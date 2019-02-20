@@ -18,31 +18,32 @@ import java.util.concurrent.atomic.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.util.yoga.Yoga.*;
 import static org.lwjgl.util.yoga.YogaNode.*;
-import static org.testng.Assert.*;
+import static org.testng.AssertJUnit.*;
 
+@SuppressWarnings("MisorderedAssertEqualsArgumentsTestNG")
 public class YogaNodeTest {
 
     @Test
     public void testInit() {
         int refCount = YGNodeGetInstanceCount();
-        new YogaNode();
+        createNode();
         assertEquals(refCount + 1, YGNodeGetInstanceCount());
     }
 
     @Test
     public void testBaseline() {
-        YogaNode root = new YogaNode();
+        YogaNode root = createNode();
         root.setFlexDirection(YogaFlexDirection.ROW);
         root.setAlignItems(YogaAlign.BASELINE);
         root.setWidth(100);
         root.setHeight(100);
 
-        YogaNode child1 = new YogaNode();
+        YogaNode child1 = createNode();
         child1.setWidth(40);
         child1.setHeight(40);
         root.addChildAt(child1, 0);
 
-        YogaNode child2 = new YogaNode();
+        YogaNode child2 = createNode();
         child2.setWidth(40);
         child2.setHeight(40);
         YGNodeSetBaselineFunc(child2.node, (node, width, height) -> 0);
@@ -53,7 +54,7 @@ public class YogaNodeTest {
         assertEquals(0, (int)child1.getLayoutY());
         assertEquals(40, (int)child2.getLayoutY());
 
-        Objects.requireNonNull(YGNodeGetBaselineFunc(child2.node)).free();
+        Objects.requireNonNull(child2.getBaselineFunction()).free();
     }
 
     private static YGMeasureFunc getTestMeasureFunc(float testWidth, float testHeight) {
@@ -70,7 +71,7 @@ public class YogaNodeTest {
 
     @Test
     public void testMeasure() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         try (YGMeasureFunc measureFunc = getTestMeasureFunc(200, 100)) {
             YGNodeSetMeasureFunc(node.node, measureFunc);
@@ -82,7 +83,7 @@ public class YogaNodeTest {
 
     @Test
     public void testMeasureFloat() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         try (YGMeasureFunc measureFunc = getTestMeasureFunc(200.5f, 100.5f)) {
             YGNodeSetMeasureFunc(node.node, measureFunc);
@@ -94,7 +95,7 @@ public class YogaNodeTest {
 
     @Test
     public void testMeasureFloatMin() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
         try (YGMeasureFunc measureFunc = getTestMeasureFunc(Float.MIN_VALUE, Float.MIN_VALUE)) {
             YGNodeSetMeasureFunc(node.node, measureFunc);
             node.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
@@ -105,7 +106,7 @@ public class YogaNodeTest {
 
     @Test
     public void testMeasureFloatMax() {
-        YogaNode node      = new YogaNode();
+        YogaNode node      = createNode();
         float    bigNumber = (float)10E5;
         try (YGMeasureFunc measureFunc = getTestMeasureFunc(bigNumber, bigNumber)) {
             YGNodeSetMeasureFunc(node.node, measureFunc);
@@ -120,10 +121,10 @@ public class YogaNodeTest {
         try (MemoryStack stack = stackPush()) {
             YGValue v = YGValue.mallocStack(stack);
 
-            YogaNode node0 = new YogaNode();
+            YogaNode node0 = createNode();
             assertTrue(YogaConstants.isUndefined(node0.getMaxHeight(v)));
 
-            YogaNode node1 = new YogaNode();
+            YogaNode node1 = createNode();
             node1.setMaxHeight(100);
 
             node0.copyStyle(node1);
@@ -133,7 +134,7 @@ public class YogaNodeTest {
 
     @Test
     public void testLayoutMargin() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
         node.setWidth(100);
         node.setHeight(100);
         node.setMargin(YogaEdge.START, 1);
@@ -150,7 +151,7 @@ public class YogaNodeTest {
 
     @Test
     public void testLayoutPadding() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
         node.setWidth(100);
         node.setHeight(100);
         node.setPadding(YogaEdge.START, 1);
@@ -167,7 +168,7 @@ public class YogaNodeTest {
 
     @Test
     public void testLayoutBorder() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
         node.setWidth(100);
         node.setHeight(100);
         node.setBorder(YogaEdge.START, 1);
@@ -186,13 +187,13 @@ public class YogaNodeTest {
     public void testUseWebDefaults() {
         YogaConfig config = new YogaConfig();
         config.setUseWebDefaults(true);
-        YogaNode node = new YogaNode(config);
+        YogaNode node = createNode(config);
         assertEquals(YogaFlexDirection.ROW.value, node.getFlexDirection());
     }
 
     @Test
     public void testPercentPaddingOnRoot() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
         node.setPaddingPercent(YogaEdge.ALL, 10);
         node.calculateLayout(50, 50);
 
@@ -204,7 +205,7 @@ public class YogaNodeTest {
 
     @Test
     public void testDefaultEdgeValues() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         try (MemoryStack stack = stackPush()) {
             YGValue v = YGValue.mallocStack(stack);
@@ -219,11 +220,11 @@ public class YogaNodeTest {
     }
 
     @Test
-    public void testCloneNode() throws Exception {
+    public void testCloneNode() {
         YogaConfig config     = new YogaConfig();
-        YogaNode   root       = new YogaNode(config);
-        YogaNode   child      = new YogaNode(config);
-        YogaNode   grandChild = new YogaNode(config);
+        YogaNode   root       = createNode(config);
+        YogaNode   child      = createNode(config);
+        YogaNode   grandChild = createNode(config);
         root.addChildAt(child, 0);
         child.addChildAt(grandChild, 0);
         child.setFlexDirection(YogaFlexDirection.ROW);
@@ -246,11 +247,11 @@ public class YogaNodeTest {
     }
 
     @Test
-    public void testCloneWithNewChildren() throws Exception {
+    public void testCloneWithNewChildren() {
         YogaConfig config     = new YogaConfig();
-        YogaNode   root       = new YogaNode(config);
-        YogaNode   child      = new YogaNode(config);
-        YogaNode   grandChild = new YogaNode(config);
+        YogaNode   root       = createNode(config);
+        YogaNode   child      = createNode(config);
+        YogaNode   grandChild = createNode(config);
         root.addChildAt(child, 0);
         child.addChildAt(grandChild, 0);
         child.setFlexDirection(YogaFlexDirection.ROW);
@@ -265,40 +266,17 @@ public class YogaNodeTest {
     }
 
     @Test
-    public void testAddSharedChildCloneWithNewChildren() throws Exception {
-        YogaConfig config     = new YogaConfig();
-        YogaNode   root       = new YogaNode(config);
-        YogaNode   child      = new YogaNode(config);
-        YogaNode   grandChild = new YogaNode(config);
-        root.addChildAt(child, 0);
-        child.addChildAt(grandChild, 0);
-        child.setFlexDirection(YogaFlexDirection.ROW);
-
-        YogaNode clonedChild = child.cloneWithNewChildren();
-
-        assertNotSame(clonedChild, child);
-        assertEquals(YogaFlexDirection.ROW.value, clonedChild.getFlexDirection());
-        assertEquals(child.getFlexDirection(), clonedChild.getFlexDirection());
-        assertEquals(0, clonedChild.getChildCount());
-        assertEquals(1, child.getChildCount());
-
-        clonedChild.addSharedChildAt(grandChild, 0);
-        assertEquals(1, clonedChild.getChildCount());
-        assertNull(grandChild.getOwner());
-    }
-
-    @Test
-    public void testCloneNodeListener() throws Exception {
+    public void testCloneNodeListener() {
         AtomicBoolean onNodeClonedExecuted = new AtomicBoolean(false);
         YogaConfig    config               = new YogaConfig();
         config.setOnCloneNode((oldNode, owner, childIndex) -> {
             onNodeClonedExecuted.set(true);
             return YogaNode.create(oldNode).clone(owner).node;
         });
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setWidth(100f);
         root.setHeight(100f);
-        YogaNode child0 = new YogaNode(config);
+        YogaNode child0 = createNode(config);
         root.addChildAt(child0, 0);
         child0.setWidth(50f);
         root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
@@ -342,25 +320,82 @@ public class YogaNodeTest {
     }
 
     @Test
-    public void testFlagShouldDiffLayoutWithoutLegacyStretchBehaviour() throws Exception {
+    public void testFlagShouldDiffLayoutWithoutLegacyStretchBehaviour() {
         YogaConfig config = new YogaConfig();
         config.setShouldDiffLayoutWithoutLegacyStretchBehaviour(true);
         config.setUseLegacyStretchBehaviour(true);
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setWidth(500);
         root.setHeight(500);
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setAlignItems(YogaAlign.FLEX_START);
         root.addChildAt(root_child0, 0);
-        YogaNode root_child0_child0 = new YogaNode(config);
+        YogaNode root_child0_child0 = createNode(config);
         root_child0_child0.setFlexGrow(1);
         root_child0_child0.setFlexShrink(1);
         root_child0.addChildAt(root_child0_child0, 0);
-        YogaNode root_child0_child0_child0 = new YogaNode(config);
+        YogaNode root_child0_child0_child0 = createNode(config);
         root_child0_child0_child0.setFlexGrow(1);
         root_child0_child0_child0.setFlexShrink(1);
         root_child0_child0.addChildAt(root_child0_child0_child0, 0);
         root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
         assertFalse(root.getDoesLegacyStretchFlagAffectsLayout());
     }
+
+    @Test
+    public void initiallyHasNewLayout() {
+        YogaNode root = createNode();
+        assertTrue(root.hasNewLayout());
+    }
+
+    @Test
+    public void initialLayoutCanBeMarkedSeen() {
+        YogaNode root = createNode();
+        root.markLayoutSeen();
+        assertFalse(root.hasNewLayout());
+    }
+
+    @Test
+    public void calculatingLayoutMarksLayoutAsUnseen() {
+        YogaNode root = createNode();
+        root.markLayoutSeen();
+        root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
+        assertTrue(root.hasNewLayout());
+    }
+
+    @Test
+    public void calculatedLayoutCanBeMarkedSeen() {
+        YogaNode root = createNode();
+        root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
+        root.markLayoutSeen();
+        assertFalse(root.hasNewLayout());
+    }
+
+    @Test
+    public void recalculatingLayoutDoesMarkAsUnseen() {
+        YogaNode root = createNode();
+        root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
+        root.markLayoutSeen();
+        root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
+        assertTrue(root.hasNewLayout());
+    }
+
+    @Test
+    public void resetAlsoResetsLayoutSeen() {
+        YogaNode root = createNode();
+        root.markLayoutSeen();
+        root.reset();
+        assertTrue(root.hasNewLayout());
+    }
+
+    @Test
+    public void directionIsPassedThrough() {
+        YogaNode root = createNode();
+
+        root.setDirection(YogaDirection.RTL);
+        root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
+
+        assertEquals(root.getLayoutDirection(), YogaDirection.RTL);
+    }
+
 }

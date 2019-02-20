@@ -9,16 +9,16 @@ import org.testng.annotations.*;
 
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.util.yoga.YogaNode.*;
-import static org.lwjgl.util.yoga.YogaNode.assertEquals;
-import static org.testng.Assert.assertEquals;
+import static org.testng.AssertJUnit.*;
 
+@SuppressWarnings("MisorderedAssertEqualsArgumentsTestNG")
 public class YogaNodeStylePropertiesTest {
 
     private static final float UNDEFINED = YogaConstants.UNDEFINED;
 
     @Test
     public void testDirectionDefault() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         assertEquals(node.getStyleDirection(), YogaDirection.INHERIT);
         assertEquals(node.getLayoutDirection(), YogaDirection.INHERIT);
@@ -26,7 +26,7 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testDirectionAssignment() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
         node.setDirection(YogaDirection.LTR);
         node.calculateLayout(UNDEFINED, UNDEFINED);
 
@@ -45,7 +45,7 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testFlexDirectionDefault() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         assertEquals(YogaFlexDirection.COLUMN.value, node.getFlexDirection());
     }
@@ -72,14 +72,14 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testJustifyContentDefault() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         assertEquals(YogaJustify.FLEX_START, node.getJustifyContent());
     }
 
     @Test
     public void testJustifyContentAssignment() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
         node.setJustifyContent(YogaJustify.SPACE_EVENLY);
 
         assertEquals(YogaJustify.SPACE_EVENLY, node.getJustifyContent());
@@ -100,14 +100,14 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testAlignItemsDefault() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         assertEquals(YogaAlign.STRETCH, node.getAlignItems());
     }
 
     @Test
     public void testAlignItemsAssignment() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
         node.setAlignItems(YogaAlign.SPACE_AROUND);
 
         assertEquals(YogaAlign.SPACE_AROUND, node.getAlignItems());
@@ -124,14 +124,14 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testAlignSelfDefault() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         assertEquals(YogaAlign.AUTO, node.getAlignSelf());
     }
 
     @Test
     public void testAlignSelfAssignment() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
         node.setAlignSelf(YogaAlign.FLEX_END);
 
         assertEquals(YogaAlign.FLEX_END, node.getAlignSelf());
@@ -148,14 +148,14 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testAlignContentDefault() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         assertEquals(YogaAlign.FLEX_START, node.getAlignContent());
     }
 
     @Test
     public void testAlignContentAssignment() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
         node.setAlignContent(YogaAlign.BASELINE);
 
         assertEquals(YogaAlign.BASELINE, node.getAlignContent());
@@ -180,14 +180,14 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testPositionTypeDefault() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         assertEquals(YogaPositionType.RELATIVE, node.getPositionType());
     }
 
     @Test
     public void testPositionTypeAssignment() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
         node.setPositionType(YogaPositionType.ABSOLUTE);
 
         assertEquals(YogaPositionType.ABSOLUTE, node.getPositionType());
@@ -222,14 +222,14 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testOverflowDefault() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         assertEquals(YogaOverflow.VISIBLE, node.getOverflow());
     }
 
     @Test
     public void testOverflowAssignment() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
         node.setOverflow(YogaOverflow.SCROLL);
 
         assertEquals(YogaOverflow.SCROLL, node.getOverflow());
@@ -239,14 +239,14 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testDisplayDefault() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         assertEquals(YogaDisplay.FLEX, node.getDisplay());
     }
 
     @Test
     public void testDisplayAssignment() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
         node.setDisplay(YogaDisplay.NONE);
 
         assertEquals(YogaDisplay.NONE, node.getDisplay());
@@ -279,14 +279,14 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testFlexGrowDefault() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         assertEquals(0, node.getFlexGrow(), 0);
     }
 
     @Test
     public void testFlexGrowAssignment() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
         node.setFlexGrow(2.5f);
 
         assertEquals(2.5f, node.getFlexGrow(), 0);
@@ -303,14 +303,14 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testFlexShrinkDefault() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         assertEquals(0, node.getFlexShrink(), 0);
     }
 
     @Test
     public void testFlexShrinkAssignment() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
         node.setFlexShrink(2.5f);
 
         assertEquals(2.5f, node.getFlexShrink(), 0);
@@ -327,7 +327,7 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testFlexBasisDefault() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         try (MemoryStack stack = stackPush()) {
             YGValue v = YGValue.mallocStack(stack);
@@ -337,7 +337,7 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testFlexBasisAssignment() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         try (MemoryStack stack = stackPush()) {
             YGValue v = YGValue.mallocStack(stack);
@@ -379,7 +379,7 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testMarginDefault() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
         try (MemoryStack stack = stackPush()) {
             YGValue v = YGValue.mallocStack(stack);
             for (YogaEdge edge : YogaEdge.values()) {
@@ -390,7 +390,7 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testMarginAssignment() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         try (MemoryStack stack = stackPush()) {
             YGValue v = YGValue.mallocStack(stack);
@@ -439,7 +439,7 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testPaddingDefault() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
         try (MemoryStack stack = stackPush()) {
             YGValue v = YGValue.mallocStack(stack);
             for (YogaEdge edge : YogaEdge.values()) {
@@ -450,7 +450,7 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testPaddingAssignment() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
         try (MemoryStack stack = stackPush()) {
             YGValue v = YGValue.mallocStack(stack);
             for (YogaEdge edge : YogaEdge.values()) {
@@ -482,15 +482,15 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testBorderDefault() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
         for (YogaEdge edge : YogaEdge.values()) {
-            assertEquals(UNDEFINED, node.getBorder(edge), 0);
+            assertEquals(UNDEFINED, node.getBorder(edge));
         }
     }
 
     @Test
     public void testBorderAssignment() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
         for (YogaEdge edge : YogaEdge.values()) {
             node.setBorder(edge, 2.5f);
             assertEquals(2.5f, node.getBorder(edge), 0);
@@ -509,7 +509,7 @@ public class YogaNodeStylePropertiesTest {
     public void testPositionDefault() {
         try (MemoryStack stack = stackPush()) {
             YGValue  v    = YGValue.mallocStack(stack);
-            YogaNode node = new YogaNode();
+            YogaNode node = createNode();
             for (YogaEdge edge : YogaEdge.values()) {
                 assertEquals(YogaValue.UNDEFINED, node.getPosition(edge, v));
             }
@@ -518,7 +518,7 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testPositionAssignment() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         try (MemoryStack stack = stackPush()) {
             YGValue v = YGValue.mallocStack(stack);
@@ -566,7 +566,7 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testWidthDefault() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
         try (MemoryStack stack = stackPush()) {
             YGValue v = YGValue.mallocStack(stack);
             assertEquals(YogaValue.AUTO, node.getWidth(v));
@@ -575,7 +575,7 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testWidthAssignment() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         try (MemoryStack stack = stackPush()) {
             YGValue v = YGValue.mallocStack(stack);
@@ -607,7 +607,7 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testHeightDefault() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         try (MemoryStack stack = stackPush()) {
             YGValue v = YGValue.mallocStack(stack);
@@ -617,7 +617,7 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testHeightAssignment() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         try (MemoryStack stack = stackPush()) {
             YGValue v = YGValue.mallocStack(stack);
@@ -649,7 +649,7 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testMinWidthDefault() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         try (MemoryStack stack = stackPush()) {
             YGValue v = YGValue.mallocStack(stack);
@@ -659,7 +659,7 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testMinWidthAssignment() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         try (MemoryStack stack = stackPush()) {
             YGValue v = YGValue.mallocStack(stack);
@@ -689,7 +689,7 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testMinHeightDefault() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         try (MemoryStack stack = stackPush()) {
             YGValue v = YGValue.mallocStack(stack);
@@ -699,7 +699,7 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testMinHeightAssignment() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         try (MemoryStack stack = stackPush()) {
             YGValue v = YGValue.mallocStack(stack);
@@ -729,7 +729,7 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testMaxWidthDefault() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         try (MemoryStack stack = stackPush()) {
             YGValue v = YGValue.mallocStack(stack);
@@ -739,7 +739,7 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testMaxWidthAssignment() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         try (MemoryStack stack = stackPush()) {
             YGValue v = YGValue.mallocStack(stack);
@@ -769,7 +769,7 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testMaxHeightDefault() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         try (MemoryStack stack = stackPush()) {
             YGValue v = YGValue.mallocStack(stack);
@@ -779,7 +779,7 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testMaxHeightAssignment() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
         try (MemoryStack stack = stackPush()) {
             YGValue v = YGValue.mallocStack(stack);
@@ -819,14 +819,14 @@ public class YogaNodeStylePropertiesTest {
 
     @Test
     public void testAspectRatioDefault() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
 
-        assertEquals(UNDEFINED, node.getAspectRatio(), 0);
+        assertEquals(UNDEFINED, node.getAspectRatio());
     }
 
     @Test
     public void testAspectRatioAssignment() {
-        YogaNode node = new YogaNode();
+        YogaNode node = createNode();
         node.setAspectRatio(2.75f);
 
         assertEquals(2.75f, node.getAspectRatio(), 0);
@@ -854,7 +854,7 @@ public class YogaNodeStylePropertiesTest {
 
     private static class StyledNode {
 
-        private YogaNode mNode = new YogaNode();
+        private YogaNode mNode = createNode();
 
         YogaNode node() {
             return mNode;

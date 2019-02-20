@@ -8,6 +8,7 @@
 #define YG_ASSERT(X, message)
 DISABLE_WARNINGS()
 #include "Yoga.h"
+#include "YGMarker.h"
 ENABLE_WARNINGS()
 
 EXTERN_C_ENTER
@@ -47,6 +48,16 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeFree(JNIEnv *__env, 
     JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeFree(nodeAddress);
 }
 
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeFreeRecursiveWithCleanupFunc(jlong nodeAddress, jlong cleanupAddress) {
+    YGNodeRef const node = (YGNodeRef const)(intptr_t)nodeAddress;
+    YGNodeCleanupFunc cleanup = (YGNodeCleanupFunc)(intptr_t)cleanupAddress;
+    YGNodeFreeRecursiveWithCleanupFunc(node, cleanup);
+}
+JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeFreeRecursiveWithCleanupFunc(JNIEnv *__env, jclass clazz, jlong nodeAddress, jlong cleanupAddress) {
+    UNUSED_PARAMS(__env, clazz)
+    JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeFreeRecursiveWithCleanupFunc(nodeAddress, cleanupAddress);
+}
+
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeFreeRecursive(jlong nodeAddress) {
     YGNodeRef const node = (YGNodeRef const)(intptr_t)nodeAddress;
     YGNodeFreeRecursive(node);
@@ -81,16 +92,6 @@ JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeInsertChild(
 JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeInsertChild(JNIEnv *__env, jclass clazz, jlong nodeAddress, jlong childAddress, jint index) {
     UNUSED_PARAMS(__env, clazz)
     JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeInsertChild(nodeAddress, childAddress, index);
-}
-
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeInsertSharedChild(jlong nodeAddress, jlong childAddress, jint index) {
-    YGNodeRef const node = (YGNodeRef const)(intptr_t)nodeAddress;
-    YGNodeRef const child = (YGNodeRef const)(intptr_t)childAddress;
-    YGNodeInsertSharedChild(node, child, (uint32_t)index);
-}
-JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeInsertSharedChild(JNIEnv *__env, jclass clazz, jlong nodeAddress, jlong childAddress, jint index) {
-    UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeInsertSharedChild(nodeAddress, childAddress, index);
 }
 
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeRemoveChild(jlong nodeAddress, jlong childAddress) {
@@ -156,6 +157,24 @@ JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeSetChildren(
 JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeSetChildren(JNIEnv *__env, jclass clazz, jlong ownerAddress, jlong childrenAddress, jint count) {
     UNUSED_PARAMS(__env, clazz)
     JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeSetChildren(ownerAddress, childrenAddress, count);
+}
+
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeSetIsReferenceBaseline(jlong nodeAddress, jboolean isReferenceBaseline) {
+    YGNodeRef node = (YGNodeRef)(intptr_t)nodeAddress;
+    YGNodeSetIsReferenceBaseline(node, (bool)isReferenceBaseline);
+}
+JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeSetIsReferenceBaseline(JNIEnv *__env, jclass clazz, jlong nodeAddress, jboolean isReferenceBaseline) {
+    UNUSED_PARAMS(__env, clazz)
+    JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeSetIsReferenceBaseline(nodeAddress, isReferenceBaseline);
+}
+
+JNIEXPORT jboolean JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeIsReferenceBaseline(jlong nodeAddress) {
+    YGNodeRef node = (YGNodeRef)(intptr_t)nodeAddress;
+    return (jboolean)YGNodeIsReferenceBaseline(node);
+}
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeIsReferenceBaseline(JNIEnv *__env, jclass clazz, jlong nodeAddress) {
+    UNUSED_PARAMS(__env, clazz)
+    return JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeIsReferenceBaseline(nodeAddress);
 }
 
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeCalculateLayout(jlong nodeAddress, jfloat availableWidth, jfloat availableHeight, jint ownerDirection) {
@@ -249,13 +268,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGConfigSetPrintTreeFlag(J
     JavaCritical_org_lwjgl_util_yoga_Yoga_nYGConfigSetPrintTreeFlag(configAddress, enabled);
 }
 
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeGetMeasureFunc(jlong nodeAddress) {
+JNIEXPORT jboolean JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeHasMeasureFunc(jlong nodeAddress) {
     YGNodeRef const node = (YGNodeRef const)(intptr_t)nodeAddress;
-    return (jlong)(intptr_t)YGNodeGetMeasureFunc(node);
+    return (jboolean)YGNodeHasMeasureFunc(node);
 }
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeGetMeasureFunc(JNIEnv *__env, jclass clazz, jlong nodeAddress) {
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeHasMeasureFunc(JNIEnv *__env, jclass clazz, jlong nodeAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeGetMeasureFunc(nodeAddress);
+    return JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeHasMeasureFunc(nodeAddress);
 }
 
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeSetMeasureFunc(jlong nodeAddress, jlong measureFuncAddress) {
@@ -268,13 +287,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeSetMeasureFunc(JNIEn
     JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeSetMeasureFunc(nodeAddress, measureFuncAddress);
 }
 
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeGetBaselineFunc(jlong nodeAddress) {
+JNIEXPORT jboolean JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeHasBaselineFunc(jlong nodeAddress) {
     YGNodeRef const node = (YGNodeRef const)(intptr_t)nodeAddress;
-    return (jlong)(intptr_t)YGNodeGetBaselineFunc(node);
+    return (jboolean)YGNodeHasBaselineFunc(node);
 }
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeGetBaselineFunc(JNIEnv *__env, jclass clazz, jlong nodeAddress) {
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeHasBaselineFunc(JNIEnv *__env, jclass clazz, jlong nodeAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeGetBaselineFunc(nodeAddress);
+    return JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeHasBaselineFunc(nodeAddress);
 }
 
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeSetBaselineFunc(jlong nodeAddress, jlong baselineFuncAddress) {
@@ -304,15 +323,6 @@ JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeSetDirtiedFu
 JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeSetDirtiedFunc(JNIEnv *__env, jclass clazz, jlong nodeAddress, jlong dirtiedFuncAddress) {
     UNUSED_PARAMS(__env, clazz)
     JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeSetDirtiedFunc(nodeAddress, dirtiedFuncAddress);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeGetPrintFunc(jlong nodeAddress) {
-    YGNodeRef const node = (YGNodeRef const)(intptr_t)nodeAddress;
-    return (jlong)(intptr_t)YGNodeGetPrintFunc(node);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeGetPrintFunc(JNIEnv *__env, jclass clazz, jlong nodeAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeGetPrintFunc(nodeAddress);
 }
 
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeSetPrintFunc(jlong nodeAddress, jlong printFuncAddress) {
@@ -1073,26 +1083,6 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGConfigSetLogger(JNIEnv *
     JavaCritical_org_lwjgl_util_yoga_Yoga_nYGConfigSetLogger(configAddress, loggerAddress);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGLog(jlong nodeAddress, jint level, jlong messageAddress) {
-    YGNodeRef const node = (YGNodeRef const)(intptr_t)nodeAddress;
-    char const *message = (char const *)(intptr_t)messageAddress;
-    YGLog(node, (YGLogLevel)level, message);
-}
-JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGLog(JNIEnv *__env, jclass clazz, jlong nodeAddress, jint level, jlong messageAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_util_yoga_Yoga_nYGLog(nodeAddress, level, messageAddress);
-}
-
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGLogWithConfig(jlong configAddress, jint level, jlong messageAddress) {
-    YGConfigRef const config = (YGConfigRef const)(intptr_t)configAddress;
-    char const *message = (char const *)(intptr_t)messageAddress;
-    YGLogWithConfig(config, (YGLogLevel)level, message);
-}
-JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGLogWithConfig(JNIEnv *__env, jclass clazz, jlong configAddress, jint level, jlong messageAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_util_yoga_Yoga_nYGLogWithConfig(configAddress, level, messageAddress);
-}
-
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGAssert(jboolean condition, jlong messageAddress) {
     char const *message = (char const *)(intptr_t)messageAddress;
     YGAssert((bool)condition, message);
@@ -1257,6 +1247,16 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGConfigGetContext(JNIEnv
     return JavaCritical_org_lwjgl_util_yoga_Yoga_nYGConfigGetContext(configAddress);
 }
 
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGConfigSetMarkerCallbacks(jlong configAddress, jlong callbacksAddress) {
+    YGConfigRef config = (YGConfigRef)(intptr_t)configAddress;
+    YGMarkerCallbacks *callbacks = (YGMarkerCallbacks *)(intptr_t)callbacksAddress;
+    YGConfigSetMarkerCallbacks(config, *callbacks);
+}
+JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGConfigSetMarkerCallbacks(JNIEnv *__env, jclass clazz, jlong configAddress, jlong callbacksAddress) {
+    UNUSED_PARAMS(__env, clazz)
+    JavaCritical_org_lwjgl_util_yoga_Yoga_nYGConfigSetMarkerCallbacks(configAddress, callbacksAddress);
+}
+
 JNIEXPORT jfloat JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_YGRoundValueToPixelGrid(jfloat value, jfloat pointScaleFactor, jboolean forceCeil, jboolean forceFloor) {
     return (jfloat)YGRoundValueToPixelGrid(value, pointScaleFactor, (bool)forceCeil, (bool)forceFloor);
 }
@@ -1391,6 +1391,30 @@ JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGWrapToString(ji
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGWrapToString(JNIEnv *__env, jclass clazz, jint value) {
     UNUSED_PARAMS(__env, clazz)
     return JavaCritical_org_lwjgl_util_yoga_Yoga_nYGWrapToString(value);
+}
+
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGValueAuto(jlong __result) {
+    *((YGValue*)(intptr_t)__result) = YGValueAuto;
+}
+JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGValueAuto(JNIEnv *__env, jclass clazz, jlong __result) {
+    UNUSED_PARAMS(__env, clazz)
+    JavaCritical_org_lwjgl_util_yoga_Yoga_nYGValueAuto(__result);
+}
+
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGValueUndefined(jlong __result) {
+    *((YGValue*)(intptr_t)__result) = YGValueUndefined;
+}
+JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGValueUndefined(JNIEnv *__env, jclass clazz, jlong __result) {
+    UNUSED_PARAMS(__env, clazz)
+    JavaCritical_org_lwjgl_util_yoga_Yoga_nYGValueUndefined(__result);
+}
+
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGValueZero(jlong __result) {
+    *((YGValue*)(intptr_t)__result) = YGValueZero;
+}
+JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGValueZero(JNIEnv *__env, jclass clazz, jlong __result) {
+    UNUSED_PARAMS(__env, clazz)
+    JavaCritical_org_lwjgl_util_yoga_Yoga_nYGValueZero(__result);
 }
 
 EXTERN_C_EXIT

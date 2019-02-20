@@ -19,7 +19,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <pre><code>
  * struct YGFloatOptional {
  *     float value;
- *     bool isUndefined;
  * }</code></pre>
  */
 public class YGFloatOptional extends Struct {
@@ -32,20 +31,17 @@ public class YGFloatOptional extends Struct {
 
     /** The struct member offsets. */
     public static final int
-        VALUE,
-        ISUNDEFINED;
+        VALUE;
 
     static {
         Layout layout = __struct(
-            __member(4),
-            __member(1)
+            __member(4)
         );
 
         SIZEOF = layout.getSize();
         ALIGNOF = layout.getAlignment();
 
         VALUE = layout.offsetof(0);
-        ISUNDEFINED = layout.offsetof(1);
     }
 
     /**
@@ -63,9 +59,6 @@ public class YGFloatOptional extends Struct {
 
     /** Returns the value of the {@code value} field. */
     public float value() { return nvalue(address()); }
-    /** Returns the value of the {@code isUndefined} field. */
-    @NativeType("bool")
-    public boolean isUndefined() { return nisUndefined(address()); }
 
     // -----------------------------------
 
@@ -100,8 +93,6 @@ public class YGFloatOptional extends Struct {
 
     /** Unsafe version of {@link #value}. */
     public static float nvalue(long struct) { return UNSAFE.getFloat(null, struct + YGFloatOptional.VALUE); }
-    /** Unsafe version of {@link #isUndefined}. */
-    public static boolean nisUndefined(long struct) { return UNSAFE.getByte(null, struct + YGFloatOptional.ISUNDEFINED) != 0; }
 
     // -----------------------------------
 
@@ -143,9 +134,6 @@ public class YGFloatOptional extends Struct {
 
         /** Returns the value of the {@code value} field. */
         public float value() { return YGFloatOptional.nvalue(address()); }
-        /** Returns the value of the {@code isUndefined} field. */
-        @NativeType("bool")
-        public boolean isUndefined() { return YGFloatOptional.nisUndefined(address()); }
 
     }
 

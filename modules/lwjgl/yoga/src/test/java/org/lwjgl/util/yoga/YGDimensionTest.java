@@ -11,16 +11,17 @@ package org.lwjgl.util.yoga;
 import org.testng.annotations.*;
 
 import static org.lwjgl.util.yoga.YogaNode.*;
-import static org.testng.Assert.*;
+import static org.testng.AssertJUnit.*;
 
+@SuppressWarnings("MisorderedAssertEqualsArgumentsTestNG")
 public class YGDimensionTest {
     @Test
     public void test_wrap_child() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setWidth(100f);
         root_child0.setHeight(100f);
         root.addChildAt(root_child0, 0);
@@ -55,12 +56,12 @@ public class YGDimensionTest {
     public void test_wrap_grandchild() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child0_child0 = new YogaNode(config);
+        YogaNode root_child0_child0 = createNode(config);
         root_child0_child0.setWidth(100f);
         root_child0_child0.setHeight(100f);
         root_child0.addChildAt(root_child0_child0, 0);

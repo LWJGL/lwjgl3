@@ -41,8 +41,16 @@ class YogaNode {
         children = new ArrayList<>();
     }
 
-    public static YogaNode create(long node) {
+    static YogaNode create(long node) {
         return memGlobalRefToObject(YGNodeGetContext(node));
+    }
+
+    static YogaNode createNode() {
+        return new YogaNode();
+    }
+
+    static YogaNode createNode(YogaConfig config) {
+        return new YogaNode(config);
     }
 
     @Override
@@ -91,12 +99,6 @@ class YogaNode {
         YGNodeInsertChild(node, child.node, index);
         children.add(index, child);
         child.owner = this;
-    }
-
-    public void addSharedChildAt(YogaNode child, int index) {
-        YGNodeInsertSharedChild(node, child.node, index);
-        children.add(index, child);
-        child.owner = null;
     }
 
     public YogaNode getChildAt(int index) {
@@ -266,6 +268,14 @@ class YogaNode {
         YGNodeStyleSetFlexWrap(node, flexWrap.value);
     }
 
+    void setBaselineFunction(YGBaselineFuncI baselineFunc) {
+        YGNodeSetBaselineFunc(node, baselineFunc);
+    }
+
+    void setIsReferenceBaseline(boolean isReferenceBaseline) {
+        YGNodeSetIsReferenceBaseline(node, isReferenceBaseline);
+    }
+
     void calculateLayout(float width, float height) {
         YGNodeCalculateLayout(node, width, height, YGNodeStyleGetDirection(node));
     }
@@ -352,6 +362,23 @@ class YogaNode {
 
     public boolean getDoesLegacyStretchFlagAffectsLayout() {
         return YGNodeLayoutGetDidLegacyStretchFlagAffectLayout(node);
+    }
+
+    @Nullable
+    YGBaselineFunc getBaselineFunction() {
+        return YGNode.create(node).baseline_noContext();
+    }
+
+    public void markLayoutSeen() {
+        YGNodeSetHasNewLayout(node, false);
+    }
+
+    public boolean hasNewLayout() {
+        return YGNodeGetHasNewLayout(node);
+    }
+
+    public void reset() {
+        YGNodeReset(node);
     }
 
     private interface EnumWrapper {

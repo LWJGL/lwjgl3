@@ -11,23 +11,24 @@ package org.lwjgl.util.yoga;
 import org.testng.annotations.*;
 
 import static org.lwjgl.util.yoga.YogaNode.*;
-import static org.testng.Assert.*;
+import static org.testng.AssertJUnit.*;
 
+@SuppressWarnings("MisorderedAssertEqualsArgumentsTestNG")
 public class YGFlexTest {
     @Test
     public void test_flex_basis_flex_grow_column() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setWidth(100f);
         root.setHeight(100f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setFlexGrow(1f);
         root_child0.setFlexBasis(50f);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child1 = new YogaNode(config);
+        YogaNode root_child1 = createNode(config);
         root_child1.setFlexGrow(1f);
         root.addChildAt(root_child1, 1);
         root.setDirection(YogaDirection.LTR);
@@ -68,20 +69,135 @@ public class YGFlexTest {
     }
 
     @Test
+    public void test_flex_shrink_flex_grow_row() {
+        YogaConfig config = new YogaConfig();
+
+        YogaNode root = createNode(config);
+        root.setFlexDirection(YogaFlexDirection.ROW);
+        root.setWidth(500f);
+        root.setHeight(500f);
+
+        YogaNode root_child0 = createNode(config);
+        root_child0.setFlexShrink(1f);
+        root_child0.setWidth(500f);
+        root_child0.setHeight(100f);
+        root.addChildAt(root_child0, 0);
+
+        YogaNode root_child1 = createNode(config);
+        root_child1.setFlexShrink(1f);
+        root_child1.setWidth(500f);
+        root_child1.setHeight(100f);
+        root.addChildAt(root_child1, 1);
+        root.setDirection(YogaDirection.LTR);
+        root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
+
+        assertEquals(0f, root.getLayoutX(), 0.0f);
+        assertEquals(0f, root.getLayoutY(), 0.0f);
+        assertEquals(500f, root.getLayoutWidth(), 0.0f);
+        assertEquals(500f, root.getLayoutHeight(), 0.0f);
+
+        assertEquals(0f, root_child0.getLayoutX(), 0.0f);
+        assertEquals(0f, root_child0.getLayoutY(), 0.0f);
+        assertEquals(250f, root_child0.getLayoutWidth(), 0.0f);
+        assertEquals(100f, root_child0.getLayoutHeight(), 0.0f);
+
+        assertEquals(250f, root_child1.getLayoutX(), 0.0f);
+        assertEquals(0f, root_child1.getLayoutY(), 0.0f);
+        assertEquals(250f, root_child1.getLayoutWidth(), 0.0f);
+        assertEquals(100f, root_child1.getLayoutHeight(), 0.0f);
+
+        root.setDirection(YogaDirection.RTL);
+        root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
+
+        assertEquals(0f, root.getLayoutX(), 0.0f);
+        assertEquals(0f, root.getLayoutY(), 0.0f);
+        assertEquals(500f, root.getLayoutWidth(), 0.0f);
+        assertEquals(500f, root.getLayoutHeight(), 0.0f);
+
+        assertEquals(250f, root_child0.getLayoutX(), 0.0f);
+        assertEquals(0f, root_child0.getLayoutY(), 0.0f);
+        assertEquals(250f, root_child0.getLayoutWidth(), 0.0f);
+        assertEquals(100f, root_child0.getLayoutHeight(), 0.0f);
+
+        assertEquals(0f, root_child1.getLayoutX(), 0.0f);
+        assertEquals(0f, root_child1.getLayoutY(), 0.0f);
+        assertEquals(250f, root_child1.getLayoutWidth(), 0.0f);
+        assertEquals(100f, root_child1.getLayoutHeight(), 0.0f);
+    }
+
+    @Test
+    public void test_flex_shrink_flex_grow_child_flex_shrink_other_child() {
+        YogaConfig config = new YogaConfig();
+
+        YogaNode root = createNode(config);
+        root.setFlexDirection(YogaFlexDirection.ROW);
+        root.setWidth(500f);
+        root.setHeight(500f);
+
+        YogaNode root_child0 = createNode(config);
+        root_child0.setFlexShrink(1f);
+        root_child0.setWidth(500f);
+        root_child0.setHeight(100f);
+        root.addChildAt(root_child0, 0);
+
+        YogaNode root_child1 = createNode(config);
+        root_child1.setFlexGrow(1f);
+        root_child1.setFlexShrink(1f);
+        root_child1.setWidth(500f);
+        root_child1.setHeight(100f);
+        root.addChildAt(root_child1, 1);
+        root.setDirection(YogaDirection.LTR);
+        root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
+
+        assertEquals(0f, root.getLayoutX(), 0.0f);
+        assertEquals(0f, root.getLayoutY(), 0.0f);
+        assertEquals(500f, root.getLayoutWidth(), 0.0f);
+        assertEquals(500f, root.getLayoutHeight(), 0.0f);
+
+        assertEquals(0f, root_child0.getLayoutX(), 0.0f);
+        assertEquals(0f, root_child0.getLayoutY(), 0.0f);
+        assertEquals(250f, root_child0.getLayoutWidth(), 0.0f);
+        assertEquals(100f, root_child0.getLayoutHeight(), 0.0f);
+
+        assertEquals(250f, root_child1.getLayoutX(), 0.0f);
+        assertEquals(0f, root_child1.getLayoutY(), 0.0f);
+        assertEquals(250f, root_child1.getLayoutWidth(), 0.0f);
+        assertEquals(100f, root_child1.getLayoutHeight(), 0.0f);
+
+        root.setDirection(YogaDirection.RTL);
+        root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
+
+        assertEquals(0f, root.getLayoutX(), 0.0f);
+        assertEquals(0f, root.getLayoutY(), 0.0f);
+        assertEquals(500f, root.getLayoutWidth(), 0.0f);
+        assertEquals(500f, root.getLayoutHeight(), 0.0f);
+
+        assertEquals(250f, root_child0.getLayoutX(), 0.0f);
+        assertEquals(0f, root_child0.getLayoutY(), 0.0f);
+        assertEquals(250f, root_child0.getLayoutWidth(), 0.0f);
+        assertEquals(100f, root_child0.getLayoutHeight(), 0.0f);
+
+        assertEquals(0f, root_child1.getLayoutX(), 0.0f);
+        assertEquals(0f, root_child1.getLayoutY(), 0.0f);
+        assertEquals(250f, root_child1.getLayoutWidth(), 0.0f);
+        assertEquals(100f, root_child1.getLayoutHeight(), 0.0f);
+    }
+
+    @Test
     public void test_flex_basis_flex_grow_row() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setFlexDirection(YogaFlexDirection.ROW);
         root.setWidth(100f);
         root.setHeight(100f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setFlexGrow(1f);
         root_child0.setFlexBasis(50f);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child1 = new YogaNode(config);
+        YogaNode root_child1 = createNode(config);
         root_child1.setFlexGrow(1f);
         root.addChildAt(root_child1, 1);
         root.setDirection(YogaDirection.LTR);
@@ -125,16 +241,16 @@ public class YGFlexTest {
     public void test_flex_basis_flex_shrink_column() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setWidth(100f);
         root.setHeight(100f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setFlexShrink(1f);
         root_child0.setFlexBasis(100f);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child1 = new YogaNode(config);
+        YogaNode root_child1 = createNode(config);
         root_child1.setFlexBasis(50f);
         root.addChildAt(root_child1, 1);
         root.setDirection(YogaDirection.LTR);
@@ -178,17 +294,17 @@ public class YGFlexTest {
     public void test_flex_basis_flex_shrink_row() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setFlexDirection(YogaFlexDirection.ROW);
         root.setWidth(100f);
         root.setHeight(100f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setFlexShrink(1f);
         root_child0.setFlexBasis(100f);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child1 = new YogaNode(config);
+        YogaNode root_child1 = createNode(config);
         root_child1.setFlexBasis(50f);
         root.addChildAt(root_child1, 1);
         root.setDirection(YogaDirection.LTR);
@@ -232,21 +348,21 @@ public class YGFlexTest {
     public void test_flex_shrink_to_zero() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setHeight(75f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setWidth(50f);
         root_child0.setHeight(50f);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child1 = new YogaNode(config);
+        YogaNode root_child1 = createNode(config);
         root_child1.setFlexShrink(1f);
         root_child1.setWidth(50f);
         root_child1.setHeight(50f);
         root.addChildAt(root_child1, 1);
 
-        YogaNode root_child2 = new YogaNode(config);
+        YogaNode root_child2 = createNode(config);
         root_child2.setWidth(50f);
         root_child2.setHeight(50f);
         root.addChildAt(root_child2, 2);
@@ -301,22 +417,22 @@ public class YGFlexTest {
     public void test_flex_basis_overrides_main_size() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setWidth(100f);
         root.setHeight(100f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setFlexGrow(1f);
         root_child0.setFlexBasis(50f);
         root_child0.setHeight(20f);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child1 = new YogaNode(config);
+        YogaNode root_child1 = createNode(config);
         root_child1.setFlexGrow(1f);
         root_child1.setHeight(10f);
         root.addChildAt(root_child1, 1);
 
-        YogaNode root_child2 = new YogaNode(config);
+        YogaNode root_child2 = createNode(config);
         root_child2.setFlexGrow(1f);
         root_child2.setHeight(10f);
         root.addChildAt(root_child2, 2);
@@ -371,14 +487,14 @@ public class YGFlexTest {
     public void test_flex_grow_shrink_at_most() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setWidth(100f);
         root.setHeight(100f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child0_child0 = new YogaNode(config);
+        YogaNode root_child0_child0 = createNode(config);
         root_child0_child0.setFlexGrow(1f);
         root_child0_child0.setFlexShrink(1f);
         root_child0.addChildAt(root_child0_child0, 0);
@@ -423,20 +539,20 @@ public class YGFlexTest {
     public void test_flex_grow_less_than_factor_one() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setWidth(200f);
         root.setHeight(500f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setFlexGrow(0.2f);
         root_child0.setFlexBasis(40f);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child1 = new YogaNode(config);
+        YogaNode root_child1 = createNode(config);
         root_child1.setFlexGrow(0.2f);
         root.addChildAt(root_child1, 1);
 
-        YogaNode root_child2 = new YogaNode(config);
+        YogaNode root_child2 = createNode(config);
         root_child2.setFlexGrow(0.4f);
         root.addChildAt(root_child2, 2);
         root.setDirection(YogaDirection.LTR);

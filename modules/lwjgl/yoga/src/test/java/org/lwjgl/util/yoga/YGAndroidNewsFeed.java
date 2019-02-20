@@ -11,29 +11,30 @@ package org.lwjgl.util.yoga;
 import org.testng.annotations.*;
 
 import static org.lwjgl.util.yoga.YogaNode.*;
-import static org.testng.Assert.*;
+import static org.testng.AssertJUnit.*;
 
+@SuppressWarnings("MisorderedAssertEqualsArgumentsTestNG")
 public class YGAndroidNewsFeed {
     @Test
     public void test_android_news_feed() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setAlignContent(YogaAlign.STRETCH);
         root.setWidth(1080f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child0_child0 = new YogaNode(config);
+        YogaNode root_child0_child0 = createNode(config);
         root_child0_child0.setAlignContent(YogaAlign.STRETCH);
         root_child0.addChildAt(root_child0_child0, 0);
 
-        YogaNode root_child0_child0_child0 = new YogaNode(config);
+        YogaNode root_child0_child0_child0 = createNode(config);
         root_child0_child0_child0.setAlignContent(YogaAlign.STRETCH);
         root_child0_child0.addChildAt(root_child0_child0_child0, 0);
 
-        YogaNode root_child0_child0_child0_child0 = new YogaNode(config);
+        YogaNode root_child0_child0_child0_child0 = createNode(config);
         root_child0_child0_child0_child0.setFlexDirection(YogaFlexDirection.ROW);
         root_child0_child0_child0_child0.setAlignContent(YogaAlign.STRETCH);
         root_child0_child0_child0_child0.setAlignItems(YogaAlign.FLEX_START);
@@ -41,19 +42,19 @@ public class YGAndroidNewsFeed {
         root_child0_child0_child0_child0.setMargin(YogaEdge.TOP, 24f);
         root_child0_child0_child0.addChildAt(root_child0_child0_child0_child0, 0);
 
-        YogaNode root_child0_child0_child0_child0_child0 = new YogaNode(config);
+        YogaNode root_child0_child0_child0_child0_child0 = createNode(config);
         root_child0_child0_child0_child0_child0.setFlexDirection(YogaFlexDirection.ROW);
         root_child0_child0_child0_child0_child0.setAlignContent(YogaAlign.STRETCH);
         root_child0_child0_child0_child0.addChildAt(root_child0_child0_child0_child0_child0, 0);
 
-        YogaNode root_child0_child0_child0_child0_child0_child0 = new YogaNode(config);
+        YogaNode root_child0_child0_child0_child0_child0_child0 = createNode(config);
         root_child0_child0_child0_child0_child0_child0.setAlignContent(YogaAlign.STRETCH);
         root_child0_child0_child0_child0_child0_child0.setWidth(120f);
         root_child0_child0_child0_child0_child0_child0.setHeight(120f);
         root_child0_child0_child0_child0_child0.addChildAt(
             root_child0_child0_child0_child0_child0_child0, 0);
 
-        YogaNode root_child0_child0_child0_child0_child1 = new YogaNode(config);
+        YogaNode root_child0_child0_child0_child0_child1 = createNode(config);
         root_child0_child0_child0_child0_child1.setAlignContent(YogaAlign.STRETCH);
         root_child0_child0_child0_child0_child1.setFlexShrink(1f);
         root_child0_child0_child0_child0_child1.setMargin(YogaEdge.RIGHT, 36f);
@@ -63,24 +64,24 @@ public class YGAndroidNewsFeed {
         root_child0_child0_child0_child0_child1.setPadding(YogaEdge.BOTTOM, 18);
         root_child0_child0_child0_child0.addChildAt(root_child0_child0_child0_child0_child1, 1);
 
-        YogaNode root_child0_child0_child0_child0_child1_child0 = new YogaNode(config);
+        YogaNode root_child0_child0_child0_child0_child1_child0 = createNode(config);
         root_child0_child0_child0_child0_child1_child0.setFlexDirection(YogaFlexDirection.ROW);
         root_child0_child0_child0_child0_child1_child0.setAlignContent(YogaAlign.STRETCH);
         root_child0_child0_child0_child0_child1_child0.setFlexShrink(1f);
         root_child0_child0_child0_child0_child1.addChildAt(
             root_child0_child0_child0_child0_child1_child0, 0);
 
-        YogaNode root_child0_child0_child0_child0_child1_child1 = new YogaNode(config);
+        YogaNode root_child0_child0_child0_child0_child1_child1 = createNode(config);
         root_child0_child0_child0_child0_child1_child1.setAlignContent(YogaAlign.STRETCH);
         root_child0_child0_child0_child0_child1_child1.setFlexShrink(1f);
         root_child0_child0_child0_child0_child1.addChildAt(
             root_child0_child0_child0_child0_child1_child1, 1);
 
-        YogaNode root_child0_child0_child1 = new YogaNode(config);
+        YogaNode root_child0_child0_child1 = createNode(config);
         root_child0_child0_child1.setAlignContent(YogaAlign.STRETCH);
         root_child0_child0.addChildAt(root_child0_child0_child1, 1);
 
-        YogaNode root_child0_child0_child1_child0 = new YogaNode(config);
+        YogaNode root_child0_child0_child1_child0 = createNode(config);
         root_child0_child0_child1_child0.setFlexDirection(YogaFlexDirection.ROW);
         root_child0_child0_child1_child0.setAlignContent(YogaAlign.STRETCH);
         root_child0_child0_child1_child0.setAlignItems(YogaAlign.FLEX_START);
@@ -88,19 +89,19 @@ public class YGAndroidNewsFeed {
         root_child0_child0_child1_child0.setMargin(YogaEdge.TOP, 24f);
         root_child0_child0_child1.addChildAt(root_child0_child0_child1_child0, 0);
 
-        YogaNode root_child0_child0_child1_child0_child0 = new YogaNode(config);
+        YogaNode root_child0_child0_child1_child0_child0 = createNode(config);
         root_child0_child0_child1_child0_child0.setFlexDirection(YogaFlexDirection.ROW);
         root_child0_child0_child1_child0_child0.setAlignContent(YogaAlign.STRETCH);
         root_child0_child0_child1_child0.addChildAt(root_child0_child0_child1_child0_child0, 0);
 
-        YogaNode root_child0_child0_child1_child0_child0_child0 = new YogaNode(config);
+        YogaNode root_child0_child0_child1_child0_child0_child0 = createNode(config);
         root_child0_child0_child1_child0_child0_child0.setAlignContent(YogaAlign.STRETCH);
         root_child0_child0_child1_child0_child0_child0.setWidth(72f);
         root_child0_child0_child1_child0_child0_child0.setHeight(72f);
         root_child0_child0_child1_child0_child0.addChildAt(
             root_child0_child0_child1_child0_child0_child0, 0);
 
-        YogaNode root_child0_child0_child1_child0_child1 = new YogaNode(config);
+        YogaNode root_child0_child0_child1_child0_child1 = createNode(config);
         root_child0_child0_child1_child0_child1.setAlignContent(YogaAlign.STRETCH);
         root_child0_child0_child1_child0_child1.setFlexShrink(1f);
         root_child0_child0_child1_child0_child1.setMargin(YogaEdge.RIGHT, 36f);
@@ -110,14 +111,14 @@ public class YGAndroidNewsFeed {
         root_child0_child0_child1_child0_child1.setPadding(YogaEdge.BOTTOM, 18);
         root_child0_child0_child1_child0.addChildAt(root_child0_child0_child1_child0_child1, 1);
 
-        YogaNode root_child0_child0_child1_child0_child1_child0 = new YogaNode(config);
+        YogaNode root_child0_child0_child1_child0_child1_child0 = createNode(config);
         root_child0_child0_child1_child0_child1_child0.setFlexDirection(YogaFlexDirection.ROW);
         root_child0_child0_child1_child0_child1_child0.setAlignContent(YogaAlign.STRETCH);
         root_child0_child0_child1_child0_child1_child0.setFlexShrink(1f);
         root_child0_child0_child1_child0_child1.addChildAt(
             root_child0_child0_child1_child0_child1_child0, 0);
 
-        YogaNode root_child0_child0_child1_child0_child1_child1 = new YogaNode(config);
+        YogaNode root_child0_child0_child1_child0_child1_child1 = createNode(config);
         root_child0_child0_child1_child0_child1_child1.setAlignContent(YogaAlign.STRETCH);
         root_child0_child0_child1_child0_child1_child1.setFlexShrink(1f);
         root_child0_child0_child1_child0_child1.addChildAt(

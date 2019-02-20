@@ -12,8 +12,10 @@ val yoga = "Yoga".nativeClass(Module.YOGA, prefix = "YG", prefixConstant = "YG",
 #define YG_ASSERT(X, message)
 DISABLE_WARNINGS()
 #include "Yoga.h"
+#include "YGMarker.h"
 ENABLE_WARNINGS()""")
 
+    cpp = true
     documentation =
         """
         Native bindings to ${url("https://facebook.github.io/yoga/", "Yoga")}.
@@ -63,7 +65,7 @@ div {
     FloatConstant(
         "",
 
-        "Undefined".."10e20f"
+        "Undefined".."Float.NaN"
     )
 
     EnumConstant(
@@ -207,6 +209,14 @@ div {
         "WrapReverse".enum
     )
 
+    EnumConstant(
+        "{@code YGMarker}",
+
+        "MarkerLayout".enum,
+        "MarkerMeasure".enum,
+        "MarkerBaselineFn".enum
+    )
+
     YGNodeRef("NodeNew", "", void())
 
     YGNodeRef(
@@ -233,6 +243,14 @@ div {
     )
 
     void(
+        "NodeFreeRecursiveWithCleanupFunc",
+        "",
+
+        node,
+        YGNodeCleanupFunc("cleanup", "")
+    )
+
+    void(
         "NodeFreeRecursive",
         "",
 
@@ -251,19 +269,6 @@ div {
     void(
         "NodeInsertChild",
         "",
-
-        node,
-        YGNodeRef.const("child", ""),
-        uint32_t("index", "")
-    )
-
-    void(
-        "NodeInsertSharedChild",
-        """
-        This function inserts the child {@code YGNodeRef} as a children of the node received by parameter and set the Owner of the child object to null. This
-        function is expected to be called when using Yoga in persistent mode in order to share a {@code YGNodeRef} object as a child of two different Yoga
-        trees. The child {@code YGNodeRef} is expected to be referenced from its original owner and from a clone of its original owner.
-        """,
 
         node,
         YGNodeRef.const("child", ""),
@@ -324,6 +329,21 @@ div {
     )
 
     void(
+        "NodeSetIsReferenceBaseline",
+        "",
+
+        YGNodeRef("node", ""),
+        bool("isReferenceBaseline", "")
+    )
+
+    bool(
+        "NodeIsReferenceBaseline",
+        "",
+
+        YGNodeRef("node", "")
+    )
+
+    void(
         "NodeCalculateLayout",
         "",
 
@@ -338,8 +358,10 @@ div {
         """
         Marks a node as dirty.
 
-        Only valid for nodes with a custom measure function set. YG knows when to mark all other nodes as dirty but because nodes with measure functions
-        depends on information not known to YG they must perform this dirty marking manually.
+        Only valid for nodes with a custom measure function set.
+
+        Yoga knows when to mark all other nodes as dirty but because nodes with measure functions depend on information not known to Yoga they must perform
+        this dirty marking manually.
         """,
 
         node
@@ -350,8 +372,8 @@ div {
         """
         Marks the current node and all its descendants as dirty.
 
-        This function is added to test yoga benchmarks. It is not expected to be used in production as calling #NodeCalculateLayout() will cause the
-        recalculation of each and every node.
+        Intended to be used for Yoga benchmarks. Don't use in production, as calling #NodeCalculateLayout() will cause the recalculation of each and every
+        node.
         """,
 
         node
@@ -421,8 +443,8 @@ div {
         bool("enabled", "")
     )
 
-    YGMeasureFunc(
-        "NodeGetMeasureFunc",
+    bool(
+        "NodeHasMeasureFunc",
         "",
 
         node
@@ -435,8 +457,8 @@ div {
         nullable..YGMeasureFunc("measureFunc", "")
     )
 
-    YGBaselineFunc(
-        "NodeGetBaselineFunc",
+    bool(
+        "NodeHasBaselineFunc",
         "",
 
         node
@@ -463,12 +485,6 @@ div {
         nullable..YGDirtiedFunc("dirtiedFunc", "")
     )
 
-    YGPrintFunc(
-        "NodeGetPrintFunc",
-        "",
-
-        node
-    )
     void(
         "NodeSetPrintFunc",
         "",
@@ -1082,24 +1098,6 @@ div {
     )
 
     void(
-        "Log",
-        "",
-
-        YGNodeRef.const("node", ""),
-        YGLogLevel("level", "", "LogLevel\\w+"),
-        charUTF8.const.p("message", "")
-    )
-
-    void(
-        "LogWithConfig",
-        "",
-
-        YGConfigRef.const("config", ""),
-        YGLogLevel("level", ""),
-        charUTF8.const.p("message", "")
-    )
-
-    void(
         "Assert",
         "",
 
@@ -1224,6 +1222,14 @@ div {
         YGConfigRef.const("config", "")
     )
 
+    void(
+        "ConfigSetMarkerCallbacks",
+        "",
+
+        YGConfigRef("config", ""),
+        YGMarkerCallbacks("callbacks", "")
+    )
+
     float(
         "RoundValueToPixelGrid",
         "",
@@ -1262,4 +1268,10 @@ div {
     YG_TYPE_TO_STRING(YGPrintOptions)
     YG_TYPE_TO_STRING(YGUnit)
     YG_TYPE_TO_STRING(YGWrap)
+
+    // Pre-defined YGValue structs
+
+    macro..YGValue("ValueAuto", "", void())
+    macro..YGValue("ValueUndefined", "", void())
+    macro..YGValue("ValueZero", "", void())
 }

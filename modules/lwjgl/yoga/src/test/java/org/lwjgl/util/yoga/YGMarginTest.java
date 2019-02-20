@@ -11,19 +11,20 @@ package org.lwjgl.util.yoga;
 import org.testng.annotations.*;
 
 import static org.lwjgl.util.yoga.YogaNode.*;
-import static org.testng.Assert.*;
+import static org.testng.AssertJUnit.*;
 
+@SuppressWarnings("MisorderedAssertEqualsArgumentsTestNG")
 public class YGMarginTest {
     @Test
     public void test_margin_start() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setFlexDirection(YogaFlexDirection.ROW);
         root.setWidth(100f);
         root.setHeight(100f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setMargin(YogaEdge.START, 10f);
         root_child0.setWidth(10f);
         root.addChildAt(root_child0, 0);
@@ -58,11 +59,11 @@ public class YGMarginTest {
     public void test_margin_top() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setWidth(100f);
         root.setHeight(100f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setMargin(YogaEdge.TOP, 10f);
         root_child0.setHeight(10f);
         root.addChildAt(root_child0, 0);
@@ -97,13 +98,13 @@ public class YGMarginTest {
     public void test_margin_end() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setFlexDirection(YogaFlexDirection.ROW);
         root.setJustifyContent(YogaJustify.FLEX_END);
         root.setWidth(100f);
         root.setHeight(100f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setMargin(YogaEdge.END, 10f);
         root_child0.setWidth(10f);
         root.addChildAt(root_child0, 0);
@@ -138,12 +139,12 @@ public class YGMarginTest {
     public void test_margin_bottom() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setJustifyContent(YogaJustify.FLEX_END);
         root.setWidth(100f);
         root.setHeight(100f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setMargin(YogaEdge.BOTTOM, 10f);
         root_child0.setHeight(10f);
         root.addChildAt(root_child0, 0);
@@ -178,12 +179,12 @@ public class YGMarginTest {
     public void test_margin_and_flex_row() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setFlexDirection(YogaFlexDirection.ROW);
         root.setWidth(100f);
         root.setHeight(100f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setFlexGrow(1f);
         root_child0.setMargin(YogaEdge.START, 10f);
         root_child0.setMargin(YogaEdge.END, 10f);
@@ -219,11 +220,11 @@ public class YGMarginTest {
     public void test_margin_and_flex_column() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setWidth(100f);
         root.setHeight(100f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setFlexGrow(1f);
         root_child0.setMargin(YogaEdge.TOP, 10f);
         root_child0.setMargin(YogaEdge.BOTTOM, 10f);
@@ -259,12 +260,12 @@ public class YGMarginTest {
     public void test_margin_and_stretch_row() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setFlexDirection(YogaFlexDirection.ROW);
         root.setWidth(100f);
         root.setHeight(100f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setFlexGrow(1f);
         root_child0.setMargin(YogaEdge.TOP, 10f);
         root_child0.setMargin(YogaEdge.BOTTOM, 10f);
@@ -300,11 +301,11 @@ public class YGMarginTest {
     public void test_margin_and_stretch_column() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setWidth(100f);
         root.setHeight(100f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setFlexGrow(1f);
         root_child0.setMargin(YogaEdge.START, 10f);
         root_child0.setMargin(YogaEdge.END, 10f);
@@ -340,17 +341,17 @@ public class YGMarginTest {
     public void test_margin_with_sibling_row() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setFlexDirection(YogaFlexDirection.ROW);
         root.setWidth(100f);
         root.setHeight(100f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setFlexGrow(1f);
         root_child0.setMargin(YogaEdge.END, 10f);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child1 = new YogaNode(config);
+        YogaNode root_child1 = createNode(config);
         root_child1.setFlexGrow(1f);
         root.addChildAt(root_child1, 1);
         root.setDirection(YogaDirection.LTR);
@@ -394,16 +395,16 @@ public class YGMarginTest {
     public void test_margin_with_sibling_column() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setWidth(100f);
         root.setHeight(100f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setFlexGrow(1f);
         root_child0.setMargin(YogaEdge.BOTTOM, 10f);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child1 = new YogaNode(config);
+        YogaNode root_child1 = createNode(config);
         root_child1.setFlexGrow(1f);
         root.addChildAt(root_child1, 1);
         root.setDirection(YogaDirection.LTR);
@@ -447,18 +448,18 @@ public class YGMarginTest {
     public void test_margin_auto_bottom() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setAlignItems(YogaAlign.CENTER);
         root.setWidth(200f);
         root.setHeight(200f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setMarginAuto(YogaEdge.BOTTOM);
         root_child0.setWidth(50f);
         root_child0.setHeight(50f);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child1 = new YogaNode(config);
+        YogaNode root_child1 = createNode(config);
         root_child1.setWidth(50f);
         root_child1.setHeight(50f);
         root.addChildAt(root_child1, 1);
@@ -503,18 +504,18 @@ public class YGMarginTest {
     public void test_margin_auto_top() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setAlignItems(YogaAlign.CENTER);
         root.setWidth(200f);
         root.setHeight(200f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setMarginAuto(YogaEdge.TOP);
         root_child0.setWidth(50f);
         root_child0.setHeight(50f);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child1 = new YogaNode(config);
+        YogaNode root_child1 = createNode(config);
         root_child1.setWidth(50f);
         root_child1.setHeight(50f);
         root.addChildAt(root_child1, 1);
@@ -559,19 +560,19 @@ public class YGMarginTest {
     public void test_margin_auto_bottom_and_top() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setAlignItems(YogaAlign.CENTER);
         root.setWidth(200f);
         root.setHeight(200f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setMarginAuto(YogaEdge.TOP);
         root_child0.setMarginAuto(YogaEdge.BOTTOM);
         root_child0.setWidth(50f);
         root_child0.setHeight(50f);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child1 = new YogaNode(config);
+        YogaNode root_child1 = createNode(config);
         root_child1.setWidth(50f);
         root_child1.setHeight(50f);
         root.addChildAt(root_child1, 1);
@@ -616,19 +617,19 @@ public class YGMarginTest {
     public void test_margin_auto_bottom_and_top_justify_center() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setJustifyContent(YogaJustify.CENTER);
         root.setWidth(200f);
         root.setHeight(200f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setMarginAuto(YogaEdge.TOP);
         root_child0.setMarginAuto(YogaEdge.BOTTOM);
         root_child0.setWidth(50f);
         root_child0.setHeight(50f);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child1 = new YogaNode(config);
+        YogaNode root_child1 = createNode(config);
         root_child1.setWidth(50f);
         root_child1.setHeight(50f);
         root.addChildAt(root_child1, 1);
@@ -673,24 +674,24 @@ public class YGMarginTest {
     public void test_margin_auto_mutiple_children_column() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setAlignItems(YogaAlign.CENTER);
         root.setWidth(200f);
         root.setHeight(200f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setMarginAuto(YogaEdge.TOP);
         root_child0.setWidth(50f);
         root_child0.setHeight(50f);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child1 = new YogaNode(config);
+        YogaNode root_child1 = createNode(config);
         root_child1.setMarginAuto(YogaEdge.TOP);
         root_child1.setWidth(50f);
         root_child1.setHeight(50f);
         root.addChildAt(root_child1, 1);
 
-        YogaNode root_child2 = new YogaNode(config);
+        YogaNode root_child2 = createNode(config);
         root_child2.setWidth(50f);
         root_child2.setHeight(50f);
         root.addChildAt(root_child2, 2);
@@ -745,25 +746,25 @@ public class YGMarginTest {
     public void test_margin_auto_mutiple_children_row() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setFlexDirection(YogaFlexDirection.ROW);
         root.setAlignItems(YogaAlign.CENTER);
         root.setWidth(200f);
         root.setHeight(200f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setMarginAuto(YogaEdge.RIGHT);
         root_child0.setWidth(50f);
         root_child0.setHeight(50f);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child1 = new YogaNode(config);
+        YogaNode root_child1 = createNode(config);
         root_child1.setMarginAuto(YogaEdge.RIGHT);
         root_child1.setWidth(50f);
         root_child1.setHeight(50f);
         root.addChildAt(root_child1, 1);
 
-        YogaNode root_child2 = new YogaNode(config);
+        YogaNode root_child2 = createNode(config);
         root_child2.setWidth(50f);
         root_child2.setHeight(50f);
         root.addChildAt(root_child2, 2);
@@ -818,20 +819,20 @@ public class YGMarginTest {
     public void test_margin_auto_left_and_right_column() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setFlexDirection(YogaFlexDirection.ROW);
         root.setAlignItems(YogaAlign.CENTER);
         root.setWidth(200f);
         root.setHeight(200f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setMarginAuto(YogaEdge.LEFT);
         root_child0.setMarginAuto(YogaEdge.RIGHT);
         root_child0.setWidth(50f);
         root_child0.setHeight(50f);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child1 = new YogaNode(config);
+        YogaNode root_child1 = createNode(config);
         root_child1.setWidth(50f);
         root_child1.setHeight(50f);
         root.addChildAt(root_child1, 1);
@@ -876,18 +877,18 @@ public class YGMarginTest {
     public void test_margin_auto_left_and_right() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setWidth(200f);
         root.setHeight(200f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setMarginAuto(YogaEdge.LEFT);
         root_child0.setMarginAuto(YogaEdge.RIGHT);
         root_child0.setWidth(50f);
         root_child0.setHeight(50f);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child1 = new YogaNode(config);
+        YogaNode root_child1 = createNode(config);
         root_child1.setWidth(50f);
         root_child1.setHeight(50f);
         root.addChildAt(root_child1, 1);
@@ -932,20 +933,20 @@ public class YGMarginTest {
     public void test_margin_auto_start_and_end_column() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setFlexDirection(YogaFlexDirection.ROW);
         root.setAlignItems(YogaAlign.CENTER);
         root.setWidth(200f);
         root.setHeight(200f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setMarginAuto(YogaEdge.START);
         root_child0.setMarginAuto(YogaEdge.END);
         root_child0.setWidth(50f);
         root_child0.setHeight(50f);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child1 = new YogaNode(config);
+        YogaNode root_child1 = createNode(config);
         root_child1.setWidth(50f);
         root_child1.setHeight(50f);
         root.addChildAt(root_child1, 1);
@@ -990,18 +991,18 @@ public class YGMarginTest {
     public void test_margin_auto_start_and_end() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setWidth(200f);
         root.setHeight(200f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setMarginAuto(YogaEdge.START);
         root_child0.setMarginAuto(YogaEdge.END);
         root_child0.setWidth(50f);
         root_child0.setHeight(50f);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child1 = new YogaNode(config);
+        YogaNode root_child1 = createNode(config);
         root_child1.setWidth(50f);
         root_child1.setHeight(50f);
         root.addChildAt(root_child1, 1);
@@ -1046,19 +1047,19 @@ public class YGMarginTest {
     public void test_margin_auto_left_and_right_column_and_center() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setAlignItems(YogaAlign.CENTER);
         root.setWidth(200f);
         root.setHeight(200f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setMarginAuto(YogaEdge.LEFT);
         root_child0.setMarginAuto(YogaEdge.RIGHT);
         root_child0.setWidth(50f);
         root_child0.setHeight(50f);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child1 = new YogaNode(config);
+        YogaNode root_child1 = createNode(config);
         root_child1.setWidth(50f);
         root_child1.setHeight(50f);
         root.addChildAt(root_child1, 1);
@@ -1103,18 +1104,18 @@ public class YGMarginTest {
     public void test_margin_auto_left() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setAlignItems(YogaAlign.CENTER);
         root.setWidth(200f);
         root.setHeight(200f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setMarginAuto(YogaEdge.LEFT);
         root_child0.setWidth(50f);
         root_child0.setHeight(50f);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child1 = new YogaNode(config);
+        YogaNode root_child1 = createNode(config);
         root_child1.setWidth(50f);
         root_child1.setHeight(50f);
         root.addChildAt(root_child1, 1);
@@ -1159,18 +1160,18 @@ public class YGMarginTest {
     public void test_margin_auto_right() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setAlignItems(YogaAlign.CENTER);
         root.setWidth(200f);
         root.setHeight(200f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setMarginAuto(YogaEdge.RIGHT);
         root_child0.setWidth(50f);
         root_child0.setHeight(50f);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child1 = new YogaNode(config);
+        YogaNode root_child1 = createNode(config);
         root_child1.setWidth(50f);
         root_child1.setHeight(50f);
         root.addChildAt(root_child1, 1);
@@ -1215,19 +1216,19 @@ public class YGMarginTest {
     public void test_margin_auto_left_and_right_strech() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setFlexDirection(YogaFlexDirection.ROW);
         root.setWidth(200f);
         root.setHeight(200f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setMarginAuto(YogaEdge.LEFT);
         root_child0.setMarginAuto(YogaEdge.RIGHT);
         root_child0.setWidth(50f);
         root_child0.setHeight(50f);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child1 = new YogaNode(config);
+        YogaNode root_child1 = createNode(config);
         root_child1.setWidth(50f);
         root_child1.setHeight(50f);
         root.addChildAt(root_child1, 1);
@@ -1272,18 +1273,18 @@ public class YGMarginTest {
     public void test_margin_auto_top_and_bottom_strech() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setWidth(200f);
         root.setHeight(200f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setMarginAuto(YogaEdge.TOP);
         root_child0.setMarginAuto(YogaEdge.BOTTOM);
         root_child0.setWidth(50f);
         root_child0.setHeight(50f);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child1 = new YogaNode(config);
+        YogaNode root_child1 = createNode(config);
         root_child1.setWidth(50f);
         root_child1.setHeight(50f);
         root.addChildAt(root_child1, 1);
@@ -1328,11 +1329,11 @@ public class YGMarginTest {
     public void test_margin_should_not_be_part_of_max_height() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setWidth(250f);
         root.setHeight(250f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setMargin(YogaEdge.TOP, 20f);
         root_child0.setWidth(100f);
         root_child0.setHeight(100f);
@@ -1369,11 +1370,11 @@ public class YGMarginTest {
     public void test_margin_should_not_be_part_of_max_width() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setWidth(250f);
         root.setHeight(250f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setMargin(YogaEdge.LEFT, 20f);
         root_child0.setWidth(100f);
         root_child0.setMaxWidth(100f);
@@ -1410,12 +1411,12 @@ public class YGMarginTest {
     public void test_margin_auto_left_right_child_bigger_than_parent() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setJustifyContent(YogaJustify.CENTER);
         root.setWidth(52f);
         root.setHeight(52f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setMarginAuto(YogaEdge.LEFT);
         root_child0.setMarginAuto(YogaEdge.RIGHT);
         root_child0.setWidth(72f);
@@ -1452,12 +1453,12 @@ public class YGMarginTest {
     public void test_margin_auto_left_child_bigger_than_parent() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setJustifyContent(YogaJustify.CENTER);
         root.setWidth(52f);
         root.setHeight(52f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setMarginAuto(YogaEdge.LEFT);
         root_child0.setWidth(72f);
         root_child0.setHeight(72f);
@@ -1493,12 +1494,12 @@ public class YGMarginTest {
     public void test_margin_fix_left_auto_right_child_bigger_than_parent() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setJustifyContent(YogaJustify.CENTER);
         root.setWidth(52f);
         root.setHeight(52f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setMargin(YogaEdge.LEFT, 10f);
         root_child0.setMarginAuto(YogaEdge.RIGHT);
         root_child0.setWidth(72f);
@@ -1535,12 +1536,12 @@ public class YGMarginTest {
     public void test_margin_auto_left_fix_right_child_bigger_than_parent() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setJustifyContent(YogaJustify.CENTER);
         root.setWidth(52f);
         root.setHeight(52f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setMarginAuto(YogaEdge.LEFT);
         root_child0.setMargin(YogaEdge.RIGHT, 10f);
         root_child0.setWidth(72f);
@@ -1577,19 +1578,19 @@ public class YGMarginTest {
     public void test_margin_auto_top_stretching_child() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setAlignItems(YogaAlign.CENTER);
         root.setWidth(200f);
         root.setHeight(200f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setFlexGrow(1f);
         root_child0.setFlexShrink(1f);
         root_child0.setFlexBasisPercent(0f);
         root_child0.setMarginAuto(YogaEdge.TOP);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child1 = new YogaNode(config);
+        YogaNode root_child1 = createNode(config);
         root_child1.setWidth(50f);
         root_child1.setHeight(50f);
         root.addChildAt(root_child1, 1);
@@ -1634,19 +1635,19 @@ public class YGMarginTest {
     public void test_margin_auto_left_stretching_child() {
         YogaConfig config = new YogaConfig();
 
-        YogaNode root = new YogaNode(config);
+        YogaNode root = createNode(config);
         root.setAlignItems(YogaAlign.CENTER);
         root.setWidth(200f);
         root.setHeight(200f);
 
-        YogaNode root_child0 = new YogaNode(config);
+        YogaNode root_child0 = createNode(config);
         root_child0.setFlexGrow(1f);
         root_child0.setFlexShrink(1f);
         root_child0.setFlexBasisPercent(0f);
         root_child0.setMarginAuto(YogaEdge.LEFT);
         root.addChildAt(root_child0, 0);
 
-        YogaNode root_child1 = new YogaNode(config);
+        YogaNode root_child1 = createNode(config);
         root_child1.setWidth(50f);
         root_child1.setHeight(50f);
         root.addChildAt(root_child1, 1);

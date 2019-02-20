@@ -401,7 +401,7 @@
         <build_simple module="xxhash"/>
 
         <!-- yoga -->
-        <build module="yoga" simple="true" linker="g++" if:true="${binding.yoga}">
+        <build module="yoga" simple="true" lang="c++" if:true="${binding.yoga}">
             <beforeCompile>
                 <compile lang="c++">
                     <arg value="-I${src.main.rel}"/>

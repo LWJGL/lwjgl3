@@ -1,22 +1,26 @@
-/*
- *  Copyright (c) Facebook, Inc. and its affiliates.
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates.
  *
- *  This source code is licensed under the MIT license found in the LICENSE
- *  file in the root directory of this source tree.
- *
+ * This source code is licensed under the MIT license found in the LICENSE
+ * file in the root directory of this source tree.
  */
 #include "YGConfig.h"
 
-const std::array<bool, YGExperimentalFeatureCount>
-    kYGDefaultExperimentalFeatures = {{false}};
+YGConfig::YGConfig(YGLogger logger) {
+  logger_.noContext = logger;
+  loggerUsesContext_ = false;
+}
 
-YGConfig::YGConfig(YGLogger logger)
-    : experimentalFeatures(kYGDefaultExperimentalFeatures),
-      useWebDefaults(false),
-      useLegacyStretchBehaviour(false),
-      shouldDiffLayoutWithoutLegacyStretchBehaviour(false),
-      pointScaleFactor(1.0f),
-      logger(logger),
-      cloneNodeCallback(nullptr),
-      context(nullptr),
-      printTree(false) {}
+void YGConfig::log(
+    YGConfig* config,
+    YGNode* node,
+    YGLogLevel logLevel,
+    void* logContext,
+    const char* format,
+    va_list args) {
+  if (loggerUsesContext_) {
+    logger_.withContext(config, node, logLevel, logContext, format, args);
+  } else {
+    logger_.noContext(config, node, logLevel, format, args);
+  }
+}

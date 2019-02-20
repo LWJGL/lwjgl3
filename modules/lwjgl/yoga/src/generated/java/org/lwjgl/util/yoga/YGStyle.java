@@ -13,33 +13,36 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
 
 /**
+ * Unstable/private API.
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct YGStyle {
- *     YGDirection direction;
- *     YGFlexDirection flexDirection;
- *     YGJustify justifyContent;
- *     YGAlign alignContent;
- *     YGAlign alignItems;
- *     YGAlign alignSelf;
- *     YGPositionType positionType;
- *     YGWrap flexWrap;
- *     YGOverflow overflow;
- *     YGDisplay display;
+ *     YGDirection direction : 2;
+ *     YGFlexDirection flexDirection : 2;
+ *     YGJustify justifyContent : 3;
+ *     YGAlign alignContent : 3;
+ *     YGAlign alignItems : 3;
+ *     YGAlign alignSelf : 3;
+ *     YGPositionType positionType : 1;
+ *     YGWrap flexWrap : 2;
+ *     YGOverflow overflow : 2;
+ *     YGDisplay display : 1;
  *     {@link YGFloatOptional YGFloatOptional} flex;
  *     {@link YGFloatOptional YGFloatOptional} flexGrow;
  *     {@link YGFloatOptional YGFloatOptional} flexShrink;
- *     {@link YGValue YGValue} flexBasis;
- *     {@link YGValue YGValue} margin[9];
- *     {@link YGValue YGValue} positions[9];
- *     {@link YGValue YGValue} padding[9];
- *     {@link YGValue YGValue} border[9];
- *     {@link YGValue YGValue} dimensions[2];
- *     {@link YGValue YGValue} minDimensions[2];
- *     {@link YGValue YGValue} maxDimensions[2];
+ *     {@link CompactValue CompactValue} flexBasis;
+ *     {@link CompactValue CompactValue} margin[9];
+ *     {@link CompactValue CompactValue} positions[9];
+ *     {@link CompactValue CompactValue} padding[9];
+ *     {@link CompactValue CompactValue} border[9];
+ *     {@link CompactValue CompactValue} dimensions[2];
+ *     {@link CompactValue CompactValue} minDimensions[2];
+ *     {@link CompactValue CompactValue} maxDimensions[2];
  *     {@link YGFloatOptional YGFloatOptional} aspectRatio;
  * }</code></pre>
  */
@@ -53,16 +56,6 @@ public class YGStyle extends Struct {
 
     /** The struct member offsets. */
     public static final int
-        DIRECTION,
-        FLEXDIRECTION,
-        JUSTIFYCONTENT,
-        ALIGNCONTENT,
-        ALIGNITEMS,
-        ALIGNSELF,
-        POSITIONTYPE,
-        FLEXWRAP,
-        OVERFLOW,
-        DISPLAY,
         FLEX,
         FLEXGROW,
         FLEXSHRINK,
@@ -77,57 +70,30 @@ public class YGStyle extends Struct {
         ASPECTRATIO;
 
     static {
-        Layout layout = __struct(
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(YGFloatOptional.SIZEOF, YGFloatOptional.ALIGNOF),
-            __member(YGFloatOptional.SIZEOF, YGFloatOptional.ALIGNOF),
-            __member(YGFloatOptional.SIZEOF, YGFloatOptional.ALIGNOF),
-            __member(YGValue.SIZEOF, YGValue.ALIGNOF),
-            __array(YGValue.SIZEOF, YGValue.ALIGNOF, 9),
-            __array(YGValue.SIZEOF, YGValue.ALIGNOF, 9),
-            __array(YGValue.SIZEOF, YGValue.ALIGNOF, 9),
-            __array(YGValue.SIZEOF, YGValue.ALIGNOF, 9),
-            __array(YGValue.SIZEOF, YGValue.ALIGNOF, 2),
-            __array(YGValue.SIZEOF, YGValue.ALIGNOF, 2),
-            __array(YGValue.SIZEOF, YGValue.ALIGNOF, 2),
-            __member(YGFloatOptional.SIZEOF, YGFloatOptional.ALIGNOF)
-        );
+        LibYoga.initialize();
 
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
+        try (MemoryStack stack = stackPush()) {
+            IntBuffer offsets = stack.mallocInt(13);
+            SIZEOF = offsets(memAddress(offsets));
 
-        DIRECTION = layout.offsetof(0);
-        FLEXDIRECTION = layout.offsetof(1);
-        JUSTIFYCONTENT = layout.offsetof(2);
-        ALIGNCONTENT = layout.offsetof(3);
-        ALIGNITEMS = layout.offsetof(4);
-        ALIGNSELF = layout.offsetof(5);
-        POSITIONTYPE = layout.offsetof(6);
-        FLEXWRAP = layout.offsetof(7);
-        OVERFLOW = layout.offsetof(8);
-        DISPLAY = layout.offsetof(9);
-        FLEX = layout.offsetof(10);
-        FLEXGROW = layout.offsetof(11);
-        FLEXSHRINK = layout.offsetof(12);
-        FLEXBASIS = layout.offsetof(13);
-        MARGIN = layout.offsetof(14);
-        POSITIONS = layout.offsetof(15);
-        PADDING = layout.offsetof(16);
-        BORDER = layout.offsetof(17);
-        DIMENSIONS = layout.offsetof(18);
-        MINDIMENSIONS = layout.offsetof(19);
-        MAXDIMENSIONS = layout.offsetof(20);
-        ASPECTRATIO = layout.offsetof(21);
+            FLEX = offsets.get(0);
+            FLEXGROW = offsets.get(1);
+            FLEXSHRINK = offsets.get(2);
+            FLEXBASIS = offsets.get(3);
+            MARGIN = offsets.get(4);
+            POSITIONS = offsets.get(5);
+            PADDING = offsets.get(6);
+            BORDER = offsets.get(7);
+            DIMENSIONS = offsets.get(8);
+            MINDIMENSIONS = offsets.get(9);
+            MAXDIMENSIONS = offsets.get(10);
+            ASPECTRATIO = offsets.get(11);
+
+            ALIGNOF = offsets.get(12);
+        }
     }
+
+    private static native int offsets(long buffer);
 
     /**
      * Creates a {@code YGStyle} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -178,45 +144,43 @@ public class YGStyle extends Struct {
     public YGFloatOptional flexGrow() { return nflexGrow(address()); }
     /** Returns a {@link YGFloatOptional} view of the {@code flexShrink} field. */
     public YGFloatOptional flexShrink() { return nflexShrink(address()); }
-    /** Returns a {@link YGValue} view of the {@code flexBasis} field. */
-    public YGValue flexBasis() { return nflexBasis(address()); }
-    /** Passes the {@code flexBasis} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public YGStyle flexBasis(java.util.function.Consumer<YGValue> consumer) { consumer.accept(flexBasis()); return this; }
-    /** Returns a {@link YGValue}.Buffer view of the {@code margin} field. */
-    @NativeType("YGValue[9]")
-    public YGValue.Buffer margin() { return nmargin(address()); }
-    /** Returns a {@link YGValue} view of the struct at the specified index of the {@code margin} field. */
-    public YGValue margin(int index) { return nmargin(address(), index); }
-    /** Returns a {@link YGValue}.Buffer view of the {@code positions} field. */
-    @NativeType("YGValue[9]")
-    public YGValue.Buffer positions() { return npositions(address()); }
-    /** Returns a {@link YGValue} view of the struct at the specified index of the {@code positions} field. */
-    public YGValue positions(int index) { return npositions(address(), index); }
-    /** Returns a {@link YGValue}.Buffer view of the {@code padding} field. */
-    @NativeType("YGValue[9]")
-    public YGValue.Buffer padding() { return npadding(address()); }
-    /** Returns a {@link YGValue} view of the struct at the specified index of the {@code padding} field. */
-    public YGValue padding(int index) { return npadding(address(), index); }
-    /** Returns a {@link YGValue}.Buffer view of the {@code border} field. */
-    @NativeType("YGValue[9]")
-    public YGValue.Buffer border() { return nborder(address()); }
-    /** Returns a {@link YGValue} view of the struct at the specified index of the {@code border} field. */
-    public YGValue border(int index) { return nborder(address(), index); }
-    /** Returns a {@link YGValue}.Buffer view of the {@code dimensions} field. */
-    @NativeType("YGValue[2]")
-    public YGValue.Buffer dimensions() { return ndimensions(address()); }
-    /** Returns a {@link YGValue} view of the struct at the specified index of the {@code dimensions} field. */
-    public YGValue dimensions(int index) { return ndimensions(address(), index); }
-    /** Returns a {@link YGValue}.Buffer view of the {@code minDimensions} field. */
-    @NativeType("YGValue[2]")
-    public YGValue.Buffer minDimensions() { return nminDimensions(address()); }
-    /** Returns a {@link YGValue} view of the struct at the specified index of the {@code minDimensions} field. */
-    public YGValue minDimensions(int index) { return nminDimensions(address(), index); }
-    /** Returns a {@link YGValue}.Buffer view of the {@code maxDimensions} field. */
-    @NativeType("YGValue[2]")
-    public YGValue.Buffer maxDimensions() { return nmaxDimensions(address()); }
-    /** Returns a {@link YGValue} view of the struct at the specified index of the {@code maxDimensions} field. */
-    public YGValue maxDimensions(int index) { return nmaxDimensions(address(), index); }
+    /** Returns a {@link CompactValue} view of the {@code flexBasis} field. */
+    public CompactValue flexBasis() { return nflexBasis(address()); }
+    /** Returns a {@link CompactValue}.Buffer view of the {@code margin} field. */
+    @NativeType("CompactValue[9]")
+    public CompactValue.Buffer margin() { return nmargin(address()); }
+    /** Returns a {@link CompactValue} view of the struct at the specified index of the {@code margin} field. */
+    public CompactValue margin(int index) { return nmargin(address(), index); }
+    /** Returns a {@link CompactValue}.Buffer view of the {@code positions} field. */
+    @NativeType("CompactValue[9]")
+    public CompactValue.Buffer positions() { return npositions(address()); }
+    /** Returns a {@link CompactValue} view of the struct at the specified index of the {@code positions} field. */
+    public CompactValue positions(int index) { return npositions(address(), index); }
+    /** Returns a {@link CompactValue}.Buffer view of the {@code padding} field. */
+    @NativeType("CompactValue[9]")
+    public CompactValue.Buffer padding() { return npadding(address()); }
+    /** Returns a {@link CompactValue} view of the struct at the specified index of the {@code padding} field. */
+    public CompactValue padding(int index) { return npadding(address(), index); }
+    /** Returns a {@link CompactValue}.Buffer view of the {@code border} field. */
+    @NativeType("CompactValue[9]")
+    public CompactValue.Buffer border() { return nborder(address()); }
+    /** Returns a {@link CompactValue} view of the struct at the specified index of the {@code border} field. */
+    public CompactValue border(int index) { return nborder(address(), index); }
+    /** Returns a {@link CompactValue}.Buffer view of the {@code dimensions} field. */
+    @NativeType("CompactValue[2]")
+    public CompactValue.Buffer dimensions() { return ndimensions(address()); }
+    /** Returns a {@link CompactValue} view of the struct at the specified index of the {@code dimensions} field. */
+    public CompactValue dimensions(int index) { return ndimensions(address(), index); }
+    /** Returns a {@link CompactValue}.Buffer view of the {@code minDimensions} field. */
+    @NativeType("CompactValue[2]")
+    public CompactValue.Buffer minDimensions() { return nminDimensions(address()); }
+    /** Returns a {@link CompactValue} view of the struct at the specified index of the {@code minDimensions} field. */
+    public CompactValue minDimensions(int index) { return nminDimensions(address(), index); }
+    /** Returns a {@link CompactValue}.Buffer view of the {@code maxDimensions} field. */
+    @NativeType("CompactValue[2]")
+    public CompactValue.Buffer maxDimensions() { return nmaxDimensions(address()); }
+    /** Returns a {@link CompactValue} view of the struct at the specified index of the {@code maxDimensions} field. */
+    public CompactValue maxDimensions(int index) { return nmaxDimensions(address(), index); }
     /** Returns a {@link YGFloatOptional} view of the {@code aspectRatio} field. */
     public YGFloatOptional aspectRatio() { return naspectRatio(address()); }
 
@@ -252,25 +216,25 @@ public class YGStyle extends Struct {
     // -----------------------------------
 
     /** Unsafe version of {@link #direction}. */
-    public static int ndirection(long struct) { return UNSAFE.getInt(null, struct + YGStyle.DIRECTION); }
+    public static native int ndirection(long struct);
     /** Unsafe version of {@link #flexDirection}. */
-    public static int nflexDirection(long struct) { return UNSAFE.getInt(null, struct + YGStyle.FLEXDIRECTION); }
+    public static native int nflexDirection(long struct);
     /** Unsafe version of {@link #justifyContent}. */
-    public static int njustifyContent(long struct) { return UNSAFE.getInt(null, struct + YGStyle.JUSTIFYCONTENT); }
+    public static native int njustifyContent(long struct);
     /** Unsafe version of {@link #alignContent}. */
-    public static int nalignContent(long struct) { return UNSAFE.getInt(null, struct + YGStyle.ALIGNCONTENT); }
+    public static native int nalignContent(long struct);
     /** Unsafe version of {@link #alignItems}. */
-    public static int nalignItems(long struct) { return UNSAFE.getInt(null, struct + YGStyle.ALIGNITEMS); }
+    public static native int nalignItems(long struct);
     /** Unsafe version of {@link #alignSelf}. */
-    public static int nalignSelf(long struct) { return UNSAFE.getInt(null, struct + YGStyle.ALIGNSELF); }
+    public static native int nalignSelf(long struct);
     /** Unsafe version of {@link #positionType}. */
-    public static int npositionType(long struct) { return UNSAFE.getInt(null, struct + YGStyle.POSITIONTYPE); }
+    public static native int npositionType(long struct);
     /** Unsafe version of {@link #flexWrap}. */
-    public static int nflexWrap(long struct) { return UNSAFE.getInt(null, struct + YGStyle.FLEXWRAP); }
+    public static native int nflexWrap(long struct);
     /** Unsafe version of {@link #overflow}. */
-    public static int noverflow(long struct) { return UNSAFE.getInt(null, struct + YGStyle.OVERFLOW); }
+    public static native int noverflow(long struct);
     /** Unsafe version of {@link #display}. */
-    public static int ndisplay(long struct) { return UNSAFE.getInt(null, struct + YGStyle.DISPLAY); }
+    public static native int ndisplay(long struct);
     /** Unsafe version of {@link #flex}. */
     public static YGFloatOptional nflex(long struct) { return YGFloatOptional.create(struct + YGStyle.FLEX); }
     /** Unsafe version of {@link #flexGrow}. */
@@ -278,48 +242,48 @@ public class YGStyle extends Struct {
     /** Unsafe version of {@link #flexShrink}. */
     public static YGFloatOptional nflexShrink(long struct) { return YGFloatOptional.create(struct + YGStyle.FLEXSHRINK); }
     /** Unsafe version of {@link #flexBasis}. */
-    public static YGValue nflexBasis(long struct) { return YGValue.create(struct + YGStyle.FLEXBASIS); }
+    public static CompactValue nflexBasis(long struct) { return CompactValue.create(struct + YGStyle.FLEXBASIS); }
     /** Unsafe version of {@link #margin}. */
-    public static YGValue.Buffer nmargin(long struct) { return YGValue.create(struct + YGStyle.MARGIN, 9); }
+    public static CompactValue.Buffer nmargin(long struct) { return CompactValue.create(struct + YGStyle.MARGIN, 9); }
     /** Unsafe version of {@link #margin(int) margin}. */
-    public static YGValue nmargin(long struct, int index) {
-        return YGValue.create(struct + YGStyle.MARGIN + check(index, 9) * YGValue.SIZEOF);
+    public static CompactValue nmargin(long struct, int index) {
+        return CompactValue.create(struct + YGStyle.MARGIN + check(index, 9) * CompactValue.SIZEOF);
     }
     /** Unsafe version of {@link #positions}. */
-    public static YGValue.Buffer npositions(long struct) { return YGValue.create(struct + YGStyle.POSITIONS, 9); }
+    public static CompactValue.Buffer npositions(long struct) { return CompactValue.create(struct + YGStyle.POSITIONS, 9); }
     /** Unsafe version of {@link #positions(int) positions}. */
-    public static YGValue npositions(long struct, int index) {
-        return YGValue.create(struct + YGStyle.POSITIONS + check(index, 9) * YGValue.SIZEOF);
+    public static CompactValue npositions(long struct, int index) {
+        return CompactValue.create(struct + YGStyle.POSITIONS + check(index, 9) * CompactValue.SIZEOF);
     }
     /** Unsafe version of {@link #padding}. */
-    public static YGValue.Buffer npadding(long struct) { return YGValue.create(struct + YGStyle.PADDING, 9); }
+    public static CompactValue.Buffer npadding(long struct) { return CompactValue.create(struct + YGStyle.PADDING, 9); }
     /** Unsafe version of {@link #padding(int) padding}. */
-    public static YGValue npadding(long struct, int index) {
-        return YGValue.create(struct + YGStyle.PADDING + check(index, 9) * YGValue.SIZEOF);
+    public static CompactValue npadding(long struct, int index) {
+        return CompactValue.create(struct + YGStyle.PADDING + check(index, 9) * CompactValue.SIZEOF);
     }
     /** Unsafe version of {@link #border}. */
-    public static YGValue.Buffer nborder(long struct) { return YGValue.create(struct + YGStyle.BORDER, 9); }
+    public static CompactValue.Buffer nborder(long struct) { return CompactValue.create(struct + YGStyle.BORDER, 9); }
     /** Unsafe version of {@link #border(int) border}. */
-    public static YGValue nborder(long struct, int index) {
-        return YGValue.create(struct + YGStyle.BORDER + check(index, 9) * YGValue.SIZEOF);
+    public static CompactValue nborder(long struct, int index) {
+        return CompactValue.create(struct + YGStyle.BORDER + check(index, 9) * CompactValue.SIZEOF);
     }
     /** Unsafe version of {@link #dimensions}. */
-    public static YGValue.Buffer ndimensions(long struct) { return YGValue.create(struct + YGStyle.DIMENSIONS, 2); }
+    public static CompactValue.Buffer ndimensions(long struct) { return CompactValue.create(struct + YGStyle.DIMENSIONS, 2); }
     /** Unsafe version of {@link #dimensions(int) dimensions}. */
-    public static YGValue ndimensions(long struct, int index) {
-        return YGValue.create(struct + YGStyle.DIMENSIONS + check(index, 2) * YGValue.SIZEOF);
+    public static CompactValue ndimensions(long struct, int index) {
+        return CompactValue.create(struct + YGStyle.DIMENSIONS + check(index, 2) * CompactValue.SIZEOF);
     }
     /** Unsafe version of {@link #minDimensions}. */
-    public static YGValue.Buffer nminDimensions(long struct) { return YGValue.create(struct + YGStyle.MINDIMENSIONS, 2); }
+    public static CompactValue.Buffer nminDimensions(long struct) { return CompactValue.create(struct + YGStyle.MINDIMENSIONS, 2); }
     /** Unsafe version of {@link #minDimensions(int) minDimensions}. */
-    public static YGValue nminDimensions(long struct, int index) {
-        return YGValue.create(struct + YGStyle.MINDIMENSIONS + check(index, 2) * YGValue.SIZEOF);
+    public static CompactValue nminDimensions(long struct, int index) {
+        return CompactValue.create(struct + YGStyle.MINDIMENSIONS + check(index, 2) * CompactValue.SIZEOF);
     }
     /** Unsafe version of {@link #maxDimensions}. */
-    public static YGValue.Buffer nmaxDimensions(long struct) { return YGValue.create(struct + YGStyle.MAXDIMENSIONS, 2); }
+    public static CompactValue.Buffer nmaxDimensions(long struct) { return CompactValue.create(struct + YGStyle.MAXDIMENSIONS, 2); }
     /** Unsafe version of {@link #maxDimensions(int) maxDimensions}. */
-    public static YGValue nmaxDimensions(long struct, int index) {
-        return YGValue.create(struct + YGStyle.MAXDIMENSIONS + check(index, 2) * YGValue.SIZEOF);
+    public static CompactValue nmaxDimensions(long struct, int index) {
+        return CompactValue.create(struct + YGStyle.MAXDIMENSIONS + check(index, 2) * CompactValue.SIZEOF);
     }
     /** Unsafe version of {@link #aspectRatio}. */
     public static YGFloatOptional naspectRatio(long struct) { return YGFloatOptional.create(struct + YGStyle.ASPECTRATIO); }
@@ -398,45 +362,43 @@ public class YGStyle extends Struct {
         public YGFloatOptional flexGrow() { return YGStyle.nflexGrow(address()); }
         /** Returns a {@link YGFloatOptional} view of the {@code flexShrink} field. */
         public YGFloatOptional flexShrink() { return YGStyle.nflexShrink(address()); }
-        /** Returns a {@link YGValue} view of the {@code flexBasis} field. */
-        public YGValue flexBasis() { return YGStyle.nflexBasis(address()); }
-        /** Passes the {@code flexBasis} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public YGStyle.Buffer flexBasis(java.util.function.Consumer<YGValue> consumer) { consumer.accept(flexBasis()); return this; }
-        /** Returns a {@link YGValue}.Buffer view of the {@code margin} field. */
-        @NativeType("YGValue[9]")
-        public YGValue.Buffer margin() { return YGStyle.nmargin(address()); }
-        /** Returns a {@link YGValue} view of the struct at the specified index of the {@code margin} field. */
-        public YGValue margin(int index) { return YGStyle.nmargin(address(), index); }
-        /** Returns a {@link YGValue}.Buffer view of the {@code positions} field. */
-        @NativeType("YGValue[9]")
-        public YGValue.Buffer positions() { return YGStyle.npositions(address()); }
-        /** Returns a {@link YGValue} view of the struct at the specified index of the {@code positions} field. */
-        public YGValue positions(int index) { return YGStyle.npositions(address(), index); }
-        /** Returns a {@link YGValue}.Buffer view of the {@code padding} field. */
-        @NativeType("YGValue[9]")
-        public YGValue.Buffer padding() { return YGStyle.npadding(address()); }
-        /** Returns a {@link YGValue} view of the struct at the specified index of the {@code padding} field. */
-        public YGValue padding(int index) { return YGStyle.npadding(address(), index); }
-        /** Returns a {@link YGValue}.Buffer view of the {@code border} field. */
-        @NativeType("YGValue[9]")
-        public YGValue.Buffer border() { return YGStyle.nborder(address()); }
-        /** Returns a {@link YGValue} view of the struct at the specified index of the {@code border} field. */
-        public YGValue border(int index) { return YGStyle.nborder(address(), index); }
-        /** Returns a {@link YGValue}.Buffer view of the {@code dimensions} field. */
-        @NativeType("YGValue[2]")
-        public YGValue.Buffer dimensions() { return YGStyle.ndimensions(address()); }
-        /** Returns a {@link YGValue} view of the struct at the specified index of the {@code dimensions} field. */
-        public YGValue dimensions(int index) { return YGStyle.ndimensions(address(), index); }
-        /** Returns a {@link YGValue}.Buffer view of the {@code minDimensions} field. */
-        @NativeType("YGValue[2]")
-        public YGValue.Buffer minDimensions() { return YGStyle.nminDimensions(address()); }
-        /** Returns a {@link YGValue} view of the struct at the specified index of the {@code minDimensions} field. */
-        public YGValue minDimensions(int index) { return YGStyle.nminDimensions(address(), index); }
-        /** Returns a {@link YGValue}.Buffer view of the {@code maxDimensions} field. */
-        @NativeType("YGValue[2]")
-        public YGValue.Buffer maxDimensions() { return YGStyle.nmaxDimensions(address()); }
-        /** Returns a {@link YGValue} view of the struct at the specified index of the {@code maxDimensions} field. */
-        public YGValue maxDimensions(int index) { return YGStyle.nmaxDimensions(address(), index); }
+        /** Returns a {@link CompactValue} view of the {@code flexBasis} field. */
+        public CompactValue flexBasis() { return YGStyle.nflexBasis(address()); }
+        /** Returns a {@link CompactValue}.Buffer view of the {@code margin} field. */
+        @NativeType("CompactValue[9]")
+        public CompactValue.Buffer margin() { return YGStyle.nmargin(address()); }
+        /** Returns a {@link CompactValue} view of the struct at the specified index of the {@code margin} field. */
+        public CompactValue margin(int index) { return YGStyle.nmargin(address(), index); }
+        /** Returns a {@link CompactValue}.Buffer view of the {@code positions} field. */
+        @NativeType("CompactValue[9]")
+        public CompactValue.Buffer positions() { return YGStyle.npositions(address()); }
+        /** Returns a {@link CompactValue} view of the struct at the specified index of the {@code positions} field. */
+        public CompactValue positions(int index) { return YGStyle.npositions(address(), index); }
+        /** Returns a {@link CompactValue}.Buffer view of the {@code padding} field. */
+        @NativeType("CompactValue[9]")
+        public CompactValue.Buffer padding() { return YGStyle.npadding(address()); }
+        /** Returns a {@link CompactValue} view of the struct at the specified index of the {@code padding} field. */
+        public CompactValue padding(int index) { return YGStyle.npadding(address(), index); }
+        /** Returns a {@link CompactValue}.Buffer view of the {@code border} field. */
+        @NativeType("CompactValue[9]")
+        public CompactValue.Buffer border() { return YGStyle.nborder(address()); }
+        /** Returns a {@link CompactValue} view of the struct at the specified index of the {@code border} field. */
+        public CompactValue border(int index) { return YGStyle.nborder(address(), index); }
+        /** Returns a {@link CompactValue}.Buffer view of the {@code dimensions} field. */
+        @NativeType("CompactValue[2]")
+        public CompactValue.Buffer dimensions() { return YGStyle.ndimensions(address()); }
+        /** Returns a {@link CompactValue} view of the struct at the specified index of the {@code dimensions} field. */
+        public CompactValue dimensions(int index) { return YGStyle.ndimensions(address(), index); }
+        /** Returns a {@link CompactValue}.Buffer view of the {@code minDimensions} field. */
+        @NativeType("CompactValue[2]")
+        public CompactValue.Buffer minDimensions() { return YGStyle.nminDimensions(address()); }
+        /** Returns a {@link CompactValue} view of the struct at the specified index of the {@code minDimensions} field. */
+        public CompactValue minDimensions(int index) { return YGStyle.nminDimensions(address(), index); }
+        /** Returns a {@link CompactValue}.Buffer view of the {@code maxDimensions} field. */
+        @NativeType("CompactValue[2]")
+        public CompactValue.Buffer maxDimensions() { return YGStyle.nmaxDimensions(address()); }
+        /** Returns a {@link CompactValue} view of the struct at the specified index of the {@code maxDimensions} field. */
+        public CompactValue maxDimensions(int index) { return YGStyle.nmaxDimensions(address(), index); }
         /** Returns a {@link YGFloatOptional} view of the {@code aspectRatio} field. */
         public YGFloatOptional aspectRatio() { return YGStyle.naspectRatio(address()); }
 
