@@ -10,7 +10,6 @@ import openvr.*
 val VRChaperoneSetup = "VRChaperoneSetup".nativeClass(
     Module.OPENVR,
     prefixMethod = "VRChaperoneSetup_",
-    library = OPENVR_LIBRARY,
     binding = OPENVR_FNTABLE_BINDING
 ) {
     documentation =

@@ -10,7 +10,6 @@ import openvr.*
 val VRInput = "VRInput".nativeClass(
     Module.OPENVR,
     prefixMethod = "VRInput_",
-    library = OPENVR_LIBRARY,
     binding = OPENVR_FNTABLE_BINDING
 ) {
     documentation =

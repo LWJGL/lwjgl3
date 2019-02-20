@@ -10,7 +10,6 @@ import openvr.*
 val VRNotifications = "VRNotifications".nativeClass(
     Module.OPENVR,
     prefixMethod = "VRNotifications_",
-    library = OPENVR_LIBRARY,
     binding = OPENVR_FNTABLE_BINDING
 ) {
     documentation =

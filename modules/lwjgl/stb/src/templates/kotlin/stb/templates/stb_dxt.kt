@@ -7,7 +7,7 @@ package stb.templates
 import org.lwjgl.generator.*
 import stb.*
 
-val stb_dxt = "STBDXT".nativeClass(Module.STB, prefix = "STB", prefixMethod = "stb_", library = STB_LIBRARY) {
+val stb_dxt = "STBDXT".nativeClass(Module.STB, prefix = "STB", prefixMethod = "stb_") {
     includeSTBAPI(
         """#define STB_DXT_IMPLEMENTATION
 #define STB_DXT_STATIC

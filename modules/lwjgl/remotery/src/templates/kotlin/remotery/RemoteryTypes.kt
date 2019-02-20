@@ -6,8 +6,6 @@ package remotery
 
 import org.lwjgl.generator.*
 
-const val REMOTERY_LIBRARY = "LibRemotery.initialize();"
-
 fun config() {
     packageInfo(
         Module.REMOTERY,
@@ -16,8 +14,6 @@ fun config() {
         that runs in a web browser.
         """
     )
-
-    Generator.registerLibraryInit(Module.REMOTERY, "LibRemotery", "remotery")
 }
 
 fun NativeClass.remoteryIncludes(type: String) {

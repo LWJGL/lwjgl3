@@ -10,7 +10,6 @@ import openvr.*
 val VRScreenshots = "VRScreenshots".nativeClass(
     Module.OPENVR,
     prefixMethod = "VRScreenshots_",
-    library = OPENVR_LIBRARY,
     binding = OPENVR_FNTABLE_BINDING
 ) {
     documentation = "Allows the application to generate screenshots."

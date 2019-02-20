@@ -7,7 +7,7 @@ package stb.templates
 import org.lwjgl.generator.*
 import stb.*
 
-val stb_easy_font = "STBEasyFont".nativeClass(Module.STB, prefix = "STB", prefixMethod = "stb_", library = STB_LIBRARY) {
+val stb_easy_font = "STBEasyFont".nativeClass(Module.STB, prefix = "STB", prefixMethod = "stb_") {
     includeSTBAPI("#include \"stb_easy_font.h\"")
 
     documentation =

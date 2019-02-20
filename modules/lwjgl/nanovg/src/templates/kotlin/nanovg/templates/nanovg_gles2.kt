@@ -7,7 +7,7 @@ package nanovg.templates
 import org.lwjgl.generator.*
 import nanovg.*
 
-val nanovg_gles2 = "NanoVGGLES2".dependsOn(Module.OPENGLES)?.nativeClass(Module.NANOVG, prefix = "NVG", library = NANOVG_LIBRARY) {
+val nanovg_gles2 = "NanoVGGLES2".dependsOn(Module.OPENGLES)?.nativeClass(Module.NANOVG, prefix = "NVG") {
     includeNanoVGAPI("""#define NANOVG_GLES2_IMPLEMENTATION
 #include "nanovg.h"
 #include "nanovg_gl.h"

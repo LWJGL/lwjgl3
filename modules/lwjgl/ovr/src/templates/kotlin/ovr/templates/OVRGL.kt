@@ -7,7 +7,7 @@ package ovr.templates
 import org.lwjgl.generator.*
 import ovr.*
 
-val OVRGL = "OVRGL".dependsOn(Module.OPENGL)?.nativeClass(Module.OVR, prefixMethod = "ovr_", prefixConstant = "ovr", library = OVR_LIBRARY) {
+val OVRGL = "OVRGL".dependsOn(Module.OPENGL)?.nativeClass(Module.OVR, prefixMethod = "ovr_", prefixConstant = "ovr") {
     includeOVRCAPI_GL()
 
     documentation =

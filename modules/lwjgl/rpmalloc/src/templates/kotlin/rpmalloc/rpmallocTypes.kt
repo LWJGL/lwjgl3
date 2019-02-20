@@ -16,8 +16,6 @@ fun config() {
         """
     )
 
-    Generator.registerLibraryInit(Module.RPMALLOC, "LibRPmalloc", "rpmalloc")
-
     Generator.register(object : GeneratorTarget(Module.RPMALLOC, "RPmallocAllocator") {
 
         init {

@@ -6,12 +6,8 @@ package meow
 
 import org.lwjgl.generator.*
 
-const val MEOW_LIBRARY = "LibMeow.initialize();"
-
 fun config() {
     packageInfo(Module.MEOW, "Contains bindings to ${url("https://github.com/cmuratori/meow_hash", "Meow hash")}, an extremely fast non-cryptographic hash.")
-
-    Generator.registerLibraryInit(Module.MEOW, "LibMeow", "meow")
 }
 
 val meow_u8 = typedef(unsigned_char, "meow_u8")
@@ -26,7 +22,6 @@ val meow_u128 = struct(
     nativeLayout = true
 ) {
     nativeImport("meow_intrinsics.h")
-    static(MEOW_LIBRARY)
     alignas(16)
 }
 
@@ -48,5 +43,4 @@ val meow_hash_state = struct(
         "meow_hash.h",
         "meow_more.h"
     )
-    static(MEOW_LIBRARY)
 }

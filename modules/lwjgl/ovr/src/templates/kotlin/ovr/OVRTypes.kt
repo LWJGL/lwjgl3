@@ -22,8 +22,6 @@ fun GeneratorTargetNative.includeOVRCAPI_VK() = nativeDirective(
 #include "OVR_CAPI_Vk.h"
 ENABLE_WARNINGS()""")
 
-const val OVR_LIBRARY = "LibOVR.initialize();"
-
 val long_long = IntegerType("long long", PrimitiveMapping.LONG)
 
 val ovrBool = IntegerType("ovrBool", PrimitiveMapping.BOOLEAN)
@@ -1266,8 +1264,6 @@ fun config() {
         Documentation on how to get started with the Oculus SDK can be found ${url("https://developer.oculus.com/documentation/", "here")}.
         """
     )
-
-    Generator.registerLibraryInit(Module.OVR, "LibOVR", "ovr")
 
     union(Module.OVR, "OVRLayerUnion", nativeName = "ovrLayer_Union") {
         documentation = "Union that combines {@code ovrLayer} types in a way that allows them to be used in a polymorphic way."

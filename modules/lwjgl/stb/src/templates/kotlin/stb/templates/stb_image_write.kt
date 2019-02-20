@@ -7,7 +7,7 @@ package stb.templates
 import org.lwjgl.generator.*
 import stb.*
 
-val stb_image_write = "STBImageWrite".nativeClass(Module.STB, prefix = "STBI", prefixMethod = "stbi_", library = STB_LIBRARY) {
+val stb_image_write = "STBImageWrite".nativeClass(Module.STB, prefix = "STBI", prefixMethod = "stbi_") {
     includeSTBAPI(
         """#include "lwjgl_malloc.h"
 #define STBIW_MALLOC(sz)    org_lwjgl_malloc(sz)

@@ -6,8 +6,6 @@ package zstd
 
 import org.lwjgl.generator.*
 
-const val ZSTD_LIBRARY = "LibZstd.initialize();"
-
 fun config() {
     packageInfo(
         Module.ZSTD,
@@ -20,8 +18,6 @@ fun config() {
         sample set.
         """
     )
-
-    Generator.registerLibraryInit(Module.ZSTD, "LibZstd", "zstd")
 }
 
 val ZSTD_CCtx = "ZSTD_CCtx".opaque

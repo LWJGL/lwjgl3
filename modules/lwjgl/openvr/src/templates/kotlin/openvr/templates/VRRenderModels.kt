@@ -10,7 +10,6 @@ import openvr.*
 val VRRenderModels = "VRRenderModels".nativeClass(
     Module.OPENVR,
     prefixMethod = "VRRenderModels_",
-    library = OPENVR_LIBRARY,
     binding = OPENVR_FNTABLE_BINDING
 ) {
     documentation =

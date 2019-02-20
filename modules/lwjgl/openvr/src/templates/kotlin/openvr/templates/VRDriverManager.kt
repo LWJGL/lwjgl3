@@ -10,7 +10,6 @@ import openvr.*
 val VRDriverManager = "VRDriverManager".nativeClass(
     Module.OPENVR,
     prefixMethod = "VRDriverManager_",
-    library = OPENVR_LIBRARY,
     binding = OPENVR_FNTABLE_BINDING
 ) {
     documentation =

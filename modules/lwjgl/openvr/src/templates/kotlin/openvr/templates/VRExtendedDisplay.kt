@@ -10,7 +10,6 @@ import openvr.*
 val VRExtendedDisplay = "VRExtendedDisplay".nativeClass(
     Module.OPENVR,
     prefixMethod = "VRExtendedDisplay_",
-    library = OPENVR_LIBRARY,
     binding = OPENVR_FNTABLE_BINDING
 ) {
     documentation =

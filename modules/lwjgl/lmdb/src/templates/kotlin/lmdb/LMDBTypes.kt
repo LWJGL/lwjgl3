@@ -6,8 +6,6 @@ package lmdb
 
 import org.lwjgl.generator.*
 
-const val LMDB_LIBRARY = "LibLMDB.initialize();"
-
 fun config() {
     packageInfo(
         Module.LMDB,
@@ -115,8 +113,6 @@ fun config() {
         can be found after coalescing old pages from many old transactions together.
         """
     )
-
-    Generator.registerLibraryInit(Module.LMDB, "LibLMDB", "lmdb", setupAllocator = true)
 }
 
 val MDB_env = "MDB_env".opaque

@@ -11,8 +11,7 @@ val LLVMTargetX86 = "LLVMTargetX86".nativeClass(
     Module.LLVM,
     prefixConstant = "LLVM",
     prefixMethod = "LLVM",
-    binding = LLVM_BINDING_DELEGATE,
-    library = LLVM_LIBRARY
+    binding = LLVM_BINDING_DELEGATE
 ) {
     documentation = ""
 

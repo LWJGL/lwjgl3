@@ -265,7 +265,6 @@ fun String.nativeClassGL(
     prefixMethod = prefixMethod,
     postfix = postfix,
     binding = GLBinding,
-    library = "GL.initialize();",
     init = {
         init()
         if (!skipNative) {

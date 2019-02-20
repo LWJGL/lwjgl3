@@ -10,7 +10,6 @@ import openvr.*
 val VRSettings = "VRSettings".nativeClass(
     Module.OPENVR,
     prefixMethod = "VRSettings_",
-    library = OPENVR_LIBRARY,
     binding = OPENVR_FNTABLE_BINDING
 ) {
     documentation =

@@ -10,7 +10,6 @@ import openvr.*
 val VROverlay = "VROverlay".nativeClass(
     Module.OPENVR,
     prefixMethod = "VROverlay_",
-    library = OPENVR_LIBRARY,
     binding = OPENVR_FNTABLE_BINDING
 ) {
     documentation = "Overlay management methods."

@@ -7,7 +7,7 @@ package ovr.templates
 import org.lwjgl.generator.*
 import ovr.*
 
-val OVR_ErrorCode = "OVRErrorCode".nativeClass(Module.OVR, prefixMethod = "OVR_", prefixConstant = "ovr", library = OVR_LIBRARY) {
+val OVR_ErrorCode = "OVRErrorCode".nativeClass(Module.OVR, prefixMethod = "OVR_", prefixConstant = "ovr") {
     documentation = "LibOVR error code declarations."
 
     EnumConstant(

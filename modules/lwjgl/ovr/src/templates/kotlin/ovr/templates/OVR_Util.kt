@@ -7,7 +7,7 @@ package ovr.templates
 import org.lwjgl.generator.*
 import ovr.*
 
-val OVR_Util = "OVRUtil".nativeClass(Module.OVR, prefixMethod = "ovr", prefixConstant = "ovr", library = OVR_LIBRARY) {
+val OVR_Util = "OVRUtil".nativeClass(Module.OVR, prefixMethod = "ovr", prefixConstant = "ovr") {
     includeOVRCAPI()
 
     documentation = "Native bindings to the libOVR utility functions."

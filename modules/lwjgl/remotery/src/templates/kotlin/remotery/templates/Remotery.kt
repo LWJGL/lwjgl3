@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import remotery.*
 
 // Prefixed with an underscore to avoid a nameclash with the Remotery type
-val _Remotery = "Remotery".nativeClass(Module.REMOTERY, prefix = "RMT_", library = REMOTERY_LIBRARY) {
+val _Remotery = "Remotery".nativeClass(Module.REMOTERY, prefix = "RMT_") {
     remoteryIncludes("c")
 
     documentation =

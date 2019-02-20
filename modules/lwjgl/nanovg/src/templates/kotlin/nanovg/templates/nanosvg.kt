@@ -7,7 +7,7 @@ package nanovg.templates
 import org.lwjgl.generator.*
 import nanovg.*
 
-val nanosvg = "NanoSVG".nativeClass(Module.NANOVG, prefix = "NSVG", library = NANOVG_LIBRARY) {
+val nanosvg = "NanoSVG".nativeClass(Module.NANOVG, prefix = "NSVG") {
     includeNanoVGAPI("""#define NANOSVG_IMPLEMENTATION
 #include "nanosvg.h"
 #define NANOSVGRAST_IMPLEMENTATION

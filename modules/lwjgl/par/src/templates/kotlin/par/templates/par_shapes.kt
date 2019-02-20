@@ -7,7 +7,7 @@ package par.templates
 import org.lwjgl.generator.*
 import par.*
 
-val par_shapes = "ParShapes".nativeClass(Module.PAR, prefix = "par_shapes_", library = "LibPar.initialize();") {
+val par_shapes = "ParShapes".nativeClass(Module.PAR, prefix = "par_shapes_") {
     nativeDirective(
         """#include "lwjgl_malloc.h"
 #define PAR_MALLOC(T, N) ((T*) org_lwjgl_malloc(N * sizeof(T)))

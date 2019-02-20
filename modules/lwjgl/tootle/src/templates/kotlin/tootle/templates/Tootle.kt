@@ -7,7 +7,7 @@ package tootle.templates
 import org.lwjgl.generator.*
 import tootle.*
 
-val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod = "Tootle", library = "lwjgl_tootle") {
+val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod = "Tootle") {
     nativeImport("tootlelib.h")
 
     cpp = true

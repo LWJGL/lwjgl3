@@ -13,6 +13,4 @@ fun config() {
         Module.SSE,
         "Contains bindings to SSE macros."
     )
-
-    Generator.registerLibraryInit(Module.SSE, "LibSSE", "sse")
 }

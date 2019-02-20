@@ -39,8 +39,6 @@ public class CXCursorAndRangeVisitor extends Struct implements NativeResource {
         VISIT;
 
     static {
-        LibLLVM.initialize();
-
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE)

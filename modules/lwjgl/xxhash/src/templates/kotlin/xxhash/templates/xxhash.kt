@@ -7,7 +7,7 @@ package xxhash.templates
 import org.lwjgl.generator.*
 import xxhash.*
 
-val xxhash = "XXHash".nativeClass(Module.XXHASH, prefix = "XXH", prefixMethod = "XXH", library = "LibXXHash.initialize();") {
+val xxhash = "XXHash".nativeClass(Module.XXHASH, prefix = "XXH", prefixMethod = "XXH") {
     nativeDirective(
         """DISABLE_WARNINGS()
 #define XXH_INLINE_ALL

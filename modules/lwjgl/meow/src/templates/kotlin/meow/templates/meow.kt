@@ -7,7 +7,7 @@ package meow.templates
 import meow.*
 import org.lwjgl.generator.*
 
-val meow = "Meow".nativeClass(Module.MEOW, prefix = "MEOW", prefixMethod = "Meow", library = MEOW_LIBRARY) {
+val meow = "Meow".nativeClass(Module.MEOW, prefix = "MEOW", prefixMethod = "Meow") {
     nativeImport(
         "meow_intrinsics.h",
         "meow_hash.h",
@@ -104,7 +104,7 @@ val meow = "Meow".nativeClass(Module.MEOW, prefix = "MEOW", prefixMethod = "Meow
     )
 }
 
-val meow_C = "MeowC".nativeClass(Module.MEOW, prefix = "MEOW", prefixMethod = "Meow", library = MEOW_LIBRARY) {
+val meow_C = "MeowC".nativeClass(Module.MEOW, prefix = "MEOW", prefixMethod = "Meow") {
     nativeDirective("#define MEOW_INCLUDE_C 1", beforeIncludes = true)
     nativeImport(
         "meow_intrinsics.h",

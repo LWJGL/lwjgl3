@@ -7,7 +7,7 @@ package remotery.templates
 import org.lwjgl.generator.*
 import remotery.*
 
-val RemoteryGL = "RemoteryGL".nativeClass(Module.REMOTERY, prefix = "RMT_", library = REMOTERY_LIBRARY) {
+val RemoteryGL = "RemoteryGL".nativeClass(Module.REMOTERY, prefix = "RMT_") {
     remoteryIncludes("h")
 
     documentation =

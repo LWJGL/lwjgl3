@@ -10,7 +10,6 @@ import openvr.*
 val VRSystem = "VRSystem".nativeClass(
     Module.OPENVR,
     prefixMethod = "VRSystem_",
-    library = OPENVR_LIBRARY,
     binding = OPENVR_FNTABLE_BINDING
 ) {
     nativeImport("<stdint.h>")

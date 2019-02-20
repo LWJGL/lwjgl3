@@ -11,8 +11,7 @@ val LLVMCore = "LLVMCore".nativeClass(
     Module.LLVM,
     prefixConstant = "LLVM",
     prefixMethod = "LLVM",
-    binding = LLVM_BINDING,
-    library = LLVM_LIBRARY
+    binding = LLVM_BINDING
 ) {
     EnumConstant(
         "{@code LLVMOpcode}",

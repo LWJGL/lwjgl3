@@ -5,9 +5,8 @@
 package tinyfd.templates
 
 import org.lwjgl.generator.*
-import tinyfd.*
 
-val tinyfiledialogs = "TinyFileDialogs".nativeClass(Module.TINYFD, prefix = "tinyfd_", library = TinyFD_LIBRARY) {
+val tinyfiledialogs = "TinyFileDialogs".nativeClass(Module.TINYFD, prefix = "tinyfd_") {
     nativeImport("tinyfiledialogs.h")
     nativeDirective(
         """#ifndef LWJGL_WINDOWS

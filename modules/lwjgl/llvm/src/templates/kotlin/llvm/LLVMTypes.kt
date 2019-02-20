@@ -6,7 +6,6 @@ package llvm
 
 import org.lwjgl.generator.*
 
-const val LLVM_LIBRARY = "LibLLVM.initialize();"
 val LLVM_BINDING = simpleBinding(Module.LLVM, libraryName = "LLVM", libraryExpression = "Configuration.LLVM_LIBRARY_NAME, \"libLLVM\"")
 val LLVM_BINDING_DELEGATE = LLVM_BINDING.delegate("LLVMCore.getLibrary()")
 
@@ -26,8 +25,6 @@ fun config() {
         {@link org.lwjgl.system.Configuration Configuration} to point LWJGL to the appropriate binaries.
         """
     )
-
-    Generator.registerLibraryInit(Module.LLVM, "LibLLVM", "llvm")
 }
 
 val LLVMAttributeRef = "LLVMAttributeRef".handle

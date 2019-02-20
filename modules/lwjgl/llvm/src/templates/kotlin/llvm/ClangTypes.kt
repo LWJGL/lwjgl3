@@ -255,7 +255,6 @@ val CXCodeCompleteResults = struct(Module.LLVM, "CXCodeCompleteResults", mutable
 }
 
 val CXCursorAndRangeVisitor = struct(Module.LLVM, "CXCursorAndRangeVisitor") {
-    static(LLVM_LIBRARY)
     UserDataMember("visit")..opaque_p("context", "")
     Module.LLVM.callback {
         CXVisitorResult(

@@ -7,7 +7,7 @@ package bullet.templates
 import bullet.*
 import org.lwjgl.generator.*
 
-val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = "", prefixMethod = "b3", library = BULLET_LIBRARY) {
+val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = "", prefixMethod = "b3") {
     nativeDirective("""
 #define BT_ENABLE_ENET
 #define BT_ENABLE_CLSOCKET

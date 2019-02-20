@@ -10,7 +10,6 @@ import openvr.*
 val VRCompositor = "VRCompositor".nativeClass(
     Module.OPENVR,
     prefixMethod = "VRCompositor_",
-    library = OPENVR_LIBRARY,
     binding = OPENVR_FNTABLE_BINDING
 ) {
     nativeDirective("""

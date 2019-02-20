@@ -7,9 +7,7 @@ package rpmalloc.templates
 import org.lwjgl.generator.*
 import rpmalloc.*
 
-val RPMALLOC_LIBRARY = "LibRPmalloc.initialize();"
-
-val rpmalloc = "RPmalloc".nativeClass(Module.RPMALLOC, prefix = "RP", prefixConstant = "RP", library = RPMALLOC_LIBRARY) {
+val rpmalloc = "RPmalloc".nativeClass(Module.RPMALLOC, prefix = "RP", prefixConstant = "RP") {
     nativeDirective("""DISABLE_WARNINGS()
 //#define ENABLE_STATISTICS 1
 #include "rpmalloc.c"

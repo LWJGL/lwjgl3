@@ -7,7 +7,7 @@ package zstd.templates
 import org.lwjgl.generator.*
 import zstd.*
 
-val Zdict = "Zdict".nativeClass(Module.ZSTD, prefix = "ZDICT", prefixMethod = "ZDICT_", library = ZSTD_LIBRARY) {
+val Zdict = "Zdict".nativeClass(Module.ZSTD, prefix = "ZDICT", prefixMethod = "ZDICT_") {
     nativeDirective(
         """DISABLE_WARNINGS()
 #define ZDICT_STATIC_LINKING_ONLY

@@ -10,7 +10,6 @@ import openvr.*
 val VRApplications = "VRApplications".nativeClass(
     Module.OPENVR,
     prefixMethod = "VRApplications_",
-    library = OPENVR_LIBRARY,
     binding = OPENVR_FNTABLE_BINDING
 ) {
     documentation = "Application management."

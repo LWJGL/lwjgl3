@@ -182,7 +182,6 @@ class NativeClass internal constructor(
     val prefixTemplate: String,
     val postfix: String,
     val binding: APIBinding?,
-    internal val library: String?,
     internal val callingConvention: CallingConvention
 ) : GeneratorTargetNative(module, className, nativeSubPath) {
     companion object {
@@ -519,19 +518,22 @@ class NativeClass internal constructor(
         }
 
         fun PrintWriter.libraryInit() {
-            if (library != null || binding !is SimpleBinding) {
-                println(if (library == null)
+            if (module.library != null || binding !is SimpleBinding) {
+                println(if (module.library == null)
                     "\n${t}static { Library.initialize(); }"
-                else if (library.contains('\n'))
-                    """
+                else
+                    module.library.expression(module)
+                        .let { library ->
+                            if (library.contains('\n'))
+                                """
     static {
         ${library.trim()}
     }"""
-                else if (library.endsWith(");"))
-                    "\n${t}static { $library }"
-                else
-                    "\n${t}static { Library.loadSystem(System::load, System::loadLibrary, $className.class, Platform.mapLibraryNameBundled(\"$library\")); }"
-                )
+                            else if (library.endsWith(");"))
+                                "\n${t}static { $library }"
+                            else
+                                "\n${t}static { Library.loadSystem(System::load, System::loadLibrary, $className.class, Platform.mapLibraryNameBundled(\"$library\")); }"
+                        })
             }
         }
 
@@ -884,11 +886,10 @@ fun String.nativeClass(
     prefixTemplate: String = prefix,
     postfix: String = "",
     binding: APIBinding? = null,
-    library: String? = null,
     callingConvention: CallingConvention = module.callingConvention,
     init: (NativeClass.() -> Unit)? = null
 ): NativeClass {
-    val ext = NativeClass(module, this, nativeSubPath, templateName, prefix, prefixMethod, prefixConstant, prefixTemplate, postfix, binding, library, callingConvention)
+    val ext = NativeClass(module, this, nativeSubPath, templateName, prefix, prefixMethod, prefixConstant, prefixTemplate, postfix, binding, callingConvention)
     if (init != null)
         ext.init()
 

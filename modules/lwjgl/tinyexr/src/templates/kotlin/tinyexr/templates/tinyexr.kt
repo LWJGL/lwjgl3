@@ -7,7 +7,7 @@ package tinyexr.templates
 import org.lwjgl.generator.*
 import tinyexr.*
 
-val tinyexr = "TinyEXR".nativeClass(Module.TINYEXR, prefix = "TINYEXR", prefixMethod = "", library = "lwjgl_tinyexr") {
+val tinyexr = "TinyEXR".nativeClass(Module.TINYEXR, prefix = "TINYEXR", prefixMethod = "") {
     nativeDirective("""DISABLE_WARNINGS()
 #include "tinyexr.h"
 ENABLE_WARNINGS()""")

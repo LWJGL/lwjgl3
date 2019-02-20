@@ -7,7 +7,7 @@ package lz4.templates
 import org.lwjgl.generator.*
 import lz4.*
 
-val LZ4HC = "LZ4HC".nativeClass(Module.LZ4, prefix = "LZ4HC", prefixMethod = "LZ4_", library = LZ4_LIBRARY) {
+val LZ4HC = "LZ4HC".nativeClass(Module.LZ4, prefix = "LZ4HC", prefixMethod = "LZ4_") {
     nativeDirective(
         """DISABLE_WARNINGS()
 #define LZ4_HC_STATIC_LINKING_ONLY

@@ -10,7 +10,6 @@ import openvr.*
 val VRIOBuffer = "VRIOBuffer".nativeClass(
     Module.OPENVR,
     prefixMethod = "VRIOBuffer_",
-    library = OPENVR_LIBRARY,
     binding = OPENVR_FNTABLE_BINDING
 ) {
     documentation =

@@ -16,8 +16,6 @@ fun config() {
         randomness qualities of hash functions.
         """
     )
-
-    Generator.registerLibraryInit(Module.XXHASH, "LibXXHash", "xxhash", setupAllocator = true)
 }
 
 val XXH32_hash_t = typedef(unsigned_int, "XXH32_hash_t")

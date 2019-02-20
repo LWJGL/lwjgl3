@@ -6,8 +6,6 @@ package bullet
 
 import org.lwjgl.generator.*
 
-const val BULLET_LIBRARY = "LibBullet.initialize();"
-
 fun config() {
     packageInfo(
         Module.BULLET,
@@ -19,8 +17,6 @@ fun config() {
         Until these bindings are sufficiently tested, this API should be considered unstable.
 		"""
     )
-
-    Generator.registerLibraryInit(Module.BULLET, "LibBullet", "bullet")
 }
 
 val b3PhysicsClientHandle = "b3PhysicsClientHandle".handle

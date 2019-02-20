@@ -11,8 +11,7 @@ val ClangIndex = "ClangIndex".nativeClass(
     Module.LLVM,
     prefixConstant = "CX",
     prefixMethod = "clang_",
-    binding = CLANG_BINDING,
-    library = LLVM_LIBRARY
+    binding = CLANG_BINDING
 ) {
     nativeImport("clang-c/Index.h")
 

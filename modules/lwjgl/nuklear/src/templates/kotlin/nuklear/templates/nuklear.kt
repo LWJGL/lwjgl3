@@ -7,7 +7,7 @@ package nuklear.templates
 import org.lwjgl.generator.*
 import nuklear.*
 
-val nuklear = "Nuklear".nativeClass(Module.NUKLEAR, prefix = "NK", prefixMethod = "nk_", library = "lwjgl_nuklear") {
+val nuklear = "Nuklear".nativeClass(Module.NUKLEAR, prefix = "NK", prefixMethod = "nk_") {
     nativeDirective(
         """DISABLE_WARNINGS()
 #define NK_PRIVATE

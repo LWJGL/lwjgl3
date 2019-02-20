@@ -10,7 +10,6 @@ import openvr.*
 val VRTrackedCamera = "VRTrackedCamera".nativeClass(
     Module.OPENVR,
     prefixMethod = "VRTrackedCamera_",
-    library = OPENVR_LIBRARY,
     binding = OPENVR_FNTABLE_BINDING
 ) {
     documentation =

@@ -6,9 +6,6 @@ package tinyfd
 
 import org.lwjgl.generator.*
 
-const val TinyFD_LIBRARY = """Library.loadSystem(System::load, System::loadLibrary, TinyFileDialogs.class, Platform.mapLibraryNameBundled("lwjgl_tinyfd"));
-        tinyfd_winUtf8().put(0, 1);"""
-
 fun config() {
     packageInfo(
         Module.TINYFD,

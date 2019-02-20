@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import stb.*
 
 // Prefixed with an underscore to avoid a nameclash with the stb_vorbis type
-val _stb_vorbis = "STBVorbis".nativeClass(Module.STB, prefixMethod = "stb_vorbis_", prefixConstant = "VORBIS_", library = STB_LIBRARY) {
+val _stb_vorbis = "STBVorbis".nativeClass(Module.STB, prefixMethod = "stb_vorbis_", prefixConstant = "VORBIS_") {
     includeSTBAPI(
         """#ifdef LWJGL_LINUX
     #include <alloca.h>

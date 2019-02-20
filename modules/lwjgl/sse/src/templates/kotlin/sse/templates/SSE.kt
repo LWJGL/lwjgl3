@@ -5,9 +5,8 @@
 package sse.templates
 
 import org.lwjgl.generator.*
-import sse.*
 
-val SSE = "SSE".nativeClass(Module.SSE, prefix = "_MM", prefixMethod = "_MM_", library = SSE_LIBRARY) {
+val SSE = "SSE".nativeClass(Module.SSE, prefix = "_MM", prefixMethod = "_MM_") {
     nativeImport(
         "intrinsics.h"
     )

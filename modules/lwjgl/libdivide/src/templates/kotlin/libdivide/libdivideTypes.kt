@@ -6,8 +6,6 @@ package libdivide
 
 import org.lwjgl.generator.*
 
-const val LIBDIVIDE_LIBRARY = "LibDivideBoot.initialize();"
-
 fun config() {
     packageInfo(
         Module.LIBDIVIDE,

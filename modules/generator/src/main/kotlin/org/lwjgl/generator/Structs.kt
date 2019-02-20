@@ -568,9 +568,14 @@ $indentation}"""
         val mallocable = mutable || usageOutput || (usageInput && !usageResultPointer)
         validate(mallocable)
 
-        val nativeLayout = this@Struct.nativeLayout || members.isEmpty()
-        if (!nativeLayout && preamble.hasNativeDirectives)
+        val nativeLayout = !skipNative
+        if (nativeLayout) {
+            if (module.library == null) {
+                throw IllegalStateException("${t}Missing module library for native layout of struct: ${module.packageKotlin}.$className")
+            }
+        } else if (preamble.hasNativeDirectives) {
             kotlin.io.println("${t}Unnecessary native directives in struct: ${module.packageKotlin}.$className")
+        }
 
         print(HEADER)
         println("package $packageName;\n")
@@ -659,6 +664,8 @@ $indentation}"""
                 if (nativeLayout) {
                     print(
                         """
+        ${module.library!!.expression(module)}
+
         try (MemoryStack stack = stackPush()) {
             IntBuffer offsets = stack.mallocInt(${memberCount + 1});
             SIZEOF = offsets(memAddress(offsets));
@@ -702,6 +709,8 @@ $indentation}"""
                     )
                 println(
                     """
+        ${module.library!!.expression(module)}
+
         try (MemoryStack stack = stackPush()) {
             IntBuffer offsets = stack.mallocInt(1);
             SIZEOF = offsets(memAddress(offsets));

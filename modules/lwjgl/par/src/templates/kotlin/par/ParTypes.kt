@@ -13,8 +13,6 @@ fun config() {
         Contains bindings to the ${url("https://github.com/prideout/par", "par")} library.
         """
     )
-
-    Generator.registerLibraryInit(Module.PAR, "LibPar", "par", setupAllocator = true)
 }
 
 val PAR_SHAPES_T = typedef(uint32_t, "PAR_SHAPES_T")

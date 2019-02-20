@@ -18,7 +18,6 @@ fun config() {
     )
 }
 
-const val OPENVR_LIBRARY = "OpenVR.initialize();"
 val OPENVR_API_BINDING = simpleBinding(
     Module.OPENVR,
     libraryExpression = """Configuration.OPENVR_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("openvr_api"))""",

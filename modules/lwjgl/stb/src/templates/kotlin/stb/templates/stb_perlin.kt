@@ -7,7 +7,7 @@ package stb.templates
 import org.lwjgl.generator.*
 import stb.*
 
-val stb_perlin = "STBPerlin".nativeClass(Module.STB, prefix = "STB", prefixMethod = "stb_", library = STB_LIBRARY) {
+val stb_perlin = "STBPerlin".nativeClass(Module.STB, prefix = "STB", prefixMethod = "stb_") {
     includeSTBAPI(
         """#define STB_PERLIN_IMPLEMENTATION
 #include "stb_perlin.h"""")

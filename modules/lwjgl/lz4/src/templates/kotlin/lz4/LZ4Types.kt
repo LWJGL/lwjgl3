@@ -6,8 +6,6 @@ package lz4
 
 import org.lwjgl.generator.*
 
-const val LZ4_LIBRARY = "LibLZ4.initialize();"
-
 fun config() {
     packageInfo(
         Module.LZ4,
@@ -17,8 +15,6 @@ fun config() {
         multi-core systems.
         """
     )
-
-    Generator.registerLibraryInit(Module.LZ4, "LibLZ4", "lz4")
 }
 
 val LZ4_stream_t = "LZ4_stream_t".opaque

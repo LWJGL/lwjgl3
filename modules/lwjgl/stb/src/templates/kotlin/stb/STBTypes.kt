@@ -6,8 +6,6 @@ package stb
 
 import org.lwjgl.generator.*
 
-const val STB_LIBRARY = "LibSTB.initialize();"
-
 fun config() {
     packageInfo(
         Module.STB,
@@ -26,8 +24,6 @@ fun config() {
         )}
         """
     )
-
-    Generator.registerLibraryInit(Module.STB, "LibSTB", "stb", setupAllocator = true)
 }
 
 fun GeneratorTargetNative.includeSTBAPI(directives: String) = nativeDirective(
@@ -266,7 +262,6 @@ val stbtt_pack_range = struct(Module.STB, "STBTTPackRange", nativeName = "stbtt_
 val stbtt_fontinfo = struct(Module.STB, "STBTTFontinfo", nativeName = "stbtt_fontinfo", mutable = false) {
     documentation = "An opaque structure that contains font information."
     includeSTBAPI("#include \"stb_truetype.h\"")
-    static(STB_LIBRARY)
 }
 
 val stbtt_vertex_type = IntegerType("stbtt_vertex_type", PrimitiveMapping.SHORT)

@@ -10,7 +10,6 @@ import openvr.*
 val VRResources = "VRResources".nativeClass(
     Module.OPENVR,
     prefixMethod = "VRResources_",
-    library = OPENVR_LIBRARY,
     binding = OPENVR_FNTABLE_BINDING
 ) {
     documentation = "Shared Resource Methods."

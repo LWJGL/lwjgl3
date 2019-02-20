@@ -7,7 +7,7 @@ package stb.templates
 import org.lwjgl.generator.*
 import stb.*
 
-val stb_image_resize = "STBImageResize".nativeClass(Module.STB, prefix = "STBIR", prefixMethod = "stbir_", library = STB_LIBRARY) {
+val stb_image_resize = "STBImageResize".nativeClass(Module.STB, prefix = "STBIR", prefixMethod = "stbir_") {
     includeSTBAPI(
         """#include "lwjgl_malloc.h"
 #define STBIR_MALLOC(size,c) org_lwjgl_malloc(size)

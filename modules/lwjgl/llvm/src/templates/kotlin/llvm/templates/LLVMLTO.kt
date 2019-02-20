@@ -11,8 +11,7 @@ val LLVMLTO = "LLVMLTO".nativeClass(
     Module.LLVM,
     prefixConstant = "LTO",
     prefixMethod = "lto_",
-    binding = LTO_BINDING,
-    library = LLVM_LIBRARY
+    binding = LTO_BINDING
 ) {
     nativeDirective("""
 typedef struct {

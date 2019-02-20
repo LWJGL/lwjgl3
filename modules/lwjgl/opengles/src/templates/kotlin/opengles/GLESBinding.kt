@@ -207,7 +207,6 @@ fun String.nativeClassGLES(
     prefixMethod = prefixMethod,
     postfix = postfix,
     binding = GLESBinding,
-    library = "GLES.initialize();",
     init = {
         init()
         if (!skipNative) {

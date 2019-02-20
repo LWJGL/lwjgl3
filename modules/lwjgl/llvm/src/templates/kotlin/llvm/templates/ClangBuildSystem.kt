@@ -11,8 +11,7 @@ val ClangBuildSystem = "ClangBuildSystem".nativeClass(
     Module.LLVM,
     prefixConstant = "CX",
     prefixMethod = "clang_",
-    binding = CLANG_BINDING_DELEGATE,
-    library = LLVM_LIBRARY
+    binding = CLANG_BINDING_DELEGATE
 ) {
     unsigned_long_long("getBuildSessionTimestamp", "Return the timestamp for use with Clang's {@code -fbuild-session-timestamp=} option.", void())
 

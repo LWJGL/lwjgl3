@@ -10,7 +10,6 @@ import openvr.*
 val VRSpatialAnchors = "VRSpatialAnchors".nativeClass(
     Module.OPENVR,
     prefixMethod = "VRSpatialAnchors_",
-    library = OPENVR_LIBRARY,
     binding = OPENVR_FNTABLE_BINDING
 ) {
     documentation =

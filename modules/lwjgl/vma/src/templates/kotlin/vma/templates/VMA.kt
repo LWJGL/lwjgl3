@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import vma.*
 import vulkan.*
 
-val VMA = "Vma".nativeClass(Module.VMA, "Vma", prefix = "VMA", library = VMA_LIBRARY) {
+val VMA = "Vma".nativeClass(Module.VMA, "Vma", prefix = "VMA") {
     nativeDirective(
         """#include "lwjgl_malloc.h"
 DISABLE_WARNINGS()

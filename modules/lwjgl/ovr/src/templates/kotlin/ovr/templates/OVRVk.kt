@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import ovr.*
 import vulkan.*
 
-val OVRVk = "OVRVk".dependsOn(Module.VULKAN)?.nativeClass(Module.OVR, prefixMethod = "ovr_", prefixConstant = "ovr", library = OVR_LIBRARY) {
+val OVRVk = "OVRVk".dependsOn(Module.VULKAN)?.nativeClass(Module.OVR, prefixMethod = "ovr_", prefixConstant = "ovr") {
     includeOVRCAPI_VK()
     javaImport("org.lwjgl.vulkan.*")
 
