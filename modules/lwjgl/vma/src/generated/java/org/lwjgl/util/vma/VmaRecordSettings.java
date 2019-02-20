@@ -17,6 +17,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
+ * Parameters for recording calls to VMA functions. To be used in {@link VmaAllocatorCreateInfo}{@code ::pRecordSettings}.
+ * 
  * <h3>Member documentation</h3>
  * 
  * <ul>

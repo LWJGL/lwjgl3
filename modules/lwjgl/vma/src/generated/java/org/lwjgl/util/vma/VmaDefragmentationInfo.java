@@ -16,6 +16,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
+ * Deprecated. Optional configuration parameters to be passed to function {@link Vma#vmaDefragment Defragment}.
+ * 
+ * <p>This is a part of the old interface. It is recommended to use structure {@link VmaDefragmentationInfo2} and function {@link Vma#vmaDefragmentationBegin DefragmentationBegin} instead.</p>
+ * 
  * <h3>Member documentation</h3>
  * 
  * <ul>

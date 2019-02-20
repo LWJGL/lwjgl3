@@ -16,6 +16,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
+ * Describes parameter of existing {@code VmaPool}.
+ * 
  * <h3>Member documentation</h3>
  * 
  * <ul>

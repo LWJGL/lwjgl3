@@ -7,15 +7,17 @@ package vma
 import org.lwjgl.generator.*
 import vulkan.*
 
-val VmaAllocator = "VmaAllocator".handle
 val VmaAllocation = "VmaAllocation".handle
+val VmaAllocator = "VmaAllocator".handle
+val VmaDefragmentationContext = "VmaDefragmentationContext".handle
 val VmaPool = "VmaPool".handle
 
-val VmaRecordFlags = "VmaRecordFlags".enumType
-val VmaAllocatorCreateFlags = "VmaAllocatorCreateFlags".enumType
 val VmaAllocationCreateFlags = "VmaAllocationCreateFlags".enumType
+val VmaAllocatorCreateFlags = "VmaAllocatorCreateFlags".enumType
+val VmaDefragmentationFlags = "VmaDefragmentationFlags".enumType
 val VmaMemoryUsage = "VmaMemoryUsage".enumType
 val VmaPoolCreateFlags = "VmaPoolCreateFlags".enumType
+val VmaRecordFlags = "VmaRecordFlags".enumType
 
 val PFN_vmaAllocateDeviceMemoryFunction = Module.VMA.callback {
     void(
@@ -87,6 +89,7 @@ val VmaVulkanFunctions = struct(Module.VMA, "VmaVulkanFunctions", skipBuffer = t
     "PFN_vkDestroyBuffer".handle("vkDestroyBuffer", "")
     "PFN_vkCreateImage".handle("vkCreateImage", "")
     "PFN_vkDestroyImage".handle("vkDestroyImage", "")
+    "PFN_vkCmdCopyBuffer".handle("vkCmdCopyBuffer", "")
     nullable.."PFN_vkGetBufferMemoryRequirements2KHR".handle("vkGetBufferMemoryRequirements2KHR", "")
     nullable.."PFN_vkGetImageMemoryRequirements2KHR".handle("vkGetImageMemoryRequirements2KHR", "")
 
@@ -117,6 +120,7 @@ val VmaVulkanFunctions = struct(Module.VMA, "VmaVulkanFunctions", skipBuffer = t
             .vkDestroyBuffer(dc.vkDestroyBuffer)
             .vkCreateImage(dc.vkCreateImage)
             .vkDestroyImage(dc.vkDestroyImage)
+            .vkCmdCopyBuffer(dc.vkCmdCopyBuffer)
             .vkGetBufferMemoryRequirements2KHR(dc.vkGetBufferMemoryRequirements2 != NULL ? dc.vkGetBufferMemoryRequirements2 : dc.vkGetBufferMemoryRequirements2KHR)
             .vkGetImageMemoryRequirements2KHR(dc.vkGetImageMemoryRequirements2 != NULL ? dc.vkGetImageMemoryRequirements2 : dc.vkGetImageMemoryRequirements2KHR);
         return this;
@@ -124,6 +128,8 @@ val VmaVulkanFunctions = struct(Module.VMA, "VmaVulkanFunctions", skipBuffer = t
 }
 
 val VmaRecordSettings = struct(Module.VMA, "VmaRecordSettings") {
+    documentation = "Parameters for recording calls to VMA functions. To be used in ##VmaAllocatorCreateInfo{@code ::pRecordSettings}."
+
     VmaRecordFlags("flags", "flags for recording").links("RECORD_\\w+")
     charASCII.const.p(
         "pFilePath",
@@ -294,6 +300,8 @@ val VmaAllocationCreateInfo = struct(Module.VMA, "VmaAllocationCreateInfo") {
 }
 
 val VmaPoolCreateInfo = struct(Module.VMA, "VmaPoolCreateInfo") {
+    documentation = "Describes parameter of created {@code VmaPool}."
+
     uint32_t("memoryTypeIndex", "Vulkan memory type index to allocate this pool from")
     VmaPoolCreateFlags("flags", "Use combination of {@code VmaPoolCreateFlagBits}.").links("POOL_CREATE_\\w+", LinkMode.BITFIELD)
     VkDeviceSize(
@@ -339,6 +347,7 @@ val VmaPoolCreateInfo = struct(Module.VMA, "VmaPoolCreateInfo") {
 }
 
 val VmaPoolStats = struct(Module.VMA, "VmaPoolStats", mutable = false) {
+    documentation = "Describes parameter of existing {@code VmaPool}."
     VkDeviceSize("size", "total amount of {@code VkDeviceMemory} allocated from Vulkan for this pool, in bytes")
     VkDeviceSize("unusedSize", "total number of bytes in the pool not used by any {@code VmaAllocation}")
     size_t("allocationCount", "number of {@code VmaAllocation} objects created from this pool that were not destroyed or lost")
@@ -356,6 +365,8 @@ val VmaPoolStats = struct(Module.VMA, "VmaPoolStats", mutable = false) {
 }
 
 val VmaAllocationInfo = struct(Module.VMA, "VmaAllocationInfo", mutable = false) {
+    documentation = "Parameters of {@code VmaAllocation} objects, that can be retrieved using function #GetAllocationInfo()."
+
     uint32_t(
         "memoryType",
         """
@@ -413,7 +424,108 @@ val VmaAllocationInfo = struct(Module.VMA, "VmaAllocationInfo", mutable = false)
     )
 }
 
+val VmaDefragmentationInfo2 = struct(Module.VMA, "VmaDefragmentationInfo2") {
+    javaImport("org.lwjgl.vulkan.*")
+    documentation =
+        """
+        Parameters for defragmentation.
+
+        To be used with function #DefragmentationBegin().
+        """
+
+    VmaDefragmentationFlags("flags", "reserved for future use. Should be 0.")
+    AutoSize("pAllocations", "pAllocationsChanged")..uint32_t("allocationCount", "number of allocations in {@code pAllocations} array")
+    /** \brief
+    */
+    VmaAllocation.p(
+        "pAllocations",
+        """
+        Pointer to array of allocations that can be defragmented.
+
+        The array should have {@code allocationCount} elements. The array should not contain nulls. Elements in the array should be unique - same allocation
+        cannot occur twice. It is safe to pass allocations that are in the lost state - they are ignored. All allocations not present in this array are
+        considered non-moveable during this defragmentation.
+        """
+    )
+    nullable..VkBool32.p(
+        "pAllocationsChanged",
+        """
+        Optional, output. Pointer to array that will be filled with information whether the allocation at certain index has been changed during defragmentation.
+
+        The array should have {@code allocationCount} elements. You can pass null if you are not interested in this information.
+        """
+    )
+    AutoSize("pPools")..uint32_t("poolCount", "number of pools in {@code pPools} array")
+    nullable..VmaPool.p(
+        "pPools",
+        """
+        Either null or pointer to array of pools to be defragmented.
+
+        All the allocations in the specified pools can be moved during defragmentation and there is no way to check if they were really moved as in
+        {@code pAllocationsChanged}, so you must query all the allocations in all these pools for new {@code VkDeviceMemory} and offset using
+        #GetAllocationInfo() if you might need to recreate buffers and images bound to them.
+
+        The array should have {@code poolCount} elements. The array should not contain nulls. Elements in the array should be unique - same pool cannot occur
+        twice.
+
+        Using this array is equivalent to specifying all allocations from the pools in {@code pAllocations}. It might be more efficient.
+        """
+    )
+    VkDeviceSize(
+        "maxCpuBytesToMove",
+        """
+        Maximum total numbers of bytes that can be copied while moving allocations to different places using transfers on CPU side, like {@code memcpy()},
+        {@code memmove()}.
+
+        {@code VK_WHOLE_SIZE} means no limit.
+        """
+    )
+    uint32_t(
+        "maxCpuAllocationsToMove",
+        """
+        Maximum number of allocations that can be moved to a different place using transfers on CPU side, like {@code memcpy()}, {@code memmove()}.
+
+        {@code UINT32_MAX} means no limit.
+        """
+    )
+    VkDeviceSize(
+        "maxGpuBytesToMove",
+        """
+        Maximum total numbers of bytes that can be copied while moving allocations to different places using transfers on GPU side, posted to
+        {@code commandBuffer}.
+
+        {@code VK_WHOLE_SIZE} means no limit.
+        """
+    )
+    uint32_t(
+        "maxGpuAllocationsToMove",
+        """
+        Maximum number of allocations that can be moved to a different place using transfers on GPU side, posted to {@code commandBuffer}.
+
+        {@code UINT32_MAX} means no limit.
+        """
+    )
+    nullable..VkCommandBuffer(
+        "commandBuffer",
+        """
+        Optional. Command buffer where GPU copy commands will be posted.
+
+        If not null, it must be a valid command buffer handle that supports Transfer queue type. It must be in the recording state and outside of a render pass
+        instance. You need to submit it and make sure it finished execution before calling #DefragmentationEnd().
+
+        Passing null means that only CPU defragmentation will be performed.
+        """
+    )
+}
+
 val VmaDefragmentationInfo = struct(Module.VMA, "VmaDefragmentationInfo") {
+    documentation =
+        """
+        Deprecated. Optional configuration parameters to be passed to function #Defragment().
+
+        This is a part of the old interface. It is recommended to use structure ##VmaDefragmentationInfo2 and function #DefragmentationBegin() instead.
+        """
+
     VkDeviceSize(
         "maxBytesToMove",
         """

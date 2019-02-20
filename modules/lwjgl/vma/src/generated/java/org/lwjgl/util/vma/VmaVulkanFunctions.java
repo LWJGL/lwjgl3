@@ -43,6 +43,7 @@ import org.lwjgl.vulkan.*;
  *     PFN_vkDestroyBuffer vkDestroyBuffer;
  *     PFN_vkCreateImage vkCreateImage;
  *     PFN_vkDestroyImage vkDestroyImage;
+ *     PFN_vkCmdCopyBuffer vkCmdCopyBuffer;
  *     PFN_vkGetBufferMemoryRequirements2KHR vkGetBufferMemoryRequirements2KHR;
  *     PFN_vkGetImageMemoryRequirements2KHR vkGetImageMemoryRequirements2KHR;
  * }</code></pre>
@@ -73,11 +74,13 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
         VKDESTROYBUFFER,
         VKCREATEIMAGE,
         VKDESTROYIMAGE,
+        VKCMDCOPYBUFFER,
         VKGETBUFFERMEMORYREQUIREMENTS2KHR,
         VKGETIMAGEMEMORYREQUIREMENTS2KHR;
 
     static {
         Layout layout = __struct(
+            __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
@@ -117,8 +120,9 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
         VKDESTROYBUFFER = layout.offsetof(13);
         VKCREATEIMAGE = layout.offsetof(14);
         VKDESTROYIMAGE = layout.offsetof(15);
-        VKGETBUFFERMEMORYREQUIREMENTS2KHR = layout.offsetof(16);
-        VKGETIMAGEMEMORYREQUIREMENTS2KHR = layout.offsetof(17);
+        VKCMDCOPYBUFFER = layout.offsetof(16);
+        VKGETBUFFERMEMORYREQUIREMENTS2KHR = layout.offsetof(17);
+        VKGETIMAGEMEMORYREQUIREMENTS2KHR = layout.offsetof(18);
     }
 
     /**
@@ -182,6 +186,9 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
     /** Returns the value of the {@code vkDestroyImage} field. */
     @NativeType("PFN_vkDestroyImage")
     public long vkDestroyImage() { return nvkDestroyImage(address()); }
+    /** Returns the value of the {@code vkCmdCopyBuffer} field. */
+    @NativeType("PFN_vkCmdCopyBuffer")
+    public long vkCmdCopyBuffer() { return nvkCmdCopyBuffer(address()); }
     /** Returns the value of the {@code vkGetBufferMemoryRequirements2KHR} field. */
     @NativeType("PFN_vkGetBufferMemoryRequirements2KHR")
     public long vkGetBufferMemoryRequirements2KHR() { return nvkGetBufferMemoryRequirements2KHR(address()); }
@@ -221,6 +228,8 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
     public VmaVulkanFunctions vkCreateImage(@NativeType("PFN_vkCreateImage") long value) { nvkCreateImage(address(), value); return this; }
     /** Sets the specified value to the {@code vkDestroyImage} field. */
     public VmaVulkanFunctions vkDestroyImage(@NativeType("PFN_vkDestroyImage") long value) { nvkDestroyImage(address(), value); return this; }
+    /** Sets the specified value to the {@code vkCmdCopyBuffer} field. */
+    public VmaVulkanFunctions vkCmdCopyBuffer(@NativeType("PFN_vkCmdCopyBuffer") long value) { nvkCmdCopyBuffer(address(), value); return this; }
     /** Sets the specified value to the {@code vkGetBufferMemoryRequirements2KHR} field. */
     public VmaVulkanFunctions vkGetBufferMemoryRequirements2KHR(@NativeType("PFN_vkGetBufferMemoryRequirements2KHR") long value) { nvkGetBufferMemoryRequirements2KHR(address(), value); return this; }
     /** Sets the specified value to the {@code vkGetImageMemoryRequirements2KHR} field. */
@@ -244,6 +253,7 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
         long vkDestroyBuffer,
         long vkCreateImage,
         long vkDestroyImage,
+        long vkCmdCopyBuffer,
         long vkGetBufferMemoryRequirements2KHR,
         long vkGetImageMemoryRequirements2KHR
     ) {
@@ -263,6 +273,7 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
         vkDestroyBuffer(vkDestroyBuffer);
         vkCreateImage(vkCreateImage);
         vkDestroyImage(vkDestroyImage);
+        vkCmdCopyBuffer(vkCmdCopyBuffer);
         vkGetBufferMemoryRequirements2KHR(vkGetBufferMemoryRequirements2KHR);
         vkGetImageMemoryRequirements2KHR(vkGetImageMemoryRequirements2KHR);
 
@@ -374,6 +385,8 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
     public static long nvkCreateImage(long struct) { return memGetAddress(struct + VmaVulkanFunctions.VKCREATEIMAGE); }
     /** Unsafe version of {@link #vkDestroyImage}. */
     public static long nvkDestroyImage(long struct) { return memGetAddress(struct + VmaVulkanFunctions.VKDESTROYIMAGE); }
+    /** Unsafe version of {@link #vkCmdCopyBuffer}. */
+    public static long nvkCmdCopyBuffer(long struct) { return memGetAddress(struct + VmaVulkanFunctions.VKCMDCOPYBUFFER); }
     /** Unsafe version of {@link #vkGetBufferMemoryRequirements2KHR}. */
     public static long nvkGetBufferMemoryRequirements2KHR(long struct) { return memGetAddress(struct + VmaVulkanFunctions.VKGETBUFFERMEMORYREQUIREMENTS2KHR); }
     /** Unsafe version of {@link #vkGetImageMemoryRequirements2KHR}. */
@@ -411,6 +424,8 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
     public static void nvkCreateImage(long struct, long value) { memPutAddress(struct + VmaVulkanFunctions.VKCREATEIMAGE, check(value)); }
     /** Unsafe version of {@link #vkDestroyImage(long) vkDestroyImage}. */
     public static void nvkDestroyImage(long struct, long value) { memPutAddress(struct + VmaVulkanFunctions.VKDESTROYIMAGE, check(value)); }
+    /** Unsafe version of {@link #vkCmdCopyBuffer(long) vkCmdCopyBuffer}. */
+    public static void nvkCmdCopyBuffer(long struct, long value) { memPutAddress(struct + VmaVulkanFunctions.VKCMDCOPYBUFFER, check(value)); }
     /** Unsafe version of {@link #vkGetBufferMemoryRequirements2KHR(long) vkGetBufferMemoryRequirements2KHR}. */
     public static void nvkGetBufferMemoryRequirements2KHR(long struct, long value) { memPutAddress(struct + VmaVulkanFunctions.VKGETBUFFERMEMORYREQUIREMENTS2KHR, value); }
     /** Unsafe version of {@link #vkGetImageMemoryRequirements2KHR(long) vkGetImageMemoryRequirements2KHR}. */
@@ -438,6 +453,7 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
         check(memGetAddress(struct + VmaVulkanFunctions.VKDESTROYBUFFER));
         check(memGetAddress(struct + VmaVulkanFunctions.VKCREATEIMAGE));
         check(memGetAddress(struct + VmaVulkanFunctions.VKDESTROYIMAGE));
+        check(memGetAddress(struct + VmaVulkanFunctions.VKCMDCOPYBUFFER));
     }
 
     /**
@@ -478,6 +494,7 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
             .vkDestroyBuffer(dc.vkDestroyBuffer)
             .vkCreateImage(dc.vkCreateImage)
             .vkDestroyImage(dc.vkDestroyImage)
+            .vkCmdCopyBuffer(dc.vkCmdCopyBuffer)
             .vkGetBufferMemoryRequirements2KHR(dc.vkGetBufferMemoryRequirements2 != NULL ? dc.vkGetBufferMemoryRequirements2 : dc.vkGetBufferMemoryRequirements2KHR)
             .vkGetImageMemoryRequirements2KHR(dc.vkGetImageMemoryRequirements2 != NULL ? dc.vkGetImageMemoryRequirements2 : dc.vkGetImageMemoryRequirements2KHR);
         return this;
