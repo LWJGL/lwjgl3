@@ -268,8 +268,6 @@ val nk_clipboard = struct(Module.NUKLEAR, "NkClipboard", nativeName = "struct nk
 }
 
 val nk_text_undo_record = struct(Module.NUKLEAR, "NkTextUndoRecord", nativeName = "struct nk_text_undo_record", mutable = false) {
-    access = Access.INTERNAL
-
     int("where", "")
     short("insert_length", "")
     short("delete_length", "")
@@ -279,8 +277,6 @@ val nk_text_undo_record = struct(Module.NUKLEAR, "NkTextUndoRecord", nativeName 
 const val NK_TEXTEDIT_UNDOSTATECOUNT = 99
 const val NK_TEXTEDIT_UNDOCHARCOUNT = 999
 val nk_text_undo_state = struct(Module.NUKLEAR, "NkTextUndoState", nativeName = "struct nk_text_undo_state", mutable = false) {
-    access = Access.INTERNAL
-
     nk_text_undo_record("undo_rec", "")[NK_TEXTEDIT_UNDOSTATECOUNT]
     nk_rune("undo_char", "")[NK_TEXTEDIT_UNDOCHARCOUNT]
     short("undo_point", "")
@@ -290,8 +286,6 @@ val nk_text_undo_state = struct(Module.NUKLEAR, "NkTextUndoState", nativeName = 
 }
 
 val nk_text_edit = struct(Module.NUKLEAR, "NkTextEdit", nativeName = "struct nk_text_edit", mutable = false) {
-    access = Access.INTERNAL
-
     nk_clipboard("clip", "")
     nk_str("string", "")
     nullable..nk_plugin_filter("filter", "")

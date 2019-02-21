@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * }</code></pre>
  */
 @NativeType("struct nk_text_edit")
-class NkTextEdit extends Struct implements NativeResource {
+public class NkTextEdit extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -111,7 +111,7 @@ class NkTextEdit extends Struct implements NativeResource {
      *
      * <p>The created instance holds a strong reference to the container object.</p>
      */
-    NkTextEdit(ByteBuffer container) {
+    public NkTextEdit(ByteBuffer container) {
         super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
