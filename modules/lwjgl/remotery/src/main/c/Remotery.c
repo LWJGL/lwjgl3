@@ -494,24 +494,20 @@ static void AtomicSub(rmtS32 volatile* value, rmtS32 sub)
 
 static void CompilerWriteFence()
 {
-#if defined (__clang__)
-    __asm__ volatile("" : : : "memory");
-#elif defined(RMT_PLATFORM_WINDOWS) && !defined(__MINGW32__)
+#if defined(RMT_PLATFORM_WINDOWS) && !defined(__MINGW32__)
     _WriteBarrier();
 #else
-    asm volatile ("" : : : "memory");
+    __asm__ volatile ("" : : : "memory");
 #endif
 }
 
 
 static void CompilerReadFence()
 {
-#if defined (__clang__)
-    __asm__ volatile("" : : : "memory");
-#elif defined(RMT_PLATFORM_WINDOWS) && !defined(__MINGW32__)
+#if defined(RMT_PLATFORM_WINDOWS) && !defined(__MINGW32__)
     _ReadBarrier();
 #else
-    asm volatile ("" : : : "memory");
+    __asm__ volatile ("" : : : "memory");
 #endif
 }
 
