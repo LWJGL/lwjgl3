@@ -44,15 +44,7 @@ public final class ExampleBGFX extends Demo {
         }
 
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-        glfwWindowHint(GLFW_SCALE_TO_MONITOR, GLFW_TRUE);
-        if (Platform.get() == Platform.MACOSX) {
-            glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
-        }
-
-        int width  = 1000;
-        int height = 600;
-
-        long window = glfwCreateWindow(width, height, "NanoVG (bgfx)", NULL, NULL);
+        long window = glfwCreateWindow(1000, 600, "NanoVG (bgfx)", NULL, NULL);
         if (window == NULL) {
             glfwTerminate();
             throw new RuntimeException();
@@ -74,6 +66,12 @@ public final class ExampleBGFX extends Demo {
         });
 
         boolean DEMO_MSAA = args.length != 0 && "msaa".equalsIgnoreCase(args[0]);
+        glfwSetFramebufferSizeCallback(window, (handle, w, h) -> bgfx_reset(
+            w, h,
+            DEMO_MSAA ? BGFX_RESET_MSAA_X8 : BGFX_RESET_NONE,
+            BGFX_TEXTURE_FORMAT_UNKNOWN
+        ));
+        glfwGetFramebufferSize(window, fbWidth, fbHeight);
 
         try (MemoryStack stack = stackPush()) {
             BGFXInit init = BGFXInit.mallocStack(stack);
@@ -108,7 +106,6 @@ public final class ExampleBGFX extends Demo {
                             } else {
                                 setAlpha(image, _width, _height, _pitch, (byte)255);
                             }
-                            System.out.println("_yflip = " + _yflip);
                             if (!_yflip) {
                                 flipHorizontal(image, _width, _height, _pitch);
                             }
@@ -122,8 +119,8 @@ public final class ExampleBGFX extends Demo {
                 )
                 //.type(BGFX_RENDERER_TYPE_DIRECT3D12)
                 .resolution(it -> it
-                    .width(width)
-                    .height(height)
+                    .width(fbWidth.get(0))
+                    .height(fbHeight.get(0))
                     .reset(DEMO_MSAA ? BGFX_RESET_MSAA_X8 : BGFX_RESET_NONE));
 
             switch (Platform.get()) {
@@ -175,9 +172,6 @@ public final class ExampleBGFX extends Demo {
             glfwGetWindowSize(window, winWidth, winHeight);
             glfwGetFramebufferSize(window, fbWidth, fbHeight);
 
-            // Calculate pixel ration for hi-dpi devices.
-            float pxRatio = fbWidth.get(0) / (float)winWidth.get(0);
-
             // Update and render
             bgfx_set_view_rect(0, 0, 0, fbWidth.get(0), fbHeight.get(0));
             bgfx_set_view_clear(0,
@@ -189,6 +183,8 @@ public final class ExampleBGFX extends Demo {
                 0
             );
 
+            // Calculate pixel ration for hi-dpi devices.
+            float pxRatio = fbWidth.get(0) / (float)winWidth.get(0);
             nvgBeginFrame(vg, winWidth.get(0), winHeight.get(0), pxRatio);
 
             renderDemo(vg, (float)mx.get(0), (float)my.get(0), winWidth.get(0), winHeight.get(0), (float)t, blowup, data);

@@ -9,14 +9,12 @@ import org.lwjgl.nanovg.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
 
-import java.io.*;
-import java.net.*;
 import java.nio.*;
-import java.nio.channels.*;
 import java.util.*;
 
 import static java.lang.Math.*;
 import static org.lwjgl.demo.glfw.GLFWUtil.*;
+import static org.lwjgl.demo.nanovg.NanoVGUtils.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.nanovg.NanoSVG.*;
@@ -45,9 +43,10 @@ public class SVGDemo {
         NSVGImage svg;
         try (MemoryStack stack = MemoryStack.stackPush()) {
             svg = nsvgParse(svgData, stack.ASCII("px"), 96.0f);
-            if (svg == null) {
-                throw new IllegalStateException("Failed to parse SVG.");
-            }
+            memFree(svgData);
+        }
+        if (svg == null) {
+            throw new IllegalStateException("Failed to parse SVG.");
         }
 
         long rast = nsvgCreateRasterizer();
@@ -68,47 +67,22 @@ public class SVGDemo {
     }
 
     public static void main(String[] args) {
-        SVGDemo demo;
-
-        ByteBuffer svgData = memAlloc(128 * 1024);
-        try {
-            String spec;
-            if (args.length == 0) {
-                System.out.println("Use 'ant demo -Dclass=org.lwjgl.demo.nanovg.SVGDemo -Dargs=<url>' to load a different image.\n");
-                spec = "https://upload.wikimedia.org/wikipedia/commons/f/fd/Ghostscript_Tiger.svg";
-            } else {
-                spec = args[0];
-            }
-
-            System.out.print("Downloading SVG image...");
-
-            long t = System.nanoTime();
-
-            URL website = new URL(spec);
-
-            try (ReadableByteChannel rbc = Channels.newChannel(website.openStream())) {
-                int c;
-                while ((c = rbc.read(svgData)) != -1) {
-                    if (c == 0) {
-                        svgData = memRealloc(svgData, (svgData.capacity() * 3) >> 1);
-                    }
-                }
-            }
-
-            t = System.nanoTime() - t;
-            System.out.format("%dms\n", t / 1000 / 1000);
-
-            svgData.put((byte)0);
-            svgData.flip();
-
-            demo = new SVGDemo(svgData);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } finally {
-            memFree(svgData);
+        String spec;
+        if (args.length == 0) {
+            System.out.println("Use 'ant demo -Dclass=org.lwjgl.demo.nanovg.SVGDemo -Dargs=<url>' to load a different image.\n");
+            spec = "https://upload.wikimedia.org/wikipedia/commons/f/fd/Ghostscript_Tiger.svg";
+        } else {
+            spec = args[0];
         }
 
-        demo.run();
+        System.out.print("Downloading SVG image...");
+        long t = System.nanoTime();
+
+        ByteBuffer svgData = downloadSVG(spec);
+
+        System.out.format("%dms\n", (System.nanoTime() - t) / 1000 / 1000);
+
+        new SVGDemo(svgData).run();
     }
 
     private void run() {
@@ -225,19 +199,6 @@ public class SVGDemo {
         this.scale = max(-9, scale);
     }
 
-    private void premultiplyAlpha() {
-        int stride = w * 4;
-        for (int y = 0; y < h; y++) {
-            for (int x = 0; x < w; x++) {
-                int i = y * stride + x * 4;
-
-                float alpha = (image.get(i + 3) & 0xFF) / 255.0f;
-                image.put(i + 0, (byte)round(((image.get(i + 0) & 0xFF) * alpha)));
-                image.put(i + 1, (byte)round(((image.get(i + 1) & 0xFF) * alpha)));
-                image.put(i + 2, (byte)round(((image.get(i + 2) & 0xFF) * alpha)));
-            }
-        }
-    }
 
     private int createTexture() {
         System.out.print("Creating texture...");
@@ -251,7 +212,7 @@ public class SVGDemo {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
-        premultiplyAlpha();
+        premultiplyAlpha(image, w, h, w * 4);
 
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 

@@ -8,8 +8,13 @@ import org.lwjgl.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
 
+import java.io.*;
+import java.net.*;
 import java.nio.*;
+import java.nio.channels.*;
+import java.util.zip.*;
 
+import static java.lang.Math.*;
 import static org.lwjgl.opengl.ARBTimerQuery.*;
 import static org.lwjgl.opengl.GL11C.*;
 import static org.lwjgl.opengl.GL15C.*;
@@ -90,6 +95,19 @@ class NanoVGUtils {
         flipHorizontal(image, w, h, w * 4);
         stbi_write_png(name, w, h, 4, image, w * 4);
         memFree(image);
+    }
+
+    static void premultiplyAlpha(ByteBuffer image, int w, int h, int stride) {
+        for (int y = 0; y < h; y++) {
+            for (int x = 0; x < w; x++) {
+                int i = y * stride + x * 4;
+
+                float alpha = (image.get(i + 3) & 0xFF) / 255.0f;
+                image.put(i + 0, (byte)round(((image.get(i + 0) & 0xFF) * alpha)));
+                image.put(i + 1, (byte)round(((image.get(i + 1) & 0xFF) * alpha)));
+                image.put(i + 2, (byte)round(((image.get(i + 2) & 0xFF) * alpha)));
+            }
+        }
     }
 
     private static int mini(int a, int b) { return a < b ? a : b; }
@@ -180,6 +198,36 @@ class NanoVGUtils {
             i++;
             j--;
         }
+    }
+
+    static ByteBuffer downloadSVG(String spec) {
+        ByteBuffer buffer = memAlloc(128 * 1024);
+        try {
+            URL url = new URL(spec);
+
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestProperty("Accept-Encoding", "gzip");
+            InputStream is = con.getInputStream();
+            if ("gzip".equals(con.getContentEncoding())) {
+                is = new GZIPInputStream(is);
+            }
+
+            try (ReadableByteChannel rbc = Channels.newChannel(is)) {
+                int c;
+                while ((c = rbc.read(buffer)) != -1) {
+                    if (c == 0) {
+                        buffer = memRealloc(buffer, (buffer.capacity() * 3) >> 1);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            memFree(buffer);
+            throw new RuntimeException(e);
+        }
+        buffer.put((byte)0);
+        buffer.flip();
+
+        return buffer;
     }
 
 }

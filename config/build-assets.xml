@@ -12,7 +12,7 @@ This script is included in /build.xml and depends on /build-definitions.xml
 <project name="assets" basedir="../" xmlns:if="ant:if" xmlns:unless="ant:unless">
     <target name="-update-assets">
         <uptodate property="assets-uptodate" targetfile="${test.resources}/demo/touch.txt">
-            <srcfiles dir="${config}/" includes="build-*.xml"/>
+            <srcfiles dir="config" includes="build-*.xml"/>
         </uptodate>
         <antcall target="update-assets" unless:set="assets-uptodate"/>
     </target>

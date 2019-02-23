@@ -66,7 +66,7 @@ public final class IOUtil {
         }
 
         buffer.flip();
-        return buffer.slice();
+        return buffer;
     }
 
 }
