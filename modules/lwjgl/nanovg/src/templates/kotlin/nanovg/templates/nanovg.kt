@@ -1232,4 +1232,12 @@ nvgFill(vg);""")}
         NVGtextRow.p("rows", "returns the text rows"),
         AutoSize("rows")..int("maxRows", "the maximum number of text rows to return")
     )
+
+    // Rendering back-end integration
+
+    internal..macro..Address..opaque_p("CreateInternal", "", void())
+    internal..macro..Address..opaque_p("InternalParams", "", void())
+    internal..macro..Address..opaque_p("DeleteInternal", "", void())
+
+
 }

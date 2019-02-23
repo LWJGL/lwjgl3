@@ -21,8 +21,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code access} &ndash; access</li>
- * <li>{@code handle} &ndash; texture handle</li>
+ * <li>{@code access} &ndash; attachment access</li>
+ * <li>{@code handle} &ndash; render target texture handle</li>
  * <li>{@code mip} &ndash; mip level</li>
  * <li>{@code layer} &ndash; cubemap side or depth layer/slice</li>
  * <li>{@code resolve} &ndash; resolve flags. One of:<br><table><tr><td>{@link BGFX#BGFX_RESOLVE_NONE RESOLVE_NONE}</td><td>{@link BGFX#BGFX_RESOLVE_AUTO_GEN_MIPS RESOLVE_AUTO_GEN_MIPS}</td></tr></table></li>

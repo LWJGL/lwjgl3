@@ -932,6 +932,30 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_nanovg_NanoVG_nnvgTextBreakLines(JNIEnv *_
     return CRITICAL(org_lwjgl_nanovg_NanoVG_nnvgTextBreakLines)(ctxAddress, stringAddress, endAddress, breakRowWidth, rowsAddress, maxRows);
 }
 
+JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_nanovg_NanoVG_nvgCreateInternal(void) {
+    return (jlong)(intptr_t)&nvgCreateInternal;
+}
+JNIEXPORT jlong JNICALL Java_org_lwjgl_nanovg_NanoVG_nvgCreateInternal(JNIEnv *__env, jclass clazz) {
+    UNUSED_PARAMS(__env, clazz)
+    return JavaCritical_org_lwjgl_nanovg_NanoVG_nvgCreateInternal();
+}
+
+JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_nanovg_NanoVG_nvgInternalParams(void) {
+    return (jlong)(intptr_t)&nvgInternalParams;
+}
+JNIEXPORT jlong JNICALL Java_org_lwjgl_nanovg_NanoVG_nvgInternalParams(JNIEnv *__env, jclass clazz) {
+    UNUSED_PARAMS(__env, clazz)
+    return JavaCritical_org_lwjgl_nanovg_NanoVG_nvgInternalParams();
+}
+
+JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_nanovg_NanoVG_nvgDeleteInternal(void) {
+    return (jlong)(intptr_t)&nvgDeleteInternal;
+}
+JNIEXPORT jlong JNICALL Java_org_lwjgl_nanovg_NanoVG_nvgDeleteInternal(JNIEnv *__env, jclass clazz) {
+    UNUSED_PARAMS(__env, clazz)
+    return JavaCritical_org_lwjgl_nanovg_NanoVG_nvgDeleteInternal();
+}
+
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_nanovg_NanoVG_nnvgCurrentTransform__J_3F(jlong ctxAddress, jint xform__length, jfloat* xform) {
     UNUSED_PARAM(xform__length)
     JavaCritical_org_lwjgl_nanovg_NanoVG_nnvgCurrentTransform__JJ(ctxAddress, (intptr_t)xform);

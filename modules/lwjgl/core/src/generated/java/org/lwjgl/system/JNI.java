@@ -115,6 +115,7 @@ public final class JNI {
     public static native long invokePP(long param0, int param1, long __functionAddress);
     public static native long invokePP(short param0, long param1, long __functionAddress);
     public static native long invokePP(int param0, int param1, long param2, long __functionAddress);
+    public static native long invokePP(int param0, short param1, long param2, long __functionAddress);
     public static native long invokePP(long param0, int param1, int param2, long __functionAddress);
     public static native long invokePP(int param0, int param1, int param2, long param3, long __functionAddress);
     public static native long invokePP(long param0, int param1, int param2, int param3, long __functionAddress);

@@ -2527,6 +2527,27 @@ public class NanoVG {
         }
     }
 
+    // --- [ nvgCreateInternal ] ---
+
+    @NativeType("void *")
+    private static native long nvgCreateInternal();
+
+    static final long nvgCreateInternal = nvgCreateInternal();
+
+    // --- [ nvgInternalParams ] ---
+
+    @NativeType("void *")
+    private static native long nvgInternalParams();
+
+    static final long nvgInternalParams = nvgInternalParams();
+
+    // --- [ nvgDeleteInternal ] ---
+
+    @NativeType("void *")
+    private static native long nvgDeleteInternal();
+
+    static final long nvgDeleteInternal = nvgDeleteInternal();
+
     /** Array version of: {@link #nnvgCurrentTransform} */
     public static native void nnvgCurrentTransform(long ctx, float[] xform);
 

@@ -25,7 +25,6 @@ public final class HelloBGFX {
 
     private HelloBGFX() {}
 
-    @SuppressWarnings("UnnecessaryLocalVariable")
     public static void main(String[] args) {
         int width  = 1024;
         int height = 480;
@@ -105,7 +104,7 @@ public final class HelloBGFX {
 
             // This dummy draw call is here to make sure that view 0 is cleared
             // if no other draw calls are submitted to view 0.
-            bgfx_touch((byte)0);
+            bgfx_touch(0);
 
             // Use debug font to print information about this example.
             bgfx_dbg_text_clear(0, false);
