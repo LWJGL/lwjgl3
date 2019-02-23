@@ -65,7 +65,7 @@ import org.lwjgl.system.windows.*;
  * struct VkExportFenceWin32HandleInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
- *     {@link SECURITY_ATTRIBUTES SECURITY_ATTRIBUTES const} * pAttributes;
+ *     {@link SECURITY_ATTRIBUTES SECURITY_ATTRIBUTES} const * pAttributes;
  *     DWORD dwAccess;
  *     LPCWSTR name;
  * }</code></pre>

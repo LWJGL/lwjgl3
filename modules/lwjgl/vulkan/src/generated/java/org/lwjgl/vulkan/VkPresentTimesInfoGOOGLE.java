@@ -52,7 +52,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t swapchainCount;
- *     {@link VkPresentTimeGOOGLE VkPresentTimeGOOGLE const} * pTimes;
+ *     {@link VkPresentTimeGOOGLE VkPresentTimeGOOGLE} const * pTimes;
  * }</code></pre>
  */
 public class VkPresentTimesInfoGOOGLE extends Struct implements NativeResource {

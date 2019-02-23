@@ -27,17 +27,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct CXIdxDeclInfo {
- *     {@link CXIdxEntityInfo CXIdxEntityInfo const} * entityInfo;
+ *     {@link CXIdxEntityInfo CXIdxEntityInfo} const * entityInfo;
  *     {@link CXCursor CXCursor} cursor;
  *     {@link CXIdxLoc CXIdxLoc} loc;
- *     {@link CXIdxContainerInfo CXIdxContainerInfo const} * semanticContainer;
- *     {@link CXIdxContainerInfo CXIdxContainerInfo const} * lexicalContainer;
+ *     {@link CXIdxContainerInfo CXIdxContainerInfo} const * semanticContainer;
+ *     {@link CXIdxContainerInfo CXIdxContainerInfo} const * lexicalContainer;
  *     int isRedeclaration;
  *     int isDefinition;
  *     int isContainer;
- *     {@link CXIdxContainerInfo CXIdxContainerInfo const} * declAsContainer;
+ *     {@link CXIdxContainerInfo CXIdxContainerInfo} const * declAsContainer;
  *     int isImplicit;
- *     {@link CXIdxAttrInfo CXIdxAttrInfo const} * const * attributes;
+ *     {@link CXIdxAttrInfo CXIdxAttrInfo} const * const * attributes;
  *     unsigned numAttributes;
  *     unsigned flags;
  * }</code></pre>

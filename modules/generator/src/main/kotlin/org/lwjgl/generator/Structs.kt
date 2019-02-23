@@ -480,9 +480,13 @@ ${members.joinToString(";\n$memberIndentation", prefix = memberIndentation, post
                                 "(*{@link ${elementType.javaMethodType} ${member.name}})"
                             )
                             elementType is StructType || elementType is FunctionType -> it.replace(
-                                elementType.name,
-                                "{@link ${elementType.javaMethodType} ${elementType.name}}"
-                            )
+                                elementType.name, "{@link ${elementType.javaMethodType} ${elementType.name.let { name ->
+                                    if (name.endsWith(" const")) {
+                                        "${name.substring(0, name.length - 6)}} const"
+                                    } else {
+                                        "$name}"
+                                    }
+                                }}")
                             else                                                     -> it
                         }
                     }

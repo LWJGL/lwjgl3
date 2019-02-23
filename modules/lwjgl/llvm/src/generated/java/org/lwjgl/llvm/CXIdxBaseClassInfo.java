@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <pre><code>
  * struct CXIdxBaseClassInfo {
- *     {@link CXIdxEntityInfo CXIdxEntityInfo const} * base;
+ *     {@link CXIdxEntityInfo CXIdxEntityInfo} const * base;
  *     {@link CXCursor CXCursor} cursor;
  *     {@link CXIdxLoc CXIdxLoc} loc;
  * }</code></pre>

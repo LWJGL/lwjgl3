@@ -40,7 +40,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre><code>
  * struct VkPresentRegionKHR {
  *     uint32_t rectangleCount;
- *     {@link VkRectLayerKHR VkRectLayerKHR const} * pRectangles;
+ *     {@link VkRectLayerKHR VkRectLayerKHR} const * pRectangles;
  * }</code></pre>
  */
 public class VkPresentRegionKHR extends Struct implements NativeResource {

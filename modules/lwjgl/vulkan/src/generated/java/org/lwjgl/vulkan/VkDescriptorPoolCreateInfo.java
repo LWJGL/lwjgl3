@@ -71,7 +71,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkDescriptorPoolCreateFlags flags;
  *     uint32_t maxSets;
  *     uint32_t poolSizeCount;
- *     {@link VkDescriptorPoolSize VkDescriptorPoolSize const} * pPoolSizes;
+ *     {@link VkDescriptorPoolSize VkDescriptorPoolSize} const * pPoolSizes;
  * }</code></pre>
  */
 public class VkDescriptorPoolCreateInfo extends Struct implements NativeResource {

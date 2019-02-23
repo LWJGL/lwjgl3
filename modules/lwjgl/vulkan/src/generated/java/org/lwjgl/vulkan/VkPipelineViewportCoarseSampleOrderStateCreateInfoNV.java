@@ -64,7 +64,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void const * pNext;
  *     VkCoarseSampleOrderTypeNV sampleOrderType;
  *     uint32_t customSampleOrderCount;
- *     {@link VkCoarseSampleOrderCustomNV VkCoarseSampleOrderCustomNV const} * pCustomSampleOrders;
+ *     {@link VkCoarseSampleOrderCustomNV VkCoarseSampleOrderCustomNV} const * pCustomSampleOrders;
  * }</code></pre>
  */
 public class VkPipelineViewportCoarseSampleOrderStateCreateInfoNV extends Struct implements NativeResource {

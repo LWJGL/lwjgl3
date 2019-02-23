@@ -49,9 +49,9 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t attachmentInitialSampleLocationsCount;
- *     {@link VkAttachmentSampleLocationsEXT VkAttachmentSampleLocationsEXT const} * pAttachmentInitialSampleLocations;
+ *     {@link VkAttachmentSampleLocationsEXT VkAttachmentSampleLocationsEXT} const * pAttachmentInitialSampleLocations;
  *     uint32_t postSubpassSampleLocationsCount;
- *     {@link VkSubpassSampleLocationsEXT VkSubpassSampleLocationsEXT const} * pPostSubpassSampleLocations;
+ *     {@link VkSubpassSampleLocationsEXT VkSubpassSampleLocationsEXT} const * pPostSubpassSampleLocations;
  * }</code></pre>
  */
 public class VkRenderPassSampleLocationsBeginInfoEXT extends Struct implements NativeResource {

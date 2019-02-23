@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <pre><code>
  * struct CXIdxObjCContainerDeclInfo {
- *     {@link CXIdxDeclInfo CXIdxDeclInfo const} * declInfo;
+ *     {@link CXIdxDeclInfo CXIdxDeclInfo} const * declInfo;
  *     CXIdxObjCContainerKind kind;
  * }</code></pre>
  */

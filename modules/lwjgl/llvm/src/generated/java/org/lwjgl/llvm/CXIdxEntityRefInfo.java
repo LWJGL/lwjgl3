@@ -40,9 +40,9 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     CXIdxEntityRefKind kind;
  *     {@link CXCursor CXCursor} cursor;
  *     {@link CXIdxLoc CXIdxLoc} loc;
- *     {@link CXIdxEntityInfo CXIdxEntityInfo const} * referencedEntity;
- *     {@link CXIdxEntityInfo CXIdxEntityInfo const} * parentEntity;
- *     {@link CXIdxContainerInfo CXIdxContainerInfo const} * container;
+ *     {@link CXIdxEntityInfo CXIdxEntityInfo} const * referencedEntity;
+ *     {@link CXIdxEntityInfo CXIdxEntityInfo} const * parentEntity;
+ *     {@link CXIdxContainerInfo CXIdxContainerInfo} const * container;
  *     CXSymbolRole role;
  * }</code></pre>
  */

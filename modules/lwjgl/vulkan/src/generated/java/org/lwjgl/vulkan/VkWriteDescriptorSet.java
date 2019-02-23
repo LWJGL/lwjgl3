@@ -110,8 +110,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t dstArrayElement;
  *     uint32_t descriptorCount;
  *     VkDescriptorType descriptorType;
- *     {@link VkDescriptorImageInfo VkDescriptorImageInfo const} * pImageInfo;
- *     {@link VkDescriptorBufferInfo VkDescriptorBufferInfo const} * pBufferInfo;
+ *     {@link VkDescriptorImageInfo VkDescriptorImageInfo} const * pImageInfo;
+ *     {@link VkDescriptorBufferInfo VkDescriptorBufferInfo} const * pBufferInfo;
  *     VkBufferView const * pTexelBufferView;
  * }</code></pre>
  */

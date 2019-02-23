@@ -88,11 +88,11 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void const * pNext;
  *     VkRenderPassCreateFlags flags;
  *     uint32_t attachmentCount;
- *     {@link VkAttachmentDescription2KHR VkAttachmentDescription2KHR const} * pAttachments;
+ *     {@link VkAttachmentDescription2KHR VkAttachmentDescription2KHR} const * pAttachments;
  *     uint32_t subpassCount;
- *     {@link VkSubpassDescription2KHR VkSubpassDescription2KHR const} * pSubpasses;
+ *     {@link VkSubpassDescription2KHR VkSubpassDescription2KHR} const * pSubpasses;
  *     uint32_t dependencyCount;
- *     {@link VkSubpassDependency2KHR VkSubpassDependency2KHR const} * pDependencies;
+ *     {@link VkSubpassDependency2KHR VkSubpassDependency2KHR} const * pDependencies;
  *     uint32_t correlatedViewMaskCount;
  *     uint32_t const * pCorrelatedViewMasks;
  * }</code></pre>

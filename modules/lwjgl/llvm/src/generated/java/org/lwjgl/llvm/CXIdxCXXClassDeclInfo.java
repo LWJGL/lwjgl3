@@ -19,8 +19,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <pre><code>
  * struct CXIdxCXXClassDeclInfo {
- *     {@link CXIdxDeclInfo CXIdxDeclInfo const} * declInfo;
- *     {@link CXIdxBaseClassInfo CXIdxBaseClassInfo const} * const * bases;
+ *     {@link CXIdxDeclInfo CXIdxDeclInfo} const * declInfo;
+ *     {@link CXIdxBaseClassInfo CXIdxBaseClassInfo} const * const * bases;
  *     unsigned numBases;
  * }</code></pre>
  */

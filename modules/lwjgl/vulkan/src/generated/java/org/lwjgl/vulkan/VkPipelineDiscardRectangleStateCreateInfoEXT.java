@@ -56,7 +56,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkPipelineDiscardRectangleStateCreateFlagsEXT flags;
  *     VkDiscardRectangleModeEXT discardRectangleMode;
  *     uint32_t discardRectangleCount;
- *     {@link VkRect2D VkRect2D const} * pDiscardRectangles;
+ *     {@link VkRect2D VkRect2D} const * pDiscardRectangles;
  * }</code></pre>
  */
 public class VkPipelineDiscardRectangleStateCreateInfoEXT extends Struct implements NativeResource {

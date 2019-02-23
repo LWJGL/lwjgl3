@@ -45,7 +45,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct VkSparseBufferMemoryBindInfo {
  *     VkBuffer buffer;
  *     uint32_t bindCount;
- *     {@link VkSparseMemoryBind VkSparseMemoryBind const} * pBinds;
+ *     {@link VkSparseMemoryBind VkSparseMemoryBind} const * pBinds;
  * }</code></pre>
  */
 public class VkSparseBufferMemoryBindInfo extends Struct implements NativeResource {

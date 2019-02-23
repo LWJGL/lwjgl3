@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     char const * name;
  *     char const * USR;
  *     {@link CXCursor CXCursor} cursor;
- *     {@link CXIdxAttrInfo CXIdxAttrInfo const} * const * attributes;
+ *     {@link CXIdxAttrInfo CXIdxAttrInfo} const * const * attributes;
  *     unsigned numAttributes;
  * }</code></pre>
  */

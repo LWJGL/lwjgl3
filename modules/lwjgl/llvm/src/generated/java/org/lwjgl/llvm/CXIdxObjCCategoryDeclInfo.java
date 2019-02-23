@@ -18,11 +18,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <pre><code>
  * struct CXIdxObjCCategoryDeclInfo {
- *     {@link CXIdxObjCContainerDeclInfo CXIdxObjCContainerDeclInfo const} * containerInfo;
- *     {@link CXIdxEntityInfo CXIdxEntityInfo const} * objcClass;
+ *     {@link CXIdxObjCContainerDeclInfo CXIdxObjCContainerDeclInfo} const * containerInfo;
+ *     {@link CXIdxEntityInfo CXIdxEntityInfo} const * objcClass;
  *     {@link CXCursor CXCursor} classCursor;
  *     {@link CXIdxLoc CXIdxLoc} classLoc;
- *     {@link CXIdxObjCProtocolRefListInfo CXIdxObjCProtocolRefListInfo const} * protocols;
+ *     {@link CXIdxObjCProtocolRefListInfo CXIdxObjCProtocolRefListInfo} const * protocols;
  * }</code></pre>
  */
 public class CXIdxObjCCategoryDeclInfo extends Struct {

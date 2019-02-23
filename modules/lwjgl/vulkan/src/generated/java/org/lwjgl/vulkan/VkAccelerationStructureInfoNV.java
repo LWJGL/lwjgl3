@@ -70,7 +70,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBuildAccelerationStructureFlagsNV flags;
  *     uint32_t instanceCount;
  *     uint32_t geometryCount;
- *     {@link VkGeometryNV VkGeometryNV const} * pGeometries;
+ *     {@link VkGeometryNV VkGeometryNV} const * pGeometries;
  * }</code></pre>
  */
 public class VkAccelerationStructureInfoNV extends Struct implements NativeResource {

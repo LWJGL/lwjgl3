@@ -80,11 +80,11 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int32_t messageIdNumber;
  *     char const * pMessage;
  *     uint32_t queueLabelCount;
- *     {@link VkDebugUtilsLabelEXT VkDebugUtilsLabelEXT const} * pQueueLabels;
+ *     {@link VkDebugUtilsLabelEXT VkDebugUtilsLabelEXT} const * pQueueLabels;
  *     uint32_t cmdBufLabelCount;
- *     {@link VkDebugUtilsLabelEXT VkDebugUtilsLabelEXT const} * pCmdBufLabels;
+ *     {@link VkDebugUtilsLabelEXT VkDebugUtilsLabelEXT} const * pCmdBufLabels;
  *     uint32_t objectCount;
- *     {@link VkDebugUtilsObjectNameInfoEXT VkDebugUtilsObjectNameInfoEXT const} * pObjects;
+ *     {@link VkDebugUtilsObjectNameInfoEXT VkDebugUtilsObjectNameInfoEXT} const * pObjects;
  * }</code></pre>
  */
 public class VkDebugUtilsMessengerCallbackDataEXT extends Struct implements NativeResource {

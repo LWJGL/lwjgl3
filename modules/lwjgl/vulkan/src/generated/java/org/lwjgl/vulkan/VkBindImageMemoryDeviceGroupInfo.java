@@ -75,7 +75,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t deviceIndexCount;
  *     uint32_t const * pDeviceIndices;
  *     uint32_t splitInstanceBindRegionCount;
- *     {@link VkRect2D VkRect2D const} * pSplitInstanceBindRegions;
+ *     {@link VkRect2D VkRect2D} const * pSplitInstanceBindRegions;
  * }</code></pre>
  */
 public class VkBindImageMemoryDeviceGroupInfo extends Struct implements NativeResource {

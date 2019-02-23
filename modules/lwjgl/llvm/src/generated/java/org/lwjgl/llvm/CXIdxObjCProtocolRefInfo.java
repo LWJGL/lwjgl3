@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <pre><code>
  * struct CXIdxObjCProtocolRefInfo {
- *     {@link CXIdxEntityInfo CXIdxEntityInfo const} * protocol;
+ *     {@link CXIdxEntityInfo CXIdxEntityInfo} const * protocol;
  *     {@link CXCursor CXCursor} cursor;
  *     {@link CXIdxLoc CXIdxLoc} loc;
  * }</code></pre>

@@ -18,8 +18,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <pre><code>
  * struct CXIdxIBOutletCollectionAttrInfo {
- *     {@link CXIdxAttrInfo CXIdxAttrInfo const} * attrInfo;
- *     {@link CXIdxEntityInfo CXIdxEntityInfo const} * objcClass;
+ *     {@link CXIdxAttrInfo CXIdxAttrInfo} const * attrInfo;
+ *     {@link CXIdxEntityInfo CXIdxEntityInfo} const * objcClass;
  *     {@link CXCursor CXCursor} classCursor;
  *     {@link CXIdxLoc CXIdxLoc} classLoc;
  * }</code></pre>

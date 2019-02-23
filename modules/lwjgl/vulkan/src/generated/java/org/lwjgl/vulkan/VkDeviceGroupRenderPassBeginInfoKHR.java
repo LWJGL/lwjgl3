@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void const * pNext;
  *     uint32_t deviceMask;
  *     uint32_t deviceRenderAreaCount;
- *     {@link VkRect2D VkRect2D const} * pDeviceRenderAreas;
+ *     {@link VkRect2D VkRect2D} const * pDeviceRenderAreas;
  * }</code></pre>
  */
 public class VkDeviceGroupRenderPassBeginInfoKHR extends VkDeviceGroupRenderPassBeginInfo {

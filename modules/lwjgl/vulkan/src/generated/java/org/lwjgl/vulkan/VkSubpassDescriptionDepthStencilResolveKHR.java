@@ -65,7 +65,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void const * pNext;
  *     VkResolveModeFlagBitsKHR depthResolveMode;
  *     VkResolveModeFlagBitsKHR stencilResolveMode;
- *     {@link VkAttachmentReference2KHR VkAttachmentReference2KHR const} * pDepthStencilResolveAttachment;
+ *     {@link VkAttachmentReference2KHR VkAttachmentReference2KHR} const * pDepthStencilResolveAttachment;
  * }</code></pre>
  */
 public class VkSubpassDescriptionDepthStencilResolveKHR extends Struct implements NativeResource {

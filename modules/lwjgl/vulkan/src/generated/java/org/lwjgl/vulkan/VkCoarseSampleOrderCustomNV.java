@@ -61,7 +61,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkShadingRatePaletteEntryNV shadingRate;
  *     uint32_t sampleCount;
  *     uint32_t sampleLocationCount;
- *     {@link VkCoarseSampleLocationNV VkCoarseSampleLocationNV const} * pSampleLocations;
+ *     {@link VkCoarseSampleLocationNV VkCoarseSampleLocationNV} const * pSampleLocations;
  * }</code></pre>
  */
 public class VkCoarseSampleOrderCustomNV extends Struct implements NativeResource {

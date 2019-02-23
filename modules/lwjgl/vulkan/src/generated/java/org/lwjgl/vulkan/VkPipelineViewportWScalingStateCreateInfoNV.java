@@ -47,7 +47,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void const * pNext;
  *     VkBool32 viewportWScalingEnable;
  *     uint32_t viewportCount;
- *     {@link VkViewportWScalingNV VkViewportWScalingNV const} * pViewportWScalings;
+ *     {@link VkViewportWScalingNV VkViewportWScalingNV} const * pViewportWScalings;
  * }</code></pre>
  */
 public class VkPipelineViewportWScalingStateCreateInfoNV extends Struct implements NativeResource {

@@ -92,11 +92,11 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkPipelineBindPoint pipelineBindPoint;
  *     uint32_t viewMask;
  *     uint32_t inputAttachmentCount;
- *     {@link VkAttachmentReference2KHR VkAttachmentReference2KHR const} * pInputAttachments;
+ *     {@link VkAttachmentReference2KHR VkAttachmentReference2KHR} const * pInputAttachments;
  *     uint32_t colorAttachmentCount;
- *     {@link VkAttachmentReference2KHR VkAttachmentReference2KHR const} * pColorAttachments;
- *     {@link VkAttachmentReference2KHR VkAttachmentReference2KHR const} * pResolveAttachments;
- *     {@link VkAttachmentReference2KHR VkAttachmentReference2KHR const} * pDepthStencilAttachment;
+ *     {@link VkAttachmentReference2KHR VkAttachmentReference2KHR} const * pColorAttachments;
+ *     {@link VkAttachmentReference2KHR VkAttachmentReference2KHR} const * pResolveAttachments;
+ *     {@link VkAttachmentReference2KHR VkAttachmentReference2KHR} const * pDepthStencilAttachment;
  *     uint32_t preserveAttachmentCount;
  *     uint32_t const * pPreserveAttachments;
  * }</code></pre>

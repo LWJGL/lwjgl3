@@ -60,7 +60,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void const * pNext;
  *     VkBool32 shadingRateImageEnable;
  *     uint32_t viewportCount;
- *     {@link VkShadingRatePaletteNV VkShadingRatePaletteNV const} * pShadingRatePalettes;
+ *     {@link VkShadingRatePaletteNV VkShadingRatePaletteNV} const * pShadingRatePalettes;
  * }</code></pre>
  */
 public class VkPipelineViewportShadingRateImageStateCreateInfoNV extends Struct implements NativeResource {

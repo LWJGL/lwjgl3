@@ -62,11 +62,11 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t waitSemaphoreCount;
  *     VkSemaphore const * pWaitSemaphores;
  *     uint32_t bufferBindCount;
- *     {@link VkSparseBufferMemoryBindInfo VkSparseBufferMemoryBindInfo const} * pBufferBinds;
+ *     {@link VkSparseBufferMemoryBindInfo VkSparseBufferMemoryBindInfo} const * pBufferBinds;
  *     uint32_t imageOpaqueBindCount;
- *     {@link VkSparseImageOpaqueMemoryBindInfo VkSparseImageOpaqueMemoryBindInfo const} * pImageOpaqueBinds;
+ *     {@link VkSparseImageOpaqueMemoryBindInfo VkSparseImageOpaqueMemoryBindInfo} const * pImageOpaqueBinds;
  *     uint32_t imageBindCount;
- *     {@link VkSparseImageMemoryBindInfo VkSparseImageMemoryBindInfo const} * pImageBinds;
+ *     {@link VkSparseImageMemoryBindInfo VkSparseImageMemoryBindInfo} const * pImageBinds;
  *     uint32_t signalSemaphoreCount;
  *     VkSemaphore const * pSignalSemaphores;
  * }</code></pre>

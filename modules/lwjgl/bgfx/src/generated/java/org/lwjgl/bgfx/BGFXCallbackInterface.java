@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct bgfx_callback_interface_t {
- *     {@link BGFXCallbackVtbl bgfx_callback_vtbl_t const} * vtbl;
+ *     {@link BGFXCallbackVtbl bgfx_callback_vtbl_t} const * vtbl;
  * }</code></pre>
  */
 @NativeType("struct bgfx_callback_interface_t")

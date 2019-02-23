@@ -56,7 +56,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void const * pNext;
  *     VkPipelineViewportSwizzleStateCreateFlagsNV flags;
  *     uint32_t viewportCount;
- *     {@link VkViewportSwizzleNV VkViewportSwizzleNV const} * pViewportSwizzles;
+ *     {@link VkViewportSwizzleNV VkViewportSwizzleNV} const * pViewportSwizzles;
  * }</code></pre>
  */
 public class VkPipelineViewportSwizzleStateCreateInfoNV extends Struct implements NativeResource {

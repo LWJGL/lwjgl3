@@ -83,7 +83,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkShaderStageFlagBits stage;
  *     VkShaderModule module;
  *     char const * pName;
- *     {@link VkSpecializationInfo VkSpecializationInfo const} * pSpecializationInfo;
+ *     {@link VkSpecializationInfo VkSpecializationInfo} const * pSpecializationInfo;
  * }</code></pre>
  */
 public class VkPipelineShaderStageCreateInfo extends Struct implements NativeResource {

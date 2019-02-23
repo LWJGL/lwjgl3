@@ -52,7 +52,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t swapchainCount;
- *     {@link VkPresentRegionKHR VkPresentRegionKHR const} * pRegions;
+ *     {@link VkPresentRegionKHR VkPresentRegionKHR} const * pRegions;
  * }</code></pre>
  */
 public class VkPresentRegionsKHR extends Struct implements NativeResource {

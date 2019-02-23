@@ -61,7 +61,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void const * pNext;
  *     VkDescriptorSetLayoutCreateFlags flags;
  *     uint32_t bindingCount;
- *     {@link VkDescriptorSetLayoutBinding VkDescriptorSetLayoutBinding const} * pBindings;
+ *     {@link VkDescriptorSetLayoutBinding VkDescriptorSetLayoutBinding} const * pBindings;
  * }</code></pre>
  */
 public class VkDescriptorSetLayoutCreateInfo extends Struct implements NativeResource {

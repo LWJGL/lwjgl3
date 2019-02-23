@@ -47,7 +47,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t aspectReferenceCount;
- *     {@link VkInputAttachmentAspectReference VkInputAttachmentAspectReference const} * pAspectReferences;
+ *     {@link VkInputAttachmentAspectReference VkInputAttachmentAspectReference} const * pAspectReferences;
  * }</code></pre>
  */
 public class VkRenderPassInputAttachmentAspectCreateInfo extends Struct implements NativeResource {

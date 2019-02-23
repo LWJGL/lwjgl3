@@ -64,7 +64,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void const * pNext;
  *     uint64_t drmFormatModifier;
  *     uint32_t drmFormatModifierPlaneCount;
- *     {@link VkSubresourceLayout VkSubresourceLayout const} * pPlaneLayouts;
+ *     {@link VkSubresourceLayout VkSubresourceLayout} const * pPlaneLayouts;
  * }</code></pre>
  */
 public class VkImageDrmFormatModifierExplicitCreateInfoEXT extends Struct implements NativeResource {

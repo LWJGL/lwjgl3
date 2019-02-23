@@ -18,9 +18,9 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <pre><code>
  * struct CXIdxObjCInterfaceDeclInfo {
- *     {@link CXIdxObjCContainerDeclInfo CXIdxObjCContainerDeclInfo const} * containerInfo;
- *     {@link CXIdxBaseClassInfo CXIdxBaseClassInfo const} * superInfo;
- *     {@link CXIdxObjCProtocolRefListInfo CXIdxObjCProtocolRefListInfo const} * protocols;
+ *     {@link CXIdxObjCContainerDeclInfo CXIdxObjCContainerDeclInfo} const * containerInfo;
+ *     {@link CXIdxBaseClassInfo CXIdxBaseClassInfo} const * superInfo;
+ *     {@link CXIdxObjCProtocolRefListInfo CXIdxObjCProtocolRefListInfo} const * protocols;
  * }</code></pre>
  */
 public class CXIdxObjCInterfaceDeclInfo extends Struct {

@@ -78,12 +78,12 @@ import org.lwjgl.vulkan.*;
  *     VkPhysicalDevice physicalDevice;
  *     VkDevice device;
  *     VkDeviceSize preferredLargeHeapBlockSize;
- *     {@link VkAllocationCallbacks VkAllocationCallbacks const} * pAllocationCallbacks;
- *     {@link VmaDeviceMemoryCallbacks VmaDeviceMemoryCallbacks const} * pDeviceMemoryCallbacks;
+ *     {@link VkAllocationCallbacks VkAllocationCallbacks} const * pAllocationCallbacks;
+ *     {@link VmaDeviceMemoryCallbacks VmaDeviceMemoryCallbacks} const * pDeviceMemoryCallbacks;
  *     uint32_t frameInUseCount;
  *     VkDeviceSize const * pHeapSizeLimit;
- *     {@link VmaVulkanFunctions VmaVulkanFunctions const} * pVulkanFunctions;
- *     {@link VmaRecordSettings VmaRecordSettings const} * pRecordSettings;
+ *     {@link VmaVulkanFunctions VmaVulkanFunctions} const * pVulkanFunctions;
+ *     {@link VmaRecordSettings VmaRecordSettings} const * pRecordSettings;
  * }</code></pre>
  */
 public class VmaAllocatorCreateInfo extends Struct implements NativeResource {

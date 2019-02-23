@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct RenderModel_t {
- *     {@link RenderModelVertex RenderModel_Vertex_t const} * rVertexData;
+ *     {@link RenderModelVertex RenderModel_Vertex_t} const * rVertexData;
  *     uint32_t unVertexCount;
  *     uint16_t const * IndexData;
  *     uint32_t unTriangleCount;

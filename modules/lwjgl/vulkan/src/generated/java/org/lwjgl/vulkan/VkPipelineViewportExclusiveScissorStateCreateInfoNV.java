@@ -58,7 +58,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t exclusiveScissorCount;
- *     {@link VkRect2D VkRect2D const} * pExclusiveScissors;
+ *     {@link VkRect2D VkRect2D} const * pExclusiveScissors;
  * }</code></pre>
  */
 public class VkPipelineViewportExclusiveScissorStateCreateInfoNV extends Struct implements NativeResource {

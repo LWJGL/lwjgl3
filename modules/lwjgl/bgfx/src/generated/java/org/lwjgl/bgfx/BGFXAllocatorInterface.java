@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct bgfx_allocator_interface_t {
- *     {@link BGFXAllocatorVtbl bgfx_allocator_vtbl_t const} * vtbl;
+ *     {@link BGFXAllocatorVtbl bgfx_allocator_vtbl_t} const * vtbl;
  * }</code></pre>
  */
 @NativeType("struct bgfx_allocator_interface_t")

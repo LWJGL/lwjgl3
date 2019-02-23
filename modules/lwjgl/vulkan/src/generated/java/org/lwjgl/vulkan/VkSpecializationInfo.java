@@ -55,7 +55,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre><code>
  * struct VkSpecializationInfo {
  *     uint32_t mapEntryCount;
- *     {@link VkSpecializationMapEntry VkSpecializationMapEntry const} * pMapEntries;
+ *     {@link VkSpecializationMapEntry VkSpecializationMapEntry} const * pMapEntries;
  *     size_t dataSize;
  *     void const * pData;
  * }</code></pre>

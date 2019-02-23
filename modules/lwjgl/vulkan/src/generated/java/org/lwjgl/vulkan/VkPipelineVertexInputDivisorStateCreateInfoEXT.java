@@ -47,7 +47,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t vertexBindingDivisorCount;
- *     {@link VkVertexInputBindingDivisorDescriptionEXT VkVertexInputBindingDivisorDescriptionEXT const} * pVertexBindingDivisors;
+ *     {@link VkVertexInputBindingDivisorDescriptionEXT VkVertexInputBindingDivisorDescriptionEXT} const * pVertexBindingDivisors;
  * }</code></pre>
  */
 public class VkPipelineVertexInputDivisorStateCreateInfoEXT extends Struct implements NativeResource {

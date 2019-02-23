@@ -68,7 +68,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void const * pNext;
  *     VkDescriptorUpdateTemplateCreateFlags flags;
  *     uint32_t descriptorUpdateEntryCount;
- *     {@link VkDescriptorUpdateTemplateEntry VkDescriptorUpdateTemplateEntry const} * pDescriptorUpdateEntries;
+ *     {@link VkDescriptorUpdateTemplateEntry VkDescriptorUpdateTemplateEntry} const * pDescriptorUpdateEntries;
  *     VkDescriptorUpdateTemplateType templateType;
  *     VkDescriptorSetLayout descriptorSetLayout;
  *     VkPipelineBindPoint pipelineBindPoint;

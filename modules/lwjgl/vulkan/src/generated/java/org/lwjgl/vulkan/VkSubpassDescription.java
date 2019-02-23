@@ -104,11 +104,11 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkSubpassDescriptionFlags flags;
  *     VkPipelineBindPoint pipelineBindPoint;
  *     uint32_t inputAttachmentCount;
- *     {@link VkAttachmentReference VkAttachmentReference const} * pInputAttachments;
+ *     {@link VkAttachmentReference VkAttachmentReference} const * pInputAttachments;
  *     uint32_t colorAttachmentCount;
- *     {@link VkAttachmentReference VkAttachmentReference const} * pColorAttachments;
- *     {@link VkAttachmentReference VkAttachmentReference const} * pResolveAttachments;
- *     {@link VkAttachmentReference VkAttachmentReference const} * pDepthStencilAttachment;
+ *     {@link VkAttachmentReference VkAttachmentReference} const * pColorAttachments;
+ *     {@link VkAttachmentReference VkAttachmentReference} const * pResolveAttachments;
+ *     {@link VkAttachmentReference VkAttachmentReference} const * pDepthStencilAttachment;
  *     uint32_t preserveAttachmentCount;
  *     uint32_t const * pPreserveAttachments;
  * }</code></pre>

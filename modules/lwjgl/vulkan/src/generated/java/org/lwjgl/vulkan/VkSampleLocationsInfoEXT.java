@@ -66,7 +66,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkSampleCountFlagBits sampleLocationsPerPixel;
  *     {@link VkExtent2D VkExtent2D} sampleLocationGridSize;
  *     uint32_t sampleLocationsCount;
- *     {@link VkSampleLocationEXT VkSampleLocationEXT const} * pSampleLocations;
+ *     {@link VkSampleLocationEXT VkSampleLocationEXT} const * pSampleLocations;
  * }</code></pre>
  */
 public class VkSampleLocationsInfoEXT extends Struct implements NativeResource {

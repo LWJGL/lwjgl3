@@ -101,7 +101,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t setLayoutCount;
  *     VkDescriptorSetLayout const * pSetLayouts;
  *     uint32_t pushConstantRangeCount;
- *     {@link VkPushConstantRange VkPushConstantRange const} * pPushConstantRanges;
+ *     {@link VkPushConstantRange VkPushConstantRange} const * pPushConstantRanges;
  * }</code></pre>
  */
 public class VkPipelineLayoutCreateInfo extends Struct implements NativeResource {

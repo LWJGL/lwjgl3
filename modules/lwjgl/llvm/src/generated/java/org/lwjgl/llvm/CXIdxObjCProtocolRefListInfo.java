@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <pre><code>
  * struct CXIdxObjCProtocolRefListInfo {
- *     {@link CXIdxObjCProtocolRefInfo CXIdxObjCProtocolRefInfo const} * const * protocols;
+ *     {@link CXIdxObjCProtocolRefInfo CXIdxObjCProtocolRefInfo} const * const * protocols;
  *     unsigned numProtocols;
  * }</code></pre>
  */
