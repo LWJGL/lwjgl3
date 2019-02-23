@@ -9,6 +9,7 @@ import org.lwjgl.opengl.*;
 
 import java.util.*;
 
+import static org.lwjgl.demo.nanovg.NanoVGUtils.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.nanovg.NanoVG.*;
@@ -57,18 +58,12 @@ public final class ExampleGL2 extends Demo {
             throw new RuntimeException("Failed to init GLFW.");
         }
 
-        DemoData  data = new DemoData();
-        PerfGraph fps  = new PerfGraph();
-
-        initGraph(fps, GRAPH_RENDER_FPS, "Frame Time");
-
         boolean DEMO_MSAA = args.length != 0 && "msaa".equalsIgnoreCase(args[0]);
         if (DEMO_MSAA) {
             glfwWindowHint(GLFW_SAMPLES, 8);
         }
 
-        long window = glfwCreateWindow(1000, 600, "NanoVG", NULL, NULL);
-        //window = glfwCreateWindow(1000, 600, "NanoVG", glfwGetPrimaryMonitor(), NULL);
+        long window = glfwCreateWindow(1000, 600, "NanoVG (OpenGL 2)", NULL, NULL);
         if (window == NULL) {
             glfwTerminate();
             throw new RuntimeException();
@@ -91,17 +86,21 @@ public final class ExampleGL2 extends Demo {
 
         glfwMakeContextCurrent(window);
         GL.createCapabilities();
+        glfwSwapInterval(0);
 
         long vg = nvgCreate(DEMO_MSAA ? 0 : NVG_ANTIALIAS);
         if (vg == NULL) {
             throw new RuntimeException("Could not init nanovg.");
         }
 
+        DemoData data = new DemoData();
         if (loadDemoData(vg, data) == -1) {
             throw new RuntimeException();
         }
 
-        glfwSwapInterval(0);
+        PerfGraph fps = new PerfGraph();
+
+        initGraph(fps, GRAPH_RENDER_FPS, "Frame Time");
 
         glfwSetTime(0);
         double prevt = glfwGetTime();
@@ -117,7 +116,7 @@ public final class ExampleGL2 extends Demo {
             glfwGetFramebufferSize(window, fbWidth, fbHeight);
 
             // Calculate pixel ration for hi-dpi devices.
-            float pxRatio = (float)fbWidth.get(0) / (float)winWidth.get(0);
+            float pxRatio = fbWidth.get(0) / (float)winWidth.get(0);
 
             // Update and render
             glViewport(0, 0, fbWidth.get(0), fbHeight.get(0));
@@ -137,7 +136,7 @@ public final class ExampleGL2 extends Demo {
 
             if (screenshot) {
                 screenshot = false;
-                saveScreenShot(fbWidth.get(0), fbHeight.get(0), premult, "dump.png");
+                saveScreenShotGL(fbWidth.get(0), fbHeight.get(0), premult, "nanovg_gl2.png");
             }
 
             glfwSwapBuffers(window);

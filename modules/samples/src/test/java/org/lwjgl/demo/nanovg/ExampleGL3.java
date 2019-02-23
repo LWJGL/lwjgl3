@@ -10,6 +10,7 @@ import org.lwjgl.system.*;
 
 import java.util.*;
 
+import static org.lwjgl.demo.nanovg.NanoVGUtils.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.nanovg.NanoVG.*;
@@ -58,17 +59,6 @@ public final class ExampleGL3 extends Demo {
             throw new RuntimeException("Failed to init GLFW.");
         }
 
-        DemoData data     = new DemoData();
-        GPUtimer gpuTimer = new GPUtimer();
-
-        PerfGraph fps      = new PerfGraph();
-        PerfGraph cpuGraph = new PerfGraph();
-        PerfGraph gpuGraph = new PerfGraph();
-
-        initGraph(fps, GRAPH_RENDER_FPS, "Frame Time");
-        initGraph(cpuGraph, GRAPH_RENDER_MS, "CPU Time");
-        initGraph(gpuGraph, GRAPH_RENDER_MS, "GPU Time");
-
         if (Platform.get() == Platform.MACOSX) {
             glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
             glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
@@ -81,8 +71,7 @@ public final class ExampleGL3 extends Demo {
             glfwWindowHint(GLFW_SAMPLES, 8);
         }
 
-        long window = glfwCreateWindow(1000, 600, "NanoVG", NULL, NULL);
-        //window = glfwCreateWindow(1000, 600, "NanoVG", glfwGetPrimaryMonitor(), NULL);
+        long window = glfwCreateWindow(1000, 600, "NanoVG (OpenGL 3)", NULL, NULL);
         if (window == NULL) {
             glfwTerminate();
             throw new RuntimeException();
@@ -105,17 +94,27 @@ public final class ExampleGL3 extends Demo {
 
         glfwMakeContextCurrent(window);
         GL.createCapabilities();
+        glfwSwapInterval(0);
 
         long vg = nvgCreate(DEMO_MSAA ? 0 : NVG_ANTIALIAS);
         if (vg == NULL) {
             throw new RuntimeException("Could not init nanovg.");
         }
 
+        DemoData data = new DemoData();
         if (loadDemoData(vg, data) == -1) {
             throw new RuntimeException();
         }
 
-        glfwSwapInterval(0);
+        GPUtimer gpuTimer = new GPUtimer();
+
+        PerfGraph fps      = new PerfGraph();
+        PerfGraph cpuGraph = new PerfGraph();
+        PerfGraph gpuGraph = new PerfGraph();
+
+        initGraph(fps, GRAPH_RENDER_FPS, "Frame Time");
+        initGraph(cpuGraph, GRAPH_RENDER_MS, "CPU Time");
+        initGraph(gpuGraph, GRAPH_RENDER_MS, "GPU Time");
 
         initGPUTimer(gpuTimer);
 
@@ -138,7 +137,7 @@ public final class ExampleGL3 extends Demo {
             glfwGetFramebufferSize(window, fbWidth, fbHeight);
 
             // Calculate pixel ration for hi-dpi devices.
-            pxRatio = (float)fbWidth.get(0) / (float)winWidth.get(0);
+            pxRatio = fbWidth.get(0) / (float)winWidth.get(0);
 
             // Update and render
             glViewport(0, 0, fbWidth.get(0), fbHeight.get(0));
@@ -174,7 +173,7 @@ public final class ExampleGL3 extends Demo {
 
             if (screenshot) {
                 screenshot = false;
-                saveScreenShot(fbWidth.get(0), fbHeight.get(0), premult, "dump.png");
+                saveScreenShotGL(fbWidth.get(0), fbHeight.get(0), premult, "nanovg_gl3.png");
             }
 
             glfwSwapBuffers(window);

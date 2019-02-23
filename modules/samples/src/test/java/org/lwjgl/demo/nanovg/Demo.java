@@ -26,7 +26,6 @@ package org.lwjgl.demo.nanovg;
 
 import org.lwjgl.*;
 import org.lwjgl.nanovg.*;
-import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
 
 import java.io.*;
@@ -36,9 +35,6 @@ import java.util.*;
 import static java.lang.Math.*;
 import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.nanovg.NanoVG.*;
-import static org.lwjgl.opengl.ARBTimerQuery.*;
-import static org.lwjgl.opengl.GL15C.*;
-import static org.lwjgl.stb.STBImageWrite.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
@@ -636,7 +632,7 @@ class Demo {
         nvgScissor(vg, x, y, w, h);
         nvgTranslate(vg, 0, -(stackh - h) * u);
 
-        float dv = 1.0f / (float)(nimages - 1);
+        float dv = 1.0f / (nimages - 1);
 
         try (MemoryStack stack = stackPush()) {
             IntBuffer
@@ -655,12 +651,12 @@ class Demo {
 
                 if (imgw.get(0) < imgh.get(0)) {
                     iw = thumb;
-                    ih = iw * (float)imgh.get(0) / (float)imgw.get(0);
+                    ih = iw * imgh.get(0) / imgw.get(0);
                     ix = 0;
                     iy = -(ih - thumb) * 0.5f;
                 } else {
                     ih = thumb;
-                    iw = ih * (float)imgw.get(0) / (float)imgh.get(0);
+                    iw = ih * imgw.get(0) / imgh.get(0);
                     ix = -(iw - thumb) * 0.5f;
                     iy = 0;
                 }
@@ -755,7 +751,7 @@ class Demo {
         float aeps = 0.5f / r1;    // half a pixel arc length in radians (2pi cancels out).
 
         for (int i = 0; i < 6; i++) {
-            float a0 = (float)i / 6.0f * NVG_PI * 2.0f - aeps;
+            float a0 = i / 6.0f * NVG_PI * 2.0f - aeps;
             float a1 = (i + 1.0f) / 6.0f * NVG_PI * 2.0f + aeps;
             nvgBeginPath(vg);
             nvgArc(vg, cx, cy, r0, a0, a1, NVG_CW);
@@ -1254,106 +1250,6 @@ class Demo {
         nvgRestore(vg);
     }
 
-    private static int mini(int a, int b) { return a < b ? a : b; }
-
-    private static void unpremultiplyAlpha(ByteBuffer image, int w, int h, int stride) {
-        int x, y;
-
-        // Unpremultiply
-        for (y = 0; y < h; y++) {
-            int row = y * stride;
-            for (x = 0; x < w; x++) {
-                int r = image.get(row + 0), g = image.get(row + 1), b = image.get(row + 2), a = image.get(row + 3);
-                if (a != 0) {
-                    image.put(row + 0, (byte)mini(r * 255 / a, 255));
-                    image.put(row + 1, (byte)mini(g * 255 / a, 255));
-                    image.put(row + 2, (byte)mini(b * 255 / a, 255));
-                }
-                row += 4;
-            }
-        }
-
-        // Defringe
-        for (y = 0; y < h; y++) {
-            int row = y * stride;
-            for (x = 0; x < w; x++) {
-                int r = 0, g = 0, b = 0, a = image.get(row + 3), n = 0;
-                if (a == 0) {
-                    if (x - 1 > 0 && image.get(row - 1) != 0) {
-                        r += image.get(row - 4);
-                        g += image.get(row - 3);
-                        b += image.get(row - 2);
-                        n++;
-                    }
-                    if (x + 1 < w && image.get(row + 7) != 0) {
-                        r += image.get(row + 4);
-                        g += image.get(row + 5);
-                        b += image.get(row + 6);
-                        n++;
-                    }
-                    if (y - 1 > 0 && image.get(row - stride + 3) != 0) {
-                        r += image.get(row - stride);
-                        g += image.get(row - stride + 1);
-                        b += image.get(row - stride + 2);
-                        n++;
-                    }
-                    if (y + 1 < h && image.get(row + stride + 3) != 0) {
-                        r += image.get(row + stride);
-                        g += image.get(row + stride + 1);
-                        b += image.get(row + stride + 2);
-                        n++;
-                    }
-                    if (n > 0) {
-                        image.put(row + 0, (byte)(r / n));
-                        image.put(row + 1, (byte)(g / n));
-                        image.put(row + 2, (byte)(b / n));
-                    }
-                }
-                row += 4;
-            }
-        }
-    }
-
-    private static void setAlpha(ByteBuffer image, int w, int h, int stride, byte a) {
-        int x, y;
-        for (y = 0; y < h; y++) {
-            int row = y * stride;
-            for (x = 0; x < w; x++) {
-                image.put(row + x * 4 + 3, a);
-            }
-        }
-    }
-
-    private static void flipHorizontal(ByteBuffer image, int w, int h, int stride) {
-        int i = 0, j = h - 1, k;
-        while (i < j) {
-            int ri = i * stride;
-            int rj = j * stride;
-            for (k = 0; k < w * 4; k++) {
-                byte t = image.get(ri + k);
-                image.put(ri + k, image.get(rj + k));
-                image.put(rj + k, t);
-            }
-            i++;
-            j--;
-        }
-    }
-
-    static void saveScreenShot(int w, int h, boolean premult, String name) {
-        ByteBuffer image = memAlloc(w * h * 4);
-
-        // TODO: Make this work for GLES
-        glReadPixels(0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, image);
-        if (premult) {
-            unpremultiplyAlpha(image, w, h, w * 4);
-        } else {
-            setAlpha(image, w, h, w * 4, (byte)255);
-        }
-        flipHorizontal(image, w, h, w * 4);
-        stbi_write_png(name, w, h, 4, image, w * 4);
-        memFree(image);
-    }
-
     // PERF
 
     static final int
@@ -1363,67 +1259,11 @@ class Demo {
 
     private static final int GRAPH_HISTORY_COUNT = 100;
 
-    private static final int GPU_QUERY_COUNT = 5;
-
     static class PerfGraph {
         int        style;
         ByteBuffer name   = BufferUtils.createByteBuffer(32);
         float[]    values = new float[GRAPH_HISTORY_COUNT];
         int        head;
-    }
-
-    static class GPUtimer {
-        boolean supported;
-        int     cur, ret;
-        IntBuffer queries = BufferUtils.createIntBuffer(GPU_QUERY_COUNT);
-    }
-
-    // TODO: move to implementation
-    static void initGPUTimer(GPUtimer timer) {
-        //memset(timer, 0, sizeof(*timer));
-        timer.supported = GL.getCapabilities().GL_ARB_timer_query;
-        timer.cur = 0;
-        timer.ret = 0;
-        BufferUtils.zeroBuffer(timer.queries);
-
-        if (timer.supported) {
-            glGenQueries(timer.queries);
-        }
-    }
-
-    static void startGPUTimer(GPUtimer timer) {
-        if (!timer.supported) {
-            return;
-        }
-        glBeginQuery(GL_TIME_ELAPSED, timer.queries.get(timer.cur % GPU_QUERY_COUNT));
-        timer.cur++;
-    }
-
-    static int stopGPUTimer(GPUtimer timer, FloatBuffer times, int maxTimes) {
-        int n = 0;
-        if (!timer.supported) {
-            return 0;
-        }
-
-        glEndQuery(GL_TIME_ELAPSED);
-
-        try (MemoryStack stack = stackPush()) {
-            IntBuffer available = stack.ints(1);
-            while (available.get(0) != 0 && timer.ret <= timer.cur) {
-                // check for results if there are any
-                glGetQueryObjectiv(timer.queries.get(timer.ret % GPU_QUERY_COUNT), GL_QUERY_RESULT_AVAILABLE, available);
-                if (available.get(0) != 0) {
-                    LongBuffer timeElapsed = stack.mallocLong(1);
-                    glGetQueryObjectui64v(timer.queries.get(timer.ret % GPU_QUERY_COUNT), GL_QUERY_RESULT, timeElapsed);
-                    timer.ret++;
-                    if (n < maxTimes) {
-                        times.put(n, (float)((double)timeElapsed.get(0) * 1e-9));
-                        n++;
-                    }
-                }
-            }
-        }
-        return n;
     }
 
     static void initGraph(PerfGraph fps, int style, String name) {
@@ -1443,7 +1283,7 @@ class Demo {
         for (int i = 0; i < GRAPH_HISTORY_COUNT; i++) {
             avg += fps.values[i];
         }
-        return avg / (float)GRAPH_HISTORY_COUNT;
+        return avg / GRAPH_HISTORY_COUNT;
     }
 
     static void renderGraph(long vg, float x, float y, PerfGraph fps) {

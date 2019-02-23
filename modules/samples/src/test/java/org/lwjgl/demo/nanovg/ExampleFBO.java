@@ -14,6 +14,7 @@ import java.nio.*;
 import java.util.*;
 
 import static java.lang.Math.*;
+import static org.lwjgl.demo.nanovg.NanoVGUtils.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.nanovg.NanoVG.*;
@@ -112,15 +113,6 @@ public final class ExampleFBO extends Demo {
             throw new RuntimeException("Failed to init GLFW.");
         }
 
-        GPUtimer  gpuTimer = new GPUtimer();
-        PerfGraph fps      = new PerfGraph();
-        PerfGraph cpuGraph = new PerfGraph();
-        PerfGraph gpuGraph = new PerfGraph();
-
-        initGraph(fps, GRAPH_RENDER_FPS, "Frame Time");
-        initGraph(cpuGraph, GRAPH_RENDER_MS, "CPU Time");
-        initGraph(gpuGraph, GRAPH_RENDER_MS, "GPU Time");
-
         if (Platform.get() == Platform.MACOSX) {
             glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
             glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
@@ -134,7 +126,6 @@ public final class ExampleFBO extends Demo {
         }
 
         long window = glfwCreateWindow(1000, 600, "NanoVG", NULL, NULL);
-        //window = glfwCreateWindow(1000, 600, "NanoVG", glfwGetPrimaryMonitor(), NULL);
         if (window == NULL) {
             glfwTerminate();
             throw new RuntimeException();
@@ -148,6 +139,7 @@ public final class ExampleFBO extends Demo {
 
         glfwMakeContextCurrent(window);
         GL.createCapabilities();
+        glfwSwapInterval(0);
 
         long vg = nvgCreate(DEMO_MSAA ? 0 : NVG_ANTIALIAS);
         if (vg == NULL) {
@@ -158,7 +150,7 @@ public final class ExampleFBO extends Demo {
         glfwGetWindowSize(window, winWidth, winHeight);
         glfwGetFramebufferSize(window, fbWidth, fbHeight);
         // Calculate pixel ration for hi-dpi devices.
-        float pxRatio = (float)fbWidth.get(0) / (float)winWidth.get(0);
+        float pxRatio = fbWidth.get(0) / (float)winWidth.get(0);
 
         // The image pattern is tiled, set repeat on x and y.
         NVGLUFramebuffer fb = nvgluCreateFramebuffer(vg, (int)(100 * pxRatio), (int)(100 * pxRatio), NVG_IMAGE_REPEATX | NVG_IMAGE_REPEATY);
@@ -168,7 +160,14 @@ public final class ExampleFBO extends Demo {
 
         loadFonts(vg);
 
-        glfwSwapInterval(0);
+        GPUtimer  gpuTimer = new GPUtimer();
+        PerfGraph fps      = new PerfGraph();
+        PerfGraph cpuGraph = new PerfGraph();
+        PerfGraph gpuGraph = new PerfGraph();
+
+        initGraph(fps, GRAPH_RENDER_FPS, "Frame Time");
+        initGraph(cpuGraph, GRAPH_RENDER_MS, "CPU Time");
+        initGraph(gpuGraph, GRAPH_RENDER_MS, "GPU Time");
 
         initGPUTimer(gpuTimer);
 
