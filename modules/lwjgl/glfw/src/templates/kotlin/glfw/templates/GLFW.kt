@@ -486,7 +486,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         "CURSOR"..0x00033001,
         "STICKY_KEYS"..0x00033002,
         "STICKY_MOUSE_BUTTONS"..0x00033003,
-        "LOCK_KEY_MODS"..0x00033004
+        "LOCK_KEY_MODS"..0x00033004,
+        "RAW_MOUSE_MOTION"..0x00033005
     ).javaDocLinks
 
     IntConstant(
@@ -2333,18 +2334,21 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
             """
         )}
 
-        If {@code mode} is #STICKY_KEYS, the value must be either #TRUE to enable sticky keys, or #FALSE to disable it. If sticky keys are
-        enabled, a key press will ensure that #GetKey() returns #PRESS the next time it is called even if the key had been released before the call. This is
-        useful when you are only interested in whether keys have been pressed but not when or in which order.
+        If the {@code mode} is #STICKY_KEYS, the value must be either #TRUE to enable sticky keys, or #FALSE to disable it. If sticky keys are enabled, a key
+        press will ensure that #GetKey() returns #PRESS the next time it is called even if the key had been released before the call. This is useful when you
+        are only interested in whether keys have been pressed but not when or in which order.
 
-        If {@code mode} is #STICKY_MOUSE_BUTTONS, the value must be either #TRUE to enable sticky mouse buttons, or #FALSE to
-        disable it. If sticky mouse buttons are enabled, a mouse button press will ensure that #GetMouseButton() returns #PRESS the next
-        time it is called even if the mouse button had been released before the call. This is useful when you are only interested in whether mouse buttons have
-        been pressed but not when or in which order.
+        If the {@code mode} is #STICKY_MOUSE_BUTTONS, the value must be either #TRUE to enable sticky mouse buttons, or #FALSE to disable it. If sticky mouse
+        buttons are enabled, a mouse button press will ensure that #GetMouseButton() returns #PRESS the next time it is called even if the mouse button had
+        been released before the call. This is useful when you are only interested in whether mouse buttons have been pressed but not when or in which order.
 
-        If {@code mode} is #LOCK_KEY_MODS, the value must be either #TRUE to enable lock key modifier bits, or #FALSE to disable them. If enabled, callbacks
-        that receive modifier bits will also have the #MOD_CAPS_LOCK bit set when the event was generated with Caps Lock on, and the #MOD_NUM_LOCK bit when Num
-        Lock was on.
+        If the {@code mode} is #LOCK_KEY_MODS, the value must be either #TRUE to enable lock key modifier bits, or #FALSE to disable them. If enabled,
+        callbacks that receive modifier bits will also have the #MOD_CAPS_LOCK bit set when the event was generated with Caps Lock on, and the #MOD_NUM_LOCK
+        bit when Num Lock was on.
+
+        If the mode is #RAW_MOUSE_MOTION, the value must be either #TRUE to enable raw (unscaled and unaccelerated) mouse motion when the cursor is disabled,
+        or #FALSE to disable it. If raw motion is not supported, attempting to set this will emit #PLATFORM_ERROR. Call #RawMouseMotionSupported() to check for
+        support.
 
         This function must only be called from the main thread.
         """,
@@ -2354,6 +2358,27 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         int("value", "the new value of the specified input mode"),
 
         since = "GFLW 3.0"
+    )
+
+    intb(
+        "RawMouseMotionSupported",
+        """
+        Returns whether raw mouse motion is supported.
+
+        This function returns whether raw mouse motion is supported on the current system. This status does not change after GLFW has been initialized so you
+        only need to check this once. If you attempt to enable raw motion on a system that does not support it, #PLATFORM_ERROR will be emitted.
+
+        Raw mouse motion is closer to the actual motion of the mouse across a surface. It is not affected by the scaling and acceleration applied to the motion
+        of the desktop cursor. That processing is suitable for a cursor while raw motion is better for controlling for example a 3D camera. Because of this,
+        raw mouse motion is only provided when the cursor is disabled.
+
+        This function must only be called from the main thread.
+        """,
+
+        void(),
+
+        returnDoc = "#TRUE if raw mouse motion is supported on the current machine, or #FALSE otherwise",
+        since = "version 3.3"
     )
 
     charUTF8.const.p(

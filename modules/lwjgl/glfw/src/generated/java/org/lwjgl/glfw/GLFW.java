@@ -451,7 +451,8 @@ public class GLFW {
         GLFW_CURSOR               = 0x33001,
         GLFW_STICKY_KEYS          = 0x33002,
         GLFW_STICKY_MOUSE_BUTTONS = 0x33003,
-        GLFW_LOCK_KEY_MODS        = 0x33004;
+        GLFW_LOCK_KEY_MODS        = 0x33004,
+        GLFW_RAW_MOUSE_MOTION     = 0x33005;
 
     /** Cursor state. */
     public static final int
@@ -748,6 +749,7 @@ public class GLFW {
             PostEmptyEvent                = apiGetFunctionAddress(GLFW, "glfwPostEmptyEvent"),
             GetInputMode                  = apiGetFunctionAddress(GLFW, "glfwGetInputMode"),
             SetInputMode                  = apiGetFunctionAddress(GLFW, "glfwSetInputMode"),
+            RawMouseMotionSupported       = apiGetFunctionAddress(GLFW, "glfwRawMouseMotionSupported"),
             GetKeyName                    = apiGetFunctionAddress(GLFW, "glfwGetKeyName"),
             GetKeyScancode                = apiGetFunctionAddress(GLFW, "glfwGetKeyScancode"),
             GetKey                        = apiGetFunctionAddress(GLFW, "glfwGetKey"),
@@ -3151,7 +3153,7 @@ public class GLFW {
      * <p>This function must only be called from the main thread.</p>
      *
      * @param window the window to query
-     * @param mode   the input mode whose value to return. One of:<br><table><tr><td>{@link #GLFW_CURSOR CURSOR}</td><td>{@link #GLFW_STICKY_KEYS STICKY_KEYS}</td><td>{@link #GLFW_STICKY_MOUSE_BUTTONS STICKY_MOUSE_BUTTONS}</td><td>{@link #GLFW_LOCK_KEY_MODS LOCK_KEY_MODS}</td></tr></table>
+     * @param mode   the input mode whose value to return. One of:<br><table><tr><td>{@link #GLFW_CURSOR CURSOR}</td><td>{@link #GLFW_STICKY_KEYS STICKY_KEYS}</td><td>{@link #GLFW_STICKY_MOUSE_BUTTONS STICKY_MOUSE_BUTTONS}</td><td>{@link #GLFW_LOCK_KEY_MODS LOCK_KEY_MODS}</td><td>{@link #GLFW_RAW_MOUSE_MOTION RAW_MOUSE_MOTION}</td></tr></table>
      *
      * @return the input mode value
      *
@@ -3179,18 +3181,21 @@ public class GLFW {
      * controls.</li>
      * </ul>
      * 
-     * <p>If {@code mode} is {@link #GLFW_STICKY_KEYS STICKY_KEYS}, the value must be either {@link #GLFW_TRUE TRUE} to enable sticky keys, or {@link #GLFW_FALSE FALSE} to disable it. If sticky keys are
-     * enabled, a key press will ensure that {@link #glfwGetKey GetKey} returns {@link #GLFW_PRESS PRESS} the next time it is called even if the key had been released before the call. This is
-     * useful when you are only interested in whether keys have been pressed but not when or in which order.</p>
+     * <p>If the {@code mode} is {@link #GLFW_STICKY_KEYS STICKY_KEYS}, the value must be either {@link #GLFW_TRUE TRUE} to enable sticky keys, or {@link #GLFW_FALSE FALSE} to disable it. If sticky keys are enabled, a key
+     * press will ensure that {@link #glfwGetKey GetKey} returns {@link #GLFW_PRESS PRESS} the next time it is called even if the key had been released before the call. This is useful when you
+     * are only interested in whether keys have been pressed but not when or in which order.</p>
      * 
-     * <p>If {@code mode} is {@link #GLFW_STICKY_MOUSE_BUTTONS STICKY_MOUSE_BUTTONS}, the value must be either {@link #GLFW_TRUE TRUE} to enable sticky mouse buttons, or {@link #GLFW_FALSE FALSE} to
-     * disable it. If sticky mouse buttons are enabled, a mouse button press will ensure that {@link #glfwGetMouseButton GetMouseButton} returns {@link #GLFW_PRESS PRESS} the next
-     * time it is called even if the mouse button had been released before the call. This is useful when you are only interested in whether mouse buttons have
-     * been pressed but not when or in which order.</p>
+     * <p>If the {@code mode} is {@link #GLFW_STICKY_MOUSE_BUTTONS STICKY_MOUSE_BUTTONS}, the value must be either {@link #GLFW_TRUE TRUE} to enable sticky mouse buttons, or {@link #GLFW_FALSE FALSE} to disable it. If sticky mouse
+     * buttons are enabled, a mouse button press will ensure that {@link #glfwGetMouseButton GetMouseButton} returns {@link #GLFW_PRESS PRESS} the next time it is called even if the mouse button had
+     * been released before the call. This is useful when you are only interested in whether mouse buttons have been pressed but not when or in which order.</p>
      * 
-     * <p>If {@code mode} is {@link #GLFW_LOCK_KEY_MODS LOCK_KEY_MODS}, the value must be either {@link #GLFW_TRUE TRUE} to enable lock key modifier bits, or {@link #GLFW_FALSE FALSE} to disable them. If enabled, callbacks
-     * that receive modifier bits will also have the {@link #GLFW_MOD_CAPS_LOCK MOD_CAPS_LOCK} bit set when the event was generated with Caps Lock on, and the {@link #GLFW_MOD_NUM_LOCK MOD_NUM_LOCK} bit when Num
-     * Lock was on.</p>
+     * <p>If the {@code mode} is {@link #GLFW_LOCK_KEY_MODS LOCK_KEY_MODS}, the value must be either {@link #GLFW_TRUE TRUE} to enable lock key modifier bits, or {@link #GLFW_FALSE FALSE} to disable them. If enabled,
+     * callbacks that receive modifier bits will also have the {@link #GLFW_MOD_CAPS_LOCK MOD_CAPS_LOCK} bit set when the event was generated with Caps Lock on, and the {@link #GLFW_MOD_NUM_LOCK MOD_NUM_LOCK}
+     * bit when Num Lock was on.</p>
+     * 
+     * <p>If the mode is {@link #GLFW_RAW_MOUSE_MOTION RAW_MOUSE_MOTION}, the value must be either {@link #GLFW_TRUE TRUE} to enable raw (unscaled and unaccelerated) mouse motion when the cursor is disabled,
+     * or {@link #GLFW_FALSE FALSE} to disable it. If raw motion is not supported, attempting to set this will emit {@link #GLFW_PLATFORM_ERROR PLATFORM_ERROR}. Call {@link #glfwRawMouseMotionSupported RawMouseMotionSupported} to check for
+     * support.</p>
      * 
      * <p>This function must only be called from the main thread.</p>
      *
@@ -3206,6 +3211,30 @@ public class GLFW {
             check(window);
         }
         invokePV(window, mode, value, __functionAddress);
+    }
+
+    // --- [ glfwRawMouseMotionSupported ] ---
+
+    /**
+     * Returns whether raw mouse motion is supported.
+     * 
+     * <p>This function returns whether raw mouse motion is supported on the current system. This status does not change after GLFW has been initialized so you
+     * only need to check this once. If you attempt to enable raw motion on a system that does not support it, {@link #GLFW_PLATFORM_ERROR PLATFORM_ERROR} will be emitted.</p>
+     * 
+     * <p>Raw mouse motion is closer to the actual motion of the mouse across a surface. It is not affected by the scaling and acceleration applied to the motion
+     * of the desktop cursor. That processing is suitable for a cursor while raw motion is better for controlling for example a 3D camera. Because of this,
+     * raw mouse motion is only provided when the cursor is disabled.</p>
+     * 
+     * <p>This function must only be called from the main thread.</p>
+     *
+     * @return {@link #GLFW_TRUE TRUE} if raw mouse motion is supported on the current machine, or {@link #GLFW_FALSE FALSE} otherwise
+     *
+     * @since version 3.3
+     */
+    @NativeType("int")
+    public static boolean glfwRawMouseMotionSupported() {
+        long __functionAddress = Functions.RawMouseMotionSupported;
+        return invokeI(__functionAddress) != 0;
     }
 
     // --- [ glfwGetKeyName ] ---
