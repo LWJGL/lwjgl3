@@ -433,7 +433,9 @@ internal fun CXCursor.parseCallback(header: Header, type: CXType, name: String):
     """val $name = Module.${header.module}.callback {
     ${clang_getResultType(type, CXType.mallocStack(stack)).lwjgl}(
         "$name",
-        ${doc.format("$t$t")}${getFunctionArguments(header.module, type, name, doc, "$t$t", args)}${doc.formatReturnDoc()}
+        ${doc.format("$t$t")}${getFunctionArguments(header.module, type, name, doc, "$t$t", args)},
+
+        nativeType = "$name"${doc.formatReturnDoc()}
     ) {
         documentation = "Instances of this interface may be passed to the #FIXME() method."
     }
