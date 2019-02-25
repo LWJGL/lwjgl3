@@ -104,19 +104,14 @@ class Parameter(
     internal fun isArrayParameter(autoSizeResultOutParams: Int) = nativeType.isArray && (!isAutoSizeResultOut || autoSizeResultOutParams != 1)
 
     internal fun toNativeType(binding: APIBinding?, pointerMode: Boolean = false) =
-        if (binding == null || this === JNI_ENV || nativeType is StructType) {
+        if (binding == null || this === JNI_ENV || nativeType is StructType)
             nativeType.name.let {
-                if (pointerMode && nativeType is StructType) {
-                    if (!it.endsWith('*')) "$it *" else "$it*"
-                } else
-                    it
+                if (pointerMode && nativeType is StructType) "$it *" else it
             }
-        } else {
-            if (nativeType.mapping === PrimitiveMapping.POINTER || nativeType is PointerType<*>)
-                "intptr_t"
-            else
-                nativeType.jniFunctionType
-        }
+        else if (nativeType.mapping === PrimitiveMapping.POINTER || nativeType is PointerType<*>)
+            "intptr_t"
+        else
+            nativeType.jniFunctionType
 
     override fun validate(modifier: ParameterModifier) = modifier.validate(this)
 
