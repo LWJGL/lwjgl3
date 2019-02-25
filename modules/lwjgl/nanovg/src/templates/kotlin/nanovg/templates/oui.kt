@@ -12,6 +12,7 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include "lwjgl_malloc.h"
 #define OUI_IMPLEMENTATION
 #include "oui.h"""")
 
@@ -24,20 +25,17 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
 
         "USERMASK".enum(
             """
-            these bits, starting at bit 24, can be safely assigned by the application, e.g. as item types, other event types, drop targets, etc. they can be
-            set and queried using uiSetFlags() and uiGetFlags()
+            these bits, starting at bit 24, can be safely assigned by the application, e.g. as item types, other event types, drop targets, etc.
+
+            They can be set and queried using #SetFlags() and #GetFlags().
             """,
             0xff000000.i
         ),
-        "ANY".enum("a special mask passed to uiFindItem()", 0xffffffff.i)
+        "ANY".enum("a special mask passed to #FindItem()", 0xffffffff.i)
     )
 
     EnumConstant(
-        """
-        item states as returned by uiGetState()
-
-        ({@code UIitemState})
-        """,
+        "Item states as returned by #GetState(). ({@code UIitemState})",
 
         "COLD".enum("the item is inactive", "0"),
         "HOT".enum("the item is inactive, but the cursor is hovering over this item"),
@@ -45,12 +43,8 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
         "FROZEN".enum("the item is unresponsive")
     )
 
-    EnumConstant(
-        """
-        container flags to pass to uiSetBox()
-
-        ({@code UIboxFlags})
-        """,
+    val UIboxFlags = EnumConstant(
+        "Container flags to pass to #SetBox(). ({@code UIboxFlags})",
 
         "ROW".enum("left to right", "0x002"),
         "COLUMN".enum("top to bottom", "0x003"),
@@ -62,14 +56,10 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
         "MIDDLE".enum("at center of row/column", "0x000"),
         "END".enum("at end of row/column", "0x010"),
         "JUSTIFY".enum("insert spacing to stretch across whole row/column", "0x018")
-    )
+    ).javaDocLinks
 
-    EnumConstant(
-        """
-        child layout flags to pass to uiSetLayout()
-
-        ({@code UIlayoutFlags})
-        """,
+    val UIlayoutFlags = EnumConstant(
+        "Child layout flags to pass to #SetLayout(). ({@code UIlayoutFlags})",
 
         "LEFT".enum("anchor to left item or left side of parent", "0x020"),
         "TOP".enum("anchor to top item or top side of parent", "0x040"),
@@ -83,78 +73,79 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
         "FILL".enum("anchor to all four directions", "0x1e0"),
         "BREAK".enum(
             """
-            when wrapping, put this element on a new line wrapping layout code auto-inserts UI_BREAK flags, drawing routines can read them with uiGetLayout()
+            when wrapping, put this element on a new line.
+
+            Wrapping layout code auto-inserts {@code UI_BREAK} flags, drawing routines can read them with #GetLayout().
             """,
             "0x200"
         )
-    )
+    ).javaDocLinks
 
-    EnumConstant(
-        """
-        event flags
-
-        ({@code UIevent})
-        """,
+    val UIevent = EnumConstant(
+        "Event flags. ({@code UIevent})",
 
         "BUTTON0_DOWN".enum("on button 0 down", "0x0400"),
-        "BUTTON0_UP".enum("on button 0 up when this event has a handler, uiGetState() will return UI_ACTIVE as long as button 0 is down.", "0x0800"),
+        "BUTTON0_UP".enum("on button 0 up when this event has a handler, #GetState() will return #ACTIVE as long as button 0 is down", "0x0800"),
         "BUTTON0_HOT_UP".enum(
             """
-            on button 0 up while item is hovered when this event has a handler, uiGetState() will return UI_ACTIVE when the cursor is hovering the items
-            rectangle; this is the behavior expected for buttons.
+            on button 0 up while item is hovered when this event has a handler, #GetState() will return #ACTIVE when the cursor is hovering the items
+            rectangle; this is the behavior expected for buttons
             """,
             "0x1000"
         ),
         "BUTTON0_CAPTURE".enum(
-            """
-            item is being captured (button 0 constantly pressed); when this event has a handler, uiGetState() will return UI_ACTIVE as long as button 0 is
-            down.
-            """,
+            "item is being captured (button 0 constantly pressed); when this event has a handler, #GetState() will return #ACTIVE as long as button 0 is down",
             "0x2000"
         ),
         "BUTTON2_DOWN".enum("on button 2 down (right mouse button, usually triggers context menu)", "0x4000"),
-        "SCROLL".enum("item has received a scrollwheel event the accumulated wheel offset can be queried with uiGetScroll()", "0x8000"),
-        "KEY_DOWN".enum("item is focused and has received a key-down event the respective key can be queried using uiGetKey() and uiGetModifier()", "0x10000"),
-        "KEY_UP".enum("item is focused and has received a key-up event the respective key can be queried using uiGetKey() and uiGetModifier()", "0x20000"),
-        "CHAR".enum("item is focused and has received a character event the respective character can be queried using uiGetKey()", "0x40000")
-    )
+        "SCROLL".enum("item has received a scrollwheel event the accumulated wheel offset can be queried with #GetScroll()", "0x8000"),
+        "KEY_DOWN".enum("item is focused and has received a key-down event the respective key can be queried using #GetKey() and #GetModifier()", "0x10000"),
+        "KEY_UP".enum("item is focused and has received a key-up event the respective key can be queried using #GetKey() and #GetModifier()", "0x20000"),
+        "CHAR".enum("item is focused and has received a character event the respective character can be queried using #GetKey()", "0x40000")
+    ).javaDocLinks
 
     UIcontext.p(
         "CreateContext",
         """
-        create a new UI context; call uiMakeCurrent() to make this context the current context. The context is managed by the client and must be released using
-        uiDestroyContext() item_capacity is the maximum of number of items that can be declared. buffer_capacity is the maximum total size of bytes that can be
-        allocated using uiAllocHandle(); you may pass 0 if you don't need to allocate handles. 4096 and (1 &lt; &lt;20) are good starting values.
+        Creates a new UI context; call #MakeCurrent() to make this context the current context.
+
+        The context is managed by the client and must be released using #DestroyContext().
         """,
 
-        unsigned_int("item_capacity", ""),
-        unsigned_int("buffer_capacity", "")
+        unsigned_int("item_capacity", "the maximum number of items that can be declared. 4096 is a good starting value."),
+        unsigned_int(
+            "buffer_capacity",
+            """
+            the maximum total size of bytes that can be allocated using #AllocHandle(); you may pass 0 if you don't need to allocate handles. {@code (1<<20)}
+            is a good starting value.
+            """
+        )
     )
 
     void(
         "MakeCurrent",
-        "select an UI context as the current context; a context must always be selected before using any of the other UI functions",
+        "Selects an UI context as the current context; a context must always be selected before using any of the other UI functions.",
 
-        UIcontext.p("ctx", "")
+        nullable..UIcontext.p("ctx", "")
     )
 
     void(
         "DestroyContext",
-        "release the memory of an UI context created with uiCreateContext(); if the context is the current context, the current context will be set to NULL",
+        "Releases the memory of an UI context created with #CreateContext(); if the context is the current context, the current context will be set to #NULL.",
 
         UIcontext.p("ctx", "")
     )
 
     UIcontext.p(
         "GetContext",
-        "returns the currently selected context or NULL",
+        "Returns the currently selected context or #NULL.",
 
         void()
     )
 
     void(
         "SetCursor",
-        "sets the current cursor position (usually belonging to a mouse) to the screen coordinates at (x,y)",
+        "Sets the current cursor position (usually belonging to a mouse) to the screen coordinates at {@code (x,y)}.",
 
         int("x", ""),
         int("y", "")
@@ -162,57 +153,53 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
 
     UIvec2(
         "GetCursor",
-        "returns the current cursor position in screen coordinates as set by uiSetCursor()",
+        "Returns the current cursor position in screen coordinates as set by #SetCursor().",
 
         void()
     )
 
     UIvec2(
         "GetCursorDelta",
-        "returns the offset of the cursor relative to the last call to uiProcess()",
+        "Returns the offset of the cursor relative to the last call to #Process().",
 
         void()
     )
 
     UIvec2(
         "GetCursorStart",
-        "returns the beginning point of a drag operation.",
+        "Returns the beginning point of a drag operation.",
 
         void()
     )
 
     UIvec2(
         "GetCursorStartDelta",
-        "returns the offset of the cursor relative to the beginning point of a drag operation.",
+        "Returns the offset of the cursor relative to the beginning point of a drag operation.",
 
         void()
     )
 
     void(
         "SetButton",
-        """
-        sets a mouse or gamepad button as pressed/released button is in the range 0..63 and maps to an application defined input source. mod is an application
-        defined set of flags for modifier keys enabled is 1 for pressed, 0 for released
-        """,
+        "Sets a mouse or gamepad button as pressed/released button is in the range {@code 0..63} and maps to an application defined input source.",
 
         unsigned_int("button", ""),
-        unsigned_int("mod", ""),
-        intb("enabled", "")
+        unsigned_int("mod", "an application defined set of flags for modifier keys"),
+        intb("enabled", "is 1 for pressed, 0 for released")
     )
 
-    int(
+    intb(
         "GetButton",
-        """
-        returns the current state of an application dependent input button as set by uiSetButton(). the function returns 1 if the button has been set to
-        pressed, 0 for released.
-        """,
+        "Returns the current state of an application dependent input button as set by #SetButton().",
 
-        unsigned_int("button", "")
+        unsigned_int("button", ""),
+
+        returnDoc = "1 if the button has been set to pressed, 0 for released"
     )
 
     int(
         "GetClicks",
-        "returns the number of chained clicks; 1 is a single click, 2 is a double click, etc.",
+        "Returns the number of chained clicks; 1 is a single click, 2 is a double click, etc.",
 
         void()
     )
@@ -220,20 +207,22 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
     void(
         "SetKey",
         """
-        sets a key as down/up; the key can be any application defined keycode mod is an application defined set of flags for modifier keys enabled is 1 for key
-        down, 0 for key up all key events are being buffered until the next call to uiProcess()
+        Sets a key as down/up; the key can be any application defined {@code keycode}.
+
+        All key events are being buffered until the next call to #Process().
         """,
 
         unsigned_int("key", ""),
-        unsigned_int("mod", ""),
-        intb("enabled", "")
+        unsigned_int("mod", "an application defined set of flags for modifier keys"),
+        intb("enabled", "1 for key down, 0 for key up")
     )
 
     void(
         "SetChar",
         """
-        sends a single character for text input; the character is usually in the unicode range, but can be application defined. all char events are being
-        buffered until the next call to uiProcess()
+        Sends a single character for text input; the character is usually in the unicode range, but can be application defined.
+
+        All char events are being buffered until the next call to #Process().
         """,
 
         unsigned_int("value", "")
@@ -241,7 +230,11 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
 
     void(
         "SetScroll",
-        "accumulates scroll wheel offsets for the current frame all offsets are being accumulated until the next call to uiProcess()",
+        """
+        Accumulates scroll wheel offsets for the current frame.
+
+        All offsets are being accumulated until the next call to #Process().
+        """,
 
         int("x", ""),
         int("y", "")
@@ -249,7 +242,7 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
 
     UIvec2(
         "GetScroll",
-        "returns the currently accumulated scroll wheel offsets for this frame",
+        "Returns the currently accumulated scroll wheel offsets for this frame",
 
         void()
     )
@@ -257,9 +250,12 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
     void(
         "BeginLayout",
         """
-        clear the item buffer; uiBeginLayout() should be called before the first UI declaration for this frame to avoid concatenation of the same UI multiple
-        times. After the call, all previously declared item IDs are invalid, and all application dependent context data has been freed. uiBeginLayout() must be
-        followed by uiEndLayout().
+        Clears the item buffer.
+
+        {@code uiBeginLayout()} should be called before the first UI declaration for this frame to avoid concatenation of the same UI multiple times. After the
+        call, all previously declared item IDs are invalid, and all application dependent context data has been freed.
+
+        {@code uiBeginLayout()} must be followed by #EndLayout().
         """,
 
         void()
@@ -268,9 +264,12 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
     void(
         "EndLayout",
         """
-        layout all added items starting from the root item 0. after calling uiEndLayout(), no further modifications to the item tree should be done until the
-        next call to uiBeginLayout(). It is safe to immediately draw the items after a call to uiEndLayout(). this is an O(N) operation for N = number of
-        declared items.
+        Layout all added items starting from the root item 0.
+
+        After calling {@code uiEndLayout()}, no further modifications to the item tree should be done until the next call to #BeginLayout(). It is safe to
+        immediately draw the items after a call to {@code uiEndLayout()}.
+
+        This is an {@code O(N)} operation for {@code N = number of declared items}.
         """,
 
         void()
@@ -278,7 +277,7 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
 
     void(
         "UpdateHotItem",
-        "update the current hot item; this only needs to be called if items are kept for more than one frame and uiEndLayout() is not called",
+        "Updates the current hot item; this only needs to be called if items are kept for more than one frame and #EndLayout() is not called.",
 
         void()
     )
@@ -286,20 +285,29 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
     void(
         "Process",
         """
-        update the internal state according to the current cursor position and button states, and call all registered handlers. timestamp is the time in
-        milliseconds relative to the last call to uiProcess() and is used to estimate the threshold for double-clicks after calling uiProcess(), no further
-        modifications to the item tree should be done until the next call to uiBeginLayout(). Items should be drawn before a call to uiProcess() this is an
-        O(N) operation for N = number of declared items.
+        Updates the internal state according to the current cursor position and button states, and call all registered handlers.
+
+        No further modifications to the item tree should be done until the next call to #BeginLayout(). Items should be drawn before a call to
+        {@code uiProcess()}.
+
+        This is an {@code O(N)} operation for {@code N = number of declared items}.
         """,
 
-        int("timestamp", "")
+        int(
+            "timestamp",
+            """
+            the time in milliseconds relative to the last call to {@code uiProcess()} and is used to estimate the threshold for double-clicks after calling
+            {@code uiProcess()}.
+            """
+        )
     )
 
     void(
         "ClearState",
         """
-        reset the currently stored hot/active etc. handles; this should be called when a re-declaration of the UI changes the item indices, to avoid state
-        related glitches because item identities have changed.
+        Resets the currently stored hot/active etc. handles.
+
+        This should be called when a re-declaration of the UI changes the item indices, to avoid state related glitches because item identities have changed.
         """,
 
         void()
@@ -307,7 +315,7 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
 
     int(
         "Item",
-        "create a new UI item and return the new items ID.",
+        "Creates a new UI item and return the new item's ID.",
 
         void()
     )
@@ -315,9 +323,11 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
     void(
         "SetFrozen",
         """
-        set an items state to frozen; the UI will not recurse into frozen items when searching for hot or active items; subsequently, frozen items and their
-        child items will not cause mouse event notifications. The frozen state is not applied recursively; uiGetState() will report UI_COLD for child items.
-        Upon encountering a frozen item, the drawing routine needs to handle rendering of child items appropriately. see example.cpp for a demonstration.
+        Sets an items state to frozen.
+
+        The UI will not recurse into frozen items when searching for hot or active items; subsequently, frozen items and their child items will not cause mouse
+        event notifications. The frozen state is not applied recursively; #GetState() will report #COLD for child items. Upon encountering a frozen item, the
+        drawing routine needs to handle rendering of child items appropriately.
         """,
 
         int("item", ""),
@@ -326,17 +336,18 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
 
     void(
         "SetHandle",
-        "set the application-dependent handle of an item. handle is an application defined 64-bit handle. If handle is NULL, the item will not be interactive.",
+        "Sets the application-dependent handle of an item.",
 
         int("item", ""),
-        nullable..opaque_p("handle", "")
+        nullable..opaque_p("handle", "an application defined 64-bit handle. If #NULL, the item will not be interactive.")
     )
 
     void.p(
         "AllocHandle",
         """
-        allocate space for application-dependent context data and assign it as the handle to the item. The memory of the pointer is managed by the UI context
-        and released upon the next call to uiBeginLayout()
+        Allocates space for application-dependent context data and assign it as the handle to the item.
+
+        The memory of the pointer is managed by the UI context and released upon the next call to #BeginLayout().
         """,
 
         int("item", ""),
@@ -345,52 +356,61 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
 
     void(
         "SetHandler",
-        "set the global handler callback for interactive items. the handler will be called for each item whose event flags are set using uiSetEvents.",
+        """
+        Sets the global handler callback for interactive items.
+
+        The handler will be called for each item whose event flags are set using #SetEvents().
+        """,
 
         UIhandler("handler", "")
     )
 
     void(
         "SetEvents",
-        "flags is a combination of UI_EVENT_* and designates for which events the handler should be called.",
+        "",
 
         int("item", ""),
-        unsigned_int("flags", "")
+        unsigned_int("flags", "designates for which events the handler should be called", UIevent, LinkMode.BITFIELD)
     )
 
     void(
         "SetFlags",
-        "flags is a user-defined set of flags defined by UI_USERMASK.",
+        "",
 
         int("item", ""),
-        unsigned_int("flags", "")
+        unsigned_int("flags", "a user-defined set of flags defined by #USERMASK")
     )
 
     int(
         "Insert",
         """
-        assign an item to a container. an item ID of 0 refers to the root item. the function returns the child item ID if the container has already added
-        items, the function searches for the last item and calls uiAppend() on it, which is an O(N) operation for N siblings. it is usually more efficient to
-        call uiInsert() for the first child, then chain additional siblings using uiAppend().
+        Assigns an item to a container.
+
+        An item ID of 0 refers to the root item. The function searches for the last item and calls #Append() on it, which is an {@code O(N)} operation for
+        {@code N} siblings. It is usually more efficient to call {@code uiInser}t() for the first child, then chain additional siblings using
+        {@code uiAppend()}.
         """,
 
         int("item", ""),
-        int("child", "")
+        int("child", ""),
+
+        returnDoc = "the child item ID if the container has already added items"
     )
 
     int(
         "Append",
-        "assign an item to the same container as another item sibling is inserted after item.",
+        "Assigns an item to the same container as another item.",
 
         int("item", ""),
-        int("sibling", "")
+        int("sibling", "inserted after {@code item}")
     )
 
     int(
         "InsertBack",
         """
-        insert child into container item like uiInsert(), but prepend it to the first child item, effectively putting it in the background. it is efficient to
-        call uiInsertBack() repeatedly in cases where drawing or layout order doesn't matter.
+        Inserts child into container item like #Insert(), but prepend it to the first child item, effectively putting it in the background.
+
+        It is efficient to call {@code uiInsertBack()} repeatedly in cases where drawing or layout order doesn't matter.
         """,
 
         int("item", ""),
@@ -399,7 +419,7 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
 
     int(
         "InsertFront",
-        "same as uiInsert()",
+        "Same as #Insert().",
 
         int("item", ""),
         int("child", "")
@@ -407,7 +427,11 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
 
     void(
         "SetSize",
-        "set the size of the item; a size of 0 indicates the dimension to be dynamic; if the size is set, the item can not expand beyond that size.",
+        """
+        Sets the size of the item.
+
+        A size of 0 indicates the dimension to be dynamic; if the size is set, the item can not expand beyond that size.
+        """,
 
         int("item", ""),
         int("w", ""),
@@ -416,25 +440,26 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
 
     void(
         "SetLayout",
-        "set the anchoring behavior of the item to one or multiple UIlayoutFlags",
+        "Sets the anchoring behavior of the item to one or multiple {@code UIlayoutFlags}.",
 
         int("item", ""),
-        unsigned_int("flags", "")
+        unsigned_int("flags", "", UIlayoutFlags, LinkMode.BITFIELD)
     )
 
     void(
         "SetBox",
-        "set the box model behavior of the item to one or multiple UIboxFlags",
+        "Sets the box model behavior of the item to one or multiple {@code UIboxFlags}.",
 
         int("item", ""),
-        unsigned_int("flags", "")
+        unsigned_int("flags", "", UIboxFlags, LinkMode.BITFIELD)
     )
 
     void(
         "SetMargins",
         """
-        set the left, top, right and bottom margins of an item; when the item is anchored to the parent or another item, the margin controls the distance from
-        the neighboring element.
+        Sets the left, top, right and bottom margins of an item.
+
+        When the item is anchored to the parent or another item, the margin controls the distance from the neighboring element.
         """,
 
         int("item", ""),
@@ -446,38 +471,43 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
 
     void(
         "Focus",
-        "set item as recipient of all keyboard events; if item is -1, no item will be focused.",
+        "Sets item as recipient of all keyboard events.",
 
-        int("item", "")
+        int("item", "if -1, no item will be focused")
     )
 
     int(
         "FirstChild",
         """
-        returns the first child item of a container item. If the item is not a container or does not contain any items, -1 is returned. if item is 0, the first
-        child item of the root item will be returned.
+        Returns the first child item of a container item.
+
+        If the item is not a container or does not contain any items, -1 is returned.
+        """,
+
+        int("item", "if 0, the first child item of the root item will be returned")
+    )
+
+    int(
+        "NextSibling",
+        """
+        Returns an items next sibling in the list of the parent containers children.
+
+        If {@code item} is 0 or the item is the last child item, -1 will be returned.
         """,
 
         int("item", "")
     )
 
     int(
-        "NextSibling",
-        "returns an items next sibling in the list of the parent containers children. if item is 0 or the item is the last child item, -1 will be returned.",
-
-        int("item", "")
-    )
-
-    int(
         "GetItemCount",
-        "return the total number of allocated items",
+        "Returns the total number of allocated items",
 
         void()
     )
 
     unsigned_int(
         "GetAllocSize",
-        "return the total bytes that have been allocated by uiAllocHandle()",
+        "Returns the total bytes that have been allocated by #AllocHandle()",
 
         void()
     )
@@ -485,8 +515,9 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
     UIitemState(
         "GetState",
         """
-        return the current state of the item. This state is only valid after a call to uiProcess(). The returned value is one of UI_COLD, UI_HOT, UI_ACTIVE,
-        UI_FROZEN.
+        Returns the current state of the item.
+
+        This state is only valid after a call to #Process(). The returned value is one of #COLD, #HOT, #ACTIVE, #FROZEN.
         """,
 
         int("item", "")
@@ -494,21 +525,21 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
 
     opaque_p(
         "GetHandle",
-        "return the application-dependent handle of the item as passed to uiSetHandle() or uiAllocHandle().",
+        "Returns the application-dependent handle of the item as passed to #SetHandle() or #AllocHandle().",
 
         int("item", "")
     )
 
     int(
         "GetHotItem",
-        "return the item that is currently under the cursor or -1 for none",
+        "Returns the item that is currently under the cursor or -1 for none.",
 
         void()
     )
 
     int(
         "GetFocusedItem",
-        "return the item that is currently focused or -1 for none",
+        "Returns the item that is currently focused or -1 for none.",
 
         void()
     )
@@ -516,9 +547,11 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
     int(
         "FindItem",
         """
-        returns the topmost item containing absolute location (x,y), starting with item as parent, using a set of flags and masks as filter: if both flags and
-        mask are UI_ANY, the first topmost item is returned. if mask is UI_ANY, the first topmost item matching *any* of flags is returned. otherwise the first
-        item matching (item.flags & flags) == mask is returned. you may combine box, layout, event and user flags. frozen items will always be ignored.
+        Returns the topmost item containing absolute location {@code (x,y)}, starting with {@code item} as parent, using a set of flags and masks as filter.
+
+        If both {@code flags} and {@code mask} are #ANY, the first topmost item is returned. If {@code mask} is #ANY, the first topmost item matching
+        <em>any</em> of flags is returned. otherwise the first item matching {@code (item.flags & flags) == mask} is returned. You may combine box, layout,
+        event and user flags. Frozen items will always be ignored.
         """,
 
         int("item", ""),
@@ -530,35 +563,35 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
 
     UIhandler(
         "GetHandler",
-        "return the handler callback as passed to uiSetHandler()",
+        "Returns the handler callback as passed to #SetHandler()",
 
         void()
     )
 
     unsigned_int(
         "GetEvents",
-        "return the event flags for an item as passed to uiSetEvents()",
+        "Returns the event flags for an item as passed to #SetEvents()",
 
         int("item", "")
     )
 
     unsigned_int(
         "GetFlags",
-        "return the user-defined flags for an item as passed to uiSetFlags()",
+        "Returns the user-defined flags for an item as passed to #SetFlags()",
 
         int("item", "")
     )
 
     unsigned_int(
         "GetKey",
-        "when handling a KEY_DOWN/KEY_UP event: the key that triggered this event",
+        "When handling a {@code KEY_DOWN/KEY_UP} event: the key that triggered this event.",
 
         void()
     )
 
     unsigned_int(
         "GetModifier",
-        "when handling a keyboard or mouse event: the active modifier keys",
+        "When handling a keyboard or mouse event: the active modifier keys.",
 
         void()
     )
@@ -566,16 +599,17 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
     UIrect(
         "GetRect",
         """
-        returns the items layout rectangle in absolute coordinates. If uiGetRect() is called before uiEndLayout(), the values of the returned rectangle are
-        undefined.
+        Returns the items layout rectangle in absolute coordinates.
+
+        If {@code uiGetRect()} is called before #EndLayout(), the values of the returned rectangle are undefined.
         """,
 
         int("item", "")
     )
 
-    int(
+    intb(
         "Contains",
-        "returns 1 if an items absolute rectangle contains a given coordinate otherwise 0",
+        "Returns 1 if an items absolute rectangle contains a given coordinate, otherwise 0.",
 
         int("item", ""),
         int("x", ""),
@@ -584,56 +618,56 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
 
     int(
         "GetWidth",
-        "return the width of the item as set by uiSetSize()",
+        "Returns the width of the item as set by #SetSize().",
 
         int("item", "")
     )
 
     int(
         "GetHeight",
-        "return the height of the item as set by uiSetSize()",
+        "Return the height of the item as set by #SetSize().",
 
         int("item", "")
     )
 
     unsigned_int(
         "GetLayout",
-        "return the anchoring behavior as set by uiSetLayout()",
+        "Returns the anchoring behavior as set by #SetLayout().",
 
         int("item", "")
     )
 
     unsigned_int(
         "GetBox",
-        "return the box model as set by uiSetBox()",
+        "Returns the box model as set by #SetBox().",
 
         int("item", "")
     )
 
     short(
         "GetMarginLeft",
-        "return the left margin of the item as set with uiSetMargins()",
+        "Returns the left margin of the item as set with #SetMargins().",
 
         int("item", "")
     )
 
     short(
         "GetMarginTop",
-        "return the top margin of the item as set with uiSetMargins()",
+        "Returns the top margin of the item as set with #SetMargins().",
 
         int("item", "")
     )
 
     short(
         "GetMarginRight",
-        "return the right margin of the item as set with uiSetMargins()",
+        "Returns the right margin of the item as set with #SetMargins().",
 
         int("item", "")
     )
 
     short(
         "GetMarginDown",
-        "return the bottom margin of the item as set with uiSetMargins()",
+        "Returns the bottom margin of the item as set with #SetMargins().",
 
         int("item", "")
     )
@@ -641,9 +675,9 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
     int(
         "RecoverItem",
         """
-        when uiBeginLayout() is called, the most recently declared items are retained. when uiEndLayout() completes, it matches the old item hierarchy to the
-        new one and attempts to map old items to new items as well as possible. when passed an item Id from the previous frame, uiRecoverItem() returns the
-        items new assumed Id, or -1 if the item could not be mapped. it is valid to pass -1 as item.
+        When #BeginLayout() is called, the most recently declared items are retained. When #EndLayout() completes, it matches the old item hierarchy to the new
+        one and attempts to map old items to new items as well as possible. When passed an item Id from the previous frame, {@code uiRecoverItem()} returns the
+        item's new assumed Id, or -1 if the item could not be mapped. It is valid to pass -1 as item.
         """,
 
         int("olditem", "")
@@ -652,9 +686,9 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
     void(
         "RemapItem",
         """
-        in cases where it is important to recover old state over changes in the view, and the built-in remapping fails, the UI declaration can manually remap
-        old items to new IDs in cases where e.g. the previous item ID has been temporarily saved; uiRemapItem() would then be called after creating the new
-        item using uiItem().
+        In cases where it is important to recover old state over changes in the view, and the built-in remapping fails, the UI declaration can manually remap
+        old items to new IDs in cases where e.g. the previous item ID has been temporarily saved; {@code uiRemapItem()} would then be called after creating the
+        new item using #Item().
         """,
 
         int("olditem", ""),
@@ -663,7 +697,7 @@ val oui = "OUI".nativeClass(Module.NANOVG, prefix = "UI") {
 
     int(
         "GetLastItemCount",
-        "returns the number if items that have been allocated in the last frame",
+        "Returns the number if items that have been allocated in the last frame.",
 
         void()
     )

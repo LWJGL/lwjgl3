@@ -946,16 +946,16 @@ UIcontext *uiCreateContext(
         unsigned int item_capacity,
         unsigned int buffer_capacity) {
     assert(item_capacity);
-    UIcontext *ctx = (UIcontext *)malloc(sizeof(UIcontext));
+    UIcontext *ctx = (UIcontext *)org_lwjgl_malloc(sizeof(UIcontext));
     memset(ctx, 0, sizeof(UIcontext));
     ctx->item_capacity = item_capacity;
     ctx->buffer_capacity = buffer_capacity;
     ctx->stage = UI_STAGE_PROCESS;
-    ctx->items = (UIitem *)malloc(sizeof(UIitem) * item_capacity);
-    ctx->last_items = (UIitem *)malloc(sizeof(UIitem) * item_capacity);
-    ctx->item_map = (int *)malloc(sizeof(int) * item_capacity);
+    ctx->items = (UIitem *)org_lwjgl_malloc(sizeof(UIitem) * item_capacity);
+    ctx->last_items = (UIitem *)org_lwjgl_malloc(sizeof(UIitem) * item_capacity);
+    ctx->item_map = (int *)org_lwjgl_malloc(sizeof(int) * item_capacity);
     if (buffer_capacity) {
-        ctx->data = (unsigned char *)malloc(buffer_capacity);
+        ctx->data = (unsigned char *)org_lwjgl_malloc(buffer_capacity);
     }
 
     UIcontext *oldctx = ui_context;
@@ -973,11 +973,11 @@ void uiMakeCurrent(UIcontext *ctx) {
 void uiDestroyContext(UIcontext *ctx) {
     if (ui_context == ctx)
         uiMakeCurrent(NULL);
-    free(ctx->items);
-    free(ctx->last_items);
-    free(ctx->item_map);
-    free(ctx->data);
-    free(ctx);
+    org_lwjgl_free(ctx->items);
+    org_lwjgl_free(ctx->last_items);
+    org_lwjgl_free(ctx->item_map);
+    org_lwjgl_free(ctx->data);
+    org_lwjgl_free(ctx);
 }
 
 OUI_EXPORT UIcontext *uiGetContext() {

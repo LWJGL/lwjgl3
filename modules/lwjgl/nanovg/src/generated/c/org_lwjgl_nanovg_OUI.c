@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include "lwjgl_malloc.h"
 #define OUI_IMPLEMENTATION
 #include "oui.h"
 
@@ -21,13 +22,13 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_nanovg_OUI_uiCreateContext(JNIEnv *__env,
     return JavaCritical_org_lwjgl_nanovg_OUI_uiCreateContext(item_capacity, buffer_capacity);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_nanovg_OUI_nuiMakeCurrent(jlong ctxAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_nanovg_OUI_uiMakeCurrent(jlong ctxAddress) {
     UIcontext *ctx = (UIcontext *)(intptr_t)ctxAddress;
     uiMakeCurrent(ctx);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_OUI_nuiMakeCurrent(JNIEnv *__env, jclass clazz, jlong ctxAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_OUI_uiMakeCurrent(JNIEnv *__env, jclass clazz, jlong ctxAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_nanovg_OUI_nuiMakeCurrent(ctxAddress);
+    JavaCritical_org_lwjgl_nanovg_OUI_uiMakeCurrent(ctxAddress);
 }
 
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_nanovg_OUI_nuiDestroyContext(jlong ctxAddress) {
@@ -95,12 +96,12 @@ JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_OUI_nuiSetButton(JNIEnv *__env, jcl
     JavaCritical_org_lwjgl_nanovg_OUI_nuiSetButton(button, mod, enabled);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_nanovg_OUI_uiGetButton(jint button) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_nanovg_OUI_nuiGetButton(jint button) {
     return (jint)uiGetButton((unsigned int)button);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_nanovg_OUI_uiGetButton(JNIEnv *__env, jclass clazz, jint button) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_nanovg_OUI_nuiGetButton(JNIEnv *__env, jclass clazz, jint button) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_nanovg_OUI_uiGetButton(button);
+    return JavaCritical_org_lwjgl_nanovg_OUI_nuiGetButton(button);
 }
 
 JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_nanovg_OUI_uiGetClicks(void) {
@@ -433,12 +434,12 @@ JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_OUI_nuiGetRect(JNIEnv *__env, jclas
     JavaCritical_org_lwjgl_nanovg_OUI_nuiGetRect(item, __result);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_nanovg_OUI_uiContains(jint item, jint x, jint y) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_nanovg_OUI_nuiContains(jint item, jint x, jint y) {
     return (jint)uiContains(item, x, y);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_nanovg_OUI_uiContains(JNIEnv *__env, jclass clazz, jint item, jint x, jint y) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_nanovg_OUI_nuiContains(JNIEnv *__env, jclass clazz, jint item, jint x, jint y) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_nanovg_OUI_uiContains(item, x, y);
+    return JavaCritical_org_lwjgl_nanovg_OUI_nuiContains(item, x, y);
 }
 
 JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_nanovg_OUI_uiGetWidth(jint item) {
