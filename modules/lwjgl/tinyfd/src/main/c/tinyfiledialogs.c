@@ -1343,6 +1343,14 @@ name = 'txt_input' value = '' style = 'float:left;width:100%' ><BR>\n\
             return NULL ;
         }
 
+        // LWJGL: skip \r\n
+        size_t len = wcslen(lBuff);
+        if (2 <= len && lBuff[len - 2] == '\r') {
+            lBuff[len - 2] = 0;
+        } else if (1 <= len && lBuff[len - 1] == '\n') {
+            lBuff[len - 1] = 0;
+        }
+
         /* wprintf( "lBuff+1: %ls\n" , lBuff+1 ) ; */
 #ifdef TINYFD_NOCCSUNICODE
 		return lBuff + 2;
