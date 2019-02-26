@@ -91,6 +91,7 @@ This script is included in /config/build-definitions.xml.
                 <or>
                     <isfalse value="${binding.stb}"/>
                     <and>
+                        <isfalse value="${binding.bgfx}"/>
                         <isfalse value="${binding.opengl}"/>
                         <isfalse value="${binding.opengles}"/>
                     </and>
