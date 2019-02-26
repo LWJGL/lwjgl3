@@ -844,7 +844,7 @@
             <srcfile/>
 
             <arg value="s3://build.lwjgl.org/${build.type}/${platform.remote}/${build.arch}/"/>
-            <arg line='--acl public-read --storage-class REDUCED_REDUNDANCY --cache-control "public, must-revalidate, proxy-revalidate, max-age=0"'/>
+            <arg line='--acl public-read --cache-control "public, must-revalidate, proxy-revalidate, max-age=0"'/>
 
             <fileset dir=".">
                 <include name="${lib}/${libraries}"/>
