@@ -57,7 +57,7 @@ val OES_texture_3D = "OESTexture3D".nativeClassGLES("OES_texture_3D", postfix = 
         GLenum("type", ""),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..PIXEL_UNPACK_BUFFER..nullable..void.const.p("pixels", "")
+        )..Unsafe..RawPointer..nullable..void.const.p("pixels", "")
     )
 
     void(
@@ -76,7 +76,7 @@ val OES_texture_3D = "OESTexture3D".nativeClassGLES("OES_texture_3D", postfix = 
         GLenum("type", ""),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..PIXEL_UNPACK_BUFFER..void.const.p("pixels", "")
+        )..Unsafe..RawPointer..void.const.p("pixels", "")
     )
 
     void(
@@ -106,7 +106,7 @@ val OES_texture_3D = "OESTexture3D".nativeClassGLES("OES_texture_3D", postfix = 
         GLsizei("depth", ""),
         GLint("border", ""),
         AutoSize("data")..GLsizei("imageSize", ""),
-        PIXEL_UNPACK_BUFFER..nullable..void.const.p("data", "")
+        RawPointer..nullable..void.const.p("data", "")
     )
 
     void(
@@ -123,7 +123,7 @@ val OES_texture_3D = "OESTexture3D".nativeClassGLES("OES_texture_3D", postfix = 
         GLsizei("depth", ""),
         GLenum("format", ""),
         AutoSize("data")..GLsizei("imageSize", ""),
-        PIXEL_UNPACK_BUFFER..void.const.p("data", "")
+        RawPointer..void.const.p("data", "")
     )
 
     void(

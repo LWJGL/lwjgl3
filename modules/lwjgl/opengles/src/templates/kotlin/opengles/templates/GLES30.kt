@@ -360,7 +360,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
         GLuint("end", ""),
         AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei("count", ""),
         AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum("type", ""),
-        ELEMENT_ARRAY_BUFFER..void.const.p("indices", "")
+        RawPointer..void.const.p("indices", "")
     )
 
     void(
@@ -378,7 +378,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
         GLenum("type", ""),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..PIXEL_UNPACK_BUFFER..nullable..void.const.p("pixels", "")
+        )..Unsafe..RawPointer..nullable..void.const.p("pixels", "")
     )
 
     void(
@@ -397,7 +397,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
         GLenum("type", ""),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..PIXEL_UNPACK_BUFFER..void.const.p("pixels", "")
+        )..Unsafe..RawPointer..void.const.p("pixels", "")
     )
 
     void(
@@ -427,7 +427,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
         GLsizei("depth", ""),
         GLint("border", ""),
         AutoSize("data")..GLsizei("imageSize", ""),
-        PIXEL_UNPACK_BUFFER..nullable..void.const.p("data", "")
+        RawPointer..nullable..void.const.p("data", "")
     )
 
     void(
@@ -444,7 +444,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
         GLsizei("depth", ""),
         GLenum("format", ""),
         AutoSize("data")..GLsizei("imageSize", ""),
-        PIXEL_UNPACK_BUFFER..void.const.p("data", "")
+        RawPointer..void.const.p("data", "")
     )
 
     void(
@@ -751,7 +751,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
         GLsizei("stride", ""),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT
-        )..Unsafe..ARRAY_BUFFER..void.const.p("pointer", "")
+        )..Unsafe..RawPointer..void.const.p("pointer", "")
     )
 
     void(
@@ -1036,7 +1036,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
         GLenum("mode", ""),
         AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei("count", ""),
         AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum("type", ""),
-        ELEMENT_ARRAY_BUFFER..void.const.p("indices", ""),
+        RawPointer..void.const.p("indices", ""),
         GLsizei("instancecount", "")
     )
 

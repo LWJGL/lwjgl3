@@ -925,7 +925,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         GLfloat("yOrig", "the bitmap origin y coordinate"),
         GLfloat("xInc", "the x increment added to the raster position"),
         GLfloat("yInc", "the y increment added to the raster position"),
-        Check("((w + 7) >> 3) * h")..PIXEL_UNPACK_BUFFER..nullable..GLubyte.const.p("data", "the buffer containing the bitmap data.")
+        Check("((w + 7) >> 3) * h")..RawPointer..nullable..GLubyte.const.p("data", "the buffer containing the bitmap data.")
     )
 
     GL11C reuse "BlendFunc"
@@ -1076,7 +1076,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
             "#BYTE #UNSIGNED_BYTE #SHORT #UNSIGNED_SHORT #INT #UNSIGNED_INT #HALF_FLOAT #FLOAT #DOUBLE #UNSIGNED_INT_2_10_10_10_REV #INT_2_10_10_10_REV"
         ),
         GLsizei("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-        ARRAY_BUFFER..MultiType(
+        RawPointer..MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
         )..Unsafe..void.const.p("pointer", "the color array data")
     )
@@ -1141,7 +1141,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         GLenum("type", "the pixel data type", PIXEL_DATA_TYPES),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..PIXEL_UNPACK_BUFFER..void.const.p("pixels", "the pixel data")
+        )..Unsafe..RawPointer..void.const.p("pixels", "the pixel data")
     )
 
     DeprecatedGL..void(
@@ -1171,7 +1171,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         "Specifies the location and organization of an edge flag array.",
 
         GLsizei("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-        Unsafe..ARRAY_BUFFER..GLboolean.const.p("pointer", "the edge flag array data")
+        Unsafe..RawPointer..GLboolean.const.p("pointer", "the edge flag array data")
     )
 
     DeprecatedGL..DependsOn("GL_NV_vertex_buffer_unified_memory")..void(
@@ -1439,7 +1439,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         "Returns all float values in the pixel map {@code map} in {@code data}.",
 
         GLenum("map", "the pixel map parameter to query", PIXEL_MAP_NAMES),
-        Check(32)..PIXEL_PACK_BUFFER..GLfloat.p("data", "a buffer in which to place the returned data")
+        Check(32)..RawPointer..GLfloat.p("data", "a buffer in which to place the returned data")
     )
 
     DeprecatedGL..void(
@@ -1447,7 +1447,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         "Unsigned short version of #GetPixelMapfv().",
 
         GLenum("map", "the pixel map parameter to query"),
-        Check(32)..PIXEL_PACK_BUFFER..GLushort.p("data", "a buffer in which to place the returned data")
+        Check(32)..RawPointer..GLushort.p("data", "a buffer in which to place the returned data")
     )
 
     DeprecatedGL..void(
@@ -1455,7 +1455,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         "Unsigned integer version of #GetPixelMapfv().",
 
         GLenum("map", "the pixel map parameter to query"),
-        Check(32)..PIXEL_PACK_BUFFER..GLuint.p("data", "a buffer in which to place the returned data")
+        Check(32)..RawPointer..GLuint.p("data", "a buffer in which to place the returned data")
     )
 
     GL11C reuse "GetPointerv"
@@ -1464,7 +1464,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         "GetPolygonStipple",
         "Obtains the polygon stipple.",
 
-        Check(128)..PIXEL_PACK_BUFFER..void.p("pattern", "a buffer in which to place the returned data")
+        Check(128)..RawPointer..void.p("pattern", "a buffer in which to place the returned data")
     )
 
     GL11C reuse "GetString"
@@ -1574,7 +1574,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
             "#UNSIGNED_BYTE #SHORT #INT #FLOAT #DOUBLE"
         ),
         GLsizei("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-        Unsafe..ARRAY_BUFFER..void.const.p("pointer", "the color index array data")
+        Unsafe..RawPointer..void.const.p("pointer", "the color index array data")
     )
 
     DeprecatedGL..void("InitNames", "Clears the selection name stack.")
@@ -1594,7 +1594,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         GLsizei("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..ARRAY_BUFFER..void.const.p("pointer", "the vertex array data")
+        )..Unsafe..RawPointer..void.const.p("pointer", "the vertex array data")
     )
 
     GL11C reuse "IsEnabled"
@@ -1993,7 +1993,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         GLsizei("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..ARRAY_BUFFER..void.const.p("pointer", "the normal array data")
+        )..Unsafe..RawPointer..void.const.p("pointer", "the normal array data")
     )
 
     DeprecatedGL..void(
@@ -2038,7 +2038,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
         GLenum("map", "the map to set", PIXEL_MAP_NAMES),
         AutoSize("values")..GLsizei("size", "the map size"),
-        PIXEL_UNPACK_BUFFER..GLfloat.const.p("values", "the map values")
+        RawPointer..GLfloat.const.p("values", "the map values")
     )
 
     DeprecatedGL..void(
@@ -2047,7 +2047,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
         GLenum("map", "the map to set"),
         AutoSize("values")..GLsizei("size", "the map size"),
-        PIXEL_UNPACK_BUFFER..GLushort.const.p("values", "the map values")
+        RawPointer..GLushort.const.p("values", "the map values")
     )
 
     DeprecatedGL..void(
@@ -2056,7 +2056,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
         GLenum("map", "the map to set"),
         AutoSize("values")..GLsizei("size", "the map size"),
-        PIXEL_UNPACK_BUFFER..GLuint.const.p("values", "the map values")
+        RawPointer..GLuint.const.p("values", "the map values")
     )
 
     GL11C reuse "PixelStorei"
@@ -2126,7 +2126,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         it is as if the stipple pattern were all ones.
         """,
 
-        Check(128)..PIXEL_UNPACK_BUFFER..GLubyte.const.p("pattern", "a pointer to memory into which a 32 &times; 32 pattern is packed")
+        Check(128)..RawPointer..GLubyte.const.p("pattern", "a pointer to memory into which a 32 &times; 32 pattern is packed")
     )
 
     DeprecatedGL..void(
@@ -2515,7 +2515,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         GLsizei("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..ARRAY_BUFFER..void.const.p("pointer", "the texture coordinate array data")
+        )..Unsafe..RawPointer..void.const.p("pointer", "the texture coordinate array data")
     )
 
     DeprecatedGL..void(
@@ -2759,7 +2759,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         GLsizei("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..ARRAY_BUFFER..void.const.p("pointer", "the vertex array data")
+        )..Unsafe..RawPointer..void.const.p("pointer", "the vertex array data")
     )
 
     GL11C reuse "Viewport"

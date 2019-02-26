@@ -141,6 +141,11 @@ internal open class AutoSizeCharSequenceTransform(private val bufferParam: Param
     }
 }
 
+internal object RawPointerTransform : FunctionTransform<Parameter>, SkipCheckFunctionTransform {
+    override fun transformDeclaration(param: Parameter, original: String) = "long ${param.name}"
+    override fun transformCall(param: Parameter, original: String) = param.name
+}
+
 internal class AutoTypeParamTransform(private val autoType: String) : FunctionTransform<Parameter> {
     override fun transformDeclaration(param: Parameter, original: String): String? = null // Remove the parameter
     override fun transformCall(param: Parameter, original: String) = autoType // Replace with hard-coded type

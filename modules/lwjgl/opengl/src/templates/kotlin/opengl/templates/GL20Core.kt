@@ -666,7 +666,7 @@ val GL20C = "GL20C".nativeClassGL("GL20C") {
         ),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..ARRAY_BUFFER..void.const.p(
+        )..Unsafe..RawPointer..void.const.p(
             "pointer",
             """
             the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer

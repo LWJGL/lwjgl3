@@ -597,7 +597,7 @@ val GL11C = "GL11C".nativeClassGL("GL11C") {
             "indicates the type of index values in {@code indices}",
             "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
         ),
-        ELEMENT_ARRAY_BUFFER..void.const.p("indices", "the index values")
+        RawPointer..void.const.p("indices", "the index values")
     )
 
     void(
@@ -752,7 +752,7 @@ val GL11C = "GL11C".nativeClassGL("GL11C") {
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_PACK_BUFFER..void.p("pixels", "the buffer in which to place the returned data")
+        )..Unsafe..RawPointer..void.p("pixels", "the buffer in which to place the returned data")
     )
 
     void(
@@ -968,7 +968,7 @@ val GL11C = "GL11C".nativeClassGL("GL11C") {
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT
-        )..Unsafe..PIXEL_PACK_BUFFER..void.p("pixels", "a buffer in which to place the returned pixel data")
+        )..Unsafe..RawPointer..void.p("pixels", "a buffer in which to place the returned pixel data")
     )
 
     void(
@@ -1046,7 +1046,7 @@ val GL11C = "GL11C".nativeClassGL("GL11C") {
         GLenum("type", "the texel data type"),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_UNPACK_BUFFER..nullable..void.const.p("pixels", "the texel data")
+        )..Unsafe..RawPointer..nullable..void.const.p("pixels", "the texel data")
     )
     void(
         "TexImage2D",
@@ -1062,7 +1062,7 @@ val GL11C = "GL11C".nativeClassGL("GL11C") {
         GLenum("type", "the texel data type", CORE_PIXEL_DATA_TYPES),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_UNPACK_BUFFER..nullable..void.const.p("pixels", "the texel data")
+        )..Unsafe..RawPointer..nullable..void.const.p("pixels", "the texel data")
     )
 
     void(
@@ -1202,7 +1202,7 @@ val GL11C = "GL11C".nativeClassGL("GL11C") {
         GLenum("type", "the pixel data type", CORE_PIXEL_DATA_TYPES),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_UNPACK_BUFFER..void.const.p("pixels", "the pixel data")
+        )..Unsafe..RawPointer..void.const.p("pixels", "the pixel data")
     )
 
     void(
@@ -1222,7 +1222,7 @@ val GL11C = "GL11C".nativeClassGL("GL11C") {
         GLenum("type", "the pixel data type", CORE_PIXEL_DATA_TYPES),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_UNPACK_BUFFER..void.const.p("pixels", "the pixel data")
+        )..Unsafe..RawPointer..void.const.p("pixels", "the pixel data")
     )
 
     void(

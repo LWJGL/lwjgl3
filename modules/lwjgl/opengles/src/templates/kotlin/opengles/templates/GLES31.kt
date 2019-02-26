@@ -211,7 +211,7 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
         "",
 
         GLenum("mode", ""),
-        DRAW_INDIRECT_BUFFER..Check("4 * 4")..MultiType(
+        RawPointer..Check("4 * 4")..MultiType(
             PointerMapping.DATA_INT
         )..void.const.p("indirect", "")
     )
@@ -222,7 +222,7 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
 
         GLenum("mode", ""),
         GLenum("type", ""),
-        DRAW_INDIRECT_BUFFER..Check("5 * 4")..MultiType(
+        RawPointer..Check("5 * 4")..MultiType(
             PointerMapping.DATA_INT
         )..void.const.p("indirect", "")
     )

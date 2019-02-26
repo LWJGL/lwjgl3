@@ -67,7 +67,7 @@ val OES_draw_elements_base_vertex = "OESDrawElementsBaseVertex".nativeClassGLES(
         GLenum("mode", ""),
         AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei("count", ""),
         AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum("type", ""),
-        ELEMENT_ARRAY_BUFFER..void.const.p("indices", ""),
+        RawPointer..void.const.p("indices", ""),
         GLint("basevertex", "")
     )
 
@@ -80,7 +80,7 @@ val OES_draw_elements_base_vertex = "OESDrawElementsBaseVertex".nativeClassGLES(
         GLuint("end", ""),
         AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei("count", ""),
         AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum("type", ""),
-        ELEMENT_ARRAY_BUFFER..void.const.p("indices", ""),
+        RawPointer..void.const.p("indices", ""),
         GLint("basevertex", "")
     )
 
@@ -91,7 +91,7 @@ val OES_draw_elements_base_vertex = "OESDrawElementsBaseVertex".nativeClassGLES(
         GLenum("mode", ""),
         AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei("count", ""),
         AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum("type", ""),
-        ELEMENT_ARRAY_BUFFER..void.const.p("indices", ""),
+        RawPointer..void.const.p("indices", ""),
         GLsizei("instancecount", ""),
         GLint("basevertex", "")
     )

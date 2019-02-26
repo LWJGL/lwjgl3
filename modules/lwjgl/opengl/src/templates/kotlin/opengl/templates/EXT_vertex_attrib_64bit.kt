@@ -133,7 +133,7 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
         GLint("size", ""),
         AutoType("pointer", BufferType.GL_DOUBLE)..GLenum("type", ""),
         GLsizei("stride", ""),
-        Unsafe..ARRAY_BUFFER..void.const.p("pointer", "")
+        Unsafe..RawPointer..void.const.p("pointer", "")
     )
 
     void(

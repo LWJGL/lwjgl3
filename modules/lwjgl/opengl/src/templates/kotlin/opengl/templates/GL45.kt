@@ -314,7 +314,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
         "Robust version of ${src.javaDocLink}",
 
         AutoSize("pattern")..GLsizei("bufSize", "the maximum number of bytes to write into {@code pattern}"),
-        PIXEL_PACK_BUFFER..GLubyte.p("pattern", "a buffer in which to place the returned pattern")
+        RawPointer..GLubyte.p("pattern", "a buffer in which to place the returned pattern")
     )
 
     GL45C reuse "GetnTexImage"
@@ -329,7 +329,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
         src["format"],
         src["type"],
         AutoSize("table")..GLsizei("bufSize", "the maximum number of bytes to write into {@code table}"),
-        MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT)..PIXEL_PACK_BUFFER..void.p("table", "a buffer in which to place the returned data")
+        MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT)..RawPointer..void.p("table", "a buffer in which to place the returned data")
     )
 
     src = ARB_imaging["GetConvolutionFilter"]
@@ -341,7 +341,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
         src["format"],
         src["type"],
         AutoSize("image")..GLsizei("bufSize", "the maximum number of bytes to write into {@code image}"),
-        PIXEL_PACK_BUFFER..void.p("image", "a buffer in which to place the returned data")
+        RawPointer..void.p("image", "a buffer in which to place the returned data")
     )
 
     src = ARB_imaging["GetSeparableFilter"]
@@ -353,9 +353,9 @@ val GL45 = "GL45".nativeClassGL("GL45") {
         src["format"],
         src["type"],
         AutoSize("row")..GLsizei("rowBufSize", "the maximum number of bytes to write into {@code row}"),
-        PIXEL_PACK_BUFFER..void.p("row", "a buffer in which to return the filter row"),
+        RawPointer..void.p("row", "a buffer in which to return the filter row"),
         AutoSize("column")..GLsizei("columnBufSize", "the maximum number of bytes to write into {@code column}"),
-        PIXEL_PACK_BUFFER..void.p("column", "a buffer in which to return the filter column"),
+        RawPointer..void.p("column", "a buffer in which to return the filter column"),
         Unsafe..nullable..void.p("span", "")
     )
 
@@ -369,7 +369,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
         src["format"],
         src["type"],
         AutoSize("values")..GLsizei("bufSize", "the maximum number of bytes to write into {@code values}"),
-        PIXEL_PACK_BUFFER..void.p("values", "a buffer in which to place the returned data")
+        RawPointer..void.p("values", "a buffer in which to place the returned data")
     )
 
     src = ARB_imaging["GetMinmax"]
@@ -382,7 +382,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
         src["format"],
         src["type"],
         AutoSize("values")..GLsizei("bufSize", "the maximum number of bytes to write into {@code values}"),
-        PIXEL_PACK_BUFFER..void.p("values", "a buffer in which to place the returned data")
+        RawPointer..void.p("values", "a buffer in which to place the returned data")
     )
 
     GL45C reuse "GetnCompressedTexImage"

@@ -36,7 +36,7 @@ val EXT_draw_instanced = "EXTDrawInstanced".nativeClassGL("EXT_draw_instanced", 
         GLenum("mode", ""),
         AutoSizeShr("GLChecks.typeToByteShift(type)", "indices")..GLsizei("count", ""),
         AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum("type", ""),
-        ELEMENT_ARRAY_BUFFER..void.const.p("indices", ""),
+        RawPointer..void.const.p("indices", ""),
         GLsizei("primcount", "")
     )
 }

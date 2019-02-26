@@ -47,7 +47,7 @@ typedef struct {
         """,
 
         GLenum("mode", "the primitive mode", PRIMITIVE_TYPES),
-        Check("drawCount * (stride == 0 ? (16 + vertexBufferCount * 24) : stride)")..DRAW_INDIRECT_BUFFER..void.const.p(
+        Check("drawCount * (stride == 0 ? (16 + vertexBufferCount * 24) : stride)")..RawPointer..void.const.p(
             "indirect",
             "an array of {@code DrawArraysIndirectBindlessCommandNV} structures (see the extension spec for more information)"
         ),
@@ -79,7 +79,7 @@ typedef struct {
 
         GLenum("mode", "the primitive mode", PRIMITIVE_TYPES),
         GLenum("type", "the data type of the element indices", "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"),
-        Check("drawCount * (stride == 0 ? ((vertexBufferCount + 2) * 24) : stride)")..DRAW_INDIRECT_BUFFER..void.const.p(
+        Check("drawCount * (stride == 0 ? ((vertexBufferCount + 2) * 24) : stride)")..RawPointer..void.const.p(
             "indirect",
             "an array of {@code DrawElementsIndirectBindlessCommandNV} structures (see the extension spec for more information)"
         ),

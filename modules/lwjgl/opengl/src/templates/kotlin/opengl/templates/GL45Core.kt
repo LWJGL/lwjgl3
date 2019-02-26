@@ -902,7 +902,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
         AutoSize("pixels")..GLsizei("bufSize", "the size of the buffer to receive the retrieved pixel data"),
         Check(
             expression = "glGetTextureLevelParameteri(texture, level, GL13.GL_TEXTURE_COMPRESSED_IMAGE_SIZE)", debug = true
-        )..PIXEL_PACK_BUFFER..void.p("pixels", "a buffer in which to return the compressed texture image")
+        )..RawPointer..void.p("pixels", "a buffer in which to return the compressed texture image")
     )
 
     src = GL11C["GetTexLevelParameterfv"]
@@ -1233,7 +1233,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
         GLenum("format", "the pixel format", PIXEL_DATA_FORMATS),
         GLenum("type", "the pixel type", PIXEL_DATA_TYPES),
         AutoSize("pixels")..GLsizei("bufSize", "the size of the buffer to receive the retrieved pixel data"),
-        MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE)..PIXEL_PACK_BUFFER..void.p("pixels", "the buffer in which to place the returned data")
+        MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE)..RawPointer..void.p("pixels", "the buffer in which to place the returned data")
     )
 
     void(
@@ -1249,7 +1249,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
         GLsizei("height", "the subregion height"),
         GLsizei("depth", "the subregion depth"),
         AutoSize("pixels")..GLsizei("bufSize", "the size of the buffer to receive the retrieved pixel data"),
-        MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE)..PIXEL_PACK_BUFFER..void.p("pixels", "the buffer in which to place the returned data")
+        MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE)..RawPointer..void.p("pixels", "the buffer in which to place the returned data")
     )
 
     // ARB_texture_barrier
@@ -1359,7 +1359,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
         src["format"],
         src["type"],
         AutoSize("img")..GLsizei("bufSize", "the maximum number of bytes to write into {@code img}"),
-        MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE)..PIXEL_PACK_BUFFER..void.p("img", "a buffer in which to place the returned data")
+        MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE)..RawPointer..void.p("img", "a buffer in which to place the returned data")
     )
 
     void(
@@ -1373,7 +1373,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
         GLenum("format", "the pixel format", PIXEL_DATA_FORMATS),
         GLenum("type", "the pixel type", PIXEL_DATA_TYPES),
         AutoSize("pixels")..GLsizei("bufSize", "the maximum number of bytes to write into {@code data}"),
-        MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT)..PIXEL_PACK_BUFFER..void.p("pixels", "a buffer in which to place the returned pixel data")
+        MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT)..RawPointer..void.p("pixels", "a buffer in which to place the returned pixel data")
     )
 
     src = GL13C["GetCompressedTexImage"]
@@ -1386,7 +1386,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
         AutoSize("img")..GLsizei("bufSize", "the maximum number of bytes to write into {@code img}"),
         Check(
             expression = "GL11.glGetTexLevelParameteri(target, level, GL13.GL_TEXTURE_COMPRESSED_IMAGE_SIZE)", debug = true
-        )..PIXEL_PACK_BUFFER..void.p("img", "a buffer in which to place the returned data")
+        )..RawPointer..void.p("img", "a buffer in which to place the returned data")
     )
 
     void(

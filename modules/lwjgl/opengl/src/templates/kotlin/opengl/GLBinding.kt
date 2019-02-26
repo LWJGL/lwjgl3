@@ -23,11 +23,6 @@ val NativeClass.isCore: Boolean
 
 private const val CAPABILITIES_CLASS = "GLCapabilities"
 
-private object BufferOffsetTransform : FunctionTransform<Parameter>, SkipCheckFunctionTransform {
-    override fun transformDeclaration(param: Parameter, original: String) = "long ${param.name}"
-    override fun transformCall(param: Parameter, original: String) = param.name
-}
-
 val GLBinding = Generator.register(object : APIBinding(
     Module.OPENGL,
     CAPABILITIES_CLASS,
@@ -52,15 +47,6 @@ val GLBinding = Generator.register(object : APIBinding(
     }
 
     override fun getFunctionOrdinal(function: Func) = functionOrdinals[function.name]!!
-
-    override fun generateAlternativeMethods(writer: PrintWriter, function: Func, transforms: MutableMap<QualifiedType, Transform>) {
-        val boParams = function.getParams { it.has<BufferObject>() && it.nativeType.mapping != PrimitiveMapping.POINTER && it.nativeType !is ArrayType<*> }
-        if (boParams.any()) {
-            boParams.forEach { transforms[it] = BufferOffsetTransform }
-            function.generateAlternativeMethod(writer, function.name, transforms)
-            boParams.forEach { transforms.remove(it) }
-        }
-    }
 
     override fun printCustomJavadoc(writer: PrintWriter, function: Func, documentation: String): Boolean {
         if (function.nativeClass.templateName.startsWith("GL")) {

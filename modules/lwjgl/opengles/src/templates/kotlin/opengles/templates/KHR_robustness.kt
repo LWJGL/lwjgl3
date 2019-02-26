@@ -132,7 +132,7 @@ val KHR_robustness = "KHRRobustness".nativeClassGLES("KHR_robustness", postfix =
         GLenum("format", "the pixel format"),
         GLenum("type", "the pixel type"),
         AutoSize("pixels")..GLsizei("bufSize", "the maximum number of bytes to write into {@code data}"),
-        PIXEL_PACK_BUFFER..MultiType(
+        RawPointer..MultiType(
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT

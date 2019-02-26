@@ -640,11 +640,6 @@ public class GL43 extends GL42 {
 
     // --- [ glDispatchComputeIndirect ] ---
 
-    /** Unsafe version of: {@link #glDispatchComputeIndirect DispatchComputeIndirect} */
-    public static void nglDispatchComputeIndirect(long indirect) {
-        GL43C.nglDispatchComputeIndirect(indirect);
-    }
-
     /**
      * Launches one or more compute work groups using parameters stored in a buffer.
      * 

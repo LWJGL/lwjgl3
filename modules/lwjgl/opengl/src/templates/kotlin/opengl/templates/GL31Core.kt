@@ -79,7 +79,7 @@ val GL31C = "GL31C".nativeClassGL("GL31C") {
             "the type of the values in {@code indices}",
             "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
         ),
-        ELEMENT_ARRAY_BUFFER..void.const.p("indices", "the ByteBuffer containing the indices to be rendered"),
+        RawPointer..void.const.p("indices", "the ByteBuffer containing the indices to be rendered"),
         GLsizei("primcount", "the number of instances of the specified range of indices to be rendered")
     )
 

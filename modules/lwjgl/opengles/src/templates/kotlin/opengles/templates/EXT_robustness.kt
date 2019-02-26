@@ -85,7 +85,7 @@ val EXT_robustness = "EXTRobustness".nativeClassGLES("EXT_robustness", postfix =
         GLenum("format", ""),
         GLenum("type", ""),
         AutoSize("data")..GLsizei("bufSize", ""),
-        PIXEL_PACK_BUFFER..MultiType(
+        RawPointer..MultiType(
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT

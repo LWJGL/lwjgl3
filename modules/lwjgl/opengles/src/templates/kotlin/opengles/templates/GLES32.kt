@@ -495,7 +495,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         GLenum("mode", ""),
         AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei("count", ""),
         AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum("type", ""),
-        ELEMENT_ARRAY_BUFFER..void.const.p("indices", ""),
+        RawPointer..void.const.p("indices", ""),
         GLint("basevertex", "")
     )
 
@@ -508,7 +508,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         GLuint("end", ""),
         AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei("count", ""),
         AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum("type", ""),
-        ELEMENT_ARRAY_BUFFER..void.const.p("indices", ""),
+        RawPointer..void.const.p("indices", ""),
         GLint("basevertex", "")
     )
 
@@ -519,7 +519,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         GLenum("mode", ""),
         AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei("count", ""),
         AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum("type", ""),
-        ELEMENT_ARRAY_BUFFER..void.const.p("indices", ""),
+        RawPointer..void.const.p("indices", ""),
         GLsizei("instancecount", ""),
         GLint("basevertex", "")
     )
@@ -742,7 +742,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         GLenum("format", "the pixel format"),
         GLenum("type", "the pixel type"),
         AutoSize("pixels")..GLsizei("bufSize", "the maximum number of bytes to write into {@code data}"),
-        PIXEL_PACK_BUFFER..MultiType(
+        RawPointer..MultiType(
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT

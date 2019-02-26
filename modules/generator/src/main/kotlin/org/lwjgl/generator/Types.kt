@@ -413,11 +413,8 @@ internal fun NativeType.annotate(type: String) = annotation(type).let {
 internal val NativeType.castAddressToPointer
     get() = (this is PointerType<*> && this !is ArrayType<*>) || this is StructType
 
-val NativeType.isPointer
+internal val NativeType.isPointer
     get() = this is PointerType<*> || this.mapping === PrimitiveMapping.POINTER
-
-val NativeType.isPointerHandle
-    get() = this is PointerType<*> && this.mapping === PointerMapping.OPAQUE_POINTER
 
 internal val NativeType.isPointerData
     get() = this is PointerType<*> && this.mapping !== PointerMapping.OPAQUE_POINTER

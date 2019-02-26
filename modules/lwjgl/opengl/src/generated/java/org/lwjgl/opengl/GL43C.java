@@ -621,9 +621,6 @@ public class GL43C extends GL42C {
 
     // --- [ glDispatchComputeIndirect ] ---
 
-    /** Unsafe version of: {@link #glDispatchComputeIndirect DispatchComputeIndirect} */
-    public static native void nglDispatchComputeIndirect(long indirect);
-
     /**
      * Launches one or more compute work groups using parameters stored in a buffer.
      * 
@@ -647,9 +644,7 @@ public class GL43C extends GL42C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glDispatchComputeIndirect">Reference Page</a>
      */
-    public static void glDispatchComputeIndirect(@NativeType("GLintptr") long indirect) {
-        nglDispatchComputeIndirect(indirect);
-    }
+    public static native void glDispatchComputeIndirect(@NativeType("GLintptr") long indirect);
 
     // --- [ glCopyImageSubData ] ---
 

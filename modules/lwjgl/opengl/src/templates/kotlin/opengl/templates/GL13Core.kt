@@ -67,7 +67,7 @@ val GL13C = "GL13C".nativeClassGL("GL13C") {
         GLsizei("depth", "the depth of the texture image"),
         GLint("border", "must be 0"),
         AutoSize("data")..GLsizei("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-        PIXEL_UNPACK_BUFFER..nullable..void.const.p("data", "a pointer to the compressed image data")
+        RawPointer..nullable..void.const.p("data", "a pointer to the compressed image data")
     )
 
     void(
@@ -81,7 +81,7 @@ val GL13C = "GL13C".nativeClassGL("GL13C") {
         GLsizei("height", "the height of the texture image"),
         GLint("border", "must be 0"),
         AutoSize("data")..GLsizei("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-        PIXEL_UNPACK_BUFFER..nullable..void.const.p("data", "a pointer to the compressed image data")
+        RawPointer..nullable..void.const.p("data", "a pointer to the compressed image data")
     )
 
     void(
@@ -94,7 +94,7 @@ val GL13C = "GL13C".nativeClassGL("GL13C") {
         GLsizei("width", "the width of the texture image"),
         GLint("border", "must be 0"),
         AutoSize("data")..GLsizei("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-        PIXEL_UNPACK_BUFFER..nullable..void.const.p("data", "a pointer to the compressed image data")
+        RawPointer..nullable..void.const.p("data", "a pointer to the compressed image data")
     )
 
     void(
@@ -111,7 +111,7 @@ val GL13C = "GL13C".nativeClassGL("GL13C") {
         GLsizei("depth", "the depth of the texture subimage"),
         GLenum("format", "the format of the compressed image data stored at address {@code data}", CompressTexImageFormats),
         AutoSize("data")..GLsizei("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-        PIXEL_UNPACK_BUFFER..void.const.p("data", "a pointer to the compressed image data")
+        RawPointer..void.const.p("data", "a pointer to the compressed image data")
     )
 
     void(
@@ -126,7 +126,7 @@ val GL13C = "GL13C".nativeClassGL("GL13C") {
         GLsizei("height", "the height of the texture subimage"),
         GLenum("format", "the format of the compressed image data stored at address {@code data}", CompressTexImageFormats),
         AutoSize("data")..GLsizei("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-        PIXEL_UNPACK_BUFFER..void.const.p("data", "a pointer to the compressed image data")
+        RawPointer..void.const.p("data", "a pointer to the compressed image data")
     )
 
     void(
@@ -139,7 +139,7 @@ val GL13C = "GL13C".nativeClassGL("GL13C") {
         GLsizei("width", "the width of the texture subimage"),
         GLenum("format", "the format of the compressed image data stored at address {@code data}", CompressTexImageFormats),
         AutoSize("data")..GLsizei("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-        PIXEL_UNPACK_BUFFER..void.const.p("data", "a pointer to the compressed image data")
+        RawPointer..void.const.p("data", "a pointer to the compressed image data")
     )
 
     void(
@@ -150,7 +150,7 @@ val GL13C = "GL13C".nativeClassGL("GL13C") {
         GLint("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
         Check(
             expression = "GL11.glGetTexLevelParameteri(target, level, GL_TEXTURE_COMPRESSED_IMAGE_SIZE)", debug = true
-        )..PIXEL_PACK_BUFFER..void.p("pixels", "a buffer in which to return the compressed texture image")
+        )..RawPointer..void.p("pixels", "a buffer in which to return the compressed texture image")
     )
 
     // ARB_texture_cube_map

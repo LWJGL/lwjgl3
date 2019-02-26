@@ -375,7 +375,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
         GLenum("type", ""),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_UNPACK_BUFFER..nullable..void.const.p("pixels", "")
+        )..Unsafe..RawPointer..nullable..void.const.p("pixels", "")
     )
 
     void(
@@ -393,7 +393,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
         GLenum("type", ""),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_UNPACK_BUFFER..nullable..void.const.p("pixels", "")
+        )..Unsafe..RawPointer..nullable..void.const.p("pixels", "")
     )
 
     void(
@@ -409,7 +409,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
         GLenum("type", ""),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_UNPACK_BUFFER..void.const.p("pixels", "")
+        )..Unsafe..RawPointer..void.const.p("pixels", "")
     )
 
     void(
@@ -427,7 +427,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
         GLenum("type", ""),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_UNPACK_BUFFER..void.const.p("pixels", "")
+        )..Unsafe..RawPointer..void.const.p("pixels", "")
     )
 
     void(
@@ -501,7 +501,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_PACK_BUFFER..void.p("pixels", "")
+        )..Unsafe..RawPointer..void.p("pixels", "")
     )
 
     void(
@@ -567,7 +567,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
         GLenum("type", ""),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..nullable..PIXEL_UNPACK_BUFFER..void.const.p("pixels", "")
+        )..Unsafe..nullable..RawPointer..void.const.p("pixels", "")
     )
 
     DependsOn("OpenGL12")..void(
@@ -587,7 +587,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
         GLenum("type", ""),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_UNPACK_BUFFER..void.const.p("pixels", "")
+        )..Unsafe..RawPointer..void.const.p("pixels", "")
     )
 
     DependsOn("OpenGL12")..void(
@@ -631,7 +631,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
         GLsizei("stride", ""),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..ARRAY_BUFFER..void.const.p("pointer", "")
+        )..Unsafe..RawPointer..void.const.p("pointer", "")
     )
 
     DependsOn("OpenGL13")..void(
@@ -838,7 +838,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
         GLenum("type", ""),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_UNPACK_BUFFER..nullable..void.const.p("pixels", "")
+        )..Unsafe..RawPointer..nullable..void.const.p("pixels", "")
     )
 
     DependsOn("OpenGL13")..void(
@@ -856,7 +856,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
         GLenum("type", ""),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_UNPACK_BUFFER..nullable..void.const.p("pixels", "")
+        )..Unsafe..RawPointer..nullable..void.const.p("pixels", "")
     )
 
     DependsOn("OpenGL13")..void(
@@ -872,7 +872,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
         GLenum("type", ""),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_UNPACK_BUFFER..void.const.p("pixels", "")
+        )..Unsafe..RawPointer..void.const.p("pixels", "")
     )
 
     DependsOn("OpenGL13")..void(
@@ -890,7 +890,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
         GLenum("type", ""),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_UNPACK_BUFFER..void.const.p("pixels", "")
+        )..Unsafe..RawPointer..void.const.p("pixels", "")
     )
 
     DependsOn("OpenGL13")..void(
@@ -964,7 +964,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_PACK_BUFFER..void.p("pixels", "")
+        )..Unsafe..RawPointer..void.p("pixels", "")
     )
 
     DependsOn("OpenGL13")..void(
@@ -1025,7 +1025,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
         GLenum("type", ""),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..nullable..PIXEL_UNPACK_BUFFER..void.const.p("pixels", "")
+        )..Unsafe..nullable..RawPointer..void.const.p("pixels", "")
     )
 
     DependsOn("OpenGL13")..void(
@@ -1045,7 +1045,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
         GLenum("type", ""),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_UNPACK_BUFFER..void.const.p("pixels", "")
+        )..Unsafe..RawPointer..void.const.p("pixels", "")
     )
 
     DependsOn("OpenGL13")..void(
@@ -1310,7 +1310,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
         GLsizei("depth", ""),
         GLint("border", ""),
         AutoSize("data")..GLsizei("imageSize", ""),
-        PIXEL_UNPACK_BUFFER..nullable..void.const.p("data", "")
+        RawPointer..nullable..void.const.p("data", "")
     )
 
     DependsOn("OpenGL13")..void(
@@ -1325,7 +1325,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
         GLsizei("height", ""),
         GLint("border", ""),
         AutoSize("data")..GLsizei("imageSize", ""),
-        PIXEL_UNPACK_BUFFER..nullable..void.const.p("data", "")
+        RawPointer..nullable..void.const.p("data", "")
     )
 
     DependsOn("OpenGL13")..void(
@@ -1339,7 +1339,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
         GLsizei("width", ""),
         GLint("border", ""),
         AutoSize("data")..GLsizei("imageSize", ""),
-        PIXEL_UNPACK_BUFFER..nullable..void.const.p("data", "")
+        RawPointer..nullable..void.const.p("data", "")
     )
 
     DependsOn("OpenGL13")..void(
@@ -1357,7 +1357,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
         GLsizei("depth", ""),
         GLenum("format", ""),
         AutoSize("data")..GLsizei("imageSize", ""),
-        PIXEL_UNPACK_BUFFER..void.const.p("data", "")
+        RawPointer..void.const.p("data", "")
     )
 
     DependsOn("OpenGL13")..void(
@@ -1373,7 +1373,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
         GLsizei("height", ""),
         GLenum("format", ""),
         AutoSize("data")..GLsizei("imageSize", ""),
-        PIXEL_UNPACK_BUFFER..void.const.p("data", "")
+        RawPointer..void.const.p("data", "")
     )
 
     DependsOn("OpenGL13")..void(
@@ -1387,7 +1387,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
         GLsizei("width", ""),
         GLenum("format", ""),
         AutoSize("data")..GLsizei("imageSize", ""),
-        PIXEL_UNPACK_BUFFER..void.const.p("data", "")
+        RawPointer..void.const.p("data", "")
     )
 
     DependsOn("OpenGL13")..void(
@@ -1399,7 +1399,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
         GLint("level", ""),
         Check(
             expression = "glGetTextureLevelParameteriEXT(texture, target, level, GL13.GL_TEXTURE_COMPRESSED_IMAGE_SIZE)", debug = true
-        )..PIXEL_PACK_BUFFER..void.p("img", "")
+        )..RawPointer..void.p("img", "")
     )
 
     /*
@@ -1421,7 +1421,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
         GLsizei("depth", ""),
         GLint("border", ""),
         AutoSize("data")..GLsizei("imageSize", ""),
-        PIXEL_UNPACK_BUFFER..nullable..void.const.p("data", "")
+        RawPointer..nullable..void.const.p("data", "")
     )
 
     DependsOn("OpenGL13")..void(
@@ -1436,7 +1436,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
         GLsizei("height", ""),
         GLint("border", ""),
         AutoSize("data")..GLsizei("imageSize", ""),
-        PIXEL_UNPACK_BUFFER..nullable..void.const.p("data", "")
+        RawPointer..nullable..void.const.p("data", "")
     )
 
     DependsOn("OpenGL13")..void(
@@ -1450,7 +1450,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
         GLsizei("width", ""),
         GLint("border", ""),
         AutoSize("data")..GLsizei("imageSize", ""),
-        PIXEL_UNPACK_BUFFER..nullable..void.const.p("data", "")
+        RawPointer..nullable..void.const.p("data", "")
     )
 
     DependsOn("OpenGL13")..void(
@@ -1468,7 +1468,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
         GLsizei("depth", ""),
         GLenum("format", ""),
         AutoSize("data")..GLsizei("imageSize", ""),
-        PIXEL_UNPACK_BUFFER..void.const.p("data", "")
+        RawPointer..void.const.p("data", "")
     )
 
     DependsOn("OpenGL13")..void(
@@ -1484,7 +1484,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
         GLsizei("height", ""),
         GLenum("format", ""),
         AutoSize("data")..GLsizei("imageSize", ""),
-        PIXEL_UNPACK_BUFFER..void.const.p("data", "")
+        RawPointer..void.const.p("data", "")
     )
 
     DependsOn("OpenGL13")..void(
@@ -1498,7 +1498,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
         GLsizei("width", ""),
         GLenum("format", ""),
         AutoSize("data")..GLsizei("imageSize", ""),
-        PIXEL_UNPACK_BUFFER..void.const.p("data", "")
+        RawPointer..void.const.p("data", "")
     )
 
     DependsOn("OpenGL13")..void(
@@ -1510,7 +1510,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
         GLint("level", ""),
         Check(
             expression = "glGetMultiTexLevelParameteriEXT(texunit, target, level, GL13.GL_TEXTURE_COMPRESSED_IMAGE_SIZE)", debug = true
-        )..PIXEL_PACK_BUFFER..void.p("img", "")
+        )..RawPointer..void.p("img", "")
     )
 
     /*

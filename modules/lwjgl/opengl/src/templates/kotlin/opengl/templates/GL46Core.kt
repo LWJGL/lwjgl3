@@ -63,7 +63,7 @@ val GL46C = "GL46C".nativeClassGL("GL46C") {
         src["mode"],
         Check("maxdrawcount * (stride == 0 ? (4 * 4) : stride)")..MultiType(
             PointerMapping.DATA_INT
-        )..DRAW_INDIRECT_BUFFER..void.const.p("indirect", "an array of structures containing the draw parameters"),
+        )..RawPointer..void.const.p("indirect", "an array of structures containing the draw parameters"),
         GLintptr("drawcount", "the offset into the parameter buffer object"),
         GLsizei("maxdrawcount", "the maximum number of draws"),
         src["stride"]
@@ -84,7 +84,7 @@ val GL46C = "GL46C".nativeClassGL("GL46C") {
         src["type"],
         Check("maxdrawcount * (stride == 0 ? (5 * 4) : stride)")..MultiType(
             PointerMapping.DATA_INT
-        )..DRAW_INDIRECT_BUFFER..void.const.p("indirect", "a structure containing an array of draw parameters"),
+        )..RawPointer..void.const.p("indirect", "a structure containing an array of draw parameters"),
         GLintptr("drawcount", "the offset into the parameter buffer object"),
         GLsizei("maxdrawcount", "the maximum number of draws"),
         src["stride"]

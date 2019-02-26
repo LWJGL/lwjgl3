@@ -72,7 +72,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL43C_glDispatchCompute(JNIEnv *__e
     glDispatchCompute(num_groups_x, num_groups_y, num_groups_z);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL43C_nglDispatchComputeIndirect(JNIEnv *__env, jclass clazz, jlong indirect) {
+JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL43C_glDispatchComputeIndirect(JNIEnv *__env, jclass clazz, jlong indirect) {
     glDispatchComputeIndirectPROC glDispatchComputeIndirect = (glDispatchComputeIndirectPROC)tlsGetFunction(873);
     UNUSED_PARAM(clazz)
     glDispatchComputeIndirect((intptr_t)indirect);

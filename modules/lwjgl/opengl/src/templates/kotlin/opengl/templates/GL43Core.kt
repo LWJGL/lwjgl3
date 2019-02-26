@@ -237,7 +237,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
         """)}
         """,
 
-        DISPATCH_INDIRECT_BUFFER..GLintptr(
+        GLintptr(
             "indirect",
             """
             the offset into the buffer object currently bound to the #DISPATCH_INDIRECT_BUFFER buffer target at which the dispatch parameters are
@@ -860,7 +860,7 @@ for ( i = 0; i < primcount; i++ ) {
         GLenum("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
         Check("primcount * (stride == 0 ? (4 * 4) : stride)")..MultiType(
             PointerMapping.DATA_INT
-        )..DRAW_INDIRECT_BUFFER..void.const.p("indirect", "an array of structures containing the draw parameters"),
+        )..RawPointer..void.const.p("indirect", "an array of structures containing the draw parameters"),
         GLsizei("primcount", "the number of elements in the array of draw parameter structures"),
         GLsizei("stride", "the distance in basic machine units between elements of the draw parameter array")
     )
@@ -898,7 +898,7 @@ for ( i = 0; i < primcount; i++ ) {
         GLenum("type", "the type of data in the buffer bound to the GL_ELEMENT_ARRAY_BUFFER binding", "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"),
         Check("primcount * (stride == 0 ? (5 * 4) : stride)")..MultiType(
             PointerMapping.DATA_INT
-        )..DRAW_INDIRECT_BUFFER..void.const.p("indirect", "a structure containing an array of draw parameters"),
+        )..RawPointer..void.const.p("indirect", "a structure containing an array of draw parameters"),
         GLsizei("primcount", "the number of elements in the array addressed by {@code indirect}"),
         GLsizei("stride", "the distance in basic machine units between elements of the draw parameter array")
     )

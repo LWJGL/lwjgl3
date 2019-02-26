@@ -96,7 +96,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
         GLenum("type", "the color data type", PIXEL_DATA_TYPES),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..PIXEL_UNPACK_BUFFER..void.const.p("table", "the color table data")
+        )..Unsafe..RawPointer..void.const.p("table", "the color table data")
     )
 
     DeprecatedGL..void(
@@ -139,7 +139,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT
-        )..Unsafe..PIXEL_PACK_BUFFER..void.p("table", "the color table data")
+        )..Unsafe..RawPointer..void.p("table", "the color table data")
     )
 
     DeprecatedGL..void(
@@ -171,7 +171,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
         GLsizei("count", "the number of colors in the subregion to respecify"),
         GLenum("format", "the color data format", PIXEL_DATA_FORMATS),
         GLenum("type", "the color data type", PIXEL_DATA_TYPES),
-        Unsafe..PIXEL_UNPACK_BUFFER..void.const.p("data", "the color table data")
+        Unsafe..RawPointer..void.const.p("data", "the color table data")
     )
 
     DeprecatedGL..void(
@@ -277,7 +277,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
         GLsizei("width", "the filter width"),
         GLenum("format", "the filter data format", PIXEL_DATA_FORMATS),
         GLenum("type", "the filter data type", PIXEL_DATA_TYPES),
-        Unsafe..PIXEL_UNPACK_BUFFER..void.const.p("data", "the filter data")
+        Unsafe..RawPointer..void.const.p("data", "the filter data")
     )
 
     DeprecatedGL..void(
@@ -290,7 +290,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
         GLsizei("height", "the filter height"),
         GLenum("format", "the filter data format", PIXEL_DATA_FORMATS),
         GLenum("type", "the filter data type", PIXEL_DATA_TYPES),
-        Unsafe..PIXEL_UNPACK_BUFFER..void.const.p("data", "the filter data")
+        Unsafe..RawPointer..void.const.p("data", "the filter data")
     )
 
     DeprecatedGL..void(
@@ -329,7 +329,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
         GLenum("target", "the convolution target", "#CONVOLUTION_1D #CONVOLUTION_2D"),
         GLenum("format", "the filter data format", PIXEL_DATA_FORMATS),
         GLenum("type", "the filter data type", PIXEL_DATA_TYPES),
-        Unsafe..PIXEL_PACK_BUFFER..void.p("image", "the filter data")
+        Unsafe..RawPointer..void.p("image", "the filter data")
     )
 
     DeprecatedGL..void(
@@ -342,8 +342,8 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
         GLsizei("height", "the filter height"),
         GLenum("format", "the filter data format", PIXEL_DATA_FORMATS),
         GLenum("type", "the filter data type", PIXEL_DATA_TYPES),
-        Unsafe..PIXEL_UNPACK_BUFFER..void.const.p("row", "the horizontal filter data"),
-        Unsafe..PIXEL_UNPACK_BUFFER..void.const.p("column", "the vertical filter data")
+        Unsafe..RawPointer..void.const.p("row", "the horizontal filter data"),
+        Unsafe..RawPointer..void.const.p("column", "the vertical filter data")
     )
 
     DeprecatedGL..void(
@@ -353,8 +353,8 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
         GLenum("target", "the filter target", "#SEPARABLE_2D"),
         GLenum("format", "the filter data format", PIXEL_DATA_FORMATS),
         GLenum("type", "the filter data type", PIXEL_DATA_TYPES),
-        Unsafe..PIXEL_PACK_BUFFER..void.p("row", "a buffer in which to return the filter row"),
-        Unsafe..PIXEL_PACK_BUFFER..void.p("column", "a buffer in which to return the filter column"),
+        Unsafe..RawPointer..void.p("row", "a buffer in which to return the filter row"),
+        Unsafe..RawPointer..void.p("column", "a buffer in which to return the filter column"),
         Unsafe..nullable..void.p("span", "unused")
     )
 
@@ -534,7 +534,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
         ),
         GLenum("format", "the pixel data format", PIXEL_DATA_FORMATS),
         GLenum("type", "the pixel data types", PIXEL_DATA_TYPES),
-        Unsafe..PIXEL_PACK_BUFFER..void.p("values", "the pixel data")
+        Unsafe..RawPointer..void.p("values", "the pixel data")
     )
 
     DeprecatedGL..void(
@@ -588,7 +588,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
         ),
         GLenum("format", "the pixel data format", PIXEL_DATA_FORMATS),
         GLenum("type", "the pixel data type", PIXEL_DATA_TYPES),
-        Unsafe..PIXEL_PACK_BUFFER..void.p("values", "a buffer in which to place the minmax values")
+        Unsafe..RawPointer..void.p("values", "a buffer in which to place the minmax values")
     )
 
     DeprecatedGL..void(

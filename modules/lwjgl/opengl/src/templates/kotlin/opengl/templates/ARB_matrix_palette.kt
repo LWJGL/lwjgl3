@@ -90,7 +90,7 @@ val ARB_matrix_palette = "ARBMatrixPalette".nativeClassGL("ARB_matrix_palette", 
             "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
         ),
         GLsizei("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-        Unsafe..ARRAY_BUFFER..void.const.p("pointer", "the matrix index data")
+        Unsafe..RawPointer..void.const.p("pointer", "the matrix index data")
     )
 
 }

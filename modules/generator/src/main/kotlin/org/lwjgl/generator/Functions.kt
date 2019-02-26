@@ -1128,6 +1128,20 @@ class Func(
 
         nativeClass.binding?.generateAlternativeMethods(this, this@Func, transforms)
 
+        // Apply RawPointer transformations.
+        parameters.filter { it.has<RawPointer>() && it.nativeType !is ArrayType<*> }.let { params ->
+            if (params.isEmpty())
+                return@let
+
+            params.forEach {
+                transforms[it] = RawPointerTransform
+            }
+            generateAlternativeMethod(name, transforms)
+            params.forEach {
+                transforms.remove(it)
+            }
+        }
+
         if (returns.nativeType is CharSequenceType && !has<Address>() && !has<MustBeDisposed>())
             transforms[returns] = StringReturnTransform(returnsNull)
         else if (has<MapPointer>()) {

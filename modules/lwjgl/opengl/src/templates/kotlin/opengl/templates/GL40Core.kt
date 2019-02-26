@@ -116,7 +116,7 @@ glDrawArraysInstancedBaseInstance(mode, cmd->first, cmd->count, cmd->primCount, 
         GLenum("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
         Check("4 * 4")..MultiType(
             PointerMapping.DATA_INT
-        )..DRAW_INDIRECT_BUFFER..void.const.p("indirect", "a structure containing the draw parameters")
+        )..RawPointer..void.const.p("indirect", "a structure containing the draw parameters")
     )
 
     void(
@@ -163,7 +163,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
         ),
         Check("5 * 4")..MultiType(
             PointerMapping.DATA_INT
-        )..DRAW_INDIRECT_BUFFER..void.const.p("indirect", "the address of a structure containing the draw parameters")
+        )..RawPointer..void.const.p("indirect", "the address of a structure containing the draw parameters")
     )
 
     // ARB_gpu_shader5
