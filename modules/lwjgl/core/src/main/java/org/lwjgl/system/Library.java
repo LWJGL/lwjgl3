@@ -31,7 +31,7 @@ public final class Library {
     /** The LWJGL shared library name. */
     public static final String JNI_LIBRARY_NAME = Configuration.LIBRARY_NAME.get(System.getProperty("os.arch").contains("64") ? "lwjgl" : "lwjgl32");
 
-    private static final String JAVA_LIBRARY_PATH = "java.library.path";
+    static final String JAVA_LIBRARY_PATH = "java.library.path";
 
     private static final Pattern PATH_SEPARATOR = Pattern.compile(File.pathSeparator);
 
@@ -131,7 +131,7 @@ public final class Library {
             // Success, but java.library.path might be still empty, or not include the library.
             // In that case, ClassLoader::findLibrary was used to return the library path (e.g. OSGi does this with native libraries in bundles).
             String paths   = System.getProperty(JAVA_LIBRARY_PATH);
-            Path   libFile = paths == null ? null : findLibrary(paths, libName);
+            Path   libFile = paths == null ? null : findFile(paths, libName);
             if (libFile != null) {
                 apiLog(String.format("\tLoaded from %s: %s", JAVA_LIBRARY_PATH, libFile));
                 checkHash(context, libFile);
@@ -153,7 +153,7 @@ public final class Library {
     }
 
     private static boolean loadSystem(Consumer<String> load, Class<?> context, String libName, String property, String paths) {
-        Path libFile = findLibrary(paths, libName);
+        Path libFile = findFile(paths, libName);
         if (libFile == null) {
             apiLog(String.format("\t%s not found in %s=%s", libName, property, paths));
             return false;
@@ -210,7 +210,7 @@ public final class Library {
         apiLog("Loading library: " + name);
 
         // METHOD 1: absolute path
-        if (new File(name).isAbsolute()) {
+        if (Paths.get(name).isAbsolute()) {
             SharedLibrary lib = apiCreateLibrary(name);
             apiLog("\tSuccess");
             return lib;
@@ -326,7 +326,7 @@ public final class Library {
 
     @Nullable
     private static SharedLibrary loadNative(Class<?> context, String libName, String property, String paths) {
-        Path libFile = findLibrary(paths, libName);
+        Path libFile = findFile(paths, libName);
         if (libFile == null) {
             apiLog(String.format("\t%s not found in %s=%s", libName, property, paths));
             return null;
@@ -397,9 +397,9 @@ public final class Library {
     }
 
     @Nullable
-    private static Path findLibrary(String path, String libName) {
+    static Path findFile(String path, String file) {
         for (String directory : PATH_SEPARATOR.split(path)) {
-            Path p = Paths.get(directory, libName);
+            Path p = Paths.get(directory, file);
             if (Files.isReadable(p)) {
                 return p;
             }
@@ -408,7 +408,7 @@ public final class Library {
     }
 
     private static void printError(boolean bundledWithLWJGL) {
-        DEBUG_STREAM.println(
+        printError(
             "[LWJGL] Failed to load a library. Possible solutions:\n" + (bundledWithLWJGL
                 ? "\ta) Add the directory that contains the shared library to -Djava.library.path or -Dorg.lwjgl.librarypath.\n" +
                   "\tb) Add the JAR that contains the shared library to the classpath."
@@ -416,7 +416,10 @@ public final class Library {
                   "\tb) Ensure that the library is accessible from the system library paths."
             )
         );
+    }
 
+    static void printError(String message) {
+        DEBUG_STREAM.println(message);
         if (!DEBUG) {
             DEBUG_STREAM.println("[LWJGL] Enable debug mode with -Dorg.lwjgl.util.Debug=true for better diagnostics.");
             if (!Configuration.DEBUG_LOADER.get(false)) {

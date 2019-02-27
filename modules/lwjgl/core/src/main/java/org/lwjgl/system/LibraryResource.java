@@ -1,0 +1,198 @@
+/*
+ * Copyright LWJGL. All rights reserved.
+ * License terms: https://www.lwjgl.org/license
+ */
+package org.lwjgl.system;
+
+import javax.annotation.*;
+import java.net.*;
+import java.nio.channels.*;
+import java.nio.file.*;
+import java.util.function.*;
+
+import static org.lwjgl.system.APIUtil.*;
+
+/**
+ * Handles loading of native resources in LWJGL. [INTERNAL USE ONLY]
+ *
+ * <p>This class uses the same mechanism as {@link Library} for loading shared libraries. The resource name could be an absolute path, or a relative path that
+ * is resolved via {@code org.lwjgl.librarypath}, {@code java.library.path}, or even the class/module-path. When the resource is detected in the
+ * class/module-path, it is extracted automatically to {@code org.lwjgl.librarypath} via the {@code SharedLibraryLoader}.</p>
+ */
+public final class LibraryResource {
+
+    static {
+        Library.initialize();
+    }
+
+    private LibraryResource() {}
+
+    /** Calls {@link #load(Class, String)} using {@code LibraryResource.class} as the context parameter. */
+    public static Path load(String name) {
+        return load(LibraryResource.class, name);
+    }
+
+    /**
+     * Loads a library resource.
+     *
+     * @param context the class to use to discover the library resource in the classpath
+     * @param name    the resource name
+     *
+     * @return the library resource path
+     *
+     * @throws IllegalStateException if the resource could not be found
+     */
+    @SuppressWarnings("try")
+    public static Path load(Class<?> context, String name) {
+        return load(context, name, true);
+    }
+
+    @SuppressWarnings("try")
+    private static Path load(Class<?> context, String name, boolean printError) {
+        apiLog("Loading library resource: " + name);
+
+        // METHOD 1: absolute path
+        Path path = Paths.get(name);
+        if (path.isAbsolute()) {
+            if (!Files.exists(path)) {
+                if (printError) {
+                    printError();
+                }
+                throw new IllegalStateException("Failed to locate library resource: " + name);
+            }
+            apiLog("\tSuccess");
+            return path;
+        }
+
+        // METHOD 2: org.lwjgl.librarypath
+        URL libURL = context.getClassLoader().getResource(name);
+        if (libURL == null) {
+            path = loadFromLibraryPath(name);
+            if (path != null) {
+                return path;
+            }
+        } else {
+            boolean debugLoader = Configuration.DEBUG_LOADER.get(false);
+            try {
+                // Always use the SLL if the resource is found in the classpath,
+                // so that newer versions can be detected.
+                if (debugLoader) {
+                    apiLog("\tUsing SharedLibraryLoader...");
+                }
+                // Extract from classpath and try org.lwjgl.librarypath
+                try (FileChannel ignored = SharedLibraryLoader.load(name, name, libURL)) {
+                    path = loadFromLibraryPath(name);
+                    if (path != null) {
+                        return path;
+                    }
+                }
+            } catch (Exception e) {
+                if (debugLoader) {
+                    e.printStackTrace(DEBUG_STREAM);
+                }
+            }
+        }
+
+        // METHOD 3: java.library.path
+        String paths = System.getProperty(Library.JAVA_LIBRARY_PATH);
+        if (paths != null) {
+            path = load(name, Library.JAVA_LIBRARY_PATH, paths);
+            if (path != null) {
+                return path;
+            }
+        }
+
+        if (printError) {
+            printError();
+        }
+        throw new IllegalStateException("Failed to locate library resource: " + name);
+    }
+
+    @Nullable
+    private static Path loadFromLibraryPath(String libName) {
+        String paths = Configuration.LIBRARY_PATH.get();
+        if (paths == null) {
+            return null;
+        }
+        return load(libName, Configuration.LIBRARY_PATH.getProperty(), paths);
+    }
+
+    @Nullable
+    private static Path load(String name, String property, String paths) {
+        Path resource = Library.findFile(paths, name);
+        if (resource == null) {
+            apiLog(String.format("\t%s not found in %s=%s", name, property, paths));
+            return null;
+        }
+
+        apiLog(String.format("\tFound in %s: %s", property, resource));
+        return resource;
+    }
+
+    /**
+     * Loads a library resource using {@link #load(String)} with the name specified by {@code name}. If {@code name} is not set,
+     * {@link #load(String)} will be called with the names specified by {@code defaultNames}. The first successful will be returned.
+     *
+     * @param name         a {@link Configuration} that specifies the resource name
+     * @param defaultNames the default resource name(s)
+     *
+     * @return the library resource path
+     *
+     * @throws IllegalStateException if the resource could not be found
+     */
+    public static Path load(Class<?> context, Configuration<String> name, String... defaultNames) {
+        return load(context, name, null, defaultNames);
+    }
+
+    /**
+     * Loads a library resource using {@link #load(String)} with the name specified by {@code name}. If {@code name} is not set,
+     * {@link #load(String)} will be called with the names specified by {@code defaultNames}. The first successful will be returned. If the resource could
+     * not be found, the {@code fallback} will be called.
+     *
+     * @param name         a {@link Configuration} that specifies the resource name
+     * @param fallback     fallback to use if everything else fails
+     * @param defaultNames the default resource name(s)
+     *
+     * @return the library resource path
+     *
+     * @throws UnsatisfiedLinkError if the resource could not be found
+     */
+    public static Path load(Class<?> context, Configuration<String> name, @Nullable Supplier<Path> fallback, String... defaultNames) {
+        if (defaultNames.length == 0) {
+            throw new IllegalArgumentException("No default names specified.");
+        }
+
+        String resourceName = name.get();
+        if (resourceName != null) {
+            return load(context, resourceName);
+        }
+
+        if (fallback == null && defaultNames.length <= 1) {
+            return load(context, defaultNames[0]);
+        }
+
+        try {
+            return load(context, defaultNames[0], false); // try first
+        } catch (Throwable t) {
+            for (int i = 1; i < defaultNames.length; i++) { // try alternatives
+                try {
+                    return load(context, defaultNames[i], fallback == null && i == defaultNames.length - 1);
+                } catch (Throwable ignored) {
+                }
+            }
+            if (fallback != null) {
+                return fallback.get();
+            }
+            throw t; // original error
+        }
+    }
+
+    private static void printError() {
+        Library.printError(
+            "[LWJGL] Failed to load a library resource. Possible solutions:\n" +
+            "\ta) Add the directory that contains the resource to -Djava.library.path or -Dorg.lwjgl.librarypath.\n" +
+            "\tb) Add the JAR that contains the resource to the classpath."
+        );
+    }
+
+}

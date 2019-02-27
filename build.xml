@@ -855,27 +855,29 @@
 
     <macrodef name="get-release-offline">
         <attribute name="url"/>
+        <attribute name="dest"/>
 
         <sequential>
             <local name="base"/>
             <basename file="@{url}" property="base"/>
 
             <local name="available"/>
-            <available file="${lib}/${base}" property="available"/>
+            <available file="${lib}@{dest}/${base}" property="available"/>
 
             <echo message="release: ${lib}${file.separator}${base} is missing" level="warning" unless:set="available"/>
             <quiet if:set="available">
-                <copy file="${lib}/${base}" todir="${release}/${module}/native"/>
+                <copy file="${lib}@{dest}/${base}" todir="${release}/${module}/native@{dest}"/>
             </quiet>
         </sequential>
     </macrodef>
 
     <macrodef name="get-release">
         <attribute name="url"/>
+        <attribute name="dest" default=""/>
 
         <sequential>
-            <get src="https://build.lwjgl.org/${build.type}/@{url}" dest="${release}/${module}/native" verbose="false" usetimestamp="true" unless:true="${build.offline}"/>
-            <get-release-offline url="@{url}" if:true="${build.offline}"/>
+            <get src="https://build.lwjgl.org/${build.type}/@{url}" dest="${release}/${module}/native@{dest}" verbose="false" usetimestamp="true" unless:true="${build.offline}"/>
+            <get-release-offline url="@{url}" dest="@{dest}" if:true="${build.offline}"/>
         </sequential>
     </macrodef>
 
@@ -916,6 +918,7 @@
             <lwjgl-jar destfile="${release}/${module}/${module}-natives-@{platform}.jar" title="@{title}" unless:set="platform.skip">
                 <fileset dir="${release}/${module}/native" includes="*@{extension}*"/>
                 <fileset dir="${bin.lwjgl}/@{name}.natives" includes="META-INF/versions/9/module-info.class" if:set="jdk9"/>
+                <content/>
             </lwjgl-jar>
         </sequential>
     </macrodef>
@@ -924,7 +927,10 @@
         <attribute name="name"/>
         <attribute name="title"/>
         <attribute name="native-library"/>
-        <element name="content" optional="true" implicit="true"/>
+        <element name="content" optional="true"/>
+        <element name="linux-content" optional="true"/>
+        <element name="macos-content" optional="true"/>
+        <element name="windows-content" optional="true"/>
         <sequential>
             <quiet>
                 <mkdir dir="${release}/${module}/native"/>
@@ -981,9 +987,15 @@
             </checksum>
 
             <parallel threadsPerProcessor="1" failonany="true">
-                <natives-jar name="@{name}" title="@{title}" platform="linux" extension=".so"/>
-                <natives-jar name="@{name}" title="@{title}" platform="macos" extension=".dylib"/>
-                <natives-jar name="@{name}" title="@{title}" platform="windows" extension=".dll"/>
+                <natives-jar name="@{name}" title="@{title}" platform="linux" extension=".so">
+                    <linux-content/>
+                </natives-jar>
+                <natives-jar name="@{name}" title="@{title}" platform="macos" extension=".dylib">
+                    <macos-content/>
+                </natives-jar>
+                <natives-jar name="@{name}" title="@{title}" platform="windows" extension=".dll">
+                    <windows-content/>
+                </natives-jar>
             </parallel>
         </sequential>
     </macrodef>
@@ -995,6 +1007,9 @@
         <attribute name="native-library" default=""/>
         <attribute name="license" default="@{name}"/>
         <element name="natives" optional="true"/>
+        <element name="linux" optional="true"/>
+        <element name="macos" optional="true"/>
+        <element name="windows" optional="true"/>
         <sequential>
             <local name="module"/>
             <condition property="module" value="lwjgl" else="lwjgl-@{name}">
@@ -1008,7 +1023,10 @@
 
             <!-- Bundle natives -->
             <release-natives name="@{name}" title="@{title}" native-library="@{native-library}" unless:set="java-only.binding.@{name}">
-                <natives/>
+                <content><natives/></content>
+                <linux-content><linux/></linux-content>
+                <macos-content><macos/></macos-content>
+                <windows-content><windows/></windows-content>
             </release-natives>
 
             <!-- Bundle classes -->
