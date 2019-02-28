@@ -6,15 +6,19 @@ package org.lwjgl.demo.nanovg;
 
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
+import org.lwjgl.system.*;
 
+import java.nio.*;
 import java.util.*;
 
+import static java.lang.Math.*;
 import static org.lwjgl.demo.nanovg.NanoVGUtils.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.nanovg.NanoVG.*;
 import static org.lwjgl.nanovg.NanoVGGL2.*;
 import static org.lwjgl.opengl.GL11C.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /*
@@ -52,11 +56,22 @@ public final class ExampleGL2 extends Demo {
     private static boolean screenshot;
     private static boolean premult;
 
+    private static double cursorX;
+    private static double cursorY;
+
+    private static int framebufferWidth;
+    private static int framebufferHeight;
+
+    private static float contentScaleX;
+    private static float contentScaleY;
+
     public static void main(String[] args) {
         GLFWErrorCallback.createPrint().set();
         if (!glfwInit()) {
             throw new RuntimeException("Failed to init GLFW.");
         }
+
+        glfwWindowHint(GLFW_SCALE_TO_MONITOR, GLFW_TRUE);
 
         boolean DEMO_MSAA = args.length != 0 && "msaa".equalsIgnoreCase(args[0]);
         if (DEMO_MSAA) {
@@ -83,6 +98,35 @@ public final class ExampleGL2 extends Demo {
                 premult = !premult;
             }
         });
+
+        glfwSetCursorPosCallback(window, (handle, xpos, ypos) -> {
+            cursorX = (int)xpos;
+            cursorY = (int)ypos;
+        });
+
+        glfwSetFramebufferSizeCallback(window, (handle, w, h) -> {
+            framebufferWidth = w;
+            framebufferHeight = h;
+        });
+        glfwSetWindowContentScaleCallback(window, (handle, xscale, yscale) -> {
+            contentScaleX = xscale;
+            contentScaleY = yscale;
+        });
+
+        try (MemoryStack stack = stackPush()) {
+            IntBuffer   fw = stack.mallocInt(1);
+            IntBuffer   fh = stack.mallocInt(1);
+            FloatBuffer sx = stack.mallocFloat(1);
+            FloatBuffer sy = stack.mallocFloat(1);
+
+            glfwGetFramebufferSize(window, fw, fh);
+            framebufferWidth = fw.get(0);
+            framebufferHeight = fh.get(0);
+
+            glfwGetWindowContentScale(window, sx, sy);
+            contentScaleX = sx.get(0);
+            contentScaleY = sy.get(0);
+        }
 
         glfwMakeContextCurrent(window);
         GL.createCapabilities();
@@ -111,15 +155,12 @@ public final class ExampleGL2 extends Demo {
             prevt = t;
             updateGraph(fps, (float)dt);
 
-            glfwGetCursorPos(window, mx, my);
-            glfwGetWindowSize(window, winWidth, winHeight);
-            glfwGetFramebufferSize(window, fbWidth, fbHeight);
-
-            // Calculate pixel ration for hi-dpi devices.
-            float pxRatio = fbWidth.get(0) / (float)winWidth.get(0);
+            // Effective dimensions on hi-dpi devices.
+            int width  = (int)(framebufferWidth / contentScaleX);
+            int height = (int)(framebufferHeight / contentScaleY);
 
             // Update and render
-            glViewport(0, 0, fbWidth.get(0), fbHeight.get(0));
+            glViewport(0, 0, framebufferWidth, framebufferHeight);
             if (premult) {
                 glClearColor(0, 0, 0, 0);
             } else {
@@ -127,16 +168,16 @@ public final class ExampleGL2 extends Demo {
             }
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-            nvgBeginFrame(vg, winWidth.get(0), winHeight.get(0), pxRatio);
+            nvgBeginFrame(vg, width, height, max(contentScaleX, contentScaleY));
 
-            renderDemo(vg, (float)mx.get(0), (float)my.get(0), winWidth.get(0), winHeight.get(0), (float)t, blowup, data);
+            renderDemo(vg, (float)cursorX, (float)cursorY, width, height, (float)t, blowup, data);
             renderGraph(vg, 5, 5, fps);
 
             nvgEndFrame(vg);
 
             if (screenshot) {
                 screenshot = false;
-                saveScreenShotGL(fbWidth.get(0), fbHeight.get(0), premult, "nanovg_gl2.png");
+                saveScreenShotGL(framebufferWidth, framebufferHeight, premult, "nanovg_gl2.png");
             }
 
             glfwSwapBuffers(window);

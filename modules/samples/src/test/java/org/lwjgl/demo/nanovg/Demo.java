@@ -91,18 +91,6 @@ class Demo {
         int[] images = new int[12];
     }
 
-    static final DoubleBuffer
-        mx = BufferUtils.createDoubleBuffer(1),
-        my = BufferUtils.createDoubleBuffer(1);
-
-    static final IntBuffer
-        winWidth  = BufferUtils.createIntBuffer(1),
-        winHeight = BufferUtils.createIntBuffer(1);
-
-    static final IntBuffer
-        fbWidth  = BufferUtils.createIntBuffer(1),
-        fbHeight = BufferUtils.createIntBuffer(1);
-
     static final FloatBuffer gpuTimes = BufferUtils.createFloatBuffer(3);
 
     protected Demo() {

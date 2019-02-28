@@ -37,6 +37,15 @@ public final class ExampleBGFX extends Demo {
     private static boolean screenshot;
     private static boolean premult;
 
+    private static double cursorX;
+    private static double cursorY;
+
+    private static int framebufferWidth;
+    private static int framebufferHeight;
+
+    private static float contentScaleX;
+    private static float contentScaleY;
+
     public static void main(String[] args) {
         GLFWErrorCallback.createPrint().set();
         if (!glfwInit()) {
@@ -44,6 +53,8 @@ public final class ExampleBGFX extends Demo {
         }
 
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+        glfwWindowHint(GLFW_SCALE_TO_MONITOR, GLFW_TRUE);
+
         long window = glfwCreateWindow(1000, 600, "NanoVG (bgfx)", NULL, NULL);
         if (window == NULL) {
             glfwTerminate();
@@ -65,15 +76,41 @@ public final class ExampleBGFX extends Demo {
             }
         });
 
+        glfwSetCursorPosCallback(window, (handle, xpos, ypos) -> {
+            cursorX = (int)xpos;
+            cursorY = (int)ypos;
+        });
+
         boolean DEMO_MSAA = args.length != 0 && "msaa".equalsIgnoreCase(args[0]);
-        glfwSetFramebufferSizeCallback(window, (handle, w, h) -> bgfx_reset(
-            w, h,
-            DEMO_MSAA ? BGFX_RESET_MSAA_X8 : BGFX_RESET_NONE,
-            BGFX_TEXTURE_FORMAT_UNKNOWN
-        ));
-        glfwGetFramebufferSize(window, fbWidth, fbHeight);
+
+        glfwSetFramebufferSizeCallback(window, (handle, w, h) -> {
+            framebufferWidth = w;
+            framebufferHeight = h;
+            bgfx_reset(
+                w, h,
+                DEMO_MSAA ? BGFX_RESET_MSAA_X8 : BGFX_RESET_NONE,
+                BGFX_TEXTURE_FORMAT_UNKNOWN
+            );
+        });
+        glfwSetWindowContentScaleCallback(window, (handle, xscale, yscale) -> {
+            contentScaleX = xscale;
+            contentScaleY = yscale;
+        });
 
         try (MemoryStack stack = stackPush()) {
+            IntBuffer   fw = stack.mallocInt(1);
+            IntBuffer   fh = stack.mallocInt(1);
+            FloatBuffer sx = stack.mallocFloat(1);
+            FloatBuffer sy = stack.mallocFloat(1);
+
+            glfwGetFramebufferSize(window, fw, fh);
+            framebufferWidth = fw.get(0);
+            framebufferHeight = fh.get(0);
+
+            glfwGetWindowContentScale(window, sx, sy);
+            contentScaleX = sx.get(0);
+            contentScaleY = sy.get(0);
+
             BGFXInit init = BGFXInit.mallocStack(stack);
             bgfx_init_ctor(init);
             init
@@ -119,8 +156,8 @@ public final class ExampleBGFX extends Demo {
                 )
                 //.type(BGFX_RENDERER_TYPE_DIRECT3D12)
                 .resolution(it -> it
-                    .width(fbWidth.get(0))
-                    .height(fbHeight.get(0))
+                    .width(framebufferWidth)
+                    .height(framebufferHeight)
                     .reset(DEMO_MSAA ? BGFX_RESET_MSAA_X8 : BGFX_RESET_NONE));
 
             switch (Platform.get()) {
@@ -168,12 +205,6 @@ public final class ExampleBGFX extends Demo {
             prevt = t;
             updateGraph(fps, (float)dt);
 
-            glfwGetCursorPos(window, mx, my);
-            glfwGetWindowSize(window, winWidth, winHeight);
-            glfwGetFramebufferSize(window, fbWidth, fbHeight);
-
-            // Update and render
-            bgfx_set_view_rect(0, 0, 0, fbWidth.get(0), fbHeight.get(0));
             bgfx_set_view_clear(0,
                 BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH | BGFX_CLEAR_STENCIL,
                 premult
@@ -183,11 +214,13 @@ public final class ExampleBGFX extends Demo {
                 0
             );
 
-            // Calculate pixel ration for hi-dpi devices.
-            float pxRatio = fbWidth.get(0) / (float)winWidth.get(0);
-            nvgBeginFrame(vg, winWidth.get(0), winHeight.get(0), pxRatio);
+            // Effective dimensions on hi-dpi devices.
+            int width  = (int)(framebufferWidth / contentScaleX);
+            int height = (int)(framebufferHeight / contentScaleY);
 
-            renderDemo(vg, (float)mx.get(0), (float)my.get(0), winWidth.get(0), winHeight.get(0), (float)t, blowup, data);
+            nvgBeginFrame(vg, width, height, max(contentScaleX, contentScaleY));
+
+            renderDemo(vg, (float)cursorX, (float)cursorY, width, height, (float)t, blowup, data);
             renderGraph(vg, 5, 5, fps);
 
             nvgEndFrame(vg);

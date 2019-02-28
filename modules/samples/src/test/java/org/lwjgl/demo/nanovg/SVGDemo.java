@@ -13,25 +13,31 @@ import java.nio.*;
 import java.util.*;
 
 import static java.lang.Math.*;
-import static org.lwjgl.demo.glfw.GLFWUtil.*;
 import static org.lwjgl.demo.nanovg.NanoVGUtils.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.nanovg.NanoSVG.*;
 import static org.lwjgl.opengl.GL12.*;
 import static org.lwjgl.stb.STBImageResize.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 public class SVGDemo {
 
-    private final ByteBuffer image;
+    private final NSVGImage svg;
 
-    private final int w;
-    private final int h;
+    private final int svgWidth;
+    private final int svgHeight;
+
+    private int texID;
 
     private long window;
-    private int  ww;
-    private int  wh;
+
+    private int windowWidth;
+    private int windowHeight;
+
+    private int framebufferWidth;
+    private int framebufferHeight;
 
     private boolean ctrlDown;
 
@@ -40,30 +46,17 @@ public class SVGDemo {
     private Callback debugProc;
 
     private SVGDemo(ByteBuffer svgData) {
-        NSVGImage svg;
         try (MemoryStack stack = MemoryStack.stackPush()) {
             svg = nsvgParse(svgData, stack.ASCII("px"), 96.0f);
+            if (svg == null) {
+                throw new IllegalStateException("Failed to parse SVG.");
+            }
+        } finally {
             memFree(svgData);
         }
-        if (svg == null) {
-            throw new IllegalStateException("Failed to parse SVG.");
-        }
 
-        long rast = nsvgCreateRasterizer();
-        if (rast == NULL) {
-            throw new IllegalStateException("Failed to create SVG rasterizer.");
-        }
-
-        this.w = (int)svg.width();
-        this.h = (int)svg.height();
-
-        image = memAlloc(w * h * 4);
-
-        System.out.format("Rasterizing image %d x %d...", w, h);
-        long t = System.nanoTime();
-        nsvgRasterize(rast, svg, 0, 0, 1, image, w, h, w * 4);
-        t = System.nanoTime() - t;
-        System.out.format("%dms\n", t / 1000 / 1000);
+        this.svgWidth = (int)svg.width();
+        this.svgHeight = (int)svg.height();
     }
 
     public static void main(String[] args) {
@@ -99,20 +92,6 @@ public class SVGDemo {
         }
     }
 
-    private void windowSizeChanged(long window, int width, int height) {
-        this.ww = width;
-        this.wh = height;
-
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        glOrtho(0.0, width, height, 0.0, -1.0, 1.0);
-        glMatrixMode(GL_MODELVIEW);
-    }
-
-    private static void framebufferSizeChanged(long window, int width, int height) {
-        glViewport(0, 0, width, height);
-    }
-
     private void init() {
         System.out.print("Creating window...");
         long t = System.nanoTime();
@@ -127,26 +106,42 @@ public class SVGDemo {
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+        glfwWindowHint(GLFW_SCALE_TO_MONITOR, GLFW_TRUE);
 
-        GLFWVidMode vidmode = Objects.requireNonNull(glfwGetVideoMode(glfwGetPrimaryMonitor()));
-        ww = max(800, min(w, vidmode.width() - 160));
-        wh = max(600, min(h, vidmode.height() - 120));
+        long        monitor = glfwGetPrimaryMonitor();
+        GLFWVidMode vidmode = Objects.requireNonNull(glfwGetVideoMode(monitor));
+
+        int ww = min(svgWidth + 32, vidmode.width());
+        int wh = min(svgHeight + 32, vidmode.height());
+        if (Platform.get() != Platform.MACOSX) {
+            try (MemoryStack stack = stackPush()) {
+                FloatBuffer sx = stack.mallocFloat(1);
+                FloatBuffer sy = stack.mallocFloat(1);
+
+                glfwGetMonitorContentScale(monitor, sx, sy);
+
+                ww = (int)(ww / sx.get(0));
+                wh = (int)(wh / sy.get(0));
+            }
+        }
 
         this.window = glfwCreateWindow(ww, wh, "NanoSVG Demo", NULL, NULL);
         if (window == NULL) {
             throw new RuntimeException("Failed to create the GLFW window");
         }
 
-        // Center window
-        glfwSetWindowPos(
-            window,
-            (vidmode.width() - ww) / 2,
-            (vidmode.height() - wh) / 2
-        );
-
         glfwSetWindowRefreshCallback(window, window -> render());
-        glfwSetWindowSizeCallback(window, this::windowSizeChanged);
-        glfwSetFramebufferSizeCallback(window, SVGDemo::framebufferSizeChanged);
+        glfwSetWindowSizeCallback(window, (window, width, height) -> {
+            windowWidth = width;
+            windowHeight = height;
+        });
+        glfwSetFramebufferSizeCallback(window, (window, width, height) -> {
+            framebufferWidth = width;
+            framebufferHeight = height;
+
+            glViewport(0, 0, width, height);
+        });
+        glfwSetWindowContentScaleCallback(window, (window, xscale, yscale) -> createTexture(xscale, yscale));
 
         glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
             ctrlDown = (mods & GLFW_MOD_CONTROL) != 0;
@@ -187,24 +182,70 @@ public class SVGDemo {
         debugProc = GLUtil.setupDebugMessageCallback();
 
         glfwSwapInterval(1);
-        glfwShowWindow(window);
-
-        glfwInvoke(window, this::windowSizeChanged, SVGDemo::framebufferSizeChanged);
 
         t = System.nanoTime() - t;
         System.out.format("%dms\n", t / 1000 / 1000);
+
+        try (MemoryStack stack = stackPush()) {
+            IntBuffer   pw = stack.mallocInt(1);
+            IntBuffer   ph = stack.mallocInt(1);
+            FloatBuffer sx = stack.mallocFloat(1);
+            FloatBuffer sy = stack.mallocFloat(1);
+
+            glfwGetWindowSize(window, pw, ph);
+            windowWidth = pw.get(0);
+            windowHeight = ph.get(0);
+
+            glfwGetFramebufferSize(window, pw, ph);
+            framebufferWidth = pw.get(0);
+            framebufferHeight = ph.get(0);
+
+            glViewport(0, 0, framebufferWidth, framebufferHeight);
+
+            glfwGetWindowContentScale(window, sx, sy);
+            createTexture(sx.get(0), sy.get(0));
+        }
+
+        // Center window
+        glfwSetWindowPos(
+            window,
+            (vidmode.width() - windowWidth) / 2,
+            (vidmode.height() - windowHeight) / 2
+        );
+        glfwShowWindow(window);
     }
 
     private void setScale(int scale) {
         this.scale = max(-9, scale);
     }
 
+    private void createTexture(float contentScaleX, float contentScaleY) {
+        if (texID != 0) {
+            glDeleteTextures(texID);
+        }
 
-    private int createTexture() {
-        System.out.print("Creating texture...");
+        long rast = nsvgCreateRasterizer();
+        if (rast == NULL) {
+            throw new IllegalStateException("Failed to create SVG rasterizer.");
+        }
+
+        int width  = (int)(svgWidth * contentScaleX);
+        int height = (int)(svgHeight * contentScaleY);
+
+        ByteBuffer image = memAlloc(width * height * 4);
+
+        System.out.format("Rasterizing image %d x %d...", width, height);
         long t = System.nanoTime();
+        nsvgRasterize(rast, svg, 0, 0, min(contentScaleX, contentScaleY), image, width, height, width * 4);
+        t = System.nanoTime() - t;
+        System.out.format("%dms\n", t / 1000 / 1000);
 
-        int texID = glGenTextures();
+        nsvgDeleteRasterizer(rast);
+
+        System.out.print("Creating texture...");
+        t = System.nanoTime();
+
+        texID = glGenTextures();
 
         glBindTexture(GL_TEXTURE_2D, texID);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -212,13 +253,13 @@ public class SVGDemo {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
-        premultiplyAlpha(image, w, h, w * 4);
+        premultiplyAlpha(image, width, height, width * 4);
 
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 
         ByteBuffer input_pixels = image;
-        int        input_w      = w;
-        int        input_h      = h;
+        int        input_w      = width;
+        int        input_h      = height;
         int        mipmapLevel  = 0;
         while (1 < input_w || 1 < input_h) {
             int output_w = max(1, input_w >> 1);
@@ -246,13 +287,9 @@ public class SVGDemo {
 
         t = System.nanoTime() - t;
         System.out.format("%dms\n", t / 1000 / 1000);
-
-        return texID;
     }
 
     private void loop() {
-        int texID = createTexture();
-
         glEnable(GL_BLEND);
         glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -273,10 +310,15 @@ public class SVGDemo {
 
         float scaleFactor = 1.0f + scale * 0.1f;
 
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        glOrtho(0.0, windowWidth, windowHeight, 0.0, -1.0, 1.0);
+        glMatrixMode(GL_MODELVIEW);
+
         glPushMatrix();
-        glTranslatef(ww * 0.5f, wh * 0.5f, 0.0f);
+        glTranslatef(windowWidth * 0.5f, windowHeight * 0.5f, 0.0f);
         glScalef(scaleFactor, scaleFactor, 1f);
-        glTranslatef(-w * 0.5f, -h * 0.5f, 0.0f);
+        glTranslatef(-svgWidth * 0.5f, -svgHeight * 0.5f, 0.0f);
 
         glBegin(GL_QUADS);
         {
@@ -284,13 +326,13 @@ public class SVGDemo {
             glVertex2f(0.0f, 0.0f);
 
             glTexCoord2f(1.0f, 0.0f);
-            glVertex2f(w, 0.0f);
+            glVertex2f(svgWidth, 0.0f);
 
             glTexCoord2f(1.0f, 1.0f);
-            glVertex2f(w, h);
+            glVertex2f(svgWidth, svgHeight);
 
             glTexCoord2f(0.0f, 1.0f);
-            glVertex2f(0.0f, h);
+            glVertex2f(0.0f, svgHeight);
         }
         glEnd();
 

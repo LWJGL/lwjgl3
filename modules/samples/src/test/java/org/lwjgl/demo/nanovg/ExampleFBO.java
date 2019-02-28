@@ -4,7 +4,6 @@
  */
 package org.lwjgl.demo.nanovg;
 
-import org.lwjgl.*;
 import org.lwjgl.glfw.*;
 import org.lwjgl.nanovg.*;
 import org.lwjgl.opengl.*;
@@ -20,6 +19,7 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.nanovg.NanoVG.*;
 import static org.lwjgl.nanovg.NanoVGGL3.*;
 import static org.lwjgl.opengl.GL11C.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /*
@@ -50,34 +50,54 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public final class ExampleFBO extends Demo {
 
-    private static final IntBuffer
-        fboWidth  = BufferUtils.createIntBuffer(1),
-        fboHeight = BufferUtils.createIntBuffer(1);
-
     private static final ByteBuffer RobotoRegular = loadResource("demo/nanovg/Roboto-Regular.ttf", 150 * 1024);
     private static final ByteBuffer RobotoBold    = loadResource("demo/nanovg/Roboto-Bold.ttf", 150 * 1024);
+
+    private static final int FBO_WIDTH  = 100;
+    private static final int FBO_HEIGHT = 100;
+
+    private static int framebufferWidth;
+    private static int framebufferHeight;
+
+    private static float contentScaleX;
+    private static float contentScaleY;
+
+    private static NVGLUFramebuffer fb;
 
     private ExampleFBO() {
     }
 
-    private static void renderPattern(long vg, NVGLUFramebuffer fb, float t, float pxRatio) {
+    private static void createPattern(long vg) {
+        if (fb != null) {
+            nvgluDeleteFramebuffer(vg, fb);
+        }
+
+        // The image pattern is tiled, set repeat on x and y.
+        fb = nvgluCreateFramebuffer(
+            vg,
+            (int)(FBO_WIDTH * contentScaleX),
+            (int)(100 * contentScaleY),
+            NVG_IMAGE_REPEATX | NVG_IMAGE_REPEATY
+        );
+        if (fb == null) {
+            throw new RuntimeException("Could not create FBO.");
+        }
+    }
+
+    private static void renderPattern(long vg, float t) {
         float s  = 20.0f;
         float sr = ((float)cos(t) + 1) * 0.5f;
         float r  = s * 0.6f * (0.2f + 0.8f * sr);
 
-        nvgImageSize(vg, fb.image(), fboWidth, fboHeight);
-        int winWidth  = (int)(fboWidth.get(0) / pxRatio);
-        int winHeight = (int)(fboHeight.get(0) / pxRatio);
-
         // Draw some stuff to an FBO as a test
         nvgluBindFramebuffer(vg, fb);
-        glViewport(0, 0, fboWidth.get(0), fboHeight.get(0));
+        glViewport(0, 0, (int)(FBO_WIDTH * contentScaleX), (int)(FBO_HEIGHT * contentScaleY));
         glClearColor(0, 0, 0, 0);
         glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-        nvgBeginFrame(vg, winWidth, winHeight, pxRatio);
+        nvgBeginFrame(vg, FBO_WIDTH, FBO_HEIGHT, max(contentScaleX, contentScaleY));
 
-        int pw = (int)ceil(winWidth / s);
-        int ph = (int)ceil(winHeight / s);
+        int pw = (int)ceil(FBO_WIDTH / s);
+        int ph = (int)ceil(FBO_HEIGHT / s);
 
         nvgBeginPath(vg);
         for (int y = 0; y < ph; y++) {
@@ -119,6 +139,7 @@ public final class ExampleFBO extends Demo {
             glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
             glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
         }
+        glfwWindowHint(GLFW_SCALE_TO_MONITOR, GLFW_TRUE);
 
         boolean DEMO_MSAA = args.length != 0 && "msaa".equalsIgnoreCase(args[0]);
         if (DEMO_MSAA) {
@@ -137,6 +158,26 @@ public final class ExampleFBO extends Demo {
             }
         });
 
+        glfwSetFramebufferSizeCallback(window, (handle, w, h) -> {
+            framebufferWidth = w;
+            framebufferHeight = h;
+        });
+
+        try (MemoryStack stack = stackPush()) {
+            IntBuffer   fw = stack.mallocInt(1);
+            IntBuffer   fh = stack.mallocInt(1);
+            FloatBuffer sx = stack.mallocFloat(1);
+            FloatBuffer sy = stack.mallocFloat(1);
+
+            glfwGetFramebufferSize(window, fw, fh);
+            framebufferWidth = fw.get(0);
+            framebufferHeight = fh.get(0);
+
+            glfwGetWindowContentScale(window, sx, sy);
+            contentScaleX = sx.get(0);
+            contentScaleY = sy.get(0);
+        }
+
         glfwMakeContextCurrent(window);
         GL.createCapabilities();
         glfwSwapInterval(0);
@@ -146,18 +187,14 @@ public final class ExampleFBO extends Demo {
             throw new RuntimeException("Could not init nanovg.");
         }
 
-        // Create hi-dpi FBO for hi-dpi screens.
-        glfwGetWindowSize(window, winWidth, winHeight);
-        glfwGetFramebufferSize(window, fbWidth, fbHeight);
-        // Calculate pixel ration for hi-dpi devices.
-        float pxRatio = fbWidth.get(0) / (float)winWidth.get(0);
+        glfwSetWindowContentScaleCallback(window, (handle, xscale, yscale) -> {
+            contentScaleX = xscale;
+            contentScaleY = yscale;
 
-        // The image pattern is tiled, set repeat on x and y.
-        NVGLUFramebuffer fb = nvgluCreateFramebuffer(vg, (int)(100 * pxRatio), (int)(100 * pxRatio), NVG_IMAGE_REPEATX | NVG_IMAGE_REPEATY);
-        if (fb == null) {
-            throw new RuntimeException("Could not create FBO.");
-        }
+            createPattern(vg);
+        });
 
+        createPattern(vg);
         loadFonts(vg);
 
         GPUtimer  gpuTimer = new GPUtimer();
@@ -181,20 +218,18 @@ public final class ExampleFBO extends Demo {
 
             startGPUTimer(gpuTimer);
 
-            glfwGetCursorPos(window, mx, my);
-            glfwGetWindowSize(window, winWidth, winHeight);
-            glfwGetFramebufferSize(window, fbWidth, fbHeight);
-            // Calculate pixel ration for hi-dpi devices.
-            pxRatio = (float)fbWidth.get(0) / (float)winWidth.get(0);
+            // Effective dimensions on hi-dpi devices.
+            int width  = (int)(framebufferWidth / contentScaleX);
+            int height = (int)(framebufferHeight / contentScaleY);
 
-            renderPattern(vg, fb, (float)t, pxRatio);
+            renderPattern(vg, (float)t);
 
             // Update and render
-            glViewport(0, 0, fbWidth.get(0), fbHeight.get(0));
+            glViewport(0, 0, framebufferWidth, framebufferHeight);
             glClearColor(0.3f, 0.3f, 0.32f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-            nvgBeginFrame(vg, winWidth.get(0), winHeight.get(0), pxRatio);
+            nvgBeginFrame(vg, width, height, max(contentScaleX, contentScaleY));
 
             // Use the FBO as image pattern.
             NVGPaint img = paintA;
@@ -203,7 +238,7 @@ public final class ExampleFBO extends Demo {
 
             for (int i = 0; i < 20; i++) {
                 nvgBeginPath(vg);
-                nvgRect(vg, 10 + i * 30, 10, 10, winHeight.get(0) - 20);
+                nvgRect(vg, 10 + i * 30, 10, 10, height - 20);
                 nvgHSLA(i / 19.0f, 0.5f, 0.5f, (byte)255, colorA);
                 nvgFillColor(vg, colorA);
                 nvgFill(vg);
