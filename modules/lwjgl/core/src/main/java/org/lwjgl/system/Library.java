@@ -349,7 +349,7 @@ public final class Library {
      *
      * @throws UnsatisfiedLinkError if the library could not be loaded
      */
-    public static SharedLibrary loadNative(Class<?> context, Configuration<String> name, String... defaultNames) {
+    public static SharedLibrary loadNative(Class<?> context, @Nullable Configuration<String> name, String... defaultNames) {
         return loadNative(context, name, null, defaultNames);
     }
 
@@ -366,14 +366,16 @@ public final class Library {
      *
      * @throws UnsatisfiedLinkError if the library could not be loaded
      */
-    public static SharedLibrary loadNative(Class<?> context, Configuration<String> name, @Nullable Supplier<SharedLibrary> fallback, String... defaultNames) {
+    public static SharedLibrary loadNative(Class<?> context, @Nullable Configuration<String> name, @Nullable Supplier<SharedLibrary> fallback, String... defaultNames) {
         if (defaultNames.length == 0) {
             throw new IllegalArgumentException("No default names specified.");
         }
 
-        String libraryName = name.get();
-        if (libraryName != null) {
-            return loadNative(context, libraryName);
+        if (name != null) {
+            String libraryName = name.get();
+            if (libraryName != null) {
+                return loadNative(context, libraryName);
+            }
         }
 
         if (fallback == null && defaultNames.length <= 1) {

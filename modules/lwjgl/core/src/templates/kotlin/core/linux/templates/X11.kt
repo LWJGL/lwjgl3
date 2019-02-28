@@ -10,7 +10,7 @@ import core.linux.*
 val X11 = "X11".nativeClass(
     Module.CORE_LINUX,
     nativeSubPath = "linux",
-    binding = simpleBinding(Module.CORE_LINUX, "X11")
+    binding = simpleBinding(Module.CORE_LINUX, "X11", libraryExpression = "null, \"libX11.so.6\", \"libX11.so\"")
 ) {
     documentation = "Native bindings to libX11."
 
