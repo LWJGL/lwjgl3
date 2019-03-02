@@ -77,12 +77,16 @@ public class NanoVGBGFX {
 
     // --- [ nvgSetViewId ] ---
 
-    public static void nvgSetViewId(@NativeType("NVGcontext *") long _ctx, @NativeType("bgfx_view_id_t") short _viewId) {
+    public static void nnvgSetViewId(long _ctx, short _viewId) {
         long __functionAddress = Functions.SetViewId;
         if (CHECKS) {
             check(_ctx);
         }
         invokePV(_ctx, _viewId, __functionAddress);
+    }
+
+    public static void nvgSetViewId(@NativeType("NVGcontext *") long _ctx, @NativeType("bgfx_view_id_t") int _viewId) {
+        nnvgSetViewId(_ctx, (short)_viewId);
     }
 
     // --- [ nvgGetViewId ] ---
@@ -108,9 +112,9 @@ public class NanoVGBGFX {
 
     @Nullable
     @NativeType("NVGLUframebuffer *")
-    public static NVGLUFramebuffer nvgluCreateFramebuffer(@NativeType("NVGcontext *") long _ctx, @NativeType("int32_t") int _width, @NativeType("int32_t") int _height, @NativeType("int32_t") int imageFlags) {
+    public static NVGLUFramebufferBGFX nvgluCreateFramebuffer(@NativeType("NVGcontext *") long _ctx, @NativeType("int32_t") int _width, @NativeType("int32_t") int _height, @NativeType("int32_t") int imageFlags) {
         long __result = nnvgluCreateFramebuffer(_ctx, _width, _height, imageFlags);
-        return NVGLUFramebuffer.createSafe(__result);
+        return NVGLUFramebufferBGFX.createSafe(__result);
     }
 
     // --- [ nvgluBindFramebuffer ] ---
@@ -120,7 +124,7 @@ public class NanoVGBGFX {
         invokePV(_framebuffer, __functionAddress);
     }
 
-    public static void nvgluBindFramebuffer(@Nullable @NativeType("NVGLUframebuffer *") NVGLUFramebuffer _framebuffer) {
+    public static void nvgluBindFramebuffer(@Nullable @NativeType("NVGLUframebuffer *") NVGLUFramebufferBGFX _framebuffer) {
         nnvgluBindFramebuffer(memAddressSafe(_framebuffer));
     }
 
@@ -131,7 +135,7 @@ public class NanoVGBGFX {
         invokePV(_framebuffer, __functionAddress);
     }
 
-    public static void nvgluDeleteFramebuffer(@NativeType("NVGLUframebuffer *") NVGLUFramebuffer _framebuffer) {
+    public static void nvgluDeleteFramebuffer(@NativeType("NVGLUframebuffer *") NVGLUFramebufferBGFX _framebuffer) {
         nnvgluDeleteFramebuffer(_framebuffer.address());
     }
 
@@ -142,8 +146,8 @@ public class NanoVGBGFX {
         invokePV(_view_id, _framebuffer, __functionAddress);
     }
 
-    public static void nvgluSetViewFramebuffer(@NativeType("bgfx_view_id_t") short _view_id, @NativeType("NVGLUframebuffer *") NVGLUFramebuffer _framebuffer) {
-        nnvgluSetViewFramebuffer(_view_id, _framebuffer.address());
+    public static void nvgluSetViewFramebuffer(@NativeType("bgfx_view_id_t") int _view_id, @NativeType("NVGLUframebuffer *") NVGLUFramebufferBGFX _framebuffer) {
+        nnvgluSetViewFramebuffer((short)_view_id, _framebuffer.address());
     }
 
     // --- [ org_lwjgl_nanovg_setup ] ---

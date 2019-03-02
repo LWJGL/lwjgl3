@@ -38,7 +38,7 @@ val nanovg_bgfx = "NanoVGBGFX".dependsOn(Module.BGFX)?.nativeClass(Module.NANOVG
         "",
 
         NVGcontext.p("_ctx", ""),
-        ViewId("_viewId", "")
+        MapToInt..ViewId("_viewId", "")
     )
 
     uint16_t(
@@ -48,7 +48,7 @@ val nanovg_bgfx = "NanoVGBGFX".dependsOn(Module.BGFX)?.nativeClass(Module.NANOVG
         NVGcontext.p("_ctx", "")
     )
 
-    NVGLUframebuffer.p(
+    NVGLUframebufferBGFX.p(
         "luCreateFramebuffer",
         "",
 
@@ -62,22 +62,22 @@ val nanovg_bgfx = "NanoVGBGFX".dependsOn(Module.BGFX)?.nativeClass(Module.NANOVG
         "luBindFramebuffer",
         "",
 
-        Input..nullable..NVGLUframebuffer.p("_framebuffer", "")
+        Input..nullable..NVGLUframebufferBGFX.p("_framebuffer", "")
     )
 
     void(
         "luDeleteFramebuffer",
         "",
 
-        Input..NVGLUframebuffer.p("_framebuffer", "")
+        Input..NVGLUframebufferBGFX.p("_framebuffer", "")
     )
 
     void(
         "luSetViewFramebuffer",
         "",
 
-        ViewId("_view_id", ""),
-        Input..NVGLUframebuffer.p("_framebuffer", "")
+        MapToInt..ViewId("_view_id", ""),
+        Input..NVGLUframebufferBGFX.p("_framebuffer", "")
     )
 
     // BGFX/NanoVG integration

@@ -35,7 +35,6 @@ public final class HelloBGFX {
 
         // the client (renderer) API is managed by bgfx
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-        glfwWindowHint(GLFW_SCALE_TO_MONITOR, GLFW_TRUE);
         if (Platform.get() == Platform.MACOSX) {
             glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
         }
