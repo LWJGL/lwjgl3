@@ -98,6 +98,13 @@
                 <srcfiles file="${bin.native}/wrap_memcpy.o" if:true="${build.arch.x64}"/>
                 <srcfiles dir="${dest}" includes="**"/>
             </uptodate>
+            <local name="lib-dependencies-uptodate"/>
+            <condition property="lib-dependencies-uptodate" value="true">
+            <or>
+                <isset property="lib-uptodate"/>
+                <istrue value="${build.offline}"/>
+            </or>
+            </condition>
 
             <local name="version.script"/>
             <property name="version.script" location="config/${platform}/version.script"/>
@@ -165,7 +172,7 @@
             </source>
             <beforeLink>
                 <mkdir dir="${lib}/${platform}/${build.arch}"/>
-                <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-uptodate">
+                <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-dependencies-uptodate">
                     <update-dependency name="dyncall" artifact="${build.arch}/libdyncall_s.a"/>
                     <update-dependency name="dyncallback" artifact="${build.arch}/libdyncallback_s.a"/>
                     <update-dependency name="dynload" artifact="${build.arch}/libdynload_s.a"/>
@@ -183,7 +190,7 @@
         <build module="bullet" simple="true" linker="g++" if:true="${binding.bullet}">
             <beforeLink>
                 <mkdir dir="${lib}/${platform}/${build.arch}/bullet"/>
-                <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-uptodate">
+                <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-dependencies-uptodate">
                     <update-dependency name="Bullet3Common" artifact="${build.arch}/bullet/libBullet3Common.a"/>
                     <update-dependency name="BulletCollision" artifact="${build.arch}/bullet/libBulletCollision.a"/>
                     <update-dependency name="BulletDynamics" artifact="${build.arch}/bullet/libBulletDynamics.a"/>

@@ -73,6 +73,13 @@
                 <srcfiles file="config/${platform}/build.xml"/>
                 <srcfiles dir="${bin.native}/@{module}" includes="**"/>
             </uptodate>
+            <local name="lib-dependencies-uptodate"/>
+            <condition property="lib-dependencies-uptodate" value="true">
+            <or>
+                <isset property="lib-uptodate"/>
+                <istrue value="${build.offline}"/>
+            </or>
+            </condition>
 
             <!--
                 x86: Generate DEF file to drop __stdcall decorations from JavaCritical
@@ -152,7 +159,7 @@ EXPORTS
             </source>
             <beforeLink>
                 <mkdir dir="${lib}/${platform}/${build.arch}"/>
-                <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-uptodate">
+                <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-dependencies-uptodate">
                     <update-dependency name="dyncall" artifact="${build.arch}/dyncall_s.lib"/>
                     <update-dependency name="dyncallback" artifact="${build.arch}/dyncallback_s.lib"/>
                     <update-dependency name="dynload" artifact="${build.arch}/dynload_s.lib"/>
@@ -169,7 +176,7 @@ EXPORTS
         <build module="bullet" simple="true" if:true="${binding.bullet}">
             <beforeLink>
                 <mkdir dir="${lib}/${platform}/${build.arch}/bullet"/>
-                <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-uptodate">
+                <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-dependencies-uptodate">
                     <update-dependency name="Bullet3Common" artifact="${build.arch}/bullet/Bullet3Common.lib"/>
                     <update-dependency name="BulletCollision" artifact="${build.arch}/bullet/BulletCollision.lib"/>
                     <update-dependency name="BulletDynamics" artifact="${build.arch}/bullet/BulletDynamics.lib"/>
