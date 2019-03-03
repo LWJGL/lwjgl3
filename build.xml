@@ -620,10 +620,10 @@
                 <pathelement path="${module.classpath}"/>
                 <pathelement path="${bin.test}"/>
                 <pathelement path="${lib}/java/jsr305.jar"/>
-                <pathelement path="${lib}/java/testng.jar"/>
-                <pathelement path="${lib}/java/joml.jar"/>
                 <pathelement path="${lib}/java/jmh-core.jar"/>
                 <pathelement path="${lib}/java/jmh-generator-annprocess.jar"/>
+                <pathelement path="${lib}/java/joml.jar"/>
+                <pathelement path="${lib}/java/testng.jar"/>
             </classpath>
 
             <!-- Demos -->
@@ -1005,7 +1005,6 @@
         <attribute name="name"/>
         <attribute name="title"/>
         <attribute name="native-library" default=""/>
-        <attribute name="license" default="@{name}"/>
         <element name="natives" optional="true"/>
         <element name="linux" optional="true"/>
         <element name="macos" optional="true"/>
@@ -1107,7 +1106,7 @@
             <!-- Copy license -->
             <quiet>
                 <copy todir="${release}/${module}">
-                    <fileset dir="${module.lwjgl}/@{name}" includes="@{license}*"/>
+                    <fileset dir="${module.lwjgl}/@{name}" includes="*_license.txt"/>
                 </copy>
             </quiet>
         </sequential>
@@ -1180,7 +1179,7 @@
                 <fileset dir="${module.lwjgl}/core/src/main/java10" includes="**"/>
             </copy>
         </quiet>
-        <release-module package="org.lwjgl" name="core" native-library="lwjgl" license="dyncall" title="Core"/>
+        <release-module package="org.lwjgl" name="core" native-library="lwjgl" title="Core"/>
 
         <!-- Assimp -->
         <release-module package="org.lwjgl.assimp" name="assimp" native-library="assimp" title="assimp" if:true="${binding.assimp}"/>
@@ -1195,7 +1194,7 @@
         <release-module package="org.lwjgl.cuda" name="cuda" title="CUDA" if:true="${binding.cuda}"/>
 
         <!-- EGL -->
-        <release-module package="org.lwjgl.egl" name="egl" title="EGL" license="khronos" if:true="${binding.egl}"/>
+        <release-module package="org.lwjgl.egl" name="egl" title="EGL" if:true="${binding.egl}"/>
 
         <!-- GLFW -->
         <release-module package="org.lwjgl.glfw" name="glfw" title="GLFW" if:true="${binding.glfw}">
@@ -1236,7 +1235,7 @@
         <release-module package="org.lwjgl.util.meow" name="meow" native-library="lwjgl_meow" title="Meow hash" if:true="${binding.meow}"/>
 
         <!-- NanoVG -->
-        <release-module package="org.lwjgl.nanovg" name="nanovg" native-library="lwjgl_nanovg" title="NanoVG" license="*_license.txt" if:true="${binding.nanovg}"/>
+        <release-module package="org.lwjgl.nanovg" name="nanovg" native-library="lwjgl_nanovg" title="NanoVG" if:true="${binding.nanovg}"/>
 
         <!-- Native File Dialog -->
         <release-module package="org.lwjgl.util.nfd" name="nfd" native-library="lwjgl_nfd" title="Native File Dialog" if:true="${binding.nfd}"/>
@@ -1263,13 +1262,13 @@
         </release-module>
 
         <!-- OpenCL -->
-        <release-module package="org.lwjgl.opencl" name="opencl" title="OpenCL" license="khronos" if:true="${binding.opencl}"/>
+        <release-module package="org.lwjgl.opencl" name="opencl" title="OpenCL" if:true="${binding.opencl}"/>
 
         <!-- OpenGL -->
-        <release-module package="org.lwjgl.opengl" name="opengl" native-library="lwjgl_opengl" title="OpenGL" license="khronos" if:true="${binding.opengl}"/>
+        <release-module package="org.lwjgl.opengl" name="opengl" native-library="lwjgl_opengl" title="OpenGL" if:true="${binding.opengl}"/>
 
         <!-- OpenGL ES -->
-        <release-module package="org.lwjgl.opengles" name="opengles" native-library="lwjgl_opengles" title="OpenGL ES" license="khronos" if:true="${binding.opengles}"/>
+        <release-module package="org.lwjgl.opengles" name="opengles" native-library="lwjgl_opengles" title="OpenGL ES" if:true="${binding.opengles}"/>
 
         <!-- OpenVR -->
         <release-module package="org.lwjgl.openvr" name="openvr" title="OpenVR" if:true="${binding.openvr}">
@@ -1330,7 +1329,7 @@
         <release-module package="org.lwjgl.util.vma" name="vma" native-library="lwjgl_vma" title="vma" if:true="${binding.vma}"/>
 
         <!-- Vulkan -->
-        <release-module package="org.lwjgl.vulkan" name="vulkan" title="Vulkan" license="khronos" if:true="${binding.vulkan}">
+        <release-module package="org.lwjgl.vulkan" name="vulkan" title="Vulkan" if:true="${binding.vulkan}">
             <natives>
                 <get-release url="macosx/x64/libMoltenVK.dylib"/>
                 <get-release url="macosx/x64/libMoltenVK.dylib.git"/>
