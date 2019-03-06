@@ -965,6 +965,29 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     )
 
     void(
+        "GetMonitorWorkarea",
+        """
+        Retrieves the work area of the monitor.
+
+        This function returns the position, in screen coordinates, of the upper-left corner of the work area of the specified monitor along with the work area
+        size in screen coordinates. The work area is defined as the area of the monitor not occluded by the operating system task bar where present. If no task
+        bar exists then the work area is the monitor resolution in screen coordinates.
+
+        Any or all of the position and size arguments may be #NULL.  If an error occurs, all non-#NULL position and size arguments will be set to zero.
+
+        This function must only be called from the main thread.
+        """,
+
+        GLFWmonitor.p("monitor", "the monitor to query"),
+        nullable..Check(1)..int.p("xpos", "where to store the working area x-coordinate, or #NULL"),
+        nullable..Check(1)..int.p("ypos", "where to store the working area y-coordinate, or #NULL"),
+        nullable..Check(1)..int.p("width", "where to store the working area width, or #NULL"),
+        nullable..Check(1)..int.p("height", "where to store the working area height, or #NULL"),
+
+        since = "version 3.3"
+    )
+
+    void(
         "GetMonitorPhysicalSize",
         """
         Returns the size, in millimetres, of the display area of the specified monitor.

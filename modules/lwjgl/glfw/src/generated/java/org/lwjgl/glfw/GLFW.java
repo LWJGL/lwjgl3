@@ -690,6 +690,7 @@ public class GLFW {
             GetMonitors                   = apiGetFunctionAddress(GLFW, "glfwGetMonitors"),
             GetPrimaryMonitor             = apiGetFunctionAddress(GLFW, "glfwGetPrimaryMonitor"),
             GetMonitorPos                 = apiGetFunctionAddress(GLFW, "glfwGetMonitorPos"),
+            GetMonitorWorkarea            = apiGetFunctionAddress(GLFW, "glfwGetMonitorWorkarea"),
             GetMonitorPhysicalSize        = apiGetFunctionAddress(GLFW, "glfwGetMonitorPhysicalSize"),
             GetMonitorContentScale        = apiGetFunctionAddress(GLFW, "glfwGetMonitorContentScale"),
             GetMonitorName                = apiGetFunctionAddress(GLFW, "glfwGetMonitorName"),
@@ -1115,6 +1116,46 @@ public class GLFW {
             checkSafe(ypos, 1);
         }
         nglfwGetMonitorPos(monitor, memAddressSafe(xpos), memAddressSafe(ypos));
+    }
+
+    // --- [ glfwGetMonitorWorkarea ] ---
+
+    /** Unsafe version of: {@link #glfwGetMonitorWorkarea GetMonitorWorkarea} */
+    public static void nglfwGetMonitorWorkarea(long monitor, long xpos, long ypos, long width, long height) {
+        long __functionAddress = Functions.GetMonitorWorkarea;
+        if (CHECKS) {
+            check(monitor);
+        }
+        invokePPPPPV(monitor, xpos, ypos, width, height, __functionAddress);
+    }
+
+    /**
+     * Retrieves the work area of the monitor.
+     * 
+     * <p>This function returns the position, in screen coordinates, of the upper-left corner of the work area of the specified monitor along with the work area
+     * size in screen coordinates. The work area is defined as the area of the monitor not occluded by the operating system task bar where present. If no task
+     * bar exists then the work area is the monitor resolution in screen coordinates.</p>
+     * 
+     * <p>Any or all of the position and size arguments may be {@code NULL}.  If an error occurs, all non-{@code NULL} position and size arguments will be set to zero.</p>
+     * 
+     * <p>This function must only be called from the main thread.</p>
+     *
+     * @param monitor the monitor to query
+     * @param xpos    where to store the working area x-coordinate, or {@code NULL}
+     * @param ypos    where to store the working area y-coordinate, or {@code NULL}
+     * @param width   where to store the working area width, or {@code NULL}
+     * @param height  where to store the working area height, or {@code NULL}
+     *
+     * @since version 3.3
+     */
+    public static void glfwGetMonitorWorkarea(@NativeType("GLFWmonitor *") long monitor, @Nullable @NativeType("int *") IntBuffer xpos, @Nullable @NativeType("int *") IntBuffer ypos, @Nullable @NativeType("int *") IntBuffer width, @Nullable @NativeType("int *") IntBuffer height) {
+        if (CHECKS) {
+            checkSafe(xpos, 1);
+            checkSafe(ypos, 1);
+            checkSafe(width, 1);
+            checkSafe(height, 1);
+        }
+        nglfwGetMonitorWorkarea(monitor, memAddressSafe(xpos), memAddressSafe(ypos), memAddressSafe(width), memAddressSafe(height));
     }
 
     // --- [ glfwGetMonitorPhysicalSize ] ---
@@ -4761,6 +4802,19 @@ public class GLFW {
             checkSafe(ypos, 1);
         }
         invokePPPV(monitor, xpos, ypos, __functionAddress);
+    }
+
+    /** Array version of: {@link #glfwGetMonitorWorkarea GetMonitorWorkarea} */
+    public static void glfwGetMonitorWorkarea(@NativeType("GLFWmonitor *") long monitor, @Nullable @NativeType("int *") int[] xpos, @Nullable @NativeType("int *") int[] ypos, @Nullable @NativeType("int *") int[] width, @Nullable @NativeType("int *") int[] height) {
+        long __functionAddress = Functions.GetMonitorWorkarea;
+        if (CHECKS) {
+            check(monitor);
+            checkSafe(xpos, 1);
+            checkSafe(ypos, 1);
+            checkSafe(width, 1);
+            checkSafe(height, 1);
+        }
+        invokePPPPPV(monitor, xpos, ypos, width, height, __functionAddress);
     }
 
     /** Array version of: {@link #glfwGetMonitorPhysicalSize GetMonitorPhysicalSize} */
