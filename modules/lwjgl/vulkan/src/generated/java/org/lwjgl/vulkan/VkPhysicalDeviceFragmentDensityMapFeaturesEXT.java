@@ -9,9 +9,11 @@ import javax.annotation.*;
 
 import java.nio.*;
 
+import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
 
 /**
  * Structure describing fragment density map features that can be supported by an implementation.
@@ -45,7 +47,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     VkBool32 fragmentDensityMapNonSubsampledImages;
  * }</code></pre>
  */
-public class VkPhysicalDeviceFragmentDensityMapFeaturesEXT extends Struct {
+public class VkPhysicalDeviceFragmentDensityMapFeaturesEXT extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -139,6 +141,22 @@ public class VkPhysicalDeviceFragmentDensityMapFeaturesEXT extends Struct {
 
     // -----------------------------------
 
+    /** Returns a new {@code VkPhysicalDeviceFragmentDensityMapFeaturesEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    public static VkPhysicalDeviceFragmentDensityMapFeaturesEXT malloc() {
+        return wrap(VkPhysicalDeviceFragmentDensityMapFeaturesEXT.class, nmemAllocChecked(SIZEOF));
+    }
+
+    /** Returns a new {@code VkPhysicalDeviceFragmentDensityMapFeaturesEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    public static VkPhysicalDeviceFragmentDensityMapFeaturesEXT calloc() {
+        return wrap(VkPhysicalDeviceFragmentDensityMapFeaturesEXT.class, nmemCallocChecked(1, SIZEOF));
+    }
+
+    /** Returns a new {@code VkPhysicalDeviceFragmentDensityMapFeaturesEXT} instance allocated with {@link BufferUtils}. */
+    public static VkPhysicalDeviceFragmentDensityMapFeaturesEXT create() {
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPhysicalDeviceFragmentDensityMapFeaturesEXT.class, memAddress(container), container);
+    }
+
     /** Returns a new {@code VkPhysicalDeviceFragmentDensityMapFeaturesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceFragmentDensityMapFeaturesEXT create(long address) {
         return wrap(VkPhysicalDeviceFragmentDensityMapFeaturesEXT.class, address);
@@ -148,6 +166,34 @@ public class VkPhysicalDeviceFragmentDensityMapFeaturesEXT extends Struct {
     @Nullable
     public static VkPhysicalDeviceFragmentDensityMapFeaturesEXT createSafe(long address) {
         return address == NULL ? null : wrap(VkPhysicalDeviceFragmentDensityMapFeaturesEXT.class, address);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceFragmentDensityMapFeaturesEXT.Buffer malloc(int capacity) {
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceFragmentDensityMapFeaturesEXT.Buffer calloc(int capacity) {
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT.Buffer} instance allocated with {@link BufferUtils}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceFragmentDensityMapFeaturesEXT.Buffer create(int capacity) {
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -164,6 +210,74 @@ public class VkPhysicalDeviceFragmentDensityMapFeaturesEXT extends Struct {
     @Nullable
     public static VkPhysicalDeviceFragmentDensityMapFeaturesEXT.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    // -----------------------------------
+
+    /** Returns a new {@code VkPhysicalDeviceFragmentDensityMapFeaturesEXT} instance allocated on the thread-local {@link MemoryStack}. */
+    public static VkPhysicalDeviceFragmentDensityMapFeaturesEXT mallocStack() {
+        return mallocStack(stackGet());
+    }
+
+    /** Returns a new {@code VkPhysicalDeviceFragmentDensityMapFeaturesEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    public static VkPhysicalDeviceFragmentDensityMapFeaturesEXT callocStack() {
+        return callocStack(stackGet());
+    }
+
+    /**
+     * Returns a new {@code VkPhysicalDeviceFragmentDensityMapFeaturesEXT} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkPhysicalDeviceFragmentDensityMapFeaturesEXT mallocStack(MemoryStack stack) {
+        return wrap(VkPhysicalDeviceFragmentDensityMapFeaturesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@code VkPhysicalDeviceFragmentDensityMapFeaturesEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkPhysicalDeviceFragmentDensityMapFeaturesEXT callocStack(MemoryStack stack) {
+        return wrap(VkPhysicalDeviceFragmentDensityMapFeaturesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT.Buffer} instance allocated on the thread-local {@link MemoryStack}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceFragmentDensityMapFeaturesEXT.Buffer mallocStack(int capacity) {
+        return mallocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceFragmentDensityMapFeaturesEXT.Buffer callocStack(int capacity) {
+        return callocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT.Buffer} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceFragmentDensityMapFeaturesEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceFragmentDensityMapFeaturesEXT.Buffer callocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -187,7 +301,7 @@ public class VkPhysicalDeviceFragmentDensityMapFeaturesEXT extends Struct {
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceFragmentDensityMapFeaturesEXT, Buffer> {
+    public static class Buffer extends StructBuffer<VkPhysicalDeviceFragmentDensityMapFeaturesEXT, Buffer> implements NativeResource {
 
         private static final VkPhysicalDeviceFragmentDensityMapFeaturesEXT ELEMENT_FACTORY = VkPhysicalDeviceFragmentDensityMapFeaturesEXT.create(-1L);
 

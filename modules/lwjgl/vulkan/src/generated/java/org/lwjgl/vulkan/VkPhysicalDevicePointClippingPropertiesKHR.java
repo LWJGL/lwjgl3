@@ -9,9 +9,11 @@ import javax.annotation.*;
 
 import java.nio.*;
 
+import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
 
 /**
  * See {@link VkPhysicalDevicePointClippingProperties}.
@@ -70,6 +72,22 @@ public class VkPhysicalDevicePointClippingPropertiesKHR extends VkPhysicalDevice
 
     // -----------------------------------
 
+    /** Returns a new {@code VkPhysicalDevicePointClippingPropertiesKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    public static VkPhysicalDevicePointClippingPropertiesKHR malloc() {
+        return wrap(VkPhysicalDevicePointClippingPropertiesKHR.class, nmemAllocChecked(SIZEOF));
+    }
+
+    /** Returns a new {@code VkPhysicalDevicePointClippingPropertiesKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    public static VkPhysicalDevicePointClippingPropertiesKHR calloc() {
+        return wrap(VkPhysicalDevicePointClippingPropertiesKHR.class, nmemCallocChecked(1, SIZEOF));
+    }
+
+    /** Returns a new {@code VkPhysicalDevicePointClippingPropertiesKHR} instance allocated with {@link BufferUtils}. */
+    public static VkPhysicalDevicePointClippingPropertiesKHR create() {
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPhysicalDevicePointClippingPropertiesKHR.class, memAddress(container), container);
+    }
+
     /** Returns a new {@code VkPhysicalDevicePointClippingPropertiesKHR} instance for the specified memory address. */
     public static VkPhysicalDevicePointClippingPropertiesKHR create(long address) {
         return wrap(VkPhysicalDevicePointClippingPropertiesKHR.class, address);
@@ -79,6 +97,34 @@ public class VkPhysicalDevicePointClippingPropertiesKHR extends VkPhysicalDevice
     @Nullable
     public static VkPhysicalDevicePointClippingPropertiesKHR createSafe(long address) {
         return address == NULL ? null : wrap(VkPhysicalDevicePointClippingPropertiesKHR.class, address);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDevicePointClippingPropertiesKHR.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDevicePointClippingPropertiesKHR.Buffer malloc(int capacity) {
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDevicePointClippingPropertiesKHR.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDevicePointClippingPropertiesKHR.Buffer calloc(int capacity) {
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDevicePointClippingPropertiesKHR.Buffer} instance allocated with {@link BufferUtils}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDevicePointClippingPropertiesKHR.Buffer create(int capacity) {
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -95,6 +141,74 @@ public class VkPhysicalDevicePointClippingPropertiesKHR extends VkPhysicalDevice
     @Nullable
     public static VkPhysicalDevicePointClippingPropertiesKHR.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    // -----------------------------------
+
+    /** Returns a new {@code VkPhysicalDevicePointClippingPropertiesKHR} instance allocated on the thread-local {@link MemoryStack}. */
+    public static VkPhysicalDevicePointClippingPropertiesKHR mallocStack() {
+        return mallocStack(stackGet());
+    }
+
+    /** Returns a new {@code VkPhysicalDevicePointClippingPropertiesKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    public static VkPhysicalDevicePointClippingPropertiesKHR callocStack() {
+        return callocStack(stackGet());
+    }
+
+    /**
+     * Returns a new {@code VkPhysicalDevicePointClippingPropertiesKHR} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkPhysicalDevicePointClippingPropertiesKHR mallocStack(MemoryStack stack) {
+        return wrap(VkPhysicalDevicePointClippingPropertiesKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@code VkPhysicalDevicePointClippingPropertiesKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkPhysicalDevicePointClippingPropertiesKHR callocStack(MemoryStack stack) {
+        return wrap(VkPhysicalDevicePointClippingPropertiesKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDevicePointClippingPropertiesKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDevicePointClippingPropertiesKHR.Buffer mallocStack(int capacity) {
+        return mallocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDevicePointClippingPropertiesKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDevicePointClippingPropertiesKHR.Buffer callocStack(int capacity) {
+        return callocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDevicePointClippingPropertiesKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDevicePointClippingPropertiesKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDevicePointClippingPropertiesKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDevicePointClippingPropertiesKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------

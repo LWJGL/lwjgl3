@@ -9,9 +9,11 @@ import javax.annotation.*;
 
 import java.nio.*;
 
+import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
 
 /**
  * See {@link VkPhysicalDeviceMaintenance3Properties}.
@@ -71,6 +73,22 @@ public class VkPhysicalDeviceMaintenance3PropertiesKHR extends VkPhysicalDeviceM
 
     // -----------------------------------
 
+    /** Returns a new {@code VkPhysicalDeviceMaintenance3PropertiesKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    public static VkPhysicalDeviceMaintenance3PropertiesKHR malloc() {
+        return wrap(VkPhysicalDeviceMaintenance3PropertiesKHR.class, nmemAllocChecked(SIZEOF));
+    }
+
+    /** Returns a new {@code VkPhysicalDeviceMaintenance3PropertiesKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    public static VkPhysicalDeviceMaintenance3PropertiesKHR calloc() {
+        return wrap(VkPhysicalDeviceMaintenance3PropertiesKHR.class, nmemCallocChecked(1, SIZEOF));
+    }
+
+    /** Returns a new {@code VkPhysicalDeviceMaintenance3PropertiesKHR} instance allocated with {@link BufferUtils}. */
+    public static VkPhysicalDeviceMaintenance3PropertiesKHR create() {
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPhysicalDeviceMaintenance3PropertiesKHR.class, memAddress(container), container);
+    }
+
     /** Returns a new {@code VkPhysicalDeviceMaintenance3PropertiesKHR} instance for the specified memory address. */
     public static VkPhysicalDeviceMaintenance3PropertiesKHR create(long address) {
         return wrap(VkPhysicalDeviceMaintenance3PropertiesKHR.class, address);
@@ -80,6 +98,34 @@ public class VkPhysicalDeviceMaintenance3PropertiesKHR extends VkPhysicalDeviceM
     @Nullable
     public static VkPhysicalDeviceMaintenance3PropertiesKHR createSafe(long address) {
         return address == NULL ? null : wrap(VkPhysicalDeviceMaintenance3PropertiesKHR.class, address);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceMaintenance3PropertiesKHR.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceMaintenance3PropertiesKHR.Buffer malloc(int capacity) {
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceMaintenance3PropertiesKHR.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceMaintenance3PropertiesKHR.Buffer calloc(int capacity) {
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceMaintenance3PropertiesKHR.Buffer} instance allocated with {@link BufferUtils}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceMaintenance3PropertiesKHR.Buffer create(int capacity) {
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -96,6 +142,74 @@ public class VkPhysicalDeviceMaintenance3PropertiesKHR extends VkPhysicalDeviceM
     @Nullable
     public static VkPhysicalDeviceMaintenance3PropertiesKHR.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    // -----------------------------------
+
+    /** Returns a new {@code VkPhysicalDeviceMaintenance3PropertiesKHR} instance allocated on the thread-local {@link MemoryStack}. */
+    public static VkPhysicalDeviceMaintenance3PropertiesKHR mallocStack() {
+        return mallocStack(stackGet());
+    }
+
+    /** Returns a new {@code VkPhysicalDeviceMaintenance3PropertiesKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    public static VkPhysicalDeviceMaintenance3PropertiesKHR callocStack() {
+        return callocStack(stackGet());
+    }
+
+    /**
+     * Returns a new {@code VkPhysicalDeviceMaintenance3PropertiesKHR} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkPhysicalDeviceMaintenance3PropertiesKHR mallocStack(MemoryStack stack) {
+        return wrap(VkPhysicalDeviceMaintenance3PropertiesKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@code VkPhysicalDeviceMaintenance3PropertiesKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkPhysicalDeviceMaintenance3PropertiesKHR callocStack(MemoryStack stack) {
+        return wrap(VkPhysicalDeviceMaintenance3PropertiesKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceMaintenance3PropertiesKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceMaintenance3PropertiesKHR.Buffer mallocStack(int capacity) {
+        return mallocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceMaintenance3PropertiesKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceMaintenance3PropertiesKHR.Buffer callocStack(int capacity) {
+        return callocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceMaintenance3PropertiesKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceMaintenance3PropertiesKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceMaintenance3PropertiesKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceMaintenance3PropertiesKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------

@@ -569,7 +569,7 @@ $indentation}"""
             usageResultPointer = usageResultPointer or alias.usageResultPointer
         }
 
-        val mallocable = mutable || usageOutput || (usageInput && !usageResultPointer)
+        val mallocable = mutableMembers().any() || usageOutput || (usageInput && !usageResultPointer)
         validate(mallocable)
 
         val nativeLayout = !skipNative

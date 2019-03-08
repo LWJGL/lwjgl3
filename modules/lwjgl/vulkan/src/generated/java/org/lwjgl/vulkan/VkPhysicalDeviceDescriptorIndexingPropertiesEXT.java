@@ -9,9 +9,11 @@ import javax.annotation.*;
 
 import java.nio.*;
 
+import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
 
 /**
  * Structure describing descriptor indexing properties that can be supported by an implementation.
@@ -87,7 +89,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     uint32_t maxDescriptorSetUpdateAfterBindInputAttachments;
  * }</code></pre>
  */
-public class VkPhysicalDeviceDescriptorIndexingPropertiesEXT extends Struct {
+public class VkPhysicalDeviceDescriptorIndexingPropertiesEXT extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -301,6 +303,22 @@ public class VkPhysicalDeviceDescriptorIndexingPropertiesEXT extends Struct {
 
     // -----------------------------------
 
+    /** Returns a new {@code VkPhysicalDeviceDescriptorIndexingPropertiesEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    public static VkPhysicalDeviceDescriptorIndexingPropertiesEXT malloc() {
+        return wrap(VkPhysicalDeviceDescriptorIndexingPropertiesEXT.class, nmemAllocChecked(SIZEOF));
+    }
+
+    /** Returns a new {@code VkPhysicalDeviceDescriptorIndexingPropertiesEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    public static VkPhysicalDeviceDescriptorIndexingPropertiesEXT calloc() {
+        return wrap(VkPhysicalDeviceDescriptorIndexingPropertiesEXT.class, nmemCallocChecked(1, SIZEOF));
+    }
+
+    /** Returns a new {@code VkPhysicalDeviceDescriptorIndexingPropertiesEXT} instance allocated with {@link BufferUtils}. */
+    public static VkPhysicalDeviceDescriptorIndexingPropertiesEXT create() {
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPhysicalDeviceDescriptorIndexingPropertiesEXT.class, memAddress(container), container);
+    }
+
     /** Returns a new {@code VkPhysicalDeviceDescriptorIndexingPropertiesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceDescriptorIndexingPropertiesEXT create(long address) {
         return wrap(VkPhysicalDeviceDescriptorIndexingPropertiesEXT.class, address);
@@ -310,6 +328,34 @@ public class VkPhysicalDeviceDescriptorIndexingPropertiesEXT extends Struct {
     @Nullable
     public static VkPhysicalDeviceDescriptorIndexingPropertiesEXT createSafe(long address) {
         return address == NULL ? null : wrap(VkPhysicalDeviceDescriptorIndexingPropertiesEXT.class, address);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceDescriptorIndexingPropertiesEXT.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceDescriptorIndexingPropertiesEXT.Buffer malloc(int capacity) {
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceDescriptorIndexingPropertiesEXT.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceDescriptorIndexingPropertiesEXT.Buffer calloc(int capacity) {
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceDescriptorIndexingPropertiesEXT.Buffer} instance allocated with {@link BufferUtils}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceDescriptorIndexingPropertiesEXT.Buffer create(int capacity) {
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -326,6 +372,74 @@ public class VkPhysicalDeviceDescriptorIndexingPropertiesEXT extends Struct {
     @Nullable
     public static VkPhysicalDeviceDescriptorIndexingPropertiesEXT.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    // -----------------------------------
+
+    /** Returns a new {@code VkPhysicalDeviceDescriptorIndexingPropertiesEXT} instance allocated on the thread-local {@link MemoryStack}. */
+    public static VkPhysicalDeviceDescriptorIndexingPropertiesEXT mallocStack() {
+        return mallocStack(stackGet());
+    }
+
+    /** Returns a new {@code VkPhysicalDeviceDescriptorIndexingPropertiesEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    public static VkPhysicalDeviceDescriptorIndexingPropertiesEXT callocStack() {
+        return callocStack(stackGet());
+    }
+
+    /**
+     * Returns a new {@code VkPhysicalDeviceDescriptorIndexingPropertiesEXT} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkPhysicalDeviceDescriptorIndexingPropertiesEXT mallocStack(MemoryStack stack) {
+        return wrap(VkPhysicalDeviceDescriptorIndexingPropertiesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@code VkPhysicalDeviceDescriptorIndexingPropertiesEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkPhysicalDeviceDescriptorIndexingPropertiesEXT callocStack(MemoryStack stack) {
+        return wrap(VkPhysicalDeviceDescriptorIndexingPropertiesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceDescriptorIndexingPropertiesEXT.Buffer} instance allocated on the thread-local {@link MemoryStack}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceDescriptorIndexingPropertiesEXT.Buffer mallocStack(int capacity) {
+        return mallocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceDescriptorIndexingPropertiesEXT.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceDescriptorIndexingPropertiesEXT.Buffer callocStack(int capacity) {
+        return callocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceDescriptorIndexingPropertiesEXT.Buffer} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceDescriptorIndexingPropertiesEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceDescriptorIndexingPropertiesEXT.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceDescriptorIndexingPropertiesEXT.Buffer callocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -389,7 +503,7 @@ public class VkPhysicalDeviceDescriptorIndexingPropertiesEXT extends Struct {
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceDescriptorIndexingPropertiesEXT} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceDescriptorIndexingPropertiesEXT, Buffer> {
+    public static class Buffer extends StructBuffer<VkPhysicalDeviceDescriptorIndexingPropertiesEXT, Buffer> implements NativeResource {
 
         private static final VkPhysicalDeviceDescriptorIndexingPropertiesEXT ELEMENT_FACTORY = VkPhysicalDeviceDescriptorIndexingPropertiesEXT.create(-1L);
 

@@ -9,9 +9,11 @@ import javax.annotation.*;
 
 import java.nio.*;
 
+import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
 
 /**
  * return structure for queue family checkpoint info query.
@@ -39,7 +41,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     VkPipelineStageFlags checkpointExecutionStageMask;
  * }</code></pre>
  */
-public class VkQueueFamilyCheckpointPropertiesNV extends Struct {
+public class VkQueueFamilyCheckpointPropertiesNV extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -121,6 +123,22 @@ public class VkQueueFamilyCheckpointPropertiesNV extends Struct {
 
     // -----------------------------------
 
+    /** Returns a new {@code VkQueueFamilyCheckpointPropertiesNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    public static VkQueueFamilyCheckpointPropertiesNV malloc() {
+        return wrap(VkQueueFamilyCheckpointPropertiesNV.class, nmemAllocChecked(SIZEOF));
+    }
+
+    /** Returns a new {@code VkQueueFamilyCheckpointPropertiesNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    public static VkQueueFamilyCheckpointPropertiesNV calloc() {
+        return wrap(VkQueueFamilyCheckpointPropertiesNV.class, nmemCallocChecked(1, SIZEOF));
+    }
+
+    /** Returns a new {@code VkQueueFamilyCheckpointPropertiesNV} instance allocated with {@link BufferUtils}. */
+    public static VkQueueFamilyCheckpointPropertiesNV create() {
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkQueueFamilyCheckpointPropertiesNV.class, memAddress(container), container);
+    }
+
     /** Returns a new {@code VkQueueFamilyCheckpointPropertiesNV} instance for the specified memory address. */
     public static VkQueueFamilyCheckpointPropertiesNV create(long address) {
         return wrap(VkQueueFamilyCheckpointPropertiesNV.class, address);
@@ -130,6 +148,34 @@ public class VkQueueFamilyCheckpointPropertiesNV extends Struct {
     @Nullable
     public static VkQueueFamilyCheckpointPropertiesNV createSafe(long address) {
         return address == NULL ? null : wrap(VkQueueFamilyCheckpointPropertiesNV.class, address);
+    }
+
+    /**
+     * Returns a new {@link VkQueueFamilyCheckpointPropertiesNV.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkQueueFamilyCheckpointPropertiesNV.Buffer malloc(int capacity) {
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkQueueFamilyCheckpointPropertiesNV.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkQueueFamilyCheckpointPropertiesNV.Buffer calloc(int capacity) {
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkQueueFamilyCheckpointPropertiesNV.Buffer} instance allocated with {@link BufferUtils}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkQueueFamilyCheckpointPropertiesNV.Buffer create(int capacity) {
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -150,6 +196,74 @@ public class VkQueueFamilyCheckpointPropertiesNV extends Struct {
 
     // -----------------------------------
 
+    /** Returns a new {@code VkQueueFamilyCheckpointPropertiesNV} instance allocated on the thread-local {@link MemoryStack}. */
+    public static VkQueueFamilyCheckpointPropertiesNV mallocStack() {
+        return mallocStack(stackGet());
+    }
+
+    /** Returns a new {@code VkQueueFamilyCheckpointPropertiesNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    public static VkQueueFamilyCheckpointPropertiesNV callocStack() {
+        return callocStack(stackGet());
+    }
+
+    /**
+     * Returns a new {@code VkQueueFamilyCheckpointPropertiesNV} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkQueueFamilyCheckpointPropertiesNV mallocStack(MemoryStack stack) {
+        return wrap(VkQueueFamilyCheckpointPropertiesNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@code VkQueueFamilyCheckpointPropertiesNV} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkQueueFamilyCheckpointPropertiesNV callocStack(MemoryStack stack) {
+        return wrap(VkQueueFamilyCheckpointPropertiesNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@link VkQueueFamilyCheckpointPropertiesNV.Buffer} instance allocated on the thread-local {@link MemoryStack}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkQueueFamilyCheckpointPropertiesNV.Buffer mallocStack(int capacity) {
+        return mallocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkQueueFamilyCheckpointPropertiesNV.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkQueueFamilyCheckpointPropertiesNV.Buffer callocStack(int capacity) {
+        return callocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkQueueFamilyCheckpointPropertiesNV.Buffer} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkQueueFamilyCheckpointPropertiesNV.Buffer mallocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkQueueFamilyCheckpointPropertiesNV.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkQueueFamilyCheckpointPropertiesNV.Buffer callocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+    }
+
+    // -----------------------------------
+
     /** Unsafe version of {@link #sType}. */
     public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkQueueFamilyCheckpointPropertiesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
@@ -165,7 +279,7 @@ public class VkQueueFamilyCheckpointPropertiesNV extends Struct {
     // -----------------------------------
 
     /** An array of {@link VkQueueFamilyCheckpointPropertiesNV} structs. */
-    public static class Buffer extends StructBuffer<VkQueueFamilyCheckpointPropertiesNV, Buffer> {
+    public static class Buffer extends StructBuffer<VkQueueFamilyCheckpointPropertiesNV, Buffer> implements NativeResource {
 
         private static final VkQueueFamilyCheckpointPropertiesNV ELEMENT_FACTORY = VkQueueFamilyCheckpointPropertiesNV.create(-1L);
 

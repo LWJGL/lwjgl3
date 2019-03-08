@@ -9,9 +9,11 @@ import javax.annotation.*;
 
 import java.nio.*;
 
+import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
 
 /**
  * Structure describing push descriptor limits that can be supported by an implementation.
@@ -43,7 +45,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     uint32_t maxPushDescriptors;
  * }</code></pre>
  */
-public class VkPhysicalDevicePushDescriptorPropertiesKHR extends Struct {
+public class VkPhysicalDevicePushDescriptorPropertiesKHR extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -125,6 +127,22 @@ public class VkPhysicalDevicePushDescriptorPropertiesKHR extends Struct {
 
     // -----------------------------------
 
+    /** Returns a new {@code VkPhysicalDevicePushDescriptorPropertiesKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    public static VkPhysicalDevicePushDescriptorPropertiesKHR malloc() {
+        return wrap(VkPhysicalDevicePushDescriptorPropertiesKHR.class, nmemAllocChecked(SIZEOF));
+    }
+
+    /** Returns a new {@code VkPhysicalDevicePushDescriptorPropertiesKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    public static VkPhysicalDevicePushDescriptorPropertiesKHR calloc() {
+        return wrap(VkPhysicalDevicePushDescriptorPropertiesKHR.class, nmemCallocChecked(1, SIZEOF));
+    }
+
+    /** Returns a new {@code VkPhysicalDevicePushDescriptorPropertiesKHR} instance allocated with {@link BufferUtils}. */
+    public static VkPhysicalDevicePushDescriptorPropertiesKHR create() {
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPhysicalDevicePushDescriptorPropertiesKHR.class, memAddress(container), container);
+    }
+
     /** Returns a new {@code VkPhysicalDevicePushDescriptorPropertiesKHR} instance for the specified memory address. */
     public static VkPhysicalDevicePushDescriptorPropertiesKHR create(long address) {
         return wrap(VkPhysicalDevicePushDescriptorPropertiesKHR.class, address);
@@ -134,6 +152,34 @@ public class VkPhysicalDevicePushDescriptorPropertiesKHR extends Struct {
     @Nullable
     public static VkPhysicalDevicePushDescriptorPropertiesKHR createSafe(long address) {
         return address == NULL ? null : wrap(VkPhysicalDevicePushDescriptorPropertiesKHR.class, address);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDevicePushDescriptorPropertiesKHR.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDevicePushDescriptorPropertiesKHR.Buffer malloc(int capacity) {
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDevicePushDescriptorPropertiesKHR.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDevicePushDescriptorPropertiesKHR.Buffer calloc(int capacity) {
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDevicePushDescriptorPropertiesKHR.Buffer} instance allocated with {@link BufferUtils}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDevicePushDescriptorPropertiesKHR.Buffer create(int capacity) {
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -154,6 +200,74 @@ public class VkPhysicalDevicePushDescriptorPropertiesKHR extends Struct {
 
     // -----------------------------------
 
+    /** Returns a new {@code VkPhysicalDevicePushDescriptorPropertiesKHR} instance allocated on the thread-local {@link MemoryStack}. */
+    public static VkPhysicalDevicePushDescriptorPropertiesKHR mallocStack() {
+        return mallocStack(stackGet());
+    }
+
+    /** Returns a new {@code VkPhysicalDevicePushDescriptorPropertiesKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    public static VkPhysicalDevicePushDescriptorPropertiesKHR callocStack() {
+        return callocStack(stackGet());
+    }
+
+    /**
+     * Returns a new {@code VkPhysicalDevicePushDescriptorPropertiesKHR} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkPhysicalDevicePushDescriptorPropertiesKHR mallocStack(MemoryStack stack) {
+        return wrap(VkPhysicalDevicePushDescriptorPropertiesKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@code VkPhysicalDevicePushDescriptorPropertiesKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkPhysicalDevicePushDescriptorPropertiesKHR callocStack(MemoryStack stack) {
+        return wrap(VkPhysicalDevicePushDescriptorPropertiesKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDevicePushDescriptorPropertiesKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDevicePushDescriptorPropertiesKHR.Buffer mallocStack(int capacity) {
+        return mallocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDevicePushDescriptorPropertiesKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDevicePushDescriptorPropertiesKHR.Buffer callocStack(int capacity) {
+        return callocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDevicePushDescriptorPropertiesKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDevicePushDescriptorPropertiesKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDevicePushDescriptorPropertiesKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDevicePushDescriptorPropertiesKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+    }
+
+    // -----------------------------------
+
     /** Unsafe version of {@link #sType}. */
     public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePushDescriptorPropertiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
@@ -169,7 +283,7 @@ public class VkPhysicalDevicePushDescriptorPropertiesKHR extends Struct {
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDevicePushDescriptorPropertiesKHR} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDevicePushDescriptorPropertiesKHR, Buffer> {
+    public static class Buffer extends StructBuffer<VkPhysicalDevicePushDescriptorPropertiesKHR, Buffer> implements NativeResource {
 
         private static final VkPhysicalDevicePushDescriptorPropertiesKHR ELEMENT_FACTORY = VkPhysicalDevicePushDescriptorPropertiesKHR.create(-1L);
 

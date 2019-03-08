@@ -9,10 +9,12 @@ import javax.annotation.*;
 
 import java.nio.*;
 
+import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
 
 /**
  * Structure describing sample location limits that can be supported by an implementation.
@@ -56,7 +58,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     VkBool32 variableSampleLocations;
  * }</code></pre>
  */
-public class VkPhysicalDeviceSampleLocationsPropertiesEXT extends Struct {
+public class VkPhysicalDeviceSampleLocationsPropertiesEXT extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -165,6 +167,22 @@ public class VkPhysicalDeviceSampleLocationsPropertiesEXT extends Struct {
 
     // -----------------------------------
 
+    /** Returns a new {@code VkPhysicalDeviceSampleLocationsPropertiesEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    public static VkPhysicalDeviceSampleLocationsPropertiesEXT malloc() {
+        return wrap(VkPhysicalDeviceSampleLocationsPropertiesEXT.class, nmemAllocChecked(SIZEOF));
+    }
+
+    /** Returns a new {@code VkPhysicalDeviceSampleLocationsPropertiesEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    public static VkPhysicalDeviceSampleLocationsPropertiesEXT calloc() {
+        return wrap(VkPhysicalDeviceSampleLocationsPropertiesEXT.class, nmemCallocChecked(1, SIZEOF));
+    }
+
+    /** Returns a new {@code VkPhysicalDeviceSampleLocationsPropertiesEXT} instance allocated with {@link BufferUtils}. */
+    public static VkPhysicalDeviceSampleLocationsPropertiesEXT create() {
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPhysicalDeviceSampleLocationsPropertiesEXT.class, memAddress(container), container);
+    }
+
     /** Returns a new {@code VkPhysicalDeviceSampleLocationsPropertiesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceSampleLocationsPropertiesEXT create(long address) {
         return wrap(VkPhysicalDeviceSampleLocationsPropertiesEXT.class, address);
@@ -174,6 +192,34 @@ public class VkPhysicalDeviceSampleLocationsPropertiesEXT extends Struct {
     @Nullable
     public static VkPhysicalDeviceSampleLocationsPropertiesEXT createSafe(long address) {
         return address == NULL ? null : wrap(VkPhysicalDeviceSampleLocationsPropertiesEXT.class, address);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceSampleLocationsPropertiesEXT.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceSampleLocationsPropertiesEXT.Buffer malloc(int capacity) {
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceSampleLocationsPropertiesEXT.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceSampleLocationsPropertiesEXT.Buffer calloc(int capacity) {
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceSampleLocationsPropertiesEXT.Buffer} instance allocated with {@link BufferUtils}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceSampleLocationsPropertiesEXT.Buffer create(int capacity) {
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -190,6 +236,74 @@ public class VkPhysicalDeviceSampleLocationsPropertiesEXT extends Struct {
     @Nullable
     public static VkPhysicalDeviceSampleLocationsPropertiesEXT.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    // -----------------------------------
+
+    /** Returns a new {@code VkPhysicalDeviceSampleLocationsPropertiesEXT} instance allocated on the thread-local {@link MemoryStack}. */
+    public static VkPhysicalDeviceSampleLocationsPropertiesEXT mallocStack() {
+        return mallocStack(stackGet());
+    }
+
+    /** Returns a new {@code VkPhysicalDeviceSampleLocationsPropertiesEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    public static VkPhysicalDeviceSampleLocationsPropertiesEXT callocStack() {
+        return callocStack(stackGet());
+    }
+
+    /**
+     * Returns a new {@code VkPhysicalDeviceSampleLocationsPropertiesEXT} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkPhysicalDeviceSampleLocationsPropertiesEXT mallocStack(MemoryStack stack) {
+        return wrap(VkPhysicalDeviceSampleLocationsPropertiesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@code VkPhysicalDeviceSampleLocationsPropertiesEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkPhysicalDeviceSampleLocationsPropertiesEXT callocStack(MemoryStack stack) {
+        return wrap(VkPhysicalDeviceSampleLocationsPropertiesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceSampleLocationsPropertiesEXT.Buffer} instance allocated on the thread-local {@link MemoryStack}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceSampleLocationsPropertiesEXT.Buffer mallocStack(int capacity) {
+        return mallocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceSampleLocationsPropertiesEXT.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceSampleLocationsPropertiesEXT.Buffer callocStack(int capacity) {
+        return callocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceSampleLocationsPropertiesEXT.Buffer} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceSampleLocationsPropertiesEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceSampleLocationsPropertiesEXT.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceSampleLocationsPropertiesEXT.Buffer callocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -221,7 +335,7 @@ public class VkPhysicalDeviceSampleLocationsPropertiesEXT extends Struct {
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceSampleLocationsPropertiesEXT} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceSampleLocationsPropertiesEXT, Buffer> {
+    public static class Buffer extends StructBuffer<VkPhysicalDeviceSampleLocationsPropertiesEXT, Buffer> implements NativeResource {
 
         private static final VkPhysicalDeviceSampleLocationsPropertiesEXT ELEMENT_FACTORY = VkPhysicalDeviceSampleLocationsPropertiesEXT.create(-1L);
 

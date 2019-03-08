@@ -9,9 +9,11 @@ import javax.annotation.*;
 
 import java.nio.*;
 
+import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
 
 /**
  * See {@link VkExternalImageFormatProperties}.
@@ -70,6 +72,22 @@ public class VkExternalImageFormatPropertiesKHR extends VkExternalImageFormatPro
 
     // -----------------------------------
 
+    /** Returns a new {@code VkExternalImageFormatPropertiesKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    public static VkExternalImageFormatPropertiesKHR malloc() {
+        return wrap(VkExternalImageFormatPropertiesKHR.class, nmemAllocChecked(SIZEOF));
+    }
+
+    /** Returns a new {@code VkExternalImageFormatPropertiesKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    public static VkExternalImageFormatPropertiesKHR calloc() {
+        return wrap(VkExternalImageFormatPropertiesKHR.class, nmemCallocChecked(1, SIZEOF));
+    }
+
+    /** Returns a new {@code VkExternalImageFormatPropertiesKHR} instance allocated with {@link BufferUtils}. */
+    public static VkExternalImageFormatPropertiesKHR create() {
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkExternalImageFormatPropertiesKHR.class, memAddress(container), container);
+    }
+
     /** Returns a new {@code VkExternalImageFormatPropertiesKHR} instance for the specified memory address. */
     public static VkExternalImageFormatPropertiesKHR create(long address) {
         return wrap(VkExternalImageFormatPropertiesKHR.class, address);
@@ -79,6 +97,34 @@ public class VkExternalImageFormatPropertiesKHR extends VkExternalImageFormatPro
     @Nullable
     public static VkExternalImageFormatPropertiesKHR createSafe(long address) {
         return address == NULL ? null : wrap(VkExternalImageFormatPropertiesKHR.class, address);
+    }
+
+    /**
+     * Returns a new {@link VkExternalImageFormatPropertiesKHR.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkExternalImageFormatPropertiesKHR.Buffer malloc(int capacity) {
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkExternalImageFormatPropertiesKHR.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkExternalImageFormatPropertiesKHR.Buffer calloc(int capacity) {
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkExternalImageFormatPropertiesKHR.Buffer} instance allocated with {@link BufferUtils}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkExternalImageFormatPropertiesKHR.Buffer create(int capacity) {
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -95,6 +141,74 @@ public class VkExternalImageFormatPropertiesKHR extends VkExternalImageFormatPro
     @Nullable
     public static VkExternalImageFormatPropertiesKHR.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    // -----------------------------------
+
+    /** Returns a new {@code VkExternalImageFormatPropertiesKHR} instance allocated on the thread-local {@link MemoryStack}. */
+    public static VkExternalImageFormatPropertiesKHR mallocStack() {
+        return mallocStack(stackGet());
+    }
+
+    /** Returns a new {@code VkExternalImageFormatPropertiesKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    public static VkExternalImageFormatPropertiesKHR callocStack() {
+        return callocStack(stackGet());
+    }
+
+    /**
+     * Returns a new {@code VkExternalImageFormatPropertiesKHR} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkExternalImageFormatPropertiesKHR mallocStack(MemoryStack stack) {
+        return wrap(VkExternalImageFormatPropertiesKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@code VkExternalImageFormatPropertiesKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkExternalImageFormatPropertiesKHR callocStack(MemoryStack stack) {
+        return wrap(VkExternalImageFormatPropertiesKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@link VkExternalImageFormatPropertiesKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkExternalImageFormatPropertiesKHR.Buffer mallocStack(int capacity) {
+        return mallocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkExternalImageFormatPropertiesKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkExternalImageFormatPropertiesKHR.Buffer callocStack(int capacity) {
+        return callocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkExternalImageFormatPropertiesKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkExternalImageFormatPropertiesKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkExternalImageFormatPropertiesKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkExternalImageFormatPropertiesKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------

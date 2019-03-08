@@ -9,9 +9,11 @@ import javax.annotation.*;
 
 import java.nio.*;
 
+import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
 
 /**
  * Structure describing dedicated allocation requirements of buffer and image resources.
@@ -65,7 +67,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     VkBool32 requiresDedicatedAllocation;
  * }</code></pre>
  */
-public class VkMemoryDedicatedRequirements extends Struct {
+public class VkMemoryDedicatedRequirements extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -153,6 +155,22 @@ public class VkMemoryDedicatedRequirements extends Struct {
 
     // -----------------------------------
 
+    /** Returns a new {@code VkMemoryDedicatedRequirements} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    public static VkMemoryDedicatedRequirements malloc() {
+        return wrap(VkMemoryDedicatedRequirements.class, nmemAllocChecked(SIZEOF));
+    }
+
+    /** Returns a new {@code VkMemoryDedicatedRequirements} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    public static VkMemoryDedicatedRequirements calloc() {
+        return wrap(VkMemoryDedicatedRequirements.class, nmemCallocChecked(1, SIZEOF));
+    }
+
+    /** Returns a new {@code VkMemoryDedicatedRequirements} instance allocated with {@link BufferUtils}. */
+    public static VkMemoryDedicatedRequirements create() {
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkMemoryDedicatedRequirements.class, memAddress(container), container);
+    }
+
     /** Returns a new {@code VkMemoryDedicatedRequirements} instance for the specified memory address. */
     public static VkMemoryDedicatedRequirements create(long address) {
         return wrap(VkMemoryDedicatedRequirements.class, address);
@@ -162,6 +180,34 @@ public class VkMemoryDedicatedRequirements extends Struct {
     @Nullable
     public static VkMemoryDedicatedRequirements createSafe(long address) {
         return address == NULL ? null : wrap(VkMemoryDedicatedRequirements.class, address);
+    }
+
+    /**
+     * Returns a new {@link VkMemoryDedicatedRequirements.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkMemoryDedicatedRequirements.Buffer malloc(int capacity) {
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkMemoryDedicatedRequirements.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkMemoryDedicatedRequirements.Buffer calloc(int capacity) {
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkMemoryDedicatedRequirements.Buffer} instance allocated with {@link BufferUtils}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkMemoryDedicatedRequirements.Buffer create(int capacity) {
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -178,6 +224,74 @@ public class VkMemoryDedicatedRequirements extends Struct {
     @Nullable
     public static VkMemoryDedicatedRequirements.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    // -----------------------------------
+
+    /** Returns a new {@code VkMemoryDedicatedRequirements} instance allocated on the thread-local {@link MemoryStack}. */
+    public static VkMemoryDedicatedRequirements mallocStack() {
+        return mallocStack(stackGet());
+    }
+
+    /** Returns a new {@code VkMemoryDedicatedRequirements} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    public static VkMemoryDedicatedRequirements callocStack() {
+        return callocStack(stackGet());
+    }
+
+    /**
+     * Returns a new {@code VkMemoryDedicatedRequirements} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkMemoryDedicatedRequirements mallocStack(MemoryStack stack) {
+        return wrap(VkMemoryDedicatedRequirements.class, stack.nmalloc(ALIGNOF, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@code VkMemoryDedicatedRequirements} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkMemoryDedicatedRequirements callocStack(MemoryStack stack) {
+        return wrap(VkMemoryDedicatedRequirements.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@link VkMemoryDedicatedRequirements.Buffer} instance allocated on the thread-local {@link MemoryStack}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkMemoryDedicatedRequirements.Buffer mallocStack(int capacity) {
+        return mallocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkMemoryDedicatedRequirements.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkMemoryDedicatedRequirements.Buffer callocStack(int capacity) {
+        return callocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkMemoryDedicatedRequirements.Buffer} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkMemoryDedicatedRequirements.Buffer mallocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkMemoryDedicatedRequirements.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkMemoryDedicatedRequirements.Buffer callocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -199,7 +313,7 @@ public class VkMemoryDedicatedRequirements extends Struct {
     // -----------------------------------
 
     /** An array of {@link VkMemoryDedicatedRequirements} structs. */
-    public static class Buffer extends StructBuffer<VkMemoryDedicatedRequirements, Buffer> {
+    public static class Buffer extends StructBuffer<VkMemoryDedicatedRequirements, Buffer> implements NativeResource {
 
         private static final VkMemoryDedicatedRequirements ELEMENT_FACTORY = VkMemoryDedicatedRequirements.create(-1L);
 

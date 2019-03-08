@@ -9,9 +9,11 @@ import javax.annotation.*;
 
 import java.nio.*;
 
+import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
 
 /**
  * Structure describing depth/stencil resolve properties that can be supported by an implementation.
@@ -43,7 +45,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     VkBool32 independentResolve;
  * }</code></pre>
  */
-public class VkPhysicalDeviceDepthStencilResolvePropertiesKHR extends Struct {
+public class VkPhysicalDeviceDepthStencilResolvePropertiesKHR extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -143,6 +145,22 @@ public class VkPhysicalDeviceDepthStencilResolvePropertiesKHR extends Struct {
 
     // -----------------------------------
 
+    /** Returns a new {@code VkPhysicalDeviceDepthStencilResolvePropertiesKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    public static VkPhysicalDeviceDepthStencilResolvePropertiesKHR malloc() {
+        return wrap(VkPhysicalDeviceDepthStencilResolvePropertiesKHR.class, nmemAllocChecked(SIZEOF));
+    }
+
+    /** Returns a new {@code VkPhysicalDeviceDepthStencilResolvePropertiesKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    public static VkPhysicalDeviceDepthStencilResolvePropertiesKHR calloc() {
+        return wrap(VkPhysicalDeviceDepthStencilResolvePropertiesKHR.class, nmemCallocChecked(1, SIZEOF));
+    }
+
+    /** Returns a new {@code VkPhysicalDeviceDepthStencilResolvePropertiesKHR} instance allocated with {@link BufferUtils}. */
+    public static VkPhysicalDeviceDepthStencilResolvePropertiesKHR create() {
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPhysicalDeviceDepthStencilResolvePropertiesKHR.class, memAddress(container), container);
+    }
+
     /** Returns a new {@code VkPhysicalDeviceDepthStencilResolvePropertiesKHR} instance for the specified memory address. */
     public static VkPhysicalDeviceDepthStencilResolvePropertiesKHR create(long address) {
         return wrap(VkPhysicalDeviceDepthStencilResolvePropertiesKHR.class, address);
@@ -152,6 +170,34 @@ public class VkPhysicalDeviceDepthStencilResolvePropertiesKHR extends Struct {
     @Nullable
     public static VkPhysicalDeviceDepthStencilResolvePropertiesKHR createSafe(long address) {
         return address == NULL ? null : wrap(VkPhysicalDeviceDepthStencilResolvePropertiesKHR.class, address);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceDepthStencilResolvePropertiesKHR.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceDepthStencilResolvePropertiesKHR.Buffer malloc(int capacity) {
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceDepthStencilResolvePropertiesKHR.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceDepthStencilResolvePropertiesKHR.Buffer calloc(int capacity) {
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceDepthStencilResolvePropertiesKHR.Buffer} instance allocated with {@link BufferUtils}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceDepthStencilResolvePropertiesKHR.Buffer create(int capacity) {
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -168,6 +214,74 @@ public class VkPhysicalDeviceDepthStencilResolvePropertiesKHR extends Struct {
     @Nullable
     public static VkPhysicalDeviceDepthStencilResolvePropertiesKHR.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    // -----------------------------------
+
+    /** Returns a new {@code VkPhysicalDeviceDepthStencilResolvePropertiesKHR} instance allocated on the thread-local {@link MemoryStack}. */
+    public static VkPhysicalDeviceDepthStencilResolvePropertiesKHR mallocStack() {
+        return mallocStack(stackGet());
+    }
+
+    /** Returns a new {@code VkPhysicalDeviceDepthStencilResolvePropertiesKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    public static VkPhysicalDeviceDepthStencilResolvePropertiesKHR callocStack() {
+        return callocStack(stackGet());
+    }
+
+    /**
+     * Returns a new {@code VkPhysicalDeviceDepthStencilResolvePropertiesKHR} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkPhysicalDeviceDepthStencilResolvePropertiesKHR mallocStack(MemoryStack stack) {
+        return wrap(VkPhysicalDeviceDepthStencilResolvePropertiesKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@code VkPhysicalDeviceDepthStencilResolvePropertiesKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkPhysicalDeviceDepthStencilResolvePropertiesKHR callocStack(MemoryStack stack) {
+        return wrap(VkPhysicalDeviceDepthStencilResolvePropertiesKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceDepthStencilResolvePropertiesKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceDepthStencilResolvePropertiesKHR.Buffer mallocStack(int capacity) {
+        return mallocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceDepthStencilResolvePropertiesKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceDepthStencilResolvePropertiesKHR.Buffer callocStack(int capacity) {
+        return callocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceDepthStencilResolvePropertiesKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceDepthStencilResolvePropertiesKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceDepthStencilResolvePropertiesKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceDepthStencilResolvePropertiesKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -193,7 +307,7 @@ public class VkPhysicalDeviceDepthStencilResolvePropertiesKHR extends Struct {
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceDepthStencilResolvePropertiesKHR} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceDepthStencilResolvePropertiesKHR, Buffer> {
+    public static class Buffer extends StructBuffer<VkPhysicalDeviceDepthStencilResolvePropertiesKHR, Buffer> implements NativeResource {
 
         private static final VkPhysicalDeviceDepthStencilResolvePropertiesKHR ELEMENT_FACTORY = VkPhysicalDeviceDepthStencilResolvePropertiesKHR.create(-1L);
 

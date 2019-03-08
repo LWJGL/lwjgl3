@@ -9,9 +9,11 @@ import javax.annotation.*;
 
 import java.nio.*;
 
+import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
 
 /**
  * See {@link VkMemoryDedicatedRequirements}.
@@ -71,6 +73,22 @@ public class VkMemoryDedicatedRequirementsKHR extends VkMemoryDedicatedRequireme
 
     // -----------------------------------
 
+    /** Returns a new {@code VkMemoryDedicatedRequirementsKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    public static VkMemoryDedicatedRequirementsKHR malloc() {
+        return wrap(VkMemoryDedicatedRequirementsKHR.class, nmemAllocChecked(SIZEOF));
+    }
+
+    /** Returns a new {@code VkMemoryDedicatedRequirementsKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    public static VkMemoryDedicatedRequirementsKHR calloc() {
+        return wrap(VkMemoryDedicatedRequirementsKHR.class, nmemCallocChecked(1, SIZEOF));
+    }
+
+    /** Returns a new {@code VkMemoryDedicatedRequirementsKHR} instance allocated with {@link BufferUtils}. */
+    public static VkMemoryDedicatedRequirementsKHR create() {
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkMemoryDedicatedRequirementsKHR.class, memAddress(container), container);
+    }
+
     /** Returns a new {@code VkMemoryDedicatedRequirementsKHR} instance for the specified memory address. */
     public static VkMemoryDedicatedRequirementsKHR create(long address) {
         return wrap(VkMemoryDedicatedRequirementsKHR.class, address);
@@ -80,6 +98,34 @@ public class VkMemoryDedicatedRequirementsKHR extends VkMemoryDedicatedRequireme
     @Nullable
     public static VkMemoryDedicatedRequirementsKHR createSafe(long address) {
         return address == NULL ? null : wrap(VkMemoryDedicatedRequirementsKHR.class, address);
+    }
+
+    /**
+     * Returns a new {@link VkMemoryDedicatedRequirementsKHR.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkMemoryDedicatedRequirementsKHR.Buffer malloc(int capacity) {
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkMemoryDedicatedRequirementsKHR.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkMemoryDedicatedRequirementsKHR.Buffer calloc(int capacity) {
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkMemoryDedicatedRequirementsKHR.Buffer} instance allocated with {@link BufferUtils}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkMemoryDedicatedRequirementsKHR.Buffer create(int capacity) {
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -96,6 +142,74 @@ public class VkMemoryDedicatedRequirementsKHR extends VkMemoryDedicatedRequireme
     @Nullable
     public static VkMemoryDedicatedRequirementsKHR.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    // -----------------------------------
+
+    /** Returns a new {@code VkMemoryDedicatedRequirementsKHR} instance allocated on the thread-local {@link MemoryStack}. */
+    public static VkMemoryDedicatedRequirementsKHR mallocStack() {
+        return mallocStack(stackGet());
+    }
+
+    /** Returns a new {@code VkMemoryDedicatedRequirementsKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    public static VkMemoryDedicatedRequirementsKHR callocStack() {
+        return callocStack(stackGet());
+    }
+
+    /**
+     * Returns a new {@code VkMemoryDedicatedRequirementsKHR} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkMemoryDedicatedRequirementsKHR mallocStack(MemoryStack stack) {
+        return wrap(VkMemoryDedicatedRequirementsKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@code VkMemoryDedicatedRequirementsKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkMemoryDedicatedRequirementsKHR callocStack(MemoryStack stack) {
+        return wrap(VkMemoryDedicatedRequirementsKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@link VkMemoryDedicatedRequirementsKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkMemoryDedicatedRequirementsKHR.Buffer mallocStack(int capacity) {
+        return mallocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkMemoryDedicatedRequirementsKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkMemoryDedicatedRequirementsKHR.Buffer callocStack(int capacity) {
+        return callocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkMemoryDedicatedRequirementsKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkMemoryDedicatedRequirementsKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkMemoryDedicatedRequirementsKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkMemoryDedicatedRequirementsKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------

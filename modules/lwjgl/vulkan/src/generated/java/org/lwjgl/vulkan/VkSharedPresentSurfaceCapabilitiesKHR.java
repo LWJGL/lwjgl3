@@ -9,9 +9,11 @@ import javax.annotation.*;
 
 import java.nio.*;
 
+import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
 
 /**
  * structure describing capabilities of a surface for shared presentation.
@@ -39,7 +41,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     VkImageUsageFlags sharedPresentSupportedUsageFlags;
  * }</code></pre>
  */
-public class VkSharedPresentSurfaceCapabilitiesKHR extends Struct {
+public class VkSharedPresentSurfaceCapabilitiesKHR extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -121,6 +123,22 @@ public class VkSharedPresentSurfaceCapabilitiesKHR extends Struct {
 
     // -----------------------------------
 
+    /** Returns a new {@code VkSharedPresentSurfaceCapabilitiesKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    public static VkSharedPresentSurfaceCapabilitiesKHR malloc() {
+        return wrap(VkSharedPresentSurfaceCapabilitiesKHR.class, nmemAllocChecked(SIZEOF));
+    }
+
+    /** Returns a new {@code VkSharedPresentSurfaceCapabilitiesKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    public static VkSharedPresentSurfaceCapabilitiesKHR calloc() {
+        return wrap(VkSharedPresentSurfaceCapabilitiesKHR.class, nmemCallocChecked(1, SIZEOF));
+    }
+
+    /** Returns a new {@code VkSharedPresentSurfaceCapabilitiesKHR} instance allocated with {@link BufferUtils}. */
+    public static VkSharedPresentSurfaceCapabilitiesKHR create() {
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkSharedPresentSurfaceCapabilitiesKHR.class, memAddress(container), container);
+    }
+
     /** Returns a new {@code VkSharedPresentSurfaceCapabilitiesKHR} instance for the specified memory address. */
     public static VkSharedPresentSurfaceCapabilitiesKHR create(long address) {
         return wrap(VkSharedPresentSurfaceCapabilitiesKHR.class, address);
@@ -130,6 +148,34 @@ public class VkSharedPresentSurfaceCapabilitiesKHR extends Struct {
     @Nullable
     public static VkSharedPresentSurfaceCapabilitiesKHR createSafe(long address) {
         return address == NULL ? null : wrap(VkSharedPresentSurfaceCapabilitiesKHR.class, address);
+    }
+
+    /**
+     * Returns a new {@link VkSharedPresentSurfaceCapabilitiesKHR.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkSharedPresentSurfaceCapabilitiesKHR.Buffer malloc(int capacity) {
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkSharedPresentSurfaceCapabilitiesKHR.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkSharedPresentSurfaceCapabilitiesKHR.Buffer calloc(int capacity) {
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkSharedPresentSurfaceCapabilitiesKHR.Buffer} instance allocated with {@link BufferUtils}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkSharedPresentSurfaceCapabilitiesKHR.Buffer create(int capacity) {
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -150,6 +196,74 @@ public class VkSharedPresentSurfaceCapabilitiesKHR extends Struct {
 
     // -----------------------------------
 
+    /** Returns a new {@code VkSharedPresentSurfaceCapabilitiesKHR} instance allocated on the thread-local {@link MemoryStack}. */
+    public static VkSharedPresentSurfaceCapabilitiesKHR mallocStack() {
+        return mallocStack(stackGet());
+    }
+
+    /** Returns a new {@code VkSharedPresentSurfaceCapabilitiesKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    public static VkSharedPresentSurfaceCapabilitiesKHR callocStack() {
+        return callocStack(stackGet());
+    }
+
+    /**
+     * Returns a new {@code VkSharedPresentSurfaceCapabilitiesKHR} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkSharedPresentSurfaceCapabilitiesKHR mallocStack(MemoryStack stack) {
+        return wrap(VkSharedPresentSurfaceCapabilitiesKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@code VkSharedPresentSurfaceCapabilitiesKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkSharedPresentSurfaceCapabilitiesKHR callocStack(MemoryStack stack) {
+        return wrap(VkSharedPresentSurfaceCapabilitiesKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@link VkSharedPresentSurfaceCapabilitiesKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkSharedPresentSurfaceCapabilitiesKHR.Buffer mallocStack(int capacity) {
+        return mallocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkSharedPresentSurfaceCapabilitiesKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkSharedPresentSurfaceCapabilitiesKHR.Buffer callocStack(int capacity) {
+        return callocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkSharedPresentSurfaceCapabilitiesKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkSharedPresentSurfaceCapabilitiesKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkSharedPresentSurfaceCapabilitiesKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkSharedPresentSurfaceCapabilitiesKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+    }
+
+    // -----------------------------------
+
     /** Unsafe version of {@link #sType}. */
     public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSharedPresentSurfaceCapabilitiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
@@ -165,7 +279,7 @@ public class VkSharedPresentSurfaceCapabilitiesKHR extends Struct {
     // -----------------------------------
 
     /** An array of {@link VkSharedPresentSurfaceCapabilitiesKHR} structs. */
-    public static class Buffer extends StructBuffer<VkSharedPresentSurfaceCapabilitiesKHR, Buffer> {
+    public static class Buffer extends StructBuffer<VkSharedPresentSurfaceCapabilitiesKHR, Buffer> implements NativeResource {
 
         private static final VkSharedPresentSurfaceCapabilitiesKHR ELEMENT_FACTORY = VkSharedPresentSurfaceCapabilitiesKHR.create(-1L);
 

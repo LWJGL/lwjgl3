@@ -9,9 +9,11 @@ import javax.annotation.*;
 
 import java.nio.*;
 
+import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
 
 /**
  * Structure describing cooperative matrix properties supported by an implementation.
@@ -43,7 +45,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     VkShaderStageFlags cooperativeMatrixSupportedStages;
  * }</code></pre>
  */
-public class VkPhysicalDeviceCooperativeMatrixPropertiesNV extends Struct {
+public class VkPhysicalDeviceCooperativeMatrixPropertiesNV extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -125,6 +127,22 @@ public class VkPhysicalDeviceCooperativeMatrixPropertiesNV extends Struct {
 
     // -----------------------------------
 
+    /** Returns a new {@code VkPhysicalDeviceCooperativeMatrixPropertiesNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    public static VkPhysicalDeviceCooperativeMatrixPropertiesNV malloc() {
+        return wrap(VkPhysicalDeviceCooperativeMatrixPropertiesNV.class, nmemAllocChecked(SIZEOF));
+    }
+
+    /** Returns a new {@code VkPhysicalDeviceCooperativeMatrixPropertiesNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    public static VkPhysicalDeviceCooperativeMatrixPropertiesNV calloc() {
+        return wrap(VkPhysicalDeviceCooperativeMatrixPropertiesNV.class, nmemCallocChecked(1, SIZEOF));
+    }
+
+    /** Returns a new {@code VkPhysicalDeviceCooperativeMatrixPropertiesNV} instance allocated with {@link BufferUtils}. */
+    public static VkPhysicalDeviceCooperativeMatrixPropertiesNV create() {
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPhysicalDeviceCooperativeMatrixPropertiesNV.class, memAddress(container), container);
+    }
+
     /** Returns a new {@code VkPhysicalDeviceCooperativeMatrixPropertiesNV} instance for the specified memory address. */
     public static VkPhysicalDeviceCooperativeMatrixPropertiesNV create(long address) {
         return wrap(VkPhysicalDeviceCooperativeMatrixPropertiesNV.class, address);
@@ -134,6 +152,34 @@ public class VkPhysicalDeviceCooperativeMatrixPropertiesNV extends Struct {
     @Nullable
     public static VkPhysicalDeviceCooperativeMatrixPropertiesNV createSafe(long address) {
         return address == NULL ? null : wrap(VkPhysicalDeviceCooperativeMatrixPropertiesNV.class, address);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceCooperativeMatrixPropertiesNV.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceCooperativeMatrixPropertiesNV.Buffer malloc(int capacity) {
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceCooperativeMatrixPropertiesNV.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceCooperativeMatrixPropertiesNV.Buffer calloc(int capacity) {
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceCooperativeMatrixPropertiesNV.Buffer} instance allocated with {@link BufferUtils}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceCooperativeMatrixPropertiesNV.Buffer create(int capacity) {
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -154,6 +200,74 @@ public class VkPhysicalDeviceCooperativeMatrixPropertiesNV extends Struct {
 
     // -----------------------------------
 
+    /** Returns a new {@code VkPhysicalDeviceCooperativeMatrixPropertiesNV} instance allocated on the thread-local {@link MemoryStack}. */
+    public static VkPhysicalDeviceCooperativeMatrixPropertiesNV mallocStack() {
+        return mallocStack(stackGet());
+    }
+
+    /** Returns a new {@code VkPhysicalDeviceCooperativeMatrixPropertiesNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    public static VkPhysicalDeviceCooperativeMatrixPropertiesNV callocStack() {
+        return callocStack(stackGet());
+    }
+
+    /**
+     * Returns a new {@code VkPhysicalDeviceCooperativeMatrixPropertiesNV} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkPhysicalDeviceCooperativeMatrixPropertiesNV mallocStack(MemoryStack stack) {
+        return wrap(VkPhysicalDeviceCooperativeMatrixPropertiesNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@code VkPhysicalDeviceCooperativeMatrixPropertiesNV} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkPhysicalDeviceCooperativeMatrixPropertiesNV callocStack(MemoryStack stack) {
+        return wrap(VkPhysicalDeviceCooperativeMatrixPropertiesNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceCooperativeMatrixPropertiesNV.Buffer} instance allocated on the thread-local {@link MemoryStack}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceCooperativeMatrixPropertiesNV.Buffer mallocStack(int capacity) {
+        return mallocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceCooperativeMatrixPropertiesNV.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceCooperativeMatrixPropertiesNV.Buffer callocStack(int capacity) {
+        return callocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceCooperativeMatrixPropertiesNV.Buffer} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceCooperativeMatrixPropertiesNV.Buffer mallocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceCooperativeMatrixPropertiesNV.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceCooperativeMatrixPropertiesNV.Buffer callocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+    }
+
+    // -----------------------------------
+
     /** Unsafe version of {@link #sType}. */
     public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceCooperativeMatrixPropertiesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
@@ -169,7 +283,7 @@ public class VkPhysicalDeviceCooperativeMatrixPropertiesNV extends Struct {
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceCooperativeMatrixPropertiesNV} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceCooperativeMatrixPropertiesNV, Buffer> {
+    public static class Buffer extends StructBuffer<VkPhysicalDeviceCooperativeMatrixPropertiesNV, Buffer> implements NativeResource {
 
         private static final VkPhysicalDeviceCooperativeMatrixPropertiesNV ELEMENT_FACTORY = VkPhysicalDeviceCooperativeMatrixPropertiesNV.create(-1L);
 
