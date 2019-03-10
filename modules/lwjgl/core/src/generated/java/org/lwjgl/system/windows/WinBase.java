@@ -116,8 +116,9 @@ public class WinBase {
      *             
      *             <p>If the function cannot find the module, the function fails. When specifying a path, be sure to use backslashes (\), not forward slashes (/).</p>
      *             
-     *             <p>If the string specifies a module name without a path and the file name extension is omitted, the function appends the default library extension .dll
-     *             to the module name. To prevent the function from appending.dll to the module name, include a trailing point character (.) in the module name string.</p>
+     *             <p>If the string specifies a module name without a path and the file name extension is omitted, the function appends the default library extension
+     *             .dll to the module name. To prevent the function from appending .dll to the module name, include a trailing point character (.) in the module name
+     *             string.</p>
      */
     @NativeType("HMODULE")
     public static long LoadLibrary(@NativeType("LPCTSTR") ByteBuffer name) {
@@ -140,8 +141,9 @@ public class WinBase {
      *             
      *             <p>If the function cannot find the module, the function fails. When specifying a path, be sure to use backslashes (\), not forward slashes (/).</p>
      *             
-     *             <p>If the string specifies a module name without a path and the file name extension is omitted, the function appends the default library extension .dll
-     *             to the module name. To prevent the function from appending.dll to the module name, include a trailing point character (.) in the module name string.</p>
+     *             <p>If the string specifies a module name without a path and the file name extension is omitted, the function appends the default library extension
+     *             .dll to the module name. To prevent the function from appending .dll to the module name, include a trailing point character (.) in the module name
+     *             string.</p>
      */
     @NativeType("HMODULE")
     public static long LoadLibrary(@NativeType("LPCTSTR") CharSequence name) {

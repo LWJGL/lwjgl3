@@ -332,7 +332,7 @@ public final class Library {
             return null;
         }
 
-        SharedLibrary lib = apiCreateLibrary(libFile.toString());
+        SharedLibrary lib = apiCreateLibrary(libFile.toAbsolutePath().toString());
         apiLog(String.format("\tLoaded from %s: %s", property, libFile));
         checkHash(context, libFile);
         return lib;
