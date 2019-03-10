@@ -125,7 +125,7 @@ public final class LibraryResource {
             return null;
         }
 
-        apiLog(String.format("\tFound in %s: %s", property, resource));
+        apiLog(String.format("\tLoaded from %s: %s", property, resource));
         return resource;
     }
 
