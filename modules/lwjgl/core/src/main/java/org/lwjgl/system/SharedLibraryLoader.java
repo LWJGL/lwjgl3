@@ -109,38 +109,41 @@ final class SharedLibraryLoader {
 
         // Temp directory with username in path
         tempDirectory = Paths.get(Configuration.SHARED_LIBRARY_EXTRACT_DIRECTORY.get("lwjgl" + System.getProperty("user.name")), version, filename);
-        root = Paths.get(System.getProperty("java.io.tmpdir"));
-        file = root.resolve(tempDirectory);
+        file = (root = Paths.get(System.getProperty("java.io.tmpdir"))).resolve(tempDirectory);
         if (canWrite(root, file, resource)) {
             return file;
         }
 
         // User home
         tempDirectory = Paths.get(Configuration.SHARED_LIBRARY_EXTRACT_DIRECTORY.get("lwjgl"), version, filename);
-        root = Paths.get(System.getProperty("user.home"));
-        file = root.resolve(tempDirectory);
+        file = (root = Paths.get(System.getProperty("user.home"))).resolve(tempDirectory);
         if (canWrite(root, file, resource)) {
             return file;
         }
 
         // Working directory
-        root = Paths.get("").toAbsolutePath();
-        file = root.resolve(tempDirectory);
+        file = (root = Paths.get("").toAbsolutePath()).resolve(tempDirectory);
         if (canWrite(root, file, resource)) {
             return file;
         }
 
         if (Platform.get() == Platform.WINDOWS) {
-            root = Paths.get("C:/Windows/Temp");
-            file = root.resolve(tempDirectory);
-            if (canWrite(root, file, resource)) {
-                return file;
+            // C:\Windows\Temp
+            String env = System.getenv("SystemRoot");
+            if (env != null) {
+                file = (root = Paths.get(env, "Temp")).resolve(tempDirectory);
+                if (canWrite(root, file, resource)) {
+                    return file;
+                }
             }
 
-            root = Paths.get("C:/");
-            file = root.resolve(Paths.get("Temp").resolve(tempDirectory));
-            if (canWrite(root, file, resource)) {
-                return file;
+            // C:\Temp
+            env = System.getenv("SystemDrive");
+            if (env != null) {
+                file = (root = Paths.get(env + "/")).resolve(Paths.get("Temp").resolve(tempDirectory));
+                if (canWrite(root, file, resource)) {
+                    return file;
+                }
             }
         }
 
