@@ -2367,7 +2367,7 @@ public final class MemoryUtil {
      * @return the decoded {@link String}
      */
     @SuppressWarnings("deprecation")
-    private static String memASCII(long address, int length) {
+    public static String memASCII(long address, int length) {
         if (length <= 0) {
             return "";
         }
