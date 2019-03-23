@@ -1249,7 +1249,7 @@ public class CL12 extends CL11 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clLinkProgram.html">Reference Page</a>
      */
     @NativeType("cl_program")
-    public static long clLinkProgram(@NativeType("cl_context") long context, @Nullable @NativeType("cl_device_id const *") PointerBuffer device_list, @NativeType("cl_char const *") CharSequence options, @Nullable @NativeType("cl_program const *") long input_program, @Nullable @NativeType("void (*) (cl_program, void *)") CLProgramCallbackI pfn_notify, @NativeType("void *") long user_data) {
+    public static long clLinkProgram(@NativeType("cl_context") long context, @Nullable @NativeType("cl_device_id const *") PointerBuffer device_list, @NativeType("cl_char const *") CharSequence options, @NativeType("cl_program const *") long input_program, @Nullable @NativeType("void (*) (cl_program, void *)") CLProgramCallbackI pfn_notify, @NativeType("void *") long user_data) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCII(options, true);

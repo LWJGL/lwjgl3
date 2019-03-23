@@ -254,7 +254,7 @@ public class KHRDebug {
      * @param severity the severity of debug messages to enable or disable. One of:<br><table><tr><td>{@link #GL_DEBUG_SEVERITY_HIGH_KHR DEBUG_SEVERITY_HIGH_KHR}</td><td>{@link #GL_DEBUG_SEVERITY_MEDIUM_KHR DEBUG_SEVERITY_MEDIUM_KHR}</td><td>{@link #GL_DEBUG_SEVERITY_LOW_KHR DEBUG_SEVERITY_LOW_KHR}</td></tr><tr><td>{@link #GL_DEBUG_SEVERITY_NOTIFICATION_KHR DEBUG_SEVERITY_NOTIFICATION_KHR}</td></tr></table>
      * @param enabled  whether the selected messages should be enabled or disabled
      */
-    public static void glDebugMessageControlKHR(@NativeType("GLenum") int source, @NativeType("GLenum") int type, @NativeType("GLenum") int severity, @Nullable @NativeType("GLuint const *") int id, @NativeType("GLboolean") boolean enabled) {
+    public static void glDebugMessageControlKHR(@NativeType("GLenum") int source, @NativeType("GLenum") int type, @NativeType("GLenum") int severity, @NativeType("GLuint const *") int id, @NativeType("GLboolean") boolean enabled) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             IntBuffer ids = stack.ints(id);

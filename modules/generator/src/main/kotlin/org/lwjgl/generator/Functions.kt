@@ -1521,7 +1521,11 @@ class Func(
         print("$t${if (constantMacro) "private " else accessModifier}static $retType $name(")
         printList(getNativeParams(withAutoSizeResultParams = false)) { param ->
             param.transformDeclarationOrElse(transforms, param.asJavaMethodParam(false), true).let {
-                if (it != null && param.nativeType.isReference && param.has(nullable) && transforms[param] !is SingleValueStructTransform) {
+                if (
+                    it != null && param.nativeType.isReference && param.has(nullable) &&
+                    transforms[param] !is SingleValueTransform &&
+                    transforms[param] !is SingleValueStructTransform
+                ) {
                     "@Nullable $it"
                 } else {
                     it
