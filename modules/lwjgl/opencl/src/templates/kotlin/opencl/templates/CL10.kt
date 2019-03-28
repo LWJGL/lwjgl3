@@ -996,7 +996,12 @@ val CL10 = "CL10".nativeClassCL("CL10") {
         """
     )
 
-    cl_int(
+    Code(
+        javaInit = statement(
+            "\t\tif (!blocking_read) { throw new IllegalArgumentException(\"Non blocking reads cannot be used when the ptr parameter is a Java array.\"); }",
+            ApplyTo.ARRAY_ONLY
+        )
+    )..cl_int(
         "EnqueueReadBuffer",
         """
         Enqueues a command to read from a buffer object to host memory.
@@ -1070,7 +1075,12 @@ val CL10 = "CL10".nativeClassCL("CL10") {
         """
     )
 
-    cl_int(
+    Code(
+        javaInit = statement(
+            "\t\tif (!blocking_write) { throw new IllegalArgumentException(\"Non blocking writes cannot be used when the ptr parameter is a Java array.\"); }",
+            ApplyTo.ARRAY_ONLY
+        )
+    )..cl_int(
         "EnqueueWriteBuffer",
         """
         Enqueues a command to write to a buffer object from host memory.
@@ -1106,7 +1116,12 @@ val CL10 = "CL10".nativeClassCL("CL10") {
         ),
         size_t("offset", "the offset in bytes in the buffer object to write to"),
         AutoSize("ptr")..size_t("size", "the size in bytes of data being written"),
-        MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE)..void.const.p("ptr", "the pointer to buffer in host memory where data is to be written from"),
+        MultiType(
+            PointerMapping.DATA_SHORT,
+            PointerMapping.DATA_INT,
+            PointerMapping.DATA_FLOAT,
+            PointerMapping.DATA_DOUBLE
+        )..void.const.p("ptr", "the pointer to buffer in host memory where data is to be written from"),
         NEWL,
         EWL,
         EVENT,
@@ -1448,7 +1463,12 @@ val CL10 = "CL10".nativeClassCL("CL10") {
         """
     )
 
-    cl_int(
+    Code(
+        javaInit = statement(
+            "\t\tif (!blocking_read) { throw new IllegalArgumentException(\"Non blocking reads cannot be used when the ptr parameter is a Java array.\"); }",
+            ApplyTo.ARRAY_ONLY
+        )
+    )..cl_int(
         "EnqueueReadImage",
         """
         Enqueues a command to read from an image or image array object to host memory.
@@ -1519,7 +1539,10 @@ val CL10 = "CL10".nativeClassCL("CL10") {
             """
         ),
         MultiType(
-            PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
+            PointerMapping.DATA_SHORT,
+            PointerMapping.DATA_INT,
+            PointerMapping.DATA_FLOAT,
+            PointerMapping.DATA_DOUBLE
         )..Unsafe..void.p("ptr", "the pointer to a buffer in host memory where image data is to be read to"),
         NEWL,
         EWL,
@@ -1572,7 +1595,12 @@ val CL10 = "CL10".nativeClassCL("CL10") {
         """
     )
 
-    cl_int(
+    Code(
+        javaInit = statement(
+            "\t\tif (!blocking_write) { throw new IllegalArgumentException(\"Non blocking writes cannot be used when the ptr parameter is a Java array.\"); }",
+            ApplyTo.ARRAY_ONLY
+        )
+    )..cl_int(
         "EnqueueWriteImage",
         """
         Enqueues a command to write to an image or image array object from host memory.

@@ -255,7 +255,12 @@ val CL11 = "CL11".nativeClassCL("CL11") {
         """
     )
 
-    cl_int(
+    Code(
+        javaInit = statement(
+            "\t\tif (!blocking_read) { throw new IllegalArgumentException(\"Non blocking reads cannot be used when the ptr parameter is a Java array.\"); }",
+            ApplyTo.ARRAY_ONLY
+        )
+    )..cl_int(
         "EnqueueReadBufferRect",
         """
         Enqueues a command to read a 2D or 3D rectangular region from a buffer object to host memory.
@@ -300,7 +305,10 @@ val CL11 = "CL11".nativeClassCL("CL11") {
         BufferRectHostRowPitch,
         BufferRectHostSlicePitch,
         MultiType(
-            PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
+            PointerMapping.DATA_SHORT,
+            PointerMapping.DATA_INT,
+            PointerMapping.DATA_FLOAT,
+            PointerMapping.DATA_DOUBLE
         )..Unsafe..void.p("ptr", "the pointer to buffer in host memory where data is to be read into"),
         NEWL,
         EWL,
@@ -334,7 +342,12 @@ val CL11 = "CL11".nativeClassCL("CL11") {
         """
     )
 
-    cl_int(
+    Code(
+        javaInit = statement(
+            "\t\tif (!blocking_write) { throw new IllegalArgumentException(\"Non blocking writes cannot be used when the ptr parameter is a Java array.\"); }",
+            ApplyTo.ARRAY_ONLY
+        )
+    )..cl_int(
         "EnqueueWriteBufferRect",
         """
         Enqueues a command to write a 2D or 3D rectangular region to a buffer object from host memory.
