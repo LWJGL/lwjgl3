@@ -27,10 +27,26 @@ class Capabilities(
     override val isSpecial = true
 }
 
-enum class ApplyTo {
-    NORMAL,
-    ALTERNATIVE,
-    BOTH
+enum class ApplyTo(
+    private val alternative: Boolean?,
+    private val array: Boolean?
+) {
+    NORMAL(false, null),
+    ALTERNATIVE(true, null),
+    ARRAY_ONLY(null, true),
+    BOTH(null, null);
+
+    fun filter(alternative: Boolean, arrays: Boolean): Boolean {
+        if (this.alternative != null) {
+            if (this.alternative != alternative)
+                return false
+        }
+        if (this.array != null) {
+            if (this.array != arrays)
+                return false
+        }
+        return true
+    }
 }
 
 class Code(
@@ -61,11 +77,11 @@ class Code(
     Code.NO_STATEMENTS !== javaAfterNative ||
     Code.NO_STATEMENTS !== javaFinally
 
-    internal fun hasStatements(statements: List<Code.Statement>, applyTo: ApplyTo) =
-        if (statements === NO_STATEMENTS) false else statements.any { it.applyTo === ApplyTo.BOTH || it.applyTo === applyTo }
+    internal fun hasStatements(statements: List<Code.Statement>, alternative: Boolean, arrays: Boolean) =
+        if (statements === NO_STATEMENTS) false else statements.any { it.applyTo.filter(alternative, arrays) }
 
-    internal fun getStatements(statements: List<Code.Statement>, applyTo: ApplyTo) =
-        if (statements === NO_STATEMENTS) statements else statements.filter { it.applyTo === ApplyTo.BOTH || it.applyTo === applyTo }
+    internal fun getStatements(statements: List<Code.Statement>, alternative: Boolean, arrays: Boolean) =
+        if (statements === NO_STATEMENTS) statements else statements.filter { it.applyTo.filter(alternative, arrays) }
 
     private fun List<Code.Statement>.append(other: List<Code.Statement>) =
         if (this === Code.NO_STATEMENTS && other === Code.NO_STATEMENTS) Code.NO_STATEMENTS else this + other

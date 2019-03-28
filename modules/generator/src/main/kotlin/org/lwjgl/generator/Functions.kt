@@ -905,6 +905,7 @@ class Func(
             return
         }
 
+        val hasArrays = hasParam { it.nativeType is ArrayType<*> }
         val code = if (has<Code>()) get() else Code.NO_CODE
 
         // Get function address
@@ -913,7 +914,7 @@ class Func(
             nativeClass.binding!!.generateFunctionAddress(this, this@Func)
 
         // Generate checks
-        printCode(code.javaInit, ApplyTo.NORMAL)
+        printCode(code.javaInit, false, hasArrays)
         if (Module.CHECKS && !has<Macro>())
             generateChecks(NORMAL)
 
@@ -928,15 +929,15 @@ class Func(
             println("$t$t${autoSizeType}Buffer ${autoSizeParam.name} = stack.calloc$autoSizeType(1);")
         }
 
-        val hasFinally = hasStack || code.hasStatements(code.javaFinally, ApplyTo.NORMAL)
+        val hasFinally = hasStack || code.hasStatements(code.javaFinally, false, hasArrays)
 
         // Call the native method
-        generateCodeBeforeNative(code, ApplyTo.NORMAL, hasFinally)
+        generateCodeBeforeNative(code, false, hasArrays, hasFinally)
 
         if (hasCustomJNI || !has<Address>()) {
             generateNativeMethodCall(
-                code.hasStatements(code.javaAfterNative, ApplyTo.NORMAL),
-                hasStack || code.hasStatements(code.javaFinally, ApplyTo.NORMAL)
+                code.hasStatements(code.javaAfterNative, false, hasArrays),
+                hasStack || code.hasStatements(code.javaFinally, false, hasArrays)
             ) {
                 printList(getNativeParams()) {
                     it.asNativeMethodArgument(NORMAL)
@@ -944,7 +945,7 @@ class Func(
             }
         }
 
-        generateCodeAfterNative(code, ApplyTo.NORMAL, hasFinally)
+        generateCodeAfterNative(code, false, hasArrays, hasFinally)
 
         if (returns.isStructValue) {
             println("${if (hasFinally) "$t$t$t" else "$t$t"}return ${getParams { it has ReturnParam }.map { it.name }.singleOrNull() ?: RESULT};")
@@ -994,26 +995,28 @@ class Func(
                     }
                 }
                 println(");")
-            } else if (code.hasStatements(code.javaAfterNative, ApplyTo.NORMAL)) {
+            } else if (code.hasStatements(code.javaAfterNative, false, hasArrays)) {
                 if (hasFinally)
                     print(t)
                 println("$t${t}return $RESULT;")
             }
         }
 
-        generateCodeFinally(code, ApplyTo.NORMAL, hasStack)
+        generateCodeFinally(code, false, hasArrays, hasStack)
 
         println("$t}")
     }
 
-    private fun PrintWriter.printCode(statements: List<Code.Statement>, applyTo: ApplyTo, indent: String = "") {
+    private fun PrintWriter.printCode(statements: List<Code.Statement>, alternative: Boolean, arrays: Boolean, indent: String = "") {
         if (statements.isEmpty())
             return
 
-        statements.filter { it.applyTo === ApplyTo.BOTH || it.applyTo === applyTo }.forEach {
-            print(indent)
-            println(it.code)
-        }
+        statements
+            .filter { it.applyTo.filter(alternative, arrays) }
+            .forEach {
+                print(indent)
+                println(it.code)
+            }
     }
 
     private fun getAutoSizeResultExpression(single: Boolean, param: Parameter) =
@@ -1032,19 +1035,19 @@ class Func(
                 custom?.replace("\$original", it) ?: it.let { expression -> if (param.nativeType.mapping === PointerMapping.DATA_INT) expression else "(int)$expression" }
             }
 
-    private fun PrintWriter.generateCodeBeforeNative(code: Code, applyTo: ApplyTo, hasFinally: Boolean) {
-        printCode(code.javaBeforeNative, applyTo, "")
+    private fun PrintWriter.generateCodeBeforeNative(code: Code, alternative: Boolean, arrays: Boolean, hasFinally: Boolean) {
+        printCode(code.javaBeforeNative, alternative, arrays , "")
 
         if (hasFinally)
             println("$t${t}try {")
     }
 
-    private fun PrintWriter.generateCodeAfterNative(code: Code, applyTo: ApplyTo, hasFinally: Boolean) {
-        printCode(code.javaAfterNative, applyTo, if (hasFinally) t else "")
+    private fun PrintWriter.generateCodeAfterNative(code: Code, alternative: Boolean, arrays: Boolean, hasFinally: Boolean) {
+        printCode(code.javaAfterNative, alternative, arrays, if (hasFinally) t else "")
     }
 
-    private fun PrintWriter.generateCodeFinally(code: Code, applyTo: ApplyTo, hasStack: Boolean) {
-        val finally = code.getStatements(code.javaFinally, applyTo)
+    private fun PrintWriter.generateCodeFinally(code: Code, alternative: Boolean, arrays: Boolean, hasStack: Boolean) {
+        val finally = code.getStatements(code.javaFinally, alternative, arrays)
         if (hasStack || finally.isNotEmpty()) {
             println("$t$t} finally {")
             finally.forEach {
@@ -1581,6 +1584,7 @@ class Func(
 
         // Append CodeFunctionTransform statements to Code
 
+        val hasArrays = hasParam { it.nativeType is ArrayType<*> }
         val code = transforms
             .asSequence()
             .filter { it.value is CodeFunctionTransform<*> }
@@ -1607,7 +1611,7 @@ class Func(
                 println("$t$t${param.asJavaMethodParam(false)} = ${transform.transformCall(param, param.name)};")
             }
 
-        printCode(code.javaInit, ApplyTo.ALTERNATIVE)
+        printCode(code.javaInit, true, hasArrays)
         if (Module.CHECKS && !macro)
             generateChecks(ALTERNATIVE, transforms)
 
@@ -1620,11 +1624,11 @@ class Func(
         if (hasStack)
             println("$t${t}MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();")
 
-        val hasFinally = hasStack || code.hasStatements(code.javaFinally, ApplyTo.ALTERNATIVE)
+        val hasFinally = hasStack || code.hasStatements(code.javaFinally, true, hasArrays)
 
         // Call the native method
 
-        generateCodeBeforeNative(code, ApplyTo.ALTERNATIVE, hasFinally)
+        generateCodeBeforeNative(code, true, hasArrays, hasFinally)
 
         if (hideAutoSizeResultParam) {
             val autoSizeParam = getParam { it.has<AutoSizeResultParam>() }
@@ -1640,14 +1644,14 @@ class Func(
             }
         }
 
-        val returnLater = code.hasStatements(code.javaAfterNative, ApplyTo.ALTERNATIVE) || transforms[returns] is ReturnLaterTransform
+        val returnLater = code.hasStatements(code.javaAfterNative, true, hasArrays) || transforms[returns] is ReturnLaterTransform
         generateNativeMethodCall(returnLater, hasFinally) {
             printList(getNativeParams()) {
                 it.transformCallOrElse(transforms, it.asNativeMethodArgument(ALTERNATIVE))
             }
         }
 
-        generateCodeAfterNative(code, ApplyTo.ALTERNATIVE, hasFinally)
+        generateCodeAfterNative(code, true, hasArrays, hasFinally)
 
         // Return
 
@@ -1712,7 +1716,7 @@ class Func(
             }
         }
 
-        generateCodeFinally(code, ApplyTo.ALTERNATIVE, hasStack)
+        generateCodeFinally(code, true, hasArrays, hasStack)
 
         println("$t}")
     }
