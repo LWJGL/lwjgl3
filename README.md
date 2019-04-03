@@ -181,32 +181,23 @@ improve the chances of a quick and useful response.
 
 Use of a binding is subject to the terms of the [corresponding license](https://github.com/LWJGL/lwjgl3/tree/master/doc/3rdparty).
 
-## Contributors
+## Supporting this project
 
-This project exists thanks to all the people who contribute. [[Contribute]](/.github/CONTRIBUTING.md).
-<a href="../../graphs/contributors"><img src="https://opencollective.com/lwjgl/contributors.svg?width=890" /></a>
+LWJGL exists thanks to [all the people](https://github.com/LWJGL/lwjgl3/blob/master/BACKERS.md) who [contribute](https://github.com/LWJGL/lwjgl3/blob/master/.github/CONTRIBUTING.md) and back/sponsor our collective.
 
+<a href="https://opencollective.com/lwjgl/donate" target="_blank">
+    <img src="https://opencollective.com/lwjgl/donate/button@2x.png?color=white" width=300 />
+</a>
 
-## Backers
+Our gold sponsors:
 
-Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/lwjgl#backer)]
-
-<a href="https://opencollective.com/lwjgl#backers" target="_blank"><img src="https://opencollective.com/lwjgl/backers.svg?width=890"></a>
-
-
-## Sponsors
-
-Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/lwjgl#sponsor)]
-
-<a href="https://opencollective.com/lwjgl/sponsor/0/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/0/avatar.svg"></a>
-<a href="https://opencollective.com/lwjgl/sponsor/1/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/1/avatar.svg"></a>
-<a href="https://opencollective.com/lwjgl/sponsor/2/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/2/avatar.svg"></a>
-<a href="https://opencollective.com/lwjgl/sponsor/3/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/3/avatar.svg"></a>
-<a href="https://opencollective.com/lwjgl/sponsor/4/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/4/avatar.svg"></a>
-<a href="https://opencollective.com/lwjgl/sponsor/5/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/5/avatar.svg"></a>
-<a href="https://opencollective.com/lwjgl/sponsor/6/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/6/avatar.svg"></a>
-<a href="https://opencollective.com/lwjgl/sponsor/7/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/7/avatar.svg"></a>
-<a href="https://opencollective.com/lwjgl/sponsor/8/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/8/avatar.svg"></a>
-<a href="https://opencollective.com/lwjgl/sponsor/9/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/9/avatar.svg"></a>
-
-
+<a href="https://opencollective.com/lwjgl/tiers/gold-sponsor/0/website" target="_blank"><img src="https://opencollective.com/lwjgl/tiers/gold-sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/tiers/gold-sponsor/1/website" target="_blank"><img src="https://opencollective.com/lwjgl/tiers/gold-sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/tiers/gold-sponsor/2/website" target="_blank"><img src="https://opencollective.com/lwjgl/tiers/gold-sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/tiers/gold-sponsor/3/website" target="_blank"><img src="https://opencollective.com/lwjgl/tiers/gold-sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/tiers/gold-sponsor/4/website" target="_blank"><img src="https://opencollective.com/lwjgl/tiers/gold-sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/tiers/gold-sponsor/5/website" target="_blank"><img src="https://opencollective.com/lwjgl/tiers/gold-sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/tiers/gold-sponsor/6/website" target="_blank"><img src="https://opencollective.com/lwjgl/tiers/gold-sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/tiers/gold-sponsor/7/website" target="_blank"><img src="https://opencollective.com/lwjgl/tiers/gold-sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/tiers/gold-sponsor/8/website" target="_blank"><img src="https://opencollective.com/lwjgl/tiers/gold-sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/tiers/gold-sponsor/9/website" target="_blank"><img src="https://opencollective.com/lwjgl/tiers/gold-sponsor/9/avatar.svg"></a>

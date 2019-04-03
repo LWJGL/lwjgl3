@@ -34,34 +34,4 @@ Anyone can file an expense. If the expense makes sense for the development of th
 If you have any questions, create an [issue](https://github.com/LWJGL/lwjgl3/issues) (protip: do a quick search first to see if someone else didn't ask the same question before!).
 You can also reach us at the LWJGL [forum](http://forum.lwjgl.org/) and [slack](http://slack.lwjgl.org/) team.
 
-## Credits
-
-### Contributors
-
-Thank you to all the people who have already contributed to lwjgl!
-<a href="graphs/contributors"><img src="https://opencollective.com/lwjgl/contributors.svg?width=890" /></a>
-
-
-### Backers
-
-Thank you to all our backers! [[Become a backer](https://opencollective.com/lwjgl#backer)]
-
-<a href="https://opencollective.com/lwjgl#backers" target="_blank"><img src="https://opencollective.com/lwjgl/backers.svg?width=890"></a>
-
-
-### Sponsors
-
-Thank you to all our sponsors! (please ask your company to also support this open source project by [becoming a sponsor](https://opencollective.com/lwjgl#sponsor))
-
-<a href="https://opencollective.com/lwjgl/sponsor/0/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/0/avatar.svg"></a>
-<a href="https://opencollective.com/lwjgl/sponsor/1/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/1/avatar.svg"></a>
-<a href="https://opencollective.com/lwjgl/sponsor/2/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/2/avatar.svg"></a>
-<a href="https://opencollective.com/lwjgl/sponsor/3/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/3/avatar.svg"></a>
-<a href="https://opencollective.com/lwjgl/sponsor/4/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/4/avatar.svg"></a>
-<a href="https://opencollective.com/lwjgl/sponsor/5/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/5/avatar.svg"></a>
-<a href="https://opencollective.com/lwjgl/sponsor/6/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/6/avatar.svg"></a>
-<a href="https://opencollective.com/lwjgl/sponsor/7/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/7/avatar.svg"></a>
-<a href="https://opencollective.com/lwjgl/sponsor/8/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/8/avatar.svg"></a>
-<a href="https://opencollective.com/lwjgl/sponsor/9/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/9/avatar.svg"></a>
-
 <!-- This `CONTRIBUTING.md` is based on @nayafia's template https://github.com/nayafia/contributing-template -->
