@@ -1160,7 +1160,7 @@ public class Assimp {
      * <li>{@link #aiTextureType_REFLECTION TextureType_REFLECTION} - Reflection texture. Contains the color of a perfect mirror reflection. Rarely used, almost never for real-time applications.</li>
      * <li>{@link #aiTextureType_UNKNOWN TextureType_UNKNOWN} - 
      * Unknown texture. A texture reference that does not match any of the definitions above is considered to be 'unknown'. It is still imported, but is
-     * excluded from any further postprocessing.
+     * excluded from any further post-processing.
      * </li>
      * </ul>
      */
@@ -1227,7 +1227,7 @@ public class Assimp {
      * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #aiTextureFlags_Invert TextureFlags_Invert} - The texture's color values have to be inverted (componentwise 1-n)</li>
+     * <li>{@link #aiTextureFlags_Invert TextureFlags_Invert} - The texture's color values have to be inverted (component-wise 1-n)</li>
      * <li>{@link #aiTextureFlags_UseAlpha TextureFlags_UseAlpha} - 
      * Explicit request to the application to process the alpha channel of the texture. Mutually exclusive with {@link #aiTextureFlags_IgnoreAlpha TextureFlags_IgnoreAlpha}. These flags are
      * set if the library can say for sure that the alpha channel is used/is not used. If the model format does not define this, it is left to the
@@ -1286,6 +1286,7 @@ public class Assimp {
         AI_MATKEY_ENABLE_WIREFRAME        = "$mat.wireframe",
         AI_MATKEY_BLEND_FUNC              = "$mat.blend",
         AI_MATKEY_OPACITY                 = "$mat.opacity",
+        AI_MATKEY_TRANSPARENCYFACTOR      = "$mat.transparencyfactor",
         AI_MATKEY_BUMPSCALING             = "$mat.bumpscaling",
         AI_MATKEY_SHININESS               = "$mat.shininess",
         AI_MATKEY_REFLECTIVITY            = "$mat.reflectivity",
@@ -1298,6 +1299,13 @@ public class Assimp {
         AI_MATKEY_COLOR_TRANSPARENT       = "$clr.transparent",
         AI_MATKEY_COLOR_REFLECTIVE        = "$clr.reflective",
         AI_MATKEY_GLOBAL_BACKGROUND_IMAGE = "?bg.global",
+        AI_MATKEY_GLOBAL_SHADERLANG       = "?sh.lang",
+        AI_MATKEY_SHADER_VERTEX           = "?sh.vs",
+        AI_MATKEY_SHADER_FRAGMENT         = "?sh.fs",
+        AI_MATKEY_SHADER_GEO              = "?sh.gs",
+        AI_MATKEY_SHADER_TESSELATION      = "?sh.ts",
+        AI_MATKEY_SHADER_PRIMITIVE        = "?sh.ps",
+        AI_MATKEY_SHADER_COMPUTE          = "?sh.cs",
         _AI_MATKEY_TEXTURE_BASE           = "$tex.file",
         _AI_MATKEY_UVWSRC_BASE            = "$tex.uvwsrc",
         _AI_MATKEY_TEXOP_BASE             = "$tex.op",

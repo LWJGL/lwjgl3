@@ -2042,7 +2042,7 @@ aiAttachLogStream(&c);""")}
         "TextureType_UNKNOWN".enum(
             """
             Unknown texture. A texture reference that does not match any of the definitions above is considered to be 'unknown'. It is still imported, but is
-            excluded from any further postprocessing.
+            excluded from any further post-processing.
             """,
             0xC
         )
@@ -2088,7 +2088,7 @@ aiAttachLogStream(&c);""")}
         This corresponds to the #_AI_MATKEY_TEXFLAGS_BASE property.
         """,
 
-        "TextureFlags_Invert".enum("The texture's color values have to be inverted (componentwise 1-n)", 0x1),
+        "TextureFlags_Invert".enum("The texture's color values have to be inverted (component-wise 1-n)", 0x1),
         "TextureFlags_UseAlpha".enum(
             """
             Explicit request to the application to process the alpha channel of the texture. Mutually exclusive with #TextureFlags_IgnoreAlpha. These flags are
@@ -2134,6 +2134,7 @@ aiAttachLogStream(&c);""")}
         "AI_MATKEY_ENABLE_WIREFRAME".."\$mat.wireframe",
         "AI_MATKEY_BLEND_FUNC".."\$mat.blend",
         "AI_MATKEY_OPACITY".."\$mat.opacity",
+        "AI_MATKEY_TRANSPARENCYFACTOR".."\$mat.transparencyfactor",
         "AI_MATKEY_BUMPSCALING".."\$mat.bumpscaling",
         "AI_MATKEY_SHININESS".."\$mat.shininess",
         "AI_MATKEY_REFLECTIVITY".."\$mat.reflectivity",
@@ -2146,6 +2147,13 @@ aiAttachLogStream(&c);""")}
         "AI_MATKEY_COLOR_TRANSPARENT".."\$clr.transparent",
         "AI_MATKEY_COLOR_REFLECTIVE".."\$clr.reflective",
         "AI_MATKEY_GLOBAL_BACKGROUND_IMAGE".."?bg.global",
+        "AI_MATKEY_GLOBAL_SHADERLANG".."?sh.lang",
+        "AI_MATKEY_SHADER_VERTEX".."?sh.vs",
+        "AI_MATKEY_SHADER_FRAGMENT".."?sh.fs",
+        "AI_MATKEY_SHADER_GEO".."?sh.gs",
+        "AI_MATKEY_SHADER_TESSELATION".."?sh.ts",
+        "AI_MATKEY_SHADER_PRIMITIVE".."?sh.ps",
+        "AI_MATKEY_SHADER_COMPUTE".."?sh.cs",
 
         "_AI_MATKEY_TEXTURE_BASE".."\$tex.file",
         "_AI_MATKEY_UVWSRC_BASE".."\$tex.uvwsrc",
