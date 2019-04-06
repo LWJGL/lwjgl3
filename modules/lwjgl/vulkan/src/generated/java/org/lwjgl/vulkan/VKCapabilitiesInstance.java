@@ -70,6 +70,10 @@ public class VKCapabilitiesInstance {
     public final long
         vkGetPhysicalDeviceSurfaceCapabilities2EXT;
 
+    // EXT_full_screen_exclusive
+    public final long
+        vkGetPhysicalDeviceSurfacePresentModes2EXT;
+
     // EXT_sample_locations
     public final long
         vkGetPhysicalDeviceMultisamplePropertiesEXT;
@@ -206,6 +210,8 @@ public class VKCapabilitiesInstance {
     public final boolean VK_KHR_get_surface_capabilities2;
     /** When true, {@link KHRSurface} is supported. */
     public final boolean VK_KHR_surface;
+    /** When true, {@link KHRSurfaceProtectedCapabilities} is supported. */
+    public final boolean VK_KHR_surface_protected_capabilities;
     /** When true, {@link KHRWaylandSurface} is supported. */
     public final boolean VK_KHR_wayland_surface;
     /** When true, {@link KHRWin32Surface} is supported. */
@@ -220,7 +226,7 @@ public class VKCapabilitiesInstance {
     VKCapabilitiesInstance(FunctionProvider provider, int apiVersion, Set<String> ext, Set<String> deviceExt) {
         this.apiVersion = apiVersion;
 
-        Map<String, Long> caps = new HashMap<>(75);
+        Map<String, Long> caps = new HashMap<>(76);
 
         Vulkan10 = VK10.checkCapsInstance(provider, caps, ext);
         Vulkan11 = VK11.checkCapsInstance(provider, caps, ext);
@@ -230,6 +236,7 @@ public class VKCapabilitiesInstance {
         VK_EXT_debug_utils = EXTDebugUtils.checkCapsInstance(provider, caps, ext);
         VK_EXT_direct_mode_display = EXTDirectModeDisplay.checkCapsInstance(provider, caps, ext);
         VK_EXT_display_surface_counter = EXTDisplaySurfaceCounter.checkCapsInstance(provider, caps, ext);
+        EXTFullScreenExclusive.checkCapsInstance(provider, caps, deviceExt);
         EXTSampleLocations.checkCapsInstance(provider, caps, deviceExt);
         VK_EXT_swapchain_colorspace = ext.contains("VK_EXT_swapchain_colorspace");
         VK_EXT_validation_features = ext.contains("VK_EXT_validation_features");
@@ -244,6 +251,7 @@ public class VKCapabilitiesInstance {
         VK_KHR_get_physical_device_properties2 = KHRGetPhysicalDeviceProperties2.checkCapsInstance(provider, caps, ext);
         VK_KHR_get_surface_capabilities2 = KHRGetSurfaceCapabilities2.checkCapsInstance(provider, caps, ext);
         VK_KHR_surface = KHRSurface.checkCapsInstance(provider, caps, ext);
+        VK_KHR_surface_protected_capabilities = ext.contains("VK_KHR_surface_protected_capabilities");
         KHRSwapchain.checkCapsInstance(provider, caps, deviceExt);
         VK_KHR_wayland_surface = KHRWaylandSurface.checkCapsInstance(provider, caps, ext);
         VK_KHR_win32_surface = KHRWin32Surface.checkCapsInstance(provider, caps, ext);
@@ -287,6 +295,7 @@ public class VKCapabilitiesInstance {
         vkSubmitDebugUtilsMessageEXT = VK.get(caps, "vkSubmitDebugUtilsMessageEXT");
         vkReleaseDisplayEXT = VK.get(caps, "vkReleaseDisplayEXT");
         vkGetPhysicalDeviceSurfaceCapabilities2EXT = VK.get(caps, "vkGetPhysicalDeviceSurfaceCapabilities2EXT");
+        vkGetPhysicalDeviceSurfacePresentModes2EXT = VK.get(caps, "vkGetPhysicalDeviceSurfacePresentModes2EXT");
         vkGetPhysicalDeviceMultisamplePropertiesEXT = VK.get(caps, "vkGetPhysicalDeviceMultisamplePropertiesEXT");
         vkGetPhysicalDevicePresentRectanglesKHR = VK.get(caps, "vkGetPhysicalDevicePresentRectanglesKHR");
         vkEnumeratePhysicalDeviceGroupsKHR = VK.get(caps, "vkEnumeratePhysicalDeviceGroupsKHR");

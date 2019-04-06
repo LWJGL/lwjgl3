@@ -71,6 +71,7 @@ val EXT_buffer_device_address = "EXTBufferDeviceAddress".nativeClassVK("EXT_buff
     EnumConstant(
         "Extends {@code VkStructureType}.",
 
+        "STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT".."1000244000",
         "STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_ADDRESS_FEATURES_EXT".."1000244000",
         "STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO_EXT".."1000244001",
         "STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT".."1000244002"
@@ -108,14 +109,14 @@ val EXT_buffer_device_address = "EXTBufferDeviceAddress".nativeClassVK("EXT_buff
 ￿    const VkBufferDeviceAddressInfoEXT*         pInfo);</code></pre>
 
         <h5>Description</h5>
-        The 64-bit return value is an address of the start of {@code pInfo}{@code ::buffer}. The address range starting at this value and whose size is the size of the buffer <b>can</b> be used in a shader to access the memory bound to that buffer, using the {@code SPV_EXT_physical_storage_buffer} extension and the {@code PhysicalStorageBufferEXT} storage class. For example, this value <b>can</b> be stored in a uniform buffer, and the shader <b>can</b> read the value from the uniform buffer and use it to do a dependent read/write to this buffer. A value of zero is reserved as a "null" pointer and <b>must</b> not be returned as a valid buffer device address. All loads, stores, and atomics in a shader through {@code PhysicalStorageBufferEXT} pointers <b>must</b> access addresses in the address range of some buffer.
+        The 64-bit return value is an address of the start of {@code pInfo}{@code ::buffer}. The address range starting at this value and whose size is the size of the buffer <b>can</b> be used in a shader to access the memory bound to that buffer, using the {@code SPV_EXT_physical_storage_buffer} extension and the {@code PhysicalStorageBufferEXT} storage class. For example, this value <b>can</b> be stored in a uniform buffer, and the shader <b>can</b> read the value from the uniform buffer and use it to do a dependent read/write to this buffer. A value of zero is reserved as a "{@code null}" pointer and <b>must</b> not be returned as a valid buffer device address. All loads, stores, and atomics in a shader through {@code PhysicalStorageBufferEXT} pointers <b>must</b> access addresses in the address range of some buffer.
 
         If the buffer was created with a non-zero value of ##VkBufferDeviceAddressCreateInfoEXT{@code ::deviceAddress}, the return value will be the same address.
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-features-bufferDeviceAddress">bufferDeviceAddress</a> feature <b>must</b> be enabled</li>
-            <li>If {@code device} was created with multiple physical devices, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-features-bufferDeviceAddressMultiDevice">bufferDeviceAddressMultiDevice</a> feature <b>must</b> be enabled</li>
+            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-bufferDeviceAddress">bufferDeviceAddress</a> feature <b>must</b> be enabled</li>
+            <li>If {@code device} was created with multiple physical devices, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-bufferDeviceAddressMultiDevice">bufferDeviceAddressMultiDevice</a> feature <b>must</b> be enabled</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

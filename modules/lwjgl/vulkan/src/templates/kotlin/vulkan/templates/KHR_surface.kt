@@ -170,6 +170,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
             <li>#COLOR_SPACE_ADOBERGB_LINEAR_EXT specifies support for the AdobeRGB color space and applies a linear OETF.</li>
             <li>#COLOR_SPACE_ADOBERGB_NONLINEAR_EXT specifies support for the AdobeRGB color space and applies the Gamma 2.2 OETF.</li>
             <li>#COLOR_SPACE_PASS_THROUGH_EXT specifies that color components are used “as is”. This is intended to allow applications to supply data for color spaces not described here.</li>
+            <li>#COLOR_SPACE_DISPLAY_NATIVE_AMD specifies support for the display&#8217;s native color space. This matches the color space expectations of AMD&#8217;s FreeSync2 standard, for displays supporting it.</li>
         </ul>
 
         The color components of Non-linear color space swap chain images have had the appropriate transfer function applied. Vulkan requires that all implementations support the sRGB transfer function when using an SRGB pixel format. Other transfer functions, such as SMPTE 170M or SMPTE2084, <b>must</b> not be performed by the implementation, but <b>can</b> be performed by the application shader. This extension defines enums for {@code VkColorSpaceKHR} that correspond to the following color spaces:
@@ -238,7 +239,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
         </div>
 
         <h5>See Also</h5>
-        ##VkSwapchainCreateInfoKHR, #GetPhysicalDeviceSurfacePresentModesKHR()
+        ##VkSwapchainCreateInfoKHR, #GetPhysicalDeviceSurfacePresentModes2EXT(), #GetPhysicalDeviceSurfacePresentModesKHR()
         """,
 
         "PRESENT_MODE_IMMEDIATE_KHR".."0",

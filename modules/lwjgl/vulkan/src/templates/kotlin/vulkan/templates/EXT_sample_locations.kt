@@ -147,7 +147,7 @@ val EXT_sample_locations = "EXTSampleLocations".nativeClassVK("EXT_sample_locati
         Report sample count specific multisampling capabilities of a physical device.
 
         <h5>C Specification</h5>
-        In addition to the minimum capabilities described in the previous section (<a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-limits">Limits</a>), implementations <b>may</b> support additional multisampling capabilities specific to a particular sample count.
+        In addition to the minimum capabilities described for (<a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#limits">Limits</a>) above, implementations <b>may</b> support additional multisampling capabilities specific to a particular sample count.
 
         To query additional sample count specific multisampling capabilities, call:
 

@@ -111,6 +111,12 @@ public class KHRGetSurfaceCapabilities2 {
      * 
      * <p>{@code vkGetPhysicalDeviceSurfaceCapabilities2KHR} behaves similarly to {@link KHRSurface#vkGetPhysicalDeviceSurfaceCapabilitiesKHR GetPhysicalDeviceSurfaceCapabilitiesKHR}, with the ability to specify extended inputs via chained input structures, and to return extended information via chained output structures.</p>
      * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>If an instance of {@link VkSurfaceCapabilitiesFullScreenExclusiveEXT} is included in the {@code pNext} chain of {@code pSurfaceCapabilities}, an instance of {@link VkSurfaceFullScreenExclusiveWin32InfoEXT} <b>must</b> be included in the {@code pNext} chain of {@code pSurfaceInfo}.</li>
+     * </ul>
+     * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>

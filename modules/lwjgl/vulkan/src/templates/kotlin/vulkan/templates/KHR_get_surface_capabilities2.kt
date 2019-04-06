@@ -89,6 +89,11 @@ val KHR_get_surface_capabilities2 = "KHRGetSurfaceCapabilities2".nativeClassVK("
         <h5>Description</h5>
         {@code vkGetPhysicalDeviceSurfaceCapabilities2KHR} behaves similarly to #GetPhysicalDeviceSurfaceCapabilitiesKHR(), with the ability to specify extended inputs via chained input structures, and to return extended information via chained output structures.
 
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If an instance of ##VkSurfaceCapabilitiesFullScreenExclusiveEXT is included in the {@code pNext} chain of {@code pSurfaceCapabilities}, an instance of ##VkSurfaceFullScreenExclusiveWin32InfoEXT <b>must</b> be included in the {@code pNext} chain of {@code pSurfaceInfo}.</li>
+        </ul>
+
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>

@@ -34,7 +34,7 @@ val KHR_shader_draw_parameters = "KHRShaderDrawParameters".nativeClassVK("KHR_sh
         </ul>
 
         <h5>Promotion to Vulkan 1.1</h5>
-        All functionality in this extension is included in core Vulkan 1.1, however a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-features-shaderDrawParameters">feature bit was added</a> to distinguish whether it's actually available or not.
+        All functionality in this extension is included in core Vulkan 1.1, however a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-shaderDrawParameters">feature bit was added</a> to distinguish whether it is actually available or not.
 
         <dl>
             <dt><b>Name String</b></dt>

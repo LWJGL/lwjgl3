@@ -22,12 +22,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>When this structure is chained to {@link VkImageViewCreateInfo} the {@code usage} field overrides the implicit {@code usage} parameter inherited from image creation time and its value is used instead for the purposes of determining the valid usage conditions of {@link VkImageViewCreateInfo}.</p>
  * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code usage} <b>must</b> not include any set bits that were not set in the {@code usage} member of the {@link VkImageCreateInfo} structure used to create the image this image view is created from.</li>
- * </ul>
- * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

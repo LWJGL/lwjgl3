@@ -135,6 +135,7 @@ val KHR_shared_presentable_image = "KHRSharedPresentableImage".nativeClassVK("KH
                 <li>#ERROR_DEVICE_LOST</li>
                 <li>#ERROR_OUT_OF_DATE_KHR</li>
                 <li>#ERROR_SURFACE_LOST_KHR</li>
+                <li>#ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT</li>
             </ul></dd>
         </dl>
         """,

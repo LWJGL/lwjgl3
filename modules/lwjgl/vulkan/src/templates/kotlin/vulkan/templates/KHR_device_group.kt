@@ -411,6 +411,7 @@ val KHR_device_group = "KHRDeviceGroup".nativeClassVK("KHR_device_group", type =
                 <li>#ERROR_DEVICE_LOST</li>
                 <li>#ERROR_OUT_OF_DATE_KHR</li>
                 <li>#ERROR_SURFACE_LOST_KHR</li>
+                <li>#ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT</li>
             </ul></dd>
         </dl>
 
@@ -421,5 +422,53 @@ val KHR_device_group = "KHRDeviceGroup".nativeClassVK("KHR_device_group", type =
         VkDevice("device", "the device associated with {@code swapchain}."),
         VkAcquireNextImageInfoKHR.const.p("pAcquireInfo", "a pointer to a structure of type ##VkAcquireNextImageInfoKHR containing parameters of the acquire."),
         Check(1)..uint32_t.p("pImageIndex", "a pointer to a {@code uint32_t} that is set to the index of the next image to use.")
+    )
+
+    DependsOn("VK_EXT_full_screen_exclusive")..VkResult(
+        "GetDeviceGroupSurfacePresentModes2EXT",
+        """
+        Query device group present capabilities for a surface.
+
+        <h5>C Specification</h5>
+        Alternatively, to query the supported device group presentation modes for a surface combined with select other fixed swapchain creation parameters, call:
+
+        <pre><code>
+￿VkResult vkGetDeviceGroupSurfacePresentModes2EXT(
+￿    VkDevice                                    device,
+￿    const VkPhysicalDeviceSurfaceInfo2KHR*      pSurfaceInfo,
+￿    VkDeviceGroupPresentModeFlagsKHR*           pModes);</code></pre>
+
+        <h5>Description</h5>
+        {@code vkGetDeviceGroupSurfacePresentModes2EXT} behaves similarly to #GetDeviceGroupSurfacePresentModesKHR(), with the ability to specify extended inputs via chained input structures.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+            <li>{@code pSurfaceInfo} <b>must</b> be a valid pointer to a valid ##VkPhysicalDeviceSurfaceInfo2KHR structure</li>
+            <li>{@code pModes} <b>must</b> be a valid pointer to a {@code VkDeviceGroupPresentModeFlagsKHR} value</li>
+        </ul>
+
+        <h5>Return Codes</h5>
+        <dl>
+            <dt>On success, this command returns</dt>
+            <dd><ul>
+                <li>#SUCCESS</li>
+            </ul></dd>
+
+            <dt>On failure, this command returns</dt>
+            <dd><ul>
+                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
+                <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+                <li>#ERROR_SURFACE_LOST_KHR</li>
+            </ul></dd>
+        </dl>
+
+        <h5>See Also</h5>
+        ##VkPhysicalDeviceSurfaceInfo2KHR
+        """,
+
+        VkDevice("device", "the logical device."),
+        VkPhysicalDeviceSurfaceInfo2KHR.const.p("pSurfaceInfo", "points to an instance of the VkPhysicalDeviceSurfaceInfo2KHR structure, describing the surface and other fixed parameters that would be consumed by vkCreateSwapchainKHR."),
+        Check(1)..VkDeviceGroupPresentModeFlagsKHR.p("pModes", "a pointer to a value of type {@code VkDeviceGroupPresentModeFlagsKHR} that is filled with the supported device group present modes for the surface.")
     )
 }

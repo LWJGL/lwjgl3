@@ -55,7 +55,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct VkBufferDeviceAddressCreateInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
- *     VkDeviceSize deviceAddress;
+ *     VkDeviceAddress deviceAddress;
  * }</code></pre>
  */
 public class VkBufferDeviceAddressCreateInfoEXT extends Struct implements NativeResource {
@@ -107,7 +107,7 @@ public class VkBufferDeviceAddressCreateInfoEXT extends Struct implements Native
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
     /** Returns the value of the {@code deviceAddress} field. */
-    @NativeType("VkDeviceSize")
+    @NativeType("VkDeviceAddress")
     public long deviceAddress() { return ndeviceAddress(address()); }
 
     /** Sets the specified value to the {@code sType} field. */
@@ -115,7 +115,7 @@ public class VkBufferDeviceAddressCreateInfoEXT extends Struct implements Native
     /** Sets the specified value to the {@code pNext} field. */
     public VkBufferDeviceAddressCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code deviceAddress} field. */
-    public VkBufferDeviceAddressCreateInfoEXT deviceAddress(@NativeType("VkDeviceSize") long value) { ndeviceAddress(address(), value); return this; }
+    public VkBufferDeviceAddressCreateInfoEXT deviceAddress(@NativeType("VkDeviceAddress") long value) { ndeviceAddress(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkBufferDeviceAddressCreateInfoEXT set(
@@ -344,7 +344,7 @@ public class VkBufferDeviceAddressCreateInfoEXT extends Struct implements Native
         @NativeType("void const *")
         public long pNext() { return VkBufferDeviceAddressCreateInfoEXT.npNext(address()); }
         /** Returns the value of the {@code deviceAddress} field. */
-        @NativeType("VkDeviceSize")
+        @NativeType("VkDeviceAddress")
         public long deviceAddress() { return VkBufferDeviceAddressCreateInfoEXT.ndeviceAddress(address()); }
 
         /** Sets the specified value to the {@code sType} field. */
@@ -352,7 +352,7 @@ public class VkBufferDeviceAddressCreateInfoEXT extends Struct implements Native
         /** Sets the specified value to the {@code pNext} field. */
         public VkBufferDeviceAddressCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkBufferDeviceAddressCreateInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code deviceAddress} field. */
-        public VkBufferDeviceAddressCreateInfoEXT.Buffer deviceAddress(@NativeType("VkDeviceSize") long value) { VkBufferDeviceAddressCreateInfoEXT.ndeviceAddress(address(), value); return this; }
+        public VkBufferDeviceAddressCreateInfoEXT.Buffer deviceAddress(@NativeType("VkDeviceAddress") long value) { VkBufferDeviceAddressCreateInfoEXT.ndeviceAddress(address(), value); return this; }
 
     }
 

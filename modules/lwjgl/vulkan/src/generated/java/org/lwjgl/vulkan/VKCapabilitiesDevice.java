@@ -158,6 +158,10 @@ public class VKCapabilitiesDevice {
     public final long
         vkCmdWriteBufferMarkerAMD;
 
+    // AMD_display_native_hdr
+    public final long
+        vkSetLocalDimmingAMD;
+
     // AMD_draw_indirect_count
     public final long
         vkCmdDrawIndirectCountAMD,
@@ -214,9 +218,19 @@ public class VKCapabilitiesDevice {
     public final long
         vkGetMemoryHostPointerPropertiesEXT;
 
+    // EXT_full_screen_exclusive
+    public final long
+        vkAcquireFullScreenExclusiveModeEXT,
+        vkReleaseFullScreenExclusiveModeEXT,
+        vkGetDeviceGroupSurfacePresentModes2EXT;
+
     // EXT_hdr_metadata
     public final long
         vkSetHdrMetadataEXT;
+
+    // EXT_host_query_reset
+    public final long
+        vkResetQueryPoolEXT;
 
     // EXT_image_drm_format_modifier
     public final long
@@ -404,6 +418,10 @@ public class VKCapabilitiesDevice {
         vkRegisterObjectsNVX,
         vkUnregisterObjectsNVX;
 
+    // NVX_image_view_handle
+    public final long
+        vkGetImageViewHandleNVX;
+
     /** The Vulkan API version number. */
     public final int apiVersion;
 
@@ -413,6 +431,8 @@ public class VKCapabilitiesDevice {
     public final boolean Vulkan11;
     /** When true, {@link AMDBufferMarker} is supported. */
     public final boolean VK_AMD_buffer_marker;
+    /** When true, {@link AMDDisplayNativeHdr} is supported. */
+    public final boolean VK_AMD_display_native_hdr;
     /** When true, {@link AMDDrawIndirectCount} is supported. */
     public final boolean VK_AMD_draw_indirect_count;
     /** When true, {@link AMDGCNShader} is supported. */
@@ -477,10 +497,14 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_filter_cubic;
     /** When true, {@link EXTFragmentDensityMap} is supported. */
     public final boolean VK_EXT_fragment_density_map;
+    /** When true, {@link EXTFullScreenExclusive} is supported. */
+    public final boolean VK_EXT_full_screen_exclusive;
     /** When true, {@link EXTGlobalPriority} is supported. */
     public final boolean VK_EXT_global_priority;
     /** When true, {@link EXTHdrMetadata} is supported. */
     public final boolean VK_EXT_hdr_metadata;
+    /** When true, {@link EXTHostQueryReset} is supported. */
+    public final boolean VK_EXT_host_query_reset;
     /** When true, {@link EXTImageDrmFormatModifier} is supported. */
     public final boolean VK_EXT_image_drm_format_modifier;
     /** When true, {@link EXTInlineUniformBlock} is supported. */
@@ -491,6 +515,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_memory_priority;
     /** When true, {@link EXTPciBusInfo} is supported. */
     public final boolean VK_EXT_pci_bus_info;
+    /** When true, {@link EXTPipelineCreationFeedback} is supported. */
+    public final boolean VK_EXT_pipeline_creation_feedback;
     /** When true, {@link EXTPostDepthCoverage} is supported. */
     public final boolean VK_EXT_post_depth_coverage;
     /** When true, {@link EXTQueueFamilyForeign} is supported. */
@@ -517,6 +543,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_validation_cache;
     /** When true, {@link EXTVertexAttributeDivisor} is supported. */
     public final boolean VK_EXT_vertex_attribute_divisor;
+    /** When true, {@link EXTYcbcrImageArrays} is supported. */
+    public final boolean VK_EXT_ycbcr_image_arrays;
     /** When true, {@link GOOGLEDecorateString} is supported. */
     public final boolean VK_GOOGLE_decorate_string;
     /** When true, {@link GOOGLEDisplayTiming} is supported. */
@@ -665,17 +693,20 @@ public class VKCapabilitiesDevice {
     public final boolean VK_NV_win32_keyed_mutex;
     /** When true, {@link NVXDeviceGeneratedCommands} is supported. */
     public final boolean VK_NVX_device_generated_commands;
+    /** When true, {@link NVXImageViewHandle} is supported. */
+    public final boolean VK_NVX_image_view_handle;
     /** When true, {@link NVXMultiviewPerViewAttributes} is supported. */
     public final boolean VK_NVX_multiview_per_view_attributes;
 
     VKCapabilitiesDevice(FunctionProvider provider, VKCapabilitiesInstance capsInstance, Set<String> ext) {
         this.apiVersion = capsInstance.apiVersion;
 
-        Map<String, Long> caps = new HashMap<>(255);
+        Map<String, Long> caps = new HashMap<>(261);
 
         Vulkan10 = VK10.checkCapsDevice(provider, caps, ext);
         Vulkan11 = VK11.checkCapsDevice(provider, caps, ext);
         VK_AMD_buffer_marker = AMDBufferMarker.checkCapsDevice(provider, caps, ext);
+        VK_AMD_display_native_hdr = AMDDisplayNativeHdr.checkCapsDevice(provider, caps, ext);
         VK_AMD_draw_indirect_count = AMDDrawIndirectCount.checkCapsDevice(provider, caps, ext);
         VK_AMD_gcn_shader = ext.contains("VK_AMD_gcn_shader");
         VK_AMD_gpu_shader_half_float = ext.contains("VK_AMD_gpu_shader_half_float");
@@ -709,13 +740,16 @@ public class VKCapabilitiesDevice {
         VK_EXT_external_memory_host = EXTExternalMemoryHost.checkCapsDevice(provider, caps, ext);
         VK_EXT_filter_cubic = ext.contains("VK_EXT_filter_cubic");
         VK_EXT_fragment_density_map = ext.contains("VK_EXT_fragment_density_map");
+        VK_EXT_full_screen_exclusive = EXTFullScreenExclusive.checkCapsDevice(provider, caps, ext);
         VK_EXT_global_priority = ext.contains("VK_EXT_global_priority");
         VK_EXT_hdr_metadata = EXTHdrMetadata.checkCapsDevice(provider, caps, ext);
+        VK_EXT_host_query_reset = EXTHostQueryReset.checkCapsDevice(provider, caps, ext);
         VK_EXT_image_drm_format_modifier = EXTImageDrmFormatModifier.checkCapsDevice(provider, caps, ext);
         VK_EXT_inline_uniform_block = ext.contains("VK_EXT_inline_uniform_block");
         VK_EXT_memory_budget = ext.contains("VK_EXT_memory_budget");
         VK_EXT_memory_priority = ext.contains("VK_EXT_memory_priority");
         VK_EXT_pci_bus_info = ext.contains("VK_EXT_pci_bus_info");
+        VK_EXT_pipeline_creation_feedback = ext.contains("VK_EXT_pipeline_creation_feedback");
         VK_EXT_post_depth_coverage = ext.contains("VK_EXT_post_depth_coverage");
         VK_EXT_queue_family_foreign = ext.contains("VK_EXT_queue_family_foreign");
         VK_EXT_sample_locations = EXTSampleLocations.checkCapsDevice(provider, caps, ext);
@@ -729,6 +763,7 @@ public class VKCapabilitiesDevice {
         VK_EXT_transform_feedback = EXTTransformFeedback.checkCapsDevice(provider, caps, ext);
         VK_EXT_validation_cache = EXTValidationCache.checkCapsDevice(provider, caps, ext);
         VK_EXT_vertex_attribute_divisor = ext.contains("VK_EXT_vertex_attribute_divisor");
+        VK_EXT_ycbcr_image_arrays = ext.contains("VK_EXT_ycbcr_image_arrays");
         VK_GOOGLE_decorate_string = ext.contains("VK_GOOGLE_decorate_string");
         VK_GOOGLE_display_timing = GOOGLEDisplayTiming.checkCapsDevice(provider, caps, ext);
         VK_GOOGLE_hlsl_functionality1 = ext.contains("VK_GOOGLE_hlsl_functionality1");
@@ -803,6 +838,7 @@ public class VKCapabilitiesDevice {
         VK_NV_viewport_swizzle = ext.contains("VK_NV_viewport_swizzle");
         VK_NV_win32_keyed_mutex = ext.contains("VK_NV_win32_keyed_mutex");
         VK_NVX_device_generated_commands = NVXDeviceGeneratedCommands.checkCapsDevice(provider, caps, ext);
+        VK_NVX_image_view_handle = NVXImageViewHandle.checkCapsDevice(provider, caps, ext);
         VK_NVX_multiview_per_view_attributes = ext.contains("VK_NVX_multiview_per_view_attributes");
 
         vkGetDeviceProcAddr = VK.get(caps, "vkGetDeviceProcAddr");
@@ -943,6 +979,7 @@ public class VKCapabilitiesDevice {
         vkUpdateDescriptorSetWithTemplate = VK.get(caps, "vkUpdateDescriptorSetWithTemplate");
         vkGetDescriptorSetLayoutSupport = VK.get(caps, "vkGetDescriptorSetLayoutSupport");
         vkCmdWriteBufferMarkerAMD = VK.get(caps, "vkCmdWriteBufferMarkerAMD");
+        vkSetLocalDimmingAMD = VK.get(caps, "vkSetLocalDimmingAMD");
         vkCmdDrawIndirectCountAMD = VK.get(caps, "vkCmdDrawIndirectCountAMD");
         vkCmdDrawIndexedIndirectCountAMD = VK.get(caps, "vkCmdDrawIndexedIndirectCountAMD");
         vkGetShaderInfoAMD = VK.get(caps, "vkGetShaderInfoAMD");
@@ -969,7 +1006,11 @@ public class VKCapabilitiesDevice {
         vkRegisterDisplayEventEXT = VK.get(caps, "vkRegisterDisplayEventEXT");
         vkGetSwapchainCounterEXT = VK.get(caps, "vkGetSwapchainCounterEXT");
         vkGetMemoryHostPointerPropertiesEXT = VK.get(caps, "vkGetMemoryHostPointerPropertiesEXT");
+        vkAcquireFullScreenExclusiveModeEXT = VK.get(caps, "vkAcquireFullScreenExclusiveModeEXT");
+        vkReleaseFullScreenExclusiveModeEXT = VK.get(caps, "vkReleaseFullScreenExclusiveModeEXT");
+        vkGetDeviceGroupSurfacePresentModes2EXT = VK.get(caps, "vkGetDeviceGroupSurfacePresentModes2EXT");
         vkSetHdrMetadataEXT = VK.get(caps, "vkSetHdrMetadataEXT");
+        vkResetQueryPoolEXT = VK.get(caps, "vkResetQueryPoolEXT");
         vkGetImageDrmFormatModifierPropertiesEXT = VK.get(caps, "vkGetImageDrmFormatModifierPropertiesEXT");
         vkCmdSetSampleLocationsEXT = VK.get(caps, "vkCmdSetSampleLocationsEXT");
         vkCmdBindTransformFeedbackBuffersEXT = VK.get(caps, "vkCmdBindTransformFeedbackBuffersEXT");
@@ -1060,6 +1101,7 @@ public class VKCapabilitiesDevice {
         vkDestroyObjectTableNVX = VK.get(caps, "vkDestroyObjectTableNVX");
         vkRegisterObjectsNVX = VK.get(caps, "vkRegisterObjectsNVX");
         vkUnregisterObjectsNVX = VK.get(caps, "vkUnregisterObjectsNVX");
+        vkGetImageViewHandleNVX = VK.get(caps, "vkGetImageViewHandleNVX");
     }
 
 }
