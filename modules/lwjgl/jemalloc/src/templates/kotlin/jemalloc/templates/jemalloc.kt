@@ -32,7 +32,7 @@ val jemalloc = "JEmalloc".nativeClass(Module.JEMALLOC, prefixMethod = "je_", bin
     StringConstant(
         "The globally unique identifier (git commit hash).",
 
-        "JEMALLOC_VERSION_GID".."c4063ce439523d382f2dfbbc5bf6da657e6badb0"
+        "JEMALLOC_VERSION_GID".."b0b3e49a54ec29e32636f4577d9d5a896d67fd20"
     )
 
     StringConstant(
