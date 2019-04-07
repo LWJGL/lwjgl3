@@ -787,7 +787,7 @@ static rmtError VirtualMirrorBuffer_Constructor(VirtualMirrorBuffer* buffer, rmt
         if (buffer->file_map_handle == NULL)
             break;
 
-		
+
 #ifndef _UWP // NON-UWP Windows Desktop Version
 
 		// Reserve two contiguous pages of virtual memory
@@ -800,7 +800,7 @@ static rmtError VirtualMirrorBuffer_Constructor(VirtualMirrorBuffer* buffer, rmt
 		// address range from underneath us so multiple attempts need to be made.
 		VirtualFree(desired_addr, 0, MEM_RELEASE);
 
-		// Immediately try to point both pages at the file mapping		
+		// Immediately try to point both pages at the file mapping
 		if (MapViewOfFileEx(buffer->file_map_handle, FILE_MAP_ALL_ACCESS, 0, 0, size, desired_addr) == desired_addr &&
 			MapViewOfFileEx(buffer->file_map_handle, FILE_MAP_ALL_ACCESS, 0, 0, size, desired_addr + size) == desired_addr + size)
 		{
@@ -808,23 +808,23 @@ static rmtError VirtualMirrorBuffer_Constructor(VirtualMirrorBuffer* buffer, rmt
 			break;
 		}
 
-#else   // UWP 
+#else   // UWP
 
 		// Implementation based on example from: https://docs.microsoft.com/en-us/windows/desktop/api/memoryapi/nf-memoryapi-virtualalloc2
 		//
 		// Notes
-		//  - just replaced the non-uwp functions by the uwp variants. 
+		//  - just replaced the non-uwp functions by the uwp variants.
 		//  - Both versions could be rewritten to not need the try-loop, see the example mentioned above. I just keep it as is for now.
 		//  - Successfully tested on Hololens
 		desired_addr = (rmtU8*) VirtualAlloc2FromApp(NULL, NULL, 2 * size,MEM_RESERVE | MEM_RESERVE_PLACEHOLDER,PAGE_NOACCESS,NULL, 0);
 
 		// Split the placeholder region into two regions of equal size.
 		VirtualFree(desired_addr, size,	MEM_RELEASE | MEM_PRESERVE_PLACEHOLDER);
-		
-		// Immediately try to point both pages at the file mapping. 
+
+		// Immediately try to point both pages at the file mapping.
 		if(MapViewOfFile3FromApp(buffer->file_map_handle,NULL, desired_addr, 0, size, MEM_REPLACE_PLACEHOLDER,PAGE_READWRITE,NULL,0)==desired_addr &&
    		   MapViewOfFile3FromApp(buffer->file_map_handle,NULL, desired_addr+size, 0, size, MEM_REPLACE_PLACEHOLDER,PAGE_READWRITE,NULL,0)== desired_addr + size) {
-			buffer->ptr = desired_addr;			
+			buffer->ptr = desired_addr;
 			break;
 		}
 #endif
@@ -989,7 +989,7 @@ static void VirtualMirrorBuffer_Destructor(VirtualMirrorBuffer* buffer)
         {
 			// FIXME, don't we need to unmap the file views obtained in VirtualMirrorBuffer_Constructor, both for uwp/non-uwp
 			// See example https://docs.microsoft.com/en-us/windows/desktop/api/memoryapi/nf-memoryapi-virtualalloc2
-	
+
             CloseHandle(buffer->file_map_handle);
             buffer->file_map_handle = NULL;
         }
@@ -2906,11 +2906,13 @@ static rmtU32 rotl32(rmtU32 x, rmtS8 r)
 }
 
 
-// Block read - if your platform needs to do endian-swapping or can only
-// handle aligned reads, do the conversion here
+// Block read - if your platform needs to do endian-swapping, do the conversion here
 static rmtU32 getblock32(const rmtU32* p, int i)
 {
-    return p[i];
+    rmtU32 result;
+    const rmtU8 *src = ((const rmtU8 *)p) + i * sizeof(rmtU32);
+    memcpy(&result, src, sizeof(result));
+    return result;
 }
 
 
