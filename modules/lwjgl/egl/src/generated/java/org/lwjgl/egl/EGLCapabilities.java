@@ -245,6 +245,8 @@ public class EGLCapabilities {
     public final boolean EGL_EXT_gl_colorspace_display_p3;
     /** When true, {@link EXTGLColorspaceDisplayP3Linear} is supported. */
     public final boolean EGL_EXT_gl_colorspace_display_p3_linear;
+    /** When true, {@link EXTGLColorspaceDisplayP3Passthrough} is supported. */
+    public final boolean EGL_EXT_gl_colorspace_display_p3_passthrough;
     /** When true, {@link EXTGLColorspaceSCRGB} is supported. */
     public final boolean EGL_EXT_gl_colorspace_scrgb;
     /** When true, {@link EXTGLColorspaceSCRGBLinear} is supported. */
@@ -477,6 +479,8 @@ public class EGLCapabilities {
     public final boolean EGL_NV_post_convert_rounding;
     /** When true, {@link NVPostSubBuffer} is supported. */
     public final boolean EGL_NV_post_sub_buffer;
+    /** When true, {@link NVQuadrupleBuffer} is supported. */
+    public final boolean EGL_NV_quadruple_buffer;
     /** When true, {@link NVRobustnessVideoMemoryPurge} is supported. */
     public final boolean EGL_NV_robustness_video_memory_purge;
     /** When true, {@link NVStreamConsumerGLTextureYUV} is supported. */
@@ -517,6 +521,8 @@ public class EGLCapabilities {
     public final boolean EGL_NV_sync;
     /** When true, {@link NVSystemTime} is supported. */
     public final boolean EGL_NV_system_time;
+    /** When true, {@link NVTripleBuffer} is supported. */
+    public final boolean EGL_NV_triple_buffer;
     /** When true, {@link TIZENImageNativeBuffer} is supported. */
     public final boolean EGL_TIZEN_image_native_buffer;
     /** When true, {@link TIZENImageNativeSurface} is supported. */
@@ -980,6 +986,7 @@ public class EGLCapabilities {
         EGL_EXT_gl_colorspace_bt2020_pq = ext.contains("EGL_EXT_gl_colorspace_bt2020_pq");
         EGL_EXT_gl_colorspace_display_p3 = ext.contains("EGL_EXT_gl_colorspace_display_p3");
         EGL_EXT_gl_colorspace_display_p3_linear = ext.contains("EGL_EXT_gl_colorspace_display_p3_linear");
+        EGL_EXT_gl_colorspace_display_p3_passthrough = ext.contains("EGL_EXT_gl_colorspace_display_p3_passthrough");
         EGL_EXT_gl_colorspace_scrgb = ext.contains("EGL_EXT_gl_colorspace_scrgb");
         EGL_EXT_gl_colorspace_scrgb_linear = ext.contains("EGL_EXT_gl_colorspace_scrgb_linear");
         EGL_EXT_image_dma_buf_import = ext.contains("EGL_EXT_image_dma_buf_import");
@@ -1060,6 +1067,7 @@ public class EGLCapabilities {
         EGL_NV_native_query = ext.contains("EGL_NV_native_query") && EGL.checkExtension("EGL_NV_native_query", NVNativeQuery.isAvailable(this));
         EGL_NV_post_convert_rounding = ext.contains("EGL_NV_post_convert_rounding");
         EGL_NV_post_sub_buffer = ext.contains("EGL_NV_post_sub_buffer") && EGL.checkExtension("EGL_NV_post_sub_buffer", NVPostSubBuffer.isAvailable(this));
+        EGL_NV_quadruple_buffer = ext.contains("EGL_NV_quadruple_buffer");
         EGL_NV_robustness_video_memory_purge = ext.contains("EGL_NV_robustness_video_memory_purge");
         EGL_NV_stream_consumer_gltexture_yuv = ext.contains("EGL_NV_stream_consumer_gltexture_yuv") && EGL.checkExtension("EGL_NV_stream_consumer_gltexture_yuv", NVStreamConsumerGLTextureYUV.isAvailable(this));
         EGL_NV_stream_cross_display = ext.contains("EGL_NV_stream_cross_display");
@@ -1080,6 +1088,7 @@ public class EGLCapabilities {
         EGL_NV_stream_sync = ext.contains("EGL_NV_stream_sync") && EGL.checkExtension("EGL_NV_stream_sync", NVStreamSync.isAvailable(this));
         EGL_NV_sync = ext.contains("EGL_NV_sync") && EGL.checkExtension("EGL_NV_sync", NVSync.isAvailable(this));
         EGL_NV_system_time = ext.contains("EGL_NV_system_time") && EGL.checkExtension("EGL_NV_system_time", NVSystemTime.isAvailable(this));
+        EGL_NV_triple_buffer = ext.contains("EGL_NV_triple_buffer");
         EGL_TIZEN_image_native_buffer = ext.contains("EGL_TIZEN_image_native_buffer");
         EGL_TIZEN_image_native_surface = ext.contains("EGL_TIZEN_image_native_surface");
     }
