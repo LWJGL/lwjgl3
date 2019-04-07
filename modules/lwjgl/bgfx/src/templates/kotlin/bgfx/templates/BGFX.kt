@@ -14,7 +14,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     IntConstant(
         "API version",
 
-        "API_VERSION".."94"
+        "API_VERSION".."99"
     )
 
     ShortConstant(
@@ -510,6 +510,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "RENDERER_TYPE_DIRECT3D12".enum("Direct3D 12.0"),
         "RENDERER_TYPE_GNM".enum("GNM"),
         "RENDERER_TYPE_METAL".enum("Metal"),
+        "RENDERER_TYPE_NVN".enum("Nvn"),
         "RENDERER_TYPE_OPENGLES".enum("OpenGL ES 2.0+"),
         "RENDERER_TYPE_OPENGL".enum("OpenGL 2.1+"),
         "RENDERER_TYPE_VULKAN".enum("Vulkan"),
@@ -761,7 +762,7 @@ RGBA16S
         "VIEW_MODE_DEPTH_ASCENDING".enum("Sort draw call depth in ascending order."),
         "VIEW_MODE_DEPTH_DESCENDING".enum("Sort draw call depth in descending order."),
 
-        "VIEW_MODE_CCOUNT".enum
+        "VIEW_MODE_COUNT".enum
     ).javaDocLinksSkipCount
 
     EnumConstant(
@@ -774,6 +775,18 @@ RGBA16S
         "FATAL_DEVICE_LOST".enum,
 
         "FATAL_COUNT".enum
+    )
+
+    void(
+        "attachment_init",
+        "Init attachment.",
+
+        bgfx_attachment_t.p("_this", ""),
+        bgfx_texture_handle_t("_handle", "render target texture handle"),
+        bgfx_access_t("_access", "access", Access),
+        MapToInt..uint16_t("_layer", "cubemap side or depth layer/slice"),
+        MapToInt..uint16_t("_mip", "mip level"),
+        MapToInt..uint8_t("_resolve", "resolve flags", "RESOLVE_\\w+")
     )
 
     void(
@@ -874,8 +887,8 @@ RGBA16S
         "vertex_convert",
         "Converts vertex stream data from one vertex stream format to another.",
 
-        bgfx_vertex_decl_t.const.p("_destDecl", "destination vertex stream declaration"),
-        Unsafe..void.p("_destData", "destination vertex stream"),
+        bgfx_vertex_decl_t.const.p("_dstDecl", "destination vertex stream declaration"),
+        Unsafe..void.p("_dstData", "destination vertex stream"),
         bgfx_vertex_decl_t.const.p("_srcDecl", "source vertex stream declaration"),
         Unsafe..void.const.p("_srcData", "source vertex stream data"),
         uint32_t("_num", "number of vertices to convert from source to destination")
@@ -1003,20 +1016,6 @@ RGBA16S
         bgfx_texture_format_t("_format", "texture format", TextureFormat)
     )
 
-    bgfx_encoder_s.p(
-        "begin",
-        "Begin submitting draw calls from thread.",
-
-        returnDoc = "an encoder for submitting draw calls from multiple threads"
-    )
-
-    void(
-        "end",
-        "End submitting draw calls from thread.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder")
-    )
-
     uint32_t(
         "frame",
         """
@@ -1108,14 +1107,8 @@ RGBA16S
         "dbg_text_clear",
         "Clears internal debug text buffer.",
 
-        MapToInt..uint8_t(
-            "_attr",
-            """
-            color palette. Where top 4-bits represent index of background, and bottom 4-bits represent foreground color from standard VGA text palette (ANSI
-            escape codes).
-            """
-        ),
-        bool("_small", "")
+        MapToInt..uint8_t("_attr", "background color"),
+        bool("_small", "default 8x16 or 8x8 font")
     )
 
     void(
@@ -1185,6 +1178,20 @@ RGBA16S
         "Destroys static index buffer.",
 
         bgfx_index_buffer_handle_t("_handle", "the static index buffer to destroy")
+    )
+
+    bgfx_vertex_decl_handle_t(
+        "create_vertex_decl",
+        "Create vertex declaration.",
+
+        bgfx_vertex_decl_t.const.p("_decl", "vertex declaration")
+    )
+
+    void(
+        "destroy_vertex_decl",
+        "Destroy vertex declaration.",
+
+        bgfx_vertex_decl_handle_t("_handle", "vertex declaration handle")
     )
 
     bgfx_vertex_buffer_handle_t(
@@ -1509,7 +1516,7 @@ RGBA16S
 
     bgfx_texture_handle_t(
         "create_texture_2d_scaled",
-        "Creates frame buffer with size based on backbuffer ratio. Frame buffer will maintain ratio if back buffer resolution changes.",
+        "Creates texture with size based on backbuffer ratio. Texture will maintain ratio if back buffer resolution changes.",
 
         bgfx_backbuffer_ratio_t("_ratio", "frame buffer size in respect to back-buffer size", BackbufferRatio),
         bool("_hasMips", "indicates that texture contains full mip-map chain"),
@@ -1563,7 +1570,11 @@ RGBA16S
 
     void(
         "update_texture_2d",
-        "Updates 2D texture.",
+        """
+        Updates 2D texture.
+
+        It's valid to update only mutable texture. See #create_texture_2d() for more info.
+        """,
 
         bgfx_texture_handle_t("_handle", "texture handle"),
         MapToInt..uint16_t("_layer", "layers in texture array"),
@@ -1581,7 +1592,11 @@ RGBA16S
 
     void(
         "update_texture_3d",
-        "Updates 3D texture.",
+        """
+        Updates 3D texture.
+
+        It's valid to update only mutable texture. See #create_texture_3d() for more info.
+        """,
 
         bgfx_texture_handle_t("_handle", "texture handle"),
         MapToInt..uint8_t("_mip", "mip level"),
@@ -1599,8 +1614,16 @@ RGBA16S
         """
         Updates Cube texture.
 
-        Cubemap sides: 0 is +X, 1 is -X, 2 is +Y, 3 is -Y, 4 is +Z, and 5 is -Z.
-        ${codeBlock("""
+        It's valid to update only mutable texture. See #create_texture_cube() for more info.
+        """,
+
+        bgfx_texture_handle_t("_handle", "texture handle"),
+        MapToInt..uint16_t("_layer", "layers in texture array"),
+        uint8_t(
+            "_side",
+            """
+            cubemap side, where 0 is +X, 1 is -X, 2 is +Y, 3 is -Y, 4 is +Z, and 5 is -Z.
+            ${codeBlock("""
            +----------+
            |-z       2|
            | ^  +y    |
@@ -1617,11 +1640,9 @@ RGBA16S
            | |        |
            | +---->+x |
            +----------+""")}
-        """,
-
-        bgfx_texture_handle_t("_handle", "texture handle"),
-        MapToInt..uint16_t("_layer", "layers in texture array"),
-        uint8_t("_side", "cubemap side", CubeMapSides),
+            """,
+            CubeMapSides
+        ),
         MapToInt..uint8_t("_mip", "mip level"),
         MapToInt..uint16_t("_x", "x offset in texture"),
         MapToInt..uint16_t("_y", "y offset in texture"),
@@ -1700,18 +1721,6 @@ RGBA16S
         returnDoc = "handle to frame buffer object"
     )
 
-    void(
-        "set_frame_buffer_name",
-        "Set frame buffer debug name.",
-
-        bgfx_frame_buffer_handle_t("_handle", "frame buffer handle"),
-        charASCII.const.p("_name", "frame buffer name"),
-        AutoSize("_name")..int32_t(
-            "_len",
-            "frame buffer name length (if length is {@code INT32_MAX}, it's expected that {@code _name} is zero terminated string)"
-        )
-    )
-
     bgfx_frame_buffer_handle_t(
         "create_frame_buffer_scaled",
         "Creates frame buffer with size based on backbuffer ratio. Frame buffer will maintain ratio if back buffer resolution changes.",
@@ -1760,6 +1769,18 @@ RGBA16S
         bgfx_texture_format_t("_depthFormat", "window back buffer depth format", TextureFormat),
 
         returnDoc = "handle to frame buffer object"
+    )
+
+    void(
+        "set_frame_buffer_name",
+        "Set frame buffer debug name.",
+
+        bgfx_frame_buffer_handle_t("_handle", "frame buffer handle"),
+        charASCII.const.p("_name", "frame buffer name"),
+        AutoSize("_name")..int32_t(
+            "_len",
+            "frame buffer name length (if length is {@code INT32_MAX}, it's expected that {@code _name} is zero terminated string)"
+        )
     )
 
     bgfx_texture_handle_t(
@@ -1859,7 +1880,15 @@ RGBA16S
         "Sets palette color value.",
 
         MapToInt..uint8_t("_index", "index into palette"),
-        Check(4)..float.const.p("_rgba", "packed 32-bit RGBA value")
+        Check(4)..float.const.p("_rgba", "RGBA floating point values")
+    )
+
+    void(
+        "set_palette_color_rgba8",
+        "Sets palette color value.",
+
+        MapToInt..uint8_t("_index", "index into palette"),
+        uint32_t("_rgba", "packed 32-bit RGBA value")
     )
 
     void(
@@ -1892,7 +1921,7 @@ RGBA16S
     )
 
     void(
-        "set_view_rect_auto",
+        "set_view_rect_ratio",
         "Sets view rectangle. Draw primitive outside view will be clipped.",
 
         MapToInt..bgfx_view_id_t("_id", "view id"),
@@ -1928,7 +1957,7 @@ RGBA16S
 
     void(
         "set_view_clear_mrt",
-        "Sets view clear flags with different clear color for each frame buffer texture. Must use {@code setClearColor} to setup clear color palette.",
+        "Sets view clear flags with different clear color for each frame buffer texture. Must use #set_palette_color() to setup clear color palette.",
 
         MapToInt..bgfx_view_id_t("_id", "view id"),
         MapToInt..uint16_t("_flags", "clear flags. Use #CLEAR_NONE to remove any clear operation.", ClearFlags, LinkMode.BITFIELD),
@@ -1989,11 +2018,466 @@ RGBA16S
         Check("_num")..nullable..bgfx_view_id_t.const.p("_order", "view remap id table. Passing #NULL will reset view ids to default state")
     )
 
-    void(
-        "reset_view",
-        "Resets all view settings to default.",
+    bgfx_encoder_s.p(
+        "encoder_begin",
+        "Begin submitting draw calls from thread.",
 
+        returnDoc = "an encoder for submitting draw calls from multiple threads"
+    )
+
+    void(
+        "encoder_end",
+        "End submitting draw calls from thread.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder")
+    )
+
+    void(
+        "encoder_set_marker",
+        "Sets debug marker.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        charASCII.const.p("_marker", "debug marker")
+    )
+
+    void(
+        "encoder_set_state",
+        """
+        Sets render states for draw primitive.
+
+        Remarks:
+        ${ol(
+            """
+            To setup more complex states use:
+            ${codeBlock("""
+BGFX_STATE_ALPHA_REF(_ref),
+BGFX_STATE_POINT_SIZE(_size),
+BGFX_STATE_BLEND_FUNC(_src, _dst),
+BGFX_STATE_BLEND_FUNC_SEPARATE(_srcRGB, _dstRGB, _srcA, _dstA)
+BGFX_STATE_BLEND_EQUATION(_equation)
+BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
+            """,
+            "#STATE_BLEND_EQUATION_ADD is set when no other blend equation is specified."
+        )}
+        """,
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        uint64_t("_state", "state flags", StateFlags, LinkMode.BITFIELD),
+        uint32_t("_rgba", "blend factor used by #STATE_BLEND_FACTOR and #STATE_BLEND_INV_FACTOR blend modes")
+    )
+
+    void(
+        "encoder_set_condition",
+        "Sets condition for rendering.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        bgfx_occlusion_query_handle_t("_handle", "occlusion query handle"),
+        bool("_visible", "render if occlusion query is visible")
+    )
+
+    void(
+        "encoder_set_stencil",
+        "Sets stencil test state.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        uint32_t("_fstencil", "front stencil state", StencilFlags, LinkMode.BITFIELD),
+        uint32_t(
+            "_bstencil",
+            "back stencil state. If back is set to #STENCIL_NONE {@code _fstencil} is applied to both front and back facing primitives.",
+            StencilFlags, LinkMode.BITFIELD
+        )
+    )
+
+    uint16_t(
+        "encoder_set_scissor",
+        "Sets scissor for draw primitive. To scissor for all primitives in view see #set_view_scissor().",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        MapToInt..uint16_t("_x", "position x from the left side of the window"),
+        MapToInt..uint16_t("_y", "position y from the top side of the window"),
+        MapToInt..uint16_t("_width", "width of scissor region"),
+        MapToInt..uint16_t("_height", "height of scissor region"),
+
+        returnDoc = "scissor cache index"
+    )
+
+    void(
+        "encoder_set_scissor_cached",
+        "Sets scissor from cache for draw primitive.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        MapToInt..uint16_t("_cache", "index in scissor cache. Pass {@code UINT16_MAX} to have primitive use view scissor instead.")
+    )
+
+    uint32_t(
+        "encoder_set_transform",
+        "Sets model matrix for draw primitive. If it is not called, the model will be rendered with identity model matrix.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        MultiType(
+            PointerMapping.DATA_FLOAT
+        )..void.const.p("_mtx", "pointer to first matrix in array"),
+        AutoSize(4 x 4 x 4, "_mtx")..uint16_t("_num", "number of matrices in array"),
+
+        returnDoc = "index into matrix cache in case the same model matrix has to be used for other draw primitive call"
+    )
+
+    void(
+        "encoder_set_transform_cached",
+        "Sets model matrix from matrix cache for draw primitive.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        uint32_t("_cache", "index in matrix cache"),
+        MapToInt..uint16_t("_num", "number of matrices from cache")
+    )
+
+    uint32_t(
+        "encoder_alloc_transform",
+        """
+        Reserves {@code _num} matrices in internal matrix cache.
+
+        Pointer returned can be modifed until #frame() is called.
+        """,
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        bgfx_transform_t.p("_transform", "pointer to ##BGFXTransform structure"),
+        MapToInt..uint16_t("_num", "number of matrices"),
+
+        returnDoc = "index into matrix cache"
+    )
+
+    void(
+        "encoder_set_uniform",
+        "Sets shader uniform parameter for draw primitive.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        bgfx_uniform_handle_t("_handle", "uniform"),
+        MultiType(
+            PointerMapping.DATA_SHORT,
+            PointerMapping.DATA_INT,
+            PointerMapping.DATA_LONG,
+            PointerMapping.DATA_FLOAT,
+            PointerMapping.DATA_DOUBLE
+        )..Unsafe..void.const.p("_value", "pointer to uniform data"),
+        MapToInt..uint16_t("_num", "number of elements. Passing {@code UINT16_MAX} will use the {@code _num} passed on uniform creation.")
+    )
+
+    void(
+        "encoder_set_index_buffer",
+        "Sets index buffer for draw primitive.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        bgfx_index_buffer_handle_t("_handle", "index buffer"),
+        uint32_t("_firstIndex", "first index to render"),
+        uint32_t("_numIndices", "number of indices to render")
+    )
+
+    void(
+        "encoder_set_dynamic_index_buffer",
+        "Sets index buffer for draw primitive.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        bgfx_dynamic_index_buffer_handle_t("_handle", "dynamic index buffer"),
+        uint32_t("_firstIndex", "first index to render"),
+        uint32_t("_numIndices", "number of indices to render")
+    )
+
+    void(
+        "encoder_set_transient_index_buffer",
+        "Sets index buffer for draw primitive.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        bgfx_transient_index_buffer_t.const.p("_tib", "transient index buffer"),
+        uint32_t("_firstIndex", "first index to render"),
+        uint32_t("_numIndices", "number of indices to render")
+    )
+
+    void(
+        "encoder_set_vertex_buffer",
+        "Sets vertex buffer for draw primitive.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        MapToInt..uint8_t("_stream", "vertex stream"),
+        bgfx_vertex_buffer_handle_t("_handle", "vertex buffer"),
+        uint32_t("_startVertex", "first vertex to render"),
+        uint32_t("_numVertices", "number of vertices to render"),
+        bgfx_vertex_decl_handle_t("_declHandle", "{@code bgfx_vertex_decl_handle_t} handle for aliasing vertex buffer")
+    )
+
+    void(
+        "encoder_set_dynamic_vertex_buffer",
+        "Sets vertex buffer for draw primitive.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        MapToInt..uint8_t("_stream", "vertex stream"),
+        bgfx_dynamic_vertex_buffer_handle_t("_handle", "dynamic vertex buffer"),
+        uint32_t("_startVertex", "first vertex to render"),
+        uint32_t("_numVertices", "number of vertices to render"),
+        bgfx_vertex_decl_handle_t("_declHandle", "{@code bgfx_vertex_decl_handle_t} handle for aliasing vertex buffer")
+    )
+
+    void(
+        "encoder_set_transient_vertex_buffer",
+        "Sets vertex buffer for draw primitive.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        MapToInt..uint8_t("_stream", "vertex stream"),
+        bgfx_transient_vertex_buffer_t.const.p("_tvb", "transient vertex buffer"),
+        uint32_t("_startVertex", "first vertex to render"),
+        uint32_t("_numVertices", "number of vertices to render"),
+        bgfx_vertex_decl_handle_t("_declHandle", "{@code bgfx_vertex_decl_handle_t} handle for aliasing vertex buffer")
+    )
+
+    void(
+        "encoder_set_vertex_count",
+        """
+        Set number of vertices for auto generated vertices use in conjuction with {@code gl_VertexID}.
+
+        Availability depends on: #CAPS_VERTEX_ID.
+        """,
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        uint32_t("_numVertices", "number of vertices")
+    )
+
+    void(
+        "encoder_set_instance_data_buffer",
+        "Sets instance data buffer for draw primitive.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        bgfx_instance_data_buffer_t.const.p("_idb", "transient instance data buffer"),
+        uint32_t("_start", "first instance data"),
+        uint32_t("_num", "number of data instances")
+    )
+
+    void(
+        "encoder_set_instance_data_from_vertex_buffer",
+        "Set instance data buffer for draw primitive.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        bgfx_vertex_buffer_handle_t("_handle", "vertex buffer"),
+        uint32_t("_start", "first instance data"),
+        uint32_t("_num", "number of data instances")
+    )
+
+    void(
+        "encoder_set_instance_data_from_dynamic_vertex_buffer",
+        "Set instance data buffer for draw primitive.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        bgfx_dynamic_vertex_buffer_handle_t("_handle", "dynamic vertex buffer"),
+        uint32_t("_start", "first instance data"),
+        uint32_t("_num", "number of data instances")
+    )
+
+    void(
+        "encoder_set_instance_count",
+        """
+        Sets number of instances for auto generated instances use in conjuction with {@code gl_InstanceID}.
+
+        Availability depends on: #CAPS_VERTEX_ID.
+        """,
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        uint32_t("_numInstances", "number of instances")
+    )
+
+    void(
+        "encoder_set_texture",
+        "Sets texture stage for draw primitive.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        MapToInt..uint8_t("_stage", "texture unit"),
+        bgfx_uniform_handle_t("_sampler", "program sampler"),
+        bgfx_texture_handle_t("_handle", "texture handle"),
+        uint32_t("_flags", "texture sampling mode. {@code UINT32_MAX} uses texture sampling settings from the texture.", SamplerFlags)
+    )
+
+    void(
+        "encoder_touch",
+        """
+        Submits an empty primitive for rendering. Uniforms and draw state will be applied but no geometry will be submitted.
+
+        These empty draw calls will sort before ordinary draw calls.
+        """,
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
         MapToInt..bgfx_view_id_t("_id", "view id")
+    )
+
+    void(
+        "encoder_submit",
+        "Submits primitive for rendering.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        MapToInt..bgfx_view_id_t("_id", "view id"),
+        bgfx_program_handle_t("_handle", "program"),
+        uint32_t("_depth", "depth for sorting"),
+        bool("_preserveState", "preserve internal draw state for next draw call submit")
+    )
+
+    void(
+        "encoder_submit_occlusion_query",
+        "Submits primitive with occlusion query for rendering.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        MapToInt..bgfx_view_id_t("_id", "view id"),
+        bgfx_program_handle_t("_program", "program"),
+        bgfx_occlusion_query_handle_t("_occlusionQuery", "occlusion query"),
+        uint32_t("_depth", "depth for sorting"),
+        bool("_preserveState", "preserve internal draw state for next draw call submit")
+    )
+
+    void(
+        "encoder_submit_indirect",
+        "Submits primitive for rendering with index and instance data info from indirect buffer.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        MapToInt..bgfx_view_id_t("_id", "view id"),
+        bgfx_program_handle_t("_handle", "program"),
+        bgfx_indirect_buffer_handle_t("_indirectHandle", "indirect buffer"),
+        MapToInt..uint16_t("_start", "first element in indirect buffer"),
+        MapToInt..uint16_t("_num", "number of dispatches"),
+        uint32_t("_depth", "depth for sorting"),
+        bool("_preserveState", "preserve internal draw state for next draw call submit")
+    )
+
+    void(
+        "encoder_set_compute_index_buffer",
+        "Sets compute index buffer.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        MapToInt..uint8_t("_stage", "compute stage"),
+        bgfx_index_buffer_handle_t("_handle", "index buffer handle"),
+        bgfx_access_t("_access", "buffer access", Access)
+    )
+
+    void(
+        "encoder_set_compute_vertex_buffer",
+        "Sets compute vertex buffer.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        MapToInt..uint8_t("_stage", "compute stage"),
+        bgfx_vertex_buffer_handle_t("_handle", "vertex buffer handle"),
+        bgfx_access_t("_access", "buffer access", Access)
+    )
+
+    void(
+        "encoder_set_compute_dynamic_index_buffer",
+        "Sets compute dynamic index buffer.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        MapToInt..uint8_t("_stage", "compute stage"),
+        bgfx_dynamic_index_buffer_handle_t("_handle", "dynamic index buffer handle"),
+        bgfx_access_t("_access", "buffer access", Access)
+    )
+
+    void(
+        "encoder_set_compute_dynamic_vertex_buffer",
+        "Sets compute dynamic vertex buffer.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        MapToInt..uint8_t("_stage", "compute stage"),
+        bgfx_dynamic_vertex_buffer_handle_t("_handle", "dynamic vertex buffer handle"),
+        bgfx_access_t("_access", "buffer access", Access)
+    )
+
+    void(
+        "encoder_set_compute_indirect_buffer",
+        "Sets compute indirect buffer.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        MapToInt..uint8_t("_stage", "compute stage"),
+        bgfx_indirect_buffer_handle_t("_handle", "indirect buffer handle"),
+        bgfx_access_t("_access", "buffer access", Access)
+    )
+
+    void(
+        "encoder_set_image",
+        "Sets compute image from texture.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        MapToInt..uint8_t("_stage", "texture unit"),
+        bgfx_texture_handle_t("_handle", "texture handle"),
+        MapToInt..uint8_t("_mip", "mip level"),
+        bgfx_access_t("_access", "texture access", Access),
+        bgfx_texture_format_t("_format", "texture format", TextureFormat)
+    )
+
+    void(
+        "encoder_dispatch",
+        "Dispatches compute.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        MapToInt..bgfx_view_id_t("_id", "view id"),
+        bgfx_program_handle_t("_handle", "compute program"),
+        uint32_t("_numX", "number of groups X"),
+        uint32_t("_numY", "number of groups Y"),
+        uint32_t("_numZ", "number of groups Z")
+    )
+
+    void(
+        "encoder_dispatch_indirect",
+        "Dispatches compute indirect.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        MapToInt..bgfx_view_id_t("_id", "view id"),
+        bgfx_program_handle_t("_handle", "compute program"),
+        bgfx_indirect_buffer_handle_t("_indirectHandle", "indirect buffer"),
+        MapToInt..uint16_t("_start", "first element in indirect buffer"),
+        MapToInt..uint16_t("_num", "number of dispatches")
+    )
+
+    void(
+        "encoder_discard",
+        "Discards all previously set state for draw or compute call.",
+
+        bgfx_encoder_s.p("_encoder", "the encoder")
+    )
+
+    void(
+        "encoder_blit",
+        """
+        Blits texture region between two textures.
+
+        Destination texture must be created with #TEXTURE_BLIT_DST flag. Availability depends on #CAPS_TEXTURE_BLIT.
+        """,
+
+        bgfx_encoder_s.p("_encoder", "the encoder"),
+        MapToInt..bgfx_view_id_t("_id", "view id"),
+        bgfx_texture_handle_t("_dst", "destination texture handle"),
+        MapToInt..uint8_t("_dstMip", "destination texture mip level"),
+        MapToInt..uint16_t("_dstX", "destination texture X position"),
+        MapToInt..uint16_t("_dstY", "destination texture Y position"),
+        MapToInt..uint16_t(
+            "_dstZ",
+            """
+            if texture is 2D this argument should be 0. If destination texture is cube this argument represents destination texture cube face. For 3D texture
+            this argument represents destination texture Z position.
+            """
+        ),
+        bgfx_texture_handle_t("_src", "source texture handle"),
+        MapToInt..uint8_t("_srcMip", "source texture mip level"),
+        MapToInt..uint16_t("_srcX", "source texture X position"),
+        MapToInt..uint16_t("_srcY", "source texture Y position"),
+        MapToInt..uint16_t(
+            "_srcZ",
+            """
+            if texture is 2D this argument should be 0. If destination texture is cube this argument represents destination texture cube face. For 3D texture
+            this argument represent destination texture Z position.
+            """
+        ),
+        MapToInt..uint16_t("_width", "width of region"),
+        MapToInt..uint16_t("_height", "height of region"),
+        MapToInt..uint16_t("_depth", "if texture is 3D this argument represents depth of region, otherwise it's unused")
+    )
+
+    void(
+        "request_screen_shot",
+        "Requests screen shot.",
+
+        bgfx_frame_buffer_handle_t("_handle", "frame buffer handle"),
+        charASCII.const.p("_filePath", "will be passed to ##BGFXScreenShotCallback")
     )
 
     void(
@@ -2079,6 +2563,14 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         returnDoc = "index into matrix cache in case the same model matrix has to be used for other draw primitive call"
     )
 
+    void(
+        "set_transform_cached",
+        "Sets model matrix from matrix cache for draw primitive.",
+
+        uint32_t("_cache", "index in matrix cache"),
+        MapToInt..uint16_t("_num", "number of matrices from cache")
+    )
+
     uint32_t(
         "alloc_transform",
         """
@@ -2091,14 +2583,6 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         MapToInt..uint16_t("_num", "number of matrices"),
 
         returnDoc = "index into matrix cache"
-    )
-
-    void(
-        "set_transform_cached",
-        "Sets model matrix from matrix cache for draw primitive.",
-
-        uint32_t("_cache", "index in matrix cache"),
-        MapToInt..uint16_t("_num", "number of matrices from cache")
     )
 
     void(
@@ -2248,7 +2732,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "Submits primitive for rendering.",
 
         MapToInt..bgfx_view_id_t("_id", "view id"),
-        bgfx_program_handle_t("_handle", "program"),
+        bgfx_program_handle_t("_program", "program"),
         uint32_t("_depth", "depth for sorting"),
         bool("_preserveState", "preserve internal draw state for next draw call submit")
     )
@@ -2269,23 +2753,12 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "Submits primitive for rendering with index and instance data info from indirect buffer.",
 
         MapToInt..bgfx_view_id_t("_id", "view id"),
-        bgfx_program_handle_t("_handle", "program"),
+        bgfx_program_handle_t("_program", "program"),
         bgfx_indirect_buffer_handle_t("_indirectHandle", "indirect buffer"),
         MapToInt..uint16_t("_start", "first element in indirect buffer"),
         MapToInt..uint16_t("_num", "number of dispatches"),
         uint32_t("_depth", "depth for sorting"),
         bool("_preserveState", "preserve internal draw state for next draw call submit")
-    )
-
-    void(
-        "set_image",
-        "Sets compute image from texture.",
-
-        MapToInt..uint8_t("_stage", "texture unit"),
-        bgfx_texture_handle_t("_handle", "texture handle"),
-        MapToInt..uint8_t("_mip", "mip level"),
-        bgfx_access_t("_access", "texture access", Access),
-        bgfx_texture_format_t("_format", "texture format", TextureFormat)
     )
 
     void(
@@ -2334,11 +2807,22 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
     )
 
     void(
+        "set_image",
+        "Sets compute image from texture.",
+
+        MapToInt..uint8_t("_stage", "texture unit"),
+        bgfx_texture_handle_t("_handle", "texture handle"),
+        MapToInt..uint8_t("_mip", "mip level"),
+        bgfx_access_t("_access", "texture access", Access),
+        bgfx_texture_format_t("_format", "texture format", TextureFormat)
+    )
+
+    void(
         "dispatch",
         "Dispatches compute.",
 
         MapToInt..bgfx_view_id_t("_id", "view id"),
-        bgfx_program_handle_t("_handle", "compute program"),
+        bgfx_program_handle_t("_program", "compute program"),
         uint32_t("_numX", "number of groups X"),
         uint32_t("_numY", "number of groups Y"),
         uint32_t("_numZ", "number of groups Z")
@@ -2349,7 +2833,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "Dispatches compute indirect.",
 
         MapToInt..bgfx_view_id_t("_id", "view id"),
-        bgfx_program_handle_t("_handle", "compute program"),
+        bgfx_program_handle_t("_program", "compute program"),
         bgfx_indirect_buffer_handle_t("_indirectHandle", "indirect buffer"),
         MapToInt..uint16_t("_start", "first element in indirect buffer"),
         MapToInt..uint16_t("_num", "number of dispatches")
@@ -2394,451 +2878,6 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         MapToInt..uint16_t("_width", "width of region"),
         MapToInt..uint16_t("_height", "height of region"),
         MapToInt..uint16_t("_depth", "if texture is 3D this argument represents depth of region, otherwise it's unused")
-    )
-
-    void(
-        "encoder_set_marker",
-        "Sets debug marker.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        charASCII.const.p("_marker", "debug marker")
-    )
-
-    void(
-        "encoder_set_state",
-        """
-        Sets render states for draw primitive.
-
-        Remarks:
-        ${ol(
-            """
-            To setup more complex states use:
-            ${codeBlock("""
-BGFX_STATE_ALPHA_REF(_ref),
-BGFX_STATE_POINT_SIZE(_size),
-BGFX_STATE_BLEND_FUNC(_src, _dst),
-BGFX_STATE_BLEND_FUNC_SEPARATE(_srcRGB, _dstRGB, _srcA, _dstA)
-BGFX_STATE_BLEND_EQUATION(_equation)
-BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
-            """,
-            "#STATE_BLEND_EQUATION_ADD is set when no other blend equation is specified."
-        )}
-        """,
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        uint64_t("_state", "state flags", StateFlags, LinkMode.BITFIELD),
-        uint32_t("_rgba", "blend factor used by #STATE_BLEND_FACTOR and #STATE_BLEND_INV_FACTOR blend modes")
-    )
-
-    void(
-        "encoder_set_condition",
-        "Sets condition for rendering.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        bgfx_occlusion_query_handle_t("_handle", "occlusion query handle"),
-        bool("_visible", "render if occlusion query is visible")
-    )
-
-    void(
-        "encoder_set_stencil",
-        "Sets stencil test state.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        uint32_t("_fstencil", "front stencil state", StencilFlags, LinkMode.BITFIELD),
-        uint32_t(
-            "_bstencil",
-            "back stencil state. If back is set to #STENCIL_NONE {@code _fstencil} is applied to both front and back facing primitives.",
-            StencilFlags, LinkMode.BITFIELD
-        )
-    )
-
-    uint16_t(
-        "encoder_set_scissor",
-        "Sets scissor for draw primitive. To scissor for all primitives in view see #set_view_scissor().",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        MapToInt..uint16_t("_x", "position x from the left side of the window"),
-        MapToInt..uint16_t("_y", "position y from the top side of the window"),
-        MapToInt..uint16_t("_width", "width of scissor region"),
-        MapToInt..uint16_t("_height", "height of scissor region"),
-
-        returnDoc = "scissor cache index"
-    )
-
-    void(
-        "encoder_set_scissor_cached",
-        "Sets scissor from cache for draw primitive.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        MapToInt..uint16_t("_cache", "index in scissor cache. Pass {@code UINT16_MAX} to have primitive use view scissor instead.")
-    )
-
-    uint32_t(
-        "encoder_set_transform",
-        "Sets model matrix for draw primitive. If it is not called, the model will be rendered with identity model matrix.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        MultiType(
-            PointerMapping.DATA_FLOAT
-        )..void.const.p("_mtx", "pointer to first matrix in array"),
-        AutoSize(4 x 4 x 4, "_mtx")..uint16_t("_num", "number of matrices in array"),
-
-        returnDoc = "index into matrix cache in case the same model matrix has to be used for other draw primitive call"
-    )
-
-    uint32_t(
-        "encoder_alloc_transform",
-        """
-        Reserves {@code _num} matrices in internal matrix cache.
-
-        Pointer returned can be modifed until #frame() is called.
-        """,
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        bgfx_transform_t.p("_transform", "pointer to ##BGFXTransform structure"),
-        MapToInt..uint16_t("_num", "number of matrices"),
-
-        returnDoc = "index into matrix cache"
-    )
-
-    void(
-        "encoder_set_transform_cached",
-        "Sets model matrix from matrix cache for draw primitive.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        uint32_t("_cache", "index in matrix cache"),
-        MapToInt..uint16_t("_num", "number of matrices from cache")
-    )
-
-    void(
-        "encoder_set_uniform",
-        "Sets shader uniform parameter for draw primitive.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        bgfx_uniform_handle_t("_handle", "uniform"),
-        MultiType(
-            PointerMapping.DATA_SHORT,
-            PointerMapping.DATA_INT,
-            PointerMapping.DATA_LONG,
-            PointerMapping.DATA_FLOAT,
-            PointerMapping.DATA_DOUBLE
-        )..Unsafe..void.const.p("_value", "pointer to uniform data"),
-        MapToInt..uint16_t("_num", "number of elements. Passing {@code UINT16_MAX} will use the {@code _num} passed on uniform creation.")
-    )
-
-    void(
-        "encoder_set_index_buffer",
-        "Sets index buffer for draw primitive.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        bgfx_index_buffer_handle_t("_handle", "index buffer"),
-        uint32_t("_firstIndex", "first index to render"),
-        uint32_t("_numIndices", "number of indices to render")
-    )
-
-    void(
-        "encoder_set_dynamic_index_buffer",
-        "Sets index buffer for draw primitive.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        bgfx_dynamic_index_buffer_handle_t("_handle", "dynamic index buffer"),
-        uint32_t("_firstIndex", "first index to render"),
-        uint32_t("_numIndices", "number of indices to render")
-    )
-
-    void(
-        "encoder_set_transient_index_buffer",
-        "Sets index buffer for draw primitive.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        bgfx_transient_index_buffer_t.const.p("_tib", "transient index buffer"),
-        uint32_t("_firstIndex", "first index to render"),
-        uint32_t("_numIndices", "number of indices to render")
-    )
-
-    void(
-        "encoder_set_vertex_buffer",
-        "Sets vertex buffer for draw primitive.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        MapToInt..uint8_t("_stream", "vertex stream"),
-        bgfx_vertex_buffer_handle_t("_handle", "vertex buffer"),
-        uint32_t("_startVertex", "first vertex to render"),
-        uint32_t("_numVertices", "number of vertices to render")
-    )
-
-    void(
-        "encoder_set_dynamic_vertex_buffer",
-        "Sets vertex buffer for draw primitive.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        MapToInt..uint8_t("_stream", "vertex stream"),
-        bgfx_dynamic_vertex_buffer_handle_t("_handle", "dynamic vertex buffer"),
-        uint32_t("_startVertex", "first vertex to render"),
-        uint32_t("_numVertices", "number of vertices to render")
-    )
-
-    void(
-        "encoder_set_transient_vertex_buffer",
-        "Sets vertex buffer for draw primitive.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        MapToInt..uint8_t("_stream", "vertex stream"),
-        bgfx_transient_vertex_buffer_t.const.p("_tvb", "transient vertex buffer"),
-        uint32_t("_startVertex", "first vertex to render"),
-        uint32_t("_numVertices", "number of vertices to render")
-    )
-
-    void(
-        "encoder_set_vertex_count",
-        """
-        Set number of vertices for auto generated vertices use in conjuction with {@code gl_VertexID}.
-
-        Availability depends on: #CAPS_VERTEX_ID.
-        """,
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        uint32_t("_numVertices", "number of vertices")
-    )
-
-    void(
-        "encoder_set_instance_data_buffer",
-        "Sets instance data buffer for draw primitive.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        bgfx_instance_data_buffer_t.const.p("_idb", "transient instance data buffer"),
-        uint32_t("_start", "first instance data"),
-        uint32_t("_num", "number of data instances")
-    )
-
-    void(
-        "encoder_set_instance_data_from_vertex_buffer",
-        "Set instance data buffer for draw primitive.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        bgfx_vertex_buffer_handle_t("_handle", "vertex buffer"),
-        uint32_t("_start", "first instance data"),
-        uint32_t("_num", "number of data instances")
-    )
-
-    void(
-        "encoder_set_instance_data_from_dynamic_vertex_buffer",
-        "Set instance data buffer for draw primitive.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        bgfx_dynamic_vertex_buffer_handle_t("_handle", "dynamic vertex buffer"),
-        uint32_t("_start", "first instance data"),
-        uint32_t("_num", "number of data instances")
-    )
-
-    void(
-        "encoder_set_instance_count",
-        """
-        Sets number of instances for auto generated instances use in conjuction with {@code gl_InstanceID}.
-
-        Availability depends on: #CAPS_VERTEX_ID.
-        """,
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        uint32_t("_numInstances", "number of instances")
-    )
-
-    void(
-        "encoder_set_texture",
-        "Sets texture stage for draw primitive.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        MapToInt..uint8_t("_stage", "texture unit"),
-        bgfx_uniform_handle_t("_sampler", "program sampler"),
-        bgfx_texture_handle_t("_handle", "texture handle"),
-        uint32_t("_flags", "texture sampling mode. {@code UINT32_MAX} uses texture sampling settings from the texture.", SamplerFlags)
-    )
-
-    void(
-        "encoder_touch",
-        """
-        Submits an empty primitive for rendering. Uniforms and draw state will be applied but no geometry will be submitted.
-
-        These empty draw calls will sort before ordinary draw calls.
-        """,
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        MapToInt..bgfx_view_id_t("_id", "view id")
-    )
-
-    void(
-        "encoder_submit",
-        "Submits primitive for rendering.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        MapToInt..bgfx_view_id_t("_id", "view id"),
-        bgfx_program_handle_t("_handle", "program"),
-        uint32_t("_depth", "depth for sorting"),
-        bool("_preserveState", "preserve internal draw state for next draw call submit")
-    )
-
-    void(
-        "encoder_submit_occlusion_query",
-        "Submits primitive with occlusion query for rendering.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        MapToInt..bgfx_view_id_t("_id", "view id"),
-        bgfx_program_handle_t("_program", "program"),
-        bgfx_occlusion_query_handle_t("_occlusionQuery", "occlusion query"),
-        uint32_t("_depth", "depth for sorting"),
-        bool("_preserveState", "preserve internal draw state for next draw call submit")
-    )
-
-    void(
-        "encoder_submit_indirect",
-        "Submits primitive for rendering with index and instance data info from indirect buffer.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        MapToInt..bgfx_view_id_t("_id", "view id"),
-        bgfx_program_handle_t("_handle", "program"),
-        bgfx_indirect_buffer_handle_t("_indirectHandle", "indirect buffer"),
-        MapToInt..uint16_t("_start", "first element in indirect buffer"),
-        MapToInt..uint16_t("_num", "number of dispatches"),
-        uint32_t("_depth", "depth for sorting"),
-        bool("_preserveState", "preserve internal draw state for next draw call submit")
-    )
-
-    void(
-        "encoder_set_image",
-        "Sets compute image from texture.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        MapToInt..uint8_t("_stage", "texture unit"),
-        bgfx_texture_handle_t("_handle", "texture handle"),
-        MapToInt..uint8_t("_mip", "mip level"),
-        bgfx_access_t("_access", "texture access", Access),
-        bgfx_texture_format_t("_format", "texture format", TextureFormat)
-    )
-
-    void(
-        "encoder_set_compute_index_buffer",
-        "Sets compute index buffer.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        MapToInt..uint8_t("_stage", "compute stage"),
-        bgfx_index_buffer_handle_t("_handle", "index buffer handle"),
-        bgfx_access_t("_access", "buffer access", Access)
-    )
-
-    void(
-        "encoder_set_compute_vertex_buffer",
-        "Sets compute vertex buffer.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        MapToInt..uint8_t("_stage", "compute stage"),
-        bgfx_vertex_buffer_handle_t("_handle", "vertex buffer handle"),
-        bgfx_access_t("_access", "buffer access", Access)
-    )
-
-    void(
-        "encoder_set_compute_dynamic_index_buffer",
-        "Sets compute dynamic index buffer.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        MapToInt..uint8_t("_stage", "compute stage"),
-        bgfx_dynamic_index_buffer_handle_t("_handle", "dynamic index buffer handle"),
-        bgfx_access_t("_access", "buffer access", Access)
-    )
-
-    void(
-        "encoder_set_compute_dynamic_vertex_buffer",
-        "Sets compute dynamic vertex buffer.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        MapToInt..uint8_t("_stage", "compute stage"),
-        bgfx_dynamic_vertex_buffer_handle_t("_handle", "dynamic vertex buffer handle"),
-        bgfx_access_t("_access", "buffer access", Access)
-    )
-
-    void(
-        "encoder_set_compute_indirect_buffer",
-        "Sets compute indirect buffer.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        MapToInt..uint8_t("_stage", "compute stage"),
-        bgfx_indirect_buffer_handle_t("_handle", "indirect buffer handle"),
-        bgfx_access_t("_access", "buffer access", Access)
-    )
-
-    void(
-        "encoder_dispatch",
-        "Dispatches compute.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        MapToInt..bgfx_view_id_t("_id", "view id"),
-        bgfx_program_handle_t("_handle", "compute program"),
-        uint32_t("_numX", "number of groups X"),
-        uint32_t("_numY", "number of groups Y"),
-        uint32_t("_numZ", "number of groups Z")
-    )
-
-    void(
-        "encoder_dispatch_indirect",
-        "Dispatches compute indirect.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        MapToInt..bgfx_view_id_t("_id", "view id"),
-        bgfx_program_handle_t("_handle", "compute program"),
-        bgfx_indirect_buffer_handle_t("_indirectHandle", "indirect buffer"),
-        MapToInt..uint16_t("_start", "first element in indirect buffer"),
-        MapToInt..uint16_t("_num", "number of dispatches")
-    )
-
-    void(
-        "encoder_discard",
-        "Discards all previously set state for draw or compute call.",
-
-        bgfx_encoder_s.p("_encoder", "the encoder")
-    )
-
-    void(
-        "encoder_blit",
-        """
-        Blits texture region between two textures.
-
-        Destination texture must be created with #TEXTURE_BLIT_DST flag. Availability depends on #CAPS_TEXTURE_BLIT.
-        """,
-
-        bgfx_encoder_s.p("_encoder", "the encoder"),
-        MapToInt..bgfx_view_id_t("_id", "view id"),
-        bgfx_texture_handle_t("_dst", "destination texture handle"),
-        MapToInt..uint8_t("_dstMip", "destination texture mip level"),
-        MapToInt..uint16_t("_dstX", "destination texture X position"),
-        MapToInt..uint16_t("_dstY", "destination texture Y position"),
-        MapToInt..uint16_t(
-            "_dstZ",
-            """
-            if texture is 2D this argument should be 0. If destination texture is cube this argument represents destination texture cube face. For 3D texture
-            this argument represents destination texture Z position.
-            """
-        ),
-        bgfx_texture_handle_t("_src", "source texture handle"),
-        MapToInt..uint8_t("_srcMip", "source texture mip level"),
-        MapToInt..uint16_t("_srcX", "source texture X position"),
-        MapToInt..uint16_t("_srcY", "source texture Y position"),
-        MapToInt..uint16_t(
-            "_srcZ",
-            """
-            if texture is 2D this argument should be 0. If destination texture is cube this argument represents destination texture cube face. For 3D texture
-            this argument represent destination texture Z position.
-            """
-        ),
-        MapToInt..uint16_t("_width", "width of region"),
-        MapToInt..uint16_t("_height", "height of region"),
-        MapToInt..uint16_t("_depth", "if texture is 3D this argument represents depth of region, otherwise it's unused")
-    )
-
-    void(
-        "request_screen_shot",
-        "Requests screen shot.",
-
-        bgfx_frame_buffer_handle_t("_handle", "frame buffer handle"),
-        charASCII.const.p("_filePath", "will be passed to ##BGFXScreenShotCallback")
     )
 
     macro(expression = "(_ref << BGFX_STATE_ALPHA_REF_SHIFT) & BGFX_STATE_ALPHA_REF_MASK")..uint64_t(

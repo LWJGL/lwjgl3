@@ -133,9 +133,9 @@ public class BGFXPlatform {
     // --- [ bgfx_override_internal_texture ] ---
 
     /** Unsafe version of: {@link #bgfx_override_internal_texture override_internal_texture} */
-    public static long nbgfx_override_internal_texture(short _handle, short _width, short _height, byte _numMips, int _format, int _flags) {
+    public static long nbgfx_override_internal_texture(short _handle, short _width, short _height, byte _numMips, int _format, long _flags) {
         long __functionAddress = Functions.override_internal_texture;
-        return invokeP(_handle, _width, _height, _numMips, _format, _flags, __functionAddress);
+        return invokeJP(_handle, _width, _height, _numMips, _format, _flags, __functionAddress);
     }
 
     /**
@@ -155,7 +155,7 @@ public class BGFXPlatform {
      * @return native API pointer to texture. If result is 0, texture is not created yet from the main thread.
      */
     @NativeType("uintptr_t")
-    public static long bgfx_override_internal_texture(@NativeType("bgfx_texture_handle_t") short _handle, @NativeType("uint16_t") int _width, @NativeType("uint16_t") int _height, @NativeType("uint8_t") int _numMips, @NativeType("bgfx_texture_format_t") int _format, @NativeType("uint32_t") int _flags) {
+    public static long bgfx_override_internal_texture(@NativeType("bgfx_texture_handle_t") short _handle, @NativeType("uint16_t") int _width, @NativeType("uint16_t") int _height, @NativeType("uint8_t") int _numMips, @NativeType("bgfx_texture_format_t") int _format, @NativeType("uint64_t") long _flags) {
         return nbgfx_override_internal_texture(_handle, (short)_width, (short)_height, (byte)_numMips, _format, _flags);
     }
 

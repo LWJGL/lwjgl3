@@ -89,7 +89,7 @@ val BGFXPlatform = "BGFXPlatform".nativeClass(Module.BGFX, prefix = "BGFX", pref
         MapToInt..uint16_t("_height", "height"),
         MapToInt..uint8_t("_numMips", "number of mip-maps"),
         bgfx_texture_format_t("_format", "texture format"),
-        uint32_t("_flags", "default texture sampling mode is linear, and wrap mode is repeat"),
+        uint64_t("_flags", "default texture sampling mode is linear, and wrap mode is repeat"),
 
         returnDoc = "native API pointer to texture. If result is 0, texture is not created yet from the main thread."
     )

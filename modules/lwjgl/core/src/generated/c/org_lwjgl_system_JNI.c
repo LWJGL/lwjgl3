@@ -501,13 +501,6 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_system_JNI_invokeP__IIJ(JNIEnv *__env, jc
     UNUSED_PARAMS(__env, clazz)
     return JavaCritical_org_lwjgl_system_JNI_invokeP__IIJ(param0, param1, __functionAddress);
 }
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_system_JNI_invokeP__SSSBIIJ(jshort param0, jshort param1, jshort param2, jbyte param3, jint param4, jint param5, jlong __functionAddress) {
-    return (jlong)((intptr_t (*) (jshort, jshort, jshort, jbyte, jint, jint))(intptr_t)__functionAddress)(param0, param1, param2, param3, param4, param5);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_system_JNI_invokeP__SSSBIIJ(JNIEnv *__env, jclass clazz, jshort param0, jshort param1, jshort param2, jbyte param3, jint param4, jint param5, jlong __functionAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_system_JNI_invokeP__SSSBIIJ(param0, param1, param2, param3, param4, param5, __functionAddress);
-}
 JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_system_JNI_invokePP__JJ(jlong param0, jlong __functionAddress) {
     return (jlong)((intptr_t (*) (intptr_t))(intptr_t)__functionAddress)((intptr_t)param0);
 }
@@ -577,6 +570,13 @@ JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_system_JNI_invokePP__JIIIJ(jlong 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_JNI_invokePP__JIIIJ(JNIEnv *__env, jclass clazz, jlong param0, jint param1, jint param2, jint param3, jlong __functionAddress) {
     UNUSED_PARAMS(__env, clazz)
     return JavaCritical_org_lwjgl_system_JNI_invokePP__JIIIJ(param0, param1, param2, param3, __functionAddress);
+}
+JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_system_JNI_invokeJP__SSSBIJJ(jshort param0, jshort param1, jshort param2, jbyte param3, jint param4, jlong param5, jlong __functionAddress) {
+    return (jlong)((intptr_t (*) (jshort, jshort, jshort, jbyte, jint, jlong))(intptr_t)__functionAddress)(param0, param1, param2, param3, param4, param5);
+}
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_JNI_invokeJP__SSSBIJJ(JNIEnv *__env, jclass clazz, jshort param0, jshort param1, jshort param2, jbyte param3, jint param4, jlong param5, jlong __functionAddress) {
+    UNUSED_PARAMS(__env, clazz)
+    return JavaCritical_org_lwjgl_system_JNI_invokeJP__SSSBIJJ(param0, param1, param2, param3, param4, param5, __functionAddress);
 }
 JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_system_JNI_invokePJP__JJJ(jlong param0, jlong param1, jlong __functionAddress) {
     return (jlong)((intptr_t (*) (intptr_t, jlong))(intptr_t)__functionAddress)((intptr_t)param0, param1);
@@ -1313,6 +1313,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_JNI_invokeV__SJ(JNIEnv *__env, jcla
     UNUSED_PARAMS(__env, clazz)
     JavaCritical_org_lwjgl_system_JNI_invokeV__SJ(param0, __functionAddress);
 }
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_system_JNI_invokeV__BIJ(jbyte param0, jint param1, jlong __functionAddress) {
+    ((void (*) (jbyte, jint))(intptr_t)__functionAddress)(param0, param1);
+}
+JNIEXPORT void JNICALL Java_org_lwjgl_system_JNI_invokeV__BIJ(JNIEnv *__env, jclass clazz, jbyte param0, jint param1, jlong __functionAddress) {
+    UNUSED_PARAMS(__env, clazz)
+    JavaCritical_org_lwjgl_system_JNI_invokeV__BIJ(param0, param1, __functionAddress);
+}
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_system_JNI_invokeV__BZJ(jbyte param0, jboolean param1, jlong __functionAddress) {
     ((void (*) (jbyte, jboolean))(intptr_t)__functionAddress)(param0, param1);
 }
@@ -1705,13 +1712,6 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_JNI_invokePV__IIJIIJ(JNIEnv *__env,
     UNUSED_PARAMS(__env, clazz)
     JavaCritical_org_lwjgl_system_JNI_invokePV__IIJIIJ(param0, param1, param2, param3, param4, __functionAddress);
 }
-JNIEXPORT void JNICALL CRITICAL(org_lwjgl_system_JNI_invokePV__JBSIIJ)(jlong param0, jbyte param1, jshort param2, jint param3, jint param4, jlong __functionAddress) {
-    ((void (*) (intptr_t, jbyte, jshort, jint, jint))(intptr_t)__functionAddress)((intptr_t)param0, param1, param2, param3, param4);
-}
-JNIEXPORT void JNICALL Java_org_lwjgl_system_JNI_invokePV__JBSIIJ(JNIEnv *__env, jclass clazz, jlong param0, jbyte param1, jshort param2, jint param3, jint param4, jlong __functionAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    CRITICAL(org_lwjgl_system_JNI_invokePV__JBSIIJ)(param0, param1, param2, param3, param4, __functionAddress);
-}
 JNIEXPORT void JNICALL CRITICAL(org_lwjgl_system_JNI_invokePV__JBSSIJ)(jlong param0, jbyte param1, jshort param2, jshort param3, jint param4, jlong __functionAddress) {
     ((void (*) (intptr_t, jbyte, jshort, jshort, jint))(intptr_t)__functionAddress)((intptr_t)param0, param1, param2, param3, param4);
 }
@@ -1740,6 +1740,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_JNI_invokePV__JBSBIIJ(JNIEnv *__env
     UNUSED_PARAMS(__env, clazz)
     CRITICAL(org_lwjgl_system_JNI_invokePV__JBSBIIJ)(param0, param1, param2, param3, param4, param5, __functionAddress);
 }
+JNIEXPORT void JNICALL CRITICAL(org_lwjgl_system_JNI_invokePV__JBSIISJ)(jlong param0, jbyte param1, jshort param2, jint param3, jint param4, jshort param5, jlong __functionAddress) {
+    ((void (*) (intptr_t, jbyte, jshort, jint, jint, jshort))(intptr_t)__functionAddress)((intptr_t)param0, param1, param2, param3, param4, param5);
+}
+JNIEXPORT void JNICALL Java_org_lwjgl_system_JNI_invokePV__JBSIISJ(JNIEnv *__env, jclass clazz, jlong param0, jbyte param1, jshort param2, jint param3, jint param4, jshort param5, jlong __functionAddress) {
+    UNUSED_PARAMS(__env, clazz)
+    CRITICAL(org_lwjgl_system_JNI_invokePV__JBSIISJ)(param0, param1, param2, param3, param4, param5, __functionAddress);
+}
 JNIEXPORT void JNICALL CRITICAL(org_lwjgl_system_JNI_invokePV__JIBIZZJ)(jlong param0, jint param1, jbyte param2, jint param3, jboolean param4, jboolean param5, jlong __functionAddress) {
     ((void (*) (intptr_t, jint, jbyte, jint, jboolean, jboolean))(intptr_t)__functionAddress)((intptr_t)param0, param1, param2, param3, param4, param5);
 }
@@ -1753,6 +1760,13 @@ JNIEXPORT void JNICALL CRITICAL(org_lwjgl_system_JNI_invokePV__JIIIIZJ)(jlong pa
 JNIEXPORT void JNICALL Java_org_lwjgl_system_JNI_invokePV__JIIIIZJ(JNIEnv *__env, jclass clazz, jlong param0, jint param1, jint param2, jint param3, jint param4, jboolean param5, jlong __functionAddress) {
     UNUSED_PARAMS(__env, clazz)
     CRITICAL(org_lwjgl_system_JNI_invokePV__JIIIIZJ)(param0, param1, param2, param3, param4, param5, __functionAddress);
+}
+JNIEXPORT void JNICALL CRITICAL(org_lwjgl_system_JNI_invokePV__JSISSBJ)(jlong param0, jshort param1, jint param2, jshort param3, jshort param4, jbyte param5, jlong __functionAddress) {
+    ((void (*) (intptr_t, jshort, jint, jshort, jshort, jbyte))(intptr_t)__functionAddress)((intptr_t)param0, param1, param2, param3, param4, param5);
+}
+JNIEXPORT void JNICALL Java_org_lwjgl_system_JNI_invokePV__JSISSBJ(JNIEnv *__env, jclass clazz, jlong param0, jshort param1, jint param2, jshort param3, jshort param4, jbyte param5, jlong __functionAddress) {
+    UNUSED_PARAMS(__env, clazz)
+    CRITICAL(org_lwjgl_system_JNI_invokePV__JSISSBJ)(param0, param1, param2, param3, param4, param5, __functionAddress);
 }
 JNIEXPORT void JNICALL CRITICAL(org_lwjgl_system_JNI_invokePV__JSSIIIJ)(jlong param0, jshort param1, jshort param2, jint param3, jint param4, jint param5, jlong __functionAddress) {
     ((void (*) (intptr_t, jshort, jshort, jint, jint, jint))(intptr_t)__functionAddress)((intptr_t)param0, param1, param2, param3, param4, param5);
@@ -1908,13 +1922,6 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_JNI_invokePPV__JSJSJ(JNIEnv *__env,
     UNUSED_PARAMS(__env, clazz)
     JavaCritical_org_lwjgl_system_JNI_invokePPV__JSJSJ(param0, param1, param2, param3, __functionAddress);
 }
-JNIEXPORT void JNICALL CRITICAL(org_lwjgl_system_JNI_invokePPV__JBJIIJ)(jlong param0, jbyte param1, jlong param2, jint param3, jint param4, jlong __functionAddress) {
-    ((void (*) (intptr_t, jbyte, intptr_t, jint, jint))(intptr_t)__functionAddress)((intptr_t)param0, param1, (intptr_t)param2, param3, param4);
-}
-JNIEXPORT void JNICALL Java_org_lwjgl_system_JNI_invokePPV__JBJIIJ(JNIEnv *__env, jclass clazz, jlong param0, jbyte param1, jlong param2, jint param3, jint param4, jlong __functionAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    CRITICAL(org_lwjgl_system_JNI_invokePPV__JBJIIJ)(param0, param1, param2, param3, param4, __functionAddress);
-}
 JNIEXPORT void JNICALL CRITICAL(org_lwjgl_system_JNI_invokePPV__JFJIIJ)(jlong param0, jfloat param1, jlong param2, jint param3, jint param4, jlong __functionAddress) {
     ((void (*) (intptr_t, jfloat, intptr_t, jint, jint))(intptr_t)__functionAddress)((intptr_t)param0, param1, (intptr_t)param2, param3, param4);
 }
@@ -1928,6 +1935,13 @@ JNIEXPORT void JNICALL JavaCritical_org_lwjgl_system_JNI_invokePPV__SSBJJJ(jshor
 JNIEXPORT void JNICALL Java_org_lwjgl_system_JNI_invokePPV__SSBJJJ(JNIEnv *__env, jclass clazz, jshort param0, jshort param1, jbyte param2, jlong param3, jlong param4, jlong __functionAddress) {
     UNUSED_PARAMS(__env, clazz)
     JavaCritical_org_lwjgl_system_JNI_invokePPV__SSBJJJ(param0, param1, param2, param3, param4, __functionAddress);
+}
+JNIEXPORT void JNICALL CRITICAL(org_lwjgl_system_JNI_invokePPV__JBJIISJ)(jlong param0, jbyte param1, jlong param2, jint param3, jint param4, jshort param5, jlong __functionAddress) {
+    ((void (*) (intptr_t, jbyte, intptr_t, jint, jint, jshort))(intptr_t)__functionAddress)((intptr_t)param0, param1, (intptr_t)param2, param3, param4, param5);
+}
+JNIEXPORT void JNICALL Java_org_lwjgl_system_JNI_invokePPV__JBJIISJ(JNIEnv *__env, jclass clazz, jlong param0, jbyte param1, jlong param2, jint param3, jint param4, jshort param5, jlong __functionAddress) {
+    UNUSED_PARAMS(__env, clazz)
+    CRITICAL(org_lwjgl_system_JNI_invokePPV__JBJIISJ)(param0, param1, param2, param3, param4, param5, __functionAddress);
 }
 JNIEXPORT void JNICALL CRITICAL(org_lwjgl_system_JNI_invokePPV__JJIIIIIJ)(jlong param0, jlong param1, jint param2, jint param3, jint param4, jint param5, jint param6, jlong __functionAddress) {
     ((void (*) (intptr_t, intptr_t, jint, jint, jint, jint, jint))(intptr_t)__functionAddress)((intptr_t)param0, (intptr_t)param1, param2, param3, param4, param5, param6);

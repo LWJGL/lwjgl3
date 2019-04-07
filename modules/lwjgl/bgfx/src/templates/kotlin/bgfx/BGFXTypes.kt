@@ -13,16 +13,17 @@ val BGFX_BINDING = simpleBinding(
 )
 val BGFX_BINDING_DELEGATE = BGFX_BINDING.delegate("BGFX.getLibrary()")
 
-val bgfx_renderer_type_t = "bgfx_renderer_type_t".enumType
 val bgfx_access_t = "bgfx_access_t".enumType
 val bgfx_attrib_t = "bgfx_attrib_t".enumType
 val bgfx_attrib_type_t = "bgfx_attrib_type_t".enumType
-val bgfx_texture_format_t = "bgfx_texture_format_t".enumType
-val bgfx_uniform_type_t = "bgfx_uniform_type_t".enumType
 val bgfx_backbuffer_ratio_t = "bgfx_backbuffer_ratio_t".enumType
 val bgfx_occlusion_query_result_t = "bgfx_occlusion_query_result_t".enumType
+val bgfx_render_frame_t = "bgfx_render_frame_t".enumType
+val bgfx_renderer_type_t = "bgfx_renderer_type_t".enumType
+val bgfx_texture_format_t = "bgfx_texture_format_t".enumType
 val bgfx_topology_convert_t = "bgfx_topology_convert_t".enumType
 val bgfx_topology_sort_t = "bgfx_topology_sort_t".enumType
+val bgfx_uniform_type_t = "bgfx_uniform_type_t".enumType
 val bgfx_view_mode_t = "bgfx_view_mode_t".enumType
 
 val bgfx_view_id_t = typedef(uint16_t, "bgfx_view_id_t")
@@ -152,7 +153,7 @@ val bgfx_stats_t = struct(Module.BGFX, "BGFXStats", nativeName = "bgfx_stats_t",
     AutoSize("viewStats")..uint16_t("numViews", "number of view stats")
     bgfx_view_stats_t.p("viewStats", "array of view stats")
 
-    AutoSize("encoderStats")..uint16_t("numEncoder", "number of encoders used during frame")
+    AutoSize("encoderStats")..uint16_t("numEncoders", "number of encoders used during frame")
     bgfx_encoder_stats_t.p("encoderStats", "array of encoder stats")
 }
 
@@ -171,8 +172,8 @@ val bgfx_transient_index_buffer_t = struct(Module.BGFX, "BGFXTransientIndexBuffe
 
     uint8_t.p("data", "pointer to data")
     AutoSize("data")..uint32_t("size", "data size")
-    bgfx_index_buffer_handle_t("handle", "index buffer handle")
     uint32_t("startIndex", "first index")
+    bgfx_index_buffer_handle_t("handle", "index buffer handle")
 }
 
 val bgfx_transient_vertex_buffer_t = struct(Module.BGFX, "BGFXTransientVertexBuffer", nativeName = "bgfx_transient_vertex_buffer_t") {

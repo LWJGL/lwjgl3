@@ -24,8 +24,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code data} &ndash; pointer to data</li>
  * <li>{@code size} &ndash; data size</li>
- * <li>{@code handle} &ndash; index buffer handle</li>
  * <li>{@code startIndex} &ndash; first index</li>
+ * <li>{@code handle} &ndash; index buffer handle</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -34,8 +34,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct bgfx_transient_index_buffer_t {
  *     uint8_t * data;
  *     uint32_t size;
- *     bgfx_index_buffer_handle_t handle;
  *     uint32_t startIndex;
+ *     bgfx_index_buffer_handle_t handle;
  * }</code></pre>
  */
 @NativeType("struct bgfx_transient_index_buffer_t")
@@ -51,15 +51,15 @@ public class BGFXTransientIndexBuffer extends Struct implements NativeResource {
     public static final int
         DATA,
         SIZE,
-        HANDLE,
-        STARTINDEX;
+        STARTINDEX,
+        HANDLE;
 
     static {
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(4),
-            __member(2),
-            __member(4)
+            __member(4),
+            __member(2)
         );
 
         SIZEOF = layout.getSize();
@@ -67,8 +67,8 @@ public class BGFXTransientIndexBuffer extends Struct implements NativeResource {
 
         DATA = layout.offsetof(0);
         SIZE = layout.offsetof(1);
-        HANDLE = layout.offsetof(2);
-        STARTINDEX = layout.offsetof(3);
+        STARTINDEX = layout.offsetof(2);
+        HANDLE = layout.offsetof(3);
     }
 
     /**
@@ -90,29 +90,29 @@ public class BGFXTransientIndexBuffer extends Struct implements NativeResource {
     /** Returns the value of the {@code size} field. */
     @NativeType("uint32_t")
     public int size() { return nsize(address()); }
-    /** Returns the value of the {@code handle} field. */
-    @NativeType("bgfx_index_buffer_handle_t")
-    public short handle() { return nhandle(address()); }
     /** Returns the value of the {@code startIndex} field. */
     @NativeType("uint32_t")
     public int startIndex() { return nstartIndex(address()); }
+    /** Returns the value of the {@code handle} field. */
+    @NativeType("bgfx_index_buffer_handle_t")
+    public short handle() { return nhandle(address()); }
 
     /** Sets the address of the specified {@link ByteBuffer} to the {@code data} field. */
     public BGFXTransientIndexBuffer data(@NativeType("uint8_t *") ByteBuffer value) { ndata(address(), value); return this; }
-    /** Sets the specified value to the {@code handle} field. */
-    public BGFXTransientIndexBuffer handle(@NativeType("bgfx_index_buffer_handle_t") short value) { nhandle(address(), value); return this; }
     /** Sets the specified value to the {@code startIndex} field. */
     public BGFXTransientIndexBuffer startIndex(@NativeType("uint32_t") int value) { nstartIndex(address(), value); return this; }
+    /** Sets the specified value to the {@code handle} field. */
+    public BGFXTransientIndexBuffer handle(@NativeType("bgfx_index_buffer_handle_t") short value) { nhandle(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public BGFXTransientIndexBuffer set(
         ByteBuffer data,
-        short handle,
-        int startIndex
+        int startIndex,
+        short handle
     ) {
         data(data);
-        handle(handle);
         startIndex(startIndex);
+        handle(handle);
 
         return this;
     }
@@ -276,19 +276,19 @@ public class BGFXTransientIndexBuffer extends Struct implements NativeResource {
     public static ByteBuffer ndata(long struct) { return memByteBuffer(memGetAddress(struct + BGFXTransientIndexBuffer.DATA), nsize(struct)); }
     /** Unsafe version of {@link #size}. */
     public static int nsize(long struct) { return UNSAFE.getInt(null, struct + BGFXTransientIndexBuffer.SIZE); }
-    /** Unsafe version of {@link #handle}. */
-    public static short nhandle(long struct) { return UNSAFE.getShort(null, struct + BGFXTransientIndexBuffer.HANDLE); }
     /** Unsafe version of {@link #startIndex}. */
     public static int nstartIndex(long struct) { return UNSAFE.getInt(null, struct + BGFXTransientIndexBuffer.STARTINDEX); }
+    /** Unsafe version of {@link #handle}. */
+    public static short nhandle(long struct) { return UNSAFE.getShort(null, struct + BGFXTransientIndexBuffer.HANDLE); }
 
     /** Unsafe version of {@link #data(ByteBuffer) data}. */
     public static void ndata(long struct, ByteBuffer value) { memPutAddress(struct + BGFXTransientIndexBuffer.DATA, memAddress(value)); nsize(struct, value.remaining()); }
     /** Sets the specified value to the {@code size} field of the specified {@code struct}. */
     public static void nsize(long struct, int value) { UNSAFE.putInt(null, struct + BGFXTransientIndexBuffer.SIZE, value); }
-    /** Unsafe version of {@link #handle(short) handle}. */
-    public static void nhandle(long struct, short value) { UNSAFE.putShort(null, struct + BGFXTransientIndexBuffer.HANDLE, value); }
     /** Unsafe version of {@link #startIndex(int) startIndex}. */
     public static void nstartIndex(long struct, int value) { UNSAFE.putInt(null, struct + BGFXTransientIndexBuffer.STARTINDEX, value); }
+    /** Unsafe version of {@link #handle(short) handle}. */
+    public static void nhandle(long struct, short value) { UNSAFE.putShort(null, struct + BGFXTransientIndexBuffer.HANDLE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -355,19 +355,19 @@ public class BGFXTransientIndexBuffer extends Struct implements NativeResource {
         /** Returns the value of the {@code size} field. */
         @NativeType("uint32_t")
         public int size() { return BGFXTransientIndexBuffer.nsize(address()); }
-        /** Returns the value of the {@code handle} field. */
-        @NativeType("bgfx_index_buffer_handle_t")
-        public short handle() { return BGFXTransientIndexBuffer.nhandle(address()); }
         /** Returns the value of the {@code startIndex} field. */
         @NativeType("uint32_t")
         public int startIndex() { return BGFXTransientIndexBuffer.nstartIndex(address()); }
+        /** Returns the value of the {@code handle} field. */
+        @NativeType("bgfx_index_buffer_handle_t")
+        public short handle() { return BGFXTransientIndexBuffer.nhandle(address()); }
 
         /** Sets the address of the specified {@link ByteBuffer} to the {@code data} field. */
         public BGFXTransientIndexBuffer.Buffer data(@NativeType("uint8_t *") ByteBuffer value) { BGFXTransientIndexBuffer.ndata(address(), value); return this; }
-        /** Sets the specified value to the {@code handle} field. */
-        public BGFXTransientIndexBuffer.Buffer handle(@NativeType("bgfx_index_buffer_handle_t") short value) { BGFXTransientIndexBuffer.nhandle(address(), value); return this; }
         /** Sets the specified value to the {@code startIndex} field. */
         public BGFXTransientIndexBuffer.Buffer startIndex(@NativeType("uint32_t") int value) { BGFXTransientIndexBuffer.nstartIndex(address(), value); return this; }
+        /** Sets the specified value to the {@code handle} field. */
+        public BGFXTransientIndexBuffer.Buffer handle(@NativeType("bgfx_index_buffer_handle_t") short value) { BGFXTransientIndexBuffer.nhandle(address(), value); return this; }
 
     }
 
