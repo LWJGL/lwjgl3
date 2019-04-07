@@ -1214,8 +1214,9 @@ public class GLFW {
      * Retrieves the content scale for the specified monitor.
      * 
      * <p>This function retrieves the content scale for the specified monitor. The content scale is the ratio between the current DPI and the platform's default
-     * DPI. If you scale all pixel dimensions by this scale then your content should appear at an appropriate size. This is especially important for text and
-     * any UI elements.</p>
+     * DPI. This is especially important for text and any UI elements. If the pixel dimensions of your UI scaled by this look appropriate on your machine then
+     * it should appear at a reasonable size on other machines regardless of their DPI and scaling settings. This relies on the system DPI and scaling
+     * settings being somewhat correct.</p>
      * 
      * <p>The content scale may depend on both the monitor resolution and pixel density and on user settings. It may be very different from the raw DPI
      * calculated from the physical size and current resolution.</p>
@@ -2358,8 +2359,9 @@ public class GLFW {
      * Retrieves the content scale for the specified window.
      * 
      * <p>This function retrieves the content scale for the specified window. The content scale is the ratio between the current DPI and the platform's default
-     * DPI. If you scale all pixel dimensions by this scale then your content should appear at an appropriate size. This is especially important for text and
-     * any UI elements.</p>
+     * DPI. This is especially important for text and any UI elements. If the pixel dimensions of your UI scaled by this look appropriate on your machine then
+     * it should appear at a reasonable size on other machines regardless of their DPI and scaling settings. This relies on the system DPI and scaling
+     * settings being somewhat correct.</p>
      * 
      * <p>On systems where each monitor can have its own content scale, the window content scale will depend on which monitor the system considers the window to
      * be on.</p>
