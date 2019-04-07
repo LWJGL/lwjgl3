@@ -1411,6 +1411,12 @@ public class Vma {
      * 
      * <p>This flag is only allowed for custom pools created with {@link #VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT POOL_CREATE_LINEAR_ALGORITHM_BIT} flag.</p>
      * </li>
+     * <li>{@link #VMA_ALLOCATION_CREATE_DONT_BIND_BIT ALLOCATION_CREATE_DONT_BIND_BIT} - 
+     * Create both buffer/image and allocation, but don't bind them together.
+     * 
+     * <p>It is useful when you want to bind yourself to do some more advanced binding, e.g. using some extensions. The flag is meaningful only with
+     * functions that bind by default: {@link #vmaCreateBuffer CreateBuffer}, {@link #vmaCreateImage CreateImage}. Otherwise it is ignored.</p>
+     * </li>
      * <li>{@link #VMA_ALLOCATION_CREATE_STRATEGY_BEST_FIT_BIT ALLOCATION_CREATE_STRATEGY_BEST_FIT_BIT} - Allocation strategy that chooses smallest possible free range for the allocation.</li>
      * <li>{@link #VMA_ALLOCATION_CREATE_STRATEGY_WORST_FIT_BIT ALLOCATION_CREATE_STRATEGY_WORST_FIT_BIT} - Allocation strategy that chooses biggest possible free range for the allocation.</li>
      * <li>{@link #VMA_ALLOCATION_CREATE_STRATEGY_FIRST_FIT_BIT ALLOCATION_CREATE_STRATEGY_FIRST_FIT_BIT} - 
@@ -1425,13 +1431,14 @@ public class Vma {
      * </ul>
      */
     public static final int
-        VMA_ALLOCATION_CREATE_DEDICATED_MEMORY_BIT           = 0x1,
-        VMA_ALLOCATION_CREATE_NEVER_ALLOCATE_BIT             = 0x2,
-        VMA_ALLOCATION_CREATE_MAPPED_BIT                     = 0x4,
-        VMA_ALLOCATION_CREATE_CAN_BECOME_LOST_BIT            = 0x8,
-        VMA_ALLOCATION_CREATE_CAN_MAKE_OTHER_LOST_BIT        = 0x10,
-        VMA_ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT      = 0x20,
-        VMA_ALLOCATION_CREATE_UPPER_ADDRESS_BIT              = 0x40,
+        VMA_ALLOCATION_CREATE_DEDICATED_MEMORY_BIT           = 0x00000001,
+        VMA_ALLOCATION_CREATE_NEVER_ALLOCATE_BIT             = 0x00000002,
+        VMA_ALLOCATION_CREATE_MAPPED_BIT                     = 0x00000004,
+        VMA_ALLOCATION_CREATE_CAN_BECOME_LOST_BIT            = 0x00000008,
+        VMA_ALLOCATION_CREATE_CAN_MAKE_OTHER_LOST_BIT        = 0x00000010,
+        VMA_ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT      = 0x00000020,
+        VMA_ALLOCATION_CREATE_UPPER_ADDRESS_BIT              = 0x00000040,
+        VMA_ALLOCATION_CREATE_DONT_BIND_BIT                  = 0x00000080,
         VMA_ALLOCATION_CREATE_STRATEGY_BEST_FIT_BIT          = 0x00010000,
         VMA_ALLOCATION_CREATE_STRATEGY_WORST_FIT_BIT         = 0x00020000,
         VMA_ALLOCATION_CREATE_STRATEGY_FIRST_FIT_BIT         = 0x00040000,
@@ -2208,6 +2215,9 @@ public class Vma {
      * <li>If {@code size} is 0, this call is ignored.</li>
      * <li>If memory type that the {@code allocation} belongs to is not {@code HOST_VISIBLE} or it is {@code HOST_COHERENT}, this call is ignored.</li>
      * </ul>
+     * 
+     * <p>Warning! {@code offset} and {@code size} are relative to the contents of given {@code allocation}. If you mean whole allocation, you can pass 0 and
+     * {@code VK_WHOLE_SIZE}, respectively. Do not pass allocation's offset as {@code offset}!!!</p>
      */
     public static void vmaFlushAllocation(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation, @NativeType("VkDeviceSize") long offset, @NativeType("VkDeviceSize") long size) {
         if (CHECKS) {
@@ -2234,6 +2244,9 @@ public class Vma {
      * <li>If {@code size} is 0, this call is ignored.</li>
      * <li>If memory type that the {@code allocation} belongs to is not {@code HOST_VISIBLE} or it is {@code HOST_COHERENT}, this call is ignored.</li>
      * </ul>
+     * 
+     * <p>Warning! {@code offset} and {@code size} are relative to the contents of given {@code allocation}. If you mean whole allocation, you can pass 0 and
+     * {@code VK_WHOLE_SIZE}, respectively. Do not pass allocation's offset as {@code offset}!!!</p>
      */
     public static void vmaInvalidateAllocation(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation, @NativeType("VkDeviceSize") long offset, @NativeType("VkDeviceSize") long size) {
         if (CHECKS) {

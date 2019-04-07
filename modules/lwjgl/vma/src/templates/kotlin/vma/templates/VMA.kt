@@ -1434,7 +1434,7 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
 
             You should not use this flag if ##VmaAllocationCreateInfo{@code ::pool} is not null.
             """,
-            0x00000001
+            "0x00000001"
         ),
         "ALLOCATION_CREATE_NEVER_ALLOCATE_BIT".enum(
             """
@@ -1446,7 +1446,7 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
 
             If ##VmaAllocationCreateInfo{@code ::pool} is not null, this flag is implied and ignored.
             """,
-            0x00000002
+            "0x00000002"
         ),
         "ALLOCATION_CREATE_MAPPED_BIT".enum(
             """
@@ -1460,7 +1460,7 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
 
             You should not use this flag together with #ALLOCATION_CREATE_CAN_BECOME_LOST_BIT.
             """,
-            0x00000004
+            "0x00000004"
         ),
         "ALLOCATION_CREATE_CAN_BECOME_LOST_BIT".enum(
             """
@@ -1473,7 +1473,7 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
 
             You should not use this flag together with #ALLOCATION_CREATE_MAPPED_BIT.
             """,
-            0x00000008
+            "0x00000008"
         ),
         "ALLOCATION_CREATE_CAN_MAKE_OTHER_LOST_BIT".enum(
             """
@@ -1481,7 +1481,7 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
 
             For details about supporting lost allocations, see Lost Allocations chapter of User Guide on Main Page.
             """,
-            0x00000010
+            "0x00000010"
         ),
         "ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT".enum(
             """
@@ -1489,7 +1489,7 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
             local copy of the string is made and stored in allocation's {@code pUserData}. The string is automatically freed together with the allocation. It
             is also used in #BuildStatsString().
             """,
-            0x00000020
+            "0x00000020"
         ),
         "ALLOCATION_CREATE_UPPER_ADDRESS_BIT".enum(
             """
@@ -1497,7 +1497,16 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
 
             This flag is only allowed for custom pools created with #POOL_CREATE_LINEAR_ALGORITHM_BIT flag.
             """,
-            0x00000040
+            "0x00000040"
+        ),
+        "ALLOCATION_CREATE_DONT_BIND_BIT".enum(
+            """
+            Create both buffer/image and allocation, but don't bind them together.
+
+            It is useful when you want to bind yourself to do some more advanced binding, e.g. using some extensions. The flag is meaningful only with
+            functions that bind by default: #CreateBuffer(), #CreateImage(). Otherwise it is ignored.
+            """,
+            "0x00000080"
         ),
         "ALLOCATION_CREATE_STRATEGY_BEST_FIT_BIT".enum("Allocation strategy that chooses smallest possible free range for the allocation.", "0x00010000"),
         "ALLOCATION_CREATE_STRATEGY_WORST_FIT_BIT".enum("Allocation strategy that chooses biggest possible free range for the allocation.", "0x00020000"),
@@ -2087,6 +2096,9 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
             "If {@code size} is 0, this call is ignored.",
             "If memory type that the {@code allocation} belongs to is not {@code HOST_VISIBLE} or it is {@code HOST_COHERENT}, this call is ignored."
         )}
+
+        Warning! {@code offset} and {@code size} are relative to the contents of given {@code allocation}. If you mean whole allocation, you can pass 0 and
+        {@code VK_WHOLE_SIZE}, respectively. Do not pass allocation's offset as {@code offset}!!!
         """,
 
         VmaAllocator("allocator", ""),
@@ -2109,6 +2121,9 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
             "If {@code size} is 0, this call is ignored.",
             "If memory type that the {@code allocation} belongs to is not {@code HOST_VISIBLE} or it is {@code HOST_COHERENT}, this call is ignored."
         )}
+
+        Warning! {@code offset} and {@code size} are relative to the contents of given {@code allocation}. If you mean whole allocation, you can pass 0 and
+        {@code VK_WHOLE_SIZE}, respectively. Do not pass allocation's offset as {@code offset}!!!
         """,
 
         VmaAllocator("allocator", ""),

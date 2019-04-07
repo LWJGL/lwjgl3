@@ -29,7 +29,7 @@ extern "C" {
 
 /** \mainpage Vulkan Memory Allocator
 
-<b>Version 2.2.1-development</b> (2018-12-14)
+<b>Version 2.3.0-development</b> (2019-03-05)
 
 Copyright (c) 2017-2018 Advanced Micro Devices, Inc. All rights reserved. \n
 License: MIT
@@ -2106,6 +2106,12 @@ typedef enum VmaAllocationCreateFlagBits {
     This flag is only allowed for custom pools created with #VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT flag.
     */
     VMA_ALLOCATION_CREATE_UPPER_ADDRESS_BIT = 0x00000040,
+    /** Create both buffer/image and allocation, but don't bind them together.
+    It is useful when you want to bind yourself to do some more advanced binding, e.g. using some extensions.
+    The flag is meaningful only with functions that bind by default: vmaCreateBuffer(), vmaCreateImage().
+    Otherwise it is ignored.
+    */
+    VMA_ALLOCATION_CREATE_DONT_BIND_BIT = 0x00000080,
 
     /** Allocation strategy that chooses smallest possible free range for the
     allocation.
@@ -2744,6 +2750,10 @@ Calls `vkFlushMappedMemoryRanges()` for memory associated with given range of gi
 - If `size` is 0, this call is ignored.
 - If memory type that the `allocation` belongs to is not `HOST_VISIBLE` or it is `HOST_COHERENT`,
   this call is ignored.
+
+Warning! `offset` and `size` are relative to the contents of given `allocation`.
+If you mean whole allocation, you can pass 0 and `VK_WHOLE_SIZE`, respectively.
+Do not pass allocation's offset as `offset`!!!
 */
 void vmaFlushAllocation(VmaAllocator allocator, VmaAllocation allocation, VkDeviceSize offset, VkDeviceSize size);
 
@@ -2758,6 +2768,10 @@ Calls `vkInvalidateMappedMemoryRanges()` for memory associated with given range 
 - If `size` is 0, this call is ignored.
 - If memory type that the `allocation` belongs to is not `HOST_VISIBLE` or it is `HOST_COHERENT`,
   this call is ignored.
+
+Warning! `offset` and `size` are relative to the contents of given `allocation`.
+If you mean whole allocation, you can pass 0 and `VK_WHOLE_SIZE`, respectively.
+Do not pass allocation's offset as `offset`!!!
 */
 void vmaInvalidateAllocation(VmaAllocator allocator, VmaAllocation allocation, VkDeviceSize offset, VkDeviceSize size);
 
@@ -3163,6 +3177,10 @@ the containers.
     #endif
 #endif
 
+/*
+THESE INCLUDES ARE NOT ENABLED BY DEFAULT.
+Library has its own container implementation.
+*/
 #if VMA_USE_STL_VECTOR
    #include <vector>
 #endif
@@ -12267,9 +12285,6 @@ void VmaBlockVector::ApplyDefragmentationMovesGpu(
     // Go over all moves. Post data transfer commands to command buffer.
     if(pDefragCtx->res == VK_SUCCESS)
     {
-        const VkDeviceSize nonCoherentAtomSize = m_hAllocator->m_PhysicalDeviceProperties.limits.nonCoherentAtomSize;
-        VkMappedMemoryRange memRange = { VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE };
-
         for(size_t moveIndex = 0; moveIndex < moveCount; ++moveIndex)
         {
             const VmaDefragmentationMove& move = moves[moveIndex];
@@ -12603,8 +12618,8 @@ VmaDefragmentationAlgorithm_Generic::VmaDefragmentationAlgorithm_Generic(
     uint32_t currentFrameIndex,
     bool overlappingMoveSupported) :
     VmaDefragmentationAlgorithm(hAllocator, pBlockVector, currentFrameIndex),
-    m_AllAllocations(false),
     m_AllocationCount(0),
+    m_AllAllocations(false),
     m_BytesMoved(0),
     m_AllocationsMoved(0),
     m_Blocks(VmaStlAllocator<BlockInfo*>(hAllocator->GetAllocationCallbacks()))
@@ -14291,23 +14306,23 @@ void VmaAllocator_T::ImportVulkanFunctions(const VmaVulkanFunctions* pVulkanFunc
     memset(&m_VulkanFunctions, 0, sizeof(m_VulkanFunctions));
 
 #if VMA_STATIC_VULKAN_FUNCTIONS == 1
-    m_VulkanFunctions.vkGetPhysicalDeviceProperties = &vkGetPhysicalDeviceProperties;
-    m_VulkanFunctions.vkGetPhysicalDeviceMemoryProperties = &vkGetPhysicalDeviceMemoryProperties;
-    m_VulkanFunctions.vkAllocateMemory = &vkAllocateMemory;
-    m_VulkanFunctions.vkFreeMemory = &vkFreeMemory;
-    m_VulkanFunctions.vkMapMemory = &vkMapMemory;
-    m_VulkanFunctions.vkUnmapMemory = &vkUnmapMemory;
-    m_VulkanFunctions.vkFlushMappedMemoryRanges = &vkFlushMappedMemoryRanges;
-    m_VulkanFunctions.vkInvalidateMappedMemoryRanges = &vkInvalidateMappedMemoryRanges;
-    m_VulkanFunctions.vkBindBufferMemory = &vkBindBufferMemory;
-    m_VulkanFunctions.vkBindImageMemory = &vkBindImageMemory;
-    m_VulkanFunctions.vkGetBufferMemoryRequirements = &vkGetBufferMemoryRequirements;
-    m_VulkanFunctions.vkGetImageMemoryRequirements = &vkGetImageMemoryRequirements;
-    m_VulkanFunctions.vkCreateBuffer = &vkCreateBuffer;
-    m_VulkanFunctions.vkDestroyBuffer = &vkDestroyBuffer;
-    m_VulkanFunctions.vkCreateImage = &vkCreateImage;
-    m_VulkanFunctions.vkDestroyImage = &vkDestroyImage;
-    m_VulkanFunctions.vkCmdCopyBuffer = &vkCmdCopyBuffer;
+    m_VulkanFunctions.vkGetPhysicalDeviceProperties = (PFN_vkGetPhysicalDeviceProperties)vkGetPhysicalDeviceProperties;
+    m_VulkanFunctions.vkGetPhysicalDeviceMemoryProperties = (PFN_vkGetPhysicalDeviceMemoryProperties)vkGetPhysicalDeviceMemoryProperties;
+    m_VulkanFunctions.vkAllocateMemory = (PFN_vkAllocateMemory)vkAllocateMemory;
+    m_VulkanFunctions.vkFreeMemory = (PFN_vkFreeMemory)vkFreeMemory;
+    m_VulkanFunctions.vkMapMemory = (PFN_vkMapMemory)vkMapMemory;
+    m_VulkanFunctions.vkUnmapMemory = (PFN_vkUnmapMemory)vkUnmapMemory;
+    m_VulkanFunctions.vkFlushMappedMemoryRanges = (PFN_vkFlushMappedMemoryRanges)vkFlushMappedMemoryRanges;
+    m_VulkanFunctions.vkInvalidateMappedMemoryRanges = (PFN_vkInvalidateMappedMemoryRanges)vkInvalidateMappedMemoryRanges;
+    m_VulkanFunctions.vkBindBufferMemory = (PFN_vkBindBufferMemory)vkBindBufferMemory;
+    m_VulkanFunctions.vkBindImageMemory = (PFN_vkBindImageMemory)vkBindImageMemory;
+    m_VulkanFunctions.vkGetBufferMemoryRequirements = (PFN_vkGetBufferMemoryRequirements)vkGetBufferMemoryRequirements;
+    m_VulkanFunctions.vkGetImageMemoryRequirements = (PFN_vkGetImageMemoryRequirements)vkGetImageMemoryRequirements;
+    m_VulkanFunctions.vkCreateBuffer = (PFN_vkCreateBuffer)vkCreateBuffer;
+    m_VulkanFunctions.vkDestroyBuffer = (PFN_vkDestroyBuffer)vkDestroyBuffer;
+    m_VulkanFunctions.vkCreateImage = (PFN_vkCreateImage)vkCreateImage;
+    m_VulkanFunctions.vkDestroyImage = (PFN_vkDestroyImage)vkDestroyImage;
+    m_VulkanFunctions.vkCmdCopyBuffer = (PFN_vkCmdCopyBuffer)vkCmdCopyBuffer;
 #if VMA_DEDICATED_ALLOCATION
     if(m_UseKhrDedicatedAllocation)
     {
@@ -15863,12 +15878,6 @@ VkResult vmaFindMemoryTypeIndex(
     uint32_t requiredFlags = pAllocationCreateInfo->requiredFlags;
     uint32_t preferredFlags = pAllocationCreateInfo->preferredFlags;
 
-    const bool mapped = (pAllocationCreateInfo->flags & VMA_ALLOCATION_CREATE_MAPPED_BIT) != 0;
-    if(mapped)
-    {
-        preferredFlags |= VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT;
-    }
-
     // Convert usage to requiredFlags and preferredFlags.
     switch(pAllocationCreateInfo->usage)
     {
@@ -16752,7 +16761,10 @@ VkResult vmaCreateBuffer(
         if(res >= 0)
         {
             // 3. Bind buffer with memory.
-            res = allocator->BindBufferMemory(*pAllocation, *pBuffer);
+            if((pAllocationCreateInfo->flags & VMA_ALLOCATION_CREATE_DONT_BIND_BIT) == 0)
+            {
+                res = allocator->BindBufferMemory(*pAllocation, *pBuffer);
+            }
             if(res >= 0)
             {
                 // All steps succeeded.
@@ -16889,7 +16901,10 @@ VkResult vmaCreateImage(
         if(res >= 0)
         {
             // 3. Bind image with memory.
-            res = allocator->BindImageMemory(*pAllocation, *pImage);
+            if((pAllocationCreateInfo->flags & VMA_ALLOCATION_CREATE_DONT_BIND_BIT) == 0)
+            {
+                res = allocator->BindImageMemory(*pAllocation, *pImage);
+            }
             if(res >= 0)
             {
                 // All steps succeeded.
