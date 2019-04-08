@@ -83,6 +83,11 @@ public class HashingTest {
     }
 
     @Benchmark
+    public long xxhash3() {
+        return XXH3_64bits_withSeed(buffer, 7);
+    }
+
+    @Benchmark
     public long xxhashJava() {
         return XXH64Java(memAddress(buffer), buffer.remaining(), 7);
     }

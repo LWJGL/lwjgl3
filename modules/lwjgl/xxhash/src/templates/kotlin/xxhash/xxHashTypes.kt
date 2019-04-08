@@ -12,28 +12,28 @@ val XXH64_hash_t = typedef(unsigned_long_long, "XXH32_hash_t")
 val XXH32_state_t = struct(Module.XXHASH, "XXH32State", nativeName = "XXH32_state_t") {
     documentation = "32-bit XXH state for stack allocation. Unstable API."
 
-    unsigned("total_len_32", "")
-    unsigned("large_len", "")
-    unsigned("v1", "")
-    unsigned("v2", "")
-    unsigned("v3", "")
-    unsigned("v4", "")
-    unsigned("mem32", "")[4]
-    unsigned("memsize", "")
-    unsigned("reserved", "")
+    XXH32_hash_t("total_len_32", "")
+    XXH32_hash_t("large_len", "")
+    XXH32_hash_t("v1", "")
+    XXH32_hash_t("v2", "")
+    XXH32_hash_t("v3", "")
+    XXH32_hash_t("v4", "")
+    XXH32_hash_t("mem32", "")[4]
+    XXH32_hash_t("memsize", "")
+    XXH32_hash_t("reserved", "")
 }
 
 val XXH64_state_t = struct(Module.XXHASH, "XXH64State", nativeName = "XXH64_state_t") {
     documentation = "64-bit XXH state for stack allocation. Unstable API."
 
-    unsigned_long_long("total_len", "")
-    unsigned_long_long("v1", "")
-    unsigned_long_long("v2", "")
-    unsigned_long_long("v3", "")
-    unsigned_long_long("v4", "")
-    unsigned_long_long("mem64", "")[4]
-    unsigned("memsize", "")
-    unsigned("reserved", "")[2]
+    XXH64_hash_t("total_len", "")
+    XXH64_hash_t("v1", "")
+    XXH64_hash_t("v2", "")
+    XXH64_hash_t("v3", "")
+    XXH64_hash_t("v4", "")
+    XXH64_hash_t("mem64", "")[4]
+    XXH32_hash_t("memsize", "")
+    XXH32_hash_t("reserved", "")[2]
 }
 
 val XXH_errorcode = "XXH_errorcode".enumType
@@ -48,4 +48,9 @@ val XXH64_canonical_t = struct(Module.XXHASH, "XXH64Canonical", nativeName = "XX
     documentation = "64-bit canonical representation."
 
     unsigned_char("digest", "the digest in canonical representation")[8]
+}
+
+val XXH128_hash_t = struct(Module.XXHASH, "XXH128Hash", nativeName = "XXH128_hash_t", mutable = false) {
+    XXH64_hash_t("low64", "")
+    XXH64_hash_t("high64", "high64")
 }

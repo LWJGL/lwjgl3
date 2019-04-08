@@ -176,4 +176,49 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_xxhash_XXHash_nXXH64_1hashFromCanoni
     return JavaCritical_org_lwjgl_util_xxhash_XXHash_nXXH64_1hashFromCanonical(srcAddress);
 }
 
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_xxhash_XXHash_nXXH128(jlong dataAddress, jlong len, jlong seed, jlong __result) {
+    void const *data = (void const *)(intptr_t)dataAddress;
+    *((XXH128_hash_t*)(intptr_t)__result) = XXH128(data, (size_t)len, (unsigned long long)seed);
+}
+JNIEXPORT void JNICALL Java_org_lwjgl_util_xxhash_XXHash_nXXH128(JNIEnv *__env, jclass clazz, jlong dataAddress, jlong len, jlong seed, jlong __result) {
+    UNUSED_PARAMS(__env, clazz)
+    JavaCritical_org_lwjgl_util_xxhash_XXHash_nXXH128(dataAddress, len, seed, __result);
+}
+
+JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_xxhash_XXHash_nXXH3_164bits(jlong dataAddress, jlong len) {
+    void const *data = (void const *)(intptr_t)dataAddress;
+    return (jlong)XXH3_64bits(data, (size_t)len);
+}
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_xxhash_XXHash_nXXH3_164bits(JNIEnv *__env, jclass clazz, jlong dataAddress, jlong len) {
+    UNUSED_PARAMS(__env, clazz)
+    return JavaCritical_org_lwjgl_util_xxhash_XXHash_nXXH3_164bits(dataAddress, len);
+}
+
+JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_xxhash_XXHash_nXXH3_164bits_1withSeed(jlong dataAddress, jlong len, jlong seed) {
+    void const *data = (void const *)(intptr_t)dataAddress;
+    return (jlong)XXH3_64bits_withSeed(data, (size_t)len, (unsigned long long)seed);
+}
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_xxhash_XXHash_nXXH3_164bits_1withSeed(JNIEnv *__env, jclass clazz, jlong dataAddress, jlong len, jlong seed) {
+    UNUSED_PARAMS(__env, clazz)
+    return JavaCritical_org_lwjgl_util_xxhash_XXHash_nXXH3_164bits_1withSeed(dataAddress, len, seed);
+}
+
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_xxhash_XXHash_nXXH3_1128bits(jlong dataAddress, jlong len, jlong __result) {
+    void const *data = (void const *)(intptr_t)dataAddress;
+    *((XXH128_hash_t*)(intptr_t)__result) = XXH3_128bits(data, (size_t)len);
+}
+JNIEXPORT void JNICALL Java_org_lwjgl_util_xxhash_XXHash_nXXH3_1128bits(JNIEnv *__env, jclass clazz, jlong dataAddress, jlong len, jlong __result) {
+    UNUSED_PARAMS(__env, clazz)
+    JavaCritical_org_lwjgl_util_xxhash_XXHash_nXXH3_1128bits(dataAddress, len, __result);
+}
+
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_xxhash_XXHash_nXXH3_1128bits_1withSeed(jlong dataAddress, jlong len, jlong seed, jlong __result) {
+    void const *data = (void const *)(intptr_t)dataAddress;
+    *((XXH128_hash_t*)(intptr_t)__result) = XXH3_128bits_withSeed(data, (size_t)len, (unsigned long long)seed);
+}
+JNIEXPORT void JNICALL Java_org_lwjgl_util_xxhash_XXHash_nXXH3_1128bits_1withSeed(JNIEnv *__env, jclass clazz, jlong dataAddress, jlong len, jlong seed, jlong __result) {
+    UNUSED_PARAMS(__env, clazz)
+    JavaCritical_org_lwjgl_util_xxhash_XXHash_nXXH3_1128bits_1withSeed(dataAddress, len, seed, __result);
+}
+
 EXTERN_C_EXIT
