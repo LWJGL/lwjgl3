@@ -1587,7 +1587,10 @@ ${validations.joinToString("\n")}
             val member = it.fieldName(parentMember)
 
             val indent = accessMode.indent
-            val overrides = alias != null && alias.members.any { parentMember -> parentMember.name == it.name }
+            val overrides = alias != null /*
+                TODO: forward declarations have no members (see VkPhysicalDeviceBufferDeviceAddressFeaturesEXT)
+                && alias.members.any { parentMember -> parentMember.name == it.name }
+            */
 
             val returnType = if (accessMode === AccessMode.INSTANCE)
                 className

@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceVariablePointerFeatures}.
+ * See {@link VkPhysicalDeviceVariablePointersFeatures}.
  * 
  * <h3>Layout</h3>
  * 
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 variablePointers;
  * }</code></pre>
  */
-public class VkPhysicalDeviceVariablePointerFeaturesKHR extends VkPhysicalDeviceVariablePointerFeatures {
+public class VkPhysicalDeviceVariablePointerFeaturesKHR extends VkPhysicalDeviceVariablePointersFeatures {
 
     /**
      * Creates a {@code VkPhysicalDeviceVariablePointerFeaturesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -225,7 +225,7 @@ public class VkPhysicalDeviceVariablePointerFeaturesKHR extends VkPhysicalDevice
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceVariablePointerFeaturesKHR} structs. */
-    public static class Buffer extends VkPhysicalDeviceVariablePointerFeatures.Buffer {
+    public static class Buffer extends VkPhysicalDeviceVariablePointersFeatures.Buffer {
 
         private static final VkPhysicalDeviceVariablePointerFeaturesKHR ELEMENT_FACTORY = VkPhysicalDeviceVariablePointerFeaturesKHR.create(-1L);
 

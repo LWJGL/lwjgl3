@@ -16,30 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing variable pointers features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceVariablePointerFeatures} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceFeatures2}, it is filled with values indicating whether each feature is supported. {@link VkPhysicalDeviceVariablePointerFeatures} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to enable the features.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code variablePointers} is enabled then {@code variablePointersStorageBuffer} <b>must</b> also be enabled.</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES}</li>
- * </ul>
- * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code variablePointersStorageBuffer} &ndash; specifies whether the implementation supports the SPIR-V {@code VariablePointersStorageBuffer} capability. When this feature is not enabled, shader modules <b>must</b> not declare the {@code SPV_KHR_variable_pointers} extension or the {@code VariablePointersStorageBuffer} capability.</li>
- * <li>{@code variablePointers} &ndash; specifies whether the implementation supports the SPIR-V {@code VariablePointers} capability. When this feature is not enabled, shader modules <b>must</b> not declare the {@code VariablePointers} capability.</li>
- * </ul>
+ * See {@link VkPhysicalDeviceVariablePointersFeatures}.
  * 
  * <h3>Layout</h3>
  * 
@@ -51,37 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 variablePointers;
  * }</code></pre>
  */
-public class VkPhysicalDeviceVariablePointerFeatures extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        VARIABLEPOINTERSSTORAGEBUFFER,
-        VARIABLEPOINTERS;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        VARIABLEPOINTERSSTORAGEBUFFER = layout.offsetof(2);
-        VARIABLEPOINTERS = layout.offsetof(3);
-    }
+public class VkPhysicalDeviceVariablePointerFeatures extends VkPhysicalDeviceVariablePointersFeatures {
 
     /**
      * Creates a {@code VkPhysicalDeviceVariablePointerFeatures} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -90,35 +37,24 @@ public class VkPhysicalDeviceVariablePointerFeatures extends Struct implements N
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceVariablePointerFeatures(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** Returns the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code variablePointersStorageBuffer} field. */
-    @NativeType("VkBool32")
-    public boolean variablePointersStorageBuffer() { return nvariablePointersStorageBuffer(address()) != 0; }
-    /** Returns the value of the {@code variablePointers} field. */
-    @NativeType("VkBool32")
-    public boolean variablePointers() { return nvariablePointers(address()) != 0; }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkPhysicalDeviceVariablePointerFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkPhysicalDeviceVariablePointerFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code variablePointersStorageBuffer} field. */
+    @Override
     public VkPhysicalDeviceVariablePointerFeatures variablePointersStorageBuffer(@NativeType("VkBool32") boolean value) { nvariablePointersStorageBuffer(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code variablePointers} field. */
+    @Override
     public VkPhysicalDeviceVariablePointerFeatures variablePointers(@NativeType("VkBool32") boolean value) { nvariablePointers(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkPhysicalDeviceVariablePointerFeatures set(
         int sType,
         long pNext,
@@ -288,28 +224,8 @@ public class VkPhysicalDeviceVariablePointerFeatures extends Struct implements N
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVariablePointerFeatures.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceVariablePointerFeatures.PNEXT); }
-    /** Unsafe version of {@link #variablePointersStorageBuffer}. */
-    public static int nvariablePointersStorageBuffer(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVariablePointerFeatures.VARIABLEPOINTERSSTORAGEBUFFER); }
-    /** Unsafe version of {@link #variablePointers}. */
-    public static int nvariablePointers(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVariablePointerFeatures.VARIABLEPOINTERS); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVariablePointerFeatures.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceVariablePointerFeatures.PNEXT, value); }
-    /** Unsafe version of {@link #variablePointersStorageBuffer(boolean) variablePointersStorageBuffer}. */
-    public static void nvariablePointersStorageBuffer(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVariablePointerFeatures.VARIABLEPOINTERSSTORAGEBUFFER, value); }
-    /** Unsafe version of {@link #variablePointers(boolean) variablePointers}. */
-    public static void nvariablePointers(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVariablePointerFeatures.VARIABLEPOINTERS, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkPhysicalDeviceVariablePointerFeatures} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceVariablePointerFeatures, Buffer> implements NativeResource {
+    public static class Buffer extends VkPhysicalDeviceVariablePointersFeatures.Buffer {
 
         private static final VkPhysicalDeviceVariablePointerFeatures ELEMENT_FACTORY = VkPhysicalDeviceVariablePointerFeatures.create(-1L);
 
@@ -323,7 +239,7 @@ public class VkPhysicalDeviceVariablePointerFeatures extends Struct implements N
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -344,26 +260,17 @@ public class VkPhysicalDeviceVariablePointerFeatures extends Struct implements N
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkPhysicalDeviceVariablePointerFeatures.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkPhysicalDeviceVariablePointerFeatures.npNext(address()); }
-        /** Returns the value of the {@code variablePointersStorageBuffer} field. */
-        @NativeType("VkBool32")
-        public boolean variablePointersStorageBuffer() { return VkPhysicalDeviceVariablePointerFeatures.nvariablePointersStorageBuffer(address()) != 0; }
-        /** Returns the value of the {@code variablePointers} field. */
-        @NativeType("VkBool32")
-        public boolean variablePointers() { return VkPhysicalDeviceVariablePointerFeatures.nvariablePointers(address()) != 0; }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceVariablePointerFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceVariablePointerFeatures.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkPhysicalDeviceVariablePointerFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceVariablePointerFeatures.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code variablePointersStorageBuffer} field. */
+        @Override
         public VkPhysicalDeviceVariablePointerFeatures.Buffer variablePointersStorageBuffer(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVariablePointerFeatures.nvariablePointersStorageBuffer(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code variablePointers} field. */
+        @Override
         public VkPhysicalDeviceVariablePointerFeatures.Buffer variablePointers(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVariablePointerFeatures.nvariablePointers(address(), value ? 1 : 0); return this; }
 
     }

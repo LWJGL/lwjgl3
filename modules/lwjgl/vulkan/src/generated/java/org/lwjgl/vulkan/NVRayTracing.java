@@ -678,7 +678,7 @@ public class NVRayTracing {
      * 
      * <ul>
      * <li>{@code geometryCount} <b>must</b> be less than or equal to {@link VkPhysicalDeviceRayTracingPropertiesNV}{@code ::maxGeometryCount}</li>
-     * <li>{@code dst} <b>must</b> have been created with compatible {@link VkAccelerationStructureInfoNV} where {@link VkAccelerationStructureInfoNV}:{@code ::type} and {@link VkAccelerationStructureInfoNV}{@code ::flags} are identical, {@link VkAccelerationStructureInfoNV}{@code ::instanceCount} and {@link VkAccelerationStructureInfoNV}{@code ::geometryCount} for {@code dst} are greater than or equal to the build size and each geometry in {@link VkAccelerationStructureInfoNV}{@code ::pGeometries} for {@code dst} has greater than or equal to the number of vertices, indices, and AABBs.</li>
+     * <li>{@code dst} <b>must</b> have been created with compatible {@link VkAccelerationStructureInfoNV} where {@link VkAccelerationStructureInfoNV}{@code ::type} and {@link VkAccelerationStructureInfoNV}{@code ::flags} are identical, {@link VkAccelerationStructureInfoNV}{@code ::instanceCount} and {@link VkAccelerationStructureInfoNV}{@code ::geometryCount} for {@code dst} are greater than or equal to the build size and each geometry in {@link VkAccelerationStructureInfoNV}{@code ::pGeometries} for {@code dst} has greater than or equal to the number of vertices, indices, and AABBs.</li>
      * <li>If {@code update} is {@link VK10#VK_TRUE TRUE}, {@code src} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
      * <li>If {@code update} is {@link VK10#VK_TRUE TRUE}, {@code src} <b>must</b> have been built before with {@link #VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NV BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NV} set in {@link VkAccelerationStructureInfoNV}{@code ::flags}</li>
      * <li>If {@code update} is {@link VK10#VK_FALSE FALSE}, The {@code size} member of the {@link VkMemoryRequirements} structure returned from a call to {@link #vkGetAccelerationStructureMemoryRequirementsNV GetAccelerationStructureMemoryRequirementsNV} with {@link VkAccelerationStructureMemoryRequirementsInfoNV}{@code ::accelerationStructure} set to {@code dst} and {@link VkAccelerationStructureMemoryRequirementsInfoNV}{@code ::type} set to {@link #VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_BUILD_SCRATCH_NV ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_BUILD_SCRATCH_NV} <b>must</b> be less than or equal to the size of {@code scratch} minus {@code scratchOffset}</li>
@@ -1059,7 +1059,7 @@ public class NVRayTracing {
      *
      * @param device     the logical device that contains the ray tracing pipeline.
      * @param pipeline   the ray tracing pipeline object that contains the shaders.
-     * @param firstGroup the index of the first group to retrieve a handle for from the {@link VkPipelineShaderStageCreateInfo}{@code ::pGroups} array.
+     * @param firstGroup the index of the first group to retrieve a handle for from the {@link VkRayTracingShaderGroupCreateInfoNV}{@code ::pGroups} array.
      * @param groupCount the number of shader handles to retrieve.
      * @param pData      a pointer to a user-allocated buffer where the results will be written.
      */

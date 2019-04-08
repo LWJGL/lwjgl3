@@ -7141,7 +7141,8 @@ val VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV = struct(Module.V
     VkBool32("dedicatedAllocationImageAliasing", "indicates that the implementation supports aliasing of compatible image objects on a dedicated allocation.")
 }
 
-val VkPhysicalDeviceBufferAddressFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceBufferAddressFeaturesEXT", alias = VkPhysicalDeviceBufferDeviceAddressFeaturesEXT) {
+val _VkPhysicalDeviceBufferDeviceAddressFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceBufferDeviceAddressFeaturesEXT")
+val VkPhysicalDeviceBufferAddressFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceBufferAddressFeaturesEXT", alias = _VkPhysicalDeviceBufferDeviceAddressFeaturesEXT) {
     documentation = "See ##VkPhysicalDeviceBufferDeviceAddressFeaturesEXT."
 
     VkStructureType("sType", "")
