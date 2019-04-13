@@ -339,7 +339,8 @@ if (nb_packets > 0)
         "GET_PREDICTION_DISABLED_REQUEST".enum,
         /* Don't use 4045, it's already taken by OPUS_GET_GAIN_REQUEST */
         "SET_PHASE_INVERSION_DISABLED_REQUEST".enum("", "4046"),
-        "GET_PHASE_INVERSION_DISABLED_REQUEST".enum
+        "GET_PHASE_INVERSION_DISABLED_REQUEST".enum,
+        "GET_IN_DTX_REQUEST".enum("", "4049")
     ).javaDocLinks
 
     IntConstant(
@@ -1509,6 +1510,17 @@ if (nb_packets > 0)
      * </dl>
      */
     public static CTLRequest OPUS_GET_PHASE_INVERSION_DISABLED(IntBuffer value) { return new CTLRequestGetI(OPUS_GET_PHASE_INVERSION_DISABLED_REQUEST, value); }
+
+    /**
+     * Gets the DTX state of the encoder.
+     *
+     * @return one of the following values:
+     * <dl>
+     * <dt>0</dt><dd>The encoder is not in DTX.</dd>
+     * <dt>1</dt><dd>The encoder is in DTX.</dd>
+     * </dl>
+     */
+    public static CTLRequest OPUS_GET_IN_DTX(IntBuffer value) { return new CTLRequestGetI(OPUS_GET_IN_DTX_REQUEST, value); }
 
     /**
      * Configures decoder gain adjustment.

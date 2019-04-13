@@ -375,6 +375,7 @@ public class Opus {
      * <li>{@link #OPUS_GET_PREDICTION_DISABLED_REQUEST GET_PREDICTION_DISABLED_REQUEST}</li>
      * <li>{@link #OPUS_SET_PHASE_INVERSION_DISABLED_REQUEST SET_PHASE_INVERSION_DISABLED_REQUEST}</li>
      * <li>{@link #OPUS_GET_PHASE_INVERSION_DISABLED_REQUEST GET_PHASE_INVERSION_DISABLED_REQUEST}</li>
+     * <li>{@link #OPUS_GET_IN_DTX_REQUEST GET_IN_DTX_REQUEST}</li>
      * </ul>
      */
     public static final int
@@ -417,7 +418,8 @@ public class Opus {
         OPUS_SET_PREDICTION_DISABLED_REQUEST      = 4042,
         OPUS_GET_PREDICTION_DISABLED_REQUEST      = 4043,
         OPUS_SET_PHASE_INVERSION_DISABLED_REQUEST = 4046,
-        OPUS_GET_PHASE_INVERSION_DISABLED_REQUEST = 4047;
+        OPUS_GET_PHASE_INVERSION_DISABLED_REQUEST = 4047,
+        OPUS_GET_IN_DTX_REQUEST                   = 4049;
 
     /** Values for the various encoder CTLs. */
     public static final int
@@ -1991,6 +1993,17 @@ public class Opus {
      * </dl>
      */
     public static CTLRequest OPUS_GET_PHASE_INVERSION_DISABLED(IntBuffer value) { return new CTLRequestGetI(OPUS_GET_PHASE_INVERSION_DISABLED_REQUEST, value); }
+
+    /**
+     * Gets the DTX state of the encoder.
+     *
+     * @return one of the following values:
+     * <dl>
+     * <dt>0</dt><dd>The encoder is not in DTX.</dd>
+     * <dt>1</dt><dd>The encoder is in DTX.</dd>
+     * </dl>
+     */
+    public static CTLRequest OPUS_GET_IN_DTX(IntBuffer value) { return new CTLRequestGetI(OPUS_GET_IN_DTX_REQUEST, value); }
 
     /**
      * Configures decoder gain adjustment.
