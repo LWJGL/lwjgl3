@@ -1191,7 +1191,7 @@ public class Assimp {
      * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #aiShadingMode_Fflat ShadingMode_Fflat} - Flat shading. Shading is done on per-face base, diffuse only. Also known as 'faceted shading'.</li>
+     * <li>{@link #aiShadingMode_Flat ShadingMode_Flat} - Flat shading. Shading is done on per-face base, diffuse only. Also known as 'faceted shading'.</li>
      * <li>{@link #aiShadingMode_Gouraud ShadingMode_Gouraud} - Simple Gouraud shading.</li>
      * <li>{@link #aiShadingMode_Phong ShadingMode_Phong} - Phong-Shading</li>
      * <li>{@link #aiShadingMode_Blinn ShadingMode_Blinn} - Phong-Blinn-Shading</li>
@@ -1204,7 +1204,7 @@ public class Assimp {
      * </ul>
      */
     public static final int
-        aiShadingMode_Fflat        = 0x1,
+        aiShadingMode_Flat         = 0x1,
         aiShadingMode_Gouraud      = 0x2,
         aiShadingMode_Phong        = 0x3,
         aiShadingMode_Blinn        = 0x4,

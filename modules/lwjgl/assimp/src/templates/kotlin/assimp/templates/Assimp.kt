@@ -2059,7 +2059,7 @@ aiAttachLogStream(&c);""")}
         modeller which wrote a particular model as closely as possible.
         """,
 
-        "ShadingMode_Fflat".enum("Flat shading. Shading is done on per-face base, diffuse only. Also known as 'faceted shading'.", 0x1),
+        "ShadingMode_Flat".enum("Flat shading. Shading is done on per-face base, diffuse only. Also known as 'faceted shading'.", 0x1),
         "ShadingMode_Gouraud".enum("Simple Gouraud shading.", 0x2),
         "ShadingMode_Phong".enum("Phong-Shading", 0x3),
         "ShadingMode_Blinn".enum("Phong-Blinn-Shading", 0x4),
