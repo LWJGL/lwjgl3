@@ -54,6 +54,7 @@ val EDeviceActivityLevel = "EDeviceActivityLevel".enumType
 val EDualAnalogWhich = "EDualAnalogWhich".enumType
 val EGamepadTextInputMode = "EGamepadTextInputMode".enumType
 val EGamepadTextInputLineMode = "EGamepadTextInputLineMode".enumType
+val EHDCPError = "EHDCPError".enumType
 val EHiddenAreaMeshType = "EHiddenAreaMeshType".enumType
 val EIOBufferMode = "EIOBufferMode".enumType
 val EOverlayDirection = "EOverlayDirection".enumType
@@ -211,11 +212,15 @@ val VREvent_Mouse_t = struct(Module.OPENVR, "VREventMouse", nativeName = "VREven
 }
 
 val VREvent_Scroll_t = struct(Module.OPENVR, "VREventScroll", nativeName = "VREvent_Scroll_t", mutable = false) {
-    documentation = "Used for simulated mouse wheel scroll in overlay space."
+    documentation = "Used for simulated mouse wheel scroll."
 
     float("xdelta", "movement in fraction of the pad traversed since last delta, 1.0 for a full swipe")
     float("ydelta", "")
-    uint32_t("repeatCount", "")
+    uint32_t("unused", "")
+    float(
+        "viewportscale",
+        "for scrolling on an overlay with laser mouse, this is the overlay's vertical size relative to the overlay height. Range: {@code [0,1]}"
+    )
 }
 
 val VREvent_Process_t = struct(Module.OPENVR, "VREventProcess", nativeName = "VREvent_Process_t", mutable = false) {
@@ -363,6 +368,14 @@ val VREvent_ProgressUpdate_t = struct(Module.OPENVR, "VREventProgressUpdate", na
 
 val VREvent_ShowUI_t = struct(Module.OPENVR, "VREventShowUI", nativeName = "VREvent_ShowUI_t", mutable = false) {
 	EShowUIType("eType", "")
+}
+
+val VREvent_ShowDevTools_t = struct(Module.OPENVR, "VREventShowDevTools", nativeName = "VREvent_ShowDevTools_t", mutable = false) {
+	int32_t("nBrowserIdentifier", "")
+}
+
+val VREvent_HDCPError_t = struct(Module.OPENVR, "VREventHDCPError", nativeName = "VREvent_HDCPError_t", mutable = false) {
+	EHDCPError("eCode", "")
 }
 
 val VREvent_Data_t = union(Module.OPENVR, "VREventData", nativeName = "VREvent_Data_t", mutable = false) {

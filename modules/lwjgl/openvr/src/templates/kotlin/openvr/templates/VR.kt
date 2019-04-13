@@ -16,6 +16,14 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         """
 
     IntConstant(
+        "OpenVR version.",
+
+        "k_nSteamVRVersionMajor".."1",
+	    "k_nSteamVRVersionMinor".."3",
+	    "k_nSteamVRVersionBuild".."22"
+    )
+
+    IntConstant(
         "OpenVR constants.",
 
         "k_nDriverNone".."-1",
@@ -171,6 +179,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "k_pch_Lighthouse_PowerManagedBaseStations_String".."PowerManagedBaseStations",
         "k_pch_Lighthouse_PowerManagedBaseStations2_String".."PowerManagedBaseStations2",
         "k_pch_Lighthouse_EnableImuFallback_Bool".."enableImuFallback",
+        "k_pch_Lighthouse_NewPairing_Bool".."newPairing",
         "k_pch_Null_Section".."driver_null",
         "k_pch_Null_SerialNumber_String".."serialNumber",
         "k_pch_Null_ModelNumber_String".."modelNumber",
@@ -242,9 +251,10 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "k_pch_Dashboard_Section".."dashboard",
         "k_pch_Dashboard_EnableDashboard_Bool".."enableDashboard",
         "k_pch_Dashboard_ArcadeMode_Bool".."arcadeMode",
-        "k_pch_Dashboard_EnableWebUI".."webUI",
-        "k_pch_Dashboard_EnableWebUIDevTools ".."webUIDevTools",
-        "k_pch_Dashboard_EnableWebUIDashboardReplacement ".."webUIDashboard",
+        "k_pch_Dashboard_UseWebDashboard".."useWebDashboard",
+        "k_pch_Dashboard_UseWebSettings".."useWebSettings",
+        "k_pch_Dashboard_UseWebIPD".."useWebIPD",
+        "k_pch_Dashboard_UseWebPowerMenu".."useWebPowerMenu",
         "k_pch_modelskin_Section".."modelskins",
         "k_pch_Driver_Enable_Bool".."enable",
         "k_pch_WebInterface_Section".."WebInterface",
@@ -428,6 +438,8 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "ETrackedDeviceProperty_Prop_AdditionalDeviceSettingsPath_String".enum("driver-relative path to additional device and global configuration settings"),
         "ETrackedDeviceProperty_Prop_Identifiable_Bool".enum("Whether device supports being identified from vrmonitor (e.g. blink LED, vibrate haptics, etc)"),
         "ETrackedDeviceProperty_Prop_BootloaderVersion_Uint64".enum,
+        "ETrackedDeviceProperty_Prop_AdditionalSystemReportData_String".enum("additional string to include in system reports about a tracked device"),
+        "ETrackedDeviceProperty_Prop_CompositeFirmwareVersion_String".enum("additional FW components from a device that gets propagated into reports"),
         "ETrackedDeviceProperty_Prop_ReportsTimeSinceVSync_Bool".enum("", "2000"),
         "ETrackedDeviceProperty_Prop_SecondsFromVsyncToPhotons_Float".enum,
         "ETrackedDeviceProperty_Prop_DisplayFrequency_Float".enum,
@@ -529,6 +541,8 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "ETrackedDeviceProperty_Prop_TrackingRangeMinimumMeters_Float".enum,
         "ETrackedDeviceProperty_Prop_TrackingRangeMaximumMeters_Float".enum,
         "ETrackedDeviceProperty_Prop_ModeLabel_String".enum,
+        "ETrackedDeviceProperty_Prop_CanWirelessIdentify_Bool".enum("volatile, based on radio presence and fw discovery"),
+        "ETrackedDeviceProperty_Prop_Nonce_Int32".enum,
         "ETrackedDeviceProperty_Prop_IconPathName_String".enum("usually a directory named \"icons\"", "5000"),
         "ETrackedDeviceProperty_Prop_NamedIconPathDeviceOff_String".enum("PNG for static icon, or GIF for animation, 50x32 for headsets and 32x32 for others"),
         "ETrackedDeviceProperty_Prop_NamedIconPathDeviceSearching_String".enum("PNG for static icon, or GIF for animation, 50x32 for headsets and 32x32 for others"),
@@ -683,7 +697,6 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EVREventType_VREvent_OverlayHidden".enum,
         "EVREventType_VREvent_DashboardActivated".enum,
         "EVREventType_VREvent_DashboardDeactivated".enum,
-        "EVREventType_VREvent_DashboardThumbSelected".enum("Sent to the overlay manager - data is overlay"),
         "EVREventType_VREvent_DashboardRequested".enum("Sent to the overlay manager - data is overlay"),
         "EVREventType_VREvent_ResetDashboard".enum("Sent to the overlay manager"),
         "EVREventType_VREvent_RenderToast".enum("Sent to the dashboard to render a toast - data is the notification ID"),
@@ -708,6 +721,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EVREventType_VREvent_RoomViewShown".enum("Sent by compositor whenever room-view is enabled"),
         "EVREventType_VREvent_RoomViewHidden".enum("Sent by compositor whenever room-view is disabled"),
         "EVREventType_VREvent_ShowUI".enum("data is showUi"),
+        "EVREventType_VREvent_ShowDevTools".enum("data is showDevTools"),
         "EVREventType_VREvent_Notification_Shown".enum("", "600"),
         "EVREventType_VREvent_Notification_Hidden".enum,
         "EVREventType_VREvent_Notification_BeginInteraction".enum,
@@ -717,6 +731,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EVREventType_VREvent_QuitAborted_UserPrompt".enum("data is process"),
         "EVREventType_VREvent_QuitAcknowledged".enum("data is process"),
         "EVREventType_VREvent_DriverRequestedQuit".enum("The driver has requested that SteamVR shut down"),
+        "EVREventType_VREvent_RestartRequested".enum("A driver or other component wants the user to restart SteamVR"),
         "EVREventType_VREvent_ChaperoneDataHasChanged".enum("Sent when the process needs to call {@code VRChaperone()->ReloadInfo()}", "800"),
         "EVREventType_VREvent_ChaperoneUniverseHasChanged".enum,
         "EVREventType_VREvent_ChaperoneTempDataHasChanged".enum,
@@ -763,6 +778,11 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EVREventType_VREvent_Compositor_MirrorWindowHidden".enum,
         "EVREventType_VREvent_Compositor_ChaperoneBoundsShown".enum("", "1410"),
         "EVREventType_VREvent_Compositor_ChaperoneBoundsHidden".enum,
+        "EVREventType_VREvent_Compositor_DisplayDisconnected".enum,
+        "EVREventType_VREvent_Compositor_DisplayReconnected".enum,
+        "EVREventType_VREvent_Compositor_HDCPError".enum("data is hdcpError"),
+        "EVREventType_VREvent_Compositor_ApplicationNotResponding".enum,
+        "EVREventType_VREvent_Compositor_ApplicationResumed".enum,
         "EVREventType_VREvent_TrackedCamera_StartVideoStream".enum("", "1500"),
         "EVREventType_VREvent_TrackedCamera_StopVideoStream".enum,
         "EVREventType_VREvent_TrackedCamera_PauseVideoStream".enum,
@@ -785,6 +805,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EVREventType_VREvent_SpatialAnchors_DescriptorUpdated".enum("data is spatialAnchor. broadcast"),
         "EVREventType_VREvent_SpatialAnchors_RequestPoseUpdate".enum("data is spatialAnchor. sent to specific driver"),
         "EVREventType_VREvent_SpatialAnchors_RequestDescriptorUpdate".enum("data is spatialAnchor. sent to specific driver"),
+        "EVREventType_VREvent_SystemReport_Started".enum("user or system initiated generation of a system report. broadcast", "1900"),
         "EVREventType_VREvent_VendorSpecific_Reserved_Start".enum("", "10000"),
         "EVREventType_VREvent_VendorSpecific_Reserved_End".enum("", "19999")
     )
@@ -846,7 +867,18 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EShowUIType_ShowUI_ControllerBinding".enum("", "0"),
         "EShowUIType_ShowUI_ManageTrackers".enum,
         "EShowUIType_ShowUI_QuickStart".enum,
-        "EShowUIType_ShowUI_Pairing".enum
+        "EShowUIType_ShowUI_Pairing".enum,
+        "EShowUIType_ShowUI_Settings".enum
+    )
+
+    EnumConstant(
+        "{@code EHDCPError}",
+
+        "EHDCPError_HDCPError_None".enum("", "0"),
+        "EHDCPError_HDCPError_LinkLost".enum,
+        "EHDCPError_HDCPError_Tampered".enum,
+        "EHDCPError_HDCPError_DeviceRevoked".enum,
+        "EHDCPError_HDCPError_Unknown".enum
     )
 
     EnumConstant(
@@ -1096,6 +1128,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EVRInitError_VRInitError_Init_USBServiceBusy".enum,
         "EVRInitError_VRInitError_Init_VRWebHelperStartupFailed".enum,
         "EVRInitError_VRInitError_Init_TrackerManagerInitFailed".enum,
+        "EVRInitError_VRInitError_Init_AlreadyRunning".enum,
         "EVRInitError_VRInitError_Driver_Failed".enum("", "200"),
         "EVRInitError_VRInitError_Driver_Unknown".enum,
         "EVRInitError_VRInitError_Driver_HmdUnknown".enum,
@@ -1217,7 +1250,8 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EVRInitError_VRInitError_VendorSpecific_HmdFound_UserDataAddressRange".enum,
         "EVRInitError_VRInitError_VendorSpecific_HmdFound_UserDataError".enum,
         "EVRInitError_VRInitError_VendorSpecific_HmdFound_ConfigFailedSanityCheck".enum,
-        "EVRInitError_VRInitError_Steam_SteamInstallationNotFound".enum("", "2000")
+        "EVRInitError_VRInitError_Steam_SteamInstallationNotFound".enum("", "2000"),
+        "EVRInitError_VRInitError_LastError".enum
     )
 
     EnumConstant(

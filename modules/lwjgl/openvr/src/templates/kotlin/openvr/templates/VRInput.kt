@@ -267,4 +267,9 @@ val VRInput = "VRInput".nativeClass(
         AutoSize("pSets")..uint32_t("unSetCount", ""),
         VRInputValueHandle_t("originToHighlight", "")
     )
+
+    bool(
+        "IsUsingLegacyInput",
+        ""
+    )
 }
