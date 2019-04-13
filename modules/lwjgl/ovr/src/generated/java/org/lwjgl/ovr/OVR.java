@@ -277,7 +277,7 @@ public class OVR {
      * <li>{@link #OVR_FORMAT_B8G8R8X8_UNORM OVR_FORMAT_B8G8R8X8_UNORM} - Not supported for OpenGL applications.</li>
      * <li>{@link #OVR_FORMAT_B8G8R8X8_UNORM_SRGB OVR_FORMAT_B8G8R8X8_UNORM_SRGB} - Not supported for OpenGL applications.</li>
      * <li>{@link #OVR_FORMAT_R16G16B16A16_FLOAT OVR_FORMAT_R16G16B16A16_FLOAT}</li>
-     * <li>{@link #OVR_FORMAT_R11G11B10_FLOAT OVR_FORMAT_R11G11B10_FLOAT}</li>
+     * <li>{@link #OVR_FORMAT_R11G11B10_FLOAT OVR_FORMAT_R11G11B10_FLOAT} - Not supported for D3D12 applications.</li>
      * <li>{@link #OVR_FORMAT_D16_UNORM OVR_FORMAT_D16_UNORM}</li>
      * <li>{@link #OVR_FORMAT_D24_UNORM_S8_UINT OVR_FORMAT_D24_UNORM_S8_UINT}</li>
      * <li>{@link #OVR_FORMAT_D32_FLOAT OVR_FORMAT_D32_FLOAT}</li>

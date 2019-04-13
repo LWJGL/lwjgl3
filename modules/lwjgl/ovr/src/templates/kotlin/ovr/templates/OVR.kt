@@ -201,7 +201,7 @@ ENABLE_WARNINGS()""")
         "OVR_FORMAT_B8G8R8X8_UNORM".enum("Not supported for OpenGL applications."),
         "OVR_FORMAT_B8G8R8X8_UNORM_SRGB".enum("Not supported for OpenGL applications."),
         "OVR_FORMAT_R16G16B16A16_FLOAT".enum,
-        "OVR_FORMAT_R11G11B10_FLOAT".enum("", "25"),
+        "OVR_FORMAT_R11G11B10_FLOAT".enum("Not supported for D3D12 applications.", "25"),
 
         // Depth formats
         "OVR_FORMAT_D16_UNORM".enum("", "11"),
