@@ -234,7 +234,8 @@ private fun CXComment.parse(doc: Documentation, builder: StringBuilder, context:
                         builder.append("</h3>")
                     }
                     "return",
-                    "returns"    -> {
+                    "returns",
+                    "result"     -> {
                         parseChildren(doc, doc.returnDoc, context)
                     }
                     "sa"         -> {
@@ -249,7 +250,7 @@ private fun CXComment.parse(doc: Documentation, builder: StringBuilder, context:
                         }
                     }
                     "see",
-                    "since" -> {
+                    "since"      -> {
                         // TODO: ignored for now
                     }
                     "todo"       -> {
