@@ -205,7 +205,7 @@ class ConstantBlock<T : Any>(
 
     private fun PrintWriter.printConstant(constant: Constant<T>, indent: String, alignment: Int) {
         print("$indent${getConstantName(constant.name)}")
-        for (i in 0..(alignment - constant.name.length - 1))
+        for (i in 0 until alignment - constant.name.length)
             print(' ')
 
         print(" = ")

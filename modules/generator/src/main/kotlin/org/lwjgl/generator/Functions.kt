@@ -1477,12 +1477,6 @@ class Func(
             return (transform as FunctionTransform<T>).transformCall(this, original)
     }
 
-    // TODO: Remove if KT-7859 is fixed.
-    fun generateAlternativeMethod(
-        writer: PrintWriter, name: String,
-        transforms: Map<QualifiedType, Transform>
-    ) = writer.generateAlternativeMethod(name, transforms)
-
     private fun PrintWriter.generateAlternativeMethodSignature(
         name: String,
         transforms: Map<QualifiedType, Transform>,

@@ -372,7 +372,7 @@ internal fun parse(
         enums
             .mapNotNull { (_, enum) -> if (enum.name.isNotEmpty()) enum.getTypedef() else null }
             .sorted()
-            .forEach { it ->
+            .forEach {
                 output.println(it)
             }
         output.println()

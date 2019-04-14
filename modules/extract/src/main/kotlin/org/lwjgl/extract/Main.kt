@@ -400,15 +400,15 @@ class Application {
 
         source.setup(Color(0xA9B7C6))
         console.setup(Color(0xFF6B68))
-        console.isEditable = false;
+        console.isEditable = false
 
         fun JSplitPane.removeBorders(): JSplitPane {
             ui.let {
                 if (it is BasicSplitPaneUI) {
-                    it.getDivider().setBorder(null)
+                    it.divider.border = null
                 }
             }
-            setBorder(BorderFactory.createEmptyBorder());
+            border = BorderFactory.createEmptyBorder()
             return this
         }
 

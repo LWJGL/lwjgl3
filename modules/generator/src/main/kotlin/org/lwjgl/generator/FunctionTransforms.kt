@@ -267,7 +267,7 @@ internal class VectorValueTransform(
     override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with stack buffer
     override fun setupStack(func: Func, qtype: Parameter, writer: PrintWriter) {
         writer.print("$t$t$t${paramType.box}Buffer ${qtype.name} = stack.${elementType}s(${newName}0")
-        for (i in 1..(size - 1))
+        for (i in 1 until size)
             writer.print(", $newName$i")
         writer.println(");")
     }
