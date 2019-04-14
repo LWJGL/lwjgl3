@@ -12,10 +12,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
+ * Instances of this class may be passed to the {@link ZSTDCustomMem} struct.
+ * 
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void * (*) (
+ * void (*) (
  *     void *opaque,
  *     void *address
  * )</code></pre>
@@ -65,8 +67,8 @@ public abstract class ZSTDFreeFunction extends Callback implements ZSTDFreeFunct
         }
 
         @Override
-        public long invoke(long opaque, long address) {
-            return delegate.invoke(opaque, address);
+        public void invoke(long opaque, long address) {
+            delegate.invoke(opaque, address);
         }
 
     }

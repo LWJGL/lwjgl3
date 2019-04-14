@@ -203,17 +203,17 @@ public final class HelloZstd {
 
         long cctx = ZSTD_createCCtx();
         try (MemoryStack stack = stackPush()) {
-            checkZSTD(ZSTD_CCtx_setParameter(cctx, ZSTD_p_compressionLevel, cLevel));
-            //checkZSTD(ZSTD_CCtx_setParameter(cctx, ZSTD_p_compressionStrategy, ZSTD_dfast));
-            checkZSTD(ZSTD_CCtx_setParameter(cctx, ZSTD_p_nbWorkers, Math.min(Runtime.getRuntime().availableProcessors(), 8)));
-            checkZSTD(ZSTD_CCtx_setParameter(cctx, ZSTD_p_windowLog, 14)); // the default window is tuned for large files
+            checkZSTD(ZSTD_CCtx_setParameter(cctx, ZSTD_c_compressionLevel, cLevel));
+            //checkZSTD(ZSTD_CCtx_setParameter(cctx, ZSTD_c_strategy, ZSTD_dfast));
+            checkZSTD(ZSTD_CCtx_setParameter(cctx, ZSTD_c_nbWorkers, Math.min(Runtime.getRuntime().availableProcessors(), 8)));
+            checkZSTD(ZSTD_CCtx_setParameter(cctx, ZSTD_c_windowLog, 14)); // the default window is tuned for large files
 
             PointerBuffer dstPos = stack.callocPointer(1);
             PointerBuffer srcPos = stack.callocPointer(1);
 
             for (int i = 0; i < iterations; i++) {
                 ZSTD_CCtx_setPledgedSrcSize(cctx, uncompressed.remaining());
-                checkZSTD(ZSTD_compress_generic_simpleArgs(cctx, compressed, dstPos, uncompressed, srcPos, ZSTD_e_end));
+                checkZSTD(ZSTD_compressStream2_simpleArgs(cctx, compressed, dstPos, uncompressed, srcPos, ZSTD_e_end));
                 size |= dstPos.get(0);
                 dstPos.put(0, 0L);
                 srcPos.put(0, 0L);

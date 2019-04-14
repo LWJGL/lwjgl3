@@ -20,17 +20,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code contentSizeFlag} &ndash; 1: content size will be in frame header (when known)</li>
- * <li>{@code checksumFlag} &ndash; 1: generate a 32-bits checksum at end of frame, for error detection</li>
- * <li>{@code noDictIDFlag} &ndash; 1: no dictID will be saved into frame header (if dictionary compression)</li>
+ * <li>{@code checksumFlag} &ndash; 1: generate a 32-bits checksum using XXH64 algorithm at end of frame, for error detection</li>
+ * <li>{@code noDictIDFlag} &ndash; 1: no {@code dictID} will be saved into frame header ({@code dictID} is only useful for dictionary compression)</li>
  * </ul>
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct ZSTD_frameParameters {
- *     unsigned contentSizeFlag;
- *     unsigned checksumFlag;
- *     unsigned noDictIDFlag;
+ *     int contentSizeFlag;
+ *     int checksumFlag;
+ *     int noDictIDFlag;
  * }</code></pre>
  */
 @NativeType("struct ZSTD_frameParameters")
@@ -77,27 +77,24 @@ public class ZSTDFrameParameters extends Struct implements NativeResource {
     public int sizeof() { return SIZEOF; }
 
     /** Returns the value of the {@code contentSizeFlag} field. */
-    @NativeType("unsigned")
-    public boolean contentSizeFlag() { return ncontentSizeFlag(address()) != 0; }
+    public int contentSizeFlag() { return ncontentSizeFlag(address()); }
     /** Returns the value of the {@code checksumFlag} field. */
-    @NativeType("unsigned")
-    public boolean checksumFlag() { return nchecksumFlag(address()) != 0; }
+    public int checksumFlag() { return nchecksumFlag(address()); }
     /** Returns the value of the {@code noDictIDFlag} field. */
-    @NativeType("unsigned")
-    public boolean noDictIDFlag() { return nnoDictIDFlag(address()) != 0; }
+    public int noDictIDFlag() { return nnoDictIDFlag(address()); }
 
     /** Sets the specified value to the {@code contentSizeFlag} field. */
-    public ZSTDFrameParameters contentSizeFlag(@NativeType("unsigned") boolean value) { ncontentSizeFlag(address(), value ? 1 : 0); return this; }
+    public ZSTDFrameParameters contentSizeFlag(int value) { ncontentSizeFlag(address(), value); return this; }
     /** Sets the specified value to the {@code checksumFlag} field. */
-    public ZSTDFrameParameters checksumFlag(@NativeType("unsigned") boolean value) { nchecksumFlag(address(), value ? 1 : 0); return this; }
+    public ZSTDFrameParameters checksumFlag(int value) { nchecksumFlag(address(), value); return this; }
     /** Sets the specified value to the {@code noDictIDFlag} field. */
-    public ZSTDFrameParameters noDictIDFlag(@NativeType("unsigned") boolean value) { nnoDictIDFlag(address(), value ? 1 : 0); return this; }
+    public ZSTDFrameParameters noDictIDFlag(int value) { nnoDictIDFlag(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public ZSTDFrameParameters set(
-        boolean contentSizeFlag,
-        boolean checksumFlag,
-        boolean noDictIDFlag
+        int contentSizeFlag,
+        int checksumFlag,
+        int noDictIDFlag
     ) {
         contentSizeFlag(contentSizeFlag);
         checksumFlag(checksumFlag);
@@ -268,11 +265,11 @@ public class ZSTDFrameParameters extends Struct implements NativeResource {
     /** Unsafe version of {@link #noDictIDFlag}. */
     public static int nnoDictIDFlag(long struct) { return UNSAFE.getInt(null, struct + ZSTDFrameParameters.NODICTIDFLAG); }
 
-    /** Unsafe version of {@link #contentSizeFlag(boolean) contentSizeFlag}. */
+    /** Unsafe version of {@link #contentSizeFlag(int) contentSizeFlag}. */
     public static void ncontentSizeFlag(long struct, int value) { UNSAFE.putInt(null, struct + ZSTDFrameParameters.CONTENTSIZEFLAG, value); }
-    /** Unsafe version of {@link #checksumFlag(boolean) checksumFlag}. */
+    /** Unsafe version of {@link #checksumFlag(int) checksumFlag}. */
     public static void nchecksumFlag(long struct, int value) { UNSAFE.putInt(null, struct + ZSTDFrameParameters.CHECKSUMFLAG, value); }
-    /** Unsafe version of {@link #noDictIDFlag(boolean) noDictIDFlag}. */
+    /** Unsafe version of {@link #noDictIDFlag(int) noDictIDFlag}. */
     public static void nnoDictIDFlag(long struct, int value) { UNSAFE.putInt(null, struct + ZSTDFrameParameters.NODICTIDFLAG, value); }
 
     // -----------------------------------
@@ -314,21 +311,18 @@ public class ZSTDFrameParameters extends Struct implements NativeResource {
         }
 
         /** Returns the value of the {@code contentSizeFlag} field. */
-        @NativeType("unsigned")
-        public boolean contentSizeFlag() { return ZSTDFrameParameters.ncontentSizeFlag(address()) != 0; }
+        public int contentSizeFlag() { return ZSTDFrameParameters.ncontentSizeFlag(address()); }
         /** Returns the value of the {@code checksumFlag} field. */
-        @NativeType("unsigned")
-        public boolean checksumFlag() { return ZSTDFrameParameters.nchecksumFlag(address()) != 0; }
+        public int checksumFlag() { return ZSTDFrameParameters.nchecksumFlag(address()); }
         /** Returns the value of the {@code noDictIDFlag} field. */
-        @NativeType("unsigned")
-        public boolean noDictIDFlag() { return ZSTDFrameParameters.nnoDictIDFlag(address()) != 0; }
+        public int noDictIDFlag() { return ZSTDFrameParameters.nnoDictIDFlag(address()); }
 
         /** Sets the specified value to the {@code contentSizeFlag} field. */
-        public ZSTDFrameParameters.Buffer contentSizeFlag(@NativeType("unsigned") boolean value) { ZSTDFrameParameters.ncontentSizeFlag(address(), value ? 1 : 0); return this; }
+        public ZSTDFrameParameters.Buffer contentSizeFlag(int value) { ZSTDFrameParameters.ncontentSizeFlag(address(), value); return this; }
         /** Sets the specified value to the {@code checksumFlag} field. */
-        public ZSTDFrameParameters.Buffer checksumFlag(@NativeType("unsigned") boolean value) { ZSTDFrameParameters.nchecksumFlag(address(), value ? 1 : 0); return this; }
+        public ZSTDFrameParameters.Buffer checksumFlag(int value) { ZSTDFrameParameters.nchecksumFlag(address(), value); return this; }
         /** Sets the specified value to the {@code noDictIDFlag} field. */
-        public ZSTDFrameParameters.Buffer noDictIDFlag(@NativeType("unsigned") boolean value) { ZSTDFrameParameters.nnoDictIDFlag(address(), value ? 1 : 0); return this; }
+        public ZSTDFrameParameters.Buffer noDictIDFlag(int value) { ZSTDFrameParameters.nnoDictIDFlag(address(), value); return this; }
 
     }
 

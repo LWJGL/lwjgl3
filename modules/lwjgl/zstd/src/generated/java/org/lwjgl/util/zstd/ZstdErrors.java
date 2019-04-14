@@ -40,6 +40,7 @@ public class ZstdErrors {
      * <li>{@link #ZSTD_error_workSpace_tooSmall error_workSpace_tooSmall}</li>
      * <li>{@link #ZSTD_error_dstSize_tooSmall error_dstSize_tooSmall}</li>
      * <li>{@link #ZSTD_error_srcSize_wrong error_srcSize_wrong}</li>
+     * <li>{@link #ZSTD_error_dstBuffer_null error_dstBuffer_null}</li>
      * <li>{@link #ZSTD_error_frameIndex_tooLarge error_frameIndex_tooLarge}</li>
      * <li>{@link #ZSTD_error_seekableIO error_seekableIO}</li>
      * </ul>
@@ -67,6 +68,7 @@ public class ZstdErrors {
         ZSTD_error_workSpace_tooSmall            = 66,
         ZSTD_error_dstSize_tooSmall              = 70,
         ZSTD_error_srcSize_wrong                 = 72,
+        ZSTD_error_dstBuffer_null                = 74,
         ZSTD_error_frameIndex_tooLarge           = 100,
         ZSTD_error_seekableIO                    = 102;
 

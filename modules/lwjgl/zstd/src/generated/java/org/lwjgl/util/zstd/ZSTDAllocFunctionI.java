@@ -10,6 +10,8 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.dyncall.DynCallback.*;
 
 /**
+ * Instances of this interface may be passed to the {@link ZSTDCustomMem} struct.
+ * 
  * <h3>Type</h3>
  * 
  * <pre><code>

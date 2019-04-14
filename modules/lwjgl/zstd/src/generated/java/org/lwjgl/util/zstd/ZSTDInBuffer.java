@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code src} &ndash; start of input buffer</li>
  * <li>{@code size} &ndash; size of input buffer</li>
- * <li>{@code pos} &ndash; position where reading stopped. Will be updated. Necessarily {@code 0 <= pos <= size}</li>
+ * <li>{@code pos} &ndash; position where reading stopped. Will be updated. Necessarily 0 &le; {@code pos} &le; {@code size}</li>
  * </ul>
  * 
  * <h3>Layout</h3>

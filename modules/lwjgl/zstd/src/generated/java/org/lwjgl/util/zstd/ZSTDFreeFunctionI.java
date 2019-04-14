@@ -10,31 +10,33 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.dyncall.DynCallback.*;
 
 /**
+ * Instances of this interface may be passed to the {@link ZSTDCustomMem} struct.
+ * 
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void * (*) (
+ * void (*) (
  *     void *opaque,
  *     void *address
  * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("ZSTD_freeFunction")
-public interface ZSTDFreeFunctionI extends CallbackI.P {
+public interface ZSTDFreeFunctionI extends CallbackI.V {
 
-    String SIGNATURE = "(pp)p";
+    String SIGNATURE = "(pp)v";
 
     @Override
     default String getSignature() { return SIGNATURE; }
 
     @Override
-    default long callback(long args) {
-        return invoke(
+    default void callback(long args) {
+        invoke(
             dcbArgPointer(args),
             dcbArgPointer(args)
         );
     }
 
-    @NativeType("void *") long invoke(@NativeType("void *") long opaque, @NativeType("void *") long address);
+    void invoke(@NativeType("void *") long opaque, @NativeType("void *") long address);
 
 }

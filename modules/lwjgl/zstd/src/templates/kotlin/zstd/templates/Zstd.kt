@@ -50,16 +50,21 @@ ENABLE_WARNINGS()""")
         A {@code ZSTD_CStream} object is required to track streaming operation.
 
         Use #createCStream() and #freeCStream() to create/release resources. {@code ZSTD_CStream} objects can be reused multiple times on consecutive
-        compression operations. It is recommended to re-use {@code ZSTD_CStream} in situations where many streaming operations will be achieved consecutively,
-        since it will play nicer with system's memory, by re-using already allocated memory. Use one separate {@code ZSTD_CStream} per thread for parallel
-        execution.
+        compression operations. It is recommended to re-use {@code ZSTD_CStream} since it will play nicer with system's memory, by re-using already allocated
+        memory.
 
-        Start a new compression by initializing {@code ZSTD_CStream} context. Use #initCStream() to start a new compression operation.
+        For parallel execution, use one separate {@code ZSTD_CStream}.
+
+        Since v1.3.0, {@code ZSTD_CStream} and {@code ZSTD_CCtx} are the same thing.
+
+        Parameters are sticky: when starting a new compression on the same context, it will re-use the same sticky parameters as previous compression session.
+        When in doubt, it's recommended to fully initialize the context before usage. Use #initCStream() to set the parameter to a selected compression level.
+        Use advanced API (#CCtx_setParameter(), etc.) to set more specific parameters.
 
         Use #compressStream() as many times as necessary to consume input stream. The function will automatically update both {@code pos} fields within
         {@code input} and {@code output}. Note that the function may not consume the entire input, for example, because the output buffer is already full, in
         which case {@code input.pos < input.size}. The caller must check if input has been entirely consumed. If not, the caller must make some room to receive
-        more compressed data, typically by emptying output buffer, or allocating a new output buffer, and then present again remaining input data.
+        more compressed data, and then present again remaining input data.
 
         At any moment, it's possible to flush whatever data might remain stuck within internal buffer, using #flushStream(). {@code output->pos} will be
         updated. Note that, if {@code output->size} is too small, a single invocation of {@code ZSTD_flushStream()} might not be enough (return code &gt; 0).
@@ -74,7 +79,7 @@ ENABLE_WARNINGS()""")
 
         Use #createDStream() and #freeDStream() to create/release resources. {@code ZSTD_DStream} objects can be re-used multiple times.
 
-        Use #initDStream() to start a new decompression operation, or {@code ZSTD_initDStream_usingDict()} if decompression requires a dictionary.
+        Use #initDStream() to start a new decompression operation. Alternatively, use advanced API to set specific properties.
 
         Use #decompressStream() repetitively to consume your input. The function will update both {@code pos} fields. If {@code input.pos < input.size}, some
         input has not been consumed. It's up to the caller to present again remaining data. If {@code output.pos < output.size}, decoder has flushed everything
@@ -86,7 +91,7 @@ ENABLE_WARNINGS()""")
 
         "VERSION_MAJOR".."1",
         "VERSION_MINOR".."3",
-        "VERSION_RELEASE".."7"
+        "VERSION_RELEASE".."8"
     )
 
     IntConstant("Version number.", "VERSION_NUMBER".."(ZSTD_VERSION_MAJOR *100*100 + ZSTD_VERSION_MINOR *100 + ZSTD_VERSION_RELEASE)")
@@ -250,7 +255,7 @@ ENABLE_WARNINGS()""")
 
     size_t(
         "compressCCtx",
-        "Same as #compress(), requires an allocated {@code ZSTD_CCtx} (see #createCCtx()).",
+        "Same as #compress(), using an explicit {@code ZSTD_CCtx}. The function will compress at requested compression level, ignoring any other parameter.",
 
         ZSTD_CCtx.p("ctx", ""),
         compress["dst"],
@@ -280,7 +285,7 @@ ENABLE_WARNINGS()""")
 
     size_t(
         "decompressDCtx",
-        "Same as #decompress(), requires an allocated {@code ZSTD_DCtx} (see #createDCtx()).",
+        "Same as #decompress(), requires an allocated {@code ZSTD_DCtx}. Compatible with sticky parameters.",
 
         ZSTD_DCtx.p("ctx", ""),
         compress["dst"],
@@ -296,9 +301,11 @@ ENABLE_WARNINGS()""")
     size_t(
         "compress_usingDict",
         """
-        Compression using a predefined Dictionary (see {@code dictBuilder/zdict.h}).
+        Compression at an explicit compression level using a Dictionary.
 
-        This function loads the dictionary, resulting in significant startup delay.
+        A dictionary can be any arbitrary data segment (also called a prefix), or a buffer with specified information (see {@code dictBuilder/zdict.h}).
+
+        This function loads the dictionary, resulting in significant startup delay. It's intended for a dictionary used only once.
 
         When {@code dict == NULL || dictSize < 8} no dictionary is used.
         """,
@@ -316,9 +323,9 @@ ENABLE_WARNINGS()""")
     size_t(
         "decompress_usingDict",
         """
-        Decompression using a predefined Dictionary (see {@code dictBuilder/zdict.h}). Dictionary must be identical to the one used during compression.
+        Decompression using a known Dictionary. Dictionary must be identical to the one used during compression.
 
-        This function loads the dictionary, resulting in significant startup delay.
+        This function loads the dictionary, resulting in significant startup delay. It's intended for a dictionary used only once.
 
         When {@code dict == NULL || dictSize < 8} no dictionary is used.
         """,
@@ -339,14 +346,15 @@ ENABLE_WARNINGS()""")
     ZSTD_CDict.p(
         "createCDict",
         """
-        When compressing multiple messages / blocks with the same dictionary, it's recommended to load it just once.
+        When compressing multiple messages / blocks using the same dictionary, it's recommended to load it only once.
 
-        {@code ZSTD_createCDict()} will create a digested dictionary, ready to start future compression operations without startup delay. {@code ZSTD_CDict}
+        {@code ZSTD_createCDict()} will create a digested dictionary, ready to start future compression operations without startup cost. {@code ZSTD_CDict}
         can be created once and shared by multiple threads concurrently, since its usage is read-only.
 
-        {@code dictBuffer} can be released after {@code ZSTD_CDict} creation, since its content is copied within CDict.
+        {@code dictBuffer} can be released after {@code ZSTD_CDict} creation, because its content is copied within CDict. Consider experimental function
+        #createCDict_byReference() if you prefer to not duplicate {@code dictBuffer} content.
 
-        Note: A {@code ZSTD_CDict} can be created with an empty dictionary, but it is inefficient for small data.
+        Note: A {@code ZSTD_CDict} can be created from an empty {@code dictBuffer}, but it is inefficient when used to compress small data.
         """,
 
         void.const.p("dictBuffer", ""),
@@ -364,13 +372,9 @@ ENABLE_WARNINGS()""")
     size_t(
         "compress_usingCDict",
         """
-        Compression using a digested Dictionary.
+        Compression using a digested Dictionary. Recommended when same dictionary is used multiple times.
 
-        Faster startup than #compress_usingDict(), recommended when same dictionary is used multiple times. Note that compression level is decided during
-        dictionary creation. Frame parameters are hardcoded ({@code dictID=yes, contentSize=yes, checksum=no})
-
-        Note: {@code ZSTD_compress_usingCDict()} can be used with a {@code ZSTD_CDict} created from an empty dictionary. But it is inefficient for small data,
-        and it is recommended to use #compressCCtx().
+        Compression level is <b>decided at dictionary creation time</b>, and frame parameters are hardcoded ({@code dictID=yes, contentSize=yes, checksum=no})
         """,
 
         ZSTD_CCtx.p("cctx", ""),
@@ -405,7 +409,7 @@ ENABLE_WARNINGS()""")
         """
         Decompression using a digested Dictionary.
 
-        Faster startup than #decompress_usingDict(), recommended when same dictionary is used multiple times.
+        Recommended when same dictionary is used multiple times.
         """,
 
         ZSTD_DCtx.p("dctx", ""),
@@ -470,7 +474,7 @@ ENABLE_WARNINGS()""")
 
         Notes:
         ${ol(
-            "it's just a hint, to help latency a little, any other value will work fine",
+            "it's just a hint, to help latency a little, any value will work fine",
             "size hint is guaranteed to be &le; #CStreamInSize()"
         )}
         """
@@ -561,10 +565,10 @@ ENABLE_WARNINGS()""")
         Use {@code ZSTD_decompressStream()} repetitively to consume your input.
 
         The function will update both {@code pos} fields. If {@code input.pos < input.size}, some input has not been consumed. It's up to the caller to present
-        again remaining data. The function tries to flush all data decoded immediately, respecting buffer sizes.  If {@code output.pos < output.size}, decoder
-        has flushed everything it could. But if {@code output.pos == output.size}, there is no such guarantee, it's likely that some decoded data was not
-        flushed and still remains within internal buffers. In which case, call {@code ZSTD_decompressStream()} again to flush whatever remains in the buffer.
-        When no additional input is provided, amount of data flushed is necessarily &le; #BLOCKSIZE_MAX.
+        again remaining data. The function tries to flush all data decoded immediately, respecting output buffer size. If {@code output.pos < output.size},
+        decoder has flushed everything it could. But if {@code output.pos == output.size}, there might be some data left within internal buffers. In which
+        case, call {@code ZSTD_decompressStream()} again to flush whatever remains in the buffer. With no additional input provided, amount of data flushed is
+        necessarily &le; #BLOCKSIZE_MAX.
         """,
 
         ZSTD_DStream.p("zds", ""),
@@ -574,8 +578,8 @@ ENABLE_WARNINGS()""")
         returnDoc =
         """
         0 when a frame is completely decoded and fully flushed, an error code, which can be tested using #isError(), any other value &gt; 0, which means there
-        is still some decoding to do to complete current frame. The return value is a suggested next input size (a hint to improve latency) that will never
-        load more than the current frame.
+        is still some decoding to do to complete current frame. The return value is a suggested next input size (just a hint to improve latency) that will
+        never request more than the remaining frame size.
         """
     )
 

@@ -51,16 +51,21 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <p>A {@code ZSTD_CStream} object is required to track streaming operation.</p>
  * 
  * <p>Use {@link #ZSTD_createCStream createCStream} and {@link #ZSTD_freeCStream freeCStream} to create/release resources. {@code ZSTD_CStream} objects can be reused multiple times on consecutive
- * compression operations. It is recommended to re-use {@code ZSTD_CStream} in situations where many streaming operations will be achieved consecutively,
- * since it will play nicer with system's memory, by re-using already allocated memory. Use one separate {@code ZSTD_CStream} per thread for parallel
- * execution.</p>
+ * compression operations. It is recommended to re-use {@code ZSTD_CStream} since it will play nicer with system's memory, by re-using already allocated
+ * memory.</p>
  * 
- * <p>Start a new compression by initializing {@code ZSTD_CStream} context. Use {@link #ZSTD_initCStream initCStream} to start a new compression operation.</p>
+ * <p>For parallel execution, use one separate {@code ZSTD_CStream}.</p>
+ * 
+ * <p>Since v1.3.0, {@code ZSTD_CStream} and {@code ZSTD_CCtx} are the same thing.</p>
+ * 
+ * <p>Parameters are sticky: when starting a new compression on the same context, it will re-use the same sticky parameters as previous compression session.
+ * When in doubt, it's recommended to fully initialize the context before usage. Use {@link #ZSTD_initCStream initCStream} to set the parameter to a selected compression level.
+ * Use advanced API ({@link ZstdX#ZSTD_CCtx_setParameter CCtx_setParameter}, etc.) to set more specific parameters.</p>
  * 
  * <p>Use {@link #ZSTD_compressStream compressStream} as many times as necessary to consume input stream. The function will automatically update both {@code pos} fields within
  * {@code input} and {@code output}. Note that the function may not consume the entire input, for example, because the output buffer is already full, in
  * which case {@code input.pos < input.size}. The caller must check if input has been entirely consumed. If not, the caller must make some room to receive
- * more compressed data, typically by emptying output buffer, or allocating a new output buffer, and then present again remaining input data.</p>
+ * more compressed data, and then present again remaining input data.</p>
  * 
  * <p>At any moment, it's possible to flush whatever data might remain stuck within internal buffer, using {@link #ZSTD_flushStream flushStream}. {@code output->pos} will be
  * updated. Note that, if {@code output->size} is too small, a single invocation of {@code ZSTD_flushStream()} might not be enough (return code &gt; 0).
@@ -75,7 +80,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>Use {@link #ZSTD_createDStream createDStream} and {@link #ZSTD_freeDStream freeDStream} to create/release resources. {@code ZSTD_DStream} objects can be re-used multiple times.</p>
  * 
- * <p>Use {@link #ZSTD_initDStream initDStream} to start a new decompression operation, or {@code ZSTD_initDStream_usingDict()} if decompression requires a dictionary.</p>
+ * <p>Use {@link #ZSTD_initDStream initDStream} to start a new decompression operation. Alternatively, use advanced API to set specific properties.</p>
  * 
  * <p>Use {@link #ZSTD_decompressStream decompressStream} repetitively to consume your input. The function will update both {@code pos} fields. If {@code input.pos < input.size}, some
  * input has not been consumed. It's up to the caller to present again remaining data. If {@code output.pos < output.size}, decoder has flushed everything
@@ -87,7 +92,7 @@ public class Zstd {
     public static final int
         ZSTD_VERSION_MAJOR   = 1,
         ZSTD_VERSION_MINOR   = 3,
-        ZSTD_VERSION_RELEASE = 7;
+        ZSTD_VERSION_RELEASE = 8;
 
     /** Version number. */
     public static final int ZSTD_VERSION_NUMBER = (ZSTD_VERSION_MAJOR *100*100 + ZSTD_VERSION_MINOR *100 + ZSTD_VERSION_RELEASE);
@@ -268,7 +273,7 @@ public class Zstd {
     /** Unsafe version of: {@link #ZSTD_compressCCtx compressCCtx} */
     public static native long nZSTD_compressCCtx(long ctx, long dst, long dstCapacity, long src, long srcSize, int compressionLevel);
 
-    /** Same as {@link #ZSTD_compress compress}, requires an allocated {@code ZSTD_CCtx} (see {@link #ZSTD_createCCtx createCCtx}). */
+    /** Same as {@link #ZSTD_compress compress}, using an explicit {@code ZSTD_CCtx}. The function will compress at requested compression level, ignoring any other parameter. */
     @NativeType("size_t")
     public static long ZSTD_compressCCtx(@NativeType("ZSTD_CCtx *") long ctx, @NativeType("void *") ByteBuffer dst, @NativeType("void const *") ByteBuffer src, int compressionLevel) {
         if (CHECKS) {
@@ -307,7 +312,7 @@ public class Zstd {
     /** Unsafe version of: {@link #ZSTD_decompressDCtx decompressDCtx} */
     public static native long nZSTD_decompressDCtx(long ctx, long dst, long dstCapacity, long src, long srcSize);
 
-    /** Same as {@link #ZSTD_decompress decompress}, requires an allocated {@code ZSTD_DCtx} (see {@link #ZSTD_createDCtx createDCtx}). */
+    /** Same as {@link #ZSTD_decompress decompress}, requires an allocated {@code ZSTD_DCtx}. Compatible with sticky parameters. */
     @NativeType("size_t")
     public static long ZSTD_decompressDCtx(@NativeType("ZSTD_DCtx *") long ctx, @NativeType("void *") ByteBuffer dst, @NativeType("void const *") ByteBuffer src) {
         if (CHECKS) {
@@ -322,9 +327,11 @@ public class Zstd {
     public static native long nZSTD_compress_usingDict(long ctx, long dst, long dstCapacity, long src, long srcSize, long dict, long dictSize, int compressionLevel);
 
     /**
-     * Compression using a predefined Dictionary (see {@code dictBuilder/zdict.h}).
+     * Compression at an explicit compression level using a Dictionary.
      * 
-     * <p>This function loads the dictionary, resulting in significant startup delay.</p>
+     * <p>A dictionary can be any arbitrary data segment (also called a prefix), or a buffer with specified information (see {@code dictBuilder/zdict.h}).</p>
+     * 
+     * <p>This function loads the dictionary, resulting in significant startup delay. It's intended for a dictionary used only once.</p>
      * 
      * <p>When {@code dict == NULL || dictSize < 8} no dictionary is used.</p>
      */
@@ -342,9 +349,9 @@ public class Zstd {
     public static native long nZSTD_decompress_usingDict(long dctx, long dst, long dstCapacity, long src, long srcSize, long dict, long dictSize);
 
     /**
-     * Decompression using a predefined Dictionary (see {@code dictBuilder/zdict.h}). Dictionary must be identical to the one used during compression.
+     * Decompression using a known Dictionary. Dictionary must be identical to the one used during compression.
      * 
-     * <p>This function loads the dictionary, resulting in significant startup delay.</p>
+     * <p>This function loads the dictionary, resulting in significant startup delay. It's intended for a dictionary used only once.</p>
      * 
      * <p>When {@code dict == NULL || dictSize < 8} no dictionary is used.</p>
      */
@@ -362,14 +369,15 @@ public class Zstd {
     public static native long nZSTD_createCDict(long dictBuffer, long dictSize, int compressionLevel);
 
     /**
-     * When compressing multiple messages / blocks with the same dictionary, it's recommended to load it just once.
+     * When compressing multiple messages / blocks using the same dictionary, it's recommended to load it only once.
      * 
-     * <p>{@code ZSTD_createCDict()} will create a digested dictionary, ready to start future compression operations without startup delay. {@code ZSTD_CDict}
+     * <p>{@code ZSTD_createCDict()} will create a digested dictionary, ready to start future compression operations without startup cost. {@code ZSTD_CDict}
      * can be created once and shared by multiple threads concurrently, since its usage is read-only.</p>
      * 
-     * <p>{@code dictBuffer} can be released after {@code ZSTD_CDict} creation, since its content is copied within CDict.</p>
+     * <p>{@code dictBuffer} can be released after {@code ZSTD_CDict} creation, because its content is copied within CDict. Consider experimental function
+     * {@link ZstdX#ZSTD_createCDict_byReference createCDict_byReference} if you prefer to not duplicate {@code dictBuffer} content.</p>
      * 
-     * <p>Note: A {@code ZSTD_CDict} can be created with an empty dictionary, but it is inefficient for small data.</p>
+     * <p>Note: A {@code ZSTD_CDict} can be created from an empty {@code dictBuffer}, but it is inefficient when used to compress small data.</p>
      */
     @NativeType("ZSTD_CDict *")
     public static long ZSTD_createCDict(@NativeType("void const *") ByteBuffer dictBuffer, int compressionLevel) {
@@ -396,13 +404,9 @@ public class Zstd {
     public static native long nZSTD_compress_usingCDict(long cctx, long dst, long dstCapacity, long src, long srcSize, long cdict);
 
     /**
-     * Compression using a digested Dictionary.
+     * Compression using a digested Dictionary. Recommended when same dictionary is used multiple times.
      * 
-     * <p>Faster startup than {@link #ZSTD_compress_usingDict compress_usingDict}, recommended when same dictionary is used multiple times. Note that compression level is decided during
-     * dictionary creation. Frame parameters are hardcoded ({@code dictID=yes, contentSize=yes, checksum=no})</p>
-     * 
-     * <p>Note: {@code ZSTD_compress_usingCDict()} can be used with a {@code ZSTD_CDict} created from an empty dictionary. But it is inefficient for small data,
-     * and it is recommended to use {@link #ZSTD_compressCCtx compressCCtx}.</p>
+     * <p>Compression level is <b>decided at dictionary creation time</b>, and frame parameters are hardcoded ({@code dictID=yes, contentSize=yes, checksum=no})</p>
      */
     @NativeType("size_t")
     public static long ZSTD_compress_usingCDict(@NativeType("ZSTD_CCtx *") long cctx, @NativeType("void *") ByteBuffer dst, @NativeType("void const *") ByteBuffer src, @NativeType("ZSTD_CDict const *") long cdict) {
@@ -450,7 +454,7 @@ public class Zstd {
     /**
      * Decompression using a digested Dictionary.
      * 
-     * <p>Faster startup than {@link #ZSTD_decompress_usingDict decompress_usingDict}, recommended when same dictionary is used multiple times.</p>
+     * <p>Recommended when same dictionary is used multiple times.</p>
      */
     @NativeType("size_t")
     public static long ZSTD_decompress_usingDDict(@NativeType("ZSTD_DCtx *") long dctx, @NativeType("void *") ByteBuffer dst, @NativeType("void const *") ByteBuffer src, @NativeType("ZSTD_DDict const *") long ddict) {
@@ -521,7 +525,7 @@ public class Zstd {
      *         <p>Notes:</p>
      *         
      *         <ol>
-     *         <li>it's just a hint, to help latency a little, any other value will work fine</li>
+     *         <li>it's just a hint, to help latency a little, any value will work fine</li>
      *         <li>size hint is guaranteed to be &le; {@link #ZSTD_CStreamInSize CStreamInSize}</li>
      *         </ol>
      */
@@ -647,14 +651,14 @@ same, and follows same rules as {@link #ZSTD_flushStream flushStream}.</p>
      * Use {@code ZSTD_decompressStream()} repetitively to consume your input.
      * 
      * <p>The function will update both {@code pos} fields. If {@code input.pos < input.size}, some input has not been consumed. It's up to the caller to present
-     * again remaining data. The function tries to flush all data decoded immediately, respecting buffer sizes.  If {@code output.pos < output.size}, decoder
-     * has flushed everything it could. But if {@code output.pos == output.size}, there is no such guarantee, it's likely that some decoded data was not
-     * flushed and still remains within internal buffers. In which case, call {@code ZSTD_decompressStream()} again to flush whatever remains in the buffer.
-     * When no additional input is provided, amount of data flushed is necessarily &le; {@link ZstdX#ZSTD_BLOCKSIZE_MAX BLOCKSIZE_MAX}.</p>
+     * again remaining data. The function tries to flush all data decoded immediately, respecting output buffer size. If {@code output.pos < output.size},
+     * decoder has flushed everything it could. But if {@code output.pos == output.size}, there might be some data left within internal buffers. In which
+     * case, call {@code ZSTD_decompressStream()} again to flush whatever remains in the buffer. With no additional input provided, amount of data flushed is
+     * necessarily &le; {@link ZstdX#ZSTD_BLOCKSIZE_MAX BLOCKSIZE_MAX}.</p>
      *
      * @return 0 when a frame is completely decoded and fully flushed, an error code, which can be tested using {@link #ZSTD_isError isError}, any other value &gt; 0, which means there
-     *         is still some decoding to do to complete current frame. The return value is a suggested next input size (a hint to improve latency) that will never
-     *         load more than the current frame.
+     *         is still some decoding to do to complete current frame. The return value is a suggested next input size (just a hint to improve latency) that will
+     *         never request more than the remaining frame size.
      */
     @NativeType("size_t")
     public static long ZSTD_decompressStream(@NativeType("ZSTD_DStream *") long zds, @NativeType("ZSTD_outBuffer *") ZSTDOutBuffer output, @NativeType("ZSTD_inBuffer *") ZSTDInBuffer input) {

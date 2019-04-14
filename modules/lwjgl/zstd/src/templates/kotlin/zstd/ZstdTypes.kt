@@ -7,37 +7,75 @@ package zstd
 import org.lwjgl.generator.*
 
 val ZSTD_CCtx = "ZSTD_CCtx".opaque
-val ZSTD_DCtx = "ZSTD_DCtx".opaque
+val ZSTD_CCtx_params = "ZSTD_CCtx_params".opaque
 val ZSTD_CDict = "ZSTD_CDict".opaque
+val ZSTD_CStream = typedef(ZSTD_CCtx, "ZSTD_CStream")
+val ZSTD_DCtx = "ZSTD_DCtx".opaque
 val ZSTD_DDict = "ZSTD_DDict".opaque
-val ZSTD_CStream = "ZSTD_CStream".opaque
+val ZSTD_DStream = typedef(ZSTD_DCtx, "ZSTD_DStream")
+
+val ZSTD_ErrorCode = "ZSTD_ErrorCode".enumType
+
+val ZSTD_EndDirective = "ZSTD_EndDirective".enumType
+val ZSTD_ResetDirective = "ZSTD_ResetDirective".enumType
+val ZSTD_cParameter = "ZSTD_cParameter".enumType
+val ZSTD_dParameter = "ZSTD_dParameter".enumType
+val ZSTD_dictAttachPref_e = "ZSTD_dictAttachPref_e".enumType
+val ZSTD_dictContentType_e = "ZSTD_dictContentType_e".enumType
+val ZSTD_dictLoadMethod_e = "ZSTD_dictLoadMethod_e".enumType
+val ZSTD_format_e = "ZSTD_format_e".enumType
+val ZSTD_frameType_e = "ZSTD_frameType_e".enumType
+val ZSTD_nextInputType_e = "ZSTD_nextInputType_e".enumType
+val ZSTD_strategy = "ZSTD_strategy".enumType
 
 val ZSTD_inBuffer = struct(Module.ZSTD, "ZSTDInBuffer", nativeName = "ZSTD_inBuffer") {
     void.const.p("src", "start of input buffer")
     AutoSize("src")..size_t("size", "size of input buffer")
-    size_t("pos", "position where reading stopped. Will be updated. Necessarily {@code 0 <= pos <= size}")
+    size_t("pos", "position where reading stopped. Will be updated. Necessarily 0 &le; {@code pos} &le; {@code size}")
 }
 
 val ZSTD_outBuffer = struct(Module.ZSTD, "ZSTDOutBuffer", nativeName = "ZSTD_outBuffer") {
+    documentation = ""
+
     void.p("dst", "start of output buffer")
     AutoSize("dst")..size_t("size", "size of output buffer")
-    size_t("pos", "position where writing stopped. Will be updated. Necessarily {@code 0 <= pos <= size}")
+    size_t("pos", "position where writing stopped. Will be updated. Necessarily 0 &le; {@code pos} &le; {@code size}")
 }
 
-val ZSTD_DStream = "ZSTD_DStream".opaque
+val ZSTD_bounds = struct(Module.ZSTD, "ZSTDBounds", nativeName = "ZSTD_bounds", mutable = false) {
+    documentation = ""
 
-// Experimental API
+    size_t("error", "")
+    int("lowerBound", "")
+    int("upperBound", "")
+}
 
-val ZSTD_strategy = "ZSTD_strategy".enumType
-val ZSTD_nextInputType_e = "ZSTD_nextInputType_e".enumType
-val ZSTD_format_e = "ZSTD_format_e".enumType
-val ZSTD_cParameter = "ZSTD_cParameter".enumType
-val ZSTD_dictLoadMethod_e = "ZSTD_dictLoadMethod_e".enumType
-val ZSTD_dictContentType_e = "ZSTD_dictContentType_e".enumType
-val ZSTD_EndDirective = "ZSTD_EndDirective".enumType
-val ZSTD_frameType_e = "ZSTD_frameType_e".enumType
+val ZSTD_compressionParameters = struct(Module.ZSTD, "ZSTDCompressionParameters", nativeName = "ZSTD_compressionParameters") {
+    documentation = ""
 
-val ZSTD_CCtx_params = "ZSTD_CCtx_params".opaque
+    unsigned_int("windowLog", "largest match distance: larger == more compression, more memory needed during decompression")
+    unsigned_int("chainLog", "fully searched segment: larger == more compression, slower, more memory (useless for fast)")
+    unsigned_int("hashLog", "dispatch table: larger == faster, more memory")
+    unsigned_int("searchLog", "nb of searches: larger == more compression, slower")
+    unsigned_int("minMatch", "match length searched: larger == faster decompression, sometimes less compression")
+    unsigned_int("targetLength", "acceptable match size for optimal parser (only): larger == more compression, slower")
+    ZSTD_strategy("strategy", "see {@code ZSTD_strategy} definition")
+}
+
+val ZSTD_frameParameters = struct(Module.ZSTD, "ZSTDFrameParameters", nativeName = "ZSTD_frameParameters") {
+    documentation = ""
+
+    int("contentSizeFlag", "1: content size will be in frame header (when known)")
+    int("checksumFlag", "1: generate a 32-bits checksum using XXH64 algorithm at end of frame, for error detection")
+    int("noDictIDFlag", "1: no {@code dictID} will be saved into frame header ({@code dictID} is only useful for dictionary compression)")
+}
+
+val ZSTD_parameters = struct(Module.ZSTD, "ZSTDParameters", nativeName = "ZSTD_parameters") {
+    documentation = ""
+
+    ZSTD_compressionParameters("cParams", "")
+    ZSTD_frameParameters("fParams", "")
+}
 
 val ZSTD_allocFunction = Module.ZSTD.callback {
     void.p(
@@ -48,11 +86,13 @@ val ZSTD_allocFunction = Module.ZSTD.callback {
         size_t("size", ""),
 
         nativeType = "ZSTD_allocFunction"
-    )
+    ) {
+        documentation = "Instances of this interface may be passed to the ##ZSTDCustomMem struct."
+    }
 }
 
 val ZSTD_freeFunction = Module.ZSTD.callback {
-    opaque_p(
+    void(
         "ZSTDFreeFunction",
         "",
 
@@ -60,28 +100,9 @@ val ZSTD_freeFunction = Module.ZSTD.callback {
         void.p("address", ""),
 
         nativeType = "ZSTD_freeFunction"
-    )
-}
-
-val ZSTD_compressionParameters = struct(Module.ZSTD, "ZSTDCompressionParameters", nativeName = "ZSTD_compressionParameters") {
-    unsigned("windowLog", "largest match distance : larger == more compression, more memory needed during decompression")
-    unsigned("chainLog", "fully searched segment : larger == more compression, slower, more memory (useless for fast)")
-    unsigned("hashLog", "dispatch table : larger == faster, more memory")
-    unsigned("searchLog", "nb of searches : larger == more compression, slower")
-    unsigned("searchLength", "match length searched : larger == faster decompression, sometimes less compression")
-    unsigned("targetLength", "acceptable match size for optimal parser (only) : larger == more compression, slower")
-    ZSTD_strategy("strategy", "")
-}
-
-val ZSTD_frameParameters = struct(Module.ZSTD, "ZSTDFrameParameters", nativeName = "ZSTD_frameParameters") {
-    unsignedb("contentSizeFlag", "1: content size will be in frame header (when known)")
-    unsignedb("checksumFlag", "1: generate a 32-bits checksum at end of frame, for error detection")
-    unsignedb("noDictIDFlag", "1: no dictID will be saved into frame header (if dictionary compression)")
-}
-
-val ZSTD_parameters = struct(Module.ZSTD, "ZSTDParameters", nativeName = "ZSTD_parameters") {
-    ZSTD_compressionParameters("cParams", "")
-    ZSTD_frameParameters("fParams", "")
+    ) {
+        documentation = "Instances of this interface may be passed to the ##ZSTDCustomMem struct."
+    }
 }
 
 val ZSTD_customMem = struct(Module.ZSTD, "ZSTDCustomMem", nativeName = "ZSTD_customMem") {
@@ -90,25 +111,21 @@ val ZSTD_customMem = struct(Module.ZSTD, "ZSTDCustomMem", nativeName = "ZSTD_cus
     opaque_p("opaque", "")
 }
 
-val ZSTD_frameHeader = struct(Module.ZSTD, "ZSTDFrameHeader", nativeName = "ZSTD_frameHeader", mutable = false) {
-    unsigned_long_long("frameContentSize", "if #CONTENTSIZE_UNKNOWN, it means this field is not available. 0 means \"empty\"")
-    unsigned_long_long("windowSize", "can be very large, up to &le; {@code frameContentSize}")
-    unsigned("blockSizeMax", "")
-    ZSTD_frameType_e("frameType", "if #skippableFrame, {@code frameContentSize} is the size of skippable content")
-    unsigned("headerSize", "")
-    unsigned("dictID", "")
-    unsigned("checksumFlag", "")
-}
-
 val ZSTD_frameProgression = struct(Module.ZSTD, "ZSTDFrameProgression", nativeName = "ZSTD_frameProgression", mutable = false) {
     unsigned_long_long("ingested", "nb input bytes read and buffered")
     unsigned_long_long("consumed", "nb input bytes actually compressed")
     unsigned_long_long("produced", "nb of compressed bytes generated and buffered")
     unsigned_long_long("flushed", "nb of compressed bytes flushed: not provided; can be tracked from caller side")
-    unsigned("currentJobID", "MT only: latest started job nb")
-    unsigned("nbActiveWorkers", "MT only: nb of workers actively compressing at probe time")
+    unsigned_int("currentJobID", "mT only: latest started job nb")
+    unsigned_int("nbActiveWorkers", "mT only: nb of workers actively compressing at probe time")
 }
 
-// zstd_errors.h
-
-val ZSTD_ErrorCode = "ZSTD_ErrorCode".enumType
+val ZSTD_frameHeader = struct(Module.ZSTD, "ZSTDFrameHeader", nativeName = "ZSTD_frameHeader", mutable = false) {
+    unsigned_long_long("frameContentSize", "if == #CONTENTSIZE_UNKNOWN, it means this field is not available. 0 means \"empty\"")
+    unsigned_long_long("windowSize", "can be very large, up to &le; {@code frameContentSize}")
+    unsigned_int("blockSizeMax", "")
+    ZSTD_frameType_e("frameType", "if == #skippableFrame, {@code frameContentSize} is the size of skippable content")
+    unsigned_int("headerSize", "")
+    unsigned_int("dictID", "")
+    unsigned_int("checksumFlag", "")
+}
