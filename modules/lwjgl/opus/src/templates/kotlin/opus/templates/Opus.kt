@@ -1514,6 +1514,8 @@ if (nb_packets > 0)
     /**
      * Gets the DTX state of the encoder.
      *
+     * <p>Returns whether the last encoded frame was either a comfort noise update during DTX or not encoded because of DTX.</p>
+     *
      * @return one of the following values:
      * <dl>
      * <dt>0</dt><dd>The encoder is not in DTX.</dd>
