@@ -90,8 +90,8 @@ public class ZstdX {
      * Special: value 0 means "use default {@code minMatchLength}".
      * </li>
      * <li>{@link #ZSTD_c_targetLength c_targetLength} - 
-     * Impact of this field depends on strategy. For strategies btopt, btultra & btultra2: Length of Match considered "good enough" to stop search. Larger
-     * values make compression stronger, and slower. For strategy fast: Distance between match sampling. Larger values make compression faster, and
+     * Impact of this field depends on strategy. For strategies btopt, btultra &amp; btultra2: Length of Match considered "good enough" to stop search.
+     * Larger values make compression stronger, and slower. For strategy fast: Distance between match sampling. Larger values make compression faster, and
      * weaker. Special: value 0 means "use default targetLength".
      * </li>
      * <li>{@link #ZSTD_c_strategy c_strategy} - 
@@ -127,7 +127,7 @@ public class ZstdX {
      * <li>{@link #ZSTD_c_checksumFlag c_checksumFlag} - A 32-bits checksum of content is written at end of frame (default:0)</li>
      * <li>{@link #ZSTD_c_dictIDFlag c_dictIDFlag} - When applicable, dictionary's ID is written into frame header (default:1)</li>
      * <li>{@link #ZSTD_c_nbWorkers c_nbWorkers} - 
-     * Select how many threads will be spawned to compress in parallel. When {@code nbWorkers >= 1}, triggers asynchronous mode when used with
+     * Select how many threads will be spawned to compress in parallel. When {@code nbWorkers &ge; 1}, triggers asynchronous mode when used with
      * {@code ZSTD_compressStream*()}: {@code ZSTD_compressStream*()} consumes input and flush output if possible, but immediately gives back control to
      * caller, while compression work is performed in parallel, within worker threads. (note: a strong exception to this rule is when first invocation of
      * {@link #ZSTD_compressStream2 compressStream2} sets {@link #ZSTD_e_end e_end}: in which case, {@code ZSTD_compressStream2()} delegates to {@link #ZSTD_compress2 compress2}, which is always a blocking call). More
@@ -135,14 +135,14 @@ public class ZstdX {
      * performed inside Caller's thread, all invocations are blocking.
      * </li>
      * <li>{@link #ZSTD_c_jobSize c_jobSize} - 
-     * Size of a compression job. This value is enforced only when {@code nbWorkers >= 1}. Each compression job is completed in parallel, so this value
+     * Size of a compression job. This value is enforced only when {@code nbWorkers &ge; 1}. Each compression job is completed in parallel, so this value
      * can indirectly impact the nb of active threads. 0 means default, which is dynamically determined based on compression parameters. Job size must be
      * a minimum of overlap size, or 1 MB, whichever is largest. The minimum size is automatically and transparently enforced.
      * </li>
      * <li>{@link #ZSTD_c_overlapLog c_overlapLog} - 
      * Control the overlap size, as a fraction of window size. The overlap size is an amount of data reloaded from previous job at the beginning of a new
-     * job. It helps preserve compression ratio, while each job is compressed in parallel. This value is enforced only when {@code nbWorkers >= 1}. Larger
-     * values increase compression ratio, but decrease speed. Possible values range from 0 to 9:
+     * job. It helps preserve compression ratio, while each job is compressed in parallel. This value is enforced only when {@code nbWorkers &ge; 1}.
+     * Larger values increase compression ratio, but decrease speed. Possible values range from 0 to 9:
      * 
      * <ul>
      * <li>0 means "default" : value will be determined by the library, depending on strategy</li>
@@ -571,7 +571,7 @@ public class ZstdX {
      * 
      * <p>All parameters have valid bounds. Bounds can be queried using {@link #ZSTD_cParam_getBounds cParam_getBounds}. Providing a value beyond bound will either clamp it, or trigger an
      * error (depending on parameter). Setting a parameter is generally only possible during frame initialization (before starting compression). Exception:
-     * when using multi-threading mode (nbWorkers &ge; 1), the following parameters can be updated <b>during</b> compression (within same frame): =>
+     * when using multi-threading mode (nbWorkers &ge; 1), the following parameters can be updated <b>during</b> compression (within same frame): =&lt;
      * compressionLevel, hashLog, chainLog, searchLog, minMatch, targetLength and strategy. new parameters will be active for next job only (after a
      * {@code flush()}).</p>
      *
@@ -775,7 +775,7 @@ public class ZstdX {
      * - {@code outpot->pos} must be &le; {@code dstCapacity}, {@code input->pos} must be &le; {@code srcSize}.
      * - {@code outpot->pos} and {@code input->pos} will be updated. They are guaranteed to remain below their respective limit.
      * - When {@code nbWorkers==0} (default), function is blocking: it completes its job before returning to caller.
-     * - When {@code nbWorkers>=1}, function is non-blocking: it just acquires a copy of input, and distributes jobs to internal worker threads, flush
+     * - When {@code nbWorkers&ge;1}, function is non-blocking: it just acquires a copy of input, and distributes jobs to internal worker threads, flush
      * whatever is available, and then immediately returns, just indicating that there is some data remaining to be flushed. The function nonetheless
      * guarantees forward progress: it will return only after it reads or write at least 1+ byte.
      * - Exception: if the first call requests a {@link #ZSTD_e_end e_end} directive and provides enough {@code dstCapacity}, the function delegates to {@link #ZSTD_compress2 compress2} which is
