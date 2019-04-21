@@ -1348,8 +1348,8 @@ public class Vma {
      */
     public static final int
         VMA_MEMORY_USAGE_UNKNOWN    = 0,
-        VMA_MEMORY_USAGE_GPU_ONLY   = 2,
-        VMA_MEMORY_USAGE_CPU_ONLY   = 1,
+        VMA_MEMORY_USAGE_GPU_ONLY   = 1,
+        VMA_MEMORY_USAGE_CPU_ONLY   = 2,
         VMA_MEMORY_USAGE_CPU_TO_GPU = 3,
         VMA_MEMORY_USAGE_GPU_TO_CPU = 4;
 

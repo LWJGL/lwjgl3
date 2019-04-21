@@ -1378,8 +1378,7 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
             )}
             Allocation may still end up in {@code HOST_VISIBLE} memory on some implementations. In such case, you are free to map it. You can use
             #ALLOCATION_CREATE_MAPPED_BIT with this usage type.
-            """,
-            "2"
+            """
         ),
         "MEMORY_USAGE_CPU_ONLY".enum(
             """
@@ -1390,8 +1389,7 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
             of {@code D3D12_HEAP_TYPE_UPLOAD}.
 
             Usage: Staging copy of resources used as transfer source.
-            """,
-            "1"
+            """
         ),
         "MEMORY_USAGE_CPU_TO_GPU".enum(
             """
@@ -1401,8 +1399,7 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
 
             Usage: Resources written frequently by host (dynamic), read by device. E.g. textures, vertex buffers, uniform buffers updated every frame or every
             draw call.
-            """,
-            "3"
+            """
         ),
         "MEMORY_USAGE_GPU_TO_CPU".enum(
             """
@@ -1418,8 +1415,7 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
                 detection.
                 """
             )}
-            """,
-            "4"
+            """
         )
     )
 
