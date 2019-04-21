@@ -702,14 +702,22 @@ for(uint32_t i = 0; i < allocCount; ++i)
 
         <h4>Additional notes</h4>
 
-        While using defragmentation, you may experience validation layer warnings, which you just need to ignore.
+        It is only legal to defragment allocations bound to:
+        ${ul(
+            "buffers",
+            """
+            images created with {@code VK_IMAGE_CREATE_ALIAS_BIT}, {@code VK_IMAGE_TILING_LINEAR}, and being currently in {@code VK_IMAGE_LAYOUT_GENERAL} or
+            {@code VK_IMAGE_LAYOUT_PREINITIALIZED}.
+            """
+        )}
 
-        If you defragment allocations bound to images, these images should be created with {@code VK_IMAGE_CREATE_ALIAS_BIT} flag, to make sure that new image
-        created with same parameters and pointing to data copied to another memory region will interpret its contents consistently. Otherwise you may
-        experience corrupted data on some implementations, e.g. due to different pixel swizzling used internally by the graphics driver.
+        Defragmentation of images created with {@code VK_IMAGE_TILING_OPTIMAL} or in any other layout may give undefined results.
 
         If you defragment allocations bound to images, new images to be bound to new memory region after defragmentation should be created with
-        {@code VK_IMAGE_LAYOUT_PREINITIALIZED} and then transitioned to their original layout from before defragmentation using an image memory barrier.
+        {@code VK_IMAGE_LAYOUT_PREINITIALIZED} and then transitioned to their original layout from before defragmentation if needed using an image memory
+        barrier.
+
+        While using defragmentation, you may experience validation layer warnings, which you just need to ignore.
 
         Please don't expect memory to be fully compacted after defragmentation. Algorithms inside are based on some heuristics that try to maximize number of
         Vulkan memory blocks to make totally empty to release them, as well as to maximize continuous empty space inside remaining blocks, while minimizing the

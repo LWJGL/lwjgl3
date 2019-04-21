@@ -907,19 +907,22 @@ in function vmaDefragmentationBegin().
 
 \section defragmentation_additional_notes Additional notes
 
-While using defragmentation, you may experience validation layer warnings, which you just need to ignore.
-See [Validation layer warnings](@ref general_considerations_validation_layer_warnings).
+It is only legal to defragment allocations bound to:
 
-If you defragment allocations bound to images, these images should be created with
-`VK_IMAGE_CREATE_ALIAS_BIT` flag, to make sure that new image created with same
-parameters and pointing to data copied to another memory region will interpret
-its contents consistently. Otherwise you may experience corrupted data on some
-implementations, e.g. due to different pixel swizzling used internally by the graphics driver.
+- buffers
+- images created with `VK_IMAGE_CREATE_ALIAS_BIT`, `VK_IMAGE_TILING_LINEAR`, and
+  being currently in `VK_IMAGE_LAYOUT_GENERAL` or `VK_IMAGE_LAYOUT_PREINITIALIZED`.
+
+Defragmentation of images created with `VK_IMAGE_TILING_OPTIMAL` or in any other
+layout may give undefined results.
 
 If you defragment allocations bound to images, new images to be bound to new
 memory region after defragmentation should be created with `VK_IMAGE_LAYOUT_PREINITIALIZED`
-and then transitioned to their original layout from before defragmentation using
-an image memory barrier.
+and then transitioned to their original layout from before defragmentation if
+needed using an image memory barrier.
+
+While using defragmentation, you may experience validation layer warnings, which you just need to ignore.
+See [Validation layer warnings](@ref general_considerations_validation_layer_warnings).
 
 Please don't expect memory to be fully compacted after defragmentation.
 Algorithms inside are based on some heuristics that try to maximize number of Vulkan
@@ -2937,6 +2940,9 @@ Warning! Between the call to vmaDefragmentationBegin() and vmaDefragmentationEnd
   They become valid after call to vmaDefragmentationEnd().
 - If `pInfo->commandBuffer` is not null, you must submit that command buffer
   and make sure it finished execution before calling vmaDefragmentationEnd().
+
+For more information and important limitations regarding defragmentation, see documentation chapter:
+[Defragmentation](@ref defragmentation).
 */
 VkResult vmaDefragmentationBegin(
     VmaAllocator allocator,
@@ -3200,7 +3206,6 @@ remove them if not needed.
 #include <cassert> // for assert
 #include <algorithm> // for min, max
 #include <mutex>
-#include <atomic> // for std::atomic
 
 #ifndef VMA_NULL
    // Value used as null pointer. Define it to e.g.: nullptr, NULL, 0, (void*)0.
@@ -3390,7 +3395,8 @@ If providing your own implementation, you need to implement a subset of std::ato
 - bool compare_exchange_weak(uint32_t& expected, uint32_t desired)
 */
 #ifndef VMA_ATOMIC_UINT32
-   #define VMA_ATOMIC_UINT32 std::atomic<uint32_t>
+    #include <atomic>
+    #define VMA_ATOMIC_UINT32 std::atomic<uint32_t>
 #endif
 
 #ifndef VMA_DEBUG_ALWAYS_DEDICATED_MEMORY
@@ -3736,6 +3742,18 @@ static bool VmaValidateMagicValue(const void* pData, VkDeviceSize offset)
         }
     }
     return true;
+}
+
+/*
+Fills structure with parameters of an example buffer to be used for transfers
+during GPU memory defragmentation.
+*/
+static void VmaFillGpuDefragmentationBufferCreateInfo(VkBufferCreateInfo& outBufCreateInfo)
+{
+    memset(&outBufCreateInfo, 0, sizeof(outBufCreateInfo));
+    outBufCreateInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
+    outBufCreateInfo.usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
+    outBufCreateInfo.size = (VkDeviceSize)VMA_DEFAULT_LARGE_HEAP_BLOCK_SIZE; // Example size.
 }
 
 // Helper RAII class to lock a mutex in constructor and unlock it in destructor (at the end of scope).
@@ -6773,11 +6791,18 @@ public:
 
     void FillAllocation(const VmaAllocation hAllocation, uint8_t pattern);
 
+    /*
+    Returns bit mask of memory types that can support defragmentation on GPU as
+    they support creation of required buffer for copy operations.
+    */
+    uint32_t GetGpuDefragmentationMemoryTypeBits();
+
 private:
     VkDeviceSize m_PreferredLargeHeapBlockSize;
 
     VkPhysicalDevice m_PhysicalDevice;
     VMA_ATOMIC_UINT32 m_CurrentFrameIndex;
+    VMA_ATOMIC_UINT32 m_GpuDefragmentationMemoryTypeBits; // UINT32_MAX means uninitialized.
 
     VMA_RW_MUTEX m_PoolsMutex;
     // Protected by m_PoolsMutex. Sorted by pointer value.
@@ -6832,6 +6857,12 @@ private:
 
     // Tries to free pMemory as Dedicated Memory. Returns true if found and freed.
     void FreeDedicatedMemory(VmaAllocation allocation);
+
+    /*
+    Calculates and returns bit mask of memory types that can support defragmentation
+    on GPU as they support creation of required buffer for copy operations.
+    */
+    uint32_t CalculateGpuDefragmentationMemoryTypeBits() const;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -12260,9 +12291,8 @@ void VmaBlockVector::ApplyDefragmentationMovesGpu(
 
     // Go over all blocks. Create and bind buffer for whole block if necessary.
     {
-        VkBufferCreateInfo bufCreateInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
-        bufCreateInfo.usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT |
-            VK_BUFFER_USAGE_TRANSFER_DST_BIT;
+        VkBufferCreateInfo bufCreateInfo;
+        VmaFillGpuDefragmentationBufferCreateInfo(bufCreateInfo);
 
         for(size_t blockIndex = 0; pDefragCtx->res == VK_SUCCESS && blockIndex < blockCount; ++blockIndex)
         {
@@ -12422,7 +12452,8 @@ void VmaBlockVector::Defragment(
     const bool canDefragmentOnCpu = maxCpuBytesToMove > 0 && maxCpuAllocationsToMove > 0 &&
         isHostVisible;
     const bool canDefragmentOnGpu = maxGpuBytesToMove > 0 && maxGpuAllocationsToMove > 0 &&
-        !IsCorruptionDetectionEnabled();
+        !IsCorruptionDetectionEnabled() &&
+        ((1u << m_MemoryTypeIndex) & m_hAllocator->GetGpuDefragmentationMemoryTypeBits()) != 0;
 
     // There are options to defragment this memory type.
     if(canDefragmentOnCpu || canDefragmentOnGpu)
@@ -14158,6 +14189,7 @@ VmaAllocator_T::VmaAllocator_T(const VmaAllocatorCreateInfo* pCreateInfo) :
     m_PreferredLargeHeapBlockSize(0),
     m_PhysicalDevice(pCreateInfo->physicalDevice),
     m_CurrentFrameIndex(0),
+    m_GpuDefragmentationMemoryTypeBits(UINT32_MAX),
     m_Pools(VmaStlAllocator<VmaPool>(GetAllocationCallbacks())),
     m_NextPoolId(0)
 #if VMA_RECORDING_ENABLED
@@ -15551,6 +15583,31 @@ void VmaAllocator_T::FreeDedicatedMemory(VmaAllocation allocation)
     VMA_DEBUG_LOG("    Freed DedicatedMemory MemoryTypeIndex=%u", memTypeIndex);
 }
 
+uint32_t VmaAllocator_T::CalculateGpuDefragmentationMemoryTypeBits() const
+{
+    VkBufferCreateInfo dummyBufCreateInfo;
+    VmaFillGpuDefragmentationBufferCreateInfo(dummyBufCreateInfo);
+
+    uint32_t memoryTypeBits = 0;
+
+    // Create buffer.
+    VkBuffer buf = VMA_NULL;
+    VkResult res = (*GetVulkanFunctions().vkCreateBuffer)(
+        m_hDevice, &dummyBufCreateInfo, GetAllocationCallbacks(), &buf);
+    if(res == VK_SUCCESS)
+    {
+        // Query for supported memory types.
+        VkMemoryRequirements memReq;
+        (*GetVulkanFunctions().vkGetBufferMemoryRequirements)(m_hDevice, buf, &memReq);
+        memoryTypeBits = memReq.memoryTypeBits;
+
+        // Destroy buffer.
+        (*GetVulkanFunctions().vkDestroyBuffer)(m_hDevice, buf, GetAllocationCallbacks());
+    }
+
+    return memoryTypeBits;
+}
+
 void VmaAllocator_T::FillAllocation(const VmaAllocation hAllocation, uint8_t pattern)
 {
     if(VMA_DEBUG_INITIALIZE_ALLOCATIONS &&
@@ -15570,6 +15627,17 @@ void VmaAllocator_T::FillAllocation(const VmaAllocation hAllocation, uint8_t pat
             VMA_ASSERT(0 && "VMA_DEBUG_INITIALIZE_ALLOCATIONS is enabled, but couldn't map memory to fill allocation.");
         }
     }
+}
+
+uint32_t VmaAllocator_T::GetGpuDefragmentationMemoryTypeBits()
+{
+    uint32_t memoryTypeBits = m_GpuDefragmentationMemoryTypeBits.load();
+    if(memoryTypeBits == UINT32_MAX)
+    {
+        memoryTypeBits = CalculateGpuDefragmentationMemoryTypeBits();
+        m_GpuDefragmentationMemoryTypeBits.store(memoryTypeBits);
+    }
+    return memoryTypeBits;
 }
 
 #if VMA_STATS_STRING_ENABLED
