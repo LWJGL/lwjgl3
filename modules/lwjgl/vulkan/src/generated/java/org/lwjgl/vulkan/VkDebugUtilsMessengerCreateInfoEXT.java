@@ -60,6 +60,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code messageSeverity} <b>must</b> not be 0</li>
  * <li>{@code messageType} <b>must</b> be a valid combination of {@code VkDebugUtilsMessageTypeFlagBitsEXT} values</li>
  * <li>{@code messageType} <b>must</b> not be 0</li>
+ * <li>{@code pfnUserCallback} <b>must</b> be a valid {@link VkDebugUtilsMessengerCallbackEXT} value</li>
  * </ul>
  * 
  * <h5>See Also</h5>

@@ -11,11 +11,10 @@ import vulkan.*
 val AMD_gpu_shader_int16 = "AMDGPUShaderInt16".nativeClassVK("AMD_gpu_shader_int16", type = "device", postfix = AMD) {
     documentation =
         """
-        This extension adds support for the following SPIR-V extension in Vulkan:
+        This extension adds support for using 16-bit integer variables in shaders.
 
-        <ul>
-            <li>{@code SPV_AMD_gpu_shader_int16}</li>
-        </ul>
+        <h5>Deprecation by VK_KHR_shader_float16_int8</h5>
+        Functionality in this extension was included in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_shader_float16_int8">VK_KHR_shader_float16_int8</a> extension, when ##VkPhysicalDeviceFeatures{@code ::shaderInt16} and slink::VkPhysicalDeviceFloat16Int8FeaturesKHR{@code ::shaderFloat16} are enabled.
 
         <dl>
             <dt><b>Name String</b></dt>
@@ -28,11 +27,16 @@ val AMD_gpu_shader_int16 = "AMDGPUShaderInt16".nativeClassVK("AMD_gpu_shader_int
             <dd>133</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
+            </ul></dd>
+
+            <dt><b>Deprecation state</b></dt>
+            <dd><ul>
+                <li><em>Deprecated</em> by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_shader_float16_int8">VK_KHR_shader_float16_int8</a> extension</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -41,7 +45,7 @@ val AMD_gpu_shader_int16 = "AMDGPUShaderInt16".nativeClassVK("AMD_gpu_shader_int
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
-            <dd>2017-06-08</dd>
+            <dd>2019-04-11</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -60,13 +64,18 @@ val AMD_gpu_shader_int16 = "AMDGPUShaderInt16".nativeClassVK("AMD_gpu_shader_int
                 <li>Timothy Lottes, AMD</li>
                 <li>Zhi Cai, AMD</li>
             </ul></dd>
+
+            <dt><b>External Dependencies</b></dt>
+            <dd><ul>
+                <li><a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/AMD/SPV_AMD_gpu_shader_int16.html">{@code SPV_AMD_gpu_shader_int16}</a></li>
+            </ul></dd>
         </dl>
         """
 
     IntConstant(
         "The extension specification version.",
 
-        "AMD_GPU_SHADER_INT16_SPEC_VERSION".."1"
+        "AMD_GPU_SHADER_INT16_SPEC_VERSION".."2"
     )
 
     StringConstant(

@@ -11,11 +11,10 @@ import vulkan.*
 val AMD_gpu_shader_half_float = "AMDGPUShaderHalfFloat".nativeClassVK("AMD_gpu_shader_half_float", type = "device", postfix = AMD) {
     documentation =
         """
-        This extension adds support for the following SPIR-V extension in Vulkan:
+        This extension adds support for using half float variables in shaders.
 
-        <ul>
-            <li><a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/AMD/SPV_AMD_gpu_shader_half_float.html">{@code SPV_AMD_gpu_shader_half_float}</a></li>
-        </ul>
+        <h5>Deprecation by VK_KHR_shader_float16_int8</h5>
+        Functionality in this extension was included in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_shader_float16_int8">VK_KHR_shader_float16_int8</a> extension, when slink::VkPhysicalDeviceFloat16Int8FeaturesKHR{@code ::shaderFloat16} is enabled.
 
         <dl>
             <dt><b>Name String</b></dt>
@@ -28,11 +27,16 @@ val AMD_gpu_shader_half_float = "AMDGPUShaderHalfFloat".nativeClassVK("AMD_gpu_s
             <dd>37</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
+            </ul></dd>
+
+            <dt><b>Deprecation state</b></dt>
+            <dd><ul>
+                <li><em>Deprecated</em> by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_shader_float16_int8">VK_KHR_shader_float16_int8</a> extension</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -41,7 +45,7 @@ val AMD_gpu_shader_half_float = "AMDGPUShaderHalfFloat".nativeClassVK("AMD_gpu_s
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
-            <dd>2016-09-21</dd>
+            <dd>2019-04-11</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -55,13 +59,18 @@ val AMD_gpu_shader_half_float = "AMDGPUShaderHalfFloat".nativeClassVK("AMD_gpu_s
                 <li>Qun Lin, AMD</li>
                 <li>Rex Xu, AMD</li>
             </ul></dd>
+
+            <dt><b>External Dependencies</b></dt>
+            <dd><ul>
+                <li><a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/AMD/SPV_AMD_gpu_shader_half_float.html">{@code SPV_AMD_gpu_shader_half_float}</a></li>
+            </ul></dd>
         </dl>
         """
 
     IntConstant(
         "The extension specification version.",
 
-        "AMD_GPU_SHADER_HALF_FLOAT_SPEC_VERSION".."1"
+        "AMD_GPU_SHADER_HALF_FLOAT_SPEC_VERSION".."2"
     )
 
     StringConstant(

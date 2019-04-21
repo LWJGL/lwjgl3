@@ -48,6 +48,7 @@ val EXT_calibrated_timestamps = "EXTCalibratedTimestamps".nativeClassVK("EXT_cal
                 <li>Alan Harrison, AMD</li>
                 <li>Derrick Owens, AMD</li>
                 <li>Daniel Rakos, AMD</li>
+                <li>Jason Ekstrand, Intel</li>
                 <li>Keith Packard, Valve</li>
             </ul></dd>
         </dl>

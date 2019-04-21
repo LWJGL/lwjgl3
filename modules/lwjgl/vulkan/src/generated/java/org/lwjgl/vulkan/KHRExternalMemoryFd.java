@@ -113,7 +113,7 @@ public class KHRExternalMemoryFd {
      * <ul>
      * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
      * <li>{@code pGetFdInfo} <b>must</b> be a valid pointer to a valid {@link VkMemoryGetFdInfoKHR} structure</li>
-     * <li>{@code pFd} <b>must</b> be a valid pointer to a {@code int} value</li>
+     * <li>{@code pFd} <b>must</b> be a valid pointer to an {@code int} value</li>
      * </ul>
      * 
      * <h5>Return Codes</h5>

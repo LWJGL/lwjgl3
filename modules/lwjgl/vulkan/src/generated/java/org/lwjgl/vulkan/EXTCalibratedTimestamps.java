@@ -45,6 +45,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>Alan Harrison, AMD</li>
  * <li>Derrick Owens, AMD</li>
  * <li>Daniel Rakos, AMD</li>
+ * <li>Jason Ekstrand, Intel</li>
  * <li>Keith Packard, Valve</li>
  * </ul></dd>
  * </dl>

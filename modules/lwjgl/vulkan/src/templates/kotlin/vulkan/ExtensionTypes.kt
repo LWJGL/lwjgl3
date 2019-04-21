@@ -125,6 +125,7 @@ val VkGeometryInstanceFlagsNV = typedef(VkFlags, "VkGeometryInstanceFlagsNV")
 val VkBuildAccelerationStructureFlagsNV = typedef(VkFlags, "VkBuildAccelerationStructureFlagsNV")
 val VkPipelineCreationFeedbackFlagsEXT = typedef(VkFlags, "VkPipelineCreationFeedbackFlagsEXT")
 val VkResolveModeFlagsKHR = typedef(VkFlags, "VkResolveModeFlagsKHR")
+val VkHeadlessSurfaceCreateFlagsEXT = typedef(VkFlags, "VkHeadlessSurfaceCreateFlagsEXT")
 
 // Function pointer types
 val PFN_vkDebugReportCallbackEXT = Module.VULKAN.callback {
@@ -870,15 +871,11 @@ val VkDebugReportCallbackCreateInfoEXT = struct(Module.VULKAN, "VkDebugReportCal
 
         A callback may be called from multiple threads simultaneously (if the application is making Vulkan calls from multiple threads).
 
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code pfnCallback} <b>must</b> be a valid ##VkDebugReportCallbackEXT</li>
-        </ul>
-
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT</li>
             <li>{@code flags} <b>must</b> be a valid combination of {@code VkDebugReportFlagBitsEXT} values</li>
+            <li>{@code pfnCallback} <b>must</b> be a valid ##VkDebugReportCallbackEXT value</li>
         </ul>
 
         <h5>See Also</h5>
@@ -4436,6 +4433,7 @@ val VkDebugUtilsMessengerCreateInfoEXT = struct(Module.VULKAN, "VkDebugUtilsMess
             <li>{@code messageSeverity} <b>must</b> not be 0</li>
             <li>{@code messageType} <b>must</b> be a valid combination of {@code VkDebugUtilsMessageTypeFlagBitsEXT} values</li>
             <li>{@code messageType} <b>must</b> not be 0</li>
+            <li>{@code pfnUserCallback} <b>must</b> be a valid ##VkDebugUtilsMessengerCallbackEXT value</li>
         </ul>
 
         <h5>See Also</h5>
@@ -7451,6 +7449,27 @@ val VkSurfaceFullScreenExclusiveWin32InfoEXT = struct(Module.VULKAN, "VkSurfaceF
     VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     HMONITOR("hmonitor", "the Win32 {@code HMONITOR} handle identifying the display to create the surface with.")
+}
+
+val VkHeadlessSurfaceCreateInfoEXT = struct(Module.VULKAN, "VkHeadlessSurfaceCreateInfoEXT") {
+    documentation =
+        """
+        Structure specifying parameters of a newly created headless surface object.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_HEADLESS_SURFACE_CREATE_INFO_EXT</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code flags} <b>must</b> be 0</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #CreateHeadlessSurfaceEXT()
+        """
+
+    VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkHeadlessSurfaceCreateFlagsEXT("flags", "reserved for future use.")
 }
 
 val VkPhysicalDeviceHostQueryResetFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceHostQueryResetFeaturesEXT") {

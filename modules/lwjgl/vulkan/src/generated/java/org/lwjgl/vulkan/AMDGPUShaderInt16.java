@@ -6,11 +6,11 @@
 package org.lwjgl.vulkan;
 
 /**
- * This extension adds support for the following SPIR-V extension in Vulkan:
+ * This extension adds support for using 16-bit integer variables in shaders.
  * 
- * <ul>
- * <li>{@code SPV_AMD_gpu_shader_int16}</li>
- * </ul>
+ * <h5>Deprecation by VK_KHR_shader_float16_int8</h5>
+ * 
+ * <p>Functionality in this extension was included in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_shader_float16_int8">VK_KHR_shader_float16_int8</a> extension, when {@link VkPhysicalDeviceFeatures}{@code ::shaderInt16} and slink::VkPhysicalDeviceFloat16Int8FeaturesKHR{@code ::shaderFloat16} are enabled.</p>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -20,17 +20,21 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>133</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
+ * </ul></dd>
+ * <dt><b>Deprecation state</b></dt>
+ * <dd><ul>
+ * <li><em>Deprecated</em> by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_shader_float16_int8">VK_KHR_shader_float16_int8</a> extension</li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Qun Lin <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_gpu_shader_int16:%20&amp;body=@linqun%20">linqun</a></li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2017-06-08</dd>
+ * <dd>2019-04-11</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
@@ -46,12 +50,16 @@ package org.lwjgl.vulkan;
  * <li>Timothy Lottes, AMD</li>
  * <li>Zhi Cai, AMD</li>
  * </ul></dd>
+ * <dt><b>External Dependencies</b></dt>
+ * <dd><ul>
+ * <li><a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/AMD/SPV_AMD_gpu_shader_int16.html">{@code SPV_AMD_gpu_shader_int16}</a></li>
+ * </ul></dd>
  * </dl>
  */
 public final class AMDGPUShaderInt16 {
 
     /** The extension specification version. */
-    public static final int VK_AMD_GPU_SHADER_INT16_SPEC_VERSION = 1;
+    public static final int VK_AMD_GPU_SHADER_INT16_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String VK_AMD_GPU_SHADER_INT16_EXTENSION_NAME = "VK_AMD_gpu_shader_int16";

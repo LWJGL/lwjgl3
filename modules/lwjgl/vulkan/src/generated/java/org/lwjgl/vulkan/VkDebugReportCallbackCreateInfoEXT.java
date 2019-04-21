@@ -27,17 +27,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>A callback may be called from multiple threads simultaneously (if the application is making Vulkan calls from multiple threads).</p>
  * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code pfnCallback} <b>must</b> be a valid {@link VkDebugReportCallbackEXT}</li>
- * </ul>
- * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTDebugReport#VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT}</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkDebugReportFlagBitsEXT} values</li>
+ * <li>{@code pfnCallback} <b>must</b> be a valid {@link VkDebugReportCallbackEXT} value</li>
  * </ul>
  * 
  * <h5>See Also</h5>
