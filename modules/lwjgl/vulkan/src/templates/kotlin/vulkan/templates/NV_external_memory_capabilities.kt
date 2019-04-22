@@ -34,9 +34,9 @@ val NV_external_memory_capabilities = "NVExternalMemoryCapabilities".nativeClass
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
                 <li>
-                    <em>Deprecated</em> by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_external_memory_capabilities">VK_KHR_external_memory_capabilities</a> extension
+                    <em>Deprecated</em> by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#VK_KHR_external_memory_capabilities">VK_KHR_external_memory_capabilities</a> extension
                     <ul>
-                        <li>Which in turn was <em>promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#versions-1.1-promotions">Vulkan 1.1</a></li>
+                        <li>Which in turn was <em>promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#versions-1.1-promotions">Vulkan 1.1</a></li>
                     </ul>
                 </li>
             </ul></dd>

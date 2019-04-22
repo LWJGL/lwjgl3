@@ -88,7 +88,7 @@ public class EXTHostQueryReset {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#features-hostQueryReset">hostQueryReset</a> feature <b>must</b> be enabled</li>
+     * <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#features-hostQueryReset">hostQueryReset</a> feature <b>must</b> be enabled</li>
      * <li>{@code firstQuery} <b>must</b> be less than the number of queries in {@code queryPool}</li>
      * <li>The sum of {@code firstQuery} and {@code queryCount} <b>must</b> be less than or equal to the number of queries in {@code queryPool}</li>
      * </ul>

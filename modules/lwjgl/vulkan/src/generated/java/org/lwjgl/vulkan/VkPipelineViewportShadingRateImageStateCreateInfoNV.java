@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#features-multiViewport">multiple viewports</a> feature is not enabled, {@code viewportCount} <b>must</b> be 0 or 1</li>
+ * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#features-multiViewport">multiple viewports</a> feature is not enabled, {@code viewportCount} <b>must</b> be 0 or 1</li>
  * <li>{@code viewportCount} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxViewports}</li>
  * <li>If {@code shadingRateImageEnable} is {@link VK10#VK_TRUE TRUE}, {@code viewportCount} <b>must</b> be equal to the {@code viewportCount} member of {@link VkPipelineViewportStateCreateInfo}</li>
  * <li>If no element of the {@code pDynamicStates} member of {@code pDynamicState} is {@link NVShadingRateImage#VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV}, {@code pShadingRatePalettes} <b>must</b> be a valid pointer to an array of {@code viewportCount} {@link VkShadingRatePaletteNV} structures</li>

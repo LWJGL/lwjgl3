@@ -98,8 +98,8 @@ val AMD_rasterization_order = "AMDRasterizationOrder".nativeClassVK("AMD_rasteri
 
         <h5>Description</h5>
         <ul>
-            <li>#RASTERIZATION_ORDER_STRICT_AMD specifies that operations for each primitive in a subpass <b>must</b> occur in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#drawing-primitive-order">primitive order</a>.</li>
-            <li>#RASTERIZATION_ORDER_RELAXED_AMD specifies that operations for each primitive in a subpass <b>may</b> not occur in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#drawing-primitive-order">primitive order</a>.</li>
+            <li>#RASTERIZATION_ORDER_STRICT_AMD specifies that operations for each primitive in a subpass <b>must</b> occur in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#drawing-primitive-order">primitive order</a>.</li>
+            <li>#RASTERIZATION_ORDER_RELAXED_AMD specifies that operations for each primitive in a subpass <b>may</b> not occur in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#drawing-primitive-order">primitive order</a>.</li>
         </ul>
 
         <h5>See Also</h5>

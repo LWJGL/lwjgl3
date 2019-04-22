@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code scalarBlockLayout} &ndash; indicates that the implementation supports the layout of resource blocks in shaders using <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#interfaces-scalar-block-layout">scalar alignment</a>.</li>
+ * <li>{@code scalarBlockLayout} &ndash; indicates that the implementation supports the layout of resource blocks in shaders using <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#interfaces-scalar-block-layout">scalar alignment</a>.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

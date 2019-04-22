@@ -14,7 +14,7 @@ val AMD_draw_indirect_count = "AMDDrawIndirectCount".nativeClassVK("AMD_draw_ind
         This extension allows an application to source the number of draw calls for indirect draw calls from a buffer. This enables applications to generate arbitrary amounts of draw commands and execute them without host intervention.
 
         <h5>Promotion to VK_KHR_draw_indirect_count</h5>
-        All functionality in this extension is included in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_draw_indirect_count">VK_KHR_draw_indirect_count</a>, with the suffix changed to KHR. The original type, enum and command names are still available as aliases of the core functionality.
+        All functionality in this extension is included in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#VK_KHR_draw_indirect_count">VK_KHR_draw_indirect_count</a>, with the suffix changed to KHR. The original type, enum and command names are still available as aliases of the core functionality.
 
         <dl>
             <dt><b>Name String</b></dt>
@@ -36,7 +36,7 @@ val AMD_draw_indirect_count = "AMDDrawIndirectCount".nativeClassVK("AMD_draw_ind
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
-                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_draw_indirect_count">VK_KHR_draw_indirect_count</a> extension</li>
+                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#VK_KHR_draw_indirect_count">VK_KHR_draw_indirect_count</a> extension</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

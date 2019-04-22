@@ -42,7 +42,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code waitSemaphoreCount} &ndash; the number of semaphores upon which to wait before executing the sparse binding operations for the batch.</li>
- * <li>{@code pWaitSemaphores} &ndash; a pointer to an array of semaphores upon which to wait on before the sparse binding operations for this batch begin execution. If semaphores to wait on are provided, they define a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#synchronization-semaphores-waiting">semaphore wait operation</a>.</li>
+ * <li>{@code pWaitSemaphores} &ndash; a pointer to an array of semaphores upon which to wait on before the sparse binding operations for this batch begin execution. If semaphores to wait on are provided, they define a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-semaphores-waiting">semaphore wait operation</a>.</li>
  * <li>{@code bufferBindCount} &ndash; the number of sparse buffer bindings to perform in the batch.</li>
  * <li>{@code pBufferBinds} &ndash; a pointer to an array of {@link VkSparseBufferMemoryBindInfo} structures.</li>
  * <li>{@code imageOpaqueBindCount} &ndash; the number of opaque sparse image bindings to perform.</li>
@@ -50,7 +50,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code imageBindCount} &ndash; the number of sparse image bindings to perform.</li>
  * <li>{@code pImageBinds} &ndash; a pointer to an array of {@link VkSparseImageMemoryBindInfo} structures, indicating sparse image bindings to perform.</li>
  * <li>{@code signalSemaphoreCount} &ndash; the number of semaphores to be signaled once the sparse binding operations specified by the structure have completed execution.</li>
- * <li>{@code pSignalSemaphores} &ndash; a pointer to an array of semaphores which will be signaled when the sparse binding operations for this batch have completed execution. If semaphores to be signaled are provided, they define a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#synchronization-semaphores-signaling">semaphore signal operation</a>.</li>
+ * <li>{@code pSignalSemaphores} &ndash; a pointer to an array of semaphores which will be signaled when the sparse binding operations for this batch have completed execution. If semaphores to be signaled are provided, they define a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-semaphores-signaling">semaphore signal operation</a>.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

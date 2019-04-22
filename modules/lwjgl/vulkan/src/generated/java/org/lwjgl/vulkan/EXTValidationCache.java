@@ -172,7 +172,7 @@ public class EXTValidationCache {
      *
      * @param device           the logical device that creates the validation cache object.
      * @param pCreateInfo      a pointer to a {@link VkValidationCacheCreateInfoEXT} structure that contains the initial parameters for the validation cache object.
-     * @param pAllocator       controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
+     * @param pAllocator       controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      * @param pValidationCache a pointer to a {@code VkValidationCacheEXT} handle in which the resulting validation cache object is returned.
      */
     @NativeType("VkResult")
@@ -236,7 +236,7 @@ public class EXTValidationCache {
      *
      * @param device          the logical device that destroys the validation cache object.
      * @param validationCache the handle of the validation cache to destroy.
-     * @param pAllocator      controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
+     * @param pAllocator      controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      */
     public static void vkDestroyValidationCacheEXT(VkDevice device, @NativeType("VkValidationCacheEXT") long validationCache, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
         nvkDestroyValidationCacheEXT(device, validationCache, memAddressSafe(pAllocator));

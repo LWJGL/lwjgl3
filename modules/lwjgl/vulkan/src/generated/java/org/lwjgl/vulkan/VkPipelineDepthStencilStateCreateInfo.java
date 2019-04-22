@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#features-depthBounds">depth bounds testing</a> feature is not enabled, {@code depthBoundsTestEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
+ * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#features-depthBounds">depth bounds testing</a> feature is not enabled, {@code depthBoundsTestEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -45,14 +45,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code flags} &ndash; reserved for future use.</li>
- * <li>{@code depthTestEnable} &ndash; controls whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#fragops-depth">depth testing</a> is enabled.</li>
- * <li>{@code depthWriteEnable} &ndash; controls whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#fragops-depth-write">depth writes</a> are enabled when {@code depthTestEnable} is {@link VK10#VK_TRUE TRUE}. Depth writes are always disabled when {@code depthTestEnable} is {@link VK10#VK_FALSE FALSE}.</li>
- * <li>{@code depthCompareOp} &ndash; the comparison operator used in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#fragops-depth">depth test</a>.</li>
- * <li>{@code depthBoundsTestEnable} &ndash; controls whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#fragops-dbt">depth bounds testing</a> is enabled.</li>
- * <li>{@code stencilTestEnable} &ndash; controls whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#fragops-stencil">stencil testing</a> is enabled.</li>
- * <li>{@code front} &ndash; {@code front} and {@code back} control the parameters of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#fragops-stencil">stencil test</a>.</li>
+ * <li>{@code depthTestEnable} &ndash; controls whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#fragops-depth">depth testing</a> is enabled.</li>
+ * <li>{@code depthWriteEnable} &ndash; controls whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#fragops-depth-write">depth writes</a> are enabled when {@code depthTestEnable} is {@link VK10#VK_TRUE TRUE}. Depth writes are always disabled when {@code depthTestEnable} is {@link VK10#VK_FALSE FALSE}.</li>
+ * <li>{@code depthCompareOp} &ndash; the comparison operator used in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#fragops-depth">depth test</a>.</li>
+ * <li>{@code depthBoundsTestEnable} &ndash; controls whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#fragops-dbt">depth bounds testing</a> is enabled.</li>
+ * <li>{@code stencilTestEnable} &ndash; controls whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#fragops-stencil">stencil testing</a> is enabled.</li>
+ * <li>{@code front} &ndash; {@code front} and {@code back} control the parameters of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#fragops-stencil">stencil test</a>.</li>
  * <li>{@code back} &ndash; see {@code front}</li>
- * <li>{@code minDepthBounds} &ndash; {@code minDepthBounds} and {@code maxDepthBounds} define the range of values used in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#fragops-dbt">depth bounds test</a>.</li>
+ * <li>{@code minDepthBounds} &ndash; {@code minDepthBounds} and {@code maxDepthBounds} define the range of values used in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#fragops-dbt">depth bounds test</a>.</li>
  * <li>{@code maxDepthBounds} &ndash; see {@code minDepthBounds}</li>
  * </ul>
  * 

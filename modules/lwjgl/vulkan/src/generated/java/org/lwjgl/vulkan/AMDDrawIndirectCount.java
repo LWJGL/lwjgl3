@@ -15,7 +15,7 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <h5>Promotion to VK_KHR_draw_indirect_count</h5>
  * 
- * <p>All functionality in this extension is included in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_draw_indirect_count">VK_KHR_draw_indirect_count</a>, with the suffix changed to KHR. The original type, enum and command names are still available as aliases of the core functionality.</p>
+ * <p>All functionality in this extension is included in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_draw_indirect_count">VK_KHR_draw_indirect_count</a>, with the suffix changed to KHR. The original type, enum and command names are still available as aliases of the core functionality.</p>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -32,7 +32,7 @@ import static org.lwjgl.system.JNI.*;
  * </ul></dd>
  * <dt><b>Deprecation state</b></dt>
  * <dd><ul>
- * <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_draw_indirect_count">VK_KHR_draw_indirect_count</a> extension</li>
+ * <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_draw_indirect_count">VK_KHR_draw_indirect_count</a> extension</li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>

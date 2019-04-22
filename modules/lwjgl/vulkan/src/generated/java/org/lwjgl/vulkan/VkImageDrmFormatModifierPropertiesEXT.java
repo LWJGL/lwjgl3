@@ -38,7 +38,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code drmFormatModifier} &ndash; returns the image&#8217;s <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#glossary-drm-format-modifier">Linux DRM format modifier</a>.</li>
+ * <li>{@code drmFormatModifier} &ndash; returns the image&#8217;s <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#glossary-drm-format-modifier">Linux DRM format modifier</a>.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

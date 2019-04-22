@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code flags} &ndash; reserved for future use.</li>
- * <li>{@code depthClipEnable} &ndash; controls whether depth clipping is enabled as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vertexpostproc-clipping">Primitive Clipping</a>.</li>
+ * <li>{@code depthClipEnable} &ndash; controls whether depth clipping is enabled as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vertexpostproc-clipping">Primitive Clipping</a>.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

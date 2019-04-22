@@ -77,7 +77,7 @@ val NV_viewport_swizzle = "NVViewportSwizzle".nativeClassVK("NV_viewport_swizzle
         VkViewportCoordinateSwizzleNV - Specify how a viewport coordinate is swizzled
 
         <h5>Description</h5>
-        These values are described in detail in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#vertexpostproc-viewport-swizzle">Viewport Swizzle</a>.
+        These values are described in detail in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#vertexpostproc-viewport-swizzle">Viewport Swizzle</a>.
 
         <h5>See Also</h5>
         ##VkViewportSwizzleNV

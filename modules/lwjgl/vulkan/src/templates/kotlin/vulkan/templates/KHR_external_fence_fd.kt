@@ -149,7 +149,7 @@ val KHR_external_fence_fd = "KHRExternalFenceFd".nativeClassVK("KHR_external_fen
 
         Where supported by the operating system, the implementation <b>must</b> set the file descriptor to be closed automatically when an {@code execve} system call is made.
 
-        Exporting a file descriptor from a fence <b>may</b> have side effects depending on the transference of the specified handle type, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-fences-importing">Importing Fence State</a>.
+        Exporting a file descriptor from a fence <b>may</b> have side effects depending on the transference of the specified handle type, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#synchronization-fences-importing">Importing Fence State</a>.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

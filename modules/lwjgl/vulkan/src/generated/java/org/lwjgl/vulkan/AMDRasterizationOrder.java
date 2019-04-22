@@ -78,8 +78,8 @@ public final class AMDRasterizationOrder {
      * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_RASTERIZATION_ORDER_STRICT_AMD RASTERIZATION_ORDER_STRICT_AMD} specifies that operations for each primitive in a subpass <b>must</b> occur in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#drawing-primitive-order">primitive order</a>.</li>
-     * <li>{@link #VK_RASTERIZATION_ORDER_RELAXED_AMD RASTERIZATION_ORDER_RELAXED_AMD} specifies that operations for each primitive in a subpass <b>may</b> not occur in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#drawing-primitive-order">primitive order</a>.</li>
+     * <li>{@link #VK_RASTERIZATION_ORDER_STRICT_AMD RASTERIZATION_ORDER_STRICT_AMD} specifies that operations for each primitive in a subpass <b>must</b> occur in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#drawing-primitive-order">primitive order</a>.</li>
+     * <li>{@link #VK_RASTERIZATION_ORDER_RELAXED_AMD RASTERIZATION_ORDER_RELAXED_AMD} specifies that operations for each primitive in a subpass <b>may</b> not occur in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#drawing-primitive-order">primitive order</a>.</li>
      * </ul>
      * 
      * <h5>See Also</h5>

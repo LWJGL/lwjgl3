@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#fragops-exclusive-scissor">Exclusive Scissor Test</a> for more information.</p>
+ * <p>See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#fragops-exclusive-scissor">Exclusive Scissor Test</a> for more information.</p>
  * 
  * <p>If the {@link VkPhysicalDeviceExclusiveScissorFeaturesNV} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceFeatures2KHR}, it is filled with values indicating whether the feature is supported. {@link VkPhysicalDeviceExclusiveScissorFeaturesNV} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to enable the feature.</p>
  * 

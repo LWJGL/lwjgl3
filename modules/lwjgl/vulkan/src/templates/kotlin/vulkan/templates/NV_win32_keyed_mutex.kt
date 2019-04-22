@@ -165,7 +165,7 @@ val NV_win32_keyed_mutex = "NVWin32KeyedMutex".nativeClassVK("NV_win32_keyed_mut
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
-                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_win32_keyed_mutex">VK_KHR_win32_keyed_mutex</a> extension</li>
+                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#VK_KHR_win32_keyed_mutex">VK_KHR_win32_keyed_mutex</a> extension</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

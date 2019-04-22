@@ -103,9 +103,9 @@ val NV_dedicated_allocation = "NVDedicatedAllocation".nativeClassVK("NV_dedicate
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
                 <li>
-                    <em>Deprecated</em> by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_dedicated_allocation">VK_KHR_dedicated_allocation</a> extension
+                    <em>Deprecated</em> by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#VK_KHR_dedicated_allocation">VK_KHR_dedicated_allocation</a> extension
                     <ul>
-                        <li>Which in turn was <em>promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#versions-1.1-promotions">Vulkan 1.1</a></li>
+                        <li>Which in turn was <em>promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#versions-1.1-promotions">Vulkan 1.1</a></li>
                     </ul>
                 </li>
             </ul></dd>

@@ -74,7 +74,7 @@ public final class EXTSamplerFilterMinmax {
      * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT} specifies that texel values are combined by computing a weighted average of values in the footprint, using weights as specified in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#textures-unnormalized-to-integer">the image operations chapter</a>.</li>
+     * <li>{@link #VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT} specifies that texel values are combined by computing a weighted average of values in the footprint, using weights as specified in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#textures-unnormalized-to-integer">the image operations chapter</a>.</li>
      * <li>{@link #VK_SAMPLER_REDUCTION_MODE_MIN_EXT SAMPLER_REDUCTION_MODE_MIN_EXT} specifies that texel values are combined by taking the component-wise minimum of values in the footprint with non-zero weights.</li>
      * <li>{@link #VK_SAMPLER_REDUCTION_MODE_MAX_EXT SAMPLER_REDUCTION_MODE_MAX_EXT} specifies that texel values are combined by taking the component-wise maximum of values in the footprint with non-zero weights.</li>
      * </ul>

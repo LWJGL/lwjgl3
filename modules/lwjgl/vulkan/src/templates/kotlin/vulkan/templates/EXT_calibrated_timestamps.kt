@@ -78,7 +78,7 @@ val EXT_calibrated_timestamps = "EXTCalibratedTimestamps".nativeClassVK("EXT_cal
 
         <h5>Description</h5>
         <ul>
-            <li>#TIME_DOMAIN_DEVICE_EXT specifies the device time domain. Timestamp values in this time domain are comparable with device timestamp values captured using #CmdWriteTimestamp() and are defined to be incrementing according to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#limits-timestampPeriod">timestampPeriod</a> of the device.</li>
+            <li>#TIME_DOMAIN_DEVICE_EXT specifies the device time domain. Timestamp values in this time domain are comparable with device timestamp values captured using #CmdWriteTimestamp() and are defined to be incrementing according to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#limits-timestampPeriod">timestampPeriod</a> of the device.</li>
             <li>#TIME_DOMAIN_CLOCK_MONOTONIC_EXT specifies the CLOCK_MONOTONIC time domain available on POSIX platforms.</li>
             <li>#TIME_DOMAIN_CLOCK_MONOTONIC_RAW_EXT specifies the CLOCK_MONOTONIC_RAW time domain available on POSIX platforms.</li>
             <li>#TIME_DOMAIN_QUERY_PERFORMANCE_COUNTER_EXT specifies the performance counter (QPC) time domain available on Windows.</li>
