@@ -11,220 +11,6 @@ ENABLE_WARNINGS()
 
 EXTERN_C_ENTER
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_ZSTD_1minCLevel(void) {
-    return (jint)ZSTD_minCLevel();
-}
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_zstd_ZstdX_ZSTD_1minCLevel(JNIEnv *__env, jclass clazz) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_ZSTD_1minCLevel();
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1findFrameCompressedSize(jlong srcAddress, jlong srcSize) {
-    void const *src = (void const *)(intptr_t)srcAddress;
-    return (jlong)ZSTD_findFrameCompressedSize(src, (size_t)srcSize);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1findFrameCompressedSize(JNIEnv *__env, jclass clazz, jlong srcAddress, jlong srcSize) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1findFrameCompressedSize(srcAddress, srcSize);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1sizeof_1CCtx(jlong cctxAddress) {
-    ZSTD_CCtx const *cctx = (ZSTD_CCtx const *)(intptr_t)cctxAddress;
-    return (jlong)ZSTD_sizeof_CCtx(cctx);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1sizeof_1CCtx(JNIEnv *__env, jclass clazz, jlong cctxAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1sizeof_1CCtx(cctxAddress);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1sizeof_1DCtx(jlong dctxAddress) {
-    ZSTD_DCtx const *dctx = (ZSTD_DCtx const *)(intptr_t)dctxAddress;
-    return (jlong)ZSTD_sizeof_DCtx(dctx);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1sizeof_1DCtx(JNIEnv *__env, jclass clazz, jlong dctxAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1sizeof_1DCtx(dctxAddress);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1sizeof_1CStream(jlong zcsAddress) {
-    ZSTD_CStream const *zcs = (ZSTD_CStream const *)(intptr_t)zcsAddress;
-    return (jlong)ZSTD_sizeof_CStream(zcs);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1sizeof_1CStream(JNIEnv *__env, jclass clazz, jlong zcsAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1sizeof_1CStream(zcsAddress);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1sizeof_1DStream(jlong zdsAddress) {
-    ZSTD_DStream const *zds = (ZSTD_DStream const *)(intptr_t)zdsAddress;
-    return (jlong)ZSTD_sizeof_DStream(zds);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1sizeof_1DStream(JNIEnv *__env, jclass clazz, jlong zdsAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1sizeof_1DStream(zdsAddress);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1sizeof_1CDict(jlong cdictAddress) {
-    ZSTD_CDict const *cdict = (ZSTD_CDict const *)(intptr_t)cdictAddress;
-    return (jlong)ZSTD_sizeof_CDict(cdict);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1sizeof_1CDict(JNIEnv *__env, jclass clazz, jlong cdictAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1sizeof_1CDict(cdictAddress);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1sizeof_1DDict(jlong ddictAddress) {
-    ZSTD_DDict const *ddict = (ZSTD_DDict const *)(intptr_t)ddictAddress;
-    return (jlong)ZSTD_sizeof_DDict(ddict);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1sizeof_1DDict(JNIEnv *__env, jclass clazz, jlong ddictAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1sizeof_1DDict(ddictAddress);
-}
-
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1cParam_1getBounds(jint cParam, jlong __result) {
-    *((ZSTD_bounds*)(intptr_t)__result) = ZSTD_cParam_getBounds((ZSTD_cParameter)cParam);
-}
-JNIEXPORT void JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1cParam_1getBounds(JNIEnv *__env, jclass clazz, jint cParam, jlong __result) {
-    UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1cParam_1getBounds(cParam, __result);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1setParameter(jlong cctxAddress, jint param, jint value) {
-    ZSTD_CCtx *cctx = (ZSTD_CCtx *)(intptr_t)cctxAddress;
-    return (jlong)ZSTD_CCtx_setParameter(cctx, (ZSTD_cParameter)param, value);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1setParameter(JNIEnv *__env, jclass clazz, jlong cctxAddress, jint param, jint value) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1setParameter(cctxAddress, param, value);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1setPledgedSrcSize(jlong cctxAddress, jlong pledgedSrcSize) {
-    ZSTD_CCtx *cctx = (ZSTD_CCtx *)(intptr_t)cctxAddress;
-    return (jlong)ZSTD_CCtx_setPledgedSrcSize(cctx, (unsigned long long)pledgedSrcSize);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1setPledgedSrcSize(JNIEnv *__env, jclass clazz, jlong cctxAddress, jlong pledgedSrcSize) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1setPledgedSrcSize(cctxAddress, pledgedSrcSize);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1loadDictionary(jlong cctxAddress, jlong dictAddress, jlong dictSize) {
-    ZSTD_CCtx *cctx = (ZSTD_CCtx *)(intptr_t)cctxAddress;
-    void const *dict = (void const *)(intptr_t)dictAddress;
-    return (jlong)ZSTD_CCtx_loadDictionary(cctx, dict, (size_t)dictSize);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1loadDictionary(JNIEnv *__env, jclass clazz, jlong cctxAddress, jlong dictAddress, jlong dictSize) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1loadDictionary(cctxAddress, dictAddress, dictSize);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1refCDict(jlong cctxAddress, jlong cdictAddress) {
-    ZSTD_CCtx *cctx = (ZSTD_CCtx *)(intptr_t)cctxAddress;
-    ZSTD_CDict const *cdict = (ZSTD_CDict const *)(intptr_t)cdictAddress;
-    return (jlong)ZSTD_CCtx_refCDict(cctx, cdict);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1refCDict(JNIEnv *__env, jclass clazz, jlong cctxAddress, jlong cdictAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1refCDict(cctxAddress, cdictAddress);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1refPrefix(jlong cctxAddress, jlong prefixAddress, jlong prefixSize) {
-    ZSTD_CCtx *cctx = (ZSTD_CCtx *)(intptr_t)cctxAddress;
-    void const *prefix = (void const *)(intptr_t)prefixAddress;
-    return (jlong)ZSTD_CCtx_refPrefix(cctx, prefix, (size_t)prefixSize);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1refPrefix(JNIEnv *__env, jclass clazz, jlong cctxAddress, jlong prefixAddress, jlong prefixSize) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1refPrefix(cctxAddress, prefixAddress, prefixSize);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1reset(jlong cctxAddress, jint reset) {
-    ZSTD_CCtx *cctx = (ZSTD_CCtx *)(intptr_t)cctxAddress;
-    return (jlong)ZSTD_CCtx_reset(cctx, (ZSTD_ResetDirective)reset);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1reset(JNIEnv *__env, jclass clazz, jlong cctxAddress, jint reset) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1reset(cctxAddress, reset);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1compress2(jlong cctxAddress, jlong dstAddress, jlong dstCapacity, jlong srcAddress, jlong srcSize) {
-    ZSTD_CCtx *cctx = (ZSTD_CCtx *)(intptr_t)cctxAddress;
-    void *dst = (void *)(intptr_t)dstAddress;
-    void const *src = (void const *)(intptr_t)srcAddress;
-    return (jlong)ZSTD_compress2(cctx, dst, (size_t)dstCapacity, src, (size_t)srcSize);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1compress2(JNIEnv *__env, jclass clazz, jlong cctxAddress, jlong dstAddress, jlong dstCapacity, jlong srcAddress, jlong srcSize) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1compress2(cctxAddress, dstAddress, dstCapacity, srcAddress, srcSize);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1compressStream2(jlong cctxAddress, jlong outputAddress, jlong inputAddress, jint endOp) {
-    ZSTD_CCtx *cctx = (ZSTD_CCtx *)(intptr_t)cctxAddress;
-    ZSTD_outBuffer *output = (ZSTD_outBuffer *)(intptr_t)outputAddress;
-    ZSTD_inBuffer *input = (ZSTD_inBuffer *)(intptr_t)inputAddress;
-    return (jlong)ZSTD_compressStream2(cctx, output, input, (ZSTD_EndDirective)endOp);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1compressStream2(JNIEnv *__env, jclass clazz, jlong cctxAddress, jlong outputAddress, jlong inputAddress, jint endOp) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1compressStream2(cctxAddress, outputAddress, inputAddress, endOp);
-}
-
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1dParam_1getBounds(jint dParam, jlong __result) {
-    *((ZSTD_bounds*)(intptr_t)__result) = ZSTD_dParam_getBounds((ZSTD_dParameter)dParam);
-}
-JNIEXPORT void JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1dParam_1getBounds(JNIEnv *__env, jclass clazz, jint dParam, jlong __result) {
-    UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1dParam_1getBounds(dParam, __result);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1DCtx_1setParameter(jlong dctxAddress, jint param, jint value) {
-    ZSTD_DCtx *dctx = (ZSTD_DCtx *)(intptr_t)dctxAddress;
-    return (jlong)ZSTD_DCtx_setParameter(dctx, (ZSTD_dParameter)param, value);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1DCtx_1setParameter(JNIEnv *__env, jclass clazz, jlong dctxAddress, jint param, jint value) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1DCtx_1setParameter(dctxAddress, param, value);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1DCtx_1loadDictionary(jlong dctxAddress, jlong dictAddress, jlong dictSize) {
-    ZSTD_DCtx *dctx = (ZSTD_DCtx *)(intptr_t)dctxAddress;
-    void const *dict = (void const *)(intptr_t)dictAddress;
-    return (jlong)ZSTD_DCtx_loadDictionary(dctx, dict, (size_t)dictSize);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1DCtx_1loadDictionary(JNIEnv *__env, jclass clazz, jlong dctxAddress, jlong dictAddress, jlong dictSize) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1DCtx_1loadDictionary(dctxAddress, dictAddress, dictSize);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1DCtx_1refDDict(jlong dctxAddress, jlong ddictAddress) {
-    ZSTD_DCtx *dctx = (ZSTD_DCtx *)(intptr_t)dctxAddress;
-    ZSTD_DDict const *ddict = (ZSTD_DDict const *)(intptr_t)ddictAddress;
-    return (jlong)ZSTD_DCtx_refDDict(dctx, ddict);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1DCtx_1refDDict(JNIEnv *__env, jclass clazz, jlong dctxAddress, jlong ddictAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1DCtx_1refDDict(dctxAddress, ddictAddress);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1DCtx_1refPrefix(jlong dctxAddress, jlong prefixAddress, jlong prefixSize) {
-    ZSTD_DCtx *dctx = (ZSTD_DCtx *)(intptr_t)dctxAddress;
-    void const *prefix = (void const *)(intptr_t)prefixAddress;
-    return (jlong)ZSTD_DCtx_refPrefix(dctx, prefix, (size_t)prefixSize);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1DCtx_1refPrefix(JNIEnv *__env, jclass clazz, jlong dctxAddress, jlong prefixAddress, jlong prefixSize) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1DCtx_1refPrefix(dctxAddress, prefixAddress, prefixSize);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1DCtx_1reset(jlong dctxAddress, jint reset) {
-    ZSTD_DCtx *dctx = (ZSTD_DCtx *)(intptr_t)dctxAddress;
-    return (jlong)ZSTD_DCtx_reset(dctx, (ZSTD_ResetDirective)reset);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1DCtx_1reset(JNIEnv *__env, jclass clazz, jlong dctxAddress, jint reset) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1DCtx_1reset(dctxAddress, reset);
-}
-
 JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1findDecompressedSize(jlong srcAddress, jlong srcSize) {
     void const *src = (void const *)(intptr_t)srcAddress;
     return (jlong)ZSTD_findDecompressedSize(src, (size_t)srcSize);
@@ -232,6 +18,15 @@ JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1findDecomp
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1findDecompressedSize(JNIEnv *__env, jclass clazz, jlong srcAddress, jlong srcSize) {
     UNUSED_PARAMS(__env, clazz)
     return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1findDecompressedSize(srcAddress, srcSize);
+}
+
+JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1decompressBound(jlong srcAddress, jlong srcSize) {
+    void const *src = (void const *)(intptr_t)srcAddress;
+    return (jlong)ZSTD_decompressBound(src, (size_t)srcSize);
+}
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1decompressBound(JNIEnv *__env, jclass clazz, jlong srcAddress, jlong srcSize) {
+    UNUSED_PARAMS(__env, clazz)
+    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1decompressBound(srcAddress, srcSize);
 }
 
 JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1frameHeaderSize(jlong srcAddress, jlong srcSize) {
@@ -613,23 +408,23 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtxParams_1init_1
     return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtxParams_1init_1advanced(cctxParamsAddress, paramsAddress);
 }
 
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtxParam_1setParameter(jlong paramsAddress, jint param, jint value) {
+JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtxParams_1setParameter(jlong paramsAddress, jint param, jint value) {
     ZSTD_CCtx_params *params = (ZSTD_CCtx_params *)(intptr_t)paramsAddress;
-    return (jlong)ZSTD_CCtxParam_setParameter(params, (ZSTD_cParameter)param, value);
+    return (jlong)ZSTD_CCtxParams_setParameter(params, (ZSTD_cParameter)param, value);
 }
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtxParam_1setParameter(JNIEnv *__env, jclass clazz, jlong paramsAddress, jint param, jint value) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtxParams_1setParameter(JNIEnv *__env, jclass clazz, jlong paramsAddress, jint param, jint value) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtxParam_1setParameter(paramsAddress, param, value);
+    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtxParams_1setParameter(paramsAddress, param, value);
 }
 
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtxParam_1getParameter(jlong paramsAddress, jint param, jlong valueAddress) {
+JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtxParams_1getParameter(jlong paramsAddress, jint param, jlong valueAddress) {
     ZSTD_CCtx_params *params = (ZSTD_CCtx_params *)(intptr_t)paramsAddress;
     int *value = (int *)(intptr_t)valueAddress;
-    return (jlong)ZSTD_CCtxParam_getParameter(params, (ZSTD_cParameter)param, value);
+    return (jlong)ZSTD_CCtxParams_getParameter(params, (ZSTD_cParameter)param, value);
 }
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtxParam_1getParameter(JNIEnv *__env, jclass clazz, jlong paramsAddress, jint param, jlong valueAddress) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtxParams_1getParameter(JNIEnv *__env, jclass clazz, jlong paramsAddress, jint param, jlong valueAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtxParam_1getParameter(paramsAddress, param, valueAddress);
+    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtxParams_1getParameter(paramsAddress, param, valueAddress);
 }
 
 JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1setParametersUsingCCtxParams(jlong cctxAddress, jlong paramsAddress) {
@@ -671,33 +466,6 @@ JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1createDDic
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1createDDict_1byReference(JNIEnv *__env, jclass clazz, jlong dictBufferAddress, jlong dictSize) {
     UNUSED_PARAMS(__env, clazz)
     return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1createDDict_1byReference(dictBufferAddress, dictSize);
-}
-
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1getDictID_1fromDict(jlong dictAddress, jlong dictSize) {
-    void const *dict = (void const *)(intptr_t)dictAddress;
-    return (jint)ZSTD_getDictID_fromDict(dict, (size_t)dictSize);
-}
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1getDictID_1fromDict(JNIEnv *__env, jclass clazz, jlong dictAddress, jlong dictSize) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1getDictID_1fromDict(dictAddress, dictSize);
-}
-
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1getDictID_1fromDDict(jlong ddictAddress) {
-    ZSTD_DDict const *ddict = (ZSTD_DDict const *)(intptr_t)ddictAddress;
-    return (jint)ZSTD_getDictID_fromDDict(ddict);
-}
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1getDictID_1fromDDict(JNIEnv *__env, jclass clazz, jlong ddictAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1getDictID_1fromDDict(ddictAddress);
-}
-
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1getDictID_1fromFrame(jlong srcAddress, jlong srcSize) {
-    void const *src = (void const *)(intptr_t)srcAddress;
-    return (jint)ZSTD_getDictID_fromFrame(src, (size_t)srcSize);
-}
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1getDictID_1fromFrame(JNIEnv *__env, jclass clazz, jlong srcAddress, jlong srcSize) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1getDictID_1fromFrame(srcAddress, srcSize);
 }
 
 JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1DCtx_1loadDictionary_1byReference(jlong dctxAddress, jlong dictAddress, jlong dictSize) {
@@ -761,66 +529,6 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1decompressStream_1
     return CRITICAL(org_lwjgl_util_zstd_ZstdX_nZSTD_1decompressStream_1simpleArgs)(dctxAddress, dstAddress, dstCapacity, dstPosAddress, srcAddress, srcSize, srcPosAddress);
 }
 
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1initCStream_1srcSize(jlong zcsAddress, jint compressionLevel, jlong pledgedSrcSize) {
-    ZSTD_CStream *zcs = (ZSTD_CStream *)(intptr_t)zcsAddress;
-    return (jlong)ZSTD_initCStream_srcSize(zcs, compressionLevel, (unsigned long long)pledgedSrcSize);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1initCStream_1srcSize(JNIEnv *__env, jclass clazz, jlong zcsAddress, jint compressionLevel, jlong pledgedSrcSize) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1initCStream_1srcSize(zcsAddress, compressionLevel, pledgedSrcSize);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1initCStream_1usingDict(jlong zcsAddress, jlong dictAddress, jlong dictSize, jint compressionLevel) {
-    ZSTD_CStream *zcs = (ZSTD_CStream *)(intptr_t)zcsAddress;
-    void const *dict = (void const *)(intptr_t)dictAddress;
-    return (jlong)ZSTD_initCStream_usingDict(zcs, dict, (size_t)dictSize, compressionLevel);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1initCStream_1usingDict(JNIEnv *__env, jclass clazz, jlong zcsAddress, jlong dictAddress, jlong dictSize, jint compressionLevel) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1initCStream_1usingDict(zcsAddress, dictAddress, dictSize, compressionLevel);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1initCStream_1advanced(jlong zcsAddress, jlong dictAddress, jlong dictSize, jlong paramsAddress, jlong pledgedSrcSize) {
-    ZSTD_CStream *zcs = (ZSTD_CStream *)(intptr_t)zcsAddress;
-    void const *dict = (void const *)(intptr_t)dictAddress;
-    ZSTD_parameters *params = (ZSTD_parameters *)(intptr_t)paramsAddress;
-    return (jlong)ZSTD_initCStream_advanced(zcs, dict, (size_t)dictSize, *params, (unsigned long long)pledgedSrcSize);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1initCStream_1advanced(JNIEnv *__env, jclass clazz, jlong zcsAddress, jlong dictAddress, jlong dictSize, jlong paramsAddress, jlong pledgedSrcSize) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1initCStream_1advanced(zcsAddress, dictAddress, dictSize, paramsAddress, pledgedSrcSize);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1initCStream_1usingCDict(jlong zcsAddress, jlong cdictAddress) {
-    ZSTD_CStream *zcs = (ZSTD_CStream *)(intptr_t)zcsAddress;
-    ZSTD_CDict const *cdict = (ZSTD_CDict const *)(intptr_t)cdictAddress;
-    return (jlong)ZSTD_initCStream_usingCDict(zcs, cdict);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1initCStream_1usingCDict(JNIEnv *__env, jclass clazz, jlong zcsAddress, jlong cdictAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1initCStream_1usingCDict(zcsAddress, cdictAddress);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1initCStream_1usingCDict_1advanced(jlong zcsAddress, jlong cdictAddress, jlong fParamsAddress, jlong pledgedSrcSize) {
-    ZSTD_CStream *zcs = (ZSTD_CStream *)(intptr_t)zcsAddress;
-    ZSTD_CDict const *cdict = (ZSTD_CDict const *)(intptr_t)cdictAddress;
-    ZSTD_frameParameters *fParams = (ZSTD_frameParameters *)(intptr_t)fParamsAddress;
-    return (jlong)ZSTD_initCStream_usingCDict_advanced(zcs, cdict, *fParams, (unsigned long long)pledgedSrcSize);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1initCStream_1usingCDict_1advanced(JNIEnv *__env, jclass clazz, jlong zcsAddress, jlong cdictAddress, jlong fParamsAddress, jlong pledgedSrcSize) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1initCStream_1usingCDict_1advanced(zcsAddress, cdictAddress, fParamsAddress, pledgedSrcSize);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1resetCStream(jlong zcsAddress, jlong pledgedSrcSize) {
-    ZSTD_CStream *zcs = (ZSTD_CStream *)(intptr_t)zcsAddress;
-    return (jlong)ZSTD_resetCStream(zcs, (unsigned long long)pledgedSrcSize);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1resetCStream(JNIEnv *__env, jclass clazz, jlong zcsAddress, jlong pledgedSrcSize) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1resetCStream(zcsAddress, pledgedSrcSize);
-}
-
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1getFrameProgression(jlong cctxAddress, jlong __result) {
     ZSTD_CCtx const *cctx = (ZSTD_CCtx const *)(intptr_t)cctxAddress;
     *((ZSTD_frameProgression*)(intptr_t)__result) = ZSTD_getFrameProgression(cctx);
@@ -837,35 +545,6 @@ JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1toFlushNow
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1toFlushNow(JNIEnv *__env, jclass clazz, jlong cctxAddress) {
     UNUSED_PARAMS(__env, clazz)
     return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1toFlushNow(cctxAddress);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1initDStream_1usingDict(jlong zdsAddress, jlong dictAddress, jlong dictSize) {
-    ZSTD_DStream *zds = (ZSTD_DStream *)(intptr_t)zdsAddress;
-    void const *dict = (void const *)(intptr_t)dictAddress;
-    return (jlong)ZSTD_initDStream_usingDict(zds, dict, (size_t)dictSize);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1initDStream_1usingDict(JNIEnv *__env, jclass clazz, jlong zdsAddress, jlong dictAddress, jlong dictSize) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1initDStream_1usingDict(zdsAddress, dictAddress, dictSize);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1initDStream_1usingDDict(jlong zdsAddress, jlong ddictAddress) {
-    ZSTD_DStream *zds = (ZSTD_DStream *)(intptr_t)zdsAddress;
-    ZSTD_DDict const *ddict = (ZSTD_DDict const *)(intptr_t)ddictAddress;
-    return (jlong)ZSTD_initDStream_usingDDict(zds, ddict);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1initDStream_1usingDDict(JNIEnv *__env, jclass clazz, jlong zdsAddress, jlong ddictAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1initDStream_1usingDDict(zdsAddress, ddictAddress);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1resetDStream(jlong zdsAddress) {
-    ZSTD_DStream *zds = (ZSTD_DStream *)(intptr_t)zdsAddress;
-    return (jlong)ZSTD_resetDStream(zds);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1resetDStream(JNIEnv *__env, jclass clazz, jlong zdsAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1resetDStream(zdsAddress);
 }
 
 JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1compressBegin(jlong cctxAddress, jint compressionLevel) {
