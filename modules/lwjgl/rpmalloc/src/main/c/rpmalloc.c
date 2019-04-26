@@ -389,9 +389,9 @@ static atomicptr_t _memory_heaps[HEAP_ARRAY_SIZE];
 static atomicptr_t _memory_orphan_heaps;
 //! Running orphan counter to avoid ABA issues in linked list
 static atomic32_t _memory_orphan_counter;
+#if ENABLE_STATISTICS
 //! Active heap count
 static atomic32_t _memory_active_heaps;
-#if ENABLE_STATISTICS
 //! Total number of currently mapped memory pages
 static atomic32_t _mapped_pages;
 //! Total number of currently lost spans
@@ -1292,7 +1292,7 @@ _memory_usable_size(void* p) {
 		if (span->size_class < SIZE_CLASS_COUNT) {
 			size_class_t* size_class = _memory_size_class + span->size_class;
 			void* blocks_start = pointer_offset(span, SPAN_HEADER_SIZE);
-			return size_class->size - (pointer_diff(p, blocks_start) % size_class->size);
+			return size_class->size - ((size_t)pointer_diff(p, blocks_start) % size_class->size);
 		}
 
 		//Large block
@@ -1333,6 +1333,10 @@ _memory_adjust_size_class(size_t iclass) {
 #else
 #  include <sys/mman.h>
 #  include <sched.h>
+#  ifdef __FreeBSD__
+#    include <sys/sysctl.h>
+#    define MAP_HUGETLB MAP_ALIGNED_SUPER
+#  endif
 #  ifndef MAP_UNINITIALIZED
 #    define MAP_UNINITIALIZED 0
 #  endif
@@ -1412,6 +1416,15 @@ rpmalloc_initialize_config(const rpmalloc_config_t* config) {
 				_memory_page_size = huge_page_size;
 				_memory_map_granularity = huge_page_size;
 			}
+#elif defined(__FreeBSD__)
+			int rc;
+			size_t sz = sizeof(rc);
+
+			if (sysctlbyname("vm.pmap.pg_ps_enabled", &rc, &sz, NULL, 0) == 0 && rc == 1) {
+				_memory_huge_pages = 1;
+				_memory_page_size = 2 * 1024 * 1024;
+				_memory_map_granularity = _memory_page_size;
+			}
 #elif defined(__APPLE__)
 			_memory_huge_pages = 1;
 			_memory_page_size = 2 * 1024 * 1024;
@@ -1472,8 +1485,8 @@ rpmalloc_initialize_config(const rpmalloc_config_t* config) {
 
 	atomic_store32(&_memory_heap_id, 0);
 	atomic_store32(&_memory_orphan_counter, 0);
-	atomic_store32(&_memory_active_heaps, 0);
 #if ENABLE_STATISTICS
+	atomic_store32(&_memory_active_heaps, 0);
 	atomic_store32(&_reserved_spans, 0);
 	atomic_store32(&_mapped_pages, 0);
 	atomic_store32(&_mapped_total, 0);
@@ -1514,8 +1527,11 @@ rpmalloc_finalize(void) {
 	atomic_thread_fence_acquire();
 
 	rpmalloc_thread_finalize();
+
+#if ENABLE_STATISTICS
 	//If you hit this assert, you still have active threads or forgot to finalize some thread(s)
 	assert(atomic_load32(&_memory_active_heaps) == 0);
+#endif
 
 	//Free all thread caches
 	for (size_t list_idx = 0; list_idx < HEAP_ARRAY_SIZE; ++list_idx) {
@@ -1567,13 +1583,15 @@ rpmalloc_finalize(void) {
 void
 rpmalloc_thread_initialize(void) {
 	if (!get_thread_heap()) {
-		atomic_incr32(&_memory_active_heaps);
 		heap_t* heap = _memory_allocate_heap();
+		if (heap) {
 #if ENABLE_STATISTICS
-		heap->thread_to_global = 0;
-		heap->global_to_thread = 0;
+			atomic_incr32(&_memory_active_heaps);
+			heap->thread_to_global = 0;
+			heap->global_to_thread = 0;
 #endif
-		set_thread_heap(heap);
+			set_thread_heap(heap);
+		}
 	}
 }
 
@@ -1619,7 +1637,10 @@ rpmalloc_thread_finalize(void) {
 	while (!atomic_cas_ptr(&_memory_orphan_heaps, raw_heap, last_heap));
 
 	set_thread_heap(0);
+
+#if ENABLE_STATISTICS
 	atomic_add32(&_memory_active_heaps, -1);
+#endif
 }
 
 int
