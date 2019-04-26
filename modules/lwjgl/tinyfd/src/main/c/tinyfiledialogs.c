@@ -1,5 +1,5 @@
 /*_________
- /         \ tinyfiledialogs.c v3.3.8 [Nov 4, 2018] zlib licence
+ /         \ tinyfiledialogs.c v3.3.9 [Apr 14, 2019] zlib licence
  |tiny file| Unique code file created [November 9, 2014]
  | dialogs | Copyright (c) 2014 - 2018 Guillaume Vareille http://ysengrin.com
  \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -98,7 +98,7 @@ misrepresented as being the original software.
 #include <sys/stat.h>
 
 #include "tinyfiledialogs.h"
-/* #define TINYFD_NOLIB */
+/* #define TINYFD_NOLIB */ 
 
 #ifdef _WIN32
  #ifdef __BORLANDC__
@@ -132,7 +132,7 @@ misrepresented as being the original software.
 #define MAX_PATH_OR_CMD 1024 /* _MAX_PATH or MAX_PATH */
 #define MAX_MULTIPLE_FILES 32
 
-char const tinyfd_version [8] = "3.3.8";
+char const tinyfd_version [8] = "3.3.9";
 
 int tinyfd_verbose = 0 ; /* on unix: prints the command line calls */
 int tinyfd_silent = 1 ; /* 1 (default) or 0 : on unix,
@@ -341,7 +341,7 @@ static void replaceSubStr( char const * const aSource ,
         char const * p ;
         char const * lNewSubStr = "" ;
         size_t lOldSubLen = strlen( aOldSubStr ) ;
-
+        
         if ( ! aSource )
         {
                 * aoDestination = '\0' ;
@@ -478,7 +478,7 @@ static int dirExists(char const * const aDirPath)
         struct stat lInfo;
 
         if (!aDirPath || !strlen(aDirPath))
-                return 0;
+                return 0;       
         if (stat(aDirPath, &lInfo) != 0)
                 return 0;
         else if ( tinyfd_winUtf8 )
@@ -666,7 +666,7 @@ static int sizeMbcs(wchar_t const * const aMbcsString)
 static wchar_t * utf8to16(char const * const aUtf8string)
 {
         wchar_t * lUtf16string ;
-        int lSize = sizeUtf16(aUtf8string);
+        int lSize = sizeUtf16(aUtf8string);     
         lUtf16string = (wchar_t *) malloc( lSize * sizeof(wchar_t) );
         lSize = MultiByteToWideChar(CP_UTF8, MB_ERR_INVALID_CHARS,
                                         aUtf8string, -1, lUtf16string, lSize);
@@ -799,6 +799,36 @@ static int fileExists(char const * const aFilePathAndName)
         }
 }
 
+static int replaceWchar(wchar_t * const aString,
+	wchar_t const aOldChr,
+	wchar_t const aNewChr)
+{
+	wchar_t * p;
+	int lRes = 0;
+
+	if (!aString)
+	{
+		return 0;
+	}
+
+	if (aOldChr == aNewChr)
+	{
+		return 0;
+	}
+
+	p = aString;
+	while ((p = wcsrchr(p, aOldChr)))
+	{
+		*p = aNewChr;
+#ifdef TINYFD_NOCCSUNICODE
+		p++;
+#endif
+		p++;
+		lRes = 1;
+	}
+	return lRes;
+}
+
 #endif /* TINYFD_NOLIB */
 #endif /* _WIN32 */
 
@@ -852,7 +882,7 @@ static char const * ensureFilesExist(char * const aDestination,
 #ifndef TINYFD_NOLIB
 
 static int __stdcall EnumThreadWndProc(HWND hwnd, LPARAM lParam)
-{
+{ 
         wchar_t lTitleName[MAX_PATH];
         GetWindowTextW(hwnd, lTitleName, MAX_PATH);
         /* wprintf(L"lTitleName %ls \n", lTitleName);  */
@@ -1066,7 +1096,7 @@ Show-BalloonTip");
 static int notifyWinGui(
         char const * const aTitle, /* NULL or "" */
         char const * const aMessage, /* NULL or "" may NOT contain \n nor \t */
-        char const * const aIconType)
+        char const * const aIconType) 
 {
         wchar_t * lTitle;
         wchar_t * lMessage;
@@ -1143,12 +1173,16 @@ wchar_t const * tinyfd_inputBoxW(
                 wcscpy(lDialogString, L"Dim result:result=InputBox(\"");
                 if (aMessage && wcslen(aMessage))
                 {
-                        wcscat(lDialogString, aMessage);
+					wcscpy(lBuff, aMessage);
+					replaceWchar(lBuff, L'\n', L' ');
+					wcscat(lDialogString, lBuff);
                 }
                 wcscat(lDialogString, L"\",\"tinyfiledialogsTopWindow\",\"");
                 if (aDefaultInput && wcslen(aDefaultInput))
                 {
-                        wcscat(lDialogString, aDefaultInput);
+					wcscpy(lBuff, aDefaultInput);
+					replaceWchar(lBuff, L'\n', L' ');
+					wcscat(lDialogString, lBuff);
                 }
                 wcscat(lDialogString, L"\"):If IsEmpty(result) then:WScript.Echo 0");
                 wcscat(lDialogString, L":Else: WScript.Echo \"1\" & result : End If");
@@ -1301,6 +1335,9 @@ name = 'txt_input' value = '' style = 'float:left;width:100%' ><BR>\n\
                 free(lDialogString);
                 return NULL;
         }
+
+		memset(lBuff, 0, MAX_PATH_OR_CMD);
+
 #ifdef TINYFD_NOCCSUNICODE
 		fgets((char *)lBuff, 2*MAX_PATH_OR_CMD, lIn);
 #else
@@ -1336,25 +1373,25 @@ name = 'txt_input' value = '' style = 'float:left;width:100%' ><BR>\n\
 #else
 		lResult = !wcsncmp(lBuff, L"1", 1);
 #endif
-
+        
         /* printf( "lResult: %d \n" , lResult ) ; */
         if (!lResult)
         {
             return NULL ;
         }
 
-        // LWJGL: skip \r\n
-        size_t len = wcslen(lBuff);
-        if (2 <= len && lBuff[len - 2] == '\r') {
-            lBuff[len - 2] = 0;
-        } else if (1 <= len && lBuff[len - 1] == '\n') {
-            lBuff[len - 1] = 0;
-        }
-
         /* wprintf( "lBuff+1: %ls\n" , lBuff+1 ) ; */
+
 #ifdef TINYFD_NOCCSUNICODE
+		if (aDefaultInput)
+		{
+			lDialogStringLen = wcslen(lBuff) ;
+			lBuff[lDialogStringLen - 1] = L'\0';
+			lBuff[lDialogStringLen - 2] = L'\0';
+		}
 		return lBuff + 2;
 #else
+		if (aDefaultInput) lBuff[wcslen(lBuff) - 1] = L'\0';
 		return lBuff + 1;
 #endif
 }
@@ -1567,7 +1604,7 @@ wchar_t const * tinyfd_openFileDialogW(
         int const aAllowMultipleSelects) /* 0 or 1 */
 {
         static wchar_t lBuff[MAX_MULTIPLE_FILES*MAX_PATH_OR_CMD];
-
+                
         size_t lLengths[MAX_MULTIPLE_FILES];
         wchar_t lDirname[MAX_PATH_OR_CMD];
         wchar_t lFilterPatterns[MAX_PATH_OR_CMD] = L"";
@@ -1769,7 +1806,7 @@ wchar_t const * tinyfd_selectFolderDialogW(
         wchar_t const * const aDefaultPath) /* NULL or "" */
 {
         static wchar_t lBuff[MAX_PATH_OR_CMD];
-
+                
         BROWSEINFOW bInfo;
         LPITEMIDLIST lpItem;
         HRESULT lHResult;
@@ -1945,7 +1982,7 @@ static int messageBoxWinGuiA(
 {
         int lBoxReturnValue;
     UINT aCode ;
-
+        
         if ( aIconType && ! strcmp( "warning" , aIconType ) )
         {
                 aCode = MB_ICONWARNING ;
@@ -2043,7 +2080,7 @@ static char const * saveFileDialogWinGuiA(
 
         getPathWithoutFinalSlash(lDirname, aDefaultPathAndFile);
         getLastName(aoBuff, aDefaultPathAndFile);
-
+    
         if (aNumOfFilterPatterns > 0)
         {
                 if ( aSingleFilterDescription && strlen(aSingleFilterDescription) )
@@ -2071,7 +2108,7 @@ static char const * saveFileDialogWinGuiA(
                         p ++ ;
                 }
         }
-
+    
         ofn.lStructSize     = sizeof(OPENFILENAME) ;
         ofn.hwndOwner           = GetForegroundWindow();
         ofn.hInstance       = 0 ;
@@ -2098,12 +2135,12 @@ static char const * saveFileDialogWinGuiA(
         {
                 lRetval = NULL ;
         }
-        else
-        {
+        else 
+        { 
                 lRetval = aoBuff ;
         }
 
-        if (lHResult==S_OK || lHResult==S_FALSE)
+        if (lHResult==S_OK || lHResult==S_FALSE) 
         {
                 CoUninitialize();
         }
@@ -2195,7 +2232,7 @@ static char const * openFileDialogWinGuiA(
         {
                 lRetval = NULL ;
         }
-        else
+        else 
         {
                 lBuffLen = strlen(aoBuff) ;
                 lPointers[0] = aoBuff + lBuffLen + 1 ;
@@ -2203,7 +2240,7 @@ static char const * openFileDialogWinGuiA(
                 {
                         lRetval = aoBuff ;
                 }
-                else
+                else 
                 {
                         i = 0 ;
                         do
@@ -2232,7 +2269,7 @@ static char const * openFileDialogWinGuiA(
                 }
         }
 
-        if (lHResult==S_OK || lHResult==S_FALSE)
+        if (lHResult==S_OK || lHResult==S_FALSE) 
         {
                 CoUninitialize();
         }
@@ -2272,7 +2309,7 @@ static char const * selectFolderDialogWinGuiA(
 				lRetval = aoBuff;
         }
 
-        if (lHResult==S_OK || lHResult==S_FALSE)
+        if (lHResult==S_OK || lHResult==S_FALSE) 
         {
                 CoUninitialize();
         }
