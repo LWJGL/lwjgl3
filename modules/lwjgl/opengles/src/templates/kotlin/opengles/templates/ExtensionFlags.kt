@@ -482,6 +482,19 @@ val NV_explicit_attrib_location = EXT_FLAG.nativeClassGLES("NV_explicit_attrib_l
         """
 }
 
+val NV_fragment_shader_barycentric = EXT_FLAG.nativeClassGLES("NV_fragment_shader_barycentric", postfix = NV) {
+    documentation =
+        """
+        When true, the $registryLink extension is supported.
+
+        This extension advertises OpenGL support for the OpenGL Shading Language (GLSL) extension {@code "NV_fragment_shader_barycentric"}, which provides
+        fragment shader built-in variables holding barycentric weight vectors that identify the location of the fragment within its primitive. Additionally,
+        the GLSL extension allows fragment the ability to read raw attribute values for each of the vertices of the primitive that produced the fragment.
+
+        Requires ${GLES32.core}.
+        """
+}
+
 val NV_fragment_shader_interlock = EXT_FLAG.nativeClassGLES("NV_fragment_shader_interlock", postfix = NV) {
     documentation =
         """

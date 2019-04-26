@@ -1564,6 +1564,16 @@ public final class GLESCapabilities {
     /** When true, {@link NVFragmentCoverageToColor} is supported. */
     public final boolean GL_NV_fragment_coverage_to_color;
     /**
+     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_fragment_shader_barycentric.txt">NV_fragment_shader_barycentric</a> extension is supported.
+     * 
+     * <p>This extension advertises OpenGL support for the OpenGL Shading Language (GLSL) extension {@code "NV_fragment_shader_barycentric"}, which provides
+     * fragment shader built-in variables holding barycentric weight vectors that identify the location of the fragment within its primitive. Additionally,
+     * the GLSL extension allows fragment the ability to read raw attribute values for each of the vertices of the primitive that produced the fragment.</p>
+     * 
+     * <p>Requires {@link GLES32 GLES 3.2}.</p>
+     */
+    public final boolean GL_NV_fragment_shader_barycentric;
+    /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_fragment_shader_interlock.txt">NV_fragment_shader_interlock</a> extension is supported.
      * 
      * <p>In unextended OpenGL 4.3 or OpenGL ES 3.1, applications may produce a large number of fragment shader invocations that perform loads and stores to
@@ -3280,6 +3290,7 @@ public final class GLESCapabilities {
         GL_NV_fence = ext.contains("GL_NV_fence") && checkExtension("GL_NV_fence", NVFence.isAvailable(this));
         GL_NV_fill_rectangle = ext.contains("GL_NV_fill_rectangle");
         GL_NV_fragment_coverage_to_color = ext.contains("GL_NV_fragment_coverage_to_color") && checkExtension("GL_NV_fragment_coverage_to_color", NVFragmentCoverageToColor.isAvailable(this));
+        GL_NV_fragment_shader_barycentric = ext.contains("GL_NV_fragment_shader_barycentric");
         GL_NV_fragment_shader_interlock = ext.contains("GL_NV_fragment_shader_interlock");
         GL_NV_framebuffer_blit = ext.contains("GL_NV_framebuffer_blit") && checkExtension("GL_NV_framebuffer_blit", NVFramebufferBlit.isAvailable(this));
         GL_NV_framebuffer_mixed_samples = ext.contains("GL_NV_framebuffer_mixed_samples") && checkExtension("GL_NV_framebuffer_mixed_samples", NVFramebufferMixedSamples.isAvailable(this));
