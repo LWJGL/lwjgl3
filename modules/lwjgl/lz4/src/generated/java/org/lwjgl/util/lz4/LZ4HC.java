@@ -17,19 +17,34 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Streaming Compression - Bufferless synchronous API</h3>
  * 
- * <p>These functions compress data in successive blocks of any size, using previous blocks as dictionary. One key assumption is that previous blocks (up to
- * 64 KB) remain read-accessible while compressing next blocks. There is an exception for ring buffers, which can be smaller than 64 KB. Ring buffers scenario is automatically detected and handled by LZ4_compress_HC_continue().</p>
+ * <p>These functions compress data in successive blocks of any size, using previous blocks as dictionary, to improve compression ratio. One key assumption
+ * is that previous blocks (up to 64 KB) remain read-accessible while compressing next blocks. There is an exception for ring buffers, which can be
+ * smaller than 64 KB. Ring-buffer scenario is automatically detected and handled within {@link #LZ4_compress_HC_continue compress_HC_continue}.</p>
  * 
- * <p>Before starting compression, state must be properly initialized, using {@link #LZ4_resetStreamHC resetStreamHC}. A first "fictional block" can then be designated as initial
- * dictionary, using {@link #LZ4_loadDictHC loadDictHC} (Optional).</p>
+ * <p>Before starting compression, state must be allocated and properly initialized. {@link #LZ4_createStreamHC createStreamHC} does both, though compression level is set to
+ * {@link #LZ4HC_CLEVEL_DEFAULT CLEVEL_DEFAULT}.</p>
  * 
- * <p>Then, use {@link #LZ4_compress_HC_continue compress_HC_continue} to compress each successive block. Previous memory blocks (including initial dictionary when present) must remain
- * accessible and unmodified during compression. {@code dst} buffer should be sized to handle worst case scenarios (see {@link LZ4#LZ4_compressBound compressBound}), to ensure
- * operation success. Because in case of failure, the API does not guarantee context recovery, and context will have to be reset. If {@code dst} buffer
- * budget cannot be &ge; {@link LZ4#LZ4_compressBound compressBound}, consider using {@link #LZ4_compress_HC_continue_destSize compress_HC_continue_destSize} instead.</p>
+ * <p>Selecting the compression level can be done with {@link #LZ4_resetStreamHC_fast resetStreamHC_fast} (starts a new stream) {@link #LZ4_setCompressionLevel setCompressionLevel} (anytime, between blocks in the
+ * same stream) (experimental). {@code LZ4_resetStreamHC_fast()} only works on states which have been properly initialized at least once, which is
+ * automatically the case when state is created using {@code LZ4_createStreamHC()}.</p>
  * 
- * <p>If, for any reason, previous data block can't be preserved unmodified in memory for next compression block, you can save it to a more stable memory
- * space, using {@link #LZ4_saveDictHC saveDictHC}. Return value of {@link #LZ4_saveDictHC saveDictHC} is the size of dictionary effectively saved into {@code safeBuffer}.</p>
+ * <p>After reset, a first "fictional block" can be designated as initial dictionary, using {@link #LZ4_loadDictHC loadDictHC} (Optional).</p>
+ * 
+ * <p>Invoke {@link #LZ4_compress_HC_continue compress_HC_continue} to compress each successive block. The number of blocks is unlimited. Previous input blocks, including initial
+ * dictionary when present, must remain accessible and unmodified during compression.</p>
+ * 
+ * <p>It's allowed to update compression level anytime between blocks, using {@code LZ4_setCompressionLevel()} (experimental).</p>
+ * 
+ * <p>{@code dst} buffer should be sized to handle worst case scenarios (see {@link LZ4#LZ4_compressBound compressBound}, it ensures compression success). In case of failure, the API
+ * does not guarantee recovery, so the state <em>must</em> be reset. To ensure compression success whenever {@code dst} buffer size cannot be made &ge;
+ * {@code LZ4_compressBound()}, consider using {@link #LZ4_compress_HC_continue_destSize compress_HC_continue_destSize}.</p>
+ * 
+ * <p>Whenever previous input blocks can't be preserved unmodified in-place during compression of next blocks, it's possible to copy the last blocks into a
+ * more stable memory space, using {@link #LZ4_saveDictHC saveDictHC}. Return value of {@code LZ4_saveDictHC()} is the size of dictionary effectively saved into
+ * {@code safeBuffer} (&le; 64 KB)</p>
+ * 
+ * <p>After completing a streaming compression, it's possible to start a new stream of blocks, using the same {@code LZ4_streamHC_t} state, just by
+ * resetting it, using {@code LZ4_resetStreamHC_fast()}.</p>
  */
 public class LZ4HC {
 
@@ -52,7 +67,7 @@ public class LZ4HC {
 
     public static final int LZ4HC_HASH_MASK = (LZ4HC_HASHTABLESIZE - 1);
 
-    public static final int LZ4_STREAMHCSIZE = (4*LZ4HC_HASHTABLESIZE + 2*LZ4HC_MAXD + 56);
+    public static final int LZ4_STREAMHCSIZE = 4 * LZ4HC_HASHTABLESIZE + 2 * LZ4HC_MAXD + 56 + (Pointer.POINTER_SIZE == 16 ? 56 : 0);
 
     public static final int LZ4_STREAMHCSIZE_SIZET = (LZ4_STREAMHCSIZE / Pointer.POINTER_SIZE);
 
@@ -72,10 +87,11 @@ public class LZ4HC {
     public static native int nLZ4_compress_HC(long src, long dst, int srcSize, int dstCapacity, int compressionLevel);
 
     /**
-     * Compress data from {@code src} into {@code dst}, using the more powerful but slower "HC" algorithm. {@code dst} must be already allocated.
+     * Compress data from {@code src} into {@code dst}, using the powerful but slower "HC" algorithm.
      * 
      * <p>Compression is guaranteed to succeed if {@code dstCapacity} &ge; {@link LZ4#LZ4_compressBound compressBound}{@code (srcSize)}`</p>
      *
+     * @param dst              must be already allocated
      * @param compressionLevel any value between 1 and {@link #LZ4HC_CLEVEL_MAX CLEVEL_MAX} will work. Values &gt; {@link #LZ4HC_CLEVEL_MAX CLEVEL_MAX} behave the same as {@link #LZ4HC_CLEVEL_MAX CLEVEL_MAX}.
      *
      * @return the number of bytes written into {@code dst} or 0 if compression fails
@@ -103,12 +119,39 @@ public class LZ4HC {
         return nLZ4_compress_HC_extStateHC(memAddress(state), memAddress(src), memAddress(dst), src.remaining(), dst.remaining(), compressionLevel);
     }
 
+    // --- [ LZ4_compress_HC_destSize ] ---
+
+    /**
+     * Unsafe version of: {@link #LZ4_compress_HC_destSize compress_HC_destSize}
+     *
+     * @param srcSizePtr on success, {@code *srcSizePtr} is updated to indicate how much bytes were read from {@code src}
+     */
+    public static native int nLZ4_compress_HC_destSize(long stateHC, long src, long dst, long srcSizePtr, int targetDstSize, int compressionLevel);
+
+    /**
+     * Will compress as much data as possible from {@code src} to fit into {@code targetDstSize} budget.
+     *
+     * @param srcSizePtr on success, {@code *srcSizePtr} is updated to indicate how much bytes were read from {@code src}
+     *
+     * @return the number of bytes written into {@code dst} (necessarily &le; {@code targetDstSize}) or 0 if compression fails
+     *
+     * @since 1.9.0
+     */
+    public static int LZ4_compress_HC_destSize(@NativeType("void *") ByteBuffer stateHC, @NativeType("char const *") ByteBuffer src, @NativeType("char *") ByteBuffer dst, @NativeType("int *") IntBuffer srcSizePtr, int compressionLevel) {
+        if (CHECKS) {
+            check(srcSizePtr, 1);
+            check(src, srcSizePtr.get(srcSizePtr.position()));
+        }
+        return nLZ4_compress_HC_destSize(memAddress(stateHC), memAddress(src), memAddress(dst), memAddress(srcSizePtr), dst.remaining(), compressionLevel);
+    }
+
     // --- [ LZ4_createStreamHC ] ---
 
     /**
      * Creates memory for LZ4 HC streaming state.
      * 
-     * <p>Newly created states are automatically initialized. Existing states can be re-used several times, using {@link #LZ4_resetStreamHC resetStreamHC}.</p>
+     * <p>Newly created states are automatically initialized. A same state can be used multiple times consecutively, starting with {@link #LZ4_resetStreamHC_fast resetStreamHC_fast} to start
+     * a new stream of blocks.</p>
      */
     @NativeType("LZ4_streamHC_t *")
     public static native long LZ4_createStreamHC();
@@ -126,15 +169,36 @@ public class LZ4HC {
         return nLZ4_freeStreamHC(streamHCPtr);
     }
 
-    // --- [ LZ4_resetStreamHC ] ---
+    // --- [ LZ4_resetStreamHC_fast ] ---
 
-    public static native void nLZ4_resetStreamHC(long streamHCPtr, int compressionLevel);
+    /** Unsafe version of: {@link #LZ4_resetStreamHC_fast resetStreamHC_fast} */
+    public static native void nLZ4_resetStreamHC_fast(long LZ4_streamHCPtr, int compressionLevel);
 
-    public static void LZ4_resetStreamHC(@NativeType("LZ4_streamHC_t *") long streamHCPtr, int compressionLevel) {
+    /**
+     * When an {@code LZ4_streamHC_t} is known to be in a internally coherent state, it can often be prepared for a new compression with almost no work, only
+     * sometimes falling back to the full, expensive reset that is always required when the stream is in an indeterminate state (i.e., the reset performed by
+     * {@link #LZ4_initStreamHC initStreamHC}).
+     * 
+     * <p>{@code LZ4_streamHC}s are guaranteed to be in a valid state when:</p>
+     * 
+     * <ul>
+     * <li>returned from {@link #LZ4_createStreamHC createStreamHC}</li>
+     * <li>reset by {@link #LZ4_initStreamHC initStreamHC}</li>
+     * <li>{@code memset(stream, 0, sizeof(LZ4_streamHC_t))}</li>
+     * <li>the stream was in a valid state and was reset by {@link #LZ4_resetStreamHC_fast resetStreamHC_fast}</li>
+     * <li>the stream was in a valid state and was then used in any compression call that returned success</li>
+     * <li>the stream was in an indeterminate state and was used in a compression call that fully reset the state ({@link #LZ4_compress_HC_extStateHC compress_HC_extStateHC}) and that
+     * returned success</li>
+     * </ul>
+     * 
+     * <p>Note: A stream that was last used in a compression call that returned an error may be passed to this function. However, it will be fully reset, which
+     * will clear any existing history and settings from the context.</p>
+     */
+    public static void LZ4_resetStreamHC_fast(@NativeType("LZ4_streamHC_t *") long LZ4_streamHCPtr, int compressionLevel) {
         if (CHECKS) {
-            check(streamHCPtr);
+            check(LZ4_streamHCPtr);
         }
-        nLZ4_resetStreamHC(streamHCPtr, compressionLevel);
+        nLZ4_resetStreamHC_fast(LZ4_streamHCPtr, compressionLevel);
     }
 
     // --- [ LZ4_loadDictHC ] ---
@@ -159,6 +223,35 @@ public class LZ4HC {
         return nLZ4_compress_HC_continue(streamHCPtr, memAddress(src), memAddress(dst), src.remaining(), dst.remaining());
     }
 
+    // --- [ LZ4_compress_HC_continue_destSize ] ---
+
+    /**
+     * Unsafe version of: {@link #LZ4_compress_HC_continue_destSize compress_HC_continue_destSize}
+     *
+     * @param srcSizePtr on success, {@code *srcSizePtr} will be updated to indicate how much bytes were read from {@code src}. Note that this function may not consume the
+     *                   entire input.
+     */
+    public static native int nLZ4_compress_HC_continue_destSize(long streamHCPtr, long src, long dst, long srcSizePtr, int targetDstSize);
+
+    /**
+     * Similar to {@link #LZ4_compress_HC_continue compress_HC_continue}, but will read as much data as possible from {@code src} to fit into {@code targetDstSize} budget.
+     *
+     * @param srcSizePtr on success, {@code *srcSizePtr} will be updated to indicate how much bytes were read from {@code src}. Note that this function may not consume the
+     *                   entire input.
+     *
+     * @return the number of bytes written into {@code dst} (necessarily &le; targetDstSize) or 0 if compression fails
+     *
+     * @since 1.9.0
+     */
+    public static int LZ4_compress_HC_continue_destSize(@NativeType("LZ4_streamHC_t *") long streamHCPtr, @NativeType("char const *") ByteBuffer src, @NativeType("char *") ByteBuffer dst, @NativeType("int *") IntBuffer srcSizePtr) {
+        if (CHECKS) {
+            check(streamHCPtr);
+            check(srcSizePtr, 1);
+            check(src, srcSizePtr.get(srcSizePtr.position()));
+        }
+        return nLZ4_compress_HC_continue_destSize(streamHCPtr, memAddress(src), memAddress(dst), memAddress(srcSizePtr), dst.remaining());
+    }
+
     // --- [ LZ4_saveDictHC ] ---
 
     public static native int nLZ4_saveDictHC(long streamHCPtr, long safeBuffer, int maxDictSize);
@@ -170,53 +263,19 @@ public class LZ4HC {
         return nLZ4_saveDictHC(streamHCPtr, memAddress(safeBuffer), safeBuffer.remaining());
     }
 
-    // --- [ LZ4_compress_HC_destSize ] ---
+    // --- [ LZ4_initStreamHC ] ---
+
+    /** Unsafe version of: {@link #LZ4_initStreamHC initStreamHC} */
+    public static native long nLZ4_initStreamHC(long buffer, long size);
 
     /**
-     * Unsafe version of: {@link #LZ4_compress_HC_destSize compress_HC_destSize}
+     * Required before first use of a statically allocated {@code LZ4_streamHC_t}.
      *
-     * @param srcSizePtr value will be updated to indicate how much bytes were read from {@code src}
+     * @since 1.9.0
      */
-    public static native int nLZ4_compress_HC_destSize(long LZ4HC_Data, long src, long dst, long srcSizePtr, int targetDstSize, int compressionLevel);
-
-    /**
-     * Will try to compress as much data from {@code src} as possible that can fit into {@code targetDstSize} budget.
-     *
-     * @param srcSizePtr value will be updated to indicate how much bytes were read from {@code src}
-     *
-     * @return the number of bytes written into {@code dst} or 0 if compression fails
-     */
-    public static int LZ4_compress_HC_destSize(@NativeType("void *") ByteBuffer LZ4HC_Data, @NativeType("char const *") ByteBuffer src, @NativeType("char *") ByteBuffer dst, @NativeType("int *") IntBuffer srcSizePtr, int compressionLevel) {
-        if (CHECKS) {
-            check(srcSizePtr, 1);
-            check(src, srcSizePtr.get(srcSizePtr.position()));
-        }
-        return nLZ4_compress_HC_destSize(memAddress(LZ4HC_Data), memAddress(src), memAddress(dst), memAddress(srcSizePtr), dst.remaining(), compressionLevel);
-    }
-
-    // --- [ LZ4_compress_HC_continue_destSize ] ---
-
-    /**
-     * Unsafe version of: {@link #LZ4_compress_HC_continue_destSize compress_HC_continue_destSize}
-     *
-     * @param srcSizePtr value will be updated to indicate how much bytes were read from {@code src}
-     */
-    public static native int nLZ4_compress_HC_continue_destSize(long LZ4_streamHCPtr, long src, long dst, long srcSizePtr, int targetDstSize);
-
-    /**
-     * Similar as {@link #LZ4_compress_HC_continue compress_HC_continue}, but will read a variable nb of bytes from {@code src} to fit into {@code targetDstSize} budget.
-     *
-     * @param srcSizePtr value will be updated to indicate how much bytes were read from {@code src}
-     *
-     * @return the number of bytes written into {@code dst} or 0 if compression fails
-     */
-    public static int LZ4_compress_HC_continue_destSize(@NativeType("LZ4_streamHC_t *") long LZ4_streamHCPtr, @NativeType("char const *") ByteBuffer src, @NativeType("char *") ByteBuffer dst, @NativeType("int *") IntBuffer srcSizePtr) {
-        if (CHECKS) {
-            check(LZ4_streamHCPtr);
-            check(srcSizePtr, 1);
-            check(src, srcSizePtr.get(srcSizePtr.position()));
-        }
-        return nLZ4_compress_HC_continue_destSize(LZ4_streamHCPtr, memAddress(src), memAddress(dst), memAddress(srcSizePtr), dst.remaining());
+    @NativeType("LZ4_streamHC_t *")
+    public static long LZ4_initStreamHC(@NativeType("void *") ByteBuffer buffer) {
+        return nLZ4_initStreamHC(memAddress(buffer), buffer.remaining());
     }
 
     // --- [ LZ4_setCompressionLevel ] ---
@@ -224,7 +283,7 @@ public class LZ4HC {
     /** Unsafe version of: {@link #LZ4_setCompressionLevel setCompressionLevel} */
     public static native void nLZ4_setCompressionLevel(long LZ4_streamHCPtr, int compressionLevel);
 
-    /** It's possible to change compression level between 2 invocations of {@code LZ4_compress_HC_continue*()}. */
+    /** It's possible to change compression level between successive invocations of {@code LZ4_compress_HC_continue*()} for dynamic adaptation. */
     public static void LZ4_setCompressionLevel(@NativeType("LZ4_streamHC_t *") long LZ4_streamHCPtr, int compressionLevel) {
         if (CHECKS) {
             check(LZ4_streamHCPtr);
@@ -238,9 +297,9 @@ public class LZ4HC {
     public static native void nLZ4_favorDecompressionSpeed(long LZ4_streamHCPtr, int favor);
 
     /**
-     * Parser will select decisions favoring decompression over compression ratio.
+     * Parser will favor decompression speed over compression ratio.
      * 
-     * <p>Only works at highest compression settings (level &ge; {@link #LZ4HC_CLEVEL_OPT_MIN CLEVEL_OPT_MIN})</p>
+     * <p>Only applicable to levels &ge; {@link #LZ4HC_CLEVEL_OPT_MIN CLEVEL_OPT_MIN}.</p>
      *
      * @since version 1.8.2 (experimental)
      */
@@ -249,35 +308,6 @@ public class LZ4HC {
             check(LZ4_streamHCPtr);
         }
         nLZ4_favorDecompressionSpeed(LZ4_streamHCPtr, favor ? 1 : 0);
-    }
-
-    // --- [ LZ4_resetStreamHC_fast ] ---
-
-    /** Unsafe version of: {@link #LZ4_resetStreamHC_fast resetStreamHC_fast} */
-    public static native void nLZ4_resetStreamHC_fast(long LZ4_streamHCPtr, int compressionLevel);
-
-    /**
-     * When an {@code LZ4_streamHC_t} is known to be in a internally coherent state, it can often be prepared for a new compression with almost no work, only
-     * sometimes falling back to the full, expensive reset that is always required when the stream is in an indeterminate state (i.e., the reset performed by
-     * {@link #LZ4_resetStreamHC resetStreamHC}).
-     * 
-     * <p>{@code LZ4_streamHC}s are guaranteed to be in a valid state when:</p>
-     * 
-     * <ul>
-     * <li>returned from {@link #LZ4_createStreamHC createStreamHC}</li>
-     * <li>reset by {@link #LZ4_resetStreamHC resetStreamHC}</li>
-     * <li>{@code memset(stream, 0, sizeof(LZ4_streamHC_t))}</li>
-     * <li>the stream was in a valid state and was reset by {@link #LZ4_resetStreamHC_fast resetStreamHC_fast}</li>
-     * <li>the stream was in a valid state and was then used in any compression call that returned success</li>
-     * <li>the stream was in an indeterminate state and was used in a compression call that fully reset the state ({@link #LZ4_compress_HC_extStateHC compress_HC_extStateHC}) and that
-     * returned success</li>
-     * </ul>
-     */
-    public static void LZ4_resetStreamHC_fast(@NativeType("LZ4_streamHC_t *") long LZ4_streamHCPtr, int compressionLevel) {
-        if (CHECKS) {
-            check(LZ4_streamHCPtr);
-        }
-        nLZ4_resetStreamHC_fast(LZ4_streamHCPtr, compressionLevel);
     }
 
     // --- [ LZ4_compress_HC_extStateHC_fastReset ] ---
@@ -290,7 +320,7 @@ public class LZ4HC {
      * 
      * <p>Using this variant avoids an expensive initialization step. It is only safe to call if the state buffer is known to be correctly initialized already
      * (see comment on {@link #LZ4_resetStreamHC_fast resetStreamHC_fast} for a definition of "correctly initialized"). From a high level, the difference is that this function initializes
-     * the provided state with a call to {@link #LZ4_resetStreamHC_fast resetStreamHC_fast} while {@link #LZ4_compress_HC_extStateHC compress_HC_extStateHC} starts with a call to {@link #LZ4_resetStreamHC resetStreamHC}.</p>
+     * the provided state with a call to {@link #LZ4_resetStreamHC_fast resetStreamHC_fast} while {@link #LZ4_compress_HC_extStateHC compress_HC_extStateHC} starts with a call to {@link #LZ4_initStreamHC initStreamHC}.</p>
      */
     public static int LZ4_compress_HC_extStateHC_fastReset(@NativeType("void *") ByteBuffer state, @NativeType("char * const") ByteBuffer src, @NativeType("char *") ByteBuffer dst, int compressionLevel) {
         return nLZ4_compress_HC_extStateHC_fastReset(memAddress(state), memAddress(src), memAddress(dst), src.remaining(), dst.remaining(), compressionLevel);
@@ -315,9 +345,9 @@ public class LZ4HC {
      * 
      * <p>A dictionary should only be attached to a stream without any history (i.e., a stream that has just been reset).</p>
      * 
-     * <p>The dictionary will remain attached to the working stream only for the current stream session. Calls to {@code LZ4_resetStreamHC(_fast)} will remove
-     * the dictionary context association from the working stream. The dictionary stream (and source buffer) must remain in-place / accessible / unchanged
-     * through the lifetime of the stream session.</p>
+     * <p>The dictionary will remain attached to the working stream only for the current stream session. Calls to {@link #LZ4_resetStreamHC_fast resetStreamHC_fast} will remove the
+     * dictionary context association from the working stream. The dictionary stream (and source buffer) must remain in-place / accessible / unchanged through
+     * the lifetime of the stream session.</p>
      */
     public static void LZ4_attach_HC_dictionary(@NativeType("LZ4_streamHC_t *") long working_stream, @NativeType("LZ4_streamHC_t * const") long dictionary_stream) {
         if (CHECKS) {

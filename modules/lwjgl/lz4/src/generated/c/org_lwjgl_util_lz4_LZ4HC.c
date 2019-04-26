@@ -40,6 +40,18 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_lz4_LZ4HC_nLZ4_1compress_1HC_1extStat
     return CRITICAL(org_lwjgl_util_lz4_LZ4HC_nLZ4_1compress_1HC_1extStateHC)(stateAddress, srcAddress, dstAddress, srcSize, maxDstSize, compressionLevel);
 }
 
+JNIEXPORT_CRITICAL jint JNICALL CRITICAL(org_lwjgl_util_lz4_LZ4HC_nLZ4_1compress_1HC_1destSize)(jlong stateHCAddress, jlong srcAddress, jlong dstAddress, jlong srcSizePtrAddress, jint targetDstSize, jint compressionLevel) {
+    void *stateHC = (void *)(intptr_t)stateHCAddress;
+    char const *src = (char const *)(intptr_t)srcAddress;
+    char *dst = (char *)(intptr_t)dstAddress;
+    int *srcSizePtr = (int *)(intptr_t)srcSizePtrAddress;
+    return (jint)LZ4_compress_HC_destSize(stateHC, src, dst, srcSizePtr, targetDstSize, compressionLevel);
+}
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_lz4_LZ4HC_nLZ4_1compress_1HC_1destSize(JNIEnv *__env, jclass clazz, jlong stateHCAddress, jlong srcAddress, jlong dstAddress, jlong srcSizePtrAddress, jint targetDstSize, jint compressionLevel) {
+    UNUSED_PARAMS(__env, clazz)
+    return CRITICAL(org_lwjgl_util_lz4_LZ4HC_nLZ4_1compress_1HC_1destSize)(stateHCAddress, srcAddress, dstAddress, srcSizePtrAddress, targetDstSize, compressionLevel);
+}
+
 JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_lz4_LZ4HC_LZ4_1createStreamHC(void) {
     return (jlong)(intptr_t)LZ4_createStreamHC();
 }
@@ -57,13 +69,13 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_lz4_LZ4HC_nLZ4_1freeStreamHC(JNIEnv *
     return JavaCritical_org_lwjgl_util_lz4_LZ4HC_nLZ4_1freeStreamHC(streamHCPtrAddress);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_lz4_LZ4HC_nLZ4_1resetStreamHC(jlong streamHCPtrAddress, jint compressionLevel) {
-    LZ4_streamHC_t *streamHCPtr = (LZ4_streamHC_t *)(intptr_t)streamHCPtrAddress;
-    LZ4_resetStreamHC(streamHCPtr, compressionLevel);
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_lz4_LZ4HC_nLZ4_1resetStreamHC_1fast(jlong LZ4_streamHCPtrAddress, jint compressionLevel) {
+    LZ4_streamHC_t *LZ4_streamHCPtr = (LZ4_streamHC_t *)(intptr_t)LZ4_streamHCPtrAddress;
+    LZ4_resetStreamHC_fast(LZ4_streamHCPtr, compressionLevel);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_util_lz4_LZ4HC_nLZ4_1resetStreamHC(JNIEnv *__env, jclass clazz, jlong streamHCPtrAddress, jint compressionLevel) {
+JNIEXPORT void JNICALL Java_org_lwjgl_util_lz4_LZ4HC_nLZ4_1resetStreamHC_1fast(JNIEnv *__env, jclass clazz, jlong LZ4_streamHCPtrAddress, jint compressionLevel) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_util_lz4_LZ4HC_nLZ4_1resetStreamHC(streamHCPtrAddress, compressionLevel);
+    JavaCritical_org_lwjgl_util_lz4_LZ4HC_nLZ4_1resetStreamHC_1fast(LZ4_streamHCPtrAddress, compressionLevel);
 }
 
 JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_lz4_LZ4HC_nLZ4_1loadDictHC(jlong streamHCPtrAddress, jlong dictionaryAddress, jint dictSize) {
@@ -87,6 +99,18 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_lz4_LZ4HC_nLZ4_1compress_1HC_1continu
     return JavaCritical_org_lwjgl_util_lz4_LZ4HC_nLZ4_1compress_1HC_1continue(streamHCPtrAddress, srcAddress, dstAddress, srcSize, maxDstSize);
 }
 
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_lz4_LZ4HC_nLZ4_1compress_1HC_1continue_1destSize(jlong streamHCPtrAddress, jlong srcAddress, jlong dstAddress, jlong srcSizePtrAddress, jint targetDstSize) {
+    LZ4_streamHC_t *streamHCPtr = (LZ4_streamHC_t *)(intptr_t)streamHCPtrAddress;
+    char const *src = (char const *)(intptr_t)srcAddress;
+    char *dst = (char *)(intptr_t)dstAddress;
+    int *srcSizePtr = (int *)(intptr_t)srcSizePtrAddress;
+    return (jint)LZ4_compress_HC_continue_destSize(streamHCPtr, src, dst, srcSizePtr, targetDstSize);
+}
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_lz4_LZ4HC_nLZ4_1compress_1HC_1continue_1destSize(JNIEnv *__env, jclass clazz, jlong streamHCPtrAddress, jlong srcAddress, jlong dstAddress, jlong srcSizePtrAddress, jint targetDstSize) {
+    UNUSED_PARAMS(__env, clazz)
+    return JavaCritical_org_lwjgl_util_lz4_LZ4HC_nLZ4_1compress_1HC_1continue_1destSize(streamHCPtrAddress, srcAddress, dstAddress, srcSizePtrAddress, targetDstSize);
+}
+
 JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_lz4_LZ4HC_nLZ4_1saveDictHC(jlong streamHCPtrAddress, jlong safeBufferAddress, jint maxDictSize) {
     LZ4_streamHC_t *streamHCPtr = (LZ4_streamHC_t *)(intptr_t)streamHCPtrAddress;
     char *safeBuffer = (char *)(intptr_t)safeBufferAddress;
@@ -97,28 +121,13 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_lz4_LZ4HC_nLZ4_1saveDictHC(JNIEnv *__
     return JavaCritical_org_lwjgl_util_lz4_LZ4HC_nLZ4_1saveDictHC(streamHCPtrAddress, safeBufferAddress, maxDictSize);
 }
 
-JNIEXPORT_CRITICAL jint JNICALL CRITICAL(org_lwjgl_util_lz4_LZ4HC_nLZ4_1compress_1HC_1destSize)(jlong LZ4HC_DataAddress, jlong srcAddress, jlong dstAddress, jlong srcSizePtrAddress, jint targetDstSize, jint compressionLevel) {
-    void *LZ4HC_Data = (void *)(intptr_t)LZ4HC_DataAddress;
-    char const *src = (char const *)(intptr_t)srcAddress;
-    char *dst = (char *)(intptr_t)dstAddress;
-    int *srcSizePtr = (int *)(intptr_t)srcSizePtrAddress;
-    return (jint)LZ4_compress_HC_destSize(LZ4HC_Data, src, dst, srcSizePtr, targetDstSize, compressionLevel);
+JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_lz4_LZ4HC_nLZ4_1initStreamHC(jlong bufferAddress, jlong size) {
+    void *buffer = (void *)(intptr_t)bufferAddress;
+    return (jlong)(intptr_t)LZ4_initStreamHC(buffer, (size_t)size);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_lz4_LZ4HC_nLZ4_1compress_1HC_1destSize(JNIEnv *__env, jclass clazz, jlong LZ4HC_DataAddress, jlong srcAddress, jlong dstAddress, jlong srcSizePtrAddress, jint targetDstSize, jint compressionLevel) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_lz4_LZ4HC_nLZ4_1initStreamHC(JNIEnv *__env, jclass clazz, jlong bufferAddress, jlong size) {
     UNUSED_PARAMS(__env, clazz)
-    return CRITICAL(org_lwjgl_util_lz4_LZ4HC_nLZ4_1compress_1HC_1destSize)(LZ4HC_DataAddress, srcAddress, dstAddress, srcSizePtrAddress, targetDstSize, compressionLevel);
-}
-
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_lz4_LZ4HC_nLZ4_1compress_1HC_1continue_1destSize(jlong LZ4_streamHCPtrAddress, jlong srcAddress, jlong dstAddress, jlong srcSizePtrAddress, jint targetDstSize) {
-    LZ4_streamHC_t *LZ4_streamHCPtr = (LZ4_streamHC_t *)(intptr_t)LZ4_streamHCPtrAddress;
-    char const *src = (char const *)(intptr_t)srcAddress;
-    char *dst = (char *)(intptr_t)dstAddress;
-    int *srcSizePtr = (int *)(intptr_t)srcSizePtrAddress;
-    return (jint)LZ4_compress_HC_continue_destSize(LZ4_streamHCPtr, src, dst, srcSizePtr, targetDstSize);
-}
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_lz4_LZ4HC_nLZ4_1compress_1HC_1continue_1destSize(JNIEnv *__env, jclass clazz, jlong LZ4_streamHCPtrAddress, jlong srcAddress, jlong dstAddress, jlong srcSizePtrAddress, jint targetDstSize) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_lz4_LZ4HC_nLZ4_1compress_1HC_1continue_1destSize(LZ4_streamHCPtrAddress, srcAddress, dstAddress, srcSizePtrAddress, targetDstSize);
+    return JavaCritical_org_lwjgl_util_lz4_LZ4HC_nLZ4_1initStreamHC(bufferAddress, size);
 }
 
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_lz4_LZ4HC_nLZ4_1setCompressionLevel(jlong LZ4_streamHCPtrAddress, jint compressionLevel) {
@@ -137,15 +146,6 @@ JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_lz4_LZ4HC_nLZ4_1favorDecompre
 JNIEXPORT void JNICALL Java_org_lwjgl_util_lz4_LZ4HC_nLZ4_1favorDecompressionSpeed(JNIEnv *__env, jclass clazz, jlong LZ4_streamHCPtrAddress, jint favor) {
     UNUSED_PARAMS(__env, clazz)
     JavaCritical_org_lwjgl_util_lz4_LZ4HC_nLZ4_1favorDecompressionSpeed(LZ4_streamHCPtrAddress, favor);
-}
-
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_lz4_LZ4HC_nLZ4_1resetStreamHC_1fast(jlong LZ4_streamHCPtrAddress, jint compressionLevel) {
-    LZ4_streamHC_t *LZ4_streamHCPtr = (LZ4_streamHC_t *)(intptr_t)LZ4_streamHCPtrAddress;
-    LZ4_resetStreamHC_fast(LZ4_streamHCPtr, compressionLevel);
-}
-JNIEXPORT void JNICALL Java_org_lwjgl_util_lz4_LZ4HC_nLZ4_1resetStreamHC_1fast(JNIEnv *__env, jclass clazz, jlong LZ4_streamHCPtrAddress, jint compressionLevel) {
-    UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_util_lz4_LZ4HC_nLZ4_1resetStreamHC_1fast(LZ4_streamHCPtrAddress, compressionLevel);
 }
 
 JNIEXPORT_CRITICAL jint JNICALL CRITICAL(org_lwjgl_util_lz4_LZ4HC_nLZ4_1compress_1HC_1extStateHC_1fastReset)(jlong stateAddress, jlong srcAddress, jlong dstAddress, jint srcSize, jint dstCapacity, jint compressionLevel) {

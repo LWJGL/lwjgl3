@@ -26,6 +26,8 @@ import static org.lwjgl.util.lz4.LZ4HC.*;
  * <li>{@code dictLimit} &ndash; below that point, need {@code extDict}</li>
  * <li>{@code lowLimit} &ndash; below that point, no more {@code dict}</li>
  * <li>{@code nextToUpdate} &ndash; index from which to continue dictionary update</li>
+ * <li>{@code favorDecSpeed} &ndash; favor decompression speed if this flag set, otherwise, favor compression ratio</li>
+ * <li>{@code dirty} &ndash; stream has to be fully reset if this flag is set</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -41,7 +43,8 @@ import static org.lwjgl.util.lz4.LZ4HC.*;
  *     uint32_t lowLimit;
  *     uint32_t nextToUpdate;
  *     short compressionLevel;
- *     short favorDecSpeed;
+ *     int8_t favorDecSpeed;
+ *     int8_t dirty;
  *     {@link LZ4HCCCtxInternal LZ4HC_CCtx_internal} * const dictCtx;
  * }</code></pre>
  */
@@ -66,6 +69,7 @@ public class LZ4HCCCtxInternal extends Struct {
         NEXTTOUPDATE,
         COMPRESSIONLEVEL,
         FAVORDECSPEED,
+        DIRTY,
         DICTCTX;
 
     static {
@@ -79,7 +83,8 @@ public class LZ4HCCCtxInternal extends Struct {
             __member(4),
             __member(4),
             __member(2),
-            __member(2),
+            __member(1),
+            __member(1),
             __member(POINTER_SIZE)
         );
 
@@ -96,7 +101,8 @@ public class LZ4HCCCtxInternal extends Struct {
         NEXTTOUPDATE = layout.offsetof(7);
         COMPRESSIONLEVEL = layout.offsetof(8);
         FAVORDECSPEED = layout.offsetof(9);
-        DICTCTX = layout.offsetof(10);
+        DIRTY = layout.offsetof(10);
+        DICTCTX = layout.offsetof(11);
     }
 
     /**
@@ -157,7 +163,11 @@ public class LZ4HCCCtxInternal extends Struct {
     /** Returns the value of the {@code compressionLevel} field. */
     public short compressionLevel() { return ncompressionLevel(address()); }
     /** Returns the value of the {@code favorDecSpeed} field. */
-    public short favorDecSpeed() { return nfavorDecSpeed(address()); }
+    @NativeType("int8_t")
+    public byte favorDecSpeed() { return nfavorDecSpeed(address()); }
+    /** Returns the value of the {@code dirty} field. */
+    @NativeType("int8_t")
+    public byte dirty() { return ndirty(address()); }
     /** Returns a {@link LZ4HCCCtxInternal} view of the struct pointed to by the {@code dictCtx} field. */
     @NativeType("LZ4HC_CCtx_internal * const")
     public LZ4HCCCtxInternal dictCtx() { return ndictCtx(address()); }
@@ -220,7 +230,9 @@ public class LZ4HCCCtxInternal extends Struct {
     /** Unsafe version of {@link #compressionLevel}. */
     public static short ncompressionLevel(long struct) { return UNSAFE.getShort(null, struct + LZ4HCCCtxInternal.COMPRESSIONLEVEL); }
     /** Unsafe version of {@link #favorDecSpeed}. */
-    public static short nfavorDecSpeed(long struct) { return UNSAFE.getShort(null, struct + LZ4HCCCtxInternal.FAVORDECSPEED); }
+    public static byte nfavorDecSpeed(long struct) { return UNSAFE.getByte(null, struct + LZ4HCCCtxInternal.FAVORDECSPEED); }
+    /** Unsafe version of {@link #dirty}. */
+    public static byte ndirty(long struct) { return UNSAFE.getByte(null, struct + LZ4HCCCtxInternal.DIRTY); }
     /** Unsafe version of {@link #dictCtx}. */
     public static LZ4HCCCtxInternal ndictCtx(long struct) { return LZ4HCCCtxInternal.create(memGetAddress(struct + LZ4HCCCtxInternal.DICTCTX)); }
 
@@ -307,7 +319,11 @@ public class LZ4HCCCtxInternal extends Struct {
         /** Returns the value of the {@code compressionLevel} field. */
         public short compressionLevel() { return LZ4HCCCtxInternal.ncompressionLevel(address()); }
         /** Returns the value of the {@code favorDecSpeed} field. */
-        public short favorDecSpeed() { return LZ4HCCCtxInternal.nfavorDecSpeed(address()); }
+        @NativeType("int8_t")
+        public byte favorDecSpeed() { return LZ4HCCCtxInternal.nfavorDecSpeed(address()); }
+        /** Returns the value of the {@code dirty} field. */
+        @NativeType("int8_t")
+        public byte dirty() { return LZ4HCCCtxInternal.ndirty(address()); }
         /** Returns a {@link LZ4HCCCtxInternal} view of the struct pointed to by the {@code dictCtx} field. */
         @NativeType("LZ4HC_CCtx_internal * const")
         public LZ4HCCCtxInternal dictCtx() { return LZ4HCCCtxInternal.ndictCtx(address()); }

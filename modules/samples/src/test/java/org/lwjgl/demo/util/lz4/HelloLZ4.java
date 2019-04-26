@@ -17,6 +17,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.util.lz4.LZ4.*;
 import static org.lwjgl.util.lz4.LZ4Frame.*;
+import static org.lwjgl.util.lz4.LZ4HC.*;
 
 public class HelloLZ4 {
 
@@ -47,10 +48,16 @@ public class HelloLZ4 {
             System.nanoTime();
         }
 
-        ByteBuffer compressed     = memAlloc(LZ4_compressBound(uncompressed.remaining()));
-        long       compressedSize = LZ4_compress_default(uncompressed, compressed);
+        ByteBuffer compressed   = memAlloc(LZ4_compressBound(uncompressed.remaining()));
+        ByteBuffer compressedHC = memAlloc(compressed.capacity());
+
+        long compressedSize = LZ4_compress_default(uncompressed, compressed);
         compressed.limit((int)compressedSize);
         compressed = compressed.slice();
+
+        compressedSize = LZ4_compress_HC(uncompressed, compressedHC, LZ4HC_CLEVEL_DEFAULT);
+        compressedHC.limit((int)compressedSize);
+        compressedHC = compressedHC.slice();
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try (GZIPOutputStream dos = new GZIPOutputStream(baos)) {
@@ -64,14 +71,18 @@ public class HelloLZ4 {
 
         System.out.format("Uncompressed size: %d bytes\n", uncompressed.remaining());
         System.out.println("COMPRESSION RATIO:");
-        System.out.format("\tLZ4: %f (%d bytes)\n", (uncompressed.remaining() / (float)compressed.remaining()), compressed.remaining());
-        System.out.format("\tGZip: %f (%d bytes)\n", (uncompressedArray.length / (float)compressedArray.length), compressedArray.length);
+        System.out.format("\tLZ4     : %f (%d bytes)\n", (uncompressed.remaining() / (float)compressed.remaining()), compressed.remaining());
+        System.out.format("\tLZ4(HC) : %f (%d bytes)\n", (uncompressed.remaining() / (float)compressedHC.remaining()), compressedHC.remaining());
+        System.out.format("\tGZip    : %f (%d bytes)\n", (uncompressedArray.length / (float)compressedArray.length), compressedArray.length);
 
         long time = benchLZ4Compression(uncompressed);
         System.out.format("\nCompression   LZ4(simple): %d MB/s (%d us/file)\n", getThroughput(uncompressed.remaining(), time), time / 1_000);
 
         time = benchLZ4CompressionAdvanced(uncompressed);
         System.out.format("Compression LZ4(advanced): %d MB/s (%d us/file)\n", getThroughput(uncompressed.remaining(), time), time / 1_000);
+
+        time = benchLZ4HCCompression(uncompressed);
+        System.out.format("Compression       LZ4(HC): %d MB/s (%d us/file)\n", getThroughput(uncompressed.remaining(), time), time / 1_000);
 
         time = benchGZIPCompression(uncompressedArray);
         System.out.format("Compression          GZip: %d MB/s (%d us/file)\n", getThroughput(uncompressedArray.length, time), time / 1_000);
@@ -177,7 +188,7 @@ public class HelloLZ4 {
     }
 
     private static long benchLZ4CompressionAdvanced(ByteBuffer uncompressed, ByteBuffer compressed, int iterations) {
-        int  size = 0;
+        int size = 0;
 
         long cctx = NULL;
         try (MemoryStack stack = stackPush()) {
@@ -201,6 +212,36 @@ public class HelloLZ4 {
             }
         }
 
+        return size;
+    }
+
+    // LZ4HC
+
+    private static long benchLZ4HCCompression(ByteBuffer uncompressed) {
+        ByteBuffer compressed = memAlloc(LZ4_compressBound(uncompressed.remaining()));
+        try {
+            // warmup
+            long compressedSize = benchLZ4HCCompression(uncompressed, compressed, BENCH_WARMUP);
+
+            compressed.limit((int)compressedSize);
+            verifyDecompressed(uncompressed, compressed.slice());
+            compressed.limit(compressed.capacity());
+
+            long t = System.nanoTime();
+            benchLZ4HCCompression(uncompressed, compressed, BENCH_ITERS);
+            t = System.nanoTime() - t;
+
+            return t / BENCH_ITERS;
+        } finally {
+            memFree(compressed);
+        }
+    }
+
+    private static long benchLZ4HCCompression(ByteBuffer uncompressed, ByteBuffer compressed, int iterations) {
+        long size = 0L;
+        for (int i = 0; i < iterations; i++) {
+            size |= LZ4_compress_HC(uncompressed, compressed, LZ4HC_CLEVEL_DEFAULT);
+        }
         return size;
     }
 
@@ -252,7 +293,7 @@ public class HelloLZ4 {
         //long dctx = LZ4_createDCtx();
         try {
             for (int i = 0; i < iterations; i++) {
-                checkLZ4F(LZ4_decompress_fast(compressed, decompressed));
+                checkLZ4F(LZ4_decompress_safe(compressed, decompressed));
             }
         } finally {
             //checkLZ4(LZ4_freeDCtx(dctx));

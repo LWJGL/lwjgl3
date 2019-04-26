@@ -23,7 +23,7 @@ import static org.lwjgl.util.lz4.LZ4.LZ4_HASH_SIZE_U32;
  * struct LZ4_stream_t_internal {
  *     uint32_t hashTable[LZ4_HASH_SIZE_U32];
  *     uint32_t currentOffset;
- *     uint32_t initCheck;
+ *     uint16_t dirty;
  *     uint16_t tableType;
  *     uint8_t const * dictionary;
  *     {@link LZ4StreamInternal LZ4_stream_t_internal} * const dictCtx;
@@ -43,7 +43,7 @@ public class LZ4StreamInternal extends Struct {
     public static final int
         HASHTABLE,
         CURRENTOFFSET,
-        INITCHECK,
+        DIRTY,
         TABLETYPE,
         DICTIONARY,
         DICTCTX,
@@ -53,7 +53,7 @@ public class LZ4StreamInternal extends Struct {
         Layout layout = __struct(
             __array(4, LZ4_HASH_SIZE_U32),
             __member(4),
-            __member(4),
+            __member(2),
             __member(2),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
@@ -65,7 +65,7 @@ public class LZ4StreamInternal extends Struct {
 
         HASHTABLE = layout.offsetof(0);
         CURRENTOFFSET = layout.offsetof(1);
-        INITCHECK = layout.offsetof(2);
+        DIRTY = layout.offsetof(2);
         TABLETYPE = layout.offsetof(3);
         DICTIONARY = layout.offsetof(4);
         DICTCTX = layout.offsetof(5);
@@ -94,9 +94,9 @@ public class LZ4StreamInternal extends Struct {
     /** Returns the value of the {@code currentOffset} field. */
     @NativeType("uint32_t")
     public int currentOffset() { return ncurrentOffset(address()); }
-    /** Returns the value of the {@code initCheck} field. */
-    @NativeType("uint32_t")
-    public int initCheck() { return ninitCheck(address()); }
+    /** Returns the value of the {@code dirty} field. */
+    @NativeType("uint16_t")
+    public short dirty() { return ndirty(address()); }
     /** Returns the value of the {@code tableType} field. */
     @NativeType("uint16_t")
     public short tableType() { return ntableType(address()); }
@@ -153,8 +153,8 @@ public class LZ4StreamInternal extends Struct {
     }
     /** Unsafe version of {@link #currentOffset}. */
     public static int ncurrentOffset(long struct) { return UNSAFE.getInt(null, struct + LZ4StreamInternal.CURRENTOFFSET); }
-    /** Unsafe version of {@link #initCheck}. */
-    public static int ninitCheck(long struct) { return UNSAFE.getInt(null, struct + LZ4StreamInternal.INITCHECK); }
+    /** Unsafe version of {@link #dirty}. */
+    public static short ndirty(long struct) { return UNSAFE.getShort(null, struct + LZ4StreamInternal.DIRTY); }
     /** Unsafe version of {@link #tableType}. */
     public static short ntableType(long struct) { return UNSAFE.getShort(null, struct + LZ4StreamInternal.TABLETYPE); }
     /** Unsafe version of {@link #dictionary(int) dictionary}. */
@@ -211,9 +211,9 @@ public class LZ4StreamInternal extends Struct {
         /** Returns the value of the {@code currentOffset} field. */
         @NativeType("uint32_t")
         public int currentOffset() { return LZ4StreamInternal.ncurrentOffset(address()); }
-        /** Returns the value of the {@code initCheck} field. */
-        @NativeType("uint32_t")
-        public int initCheck() { return LZ4StreamInternal.ninitCheck(address()); }
+        /** Returns the value of the {@code dirty} field. */
+        @NativeType("uint16_t")
+        public short dirty() { return LZ4StreamInternal.ndirty(address()); }
         /** Returns the value of the {@code tableType} field. */
         @NativeType("uint16_t")
         public short tableType() { return LZ4StreamInternal.ntableType(address()); }

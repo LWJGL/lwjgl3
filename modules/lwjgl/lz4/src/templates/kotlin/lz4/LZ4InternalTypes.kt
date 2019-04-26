@@ -12,7 +12,7 @@ val LZ4_stream_t_internal = struct(Module.LZ4, "LZ4StreamInternal", nativeName =
 
     uint32_t("hashTable", "")["LZ4_HASH_SIZE_U32"]
     uint32_t("currentOffset", "")
-    uint32_t("initCheck", "")
+    uint16_t("dirty", "")
     uint16_t("tableType", "")
     uint8_t.const.p("dictionary", "")
     _LZ4_stream_t_internal.p.const("dictCtx", "")
@@ -53,7 +53,8 @@ val LZ4HC_CCtx_internal = struct(Module.LZ4, "LZ4HCCCtxInternal", nativeName = "
     uint32_t("lowLimit", "below that point, no more {@code dict}")
     uint32_t("nextToUpdate", "index from which to continue dictionary update")
     short("compressionLevel", "")
-    short("favorDecSpeed", "")
+    int8_t("favorDecSpeed", "favor decompression speed if this flag set, otherwise, favor compression ratio")
+    int8_t("dirty", "stream has to be fully reset if this flag is set")
     _LZ4HC_CCtx_internal.p.const("dictCtx", "")
 }
 

@@ -39,8 +39,8 @@ ENABLE_WARNINGS()""")
         "Version number part.",
 
         "VERSION_MAJOR".."1",
-        "VERSION_MINOR".."8",
-        "VERSION_RELEASE".."3"
+        "VERSION_MINOR".."9",
+        "VERSION_RELEASE".."1"
     )
 
     IntConstant("Version number.", "VERSION_NUMBER".."(LZ4_VERSION_MAJOR *100*100 + LZ4_VERSION_MINOR *100 + LZ4_VERSION_RELEASE)")
@@ -59,8 +59,8 @@ ENABLE_WARNINGS()""")
         """
         Memory usage formula : {@code N->2^N} Bytes (examples: {@code 10 -> 1KB; 12 -> 4KB ; 16 -> 64KB; 20 -> 1MB;} etc.)
 
-        Increasing memory usage improves compression ratio. Reduced memory usage can improve speed, due to cache effect. Default value is 14, for 16KB, which
-        nicely fits into Intel x86 L1 cache.
+        Increasing memory usage improves compression ratio. Reduced memory usage may improve speed, thanks to better cache locality. Default value is 14, for
+        16KB, which nicely fits into Intel x86 L1 cache.
         """,
         "MEMORY_USAGE".."14"
     )
@@ -69,10 +69,10 @@ ENABLE_WARNINGS()""")
     IntConstant("", "HASHTABLESIZE".."(1 << LZ4_MEMORY_USAGE)")
     IntConstant("", "HASH_SIZE_U32".."(1 << LZ4_HASHLOG)")
 
-    IntConstant("", "STREAMSIZE_U64".."((1 << (LZ4_MEMORY_USAGE-3)) + 4)")
+    IntConstant("", "STREAMSIZE_U64".."(1 << (LZ4_MEMORY_USAGE-3)) + 4 + (Pointer.POINTER_SIZE == 16 ? 4 : 0)")
     IntConstant("", "STREAMSIZE".."(LZ4_STREAMSIZE_U64 * Long.BYTES)")
 
-    IntConstant("", "STREAMDECODESIZE_U64".."4")
+    IntConstant("", "STREAMDECODESIZE_U64".."4 + (Pointer.POINTER_SIZE == 16 ? 2 : 0)")
     IntConstant("", "STREAMDECODESIZE".."(LZ4_STREAMDECODESIZE_U64 * Long.BYTES)")
 
     int(
@@ -83,7 +83,7 @@ ENABLE_WARNINGS()""")
         Compression is guaranteed to succeed if {@code dstCapacity} &ge; #compressBound(){@code (srcSize)}. It also runs faster, so it's a recommended setting.
 
         If the function cannot compress {@code src} into a more limited {@code dst} budget, compression stops <i>immediately</i>, and the function result is
-        zero. As a consequence, {@code dst} content is not valid.
+        zero. In which case, {@code dst} content is undefined (invalid).
 
         This function is protected against buffer overflow scenarios (never writes outside {@code dst} buffer, nor read outside {@code src} buffer).
         """,
@@ -103,7 +103,7 @@ ENABLE_WARNINGS()""")
 
         If the source stream is detected malformed, the function will stop decoding and return a negative result.
 
-        This function is protected against malicious data packets.
+        This function is protected against malicious data packets (never writes outside {@code dst} buffer, nor read outside {@code src} buffer).
         """,
 
         char.const.p("src", ""),
@@ -159,7 +159,7 @@ ENABLE_WARNINGS()""")
     int(
         "compress_fast_extState",
         """
-        Same as #compress_fast(), just using an externally allocated memory space to store compression state.
+        Same as #compress_fast(), using an externally allocated memory space for its state.
 
         Use #sizeofState() to know how much memory must be allocated, and allocate it on 8-bytes boundaries (using {@code malloc()} typically). Then, provide
         it as {@code void* state} to compression function.
@@ -192,32 +192,6 @@ ENABLE_WARNINGS()""")
         AutoSize("dst")..int("targetDstSize", ""),
 
         returnDoc = "nb bytes written into {@code dest} (necessarily &le; {@code targetDestSize}) or 0 if compression fails"
-    )
-
-    int(
-        "decompress_fast",
-        """
-        This function used to be a bit faster than #decompress_safe(), though situation has changed in recent versions, and now {@code LZ4_decompress_safe()}
-        can be as fast and sometimes faster than {@code LZ4_decompress_fast()}. Moreover, {@code LZ4_decompress_fast()} is not protected vs malformed input, as
-        it doesn't perform full validation of compressed data. As a consequence, this function is no longer recommended, and may be deprecated in future
-        versions. It's only remaining specificity is that it can decompress data without knowing its compressed size.
-
-        This function requires uncompressed {@code originalSize} to be known in advance. The function never writes past the output buffer. However, since it
-        doesn't know its {@code src} size, it may read past the intended input. Also, because match offsets are not validated during decoding, reads from
-        {@code src} may underflow. Use this function in trusted environment <b>only</b>.
-        """,
-
-        Unsafe..char.const.p("src", ""),
-        char.p("dst", ""),
-        AutoSize("dst")..int(
-            "originalSize",
-            "is the uncompressed size to regenerate. {@code dst} must be already allocated, its size must be &ge; {@code originalSize} bytes."),
-
-        returnDoc =
-        """
-        the number of bytes read from the source buffer (== the compressed size). If the source stream is detected malformed, the function stops decoding and
-        return a negative result. Destination buffer must be already allocated. Its size must be &ge; {@code originalSize} bytes.
-        """
     )
 
     int(
@@ -263,23 +237,43 @@ ENABLE_WARNINGS()""")
     )
 
     void(
-        "resetStream",
-        "An {@code LZ4_stream_t} structure can be allocated once and re-used multiple times. Use this function to start compressing a new stream.",
+        "resetStream_fast",
+        """
+        Use this to prepare an {@code LZ4_stream_t} for a new chain of dependent blocks (e.g., #compress_fast_continue()).
 
-        LZ4_stream_t.p("streamPtr", "")
+        An {@code LZ4_stream_t} must be initialized once before usage. This is automatically done when created by #createStream(). However, should the
+        {@code LZ4_stream_t} be simply declared on stack (for example), it's necessary to initialize it first, using #initStream().
+
+        After init, start any new stream with {@code LZ4_resetStream_fast()}. A same {@code LZ4_stream_t} can be re-used multiple times consecutively and
+        compress multiple streams, provided that it starts each new stream with {@code LZ4_resetStream_fast()}.
+
+        {@code LZ4_resetStream_fast()} is much faster than {@code LZ4_initStream()}, but is not compatible with memory regions containing garbage data.
+
+        Note: it's only useful to call {@code LZ4_resetStream_fast()} in the context of streaming compression. The {@code extState} functions perform their own
+        resets. Invoking {@code LZ4_resetStream_fast()} before is redundant, and even counterproductive.
+        """,
+
+        LZ4_stream_t.p("streamPtr", ""),
+
+        since = "version 1.9.0"
     )
 
     int(
         "loadDict",
         """
-        Use this function to load a static dictionary into {@code LZ4_stream_t}.
+        Use this function to reference a static dictionary into {@code LZ4_stream_t}.
 
-        Any previous data will be forgotten, only {@code dictionary} will remain in memory. Loading a size of 0 is allowed, and is the same as reset.
+        The dictionary must remain available during compression. {@code LZ4_loadDict()} triggers a reset, so any previous data will be forgotten. The same
+        dictionary will have to be loaded on decompression side for successful decoding. Dictionarys are useful for better compression of small data (KB
+        range). While LZ4 accepts any input as dictionary, results are generally better when using Zstandard's Dictionary Builder. Loading a size of 0 is
+        allowed, and is the same as reset.
         """,
 
         LZ4_stream_t.p("streamPtr", ""),
         nullable..char.const.p("dictionary", ""),
-        AutoSize("dictionary")..int("dictSize", "")
+        AutoSize("dictionary")..int("dictSize", ""),
+
+        returnDoc = "loaded dictionary size, in bytes (necessarily &le; 64 KB)"
     )
 
     int(
@@ -290,9 +284,9 @@ ENABLE_WARNINGS()""")
         {@code dst} buffer must be already allocated. If {@code dstCapacity} &ge; #compressBound(){@code (srcSize)}, compression is guaranteed to succeed, and
         runs faster.
 
-        Note 1: Each invocation to {@code LZ4_compress_fast_continue()} generates a new block. Each block has precise boundaries. It's not possible to append
-        blocks together and expect a single invocation of {@code LZ4_decompress_*()} to decompress them together. Each block must be decompressed separately,
-        calling {@code LZ4_decompress_*()} with associated metadata.
+        Note 1: Each invocation to {@code LZ4_compress_fast_continue()} generates a new block. Each block has precise boundaries. Each block must be
+        decompressed separately, calling {@code LZ4_decompress_*()} with relevant metadata. It's not possible to append blocks together and expect a single
+        invocation of {@code LZ4_decompress_*()} to decompress them together.
 
         Note 2: The previous 64KB of source data is <em>assumed</em> to remain present, unmodified, at same address in memory!
 
@@ -311,8 +305,8 @@ ENABLE_WARNINGS()""")
 
         returnDoc =
         """
-        size of compressed block or 0 if there is an error (typically, cannot fit into {@code dst}). After an error, the stream status is invalid, it can only
-        be reset or freed.
+        size of compressed block or 0 if there is an error (typically, cannot fit into {@code dst}). After an error, the stream status is undefined (invalid),
+        it can only be reset or freed.
         """
     )
 
@@ -382,9 +376,9 @@ ENABLE_WARNINGS()""")
 
     customMethod(
         """
-    /** For static allocation; {@code mbs} presumed valid. */
-    public static int LZ4_DECODER_RING_BUFFER_SIZE(int mbs) {
-        return 65536 + 14 + mbs;
+    /** For static allocation; {@code maxBlockSize} presumed valid. */
+    public static int LZ4_DECODER_RING_BUFFER_SIZE(int maxBlockSize) {
+        return 65536 + 14 + maxBlockSize;
     }""")
 
     int(
@@ -425,22 +419,14 @@ ENABLE_WARNINGS()""")
     )
 
     int(
-        "decompress_fast_continue",
-        "See #decompress_safe_continue().",
-
-        LZ4_streamDecode_t.p("LZ4_streamDecode", ""),
-        Unsafe..char.const.p("src", ""),
-        char.p("dst", ""),
-        AutoSize("dst")..int("originalSize", "")
-    )
-
-    int(
         "decompress_safe_usingDict",
         """
         These decoding functions work the same as a combination of #setStreamDecode() followed by {@code LZ4_decompress_*_continue()}. They are stand-alone,
         and don't need an {@code LZ4_streamDecode_t} structure.
 
-        Dictionary is presumed stable: it must remain accessible and unmodified during next decompression.
+        Dictionary is presumed stable: it must remain accessible and unmodified during decompression.
+
+        Performance tip: Decompression speed can be substantially increased when {@code dst == dictStart + dictSize}.
         """,
 
         char.const.p("src", ""),
@@ -452,59 +438,13 @@ ENABLE_WARNINGS()""")
     )
 
     int(
-        "decompress_fast_usingDict",
-        "See {@code decompress_safe_usingDict}.",
-
-        Unsafe..char.const.p("src", ""),
-        char.p("dst", ""),
-        AutoSize("dst")..int("originalSize", ""),
-        char.const.p("dictStart", ""),
-        AutoSize("dictStart")..int("dictSize", "")
-    )
-
-    void(
-        "resetStream_fast",
-        """
-        Use this, like #resetStream(), to prepare a context for a new chain of calls to a streaming API (e.g., #compress_fast_continue()).
-
-        ${note("""
-        Using this in advance of a non- streaming-compression function is redundant, and potentially bad for performance, since they all perform their own
-        custom reset internally.
-        """)}
-
-        Differences from #resetStream():
-
-        When an {@code LZ4_stream_t} is known to be in a internally coherent state, it can often be prepared for a new compression with almost no work, only
-        sometimes falling back to the full, expensive reset that is always required when the stream is in an indeterminate state (i.e., the reset performed b
-        #resetStream()).
-
-        {@code LZ4_streams} are guaranteed to be in a valid state when:
-        ${ul(
-            "returned from #createStream()",
-            "reset by #resetStream()",
-            "{@code memset(stream, 0, sizeof(LZ4_stream_t))}, though this is discouraged",
-            "the stream was in a valid state and was reset by #resetStream_fast()",
-            "the stream was in a valid state and was then used in any compression call that returned success",
-            """
-            the stream was in an indeterminate state and was used in a compression call that fully reset the state (e.g., #compress_fast_extState()) and that
-            returned success
-            """
-        )}
-        When a stream isn't known to be in a valid state, it is not safe to pass to any fastReset or streaming function. It must first be cleansed by the full
-        #resetStream().
-        """,
-
-        LZ4_stream_t.p("streamPtr", "")
-    )
-
-    int(
         "compress_fast_extState_fastReset",
         """
         A variant of #compress_fast_extState().
 
         Using this variant avoids an expensive initialization step. It is only safe to call if the state buffer is known to be correctly initialized already
         (see above comment on #resetStream_fast() for a definition of "correctly initialized"). From a high level, the difference is that this function
-        initializes the provided state with a call to something like #resetStream_fast() while #compress_fast_extState() starts with a call to #resetStream().
+        initializes the provided state with a call to something like #resetStream_fast() while #compress_fast_extState() starts with a call to #initStream().
         """,
 
         Unsafe..void.p("state", ""),
@@ -518,7 +458,7 @@ ENABLE_WARNINGS()""")
     void(
         "attach_dictionary",
         """
-        This is an experimental API that allows for the efficient use of a static dictionary many times.
+        This is an experimental API that allows efficient use of a static dictionary many times.
 
         Rather than re-loading the dictionary buffer into a working context before each compression, or copying a pre-loaded dictionary's {@code LZ4_stream_t}
         into a working {@code LZ4_stream_t}, this function introduces a no-copy setup mechanism, in which the working stream references the dictionary stream
@@ -527,7 +467,7 @@ ENABLE_WARNINGS()""")
         Several assumptions are made about the state of the dictionary stream. Currently, only streams which have been prepared by #loadDict() should be
         expected to work.
 
-        Alternatively, the provided dictionary stream pointer may be #NULL, in which case any existing dictionary stream is unset.
+        Alternatively, the provided {@code dictionaryStream} may be #NULL, in which case any existing dictionary stream is unset.
 
         If a dictionary is provided, it replaces any pre-existing stream history. The dictionary contents are the only history that can be referenced and
         logically immediately precede the data compressed in the first subsequent compression call.
@@ -536,7 +476,27 @@ ENABLE_WARNINGS()""")
         stream (and source buffer) must remain in-place / accessible / unchanged through the completion of the first compression call on the stream.
         """,
 
-        LZ4_stream_t.p("working_stream", ""),
-        nullable..LZ4_stream_t.const.p("dictionary_stream", "")
+        LZ4_stream_t.p("workingStream", ""),
+        nullable..LZ4_stream_t.const.p("dictionaryStream", "")
+    )
+
+    LZ4_stream_t.p(
+        "initStream",
+        """
+        An {@code LZ4_stream_t} structure must be initialized at least once. This is automatically done when invoking createStream(), but it's not when the
+        structure is simply declared on stack (for example).
+
+        Use {@code LZ4_initStream()} to properly initialize a newly declared {@code LZ4_stream_t}. It can also initialize any arbitrary buffer of sufficient
+        size, and will return a pointer of proper type upon initialization.
+
+        Note: initialization fails if size and alignment conditions are not respected. In which case, the function will #NULL.
+
+        Note 2: An {@code LZ4_stream_t} structure guarantees correct alignment and size.
+        """,
+
+        void.p("buffer", ""),
+        AutoSize("buffer")..size_t("size", ""),
+
+        since = "1.9.0"
     )
 }
