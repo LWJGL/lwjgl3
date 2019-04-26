@@ -1288,6 +1288,10 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
             responsibility of the user.
             """,
             """
+            Defining some "texture" object that would automatically stream its data from a staging copy in CPU memory to GPU memory would rather be a feature
+            of another, higher-level library implemented on top of VMA.
+            """,
+            """
             Allocations for imported/exported external memory. They tend to require explicit memory type index and dedicated allocation anyway, so they don't
             interact with main features of this library. Such special purpose allocations should be made manually, using {@code vkCreateBuffer()} and
             {@code vkAllocateMemory()}.

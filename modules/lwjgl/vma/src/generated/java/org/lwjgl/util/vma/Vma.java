@@ -1225,6 +1225,8 @@ import org.lwjgl.vulkan.*;
  * <ul>
  * <li>Data transfer. Uploading (streaming) and downloading data of buffers and images between CPU and GPU memory and related synchronization is
  * responsibility of the user.</li>
+ * <li>Defining some "texture" object that would automatically stream its data from a staging copy in CPU memory to GPU memory would rather be a feature
+ * of another, higher-level library implemented on top of VMA.</li>
  * <li>Allocations for imported/exported external memory. They tend to require explicit memory type index and dedicated allocation anyway, so they don't
  * interact with main features of this library. Such special purpose allocations should be made manually, using {@code vkCreateBuffer()} and
  * {@code vkAllocateMemory()}.</li>
