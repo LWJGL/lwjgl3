@@ -18,6 +18,7 @@ import java.util.concurrent.atomic.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.util.yoga.Yoga.*;
 import static org.lwjgl.util.yoga.YogaNode.*;
+import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.*;
 
 @SuppressWarnings("MisorderedAssertEqualsArgumentsTestNG")
@@ -396,6 +397,63 @@ public class YogaNodeTest {
         root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
 
         assertEquals(root.getLayoutDirection(), YogaDirection.RTL);
+    }
+
+    @Test
+    public void testResetApiShouldResetAllLayoutOutputs() {
+        YogaConfig config = new YogaConfig();
+        config.setShouldDiffLayoutWithoutLegacyStretchBehaviour(true);
+        config.setUseLegacyStretchBehaviour(true);
+        YogaNode node = createNode(config);
+        node.setWidth(100);
+        node.setHeight(100);
+        node.setMargin(YogaEdge.START, 1);
+        node.setMargin(YogaEdge.END, 2);
+        node.setMargin(YogaEdge.TOP, 3);
+        node.setMargin(YogaEdge.BOTTOM, 4);
+        node.setPadding(YogaEdge.START, 1);
+        node.setPadding(YogaEdge.END, 2);
+        node.setPadding(YogaEdge.TOP, 3);
+        node.setPadding(YogaEdge.BOTTOM, 4);
+        node.setBorder(YogaEdge.START, 1);
+        node.setBorder(YogaEdge.END, 2);
+        node.setBorder(YogaEdge.TOP, 3);
+        node.setBorder(YogaEdge.BOTTOM, 4);
+        node.setDirection(YogaDirection.RTL);
+        node.markLayoutSeen();
+        node.setMeasureFunction((n, width, widthMode, height, heightMode) -> {
+            try (MemoryStack stack = stackPush()) {
+                return YGMeasureFunc.toLong(
+                    YGSize.mallocStack(stack)
+                        .width(100)
+                        .height(100)
+                );
+            }
+        });
+        node.setBaselineFunction((n, width, height) -> height);
+
+        node.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
+        node.reset();
+
+        assertEquals(0, (int)node.getLayoutHeight());
+        assertEquals(0, (int)node.getLayoutWidth());
+        assertEquals(0, (int)node.getLayoutMargin(YogaEdge.LEFT));
+        assertEquals(0, (int)node.getLayoutMargin(YogaEdge.RIGHT));
+        assertEquals(0, (int)node.getLayoutMargin(YogaEdge.TOP));
+        assertEquals(0, (int)node.getLayoutMargin(YogaEdge.BOTTOM));
+        assertEquals(0, (int)node.getLayoutPadding(YogaEdge.LEFT));
+        assertEquals(0, (int)node.getLayoutPadding(YogaEdge.RIGHT));
+        assertEquals(0, (int)node.getLayoutPadding(YogaEdge.TOP));
+        assertEquals(0, (int)node.getLayoutPadding(YogaEdge.BOTTOM));
+        assertEquals(0, (int)node.getLayoutBorder(YogaEdge.LEFT));
+        assertEquals(0, (int)node.getLayoutBorder(YogaEdge.RIGHT));
+        assertEquals(0, (int)node.getLayoutBorder(YogaEdge.TOP));
+        assertEquals(0, (int)node.getLayoutBorder(YogaEdge.BOTTOM));
+        assertEquals(node.getLayoutDirection(), YogaDirection.INHERIT);
+        assertTrue(node.hasNewLayout());
+        assertFalse(node.isMeasureDefined());
+        assertFalse(node.isBaselineDefined());
+        assertFalse(node.getDoesLegacyStretchFlagAffectsLayout());
     }
 
 }

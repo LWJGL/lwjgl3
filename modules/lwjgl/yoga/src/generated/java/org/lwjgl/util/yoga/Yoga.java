@@ -290,22 +290,6 @@ public class Yoga {
         YGPositionTypeAbsolute = 1;
 
     /**
-     * YGPrintOptions
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #YGPrintOptionsLayout PrintOptionsLayout}</li>
-     * <li>{@link #YGPrintOptionsStyle PrintOptionsStyle}</li>
-     * <li>{@link #YGPrintOptionsChildren PrintOptionsChildren}</li>
-     * </ul>
-     */
-    public static final int
-        YGPrintOptionsLayout   = 1,
-        YGPrintOptionsStyle    = 2,
-        YGPrintOptionsChildren = 4;
-
-    /**
      * YGUnit
      * 
      * <h5>Enum values:</h5>
@@ -605,19 +589,6 @@ public class Yoga {
             check(node);
         }
         nYGNodeMarkDirtyAndPropogateToDescendants(node);
-    }
-
-    // --- [ YGNodePrint ] ---
-
-    /** Unsafe version of: {@link #YGNodePrint NodePrint} */
-    public static native void nYGNodePrint(long node, int options);
-
-    /** @param options one of:<br><table><tr><td>{@link #YGPrintOptionsLayout PrintOptionsLayout}</td><td>{@link #YGPrintOptionsStyle PrintOptionsStyle}</td><td>{@link #YGPrintOptionsChildren PrintOptionsChildren}</td></tr></table> */
-    public static void YGNodePrint(@NativeType("YGNodeRef const") long node, @NativeType("YGPrintOptions") int options) {
-        if (CHECKS) {
-            check(node);
-        }
-        nYGNodePrint(node, options);
     }
 
     // --- [ YGFloatIsUndefined ] ---
@@ -2194,18 +2165,6 @@ public class Yoga {
     @NativeType("char const *")
     public static String YGPositionTypeToString(@NativeType("YGPositionType") int value) {
         long __result = nYGPositionTypeToString(value);
-        return memASCII(__result);
-    }
-
-    // --- [ YGPrintOptionsToString ] ---
-
-    /** Unsafe version of: {@link #YGPrintOptionsToString PrintOptionsToString} */
-    public static native long nYGPrintOptionsToString(int value);
-
-    /** @param value one of:<br><table><tr><td>{@link #YGPrintOptionsLayout PrintOptionsLayout}</td><td>{@link #YGPrintOptionsStyle PrintOptionsStyle}</td><td>{@link #YGPrintOptionsChildren PrintOptionsChildren}</td></tr></table> */
-    @NativeType("char const *")
-    public static String YGPrintOptionsToString(@NativeType("YGPrintOptions") int value) {
-        long __result = nYGPrintOptionsToString(value);
         return memASCII(__result);
     }
 

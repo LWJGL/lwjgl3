@@ -53,7 +53,14 @@ private:
       const float axisSize) const;
 
   void setMeasureFunc(decltype(measure_));
-  void setBaseLineFunc(decltype(baseline_));
+  void setBaselineFunc(decltype(baseline_));
+
+  // DANGER DANGER DANGER!
+  // If the the node assigned to has children, we'd either have to deallocate
+  // them (potentially incorrect) or ignore them (danger of leaks). Only ever
+  // use this after checking that there are no children.
+  // DO NOT CHANGE THE VISIBILITY OF THIS METHOD!
+  YGNode& operator=(YGNode&&) = default;
 
 public:
   YGNode()
@@ -66,8 +73,16 @@ public:
         printUsesContext_{false} {}
   ~YGNode() = default; // cleanup of owner/children relationships in YGNodeFree
   explicit YGNode(const YGConfigRef newConfig) : config_(newConfig){};
+
+  YGNode(YGNode&&);
+
+  // Does not expose true value semantics, as children are not cloned eagerly.
+  // Should we remove this?
   YGNode(const YGNode& node) = default;
-  YGNode& operator=(const YGNode& node);
+
+  // assignment means potential leaks of existing children, or alternatively
+  // freeing unowned memory, double free, or freeing stack memory.
+  YGNode& operator=(const YGNode&) = delete;
 
   // Getters
   void* getContext() const {
@@ -141,6 +156,22 @@ public:
 
   const YGVector& getChildren() const {
     return children_;
+  }
+
+  // Applies a callback to all children, after cloning them if they are not
+  // owned.
+  template <typename T>
+  void iterChildrenAfterCloningIfNeeded(T callback, void* cloneContext) {
+    int i = 0;
+    for (YGNodeRef& child : children_) {
+      if (child->getOwner() != this) {
+        child = config_->cloneNode(child, this, i, cloneContext);
+        child->setOwner(this);
+      }
+      i += 1;
+
+      callback(child, cloneContext);
+    }
   }
 
   YGNodeRef getChild(uint32_t index) const {
@@ -235,16 +266,16 @@ public:
     return setMeasureFunc(YGMeasureFunc{nullptr});
   }
 
-  void setBaseLineFunc(YGBaselineFunc baseLineFunc) {
+  void setBaselineFunc(YGBaselineFunc baseLineFunc) {
     baselineUsesContext_ = false;
     baseline_.noContext = baseLineFunc;
   }
-  void setBaseLineFunc(BaselineWithContextFn baseLineFunc) {
+  void setBaselineFunc(BaselineWithContextFn baseLineFunc) {
     baselineUsesContext_ = true;
     baseline_.withContext = baseLineFunc;
   }
-  void setBaseLineFunc(std::nullptr_t) {
-    return setBaseLineFunc(YGBaselineFunc{nullptr});
+  void setBaselineFunc(std::nullptr_t) {
+    return setBaselineFunc(YGBaselineFunc{nullptr});
   }
 
   void setDirtiedFunc(YGDirtiedFunc dirtiedFunc) {
@@ -319,11 +350,12 @@ public:
   bool removeChild(YGNodeRef child);
   void removeChild(uint32_t index);
 
-  void cloneChildrenIfNeeded();
+  void cloneChildrenIfNeeded(void*);
   void markDirtyAndPropogate();
   float resolveFlexGrow();
   float resolveFlexShrink();
   bool isNodeFlexible();
   bool didUseLegacyFlag();
   bool isLayoutTreeEqualToNode(const YGNode& node) const;
+  void reset();
 };

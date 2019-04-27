@@ -10,19 +10,29 @@
 #include "Yoga.h"
 
 struct YGConfig {
-  using LogWithContextFn = void (*)(
+  using LogWithContextFn = int (*)(
       YGConfigRef config,
       YGNodeRef node,
       YGLogLevel level,
       void* context,
       const char* format,
       va_list args);
+  using CloneWithContextFn = YGNodeRef (*)(
+      YGNodeRef node,
+      YGNodeRef owner,
+      int childIndex,
+      void* cloneContext);
 
 private:
+  union {
+    CloneWithContextFn withContext;
+    YGCloneNodeFunc noContext;
+  } cloneNodeCallback_;
   union {
     LogWithContextFn withContext;
     YGLogger noContext;
   } logger_;
+  bool cloneNodeUsesContext_;
   bool loggerUsesContext_;
 
 public:
@@ -31,7 +41,6 @@ public:
   bool shouldDiffLayoutWithoutLegacyStretchBehaviour = false;
   bool printTree = false;
   float pointScaleFactor = 1.0f;
-  YGCloneNodeFunc cloneNodeCallback = nullptr;
   std::array<bool, facebook::yoga::enums::count<YGExperimentalFeature>()>
       experimentalFeatures = {};
   void* context = nullptr;
@@ -49,5 +58,22 @@ public:
   }
   void setLogger(std::nullptr_t) {
     setLogger(YGLogger{nullptr});
+  }
+
+  YGNodeRef cloneNode(
+      YGNodeRef node,
+      YGNodeRef owner,
+      int childIndex,
+      void* cloneContext);
+  void setCloneNodeCallback(YGCloneNodeFunc cloneNode) {
+    cloneNodeCallback_.noContext = cloneNode;
+    cloneNodeUsesContext_ = false;
+  }
+  void setCloneNodeCallback(CloneWithContextFn cloneNode) {
+    cloneNodeCallback_.withContext = cloneNode;
+    cloneNodeUsesContext_ = true;
+  }
+  void setCloneNodeCallback(std::nullptr_t) {
+    setCloneNodeCallback(YGCloneNodeFunc{nullptr});
   }
 };

@@ -185,14 +185,6 @@ div {
     )
 
     EnumConstant(
-        "YGPrintOptions",
-
-        "PrintOptionsLayout".enum("", "1"),
-        "PrintOptionsStyle".enum("", "2"),
-        "PrintOptionsChildren".enum("", "4")
-    )
-
-    EnumConstant(
         "YGUnit",
 
         "UnitUndefined".enum,
@@ -377,14 +369,6 @@ div {
         """,
 
         node
-    )
-
-    void(
-        "NodePrint",
-        "",
-
-        node,
-        YGPrintOptions("options", "", "PrintOptions\\w+")
     )
 
     bool(
@@ -1265,7 +1249,6 @@ div {
     YG_TYPE_TO_STRING(YGNodeType)
     YG_TYPE_TO_STRING(YGOverflow)
     YG_TYPE_TO_STRING(YGPositionType)
-    YG_TYPE_TO_STRING(YGPrintOptions)
     YG_TYPE_TO_STRING(YGUnit)
     YG_TYPE_TO_STRING(YGWrap)
 

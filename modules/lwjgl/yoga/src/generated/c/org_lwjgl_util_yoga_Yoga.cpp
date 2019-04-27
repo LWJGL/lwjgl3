@@ -204,15 +204,6 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeMarkDirtyAndPropogat
     JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodeMarkDirtyAndPropogateToDescendants(nodeAddress);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodePrint(jlong nodeAddress, jint options) {
-    YGNodeRef const node = (YGNodeRef const)(intptr_t)nodeAddress;
-    YGNodePrint(node, (YGPrintOptions)options);
-}
-JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodePrint(JNIEnv *__env, jclass clazz, jlong nodeAddress, jint options) {
-    UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_util_yoga_Yoga_nYGNodePrint(nodeAddress, options);
-}
-
 JNIEXPORT jboolean JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_YGFloatIsUndefined(jfloat value) {
     return (jboolean)YGFloatIsUndefined(value);
 }
@@ -1367,14 +1358,6 @@ JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGPositionTypeToS
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGPositionTypeToString(JNIEnv *__env, jclass clazz, jint value) {
     UNUSED_PARAMS(__env, clazz)
     return JavaCritical_org_lwjgl_util_yoga_Yoga_nYGPositionTypeToString(value);
-}
-
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGPrintOptionsToString(jint value) {
-    return (jlong)(intptr_t)YGPrintOptionsToString((YGPrintOptions)value);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGPrintOptionsToString(JNIEnv *__env, jclass clazz, jint value) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_yoga_Yoga_nYGPrintOptionsToString(value);
 }
 
 JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_yoga_Yoga_nYGUnitToString(jint value) {

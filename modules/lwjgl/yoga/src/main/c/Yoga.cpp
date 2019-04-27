@@ -28,6 +28,15 @@ __forceinline const float fmaxf(const float a, const float b) {
 using namespace facebook::yoga;
 using detail::Log;
 
+namespace {
+size_t usedMeasureCacheEntries = YG_MAX_CACHED_RESULT_COUNT;
+}
+
+void YGSetUsedCachedEntries(size_t n) {
+  usedMeasureCacheEntries =
+      n == 0 || n > YG_MAX_CACHED_RESULT_COUNT ? YG_MAX_CACHED_RESULT_COUNT : n;
+}
+
 #ifdef ANDROID
 static int YGAndroidLog(
     const YGConfigRef config,
@@ -158,7 +167,7 @@ bool YGNodeHasBaselineFunc(YGNodeRef node) {
 }
 
 void YGNodeSetBaselineFunc(YGNodeRef node, YGBaselineFunc baselineFunc) {
-  node->setBaseLineFunc(baselineFunc);
+  node->setBaselineFunc(baselineFunc);
 }
 
 YGDirtiedFunc YGNodeGetDirtiedFunc(YGNodeRef node) {
@@ -302,14 +311,16 @@ static void YGConfigFreeRecursive(const YGNodeRef root) {
 void YGNodeFreeRecursiveWithCleanupFunc(
     const YGNodeRef root,
     YGNodeCleanupFunc cleanup) {
-  while (YGNodeGetChildCount(root) > 0) {
-    const YGNodeRef child = YGNodeGetChild(root, 0);
+  uint32_t skipped = 0;
+  while (YGNodeGetChildCount(root) > skipped) {
+    const YGNodeRef child = YGNodeGetChild(root, skipped);
     if (child->getOwner() != root) {
       // Don't free shared nodes that we don't own.
-      break;
+      skipped += 1;
+    } else {
+      YGNodeRemoveChild(root, child);
+      YGNodeFreeRecursive(child);
     }
-    YGNodeRemoveChild(root, child);
-    YGNodeFreeRecursive(child);
   }
   if (cleanup != nullptr) {
     cleanup(root);
@@ -321,25 +332,8 @@ void YGNodeFreeRecursive(const YGNodeRef root) {
   return YGNodeFreeRecursiveWithCleanupFunc(root, nullptr);
 }
 
-void YGNodeReset(const YGNodeRef node) {
-  YGAssertWithNode(
-      node,
-      YGNodeGetChildCount(node) == 0,
-      "Cannot reset a node which still has children attached");
-  YGAssertWithNode(
-      node,
-      node->getOwner() == nullptr,
-      "Cannot reset a node still attached to a owner");
-
-  node->clearChildren();
-
-  const YGConfigRef config = node->getConfig();
-  *node = YGNode();
-  if (config->useWebDefaults) {
-    node->setStyleFlexDirection(YGFlexDirectionRow);
-    node->setStyleAlignContent(YGAlignStretch);
-  }
-  node->setConfig(config);
+void YGNodeReset(YGNodeRef node) {
+  node->reset();
 }
 
 int32_t YGNodeGetInstanceCount(void) {
@@ -381,77 +375,40 @@ bool YGNodeIsReferenceBaseline(YGNodeRef node) {
 }
 
 void YGNodeInsertChild(
-    const YGNodeRef node,
+    const YGNodeRef owner,
     const YGNodeRef child,
     const uint32_t index) {
   YGAssertWithNode(
-      node,
+      owner,
       child->getOwner() == nullptr,
       "Child already has a owner, it must be removed first.");
 
   YGAssertWithNode(
-      node,
-      !node->hasMeasureFunc(),
+      owner,
+      !owner->hasMeasureFunc(),
       "Cannot add child: Nodes with measure functions cannot have children.");
 
-  node->cloneChildrenIfNeeded();
-  node->insertChild(child, index);
-  YGNodeRef owner = child->getOwner() ? nullptr : node;
+  owner->insertChild(child, index);
   child->setOwner(owner);
-  node->markDirtyAndPropogate();
+  owner->markDirtyAndPropogate();
 }
 
 void YGNodeRemoveChild(const YGNodeRef owner, const YGNodeRef excludedChild) {
-  // This algorithm is a forked variant from cloneChildrenIfNeeded in YGNode
-  // that excludes a child.
-  const uint32_t childCount = YGNodeGetChildCount(owner);
-
-  if (childCount == 0) {
+  if (YGNodeGetChildCount(owner) == 0) {
     // This is an empty set. Nothing to remove.
     return;
   }
-  const YGNodeRef firstChild = YGNodeGetChild(owner, 0);
-  if (firstChild->getOwner() == owner) {
-    // If the first child has this node as its owner, we assume that it is
-    // already unique. We can now try to delete a child in this list.
-    if (owner->removeChild(excludedChild)) {
-      excludedChild->setLayout(
-          YGNode().getLayout()); // layout is no longer valid
-      excludedChild->setOwner(nullptr);
-      owner->markDirtyAndPropogate();
-    }
-    return;
-  }
-  // Otherwise we have to clone the node list except for the child we're trying
-  // to delete. We don't want to simply clone all children, because then the
-  // host will need to free the clone of the child that was just deleted.
-  const YGCloneNodeFunc cloneNodeCallback =
-      owner->getConfig()->cloneNodeCallback;
-  uint32_t nextInsertIndex = 0;
-  for (uint32_t i = 0; i < childCount; i++) {
-    const YGNodeRef oldChild = owner->getChild(i);
-    if (excludedChild == oldChild) {
-      // Ignore the deleted child. Don't reset its layout or owner since it is
-      // still valid in the other owner. However, since this owner has now
-      // changed, we need to mark it as dirty.
-      owner->markDirtyAndPropogate();
-      continue;
-    }
-    YGNodeRef newChild = nullptr;
-    if (cloneNodeCallback) {
-      newChild = cloneNodeCallback(oldChild, owner, nextInsertIndex);
-    }
-    if (newChild == nullptr) {
-      newChild = YGNodeClone(oldChild);
-    }
-    owner->replaceChild(newChild, nextInsertIndex);
-    newChild->setOwner(owner);
 
-    nextInsertIndex++;
-  }
-  while (nextInsertIndex < childCount) {
-    owner->removeChild(nextInsertIndex);
-    nextInsertIndex++;
+  // Children may be shared between parents, which is indicated by not having an
+  // owner. We only want to reset the child completely if it is owned
+  // exclusively by one node.
+  auto childOwner = excludedChild->getOwner();
+  if (owner->removeChild(excludedChild)) {
+    if (owner == childOwner) {
+      excludedChild->setLayout({}); // layout is no longer valid
+      excludedChild->setOwner(nullptr);
+    }
+    owner->markDirtyAndPropogate();
   }
 }
 
@@ -1022,6 +979,7 @@ bool YGLayoutNodeInternal(
     YGMarkerLayoutData& layoutMarkerData,
     void* const layoutContext);
 
+#ifdef DEBUG
 static void YGNodePrintInternal(
     const YGNodeRef node,
     const YGPrintOptions options) {
@@ -1033,6 +991,7 @@ static void YGNodePrintInternal(
 void YGNodePrint(const YGNodeRef node, const YGPrintOptions options) {
   YGNodePrintInternal(node, options);
 }
+#endif
 
 const std::array<YGEdge, 4> leading = {
     {YGEdgeTop, YGEdgeBottom, YGEdgeLeft, YGEdgeRight}};
@@ -1824,17 +1783,16 @@ static bool YGNodeFixedSizeSetMeasuredDimensions(
   return false;
 }
 
-static void YGZeroOutLayoutRecursivly(const YGNodeRef node) {
+static void YGZeroOutLayoutRecursivly(
+    const YGNodeRef node,
+    void* layoutContext) {
   node->getLayout() = {};
   node->setLayoutDimension(0, 0);
   node->setLayoutDimension(0, 1);
   node->setHasNewLayout(true);
-  node->cloneChildrenIfNeeded();
-  const uint32_t childCount = YGNodeGetChildCount(node);
-  for (uint32_t i = 0; i < childCount; i++) {
-    const YGNodeRef child = node->getChild(i);
-    YGZeroOutLayoutRecursivly(child);
-  }
+
+  node->iterChildrenAfterCloningIfNeeded(
+      YGZeroOutLayoutRecursivly, layoutContext);
 }
 
 static float YGNodeCalculateAvailableInnerDim(
@@ -1916,7 +1874,7 @@ static float YGNodeComputeFlexBasisForChildren(
   for (auto child : children) {
     child->resolveDimension();
     if (child->getStyle().display == YGDisplayNone) {
-      YGZeroOutLayoutRecursivly(child);
+      YGZeroOutLayoutRecursivly(child, layoutContext);
       child->setHasNewLayout(true);
       child->setDirty(false);
       continue;
@@ -2790,7 +2748,7 @@ static void YGNodelayoutImpl(
 
   // At this point we know we're going to perform work. Ensure that each child
   // has a mutable copy.
-  node->cloneChildrenIfNeeded();
+  node->cloneChildrenIfNeeded(layoutContext);
   // Reset layout flags, as they could have changed.
   node->setLayoutHadOverflow(false);
 
@@ -3131,12 +3089,19 @@ static void YGNodelayoutImpl(
               const float childHeight =
                   !isMainAxisRow ? childMainSize : childCrossSize;
 
+              auto alignContent = node->getStyle().alignContent;
+              auto crossAxisDoesNotGrow =
+                  alignContent != YGAlignStretch && isNodeFlexWrap;
               const YGMeasureMode childWidthMeasureMode =
-                  YGFloatIsUndefined(childWidth) ? YGMeasureModeUndefined
-                                                 : YGMeasureModeExactly;
+                  YGFloatIsUndefined(childWidth) ||
+                      (!isMainAxisRow && crossAxisDoesNotGrow)
+                  ? YGMeasureModeUndefined
+                  : YGMeasureModeExactly;
               const YGMeasureMode childHeightMeasureMode =
-                  YGFloatIsUndefined(childHeight) ? YGMeasureModeUndefined
-                                                  : YGMeasureModeExactly;
+                  YGFloatIsUndefined(childHeight) ||
+                      (isMainAxisRow && crossAxisDoesNotGrow)
+                  ? YGMeasureModeUndefined
+                  : YGMeasureModeExactly;
 
               YGLayoutNodeInternal(
                   child,
@@ -3190,7 +3155,7 @@ static void YGNodelayoutImpl(
 
   // STEP 8: MULTI-LINE CONTENT ALIGNMENT
   // currentLead stores the size of the cross dim
-  if (performLayout && (lineCount > 1 || YGIsBaselineLayout(node))) {
+  if (performLayout && (isNodeFlexWrap || YGIsBaselineLayout(node))) {
     float crossDimLead = 0;
     float currentLead = leadingPaddingAndBorderCross;
     if (!YGFloatIsUndefined(availableInnerCrossDim)) {
@@ -3924,7 +3889,7 @@ bool YGLayoutNodeInternal(
         layoutMarkerData.maxMeasureCache =
             layout->nextCachedMeasurementsIndex + 1;
       }
-      if (layout->nextCachedMeasurementsIndex == YG_MAX_CACHED_RESULT_COUNT) {
+      if (layout->nextCachedMeasurementsIndex == usedMeasureCacheEntries) {
         if (gPrintChanges) {
           Log::log(node, YGLogLevelVerbose, nullptr, "Out of cache entries!\n");
         }
@@ -4135,6 +4100,7 @@ void YGNodeCalculateLayoutWithContext(
         node->getLayout().direction, ownerWidth, ownerHeight, ownerWidth);
     YGRoundToPixelGrid(node, node->getConfig()->pointScaleFactor, 0.0f, 0.0f);
 
+#ifdef DEBUG
     if (node->getConfig()->printTree) {
       YGNodePrint(
           node,
@@ -4142,6 +4108,7 @@ void YGNodeCalculateLayoutWithContext(
               YGPrintOptionsLayout | YGPrintOptionsChildren |
               YGPrintOptionsStyle));
     }
+#endif
   }
 
   // We want to get rid off `useLegacyStretchBehaviour` from YGConfig. But we
@@ -4191,6 +4158,7 @@ void YGNodeCalculateLayoutWithContext(
           !originalNode->isLayoutTreeEqualToNode(*node);
       node->setLayoutDoesLegacyFlagAffectsLayout(neededLegacyStretchBehaviour);
 
+#ifdef DEBUG
       if (originalNode->getConfig()->printTree) {
         YGNodePrint(
             originalNode,
@@ -4198,6 +4166,7 @@ void YGNodeCalculateLayoutWithContext(
                 YGPrintOptionsLayout | YGPrintOptionsChildren |
                 YGPrintOptionsStyle));
       }
+#endif
     }
     YGConfigFreeRecursive(originalNode);
     YGNodeFreeRecursive(originalNode);
@@ -4293,7 +4262,7 @@ void* YGConfigGetContext(const YGConfigRef config) {
 void YGConfigSetCloneNodeFunc(
     const YGConfigRef config,
     const YGCloneNodeFunc callback) {
-  config->cloneNodeCallback = callback;
+  config->setCloneNodeCallback(callback);
 }
 
 static void YGTraverseChildrenPreOrder(

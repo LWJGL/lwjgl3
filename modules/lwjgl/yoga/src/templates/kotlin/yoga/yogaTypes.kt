@@ -22,7 +22,6 @@ val YGMeasureMode = "YGMeasureMode".enumType
 val YGNodeType = "YGNodeType".enumType
 val YGOverflow = "YGOverflow".enumType
 val YGPositionType = "YGPositionType".enumType
-val YGPrintOptions = "YGPrintOptions".enumType
 val YGUnit = "YGUnit".enumType
 val YGWrap = "YGWrap".enumType
 

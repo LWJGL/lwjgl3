@@ -268,8 +268,20 @@ class YogaNode {
         YGNodeStyleSetFlexWrap(node, flexWrap.value);
     }
 
+    void setMeasureFunction(YGMeasureFuncI measureFunction) {
+        YGNodeSetMeasureFunc(node, measureFunction);
+    }
+
     void setBaselineFunction(YGBaselineFuncI baselineFunc) {
         YGNodeSetBaselineFunc(node, baselineFunc);
+    }
+
+    boolean isMeasureDefined() {
+        return YGNodeHasMeasureFunc(node);
+    }
+
+    boolean isBaselineDefined() {
+        return YGNodeHasBaselineFunc(node);
     }
 
     void setIsReferenceBaseline(boolean isReferenceBaseline) {
@@ -365,6 +377,11 @@ class YogaNode {
     }
 
     @Nullable
+    YGMeasureFunc getMeasureFunction() {
+        return YGNode.create(node).measure_noContext();
+    }
+
+    @Nullable
     YGBaselineFunc getBaselineFunction() {
         return YGNode.create(node).baseline_noContext();
     }
@@ -378,6 +395,14 @@ class YogaNode {
     }
 
     public void reset() {
+        YGMeasureFunc measureFunc = getMeasureFunction();
+        if (measureFunc != null) {
+            measureFunc.free();
+        }
+        YGBaselineFunc baselineFunc = getBaselineFunction();
+        if (baselineFunc != null) {
+            baselineFunc.free();
+        }
         YGNodeReset(node);
     }
 

@@ -5,12 +5,38 @@
  * file in the root directory of this source tree.
  */
 #include "YGNode.h"
+#include <algorithm>
 #include <iostream>
 #include "CompactValue.h"
 #include "Utils.h"
 
 using namespace facebook;
 using facebook::yoga::detail::CompactValue;
+
+YGNode::YGNode(YGNode&& node) {
+  context_ = node.context_;
+  hasNewLayout_ = node.hasNewLayout_;
+  isReferenceBaseline_ = node.isReferenceBaseline_;
+  isDirty_ = node.isDirty_;
+  nodeType_ = node.nodeType_;
+  measureUsesContext_ = node.measureUsesContext_;
+  baselineUsesContext_ = node.baselineUsesContext_;
+  printUsesContext_ = node.printUsesContext_;
+  measure_ = node.measure_;
+  baseline_ = node.baseline_;
+  print_ = node.print_;
+  dirtied_ = node.dirtied_;
+  style_ = node.style_;
+  layout_ = node.layout_;
+  lineIndex_ = node.lineIndex_;
+  owner_ = node.owner_;
+  children_ = std::move(node.children_);
+  config_ = node.config_;
+  resolvedDimensions_ = node.resolvedDimensions_;
+  for (auto c : children_) {
+    c->setOwner(c);
+  }
+}
 
 void YGNode::print(void* printContext) {
   if (print_.noContext != nullptr) {
@@ -298,37 +324,6 @@ void YGNode::setPosition(
       trailing[crossAxis]);
 }
 
-YGNode& YGNode::operator=(const YGNode& node) {
-  if (&node == this) {
-    return *this;
-  }
-
-  for (auto child : children_) {
-    delete child;
-  }
-
-  context_ = node.getContext();
-  hasNewLayout_ = node.getHasNewLayout();
-  nodeType_ = node.getNodeType();
-  measureUsesContext_ = node.measureUsesContext_;
-  baselineUsesContext_ = node.baselineUsesContext_;
-  printUsesContext_ = node.printUsesContext_;
-  measure_ = node.measure_;
-  baseline_ = node.baseline_;
-  print_ = node.print_;
-  dirtied_ = node.getDirtied();
-  style_ = node.style_;
-  layout_ = node.layout_;
-  lineIndex_ = node.getLineIndex();
-  owner_ = node.getOwner();
-  children_ = node.getChildren();
-  config_ = node.getConfig();
-  isDirty_ = node.isDirty();
-  resolvedDimensions_ = node.getResolvedDimensions();
-
-  return *this;
-}
-
 YGValue YGNode::marginLeadingValue(const YGFlexDirection axis) const {
   if (YGFlexDirectionIsRow(axis) && !style_.margin[YGEdgeStart].isUndefined()) {
     return style_.margin[YGEdgeStart];
@@ -385,38 +380,8 @@ void YGNode::clearChildren() {
 
 // Other Methods
 
-void YGNode::cloneChildrenIfNeeded() {
-  // YGNodeRemoveChild in yoga.cpp has a forked variant of this algorithm
-  // optimized for deletions.
-
-  const uint32_t childCount = static_cast<uint32_t>(children_.size());
-  if (childCount == 0) {
-    // This is an empty set. Nothing to clone.
-    return;
-  }
-
-  const YGNodeRef firstChild = children_.front();
-  if (firstChild->getOwner() == this) {
-    // If the first child has this node as its owner, we assume that it is
-    // already unique. We can do this because if we have it has a child, that
-    // means that its owner was at some point cloned which made that subtree
-    // immutable. We also assume that all its sibling are cloned as well.
-    return;
-  }
-
-  const YGCloneNodeFunc cloneNodeCallback = config_->cloneNodeCallback;
-  for (uint32_t i = 0; i < childCount; ++i) {
-    const YGNodeRef oldChild = children_[i];
-    YGNodeRef newChild = nullptr;
-    if (cloneNodeCallback) {
-      newChild = cloneNodeCallback(oldChild, this, i);
-    }
-    if (newChild == nullptr) {
-      newChild = YGNodeClone(oldChild);
-    }
-    replaceChild(newChild, i);
-    newChild->setOwner(this);
-  }
+void YGNode::cloneChildrenIfNeeded(void* cloneContext) {
+  iterChildrenAfterCloningIfNeeded([](YGNodeRef, void*) {}, cloneContext);
 }
 
 void YGNode::markDirtyAndPropogate() {
@@ -600,4 +565,23 @@ bool YGNode::isLayoutTreeEqualToNode(const YGNode& node) const {
     }
   }
   return isLayoutTreeEqual;
+}
+
+void YGNode::reset() {
+  YGAssertWithNode(
+      this,
+      children_.size() == 0,
+      "Cannot reset a node which still has children attached");
+  YGAssertWithNode(
+      this, owner_ == nullptr, "Cannot reset a node still attached to a owner");
+
+  clearChildren();
+
+  auto config = getConfig();
+  *this = YGNode{};
+  if (config->useWebDefaults) {
+    setStyleFlexDirection(YGFlexDirectionRow);
+    setStyleAlignContent(YGAlignStretch);
+  }
+  setConfig(config);
 }
