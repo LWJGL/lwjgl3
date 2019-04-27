@@ -508,8 +508,7 @@ public class CU {
      * <p>If the user-specified dynamic shared memory size is larger than this value, the launch will fail.</p>
      * </li>
      * <li>{@link #CU_FUNC_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT FUNC_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT} - 
-     * On devices where the L1 cache and shared memory use the same hardware resources, this sets the shared memory carveout preference, in percent of the
-     * total resources.
+     * On devices where the L1 cache and shared memory use the same hardware resources, this sets the shared memory carveout preference, in percent of the total shared memory. Refer to {@link #CU_DEVICE_ATTRIBUTE_MAX_SHARED_MEMORY_PER_MULTIPROCESSOR DEVICE_ATTRIBUTE_MAX_SHARED_MEMORY_PER_MULTIPROCESSOR}.
      * 
      * <p>This is only a hint, and the driver can choose a different ratio if required to execute the function.</p>
      * </li>
@@ -740,6 +739,7 @@ public class CU {
      * <li>{@link #CU_TARGET_COMPUTE_61 TARGET_COMPUTE_61} - Compute device class 6.1.</li>
      * <li>{@link #CU_TARGET_COMPUTE_62 TARGET_COMPUTE_62} - Compute device class 6.2.</li>
      * <li>{@link #CU_TARGET_COMPUTE_70 TARGET_COMPUTE_70} - Compute device class 7.0.</li>
+     * <li>{@link #CU_TARGET_COMPUTE_72 TARGET_COMPUTE_72} - Compute device class 7.2.</li>
      * <li>{@link #CU_TARGET_COMPUTE_75 TARGET_COMPUTE_75} - Compute device class 7.5.</li>
      * </ul>
      */
@@ -757,6 +757,7 @@ public class CU {
         CU_TARGET_COMPUTE_61 = 0x3D,
         CU_TARGET_COMPUTE_62 = 0x3E,
         CU_TARGET_COMPUTE_70 = 0x46,
+        CU_TARGET_COMPUTE_72 = 0x48,
         CU_TARGET_COMPUTE_75 = 0x4B;
 
     /**
@@ -1038,8 +1039,9 @@ public class CU {
      * <li>{@link #CUDA_ERROR_LAUNCH_FAILED CUDA_ERROR_LAUNCH_FAILED} - 
      * An exception occurred on the device while executing a kernel.
      * 
-     * <p>Common causes include dereferencing an invalid device pointer and accessing out of bounds shared memory. This leaves the process in an inconsistent
-     * state and any further CUDA work will return the same error. To continue using CUDA, the process must be terminated and relaunched.</p>
+     * <p>Common causes include dereferencing an invalid device pointer and accessing out of bounds shared memory. Less common cases can be system specific -
+     * more information about these cases can be found in the system specific user guide.This leaves the process in an inconsistent state and any further
+     * CUDA work will return the same error. To continue using CUDA, the process must be terminated and relaunched.</p>
      * </li>
      * <li>{@link #CUDA_ERROR_COOPERATIVE_LAUNCH_TOO_LARGE CUDA_ERROR_COOPERATIVE_LAUNCH_TOO_LARGE} - 
      * This error indicates that the number of blocks launched per grid for a kernel that was launched via either {@link CU90#cuLaunchCooperativeKernel LaunchCooperativeKernel} or
@@ -1052,7 +1054,20 @@ public class CU {
      * <li>{@link #CUDA_ERROR_SYSTEM_NOT_READY CUDA_ERROR_SYSTEM_NOT_READY} - 
      * This error indicates that the system is not yet ready to start any CUDA work.
      * 
-     * <p>To continue using CUDA, verify the system configuration is in a valid state and all required driver daemons are actively running.</p>
+     * <p>To continue using CUDA, verify the system configuration is in a valid state and all required driver daemons are actively running. More information
+     * about this error can be found in the system specific user guide.</p>
+     * </li>
+     * <li>{@link #CUDA_ERROR_SYSTEM_DRIVER_MISMATCH CUDA_ERROR_SYSTEM_DRIVER_MISMATCH} - 
+     * This error indicates that there is a mismatch between the versions of the display driver and the CUDA driver.
+     * 
+     * <p>Refer to the compatibility documentation for supported versions.</p>
+     * </li>
+     * <li>{@link #CUDA_ERROR_COMPAT_NOT_SUPPORTED_ON_DEVICE CUDA_ERROR_COMPAT_NOT_SUPPORTED_ON_DEVICE} - 
+     * This error indicates that the system was upgraded to run with forward compatibility but the visible hardware detected by CUDA does not support this
+     * configuration.
+     * 
+     * <p>Refer to the compatibility documentation for the supported hardware matrix or ensure that only supported hardware is visible during initialization
+     * via the {@code CUDA_VISIBLE_DEVICES} environment variable.</p>
      * </li>
      * <li>{@link #CUDA_ERROR_STREAM_CAPTURE_UNSUPPORTED CUDA_ERROR_STREAM_CAPTURE_UNSUPPORTED} - This error indicates that the operation is not permitted when the stream is capturing.</li>
      * <li>{@link #CUDA_ERROR_STREAM_CAPTURE_INVALIDATED CUDA_ERROR_STREAM_CAPTURE_INVALIDATED} - This error indicates that the current capture sequence on the stream has been invalidated due to a previous error.</li>
@@ -1066,6 +1081,10 @@ public class CU {
      * </li>
      * <li>{@link #CUDA_ERROR_STREAM_CAPTURE_IMPLICIT CUDA_ERROR_STREAM_CAPTURE_IMPLICIT} - This error indicates a disallowed implicit dependency on a current capture sequence from cudaStreamLegacy.</li>
      * <li>{@link #CUDA_ERROR_CAPTURED_EVENT CUDA_ERROR_CAPTURED_EVENT} - This error indicates that the operation is not permitted on an event which was last recorded in a capturing stream.</li>
+     * <li>{@link #CUDA_ERROR_STREAM_CAPTURE_WRONG_THREAD CUDA_ERROR_STREAM_CAPTURE_WRONG_THREAD} - 
+     * A stream capture sequence not initiated with the {@link CU101#CU_STREAM_CAPTURE_MODE_RELAXED STREAM_CAPTURE_MODE_RELAXED} argument to {@link CU100#cuStreamBeginCapture StreamBeginCapture} was passed to {@link CU100#cuStreamEndCapture StreamEndCapture}
+     * in a different thread.
+     * </li>
      * <li>{@link #CUDA_ERROR_UNKNOWN CUDA_ERROR_UNKNOWN} - This indicates that an unknown internal error has occurred.</li>
      * </ul>
      */
@@ -1132,6 +1151,8 @@ public class CU {
         CUDA_ERROR_NOT_PERMITTED                  = 0x320,
         CUDA_ERROR_NOT_SUPPORTED                  = 0x321,
         CUDA_ERROR_SYSTEM_NOT_READY               = 0x322,
+        CUDA_ERROR_SYSTEM_DRIVER_MISMATCH         = 0x323,
+        CUDA_ERROR_COMPAT_NOT_SUPPORTED_ON_DEVICE = 0x324,
         CUDA_ERROR_STREAM_CAPTURE_UNSUPPORTED     = 0x384,
         CUDA_ERROR_STREAM_CAPTURE_INVALIDATED     = 0x385,
         CUDA_ERROR_STREAM_CAPTURE_MERGE           = 0x386,
@@ -1140,6 +1161,7 @@ public class CU {
         CUDA_ERROR_STREAM_CAPTURE_ISOLATION       = 0x389,
         CUDA_ERROR_STREAM_CAPTURE_IMPLICIT        = 0x38A,
         CUDA_ERROR_CAPTURED_EVENT                 = 0x38B,
+        CUDA_ERROR_STREAM_CAPTURE_WRONG_THREAD    = 0x38C,
         CUDA_ERROR_UNKNOWN                        = 0x3E7;
 
     protected CU() {

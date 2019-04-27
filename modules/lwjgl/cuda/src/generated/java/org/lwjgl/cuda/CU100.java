@@ -377,7 +377,7 @@ public class CU100 extends CU92 {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphAddKernelNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode *") PointerBuffer dependencies, @NativeType("CUDA_KERNEL_NODE_PARAMS const *") CUDA_KERNEL_NODE_PARAMS nodeParams) {
+    public static int cuGraphAddKernelNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer dependencies, @NativeType("CUDA_KERNEL_NODE_PARAMS const *") CUDA_KERNEL_NODE_PARAMS nodeParams) {
         if (CHECKS) {
             check(phGraphNode, 1);
         }
@@ -428,7 +428,7 @@ public class CU100 extends CU92 {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphAddMemcpyNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode *") PointerBuffer dependencies, @NativeType("CUDA_MEMCPY3D const *") CUDA_MEMCPY3D copyParams, @NativeType("CUcontext") long ctx) {
+    public static int cuGraphAddMemcpyNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer dependencies, @NativeType("CUDA_MEMCPY3D const *") CUDA_MEMCPY3D copyParams, @NativeType("CUcontext") long ctx) {
         if (CHECKS) {
             check(phGraphNode, 1);
         }
@@ -479,7 +479,7 @@ public class CU100 extends CU92 {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphAddMemsetNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode *") PointerBuffer dependencies, @NativeType("CUDA_MEMSET_NODE_PARAMS const *") CUDA_MEMSET_NODE_PARAMS memsetParams, @NativeType("CUcontext") long ctx) {
+    public static int cuGraphAddMemsetNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer dependencies, @NativeType("CUDA_MEMSET_NODE_PARAMS const *") CUDA_MEMSET_NODE_PARAMS memsetParams, @NativeType("CUcontext") long ctx) {
         if (CHECKS) {
             check(phGraphNode, 1);
         }
@@ -529,7 +529,7 @@ public class CU100 extends CU92 {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphAddHostNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode *") PointerBuffer dependencies, @NativeType("CUDA_HOST_NODE_PARAMS const *") CUDA_HOST_NODE_PARAMS nodeParams) {
+    public static int cuGraphAddHostNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer dependencies, @NativeType("CUDA_HOST_NODE_PARAMS const *") CUDA_HOST_NODE_PARAMS nodeParams) {
         if (CHECKS) {
             check(phGraphNode, 1);
         }
@@ -579,7 +579,7 @@ public class CU100 extends CU92 {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphAddChildGraphNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode *") PointerBuffer dependencies, @NativeType("CUgraph") long childGraph) {
+    public static int cuGraphAddChildGraphNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer dependencies, @NativeType("CUgraph") long childGraph) {
         if (CHECKS) {
             check(phGraphNode, 1);
         }
@@ -615,7 +615,7 @@ public class CU100 extends CU92 {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphAddEmptyNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode *") PointerBuffer dependencies) {
+    public static int cuGraphAddEmptyNode(@NativeType("CUgraphNode *") PointerBuffer phGraphNode, @NativeType("CUgraph") long hGraph, @Nullable @NativeType("CUgraphNode const *") PointerBuffer dependencies) {
         if (CHECKS) {
             check(phGraphNode, 1);
         }
@@ -784,7 +784,7 @@ public class CU100 extends CU92 {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphAddDependencies(@NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode *") PointerBuffer from, @NativeType("CUgraphNode *") PointerBuffer to) {
+    public static int cuGraphAddDependencies(@NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode const *") PointerBuffer from, @NativeType("CUgraphNode const *") PointerBuffer to) {
         if (CHECKS) {
             check(to, from.remaining());
         }
@@ -802,7 +802,7 @@ public class CU100 extends CU92 {
     }
 
     @NativeType("CUresult")
-    public static int cuGraphRemoveDependencies(@NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode *") PointerBuffer from, @NativeType("CUgraphNode *") PointerBuffer to) {
+    public static int cuGraphRemoveDependencies(@NativeType("CUgraph") long hGraph, @NativeType("CUgraphNode const *") PointerBuffer from, @NativeType("CUgraphNode const *") PointerBuffer to) {
         if (CHECKS) {
             check(to, from.remaining());
         }

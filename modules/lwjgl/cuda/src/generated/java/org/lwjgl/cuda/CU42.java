@@ -36,6 +36,8 @@ public class CU42 extends CU41 {
     /**
      * Shared memory carveout configurations. ({@code CUshared_carveout})
      * 
+     * <p>These may be passed to {@link CU90#cuFuncSetAttribute FuncSetAttribute}.</p>
+     * 
      * <h5>Enum values:</h5>
      * 
      * <ul>

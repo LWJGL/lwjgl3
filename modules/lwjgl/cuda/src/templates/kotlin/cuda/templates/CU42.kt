@@ -20,7 +20,11 @@ val CU42 = "CU42".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
     )
 
     EnumConstant(
-        "Shared memory carveout configurations. ({@code CUshared_carveout})",
+        """
+        Shared memory carveout configurations. ({@code CUshared_carveout})
+
+        These may be passed to #FuncSetAttribute().
+        """,
 
         "SHAREDMEM_CARVEOUT_DEFAULT".enum("no preference for shared memory or L1 (default)", -1),
         "SHAREDMEM_CARVEOUT_MAX_SHARED".enum("prefer maximum available shared memory, minimum L1 cache", 100),

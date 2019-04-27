@@ -99,7 +99,7 @@ val CU80 = "CU80".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "DEVICE_P2P_ATTRIBUTE_PERFORMANCE_RANK".enum("A relative value indicating the performance of the link between two devices", 0x01),
         "DEVICE_P2P_ATTRIBUTE_ACCESS_SUPPORTED".enum("P2P Access is enable", 0x02),
         "DEVICE_P2P_ATTRIBUTE_NATIVE_ATOMIC_SUPPORTED".enum("Atomic operation over the link supported", 0x03),
-        "DEVICE_P2P_ATTRIBUTE_ARRAY_ACCESS_ACCESS_SUPPORTED".enum("Deprecated, use CU_DEVICE_P2P_ATTRIBUTE_CUDA_ARRAY_ACCESS_SUPPORTED instead", 0x04),
+        "DEVICE_P2P_ATTRIBUTE_ACCESS_ACCESS_SUPPORTED".enum("Deprecated, use CU_DEVICE_P2P_ATTRIBUTE_CUDA_ARRAY_ACCESS_SUPPORTED instead", 0x04),
         "DEVICE_P2P_ATTRIBUTE_CUDA_ARRAY_ACCESS_SUPPORTED".enum("Accessing CUDA arrays over the link supported", 0x04)
     )
 

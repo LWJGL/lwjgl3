@@ -73,8 +73,9 @@ val CUresourcetype = "CUresourcetype".enumType
 val CUresourceViewFormat = "CUresourceViewFormat".enumType
 val CUresult = "CUresult".enumType
 val CUsharedconfig = "CUsharedconfig".enumType
-val CUstreamCaptureStatus = "CUstreamCaptureStatus".enumType
 val CUstreamBatchMemOpType = "CUstreamBatchMemOpType".enumType
+val CUstreamCaptureMode = "CUstreamCaptureMode".enumType
+val CUstreamCaptureStatus = "CUstreamCaptureStatus".enumType
 
 val CUstreamCallback = Module.CUDA.callback {
     void(

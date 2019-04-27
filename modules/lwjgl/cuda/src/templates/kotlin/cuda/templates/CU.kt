@@ -344,8 +344,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
 
         "FUNC_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT".enum(
             """
-            On devices where the L1 cache and shared memory use the same hardware resources, this sets the shared memory carveout preference, in percent of the
-            total resources.
+            On devices where the L1 cache and shared memory use the same hardware resources, this sets the shared memory carveout preference, in percent of the total shared memory. Refer to #DEVICE_ATTRIBUTE_MAX_SHARED_MEMORY_PER_MULTIPROCESSOR.
 
             This is only a hint, and the driver can choose a different ratio if required to execute the function.
             """,
@@ -570,6 +569,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "TARGET_COMPUTE_61".enum("Compute device class 6.1.", 61),
         "TARGET_COMPUTE_62".enum("Compute device class 6.2.", 62),
         "TARGET_COMPUTE_70".enum("Compute device class 7.0.", 70),
+        "TARGET_COMPUTE_72".enum("Compute device class 7.2.", 72),
         "TARGET_COMPUTE_75".enum("Compute device class 7.5.", 75)
     )
 
@@ -883,8 +883,9 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
             """
             An exception occurred on the device while executing a kernel.
 
-            Common causes include dereferencing an invalid device pointer and accessing out of bounds shared memory. This leaves the process in an inconsistent
-            state and any further CUDA work will return the same error. To continue using CUDA, the process must be terminated and relaunched.
+            Common causes include dereferencing an invalid device pointer and accessing out of bounds shared memory. Less common cases can be system specific -
+            more information about these cases can be found in the system specific user guide.This leaves the process in an inconsistent state and any further
+            CUDA work will return the same error. To continue using CUDA, the process must be terminated and relaunched.
             """,
             719
         ),
@@ -903,9 +904,26 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
             """
             This error indicates that the system is not yet ready to start any CUDA work.
 
-            To continue using CUDA, verify the system configuration is in a valid state and all required driver daemons are actively running.
+            To continue using CUDA, verify the system configuration is in a valid state and all required driver daemons are actively running. More information
+            about this error can be found in the system specific user guide.
             """,
             802
+        ),
+        "CUDA_ERROR_SYSTEM_DRIVER_MISMATCH".enum(
+            """
+            This error indicates that there is a mismatch between the versions of the display driver and the CUDA driver.
+
+            Refer to the compatibility documentation for supported versions.
+            """
+        ),
+        "CUDA_ERROR_COMPAT_NOT_SUPPORTED_ON_DEVICE".enum(
+            """
+            This error indicates that the system was upgraded to run with forward compatibility but the visible hardware detected by CUDA does not support this
+            configuration.
+
+            Refer to the compatibility documentation for the supported hardware matrix or ensure that only supported hardware is visible during initialization
+            via the {@code CUDA_VISIBLE_DEVICES} environment variable.
+            """
         ),
         "CUDA_ERROR_STREAM_CAPTURE_UNSUPPORTED".enum("This error indicates that the operation is not permitted when the stream is capturing.", 900),
         "CUDA_ERROR_STREAM_CAPTURE_INVALIDATED".enum(
@@ -936,6 +954,12 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "CUDA_ERROR_CAPTURED_EVENT".enum(
             "This error indicates that the operation is not permitted on an event which was last recorded in a capturing stream.",
             907
+        ),
+        "CUDA_ERROR_STREAM_CAPTURE_WRONG_THREAD".enum(
+            """
+            A stream capture sequence not initiated with the #STREAM_CAPTURE_MODE_RELAXED argument to #StreamBeginCapture() was passed to #StreamEndCapture()
+            in a different thread.
+            """
         ),
         "CUDA_ERROR_UNKNOWN".enum("This indicates that an unknown internal error has occurred.", 999)
     ).noPrefix()

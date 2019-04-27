@@ -179,7 +179,7 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
 
         Check(1)..CUgraphNode.p("phGraphNode", ""),
         CUgraph("hGraph", ""),
-        nullable..CUgraphNode.p("dependencies", ""),
+        nullable..CUgraphNode.const.p("dependencies", ""),
         AutoSize("dependencies")..size_t("numDependencies", ""),
         CUDA_KERNEL_NODE_PARAMS.const.p("nodeParams", "")
     )
@@ -206,7 +206,7 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
 
         Check(1)..CUgraphNode.p("phGraphNode", ""),
         CUgraph("hGraph", ""),
-        nullable..CUgraphNode.p("dependencies", ""),
+        nullable..CUgraphNode.const.p("dependencies", ""),
         AutoSize("dependencies")..size_t("numDependencies", ""),
         CUDA_MEMCPY3D.const.p("copyParams", ""),
         CUcontext("ctx", "")
@@ -234,7 +234,7 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
 
         Check(1)..CUgraphNode.p("phGraphNode", ""),
         CUgraph("hGraph", ""),
-        nullable..CUgraphNode.p("dependencies", ""),
+        nullable..CUgraphNode.const.p("dependencies", ""),
         AutoSize("dependencies")..size_t("numDependencies", ""),
         CUDA_MEMSET_NODE_PARAMS.const.p("memsetParams", ""),
         CUcontext("ctx", "")
@@ -262,7 +262,7 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
 
         Check(1)..CUgraphNode.p("phGraphNode", ""),
         CUgraph("hGraph", ""),
-        nullable..CUgraphNode.p("dependencies", ""),
+        nullable..CUgraphNode.const.p("dependencies", ""),
         AutoSize("dependencies")..size_t("numDependencies", ""),
         CUDA_HOST_NODE_PARAMS.const.p("nodeParams", "")
     )
@@ -289,7 +289,7 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
 
         Check(1)..CUgraphNode.p("phGraphNode", ""),
         CUgraph("hGraph", ""),
-        nullable..CUgraphNode.p("dependencies", ""),
+        nullable..CUgraphNode.const.p("dependencies", ""),
         AutoSize("dependencies")..size_t("numDependencies", ""),
         CUgraph("childGraph", "")
     )
@@ -308,7 +308,7 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
 
         Check(1)..CUgraphNode.p("phGraphNode", ""),
         CUgraph("hGraph", ""),
-        nullable..CUgraphNode.p("dependencies", ""),
+        nullable..CUgraphNode.const.p("dependencies", ""),
         AutoSize("dependencies")..size_t("numDependencies", "")
     )
 
@@ -388,8 +388,8 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "",
 
         CUgraph("hGraph", ""),
-        CUgraphNode.p("from", ""),
-        CUgraphNode.p("to", ""),
+        CUgraphNode.const.p("from", ""),
+        CUgraphNode.const.p("to", ""),
         AutoSize("from", "to")..size_t("numDependencies", "")
     )
 
@@ -398,8 +398,8 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "",
 
         CUgraph("hGraph", ""),
-        CUgraphNode.p("from", ""),
-        CUgraphNode.p("to", ""),
+        CUgraphNode.const.p("from", ""),
+        CUgraphNode.const.p("to", ""),
         AutoSize("from", "to")..size_t("numDependencies", "")
     )
 
