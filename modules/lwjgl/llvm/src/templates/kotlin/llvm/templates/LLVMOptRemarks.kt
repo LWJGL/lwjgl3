@@ -100,4 +100,13 @@ LLVMOptRemarkParserDispose(Parser);""")}
 
         LLVMOptRemarkParserRef("Parser", "")
     )
+
+    IgnoreMissing..uint32_t(
+        "OptRemarkVersion",
+        "Returns the version of the opt-remarks dylib.",
+
+        void(),
+
+        since = "8.0"
+    )
 }

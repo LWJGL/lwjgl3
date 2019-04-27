@@ -65,7 +65,7 @@ public class LLVMExecutionEngine {
             DisposeMCJITMemoryManager       = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDisposeMCJITMemoryManager"),
             CreateGDBRegistrationListener   = LLVMCore.getLibrary().getFunctionAddress("LLVMCreateGDBRegistrationListener"),
             CreateIntelJITEventListener     = LLVMCore.getLibrary().getFunctionAddress("LLVMCreateIntelJITEventListener"),
-            CreateOprofileJITEventListener  = LLVMCore.getLibrary().getFunctionAddress("LLVMCreateOprofileJITEventListener"),
+            CreateOProfileJITEventListener  = LLVMCore.getLibrary().getFunctionAddress("LLVMCreateOProfileJITEventListener"),
             CreatePerfJITEventListener      = LLVMCore.getLibrary().getFunctionAddress("LLVMCreatePerfJITEventListener");
 
     }
@@ -592,11 +592,11 @@ public class LLVMExecutionEngine {
         return invokeP(__functionAddress);
     }
 
-    // --- [ LLVMCreateOprofileJITEventListener ] ---
+    // --- [ LLVMCreateOProfileJITEventListener ] ---
 
     @NativeType("LLVMJITEventListenerRef")
-    public static long LLVMCreateOprofileJITEventListener() {
-        long __functionAddress = Functions.CreateOprofileJITEventListener;
+    public static long LLVMCreateOProfileJITEventListener() {
+        long __functionAddress = Functions.CreateOProfileJITEventListener;
         if (CHECKS) {
             check(__functionAddress);
         }

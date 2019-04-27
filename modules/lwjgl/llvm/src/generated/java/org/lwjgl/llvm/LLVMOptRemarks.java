@@ -35,7 +35,8 @@ public class LLVMOptRemarks {
             OptRemarkParserGetNext         = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMOptRemarkParserGetNext"),
             OptRemarkParserHasError        = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMOptRemarkParserHasError"),
             OptRemarkParserGetErrorMessage = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMOptRemarkParserGetErrorMessage"),
-            OptRemarkParserDispose         = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMOptRemarkParserDispose");
+            OptRemarkParserDispose         = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMOptRemarkParserDispose"),
+            OptRemarkVersion               = LLVMCore.getLibrary().getFunctionAddress("LLVMOptRemarkVersion");
 
     }
 
@@ -158,6 +159,22 @@ public class LLVMOptRemarks {
             check(Parser);
         }
         invokePV(Parser, __functionAddress);
+    }
+
+    // --- [ LLVMOptRemarkVersion ] ---
+
+    /**
+     * Returns the version of the opt-remarks dylib.
+     *
+     * @since 8.0
+     */
+    @NativeType("uint32_t")
+    public static int LLVMOptRemarkVersion() {
+        long __functionAddress = Functions.OptRemarkVersion;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return invokeI(__functionAddress);
     }
 
 }

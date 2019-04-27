@@ -30,7 +30,10 @@ val LLVMTargetMachine = "LLVMTargetMachine".nativeClass(
         "RelocDefault".enum("", "0"),
         "RelocStatic".enum,
         "RelocPIC".enum,
-        "RelocDynamicNoPic".enum
+        "RelocDynamicNoPic".enum,
+        "RelocROPI".enum,
+        "RelocRWPI".enum,
+        "RelocROPI_RWPI".enum
     )
 
     EnumConstant(

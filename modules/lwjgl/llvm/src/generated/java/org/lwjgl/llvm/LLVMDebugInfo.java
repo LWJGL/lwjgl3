@@ -56,6 +56,7 @@ public class LLVMDebugInfo {
      * <li>{@link #LLVMDIFlagMainSubprogram DIFlagMainSubprogram}</li>
      * <li>{@link #LLVMDIFlagTypePassByValue DIFlagTypePassByValue}</li>
      * <li>{@link #LLVMDIFlagTypePassByReference DIFlagTypePassByReference}</li>
+     * <li>{@link #LLVMDIFlagEnumClass DIFlagEnumClass}</li>
      * <li>{@link #LLVMDIFlagFixedEnum DIFlagFixedEnum}</li>
      * <li>{@link #LLVMDIFlagThunk DIFlagThunk}</li>
      * <li>{@link #LLVMDIFlagTrivial DIFlagTrivial}</li>
@@ -94,7 +95,8 @@ public class LLVMDebugInfo {
         LLVMDIFlagMainSubprogram      = 1 << 21,
         LLVMDIFlagTypePassByValue     = 1 << 22,
         LLVMDIFlagTypePassByReference = 1 << 23,
-        LLVMDIFlagFixedEnum           = 1 << 24,
+        LLVMDIFlagEnumClass           = 1 << 24,
+        LLVMDIFlagFixedEnum           = LLVMDIFlagEnumClass,
         LLVMDIFlagThunk               = 1 << 25,
         LLVMDIFlagTrivial             = 1 << 26,
         LLVMDIFlagBigEndian           = 1 << 27,

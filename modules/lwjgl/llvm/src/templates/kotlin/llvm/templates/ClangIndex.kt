@@ -1021,9 +1021,22 @@ val ClangIndex = "ClangIndex".nativeClass(
         "Type_OCLEvent".enum("OpenCL builtin types."),
         "Type_OCLQueue".enum("OpenCL builtin types."),
         "Type_OCLReserveID".enum("OpenCL builtin types."),
-        "Type_ObjCObject".enum("OpenCL builtin types."),
-        "Type_ObjCTypeParam".enum("OpenCL builtin types."),
-        "Type_Attributed".enum("OpenCL builtin types.")
+        "Type_ObjCObject".enum,
+        "Type_ObjCTypeParam".enum,
+        "Type_Attributed".enum,
+        "Type_OCLIntelSubgroupAVCMcePayload".enum("OpenCL builtin types."),
+        "Type_OCLIntelSubgroupAVCImePayload".enum("OpenCL builtin types."),
+        "Type_OCLIntelSubgroupAVCRefPayload".enum("OpenCL builtin types."),
+        "Type_OCLIntelSubgroupAVCSicPayload".enum("OpenCL builtin types."),
+        "Type_OCLIntelSubgroupAVCMceResult".enum("OpenCL builtin types."),
+        "Type_OCLIntelSubgroupAVCImeResult".enum("OpenCL builtin types."),
+        "Type_OCLIntelSubgroupAVCRefResult".enum("OpenCL builtin types."),
+        "Type_OCLIntelSubgroupAVCSicResult".enum("OpenCL builtin types."),
+        "Type_OCLIntelSubgroupAVCImeResultSingleRefStreamout".enum("OpenCL builtin types."),
+        "Type_OCLIntelSubgroupAVCImeResultDualRefStreamout".enum("OpenCL builtin types."),
+        "Type_OCLIntelSubgroupAVCImeSingleRefStreamin".enum("OpenCL builtin types."),
+
+        "Type_OCLIntelSubgroupAVCImeDualRefStreamin".enum("OpenCL builtin types.")
     )
 
     EnumConstant(

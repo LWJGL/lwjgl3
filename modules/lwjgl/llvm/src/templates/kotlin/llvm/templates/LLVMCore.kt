@@ -22,7 +22,8 @@ val LLVMCore = "LLVMCore".nativeClass(
         "IndirectBr".enum("Terminator Instructions"),
         "Invoke".enum("Terminator Instructions"),
         "Unreachable".enum("removed 6 due to API changes", "7"),
-        "Add".enum("Standard Binary Operators"),
+        "FNeg".enum("Standard Unary Operators", "66"),
+        "Add".enum("Standard Binary Operators", "8"),
         "FAdd".enum("Standard Binary Operators"),
         "Sub".enum("Standard Binary Operators"),
         "FSub".enum("Standard Binary Operators"),
@@ -445,6 +446,30 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMContextRef("C", ""),
         nullable..LLVMYieldCallback("Callback", ""),
         nullable..opaque_p("OpaqueHandle", "")
+    )
+
+    IgnoreMissing..LLVMBool(
+        "ContextShouldDiscardValueNames",
+        "Retrieve whether the given context is set to discard all value names.",
+
+        LLVMContextRef("C", ""),
+
+        since = "8.0"
+    )
+
+    IgnoreMissing..void(
+        "ContextSetDiscardValueNames",
+        """
+        Set whether the given context discards all value names.
+
+        If true, only the names of {@code GlobalValue} objects will be available in the IR. This can be used to save memory and runtime, especially in release
+        mode.
+        """,
+
+        LLVMContextRef("C", ""),
+        LLVMBool("Discard", ""),
+
+        since = "8.0"
     )
 
     void(
@@ -2274,6 +2299,18 @@ val LLVMCore = "LLVMCore".nativeClass(
         AutoSize("ConstantIndices")..unsigned_int("NumIndices", "")
     )
 
+    IgnoreMissing..LLVMValueRef(
+        "ConstGEP2",
+        "",
+
+        LLVMTypeRef("Ty", ""),
+        LLVMValueRef("ConstantVal", ""),
+        LLVMValueRef.p("ConstantIndices", ""),
+        AutoSize("ConstantIndices")..unsigned_int("NumIndices", ""),
+
+        since = "8.0"
+    )
+
     LLVMValueRef(
         "ConstInBoundsGEP",
         "",
@@ -2281,6 +2318,18 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("ConstantVal", ""),
         LLVMValueRef.p("ConstantIndices", ""),
         AutoSize("ConstantIndices")..unsigned_int("NumIndices", "")
+    )
+
+    IgnoreMissing..LLVMValueRef(
+        "ConstInBoundsGEP2",
+        "",
+
+        LLVMTypeRef("Ty", ""),
+        LLVMValueRef("ConstantVal", ""),
+        LLVMValueRef.p("ConstantIndices", ""),
+        AutoSize("ConstantIndices")..unsigned_int("NumIndices", ""),
+
+        since = "8.0"
     )
 
     LLVMValueRef(
@@ -2940,6 +2989,73 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("Fn", "")
     )
 
+    IgnoreMissing..LLVMValueRef(
+        "GetIntrinsicDeclaration",
+        """
+        Create or insert the declaration of an intrinsic.
+
+        For overloaded intrinsics, parameter types must be provided to uniquely identify an overload.
+        """,
+
+        LLVMModuleRef("Mod", ""),
+        unsigned("ID", ""),
+        LLVMTypeRef.p("ParamTypes", ""),
+        AutoSize("ParamTypes")..size_t("ParamCount", ""),
+
+        since = "8.0"
+    )
+
+    IgnoreMissing..LLVMValueRef(
+        "IntrinsicGetType",
+        """
+        Retrieves the type of an intrinsic.
+
+        For overloaded intrinsics, parameter types must be provided to uniquely identify an overload.
+        """,
+
+        LLVMContextRef("Ctx", ""),
+        unsigned("ID", ""),
+        LLVMTypeRef.p("ParamTypes", ""),
+        AutoSize("ParamTypes")..size_t("ParamCount", ""),
+
+        since = "8.0"
+    )
+
+    IgnoreMissing..charUTF8.const.p(
+        "IntrinsicGetName",
+        "Retrieves the name of an intrinsic.",
+
+        unsigned("ID", ""),
+        AutoSizeResult..Check(1)..size_t.p("NameLength", ""),
+
+        since = "8.0"
+    )
+
+    IgnoreMissing..charUTF8.const.p(
+        "IntrinsicCopyOverloadedName",
+        """
+        Copies the name of an overloaded intrinsic identified by a given list of parameter types.
+
+        Unlike #IntrinsicGetName(), the caller is responsible for freeing the returned string.
+        """,
+
+        unsigned("ID", ""),
+        LLVMTypeRef.p("ParamTypes", ""),
+        AutoSize("ParamTypes")..size_t("ParamCount", ""),
+        AutoSizeResult..Check(1)..size_t.p("NameLength", ""),
+
+        since = "8.0"
+    )
+
+    IgnoreMissing..LLVMBool(
+        "IntrinsicIsOverloaded",
+        "Obtain if the intrinsic identified by the given ID is overloaded.",
+
+        unsigned("ID", ""),
+
+        since = "8.0"
+    )
+
     unsigned_int(
         "GetFunctionCallConv",
         """
@@ -3345,6 +3461,16 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("Fn", "")
     )
 
+    IgnoreMissing..LLVMBasicBlockRef(
+        "CreateBasicBlockInContext",
+        "Create a new basic block without inserting it into a function.",
+
+        LLVMContextRef("C", ""),
+        charUTF8.const.p("Name", ""),
+
+        since = "8.0"
+    )
+
     LLVMBasicBlockRef(
         "AppendBasicBlockInContext",
         "Append a basic block to the end of a function.",
@@ -3690,6 +3816,15 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMAttributeIndex("Idx", ""),
         charUTF8.const.p("K", ""),
         AutoSize("K")..unsigned_int("KLen", "")
+    )
+
+    IgnoreMissing..LLVMTypeRef(
+        "GetCalledFunctionType",
+        "Obtain the function type called by this instruction.",
+
+        LLVMValueRef("C", ""),
+
+        since = "8.0"
     )
 
     LLVMValueRef(
@@ -4077,6 +4212,22 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMBasicBlockRef("Then", ""),
         LLVMBasicBlockRef("Catch", ""),
         charUTF8.const.p("Name", "")
+    )
+
+    IgnoreMissing..LLVMValueRef(
+        "BuildInvoke2",
+        "",
+
+        LLVMBuilderRef("Builder", ""),
+        LLVMTypeRef("Ty", ""),
+        LLVMValueRef("Fn", ""),
+        LLVMValueRef.p("Args", ""),
+        AutoSize("Args")..unsigned_int("NumArgs", ""),
+        LLVMBasicBlockRef("Then", ""),
+        LLVMBasicBlockRef("Catch", ""),
+        charUTF8.const.p("Name", ""),
+
+        since = "8.0"
     )
 
     LLVMValueRef(
@@ -4616,6 +4767,47 @@ val LLVMCore = "LLVMCore".nativeClass(
         charUTF8.const.p("Name", "")
     )
 
+    IgnoreMissing..LLVMValueRef(
+        "BuildMemSet",
+        "Creates and inserts a memset to the specified pointer and the specified value.",
+
+        LLVMBuilderRef("B", ""),
+        LLVMValueRef("Ptr", ""),
+        LLVMValueRef("Val", ""),
+        LLVMValueRef("Len", ""),
+        unsigned("Align", ""),
+
+        since = "8.0"
+    )
+
+    IgnoreMissing..LLVMValueRef(
+        "BuildMemCpy",
+        "Creates and inserts a memcpy between the specified pointers.",
+
+        LLVMBuilderRef("B", ""),
+        LLVMValueRef("Dst", ""),
+        unsigned("DstAlign", ""),
+        LLVMValueRef("Src", ""),
+        unsigned("SrcAlign", ""),
+        LLVMValueRef("Size", ""),
+
+        since = "8.0"
+    )
+
+    IgnoreMissing..LLVMValueRef(
+        "BuildMemMove",
+        "Creates and inserts a memmove between the specified pointers.",
+
+        LLVMBuilderRef("B", ""),
+        LLVMValueRef("Dst", ""),
+        unsigned("DstAlign", ""),
+        LLVMValueRef("Src", ""),
+        unsigned("SrcAlign", ""),
+        LLVMValueRef("Size", ""),
+
+        since = "8.0"
+    )
+
     LLVMValueRef(
         "BuildAlloca",
         "",
@@ -4650,6 +4842,18 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMBuilderRef("Builder", ""),
         LLVMValueRef("PointerVal", ""),
         charUTF8.const.p("Name", "")
+    )
+
+    IgnoreMissing..LLVMValueRef(
+        "BuildLoad2",
+        "",
+
+        LLVMBuilderRef("Builder", ""),
+        LLVMTypeRef("Ty", ""),
+        LLVMValueRef("PointerVal", ""),
+        charUTF8.const.p("Name", ""),
+
+        since = "8.0"
     )
 
     LLVMValueRef(
@@ -4691,6 +4895,47 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("Pointer", ""),
         unsigned_int("Idx", ""),
         charUTF8.const.p("Name", "")
+    )
+
+    IgnoreMissing..LLVMValueRef(
+        "BuildGEP2",
+        "",
+
+        LLVMBuilderRef("B", ""),
+        LLVMTypeRef("Ty", ""),
+        LLVMValueRef("Pointer", ""),
+        LLVMValueRef.p("Indices", ""),
+        AutoSize("Indices")..unsigned_int("NumIndices", ""),
+        charUTF8.const.p("Name", ""),
+
+        since = "8.0"
+    )
+
+    IgnoreMissing..LLVMValueRef(
+        "BuildInBoundsGEP2",
+        "",
+
+        LLVMBuilderRef("B", ""),
+        LLVMTypeRef("Ty", ""),
+        LLVMValueRef("Pointer", ""),
+        LLVMValueRef.p("Indices", ""),
+        AutoSize("Indices")..unsigned_int("NumIndices", ""),
+        charUTF8.const.p("Name", ""),
+
+        since = "8.0"
+    )
+
+    IgnoreMissing..LLVMValueRef(
+        "BuildStructGEP2",
+        "",
+
+        LLVMBuilderRef("B", ""),
+        LLVMTypeRef("Ty", ""),
+        LLVMValueRef("Pointer", ""),
+        unsigned_int("Idx", ""),
+        charUTF8.const.p("Name", ""),
+
+        since = "8.0"
     )
 
     LLVMValueRef(
@@ -4922,6 +5167,19 @@ val LLVMCore = "LLVMCore".nativeClass(
         charUTF8.const.p("Name", "")
     )
 
+    IgnoreMissing..LLVMValueRef(
+        "BuildPointerCast2",
+        "",
+
+        LLVMBuilderRef("Builder", ""),
+        LLVMValueRef("Val", ""),
+        LLVMTypeRef("DestTy", ""),
+        LLVMBool("IsSigned", ""),
+        charUTF8.const.p("Name", ""),
+
+        since = "8.0"
+    )
+
     LLVMValueRef(
         "BuildIntCast",
         "",
@@ -4982,6 +5240,20 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef.p("Args", ""),
         AutoSize("Args")..unsigned_int("NumArgs", ""),
         charUTF8.const.p("Name", "")
+    )
+
+    IgnoreMissing..LLVMValueRef(
+        "BuildCall2",
+        "",
+
+        LLVMBuilderRef("Builder", ""),
+        LLVMTypeRef("Ty", ""),
+        LLVMValueRef("Fn", ""),
+        LLVMValueRef.p("Args", ""),
+        AutoSize("Args")..unsigned_int("NumArgs", ""),
+        charUTF8.const.p("Name", ""),
+
+        since = "8.0"
     )
 
     LLVMValueRef(

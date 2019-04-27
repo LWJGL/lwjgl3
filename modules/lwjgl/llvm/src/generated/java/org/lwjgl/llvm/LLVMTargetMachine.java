@@ -49,13 +49,19 @@ public class LLVMTargetMachine {
      * <li>{@link #LLVMRelocStatic RelocStatic}</li>
      * <li>{@link #LLVMRelocPIC RelocPIC}</li>
      * <li>{@link #LLVMRelocDynamicNoPic RelocDynamicNoPic}</li>
+     * <li>{@link #LLVMRelocROPI RelocROPI}</li>
+     * <li>{@link #LLVMRelocRWPI RelocRWPI}</li>
+     * <li>{@link #LLVMRelocROPI_RWPI RelocROPI_RWPI}</li>
      * </ul>
      */
     public static final int
         LLVMRelocDefault      = 0,
         LLVMRelocStatic       = 1,
         LLVMRelocPIC          = 2,
-        LLVMRelocDynamicNoPic = 3;
+        LLVMRelocDynamicNoPic = 3,
+        LLVMRelocROPI         = 4,
+        LLVMRelocRWPI         = 5,
+        LLVMRelocROPI_RWPI    = 6;
 
     /**
      * {@code LLVMCodeModel}
