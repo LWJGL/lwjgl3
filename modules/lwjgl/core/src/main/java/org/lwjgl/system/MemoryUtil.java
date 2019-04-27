@@ -129,6 +129,13 @@ public final class MemoryUtil {
             throw new UnsupportedOperationException(t);
         }
 
+        // JDK-12 has a JIT compilation bug related to Unsafe. In LWJGL applications it is triggered when
+        // making concurrent calls to the custom slice/duplicate implementations, during JVM start-up. An
+        // effective workaround is to warm-up Unsafe.putObject in a single thread (this static-init block).
+        for (int i = 0; i < 10000; i++) {
+            UNSAFE.putObject(bb, PARENT_BYTE, UNSAFE.getObject(bb, PARENT_BYTE));
+        }
+
         PAGE_SIZE = UNSAFE.pageSize();
         CACHE_LINE_SIZE = 64; // TODO: Can we do better?
     }
