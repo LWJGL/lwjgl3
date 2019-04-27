@@ -15594,7 +15594,7 @@ uint32_t VmaAllocator_T::CalculateGpuDefragmentationMemoryTypeBits() const
     uint32_t memoryTypeBits = 0;
 
     // Create buffer.
-    VkBuffer buf = VMA_NULL;
+    VkBuffer buf = VK_NULL_HANDLE;
     VkResult res = (*GetVulkanFunctions().vkCreateBuffer)(
         m_hDevice, &dummyBufCreateInfo, GetAllocationCallbacks(), &buf);
     if(res == VK_SUCCESS)
