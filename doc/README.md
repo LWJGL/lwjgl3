@@ -118,7 +118,7 @@ The ANT build can be configured with the following environment variables:
    - *release/{build.version}*
        a specific previously released build.
 * `LWJGL_BUILD_ARCH` (optional)
-    The target native architecture. Must be either x86 or x64. By default, os.arch of the JVM that runs ANT is used, but this can be overridden for cross-compiling to another architecture.
+    The target native architecture. Must be one of: `x64`, `x86`, `arm64`, `arm32`. By default, the `os.arch` of the JVM that runs ANT is used, but this can be overridden for cross-compiling to another architecture.
 * `LWJGL_BUILD_OFFLINE` (optional)
     Offline build flag. This is useful when working offline, or when custom binary dependencies are used (so they are not overridden). Set to one of true/on/yes to enable.
 * `LWJGL_BUILD_OUTPUT` (optional)

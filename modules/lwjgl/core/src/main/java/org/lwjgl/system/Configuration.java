@@ -28,6 +28,44 @@ public class Configuration<T> {
     public static final Configuration<String> LIBRARY_PATH = new Configuration<>("org.lwjgl.librarypath", StateInit.STRING);
 
     /**
+     * Sets the mapping algorithm used to resolve the <b>name</b> of bundled shared libraries. Supported values:
+     *
+     * <ul>
+     * <li><em>default</em> - Maps {@code <libname>} to {@code <libname>}.</li>
+     * <li><em>legacy</em> - Maps {@code <libname>} to {@code is64bit(arch) ? <libname> : <libname>32}.</li>
+     * <li><em>&lt;classpath&gt;</em> - A class that implements the {@link Function Function&lt;String, String&gt;} interface. It will be instantiated using reflection.</li>
+     * </ul>
+     *
+     * <p>When set programmatically, it can also be a {@link Function Function&lt;String, String&gt;} instance.</p>
+     *
+     * <p style="font-family: monospace">
+     * Property: <b>org.lwjgl.system.bundledLibrary.nameMapper</b><br>
+     * &nbsp; &nbsp; Type: String or a {@link Function Function&lt;String, String&gt;} instance<br>
+     * &nbsp; &nbsp;Usage: Static</p>
+     */
+    public static final Configuration<Object> BUNDLED_LIBRARY_NAME_MAPPER =
+        new Configuration<>("org.lwjgl.system.bundledLibrary.nameMapper", StateInit.STRING);
+
+    /**
+     * Sets the mapping algorithm used to resolve bundled shared libraries in the <b>classpath/modulepath</b>. Supported values:
+     *
+     * <ul>
+     * <li><em>default</em> - Maps {@code <libpath>} to {@code <arch>/<libpath>}.</li>
+     * <li><em>legacy</em> - Maps {@code <libpath>} to {@code <libpath>}.</li>
+     * <li><em>&lt;classpath&gt;</em> - A class that implements the {@link Function Function&lt;String, String&gt;} interface. It will be instantiated using reflection.</li>
+     * </ul>
+     *
+     * <p>When set programmatically, it can also be a {@link Function Function&lt;String, String&gt;} instance.</p>
+     *
+     * <p style="font-family: monospace">
+     * Property: <b>org.lwjgl.system.bundledLibrary.nameMapper</b><br>
+     * &nbsp; &nbsp; Type: String or a {@link Function Function&lt;String, String&gt;} instance<br>
+     * &nbsp; &nbsp;Usage: Static</p>
+     */
+    public static final Configuration<Object> BUNDLED_LIBRARY_PATH_MAPPER =
+        new Configuration<>("org.lwjgl.system.bundledLibrary.pathMapper", StateInit.STRING);
+
+    /**
      * Changes the temporary directory name created by LWJGL when extracting shared libraries from JAR files. If this option is not set, it defaults to
      * <code>lwjgl&lt;user name&gt;</code>.
      *

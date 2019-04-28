@@ -187,10 +187,10 @@ final class SharedLibraryLoader {
         }
 
         // If file doesn't exist or the CRC doesn't match, extract it to the temp dir.
-        apiLog(String.format("    Extracting: %s\n", resource.getPath()));
+        apiLog(String.format("    Extracting: %s", resource.getPath()));
         //noinspection FieldAccessNotGuarded (already inside the lock)
         if (extractPath == null) {
-            apiLog(String.format("            to: %s\n", file));
+            apiLog(String.format("            to: %s", file));
         }
 
         Files.createDirectories(file.getParent());
