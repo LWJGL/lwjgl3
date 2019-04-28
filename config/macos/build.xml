@@ -108,7 +108,7 @@
             </compile>
 
             <local name="lib-uptodate"/>
-            <uptodate property="lib-uptodate" targetfile="${lib}/lib${name}.dylib">
+            <uptodate property="lib-uptodate" targetfile="${lib.arch}/lib${name}.dylib">
                 <srcfiles file="config/${platform}/build.xml"/>
                 <srcfiles dir="${dest}" includes="**"/>
             </uptodate>
@@ -128,7 +128,7 @@
             <beforeLink/>
             <apply executable="${clang}" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
                 <srcfile/>
-                <arg line='-dynamiclib -Wl,-no_compact_unwind -mmacosx-version-min=${macosx-version-min} -o ${lib}/lib${name}.dylib -O3 -flto -fPIC'/>
+                <arg line='-dynamiclib -Wl,-no_compact_unwind -mmacosx-version-min=${macosx-version-min} -o ${lib.arch}/lib${name}.dylib -O3 -flto -fPIC'/>
                 <fileset dir="${dest}" includes="*.o"/>
                 <link/>
             </apply>
@@ -136,9 +136,9 @@
             <apply executable="strip" failonerror="true" taskname="Symbol strip" unless:set="lib-uptodate">
                 <arg value="-u"/>
                 <arg value="-r"/>
-                <filelist dir="${lib}" files="lib${name}.dylib"/>
+                <filelist dir="${lib.arch}" files="lib${name}.dylib"/>
             </apply>
-            <delete file="${lib}/touch_${platform}.txt" quiet="true" unless:set="lib-uptodate"/>
+            <delete file="${lib.arch}/touch_${platform}.txt" quiet="true" unless:set="lib-uptodate"/>
         </sequential>
     </macrodef>
 
@@ -150,6 +150,8 @@
     </macrodef>
 
     <target name="compile-native-platform">
+        <mkdir dir="${lib.arch}"/>
+
         <echo message="${sdkroot}" taskname="SDK Root"/>
 
         <parallel threadsPerProcessor="2">
@@ -388,31 +390,29 @@
             <or>
                 <istrue value="${build.offline}"/>
                 <resourceexists>
-                    <file file="${lib}/touch_${platform}.txt"/>
+                    <file file="${lib.arch}/touch_${platform}.txt"/>
                 </resourceexists>
             </or>
         </condition>
 
         <sequential unless:set="native-dependencies-uptodate">
-            <mkdir dir="${lib}/${platform}/${build.arch}"/>
-
             <parallel threadsPerProcessor="4" failonany="true">
 
-            <update-dependency name="Assimp" artifact="${build.arch}/libassimp.dylib" dest="${lib}" if:true="${binding.assimp}"/>
-            <update-dependency name="bgfx" artifact="${build.arch}/libbgfx.dylib" dest="${lib}" if:true="${binding.bgfx}"/>
-            <update-dependency name="jemalloc" artifact="${build.arch}/libjemalloc.dylib" dest="${lib}" if:true="${binding.jemalloc}"/>
-            <update-dependency name="GLFW" artifact="${build.arch}/libglfw.dylib" dest="${lib}" if:true="${binding.glfw}"/>
-            <update-dependency name="OpenAL32" artifact="${build.arch}/libopenal.dylib" dest="${lib}" if:true="${binding.openal}"/>
-            <update-dependency name="OpenVR" artifact="${build.arch}/libopenvr_api.dylib" dest="${lib}" if:true="${binding.openvr}"/>
-            <update-dependency name="Opus" artifact="${build.arch}/libopus.dylib" dest="${lib}" if:true="${binding.opus}"/>
-            <update-dependency name="Shaderc" artifact="${build.arch}/libshaderc.dylib" dest="${lib}" if:true="${binding.shaderc}"/>
-            <update-dependency name="Shaderc spvc" artifact="${build.arch}/libshaderc_spvc.dylib" dest="${lib}" if:true="${binding.shaderc}"/>
+            <update-dependency name="Assimp" artifact="${build.arch}/libassimp.dylib" dest="${lib.arch}" if:true="${binding.assimp}"/>
+            <update-dependency name="bgfx" artifact="${build.arch}/libbgfx.dylib" dest="${lib.arch}" if:true="${binding.bgfx}"/>
+            <update-dependency name="jemalloc" artifact="${build.arch}/libjemalloc.dylib" dest="${lib.arch}" if:true="${binding.jemalloc}"/>
+            <update-dependency name="GLFW" artifact="${build.arch}/libglfw.dylib" dest="${lib.arch}" if:true="${binding.glfw}"/>
+            <update-dependency name="OpenAL32" artifact="${build.arch}/libopenal.dylib" dest="${lib.arch}" if:true="${binding.openal}"/>
+            <update-dependency name="OpenVR" artifact="${build.arch}/libopenvr_api.dylib" dest="${lib.arch}" if:true="${binding.openvr}"/>
+            <update-dependency name="Opus" artifact="${build.arch}/libopus.dylib" dest="${lib.arch}" if:true="${binding.opus}"/>
+            <update-dependency name="Shaderc" artifact="${build.arch}/libshaderc.dylib" dest="${lib.arch}" if:true="${binding.shaderc}"/>
+            <update-dependency name="Shaderc spvc" artifact="${build.arch}/libshaderc_spvc.dylib" dest="${lib.arch}" if:true="${binding.shaderc}"/>
 
-            <update-dependency name="MoltenVK" artifact="${build.arch}/libMoltenVK.dylib" dest="${lib}" if:true="${binding.vulkan}"/>
+            <update-dependency name="MoltenVK" artifact="${build.arch}/libMoltenVK.dylib" dest="${lib.arch}" if:true="${binding.vulkan}"/>
 
             </parallel>
 
-            <touch file="${lib}/touch_${platform}.txt" verbose="false"/>
+            <touch file="${lib.arch}/touch_${platform}.txt" verbose="false"/>
         </sequential>
     </target>
 </project>

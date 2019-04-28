@@ -453,7 +453,7 @@
                 <pathelement path="${kotlinc}/lib/kotlin-stdlib-jdk7.jar"/>
             </classpath>
 
-            <jvmarg value="-Djava.library.path=${lib}"/>
+            <jvmarg value="-Djava.library.path=${lib.arch}"/>
             <jvmarg line="${jvmargs}" if:set="jvmargs"/>
             <arg line="${args}" if:set="args"/>
         </java>
@@ -689,7 +689,7 @@
             <jvmarg value="-ea"/>
             <jvmarg value="-Dorg.lwjgl.util.Debug=true"/>
             <jvmarg value="-Dorg.lwjgl.util.DebugAllocator=true"/>
-            <jvmarg value="-Djava.library.path=${lib}"/>
+            <jvmarg value="-Djava.library.path=${lib.arch}"/>
             <jvmarg value="-XstartOnFirstThread" if:set="platform.macos"/>
             <jvmarg value="-Xss256k"/> <!-- for StackTest::testSOE -->
             <jvmarg line="${jvmargs}" if:set="jvmargs"/>
@@ -726,7 +726,7 @@
                 <pathelement path="${lib}/java/jopt-simple.jar"/>
             </classpath>
 
-            <jvmarg value="-Djava.library.path=${lib}"/>
+            <jvmarg value="-Djava.library.path=${lib.arch}"/>
             <jvmarg value="-XstartOnFirstThread" if:set="platform.macos"/>
             <!--<jvmarg value="-Xcheck:jni"/>-->
 
@@ -744,7 +744,7 @@
         <local name="stderr"/>
         <java classname="org.lwjgl.Version" fork="true" failonerror="true" outputproperty="build.version" errorproperty="stderr">
             <classpath path="${bin.lwjgl}/core"/>
-            <jvmarg value="-Djava.library.path=${lib}"/>
+            <jvmarg value="-Djava.library.path=${lib.arch}"/>
         </java>
     </target>
 
@@ -816,11 +816,9 @@
         <local name="revision"/>
         <property name="revision" value="liblwjgl.so.git" if:set="platform.linux"/>
         <property name="revision" value="liblwjgl.dylib.git" if:set="platform.macos"/>
-        <condition property="revision" value="lwjgl.dll.git" else="lwjgl32.dll.git" if:set="platform.windows">
-            <equals arg1="${build.arch}" arg2="x64"/>
-        </condition>
+        <property name="revision" value="lwjgl.dll.git" if:set="platform.windows"/>
 
-        <exec executable="git" failonerror="true" output="${lib}/${revision}" taskname="Git revision">
+        <exec executable="git" failonerror="true" output="${lib.arch}/${revision}" taskname="Git revision">
             <arg value="log"/>
             <arg value="--first-parent"/>
             <arg value="--pretty=format:%H"/>
@@ -829,14 +827,7 @@
 
         <local name="libraries"/>
         <property name="libraries" value="liblwjgl*" unless:set="platform.windows"/>
-        <condition property="libraries" value="lwjgl*" else="lwjgl*32.*" if:set="platform.windows">
-            <equals arg1="${build.arch}" arg2="x64"/>
-        </condition>
-
-        <local name="exclude_libraries"/>
-        <condition property="exclude_libraries" value="lwjgl*32.*" if:set="platform.windows">
-            <equals arg1="${build.arch}" arg2="x64"/>
-        </condition>
+        <property name="libraries" value="lwjgl*" if:set="platform.windows"/>
 
         <apply executable="aws" failonerror="true" relative="true" taskname="S3 upload">
             <arg value="s3"/>
@@ -848,37 +839,37 @@
             <arg line='--acl public-read --cache-control "public, must-revalidate, proxy-revalidate, max-age=0"'/>
 
             <fileset dir=".">
-                <include name="${lib}/${libraries}"/>
-                <exclude name="${lib}/${exclude_libraries}" if:set="exclude_libraries"/>
+                <include name="${lib.arch}/${libraries}"/>
             </fileset>
         </apply>
     </target>
 
     <macrodef name="get-release-offline">
-        <attribute name="url"/>
-        <attribute name="dest"/>
+        <attribute name="arch"/>
+        <attribute name="file"/>
 
         <sequential>
-            <local name="base"/>
-            <basename file="@{url}" property="base"/>
-
             <local name="available"/>
-            <available file="${lib}@{dest}/${base}" property="available"/>
+            <available file="${lib}/@{arch}/@{file}" property="available"/>
 
-            <echo message="release: ${lib}${file.separator}${base} is missing" level="warning" unless:set="available"/>
+            <echo message="release: ${lib}/@{arch}/@{file} is missing" level="warning" unless:set="available"/>
             <quiet if:set="available">
-                <copy file="${lib}@{dest}/${base}" todir="${release}/${module}/native@{dest}"/>
+                <copy file="${lib}/@{arch}/@{file}" todir="${release}/${module}/native/@{arch}"/>
             </quiet>
         </sequential>
     </macrodef>
 
     <macrodef name="get-release">
-        <attribute name="url"/>
-        <attribute name="dest" default=""/>
+        <attribute name="platform"/>
+        <attribute name="arch"/>
+        <attribute name="file"/>
 
         <sequential>
-            <get src="https://build.lwjgl.org/${build.type}/@{url}" dest="${release}/${module}/native@{dest}" verbose="false" usetimestamp="true" unless:true="${build.offline}"/>
-            <get-release-offline url="@{url}" dest="@{dest}" if:true="${build.offline}"/>
+            <quiet>
+                <mkdir dir="${release}/${module}/native/@{arch}"/>
+            </quiet>
+            <get src="https://build.lwjgl.org/${build.type}/@{platform}/@{arch}/@{file}" dest="${release}/${module}/native/@{arch}" verbose="false" usetimestamp="true" unless:true="${build.offline}"/>
+            <get-release-offline arch="@{arch}" file="@{file}" if:true="${build.offline}"/>
         </sequential>
     </macrodef>
 
@@ -906,18 +897,18 @@
         <attribute name="name"/>
         <attribute name="title"/>
         <attribute name="platform"/>
-        <attribute name="extension"/>
+        <attribute name="pattern"/>
         <element name="content" optional="true" implicit="true"/>
         <sequential>
             <local name="platform.skip"/>
             <condition property="platform.skip">
                 <resourcecount when="eq" count="0">
-                    <fileset dir="${release}/${module}/native" includes="*@{extension}"/>
+                    <fileset dir="${release}/${module}/native" includes="@{pattern}"/>
                 </resourcecount>
             </condition>
 
             <lwjgl-jar destfile="${release}/${module}/${module}-natives-@{platform}.jar" title="@{title}" unless:set="platform.skip">
-                <fileset dir="${release}/${module}/native" includes="*@{extension}*"/>
+                <fileset dir="${release}/${module}/native" includes="@{pattern}*"/>
                 <fileset dir="${bin.lwjgl}/@{name}.natives" includes="META-INF/versions/9/module-info.class" if:set="jdk9"/>
                 <content/>
             </lwjgl-jar>
@@ -930,13 +921,11 @@
         <attribute name="native-library"/>
         <element name="content" optional="true"/>
         <element name="linux-content" optional="true"/>
+        <element name="linux-arm64-content" optional="true"/>
+        <element name="linux-arm32-content" optional="true"/>
         <element name="macos-content" optional="true"/>
         <element name="windows-content" optional="true"/>
         <sequential>
-            <quiet>
-                <mkdir dir="${release}/${module}/native"/>
-            </quiet>
-
             <local name="auto-natives"/>
             <condition property="auto-natives">
                 <not>
@@ -952,15 +941,23 @@
             </condition>
 
             <parallel threadsPerProcessor="4" failonany="true">
-                <get-release url="linux/x64/lib@{native-library}.so" if:set="auto-natives"/>
-                <get-release url="macosx/x64/lib@{native-library}.dylib" if:set="auto-natives"/>
-                <get-release url="windows/x64/@{native-library}.dll" if:set="auto-natives"/>
-                <get-release url="windows/x86/@{native-library}32.dll" if:set="auto-natives"/>
+                <get-release platform="linux" arch="x64" file="lib@{native-library}.so" if:set="auto-natives"/>
+                <get-release platform="linux" arch="x64" file="lib@{native-library}.so.git" if:set="git-revision"/>
 
-                <get-release url="linux/x64/lib@{native-library}.so.git" if:set="git-revision"/>
-                <get-release url="macosx/x64/lib@{native-library}.dylib.git" if:set="git-revision"/>
-                <get-release url="windows/x64/@{native-library}.dll.git" if:set="git-revision"/>
-                <get-release url="windows/x86/@{native-library}32.dll.git" if:set="git-revision"/>
+                <get-release platform="linux" arch="arm64" file="lib@{native-library}.so" if:set="auto-natives"/>
+                <get-release platform="linux" arch="arm64" file="lib@{native-library}.so.git" if:set="git-revision"/>
+
+                <get-release platform="linux" arch="arm32" file="lib@{native-library}.so" if:set="auto-natives"/>
+                <get-release platform="linux" arch="arm32" file="lib@{native-library}.so.git" if:set="git-revision"/>
+
+                <get-release platform="macosx" arch="x64" file="lib@{native-library}.dylib" if:set="auto-natives"/>
+                <get-release platform="macosx" arch="x64" file="lib@{native-library}.dylib.git" if:set="git-revision"/>
+
+                <get-release platform="windows" arch="x64" file="@{native-library}.dll" if:set="auto-natives"/>
+                <get-release platform="windows" arch="x64" file="@{native-library}.dll.git" if:set="git-revision"/>
+
+                <get-release platform="windows" arch="x86" file="@{native-library}.dll" if:set="auto-natives"/>
+                <get-release platform="windows" arch="x86" file="@{native-library}.dll.git" if:set="git-revision"/>
 
                 <content/>
             </parallel>
@@ -980,21 +977,27 @@
             </condition>
 
             <checksum algorithm="SHA-1" fileext=".sha1" unless:set="checksum.skip">
-                <fileset dir="${release}/${module}/native">
-                    <include name="*.dll"/>
-                    <include name="*.dylib"/>
-                    <include name="*.so"/>
+                <fileset dir="${release}/${module}/native/">
+                    <include name="**/*.dll"/>
+                    <include name="**/*.dylib"/>
+                    <include name="**/*.so"/>
                 </fileset>
             </checksum>
 
             <parallel threadsPerProcessor="1" failonany="true">
-                <natives-jar name="@{name}" title="@{title}" platform="linux" extension=".so">
+                <natives-jar name="@{name}" title="@{title}" platform="linux" pattern="x64/*.so">
                     <linux-content/>
                 </natives-jar>
-                <natives-jar name="@{name}" title="@{title}" platform="macos" extension=".dylib">
+                <natives-jar name="@{name}" title="@{title}" platform="linux-arm64" pattern="arm64/*.so">
+                    <linux-arm64-content/>
+                </natives-jar>
+                <natives-jar name="@{name}" title="@{title}" platform="linux-arm32" pattern="arm32/*.so">
+                    <linux-arm32-content/>
+                </natives-jar>
+                <natives-jar name="@{name}" title="@{title}" platform="macos" pattern="x64/*.dylib">
                     <macos-content/>
                 </natives-jar>
-                <natives-jar name="@{name}" title="@{title}" platform="windows" extension=".dll">
+                <natives-jar name="@{name}" title="@{title}" platform="windows" pattern="**/*.dll">
                     <windows-content/>
                 </natives-jar>
             </parallel>
@@ -1008,6 +1011,8 @@
         <attribute name="native-library" default=""/>
         <element name="natives" optional="true"/>
         <element name="linux" optional="true"/>
+        <element name="linux-arm64" optional="true"/>
+        <element name="linux-arm32" optional="true"/>
         <element name="macos" optional="true"/>
         <element name="windows" optional="true"/>
         <sequential>
@@ -1025,6 +1030,8 @@
             <release-natives name="@{name}" title="@{title}" native-library="@{native-library}" unless:set="java-only.binding.@{name}">
                 <content><natives/></content>
                 <linux-content><linux/></linux-content>
+                <linux-arm64-content><linux-arm64/></linux-arm64-content>
+                <linux-arm32-content><linux-arm32/></linux-arm32-content>
                 <macos-content><macos/></macos-content>
                 <windows-content><windows/></windows-content>
             </release-natives>
@@ -1139,7 +1146,7 @@
     </target>
 
     <!-- Set the LWJGL_BUILD_OFFLINE=true environment variable for local builds. -->
-    <target name="release" depends="-check-release-jdk,clean-java,compile,-build-version">
+    <target name="release" depends="-check-release-jdk,compile,-build-version">
         <local name="revision"/>
         <condition property="revision" value="build ${build.revision}" else="SNAPSHOT">
             <isset property="build.revision"/>
@@ -1200,17 +1207,29 @@
         <!-- GLFW -->
         <release-module package="org.lwjgl.glfw" name="glfw" title="GLFW" if:true="${binding.glfw}">
             <natives>
-                <get-release url="linux/x64/libglfw.so"/>
-                <get-release url="linux/x64/libglfw_wayland.so"/>
-                <get-release url="macosx/x64/libglfw.dylib"/>
-                <get-release url="windows/x64/glfw.dll"/>
-                <get-release url="windows/x86/glfw32.dll"/>
+                <get-release platform="linux" arch="x64" file="libglfw.so"/>
+                <get-release platform="linux" arch="x64" file="libglfw.so.git"/>
+                <get-release platform="linux" arch="x64" file="libglfw_wayland.so"/>
+                <get-release platform="linux" arch="x64" file="libglfw_wayland.so.git"/>
 
-                <get-release url="linux/x64/libglfw.so.git"/>
-                <get-release url="linux/x64/libglfw_wayland.so.git"/>
-                <get-release url="macosx/x64/libglfw.dylib.git"/>
-                <get-release url="windows/x64/glfw.dll.git"/>
-                <get-release url="windows/x86/glfw32.dll.git"/>
+                <get-release platform="linux" arch="arm64" file="libglfw.so"/>
+                <get-release platform="linux" arch="arm64" file="libglfw.so.git"/>
+                <get-release platform="linux" arch="arm64" file="libglfw_wayland.so"/>
+                <get-release platform="linux" arch="arm64" file="libglfw_wayland.so.git"/>
+
+                <get-release platform="linux" arch="arm32" file="libglfw.so"/>
+                <get-release platform="linux" arch="arm32" file="libglfw.so.git"/>
+                <get-release platform="linux" arch="arm32" file="libglfw_wayland.so"/>
+                <get-release platform="linux" arch="arm32" file="libglfw_wayland.so.git"/>
+
+                <get-release platform="macosx" arch="x64" file="libglfw.dylib"/>
+                <get-release platform="macosx" arch="x64" file="libglfw.dylib.git"/>
+
+                <get-release platform="windows" arch="x64" file="glfw.dll"/>
+                <get-release platform="windows" arch="x64" file="glfw.dll.git"/>
+
+                <get-release platform="windows" arch="x86" file="glfw.dll"/>
+                <get-release platform="windows" arch="x86" file="glfw.dll.git"/>
             </natives>
         </release-module>
 
@@ -1233,13 +1252,28 @@
         <release-module package="org.lwjgl.util.lz4" name="lz4" native-library="lwjgl_lz4" title="lz4" if:true="${binding.lz4}"/>
 
         <!-- Meow hash -->
-        <release-module package="org.lwjgl.util.meow" name="meow" native-library="lwjgl_meow" title="Meow hash" if:true="${binding.meow}"/>
+        <release-module package="org.lwjgl.util.meow" name="meow" title="Meow hash" if:true="${binding.meow}">
+            <natives>
+                <get-release platform="linux" arch="x64" file="liblwjgl_meow.so"/>
+                <get-release platform="linux" arch="arm64" file="liblwjgl_meow.so"/>
+                <get-release platform="macosx" arch="x64" file="liblwjgl_meow.dylib"/>
+                <get-release platform="windows" arch="x64" file="lwjgl_meow.dll"/>
+                <get-release platform="windows" arch="x86" file="lwjgl_meow.dll"/>
+            </natives>
+        </release-module>
 
         <!-- NanoVG -->
         <release-module package="org.lwjgl.nanovg" name="nanovg" native-library="lwjgl_nanovg" title="NanoVG" if:true="${binding.nanovg}"/>
 
         <!-- Native File Dialog -->
-        <release-module package="org.lwjgl.util.nfd" name="nfd" native-library="lwjgl_nfd" title="Native File Dialog" if:true="${binding.nfd}"/>
+        <release-module package="org.lwjgl.util.nfd" name="nfd" title="Native File Dialog" if:true="${binding.nfd}">
+            <natives>
+                <get-release platform="linux" arch="x64" file="liblwjgl_nfd.so"/>
+                <get-release platform="macosx" arch="x64" file="liblwjgl_nfd.dylib"/>
+                <get-release platform="windows" arch="x64" file="lwjgl_nfd.dll"/>
+                <get-release platform="windows" arch="x86" file="lwjgl_nfd.dll"/>
+            </natives>
+        </release-module>
 
         <!-- Nuklear -->
         <release-module package="org.lwjgl.nuklear" name="nuklear" native-library="lwjgl_nuklear" title="Nuklear" if:true="${binding.nuklear}"/>
@@ -1250,15 +1284,23 @@
         <!-- OpenAL -->
         <release-module package="org.lwjgl.openal" name="openal" title="OpenAL" if:true="${binding.openal}">
             <natives>
-                <get-release url="linux/x64/libopenal.so"/>
-                <get-release url="macosx/x64/libopenal.dylib"/>
-                <get-release url="windows/x64/OpenAL.dll"/>
-                <get-release url="windows/x86/OpenAL32.dll"/>
+                <get-release platform="linux" arch="x64" file="libopenal.so"/>
+                <get-release platform="linux" arch="x64" file="libopenal.so.git"/>
 
-                <get-release url="linux/x64/libopenal.so.git"/>
-                <get-release url="macosx/x64/libopenal.dylib.git"/>
-                <get-release url="windows/x64/OpenAL.dll.git"/>
-                <get-release url="windows/x86/OpenAL32.dll.git"/>
+                <get-release platform="linux" arch="arm64" file="libopenal.so"/>
+                <get-release platform="linux" arch="arm64" file="libopenal.so.git"/>
+
+                <get-release platform="linux" arch="arm32" file="libopenal.so"/>
+                <get-release platform="linux" arch="arm32" file="libopenal.so.git"/>
+
+                <get-release platform="macosx" arch="x64" file="libopenal.dylib"/>
+                <get-release platform="macosx" arch="x64" file="libopenal.dylib.git"/>
+
+                <get-release platform="windows" arch="x64" file="OpenAL.dll"/>
+                <get-release platform="windows" arch="x64" file="OpenAL.dll.git"/>
+
+                <get-release platform="windows" arch="x86" file="OpenAL.dll"/>
+                <get-release platform="windows" arch="x86" file="OpenAL.dll.git"/>
             </natives>
         </release-module>
 
@@ -1274,20 +1316,21 @@
         <!-- OpenVR -->
         <release-module package="org.lwjgl.openvr" name="openvr" title="OpenVR" if:true="${binding.openvr}">
             <natives>
-                <get-release url="linux/x64/liblwjgl_openvr.so"/>
-                <get-release url="macosx/x64/liblwjgl_openvr.dylib"/>
-                <get-release url="windows/x64/lwjgl_openvr.dll"/>
-                <get-release url="windows/x86/lwjgl_openvr32.dll"/>
+                <get-release platform="linux" arch="x64" file="liblwjgl_openvr.so"/>
+                <get-release platform="linux" arch="x64" file="libopenvr_api.so"/>
+                <get-release platform="linux" arch="x64" file="libopenvr_api.so.git"/>
 
-                <get-release url="linux/x64/libopenvr_api.so"/>
-                <get-release url="macosx/x64/libopenvr_api.dylib"/>
-                <get-release url="windows/x64/openvr_api.dll"/>
-                <get-release url="windows/x86/openvr_api32.dll"/>
+                <get-release platform="macosx" arch="x64" file="liblwjgl_openvr.dylib"/>
+                <get-release platform="macosx" arch="x64" file="libopenvr_api.dylib"/>
+                <get-release platform="macosx" arch="x64" file="libopenvr_api.dylib.git"/>
 
-                <get-release url="linux/x64/libopenvr_api.so.git"/>
-                <get-release url="macosx/x64/libopenvr_api.dylib.git"/>
-                <get-release url="windows/x64/openvr_api.dll.git"/>
-                <get-release url="windows/x86/openvr_api32.dll.git"/>
+                <get-release platform="windows" arch="x64" file="lwjgl_openvr.dll"/>
+                <get-release platform="windows" arch="x64" file="openvr_api.dll"/>
+                <get-release platform="windows" arch="x64" file="openvr_api.dll.git"/>
+
+                <get-release platform="windows" arch="x86" file="lwjgl_openvr.dll"/>
+                <get-release platform="windows" arch="x86" file="openvr_api.dll"/>
+                <get-release platform="windows" arch="x86" file="openvr_api.dll.git"/>
             </natives>
         </release-module>
 
@@ -1297,8 +1340,8 @@
         <!-- LibOVR -->
         <release-module package="org.lwjgl.ovr" name="ovr" title="LibOVR" if:true="${binding.ovr}">
             <natives>
-                <get-release url="windows/x64/lwjgl_ovr.dll"/>
-                <get-release url="windows/x86/lwjgl_ovr32.dll"/>
+                <get-release platform="windows" arch="x64" file="lwjgl_ovr.dll"/>
+                <get-release platform="windows" arch="x86" file="lwjgl_ovr.dll"/>
             </natives>
         </release-module>
 
@@ -1314,25 +1357,41 @@
         <!-- shaderc -->
         <release-module package="org.lwjgl.util.shaderc" name="shaderc" title="Shaderc" if:true="${binding.shaderc}">
             <natives>
-                <get-release url="linux/x64/libshaderc.so"/>
-                <get-release url="macosx/x64/libshaderc.dylib"/>
-                <get-release url="windows/x64/shaderc.dll"/>
-                <get-release url="windows/x86/shaderc32.dll"/>
+                <get-release platform="linux" arch="x64" file="libshaderc.so"/>
+                <get-release platform="linux" arch="x64" file="libshaderc.so.git"/>
+                <get-release platform="linux" arch="x64" file="libshaderc_spvc.so"/>
 
-                <get-release url="linux/x64/libshaderc_spvc.so"/>
-                <get-release url="macosx/x64/libshaderc_spvc.dylib"/>
-                <get-release url="windows/x64/shaderc_spvc.dll"/>
-                <get-release url="windows/x86/shaderc_spvc32.dll"/>
+                <get-release platform="linux" arch="arm64" file="libshaderc.so"/>
+                <get-release platform="linux" arch="arm64" file="libshaderc.so.git"/>
+                <get-release platform="linux" arch="arm64" file="libshaderc_spvc.so"/>
 
-                <get-release url="linux/x64/libshaderc.so.git"/>
-                <get-release url="macosx/x64/libshaderc.dylib.git"/>
-                <get-release url="windows/x64/shaderc.dll.git"/>
-                <get-release url="windows/x86/shaderc32.dll.git"/>
+                <get-release platform="linux" arch="arm32" file="libshaderc.so"/>
+                <get-release platform="linux" arch="arm32" file="libshaderc.so.git"/>
+                <get-release platform="linux" arch="arm32" file="libshaderc_spvc.so"/>
+
+                <get-release platform="macosx" arch="x64" file="libshaderc.dylib"/>
+                <get-release platform="macosx" arch="x64" file="libshaderc.dylib.git"/>
+                <get-release platform="macosx" arch="x64" file="libshaderc_spvc.dylib"/>
+
+                <get-release platform="windows" arch="x64" file="shaderc.dll"/>
+                <get-release platform="windows" arch="x64" file="shaderc.dll.git"/>
+                <get-release platform="windows" arch="x64" file="shaderc_spvc.dll"/>
+
+                <get-release platform="windows" arch="x86" file="shaderc.dll"/>
+                <get-release platform="windows" arch="x86" file="shaderc.dll.git"/>
+                <get-release platform="windows" arch="x86" file="shaderc_spvc.dll"/>
             </natives>
         </release-module>
 
         <!-- SSE -->
-        <release-module package="org.lwjgl.util.simd" name="sse" native-library="lwjgl_sse" title="SSE" if:true="${binding.sse}"/>
+        <release-module package="org.lwjgl.util.simd" name="sse" title="SSE" if:true="${binding.sse}">
+            <natives>
+                <get-release platform="linux" arch="x64" file="liblwjgl_sse.so"/>
+                <get-release platform="macosx" arch="x64" file="liblwjgl_sse.dylib"/>
+                <get-release platform="windows" arch="x64" file="lwjgl_sse.dll"/>
+                <get-release platform="windows" arch="x86" file="lwjgl_sse.dll"/>
+            </natives>
+        </release-module>
 
         <!-- stb -->
         <release-module package="org.lwjgl.stb" name="stb" native-library="lwjgl_stb" title="stb" if:true="${binding.stb}"/>
@@ -1344,7 +1403,14 @@
         <release-module package="org.lwjgl.util.tinyfd" name="tinyfd" native-library="lwjgl_tinyfd" title="tiny file dialogs" if:true="${binding.tinyfd}"/>
 
         <!-- AMD Tootle -->
-        <release-module package="org.lwjgl.util.tootle" name="tootle" native-library="lwjgl_tootle" title="tootle" if:true="${binding.tootle}"/>
+        <release-module package="org.lwjgl.util.tootle" name="tootle" title="tootle" if:true="${binding.tootle}">
+            <natives>
+                <get-release platform="linux" arch="x64" file="liblwjgl_tootle.so"/>
+                <get-release platform="macosx" arch="x64" file="liblwjgl_tootle.dylib"/>
+                <get-release platform="windows" arch="x64" file="lwjgl_tootle.dll"/>
+                <get-release platform="windows" arch="x86" file="lwjgl_tootle.dll"/>
+            </natives>
+        </release-module>
 
         <!-- Vulkan Memory Allocator -->
         <release-module package="org.lwjgl.util.vma" name="vma" native-library="lwjgl_vma" title="vma" if:true="${binding.vma}"/>
@@ -1352,8 +1418,8 @@
         <!-- Vulkan -->
         <release-module package="org.lwjgl.vulkan" name="vulkan" title="Vulkan" if:true="${binding.vulkan}">
             <natives>
-                <get-release url="macosx/x64/libMoltenVK.dylib"/>
-                <get-release url="macosx/x64/libMoltenVK.dylib.git"/>
+                <get-release platform="macosx" arch="x64" file="libMoltenVK.dylib"/>
+                <get-release platform="macosx" arch="x64" file="libMoltenVK.dylib.git"/>
             </natives>
         </release-module>
 

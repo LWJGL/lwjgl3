@@ -5,14 +5,12 @@
 <project name="native-linux" basedir="../.." xmlns:if="ant:if" xmlns:unless="ant:unless">
     <import file="../build-definitions.xml"/>
 
-    <condition property="LIB_POSTFIX" value="" else="32">
-        <equals arg1="${build.arch}" arg2="x64"/>
-    </condition>
+    <property name="gcc.prefix" value="aarch64-linux-gnu-" if:set="build.arch.arm64"/>
+    <property name="gcc.prefix" value="arm-linux-gnueabihf-" if:set="build.arch.arm32"/>
 
-    <condition property="build.arch.x64" value="true" else="false">
-        <equals arg1="${build.arch}" arg2="x64"/>
+    <condition property="gcc.prefix" value="${gcc.prefix}" else="">
+        <isset property="gcc.prefix"/>
     </condition>
-
     <condition property="gcc.suffix" value="-${gcc.version}" else="">
         <isset property="gcc.version"/>
     </condition>
@@ -22,8 +20,8 @@
     <macrodef name="compile">
         <attribute name="dest" default="${dest}"/>
         <attribute name="lang" default="c"/>
-        <attribute name="gcc.exec" default="gcc${gcc.suffix}"/>
-        <attribute name="gpp.exec" default="g++${gcc.suffix}"/>
+        <attribute name="gcc.exec" default="${gcc.prefix}gcc${gcc.suffix}"/>
+        <attribute name="gpp.exec" default="${gcc.prefix}g++${gcc.suffix}"/>
         <attribute name="lto" default="-flto"/>
         <attribute name="flags" default=""/>
         <attribute name="simple" default="false"/>
@@ -34,13 +32,12 @@
             <condition property="cpp"><not><equals arg1="@{lang}" arg2="c"/></not></condition>
             <local name="gcc"/>
             <condition property="gcc" value="@{gcc.exec}" else="@{gpp.exec}"><equals arg1="@{lang}" arg2="c"/></condition>
-
             <mkdir dir="@{dest}"/>
             <apply dir="@{dest}" executable="${gcc}" dest="@{dest}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
                 <arg line="-c -std=c11" unless:set="cpp"/>
                 <arg line="-c -std=c++11" if:set="cpp"/>
-                <arg line="-m64" if:true="${build.arch.x64}"/>
-                <arg line="-m32 -mfpmath=sse -msse -msse2" unless:true="${build.arch.x64}"/>
+                <arg line="-m64" if:set="build.arch.x64"/>
+                <arg line="-m32 -mfpmath=sse -msse -msse2" if:set="build.arch.x86"/>
                 <arg line="-O3 @{lto} -fPIC @{flags} -pthread -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0 -D_GNU_SOURCE -DNDEBUG -DLWJGL_LINUX -DLWJGL_${build.arch}"/>
 
                 <arg value="-I${jni.headers}"/>
@@ -63,8 +60,8 @@
         <attribute name="module"/>
         <attribute name="linker" default="gcc"/>
         <attribute name="lang" default="c"/>
-        <attribute name="gcc.exec" default="gcc${gcc.suffix}"/>
-        <attribute name="gpp.exec" default="g++${gcc.suffix}"/>
+        <attribute name="gcc.exec" default="${gcc.prefix}gcc${gcc.suffix}"/>
+        <attribute name="gpp.exec" default="${gcc.prefix}g++${gcc.suffix}"/>
         <attribute name="flags" default="-Werror -Wfatal-errors"/>
         <attribute name="simple" default="false"/>
         <element name="beforeCompile" optional="true"/>
@@ -93,9 +90,9 @@
             </compile>
 
             <local name="lib-uptodate"/>
-            <uptodate property="lib-uptodate" targetfile="${lib}/lib${name}${LIB_POSTFIX}.so">
+            <uptodate property="lib-uptodate" targetfile="${lib.arch}/lib${name}.so">
                 <srcfiles file="config/${platform}/build.xml"/>
-                <srcfiles file="${bin.native}/wrap_memcpy.o" if:true="${build.arch.x64}"/>
+                <srcfiles file="${bin.native}/wrap_memcpy.o" if:set="build.arch.x64"/>
                 <srcfiles dir="${dest}" includes="**"/>
             </uptodate>
             <local name="lib-dependencies-uptodate"/>
@@ -122,38 +119,46 @@
             <apply executable="${gcc}" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
                 <srcfile/>
                 <arg value="-shared"/>
-                <arg value="-m64" if:true="${build.arch.x64}"/>
-                <arg value="-m32" unless:true="${build.arch.x64}"/>
+                <arg value="-m64" if:set="build.arch.x64"/>
+                <arg value="-m32" if:set="build.arch.x86"/>
 
                 <arg line="-z noexecstack"/>
-                <arg line="-O3 -flto -fPIC -pthread -o ${lib}/lib${name}${LIB_POSTFIX}.so"/>
+                <arg line="-O3 -flto -fPIC -pthread -o ${lib.arch}/lib${name}.so"/>
 
                 <arg line="-Wl,--no-undefined"/>
                 <arg line="-Wl,--version-script,${version.script}"/>
-                <arg line="-Wl,--wrap,memcpy" if:true="${build.arch.x64}"/>
-                <fileset dir="${bin.native}" includes="wrap_memcpy.o" if:true="${build.arch.x64}"/>
+                <arg line="-Wl,--wrap,memcpy" if:set="build.arch.x64"/>
+                <fileset dir="${bin.native}" includes="wrap_memcpy.o" if:set="build.arch.x64"/>
                 <fileset dir="${dest}" includes="*.o"/>
                 <link/>
             </apply>
 
-            <apply executable="strip" failonerror="true" taskname="Symbol strip" unless:set="lib-uptodate">
-                <filelist dir="${lib}" files="lib${name}${LIB_POSTFIX}.so"/>
+            <apply executable="${gcc.prefix}strip" failonerror="true" taskname="Symbol strip" unless:set="lib-uptodate">
+                <filelist dir="${lib.arch}" files="lib${name}.so"/>
             </apply>
-            <delete file="${lib}/touch_${platform}.txt" quiet="true" unless:set="lib-uptodate"/>
+            <delete file="${lib.arch}/touch_${platform}.txt" quiet="true" unless:set="lib-uptodate"/>
         </sequential>
     </macrodef>
 
     <macrodef name="build_simple">
         <attribute name="module"/>
-        <attribute name="gcc.exec" default="gcc${gcc.suffix}"/>
-        <attribute name="gpp.exec" default="g++${gcc.suffix}"/>
+        <attribute name="gcc.exec" default="${gcc.prefix}gcc${gcc.suffix}"/>
+        <attribute name="gpp.exec" default="${gcc.prefix}g++${gcc.suffix}"/>
         <sequential>
             <build module="@{module}" gcc.exec="@{gcc.exec}" gpp.exec="@{gpp.exec}" simple="true" if:true="${binding.@{module}}"/>
         </sequential>
     </macrodef>
 
     <target name="compile-native-platform">
-        <compile dest="${bin.native}" lto="">
+        <mkdir dir="${lib.arch}"/>
+
+        <exec executable="bash" outputproperty="gcc.version" unless:set="gcc.version">
+            <arg value="-c"/>
+            <arg value="gcc --version | grep ^gcc | sed 's/^.* //g;s/.[0-9]//2'"/>
+        </exec>
+        <echo message="Building with GCC v${gcc.version} (command: ${gcc.prefix}gcc${gcc.suffix})"/>
+
+        <compile dest="${bin.native}" lto="" if:set="build.arch.x64">
             <fileset dir="." includes="${module.lwjgl}/core/src/main/c/${platform}/wrap_memcpy.c"/>
         </compile>
 
@@ -250,7 +255,14 @@
         </build>
 
         <!-- Meow -->
-        <build module="meow" simple="true" flags="-Werror -Wfatal-errors -maes -msse4.2" if:true="${binding.meow}"/>
+        <local name="meow.flags"/>
+        <condition property="meow.flags" value="-maes -msse4.2" else="-march=armv8-a+crypto">
+            <or>
+                <isset property="build.arch.x64"/>
+                <isset property="build.arch.x86"/>
+            </or>
+        </condition>
+        <build module="meow" simple="true" flags="-Werror -Wfatal-errors ${meow.flags}" if:true="${binding.meow}"/>
 
         <!-- NanoVG -->
         <build module="nanovg" simple="true" if:true="${binding.nanovg}">
@@ -320,12 +332,18 @@
             </source>
             <link>
                 <arg value="-ldl"/>
-                <arg value="-lGL"/>
+                <arg value="-l:libGL.so.1" unless:set="gcc.libpath.opengl"/>
+                <arg line="-L ${gcc.libpath.opengl} -l:libGL.so.1" if:set="gcc.libpath.opengl"/>
             </link>
         </build>
 
-        <!-- rpmalloc -->
-        <build_simple module="rpmalloc"/>
+        <!-- rpmalloc: requires GCC 4.9 or higher -->
+        <local name="rpmalloc.gcc"/>
+        <condition property="rpmalloc.gcc" value="${gcc.prefix}gcc-4.9">
+            <matches string="${gcc.version}" pattern="[1-3]\.\d|4\.[0-8]"/>
+        </condition>
+        <build_simple module="rpmalloc" unless:set="rpmalloc.gcc"/>
+        <build_simple module="rpmalloc" gcc.exec="${rpmalloc.gcc}" if:set="rpmalloc.gcc"/>
 
         <!-- SSE -->
         <build module="sse" simple="true" if:true="${binding.sse}">
@@ -447,30 +465,28 @@
             <or>
                 <istrue value="${build.offline}"/>
                 <resourceexists>
-                    <file file="${lib}/touch_${platform}.txt"/>
+                    <file file="${lib.arch}/touch_${platform}.txt"/>
                 </resourceexists>
             </or>
         </condition>
 
         <sequential unless:set="native-dependencies-uptodate">
-            <mkdir dir="${lib}/${platform}/x64"/>
-
             <parallel threadsPerProcessor="4" failonany="true">
 
-            <update-dependency name="Assimp" artifact="${build.arch}/libassimp.so" dest="${lib}" if:true="${binding.assimp}"/>
-            <update-dependency name="bgfx" artifact="${build.arch}/libbgfx.so" dest="${lib}" if:true="${binding.bgfx}"/>
-            <update-dependency name="jemalloc" artifact="${build.arch}/libjemalloc.so" dest="${lib}" if:true="${binding.jemalloc}"/>
-            <update-dependency name="GLFW" artifact="${build.arch}/libglfw.so" dest="${lib}" if:true="${binding.glfw}"/>
-            <update-dependency name="GLFW" artifact="${build.arch}/libglfw_wayland.so" dest="${lib}" if:true="${binding.glfw}"/>
-            <update-dependency name="OpenAL32" artifact="${build.arch}/libopenal.so" dest="${lib}" if:true="${binding.openal}"/>
-            <update-dependency name="OpenVR" artifact="${build.arch}/libopenvr_api.so" dest="${lib}" if:true="${binding.openvr}"/>
-            <update-dependency name="Opus" artifact="${build.arch}/libopus.so" dest="${lib}" if:true="${binding.opus}"/>
-            <update-dependency name="Shaderc" artifact="${build.arch}/libshaderc.so" dest="${lib}" if:true="${binding.shaderc}"/>
-            <update-dependency name="Shaderc spvc" artifact="${build.arch}/libshaderc_spvc.so" dest="${lib}" if:true="${binding.shaderc}"/>
+            <update-dependency name="Assimp" artifact="${build.arch}/libassimp.so" dest="${lib.arch}" if:true="${binding.assimp}"/>
+            <update-dependency name="bgfx" artifact="${build.arch}/libbgfx.so" dest="${lib.arch}" if:true="${binding.bgfx}"/>
+            <update-dependency name="jemalloc" artifact="${build.arch}/libjemalloc.so" dest="${lib.arch}" if:true="${binding.jemalloc}"/>
+            <update-dependency name="GLFW" artifact="${build.arch}/libglfw.so" dest="${lib.arch}" if:true="${binding.glfw}"/>
+            <update-dependency name="GLFW" artifact="${build.arch}/libglfw_wayland.so" dest="${lib.arch}" if:true="${binding.glfw}"/>
+            <update-dependency name="OpenAL32" artifact="${build.arch}/libopenal.so" dest="${lib.arch}" if:true="${binding.openal}"/>
+            <update-dependency name="OpenVR" artifact="${build.arch}/libopenvr_api.so" dest="${lib.arch}" if:true="${binding.openvr}"/>
+            <update-dependency name="Opus" artifact="${build.arch}/libopus.so" dest="${lib.arch}" if:true="${binding.opus}"/>
+            <update-dependency name="Shaderc" artifact="${build.arch}/libshaderc.so" dest="${lib.arch}" if:true="${binding.shaderc}"/>
+            <update-dependency name="Shaderc spvc" artifact="${build.arch}/libshaderc_spvc.so" dest="${lib.arch}" if:true="${binding.shaderc}"/>
 
             </parallel>
 
-            <touch file="${lib}/touch_${platform}.txt" verbose="false"/>
+            <touch file="${lib.arch}/touch_${platform}.txt" verbose="false"/>
         </sequential>
     </target>
 </project>
