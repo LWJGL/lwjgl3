@@ -3059,7 +3059,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
         This function must only be called from the main thread.
         """,
 
-        charASCII.const.p("string", "the string containing the gamepad mappings"),
+        NullTerminated..char.const.p("string", "the string containing the gamepad mappings"),
 
         returnDoc = "{@code true}, or {@code false} if an error occurred",
         since = "version 3.3"

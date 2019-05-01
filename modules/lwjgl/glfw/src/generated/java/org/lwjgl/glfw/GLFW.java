@@ -4267,38 +4267,6 @@ public class GLFW {
         return nglfwUpdateGamepadMappings(memAddress(string)) != 0;
     }
 
-    /**
-     * Adds the specified SDL_GameControllerDB gamepad mappings.
-     * 
-     * <p>This function parses the specified ASCII encoded string and updates the internal list with any gamepad mappings it finds. This string may contain either
-     * a single gamepad mapping or many mappings separated by newlines. The parser supports the full format of the {@code gamecontrollerdb.txt} source file
-     * including empty lines and comments.</p>
-     * 
-     * <p>See <a target="_blank" href="http://www.glfw.org/docs/latest/input.html#gamepad_mapping">gamepad_mapping</a> for a description of the format.</p>
-     * 
-     * <p>If there is already a gamepad mapping for a given GUID in the internal list, it will be replaced by the one passed to this function. If the library is
-     * terminated and re-initialized the internal list will revert to the built-in default.</p>
-     * 
-     * <p>This function must only be called from the main thread.</p>
-     *
-     * @param string the string containing the gamepad mappings
-     *
-     * @return {@code true}, or {@code false} if an error occurred
-     *
-     * @since version 3.3
-     */
-    @NativeType("int")
-    public static boolean glfwUpdateGamepadMappings(@NativeType("char const *") CharSequence string) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            stack.nASCII(string, true);
-            long stringEncoded = stack.getPointerAddress();
-            return nglfwUpdateGamepadMappings(stringEncoded) != 0;
-        } finally {
-            stack.setPointer(stackPointer);
-        }
-    }
-
     // --- [ glfwGetGamepadName ] ---
 
     /** Unsafe version of: {@link #glfwGetGamepadName GetGamepadName} */
