@@ -30,6 +30,12 @@ public interface Pointer {
     /** The pointer size power-of-two. Will be 2 on a 32bit JVM and 3 on a 64bit one. */
     int POINTER_SHIFT = POINTER_SIZE == 8 ? 3 : 2;
 
+    /** The value of {@code sizeof(long)} for the current platform. */
+    int CLONG_SIZE  = POINTER_SIZE == 8 && Platform.get() == Platform.WINDOWS ? 4 : POINTER_SIZE;
+
+    /** The value of {@code sizeof(long)} as a power-of-two. */
+    int CLONG_SHIFT = CLONG_SIZE == 8 ? 3 : 2;
+
     /** Will be true on a 32bit JVM. */
     boolean BITS32 = POINTER_SIZE * 8 == 32;
 

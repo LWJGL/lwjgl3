@@ -278,24 +278,27 @@ open class TypeMapping(
 open class PrimitiveMapping internal constructor(
     jniFunctionType: String,
     javaMethodType: KClass<*>,
+    val toPointer: PointerMapping,
     val bytes: Int,
-    val toPointer: PointerMapping
+    val bytesExpression: String = bytes.toString()
 ) : TypeMapping(jniFunctionType, javaMethodType, javaMethodType) {
 
     companion object {
-        val BOOLEAN = PrimitiveMapping("jboolean", Boolean::class, 1, PointerMapping.DATA_BOOLEAN)
-        val BOOLEAN4 = PrimitiveMapping("jint", Int::class, 4, PointerMapping.DATA_INT)
+        val BOOLEAN = PrimitiveMapping("jboolean", Boolean::class, PointerMapping.DATA_BOOLEAN, 1)
+        val BOOLEAN4 = PrimitiveMapping("jint", Int::class, PointerMapping.DATA_INT, 4)
 
-        val BYTE = PrimitiveMapping("jbyte", Byte::class, 1, PointerMapping.DATA_BYTE)
-        val SHORT = PrimitiveMapping("jshort", Short::class, 2, PointerMapping.DATA_SHORT)
-        val INT = PrimitiveMapping("jint", Int::class, 4, PointerMapping.DATA_INT)
-        val LONG = PrimitiveMapping("jlong", Long::class, 8, PointerMapping.DATA_LONG)
+        val BYTE = PrimitiveMapping("jbyte", Byte::class, PointerMapping.DATA_BYTE, 1)
+        val SHORT = PrimitiveMapping("jshort", Short::class, PointerMapping.DATA_SHORT, 2)
+        val INT = PrimitiveMapping("jint", Int::class, PointerMapping.DATA_INT, 4)
+        val LONG = PrimitiveMapping("jlong", Long::class, PointerMapping.DATA_LONG, 8)
+
+        val CLONG = PrimitiveMapping("jlong", Long::class, PointerMapping.DATA_CLONG, Int.MAX_VALUE /* should not be used */, "CLONG_SIZE")
 
         // Integer type with enough precision to store a pointer
-        val POINTER = PrimitiveMapping("jlong", Long::class, Int.MAX_VALUE /* should not be used */, PointerMapping.DATA_POINTER)
+        val POINTER = PrimitiveMapping("jlong", Long::class, PointerMapping.DATA_POINTER, Int.MAX_VALUE /* should not be used */, "POINTER_SIZE")
 
-        val FLOAT = PrimitiveMapping("jfloat", Float::class, 4, PointerMapping.DATA_FLOAT)
-        val DOUBLE = PrimitiveMapping("jdouble", Double::class, 8, PointerMapping.DATA_DOUBLE)
+        val FLOAT = PrimitiveMapping("jfloat", Float::class, PointerMapping.DATA_FLOAT, 4)
+        val DOUBLE = PrimitiveMapping("jdouble", Double::class, PointerMapping.DATA_DOUBLE, 8)
     }
 
 }
@@ -303,15 +306,15 @@ open class PrimitiveMapping internal constructor(
 class CharMapping(
     jniFunctionType: String,
     javaMethodType: KClass<*>,
-    bytes: Int,
     toPointer: PointerMapping,
+    bytes: Int,
     val charset: String
-) : PrimitiveMapping(jniFunctionType, javaMethodType, bytes, toPointer) {
+) : PrimitiveMapping(jniFunctionType, javaMethodType, toPointer, bytes) {
 
     companion object {
-        val ASCII = CharMapping("jbyte", Byte::class, 1, PointerMapping.DATA_BYTE, "ASCII")
-        val UTF8 = CharMapping("jbyte", Byte::class, 1, PointerMapping.DATA_BYTE, "UTF8")
-        val UTF16 = CharMapping("jchar", Char::class, 2, PointerMapping.DATA_SHORT, "UTF16")
+        val ASCII = CharMapping("jbyte", Byte::class, PointerMapping.DATA_BYTE, 1, "ASCII")
+        val UTF8 = CharMapping("jbyte", Byte::class, PointerMapping.DATA_BYTE, 1, "UTF8")
+        val UTF16 = CharMapping("jchar", Char::class, PointerMapping.DATA_SHORT, 2, "UTF16")
     }
 
 }
@@ -328,6 +331,7 @@ open class PointerMapping private constructor(
         internal val OPAQUE_POINTER = PointerMapping(Long::class, "POINTER_SHIFT")
 
         val DATA_POINTER = PointerMapping(PointerBuffer::class, "POINTER_SHIFT")
+        val DATA_CLONG = PointerMapping(CLongBuffer::class, "CLONG_SHIFT")
 
         val DATA_BOOLEAN = PointerMapping(ByteBuffer::class, 0)
         val DATA_BYTE = PointerMapping(ByteBuffer::class, 0)
@@ -343,6 +347,7 @@ open class PointerMapping private constructor(
     internal val box = super.javaMethodName.substringBefore("Buffer")
     internal val primitive get() = when (this) {
         DATA_BOOLEAN -> "boolean"
+        DATA_CLONG   -> "long"
         DATA_POINTER -> "long"
         else         -> box.toLowerCase()
     }
@@ -391,7 +396,11 @@ internal val NativeType.jniSignature
     get() = if (mapping.nativeMethodType === Long::class.java && mapping !== PrimitiveMapping.LONG) "P" else jniSignatureStrict
 internal val NativeType.jniSignatureJava
     get() = if (mapping.nativeMethodType === Long::class.java)
-        if (mapping === PrimitiveMapping.LONG) "J" else "P"
+        when (mapping) {
+            PrimitiveMapping.LONG  -> "J"
+            PrimitiveMapping.CLONG -> "C"
+            else                   -> "P"
+        }
     else
         ""
 
@@ -424,7 +433,7 @@ internal val NativeType.isReference
     get() = this is ReferenceType && (this.mapping !== PointerMapping.OPAQUE_POINTER || this is WrappedPointerType)
 
 internal val NativeType.isPointerSize
-    get() = this.mapping === PointerMapping.DATA_INT || this.mapping === PointerMapping.DATA_POINTER
+    get() = this.mapping === PointerMapping.DATA_INT || this.mapping === PointerMapping.DATA_POINTER || this.mapping === PointerMapping.DATA_CLONG
 
 internal val NativeType.isArray
     get() = this is PointerType<*> && this.mapping.supportsArrayOverload

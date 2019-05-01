@@ -22,11 +22,8 @@ val SQLCHARUTF16 = CharType("SQLWCHAR", CharMapping.UTF16)
 val SQLSMALLINT = typedef(short, "SQLSMALLINT")
 val SQLUSMALLINT = typedef(unsigned_short, "SQLUSMALLINT")
 
-val long = IntegerType("long", PrimitiveMapping.INT)
-val unsigned_long = IntegerType("unsigned long", PrimitiveMapping.INT, unsigned = true)
-
-val SQLINTEGER = typedef(long, "SQLINTEGER")
-val SQLUINTEGER = typedef(unsigned_long, "SQLUINTEGER")
+val SQLINTEGER = typedef(int32_t, "SQLINTEGER")
+val SQLUINTEGER = typedef(uint32_t, "SQLUINTEGER")
 
 val SQLRETURN = typedef(SQLSMALLINT, "SQLRETURN")
 

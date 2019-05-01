@@ -43,6 +43,7 @@ class AutoSizeMember(
             PrimitiveMapping.SHORT,
             PrimitiveMapping.INT,
             PrimitiveMapping.LONG,
+            PrimitiveMapping.CLONG,
             PrimitiveMapping.POINTER -> false
             else                     -> true
         })
@@ -68,6 +69,7 @@ class AutoSizeIndirect(
             PrimitiveMapping.SHORT,
             PrimitiveMapping.INT,
             PrimitiveMapping.LONG,
+            PrimitiveMapping.CLONG,
             PrimitiveMapping.POINTER -> false
             else                     -> true
         })

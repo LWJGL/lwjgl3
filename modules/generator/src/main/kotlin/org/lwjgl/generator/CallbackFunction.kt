@@ -55,6 +55,7 @@ class CallbackFunction internal constructor(
                 PrimitiveMapping.BOOLEAN4,
                 PrimitiveMapping.INT     -> 'i'
                 PrimitiveMapping.LONG    -> 'l'
+                PrimitiveMapping.CLONG   -> 'j'
                 PrimitiveMapping.POINTER -> 'p'
                 PrimitiveMapping.FLOAT   -> 'f'
                 PrimitiveMapping.DOUBLE  -> 'd'
@@ -65,11 +66,11 @@ class CallbackFunction internal constructor(
         }
 
     private val NativeType.argType
-        get() = when {
-            this.isPointer                       -> "Pointer"
-            mapping === PrimitiveMapping.BOOLEAN -> "Bool"
-            mapping === PrimitiveMapping.LONG    -> "LongLong"
-            else                                 -> (mapping as PrimitiveMapping).javaMethodName.upperCaseFirst
+        get() = if (isPointer) "Pointer" else when (mapping) {
+            PrimitiveMapping.BOOLEAN -> "Bool"
+            PrimitiveMapping.LONG    -> "LongLong"
+            PrimitiveMapping.CLONG   -> "Long"
+            else                     -> (mapping as PrimitiveMapping).javaMethodName.upperCaseFirst
         }
 
     private fun PrintWriter.generateDocumentation(isClass: Boolean) {

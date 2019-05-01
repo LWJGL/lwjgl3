@@ -108,6 +108,7 @@ class AutoSize(
                 PrimitiveMapping.SHORT,
                 PrimitiveMapping.INT,
                 PrimitiveMapping.LONG,
+                PrimitiveMapping.CLONG,
                 PrimitiveMapping.POINTER -> {
                 }
                 else                     -> throw IllegalArgumentException("Value parameters with the AutoSize modifier must be integer primitive types.")

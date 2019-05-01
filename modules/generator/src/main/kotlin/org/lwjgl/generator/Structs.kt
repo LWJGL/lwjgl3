@@ -1162,7 +1162,7 @@ ${validations.joinToString("\n")}
                     size = if (it.nativeType.isPointer)
                         "POINTER_SIZE"
                     else
-                        (it.nativeType.mapping as PrimitiveMapping).bytes.toString()
+                        (it.nativeType.mapping as PrimitiveMapping).bytesExpression
                     alignment = size
                 }
 
@@ -1491,7 +1491,6 @@ ${validations.joinToString("\n")}
                         println("$t}")
                     } else {
                         val mapping = it.primitiveMapping
-                        val bytesPerElement = if (mapping === PrimitiveMapping.POINTER) "POINTER_SIZE" else mapping.bytes.toString()
                         val bufferType = mapping.toPointer.javaMethodName
 
                         if (it.public)
@@ -1499,7 +1498,7 @@ ${validations.joinToString("\n")}
                         println("${t}public static void n$setter(long $STRUCT, $bufferType value) {")
                         if (Module.CHECKS)
                             println("$t${t}if (CHECKS) { checkGT(value, ${it.size}); }")
-                        println("$t${t}memCopy(memAddress(value), $STRUCT + $field, value.remaining() * $bytesPerElement);")
+                        println("$t${t}memCopy(memAddress(value), $STRUCT + $field, value.remaining() * ${mapping.bytesExpression});")
                         setRemaining(it, prefix = "$t$t", suffix = "\n")
                         println("$t}")
 
@@ -1508,7 +1507,7 @@ ${validations.joinToString("\n")}
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$setter(int, $javaType) $setter}. */")
                         println("${t}public static void n$setter(long $STRUCT, int index, $javaType value) {")
-                        println("$t$t${getBufferMethod("put", it, javaType)}$STRUCT + $field + check(index, ${it.size}) * $bytesPerElement, value);")
+                        println("$t$t${getBufferMethod("put", it, javaType)}$STRUCT + $field + check(index, ${it.size}) * ${mapping.bytesExpression}, value);")
                         println("$t}")
                     }
                 } else if (it.nativeType is CharSequenceType) {
@@ -1774,12 +1773,11 @@ ${validations.joinToString("\n")}
                         println("${t}public static $bufferType n$getter(long $STRUCT) { return ${it.mem(bufferType)}($STRUCT + $field, ${getReferenceMember<AutoSizeMember>(it.name)?.autoSize ?: it.size}); }")
 
                         val javaType = it.nativeType.nativeMethodType
-                        val bytesPerElement = if (mapping === PrimitiveMapping.POINTER) "POINTER_SIZE" else mapping.bytes.toString()
 
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$getter(int) $getter}. */")
                         println("${t}public static $javaType n$getter(long $STRUCT, int index) {")
-                        print("$t${t}return ${getBufferMethod("get", it, javaType)}$STRUCT + $field + check(index, ${it.size}) * $bytesPerElement)")
+                        print("$t${t}return ${getBufferMethod("get", it, javaType)}$STRUCT + $field + check(index, ${it.size}) * ${mapping.bytesExpression})")
                         if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN)
                             print(" != 0")
                         println(";\n$t}")
@@ -1973,6 +1971,8 @@ $indent */""")
 
     private fun getBufferMethod(type: String, member: StructMember, javaType: String) = if (member.nativeType.isPointer)
         "mem${type.upperCaseFirst}Address("
+    else if (member.nativeType.mapping === PrimitiveMapping.CLONG)
+        "mem${type.upperCaseFirst}CLong("
     else
         "UNSAFE.$type${
         bufferMethodMap[javaType] ?: throw UnsupportedOperationException("Unsupported struct member java type: $className.${member.name} ($javaType)")

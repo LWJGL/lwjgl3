@@ -5,3 +5,4 @@
 package org.lwjgl
 
 internal interface PointerBuffer
+internal interface CLongBuffer

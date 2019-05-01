@@ -22,8 +22,6 @@ fun GeneratorTargetNative.includeOVRCAPI_VK() = nativeDirective(
 #include "OVR_CAPI_Vk.h"
 ENABLE_WARNINGS()""")
 
-val long_long = IntegerType("long long", PrimitiveMapping.LONG)
-
 val ovrBool = IntegerType("ovrBool", PrimitiveMapping.BOOLEAN)
 val ovrResult = IntegerType("ovrResult", PrimitiveMapping.INT)
 

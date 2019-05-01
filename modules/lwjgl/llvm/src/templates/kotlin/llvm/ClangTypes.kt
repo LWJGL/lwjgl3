@@ -29,8 +29,8 @@ val CXIdxClientASTFile = "CXIdxClientASTFile".handle
 val CXIndexAction = "CXIndexAction".handle
 
 val time_t = IntegerType("time_t", PrimitiveMapping.LONG, unsigned = true) // TODO:
-val unsigned_long = IntegerType("unsigned long", PrimitiveMapping.INT, unsigned = true)
-val long_long = IntegerType("long long", PrimitiveMapping.LONG)
+
+val unsigned_long = IntegerType("unsigned long", PrimitiveMapping.CLONG, unsigned = true)
 
 val CXLoadDiag_Error = "enum CXLoadDiag_Error".enumType
 val CXDiagnosticSeverity = "enum CXDiagnosticSeverity".enumType

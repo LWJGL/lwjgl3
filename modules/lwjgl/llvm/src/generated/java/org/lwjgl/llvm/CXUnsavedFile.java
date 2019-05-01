@@ -61,7 +61,7 @@ public class CXUnsavedFile extends Struct implements NativeResource {
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
-            __member(4)
+            __member(CLONG_SIZE)
         );
 
         SIZEOF = layout.getSize();
@@ -96,7 +96,7 @@ public class CXUnsavedFile extends Struct implements NativeResource {
     public ByteBuffer Contents() { return nContents(address()); }
     /** Returns the value of the {@code Length} field. */
     @NativeType("unsigned long")
-    public int Length() { return nLength(address()); }
+    public long Length() { return nLength(address()); }
 
     /** Sets the address of the specified encoded string to the {@code Filename} field. */
     public CXUnsavedFile Filename(@NativeType("char const *") ByteBuffer value) { nFilename(address(), value); return this; }
@@ -274,9 +274,9 @@ public class CXUnsavedFile extends Struct implements NativeResource {
     /** Unsafe version of {@link #FilenameString}. */
     public static String nFilenameString(long struct) { return memASCII(memGetAddress(struct + CXUnsavedFile.FILENAME)); }
     /** Unsafe version of {@link #Contents() Contents}. */
-    public static ByteBuffer nContents(long struct) { return memByteBuffer(memGetAddress(struct + CXUnsavedFile.CONTENTS), nLength(struct)); }
+    public static ByteBuffer nContents(long struct) { return memByteBuffer(memGetAddress(struct + CXUnsavedFile.CONTENTS), (int)nLength(struct)); }
     /** Unsafe version of {@link #Length}. */
-    public static int nLength(long struct) { return UNSAFE.getInt(null, struct + CXUnsavedFile.LENGTH); }
+    public static long nLength(long struct) { return memGetCLong(struct + CXUnsavedFile.LENGTH); }
 
     /** Unsafe version of {@link #Filename(ByteBuffer) Filename}. */
     public static void nFilename(long struct, ByteBuffer value) {
@@ -286,7 +286,7 @@ public class CXUnsavedFile extends Struct implements NativeResource {
     /** Unsafe version of {@link #Contents(ByteBuffer) Contents}. */
     public static void nContents(long struct, ByteBuffer value) { memPutAddress(struct + CXUnsavedFile.CONTENTS, memAddress(value)); nLength(struct, value.remaining()); }
     /** Sets the specified value to the {@code Length} field of the specified {@code struct}. */
-    public static void nLength(long struct, int value) { UNSAFE.putInt(null, struct + CXUnsavedFile.LENGTH, value); }
+    public static void nLength(long struct, long value) { memPutCLong(struct + CXUnsavedFile.LENGTH, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -359,7 +359,7 @@ public class CXUnsavedFile extends Struct implements NativeResource {
         public ByteBuffer Contents() { return CXUnsavedFile.nContents(address()); }
         /** Returns the value of the {@code Length} field. */
         @NativeType("unsigned long")
-        public int Length() { return CXUnsavedFile.nLength(address()); }
+        public long Length() { return CXUnsavedFile.nLength(address()); }
 
         /** Sets the address of the specified encoded string to the {@code Filename} field. */
         public CXUnsavedFile.Buffer Filename(@NativeType("char const *") ByteBuffer value) { CXUnsavedFile.nFilename(address(), value); return this; }

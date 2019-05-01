@@ -45,7 +45,7 @@ public class CXTUResourceUsageEntry extends Struct {
     static {
         Layout layout = __struct(
             __member(4),
-            __member(4)
+            __member(CLONG_SIZE)
         );
 
         SIZEOF = layout.getSize();
@@ -73,7 +73,7 @@ public class CXTUResourceUsageEntry extends Struct {
     public int kind() { return nkind(address()); }
     /** Returns the value of the {@code amount} field. */
     @NativeType("unsigned long")
-    public int amount() { return namount(address()); }
+    public long amount() { return namount(address()); }
 
     // -----------------------------------
 
@@ -109,7 +109,7 @@ public class CXTUResourceUsageEntry extends Struct {
     /** Unsafe version of {@link #kind}. */
     public static int nkind(long struct) { return UNSAFE.getInt(null, struct + CXTUResourceUsageEntry.KIND); }
     /** Unsafe version of {@link #amount}. */
-    public static int namount(long struct) { return UNSAFE.getInt(null, struct + CXTUResourceUsageEntry.AMOUNT); }
+    public static long namount(long struct) { return memGetCLong(struct + CXTUResourceUsageEntry.AMOUNT); }
 
     // -----------------------------------
 
@@ -154,7 +154,7 @@ public class CXTUResourceUsageEntry extends Struct {
         public int kind() { return CXTUResourceUsageEntry.nkind(address()); }
         /** Returns the value of the {@code amount} field. */
         @NativeType("unsigned long")
-        public int amount() { return CXTUResourceUsageEntry.namount(address()); }
+        public long amount() { return CXTUResourceUsageEntry.namount(address()); }
 
     }
 

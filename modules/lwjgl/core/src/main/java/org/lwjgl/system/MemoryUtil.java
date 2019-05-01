@@ -1683,6 +1683,12 @@ public final class MemoryUtil {
     public static long memGetLong(long ptr)       { return UNSAFE.getLong(null, ptr); }
     public static float memGetFloat(long ptr)     { return UNSAFE.getFloat(null, ptr); }
     public static double memGetDouble(long ptr)   { return UNSAFE.getDouble(null, ptr); }
+    public static long memGetCLong(long ptr) {
+        return CLONG_SIZE == 8
+            ? UNSAFE.getLong(null, ptr) :
+            UNSAFE.getInt(null, ptr);
+    }
+
     public static long memGetAddress(long ptr) {
         return BITS64
             ? UNSAFE.getLong(null, ptr) :
@@ -1695,6 +1701,14 @@ public final class MemoryUtil {
     public static void memPutLong(long ptr, long value)     { UNSAFE.putLong(null, ptr, value); }
     public static void memPutFloat(long ptr, float value)   { UNSAFE.putFloat(null, ptr, value); }
     public static void memPutDouble(long ptr, double value) { UNSAFE.putDouble(null, ptr, value); }
+    public static void memPutCLong(long ptr, long value) {
+        if (CLONG_SIZE == 8) {
+            UNSAFE.putLong(null, ptr, value);
+        } else {
+            UNSAFE.putInt(null, ptr, (int)value);
+        }
+    }
+
     public static void memPutAddress(long ptr, long value) {
         if (BITS64) {
             UNSAFE.putLong(null, ptr, value);

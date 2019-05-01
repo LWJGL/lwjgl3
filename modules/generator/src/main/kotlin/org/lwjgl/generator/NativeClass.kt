@@ -433,12 +433,12 @@ class NativeClass internal constructor(
                 })
                     println("import java.nio.*;\n")
 
-                val needsPointerBuffer: NativeType.() -> Boolean = {
-                    this is PointerType<*> && this.elementType.let { it is PointerType<*> || (it.mapping == PrimitiveMapping.POINTER && it !is StructType) }
+                val needsCustomBuffer: NativeType.() -> Boolean = {
+                    this is PointerType<*> && this.elementType.run { this is PointerType<*> || (mapping == PrimitiveMapping.POINTER && this !is StructType) || mapping == PrimitiveMapping.CLONG }
                 }
                 if (functions.any {
-                    it.returns.nativeType.needsPointerBuffer() || it.hasParam { param ->
-                        param.nativeType.needsPointerBuffer() || (param.has<MultiType>() && param.get<MultiType>().types.contains(PointerMapping.DATA_POINTER))
+                    it.returns.nativeType.needsCustomBuffer() || it.hasParam { param ->
+                        param.nativeType.needsCustomBuffer() || (param.has<MultiType>() && param.get<MultiType>().types.run { contains(PointerMapping.DATA_POINTER) || contains(PointerMapping.DATA_CLONG) })
                     }
                 })
                     println("import org.lwjgl.*;\n")
