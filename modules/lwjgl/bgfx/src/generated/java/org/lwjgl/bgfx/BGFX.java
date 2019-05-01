@@ -1169,9 +1169,9 @@ public class BGFX {
     // --- [ bgfx_vertex_decl_begin ] ---
 
     /** Unsafe version of: {@link #bgfx_vertex_decl_begin vertex_decl_begin} */
-    public static void nbgfx_vertex_decl_begin(long _decl, int _renderer) {
+    public static long nbgfx_vertex_decl_begin(long _decl, int _renderer) {
         long __functionAddress = Functions.vertex_decl_begin;
-        invokePV(_decl, _renderer, __functionAddress);
+        return invokePP(_decl, _renderer, __functionAddress);
     }
 
     /**
@@ -1180,16 +1180,19 @@ public class BGFX {
      * @param _decl     the vertex declaration
      * @param _renderer the renderer type. One of:<br><table><tr><td>{@link #BGFX_RENDERER_TYPE_NOOP RENDERER_TYPE_NOOP}</td><td>{@link #BGFX_RENDERER_TYPE_DIRECT3D9 RENDERER_TYPE_DIRECT3D9}</td><td>{@link #BGFX_RENDERER_TYPE_DIRECT3D11 RENDERER_TYPE_DIRECT3D11}</td><td>{@link #BGFX_RENDERER_TYPE_DIRECT3D12 RENDERER_TYPE_DIRECT3D12}</td></tr><tr><td>{@link #BGFX_RENDERER_TYPE_GNM RENDERER_TYPE_GNM}</td><td>{@link #BGFX_RENDERER_TYPE_METAL RENDERER_TYPE_METAL}</td><td>{@link #BGFX_RENDERER_TYPE_NVN RENDERER_TYPE_NVN}</td><td>{@link #BGFX_RENDERER_TYPE_OPENGLES RENDERER_TYPE_OPENGLES}</td></tr><tr><td>{@link #BGFX_RENDERER_TYPE_OPENGL RENDERER_TYPE_OPENGL}</td><td>{@link #BGFX_RENDERER_TYPE_VULKAN RENDERER_TYPE_VULKAN}</td><td>{@link #BGFX_RENDERER_TYPE_COUNT RENDERER_TYPE_COUNT}</td></tr></table>
      */
-    public static void bgfx_vertex_decl_begin(@NativeType("bgfx_vertex_decl_t *") BGFXVertexDecl _decl, @NativeType("bgfx_renderer_type_t") int _renderer) {
-        nbgfx_vertex_decl_begin(_decl.address(), _renderer);
+    @Nullable
+    @NativeType("bgfx_vertex_decl_t *")
+    public static BGFXVertexDecl bgfx_vertex_decl_begin(@NativeType("bgfx_vertex_decl_t *") BGFXVertexDecl _decl, @NativeType("bgfx_renderer_type_t") int _renderer) {
+        long __result = nbgfx_vertex_decl_begin(_decl.address(), _renderer);
+        return BGFXVertexDecl.createSafe(__result);
     }
 
     // --- [ bgfx_vertex_decl_add ] ---
 
     /** Unsafe version of: {@link #bgfx_vertex_decl_add vertex_decl_add} */
-    public static void nbgfx_vertex_decl_add(long _decl, int _attrib, byte _num, int _type, boolean _normalized, boolean _asInt) {
+    public static long nbgfx_vertex_decl_add(long _decl, int _attrib, byte _num, int _type, boolean _normalized, boolean _asInt) {
         long __functionAddress = Functions.vertex_decl_add;
-        invokePV(_decl, _attrib, _num, _type, _normalized, _asInt, __functionAddress);
+        return invokePP(_decl, _attrib, _num, _type, _normalized, _asInt, __functionAddress);
     }
 
     /**
@@ -1206,8 +1209,11 @@ public class BGFX {
      * @param _asInt      packaging rule for {@code vertexPack}, {@code vertexUnpack}, and {@code vertexConvert} for {@link #BGFX_ATTRIB_TYPE_UINT8 ATTRIB_TYPE_UINT8} and {@link #BGFX_ATTRIB_TYPE_INT16 ATTRIB_TYPE_INT16}. Unpacking
      *                    code must be implemented inside vertex shader.
      */
-    public static void bgfx_vertex_decl_add(@NativeType("bgfx_vertex_decl_t *") BGFXVertexDecl _decl, @NativeType("bgfx_attrib_t") int _attrib, @NativeType("uint8_t") int _num, @NativeType("bgfx_attrib_type_t") int _type, @NativeType("bool") boolean _normalized, @NativeType("bool") boolean _asInt) {
-        nbgfx_vertex_decl_add(_decl.address(), _attrib, (byte)_num, _type, _normalized, _asInt);
+    @Nullable
+    @NativeType("bgfx_vertex_decl_t *")
+    public static BGFXVertexDecl bgfx_vertex_decl_add(@NativeType("bgfx_vertex_decl_t *") BGFXVertexDecl _decl, @NativeType("bgfx_attrib_t") int _attrib, @NativeType("uint8_t") int _num, @NativeType("bgfx_attrib_type_t") int _type, @NativeType("bool") boolean _normalized, @NativeType("bool") boolean _asInt) {
+        long __result = nbgfx_vertex_decl_add(_decl.address(), _attrib, (byte)_num, _type, _normalized, _asInt);
+        return BGFXVertexDecl.createSafe(__result);
     }
 
     // --- [ bgfx_vertex_decl_decode ] ---
@@ -1260,9 +1266,9 @@ public class BGFX {
     // --- [ bgfx_vertex_decl_skip ] ---
 
     /** Unsafe version of: {@link #bgfx_vertex_decl_skip vertex_decl_skip} */
-    public static void nbgfx_vertex_decl_skip(long _decl, byte _num) {
+    public static long nbgfx_vertex_decl_skip(long _decl, byte _num) {
         long __functionAddress = Functions.vertex_decl_skip;
-        invokePV(_decl, _num, __functionAddress);
+        return invokePP(_decl, _num, __functionAddress);
     }
 
     /**
@@ -1271,8 +1277,11 @@ public class BGFX {
      * @param _decl the vertex declaration
      * @param _num  the number of bytes to skip
      */
-    public static void bgfx_vertex_decl_skip(@NativeType("bgfx_vertex_decl_t *") BGFXVertexDecl _decl, @NativeType("uint8_t") int _num) {
-        nbgfx_vertex_decl_skip(_decl.address(), (byte)_num);
+    @Nullable
+    @NativeType("bgfx_vertex_decl_t *")
+    public static BGFXVertexDecl bgfx_vertex_decl_skip(@NativeType("bgfx_vertex_decl_t *") BGFXVertexDecl _decl, @NativeType("uint8_t") int _num) {
+        long __result = nbgfx_vertex_decl_skip(_decl.address(), (byte)_num);
+        return BGFXVertexDecl.createSafe(__result);
     }
 
     // --- [ bgfx_vertex_decl_end ] ---
@@ -3915,12 +3924,14 @@ public class BGFX {
     /**
      * Begin submitting draw calls from thread.
      *
+     * @param _forThread explicitly request an encoder for a worker thread
+     *
      * @return an encoder for submitting draw calls from multiple threads
      */
     @NativeType("struct bgfx_encoder_s *")
-    public static long bgfx_encoder_begin() {
+    public static long bgfx_encoder_begin(@NativeType("bool") boolean _forThread) {
         long __functionAddress = Functions.encoder_begin;
-        return invokeP(__functionAddress);
+        return invokeP(_forThread, __functionAddress);
     }
 
     // --- [ bgfx_encoder_end ] ---

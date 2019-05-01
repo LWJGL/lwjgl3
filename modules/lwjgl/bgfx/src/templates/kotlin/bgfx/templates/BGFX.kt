@@ -789,7 +789,7 @@ RGBA16S
         MapToInt..uint8_t("_resolve", "resolve flags", "RESOLVE_\\w+")
     )
 
-    void(
+    bgfx_vertex_decl_t.p(
         "vertex_decl_begin",
         "Start a vertex declaration.",
 
@@ -797,7 +797,7 @@ RGBA16S
         bgfx_renderer_type_t("_renderer", "the renderer type", RendererType)
     )
 
-    void(
+    bgfx_vertex_decl_t.p(
         "vertex_decl_add",
         """
         Adds attribute to a vertex declaration.
@@ -845,7 +845,7 @@ RGBA16S
         bgfx_attrib_t("_attr", "the attribute to query", Attrib)
     )
 
-    void(
+    bgfx_vertex_decl_t.p(
         "vertex_decl_skip",
         "Skips {@code _num} bytes in vertex stream.",
 
@@ -2021,6 +2021,8 @@ RGBA16S
     bgfx_encoder_s.p(
         "encoder_begin",
         "Begin submitting draw calls from thread.",
+
+        bool("_forThread", "explicitly request an encoder for a worker thread"),
 
         returnDoc = "an encoder for submitting draw calls from multiple threads"
     )
