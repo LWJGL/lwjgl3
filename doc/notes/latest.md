@@ -1,88 +1,64 @@
-### 3.2.1
+### 3.2.2
 
-_Released 2018 Dec 08_
+_Released 2019 May 05_
 
 This build includes the following changes:
 
 #### Bindings
 
-- Added [CUDA](https://developer.nvidia.com/cuda-zone/) bindings.
-    * Only the Driver API & NVRTC are supported in this release.
-    * Bindings to more CUDA Toolkit libraries will be added in the future.
-- Added [libdivide](https://libdivide.com/) bindings.
-- Added [LLVM/Clang](https://llvm.org/) bindings.
-    * LLVM binaries are not included in this release. They must be separately downloaded or built for each platform.
-- Added [Meow hash](https://github.com/cmuratori/meow_hash/) bindings.
-- Added [Opus](http://opus-codec.org/) bindings.
-- bgfx: Updated to API version 90 (up from 76)
-- dyncall: Updated to 1.0 (up from 1.0-RC)
-- glfw: Updated to pre-release 3.3.0 version (up from 3.3.0 pre-release):
-    * Added `GLFW_SCALE_TO_MONITOR`.
-    * Added `glfwAttachWin32Window`. (experimental)
-- jemalloc: Updated to pre-release 5.2.0 (up from 5.1.0)
-    * When available, it is again the default memory allocator on Windows.
-- LibOVR: Updated to 1.31.0 (up from 1.26.0)
-- lz4: Updated to 1.8.3 (up from 1.8.2)
-- Nuklear: Updated to 4.00.2 (up from 4.00.1)
-- OpenAL Soft: Updated to 1.19.1 (up from 1.18.2)
-    * Added `ALC_SOFT_device_clock` extension.
-- OpenGL(ES): Added latest extensions:
-    * `NV_memory_attachment`
-    * `NV_compute_shader_derivatives`
-    * `NV_fragment_shader_barycentric`
-    * `NV_mesh_shader`
-    * `NV_representative_fragment_test`
-    * `NV_scissor_exclusive`
-    * `NV_shader_texture_footprint`
-    * `NV_shading_rate_image`
-    * `QCOM_shader_framebuffer_fetch_rate`
-    * `QCOM_texture_foveated_subsampled_layout`
-- OpenVR: Updated to 1.1.3b (up from 1.0.16)
-- rpmalloc: Updated to 1.3.2 (up from 1.3.1)
-- tinyfiledialogs: Updated to 3.3.8 (up from 3.3.6)
-- vma: Updated to 2.1.0 (up from 2.0.0)
-- Vulkan: Updated to 1.1.95 (up from 1.0.82)
-    * Includes MoltenVK 1.0.27 (up from 1.0.16)
-- Yoga: Updated to 1.10.0 (up from 1.9.0)
-- Zstd: Updated to 1.3.7 (up from 1.3.5)
+- bgfx: Updated to API version 99 (up from 90)
+- glfw: Updated to 3.3.0 (up from 3.3.0 pre-release):
+    * Added `GLFW_RAW_MOUSE_MOTION`.
+    * Added `glfwGetMonitorWorkarea`.
+    * Added `glfwRawMouseMotionSupported`.
+- CUDA: Updated to 10.1 (up from 10.0)
+- jemalloc: Updated to 5.2.0 (up from pre-release 5.2.0)
+- LibOVR: Updated to 1.35.0 (up from 1.31.0)
+- LLVM/Clang: Updated to 8.0 (up from 7.0)
+- lmdb: Updated to 0.9.24 (up from 0.9.23)
+- lz4: Updated to 1.9.1 (up from 1.8.3)
+- NanoVG: Added support for using bgfx as the rendering back-end.
+- NanoVG: Added Blendish & OUI bindings. 
+- NativeFileDialog: Updated to 1.1.4 (up from 1.1.3)
+- OpenVR: Updated to 1.3.22 (up from 1.1.3b)
+- Opus: Updated to 1.3.1 (up from 1.3.0)
+- stb
+    * Updated `stb_image` to 2.22 (up from 2.19)
+    * Updated `stb_image_resize` to 0.96 (up from 0.95)
+    * Updated `stb_image_write` to 1.13 (up from 1.09)
+    * Updated `stb_perlin` to 0.4 (up from 0.3)
+    * Updated `stb_rect_pack` to 1.00 (up from 0.11)
+    * Updated `stb_truetype` to 1.21 (up from 1.19)
+    * Updated `stb_vorbis` to 1.16 (up from 1.14)
+- tinyfiledialogs: Updated to 3.3.9 (up from 3.3.8)
+- vma: Updated to 2.2.0 (up from 2.1.0)
+- Vulkan: Updated to 1.1.107 (up from 1.0.95)
+    * Includes MoltenVK 1.0.35 (up from 1.0.27)
+- xxhash: Updated to 0.7.0 (up from 0.6.5)
+- Yoga: Updated to 1.14.0 (up from 1.10.0)
+- Zstd: Updated to 1.4.0 (up from 1.3.7)
 
 #### Improvements
 
-- perf(core): Refactored LWJGL internals to make call stacks shallower.
-    * Makes it harder to cross Hotspot's default `MaxInlineLevel` threshold, which can disable important optimizations.
-- perf(core): Added `memDuplicate` and refactored `memSlice` with implementations that use `Unsafe` to construct buffer instances, similar to `mem-X-Buffer`.
-    * Compared to the default JDK implementations, these methods are faster and enable Scalar Replacement via EA on Hotspot.
-    * The `memSlice` with offset method is also thread-safe now.
-- perf(core): Implemented workarounds to make struct buffer iteration garbage free on Hotspot.
-- perf(core): Re-tuned string codecs and `memCopy`/`memSet` for Java versions 8 to 11.
-- perf(core): Added thread-local array cache to minimize allocations while decoding text.
-- bgfx: Builds of bgfx tools (`geometryc`, `shaderc`, `texturec`, `texturev`) are now available.
-    * Use the [file browser](https://www.lwjgl.org/browse) in the LWJGL website to download the executables.
-    * For example, the latest Windows x64 build of `shaderc` can be found under `nightly/windows/x64/bgfx-tools/`.
-- vma: `VmaVulkanFunctions.set(VkInstance, VkDevice)` will now use Vulkan 1.1 functions instead of `KHR_get_memory_requirements2` functions, if available.
-- Generator: The template DSL has been simplified considerably.
-- Generator: Added the `LWJGL Template Extraction Tool`. It uses the new Clang bindings to parse native headers and extract LWJGL template declarations.
-    * Extracts both declarations and associated documentation.
-    * Written in Kotlin. The source can be found in the `extract` module.
+- build(ant): The `release` target now works in offline mode (`LWJGL_BUILD_OFFLINE=true`).
+    * The build can be incomplete. Missing natives will be ignored and javadoc generation can be disabled for faster builds.
+- build(gradle): Deployments of incomplete builds to the local Maven repository are now allowed.
+- Core: Implemented workaround for [JDK-8195129](https://bugs.openjdk.java.net/browse/JDK-8195129) in the `SharedLibraryLoader`.
+- perf: Critical JNI Natives are now generated for primitive-only functions.
+- LLVM: The bindings can now be used with LLVM/Clang version 5.0 or newer (down from 8.0).
 
 #### Fixes
 
-- Core: Fixed text decoding from buffer with `.position() > 0`.
-    * Affected all decoders on Java 9+, only UTF-16 on Java 8.
-- Core: Fixed the bounds check in `memCopy`. (#414)
-- OpenAL: Fixed signature of `alListener3i`. (#427)
-- OpenVR: The `pGamePoseArray` parameter of `VRCompositor_WaitGetPoses` is now nullable. (#418)
-- OpenVR: Fixed returned type of `VRRenderModels_GetComponentStateForDevicePath`.
-- OpenVR: Renamed `VRInput_UncompressSkeletalActionData` to `VRInput_DecompressSkeletalBoneData`.
-- OpenVR: Fixed wrong modifiers in `VRInput` functions:
-    - `VRInput_GetDigitalActionData`
-    - `VRInput_GetAnalogActionData`
-    - `VRInput_GetPoseActionData`
-    - `VRInput_GetSkeletalActionData`
-    - `VRInput_GetOriginTrackedDeviceInfo`
-- vma: The native library is now initialized automatically.
-- vma: Optional `KHR_get_memory_requirements2` addresses in `VmaVulkanFunctions` are now nullable.
-- vma: Nullability of `VmaAllocationCreateInfo` & `VmaAllocationInfo` members.
+- build(ant): Fixed building on Linux & macOS when the path to LWJGL's root directory is shallow. (#442)
+- Core: Fixed race condition in callback deallocation when the debug allocator is enabled. (#444)
+- Generator: The workaround for [JDK-8167409](https://bugs.openjdk.java.net/browse/JDK-8167409) is now applicable to functions with 5 parameters + 1 implicit parameter (function address or struct value result).
+- Generator: Support `void()` in callback functions without parameters. 
+- Assimp: Added missing members to various struct types.
+- LLVM: `LLVMGetErrorMessage` now returns `ByteBuffer` instead of `String`, so that `LLVMDisposeErrorMessage` can be used.
+- nuklear: The `nk_text_edit`, `nk_text_undo_state` and `nk_text_undo_record` structs are now public.
+- OpenCL: Array overloads of `EnqueueRead/Write` functions cannot be used to perform non-blocking reads/writes anymore.  
+- OpenGL: Added `GL_DRAW_INDIRECT_BUFFER` overloads to `NV_bindless_multi_draw_indirect` & `NV_bindless_multi_draw_indirect_count` extensions.
+- vma: Fixed `VmaMemoryUsage` enumeration values. (#458)
 
 #### Breaking Changes
 
@@ -91,5 +67,6 @@ This build includes the following changes:
 (S): source incompatible change
 ```
 
-- Core: `sun.misc.Unsafe` is now required, there is no JNI fallback.
-- vma: The `VmaVulkanFunctions.set` helper method now returns `VmaVulkanFunctions`. **(B)**
+- Core: Function address parameters in `org.lwjgl.system.JNI` & `org.lwjgl.system.jawt.JAWTFunctions` methods are now last, after normal parameters. **(S)**
+    * Enables tail-calls without argument shuffling, when Critical JNI Natives are used.
+- glfw: removed `CharSequence` overload of `glfwUpdateGamepadMappings`. **(S)** (#462)
