@@ -365,13 +365,20 @@ public final class HelloVulkan {
                     VkLayerProperties.Buffer availableLayers = VkLayerProperties.mallocStack(ip.get(0), stack);
                     check(vkEnumerateInstanceLayerProperties(ip, availableLayers));
 
+                    // VulkanSDK 1.1.106+
                     requiredLayers = demo_check_layers(
                         stack, availableLayers,
-                        "VK_LAYER_LUNARG_standard_validation"/*,
+                        "VK_LAYER_KHRONOS_validation"/*,
                         "VK_LAYER_LUNARG_assistant_layer"*/
                     );
-                    if (requiredLayers == null) // use alternative set of validation layers
-                    {
+                    if (requiredLayers == null) { // use alternative (deprecated) set of validation layers
+                        requiredLayers = demo_check_layers(
+                            stack, availableLayers,
+                            "VK_LAYER_LUNARG_standard_validation"/*,
+                            "VK_LAYER_LUNARG_assistant_layer"*/
+                        );
+                    }
+                    if (requiredLayers == null) { // use alternative (deprecated) set of validation layers
                         requiredLayers = demo_check_layers(
                             stack, availableLayers,
                             "VK_LAYER_GOOGLE_threading",
