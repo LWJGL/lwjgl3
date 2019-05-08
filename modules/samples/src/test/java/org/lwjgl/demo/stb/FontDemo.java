@@ -190,7 +190,12 @@ abstract class FontDemo {
         glfwSetFramebufferSizeCallback(window, FontDemo::framebufferSizeChanged);
 
         glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
-            ctrlDown = (mods & GLFW_MOD_CONTROL) != 0;
+            switch (key) {
+                case GLFW_KEY_LEFT_CONTROL:
+                case GLFW_KEY_RIGHT_CONTROL:
+                    ctrlDown = action != GLFW_RELEASE;
+            }
+
             if (action == GLFW_RELEASE) {
                 return;
             }
