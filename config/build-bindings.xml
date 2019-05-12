@@ -40,6 +40,7 @@ This script is included in /config/build-definitions.xml.
     <property name="binding.par" value="true"/>
     <property name="binding.remotery" value="true"/>
     <property name="binding.rpmalloc" value="true"/>
+    <property name="binding.shaderc" value="true"/>
     <property name="binding.sse" value="true"/>
     <property name="binding.stb" value="true"/>
     <property name="binding.tinyexr" value="true"/>
@@ -178,6 +179,7 @@ This script is included in /config/build-definitions.xml.
                 <sequential if:set="binding.par"><local name="module"/><property name="module" value="par"/><body/></sequential>
                 <sequential if:set="binding.remotery"><local name="module"/><property name="module" value="remotery"/><body/></sequential>
                 <sequential if:set="binding.rpmalloc"><local name="module"/><property name="module" value="rpmalloc"/><body/></sequential>
+                <sequential if:set="binding.shaderc"><local name="module"/><property name="module" value="shaderc"/><body/></sequential>
                 <sequential if:set="binding.sse"><local name="module"/><property name="module" value="sse"/><body/></sequential>
                 <sequential if:set="binding.stb"><local name="module"/><property name="module" value="stb"/><body/></sequential>
                 <sequential if:set="binding.tinyexr"><local name="module"/><property name="module" value="tinyexr"/><body/></sequential>

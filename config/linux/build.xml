@@ -465,6 +465,8 @@
             <update-dependency name="OpenAL32" artifact="${build.arch}/libopenal.so" dest="${lib}" if:true="${binding.openal}"/>
             <update-dependency name="OpenVR" artifact="${build.arch}/libopenvr_api.so" dest="${lib}" if:true="${binding.openvr}"/>
             <update-dependency name="Opus" artifact="${build.arch}/libopus.so" dest="${lib}" if:true="${binding.opus}"/>
+            <update-dependency name="Shaderc" artifact="${build.arch}/libshaderc.so" dest="${lib}" if:true="${binding.shaderc}"/>
+            <update-dependency name="Shaderc spvc" artifact="${build.arch}/libshaderc_spvc.so" dest="${lib}" if:true="${binding.shaderc}"/>
 
             </parallel>
 

@@ -38,6 +38,11 @@
             <package name="org.lwjgl.system.rpmalloc"/>
         </packages>
     </test>
+    <test name="shaderc">
+        <packages>
+            <package name="org.lwjgl.util.shaderc"/>
+        </packages>
+    </test>
     <test name="sse">
         <packages>
             <package name="org.lwjgl.util.simd"/>

@@ -142,6 +142,7 @@ improve the chances of a quick and useful response.
 |[Nuklear](https://github.com/vurtun/nuklear)|A minimal state immediate mode graphical user interface toolkit written in ANSI C and licensed under public domain.|
 |[par_shapes](https://github.com/prideout/par)|Generate parametric surfaces and other simple shapes.|
 |[OpenVR](https://github.com/ValveSoftware/openvr)|An API and runtime that allows access to VR hardware from multiple vendors without requiring that applications have specific knowledge of the hardware they are targeting.|
+|[Shaderc](https://github.com/google/shaderc)|A collection of libraries for shader compilation.|
 |[Tiny OpenEXR](https://github.com/syoyo/tinyexr)|A small, single header-only library to load and save OpenEXR(.exr) images.|
 |[Tootle (AMD)](https://github.com/GPUOpen-Tools/amd-tootle)|A 3D triangle mesh optimization library that improves on existing mesh preprocessing techniques.|
 |[Vulkan Memory Allocator](https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator)|An easy to integrate Vulkan memory allocation library.|

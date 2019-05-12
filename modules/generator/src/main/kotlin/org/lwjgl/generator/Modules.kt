@@ -526,6 +526,26 @@ enum class Module(
         library = JNILibrary.create("LibRPmalloc"),
         arrayOverloads = false
     ),
+    SHADERC(
+        "shaderc",
+        "org.lwjgl.util.shaderc",
+        """
+        Contains bindings to ${url("https://github.com/google/shaderc", "Shaderc")}, a collection of libraries for shader compilation.
+
+        Shaderc wraps around core functionality in ${url("https://github.com/KhronosGroup/glslang", "glslang")} and ${url(
+            "https://github.com/KhronosGroup/SPIRV-Tools",
+            "SPIRV-Tools"
+        )}. Shaderc aims to to provide:
+
+        ${ul(
+            "a command line compiler with GCC- and Clang-like usage, for better integration with build systems",
+            "an API where functionality can be added without breaking existing clients",
+            "an API supporting standard concurrency patterns across multiple operating systems",
+            "increased functionality such as file \\#include support"
+        )}
+        """,
+        arrayOverloads = false
+    ),
     SSE(
         "sse",
         "org.lwjgl.util.simd",

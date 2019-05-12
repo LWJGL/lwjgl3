@@ -409,6 +409,14 @@ public class Configuration<T> {
     /** Similar to {@link #LIBRARY_NAME} for the Opus library (<b>org.lwjgl.opus.libname</b>). */
     public static final Configuration<String> OPUS_LIBRARY_NAME = new Configuration<>("org.lwjgl.opus.libname", StateInit.STRING);
 
+    // -- SHADERC
+
+    /** Similar to {@link #LIBRARY_NAME} for the Shaderc libshaderc library (<b>org.lwjgl.shaderc.libname</b>). */
+    public static final Configuration<String> SHADERC_LIBRARY_NAME = new Configuration<>("org.lwjgl.shaderc.libname", StateInit.STRING);
+
+    /** Similar to {@link #LIBRARY_NAME} for the Shaderc libshaderc_spvc library (<b>org.lwjgl.shaderc_spvc.libname</b>). */
+    public static final Configuration<String> SHADERC_SPVC_LIBRARY_NAME = new Configuration<>("org.lwjgl.shaderc.spvc.libname", StateInit.STRING);
+
     // -- VULKAN
 
     /** Similar to {@link #EGL_EXPLICIT_INIT} for the Vulkan library (<b>org.lwjgl.vulkan.explicitInit</b>). */

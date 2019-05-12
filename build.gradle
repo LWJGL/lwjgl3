@@ -201,6 +201,11 @@ enum Artifacts {
         "A public domain cross platform lock free thread caching 16-byte aligned memory allocator implemented in C.",
         Platforms.ALL
     ),
+    SHADERC(
+        "lwjgl-shaderc", "LWJGL - Shaderc bindings",
+        "A collection of libraries for shader compilation.",
+        Platforms.ALL
+    ),
     SSE(
         "lwjgl-sse", "LWJGL - SSE bindings",
         "Simple SSE intrinsics.",

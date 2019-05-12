@@ -450,6 +450,8 @@ EXPORTS
             <update-dependency name="OpenAL32" artifact="${build.arch}/OpenAL${LIB_POSTFIX}.dll" dest="${lib}" if:true="${binding.openal}"/>
             <update-dependency name="OpenVR" artifact="${build.arch}/openvr_api${LIB_POSTFIX}.dll" dest="${lib}" if:true="${binding.openvr}"/>
             <update-dependency name="Opus" artifact="${build.arch}/opus${LIB_POSTFIX}.dll" dest="${lib}" if:true="${binding.opus}"/>
+            <update-dependency name="Shaderc" artifact="${build.arch}/shaderc${LIB_POSTFIX}.dll" dest="${lib}" if:true="${binding.shaderc}"/>
+            <update-dependency name="Shaderc spvc" artifact="${build.arch}/shaderc_spvc${LIB_POSTFIX}.dll" dest="${lib}" if:true="${binding.shaderc}"/>
 
             </parallel>
 
