@@ -370,6 +370,7 @@
             <compileBinding binding="par"/>
             <compileBinding binding="remotery"/>
             <compileBinding binding="rpmalloc"/>
+            <compileBinding binding="shaderc"/>
             <compileBinding binding="sse"/>
             <compileBinding binding="stb"/>
             <compileBinding binding="tinyexr"/>
@@ -1309,6 +1310,26 @@
 
         <!-- rpmalloc -->
         <release-module package="org.lwjgl.system.rpmalloc" name="rpmalloc" native-library="lwjgl_rpmalloc" title="rpmalloc" if:true="${binding.rpmalloc}"/>
+
+        <!-- shaderc -->
+        <release-module package="org.lwjgl.util.shaderc" name="shaderc" title="Shaderc" if:true="${binding.shaderc}">
+            <natives>
+                <get-release url="linux/x64/libshaderc.so"/>
+                <get-release url="macosx/x64/libshaderc.dylib"/>
+                <get-release url="windows/x64/shaderc.dll"/>
+                <get-release url="windows/x86/shaderc32.dll"/>
+
+                <get-release url="linux/x64/libshaderc_spvc.so"/>
+                <get-release url="macosx/x64/libshaderc_spvc.dylib"/>
+                <get-release url="windows/x64/shaderc_spvc.dll"/>
+                <get-release url="windows/x86/shaderc_spvc32.dll"/>
+
+                <get-release url="linux/x64/libshaderc.so.git"/>
+                <get-release url="macosx/x64/libshaderc.dylib.git"/>
+                <get-release url="windows/x64/shaderc.dll.git"/>
+                <get-release url="windows/x86/shaderc32.dll.git"/>
+            </natives>
+        </release-module>
 
         <!-- SSE -->
         <release-module package="org.lwjgl.util.simd" name="sse" native-library="lwjgl_sse" title="SSE" if:true="${binding.sse}"/>

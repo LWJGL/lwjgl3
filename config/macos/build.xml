@@ -405,6 +405,9 @@
             <update-dependency name="OpenAL32" artifact="${build.arch}/libopenal.dylib" dest="${lib}" if:true="${binding.openal}"/>
             <update-dependency name="OpenVR" artifact="${build.arch}/libopenvr_api.dylib" dest="${lib}" if:true="${binding.openvr}"/>
             <update-dependency name="Opus" artifact="${build.arch}/libopus.dylib" dest="${lib}" if:true="${binding.opus}"/>
+            <update-dependency name="Shaderc" artifact="${build.arch}/libshaderc.dylib" dest="${lib}" if:true="${binding.shaderc}"/>
+            <update-dependency name="Shaderc spvc" artifact="${build.arch}/libshaderc_spvc.dylib" dest="${lib}" if:true="${binding.shaderc}"/>
+
             <update-dependency name="MoltenVK" artifact="${build.arch}/libMoltenVK.dylib" dest="${lib}" if:true="${binding.vulkan}"/>
 
             </parallel>
