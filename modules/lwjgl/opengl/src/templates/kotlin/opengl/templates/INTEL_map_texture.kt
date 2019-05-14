@@ -74,7 +74,7 @@ val INTEL_map_texture = "INTELMapTexture".nativeClassGL("INTEL_map_texture", pos
         return stride[0];
     }""")
 
-    MapPointer("getStride(stride) * GLChecks.getTexLevelParameteri(texture, GL11.GL_TEXTURE_2D, level, GL11.GL_TEXTURE_HEIGHT)")..void.p(
+    MapPointer("getStride(stride) * GLChecks.getTexLevelParameteri(texture, GL11.GL_TEXTURE_2D, level, GL11.GL_TEXTURE_HEIGHT)", oldBufferOverloads = true)..void.p(
         "MapTexture2DINTEL",
         """
         Attempts to return a direct pointer to the graphics storage for 2D texture indicated by the {@code texture} parameter.

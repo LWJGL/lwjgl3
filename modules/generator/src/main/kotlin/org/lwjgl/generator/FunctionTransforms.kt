@@ -273,17 +273,19 @@ internal class VectorValueTransform(
     }
 }
 
-// TODO: remove in a future version?
-internal class MapPointerTransform(val expression: String) : FunctionTransform<ReturnValue> {
+// TODO: remove old_buffer in LWJGL 4
+internal class MapPointerTransform(val expression: String, val useOldBuffer: Boolean) : FunctionTransform<ReturnValue> {
     override fun transformDeclaration(param: ReturnValue, original: String) = "ByteBuffer" // Return a ByteBuffer
     override fun transformCall(param: ReturnValue, original: String) = """int $MAP_LENGTH = $expression;
-        return apiGetMappedBuffer($MAP_OLD, $RESULT, $MAP_LENGTH);"""
+        return ${if (useOldBuffer) "apiGetMappedBuffer($MAP_OLD, $RESULT, $MAP_LENGTH)" else "memByteBufferSafe($RESULT, $MAP_LENGTH)"};"""
 }
 
-internal class MapPointerExplicitTransform(val lengthParam: String, val addParam: Boolean = true) : FunctionTransform<ReturnValue> {
+internal class MapPointerExplicitTransform(val lengthParam: String, val useOldBuffer: Boolean, val addParam: Boolean = true) : FunctionTransform<ReturnValue> {
     override fun transformDeclaration(param: ReturnValue, original: String) = "ByteBuffer" // Return a ByteBuffer
-    override fun transformCall(param: ReturnValue, original: String) =
+    override fun transformCall(param: ReturnValue, original: String) = if (useOldBuffer)
         "apiGetMappedBuffer($MAP_OLD, $RESULT, (int)$lengthParam)"
+    else
+        "memByteBufferSafe($RESULT, (int)$lengthParam)"
 }
 
 internal val BufferLengthTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {

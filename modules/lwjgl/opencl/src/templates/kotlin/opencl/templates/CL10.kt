@@ -1205,7 +1205,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
         """
     )
 
-    MapPointer("size")..void.p(
+    MapPointer("size", oldBufferOverloads = true)..void.p(
         "EnqueueMapBuffer",
         """
         Enqueues a command to map a region of the buffer object given by buffer into the host address space and returns a pointer to this mapped region.
@@ -2004,7 +2004,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
     }
     """)
 
-    MapPointer("(int)getMemObjectInfoPointer(image, CL_MEM_SIZE)")..void.p(
+    MapPointer("(int)getMemObjectInfoPointer(image, CL_MEM_SIZE)", oldBufferOverloads = true)..void.p(
         "EnqueueMapImage",
         """
         Enqueues a command to map a region in the image object given by {@code image} into the host address space and returns a pointer to this mapped region.

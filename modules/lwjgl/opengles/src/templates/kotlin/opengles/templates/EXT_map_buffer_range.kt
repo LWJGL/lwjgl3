@@ -39,7 +39,7 @@ val EXT_map_buffer_range = "EXTMapBufferRange".nativeClassGLES("EXT_map_buffer_r
         "MAP_UNSYNCHRONIZED_BIT_EXT"..0x0020
     )
 
-    MapPointer("length")..void.p(
+    MapPointer("length", oldBufferOverloads = true)..void.p(
         "MapBufferRangeEXT",
         "",
 

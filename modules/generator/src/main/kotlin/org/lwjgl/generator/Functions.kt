@@ -1150,10 +1150,12 @@ class Func(
         else if (has<MapPointer>()) {
             val mapPointer = get<MapPointer>()
 
-            transforms[returns] = if (paramMap.containsKey(mapPointer.sizeExpression))
-                MapPointerExplicitTransform(lengthParam = mapPointer.sizeExpression, addParam = false)
-            else
-                MapPointerTransform(mapPointer.sizeExpression)
+            if (mapPointer.oldBufferOverloads) {
+                transforms[returns] = if (paramMap.containsKey(mapPointer.sizeExpression))
+                    MapPointerExplicitTransform(mapPointer.sizeExpression, useOldBuffer = true, addParam = false)
+                else
+                    MapPointerTransform(mapPointer.sizeExpression, useOldBuffer = true)
+            }
         }
 
         // Apply basic transformations
@@ -1179,12 +1181,11 @@ class Func(
             generateAlternativeMethod(name, transforms)
 
         // Generate more complex alternatives if necessary
-        if (has<MapPointer>()) {
-            // The size expression may be an existing parameter, in which case we don't need an explicit size alternative.
-            if (!paramMap.containsKey(get<MapPointer>().sizeExpression)) {
-                transforms[returns] = MapPointerExplicitTransform("length")
-                generateAlternativeMethod(name, transforms)
-            }
+
+        // The size expression may be an existing parameter, in which case we don't need an explicit size alternative.
+        if (has<MapPointer> { !paramMap.containsKey(sizeExpression) }) {
+            transforms[returns] = MapPointerExplicitTransform("length", get<MapPointer>().oldBufferOverloads)
+            generateAlternativeMethod(name, transforms)
         }
 
         // Apply any CharSequenceTransforms. These can be combined with any of the other transformations.
@@ -1530,17 +1531,24 @@ class Func(
             }
         }
         val returnTransform = transforms[returns]
-        if (returnTransform is MapPointerTransform) {
-            if (!parameters.isEmpty())
-                print(", ")
-            print("@Nullable ByteBuffer $MAP_OLD")
-        } else if (returnTransform != null && returnTransform::class.java === MapPointerExplicitTransform::class.java) {
-            if (!parameters.isEmpty())
-                print(", ")
-            val mapPointerExplicit = returnTransform as MapPointerExplicitTransform
-            if (mapPointerExplicit.addParam)
-                print("long ${mapPointerExplicit.lengthParam}, ")
-            print("@Nullable ByteBuffer $MAP_OLD")
+        when (returnTransform) {
+            is MapPointerTransform         -> {
+                if (returnTransform.useOldBuffer) {
+                    if (!parameters.isEmpty()) print(", ")
+                    print("@Nullable ByteBuffer $MAP_OLD")
+                }
+            }
+            is MapPointerExplicitTransform -> {
+                var hasParams = !parameters.isEmpty()
+                if (returnTransform.addParam) {
+                    if (hasParams) print(", ") else hasParams = true
+                    print("long ${returnTransform.lengthParam}")
+                }
+                if (returnTransform.useOldBuffer) {
+                    if (hasParams) print(", ")
+                    print("@Nullable ByteBuffer $MAP_OLD")
+                }
+            }
         }
         if (returns.isStructValue) {
             if (!parameters.isEmpty()) print(", ")

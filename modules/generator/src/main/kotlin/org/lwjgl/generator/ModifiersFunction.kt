@@ -172,7 +172,9 @@ object OffHeapOnly : FunctionModifier {
 /** Marks a return value as a pointer that should be mapped (wrapped in a ByteBuffer of some capacity). */
 class MapPointer(
     /** An expression that defines the ByteBuffer capacity. */
-    val sizeExpression: String
+    val sizeExpression: String,
+    /** If true, overloads with an old_buffer parameter will be generated. */
+    val oldBufferOverloads: Boolean = false // TODO: remove in LWJGL 4
 ) : FunctionModifier {
     override val isSpecial = true
     override fun validate(func: Func) {

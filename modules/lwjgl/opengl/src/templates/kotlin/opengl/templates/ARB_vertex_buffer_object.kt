@@ -210,7 +210,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
         )..void.p("data", "a pointer to the location where buffer object data is returned")
     )
 
-    MapPointer("glGetBufferParameteriARB(target, GL_BUFFER_SIZE_ARB)")..void.p(
+    MapPointer("glGetBufferParameteriARB(target, GL_BUFFER_SIZE_ARB)", oldBufferOverloads = true)..void.p(
         "MapBufferARB",
         """
         Maps a buffer object's data store.

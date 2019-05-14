@@ -400,7 +400,7 @@ val GL30C = "GL30C".nativeClassGL("GL30C") {
         "BUFFER_MAP_OFFSET"..0x9121
     )
 
-    MapPointer("length")..void.p(
+    MapPointer("length", oldBufferOverloads = true)..void.p(
         "MapBufferRange",
         """
         Maps a section of a buffer object's data store.

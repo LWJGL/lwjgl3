@@ -625,7 +625,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
         GLint("layer", "")
     )
 
-    MapPointer("length")..void.p(
+    MapPointer("length", oldBufferOverloads = true)..void.p(
         "MapBufferRange",
         "",
 
