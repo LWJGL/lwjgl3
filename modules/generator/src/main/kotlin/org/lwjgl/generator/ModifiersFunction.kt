@@ -180,8 +180,8 @@ class MapPointer(
         if (returnType !is PointerType<*>)
             throw IllegalArgumentException("The MapPointer modifier can only be applied to functions with pointer return types.")
 
-        if (returnType.elementType !is VoidType)
-            throw IllegalArgumentException("The MapPointer modifier can only be applied to functions with void pointer return types.")
+        if (!(returnType.elementType is VoidType || (returnType.elementType is PrimitiveType && returnType.elementType.mapping == PrimitiveMapping.BYTE)))
+            throw IllegalArgumentException("The MapPointer modifier can only be applied to functions with void/char pointer return types.")
     }
 }
 
