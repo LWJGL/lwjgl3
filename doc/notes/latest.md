@@ -7,11 +7,11 @@ This build includes the following changes:
 #### Bindings
 
 - bgfx: Updated to API version 99 (up from 90)
+- CUDA: Updated to 10.1 (up from 10.0)
 - glfw: Updated to 3.3.0 (up from 3.3.0 pre-release):
     * Added `GLFW_RAW_MOUSE_MOTION`.
     * Added `glfwGetMonitorWorkarea`.
     * Added `glfwRawMouseMotionSupported`.
-- CUDA: Updated to 10.1 (up from 10.0)
 - jemalloc: Updated to 5.2.0 (up from pre-release 5.2.0)
 - LibOVR: Updated to 1.35.0 (up from 1.31.0)
 - LLVM/Clang: Updated to 8.0 (up from 7.0)
