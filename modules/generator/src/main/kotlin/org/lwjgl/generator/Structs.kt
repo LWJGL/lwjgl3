@@ -204,7 +204,7 @@ class Struct(
 
     private val settableMembers: Sequence<StructMember> by lazy(LazyThreadSafetyMode.NONE) {
         val mutableMembers = mutableMembers()
-        mutableMembers.filter { !((it.has<AutoSizeMember>() && !it.get<AutoSizeMember>().keepSetter(mutableMembers)) || it.has<UserDataMember>()) }
+        mutableMembers.filter { !(it.has<AutoSizeMember> { !keepSetter(mutableMembers) } || it.has<UserDataMember>()) }
     }
 
     private fun hasMutableMembers(members: Sequence<StructMember> = publicMembers) = this.members.isNotEmpty() && (mutable || mutableMembers(members).any())
@@ -1337,8 +1337,7 @@ ${validations.joinToString("\n")}
     private fun PrintWriter.setRemaining(m: StructMember, offset: Int = 0, prefix: String = " ", suffix: String = "") {
         // do not do this if the AutoSize parameter auto-sizes multiple members
         val capacity = members.firstOrNull {
-            it.has<AutoSizeMember>() && it.get<AutoSizeMember>()
-                .let { autoSize -> autoSize.atLeastOne || (autoSize.dependent.isEmpty() && autoSize.reference == m.name) }
+            it.has<AutoSizeMember> { atLeastOne || (dependent.isEmpty() && reference == m.name) }
         }
         if (capacity != null) {
             val autoSize = capacity.get<AutoSizeMember>()

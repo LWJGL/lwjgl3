@@ -438,7 +438,7 @@ class NativeClass internal constructor(
                 }
                 if (functions.any {
                     it.returns.nativeType.needsCustomBuffer() || it.hasParam { param ->
-                        param.nativeType.needsCustomBuffer() || (param.has<MultiType>() && param.get<MultiType>().types.run { contains(PointerMapping.DATA_POINTER) || contains(PointerMapping.DATA_CLONG) })
+                        param.nativeType.needsCustomBuffer() || param.has<MultiType> { types.contains(PointerMapping.DATA_POINTER) || types.contains(PointerMapping.DATA_CLONG) }
                     }
                 })
                     println("import org.lwjgl.*;\n")
@@ -489,7 +489,7 @@ class NativeClass internal constructor(
                 println("import static org.lwjgl.system.MemoryUtil.*;")
                 if (functions.any { func ->
                     func.hasParam {
-                        it.has<MultiType>() && it.get<MultiType>().types.contains(PointerMapping.DATA_POINTER) && func.hasAutoSizeFor(it)
+                        it.has<MultiType> { types.contains(PointerMapping.DATA_POINTER) } && func.hasAutoSizeFor(it)
                     }
                 })
                     println("import static org.lwjgl.system.Pointer.*;")

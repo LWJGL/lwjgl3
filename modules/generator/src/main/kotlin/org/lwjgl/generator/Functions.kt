@@ -107,7 +107,7 @@ class Func(
 
     val functionAddress get() = if (has<NativeName>()) get<NativeName>().name else "\"${this.name}\""
 
-    val nativeName get() = if (has<NativeName>() && !get<NativeName>().nativeName.contains(' ')) get<NativeName>().nativeName else this.name
+    val nativeName get() = if (has<NativeName> { !nativeName.contains(' ') }) get<NativeName>().nativeName else this.name
 
     private val accessModifier
         get() = (if (has<AccessModifier>()) get<AccessModifier>().access else nativeClass.access).modifier
@@ -144,12 +144,12 @@ class Func(
         get() = this.parameters.isNotEmpty() && this.parameters.last() === EXPLICIT_FUNCTION_ADDRESS
 
     private val hasNativeCode
-        get() = (has<Code>() && get<Code>().let { it.nativeBeforeCall != null || it.nativeCall != null || it.nativeAfterCall != null }) || this.parameters.contains(JNI_ENV)
+        get() = (has<Code> { nativeBeforeCall != null || nativeCall != null || nativeAfterCall != null }) || this.parameters.contains(JNI_ENV)
 
-    internal val hasCustomJNIWithIgnoreAddress get() = (this.returns.isStructValue || hasNativeCode) && (!has<Macro>() || get<Macro>().expression == null)
+    internal val hasCustomJNIWithIgnoreAddress get() = (this.returns.isStructValue || hasNativeCode) && (!has<Macro> { expression != null })
 
     internal val hasCustomJNI: Boolean by lazy(LazyThreadSafetyMode.NONE) {
-        (!hasFunctionAddressParam || returns.isStructValue || hasNativeCode) && (!has<Macro>() || get<Macro>().expression == null)
+        (!hasFunctionAddressParam || returns.isStructValue || hasNativeCode) && (!has<Macro> { expression != null })
     }
 
     private val isNativeOnly: Boolean by lazy(LazyThreadSafetyMode.NONE) {
@@ -159,7 +159,7 @@ class Func(
                     || this.returns.isSpecial
                     || hasParam { it.isSpecial }
                     || has<NativeName>()
-                    || (has<Macro>() && get<Macro>().expression != null)
+                    || (has<Macro> { expression != null })
                 )
     }
 
@@ -169,7 +169,7 @@ class Func(
         && (this.returns.hasUnsafe || hasParam { it.hasUnsafe || it has MapToInt })
         && !has<Address>()
         && !hasParam { it.nativeType is ArrayType<*> }
-        && (!has<Macro>() || get<Macro>().expression == null)
+        && (!has<Macro> { expression != null })
     }
 
     internal val hasArrayOverloads
@@ -197,11 +197,11 @@ class Func(
         get() = if (this.isStructValue) "void" else this.nativeType.jniFunctionType
 
     internal val returnsNull
-        get() = !(has(Nonnull) || has(Address) || (has<Macro>() && !get<Macro>().function))
+        get() = !(has(Nonnull) || has(Address) || has<Macro> { !function })
 
     private inline fun <reified T> hasReference(reference: Parameter): (Parameter) -> Boolean
         where T : ParameterModifier,
-              T : ReferenceModifier = { it.has<T>() && it.get<T>().hasReference(reference.name) }
+              T : ReferenceModifier = { it.has<T> { hasReference(reference.name) } }
 
     private inline fun <reified T> hasReferenceFor(reference: Parameter)
         where T : ParameterModifier,
@@ -621,7 +621,7 @@ class Func(
         val hasReuse = has<Reuse>()
         val nativeOnly = isNativeOnly
 
-        val constantMacro = has<Macro>() && get<Macro>().constant
+        val constantMacro = has<Macro> { constant }
 
         if (hasCustomJNI && !(hasReuse && nativeOnly))
             writer.generateNativeMethod(constantMacro, nativeOnly, hasReuse)
@@ -630,7 +630,7 @@ class Func(
             if (hasUnsafeMethod)
                 writer.generateUnsafeMethod(constantMacro, hasReuse)
 
-            if ((returns.nativeType !is CharSequenceType || has<Address>() || has<MustBeDisposed>()) && parameters.none { (it.has<AutoSize>() && it.isInput) || (it.has<Expression>() && it.get<Expression>().skipNormal) })
+            if ((returns.nativeType !is CharSequenceType || has<Address>() || has<MustBeDisposed>()) && parameters.none { (it.has<AutoSize>() && it.isInput) || it.has<Expression> { skipNormal } })
                 writer.generateJavaMethod(constantMacro, hasReuse)
 
             writer.generateAlternativeMethods()
@@ -976,7 +976,7 @@ class Func(
                 print("($RESULT")
                 if (has<MapPointer>())
                     get<MapPointer>().sizeExpression.let { expression ->
-                        print(", ${if (paramMap[expression]?.nativeType?.mapping === PrimitiveMapping.POINTER) "(int)" else ""}$expression")
+                        print(", ${if (paramMap[expression].run { this != null && nativeType.mapping !== PrimitiveMapping.INT }) "(int)" else ""}$expression")
                     }
                 else {
                     val hasAutoSizeResult = hasParam { it.has<AutoSizeResultParam>() }
@@ -1364,7 +1364,7 @@ class Func(
                 return@let
 
             fun Parameter.getAutoSizeReference(): Parameter? = getParams {
-                it.has<AutoSize>() && it.get<AutoSize>().reference == this.name
+                it.has<AutoSize> { reference == this@getAutoSizeReference.name }
             }.firstOrNull()
 
             // Array version
@@ -1722,7 +1722,7 @@ class Func(
     ) {
         println()
 
-        generateAlternativeMethodSignature(name, transforms, description, has<Macro>() && get<Macro>().constant)
+        generateAlternativeMethodSignature(name, transforms, description, has<Macro> { constant })
 
         // Call the native method
         print("$t$t")
@@ -1946,7 +1946,7 @@ class Func(
                 if (parameters.isNotEmpty() && parameters[0] === JNI_ENV && nativeClass.className == "JNINativeInterface")
                     print("(*$JNIENV)->")
                 print(nativeName)
-                if (!has<Macro>() || get<Macro>().function) print('(')
+                if (!has<Macro> { !function }) print('(')
                 printList(getNativeParams(withExplicitFunctionAddress = false, withJNIEnv = true)) { param ->
                     param.nativeType.let {
                         if (it is StructType || it === va_list)
@@ -1961,7 +1961,7 @@ class Func(
                             param.name
                     }
                 }
-                if (!has<Macro>() || get<Macro>().function) print(')')
+                if (!has<Macro> { !function }) print(')')
                 println(';')
             }
         }
