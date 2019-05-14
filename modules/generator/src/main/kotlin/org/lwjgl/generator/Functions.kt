@@ -976,7 +976,17 @@ class Func(
                 print("($RESULT")
                 if (has<MapPointer>())
                     get<MapPointer>().sizeExpression.let { expression ->
-                        print(", ${if (paramMap[expression].run { this != null && nativeType.mapping !== PrimitiveMapping.INT }) "(int)" else ""}$expression")
+                        val castToInt =
+                            paramMap[expression].run { this != null && nativeType.mapping !== PrimitiveMapping.INT }
+                            ||
+                            expression.indexOf('(').run {
+                                if (this == -1) false else expression.substring(0, this).run {
+                                    nativeClass.functions
+                                        .singleOrNull { it.nativeName == this }?.let { it.returns.nativeType.mapping !== PrimitiveMapping.INT } ?: false
+                                }
+                            }
+
+                        print(", ${if (castToInt) "(int)" else ""}$expression")
                     }
                 else {
                     val hasAutoSizeResult = hasParam { it.has<AutoSizeResultParam>() }
