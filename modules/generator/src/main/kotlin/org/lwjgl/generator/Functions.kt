@@ -1874,7 +1874,7 @@ class Func(
                         } else {
                             "($variableType)"
                         }
-                        }${if (nativeClass.binding == null) "(intptr_t)" else ""}${it.name}$POINTER_POSTFIX;"
+                        }${if (variableType != "intptr_t") "(intptr_t)" else ""}${it.name}$POINTER_POSTFIX;"
                     )
                 }
         }
