@@ -20,6 +20,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.vulkan.EXTDebugReport.*;
 import static org.lwjgl.vulkan.KHRSurface.*;
 import static org.lwjgl.vulkan.KHRSwapchain.*;
+import static org.lwjgl.vulkan.NVRayTracing.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /*
@@ -1537,6 +1538,7 @@ public final class HelloVulkan {
                 .sType(VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET)
                 .dstSet(desc_set)
                 .descriptorType(VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER)
+                .descriptorCount(tex_descs.remaining())
                 .pImageInfo(tex_descs);
 
             vkUpdateDescriptorSets(device, write, null);
