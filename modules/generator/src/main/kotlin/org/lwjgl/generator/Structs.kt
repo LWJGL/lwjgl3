@@ -211,9 +211,10 @@ class Struct(
 
     operator fun get(name: String): StructMember = members.asSequence().first { it.name == name }
 
-    fun StructMember.replace(old: StructMember) {
+    fun StructMember.replace(old: StructMember): StructMember {
         members.remove(this)
         members[members.indexOf(old)] = this
+        return this
     }
 
     private fun add(member: StructMember): StructMember {

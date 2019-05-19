@@ -235,4 +235,8 @@ fun templateCustomization() {
         javaImport("static org.lwjgl.vulkan.VK10.*")
         javaImport("static org.lwjgl.vulkan.VK11.*")
     }
+
+    NV_ray_tracing.apply {
+        MultiType(PointerMapping.DATA_LONG)..this["GetAccelerationStructureHandleNV"].getParam("pData")
+    }
 }

@@ -1139,6 +1139,59 @@ public class NVRayTracing {
         return nvkGetAccelerationStructureHandleNV(device, accelerationStructure, pData.remaining(), memAddress(pData));
     }
 
+    /**
+     * Get opaque acceleration structure handle.
+     * 
+     * <h5>C Specification</h5>
+     * 
+     * <p>To allow constructing geometry instances with device code if desired, we need to be able to query a opaque handle for an acceleration structure. This handle is a value of 8 bytes. To get this handle, call:</p>
+     * 
+     * <pre><code>
+     * VkResult vkGetAccelerationStructureHandleNV(
+     *     VkDevice                                    device,
+     *     VkAccelerationStructureNV                   accelerationStructure,
+     *     size_t                                      dataSize,
+     *     void*                                       pData);</code></pre>
+     * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>{@code dataSize} <b>must</b> be large enough to contain the result of the query, as described above</li>
+     * </ul>
+     * 
+     * <h5>Valid Usage (Implicit)</h5>
+     * 
+     * <ul>
+     * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+     * <li>{@code accelerationStructure} <b>must</b> be a valid {@code VkAccelerationStructureNV} handle</li>
+     * <li>{@code pData} <b>must</b> be a valid pointer to an array of {@code dataSize} bytes</li>
+     * <li>{@code dataSize} <b>must</b> be greater than 0</li>
+     * <li>{@code accelerationStructure} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+     * </ul>
+     * 
+     * <h5>Return Codes</h5>
+     * 
+     * <dl>
+     * <dt>On success, this command returns</dt>
+     * <dd><ul>
+     * <li>{@link VK10#VK_SUCCESS SUCCESS}</li>
+     * </ul></dd>
+     * <dt>On failure, this command returns</dt>
+     * <dd><ul>
+     * <li>{@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY}</li>
+     * <li>{@link VK10#VK_ERROR_OUT_OF_DEVICE_MEMORY ERROR_OUT_OF_DEVICE_MEMORY}</li>
+     * </ul></dd>
+     * </dl>
+     *
+     * @param device                the logical device that owns the acceleration structures.
+     * @param accelerationStructure the acceleration structure.
+     * @param pData                 a pointer to a user-allocated buffer where the results will be written.
+     */
+    @NativeType("VkResult")
+    public static int vkGetAccelerationStructureHandleNV(VkDevice device, @NativeType("VkAccelerationStructureNV") long accelerationStructure, @NativeType("void *") LongBuffer pData) {
+        return nvkGetAccelerationStructureHandleNV(device, accelerationStructure, Integer.toUnsignedLong(pData.remaining()) << 3, memAddress(pData));
+    }
+
     // --- [ vkCmdWriteAccelerationStructuresPropertiesNV ] ---
 
     /**
@@ -1296,6 +1349,16 @@ public class NVRayTracing {
             if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPJPPPI(device.address(), pipelineCache, pCreateInfos.remaining(), pCreateInfos.address(), memAddressSafe(pAllocator), pPipelines, __functionAddress);
+    }
+
+    /** Array version of: {@link #vkGetAccelerationStructureHandleNV GetAccelerationStructureHandleNV} */
+    @NativeType("VkResult")
+    public static int vkGetAccelerationStructureHandleNV(VkDevice device, @NativeType("VkAccelerationStructureNV") long accelerationStructure, @NativeType("void *") long[] pData) {
+        long __functionAddress = device.getCapabilities().vkGetAccelerationStructureHandleNV;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callPJPPI(device.address(), accelerationStructure, Integer.toUnsignedLong(pData.length) << 3, pData, __functionAddress);
     }
 
     /** Array version of: {@link #vkCmdWriteAccelerationStructuresPropertiesNV CmdWriteAccelerationStructuresPropertiesNV} */
