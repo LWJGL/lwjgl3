@@ -85,7 +85,6 @@ public class KHRPushDescriptor {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdPushDescriptorSetKHR;
         if (CHECKS) {
             check(__functionAddress);
-            VkWriteDescriptorSet.validate(pDescriptorWrites, descriptorWriteCount);
         }
         callPJPV(commandBuffer.address(), pipelineBindPoint, layout, set, descriptorWriteCount, pDescriptorWrites, __functionAddress);
     }

@@ -9157,9 +9157,6 @@ public class VK10 {
      */
     public static void nvkUpdateDescriptorSets(VkDevice device, int descriptorWriteCount, long pDescriptorWrites, int descriptorCopyCount, long pDescriptorCopies) {
         long __functionAddress = device.getCapabilities().vkUpdateDescriptorSets;
-        if (CHECKS) {
-            if (pDescriptorWrites != NULL) { VkWriteDescriptorSet.validate(pDescriptorWrites, descriptorWriteCount); }
-        }
         callPPPV(device.address(), descriptorWriteCount, pDescriptorWrites, descriptorCopyCount, pDescriptorCopies, __functionAddress);
     }
 

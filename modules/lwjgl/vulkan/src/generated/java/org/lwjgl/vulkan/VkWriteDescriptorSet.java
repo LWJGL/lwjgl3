@@ -222,6 +222,8 @@ public class VkWriteDescriptorSet extends Struct implements NativeResource {
     public VkWriteDescriptorSet dstBinding(@NativeType("uint32_t") int value) { ndstBinding(address(), value); return this; }
     /** Sets the specified value to the {@code dstArrayElement} field. */
     public VkWriteDescriptorSet dstArrayElement(@NativeType("uint32_t") int value) { ndstArrayElement(address(), value); return this; }
+    /** Sets the specified value to the {@code descriptorCount} field. */
+    public VkWriteDescriptorSet descriptorCount(@NativeType("uint32_t") int value) { ndescriptorCount(address(), value); return this; }
     /** Sets the specified value to the {@code descriptorType} field. */
     public VkWriteDescriptorSet descriptorType(@NativeType("VkDescriptorType") int value) { ndescriptorType(address(), value); return this; }
     /** Sets the address of the specified {@link VkDescriptorImageInfo.Buffer} to the {@code pImageInfo} field. */
@@ -238,6 +240,7 @@ public class VkWriteDescriptorSet extends Struct implements NativeResource {
         long dstSet,
         int dstBinding,
         int dstArrayElement,
+        int descriptorCount,
         int descriptorType,
         @Nullable VkDescriptorImageInfo.Buffer pImageInfo,
         @Nullable VkDescriptorBufferInfo.Buffer pBufferInfo,
@@ -248,6 +251,7 @@ public class VkWriteDescriptorSet extends Struct implements NativeResource {
         dstSet(dstSet);
         dstBinding(dstBinding);
         dstArrayElement(dstArrayElement);
+        descriptorCount(descriptorCount);
         descriptorType(descriptorType);
         pImageInfo(pImageInfo);
         pBufferInfo(pBufferInfo);
@@ -447,40 +451,11 @@ public class VkWriteDescriptorSet extends Struct implements NativeResource {
     /** Unsafe version of {@link #descriptorType(int) descriptorType}. */
     public static void ndescriptorType(long struct, int value) { UNSAFE.putInt(null, struct + VkWriteDescriptorSet.DESCRIPTORTYPE, value); }
     /** Unsafe version of {@link #pImageInfo(VkDescriptorImageInfo.Buffer) pImageInfo}. */
-    public static void npImageInfo(long struct, @Nullable VkDescriptorImageInfo.Buffer value) { memPutAddress(struct + VkWriteDescriptorSet.PIMAGEINFO, memAddressSafe(value)); if (value != null) { ndescriptorCount(struct, value.remaining()); } }
+    public static void npImageInfo(long struct, @Nullable VkDescriptorImageInfo.Buffer value) { memPutAddress(struct + VkWriteDescriptorSet.PIMAGEINFO, memAddressSafe(value)); }
     /** Unsafe version of {@link #pBufferInfo(VkDescriptorBufferInfo.Buffer) pBufferInfo}. */
-    public static void npBufferInfo(long struct, @Nullable VkDescriptorBufferInfo.Buffer value) { memPutAddress(struct + VkWriteDescriptorSet.PBUFFERINFO, memAddressSafe(value)); if (value != null) { ndescriptorCount(struct, value.remaining()); } }
+    public static void npBufferInfo(long struct, @Nullable VkDescriptorBufferInfo.Buffer value) { memPutAddress(struct + VkWriteDescriptorSet.PBUFFERINFO, memAddressSafe(value)); }
     /** Unsafe version of {@link #pTexelBufferView(LongBuffer) pTexelBufferView}. */
-    public static void npTexelBufferView(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkWriteDescriptorSet.PTEXELBUFFERVIEW, memAddressSafe(value)); if (value != null) { ndescriptorCount(struct, value.remaining()); } }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        int descriptorCount = ndescriptorCount(struct);
-        if (
-            descriptorCount == 0 || (
-            memGetAddress(struct + VkWriteDescriptorSet.PIMAGEINFO) == NULL &&
-            memGetAddress(struct + VkWriteDescriptorSet.PBUFFERINFO) == NULL &&
-            memGetAddress(struct + VkWriteDescriptorSet.PTEXELBUFFERVIEW) == NULL
-        )) {
-            throw new NullPointerException("At least one of pImageInfo, pBufferInfo, pTexelBufferView must not be null");
-        }
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
-        }
-    }
+    public static void npTexelBufferView(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkWriteDescriptorSet.PTEXELBUFFERVIEW, memAddressSafe(value)); }
 
     // -----------------------------------
 
@@ -564,6 +539,8 @@ public class VkWriteDescriptorSet extends Struct implements NativeResource {
         public VkWriteDescriptorSet.Buffer dstBinding(@NativeType("uint32_t") int value) { VkWriteDescriptorSet.ndstBinding(address(), value); return this; }
         /** Sets the specified value to the {@code dstArrayElement} field. */
         public VkWriteDescriptorSet.Buffer dstArrayElement(@NativeType("uint32_t") int value) { VkWriteDescriptorSet.ndstArrayElement(address(), value); return this; }
+        /** Sets the specified value to the {@code descriptorCount} field. */
+        public VkWriteDescriptorSet.Buffer descriptorCount(@NativeType("uint32_t") int value) { VkWriteDescriptorSet.ndescriptorCount(address(), value); return this; }
         /** Sets the specified value to the {@code descriptorType} field. */
         public VkWriteDescriptorSet.Buffer descriptorType(@NativeType("VkDescriptorType") int value) { VkWriteDescriptorSet.ndescriptorType(address(), value); return this; }
         /** Sets the address of the specified {@link VkDescriptorImageInfo.Buffer} to the {@code pImageInfo} field. */
