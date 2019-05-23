@@ -124,6 +124,36 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
         return self();
     }
 
+    /**
+     * Relative <i>apply</i> method.
+     *
+     * <p>Passes the struct at the buffer's current position to the specified {@link Consumer}, and then increments the position.</p>
+     *
+     * @return This buffer
+     *
+     * @throws java.nio.BufferUnderflowException If the buffer's current position is not smaller than its limit
+     */
+    public SELF apply(Consumer<T> consumer) {
+        consumer.accept(get());
+        return self();
+    }
+
+    /**
+     * Absolute <i>apply</i> method.
+     *
+     * <p>Passes the struct at the specified position to the specified {@link Consumer}.</p>
+     *
+     * @param index the index where the {@code consumer} will be applied.
+     *
+     * @return This buffer
+     *
+     * @throws IndexOutOfBoundsException If {@code index} is negative or not smaller than the buffer's limit
+     */
+    public SELF apply(int index, Consumer<T> consumer) {
+        consumer.accept(get(index));
+        return self();
+    }
+
     // --------------------------------------
 
     @Override

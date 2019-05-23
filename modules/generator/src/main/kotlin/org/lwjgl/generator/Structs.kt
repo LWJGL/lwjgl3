@@ -33,7 +33,7 @@ private val BUFFER_KEYWORDS = setOf(
     "address0", "capacity", "clear", "compact", "duplicate", "flip", "hasRemaining", "limit", "mark", "position", "remaining", "reset", "rewind",
     "slice",
     // StructBuffer
-    "get", "parallelStream", "put", "stream"
+    "apply", "get", "parallelStream", "put", "stream"
 )
 
 open class StructMember(

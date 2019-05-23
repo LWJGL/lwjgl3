@@ -73,8 +73,8 @@ public class BufferTest {
         buffer.get(array);
         assertEquals(buffer.remaining(), 0);
         buffer.flip();
-        for (int i = 0; i < array.length; i++) {
-            assertEquals(array[i], buffer.get());
+        for (long l : array) {
+            assertEquals(l, buffer.get());
         }
 
         for (int i = 0; i < array.length; i++) {
@@ -84,8 +84,8 @@ public class BufferTest {
         buffer.put(array);
         assertEquals(buffer.remaining(), 0);
         buffer.flip();
-        for (int i = 0; i < array.length; i++) {
-            assertEquals(buffer.get(), array[i]);
+        for (long l : array) {
+            assertEquals(buffer.get(), l);
         }
 
         memFree(buffer);
