@@ -31,7 +31,7 @@ public class GLFW {
     public static final int GLFW_VERSION_MAJOR = 3;
 
     /** The minor version number of the GLFW library. This is incremented when features are added to the API but it remains backward-compatible. */
-    public static final int GLFW_VERSION_MINOR = 3;
+    public static final int GLFW_VERSION_MINOR = 4;
 
     /** The revision number of the GLFW library. This is incremented when a bug fix release is made that does not contain any API changes. */
     public static final int GLFW_VERSION_REVISION = 0;
@@ -2447,8 +2447,7 @@ public class GLFW {
      * 
      * <ul>
      * <li>This function must only be called from the main thread.</li>
-     * <li><b>Wayland</b>: There is no concept of iconification in {@code wl_shell}, this function will emit {@link #GLFW_PLATFORM_ERROR PLATFORM_ERROR} when using this deprecated
-     * protocol.</li>
+     * <li><b>Wayland</b>: Once a window is iconified, {@link #glfwRestoreWindow RestoreWindow} won’t be able to restore it. This is a design decision of the {@code xdg-shell}.</li>
      * </ul>
      *
      * @param window the window to iconify
@@ -2957,13 +2956,7 @@ public class GLFW {
     /**
      * Sets the iconification callback of the specified window, which is called when the window is iconified or restored.
      * 
-     * <p>Notes:</p>
-     * 
-     * <ul>
-     * <li>This function must only be called from the main thread.</li>
-     * <li><b>Wayland</b>: The {@code wl_shell} protocol has no concept of iconification, this callback will never be called when using this deprecated
-     * protocol.</li>
-     * </ul>
+     * <p>This function must only be called from the main thread.</p>
      *
      * @param window the window whose callback to set
      * @param cbfun  the new callback or {@code NULL} to remove the currently set callback

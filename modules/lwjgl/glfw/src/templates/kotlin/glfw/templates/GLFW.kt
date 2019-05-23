@@ -25,7 +25,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     IntConstant(
         "The minor version number of the GLFW library. This is incremented when features are added to the API but it remains backward-compatible.",
 
-        "VERSION_MINOR".."3"
+        "VERSION_MINOR".."4"
     )
 
     IntConstant(
@@ -1807,10 +1807,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         Notes:
         ${ul(
             "This function must only be called from the main thread.",
-            """
-            <b>Wayland</b>: There is no concept of iconification in {@code wl_shell}, this function will emit #PLATFORM_ERROR when using this deprecated
-            protocol.
-            """
+            "<b>Wayland</b>: Once a window is iconified, #RestoreWindow() won’t be able to restore it. This is a design decision of the {@code xdg-shell}."
         )}
         """,
 
@@ -2165,14 +2162,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """
         Sets the iconification callback of the specified window, which is called when the window is iconified or restored.
 
-        Notes:
-        ${ul(
-            "This function must only be called from the main thread.",
-            """
-            <b>Wayland</b>: The {@code wl_shell} protocol has no concept of iconification, this callback will never be called when using this deprecated
-            protocol.
-            """
-        )}
+        This function must only be called from the main thread.
         """,
 
         CALLBACK_WINDOW,
