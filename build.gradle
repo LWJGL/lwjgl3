@@ -363,7 +363,6 @@ def lwjglPOM = { String projectName, String projectDescription ->
         project {
             name projectName
             description projectDescription
-            packaging "jar"
             url 'https://www.lwjgl.org'
 
             scm {
@@ -397,7 +396,6 @@ def bindingPOM = { String projectName, String projectDescription ->
         project {
             name projectName
             description projectDescription
-            packaging "jar"
             url 'https://www.lwjgl.org'
 
             scm {

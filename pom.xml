@@ -1,0 +1,44 @@
+<!--
+  ~ Copyright LWJGL. All rights reserved.
+  ~ License terms: https://www.lwjgl.org/license
+
+  This file is only useful for tracking GitHub projects that depend on LWJGL.
+  -->
+<project
+        xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.lwjgl</groupId>
+    <artifactId>lwjgl</artifactId>
+    <version>3.2.3-SNAPSHOT</version>
+
+    <name>LWJGL</name>
+    <description>The LWJGL core library.</description>
+    <url>https://www.lwjgl.org</url>
+
+    <licenses>
+        <license>
+            <name>BSD</name>
+            <url>https://www.lwjgl.org/license</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>spasi</id>
+            <name>Ioannis Tsakpinis</name>
+            <email>iotsakp@gmail.com</email>
+            <url>https://github.com/Spasi</url>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/LWJGL/lwjgl3.git</connection>
+        <developerConnection>scm:git:https://github.com/LWJGL/lwjgl3.git</developerConnection>
+        <url>https://github.com/LWJGL/lwjgl3.git</url>
+    </scm>
+</project>
