@@ -67,11 +67,32 @@ public class EXTCalibratedTimestamps {
      * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_TIME_DOMAIN_DEVICE_EXT TIME_DOMAIN_DEVICE_EXT} specifies the device time domain. Timestamp values in this time domain are comparable with device timestamp values captured using {@link VK10#vkCmdWriteTimestamp CmdWriteTimestamp} and are defined to be incrementing according to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#limits-timestampPeriod">timestampPeriod</a> of the device.</li>
-     * <li>{@link #VK_TIME_DOMAIN_CLOCK_MONOTONIC_EXT TIME_DOMAIN_CLOCK_MONOTONIC_EXT} specifies the CLOCK_MONOTONIC time domain available on POSIX platforms.</li>
-     * <li>{@link #VK_TIME_DOMAIN_CLOCK_MONOTONIC_RAW_EXT TIME_DOMAIN_CLOCK_MONOTONIC_RAW_EXT} specifies the CLOCK_MONOTONIC_RAW time domain available on POSIX platforms.</li>
-     * <li>{@link #VK_TIME_DOMAIN_QUERY_PERFORMANCE_COUNTER_EXT TIME_DOMAIN_QUERY_PERFORMANCE_COUNTER_EXT} specifies the performance counter (QPC) time domain available on Windows.</li>
+     * <li>{@link #VK_TIME_DOMAIN_DEVICE_EXT TIME_DOMAIN_DEVICE_EXT} specifies the device time domain. Timestamp values in this time domain use the same units and are comparable with device timestamp values captured using {@link VK10#vkCmdWriteTimestamp CmdWriteTimestamp} and are defined to be incrementing according to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#limits-timestampPeriod">timestampPeriod</a> of the device.</li>
+     * <li>{@link #VK_TIME_DOMAIN_CLOCK_MONOTONIC_EXT TIME_DOMAIN_CLOCK_MONOTONIC_EXT} specifies the CLOCK_MONOTONIC time domain available on POSIX platforms. Timestamp values in this time domain are in units of nanoseconds and are comparable with platform timestamp values captured using the POSIX clock_gettime API as computed by this example:</li>
      * </ul>
+     * 
+     * <pre><code>
+     * struct timespec tv;
+     * clock_gettime(CLOCK_MONOTONIC, &amp;tv);
+     * return tv.tv_nsec + tv.tv_sec*1000000000ull;</code></pre>
+     * 
+     * <ul>
+     * <li>{@link #VK_TIME_DOMAIN_CLOCK_MONOTONIC_RAW_EXT TIME_DOMAIN_CLOCK_MONOTONIC_RAW_EXT} specifies the CLOCK_MONOTONIC_RAW time domain available on POSIX platforms. Timestamp values in this time domain are in units of nanoseconds and are comparable with platform timestamp values captured using the POSIX clock_gettime API as computed by this example:</li>
+     * </ul>
+     * 
+     * <pre><code>
+     * struct timespec tv;
+     * clock_gettime(CLOCK_MONOTONIC_RAW, &amp;tv);
+     * return tv.tv_nsec + tv.tv_sec*1000000000ull;</code></pre>
+     * 
+     * <ul>
+     * <li>{@link #VK_TIME_DOMAIN_QUERY_PERFORMANCE_COUNTER_EXT TIME_DOMAIN_QUERY_PERFORMANCE_COUNTER_EXT} specifies the performance counter (QPC) time domain available on Windows. Timestamp values in this time domain are in the same units as those provided by the Windows QueryPerformanceCounter API and are comparable with platform timestamp values captured using that API as computed by this example:</li>
+     * </ul>
+     * 
+     * <pre><code>
+     * LARGE_INTEGER counter;
+     * QueryPerformanceCounter(&amp;counter);
+     * return counter.QuadPart;</code></pre>
      * 
      * <h5>See Also</h5>
      * 

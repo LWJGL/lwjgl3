@@ -292,7 +292,7 @@ public class KHRGetPhysicalDeviceProperties2 {
      * See {@link VK11#vkGetPhysicalDeviceMemoryProperties2 GetPhysicalDeviceMemoryProperties2}.
      *
      * @param physicalDevice    the handle to the device to query.
-     * @param pMemoryProperties points to an instance of {@link VkPhysicalDeviceMemoryProperties2} structure in which the properties are returned.
+     * @param pMemoryProperties points to an instance of the {@link VkPhysicalDeviceMemoryProperties2} structure in which the properties are returned.
      */
     public static void vkGetPhysicalDeviceMemoryProperties2KHR(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceMemoryProperties2 *") VkPhysicalDeviceMemoryProperties2 pMemoryProperties) {
         nvkGetPhysicalDeviceMemoryProperties2KHR(physicalDevice, pMemoryProperties.address());

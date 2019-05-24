@@ -215,11 +215,11 @@ public class NVShadingRateImage {
      * 
      * <ul>
      * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-     * <li>{@code imageView} <b>must</b> be a valid {@code VkImageView} handle</li>
+     * <li>If {@code imageView} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code imageView} <b>must</b> be a valid {@code VkImageView} handle</li>
      * <li>{@code imageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
      * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
      * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
-     * <li>Both of {@code commandBuffer}, and {@code imageView} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+     * <li>Both of {@code commandBuffer}, and {@code imageView} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
      * </ul>
      * 
      * <h5>Host Synchronization</h5>

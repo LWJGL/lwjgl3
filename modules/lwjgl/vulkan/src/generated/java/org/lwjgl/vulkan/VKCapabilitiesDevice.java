@@ -261,6 +261,18 @@ public class VKCapabilitiesDevice {
         vkGetRefreshCycleDurationGOOGLE,
         vkGetPastPresentationTimingGOOGLE;
 
+    // INTEL_performance_query
+    public final long
+        vkInitializePerformanceApiINTEL,
+        vkUninitializePerformanceApiINTEL,
+        vkCmdSetPerformanceMarkerINTEL,
+        vkCmdSetPerformanceStreamMarkerINTEL,
+        vkCmdSetPerformanceOverrideINTEL,
+        vkAcquirePerformanceConfigurationINTEL,
+        vkReleasePerformanceConfigurationINTEL,
+        vkQueueSetPerformanceConfigurationINTEL,
+        vkGetPerformanceParameterINTEL;
+
     // KHR_bind_memory2
     public final long
         vkBindBufferMemory2KHR,
@@ -555,6 +567,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_IMG_filter_cubic;
     /** When true, {@link IMGFormatPVRTC} is supported. */
     public final boolean VK_IMG_format_pvrtc;
+    /** When true, {@link INTELPerformanceQuery} is supported. */
+    public final boolean VK_INTEL_performance_query;
     /** When true, {@link INTELShaderIntegerFunctions2} is supported. */
     public final boolean VK_INTEL_shader_integer_functions2;
     /** When true, {@link KHR16bitStorage} is supported. */
@@ -707,7 +721,7 @@ public class VKCapabilitiesDevice {
     VKCapabilitiesDevice(FunctionProvider provider, VKCapabilitiesInstance capsInstance, Set<String> ext) {
         this.apiVersion = capsInstance.apiVersion;
 
-        Map<String, Long> caps = new HashMap<>(261);
+        Map<String, Long> caps = new HashMap<>(270);
 
         Vulkan10 = VK10.checkCapsDevice(provider, caps, ext);
         Vulkan11 = VK11.checkCapsDevice(provider, caps, ext);
@@ -775,6 +789,7 @@ public class VKCapabilitiesDevice {
         VK_GOOGLE_hlsl_functionality1 = ext.contains("VK_GOOGLE_hlsl_functionality1");
         VK_IMG_filter_cubic = ext.contains("VK_IMG_filter_cubic");
         VK_IMG_format_pvrtc = ext.contains("VK_IMG_format_pvrtc");
+        VK_INTEL_performance_query = INTELPerformanceQuery.checkCapsDevice(provider, caps, ext);
         VK_INTEL_shader_integer_functions2 = ext.contains("VK_INTEL_shader_integer_functions2");
         VK_KHR_16bit_storage = ext.contains("VK_KHR_16bit_storage");
         VK_KHR_8bit_storage = ext.contains("VK_KHR_8bit_storage");
@@ -1034,6 +1049,15 @@ public class VKCapabilitiesDevice {
         vkGetValidationCacheDataEXT = VK.get(caps, "vkGetValidationCacheDataEXT");
         vkGetRefreshCycleDurationGOOGLE = VK.get(caps, "vkGetRefreshCycleDurationGOOGLE");
         vkGetPastPresentationTimingGOOGLE = VK.get(caps, "vkGetPastPresentationTimingGOOGLE");
+        vkInitializePerformanceApiINTEL = VK.get(caps, "vkInitializePerformanceApiINTEL");
+        vkUninitializePerformanceApiINTEL = VK.get(caps, "vkUninitializePerformanceApiINTEL");
+        vkCmdSetPerformanceMarkerINTEL = VK.get(caps, "vkCmdSetPerformanceMarkerINTEL");
+        vkCmdSetPerformanceStreamMarkerINTEL = VK.get(caps, "vkCmdSetPerformanceStreamMarkerINTEL");
+        vkCmdSetPerformanceOverrideINTEL = VK.get(caps, "vkCmdSetPerformanceOverrideINTEL");
+        vkAcquirePerformanceConfigurationINTEL = VK.get(caps, "vkAcquirePerformanceConfigurationINTEL");
+        vkReleasePerformanceConfigurationINTEL = VK.get(caps, "vkReleasePerformanceConfigurationINTEL");
+        vkQueueSetPerformanceConfigurationINTEL = VK.get(caps, "vkQueueSetPerformanceConfigurationINTEL");
+        vkGetPerformanceParameterINTEL = VK.get(caps, "vkGetPerformanceParameterINTEL");
         vkBindBufferMemory2KHR = VK.get(caps, "vkBindBufferMemory2KHR");
         vkBindImageMemory2KHR = VK.get(caps, "vkBindImageMemory2KHR");
         vkCreateRenderPass2KHR = VK.get(caps, "vkCreateRenderPass2KHR");

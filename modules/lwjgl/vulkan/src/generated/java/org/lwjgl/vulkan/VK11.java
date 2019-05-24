@@ -2134,7 +2134,7 @@ public class VK11 extends VK10 {
      * <p>{@link VkPhysicalDeviceMemoryProperties2}</p>
      *
      * @param physicalDevice    the handle to the device to query.
-     * @param pMemoryProperties points to an instance of {@link VkPhysicalDeviceMemoryProperties2} structure in which the properties are returned.
+     * @param pMemoryProperties points to an instance of the {@link VkPhysicalDeviceMemoryProperties2} structure in which the properties are returned.
      */
     public static void vkGetPhysicalDeviceMemoryProperties2(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceMemoryProperties2 *") VkPhysicalDeviceMemoryProperties2 pMemoryProperties) {
         nvkGetPhysicalDeviceMemoryProperties2(physicalDevice, pMemoryProperties.address());

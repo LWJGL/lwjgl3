@@ -46,8 +46,8 @@ import org.lwjgl.system.windows.*;
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code flags} &ndash; reserved for future use.</li>
- * <li>{@code hinstance} &ndash; {@code hinstance} and {@code hwnd} are the Win32 {@code HINSTANCE} and {@code HWND} for the window to associate the surface with.</li>
- * <li>{@code hwnd} &ndash; see {@code hinstance}</li>
+ * <li>{@code hinstance} &ndash; the Win32 {@code HINSTANCE} for the window to associate the surface with.</li>
+ * <li>{@code hwnd} &ndash; the Win32 {@code HWND} for the window to associate the surface with.</li>
  * </ul>
  * 
  * <h3>Layout</h3>
