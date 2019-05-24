@@ -63,9 +63,6 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "STATE_BLEND_EQUATION_MIN"..0x0000000030000000L,
         "STATE_BLEND_EQUATION_MAX"..0x0000000040000000L,
 
-        "STATE_BLEND_INDEPENDENT"..0x0000000400000000L,
-        "STATE_BLEND_ALPHA_TO_COVERAGE"..0x0000000800000000L,
-
         "STATE_CULL_CW"..0x0000001000000000L,
         "STATE_CULL_CCW"..0x0000002000000000L,
 
@@ -79,6 +76,9 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "STATE_CONSERVATIVE_RASTER"..0x0400000000000000L,
 
         "STATE_NONE"..0x0000000000000000L,
+
+        "STATE_BLEND_INDEPENDENT"..0x0000000400000000L,
+        "STATE_BLEND_ALPHA_TO_COVERAGE"..0x0000000800000000L,
 
         "STATE_DEFAULT".."""(0L
         | BGFX_STATE_WRITE_RGB
@@ -432,6 +432,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "CAPS_FRAGMENT_ORDERING"..0x0000000000000040L,
         "CAPS_FRAMEBUFFER_RW"..0x0000000000000080L,
         "CAPS_GRAPHICS_DEBUGGER"..0x0000000000000100L,
+        "CAPS_RESERVED"..0x0000000000000200L,
         "CAPS_HDR10"..0x0000000000000400L,
         "CAPS_HIDPI"..0x0000000000000800L,
         "CAPS_INDEX32"..0x0000000000001000L,
@@ -442,8 +443,9 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "CAPS_TEXTURE_2D_ARRAY"..0x0000000000020000L,
         "CAPS_TEXTURE_3D"..0x0000000000040000L,
         "CAPS_TEXTURE_BLIT"..0x0000000000180000L,
-        "CAPS_TEXTURE_COMPARE_ALL"..0x0000000000100000L,
+        "CAPS_TEXTURE_COMPARE_RESERVED"..0x0000000000100000L,
         "CAPS_TEXTURE_COMPARE_LEQUAL"..0x0000000000200000L,
+        "CAPS_TEXTURE_COMPARE_ALL".."BGFX_CAPS_TEXTURE_COMPARE_RESERVED | BGFX_CAPS_TEXTURE_COMPARE_LEQUAL",
         "CAPS_TEXTURE_CUBE_ARRAY"..0x0000000000400000L,
         "CAPS_TEXTURE_DIRECT_ACCESS"..0x0000000000800000L,
         "CAPS_TEXTURE_READ_BACK"..0x0000000001000000L,
@@ -500,6 +502,18 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "CUBE_MAP_POSITIVE_Z"..0x04.b,
         "CUBE_MAP_NEGATIVE_Z"..0x05.b
     ).javaDocLinks
+
+    EnumConstant(
+        "Fatal errors ({@code bgfx_fatal_t}).",
+
+        "FATAL_DEBUG_CHECK".enum,
+        "FATAL_INVALID_SHADER".enum,
+        "FATAL_UNABLE_TO_INITIALIZE".enum,
+        "FATAL_UNABLE_TO_CREATE_TEXTURE".enum,
+        "FATAL_DEVICE_LOST".enum,
+
+        "FATAL_COUNT".enum
+    )
 
     val RendererType = EnumConstant(
         "Renderer backend type. ({@code bgfx_renderer_type_t})",
@@ -764,18 +778,6 @@ RGBA16S
 
         "VIEW_MODE_COUNT".enum
     ).javaDocLinksSkipCount
-
-    EnumConstant(
-        "Fatal errors ({@code bgfx_fatal_t}).",
-
-        "FATAL_DEBUG_CHECK".enum,
-        "FATAL_INVALID_SHADER".enum,
-        "FATAL_UNABLE_TO_INITIALIZE".enum,
-        "FATAL_UNABLE_TO_CREATE_TEXTURE".enum,
-        "FATAL_DEVICE_LOST".enum,
-
-        "FATAL_COUNT".enum
-    )
 
     void(
         "attachment_init",
@@ -3011,6 +3013,12 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
     macro(expression = "(_index << BGFX_SAMPLER_BORDER_COLOR_SHIFT) & BGFX_SAMPLER_BORDER_COLOR_MASK")..uint32_t(
         "BGFX_SAMPLER_BORDER_COLOR", "",
         uint32_t("_index", ""),
+        noPrefix = true
+    )
+
+    macro(expression = "Short.toUnsignedInt(h) != 0xFFFF")..bool(
+        "BGFX_HANDLE_IS_VALID", "",
+        uint16_t("h", ""),
         noPrefix = true
     )
 }
