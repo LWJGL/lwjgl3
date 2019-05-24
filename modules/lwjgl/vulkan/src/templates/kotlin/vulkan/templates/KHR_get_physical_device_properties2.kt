@@ -186,7 +186,7 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
         "See #GetPhysicalDeviceMemoryProperties2().",
 
         VkPhysicalDevice("physicalDevice", "the handle to the device to query."),
-        VkPhysicalDeviceMemoryProperties2.p("pMemoryProperties", "points to an instance of ##VkPhysicalDeviceMemoryProperties2 structure in which the properties are returned.")
+        VkPhysicalDeviceMemoryProperties2.p("pMemoryProperties", "points to an instance of the ##VkPhysicalDeviceMemoryProperties2 structure in which the properties are returned.")
     )
 
     void(

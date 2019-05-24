@@ -1613,7 +1613,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         """,
 
         VkPhysicalDevice("physicalDevice", "the handle to the device to query."),
-        VkPhysicalDeviceMemoryProperties2.p("pMemoryProperties", "points to an instance of ##VkPhysicalDeviceMemoryProperties2 structure in which the properties are returned.")
+        VkPhysicalDeviceMemoryProperties2.p("pMemoryProperties", "points to an instance of the ##VkPhysicalDeviceMemoryProperties2 structure in which the properties are returned.")
     )
 
     void(

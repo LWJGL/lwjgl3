@@ -7195,6 +7195,17 @@ JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_system_JNI_callPPPI__JIII_3I_3IJ(j
     return CRITICAL(org_lwjgl_system_JNI_callPPPI__JIIIJJJ)(param0, param1, param2, param3, (intptr_t)param4, (intptr_t)param5, __functionAddress);
 }
 #endif
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_JNI_callPJPPI__JJJ_3JJ(JNIEnv *__env, jclass clazz, jlong param0, jlong param1, jlong param2, jlongArray param3, jlong __functionAddress) {
+    UNUSED_PARAMS(__env, clazz)
+    void *paramArray3 = param3 == NULL ? NULL : (*__env)->GetPrimitiveArrayCritical(__env, param3, 0);
+    jint __result = JavaCritical_org_lwjgl_system_JNI_callPJPPI__JJJJJ(param0, param1, param2, (intptr_t)paramArray3, __functionAddress);
+    if (param3 != NULL) { (*__env)->ReleasePrimitiveArrayCritical(__env, param3, paramArray3, 0); }
+    return __result;
+}
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_system_JNI_callPJPPI__JJJ_3JJ(jlong param0, jlong param1, jlong param2, jint length3, jlong* param3, jlong __functionAddress) {
+    UNUSED_PARAM(length3)
+    return JavaCritical_org_lwjgl_system_JNI_callPJPPI__JJJJJ(param0, param1, param2, (intptr_t)param3, __functionAddress);
+}
 JNIEXPORT jint JNICALL Java_org_lwjgl_system_JNI_callPJPPI__JJ_3IJJ(JNIEnv *__env, jclass clazz, jlong param0, jlong param1, jintArray param2, jlong param3, jlong __functionAddress) {
     UNUSED_PARAMS(__env, clazz)
     void *paramArray2 = param2 == NULL ? NULL : (*__env)->GetPrimitiveArrayCritical(__env, param2, 0);

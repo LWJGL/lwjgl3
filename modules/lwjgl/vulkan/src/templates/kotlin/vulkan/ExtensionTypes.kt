@@ -23,6 +23,7 @@ val VkDebugUtilsMessengerEXT = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkDebugUtilsMe
 val VkSamplerYcbcrConversionKHR = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkSamplerYcbcrConversionKHR")
 val VkValidationCacheEXT = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkValidationCacheEXT")
 val VkAccelerationStructureNV = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkAccelerationStructureNV")
+val VkPerformanceConfigurationINTEL = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkPerformanceConfigurationINTEL")
 
 // Enum types
 val VkSurfaceTransformFlagBitsKHR = "VkSurfaceTransformFlagBitsKHR".enumType
@@ -70,6 +71,11 @@ val VkMemoryOverallocationBehaviorAMD = "VkMemoryOverallocationBehaviorAMD".enum
 val VkPipelineCreationFeedbackFlagBitsEXT = "VkPipelineCreationFeedbackFlagBitsEXT".enumType
 val VkDriverIdKHR = "VkDriverIdKHR".enumType
 val VkResolveModeFlagBitsKHR = "VkResolveModeFlagBitsKHR".enumType
+val VkPerformanceConfigurationTypeINTEL = "VkPerformanceConfigurationTypeINTEL".enumType
+val VkQueryPoolSamplingModeINTEL = "VkQueryPoolSamplingModeINTEL".enumType
+val VkPerformanceOverrideTypeINTEL = "VkPerformanceOverrideTypeINTEL".enumType
+val VkPerformanceParameterTypeINTEL = "VkPerformanceParameterTypeINTEL".enumType
+val VkPerformanceValueTypeINTEL = "VkPerformanceValueTypeINTEL".enumType
 val VkValidationFeatureEnableEXT = "VkValidationFeatureEnableEXT".enumType
 val VkValidationFeatureDisableEXT = "VkValidationFeatureDisableEXT".enumType
 val VkComponentTypeNV = "VkComponentTypeNV".enumType
@@ -857,8 +863,8 @@ val VkWin32SurfaceCreateInfoKHR = struct(Module.VULKAN, "VkWin32SurfaceCreateInf
     VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkWin32SurfaceCreateFlagsKHR("flags", "reserved for future use.")
-    HINSTANCE("hinstance", "{@code hinstance} and {@code hwnd} are the Win32 {@code HINSTANCE} and {@code HWND} for the window to associate the surface with.")
-    HWND("hwnd", "see {@code hinstance}")
+    HINSTANCE("hinstance", "the Win32 {@code HINSTANCE} for the window to associate the surface with.")
+    HWND("hwnd", "the Win32 {@code HWND} for the window to associate the surface with.")
 }
 
 val VkDebugReportCallbackCreateInfoEXT = struct(Module.VULKAN, "VkDebugReportCallbackCreateInfoEXT") {
@@ -6697,12 +6703,12 @@ val VkPhysicalDeviceMeshShaderPropertiesNV = struct(Module.VULKAN, "VkPhysicalDe
     VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
     uint32_t("maxDrawMeshTasksCount", "the maximum number of local workgroups that <b>can</b> be launched by a single draw mesh tasks command. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\\#drawing-mesh-shading\">Programmable Mesh Shading</a>.")
-    uint32_t("maxTaskWorkGroupInvocations", "the maximum total number of task shader invocations in a single local workgroup. The product of the X, Y, and Z sizes as specified by the {@code LocalSize} execution mode in shader modules and by the object decorated by the {@code WorkgroupSize} decoration <b>must</b> be less than or equal to this limit.")
-    uint32_t("maxTaskWorkGroupSize", "the maximum size of a local task workgroup. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes specified by the {@code LocalSize} execution mode and by the object decorated by the {@code WorkgroupSize} decoration in shader modules <b>must</b> be less than or equal to the corresponding limit.")[3]
+    uint32_t("maxTaskWorkGroupInvocations", "the maximum total number of task shader invocations in a single local workgroup. The product of the X, Y, and Z sizes, as specified by the {@code LocalSize} execution mode in shader modules or by the object decorated by the {@code WorkgroupSize} decoration, <b>must</b> be less than or equal to this limit.")
+    uint32_t("maxTaskWorkGroupSize", "the maximum size of a local task workgroup. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes, as specified by the {@code LocalSize} execution mode or by the object decorated by the {@code WorkgroupSize} decoration in shader modules, <b>must</b> be less than or equal to the corresponding limit.")[3]
     uint32_t("maxTaskTotalMemorySize", "the maximum number of bytes that the task shader can use in total for shared and output memory combined.")
     uint32_t("maxTaskOutputCount", "the maximum number of output tasks a single task shader workgroup can emit.")
-    uint32_t("maxMeshWorkGroupInvocations", "the maximum total number of mesh shader invocations in a single local workgroup. The product of the X, Y, and Z sizes as specified by the {@code LocalSize} execution mode in shader modules and by the object decorated by the {@code WorkgroupSize} decoration <b>must</b> be less than or equal to this limit.")
-    uint32_t("maxMeshWorkGroupSize", "the maximum size of a local mesh workgroup. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes specified by the {@code LocalSize} execution mode and by the object decorated by the {@code WorkgroupSize} decoration in shader modules <b>must</b> be less than or equal to the corresponding limit.")[3]
+    uint32_t("maxMeshWorkGroupInvocations", "the maximum total number of mesh shader invocations in a single local workgroup. The product of the X, Y, and Z sizes, as specified by the {@code LocalSize} execution mode in shader modules or by the object decorated by the {@code WorkgroupSize} decoration, <b>must</b> be less than or equal to this limit.")
+    uint32_t("maxMeshWorkGroupSize", "the maximum size of a local mesh workgroup. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes, as specified by the {@code LocalSize} execution mode or by the object decorated by the {@code WorkgroupSize} decoration in shader modules, <b>must</b> be less than or equal to the corresponding limit.")[3]
     uint32_t("maxMeshTotalMemorySize", "the maximum number of bytes that the mesh shader can use in total for shared and output memory combined.")
     uint32_t("maxMeshOutputVertices", "the maximum number of vertices a mesh shader output can store.")
     uint32_t("maxMeshOutputPrimitives", "the maximum number of primitives a mesh shader output can store.")
@@ -6883,6 +6889,176 @@ val VkPhysicalDeviceShaderIntegerFunctions2INTEL = struct(Module.VULKAN, "VkPhys
     VkStructureType("sType", "")
     nullable..opaque_p("pNext", "")
     VkBool32("shaderIntegerFunctions2", "indicates that the implementation supports the {@code ShaderIntegerFunctions2INTEL} SPIR-V capability.")
+}
+
+val VkPerformanceValueDataINTEL = union(Module.VULKAN, "VkPerformanceValueDataINTEL") {
+    documentation =
+        """
+        Values returned for the parameters.
+
+        <h5>Description</h5>
+        The correct member of the union is determined by the associated {@code VkPerformanceValueTypeINTEL} value.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code valueString} <b>must</b> be a valid pointer to a valid</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkPerformanceValueINTEL
+        """
+
+    uint32_t("value32", "")
+    uint64_t("value64", "")
+    float("valueFloat", "")
+    VkBool32("valueBool", "")
+    char.const.p("valueString", "")
+}
+
+val VkPerformanceValueINTEL = struct(Module.VULKAN, "VkPerformanceValueINTEL") {
+    documentation =
+        """
+        Container for value and types of parameters that can be queried.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code type} <b>must</b> be a valid {@code VkPerformanceValueTypeINTEL} value</li>
+            <li>{@code data} <b>must</b> be a valid ##VkPerformanceValueDataINTEL union</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkPerformanceValueDataINTEL, #GetPerformanceParameterINTEL()
+        """
+
+    VkPerformanceValueTypeINTEL("type", "an {@code VkPerformanceValueTypeINTEL} value specifying the type of the returned data.")
+    VkPerformanceValueDataINTEL("data", "an ##VkPerformanceValueDataINTEL union specifying the value of the returned data.")
+}
+
+val VkInitializePerformanceApiInfoINTEL = struct(Module.VULKAN, "VkInitializePerformanceApiInfoINTEL") {
+    documentation =
+        """
+        Structure specifying parameters of initialize of the device.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_INITIALIZE_PERFORMANCE_API_INFO_INTEL</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #InitializePerformanceApiINTEL()
+        """
+
+    VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_p("pUserData", "a pointer for application data.")
+}
+
+val VkQueryPoolCreateInfoINTEL = struct(Module.VULKAN, "VkQueryPoolCreateInfoINTEL") {
+    documentation =
+        """
+        Structure specifying parameters to create a pool of performance queries.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO_INTEL</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code performanceCountersSampling} <b>must</b> be a valid {@code VkQueryPoolSamplingModeINTEL} value</li>
+        </ul>
+        """
+
+    VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkQueryPoolSamplingModeINTEL("performanceCountersSampling", "describe how performance queries should be captured.")
+}
+
+val VkPerformanceMarkerInfoINTEL = struct(Module.VULKAN, "VkPerformanceMarkerInfoINTEL") {
+    documentation =
+        """
+        Structure specifying performance markers.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PERFORMANCE_MARKER_INFO_INTEL</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #CmdSetPerformanceMarkerINTEL()
+        """
+
+    VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    uint64_t("marker", "the marker value that will be recorded into the opaque query results.")
+}
+
+val VkPerformanceStreamMarkerInfoINTEL = struct(Module.VULKAN, "VkPerformanceStreamMarkerInfoINTEL") {
+    documentation =
+        """
+        Structure specifying stream performance markers.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>The value written by the application into {@code marker} <b>must</b> only used the valid bits as reported by #GetPerformanceParameterINTEL() with the #PERFORMANCE_PARAMETER_TYPE_STREAM_MARKER_VALID_BITS_INTEL.</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PERFORMANCE_STREAM_MARKER_INFO_INTEL</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #CmdSetPerformanceStreamMarkerINTEL()
+        """
+
+    VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    uint32_t("marker", "the marker value that will be recorded into the reports consumed by an external application.")
+}
+
+val VkPerformanceOverrideInfoINTEL = struct(Module.VULKAN, "VkPerformanceOverrideInfoINTEL") {
+    documentation =
+        """
+        Performance override info.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PERFORMANCE_OVERRIDE_INFO_INTEL</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code type} <b>must</b> be a valid {@code VkPerformanceOverrideTypeINTEL} value</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #CmdSetPerformanceOverrideINTEL()
+        """
+
+    VkStructureType("sType", "")
+    nullable..opaque_const_p("pNext", "")
+    VkPerformanceOverrideTypeINTEL("type", "the particular {@code VkPerformanceOverrideTypeINTEL} to set.")
+    VkBool32("enable", "defines whether the override is enabled.")
+    uint64_t("parameter", "a potential required parameter for the override.")
+}
+
+val VkPerformanceConfigurationAcquireInfoINTEL = struct(Module.VULKAN, "VkPerformanceConfigurationAcquireInfoINTEL") {
+    documentation =
+        """
+        Acquire a configuration to capture performance data.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PERFORMANCE_CONFIGURATION_ACQUIRE_INFO_INTEL</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code type} <b>must</b> be a valid {@code VkPerformanceConfigurationTypeINTEL} value</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #AcquirePerformanceConfigurationINTEL()
+        """
+
+    VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkPerformanceConfigurationTypeINTEL("type", "one of the {@code VkPerformanceConfigurationTypeINTEL} type of performance configuration that will be acquired.")
 }
 
 val VkPhysicalDeviceVulkanMemoryModelFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceVulkanMemoryModelFeaturesKHR") {
