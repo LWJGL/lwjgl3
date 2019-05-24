@@ -631,6 +631,28 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
 
     StringConstant(
         """
+        Set whether the importer shall not remove empty bones.
+
+        Empty bones are often used to define connections for other models.
+
+        Property type: bool. The default value is false (0)
+        """,
+
+        "AI_CONFIG_IMPORT_REMOVE_EMPTY_BONES".."AI_CONFIG_IMPORT_REMOVE_EMPTY_BONES"
+    ).noPrefix()
+
+    StringConstant(
+        """
+        Set whether the FBX importer shall convert the unit from cm to m.
+
+        Property type: bool. The default value is false (0)
+        """,
+
+        "AI_CONFIG_FBX_CONVERT_TO_M".."AI_CONFIG_FBX_CONVERT_TO_M"
+    ).noPrefix()
+
+    StringConstant(
+        """
         Set the vertex animation keyframe to be imported.
 
         ASSIMP does not support vertex keyframes (only bone animation is supported). The library reads only one frame of models with vertex animations. By
