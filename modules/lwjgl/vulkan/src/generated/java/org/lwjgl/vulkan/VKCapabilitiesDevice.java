@@ -555,6 +555,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_IMG_filter_cubic;
     /** When true, {@link IMGFormatPVRTC} is supported. */
     public final boolean VK_IMG_format_pvrtc;
+    /** When true, {@link INTELShaderIntegerFunctions2} is supported. */
+    public final boolean VK_INTEL_shader_integer_functions2;
     /** When true, {@link KHR16bitStorage} is supported. */
     public final boolean VK_KHR_16bit_storage;
     /** When true, {@link KHR8bitStorage} is supported. */
@@ -633,6 +635,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_KHR_swapchain;
     /** When true, {@link KHRSwapchainMutableFormat} is supported. */
     public final boolean VK_KHR_swapchain_mutable_format;
+    /** When true, {@link KHRUniformBufferStandardLayout} is supported. */
+    public final boolean VK_KHR_uniform_buffer_standard_layout;
     /** When true, {@link KHRVariablePointers} is supported. */
     public final boolean VK_KHR_variable_pointers;
     /** When true, {@link KHRVulkanMemoryModel} is supported. */
@@ -647,6 +651,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_NV_cooperative_matrix;
     /** When true, {@link NVCornerSampledImage} is supported. */
     public final boolean VK_NV_corner_sampled_image;
+    /** When true, {@link NVCoverageReductionMode} is supported. */
+    public final boolean VK_NV_coverage_reduction_mode;
     /** When true, {@link NVDedicatedAllocation} is supported. */
     public final boolean VK_NV_dedicated_allocation;
     /** When true, {@link NVDedicatedAllocationImageAliasing} is supported. */
@@ -769,6 +775,7 @@ public class VKCapabilitiesDevice {
         VK_GOOGLE_hlsl_functionality1 = ext.contains("VK_GOOGLE_hlsl_functionality1");
         VK_IMG_filter_cubic = ext.contains("VK_IMG_filter_cubic");
         VK_IMG_format_pvrtc = ext.contains("VK_IMG_format_pvrtc");
+        VK_INTEL_shader_integer_functions2 = ext.contains("VK_INTEL_shader_integer_functions2");
         VK_KHR_16bit_storage = ext.contains("VK_KHR_16bit_storage");
         VK_KHR_8bit_storage = ext.contains("VK_KHR_8bit_storage");
         VK_KHR_bind_memory2 = KHRBindMemory2.checkCapsDevice(provider, caps, ext);
@@ -808,6 +815,7 @@ public class VKCapabilitiesDevice {
         VK_KHR_storage_buffer_storage_class = ext.contains("VK_KHR_storage_buffer_storage_class");
         VK_KHR_swapchain = KHRSwapchain.checkCapsDevice(provider, caps, ext);
         VK_KHR_swapchain_mutable_format = ext.contains("VK_KHR_swapchain_mutable_format");
+        VK_KHR_uniform_buffer_standard_layout = ext.contains("VK_KHR_uniform_buffer_standard_layout");
         VK_KHR_variable_pointers = ext.contains("VK_KHR_variable_pointers");
         VK_KHR_vulkan_memory_model = ext.contains("VK_KHR_vulkan_memory_model");
         VK_KHR_win32_keyed_mutex = ext.contains("VK_KHR_win32_keyed_mutex");
@@ -815,6 +823,7 @@ public class VKCapabilitiesDevice {
         VK_NV_compute_shader_derivatives = ext.contains("VK_NV_compute_shader_derivatives");
         VK_NV_cooperative_matrix = ext.contains("VK_NV_cooperative_matrix");
         VK_NV_corner_sampled_image = ext.contains("VK_NV_corner_sampled_image");
+        VK_NV_coverage_reduction_mode = ext.contains("VK_NV_coverage_reduction_mode");
         VK_NV_dedicated_allocation = ext.contains("VK_NV_dedicated_allocation");
         VK_NV_dedicated_allocation_image_aliasing = ext.contains("VK_NV_dedicated_allocation_image_aliasing");
         VK_NV_device_diagnostic_checkpoints = NVDeviceDiagnosticCheckpoints.checkCapsDevice(provider, caps, ext);

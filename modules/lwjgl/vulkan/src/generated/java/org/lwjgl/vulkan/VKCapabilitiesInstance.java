@@ -165,6 +165,10 @@ public class VKCapabilitiesInstance {
     public final long
         vkGetPhysicalDeviceCooperativeMatrixPropertiesNV;
 
+    // NV_coverage_reduction_mode
+    public final long
+        vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV;
+
     // NV_external_memory_capabilities
     public final long
         vkGetPhysicalDeviceExternalImageFormatPropertiesNV;
@@ -232,7 +236,7 @@ public class VKCapabilitiesInstance {
     VKCapabilitiesInstance(FunctionProvider provider, int apiVersion, Set<String> ext, Set<String> deviceExt) {
         this.apiVersion = apiVersion;
 
-        Map<String, Long> caps = new HashMap<>(77);
+        Map<String, Long> caps = new HashMap<>(78);
 
         Vulkan10 = VK10.checkCapsInstance(provider, caps, ext);
         Vulkan11 = VK11.checkCapsInstance(provider, caps, ext);
@@ -265,6 +269,7 @@ public class VKCapabilitiesInstance {
         VK_KHR_xlib_surface = KHRXlibSurface.checkCapsInstance(provider, caps, ext);
         VK_MVK_macos_surface = MVKMacosSurface.checkCapsInstance(provider, caps, ext);
         NVCooperativeMatrix.checkCapsInstance(provider, caps, deviceExt);
+        NVCoverageReductionMode.checkCapsInstance(provider, caps, deviceExt);
         VK_NV_external_memory_capabilities = NVExternalMemoryCapabilities.checkCapsInstance(provider, caps, ext);
         NVXDeviceGeneratedCommands.checkCapsInstance(provider, caps, deviceExt);
 
@@ -343,6 +348,7 @@ public class VKCapabilitiesInstance {
         vkGetPhysicalDeviceXlibPresentationSupportKHR = VK.get(caps, "vkGetPhysicalDeviceXlibPresentationSupportKHR");
         vkCreateMacOSSurfaceMVK = VK.get(caps, "vkCreateMacOSSurfaceMVK");
         vkGetPhysicalDeviceCooperativeMatrixPropertiesNV = VK.get(caps, "vkGetPhysicalDeviceCooperativeMatrixPropertiesNV");
+        vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV = VK.get(caps, "vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV");
         vkGetPhysicalDeviceExternalImageFormatPropertiesNV = VK.get(caps, "vkGetPhysicalDeviceExternalImageFormatPropertiesNV");
         vkGetPhysicalDeviceGeneratedCommandsPropertiesNVX = VK.get(caps, "vkGetPhysicalDeviceGeneratedCommandsPropertiesNVX");
     }

@@ -56,7 +56,7 @@ public final class NVFramebufferMixedSamples {
     public static final int VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV = 1000152000;
 
     /**
-     * VkCoverageModulationModeNV - Specify the discard rectangle mode
+     * VkCoverageModulationModeNV - Specify the coverage modulation mode
      * 
      * <h5>Description</h5>
      * 

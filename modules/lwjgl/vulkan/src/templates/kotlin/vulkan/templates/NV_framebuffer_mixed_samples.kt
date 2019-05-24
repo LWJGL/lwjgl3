@@ -77,7 +77,7 @@ val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassVK("NV
 
     EnumConstant(
         """
-        VkCoverageModulationModeNV - Specify the discard rectangle mode
+        VkCoverageModulationModeNV - Specify the coverage modulation mode
 
         <h5>Description</h5>
         <ul>

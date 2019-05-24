@@ -499,9 +499,10 @@ public class EXTTransformFeedback {
      * <li>All queries used by the command <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#queries-operation-active">active</a></li>
      * <li>{@code query} <b>must</b> be less than the number of queries in {@code queryPool}</li>
      * <li>{@code commandBuffer} <b>must</b> not be a protected command buffer</li>
-     * <li>If {@code vkCmdEndQuery} is called within a render pass instance, the sum of {@code query} and the number of bits set in the current subpass&#8217;s view mask <b>must</b> be less than or equal to the number of queries in {@code queryPool}</li>
+     * <li>If {@code vkCmdEndQueryIndexedEXT} is called within a render pass instance, the sum of {@code query} and the number of bits set in the current subpass&#8217;s view mask <b>must</b> be less than or equal to the number of queries in {@code queryPool}</li>
      * <li>If the {@code queryType} used to create {@code queryPool} was {@link #VK_QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT} the {@code index} parameter <b>must</b> be less than {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT}{@code ::maxTransformFeedbackStreams}</li>
      * <li>If the {@code queryType} used to create {@code queryPool} was not {@link #VK_QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT} the {@code index} <b>must</b> be zero</li>
+     * <li>If the {@code queryType} used to create {@code queryPool} was {@link #VK_QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT} {@code index} <b>must</b> equal the {@code index} used to begin the query</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>

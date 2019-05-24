@@ -74,6 +74,7 @@ val VkValidationFeatureEnableEXT = "VkValidationFeatureEnableEXT".enumType
 val VkValidationFeatureDisableEXT = "VkValidationFeatureDisableEXT".enumType
 val VkComponentTypeNV = "VkComponentTypeNV".enumType
 val VkScopeNV = "VkScopeNV".enumType
+val VkCoverageReductionModeNV = "VkCoverageReductionModeNV".enumType
 val VkFullScreenExclusiveEXT = "VkFullScreenExclusiveEXT".enumType
 
 // Bitmask types
@@ -125,6 +126,7 @@ val VkGeometryInstanceFlagsNV = typedef(VkFlags, "VkGeometryInstanceFlagsNV")
 val VkBuildAccelerationStructureFlagsNV = typedef(VkFlags, "VkBuildAccelerationStructureFlagsNV")
 val VkPipelineCreationFeedbackFlagsEXT = typedef(VkFlags, "VkPipelineCreationFeedbackFlagsEXT")
 val VkResolveModeFlagsKHR = typedef(VkFlags, "VkResolveModeFlagsKHR")
+val VkPipelineCoverageReductionStateCreateFlagsNV = typedef(VkFlags, "VkPipelineCoverageReductionStateCreateFlagsNV")
 val VkHeadlessSurfaceCreateFlagsEXT = typedef(VkFlags, "VkHeadlessSurfaceCreateFlagsEXT")
 
 // Function pointer types
@@ -1562,38 +1564,6 @@ val VkBindImageMemoryDeviceGroupInfoKHR = struct(Module.VULKAN, "VkBindImageMemo
     uint32_t.const.p("pDeviceIndices", "")
     AutoSize("pSplitInstanceBindRegions", optional = true)..uint32_t("splitInstanceBindRegionCount", "")
     VkRect2D.const.p("pSplitInstanceBindRegions", "")
-}
-
-val VkPhysicalDeviceSurfaceInfo2KHR = struct(Module.VULKAN, "VkPhysicalDeviceSurfaceInfo2KHR") {
-    documentation =
-        """
-        Structure specifying a surface and related swapchain creation parameters.
-
-        <h5>Description</h5>
-        The members of ##VkPhysicalDeviceSurfaceInfo2KHR correspond to the arguments to #GetPhysicalDeviceSurfaceCapabilitiesKHR(), with {@code sType} and {@code pNext} added for extensibility.
-
-        Additional capabilities of a surface <b>may</b> be available to swapchains created with different full-screen exclusive settings - particularly if exclusive full-screen access is application controlled. These additional capabilities <b>can</b> be queried by including the ##VkSurfaceFullScreenExclusiveInfoEXT structure in the {@code pNext} chain of this structure when used to query surface properties. Additionally, for Win32 surfaces with application controlled exclusive full-screen access, chaining a valid instance of the ##VkSurfaceFullScreenExclusiveWin32InfoEXT structure <b>may</b> also report additional surface capabilities. These additional capabilities only apply to swapchains created with the same parameters passed into the {@code pNext} chain of ##VkSwapchainCreateInfoKHR.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>If the {@code pNext} chain includes an instance of ##VkSurfaceFullScreenExclusiveInfoEXT with its {@code fullScreenExclusive} member set to #FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT, and {@code surface} was created using #CreateWin32SurfaceKHR(), an instance of ##VkSurfaceFullScreenExclusiveWin32InfoEXT <b>must</b> be present in the {@code pNext} chain</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR</li>
-            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkSurfaceFullScreenExclusiveInfoEXT or ##VkSurfaceFullScreenExclusiveWin32InfoEXT</li>
-            <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
-            <li>{@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetDeviceGroupSurfacePresentModes2EXT(), #GetPhysicalDeviceSurfaceCapabilities2KHR(), #GetPhysicalDeviceSurfaceFormats2KHR(), #GetPhysicalDeviceSurfacePresentModes2EXT()
-        """
-
-    VkStructureType("sType", "the type of this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkSurfaceKHR("surface", "the surface that will be associated with the swapchain.")
 }
 
 val VkValidationFlagsEXT = struct(Module.VULKAN, "VkValidationFlagsEXT") {
@@ -4027,6 +3997,38 @@ val VkPipelineTessellationDomainOriginStateCreateInfoKHR = struct(Module.VULKAN,
     VkStructureType("sType", "")
     nullable..opaque_const_p("pNext", "")
     VkTessellationDomainOrigin("domainOrigin", "")
+}
+
+val VkPhysicalDeviceSurfaceInfo2KHR = struct(Module.VULKAN, "VkPhysicalDeviceSurfaceInfo2KHR") {
+    documentation =
+        """
+        Structure specifying a surface and related swapchain creation parameters.
+
+        <h5>Description</h5>
+        The members of ##VkPhysicalDeviceSurfaceInfo2KHR correspond to the arguments to #GetPhysicalDeviceSurfaceCapabilitiesKHR(), with {@code sType} and {@code pNext} added for extensibility.
+
+        Additional capabilities of a surface <b>may</b> be available to swapchains created with different full-screen exclusive settings - particularly if exclusive full-screen access is application controlled. These additional capabilities <b>can</b> be queried by including the ##VkSurfaceFullScreenExclusiveInfoEXT structure in the {@code pNext} chain of this structure when used to query surface properties. Additionally, for Win32 surfaces with application controlled exclusive full-screen access, chaining a valid instance of the ##VkSurfaceFullScreenExclusiveWin32InfoEXT structure <b>may</b> also report additional surface capabilities. These additional capabilities only apply to swapchains created with the same parameters passed into the {@code pNext} chain of ##VkSwapchainCreateInfoKHR.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If the {@code pNext} chain includes an instance of ##VkSurfaceFullScreenExclusiveInfoEXT with its {@code fullScreenExclusive} member set to #FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT, and {@code surface} was created using #CreateWin32SurfaceKHR(), an instance of ##VkSurfaceFullScreenExclusiveWin32InfoEXT <b>must</b> be present in the {@code pNext} chain</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkSurfaceFullScreenExclusiveInfoEXT or ##VkSurfaceFullScreenExclusiveWin32InfoEXT</li>
+            <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
+            <li>{@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #GetDeviceGroupSurfacePresentModes2EXT(), #GetPhysicalDeviceSurfaceCapabilities2KHR(), #GetPhysicalDeviceSurfaceFormats2KHR(), #GetPhysicalDeviceSurfacePresentModes2EXT()
+        """
+
+    VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkSurfaceKHR("surface", "the surface that will be associated with the swapchain.")
 }
 
 val VkSurfaceCapabilities2KHR = struct(Module.VULKAN, "VkSurfaceCapabilities2KHR", mutable = false) {
@@ -6864,6 +6866,25 @@ val VkCheckpointDataNV = struct(Module.VULKAN, "VkCheckpointDataNV", mutable = f
     opaque_p("pCheckpointMarker", "contains the value of the last checkpoint marker executed in the stage that {@code stage} refers to.")
 }
 
+val VkPhysicalDeviceShaderIntegerFunctions2INTEL = struct(Module.VULKAN, "VkPhysicalDeviceShaderIntegerFunctions2INTEL") {
+    documentation =
+        """
+        Structure describing shader integer functions that can be supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceShaderIntegerFunctions2INTEL structure is included in the {@code pNext} chain of ##VkPhysicalDeviceFeatures2KHR, it is filled with values indicating whether the feature is supported. ##VkPhysicalDeviceShaderIntegerFunctions2INTEL <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to enable features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS2_FEATURES_INTEL</li>
+        </ul>
+        """
+
+    VkStructureType("sType", "")
+    nullable..opaque_p("pNext", "")
+    VkBool32("shaderIntegerFunctions2", "indicates that the implementation supports the {@code ShaderIntegerFunctions2INTEL} SPIR-V capability.")
+}
+
 val VkPhysicalDeviceVulkanMemoryModelFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceVulkanMemoryModelFeaturesKHR") {
     documentation =
         """
@@ -7360,6 +7381,76 @@ val VkPhysicalDeviceCooperativeMatrixPropertiesNV = struct(Module.VULKAN, "VkPhy
     VkShaderStageFlags("cooperativeMatrixSupportedStages", "a bitfield of {@code VkShaderStageFlagBits} describing the shader stages that cooperative matrix instructions are supported in. {@code cooperativeMatrixSupportedStages} will have the #SHADER_STAGE_COMPUTE_BIT bit set if any of the physical device&#8217;s queues support #QUEUE_COMPUTE_BIT.")
 }
 
+val VkPhysicalDeviceCoverageReductionModeFeaturesNV = struct(Module.VULKAN, "VkPhysicalDeviceCoverageReductionModeFeaturesNV") {
+    documentation =
+        """
+        Structure describing the coverage reduction mode features that can be supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceCoverageReductionModeFeaturesNV structure is included in the {@code pNext} chain of ##VkPhysicalDeviceFeatures2KHR, it is filled with values indicating whether the feature is supported. ##VkPhysicalDeviceCoverageReductionModeFeaturesNV <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to enable the feature.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_COVERAGE_REDUCTION_MODE_FEATURES_NV</li>
+        </ul>
+        """
+
+    VkStructureType("sType", "")
+    nullable..opaque_p("pNext", "")
+    VkBool32("coverageReductionMode", "indicates whether the implementation supports coverage reduction modes. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\\#fragops-coverage-reduction\">Coverage Reduction</a>.")
+}
+
+val VkPipelineCoverageReductionStateCreateInfoNV = struct(Module.VULKAN, "VkPipelineCoverageReductionStateCreateInfoNV") {
+    documentation =
+        """
+        Structure specifying parameters controlling coverage reduction.
+
+        <h5>Description</h5>
+        If this structure is not present, the default coverage reduction mode is inferred as follows:
+
+        <ul>
+            <li>If the {@code VK_NV_framebuffer_mixed_samples} extension is enabled, then it is as if the {@code coverageReductionMode} is #COVERAGE_REDUCTION_MODE_MERGE_NV.</li>
+            <li>If the {@code VK_AMD_mixed_attachment_samples} extension is enabled, then it is as if the {@code coverageReductionMode} is #COVERAGE_REDUCTION_MODE_TRUNCATE_NV.</li>
+            <li>If both {@code VK_NV_framebuffer_mixed_samples} and {@code VK_AMD_mixed_attachment_samples} are enabled, then the default coverage reduction mode is implementation-dependent.</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_COVERAGE_REDUCTION_STATE_CREATE_INFO_NV</li>
+            <li>{@code flags} <b>must</b> be 0</li>
+            <li>{@code coverageReductionMode} <b>must</b> be a valid {@code VkCoverageReductionModeNV} value</li>
+        </ul>
+        """
+
+    VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkPipelineCoverageReductionStateCreateFlagsNV("flags", "reserved for future use.")
+    VkCoverageReductionModeNV("coverageReductionMode", "controls how the <em>color sample mask</em> is generated from the coverage mask and is of type {@code VkCoverageReductionModeNV}.")
+}
+
+val VkFramebufferMixedSamplesCombinationNV = struct(Module.VULKAN, "VkFramebufferMixedSamplesCombinationNV", mutable = false) {
+    documentation =
+        """
+        Structure specifying a supported sample count combination.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_FRAMEBUFFER_MIXED_SAMPLES_COMBINATION_NV</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #GetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV()
+        """
+
+    VkStructureType("sType", "the type of this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
+    VkCoverageReductionModeNV("coverageReductionMode", "specifies the coverage reduction mode and is of type {@code VkCoverageReductionModeNV}.")
+    VkSampleCountFlagBits("rasterizationSamples", "specifies the number of rasterization samples in the supported combination.")
+    VkSampleCountFlags("depthStencilSamples", "specifies the number of samples in the depth stencil attachment in the supported combination. A value of 0 indicates the combination does not have a depth stencil attachment.")
+    VkSampleCountFlags("colorSamples", "specifies the number of color samples in a color attachment in the supported combination. A value of 0 indicates the combination does not have a color attachment.")
+}
+
 val VkPhysicalDeviceYcbcrImageArraysFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceYcbcrImageArraysFeaturesEXT") {
     documentation =
         """
@@ -7377,6 +7468,25 @@ val VkPhysicalDeviceYcbcrImageArraysFeaturesEXT = struct(Module.VULKAN, "VkPhysi
     VkStructureType("sType", "")
     nullable..opaque_p("pNext", "")
     VkBool32("ycbcrImageArrays", "indicates that the implementation supports creating images with a format that requires <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\\#formats-requiring-sampler-ycbcr-conversion\">Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a> and has multiple array layers.")
+}
+
+val VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR") {
+    documentation =
+        """
+        Structure indicating support for std430-like packing in uniform buffers.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR structure is included in the {@code pNext} chain of ##VkPhysicalDeviceFeatures2KHR, it is filled with values indicating whether the feature is supported. ##VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to enable this feature.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES_KHR</li>
+        </ul>
+        """
+
+    VkStructureType("sType", "")
+    nullable..opaque_p("pNext", "")
+    VkBool32("uniformBufferStandardLayout", "indicates that the implementation supports the same layouts for uniform buffers as for storage and other kinds of buffers. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\\#interfaces-resources-standard-layout\">Standard Buffer Layout</a>.")
 }
 
 val VkSurfaceFullScreenExclusiveInfoEXT = struct(Module.VULKAN, "VkSurfaceFullScreenExclusiveInfoEXT") {

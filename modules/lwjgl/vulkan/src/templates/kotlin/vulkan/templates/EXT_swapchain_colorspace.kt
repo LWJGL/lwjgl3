@@ -22,7 +22,7 @@ val EXT_swapchain_colorspace = "EXTSwapchainColorspace".nativeClassVK("EXT_swapc
             <dd>105</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>3</dd>
+            <dd>4</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -36,7 +36,7 @@ val EXT_swapchain_colorspace = "EXTSwapchainColorspace".nativeClassVK("EXT_swapc
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
-            <dd>2017-03-15</dd>
+            <dd>2019-04-26</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -51,7 +51,7 @@ val EXT_swapchain_colorspace = "EXTSwapchainColorspace".nativeClassVK("EXT_swapc
     IntConstant(
         "The extension specification version.",
 
-        "EXT_SWAPCHAIN_COLOR_SPACE_SPEC_VERSION".."3"
+        "EXT_SWAPCHAIN_COLOR_SPACE_SPEC_VERSION".."4"
     )
 
     StringConstant(
@@ -65,7 +65,7 @@ val EXT_swapchain_colorspace = "EXTSwapchainColorspace".nativeClassVK("EXT_swapc
 
         "COLOR_SPACE_DISPLAY_P3_NONLINEAR_EXT".."1000104001",
         "COLOR_SPACE_EXTENDED_SRGB_LINEAR_EXT".."1000104002",
-        "COLOR_SPACE_DCI_P3_LINEAR_EXT".."1000104003",
+        "COLOR_SPACE_DISPLAY_P3_LINEAR_EXT".."1000104003",
         "COLOR_SPACE_DCI_P3_NONLINEAR_EXT".."1000104004",
         "COLOR_SPACE_BT709_LINEAR_EXT".."1000104005",
         "COLOR_SPACE_BT709_NONLINEAR_EXT".."1000104006",
@@ -76,6 +76,7 @@ val EXT_swapchain_colorspace = "EXTSwapchainColorspace".nativeClassVK("EXT_swapc
         "COLOR_SPACE_ADOBERGB_LINEAR_EXT".."1000104011",
         "COLOR_SPACE_ADOBERGB_NONLINEAR_EXT".."1000104012",
         "COLOR_SPACE_PASS_THROUGH_EXT".."1000104013",
-        "COLOR_SPACE_EXTENDED_SRGB_NONLINEAR_EXT".."1000104014"
+        "COLOR_SPACE_EXTENDED_SRGB_NONLINEAR_EXT".."1000104014",
+        "COLOR_SPACE_DCI_P3_LINEAR_EXT".."1000104003"
     )
 }
