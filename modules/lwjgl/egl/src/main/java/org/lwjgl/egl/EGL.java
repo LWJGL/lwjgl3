@@ -92,7 +92,7 @@ public final class EGL {
 
                 @Override
                 public long getFunctionAddress(ByteBuffer functionName) {
-                    long address = callPP(eglGetProcAddress, memAddress(functionName));
+                    long address = callPP(memAddress(functionName), eglGetProcAddress);
                     if (address == NULL) {
                         address = library.getFunctionAddress(functionName);
                         if (address == NULL && Checks.DEBUG_FUNCTIONS) {

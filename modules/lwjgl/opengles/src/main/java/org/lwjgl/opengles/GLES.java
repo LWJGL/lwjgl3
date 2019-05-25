@@ -237,10 +237,10 @@ public final class GLES {
                 IntBuffer pi = stack.ints(0);
 
                 // Try the 3.0+ version query first
-                callPV(GetIntegerv, GL_MAJOR_VERSION, memAddress(pi));
+                callPV(GL_MAJOR_VERSION, memAddress(pi), GetIntegerv);
                 if (callI(GetError) == GL_NO_ERROR && 3 <= (majorVersion = pi.get(0))) {
                     // We're on an 3.0+ context.
-                    callPV(GetIntegerv, GL_MINOR_VERSION, memAddress(pi));
+                    callPV(GL_MINOR_VERSION, memAddress(pi), GetIntegerv);
                     minorVersion = pi.get(0);
                 } else {
                     // Fallback to the string query.
@@ -302,7 +302,7 @@ public final class GLES {
                 try (MemoryStack stack = stackPush()) {
                     IntBuffer pi = stack.ints(0);
 
-                    callPV(GetIntegerv, GL_NUM_EXTENSIONS, memAddress(pi));
+                    callPV(GL_NUM_EXTENSIONS, memAddress(pi), GetIntegerv);
                     extensionCount = pi.get(0);
                 }
 
