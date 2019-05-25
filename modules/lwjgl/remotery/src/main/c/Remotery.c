@@ -92,7 +92,7 @@ static rmtBool g_SettingsInitialized = RMT_FALSE;
         #include <mach/mach.h>
         #include <sys/time.h>
     #else
-        #ifndef __FreeBSD__
+        #if !defined(__FreeBSD__) && !defined(__OpenBSD__)
             #include <malloc.h>
         #endif
     #endif
@@ -248,7 +248,7 @@ static rmtU32 msTimer_Get()
         clock_t time = clock();
 
         // CLOCKS_PER_SEC is 128 on FreeBSD, causing div/0
-        #ifdef __FreeBSD__
+        #if defined(__FreeBSD__) || defined(__OpenBSD__)
             rmtU32 msTime = (rmtU32) (time * 1000 / CLOCKS_PER_SEC);
         #else
             rmtU32 msTime = (rmtU32) (time / (CLOCKS_PER_SEC / 1000));
@@ -322,7 +322,7 @@ static rmtU64 usTimer_Get(usTimer* timer)
         rmtU64 curr_time = mach_absolute_time();
         return (rmtU64)((curr_time - timer->counter_start) * timer->counter_scale);
 
-    #elif defined(RMT_PLATFORM_LINUX)
+    #elif defined(RMT_PLATFORM_LINUX) || defined(__OpenBSD__)
 
         struct timespec tv;
         clock_gettime(CLOCK_REALTIME, &tv);
@@ -4734,6 +4734,8 @@ static rmtError Remotery_ConsumeMessageQueue(Remotery* rmt)
                 error = Remotery_SendSampleTreeMessage(rmt, message);
                 rmt_EndCPUSample();
                 break;
+	    default:
+		break;
         }
 
         // Consume the message before reacting to any errors
@@ -4771,6 +4773,8 @@ static void Remotery_FlushMessageQueue(Remotery* rmt)
                 FreeSampleTree(sample_tree->root_sample, sample_tree->allocator);
                 break;
             }
+	    default:
+		break;
         }
 
         rmtMessageQueue_ConsumeNextMessage(rmt->mq_to_rmt_thread, message);

@@ -1,0 +1,476 @@
+<!--
+  ~ Copyright LWJGL. All rights reserved.
+  ~ License terms: https://www.lwjgl.org/license
+  -->
+<project name="native-openbsd" basedir="../.." xmlns:if="ant:if" xmlns:unless="ant:unless">
+    <import file="../build-definitions.xml"/>
+
+    <condition property="LIB_POSTFIX" value="" else="32">
+        <equals arg1="${build.arch}" arg2="x64"/>
+    </condition>
+
+    <condition property="build.arch.x64" value="true" else="false">
+        <equals arg1="${build.arch}" arg2="x64"/>
+    </condition>
+
+    <condition property="cc.suffix" value="-${cc.version}" else="">
+        <isset property="cc.version"/>
+    </condition>
+
+    <property name="module.lwjgl.rel" value="../../../../${module.lwjgl}"/>
+
+    <macrodef name="compile">
+        <attribute name="dest" default="${dest}"/>
+        <attribute name="lang" default="c"/>
+        <attribute name="cc.exec" default="cc${cc.suffix}"/>
+        <attribute name="cpp.exec" default="c++${cc.suffix}"/>
+        <attribute name="lto" default="-flto"/>
+        <attribute name="flags" default=""/>
+        <attribute name="simple" default="false"/>
+        <attribute name="relative" default="true"/>
+        <element name="source" implicit="true" optional="true"/>
+        <sequential>
+            <local name="cpp"/>
+            <condition property="cpp"><not><equals arg1="@{lang}" arg2="c"/></not></condition>
+            <local name="cc"/>
+            <condition property="cc" value="@{cc.exec}" else="@{cpp.exec}"><equals arg1="@{lang}" arg2="c"/></condition>
+
+            <mkdir dir="@{dest}"/>
+            <apply dir="@{dest}" executable="${cc}" dest="@{dest}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
+                <arg line="-c -std=c11" unless:set="cpp"/>
+                <arg line="-c -std=c++11" if:set="cpp"/>
+                <arg line="-m64" if:true="${build.arch.x64}"/>
+                <arg line="-m32 -mfpmath=sse -msse -msse2" unless:true="${build.arch.x64}"/>
+                <arg line="-O3 @{lto} -fPIC @{flags} -pthread -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0 -D_GNU_SOURCE -DNDEBUG -DLWJGL_OPENBSD -DLWJGL_${build.arch}"/>
+
+                <arg value="-I${jni.headers}"/>
+                <arg value="-I${jni.headers}/openbsd"/>
+		<arg value="-I/usr/local/jdk-1.8.0/include/openbsd"/>
+		<arg value="-I/usr/local/include"/>
+		<arg value="-I/usr/X11R6/include"/>
+
+                <arg value="-I${module.lwjgl.rel}/core/src/main/c"/>
+                <arg value="-I${module.lwjgl.rel}/core/src/main/c/${platform}"/>
+
+                <arg value="-I${src.main.rel}" if:true="@{simple}"/>
+
+                <source/>
+                <fileset dir="." includes="${src.generated}/*" if:true="@{simple}"/>
+
+                <regexpmapper from="(\w+)\.c(?:c|pp)?$" to="\1.o"/>
+            </apply>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="build">
+        <attribute name="module"/>
+        <attribute name="linker" default="cc"/>
+        <attribute name="lang" default="c"/>
+        <attribute name="cc.exec" default="cc${cc.suffix}"/>
+        <attribute name="cpp.exec" default="c++${cc.suffix}"/>
+        <attribute name="flags" default="-Werror -Wfatal-errors"/>
+        <attribute name="simple" default="false"/>
+        <element name="beforeCompile" optional="true"/>
+        <element name="source" optional="true"/>
+        <element name="beforeLink" optional="true"/>
+        <element name="link" optional="true"/>
+        <sequential>
+            <local name="src.main"/>
+            <local name="src.main.rel"/>
+            <local name="src.generated"/>
+            <property name="src.main" location="${module.lwjgl}/@{module}/src/main/c" relative="true"/>
+            <property name="src.main.rel" value="${module.lwjgl.rel}/@{module}/src/main/c"/>
+            <property name="src.generated" location="${module.lwjgl}/@{module}/src/generated/c" relative="true"/>
+
+            <local name="name"/>
+            <condition property="name" value="lwjgl" else="lwjgl_@{module}">
+                <equals arg1="@{module}" arg2="core"/>
+            </condition>
+
+            <local name="dest"/>
+            <property name="dest" value="${bin.native}/@{module}"/>
+
+            <beforeCompile/>
+            <compile lang="@{lang}" cc.exec="@{cc.exec}" cpp.exec="@{cpp.exec}" flags="@{flags}" simple="@{simple}">
+                <source/>
+            </compile>
+
+            <local name="lib-uptodate"/>
+            <uptodate property="lib-uptodate" targetfile="${lib}/lib${name}${LIB_POSTFIX}.so">
+                <srcfiles file="config/${platform}/build.xml"/>
+                <srcfiles file="${bin.native}/wrap_memcpy.o" if:true="${build.arch.x64}"/>
+                <srcfiles dir="${dest}" includes="**"/>
+            </uptodate>
+            <local name="lib-dependencies-uptodate"/>
+            <condition property="lib-dependencies-uptodate" value="true">
+            <or>
+                <isset property="lib-uptodate"/>
+                <istrue value="${build.offline}"/>
+            </or>
+            </condition>
+
+            <local name="version.script"/>
+            <property name="version.script" location="config/${platform}/version.script"/>
+
+            <local name="cc"/>
+            <condition property="cc" value="@{cc.exec}" else="@{cpp.exec}">
+                <and>
+                    <equals arg1="@{lang}" arg2="c"/>
+                    <equals arg1="@{linker}" arg2="cc"/>
+                </and>
+            </condition>
+
+            <echo message="Linking ${name}" taskname="${cc}" unless:set="lib-uptodate"/>
+            <beforeLink/>
+            <apply executable="${cc}" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
+                <srcfile/>
+                <arg value="-shared"/>
+                <arg value="-m64" if:true="${build.arch.x64}"/>
+                <arg value="-m32" unless:true="${build.arch.x64}"/>
+
+		<arg value="-L/usr/local/lib"/>
+		<arg value="-L/usr/X11R6/lib"/>
+
+                <arg line="-z noexecstack"/>
+                <arg line="-O3 -flto -fPIC -pthread -o ${lib}/lib${name}${LIB_POSTFIX}.so"/>
+
+                <fileset dir="${bin.native}" includes="wrap_memcpy.o" if:true="${build.arch.x64}"/>
+                <fileset dir="${dest}" includes="*.o"/>
+                <link/>
+            </apply>
+
+            <apply executable="strip" failonerror="true" taskname="Symbol strip" unless:set="lib-uptodate">
+                <filelist dir="${lib}" files="lib${name}${LIB_POSTFIX}.so"/>
+            </apply>
+            <delete file="${lib}/touch_${platform}.txt" quiet="true" unless:set="lib-uptodate"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="build_simple">
+        <attribute name="module"/>
+        <attribute name="cc.exec" default="cc${cc.suffix}"/>
+        <attribute name="cpp.exec" default="c++${cc.suffix}"/>
+        <sequential>
+            <build module="@{module}" cc.exec="@{cc.exec}" cpp.exec="@{cpp.exec}" simple="true" if:true="${binding.@{module}}"/>
+        </sequential>
+    </macrodef>
+
+    <target name="compile-native-platform">
+        <compile dest="${bin.native}" lto="">
+            <fileset dir="." includes="${module.lwjgl}/core/src/main/c/${platform}/wrap_memcpy.c"/>
+        </compile>
+
+        <parallel threadsPerProcessor="2">
+
+        <!-- CORE -->
+        <build module="core" flags="-Werror -Wfatal-errors -Wall -Wextra -pedantic">
+            <source>
+                <arg value="-I${src.main.rel}/dyncall"/>
+                <fileset dir=".">
+                    <include name="${src.main}/*.c"/>
+                    <include name="${src.generated}/*.c"/>
+                    <include name="${src.generated}/${platform}/*.c"/>
+                    <include name="${module.lwjgl}/jawt/src/generated/c/*.c" if:true="${binding.jawt}"/>
+                </fileset>
+            </source>
+            <beforeLink>
+                <mkdir dir="${lib}/${platform}/${build.arch}"/>
+                <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-dependencies-uptodate">
+                    <update-dependency name="dyncall" artifact="${build.arch}/libdyncall_s.a"/>
+                    <update-dependency name="dyncallback" artifact="${build.arch}/libdyncallback_s.a"/>
+                    <update-dependency name="dynload" artifact="${build.arch}/libdynload_s.a"/>
+                </parallel>
+            </beforeLink>
+            <link>
+                <fileset dir="${lib}/${platform}/${build.arch}/">
+                    <include name="libdyn*.a"/>
+                </fileset>
+            </link>
+        </build>
+
+        <!-- BULLET -->
+        <build module="bullet" simple="true" linker="c++" if:true="${binding.bullet}">
+            <beforeLink>
+                <mkdir dir="${lib}/${platform}/${build.arch}/bullet"/>
+                <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-dependencies-uptodate">
+                    <update-dependency name="Bullet3Common" artifact="${build.arch}/bullet/libBullet3Common.a"/>
+                    <update-dependency name="BulletCollision" artifact="${build.arch}/bullet/libBulletCollision.a"/>
+                    <update-dependency name="BulletDynamics" artifact="${build.arch}/bullet/libBulletDynamics.a"/>
+                    <update-dependency name="BulletFileLoader" artifact="${build.arch}/bullet/libBulletFileLoader.a"/>
+                    <update-dependency name="BulletInverseDynamics" artifact="${build.arch}/bullet/libBulletInverseDynamics.a"/>
+                    <update-dependency name="BulletInverseDynamicsUtils" artifact="${build.arch}/bullet/libBulletInverseDynamicsUtils.a"/>
+                    <update-dependency name="BulletRobotics" artifact="${build.arch}/bullet/libBulletRobotics.a"/>
+                    <update-dependency name="BulletSoftBody" artifact="${build.arch}/bullet/libBulletSoftBody.a"/>
+                    <update-dependency name="BulletWorldImporter" artifact="${build.arch}/bullet/libBulletWorldImporter.a"/>
+                    <update-dependency name="LinearMath" artifact="${build.arch}/bullet/libLinearMath.a"/>
+                </parallel>
+            </beforeLink>
+            <link>
+                <arg value="-L${lib}/${platform}/${build.arch}/bullet"/>
+                <!-- Order is important -->
+                <arg value="-lBulletWorldImporter"/>
+                <arg value="-lBulletSoftBody"/>
+                <arg value="-lBulletDynamics"/>
+                <arg value="-lBulletCollision"/>
+                <arg value="-lBulletFileLoader"/>
+                <arg value="-lBulletInverseDynamics"/>
+                <arg value="-lBulletInverseDynamicsUtils"/>
+                <arg value="-lBullet3Common"/>
+                <arg value="-lLinearMath"/>
+                <arg value="-lBulletRobotics"/>
+            </link>
+        </build>
+
+        <!-- LIBDIVIDE -->
+        <build_simple module="libdivide"/>
+
+        <!-- LLVM -->
+        <build_simple module="llvm"/>
+
+        <!-- LMDB -->
+        <build module="lmdb" simple="true" if:true="${binding.lmdb}">
+            <beforeCompile>
+                <compile>
+                    <arg value="-I${src.main.rel}"/>
+                    <arg value="-DMDB_USE_ROBUST=0"/>
+                    <fileset dir="." includes="${src.main}/*.c"/>
+                </compile>
+            </beforeCompile>
+        </build>
+
+        <!-- LZ4 -->
+        <build module="lz4" simple="true" if:true="${binding.lz4}">
+            <beforeCompile>
+                <compile>
+                    <arg value="-I${src.main.rel}"/>
+                    <arg value="-I${module.lwjgl.rel}/xxhash/src/main/c"/>
+                    <fileset dir="." includes="${src.main}/*.c"/>
+                    <fileset dir="." includes="${module.lwjgl}/xxhash/src/main/c/*.c"/>
+                </compile>
+            </beforeCompile>
+        </build>
+
+        <!-- Meow -->
+        <build module="meow" simple="true" flags="-Werror -Wfatal-errors -maes -msse4.2" if:true="${binding.meow}"/>
+
+        <!-- NanoVG -->
+        <build module="nanovg" simple="true" if:true="${binding.nanovg}">
+            <source>
+                <arg value="-isystem${module.lwjgl.rel}/stb/src/main/c"/>
+            </source>
+            <link>
+                <arg value="-lm"/>
+            </link>
+        </build>
+
+        <!-- NativeFileDialog -->
+        <build module="nfd" simple="true" if:true="${binding.nfd}">
+            <beforeCompile>
+                <local name="gtk3"/>
+                <local name="stderr"/>
+                <exec outputproperty="gtk3" errorproperty="stderr" executable="pkg-config" failonerror="true" taskname="gtk-3.0">
+                    <arg line="--cflags gtk+-3.0"/>
+                </exec>
+
+                <compile>
+                    <arg line="${gtk3}"/>
+                    <arg value="-I${src.main.rel}"/>
+                    <arg value="-I${src.main.rel}/include"/>
+                    <fileset dir="." includes="${src.main}/nfd_common.c"/>
+                    <fileset dir="." includes="${src.main}/nfd_gtk.c"/>
+                </compile>
+            </beforeCompile>
+            <source>
+                <arg value="-I${src.main.rel}/include"/>
+            </source>
+            <link>
+                <arg value="-lglib-2.0"/>
+                <arg value="-lgobject-2.0"/>
+                <arg value="-lgtk-3"/>
+            </link>
+        </build>
+
+        <!-- Nuklear -->
+        <build simple="true" module="nuklear">
+            <link>
+                <arg value="-lm"/>
+            </link>
+        </build>
+
+        <!-- OpenGL -->
+        <build_simple module="opengl"/>
+
+        <!-- OpenGL ES -->
+        <build_simple module="opengles"/>
+
+        <!-- OpenVR -->
+        <build_simple module="openvr"/>
+
+        <!-- ParShapes -->
+        <build simple="true" module="par">
+            <link>
+                <arg value="-lm"/>
+            </link>
+        </build>
+
+        <!-- Remotery -->
+        <build module="remotery" if:true="${binding.remotery}">
+            <source>
+                <arg value="-I${src.main.rel}"/>
+                <fileset dir="." includes="${src.generated}/*.c" excludes="**/*Metal.c"/>
+            </source>
+            <link>
+                <arg value="-lGL"/>
+            </link>
+        </build>
+
+        <!-- rpmalloc -->
+        <build_simple module="rpmalloc"/>
+
+        <!-- SSE -->
+        <build module="sse" simple="true" if:true="${binding.sse}">
+            <source>
+                <arg value="-msse3"/>
+            </source>
+        </build>
+
+        <!-- stb -->
+        <build module="stb" if:true="${binding.stb}">
+            <source>
+                <arg value="-isystem${src.main.rel}"/>
+                <fileset dir="." includes="${src.generated}/*.c"/>
+            </source>
+            <link>
+                <arg value="-lm"/>
+            </link>
+        </build>
+
+        <!-- tinyexr -->
+        <build module="tinyexr" simple="true" linker="c++" if:true="${binding.tinyexr}">
+            <beforeCompile>
+                <compile lang="c++">
+                    <arg value="-I${src.main.rel}"/>
+                    <fileset dir="." includes="${src.main}/*.cc"/>
+                </compile>
+            </beforeCompile>
+        </build>
+
+        <!-- tiny file dialogs -->
+        <build module="tinyfd" simple="true" if:true="${binding.tinyfd}">
+            <beforeCompile>
+                <compile>
+                    <arg value="-I${src.main.rel}"/>
+                    <fileset dir="." includes="${src.main}/*.c"/>
+                </compile>
+            </beforeCompile>
+        </build>
+
+        <!-- AMD Tootle -->
+        <build module="tootle" lang="c++" if:true="${binding.tootle}">
+            <beforeCompile>
+                <compile flags="-D_SOFTWARE_ONLY_VERSION -D_LINUX">
+                    <arg value="-I${src.main.rel}"/>
+                    <fileset dir="." includes="${src.main}/*.c"/>
+                </compile>
+                <compile lang="c++" flags="-D_SOFTWARE_ONLY_VERSION -D_LINUX">
+                    <arg value="-I${src.main.rel}"/>
+                    <arg value="-I${src.main.rel}/include"/>
+                    <arg value="-I${src.main.rel}/RayTracer"/>
+                    <arg value="-I${src.main.rel}/RayTracer/JRT"/>
+                    <arg value="-I${src.main.rel}/RayTracer/Math"/>
+                    <fileset dir=".">
+                        <include name="${src.main}/*.cpp"/>
+                        <exclude name="${src.main}/d3d*.cpp"/>
+                        <exclude name="${src.main}/gdi*.cpp"/>
+                    </fileset>
+                    <fileset dir="." includes="${src.main}/RayTracer/*.cpp"/>
+                    <fileset dir="." includes="${src.main}/RayTracer/JRT/*.cpp"/>
+                    <fileset dir="." includes="${src.main}/RayTracer/Math/*.cpp"/>
+                </compile>
+            </beforeCompile>
+            <source>
+                <arg value="-D_LINUX"/>
+                <arg value="-I${src.main.rel}/include"/>
+                <fileset dir="." includes="${src.generated}/*.cpp"/>
+            </source>
+        </build>
+
+        <!-- Vulkan Memory Allocator -->
+        <build module="vma" lang="c++" if:true="${binding.vma}">
+            <source>
+                <arg value="-I${src.main.rel}"/>
+                <arg value="-I${module.lwjgl.rel}/vulkan/src/main/c"/>
+                <fileset dir="." includes="${src.generated}/*.cpp"/>
+            </source>
+        </build>
+
+        <!-- xxHash -->
+        <build_simple module="xxhash"/>
+
+        <!-- yoga -->
+        <build module="yoga" simple="true" lang="c++" if:true="${binding.yoga}">
+            <beforeCompile>
+                <compile lang="c++">
+                    <arg value="-I${src.main.rel}"/>
+                    <fileset dir="." includes="${src.main}/*.cpp"/>
+                </compile>
+            </beforeCompile>
+        </build>
+
+        <!-- zstd -->
+        <build module="zstd" simple="true" if:true="${binding.zstd}">
+            <beforeCompile>
+                <compile flags="-DZSTD_MULTITHREAD">
+                    <arg value="-I${src.main.rel}"/>
+                    <arg value="-I${src.main.rel}/common"/>
+                    <arg value="-I${src.main.rel}/compress"/>
+                    <arg value="-I${src.main.rel}/decompress"/>
+                    <arg value="-I${src.main.rel}/dictBuilder"/>
+                    <arg value="-I${module.lwjgl.rel}/xxhash/src/main/c"/>
+                    <fileset dir="." includes="${src.main}/common/*.c"/>
+                    <fileset dir="." includes="${src.main}/compress/*.c"/>
+                    <fileset dir="." includes="${src.main}/decompress/*.c"/>
+                    <fileset dir="." includes="${src.main}/dictBuilder/*.c"/>
+                    <fileset dir="." includes="${module.lwjgl}/xxhash/src/main/c/*.c"/>
+                </compile>
+            </beforeCompile>
+            <source>
+                <arg value="-I${src.main.rel}/common"/>
+                <arg value="-I${src.main.rel}/dictBuilder"/>
+            </source>
+        </build>
+
+        </parallel>
+
+        <local name="native-dependencies-uptodate"/>
+        <condition property="native-dependencies-uptodate" value="true">
+            <or>
+                <istrue value="${build.offline}"/>
+                <resourceexists>
+                    <file file="${lib}/touch_${platform}.txt"/>
+                </resourceexists>
+            </or>
+        </condition>
+
+        <sequential unless:set="native-dependencies-uptodate">
+            <mkdir dir="${lib}/${platform}/x64"/>
+
+            <parallel threadsPerProcessor="4" failonany="true">
+
+            <update-dependency name="Assimp" artifact="${build.arch}/libassimp.so" dest="${lib}" if:true="${binding.assimp}"/>
+            <update-dependency name="bgfx" artifact="${build.arch}/libbgfx.so" dest="${lib}" if:true="${binding.bgfx}"/>
+            <update-dependency name="jemalloc" artifact="${build.arch}/libjemalloc.so" dest="${lib}" if:true="${binding.jemalloc}"/>
+            <update-dependency name="GLFW" artifact="${build.arch}/libglfw.so" dest="${lib}" if:true="${binding.glfw}"/>
+            <update-dependency name="GLFW" artifact="${build.arch}/libglfw_wayland.so" dest="${lib}" if:true="${binding.glfw}"/>
+            <update-dependency name="OpenAL32" artifact="${build.arch}/libopenal.so" dest="${lib}" if:true="${binding.openal}"/>
+            <update-dependency name="OpenVR" artifact="${build.arch}/libopenvr_api.so" dest="${lib}" if:true="${binding.openvr}"/>
+            <update-dependency name="Opus" artifact="${build.arch}/libopus.so" dest="${lib}" if:true="${binding.opus}"/>
+            <update-dependency name="Shaderc" artifact="${build.arch}/libshaderc.so" dest="${lib}" if:true="${binding.shaderc}"/>
+            <update-dependency name="Shaderc spvc" artifact="${build.arch}/libshaderc_spvc.so" dest="${lib}" if:true="${binding.shaderc}"/>
+
+            </parallel>
+
+            <touch file="${lib}/touch_${platform}.txt" verbose="false"/>
+        </sequential>
+    </target>
+</project>

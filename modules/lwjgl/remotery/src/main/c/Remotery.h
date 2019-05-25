@@ -122,6 +122,8 @@ documented just below this comment.
 #elif defined(__linux__) || defined(__FreeBSD__)
     #define RMT_PLATFORM_LINUX
     #define RMT_PLATFORM_POSIX
+#elif defined(__OpenBSD__)
+    #define RMT_PLATFORM_POSIX
 #elif defined(__APPLE__)
     #define RMT_PLATFORM_MACOS
     #define RMT_PLATFORM_POSIX
