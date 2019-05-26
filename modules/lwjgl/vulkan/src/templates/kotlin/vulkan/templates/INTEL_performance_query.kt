@@ -228,13 +228,6 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassVK("INTEL_perfo
 
         <h5>See Also</h5>
         ##VkPerformanceConfigurationAcquireInfoINTEL
-
-        <h5>Document Notes</h5>
-        For more information, see the Vulkan Specification at URL
-
-        https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPerformanceConfigurationTypeINTEL
-
-        This page is extracted from the Vulkan Specification. Fixes and changes should be made to the Specification, not directly.
         """,
 
         "PERFORMANCE_CONFIGURATION_TYPE_COMMAND_QUEUE_METRICS_DISCOVERY_ACTIVATED_INTEL".."0"
@@ -298,13 +291,6 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassVK("INTEL_perfo
 
         <h5>See Also</h5>
         ##VkPerformanceValueINTEL
-
-        <h5>Document Notes</h5>
-        For more information, see the Vulkan Specification at URL
-
-        https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkPerformanceValueTypeINTEL
-
-        This page is extracted from the Vulkan Specification. Fixes and changes should be made to the Specification, not directly.
         """,
 
         "PERFORMANCE_VALUE_TYPE_UINT32_INTEL".."0",

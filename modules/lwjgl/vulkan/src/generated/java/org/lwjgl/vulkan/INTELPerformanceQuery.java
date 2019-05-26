@@ -224,14 +224,6 @@ public class INTELPerformanceQuery {
      * <h5>See Also</h5>
      * 
      * <p>{@link VkPerformanceConfigurationAcquireInfoINTEL}</p>
-     * 
-     * <h5>Document Notes</h5>
-     * 
-     * <p>For more information, see the Vulkan Specification at URL</p>
-     * 
-     * <p>https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/{@link vkspec.html#VkPerformanceConfigurationTypeINTEL}</p>
-     * 
-     * <p>This page is extracted from the Vulkan Specification. Fixes and changes should be made to the Specification, not directly.</p>
      */
     public static final int VK_PERFORMANCE_CONFIGURATION_TYPE_COMMAND_QUEUE_METRICS_DISCOVERY_ACTIVATED_INTEL = 0;
 
@@ -292,14 +284,6 @@ public class INTELPerformanceQuery {
      * <h5>See Also</h5>
      * 
      * <p>{@link VkPerformanceValueINTEL}</p>
-     * 
-     * <h5>Document Notes</h5>
-     * 
-     * <p>For more information, see the Vulkan Specification at URL</p>
-     * 
-     * <p>https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/{@link vkspec.html#VkPerformanceValueTypeINTEL}</p>
-     * 
-     * <p>This page is extracted from the Vulkan Specification. Fixes and changes should be made to the Specification, not directly.</p>
      * 
      * <h5>Enum values:</h5>
      * 
