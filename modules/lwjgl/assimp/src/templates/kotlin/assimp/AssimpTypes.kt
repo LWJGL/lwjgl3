@@ -51,7 +51,7 @@ val aiString = struct(Module.ASSIMP, "AIString", nativeName = "struct aiString")
     documentation = "Represents an UTF-8 string, zero byte terminated."
 
     AutoSize("data")..size_t("length", "Binary length of the string excluding the terminal 0.")
-    charUTF8("data", "String buffer.")["Assimp.MAXLEN"]
+    NullTerminatedMember..charUTF8("data", "String buffer.")["Assimp.MAXLEN"]
 }
 
 val aiMemoryInfo = struct(Module.ASSIMP, "AIMemoryInfo", nativeName = "struct aiMemoryInfo", mutable = false) {

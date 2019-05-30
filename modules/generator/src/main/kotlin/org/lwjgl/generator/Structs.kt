@@ -1476,18 +1476,21 @@ ${validations.joinToString("\n")}
                     } else if (it.nativeType is CharType) {
                         val mapping = it.nativeType.mapping as PrimitiveMapping
                         val byteSize = if (mapping.bytes == 1) it.size else "${it.size} * ${mapping.bytes}"
+                        val nullTerminated = getReferenceMember<AutoSizeMember>(it.name) == null || it.has(NullTerminatedMember)
 
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$setter(ByteBuffer) $setter}. */")
                         println("${t}public static void n$setter(long $STRUCT, ByteBuffer value) {")
                         if (Module.CHECKS) {
                             println("$t${t}if (CHECKS) {")
-                            println("$t$t${t}checkNT${mapping.bytes}(value);")
+                            if (nullTerminated) {
+                                println("$t$t${t}checkNT${mapping.bytes}(value);")
+                            }
                             println("$t$t${t}checkGT(value, $byteSize);")
                             println("$t$t}")
                         }
                         println("$t${t}memCopy(memAddress(value), $STRUCT + $field, value.remaining());")
-                        setRemaining(it, mapping.bytes, prefix = "$t$t", suffix = "\n")
+                        setRemaining(it, if (nullTerminated) mapping.bytes else 0, prefix = "$t$t", suffix = "\n")
                         println("$t}")
                     } else {
                         val mapping = it.primitiveMapping
@@ -1512,13 +1515,15 @@ ${validations.joinToString("\n")}
                     }
                 } else if (it.nativeType is CharSequenceType) {
                     val mapping = it.nativeType.charMapping
+                    val nullTerminated = getReferenceMember<AutoSizeMember>(it.name) == null || it.has(NullTerminatedMember)
 
                     if (it.public)
                         println("$t/** Unsafe version of {@link #$setter(ByteBuffer) $setter}. */")
                     println("${t}public static void n$setter(long $STRUCT, ${it.nullable("ByteBuffer")} value) {")
-                    if (Module.CHECKS)
+                    if (Module.CHECKS && nullTerminated)
                         println("$t${t}if (CHECKS) { checkNT${mapping.bytes}${if (it.isNullable) "Safe" else ""}(value); }")
                     println("$t${t}memPutAddress($STRUCT + $field, ${it.memAddressValue});")
+                    setRemaining(it, prefix = "$t$t", suffix = "\n")
                     println("$t}")
                 } else if (it.nativeType.isPointerData) {
                     val paramType = it.nativeType.javaMethodType

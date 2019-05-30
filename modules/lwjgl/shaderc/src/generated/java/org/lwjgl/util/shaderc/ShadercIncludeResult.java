@@ -305,15 +305,15 @@ public class ShadercIncludeResult extends Struct implements NativeResource {
 
     /** Unsafe version of {@link #source_name(ByteBuffer) source_name}. */
     public static void nsource_name(long struct, ByteBuffer value) {
-        if (CHECKS) { checkNT1(value); }
         memPutAddress(struct + ShadercIncludeResult.SOURCE_NAME, memAddress(value));
+        nsource_name_length(struct, value.remaining());
     }
     /** Sets the specified value to the {@code source_name_length} field of the specified {@code struct}. */
     public static void nsource_name_length(long struct, long value) { memPutAddress(struct + ShadercIncludeResult.SOURCE_NAME_LENGTH, value); }
     /** Unsafe version of {@link #content(ByteBuffer) content}. */
     public static void ncontent(long struct, ByteBuffer value) {
-        if (CHECKS) { checkNT1(value); }
         memPutAddress(struct + ShadercIncludeResult.CONTENT, memAddress(value));
+        ncontent_length(struct, value.remaining());
     }
     /** Sets the specified value to the {@code content_length} field of the specified {@code struct}. */
     public static void ncontent_length(long struct, long value) { memPutAddress(struct + ShadercIncludeResult.CONTENT_LENGTH, value); }

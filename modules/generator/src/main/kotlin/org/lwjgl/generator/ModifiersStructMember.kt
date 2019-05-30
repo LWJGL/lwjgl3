@@ -88,3 +88,13 @@ class UserDataMember(
         }
     }
 }
+
+/** Marks an array member as terminated by the specified value. */
+class TerminatedMember(val value: String) : StructMemberModifier {
+    override val isSpecial = true
+    override fun validate(member: StructMember) {
+        if (member !is StructMemberArray)
+            throw IllegalArgumentException("The NullTerminated modifier can only be applied to array members.")
+    }
+}
+val NullTerminatedMember = TerminatedMember("")
