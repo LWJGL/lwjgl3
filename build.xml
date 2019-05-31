@@ -313,6 +313,10 @@
 
     <target name="compile" description="Compiles the Java source code" depends="generate">
         <mkdir dir="${bin.lwjgl}/core"/>
+
+        <!-- cleanup in case there was an earlier "release" failure -->
+        <delete dir="${module.lwjgl}/core/src/generated/java/META-INF" quiet="true"/>
+
         <lwjgl.javac destdir="${bin.lwjgl}/core" taskname="javac: core">
             <classpath><pathelement path="${lib}/java/jsr305.jar"/></classpath>
             <src>
@@ -1140,9 +1144,6 @@
                 <equals arg1="n" arg2="${input}"/>
             </condition>
         </fail>
-
-        <!-- cleanup in case there was an earlier "release" failure -->
-        <delete dir="${module.lwjgl}/core/src/generated/java/META-INF"/>
     </target>
 
     <!-- Set the LWJGL_BUILD_OFFLINE=true environment variable for local builds. -->
