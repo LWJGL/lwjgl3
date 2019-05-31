@@ -701,7 +701,6 @@ public class Shaderc {
         long __functionAddress = Functions.compile_options_set_include_callbacks;
         if (CHECKS) {
             check(options);
-            check(user_data);
         }
         invokePPPPV(options, resolver, result_releaser, user_data, __functionAddress);
     }

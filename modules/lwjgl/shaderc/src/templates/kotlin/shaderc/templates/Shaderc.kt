@@ -410,7 +410,7 @@ val Shaderc = "Shaderc".nativeClass(Module.SHADERC, prefix = "shaderc_", prefixM
         shaderc_compile_options_t("options", ""),
         nullable..shaderc_include_resolve_fn("resolver", ""),
         nullable..shaderc_include_result_release_fn("result_releaser", ""),
-        opaque_p("user_data", "")
+        nullable..opaque_p("user_data", "")
     )
 
     void(
