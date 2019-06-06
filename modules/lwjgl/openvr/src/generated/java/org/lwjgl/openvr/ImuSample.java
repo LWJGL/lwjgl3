@@ -75,13 +75,9 @@ public class ImuSample extends Struct {
     /** Returns a {@link HmdVector3d} view of the {@code vAccel} field. */
     @NativeType("HmdVector3d_t")
     public HmdVector3d vAccel() { return nvAccel(address()); }
-    /** Passes the {@code vAccel} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public ImuSample vAccel(java.util.function.Consumer<HmdVector3d> consumer) { consumer.accept(vAccel()); return this; }
     /** Returns a {@link HmdVector3d} view of the {@code vGyro} field. */
     @NativeType("HmdVector3d_t")
     public HmdVector3d vGyro() { return nvGyro(address()); }
-    /** Passes the {@code vGyro} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public ImuSample vGyro(java.util.function.Consumer<HmdVector3d> consumer) { consumer.accept(vGyro()); return this; }
     /** Returns the value of the {@code unOffScaleFlags} field. */
     @NativeType("uint32_t")
     public int unOffScaleFlags() { return nunOffScaleFlags(address()); }
@@ -169,13 +165,9 @@ public class ImuSample extends Struct {
         /** Returns a {@link HmdVector3d} view of the {@code vAccel} field. */
         @NativeType("HmdVector3d_t")
         public HmdVector3d vAccel() { return ImuSample.nvAccel(address()); }
-        /** Passes the {@code vAccel} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public ImuSample.Buffer vAccel(java.util.function.Consumer<HmdVector3d> consumer) { consumer.accept(vAccel()); return this; }
         /** Returns a {@link HmdVector3d} view of the {@code vGyro} field. */
         @NativeType("HmdVector3d_t")
         public HmdVector3d vGyro() { return ImuSample.nvGyro(address()); }
-        /** Passes the {@code vGyro} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public ImuSample.Buffer vGyro(java.util.function.Consumer<HmdVector3d> consumer) { consumer.accept(vGyro()); return this; }
         /** Returns the value of the {@code unOffScaleFlags} field. */
         @NativeType("uint32_t")
         public int unOffScaleFlags() { return ImuSample.nunOffScaleFlags(address()); }

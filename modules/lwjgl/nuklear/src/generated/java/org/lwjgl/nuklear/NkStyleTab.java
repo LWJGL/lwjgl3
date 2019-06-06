@@ -115,38 +115,24 @@ public class NkStyleTab extends Struct implements NativeResource {
     /** Returns a {@link NkStyleItem} view of the {@code background} field. */
     @NativeType("struct nk_style_item")
     public NkStyleItem background() { return nbackground(address()); }
-    /** Passes the {@code background} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleTab background(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(background()); return this; }
     /** Returns a {@link NkColor} view of the {@code border_color} field. */
     @NativeType("struct nk_color")
     public NkColor border_color() { return nborder_color(address()); }
-    /** Passes the {@code border_color} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleTab border_color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(border_color()); return this; }
     /** Returns a {@link NkColor} view of the {@code text} field. */
     @NativeType("struct nk_color")
     public NkColor text() { return ntext(address()); }
-    /** Passes the {@code text} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleTab text(java.util.function.Consumer<NkColor> consumer) { consumer.accept(text()); return this; }
     /** Returns a {@link NkStyleButton} view of the {@code tab_maximize_button} field. */
     @NativeType("struct nk_style_button")
     public NkStyleButton tab_maximize_button() { return ntab_maximize_button(address()); }
-    /** Passes the {@code tab_maximize_button} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleTab tab_maximize_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(tab_maximize_button()); return this; }
     /** Returns a {@link NkStyleButton} view of the {@code tab_minimize_button} field. */
     @NativeType("struct nk_style_button")
     public NkStyleButton tab_minimize_button() { return ntab_minimize_button(address()); }
-    /** Passes the {@code tab_minimize_button} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleTab tab_minimize_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(tab_minimize_button()); return this; }
     /** Returns a {@link NkStyleButton} view of the {@code node_maximize_button} field. */
     @NativeType("struct nk_style_button")
     public NkStyleButton node_maximize_button() { return nnode_maximize_button(address()); }
-    /** Passes the {@code node_maximize_button} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleTab node_maximize_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(node_maximize_button()); return this; }
     /** Returns a {@link NkStyleButton} view of the {@code node_minimize_button} field. */
     @NativeType("struct nk_style_button")
     public NkStyleButton node_minimize_button() { return nnode_minimize_button(address()); }
-    /** Passes the {@code node_minimize_button} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleTab node_minimize_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(node_minimize_button()); return this; }
     /** Returns the value of the {@code sym_minimize} field. */
     @NativeType("enum nk_symbol_type")
     public int sym_minimize() { return nsym_minimize(address()); }
@@ -162,28 +148,38 @@ public class NkStyleTab extends Struct implements NativeResource {
     /** Returns a {@link NkVec2} view of the {@code padding} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 padding() { return npadding(address()); }
-    /** Passes the {@code padding} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleTab padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(padding()); return this; }
     /** Returns a {@link NkVec2} view of the {@code spacing} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 spacing() { return nspacing(address()); }
-    /** Passes the {@code spacing} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleTab spacing(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(spacing()); return this; }
 
     /** Copies the specified {@link NkStyleItem} to the {@code background} field. */
     public NkStyleTab background(@NativeType("struct nk_style_item") NkStyleItem value) { nbackground(address(), value); return this; }
+    /** Passes the {@code background} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleTab background(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(background()); return this; }
     /** Copies the specified {@link NkColor} to the {@code border_color} field. */
     public NkStyleTab border_color(@NativeType("struct nk_color") NkColor value) { nborder_color(address(), value); return this; }
+    /** Passes the {@code border_color} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleTab border_color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(border_color()); return this; }
     /** Copies the specified {@link NkColor} to the {@code text} field. */
     public NkStyleTab text(@NativeType("struct nk_color") NkColor value) { ntext(address(), value); return this; }
+    /** Passes the {@code text} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleTab text(java.util.function.Consumer<NkColor> consumer) { consumer.accept(text()); return this; }
     /** Copies the specified {@link NkStyleButton} to the {@code tab_maximize_button} field. */
     public NkStyleTab tab_maximize_button(@NativeType("struct nk_style_button") NkStyleButton value) { ntab_maximize_button(address(), value); return this; }
+    /** Passes the {@code tab_maximize_button} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleTab tab_maximize_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(tab_maximize_button()); return this; }
     /** Copies the specified {@link NkStyleButton} to the {@code tab_minimize_button} field. */
     public NkStyleTab tab_minimize_button(@NativeType("struct nk_style_button") NkStyleButton value) { ntab_minimize_button(address(), value); return this; }
+    /** Passes the {@code tab_minimize_button} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleTab tab_minimize_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(tab_minimize_button()); return this; }
     /** Copies the specified {@link NkStyleButton} to the {@code node_maximize_button} field. */
     public NkStyleTab node_maximize_button(@NativeType("struct nk_style_button") NkStyleButton value) { nnode_maximize_button(address(), value); return this; }
+    /** Passes the {@code node_maximize_button} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleTab node_maximize_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(node_maximize_button()); return this; }
     /** Copies the specified {@link NkStyleButton} to the {@code node_minimize_button} field. */
     public NkStyleTab node_minimize_button(@NativeType("struct nk_style_button") NkStyleButton value) { nnode_minimize_button(address(), value); return this; }
+    /** Passes the {@code node_minimize_button} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleTab node_minimize_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(node_minimize_button()); return this; }
     /** Sets the specified value to the {@code sym_minimize} field. */
     public NkStyleTab sym_minimize(@NativeType("enum nk_symbol_type") int value) { nsym_minimize(address(), value); return this; }
     /** Sets the specified value to the {@code sym_maximize} field. */
@@ -196,8 +192,12 @@ public class NkStyleTab extends Struct implements NativeResource {
     public NkStyleTab indent(float value) { nindent(address(), value); return this; }
     /** Copies the specified {@link NkVec2} to the {@code padding} field. */
     public NkStyleTab padding(@NativeType("struct nk_vec2") NkVec2 value) { npadding(address(), value); return this; }
+    /** Passes the {@code padding} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleTab padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(padding()); return this; }
     /** Copies the specified {@link NkVec2} to the {@code spacing} field. */
     public NkStyleTab spacing(@NativeType("struct nk_vec2") NkVec2 value) { nspacing(address(), value); return this; }
+    /** Passes the {@code spacing} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleTab spacing(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(spacing()); return this; }
 
     /** Initializes this struct with the specified values. */
     public NkStyleTab set(
@@ -488,38 +488,24 @@ public class NkStyleTab extends Struct implements NativeResource {
         /** Returns a {@link NkStyleItem} view of the {@code background} field. */
         @NativeType("struct nk_style_item")
         public NkStyleItem background() { return NkStyleTab.nbackground(address()); }
-        /** Passes the {@code background} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleTab.Buffer background(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(background()); return this; }
         /** Returns a {@link NkColor} view of the {@code border_color} field. */
         @NativeType("struct nk_color")
         public NkColor border_color() { return NkStyleTab.nborder_color(address()); }
-        /** Passes the {@code border_color} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleTab.Buffer border_color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(border_color()); return this; }
         /** Returns a {@link NkColor} view of the {@code text} field. */
         @NativeType("struct nk_color")
         public NkColor text() { return NkStyleTab.ntext(address()); }
-        /** Passes the {@code text} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleTab.Buffer text(java.util.function.Consumer<NkColor> consumer) { consumer.accept(text()); return this; }
         /** Returns a {@link NkStyleButton} view of the {@code tab_maximize_button} field. */
         @NativeType("struct nk_style_button")
         public NkStyleButton tab_maximize_button() { return NkStyleTab.ntab_maximize_button(address()); }
-        /** Passes the {@code tab_maximize_button} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleTab.Buffer tab_maximize_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(tab_maximize_button()); return this; }
         /** Returns a {@link NkStyleButton} view of the {@code tab_minimize_button} field. */
         @NativeType("struct nk_style_button")
         public NkStyleButton tab_minimize_button() { return NkStyleTab.ntab_minimize_button(address()); }
-        /** Passes the {@code tab_minimize_button} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleTab.Buffer tab_minimize_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(tab_minimize_button()); return this; }
         /** Returns a {@link NkStyleButton} view of the {@code node_maximize_button} field. */
         @NativeType("struct nk_style_button")
         public NkStyleButton node_maximize_button() { return NkStyleTab.nnode_maximize_button(address()); }
-        /** Passes the {@code node_maximize_button} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleTab.Buffer node_maximize_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(node_maximize_button()); return this; }
         /** Returns a {@link NkStyleButton} view of the {@code node_minimize_button} field. */
         @NativeType("struct nk_style_button")
         public NkStyleButton node_minimize_button() { return NkStyleTab.nnode_minimize_button(address()); }
-        /** Passes the {@code node_minimize_button} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleTab.Buffer node_minimize_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(node_minimize_button()); return this; }
         /** Returns the value of the {@code sym_minimize} field. */
         @NativeType("enum nk_symbol_type")
         public int sym_minimize() { return NkStyleTab.nsym_minimize(address()); }
@@ -535,28 +521,38 @@ public class NkStyleTab extends Struct implements NativeResource {
         /** Returns a {@link NkVec2} view of the {@code padding} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 padding() { return NkStyleTab.npadding(address()); }
-        /** Passes the {@code padding} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleTab.Buffer padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(padding()); return this; }
         /** Returns a {@link NkVec2} view of the {@code spacing} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 spacing() { return NkStyleTab.nspacing(address()); }
-        /** Passes the {@code spacing} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleTab.Buffer spacing(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(spacing()); return this; }
 
         /** Copies the specified {@link NkStyleItem} to the {@code background} field. */
         public NkStyleTab.Buffer background(@NativeType("struct nk_style_item") NkStyleItem value) { NkStyleTab.nbackground(address(), value); return this; }
+        /** Passes the {@code background} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleTab.Buffer background(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(background()); return this; }
         /** Copies the specified {@link NkColor} to the {@code border_color} field. */
         public NkStyleTab.Buffer border_color(@NativeType("struct nk_color") NkColor value) { NkStyleTab.nborder_color(address(), value); return this; }
+        /** Passes the {@code border_color} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleTab.Buffer border_color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(border_color()); return this; }
         /** Copies the specified {@link NkColor} to the {@code text} field. */
         public NkStyleTab.Buffer text(@NativeType("struct nk_color") NkColor value) { NkStyleTab.ntext(address(), value); return this; }
+        /** Passes the {@code text} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleTab.Buffer text(java.util.function.Consumer<NkColor> consumer) { consumer.accept(text()); return this; }
         /** Copies the specified {@link NkStyleButton} to the {@code tab_maximize_button} field. */
         public NkStyleTab.Buffer tab_maximize_button(@NativeType("struct nk_style_button") NkStyleButton value) { NkStyleTab.ntab_maximize_button(address(), value); return this; }
+        /** Passes the {@code tab_maximize_button} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleTab.Buffer tab_maximize_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(tab_maximize_button()); return this; }
         /** Copies the specified {@link NkStyleButton} to the {@code tab_minimize_button} field. */
         public NkStyleTab.Buffer tab_minimize_button(@NativeType("struct nk_style_button") NkStyleButton value) { NkStyleTab.ntab_minimize_button(address(), value); return this; }
+        /** Passes the {@code tab_minimize_button} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleTab.Buffer tab_minimize_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(tab_minimize_button()); return this; }
         /** Copies the specified {@link NkStyleButton} to the {@code node_maximize_button} field. */
         public NkStyleTab.Buffer node_maximize_button(@NativeType("struct nk_style_button") NkStyleButton value) { NkStyleTab.nnode_maximize_button(address(), value); return this; }
+        /** Passes the {@code node_maximize_button} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleTab.Buffer node_maximize_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(node_maximize_button()); return this; }
         /** Copies the specified {@link NkStyleButton} to the {@code node_minimize_button} field. */
         public NkStyleTab.Buffer node_minimize_button(@NativeType("struct nk_style_button") NkStyleButton value) { NkStyleTab.nnode_minimize_button(address(), value); return this; }
+        /** Passes the {@code node_minimize_button} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleTab.Buffer node_minimize_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(node_minimize_button()); return this; }
         /** Sets the specified value to the {@code sym_minimize} field. */
         public NkStyleTab.Buffer sym_minimize(@NativeType("enum nk_symbol_type") int value) { NkStyleTab.nsym_minimize(address(), value); return this; }
         /** Sets the specified value to the {@code sym_maximize} field. */
@@ -569,8 +565,12 @@ public class NkStyleTab extends Struct implements NativeResource {
         public NkStyleTab.Buffer indent(float value) { NkStyleTab.nindent(address(), value); return this; }
         /** Copies the specified {@link NkVec2} to the {@code padding} field. */
         public NkStyleTab.Buffer padding(@NativeType("struct nk_vec2") NkVec2 value) { NkStyleTab.npadding(address(), value); return this; }
+        /** Passes the {@code padding} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleTab.Buffer padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(padding()); return this; }
         /** Copies the specified {@link NkVec2} to the {@code spacing} field. */
         public NkStyleTab.Buffer spacing(@NativeType("struct nk_vec2") NkVec2 value) { NkStyleTab.nspacing(address(), value); return this; }
+        /** Passes the {@code spacing} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleTab.Buffer spacing(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(spacing()); return this; }
 
     }
 

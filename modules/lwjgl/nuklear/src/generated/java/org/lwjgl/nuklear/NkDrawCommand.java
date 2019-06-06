@@ -76,18 +76,12 @@ public class NkDrawCommand extends Struct {
     /** Returns a {@link NkRect} view of the {@code clip_rect} field. */
     @NativeType("struct nk_rect")
     public NkRect clip_rect() { return nclip_rect(address()); }
-    /** Passes the {@code clip_rect} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkDrawCommand clip_rect(java.util.function.Consumer<NkRect> consumer) { consumer.accept(clip_rect()); return this; }
     /** Returns a {@link NkHandle} view of the {@code texture} field. */
     @NativeType("nk_handle")
     public NkHandle texture() { return ntexture(address()); }
-    /** Passes the {@code texture} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkDrawCommand texture(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(texture()); return this; }
     /** Returns a {@link NkHandle} view of the {@code userdata} field. */
     @NativeType("nk_handle")
     public NkHandle userdata() { return nuserdata(address()); }
-    /** Passes the {@code userdata} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkDrawCommand userdata(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(userdata()); return this; }
 
     // -----------------------------------
 
@@ -173,18 +167,12 @@ public class NkDrawCommand extends Struct {
         /** Returns a {@link NkRect} view of the {@code clip_rect} field. */
         @NativeType("struct nk_rect")
         public NkRect clip_rect() { return NkDrawCommand.nclip_rect(address()); }
-        /** Passes the {@code clip_rect} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkDrawCommand.Buffer clip_rect(java.util.function.Consumer<NkRect> consumer) { consumer.accept(clip_rect()); return this; }
         /** Returns a {@link NkHandle} view of the {@code texture} field. */
         @NativeType("nk_handle")
         public NkHandle texture() { return NkDrawCommand.ntexture(address()); }
-        /** Passes the {@code texture} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkDrawCommand.Buffer texture(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(texture()); return this; }
         /** Returns a {@link NkHandle} view of the {@code userdata} field. */
         @NativeType("nk_handle")
         public NkHandle userdata() { return NkDrawCommand.nuserdata(address()); }
-        /** Passes the {@code userdata} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkDrawCommand.Buffer userdata(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(userdata()); return this; }
 
     }
 

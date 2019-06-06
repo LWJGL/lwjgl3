@@ -75,13 +75,9 @@ public class LLVMOpInfo1 extends Struct implements NativeResource {
     /** Returns a {@link LLVMOpInfoSymbol1} view of the {@code AddSymbol} field. */
     @NativeType("struct LLVMOpInfoSymbol1")
     public LLVMOpInfoSymbol1 AddSymbol() { return nAddSymbol(address()); }
-    /** Passes the {@code AddSymbol} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public LLVMOpInfo1 AddSymbol(java.util.function.Consumer<LLVMOpInfoSymbol1> consumer) { consumer.accept(AddSymbol()); return this; }
     /** Returns a {@link LLVMOpInfoSymbol1} view of the {@code SubtractSymbol} field. */
     @NativeType("struct LLVMOpInfoSymbol1")
     public LLVMOpInfoSymbol1 SubtractSymbol() { return nSubtractSymbol(address()); }
-    /** Passes the {@code SubtractSymbol} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public LLVMOpInfo1 SubtractSymbol(java.util.function.Consumer<LLVMOpInfoSymbol1> consumer) { consumer.accept(SubtractSymbol()); return this; }
     /** Returns the value of the {@code Value} field. */
     @NativeType("uint64_t")
     public long Value() { return nValue(address()); }
@@ -91,8 +87,12 @@ public class LLVMOpInfo1 extends Struct implements NativeResource {
 
     /** Copies the specified {@link LLVMOpInfoSymbol1} to the {@code AddSymbol} field. */
     public LLVMOpInfo1 AddSymbol(@NativeType("struct LLVMOpInfoSymbol1") LLVMOpInfoSymbol1 value) { nAddSymbol(address(), value); return this; }
+    /** Passes the {@code AddSymbol} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public LLVMOpInfo1 AddSymbol(java.util.function.Consumer<LLVMOpInfoSymbol1> consumer) { consumer.accept(AddSymbol()); return this; }
     /** Copies the specified {@link LLVMOpInfoSymbol1} to the {@code SubtractSymbol} field. */
     public LLVMOpInfo1 SubtractSymbol(@NativeType("struct LLVMOpInfoSymbol1") LLVMOpInfoSymbol1 value) { nSubtractSymbol(address(), value); return this; }
+    /** Passes the {@code SubtractSymbol} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public LLVMOpInfo1 SubtractSymbol(java.util.function.Consumer<LLVMOpInfoSymbol1> consumer) { consumer.accept(SubtractSymbol()); return this; }
     /** Sets the specified value to the {@code Value} field. */
     public LLVMOpInfo1 Value(@NativeType("uint64_t") long value) { nValue(address(), value); return this; }
     /** Sets the specified value to the {@code VariantKind} field. */
@@ -327,13 +327,9 @@ public class LLVMOpInfo1 extends Struct implements NativeResource {
         /** Returns a {@link LLVMOpInfoSymbol1} view of the {@code AddSymbol} field. */
         @NativeType("struct LLVMOpInfoSymbol1")
         public LLVMOpInfoSymbol1 AddSymbol() { return LLVMOpInfo1.nAddSymbol(address()); }
-        /** Passes the {@code AddSymbol} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public LLVMOpInfo1.Buffer AddSymbol(java.util.function.Consumer<LLVMOpInfoSymbol1> consumer) { consumer.accept(AddSymbol()); return this; }
         /** Returns a {@link LLVMOpInfoSymbol1} view of the {@code SubtractSymbol} field. */
         @NativeType("struct LLVMOpInfoSymbol1")
         public LLVMOpInfoSymbol1 SubtractSymbol() { return LLVMOpInfo1.nSubtractSymbol(address()); }
-        /** Passes the {@code SubtractSymbol} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public LLVMOpInfo1.Buffer SubtractSymbol(java.util.function.Consumer<LLVMOpInfoSymbol1> consumer) { consumer.accept(SubtractSymbol()); return this; }
         /** Returns the value of the {@code Value} field. */
         @NativeType("uint64_t")
         public long Value() { return LLVMOpInfo1.nValue(address()); }
@@ -343,8 +339,12 @@ public class LLVMOpInfo1 extends Struct implements NativeResource {
 
         /** Copies the specified {@link LLVMOpInfoSymbol1} to the {@code AddSymbol} field. */
         public LLVMOpInfo1.Buffer AddSymbol(@NativeType("struct LLVMOpInfoSymbol1") LLVMOpInfoSymbol1 value) { LLVMOpInfo1.nAddSymbol(address(), value); return this; }
+        /** Passes the {@code AddSymbol} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public LLVMOpInfo1.Buffer AddSymbol(java.util.function.Consumer<LLVMOpInfoSymbol1> consumer) { consumer.accept(AddSymbol()); return this; }
         /** Copies the specified {@link LLVMOpInfoSymbol1} to the {@code SubtractSymbol} field. */
         public LLVMOpInfo1.Buffer SubtractSymbol(@NativeType("struct LLVMOpInfoSymbol1") LLVMOpInfoSymbol1 value) { LLVMOpInfo1.nSubtractSymbol(address(), value); return this; }
+        /** Passes the {@code SubtractSymbol} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public LLVMOpInfo1.Buffer SubtractSymbol(java.util.function.Consumer<LLVMOpInfoSymbol1> consumer) { consumer.accept(SubtractSymbol()); return this; }
         /** Sets the specified value to the {@code Value} field. */
         public LLVMOpInfo1.Buffer Value(@NativeType("uint64_t") long value) { LLVMOpInfo1.nValue(address(), value); return this; }
         /** Sets the specified value to the {@code VariantKind} field. */

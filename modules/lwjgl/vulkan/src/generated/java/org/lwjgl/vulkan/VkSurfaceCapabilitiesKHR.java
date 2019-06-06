@@ -136,16 +136,10 @@ public class VkSurfaceCapabilitiesKHR extends Struct implements NativeResource {
     public int maxImageCount() { return nmaxImageCount(address()); }
     /** Returns a {@link VkExtent2D} view of the {@code currentExtent} field. */
     public VkExtent2D currentExtent() { return ncurrentExtent(address()); }
-    /** Passes the {@code currentExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkSurfaceCapabilitiesKHR currentExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(currentExtent()); return this; }
     /** Returns a {@link VkExtent2D} view of the {@code minImageExtent} field. */
     public VkExtent2D minImageExtent() { return nminImageExtent(address()); }
-    /** Passes the {@code minImageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkSurfaceCapabilitiesKHR minImageExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(minImageExtent()); return this; }
     /** Returns a {@link VkExtent2D} view of the {@code maxImageExtent} field. */
     public VkExtent2D maxImageExtent() { return nmaxImageExtent(address()); }
-    /** Passes the {@code maxImageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkSurfaceCapabilitiesKHR maxImageExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(maxImageExtent()); return this; }
     /** Returns the value of the {@code maxImageArrayLayers} field. */
     @NativeType("uint32_t")
     public int maxImageArrayLayers() { return nmaxImageArrayLayers(address()); }
@@ -372,16 +366,10 @@ public class VkSurfaceCapabilitiesKHR extends Struct implements NativeResource {
         public int maxImageCount() { return VkSurfaceCapabilitiesKHR.nmaxImageCount(address()); }
         /** Returns a {@link VkExtent2D} view of the {@code currentExtent} field. */
         public VkExtent2D currentExtent() { return VkSurfaceCapabilitiesKHR.ncurrentExtent(address()); }
-        /** Passes the {@code currentExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkSurfaceCapabilitiesKHR.Buffer currentExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(currentExtent()); return this; }
         /** Returns a {@link VkExtent2D} view of the {@code minImageExtent} field. */
         public VkExtent2D minImageExtent() { return VkSurfaceCapabilitiesKHR.nminImageExtent(address()); }
-        /** Passes the {@code minImageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkSurfaceCapabilitiesKHR.Buffer minImageExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(minImageExtent()); return this; }
         /** Returns a {@link VkExtent2D} view of the {@code maxImageExtent} field. */
         public VkExtent2D maxImageExtent() { return VkSurfaceCapabilitiesKHR.nmaxImageExtent(address()); }
-        /** Passes the {@code maxImageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkSurfaceCapabilitiesKHR.Buffer maxImageExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(maxImageExtent()); return this; }
         /** Returns the value of the {@code maxImageArrayLayers} field. */
         @NativeType("uint32_t")
         public int maxImageArrayLayers() { return VkSurfaceCapabilitiesKHR.nmaxImageArrayLayers(address()); }

@@ -78,13 +78,9 @@ public class RenderModelVertex extends Struct {
     /** Returns a {@link HmdVector3} view of the {@code vPosition} field. */
     @NativeType("HmdVector3_t")
     public HmdVector3 vPosition() { return nvPosition(address()); }
-    /** Passes the {@code vPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public RenderModelVertex vPosition(java.util.function.Consumer<HmdVector3> consumer) { consumer.accept(vPosition()); return this; }
     /** Returns a {@link HmdVector3} view of the {@code vNormal} field. */
     @NativeType("HmdVector3_t")
     public HmdVector3 vNormal() { return nvNormal(address()); }
-    /** Passes the {@code vNormal} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public RenderModelVertex vNormal(java.util.function.Consumer<HmdVector3> consumer) { consumer.accept(vNormal()); return this; }
     /** Returns a {@link FloatBuffer} view of the {@code rfTextureCoord} field. */
     @NativeType("float[2]")
     public FloatBuffer rfTextureCoord() { return nrfTextureCoord(address()); }
@@ -174,13 +170,9 @@ public class RenderModelVertex extends Struct {
         /** Returns a {@link HmdVector3} view of the {@code vPosition} field. */
         @NativeType("HmdVector3_t")
         public HmdVector3 vPosition() { return RenderModelVertex.nvPosition(address()); }
-        /** Passes the {@code vPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public RenderModelVertex.Buffer vPosition(java.util.function.Consumer<HmdVector3> consumer) { consumer.accept(vPosition()); return this; }
         /** Returns a {@link HmdVector3} view of the {@code vNormal} field. */
         @NativeType("HmdVector3_t")
         public HmdVector3 vNormal() { return RenderModelVertex.nvNormal(address()); }
-        /** Passes the {@code vNormal} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public RenderModelVertex.Buffer vNormal(java.util.function.Consumer<HmdVector3> consumer) { consumer.accept(vNormal()); return this; }
         /** Returns a {@link FloatBuffer} view of the {@code rfTextureCoord} field. */
         @NativeType("float[2]")
         public FloatBuffer rfTextureCoord() { return RenderModelVertex.nrfTextureCoord(address()); }

@@ -72,6 +72,10 @@ public class HmdQuad extends Struct implements NativeResource {
     public HmdQuad vCorners(@NativeType("HmdVector3_t[4]") HmdVector3.Buffer value) { nvCorners(address(), value); return this; }
     /** Copies the specified {@link HmdVector3} at the specified index of the {@code vCorners} field. */
     public HmdQuad vCorners(int index, @NativeType("HmdVector3_t") HmdVector3 value) { nvCorners(address(), index, value); return this; }
+    /** Passes the {@code vCorners} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public HmdQuad vCorners(java.util.function.Consumer<HmdVector3.Buffer> consumer) { consumer.accept(vCorners()); return this; }
+    /** Passes the element at {@code index} of the {@code vCorners} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public HmdQuad vCorners(int index, java.util.function.Consumer<HmdVector3> consumer) { consumer.accept(vCorners(index)); return this; }
 
     /**
      * Copies the specified struct data to this struct.
@@ -294,6 +298,10 @@ public class HmdQuad extends Struct implements NativeResource {
         public HmdQuad.Buffer vCorners(@NativeType("HmdVector3_t[4]") HmdVector3.Buffer value) { HmdQuad.nvCorners(address(), value); return this; }
         /** Copies the specified {@link HmdVector3} at the specified index of the {@code vCorners} field. */
         public HmdQuad.Buffer vCorners(int index, @NativeType("HmdVector3_t") HmdVector3 value) { HmdQuad.nvCorners(address(), index, value); return this; }
+        /** Passes the {@code vCorners} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public HmdQuad.Buffer vCorners(java.util.function.Consumer<HmdVector3.Buffer> consumer) { consumer.accept(vCorners()); return this; }
+        /** Passes the element at {@code index} of the {@code vCorners} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public HmdQuad.Buffer vCorners(int index, java.util.function.Consumer<HmdVector3> consumer) { consumer.accept(vCorners(index)); return this; }
 
     }
 

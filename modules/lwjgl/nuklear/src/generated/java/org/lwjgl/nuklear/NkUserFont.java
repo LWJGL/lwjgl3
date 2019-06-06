@@ -89,8 +89,6 @@ public class NkUserFont extends Struct implements NativeResource {
     /** Returns a {@link NkHandle} view of the {@code userdata} field. */
     @NativeType("nk_handle")
     public NkHandle userdata() { return nuserdata(address()); }
-    /** Passes the {@code userdata} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkUserFont userdata(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(userdata()); return this; }
     /** Returns the value of the {@code height} field. */
     public float height() { return nheight(address()); }
     /** Returns the value of the {@code width} field. */
@@ -104,11 +102,11 @@ public class NkUserFont extends Struct implements NativeResource {
     /** Returns a {@link NkHandle} view of the {@code texture} field. */
     @NativeType("nk_handle")
     public NkHandle texture() { return ntexture(address()); }
-    /** Passes the {@code texture} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkUserFont texture(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(texture()); return this; }
 
     /** Copies the specified {@link NkHandle} to the {@code userdata} field. */
     public NkUserFont userdata(@NativeType("nk_handle") NkHandle value) { nuserdata(address(), value); return this; }
+    /** Passes the {@code userdata} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkUserFont userdata(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(userdata()); return this; }
     /** Sets the specified value to the {@code height} field. */
     public NkUserFont height(float value) { nheight(address(), value); return this; }
     /** Sets the specified value to the {@code width} field. */
@@ -117,6 +115,8 @@ public class NkUserFont extends Struct implements NativeResource {
     public NkUserFont query(@Nullable @NativeType("nk_query_font_glyph_f") NkQueryFontGlyphCallbackI value) { nquery(address(), value); return this; }
     /** Copies the specified {@link NkHandle} to the {@code texture} field. */
     public NkUserFont texture(@NativeType("nk_handle") NkHandle value) { ntexture(address(), value); return this; }
+    /** Passes the {@code texture} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkUserFont texture(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(texture()); return this; }
 
     /** Initializes this struct with the specified values. */
     public NkUserFont set(
@@ -353,8 +353,6 @@ public class NkUserFont extends Struct implements NativeResource {
         /** Returns a {@link NkHandle} view of the {@code userdata} field. */
         @NativeType("nk_handle")
         public NkHandle userdata() { return NkUserFont.nuserdata(address()); }
-        /** Passes the {@code userdata} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkUserFont.Buffer userdata(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(userdata()); return this; }
         /** Returns the value of the {@code height} field. */
         public float height() { return NkUserFont.nheight(address()); }
         /** Returns the value of the {@code width} field. */
@@ -368,11 +366,11 @@ public class NkUserFont extends Struct implements NativeResource {
         /** Returns a {@link NkHandle} view of the {@code texture} field. */
         @NativeType("nk_handle")
         public NkHandle texture() { return NkUserFont.ntexture(address()); }
-        /** Passes the {@code texture} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkUserFont.Buffer texture(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(texture()); return this; }
 
         /** Copies the specified {@link NkHandle} to the {@code userdata} field. */
         public NkUserFont.Buffer userdata(@NativeType("nk_handle") NkHandle value) { NkUserFont.nuserdata(address(), value); return this; }
+        /** Passes the {@code userdata} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkUserFont.Buffer userdata(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(userdata()); return this; }
         /** Sets the specified value to the {@code height} field. */
         public NkUserFont.Buffer height(float value) { NkUserFont.nheight(address(), value); return this; }
         /** Sets the specified value to the {@code width} field. */
@@ -381,6 +379,8 @@ public class NkUserFont extends Struct implements NativeResource {
         public NkUserFont.Buffer query(@Nullable @NativeType("nk_query_font_glyph_f") NkQueryFontGlyphCallbackI value) { NkUserFont.nquery(address(), value); return this; }
         /** Copies the specified {@link NkHandle} to the {@code texture} field. */
         public NkUserFont.Buffer texture(@NativeType("nk_handle") NkHandle value) { NkUserFont.ntexture(address(), value); return this; }
+        /** Passes the {@code texture} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkUserFont.Buffer texture(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(texture()); return this; }
 
     }
 

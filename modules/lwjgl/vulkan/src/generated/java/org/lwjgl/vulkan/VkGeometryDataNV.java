@@ -85,17 +85,17 @@ public class VkGeometryDataNV extends Struct implements NativeResource {
 
     /** Returns a {@link VkGeometryTrianglesNV} view of the {@code triangles} field. */
     public VkGeometryTrianglesNV triangles() { return ntriangles(address()); }
-    /** Passes the {@code triangles} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkGeometryDataNV triangles(java.util.function.Consumer<VkGeometryTrianglesNV> consumer) { consumer.accept(triangles()); return this; }
     /** Returns a {@link VkGeometryAABBNV} view of the {@code aabbs} field. */
     public VkGeometryAABBNV aabbs() { return naabbs(address()); }
-    /** Passes the {@code aabbs} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkGeometryDataNV aabbs(java.util.function.Consumer<VkGeometryAABBNV> consumer) { consumer.accept(aabbs()); return this; }
 
     /** Copies the specified {@link VkGeometryTrianglesNV} to the {@code triangles} field. */
     public VkGeometryDataNV triangles(VkGeometryTrianglesNV value) { ntriangles(address(), value); return this; }
+    /** Passes the {@code triangles} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkGeometryDataNV triangles(java.util.function.Consumer<VkGeometryTrianglesNV> consumer) { consumer.accept(triangles()); return this; }
     /** Copies the specified {@link VkGeometryAABBNV} to the {@code aabbs} field. */
     public VkGeometryDataNV aabbs(VkGeometryAABBNV value) { naabbs(address(), value); return this; }
+    /** Passes the {@code aabbs} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkGeometryDataNV aabbs(java.util.function.Consumer<VkGeometryAABBNV> consumer) { consumer.accept(aabbs()); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkGeometryDataNV set(
@@ -313,17 +313,17 @@ public class VkGeometryDataNV extends Struct implements NativeResource {
 
         /** Returns a {@link VkGeometryTrianglesNV} view of the {@code triangles} field. */
         public VkGeometryTrianglesNV triangles() { return VkGeometryDataNV.ntriangles(address()); }
-        /** Passes the {@code triangles} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkGeometryDataNV.Buffer triangles(java.util.function.Consumer<VkGeometryTrianglesNV> consumer) { consumer.accept(triangles()); return this; }
         /** Returns a {@link VkGeometryAABBNV} view of the {@code aabbs} field. */
         public VkGeometryAABBNV aabbs() { return VkGeometryDataNV.naabbs(address()); }
-        /** Passes the {@code aabbs} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkGeometryDataNV.Buffer aabbs(java.util.function.Consumer<VkGeometryAABBNV> consumer) { consumer.accept(aabbs()); return this; }
 
         /** Copies the specified {@link VkGeometryTrianglesNV} to the {@code triangles} field. */
         public VkGeometryDataNV.Buffer triangles(VkGeometryTrianglesNV value) { VkGeometryDataNV.ntriangles(address(), value); return this; }
+        /** Passes the {@code triangles} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkGeometryDataNV.Buffer triangles(java.util.function.Consumer<VkGeometryTrianglesNV> consumer) { consumer.accept(triangles()); return this; }
         /** Copies the specified {@link VkGeometryAABBNV} to the {@code aabbs} field. */
         public VkGeometryDataNV.Buffer aabbs(VkGeometryAABBNV value) { VkGeometryDataNV.naabbs(address(), value); return this; }
+        /** Passes the {@code aabbs} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkGeometryDataNV.Buffer aabbs(java.util.function.Consumer<VkGeometryAABBNV> consumer) { consumer.accept(aabbs()); return this; }
 
     }
 

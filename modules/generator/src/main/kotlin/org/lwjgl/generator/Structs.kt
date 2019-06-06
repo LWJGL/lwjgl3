@@ -1602,7 +1602,8 @@ ${validations.joinToString("\n")}
                 "$className.Buffer"
 
             if (it.isNestedStruct) {
-                val structType = it.nativeType.javaMethodType
+                val nestedStruct = (it.nativeType as StructType).definition
+                val structType = nestedStruct.className
                 if (structType === ANONYMOUS)
                     generateSetters(
                         accessMode,
@@ -1614,6 +1615,10 @@ ${validations.joinToString("\n")}
                     println("$indent/** Copies the specified {@link $structType} to the {@code $member} field. */")
                     if (overrides) println("$indent@Override")
                     println("${indent}public $returnType $setter(${it.annotate(structType)} value) { $n$setter($ADDRESS, value); return this; }")
+                    if (this@Struct.mutable && nestedStruct.mutable) {
+                        println("$indent/** Passes the {@code $member} field to the specified {@link java.util.function.Consumer Consumer}. */")
+                        println("${indent}public $className${if (accessMode === AccessMode.INSTANCE) "" else ".Buffer"} $setter(java.util.function.Consumer<$structType> consumer) { consumer.accept($setter()); return this; }")
+                    }
                 }
             } else {
                 // Setter
@@ -1628,20 +1633,35 @@ ${validations.joinToString("\n")}
 
                 if (it is StructMemberArray) {
                     if (it.nativeType.dereference is StructType) {
+                        val nestedStruct: Struct
                         val structType = it.nativeType.javaMethodType
+                        val retType = "$structType${if (getReferenceMember<AutoSizeIndirect>(it.name) == null) "" else ".Buffer"}"
                         if (it.nativeType is PointerType<*>) {
+                            nestedStruct = (it.nativeType.dereference as StructType).definition
+
                             println("$indent/** Copies the specified {@link PointerBuffer} to the {@code $member} field. */")
                             if (overrides) println("$indent@Override")
                             println("${indent}public $returnType $setter(${it.annotate("PointerBuffer")} value) { $n$setter($ADDRESS, value); return this; }")
                             println("$indent/** Copies the address of the specified {@link $structType} at the specified index of the {@code $member} field. */")
                         } else {
+                            nestedStruct = (it.nativeType as StructType).definition
+
                             println("$indent/** Copies the specified {@link $structType.Buffer} to the {@code $member} field. */")
                             if (overrides) println("$indent@Override")
                             println("${indent}public $returnType $setter(${it.annotate("$structType.Buffer")} value) { $n$setter($ADDRESS, value); return this; }")
                             println("$indent/** Copies the specified {@link $structType} at the specified index of the {@code $member} field. */")
                         }
                         if (overrides) println("$indent@Override")
-                        println("${indent}public $returnType $setter(int index, ${it.annotate("$structType${if (getReferenceMember<AutoSizeIndirect>(it.name) == null) "" else ".Buffer"}", it.nativeType)} value) { $n$setter($ADDRESS, index, value); return this; }")
+                        println("${indent}public $returnType $setter(int index, ${it.annotate(retType, it.nativeType)} value) { $n$setter($ADDRESS, index, value); return this; }")
+
+                        if (nestedStruct.mutable) {
+                            if (it.nativeType !is PointerType<*>) {
+                                println("$indent/** Passes the {@code $member} field to the specified {@link java.util.function.Consumer Consumer}. */")
+                                println("${indent}public $className${if (accessMode === AccessMode.INSTANCE) "" else ".Buffer"} $setter(java.util.function.Consumer<$structType.Buffer> consumer) { consumer.accept($setter()); return this; }")
+                            }
+                            println("$indent/** Passes the element at {@code index} of the {@code $member} field to the specified {@link java.util.function.Consumer Consumer}. */")
+                            println("${indent}public $className${if (accessMode === AccessMode.INSTANCE) "" else ".Buffer"} $setter(int index, java.util.function.Consumer<$retType> consumer) { consumer.accept($setter(index)); return this; }")
+                        }
                     } else if (it.nativeType is CharType) {
                         println("$indent/** Copies the specified encoded string to the {@code $member} field. */")
                         if (overrides) println("$indent@Override")
@@ -1854,8 +1874,7 @@ ${validations.joinToString("\n")}
             val indent = accessMode.indent
 
             if (it.isNestedStruct) {
-                val nestedStruct = (it.nativeType as StructType).definition
-                val structType = nestedStruct.className
+                val structType = it.nativeType.javaMethodType
                 if (structType === ANONYMOUS)
                     generateGetters(
                         accessMode,
@@ -1867,10 +1886,6 @@ ${validations.joinToString("\n")}
                     println("$indent/** Returns a {@link $structType} view of the {@code $member} field. */")
                     generateGetterAnnotations(indent, it, structType)
                     println("${indent}public $structType $getter() { return $n$getter($ADDRESS); }")
-                    if (nestedStruct.mutable) {
-                        println("$indent/** Passes the {@code $member} field to the specified {@link java.util.function.Consumer Consumer}. */")
-                        println("${indent}public $className${if (accessMode === AccessMode.INSTANCE) "" else ".Buffer"} $getter(java.util.function.Consumer<$structType> consumer) { consumer.accept($getter()); return this; }")
-                    }
                 }
             } else {
                 // Getter

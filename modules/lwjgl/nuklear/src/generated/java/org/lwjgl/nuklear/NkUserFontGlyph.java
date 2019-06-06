@@ -96,8 +96,6 @@ public class NkUserFontGlyph extends Struct implements NativeResource {
     /** Returns a {@link NkVec2} view of the {@code offset} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 offset() { return noffset(address()); }
-    /** Passes the {@code offset} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkUserFontGlyph offset(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(offset()); return this; }
     /** Returns the value of the {@code width} field. */
     public float width() { return nwidth(address()); }
     /** Returns the value of the {@code height} field. */
@@ -109,8 +107,14 @@ public class NkUserFontGlyph extends Struct implements NativeResource {
     public NkUserFontGlyph uv(@NativeType("struct nk_vec2[2]") NkVec2.Buffer value) { nuv(address(), value); return this; }
     /** Copies the specified {@link NkVec2} at the specified index of the {@code uv} field. */
     public NkUserFontGlyph uv(int index, @NativeType("struct nk_vec2") NkVec2 value) { nuv(address(), index, value); return this; }
+    /** Passes the {@code uv} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkUserFontGlyph uv(java.util.function.Consumer<NkVec2.Buffer> consumer) { consumer.accept(uv()); return this; }
+    /** Passes the element at {@code index} of the {@code uv} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkUserFontGlyph uv(int index, java.util.function.Consumer<NkVec2> consumer) { consumer.accept(uv(index)); return this; }
     /** Copies the specified {@link NkVec2} to the {@code offset} field. */
     public NkUserFontGlyph offset(@NativeType("struct nk_vec2") NkVec2 value) { noffset(address(), value); return this; }
+    /** Passes the {@code offset} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkUserFontGlyph offset(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(offset()); return this; }
     /** Sets the specified value to the {@code width} field. */
     public NkUserFontGlyph width(float value) { nwidth(address(), value); return this; }
     /** Sets the specified value to the {@code height} field. */
@@ -370,8 +374,6 @@ public class NkUserFontGlyph extends Struct implements NativeResource {
         /** Returns a {@link NkVec2} view of the {@code offset} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 offset() { return NkUserFontGlyph.noffset(address()); }
-        /** Passes the {@code offset} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkUserFontGlyph.Buffer offset(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(offset()); return this; }
         /** Returns the value of the {@code width} field. */
         public float width() { return NkUserFontGlyph.nwidth(address()); }
         /** Returns the value of the {@code height} field. */
@@ -383,8 +385,14 @@ public class NkUserFontGlyph extends Struct implements NativeResource {
         public NkUserFontGlyph.Buffer uv(@NativeType("struct nk_vec2[2]") NkVec2.Buffer value) { NkUserFontGlyph.nuv(address(), value); return this; }
         /** Copies the specified {@link NkVec2} at the specified index of the {@code uv} field. */
         public NkUserFontGlyph.Buffer uv(int index, @NativeType("struct nk_vec2") NkVec2 value) { NkUserFontGlyph.nuv(address(), index, value); return this; }
+        /** Passes the {@code uv} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkUserFontGlyph.Buffer uv(java.util.function.Consumer<NkVec2.Buffer> consumer) { consumer.accept(uv()); return this; }
+        /** Passes the element at {@code index} of the {@code uv} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkUserFontGlyph.Buffer uv(int index, java.util.function.Consumer<NkVec2> consumer) { consumer.accept(uv(index)); return this; }
         /** Copies the specified {@link NkVec2} to the {@code offset} field. */
         public NkUserFontGlyph.Buffer offset(@NativeType("struct nk_vec2") NkVec2 value) { NkUserFontGlyph.noffset(address(), value); return this; }
+        /** Passes the {@code offset} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkUserFontGlyph.Buffer offset(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(offset()); return this; }
         /** Sets the specified value to the {@code width} field. */
         public NkUserFontGlyph.Buffer width(float value) { NkUserFontGlyph.nwidth(address(), value); return this; }
         /** Sets the specified value to the {@code height} field. */

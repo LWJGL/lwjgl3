@@ -120,8 +120,6 @@ public class OVRTrackingState extends Struct implements NativeResource {
     /** Returns a {@link OVRPosef} view of the {@code CalibratedOrigin} field. */
     @NativeType("ovrPosef")
     public OVRPosef CalibratedOrigin() { return nCalibratedOrigin(address()); }
-    /** Passes the {@code CalibratedOrigin} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public OVRTrackingState CalibratedOrigin(java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(CalibratedOrigin()); return this; }
 
     // -----------------------------------
 
@@ -344,8 +342,6 @@ public class OVRTrackingState extends Struct implements NativeResource {
         /** Returns a {@link OVRPosef} view of the {@code CalibratedOrigin} field. */
         @NativeType("ovrPosef")
         public OVRPosef CalibratedOrigin() { return OVRTrackingState.nCalibratedOrigin(address()); }
-        /** Passes the {@code CalibratedOrigin} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public OVRTrackingState.Buffer CalibratedOrigin(java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(CalibratedOrigin()); return this; }
 
     }
 

@@ -172,88 +172,54 @@ public class NkStyle extends Struct implements NativeResource {
     /** Returns a {@link NkStyleText} view of the {@code text} field. */
     @NativeType("struct nk_style_text")
     public NkStyleText text() { return ntext(address()); }
-    /** Passes the {@code text} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyle text(java.util.function.Consumer<NkStyleText> consumer) { consumer.accept(text()); return this; }
     /** Returns a {@link NkStyleButton} view of the {@code button} field. */
     @NativeType("struct nk_style_button")
     public NkStyleButton button() { return nbutton(address()); }
-    /** Passes the {@code button} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyle button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(button()); return this; }
     /** Returns a {@link NkStyleButton} view of the {@code contextual_button} field. */
     @NativeType("struct nk_style_button")
     public NkStyleButton contextual_button() { return ncontextual_button(address()); }
-    /** Passes the {@code contextual_button} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyle contextual_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(contextual_button()); return this; }
     /** Returns a {@link NkStyleButton} view of the {@code menu_button} field. */
     @NativeType("struct nk_style_button")
     public NkStyleButton menu_button() { return nmenu_button(address()); }
-    /** Passes the {@code menu_button} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyle menu_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(menu_button()); return this; }
     /** Returns a {@link NkStyleToggle} view of the {@code option} field. */
     @NativeType("struct nk_style_toggle")
     public NkStyleToggle option() { return noption(address()); }
-    /** Passes the {@code option} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyle option(java.util.function.Consumer<NkStyleToggle> consumer) { consumer.accept(option()); return this; }
     /** Returns a {@link NkStyleToggle} view of the {@code checkbox} field. */
     @NativeType("struct nk_style_toggle")
     public NkStyleToggle checkbox() { return ncheckbox(address()); }
-    /** Passes the {@code checkbox} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyle checkbox(java.util.function.Consumer<NkStyleToggle> consumer) { consumer.accept(checkbox()); return this; }
     /** Returns a {@link NkStyleSelectable} view of the {@code selectable} field. */
     @NativeType("struct nk_style_selectable")
     public NkStyleSelectable selectable() { return nselectable(address()); }
-    /** Passes the {@code selectable} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyle selectable(java.util.function.Consumer<NkStyleSelectable> consumer) { consumer.accept(selectable()); return this; }
     /** Returns a {@link NkStyleSlider} view of the {@code slider} field. */
     @NativeType("struct nk_style_slider")
     public NkStyleSlider slider() { return nslider(address()); }
-    /** Passes the {@code slider} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyle slider(java.util.function.Consumer<NkStyleSlider> consumer) { consumer.accept(slider()); return this; }
     /** Returns a {@link NkStyleProgress} view of the {@code progress} field. */
     @NativeType("struct nk_style_progress")
     public NkStyleProgress progress() { return nprogress(address()); }
-    /** Passes the {@code progress} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyle progress(java.util.function.Consumer<NkStyleProgress> consumer) { consumer.accept(progress()); return this; }
     /** Returns a {@link NkStyleProperty} view of the {@code property} field. */
     @NativeType("struct nk_style_property")
     public NkStyleProperty property() { return nproperty(address()); }
-    /** Passes the {@code property} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyle property(java.util.function.Consumer<NkStyleProperty> consumer) { consumer.accept(property()); return this; }
     /** Returns a {@link NkStyleEdit} view of the {@code edit} field. */
     @NativeType("struct nk_style_edit")
     public NkStyleEdit edit() { return nedit(address()); }
-    /** Passes the {@code edit} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyle edit(java.util.function.Consumer<NkStyleEdit> consumer) { consumer.accept(edit()); return this; }
     /** Returns a {@link NkStyleChart} view of the {@code chart} field. */
     @NativeType("struct nk_style_chart")
     public NkStyleChart chart() { return nchart(address()); }
-    /** Passes the {@code chart} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyle chart(java.util.function.Consumer<NkStyleChart> consumer) { consumer.accept(chart()); return this; }
     /** Returns a {@link NkStyleScrollbar} view of the {@code scrollh} field. */
     @NativeType("struct nk_style_scrollbar")
     public NkStyleScrollbar scrollh() { return nscrollh(address()); }
-    /** Passes the {@code scrollh} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyle scrollh(java.util.function.Consumer<NkStyleScrollbar> consumer) { consumer.accept(scrollh()); return this; }
     /** Returns a {@link NkStyleScrollbar} view of the {@code scrollv} field. */
     @NativeType("struct nk_style_scrollbar")
     public NkStyleScrollbar scrollv() { return nscrollv(address()); }
-    /** Passes the {@code scrollv} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyle scrollv(java.util.function.Consumer<NkStyleScrollbar> consumer) { consumer.accept(scrollv()); return this; }
     /** Returns a {@link NkStyleTab} view of the {@code tab} field. */
     @NativeType("struct nk_style_tab")
     public NkStyleTab tab() { return ntab(address()); }
-    /** Passes the {@code tab} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyle tab(java.util.function.Consumer<NkStyleTab> consumer) { consumer.accept(tab()); return this; }
     /** Returns a {@link NkStyleCombo} view of the {@code combo} field. */
     @NativeType("struct nk_style_combo")
     public NkStyleCombo combo() { return ncombo(address()); }
-    /** Passes the {@code combo} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyle combo(java.util.function.Consumer<NkStyleCombo> consumer) { consumer.accept(combo()); return this; }
     /** Returns a {@link NkStyleWindow} view of the {@code window} field. */
     @NativeType("struct nk_style_window")
     public NkStyleWindow window() { return nwindow(address()); }
-    /** Passes the {@code window} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyle window(java.util.function.Consumer<NkStyleWindow> consumer) { consumer.accept(window()); return this; }
 
     /** Sets the address of the specified {@link NkUserFont} to the {@code font} field. */
     public NkStyle font(@Nullable @NativeType("struct nk_user_font *") NkUserFont value) { nfont(address(), value); return this; }
@@ -261,6 +227,8 @@ public class NkStyle extends Struct implements NativeResource {
     public NkStyle cursors(@NativeType("struct nk_cursor *[NK_CURSOR_COUNT]") PointerBuffer value) { ncursors(address(), value); return this; }
     /** Copies the address of the specified {@link NkCursor} at the specified index of the {@code cursors} field. */
     public NkStyle cursors(int index, @Nullable @NativeType("struct nk_cursor *") NkCursor value) { ncursors(address(), index, value); return this; }
+    /** Passes the element at {@code index} of the {@code cursors} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyle cursors(int index, java.util.function.Consumer<NkCursor> consumer) { consumer.accept(cursors(index)); return this; }
     /** Sets the address of the specified {@link NkCursor} to the {@code cursor_active} field. */
     public NkStyle cursor_active(@Nullable @NativeType("struct nk_cursor *") NkCursor value) { ncursor_active(address(), value); return this; }
     /** Sets the address of the specified {@link NkCursor} to the {@code cursor_last} field. */
@@ -269,38 +237,72 @@ public class NkStyle extends Struct implements NativeResource {
     public NkStyle cursor_visible(@NativeType("int") boolean value) { ncursor_visible(address(), value ? 1 : 0); return this; }
     /** Copies the specified {@link NkStyleText} to the {@code text} field. */
     public NkStyle text(@NativeType("struct nk_style_text") NkStyleText value) { ntext(address(), value); return this; }
+    /** Passes the {@code text} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyle text(java.util.function.Consumer<NkStyleText> consumer) { consumer.accept(text()); return this; }
     /** Copies the specified {@link NkStyleButton} to the {@code button} field. */
     public NkStyle button(@NativeType("struct nk_style_button") NkStyleButton value) { nbutton(address(), value); return this; }
+    /** Passes the {@code button} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyle button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(button()); return this; }
     /** Copies the specified {@link NkStyleButton} to the {@code contextual_button} field. */
     public NkStyle contextual_button(@NativeType("struct nk_style_button") NkStyleButton value) { ncontextual_button(address(), value); return this; }
+    /** Passes the {@code contextual_button} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyle contextual_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(contextual_button()); return this; }
     /** Copies the specified {@link NkStyleButton} to the {@code menu_button} field. */
     public NkStyle menu_button(@NativeType("struct nk_style_button") NkStyleButton value) { nmenu_button(address(), value); return this; }
+    /** Passes the {@code menu_button} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyle menu_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(menu_button()); return this; }
     /** Copies the specified {@link NkStyleToggle} to the {@code option} field. */
     public NkStyle option(@NativeType("struct nk_style_toggle") NkStyleToggle value) { noption(address(), value); return this; }
+    /** Passes the {@code option} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyle option(java.util.function.Consumer<NkStyleToggle> consumer) { consumer.accept(option()); return this; }
     /** Copies the specified {@link NkStyleToggle} to the {@code checkbox} field. */
     public NkStyle checkbox(@NativeType("struct nk_style_toggle") NkStyleToggle value) { ncheckbox(address(), value); return this; }
+    /** Passes the {@code checkbox} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyle checkbox(java.util.function.Consumer<NkStyleToggle> consumer) { consumer.accept(checkbox()); return this; }
     /** Copies the specified {@link NkStyleSelectable} to the {@code selectable} field. */
     public NkStyle selectable(@NativeType("struct nk_style_selectable") NkStyleSelectable value) { nselectable(address(), value); return this; }
+    /** Passes the {@code selectable} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyle selectable(java.util.function.Consumer<NkStyleSelectable> consumer) { consumer.accept(selectable()); return this; }
     /** Copies the specified {@link NkStyleSlider} to the {@code slider} field. */
     public NkStyle slider(@NativeType("struct nk_style_slider") NkStyleSlider value) { nslider(address(), value); return this; }
+    /** Passes the {@code slider} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyle slider(java.util.function.Consumer<NkStyleSlider> consumer) { consumer.accept(slider()); return this; }
     /** Copies the specified {@link NkStyleProgress} to the {@code progress} field. */
     public NkStyle progress(@NativeType("struct nk_style_progress") NkStyleProgress value) { nprogress(address(), value); return this; }
+    /** Passes the {@code progress} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyle progress(java.util.function.Consumer<NkStyleProgress> consumer) { consumer.accept(progress()); return this; }
     /** Copies the specified {@link NkStyleProperty} to the {@code property} field. */
     public NkStyle property(@NativeType("struct nk_style_property") NkStyleProperty value) { nproperty(address(), value); return this; }
+    /** Passes the {@code property} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyle property(java.util.function.Consumer<NkStyleProperty> consumer) { consumer.accept(property()); return this; }
     /** Copies the specified {@link NkStyleEdit} to the {@code edit} field. */
     public NkStyle edit(@NativeType("struct nk_style_edit") NkStyleEdit value) { nedit(address(), value); return this; }
+    /** Passes the {@code edit} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyle edit(java.util.function.Consumer<NkStyleEdit> consumer) { consumer.accept(edit()); return this; }
     /** Copies the specified {@link NkStyleChart} to the {@code chart} field. */
     public NkStyle chart(@NativeType("struct nk_style_chart") NkStyleChart value) { nchart(address(), value); return this; }
+    /** Passes the {@code chart} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyle chart(java.util.function.Consumer<NkStyleChart> consumer) { consumer.accept(chart()); return this; }
     /** Copies the specified {@link NkStyleScrollbar} to the {@code scrollh} field. */
     public NkStyle scrollh(@NativeType("struct nk_style_scrollbar") NkStyleScrollbar value) { nscrollh(address(), value); return this; }
+    /** Passes the {@code scrollh} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyle scrollh(java.util.function.Consumer<NkStyleScrollbar> consumer) { consumer.accept(scrollh()); return this; }
     /** Copies the specified {@link NkStyleScrollbar} to the {@code scrollv} field. */
     public NkStyle scrollv(@NativeType("struct nk_style_scrollbar") NkStyleScrollbar value) { nscrollv(address(), value); return this; }
+    /** Passes the {@code scrollv} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyle scrollv(java.util.function.Consumer<NkStyleScrollbar> consumer) { consumer.accept(scrollv()); return this; }
     /** Copies the specified {@link NkStyleTab} to the {@code tab} field. */
     public NkStyle tab(@NativeType("struct nk_style_tab") NkStyleTab value) { ntab(address(), value); return this; }
+    /** Passes the {@code tab} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyle tab(java.util.function.Consumer<NkStyleTab> consumer) { consumer.accept(tab()); return this; }
     /** Copies the specified {@link NkStyleCombo} to the {@code combo} field. */
     public NkStyle combo(@NativeType("struct nk_style_combo") NkStyleCombo value) { ncombo(address(), value); return this; }
+    /** Passes the {@code combo} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyle combo(java.util.function.Consumer<NkStyleCombo> consumer) { consumer.accept(combo()); return this; }
     /** Copies the specified {@link NkStyleWindow} to the {@code window} field. */
     public NkStyle window(@NativeType("struct nk_style_window") NkStyleWindow value) { nwindow(address(), value); return this; }
+    /** Passes the {@code window} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyle window(java.util.function.Consumer<NkStyleWindow> consumer) { consumer.accept(window()); return this; }
 
     /** Initializes this struct with the specified values. */
     public NkStyle set(
@@ -672,88 +674,54 @@ public class NkStyle extends Struct implements NativeResource {
         /** Returns a {@link NkStyleText} view of the {@code text} field. */
         @NativeType("struct nk_style_text")
         public NkStyleText text() { return NkStyle.ntext(address()); }
-        /** Passes the {@code text} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyle.Buffer text(java.util.function.Consumer<NkStyleText> consumer) { consumer.accept(text()); return this; }
         /** Returns a {@link NkStyleButton} view of the {@code button} field. */
         @NativeType("struct nk_style_button")
         public NkStyleButton button() { return NkStyle.nbutton(address()); }
-        /** Passes the {@code button} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyle.Buffer button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(button()); return this; }
         /** Returns a {@link NkStyleButton} view of the {@code contextual_button} field. */
         @NativeType("struct nk_style_button")
         public NkStyleButton contextual_button() { return NkStyle.ncontextual_button(address()); }
-        /** Passes the {@code contextual_button} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyle.Buffer contextual_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(contextual_button()); return this; }
         /** Returns a {@link NkStyleButton} view of the {@code menu_button} field. */
         @NativeType("struct nk_style_button")
         public NkStyleButton menu_button() { return NkStyle.nmenu_button(address()); }
-        /** Passes the {@code menu_button} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyle.Buffer menu_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(menu_button()); return this; }
         /** Returns a {@link NkStyleToggle} view of the {@code option} field. */
         @NativeType("struct nk_style_toggle")
         public NkStyleToggle option() { return NkStyle.noption(address()); }
-        /** Passes the {@code option} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyle.Buffer option(java.util.function.Consumer<NkStyleToggle> consumer) { consumer.accept(option()); return this; }
         /** Returns a {@link NkStyleToggle} view of the {@code checkbox} field. */
         @NativeType("struct nk_style_toggle")
         public NkStyleToggle checkbox() { return NkStyle.ncheckbox(address()); }
-        /** Passes the {@code checkbox} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyle.Buffer checkbox(java.util.function.Consumer<NkStyleToggle> consumer) { consumer.accept(checkbox()); return this; }
         /** Returns a {@link NkStyleSelectable} view of the {@code selectable} field. */
         @NativeType("struct nk_style_selectable")
         public NkStyleSelectable selectable() { return NkStyle.nselectable(address()); }
-        /** Passes the {@code selectable} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyle.Buffer selectable(java.util.function.Consumer<NkStyleSelectable> consumer) { consumer.accept(selectable()); return this; }
         /** Returns a {@link NkStyleSlider} view of the {@code slider} field. */
         @NativeType("struct nk_style_slider")
         public NkStyleSlider slider() { return NkStyle.nslider(address()); }
-        /** Passes the {@code slider} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyle.Buffer slider(java.util.function.Consumer<NkStyleSlider> consumer) { consumer.accept(slider()); return this; }
         /** Returns a {@link NkStyleProgress} view of the {@code progress} field. */
         @NativeType("struct nk_style_progress")
         public NkStyleProgress progress() { return NkStyle.nprogress(address()); }
-        /** Passes the {@code progress} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyle.Buffer progress(java.util.function.Consumer<NkStyleProgress> consumer) { consumer.accept(progress()); return this; }
         /** Returns a {@link NkStyleProperty} view of the {@code property} field. */
         @NativeType("struct nk_style_property")
         public NkStyleProperty property() { return NkStyle.nproperty(address()); }
-        /** Passes the {@code property} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyle.Buffer property(java.util.function.Consumer<NkStyleProperty> consumer) { consumer.accept(property()); return this; }
         /** Returns a {@link NkStyleEdit} view of the {@code edit} field. */
         @NativeType("struct nk_style_edit")
         public NkStyleEdit edit() { return NkStyle.nedit(address()); }
-        /** Passes the {@code edit} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyle.Buffer edit(java.util.function.Consumer<NkStyleEdit> consumer) { consumer.accept(edit()); return this; }
         /** Returns a {@link NkStyleChart} view of the {@code chart} field. */
         @NativeType("struct nk_style_chart")
         public NkStyleChart chart() { return NkStyle.nchart(address()); }
-        /** Passes the {@code chart} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyle.Buffer chart(java.util.function.Consumer<NkStyleChart> consumer) { consumer.accept(chart()); return this; }
         /** Returns a {@link NkStyleScrollbar} view of the {@code scrollh} field. */
         @NativeType("struct nk_style_scrollbar")
         public NkStyleScrollbar scrollh() { return NkStyle.nscrollh(address()); }
-        /** Passes the {@code scrollh} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyle.Buffer scrollh(java.util.function.Consumer<NkStyleScrollbar> consumer) { consumer.accept(scrollh()); return this; }
         /** Returns a {@link NkStyleScrollbar} view of the {@code scrollv} field. */
         @NativeType("struct nk_style_scrollbar")
         public NkStyleScrollbar scrollv() { return NkStyle.nscrollv(address()); }
-        /** Passes the {@code scrollv} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyle.Buffer scrollv(java.util.function.Consumer<NkStyleScrollbar> consumer) { consumer.accept(scrollv()); return this; }
         /** Returns a {@link NkStyleTab} view of the {@code tab} field. */
         @NativeType("struct nk_style_tab")
         public NkStyleTab tab() { return NkStyle.ntab(address()); }
-        /** Passes the {@code tab} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyle.Buffer tab(java.util.function.Consumer<NkStyleTab> consumer) { consumer.accept(tab()); return this; }
         /** Returns a {@link NkStyleCombo} view of the {@code combo} field. */
         @NativeType("struct nk_style_combo")
         public NkStyleCombo combo() { return NkStyle.ncombo(address()); }
-        /** Passes the {@code combo} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyle.Buffer combo(java.util.function.Consumer<NkStyleCombo> consumer) { consumer.accept(combo()); return this; }
         /** Returns a {@link NkStyleWindow} view of the {@code window} field. */
         @NativeType("struct nk_style_window")
         public NkStyleWindow window() { return NkStyle.nwindow(address()); }
-        /** Passes the {@code window} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyle.Buffer window(java.util.function.Consumer<NkStyleWindow> consumer) { consumer.accept(window()); return this; }
 
         /** Sets the address of the specified {@link NkUserFont} to the {@code font} field. */
         public NkStyle.Buffer font(@Nullable @NativeType("struct nk_user_font *") NkUserFont value) { NkStyle.nfont(address(), value); return this; }
@@ -761,6 +729,8 @@ public class NkStyle extends Struct implements NativeResource {
         public NkStyle.Buffer cursors(@NativeType("struct nk_cursor *[NK_CURSOR_COUNT]") PointerBuffer value) { NkStyle.ncursors(address(), value); return this; }
         /** Copies the address of the specified {@link NkCursor} at the specified index of the {@code cursors} field. */
         public NkStyle.Buffer cursors(int index, @Nullable @NativeType("struct nk_cursor *") NkCursor value) { NkStyle.ncursors(address(), index, value); return this; }
+        /** Passes the element at {@code index} of the {@code cursors} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyle.Buffer cursors(int index, java.util.function.Consumer<NkCursor> consumer) { consumer.accept(cursors(index)); return this; }
         /** Sets the address of the specified {@link NkCursor} to the {@code cursor_active} field. */
         public NkStyle.Buffer cursor_active(@Nullable @NativeType("struct nk_cursor *") NkCursor value) { NkStyle.ncursor_active(address(), value); return this; }
         /** Sets the address of the specified {@link NkCursor} to the {@code cursor_last} field. */
@@ -769,38 +739,72 @@ public class NkStyle extends Struct implements NativeResource {
         public NkStyle.Buffer cursor_visible(@NativeType("int") boolean value) { NkStyle.ncursor_visible(address(), value ? 1 : 0); return this; }
         /** Copies the specified {@link NkStyleText} to the {@code text} field. */
         public NkStyle.Buffer text(@NativeType("struct nk_style_text") NkStyleText value) { NkStyle.ntext(address(), value); return this; }
+        /** Passes the {@code text} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyle.Buffer text(java.util.function.Consumer<NkStyleText> consumer) { consumer.accept(text()); return this; }
         /** Copies the specified {@link NkStyleButton} to the {@code button} field. */
         public NkStyle.Buffer button(@NativeType("struct nk_style_button") NkStyleButton value) { NkStyle.nbutton(address(), value); return this; }
+        /** Passes the {@code button} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyle.Buffer button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(button()); return this; }
         /** Copies the specified {@link NkStyleButton} to the {@code contextual_button} field. */
         public NkStyle.Buffer contextual_button(@NativeType("struct nk_style_button") NkStyleButton value) { NkStyle.ncontextual_button(address(), value); return this; }
+        /** Passes the {@code contextual_button} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyle.Buffer contextual_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(contextual_button()); return this; }
         /** Copies the specified {@link NkStyleButton} to the {@code menu_button} field. */
         public NkStyle.Buffer menu_button(@NativeType("struct nk_style_button") NkStyleButton value) { NkStyle.nmenu_button(address(), value); return this; }
+        /** Passes the {@code menu_button} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyle.Buffer menu_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(menu_button()); return this; }
         /** Copies the specified {@link NkStyleToggle} to the {@code option} field. */
         public NkStyle.Buffer option(@NativeType("struct nk_style_toggle") NkStyleToggle value) { NkStyle.noption(address(), value); return this; }
+        /** Passes the {@code option} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyle.Buffer option(java.util.function.Consumer<NkStyleToggle> consumer) { consumer.accept(option()); return this; }
         /** Copies the specified {@link NkStyleToggle} to the {@code checkbox} field. */
         public NkStyle.Buffer checkbox(@NativeType("struct nk_style_toggle") NkStyleToggle value) { NkStyle.ncheckbox(address(), value); return this; }
+        /** Passes the {@code checkbox} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyle.Buffer checkbox(java.util.function.Consumer<NkStyleToggle> consumer) { consumer.accept(checkbox()); return this; }
         /** Copies the specified {@link NkStyleSelectable} to the {@code selectable} field. */
         public NkStyle.Buffer selectable(@NativeType("struct nk_style_selectable") NkStyleSelectable value) { NkStyle.nselectable(address(), value); return this; }
+        /** Passes the {@code selectable} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyle.Buffer selectable(java.util.function.Consumer<NkStyleSelectable> consumer) { consumer.accept(selectable()); return this; }
         /** Copies the specified {@link NkStyleSlider} to the {@code slider} field. */
         public NkStyle.Buffer slider(@NativeType("struct nk_style_slider") NkStyleSlider value) { NkStyle.nslider(address(), value); return this; }
+        /** Passes the {@code slider} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyle.Buffer slider(java.util.function.Consumer<NkStyleSlider> consumer) { consumer.accept(slider()); return this; }
         /** Copies the specified {@link NkStyleProgress} to the {@code progress} field. */
         public NkStyle.Buffer progress(@NativeType("struct nk_style_progress") NkStyleProgress value) { NkStyle.nprogress(address(), value); return this; }
+        /** Passes the {@code progress} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyle.Buffer progress(java.util.function.Consumer<NkStyleProgress> consumer) { consumer.accept(progress()); return this; }
         /** Copies the specified {@link NkStyleProperty} to the {@code property} field. */
         public NkStyle.Buffer property(@NativeType("struct nk_style_property") NkStyleProperty value) { NkStyle.nproperty(address(), value); return this; }
+        /** Passes the {@code property} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyle.Buffer property(java.util.function.Consumer<NkStyleProperty> consumer) { consumer.accept(property()); return this; }
         /** Copies the specified {@link NkStyleEdit} to the {@code edit} field. */
         public NkStyle.Buffer edit(@NativeType("struct nk_style_edit") NkStyleEdit value) { NkStyle.nedit(address(), value); return this; }
+        /** Passes the {@code edit} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyle.Buffer edit(java.util.function.Consumer<NkStyleEdit> consumer) { consumer.accept(edit()); return this; }
         /** Copies the specified {@link NkStyleChart} to the {@code chart} field. */
         public NkStyle.Buffer chart(@NativeType("struct nk_style_chart") NkStyleChart value) { NkStyle.nchart(address(), value); return this; }
+        /** Passes the {@code chart} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyle.Buffer chart(java.util.function.Consumer<NkStyleChart> consumer) { consumer.accept(chart()); return this; }
         /** Copies the specified {@link NkStyleScrollbar} to the {@code scrollh} field. */
         public NkStyle.Buffer scrollh(@NativeType("struct nk_style_scrollbar") NkStyleScrollbar value) { NkStyle.nscrollh(address(), value); return this; }
+        /** Passes the {@code scrollh} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyle.Buffer scrollh(java.util.function.Consumer<NkStyleScrollbar> consumer) { consumer.accept(scrollh()); return this; }
         /** Copies the specified {@link NkStyleScrollbar} to the {@code scrollv} field. */
         public NkStyle.Buffer scrollv(@NativeType("struct nk_style_scrollbar") NkStyleScrollbar value) { NkStyle.nscrollv(address(), value); return this; }
+        /** Passes the {@code scrollv} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyle.Buffer scrollv(java.util.function.Consumer<NkStyleScrollbar> consumer) { consumer.accept(scrollv()); return this; }
         /** Copies the specified {@link NkStyleTab} to the {@code tab} field. */
         public NkStyle.Buffer tab(@NativeType("struct nk_style_tab") NkStyleTab value) { NkStyle.ntab(address(), value); return this; }
+        /** Passes the {@code tab} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyle.Buffer tab(java.util.function.Consumer<NkStyleTab> consumer) { consumer.accept(tab()); return this; }
         /** Copies the specified {@link NkStyleCombo} to the {@code combo} field. */
         public NkStyle.Buffer combo(@NativeType("struct nk_style_combo") NkStyleCombo value) { NkStyle.ncombo(address(), value); return this; }
+        /** Passes the {@code combo} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyle.Buffer combo(java.util.function.Consumer<NkStyleCombo> consumer) { consumer.accept(combo()); return this; }
         /** Copies the specified {@link NkStyleWindow} to the {@code window} field. */
         public NkStyle.Buffer window(@NativeType("struct nk_style_window") NkStyleWindow value) { NkStyle.nwindow(address(), value); return this; }
+        /** Passes the {@code window} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyle.Buffer window(java.util.function.Consumer<NkStyleWindow> consumer) { consumer.accept(window()); return this; }
 
     }
 

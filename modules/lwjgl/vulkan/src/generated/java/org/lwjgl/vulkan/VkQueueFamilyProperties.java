@@ -129,8 +129,6 @@ public class VkQueueFamilyProperties extends Struct implements NativeResource {
     public int timestampValidBits() { return ntimestampValidBits(address()); }
     /** Returns a {@link VkExtent3D} view of the {@code minImageTransferGranularity} field. */
     public VkExtent3D minImageTransferGranularity() { return nminImageTransferGranularity(address()); }
-    /** Passes the {@code minImageTransferGranularity} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkQueueFamilyProperties minImageTransferGranularity(java.util.function.Consumer<VkExtent3D> consumer) { consumer.accept(minImageTransferGranularity()); return this; }
 
     // -----------------------------------
 
@@ -333,8 +331,6 @@ public class VkQueueFamilyProperties extends Struct implements NativeResource {
         public int timestampValidBits() { return VkQueueFamilyProperties.ntimestampValidBits(address()); }
         /** Returns a {@link VkExtent3D} view of the {@code minImageTransferGranularity} field. */
         public VkExtent3D minImageTransferGranularity() { return VkQueueFamilyProperties.nminImageTransferGranularity(address()); }
-        /** Passes the {@code minImageTransferGranularity} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkQueueFamilyProperties.Buffer minImageTransferGranularity(java.util.function.Consumer<VkExtent3D> consumer) { consumer.accept(minImageTransferGranularity()); return this; }
 
     }
 

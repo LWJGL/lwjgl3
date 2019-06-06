@@ -69,13 +69,9 @@ public class VRBoneTransform extends Struct implements NativeResource {
     /** Returns a {@link HmdVector4} view of the {@code position} field. */
     @NativeType("HmdVector4_t")
     public HmdVector4 position$() { return nposition$(address()); }
-    /** Passes the {@code position} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VRBoneTransform position$(java.util.function.Consumer<HmdVector4> consumer) { consumer.accept(position$()); return this; }
     /** Returns a {@link HmdQuaternionf} view of the {@code orientation} field. */
     @NativeType("HmdQuaternionf_t")
     public HmdQuaternionf orientation() { return norientation(address()); }
-    /** Passes the {@code orientation} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VRBoneTransform orientation(java.util.function.Consumer<HmdQuaternionf> consumer) { consumer.accept(orientation()); return this; }
 
     // -----------------------------------
 
@@ -266,13 +262,9 @@ public class VRBoneTransform extends Struct implements NativeResource {
         /** Returns a {@link HmdVector4} view of the {@code position} field. */
         @NativeType("HmdVector4_t")
         public HmdVector4 position$() { return VRBoneTransform.nposition$(address()); }
-        /** Passes the {@code position} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VRBoneTransform.Buffer position$(java.util.function.Consumer<HmdVector4> consumer) { consumer.accept(position$()); return this; }
         /** Returns a {@link HmdQuaternionf} view of the {@code orientation} field. */
         @NativeType("HmdQuaternionf_t")
         public HmdQuaternionf orientation() { return VRBoneTransform.norientation(address()); }
-        /** Passes the {@code orientation} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VRBoneTransform.Buffer orientation(java.util.function.Consumer<HmdQuaternionf> consumer) { consumer.accept(orientation()); return this; }
 
     }
 

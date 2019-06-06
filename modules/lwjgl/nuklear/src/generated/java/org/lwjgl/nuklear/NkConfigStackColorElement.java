@@ -68,8 +68,6 @@ class NkConfigStackColorElement extends Struct {
     /** Returns a {@link NkColor} view of the {@code old_value} field. */
     @NativeType("struct nk_color")
     public NkColor old_value() { return nold_value(address()); }
-    /** Passes the {@code old_value} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkConfigStackColorElement old_value(java.util.function.Consumer<NkColor> consumer) { consumer.accept(old_value()); return this; }
 
     // -----------------------------------
 
@@ -151,8 +149,6 @@ class NkConfigStackColorElement extends Struct {
         /** Returns a {@link NkColor} view of the {@code old_value} field. */
         @NativeType("struct nk_color")
         public NkColor old_value() { return NkConfigStackColorElement.nold_value(address()); }
-        /** Passes the {@code old_value} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkConfigStackColorElement.Buffer old_value(java.util.function.Consumer<NkColor> consumer) { consumer.accept(old_value()); return this; }
 
     }
 

@@ -144,8 +144,6 @@ public class NkWindow extends Struct {
     /** Returns a {@link NkRect} view of the {@code bounds} field. */
     @NativeType("struct nk_rect")
     public NkRect bounds() { return nbounds(address()); }
-    /** Passes the {@code bounds} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkWindow bounds(java.util.function.Consumer<NkRect> consumer) { consumer.accept(bounds()); return this; }
     /** Returns a {@link NkScroll} view of the {@code scrollbar} field. */
     @NativeType("struct nk_scroll")
     public NkScroll scrollbar() { return nscrollbar(address()); }
@@ -311,8 +309,6 @@ public class NkWindow extends Struct {
         /** Returns a {@link NkRect} view of the {@code bounds} field. */
         @NativeType("struct nk_rect")
         public NkRect bounds() { return NkWindow.nbounds(address()); }
-        /** Passes the {@code bounds} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkWindow.Buffer bounds(java.util.function.Consumer<NkRect> consumer) { consumer.accept(bounds()); return this; }
         /** Returns a {@link NkScroll} view of the {@code scrollbar} field. */
         @NativeType("struct nk_scroll")
         public NkScroll scrollbar() { return NkWindow.nscrollbar(address()); }

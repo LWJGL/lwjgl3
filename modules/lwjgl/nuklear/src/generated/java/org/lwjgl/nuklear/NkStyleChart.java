@@ -87,23 +87,15 @@ public class NkStyleChart extends Struct implements NativeResource {
     /** Returns a {@link NkStyleItem} view of the {@code background} field. */
     @NativeType("struct nk_style_item")
     public NkStyleItem background() { return nbackground(address()); }
-    /** Passes the {@code background} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleChart background(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(background()); return this; }
     /** Returns a {@link NkColor} view of the {@code border_color} field. */
     @NativeType("struct nk_color")
     public NkColor border_color() { return nborder_color(address()); }
-    /** Passes the {@code border_color} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleChart border_color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(border_color()); return this; }
     /** Returns a {@link NkColor} view of the {@code selected_color} field. */
     @NativeType("struct nk_color")
     public NkColor selected_color() { return nselected_color(address()); }
-    /** Passes the {@code selected_color} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleChart selected_color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(selected_color()); return this; }
     /** Returns a {@link NkColor} view of the {@code color} field. */
     @NativeType("struct nk_color")
     public NkColor color() { return ncolor(address()); }
-    /** Passes the {@code color} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleChart color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(color()); return this; }
     /** Returns the value of the {@code border} field. */
     public float border() { return nborder(address()); }
     /** Returns the value of the {@code rounding} field. */
@@ -111,23 +103,31 @@ public class NkStyleChart extends Struct implements NativeResource {
     /** Returns a {@link NkVec2} view of the {@code padding} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 padding() { return npadding(address()); }
-    /** Passes the {@code padding} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleChart padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(padding()); return this; }
 
     /** Copies the specified {@link NkStyleItem} to the {@code background} field. */
     public NkStyleChart background(@NativeType("struct nk_style_item") NkStyleItem value) { nbackground(address(), value); return this; }
+    /** Passes the {@code background} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleChart background(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(background()); return this; }
     /** Copies the specified {@link NkColor} to the {@code border_color} field. */
     public NkStyleChart border_color(@NativeType("struct nk_color") NkColor value) { nborder_color(address(), value); return this; }
+    /** Passes the {@code border_color} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleChart border_color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(border_color()); return this; }
     /** Copies the specified {@link NkColor} to the {@code selected_color} field. */
     public NkStyleChart selected_color(@NativeType("struct nk_color") NkColor value) { nselected_color(address(), value); return this; }
+    /** Passes the {@code selected_color} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleChart selected_color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(selected_color()); return this; }
     /** Copies the specified {@link NkColor} to the {@code color} field. */
     public NkStyleChart color(@NativeType("struct nk_color") NkColor value) { ncolor(address(), value); return this; }
+    /** Passes the {@code color} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleChart color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(color()); return this; }
     /** Sets the specified value to the {@code border} field. */
     public NkStyleChart border(float value) { nborder(address(), value); return this; }
     /** Sets the specified value to the {@code rounding} field. */
     public NkStyleChart rounding(float value) { nrounding(address(), value); return this; }
     /** Copies the specified {@link NkVec2} to the {@code padding} field. */
     public NkStyleChart padding(@NativeType("struct nk_vec2") NkVec2 value) { npadding(address(), value); return this; }
+    /** Passes the {@code padding} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleChart padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(padding()); return this; }
 
     /** Initializes this struct with the specified values. */
     public NkStyleChart set(
@@ -376,23 +376,15 @@ public class NkStyleChart extends Struct implements NativeResource {
         /** Returns a {@link NkStyleItem} view of the {@code background} field. */
         @NativeType("struct nk_style_item")
         public NkStyleItem background() { return NkStyleChart.nbackground(address()); }
-        /** Passes the {@code background} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleChart.Buffer background(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(background()); return this; }
         /** Returns a {@link NkColor} view of the {@code border_color} field. */
         @NativeType("struct nk_color")
         public NkColor border_color() { return NkStyleChart.nborder_color(address()); }
-        /** Passes the {@code border_color} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleChart.Buffer border_color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(border_color()); return this; }
         /** Returns a {@link NkColor} view of the {@code selected_color} field. */
         @NativeType("struct nk_color")
         public NkColor selected_color() { return NkStyleChart.nselected_color(address()); }
-        /** Passes the {@code selected_color} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleChart.Buffer selected_color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(selected_color()); return this; }
         /** Returns a {@link NkColor} view of the {@code color} field. */
         @NativeType("struct nk_color")
         public NkColor color() { return NkStyleChart.ncolor(address()); }
-        /** Passes the {@code color} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleChart.Buffer color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(color()); return this; }
         /** Returns the value of the {@code border} field. */
         public float border() { return NkStyleChart.nborder(address()); }
         /** Returns the value of the {@code rounding} field. */
@@ -400,23 +392,31 @@ public class NkStyleChart extends Struct implements NativeResource {
         /** Returns a {@link NkVec2} view of the {@code padding} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 padding() { return NkStyleChart.npadding(address()); }
-        /** Passes the {@code padding} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleChart.Buffer padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(padding()); return this; }
 
         /** Copies the specified {@link NkStyleItem} to the {@code background} field. */
         public NkStyleChart.Buffer background(@NativeType("struct nk_style_item") NkStyleItem value) { NkStyleChart.nbackground(address(), value); return this; }
+        /** Passes the {@code background} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleChart.Buffer background(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(background()); return this; }
         /** Copies the specified {@link NkColor} to the {@code border_color} field. */
         public NkStyleChart.Buffer border_color(@NativeType("struct nk_color") NkColor value) { NkStyleChart.nborder_color(address(), value); return this; }
+        /** Passes the {@code border_color} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleChart.Buffer border_color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(border_color()); return this; }
         /** Copies the specified {@link NkColor} to the {@code selected_color} field. */
         public NkStyleChart.Buffer selected_color(@NativeType("struct nk_color") NkColor value) { NkStyleChart.nselected_color(address(), value); return this; }
+        /** Passes the {@code selected_color} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleChart.Buffer selected_color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(selected_color()); return this; }
         /** Copies the specified {@link NkColor} to the {@code color} field. */
         public NkStyleChart.Buffer color(@NativeType("struct nk_color") NkColor value) { NkStyleChart.ncolor(address(), value); return this; }
+        /** Passes the {@code color} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleChart.Buffer color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(color()); return this; }
         /** Sets the specified value to the {@code border} field. */
         public NkStyleChart.Buffer border(float value) { NkStyleChart.nborder(address(), value); return this; }
         /** Sets the specified value to the {@code rounding} field. */
         public NkStyleChart.Buffer rounding(float value) { NkStyleChart.nrounding(address(), value); return this; }
         /** Copies the specified {@link NkVec2} to the {@code padding} field. */
         public NkStyleChart.Buffer padding(@NativeType("struct nk_vec2") NkVec2 value) { NkStyleChart.npadding(address(), value); return this; }
+        /** Passes the {@code padding} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleChart.Buffer padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(padding()); return this; }
 
     }
 

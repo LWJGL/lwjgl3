@@ -98,23 +98,15 @@ public class NkMouse extends Struct {
     /** Returns a {@link NkVec2} view of the {@code pos} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 pos() { return npos(address()); }
-    /** Passes the {@code pos} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkMouse pos(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(pos()); return this; }
     /** Returns a {@link NkVec2} view of the {@code prev} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 prev() { return nprev(address()); }
-    /** Passes the {@code prev} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkMouse prev(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(prev()); return this; }
     /** Returns a {@link NkVec2} view of the {@code delta} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 delta() { return ndelta(address()); }
-    /** Passes the {@code delta} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkMouse delta(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(delta()); return this; }
     /** Returns a {@link NkVec2} view of the {@code scroll_delta} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 scroll_delta() { return nscroll_delta(address()); }
-    /** Passes the {@code scroll_delta} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkMouse scroll_delta(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(scroll_delta()); return this; }
     /** Returns the value of the {@code grab} field. */
     @NativeType("bool")
     public boolean grab() { return ngrab(address()); }
@@ -224,23 +216,15 @@ public class NkMouse extends Struct {
         /** Returns a {@link NkVec2} view of the {@code pos} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 pos() { return NkMouse.npos(address()); }
-        /** Passes the {@code pos} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkMouse.Buffer pos(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(pos()); return this; }
         /** Returns a {@link NkVec2} view of the {@code prev} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 prev() { return NkMouse.nprev(address()); }
-        /** Passes the {@code prev} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkMouse.Buffer prev(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(prev()); return this; }
         /** Returns a {@link NkVec2} view of the {@code delta} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 delta() { return NkMouse.ndelta(address()); }
-        /** Passes the {@code delta} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkMouse.Buffer delta(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(delta()); return this; }
         /** Returns a {@link NkVec2} view of the {@code scroll_delta} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 scroll_delta() { return NkMouse.nscroll_delta(address()); }
-        /** Passes the {@code scroll_delta} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkMouse.Buffer scroll_delta(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(scroll_delta()); return this; }
         /** Returns the value of the {@code grab} field. */
         @NativeType("bool")
         public boolean grab() { return NkMouse.ngrab(address()); }

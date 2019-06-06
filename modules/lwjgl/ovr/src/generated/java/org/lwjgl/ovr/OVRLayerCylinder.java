@@ -136,21 +136,15 @@ public class OVRLayerCylinder extends Struct implements NativeResource {
     /** Returns a {@link OVRLayerHeader} view of the {@code Header} field. */
     @NativeType("ovrLayerHeader")
     public OVRLayerHeader Header() { return nHeader(address()); }
-    /** Passes the {@code Header} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public OVRLayerCylinder Header(java.util.function.Consumer<OVRLayerHeader> consumer) { consumer.accept(Header()); return this; }
     /** Returns the value of the {@code ColorTexture} field. */
     @NativeType("ovrTextureSwapChain")
     public long ColorTexture() { return nColorTexture(address()); }
     /** Returns a {@link OVRRecti} view of the {@code Viewport} field. */
     @NativeType("ovrRecti")
     public OVRRecti Viewport() { return nViewport(address()); }
-    /** Passes the {@code Viewport} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public OVRLayerCylinder Viewport(java.util.function.Consumer<OVRRecti> consumer) { consumer.accept(Viewport()); return this; }
     /** Returns a {@link OVRPosef} view of the {@code CylinderPoseCenter} field. */
     @NativeType("ovrPosef")
     public OVRPosef CylinderPoseCenter() { return nCylinderPoseCenter(address()); }
-    /** Passes the {@code CylinderPoseCenter} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public OVRLayerCylinder CylinderPoseCenter(java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(CylinderPoseCenter()); return this; }
     /** Returns the value of the {@code CylinderRadius} field. */
     public float CylinderRadius() { return nCylinderRadius(address()); }
     /** Returns the value of the {@code CylinderAngle} field. */
@@ -160,12 +154,18 @@ public class OVRLayerCylinder extends Struct implements NativeResource {
 
     /** Copies the specified {@link OVRLayerHeader} to the {@code Header} field. */
     public OVRLayerCylinder Header(@NativeType("ovrLayerHeader") OVRLayerHeader value) { nHeader(address(), value); return this; }
+    /** Passes the {@code Header} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerCylinder Header(java.util.function.Consumer<OVRLayerHeader> consumer) { consumer.accept(Header()); return this; }
     /** Sets the specified value to the {@code ColorTexture} field. */
     public OVRLayerCylinder ColorTexture(@NativeType("ovrTextureSwapChain") long value) { nColorTexture(address(), value); return this; }
     /** Copies the specified {@link OVRRecti} to the {@code Viewport} field. */
     public OVRLayerCylinder Viewport(@NativeType("ovrRecti") OVRRecti value) { nViewport(address(), value); return this; }
+    /** Passes the {@code Viewport} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerCylinder Viewport(java.util.function.Consumer<OVRRecti> consumer) { consumer.accept(Viewport()); return this; }
     /** Copies the specified {@link OVRPosef} to the {@code CylinderPoseCenter} field. */
     public OVRLayerCylinder CylinderPoseCenter(@NativeType("ovrPosef") OVRPosef value) { nCylinderPoseCenter(address(), value); return this; }
+    /** Passes the {@code CylinderPoseCenter} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerCylinder CylinderPoseCenter(java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(CylinderPoseCenter()); return this; }
     /** Sets the specified value to the {@code CylinderRadius} field. */
     public OVRLayerCylinder CylinderRadius(float value) { nCylinderRadius(address(), value); return this; }
     /** Sets the specified value to the {@code CylinderAngle} field. */
@@ -441,21 +441,15 @@ public class OVRLayerCylinder extends Struct implements NativeResource {
         /** Returns a {@link OVRLayerHeader} view of the {@code Header} field. */
         @NativeType("ovrLayerHeader")
         public OVRLayerHeader Header() { return OVRLayerCylinder.nHeader(address()); }
-        /** Passes the {@code Header} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public OVRLayerCylinder.Buffer Header(java.util.function.Consumer<OVRLayerHeader> consumer) { consumer.accept(Header()); return this; }
         /** Returns the value of the {@code ColorTexture} field. */
         @NativeType("ovrTextureSwapChain")
         public long ColorTexture() { return OVRLayerCylinder.nColorTexture(address()); }
         /** Returns a {@link OVRRecti} view of the {@code Viewport} field. */
         @NativeType("ovrRecti")
         public OVRRecti Viewport() { return OVRLayerCylinder.nViewport(address()); }
-        /** Passes the {@code Viewport} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public OVRLayerCylinder.Buffer Viewport(java.util.function.Consumer<OVRRecti> consumer) { consumer.accept(Viewport()); return this; }
         /** Returns a {@link OVRPosef} view of the {@code CylinderPoseCenter} field. */
         @NativeType("ovrPosef")
         public OVRPosef CylinderPoseCenter() { return OVRLayerCylinder.nCylinderPoseCenter(address()); }
-        /** Passes the {@code CylinderPoseCenter} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public OVRLayerCylinder.Buffer CylinderPoseCenter(java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(CylinderPoseCenter()); return this; }
         /** Returns the value of the {@code CylinderRadius} field. */
         public float CylinderRadius() { return OVRLayerCylinder.nCylinderRadius(address()); }
         /** Returns the value of the {@code CylinderAngle} field. */
@@ -465,12 +459,18 @@ public class OVRLayerCylinder extends Struct implements NativeResource {
 
         /** Copies the specified {@link OVRLayerHeader} to the {@code Header} field. */
         public OVRLayerCylinder.Buffer Header(@NativeType("ovrLayerHeader") OVRLayerHeader value) { OVRLayerCylinder.nHeader(address(), value); return this; }
+        /** Passes the {@code Header} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerCylinder.Buffer Header(java.util.function.Consumer<OVRLayerHeader> consumer) { consumer.accept(Header()); return this; }
         /** Sets the specified value to the {@code ColorTexture} field. */
         public OVRLayerCylinder.Buffer ColorTexture(@NativeType("ovrTextureSwapChain") long value) { OVRLayerCylinder.nColorTexture(address(), value); return this; }
         /** Copies the specified {@link OVRRecti} to the {@code Viewport} field. */
         public OVRLayerCylinder.Buffer Viewport(@NativeType("ovrRecti") OVRRecti value) { OVRLayerCylinder.nViewport(address(), value); return this; }
+        /** Passes the {@code Viewport} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerCylinder.Buffer Viewport(java.util.function.Consumer<OVRRecti> consumer) { consumer.accept(Viewport()); return this; }
         /** Copies the specified {@link OVRPosef} to the {@code CylinderPoseCenter} field. */
         public OVRLayerCylinder.Buffer CylinderPoseCenter(@NativeType("ovrPosef") OVRPosef value) { OVRLayerCylinder.nCylinderPoseCenter(address(), value); return this; }
+        /** Passes the {@code CylinderPoseCenter} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerCylinder.Buffer CylinderPoseCenter(java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(CylinderPoseCenter()); return this; }
         /** Sets the specified value to the {@code CylinderRadius} field. */
         public OVRLayerCylinder.Buffer CylinderRadius(float value) { OVRLayerCylinder.nCylinderRadius(address(), value); return this; }
         /** Sets the specified value to the {@code CylinderAngle} field. */

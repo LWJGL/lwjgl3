@@ -67,18 +67,18 @@ public class VROverlayIntersectionMaskPrimitiveData extends Struct implements Na
     /** Returns a {@link IntersectionMaskRectangle} view of the {@code m_Rectangle} field. */
     @NativeType("IntersectionMaskRectangle_t")
     public IntersectionMaskRectangle m_Rectangle() { return nm_Rectangle(address()); }
-    /** Passes the {@code m_Rectangle} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VROverlayIntersectionMaskPrimitiveData m_Rectangle(java.util.function.Consumer<IntersectionMaskRectangle> consumer) { consumer.accept(m_Rectangle()); return this; }
     /** Returns a {@link IntersectionMaskCircle} view of the {@code m_Circle} field. */
     @NativeType("IntersectionMaskCircle_t")
     public IntersectionMaskCircle m_Circle() { return nm_Circle(address()); }
-    /** Passes the {@code m_Circle} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VROverlayIntersectionMaskPrimitiveData m_Circle(java.util.function.Consumer<IntersectionMaskCircle> consumer) { consumer.accept(m_Circle()); return this; }
 
     /** Copies the specified {@link IntersectionMaskRectangle} to the {@code m_Rectangle} field. */
     public VROverlayIntersectionMaskPrimitiveData m_Rectangle(@NativeType("IntersectionMaskRectangle_t") IntersectionMaskRectangle value) { nm_Rectangle(address(), value); return this; }
+    /** Passes the {@code m_Rectangle} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VROverlayIntersectionMaskPrimitiveData m_Rectangle(java.util.function.Consumer<IntersectionMaskRectangle> consumer) { consumer.accept(m_Rectangle()); return this; }
     /** Copies the specified {@link IntersectionMaskCircle} to the {@code m_Circle} field. */
     public VROverlayIntersectionMaskPrimitiveData m_Circle(@NativeType("IntersectionMaskCircle_t") IntersectionMaskCircle value) { nm_Circle(address(), value); return this; }
+    /** Passes the {@code m_Circle} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VROverlayIntersectionMaskPrimitiveData m_Circle(java.util.function.Consumer<IntersectionMaskCircle> consumer) { consumer.accept(m_Circle()); return this; }
 
     /**
      * Copies the specified struct data to this struct.
@@ -286,18 +286,18 @@ public class VROverlayIntersectionMaskPrimitiveData extends Struct implements Na
         /** Returns a {@link IntersectionMaskRectangle} view of the {@code m_Rectangle} field. */
         @NativeType("IntersectionMaskRectangle_t")
         public IntersectionMaskRectangle m_Rectangle() { return VROverlayIntersectionMaskPrimitiveData.nm_Rectangle(address()); }
-        /** Passes the {@code m_Rectangle} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VROverlayIntersectionMaskPrimitiveData.Buffer m_Rectangle(java.util.function.Consumer<IntersectionMaskRectangle> consumer) { consumer.accept(m_Rectangle()); return this; }
         /** Returns a {@link IntersectionMaskCircle} view of the {@code m_Circle} field. */
         @NativeType("IntersectionMaskCircle_t")
         public IntersectionMaskCircle m_Circle() { return VROverlayIntersectionMaskPrimitiveData.nm_Circle(address()); }
-        /** Passes the {@code m_Circle} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VROverlayIntersectionMaskPrimitiveData.Buffer m_Circle(java.util.function.Consumer<IntersectionMaskCircle> consumer) { consumer.accept(m_Circle()); return this; }
 
         /** Copies the specified {@link IntersectionMaskRectangle} to the {@code m_Rectangle} field. */
         public VROverlayIntersectionMaskPrimitiveData.Buffer m_Rectangle(@NativeType("IntersectionMaskRectangle_t") IntersectionMaskRectangle value) { VROverlayIntersectionMaskPrimitiveData.nm_Rectangle(address(), value); return this; }
+        /** Passes the {@code m_Rectangle} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VROverlayIntersectionMaskPrimitiveData.Buffer m_Rectangle(java.util.function.Consumer<IntersectionMaskRectangle> consumer) { consumer.accept(m_Rectangle()); return this; }
         /** Copies the specified {@link IntersectionMaskCircle} to the {@code m_Circle} field. */
         public VROverlayIntersectionMaskPrimitiveData.Buffer m_Circle(@NativeType("IntersectionMaskCircle_t") IntersectionMaskCircle value) { VROverlayIntersectionMaskPrimitiveData.nm_Circle(address(), value); return this; }
+        /** Passes the {@code m_Circle} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VROverlayIntersectionMaskPrimitiveData.Buffer m_Circle(java.util.function.Consumer<IntersectionMaskCircle> consumer) { consumer.accept(m_Circle()); return this; }
 
     }
 

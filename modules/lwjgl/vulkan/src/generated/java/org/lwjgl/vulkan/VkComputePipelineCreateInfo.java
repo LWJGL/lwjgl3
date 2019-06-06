@@ -142,8 +142,6 @@ public class VkComputePipelineCreateInfo extends Struct implements NativeResourc
     public int flags() { return nflags(address()); }
     /** Returns a {@link VkPipelineShaderStageCreateInfo} view of the {@code stage} field. */
     public VkPipelineShaderStageCreateInfo stage() { return nstage(address()); }
-    /** Passes the {@code stage} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkComputePipelineCreateInfo stage(java.util.function.Consumer<VkPipelineShaderStageCreateInfo> consumer) { consumer.accept(stage()); return this; }
     /** Returns the value of the {@code layout} field. */
     @NativeType("VkPipelineLayout")
     public long layout() { return nlayout(address()); }
@@ -162,6 +160,8 @@ public class VkComputePipelineCreateInfo extends Struct implements NativeResourc
     public VkComputePipelineCreateInfo flags(@NativeType("VkPipelineCreateFlags") int value) { nflags(address(), value); return this; }
     /** Copies the specified {@link VkPipelineShaderStageCreateInfo} to the {@code stage} field. */
     public VkComputePipelineCreateInfo stage(VkPipelineShaderStageCreateInfo value) { nstage(address(), value); return this; }
+    /** Passes the {@code stage} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkComputePipelineCreateInfo stage(java.util.function.Consumer<VkPipelineShaderStageCreateInfo> consumer) { consumer.accept(stage()); return this; }
     /** Sets the specified value to the {@code layout} field. */
     public VkComputePipelineCreateInfo layout(@NativeType("VkPipelineLayout") long value) { nlayout(address(), value); return this; }
     /** Sets the specified value to the {@code basePipelineHandle} field. */
@@ -445,8 +445,6 @@ public class VkComputePipelineCreateInfo extends Struct implements NativeResourc
         public int flags() { return VkComputePipelineCreateInfo.nflags(address()); }
         /** Returns a {@link VkPipelineShaderStageCreateInfo} view of the {@code stage} field. */
         public VkPipelineShaderStageCreateInfo stage() { return VkComputePipelineCreateInfo.nstage(address()); }
-        /** Passes the {@code stage} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkComputePipelineCreateInfo.Buffer stage(java.util.function.Consumer<VkPipelineShaderStageCreateInfo> consumer) { consumer.accept(stage()); return this; }
         /** Returns the value of the {@code layout} field. */
         @NativeType("VkPipelineLayout")
         public long layout() { return VkComputePipelineCreateInfo.nlayout(address()); }
@@ -465,6 +463,8 @@ public class VkComputePipelineCreateInfo extends Struct implements NativeResourc
         public VkComputePipelineCreateInfo.Buffer flags(@NativeType("VkPipelineCreateFlags") int value) { VkComputePipelineCreateInfo.nflags(address(), value); return this; }
         /** Copies the specified {@link VkPipelineShaderStageCreateInfo} to the {@code stage} field. */
         public VkComputePipelineCreateInfo.Buffer stage(VkPipelineShaderStageCreateInfo value) { VkComputePipelineCreateInfo.nstage(address(), value); return this; }
+        /** Passes the {@code stage} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkComputePipelineCreateInfo.Buffer stage(java.util.function.Consumer<VkPipelineShaderStageCreateInfo> consumer) { consumer.accept(stage()); return this; }
         /** Sets the specified value to the {@code layout} field. */
         public VkComputePipelineCreateInfo.Buffer layout(@NativeType("VkPipelineLayout") long value) { VkComputePipelineCreateInfo.nlayout(address(), value); return this; }
         /** Sets the specified value to the {@code basePipelineHandle} field. */

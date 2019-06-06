@@ -146,8 +146,6 @@ public class VkRenderPassBeginInfo extends Struct implements NativeResource {
     public long framebuffer() { return nframebuffer(address()); }
     /** Returns a {@link VkRect2D} view of the {@code renderArea} field. */
     public VkRect2D renderArea() { return nrenderArea(address()); }
-    /** Passes the {@code renderArea} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkRenderPassBeginInfo renderArea(java.util.function.Consumer<VkRect2D> consumer) { consumer.accept(renderArea()); return this; }
     /** Returns the value of the {@code clearValueCount} field. */
     @NativeType("uint32_t")
     public int clearValueCount() { return nclearValueCount(address()); }
@@ -166,6 +164,8 @@ public class VkRenderPassBeginInfo extends Struct implements NativeResource {
     public VkRenderPassBeginInfo framebuffer(@NativeType("VkFramebuffer") long value) { nframebuffer(address(), value); return this; }
     /** Copies the specified {@link VkRect2D} to the {@code renderArea} field. */
     public VkRenderPassBeginInfo renderArea(VkRect2D value) { nrenderArea(address(), value); return this; }
+    /** Passes the {@code renderArea} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkRenderPassBeginInfo renderArea(java.util.function.Consumer<VkRect2D> consumer) { consumer.accept(renderArea()); return this; }
     /** Sets the address of the specified {@link VkClearValue.Buffer} to the {@code pClearValues} field. */
     public VkRenderPassBeginInfo pClearValues(@Nullable @NativeType("VkClearValue const *") VkClearValue.Buffer value) { npClearValues(address(), value); return this; }
 
@@ -448,8 +448,6 @@ public class VkRenderPassBeginInfo extends Struct implements NativeResource {
         public long framebuffer() { return VkRenderPassBeginInfo.nframebuffer(address()); }
         /** Returns a {@link VkRect2D} view of the {@code renderArea} field. */
         public VkRect2D renderArea() { return VkRenderPassBeginInfo.nrenderArea(address()); }
-        /** Passes the {@code renderArea} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkRenderPassBeginInfo.Buffer renderArea(java.util.function.Consumer<VkRect2D> consumer) { consumer.accept(renderArea()); return this; }
         /** Returns the value of the {@code clearValueCount} field. */
         @NativeType("uint32_t")
         public int clearValueCount() { return VkRenderPassBeginInfo.nclearValueCount(address()); }
@@ -468,6 +466,8 @@ public class VkRenderPassBeginInfo extends Struct implements NativeResource {
         public VkRenderPassBeginInfo.Buffer framebuffer(@NativeType("VkFramebuffer") long value) { VkRenderPassBeginInfo.nframebuffer(address(), value); return this; }
         /** Copies the specified {@link VkRect2D} to the {@code renderArea} field. */
         public VkRenderPassBeginInfo.Buffer renderArea(VkRect2D value) { VkRenderPassBeginInfo.nrenderArea(address(), value); return this; }
+        /** Passes the {@code renderArea} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkRenderPassBeginInfo.Buffer renderArea(java.util.function.Consumer<VkRect2D> consumer) { consumer.accept(renderArea()); return this; }
         /** Sets the address of the specified {@link VkClearValue.Buffer} to the {@code pClearValues} field. */
         public VkRenderPassBeginInfo.Buffer pClearValues(@Nullable @NativeType("VkClearValue const *") VkClearValue.Buffer value) { VkRenderPassBeginInfo.npClearValues(address(), value); return this; }
 

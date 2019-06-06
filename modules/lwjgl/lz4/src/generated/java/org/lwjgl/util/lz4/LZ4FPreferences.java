@@ -92,8 +92,6 @@ public class LZ4FPreferences extends Struct implements NativeResource {
     /** Returns a {@link LZ4FFrameInfo} view of the {@code frameInfo} field. */
     @NativeType("LZ4F_frameInfo_t")
     public LZ4FFrameInfo frameInfo() { return nframeInfo(address()); }
-    /** Passes the {@code frameInfo} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public LZ4FPreferences frameInfo(java.util.function.Consumer<LZ4FFrameInfo> consumer) { consumer.accept(frameInfo()); return this; }
     /** Returns the value of the {@code compressionLevel} field. */
     public int compressionLevel() { return ncompressionLevel(address()); }
     /** Returns the value of the {@code autoFlush} field. */
@@ -111,6 +109,8 @@ public class LZ4FPreferences extends Struct implements NativeResource {
 
     /** Copies the specified {@link LZ4FFrameInfo} to the {@code frameInfo} field. */
     public LZ4FPreferences frameInfo(@NativeType("LZ4F_frameInfo_t") LZ4FFrameInfo value) { nframeInfo(address(), value); return this; }
+    /** Passes the {@code frameInfo} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public LZ4FPreferences frameInfo(java.util.function.Consumer<LZ4FFrameInfo> consumer) { consumer.accept(frameInfo()); return this; }
     /** Sets the specified value to the {@code compressionLevel} field. */
     public LZ4FPreferences compressionLevel(int value) { ncompressionLevel(address(), value); return this; }
     /** Sets the specified value to the {@code autoFlush} field. */
@@ -368,8 +368,6 @@ public class LZ4FPreferences extends Struct implements NativeResource {
         /** Returns a {@link LZ4FFrameInfo} view of the {@code frameInfo} field. */
         @NativeType("LZ4F_frameInfo_t")
         public LZ4FFrameInfo frameInfo() { return LZ4FPreferences.nframeInfo(address()); }
-        /** Passes the {@code frameInfo} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public LZ4FPreferences.Buffer frameInfo(java.util.function.Consumer<LZ4FFrameInfo> consumer) { consumer.accept(frameInfo()); return this; }
         /** Returns the value of the {@code compressionLevel} field. */
         public int compressionLevel() { return LZ4FPreferences.ncompressionLevel(address()); }
         /** Returns the value of the {@code autoFlush} field. */
@@ -387,6 +385,8 @@ public class LZ4FPreferences extends Struct implements NativeResource {
 
         /** Copies the specified {@link LZ4FFrameInfo} to the {@code frameInfo} field. */
         public LZ4FPreferences.Buffer frameInfo(@NativeType("LZ4F_frameInfo_t") LZ4FFrameInfo value) { LZ4FPreferences.nframeInfo(address(), value); return this; }
+        /** Passes the {@code frameInfo} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public LZ4FPreferences.Buffer frameInfo(java.util.function.Consumer<LZ4FFrameInfo> consumer) { consumer.accept(frameInfo()); return this; }
         /** Sets the specified value to the {@code compressionLevel} field. */
         public LZ4FPreferences.Buffer compressionLevel(int value) { LZ4FPreferences.ncompressionLevel(address(), value); return this; }
         /** Sets the specified value to the {@code autoFlush} field. */

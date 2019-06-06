@@ -87,8 +87,6 @@ public class VkClearRect extends Struct implements NativeResource {
 
     /** Returns a {@link VkRect2D} view of the {@code rect} field. */
     public VkRect2D rect() { return nrect(address()); }
-    /** Passes the {@code rect} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkClearRect rect(java.util.function.Consumer<VkRect2D> consumer) { consumer.accept(rect()); return this; }
     /** Returns the value of the {@code baseArrayLayer} field. */
     @NativeType("uint32_t")
     public int baseArrayLayer() { return nbaseArrayLayer(address()); }
@@ -98,6 +96,8 @@ public class VkClearRect extends Struct implements NativeResource {
 
     /** Copies the specified {@link VkRect2D} to the {@code rect} field. */
     public VkClearRect rect(VkRect2D value) { nrect(address(), value); return this; }
+    /** Passes the {@code rect} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkClearRect rect(java.util.function.Consumer<VkRect2D> consumer) { consumer.accept(rect()); return this; }
     /** Sets the specified value to the {@code baseArrayLayer} field. */
     public VkClearRect baseArrayLayer(@NativeType("uint32_t") int value) { nbaseArrayLayer(address(), value); return this; }
     /** Sets the specified value to the {@code layerCount} field. */
@@ -325,8 +325,6 @@ public class VkClearRect extends Struct implements NativeResource {
 
         /** Returns a {@link VkRect2D} view of the {@code rect} field. */
         public VkRect2D rect() { return VkClearRect.nrect(address()); }
-        /** Passes the {@code rect} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkClearRect.Buffer rect(java.util.function.Consumer<VkRect2D> consumer) { consumer.accept(rect()); return this; }
         /** Returns the value of the {@code baseArrayLayer} field. */
         @NativeType("uint32_t")
         public int baseArrayLayer() { return VkClearRect.nbaseArrayLayer(address()); }
@@ -336,6 +334,8 @@ public class VkClearRect extends Struct implements NativeResource {
 
         /** Copies the specified {@link VkRect2D} to the {@code rect} field. */
         public VkClearRect.Buffer rect(VkRect2D value) { VkClearRect.nrect(address(), value); return this; }
+        /** Passes the {@code rect} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkClearRect.Buffer rect(java.util.function.Consumer<VkRect2D> consumer) { consumer.accept(rect()); return this; }
         /** Sets the specified value to the {@code baseArrayLayer} field. */
         public VkClearRect.Buffer baseArrayLayer(@NativeType("uint32_t") int value) { VkClearRect.nbaseArrayLayer(address(), value); return this; }
         /** Sets the specified value to the {@code layerCount} field. */

@@ -239,8 +239,6 @@ public class CompositorFrameTiming extends Struct implements NativeResource {
     /** Returns a {@link TrackedDevicePose} view of the {@code m_HmdPose} field. */
     @NativeType("TrackedDevicePose_t")
     public TrackedDevicePose m_HmdPose() { return nm_HmdPose(address()); }
-    /** Passes the {@code m_HmdPose} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public CompositorFrameTiming m_HmdPose(java.util.function.Consumer<TrackedDevicePose> consumer) { consumer.accept(m_HmdPose()); return this; }
     /** Returns the value of the {@code m_nNumVSyncsReadyForUse} field. */
     @NativeType("uint32_t")
     public int m_nNumVSyncsReadyForUse() { return nm_nNumVSyncsReadyForUse(address()); }
@@ -537,8 +535,6 @@ public class CompositorFrameTiming extends Struct implements NativeResource {
         /** Returns a {@link TrackedDevicePose} view of the {@code m_HmdPose} field. */
         @NativeType("TrackedDevicePose_t")
         public TrackedDevicePose m_HmdPose() { return CompositorFrameTiming.nm_HmdPose(address()); }
-        /** Passes the {@code m_HmdPose} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public CompositorFrameTiming.Buffer m_HmdPose(java.util.function.Consumer<TrackedDevicePose> consumer) { consumer.accept(m_HmdPose()); return this; }
         /** Returns the value of the {@code m_nNumVSyncsReadyForUse} field. */
         @NativeType("uint32_t")
         public int m_nNumVSyncsReadyForUse() { return CompositorFrameTiming.nm_nNumVSyncsReadyForUse(address()); }

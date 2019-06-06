@@ -86,21 +86,21 @@ public class OVRLayerCube extends Struct implements NativeResource {
     /** Returns a {@link OVRLayerHeader} view of the {@code Header} field. */
     @NativeType("ovrLayerHeader")
     public OVRLayerHeader Header() { return nHeader(address()); }
-    /** Passes the {@code Header} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public OVRLayerCube Header(java.util.function.Consumer<OVRLayerHeader> consumer) { consumer.accept(Header()); return this; }
     /** Returns a {@link OVRQuatf} view of the {@code Orientation} field. */
     @NativeType("ovrQuatf")
     public OVRQuatf Orientation() { return nOrientation(address()); }
-    /** Passes the {@code Orientation} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public OVRLayerCube Orientation(java.util.function.Consumer<OVRQuatf> consumer) { consumer.accept(Orientation()); return this; }
     /** Returns the value of the {@code CubeMapTexture} field. */
     @NativeType("ovrTextureSwapChain")
     public long CubeMapTexture() { return nCubeMapTexture(address()); }
 
     /** Copies the specified {@link OVRLayerHeader} to the {@code Header} field. */
     public OVRLayerCube Header(@NativeType("ovrLayerHeader") OVRLayerHeader value) { nHeader(address(), value); return this; }
+    /** Passes the {@code Header} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerCube Header(java.util.function.Consumer<OVRLayerHeader> consumer) { consumer.accept(Header()); return this; }
     /** Copies the specified {@link OVRQuatf} to the {@code Orientation} field. */
     public OVRLayerCube Orientation(@NativeType("ovrQuatf") OVRQuatf value) { nOrientation(address(), value); return this; }
+    /** Passes the {@code Orientation} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerCube Orientation(java.util.function.Consumer<OVRQuatf> consumer) { consumer.accept(Orientation()); return this; }
     /** Sets the specified value to the {@code CubeMapTexture} field. */
     public OVRLayerCube CubeMapTexture(@NativeType("ovrTextureSwapChain") long value) { nCubeMapTexture(address(), value); return this; }
 
@@ -348,21 +348,21 @@ public class OVRLayerCube extends Struct implements NativeResource {
         /** Returns a {@link OVRLayerHeader} view of the {@code Header} field. */
         @NativeType("ovrLayerHeader")
         public OVRLayerHeader Header() { return OVRLayerCube.nHeader(address()); }
-        /** Passes the {@code Header} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public OVRLayerCube.Buffer Header(java.util.function.Consumer<OVRLayerHeader> consumer) { consumer.accept(Header()); return this; }
         /** Returns a {@link OVRQuatf} view of the {@code Orientation} field. */
         @NativeType("ovrQuatf")
         public OVRQuatf Orientation() { return OVRLayerCube.nOrientation(address()); }
-        /** Passes the {@code Orientation} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public OVRLayerCube.Buffer Orientation(java.util.function.Consumer<OVRQuatf> consumer) { consumer.accept(Orientation()); return this; }
         /** Returns the value of the {@code CubeMapTexture} field. */
         @NativeType("ovrTextureSwapChain")
         public long CubeMapTexture() { return OVRLayerCube.nCubeMapTexture(address()); }
 
         /** Copies the specified {@link OVRLayerHeader} to the {@code Header} field. */
         public OVRLayerCube.Buffer Header(@NativeType("ovrLayerHeader") OVRLayerHeader value) { OVRLayerCube.nHeader(address(), value); return this; }
+        /** Passes the {@code Header} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerCube.Buffer Header(java.util.function.Consumer<OVRLayerHeader> consumer) { consumer.accept(Header()); return this; }
         /** Copies the specified {@link OVRQuatf} to the {@code Orientation} field. */
         public OVRLayerCube.Buffer Orientation(@NativeType("ovrQuatf") OVRQuatf value) { OVRLayerCube.nOrientation(address(), value); return this; }
+        /** Passes the {@code Orientation} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerCube.Buffer Orientation(java.util.function.Consumer<OVRQuatf> consumer) { consumer.accept(Orientation()); return this; }
         /** Sets the specified value to the {@code CubeMapTexture} field. */
         public OVRLayerCube.Buffer CubeMapTexture(@NativeType("ovrTextureSwapChain") long value) { OVRLayerCube.nCubeMapTexture(address(), value); return this; }
 

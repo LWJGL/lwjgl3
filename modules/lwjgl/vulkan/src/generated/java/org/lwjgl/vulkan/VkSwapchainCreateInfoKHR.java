@@ -230,8 +230,6 @@ public class VkSwapchainCreateInfoKHR extends Struct implements NativeResource {
     public int imageColorSpace() { return nimageColorSpace(address()); }
     /** Returns a {@link VkExtent2D} view of the {@code imageExtent} field. */
     public VkExtent2D imageExtent() { return nimageExtent(address()); }
-    /** Passes the {@code imageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkSwapchainCreateInfoKHR imageExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(imageExtent()); return this; }
     /** Returns the value of the {@code imageArrayLayers} field. */
     @NativeType("uint32_t")
     public int imageArrayLayers() { return nimageArrayLayers(address()); }
@@ -280,6 +278,8 @@ public class VkSwapchainCreateInfoKHR extends Struct implements NativeResource {
     public VkSwapchainCreateInfoKHR imageColorSpace(@NativeType("VkColorSpaceKHR") int value) { nimageColorSpace(address(), value); return this; }
     /** Copies the specified {@link VkExtent2D} to the {@code imageExtent} field. */
     public VkSwapchainCreateInfoKHR imageExtent(VkExtent2D value) { nimageExtent(address(), value); return this; }
+    /** Passes the {@code imageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkSwapchainCreateInfoKHR imageExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(imageExtent()); return this; }
     /** Sets the specified value to the {@code imageArrayLayers} field. */
     public VkSwapchainCreateInfoKHR imageArrayLayers(@NativeType("uint32_t") int value) { nimageArrayLayers(address(), value); return this; }
     /** Sets the specified value to the {@code imageUsage} field. */
@@ -653,8 +653,6 @@ public class VkSwapchainCreateInfoKHR extends Struct implements NativeResource {
         public int imageColorSpace() { return VkSwapchainCreateInfoKHR.nimageColorSpace(address()); }
         /** Returns a {@link VkExtent2D} view of the {@code imageExtent} field. */
         public VkExtent2D imageExtent() { return VkSwapchainCreateInfoKHR.nimageExtent(address()); }
-        /** Passes the {@code imageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkSwapchainCreateInfoKHR.Buffer imageExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(imageExtent()); return this; }
         /** Returns the value of the {@code imageArrayLayers} field. */
         @NativeType("uint32_t")
         public int imageArrayLayers() { return VkSwapchainCreateInfoKHR.nimageArrayLayers(address()); }
@@ -703,6 +701,8 @@ public class VkSwapchainCreateInfoKHR extends Struct implements NativeResource {
         public VkSwapchainCreateInfoKHR.Buffer imageColorSpace(@NativeType("VkColorSpaceKHR") int value) { VkSwapchainCreateInfoKHR.nimageColorSpace(address(), value); return this; }
         /** Copies the specified {@link VkExtent2D} to the {@code imageExtent} field. */
         public VkSwapchainCreateInfoKHR.Buffer imageExtent(VkExtent2D value) { VkSwapchainCreateInfoKHR.nimageExtent(address(), value); return this; }
+        /** Passes the {@code imageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkSwapchainCreateInfoKHR.Buffer imageExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(imageExtent()); return this; }
         /** Sets the specified value to the {@code imageArrayLayers} field. */
         public VkSwapchainCreateInfoKHR.Buffer imageArrayLayers(@NativeType("uint32_t") int value) { VkSwapchainCreateInfoKHR.nimageArrayLayers(address(), value); return this; }
         /** Sets the specified value to the {@code imageUsage} field. */

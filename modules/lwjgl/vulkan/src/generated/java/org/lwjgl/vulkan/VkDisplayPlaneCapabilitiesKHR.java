@@ -126,36 +126,20 @@ public class VkDisplayPlaneCapabilitiesKHR extends Struct implements NativeResou
     public int supportedAlpha() { return nsupportedAlpha(address()); }
     /** Returns a {@link VkOffset2D} view of the {@code minSrcPosition} field. */
     public VkOffset2D minSrcPosition() { return nminSrcPosition(address()); }
-    /** Passes the {@code minSrcPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkDisplayPlaneCapabilitiesKHR minSrcPosition(java.util.function.Consumer<VkOffset2D> consumer) { consumer.accept(minSrcPosition()); return this; }
     /** Returns a {@link VkOffset2D} view of the {@code maxSrcPosition} field. */
     public VkOffset2D maxSrcPosition() { return nmaxSrcPosition(address()); }
-    /** Passes the {@code maxSrcPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkDisplayPlaneCapabilitiesKHR maxSrcPosition(java.util.function.Consumer<VkOffset2D> consumer) { consumer.accept(maxSrcPosition()); return this; }
     /** Returns a {@link VkExtent2D} view of the {@code minSrcExtent} field. */
     public VkExtent2D minSrcExtent() { return nminSrcExtent(address()); }
-    /** Passes the {@code minSrcExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkDisplayPlaneCapabilitiesKHR minSrcExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(minSrcExtent()); return this; }
     /** Returns a {@link VkExtent2D} view of the {@code maxSrcExtent} field. */
     public VkExtent2D maxSrcExtent() { return nmaxSrcExtent(address()); }
-    /** Passes the {@code maxSrcExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkDisplayPlaneCapabilitiesKHR maxSrcExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(maxSrcExtent()); return this; }
     /** Returns a {@link VkOffset2D} view of the {@code minDstPosition} field. */
     public VkOffset2D minDstPosition() { return nminDstPosition(address()); }
-    /** Passes the {@code minDstPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkDisplayPlaneCapabilitiesKHR minDstPosition(java.util.function.Consumer<VkOffset2D> consumer) { consumer.accept(minDstPosition()); return this; }
     /** Returns a {@link VkOffset2D} view of the {@code maxDstPosition} field. */
     public VkOffset2D maxDstPosition() { return nmaxDstPosition(address()); }
-    /** Passes the {@code maxDstPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkDisplayPlaneCapabilitiesKHR maxDstPosition(java.util.function.Consumer<VkOffset2D> consumer) { consumer.accept(maxDstPosition()); return this; }
     /** Returns a {@link VkExtent2D} view of the {@code minDstExtent} field. */
     public VkExtent2D minDstExtent() { return nminDstExtent(address()); }
-    /** Passes the {@code minDstExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkDisplayPlaneCapabilitiesKHR minDstExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(minDstExtent()); return this; }
     /** Returns a {@link VkExtent2D} view of the {@code maxDstExtent} field. */
     public VkExtent2D maxDstExtent() { return nmaxDstExtent(address()); }
-    /** Passes the {@code maxDstExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkDisplayPlaneCapabilitiesKHR maxDstExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(maxDstExtent()); return this; }
 
     // -----------------------------------
 
@@ -362,36 +346,20 @@ public class VkDisplayPlaneCapabilitiesKHR extends Struct implements NativeResou
         public int supportedAlpha() { return VkDisplayPlaneCapabilitiesKHR.nsupportedAlpha(address()); }
         /** Returns a {@link VkOffset2D} view of the {@code minSrcPosition} field. */
         public VkOffset2D minSrcPosition() { return VkDisplayPlaneCapabilitiesKHR.nminSrcPosition(address()); }
-        /** Passes the {@code minSrcPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkDisplayPlaneCapabilitiesKHR.Buffer minSrcPosition(java.util.function.Consumer<VkOffset2D> consumer) { consumer.accept(minSrcPosition()); return this; }
         /** Returns a {@link VkOffset2D} view of the {@code maxSrcPosition} field. */
         public VkOffset2D maxSrcPosition() { return VkDisplayPlaneCapabilitiesKHR.nmaxSrcPosition(address()); }
-        /** Passes the {@code maxSrcPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkDisplayPlaneCapabilitiesKHR.Buffer maxSrcPosition(java.util.function.Consumer<VkOffset2D> consumer) { consumer.accept(maxSrcPosition()); return this; }
         /** Returns a {@link VkExtent2D} view of the {@code minSrcExtent} field. */
         public VkExtent2D minSrcExtent() { return VkDisplayPlaneCapabilitiesKHR.nminSrcExtent(address()); }
-        /** Passes the {@code minSrcExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkDisplayPlaneCapabilitiesKHR.Buffer minSrcExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(minSrcExtent()); return this; }
         /** Returns a {@link VkExtent2D} view of the {@code maxSrcExtent} field. */
         public VkExtent2D maxSrcExtent() { return VkDisplayPlaneCapabilitiesKHR.nmaxSrcExtent(address()); }
-        /** Passes the {@code maxSrcExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkDisplayPlaneCapabilitiesKHR.Buffer maxSrcExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(maxSrcExtent()); return this; }
         /** Returns a {@link VkOffset2D} view of the {@code minDstPosition} field. */
         public VkOffset2D minDstPosition() { return VkDisplayPlaneCapabilitiesKHR.nminDstPosition(address()); }
-        /** Passes the {@code minDstPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkDisplayPlaneCapabilitiesKHR.Buffer minDstPosition(java.util.function.Consumer<VkOffset2D> consumer) { consumer.accept(minDstPosition()); return this; }
         /** Returns a {@link VkOffset2D} view of the {@code maxDstPosition} field. */
         public VkOffset2D maxDstPosition() { return VkDisplayPlaneCapabilitiesKHR.nmaxDstPosition(address()); }
-        /** Passes the {@code maxDstPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkDisplayPlaneCapabilitiesKHR.Buffer maxDstPosition(java.util.function.Consumer<VkOffset2D> consumer) { consumer.accept(maxDstPosition()); return this; }
         /** Returns a {@link VkExtent2D} view of the {@code minDstExtent} field. */
         public VkExtent2D minDstExtent() { return VkDisplayPlaneCapabilitiesKHR.nminDstExtent(address()); }
-        /** Passes the {@code minDstExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkDisplayPlaneCapabilitiesKHR.Buffer minDstExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(minDstExtent()); return this; }
         /** Returns a {@link VkExtent2D} view of the {@code maxDstExtent} field. */
         public VkExtent2D maxDstExtent() { return VkDisplayPlaneCapabilitiesKHR.nmaxDstExtent(address()); }
-        /** Passes the {@code maxDstExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkDisplayPlaneCapabilitiesKHR.Buffer maxDstExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(maxDstExtent()); return this; }
 
     }
 

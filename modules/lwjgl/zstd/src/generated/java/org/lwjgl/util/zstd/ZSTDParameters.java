@@ -67,18 +67,18 @@ public class ZSTDParameters extends Struct implements NativeResource {
     /** Returns a {@link ZSTDCompressionParameters} view of the {@code cParams} field. */
     @NativeType("ZSTD_compressionParameters")
     public ZSTDCompressionParameters cParams() { return ncParams(address()); }
-    /** Passes the {@code cParams} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public ZSTDParameters cParams(java.util.function.Consumer<ZSTDCompressionParameters> consumer) { consumer.accept(cParams()); return this; }
     /** Returns a {@link ZSTDFrameParameters} view of the {@code fParams} field. */
     @NativeType("ZSTD_frameParameters")
     public ZSTDFrameParameters fParams() { return nfParams(address()); }
-    /** Passes the {@code fParams} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public ZSTDParameters fParams(java.util.function.Consumer<ZSTDFrameParameters> consumer) { consumer.accept(fParams()); return this; }
 
     /** Copies the specified {@link ZSTDCompressionParameters} to the {@code cParams} field. */
     public ZSTDParameters cParams(@NativeType("ZSTD_compressionParameters") ZSTDCompressionParameters value) { ncParams(address(), value); return this; }
+    /** Passes the {@code cParams} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public ZSTDParameters cParams(java.util.function.Consumer<ZSTDCompressionParameters> consumer) { consumer.accept(cParams()); return this; }
     /** Copies the specified {@link ZSTDFrameParameters} to the {@code fParams} field. */
     public ZSTDParameters fParams(@NativeType("ZSTD_frameParameters") ZSTDFrameParameters value) { nfParams(address(), value); return this; }
+    /** Passes the {@code fParams} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public ZSTDParameters fParams(java.util.function.Consumer<ZSTDFrameParameters> consumer) { consumer.accept(fParams()); return this; }
 
     /** Initializes this struct with the specified values. */
     public ZSTDParameters set(
@@ -297,18 +297,18 @@ public class ZSTDParameters extends Struct implements NativeResource {
         /** Returns a {@link ZSTDCompressionParameters} view of the {@code cParams} field. */
         @NativeType("ZSTD_compressionParameters")
         public ZSTDCompressionParameters cParams() { return ZSTDParameters.ncParams(address()); }
-        /** Passes the {@code cParams} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public ZSTDParameters.Buffer cParams(java.util.function.Consumer<ZSTDCompressionParameters> consumer) { consumer.accept(cParams()); return this; }
         /** Returns a {@link ZSTDFrameParameters} view of the {@code fParams} field. */
         @NativeType("ZSTD_frameParameters")
         public ZSTDFrameParameters fParams() { return ZSTDParameters.nfParams(address()); }
-        /** Passes the {@code fParams} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public ZSTDParameters.Buffer fParams(java.util.function.Consumer<ZSTDFrameParameters> consumer) { consumer.accept(fParams()); return this; }
 
         /** Copies the specified {@link ZSTDCompressionParameters} to the {@code cParams} field. */
         public ZSTDParameters.Buffer cParams(@NativeType("ZSTD_compressionParameters") ZSTDCompressionParameters value) { ZSTDParameters.ncParams(address(), value); return this; }
+        /** Passes the {@code cParams} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public ZSTDParameters.Buffer cParams(java.util.function.Consumer<ZSTDCompressionParameters> consumer) { consumer.accept(cParams()); return this; }
         /** Copies the specified {@link ZSTDFrameParameters} to the {@code fParams} field. */
         public ZSTDParameters.Buffer fParams(@NativeType("ZSTD_frameParameters") ZSTDFrameParameters value) { ZSTDParameters.nfParams(address(), value); return this; }
+        /** Passes the {@code fParams} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public ZSTDParameters.Buffer fParams(java.util.function.Consumer<ZSTDFrameParameters> consumer) { consumer.accept(fParams()); return this; }
 
     }
 

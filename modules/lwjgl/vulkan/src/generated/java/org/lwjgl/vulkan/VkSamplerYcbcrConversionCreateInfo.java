@@ -176,8 +176,6 @@ public class VkSamplerYcbcrConversionCreateInfo extends Struct implements Native
     public int ycbcrRange() { return nycbcrRange(address()); }
     /** Returns a {@link VkComponentMapping} view of the {@code components} field. */
     public VkComponentMapping components() { return ncomponents(address()); }
-    /** Passes the {@code components} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkSamplerYcbcrConversionCreateInfo components(java.util.function.Consumer<VkComponentMapping> consumer) { consumer.accept(components()); return this; }
     /** Returns the value of the {@code xChromaOffset} field. */
     @NativeType("VkChromaLocation")
     public int xChromaOffset() { return nxChromaOffset(address()); }
@@ -203,6 +201,8 @@ public class VkSamplerYcbcrConversionCreateInfo extends Struct implements Native
     public VkSamplerYcbcrConversionCreateInfo ycbcrRange(@NativeType("VkSamplerYcbcrRange") int value) { nycbcrRange(address(), value); return this; }
     /** Copies the specified {@link VkComponentMapping} to the {@code components} field. */
     public VkSamplerYcbcrConversionCreateInfo components(VkComponentMapping value) { ncomponents(address(), value); return this; }
+    /** Passes the {@code components} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkSamplerYcbcrConversionCreateInfo components(java.util.function.Consumer<VkComponentMapping> consumer) { consumer.accept(components()); return this; }
     /** Sets the specified value to the {@code xChromaOffset} field. */
     public VkSamplerYcbcrConversionCreateInfo xChromaOffset(@NativeType("VkChromaLocation") int value) { nxChromaOffset(address(), value); return this; }
     /** Sets the specified value to the {@code yChromaOffset} field. */
@@ -491,8 +491,6 @@ public class VkSamplerYcbcrConversionCreateInfo extends Struct implements Native
         public int ycbcrRange() { return VkSamplerYcbcrConversionCreateInfo.nycbcrRange(address()); }
         /** Returns a {@link VkComponentMapping} view of the {@code components} field. */
         public VkComponentMapping components() { return VkSamplerYcbcrConversionCreateInfo.ncomponents(address()); }
-        /** Passes the {@code components} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkSamplerYcbcrConversionCreateInfo.Buffer components(java.util.function.Consumer<VkComponentMapping> consumer) { consumer.accept(components()); return this; }
         /** Returns the value of the {@code xChromaOffset} field. */
         @NativeType("VkChromaLocation")
         public int xChromaOffset() { return VkSamplerYcbcrConversionCreateInfo.nxChromaOffset(address()); }
@@ -518,6 +516,8 @@ public class VkSamplerYcbcrConversionCreateInfo extends Struct implements Native
         public VkSamplerYcbcrConversionCreateInfo.Buffer ycbcrRange(@NativeType("VkSamplerYcbcrRange") int value) { VkSamplerYcbcrConversionCreateInfo.nycbcrRange(address(), value); return this; }
         /** Copies the specified {@link VkComponentMapping} to the {@code components} field. */
         public VkSamplerYcbcrConversionCreateInfo.Buffer components(VkComponentMapping value) { VkSamplerYcbcrConversionCreateInfo.ncomponents(address(), value); return this; }
+        /** Passes the {@code components} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkSamplerYcbcrConversionCreateInfo.Buffer components(java.util.function.Consumer<VkComponentMapping> consumer) { consumer.accept(components()); return this; }
         /** Sets the specified value to the {@code xChromaOffset} field. */
         public VkSamplerYcbcrConversionCreateInfo.Buffer xChromaOffset(@NativeType("VkChromaLocation") int value) { VkSamplerYcbcrConversionCreateInfo.nxChromaOffset(address(), value); return this; }
         /** Sets the specified value to the {@code yChromaOffset} field. */

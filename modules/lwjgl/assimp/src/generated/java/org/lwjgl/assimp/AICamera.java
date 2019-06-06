@@ -125,23 +125,15 @@ public class AICamera extends Struct implements NativeResource {
     /** Returns a {@link AIString} view of the {@code mName} field. */
     @NativeType("struct aiString")
     public AIString mName() { return nmName(address()); }
-    /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public AICamera mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
     /** Returns a {@link AIVector3D} view of the {@code mPosition} field. */
     @NativeType("struct aiVector3D")
     public AIVector3D mPosition() { return nmPosition(address()); }
-    /** Passes the {@code mPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public AICamera mPosition(java.util.function.Consumer<AIVector3D> consumer) { consumer.accept(mPosition()); return this; }
     /** Returns a {@link AIVector3D} view of the {@code mUp} field. */
     @NativeType("struct aiVector3D")
     public AIVector3D mUp() { return nmUp(address()); }
-    /** Passes the {@code mUp} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public AICamera mUp(java.util.function.Consumer<AIVector3D> consumer) { consumer.accept(mUp()); return this; }
     /** Returns a {@link AIVector3D} view of the {@code mLookAt} field. */
     @NativeType("struct aiVector3D")
     public AIVector3D mLookAt() { return nmLookAt(address()); }
-    /** Passes the {@code mLookAt} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public AICamera mLookAt(java.util.function.Consumer<AIVector3D> consumer) { consumer.accept(mLookAt()); return this; }
     /** Returns the value of the {@code mHorizontalFOV} field. */
     public float mHorizontalFOV() { return nmHorizontalFOV(address()); }
     /** Returns the value of the {@code mClipPlaneNear} field. */
@@ -153,12 +145,20 @@ public class AICamera extends Struct implements NativeResource {
 
     /** Copies the specified {@link AIString} to the {@code mName} field. */
     public AICamera mName(@NativeType("struct aiString") AIString value) { nmName(address(), value); return this; }
+    /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public AICamera mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
     /** Copies the specified {@link AIVector3D} to the {@code mPosition} field. */
     public AICamera mPosition(@NativeType("struct aiVector3D") AIVector3D value) { nmPosition(address(), value); return this; }
+    /** Passes the {@code mPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public AICamera mPosition(java.util.function.Consumer<AIVector3D> consumer) { consumer.accept(mPosition()); return this; }
     /** Copies the specified {@link AIVector3D} to the {@code mUp} field. */
     public AICamera mUp(@NativeType("struct aiVector3D") AIVector3D value) { nmUp(address(), value); return this; }
+    /** Passes the {@code mUp} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public AICamera mUp(java.util.function.Consumer<AIVector3D> consumer) { consumer.accept(mUp()); return this; }
     /** Copies the specified {@link AIVector3D} to the {@code mLookAt} field. */
     public AICamera mLookAt(@NativeType("struct aiVector3D") AIVector3D value) { nmLookAt(address(), value); return this; }
+    /** Passes the {@code mLookAt} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public AICamera mLookAt(java.util.function.Consumer<AIVector3D> consumer) { consumer.accept(mLookAt()); return this; }
     /** Sets the specified value to the {@code mHorizontalFOV} field. */
     public AICamera mHorizontalFOV(float value) { nmHorizontalFOV(address(), value); return this; }
     /** Sets the specified value to the {@code mClipPlaneNear} field. */
@@ -421,23 +421,15 @@ public class AICamera extends Struct implements NativeResource {
         /** Returns a {@link AIString} view of the {@code mName} field. */
         @NativeType("struct aiString")
         public AIString mName() { return AICamera.nmName(address()); }
-        /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public AICamera.Buffer mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
         /** Returns a {@link AIVector3D} view of the {@code mPosition} field. */
         @NativeType("struct aiVector3D")
         public AIVector3D mPosition() { return AICamera.nmPosition(address()); }
-        /** Passes the {@code mPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public AICamera.Buffer mPosition(java.util.function.Consumer<AIVector3D> consumer) { consumer.accept(mPosition()); return this; }
         /** Returns a {@link AIVector3D} view of the {@code mUp} field. */
         @NativeType("struct aiVector3D")
         public AIVector3D mUp() { return AICamera.nmUp(address()); }
-        /** Passes the {@code mUp} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public AICamera.Buffer mUp(java.util.function.Consumer<AIVector3D> consumer) { consumer.accept(mUp()); return this; }
         /** Returns a {@link AIVector3D} view of the {@code mLookAt} field. */
         @NativeType("struct aiVector3D")
         public AIVector3D mLookAt() { return AICamera.nmLookAt(address()); }
-        /** Passes the {@code mLookAt} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public AICamera.Buffer mLookAt(java.util.function.Consumer<AIVector3D> consumer) { consumer.accept(mLookAt()); return this; }
         /** Returns the value of the {@code mHorizontalFOV} field. */
         public float mHorizontalFOV() { return AICamera.nmHorizontalFOV(address()); }
         /** Returns the value of the {@code mClipPlaneNear} field. */
@@ -449,12 +441,20 @@ public class AICamera extends Struct implements NativeResource {
 
         /** Copies the specified {@link AIString} to the {@code mName} field. */
         public AICamera.Buffer mName(@NativeType("struct aiString") AIString value) { AICamera.nmName(address(), value); return this; }
+        /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public AICamera.Buffer mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
         /** Copies the specified {@link AIVector3D} to the {@code mPosition} field. */
         public AICamera.Buffer mPosition(@NativeType("struct aiVector3D") AIVector3D value) { AICamera.nmPosition(address(), value); return this; }
+        /** Passes the {@code mPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public AICamera.Buffer mPosition(java.util.function.Consumer<AIVector3D> consumer) { consumer.accept(mPosition()); return this; }
         /** Copies the specified {@link AIVector3D} to the {@code mUp} field. */
         public AICamera.Buffer mUp(@NativeType("struct aiVector3D") AIVector3D value) { AICamera.nmUp(address(), value); return this; }
+        /** Passes the {@code mUp} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public AICamera.Buffer mUp(java.util.function.Consumer<AIVector3D> consumer) { consumer.accept(mUp()); return this; }
         /** Copies the specified {@link AIVector3D} to the {@code mLookAt} field. */
         public AICamera.Buffer mLookAt(@NativeType("struct aiVector3D") AIVector3D value) { AICamera.nmLookAt(address(), value); return this; }
+        /** Passes the {@code mLookAt} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public AICamera.Buffer mLookAt(java.util.function.Consumer<AIVector3D> consumer) { consumer.accept(mLookAt()); return this; }
         /** Sets the specified value to the {@code mHorizontalFOV} field. */
         public AICamera.Buffer mHorizontalFOV(float value) { AICamera.nmHorizontalFOV(address(), value); return this; }
         /** Sets the specified value to the {@code mClipPlaneNear} field. */

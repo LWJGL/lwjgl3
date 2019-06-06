@@ -68,8 +68,6 @@ class NkConfigStackStyleItemElement extends Struct {
     /** Returns a {@link NkStyleItem} view of the {@code old_value} field. */
     @NativeType("struct nk_style_item")
     public NkStyleItem old_value() { return nold_value(address()); }
-    /** Passes the {@code old_value} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkConfigStackStyleItemElement old_value(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(old_value()); return this; }
 
     // -----------------------------------
 
@@ -151,8 +149,6 @@ class NkConfigStackStyleItemElement extends Struct {
         /** Returns a {@link NkStyleItem} view of the {@code old_value} field. */
         @NativeType("struct nk_style_item")
         public NkStyleItem old_value() { return NkConfigStackStyleItemElement.nold_value(address()); }
-        /** Passes the {@code old_value} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkConfigStackStyleItemElement.Buffer old_value(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(old_value()); return this; }
 
     }
 

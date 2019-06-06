@@ -87,8 +87,6 @@ public class CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC extends Struct implements
     public long offset() { return noffset(address()); }
     /** Returns a {@link CUDA_ARRAY3D_DESCRIPTOR} view of the {@code arrayDesc} field. */
     public CUDA_ARRAY3D_DESCRIPTOR arrayDesc() { return narrayDesc(address()); }
-    /** Passes the {@code arrayDesc} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC arrayDesc(java.util.function.Consumer<CUDA_ARRAY3D_DESCRIPTOR> consumer) { consumer.accept(arrayDesc()); return this; }
     /** Returns the value of the {@code numLevels} field. */
     @NativeType("unsigned int")
     public int numLevels() { return nnumLevels(address()); }
@@ -103,6 +101,8 @@ public class CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC extends Struct implements
     public CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC offset(@NativeType("unsigned long long") long value) { noffset(address(), value); return this; }
     /** Copies the specified {@link CUDA_ARRAY3D_DESCRIPTOR} to the {@code arrayDesc} field. */
     public CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC arrayDesc(CUDA_ARRAY3D_DESCRIPTOR value) { narrayDesc(address(), value); return this; }
+    /** Passes the {@code arrayDesc} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC arrayDesc(java.util.function.Consumer<CUDA_ARRAY3D_DESCRIPTOR> consumer) { consumer.accept(arrayDesc()); return this; }
     /** Sets the specified value to the {@code numLevels} field. */
     public CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC numLevels(@NativeType("unsigned int") int value) { nnumLevels(address(), value); return this; }
     /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */
@@ -352,8 +352,6 @@ public class CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC extends Struct implements
         public long offset() { return CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.noffset(address()); }
         /** Returns a {@link CUDA_ARRAY3D_DESCRIPTOR} view of the {@code arrayDesc} field. */
         public CUDA_ARRAY3D_DESCRIPTOR arrayDesc() { return CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.narrayDesc(address()); }
-        /** Passes the {@code arrayDesc} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.Buffer arrayDesc(java.util.function.Consumer<CUDA_ARRAY3D_DESCRIPTOR> consumer) { consumer.accept(arrayDesc()); return this; }
         /** Returns the value of the {@code numLevels} field. */
         @NativeType("unsigned int")
         public int numLevels() { return CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.nnumLevels(address()); }
@@ -368,6 +366,8 @@ public class CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC extends Struct implements
         public CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.Buffer offset(@NativeType("unsigned long long") long value) { CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.noffset(address(), value); return this; }
         /** Copies the specified {@link CUDA_ARRAY3D_DESCRIPTOR} to the {@code arrayDesc} field. */
         public CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.Buffer arrayDesc(CUDA_ARRAY3D_DESCRIPTOR value) { CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.narrayDesc(address(), value); return this; }
+        /** Passes the {@code arrayDesc} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.Buffer arrayDesc(java.util.function.Consumer<CUDA_ARRAY3D_DESCRIPTOR> consumer) { consumer.accept(arrayDesc()); return this; }
         /** Sets the specified value to the {@code numLevels} field. */
         public CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.Buffer numLevels(@NativeType("unsigned int") int value) { CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.nnumLevels(address(), value); return this; }
         /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */

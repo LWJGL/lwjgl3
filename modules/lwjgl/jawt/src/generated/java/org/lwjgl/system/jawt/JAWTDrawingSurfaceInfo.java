@@ -96,8 +96,6 @@ public class JAWTDrawingSurfaceInfo extends Struct {
     /** Returns a {@link JAWTRectangle} view of the {@code bounds} field. */
     @NativeType("JAWT_Rectangle")
     public JAWTRectangle bounds() { return nbounds(address()); }
-    /** Passes the {@code bounds} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public JAWTDrawingSurfaceInfo bounds(java.util.function.Consumer<JAWTRectangle> consumer) { consumer.accept(bounds()); return this; }
     /** Returns the value of the {@code clipSize} field. */
     @NativeType("jint")
     public int clipSize() { return nclipSize(address()); }
@@ -194,8 +192,6 @@ public class JAWTDrawingSurfaceInfo extends Struct {
         /** Returns a {@link JAWTRectangle} view of the {@code bounds} field. */
         @NativeType("JAWT_Rectangle")
         public JAWTRectangle bounds() { return JAWTDrawingSurfaceInfo.nbounds(address()); }
-        /** Passes the {@code bounds} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public JAWTDrawingSurfaceInfo.Buffer bounds(java.util.function.Consumer<JAWTRectangle> consumer) { consumer.accept(bounds()); return this; }
         /** Returns the value of the {@code clipSize} field. */
         @NativeType("jint")
         public int clipSize() { return JAWTDrawingSurfaceInfo.nclipSize(address()); }

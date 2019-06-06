@@ -275,8 +275,6 @@ public class AIMesh extends Struct implements NativeResource {
     /** Returns a {@link AIString} view of the {@code mName} field. */
     @NativeType("struct aiString")
     public AIString mName() { return nmName(address()); }
-    /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public AIMesh mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
     /** Returns the value of the {@code mNumAnimMeshes} field. */
     @NativeType("unsigned int")
     public int mNumAnimMeshes() { return nmNumAnimMeshes(address()); }
@@ -304,10 +302,14 @@ public class AIMesh extends Struct implements NativeResource {
     public AIMesh mColors(@NativeType("struct aiColor4D *[Assimp.AI_MAX_NUMBER_OF_COLOR_SETS]") PointerBuffer value) { nmColors(address(), value); return this; }
     /** Copies the address of the specified {@link AIColor4D} at the specified index of the {@code mColors} field. */
     public AIMesh mColors(int index, @Nullable @NativeType("struct aiColor4D *") AIColor4D.Buffer value) { nmColors(address(), index, value); return this; }
+    /** Passes the element at {@code index} of the {@code mColors} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public AIMesh mColors(int index, java.util.function.Consumer<AIColor4D.Buffer> consumer) { consumer.accept(mColors(index)); return this; }
     /** Copies the specified {@link PointerBuffer} to the {@code mTextureCoords} field. */
     public AIMesh mTextureCoords(@NativeType("struct aiVector3D *[Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS]") PointerBuffer value) { nmTextureCoords(address(), value); return this; }
     /** Copies the address of the specified {@link AIVector3D} at the specified index of the {@code mTextureCoords} field. */
     public AIMesh mTextureCoords(int index, @Nullable @NativeType("struct aiVector3D *") AIVector3D.Buffer value) { nmTextureCoords(address(), index, value); return this; }
+    /** Passes the element at {@code index} of the {@code mTextureCoords} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public AIMesh mTextureCoords(int index, java.util.function.Consumer<AIVector3D.Buffer> consumer) { consumer.accept(mTextureCoords(index)); return this; }
     /** Copies the specified {@link IntBuffer} to the {@code mNumUVComponents} field. */
     public AIMesh mNumUVComponents(@NativeType("unsigned int[Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS]") IntBuffer value) { nmNumUVComponents(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code mNumUVComponents} field. */
@@ -320,6 +322,8 @@ public class AIMesh extends Struct implements NativeResource {
     public AIMesh mMaterialIndex(@NativeType("unsigned int") int value) { nmMaterialIndex(address(), value); return this; }
     /** Copies the specified {@link AIString} to the {@code mName} field. */
     public AIMesh mName(@NativeType("struct aiString") AIString value) { nmName(address(), value); return this; }
+    /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public AIMesh mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
     /** Sets the address of the specified {@link PointerBuffer} to the {@code mAnimMeshes} field. */
     public AIMesh mAnimMeshes(@Nullable @NativeType("struct aiAnimMesh **") PointerBuffer value) { nmAnimMeshes(address(), value); return this; }
     /** Sets the specified value to the {@code mMethod} field. */
@@ -753,8 +757,6 @@ public class AIMesh extends Struct implements NativeResource {
         /** Returns a {@link AIString} view of the {@code mName} field. */
         @NativeType("struct aiString")
         public AIString mName() { return AIMesh.nmName(address()); }
-        /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public AIMesh.Buffer mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
         /** Returns the value of the {@code mNumAnimMeshes} field. */
         @NativeType("unsigned int")
         public int mNumAnimMeshes() { return AIMesh.nmNumAnimMeshes(address()); }
@@ -782,10 +784,14 @@ public class AIMesh extends Struct implements NativeResource {
         public AIMesh.Buffer mColors(@NativeType("struct aiColor4D *[Assimp.AI_MAX_NUMBER_OF_COLOR_SETS]") PointerBuffer value) { AIMesh.nmColors(address(), value); return this; }
         /** Copies the address of the specified {@link AIColor4D} at the specified index of the {@code mColors} field. */
         public AIMesh.Buffer mColors(int index, @Nullable @NativeType("struct aiColor4D *") AIColor4D.Buffer value) { AIMesh.nmColors(address(), index, value); return this; }
+        /** Passes the element at {@code index} of the {@code mColors} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public AIMesh.Buffer mColors(int index, java.util.function.Consumer<AIColor4D.Buffer> consumer) { consumer.accept(mColors(index)); return this; }
         /** Copies the specified {@link PointerBuffer} to the {@code mTextureCoords} field. */
         public AIMesh.Buffer mTextureCoords(@NativeType("struct aiVector3D *[Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS]") PointerBuffer value) { AIMesh.nmTextureCoords(address(), value); return this; }
         /** Copies the address of the specified {@link AIVector3D} at the specified index of the {@code mTextureCoords} field. */
         public AIMesh.Buffer mTextureCoords(int index, @Nullable @NativeType("struct aiVector3D *") AIVector3D.Buffer value) { AIMesh.nmTextureCoords(address(), index, value); return this; }
+        /** Passes the element at {@code index} of the {@code mTextureCoords} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public AIMesh.Buffer mTextureCoords(int index, java.util.function.Consumer<AIVector3D.Buffer> consumer) { consumer.accept(mTextureCoords(index)); return this; }
         /** Copies the specified {@link IntBuffer} to the {@code mNumUVComponents} field. */
         public AIMesh.Buffer mNumUVComponents(@NativeType("unsigned int[Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS]") IntBuffer value) { AIMesh.nmNumUVComponents(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code mNumUVComponents} field. */
@@ -798,6 +804,8 @@ public class AIMesh extends Struct implements NativeResource {
         public AIMesh.Buffer mMaterialIndex(@NativeType("unsigned int") int value) { AIMesh.nmMaterialIndex(address(), value); return this; }
         /** Copies the specified {@link AIString} to the {@code mName} field. */
         public AIMesh.Buffer mName(@NativeType("struct aiString") AIString value) { AIMesh.nmName(address(), value); return this; }
+        /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public AIMesh.Buffer mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
         /** Sets the address of the specified {@link PointerBuffer} to the {@code mAnimMeshes} field. */
         public AIMesh.Buffer mAnimMeshes(@Nullable @NativeType("struct aiAnimMesh **") PointerBuffer value) { AIMesh.nmAnimMeshes(address(), value); return this; }
         /** Sets the specified value to the {@code mMethod} field. */

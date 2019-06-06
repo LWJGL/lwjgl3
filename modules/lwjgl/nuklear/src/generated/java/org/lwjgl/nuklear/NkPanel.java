@@ -141,8 +141,6 @@ public class NkPanel extends Struct {
     /** Returns a {@link NkRect} view of the {@code bounds} field. */
     @NativeType("struct nk_rect")
     public NkRect bounds() { return nbounds(address()); }
-    /** Passes the {@code bounds} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkPanel bounds(java.util.function.Consumer<NkRect> consumer) { consumer.accept(bounds()); return this; }
     /**
      * Returns a {@link IntBuffer} view of the data pointed to by the {@code offset_x} field.
      *
@@ -175,8 +173,6 @@ public class NkPanel extends Struct {
     /** Returns a {@link NkRect} view of the {@code clip} field. */
     @NativeType("struct nk_rect")
     public NkRect clip() { return nclip(address()); }
-    /** Passes the {@code clip} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkPanel clip(java.util.function.Consumer<NkRect> consumer) { consumer.accept(clip()); return this; }
     /** Returns a {@link NkMenuState} view of the {@code menu} field. */
     @NativeType("struct nk_menu_state")
     public NkMenuState menu() { return nmenu(address()); }
@@ -308,8 +304,6 @@ public class NkPanel extends Struct {
         /** Returns a {@link NkRect} view of the {@code bounds} field. */
         @NativeType("struct nk_rect")
         public NkRect bounds() { return NkPanel.nbounds(address()); }
-        /** Passes the {@code bounds} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkPanel.Buffer bounds(java.util.function.Consumer<NkRect> consumer) { consumer.accept(bounds()); return this; }
         /**
          * Returns a {@link IntBuffer} view of the data pointed to by the {@code offset_x} field.
          *
@@ -342,8 +336,6 @@ public class NkPanel extends Struct {
         /** Returns a {@link NkRect} view of the {@code clip} field. */
         @NativeType("struct nk_rect")
         public NkRect clip() { return NkPanel.nclip(address()); }
-        /** Passes the {@code clip} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkPanel.Buffer clip(java.util.function.Consumer<NkRect> consumer) { consumer.accept(clip()); return this; }
         /** Returns a {@link NkMenuState} view of the {@code menu} field. */
         @NativeType("struct nk_menu_state")
         public NkMenuState menu() { return NkPanel.nmenu(address()); }

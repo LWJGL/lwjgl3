@@ -71,21 +71,21 @@ public class VROverlayIntersectionParams extends Struct implements NativeResourc
     /** Returns a {@link HmdVector3} view of the {@code vSource} field. */
     @NativeType("HmdVector3_t")
     public HmdVector3 vSource() { return nvSource(address()); }
-    /** Passes the {@code vSource} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VROverlayIntersectionParams vSource(java.util.function.Consumer<HmdVector3> consumer) { consumer.accept(vSource()); return this; }
     /** Returns a {@link HmdVector3} view of the {@code vDirection} field. */
     @NativeType("HmdVector3_t")
     public HmdVector3 vDirection() { return nvDirection(address()); }
-    /** Passes the {@code vDirection} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VROverlayIntersectionParams vDirection(java.util.function.Consumer<HmdVector3> consumer) { consumer.accept(vDirection()); return this; }
     /** Returns the value of the {@code eOrigin} field. */
     @NativeType("ETrackingUniverseOrigin")
     public int eOrigin() { return neOrigin(address()); }
 
     /** Copies the specified {@link HmdVector3} to the {@code vSource} field. */
     public VROverlayIntersectionParams vSource(@NativeType("HmdVector3_t") HmdVector3 value) { nvSource(address(), value); return this; }
+    /** Passes the {@code vSource} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VROverlayIntersectionParams vSource(java.util.function.Consumer<HmdVector3> consumer) { consumer.accept(vSource()); return this; }
     /** Copies the specified {@link HmdVector3} to the {@code vDirection} field. */
     public VROverlayIntersectionParams vDirection(@NativeType("HmdVector3_t") HmdVector3 value) { nvDirection(address(), value); return this; }
+    /** Passes the {@code vDirection} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VROverlayIntersectionParams vDirection(java.util.function.Consumer<HmdVector3> consumer) { consumer.accept(vDirection()); return this; }
     /** Sets the specified value to the {@code eOrigin} field. */
     public VROverlayIntersectionParams eOrigin(@NativeType("ETrackingUniverseOrigin") int value) { neOrigin(address(), value); return this; }
 
@@ -312,21 +312,21 @@ public class VROverlayIntersectionParams extends Struct implements NativeResourc
         /** Returns a {@link HmdVector3} view of the {@code vSource} field. */
         @NativeType("HmdVector3_t")
         public HmdVector3 vSource() { return VROverlayIntersectionParams.nvSource(address()); }
-        /** Passes the {@code vSource} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VROverlayIntersectionParams.Buffer vSource(java.util.function.Consumer<HmdVector3> consumer) { consumer.accept(vSource()); return this; }
         /** Returns a {@link HmdVector3} view of the {@code vDirection} field. */
         @NativeType("HmdVector3_t")
         public HmdVector3 vDirection() { return VROverlayIntersectionParams.nvDirection(address()); }
-        /** Passes the {@code vDirection} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VROverlayIntersectionParams.Buffer vDirection(java.util.function.Consumer<HmdVector3> consumer) { consumer.accept(vDirection()); return this; }
         /** Returns the value of the {@code eOrigin} field. */
         @NativeType("ETrackingUniverseOrigin")
         public int eOrigin() { return VROverlayIntersectionParams.neOrigin(address()); }
 
         /** Copies the specified {@link HmdVector3} to the {@code vSource} field. */
         public VROverlayIntersectionParams.Buffer vSource(@NativeType("HmdVector3_t") HmdVector3 value) { VROverlayIntersectionParams.nvSource(address(), value); return this; }
+        /** Passes the {@code vSource} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VROverlayIntersectionParams.Buffer vSource(java.util.function.Consumer<HmdVector3> consumer) { consumer.accept(vSource()); return this; }
         /** Copies the specified {@link HmdVector3} to the {@code vDirection} field. */
         public VROverlayIntersectionParams.Buffer vDirection(@NativeType("HmdVector3_t") HmdVector3 value) { VROverlayIntersectionParams.nvDirection(address(), value); return this; }
+        /** Passes the {@code vDirection} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VROverlayIntersectionParams.Buffer vDirection(java.util.function.Consumer<HmdVector3> consumer) { consumer.accept(vDirection()); return this; }
         /** Sets the specified value to the {@code eOrigin} field. */
         public VROverlayIntersectionParams.Buffer eOrigin(@NativeType("ETrackingUniverseOrigin") int value) { VROverlayIntersectionParams.neOrigin(address(), value); return this; }
 

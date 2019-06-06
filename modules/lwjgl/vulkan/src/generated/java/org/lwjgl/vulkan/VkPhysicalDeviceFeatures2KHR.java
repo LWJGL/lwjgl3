@@ -48,6 +48,8 @@ public class VkPhysicalDeviceFeatures2KHR extends VkPhysicalDeviceFeatures2 {
     /** Copies the specified {@link VkPhysicalDeviceFeatures} to the {@code features} field. */
     @Override
     public VkPhysicalDeviceFeatures2KHR features(VkPhysicalDeviceFeatures value) { nfeatures(address(), value); return this; }
+    /** Passes the {@code features} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkPhysicalDeviceFeatures2KHR features(java.util.function.Consumer<VkPhysicalDeviceFeatures> consumer) { consumer.accept(features()); return this; }
 
     /** Initializes this struct with the specified values. */
     @Override
@@ -263,6 +265,8 @@ public class VkPhysicalDeviceFeatures2KHR extends VkPhysicalDeviceFeatures2 {
         /** Copies the specified {@link VkPhysicalDeviceFeatures} to the {@code features} field. */
         @Override
         public VkPhysicalDeviceFeatures2KHR.Buffer features(VkPhysicalDeviceFeatures value) { VkPhysicalDeviceFeatures2KHR.nfeatures(address(), value); return this; }
+        /** Passes the {@code features} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkPhysicalDeviceFeatures2KHR.Buffer features(java.util.function.Consumer<VkPhysicalDeviceFeatures> consumer) { consumer.accept(features()); return this; }
 
     }
 

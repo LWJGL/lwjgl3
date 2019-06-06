@@ -76,6 +76,10 @@ public class OVRTextureLayoutDescUnion extends Struct implements NativeResource 
     public OVRTextureLayoutDescUnion Octilinear(@NativeType("ovrTextureLayoutOctilinear[ovrEye_Count]") OVRTextureLayoutOctilinear.Buffer value) { nOctilinear(address(), value); return this; }
     /** Copies the specified {@link OVRTextureLayoutOctilinear} at the specified index of the {@code Octilinear} field. */
     public OVRTextureLayoutDescUnion Octilinear(int index, @NativeType("ovrTextureLayoutOctilinear") OVRTextureLayoutOctilinear value) { nOctilinear(address(), index, value); return this; }
+    /** Passes the {@code Octilinear} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRTextureLayoutDescUnion Octilinear(java.util.function.Consumer<OVRTextureLayoutOctilinear.Buffer> consumer) { consumer.accept(Octilinear()); return this; }
+    /** Passes the element at {@code index} of the {@code Octilinear} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRTextureLayoutDescUnion Octilinear(int index, java.util.function.Consumer<OVRTextureLayoutOctilinear> consumer) { consumer.accept(Octilinear(index)); return this; }
 
     /**
      * Copies the specified struct data to this struct.
@@ -298,6 +302,10 @@ public class OVRTextureLayoutDescUnion extends Struct implements NativeResource 
         public OVRTextureLayoutDescUnion.Buffer Octilinear(@NativeType("ovrTextureLayoutOctilinear[ovrEye_Count]") OVRTextureLayoutOctilinear.Buffer value) { OVRTextureLayoutDescUnion.nOctilinear(address(), value); return this; }
         /** Copies the specified {@link OVRTextureLayoutOctilinear} at the specified index of the {@code Octilinear} field. */
         public OVRTextureLayoutDescUnion.Buffer Octilinear(int index, @NativeType("ovrTextureLayoutOctilinear") OVRTextureLayoutOctilinear value) { OVRTextureLayoutDescUnion.nOctilinear(address(), index, value); return this; }
+        /** Passes the {@code Octilinear} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRTextureLayoutDescUnion.Buffer Octilinear(java.util.function.Consumer<OVRTextureLayoutOctilinear.Buffer> consumer) { consumer.accept(Octilinear()); return this; }
+        /** Passes the element at {@code index} of the {@code Octilinear} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRTextureLayoutDescUnion.Buffer Octilinear(int index, java.util.function.Consumer<OVRTextureLayoutOctilinear> consumer) { consumer.accept(Octilinear(index)); return this; }
 
     }
 

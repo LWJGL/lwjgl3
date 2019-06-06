@@ -75,8 +75,6 @@ public class NkCommand extends Struct {
     /** Returns a {@link NkHandle} view of the {@code userdata} field. */
     @NativeType("nk_handle")
     public NkHandle userdata() { return nuserdata(address()); }
-    /** Passes the {@code userdata} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkCommand userdata(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(userdata()); return this; }
 
     // -----------------------------------
 
@@ -163,8 +161,6 @@ public class NkCommand extends Struct {
         /** Returns a {@link NkHandle} view of the {@code userdata} field. */
         @NativeType("nk_handle")
         public NkHandle userdata() { return NkCommand.nuserdata(address()); }
-        /** Passes the {@code userdata} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkCommand.Buffer userdata(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(userdata()); return this; }
 
     }
 

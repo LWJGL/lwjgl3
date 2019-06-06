@@ -74,17 +74,17 @@ public class VkRect2D extends Struct implements NativeResource {
 
     /** Returns a {@link VkOffset2D} view of the {@code offset} field. */
     public VkOffset2D offset() { return noffset(address()); }
-    /** Passes the {@code offset} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkRect2D offset(java.util.function.Consumer<VkOffset2D> consumer) { consumer.accept(offset()); return this; }
     /** Returns a {@link VkExtent2D} view of the {@code extent} field. */
     public VkExtent2D extent() { return nextent(address()); }
-    /** Passes the {@code extent} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkRect2D extent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(extent()); return this; }
 
     /** Copies the specified {@link VkOffset2D} to the {@code offset} field. */
     public VkRect2D offset(VkOffset2D value) { noffset(address(), value); return this; }
+    /** Passes the {@code offset} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkRect2D offset(java.util.function.Consumer<VkOffset2D> consumer) { consumer.accept(offset()); return this; }
     /** Copies the specified {@link VkExtent2D} to the {@code extent} field. */
     public VkRect2D extent(VkExtent2D value) { nextent(address(), value); return this; }
+    /** Passes the {@code extent} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkRect2D extent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(extent()); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkRect2D set(
@@ -302,17 +302,17 @@ public class VkRect2D extends Struct implements NativeResource {
 
         /** Returns a {@link VkOffset2D} view of the {@code offset} field. */
         public VkOffset2D offset() { return VkRect2D.noffset(address()); }
-        /** Passes the {@code offset} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkRect2D.Buffer offset(java.util.function.Consumer<VkOffset2D> consumer) { consumer.accept(offset()); return this; }
         /** Returns a {@link VkExtent2D} view of the {@code extent} field. */
         public VkExtent2D extent() { return VkRect2D.nextent(address()); }
-        /** Passes the {@code extent} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkRect2D.Buffer extent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(extent()); return this; }
 
         /** Copies the specified {@link VkOffset2D} to the {@code offset} field. */
         public VkRect2D.Buffer offset(VkOffset2D value) { VkRect2D.noffset(address(), value); return this; }
+        /** Passes the {@code offset} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkRect2D.Buffer offset(java.util.function.Consumer<VkOffset2D> consumer) { consumer.accept(offset()); return this; }
         /** Copies the specified {@link VkExtent2D} to the {@code extent} field. */
         public VkRect2D.Buffer extent(VkExtent2D value) { VkRect2D.nextent(address(), value); return this; }
+        /** Passes the {@code extent} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkRect2D.Buffer extent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(extent()); return this; }
 
     }
 

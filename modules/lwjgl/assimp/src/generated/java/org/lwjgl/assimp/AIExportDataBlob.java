@@ -103,8 +103,6 @@ public class AIExportDataBlob extends Struct implements NativeResource {
     /** Returns a {@link AIString} view of the {@code name} field. */
     @NativeType("struct aiString")
     public AIString name() { return nname(address()); }
-    /** Passes the {@code name} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public AIExportDataBlob name(java.util.function.Consumer<AIString> consumer) { consumer.accept(name()); return this; }
     /** Returns a {@link AIExportDataBlob} view of the struct pointed to by the {@code next} field. */
     @Nullable
     @NativeType("struct aiExportDataBlob *")
@@ -114,6 +112,8 @@ public class AIExportDataBlob extends Struct implements NativeResource {
     public AIExportDataBlob data(@NativeType("void *") ByteBuffer value) { ndata(address(), value); return this; }
     /** Copies the specified {@link AIString} to the {@code name} field. */
     public AIExportDataBlob name(@NativeType("struct aiString") AIString value) { nname(address(), value); return this; }
+    /** Passes the {@code name} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public AIExportDataBlob name(java.util.function.Consumer<AIString> consumer) { consumer.accept(name()); return this; }
     /** Sets the address of the specified {@link AIExportDataBlob} to the {@code next} field. */
     public AIExportDataBlob next(@Nullable @NativeType("struct aiExportDataBlob *") AIExportDataBlob value) { nnext(address(), value); return this; }
 
@@ -371,8 +371,6 @@ public class AIExportDataBlob extends Struct implements NativeResource {
         /** Returns a {@link AIString} view of the {@code name} field. */
         @NativeType("struct aiString")
         public AIString name() { return AIExportDataBlob.nname(address()); }
-        /** Passes the {@code name} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public AIExportDataBlob.Buffer name(java.util.function.Consumer<AIString> consumer) { consumer.accept(name()); return this; }
         /** Returns a {@link AIExportDataBlob} view of the struct pointed to by the {@code next} field. */
         @Nullable
         @NativeType("struct aiExportDataBlob *")
@@ -382,6 +380,8 @@ public class AIExportDataBlob extends Struct implements NativeResource {
         public AIExportDataBlob.Buffer data(@NativeType("void *") ByteBuffer value) { AIExportDataBlob.ndata(address(), value); return this; }
         /** Copies the specified {@link AIString} to the {@code name} field. */
         public AIExportDataBlob.Buffer name(@NativeType("struct aiString") AIString value) { AIExportDataBlob.nname(address(), value); return this; }
+        /** Passes the {@code name} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public AIExportDataBlob.Buffer name(java.util.function.Consumer<AIString> consumer) { consumer.accept(name()); return this; }
         /** Sets the address of the specified {@link AIExportDataBlob} to the {@code next} field. */
         public AIExportDataBlob.Buffer next(@Nullable @NativeType("struct aiExportDataBlob *") AIExportDataBlob value) { AIExportDataBlob.nnext(address(), value); return this; }
 

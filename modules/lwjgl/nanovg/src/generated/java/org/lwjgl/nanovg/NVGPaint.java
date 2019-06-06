@@ -116,13 +116,9 @@ public class NVGPaint extends Struct implements NativeResource {
     /** Returns a {@link NVGColor} view of the {@code innerColor} field. */
     @NativeType("NVGcolor")
     public NVGColor innerColor() { return ninnerColor(address()); }
-    /** Passes the {@code innerColor} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NVGPaint innerColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(innerColor()); return this; }
     /** Returns a {@link NVGColor} view of the {@code outerColor} field. */
     @NativeType("NVGcolor")
     public NVGColor outerColor() { return nouterColor(address()); }
-    /** Passes the {@code outerColor} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NVGPaint outerColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(outerColor()); return this; }
     /** Returns the value of the {@code image} field. */
     public int image() { return nimage(address()); }
 
@@ -140,8 +136,12 @@ public class NVGPaint extends Struct implements NativeResource {
     public NVGPaint feather(float value) { nfeather(address(), value); return this; }
     /** Copies the specified {@link NVGColor} to the {@code innerColor} field. */
     public NVGPaint innerColor(@NativeType("NVGcolor") NVGColor value) { ninnerColor(address(), value); return this; }
+    /** Passes the {@code innerColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NVGPaint innerColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(innerColor()); return this; }
     /** Copies the specified {@link NVGColor} to the {@code outerColor} field. */
     public NVGPaint outerColor(@NativeType("NVGcolor") NVGColor value) { nouterColor(address(), value); return this; }
+    /** Passes the {@code outerColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NVGPaint outerColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(outerColor()); return this; }
     /** Sets the specified value to the {@code image} field. */
     public NVGPaint image(int value) { nimage(address(), value); return this; }
 
@@ -428,13 +428,9 @@ public class NVGPaint extends Struct implements NativeResource {
         /** Returns a {@link NVGColor} view of the {@code innerColor} field. */
         @NativeType("NVGcolor")
         public NVGColor innerColor() { return NVGPaint.ninnerColor(address()); }
-        /** Passes the {@code innerColor} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NVGPaint.Buffer innerColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(innerColor()); return this; }
         /** Returns a {@link NVGColor} view of the {@code outerColor} field. */
         @NativeType("NVGcolor")
         public NVGColor outerColor() { return NVGPaint.nouterColor(address()); }
-        /** Passes the {@code outerColor} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NVGPaint.Buffer outerColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(outerColor()); return this; }
         /** Returns the value of the {@code image} field. */
         public int image() { return NVGPaint.nimage(address()); }
 
@@ -452,8 +448,12 @@ public class NVGPaint extends Struct implements NativeResource {
         public NVGPaint.Buffer feather(float value) { NVGPaint.nfeather(address(), value); return this; }
         /** Copies the specified {@link NVGColor} to the {@code innerColor} field. */
         public NVGPaint.Buffer innerColor(@NativeType("NVGcolor") NVGColor value) { NVGPaint.ninnerColor(address(), value); return this; }
+        /** Passes the {@code innerColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NVGPaint.Buffer innerColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(innerColor()); return this; }
         /** Copies the specified {@link NVGColor} to the {@code outerColor} field. */
         public NVGPaint.Buffer outerColor(@NativeType("NVGcolor") NVGColor value) { NVGPaint.nouterColor(address(), value); return this; }
+        /** Passes the {@code outerColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NVGPaint.Buffer outerColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(outerColor()); return this; }
         /** Sets the specified value to the {@code image} field. */
         public NVGPaint.Buffer image(int value) { NVGPaint.nimage(address(), value); return this; }
 

@@ -142,8 +142,6 @@ public class NkRowLayout extends Struct {
     /** Returns a {@link NkRect} view of the {@code item} field. */
     @NativeType("struct nk_rect")
     public NkRect item() { return nitem(address()); }
-    /** Passes the {@code item} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkRowLayout item(java.util.function.Consumer<NkRect> consumer) { consumer.accept(item()); return this; }
     /** Returns the value of the {@code tree_depth} field. */
     public int tree_depth() { return ntree_depth(address()); }
     /** Returns a {@link FloatBuffer} view of the {@code templates} field. */
@@ -281,8 +279,6 @@ public class NkRowLayout extends Struct {
         /** Returns a {@link NkRect} view of the {@code item} field. */
         @NativeType("struct nk_rect")
         public NkRect item() { return NkRowLayout.nitem(address()); }
-        /** Passes the {@code item} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkRowLayout.Buffer item(java.util.function.Consumer<NkRect> consumer) { consumer.accept(item()); return this; }
         /** Returns the value of the {@code tree_depth} field. */
         public int tree_depth() { return NkRowLayout.ntree_depth(address()); }
         /** Returns a {@link FloatBuffer} view of the {@code templates} field. */

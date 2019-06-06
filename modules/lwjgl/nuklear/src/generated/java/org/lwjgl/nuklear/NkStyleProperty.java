@@ -138,38 +138,24 @@ public class NkStyleProperty extends Struct implements NativeResource {
     /** Returns a {@link NkStyleItem} view of the {@code normal} field. */
     @NativeType("struct nk_style_item")
     public NkStyleItem normal() { return nnormal(address()); }
-    /** Passes the {@code normal} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleProperty normal(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(normal()); return this; }
     /** Returns a {@link NkStyleItem} view of the {@code hover} field. */
     @NativeType("struct nk_style_item")
     public NkStyleItem hover() { return nhover(address()); }
-    /** Passes the {@code hover} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleProperty hover(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(hover()); return this; }
     /** Returns a {@link NkStyleItem} view of the {@code active} field. */
     @NativeType("struct nk_style_item")
     public NkStyleItem active() { return nactive(address()); }
-    /** Passes the {@code active} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleProperty active(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(active()); return this; }
     /** Returns a {@link NkColor} view of the {@code border_color} field. */
     @NativeType("struct nk_color")
     public NkColor border_color() { return nborder_color(address()); }
-    /** Passes the {@code border_color} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleProperty border_color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(border_color()); return this; }
     /** Returns a {@link NkColor} view of the {@code label_normal} field. */
     @NativeType("struct nk_color")
     public NkColor label_normal() { return nlabel_normal(address()); }
-    /** Passes the {@code label_normal} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleProperty label_normal(java.util.function.Consumer<NkColor> consumer) { consumer.accept(label_normal()); return this; }
     /** Returns a {@link NkColor} view of the {@code label_hover} field. */
     @NativeType("struct nk_color")
     public NkColor label_hover() { return nlabel_hover(address()); }
-    /** Passes the {@code label_hover} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleProperty label_hover(java.util.function.Consumer<NkColor> consumer) { consumer.accept(label_hover()); return this; }
     /** Returns a {@link NkColor} view of the {@code label_active} field. */
     @NativeType("struct nk_color")
     public NkColor label_active() { return nlabel_active(address()); }
-    /** Passes the {@code label_active} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleProperty label_active(java.util.function.Consumer<NkColor> consumer) { consumer.accept(label_active()); return this; }
     /** Returns the value of the {@code sym_left} field. */
     @NativeType("enum nk_symbol_type")
     public int sym_left() { return nsym_left(address()); }
@@ -183,28 +169,18 @@ public class NkStyleProperty extends Struct implements NativeResource {
     /** Returns a {@link NkVec2} view of the {@code padding} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 padding() { return npadding(address()); }
-    /** Passes the {@code padding} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleProperty padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(padding()); return this; }
     /** Returns a {@link NkStyleEdit} view of the {@code edit} field. */
     @NativeType("struct nk_style_edit")
     public NkStyleEdit edit() { return nedit(address()); }
-    /** Passes the {@code edit} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleProperty edit(java.util.function.Consumer<NkStyleEdit> consumer) { consumer.accept(edit()); return this; }
     /** Returns a {@link NkStyleButton} view of the {@code inc_button} field. */
     @NativeType("struct nk_style_button")
     public NkStyleButton inc_button() { return ninc_button(address()); }
-    /** Passes the {@code inc_button} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleProperty inc_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(inc_button()); return this; }
     /** Returns a {@link NkStyleButton} view of the {@code dec_button} field. */
     @NativeType("struct nk_style_button")
     public NkStyleButton dec_button() { return ndec_button(address()); }
-    /** Passes the {@code dec_button} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleProperty dec_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(dec_button()); return this; }
     /** Returns a {@link NkHandle} view of the {@code userdata} field. */
     @NativeType("nk_handle")
     public NkHandle userdata() { return nuserdata(address()); }
-    /** Passes the {@code userdata} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleProperty userdata(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(userdata()); return this; }
     /** Returns the value of the {@code draw_begin} field. */
     @Nullable
     @NativeType("nk_draw_begin")
@@ -216,18 +192,32 @@ public class NkStyleProperty extends Struct implements NativeResource {
 
     /** Copies the specified {@link NkStyleItem} to the {@code normal} field. */
     public NkStyleProperty normal(@NativeType("struct nk_style_item") NkStyleItem value) { nnormal(address(), value); return this; }
+    /** Passes the {@code normal} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleProperty normal(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(normal()); return this; }
     /** Copies the specified {@link NkStyleItem} to the {@code hover} field. */
     public NkStyleProperty hover(@NativeType("struct nk_style_item") NkStyleItem value) { nhover(address(), value); return this; }
+    /** Passes the {@code hover} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleProperty hover(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(hover()); return this; }
     /** Copies the specified {@link NkStyleItem} to the {@code active} field. */
     public NkStyleProperty active(@NativeType("struct nk_style_item") NkStyleItem value) { nactive(address(), value); return this; }
+    /** Passes the {@code active} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleProperty active(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(active()); return this; }
     /** Copies the specified {@link NkColor} to the {@code border_color} field. */
     public NkStyleProperty border_color(@NativeType("struct nk_color") NkColor value) { nborder_color(address(), value); return this; }
+    /** Passes the {@code border_color} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleProperty border_color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(border_color()); return this; }
     /** Copies the specified {@link NkColor} to the {@code label_normal} field. */
     public NkStyleProperty label_normal(@NativeType("struct nk_color") NkColor value) { nlabel_normal(address(), value); return this; }
+    /** Passes the {@code label_normal} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleProperty label_normal(java.util.function.Consumer<NkColor> consumer) { consumer.accept(label_normal()); return this; }
     /** Copies the specified {@link NkColor} to the {@code label_hover} field. */
     public NkStyleProperty label_hover(@NativeType("struct nk_color") NkColor value) { nlabel_hover(address(), value); return this; }
+    /** Passes the {@code label_hover} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleProperty label_hover(java.util.function.Consumer<NkColor> consumer) { consumer.accept(label_hover()); return this; }
     /** Copies the specified {@link NkColor} to the {@code label_active} field. */
     public NkStyleProperty label_active(@NativeType("struct nk_color") NkColor value) { nlabel_active(address(), value); return this; }
+    /** Passes the {@code label_active} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleProperty label_active(java.util.function.Consumer<NkColor> consumer) { consumer.accept(label_active()); return this; }
     /** Sets the specified value to the {@code sym_left} field. */
     public NkStyleProperty sym_left(@NativeType("enum nk_symbol_type") int value) { nsym_left(address(), value); return this; }
     /** Sets the specified value to the {@code sym_right} field. */
@@ -238,14 +228,24 @@ public class NkStyleProperty extends Struct implements NativeResource {
     public NkStyleProperty rounding(float value) { nrounding(address(), value); return this; }
     /** Copies the specified {@link NkVec2} to the {@code padding} field. */
     public NkStyleProperty padding(@NativeType("struct nk_vec2") NkVec2 value) { npadding(address(), value); return this; }
+    /** Passes the {@code padding} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleProperty padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(padding()); return this; }
     /** Copies the specified {@link NkStyleEdit} to the {@code edit} field. */
     public NkStyleProperty edit(@NativeType("struct nk_style_edit") NkStyleEdit value) { nedit(address(), value); return this; }
+    /** Passes the {@code edit} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleProperty edit(java.util.function.Consumer<NkStyleEdit> consumer) { consumer.accept(edit()); return this; }
     /** Copies the specified {@link NkStyleButton} to the {@code inc_button} field. */
     public NkStyleProperty inc_button(@NativeType("struct nk_style_button") NkStyleButton value) { ninc_button(address(), value); return this; }
+    /** Passes the {@code inc_button} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleProperty inc_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(inc_button()); return this; }
     /** Copies the specified {@link NkStyleButton} to the {@code dec_button} field. */
     public NkStyleProperty dec_button(@NativeType("struct nk_style_button") NkStyleButton value) { ndec_button(address(), value); return this; }
+    /** Passes the {@code dec_button} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleProperty dec_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(dec_button()); return this; }
     /** Copies the specified {@link NkHandle} to the {@code userdata} field. */
     public NkStyleProperty userdata(@NativeType("nk_handle") NkHandle value) { nuserdata(address(), value); return this; }
+    /** Passes the {@code userdata} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleProperty userdata(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(userdata()); return this; }
     /** Sets the specified value to the {@code draw_begin} field. */
     public NkStyleProperty draw_begin(@Nullable @NativeType("nk_draw_begin") NkDrawBeginCallbackI value) { ndraw_begin(address(), value); return this; }
     /** Sets the specified value to the {@code draw_end} field. */
@@ -564,38 +564,24 @@ public class NkStyleProperty extends Struct implements NativeResource {
         /** Returns a {@link NkStyleItem} view of the {@code normal} field. */
         @NativeType("struct nk_style_item")
         public NkStyleItem normal() { return NkStyleProperty.nnormal(address()); }
-        /** Passes the {@code normal} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleProperty.Buffer normal(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(normal()); return this; }
         /** Returns a {@link NkStyleItem} view of the {@code hover} field. */
         @NativeType("struct nk_style_item")
         public NkStyleItem hover() { return NkStyleProperty.nhover(address()); }
-        /** Passes the {@code hover} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleProperty.Buffer hover(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(hover()); return this; }
         /** Returns a {@link NkStyleItem} view of the {@code active} field. */
         @NativeType("struct nk_style_item")
         public NkStyleItem active() { return NkStyleProperty.nactive(address()); }
-        /** Passes the {@code active} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleProperty.Buffer active(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(active()); return this; }
         /** Returns a {@link NkColor} view of the {@code border_color} field. */
         @NativeType("struct nk_color")
         public NkColor border_color() { return NkStyleProperty.nborder_color(address()); }
-        /** Passes the {@code border_color} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleProperty.Buffer border_color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(border_color()); return this; }
         /** Returns a {@link NkColor} view of the {@code label_normal} field. */
         @NativeType("struct nk_color")
         public NkColor label_normal() { return NkStyleProperty.nlabel_normal(address()); }
-        /** Passes the {@code label_normal} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleProperty.Buffer label_normal(java.util.function.Consumer<NkColor> consumer) { consumer.accept(label_normal()); return this; }
         /** Returns a {@link NkColor} view of the {@code label_hover} field. */
         @NativeType("struct nk_color")
         public NkColor label_hover() { return NkStyleProperty.nlabel_hover(address()); }
-        /** Passes the {@code label_hover} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleProperty.Buffer label_hover(java.util.function.Consumer<NkColor> consumer) { consumer.accept(label_hover()); return this; }
         /** Returns a {@link NkColor} view of the {@code label_active} field. */
         @NativeType("struct nk_color")
         public NkColor label_active() { return NkStyleProperty.nlabel_active(address()); }
-        /** Passes the {@code label_active} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleProperty.Buffer label_active(java.util.function.Consumer<NkColor> consumer) { consumer.accept(label_active()); return this; }
         /** Returns the value of the {@code sym_left} field. */
         @NativeType("enum nk_symbol_type")
         public int sym_left() { return NkStyleProperty.nsym_left(address()); }
@@ -609,28 +595,18 @@ public class NkStyleProperty extends Struct implements NativeResource {
         /** Returns a {@link NkVec2} view of the {@code padding} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 padding() { return NkStyleProperty.npadding(address()); }
-        /** Passes the {@code padding} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleProperty.Buffer padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(padding()); return this; }
         /** Returns a {@link NkStyleEdit} view of the {@code edit} field. */
         @NativeType("struct nk_style_edit")
         public NkStyleEdit edit() { return NkStyleProperty.nedit(address()); }
-        /** Passes the {@code edit} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleProperty.Buffer edit(java.util.function.Consumer<NkStyleEdit> consumer) { consumer.accept(edit()); return this; }
         /** Returns a {@link NkStyleButton} view of the {@code inc_button} field. */
         @NativeType("struct nk_style_button")
         public NkStyleButton inc_button() { return NkStyleProperty.ninc_button(address()); }
-        /** Passes the {@code inc_button} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleProperty.Buffer inc_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(inc_button()); return this; }
         /** Returns a {@link NkStyleButton} view of the {@code dec_button} field. */
         @NativeType("struct nk_style_button")
         public NkStyleButton dec_button() { return NkStyleProperty.ndec_button(address()); }
-        /** Passes the {@code dec_button} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleProperty.Buffer dec_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(dec_button()); return this; }
         /** Returns a {@link NkHandle} view of the {@code userdata} field. */
         @NativeType("nk_handle")
         public NkHandle userdata() { return NkStyleProperty.nuserdata(address()); }
-        /** Passes the {@code userdata} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleProperty.Buffer userdata(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(userdata()); return this; }
         /** Returns the value of the {@code draw_begin} field. */
         @Nullable
         @NativeType("nk_draw_begin")
@@ -642,18 +618,32 @@ public class NkStyleProperty extends Struct implements NativeResource {
 
         /** Copies the specified {@link NkStyleItem} to the {@code normal} field. */
         public NkStyleProperty.Buffer normal(@NativeType("struct nk_style_item") NkStyleItem value) { NkStyleProperty.nnormal(address(), value); return this; }
+        /** Passes the {@code normal} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleProperty.Buffer normal(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(normal()); return this; }
         /** Copies the specified {@link NkStyleItem} to the {@code hover} field. */
         public NkStyleProperty.Buffer hover(@NativeType("struct nk_style_item") NkStyleItem value) { NkStyleProperty.nhover(address(), value); return this; }
+        /** Passes the {@code hover} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleProperty.Buffer hover(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(hover()); return this; }
         /** Copies the specified {@link NkStyleItem} to the {@code active} field. */
         public NkStyleProperty.Buffer active(@NativeType("struct nk_style_item") NkStyleItem value) { NkStyleProperty.nactive(address(), value); return this; }
+        /** Passes the {@code active} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleProperty.Buffer active(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(active()); return this; }
         /** Copies the specified {@link NkColor} to the {@code border_color} field. */
         public NkStyleProperty.Buffer border_color(@NativeType("struct nk_color") NkColor value) { NkStyleProperty.nborder_color(address(), value); return this; }
+        /** Passes the {@code border_color} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleProperty.Buffer border_color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(border_color()); return this; }
         /** Copies the specified {@link NkColor} to the {@code label_normal} field. */
         public NkStyleProperty.Buffer label_normal(@NativeType("struct nk_color") NkColor value) { NkStyleProperty.nlabel_normal(address(), value); return this; }
+        /** Passes the {@code label_normal} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleProperty.Buffer label_normal(java.util.function.Consumer<NkColor> consumer) { consumer.accept(label_normal()); return this; }
         /** Copies the specified {@link NkColor} to the {@code label_hover} field. */
         public NkStyleProperty.Buffer label_hover(@NativeType("struct nk_color") NkColor value) { NkStyleProperty.nlabel_hover(address(), value); return this; }
+        /** Passes the {@code label_hover} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleProperty.Buffer label_hover(java.util.function.Consumer<NkColor> consumer) { consumer.accept(label_hover()); return this; }
         /** Copies the specified {@link NkColor} to the {@code label_active} field. */
         public NkStyleProperty.Buffer label_active(@NativeType("struct nk_color") NkColor value) { NkStyleProperty.nlabel_active(address(), value); return this; }
+        /** Passes the {@code label_active} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleProperty.Buffer label_active(java.util.function.Consumer<NkColor> consumer) { consumer.accept(label_active()); return this; }
         /** Sets the specified value to the {@code sym_left} field. */
         public NkStyleProperty.Buffer sym_left(@NativeType("enum nk_symbol_type") int value) { NkStyleProperty.nsym_left(address(), value); return this; }
         /** Sets the specified value to the {@code sym_right} field. */
@@ -664,14 +654,24 @@ public class NkStyleProperty extends Struct implements NativeResource {
         public NkStyleProperty.Buffer rounding(float value) { NkStyleProperty.nrounding(address(), value); return this; }
         /** Copies the specified {@link NkVec2} to the {@code padding} field. */
         public NkStyleProperty.Buffer padding(@NativeType("struct nk_vec2") NkVec2 value) { NkStyleProperty.npadding(address(), value); return this; }
+        /** Passes the {@code padding} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleProperty.Buffer padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(padding()); return this; }
         /** Copies the specified {@link NkStyleEdit} to the {@code edit} field. */
         public NkStyleProperty.Buffer edit(@NativeType("struct nk_style_edit") NkStyleEdit value) { NkStyleProperty.nedit(address(), value); return this; }
+        /** Passes the {@code edit} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleProperty.Buffer edit(java.util.function.Consumer<NkStyleEdit> consumer) { consumer.accept(edit()); return this; }
         /** Copies the specified {@link NkStyleButton} to the {@code inc_button} field. */
         public NkStyleProperty.Buffer inc_button(@NativeType("struct nk_style_button") NkStyleButton value) { NkStyleProperty.ninc_button(address(), value); return this; }
+        /** Passes the {@code inc_button} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleProperty.Buffer inc_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(inc_button()); return this; }
         /** Copies the specified {@link NkStyleButton} to the {@code dec_button} field. */
         public NkStyleProperty.Buffer dec_button(@NativeType("struct nk_style_button") NkStyleButton value) { NkStyleProperty.ndec_button(address(), value); return this; }
+        /** Passes the {@code dec_button} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleProperty.Buffer dec_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(dec_button()); return this; }
         /** Copies the specified {@link NkHandle} to the {@code userdata} field. */
         public NkStyleProperty.Buffer userdata(@NativeType("nk_handle") NkHandle value) { NkStyleProperty.nuserdata(address(), value); return this; }
+        /** Passes the {@code userdata} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleProperty.Buffer userdata(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(userdata()); return this; }
         /** Sets the specified value to the {@code draw_begin} field. */
         public NkStyleProperty.Buffer draw_begin(@Nullable @NativeType("nk_draw_begin") NkDrawBeginCallbackI value) { NkStyleProperty.ndraw_begin(address(), value); return this; }
         /** Sets the specified value to the {@code draw_end} field. */

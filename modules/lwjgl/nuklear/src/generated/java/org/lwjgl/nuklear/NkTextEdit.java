@@ -121,8 +121,6 @@ public class NkTextEdit extends Struct implements NativeResource {
     /** Returns a {@link NkClipboard} view of the {@code clip} field. */
     @NativeType("struct nk_clipboard")
     public NkClipboard clip() { return nclip(address()); }
-    /** Passes the {@code clip} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkTextEdit clip(java.util.function.Consumer<NkClipboard> consumer) { consumer.accept(clip()); return this; }
     /** Returns a {@link NkStr} view of the {@code string} field. */
     @NativeType("struct nk_str")
     public NkStr string() { return nstring(address()); }
@@ -133,8 +131,6 @@ public class NkTextEdit extends Struct implements NativeResource {
     /** Returns a {@link NkVec2} view of the {@code scrollbar} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 scrollbar() { return nscrollbar(address()); }
-    /** Passes the {@code scrollbar} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkTextEdit scrollbar(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(scrollbar()); return this; }
     /** Returns the value of the {@code cursor} field. */
     public int cursor() { return ncursor(address()); }
     /** Returns the value of the {@code select_start} field. */
@@ -380,8 +376,6 @@ public class NkTextEdit extends Struct implements NativeResource {
         /** Returns a {@link NkClipboard} view of the {@code clip} field. */
         @NativeType("struct nk_clipboard")
         public NkClipboard clip() { return NkTextEdit.nclip(address()); }
-        /** Passes the {@code clip} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkTextEdit.Buffer clip(java.util.function.Consumer<NkClipboard> consumer) { consumer.accept(clip()); return this; }
         /** Returns a {@link NkStr} view of the {@code string} field. */
         @NativeType("struct nk_str")
         public NkStr string() { return NkTextEdit.nstring(address()); }
@@ -392,8 +386,6 @@ public class NkTextEdit extends Struct implements NativeResource {
         /** Returns a {@link NkVec2} view of the {@code scrollbar} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 scrollbar() { return NkTextEdit.nscrollbar(address()); }
-        /** Passes the {@code scrollbar} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkTextEdit.Buffer scrollbar(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(scrollbar()); return this; }
         /** Returns the value of the {@code cursor} field. */
         public int cursor() { return NkTextEdit.ncursor(address()); }
         /** Returns the value of the {@code select_start} field. */

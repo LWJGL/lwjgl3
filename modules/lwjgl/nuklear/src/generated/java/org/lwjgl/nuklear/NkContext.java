@@ -150,16 +150,12 @@ public class NkContext extends Struct implements NativeResource {
     /** Returns a {@link NkStyle} view of the {@code style} field. */
     @NativeType("struct nk_style")
     public NkStyle style() { return nstyle(address()); }
-    /** Passes the {@code style} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkContext style(java.util.function.Consumer<NkStyle> consumer) { consumer.accept(style()); return this; }
     /** Returns a {@link NkBuffer} view of the {@code memory} field. */
     @NativeType("struct nk_buffer")
     public NkBuffer memory() { return nmemory(address()); }
     /** Returns a {@link NkClipboard} view of the {@code clip} field. */
     @NativeType("struct nk_clipboard")
     public NkClipboard clip() { return nclip(address()); }
-    /** Passes the {@code clip} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkContext clip(java.util.function.Consumer<NkClipboard> consumer) { consumer.accept(clip()); return this; }
     /** Returns the value of the {@code last_widget_state} field. */
     @NativeType("nk_flags")
     public int last_widget_state() { return nlast_widget_state(address()); }

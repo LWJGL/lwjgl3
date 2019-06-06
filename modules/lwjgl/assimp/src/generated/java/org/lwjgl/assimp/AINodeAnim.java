@@ -130,8 +130,6 @@ public class AINodeAnim extends Struct implements NativeResource {
     /** Returns a {@link AIString} view of the {@code mNodeName} field. */
     @NativeType("struct aiString")
     public AIString mNodeName() { return nmNodeName(address()); }
-    /** Passes the {@code mNodeName} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public AINodeAnim mNodeName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mNodeName()); return this; }
     /** Returns the value of the {@code mNumPositionKeys} field. */
     @NativeType("unsigned int")
     public int mNumPositionKeys() { return nmNumPositionKeys(address()); }
@@ -162,6 +160,8 @@ public class AINodeAnim extends Struct implements NativeResource {
 
     /** Copies the specified {@link AIString} to the {@code mNodeName} field. */
     public AINodeAnim mNodeName(@NativeType("struct aiString") AIString value) { nmNodeName(address(), value); return this; }
+    /** Passes the {@code mNodeName} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public AINodeAnim mNodeName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mNodeName()); return this; }
     /** Sets the address of the specified {@link AIVectorKey.Buffer} to the {@code mPositionKeys} field. */
     public AINodeAnim mPositionKeys(@Nullable @NativeType("struct aiVectorKey *") AIVectorKey.Buffer value) { nmPositionKeys(address(), value); return this; }
     /** Sets the address of the specified {@link AIQuatKey.Buffer} to the {@code mRotationKeys} field. */
@@ -455,8 +455,6 @@ public class AINodeAnim extends Struct implements NativeResource {
         /** Returns a {@link AIString} view of the {@code mNodeName} field. */
         @NativeType("struct aiString")
         public AIString mNodeName() { return AINodeAnim.nmNodeName(address()); }
-        /** Passes the {@code mNodeName} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public AINodeAnim.Buffer mNodeName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mNodeName()); return this; }
         /** Returns the value of the {@code mNumPositionKeys} field. */
         @NativeType("unsigned int")
         public int mNumPositionKeys() { return AINodeAnim.nmNumPositionKeys(address()); }
@@ -487,6 +485,8 @@ public class AINodeAnim extends Struct implements NativeResource {
 
         /** Copies the specified {@link AIString} to the {@code mNodeName} field. */
         public AINodeAnim.Buffer mNodeName(@NativeType("struct aiString") AIString value) { AINodeAnim.nmNodeName(address(), value); return this; }
+        /** Passes the {@code mNodeName} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public AINodeAnim.Buffer mNodeName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mNodeName()); return this; }
         /** Sets the address of the specified {@link AIVectorKey.Buffer} to the {@code mPositionKeys} field. */
         public AINodeAnim.Buffer mPositionKeys(@Nullable @NativeType("struct aiVectorKey *") AIVectorKey.Buffer value) { AINodeAnim.nmPositionKeys(address(), value); return this; }
         /** Sets the address of the specified {@link AIQuatKey.Buffer} to the {@code mRotationKeys} field. */

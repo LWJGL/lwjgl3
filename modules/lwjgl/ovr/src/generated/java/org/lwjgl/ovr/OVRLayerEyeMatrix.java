@@ -124,8 +124,6 @@ public class OVRLayerEyeMatrix extends Struct implements NativeResource {
     /** Returns a {@link OVRLayerHeader} view of the {@code Header} field. */
     @NativeType("ovrLayerHeader")
     public OVRLayerHeader Header() { return nHeader(address()); }
-    /** Passes the {@code Header} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public OVRLayerEyeMatrix Header(java.util.function.Consumer<OVRLayerHeader> consumer) { consumer.accept(Header()); return this; }
     /** Returns a {@link PointerBuffer} view of the {@code ColorTexture} field. */
     @NativeType("ovrTextureSwapChain[ovrEye_Count]")
     public PointerBuffer ColorTexture() { return nColorTexture(address()); }
@@ -155,6 +153,8 @@ public class OVRLayerEyeMatrix extends Struct implements NativeResource {
 
     /** Copies the specified {@link OVRLayerHeader} to the {@code Header} field. */
     public OVRLayerEyeMatrix Header(@NativeType("ovrLayerHeader") OVRLayerHeader value) { nHeader(address(), value); return this; }
+    /** Passes the {@code Header} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerEyeMatrix Header(java.util.function.Consumer<OVRLayerHeader> consumer) { consumer.accept(Header()); return this; }
     /** Copies the specified {@link PointerBuffer} to the {@code ColorTexture} field. */
     public OVRLayerEyeMatrix ColorTexture(@NativeType("ovrTextureSwapChain[ovrEye_Count]") PointerBuffer value) { nColorTexture(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code ColorTexture} field. */
@@ -163,14 +163,26 @@ public class OVRLayerEyeMatrix extends Struct implements NativeResource {
     public OVRLayerEyeMatrix Viewport(@NativeType("ovrRecti[ovrEye_Count]") OVRRecti.Buffer value) { nViewport(address(), value); return this; }
     /** Copies the specified {@link OVRRecti} at the specified index of the {@code Viewport} field. */
     public OVRLayerEyeMatrix Viewport(int index, @NativeType("ovrRecti") OVRRecti value) { nViewport(address(), index, value); return this; }
+    /** Passes the {@code Viewport} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerEyeMatrix Viewport(java.util.function.Consumer<OVRRecti.Buffer> consumer) { consumer.accept(Viewport()); return this; }
+    /** Passes the element at {@code index} of the {@code Viewport} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerEyeMatrix Viewport(int index, java.util.function.Consumer<OVRRecti> consumer) { consumer.accept(Viewport(index)); return this; }
     /** Copies the specified {@link OVRPosef.Buffer} to the {@code RenderPose} field. */
     public OVRLayerEyeMatrix RenderPose(@NativeType("ovrPosef[ovrEye_Count]") OVRPosef.Buffer value) { nRenderPose(address(), value); return this; }
     /** Copies the specified {@link OVRPosef} at the specified index of the {@code RenderPose} field. */
     public OVRLayerEyeMatrix RenderPose(int index, @NativeType("ovrPosef") OVRPosef value) { nRenderPose(address(), index, value); return this; }
+    /** Passes the {@code RenderPose} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerEyeMatrix RenderPose(java.util.function.Consumer<OVRPosef.Buffer> consumer) { consumer.accept(RenderPose()); return this; }
+    /** Passes the element at {@code index} of the {@code RenderPose} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerEyeMatrix RenderPose(int index, java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(RenderPose(index)); return this; }
     /** Copies the specified {@link OVRMatrix4f.Buffer} to the {@code Matrix} field. */
     public OVRLayerEyeMatrix Matrix(@NativeType("ovrMatrix4f[ovrEye_Count]") OVRMatrix4f.Buffer value) { nMatrix(address(), value); return this; }
     /** Copies the specified {@link OVRMatrix4f} at the specified index of the {@code Matrix} field. */
     public OVRLayerEyeMatrix Matrix(int index, @NativeType("ovrMatrix4f") OVRMatrix4f value) { nMatrix(address(), index, value); return this; }
+    /** Passes the {@code Matrix} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerEyeMatrix Matrix(java.util.function.Consumer<OVRMatrix4f.Buffer> consumer) { consumer.accept(Matrix()); return this; }
+    /** Passes the element at {@code index} of the {@code Matrix} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerEyeMatrix Matrix(int index, java.util.function.Consumer<OVRMatrix4f> consumer) { consumer.accept(Matrix(index)); return this; }
     /** Sets the specified value to the {@code SensorSampleTime} field. */
     public OVRLayerEyeMatrix SensorSampleTime(double value) { nSensorSampleTime(address(), value); return this; }
 
@@ -480,8 +492,6 @@ public class OVRLayerEyeMatrix extends Struct implements NativeResource {
         /** Returns a {@link OVRLayerHeader} view of the {@code Header} field. */
         @NativeType("ovrLayerHeader")
         public OVRLayerHeader Header() { return OVRLayerEyeMatrix.nHeader(address()); }
-        /** Passes the {@code Header} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public OVRLayerEyeMatrix.Buffer Header(java.util.function.Consumer<OVRLayerHeader> consumer) { consumer.accept(Header()); return this; }
         /** Returns a {@link PointerBuffer} view of the {@code ColorTexture} field. */
         @NativeType("ovrTextureSwapChain[ovrEye_Count]")
         public PointerBuffer ColorTexture() { return OVRLayerEyeMatrix.nColorTexture(address()); }
@@ -511,6 +521,8 @@ public class OVRLayerEyeMatrix extends Struct implements NativeResource {
 
         /** Copies the specified {@link OVRLayerHeader} to the {@code Header} field. */
         public OVRLayerEyeMatrix.Buffer Header(@NativeType("ovrLayerHeader") OVRLayerHeader value) { OVRLayerEyeMatrix.nHeader(address(), value); return this; }
+        /** Passes the {@code Header} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerEyeMatrix.Buffer Header(java.util.function.Consumer<OVRLayerHeader> consumer) { consumer.accept(Header()); return this; }
         /** Copies the specified {@link PointerBuffer} to the {@code ColorTexture} field. */
         public OVRLayerEyeMatrix.Buffer ColorTexture(@NativeType("ovrTextureSwapChain[ovrEye_Count]") PointerBuffer value) { OVRLayerEyeMatrix.nColorTexture(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code ColorTexture} field. */
@@ -519,14 +531,26 @@ public class OVRLayerEyeMatrix extends Struct implements NativeResource {
         public OVRLayerEyeMatrix.Buffer Viewport(@NativeType("ovrRecti[ovrEye_Count]") OVRRecti.Buffer value) { OVRLayerEyeMatrix.nViewport(address(), value); return this; }
         /** Copies the specified {@link OVRRecti} at the specified index of the {@code Viewport} field. */
         public OVRLayerEyeMatrix.Buffer Viewport(int index, @NativeType("ovrRecti") OVRRecti value) { OVRLayerEyeMatrix.nViewport(address(), index, value); return this; }
+        /** Passes the {@code Viewport} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerEyeMatrix.Buffer Viewport(java.util.function.Consumer<OVRRecti.Buffer> consumer) { consumer.accept(Viewport()); return this; }
+        /** Passes the element at {@code index} of the {@code Viewport} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerEyeMatrix.Buffer Viewport(int index, java.util.function.Consumer<OVRRecti> consumer) { consumer.accept(Viewport(index)); return this; }
         /** Copies the specified {@link OVRPosef.Buffer} to the {@code RenderPose} field. */
         public OVRLayerEyeMatrix.Buffer RenderPose(@NativeType("ovrPosef[ovrEye_Count]") OVRPosef.Buffer value) { OVRLayerEyeMatrix.nRenderPose(address(), value); return this; }
         /** Copies the specified {@link OVRPosef} at the specified index of the {@code RenderPose} field. */
         public OVRLayerEyeMatrix.Buffer RenderPose(int index, @NativeType("ovrPosef") OVRPosef value) { OVRLayerEyeMatrix.nRenderPose(address(), index, value); return this; }
+        /** Passes the {@code RenderPose} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerEyeMatrix.Buffer RenderPose(java.util.function.Consumer<OVRPosef.Buffer> consumer) { consumer.accept(RenderPose()); return this; }
+        /** Passes the element at {@code index} of the {@code RenderPose} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerEyeMatrix.Buffer RenderPose(int index, java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(RenderPose(index)); return this; }
         /** Copies the specified {@link OVRMatrix4f.Buffer} to the {@code Matrix} field. */
         public OVRLayerEyeMatrix.Buffer Matrix(@NativeType("ovrMatrix4f[ovrEye_Count]") OVRMatrix4f.Buffer value) { OVRLayerEyeMatrix.nMatrix(address(), value); return this; }
         /** Copies the specified {@link OVRMatrix4f} at the specified index of the {@code Matrix} field. */
         public OVRLayerEyeMatrix.Buffer Matrix(int index, @NativeType("ovrMatrix4f") OVRMatrix4f value) { OVRLayerEyeMatrix.nMatrix(address(), index, value); return this; }
+        /** Passes the {@code Matrix} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerEyeMatrix.Buffer Matrix(java.util.function.Consumer<OVRMatrix4f.Buffer> consumer) { consumer.accept(Matrix()); return this; }
+        /** Passes the element at {@code index} of the {@code Matrix} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerEyeMatrix.Buffer Matrix(int index, java.util.function.Consumer<OVRMatrix4f> consumer) { consumer.accept(Matrix(index)); return this; }
         /** Sets the specified value to the {@code SensorSampleTime} field. */
         public OVRLayerEyeMatrix.Buffer SensorSampleTime(double value) { OVRLayerEyeMatrix.nSensorSampleTime(address(), value); return this; }
 

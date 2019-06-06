@@ -112,8 +112,6 @@ public class VkGeometryNV extends Struct implements NativeResource {
     public int geometryType() { return ngeometryType(address()); }
     /** Returns a {@link VkGeometryDataNV} view of the {@code geometry} field. */
     public VkGeometryDataNV geometry() { return ngeometry(address()); }
-    /** Passes the {@code geometry} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkGeometryNV geometry(java.util.function.Consumer<VkGeometryDataNV> consumer) { consumer.accept(geometry()); return this; }
     /** Returns the value of the {@code flags} field. */
     @NativeType("VkGeometryFlagsNV")
     public int flags() { return nflags(address()); }
@@ -126,6 +124,8 @@ public class VkGeometryNV extends Struct implements NativeResource {
     public VkGeometryNV geometryType(@NativeType("VkGeometryTypeNV") int value) { ngeometryType(address(), value); return this; }
     /** Copies the specified {@link VkGeometryDataNV} to the {@code geometry} field. */
     public VkGeometryNV geometry(VkGeometryDataNV value) { ngeometry(address(), value); return this; }
+    /** Passes the {@code geometry} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkGeometryNV geometry(java.util.function.Consumer<VkGeometryDataNV> consumer) { consumer.accept(geometry()); return this; }
     /** Sets the specified value to the {@code flags} field. */
     public VkGeometryNV flags(@NativeType("VkGeometryFlagsNV") int value) { nflags(address(), value); return this; }
 
@@ -372,8 +372,6 @@ public class VkGeometryNV extends Struct implements NativeResource {
         public int geometryType() { return VkGeometryNV.ngeometryType(address()); }
         /** Returns a {@link VkGeometryDataNV} view of the {@code geometry} field. */
         public VkGeometryDataNV geometry() { return VkGeometryNV.ngeometry(address()); }
-        /** Passes the {@code geometry} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkGeometryNV.Buffer geometry(java.util.function.Consumer<VkGeometryDataNV> consumer) { consumer.accept(geometry()); return this; }
         /** Returns the value of the {@code flags} field. */
         @NativeType("VkGeometryFlagsNV")
         public int flags() { return VkGeometryNV.nflags(address()); }
@@ -386,6 +384,8 @@ public class VkGeometryNV extends Struct implements NativeResource {
         public VkGeometryNV.Buffer geometryType(@NativeType("VkGeometryTypeNV") int value) { VkGeometryNV.ngeometryType(address(), value); return this; }
         /** Copies the specified {@link VkGeometryDataNV} to the {@code geometry} field. */
         public VkGeometryNV.Buffer geometry(VkGeometryDataNV value) { VkGeometryNV.ngeometry(address(), value); return this; }
+        /** Passes the {@code geometry} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkGeometryNV.Buffer geometry(java.util.function.Consumer<VkGeometryDataNV> consumer) { consumer.accept(geometry()); return this; }
         /** Sets the specified value to the {@code flags} field. */
         public VkGeometryNV.Buffer flags(@NativeType("VkGeometryFlagsNV") int value) { VkGeometryNV.nflags(address(), value); return this; }
 

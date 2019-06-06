@@ -87,13 +87,9 @@ public class OVRTrackerPose extends Struct implements NativeResource {
     /** Returns a {@link OVRPosef} view of the {@code Pose} field. */
     @NativeType("ovrPosef")
     public OVRPosef Pose() { return nPose(address()); }
-    /** Passes the {@code Pose} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public OVRTrackerPose Pose(java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(Pose()); return this; }
     /** Returns a {@link OVRPosef} view of the {@code LeveledPose} field. */
     @NativeType("ovrPosef")
     public OVRPosef LeveledPose() { return nLeveledPose(address()); }
-    /** Passes the {@code LeveledPose} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public OVRTrackerPose LeveledPose(java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(LeveledPose()); return this; }
 
     // -----------------------------------
 
@@ -289,13 +285,9 @@ public class OVRTrackerPose extends Struct implements NativeResource {
         /** Returns a {@link OVRPosef} view of the {@code Pose} field. */
         @NativeType("ovrPosef")
         public OVRPosef Pose() { return OVRTrackerPose.nPose(address()); }
-        /** Passes the {@code Pose} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public OVRTrackerPose.Buffer Pose(java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(Pose()); return this; }
         /** Returns a {@link OVRPosef} view of the {@code LeveledPose} field. */
         @NativeType("ovrPosef")
         public OVRPosef LeveledPose() { return OVRTrackerPose.nLeveledPose(address()); }
-        /** Passes the {@code LeveledPose} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public OVRTrackerPose.Buffer LeveledPose(java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(LeveledPose()); return this; }
 
     }
 

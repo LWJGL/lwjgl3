@@ -100,13 +100,9 @@ public class OVRFovStencilDesc extends Struct implements NativeResource {
     /** Returns a {@link OVRFovPort} view of the {@code FovPort} field. */
     @NativeType("ovrFovPort")
     public OVRFovPort FovPort() { return nFovPort(address()); }
-    /** Passes the {@code FovPort} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public OVRFovStencilDesc FovPort(java.util.function.Consumer<OVRFovPort> consumer) { consumer.accept(FovPort()); return this; }
     /** Returns a {@link OVRQuatf} view of the {@code HmdToEyeRotation} field. */
     @NativeType("ovrQuatf")
     public OVRQuatf HmdToEyeRotation() { return nHmdToEyeRotation(address()); }
-    /** Passes the {@code HmdToEyeRotation} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public OVRFovStencilDesc HmdToEyeRotation(java.util.function.Consumer<OVRQuatf> consumer) { consumer.accept(HmdToEyeRotation()); return this; }
 
     /** Sets the specified value to the {@code StencilType} field. */
     public OVRFovStencilDesc StencilType(@NativeType("ovrFovStencilType") int value) { nStencilType(address(), value); return this; }
@@ -116,8 +112,12 @@ public class OVRFovStencilDesc extends Struct implements NativeResource {
     public OVRFovStencilDesc Eye(@NativeType("ovrEyeType") int value) { nEye(address(), value); return this; }
     /** Copies the specified {@link OVRFovPort} to the {@code FovPort} field. */
     public OVRFovStencilDesc FovPort(@NativeType("ovrFovPort") OVRFovPort value) { nFovPort(address(), value); return this; }
+    /** Passes the {@code FovPort} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRFovStencilDesc FovPort(java.util.function.Consumer<OVRFovPort> consumer) { consumer.accept(FovPort()); return this; }
     /** Copies the specified {@link OVRQuatf} to the {@code HmdToEyeRotation} field. */
     public OVRFovStencilDesc HmdToEyeRotation(@NativeType("ovrQuatf") OVRQuatf value) { nHmdToEyeRotation(address(), value); return this; }
+    /** Passes the {@code HmdToEyeRotation} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRFovStencilDesc HmdToEyeRotation(java.util.function.Consumer<OVRQuatf> consumer) { consumer.accept(HmdToEyeRotation()); return this; }
 
     /** Initializes this struct with the specified values. */
     public OVRFovStencilDesc set(
@@ -363,13 +363,9 @@ public class OVRFovStencilDesc extends Struct implements NativeResource {
         /** Returns a {@link OVRFovPort} view of the {@code FovPort} field. */
         @NativeType("ovrFovPort")
         public OVRFovPort FovPort() { return OVRFovStencilDesc.nFovPort(address()); }
-        /** Passes the {@code FovPort} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public OVRFovStencilDesc.Buffer FovPort(java.util.function.Consumer<OVRFovPort> consumer) { consumer.accept(FovPort()); return this; }
         /** Returns a {@link OVRQuatf} view of the {@code HmdToEyeRotation} field. */
         @NativeType("ovrQuatf")
         public OVRQuatf HmdToEyeRotation() { return OVRFovStencilDesc.nHmdToEyeRotation(address()); }
-        /** Passes the {@code HmdToEyeRotation} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public OVRFovStencilDesc.Buffer HmdToEyeRotation(java.util.function.Consumer<OVRQuatf> consumer) { consumer.accept(HmdToEyeRotation()); return this; }
 
         /** Sets the specified value to the {@code StencilType} field. */
         public OVRFovStencilDesc.Buffer StencilType(@NativeType("ovrFovStencilType") int value) { OVRFovStencilDesc.nStencilType(address(), value); return this; }
@@ -379,8 +375,12 @@ public class OVRFovStencilDesc extends Struct implements NativeResource {
         public OVRFovStencilDesc.Buffer Eye(@NativeType("ovrEyeType") int value) { OVRFovStencilDesc.nEye(address(), value); return this; }
         /** Copies the specified {@link OVRFovPort} to the {@code FovPort} field. */
         public OVRFovStencilDesc.Buffer FovPort(@NativeType("ovrFovPort") OVRFovPort value) { OVRFovStencilDesc.nFovPort(address(), value); return this; }
+        /** Passes the {@code FovPort} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRFovStencilDesc.Buffer FovPort(java.util.function.Consumer<OVRFovPort> consumer) { consumer.accept(FovPort()); return this; }
         /** Copies the specified {@link OVRQuatf} to the {@code HmdToEyeRotation} field. */
         public OVRFovStencilDesc.Buffer HmdToEyeRotation(@NativeType("ovrQuatf") OVRQuatf value) { OVRFovStencilDesc.nHmdToEyeRotation(address(), value); return this; }
+        /** Passes the {@code HmdToEyeRotation} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRFovStencilDesc.Buffer HmdToEyeRotation(java.util.function.Consumer<OVRQuatf> consumer) { consumer.accept(HmdToEyeRotation()); return this; }
 
     }
 

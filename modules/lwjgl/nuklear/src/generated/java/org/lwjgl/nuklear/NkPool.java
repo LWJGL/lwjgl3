@@ -89,8 +89,6 @@ class NkPool extends Struct {
     /** Returns a {@link NkAllocator} view of the {@code alloc} field. */
     @NativeType("struct nk_allocator")
     public NkAllocator alloc() { return nalloc(address()); }
-    /** Passes the {@code alloc} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkPool alloc(java.util.function.Consumer<NkAllocator> consumer) { consumer.accept(alloc()); return this; }
     /** Returns the value of the {@code type} field. */
     @NativeType("enum nk_allocation_type")
     public int type() { return ntype(address()); }
@@ -202,8 +200,6 @@ class NkPool extends Struct {
         /** Returns a {@link NkAllocator} view of the {@code alloc} field. */
         @NativeType("struct nk_allocator")
         public NkAllocator alloc() { return NkPool.nalloc(address()); }
-        /** Passes the {@code alloc} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkPool.Buffer alloc(java.util.function.Consumer<NkAllocator> consumer) { consumer.accept(alloc()); return this; }
         /** Returns the value of the {@code type} field. */
         @NativeType("enum nk_allocation_type")
         public int type() { return NkPool.ntype(address()); }

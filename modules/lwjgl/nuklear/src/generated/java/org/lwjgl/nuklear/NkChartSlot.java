@@ -96,13 +96,9 @@ public class NkChartSlot extends Struct {
     /** Returns a {@link NkColor} view of the {@code color} field. */
     @NativeType("struct nk_color")
     public NkColor color() { return ncolor(address()); }
-    /** Passes the {@code color} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkChartSlot color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(color()); return this; }
     /** Returns a {@link NkColor} view of the {@code highlight} field. */
     @NativeType("struct nk_color")
     public NkColor highlight() { return nhighlight(address()); }
-    /** Passes the {@code highlight} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkChartSlot highlight(java.util.function.Consumer<NkColor> consumer) { consumer.accept(highlight()); return this; }
     /** Returns the value of the {@code min} field. */
     public float min() { return nmin(address()); }
     /** Returns the value of the {@code max} field. */
@@ -114,8 +110,6 @@ public class NkChartSlot extends Struct {
     /** Returns a {@link NkVec2} view of the {@code last} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 last() { return nlast(address()); }
-    /** Passes the {@code last} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkChartSlot last(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(last()); return this; }
     /** Returns the value of the {@code index} field. */
     public int index() { return nindex(address()); }
 
@@ -213,13 +207,9 @@ public class NkChartSlot extends Struct {
         /** Returns a {@link NkColor} view of the {@code color} field. */
         @NativeType("struct nk_color")
         public NkColor color() { return NkChartSlot.ncolor(address()); }
-        /** Passes the {@code color} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkChartSlot.Buffer color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(color()); return this; }
         /** Returns a {@link NkColor} view of the {@code highlight} field. */
         @NativeType("struct nk_color")
         public NkColor highlight() { return NkChartSlot.nhighlight(address()); }
-        /** Passes the {@code highlight} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkChartSlot.Buffer highlight(java.util.function.Consumer<NkColor> consumer) { consumer.accept(highlight()); return this; }
         /** Returns the value of the {@code min} field. */
         public float min() { return NkChartSlot.nmin(address()); }
         /** Returns the value of the {@code max} field. */
@@ -231,8 +221,6 @@ public class NkChartSlot extends Struct {
         /** Returns a {@link NkVec2} view of the {@code last} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 last() { return NkChartSlot.nlast(address()); }
-        /** Passes the {@code last} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkChartSlot.Buffer last(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(last()); return this; }
         /** Returns the value of the {@code index} field. */
         public int index() { return NkChartSlot.nindex(address()); }
 

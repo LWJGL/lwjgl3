@@ -131,8 +131,6 @@ public class VkPhysicalDeviceDriverPropertiesKHR extends Struct implements Nativ
     public String driverInfoString() { return ndriverInfoString(address()); }
     /** Returns a {@link VkConformanceVersionKHR} view of the {@code conformanceVersion} field. */
     public VkConformanceVersionKHR conformanceVersion() { return nconformanceVersion(address()); }
-    /** Passes the {@code conformanceVersion} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkPhysicalDeviceDriverPropertiesKHR conformanceVersion(java.util.function.Consumer<VkConformanceVersionKHR> consumer) { consumer.accept(conformanceVersion()); return this; }
 
     /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceDriverPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -388,8 +386,6 @@ public class VkPhysicalDeviceDriverPropertiesKHR extends Struct implements Nativ
         public String driverInfoString() { return VkPhysicalDeviceDriverPropertiesKHR.ndriverInfoString(address()); }
         /** Returns a {@link VkConformanceVersionKHR} view of the {@code conformanceVersion} field. */
         public VkConformanceVersionKHR conformanceVersion() { return VkPhysicalDeviceDriverPropertiesKHR.nconformanceVersion(address()); }
-        /** Passes the {@code conformanceVersion} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkPhysicalDeviceDriverPropertiesKHR.Buffer conformanceVersion(java.util.function.Consumer<VkConformanceVersionKHR> consumer) { consumer.accept(conformanceVersion()); return this; }
 
         /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceDriverPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDriverPropertiesKHR.nsType(address(), value); return this; }

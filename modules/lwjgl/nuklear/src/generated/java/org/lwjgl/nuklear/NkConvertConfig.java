@@ -132,8 +132,6 @@ public class NkConvertConfig extends Struct implements NativeResource {
     /** Returns a {@link NkDrawNullTexture} view of the {@code null_texture} field. */
     @NativeType("struct nk_draw_null_texture")
     public NkDrawNullTexture null_texture() { return nnull_texture(address()); }
-    /** Passes the {@code null_texture} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkConvertConfig null_texture(java.util.function.Consumer<NkDrawNullTexture> consumer) { consumer.accept(null_texture()); return this; }
     /**
      * Returns a {@link NkDrawVertexLayoutElement.Buffer} view of the struct array pointed to by the {@code vertex_layout} field.
      *
@@ -162,6 +160,8 @@ public class NkConvertConfig extends Struct implements NativeResource {
     public NkConvertConfig curve_segment_count(@NativeType("unsigned int") int value) { ncurve_segment_count(address(), value); return this; }
     /** Copies the specified {@link NkDrawNullTexture} to the {@code null_texture} field. */
     public NkConvertConfig null_texture(@NativeType("struct nk_draw_null_texture") NkDrawNullTexture value) { nnull_texture(address(), value); return this; }
+    /** Passes the {@code null_texture} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkConvertConfig null_texture(java.util.function.Consumer<NkDrawNullTexture> consumer) { consumer.accept(null_texture()); return this; }
     /** Sets the address of the specified {@link NkDrawVertexLayoutElement.Buffer} to the {@code vertex_layout} field. */
     public NkConvertConfig vertex_layout(@NativeType("struct nk_draw_vertex_layout_element *") NkDrawVertexLayoutElement.Buffer value) { nvertex_layout(address(), value); return this; }
     /** Sets the specified value to the {@code vertex_size} field. */
@@ -472,8 +472,6 @@ public class NkConvertConfig extends Struct implements NativeResource {
         /** Returns a {@link NkDrawNullTexture} view of the {@code null_texture} field. */
         @NativeType("struct nk_draw_null_texture")
         public NkDrawNullTexture null_texture() { return NkConvertConfig.nnull_texture(address()); }
-        /** Passes the {@code null_texture} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkConvertConfig.Buffer null_texture(java.util.function.Consumer<NkDrawNullTexture> consumer) { consumer.accept(null_texture()); return this; }
         /**
          * Returns a {@link NkDrawVertexLayoutElement.Buffer} view of the struct array pointed to by the {@code vertex_layout} field.
          *
@@ -502,6 +500,8 @@ public class NkConvertConfig extends Struct implements NativeResource {
         public NkConvertConfig.Buffer curve_segment_count(@NativeType("unsigned int") int value) { NkConvertConfig.ncurve_segment_count(address(), value); return this; }
         /** Copies the specified {@link NkDrawNullTexture} to the {@code null_texture} field. */
         public NkConvertConfig.Buffer null_texture(@NativeType("struct nk_draw_null_texture") NkDrawNullTexture value) { NkConvertConfig.nnull_texture(address(), value); return this; }
+        /** Passes the {@code null_texture} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkConvertConfig.Buffer null_texture(java.util.function.Consumer<NkDrawNullTexture> consumer) { consumer.accept(null_texture()); return this; }
         /** Sets the address of the specified {@link NkDrawVertexLayoutElement.Buffer} to the {@code vertex_layout} field. */
         public NkConvertConfig.Buffer vertex_layout(@NativeType("struct nk_draw_vertex_layout_element *") NkDrawVertexLayoutElement.Buffer value) { NkConvertConfig.nvertex_layout(address(), value); return this; }
         /** Sets the specified value to the {@code vertex_size} field. */

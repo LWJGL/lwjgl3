@@ -105,16 +105,10 @@ public class WINDOWPLACEMENT extends Struct implements NativeResource {
     public int showCmd() { return nshowCmd(address()); }
     /** Returns a {@link POINT} view of the {@code ptMinPosition} field. */
     public POINT ptMinPosition() { return nptMinPosition(address()); }
-    /** Passes the {@code ptMinPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public WINDOWPLACEMENT ptMinPosition(java.util.function.Consumer<POINT> consumer) { consumer.accept(ptMinPosition()); return this; }
     /** Returns a {@link POINT} view of the {@code ptMaxPosition} field. */
     public POINT ptMaxPosition() { return nptMaxPosition(address()); }
-    /** Passes the {@code ptMaxPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public WINDOWPLACEMENT ptMaxPosition(java.util.function.Consumer<POINT> consumer) { consumer.accept(ptMaxPosition()); return this; }
     /** Returns a {@link RECT} view of the {@code rcNormalPosition} field. */
     public RECT rcNormalPosition() { return nrcNormalPosition(address()); }
-    /** Passes the {@code rcNormalPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public WINDOWPLACEMENT rcNormalPosition(java.util.function.Consumer<RECT> consumer) { consumer.accept(rcNormalPosition()); return this; }
 
     /** Sets the specified value to the {@code length} field. */
     public WINDOWPLACEMENT length(@NativeType("UINT") int value) { nlength(address(), value); return this; }
@@ -124,10 +118,16 @@ public class WINDOWPLACEMENT extends Struct implements NativeResource {
     public WINDOWPLACEMENT showCmd(@NativeType("UINT") int value) { nshowCmd(address(), value); return this; }
     /** Copies the specified {@link POINT} to the {@code ptMinPosition} field. */
     public WINDOWPLACEMENT ptMinPosition(POINT value) { nptMinPosition(address(), value); return this; }
+    /** Passes the {@code ptMinPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public WINDOWPLACEMENT ptMinPosition(java.util.function.Consumer<POINT> consumer) { consumer.accept(ptMinPosition()); return this; }
     /** Copies the specified {@link POINT} to the {@code ptMaxPosition} field. */
     public WINDOWPLACEMENT ptMaxPosition(POINT value) { nptMaxPosition(address(), value); return this; }
+    /** Passes the {@code ptMaxPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public WINDOWPLACEMENT ptMaxPosition(java.util.function.Consumer<POINT> consumer) { consumer.accept(ptMaxPosition()); return this; }
     /** Copies the specified {@link RECT} to the {@code rcNormalPosition} field. */
     public WINDOWPLACEMENT rcNormalPosition(RECT value) { nrcNormalPosition(address(), value); return this; }
+    /** Passes the {@code rcNormalPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public WINDOWPLACEMENT rcNormalPosition(java.util.function.Consumer<RECT> consumer) { consumer.accept(rcNormalPosition()); return this; }
 
     /** Initializes this struct with the specified values. */
     public WINDOWPLACEMENT set(
@@ -378,16 +378,10 @@ public class WINDOWPLACEMENT extends Struct implements NativeResource {
         public int showCmd() { return WINDOWPLACEMENT.nshowCmd(address()); }
         /** Returns a {@link POINT} view of the {@code ptMinPosition} field. */
         public POINT ptMinPosition() { return WINDOWPLACEMENT.nptMinPosition(address()); }
-        /** Passes the {@code ptMinPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public WINDOWPLACEMENT.Buffer ptMinPosition(java.util.function.Consumer<POINT> consumer) { consumer.accept(ptMinPosition()); return this; }
         /** Returns a {@link POINT} view of the {@code ptMaxPosition} field. */
         public POINT ptMaxPosition() { return WINDOWPLACEMENT.nptMaxPosition(address()); }
-        /** Passes the {@code ptMaxPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public WINDOWPLACEMENT.Buffer ptMaxPosition(java.util.function.Consumer<POINT> consumer) { consumer.accept(ptMaxPosition()); return this; }
         /** Returns a {@link RECT} view of the {@code rcNormalPosition} field. */
         public RECT rcNormalPosition() { return WINDOWPLACEMENT.nrcNormalPosition(address()); }
-        /** Passes the {@code rcNormalPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public WINDOWPLACEMENT.Buffer rcNormalPosition(java.util.function.Consumer<RECT> consumer) { consumer.accept(rcNormalPosition()); return this; }
 
         /** Sets the specified value to the {@code length} field. */
         public WINDOWPLACEMENT.Buffer length(@NativeType("UINT") int value) { WINDOWPLACEMENT.nlength(address(), value); return this; }
@@ -397,10 +391,16 @@ public class WINDOWPLACEMENT extends Struct implements NativeResource {
         public WINDOWPLACEMENT.Buffer showCmd(@NativeType("UINT") int value) { WINDOWPLACEMENT.nshowCmd(address(), value); return this; }
         /** Copies the specified {@link POINT} to the {@code ptMinPosition} field. */
         public WINDOWPLACEMENT.Buffer ptMinPosition(POINT value) { WINDOWPLACEMENT.nptMinPosition(address(), value); return this; }
+        /** Passes the {@code ptMinPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public WINDOWPLACEMENT.Buffer ptMinPosition(java.util.function.Consumer<POINT> consumer) { consumer.accept(ptMinPosition()); return this; }
         /** Copies the specified {@link POINT} to the {@code ptMaxPosition} field. */
         public WINDOWPLACEMENT.Buffer ptMaxPosition(POINT value) { WINDOWPLACEMENT.nptMaxPosition(address(), value); return this; }
+        /** Passes the {@code ptMaxPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public WINDOWPLACEMENT.Buffer ptMaxPosition(java.util.function.Consumer<POINT> consumer) { consumer.accept(ptMaxPosition()); return this; }
         /** Copies the specified {@link RECT} to the {@code rcNormalPosition} field. */
         public WINDOWPLACEMENT.Buffer rcNormalPosition(RECT value) { WINDOWPLACEMENT.nrcNormalPosition(address(), value); return this; }
+        /** Passes the {@code rcNormalPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public WINDOWPLACEMENT.Buffer rcNormalPosition(java.util.function.Consumer<RECT> consumer) { consumer.accept(rcNormalPosition()); return this; }
 
     }
 

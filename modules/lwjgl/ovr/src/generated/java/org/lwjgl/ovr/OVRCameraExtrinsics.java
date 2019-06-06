@@ -109,8 +109,6 @@ public class OVRCameraExtrinsics extends Struct implements NativeResource {
     /** Returns a {@link OVRPosef} view of the {@code RelativePose} field. */
     @NativeType("ovrPosef")
     public OVRPosef RelativePose() { return nRelativePose(address()); }
-    /** Passes the {@code RelativePose} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public OVRCameraExtrinsics RelativePose(java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(RelativePose()); return this; }
     /** Returns the value of the {@code LastExposureTimeSeconds} field. */
     public double LastExposureTimeSeconds() { return nLastExposureTimeSeconds(address()); }
     /** Returns the value of the {@code ExposureLatencySeconds} field. */
@@ -126,6 +124,8 @@ public class OVRCameraExtrinsics extends Struct implements NativeResource {
     public OVRCameraExtrinsics AttachedToDevice(@NativeType("ovrTrackedDeviceType") int value) { nAttachedToDevice(address(), value); return this; }
     /** Copies the specified {@link OVRPosef} to the {@code RelativePose} field. */
     public OVRCameraExtrinsics RelativePose(@NativeType("ovrPosef") OVRPosef value) { nRelativePose(address(), value); return this; }
+    /** Passes the {@code RelativePose} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRCameraExtrinsics RelativePose(java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(RelativePose()); return this; }
     /** Sets the specified value to the {@code LastExposureTimeSeconds} field. */
     public OVRCameraExtrinsics LastExposureTimeSeconds(double value) { nLastExposureTimeSeconds(address(), value); return this; }
     /** Sets the specified value to the {@code ExposureLatencySeconds} field. */
@@ -388,8 +388,6 @@ public class OVRCameraExtrinsics extends Struct implements NativeResource {
         /** Returns a {@link OVRPosef} view of the {@code RelativePose} field. */
         @NativeType("ovrPosef")
         public OVRPosef RelativePose() { return OVRCameraExtrinsics.nRelativePose(address()); }
-        /** Passes the {@code RelativePose} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public OVRCameraExtrinsics.Buffer RelativePose(java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(RelativePose()); return this; }
         /** Returns the value of the {@code LastExposureTimeSeconds} field. */
         public double LastExposureTimeSeconds() { return OVRCameraExtrinsics.nLastExposureTimeSeconds(address()); }
         /** Returns the value of the {@code ExposureLatencySeconds} field. */
@@ -405,6 +403,8 @@ public class OVRCameraExtrinsics extends Struct implements NativeResource {
         public OVRCameraExtrinsics.Buffer AttachedToDevice(@NativeType("ovrTrackedDeviceType") int value) { OVRCameraExtrinsics.nAttachedToDevice(address(), value); return this; }
         /** Copies the specified {@link OVRPosef} to the {@code RelativePose} field. */
         public OVRCameraExtrinsics.Buffer RelativePose(@NativeType("ovrPosef") OVRPosef value) { OVRCameraExtrinsics.nRelativePose(address(), value); return this; }
+        /** Passes the {@code RelativePose} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRCameraExtrinsics.Buffer RelativePose(java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(RelativePose()); return this; }
         /** Sets the specified value to the {@code LastExposureTimeSeconds} field. */
         public OVRCameraExtrinsics.Buffer LastExposureTimeSeconds(double value) { OVRCameraExtrinsics.nLastExposureTimeSeconds(address(), value); return this; }
         /** Sets the specified value to the {@code ExposureLatencySeconds} field. */

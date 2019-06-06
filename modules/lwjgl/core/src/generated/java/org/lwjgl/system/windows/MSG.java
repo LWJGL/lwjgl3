@@ -109,8 +109,6 @@ public class MSG extends Struct implements NativeResource {
     public int time() { return ntime(address()); }
     /** Returns a {@link POINT} view of the {@code pt} field. */
     public POINT pt() { return npt(address()); }
-    /** Passes the {@code pt} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public MSG pt(java.util.function.Consumer<POINT> consumer) { consumer.accept(pt()); return this; }
 
     /** Sets the specified value to the {@code hwnd} field. */
     public MSG hwnd(@NativeType("HWND") long value) { nhwnd(address(), value); return this; }
@@ -124,6 +122,8 @@ public class MSG extends Struct implements NativeResource {
     public MSG time(@NativeType("DWORD") int value) { ntime(address(), value); return this; }
     /** Copies the specified {@link POINT} to the {@code pt} field. */
     public MSG pt(POINT value) { npt(address(), value); return this; }
+    /** Passes the {@code pt} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public MSG pt(java.util.function.Consumer<POINT> consumer) { consumer.accept(pt()); return this; }
 
     /** Initializes this struct with the specified values. */
     public MSG set(
@@ -380,8 +380,6 @@ public class MSG extends Struct implements NativeResource {
         public int time() { return MSG.ntime(address()); }
         /** Returns a {@link POINT} view of the {@code pt} field. */
         public POINT pt() { return MSG.npt(address()); }
-        /** Passes the {@code pt} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public MSG.Buffer pt(java.util.function.Consumer<POINT> consumer) { consumer.accept(pt()); return this; }
 
         /** Sets the specified value to the {@code hwnd} field. */
         public MSG.Buffer hwnd(@NativeType("HWND") long value) { MSG.nhwnd(address(), value); return this; }
@@ -395,6 +393,8 @@ public class MSG extends Struct implements NativeResource {
         public MSG.Buffer time(@NativeType("DWORD") int value) { MSG.ntime(address(), value); return this; }
         /** Copies the specified {@link POINT} to the {@code pt} field. */
         public MSG.Buffer pt(POINT value) { MSG.npt(address(), value); return this; }
+        /** Passes the {@code pt} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public MSG.Buffer pt(java.util.function.Consumer<POINT> consumer) { consumer.accept(pt()); return this; }
 
     }
 

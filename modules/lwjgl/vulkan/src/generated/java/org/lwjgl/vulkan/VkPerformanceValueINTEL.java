@@ -88,13 +88,13 @@ public class VkPerformanceValueINTEL extends Struct implements NativeResource {
     public int type() { return ntype(address()); }
     /** Returns a {@link VkPerformanceValueDataINTEL} view of the {@code data} field. */
     public VkPerformanceValueDataINTEL data() { return ndata(address()); }
-    /** Passes the {@code data} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkPerformanceValueINTEL data(java.util.function.Consumer<VkPerformanceValueDataINTEL> consumer) { consumer.accept(data()); return this; }
 
     /** Sets the specified value to the {@code type} field. */
     public VkPerformanceValueINTEL type(@NativeType("VkPerformanceValueTypeINTEL") int value) { ntype(address(), value); return this; }
     /** Copies the specified {@link VkPerformanceValueDataINTEL} to the {@code data} field. */
     public VkPerformanceValueINTEL data(VkPerformanceValueDataINTEL value) { ndata(address(), value); return this; }
+    /** Passes the {@code data} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkPerformanceValueINTEL data(java.util.function.Consumer<VkPerformanceValueDataINTEL> consumer) { consumer.accept(data()); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPerformanceValueINTEL set(
@@ -315,13 +315,13 @@ public class VkPerformanceValueINTEL extends Struct implements NativeResource {
         public int type() { return VkPerformanceValueINTEL.ntype(address()); }
         /** Returns a {@link VkPerformanceValueDataINTEL} view of the {@code data} field. */
         public VkPerformanceValueDataINTEL data() { return VkPerformanceValueINTEL.ndata(address()); }
-        /** Passes the {@code data} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkPerformanceValueINTEL.Buffer data(java.util.function.Consumer<VkPerformanceValueDataINTEL> consumer) { consumer.accept(data()); return this; }
 
         /** Sets the specified value to the {@code type} field. */
         public VkPerformanceValueINTEL.Buffer type(@NativeType("VkPerformanceValueTypeINTEL") int value) { VkPerformanceValueINTEL.ntype(address(), value); return this; }
         /** Copies the specified {@link VkPerformanceValueDataINTEL} to the {@code data} field. */
         public VkPerformanceValueINTEL.Buffer data(VkPerformanceValueDataINTEL value) { VkPerformanceValueINTEL.ndata(address(), value); return this; }
+        /** Passes the {@code data} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkPerformanceValueINTEL.Buffer data(java.util.function.Consumer<VkPerformanceValueDataINTEL> consumer) { consumer.accept(data()); return this; }
 
     }
 

@@ -109,8 +109,6 @@ public class VkPhysicalDeviceShadingRateImagePropertiesNV extends Struct impleme
     public long pNext() { return npNext(address()); }
     /** Returns a {@link VkExtent2D} view of the {@code shadingRateTexelSize} field. */
     public VkExtent2D shadingRateTexelSize() { return nshadingRateTexelSize(address()); }
-    /** Passes the {@code shadingRateTexelSize} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkPhysicalDeviceShadingRateImagePropertiesNV shadingRateTexelSize(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(shadingRateTexelSize()); return this; }
     /** Returns the value of the {@code shadingRatePaletteSize} field. */
     @NativeType("uint32_t")
     public int shadingRatePaletteSize() { return nshadingRatePaletteSize(address()); }
@@ -351,8 +349,6 @@ public class VkPhysicalDeviceShadingRateImagePropertiesNV extends Struct impleme
         public long pNext() { return VkPhysicalDeviceShadingRateImagePropertiesNV.npNext(address()); }
         /** Returns a {@link VkExtent2D} view of the {@code shadingRateTexelSize} field. */
         public VkExtent2D shadingRateTexelSize() { return VkPhysicalDeviceShadingRateImagePropertiesNV.nshadingRateTexelSize(address()); }
-        /** Passes the {@code shadingRateTexelSize} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkPhysicalDeviceShadingRateImagePropertiesNV.Buffer shadingRateTexelSize(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(shadingRateTexelSize()); return this; }
         /** Returns the value of the {@code shadingRatePaletteSize} field. */
         @NativeType("uint32_t")
         public int shadingRatePaletteSize() { return VkPhysicalDeviceShadingRateImagePropertiesNV.nshadingRatePaletteSize(address()); }

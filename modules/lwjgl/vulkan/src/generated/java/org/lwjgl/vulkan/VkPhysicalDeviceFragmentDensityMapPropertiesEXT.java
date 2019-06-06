@@ -105,12 +105,8 @@ public class VkPhysicalDeviceFragmentDensityMapPropertiesEXT extends Struct impl
     public long pNext() { return npNext(address()); }
     /** Returns a {@link VkExtent2D} view of the {@code minFragmentDensityTexelSize} field. */
     public VkExtent2D minFragmentDensityTexelSize() { return nminFragmentDensityTexelSize(address()); }
-    /** Passes the {@code minFragmentDensityTexelSize} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkPhysicalDeviceFragmentDensityMapPropertiesEXT minFragmentDensityTexelSize(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(minFragmentDensityTexelSize()); return this; }
     /** Returns a {@link VkExtent2D} view of the {@code maxFragmentDensityTexelSize} field. */
     public VkExtent2D maxFragmentDensityTexelSize() { return nmaxFragmentDensityTexelSize(address()); }
-    /** Passes the {@code maxFragmentDensityTexelSize} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkPhysicalDeviceFragmentDensityMapPropertiesEXT maxFragmentDensityTexelSize(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(maxFragmentDensityTexelSize()); return this; }
     /** Returns the value of the {@code fragmentDensityInvocations} field. */
     @NativeType("VkBool32")
     public boolean fragmentDensityInvocations() { return nfragmentDensityInvocations(address()) != 0; }
@@ -348,12 +344,8 @@ public class VkPhysicalDeviceFragmentDensityMapPropertiesEXT extends Struct impl
         public long pNext() { return VkPhysicalDeviceFragmentDensityMapPropertiesEXT.npNext(address()); }
         /** Returns a {@link VkExtent2D} view of the {@code minFragmentDensityTexelSize} field. */
         public VkExtent2D minFragmentDensityTexelSize() { return VkPhysicalDeviceFragmentDensityMapPropertiesEXT.nminFragmentDensityTexelSize(address()); }
-        /** Passes the {@code minFragmentDensityTexelSize} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkPhysicalDeviceFragmentDensityMapPropertiesEXT.Buffer minFragmentDensityTexelSize(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(minFragmentDensityTexelSize()); return this; }
         /** Returns a {@link VkExtent2D} view of the {@code maxFragmentDensityTexelSize} field. */
         public VkExtent2D maxFragmentDensityTexelSize() { return VkPhysicalDeviceFragmentDensityMapPropertiesEXT.nmaxFragmentDensityTexelSize(address()); }
-        /** Passes the {@code maxFragmentDensityTexelSize} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkPhysicalDeviceFragmentDensityMapPropertiesEXT.Buffer maxFragmentDensityTexelSize(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(maxFragmentDensityTexelSize()); return this; }
         /** Returns the value of the {@code fragmentDensityInvocations} field. */
         @NativeType("VkBool32")
         public boolean fragmentDensityInvocations() { return VkPhysicalDeviceFragmentDensityMapPropertiesEXT.nfragmentDensityInvocations(address()) != 0; }

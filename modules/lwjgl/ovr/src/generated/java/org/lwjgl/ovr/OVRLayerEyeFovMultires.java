@@ -125,8 +125,6 @@ public class OVRLayerEyeFovMultires extends Struct implements NativeResource {
     /** Returns a {@link OVRLayerHeader} view of the {@code Header} field. */
     @NativeType("ovrLayerHeader")
     public OVRLayerHeader Header() { return nHeader(address()); }
-    /** Passes the {@code Header} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public OVRLayerEyeFovMultires Header(java.util.function.Consumer<OVRLayerHeader> consumer) { consumer.accept(Header()); return this; }
     /** Returns a {@link PointerBuffer} view of the {@code ColorTexture} field. */
     @NativeType("ovrTextureSwapChain[ovrEye_Count]")
     public PointerBuffer ColorTexture() { return nColorTexture(address()); }
@@ -159,11 +157,11 @@ public class OVRLayerEyeFovMultires extends Struct implements NativeResource {
     /** Returns a {@link OVRTextureLayoutDescUnion} view of the {@code TextureLayoutDesc} field. */
     @NativeType("ovrTextureLayoutDesc_Union")
     public OVRTextureLayoutDescUnion TextureLayoutDesc() { return nTextureLayoutDesc(address()); }
-    /** Passes the {@code TextureLayoutDesc} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public OVRLayerEyeFovMultires TextureLayoutDesc(java.util.function.Consumer<OVRTextureLayoutDescUnion> consumer) { consumer.accept(TextureLayoutDesc()); return this; }
 
     /** Copies the specified {@link OVRLayerHeader} to the {@code Header} field. */
     public OVRLayerEyeFovMultires Header(@NativeType("ovrLayerHeader") OVRLayerHeader value) { nHeader(address(), value); return this; }
+    /** Passes the {@code Header} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerEyeFovMultires Header(java.util.function.Consumer<OVRLayerHeader> consumer) { consumer.accept(Header()); return this; }
     /** Copies the specified {@link PointerBuffer} to the {@code ColorTexture} field. */
     public OVRLayerEyeFovMultires ColorTexture(@NativeType("ovrTextureSwapChain[ovrEye_Count]") PointerBuffer value) { nColorTexture(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code ColorTexture} field. */
@@ -172,20 +170,34 @@ public class OVRLayerEyeFovMultires extends Struct implements NativeResource {
     public OVRLayerEyeFovMultires Viewport(@NativeType("ovrRecti[ovrEye_Count]") OVRRecti.Buffer value) { nViewport(address(), value); return this; }
     /** Copies the specified {@link OVRRecti} at the specified index of the {@code Viewport} field. */
     public OVRLayerEyeFovMultires Viewport(int index, @NativeType("ovrRecti") OVRRecti value) { nViewport(address(), index, value); return this; }
+    /** Passes the {@code Viewport} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerEyeFovMultires Viewport(java.util.function.Consumer<OVRRecti.Buffer> consumer) { consumer.accept(Viewport()); return this; }
+    /** Passes the element at {@code index} of the {@code Viewport} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerEyeFovMultires Viewport(int index, java.util.function.Consumer<OVRRecti> consumer) { consumer.accept(Viewport(index)); return this; }
     /** Copies the specified {@link OVRFovPort.Buffer} to the {@code Fov} field. */
     public OVRLayerEyeFovMultires Fov(@NativeType("ovrFovPort[ovrEye_Count]") OVRFovPort.Buffer value) { nFov(address(), value); return this; }
     /** Copies the specified {@link OVRFovPort} at the specified index of the {@code Fov} field. */
     public OVRLayerEyeFovMultires Fov(int index, @NativeType("ovrFovPort") OVRFovPort value) { nFov(address(), index, value); return this; }
+    /** Passes the {@code Fov} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerEyeFovMultires Fov(java.util.function.Consumer<OVRFovPort.Buffer> consumer) { consumer.accept(Fov()); return this; }
+    /** Passes the element at {@code index} of the {@code Fov} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerEyeFovMultires Fov(int index, java.util.function.Consumer<OVRFovPort> consumer) { consumer.accept(Fov(index)); return this; }
     /** Copies the specified {@link OVRPosef.Buffer} to the {@code RenderPose} field. */
     public OVRLayerEyeFovMultires RenderPose(@NativeType("ovrPosef[ovrEye_Count]") OVRPosef.Buffer value) { nRenderPose(address(), value); return this; }
     /** Copies the specified {@link OVRPosef} at the specified index of the {@code RenderPose} field. */
     public OVRLayerEyeFovMultires RenderPose(int index, @NativeType("ovrPosef") OVRPosef value) { nRenderPose(address(), index, value); return this; }
+    /** Passes the {@code RenderPose} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerEyeFovMultires RenderPose(java.util.function.Consumer<OVRPosef.Buffer> consumer) { consumer.accept(RenderPose()); return this; }
+    /** Passes the element at {@code index} of the {@code RenderPose} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerEyeFovMultires RenderPose(int index, java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(RenderPose(index)); return this; }
     /** Sets the specified value to the {@code SensorSampleTime} field. */
     public OVRLayerEyeFovMultires SensorSampleTime(double value) { nSensorSampleTime(address(), value); return this; }
     /** Sets the specified value to the {@code TextureLayout} field. */
     public OVRLayerEyeFovMultires TextureLayout(@NativeType("ovrTextureLayout") int value) { nTextureLayout(address(), value); return this; }
     /** Copies the specified {@link OVRTextureLayoutDescUnion} to the {@code TextureLayoutDesc} field. */
     public OVRLayerEyeFovMultires TextureLayoutDesc(@NativeType("ovrTextureLayoutDesc_Union") OVRTextureLayoutDescUnion value) { nTextureLayoutDesc(address(), value); return this; }
+    /** Passes the {@code TextureLayoutDesc} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerEyeFovMultires TextureLayoutDesc(java.util.function.Consumer<OVRTextureLayoutDescUnion> consumer) { consumer.accept(TextureLayoutDesc()); return this; }
 
     /** Initializes this struct with the specified values. */
     public OVRLayerEyeFovMultires set(
@@ -505,8 +517,6 @@ public class OVRLayerEyeFovMultires extends Struct implements NativeResource {
         /** Returns a {@link OVRLayerHeader} view of the {@code Header} field. */
         @NativeType("ovrLayerHeader")
         public OVRLayerHeader Header() { return OVRLayerEyeFovMultires.nHeader(address()); }
-        /** Passes the {@code Header} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public OVRLayerEyeFovMultires.Buffer Header(java.util.function.Consumer<OVRLayerHeader> consumer) { consumer.accept(Header()); return this; }
         /** Returns a {@link PointerBuffer} view of the {@code ColorTexture} field. */
         @NativeType("ovrTextureSwapChain[ovrEye_Count]")
         public PointerBuffer ColorTexture() { return OVRLayerEyeFovMultires.nColorTexture(address()); }
@@ -539,11 +549,11 @@ public class OVRLayerEyeFovMultires extends Struct implements NativeResource {
         /** Returns a {@link OVRTextureLayoutDescUnion} view of the {@code TextureLayoutDesc} field. */
         @NativeType("ovrTextureLayoutDesc_Union")
         public OVRTextureLayoutDescUnion TextureLayoutDesc() { return OVRLayerEyeFovMultires.nTextureLayoutDesc(address()); }
-        /** Passes the {@code TextureLayoutDesc} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public OVRLayerEyeFovMultires.Buffer TextureLayoutDesc(java.util.function.Consumer<OVRTextureLayoutDescUnion> consumer) { consumer.accept(TextureLayoutDesc()); return this; }
 
         /** Copies the specified {@link OVRLayerHeader} to the {@code Header} field. */
         public OVRLayerEyeFovMultires.Buffer Header(@NativeType("ovrLayerHeader") OVRLayerHeader value) { OVRLayerEyeFovMultires.nHeader(address(), value); return this; }
+        /** Passes the {@code Header} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerEyeFovMultires.Buffer Header(java.util.function.Consumer<OVRLayerHeader> consumer) { consumer.accept(Header()); return this; }
         /** Copies the specified {@link PointerBuffer} to the {@code ColorTexture} field. */
         public OVRLayerEyeFovMultires.Buffer ColorTexture(@NativeType("ovrTextureSwapChain[ovrEye_Count]") PointerBuffer value) { OVRLayerEyeFovMultires.nColorTexture(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code ColorTexture} field. */
@@ -552,20 +562,34 @@ public class OVRLayerEyeFovMultires extends Struct implements NativeResource {
         public OVRLayerEyeFovMultires.Buffer Viewport(@NativeType("ovrRecti[ovrEye_Count]") OVRRecti.Buffer value) { OVRLayerEyeFovMultires.nViewport(address(), value); return this; }
         /** Copies the specified {@link OVRRecti} at the specified index of the {@code Viewport} field. */
         public OVRLayerEyeFovMultires.Buffer Viewport(int index, @NativeType("ovrRecti") OVRRecti value) { OVRLayerEyeFovMultires.nViewport(address(), index, value); return this; }
+        /** Passes the {@code Viewport} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerEyeFovMultires.Buffer Viewport(java.util.function.Consumer<OVRRecti.Buffer> consumer) { consumer.accept(Viewport()); return this; }
+        /** Passes the element at {@code index} of the {@code Viewport} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerEyeFovMultires.Buffer Viewport(int index, java.util.function.Consumer<OVRRecti> consumer) { consumer.accept(Viewport(index)); return this; }
         /** Copies the specified {@link OVRFovPort.Buffer} to the {@code Fov} field. */
         public OVRLayerEyeFovMultires.Buffer Fov(@NativeType("ovrFovPort[ovrEye_Count]") OVRFovPort.Buffer value) { OVRLayerEyeFovMultires.nFov(address(), value); return this; }
         /** Copies the specified {@link OVRFovPort} at the specified index of the {@code Fov} field. */
         public OVRLayerEyeFovMultires.Buffer Fov(int index, @NativeType("ovrFovPort") OVRFovPort value) { OVRLayerEyeFovMultires.nFov(address(), index, value); return this; }
+        /** Passes the {@code Fov} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerEyeFovMultires.Buffer Fov(java.util.function.Consumer<OVRFovPort.Buffer> consumer) { consumer.accept(Fov()); return this; }
+        /** Passes the element at {@code index} of the {@code Fov} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerEyeFovMultires.Buffer Fov(int index, java.util.function.Consumer<OVRFovPort> consumer) { consumer.accept(Fov(index)); return this; }
         /** Copies the specified {@link OVRPosef.Buffer} to the {@code RenderPose} field. */
         public OVRLayerEyeFovMultires.Buffer RenderPose(@NativeType("ovrPosef[ovrEye_Count]") OVRPosef.Buffer value) { OVRLayerEyeFovMultires.nRenderPose(address(), value); return this; }
         /** Copies the specified {@link OVRPosef} at the specified index of the {@code RenderPose} field. */
         public OVRLayerEyeFovMultires.Buffer RenderPose(int index, @NativeType("ovrPosef") OVRPosef value) { OVRLayerEyeFovMultires.nRenderPose(address(), index, value); return this; }
+        /** Passes the {@code RenderPose} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerEyeFovMultires.Buffer RenderPose(java.util.function.Consumer<OVRPosef.Buffer> consumer) { consumer.accept(RenderPose()); return this; }
+        /** Passes the element at {@code index} of the {@code RenderPose} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerEyeFovMultires.Buffer RenderPose(int index, java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(RenderPose(index)); return this; }
         /** Sets the specified value to the {@code SensorSampleTime} field. */
         public OVRLayerEyeFovMultires.Buffer SensorSampleTime(double value) { OVRLayerEyeFovMultires.nSensorSampleTime(address(), value); return this; }
         /** Sets the specified value to the {@code TextureLayout} field. */
         public OVRLayerEyeFovMultires.Buffer TextureLayout(@NativeType("ovrTextureLayout") int value) { OVRLayerEyeFovMultires.nTextureLayout(address(), value); return this; }
         /** Copies the specified {@link OVRTextureLayoutDescUnion} to the {@code TextureLayoutDesc} field. */
         public OVRLayerEyeFovMultires.Buffer TextureLayoutDesc(@NativeType("ovrTextureLayoutDesc_Union") OVRTextureLayoutDescUnion value) { OVRLayerEyeFovMultires.nTextureLayoutDesc(address(), value); return this; }
+        /** Passes the {@code TextureLayoutDesc} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerEyeFovMultires.Buffer TextureLayoutDesc(java.util.function.Consumer<OVRTextureLayoutDescUnion> consumer) { consumer.accept(TextureLayoutDesc()); return this; }
 
     }
 

@@ -112,8 +112,6 @@ public class VkRenderPassFragmentDensityMapCreateInfoEXT extends Struct implemen
     public long pNext() { return npNext(address()); }
     /** Returns a {@link VkAttachmentReference} view of the {@code fragmentDensityMapAttachment} field. */
     public VkAttachmentReference fragmentDensityMapAttachment() { return nfragmentDensityMapAttachment(address()); }
-    /** Passes the {@code fragmentDensityMapAttachment} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkRenderPassFragmentDensityMapCreateInfoEXT fragmentDensityMapAttachment(java.util.function.Consumer<VkAttachmentReference> consumer) { consumer.accept(fragmentDensityMapAttachment()); return this; }
 
     /** Sets the specified value to the {@code sType} field. */
     public VkRenderPassFragmentDensityMapCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -121,6 +119,8 @@ public class VkRenderPassFragmentDensityMapCreateInfoEXT extends Struct implemen
     public VkRenderPassFragmentDensityMapCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Copies the specified {@link VkAttachmentReference} to the {@code fragmentDensityMapAttachment} field. */
     public VkRenderPassFragmentDensityMapCreateInfoEXT fragmentDensityMapAttachment(VkAttachmentReference value) { nfragmentDensityMapAttachment(address(), value); return this; }
+    /** Passes the {@code fragmentDensityMapAttachment} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkRenderPassFragmentDensityMapCreateInfoEXT fragmentDensityMapAttachment(java.util.function.Consumer<VkAttachmentReference> consumer) { consumer.accept(fragmentDensityMapAttachment()); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkRenderPassFragmentDensityMapCreateInfoEXT set(
@@ -350,8 +350,6 @@ public class VkRenderPassFragmentDensityMapCreateInfoEXT extends Struct implemen
         public long pNext() { return VkRenderPassFragmentDensityMapCreateInfoEXT.npNext(address()); }
         /** Returns a {@link VkAttachmentReference} view of the {@code fragmentDensityMapAttachment} field. */
         public VkAttachmentReference fragmentDensityMapAttachment() { return VkRenderPassFragmentDensityMapCreateInfoEXT.nfragmentDensityMapAttachment(address()); }
-        /** Passes the {@code fragmentDensityMapAttachment} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkRenderPassFragmentDensityMapCreateInfoEXT.Buffer fragmentDensityMapAttachment(java.util.function.Consumer<VkAttachmentReference> consumer) { consumer.accept(fragmentDensityMapAttachment()); return this; }
 
         /** Sets the specified value to the {@code sType} field. */
         public VkRenderPassFragmentDensityMapCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderPassFragmentDensityMapCreateInfoEXT.nsType(address(), value); return this; }
@@ -359,6 +357,8 @@ public class VkRenderPassFragmentDensityMapCreateInfoEXT extends Struct implemen
         public VkRenderPassFragmentDensityMapCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkRenderPassFragmentDensityMapCreateInfoEXT.npNext(address(), value); return this; }
         /** Copies the specified {@link VkAttachmentReference} to the {@code fragmentDensityMapAttachment} field. */
         public VkRenderPassFragmentDensityMapCreateInfoEXT.Buffer fragmentDensityMapAttachment(VkAttachmentReference value) { VkRenderPassFragmentDensityMapCreateInfoEXT.nfragmentDensityMapAttachment(address(), value); return this; }
+        /** Passes the {@code fragmentDensityMapAttachment} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkRenderPassFragmentDensityMapCreateInfoEXT.Buffer fragmentDensityMapAttachment(java.util.function.Consumer<VkAttachmentReference> consumer) { consumer.accept(fragmentDensityMapAttachment()); return this; }
 
     }
 

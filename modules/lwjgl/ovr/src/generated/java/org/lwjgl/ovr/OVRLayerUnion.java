@@ -99,60 +99,60 @@ public class OVRLayerUnion extends Struct implements NativeResource {
     /** Returns a {@link OVRLayerHeader} view of the {@code Header} field. */
     @NativeType("ovrLayerHeader")
     public OVRLayerHeader Header() { return nHeader(address()); }
-    /** Passes the {@code Header} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public OVRLayerUnion Header(java.util.function.Consumer<OVRLayerHeader> consumer) { consumer.accept(Header()); return this; }
     /** Returns a {@link OVRLayerEyeFov} view of the {@code EyeFov} field. */
     @NativeType("ovrLayerEyeFov")
     public OVRLayerEyeFov EyeFov() { return nEyeFov(address()); }
-    /** Passes the {@code EyeFov} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public OVRLayerUnion EyeFov(java.util.function.Consumer<OVRLayerEyeFov> consumer) { consumer.accept(EyeFov()); return this; }
     /** Returns a {@link OVRLayerEyeFovDepth} view of the {@code EyeFovDepth} field. */
     @NativeType("ovrLayerEyeFovDepth")
     public OVRLayerEyeFovDepth EyeFovDepth() { return nEyeFovDepth(address()); }
-    /** Passes the {@code EyeFovDepth} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public OVRLayerUnion EyeFovDepth(java.util.function.Consumer<OVRLayerEyeFovDepth> consumer) { consumer.accept(EyeFovDepth()); return this; }
     /** Returns a {@link OVRLayerEyeMatrix} view of the {@code EyeMatrix} field. */
     @NativeType("ovrLayerEyeMatrix")
     public OVRLayerEyeMatrix EyeMatrix() { return nEyeMatrix(address()); }
-    /** Passes the {@code EyeMatrix} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public OVRLayerUnion EyeMatrix(java.util.function.Consumer<OVRLayerEyeMatrix> consumer) { consumer.accept(EyeMatrix()); return this; }
     /** Returns a {@link OVRLayerEyeFovMultires} view of the {@code Multires} field. */
     @NativeType("ovrLayerEyeFovMultires")
     public OVRLayerEyeFovMultires Multires() { return nMultires(address()); }
-    /** Passes the {@code Multires} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public OVRLayerUnion Multires(java.util.function.Consumer<OVRLayerEyeFovMultires> consumer) { consumer.accept(Multires()); return this; }
     /** Returns a {@link OVRLayerCylinder} view of the {@code Cylinder} field. */
     @NativeType("ovrLayerCylinder")
     public OVRLayerCylinder Cylinder() { return nCylinder(address()); }
-    /** Passes the {@code Cylinder} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public OVRLayerUnion Cylinder(java.util.function.Consumer<OVRLayerCylinder> consumer) { consumer.accept(Cylinder()); return this; }
     /** Returns a {@link OVRLayerCube} view of the {@code Cube} field. */
     @NativeType("ovrLayerCube")
     public OVRLayerCube Cube() { return nCube(address()); }
-    /** Passes the {@code Cube} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public OVRLayerUnion Cube(java.util.function.Consumer<OVRLayerCube> consumer) { consumer.accept(Cube()); return this; }
     /** Returns a {@link OVRLayerQuad} view of the {@code Quad} field. */
     @NativeType("ovrLayerQuad")
     public OVRLayerQuad Quad() { return nQuad(address()); }
-    /** Passes the {@code Quad} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public OVRLayerUnion Quad(java.util.function.Consumer<OVRLayerQuad> consumer) { consumer.accept(Quad()); return this; }
 
     /** Copies the specified {@link OVRLayerHeader} to the {@code Header} field. */
     public OVRLayerUnion Header(@NativeType("ovrLayerHeader") OVRLayerHeader value) { nHeader(address(), value); return this; }
+    /** Passes the {@code Header} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerUnion Header(java.util.function.Consumer<OVRLayerHeader> consumer) { consumer.accept(Header()); return this; }
     /** Copies the specified {@link OVRLayerEyeFov} to the {@code EyeFov} field. */
     public OVRLayerUnion EyeFov(@NativeType("ovrLayerEyeFov") OVRLayerEyeFov value) { nEyeFov(address(), value); return this; }
+    /** Passes the {@code EyeFov} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerUnion EyeFov(java.util.function.Consumer<OVRLayerEyeFov> consumer) { consumer.accept(EyeFov()); return this; }
     /** Copies the specified {@link OVRLayerEyeFovDepth} to the {@code EyeFovDepth} field. */
     public OVRLayerUnion EyeFovDepth(@NativeType("ovrLayerEyeFovDepth") OVRLayerEyeFovDepth value) { nEyeFovDepth(address(), value); return this; }
+    /** Passes the {@code EyeFovDepth} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerUnion EyeFovDepth(java.util.function.Consumer<OVRLayerEyeFovDepth> consumer) { consumer.accept(EyeFovDepth()); return this; }
     /** Copies the specified {@link OVRLayerEyeMatrix} to the {@code EyeMatrix} field. */
     public OVRLayerUnion EyeMatrix(@NativeType("ovrLayerEyeMatrix") OVRLayerEyeMatrix value) { nEyeMatrix(address(), value); return this; }
+    /** Passes the {@code EyeMatrix} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerUnion EyeMatrix(java.util.function.Consumer<OVRLayerEyeMatrix> consumer) { consumer.accept(EyeMatrix()); return this; }
     /** Copies the specified {@link OVRLayerEyeFovMultires} to the {@code Multires} field. */
     public OVRLayerUnion Multires(@NativeType("ovrLayerEyeFovMultires") OVRLayerEyeFovMultires value) { nMultires(address(), value); return this; }
+    /** Passes the {@code Multires} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerUnion Multires(java.util.function.Consumer<OVRLayerEyeFovMultires> consumer) { consumer.accept(Multires()); return this; }
     /** Copies the specified {@link OVRLayerCylinder} to the {@code Cylinder} field. */
     public OVRLayerUnion Cylinder(@NativeType("ovrLayerCylinder") OVRLayerCylinder value) { nCylinder(address(), value); return this; }
+    /** Passes the {@code Cylinder} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerUnion Cylinder(java.util.function.Consumer<OVRLayerCylinder> consumer) { consumer.accept(Cylinder()); return this; }
     /** Copies the specified {@link OVRLayerCube} to the {@code Cube} field. */
     public OVRLayerUnion Cube(@NativeType("ovrLayerCube") OVRLayerCube value) { nCube(address(), value); return this; }
+    /** Passes the {@code Cube} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerUnion Cube(java.util.function.Consumer<OVRLayerCube> consumer) { consumer.accept(Cube()); return this; }
     /** Copies the specified {@link OVRLayerQuad} to the {@code Quad} field. */
     public OVRLayerUnion Quad(@NativeType("ovrLayerQuad") OVRLayerQuad value) { nQuad(address(), value); return this; }
+    /** Passes the {@code Quad} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerUnion Quad(java.util.function.Consumer<OVRLayerQuad> consumer) { consumer.accept(Quad()); return this; }
 
     /**
      * Copies the specified struct data to this struct.
@@ -384,60 +384,60 @@ public class OVRLayerUnion extends Struct implements NativeResource {
         /** Returns a {@link OVRLayerHeader} view of the {@code Header} field. */
         @NativeType("ovrLayerHeader")
         public OVRLayerHeader Header() { return OVRLayerUnion.nHeader(address()); }
-        /** Passes the {@code Header} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public OVRLayerUnion.Buffer Header(java.util.function.Consumer<OVRLayerHeader> consumer) { consumer.accept(Header()); return this; }
         /** Returns a {@link OVRLayerEyeFov} view of the {@code EyeFov} field. */
         @NativeType("ovrLayerEyeFov")
         public OVRLayerEyeFov EyeFov() { return OVRLayerUnion.nEyeFov(address()); }
-        /** Passes the {@code EyeFov} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public OVRLayerUnion.Buffer EyeFov(java.util.function.Consumer<OVRLayerEyeFov> consumer) { consumer.accept(EyeFov()); return this; }
         /** Returns a {@link OVRLayerEyeFovDepth} view of the {@code EyeFovDepth} field. */
         @NativeType("ovrLayerEyeFovDepth")
         public OVRLayerEyeFovDepth EyeFovDepth() { return OVRLayerUnion.nEyeFovDepth(address()); }
-        /** Passes the {@code EyeFovDepth} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public OVRLayerUnion.Buffer EyeFovDepth(java.util.function.Consumer<OVRLayerEyeFovDepth> consumer) { consumer.accept(EyeFovDepth()); return this; }
         /** Returns a {@link OVRLayerEyeMatrix} view of the {@code EyeMatrix} field. */
         @NativeType("ovrLayerEyeMatrix")
         public OVRLayerEyeMatrix EyeMatrix() { return OVRLayerUnion.nEyeMatrix(address()); }
-        /** Passes the {@code EyeMatrix} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public OVRLayerUnion.Buffer EyeMatrix(java.util.function.Consumer<OVRLayerEyeMatrix> consumer) { consumer.accept(EyeMatrix()); return this; }
         /** Returns a {@link OVRLayerEyeFovMultires} view of the {@code Multires} field. */
         @NativeType("ovrLayerEyeFovMultires")
         public OVRLayerEyeFovMultires Multires() { return OVRLayerUnion.nMultires(address()); }
-        /** Passes the {@code Multires} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public OVRLayerUnion.Buffer Multires(java.util.function.Consumer<OVRLayerEyeFovMultires> consumer) { consumer.accept(Multires()); return this; }
         /** Returns a {@link OVRLayerCylinder} view of the {@code Cylinder} field. */
         @NativeType("ovrLayerCylinder")
         public OVRLayerCylinder Cylinder() { return OVRLayerUnion.nCylinder(address()); }
-        /** Passes the {@code Cylinder} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public OVRLayerUnion.Buffer Cylinder(java.util.function.Consumer<OVRLayerCylinder> consumer) { consumer.accept(Cylinder()); return this; }
         /** Returns a {@link OVRLayerCube} view of the {@code Cube} field. */
         @NativeType("ovrLayerCube")
         public OVRLayerCube Cube() { return OVRLayerUnion.nCube(address()); }
-        /** Passes the {@code Cube} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public OVRLayerUnion.Buffer Cube(java.util.function.Consumer<OVRLayerCube> consumer) { consumer.accept(Cube()); return this; }
         /** Returns a {@link OVRLayerQuad} view of the {@code Quad} field. */
         @NativeType("ovrLayerQuad")
         public OVRLayerQuad Quad() { return OVRLayerUnion.nQuad(address()); }
-        /** Passes the {@code Quad} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public OVRLayerUnion.Buffer Quad(java.util.function.Consumer<OVRLayerQuad> consumer) { consumer.accept(Quad()); return this; }
 
         /** Copies the specified {@link OVRLayerHeader} to the {@code Header} field. */
         public OVRLayerUnion.Buffer Header(@NativeType("ovrLayerHeader") OVRLayerHeader value) { OVRLayerUnion.nHeader(address(), value); return this; }
+        /** Passes the {@code Header} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerUnion.Buffer Header(java.util.function.Consumer<OVRLayerHeader> consumer) { consumer.accept(Header()); return this; }
         /** Copies the specified {@link OVRLayerEyeFov} to the {@code EyeFov} field. */
         public OVRLayerUnion.Buffer EyeFov(@NativeType("ovrLayerEyeFov") OVRLayerEyeFov value) { OVRLayerUnion.nEyeFov(address(), value); return this; }
+        /** Passes the {@code EyeFov} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerUnion.Buffer EyeFov(java.util.function.Consumer<OVRLayerEyeFov> consumer) { consumer.accept(EyeFov()); return this; }
         /** Copies the specified {@link OVRLayerEyeFovDepth} to the {@code EyeFovDepth} field. */
         public OVRLayerUnion.Buffer EyeFovDepth(@NativeType("ovrLayerEyeFovDepth") OVRLayerEyeFovDepth value) { OVRLayerUnion.nEyeFovDepth(address(), value); return this; }
+        /** Passes the {@code EyeFovDepth} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerUnion.Buffer EyeFovDepth(java.util.function.Consumer<OVRLayerEyeFovDepth> consumer) { consumer.accept(EyeFovDepth()); return this; }
         /** Copies the specified {@link OVRLayerEyeMatrix} to the {@code EyeMatrix} field. */
         public OVRLayerUnion.Buffer EyeMatrix(@NativeType("ovrLayerEyeMatrix") OVRLayerEyeMatrix value) { OVRLayerUnion.nEyeMatrix(address(), value); return this; }
+        /** Passes the {@code EyeMatrix} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerUnion.Buffer EyeMatrix(java.util.function.Consumer<OVRLayerEyeMatrix> consumer) { consumer.accept(EyeMatrix()); return this; }
         /** Copies the specified {@link OVRLayerEyeFovMultires} to the {@code Multires} field. */
         public OVRLayerUnion.Buffer Multires(@NativeType("ovrLayerEyeFovMultires") OVRLayerEyeFovMultires value) { OVRLayerUnion.nMultires(address(), value); return this; }
+        /** Passes the {@code Multires} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerUnion.Buffer Multires(java.util.function.Consumer<OVRLayerEyeFovMultires> consumer) { consumer.accept(Multires()); return this; }
         /** Copies the specified {@link OVRLayerCylinder} to the {@code Cylinder} field. */
         public OVRLayerUnion.Buffer Cylinder(@NativeType("ovrLayerCylinder") OVRLayerCylinder value) { OVRLayerUnion.nCylinder(address(), value); return this; }
+        /** Passes the {@code Cylinder} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerUnion.Buffer Cylinder(java.util.function.Consumer<OVRLayerCylinder> consumer) { consumer.accept(Cylinder()); return this; }
         /** Copies the specified {@link OVRLayerCube} to the {@code Cube} field. */
         public OVRLayerUnion.Buffer Cube(@NativeType("ovrLayerCube") OVRLayerCube value) { OVRLayerUnion.nCube(address(), value); return this; }
+        /** Passes the {@code Cube} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerUnion.Buffer Cube(java.util.function.Consumer<OVRLayerCube> consumer) { consumer.accept(Cube()); return this; }
         /** Copies the specified {@link OVRLayerQuad} to the {@code Quad} field. */
         public OVRLayerUnion.Buffer Quad(@NativeType("ovrLayerQuad") OVRLayerQuad value) { OVRLayerUnion.nQuad(address(), value); return this; }
+        /** Passes the {@code Quad} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerUnion.Buffer Quad(java.util.function.Consumer<OVRLayerQuad> consumer) { consumer.accept(Quad()); return this; }
 
     }
 

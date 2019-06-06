@@ -67,18 +67,18 @@ public class NkStyleText extends Struct implements NativeResource {
     /** Returns a {@link NkColor} view of the {@code color} field. */
     @NativeType("struct nk_color")
     public NkColor color() { return ncolor(address()); }
-    /** Passes the {@code color} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleText color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(color()); return this; }
     /** Returns a {@link NkVec2} view of the {@code padding} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 padding() { return npadding(address()); }
-    /** Passes the {@code padding} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleText padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(padding()); return this; }
 
     /** Copies the specified {@link NkColor} to the {@code color} field. */
     public NkStyleText color(@NativeType("struct nk_color") NkColor value) { ncolor(address(), value); return this; }
+    /** Passes the {@code color} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleText color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(color()); return this; }
     /** Copies the specified {@link NkVec2} to the {@code padding} field. */
     public NkStyleText padding(@NativeType("struct nk_vec2") NkVec2 value) { npadding(address(), value); return this; }
+    /** Passes the {@code padding} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleText padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(padding()); return this; }
 
     /** Initializes this struct with the specified values. */
     public NkStyleText set(
@@ -297,18 +297,18 @@ public class NkStyleText extends Struct implements NativeResource {
         /** Returns a {@link NkColor} view of the {@code color} field. */
         @NativeType("struct nk_color")
         public NkColor color() { return NkStyleText.ncolor(address()); }
-        /** Passes the {@code color} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleText.Buffer color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(color()); return this; }
         /** Returns a {@link NkVec2} view of the {@code padding} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 padding() { return NkStyleText.npadding(address()); }
-        /** Passes the {@code padding} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleText.Buffer padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(padding()); return this; }
 
         /** Copies the specified {@link NkColor} to the {@code color} field. */
         public NkStyleText.Buffer color(@NativeType("struct nk_color") NkColor value) { NkStyleText.ncolor(address(), value); return this; }
+        /** Passes the {@code color} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleText.Buffer color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(color()); return this; }
         /** Copies the specified {@link NkVec2} to the {@code padding} field. */
         public NkStyleText.Buffer padding(@NativeType("struct nk_vec2") NkVec2 value) { NkStyleText.npadding(address(), value); return this; }
+        /** Passes the {@code padding} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleText.Buffer padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(padding()); return this; }
 
     }
 

@@ -111,8 +111,6 @@ public class VkAccelerationStructureCreateInfoNV extends Struct implements Nativ
     public long compactedSize() { return ncompactedSize(address()); }
     /** Returns a {@link VkAccelerationStructureInfoNV} view of the {@code info} field. */
     public VkAccelerationStructureInfoNV info() { return ninfo(address()); }
-    /** Passes the {@code info} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkAccelerationStructureCreateInfoNV info(java.util.function.Consumer<VkAccelerationStructureInfoNV> consumer) { consumer.accept(info()); return this; }
 
     /** Sets the specified value to the {@code sType} field. */
     public VkAccelerationStructureCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -122,6 +120,8 @@ public class VkAccelerationStructureCreateInfoNV extends Struct implements Nativ
     public VkAccelerationStructureCreateInfoNV compactedSize(@NativeType("VkDeviceSize") long value) { ncompactedSize(address(), value); return this; }
     /** Copies the specified {@link VkAccelerationStructureInfoNV} to the {@code info} field. */
     public VkAccelerationStructureCreateInfoNV info(VkAccelerationStructureInfoNV value) { ninfo(address(), value); return this; }
+    /** Passes the {@code info} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkAccelerationStructureCreateInfoNV info(java.util.function.Consumer<VkAccelerationStructureInfoNV> consumer) { consumer.accept(info()); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkAccelerationStructureCreateInfoNV set(
@@ -381,8 +381,6 @@ public class VkAccelerationStructureCreateInfoNV extends Struct implements Nativ
         public long compactedSize() { return VkAccelerationStructureCreateInfoNV.ncompactedSize(address()); }
         /** Returns a {@link VkAccelerationStructureInfoNV} view of the {@code info} field. */
         public VkAccelerationStructureInfoNV info() { return VkAccelerationStructureCreateInfoNV.ninfo(address()); }
-        /** Passes the {@code info} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkAccelerationStructureCreateInfoNV.Buffer info(java.util.function.Consumer<VkAccelerationStructureInfoNV> consumer) { consumer.accept(info()); return this; }
 
         /** Sets the specified value to the {@code sType} field. */
         public VkAccelerationStructureCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkAccelerationStructureCreateInfoNV.nsType(address(), value); return this; }
@@ -392,6 +390,8 @@ public class VkAccelerationStructureCreateInfoNV extends Struct implements Nativ
         public VkAccelerationStructureCreateInfoNV.Buffer compactedSize(@NativeType("VkDeviceSize") long value) { VkAccelerationStructureCreateInfoNV.ncompactedSize(address(), value); return this; }
         /** Copies the specified {@link VkAccelerationStructureInfoNV} to the {@code info} field. */
         public VkAccelerationStructureCreateInfoNV.Buffer info(VkAccelerationStructureInfoNV value) { VkAccelerationStructureCreateInfoNV.ninfo(address(), value); return this; }
+        /** Passes the {@code info} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkAccelerationStructureCreateInfoNV.Buffer info(java.util.function.Consumer<VkAccelerationStructureInfoNV> consumer) { consumer.accept(info()); return this; }
 
     }
 

@@ -122,8 +122,6 @@ public class VkImageFormatProperties extends Struct implements NativeResource {
 
     /** Returns a {@link VkExtent3D} view of the {@code maxExtent} field. */
     public VkExtent3D maxExtent() { return nmaxExtent(address()); }
-    /** Passes the {@code maxExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkImageFormatProperties maxExtent(java.util.function.Consumer<VkExtent3D> consumer) { consumer.accept(maxExtent()); return this; }
     /** Returns the value of the {@code maxMipLevels} field. */
     @NativeType("uint32_t")
     public int maxMipLevels() { return nmaxMipLevels(address()); }
@@ -331,8 +329,6 @@ public class VkImageFormatProperties extends Struct implements NativeResource {
 
         /** Returns a {@link VkExtent3D} view of the {@code maxExtent} field. */
         public VkExtent3D maxExtent() { return VkImageFormatProperties.nmaxExtent(address()); }
-        /** Passes the {@code maxExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkImageFormatProperties.Buffer maxExtent(java.util.function.Consumer<VkExtent3D> consumer) { consumer.accept(maxExtent()); return this; }
         /** Returns the value of the {@code maxMipLevels} field. */
         @NativeType("uint32_t")
         public int maxMipLevels() { return VkImageFormatProperties.nmaxMipLevels(address()); }

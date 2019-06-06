@@ -96,8 +96,6 @@ public class VkMultisamplePropertiesEXT extends Struct implements NativeResource
     public long pNext() { return npNext(address()); }
     /** Returns a {@link VkExtent2D} view of the {@code maxSampleLocationGridSize} field. */
     public VkExtent2D maxSampleLocationGridSize() { return nmaxSampleLocationGridSize(address()); }
-    /** Passes the {@code maxSampleLocationGridSize} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkMultisamplePropertiesEXT maxSampleLocationGridSize(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(maxSampleLocationGridSize()); return this; }
 
     /** Sets the specified value to the {@code sType} field. */
     public VkMultisamplePropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -328,8 +326,6 @@ public class VkMultisamplePropertiesEXT extends Struct implements NativeResource
         public long pNext() { return VkMultisamplePropertiesEXT.npNext(address()); }
         /** Returns a {@link VkExtent2D} view of the {@code maxSampleLocationGridSize} field. */
         public VkExtent2D maxSampleLocationGridSize() { return VkMultisamplePropertiesEXT.nmaxSampleLocationGridSize(address()); }
-        /** Passes the {@code maxSampleLocationGridSize} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkMultisamplePropertiesEXT.Buffer maxSampleLocationGridSize(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(maxSampleLocationGridSize()); return this; }
 
         /** Sets the specified value to the {@code sType} field. */
         public VkMultisamplePropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkMultisamplePropertiesEXT.nsType(address(), value); return this; }

@@ -71,8 +71,6 @@ public class NkClipboard extends Struct implements NativeResource {
     /** Returns a {@link NkHandle} view of the {@code userdata} field. */
     @NativeType("nk_handle")
     public NkHandle userdata() { return nuserdata(address()); }
-    /** Passes the {@code userdata} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkClipboard userdata(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(userdata()); return this; }
     /** Returns the value of the {@code paste} field. */
     @Nullable
     @NativeType("nk_plugin_paste")
@@ -84,6 +82,8 @@ public class NkClipboard extends Struct implements NativeResource {
 
     /** Copies the specified {@link NkHandle} to the {@code userdata} field. */
     public NkClipboard userdata(@NativeType("nk_handle") NkHandle value) { nuserdata(address(), value); return this; }
+    /** Passes the {@code userdata} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkClipboard userdata(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(userdata()); return this; }
     /** Sets the specified value to the {@code paste} field. */
     public NkClipboard paste(@Nullable @NativeType("nk_plugin_paste") NkPluginPasteI value) { npaste(address(), value); return this; }
     /** Sets the specified value to the {@code copy} field. */
@@ -312,8 +312,6 @@ public class NkClipboard extends Struct implements NativeResource {
         /** Returns a {@link NkHandle} view of the {@code userdata} field. */
         @NativeType("nk_handle")
         public NkHandle userdata() { return NkClipboard.nuserdata(address()); }
-        /** Passes the {@code userdata} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkClipboard.Buffer userdata(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(userdata()); return this; }
         /** Returns the value of the {@code paste} field. */
         @Nullable
         @NativeType("nk_plugin_paste")
@@ -325,6 +323,8 @@ public class NkClipboard extends Struct implements NativeResource {
 
         /** Copies the specified {@link NkHandle} to the {@code userdata} field. */
         public NkClipboard.Buffer userdata(@NativeType("nk_handle") NkHandle value) { NkClipboard.nuserdata(address(), value); return this; }
+        /** Passes the {@code userdata} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkClipboard.Buffer userdata(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(userdata()); return this; }
         /** Sets the specified value to the {@code paste} field. */
         public NkClipboard.Buffer paste(@Nullable @NativeType("nk_plugin_paste") NkPluginPasteI value) { NkClipboard.npaste(address(), value); return this; }
         /** Sets the specified value to the {@code copy} field. */

@@ -104,37 +104,37 @@ public class OVRLayerQuad extends Struct implements NativeResource {
     /** Returns a {@link OVRLayerHeader} view of the {@code Header} field. */
     @NativeType("ovrLayerHeader")
     public OVRLayerHeader Header() { return nHeader(address()); }
-    /** Passes the {@code Header} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public OVRLayerQuad Header(java.util.function.Consumer<OVRLayerHeader> consumer) { consumer.accept(Header()); return this; }
     /** Returns the value of the {@code ColorTexture} field. */
     @NativeType("ovrTextureSwapChain")
     public long ColorTexture() { return nColorTexture(address()); }
     /** Returns a {@link OVRRecti} view of the {@code Viewport} field. */
     @NativeType("ovrRecti")
     public OVRRecti Viewport() { return nViewport(address()); }
-    /** Passes the {@code Viewport} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public OVRLayerQuad Viewport(java.util.function.Consumer<OVRRecti> consumer) { consumer.accept(Viewport()); return this; }
     /** Returns a {@link OVRPosef} view of the {@code QuadPoseCenter} field. */
     @NativeType("ovrPosef")
     public OVRPosef QuadPoseCenter() { return nQuadPoseCenter(address()); }
-    /** Passes the {@code QuadPoseCenter} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public OVRLayerQuad QuadPoseCenter(java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(QuadPoseCenter()); return this; }
     /** Returns a {@link OVRVector2f} view of the {@code QuadSize} field. */
     @NativeType("ovrVector2f")
     public OVRVector2f QuadSize() { return nQuadSize(address()); }
-    /** Passes the {@code QuadSize} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public OVRLayerQuad QuadSize(java.util.function.Consumer<OVRVector2f> consumer) { consumer.accept(QuadSize()); return this; }
 
     /** Copies the specified {@link OVRLayerHeader} to the {@code Header} field. */
     public OVRLayerQuad Header(@NativeType("ovrLayerHeader") OVRLayerHeader value) { nHeader(address(), value); return this; }
+    /** Passes the {@code Header} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerQuad Header(java.util.function.Consumer<OVRLayerHeader> consumer) { consumer.accept(Header()); return this; }
     /** Sets the specified value to the {@code ColorTexture} field. */
     public OVRLayerQuad ColorTexture(@NativeType("ovrTextureSwapChain") long value) { nColorTexture(address(), value); return this; }
     /** Copies the specified {@link OVRRecti} to the {@code Viewport} field. */
     public OVRLayerQuad Viewport(@NativeType("ovrRecti") OVRRecti value) { nViewport(address(), value); return this; }
+    /** Passes the {@code Viewport} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerQuad Viewport(java.util.function.Consumer<OVRRecti> consumer) { consumer.accept(Viewport()); return this; }
     /** Copies the specified {@link OVRPosef} to the {@code QuadPoseCenter} field. */
     public OVRLayerQuad QuadPoseCenter(@NativeType("ovrPosef") OVRPosef value) { nQuadPoseCenter(address(), value); return this; }
+    /** Passes the {@code QuadPoseCenter} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerQuad QuadPoseCenter(java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(QuadPoseCenter()); return this; }
     /** Copies the specified {@link OVRVector2f} to the {@code QuadSize} field. */
     public OVRLayerQuad QuadSize(@NativeType("ovrVector2f") OVRVector2f value) { nQuadSize(address(), value); return this; }
+    /** Passes the {@code QuadSize} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerQuad QuadSize(java.util.function.Consumer<OVRVector2f> consumer) { consumer.accept(QuadSize()); return this; }
 
     /** Initializes this struct with the specified values. */
     public OVRLayerQuad set(
@@ -392,37 +392,37 @@ public class OVRLayerQuad extends Struct implements NativeResource {
         /** Returns a {@link OVRLayerHeader} view of the {@code Header} field. */
         @NativeType("ovrLayerHeader")
         public OVRLayerHeader Header() { return OVRLayerQuad.nHeader(address()); }
-        /** Passes the {@code Header} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public OVRLayerQuad.Buffer Header(java.util.function.Consumer<OVRLayerHeader> consumer) { consumer.accept(Header()); return this; }
         /** Returns the value of the {@code ColorTexture} field. */
         @NativeType("ovrTextureSwapChain")
         public long ColorTexture() { return OVRLayerQuad.nColorTexture(address()); }
         /** Returns a {@link OVRRecti} view of the {@code Viewport} field. */
         @NativeType("ovrRecti")
         public OVRRecti Viewport() { return OVRLayerQuad.nViewport(address()); }
-        /** Passes the {@code Viewport} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public OVRLayerQuad.Buffer Viewport(java.util.function.Consumer<OVRRecti> consumer) { consumer.accept(Viewport()); return this; }
         /** Returns a {@link OVRPosef} view of the {@code QuadPoseCenter} field. */
         @NativeType("ovrPosef")
         public OVRPosef QuadPoseCenter() { return OVRLayerQuad.nQuadPoseCenter(address()); }
-        /** Passes the {@code QuadPoseCenter} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public OVRLayerQuad.Buffer QuadPoseCenter(java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(QuadPoseCenter()); return this; }
         /** Returns a {@link OVRVector2f} view of the {@code QuadSize} field. */
         @NativeType("ovrVector2f")
         public OVRVector2f QuadSize() { return OVRLayerQuad.nQuadSize(address()); }
-        /** Passes the {@code QuadSize} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public OVRLayerQuad.Buffer QuadSize(java.util.function.Consumer<OVRVector2f> consumer) { consumer.accept(QuadSize()); return this; }
 
         /** Copies the specified {@link OVRLayerHeader} to the {@code Header} field. */
         public OVRLayerQuad.Buffer Header(@NativeType("ovrLayerHeader") OVRLayerHeader value) { OVRLayerQuad.nHeader(address(), value); return this; }
+        /** Passes the {@code Header} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerQuad.Buffer Header(java.util.function.Consumer<OVRLayerHeader> consumer) { consumer.accept(Header()); return this; }
         /** Sets the specified value to the {@code ColorTexture} field. */
         public OVRLayerQuad.Buffer ColorTexture(@NativeType("ovrTextureSwapChain") long value) { OVRLayerQuad.nColorTexture(address(), value); return this; }
         /** Copies the specified {@link OVRRecti} to the {@code Viewport} field. */
         public OVRLayerQuad.Buffer Viewport(@NativeType("ovrRecti") OVRRecti value) { OVRLayerQuad.nViewport(address(), value); return this; }
+        /** Passes the {@code Viewport} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerQuad.Buffer Viewport(java.util.function.Consumer<OVRRecti> consumer) { consumer.accept(Viewport()); return this; }
         /** Copies the specified {@link OVRPosef} to the {@code QuadPoseCenter} field. */
         public OVRLayerQuad.Buffer QuadPoseCenter(@NativeType("ovrPosef") OVRPosef value) { OVRLayerQuad.nQuadPoseCenter(address(), value); return this; }
+        /** Passes the {@code QuadPoseCenter} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerQuad.Buffer QuadPoseCenter(java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(QuadPoseCenter()); return this; }
         /** Copies the specified {@link OVRVector2f} to the {@code QuadSize} field. */
         public OVRLayerQuad.Buffer QuadSize(@NativeType("ovrVector2f") OVRVector2f value) { OVRLayerQuad.nQuadSize(address(), value); return this; }
+        /** Passes the {@code QuadSize} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerQuad.Buffer QuadSize(java.util.function.Consumer<OVRVector2f> consumer) { consumer.accept(QuadSize()); return this; }
 
     }
 

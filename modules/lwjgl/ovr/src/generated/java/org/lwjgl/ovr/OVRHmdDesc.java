@@ -205,8 +205,6 @@ public class OVRHmdDesc extends Struct implements NativeResource {
     /** Returns a {@link OVRSizei} view of the {@code Resolution} field. */
     @NativeType("ovrSizei")
     public OVRSizei Resolution() { return nResolution(address()); }
-    /** Passes the {@code Resolution} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public OVRHmdDesc Resolution(java.util.function.Consumer<OVRSizei> consumer) { consumer.accept(Resolution()); return this; }
     /** Returns the value of the {@code DisplayRefreshRate} field. */
     public float DisplayRefreshRate() { return nDisplayRefreshRate(address()); }
 

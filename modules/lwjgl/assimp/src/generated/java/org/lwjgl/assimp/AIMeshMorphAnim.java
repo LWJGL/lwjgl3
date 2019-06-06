@@ -84,8 +84,6 @@ public class AIMeshMorphAnim extends Struct implements NativeResource {
     /** Returns a {@link AIString} view of the {@code mName} field. */
     @NativeType("struct aiString")
     public AIString mName() { return nmName(address()); }
-    /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public AIMeshMorphAnim mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
     /** Returns the value of the {@code mNumKeys} field. */
     @NativeType("unsigned int")
     public int mNumKeys() { return nmNumKeys(address()); }
@@ -95,6 +93,8 @@ public class AIMeshMorphAnim extends Struct implements NativeResource {
 
     /** Copies the specified {@link AIString} to the {@code mName} field. */
     public AIMeshMorphAnim mName(@NativeType("struct aiString") AIString value) { nmName(address(), value); return this; }
+    /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public AIMeshMorphAnim mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
     /** Sets the address of the specified {@link AIMeshMorphKey.Buffer} to the {@code mKeys} field. */
     public AIMeshMorphAnim mKeys(@NativeType("struct aiMeshMorphKey *") AIMeshMorphKey.Buffer value) { nmKeys(address(), value); return this; }
 
@@ -343,8 +343,6 @@ public class AIMeshMorphAnim extends Struct implements NativeResource {
         /** Returns a {@link AIString} view of the {@code mName} field. */
         @NativeType("struct aiString")
         public AIString mName() { return AIMeshMorphAnim.nmName(address()); }
-        /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public AIMeshMorphAnim.Buffer mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
         /** Returns the value of the {@code mNumKeys} field. */
         @NativeType("unsigned int")
         public int mNumKeys() { return AIMeshMorphAnim.nmNumKeys(address()); }
@@ -354,6 +352,8 @@ public class AIMeshMorphAnim extends Struct implements NativeResource {
 
         /** Copies the specified {@link AIString} to the {@code mName} field. */
         public AIMeshMorphAnim.Buffer mName(@NativeType("struct aiString") AIString value) { AIMeshMorphAnim.nmName(address(), value); return this; }
+        /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public AIMeshMorphAnim.Buffer mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
         /** Sets the address of the specified {@link AIMeshMorphKey.Buffer} to the {@code mKeys} field. */
         public AIMeshMorphAnim.Buffer mKeys(@NativeType("struct aiMeshMorphKey *") AIMeshMorphKey.Buffer value) { AIMeshMorphAnim.nmKeys(address(), value); return this; }
 

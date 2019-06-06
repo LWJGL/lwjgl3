@@ -67,18 +67,18 @@ public class HmdRect2 extends Struct implements NativeResource {
     /** Returns a {@link HmdVector2} view of the {@code vTopLeft} field. */
     @NativeType("HmdVector2_t")
     public HmdVector2 vTopLeft() { return nvTopLeft(address()); }
-    /** Passes the {@code vTopLeft} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public HmdRect2 vTopLeft(java.util.function.Consumer<HmdVector2> consumer) { consumer.accept(vTopLeft()); return this; }
     /** Returns a {@link HmdVector2} view of the {@code vBottomRight} field. */
     @NativeType("HmdVector2_t")
     public HmdVector2 vBottomRight() { return nvBottomRight(address()); }
-    /** Passes the {@code vBottomRight} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public HmdRect2 vBottomRight(java.util.function.Consumer<HmdVector2> consumer) { consumer.accept(vBottomRight()); return this; }
 
     /** Copies the specified {@link HmdVector2} to the {@code vTopLeft} field. */
     public HmdRect2 vTopLeft(@NativeType("HmdVector2_t") HmdVector2 value) { nvTopLeft(address(), value); return this; }
+    /** Passes the {@code vTopLeft} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public HmdRect2 vTopLeft(java.util.function.Consumer<HmdVector2> consumer) { consumer.accept(vTopLeft()); return this; }
     /** Copies the specified {@link HmdVector2} to the {@code vBottomRight} field. */
     public HmdRect2 vBottomRight(@NativeType("HmdVector2_t") HmdVector2 value) { nvBottomRight(address(), value); return this; }
+    /** Passes the {@code vBottomRight} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public HmdRect2 vBottomRight(java.util.function.Consumer<HmdVector2> consumer) { consumer.accept(vBottomRight()); return this; }
 
     /** Initializes this struct with the specified values. */
     public HmdRect2 set(
@@ -297,18 +297,18 @@ public class HmdRect2 extends Struct implements NativeResource {
         /** Returns a {@link HmdVector2} view of the {@code vTopLeft} field. */
         @NativeType("HmdVector2_t")
         public HmdVector2 vTopLeft() { return HmdRect2.nvTopLeft(address()); }
-        /** Passes the {@code vTopLeft} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public HmdRect2.Buffer vTopLeft(java.util.function.Consumer<HmdVector2> consumer) { consumer.accept(vTopLeft()); return this; }
         /** Returns a {@link HmdVector2} view of the {@code vBottomRight} field. */
         @NativeType("HmdVector2_t")
         public HmdVector2 vBottomRight() { return HmdRect2.nvBottomRight(address()); }
-        /** Passes the {@code vBottomRight} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public HmdRect2.Buffer vBottomRight(java.util.function.Consumer<HmdVector2> consumer) { consumer.accept(vBottomRight()); return this; }
 
         /** Copies the specified {@link HmdVector2} to the {@code vTopLeft} field. */
         public HmdRect2.Buffer vTopLeft(@NativeType("HmdVector2_t") HmdVector2 value) { HmdRect2.nvTopLeft(address(), value); return this; }
+        /** Passes the {@code vTopLeft} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public HmdRect2.Buffer vTopLeft(java.util.function.Consumer<HmdVector2> consumer) { consumer.accept(vTopLeft()); return this; }
         /** Copies the specified {@link HmdVector2} to the {@code vBottomRight} field. */
         public HmdRect2.Buffer vBottomRight(@NativeType("HmdVector2_t") HmdVector2 value) { HmdRect2.nvBottomRight(address(), value); return this; }
+        /** Passes the {@code vBottomRight} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public HmdRect2.Buffer vBottomRight(java.util.function.Consumer<HmdVector2> consumer) { consumer.accept(vBottomRight()); return this; }
 
     }
 

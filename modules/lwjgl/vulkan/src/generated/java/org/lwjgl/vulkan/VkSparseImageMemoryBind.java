@@ -122,16 +122,10 @@ public class VkSparseImageMemoryBind extends Struct implements NativeResource {
 
     /** Returns a {@link VkImageSubresource} view of the {@code subresource} field. */
     public VkImageSubresource subresource() { return nsubresource(address()); }
-    /** Passes the {@code subresource} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkSparseImageMemoryBind subresource(java.util.function.Consumer<VkImageSubresource> consumer) { consumer.accept(subresource()); return this; }
     /** Returns a {@link VkOffset3D} view of the {@code offset} field. */
     public VkOffset3D offset() { return noffset(address()); }
-    /** Passes the {@code offset} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkSparseImageMemoryBind offset(java.util.function.Consumer<VkOffset3D> consumer) { consumer.accept(offset()); return this; }
     /** Returns a {@link VkExtent3D} view of the {@code extent} field. */
     public VkExtent3D extent() { return nextent(address()); }
-    /** Passes the {@code extent} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkSparseImageMemoryBind extent(java.util.function.Consumer<VkExtent3D> consumer) { consumer.accept(extent()); return this; }
     /** Returns the value of the {@code memory} field. */
     @NativeType("VkDeviceMemory")
     public long memory() { return nmemory(address()); }
@@ -144,10 +138,16 @@ public class VkSparseImageMemoryBind extends Struct implements NativeResource {
 
     /** Copies the specified {@link VkImageSubresource} to the {@code subresource} field. */
     public VkSparseImageMemoryBind subresource(VkImageSubresource value) { nsubresource(address(), value); return this; }
+    /** Passes the {@code subresource} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkSparseImageMemoryBind subresource(java.util.function.Consumer<VkImageSubresource> consumer) { consumer.accept(subresource()); return this; }
     /** Copies the specified {@link VkOffset3D} to the {@code offset} field. */
     public VkSparseImageMemoryBind offset(VkOffset3D value) { noffset(address(), value); return this; }
+    /** Passes the {@code offset} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkSparseImageMemoryBind offset(java.util.function.Consumer<VkOffset3D> consumer) { consumer.accept(offset()); return this; }
     /** Copies the specified {@link VkExtent3D} to the {@code extent} field. */
     public VkSparseImageMemoryBind extent(VkExtent3D value) { nextent(address(), value); return this; }
+    /** Passes the {@code extent} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkSparseImageMemoryBind extent(java.util.function.Consumer<VkExtent3D> consumer) { consumer.accept(extent()); return this; }
     /** Sets the specified value to the {@code memory} field. */
     public VkSparseImageMemoryBind memory(@NativeType("VkDeviceMemory") long value) { nmemory(address(), value); return this; }
     /** Sets the specified value to the {@code memoryOffset} field. */
@@ -395,16 +395,10 @@ public class VkSparseImageMemoryBind extends Struct implements NativeResource {
 
         /** Returns a {@link VkImageSubresource} view of the {@code subresource} field. */
         public VkImageSubresource subresource() { return VkSparseImageMemoryBind.nsubresource(address()); }
-        /** Passes the {@code subresource} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkSparseImageMemoryBind.Buffer subresource(java.util.function.Consumer<VkImageSubresource> consumer) { consumer.accept(subresource()); return this; }
         /** Returns a {@link VkOffset3D} view of the {@code offset} field. */
         public VkOffset3D offset() { return VkSparseImageMemoryBind.noffset(address()); }
-        /** Passes the {@code offset} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkSparseImageMemoryBind.Buffer offset(java.util.function.Consumer<VkOffset3D> consumer) { consumer.accept(offset()); return this; }
         /** Returns a {@link VkExtent3D} view of the {@code extent} field. */
         public VkExtent3D extent() { return VkSparseImageMemoryBind.nextent(address()); }
-        /** Passes the {@code extent} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkSparseImageMemoryBind.Buffer extent(java.util.function.Consumer<VkExtent3D> consumer) { consumer.accept(extent()); return this; }
         /** Returns the value of the {@code memory} field. */
         @NativeType("VkDeviceMemory")
         public long memory() { return VkSparseImageMemoryBind.nmemory(address()); }
@@ -417,10 +411,16 @@ public class VkSparseImageMemoryBind extends Struct implements NativeResource {
 
         /** Copies the specified {@link VkImageSubresource} to the {@code subresource} field. */
         public VkSparseImageMemoryBind.Buffer subresource(VkImageSubresource value) { VkSparseImageMemoryBind.nsubresource(address(), value); return this; }
+        /** Passes the {@code subresource} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkSparseImageMemoryBind.Buffer subresource(java.util.function.Consumer<VkImageSubresource> consumer) { consumer.accept(subresource()); return this; }
         /** Copies the specified {@link VkOffset3D} to the {@code offset} field. */
         public VkSparseImageMemoryBind.Buffer offset(VkOffset3D value) { VkSparseImageMemoryBind.noffset(address(), value); return this; }
+        /** Passes the {@code offset} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkSparseImageMemoryBind.Buffer offset(java.util.function.Consumer<VkOffset3D> consumer) { consumer.accept(offset()); return this; }
         /** Copies the specified {@link VkExtent3D} to the {@code extent} field. */
         public VkSparseImageMemoryBind.Buffer extent(VkExtent3D value) { VkSparseImageMemoryBind.nextent(address(), value); return this; }
+        /** Passes the {@code extent} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkSparseImageMemoryBind.Buffer extent(java.util.function.Consumer<VkExtent3D> consumer) { consumer.accept(extent()); return this; }
         /** Sets the specified value to the {@code memory} field. */
         public VkSparseImageMemoryBind.Buffer memory(@NativeType("VkDeviceMemory") long value) { VkSparseImageMemoryBind.nmemory(address(), value); return this; }
         /** Sets the specified value to the {@code memoryOffset} field. */

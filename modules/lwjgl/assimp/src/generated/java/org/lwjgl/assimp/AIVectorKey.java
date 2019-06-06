@@ -78,13 +78,13 @@ public class AIVectorKey extends Struct implements NativeResource {
     /** Returns a {@link AIVector3D} view of the {@code mValue} field. */
     @NativeType("struct aiVector3D")
     public AIVector3D mValue() { return nmValue(address()); }
-    /** Passes the {@code mValue} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public AIVectorKey mValue(java.util.function.Consumer<AIVector3D> consumer) { consumer.accept(mValue()); return this; }
 
     /** Sets the specified value to the {@code mTime} field. */
     public AIVectorKey mTime(double value) { nmTime(address(), value); return this; }
     /** Copies the specified {@link AIVector3D} to the {@code mValue} field. */
     public AIVectorKey mValue(@NativeType("struct aiVector3D") AIVector3D value) { nmValue(address(), value); return this; }
+    /** Passes the {@code mValue} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public AIVectorKey mValue(java.util.function.Consumer<AIVector3D> consumer) { consumer.accept(mValue()); return this; }
 
     /** Initializes this struct with the specified values. */
     public AIVectorKey set(
@@ -305,13 +305,13 @@ public class AIVectorKey extends Struct implements NativeResource {
         /** Returns a {@link AIVector3D} view of the {@code mValue} field. */
         @NativeType("struct aiVector3D")
         public AIVector3D mValue() { return AIVectorKey.nmValue(address()); }
-        /** Passes the {@code mValue} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public AIVectorKey.Buffer mValue(java.util.function.Consumer<AIVector3D> consumer) { consumer.accept(mValue()); return this; }
 
         /** Sets the specified value to the {@code mTime} field. */
         public AIVectorKey.Buffer mTime(double value) { AIVectorKey.nmTime(address(), value); return this; }
         /** Copies the specified {@link AIVector3D} to the {@code mValue} field. */
         public AIVectorKey.Buffer mValue(@NativeType("struct aiVector3D") AIVector3D value) { AIVectorKey.nmValue(address(), value); return this; }
+        /** Passes the {@code mValue} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public AIVectorKey.Buffer mValue(java.util.function.Consumer<AIVector3D> consumer) { consumer.accept(mValue()); return this; }
 
     }
 

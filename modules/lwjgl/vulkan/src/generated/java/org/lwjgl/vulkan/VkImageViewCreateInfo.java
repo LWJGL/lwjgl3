@@ -220,12 +220,8 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
     public int format() { return nformat(address()); }
     /** Returns a {@link VkComponentMapping} view of the {@code components} field. */
     public VkComponentMapping components() { return ncomponents(address()); }
-    /** Passes the {@code components} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkImageViewCreateInfo components(java.util.function.Consumer<VkComponentMapping> consumer) { consumer.accept(components()); return this; }
     /** Returns a {@link VkImageSubresourceRange} view of the {@code subresourceRange} field. */
     public VkImageSubresourceRange subresourceRange() { return nsubresourceRange(address()); }
-    /** Passes the {@code subresourceRange} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkImageViewCreateInfo subresourceRange(java.util.function.Consumer<VkImageSubresourceRange> consumer) { consumer.accept(subresourceRange()); return this; }
 
     /** Sets the specified value to the {@code sType} field. */
     public VkImageViewCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -241,8 +237,12 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
     public VkImageViewCreateInfo format(@NativeType("VkFormat") int value) { nformat(address(), value); return this; }
     /** Copies the specified {@link VkComponentMapping} to the {@code components} field. */
     public VkImageViewCreateInfo components(VkComponentMapping value) { ncomponents(address(), value); return this; }
+    /** Passes the {@code components} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkImageViewCreateInfo components(java.util.function.Consumer<VkComponentMapping> consumer) { consumer.accept(components()); return this; }
     /** Copies the specified {@link VkImageSubresourceRange} to the {@code subresourceRange} field. */
     public VkImageViewCreateInfo subresourceRange(VkImageSubresourceRange value) { nsubresourceRange(address(), value); return this; }
+    /** Passes the {@code subresourceRange} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkImageViewCreateInfo subresourceRange(java.util.function.Consumer<VkImageSubresourceRange> consumer) { consumer.accept(subresourceRange()); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkImageViewCreateInfo set(
@@ -514,12 +514,8 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
         public int format() { return VkImageViewCreateInfo.nformat(address()); }
         /** Returns a {@link VkComponentMapping} view of the {@code components} field. */
         public VkComponentMapping components() { return VkImageViewCreateInfo.ncomponents(address()); }
-        /** Passes the {@code components} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkImageViewCreateInfo.Buffer components(java.util.function.Consumer<VkComponentMapping> consumer) { consumer.accept(components()); return this; }
         /** Returns a {@link VkImageSubresourceRange} view of the {@code subresourceRange} field. */
         public VkImageSubresourceRange subresourceRange() { return VkImageViewCreateInfo.nsubresourceRange(address()); }
-        /** Passes the {@code subresourceRange} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkImageViewCreateInfo.Buffer subresourceRange(java.util.function.Consumer<VkImageSubresourceRange> consumer) { consumer.accept(subresourceRange()); return this; }
 
         /** Sets the specified value to the {@code sType} field. */
         public VkImageViewCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkImageViewCreateInfo.nsType(address(), value); return this; }
@@ -535,8 +531,12 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
         public VkImageViewCreateInfo.Buffer format(@NativeType("VkFormat") int value) { VkImageViewCreateInfo.nformat(address(), value); return this; }
         /** Copies the specified {@link VkComponentMapping} to the {@code components} field. */
         public VkImageViewCreateInfo.Buffer components(VkComponentMapping value) { VkImageViewCreateInfo.ncomponents(address(), value); return this; }
+        /** Passes the {@code components} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkImageViewCreateInfo.Buffer components(java.util.function.Consumer<VkComponentMapping> consumer) { consumer.accept(components()); return this; }
         /** Copies the specified {@link VkImageSubresourceRange} to the {@code subresourceRange} field. */
         public VkImageViewCreateInfo.Buffer subresourceRange(VkImageSubresourceRange value) { VkImageViewCreateInfo.nsubresourceRange(address(), value); return this; }
+        /** Passes the {@code subresourceRange} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkImageViewCreateInfo.Buffer subresourceRange(java.util.function.Consumer<VkImageSubresourceRange> consumer) { consumer.accept(subresourceRange()); return this; }
 
     }
 

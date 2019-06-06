@@ -130,18 +130,12 @@ public class BGFXInit extends Struct implements NativeResource {
     /** Returns a {@link BGFXPlatformData} view of the {@code platformData} field. */
     @NativeType("bgfx_platform_data_t")
     public BGFXPlatformData platformData() { return nplatformData(address()); }
-    /** Passes the {@code platformData} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public BGFXInit platformData(java.util.function.Consumer<BGFXPlatformData> consumer) { consumer.accept(platformData()); return this; }
     /** Returns a {@link BGFXResolution} view of the {@code resolution} field. */
     @NativeType("bgfx_resolution_t")
     public BGFXResolution resolution() { return nresolution(address()); }
-    /** Passes the {@code resolution} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public BGFXInit resolution(java.util.function.Consumer<BGFXResolution> consumer) { consumer.accept(resolution()); return this; }
     /** Returns a {@link BGFXInitLimits} view of the {@code limits} field. */
     @NativeType("bgfx_init_limits_t")
     public BGFXInitLimits limits() { return nlimits(address()); }
-    /** Passes the {@code limits} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public BGFXInit limits(java.util.function.Consumer<BGFXInitLimits> consumer) { consumer.accept(limits()); return this; }
     /** Returns a {@link BGFXCallbackInterface} view of the struct pointed to by the {@code callback} field. */
     @Nullable
     @NativeType("bgfx_callback_interface_t *")
@@ -163,10 +157,16 @@ public class BGFXInit extends Struct implements NativeResource {
     public BGFXInit profile(@NativeType("bool") boolean value) { nprofile(address(), value); return this; }
     /** Copies the specified {@link BGFXPlatformData} to the {@code platformData} field. */
     public BGFXInit platformData(@NativeType("bgfx_platform_data_t") BGFXPlatformData value) { nplatformData(address(), value); return this; }
+    /** Passes the {@code platformData} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public BGFXInit platformData(java.util.function.Consumer<BGFXPlatformData> consumer) { consumer.accept(platformData()); return this; }
     /** Copies the specified {@link BGFXResolution} to the {@code resolution} field. */
     public BGFXInit resolution(@NativeType("bgfx_resolution_t") BGFXResolution value) { nresolution(address(), value); return this; }
+    /** Passes the {@code resolution} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public BGFXInit resolution(java.util.function.Consumer<BGFXResolution> consumer) { consumer.accept(resolution()); return this; }
     /** Copies the specified {@link BGFXInitLimits} to the {@code limits} field. */
     public BGFXInit limits(@NativeType("bgfx_init_limits_t") BGFXInitLimits value) { nlimits(address(), value); return this; }
+    /** Passes the {@code limits} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public BGFXInit limits(java.util.function.Consumer<BGFXInitLimits> consumer) { consumer.accept(limits()); return this; }
     /** Sets the address of the specified {@link BGFXCallbackInterface} to the {@code callback} field. */
     public BGFXInit callback(@Nullable @NativeType("bgfx_callback_interface_t *") BGFXCallbackInterface value) { ncallback(address(), value); return this; }
     /** Sets the address of the specified {@link BGFXAllocatorInterface} to the {@code allocator} field. */

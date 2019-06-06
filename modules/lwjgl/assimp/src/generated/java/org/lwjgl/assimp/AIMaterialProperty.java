@@ -110,8 +110,6 @@ public class AIMaterialProperty extends Struct {
     /** Returns a {@link AIString} view of the {@code mKey} field. */
     @NativeType("struct aiString")
     public AIString mKey() { return nmKey(address()); }
-    /** Passes the {@code mKey} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public AIMaterialProperty mKey(java.util.function.Consumer<AIString> consumer) { consumer.accept(mKey()); return this; }
     /** Returns the value of the {@code mSemantic} field. */
     @NativeType("unsigned int")
     public int mSemantic() { return nmSemantic(address()); }
@@ -213,8 +211,6 @@ public class AIMaterialProperty extends Struct {
         /** Returns a {@link AIString} view of the {@code mKey} field. */
         @NativeType("struct aiString")
         public AIString mKey() { return AIMaterialProperty.nmKey(address()); }
-        /** Passes the {@code mKey} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public AIMaterialProperty.Buffer mKey(java.util.function.Consumer<AIString> consumer) { consumer.accept(mKey()); return this; }
         /** Returns the value of the {@code mSemantic} field. */
         @NativeType("unsigned int")
         public int mSemantic() { return AIMaterialProperty.nmSemantic(address()); }

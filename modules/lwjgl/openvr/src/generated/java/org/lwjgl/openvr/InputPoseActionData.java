@@ -85,8 +85,6 @@ public class InputPoseActionData extends Struct implements NativeResource {
     /** Returns a {@link TrackedDevicePose} view of the {@code pose} field. */
     @NativeType("TrackedDevicePose_t")
     public TrackedDevicePose pose() { return npose(address()); }
-    /** Passes the {@code pose} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public InputPoseActionData pose(java.util.function.Consumer<TrackedDevicePose> consumer) { consumer.accept(pose()); return this; }
 
     // -----------------------------------
 
@@ -285,8 +283,6 @@ public class InputPoseActionData extends Struct implements NativeResource {
         /** Returns a {@link TrackedDevicePose} view of the {@code pose} field. */
         @NativeType("TrackedDevicePose_t")
         public TrackedDevicePose pose() { return InputPoseActionData.npose(address()); }
-        /** Passes the {@code pose} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public InputPoseActionData.Buffer pose(java.util.function.Consumer<TrackedDevicePose> consumer) { consumer.accept(pose()); return this; }
 
     }
 

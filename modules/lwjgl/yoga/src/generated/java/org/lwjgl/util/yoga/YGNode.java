@@ -236,6 +236,10 @@ public class YGNode extends Struct implements NativeResource {
     public YGNode resolvedDimensions(@NativeType("YGValue[2]") YGValue.Buffer value) { nresolvedDimensions(address(), value); return this; }
     /** Copies the specified {@link YGValue} at the specified index of the {@code resolvedDimensions} field. */
     public YGNode resolvedDimensions(int index, YGValue value) { nresolvedDimensions(address(), index, value); return this; }
+    /** Passes the {@code resolvedDimensions} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public YGNode resolvedDimensions(java.util.function.Consumer<YGValue.Buffer> consumer) { consumer.accept(resolvedDimensions()); return this; }
+    /** Passes the element at {@code index} of the {@code resolvedDimensions} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public YGNode resolvedDimensions(int index, java.util.function.Consumer<YGValue> consumer) { consumer.accept(resolvedDimensions(index)); return this; }
 
     /**
      * Copies the specified struct data to this struct.
@@ -637,6 +641,10 @@ public class YGNode extends Struct implements NativeResource {
         public YGNode.Buffer resolvedDimensions(@NativeType("YGValue[2]") YGValue.Buffer value) { YGNode.nresolvedDimensions(address(), value); return this; }
         /** Copies the specified {@link YGValue} at the specified index of the {@code resolvedDimensions} field. */
         public YGNode.Buffer resolvedDimensions(int index, YGValue value) { YGNode.nresolvedDimensions(address(), index, value); return this; }
+        /** Passes the {@code resolvedDimensions} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public YGNode.Buffer resolvedDimensions(java.util.function.Consumer<YGValue.Buffer> consumer) { consumer.accept(resolvedDimensions()); return this; }
+        /** Passes the element at {@code index} of the {@code resolvedDimensions} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public YGNode.Buffer resolvedDimensions(int index, java.util.function.Consumer<YGValue> consumer) { consumer.accept(resolvedDimensions(index)); return this; }
 
     }
 

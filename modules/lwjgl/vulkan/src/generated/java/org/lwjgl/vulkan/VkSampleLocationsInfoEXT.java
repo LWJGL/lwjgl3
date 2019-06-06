@@ -131,8 +131,6 @@ public class VkSampleLocationsInfoEXT extends Struct implements NativeResource {
     public int sampleLocationsPerPixel() { return nsampleLocationsPerPixel(address()); }
     /** Returns a {@link VkExtent2D} view of the {@code sampleLocationGridSize} field. */
     public VkExtent2D sampleLocationGridSize() { return nsampleLocationGridSize(address()); }
-    /** Passes the {@code sampleLocationGridSize} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkSampleLocationsInfoEXT sampleLocationGridSize(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(sampleLocationGridSize()); return this; }
     /** Returns the value of the {@code sampleLocationsCount} field. */
     @NativeType("uint32_t")
     public int sampleLocationsCount() { return nsampleLocationsCount(address()); }
@@ -149,6 +147,8 @@ public class VkSampleLocationsInfoEXT extends Struct implements NativeResource {
     public VkSampleLocationsInfoEXT sampleLocationsPerPixel(@NativeType("VkSampleCountFlagBits") int value) { nsampleLocationsPerPixel(address(), value); return this; }
     /** Copies the specified {@link VkExtent2D} to the {@code sampleLocationGridSize} field. */
     public VkSampleLocationsInfoEXT sampleLocationGridSize(VkExtent2D value) { nsampleLocationGridSize(address(), value); return this; }
+    /** Passes the {@code sampleLocationGridSize} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkSampleLocationsInfoEXT sampleLocationGridSize(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(sampleLocationGridSize()); return this; }
     /** Sets the address of the specified {@link VkSampleLocationEXT.Buffer} to the {@code pSampleLocations} field. */
     public VkSampleLocationsInfoEXT pSampleLocations(@Nullable @NativeType("VkSampleLocationEXT const *") VkSampleLocationEXT.Buffer value) { npSampleLocations(address(), value); return this; }
 
@@ -422,8 +422,6 @@ public class VkSampleLocationsInfoEXT extends Struct implements NativeResource {
         public int sampleLocationsPerPixel() { return VkSampleLocationsInfoEXT.nsampleLocationsPerPixel(address()); }
         /** Returns a {@link VkExtent2D} view of the {@code sampleLocationGridSize} field. */
         public VkExtent2D sampleLocationGridSize() { return VkSampleLocationsInfoEXT.nsampleLocationGridSize(address()); }
-        /** Passes the {@code sampleLocationGridSize} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkSampleLocationsInfoEXT.Buffer sampleLocationGridSize(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(sampleLocationGridSize()); return this; }
         /** Returns the value of the {@code sampleLocationsCount} field. */
         @NativeType("uint32_t")
         public int sampleLocationsCount() { return VkSampleLocationsInfoEXT.nsampleLocationsCount(address()); }
@@ -440,6 +438,8 @@ public class VkSampleLocationsInfoEXT extends Struct implements NativeResource {
         public VkSampleLocationsInfoEXT.Buffer sampleLocationsPerPixel(@NativeType("VkSampleCountFlagBits") int value) { VkSampleLocationsInfoEXT.nsampleLocationsPerPixel(address(), value); return this; }
         /** Copies the specified {@link VkExtent2D} to the {@code sampleLocationGridSize} field. */
         public VkSampleLocationsInfoEXT.Buffer sampleLocationGridSize(VkExtent2D value) { VkSampleLocationsInfoEXT.nsampleLocationGridSize(address(), value); return this; }
+        /** Passes the {@code sampleLocationGridSize} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkSampleLocationsInfoEXT.Buffer sampleLocationGridSize(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(sampleLocationGridSize()); return this; }
         /** Sets the address of the specified {@link VkSampleLocationEXT.Buffer} to the {@code pSampleLocations} field. */
         public VkSampleLocationsInfoEXT.Buffer pSampleLocations(@Nullable @NativeType("VkSampleLocationEXT const *") VkSampleLocationEXT.Buffer value) { VkSampleLocationsInfoEXT.npSampleLocations(address(), value); return this; }
 

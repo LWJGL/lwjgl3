@@ -76,8 +76,6 @@ public class NkImage extends Struct implements NativeResource {
     /** Returns a {@link NkHandle} view of the {@code handle} field. */
     @NativeType("nk_handle")
     public NkHandle handle() { return nhandle(address()); }
-    /** Passes the {@code handle} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkImage handle(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(handle()); return this; }
     /** Returns the value of the {@code w} field. */
     @NativeType("unsigned short")
     public short w() { return nw(address()); }
@@ -93,6 +91,8 @@ public class NkImage extends Struct implements NativeResource {
 
     /** Copies the specified {@link NkHandle} to the {@code handle} field. */
     public NkImage handle(@NativeType("nk_handle") NkHandle value) { nhandle(address(), value); return this; }
+    /** Passes the {@code handle} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkImage handle(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(handle()); return this; }
     /** Sets the specified value to the {@code w} field. */
     public NkImage w(@NativeType("unsigned short") short value) { nw(address(), value); return this; }
     /** Sets the specified value to the {@code h} field. */
@@ -342,8 +342,6 @@ public class NkImage extends Struct implements NativeResource {
         /** Returns a {@link NkHandle} view of the {@code handle} field. */
         @NativeType("nk_handle")
         public NkHandle handle() { return NkImage.nhandle(address()); }
-        /** Passes the {@code handle} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkImage.Buffer handle(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(handle()); return this; }
         /** Returns the value of the {@code w} field. */
         @NativeType("unsigned short")
         public short w() { return NkImage.nw(address()); }
@@ -359,6 +357,8 @@ public class NkImage extends Struct implements NativeResource {
 
         /** Copies the specified {@link NkHandle} to the {@code handle} field. */
         public NkImage.Buffer handle(@NativeType("nk_handle") NkHandle value) { NkImage.nhandle(address(), value); return this; }
+        /** Passes the {@code handle} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkImage.Buffer handle(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(handle()); return this; }
         /** Sets the specified value to the {@code w} field. */
         public NkImage.Buffer w(@NativeType("unsigned short") short value) { NkImage.nw(address(), value); return this; }
         /** Sets the specified value to the {@code h} field. */

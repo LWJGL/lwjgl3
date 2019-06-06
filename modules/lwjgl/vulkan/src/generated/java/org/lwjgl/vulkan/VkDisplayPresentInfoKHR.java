@@ -117,12 +117,8 @@ public class VkDisplayPresentInfoKHR extends Struct implements NativeResource {
     public long pNext() { return npNext(address()); }
     /** Returns a {@link VkRect2D} view of the {@code srcRect} field. */
     public VkRect2D srcRect() { return nsrcRect(address()); }
-    /** Passes the {@code srcRect} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkDisplayPresentInfoKHR srcRect(java.util.function.Consumer<VkRect2D> consumer) { consumer.accept(srcRect()); return this; }
     /** Returns a {@link VkRect2D} view of the {@code dstRect} field. */
     public VkRect2D dstRect() { return ndstRect(address()); }
-    /** Passes the {@code dstRect} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkDisplayPresentInfoKHR dstRect(java.util.function.Consumer<VkRect2D> consumer) { consumer.accept(dstRect()); return this; }
     /** Returns the value of the {@code persistent} field. */
     @NativeType("VkBool32")
     public boolean persistent() { return npersistent(address()) != 0; }
@@ -133,8 +129,12 @@ public class VkDisplayPresentInfoKHR extends Struct implements NativeResource {
     public VkDisplayPresentInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Copies the specified {@link VkRect2D} to the {@code srcRect} field. */
     public VkDisplayPresentInfoKHR srcRect(VkRect2D value) { nsrcRect(address(), value); return this; }
+    /** Passes the {@code srcRect} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkDisplayPresentInfoKHR srcRect(java.util.function.Consumer<VkRect2D> consumer) { consumer.accept(srcRect()); return this; }
     /** Copies the specified {@link VkRect2D} to the {@code dstRect} field. */
     public VkDisplayPresentInfoKHR dstRect(VkRect2D value) { ndstRect(address(), value); return this; }
+    /** Passes the {@code dstRect} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkDisplayPresentInfoKHR dstRect(java.util.function.Consumer<VkRect2D> consumer) { consumer.accept(dstRect()); return this; }
     /** Sets the specified value to the {@code persistent} field. */
     public VkDisplayPresentInfoKHR persistent(@NativeType("VkBool32") boolean value) { npersistent(address(), value ? 1 : 0); return this; }
 
@@ -378,12 +378,8 @@ public class VkDisplayPresentInfoKHR extends Struct implements NativeResource {
         public long pNext() { return VkDisplayPresentInfoKHR.npNext(address()); }
         /** Returns a {@link VkRect2D} view of the {@code srcRect} field. */
         public VkRect2D srcRect() { return VkDisplayPresentInfoKHR.nsrcRect(address()); }
-        /** Passes the {@code srcRect} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkDisplayPresentInfoKHR.Buffer srcRect(java.util.function.Consumer<VkRect2D> consumer) { consumer.accept(srcRect()); return this; }
         /** Returns a {@link VkRect2D} view of the {@code dstRect} field. */
         public VkRect2D dstRect() { return VkDisplayPresentInfoKHR.ndstRect(address()); }
-        /** Passes the {@code dstRect} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkDisplayPresentInfoKHR.Buffer dstRect(java.util.function.Consumer<VkRect2D> consumer) { consumer.accept(dstRect()); return this; }
         /** Returns the value of the {@code persistent} field. */
         @NativeType("VkBool32")
         public boolean persistent() { return VkDisplayPresentInfoKHR.npersistent(address()) != 0; }
@@ -394,8 +390,12 @@ public class VkDisplayPresentInfoKHR extends Struct implements NativeResource {
         public VkDisplayPresentInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkDisplayPresentInfoKHR.npNext(address(), value); return this; }
         /** Copies the specified {@link VkRect2D} to the {@code srcRect} field. */
         public VkDisplayPresentInfoKHR.Buffer srcRect(VkRect2D value) { VkDisplayPresentInfoKHR.nsrcRect(address(), value); return this; }
+        /** Passes the {@code srcRect} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkDisplayPresentInfoKHR.Buffer srcRect(java.util.function.Consumer<VkRect2D> consumer) { consumer.accept(srcRect()); return this; }
         /** Copies the specified {@link VkRect2D} to the {@code dstRect} field. */
         public VkDisplayPresentInfoKHR.Buffer dstRect(VkRect2D value) { VkDisplayPresentInfoKHR.ndstRect(address(), value); return this; }
+        /** Passes the {@code dstRect} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkDisplayPresentInfoKHR.Buffer dstRect(java.util.function.Consumer<VkRect2D> consumer) { consumer.accept(dstRect()); return this; }
         /** Sets the specified value to the {@code persistent} field. */
         public VkDisplayPresentInfoKHR.Buffer persistent(@NativeType("VkBool32") boolean value) { VkDisplayPresentInfoKHR.npersistent(address(), value ? 1 : 0); return this; }
 

@@ -168,26 +168,18 @@ public class AILight extends Struct {
     /** Returns a {@link AIString} view of the {@code mName} field. */
     @NativeType("struct aiString")
     public AIString mName() { return nmName(address()); }
-    /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public AILight mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
     /** Returns the value of the {@code mType} field. */
     @NativeType("aiLightSourceType")
     public int mType() { return nmType(address()); }
     /** Returns a {@link AIVector3D} view of the {@code mPosition} field. */
     @NativeType("struct aiVector3D")
     public AIVector3D mPosition() { return nmPosition(address()); }
-    /** Passes the {@code mPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public AILight mPosition(java.util.function.Consumer<AIVector3D> consumer) { consumer.accept(mPosition()); return this; }
     /** Returns a {@link AIVector3D} view of the {@code mDirection} field. */
     @NativeType("struct aiVector3D")
     public AIVector3D mDirection() { return nmDirection(address()); }
-    /** Passes the {@code mDirection} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public AILight mDirection(java.util.function.Consumer<AIVector3D> consumer) { consumer.accept(mDirection()); return this; }
     /** Returns a {@link AIVector3D} view of the {@code mUp} field. */
     @NativeType("struct aiVector3D")
     public AIVector3D mUp() { return nmUp(address()); }
-    /** Passes the {@code mUp} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public AILight mUp(java.util.function.Consumer<AIVector3D> consumer) { consumer.accept(mUp()); return this; }
     /** Returns the value of the {@code mAttenuationConstant} field. */
     public float mAttenuationConstant() { return nmAttenuationConstant(address()); }
     /** Returns the value of the {@code mAttenuationLinear} field. */
@@ -312,26 +304,18 @@ public class AILight extends Struct {
         /** Returns a {@link AIString} view of the {@code mName} field. */
         @NativeType("struct aiString")
         public AIString mName() { return AILight.nmName(address()); }
-        /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public AILight.Buffer mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
         /** Returns the value of the {@code mType} field. */
         @NativeType("aiLightSourceType")
         public int mType() { return AILight.nmType(address()); }
         /** Returns a {@link AIVector3D} view of the {@code mPosition} field. */
         @NativeType("struct aiVector3D")
         public AIVector3D mPosition() { return AILight.nmPosition(address()); }
-        /** Passes the {@code mPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public AILight.Buffer mPosition(java.util.function.Consumer<AIVector3D> consumer) { consumer.accept(mPosition()); return this; }
         /** Returns a {@link AIVector3D} view of the {@code mDirection} field. */
         @NativeType("struct aiVector3D")
         public AIVector3D mDirection() { return AILight.nmDirection(address()); }
-        /** Passes the {@code mDirection} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public AILight.Buffer mDirection(java.util.function.Consumer<AIVector3D> consumer) { consumer.accept(mDirection()); return this; }
         /** Returns a {@link AIVector3D} view of the {@code mUp} field. */
         @NativeType("struct aiVector3D")
         public AIVector3D mUp() { return AILight.nmUp(address()); }
-        /** Passes the {@code mUp} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public AILight.Buffer mUp(java.util.function.Consumer<AIVector3D> consumer) { consumer.accept(mUp()); return this; }
         /** Returns the value of the {@code mAttenuationConstant} field. */
         public float mAttenuationConstant() { return AILight.nmAttenuationConstant(address()); }
         /** Returns the value of the {@code mAttenuationLinear} field. */

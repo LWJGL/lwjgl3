@@ -97,13 +97,13 @@ public class VkAttachmentSampleLocationsEXT extends Struct implements NativeReso
     public int attachmentIndex() { return nattachmentIndex(address()); }
     /** Returns a {@link VkSampleLocationsInfoEXT} view of the {@code sampleLocationsInfo} field. */
     public VkSampleLocationsInfoEXT sampleLocationsInfo() { return nsampleLocationsInfo(address()); }
-    /** Passes the {@code sampleLocationsInfo} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkAttachmentSampleLocationsEXT sampleLocationsInfo(java.util.function.Consumer<VkSampleLocationsInfoEXT> consumer) { consumer.accept(sampleLocationsInfo()); return this; }
 
     /** Sets the specified value to the {@code attachmentIndex} field. */
     public VkAttachmentSampleLocationsEXT attachmentIndex(@NativeType("uint32_t") int value) { nattachmentIndex(address(), value); return this; }
     /** Copies the specified {@link VkSampleLocationsInfoEXT} to the {@code sampleLocationsInfo} field. */
     public VkAttachmentSampleLocationsEXT sampleLocationsInfo(VkSampleLocationsInfoEXT value) { nsampleLocationsInfo(address(), value); return this; }
+    /** Passes the {@code sampleLocationsInfo} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkAttachmentSampleLocationsEXT sampleLocationsInfo(java.util.function.Consumer<VkSampleLocationsInfoEXT> consumer) { consumer.accept(sampleLocationsInfo()); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkAttachmentSampleLocationsEXT set(
@@ -345,13 +345,13 @@ public class VkAttachmentSampleLocationsEXT extends Struct implements NativeReso
         public int attachmentIndex() { return VkAttachmentSampleLocationsEXT.nattachmentIndex(address()); }
         /** Returns a {@link VkSampleLocationsInfoEXT} view of the {@code sampleLocationsInfo} field. */
         public VkSampleLocationsInfoEXT sampleLocationsInfo() { return VkAttachmentSampleLocationsEXT.nsampleLocationsInfo(address()); }
-        /** Passes the {@code sampleLocationsInfo} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkAttachmentSampleLocationsEXT.Buffer sampleLocationsInfo(java.util.function.Consumer<VkSampleLocationsInfoEXT> consumer) { consumer.accept(sampleLocationsInfo()); return this; }
 
         /** Sets the specified value to the {@code attachmentIndex} field. */
         public VkAttachmentSampleLocationsEXT.Buffer attachmentIndex(@NativeType("uint32_t") int value) { VkAttachmentSampleLocationsEXT.nattachmentIndex(address(), value); return this; }
         /** Copies the specified {@link VkSampleLocationsInfoEXT} to the {@code sampleLocationsInfo} field. */
         public VkAttachmentSampleLocationsEXT.Buffer sampleLocationsInfo(VkSampleLocationsInfoEXT value) { VkAttachmentSampleLocationsEXT.nsampleLocationsInfo(address(), value); return this; }
+        /** Passes the {@code sampleLocationsInfo} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkAttachmentSampleLocationsEXT.Buffer sampleLocationsInfo(java.util.function.Consumer<VkSampleLocationsInfoEXT> consumer) { consumer.accept(sampleLocationsInfo()); return this; }
 
     }
 

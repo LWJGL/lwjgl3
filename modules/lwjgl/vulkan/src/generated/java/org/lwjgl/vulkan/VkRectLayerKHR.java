@@ -92,20 +92,20 @@ public class VkRectLayerKHR extends Struct implements NativeResource {
 
     /** Returns a {@link VkOffset2D} view of the {@code offset} field. */
     public VkOffset2D offset() { return noffset(address()); }
-    /** Passes the {@code offset} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkRectLayerKHR offset(java.util.function.Consumer<VkOffset2D> consumer) { consumer.accept(offset()); return this; }
     /** Returns a {@link VkExtent2D} view of the {@code extent} field. */
     public VkExtent2D extent() { return nextent(address()); }
-    /** Passes the {@code extent} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkRectLayerKHR extent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(extent()); return this; }
     /** Returns the value of the {@code layer} field. */
     @NativeType("uint32_t")
     public int layer() { return nlayer(address()); }
 
     /** Copies the specified {@link VkOffset2D} to the {@code offset} field. */
     public VkRectLayerKHR offset(VkOffset2D value) { noffset(address(), value); return this; }
+    /** Passes the {@code offset} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkRectLayerKHR offset(java.util.function.Consumer<VkOffset2D> consumer) { consumer.accept(offset()); return this; }
     /** Copies the specified {@link VkExtent2D} to the {@code extent} field. */
     public VkRectLayerKHR extent(VkExtent2D value) { nextent(address(), value); return this; }
+    /** Passes the {@code extent} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkRectLayerKHR extent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(extent()); return this; }
     /** Sets the specified value to the {@code layer} field. */
     public VkRectLayerKHR layer(@NativeType("uint32_t") int value) { nlayer(address(), value); return this; }
 
@@ -331,20 +331,20 @@ public class VkRectLayerKHR extends Struct implements NativeResource {
 
         /** Returns a {@link VkOffset2D} view of the {@code offset} field. */
         public VkOffset2D offset() { return VkRectLayerKHR.noffset(address()); }
-        /** Passes the {@code offset} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkRectLayerKHR.Buffer offset(java.util.function.Consumer<VkOffset2D> consumer) { consumer.accept(offset()); return this; }
         /** Returns a {@link VkExtent2D} view of the {@code extent} field. */
         public VkExtent2D extent() { return VkRectLayerKHR.nextent(address()); }
-        /** Passes the {@code extent} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkRectLayerKHR.Buffer extent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(extent()); return this; }
         /** Returns the value of the {@code layer} field. */
         @NativeType("uint32_t")
         public int layer() { return VkRectLayerKHR.nlayer(address()); }
 
         /** Copies the specified {@link VkOffset2D} to the {@code offset} field. */
         public VkRectLayerKHR.Buffer offset(VkOffset2D value) { VkRectLayerKHR.noffset(address(), value); return this; }
+        /** Passes the {@code offset} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkRectLayerKHR.Buffer offset(java.util.function.Consumer<VkOffset2D> consumer) { consumer.accept(offset()); return this; }
         /** Copies the specified {@link VkExtent2D} to the {@code extent} field. */
         public VkRectLayerKHR.Buffer extent(VkExtent2D value) { VkRectLayerKHR.nextent(address(), value); return this; }
+        /** Passes the {@code extent} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkRectLayerKHR.Buffer extent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(extent()); return this; }
         /** Sets the specified value to the {@code layer} field. */
         public VkRectLayerKHR.Buffer layer(@NativeType("uint32_t") int value) { VkRectLayerKHR.nlayer(address(), value); return this; }
 

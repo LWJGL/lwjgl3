@@ -99,6 +99,10 @@ public class OVRViewScaleDesc extends Struct implements NativeResource {
     public OVRViewScaleDesc HmdToEyePose(@NativeType("ovrPosef[ovrEye_Count]") OVRPosef.Buffer value) { nHmdToEyePose(address(), value); return this; }
     /** Copies the specified {@link OVRPosef} at the specified index of the {@code HmdToEyePose} field. */
     public OVRViewScaleDesc HmdToEyePose(int index, @NativeType("ovrPosef") OVRPosef value) { nHmdToEyePose(address(), index, value); return this; }
+    /** Passes the {@code HmdToEyePose} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRViewScaleDesc HmdToEyePose(java.util.function.Consumer<OVRPosef.Buffer> consumer) { consumer.accept(HmdToEyePose()); return this; }
+    /** Passes the element at {@code index} of the {@code HmdToEyePose} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRViewScaleDesc HmdToEyePose(int index, java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(HmdToEyePose(index)); return this; }
     /** Sets the specified value to the {@code HmdSpaceToWorldScaleInMeters} field. */
     public OVRViewScaleDesc HmdSpaceToWorldScaleInMeters(float value) { nHmdSpaceToWorldScaleInMeters(address(), value); return this; }
 
@@ -340,6 +344,10 @@ public class OVRViewScaleDesc extends Struct implements NativeResource {
         public OVRViewScaleDesc.Buffer HmdToEyePose(@NativeType("ovrPosef[ovrEye_Count]") OVRPosef.Buffer value) { OVRViewScaleDesc.nHmdToEyePose(address(), value); return this; }
         /** Copies the specified {@link OVRPosef} at the specified index of the {@code HmdToEyePose} field. */
         public OVRViewScaleDesc.Buffer HmdToEyePose(int index, @NativeType("ovrPosef") OVRPosef value) { OVRViewScaleDesc.nHmdToEyePose(address(), index, value); return this; }
+        /** Passes the {@code HmdToEyePose} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRViewScaleDesc.Buffer HmdToEyePose(java.util.function.Consumer<OVRPosef.Buffer> consumer) { consumer.accept(HmdToEyePose()); return this; }
+        /** Passes the element at {@code index} of the {@code HmdToEyePose} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRViewScaleDesc.Buffer HmdToEyePose(int index, java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(HmdToEyePose(index)); return this; }
         /** Sets the specified value to the {@code HmdSpaceToWorldScaleInMeters} field. */
         public OVRViewScaleDesc.Buffer HmdSpaceToWorldScaleInMeters(float value) { OVRViewScaleDesc.nHmdSpaceToWorldScaleInMeters(address(), value); return this; }
 

@@ -345,8 +345,6 @@ public class VkImageCreateInfo extends Struct implements NativeResource {
     public int format() { return nformat(address()); }
     /** Returns a {@link VkExtent3D} view of the {@code extent} field. */
     public VkExtent3D extent() { return nextent(address()); }
-    /** Passes the {@code extent} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkImageCreateInfo extent(java.util.function.Consumer<VkExtent3D> consumer) { consumer.accept(extent()); return this; }
     /** Returns the value of the {@code mipLevels} field. */
     @NativeType("uint32_t")
     public int mipLevels() { return nmipLevels(address()); }
@@ -388,6 +386,8 @@ public class VkImageCreateInfo extends Struct implements NativeResource {
     public VkImageCreateInfo format(@NativeType("VkFormat") int value) { nformat(address(), value); return this; }
     /** Copies the specified {@link VkExtent3D} to the {@code extent} field. */
     public VkImageCreateInfo extent(VkExtent3D value) { nextent(address(), value); return this; }
+    /** Passes the {@code extent} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkImageCreateInfo extent(java.util.function.Consumer<VkExtent3D> consumer) { consumer.accept(extent()); return this; }
     /** Sets the specified value to the {@code mipLevels} field. */
     public VkImageCreateInfo mipLevels(@NativeType("uint32_t") int value) { nmipLevels(address(), value); return this; }
     /** Sets the specified value to the {@code arrayLayers} field. */
@@ -735,8 +735,6 @@ public class VkImageCreateInfo extends Struct implements NativeResource {
         public int format() { return VkImageCreateInfo.nformat(address()); }
         /** Returns a {@link VkExtent3D} view of the {@code extent} field. */
         public VkExtent3D extent() { return VkImageCreateInfo.nextent(address()); }
-        /** Passes the {@code extent} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkImageCreateInfo.Buffer extent(java.util.function.Consumer<VkExtent3D> consumer) { consumer.accept(extent()); return this; }
         /** Returns the value of the {@code mipLevels} field. */
         @NativeType("uint32_t")
         public int mipLevels() { return VkImageCreateInfo.nmipLevels(address()); }
@@ -778,6 +776,8 @@ public class VkImageCreateInfo extends Struct implements NativeResource {
         public VkImageCreateInfo.Buffer format(@NativeType("VkFormat") int value) { VkImageCreateInfo.nformat(address(), value); return this; }
         /** Copies the specified {@link VkExtent3D} to the {@code extent} field. */
         public VkImageCreateInfo.Buffer extent(VkExtent3D value) { VkImageCreateInfo.nextent(address(), value); return this; }
+        /** Passes the {@code extent} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkImageCreateInfo.Buffer extent(java.util.function.Consumer<VkExtent3D> consumer) { consumer.accept(extent()); return this; }
         /** Sets the specified value to the {@code mipLevels} field. */
         public VkImageCreateInfo.Buffer mipLevels(@NativeType("uint32_t") int value) { VkImageCreateInfo.nmipLevels(address(), value); return this; }
         /** Sets the specified value to the {@code arrayLayers} field. */

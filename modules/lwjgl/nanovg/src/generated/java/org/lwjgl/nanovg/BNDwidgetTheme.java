@@ -106,33 +106,21 @@ public class BNDwidgetTheme extends Struct implements NativeResource {
     /** Returns a {@link NVGColor} view of the {@code outlineColor} field. */
     @NativeType("NVGcolor")
     public NVGColor outlineColor() { return noutlineColor(address()); }
-    /** Passes the {@code outlineColor} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public BNDwidgetTheme outlineColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(outlineColor()); return this; }
     /** Returns a {@link NVGColor} view of the {@code itemColor} field. */
     @NativeType("NVGcolor")
     public NVGColor itemColor() { return nitemColor(address()); }
-    /** Passes the {@code itemColor} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public BNDwidgetTheme itemColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(itemColor()); return this; }
     /** Returns a {@link NVGColor} view of the {@code innerColor} field. */
     @NativeType("NVGcolor")
     public NVGColor innerColor() { return ninnerColor(address()); }
-    /** Passes the {@code innerColor} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public BNDwidgetTheme innerColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(innerColor()); return this; }
     /** Returns a {@link NVGColor} view of the {@code innerSelectedColor} field. */
     @NativeType("NVGcolor")
     public NVGColor innerSelectedColor() { return ninnerSelectedColor(address()); }
-    /** Passes the {@code innerSelectedColor} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public BNDwidgetTheme innerSelectedColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(innerSelectedColor()); return this; }
     /** Returns a {@link NVGColor} view of the {@code textColor} field. */
     @NativeType("NVGcolor")
     public NVGColor textColor() { return ntextColor(address()); }
-    /** Passes the {@code textColor} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public BNDwidgetTheme textColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(textColor()); return this; }
     /** Returns a {@link NVGColor} view of the {@code textSelectedColor} field. */
     @NativeType("NVGcolor")
     public NVGColor textSelectedColor() { return ntextSelectedColor(address()); }
-    /** Passes the {@code textSelectedColor} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public BNDwidgetTheme textSelectedColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(textSelectedColor()); return this; }
     /** Returns the value of the {@code shadeTop} field. */
     public int shadeTop() { return nshadeTop(address()); }
     /** Returns the value of the {@code shadeDown} field. */
@@ -140,16 +128,28 @@ public class BNDwidgetTheme extends Struct implements NativeResource {
 
     /** Copies the specified {@link NVGColor} to the {@code outlineColor} field. */
     public BNDwidgetTheme outlineColor(@NativeType("NVGcolor") NVGColor value) { noutlineColor(address(), value); return this; }
+    /** Passes the {@code outlineColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public BNDwidgetTheme outlineColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(outlineColor()); return this; }
     /** Copies the specified {@link NVGColor} to the {@code itemColor} field. */
     public BNDwidgetTheme itemColor(@NativeType("NVGcolor") NVGColor value) { nitemColor(address(), value); return this; }
+    /** Passes the {@code itemColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public BNDwidgetTheme itemColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(itemColor()); return this; }
     /** Copies the specified {@link NVGColor} to the {@code innerColor} field. */
     public BNDwidgetTheme innerColor(@NativeType("NVGcolor") NVGColor value) { ninnerColor(address(), value); return this; }
+    /** Passes the {@code innerColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public BNDwidgetTheme innerColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(innerColor()); return this; }
     /** Copies the specified {@link NVGColor} to the {@code innerSelectedColor} field. */
     public BNDwidgetTheme innerSelectedColor(@NativeType("NVGcolor") NVGColor value) { ninnerSelectedColor(address(), value); return this; }
+    /** Passes the {@code innerSelectedColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public BNDwidgetTheme innerSelectedColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(innerSelectedColor()); return this; }
     /** Copies the specified {@link NVGColor} to the {@code textColor} field. */
     public BNDwidgetTheme textColor(@NativeType("NVGcolor") NVGColor value) { ntextColor(address(), value); return this; }
+    /** Passes the {@code textColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public BNDwidgetTheme textColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(textColor()); return this; }
     /** Copies the specified {@link NVGColor} to the {@code textSelectedColor} field. */
     public BNDwidgetTheme textSelectedColor(@NativeType("NVGcolor") NVGColor value) { ntextSelectedColor(address(), value); return this; }
+    /** Passes the {@code textSelectedColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public BNDwidgetTheme textSelectedColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(textSelectedColor()); return this; }
     /** Sets the specified value to the {@code shadeTop} field. */
     public BNDwidgetTheme shadeTop(int value) { nshadeTop(address(), value); return this; }
     /** Sets the specified value to the {@code shadeDown} field. */
@@ -408,33 +408,21 @@ public class BNDwidgetTheme extends Struct implements NativeResource {
         /** Returns a {@link NVGColor} view of the {@code outlineColor} field. */
         @NativeType("NVGcolor")
         public NVGColor outlineColor() { return BNDwidgetTheme.noutlineColor(address()); }
-        /** Passes the {@code outlineColor} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public BNDwidgetTheme.Buffer outlineColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(outlineColor()); return this; }
         /** Returns a {@link NVGColor} view of the {@code itemColor} field. */
         @NativeType("NVGcolor")
         public NVGColor itemColor() { return BNDwidgetTheme.nitemColor(address()); }
-        /** Passes the {@code itemColor} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public BNDwidgetTheme.Buffer itemColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(itemColor()); return this; }
         /** Returns a {@link NVGColor} view of the {@code innerColor} field. */
         @NativeType("NVGcolor")
         public NVGColor innerColor() { return BNDwidgetTheme.ninnerColor(address()); }
-        /** Passes the {@code innerColor} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public BNDwidgetTheme.Buffer innerColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(innerColor()); return this; }
         /** Returns a {@link NVGColor} view of the {@code innerSelectedColor} field. */
         @NativeType("NVGcolor")
         public NVGColor innerSelectedColor() { return BNDwidgetTheme.ninnerSelectedColor(address()); }
-        /** Passes the {@code innerSelectedColor} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public BNDwidgetTheme.Buffer innerSelectedColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(innerSelectedColor()); return this; }
         /** Returns a {@link NVGColor} view of the {@code textColor} field. */
         @NativeType("NVGcolor")
         public NVGColor textColor() { return BNDwidgetTheme.ntextColor(address()); }
-        /** Passes the {@code textColor} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public BNDwidgetTheme.Buffer textColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(textColor()); return this; }
         /** Returns a {@link NVGColor} view of the {@code textSelectedColor} field. */
         @NativeType("NVGcolor")
         public NVGColor textSelectedColor() { return BNDwidgetTheme.ntextSelectedColor(address()); }
-        /** Passes the {@code textSelectedColor} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public BNDwidgetTheme.Buffer textSelectedColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(textSelectedColor()); return this; }
         /** Returns the value of the {@code shadeTop} field. */
         public int shadeTop() { return BNDwidgetTheme.nshadeTop(address()); }
         /** Returns the value of the {@code shadeDown} field. */
@@ -442,16 +430,28 @@ public class BNDwidgetTheme extends Struct implements NativeResource {
 
         /** Copies the specified {@link NVGColor} to the {@code outlineColor} field. */
         public BNDwidgetTheme.Buffer outlineColor(@NativeType("NVGcolor") NVGColor value) { BNDwidgetTheme.noutlineColor(address(), value); return this; }
+        /** Passes the {@code outlineColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public BNDwidgetTheme.Buffer outlineColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(outlineColor()); return this; }
         /** Copies the specified {@link NVGColor} to the {@code itemColor} field. */
         public BNDwidgetTheme.Buffer itemColor(@NativeType("NVGcolor") NVGColor value) { BNDwidgetTheme.nitemColor(address(), value); return this; }
+        /** Passes the {@code itemColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public BNDwidgetTheme.Buffer itemColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(itemColor()); return this; }
         /** Copies the specified {@link NVGColor} to the {@code innerColor} field. */
         public BNDwidgetTheme.Buffer innerColor(@NativeType("NVGcolor") NVGColor value) { BNDwidgetTheme.ninnerColor(address(), value); return this; }
+        /** Passes the {@code innerColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public BNDwidgetTheme.Buffer innerColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(innerColor()); return this; }
         /** Copies the specified {@link NVGColor} to the {@code innerSelectedColor} field. */
         public BNDwidgetTheme.Buffer innerSelectedColor(@NativeType("NVGcolor") NVGColor value) { BNDwidgetTheme.ninnerSelectedColor(address(), value); return this; }
+        /** Passes the {@code innerSelectedColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public BNDwidgetTheme.Buffer innerSelectedColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(innerSelectedColor()); return this; }
         /** Copies the specified {@link NVGColor} to the {@code textColor} field. */
         public BNDwidgetTheme.Buffer textColor(@NativeType("NVGcolor") NVGColor value) { BNDwidgetTheme.ntextColor(address(), value); return this; }
+        /** Passes the {@code textColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public BNDwidgetTheme.Buffer textColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(textColor()); return this; }
         /** Copies the specified {@link NVGColor} to the {@code textSelectedColor} field. */
         public BNDwidgetTheme.Buffer textSelectedColor(@NativeType("NVGcolor") NVGColor value) { BNDwidgetTheme.ntextSelectedColor(address(), value); return this; }
+        /** Passes the {@code textSelectedColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public BNDwidgetTheme.Buffer textSelectedColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(textSelectedColor()); return this; }
         /** Sets the specified value to the {@code shadeTop} field. */
         public BNDwidgetTheme.Buffer shadeTop(int value) { BNDwidgetTheme.nshadeTop(address(), value); return this; }
         /** Sets the specified value to the {@code shadeDown} field. */

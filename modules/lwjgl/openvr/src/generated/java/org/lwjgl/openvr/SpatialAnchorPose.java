@@ -63,8 +63,6 @@ public class SpatialAnchorPose extends Struct implements NativeResource {
     /** Returns a {@link HmdMatrix34} view of the {@code mAnchorToAbsoluteTracking} field. */
     @NativeType("HmdMatrix34_t")
     public HmdMatrix34 mAnchorToAbsoluteTracking() { return nmAnchorToAbsoluteTracking(address()); }
-    /** Passes the {@code mAnchorToAbsoluteTracking} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public SpatialAnchorPose mAnchorToAbsoluteTracking(java.util.function.Consumer<HmdMatrix34> consumer) { consumer.accept(mAnchorToAbsoluteTracking()); return this; }
 
     // -----------------------------------
 
@@ -253,8 +251,6 @@ public class SpatialAnchorPose extends Struct implements NativeResource {
         /** Returns a {@link HmdMatrix34} view of the {@code mAnchorToAbsoluteTracking} field. */
         @NativeType("HmdMatrix34_t")
         public HmdMatrix34 mAnchorToAbsoluteTracking() { return SpatialAnchorPose.nmAnchorToAbsoluteTracking(address()); }
-        /** Passes the {@code mAnchorToAbsoluteTracking} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public SpatialAnchorPose.Buffer mAnchorToAbsoluteTracking(java.util.function.Consumer<HmdMatrix34> consumer) { consumer.accept(mAnchorToAbsoluteTracking()); return this; }
 
     }
 

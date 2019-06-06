@@ -75,18 +75,12 @@ public class VROverlayIntersectionResults extends Struct implements NativeResour
     /** Returns a {@link HmdVector3} view of the {@code vPoint} field. */
     @NativeType("HmdVector3_t")
     public HmdVector3 vPoint() { return nvPoint(address()); }
-    /** Passes the {@code vPoint} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VROverlayIntersectionResults vPoint(java.util.function.Consumer<HmdVector3> consumer) { consumer.accept(vPoint()); return this; }
     /** Returns a {@link HmdVector3} view of the {@code vNormal} field. */
     @NativeType("HmdVector3_t")
     public HmdVector3 vNormal() { return nvNormal(address()); }
-    /** Passes the {@code vNormal} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VROverlayIntersectionResults vNormal(java.util.function.Consumer<HmdVector3> consumer) { consumer.accept(vNormal()); return this; }
     /** Returns a {@link HmdVector2} view of the {@code vUVs} field. */
     @NativeType("HmdVector2_t")
     public HmdVector2 vUVs() { return nvUVs(address()); }
-    /** Passes the {@code vUVs} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VROverlayIntersectionResults vUVs(java.util.function.Consumer<HmdVector2> consumer) { consumer.accept(vUVs()); return this; }
     /** Returns the value of the {@code fDistance} field. */
     public float fDistance() { return nfDistance(address()); }
 
@@ -283,18 +277,12 @@ public class VROverlayIntersectionResults extends Struct implements NativeResour
         /** Returns a {@link HmdVector3} view of the {@code vPoint} field. */
         @NativeType("HmdVector3_t")
         public HmdVector3 vPoint() { return VROverlayIntersectionResults.nvPoint(address()); }
-        /** Passes the {@code vPoint} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VROverlayIntersectionResults.Buffer vPoint(java.util.function.Consumer<HmdVector3> consumer) { consumer.accept(vPoint()); return this; }
         /** Returns a {@link HmdVector3} view of the {@code vNormal} field. */
         @NativeType("HmdVector3_t")
         public HmdVector3 vNormal() { return VROverlayIntersectionResults.nvNormal(address()); }
-        /** Passes the {@code vNormal} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VROverlayIntersectionResults.Buffer vNormal(java.util.function.Consumer<HmdVector3> consumer) { consumer.accept(vNormal()); return this; }
         /** Returns a {@link HmdVector2} view of the {@code vUVs} field. */
         @NativeType("HmdVector2_t")
         public HmdVector2 vUVs() { return VROverlayIntersectionResults.nvUVs(address()); }
-        /** Passes the {@code vUVs} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VROverlayIntersectionResults.Buffer vUVs(java.util.function.Consumer<HmdVector2> consumer) { consumer.accept(vUVs()); return this; }
         /** Returns the value of the {@code fDistance} field. */
         public float fDistance() { return VROverlayIntersectionResults.nfDistance(address()); }
 
