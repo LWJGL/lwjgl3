@@ -169,9 +169,9 @@ object OffHeapOnly : FunctionModifier {
     override val isSpecial = false
 }
 
-/** Marks a return value as a pointer that should be mapped (wrapped in a ByteBuffer of some capacity). */
+/** Marks a return value as a pointer that should be mapped (wrapped in a buffer of some capacity). */
 class MapPointer(
-    /** An expression that defines the ByteBuffer capacity. */
+    /** An expression that defines the buffer capacity. */
     val sizeExpression: String,
     /** If true, overloads with an old_buffer parameter will be generated. */
     val oldBufferOverloads: Boolean = false // TODO: remove in LWJGL 4
@@ -181,9 +181,6 @@ class MapPointer(
         val returnType = func.returns.nativeType
         if (returnType !is PointerType<*>)
             throw IllegalArgumentException("The MapPointer modifier can only be applied to functions with pointer return types.")
-
-        if (!(returnType.elementType is VoidType || (returnType.elementType is PrimitiveType && returnType.elementType.mapping == PrimitiveMapping.BYTE)))
-            throw IllegalArgumentException("The MapPointer modifier can only be applied to functions with void/char pointer return types.")
     }
 }
 

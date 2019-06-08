@@ -877,7 +877,7 @@ class Func(
             println("$t$retTypeAnnotation")
         }
 
-        print("$t${if (constantMacro) "private " else accessModifier}static $retType $name(")
+        print("$t${if (constantMacro) "private " else accessModifier}static ${if (has<MapPointer>() && returns.nativeType.dereference is StructType) "$retType.Buffer" else retType} $name(")
         printList(getNativeParams(withAutoSizeResultParams = false)) {
             it.asJavaMethodParam(true)
         }
