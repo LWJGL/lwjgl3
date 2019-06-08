@@ -677,7 +677,7 @@ public class GL15 extends GL14 {
     @Nullable
     @NativeType("void *")
     public static ByteBuffer glMapBuffer(@NativeType("GLenum") int target, @NativeType("GLenum") int access, @Nullable ByteBuffer old_buffer) {
-        return GL15C.glMapBuffer(target, access);
+        return GL15C.glMapBuffer(target, access, old_buffer);
     }
 
     /**
@@ -699,7 +699,7 @@ public class GL15 extends GL14 {
     @Nullable
     @NativeType("void *")
     public static ByteBuffer glMapBuffer(@NativeType("GLenum") int target, @NativeType("GLenum") int access, long length, @Nullable ByteBuffer old_buffer) {
-        return GL15C.glMapBuffer(target, access);
+        return GL15C.glMapBuffer(target, access, length, old_buffer);
     }
 
     // --- [ glUnmapBuffer ] ---

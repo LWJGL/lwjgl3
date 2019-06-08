@@ -894,7 +894,7 @@ public class ARBDirectStateAccess {
     @Nullable
     @NativeType("void *")
     public static ByteBuffer glMapNamedBuffer(@NativeType("GLuint") int buffer, @NativeType("GLenum") int access, @Nullable ByteBuffer old_buffer) {
-        return GL45C.glMapNamedBuffer(buffer, access);
+        return GL45C.glMapNamedBuffer(buffer, access, old_buffer);
     }
 
     /**
@@ -906,7 +906,7 @@ public class ARBDirectStateAccess {
     @Nullable
     @NativeType("void *")
     public static ByteBuffer glMapNamedBuffer(@NativeType("GLuint") int buffer, @NativeType("GLenum") int access, long length, @Nullable ByteBuffer old_buffer) {
-        return GL45C.glMapNamedBuffer(buffer, access);
+        return GL45C.glMapNamedBuffer(buffer, access, length, old_buffer);
     }
 
     // --- [ glMapNamedBufferRange ] ---
@@ -941,7 +941,7 @@ public class ARBDirectStateAccess {
     @Nullable
     @NativeType("void *")
     public static ByteBuffer glMapNamedBufferRange(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long length, @NativeType("GLbitfield") int access, @Nullable ByteBuffer old_buffer) {
-        return GL45C.glMapNamedBufferRange(buffer, offset, length, access);
+        return GL45C.glMapNamedBufferRange(buffer, offset, length, access, old_buffer);
     }
 
     // --- [ glUnmapNamedBuffer ] ---

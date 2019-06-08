@@ -1423,7 +1423,7 @@ public class GL30 extends GL21 {
     @Nullable
     @NativeType("void *")
     public static ByteBuffer glMapBufferRange(@NativeType("GLenum") int target, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long length, @NativeType("GLbitfield") int access, @Nullable ByteBuffer old_buffer) {
-        return GL30C.glMapBufferRange(target, offset, length, access);
+        return GL30C.glMapBufferRange(target, offset, length, access, old_buffer);
     }
 
     // --- [ glFlushMappedBufferRange ] ---

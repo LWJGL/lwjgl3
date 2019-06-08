@@ -1540,6 +1540,7 @@ class Func(
                 }
             }
         }
+        // Update Reuse delegation if the code below changes
         val returnTransform = transforms[returns]
         when (returnTransform) {
             is MapPointerTransform         -> {
@@ -1589,6 +1590,30 @@ class Func(
                 it.transformDeclarationOrElse(transforms, it.name, false).let { name ->
                     name?.substring(name.lastIndexOf(' ') + 1)
                 }
+            }
+            val returnTransform = transforms[returns]
+            when (returnTransform) {
+                is MapPointerTransform         -> {
+                    if (returnTransform.useOldBuffer) {
+                        if (!parameters.isEmpty()) print(", ")
+                        print(MAP_OLD)
+                    }
+                }
+                is MapPointerExplicitTransform -> {
+                    var hasParams = !parameters.isEmpty()
+                    if (returnTransform.addParam) {
+                        if (hasParams) print(", ") else hasParams = true
+                        print(returnTransform.lengthParam)
+                    }
+                    if (returnTransform.useOldBuffer) {
+                        if (hasParams) print(", ")
+                        print(MAP_OLD)
+                    }
+                }
+            }
+            if (returns.isStructValue) {
+                if (!parameters.isEmpty()) print(", ")
+                print(RESULT)
             }
             println(");\n$t}")
             return
