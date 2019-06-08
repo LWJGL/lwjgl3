@@ -849,6 +849,124 @@ public final class MemoryUtil {
     }
 
     /**
+     * Creates a {@link ByteBuffer} instance as a view of the specified {@link ShortBuffer} between its current position and limit.
+     *
+     * <p>This operation is the inverse of {@link ByteBuffer#asShortBuffer()}. The returned {@code ByteBuffer} instance will be set to the native
+     * {@link ByteOrder}.</p>
+     *
+     * @param buffer the source buffer
+     *
+     * @return the {@code ByteBuffer} view
+     */
+    public static ByteBuffer memByteBuffer(ShortBuffer buffer) {
+        if (CHECKS && (Integer.MAX_VALUE >> 1) < buffer.remaining()) {
+            throw new IllegalArgumentException("The source buffer range is too wide");
+        }
+        return wrap(BUFFER_BYTE, memAddress(buffer), buffer.remaining() << 1).order(NATIVE_ORDER);
+    }
+
+    /**
+     * Creates a {@link ByteBuffer} instance as a view of the specified {@link CharBuffer} between its current position and limit.
+     *
+     * <p>This operation is the inverse of {@link ByteBuffer#asCharBuffer()}. The returned {@code ByteBuffer} instance will be set to the native
+     * {@link ByteOrder}.</p>
+     *
+     * @param buffer the source buffer
+     *
+     * @return the {@code ByteBuffer} view
+     */
+    public static ByteBuffer memByteBuffer(CharBuffer buffer) {
+        if (CHECKS && (Integer.MAX_VALUE >> 1) < buffer.remaining()) {
+            throw new IllegalArgumentException("The source buffer range is too wide");
+        }
+        return wrap(BUFFER_BYTE, memAddress(buffer), buffer.remaining() << 1).order(NATIVE_ORDER);
+    }
+
+    /**
+     * Creates a {@link ByteBuffer} instance as a view of the specified {@link IntBuffer} between its current position and limit.
+     *
+     * <p>This operation is the inverse of {@link ByteBuffer#asIntBuffer()}. The returned {@code ByteBuffer} instance will be set to the native
+     * {@link ByteOrder}.</p>
+     *
+     * @param buffer the source buffer
+     *
+     * @return the {@code ByteBuffer} view
+     */
+    public static ByteBuffer memByteBuffer(IntBuffer buffer) {
+        if (CHECKS && (Integer.MAX_VALUE >> 2) < buffer.remaining()) {
+            throw new IllegalArgumentException("The source buffer range is too wide");
+        }
+        return wrap(BUFFER_BYTE, memAddress(buffer), buffer.remaining() << 2).order(NATIVE_ORDER);
+    }
+
+    /**
+     * Creates a {@link ByteBuffer} instance as a view of the specified {@link LongBuffer} between its current position and limit.
+     *
+     * <p>This operation is the inverse of {@link ByteBuffer#asLongBuffer()}. The returned {@code ByteBuffer} instance will be set to the native
+     * {@link ByteOrder}.</p>
+     *
+     * @param buffer the source buffer
+     *
+     * @return the {@code ByteBuffer} view
+     */
+    public static ByteBuffer memByteBuffer(LongBuffer buffer) {
+        if (CHECKS && (Integer.MAX_VALUE >> 3) < buffer.remaining()) {
+            throw new IllegalArgumentException("The source buffer range is too wide");
+        }
+        return wrap(BUFFER_BYTE, memAddress(buffer), buffer.remaining() << 3).order(NATIVE_ORDER);
+    }
+
+    /**
+     * Creates a {@link ByteBuffer} instance as a view of the specified {@link FloatBuffer} between its current position and limit.
+     *
+     * <p>This operation is the inverse of {@link ByteBuffer#asFloatBuffer()}. The returned {@code ByteBuffer} instance will be set to the native
+     * {@link ByteOrder}.</p>
+     *
+     * @param buffer the source buffer
+     *
+     * @return the {@code ByteBuffer} view
+     */
+    public static ByteBuffer memByteBuffer(FloatBuffer buffer) {
+        if (CHECKS && (Integer.MAX_VALUE >> 2) < buffer.remaining()) {
+            throw new IllegalArgumentException("The source buffer range is too wide");
+        }
+        return wrap(BUFFER_BYTE, memAddress(buffer), buffer.remaining() << 2).order(NATIVE_ORDER);
+    }
+
+    /**
+     * Creates a {@link ByteBuffer} instance as a view of the specified {@link DoubleBuffer} between its current position and limit.
+     *
+     * <p>This operation is the inverse of {@link ByteBuffer#asDoubleBuffer()}. The returned {@code ByteBuffer} instance will be set to the native
+     * {@link ByteOrder}.</p>
+     *
+     * @param buffer the source buffer
+     *
+     * @return the {@code ByteBuffer} view
+     */
+    public static ByteBuffer memByteBuffer(DoubleBuffer buffer) {
+        if (CHECKS && (Integer.MAX_VALUE >> 3) < buffer.remaining()) {
+            throw new IllegalArgumentException("The source buffer range is too wide");
+        }
+        return wrap(BUFFER_BYTE, memAddress(buffer), buffer.remaining() << 3).order(NATIVE_ORDER);
+    }
+
+    /**
+     * Creates a {@link ByteBuffer} instance as a view of the specified {@link CustomBuffer} between its current position and limit.
+     *
+     * <p>The returned {@code ByteBuffer} instance will be set to the native {@link ByteOrder}.</p>
+     *
+     * @param buffer the source buffer
+     *
+     * @return the {@code ByteBuffer} view
+     */
+    public static ByteBuffer memByteBuffer(CustomBuffer<?> buffer) {
+        if (CHECKS && (Integer.MAX_VALUE / buffer.sizeof()) < buffer.remaining()) {
+            throw new IllegalArgumentException("The source buffer range is too wide");
+        }
+        return wrap(BUFFER_BYTE, memAddress(buffer), buffer.remaining() * buffer.sizeof()).order(NATIVE_ORDER);
+    }
+
+    /**
      * Creates a new direct ShortBuffer that starts at the specified memory address and has the specified capacity.
      *
      * <p>The {@code address} specified must be aligned to 2 bytes. If not, use {@code memByteBuffer(address, capacity * 2).asShortBuffer()}.</p>

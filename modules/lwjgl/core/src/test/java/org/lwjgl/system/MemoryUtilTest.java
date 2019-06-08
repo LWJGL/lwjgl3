@@ -271,6 +271,35 @@ public class MemoryUtilTest {
         }
     }
 
+    public void testViewBuffer() {
+        IntBuffer ib = BufferUtils.createIntBuffer(10);
+        ib.position(2);
+        ib.limit(8);
+
+        ByteBuffer bb = memByteBuffer(ib);
+        assertEquals(bb.position(), 0);
+        assertEquals(bb.limit(), 6 * Integer.BYTES);
+        assertEquals(bb.remaining(), ib.remaining() * Integer.BYTES);
+
+        for (int i = 0; i < ib.remaining(); i++) {
+            assertEquals(bb.getInt(i * Integer.BYTES), 0);
+        }
+        memSet(ib, 0xFFFFFFFF);
+        for (int i = 0; i < ib.remaining(); i++) {
+            assertEquals(bb.getInt(i * Integer.BYTES), 0xFFFFFFFF);
+        }
+        memSet(bb, 0x0);
+        for (int i = 0; i < ib.remaining(); i++) {
+            assertEquals(ib.get(2 + i), 0x0);
+        }
+
+        DoubleBuffer db = memDoubleBuffer(memAddress(ib), Integer.MAX_VALUE);
+        assertThrows(IllegalArgumentException.class, () -> memByteBuffer(db));
+
+        db.limit(Integer.MAX_VALUE >> 3);
+        assertEquals(memByteBuffer(db).remaining(), (Integer.MAX_VALUE >> 3) << 3);
+    }
+
     @FunctionalInterface
     private interface BufferAddressGetter<T extends Buffer> {
         long apply(T buffer);
