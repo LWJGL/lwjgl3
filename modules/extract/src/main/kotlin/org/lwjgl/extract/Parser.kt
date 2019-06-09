@@ -240,21 +240,30 @@ internal class Struct(
 }
 
 internal fun CXCursor.parseStruct(context: ExtractionContext, name: String, typedef: Boolean, handles: ArrayList<String>) =
-    parseStructMembers(context, name, handles, t).let { members ->
-        if (members.isEmpty()) {
-            null
-        } else {
-            stackPush().use { stack ->
-                val doc = clang_Cursor_getParsedComment(this, CXComment.mallocStack(stack))
-                    .parse()
-                    .doc
-                    .formatDocumentation("${t}documentation = ", "$t$t", "\n$t$t")
-                Struct(name, typedef, doc, if (clang_getCursorKind(this) == CXCursor_UnionDecl) "union" else "struct", members)
+    stackPush().use { frame  ->
+        val structType = clang_getCursorType(this, CXType.mallocStack(frame))
+        parseStructMembers(context, structType, name, handles, t).let { members ->
+            if (members.isEmpty()) {
+                null
+            } else {
+                stackPush().use { stack ->
+                    val doc = clang_Cursor_getParsedComment(this, CXComment.mallocStack(stack))
+                        .parse()
+                        .doc
+                        .formatDocumentation("${t}documentation = ", "$t$t", "\n$t$t")
+                    Struct(name, typedef, doc, if (clang_getCursorKind(this) == CXCursor_UnionDecl) "union" else "struct", members)
+                }
             }
         }
     }
 
-private fun CXCursor.parseStructMembers(context: ExtractionContext, structName: String, handles: ArrayList<String>, indent: String): String {
+private fun CXCursor.parseStructMembers(
+    context: ExtractionContext,
+    structType: CXType,
+    structName: String,
+    handles: ArrayList<String>,
+    indent: String
+): String {
     val attributes = ArrayList<String>()
     val members = ArrayList<String>()
 
@@ -268,40 +277,40 @@ private fun CXCursor.parseStructMembers(context: ExtractionContext, structName: 
 
                 val type = clang_getCursorType(fieldDecl, CXType.mallocStack(stack))
                 when (type.kind()) {
-                    CXType_Elaborated    -> clang_visitChildren(fieldDecl) { child, _ ->
-                        members.add(
-                            when (clang_getCursorKind(child)) {
-                                CXCursor_StructDecl,
-                                CXCursor_UnionDecl -> {
-                                    if (members.isEmpty()) {
-                                        dump(this)
-                                        dump(fieldDecl)
-                                    }
-                                    structMember(members.removeAt(members.lastIndex), name, doc, indent)
+                    CXType_Elaborated    -> members.add(structMember(
+                        if (fieldDecl.hasChild { c ->
+                                when (clang_getCursorKind(c)) {
+                                    CXCursor_StructDecl,
+                                    CXCursor_UnionDecl -> true
+                                    else               -> false
                                 }
-                                else               -> structMember(type.lwjgl, name, doc, indent)
                             }
-                        )
-                        CXChildVisit_Continue
-                    }
+                        ) {
+                            members.removeAt(members.lastIndex)
+                        } else {
+                            type.lwjgl
+                        }, name, doc, indent
+                    ))
                     CXType_Record        -> {
-                        val record = clang_getCursorType(fieldDecl, CXType.mallocStack(stack))
+                        val (recordType, recordName) = clang_getCursorType(fieldDecl, CXType.mallocStack(stack))
                             .spelling
-                            .let { it.substring(0, it.indexOf(' ')) }
+                            .split(' ')
 
-                        if (record != "struct" && record != "union") {
-                            System.err.println(record)
+                        if (recordType != "struct" && recordType != "union") {
+                            System.err.println(recordType)
                             TODO()
                         }
 
-                        var hasChildren = false
-                        clang_visitChildren(fieldDecl) { _, _ ->
-                            hasChildren = true
-                            CXChildVisit_Break
-                        }
-
-                        if (hasChildren) {
-                            members.add("$record {\n$indent$t${fieldDecl.parseStructMembers(context, structName, handles, "$indent$t")}\n$indent}")
+                        if (fieldDecl.hasChild(CXChildVisit_Break) { true }) {
+                            members.add(
+                                "$recordType${if (clang_Cursor_isAnonymous(fieldDecl))
+                                    ""
+                                else
+                                    "(Module.${context.header.module}, \"$recordName\")"
+                                } {\n$indent$t${fieldDecl
+                                    .parseStructMembers(context, structType, structName, handles, "$indent$t")
+                                }\n$indent}"
+                            )
                         } else if (context.options.parseTypes) {
                             handles.add(
                                 parseSimpleType(
@@ -313,22 +322,32 @@ private fun CXCursor.parseStructMembers(context: ExtractionContext, structName: 
                         }
                     }
                     CXType_Pointer       -> {
-                        val pointee = clang_getPointeeType(type, CXType.mallocStack(stack))
-                        members.add(
-                            if (pointee.kind() == CXType_FunctionProto) {
-                                structMember(
+                        members.add(structMember(
+                            if (fieldDecl.hasChild { c ->
+                                    when (clang_getCursorKind(c)) {
+                                        CXCursor_StructDecl,
+                                        CXCursor_UnionDecl -> true
+                                        else               -> false
+                                    }
+                                }
+                            ) {
+                                "${members.removeAt(members.lastIndex)}.p"
+                            } else {
+                                val pointee = clang_getPointeeType(type, CXType.mallocStack(stack))
+                                if (pointee.kind() == CXType_FunctionProto) {
                                     fieldDecl.anonymousFunctionProto(
                                         stack, pointee, indent, context.header.module, name,
                                         "Instances of this interface may be set to the {@code $name} field of the ##${if (structName.isNotEmpty()) structName else "FIXME"} struct."
-                                    ),
-                                    name,
-                                    doc,
-                                    indent
-                                )
-                            } else {
-                                structMember(type.lwjgl, name, doc, indent)
-                            }
-                        )
+                                    )
+                                } else if (clang_equalTypes(structType, clang_getCanonicalType(pointee, CXType.mallocStack(stack)))) {
+                                    // recursive struct definition
+                                    "${if (clang_getCursorKind(clang_getTypeDeclaration(structType, CXCursor.mallocStack(stack))) == CXCursor_UnionDecl)
+                                        "union" else "struct"}(Module.${context.header.module}, \"$structName\").p"
+                                } else {
+                                    type.lwjgl
+                                }
+                            }, name, doc, indent
+                        ))
                     }
                     CXType_ConstantArray -> {
                         members.add(
@@ -580,6 +599,15 @@ internal fun CXCursor.parseMacro(
             clang_disposeTokens(context.tu, tokens)
         }
     }
+}
+
+private fun CXCursor.hasChild(traversal: Int = CXChildVisit_Continue, predicate: (CXCursor) -> Boolean): Boolean {
+    var result = false
+    clang_visitChildren(this) { child, _ ->
+        result = predicate(child)
+        traversal
+    }
+    return result
 }
 
 private val CXType.lwjgl: String
