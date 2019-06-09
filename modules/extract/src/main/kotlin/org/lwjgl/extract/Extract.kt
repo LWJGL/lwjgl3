@@ -30,9 +30,11 @@ internal class Header(
     includePaths: List<Path>,
     val path: Path
 ) {
-    val includePaths = includePaths.map {
-        it.toAbsolutePath()
-    }
+    val includePaths = sequenceOf(path.parent)
+        .plus(includePaths)
+        .mapTo(ArrayList()) {
+            it.toAbsolutePath()
+        }
 
     internal fun shouldParse(cursor: CXCursor, options: Options) = stackPush().use { stack ->
         val location = clang_getCursorLocation(cursor, CXSourceLocation.mallocStack(stack))

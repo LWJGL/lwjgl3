@@ -487,7 +487,9 @@ class Application {
     ) {
         includePaths.clear()
         header.includePaths.forEach {
-            includePaths.addElement(it.toString())
+            if (it != header.path.parent) {
+                includePaths.addElement(it.toString())
+            }
         }
 
         this.header.text = header.path.toString()
