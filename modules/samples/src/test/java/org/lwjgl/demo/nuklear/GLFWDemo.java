@@ -474,7 +474,7 @@ public class GLFWDemo {
         });
 
         nk_init(ctx, ALLOCATOR, null);
-        ctx.clip(it -> it
+        ctx.clip()
             .copy((handle, text, len) -> {
                 if (len == 0) {
                     return;
@@ -493,7 +493,7 @@ public class GLFWDemo {
                 if (text != NULL) {
                     nnk_textedit_paste(edit, text, nnk_strlen(text));
                 }
-            }));
+            });
 
         setupContext();
         return ctx;

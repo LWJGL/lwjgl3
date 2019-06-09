@@ -1615,7 +1615,7 @@ ${validations.joinToString("\n")}
                     println("$indent/** Copies the specified {@link $structType} to the {@code $member} field. */")
                     if (overrides) println("$indent@Override")
                     println("${indent}public $returnType $setter(${it.annotate(structType)} value) { $n$setter($ADDRESS, value); return this; }")
-                    if (this@Struct.mutable && nestedStruct.mutable) {
+                    if (nestedStruct.mutable) {
                         println("$indent/** Passes the {@code $member} field to the specified {@link java.util.function.Consumer Consumer}. */")
                         println("${indent}public $className${if (accessMode === AccessMode.INSTANCE) "" else ".Buffer"} $setter(java.util.function.Consumer<$structType> consumer) { consumer.accept($setter()); return this; }")
                     }
