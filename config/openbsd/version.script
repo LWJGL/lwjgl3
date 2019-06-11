@@ -1,0 +1,10 @@
+LWJGL {
+    # Expose symbols required by the JVM
+    global:
+        *org_lwjgl_*;
+        JNI_On*;
+        __wrap_memcpy;
+
+    # Hide everything else
+    local: *;
+};
