@@ -108,6 +108,12 @@ public final class Library {
             // so that newer versions can be detected.
             boolean debugLoader = Configuration.DEBUG_LOADER.get(false);
             try {
+                if (isRegularFile(libURL)) {
+                    load.accept(libURL.getPath());
+                    apiLog("\tLoaded from classpath: " + libURL);
+                    return;
+                }
+
                 if (debugLoader) {
                     apiLog("\tUsing SharedLibraryLoader...");
                 }
@@ -229,6 +235,12 @@ public final class Library {
         } else {
             boolean debugLoader = Configuration.DEBUG_LOADER.get(false);
             try {
+                if (isRegularFile(libURL)) {
+                    lib = apiCreateLibrary(libURL.getPath());
+                    apiLog("\tLoaded from classpath: " + libURL);
+                    return lib;
+                }
+
                 // Always use the SLL if the library is found in the classpath,
                 // so that newer versions can be detected.
                 if (debugLoader) {
@@ -408,6 +420,14 @@ public final class Library {
             }
         }
         return url == null ? context.getClassLoader().getResource(resource) : url;
+    }
+
+    private static boolean isRegularFile(URL url) {
+        if (!url.getProtocol().equals("file")) {
+            return false;
+        }
+        Path path = Paths.get(url.getPath());
+        return path.isAbsolute() && Files.isReadable(path);
     }
 
     @Nullable
