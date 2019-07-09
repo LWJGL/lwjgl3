@@ -4283,7 +4283,7 @@ public class GL45C extends GL44C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniform">Reference Page</a>
      */
-    public static void glGetnUniformiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat *") FloatBuffer params) {
+    public static void glGetnUniformiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint *") IntBuffer params) {
         nglGetnUniformiv(program, location, params.remaining(), memAddress(params));
     }
 
@@ -4296,10 +4296,10 @@ public class GL45C extends GL44C {
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniform">Reference Page</a>
      */
     @NativeType("void")
-    public static float glGetnUniformi(@NativeType("GLuint") int program, @NativeType("GLint") int location) {
+    public static int glGetnUniformi(@NativeType("GLuint") int program, @NativeType("GLint") int location) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            FloatBuffer params = stack.callocFloat(1);
+            IntBuffer params = stack.callocInt(1);
             nglGetnUniformiv(program, location, 1, memAddress(params));
             return params.get(0);
         } finally {
@@ -4325,7 +4325,7 @@ public class GL45C extends GL44C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniform">Reference Page</a>
      */
-    public static void glGetnUniformuiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat *") FloatBuffer params) {
+    public static void glGetnUniformuiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint *") IntBuffer params) {
         nglGetnUniformuiv(program, location, params.remaining(), memAddress(params));
     }
 
@@ -4338,10 +4338,10 @@ public class GL45C extends GL44C {
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniform">Reference Page</a>
      */
     @NativeType("void")
-    public static float glGetnUniformui(@NativeType("GLuint") int program, @NativeType("GLint") int location) {
+    public static int glGetnUniformui(@NativeType("GLuint") int program, @NativeType("GLint") int location) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            FloatBuffer params = stack.callocFloat(1);
+            IntBuffer params = stack.callocInt(1);
             nglGetnUniformuiv(program, location, 1, memAddress(params));
             return params.get(0);
         } finally {
@@ -5615,7 +5615,7 @@ public class GL45C extends GL44C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniform">Reference Page</a>
      */
-    public static void glGetnUniformiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat *") float[] params) {
+    public static void glGetnUniformiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetnUniformiv;
         if (CHECKS) {
             check(__functionAddress);
@@ -5628,7 +5628,7 @@ public class GL45C extends GL44C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniform">Reference Page</a>
      */
-    public static void glGetnUniformuiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat *") float[] params) {
+    public static void glGetnUniformuiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint *") int[] params) {
         long __functionAddress = GL.getICD().glGetnUniformuiv;
         if (CHECKS) {
             check(__functionAddress);

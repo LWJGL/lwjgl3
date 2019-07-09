@@ -262,7 +262,7 @@ public class KHRRobustness {
      * @param location the uniform location
      * @param params   the buffer in which to place the returned data
      */
-    public static void glGetnUniformiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat *") FloatBuffer params) {
+    public static void glGetnUniformiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint *") IntBuffer params) {
         GL45C.glGetnUniformiv(program, location, params);
     }
 
@@ -273,7 +273,7 @@ public class KHRRobustness {
      * @param location the uniform location
      */
     @NativeType("void")
-    public static float glGetnUniformi(@NativeType("GLuint") int program, @NativeType("GLint") int location) {
+    public static int glGetnUniformi(@NativeType("GLuint") int program, @NativeType("GLint") int location) {
         return GL45C.glGetnUniformi(program, location);
     }
 
@@ -295,7 +295,7 @@ public class KHRRobustness {
      * @param location the uniform location
      * @param params   the buffer in which to place the returned data
      */
-    public static void glGetnUniformuiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat *") FloatBuffer params) {
+    public static void glGetnUniformuiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint *") IntBuffer params) {
         GL45C.glGetnUniformuiv(program, location, params);
     }
 
@@ -306,7 +306,7 @@ public class KHRRobustness {
      * @param location the uniform location
      */
     @NativeType("void")
-    public static float glGetnUniformui(@NativeType("GLuint") int program, @NativeType("GLint") int location) {
+    public static int glGetnUniformui(@NativeType("GLuint") int program, @NativeType("GLint") int location) {
         return GL45C.glGetnUniformui(program, location);
     }
 
@@ -331,12 +331,12 @@ public class KHRRobustness {
     }
 
     /** Array version of: {@link #glGetnUniformiv GetnUniformiv} */
-    public static void glGetnUniformiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat *") float[] params) {
+    public static void glGetnUniformiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint *") int[] params) {
         GL45C.glGetnUniformiv(program, location, params);
     }
 
     /** Array version of: {@link #glGetnUniformuiv GetnUniformuiv} */
-    public static void glGetnUniformuiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat *") float[] params) {
+    public static void glGetnUniformuiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint *") int[] params) {
         GL45C.glGetnUniformuiv(program, location, params);
     }
 

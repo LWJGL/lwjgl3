@@ -1416,7 +1416,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
         GLuint("program", "the program object"),
         GLint("location", "the uniform location"),
         AutoSize("params")..GLsizei("bufSize", "the maximum number of bytes to write to {@code params}"),
-        ReturnParam..GLfloat.p("params", "the buffer in which to place the returned data")
+        ReturnParam..GLint.p("params", "the buffer in which to place the returned data")
     )
 
     void(
@@ -1426,6 +1426,6 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
         GLuint("program", "the program object"),
         GLint("location", "the uniform location"),
         AutoSize("params")..GLsizei("bufSize", "the maximum number of bytes to write to {@code params}"),
-        ReturnParam..GLfloat.p("params", "the buffer in which to place the returned data")
+        ReturnParam..GLuint.p("params", "the buffer in which to place the returned data")
     )
 }
