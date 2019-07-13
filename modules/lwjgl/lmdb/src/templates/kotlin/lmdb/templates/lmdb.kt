@@ -141,8 +141,7 @@ ENABLE_WARNINGS()""")
         "NOTLS".enum("Tie reader locktable slots to {@code MDB_txn} objects instead of to threads.", 0x200000),
         "NOLOCK".enum("Don't do any locking, caller must manage their own locks.", 0x400000),
         "NORDAHEAD".enum("Don't do readahead (no effect on Windows).", 0x800000),
-        "NOMEMINIT".enum("Don't initialize malloc'd memory before writing to datafile.", 0x1000000),
-        "PREVSNAPSHOT".enum("Use the previous snapshot rather than the latest one.", 0x2000000)
+        "NOMEMINIT".enum("Don't initialize malloc'd memory before writing to datafile.", 0x1000000)
     )
 
     EnumConstant(
@@ -231,8 +230,7 @@ ENABLE_WARNINGS()""")
         "BAD_TXN".enum("Transaction must abort, has a child, or is invalid.", "-30782"),
         "BAD_VALSIZE".enum("Unsupported size of key/DB name/data, or wrong #DUPFIXED size.", "-30781"),
         "BAD_DBI".enum("The specified DBI was changed unexpectedly.", "-30780"),
-        "PROBLEM".enum("Unexpected problem - txn should abort.", "-30779"),
-        "LAST_ERRCODE".enum("The last defined error code.", "MDB_PROBLEM")
+        "LAST_ERRCODE".enum("The last defined error code.", "MDB_BAD_DBI")
     )
 
     charASCII.p(
@@ -379,12 +377,6 @@ ENABLE_WARNINGS()""")
                 the caller is expected to overwrite all of the memory that was reserved in that case.
 
                 This flag may be changed at any time using #env_set_flags().
-                """,
-                """#PREVSNAPSHOT
-
-                Open the environment with the previous snapshot rather than the latest one. This loses the latest transaction, but may help work around some
-                types of corruption. If opened with write access, this must be the only process using the environment. This flag is automatically reset after a
-                write transaction is successfully committed.
                 """
             )}
             """
@@ -612,7 +604,7 @@ ENABLE_WARNINGS()""")
         """,
 
         env_open["env"],
-        mdb_size_t("size", "the size in bytes"),
+        size_t("size", "the size in bytes"),
 
         returnDoc =
         """
@@ -745,9 +737,7 @@ ENABLE_WARNINGS()""")
             """
             special options for this transaction. This parameter must be set to 0 or by bitwise OR'ing together one or more of the values described here.
             ${ul(
-                "#RDONLY - This transaction will not perform any write operations.",
-                "#NOSYNC - Don't flush system buffers to disk when committing this transaction.",
-                "#NOMETASYNC - Flush system buffers but omit metadata flush when committing this transaction."
+                "#RDONLY - This transaction will not perform any write operations."
             )}
             """
         ),
@@ -775,7 +765,7 @@ ENABLE_WARNINGS()""")
         MDB_txn.p("txn", "a transaction handle returned by #txn_begin().")
     )
 
-    mdb_size_t(
+    size_t(
         "txn_id",
         """
         Returns the transaction's ID.
@@ -896,7 +886,7 @@ ENABLE_WARNINGS()""")
                 """,
                 """#INTEGERKEY
 
-                Keys are binary integers in native byte order, either {@code unsigned int} or {@code mdb_size_t}, and will be sorted as such. The keys must all be
+                Keys are binary integers in native byte order, either {@code unsigned int} or {@code size_t}, and will be sorted as such. The keys must all be
                 of the same size.
                 """,
                 """#DUPFIXED
@@ -1309,7 +1299,7 @@ ENABLE_WARNINGS()""")
         """,
 
         cursor_close["cursor"],
-        Check(1)..mdb_size_t.p("countp", "address where the count will be stored")
+        Check(1)..size_t.p("countp", "address where the count will be stored")
     )
 
     int(

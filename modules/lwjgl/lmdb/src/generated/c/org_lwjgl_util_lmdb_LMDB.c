@@ -141,7 +141,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_lmdb_LMDB_nmdb_1env_1get_1path(JNIEnv
 
 JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_lmdb_LMDB_nmdb_1env_1set_1mapsize(jlong envAddress, jlong size) {
     MDB_env *env = (MDB_env *)(intptr_t)envAddress;
-    return (jint)mdb_env_set_mapsize(env, (mdb_size_t)size);
+    return (jint)mdb_env_set_mapsize(env, (size_t)size);
 }
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_lmdb_LMDB_nmdb_1env_1set_1mapsize(JNIEnv *__env, jclass clazz, jlong envAddress, jlong size) {
     UNUSED_PARAMS(__env, clazz)
@@ -471,7 +471,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_lmdb_LMDB_nmdb_1cursor_1del(JNIEnv *_
 
 JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_lmdb_LMDB_nmdb_1cursor_1count(jlong cursorAddress, jlong countpAddress) {
     MDB_cursor *cursor = (MDB_cursor *)(intptr_t)cursorAddress;
-    mdb_size_t *countp = (mdb_size_t *)(intptr_t)countpAddress;
+    size_t *countp = (size_t *)(intptr_t)countpAddress;
     return (jint)mdb_cursor_count(cursor, countp);
 }
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_lmdb_LMDB_nmdb_1cursor_1count(JNIEnv *__env, jclass clazz, jlong cursorAddress, jlong countpAddress) {

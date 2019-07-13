@@ -145,22 +145,20 @@ public class LMDB {
      * <li>{@link #MDB_NOLOCK NOLOCK} - Don't do any locking, caller must manage their own locks.</li>
      * <li>{@link #MDB_NORDAHEAD NORDAHEAD} - Don't do readahead (no effect on Windows).</li>
      * <li>{@link #MDB_NOMEMINIT NOMEMINIT} - Don't initialize malloc'd memory before writing to datafile.</li>
-     * <li>{@link #MDB_PREVSNAPSHOT PREVSNAPSHOT} - Use the previous snapshot rather than the latest one.</li>
      * </ul>
      */
     public static final int
-        MDB_FIXEDMAP     = 0x1,
-        MDB_NOSUBDIR     = 0x4000,
-        MDB_NOSYNC       = 0x10000,
-        MDB_RDONLY       = 0x20000,
-        MDB_NOMETASYNC   = 0x40000,
-        MDB_WRITEMAP     = 0x80000,
-        MDB_MAPASYNC     = 0x100000,
-        MDB_NOTLS        = 0x200000,
-        MDB_NOLOCK       = 0x400000,
-        MDB_NORDAHEAD    = 0x800000,
-        MDB_NOMEMINIT    = 0x1000000,
-        MDB_PREVSNAPSHOT = 0x2000000;
+        MDB_FIXEDMAP   = 0x1,
+        MDB_NOSUBDIR   = 0x4000,
+        MDB_NOSYNC     = 0x10000,
+        MDB_RDONLY     = 0x20000,
+        MDB_NOMETASYNC = 0x40000,
+        MDB_WRITEMAP   = 0x80000,
+        MDB_MAPASYNC   = 0x100000,
+        MDB_NOTLS      = 0x200000,
+        MDB_NOLOCK     = 0x400000,
+        MDB_NORDAHEAD  = 0x800000,
+        MDB_NOMEMINIT  = 0x1000000;
 
     /**
      * Database flags.
@@ -299,7 +297,6 @@ public class LMDB {
      * <li>{@link #MDB_BAD_TXN BAD_TXN} - Transaction must abort, has a child, or is invalid.</li>
      * <li>{@link #MDB_BAD_VALSIZE BAD_VALSIZE} - Unsupported size of key/DB name/data, or wrong {@link #MDB_DUPFIXED DUPFIXED} size.</li>
      * <li>{@link #MDB_BAD_DBI BAD_DBI} - The specified DBI was changed unexpectedly.</li>
-     * <li>{@link #MDB_PROBLEM PROBLEM} - Unexpected problem - txn should abort.</li>
      * <li>{@link #MDB_LAST_ERRCODE LAST_ERRCODE} - The last defined error code.</li>
      * </ul>
      */
@@ -325,8 +322,7 @@ public class LMDB {
         MDB_BAD_TXN          = -30782,
         MDB_BAD_VALSIZE      = -30781,
         MDB_BAD_DBI          = -30780,
-        MDB_PROBLEM          = -30779,
-        MDB_LAST_ERRCODE     = MDB_PROBLEM;
+        MDB_LAST_ERRCODE     = MDB_BAD_DBI;
 
     static { LibLMDB.initialize(); }
 
@@ -498,11 +494,6 @@ public class LMDB {
      *              the caller is expected to overwrite all of the memory that was reserved in that case.</p>
      *              
      *              <p>This flag may be changed at any time using {@link #mdb_env_set_flags env_set_flags}.</p></li>
-     *              <li>{@link #MDB_PREVSNAPSHOT PREVSNAPSHOT}
-     *              
-     *              <p>Open the environment with the previous snapshot rather than the latest one. This loses the latest transaction, but may help work around some
-     *              types of corruption. If opened with write access, this must be the only process using the environment. This flag is automatically reset after a
-     *              write transaction is successfully committed.</p></li>
      *              </ul>
      * @param mode  The UNIX permissions to set on created files and semaphores.
      *              
@@ -614,11 +605,6 @@ public class LMDB {
      *              the caller is expected to overwrite all of the memory that was reserved in that case.</p>
      *              
      *              <p>This flag may be changed at any time using {@link #mdb_env_set_flags env_set_flags}.</p></li>
-     *              <li>{@link #MDB_PREVSNAPSHOT PREVSNAPSHOT}
-     *              
-     *              <p>Open the environment with the previous snapshot rather than the latest one. This loses the latest transaction, but may help work around some
-     *              types of corruption. If opened with write access, this must be the only process using the environment. This flag is automatically reset after a
-     *              write transaction is successfully committed.</p></li>
      *              </ul>
      * @param mode  The UNIX permissions to set on created files and semaphores.
      *              
@@ -950,7 +936,7 @@ public class LMDB {
      *         <li>{@code EINVAL} - an invalid parameter was specified, or the environment has an active write transaction.</li>
      *         </ul>
      */
-    public static int mdb_env_set_mapsize(@NativeType("MDB_env *") long env, @NativeType("mdb_size_t") long size) {
+    public static int mdb_env_set_mapsize(@NativeType("MDB_env *") long env, @NativeType("size_t") long size) {
         if (CHECKS) {
             check(env);
         }
@@ -1120,8 +1106,6 @@ public class LMDB {
      *               
      *               <ul>
      *               <li>{@link #MDB_RDONLY RDONLY} - This transaction will not perform any write operations.</li>
-     *               <li>{@link #MDB_NOSYNC NOSYNC} - Don't flush system buffers to disk when committing this transaction.</li>
-     *               <li>{@link #MDB_NOMETASYNC NOMETASYNC} - Flush system buffers but omit metadata flush when committing this transaction.</li>
      *               </ul>
      * @param txn    address where the new {@code MDB_txn} handle will be stored
      *
@@ -1176,7 +1160,7 @@ public class LMDB {
      *
      * @return a transaction ID, valid if input is an active transaction
      */
-    @NativeType("mdb_size_t")
+    @NativeType("size_t")
     public static long mdb_txn_id(@NativeType("MDB_txn *") long txn) {
         if (CHECKS) {
             check(txn);
@@ -1317,7 +1301,7 @@ public class LMDB {
      *              default keys must be unique and may have only a single data item.</p></li>
      *              <li>{@link #MDB_INTEGERKEY INTEGERKEY}
      *              
-     *              <p>Keys are binary integers in native byte order, either {@code unsigned int} or {@code mdb_size_t}, and will be sorted as such. The keys must all be
+     *              <p>Keys are binary integers in native byte order, either {@code unsigned int} or {@code size_t}, and will be sorted as such. The keys must all be
      *              of the same size.</p></li>
      *              <li>{@link #MDB_DUPFIXED DUPFIXED}
      *              
@@ -1382,7 +1366,7 @@ public class LMDB {
      *              default keys must be unique and may have only a single data item.</p></li>
      *              <li>{@link #MDB_INTEGERKEY INTEGERKEY}
      *              
-     *              <p>Keys are binary integers in native byte order, either {@code unsigned int} or {@code mdb_size_t}, and will be sorted as such. The keys must all be
+     *              <p>Keys are binary integers in native byte order, either {@code unsigned int} or {@code size_t}, and will be sorted as such. The keys must all be
      *              of the same size.</p></li>
      *              <li>{@link #MDB_DUPFIXED DUPFIXED}
      *              
@@ -1933,7 +1917,7 @@ public class LMDB {
      * @param cursor a cursor handle returned by {@link #mdb_cursor_open cursor_open}
      * @param countp address where the count will be stored
      */
-    public static int mdb_cursor_count(@NativeType("MDB_cursor *") long cursor, @NativeType("mdb_size_t *") PointerBuffer countp) {
+    public static int mdb_cursor_count(@NativeType("MDB_cursor *") long cursor, @NativeType("size_t *") PointerBuffer countp) {
         if (CHECKS) {
             check(cursor);
             check(countp, 1);

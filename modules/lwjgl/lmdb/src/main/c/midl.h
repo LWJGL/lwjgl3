@@ -12,7 +12,7 @@
 /* This work is part of OpenLDAP Software <http://www.openldap.org/>.
  *
  * Copyright 2000-2019 The OpenLDAP Foundation.
- * Portions Copyright 2001-2019 Howard Chu, Symas Corp.
+ * Portions Copyright 2001-2018 Howard Chu, Symas Corp.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,7 +27,7 @@
 #ifndef _MDB_MIDL_H_
 #define _MDB_MIDL_H_
 
-#include "lmdb.h"
+#include <stddef.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -43,7 +43,7 @@ extern "C" {
 	/** A generic unsigned ID number. These were entryIDs in back-bdb.
 	 *	Preferably it should have the same size as a pointer.
 	 */
-typedef mdb_size_t MDB_ID;
+typedef size_t MDB_ID;
 
 	/** An IDL is an ID List, a sorted array of IDs. The first
 	 * element of the array is a counter for how many actual
@@ -178,20 +178,6 @@ int mdb_mid2l_insert( MDB_ID2L ids, MDB_ID2 *id );
 	 */
 int mdb_mid2l_append( MDB_ID2L ids, MDB_ID2 *id );
 
-#ifdef MDB_VL32
-typedef struct MDB_ID3 {
-	MDB_ID mid;		/**< The ID */
-	void *mptr;		/**< The pointer */
-	unsigned int mcnt;		/**< Number of pages */
-	unsigned int mref;		/**< Refcounter */
-} MDB_ID3;
-
-typedef MDB_ID3 *MDB_ID3L;
-
-unsigned mdb_mid3l_search( MDB_ID3L ids, MDB_ID id );
-int mdb_mid3l_insert( MDB_ID3L ids, MDB_ID3 *id );
-
-#endif /* MDB_VL32 */
 /** @} */
 /** @} */
 #ifdef __cplusplus

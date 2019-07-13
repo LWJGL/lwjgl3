@@ -11,8 +11,6 @@ val MDB_env = "MDB_env".opaque
 val mdb_mode_t = typedef(int, "mdb_mode_t") // TODO: mode_t on Linux
 val mdb_filehandle_t = typedef(opaque_p, "mdb_filehandle_t") // TODO: int on Linux
 
-val mdb_size_t = typedef(size_t, "mdb_size_t")
-
 val MDB_dbi = typedef(unsigned_int, "MDB_dbi")
 
 val MDB_txn = "MDB_txn".opaque
@@ -42,19 +40,19 @@ val MDB_stat = struct(Module.LMDB, "MDBStat", nativeName = "MDB_stat", mutable =
 
     unsigned_int("ms_psize", "Size of a database page. This is currently the same for all databases.")
     unsigned_int("ms_depth", "Depth (height) of the B-tree.")
-    mdb_size_t("ms_branch_pages", "Number of internal (non-leaf) pages.")
-    mdb_size_t("ms_leaf_pages", "Number of leaf pages.")
-    mdb_size_t("ms_overflow_pages", "Number of overflow pages.")
-    mdb_size_t("ms_entries", "Number of data items.")
+    size_t("ms_branch_pages", "Number of internal (non-leaf) pages.")
+    size_t("ms_leaf_pages", "Number of leaf pages.")
+    size_t("ms_overflow_pages", "Number of overflow pages.")
+    size_t("ms_entries", "Number of data items.")
 }
 
 val MDB_envinfo = struct(Module.LMDB, "MDBEnvInfo", nativeName = "MDB_envinfo", mutable = false) {
     documentation = "Information about the environment."
 
     opaque_p("me_mapaddr", "Address of map, if fixed.")
-    mdb_size_t("me_mapsize", "Size of the data memory map.")
-    mdb_size_t("me_last_pgno", "ID of the last used page.")
-    mdb_size_t("me_last_txnid", "ID of the last committed transaction.")
+    size_t("me_mapsize", "Size of the data memory map.")
+    size_t("me_last_pgno", "ID of the last used page.")
+    size_t("me_last_txnid", "ID of the last committed transaction.")
     unsigned_int("me_maxreaders", "Max reader slots in the environment.")
     unsigned_int("me_numreaders", "Max reader slots used in the environment.")
 }
