@@ -171,9 +171,9 @@
             </source>
             <beforeLink>
                 <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-dependencies-uptodate">
-                    <update-dependency name="core" artifact="core/libdyncall_s.a"/>
-                    <update-dependency name="core" artifact="core/libdyncallback_s.a"/>
-                    <update-dependency name="core" artifact="core/libdynload_s.a"/>
+                    <update-dependency module="core" artifact="core/libdyncall_s.a"/>
+                    <update-dependency module="core" artifact="core/libdyncallback_s.a"/>
+                    <update-dependency module="core" artifact="core/libdynload_s.a"/>
                 </parallel>
             </beforeLink>
             <link>
