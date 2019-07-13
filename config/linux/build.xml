@@ -317,7 +317,7 @@
         <!-- OpenVR -->
         <build_simple module="openvr"/>
 
-        <!-- ParShapes -->
+        <!-- Par -->
         <build simple="true" module="par">
             <link>
                 <arg value="-lm"/>
