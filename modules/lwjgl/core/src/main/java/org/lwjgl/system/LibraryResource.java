@@ -171,8 +171,8 @@ public final class LibraryResource {
     }
 
     /**
-     * Loads a library resource using {@link #load(String)} with the name specified by {@code name}. If {@code name} is not set,
-     * {@link #load(String)} will be called with the names specified by {@code defaultNames}. The first successful will be returned. If the resource could
+     * Loads a library resource using {@link #load(Class, String, String) load} with the name specified by {@code name}. If {@code name} is not set,
+     * {@code load} will be called with the names specified by {@code defaultNames}. The first successful will be returned. If the resource could
      * not be found, the {@code fallback} will be called.
      *
      * @param name         a {@link Configuration} that specifies the resource name

@@ -41,7 +41,7 @@ if (hasProperty("release")) {
         password: sonatypePassword
     )
 } else {
-    //project.version += "-LOCAL"
+    project.version += "-LOCAL"
     deployment = new Deployment(
         type: BuildType.LOCAL,
         repo: repositories.mavenLocal().url

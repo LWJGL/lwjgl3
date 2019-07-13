@@ -106,7 +106,7 @@ public class Configuration<T> {
     );
 
     /**
-     * EXPERIMENTAL: Emulates {@link System#loadLibrary} behavior in {@link Library#loadNative(String)}.
+     * EXPERIMENTAL: Emulates {@link System#loadLibrary} behavior in {@link Library#loadNative}.
      *
      * <p style="font-family: monospace">
      * Property: <b>org.lwjgl.system.EmulateSystemLoadLibrary</b><br>
