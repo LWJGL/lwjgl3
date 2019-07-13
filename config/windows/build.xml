@@ -292,7 +292,7 @@ EXPORTS
         <!-- OpenVR -->
         <build_simple module="openvr"/>
 
-        <!-- ParShapes -->
+        <!-- Par -->
         <build_simple module="par"/>
 
         <!-- Remotery -->

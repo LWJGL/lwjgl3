@@ -142,7 +142,8 @@ improve the chances of a quick and useful response.
 |[NanoSVG](https://github.com/memononen/nanosvg)|A simple stupid SVG parser.|
 |[NanoVG](https://github.com/memononen/nanovg)|A small antialiased vector graphics rendering library for OpenGL.|
 |[Nuklear](https://github.com/vurtun/nuklear)|A minimal state immediate mode graphical user interface toolkit written in ANSI C and licensed under public domain.|
-|[par_shapes](https://github.com/prideout/par)|Generate parametric surfaces and other simple shapes.|
+|[par_shapes](https://prideout.net/shapes)|Generate parametric surfaces and other simple shapes.|
+|[par_streamlines](https://prideout.net/blog/par_streamlines/)|Triangulate wide lines and curves.|
 |[OpenVR](https://github.com/ValveSoftware/openvr)|An API and runtime that allows access to VR hardware from multiple vendors without requiring that applications have specific knowledge of the hardware they are targeting.|
 |[Shaderc](https://github.com/google/shaderc)|A collection of libraries for shader compilation.|
 |[Tiny OpenEXR](https://github.com/syoyo/tinyexr)|A small, single header-only library to load and save OpenEXR(.exr) images.|
