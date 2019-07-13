@@ -10,7 +10,7 @@
 // In addition to the comment block above each function declaration, the API
 // has informal documentation here:
 //
-//     http://github.prideout.net/shapes/
+//     https://prideout.net/shapes
 //
 // For our purposes, a "mesh" is a list of points and a list of triangles; the
 // former is a flattened list of three-tuples (32-bit floats) and the latter is
@@ -21,8 +21,7 @@
 // coordinates (one per vertex).  That's it!  If you need something fancier,
 // look elsewhere.
 //
-// The MIT License
-// Copyright (c) 2015 Philip Rideout
+// Distributed under the MIT License, see bottom of file.
 
 #ifndef PAR_SHAPES_H
 #define PAR_SHAPES_H
@@ -67,6 +66,10 @@ void par_shapes_free_mesh(par_shapes_mesh*);
 // slices, and "stacks" like a number of stacked rings.  Height and radius are
 // both 1.0, but they can easily be changed with par_shapes_scale.
 par_shapes_mesh* par_shapes_create_cylinder(int slices, int stacks);
+
+// Cone is similar to cylinder but the radius diminishes to zero as Z increases.
+// Again, height and radius are 1.0, but can be changed with par_shapes_scale.
+par_shapes_mesh* par_shapes_create_cone(int slices, int stacks);
 
 // Create a donut that sits on the Z=0 plane with the specified inner radius.
 // The outer radius can be controlled with par_shapes_scale.
@@ -207,6 +210,7 @@ static void par_shapes__hemisphere(float const* uv, float* xyz, void*);
 static void par_shapes__plane(float const* uv, float* xyz, void*);
 static void par_shapes__klein(float const* uv, float* xyz, void*);
 static void par_shapes__cylinder(float const* uv, float* xyz, void*);
+static void par_shapes__cone(float const* uv, float* xyz, void*);
 static void par_shapes__torus(float const* uv, float* xyz, void*);
 static void par_shapes__trefoil(float const* uv, float* xyz, void*);
 
@@ -321,6 +325,15 @@ par_shapes_mesh* par_shapes_create_cylinder(int slices, int stacks)
         return 0;
     }
     return par_shapes_create_parametric(par_shapes__cylinder, slices,
+        stacks, 0);
+}
+
+par_shapes_mesh* par_shapes_create_cone(int slices, int stacks)
+{
+    if (slices < 3 || stacks < 1) {
+        return 0;
+    }
+    return par_shapes_create_parametric(par_shapes__cone, slices,
         stacks, 0);
 }
 
@@ -578,6 +591,15 @@ static void par_shapes__cylinder(float const* uv, float* xyz, void* userdata)
     xyz[2] = uv[0];
 }
 
+static void par_shapes__cone(float const* uv, float* xyz, void* userdata)
+{
+    float r = 1.0f - uv[0];
+    float theta = uv[1] * 2 * PAR_PI;
+    xyz[0] = r * sinf(theta);
+    xyz[1] = r * cosf(theta);
+    xyz[2] = uv[0];
+}
+
 static void par_shapes__torus(float const* uv, float* xyz, void* userdata)
 {
     float major = 1;
@@ -743,15 +765,15 @@ void par_shapes_rotate(par_shapes_mesh* mesh, float radians, float const* axis)
         p[1] = y;
         p[2] = z;
     }
-    p = mesh->normals;
-    if (p) {
-        for (int i = 0; i < mesh->npoints; i++, p += 3) {
-            float x = col0[0] * p[0] + col1[0] * p[1] + col2[0] * p[2];
-            float y = col0[1] * p[0] + col1[1] * p[1] + col2[1] * p[2];
-            float z = col0[2] * p[0] + col1[2] * p[1] + col2[2] * p[2];
-            p[0] = x;
-            p[1] = y;
-            p[2] = z;
+    float* n = mesh->normals;
+    if (n) {
+        for (int i = 0; i < mesh->npoints; i++, n += 3) {
+            float x = col0[0] * n[0] + col1[0] * n[1] + col2[0] * n[2];
+            float y = col0[1] * n[0] + col1[1] * n[1] + col2[1] * n[2];
+            float z = col0[2] * n[0] + col1[2] * n[1] + col2[2] * n[2];
+            n[0] = x;
+            n[1] = y;
+            n[2] = z;
         }
     }
 }
@@ -763,6 +785,18 @@ void par_shapes_scale(par_shapes_mesh* m, float x, float y, float z)
         *points++ *= x;
         *points++ *= y;
         *points++ *= z;
+    }
+    float* n = m->normals;
+    if (n && (x != y || x != z || y != z)) {
+        x = 1.0f / x;
+        y = 1.0f / y;
+        z = 1.0f / z;
+        for (int i = 0; i < m->npoints; i++, n += 3) {
+            n[0] *= x;
+            n[1] *= y;
+            n[2] *= z;
+            par_shapes__normalize3(n);
+        }
     }
 }
 
@@ -2063,3 +2097,25 @@ void par_shapes_remove_degenerate(par_shapes_mesh* mesh, float mintriarea)
 
 #endif // PAR_SHAPES_IMPLEMENTATION
 #endif // PAR_SHAPES_H
+
+// par_shapes is distributed under the MIT license:
+//
+// Copyright (c) 2019 Philip Rideout
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.

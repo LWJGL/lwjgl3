@@ -78,6 +78,25 @@ public class ParShapes {
         return ParShapesMesh.createSafe(__result);
     }
 
+    // --- [ par_shapes_create_cone ] ---
+
+    /** Unsafe version of: {@link #par_shapes_create_cone create_cone} */
+    public static native long npar_shapes_create_cone(int slices, int stacks);
+
+    /**
+     * Creates a cone similar to {@link #par_shapes_create_cylinder create_cylinder} but the radius diminishes to zero as Z increases.  Again, height and radius are 1.0, but can be changed
+     * with {@link #par_shapes_scale scale}.
+     *
+     * @param slices the number of slices
+     * @param stacks the number of stacks
+     */
+    @Nullable
+    @NativeType("par_shapes_mesh *")
+    public static ParShapesMesh par_shapes_create_cone(int slices, int stacks) {
+        long __result = npar_shapes_create_cone(slices, stacks);
+        return ParShapesMesh.createSafe(__result);
+    }
+
     // --- [ par_shapes_create_torus ] ---
 
     /** Unsafe version of: {@link #par_shapes_create_torus create_torus} */

@@ -145,6 +145,7 @@ public final class ParShapesDemo {
                 case GLFW_KEY_6:
                 case GLFW_KEY_7:
                 case GLFW_KEY_8:
+                case GLFW_KEY_9:
                     updateMesh(key);
                     break;
                 case GLFW_KEY_E:
@@ -287,18 +288,21 @@ public final class ParShapesDemo {
                 mesh = par_shapes_create_cylinder(slices, stacks);
                 break;
             case GLFW_KEY_4:
-                mesh = par_shapes_create_torus(slices, stacks, 0.25f);
+                mesh = par_shapes_create_cone(slices, stacks);
                 break;
             case GLFW_KEY_5:
-                mesh = par_shapes_create_trefoil_knot(slices, stacks, 1.0f);
+                mesh = par_shapes_create_torus(slices, stacks, 0.25f);
                 break;
             case GLFW_KEY_6:
+                mesh = par_shapes_create_trefoil_knot(slices, stacks, 1.0f);
+                break;
+            case GLFW_KEY_7:
                 mesh = par_shapes_create_klein_bottle(slices, stacks);
                 if (mesh != null) {
                     par_shapes_scale(mesh, 0.1f, 0.1f, 0.1f);
                 }
                 break;
-            case GLFW_KEY_7:
+            case GLFW_KEY_8:
                 String program =
                     " sx 2 sy 2" +
                     " ry 90 rx 90" +
@@ -332,7 +336,7 @@ public final class ParShapesDemo {
                     par_shapes_translate(mesh, 0.0f, -1.0f, 0.0f);
                 }
                 break;
-            case GLFW_KEY_8:
+            case GLFW_KEY_9:
                 mesh = par_shapes_create_rock(seed, subdivisions);
                 break;
         }
@@ -370,6 +374,7 @@ public final class ParShapesDemo {
             "Sphere",
             "Hemisphere",
             "Cylinder",
+            "Cone",
             "Torus",
             "Trefoil knot",
             "Klein bottle",

@@ -61,6 +61,17 @@ par_shapes_free_mesh(m);""")}
     )
 
     par_shapes_mesh.p(
+        "create_cone",
+        """
+        Creates a cone similar to #create_cylinder() but the radius diminishes to zero as Z increases.  Again, height and radius are 1.0, but can be changed
+        with #scale().
+        """,
+
+        int("slices", "the number of slices"),
+        int("stacks", "the number of stacks")
+    )
+
+    par_shapes_mesh.p(
         "create_torus",
         "Creates a donut that sits on the Z=0 plane with the specified inner radius. The outer radius can be controlled with #scale().",
 

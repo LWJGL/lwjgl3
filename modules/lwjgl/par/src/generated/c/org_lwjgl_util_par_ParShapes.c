@@ -34,6 +34,14 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_par_ParShapes_npar_1shapes_1create_1
     return JavaCritical_org_lwjgl_util_par_ParShapes_npar_1shapes_1create_1cylinder(slices, stacks);
 }
 
+JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_par_ParShapes_npar_1shapes_1create_1cone(jint slices, jint stacks) {
+    return (jlong)(intptr_t)par_shapes_create_cone(slices, stacks);
+}
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_par_ParShapes_npar_1shapes_1create_1cone(JNIEnv *__env, jclass clazz, jint slices, jint stacks) {
+    UNUSED_PARAMS(__env, clazz)
+    return JavaCritical_org_lwjgl_util_par_ParShapes_npar_1shapes_1create_1cone(slices, stacks);
+}
+
 JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_par_ParShapes_npar_1shapes_1create_1torus(jint slices, jint stacks, jfloat radius) {
     return (jlong)(intptr_t)par_shapes_create_torus(slices, stacks, radius);
 }
