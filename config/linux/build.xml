@@ -185,7 +185,7 @@
                 </parallel>
             </beforeLink>
             <link>
-                <fileset dir="${lib.native}/core">
+                <fileset dir="${lib.native}/org.lwjgl">
                     <include name="libdyn*.a"/>
                 </fileset>
                 <arg value="-ldl"/>
@@ -210,7 +210,7 @@
             </beforeLink>
             <link>
                 <arg value="-ldl"/>
-                <arg value="-L${lib.native}/bullet"/>
+                <arg value="-L${lib.native}/org.lwjgl.bullet"/>
                 <!-- Order is important -->
                 <arg value="-lBulletWorldImporter"/>
                 <arg value="-lBulletSoftBody"/>

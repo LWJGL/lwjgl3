@@ -65,7 +65,7 @@
             </compile>
 
             <local name="lib.arch"/>
-            <property name="lib.arch" value="${lib.native}/@{module}"/>
+            <property name="lib.arch" value="${lib.native}/${module.@{module}.java}"/>
 
             <local name="lib-uptodate"/>
             <uptodate property="lib-uptodate" targetfile="${lib.arch}/${name}.dll">
@@ -112,7 +112,7 @@ EXPORTS
             <mkdir dir="${lib.arch}" unless:set="lib-uptodate"/>
             <beforeLink unless:set="lib-uptodate"/>
             <apply executable="cl" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
-                <arg line='/LD /WX /nologo /Fe:"${lib.arch}\${name}.dll"'/>
+                <arg line='/LD /WX /nologo /Fe:"${bin.native}\build\${name}.dll"'/>
 
                 <fileset dir="${dest}" includes="*.obj"/>
                 <link/>
@@ -127,6 +127,7 @@ EXPORTS
                 <linkargs/>
             </apply>
 
+            <move file="${bin.native}/build/${name}.dll" todir="${lib.arch}" unless:set="lib-uptodate"/>
             <delete file="${lib.native}/touch.txt" quiet="true" unless:set="lib-uptodate"/>
         </sequential>
     </macrodef>
@@ -164,7 +165,7 @@ EXPORTS
                 </parallel>
             </beforeLink>
             <link>
-                <fileset dir="${lib.native}/core">
+                <fileset dir="${lib.native}/org.lwjgl">
                     <include name="dyn*.lib"/>
                 </fileset>
             </link>
@@ -187,7 +188,7 @@ EXPORTS
                 </parallel>
             </beforeLink>
             <link>
-                <fileset dir="${lib.native}/bullet">
+                <fileset dir="${lib.native}/org.lwjgl.bullet">
                     <include name="*.lib"/>
                 </fileset>
             </link>

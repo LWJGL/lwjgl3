@@ -69,6 +69,7 @@ public final class Library {
      * @param loadLibrary should be the {@code System::loadLibrary} expression. This ensures that {@code System.loadLibrary} has the same caller as this
      *                    method.
      * @param context     the class to use to discover the shared library in the classpath
+     * @param module      the module to which the shared library belongs
      * @param name        the library name. If not an absolute path, it must be the plain library name, without an OS specific prefix or file extension (e.g.
      *                    GL, not libGL.so)
      *
@@ -107,9 +108,10 @@ public final class Library {
             // so that newer versions can be detected.
             boolean debugLoader = Configuration.DEBUG_LOADER.get(false);
             try {
-                if (isRegularFile(libURL)) {
-                    load.accept(libURL.getPath());
-                    apiLog("\tLoaded from classpath: " + libURL);
+                String regular = getRegularFilePath(libURL);
+                if (regular != null) {
+                    load.accept(regular);
+                    apiLog("\tLoaded from classpath: " + regular);
                     return;
                 }
 
@@ -188,6 +190,7 @@ public final class Library {
      * {@link org.lwjgl.system.linux.DynamicLinkLoader#dlopen dlopen}).
      *
      * @param context the class to use to discover the shared library in the classpath
+     * @param module  the module to which the shared library belongs
      * @param name    the library name. OS-specific prefixes and file extensions are optional (e.g. both {@code "GL"} and {@code "libGL.so.1"} are
      *                valid on Linux)
      *
@@ -205,10 +208,11 @@ public final class Library {
      * {@link org.lwjgl.system.linux.DynamicLinkLoader#dlopen dlopen}).
      *
      * @param context          the class to use to discover the shared library in the classpath
+     * @param module           the module to which the shared library belongs
      * @param name             the library name. OS-specific prefixes and file extensions are optional (e.g. both {@code "GL"} and {@code "libGL.so.1"} are
      *                         valid on Linux)
-     * @param bundledWithLWJGL whether the default LWJGL distribution includes the shared library. This flag does not affect the shared library loading
-     *                         process.
+     * @param bundledWithLWJGL whether the default LWJGL distribution includes the shared library. If true, LWJGL will also try to find the shared library under
+     *                         the {@code <platform>/<arch>/<module>} subfolder.
      *
      * @return the shared library
      *
@@ -243,9 +247,10 @@ public final class Library {
         } else {
             boolean debugLoader = Configuration.DEBUG_LOADER.get(false);
             try {
-                if (isRegularFile(libURL)) {
-                    lib = apiCreateLibrary(libURL.getPath());
-                    apiLog("\tLoaded from classpath: " + libURL);
+                String regular = getRegularFilePath(libURL);
+                if (regular != null) {
+                    lib = apiCreateLibrary(regular);
+                    apiLog("\tLoaded from classpath: " + regular);
                     return lib;
                 }
 
@@ -430,12 +435,18 @@ public final class Library {
         return url == null ? context.getClassLoader().getResource(resource) : url;
     }
 
-    private static boolean isRegularFile(URL url) {
-        if (!url.getProtocol().equals("file")) {
-            return false;
+    @Nullable
+    static String getRegularFilePath(URL url) {
+        if (url.getProtocol().equals("file")) {
+            try {
+                Path path = Paths.get(url.toURI());
+                if (path.isAbsolute() && Files.isReadable(path)) {
+                    return path.toString();
+                }
+            } catch (URISyntaxException ignored) {
+            }
         }
-        Path path = Paths.get(url.getPath());
-        return path.isAbsolute() && Files.isReadable(path);
+        return null;
     }
 
     @Nullable
