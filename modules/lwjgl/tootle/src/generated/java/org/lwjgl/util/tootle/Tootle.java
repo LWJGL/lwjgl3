@@ -126,7 +126,7 @@ public class Tootle {
         TOOTLE_OVERDRAW_RAYTRACE = 3,
         TOOTLE_OVERDRAW_FAST     = 4;
 
-    static { Library.loadSystem(System::load, System::loadLibrary, Tootle.class, Platform.mapLibraryNameBundled("lwjgl_tootle")); }
+    static { Library.loadSystem(System::load, System::loadLibrary, Tootle.class, "org.lwjgl.tootle", Platform.mapLibraryNameBundled("lwjgl_tootle")); }
 
     protected Tootle() {
         throw new UnsupportedOperationException();

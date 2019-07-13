@@ -12,7 +12,7 @@ final class LibZstd {
 
     static {
         String libName = Platform.mapLibraryNameBundled("lwjgl_zstd");
-        Library.loadSystem(System::load, System::loadLibrary, LibZstd.class, libName);
+        Library.loadSystem(System::load, System::loadLibrary, LibZstd.class, "org.lwjgl.zstd", libName);
     }
 
     private LibZstd() {

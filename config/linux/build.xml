@@ -89,6 +89,9 @@
                 <source/>
             </compile>
 
+            <local name="lib.arch"/>
+            <property name="lib.arch" value="${lib.native}/${module.@{module}.java}"/>
+
             <local name="lib-uptodate"/>
             <uptodate property="lib-uptodate" targetfile="${lib.arch}/lib${name}.so">
                 <srcfiles file="config/${platform}/build.xml"/>
@@ -115,7 +118,8 @@
             </condition>
 
             <echo message="Linking ${name}" taskname="${gcc}" unless:set="lib-uptodate"/>
-            <beforeLink/>
+            <mkdir dir="${lib.arch}" unless:set="lib-uptodate"/>
+            <beforeLink unless:set="lib-uptodate"/>
             <apply executable="${gcc}" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
                 <srcfile/>
                 <arg value="-shared"/>
@@ -136,7 +140,7 @@
             <apply executable="${gcc.prefix}strip" failonerror="true" taskname="Symbol strip" unless:set="lib-uptodate">
                 <filelist dir="${lib.arch}" files="lib${name}.so"/>
             </apply>
-            <delete file="${lib.arch}/touch_${platform}.txt" quiet="true" unless:set="lib-uptodate"/>
+            <delete file="${lib.native}/touch.txt" quiet="true" unless:set="lib-uptodate"/>
         </sequential>
     </macrodef>
 
@@ -150,8 +154,6 @@
     </macrodef>
 
     <target name="compile-native-platform">
-        <mkdir dir="${lib.arch}"/>
-
         <exec executable="bash" outputproperty="gcc.version" unless:set="gcc.version">
             <arg value="-c"/>
             <arg value="gcc --version | grep ^gcc | sed 's/^.* //g;s/.[0-9]//2'"/>
@@ -176,15 +178,14 @@
                 </fileset>
             </source>
             <beforeLink>
-                <mkdir dir="${lib}/${platform}/${build.arch}"/>
                 <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-dependencies-uptodate">
-                    <update-dependency name="dyncall" artifact="${build.arch}/libdyncall_s.a"/>
-                    <update-dependency name="dyncallback" artifact="${build.arch}/libdyncallback_s.a"/>
-                    <update-dependency name="dynload" artifact="${build.arch}/libdynload_s.a"/>
+                    <update-dependency module="core" artifact="core/libdyncall_s.a"/>
+                    <update-dependency module="core" artifact="core/libdyncallback_s.a"/>
+                    <update-dependency module="core" artifact="core/libdynload_s.a"/>
                 </parallel>
             </beforeLink>
             <link>
-                <fileset dir="${lib}/${platform}/${build.arch}/">
+                <fileset dir="${lib.native}/core">
                     <include name="libdyn*.a"/>
                 </fileset>
                 <arg value="-ldl"/>
@@ -194,23 +195,22 @@
         <!-- BULLET -->
         <build module="bullet" simple="true" linker="g++" if:true="${binding.bullet}">
             <beforeLink>
-                <mkdir dir="${lib}/${platform}/${build.arch}/bullet"/>
                 <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-dependencies-uptodate">
-                    <update-dependency name="Bullet3Common" artifact="${build.arch}/bullet/libBullet3Common.a"/>
-                    <update-dependency name="BulletCollision" artifact="${build.arch}/bullet/libBulletCollision.a"/>
-                    <update-dependency name="BulletDynamics" artifact="${build.arch}/bullet/libBulletDynamics.a"/>
-                    <update-dependency name="BulletFileLoader" artifact="${build.arch}/bullet/libBulletFileLoader.a"/>
-                    <update-dependency name="BulletInverseDynamics" artifact="${build.arch}/bullet/libBulletInverseDynamics.a"/>
-                    <update-dependency name="BulletInverseDynamicsUtils" artifact="${build.arch}/bullet/libBulletInverseDynamicsUtils.a"/>
-                    <update-dependency name="BulletRobotics" artifact="${build.arch}/bullet/libBulletRobotics.a"/>
-                    <update-dependency name="BulletSoftBody" artifact="${build.arch}/bullet/libBulletSoftBody.a"/>
-                    <update-dependency name="BulletWorldImporter" artifact="${build.arch}/bullet/libBulletWorldImporter.a"/>
-                    <update-dependency name="LinearMath" artifact="${build.arch}/bullet/libLinearMath.a"/>
+                    <update-dependency module="bullet" artifact="bullet/libBullet3Common.a"/>
+                    <update-dependency module="bullet" artifact="bullet/libBulletCollision.a"/>
+                    <update-dependency module="bullet" artifact="bullet/libBulletDynamics.a"/>
+                    <update-dependency module="bullet" artifact="bullet/libBulletFileLoader.a"/>
+                    <update-dependency module="bullet" artifact="bullet/libBulletInverseDynamics.a"/>
+                    <update-dependency module="bullet" artifact="bullet/libBulletInverseDynamicsUtils.a"/>
+                    <update-dependency module="bullet" artifact="bullet/libBulletRobotics.a"/>
+                    <update-dependency module="bullet" artifact="bullet/libBulletSoftBody.a"/>
+                    <update-dependency module="bullet" artifact="bullet/libBulletWorldImporter.a"/>
+                    <update-dependency module="bullet" artifact="bullet/libLinearMath.a"/>
                 </parallel>
             </beforeLink>
             <link>
                 <arg value="-ldl"/>
-                <arg value="-L${lib}/${platform}/${build.arch}/bullet"/>
+                <arg value="-L${lib.native}/bullet"/>
                 <!-- Order is important -->
                 <arg value="-lBulletWorldImporter"/>
                 <arg value="-lBulletSoftBody"/>
@@ -465,7 +465,7 @@
             <or>
                 <istrue value="${build.offline}"/>
                 <resourceexists>
-                    <file file="${lib.arch}/touch_${platform}.txt"/>
+                    <file file="${lib.native}/touch.txt"/>
                 </resourceexists>
             </or>
         </condition>
@@ -473,20 +473,20 @@
         <sequential unless:set="native-dependencies-uptodate">
             <parallel threadsPerProcessor="4" failonany="true">
 
-            <update-dependency name="Assimp" artifact="${build.arch}/libassimp.so" dest="${lib.arch}" if:true="${binding.assimp}"/>
-            <update-dependency name="bgfx" artifact="${build.arch}/libbgfx.so" dest="${lib.arch}" if:true="${binding.bgfx}"/>
-            <update-dependency name="jemalloc" artifact="${build.arch}/libjemalloc.so" dest="${lib.arch}" if:true="${binding.jemalloc}"/>
-            <update-dependency name="GLFW" artifact="${build.arch}/libglfw.so" dest="${lib.arch}" if:true="${binding.glfw}"/>
-            <update-dependency name="GLFW" artifact="${build.arch}/libglfw_wayland.so" dest="${lib.arch}" if:true="${binding.glfw}"/>
-            <update-dependency name="OpenAL32" artifact="${build.arch}/libopenal.so" dest="${lib.arch}" if:true="${binding.openal}"/>
-            <update-dependency name="OpenVR" artifact="${build.arch}/libopenvr_api.so" dest="${lib.arch}" if:true="${binding.openvr}"/>
-            <update-dependency name="Opus" artifact="${build.arch}/libopus.so" dest="${lib.arch}" if:true="${binding.opus}"/>
-            <update-dependency name="Shaderc" artifact="${build.arch}/libshaderc.so" dest="${lib.arch}" if:true="${binding.shaderc}"/>
-            <update-dependency name="Shaderc spvc" artifact="${build.arch}/libshaderc_spvc.so" dest="${lib.arch}" if:true="${binding.shaderc}"/>
+            <update-dependency module="assimp" artifact="libassimp.so"/>
+            <update-dependency module="bgfx" artifact="libbgfx.so"/>
+            <update-dependency module="jemalloc" artifact="libjemalloc.so"/>
+            <update-dependency module="glfw" artifact="libglfw.so"/>
+            <update-dependency module="glfw" artifact="libglfw_wayland.so"/>
+            <update-dependency module="openal" artifact="libopenal.so"/>
+            <update-dependency module="openvr" artifact="libopenvr_api.so"/>
+            <update-dependency module="opus" artifact="libopus.so"/>
+            <update-dependency module="shaderc" artifact="libshaderc.so"/>
+            <update-dependency module="shaderc" artifact="libshaderc_spvc.so"/>
 
             </parallel>
 
-            <touch file="${lib.arch}/touch_${platform}.txt" verbose="false"/>
+            <touch file="${lib.native}/touch.txt" verbose="false"/>
         </sequential>
     </target>
 </project>

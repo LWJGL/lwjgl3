@@ -107,6 +107,9 @@
                 <source/>
             </compile>
 
+            <local name="lib.arch"/>
+            <property name="lib.arch" value="${lib.native}/@{module}"/>
+
             <local name="lib-uptodate"/>
             <uptodate property="lib-uptodate" targetfile="${lib.arch}/lib${name}.dylib">
                 <srcfiles file="config/${platform}/build.xml"/>
@@ -125,7 +128,8 @@
             <condition property="clang" value="clang" else="clang++"><equals arg1="@{lang}" arg2="c"/></condition>
 
             <echo message="Linking ${name}" taskname="${clang}" unless:set="lib-uptodate"/>
-            <beforeLink/>
+            <mkdir dir="${lib.arch}" unless:set="lib-uptodate"/>
+            <beforeLink unless:set="lib-uptodate"/>
             <apply executable="${clang}" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
                 <srcfile/>
                 <arg line='-dynamiclib -Wl,-no_compact_unwind -mmacosx-version-min=${macosx-version-min} -o ${lib.arch}/lib${name}.dylib -O3 -flto -fPIC'/>
@@ -138,7 +142,7 @@
                 <arg value="-r"/>
                 <filelist dir="${lib.arch}" files="lib${name}.dylib"/>
             </apply>
-            <delete file="${lib.arch}/touch_${platform}.txt" quiet="true" unless:set="lib-uptodate"/>
+            <delete file="${lib.native}/touch.txt" quiet="true" unless:set="lib-uptodate"/>
         </sequential>
     </macrodef>
 
@@ -150,8 +154,6 @@
     </macrodef>
 
     <target name="compile-native-platform">
-        <mkdir dir="${lib.arch}"/>
-
         <echo message="${sdkroot}" taskname="SDK Root"/>
 
         <parallel threadsPerProcessor="2">
@@ -168,16 +170,15 @@
                 </fileset>
             </source>
             <beforeLink>
-                <mkdir dir="${lib}/${platform}/${build.arch}"/>
                 <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-dependencies-uptodate">
-                    <update-dependency name="dyncall" artifact="${build.arch}/libdyncall_s.a"/>
-                    <update-dependency name="dyncallback" artifact="${build.arch}/libdyncallback_s.a"/>
-                    <update-dependency name="dynload" artifact="${build.arch}/libdynload_s.a"/>
+                    <update-dependency name="core" artifact="core/libdyncall_s.a"/>
+                    <update-dependency name="core" artifact="core/libdyncallback_s.a"/>
+                    <update-dependency name="core" artifact="core/libdynload_s.a"/>
                 </parallel>
             </beforeLink>
             <link>
                 <arg line="-framework CoreFoundation"/>
-                <fileset dir="${lib}/${platform}/${build.arch}/">
+                <fileset dir="${lib.native}/core">
                     <include name="libdyn*.a"/>
                 </fileset>
             </link>
@@ -186,22 +187,21 @@
         <!-- BULLET -->
         <build module="bullet" simple="true" linker="clang++" if:true="${binding.bullet}">
             <beforeLink>
-                <mkdir dir="${lib}/${platform}/${build.arch}/bullet"/>
                 <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-dependencies-uptodate">
-                    <update-dependency name="Bullet3Common" artifact="${build.arch}/bullet/libBullet3Common.a"/>
-                    <update-dependency name="BulletCollision" artifact="${build.arch}/bullet/libBulletCollision.a"/>
-                    <update-dependency name="BulletDynamics" artifact="${build.arch}/bullet/libBulletDynamics.a"/>
-                    <update-dependency name="BulletFileLoader" artifact="${build.arch}/bullet/libBulletFileLoader.a"/>
-                    <update-dependency name="BulletInverseDynamics" artifact="${build.arch}/bullet/libBulletInverseDynamics.a"/>
-                    <update-dependency name="BulletInverseDynamicsUtils" artifact="${build.arch}/bullet/libBulletInverseDynamicsUtils.a"/>
-                    <update-dependency name="BulletRobotics" artifact="${build.arch}/bullet/libBulletRobotics.a"/>
-                    <update-dependency name="BulletSoftBody" artifact="${build.arch}/bullet/libBulletSoftBody.a"/>
-                    <update-dependency name="BulletWorldImporter" artifact="${build.arch}/bullet/libBulletWorldImporter.a"/>
-                    <update-dependency name="LinearMath" artifact="${build.arch}/bullet/libLinearMath.a"/>
+                    <update-dependency module="bullet" artifact="bullet/libBullet3Common.a"/>
+                    <update-dependency module="bullet" artifact="bullet/libBulletCollision.a"/>
+                    <update-dependency module="bullet" artifact="bullet/libBulletDynamics.a"/>
+                    <update-dependency module="bullet" artifact="bullet/libBulletFileLoader.a"/>
+                    <update-dependency module="bullet" artifact="bullet/libBulletInverseDynamics.a"/>
+                    <update-dependency module="bullet" artifact="bullet/libBulletInverseDynamicsUtils.a"/>
+                    <update-dependency module="bullet" artifact="bullet/libBulletRobotics.a"/>
+                    <update-dependency module="bullet" artifact="bullet/libBulletSoftBody.a"/>
+                    <update-dependency module="bullet" artifact="bullet/libBulletWorldImporter.a"/>
+                    <update-dependency module="bullet" artifact="bullet/libLinearMath.a"/>
                 </parallel>
             </beforeLink>
             <link>
-                <fileset dir="${lib}/${platform}/${build.arch}/bullet">
+                <fileset dir="${lib.native}/bullet">
                     <include name="*.a"/>
                 </fileset>
             </link>
@@ -390,7 +390,7 @@
             <or>
                 <istrue value="${build.offline}"/>
                 <resourceexists>
-                    <file file="${lib.arch}/touch_${platform}.txt"/>
+                    <file file="${lib.native}/touch.txt"/>
                 </resourceexists>
             </or>
         </condition>
@@ -398,21 +398,21 @@
         <sequential unless:set="native-dependencies-uptodate">
             <parallel threadsPerProcessor="4" failonany="true">
 
-            <update-dependency name="Assimp" artifact="${build.arch}/libassimp.dylib" dest="${lib.arch}" if:true="${binding.assimp}"/>
-            <update-dependency name="bgfx" artifact="${build.arch}/libbgfx.dylib" dest="${lib.arch}" if:true="${binding.bgfx}"/>
-            <update-dependency name="jemalloc" artifact="${build.arch}/libjemalloc.dylib" dest="${lib.arch}" if:true="${binding.jemalloc}"/>
-            <update-dependency name="GLFW" artifact="${build.arch}/libglfw.dylib" dest="${lib.arch}" if:true="${binding.glfw}"/>
-            <update-dependency name="OpenAL32" artifact="${build.arch}/libopenal.dylib" dest="${lib.arch}" if:true="${binding.openal}"/>
-            <update-dependency name="OpenVR" artifact="${build.arch}/libopenvr_api.dylib" dest="${lib.arch}" if:true="${binding.openvr}"/>
-            <update-dependency name="Opus" artifact="${build.arch}/libopus.dylib" dest="${lib.arch}" if:true="${binding.opus}"/>
-            <update-dependency name="Shaderc" artifact="${build.arch}/libshaderc.dylib" dest="${lib.arch}" if:true="${binding.shaderc}"/>
-            <update-dependency name="Shaderc spvc" artifact="${build.arch}/libshaderc_spvc.dylib" dest="${lib.arch}" if:true="${binding.shaderc}"/>
+            <update-dependency module="assimp" artifact="libassimp.dylib"/>
+            <update-dependency module="bgfx" artifact="libbgfx.dylib"/>
+            <update-dependency module="jemalloc" artifact="libjemalloc.dylib"/>
+            <update-dependency module="glfw" artifact="libglfw.dylib"/>
+            <update-dependency module="openal" artifact="libopenal.dylib"/>
+            <update-dependency module="openvr" artifact="libopenvr_api.dylib"/>
+            <update-dependency module="opus" artifact="libopus.dylib"/>
+            <update-dependency module="shaderc" artifact="libshaderc.dylib"/>
+            <update-dependency module="shaderc" artifact="libshaderc_spvc.dylib"/>
 
-            <update-dependency name="MoltenVK" artifact="${build.arch}/libMoltenVK.dylib" dest="${lib.arch}" if:true="${binding.vulkan}"/>
+            <update-dependency module="vulkan" artifact="libMoltenVK.dylib"/>
 
             </parallel>
 
-            <touch file="${lib.arch}/touch_${platform}.txt" verbose="false"/>
+            <touch file="${lib.native}/touch.txt" verbose="false"/>
         </sequential>
     </target>
 </project>

@@ -12,7 +12,7 @@ final class LibMeow {
 
     static {
         String libName = Platform.mapLibraryNameBundled("lwjgl_meow");
-        Library.loadSystem(System::load, System::loadLibrary, LibMeow.class, libName);
+        Library.loadSystem(System::load, System::loadLibrary, LibMeow.class, "org.lwjgl.meow", libName);
     }
 
     private LibMeow() {

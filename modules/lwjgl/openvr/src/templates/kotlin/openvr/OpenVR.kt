@@ -85,7 +85,7 @@ val OPENVR_FNTABLE_BINDING: APIBinding = Generator.register(object : APIBinding(
 
     static {
         String libName = Platform.mapLibraryNameBundled("lwjgl_openvr");
-        Library.loadSystem(System::load, System::loadLibrary, OpenVR.class, libName);
+        Library.loadSystem(System::load, System::loadLibrary, OpenVR.class, "org.lwjgl.openvr", libName);
     }
 
     private OpenVR() {

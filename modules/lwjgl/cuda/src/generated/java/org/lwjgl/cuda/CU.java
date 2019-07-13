@@ -1168,7 +1168,7 @@ public class CU {
         throw new UnsupportedOperationException();
     }
 
-    private static final SharedLibrary NVCUDA = Library.loadNative(CU.class, Configuration.CUDA_LIBRARY_NAME, "nvcuda");
+    private static final SharedLibrary NVCUDA = Library.loadNative(CU.class, "org.lwjgl.cuda", Configuration.CUDA_LIBRARY_NAME, "nvcuda");
 
     /** Contains the function pointers loaded from the NVCUDA {@link SharedLibrary}. */
     public static final class Functions {

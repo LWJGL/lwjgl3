@@ -2311,7 +2311,7 @@ public class ClangIndex {
         throw new UnsupportedOperationException();
     }
 
-    private static final SharedLibrary CLANG = Library.loadNative(ClangIndex.class, Configuration.LLVM_CLANG_LIBRARY_NAME, "libclang");
+    private static final SharedLibrary CLANG = Library.loadNative(ClangIndex.class, "org.lwjgl.llvm", Configuration.LLVM_CLANG_LIBRARY_NAME, "libclang");
 
     /** Contains the function pointers loaded from the CLANG {@link SharedLibrary}. */
     public static final class Functions {

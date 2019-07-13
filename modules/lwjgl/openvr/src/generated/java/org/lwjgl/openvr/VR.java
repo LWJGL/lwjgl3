@@ -2957,7 +2957,7 @@ public class VR {
         throw new UnsupportedOperationException();
     }
 
-    private static final SharedLibrary OPENVR = Library.loadNative(VR.class, Configuration.OPENVR_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("openvr_api")), true);
+    private static final SharedLibrary OPENVR = Library.loadNative(VR.class, "org.lwjgl.openvr", Configuration.OPENVR_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("openvr_api")), true);
 
     /** Contains the function pointers loaded from the openvr {@link SharedLibrary}. */
     public static final class Functions {

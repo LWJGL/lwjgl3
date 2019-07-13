@@ -54,12 +54,12 @@ public final class CL {
         switch (Platform.get()) {
             case LINUX:
             case WINDOWS:
-                CL = Library.loadNative(CL.class, Configuration.OPENCL_LIBRARY_NAME, "OpenCL");
+                CL = Library.loadNative(CL.class, "org.lwjgl.opencl", Configuration.OPENCL_LIBRARY_NAME, "OpenCL");
                 break;
             case MACOSX:
                 String override = Configuration.OPENCL_LIBRARY_NAME.get();
                 CL = override != null
-                    ? Library.loadNative(CL.class, override)
+                    ? Library.loadNative(CL.class, "org.lwjgl.opencl", override)
                     : MacOSXLibrary.getWithIdentifier("com.apple.opencl");
                 break;
             default:
@@ -74,7 +74,7 @@ public final class CL {
      * @param libName the native library name
      */
     public static void create(String libName) {
-        create(Library.loadNative(CL.class, libName));
+        create(Library.loadNative(CL.class, "org.lwjgl.opencl", libName));
     }
 
     private static class SharedLibraryCL extends SharedLibrary.Delegate implements FunctionProviderLocal {

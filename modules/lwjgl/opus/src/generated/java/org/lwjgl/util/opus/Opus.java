@@ -504,7 +504,7 @@ public class Opus {
         throw new UnsupportedOperationException();
     }
 
-    private static final SharedLibrary OPUS = Library.loadNative(Opus.class, Configuration.OPUS_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("opus")), true);
+    private static final SharedLibrary OPUS = Library.loadNative(Opus.class, "org.lwjgl.opus", Configuration.OPUS_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("opus")), true);
 
     /** Contains the function pointers loaded from the opus {@link SharedLibrary}. */
     public static final class Functions {

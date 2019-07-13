@@ -46,7 +46,7 @@ public class LibDivide {
         LIBDIVIDE_S32_SHIFT_PATH   = 0x20,
         LIBDIVIDE_NEGATIVE_DIVISOR = 0x80;
 
-    static { Library.loadSystem(System::load, System::loadLibrary, LibDivide.class, Platform.mapLibraryNameBundled("lwjgl_libdivide")); }
+    static { Library.loadSystem(System::load, System::loadLibrary, LibDivide.class, "org.lwjgl.libdivide", Platform.mapLibraryNameBundled("lwjgl_libdivide")); }
 
     protected LibDivide() {
         throw new UnsupportedOperationException();

@@ -14,7 +14,7 @@ final class LibNFD {
 
     static {
         String libName = Platform.mapLibraryNameBundled("lwjgl_nfd");
-        Library.loadSystem(System::load, System::loadLibrary, LibNFD.class, libName);
+        Library.loadSystem(System::load, System::loadLibrary, LibNFD.class, "org.lwjgl.nfd", libName);
 
         MemoryAllocator allocator = getAllocator(Configuration.DEBUG_MEMORY_ALLOCATOR_INTERNAL.get(true));
         setupMalloc(

@@ -1998,7 +1998,7 @@ public class SQL {
         throw new UnsupportedOperationException();
     }
 
-    private static final SharedLibrary ODBC = Library.loadNative(SQL.class, Configuration.ODBC_LIBRARY_NAME, "odbc32", "odbc");
+    private static final SharedLibrary ODBC = Library.loadNative(SQL.class, "org.lwjgl.odbc", Configuration.ODBC_LIBRARY_NAME, "odbc32", "odbc");
 
     /** Contains the function pointers loaded from the odbc {@link SharedLibrary}. */
     public static final class Functions {

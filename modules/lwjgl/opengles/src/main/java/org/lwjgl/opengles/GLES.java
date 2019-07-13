@@ -59,7 +59,7 @@ public final class GLES {
     private static ICD icd = new ICDStatic();
 
     static {
-        Library.loadSystem(System::load, System::loadLibrary, GLES.class, Platform.mapLibraryNameBundled("lwjgl_opengles"));
+        Library.loadSystem(System::load, System::loadLibrary, GLES.class, "org.lwjgl.opengles", Platform.mapLibraryNameBundled("lwjgl_opengles"));
 
         MAX_VERSION = apiParseVersion(Configuration.OPENGLES_MAXVERSION);
 
@@ -80,13 +80,13 @@ public final class GLES {
         SharedLibrary GLES;
         switch (Platform.get()) {
             case LINUX:
-                GLES = Library.loadNative(GLES.class, Configuration.OPENGLES_LIBRARY_NAME, "libGLESv2.so.2");
+                GLES = Library.loadNative(GLES.class, "org.lwjgl.opengles", Configuration.OPENGLES_LIBRARY_NAME, "libGLESv2.so.2");
                 break;
             case MACOSX:
-                GLES = Library.loadNative(GLES.class, Configuration.OPENGLES_LIBRARY_NAME, "GLESv2");
+                GLES = Library.loadNative(GLES.class, "org.lwjgl.opengles", Configuration.OPENGLES_LIBRARY_NAME, "GLESv2");
                 break;
             case WINDOWS:
-                GLES = Library.loadNative(GLES.class, Configuration.OPENGLES_LIBRARY_NAME, "libGLESv2", "GLESv2");
+                GLES = Library.loadNative(GLES.class, "org.lwjgl.opengles", Configuration.OPENGLES_LIBRARY_NAME, "libGLESv2", "GLESv2");
                 break;
             default:
                 throw new IllegalStateException();
@@ -100,7 +100,7 @@ public final class GLES {
      * @param libName the native library name
      */
     public static void create(String libName) {
-        create(Library.loadNative(GLES.class, libName));
+        create(Library.loadNative(GLES.class, "org.lwjgl.opengles", libName));
     }
 
     private static void create(SharedLibrary GLES) {

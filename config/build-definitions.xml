@@ -61,7 +61,6 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <property name="build.output" location="${env.LWJGL_BUILD_OUTPUT}" relative="false" if:set="env.LWJGL_BUILD_OUTPUT"/>
 
     <property name="lib" location="bin/libs" relative="true"/>
-    <property name="lib.arch" location="${lib}/${build.arch}" relative="true"/>
 
     <property name="kotlinc" location="${lib}/kotlinc" relative="true"/>
 
@@ -94,30 +93,28 @@ This script is included in /build.xml and /config/update-dependencies.xml.
         <isset property="env.LWJGL_BUILD_OFFLINE"/>
     </condition>
 
-    <condition property="platform.windows">
-        <os family="Windows"/>
-    </condition>
     <condition property="platform.linux">
         <os name="Linux"/>
-    </condition>
-    <condition property="platform.freebsd">
-        <os name="FreeBSD"/>
-    </condition>
-    <condition property="platform.solaris">
-        <os name="SunOS"/>
     </condition>
     <condition property="platform.macos">
         <os name="Mac OS X"/>
     </condition>
+    <condition property="platform.windows">
+        <os family="Windows"/>
+    </condition>
 
-    <property name="platform" value="windows" if:set="platform.windows"/>
     <property name="platform" value="linux" if:set="platform.linux"/>
-    <property name="platform" value="freebsd" if:set="platform.freebsd"/>
-    <property name="platform" value="solaris" if:set="platform.solaris"/>
     <property name="platform" value="macos" if:set="platform.macos"/>
+    <property name="platform" value="windows" if:set="platform.windows"/>
 
     <property name="platform.remote" value="macosx" if:set="platform.macos"/>
     <property name="platform.remote" value="${platform}"/>
+
+    <property name="platform.linux.remote" value="linux"/>
+    <property name="platform.macos.remote" value="macosx"/>
+    <property name="platform.windows.remote" value="windows"/>
+
+    <property name="lib.native" location="${lib}/native/${platform}/${build.arch}" relative="true"/>
 
     <!-- JDK version -->
     <condition property="jdk10"> <!-- 10 or higher -->
@@ -282,7 +279,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 
         <sequential>
             <quiet>
-                <get taskname="@{name}" src="@{url}" dest="@{dest}" verbose="false" usetimestamp="true" skipexisting="@{skipexisting}"/>
+                <get taskname="@{name}" src="@{url}" dest="@{dest}" usetimestamp="true" skipexisting="@{skipexisting}"/>
             </quiet>
         </sequential>
     </macrodef>
@@ -301,12 +298,16 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     </macrodef>
 
     <macrodef name="update-dependency">
-        <attribute name="name"/>
+        <attribute name="module"/>
         <attribute name="artifact"/>
-        <attribute name="dest" default="${lib}/${platform}/@{artifact}"/>
 
         <sequential>
-            <get-quiet name="@{name}" url="https://build.lwjgl.org/${build.type}/${platform.remote}/@{artifact}" dest="@{dest}" skipexisting="false"/>
+            <sequential if:true="${binding.@{module}}">
+                <local name="dest"/>
+                <property name="dest" value="${lib.native}/${module.@{module}.java}"/>
+                <mkdir dir="${dest}"/>
+                <get-quiet name="@{module} :: @{artifact}" url="https://build.lwjgl.org/${build.type}/${platform.remote}/${build.arch}/@{artifact}" dest="${dest}" skipexisting="false"/>
+            </sequential>
         </sequential>
     </macrodef>
 </project>

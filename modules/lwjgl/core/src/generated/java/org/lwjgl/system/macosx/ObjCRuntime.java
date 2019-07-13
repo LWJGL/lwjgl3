@@ -100,7 +100,7 @@ public class ObjCRuntime {
         throw new UnsupportedOperationException();
     }
 
-    private static final SharedLibrary OBJC = Library.loadNative(ObjCRuntime.class, "objc");
+    private static final SharedLibrary OBJC = Library.loadNative(ObjCRuntime.class, "org.lwjgl", "objc");
 
     /** Contains the function pointers loaded from the objc {@link SharedLibrary}. */
     public static final class Functions {

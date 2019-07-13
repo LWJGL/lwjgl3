@@ -587,7 +587,7 @@ enum class Module(
         "org.lwjgl.util.tinyfd",
         "Contains bindings to ${url("https://sourceforge.net/projects/tinyfiledialogs/", "tiny file dialogs")}.",
         library = JNILibrary.simple(
-            """Library.loadSystem(System::load, System::loadLibrary, TinyFileDialogs.class, Platform.mapLibraryNameBundled("lwjgl_tinyfd"));
+            """Library.loadSystem(System::load, System::loadLibrary, TinyFileDialogs.class, "org.lwjgl.tinyfd", Platform.mapLibraryNameBundled("lwjgl_tinyfd"));
         tinyfd_winUtf8().put(0, 1);"""
         )
     ),
@@ -771,14 +771,8 @@ float h = layout.dimensions(YGDimensionHeight);""")}
     val enabled
         get() = key.startsWith("core") || System.getProperty("binding.$key", "false")!!.toBoolean()
 
-    internal val java
-        get() = name.let {
-            if (it.startsWith("CORE_")) {
-                "core"
-            } else {
-                it.toLowerCase()
-            }
-        }
+    internal val path = if (name.startsWith("CORE_")) "core" else name.toLowerCase()
+    internal val java = if (name.startsWith("CORE_")) "org.lwjgl" else "org.lwjgl.${name.toLowerCase()}"
 
     internal val packageKotlin
         get() = name.let {
@@ -848,7 +842,7 @@ private class JNILibraryWithInit constructor(
 
     static {
         String libName = Platform.mapLibraryNameBundled("lwjgl_${module.key}");
-        Library.loadSystem(System::load, System::loadLibrary, $className.class, libName);${if (setupAllocator) """
+        Library.loadSystem(System::load, System::loadLibrary, $className.class, "${module.java}", libName);${if (setupAllocator) """
 
         MemoryAllocator allocator = getAllocator(Configuration.DEBUG_MEMORY_ALLOCATOR_INTERNAL.get(true));
         setupMalloc(

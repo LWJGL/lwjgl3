@@ -129,7 +129,7 @@ public class LLVMLTO {
         throw new UnsupportedOperationException();
     }
 
-    private static final SharedLibrary LTO = Library.loadNative(LLVMLTO.class, Configuration.LLVM_LTO_LIBRARY_NAME, "libLTO");
+    private static final SharedLibrary LTO = Library.loadNative(LLVMLTO.class, "org.lwjgl.llvm", Configuration.LLVM_LTO_LIBRARY_NAME, "libLTO");
 
     /** Contains the function pointers loaded from the LTO {@link SharedLibrary}. */
     public static final class Functions {

@@ -401,7 +401,7 @@ public class X11 {
         throw new UnsupportedOperationException();
     }
 
-    private static final SharedLibrary X11 = Library.loadNative(X11.class, null, "libX11.so.6", "libX11.so");
+    private static final SharedLibrary X11 = Library.loadNative(X11.class, "org.lwjgl", null, "libX11.so.6", "libX11.so");
 
     /** Contains the function pointers loaded from the X11 {@link SharedLibrary}. */
     public static final class Functions {

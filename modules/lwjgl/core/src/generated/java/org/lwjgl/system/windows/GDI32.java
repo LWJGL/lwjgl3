@@ -126,7 +126,7 @@ public class GDI32 {
         throw new UnsupportedOperationException();
     }
 
-    private static final SharedLibrary GDI32 = Library.loadNative(GDI32.class, "gdi32");
+    private static final SharedLibrary GDI32 = Library.loadNative(GDI32.class, "org.lwjgl", "gdi32");
 
     /** Contains the function pointers loaded from the gdi32 {@link SharedLibrary}. */
     public static final class Functions {

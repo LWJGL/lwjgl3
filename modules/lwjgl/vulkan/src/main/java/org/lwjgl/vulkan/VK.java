@@ -49,25 +49,25 @@ public final class VK {
         SharedLibrary VK;
         switch (Platform.get()) {
             case LINUX:
-                VK = Library.loadNative(VK.class, Configuration.VULKAN_LIBRARY_NAME, "libvulkan.so.1");
+                VK = Library.loadNative(VK.class, "org.lwjgl.vulkan", Configuration.VULKAN_LIBRARY_NAME, "libvulkan.so.1");
                 break;
             case WINDOWS:
-                VK = Library.loadNative(VK.class, Configuration.VULKAN_LIBRARY_NAME, "vulkan-1");
+                VK = Library.loadNative(VK.class, "org.lwjgl.vulkan", Configuration.VULKAN_LIBRARY_NAME, "vulkan-1");
                 break;
             case MACOSX:
                 String override = Configuration.VULKAN_LIBRARY_NAME.get();
                 if (override != null) {
                     // use the override without a fallback
-                    VK = Library.loadNative(VK.class, override);
+                    VK = Library.loadNative(VK.class, "org.lwjgl.vulkan", override);
                 } else {
                     try {
                         // no override, try to use the bundled implementation (if available)
-                        VK = Library.loadNative(VK.class, "MoltenVK", true);
+                        VK = Library.loadNative(VK.class, "org.lwjgl.vulkan", "MoltenVK", true);
                     } catch (Throwable ignored) {
                         // TODO: print if found but loading failed (print in verbose debugloader mode?)
                         // TODO: must print all suppressed exceptions
                         // fallback to the Vulkan loader
-                        VK = Library.loadNative(VK.class, "libvulkan.1.dylib");
+                        VK = Library.loadNative(VK.class, "org.lwjgl.vulkan", "libvulkan.1.dylib");
                     }
                 }
                 break;
@@ -88,7 +88,7 @@ public final class VK {
      * @see #create(FunctionProvider)
      */
     public static void create(String libName) {
-        create(Library.loadNative(VK.class, libName));
+        create(Library.loadNative(VK.class, "org.lwjgl.vulkan", libName));
     }
 
     /**

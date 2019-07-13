@@ -12,7 +12,7 @@ final class LibSSE {
 
     static {
         String libName = Platform.mapLibraryNameBundled("lwjgl_sse");
-        Library.loadSystem(System::load, System::loadLibrary, LibSSE.class, libName);
+        Library.loadSystem(System::load, System::loadLibrary, LibSSE.class, "org.lwjgl.sse", libName);
     }
 
     private LibSSE() {

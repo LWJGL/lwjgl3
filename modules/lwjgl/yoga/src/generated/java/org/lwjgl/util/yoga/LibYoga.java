@@ -12,7 +12,7 @@ final class LibYoga {
 
     static {
         String libName = Platform.mapLibraryNameBundled("lwjgl_yoga");
-        Library.loadSystem(System::load, System::loadLibrary, LibYoga.class, libName);
+        Library.loadSystem(System::load, System::loadLibrary, LibYoga.class, "org.lwjgl.yoga", libName);
     }
 
     private LibYoga() {

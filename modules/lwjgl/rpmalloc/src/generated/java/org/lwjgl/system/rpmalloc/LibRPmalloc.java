@@ -12,7 +12,7 @@ final class LibRPmalloc {
 
     static {
         String libName = Platform.mapLibraryNameBundled("lwjgl_rpmalloc");
-        Library.loadSystem(System::load, System::loadLibrary, LibRPmalloc.class, libName);
+        Library.loadSystem(System::load, System::loadLibrary, LibRPmalloc.class, "org.lwjgl.rpmalloc", libName);
     }
 
     private LibRPmalloc() {

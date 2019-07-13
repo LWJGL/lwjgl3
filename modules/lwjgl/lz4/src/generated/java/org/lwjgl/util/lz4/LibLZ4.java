@@ -12,7 +12,7 @@ final class LibLZ4 {
 
     static {
         String libName = Platform.mapLibraryNameBundled("lwjgl_lz4");
-        Library.loadSystem(System::load, System::loadLibrary, LibLZ4.class, libName);
+        Library.loadSystem(System::load, System::loadLibrary, LibLZ4.class, "org.lwjgl.lz4", libName);
     }
 
     private LibLZ4() {

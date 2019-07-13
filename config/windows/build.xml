@@ -64,6 +64,9 @@
                 <source/>
             </compile>
 
+            <local name="lib.arch"/>
+            <property name="lib.arch" value="${lib.native}/@{module}"/>
+
             <local name="lib-uptodate"/>
             <uptodate property="lib-uptodate" targetfile="${lib.arch}/${name}.dll">
                 <srcfiles file="config/${platform}/build.xml"/>
@@ -106,9 +109,10 @@ EXPORTS
                 </filterchain>
             </concat>
 
-            <beforeLink/>
+            <mkdir dir="${lib.arch}" unless:set="lib-uptodate"/>
+            <beforeLink unless:set="lib-uptodate"/>
             <apply executable="cl" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
-                <arg line='/LD /WX /nologo /Fe:"${bin.native}\build\${name}.dll"'/>
+                <arg line='/LD /WX /nologo /Fe:"${lib.arch}\${name}.dll"'/>
 
                 <fileset dir="${dest}" includes="*.obj"/>
                 <link/>
@@ -123,8 +127,7 @@ EXPORTS
                 <linkargs/>
             </apply>
 
-            <move file="${bin.native}/build/${name}.dll" todir="${lib.arch}" unless:set="lib-uptodate"/>
-            <delete file="${lib.arch}/touch_${platform}.txt" quiet="true" unless:set="lib-uptodate"/>
+            <delete file="${lib.native}/touch.txt" quiet="true" unless:set="lib-uptodate"/>
         </sequential>
     </macrodef>
 
@@ -136,7 +139,6 @@ EXPORTS
     </macrodef>
 
     <target name="compile-native-platform">
-        <mkdir dir="${lib.arch}"/>
         <mkdir dir="${bin.native}/build"/>
 
         <parallel threadsPerProcessor="1">
@@ -155,15 +157,14 @@ EXPORTS
                 </fileset>
             </source>
             <beforeLink>
-                <mkdir dir="${lib}/${platform}/${build.arch}"/>
                 <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-dependencies-uptodate">
-                    <update-dependency name="dyncall" artifact="${build.arch}/dyncall_s.lib"/>
-                    <update-dependency name="dyncallback" artifact="${build.arch}/dyncallback_s.lib"/>
-                    <update-dependency name="dynload" artifact="${build.arch}/dynload_s.lib"/>
+                    <update-dependency module="core" artifact="core/dyncall_s.lib"/>
+                    <update-dependency module="core" artifact="core/dyncallback_s.lib"/>
+                    <update-dependency module="core" artifact="core/dynload_s.lib"/>
                 </parallel>
             </beforeLink>
             <link>
-                <fileset dir="${lib}/${platform}/${build.arch}/">
+                <fileset dir="${lib.native}/core">
                     <include name="dyn*.lib"/>
                 </fileset>
             </link>
@@ -172,22 +173,21 @@ EXPORTS
         <!-- BULLET -->
         <build module="bullet" simple="true" if:true="${binding.bullet}">
             <beforeLink>
-                <mkdir dir="${lib}/${platform}/${build.arch}/bullet"/>
                 <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-dependencies-uptodate">
-                    <update-dependency name="Bullet3Common" artifact="${build.arch}/bullet/Bullet3Common.lib"/>
-                    <update-dependency name="BulletCollision" artifact="${build.arch}/bullet/BulletCollision.lib"/>
-                    <update-dependency name="BulletDynamics" artifact="${build.arch}/bullet/BulletDynamics.lib"/>
-                    <update-dependency name="BulletFileLoader" artifact="${build.arch}/bullet/BulletFileLoader.lib"/>
-                    <update-dependency name="BulletInverseDynamics" artifact="${build.arch}/bullet/BulletInverseDynamics.lib"/>
-                    <update-dependency name="BulletInverseDynamicsUtils" artifact="${build.arch}/bullet/BulletInverseDynamicsUtils.lib"/>
-                    <update-dependency name="BulletRobotics" artifact="${build.arch}/bullet/BulletRobotics.lib"/>
-                    <update-dependency name="BulletSoftBody" artifact="${build.arch}/bullet/BulletSoftBody.lib"/>
-                    <update-dependency name="BulletWorldImporter" artifact="${build.arch}/bullet/BulletWorldImporter.lib"/>
-                    <update-dependency name="LinearMath" artifact="${build.arch}/bullet/LinearMath.lib"/>
+                    <update-dependency module="bullet" artifact="bullet/Bullet3Common.lib"/>
+                    <update-dependency module="bullet" artifact="bullet/BulletCollision.lib"/>
+                    <update-dependency module="bullet" artifact="bullet/BulletDynamics.lib"/>
+                    <update-dependency module="bullet" artifact="bullet/BulletFileLoader.lib"/>
+                    <update-dependency module="bullet" artifact="bullet/BulletInverseDynamics.lib"/>
+                    <update-dependency module="bullet" artifact="bullet/BulletInverseDynamicsUtils.lib"/>
+                    <update-dependency module="bullet" artifact="bullet/BulletRobotics.lib"/>
+                    <update-dependency module="bullet" artifact="bullet/BulletSoftBody.lib"/>
+                    <update-dependency module="bullet" artifact="bullet/BulletWorldImporter.lib"/>
+                    <update-dependency module="bullet" artifact="bullet/LinearMath.lib"/>
                 </parallel>
             </beforeLink>
             <link>
-                <fileset dir="${lib}/${platform}/${build.arch}/bullet">
+                <fileset dir="${lib.native}/bullet">
                     <include name="*.lib"/>
                 </fileset>
             </link>
@@ -430,7 +430,7 @@ EXPORTS
             <or>
                 <istrue value="${build.offline}"/>
                 <resourceexists>
-                    <file file="${lib.arch}/touch_${platform}.txt"/>
+                    <file file="${lib.native}/touch.txt"/>
                 </resourceexists>
             </or>
         </condition>
@@ -438,19 +438,19 @@ EXPORTS
         <sequential unless:set="native-dependencies-uptodate">
             <parallel threadsPerProcessor="4" failonany="true">
 
-            <update-dependency name="Assimp" artifact="${build.arch}/assimp.dll" dest="${lib.arch}/assimp.dll" if:true="${binding.assimp}"/>
-            <update-dependency name="bgfx" artifact="${build.arch}/bgfx.dll" dest="${lib.arch}/bgfx.dll" if:true="${binding.bgfx}"/>
-            <update-dependency name="jemalloc" artifact="${build.arch}/jemalloc.dll" dest="${lib.arch}/jemalloc.dll" if:true="${binding.jemalloc}"/>
-            <update-dependency name="GLFW" artifact="${build.arch}/glfw.dll" dest="${lib.arch}/glfw.dll" if:true="${binding.glfw}"/>
-            <update-dependency name="OpenAL32" artifact="${build.arch}/OpenAL.dll" dest="${lib.arch}/OpenAL.dll" if:true="${binding.openal}"/>
-            <update-dependency name="OpenVR" artifact="${build.arch}/openvr_api.dll" dest="${lib.arch}/openvr_api.dll" if:true="${binding.openvr}"/>
-            <update-dependency name="Opus" artifact="${build.arch}/opus.dll" dest="${lib.arch}/opus.dll" if:true="${binding.opus}"/>
-            <update-dependency name="Shaderc" artifact="${build.arch}/shaderc.dll" dest="${lib.arch}/shaderc.dll" if:true="${binding.shaderc}"/>
-            <update-dependency name="Shaderc spvc" artifact="${build.arch}/shaderc_spvc.dll" dest="${lib.arch}/shaderc_spvc.dll" if:true="${binding.shaderc}"/>
+            <update-dependency module="assimp" artifact="assimp.dll"/>
+            <update-dependency module="bgfx" artifact="bgfx.dll"/>
+            <update-dependency module="jemalloc" artifact="jemalloc.dll"/>
+            <update-dependency module="glfw" artifact="glfw.dll"/>
+            <update-dependency module="openal" artifact="OpenAL.dll"/>
+            <update-dependency module="openvr" artifact="openvr_api.dll"/>
+            <update-dependency module="opus" artifact="opus.dll"/>
+            <update-dependency module="shaderc" artifact="shaderc.dll"/>
+            <update-dependency module="shaderc" artifact="shaderc_spvc.dll"/>
 
             </parallel>
 
-            <touch file="${lib.arch}/touch_${platform}.txt" verbose="false"/>
+            <touch file="${lib.native}/touch.txt" verbose="false"/>
         </sequential>
     </target>
 </project>

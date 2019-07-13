@@ -191,7 +191,7 @@ class Generator(private val moduleRoot: String) {
 
     internal fun generateModule(module: Module) {
         val packageKotlin = module.packageKotlin
-        val pathKotlin = "$moduleRoot/${module.java}/src/templates/kotlin/${packageKotlin.replace('.', '/')}"
+        val pathKotlin = "$moduleRoot/${module.path}/src/templates/kotlin/${packageKotlin.replace('.', '/')}"
 
         val moduleLastModified = Paths.get(pathKotlin).lastModified(maxDepth = 1)
         moduleLastModifiedMap[module] = moduleLastModified
@@ -263,7 +263,7 @@ class Generator(private val moduleRoot: String) {
 
     private fun generate(pathKotlin: String, nativeClass: NativeClass, moduleLastModified: Long) {
         val outputJava = Paths
-            .get("$moduleRoot/${nativeClass.module.java}/src/generated/java/${nativeClass.packageName.replace('.', '/')}/${nativeClass.className}.java")
+            .get("$moduleRoot/${nativeClass.module.path}/src/generated/java/${nativeClass.packageName.replace('.', '/')}/${nativeClass.className}.java")
 
         val lmt = max(nativeClass.getLastModified("$pathKotlin/templates"), moduleLastModified)
         if (lmt < outputJava.lastModified) {
@@ -288,7 +288,7 @@ class Generator(private val moduleRoot: String) {
     }
 
     internal fun generateSimple(target: GeneratorTarget) {
-        val modulePath = "$moduleRoot/${target.module.java}"
+        val modulePath = "$moduleRoot/${target.module.path}"
         val packageKotlin = target.module.packageKotlin
         val pathKotlin = "$modulePath/src/templates/kotlin/${packageKotlin.replace('.', '/')}"
 
@@ -322,7 +322,7 @@ class Generator(private val moduleRoot: String) {
     private fun generateNative(target: GeneratorTargetNative, generate: (Path) -> Unit) {
         val targetFile =
             "${target.nativeSubPath.let { if (it.isEmpty()) "" else "$it/" }}${target.nativeFileName}.${if (target.cpp) "cpp" else "c"}"
-        generate(Paths.get("$moduleRoot/${target.module.java}/src/generated/c/$targetFile"))
+        generate(Paths.get("$moduleRoot/${target.module.path}/src/generated/c/$targetFile"))
     }
 
 }

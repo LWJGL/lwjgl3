@@ -12,7 +12,7 @@ final class LibBullet {
 
     static {
         String libName = Platform.mapLibraryNameBundled("lwjgl_bullet");
-        Library.loadSystem(System::load, System::loadLibrary, LibBullet.class, libName);
+        Library.loadSystem(System::load, System::loadLibrary, LibBullet.class, "org.lwjgl.bullet", libName);
     }
 
     private LibBullet() {

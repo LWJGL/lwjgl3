@@ -135,6 +135,7 @@ This script is included in /config/build-definitions.xml.
             }
         }
 
+        LWJGL.setProperty("binding.core", "true");
         LWJGL.setProperty("generator.bindings", bindings.join(" "));
         LWJGL.setProperty("module.list", modules.join(","));
         LWJGL.setProperty("module.list.java-only", javaOnly.join(","));
@@ -144,6 +145,8 @@ This script is included in /config/build-definitions.xml.
         var sources = [];
 
         modules.forEach(function(it) {
+            LWJGL.setProperty("module." + it + ".java", it == "core" ? "org.lwjgl" : "org.lwjgl." + it);
+
             classes.push("bin/classes/lwjgl/" + it);
 
             var src = "modules/lwjgl/" + it + "/src";

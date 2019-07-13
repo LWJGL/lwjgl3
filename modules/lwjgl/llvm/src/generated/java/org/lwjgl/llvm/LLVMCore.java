@@ -699,7 +699,7 @@ public class LLVMCore {
         throw new UnsupportedOperationException();
     }
 
-    private static final SharedLibrary LLVM = Library.loadNative(LLVMCore.class, Configuration.LLVM_LIBRARY_NAME, "libLLVM");
+    private static final SharedLibrary LLVM = Library.loadNative(LLVMCore.class, "org.lwjgl.llvm", Configuration.LLVM_LIBRARY_NAME, "libLLVM");
 
     /** Contains the function pointers loaded from the LLVM {@link SharedLibrary}. */
     public static final class Functions {

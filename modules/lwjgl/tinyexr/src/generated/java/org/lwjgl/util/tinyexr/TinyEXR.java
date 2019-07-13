@@ -74,7 +74,7 @@ public class TinyEXR {
         TINYEXR_TILE_ROUND_DOWN = 0,
         TINYEXR_TILE_ROUND_UP   = 1;
 
-    static { Library.loadSystem(System::load, System::loadLibrary, TinyEXR.class, Platform.mapLibraryNameBundled("lwjgl_tinyexr")); }
+    static { Library.loadSystem(System::load, System::loadLibrary, TinyEXR.class, "org.lwjgl.tinyexr", Platform.mapLibraryNameBundled("lwjgl_tinyexr")); }
 
     protected TinyEXR() {
         throw new UnsupportedOperationException();

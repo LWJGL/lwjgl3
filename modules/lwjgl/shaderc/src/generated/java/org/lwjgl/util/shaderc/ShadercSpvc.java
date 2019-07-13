@@ -24,7 +24,7 @@ public class ShadercSpvc {
         throw new UnsupportedOperationException();
     }
 
-    private static final SharedLibrary SHADERC = Library.loadNative(ShadercSpvc.class, Configuration.SHADERC_SPVC_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("shaderc_spvc")), true);
+    private static final SharedLibrary SHADERC = Library.loadNative(ShadercSpvc.class, "org.lwjgl.shaderc", Configuration.SHADERC_SPVC_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("shaderc_spvc")), true);
 
     /** Contains the function pointers loaded from the shaderc {@link SharedLibrary}. */
     public static final class Functions {

@@ -73,7 +73,7 @@ public final class CUDA {
      * @return true if per-thread synchronization is supported, false if only the legacy default stream is supported
      */
     public static boolean isPerThreadDefaultStreamSupported() {
-        try (SharedLibrary lib = Library.loadNative(CU.class, Configuration.CUDA_LIBRARY_NAME, "nvcuda")) {
+        try (SharedLibrary lib = Library.loadNative(CU.class, "org.lwjgl.cuda", Configuration.CUDA_LIBRARY_NAME, "nvcuda")) {
             return lib.getFunctionAddress("cuLaunchKernel_ptsz") != NULL;
         }
     }
@@ -166,8 +166,8 @@ public final class CUDA {
 
     static SharedLibrary getToolkitLibrary(Class<?> context, Configuration<String> option, String name) {
         return Library.loadNative(
-            context, option,
-            () -> Library.loadNative(context, CUDA.getToolkitLibrary(name)),
+            context, "org.lwjgl.cuda", option,
+            () -> Library.loadNative(context, "org.lwjgl.cuda", CUDA.getToolkitLibrary(name)),
             name
         );
     }

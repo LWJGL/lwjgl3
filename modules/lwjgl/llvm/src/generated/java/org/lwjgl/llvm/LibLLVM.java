@@ -12,7 +12,7 @@ final class LibLLVM {
 
     static {
         String libName = Platform.mapLibraryNameBundled("lwjgl_llvm");
-        Library.loadSystem(System::load, System::loadLibrary, LibLLVM.class, libName);
+        Library.loadSystem(System::load, System::loadLibrary, LibLLVM.class, "org.lwjgl.llvm", libName);
     }
 
     private LibLLVM() {

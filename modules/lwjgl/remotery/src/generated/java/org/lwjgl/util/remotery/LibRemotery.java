@@ -12,7 +12,7 @@ final class LibRemotery {
 
     static {
         String libName = Platform.mapLibraryNameBundled("lwjgl_remotery");
-        Library.loadSystem(System::load, System::loadLibrary, LibRemotery.class, libName);
+        Library.loadSystem(System::load, System::loadLibrary, LibRemotery.class, "org.lwjgl.remotery", libName);
     }
 
     private LibRemotery() {

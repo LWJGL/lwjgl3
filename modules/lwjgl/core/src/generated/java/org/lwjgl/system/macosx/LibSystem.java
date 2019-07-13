@@ -20,7 +20,7 @@ public final class LibSystem {
         throw new UnsupportedOperationException();
     }
 
-    private static final SharedLibrary SYSTEM = Library.loadNative(LibSystem.class, "System");
+    private static final SharedLibrary SYSTEM = Library.loadNative(LibSystem.class, "org.lwjgl", "System");
 
     /** Returns the System {@link SharedLibrary}. */
     public static SharedLibrary getLibrary() {

@@ -54,7 +54,7 @@ public class DynCallTest {
     }
 
     private static long getPutIntAddress() {
-        try (SharedLibrary lib = Library.loadNative(Library.class, Library.JNI_LIBRARY_NAME, true)) {
+        try (SharedLibrary lib = Library.loadNative(Library.class, "org.lwjgl", Library.JNI_LIBRARY_NAME, true)) {
             long putInt = lib.getFunctionAddress(
                 Platform.get() == Platform.WINDOWS && Pointer.BITS32
                     ? "_Java_org_lwjgl_system_MemoryAccessJNI_nputInt@20" // __stdcall (Win32)

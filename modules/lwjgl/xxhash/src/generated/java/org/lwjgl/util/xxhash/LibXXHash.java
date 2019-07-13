@@ -14,7 +14,7 @@ final class LibXXHash {
 
     static {
         String libName = Platform.mapLibraryNameBundled("lwjgl_xxhash");
-        Library.loadSystem(System::load, System::loadLibrary, LibXXHash.class, libName);
+        Library.loadSystem(System::load, System::loadLibrary, LibXXHash.class, "org.lwjgl.xxhash", libName);
 
         MemoryAllocator allocator = getAllocator(Configuration.DEBUG_MEMORY_ALLOCATOR_INTERNAL.get(true));
         setupMalloc(

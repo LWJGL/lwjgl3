@@ -149,7 +149,7 @@ fun simpleBinding(
     override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
         val libraryReference = libraryName.toUpperCase()
 
-        println("\n${t}private static final SharedLibrary $libraryReference = Library.loadNative(${nativeClass.className}.class, $libraryExpression${if (bundledWithLWJGL) ", true" else ""});")
+        println("\n${t}private static final SharedLibrary $libraryReference = Library.loadNative(${nativeClass.className}.class, \"${module.java}\", $libraryExpression${if (bundledWithLWJGL) ", true" else ""});")
         generateFunctionsClass(nativeClass, "\n$t/** Contains the function pointers loaded from the $libraryName {@link SharedLibrary}. */")
         println("""
     /** Returns the $libraryName {@link SharedLibrary}. */
@@ -529,7 +529,7 @@ class NativeClass internal constructor(
                             else if (library.endsWith(");"))
                                 "\n${t}static { $library }"
                             else
-                                "\n${t}static { Library.loadSystem(System::load, System::loadLibrary, $className.class, Platform.mapLibraryNameBundled(\"$library\")); }"
+                                "\n${t}static { Library.loadSystem(System::load, System::loadLibrary, $className.class, \"${module.java}\", Platform.mapLibraryNameBundled(\"$library\")); }"
                         })
             }
         }

@@ -54,7 +54,8 @@ enum Platforms {
     LINUX_ARM64("linux-arm64"),
     LINUX_ARM32("linux-arm32"),
     MACOS("macos"),
-    WINDOWS("windows")
+    WINDOWS("windows"),
+    WINDOWS_X86("windows-x86")
 
     static final Platforms[] JAVA_ONLY = []
     static final Platforms[] ALL = values()
@@ -131,7 +132,7 @@ enum Artifacts {
     MEOW(
         "lwjgl-meow", "LWJGL - Meow hash bindings",
         "An extremely fast non-cryptographic hash.",
-        Platforms.LINUX, Platforms.LINUX_ARM64, Platforms.MACOS, Platforms.WINDOWS
+        Platforms.LINUX, Platforms.LINUX_ARM64, Platforms.MACOS, Platforms.WINDOWS, Platforms.WINDOWS_X86
     ),
     NANOVG(
         "lwjgl-nanovg", "LWJGL - NanoVG & NanoSVG bindings",
@@ -141,7 +142,7 @@ enum Artifacts {
     NFD(
         "lwjgl-nfd", "LWJGL - Native File Dialog bindings",
         "A tiny, neat C library that portably invokes native file open and save dialogs.",
-        Platforms.LINUX, Platforms.MACOS, Platforms.WINDOWS
+        Platforms.LINUX, Platforms.MACOS, Platforms.WINDOWS, Platforms.WINDOWS_X86
     ),
     NUKLEAR(
         "lwjgl-nuklear", "LWJGL - Nuklear bindings",
@@ -176,7 +177,7 @@ enum Artifacts {
     OPENVR(
         "lwjgl-openvr", "LWJGL - OpenVR bindings",
         "An API and runtime that allows access to VR hardware from multiple vendors without requiring that applications have specific knowledge of the hardware they are targeting.",
-        Platforms.LINUX, Platforms.MACOS, Platforms.WINDOWS
+        Platforms.LINUX, Platforms.MACOS, Platforms.WINDOWS, Platforms.WINDOWS_X86
     ),
     OPUS(
         "lwjgl-opus", "LWJGL - Opus bindings",
@@ -186,7 +187,7 @@ enum Artifacts {
     OVR(
         "lwjgl-ovr", "LWJGL - OVR bindings",
         "The API of the Oculus SDK.",
-        Platforms.WINDOWS
+        Platforms.WINDOWS, Platforms.WINDOWS_X86
     ),
     PAR(
         "lwjgl-par", "LWJGL - par_shapes bindings",
@@ -211,7 +212,7 @@ enum Artifacts {
     SSE(
         "lwjgl-sse", "LWJGL - SSE bindings",
         "Simple SSE intrinsics.",
-        Platforms.LINUX, Platforms.MACOS, Platforms.WINDOWS
+        Platforms.LINUX, Platforms.MACOS, Platforms.WINDOWS, Platforms.WINDOWS_X86
     ),
     STB(
         "lwjgl-stb", "LWJGL - stb bindings",
@@ -231,7 +232,7 @@ enum Artifacts {
     TOOTLE(
         "lwjgl-tootle", "LWJGL - AMD Tootle bindings",
         "A 3D triangle mesh optimization library that improves on existing mesh preprocessing techniques.",
-        Platforms.LINUX, Platforms.MACOS, Platforms.WINDOWS
+        Platforms.LINUX, Platforms.MACOS, Platforms.WINDOWS, Platforms.WINDOWS_X86
     ),
     VMA(
         "lwjgl-vma", "LWJGL - Vulkan Memory Allocator bindings",
