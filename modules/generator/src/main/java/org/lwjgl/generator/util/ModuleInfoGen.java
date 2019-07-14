@@ -17,9 +17,10 @@ public final class ModuleInfoGen implements AutoCloseable {
     private static final String JAVA_PACKAGE = "\\p{javaJavaIdentifierStart}\\p{javaJavaIdentifierPart}*(\\s*\\.\\s*\\p{javaJavaIdentifierStart}\\p{javaJavaIdentifierPart}*)*";
 
     private static final Pattern
-        COMMA       = Pattern.compile(","),
         MODULE_NAME = Pattern.compile("^\\s*(?:open\\s+)?module\\s+(" + JAVA_PACKAGE + ")\\s*\\{", Pattern.MULTILINE),
         REQUIRES    = Pattern.compile("^\\s*requires(?:\\s+(?:transitive|static))?\\s+(.+)\\s*;", Pattern.MULTILINE);
+
+    private static final Path METAINF = Paths.get("META-INF", "versions", "9");
 
     private final JavaCompiler compiler;
 
@@ -38,6 +39,16 @@ public final class ModuleInfoGen implements AutoCloseable {
     @Override
     public void close() throws IOException {
         fileManager.close();
+    }
+
+    public static void main(String[] args) throws IOException {
+        if (args.length == 1) {
+            generateJavaModuleInfoClasses(args[0]);
+        } else if (args.length == 2) {
+            generateNativeModuleInfoClasses(args[0], args[1]);
+        } else {
+            throw new IllegalArgumentException("Usage: ModuleInfoGen <module.list> OR <module source name> <module release name>");
+        }
     }
 
     private static class Module implements Comparable<Module> {
@@ -70,27 +81,34 @@ public final class ModuleInfoGen implements AutoCloseable {
         @Override public String toString() {
             return name;
         }
+
+        private void compile(ModuleInfoGen gen) {
+            String modulePath = dependencies.stream()
+                .map(it -> "bin/classes/lwjgl/" + it)
+                .collect(Collectors.joining(File.pathSeparator));
+
+            gen.compile(
+                name,
+                info,
+                modulePath,
+                Paths.get("modules", "lwjgl", name, "src", "main", "java"),
+                Paths.get("bin", "classes", "lwjgl", name),
+                null
+            );
+        }
     }
 
-    public static void main(String[] args) throws IOException {
-        if (args.length < 2) {
-            throw new IllegalArgumentException("Usage: ModuleInfoGen <module.list> <module.list.java-only>");
-        }
-
-        List<String> moduleNames = COMMA
-            .splitAsStream(args[0])
+    private static void generateJavaModuleInfoClasses(String moduleNameList) throws IOException {
+        List<String> moduleNames = Pattern.compile(",")
+            .splitAsStream(moduleNameList)
             .collect(Collectors.toList());
-
-        Set<String> javaOnly = COMMA
-            .splitAsStream(args[1])
-            .collect(Collectors.toSet());
 
         try (ModuleInfoGen gen = new ModuleInfoGen()) {
             // Find module-info sources
             List<Module> modules = moduleNames.stream()
                 .map(it -> {
                     try {
-                        return Files.readAllBytes(Paths.get("modules/lwjgl", it, "src/main/resources/module-info.java"));
+                        return Files.readAllBytes(Paths.get("modules", "lwjgl", it, "src", "main", "resources", "module-info.java"));
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -103,25 +121,80 @@ public final class ModuleInfoGen implements AutoCloseable {
 
             // Compile module-info classes
             for (Module module : modules) {
-                gen.compileModuleInfo(module, javaOnly);
+                module.compile(gen);
             }
 
             // Move module-info classes to <module>/META-INF/versions/9
             for (String module : moduleNames) {
-                Path moduleInfoClass = Paths.get("bin/classes/lwjgl/" + module + "/module-info.class");
-                moveModuleInfo(moduleInfoClass);
+                Path source = Paths.get("bin", "classes", "lwjgl", module, "module-info.class");
+                Path target = source.resolveSibling(METAINF);
 
-                Path natives = moduleInfoClass.getParent().resolveSibling(module + ".natives");
-                if (Files.isDirectory(natives)) {
-                    moveModuleInfo(natives.resolve("module-info.class"));
-                }
+                Files.createDirectories(target);
+                Files.move(
+                    source,
+                    target.resolve(source.getFileName()),
+                    StandardCopyOption.REPLACE_EXISTING
+                );
+            }
+        }
+    }
+
+    private static void generateNativeModuleInfoClasses(String moduleNameSource, String moduleNameRelease) throws IOException {
+        Path root = Paths.get("bin", "RELEASE", moduleNameRelease, "native");
+
+        Module module       = parseModuleInfo(Files.readAllBytes(Paths.get("modules", "lwjgl", moduleNameSource, "src", "main", "resources", "module-info.java")));
+        String moduleNative = module.nameJava + ".natives";
+
+        try (ModuleInfoGen gen = new ModuleInfoGen()) {
+            try (Stream<Path> platforms = Files.list(root)) {
+                platforms
+                    .filter(it -> Files.isDirectory(it))
+                    .forEach(platform -> {
+                        try {
+                            try (Stream<Path> architectures = Files.list(platform)) {
+                                architectures
+                                    .filter(it -> Files.isDirectory(it))
+                                    .forEach(architecture -> {
+                                        String nativePackage = platform.getFileName().toString() + '.' + architecture.getFileName() + '.' + module.nameJava;
+
+                                        Path outputPath = architecture.resolve(METAINF);
+
+                                        gen.compile(
+                                            moduleNative,
+                                            "module " + moduleNative + " {\n" +
+                                            "    requires transitive " + module.nameJava + ";\n" +
+                                            "\n" +
+                                            "    opens " + nativePackage + ";\n" +
+                                            "}",
+                                            Stream.concat(Stream.of(module.name), module.dependencies.stream())
+                                                .map(it -> "bin/classes/lwjgl/" + it + "/META-INF/versions/9")
+                                                .collect(Collectors.joining(File.pathSeparator)),
+                                            architecture,
+                                            outputPath,
+                                            nativePackage
+                                        );
+
+                                        try (Stream<Path> dummy = Files.walk(outputPath.resolve(platform.getFileName()))) {
+                                            dummy
+                                                .sorted(Comparator.reverseOrder())
+                                                .map(Path::toFile)
+                                                .forEach(File::delete);
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                    });
+                            }
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
             }
         }
     }
 
     private static String getModule(String moduleJava) {
-        return "org.lwjgl".equals(moduleJava) ?
-            "core"
+        return "org.lwjgl".equals(moduleJava)
+            ? "core"
             : moduleJava.substring("org.lwjgl.".length());
     }
 
@@ -182,7 +255,11 @@ public final class ModuleInfoGen implements AutoCloseable {
 
         visited.add(module);
         for (String predecessor : module.dependencies) {
-            traverse(moduleRegistry.get(predecessor), moduleRegistry, stack, visited, expanded);
+            Module depModule = moduleRegistry.get(predecessor);
+            if (depModule == null) {
+                throw new IllegalStateException("Module " + module.name + " depends on module " + predecessor + " which does not exist.");
+            }
+            traverse(depModule, moduleRegistry, stack, visited, expanded);
         }
         expanded.add(module);
 
@@ -205,88 +282,70 @@ public final class ModuleInfoGen implements AutoCloseable {
         stack.add(i, module);
     }
 
-    private void compileModuleInfo(Module module, Set<String> javaOnly) throws IOException {
-        String modulePath = Stream.concat(
-            module.dependencies.stream(),
-            Stream.of(module.name)
-        )
-            .map(it -> "bin/classes/lwjgl/" + it)
-            .collect(Collectors.joining(File.pathSeparator));
-
-        compileModuleInfo(module.name, module.info, modulePath);
-        if (!javaOnly.contains(module.name)) {
-            //Paths.get("bin/classes/lwjgl/" + module + ".natives");
-            compileModuleInfo(
-                module.name + ".natives",
-                "module " + module.nameJava + ".natives {\n" +
-                "    requires transitive " + module.nameJava + ";\n" +
-                "}",
-                modulePath
-            );
-        }
-    }
-
-    private void compileModuleInfo(
+    private void compile(
         String module,
         String moduleInfo,
-        String modulePath
+        String modulePath,
+        Path sourcePath,
+        Path outputPath,
+        String nativePackage
     ) {
-        class MemoryJavaFileObject extends SimpleJavaFileObject {
-            private final String code;
-
-            MemoryJavaFileObject(String name, String code) {
-                super(Paths.get(name).toUri(), Kind.SOURCE);
-                this.code = code;
-            }
-
-            @Override
-            public CharSequence getCharContent(boolean ignoreEncodingErrors) {
-                return code;
-            }
+        ArrayList<MemoryJavaFileObject> compilationUnits = new ArrayList<>(2);
+        if (nativePackage != null) {
+            compilationUnits.add(new MemoryJavaFileObject(
+                sourcePath.resolve("Dummy.java").toString(),
+                "package " + nativePackage + ";\n\npublic class Dummy {}")
+            );
         }
+        compilationUnits.add(new MemoryJavaFileObject(
+            sourcePath.resolve("module-info.java").toString(),
+            moduleInfo
+        ));
 
-        List<JavaFileObject> compilationUnits = new ArrayList<>(32);
-        compilationUnits.add(new MemoryJavaFileObject("modules/lwjgl/" + module + "/src/main/java/module-info.java", moduleInfo));
+        ArrayList<String> options = new ArrayList<>(6);
+        options.add("--release");
+        options.add("9");
+        if (modulePath != null && !modulePath.isEmpty()) {
+            options.add("--module-path");
+            options.add(modulePath);
+        }
+        options.add("-d");
+        options.add(outputPath.toString());
 
-        JavaCompiler.CompilationTask task = compiler.getTask(
-            null,
-            fileManager,
-            diagnostics,
-            Arrays.asList(
-                "--release", "9",
-                "--module-path", modulePath,
-                "-d", "bin/classes/lwjgl/" + module
-            ),
-            null,
-            compilationUnits
-        );
-
-        boolean success = task.call();
-        System.out.println(module + ": " + (success ? "OK" : "FAILED"));
+        boolean success = compiler
+            .getTask(null, fileManager, diagnostics, options, null, compilationUnits)
+            .call();
+        System.out.println((nativePackage == null ? module : nativePackage) + ": " + (success ? "OK" : "FAILED"));
         if (!success) {
-            System.out.flush();
-            diagnostics.getDiagnostics().forEach(it -> {
-                System.err.println(it.getCode());
-                System.err.println(it.getKind());
-                System.err.println(it.getPosition());
-                System.err.println(it.getStartPosition());
-                System.err.println(it.getEndPosition());
-                System.err.println(it.getSource());
-                System.err.println(it.getMessage(null));
-            });
-            System.exit(1);
+            printDiagnostics();
         }
     }
 
-    private static void moveModuleInfo(Path moduleInfoClass) throws IOException {
-        Path java9 = moduleInfoClass.resolveSibling("META-INF/versions/9");
-        Files.createDirectories(java9);
-
-        Files.move(
-            moduleInfoClass,
-            java9.resolve("module-info.class"),
-            StandardCopyOption.REPLACE_EXISTING
-        );
+    private void printDiagnostics() {
+        System.out.flush();
+        diagnostics.getDiagnostics().forEach(it -> {
+            System.err.println(it.getCode());
+            System.err.println(it.getKind());
+            System.err.println(it.getPosition());
+            System.err.println(it.getStartPosition());
+            System.err.println(it.getEndPosition());
+            System.err.println(it.getSource());
+            System.err.println(it.getMessage(null));
+        });
+        System.exit(1);
     }
 
+    private static class MemoryJavaFileObject extends SimpleJavaFileObject {
+        private final String code;
+
+        MemoryJavaFileObject(String name, String code) {
+            super(Paths.get(name).toUri(), Kind.SOURCE);
+            this.code = code;
+        }
+
+        @Override
+        public CharSequence getCharContent(boolean ignoreEncodingErrors) {
+            return code;
+        }
+    }
 }

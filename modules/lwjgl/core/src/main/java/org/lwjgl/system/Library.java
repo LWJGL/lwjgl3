@@ -135,7 +135,7 @@ public final class Library {
 
         // METHOD 3: java.library.path (bundled only)
         if (bundledWithLWJGL && javaLibraryPath != null) {
-            if (loadSystem(load, context, module, Platform.mapLibraryPathBundled(module + "/" + libName), false, JAVA_LIBRARY_PATH, javaLibraryPath)) {
+            if (loadSystem(load, context, module, getBundledPath(module, libName), false, JAVA_LIBRARY_PATH, javaLibraryPath)) {
                 return;
             }
         }
@@ -423,11 +423,15 @@ public final class Library {
         }
     }
 
+    private static String getBundledPath(String module, String resource) {
+        return Platform.mapLibraryPathBundled(module.replace('.', '/') + "/" + resource);
+    }
+
     @Nullable
     static URL findResource(Class<?> context, String module, String resource, boolean bundledWithLWJGL) {
         URL url = null;
         if (bundledWithLWJGL) {
-            String bundledResource = Platform.mapLibraryPathBundled(module + "/" + resource);
+            String bundledResource = getBundledPath(module, resource);
             if (!bundledResource.equals(resource)) {
                 url = context.getClassLoader().getResource(bundledResource);
             }
@@ -452,7 +456,7 @@ public final class Library {
     @Nullable
     static Path findFile(String path, String module, String file, boolean bundledWithLWJGL) {
         if (bundledWithLWJGL) {
-            String bundledFile = Platform.mapLibraryPathBundled(module + "/" + file);
+            String bundledFile = getBundledPath(module, file);
             if (!bundledFile.equals(file)) {
                 Path p = findFile(path, bundledFile);
                 if (p != null) {

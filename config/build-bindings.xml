@@ -119,7 +119,6 @@ This script is included in /config/build-definitions.xml.
 
         var modules = ["core"];
         var bindings = ["-Dbinding.DISABLE_CHECKS=" + props.get("binding.DISABLE_CHECKS")];
-        var javaOnly = [];
 
         for each (p in props.entrySet()) {
             var name = p.key;
@@ -128,24 +127,19 @@ This script is included in /config/build-definitions.xml.
 
                 modules.push(module);
                 bindings.push("-D" + name + "=true");
-
-                if (props.containsKey("java-only." + name)) {
-                    javaOnly.push(module);
-                }
             }
         }
 
         LWJGL.setProperty("binding.core", "true");
         LWJGL.setProperty("generator.bindings", bindings.join(" "));
         LWJGL.setProperty("module.list", modules.join(","));
-        LWJGL.setProperty("module.list.java-only", javaOnly.join(","));
 
         var classes = [];
         var templates = [];
         var sources = [];
 
         modules.forEach(function(it) {
-            LWJGL.setProperty("module." + it + ".java", it == "core" ? "org.lwjgl" : "org.lwjgl." + it);
+            LWJGL.setProperty("module." + it + ".path", it == "core" ? "org/lwjgl" : "org/lwjgl/" + it);
 
             classes.push("bin/classes/lwjgl/" + it);
 

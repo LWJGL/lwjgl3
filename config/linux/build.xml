@@ -90,7 +90,7 @@
             </compile>
 
             <local name="lib.arch"/>
-            <property name="lib.arch" value="${lib.native}/${module.@{module}.java}"/>
+            <property name="lib.arch" value="${lib.native}/${module.@{module}.path}"/>
 
             <local name="lib-uptodate"/>
             <uptodate property="lib-uptodate" targetfile="${lib.arch}/lib${name}.so">
@@ -185,7 +185,7 @@
                 </parallel>
             </beforeLink>
             <link>
-                <fileset dir="${lib.native}/org.lwjgl">
+                <fileset dir="${lib.native}/org/lwjgl">
                     <include name="libdyn*.a"/>
                 </fileset>
                 <arg value="-ldl"/>
@@ -210,7 +210,7 @@
             </beforeLink>
             <link>
                 <arg value="-ldl"/>
-                <arg value="-L${lib.native}/org.lwjgl.bullet"/>
+                <arg value="-L${lib.native}/org/lwjgl/bullet"/>
                 <!-- Order is important -->
                 <arg value="-lBulletWorldImporter"/>
                 <arg value="-lBulletSoftBody"/>
