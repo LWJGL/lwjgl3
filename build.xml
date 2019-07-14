@@ -1062,8 +1062,8 @@
             <available file="${module.lwjgl}/@{name}/src/main/java" type="dir" property="hasMain"/>
 
             <!-- Bundle javadoc -->
-            <!-- This is slow, comment out the following section for fast local builds -->
-            <mkdir dir="${release}/${module}/javadoc"/>
+            <!-- This is slow, use -Djavadoc.skip=true for fast local builds -->
+            <mkdir dir="${release}/${module}/javadoc" unless:set="javadoc.skip"/>
             <javadoc
                 destdir="${release}/${module}/javadoc"
                 source="9"
@@ -1076,6 +1076,7 @@
                 notree="true"
                 public="true"
                 failonerror="true"
+                unless:set="javadoc.skip"
             >
                 <doctitle><![CDATA[<h1>LWJGL - @{title}</h1>]]></doctitle>
                 <bottom><![CDATA[<i>Copyright LWJGL. All Rights Reserved. <a href="https://www.lwjgl.org/license">License terms</a>.</i>]]></bottom>
@@ -1097,15 +1098,15 @@
                 <arg line="-J-Dfile.encoding=UTF8 -J-Dline.separator=&#10;"/>
                 <arg line="--add-exports jdk.javadoc/com.sun.tools.doclets=ALL-UNNAMED" if:set="jdk9"/>
             </javadoc>
-            <get-quiet name="favicon" url="https://www.lwjgl.org/favicon.ico" dest="${release}/${module}/javadoc"/>
+            <get-quiet name="favicon" url="https://www.lwjgl.org/favicon.ico" dest="${release}/${module}/javadoc" unless:set="javadoc.skip"/>
 
-            <java classname="org.lwjgl.system.JavadocPostProcess" failonerror="true">
+            <java classname="org.lwjgl.system.JavadocPostProcess" failonerror="true" unless:set="javadoc.skip">
                 <classpath path="${bin.generator}"/>
 
                 <arg value="${release}/${module}/javadoc"/>
             </java>
-            <zip destfile="${release}/${module}/${module}-javadoc.jar" basedir="${release}/${module}/javadoc" includes="**" level="9"/>
-            <delete dir="${release}/${module}/javadoc"/>
+            <zip destfile="${release}/${module}/${module}-javadoc.jar" basedir="${release}/${module}/javadoc" includes="**" level="9" unless:set="javadoc.skip"/>
+            <delete dir="${release}/${module}/javadoc" unless:set="javadoc.skip"/>
 
             <!-- Bundle source -->
             <quiet>
