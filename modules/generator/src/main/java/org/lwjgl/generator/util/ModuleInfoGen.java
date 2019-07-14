@@ -253,6 +253,7 @@ public final class ModuleInfoGen implements AutoCloseable {
             fileManager,
             diagnostics,
             Arrays.asList(
+                "--release", "9",
                 "--module-path", modulePath,
                 "-d", "bin/classes/lwjgl/" + module
             ),

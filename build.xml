@@ -1157,7 +1157,7 @@
     </target>
 
     <!-- Set the LWJGL_BUILD_OFFLINE=true environment variable for local builds. -->
-    <target name="release" depends="-check-release-jdk,compile,-build-version">
+    <target name="release" depends="-check-release-jdk,compile,-compile-generator,-build-version">
         <local name="revision"/>
         <condition property="revision" value="build ${build.revision}" else="SNAPSHOT">
             <isset property="build.revision"/>
