@@ -35,7 +35,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <p>If a SPIR-V {@code OpLoad} instruction loads a structure and the tail end of the structure is out of bounds, then all members of the structure are considered out of bounds even if the members at the end are not statically used.</p>
  * </div>
  * </li>
- * <li>If any buffer access in a given SPIR-V block is determined to be out of bounds, then any other access of the same type (load, store, or atomic) in the same SPIR-V block that accesses an address less than 16 bytes away from the out of bounds address <b>may</b> also be considered out of bounds.</li>
+ * <li>If any buffer access is determined to be out of bounds, then any other access of the same type (load, store, or atomic) to the same buffer that accesses an address less than 16 bytes away from the out of bounds address <b>may</b> also be considered out of bounds.</li>
  * </ul>
  * </li>
  * <li>Out-of-bounds buffer loads will return any of the following values:

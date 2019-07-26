@@ -93,13 +93,13 @@ package org.lwjgl.vulkan;
  * <li>Martin Dinkov <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_shader_core_properties:%20&amp;body=@mdinkov%20">mdinkov</a></li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2018-02-15</dd>
+ * <dd>2019-06-25</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
  * <li>Martin Dinkov, AMD</li>
- * <li>Matthaeus Chajdas, AMD</li>
+ * <li>Matthaeus G. Chajdas, AMD</li>
  * </ul></dd>
  * </dl>
  */

@@ -509,6 +509,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_filter_cubic;
     /** When true, {@link EXTFragmentDensityMap} is supported. */
     public final boolean VK_EXT_fragment_density_map;
+    /** When true, {@link EXTFragmentShaderInterlock} is supported. */
+    public final boolean VK_EXT_fragment_shader_interlock;
     /** When true, {@link EXTFullScreenExclusive} is supported. */
     public final boolean VK_EXT_full_screen_exclusive;
     /** When true, {@link EXTGlobalPriority} is supported. */
@@ -541,6 +543,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_scalar_block_layout;
     /** When true, {@link EXTSeparateStencilUsage} is supported. */
     public final boolean VK_EXT_separate_stencil_usage;
+    /** When true, {@link EXTShaderDemoteToHelperInvocation} is supported. */
+    public final boolean VK_EXT_shader_demote_to_helper_invocation;
     /** When true, {@link EXTShaderStencilExport} is supported. */
     public final boolean VK_EXT_shader_stencil_export;
     /** When true, {@link EXTShaderSubgroupBallot} is supported. */
@@ -549,6 +553,10 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_shader_subgroup_vote;
     /** When true, {@link EXTShaderViewportIndexLayer} is supported. */
     public final boolean VK_EXT_shader_viewport_index_layer;
+    /** When true, {@link EXTSubgroupSizeControl} is supported. */
+    public final boolean VK_EXT_subgroup_size_control;
+    /** When true, {@link EXTTexelBufferAlignment} is supported. */
+    public final boolean VK_EXT_texel_buffer_alignment;
     /** When true, {@link EXTTransformFeedback} is supported. */
     public final boolean VK_EXT_transform_feedback;
     /** When true, {@link EXTValidationCache} is supported. */
@@ -615,6 +623,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_KHR_get_memory_requirements2;
     /** When true, {@link KHRImageFormatList} is supported. */
     public final boolean VK_KHR_image_format_list;
+    /** When true, {@link KHRImagelessFramebuffer} is supported. */
+    public final boolean VK_KHR_imageless_framebuffer;
     /** When true, {@link KHRIncrementalPresent} is supported. */
     public final boolean VK_KHR_incremental_present;
     /** When true, {@link KHRMaintenance1} is supported. */
@@ -701,6 +711,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_NV_scissor_exclusive;
     /** When true, {@link NVShaderImageFootprint} is supported. */
     public final boolean VK_NV_shader_image_footprint;
+    /** When true, {@link NVShaderSmBuiltins} is supported. */
+    public final boolean VK_NV_shader_sm_builtins;
     /** When true, {@link NVShaderSubgroupPartitioned} is supported. */
     public final boolean VK_NV_shader_subgroup_partitioned;
     /** When true, {@link NVShadingRateImage} is supported. */
@@ -760,6 +772,7 @@ public class VKCapabilitiesDevice {
         VK_EXT_external_memory_host = EXTExternalMemoryHost.checkCapsDevice(provider, caps, ext);
         VK_EXT_filter_cubic = ext.contains("VK_EXT_filter_cubic");
         VK_EXT_fragment_density_map = ext.contains("VK_EXT_fragment_density_map");
+        VK_EXT_fragment_shader_interlock = ext.contains("VK_EXT_fragment_shader_interlock");
         VK_EXT_full_screen_exclusive = EXTFullScreenExclusive.checkCapsDevice(provider, caps, ext);
         VK_EXT_global_priority = ext.contains("VK_EXT_global_priority");
         VK_EXT_hdr_metadata = EXTHdrMetadata.checkCapsDevice(provider, caps, ext);
@@ -776,10 +789,13 @@ public class VKCapabilitiesDevice {
         VK_EXT_sampler_filter_minmax = ext.contains("VK_EXT_sampler_filter_minmax");
         VK_EXT_scalar_block_layout = ext.contains("VK_EXT_scalar_block_layout");
         VK_EXT_separate_stencil_usage = ext.contains("VK_EXT_separate_stencil_usage");
+        VK_EXT_shader_demote_to_helper_invocation = ext.contains("VK_EXT_shader_demote_to_helper_invocation");
         VK_EXT_shader_stencil_export = ext.contains("VK_EXT_shader_stencil_export");
         VK_EXT_shader_subgroup_ballot = ext.contains("VK_EXT_shader_subgroup_ballot");
         VK_EXT_shader_subgroup_vote = ext.contains("VK_EXT_shader_subgroup_vote");
         VK_EXT_shader_viewport_index_layer = ext.contains("VK_EXT_shader_viewport_index_layer");
+        VK_EXT_subgroup_size_control = ext.contains("VK_EXT_subgroup_size_control");
+        VK_EXT_texel_buffer_alignment = ext.contains("VK_EXT_texel_buffer_alignment");
         VK_EXT_transform_feedback = EXTTransformFeedback.checkCapsDevice(provider, caps, ext);
         VK_EXT_validation_cache = EXTValidationCache.checkCapsDevice(provider, caps, ext);
         VK_EXT_vertex_attribute_divisor = ext.contains("VK_EXT_vertex_attribute_divisor");
@@ -813,6 +829,7 @@ public class VKCapabilitiesDevice {
         VK_KHR_external_semaphore_win32 = KHRExternalSemaphoreWin32.checkCapsDevice(provider, caps, ext);
         VK_KHR_get_memory_requirements2 = KHRGetMemoryRequirements2.checkCapsDevice(provider, caps, ext);
         VK_KHR_image_format_list = ext.contains("VK_KHR_image_format_list");
+        VK_KHR_imageless_framebuffer = ext.contains("VK_KHR_imageless_framebuffer");
         VK_KHR_incremental_present = ext.contains("VK_KHR_incremental_present");
         VK_KHR_maintenance1 = KHRMaintenance1.checkCapsDevice(provider, caps, ext);
         VK_KHR_maintenance2 = ext.contains("VK_KHR_maintenance2");
@@ -856,6 +873,7 @@ public class VKCapabilitiesDevice {
         VK_NV_sample_mask_override_coverage = ext.contains("VK_NV_sample_mask_override_coverage");
         VK_NV_scissor_exclusive = NVScissorExclusive.checkCapsDevice(provider, caps, ext);
         VK_NV_shader_image_footprint = ext.contains("VK_NV_shader_image_footprint");
+        VK_NV_shader_sm_builtins = ext.contains("VK_NV_shader_sm_builtins");
         VK_NV_shader_subgroup_partitioned = ext.contains("VK_NV_shader_subgroup_partitioned");
         VK_NV_shading_rate_image = NVShadingRateImage.checkCapsDevice(provider, caps, ext);
         VK_NV_viewport_array2 = ext.contains("VK_NV_viewport_array2");

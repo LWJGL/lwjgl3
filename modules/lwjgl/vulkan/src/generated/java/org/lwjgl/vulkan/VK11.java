@@ -867,7 +867,7 @@ public class VK11 extends VK10 {
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
-     * <p>Even though the above table does not restrict the drivers and devices with which {@link EXTExternalMemoryDmaBuf#VK_EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT} <b>may</b> be shared, query mechanisms exist in the Vulkan API that prevent the import of incompatible dma-bufs (such as {@link KHRExternalMemoryFd#vkGetMemoryFdPropertiesKHR GetMemoryFdPropertiesKHR}) and that prevent incompatible usage of dma-bufs (such as {@link VkPhysicalDeviceExternalBufferInfoKHR} and {@link VkPhysicalDeviceExternalImageFormatInfoKHR}).</p>
+     * <p>Even though the above table does not restrict the drivers and devices with which {@link EXTExternalMemoryDmaBuf#VK_EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT} <b>may</b> be shared, query mechanisms exist in the Vulkan API that prevent the import of incompatible dma-bufs (such as {@link KHRExternalMemoryFd#vkGetMemoryFdPropertiesKHR GetMemoryFdPropertiesKHR}) and that prevent incompatible usage of dma-bufs (such as {@link VkPhysicalDeviceExternalBufferInfo} and {@link VkPhysicalDeviceExternalImageFormatInfo}).</p>
      * </div>
      * 
      * <h5>See Also</h5>
@@ -1394,7 +1394,7 @@ public class VK11 extends VK10 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>{@code deviceMask} is used to filter out subsequent commands from executing on all physical devices whose bit indices are not set in the mask, except commands beginning a render pass instance, commands transitioning to the next subpass in the render pass instance, and commands ending a render pass instance, which always execute on the set of physical devices whose bit indices are included in the {@code deviceMask} member of the instance of the {@link VkDeviceGroupRenderPassBeginInfoKHR} structure passed to the command beginning the corresponding render pass instance.</p>
+     * <p>{@code deviceMask} is used to filter out subsequent commands from executing on all physical devices whose bit indices are not set in the mask, except commands beginning a render pass instance, commands transitioning to the next subpass in the render pass instance, and commands ending a render pass instance, which always execute on the set of physical devices whose bit indices are included in the {@code deviceMask} member of the instance of the {@link VkDeviceGroupRenderPassBeginInfo} structure passed to the command beginning the corresponding render pass instance.</p>
      * 
      * <h5>Valid Usage</h5>
      * 

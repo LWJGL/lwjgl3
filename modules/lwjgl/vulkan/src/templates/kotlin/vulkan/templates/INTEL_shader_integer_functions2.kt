@@ -56,18 +56,18 @@ val INTEL_shader_integer_functions2 = "INTELShaderIntegerFunctions2".nativeClass
     IntConstant(
         "The extension specification version.",
 
-        "INTEL_SHADER_INTEGER_FUNCTIONS2_SPEC_VERSION".."1"
+        "INTEL_SHADER_INTEGER_FUNCTIONS_2_SPEC_VERSION".."1"
     )
 
     StringConstant(
         "The extension name.",
 
-        "INTEL_SHADER_INTEGER_FUNCTIONS2_EXTENSION_NAME".."VK_INTEL_shader_integer_functions2"
+        "INTEL_SHADER_INTEGER_FUNCTIONS_2_EXTENSION_NAME".."VK_INTEL_shader_integer_functions2"
     )
 
     EnumConstant(
         "Extends {@code VkStructureType}.",
 
-        "STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS2_FEATURES_INTEL".."1000209000"
+        "STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS_2_FEATURES_INTEL".."1000209000"
     )
 }

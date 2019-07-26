@@ -18,7 +18,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>198</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -49,13 +49,33 @@ package org.lwjgl.vulkan;
 public final class KHRShaderFloatControls {
 
     /** The extension specification version. */
-    public static final int VK_KHR_SHADER_FLOAT_CONTROLS_SPEC_VERSION = 1;
+    public static final int VK_KHR_SHADER_FLOAT_CONTROLS_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String VK_KHR_SHADER_FLOAT_CONTROLS_EXTENSION_NAME = "VK_KHR_shader_float_controls";
 
     /** Extends {@code VkStructureType}. */
     public static final int VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES_KHR = 1000197000;
+
+    /**
+     * VkShaderFloatControlsIndependenceKHR - Enum specifying whether, and how, shader float controls can be set separately
+     * 
+     * <h5>Description</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY_KHR SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY_KHR} specifies that shader float controls for 32-bit floating point <b>can</b> be set independently; other bit widths <b>must</b> be set identically to each other.</li>
+     * <li>{@link #VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_ALL_KHR SHADER_FLOAT_CONTROLS_INDEPENDENCE_ALL_KHR} specifies that shader float controls for all bit widths <b>can</b> be set independently.</li>
+     * <li>{@link #VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE_KHR SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE_KHR} specifies that shader float controls for all bit widths <b>must</b> be set identically.</li>
+     * </ul>
+     * 
+     * <h5>See Also</h5>
+     * 
+     * <p>{@link VkPhysicalDeviceFloatControlsPropertiesKHR}</p>
+     */
+    public static final int
+        VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY_KHR = 0,
+        VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_ALL_KHR         = 1,
+        VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE_KHR        = 2;
 
     private KHRShaderFloatControls() {}
 

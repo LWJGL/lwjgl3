@@ -394,20 +394,6 @@ public class INTELPerformanceQuery {
      * <ul>
      * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
      * </ul>
-     * 
-     * <h5>Return Codes</h5>
-     * 
-     * <dl>
-     * <dt>On success, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link VK10#VK_SUCCESS SUCCESS}</li>
-     * </ul></dd>
-     * <dt>On failure, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link VK10#VK_ERROR_TOO_MANY_OBJECTS ERROR_TOO_MANY_OBJECTS}</li>
-     * <li>{@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY}</li>
-     * </ul></dd>
-     * </dl>
      *
      * @param device the logical device used for the queries.
      */

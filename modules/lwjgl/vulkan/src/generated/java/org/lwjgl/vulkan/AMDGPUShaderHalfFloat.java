@@ -10,7 +10,7 @@ package org.lwjgl.vulkan;
  * 
  * <h5>Deprecation by VK_KHR_shader_float16_int8</h5>
  * 
- * <p>Functionality in this extension was included in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_shader_float16_int8">VK_KHR_shader_float16_int8</a> extension, when slink::VkPhysicalDeviceFloat16Int8FeaturesKHR{@code ::shaderFloat16} is enabled.</p>
+ * <p>Functionality in this extension was included in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_shader_float16_int8">VK_KHR_shader_float16_int8</a> extension, when slink::VkPhysicalDeviceShaderFloat16Int8FeaturesKHR{@code ::shaderFloat16} is enabled.</p>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>

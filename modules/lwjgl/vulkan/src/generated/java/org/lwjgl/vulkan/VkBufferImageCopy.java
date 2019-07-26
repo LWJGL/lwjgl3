@@ -36,6 +36,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>Because depth or stencil aspect buffer to image copies <b>may</b> require format conversions on some implementations, they are not supported on queues that do not support graphics.</p>
  * 
+ * <p>When copying to a depth aspect, and the VK_EXT_depth_range_unrestricted extension is not enabled, the data in buffer memory <b>must</b> be in the range <code>[0,1]</code>, or the resulting values are undefined.</p>
+ * 
  * <p>Copies are done layer by layer starting with image layer {@code baseArrayLayer} member of {@code imageSubresource}. {@code layerCount} layers are copied from the source image or to the destination image.</p>
  * 
  * <h5>Valid Usage</h5>

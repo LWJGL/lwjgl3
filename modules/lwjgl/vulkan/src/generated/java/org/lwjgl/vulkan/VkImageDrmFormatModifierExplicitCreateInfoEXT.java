@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code drmFormatModifier} must be compatible with the parameters in {@link VkImageCreateInfo} and its {@code pNext} chain, as determined by querying {@link VkPhysicalDeviceImageFormatInfo2KHR} extended with {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT}.</li>
+ * <li>{@code drmFormatModifier} must be compatible with the parameters in {@link VkImageCreateInfo} and its {@code pNext} chain, as determined by querying {@link VkPhysicalDeviceImageFormatInfo2} extended with {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT}.</li>
  * <li>{@code drmFormatModifierPlaneCount} <b>must</b> be equal to the {@link VkDrmFormatModifierPropertiesEXT}{@code ::drmFormatModifierPlaneCount} associated with {@link VkImageCreateInfo}{@code ::format} and {@code drmFormatModifier}, as found by querying {@link VkDrmFormatModifierPropertiesListEXT}.</li>
  * <li>For each element of {@code pPlaneLayouts}, {@code size} <b>must</b> be 0</li>
  * <li>For each element of {@code pPlaneLayouts}, {@code arrayPitch} <b>must</b> be 0 if {@link VkImageCreateInfo}{@code ::arrayLayers} is 1.</li>

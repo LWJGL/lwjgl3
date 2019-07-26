@@ -195,7 +195,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
             </tbody>
         </table>
 
-        The transfer functions are described in the "Tranfer Functions" chapter of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#data-format">Khronos Data Format Specification</a>.
+        The transfer functions are described in the "Transfer Functions" chapter of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#data-format">Khronos Data Format Specification</a>.
 
         <h5>See Also</h5>
         ##VkSurfaceFormatKHR, ##VkSwapchainCreateInfoKHR
@@ -406,7 +406,12 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
 ￿    VkSurfaceFormatKHR*                         pSurfaceFormats);</code></pre>
 
         <h5>Description</h5>
-        If {@code pSurfaceFormats} is {@code NULL}, then the number of format pairs supported for the given {@code surface} is returned in {@code pSurfaceFormatCount}. The number of format pairs supported will be greater than or equal to 1. Otherwise, {@code pSurfaceFormatCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pSurfaceFormats} array, and on return the variable is overwritten with the number of structures actually written to {@code pSurfaceFormats}. If the value of {@code pSurfaceFormatCount} is less than the number of format pairs supported, at most {@code pSurfaceFormatCount} structures will be written. If {@code pSurfaceFormatCount} is smaller than the number of format pairs supported for the given {@code surface}, #INCOMPLETE will be returned instead of #SUCCESS to indicate that not all the available values were returned.
+        If {@code pSurfaceFormats} is {@code NULL}, then the number of format pairs supported for the given {@code surface} is returned in {@code pSurfaceFormatCount}. Otherwise, {@code pSurfaceFormatCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pSurfaceFormats} array, and on return the variable is overwritten with the number of structures actually written to {@code pSurfaceFormats}. If the value of {@code pSurfaceFormatCount} is less than the number of format pairs supported, at most {@code pSurfaceFormatCount} structures will be written. If {@code pSurfaceFormatCount} is smaller than the number of format pairs supported for the given {@code surface}, #INCOMPLETE will be returned instead of #SUCCESS to indicate that not all the available values were returned. The number of format pairs supported <b>must</b> be greater than or equal to 1.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code surface} must be supported by {@code physicalDevice}, as reported by #GetPhysicalDeviceSurfaceSupportKHR() or an equivalent platform-specific mechanism.</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

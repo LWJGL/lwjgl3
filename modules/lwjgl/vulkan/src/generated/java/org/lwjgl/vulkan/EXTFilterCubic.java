@@ -18,7 +18,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>171</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -48,7 +48,7 @@ package org.lwjgl.vulkan;
 public final class EXTFilterCubic {
 
     /** The extension specification version. */
-    public static final int VK_EXT_FILTER_CUBIC_SPEC_VERSION = 1;
+    public static final int VK_EXT_FILTER_CUBIC_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String VK_EXT_FILTER_CUBIC_EXTENSION_NAME = "VK_EXT_filter_cubic";

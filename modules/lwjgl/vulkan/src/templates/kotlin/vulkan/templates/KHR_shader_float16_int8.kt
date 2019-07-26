@@ -79,6 +79,7 @@ val KHR_shader_float16_int8 = "KHRShaderFloat16Int8".nativeClassVK("KHR_shader_f
     EnumConstant(
         "Extends {@code VkStructureType}.",
 
+        "STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES_KHR".."1000082000",
         "STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR".."1000082000"
     )
 }

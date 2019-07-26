@@ -103,7 +103,7 @@ val AMD_shader_core_properties = "AMDShaderCoreProperties".nativeClassVK("AMD_sh
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
-            <dd>2018-02-15</dd>
+            <dd>2019-06-25</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -111,7 +111,7 @@ val AMD_shader_core_properties = "AMDShaderCoreProperties".nativeClassVK("AMD_sh
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Martin Dinkov, AMD</li>
-                <li>Matthaeus Chajdas, AMD</li>
+                <li>Matthaeus G. Chajdas, AMD</li>
             </ul></dd>
         </dl>
         """

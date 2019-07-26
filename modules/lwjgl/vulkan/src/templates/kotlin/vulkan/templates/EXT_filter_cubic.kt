@@ -26,7 +26,7 @@ val EXT_filter_cubic = "EXTFilterCubic".nativeClassVK("EXT_filter_cubic", type =
             <dd>171</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -61,7 +61,7 @@ val EXT_filter_cubic = "EXTFilterCubic".nativeClassVK("EXT_filter_cubic", type =
     IntConstant(
         "The extension specification version.",
 
-        "EXT_FILTER_CUBIC_SPEC_VERSION".."1"
+        "EXT_FILTER_CUBIC_SPEC_VERSION".."2"
     )
 
     StringConstant(

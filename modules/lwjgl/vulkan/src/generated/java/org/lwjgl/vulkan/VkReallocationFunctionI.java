@@ -66,7 +66,7 @@ public interface VkReallocationFunctionI extends CallbackI.P {
      * Application-defined memory reallocation function.
      *
      * @param pUserData       the value specified for {@link VkAllocationCallbacks}{@code ::pUserData} in the allocator specified by the application.
-     * @param pOriginal       <b>must</b> be either {@code NULL} or a pointer previously returned by {@code pfnReallocation} or {@code pfnAllocation} of the same allocator.
+     * @param pOriginal       <b>must</b> be either {@code NULL} or a pointer previously returned by {@code pfnReallocation} or {@code pfnAllocation} of a compatible allocator.
      * @param size            the size in bytes of the requested allocation.
      * @param alignment       the requested alignment of the allocation in bytes and <b>must</b> be a power of two.
      * @param allocationScope a {@code VkSystemAllocationScope} value specifying the allocation scope of the lifetime of the allocation, as described <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-host-allocation-scope">here</a>.

@@ -15,7 +15,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
-import static org.lwjgl.vulkan.KHRDriverProperties.*;
+import static org.lwjgl.vulkan.VK10.*;
 
 /**
  * Structure containing driver identification information.

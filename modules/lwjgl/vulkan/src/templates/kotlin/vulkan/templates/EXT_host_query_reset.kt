@@ -94,6 +94,8 @@ val EXT_host_query_reset = "EXTHostQueryReset".nativeClassVK("EXT_host_query_res
             <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#features-hostQueryReset">hostQueryReset</a> feature <b>must</b> be enabled</li>
             <li>{@code firstQuery} <b>must</b> be less than the number of queries in {@code queryPool}</li>
             <li>The sum of {@code firstQuery} and {@code queryCount} <b>must</b> be less than or equal to the number of queries in {@code queryPool}</li>
+            <li>Submitted commands that refer to the range specified by {@code firstQuery} and {@code queryCount} in {@code queryPool} <b>must</b> have completed execution</li>
+            <li>The range of queries specified by {@code firstQuery} and {@code queryCount} in {@code queryPool} <b>must</b> not be in use by calls to #GetQueryPoolResults() or {@code vkResetQueryPoolEXT} in other threads</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -104,7 +106,7 @@ val EXT_host_query_reset = "EXTHostQueryReset".nativeClassVK("EXT_host_query_res
         </ul>
         """,
 
-        VkDevice("device", ""),
+        VkDevice("device", "the logical device that owns the query pool."),
         VkQueryPool("queryPool", "the handle of the query pool managing the queries being reset."),
         uint32_t("firstQuery", "the initial query index to reset."),
         uint32_t("queryCount", "the number of queries to reset.")

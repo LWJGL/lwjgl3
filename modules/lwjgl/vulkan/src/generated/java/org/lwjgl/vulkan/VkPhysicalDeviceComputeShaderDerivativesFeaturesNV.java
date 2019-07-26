@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#texture-derivatives-compute">Compute Shader Derivatives</a> for more information.</p>
  * 
- * <p>If the {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceFeatures2KHR}, it is filled with values indicating whether each feature is supported. {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to enable features.</p>
+ * <p>If the {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceFeatures2}, it is filled with values indicating whether each feature is supported. {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to enable features.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

@@ -25,7 +25,7 @@ val KHR_shader_float_controls = "KHRShaderFloatControls".nativeClassVK("KHR_shad
             <dd>198</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -63,7 +63,7 @@ val KHR_shader_float_controls = "KHRShaderFloatControls".nativeClassVK("KHR_shad
     IntConstant(
         "The extension specification version.",
 
-        "KHR_SHADER_FLOAT_CONTROLS_SPEC_VERSION".."1"
+        "KHR_SHADER_FLOAT_CONTROLS_SPEC_VERSION".."2"
     )
 
     StringConstant(
@@ -76,5 +76,25 @@ val KHR_shader_float_controls = "KHRShaderFloatControls".nativeClassVK("KHR_shad
         "Extends {@code VkStructureType}.",
 
         "STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES_KHR".."1000197000"
+    )
+
+    EnumConstant(
+        """
+        VkShaderFloatControlsIndependenceKHR - Enum specifying whether, and how, shader float controls can be set separately
+
+        <h5>Description</h5>
+        <ul>
+            <li>#SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY_KHR specifies that shader float controls for 32-bit floating point <b>can</b> be set independently; other bit widths <b>must</b> be set identically to each other.</li>
+            <li>#SHADER_FLOAT_CONTROLS_INDEPENDENCE_ALL_KHR specifies that shader float controls for all bit widths <b>can</b> be set independently.</li>
+            <li>#SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE_KHR specifies that shader float controls for all bit widths <b>must</b> be set identically.</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkPhysicalDeviceFloatControlsPropertiesKHR
+        """,
+
+        "SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY_KHR".."0",
+        "SHADER_FLOAT_CONTROLS_INDEPENDENCE_ALL_KHR".."1",
+        "SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE_KHR".."2"
     )
 }

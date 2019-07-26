@@ -18,6 +18,15 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying descriptor pool size.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>Each combined image sampler descriptor for a multi-planar format <b>may</b> consume multiple descriptors from the pool, as indicated by {@link VkSamplerYcbcrConversionImageFormatProperties}{@code ::maxCombinedImageSamplerDescriptorCount}. The {@code descriptorCount} for pools that will contain such descriptors <b>must</b> be expanded to allow for this.</p>
+ * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>For example, consider a descriptor set layout binding with two descriptors and immutable samplers for multi-planar formats that have {@link VkSamplerYcbcrConversionImageFormatProperties}{@code ::combinedImageSamplerDescriptorCount} values of 2 and 3 respectively. There are two descriptors in the binding and the maximum {@code combinedImageSamplerDescriptorCount} is 3, so descriptor sets with this layout consume 6 descriptors from the descriptor pool. To create a descriptor pool that allows allocating four descriptor sets with this layout, {@code descriptorCount} must be at least 24.</p>
+ * </div>
+ * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>

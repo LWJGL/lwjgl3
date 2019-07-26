@@ -648,7 +648,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         </div>
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        Even though the above table does not restrict the drivers and devices with which #EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT <b>may</b> be shared, query mechanisms exist in the Vulkan API that prevent the import of incompatible dma-bufs (such as #GetMemoryFdPropertiesKHR()) and that prevent incompatible usage of dma-bufs (such as ##VkPhysicalDeviceExternalBufferInfoKHR and ##VkPhysicalDeviceExternalImageFormatInfoKHR).
+        Even though the above table does not restrict the drivers and devices with which #EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT <b>may</b> be shared, query mechanisms exist in the Vulkan API that prevent the import of incompatible dma-bufs (such as #GetMemoryFdPropertiesKHR()) and that prevent incompatible usage of dma-bufs (such as ##VkPhysicalDeviceExternalBufferInfo and ##VkPhysicalDeviceExternalImageFormatInfo).
         </div>
 
         <h5>See Also</h5>
@@ -1059,7 +1059,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
 ￿    uint32_t                                    deviceMask);</code></pre>
 
         <h5>Description</h5>
-        {@code deviceMask} is used to filter out subsequent commands from executing on all physical devices whose bit indices are not set in the mask, except commands beginning a render pass instance, commands transitioning to the next subpass in the render pass instance, and commands ending a render pass instance, which always execute on the set of physical devices whose bit indices are included in the {@code deviceMask} member of the instance of the ##VkDeviceGroupRenderPassBeginInfoKHR structure passed to the command beginning the corresponding render pass instance.
+        {@code deviceMask} is used to filter out subsequent commands from executing on all physical devices whose bit indices are not set in the mask, except commands beginning a render pass instance, commands transitioning to the next subpass in the render pass instance, and commands ending a render pass instance, which always execute on the set of physical devices whose bit indices are included in the {@code deviceMask} member of the instance of the ##VkDeviceGroupRenderPassBeginInfo structure passed to the command beginning the corresponding render pass instance.
 
         <h5>Valid Usage</h5>
         <ul>

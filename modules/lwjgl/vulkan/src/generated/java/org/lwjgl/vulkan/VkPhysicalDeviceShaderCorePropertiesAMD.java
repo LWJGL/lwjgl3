@@ -35,9 +35,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code shaderEngineCount} &ndash; an unsigned integer value indicating the number of shader engines found inside the shader core of the physical device.</li>
  * <li>{@code shaderArraysPerEngineCount} &ndash; an unsigned integer value indicating the number of shader arrays inside a shader engine. Each shader array has its own scan converter, set of compute units, and a render back end (color and depth buffers). Shader arrays within a shader engine share shader processor input (wave launcher) and shader export (export buffer) units. Currently, a shader engine can have one or two shader arrays.</li>
- * <li>{@code computeUnitsPerShaderArray} &ndash; an unsigned integer value indicating the number of compute units within a shader array. A compute unit houses a set of SIMDs along with a sequencer module and a local data store.</li>
+ * <li>{@code computeUnitsPerShaderArray} &ndash; an unsigned integer value indicating the physical number of compute units within a shader array. The active number of compute units in a shader array <b>may</b> be lower. A compute unit houses a set of SIMDs along with a sequencer module and a local data store.</li>
  * <li>{@code simdPerComputeUnit} &ndash; an unsigned integer value indicating the number of SIMDs inside a compute unit. Each SIMD processes a single instruction at a time.</li>
- * <li>{@code wavefrontSize} &ndash; an unsigned integer value indicating the number of channels (or threads) in a wavefront.</li>
+ * <li>{@code wavefrontSize} &ndash; an unsigned integer value indicating the maximum size of a subgroup.</li>
  * <li>{@code sgprsPerSimd} &ndash; an unsigned integer value indicating the number of physical Scalar General Purpose Registers (SGPRs) per SIMD.</li>
  * <li>{@code minSgprAllocation} &ndash; an unsigned integer value indicating the minimum number of SGPRs allocated for a wave.</li>
  * <li>{@code maxSgprAllocation} &ndash; an unsigned integer value indicating the maximum number of SGPRs allocated for a wave.</li>

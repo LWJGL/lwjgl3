@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If the {@link VkPhysicalDeviceASTCDecodeFeaturesEXT} structure is included in the {@code pNext} chain of {@link KHRGetPhysicalDeviceProperties2#vkGetPhysicalDeviceFeatures2KHR GetPhysicalDeviceFeatures2KHR}, it is filled with values indicating whether each feature is supported. {@link VkPhysicalDeviceASTCDecodeFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VK10#vkCreateDevice CreateDevice} to enable features.</p>
+ * <p>If the {@link VkPhysicalDeviceASTCDecodeFeaturesEXT} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceFeatures2}, it is filled with values indicating whether each feature is supported. {@link VkPhysicalDeviceASTCDecodeFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VK10#vkCreateDevice CreateDevice} to enable features.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

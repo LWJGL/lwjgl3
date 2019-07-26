@@ -357,20 +357,6 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassVK("INTEL_perfo
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
         </ul>
-
-        <h5>Return Codes</h5>
-        <dl>
-            <dt>On success, this command returns</dt>
-            <dd><ul>
-                <li>#SUCCESS</li>
-            </ul></dd>
-
-            <dt>On failure, this command returns</dt>
-            <dd><ul>
-                <li>#ERROR_TOO_MANY_OBJECTS</li>
-                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
-            </ul></dd>
-        </dl>
         """,
 
         VkDevice("device", "the logical device used for the queries.")

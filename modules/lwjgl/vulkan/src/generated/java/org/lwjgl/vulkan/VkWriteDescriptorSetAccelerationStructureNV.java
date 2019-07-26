@@ -17,12 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying acceleration to query for memory requirements.
+ * Structure specifying acceleration structure descriptor info.
  * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
  * <li>{@code accelerationStructureCount} <b>must</b> be equal to {@code descriptorCount} in the extended structure</li>
+ * <li>Each acceleration structure in {@code pAccelerationStructures} must have been created with {@link NVRayTracing#VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

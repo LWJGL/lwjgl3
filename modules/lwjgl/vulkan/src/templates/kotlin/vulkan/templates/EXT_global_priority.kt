@@ -15,7 +15,7 @@ val EXT_global_priority = "EXTGlobalPriority".nativeClassVK("EXT_global_priority
 
         The driver implementation will attempt to skew hardware resource allocation in favour of the higher-priority task. Therefore, higher-priority work may retain similar latency and throughput characteristics even if the system is congested with lower priority work.
 
-        The global priority level of a queue shall take predence over the per-process queue priority (##VkDeviceQueueCreateInfo{@code ::pQueuePriorities}).
+        The global priority level of a queue shall take precedence over the per-process queue priority (##VkDeviceQueueCreateInfo{@code ::pQueuePriorities}).
 
         Abuse of this feature may result in starving the rest of the system from hardware resources. Therefore, the driver implementation may deny requests to acquire a priority above the default priority (#QUEUE_GLOBAL_PRIORITY_MEDIUM_EXT) if the caller does not have sufficient privileges. In this scenario #ERROR_NOT_PERMITTED_EXT is returned.
 

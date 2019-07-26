@@ -10,7 +10,7 @@ package org.lwjgl.vulkan;
  * 
  * <p>The driver implementation will attempt to skew hardware resource allocation in favour of the higher-priority task. Therefore, higher-priority work may retain similar latency and throughput characteristics even if the system is congested with lower priority work.</p>
  * 
- * <p>The global priority level of a queue shall take predence over the per-process queue priority ({@link VkDeviceQueueCreateInfo}{@code ::pQueuePriorities}).</p>
+ * <p>The global priority level of a queue shall take precedence over the per-process queue priority ({@link VkDeviceQueueCreateInfo}{@code ::pQueuePriorities}).</p>
  * 
  * <p>Abuse of this feature may result in starving the rest of the system from hardware resources. Therefore, the driver implementation may deny requests to acquire a priority above the default priority ({@link #VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_EXT QUEUE_GLOBAL_PRIORITY_MEDIUM_EXT}) if the caller does not have sufficient privileges. In this scenario {@link #VK_ERROR_NOT_PERMITTED_EXT ERROR_NOT_PERMITTED_EXT} is returned.</p>
  * 
