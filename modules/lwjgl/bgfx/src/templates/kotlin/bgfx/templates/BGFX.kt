@@ -226,8 +226,8 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "DEBUG_WIREFRAME".enum("Wireframe rendering. All rendering primitives will be rendered as lines.", 0x00000001),
         "DEBUG_IFH".enum(
             """
-            Infinitely fast hardware. When this flag is set all rendering calls will be skipped. This is useful when profiling to quickly assess potential
-            bottlenecks between CPU and GPU.
+            Enable infinitely fast hardware test. No draw calls will be submitted to driver. It's useful when profiling to quickly assess bottleneck between
+            CPU and GPU.
             """,
             0x00000002
         ),
@@ -596,13 +596,13 @@ RGBA16S
         Availability depends on Caps.
         """,
 
-        "TEXTURE_FORMAT_BC1".enum("DXT1"),
-        "TEXTURE_FORMAT_BC2".enum("DXT3"),
-        "TEXTURE_FORMAT_BC3".enum("DXT5"),
-        "TEXTURE_FORMAT_BC4".enum("LATC1/ATI1"),
-        "TEXTURE_FORMAT_BC5".enum("LATC2/ATI2"),
-        "TEXTURE_FORMAT_BC6H".enum("BC6H"),
-        "TEXTURE_FORMAT_BC7".enum("BC7"),
+        "TEXTURE_FORMAT_BC1".enum("DXT1 R5G6B5A1"),
+        "TEXTURE_FORMAT_BC2".enum("DXT3 R5G6B5A4"),
+        "TEXTURE_FORMAT_BC3".enum("DXT5 R5G6B5A8"),
+        "TEXTURE_FORMAT_BC4".enum("LATC1/ATI1 R8"),
+        "TEXTURE_FORMAT_BC5".enum("LATC2/ATI2 RG8"),
+        "TEXTURE_FORMAT_BC6H".enum("BC6H RGB16F"),
+        "TEXTURE_FORMAT_BC7".enum("BC7 RGB 4-7 bits per color channel, 0-8 bits alpha"),
         "TEXTURE_FORMAT_ETC1".enum("ETC1 RGB8"),
         "TEXTURE_FORMAT_ETC2".enum("ETC2 RGB8"),
         "TEXTURE_FORMAT_ETC2A".enum("ETC2 RGBA8"),

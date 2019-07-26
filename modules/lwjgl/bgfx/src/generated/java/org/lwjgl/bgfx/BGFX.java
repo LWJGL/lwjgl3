@@ -202,8 +202,8 @@ public class BGFX {
      * <li>{@link #BGFX_DEBUG_NONE DEBUG_NONE}</li>
      * <li>{@link #BGFX_DEBUG_WIREFRAME DEBUG_WIREFRAME} - Wireframe rendering. All rendering primitives will be rendered as lines.</li>
      * <li>{@link #BGFX_DEBUG_IFH DEBUG_IFH} - 
-     * Infinitely fast hardware. When this flag is set all rendering calls will be skipped. This is useful when profiling to quickly assess potential
-     * bottlenecks between CPU and GPU.
+     * Enable infinitely fast hardware test. No draw calls will be submitted to driver. It's useful when profiling to quickly assess bottleneck between
+     * CPU and GPU.
      * </li>
      * <li>{@link #BGFX_DEBUG_STATS DEBUG_STATS} - Display internal statistics.</li>
      * <li>{@link #BGFX_DEBUG_TEXT DEBUG_TEXT} - Display debug text.</li>
@@ -596,13 +596,13 @@ public class BGFX {
      * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #BGFX_TEXTURE_FORMAT_BC1 TEXTURE_FORMAT_BC1} - DXT1</li>
-     * <li>{@link #BGFX_TEXTURE_FORMAT_BC2 TEXTURE_FORMAT_BC2} - DXT3</li>
-     * <li>{@link #BGFX_TEXTURE_FORMAT_BC3 TEXTURE_FORMAT_BC3} - DXT5</li>
-     * <li>{@link #BGFX_TEXTURE_FORMAT_BC4 TEXTURE_FORMAT_BC4} - LATC1/ATI1</li>
-     * <li>{@link #BGFX_TEXTURE_FORMAT_BC5 TEXTURE_FORMAT_BC5} - LATC2/ATI2</li>
-     * <li>{@link #BGFX_TEXTURE_FORMAT_BC6H TEXTURE_FORMAT_BC6H} - BC6H</li>
-     * <li>{@link #BGFX_TEXTURE_FORMAT_BC7 TEXTURE_FORMAT_BC7} - BC7</li>
+     * <li>{@link #BGFX_TEXTURE_FORMAT_BC1 TEXTURE_FORMAT_BC1} - DXT1 R5G6B5A1</li>
+     * <li>{@link #BGFX_TEXTURE_FORMAT_BC2 TEXTURE_FORMAT_BC2} - DXT3 R5G6B5A4</li>
+     * <li>{@link #BGFX_TEXTURE_FORMAT_BC3 TEXTURE_FORMAT_BC3} - DXT5 R5G6B5A8</li>
+     * <li>{@link #BGFX_TEXTURE_FORMAT_BC4 TEXTURE_FORMAT_BC4} - LATC1/ATI1 R8</li>
+     * <li>{@link #BGFX_TEXTURE_FORMAT_BC5 TEXTURE_FORMAT_BC5} - LATC2/ATI2 RG8</li>
+     * <li>{@link #BGFX_TEXTURE_FORMAT_BC6H TEXTURE_FORMAT_BC6H} - BC6H RGB16F</li>
+     * <li>{@link #BGFX_TEXTURE_FORMAT_BC7 TEXTURE_FORMAT_BC7} - BC7 RGB 4-7 bits per color channel, 0-8 bits alpha</li>
      * <li>{@link #BGFX_TEXTURE_FORMAT_ETC1 TEXTURE_FORMAT_ETC1} - ETC1 RGB8</li>
      * <li>{@link #BGFX_TEXTURE_FORMAT_ETC2 TEXTURE_FORMAT_ETC2} - ETC2 RGB8</li>
      * <li>{@link #BGFX_TEXTURE_FORMAT_ETC2A TEXTURE_FORMAT_ETC2A} - ETC2 RGBA8</li>
