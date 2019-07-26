@@ -125,6 +125,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned int mNumAnimMeshes;
  *     {@link AIAnimMesh struct aiAnimMesh} ** mAnimMeshes;
  *     unsigned int mMethod;
+ *     {@link AIAABB struct aiAABB} mAABB;
  * }</code></pre>
  */
 @NativeType("struct aiMesh")
@@ -155,7 +156,8 @@ public class AIMesh extends Struct implements NativeResource {
         MNAME,
         MNUMANIMMESHES,
         MANIMMESHES,
-        MMETHOD;
+        MMETHOD,
+        MAABB;
 
     static {
         Layout layout = __struct(
@@ -176,7 +178,8 @@ public class AIMesh extends Struct implements NativeResource {
             __member(AIString.SIZEOF, AIString.ALIGNOF),
             __member(4),
             __member(POINTER_SIZE),
-            __member(4)
+            __member(4),
+            __member(AIAABB.SIZEOF, AIAABB.ALIGNOF)
         );
 
         SIZEOF = layout.getSize();
@@ -200,6 +203,7 @@ public class AIMesh extends Struct implements NativeResource {
         MNUMANIMMESHES = layout.offsetof(15);
         MANIMMESHES = layout.offsetof(16);
         MMETHOD = layout.offsetof(17);
+        MAABB = layout.offsetof(18);
     }
 
     /**
@@ -285,6 +289,9 @@ public class AIMesh extends Struct implements NativeResource {
     /** Returns the value of the {@code mMethod} field. */
     @NativeType("unsigned int")
     public int mMethod() { return nmMethod(address()); }
+    /** Returns a {@link AIAABB} view of the {@code mAABB} field. */
+    @NativeType("struct aiAABB")
+    public AIAABB mAABB() { return nmAABB(address()); }
 
     /** Sets the specified value to the {@code mPrimitiveTypes} field. */
     public AIMesh mPrimitiveTypes(@NativeType("unsigned int") int value) { nmPrimitiveTypes(address(), value); return this; }
@@ -328,6 +335,10 @@ public class AIMesh extends Struct implements NativeResource {
     public AIMesh mAnimMeshes(@Nullable @NativeType("struct aiAnimMesh **") PointerBuffer value) { nmAnimMeshes(address(), value); return this; }
     /** Sets the specified value to the {@code mMethod} field. */
     public AIMesh mMethod(@NativeType("unsigned int") int value) { nmMethod(address(), value); return this; }
+    /** Copies the specified {@link AIAABB} to the {@code mAABB} field. */
+    public AIMesh mAABB(@NativeType("struct aiAABB") AIAABB value) { nmAABB(address(), value); return this; }
+    /** Passes the {@code mAABB} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public AIMesh mAABB(java.util.function.Consumer<AIAABB> consumer) { consumer.accept(mAABB()); return this; }
 
     /** Initializes this struct with the specified values. */
     public AIMesh set(
@@ -345,7 +356,8 @@ public class AIMesh extends Struct implements NativeResource {
         int mMaterialIndex,
         AIString mName,
         @Nullable PointerBuffer mAnimMeshes,
-        int mMethod
+        int mMethod,
+        AIAABB mAABB
     ) {
         mPrimitiveTypes(mPrimitiveTypes);
         mNumVertices(mNumVertices);
@@ -362,6 +374,7 @@ public class AIMesh extends Struct implements NativeResource {
         mName(mName);
         mAnimMeshes(mAnimMeshes);
         mMethod(mMethod);
+        mAABB(mAABB);
 
         return this;
     }
@@ -569,6 +582,8 @@ public class AIMesh extends Struct implements NativeResource {
     @Nullable public static PointerBuffer nmAnimMeshes(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIMesh.MANIMMESHES), nmNumAnimMeshes(struct)); }
     /** Unsafe version of {@link #mMethod}. */
     public static int nmMethod(long struct) { return UNSAFE.getInt(null, struct + AIMesh.MMETHOD); }
+    /** Unsafe version of {@link #mAABB}. */
+    public static AIAABB nmAABB(long struct) { return AIAABB.create(struct + AIMesh.MAABB); }
 
     /** Unsafe version of {@link #mPrimitiveTypes(int) mPrimitiveTypes}. */
     public static void nmPrimitiveTypes(long struct, int value) { UNSAFE.putInt(null, struct + AIMesh.MPRIMITIVETYPES, value); }
@@ -627,6 +642,8 @@ public class AIMesh extends Struct implements NativeResource {
     public static void nmAnimMeshes(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + AIMesh.MANIMMESHES, memAddressSafe(value)); nmNumAnimMeshes(struct, value == null ? 0 : value.remaining()); }
     /** Unsafe version of {@link #mMethod(int) mMethod}. */
     public static void nmMethod(long struct, int value) { UNSAFE.putInt(null, struct + AIMesh.MMETHOD, value); }
+    /** Unsafe version of {@link #mAABB(AIAABB) mAABB}. */
+    public static void nmAABB(long struct, AIAABB value) { memCopy(value.address(), struct + AIMesh.MAABB, AIAABB.SIZEOF); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -767,6 +784,9 @@ public class AIMesh extends Struct implements NativeResource {
         /** Returns the value of the {@code mMethod} field. */
         @NativeType("unsigned int")
         public int mMethod() { return AIMesh.nmMethod(address()); }
+        /** Returns a {@link AIAABB} view of the {@code mAABB} field. */
+        @NativeType("struct aiAABB")
+        public AIAABB mAABB() { return AIMesh.nmAABB(address()); }
 
         /** Sets the specified value to the {@code mPrimitiveTypes} field. */
         public AIMesh.Buffer mPrimitiveTypes(@NativeType("unsigned int") int value) { AIMesh.nmPrimitiveTypes(address(), value); return this; }
@@ -810,6 +830,10 @@ public class AIMesh extends Struct implements NativeResource {
         public AIMesh.Buffer mAnimMeshes(@Nullable @NativeType("struct aiAnimMesh **") PointerBuffer value) { AIMesh.nmAnimMeshes(address(), value); return this; }
         /** Sets the specified value to the {@code mMethod} field. */
         public AIMesh.Buffer mMethod(@NativeType("unsigned int") int value) { AIMesh.nmMethod(address(), value); return this; }
+        /** Copies the specified {@link AIAABB} to the {@code mAABB} field. */
+        public AIMesh.Buffer mAABB(@NativeType("struct aiAABB") AIAABB value) { AIMesh.nmAABB(address(), value); return this; }
+        /** Passes the {@code mAABB} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public AIMesh.Buffer mAABB(java.util.function.Consumer<AIAABB> consumer) { consumer.accept(mAABB()); return this; }
 
     }
 

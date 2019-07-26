@@ -32,6 +32,11 @@ val aiVector3D = struct(Module.ASSIMP, "AIVector3D", nativeName = "struct aiVect
     float("z", "")
 }
 
+val aiAABB = struct(Module.ASSIMP, "AIAABB", nativeName = "struct aiAABB") {
+    aiVector3D("mMin", "")
+    aiVector3D("mMax", "")
+}
+
 /*val aiRay = struct(Binding.ASSIMP, "AIRay", nativeName = "struct aiRay") {
     documentation = "Represents a ray."
 
@@ -492,6 +497,7 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
         """
     )
     unsigned_int("mMethod", "Method of morphing when {@code animeshes} are specified.").links("MorphingMethod_\\w+")
+    aiAABB("mAABB", "")
 }
 
 val aiUVTransform = struct(Module.ASSIMP, "AIUVTransform", nativeName = "struct aiUVTransform", mutable = false) {

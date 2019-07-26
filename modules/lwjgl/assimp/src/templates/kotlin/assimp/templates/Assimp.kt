@@ -1038,6 +1038,12 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
 
     StringConstant(
         """
+        Specifies whether the assimp export shall be able to export point clouds.
+
+        When this flag is not defined the render data has to contain valid faces. Point clouds are only a collection of vertices which have nor spatial
+        organization by a face and the validation process will remove them. Enabling this feature will switch off the flag and enable the functionality to
+        export pure point clouds.
+
         Property type: Bool. Default value: false.
         """,
 
@@ -1154,6 +1160,11 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         "AI_MATH_PI_F"..3.1415926538f,
         "AI_MATH_TWO_PI_F".."AI_MATH_PI_F * 2f",
         "AI_MATH_HALF_PI_F".."AI_MATH_PI_F * 0f"
+    ).noPrefix()
+
+    FloatConstant(
+        "Numerical limits.",
+        "ai_epsilon".."0.00001f"
     ).noPrefix()
 
     macro(expression = "(x)*0.0174532925f")..float(
@@ -2772,7 +2783,7 @@ aiAttachLogStream(&c);""")}
 
         "Process_OptimizeMeshes".enum(
             """
-            A postprocessing step to reduce the number of meshes.
+            A post-processing step to reduce the number of meshes.
 
             This will, in fact, reduce the number of draw calls.
 
@@ -2784,7 +2795,7 @@ aiAttachLogStream(&c);""")}
 
         "Process_OptimizeGraph".enum(
             """
-            A postprocessing step to optimize the scene hierarchy.
+            A post-processing step to optimize the scene hierarchy.
 
             Nodes without animations, bones, lights or cameras assigned are collapsed and joined.
 
@@ -2896,7 +2907,9 @@ x1""")}
             vertices in some cases. #Process_JoinIdenticalVertices is <em>senseless</em> then. This process gives sense back to #Process_JoinIdenticalVertices.
             """,
             0x40000000
-        )
+        ),
+
+        "Process_GenBoundingBoxes".enum("", 0x80000000.i)
     )
 
     EnumConstant(
