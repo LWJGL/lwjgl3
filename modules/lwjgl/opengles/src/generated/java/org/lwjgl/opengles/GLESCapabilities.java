@@ -1139,6 +1139,55 @@ public final class GLESCapabilities {
     public final boolean GL_EXT_multisampled_render_to_texture2;
     /** When true, {@link EXTMultiviewDrawBuffers} is supported. */
     public final boolean GL_EXT_multiview_draw_buffers;
+    /**
+     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_multiview_tessellation_geometry_shader.txt">EXT_multiview_tessellation_geometry_shader</a> extension is supported.
+     * 
+     * <p>This extension removes one of the limitations of the {@code OVR_multiview} extension by allowing the use of tessellation control, tessellation
+     * evaluation, and geometry shaders during multiview rendering. {@code OVR_multiview} by itself forbids the use of any of these shader types.</p>
+     * 
+     * <p>When using tessellation control, tessellation evaluation, and geometry shaders during multiview rendering, any such shader must use the
+     * "{@code num_views}" layout qualifier provided by the matching shading language extension to specify a view count. The view count specified in these
+     * shaders must match the count specified in the vertex shader. Additionally, the shading language extension allows these shaders to use the
+     * {@code gl_ViewID_OVR} built-in to handle tessellation or geometry shader processing differently for each view.</p>
+     * 
+     * <p>{@code OVR_multiview2} extends {@code OVR_multiview} by allowing view-dependent values for any vertex attributes instead of just the position. This new
+     * extension does not imply the availability of {@code OVR_multiview2}, but if both are available, view-dependent values for any vertex attributes are
+     * also allowed in tessellation control, tessellation evaluation, and geometry shaders.</p>
+     * 
+     * <p>Requires {@link GLES32 GLES 3.2} and {@link OVRMultiview OVR_multiview}.</p>
+     */
+    public final boolean GL_EXT_multiview_tessellation_geometry_shader;
+    /**
+     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_multiview_texture_multisample.txt">EXT_multiview_texture_multisample</a> extension is supported.
+     * 
+     * <p>This extension removes one of the limitations of the {@code OVR_multiview} extension by allowing the use of multisample textures during multiview
+     * rendering.</p>
+     * 
+     * <p>This is one of two extensions that allow multisampling when using {@code OVR_multiview}. Each supports one of the two different approaches to
+     * multisampling in OpenGL ES:</p>
+     * 
+     * <p>OpenGL ES 3.1+ has explicit support for multisample texture types, such as {@link GLES31#GL_TEXTURE_2D_MULTISAMPLE TEXTURE_2D_MULTISAMPLE}. Applications can access the values of individual
+     * samples and can explicitly "resolve" the samples of each pixel down to a single color.</p>
+     * 
+     * <p>The extension {@link EXTMultisampledRenderToTexture EXT_multisampled_render_to_texture} provides support for multisampled rendering to non-multisample texture types, such as
+     * {@link GLES20#GL_TEXTURE_2D TEXTURE_2D}. The individual samples for each pixel are maintained internally by the implementation and can not be accessed directly by applications.
+     * These samples are eventually resolved implicitly to a single color for each pixel.</p>
+     * 
+     * <p>This extension supports the first multisampling style with multiview rendering; the {@link OVRMultiviewMultisampledRenderToTexture OVR_multiview_multisampled_render_to_texture} extension
+     * supports the second style. Note that support for one of these multiview extensions does not imply support for the other.</p>
+     * 
+     * <p>Requires {@link GLES32 GLES 3.2} and {@link OVRMultiview OVR_multiview}.</p>
+     */
+    public final boolean GL_EXT_multiview_texture_multisample;
+    /**
+     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_multiview_timer_query.txt">EXT_multiview_timer_query</a> extension is supported.
+     * 
+     * <p>This extension removes one of the limitations of the {@code OVR_multiview} extension by allowing the use of timer queries during multiview rendering.
+     * {@code OVR_multiview} does not specify defined behavior for such usage (if {@link EXTDisjointTimerQuery EXT_disjoint_timer_query} is present).</p>
+     * 
+     * <p>Requires {@link GLES32 GLES 3.2} and {@link OVRMultiview OVR_multiview}.</p>
+     */
+    public final boolean GL_EXT_multiview_timer_query;
     /** When true, {@link EXTOcclusionQueryBoolean} is supported. */
     public final boolean GL_EXT_occlusion_query_boolean;
     /** When true, {@link EXTPolygonOffsetClamp} is supported. */
@@ -1397,6 +1446,17 @@ public final class GLESCapabilities {
     public final boolean GL_EXT_texture_norm16;
     /** When true, {@link EXTTextureRG} is supported. */
     public final boolean GL_EXT_texture_rg;
+    /**
+     * This extension adds support for various shadow sampler types with texture functions having interactions with the LOD of texture lookups.
+     * 
+     * <p>Modern shading languages support LOD queries for shadow sampler types, but until now the OpenGL Shading Language Specification has excluded multiple
+     * texture function overloads involving LOD calculations with various shadow samplers. Shading languages for other APIs do support the equivalent
+     * LOD-based texture sampling functions for these types which has made porting between those shading languages to GLSL cumbersome and has required the
+     * usage of sub-optimal workarounds.</p>
+     * 
+     * <p>Requires {@link GLES30 GLES 3.0} and {@code EXT_gpu_shader4} or equivalent functionality.</p>
+     */
+    public final boolean GL_EXT_texture_shadow_lod;
     /** When true, {@link EXTTextureSRGBDecode} is supported. */
     public final boolean GL_EXT_texture_sRGB_decode;
     /** When true, {@link EXTTextureSRGBR8} is supported. */
@@ -1479,6 +1539,8 @@ public final class GLESCapabilities {
     public final boolean GL_KHR_robust_buffer_access_behavior;
     /** When true, {@link KHRRobustness} is supported. */
     public final boolean GL_KHR_robustness;
+    /** When true, {@link KHRShaderSubgroup} is supported. */
+    public final boolean GL_KHR_shader_subgroup;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_texture_compression_astc_hdr.txt">KHR_texture_compression_astc_hdr</a> extension is supported.
      * 
@@ -1806,6 +1868,8 @@ public final class GLESCapabilities {
      * <p>Requires {@link GLES30 GLES 3.0}.</p>
      */
     public final boolean GL_NV_shader_noperspective_interpolation;
+    /** When true, {@link NVShaderSubgroupPartitioned} is supported. */
+    public final boolean GL_NV_shader_subgroup_partitioned;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_shader_texture_footprint.txt">NV_shader_texture_footprint</a> extension is supported.
      * 
@@ -3185,6 +3249,9 @@ public final class GLESCapabilities {
         GL_EXT_multisampled_render_to_texture = ext.contains("GL_EXT_multisampled_render_to_texture") && checkExtension("GL_EXT_multisampled_render_to_texture", EXTMultisampledRenderToTexture.isAvailable(this));
         GL_EXT_multisampled_render_to_texture2 = ext.contains("GL_EXT_multisampled_render_to_texture2");
         GL_EXT_multiview_draw_buffers = ext.contains("GL_EXT_multiview_draw_buffers") && checkExtension("GL_EXT_multiview_draw_buffers", EXTMultiviewDrawBuffers.isAvailable(this));
+        GL_EXT_multiview_tessellation_geometry_shader = ext.contains("GL_EXT_multiview_tessellation_geometry_shader");
+        GL_EXT_multiview_texture_multisample = ext.contains("GL_EXT_multiview_texture_multisample");
+        GL_EXT_multiview_timer_query = ext.contains("GL_EXT_multiview_timer_query");
         GL_EXT_occlusion_query_boolean = ext.contains("GL_EXT_occlusion_query_boolean") && checkExtension("GL_EXT_occlusion_query_boolean", EXTOcclusionQueryBoolean.isAvailable(this));
         GL_EXT_polygon_offset_clamp = ext.contains("GL_EXT_polygon_offset_clamp") && checkExtension("GL_EXT_polygon_offset_clamp", EXTPolygonOffsetClamp.isAvailable(this));
         GL_EXT_post_depth_coverage = ext.contains("GL_EXT_post_depth_coverage");
@@ -3232,6 +3299,7 @@ public final class GLESCapabilities {
         GL_EXT_texture_mirror_clamp_to_edge = ext.contains("GL_EXT_texture_mirror_clamp_to_edge");
         GL_EXT_texture_norm16 = ext.contains("GL_EXT_texture_norm16");
         GL_EXT_texture_rg = ext.contains("GL_EXT_texture_rg");
+        GL_EXT_texture_shadow_lod = ext.contains("GL_EXT_texture_shadow_lod");
         GL_EXT_texture_sRGB_decode = ext.contains("GL_EXT_texture_sRGB_decode");
         GL_EXT_texture_sRGB_R8 = ext.contains("GL_EXT_texture_sRGB_R8");
         GL_EXT_texture_sRGB_RG8 = ext.contains("GL_EXT_texture_sRGB_RG8");
@@ -3265,6 +3333,7 @@ public final class GLESCapabilities {
         GL_KHR_parallel_shader_compile = ext.contains("GL_KHR_parallel_shader_compile") && checkExtension("GL_KHR_parallel_shader_compile", KHRParallelShaderCompile.isAvailable(this));
         GL_KHR_robust_buffer_access_behavior = ext.contains("GL_KHR_robust_buffer_access_behavior");
         GL_KHR_robustness = ext.contains("GL_KHR_robustness") && checkExtension("GL_KHR_robustness", KHRRobustness.isAvailable(this));
+        GL_KHR_shader_subgroup = ext.contains("GL_KHR_shader_subgroup");
         GL_KHR_texture_compression_astc_hdr = ext.contains("GL_KHR_texture_compression_astc_hdr");
         GL_KHR_texture_compression_astc_ldr = ext.contains("GL_KHR_texture_compression_astc_ldr");
         GL_KHR_texture_compression_astc_sliced_3d = ext.contains("GL_KHR_texture_compression_astc_sliced_3d");
@@ -3318,6 +3387,7 @@ public final class GLESCapabilities {
         GL_NV_scissor_exclusive = ext.contains("GL_NV_scissor_exclusive") && checkExtension("GL_NV_scissor_exclusive", NVScissorExclusive.isAvailable(this));
         GL_NV_shader_atomic_fp16_vector = ext.contains("GL_NV_shader_atomic_fp16_vector");
         GL_NV_shader_noperspective_interpolation = ext.contains("GL_NV_shader_noperspective_interpolation");
+        GL_NV_shader_subgroup_partitioned = ext.contains("GL_NV_shader_subgroup_partitioned");
         GL_NV_shader_texture_footprint = ext.contains("GL_NV_shader_texture_footprint");
         GL_NV_shadow_samplers_array = ext.contains("GL_NV_shadow_samplers_array");
         GL_NV_shadow_samplers_cube = ext.contains("GL_NV_shadow_samplers_cube");
