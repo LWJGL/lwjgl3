@@ -236,6 +236,10 @@ public class VKCapabilitiesDevice {
     public final long
         vkGetImageDrmFormatModifierPropertiesEXT;
 
+    // EXT_line_rasterization
+    public final long
+        vkCmdSetLineStippleEXT;
+
     // EXT_sample_locations
     public final long
         vkCmdSetSampleLocationsEXT;
@@ -521,8 +525,12 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_host_query_reset;
     /** When true, {@link EXTImageDrmFormatModifier} is supported. */
     public final boolean VK_EXT_image_drm_format_modifier;
+    /** When true, {@link EXTIndexTypeUint8} is supported. */
+    public final boolean VK_EXT_index_type_uint8;
     /** When true, {@link EXTInlineUniformBlock} is supported. */
     public final boolean VK_EXT_inline_uniform_block;
+    /** When true, {@link EXTLineRasterization} is supported. */
+    public final boolean VK_EXT_line_rasterization;
     /** When true, {@link EXTMemoryBudget} is supported. */
     public final boolean VK_EXT_memory_budget;
     /** When true, {@link EXTMemoryPriority} is supported. */
@@ -557,6 +565,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_subgroup_size_control;
     /** When true, {@link EXTTexelBufferAlignment} is supported. */
     public final boolean VK_EXT_texel_buffer_alignment;
+    /** When true, {@link EXTTextureCompressionAstcHdr} is supported. */
+    public final boolean VK_EXT_texture_compression_astc_hdr;
     /** When true, {@link EXTTransformFeedback} is supported. */
     public final boolean VK_EXT_transform_feedback;
     /** When true, {@link EXTValidationCache} is supported. */
@@ -733,7 +743,7 @@ public class VKCapabilitiesDevice {
     VKCapabilitiesDevice(FunctionProvider provider, VKCapabilitiesInstance capsInstance, Set<String> ext) {
         this.apiVersion = capsInstance.apiVersion;
 
-        Map<String, Long> caps = new HashMap<>(270);
+        Map<String, Long> caps = new HashMap<>(271);
 
         Vulkan10 = VK10.checkCapsDevice(provider, caps, ext);
         Vulkan11 = VK11.checkCapsDevice(provider, caps, ext);
@@ -778,7 +788,9 @@ public class VKCapabilitiesDevice {
         VK_EXT_hdr_metadata = EXTHdrMetadata.checkCapsDevice(provider, caps, ext);
         VK_EXT_host_query_reset = EXTHostQueryReset.checkCapsDevice(provider, caps, ext);
         VK_EXT_image_drm_format_modifier = EXTImageDrmFormatModifier.checkCapsDevice(provider, caps, ext);
+        VK_EXT_index_type_uint8 = ext.contains("VK_EXT_index_type_uint8");
         VK_EXT_inline_uniform_block = ext.contains("VK_EXT_inline_uniform_block");
+        VK_EXT_line_rasterization = EXTLineRasterization.checkCapsDevice(provider, caps, ext);
         VK_EXT_memory_budget = ext.contains("VK_EXT_memory_budget");
         VK_EXT_memory_priority = ext.contains("VK_EXT_memory_priority");
         VK_EXT_pci_bus_info = ext.contains("VK_EXT_pci_bus_info");
@@ -796,6 +808,7 @@ public class VKCapabilitiesDevice {
         VK_EXT_shader_viewport_index_layer = ext.contains("VK_EXT_shader_viewport_index_layer");
         VK_EXT_subgroup_size_control = ext.contains("VK_EXT_subgroup_size_control");
         VK_EXT_texel_buffer_alignment = ext.contains("VK_EXT_texel_buffer_alignment");
+        VK_EXT_texture_compression_astc_hdr = ext.contains("VK_EXT_texture_compression_astc_hdr");
         VK_EXT_transform_feedback = EXTTransformFeedback.checkCapsDevice(provider, caps, ext);
         VK_EXT_validation_cache = EXTValidationCache.checkCapsDevice(provider, caps, ext);
         VK_EXT_vertex_attribute_divisor = ext.contains("VK_EXT_vertex_attribute_divisor");
@@ -1054,6 +1067,7 @@ public class VKCapabilitiesDevice {
         vkSetHdrMetadataEXT = VK.get(caps, "vkSetHdrMetadataEXT");
         vkResetQueryPoolEXT = VK.get(caps, "vkResetQueryPoolEXT");
         vkGetImageDrmFormatModifierPropertiesEXT = VK.get(caps, "vkGetImageDrmFormatModifierPropertiesEXT");
+        vkCmdSetLineStippleEXT = VK.get(caps, "vkCmdSetLineStippleEXT");
         vkCmdSetSampleLocationsEXT = VK.get(caps, "vkCmdSetSampleLocationsEXT");
         vkCmdBindTransformFeedbackBuffersEXT = VK.get(caps, "vkCmdBindTransformFeedbackBuffersEXT");
         vkCmdBeginTransformFeedbackEXT = VK.get(caps, "vkCmdBeginTransformFeedbackEXT");

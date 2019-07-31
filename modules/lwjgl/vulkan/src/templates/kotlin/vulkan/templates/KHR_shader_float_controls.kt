@@ -25,7 +25,7 @@ val KHR_shader_float_controls = "KHRShaderFloatControls".nativeClassVK("KHR_shad
             <dd>198</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>2</dd>
+            <dd>4</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -63,7 +63,7 @@ val KHR_shader_float_controls = "KHRShaderFloatControls".nativeClassVK("KHR_shad
     IntConstant(
         "The extension specification version.",
 
-        "KHR_SHADER_FLOAT_CONTROLS_SPEC_VERSION".."2"
+        "KHR_SHADER_FLOAT_CONTROLS_SPEC_VERSION".."4"
     )
 
     StringConstant(

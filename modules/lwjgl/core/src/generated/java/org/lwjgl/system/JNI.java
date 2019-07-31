@@ -706,6 +706,7 @@ public final class JNI {
     public static native void callPV(int param0, long param1, int param2, long __functionAddress);
     public static native void callPV(long param0, float param1, float param2, long __functionAddress);
     public static native void callPV(long param0, int param1, int param2, long __functionAddress);
+    public static native void callPV(long param0, int param1, short param2, long __functionAddress);
     public static native void callJV(int param0, long param1, int param2, int param3, long __functionAddress);
     public static native void callPV(int param0, float param1, long param2, int param3, long __functionAddress);
     public static native void callPV(int param0, int param1, int param2, long param3, long __functionAddress);

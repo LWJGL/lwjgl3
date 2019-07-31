@@ -32,6 +32,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code type} is {@link NVRayTracing#VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV} then {@code geometryCount} <b>must</b> be 0</li>
  * <li>If {@code type} is {@link NVRayTracing#VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV} then {@code instanceCount} <b>must</b> be 0</li>
  * <li>If {@code flags} has the {@link NVRayTracing#VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_NV BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_NV} bit set, then it <b>must</b> not have the {@link NVRayTracing#VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_NV BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_NV} bit set</li>
+ * <li>{@code scratch} <b>must</b> have been created with {@link NVRayTracing#VK_BUFFER_USAGE_RAY_TRACING_BIT_NV BUFFER_USAGE_RAY_TRACING_BIT_NV} usage flag</li>
+ * <li>If {@code instanceData} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code instanceData} <b>must</b> have been created with {@link NVRayTracing#VK_BUFFER_USAGE_RAY_TRACING_BIT_NV BUFFER_USAGE_RAY_TRACING_BIT_NV} usage flag</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

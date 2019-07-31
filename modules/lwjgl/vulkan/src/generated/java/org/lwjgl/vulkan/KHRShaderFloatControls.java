@@ -18,7 +18,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>198</dd>
  * <dt><b>Revision</b></dt>
- * <dd>2</dd>
+ * <dd>4</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -49,7 +49,7 @@ package org.lwjgl.vulkan;
 public final class KHRShaderFloatControls {
 
     /** The extension specification version. */
-    public static final int VK_KHR_SHADER_FLOAT_CONTROLS_SPEC_VERSION = 2;
+    public static final int VK_KHR_SHADER_FLOAT_CONTROLS_SPEC_VERSION = 4;
 
     /** The extension name. */
     public static final String VK_KHR_SHADER_FLOAT_CONTROLS_EXTENSION_NAME = "VK_KHR_shader_float_controls";

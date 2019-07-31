@@ -36,6 +36,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code attachmentCount} <b>must</b> be equal to the attachment count specified in {@code renderPass}</li>
+ * <li>If {@code flags} does not include {@link KHRImagelessFramebuffer#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR}, and {@code attachmentCount} is not 0, {@code pAttachments} must be a valid pointer to an array of {@code attachmentCount} valid {@code VkImageView} handles</li>
  * <li>If {@code flags} does not include {@link KHRImagelessFramebuffer#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR}, each element of {@code pAttachments} that is used as a color attachment or resolve attachment by {@code renderPass} <b>must</b> have been created with a {@code usage} value including {@link VK10#VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT IMAGE_USAGE_COLOR_ATTACHMENT_BIT}</li>
  * <li>If {@code flags} does not include {@link KHRImagelessFramebuffer#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR}, each element of {@code pAttachments} that is used as a depth/stencil attachment by {@code renderPass} <b>must</b> have been created with a {@code usage} value including {@link VK10#VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT}</li>
  * <li>If {@code flags} does not include {@link KHRImagelessFramebuffer#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR}, each element of {@code pAttachments} that is used as a depth/stencil resolve attachment by {@code renderPass} <b>must</b> have been created with a {@code usage} value including {@link VK10#VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT}</li>
@@ -59,7 +60,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code layers} <b>must</b> be greater than 0.</li>
  * <li>{@code layers} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxFramebufferLayers}</li>
  * <li>If {@code renderPass} was specified with non-zero view masks, {@code layers} <b>must</b> be 1</li>
- * <li>Each element of {@code pAttachments} that is a 2D or 2D array image view taken from a 3D image <b>must</b> not be a depth/stencil format</li>
+ * <li>If {@code flags} does not include {@link KHRImagelessFramebuffer#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR}, each element of {@code pAttachments} that is a 2D or 2D array image view taken from a 3D image <b>must</b> not be a depth/stencil format</li>
  * <li>If {@code flags} does not include {@link KHRImagelessFramebuffer#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR}, and {@code attachmentCount} is not 0, {@code pAttachments} <b>must</b> be a valid pointer to an array of {@code attachmentCount} valid {@code VkImageView} handles</li>
  * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#features-imagelessFramebuffer">imageless framebuffer</a> feature is not enabled, {@code flags} <b>must</b> not include {@link KHRImagelessFramebuffer#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR}</li>
  * <li>If {@code flags} includes {@link KHRImagelessFramebuffer#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR}, the {@code pNext} chain <b>must</b> include an instance of {@link VkFramebufferAttachmentsCreateInfoKHR}</li>
@@ -84,7 +85,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkFramebufferAttachmentsCreateInfoKHR}</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkFramebufferCreateFlagBits} values</li>
  * <li>{@code renderPass} <b>must</b> be a valid {@code VkRenderPass} handle</li>
- * <li>If {@code attachmentCount} is not 0, {@code pAttachments} <b>must</b> be a valid pointer to an array of {@code attachmentCount} valid {@code VkImageView} handles</li>
  * <li>Both of {@code renderPass}, and the elements of {@code pAttachments} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
  * </ul>
  * 
