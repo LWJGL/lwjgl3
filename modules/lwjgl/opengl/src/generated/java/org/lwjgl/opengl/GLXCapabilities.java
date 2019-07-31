@@ -135,6 +135,8 @@ public final class GLXCapabilities {
     public final boolean GLX_ARB_vertex_buffer_object;
     /** When true, {@link GLXEXTBufferAge} is supported. */
     public final boolean GLX_EXT_buffer_age;
+    /** When true, {@link GLXEXTContextPriority} is supported. */
+    public final boolean GLX_EXT_context_priority;
     /** When true, {@link GLXEXTCreateContextES2Profile} is supported. */
     public final boolean GLX_EXT_create_context_es2_profile;
     /** When true, {@link GLXEXTCreateContextESProfile} is supported. */
@@ -286,6 +288,7 @@ public final class GLXCapabilities {
         GLX_ARB_robustness_share_group_isolation = ext.contains("GLX_ARB_robustness_share_group_isolation");
         GLX_ARB_vertex_buffer_object = ext.contains("GLX_ARB_vertex_buffer_object");
         GLX_EXT_buffer_age = ext.contains("GLX_EXT_buffer_age");
+        GLX_EXT_context_priority = ext.contains("GLX_EXT_context_priority");
         GLX_EXT_create_context_es2_profile = ext.contains("GLX_EXT_create_context_es2_profile");
         GLX_EXT_create_context_es_profile = ext.contains("GLX_EXT_create_context_es_profile");
         GLX_EXT_fbconfig_packed_float = ext.contains("GLX_EXT_fbconfig_packed_float");

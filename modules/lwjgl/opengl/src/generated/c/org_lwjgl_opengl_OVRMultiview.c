@@ -12,13 +12,13 @@ typedef void (APIENTRY *glNamedFramebufferTextureMultiviewOVRPROC) (jint, jint, 
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_OVRMultiview_glFramebufferTextureMultiviewOVR(JNIEnv *__env, jclass clazz, jint target, jint attachment, jint texture, jint level, jint baseViewIndex, jint numViews) {
-    glFramebufferTextureMultiviewOVRPROC glFramebufferTextureMultiviewOVR = (glFramebufferTextureMultiviewOVRPROC)tlsGetFunction(2199);
+    glFramebufferTextureMultiviewOVRPROC glFramebufferTextureMultiviewOVR = (glFramebufferTextureMultiviewOVRPROC)tlsGetFunction(2209);
     UNUSED_PARAM(clazz)
     glFramebufferTextureMultiviewOVR(target, attachment, texture, level, baseViewIndex, numViews);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_OVRMultiview_glNamedFramebufferTextureMultiviewOVR(JNIEnv *__env, jclass clazz, jint framebuffer, jint attachment, jint texture, jint level, jint baseViewIndex, jint numViews) {
-    glNamedFramebufferTextureMultiviewOVRPROC glNamedFramebufferTextureMultiviewOVR = (glNamedFramebufferTextureMultiviewOVRPROC)tlsGetFunction(2200);
+    glNamedFramebufferTextureMultiviewOVRPROC glNamedFramebufferTextureMultiviewOVR = (glNamedFramebufferTextureMultiviewOVRPROC)tlsGetFunction(2210);
     UNUSED_PARAM(clazz)
     glNamedFramebufferTextureMultiviewOVR(framebuffer, attachment, texture, level, baseViewIndex, numViews);
 }

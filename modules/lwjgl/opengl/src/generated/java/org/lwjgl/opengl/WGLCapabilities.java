@@ -166,6 +166,8 @@ public final class WGLCapabilities {
     public final boolean WGL_NV_float_buffer;
     /** When true, {@link WGLNVGPUAffinity} is supported. */
     public final boolean WGL_NV_gpu_affinity;
+    /** When true, {@link WGLNVMultigpuContext} is supported. */
+    public final boolean WGL_NV_multigpu_context;
     /** When true, {@link WGLNVMultisampleCoverage} is supported. */
     public final boolean WGL_NV_multisample_coverage;
     /** When true, {@link WGLNVRenderDepthTexture} is supported. */
@@ -267,6 +269,7 @@ public final class WGLCapabilities {
         WGL_NV_DX_interop2 = ext.contains("WGL_NV_DX_interop2");
         WGL_NV_float_buffer = ext.contains("WGL_NV_float_buffer");
         WGL_NV_gpu_affinity = ext.contains("WGL_NV_gpu_affinity") && checkExtension("WGL_NV_gpu_affinity", WGLNVGPUAffinity.isAvailable(this));
+        WGL_NV_multigpu_context = ext.contains("WGL_NV_multigpu_context");
         WGL_NV_multisample_coverage = ext.contains("WGL_NV_multisample_coverage");
         WGL_NV_render_depth_texture = ext.contains("WGL_NV_render_depth_texture");
         WGL_NV_render_texture_rectangle = ext.contains("WGL_NV_render_texture_rectangle");

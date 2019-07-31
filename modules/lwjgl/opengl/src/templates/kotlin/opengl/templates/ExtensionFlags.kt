@@ -746,6 +746,64 @@ val ARB_vertex_type_10f_11f_11f_rev = EXT_FLAG.nativeClassGL("ARB_vertex_type_10
         """
 }
 
+val EXT_multiview_timer_query = EXT_FLAG.nativeClassGL("EXT_multiview_timer_query", postfix = EXT) {
+    documentation =
+        """
+        When true, the $registryLink extension is supported.
+
+        This extension removes one of the limitations of the {@code OVR_multiview} extension by allowing the use of timer queries during multiview rendering.
+        {@code OVR_multiview} does not specify defined behavior for such usage.
+    
+        Requires ${GL40.core} and ${OVR_multiview.link}.
+        """
+}
+
+val EXT_multiview_texture_multisample = EXT_FLAG.nativeClassGL("EXT_multiview_texture_multisample", postfix = EXT) {
+    documentation =
+        """
+        When true, the $registryLink extension is supported.
+
+        This extension removes one of the limitations of the {@code OVR_multiview} extension by allowing the use of multisample textures during multiview
+        rendering.
+
+        This is one of two extensions that allow multisampling when using {@code OVR_multiview}. Each supports one of the two different approaches to
+        multisampling in OpenGL:
+
+        Core OpenGL has explicit support for multisample texture types, such as #TEXTURE_2D_MULTISAMPLE. Applications can access the values of individual
+        samples and can explicitly "resolve" the samples of each pixel down to a single color.
+
+        The extension {@code EXT_multisampled_render_to_texture} provides support for multisampled rendering to non-multisample texture types, such as
+        #TEXTURE_2D. The individual samples for each pixel are maintained internally by the implementation and can not be accessed directly by applications.
+        These samples are eventually resolved implicitly to a single color for each pixel.
+
+        This extension supports the first multisampling style with multiview rendering; the {@code OVR_multiview_multisampled_render_to_texture} extension
+        supports the second style. Note that support for one of these multiview extensions does not imply support for the other.
+    
+        Requires ${GL40.core} and ${OVR_multiview.link}.
+        """
+}
+
+val EXT_multiview_tessellation_geometry_shader = EXT_FLAG.nativeClassGL("EXT_multiview_tessellation_geometry_shader", postfix = EXT) {
+    documentation =
+        """
+        When true, the $registryLink extension is supported.
+
+        This extension removes one of the limitations of the {@code OVR_multiview} extension by allowing the use of tessellation control, tessellation
+        evaluation, and geometry shaders during multiview rendering. {@code OVR_multiview} by itself forbids the use of any of these shader types.
+
+        When using tessellation control, tessellation evaluation, and geometry shaders during multiview rendering, any such shader must use the
+        "{@code num_views}" layout qualifier provided by the matching shading language extension to specify a view count. The view count specified in these
+        shaders must match the count specified in the vertex shader. Additionally, the shading language extension allows these shaders to use the
+        {@code gl_ViewID_OVR} built-in to handle tessellation or geometry shader processing differently for each view.
+
+        {@code OVR_multiview2} extends {@code OVR_multiview} by allowing view-dependent values for any vertex attributes instead of just the position. This new
+        extension does not imply the availability of {@code OVR_multiview2}, but if both are available, view-dependent values for any vertex attributes are
+        also allowed in tessellation control, tessellation evaluation, and geometry shaders.
+    
+        Requires ${GL40.core} and ${OVR_multiview.link}.
+        """
+}
+
 val EXT_post_depth_coverage = EXT_FLAG.nativeClassGL("EXT_post_depth_coverage", postfix = EXT) {
     documentation =
         """
@@ -823,6 +881,20 @@ val EXT_sparse_texture2 = EXT_FLAG.nativeClassGL("EXT_sparse_texture2", postfix 
         )}
 
         Requires ${ARB_sparse_texture.link}.
+        """
+}
+
+val EXT_texture_shadow_lod = EXT_FLAG.nativeClassGL("EXT_texture_shadow_lod", postfix = EXT) {
+    documentation =
+        """
+        This extension adds support for various shadow sampler types with texture functions having interactions with the LOD of texture lookups.
+        
+        Modern shading languages support LOD queries for shadow sampler types, but until now the OpenGL Shading Language Specification has excluded multiple
+        texture function overloads involving LOD calculations with various shadow samplers. Shading languages for other APIs do support the equivalent
+        LOD-based texture sampling functions for these types which has made porting between those shading languages to GLSL cumbersome and has required the
+        usage of sub-optimal workarounds.
+        
+        Requires ${GL20.core} and ${EXT_gpu_shader4.link} or equivalent functionality.
         """
 }
 
