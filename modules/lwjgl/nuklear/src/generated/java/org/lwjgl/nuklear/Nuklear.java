@@ -1637,6 +1637,28 @@ public class Nuklear {
         return NkCommandBuffer.createSafe(__result);
     }
 
+    // --- [ nk_window_get_scroll ] ---
+
+    /** Unsafe version of: {@link #nk_window_get_scroll window_get_scroll} */
+    public static native void nnk_window_get_scroll(long ctx, long offset_x, long offset_y);
+
+    /**
+     * Gets the scroll offset for the current window.
+     * 
+     * <p>Warning: Only call this function between calls {@code nk_begin_xxx} and {@link #nk_end end}.</p>
+     *
+     * @param ctx      the nuklear context
+     * @param offset_x a pointer to the x offset output (or {@code NULL} to ignore)
+     * @param offset_y a pointer to the y offset output (or {@code NULL} to ignore)
+     */
+    public static void nk_window_get_scroll(@NativeType("struct nk_context *") NkContext ctx, @Nullable @NativeType("nk_uint *") IntBuffer offset_x, @Nullable @NativeType("nk_uint *") IntBuffer offset_y) {
+        if (CHECKS) {
+            checkSafe(offset_x, 1);
+            checkSafe(offset_y, 1);
+        }
+        nnk_window_get_scroll(ctx.address(), memAddressSafe(offset_x), memAddressSafe(offset_y));
+    }
+
     // --- [ nk_window_has_focus ] ---
 
     /** Unsafe version of: {@link #nk_window_has_focus window_has_focus} */
@@ -1981,6 +2003,24 @@ public class Nuklear {
         } finally {
             stack.setPointer(stackPointer);
         }
+    }
+
+    // --- [ nk_window_set_scroll ] ---
+
+    /** Unsafe version of: {@link #nk_window_set_scroll window_set_scroll} */
+    public static native void nnk_window_set_scroll(long ctx, int offset_x, int offset_y);
+
+    /**
+     * Sets the scroll offset for the current window.
+     * 
+     * <p>Warning: Only call this function between calls {@code nk_begin_xxx} and {@link #nk_end end}.</p>
+     *
+     * @param ctx      the nuklear context
+     * @param offset_x the x offset to scroll to
+     * @param offset_y the y offset to scroll to
+     */
+    public static void nk_window_set_scroll(@NativeType("struct nk_context *") NkContext ctx, @NativeType("nk_uint") int offset_x, @NativeType("nk_uint") int offset_y) {
+        nnk_window_set_scroll(ctx.address(), offset_x, offset_y);
     }
 
     // --- [ nk_window_close ] ---
@@ -2594,6 +2634,16 @@ public class Nuklear {
         }
     }
 
+    // --- [ nk_group_end ] ---
+
+    /** Unsafe version of: {@link #nk_group_end group_end} */
+    public static native void nnk_group_end(long ctx);
+
+    /** @param ctx the nuklear context */
+    public static void nk_group_end(@NativeType("struct nk_context *") NkContext ctx) {
+        nnk_group_end(ctx.address());
+    }
+
     // --- [ nk_group_scrolled_offset_begin ] ---
 
     /** Unsafe version of: {@link #nk_group_scrolled_offset_begin group_scrolled_offset_begin} */
@@ -2664,14 +2714,88 @@ public class Nuklear {
         nnk_group_scrolled_end(ctx.address());
     }
 
-    // --- [ nk_group_end ] ---
+    // --- [ nk_group_get_scroll ] ---
 
-    /** Unsafe version of: {@link #nk_group_end group_end} */
-    public static native void nnk_group_end(long ctx);
+    /** Unsafe version of: {@link #nk_group_get_scroll group_get_scroll} */
+    public static native void nnk_group_get_scroll(long ctx, long id, long x_offset, long y_offset);
 
-    /** @param ctx the nuklear context */
-    public static void nk_group_end(@NativeType("struct nk_context *") NkContext ctx) {
-        nnk_group_end(ctx.address());
+    /**
+     * Gets the scroll position of the given group.
+     *
+     * @param ctx      the nuklear context
+     * @param id       the id of the group to get the scroll position of
+     * @param x_offset a pointer to the x offset output (or {@code NULL} to ignore)
+     * @param y_offset a pointer to the y offset output (or {@code NULL} to ignore)
+     */
+    public static void nk_group_get_scroll(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer id, @Nullable @NativeType("nk_uint *") IntBuffer x_offset, @Nullable @NativeType("nk_uint *") IntBuffer y_offset) {
+        if (CHECKS) {
+            checkNT1(id);
+            checkSafe(x_offset, 1);
+            checkSafe(y_offset, 1);
+        }
+        nnk_group_get_scroll(ctx.address(), memAddress(id), memAddressSafe(x_offset), memAddressSafe(y_offset));
+    }
+
+    /**
+     * Gets the scroll position of the given group.
+     *
+     * @param ctx      the nuklear context
+     * @param id       the id of the group to get the scroll position of
+     * @param x_offset a pointer to the x offset output (or {@code NULL} to ignore)
+     * @param y_offset a pointer to the y offset output (or {@code NULL} to ignore)
+     */
+    public static void nk_group_get_scroll(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence id, @Nullable @NativeType("nk_uint *") IntBuffer x_offset, @Nullable @NativeType("nk_uint *") IntBuffer y_offset) {
+        if (CHECKS) {
+            checkSafe(x_offset, 1);
+            checkSafe(y_offset, 1);
+        }
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(id, true);
+            long idEncoded = stack.getPointerAddress();
+            nnk_group_get_scroll(ctx.address(), idEncoded, memAddressSafe(x_offset), memAddressSafe(y_offset));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ nk_group_set_scroll ] ---
+
+    /** Unsafe version of: {@link #nk_group_set_scroll group_set_scroll} */
+    public static native void nnk_group_set_scroll(long ctx, long id, int x_offset, int y_offset);
+
+    /**
+     * Sets the scroll position of the given group.
+     *
+     * @param ctx      the nuklear context
+     * @param id       the id of the group to scroll
+     * @param x_offset the x offset to scroll to
+     * @param y_offset the y offset to scroll to
+     */
+    public static void nk_group_set_scroll(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer id, @NativeType("nk_uint") int x_offset, @NativeType("nk_uint") int y_offset) {
+        if (CHECKS) {
+            checkNT1(id);
+        }
+        nnk_group_set_scroll(ctx.address(), memAddress(id), x_offset, y_offset);
+    }
+
+    /**
+     * Sets the scroll position of the given group.
+     *
+     * @param ctx      the nuklear context
+     * @param id       the id of the group to scroll
+     * @param x_offset the x offset to scroll to
+     * @param y_offset the y offset to scroll to
+     */
+    public static void nk_group_set_scroll(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence id, @NativeType("nk_uint") int x_offset, @NativeType("nk_uint") int y_offset) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(id, true);
+            long idEncoded = stack.getPointerAddress();
+            nnk_group_set_scroll(ctx.address(), idEncoded, x_offset, y_offset);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
     }
 
     // --- [ nk_list_view_begin ] ---
@@ -4978,6 +5102,30 @@ public class Nuklear {
     /** @param ctx the nuklear context */
     public static void nk_popup_end(@NativeType("struct nk_context *") NkContext ctx) {
         nnk_popup_end(ctx.address());
+    }
+
+    // --- [ nk_popup_get_scroll ] ---
+
+    /** Unsafe version of: {@link #nk_popup_get_scroll popup_get_scroll} */
+    public static native void nnk_popup_get_scroll(long ctx, long offset_x, long offset_y);
+
+    /** @param ctx the nuklear context */
+    public static void nk_popup_get_scroll(@NativeType("struct nk_context *") NkContext ctx, @Nullable @NativeType("nk_uint *") IntBuffer offset_x, @Nullable @NativeType("nk_uint *") IntBuffer offset_y) {
+        if (CHECKS) {
+            checkSafe(offset_x, 1);
+            checkSafe(offset_y, 1);
+        }
+        nnk_popup_get_scroll(ctx.address(), memAddressSafe(offset_x), memAddressSafe(offset_y));
+    }
+
+    // --- [ nk_popup_set_scroll ] ---
+
+    /** Unsafe version of: {@link #nk_popup_set_scroll popup_set_scroll} */
+    public static native void nnk_popup_set_scroll(long ctx, int offset_x, int offset_y);
+
+    /** @param ctx the nuklear context */
+    public static void nk_popup_set_scroll(@NativeType("struct nk_context *") NkContext ctx, @NativeType("nk_uint") int offset_x, @NativeType("nk_uint") int offset_y) {
+        nnk_popup_set_scroll(ctx.address(), offset_x, offset_y);
     }
 
     // --- [ nk_combo ] ---
@@ -9235,6 +9383,18 @@ public class Nuklear {
         return __result;
     }
 
+    /** Array version of: {@link #nnk_window_get_scroll} */
+    public static native void nnk_window_get_scroll(long ctx, int[] offset_x, int[] offset_y);
+
+    /** Array version of: {@link #nk_window_get_scroll window_get_scroll} */
+    public static void nk_window_get_scroll(@NativeType("struct nk_context *") NkContext ctx, @Nullable @NativeType("nk_uint *") int[] offset_x, @Nullable @NativeType("nk_uint *") int[] offset_y) {
+        if (CHECKS) {
+            checkSafe(offset_x, 1);
+            checkSafe(offset_y, 1);
+        }
+        nnk_window_get_scroll(ctx.address(), offset_x, offset_y);
+    }
+
     /** Array version of: {@link #nnk_layout_row} */
     public static native void nnk_layout_row(long ctx, int fmt, float height, int cols, float[] ratio);
 
@@ -9269,6 +9429,35 @@ public class Nuklear {
             stack.nUTF8(title, true);
             long titleEncoded = stack.getPointerAddress();
             return nnk_group_scrolled_offset_begin(ctx.address(), x_offset, y_offset, titleEncoded, flags) != 0;
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    /** Array version of: {@link #nnk_group_get_scroll} */
+    public static native void nnk_group_get_scroll(long ctx, long id, int[] x_offset, int[] y_offset);
+
+    /** Array version of: {@link #nk_group_get_scroll group_get_scroll} */
+    public static void nk_group_get_scroll(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer id, @Nullable @NativeType("nk_uint *") int[] x_offset, @Nullable @NativeType("nk_uint *") int[] y_offset) {
+        if (CHECKS) {
+            checkNT1(id);
+            checkSafe(x_offset, 1);
+            checkSafe(y_offset, 1);
+        }
+        nnk_group_get_scroll(ctx.address(), memAddress(id), x_offset, y_offset);
+    }
+
+    /** Array version of: {@link #nk_group_get_scroll group_get_scroll} */
+    public static void nk_group_get_scroll(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence id, @Nullable @NativeType("nk_uint *") int[] x_offset, @Nullable @NativeType("nk_uint *") int[] y_offset) {
+        if (CHECKS) {
+            checkSafe(x_offset, 1);
+            checkSafe(y_offset, 1);
+        }
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(id, true);
+            long idEncoded = stack.getPointerAddress();
+            nnk_group_get_scroll(ctx.address(), idEncoded, x_offset, y_offset);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -9873,6 +10062,18 @@ public class Nuklear {
             check(values, offset + count);
         }
         nnk_plot(ctx.address(), type, values, count, offset);
+    }
+
+    /** Array version of: {@link #nnk_popup_get_scroll} */
+    public static native void nnk_popup_get_scroll(long ctx, int[] offset_x, int[] offset_y);
+
+    /** Array version of: {@link #nk_popup_get_scroll popup_get_scroll} */
+    public static void nk_popup_get_scroll(@NativeType("struct nk_context *") NkContext ctx, @Nullable @NativeType("nk_uint *") int[] offset_x, @Nullable @NativeType("nk_uint *") int[] offset_y) {
+        if (CHECKS) {
+            checkSafe(offset_x, 1);
+            checkSafe(offset_y, 1);
+        }
+        nnk_popup_get_scroll(ctx.address(), offset_x, offset_y);
     }
 
     /** Array version of: {@link #nnk_combobox} */

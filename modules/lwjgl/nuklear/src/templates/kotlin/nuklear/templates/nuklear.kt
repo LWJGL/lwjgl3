@@ -878,6 +878,19 @@ nk_style_pop_vec2(ctx);""")}
 
         nk_command_buffer.p("window_get_canvas", "Returns the draw command buffer. Can be used to draw custom widgets.", ctx)
 
+        void(
+            "window_get_scroll",
+            """
+            Gets the scroll offset for the current window.
+            
+            Warning: Only call this function between calls {@code nk_begin_xxx} and #end().
+            """,
+
+            ctx,
+            nullable..Check(1)..nk_uint.p("offset_x", "a pointer to the x offset output (or #NULL to ignore)"),
+            nullable..Check(1)..nk_uint.p("offset_y", "a pointer to the y offset output (or #NULL to ignore)")
+        )
+
         intb("window_has_focus", "Returns if the currently processed window is currently active.", cctx)
 
         intb(
@@ -951,6 +964,19 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             charUTF8.const.p("name", "name of the window to be set active")
+        )
+
+        void(
+            "window_set_scroll",
+            """
+            Sets the scroll offset for the current window.
+            
+            Warning: Only call this function between calls {@code nk_begin_xxx} and #end().
+            """,
+
+            ctx,
+            nk_uint("offset_x", "the x offset to scroll to"),
+            nk_uint("offset_y", "the y offset to scroll to")
         )
 
         void(
@@ -1213,6 +1239,7 @@ nk_style_pop_vec2(ctx);""")}
 
             returnDoc = "{@code true} if visible and fillable with widgets or {@code false} otherwise"
         )
+        void("group_end", "", ctx)
         intb(
             "group_scrolled_offset_begin",
             "",
@@ -1233,7 +1260,24 @@ nk_style_pop_vec2(ctx);""")}
             nk_flags("flags", "")
         )
         void("group_scrolled_end", "", ctx)
-        void("group_end", "", ctx)
+        void(
+            "group_get_scroll",
+            "Gets the scroll position of the given group.",
+
+            ctx,
+            charUTF8.const.p("id", "the id of the group to get the scroll position of"),
+            nullable..Check(1)..nk_uint.p("x_offset", "a pointer to the x offset output (or #NULL to ignore)"),
+            nullable..Check(1)..nk_uint.p("y_offset", "a pointer to the y offset output (or #NULL to ignore)")
+        )
+        void(
+            "group_set_scroll",
+            "Sets the scroll position of the given group.",
+
+            ctx,
+            charUTF8.const.p("id", "the id of the group to scroll"),
+            nk_uint("x_offset", "the x offset to scroll to"),
+            nk_uint("y_offset", "the y offset to scroll to")
+        )
 
         intb(
             "list_view_begin",
@@ -2178,9 +2222,24 @@ nk_style_pop_vec2(ctx);""")}
             nk_flags("flags", "", PanelFlags),
             nk_rect("rect", "")
         )
-
         void("popup_close", "", ctx)
         void("popup_end", "", ctx)
+        void(
+            "popup_get_scroll",
+            "",
+
+            ctx,
+            nullable..Check(1)..nk_uint.p("offset_x", ""),
+            nullable..Check(1)..nk_uint.p("offset_y", "")
+        )
+        void(
+            "popup_set_scroll",
+            "",
+
+            ctx,
+            nk_uint("offset_x", ""),
+            nk_uint("offset_y", "")
+        )
 
         intb(
             "combo",

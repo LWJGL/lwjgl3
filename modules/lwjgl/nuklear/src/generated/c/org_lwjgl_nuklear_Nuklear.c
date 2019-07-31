@@ -233,6 +233,17 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1window_1get_1canvas(
     return JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1window_1get_1canvas(ctxAddress);
 }
 
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1window_1get_1scroll__JJJ(jlong ctxAddress, jlong offset_xAddress, jlong offset_yAddress) {
+    struct nk_context *ctx = (struct nk_context *)(intptr_t)ctxAddress;
+    nk_uint *offset_x = (nk_uint *)(intptr_t)offset_xAddress;
+    nk_uint *offset_y = (nk_uint *)(intptr_t)offset_yAddress;
+    nk_window_get_scroll(ctx, offset_x, offset_y);
+}
+JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1window_1get_1scroll__JJJ(JNIEnv *__env, jclass clazz, jlong ctxAddress, jlong offset_xAddress, jlong offset_yAddress) {
+    UNUSED_PARAMS(__env, clazz)
+    JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1window_1get_1scroll__JJJ(ctxAddress, offset_xAddress, offset_yAddress);
+}
+
 JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1window_1has_1focus(jlong ctxAddress) {
     struct nk_context const *ctx = (struct nk_context const *)(intptr_t)ctxAddress;
     return (jint)nk_window_has_focus(ctx);
@@ -350,6 +361,15 @@ JNIEXPORT void JNICALL JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1window_1set_1
 JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1window_1set_1focus(JNIEnv *__env, jclass clazz, jlong ctxAddress, jlong nameAddress) {
     UNUSED_PARAMS(__env, clazz)
     JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1window_1set_1focus(ctxAddress, nameAddress);
+}
+
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1window_1set_1scroll(jlong ctxAddress, jint offset_x, jint offset_y) {
+    struct nk_context *ctx = (struct nk_context *)(intptr_t)ctxAddress;
+    nk_window_set_scroll(ctx, (nk_uint)offset_x, (nk_uint)offset_y);
+}
+JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1window_1set_1scroll(JNIEnv *__env, jclass clazz, jlong ctxAddress, jint offset_x, jint offset_y) {
+    UNUSED_PARAMS(__env, clazz)
+    JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1window_1set_1scroll(ctxAddress, offset_x, offset_y);
 }
 
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1window_1close(jlong ctxAddress, jlong nameAddress) {
@@ -636,6 +656,15 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1group_1begin_1titled(
     return JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1group_1begin_1titled(ctxAddress, nameAddress, titleAddress, flags);
 }
 
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1group_1end(jlong ctxAddress) {
+    struct nk_context *ctx = (struct nk_context *)(intptr_t)ctxAddress;
+    nk_group_end(ctx);
+}
+JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1group_1end(JNIEnv *__env, jclass clazz, jlong ctxAddress) {
+    UNUSED_PARAMS(__env, clazz)
+    JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1group_1end(ctxAddress);
+}
+
 JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1group_1scrolled_1offset_1begin__JJJJI(jlong ctxAddress, jlong x_offsetAddress, jlong y_offsetAddress, jlong titleAddress, jint flags) {
     struct nk_context *ctx = (struct nk_context *)(intptr_t)ctxAddress;
     nk_uint *x_offset = (nk_uint *)(intptr_t)x_offsetAddress;
@@ -668,13 +697,26 @@ JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1group_1scrolled_1end(
     JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1group_1scrolled_1end(ctxAddress);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1group_1end(jlong ctxAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1group_1get_1scroll__JJJJ(jlong ctxAddress, jlong idAddress, jlong x_offsetAddress, jlong y_offsetAddress) {
     struct nk_context *ctx = (struct nk_context *)(intptr_t)ctxAddress;
-    nk_group_end(ctx);
+    char const *id = (char const *)(intptr_t)idAddress;
+    nk_uint *x_offset = (nk_uint *)(intptr_t)x_offsetAddress;
+    nk_uint *y_offset = (nk_uint *)(intptr_t)y_offsetAddress;
+    nk_group_get_scroll(ctx, id, x_offset, y_offset);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1group_1end(JNIEnv *__env, jclass clazz, jlong ctxAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1group_1get_1scroll__JJJJ(JNIEnv *__env, jclass clazz, jlong ctxAddress, jlong idAddress, jlong x_offsetAddress, jlong y_offsetAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1group_1end(ctxAddress);
+    JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1group_1get_1scroll__JJJJ(ctxAddress, idAddress, x_offsetAddress, y_offsetAddress);
+}
+
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1group_1set_1scroll(jlong ctxAddress, jlong idAddress, jint x_offset, jint y_offset) {
+    struct nk_context *ctx = (struct nk_context *)(intptr_t)ctxAddress;
+    char const *id = (char const *)(intptr_t)idAddress;
+    nk_group_set_scroll(ctx, id, (nk_uint)x_offset, (nk_uint)y_offset);
+}
+JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1group_1set_1scroll(JNIEnv *__env, jclass clazz, jlong ctxAddress, jlong idAddress, jint x_offset, jint y_offset) {
+    UNUSED_PARAMS(__env, clazz)
+    JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1group_1set_1scroll(ctxAddress, idAddress, x_offset, y_offset);
 }
 
 JNIEXPORT_CRITICAL jint JNICALL CRITICAL(org_lwjgl_nuklear_Nuklear_nnk_1list_1view_1begin)(jlong ctxAddress, jlong viewAddress, jlong titleAddress, jint flags, jint row_height, jint row_count) {
@@ -1670,6 +1712,26 @@ JNIEXPORT void JNICALL JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1popup_1end(jl
 JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1popup_1end(JNIEnv *__env, jclass clazz, jlong ctxAddress) {
     UNUSED_PARAMS(__env, clazz)
     JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1popup_1end(ctxAddress);
+}
+
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1popup_1get_1scroll__JJJ(jlong ctxAddress, jlong offset_xAddress, jlong offset_yAddress) {
+    struct nk_context *ctx = (struct nk_context *)(intptr_t)ctxAddress;
+    nk_uint *offset_x = (nk_uint *)(intptr_t)offset_xAddress;
+    nk_uint *offset_y = (nk_uint *)(intptr_t)offset_yAddress;
+    nk_popup_get_scroll(ctx, offset_x, offset_y);
+}
+JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1popup_1get_1scroll__JJJ(JNIEnv *__env, jclass clazz, jlong ctxAddress, jlong offset_xAddress, jlong offset_yAddress) {
+    UNUSED_PARAMS(__env, clazz)
+    JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1popup_1get_1scroll__JJJ(ctxAddress, offset_xAddress, offset_yAddress);
+}
+
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1popup_1set_1scroll(jlong ctxAddress, jint offset_x, jint offset_y) {
+    struct nk_context *ctx = (struct nk_context *)(intptr_t)ctxAddress;
+    nk_popup_set_scroll(ctx, (nk_uint)offset_x, (nk_uint)offset_y);
+}
+JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1popup_1set_1scroll(JNIEnv *__env, jclass clazz, jlong ctxAddress, jint offset_x, jint offset_y) {
+    UNUSED_PARAMS(__env, clazz)
+    JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1popup_1set_1scroll(ctxAddress, offset_x, offset_y);
 }
 
 JNIEXPORT_CRITICAL jint JNICALL CRITICAL(org_lwjgl_nuklear_Nuklear_nnk_1combo)(jlong ctxAddress, jlong itemsAddress, jint count, jint selected, jint item_height, jlong sizeAddress) {
@@ -4740,6 +4802,20 @@ JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1style_1item_1hide(JNI
     JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1style_1item_1hide(__result);
 }
 
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1window_1get_1scroll__J_3I_3I(jlong ctxAddress, jint offset_x__length, jint* offset_x, jint offset_y__length, jint* offset_y) {
+    UNUSED_PARAM(offset_x__length)
+    UNUSED_PARAM(offset_y__length)
+    JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1window_1get_1scroll__JJJ(ctxAddress, (intptr_t)offset_x, (intptr_t)offset_y);
+}
+JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1window_1get_1scroll__J_3I_3I(JNIEnv *__env, jclass clazz, jlong ctxAddress, jintArray offset_xAddress, jintArray offset_yAddress) {
+    jint *offset_x = offset_xAddress == NULL ? NULL : (*__env)->GetPrimitiveArrayCritical(__env, offset_xAddress, 0);
+    jint *offset_y = offset_yAddress == NULL ? NULL : (*__env)->GetPrimitiveArrayCritical(__env, offset_yAddress, 0);
+    UNUSED_PARAMS(__env, clazz)
+    JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1window_1get_1scroll__JJJ(ctxAddress, (intptr_t)offset_x, (intptr_t)offset_y);
+    if (offset_y != NULL) { (*__env)->ReleasePrimitiveArrayCritical(__env, offset_yAddress, offset_y, 0); }
+    if (offset_x != NULL) { (*__env)->ReleasePrimitiveArrayCritical(__env, offset_xAddress, offset_x, 0); }
+}
+
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1layout_1row__JIFI_3F(jlong ctxAddress, jint fmt, jfloat height, jint cols, jint ratio__length, jfloat* ratio) {
     UNUSED_PARAM(ratio__length)
     JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1layout_1row__JIFIJ(ctxAddress, fmt, height, cols, (intptr_t)ratio);
@@ -4765,6 +4841,20 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1group_1scrolled_1offs
     (*__env)->ReleasePrimitiveArrayCritical(__env, y_offsetAddress, y_offset, 0);
     (*__env)->ReleasePrimitiveArrayCritical(__env, x_offsetAddress, x_offset, 0);
     return __result;
+}
+
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1group_1get_1scroll__JJ_3I_3I(jlong ctxAddress, jlong idAddress, jint x_offset__length, jint* x_offset, jint y_offset__length, jint* y_offset) {
+    UNUSED_PARAM(x_offset__length)
+    UNUSED_PARAM(y_offset__length)
+    JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1group_1get_1scroll__JJJJ(ctxAddress, idAddress, (intptr_t)x_offset, (intptr_t)y_offset);
+}
+JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1group_1get_1scroll__JJ_3I_3I(JNIEnv *__env, jclass clazz, jlong ctxAddress, jlong idAddress, jintArray x_offsetAddress, jintArray y_offsetAddress) {
+    jint *x_offset = x_offsetAddress == NULL ? NULL : (*__env)->GetPrimitiveArrayCritical(__env, x_offsetAddress, 0);
+    jint *y_offset = y_offsetAddress == NULL ? NULL : (*__env)->GetPrimitiveArrayCritical(__env, y_offsetAddress, 0);
+    UNUSED_PARAMS(__env, clazz)
+    JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1group_1get_1scroll__JJJJ(ctxAddress, idAddress, (intptr_t)x_offset, (intptr_t)y_offset);
+    if (y_offset != NULL) { (*__env)->ReleasePrimitiveArrayCritical(__env, y_offsetAddress, y_offset, 0); }
+    if (x_offset != NULL) { (*__env)->ReleasePrimitiveArrayCritical(__env, x_offsetAddress, x_offset, 0); }
 }
 
 JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1tree_1state_1push__JIJ_3I(jlong ctxAddress, jint type, jlong titleAddress, jint state__length, jint* state) {
@@ -5056,6 +5146,20 @@ JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1plot__JI_3FII(JNIEnv 
     UNUSED_PARAMS(__env, clazz)
     JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1plot__JIJII(ctxAddress, type, (intptr_t)values, count, offset);
     (*__env)->ReleasePrimitiveArrayCritical(__env, valuesAddress, values, 0);
+}
+
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1popup_1get_1scroll__J_3I_3I(jlong ctxAddress, jint offset_x__length, jint* offset_x, jint offset_y__length, jint* offset_y) {
+    UNUSED_PARAM(offset_x__length)
+    UNUSED_PARAM(offset_y__length)
+    JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1popup_1get_1scroll__JJJ(ctxAddress, (intptr_t)offset_x, (intptr_t)offset_y);
+}
+JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1popup_1get_1scroll__J_3I_3I(JNIEnv *__env, jclass clazz, jlong ctxAddress, jintArray offset_xAddress, jintArray offset_yAddress) {
+    jint *offset_x = offset_xAddress == NULL ? NULL : (*__env)->GetPrimitiveArrayCritical(__env, offset_xAddress, 0);
+    jint *offset_y = offset_yAddress == NULL ? NULL : (*__env)->GetPrimitiveArrayCritical(__env, offset_yAddress, 0);
+    UNUSED_PARAMS(__env, clazz)
+    JavaCritical_org_lwjgl_nuklear_Nuklear_nnk_1popup_1get_1scroll__JJJ(ctxAddress, (intptr_t)offset_x, (intptr_t)offset_y);
+    if (offset_y != NULL) { (*__env)->ReleasePrimitiveArrayCritical(__env, offset_yAddress, offset_y, 0); }
+    if (offset_x != NULL) { (*__env)->ReleasePrimitiveArrayCritical(__env, offset_xAddress, offset_x, 0); }
 }
 
 JNIEXPORT_CRITICAL void JNICALL CRITICAL(org_lwjgl_nuklear_Nuklear_nnk_1combobox__JJI_3IIJ)(jlong ctxAddress, jlong itemsAddress, jint count, jint selected__length, jint* selected, jint item_height, jlong sizeAddress) {
