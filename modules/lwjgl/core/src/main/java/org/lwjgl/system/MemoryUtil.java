@@ -13,7 +13,6 @@ import javax.annotation.*;
 import java.nio.*;
 import java.nio.charset.*;
 import java.util.*;
-import java.util.function.*;
 
 import static java.lang.Character.*;
 import static java.lang.Math.*;
@@ -83,6 +82,7 @@ public final class MemoryUtil {
     private static final long POSITION;
     private static final long LIMIT;
     private static final long CAPACITY;
+
     private static final long ADDRESS;
 
     private static final long PARENT_BYTE;
@@ -110,30 +110,27 @@ public final class MemoryUtil {
         UNSAFE = getUnsafeInstance();
 
         try {
-            ADDRESS = getAddressOffset();
             MARK = getMarkOffset();
             POSITION = getPositionOffset();
             LIMIT = getLimitOffset();
             CAPACITY = getCapacityOffset();
 
+            ADDRESS = getAddressOffset();
+
             int oopSize = UNSAFE.arrayIndexScale(Object[].class);
 
-            PARENT_BYTE = getParentOffset(oopSize, bb, it -> it.duplicate().order(it.order()));
-            PARENT_SHORT = getParentOffset(oopSize, bb.asShortBuffer(), ShortBuffer::duplicate);
-            PARENT_CHAR = getParentOffset(oopSize, bb.asCharBuffer(), CharBuffer::duplicate);
-            PARENT_INT = getParentOffset(oopSize, bb.asIntBuffer(), IntBuffer::duplicate);
-            PARENT_LONG = getParentOffset(oopSize, bb.asLongBuffer(), LongBuffer::duplicate);
-            PARENT_FLOAT = getParentOffset(oopSize, bb.asFloatBuffer(), FloatBuffer::duplicate);
-            PARENT_DOUBLE = getParentOffset(oopSize, bb.asDoubleBuffer(), DoubleBuffer::duplicate);
+            long offset = (max(max(max(MARK, POSITION), LIMIT), CAPACITY) + 4 + (oopSize - 1)) & ~Integer.toUnsignedLong(oopSize - 1);
+            long a      = memAddress(bb);
+
+            PARENT_BYTE = getParentOffset(offset, oopSize, bb, bb.duplicate().order(bb.order()));
+            PARENT_SHORT = getParentOffset(offset, oopSize, memShortBuffer(a, 0), bb.asShortBuffer());
+            PARENT_CHAR = getParentOffset(offset, oopSize, memCharBuffer(a, 0), bb.asCharBuffer());
+            PARENT_INT = getParentOffset(offset, oopSize, memIntBuffer(a, 0), bb.asIntBuffer());
+            PARENT_LONG = getParentOffset(offset, oopSize, memLongBuffer(a, 0), bb.asLongBuffer());
+            PARENT_FLOAT = getParentOffset(offset, oopSize, memFloatBuffer(a, 0), bb.asFloatBuffer());
+            PARENT_DOUBLE = getParentOffset(offset, oopSize, memDoubleBuffer(a, 0), bb.asDoubleBuffer());
         } catch (Throwable t) {
             throw new UnsupportedOperationException(t);
-        }
-
-        // JDK-12 has a JIT compilation bug related to Unsafe. In LWJGL applications it is triggered when
-        // making concurrent calls to the custom slice/duplicate implementations, during JVM start-up. An
-        // effective workaround is to warm-up Unsafe.putObject in a single thread (this static-init block).
-        for (int i = 0; i < 10000; i++) {
-            UNSAFE.putObject(bb, PARENT_BYTE, UNSAFE.getObject(bb, PARENT_BYTE));
         }
 
         PAGE_SIZE = UNSAFE.pageSize();
@@ -2845,21 +2842,18 @@ public final class MemoryUtil {
         return getIntFieldOffset(bb, MAGIC_CAPACITY);
     }
 
-    private static <T extends Buffer> long getParentOffset(int oopSize, T parent, Function<T, T> childFactory) {
-        T child = childFactory.apply(parent);
-
-        long offset = oopSize; // pointer aligned, cannot be at 0
+    private static <T extends Buffer> long getParentOffset(long offset, int oopSize, T buffer, T bufferWithAttachment) {
         switch (oopSize) {
             case Integer.BYTES: // 32-bit or 64-bit with compressed oops
                 while (true) {
-                    if (UNSAFE.getInt(parent, offset) != UNSAFE.getInt(child, offset)) {
+                    if (UNSAFE.getInt(buffer, offset) != UNSAFE.getInt(bufferWithAttachment, offset)) {
                         return offset;
                     }
                     offset += oopSize;
                 }
             case Long.BYTES: // 64-bit with uncompressed oops
                 while (true) {
-                    if (UNSAFE.getLong(parent, offset) != UNSAFE.getLong(child, offset)) {
+                    if (UNSAFE.getLong(buffer, offset) != UNSAFE.getLong(bufferWithAttachment, offset)) {
                         return offset;
                     }
                     offset += oopSize;
