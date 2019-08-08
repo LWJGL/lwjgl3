@@ -1137,7 +1137,25 @@ public final class MemoryUtil {
      *
      * @return the duplicated buffer
      */
-    public static ByteBuffer memDuplicate(ByteBuffer buffer) { return duplicate(BUFFER_BYTE, buffer, PARENT_BYTE).order(buffer.order()); }
+    public static ByteBuffer memDuplicate(ByteBuffer buffer) {
+        ByteBuffer target;
+        try {
+            target = (ByteBuffer)UNSAFE.allocateInstance(BUFFER_BYTE);
+        } catch (InstantiationException e) {
+            throw new UnsupportedOperationException(e);
+        }
+
+        UNSAFE.putLong(target, ADDRESS, UNSAFE.getLong(buffer, ADDRESS));
+        UNSAFE.putInt(target, MARK, UNSAFE.getInt(buffer, MARK));
+        UNSAFE.putInt(target, POSITION, UNSAFE.getInt(buffer, POSITION));
+        UNSAFE.putInt(target, LIMIT, UNSAFE.getInt(buffer, LIMIT));
+        UNSAFE.putInt(target, CAPACITY, UNSAFE.getInt(buffer, CAPACITY));
+
+        Object attachment = UNSAFE.getObject(buffer, PARENT_BYTE);
+        UNSAFE.putObject(target, PARENT_BYTE, attachment == null ? buffer : attachment);
+
+        return target.order(buffer.order());
+    }
 
     /**
      * Duplicates the specified buffer.
@@ -1224,7 +1242,7 @@ public final class MemoryUtil {
      * @return the sliced buffer
      */
     public static ByteBuffer memSlice(ByteBuffer buffer) {
-        return slice(BUFFER_BYTE, buffer, memAddress0(buffer) + buffer.position(), buffer.remaining(), PARENT_BYTE).order(buffer.order());
+        return slice(buffer, memAddress0(buffer) + buffer.position(), buffer.remaining());
     }
 
     /**
@@ -1330,7 +1348,7 @@ public final class MemoryUtil {
         if (capacity < 0 || buffer.capacity() - position < capacity) {
             throw new IllegalArgumentException();
         }
-        return slice(BUFFER_BYTE, buffer, memAddress0(buffer) + position, capacity, PARENT_BYTE).order(buffer.order());
+        return slice(buffer, memAddress0(buffer) + position, capacity);
     }
 
     /**
@@ -2880,6 +2898,25 @@ public final class MemoryUtil {
         return buffer;
     }
 
+    static ByteBuffer slice(ByteBuffer source, long address, int capacity) {
+        ByteBuffer target;
+        try {
+            target = (ByteBuffer)UNSAFE.allocateInstance(BUFFER_BYTE);
+        } catch (InstantiationException e) {
+            throw new UnsupportedOperationException(e);
+        }
+
+        UNSAFE.putLong(target, ADDRESS, address);
+        UNSAFE.putInt(target, MARK, -1);
+        UNSAFE.putInt(target, LIMIT, capacity);
+        UNSAFE.putInt(target, CAPACITY, capacity);
+
+        Object attachment = UNSAFE.getObject(source, PARENT_BYTE);
+        UNSAFE.putObject(target, PARENT_BYTE, attachment == null ? source : attachment);
+
+        return target.order(source.order());
+    }
+
     @SuppressWarnings("unchecked")
     static <T extends Buffer> T slice(Class<? extends T> clazz, T source, long address, int capacity, long attachmentOffset) {
         T target;
@@ -2893,7 +2930,7 @@ public final class MemoryUtil {
         UNSAFE.putInt(target, MARK, -1);
         UNSAFE.putInt(target, LIMIT, capacity);
         UNSAFE.putInt(target, CAPACITY, capacity);
-        // The JDK stores source here
+
         UNSAFE.putObject(target, attachmentOffset, UNSAFE.getObject(source, attachmentOffset));
 
         return target;
@@ -2913,7 +2950,7 @@ public final class MemoryUtil {
         UNSAFE.putInt(target, POSITION, UNSAFE.getInt(source, POSITION));
         UNSAFE.putInt(target, LIMIT, UNSAFE.getInt(source, LIMIT));
         UNSAFE.putInt(target, CAPACITY, UNSAFE.getInt(source, CAPACITY));
-        // The JDK stores source here
+
         UNSAFE.putObject(target, attachmentOffset, UNSAFE.getObject(source, attachmentOffset));
 
         return target;
