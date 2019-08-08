@@ -1448,7 +1448,7 @@ public class GL43C extends GL42C {
     // --- [ glMultiDrawArraysIndirect ] ---
 
     /** Unsafe version of: {@link #glMultiDrawArraysIndirect MultiDrawArraysIndirect} */
-    public static native void nglMultiDrawArraysIndirect(int mode, long indirect, int primcount, int stride);
+    public static native void nglMultiDrawArraysIndirect(int mode, long indirect, int drawcount, int stride);
 
     /**
      * Renders multiple sets of primitives from array data, taking parameters from memory.
@@ -1467,7 +1467,7 @@ public class GL43C extends GL42C {
      * 
      * <pre><code>
      * const ubyte *ptr = (const ubyte *)indirect;
-     * for ( i = 0; i &lt; primcount; i++ ) {
+     * for ( i = 0; i &lt; drawcount; i++ ) {
      *     DrawArraysIndirect(mode, (DrawArraysIndirectCommand*)ptr);
      *     if ( stride == 0 )
      *         ptr += sizeof(DrawArraysIndirectCommand);
@@ -1477,16 +1477,16 @@ public class GL43C extends GL42C {
      *
      * @param mode      what kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td></tr><tr><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td><td>{@link GL40#GL_PATCHES PATCHES}</td><td>{@link GL11#GL_POLYGON POLYGON}</td><td>{@link GL11#GL_QUADS QUADS}</td></tr><tr><td>{@link GL11#GL_QUAD_STRIP QUAD_STRIP}</td></tr></table>
      * @param indirect  an array of structures containing the draw parameters
-     * @param primcount the number of elements in the array of draw parameter structures
+     * @param drawcount the number of elements in the array of draw parameter structures
      * @param stride    the distance in basic machine units between elements of the draw parameter array
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawArraysIndirect">Reference Page</a>
      */
-    public static void glMultiDrawArraysIndirect(@NativeType("GLenum") int mode, @NativeType("void const *") ByteBuffer indirect, @NativeType("GLsizei") int primcount, @NativeType("GLsizei") int stride) {
+    public static void glMultiDrawArraysIndirect(@NativeType("GLenum") int mode, @NativeType("void const *") ByteBuffer indirect, @NativeType("GLsizei") int drawcount, @NativeType("GLsizei") int stride) {
         if (CHECKS) {
-            check(indirect, primcount * (stride == 0 ? (4 * 4) : stride));
+            check(indirect, drawcount * (stride == 0 ? (4 * 4) : stride));
         }
-        nglMultiDrawArraysIndirect(mode, memAddress(indirect), primcount, stride);
+        nglMultiDrawArraysIndirect(mode, memAddress(indirect), drawcount, stride);
     }
 
     /**
@@ -1506,7 +1506,7 @@ public class GL43C extends GL42C {
      * 
      * <pre><code>
      * const ubyte *ptr = (const ubyte *)indirect;
-     * for ( i = 0; i &lt; primcount; i++ ) {
+     * for ( i = 0; i &lt; drawcount; i++ ) {
      *     DrawArraysIndirect(mode, (DrawArraysIndirectCommand*)ptr);
      *     if ( stride == 0 )
      *         ptr += sizeof(DrawArraysIndirectCommand);
@@ -1516,13 +1516,13 @@ public class GL43C extends GL42C {
      *
      * @param mode      what kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td></tr><tr><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td><td>{@link GL40#GL_PATCHES PATCHES}</td><td>{@link GL11#GL_POLYGON POLYGON}</td><td>{@link GL11#GL_QUADS QUADS}</td></tr><tr><td>{@link GL11#GL_QUAD_STRIP QUAD_STRIP}</td></tr></table>
      * @param indirect  an array of structures containing the draw parameters
-     * @param primcount the number of elements in the array of draw parameter structures
+     * @param drawcount the number of elements in the array of draw parameter structures
      * @param stride    the distance in basic machine units between elements of the draw parameter array
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawArraysIndirect">Reference Page</a>
      */
-    public static void glMultiDrawArraysIndirect(@NativeType("GLenum") int mode, @NativeType("void const *") long indirect, @NativeType("GLsizei") int primcount, @NativeType("GLsizei") int stride) {
-        nglMultiDrawArraysIndirect(mode, indirect, primcount, stride);
+    public static void glMultiDrawArraysIndirect(@NativeType("GLenum") int mode, @NativeType("void const *") long indirect, @NativeType("GLsizei") int drawcount, @NativeType("GLsizei") int stride) {
+        nglMultiDrawArraysIndirect(mode, indirect, drawcount, stride);
     }
 
     /**
@@ -1542,7 +1542,7 @@ public class GL43C extends GL42C {
      * 
      * <pre><code>
      * const ubyte *ptr = (const ubyte *)indirect;
-     * for ( i = 0; i &lt; primcount; i++ ) {
+     * for ( i = 0; i &lt; drawcount; i++ ) {
      *     DrawArraysIndirect(mode, (DrawArraysIndirectCommand*)ptr);
      *     if ( stride == 0 )
      *         ptr += sizeof(DrawArraysIndirectCommand);
@@ -1552,22 +1552,22 @@ public class GL43C extends GL42C {
      *
      * @param mode      what kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td></tr><tr><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td><td>{@link GL40#GL_PATCHES PATCHES}</td><td>{@link GL11#GL_POLYGON POLYGON}</td><td>{@link GL11#GL_QUADS QUADS}</td></tr><tr><td>{@link GL11#GL_QUAD_STRIP QUAD_STRIP}</td></tr></table>
      * @param indirect  an array of structures containing the draw parameters
-     * @param primcount the number of elements in the array of draw parameter structures
+     * @param drawcount the number of elements in the array of draw parameter structures
      * @param stride    the distance in basic machine units between elements of the draw parameter array
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawArraysIndirect">Reference Page</a>
      */
-    public static void glMultiDrawArraysIndirect(@NativeType("GLenum") int mode, @NativeType("void const *") IntBuffer indirect, @NativeType("GLsizei") int primcount, @NativeType("GLsizei") int stride) {
+    public static void glMultiDrawArraysIndirect(@NativeType("GLenum") int mode, @NativeType("void const *") IntBuffer indirect, @NativeType("GLsizei") int drawcount, @NativeType("GLsizei") int stride) {
         if (CHECKS) {
-            check(indirect, (primcount * (stride == 0 ? (4 * 4) : stride)) >> 2);
+            check(indirect, (drawcount * (stride == 0 ? (4 * 4) : stride)) >> 2);
         }
-        nglMultiDrawArraysIndirect(mode, memAddress(indirect), primcount, stride);
+        nglMultiDrawArraysIndirect(mode, memAddress(indirect), drawcount, stride);
     }
 
     // --- [ glMultiDrawElementsIndirect ] ---
 
     /** Unsafe version of: {@link #glMultiDrawElementsIndirect MultiDrawElementsIndirect} */
-    public static native void nglMultiDrawElementsIndirect(int mode, int type, long indirect, int primcount, int stride);
+    public static native void nglMultiDrawElementsIndirect(int mode, int type, long indirect, int drawcount, int stride);
 
     /**
      * Renders multiple indexed primitives from array data, taking parameters from memory.
@@ -1587,7 +1587,7 @@ public class GL43C extends GL42C {
      * 
      * <pre><code>
      * const ubyte *ptr = (const ubyte *)indirect;
-     * for ( i = 0; i &lt; primcount; i++ ) {
+     * for ( i = 0; i &lt; drawcount; i++ ) {
      *     DrawElementsIndirect(mode, type, (DrawElementsIndirectCommand *)ptr);
      *     if ( stride == 0 )
      *         ptr += sizeof(DrawElementsIndirectCommand);
@@ -1598,16 +1598,16 @@ public class GL43C extends GL42C {
      * @param mode      what kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td></tr><tr><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td><td>{@link GL40#GL_PATCHES PATCHES}</td><td>{@link GL11#GL_POLYGON POLYGON}</td><td>{@link GL11#GL_QUADS QUADS}</td></tr><tr><td>{@link GL11#GL_QUAD_STRIP QUAD_STRIP}</td></tr></table>
      * @param type      the type of data in the buffer bound to the GL_ELEMENT_ARRAY_BUFFER binding. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td></tr></table>
      * @param indirect  a structure containing an array of draw parameters
-     * @param primcount the number of elements in the array addressed by {@code indirect}
+     * @param drawcount the number of elements in the array addressed by {@code indirect}
      * @param stride    the distance in basic machine units between elements of the draw parameter array
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawElementsIndirect">Reference Page</a>
      */
-    public static void glMultiDrawElementsIndirect(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") ByteBuffer indirect, @NativeType("GLsizei") int primcount, @NativeType("GLsizei") int stride) {
+    public static void glMultiDrawElementsIndirect(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") ByteBuffer indirect, @NativeType("GLsizei") int drawcount, @NativeType("GLsizei") int stride) {
         if (CHECKS) {
-            check(indirect, primcount * (stride == 0 ? (5 * 4) : stride));
+            check(indirect, drawcount * (stride == 0 ? (5 * 4) : stride));
         }
-        nglMultiDrawElementsIndirect(mode, type, memAddress(indirect), primcount, stride);
+        nglMultiDrawElementsIndirect(mode, type, memAddress(indirect), drawcount, stride);
     }
 
     /**
@@ -1628,7 +1628,7 @@ public class GL43C extends GL42C {
      * 
      * <pre><code>
      * const ubyte *ptr = (const ubyte *)indirect;
-     * for ( i = 0; i &lt; primcount; i++ ) {
+     * for ( i = 0; i &lt; drawcount; i++ ) {
      *     DrawElementsIndirect(mode, type, (DrawElementsIndirectCommand *)ptr);
      *     if ( stride == 0 )
      *         ptr += sizeof(DrawElementsIndirectCommand);
@@ -1639,13 +1639,13 @@ public class GL43C extends GL42C {
      * @param mode      what kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td></tr><tr><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td><td>{@link GL40#GL_PATCHES PATCHES}</td><td>{@link GL11#GL_POLYGON POLYGON}</td><td>{@link GL11#GL_QUADS QUADS}</td></tr><tr><td>{@link GL11#GL_QUAD_STRIP QUAD_STRIP}</td></tr></table>
      * @param type      the type of data in the buffer bound to the GL_ELEMENT_ARRAY_BUFFER binding. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td></tr></table>
      * @param indirect  a structure containing an array of draw parameters
-     * @param primcount the number of elements in the array addressed by {@code indirect}
+     * @param drawcount the number of elements in the array addressed by {@code indirect}
      * @param stride    the distance in basic machine units between elements of the draw parameter array
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawElementsIndirect">Reference Page</a>
      */
-    public static void glMultiDrawElementsIndirect(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") long indirect, @NativeType("GLsizei") int primcount, @NativeType("GLsizei") int stride) {
-        nglMultiDrawElementsIndirect(mode, type, indirect, primcount, stride);
+    public static void glMultiDrawElementsIndirect(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") long indirect, @NativeType("GLsizei") int drawcount, @NativeType("GLsizei") int stride) {
+        nglMultiDrawElementsIndirect(mode, type, indirect, drawcount, stride);
     }
 
     /**
@@ -1666,7 +1666,7 @@ public class GL43C extends GL42C {
      * 
      * <pre><code>
      * const ubyte *ptr = (const ubyte *)indirect;
-     * for ( i = 0; i &lt; primcount; i++ ) {
+     * for ( i = 0; i &lt; drawcount; i++ ) {
      *     DrawElementsIndirect(mode, type, (DrawElementsIndirectCommand *)ptr);
      *     if ( stride == 0 )
      *         ptr += sizeof(DrawElementsIndirectCommand);
@@ -1677,16 +1677,16 @@ public class GL43C extends GL42C {
      * @param mode      what kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td></tr><tr><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td><td>{@link GL40#GL_PATCHES PATCHES}</td><td>{@link GL11#GL_POLYGON POLYGON}</td><td>{@link GL11#GL_QUADS QUADS}</td></tr><tr><td>{@link GL11#GL_QUAD_STRIP QUAD_STRIP}</td></tr></table>
      * @param type      the type of data in the buffer bound to the GL_ELEMENT_ARRAY_BUFFER binding. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td></tr></table>
      * @param indirect  a structure containing an array of draw parameters
-     * @param primcount the number of elements in the array addressed by {@code indirect}
+     * @param drawcount the number of elements in the array addressed by {@code indirect}
      * @param stride    the distance in basic machine units between elements of the draw parameter array
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawElementsIndirect">Reference Page</a>
      */
-    public static void glMultiDrawElementsIndirect(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") IntBuffer indirect, @NativeType("GLsizei") int primcount, @NativeType("GLsizei") int stride) {
+    public static void glMultiDrawElementsIndirect(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") IntBuffer indirect, @NativeType("GLsizei") int drawcount, @NativeType("GLsizei") int stride) {
         if (CHECKS) {
-            check(indirect, (primcount * (stride == 0 ? (5 * 4) : stride)) >> 2);
+            check(indirect, (drawcount * (stride == 0 ? (5 * 4) : stride)) >> 2);
         }
-        nglMultiDrawElementsIndirect(mode, type, memAddress(indirect), primcount, stride);
+        nglMultiDrawElementsIndirect(mode, type, memAddress(indirect), drawcount, stride);
     }
 
     // --- [ glGetProgramInterfaceiv ] ---
@@ -2314,13 +2314,13 @@ public class GL43C extends GL42C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawArraysIndirect">Reference Page</a>
      */
-    public static void glMultiDrawArraysIndirect(@NativeType("GLenum") int mode, @NativeType("void const *") int[] indirect, @NativeType("GLsizei") int primcount, @NativeType("GLsizei") int stride) {
+    public static void glMultiDrawArraysIndirect(@NativeType("GLenum") int mode, @NativeType("void const *") int[] indirect, @NativeType("GLsizei") int drawcount, @NativeType("GLsizei") int stride) {
         long __functionAddress = GL.getICD().glMultiDrawArraysIndirect;
         if (CHECKS) {
             check(__functionAddress);
-            check(indirect, (primcount * (stride == 0 ? (4 * 4) : stride)) >> 2);
+            check(indirect, (drawcount * (stride == 0 ? (4 * 4) : stride)) >> 2);
         }
-        callPV(mode, indirect, primcount, stride, __functionAddress);
+        callPV(mode, indirect, drawcount, stride, __functionAddress);
     }
 
     /**
@@ -2328,13 +2328,13 @@ public class GL43C extends GL42C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawElementsIndirect">Reference Page</a>
      */
-    public static void glMultiDrawElementsIndirect(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") int[] indirect, @NativeType("GLsizei") int primcount, @NativeType("GLsizei") int stride) {
+    public static void glMultiDrawElementsIndirect(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") int[] indirect, @NativeType("GLsizei") int drawcount, @NativeType("GLsizei") int stride) {
         long __functionAddress = GL.getICD().glMultiDrawElementsIndirect;
         if (CHECKS) {
             check(__functionAddress);
-            check(indirect, (primcount * (stride == 0 ? (5 * 4) : stride)) >> 2);
+            check(indirect, (drawcount * (stride == 0 ? (5 * 4) : stride)) >> 2);
         }
-        callPV(mode, type, indirect, primcount, stride, __functionAddress);
+        callPV(mode, type, indirect, drawcount, stride, __functionAddress);
     }
 
     /**

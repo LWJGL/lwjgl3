@@ -123,7 +123,7 @@ val GL32C = "GL32C".nativeClassGL("GL32C") {
         GLsizei.const.p("count", "an array of the elements counts"),
         GLenum("type", "the type of the values in {@code indices}", "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"),
         void.const.p.p("indices", "a pointer to the location where the indices are stored"),
-        AutoSize("count", "indices", "basevertex")..GLsizei("primcount", "the size of the {@code count} array"),
+        AutoSize("count", "indices", "basevertex")..GLsizei("drawcount", "the size of the {@code count} array"),
         GLint.p("basevertex", "a pointer to the location where the base vertices are stored")
     )
 

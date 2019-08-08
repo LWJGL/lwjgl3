@@ -159,7 +159,7 @@ public class OESDrawElementsBaseVertex {
 
     // --- [ glMultiDrawElementsBaseVertexOES ] ---
 
-    public static native void nglMultiDrawElementsBaseVertexOES(int mode, long count, int type, long indices, int primcount, long basevertex);
+    public static native void nglMultiDrawElementsBaseVertexOES(int mode, long count, int type, long indices, int drawcount, long basevertex);
 
     public static void glMultiDrawElementsBaseVertexOES(@NativeType("GLenum") int mode, @NativeType("GLsizei const *") IntBuffer count, @NativeType("GLenum") int type, @NativeType("void const * const *") PointerBuffer indices, @NativeType("GLint const *") IntBuffer basevertex) {
         if (CHECKS) {

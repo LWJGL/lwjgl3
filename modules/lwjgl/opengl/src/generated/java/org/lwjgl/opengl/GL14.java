@@ -333,10 +333,10 @@ public class GL14 extends GL13 {
     /**
      * Unsafe version of: {@link #glMultiDrawArrays MultiDrawArrays}
      *
-     * @param primcount the size of {@code first} and {@code count}
+     * @param drawcount the size of {@code first} and {@code count}
      */
-    public static void nglMultiDrawArrays(int mode, long first, long count, int primcount) {
-        GL14C.nglMultiDrawArrays(mode, first, count, primcount);
+    public static void nglMultiDrawArrays(int mode, long first, long count, int drawcount) {
+        GL14C.nglMultiDrawArrays(mode, first, count, drawcount);
     }
 
     /**
@@ -357,10 +357,10 @@ public class GL14 extends GL13 {
     /**
      * Unsafe version of: {@link #glMultiDrawElements MultiDrawElements}
      *
-     * @param primcount the size of the {@code count} array
+     * @param drawcount the size of the {@code count} array
      */
-    public static void nglMultiDrawElements(int mode, long count, int type, long indices, int primcount) {
-        GL14C.nglMultiDrawElements(mode, count, type, indices, primcount);
+    public static void nglMultiDrawElements(int mode, long count, int type, long indices, int drawcount) {
+        GL14C.nglMultiDrawElements(mode, count, type, indices, drawcount);
     }
 
     /**

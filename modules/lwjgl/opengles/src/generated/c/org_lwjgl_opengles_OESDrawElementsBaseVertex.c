@@ -34,13 +34,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_OESDrawElementsBaseVertex_nglDraw
     glDrawElementsInstancedBaseVertexOES(mode, count, type, indices, instancecount, basevertex);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_opengles_OESDrawElementsBaseVertex_nglMultiDrawElementsBaseVertexOES__IJIJIJ(JNIEnv *__env, jclass clazz, jint mode, jlong countAddress, jint type, jlong indicesAddress, jint primcount, jlong basevertexAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_opengles_OESDrawElementsBaseVertex_nglMultiDrawElementsBaseVertexOES__IJIJIJ(JNIEnv *__env, jclass clazz, jint mode, jlong countAddress, jint type, jlong indicesAddress, jint drawcount, jlong basevertexAddress) {
     glMultiDrawElementsBaseVertexOESPROC glMultiDrawElementsBaseVertexOES = (glMultiDrawElementsBaseVertexOESPROC)tlsGetFunction(783);
     intptr_t count = (intptr_t)countAddress;
     intptr_t indices = (intptr_t)indicesAddress;
     intptr_t basevertex = (intptr_t)basevertexAddress;
     UNUSED_PARAM(clazz)
-    glMultiDrawElementsBaseVertexOES(mode, count, type, indices, primcount, basevertex);
+    glMultiDrawElementsBaseVertexOES(mode, count, type, indices, drawcount, basevertex);
 }
 
 EXTERN_C_EXIT

@@ -30,20 +30,20 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL14C_glBlendEquation(JNIEnv *__env
     glBlendEquation(mode);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL14C_nglMultiDrawArrays__IJJI(JNIEnv *__env, jclass clazz, jint mode, jlong firstAddress, jlong countAddress, jint primcount) {
+JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL14C_nglMultiDrawArrays__IJJI(JNIEnv *__env, jclass clazz, jint mode, jlong firstAddress, jlong countAddress, jint drawcount) {
     glMultiDrawArraysPROC glMultiDrawArrays = (glMultiDrawArraysPROC)tlsGetFunction(426);
     intptr_t first = (intptr_t)firstAddress;
     intptr_t count = (intptr_t)countAddress;
     UNUSED_PARAM(clazz)
-    glMultiDrawArrays(mode, first, count, primcount);
+    glMultiDrawArrays(mode, first, count, drawcount);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL14C_nglMultiDrawElements__IJIJI(JNIEnv *__env, jclass clazz, jint mode, jlong countAddress, jint type, jlong indicesAddress, jint primcount) {
+JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL14C_nglMultiDrawElements__IJIJI(JNIEnv *__env, jclass clazz, jint mode, jlong countAddress, jint type, jlong indicesAddress, jint drawcount) {
     glMultiDrawElementsPROC glMultiDrawElements = (glMultiDrawElementsPROC)tlsGetFunction(427);
     intptr_t count = (intptr_t)countAddress;
     intptr_t indices = (intptr_t)indicesAddress;
     UNUSED_PARAM(clazz)
-    glMultiDrawElements(mode, count, type, indices, primcount);
+    glMultiDrawElements(mode, count, type, indices, drawcount);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL14C_glPointParameterf(JNIEnv *__env, jclass clazz, jint pname, jfloat param) {

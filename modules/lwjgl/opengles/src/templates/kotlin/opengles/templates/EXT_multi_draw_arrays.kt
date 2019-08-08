@@ -23,7 +23,7 @@ val EXT_multi_draw_arrays = "EXTMultiDrawArrays".nativeClassGLES("EXT_multi_draw
         GLenum("mode", ""),
         GLint.const.p("first", ""),
         GLsizei.const.p("count", ""),
-        AutoSize("first", "count")..GLsizei("primcount", "")
+        AutoSize("first", "count")..GLsizei("drawcount", "")
     )
 
     void(
@@ -34,6 +34,6 @@ val EXT_multi_draw_arrays = "EXTMultiDrawArrays".nativeClassGLES("EXT_multi_draw
         GLsizei.const.p("count", ""),
         GLenum("type", ""),
         void.const.p.const.p("indices", ""),
-        AutoSize("count", "indices")..GLsizei("primcount", "")
+        AutoSize("count", "indices")..GLsizei("drawcount", "")
     )
 }

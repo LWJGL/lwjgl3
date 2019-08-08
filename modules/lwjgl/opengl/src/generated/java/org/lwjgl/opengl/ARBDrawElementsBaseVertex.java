@@ -311,10 +311,10 @@ public class ARBDrawElementsBaseVertex {
     /**
      * Unsafe version of: {@link #glMultiDrawElementsBaseVertex MultiDrawElementsBaseVertex}
      *
-     * @param primcount the size of the {@code count} array
+     * @param drawcount the size of the {@code count} array
      */
-    public static void nglMultiDrawElementsBaseVertex(int mode, long count, int type, long indices, int primcount, long basevertex) {
-        GL32C.nglMultiDrawElementsBaseVertex(mode, count, type, indices, primcount, basevertex);
+    public static void nglMultiDrawElementsBaseVertex(int mode, long count, int type, long indices, int drawcount, long basevertex) {
+        GL32C.nglMultiDrawElementsBaseVertex(mode, count, type, indices, drawcount, basevertex);
     }
 
     /**

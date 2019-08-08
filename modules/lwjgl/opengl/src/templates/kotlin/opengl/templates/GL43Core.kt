@@ -847,7 +847,7 @@ typedef struct {
         A single call to {@code glMultiDrawArraysIndirect} is equivalent, assuming no errors are generated to:
         ${codeBlock("""
 const ubyte *ptr = (const ubyte *)indirect;
-for ( i = 0; i < primcount; i++ ) {
+for ( i = 0; i < drawcount; i++ ) {
     DrawArraysIndirect(mode, (DrawArraysIndirectCommand*)ptr);
     if ( stride == 0 )
         ptr += sizeof(DrawArraysIndirectCommand);
@@ -858,10 +858,10 @@ for ( i = 0; i < primcount; i++ ) {
         """,
 
         GLenum("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
-        Check("primcount * (stride == 0 ? (4 * 4) : stride)")..MultiType(
+        Check("drawcount * (stride == 0 ? (4 * 4) : stride)")..MultiType(
             PointerMapping.DATA_INT
         )..RawPointer..void.const.p("indirect", "an array of structures containing the draw parameters"),
-        GLsizei("primcount", "the number of elements in the array of draw parameter structures"),
+        GLsizei("drawcount", "the number of elements in the array of draw parameter structures"),
         GLsizei("stride", "the distance in basic machine units between elements of the draw parameter array")
     )
 
@@ -884,7 +884,7 @@ typedef struct {
         A single call to {@code glMultiDrawElementsIndirect} is equivalent, assuming no errors are generated to:
         ${codeBlock("""
 const ubyte *ptr = (const ubyte *)indirect;
-for ( i = 0; i < primcount; i++ ) {
+for ( i = 0; i < drawcount; i++ ) {
     DrawElementsIndirect(mode, type, (DrawElementsIndirectCommand *)ptr);
     if ( stride == 0 )
         ptr += sizeof(DrawElementsIndirectCommand);
@@ -896,10 +896,10 @@ for ( i = 0; i < primcount; i++ ) {
 
         GLenum("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
         GLenum("type", "the type of data in the buffer bound to the GL_ELEMENT_ARRAY_BUFFER binding", "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"),
-        Check("primcount * (stride == 0 ? (5 * 4) : stride)")..MultiType(
+        Check("drawcount * (stride == 0 ? (5 * 4) : stride)")..MultiType(
             PointerMapping.DATA_INT
         )..RawPointer..void.const.p("indirect", "a structure containing an array of draw parameters"),
-        GLsizei("primcount", "the number of elements in the array addressed by {@code indirect}"),
+        GLsizei("drawcount", "the number of elements in the array addressed by {@code indirect}"),
         GLsizei("stride", "the distance in basic machine units between elements of the draw parameter array")
     )
 

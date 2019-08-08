@@ -109,7 +109,7 @@ val GL14C = "GL14C".nativeClassGL("GL14C") {
         GLenum("mode", "the kind of primitives to render", CORE_PRIMITIVE_TYPES),
         GLint.const.p("first", "an array of starting indices in the enabled arrays"),
         GLsizei.const.p("count", "an array of the number of indices to be rendered"),
-        AutoSize("first", "count")..GLsizei("primcount", "the size of {@code first} and {@code count}")
+        AutoSize("first", "count")..GLsizei("drawcount", "the size of {@code first} and {@code count}")
     )
 
     void(
@@ -124,7 +124,7 @@ val GL14C = "GL14C".nativeClassGL("GL14C") {
         GLsizei.p("count", "an array of the elements counts"),
         GLenum("type", "the type of the values in indices", "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"),
         void.const.p.p("indices", "a pointer to the location where the indices are stored"),
-        AutoSize("count", "indices")..GLsizei("primcount", "the size of the {@code count} array")
+        AutoSize("count", "indices")..GLsizei("drawcount", "the size of the {@code count} array")
     )
 
     // ARB_point_parameters

@@ -56,13 +56,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL32C_nglDrawElementsInstancedBaseV
     glDrawElementsInstancedBaseVertex(mode, count, type, indices, primcount, basevertex);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL32C_nglMultiDrawElementsBaseVertex__IJIJIJ(JNIEnv *__env, jclass clazz, jint mode, jlong countAddress, jint type, jlong indicesAddress, jint primcount, jlong basevertexAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL32C_nglMultiDrawElementsBaseVertex__IJIJIJ(JNIEnv *__env, jclass clazz, jint mode, jlong countAddress, jint type, jlong indicesAddress, jint drawcount, jlong basevertexAddress) {
     glMultiDrawElementsBaseVertexPROC glMultiDrawElementsBaseVertex = (glMultiDrawElementsBaseVertexPROC)tlsGetFunction(651);
     intptr_t count = (intptr_t)countAddress;
     intptr_t indices = (intptr_t)indicesAddress;
     intptr_t basevertex = (intptr_t)basevertexAddress;
     UNUSED_PARAM(clazz)
-    glMultiDrawElementsBaseVertex(mode, count, type, indices, primcount, basevertex);
+    glMultiDrawElementsBaseVertex(mode, count, type, indices, drawcount, basevertex);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL32C_glProvokingVertex(JNIEnv *__env, jclass clazz, jint mode) {

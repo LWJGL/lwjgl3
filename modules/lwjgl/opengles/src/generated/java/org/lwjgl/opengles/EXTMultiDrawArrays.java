@@ -37,7 +37,7 @@ public class EXTMultiDrawArrays {
 
     // --- [ glMultiDrawArraysEXT ] ---
 
-    public static native void nglMultiDrawArraysEXT(int mode, long first, long count, int primcount);
+    public static native void nglMultiDrawArraysEXT(int mode, long first, long count, int drawcount);
 
     public static void glMultiDrawArraysEXT(@NativeType("GLenum") int mode, @NativeType("GLint const *") IntBuffer first, @NativeType("GLsizei const *") IntBuffer count) {
         if (CHECKS) {
@@ -48,7 +48,7 @@ public class EXTMultiDrawArrays {
 
     // --- [ glMultiDrawElementsEXT ] ---
 
-    public static native void nglMultiDrawElementsEXT(int mode, long count, int type, long indices, int primcount);
+    public static native void nglMultiDrawElementsEXT(int mode, long count, int type, long indices, int drawcount);
 
     public static void glMultiDrawElementsEXT(@NativeType("GLenum") int mode, @NativeType("GLsizei const *") IntBuffer count, @NativeType("GLenum") int type, @NativeType("void const * const *") PointerBuffer indices) {
         if (CHECKS) {

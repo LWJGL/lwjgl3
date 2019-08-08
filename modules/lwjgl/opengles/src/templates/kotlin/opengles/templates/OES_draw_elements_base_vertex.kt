@@ -104,7 +104,7 @@ val OES_draw_elements_base_vertex = "OESDrawElementsBaseVertex".nativeClassGLES(
         GLsizei.const.p("count", ""),
         GLenum("type", ""),
         void.const.p.const.p("indices", ""),
-        AutoSize("count", "indices", "basevertex")..GLsizei("primcount", ""),
+        AutoSize("count", "indices", "basevertex")..GLsizei("drawcount", ""),
         GLint.const.p("basevertex", "")
     )
 }

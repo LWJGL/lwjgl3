@@ -493,9 +493,9 @@ public class GL32C extends GL31C {
     /**
      * Unsafe version of: {@link #glMultiDrawElementsBaseVertex MultiDrawElementsBaseVertex}
      *
-     * @param primcount the size of the {@code count} array
+     * @param drawcount the size of the {@code count} array
      */
-    public static native void nglMultiDrawElementsBaseVertex(int mode, long count, int type, long indices, int primcount, long basevertex);
+    public static native void nglMultiDrawElementsBaseVertex(int mode, long count, int type, long indices, int drawcount, long basevertex);
 
     /**
      * Renders multiple sets of primitives by specifying indices of array data elements and an offset to apply to each index.
