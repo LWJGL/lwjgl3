@@ -1428,7 +1428,7 @@ public class GL43 extends GL42 {
      * 
      * <pre><code>
      * const ubyte *ptr = (const ubyte *)indirect;
-     * for ( i = 0; i &lt; primcount; i++ ) {
+     * for ( i = 0; i &lt; drawcount; i++ ) {
      *     DrawArraysIndirect(mode, (DrawArraysIndirectCommand*)ptr);
      *     if ( stride == 0 )
      *         ptr += sizeof(DrawArraysIndirectCommand);
@@ -1464,7 +1464,7 @@ public class GL43 extends GL42 {
      * 
      * <pre><code>
      * const ubyte *ptr = (const ubyte *)indirect;
-     * for ( i = 0; i &lt; primcount; i++ ) {
+     * for ( i = 0; i &lt; drawcount; i++ ) {
      *     DrawArraysIndirect(mode, (DrawArraysIndirectCommand*)ptr);
      *     if ( stride == 0 )
      *         ptr += sizeof(DrawArraysIndirectCommand);
@@ -1500,7 +1500,7 @@ public class GL43 extends GL42 {
      * 
      * <pre><code>
      * const ubyte *ptr = (const ubyte *)indirect;
-     * for ( i = 0; i &lt; primcount; i++ ) {
+     * for ( i = 0; i &lt; drawcount; i++ ) {
      *     DrawArraysIndirect(mode, (DrawArraysIndirectCommand*)ptr);
      *     if ( stride == 0 )
      *         ptr += sizeof(DrawArraysIndirectCommand);
@@ -1544,7 +1544,7 @@ public class GL43 extends GL42 {
      * 
      * <pre><code>
      * const ubyte *ptr = (const ubyte *)indirect;
-     * for ( i = 0; i &lt; primcount; i++ ) {
+     * for ( i = 0; i &lt; drawcount; i++ ) {
      *     DrawElementsIndirect(mode, type, (DrawElementsIndirectCommand *)ptr);
      *     if ( stride == 0 )
      *         ptr += sizeof(DrawElementsIndirectCommand);
@@ -1582,7 +1582,7 @@ public class GL43 extends GL42 {
      * 
      * <pre><code>
      * const ubyte *ptr = (const ubyte *)indirect;
-     * for ( i = 0; i &lt; primcount; i++ ) {
+     * for ( i = 0; i &lt; drawcount; i++ ) {
      *     DrawElementsIndirect(mode, type, (DrawElementsIndirectCommand *)ptr);
      *     if ( stride == 0 )
      *         ptr += sizeof(DrawElementsIndirectCommand);
@@ -1620,7 +1620,7 @@ public class GL43 extends GL42 {
      * 
      * <pre><code>
      * const ubyte *ptr = (const ubyte *)indirect;
-     * for ( i = 0; i &lt; primcount; i++ ) {
+     * for ( i = 0; i &lt; drawcount; i++ ) {
      *     DrawElementsIndirect(mode, type, (DrawElementsIndirectCommand *)ptr);
      *     if ( stride == 0 )
      *         ptr += sizeof(DrawElementsIndirectCommand);
