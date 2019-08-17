@@ -111,13 +111,13 @@ extern "C" {
 #define TINYEXR_ERROR_INVALID_ARGUMENT (-3)
 #define TINYEXR_ERROR_INVALID_DATA (-4)
 #define TINYEXR_ERROR_INVALID_FILE (-5)
-#define TINYEXR_ERROR_INVALID_PARAMETER (-5)
-#define TINYEXR_ERROR_CANT_OPEN_FILE (-6)
-#define TINYEXR_ERROR_UNSUPPORTED_FORMAT (-7)
-#define TINYEXR_ERROR_INVALID_HEADER (-8)
-#define TINYEXR_ERROR_UNSUPPORTED_FEATURE (-9)
-#define TINYEXR_ERROR_CANT_WRITE_FILE (-10)
-#define TINYEXR_ERROR_SERIALZATION_FAILED (-11)
+#define TINYEXR_ERROR_INVALID_PARAMETER (-6)
+#define TINYEXR_ERROR_CANT_OPEN_FILE (-7)
+#define TINYEXR_ERROR_UNSUPPORTED_FORMAT (-8)
+#define TINYEXR_ERROR_INVALID_HEADER (-9)
+#define TINYEXR_ERROR_UNSUPPORTED_FEATURE (-10)
+#define TINYEXR_ERROR_CANT_WRITE_FILE (-11)
+#define TINYEXR_ERROR_SERIALZATION_FAILED (-12)
 
 // @note { OpenEXR file format: http://www.openexr.com/openexrfilelayout.pdf }
 
@@ -472,7 +472,7 @@ extern int LoadEXRFromMemory(float **out_rgba, int *width, int *height,
 #include <cstring>
 #include <sstream>
 
-// #include <iostream> // debug
+//#include <iostream> // debug
 
 #include <limits>
 #include <string>
@@ -7013,6 +7013,11 @@ static void swap2(unsigned short *val) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wunused-function"
 #endif
+
+#ifdef __GNUC__
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-function"
+#endif
 static void cpy4(int *dst_val, const int *src_val) {
   unsigned char *dst = reinterpret_cast<unsigned char *>(dst_val);
   const unsigned char *src = reinterpret_cast<const unsigned char *>(src_val);
@@ -7044,6 +7049,10 @@ static void cpy4(float *dst_val, const float *src_val) {
 }
 #ifdef __clang__
 #pragma clang diagnostic pop
+#endif
+
+#ifdef __GNUC__
+#pragma GCC diagnostic pop
 #endif
 
 static void swap4(unsigned int *val) {
@@ -8570,7 +8579,7 @@ static bool hufUnpackEncTable(
   int lc = 0;
 
   for (; im <= iM; im++) {
-    if (p - *pcode > ni) {
+    if (p - *pcode >= ni) {
       return false;
     }
 
@@ -10908,7 +10917,8 @@ static int DecodeChunk(EXRImage *exr_image, const EXRHeader *exr_header,
     // for #104.
     size_t total_data_len =
         size_t(data_width) * size_t(data_height) * size_t(num_channels);
-    if ((total_data_len == 0) || (total_data_len >= 0x4000000000)) {
+    const bool total_data_len_overflown = sizeof(void*) == 8 ? (total_data_len >= 0x4000000000) : false;
+    if ((total_data_len == 0) || total_data_len_overflown ) {
       if (err) {
         std::stringstream ss;
         ss << "Image data size is zero or too large: width = " << data_width
@@ -10947,6 +10957,11 @@ static int DecodeChunk(EXRImage *exr_image, const EXRHeader *exr_header,
         tinyexr::swap4(reinterpret_cast<unsigned int *>(&data_len));
 
         if (size_t(data_len) > data_size) {
+          invalid_data = true;
+
+        } else if ((line_no > (2 << 20)) || (line_no < -(2 << 20))) {
+          // Too large value. Assume this is invalid
+          // 2**20 = 1048576 = heuristic value.
           invalid_data = true;
         } else if (data_len == 0) {
           // TODO(syoyo): May be ok to raise the threshold for example `data_len

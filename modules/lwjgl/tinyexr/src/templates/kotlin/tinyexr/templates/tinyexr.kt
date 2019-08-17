@@ -28,13 +28,13 @@ ENABLE_WARNINGS()""")
         "ERROR_INVALID_ARGUMENT".."-3",
         "ERROR_INVALID_DATA".."-4",
         "ERROR_INVALID_FILE".."-5",
-        "ERROR_INVALID_PARAMETER".."-5",
-        "ERROR_CANT_OPEN_FILE".."-6",
-        "ERROR_UNSUPPORTED_FORMAT".."-7",
-        "ERROR_INVALID_HEADER".."-8",
-        "ERROR_UNSUPPORTED_FEATURE".."-9",
-        "ERROR_CANT_WRITE_FILE".."-10",
-        "ERROR_SERIALZATION_FAILED".."-11"
+        "ERROR_INVALID_PARAMETER".."-6",
+        "ERROR_CANT_OPEN_FILE".."-7",
+        "ERROR_UNSUPPORTED_FORMAT".."-8",
+        "ERROR_INVALID_HEADER".."-9",
+        "ERROR_UNSUPPORTED_FEATURE".."-10",
+        "ERROR_CANT_WRITE_FILE".."-11",
+        "ERROR_SERIALZATION_FAILED".."-12"
     )
 
     IntConstant(
