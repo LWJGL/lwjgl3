@@ -126,64 +126,6 @@ public class XXH32State extends Struct implements NativeResource {
     @NativeType("XXH32_hash_t")
     public int reserved() { return nreserved(address()); }
 
-    /** Sets the specified value to the {@code total_len_32} field. */
-    public XXH32State total_len_32(@NativeType("XXH32_hash_t") int value) { ntotal_len_32(address(), value); return this; }
-    /** Sets the specified value to the {@code large_len} field. */
-    public XXH32State large_len(@NativeType("XXH32_hash_t") int value) { nlarge_len(address(), value); return this; }
-    /** Sets the specified value to the {@code v1} field. */
-    public XXH32State v1(@NativeType("XXH32_hash_t") int value) { nv1(address(), value); return this; }
-    /** Sets the specified value to the {@code v2} field. */
-    public XXH32State v2(@NativeType("XXH32_hash_t") int value) { nv2(address(), value); return this; }
-    /** Sets the specified value to the {@code v3} field. */
-    public XXH32State v3(@NativeType("XXH32_hash_t") int value) { nv3(address(), value); return this; }
-    /** Sets the specified value to the {@code v4} field. */
-    public XXH32State v4(@NativeType("XXH32_hash_t") int value) { nv4(address(), value); return this; }
-    /** Copies the specified {@link IntBuffer} to the {@code mem32} field. */
-    public XXH32State mem32(@NativeType("XXH32_hash_t[4]") IntBuffer value) { nmem32(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@code mem32} field. */
-    public XXH32State mem32(int index, @NativeType("XXH32_hash_t") int value) { nmem32(address(), index, value); return this; }
-    /** Sets the specified value to the {@code memsize} field. */
-    public XXH32State memsize(@NativeType("XXH32_hash_t") int value) { nmemsize(address(), value); return this; }
-    /** Sets the specified value to the {@code reserved} field. */
-    public XXH32State reserved(@NativeType("XXH32_hash_t") int value) { nreserved(address(), value); return this; }
-
-    /** Initializes this struct with the specified values. */
-    public XXH32State set(
-        int total_len_32,
-        int large_len,
-        int v1,
-        int v2,
-        int v3,
-        int v4,
-        IntBuffer mem32,
-        int memsize,
-        int reserved
-    ) {
-        total_len_32(total_len_32);
-        large_len(large_len);
-        v1(v1);
-        v2(v2);
-        v3(v3);
-        v4(v4);
-        mem32(mem32);
-        memsize(memsize);
-        reserved(reserved);
-
-        return this;
-    }
-
-    /**
-     * Copies the specified struct data to this struct.
-     *
-     * @param src the source struct
-     *
-     * @return this struct
-     */
-    public XXH32State set(XXH32State src) {
-        memCopy(src.address(), address(), SIZEOF);
-        return this;
-    }
-
     // -----------------------------------
 
     /** Returns a new {@code XXH32State} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
@@ -350,32 +292,6 @@ public class XXH32State extends Struct implements NativeResource {
     /** Unsafe version of {@link #reserved}. */
     public static int nreserved(long struct) { return UNSAFE.getInt(null, struct + XXH32State.RESERVED); }
 
-    /** Unsafe version of {@link #total_len_32(int) total_len_32}. */
-    public static void ntotal_len_32(long struct, int value) { UNSAFE.putInt(null, struct + XXH32State.TOTAL_LEN_32, value); }
-    /** Unsafe version of {@link #large_len(int) large_len}. */
-    public static void nlarge_len(long struct, int value) { UNSAFE.putInt(null, struct + XXH32State.LARGE_LEN, value); }
-    /** Unsafe version of {@link #v1(int) v1}. */
-    public static void nv1(long struct, int value) { UNSAFE.putInt(null, struct + XXH32State.V1, value); }
-    /** Unsafe version of {@link #v2(int) v2}. */
-    public static void nv2(long struct, int value) { UNSAFE.putInt(null, struct + XXH32State.V2, value); }
-    /** Unsafe version of {@link #v3(int) v3}. */
-    public static void nv3(long struct, int value) { UNSAFE.putInt(null, struct + XXH32State.V3, value); }
-    /** Unsafe version of {@link #v4(int) v4}. */
-    public static void nv4(long struct, int value) { UNSAFE.putInt(null, struct + XXH32State.V4, value); }
-    /** Unsafe version of {@link #mem32(IntBuffer) mem32}. */
-    public static void nmem32(long struct, IntBuffer value) {
-        if (CHECKS) { checkGT(value, 4); }
-        memCopy(memAddress(value), struct + XXH32State.MEM32, value.remaining() * 4);
-    }
-    /** Unsafe version of {@link #mem32(int, int) mem32}. */
-    public static void nmem32(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + XXH32State.MEM32 + check(index, 4) * 4, value);
-    }
-    /** Unsafe version of {@link #memsize(int) memsize}. */
-    public static void nmemsize(long struct, int value) { UNSAFE.putInt(null, struct + XXH32State.MEMSIZE, value); }
-    /** Unsafe version of {@link #reserved(int) reserved}. */
-    public static void nreserved(long struct, int value) { UNSAFE.putInt(null, struct + XXH32State.RESERVED, value); }
-
     // -----------------------------------
 
     /** An array of {@link XXH32State} structs. */
@@ -444,27 +360,6 @@ public class XXH32State extends Struct implements NativeResource {
         /** Returns the value of the {@code reserved} field. */
         @NativeType("XXH32_hash_t")
         public int reserved() { return XXH32State.nreserved(address()); }
-
-        /** Sets the specified value to the {@code total_len_32} field. */
-        public XXH32State.Buffer total_len_32(@NativeType("XXH32_hash_t") int value) { XXH32State.ntotal_len_32(address(), value); return this; }
-        /** Sets the specified value to the {@code large_len} field. */
-        public XXH32State.Buffer large_len(@NativeType("XXH32_hash_t") int value) { XXH32State.nlarge_len(address(), value); return this; }
-        /** Sets the specified value to the {@code v1} field. */
-        public XXH32State.Buffer v1(@NativeType("XXH32_hash_t") int value) { XXH32State.nv1(address(), value); return this; }
-        /** Sets the specified value to the {@code v2} field. */
-        public XXH32State.Buffer v2(@NativeType("XXH32_hash_t") int value) { XXH32State.nv2(address(), value); return this; }
-        /** Sets the specified value to the {@code v3} field. */
-        public XXH32State.Buffer v3(@NativeType("XXH32_hash_t") int value) { XXH32State.nv3(address(), value); return this; }
-        /** Sets the specified value to the {@code v4} field. */
-        public XXH32State.Buffer v4(@NativeType("XXH32_hash_t") int value) { XXH32State.nv4(address(), value); return this; }
-        /** Copies the specified {@link IntBuffer} to the {@code mem32} field. */
-        public XXH32State.Buffer mem32(@NativeType("XXH32_hash_t[4]") IntBuffer value) { XXH32State.nmem32(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@code mem32} field. */
-        public XXH32State.Buffer mem32(int index, @NativeType("XXH32_hash_t") int value) { XXH32State.nmem32(address(), index, value); return this; }
-        /** Sets the specified value to the {@code memsize} field. */
-        public XXH32State.Buffer memsize(@NativeType("XXH32_hash_t") int value) { XXH32State.nmemsize(address(), value); return this; }
-        /** Sets the specified value to the {@code reserved} field. */
-        public XXH32State.Buffer reserved(@NativeType("XXH32_hash_t") int value) { XXH32State.nreserved(address(), value); return this; }
 
     }
 

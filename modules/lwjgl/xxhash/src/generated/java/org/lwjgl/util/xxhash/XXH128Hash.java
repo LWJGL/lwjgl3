@@ -16,12 +16,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code high64} &ndash; high64</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>

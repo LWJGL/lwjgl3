@@ -25,20 +25,21 @@ ENABLE_WARNINGS()""")
 
         <h3>XXH3</h3>
 
-        XXH3 is a new hash algorithm, featuring vastly improved speed performance for both small and large inputs.
-
-        In general, expect XXH3 to run about ~2x faster on large inputs, and &gt;3x faster on small ones, though exact difference depend on platform. The
-        algorithm is portable, will generate the same hash on all platforms. It benefits greatly from vectorization units, but does not require it.
+        XXH3 is a new hash algorithm, featuring improved speed performance for both small and large inputs. See full speed analysis at:
+        <a href="http://fastcompression.blogspot.com/2019/03/presenting-xxh3.html">Presenting XXH3</a>
+        
+        In general, expect XXH3 to run about ~2x faster on large inputs, and &gt;3x faster on small ones, though exact differences depend on platform.
+ 
+        The algorithm is portable, will generate the same hash on all platforms. It benefits greatly from vectorization units, but does not require it.
 
         XXH3 offers 2 variants, {@code _64bits} and {@code _128bits}. When only 64 bits are needed, prefer calling the {@code _64bits} variant: it reduces the
-        amount of mixing, resulting in faster speed on small inputs. It's also generally simpler to manipulate a scalar type than a struct. Note: the low
-        64-bit field of the {@code _128bits} variant is the same as {@code _64bits} result.
+        amount of mixing, resulting in faster speed on small inputs. It's also generally simpler to manipulate a scalar return type than a struct.
 
-        The XXH3 algorithm is still considered experimental. It's possible to use it for ephemeral data, but avoid storing long-term values for later re-use.
-        While labelled experimental, the produced result can still change between versions.
+        The XXH3 algorithm is still considered experimental. Produced results can still change between versions. For example, results produced by v0.7.1 are
+        not comparable with results from v0.7.0 . It's nonetheless possible to use XXH3 for ephemeral data (local sessions), but avoid storing values in
+        long-term storage for later re-use.
 
-        The API currently supports one-shot hashing only. The full version will include streaming capability, and canonical representation. Long term optional
-        feature may include custom secret keys, and secret key generation.
+        The API supports one-shot hashing, streaming mode, and custom secrets.
         """
 
     EnumConstant(
@@ -50,11 +51,16 @@ ENABLE_WARNINGS()""")
 
     IntConstant("The major version number.", "VERSION_MAJOR".."0")
     IntConstant("The minor version number.", "VERSION_MINOR".."7")
-    IntConstant("The release version number.", "VERSION_RELEASE".."0")
+    IntConstant("The release version number.", "VERSION_RELEASE".."1")
 
     IntConstant(
         "The version number",
         "VERSION_NUMBER".."(XXH_VERSION_MAJOR *100*100 + XXH_VERSION_MINOR *100 + XXH_VERSION_RELEASE)"
+    )
+
+    IntConstant(
+        "",
+        "3_SECRET_SIZE_MIN"..136
     )
 
     // 32-bits hash
@@ -232,30 +238,128 @@ ENABLE_WARNINGS()""")
         XXH64_canonical_t.const.p("src", "the source canonical representation")
     )
 
-    XXH128_hash_t(
-        "128",
-        "",
-
-        void.const.p("data", ""),
-        AutoSize("data")..size_t("len", ""),
-        unsigned_long_long("seed", "")
-    )
-
     XXH64_hash_t(
         "3_64bits",
-        "",
+        """
+        Default 64-bit variant, using default secret and default seed of 0.
+
+        It's the fastest variant.
+        """,
 
         void.const.p("data", ""),
         AutoSize("data")..size_t("len", "")
     )
 
     XXH64_hash_t(
+        "3_64bits_withSecret",
+        """
+        It's possible to provide any blob of bytes as a "secret" to generate the hash. This makes it more difficult for an external actor to prepare an
+        intentional collision.
+
+        The secret <b>must</b> be large enough (&ge; #3_SECRET_SIZE_MIN). It should consist of random bytes. Avoid repeating same character, or sequences of
+        bytes, and especially avoid swathes of {@code \0}. Failure to respect these conditions will result in a poor quality hash.
+        """,
+
+        void.const.p("data", ""),
+        AutoSize("data")..size_t("len", ""),
+        void.const.p("secret", ""),
+        AutoSize("secret")..size_t("secretSize", "")
+    )
+
+    XXH64_hash_t(
         "3_64bits_withSeed",
+        """
+        This variant generates on the fly a custom secret, based on the default secret, altered using the {@code seed} value.
+
+        While this operation is decently fast, note that it's not completely free. Note {@code seed==0} produces same results as #3_64bits().
+        """,
+
+        void.const.p("data", ""),
+        AutoSize("data")..size_t("len", ""),
+        XXH64_hash_t("seed", "")
+    )
+
+    XXH3_state_t.p(
+        "3_createState",
+        "",
+
+        void()
+    )
+
+    XXH_errorcode(
+        "3_freeState",
+        "",
+
+        XXH3_state_t.p("statePtr", "")
+    )
+
+    void(
+        "3_copyState",
+        "",
+
+        XXH3_state_t.p("dst_state", ""),
+        XXH3_state_t.const.p("srct_state", "")
+    )
+
+    XXH_errorcode(
+        "3_64bits_reset",
+        """
+        Initialize with default parameters.
+        
+        Result will be equivalent to #3_64bits().
+        """,
+
+        XXH3_state_t.p("statePtr", "")
+    )
+
+    XXH_errorcode(
+        "3_64bits_reset_withSeed",
+        """
+        Generate a custom secret from {@code seed}, and store it into {@code state}.
+        
+        Digest will be equivalent to #3_64bits_withSeed().
+        """,
+
+        XXH3_state_t.p("statePtr", ""),
+        XXH64_hash_t("seed", "")
+    )
+
+    XXH_errorcode(
+        "3_64bits_reset_withSecret",
+        """
+        {@code secret} is referenced, and must outlive the hash streaming session.
+        
+        {@code secretSize} must be &ge; #3_SECRET_SIZE_MIN.
+        """,
+
+        XXH3_state_t.p("statePtr", ""),
+        void.const.p("secret", ""),
+        AutoSize("secret")..size_t("secretSize", "")
+    )
+
+    XXH_errorcode(
+        "3_64bits_update",
+        "",
+
+        XXH3_state_t.p("statePtr", ""),
+        void.const.p("input", ""),
+        AutoSize("input")..size_t("length", "")
+    )
+
+    XXH64_hash_t(
+        "3_64bits_digest",
+        "",
+
+        XXH3_state_t.const.p("statePtr", "")
+    )
+
+    XXH128_hash_t(
+        "128",
         "",
 
         void.const.p("data", ""),
         AutoSize("data")..size_t("len", ""),
-        unsigned_long_long("seed", "")
+        XXH64_hash_t("seed", "")
     )
 
     XXH128_hash_t(
@@ -272,6 +376,87 @@ ENABLE_WARNINGS()""")
 
         void.const.p("data", ""),
         AutoSize("data")..size_t("len", ""),
-        unsigned_long_long("seed", "")
+        XXH64_hash_t("seed", "")
+    )
+
+    XXH128_hash_t(
+        "3_128bits_withSecret",
+        "",
+
+        void.const.p("data", ""),
+        AutoSize("data")..size_t("len", ""),
+        void.const.p("secret", ""),
+        AutoSize("secret")..size_t("secretSize", "")
+    )
+
+    XXH_errorcode(
+        "3_128bits_reset",
+        "",
+
+        XXH3_state_t.p("statePtr", "")
+    )
+
+    XXH_errorcode(
+        "3_128bits_reset_withSeed",
+        "",
+
+        XXH3_state_t.p("statePtr", ""),
+        XXH64_hash_t("seed", "")
+    )
+
+    XXH_errorcode(
+        "3_128bits_reset_withSecret",
+        "",
+
+        XXH3_state_t.p("statePtr", ""),
+        void.const.p("secret", ""),
+        AutoSize("secret")..size_t("secretSize", "")
+    )
+
+    XXH_errorcode(
+        "3_128bits_update",
+        "",
+
+        XXH3_state_t.p("statePtr", ""),
+        void.const.p("input", ""),
+        AutoSize("input")..size_t("length", "")
+    )
+
+    XXH128_hash_t(
+        "3_128bits_digest",
+        "",
+
+        XXH3_state_t.const.p("statePtr", "")
+    )
+
+    intb(
+        "128_isEqual",
+        "Returns 1 if equal, 0 if different.",
+
+        XXH128_hash_t("h1", ""),
+        XXH128_hash_t("h2", "")
+    )
+
+    int(
+        "128_cmp",
+        "This comparator is compatible with stdlib's {@code qsort()}.",
+
+        Check("XXH128Hash.SIZEOF")..void.const.p("h128_1", ""),
+        Check("XXH128Hash.SIZEOF")..void.const.p("h128_2", "")
+    )
+
+    void(
+        "128_canonicalFromHash",
+        "",
+
+        XXH128_canonical_t.p("dst", ""),
+        XXH128_hash_t("hash", "")
+    )
+
+    XXH128_hash_t(
+        "128_hashFromCanonical",
+        "",
+
+        XXH128_canonical_t.const.p("src", "")
     )
 }

@@ -106,7 +106,7 @@ public class HashingTest {
         long h64;
 
         int p = 0;
-        if (length >= 32) {
+        if (32 <= length) {
             long v1 = seed + PRIME64_1 + PRIME64_2;
             long v2 = seed + PRIME64_2;
             long v3 = seed + 0;
@@ -133,7 +133,7 @@ public class HashingTest {
             h64 = seed + PRIME64_5;
         }
 
-        return XXH64_finalize(h64 + length, input, length);
+        return XXH64_finalize(h64 + length, input + p, length);
     }
 
     private static long XXH64_round(long acc, long input) {
@@ -272,12 +272,12 @@ public class HashingTest {
     }
 
     private static long PROCESS1_64(long p, long h64) {
-        h64 ^= memGetByte(p) * PRIME64_5;
+        h64 ^= (memGetByte(p) & 0xFFL) * PRIME64_5;
         return Long.rotateLeft(h64, 11) * PRIME64_1;
     }
 
     private static long PROCESS4_64(long p, long h64) {
-        h64 ^= (memGetInt(p) & 0xFFFF_FFFFL) * PRIME64_1;
+        h64 ^= Integer.toUnsignedLong(memGetInt(p)) * PRIME64_1;
         return Long.rotateLeft(h64, 23) * PRIME64_2 + PRIME64_3;
     }
 

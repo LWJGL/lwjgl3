@@ -122,62 +122,6 @@ public class XXH64State extends Struct implements NativeResource {
     @NativeType("XXH32_hash_t")
     public int reserved(int index) { return nreserved(address(), index); }
 
-    /** Sets the specified value to the {@code total_len} field. */
-    public XXH64State total_len(@NativeType("XXH32_hash_t") long value) { ntotal_len(address(), value); return this; }
-    /** Sets the specified value to the {@code v1} field. */
-    public XXH64State v1(@NativeType("XXH32_hash_t") long value) { nv1(address(), value); return this; }
-    /** Sets the specified value to the {@code v2} field. */
-    public XXH64State v2(@NativeType("XXH32_hash_t") long value) { nv2(address(), value); return this; }
-    /** Sets the specified value to the {@code v3} field. */
-    public XXH64State v3(@NativeType("XXH32_hash_t") long value) { nv3(address(), value); return this; }
-    /** Sets the specified value to the {@code v4} field. */
-    public XXH64State v4(@NativeType("XXH32_hash_t") long value) { nv4(address(), value); return this; }
-    /** Copies the specified {@link LongBuffer} to the {@code mem64} field. */
-    public XXH64State mem64(@NativeType("XXH32_hash_t[4]") LongBuffer value) { nmem64(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@code mem64} field. */
-    public XXH64State mem64(int index, @NativeType("XXH32_hash_t") long value) { nmem64(address(), index, value); return this; }
-    /** Sets the specified value to the {@code memsize} field. */
-    public XXH64State memsize(@NativeType("XXH32_hash_t") int value) { nmemsize(address(), value); return this; }
-    /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */
-    public XXH64State reserved(@NativeType("XXH32_hash_t[2]") IntBuffer value) { nreserved(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@code reserved} field. */
-    public XXH64State reserved(int index, @NativeType("XXH32_hash_t") int value) { nreserved(address(), index, value); return this; }
-
-    /** Initializes this struct with the specified values. */
-    public XXH64State set(
-        long total_len,
-        long v1,
-        long v2,
-        long v3,
-        long v4,
-        LongBuffer mem64,
-        int memsize,
-        IntBuffer reserved
-    ) {
-        total_len(total_len);
-        v1(v1);
-        v2(v2);
-        v3(v3);
-        v4(v4);
-        mem64(mem64);
-        memsize(memsize);
-        reserved(reserved);
-
-        return this;
-    }
-
-    /**
-     * Copies the specified struct data to this struct.
-     *
-     * @param src the source struct
-     *
-     * @return this struct
-     */
-    public XXH64State set(XXH64State src) {
-        memCopy(src.address(), address(), SIZEOF);
-        return this;
-    }
-
     // -----------------------------------
 
     /** Returns a new {@code XXH64State} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
@@ -346,37 +290,6 @@ public class XXH64State extends Struct implements NativeResource {
         return UNSAFE.getInt(null, struct + XXH64State.RESERVED + check(index, 2) * 4);
     }
 
-    /** Unsafe version of {@link #total_len(long) total_len}. */
-    public static void ntotal_len(long struct, long value) { UNSAFE.putLong(null, struct + XXH64State.TOTAL_LEN, value); }
-    /** Unsafe version of {@link #v1(long) v1}. */
-    public static void nv1(long struct, long value) { UNSAFE.putLong(null, struct + XXH64State.V1, value); }
-    /** Unsafe version of {@link #v2(long) v2}. */
-    public static void nv2(long struct, long value) { UNSAFE.putLong(null, struct + XXH64State.V2, value); }
-    /** Unsafe version of {@link #v3(long) v3}. */
-    public static void nv3(long struct, long value) { UNSAFE.putLong(null, struct + XXH64State.V3, value); }
-    /** Unsafe version of {@link #v4(long) v4}. */
-    public static void nv4(long struct, long value) { UNSAFE.putLong(null, struct + XXH64State.V4, value); }
-    /** Unsafe version of {@link #mem64(LongBuffer) mem64}. */
-    public static void nmem64(long struct, LongBuffer value) {
-        if (CHECKS) { checkGT(value, 4); }
-        memCopy(memAddress(value), struct + XXH64State.MEM64, value.remaining() * 8);
-    }
-    /** Unsafe version of {@link #mem64(int, long) mem64}. */
-    public static void nmem64(long struct, int index, long value) {
-        UNSAFE.putLong(null, struct + XXH64State.MEM64 + check(index, 4) * 8, value);
-    }
-    /** Unsafe version of {@link #memsize(int) memsize}. */
-    public static void nmemsize(long struct, int value) { UNSAFE.putInt(null, struct + XXH64State.MEMSIZE, value); }
-    /** Unsafe version of {@link #reserved(IntBuffer) reserved}. */
-    public static void nreserved(long struct, IntBuffer value) {
-        if (CHECKS) { checkGT(value, 2); }
-        memCopy(memAddress(value), struct + XXH64State.RESERVED, value.remaining() * 4);
-    }
-    /** Unsafe version of {@link #reserved(int, int) reserved}. */
-    public static void nreserved(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + XXH64State.RESERVED + check(index, 2) * 4, value);
-    }
-
     // -----------------------------------
 
     /** An array of {@link XXH64State} structs. */
@@ -445,27 +358,6 @@ public class XXH64State extends Struct implements NativeResource {
         /** Returns the value at the specified index of the {@code reserved} field. */
         @NativeType("XXH32_hash_t")
         public int reserved(int index) { return XXH64State.nreserved(address(), index); }
-
-        /** Sets the specified value to the {@code total_len} field. */
-        public XXH64State.Buffer total_len(@NativeType("XXH32_hash_t") long value) { XXH64State.ntotal_len(address(), value); return this; }
-        /** Sets the specified value to the {@code v1} field. */
-        public XXH64State.Buffer v1(@NativeType("XXH32_hash_t") long value) { XXH64State.nv1(address(), value); return this; }
-        /** Sets the specified value to the {@code v2} field. */
-        public XXH64State.Buffer v2(@NativeType("XXH32_hash_t") long value) { XXH64State.nv2(address(), value); return this; }
-        /** Sets the specified value to the {@code v3} field. */
-        public XXH64State.Buffer v3(@NativeType("XXH32_hash_t") long value) { XXH64State.nv3(address(), value); return this; }
-        /** Sets the specified value to the {@code v4} field. */
-        public XXH64State.Buffer v4(@NativeType("XXH32_hash_t") long value) { XXH64State.nv4(address(), value); return this; }
-        /** Copies the specified {@link LongBuffer} to the {@code mem64} field. */
-        public XXH64State.Buffer mem64(@NativeType("XXH32_hash_t[4]") LongBuffer value) { XXH64State.nmem64(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@code mem64} field. */
-        public XXH64State.Buffer mem64(int index, @NativeType("XXH32_hash_t") long value) { XXH64State.nmem64(address(), index, value); return this; }
-        /** Sets the specified value to the {@code memsize} field. */
-        public XXH64State.Buffer memsize(@NativeType("XXH32_hash_t") int value) { XXH64State.nmemsize(address(), value); return this; }
-        /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */
-        public XXH64State.Buffer reserved(@NativeType("XXH32_hash_t[2]") IntBuffer value) { XXH64State.nreserved(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@code reserved} field. */
-        public XXH64State.Buffer reserved(int index, @NativeType("XXH32_hash_t") int value) { XXH64State.nreserved(address(), index, value); return this; }
 
     }
 

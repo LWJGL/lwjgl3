@@ -11,6 +11,7 @@ import java.nio.*;
 
 import org.lwjgl.system.*;
 
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -22,20 +23,21 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>XXH3</h3>
  * 
- * <p>XXH3 is a new hash algorithm, featuring vastly improved speed performance for both small and large inputs.</p>
+ * <p>XXH3 is a new hash algorithm, featuring improved speed performance for both small and large inputs. See full speed analysis at:
+ * <a href="http://fastcompression.blogspot.com/2019/03/presenting-xxh3.html">Presenting XXH3</a></p>
  * 
- * <p>In general, expect XXH3 to run about ~2x faster on large inputs, and &gt;3x faster on small ones, though exact difference depend on platform. The
- * algorithm is portable, will generate the same hash on all platforms. It benefits greatly from vectorization units, but does not require it.</p>
+ * <p>In general, expect XXH3 to run about ~2x faster on large inputs, and &gt;3x faster on small ones, though exact differences depend on platform.</p>
+ * 
+ * <p>The algorithm is portable, will generate the same hash on all platforms. It benefits greatly from vectorization units, but does not require it.</p>
  * 
  * <p>XXH3 offers 2 variants, {@code _64bits} and {@code _128bits}. When only 64 bits are needed, prefer calling the {@code _64bits} variant: it reduces the
- * amount of mixing, resulting in faster speed on small inputs. It's also generally simpler to manipulate a scalar type than a struct. Note: the low
- * 64-bit field of the {@code _128bits} variant is the same as {@code _64bits} result.</p>
+ * amount of mixing, resulting in faster speed on small inputs. It's also generally simpler to manipulate a scalar return type than a struct.</p>
  * 
- * <p>The XXH3 algorithm is still considered experimental. It's possible to use it for ephemeral data, but avoid storing long-term values for later re-use.
- * While labelled experimental, the produced result can still change between versions.</p>
+ * <p>The XXH3 algorithm is still considered experimental. Produced results can still change between versions. For example, results produced by v0.7.1 are
+ * not comparable with results from v0.7.0 . It's nonetheless possible to use XXH3 for ephemeral data (local sessions), but avoid storing values in
+ * long-term storage for later re-use.</p>
  * 
- * <p>The API currently supports one-shot hashing only. The full version will include streaming capability, and canonical representation. Long term optional
- * feature may include custom secret keys, and secret key generation.</p>
+ * <p>The API supports one-shot hashing, streaming mode, and custom secrets.</p>
  */
 public class XXHash {
 
@@ -60,10 +62,12 @@ public class XXHash {
     public static final int XXH_VERSION_MINOR = 7;
 
     /** The release version number. */
-    public static final int XXH_VERSION_RELEASE = 0;
+    public static final int XXH_VERSION_RELEASE = 1;
 
     /** The version number */
     public static final int XXH_VERSION_NUMBER = (XXH_VERSION_MAJOR *100*100 + XXH_VERSION_MINOR *100 + XXH_VERSION_RELEASE);
+
+    public static final int XXH_3_SECRET_SIZE_MIN = 0x88;
 
     static { LibXXHash.initialize(); }
 
@@ -369,32 +373,152 @@ public class XXHash {
         return nXXH64_hashFromCanonical(src.address());
     }
 
-    // --- [ XXH128 ] ---
-
-    public static native void nXXH128(long data, long len, long seed, long __result);
-
-    @NativeType("XXH128_hash_t")
-    public static XXH128Hash XXH128(@NativeType("void const *") ByteBuffer data, @NativeType("unsigned long long") long seed, @NativeType("XXH128_hash_t") XXH128Hash __result) {
-        nXXH128(memAddress(data), data.remaining(), seed, __result.address());
-        return __result;
-    }
-
     // --- [ XXH3_64bits ] ---
 
+    /** Unsafe version of: {@link #XXH3_64bits 3_64bits} */
     public static native long nXXH3_64bits(long data, long len);
 
+    /**
+     * Default 64-bit variant, using default secret and default seed of 0.
+     * 
+     * <p>It's the fastest variant.</p>
+     */
     @NativeType("XXH32_hash_t")
     public static long XXH3_64bits(@NativeType("void const *") ByteBuffer data) {
         return nXXH3_64bits(memAddress(data), data.remaining());
     }
 
+    // --- [ XXH3_64bits_withSecret ] ---
+
+    /** Unsafe version of: {@link #XXH3_64bits_withSecret 3_64bits_withSecret} */
+    public static native long nXXH3_64bits_withSecret(long data, long len, long secret, long secretSize);
+
+    /**
+     * It's possible to provide any blob of bytes as a "secret" to generate the hash. This makes it more difficult for an external actor to prepare an
+     * intentional collision.
+     * 
+     * <p>The secret <b>must</b> be large enough (&ge; {@link #XXH_3_SECRET_SIZE_MIN 3_SECRET_SIZE_MIN}). It should consist of random bytes. Avoid repeating same character, or sequences of
+     * bytes, and especially avoid swathes of {@code \0}. Failure to respect these conditions will result in a poor quality hash.</p>
+     */
+    @NativeType("XXH32_hash_t")
+    public static long XXH3_64bits_withSecret(@NativeType("void const *") ByteBuffer data, @NativeType("void const *") ByteBuffer secret) {
+        return nXXH3_64bits_withSecret(memAddress(data), data.remaining(), memAddress(secret), secret.remaining());
+    }
+
     // --- [ XXH3_64bits_withSeed ] ---
 
+    /** Unsafe version of: {@link #XXH3_64bits_withSeed 3_64bits_withSeed} */
     public static native long nXXH3_64bits_withSeed(long data, long len, long seed);
 
+    /**
+     * This variant generates on the fly a custom secret, based on the default secret, altered using the {@code seed} value.
+     * 
+     * <p>While this operation is decently fast, note that it's not completely free. Note {@code seed==0} produces same results as {@link #XXH3_64bits 3_64bits}.</p>
+     */
     @NativeType("XXH32_hash_t")
-    public static long XXH3_64bits_withSeed(@NativeType("void const *") ByteBuffer data, @NativeType("unsigned long long") long seed) {
+    public static long XXH3_64bits_withSeed(@NativeType("void const *") ByteBuffer data, @NativeType("XXH32_hash_t") long seed) {
         return nXXH3_64bits_withSeed(memAddress(data), data.remaining(), seed);
+    }
+
+    // --- [ XXH3_createState ] ---
+
+    public static native long nXXH3_createState();
+
+    @Nullable
+    @NativeType("XXH3_state_t *")
+    public static XXH3State XXH3_createState() {
+        long __result = nXXH3_createState();
+        return XXH3State.createSafe(__result);
+    }
+
+    // --- [ XXH3_freeState ] ---
+
+    public static native int nXXH3_freeState(long statePtr);
+
+    @NativeType("XXH_errorcode")
+    public static int XXH3_freeState(@NativeType("XXH3_state_t *") XXH3State statePtr) {
+        return nXXH3_freeState(statePtr.address());
+    }
+
+    // --- [ XXH3_copyState ] ---
+
+    public static native void nXXH3_copyState(long dst_state, long srct_state);
+
+    public static void XXH3_copyState(@NativeType("XXH3_state_t *") XXH3State dst_state, @NativeType("XXH3_state_t const *") XXH3State srct_state) {
+        nXXH3_copyState(dst_state.address(), srct_state.address());
+    }
+
+    // --- [ XXH3_64bits_reset ] ---
+
+    /** Unsafe version of: {@link #XXH3_64bits_reset 3_64bits_reset} */
+    public static native int nXXH3_64bits_reset(long statePtr);
+
+    /**
+     * Initialize with default parameters.
+     * 
+     * <p>Result will be equivalent to {@link #XXH3_64bits 3_64bits}.</p>
+     */
+    @NativeType("XXH_errorcode")
+    public static int XXH3_64bits_reset(@NativeType("XXH3_state_t *") XXH3State statePtr) {
+        return nXXH3_64bits_reset(statePtr.address());
+    }
+
+    // --- [ XXH3_64bits_reset_withSeed ] ---
+
+    /** Unsafe version of: {@link #XXH3_64bits_reset_withSeed 3_64bits_reset_withSeed} */
+    public static native int nXXH3_64bits_reset_withSeed(long statePtr, long seed);
+
+    /**
+     * Generate a custom secret from {@code seed}, and store it into {@code state}.
+     * 
+     * <p>Digest will be equivalent to {@link #XXH3_64bits_withSeed 3_64bits_withSeed}.</p>
+     */
+    @NativeType("XXH_errorcode")
+    public static int XXH3_64bits_reset_withSeed(@NativeType("XXH3_state_t *") XXH3State statePtr, @NativeType("XXH32_hash_t") long seed) {
+        return nXXH3_64bits_reset_withSeed(statePtr.address(), seed);
+    }
+
+    // --- [ XXH3_64bits_reset_withSecret ] ---
+
+    /** Unsafe version of: {@link #XXH3_64bits_reset_withSecret 3_64bits_reset_withSecret} */
+    public static native int nXXH3_64bits_reset_withSecret(long statePtr, long secret, long secretSize);
+
+    /**
+     * {@code secret} is referenced, and must outlive the hash streaming session.
+     * 
+     * <p>{@code secretSize} must be &ge; {@link #XXH_3_SECRET_SIZE_MIN 3_SECRET_SIZE_MIN}.</p>
+     */
+    @NativeType("XXH_errorcode")
+    public static int XXH3_64bits_reset_withSecret(@NativeType("XXH3_state_t *") XXH3State statePtr, @NativeType("void const *") ByteBuffer secret) {
+        return nXXH3_64bits_reset_withSecret(statePtr.address(), memAddress(secret), secret.remaining());
+    }
+
+    // --- [ XXH3_64bits_update ] ---
+
+    public static native int nXXH3_64bits_update(long statePtr, long input, long length);
+
+    @NativeType("XXH_errorcode")
+    public static int XXH3_64bits_update(@NativeType("XXH3_state_t *") XXH3State statePtr, @NativeType("void const *") ByteBuffer input) {
+        return nXXH3_64bits_update(statePtr.address(), memAddress(input), input.remaining());
+    }
+
+    // --- [ XXH3_64bits_digest ] ---
+
+    public static native long nXXH3_64bits_digest(long statePtr);
+
+    @NativeType("XXH32_hash_t")
+    public static long XXH3_64bits_digest(@NativeType("XXH3_state_t const *") XXH3State statePtr) {
+        return nXXH3_64bits_digest(statePtr.address());
+    }
+
+    // --- [ XXH128 ] ---
+
+    public static native void nXXH128(long data, long len, long seed, long __result);
+
+    @NativeType("XXH128_hash_t")
+    public static XXH128Hash XXH128(@NativeType("void const *") ByteBuffer data, @NativeType("XXH32_hash_t") long seed, @NativeType("XXH128_hash_t") XXH128Hash __result) {
+        nXXH128(memAddress(data), data.remaining(), seed, __result.address());
+        return __result;
     }
 
     // --- [ XXH3_128bits ] ---
@@ -412,8 +536,107 @@ public class XXHash {
     public static native void nXXH3_128bits_withSeed(long data, long len, long seed, long __result);
 
     @NativeType("XXH128_hash_t")
-    public static XXH128Hash XXH3_128bits_withSeed(@NativeType("void const *") ByteBuffer data, @NativeType("unsigned long long") long seed, @NativeType("XXH128_hash_t") XXH128Hash __result) {
+    public static XXH128Hash XXH3_128bits_withSeed(@NativeType("void const *") ByteBuffer data, @NativeType("XXH32_hash_t") long seed, @NativeType("XXH128_hash_t") XXH128Hash __result) {
         nXXH3_128bits_withSeed(memAddress(data), data.remaining(), seed, __result.address());
+        return __result;
+    }
+
+    // --- [ XXH3_128bits_withSecret ] ---
+
+    public static native void nXXH3_128bits_withSecret(long data, long len, long secret, long secretSize, long __result);
+
+    @NativeType("XXH128_hash_t")
+    public static XXH128Hash XXH3_128bits_withSecret(@NativeType("void const *") ByteBuffer data, @NativeType("void const *") ByteBuffer secret, @NativeType("XXH128_hash_t") XXH128Hash __result) {
+        nXXH3_128bits_withSecret(memAddress(data), data.remaining(), memAddress(secret), secret.remaining(), __result.address());
+        return __result;
+    }
+
+    // --- [ XXH3_128bits_reset ] ---
+
+    public static native int nXXH3_128bits_reset(long statePtr);
+
+    @NativeType("XXH_errorcode")
+    public static int XXH3_128bits_reset(@NativeType("XXH3_state_t *") XXH3State statePtr) {
+        return nXXH3_128bits_reset(statePtr.address());
+    }
+
+    // --- [ XXH3_128bits_reset_withSeed ] ---
+
+    public static native int nXXH3_128bits_reset_withSeed(long statePtr, long seed);
+
+    @NativeType("XXH_errorcode")
+    public static int XXH3_128bits_reset_withSeed(@NativeType("XXH3_state_t *") XXH3State statePtr, @NativeType("XXH32_hash_t") long seed) {
+        return nXXH3_128bits_reset_withSeed(statePtr.address(), seed);
+    }
+
+    // --- [ XXH3_128bits_reset_withSecret ] ---
+
+    public static native int nXXH3_128bits_reset_withSecret(long statePtr, long secret, long secretSize);
+
+    @NativeType("XXH_errorcode")
+    public static int XXH3_128bits_reset_withSecret(@NativeType("XXH3_state_t *") XXH3State statePtr, @NativeType("void const *") ByteBuffer secret) {
+        return nXXH3_128bits_reset_withSecret(statePtr.address(), memAddress(secret), secret.remaining());
+    }
+
+    // --- [ XXH3_128bits_update ] ---
+
+    public static native int nXXH3_128bits_update(long statePtr, long input, long length);
+
+    @NativeType("XXH_errorcode")
+    public static int XXH3_128bits_update(@NativeType("XXH3_state_t *") XXH3State statePtr, @NativeType("void const *") ByteBuffer input) {
+        return nXXH3_128bits_update(statePtr.address(), memAddress(input), input.remaining());
+    }
+
+    // --- [ XXH3_128bits_digest ] ---
+
+    public static native void nXXH3_128bits_digest(long statePtr, long __result);
+
+    @NativeType("XXH128_hash_t")
+    public static XXH128Hash XXH3_128bits_digest(@NativeType("XXH3_state_t const *") XXH3State statePtr, @NativeType("XXH128_hash_t") XXH128Hash __result) {
+        nXXH3_128bits_digest(statePtr.address(), __result.address());
+        return __result;
+    }
+
+    // --- [ XXH128_isEqual ] ---
+
+    /** Unsafe version of: {@link #XXH128_isEqual 128_isEqual} */
+    public static native int nXXH128_isEqual(long h1, long h2);
+
+    /** Returns 1 if equal, 0 if different. */
+    @NativeType("int")
+    public static boolean XXH128_isEqual(@NativeType("XXH128_hash_t") XXH128Hash h1, @NativeType("XXH128_hash_t") XXH128Hash h2) {
+        return nXXH128_isEqual(h1.address(), h2.address()) != 0;
+    }
+
+    // --- [ XXH128_cmp ] ---
+
+    /** Unsafe version of: {@link #XXH128_cmp 128_cmp} */
+    public static native int nXXH128_cmp(long h128_1, long h128_2);
+
+    /** This comparator is compatible with stdlib's {@code qsort()}. */
+    public static int XXH128_cmp(@NativeType("void const *") ByteBuffer h128_1, @NativeType("void const *") ByteBuffer h128_2) {
+        if (CHECKS) {
+            check(h128_1, XXH128Hash.SIZEOF);
+            check(h128_2, XXH128Hash.SIZEOF);
+        }
+        return nXXH128_cmp(memAddress(h128_1), memAddress(h128_2));
+    }
+
+    // --- [ XXH128_canonicalFromHash ] ---
+
+    public static native void nXXH128_canonicalFromHash(long dst, long hash);
+
+    public static void XXH128_canonicalFromHash(@NativeType("XXH128_canonical_t *") XXH128Canonical dst, @NativeType("XXH128_hash_t") XXH128Hash hash) {
+        nXXH128_canonicalFromHash(dst.address(), hash.address());
+    }
+
+    // --- [ XXH128_hashFromCanonical ] ---
+
+    public static native void nXXH128_hashFromCanonical(long src, long __result);
+
+    @NativeType("XXH128_hash_t")
+    public static XXH128Hash XXH128_hashFromCanonical(@NativeType("XXH128_canonical_t const *") XXH128Canonical src, @NativeType("XXH128_hash_t") XXH128Hash __result) {
+        nXXH128_hashFromCanonical(src.address(), __result.address());
         return __result;
     }
 
