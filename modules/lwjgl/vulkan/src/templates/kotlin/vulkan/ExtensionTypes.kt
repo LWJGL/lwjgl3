@@ -66,6 +66,7 @@ val VkBuildAccelerationStructureFlagBitsNV = "VkBuildAccelerationStructureFlagBi
 val VkCopyAccelerationStructureModeNV = "VkCopyAccelerationStructureModeNV".enumType
 val VkAccelerationStructureMemoryRequirementsTypeNV = "VkAccelerationStructureMemoryRequirementsTypeNV".enumType
 val VkQueueGlobalPriorityEXT = "VkQueueGlobalPriorityEXT".enumType
+val VkPipelineCompilerControlFlagBitsAMD = "VkPipelineCompilerControlFlagBitsAMD".enumType
 val VkTimeDomainEXT = "VkTimeDomainEXT".enumType
 val VkMemoryOverallocationBehaviorAMD = "VkMemoryOverallocationBehaviorAMD".enumType
 val VkPipelineCreationFeedbackFlagBitsEXT = "VkPipelineCreationFeedbackFlagBitsEXT".enumType
@@ -77,6 +78,7 @@ val VkQueryPoolSamplingModeINTEL = "VkQueryPoolSamplingModeINTEL".enumType
 val VkPerformanceOverrideTypeINTEL = "VkPerformanceOverrideTypeINTEL".enumType
 val VkPerformanceParameterTypeINTEL = "VkPerformanceParameterTypeINTEL".enumType
 val VkPerformanceValueTypeINTEL = "VkPerformanceValueTypeINTEL".enumType
+val VkShaderCorePropertiesFlagBitsAMD = "VkShaderCorePropertiesFlagBitsAMD".enumType
 val VkValidationFeatureEnableEXT = "VkValidationFeatureEnableEXT".enumType
 val VkValidationFeatureDisableEXT = "VkValidationFeatureDisableEXT".enumType
 val VkComponentTypeNV = "VkComponentTypeNV".enumType
@@ -84,6 +86,7 @@ val VkScopeNV = "VkScopeNV".enumType
 val VkCoverageReductionModeNV = "VkCoverageReductionModeNV".enumType
 val VkFullScreenExclusiveEXT = "VkFullScreenExclusiveEXT".enumType
 val VkLineRasterizationModeEXT = "VkLineRasterizationModeEXT".enumType
+val VkPipelineExecutableStatisticFormatKHR = "VkPipelineExecutableStatisticFormatKHR".enumType
 
 // Bitmask types
 val VkSurfaceTransformFlagsKHR = typedef(VkFlags, "VkSurfaceTransformFlagsKHR")
@@ -132,8 +135,10 @@ val VkDescriptorBindingFlagsEXT = typedef(VkFlags, "VkDescriptorBindingFlagsEXT"
 val VkGeometryFlagsNV = typedef(VkFlags, "VkGeometryFlagsNV")
 val VkGeometryInstanceFlagsNV = typedef(VkFlags, "VkGeometryInstanceFlagsNV")
 val VkBuildAccelerationStructureFlagsNV = typedef(VkFlags, "VkBuildAccelerationStructureFlagsNV")
+val VkPipelineCompilerControlFlagsAMD = typedef(VkFlags, "VkPipelineCompilerControlFlagsAMD")
 val VkPipelineCreationFeedbackFlagsEXT = typedef(VkFlags, "VkPipelineCreationFeedbackFlagsEXT")
 val VkResolveModeFlagsKHR = typedef(VkFlags, "VkResolveModeFlagsKHR")
+val VkShaderCorePropertiesFlagsAMD = typedef(VkFlags, "VkShaderCorePropertiesFlagsAMD")
 val VkPipelineCoverageReductionStateCreateFlagsNV = typedef(VkFlags, "VkPipelineCoverageReductionStateCreateFlagsNV")
 val VkHeadlessSurfaceCreateFlagsEXT = typedef(VkFlags, "VkHeadlessSurfaceCreateFlagsEXT")
 
@@ -3698,15 +3703,12 @@ val VkSubpassDependency2KHR = struct(Module.VULKAN, "VkSubpassDependency2KHR") {
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If {@code srcSubpass} is not #SUBPASS_EXTERNAL, {@code srcStageMask} <b>must</b> not include #PIPELINE_STAGE_HOST_BIT</li>
-            <li>If {@code dstSubpass} is not #SUBPASS_EXTERNAL, {@code dstStageMask} <b>must</b> not include #PIPELINE_STAGE_HOST_BIT</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#features-geometryShader">geometry shaders</a> feature is not enabled, {@code srcStageMask} <b>must</b> not contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#features-geometryShader">geometry shaders</a> feature is not enabled, {@code dstStageMask} <b>must</b> not contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#features-tessellationShader">tessellation shaders</a> feature is not enabled, {@code srcStageMask} <b>must</b> not contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or #PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#features-tessellationShader">tessellation shaders</a> feature is not enabled, {@code dstStageMask} <b>must</b> not contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or #PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</li>
             <li>{@code srcSubpass} <b>must</b> be less than or equal to {@code dstSubpass}, unless one of them is #SUBPASS_EXTERNAL, to avoid cyclic dependencies and ensure a valid execution order</li>
             <li>{@code srcSubpass} and {@code dstSubpass} <b>must</b> not both be equal to #SUBPASS_EXTERNAL</li>
-            <li>If {@code srcSubpass} is equal to {@code dstSubpass}, {@code srcStageMask} and {@code dstStageMask} <b>must</b> not set any bits that are neither #PIPELINE_STAGE_ALL_GRAPHICS_BIT, nor one of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#synchronization-pipeline-stages-types">graphics pipeline stages</a></li>
             <li>If {@code srcSubpass} is equal to {@code dstSubpass} and not all of the stages in {@code srcStageMask} and {@code dstStageMask} are <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#synchronization-framebuffer-regions">framebuffer-space stages</a>, the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#synchronization-pipeline-stages-order">logically latest</a> pipeline stage in {@code srcStageMask} <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#synchronization-pipeline-stages-order">logically earlier</a> than or equal to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#synchronization-pipeline-stages-order">logically earliest</a> pipeline stage in {@code dstStageMask}</li>
             <li>Any access flag included in {@code srcAccessMask} <b>must</b> be supported by one of the pipeline stages in {@code srcStageMask}, as specified in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#synchronization-access-types-supported">table of supported access types</a></li>
             <li>Any access flag included in {@code dstAccessMask} <b>must</b> be supported by one of the pipeline stages in {@code dstStageMask}, as specified in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#synchronization-access-types-supported">table of supported access types</a></li>
@@ -6091,6 +6093,7 @@ val VkAccelerationStructureInfoNV = struct(Module.VULKAN, "VkAccelerationStructu
             <li>The total number of triangles in all geometries <b>must</b> be less than or equal to ##VkPhysicalDeviceRayTracingPropertiesNV{@code ::maxTriangleCount}</li>
             <li>If {@code type} is #ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV then {@code geometryCount} <b>must</b> be 0</li>
             <li>If {@code type} is #ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV then {@code instanceCount} <b>must</b> be 0</li>
+            <li>If {@code type} is #ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV then the {@code geometryType} member of each geometry in {@code pGeometries} <b>must</b> be the same</li>
             <li>If {@code flags} has the #BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_NV bit set, then it <b>must</b> not have the #BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_NV bit set</li>
             <li>{@code scratch} <b>must</b> have been created with #BUFFER_USAGE_RAY_TRACING_BIT_NV usage flag</li>
             <li>If {@code instanceData} is not #NULL_HANDLE, {@code instanceData} <b>must</b> have been created with #BUFFER_USAGE_RAY_TRACING_BIT_NV usage flag</li>
@@ -6483,6 +6486,23 @@ val VkPhysicalDeviceShaderAtomicInt64FeaturesKHR = struct(Module.VULKAN, "VkPhys
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkBool32("shaderBufferInt64Atomics", "indicates whether shaders <b>can</b> support 64-bit unsigned and signed integer atomic operations on buffers.")
     VkBool32("shaderSharedInt64Atomics", "indicates whether shaders <b>can</b> support 64-bit unsigned and signed integer atomic operations on shared memory.")
+}
+
+val VkPipelineCompilerControlCreateInfoAMD = struct(Module.VULKAN, "VkPipelineCompilerControlCreateInfoAMD") {
+    documentation =
+        """
+        Structure used to pass compilation control flags to a pipeline.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD</li>
+            <li>{@code compilerControlFlags} <b>must</b> be a valid combination of {@code VkPipelineCompilerControlFlagBitsAMD} values</li>
+        </ul>
+        """
+
+    VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkPipelineCompilerControlFlagsAMD("compilerControlFlags", "a bitmask of {@code VkPipelineCompilerControlFlagBitsAMD} affecting how the pipeline will be compiled.")
 }
 
 val VkCalibratedTimestampInfoEXT = struct(Module.VULKAN, "VkCalibratedTimestampInfoEXT") {
@@ -7424,6 +7444,30 @@ val VkPhysicalDeviceScalarBlockLayoutFeaturesEXT = struct(Module.VULKAN, "VkPhys
     VkBool32("scalarBlockLayout", "indicates that the implementation supports the layout of resource blocks in shaders using <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\\#interfaces-scalar-block-layout\">scalar alignment</a>.")
 }
 
+val VkPhysicalDeviceSubgroupSizeControlFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceSubgroupSizeControlFeaturesEXT") {
+    documentation =
+        """
+        Structure describing the subgroup size control features that can be supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceSubgroupSizeControlFeaturesEXT structure is included in the {@code pNext} chain of ##VkPhysicalDeviceFeatures2, it is filled with values indicating whether the feature is supported. ##VkPhysicalDeviceSubgroupSizeControlFeaturesEXT <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to enable the feature.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        The ##VkPhysicalDeviceSubgroupSizeControlFeaturesEXT structure was added in version 2 of the {@link EXTSubgroupSizeControl VK_EXT_subgroup_size_control} extension. Version 1 implementations of this extension will not fill out the features structure but applications may assume that both {@code subgroupSizeControl} and {@code computeFullSubgroups} are supported if the extension is supported. (See also the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#features-requirements">Feature Requirements</a> section.) Applications are advised to add a ##VkPhysicalDeviceSubgroupSizeControlFeaturesEXT structure to the {@code pNext} chain of ##VkDeviceCreateInfo to enable the features regardless of the version of the extension supported by the implementation. If the implementation only supports version 1, it will safely ignore the ##VkPhysicalDeviceSubgroupSizeControlFeaturesEXT structure.
+        </div>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT</li>
+        </ul>
+        """
+
+    VkStructureType("sType", "")
+    nullable..opaque_p("pNext", "")
+    VkBool32("subgroupSizeControl", "indicates whether the implementation supports controlling shader subgroup sizes via the #PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT flag and the ##VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT structure.")
+    VkBool32("computeFullSubgroups", "indicates whether the implementation supports requiring full subgroups in compute shaders via the #PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT flag.")
+}
+
 val VkPhysicalDeviceSubgroupSizeControlPropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceSubgroupSizeControlPropertiesEXT", mutable = false) {
     documentation =
         """
@@ -7463,6 +7507,26 @@ val VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT = struct(Module.VULKA
     VkStructureType("sType", "").mutable()
     nullable..opaque_p("pNext", "").mutable()
     uint32_t("requiredSubgroupSize", "")
+}
+
+val VkPhysicalDeviceShaderCoreProperties2AMD = struct(Module.VULKAN, "VkPhysicalDeviceShaderCoreProperties2AMD", mutable = false) {
+    documentation =
+        """
+        Structure describing shader core properties that can be supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceShaderCoreProperties2AMD structure is included in the {@code pNext} chain of ##VkPhysicalDeviceProperties2, it is filled with the implementation-dependent limits.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_2_AMD</li>
+        </ul>
+        """
+
+    VkStructureType("sType", "the type of this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
+    VkShaderCorePropertiesFlagsAMD("shaderCoreFeatures", "a bitmask of {@code VkShaderCorePropertiesFlagBitsAMD} indicating the set of features supported by the shader core.")
+    uint32_t("activeComputeUnitCount", "an unsigned integer value indicating the number of compute units that have been enabled.")
 }
 
 val VkPhysicalDeviceMemoryBudgetPropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceMemoryBudgetPropertiesEXT", mutable = false) {
@@ -8119,6 +8183,168 @@ val VkPhysicalDeviceIndexTypeUint8FeaturesEXT = struct(Module.VULKAN, "VkPhysica
     VkStructureType("sType", "")
     nullable..opaque_p("pNext", "")
     VkBool32("indexTypeUint8", "indicates that #INDEX_TYPE_UINT8_EXT can be used with #CmdBindIndexBuffer().")
+}
+
+val VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR") {
+    documentation =
+        """
+        Structure describing whether pipeline executable properties are available.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR structure is included in the {@code pNext} chain of ##VkPhysicalDeviceFeatures2, it is filled with values indicating whether the feature is supported. ##VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to enable features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+        </ul>
+        """
+
+    VkStructureType("sType", "")
+    nullable..opaque_p("pNext", "")
+    VkBool32("pipelineExecutableInfo", "")
+}
+
+val VkPipelineInfoKHR = struct(Module.VULKAN, "VkPipelineInfoKHR") {
+    documentation =
+        """
+        Structure describing a pipeline.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_INFO_KHR</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code pipeline} <b>must</b> be a valid {@code VkPipeline} handle</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #GetPipelineExecutablePropertiesKHR()
+        """
+
+    VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkPipeline("pipeline", "a {@code VkPipeline} handle.")
+}
+
+val VkPipelineExecutablePropertiesKHR = struct(Module.VULKAN, "VkPipelineExecutablePropertiesKHR", mutable = false) {
+    javaImport("static org.lwjgl.vulkan.VK10.*")
+    documentation =
+        """
+        Structure describing a pipeline executable.
+
+        <h5>Description</h5>
+        The {@code stages} field <b>may</b> be zero or it <b>may</b> contain one or more bits describing the stages principally used to compile this pipeline. Not all implementations have a 1:1 mapping between shader stages and pipeline executables and some implementations <b>may</b> reduce a given shader stage to fixed function hardware programming such that no executable is available. No guarantees are provided about the mapping between shader stages and pipeline executables and {@code stages} <b>should</b> be considered a best effort hint. Because the application <b>cannot</b> rely on the {@code stages} field to provide an exact description, {@code name} and {@code description} provide a human readable name and description which more accurately describes the given pipeline executable.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_EXECUTABLE_PROPERTIES_KHR</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #GetPipelineExecutablePropertiesKHR()
+        """
+
+    VkStructureType("sType", "the type of this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
+    VkShaderStageFlags("stages", "a bitmask of {@code VkShaderStageFlagBits} indicating which shader stages (if any) were principally used as inputs to compile this pipeline executable.")
+    charUTF8("name", "a short human readable name for this executable.")["VK_MAX_DESCRIPTION_SIZE"]
+    charUTF8("description", "a human readable description for this executable.")["VK_MAX_DESCRIPTION_SIZE"]
+    uint32_t("subgroupSize", "the subgroup size with which this executable is dispatched.")
+}
+
+val VkPipelineExecutableInfoKHR = struct(Module.VULKAN, "VkPipelineExecutableInfoKHR") {
+    documentation =
+        """
+        Structure describing a pipeline executable to query for associated statistics or internal representations.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code executableIndex} <b>must</b> be less than or equal to the number of executables associated with {@code pipeline} as returned in the {@code pExecutableCount} parameter of {@code vkGetPipelineExecutablePropertiesKHR}.</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INFO_KHR</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code pipeline} <b>must</b> be a valid {@code VkPipeline} handle</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #GetPipelineExecutableInternalRepresentationsKHR(), #GetPipelineExecutableStatisticsKHR()
+        """
+
+    VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkPipeline("pipeline", "the pipeline to query.")
+    uint32_t("executableIndex", "the index of the executable to query in the array of executable properties returned by #GetPipelineExecutablePropertiesKHR().")
+}
+
+val VkPipelineExecutableStatisticValueKHR = union(Module.VULKAN, "VkPipelineExecutableStatisticValueKHR", mutable = false) {
+    documentation =
+        """
+        A union describing a pipeline executable statistic.
+        """
+
+    VkBool32("b32", "the 32-bit boolean value if the {@code VkPipelineExecutableStatisticFormatKHR} is #PIPELINE_EXECUTABLE_STATISTIC_FORMAT_BOOL32_KHR.")
+    int64_t("i64", "the signed 64-bit integer value if the {@code VkPipelineExecutableStatisticFormatKHR} is #PIPELINE_EXECUTABLE_STATISTIC_FORMAT_INT64_KHR.")
+    uint64_t("u64", "the unsigned 64-bit integer value if the {@code VkPipelineExecutableStatisticFormatKHR} is #PIPELINE_EXECUTABLE_STATISTIC_FORMAT_UINT64_KHR.")
+    double("f64", "the 64-bit floating-point value if the {@code VkPipelineExecutableStatisticFormatKHR} is #PIPELINE_EXECUTABLE_STATISTIC_FORMAT_FLOAT64_KHR.")
+}
+
+val VkPipelineExecutableStatisticKHR = struct(Module.VULKAN, "VkPipelineExecutableStatisticKHR", mutable = false) {
+    javaImport("static org.lwjgl.vulkan.VK10.*")
+    documentation =
+        """
+        Structure describing a compile-time pipeline executable statistic.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_EXECUTABLE_STATISTIC_KHR</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkPipelineExecutableStatisticValueKHR, #GetPipelineExecutableStatisticsKHR()
+        """
+
+    VkStructureType("sType", "the type of this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
+    charUTF8("name", "a short human readable name for this statistic.")["VK_MAX_DESCRIPTION_SIZE"]
+    charUTF8("description", "a human readable description for this statistic.")["VK_MAX_DESCRIPTION_SIZE"]
+    VkPipelineExecutableStatisticFormatKHR("format", "a {@code VkPipelineExecutableStatisticFormatKHR} value which specifies the format of the data found in {@code value}.")
+    VkPipelineExecutableStatisticValueKHR("value", "the value of this statistic.")
+}
+
+val VkPipelineExecutableInternalRepresentationKHR = struct(Module.VULKAN, "VkPipelineExecutableInternalRepresentationKHR") {
+    javaImport("static org.lwjgl.vulkan.VK10.*")
+    documentation =
+        """
+        Structure describing the textual form of a pipeline executable internal representation.
+
+        <h5>Description</h5>
+        If {@code pData} is {@code NULL}, then the size, in bytes, of the internal representation data is returned in {@code dataSize}. Otherwise, {@code dataSize} must be the size of the buffer, in bytes, pointed to by {@code pData} and on return {@code dataSize} is overwritten with the number of bytes of data actually written to {@code pData} including any trailing null character. If {@code dataSize} is less than the size, in bytes, of the internal representation data, at most {@code dataSize} bytes of data will be written to {@code pData} and {@code vkGetPipelineExecutableInternalRepresentationsKHR} will return #INCOMPLETE. If {@code isText} is #TRUE and {@code pData} is not {@code NULL} and {@code dataSize} is not zero, the last byte written to {@code pData} will be a null character.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>Any given element of {@code name} <b>must</b> be a valid</li>
+            <li>Any given element of {@code description} <b>must</b> be a valid</li>
+            <li>If {@code dataSize} is not 0, and {@code pData} is not {@code NULL}, {@code pData} <b>must</b> be a valid pointer to an array of {@code dataSize} bytes</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #GetPipelineExecutableInternalRepresentationsKHR()
+        """
+
+    VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    charUTF8("name", "a short human readable name for this internal representation.")["VK_MAX_DESCRIPTION_SIZE"]
+    charUTF8("description", "a human readable description for this internal representation.")["VK_MAX_DESCRIPTION_SIZE"]
+    VkBool32("isText", "specifies whether the returned data is text or opaque data. If {@code isText} is #TRUE then the data returned in {@code pData} is text and is guaranteed to be a null-terminated UTF-8 string.")
+    AutoSize("pData", optional = true)..size_t("dataSize", "an integer related to the size, in bytes, of the internal representation data, as described below.")
+    nullable..void.p("pData", "either {@code NULL} or a pointer to an block of data into which the implementation will write the textual form of the internal representation.")
 }
 
 val VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT") {

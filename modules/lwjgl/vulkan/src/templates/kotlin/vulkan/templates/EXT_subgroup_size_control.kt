@@ -36,7 +36,7 @@ val EXT_subgroup_size_control = "EXTSubgroupSizeControl".nativeClassVK("EXT_subg
             <dd>226</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -71,7 +71,7 @@ val EXT_subgroup_size_control = "EXTSubgroupSizeControl".nativeClassVK("EXT_subg
     IntConstant(
         "The extension specification version.",
 
-        "EXT_SUBGROUP_SIZE_CONTROL_SPEC_VERSION".."1"
+        "EXT_SUBGROUP_SIZE_CONTROL_SPEC_VERSION".."2"
     )
 
     StringConstant(
@@ -84,7 +84,8 @@ val EXT_subgroup_size_control = "EXTSubgroupSizeControl".nativeClassVK("EXT_subg
         "Extends {@code VkStructureType}.",
 
         "STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT".."1000225000",
-        "STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT".."1000225001"
+        "STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT".."1000225001",
+        "STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT".."1000225002"
     )
 
     EnumConstant(

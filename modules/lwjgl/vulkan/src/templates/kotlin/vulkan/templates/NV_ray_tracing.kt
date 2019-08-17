@@ -906,6 +906,7 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code dataSize} <b>must</b> be large enough to contain the result of the query, as described above</li>
+            <li>{@code accelerationStructure} <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object via #BindAccelerationStructureMemoryNV()</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

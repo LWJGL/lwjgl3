@@ -358,6 +358,12 @@ public class VKCapabilitiesDevice {
     public final long
         vkGetDescriptorSetLayoutSupportKHR;
 
+    // KHR_pipeline_executable_properties
+    public final long
+        vkGetPipelineExecutablePropertiesKHR,
+        vkGetPipelineExecutableStatisticsKHR,
+        vkGetPipelineExecutableInternalRepresentationsKHR;
+
     // KHR_push_descriptor
     public final long
         vkCmdPushDescriptorSetKHR;
@@ -463,12 +469,16 @@ public class VKCapabilitiesDevice {
     public final boolean VK_AMD_mixed_attachment_samples;
     /** When true, {@link AMDNegativeViewportHeight} is supported. */
     public final boolean VK_AMD_negative_viewport_height;
+    /** When true, {@link AMDPipelineCompilerControl} is supported. */
+    public final boolean VK_AMD_pipeline_compiler_control;
     /** When true, {@link AMDRasterizationOrder} is supported. */
     public final boolean VK_AMD_rasterization_order;
     /** When true, {@link AMDShaderBallot} is supported. */
     public final boolean VK_AMD_shader_ballot;
     /** When true, {@link AMDShaderCoreProperties} is supported. */
     public final boolean VK_AMD_shader_core_properties;
+    /** When true, {@link AMDShaderCoreProperties2} is supported. */
+    public final boolean VK_AMD_shader_core_properties2;
     /** When true, {@link AMDShaderExplicitVertexParameter} is supported. */
     public final boolean VK_AMD_shader_explicit_vertex_parameter;
     /** When true, {@link AMDShaderFragmentMask} is supported. */
@@ -645,6 +655,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_KHR_maintenance3;
     /** When true, {@link KHRMultiview} is supported. */
     public final boolean VK_KHR_multiview;
+    /** When true, {@link KHRPipelineExecutableProperties} is supported. */
+    public final boolean VK_KHR_pipeline_executable_properties;
     /** When true, {@link KHRPushDescriptor} is supported. */
     public final boolean VK_KHR_push_descriptor;
     /** When true, {@link KHRRelaxedBlockLayout} is supported. */
@@ -743,7 +755,7 @@ public class VKCapabilitiesDevice {
     VKCapabilitiesDevice(FunctionProvider provider, VKCapabilitiesInstance capsInstance, Set<String> ext) {
         this.apiVersion = capsInstance.apiVersion;
 
-        Map<String, Long> caps = new HashMap<>(271);
+        Map<String, Long> caps = new HashMap<>(274);
 
         Vulkan10 = VK10.checkCapsDevice(provider, caps, ext);
         Vulkan11 = VK11.checkCapsDevice(provider, caps, ext);
@@ -756,9 +768,11 @@ public class VKCapabilitiesDevice {
         VK_AMD_memory_overallocation_behavior = ext.contains("VK_AMD_memory_overallocation_behavior");
         VK_AMD_mixed_attachment_samples = ext.contains("VK_AMD_mixed_attachment_samples");
         VK_AMD_negative_viewport_height = ext.contains("VK_AMD_negative_viewport_height");
+        VK_AMD_pipeline_compiler_control = ext.contains("VK_AMD_pipeline_compiler_control");
         VK_AMD_rasterization_order = ext.contains("VK_AMD_rasterization_order");
         VK_AMD_shader_ballot = ext.contains("VK_AMD_shader_ballot");
         VK_AMD_shader_core_properties = ext.contains("VK_AMD_shader_core_properties");
+        VK_AMD_shader_core_properties2 = ext.contains("VK_AMD_shader_core_properties2");
         VK_AMD_shader_explicit_vertex_parameter = ext.contains("VK_AMD_shader_explicit_vertex_parameter");
         VK_AMD_shader_fragment_mask = ext.contains("VK_AMD_shader_fragment_mask");
         VK_AMD_shader_image_load_store_lod = ext.contains("VK_AMD_shader_image_load_store_lod");
@@ -848,6 +862,7 @@ public class VKCapabilitiesDevice {
         VK_KHR_maintenance2 = ext.contains("VK_KHR_maintenance2");
         VK_KHR_maintenance3 = KHRMaintenance3.checkCapsDevice(provider, caps, ext);
         VK_KHR_multiview = ext.contains("VK_KHR_multiview");
+        VK_KHR_pipeline_executable_properties = KHRPipelineExecutableProperties.checkCapsDevice(provider, caps, ext);
         VK_KHR_push_descriptor = KHRPushDescriptor.checkCapsDevice(provider, caps, ext);
         VK_KHR_relaxed_block_layout = ext.contains("VK_KHR_relaxed_block_layout");
         VK_KHR_sampler_mirror_clamp_to_edge = ext.contains("VK_KHR_sampler_mirror_clamp_to_edge");
@@ -1126,6 +1141,9 @@ public class VKCapabilitiesDevice {
         vkGetImageSparseMemoryRequirements2KHR = VK.get(caps, "vkGetImageSparseMemoryRequirements2KHR");
         vkTrimCommandPoolKHR = VK.get(caps, "vkTrimCommandPoolKHR");
         vkGetDescriptorSetLayoutSupportKHR = VK.get(caps, "vkGetDescriptorSetLayoutSupportKHR");
+        vkGetPipelineExecutablePropertiesKHR = VK.get(caps, "vkGetPipelineExecutablePropertiesKHR");
+        vkGetPipelineExecutableStatisticsKHR = VK.get(caps, "vkGetPipelineExecutableStatisticsKHR");
+        vkGetPipelineExecutableInternalRepresentationsKHR = VK.get(caps, "vkGetPipelineExecutableInternalRepresentationsKHR");
         vkCmdPushDescriptorSetKHR = VK.get(caps, "vkCmdPushDescriptorSetKHR");
         vkCreateSamplerYcbcrConversionKHR = VK.get(caps, "vkCreateSamplerYcbcrConversionKHR");
         vkDestroySamplerYcbcrConversionKHR = VK.get(caps, "vkDestroySamplerYcbcrConversionKHR");

@@ -1104,6 +1104,7 @@ public class NVRayTracing {
      * 
      * <ul>
      * <li>{@code dataSize} <b>must</b> be large enough to contain the result of the query, as described above</li>
+     * <li>{@code accelerationStructure} <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object via {@link #vkBindAccelerationStructureMemoryNV BindAccelerationStructureMemoryNV}</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -1157,6 +1158,7 @@ public class NVRayTracing {
      * 
      * <ul>
      * <li>{@code dataSize} <b>must</b> be large enough to contain the result of the query, as described above</li>
+     * <li>{@code accelerationStructure} <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object via {@link #vkBindAccelerationStructureMemoryNV BindAccelerationStructureMemoryNV}</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>

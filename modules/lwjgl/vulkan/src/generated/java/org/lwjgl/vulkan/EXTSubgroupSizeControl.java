@@ -30,7 +30,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>226</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.1</li>
@@ -60,7 +60,7 @@ package org.lwjgl.vulkan;
 public final class EXTSubgroupSizeControl {
 
     /** The extension specification version. */
-    public static final int VK_EXT_SUBGROUP_SIZE_CONTROL_SPEC_VERSION = 1;
+    public static final int VK_EXT_SUBGROUP_SIZE_CONTROL_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String VK_EXT_SUBGROUP_SIZE_CONTROL_EXTENSION_NAME = "VK_EXT_subgroup_size_control";
@@ -73,11 +73,13 @@ public final class EXTSubgroupSizeControl {
      * <ul>
      * <li>{@link #VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT}</li>
+     * <li>{@link #VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT}</li>
      * </ul>
      */
     public static final int
         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT         = 1000225000,
-        VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT = 1000225001;
+        VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT = 1000225001,
+        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT           = 1000225002;
 
     /**
      * Extends {@code VkPipelineShaderStageCreateFlagBits}.
