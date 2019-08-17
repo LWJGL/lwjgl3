@@ -34,11 +34,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * the size of memory pages.
  * 
  * <p>The page size MUST be a power of two in {@code [512,16384]} range (2<sup>9</sup> to 2<sup>14</sup>) unless 0 - set to 0 to use system page size. All
- * memory mapping requests to {@code memory_map} will be made with size set to a multiple of the page size.</p></li>
+ * memory mapping requests to {@code memory_map} will be made with size set to a multiple of the page size.</p>
+ * 
+ * <p>Used if {@code RPMALLOC_CONFIGURABLE} is defined to 1, otherwise system page size is used.</p></li>
  * <li>{@code span_size} &ndash; 
  * size of a span of memory blocks.
  * 
- * <p>MUST be a power of two, and in {@code [4096,262144]} range (unless 0 - set to 0 to use the default span size).</p></li>
+ * <p>MUST be a power of two, and in {@code [4096,262144]} range (unless 0 - set to 0 to use the default span size).</p>
+ * 
+ * <p>Used if {@code RPMALLOC_CONFIGURABLE} is defined to 1.</p></li>
  * <li>{@code span_map_count} &ndash; 
  * number of spans to map at each request to map new virtual memory blocks.
  * 

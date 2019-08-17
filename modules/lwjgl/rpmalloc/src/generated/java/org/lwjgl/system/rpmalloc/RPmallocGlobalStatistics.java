@@ -19,10 +19,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code mapped} &ndash; Current amount of virtual memory mapped (only if {@code ENABLE_STATISTICS=1})</li>
- * <li>{@code cached} &ndash; Current amount of memory in global caches for small and medium sizes (&lt;64KiB)</li>
- * <li>{@code mapped_total} &ndash; Total amount of memory mapped (only if {@code ENABLE_STATISTICS=1})</li>
- * <li>{@code unmapped_total} &ndash; Total amount of memory unmapped (only if {@code ENABLE_STATISTICS=1})</li>
+ * <li>{@code mapped} &ndash; Current amount of virtual memory mapped, all of which might not have been committed (only if {@code ENABLE_STATISTICS=1})</li>
+ * <li>{@code mapped_peak} &ndash; Peak amount of virtual memory mapped, all of which might not have been committed (only if {@code ENABLE_STATISTICS=1})</li>
+ * <li>{@code cached} &ndash; Current amount of memory in global caches for small and medium sizes (&lt;32KiB)</li>
+ * <li>{@code huge_alloc} &ndash; 
+ * Current amount of memory allocated in huge allocations, i.e larger than {@code LARGE_SIZE_LIMIT} which is 2MiB by default (only if
+ * {@code ENABLE_STATISTICS=1})</li>
+ * <li>{@code huge_alloc_peak} &ndash; 
+ * Peak amount of memory allocated in huge allocations, i.e larger than {@code LARGE_SIZE_LIMIT} which is 2MiB by default (only if
+ * {@code ENABLE_STATISTICS=1})</li>
+ * <li>{@code mapped_total} &ndash; Total amount of memory mapped since initialization (only if {@code ENABLE_STATISTICS=1})</li>
+ * <li>{@code unmapped_total} &ndash; Total amount of memory unmapped since initialization  (only if {@code ENABLE_STATISTICS=1})</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -30,7 +37,10 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre><code>
  * struct rpmalloc_global_statistics_t {
  *     size_t mapped;
+ *     size_t mapped_peak;
  *     size_t cached;
+ *     size_t huge_alloc;
+ *     size_t huge_alloc_peak;
  *     size_t mapped_total;
  *     size_t unmapped_total;
  * }</code></pre>
@@ -47,12 +57,18 @@ public class RPmallocGlobalStatistics extends Struct implements NativeResource {
     /** The struct member offsets. */
     public static final int
         MAPPED,
+        MAPPED_PEAK,
         CACHED,
+        HUGE_ALLOC,
+        HUGE_ALLOC_PEAK,
         MAPPED_TOTAL,
         UNMAPPED_TOTAL;
 
     static {
         Layout layout = __struct(
+            __member(POINTER_SIZE),
+            __member(POINTER_SIZE),
+            __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
@@ -63,9 +79,12 @@ public class RPmallocGlobalStatistics extends Struct implements NativeResource {
         ALIGNOF = layout.getAlignment();
 
         MAPPED = layout.offsetof(0);
-        CACHED = layout.offsetof(1);
-        MAPPED_TOTAL = layout.offsetof(2);
-        UNMAPPED_TOTAL = layout.offsetof(3);
+        MAPPED_PEAK = layout.offsetof(1);
+        CACHED = layout.offsetof(2);
+        HUGE_ALLOC = layout.offsetof(3);
+        HUGE_ALLOC_PEAK = layout.offsetof(4);
+        MAPPED_TOTAL = layout.offsetof(5);
+        UNMAPPED_TOTAL = layout.offsetof(6);
     }
 
     /**
@@ -84,9 +103,18 @@ public class RPmallocGlobalStatistics extends Struct implements NativeResource {
     /** Returns the value of the {@code mapped} field. */
     @NativeType("size_t")
     public long mapped() { return nmapped(address()); }
+    /** Returns the value of the {@code mapped_peak} field. */
+    @NativeType("size_t")
+    public long mapped_peak() { return nmapped_peak(address()); }
     /** Returns the value of the {@code cached} field. */
     @NativeType("size_t")
     public long cached() { return ncached(address()); }
+    /** Returns the value of the {@code huge_alloc} field. */
+    @NativeType("size_t")
+    public long huge_alloc() { return nhuge_alloc(address()); }
+    /** Returns the value of the {@code huge_alloc_peak} field. */
+    @NativeType("size_t")
+    public long huge_alloc_peak() { return nhuge_alloc_peak(address()); }
     /** Returns the value of the {@code mapped_total} field. */
     @NativeType("size_t")
     public long mapped_total() { return nmapped_total(address()); }
@@ -239,8 +267,14 @@ public class RPmallocGlobalStatistics extends Struct implements NativeResource {
 
     /** Unsafe version of {@link #mapped}. */
     public static long nmapped(long struct) { return memGetAddress(struct + RPmallocGlobalStatistics.MAPPED); }
+    /** Unsafe version of {@link #mapped_peak}. */
+    public static long nmapped_peak(long struct) { return memGetAddress(struct + RPmallocGlobalStatistics.MAPPED_PEAK); }
     /** Unsafe version of {@link #cached}. */
     public static long ncached(long struct) { return memGetAddress(struct + RPmallocGlobalStatistics.CACHED); }
+    /** Unsafe version of {@link #huge_alloc}. */
+    public static long nhuge_alloc(long struct) { return memGetAddress(struct + RPmallocGlobalStatistics.HUGE_ALLOC); }
+    /** Unsafe version of {@link #huge_alloc_peak}. */
+    public static long nhuge_alloc_peak(long struct) { return memGetAddress(struct + RPmallocGlobalStatistics.HUGE_ALLOC_PEAK); }
     /** Unsafe version of {@link #mapped_total}. */
     public static long nmapped_total(long struct) { return memGetAddress(struct + RPmallocGlobalStatistics.MAPPED_TOTAL); }
     /** Unsafe version of {@link #unmapped_total}. */
@@ -287,9 +321,18 @@ public class RPmallocGlobalStatistics extends Struct implements NativeResource {
         /** Returns the value of the {@code mapped} field. */
         @NativeType("size_t")
         public long mapped() { return RPmallocGlobalStatistics.nmapped(address()); }
+        /** Returns the value of the {@code mapped_peak} field. */
+        @NativeType("size_t")
+        public long mapped_peak() { return RPmallocGlobalStatistics.nmapped_peak(address()); }
         /** Returns the value of the {@code cached} field. */
         @NativeType("size_t")
         public long cached() { return RPmallocGlobalStatistics.ncached(address()); }
+        /** Returns the value of the {@code huge_alloc} field. */
+        @NativeType("size_t")
+        public long huge_alloc() { return RPmallocGlobalStatistics.nhuge_alloc(address()); }
+        /** Returns the value of the {@code huge_alloc_peak} field. */
+        @NativeType("size_t")
+        public long huge_alloc_peak() { return RPmallocGlobalStatistics.nhuge_alloc_peak(address()); }
         /** Returns the value of the {@code mapped_total} field. */
         @NativeType("size_t")
         public long mapped_total() { return RPmallocGlobalStatistics.nmapped_total(address()); }

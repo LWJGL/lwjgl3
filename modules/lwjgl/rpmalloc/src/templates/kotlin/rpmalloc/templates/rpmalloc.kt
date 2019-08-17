@@ -10,12 +10,13 @@ import rpmalloc.*
 val rpmalloc = "RPmalloc".nativeClass(Module.RPMALLOC, prefix = "RP", prefixConstant = "RP") {
     nativeDirective("""DISABLE_WARNINGS()
 //#define ENABLE_STATISTICS 1
+#define RPMALLOC_CONFIGURABLE 1
 #include "rpmalloc.c"
 ENABLE_WARNINGS()""")
 
     documentation =
         """
-        Native bindings to the ${url("https://github.com/rampantpixels/rpmalloc", "rpmalloc")} library. rpmalloc is a public domain cross platform lock free
+        Native bindings to the ${url("https://github.com/mjansson/rpmalloc", "rpmalloc")} library. rpmalloc is a public domain cross platform lock free
         thread caching 16-byte aligned memory allocator implemented in C.
 
         You are required to call these functions from your own code in order to initialize and finalize the allocator in your process and threads:
@@ -29,6 +30,8 @@ ENABLE_WARNINGS()""")
         Then simply use the #malloc()/#free() and the other malloc style replacement functions. Remember all allocations are 16-byte aligned, so no need to
         call the explicit #memalign()/#aligned_alloc()/#posix_memalign() functions unless you need greater alignment, they are simply wrappers to make it
         easier to replace in existing code.
+        
+        The rpmalloc build in LWJGL is configured with {@code RPMALLOC_CONFIGURABLE=1} and {@code ENABLE_STATISTICS=0}.
         """
 
     IntConstant(
@@ -110,7 +113,12 @@ ENABLE_WARNINGS()""")
 
     void.p(
         "aligned_realloc",
-        "Reallocates the given block to at least the given size and alignment, with optional control flags (see #MALLOC_NO_PRESERVE)",
+        """
+        Reallocates the given block to at least the given size and alignment, with optional control flags (see #MALLOC_NO_PRESERVE).
+
+        Alignment must be a power of two and a multiple of {@code sizeof(void*)}, and should ideally be less than memory page size. A caveat of rpmalloc
+        internals is that this must also be strictly less than the span size (default {@code 64KiB}).
+        """,
 
         nullable..void.p("ptr", ""),
         size_t("alignment", ""),
@@ -121,7 +129,12 @@ ENABLE_WARNINGS()""")
 
     void.p(
         "aligned_alloc",
-        "Allocates a memory block of at least the given size and alignment.",
+        """
+        Allocates a memory block of at least the given size and alignment.
+        
+        Alignment must be a power of two and a multiple of {@code sizeof(void*)}, and should ideally be less than memory page size. A caveat of rpmalloc
+        internals is that this must also be strictly less than the span size (default {@code 64KiB}).
+        """,
 
         size_t("alignment", ""),
         AutoSizeResult..size_t("size", "")
@@ -129,7 +142,12 @@ ENABLE_WARNINGS()""")
 
     void.p(
         "memalign",
-        "Allocates a memory block of at least the given size and alignment.",
+        """
+        Allocates a memory block of at least the given size and alignment.
+        
+        Alignment must be a power of two and a multiple of {@code sizeof(void*)}, and should ideally be less than memory page size. A caveat of rpmalloc
+        internals is that this must also be strictly less than the span size (default {@code 64KiB}).
+        """,
 
         size_t("alignment", ""),
         AutoSizeResult..size_t("size", "")
@@ -137,7 +155,12 @@ ENABLE_WARNINGS()""")
 
     int(
         "posix_memalign",
-        "Allocates a memory block of at least the given size and alignment.",
+        """
+        Allocates a memory block of at least the given size and alignment.
+        
+        Alignment must be a power of two and a multiple of {@code sizeof(void*)}, and should ideally be less than memory page size. A caveat of rpmalloc
+        internals is that this must also be strictly less than the span size (default {@code 64KiB}).
+        """,
 
         Check(1)..void.p.p("memptr", ""),
         size_t("alignment", ""),

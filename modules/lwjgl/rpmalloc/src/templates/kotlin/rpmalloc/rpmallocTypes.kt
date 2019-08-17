@@ -143,6 +143,8 @@ val rpmalloc_config_t = struct(Module.RPMALLOC, "RPMallocConfig", nativeName = "
 
         The page size MUST be a power of two in {@code [512,16384]} range (2<sup>9</sup> to 2<sup>14</sup>) unless 0 - set to 0 to use system page size. All
         memory mapping requests to {@code memory_map} will be made with size set to a multiple of the page size.
+        
+        Used if {@code RPMALLOC_CONFIGURABLE} is defined to 1, otherwise system page size is used.
         """
     )
     size_t(
@@ -151,6 +153,8 @@ val rpmalloc_config_t = struct(Module.RPMALLOC, "RPMallocConfig", nativeName = "
         size of a span of memory blocks.
 
         MUST be a power of two, and in {@code [4096,262144]} range (unless 0 - set to 0 to use the default span size).
+        
+        Used if {@code RPMALLOC_CONFIGURABLE} is defined to 1.
         """
     )
     size_t(
@@ -184,10 +188,25 @@ val rpmalloc_global_statistics_t = struct(
     nativeName = "rpmalloc_global_statistics_t",
     mutable = false
 ) {
-    size_t("mapped", "Current amount of virtual memory mapped (only if {@code ENABLE_STATISTICS=1})")
-    size_t("cached", "Current amount of memory in global caches for small and medium sizes (&lt;64KiB)")
-    size_t("mapped_total", "Total amount of memory mapped (only if {@code ENABLE_STATISTICS=1})")
-    size_t("unmapped_total", "Total amount of memory unmapped (only if {@code ENABLE_STATISTICS=1})")
+    size_t("mapped", "Current amount of virtual memory mapped, all of which might not have been committed (only if {@code ENABLE_STATISTICS=1})")
+	size_t("mapped_peak", "Peak amount of virtual memory mapped, all of which might not have been committed (only if {@code ENABLE_STATISTICS=1})")
+    size_t("cached", "Current amount of memory in global caches for small and medium sizes (&lt;32KiB)")
+	size_t(
+        "huge_alloc",
+        """
+        Current amount of memory allocated in huge allocations, i.e larger than {@code LARGE_SIZE_LIMIT} which is 2MiB by default (only if
+        {@code ENABLE_STATISTICS=1})
+        """
+    )
+	size_t(
+        "huge_alloc_peak",
+        """
+        Peak amount of memory allocated in huge allocations, i.e larger than {@code LARGE_SIZE_LIMIT} which is 2MiB by default (only if
+        {@code ENABLE_STATISTICS=1})
+        """
+    )
+    size_t("mapped_total", "Total amount of memory mapped since initialization (only if {@code ENABLE_STATISTICS=1})")
+    size_t("unmapped_total", "Total amount of memory unmapped since initialization  (only if {@code ENABLE_STATISTICS=1})")
 }
 
 val rpmalloc_thread_statistics_t = struct(
@@ -196,10 +215,29 @@ val rpmalloc_thread_statistics_t = struct(
     nativeName = "rpmalloc_thread_statistics_t",
     mutable = false
 ) {
-    size_t("active", "Current number of bytes available for allocation from active spans")
-    size_t("sizecache", "Current number of bytes available in thread size class caches")
-    size_t("spancache", "Current number of bytes available in thread span caches")
-    size_t("deferred", "Current number of bytes in pending deferred deallocations")
-    size_t("thread_to_global", "Total number of bytes transitioned from thread cache to global cache")
-    size_t("global_to_thread", "Total number of bytes transitioned from global cache to thread cache")
+    size_t("sizecache", "Current number of bytes available in thread size class caches for small and medium sizes (&lt;32KiB)")
+	size_t("spancache", "Current number of bytes available in thread span caches for small and medium sizes (&lt;32KiB)")
+	size_t("thread_to_global", "Total number of bytes transitioned from thread cache to global cache (only if {@code ENABLE_STATISTICS=1})")
+	size_t("global_to_thread", "Total number of bytes transitioned from global cache to thread cache (only if {@code ENABLE_STATISTICS=1})")
+	struct {
+		size_t("current", "Currently used number of spans")
+		size_t("peak", "High water mark of spans used")
+		size_t("to_global", "Number of spans transitioned to global cache")
+		size_t("from_global", "Number of spans transitioned from global cache")
+		size_t("to_cache", "Number of spans transitioned to thread cache")
+		size_t("from_cache", "Number of spans transitioned from thread cache")
+		size_t("to_reserved", "Number of spans transitioned to reserved state")
+		size_t("from_reserved", "Number of spans transitioned from reserved state")
+		size_t("map_calls", "Number of raw memory map calls (not hitting the reserve spans but resulting in actual OS mmap calls)")
+	}("span_use", "Per span count statistics (only if {@code ENABLE_STATISTICS=1})")[32]
+	struct {
+		size_t("alloc_current", "Current number of allocations")
+		size_t("alloc_peak", "Peak number of allocations")
+		size_t("alloc_total", "Total number of allocations")
+		size_t("free_total", "Total number of frees")
+		size_t("spans_to_cache", "Number of spans transitioned to cache")
+		size_t("spans_from_cache", "Number of spans transitioned from cache")
+		size_t("spans_from_reserved", "Number of spans transitioned from reserved state")
+		size_t("map_calls", "Number of raw memory map calls (not hitting the reserve spans but resulting in actual OS mmap calls)")
+	}("size_use", "Per size class statistics (only if {@code ENABLE_STATISTICS=1})")[128]
 }

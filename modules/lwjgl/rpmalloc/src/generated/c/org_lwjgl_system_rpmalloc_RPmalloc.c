@@ -6,6 +6,7 @@
 #include "common_tools.h"
 DISABLE_WARNINGS()
 //#define ENABLE_STATISTICS 1
+#define RPMALLOC_CONFIGURABLE 1
 #include "rpmalloc.c"
 ENABLE_WARNINGS()
 

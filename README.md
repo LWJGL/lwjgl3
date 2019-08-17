@@ -179,7 +179,7 @@ improve the chances of a quick and useful response.
 |[Meow hash](https://github.com/cmuratori/meow_hash)|An extremely fast non-cryptographic hash.|
 |[ODBC](https://docs.microsoft.com/en-us/sql/odbc/microsoft-open-database-connectivity-odbc)|A C programming language interface that makes it possible for applications to access data from a variety of database management systems (DBMSs).|
 |[Remotery](https://github.com/Celtoys/Remotery)|A realtime CPU/GPU profiler hosted in a single C file with a viewer that runs in a web browser.|
-|[rpmalloc](https://github.com/rampantpixels/rpmalloc)|A public domain cross platform lock free thread caching 16-byte aligned memory allocator implemented in C.|
+|[rpmalloc](https://github.com/mjansson/rpmalloc)|A public domain cross platform lock free thread caching 16-byte aligned memory allocator implemented in C.|
 |[xxHash](https://github.com/Cyan4973/xxHash)|An Extremely fast Hash algorithm, running at RAM speed limits.|
 |[Zstandard](http://facebook.github.io/zstd/) (zstd)|A fast lossless compression algorithm, targeting real-time compression scenarios at zlib-level and better compression ratios.|
 

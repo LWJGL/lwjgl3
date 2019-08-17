@@ -17,7 +17,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the <a target="_blank" href="https://github.com/rampantpixels/rpmalloc">rpmalloc</a> library. rpmalloc is a public domain cross platform lock free
+ * Native bindings to the <a target="_blank" href="https://github.com/mjansson/rpmalloc">rpmalloc</a> library. rpmalloc is a public domain cross platform lock free
  * thread caching 16-byte aligned memory allocator implemented in C.
  * 
  * <p>You are required to call these functions from your own code in order to initialize and finalize the allocator in your process and threads:</p>
@@ -32,6 +32,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <p>Then simply use the {@link #rpmalloc malloc}/{@link #rpfree free} and the other malloc style replacement functions. Remember all allocations are 16-byte aligned, so no need to
  * call the explicit {@link #rpmemalign memalign}/{@link #rpaligned_alloc aligned_alloc}/{@link #rpposix_memalign posix_memalign} functions unless you need greater alignment, they are simply wrappers to make it
  * easier to replace in existing code.</p>
+ * 
+ * <p>The rpmalloc build in LWJGL is configured with {@code RPMALLOC_CONFIGURABLE=1} and {@code ENABLE_STATISTICS=0}.</p>
  */
 public class RPmalloc {
 
@@ -247,7 +249,12 @@ public class RPmalloc {
     /** Unsafe version of: {@link #rpaligned_realloc aligned_realloc} */
     public static native long nrpaligned_realloc(long ptr, long alignment, long size, long oldsize, int flags);
 
-    /** Reallocates the given block to at least the given size and alignment, with optional control flags (see {@link #RPMALLOC_NO_PRESERVE MALLOC_NO_PRESERVE}) */
+    /**
+     * Reallocates the given block to at least the given size and alignment, with optional control flags (see {@link #RPMALLOC_NO_PRESERVE MALLOC_NO_PRESERVE}).
+     * 
+     * <p>Alignment must be a power of two and a multiple of {@code sizeof(void*)}, and should ideally be less than memory page size. A caveat of rpmalloc
+     * internals is that this must also be strictly less than the span size (default {@code 64KiB}).</p>
+     */
     @Nullable
     @NativeType("void *")
     public static ByteBuffer rpaligned_realloc(@Nullable @NativeType("void *") ByteBuffer ptr, @NativeType("size_t") long alignment, @NativeType("size_t") long size, @NativeType("unsigned int") int flags) {
@@ -260,7 +267,12 @@ public class RPmalloc {
     /** Unsafe version of: {@link #rpaligned_alloc aligned_alloc} */
     public static native long nrpaligned_alloc(long alignment, long size);
 
-    /** Allocates a memory block of at least the given size and alignment. */
+    /**
+     * Allocates a memory block of at least the given size and alignment.
+     * 
+     * <p>Alignment must be a power of two and a multiple of {@code sizeof(void*)}, and should ideally be less than memory page size. A caveat of rpmalloc
+     * internals is that this must also be strictly less than the span size (default {@code 64KiB}).</p>
+     */
     @Nullable
     @NativeType("void *")
     public static ByteBuffer rpaligned_alloc(@NativeType("size_t") long alignment, @NativeType("size_t") long size) {
@@ -273,7 +285,12 @@ public class RPmalloc {
     /** Unsafe version of: {@link #rpmemalign memalign} */
     public static native long nrpmemalign(long alignment, long size);
 
-    /** Allocates a memory block of at least the given size and alignment. */
+    /**
+     * Allocates a memory block of at least the given size and alignment.
+     * 
+     * <p>Alignment must be a power of two and a multiple of {@code sizeof(void*)}, and should ideally be less than memory page size. A caveat of rpmalloc
+     * internals is that this must also be strictly less than the span size (default {@code 64KiB}).</p>
+     */
     @Nullable
     @NativeType("void *")
     public static ByteBuffer rpmemalign(@NativeType("size_t") long alignment, @NativeType("size_t") long size) {
@@ -286,7 +303,12 @@ public class RPmalloc {
     /** Unsafe version of: {@link #rpposix_memalign posix_memalign} */
     public static native int nrpposix_memalign(long memptr, long alignment, long size);
 
-    /** Allocates a memory block of at least the given size and alignment. */
+    /**
+     * Allocates a memory block of at least the given size and alignment.
+     * 
+     * <p>Alignment must be a power of two and a multiple of {@code sizeof(void*)}, and should ideally be less than memory page size. A caveat of rpmalloc
+     * internals is that this must also be strictly less than the span size (default {@code 64KiB}).</p>
+     */
     public static int rpposix_memalign(@NativeType("void **") PointerBuffer memptr, @NativeType("size_t") long alignment, @NativeType("size_t") long size) {
         if (CHECKS) {
             check(memptr, 1);
