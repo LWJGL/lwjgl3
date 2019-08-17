@@ -111,6 +111,7 @@ class CArrayType<T : DataType> internal constructor(
     override val const: NativeType get() { throw UnsupportedOperationException() }
 
     val size: String get() = dimensions.joinToString(" * ")
+    val def: String get() = dimensions.joinToString("") { it -> "[$it]" }
 }
 operator fun <T : DataType> T.get(size: Int) = this[size.toString()]
 operator fun <T : DataType> T.get(size: String) = CArrayType(this.name, this, arrayOf(size))
@@ -407,11 +408,7 @@ internal val NativeType.jniSignatureJava
 internal fun NativeType.annotation(type: String) = if (type == name)
     null
 else
-    "@NativeType(\"$name${if (this !is CArrayType<*>) "" else this
-        .dimensions
-        .joinToString("") {
-            "[$it]"
-        }
+    "@NativeType(\"$name${if (this !is CArrayType<*>) "" else this.def
     }\")"
 internal fun NativeType.annotate(type: String) = annotation(type).let {
     if (it == null)

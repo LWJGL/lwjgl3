@@ -232,6 +232,37 @@ class Struct(
     operator fun StructMember.get(size: Int, validSize: Int = size) = this[size.toString(), validSize.toString()]
     operator fun StructMember.get(size: String, validSize: String = size): StructMemberArray {
         this@Struct.members.remove(this)
+
+        val nativeType = if (isNestedStructDefinition) {
+            val definition = (this.nativeType as StructType).definition
+
+            val copy = Struct(
+                this@Struct.module,
+                this.name,
+                this@Struct.nativeSubPath,
+                ANONYMOUS,
+                this@Struct.union,
+                true,
+                this@Struct.mutable,
+                this@Struct.alias,
+                this@Struct.nativeLayout,
+                this@Struct.generateBuffer
+            )
+
+            copy.documentation = definition.documentation
+            copy.customMethods.addAll(definition.customMethods)
+            copy.members.addAll(definition.members)
+            copy.usageInput = definition.usageInput
+            copy.usageOutput = definition.usageOutput
+            copy.usageResultPointer = definition.usageResultPointer
+            copy.static = definition.static
+            copy.alignas = definition.alignas
+            copy.pack = definition.pack
+
+            copy.nativeType
+        } else
+            this.nativeType
+
         return StructMemberArray(nativeType[size], name, documentation, validSize)
             .let {
                 add(it)
@@ -253,15 +284,27 @@ class Struct(
     fun padding(size: String, condition: String? = null) = add(StructMemberPadding(size, condition))
 
     /** Anonymous nested member struct definition. */
-    fun struct(init: Struct.() -> Unit): StructMember {
-        val struct = Struct(module, ANONYMOUS, "", ANONYMOUS, false, false, mutable, null, nativeLayout = false, generateBuffer = false)
+    fun struct(
+        mutable: Boolean = this.mutable,
+        alias: StructType? = null,
+        nativeLayout: Boolean = false,
+        skipBuffer: Boolean = false,
+        init: Struct.() -> Unit
+    ): StructMember {
+        val struct = Struct(module, ANONYMOUS, nativeSubPath, ANONYMOUS, false, true, mutable, alias?.definition, nativeLayout, !skipBuffer)
         struct.init()
         return StructType(struct).invoke(ANONYMOUS, "")
     }
 
     /** Anonymous nested member union definition. */
-    fun union(init: Struct.() -> Unit): StructMember {
-        val struct = Struct(module, ANONYMOUS, "", ANONYMOUS, true, false, mutable, null, nativeLayout = false, generateBuffer = false)
+    fun union(
+        mutable: Boolean = this.mutable,
+        alias: StructType? = null,
+        nativeLayout: Boolean = false,
+        skipBuffer: Boolean = false,
+        init: Struct.() -> Unit
+    ): StructMember {
+        val struct = Struct(module, ANONYMOUS, nativeSubPath, ANONYMOUS, true, true, mutable, alias?.definition, nativeLayout, !skipBuffer)
         struct.init()
         return StructType(struct).invoke(ANONYMOUS, "")
     }
@@ -451,13 +494,19 @@ $indent}"""
         }
     }
 
-    private fun printStructLayout(indentation: String = ""): String {
+    private fun printStructLayout(indentation: String = "", parent: String = ""): String {
         val memberIndentation = "$indentation    "
         return """$nativeNameQualified {
 ${members.joinToString(";\n$memberIndentation", prefix = memberIndentation, postfix = ";") {member ->
-            if (member.isNestedStructDefinition)
-                "${(member.nativeType as StructType).definition.printStructLayout(memberIndentation)}${if (member.name === ANONYMOUS) "" else " ${member.name}"}"
-            else {
+            if (member.isNestedStructDefinition || (member is StructMemberArray && member.nativeType is StructType && member.nativeType.name === ANONYMOUS)) {
+                val struct = (member.nativeType as StructType).definition
+                "${struct.printStructLayout(memberIndentation, "$parent${struct.className}.")}${if (member.name === ANONYMOUS) "" else " ${member.name.let {
+                    if (member is StructMemberArray)
+                        "{@link $parent${struct.className} $it}${member.arrayType.def}"
+                    else
+                        it
+                }}"}"
+            } else {
                 val anonymous = member.name === ANONYMOUS || (member.nativeType is FunctionType && member.nativeType.name.contains("(*)"))
                 member.nativeType
                     .let {
@@ -496,11 +545,7 @@ ${members.joinToString(";\n$memberIndentation", prefix = memberIndentation, post
                         if (member.bits != -1)
                             "$it : ${member.bits}"
                         else if (member is StructMemberArray)
-                            "$it${member.arrayType
-                                .dimensions
-                                .joinToString("") { dim ->
-                                    "[$dim]"
-                                }}"
+                            "$it${member.arrayType.def}"
                         else
                             it
                     }
@@ -582,7 +627,8 @@ $indentation}"""
         }
     }
 
-    override fun PrintWriter.generateJava() {
+    override fun PrintWriter.generateJava() = generateJava(false, 1)
+    private fun PrintWriter.generateJava(nested: Boolean, level: Int) {
         if (alias != null) {
             usageInput = usageInput or alias.usageInput
             usageOutput = usageOutput or alias.usageOutput
@@ -601,38 +647,42 @@ $indentation}"""
             kotlin.io.println("${t}Unnecessary native directives in struct: ${module.packageKotlin}.$className")
         }
 
-        print(HEADER)
-        println("package $packageName;\n")
+        if (!nested) {
+            print(HEADER)
+            println("package $packageName;\n")
 
-        println("import javax.annotation.*;\n")
+            println("import javax.annotation.*;\n")
 
-        println("import java.nio.*;\n")
+            println("import java.nio.*;\n")
 
-        if (mallocable || members.any { m -> m.nativeType.let {
-            (it.mapping === PointerMapping.DATA_POINTER && it is PointerType<*> && (it.elementType !is StructType || m is StructMemberArray)) ||
-            (it.mapping === PrimitiveMapping.POINTER && m is StructMemberArray && it !is StructType)
-        } })
-            println("import org.lwjgl.*;")
-        println("import org.lwjgl.system.*;\n")
+            if (mallocable || members.any { m ->
+                    m.nativeType.let {
+                        (it.mapping === PointerMapping.DATA_POINTER && it is PointerType<*> && (it.elementType !is StructType || m is StructMemberArray)) ||
+                        (it.mapping === PrimitiveMapping.POINTER && m is StructMemberArray && it !is StructType)
+                    }
+                })
+                println("import org.lwjgl.*;")
+            println("import org.lwjgl.system.*;\n")
 
-        fun Struct.hasChecks(): Boolean = visibleMembers.any {
-            (it is StructMemberArray && it.nativeType !is CharType) ||
-            (
+            fun Struct.hasChecks(): Boolean = visibleMembers.any {
+                (it is StructMemberArray && it.nativeType !is CharType) ||
+                (
                 (mutable || it.mutable) &&
                 (
-                    it is StructMemberArray ||
-                    it.nativeType is CharSequenceType ||
-                    (it.nativeType is PointerType<*> && !it.has<Nullable>())
+                it is StructMemberArray ||
+                it.nativeType is CharSequenceType ||
+                (it.nativeType is PointerType<*> && !it.has<Nullable>())
                 )
-            ) ||
-            it.isNestedStructDefinition && (it.nativeType as StructType).definition.hasChecks()
-        }
+                ) ||
+                it.isNestedStructDefinition && (it.nativeType as StructType).definition.hasChecks()
+            }
 
-        if (Module.CHECKS && hasChecks())
-            println("import static org.lwjgl.system.Checks.*;")
-        println("import static org.lwjgl.system.MemoryUtil.*;")
-        if (nativeLayout || mallocable)
-            println("import static org.lwjgl.system.MemoryStack.*;")
+            if (Module.CHECKS && hasChecks())
+                println("import static org.lwjgl.system.Checks.*;")
+            println("import static org.lwjgl.system.MemoryUtil.*;")
+            if (nativeLayout || mallocable)
+                println("import static org.lwjgl.system.MemoryStack.*;")
+        }
 
         println()
         preamble.printJava(this)
@@ -641,7 +691,7 @@ $indentation}"""
         if (className != nativeName) {
             println("@NativeType(\"$nativeNameQualified\")")
         }
-        print("${access.modifier}class $className extends ")
+        print("${access.modifier}${if (nested) "static " else ""}class $className extends ")
         print(alias?.className ?: "Struct${if (mallocable) " implements NativeResource" else ""}")
         println(" {")
 
@@ -1091,6 +1141,20 @@ ${validations.joinToString("\n")}
     }
 """)
         }
+
+        // Recursively output inner classes for array-of-anonymous-nested-struct members.
+        this@Struct.members
+            .filter { it is StructMemberArray && it.nativeType is StructType && it.nativeType.name === ANONYMOUS }
+            .forEach { member ->
+                (member.nativeType as StructType).definition.apply {
+                    val writer = StringWriter(4 * 1024)
+                    PrintWriter(writer).use {
+                        it.generateJava(nested = true, level = level + 1)
+                    }
+                    println(writer.toString().replace("\n(?!$)".toRegex(), "\n    "))
+                }
+            }
+
         print("""
 }""")
     }
@@ -1170,7 +1234,6 @@ ${validations.joinToString("\n")}
             } else if (it.isNestedStructDefinition) {
                 print("$indentation$t")
                 generateLayout((it.nativeType as StructType).definition, "$indentation$t", field)
-                //print(")")
             } else {
                 val size: String
                 val alignment: String
