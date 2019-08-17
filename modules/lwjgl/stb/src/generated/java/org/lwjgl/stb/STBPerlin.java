@@ -101,4 +101,8 @@ public class STBPerlin {
      */
     public static native float stb_perlin_turbulence_noise3(float x, float y, float z, float lacunarity, float gain, int octaves);
 
+    // --- [ stb_perlin_noise3_wrap_nonpow2 ] ---
+
+    public static native float stb_perlin_noise3_wrap_nonpow2(float x, float y, float z, int x_wrap, int y_wrap, int z_wrap, @NativeType("unsigned char") byte seed);
+
 }

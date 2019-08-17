@@ -92,4 +92,17 @@ val stb_perlin = "STBPerlin".nativeClass(Module.STB, prefix = "STB", prefixMetho
         float("gain", "relative weighting applied to each successive octave"),
         int("octaves", "number of \"octaves\" of {@code noise3()} to sum")
     )
+
+    float(
+        "perlin_noise3_wrap_nonpow2",
+        "",
+
+        float("x", ""),
+        float("y", ""),
+        float("z", ""),
+        int("x_wrap", ""),
+        int("y_wrap", ""),
+        int("z_wrap", ""),
+        unsigned_char("seed", "")
+    )
 }
