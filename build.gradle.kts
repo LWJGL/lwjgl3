@@ -5,6 +5,7 @@
 import java.net.*
 
 plugins {
+    `java-platform`
     `maven-publish`
     signing
 }
@@ -66,7 +67,6 @@ enum class Platforms(val classifier: String) {
     WINDOWS_X86("windows-x86");
 
     companion object {
-        val JAVA_ONLY = emptyArray<Platforms>()
         val ALL = values()
     }
 }
@@ -95,13 +95,11 @@ enum class Artifacts(
     ),
     CUDA(
         "lwjgl-cuda", "LWJGL - CUDA bindings",
-        "A parallel computing platform and programming model developed by NVIDIA for general computing on GPUs.",
-        *Platforms.JAVA_ONLY
+        "A parallel computing platform and programming model developed by NVIDIA for general computing on GPUs."
     ),
     EGL(
         "lwjgl-egl", "LWJGL - EGL bindings",
-        "An interface between Khronos rendering APIs such as OpenGL ES or OpenVG and the underlying native platform window system.",
-        *Platforms.JAVA_ONLY
+        "An interface between Khronos rendering APIs such as OpenGL ES or OpenVG and the underlying native platform window system."
     ),
     GLFW(
         "lwjgl-glfw", "LWJGL - GLFW bindings",
@@ -110,8 +108,7 @@ enum class Artifacts(
     ),
     JAWT(
         "lwjgl-jawt", "LWJGL - JAWT bindings",
-        "The AWT native interface.",
-        *Platforms.JAVA_ONLY
+        "The AWT native interface."
     ),
     JEMALLOC(
         "lwjgl-jemalloc", "LWJGL - jemalloc bindings",
@@ -160,8 +157,7 @@ enum class Artifacts(
     ),
     ODBC(
         "lwjgl-odbc", "LWJGL - ODBC bindings",
-        "A C programming language interface that makes it possible for applications to access data from a variety of database management systems (DBMSs).",
-        *Platforms.JAVA_ONLY
+        "A C programming language interface that makes it possible for applications to access data from a variety of database management systems (DBMSs)."
     ),
     OPENAL(
         "lwjgl-openal", "LWJGL - OpenAL bindings",
@@ -170,8 +166,7 @@ enum class Artifacts(
     ),
     OPENCL(
         "lwjgl-opencl", "LWJGL - OpenCL bindings",
-        "An open, royalty-free standard for cross-platform, parallel programming of diverse processors found in personal computers, servers, mobile devices and embedded platforms.",
-        *Platforms.JAVA_ONLY
+        "An open, royalty-free standard for cross-platform, parallel programming of diverse processors found in personal computers, servers, mobile devices and embedded platforms."
     ),
     OPENGL(
         "lwjgl-opengl", "LWJGL - OpenGL bindings",
@@ -332,6 +327,36 @@ publishing {
         and a whole lot more verbose in Maven. Hopefully, the automation
         is going to alleviate the pain.
          */
+        fun org.gradle.api.publish.maven.MavenPom.setupPom(pomName: String, pomDescription: String, pomPackaging: String) {
+            name.set(pomName)
+            description.set(pomDescription)
+            url.set("https://www.lwjgl.org")
+            packaging = pomPackaging
+
+            scm {
+                connection.set("scm:git:https://github.com/LWJGL/lwjgl3.git")
+                developerConnection.set("scm:git:https://github.com/LWJGL/lwjgl3.git")
+                url.set("https://github.com/LWJGL/lwjgl3.git")
+            }
+
+            licenses {
+                license {
+                    name.set("BSD")
+                    url.set("https://www.lwjgl.org/license")
+                    distribution.set("repo")
+                }
+            }
+
+            developers {
+                developer {
+                    id.set("spasi")
+                    name.set("Ioannis Tsakpinis")
+                    email.set("iotsakp@gmail.com")
+                    url.set("https://github.com/Spasi")
+                }
+            }
+        }
+
         Artifacts.values().forEach { module ->
             if (module.isActive) {
                 create<MavenPublication>("maven${module.name}") {
@@ -356,33 +381,7 @@ publishing {
                     }
 
                     pom {
-                        name.set(module.projectName)
-                        description.set(module.projectDescription)
-                        url.set("https://www.lwjgl.org")
-                        packaging = "jar"
-
-                        scm {
-                            connection.set("scm:git:https://github.com/LWJGL/lwjgl3.git")
-                            developerConnection.set("scm:git:https://github.com/LWJGL/lwjgl3.git")
-                            url.set("https://github.com/LWJGL/lwjgl3.git")
-                        }
-
-                        licenses {
-                            license {
-                                name.set("BSD")
-                                url.set("https://www.lwjgl.org/license")
-                                distribution.set("repo")
-                            }
-                        }
-
-                        developers {
-                            developer {
-                                id.set("spasi")
-                                name.set("Ioannis Tsakpinis")
-                                email.set("iotsakp@gmail.com")
-                                url.set("https://github.com/Spasi")
-                            }
-                        }
+                        setupPom(module.projectName, module.projectDescription, "jar")
 
                         if (module != Artifacts.CORE) {
                             withXml {
@@ -397,6 +396,36 @@ publishing {
                             }
                         }
                     }
+                }
+            }
+        }
+
+        create<MavenPublication>("lwjglBOM") {
+            from(components["javaPlatform"])
+            artifactId = "lwjgl-bom"
+
+            pom {
+                setupPom("LWJGL BOM", "LWJGL 3 Bill of Materials.", "pom")
+
+                withXml {
+                    asElement().getElementsByTagName("dependencyManagement").item(0).apply {
+                        asElement().getElementsByTagName("dependencies").item(0).apply {
+                            Artifacts.values().forEach { module ->
+                                module.platforms.forEach {
+                                    ownerDocument.createElement("dependency").also(::appendChild).apply {
+                                        appendChild(ownerDocument.createElement("groupId").also(::appendChild).apply { textContent = "org.lwjgl" })
+                                        appendChild(ownerDocument.createElement("artifactId").also(::appendChild).apply { textContent = module.artifact })
+                                        appendChild(ownerDocument.createElement("version").also(::appendChild).apply { textContent = project.version as String })
+                                        appendChild(ownerDocument.createElement("classifier").also(::appendChild).apply { textContent = "natives-${it.classifier}" })
+                                        appendChild(ownerDocument.createElement("scope").also(::appendChild).apply { textContent = "compile" })
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // Workaround for https://github.com/gradle/gradle/issues/7529
+                    asNode()
                 }
             }
         }
@@ -416,4 +445,12 @@ val copyArchives = tasks.create<Copy>("copyArchives") {
 
 tasks.withType<Sign> {
     dependsOn(copyArchives)
+}
+
+dependencies {
+    constraints {
+        Artifacts.values().forEach { module ->
+            api("org.lwjgl:${module.artifact}:$version")
+        }
+    }
 }
