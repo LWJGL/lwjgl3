@@ -1725,7 +1725,7 @@ rp_thread_destructor(void* value) {
 #include <errno.h>
 
 //! Initialize the allocator and setup global data
-extern inline int
+extern int
 rpmalloc_initialize(void) {
 	if (_rpmalloc_initialized) {
 		rpmalloc_thread_initialize();
@@ -2014,7 +2014,7 @@ rpmalloc_finalize(void) {
 }
 
 //! Initialize thread, assign heap
-extern inline void
+extern void
 rpmalloc_thread_initialize(void) {
 	if (!get_thread_heap_raw()) {
 		heap_t* heap = _memory_allocate_heap();
@@ -2137,7 +2137,7 @@ _memory_unmap_os(void* address, size_t size, size_t offset, size_t release) {
 
 // Extern interface
 
-extern inline RPMALLOC_ALLOCATOR void*
+extern RPMALLOC_ALLOCATOR void*
 rpmalloc(size_t size) {
 #if ENABLE_VALIDATE_ARGS
 	if (size >= MAX_ALLOC_SIZE) {
@@ -2149,12 +2149,12 @@ rpmalloc(size_t size) {
 	return _memory_allocate(heap, size);
 }
 
-extern inline void
+extern void
 rpfree(void* ptr) {
 	_memory_deallocate(ptr);
 }
 
-extern inline RPMALLOC_ALLOCATOR void*
+extern RPMALLOC_ALLOCATOR void*
 rpcalloc(size_t num, size_t size) {
 	size_t total;
 #if ENABLE_VALIDATE_ARGS
@@ -2180,7 +2180,7 @@ rpcalloc(size_t num, size_t size) {
 	return block;
 }
 
-extern inline RPMALLOC_ALLOCATOR void*
+extern RPMALLOC_ALLOCATOR void*
 rprealloc(void* ptr, size_t size) {
 #if ENABLE_VALIDATE_ARGS
 	if (size >= MAX_ALLOC_SIZE) {
@@ -2322,12 +2322,12 @@ retry:
 	return ptr;
 }
 
-extern inline RPMALLOC_ALLOCATOR void*
+extern RPMALLOC_ALLOCATOR void*
 rpmemalign(size_t alignment, size_t size) {
 	return rpaligned_alloc(alignment, size);
 }
 
-extern inline int
+extern int
 rpposix_memalign(void **memptr, size_t alignment, size_t size) {
 	if (memptr)
 		*memptr = rpaligned_alloc(alignment, size);
@@ -2336,12 +2336,12 @@ rpposix_memalign(void **memptr, size_t alignment, size_t size) {
 	return *memptr ? 0 : ENOMEM;
 }
 
-extern inline size_t
+extern size_t
 rpmalloc_usable_size(void* ptr) {
 	return (ptr ? _memory_usable_size(ptr) : 0);
 }
 
-extern inline void
+extern void
 rpmalloc_thread_collect(void) {
 }
 
