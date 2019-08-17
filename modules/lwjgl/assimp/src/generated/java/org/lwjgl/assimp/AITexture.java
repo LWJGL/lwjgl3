@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * Width of the texture, in pixels. If {@code mHeight} is zero the texture is compressed in a format like JPEG. In this case {@code mWidth} specifies the
  * size of the memory area {@code pcData} is pointing to, in bytes.</li>
  * <li>{@code mHeight} &ndash; Height of the texture, in pixels. If this value is zero, {@code pcData} points to an compressed texture in any format (e.g. JPEG).</li>
- * <li>{@code achFormatHint} &ndash; 
+ * <li>{@code achFormatHint[9]} &ndash; 
  * A hint from the loader to make it easier for applications to determine the type of embedded textures.
  * 
  * <p>If {@code mHeight != 0} this member is show how data is packed. Hint will consist of two parts: channel order and channel bitness (count of the bits

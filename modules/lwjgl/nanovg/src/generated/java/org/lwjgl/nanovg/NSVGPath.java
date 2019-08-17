@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>{@code pts} &ndash; cubic bezier points: {@code x0,y0, [cpx1,cpx1,cpx2,cpy2,x1,y1], ...}</li>
  * <li>{@code npts} &ndash; total number of bezier points</li>
  * <li>{@code closed} &ndash; flag indicating if shapes should be treated as closed</li>
- * <li>{@code bounds} &ndash; tight bounding box of the shape {@code [minx,miny,maxx,maxy]}</li>
+ * <li>{@code bounds[4]} &ndash; tight bounding box of the shape {@code [minx,miny,maxx,maxy]}</li>
  * <li>{@code next} &ndash; pointer to next path, or {@code NULL} if last element</li>
  * </ul>
  * 

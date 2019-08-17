@@ -34,8 +34,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code mNormals} &ndash; Replacement for {@link AIMesh}{@code ::mNormals}.</li>
  * <li>{@code mTangents} &ndash; Replacement for {@link AIMesh}{@code ::mTangents}.</li>
  * <li>{@code mBitangents} &ndash; Replacement for {@link AIMesh}{@code ::mBitangents}.</li>
- * <li>{@code mColors} &ndash; Replacement for {@link AIMesh}{@code ::mColors}</li>
- * <li>{@code mTextureCoords} &ndash; Replacement for {@link AIMesh}{@code ::mTextureCoords}</li>
+ * <li>{@code mColors[Assimp.AI_MAX_NUMBER_OF_COLOR_SETS]} &ndash; Replacement for {@link AIMesh}{@code ::mColors}</li>
+ * <li>{@code mTextureCoords[Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS]} &ndash; Replacement for {@link AIMesh}{@code ::mTextureCoords}</li>
  * <li>{@code mNumVertices} &ndash; 
  * The number of vertices in the {@code aiAnimMesh}, and thus the length of all the member arrays. This has always the same value as the
  * {@code mNumVertices} property in the corresponding {@link AIMesh}. It is duplicated here merely to make the length of the member arrays accessible even if

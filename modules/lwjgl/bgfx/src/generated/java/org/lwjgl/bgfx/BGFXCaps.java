@@ -29,9 +29,9 @@ import static org.lwjgl.bgfx.BGFX.BGFX_TEXTURE_FORMAT_COUNT;
  * <li>{@code homogeneousDepth} &ndash; true when NDC depth is in [-1, 1] range, otherwise its [0, 1]</li>
  * <li>{@code originBottomLeft} &ndash; true when NDC origin is at bottom left</li>
  * <li>{@code numGPUs} &ndash; number of enumerated GPUs</li>
- * <li>{@code gpu} &ndash; enumerated GPUs</li>
+ * <li>{@code gpu[4]} &ndash; enumerated GPUs</li>
  * <li>{@code limits} &ndash; rendering limits</li>
- * <li>{@code formats} &ndash; supported texture formats</li>
+ * <li>{@code formats[BGFX_TEXTURE_FORMAT_COUNT]} &ndash; supported texture formats</li>
  * </ul>
  * 
  * <h3>Layout</h3>

@@ -26,11 +26,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code cb} &ndash; size, in bytes, of the {@code DISPLAY_DEVICE} structure. This must be initialized prior to calling {@link User32#EnumDisplayDevices}.</li>
- * <li>{@code DeviceName} &ndash; an array of characters identifying the device name. This is either the adapter device or the monitor device.</li>
- * <li>{@code DeviceString} &ndash; an array of characters containing the device context string. This is either a description of the display adapter or of the display monitor.</li>
+ * <li>{@code DeviceName[32]} &ndash; an array of characters identifying the device name. This is either the adapter device or the monitor device.</li>
+ * <li>{@code DeviceString[128]} &ndash; an array of characters containing the device context string. This is either a description of the display adapter or of the display monitor.</li>
  * <li>{@code StateFlags} &ndash; device state flags</li>
- * <li>{@code DeviceID} &ndash; not used</li>
- * <li>{@code DeviceKey} &ndash; reserved</li>
+ * <li>{@code DeviceID[128]} &ndash; not used</li>
+ * <li>{@code DeviceKey[128]} &ndash; reserved</li>
  * </ul>
  * 
  * <h3>Layout</h3>

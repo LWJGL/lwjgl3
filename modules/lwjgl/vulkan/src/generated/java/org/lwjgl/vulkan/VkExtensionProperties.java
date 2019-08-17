@@ -23,7 +23,7 @@ import static org.lwjgl.vulkan.VK10.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code extensionName} &ndash; a null-terminated string specifying the name of the extension.</li>
+ * <li>{@code extensionName[VK_MAX_EXTENSION_NAME_SIZE]} &ndash; a null-terminated string specifying the name of the extension.</li>
  * <li>{@code specVersion} &ndash; the version of this extension. It is an integer, incremented with backward compatible changes.</li>
  * </ul>
  * 

@@ -22,11 +22,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code flFingerCurl} &ndash; 
+ * <li>{@code flFingerCurl[5]} &ndash; 
  * The amount that each finger is 'curled' inwards towards the palm.
  * 
  * <p>In the case of the thumb, this represents how much the thumb is wrapped around the fist. 0 means straight, 1 means fully curled.</p></li>
- * <li>{@code flFingerSplay} &ndash; 
+ * <li>{@code flFingerSplay[4]} &ndash; 
  * The amount that each pair of adjacent fingers are separated.
  * 
  * <p>0 means the digits are touching, 1 means they are fully separated.</p></li>

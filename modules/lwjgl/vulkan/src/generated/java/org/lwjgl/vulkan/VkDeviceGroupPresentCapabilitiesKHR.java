@@ -46,7 +46,7 @@ import static org.lwjgl.vulkan.VK11.*;
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code presentMask} &ndash; an array of masks, where the mask at element <code>i</code> is non-zero if physical device <code>i</code> has a presentation engine, and where bit <code>j</code> is set in element <code>i</code> if physical device <code>i</code> <b>can</b> present swapchain images from physical device <code>j</code>. If element <code>i</code> is non-zero, then bit <code>i</code> <b>must</b> be set.</li>
+ * <li>{@code presentMask[VK_MAX_DEVICE_GROUP_SIZE]} &ndash; an array of masks, where the mask at element <code>i</code> is non-zero if physical device <code>i</code> has a presentation engine, and where bit <code>j</code> is set in element <code>i</code> if physical device <code>i</code> <b>can</b> present swapchain images from physical device <code>j</code>. If element <code>i</code> is non-zero, then bit <code>i</code> <b>must</b> be set.</li>
  * <li>{@code modes} &ndash; a bitmask of {@code VkDeviceGroupPresentModeFlagBitsKHR} indicating which device group presentation modes are supported.</li>
  * </ul>
  * 

@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code name} &ndash; view name</li>
+ * <li>{@code name[256]} &ndash; view name</li>
  * <li>{@code view} &ndash; view id</li>
  * <li>{@code cpuTimeElapsed} &ndash; CPU (submit) time elapsed</li>
  * <li>{@code gpuTimeElapsed} &ndash; GPU time elapsed</li>

@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code Result} &ndash; the result from the last API call that generated an error {@code ovrResult}</li>
- * <li>{@code ErrorString} &ndash; a UTF8-encoded null-terminated English string describing the problem. The format of this string is subject to change in future versions</li>
+ * <li>{@code ErrorString[512]} &ndash; a UTF8-encoded null-terminated English string describing the problem. The format of this string is subject to change in future versions</li>
  * </ul>
  * 
  * <h3>Layout</h3>

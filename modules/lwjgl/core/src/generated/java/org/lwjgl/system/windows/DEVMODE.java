@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code dmDeviceName} &ndash; 
+ * <li>{@code dmDeviceName[32]} &ndash; 
  * A zero-terminated character array that specifies the "friendly" name of the printer or display; for example, "PCL/HP LaserJet" in the case of PCL/HP
  * LaserJet. This string is unique among device drivers. Note that this name may be truncated to fit in the {@code dmDeviceName} array.</li>
  * <li>{@code dmSpecVersion} &ndash; 
@@ -77,7 +77,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code dmYResolution} &ndash; for printer devices only</li>
  * <li>{@code dmTTOption} &ndash; for printer devices only</li>
  * <li>{@code dmCollate} &ndash; for printer devices only</li>
- * <li>{@code dmFormName} &ndash; for printer devices only</li>
+ * <li>{@code dmFormName[32]} &ndash; for printer devices only</li>
  * <li>{@code dmLogPixels} &ndash; the number of pixels per logical inch</li>
  * <li>{@code dmBitsPerPel} &ndash; 
  * specifies the color resolution, in bits per pixel, of the display device (for example: 4 bits for 16 colors, 8 bits for 256 colors, or 16 bits for

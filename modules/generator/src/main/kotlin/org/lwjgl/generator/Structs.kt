@@ -511,6 +511,7 @@ $indentation}"""
 
     private fun printMemberDocumentation(prefix: String = "", documentation: MutableList<String> = ArrayList()): List<String> {
         members.forEach {
+            val size = if (it is StructMemberArray) "[${it.size}]" else ""
             val doc = if (it.documentation.isNotEmpty() || it.links.isNotEmpty()) {
                 if (it.links.isEmpty())
                     it.documentation
@@ -529,9 +530,9 @@ $indentation}"""
                 nestedStruct.printMemberDocumentation(if (it.name === ANONYMOUS) prefix else "$prefix${it.name}.", memberDoc)
 
                 val name = if (it.name === ANONYMOUS)
-                    "${if (prefix.isEmpty()) "" else "{@code $prefix}"}<em>&lt;${if (nestedStruct.union) "union" else "struct"}&gt;</em>"
+                    "${if (prefix.isEmpty()) "" else "{@code $prefix}"}<em>&lt;${if (nestedStruct.union) "union" else "struct"}&gt;$size</em>"
                 else
-                    "{@code $prefix${it.name}}"
+                    "{@code $prefix${it.name}$size}"
 
                 if (memberDoc.isNotEmpty()) {
                     documentation.add("$name${if (doc == null) "" else " &ndash; $doc"}\n\n${ul(*memberDoc.toTypedArray())}")
@@ -539,7 +540,7 @@ $indentation}"""
                     documentation.add("$name &ndash; $doc")
                 }
             } else if (doc != null) {
-                documentation.add("{@code $prefix${it.name}} &ndash; $doc")
+                documentation.add("{@code $prefix${it.name}$size} &ndash; $doc")
             }
         }
         return documentation

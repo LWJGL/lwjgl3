@@ -36,8 +36,8 @@ import static org.lwjgl.vulkan.VK10.*;
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code heapBudget} &ndash; an array of memory budgets, with one element for each memory heap. A heap&#8217;s budget is a rough estimate of how much memory the process <b>can</b> allocate from that heap before allocations <b>may</b> fail or cause performance degradation. The budget includes any currently allocated device memory.</li>
- * <li>{@code heapUsage} &ndash; an array of memory usage, with one element for each memory heap. A heap&#8217;s usage is an estimate of how much memory the process is currently using in that heap.</li>
+ * <li>{@code heapBudget[VK_MAX_MEMORY_HEAPS]} &ndash; an array of memory budgets, with one element for each memory heap. A heap&#8217;s budget is a rough estimate of how much memory the process <b>can</b> allocate from that heap before allocations <b>may</b> fail or cause performance degradation. The budget includes any currently allocated device memory.</li>
+ * <li>{@code heapUsage[VK_MAX_MEMORY_HEAPS]} &ndash; an array of memory usage, with one element for each memory heap. A heap&#8217;s usage is an estimate of how much memory the process is currently using in that heap.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

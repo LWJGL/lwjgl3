@@ -22,8 +22,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code xform} &ndash; the transformation matrix</li>
- * <li>{@code extent} &ndash; the extent</li>
+ * <li>{@code xform[6]} &ndash; the transformation matrix</li>
+ * <li>{@code extent[2]} &ndash; the extent</li>
  * <li>{@code radius} &ndash; the radius</li>
  * <li>{@code feather} &ndash; the feather amount</li>
  * <li>{@code innerColor} &ndash; the inner color</li>

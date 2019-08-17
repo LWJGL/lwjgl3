@@ -25,19 +25,19 @@ import static org.lwjgl.ovr.OVR.ovrEye_Count;
  * 
  * <ul>
  * <li>{@code Type} &ndash; this HMD's type. One of:<br><table><tr><td>{@link OVR#ovrHmd_None Hmd_None}</td><td>{@link OVR#ovrHmd_DK1 Hmd_DK1}</td><td>{@link OVR#ovrHmd_DKHD Hmd_DKHD}</td><td>{@link OVR#ovrHmd_DK2 Hmd_DK2}</td><td>{@link OVR#ovrHmd_CB Hmd_CB}</td><td>{@link OVR#ovrHmd_Other Hmd_Other}</td><td>{@link OVR#ovrHmd_E3_2015 Hmd_E3_2015}</td><td>{@link OVR#ovrHmd_ES06 Hmd_ES06}</td><td>{@link OVR#ovrHmd_ES09 Hmd_ES09}</td><td>{@link OVR#ovrHmd_ES11 Hmd_ES11}</td></tr><tr><td>{@link OVR#ovrHmd_CV1 Hmd_CV1}</td></tr></table></li>
- * <li>{@code ProductName} &ndash; name string describing the product: "Oculus Rift DK1", etc.</li>
- * <li>{@code Manufacturer} &ndash; string describing the manufacturer. Usually "Oculus".</li>
+ * <li>{@code ProductName[64]} &ndash; name string describing the product: "Oculus Rift DK1", etc.</li>
+ * <li>{@code Manufacturer[64]} &ndash; string describing the manufacturer. Usually "Oculus".</li>
  * <li>{@code VendorId} &ndash; HID Vendor ID of the device</li>
  * <li>{@code ProductId} &ndash; HID Product ID of the device</li>
- * <li>{@code SerialNumber} &ndash; HMD serial number</li>
+ * <li>{@code SerialNumber[24]} &ndash; HMD serial number</li>
  * <li>{@code FirmwareMajor} &ndash; HMD firmware major version number</li>
  * <li>{@code FirmwareMinor} &ndash; HMD firmware minor version number</li>
  * <li>{@code AvailableHmdCaps} &ndash; available {@code ovrHmdCaps} bits</li>
  * <li>{@code DefaultHmdCaps} &ndash; default {@code ovrHmdCaps} bits</li>
  * <li>{@code AvailableTrackingCaps} &ndash; available {@code ovrTrackingCaps} bits</li>
  * <li>{@code DefaultTrackingCaps} &ndash; default {@code ovrTrackingCaps} bits</li>
- * <li>{@code DefaultEyeFov} &ndash; the recommended optical FOV for the HMD</li>
- * <li>{@code MaxEyeFov} &ndash; the maximum optical FOV for the HMD</li>
+ * <li>{@code DefaultEyeFov[ovrEye_Count]} &ndash; the recommended optical FOV for the HMD</li>
+ * <li>{@code MaxEyeFov[ovrEye_Count]} &ndash; the maximum optical FOV for the HMD</li>
  * <li>{@code Resolution} &ndash; resolution of the full HMD screen (both eyes) in pixels</li>
  * <li>{@code DisplayRefreshRate} &ndash; refresh rate of the display in cycles per second at the time of HMD creation</li>
  * </ul>

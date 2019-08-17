@@ -67,13 +67,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
  * 
  * <p>If the mesh contains tangents, it automatically also contains bitangents.</p></div></li>
- * <li>{@code mColors} &ndash; 
+ * <li>{@code mColors[Assimp.AI_MAX_NUMBER_OF_COLOR_SETS]} &ndash; 
  * Vertex color sets. A mesh may contain 0 to {@link Assimp#AI_MAX_NUMBER_OF_COLOR_SETS} vertex colors per vertex. {@code NULL} if not present. Each array is
  * {@code mNumVertices} in size if present.</li>
- * <li>{@code mTextureCoords} &ndash; 
+ * <li>{@code mTextureCoords[Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS]} &ndash; 
  * Vertex texture coords, also known as UV channels. A mesh may contain 0 to {@link Assimp#AI_MAX_NUMBER_OF_TEXTURECOORDS} per vertex. {@code NULL} if not present. The array
  * is {@code mNumVertices} in size.</li>
- * <li>{@code mNumUVComponents} &ndash; 
+ * <li>{@code mNumUVComponents[Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS]} &ndash; 
  * Specifies the number of components for a given UV channel. Up to three channels are supported (UVW, for accessing volume or cube maps). If the value is
  * 2 for a given channel n, the component {@code p.z} of {@code mTextureCoords[n][p]} is set to 0.0f. If the value is 1 for a given channel, {@code p.y}
  * is set to 0.0f, too.</li>

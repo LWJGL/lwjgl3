@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code uv} &ndash; texture coordinates</li>
+ * <li>{@code uv[2]} &ndash; texture coordinates</li>
  * <li>{@code offset} &ndash; offset between top left and glyph</li>
  * <li>{@code width} &ndash; width of the glyph</li>
  * <li>{@code height} &ndash; height of the glyph</li>

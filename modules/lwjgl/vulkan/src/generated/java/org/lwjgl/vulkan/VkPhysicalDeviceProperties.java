@@ -63,8 +63,8 @@ import static org.lwjgl.vulkan.VK10.*;
  * <li>{@code vendorID} &ndash; a unique identifier for the <em>vendor</em> (see below) of the physical device.</li>
  * <li>{@code deviceID} &ndash; a unique identifier for the physical device among devices available from the vendor.</li>
  * <li>{@code deviceType} &ndash; a {@code VkPhysicalDeviceType} specifying the type of device.</li>
- * <li>{@code deviceName} &ndash; a null-terminated UTF-8 string containing the name of the device.</li>
- * <li>{@code pipelineCacheUUID} &ndash; an array of size {@link VK10#VK_UUID_SIZE UUID_SIZE}, containing 8-bit values that represent a universally unique identifier for the device.</li>
+ * <li>{@code deviceName[VK_MAX_PHYSICAL_DEVICE_NAME_SIZE]} &ndash; a null-terminated UTF-8 string containing the name of the device.</li>
+ * <li>{@code pipelineCacheUUID[VK_UUID_SIZE]} &ndash; an array of size {@link VK10#VK_UUID_SIZE UUID_SIZE}, containing 8-bit values that represent a universally unique identifier for the device.</li>
  * <li>{@code limits} &ndash; the {@link VkPhysicalDeviceLimits} structure which specifies device-specific limits of the physical device. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#limits">Limits</a> for details.</li>
  * <li>{@code sparseProperties} &ndash; the {@link VkPhysicalDeviceSparseProperties} structure which specifies various sparse related properties of the physical device. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#sparsememory-physicalprops">Sparse Properties</a> for details.</li>
  * </ul>

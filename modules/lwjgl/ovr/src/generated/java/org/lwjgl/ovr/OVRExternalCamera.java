@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code Name} &ndash; camera identifier: vid + pid + serial number etc.</li>
+ * <li>{@code Name[32]} &ndash; camera identifier: vid + pid + serial number etc.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

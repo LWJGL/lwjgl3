@@ -18,20 +18,20 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code id} &ndash; optional 'id' attr of the shape or its group</li>
+ * <li>{@code id[64]} &ndash; optional 'id' attr of the shape or its group</li>
  * <li>{@code fill} &ndash; fill paint</li>
  * <li>{@code stroke} &ndash; stroke paint</li>
  * <li>{@code opacity} &ndash; opacity of the shape</li>
  * <li>{@code strokeWidth} &ndash; stroke width (scaled)</li>
  * <li>{@code strokeDashOffset} &ndash; stroke dash offset (scaled)</li>
- * <li>{@code strokeDashArray} &ndash; stroke dash array (scaled)</li>
+ * <li>{@code strokeDashArray[8]} &ndash; stroke dash array (scaled)</li>
  * <li>{@code strokeDashCount} &ndash; number of dash values in dash array</li>
  * <li>{@code strokeLineJoin} &ndash; stroke join type</li>
  * <li>{@code strokeLineCap} &ndash; stroke cap type</li>
  * <li>{@code miterLimit} &ndash; miter limit</li>
  * <li>{@code fillRule} &ndash; fill rule, see NSVGfillRule</li>
  * <li>{@code flags} &ndash; logical or of NSVG_FLAGS_* flags</li>
- * <li>{@code bounds} &ndash; tight bounding box of the shape {@code [minx,miny,maxx,maxy]}</li>
+ * <li>{@code bounds[4]} &ndash; tight bounding box of the shape {@code [minx,miny,maxx,maxy]}</li>
  * <li>{@code paths} &ndash; linked list of paths in the image</li>
  * <li>{@code next} &ndash; pointer to next shape, or {@code NULL} if last element</li>
  * </ul>

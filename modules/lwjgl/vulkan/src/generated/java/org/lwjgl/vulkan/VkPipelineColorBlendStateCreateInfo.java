@@ -54,7 +54,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code logicOp} &ndash; selects which logical operation to apply.</li>
  * <li>{@code attachmentCount} &ndash; the number of {@link VkPipelineColorBlendAttachmentState} elements in {@code pAttachments}. This value <b>must</b> equal the {@code colorAttachmentCount} for the subpass in which this pipeline is used.</li>
  * <li>{@code pAttachments} &ndash; a pointer to array of per target attachment states.</li>
- * <li>{@code blendConstants} &ndash; an array of four values used as the R, G, B, and A components of the blend constant that are used in blending, depending on the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#framebuffer-blendfactors">blend factor</a>.</li>
+ * <li>{@code blendConstants[4]} &ndash; an array of four values used as the R, G, B, and A components of the blend constant that are used in blending, depending on the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#framebuffer-blendfactors">blend factor</a>.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

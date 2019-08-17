@@ -35,7 +35,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * such as the task bar and side bars. Note that if the monitor is not the primary display monitor, some of the rectangle's coordinates may be negative
  * values.</li>
  * <li>{@code dwFlags} &ndash; the attributes of the display monitor. May be:<br>{@link User32#MONITORINFOF_PRIMARY}</li>
- * <li>{@code szDevice} &ndash; a string that specifies the device name of the monitor being used</li>
+ * <li>{@code szDevice[32]} &ndash; a string that specifies the device name of the monitor being used</li>
  * </ul>
  * 
  * <h3>Layout</h3>

@@ -22,8 +22,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code buttons} &ndash; the states of each gamepad button, {@link GLFW#GLFW_PRESS PRESS} or {@link GLFW#GLFW_RELEASE RELEASE}</li>
- * <li>{@code axes} &ndash; the states of each gamepad axis, in the range -1.0 to 1.0 inclusive</li>
+ * <li>{@code buttons[15]} &ndash; the states of each gamepad button, {@link GLFW#GLFW_PRESS PRESS} or {@link GLFW#GLFW_RELEASE RELEASE}</li>
+ * <li>{@code axes[6]} &ndash; the states of each gamepad axis, in the range -1.0 to 1.0 inclusive</li>
  * </ul>
  * 
  * <h3>Layout</h3>

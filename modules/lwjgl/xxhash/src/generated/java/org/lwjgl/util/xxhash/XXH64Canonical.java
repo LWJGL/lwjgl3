@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code digest} &ndash; the digest in canonical representation</li>
+ * <li>{@code digest[8]} &ndash; the digest in canonical representation</li>
  * </ul>
  * 
  * <h3>Layout</h3>

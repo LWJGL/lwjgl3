@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code m_bodyName} &ndash; for {@code btRigidBody}, it does not have a base, but can still have a body name from {@code urdf}</li>
+ * <li>{@code m_bodyName[1024]} &ndash; for {@code btRigidBody}, it does not have a base, but can still have a body name from {@code urdf}</li>
  * </ul>
  * 
  * <h3>Layout</h3>

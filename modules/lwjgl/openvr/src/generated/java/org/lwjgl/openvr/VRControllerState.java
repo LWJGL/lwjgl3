@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code unPacketNum} &ndash; If packet num matches that on your prior call, then the controller state hasn't been changed since your last call and there is no need to process it.</li>
  * <li>{@code ulButtonPressed} &ndash; bit flags for each of the buttons. Use {@code ButtonMaskFromId} to turn an ID into a mask</li>
- * <li>{@code rAxis} &ndash; axis data for the controller's analog inputs</li>
+ * <li>{@code rAxis[5]} &ndash; axis data for the controller's analog inputs</li>
  * </ul>
  * 
  * <h3>Layout</h3>

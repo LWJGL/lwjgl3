@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li><em>&lt;union&gt;</em>
  * 
  * <ul>
- * <li>{@code rgba} &ndash; an array of 4 color components</li>
+ * <li>{@code rgba[4]} &ndash; an array of 4 color components</li>
  * <li><em>&lt;struct&gt;</em>
  * 
  * <ul>

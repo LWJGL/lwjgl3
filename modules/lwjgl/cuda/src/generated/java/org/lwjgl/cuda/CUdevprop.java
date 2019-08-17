@@ -23,8 +23,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code maxThreadsPerBlock} &ndash; Maximum number of threads per block</li>
- * <li>{@code maxThreadsDim} &ndash; Maximum size of each dimension of a block</li>
- * <li>{@code maxGridSize} &ndash; Maximum size of each dimension of a grid</li>
+ * <li>{@code maxThreadsDim[3]} &ndash; Maximum size of each dimension of a block</li>
+ * <li>{@code maxGridSize[3]} &ndash; Maximum size of each dimension of a grid</li>
  * <li>{@code sharedMemPerBlock} &ndash; Shared memory available per block in bytes</li>
  * <li>{@code totalConstantMemory} &ndash; Constant memory available on device in bytes</li>
  * <li>{@code SIMDWidth} &ndash; Warp size in threads</li>

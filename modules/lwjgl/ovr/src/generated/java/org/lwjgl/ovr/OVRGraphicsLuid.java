@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code Reserved} &ndash; public definition reserves space for graphics API-specific implementation.</li>
+ * <li>{@code Reserved[8]} &ndash; public definition reserves space for graphics API-specific implementation.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

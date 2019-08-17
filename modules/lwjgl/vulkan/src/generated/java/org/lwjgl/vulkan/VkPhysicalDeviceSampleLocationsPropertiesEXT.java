@@ -40,7 +40,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code sampleLocationSampleCounts} &ndash; a bitmask of {@code VkSampleCountFlagBits} indicating the sample counts supporting custom sample locations.</li>
  * <li>{@code maxSampleLocationGridSize} &ndash; the maximum size of the pixel grid in which sample locations <b>can</b> vary that is supported for all sample counts in {@code sampleLocationSampleCounts}.</li>
- * <li>{@code sampleLocationCoordinateRange} &ndash; the range of supported sample location coordinates.</li>
+ * <li>{@code sampleLocationCoordinateRange[2]} &ndash; the range of supported sample location coordinates.</li>
  * <li>{@code sampleLocationSubPixelBits} &ndash; the number of bits of subpixel precision for sample locations.</li>
  * <li>{@code variableSampleLocations} &ndash; specifies whether the sample locations used by all pipelines that will be bound to a command buffer during a subpass <b>must</b> match. If set to {@link VK10#VK_TRUE TRUE}, the implementation supports variable sample locations in a subpass. If set to {@link VK10#VK_FALSE FALSE}, then the sample locations <b>must</b> stay constant in each subpass.</li>
  * </ul>

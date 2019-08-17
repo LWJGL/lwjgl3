@@ -25,7 +25,7 @@ import static org.lwjgl.bgfx.BGFX.BGFX_ATTRIB_COUNT;
  * 
  * <ul>
  * <li>{@code stride} &ndash; vertex stride</li>
- * <li>{@code offset} &ndash; relative attribute offset from the vertex</li>
+ * <li>{@code offset[BGFX_ATTRIB_COUNT]} &ndash; relative attribute offset from the vertex</li>
  * </ul>
  * 
  * <h3>Layout</h3>

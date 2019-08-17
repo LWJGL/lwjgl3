@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code M} &ndash; the matrix components</li>
+ * <li>{@code M[16]} &ndash; the matrix components</li>
  * </ul>
  * 
  * <h3>Layout</h3>

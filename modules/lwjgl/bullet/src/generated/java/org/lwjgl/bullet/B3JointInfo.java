@@ -20,9 +20,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code m_parentFrame} &ndash; position and orientation (quaternion)</li>
- * <li>{@code m_childFrame} &ndash; position and orientation (quaternion)</li>
- * <li>{@code m_jointAxis} &ndash; joint axis in parent local frame</li>
+ * <li>{@code m_parentFrame[7]} &ndash; position and orientation (quaternion)</li>
+ * <li>{@code m_childFrame[7]} &ndash; position and orientation (quaternion)</li>
+ * <li>{@code m_jointAxis[3]} &ndash; joint axis in parent local frame</li>
  * </ul>
  * 
  * <h3>Layout</h3>

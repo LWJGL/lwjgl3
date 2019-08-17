@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code stableDst} &ndash; pledges that last 64KB decompressed data will remain available unmodified. This optimization skips storage operations in tmp buffers.</li>
- * <li>{@code reserved} &ndash; must be set to zero for forward compatibility</li>
+ * <li>{@code reserved[3]} &ndash; must be set to zero for forward compatibility</li>
  * </ul>
  * 
  * <h3>Layout</h3>

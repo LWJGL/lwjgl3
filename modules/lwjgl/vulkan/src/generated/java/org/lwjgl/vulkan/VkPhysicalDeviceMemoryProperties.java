@@ -106,9 +106,9 @@ import static org.lwjgl.vulkan.VK10.*;
  * 
  * <ul>
  * <li>{@code memoryTypeCount} &ndash; the number of valid elements in the {@code memoryTypes} array.</li>
- * <li>{@code memoryTypes} &ndash; an array of {@link VkMemoryType} structures describing the <em>memory types</em> that <b>can</b> be used to access memory allocated from the heaps specified by {@code memoryHeaps}.</li>
+ * <li>{@code memoryTypes[VK_MAX_MEMORY_TYPES]} &ndash; an array of {@link VkMemoryType} structures describing the <em>memory types</em> that <b>can</b> be used to access memory allocated from the heaps specified by {@code memoryHeaps}.</li>
  * <li>{@code memoryHeapCount} &ndash; the number of valid elements in the {@code memoryHeaps} array.</li>
- * <li>{@code memoryHeaps} &ndash; an array of {@link VkMemoryHeap} structures describing the <em>memory heaps</em> from which memory <b>can</b> be allocated.</li>
+ * <li>{@code memoryHeaps[VK_MAX_MEMORY_HEAPS]} &ndash; an array of {@link VkMemoryHeap} structures describing the <em>memory heaps</em> from which memory <b>can</b> be allocated.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

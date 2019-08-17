@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code addressMode} &ndash; Address modes</li>
+ * <li>{@code addressMode[3]} &ndash; Address modes</li>
  * <li>{@code filterMode} &ndash; Filter mode</li>
  * <li>{@code flags} &ndash; Flags</li>
  * <li>{@code maxAnisotropy} &ndash; Maximum anisotropy ratio</li>
@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code mipmapLevelBias} &ndash; Mipmap level bias</li>
  * <li>{@code minMipmapLevelClamp} &ndash; Mipmap minimum level clamp</li>
  * <li>{@code maxMipmapLevelClamp} &ndash; Mipmap maximum level clamp</li>
- * <li>{@code borderColor} &ndash; Border Color</li>
+ * <li>{@code borderColor[4]} &ndash; Border Color</li>
  * </ul>
  * 
  * <h3>Layout</h3>

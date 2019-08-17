@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code extra} &ndash; we allocate two extra nodes so optimal user-node-count is {@code width} not {@code width+2}</li>
+ * <li>{@code extra[2]} &ndash; we allocate two extra nodes so optimal user-node-count is {@code width} not {@code width+2}</li>
  * </ul>
  * 
  * <h3>Layout</h3>

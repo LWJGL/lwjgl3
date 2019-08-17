@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code length} &ndash; Binary length of the string excluding the terminal 0.</li>
- * <li>{@code data} &ndash; String buffer.</li>
+ * <li>{@code data[Assimp.MAXLEN]} &ndash; String buffer.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

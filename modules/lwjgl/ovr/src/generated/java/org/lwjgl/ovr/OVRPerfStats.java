@@ -24,7 +24,7 @@ import static org.lwjgl.ovr.OVR.ovrMaxProvidedFrameStats;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code FrameStats} &ndash; 
+ * <li>{@code FrameStats[ovrMaxProvidedFrameStats]} &ndash; 
  * an array of performance stats.
  * 
  * <p>The performance entries will be ordered in reverse chronological order such that the first entry will be the most recent one.</p></li>

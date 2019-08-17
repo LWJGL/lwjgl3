@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code compressionLevel} &ndash; 0: default (fast mode); values &gt; {@link LZ4HC#LZ4HC_CLEVEL_MAX CLEVEL_MAX} count as {@link LZ4HC#LZ4HC_CLEVEL_MAX CLEVEL_MAX}; values &gt; 0 trigger "fast acceleration"</li>
  * <li>{@code autoFlush} &ndash; 1: always flush, reduces usage of internal buffers</li>
  * <li>{@code favorDecSpeed} &ndash; 1: parser favors decompression speed vs compression ratio. Only works for high compression modes (&ge; {@link LZ4HC#LZ4HC_CLEVEL_OPT_MIN CLEVEL_OPT_MIN}). Since version 1.8.2.</li>
- * <li>{@code reserved} &ndash; must be zero for forward compatibility</li>
+ * <li>{@code reserved[3]} &ndash; must be zero for forward compatibility</li>
  * </ul>
  * 
  * <h3>Layout</h3>

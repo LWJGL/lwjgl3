@@ -59,9 +59,9 @@ import static org.lwjgl.vulkan.VK11.*;
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code deviceUUID} &ndash; an array of size {@link VK10#VK_UUID_SIZE UUID_SIZE}, containing 8-bit values that represent a universally unique identifier for the device.</li>
- * <li>{@code driverUUID} &ndash; an array of size {@link VK10#VK_UUID_SIZE UUID_SIZE}, containing 8-bit values that represent a universally unique identifier for the driver build in use by the device.</li>
- * <li>{@code deviceLUID} &ndash; an array of size {@link VK11#VK_LUID_SIZE LUID_SIZE}, containing 8-bit values that represent a locally unique identifier for the device.</li>
+ * <li>{@code deviceUUID[VK_UUID_SIZE]} &ndash; an array of size {@link VK10#VK_UUID_SIZE UUID_SIZE}, containing 8-bit values that represent a universally unique identifier for the device.</li>
+ * <li>{@code driverUUID[VK_UUID_SIZE]} &ndash; an array of size {@link VK10#VK_UUID_SIZE UUID_SIZE}, containing 8-bit values that represent a universally unique identifier for the driver build in use by the device.</li>
+ * <li>{@code deviceLUID[VK_LUID_SIZE]} &ndash; an array of size {@link VK11#VK_LUID_SIZE LUID_SIZE}, containing 8-bit values that represent a locally unique identifier for the device.</li>
  * <li>{@code deviceNodeMask} &ndash; a bitfield identifying the node within a linked device adapter corresponding to the device.</li>
  * <li>{@code deviceLUIDValid} &ndash; a boolean value that will be {@link VK10#VK_TRUE TRUE} if {@code deviceLUID} contains a valid LUID and {@code deviceNodeMask} contains a valid node mask, and {@link VK10#VK_FALSE FALSE} if they do not.</li>
  * </ul>

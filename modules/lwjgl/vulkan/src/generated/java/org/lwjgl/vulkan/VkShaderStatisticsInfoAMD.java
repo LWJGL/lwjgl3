@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>{@code numPhysicalSgprs} &ndash; the maximum number of scalar instruction general-purpose registers (SGPRs) available to the physical device.</li>
  * <li>{@code numAvailableVgprs} &ndash; the maximum limit of VGPRs made available to the shader compiler.</li>
  * <li>{@code numAvailableSgprs} &ndash; the maximum limit of SGPRs made available to the shader compiler.</li>
- * <li>{@code computeWorkGroupSize} &ndash; the local workgroup size of this shader in { X, Y, Z } dimensions.</li>
+ * <li>{@code computeWorkGroupSize[3]} &ndash; the local workgroup size of this shader in { X, Y, Z } dimensions.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

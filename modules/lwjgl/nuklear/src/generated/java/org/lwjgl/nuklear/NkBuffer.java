@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code marker} &ndash; buffer marker to free a buffer to a certain offset</li>
+ * <li>{@code marker[2]} &ndash; buffer marker to free a buffer to a certain offset</li>
  * <li>{@code pool} &ndash; allocator callback for dynamic buffers</li>
  * <li>{@code type} &ndash; memory management type</li>
  * <li>{@code memory} &ndash; memory and size of the current memory block</li>

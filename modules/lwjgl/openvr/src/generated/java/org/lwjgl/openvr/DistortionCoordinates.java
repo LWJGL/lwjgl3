@@ -24,9 +24,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code rfRed} &ndash; the UVs for the red channel</li>
- * <li>{@code rfGreen} &ndash; the UVs for the green channel</li>
- * <li>{@code rfBlue} &ndash; the UVs for the blue channel</li>
+ * <li>{@code rfRed[2]} &ndash; the UVs for the red channel</li>
+ * <li>{@code rfGreen[2]} &ndash; the UVs for the green channel</li>
+ * <li>{@code rfBlue[2]} &ndash; the UVs for the blue channel</li>
  * </ul>
  * 
  * <h3>Layout</h3>

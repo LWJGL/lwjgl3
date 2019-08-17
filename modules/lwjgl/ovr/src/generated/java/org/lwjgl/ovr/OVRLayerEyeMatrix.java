@@ -39,12 +39,12 @@ import static org.lwjgl.ovr.OVR.ovrEye_Count;
  * 
  * <ul>
  * <li>{@code Header} &ndash; {@code Header.Type} must be {@link OVR#ovrLayerType_EyeMatrix LayerType_EyeMatrix}</li>
- * <li>{@code ColorTexture} &ndash; {@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be {@code NULL} for cases described above.</li>
- * <li>{@code Viewport} &ndash; specifies the {@code ColorTexture} sub-rect UV coordinates. Both {@code Viewport[0]} and {@code Viewport[1]} must be valid.</li>
- * <li>{@code RenderPose} &ndash; 
+ * <li>{@code ColorTexture[ovrEye_Count]} &ndash; {@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be {@code NULL} for cases described above.</li>
+ * <li>{@code Viewport[ovrEye_Count]} &ndash; specifies the {@code ColorTexture} sub-rect UV coordinates. Both {@code Viewport[0]} and {@code Viewport[1]} must be valid.</li>
+ * <li>{@code RenderPose[ovrEye_Count]} &ndash; 
  * specifies the position and orientation of each eye view, with the position specified in meters. {@code RenderPose} will typically be the value
  * returned from {@link OVRUtil#ovr_CalcEyePoses _CalcEyePoses}, but can be different in special cases if a different head pose is used for rendering.</li>
- * <li>{@code Matrix} &ndash; 
+ * <li>{@code Matrix[ovrEye_Count]} &ndash; 
  * specifies the mapping from a view-space vector to a UV coordinate on the textures given above.
  * 
  * <pre><code>

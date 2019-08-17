@@ -34,7 +34,7 @@ import static org.lwjgl.ovr.OVR.ovrEye_Count;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code HmdToEyePose} &ndash; transform of each eye from the HMD center, in meters</li>
+ * <li>{@code HmdToEyePose[ovrEye_Count]} &ndash; transform of each eye from the HMD center, in meters</li>
  * <li>{@code HmdSpaceToWorldScaleInMeters} &ndash; ratio of viewer units to meter units</li>
  * </ul>
  * 

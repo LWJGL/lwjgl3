@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code name} &ndash; uniform name</li>
+ * <li>{@code name[256]} &ndash; uniform name</li>
  * <li>{@code type} &ndash; uniform type</li>
  * <li>{@code num} &ndash; number of elements in array</li>
  * </ul>

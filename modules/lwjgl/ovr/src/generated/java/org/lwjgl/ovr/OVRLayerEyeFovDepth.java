@@ -38,17 +38,17 @@ import static org.lwjgl.ovr.OVR.ovrEye_Count;
  * 
  * <ul>
  * <li>{@code Header} &ndash; {@code Header.Type} must be {@link OVR#ovrLayerType_EyeFovDepth LayerType_EyeFovDepth}</li>
- * <li>{@code ColorTexture} &ndash; {@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be {@code NULL} for cases described above.</li>
- * <li>{@code Viewport} &ndash; specifies the {@code ColorTexture} sub-rect UV coordinates. Both {@code Viewport[0]} and {@code Viewport[1]} must be valid.</li>
- * <li>{@code Fov} &ndash; the viewport field of view</li>
- * <li>{@code RenderPose} &ndash; 
+ * <li>{@code ColorTexture[ovrEye_Count]} &ndash; {@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be {@code NULL} for cases described above.</li>
+ * <li>{@code Viewport[ovrEye_Count]} &ndash; specifies the {@code ColorTexture} sub-rect UV coordinates. Both {@code Viewport[0]} and {@code Viewport[1]} must be valid.</li>
+ * <li>{@code Fov[ovrEye_Count]} &ndash; the viewport field of view</li>
+ * <li>{@code RenderPose[ovrEye_Count]} &ndash; 
  * specifies the position and orientation of each eye view, with position specified in meters. {@code RenderPose} will typically be the value returned
  * from {@link OVRUtil#ovr_CalcEyePoses _CalcEyePoses}, but can be different in special cases if a different head pose is used for rendering.</li>
  * <li>{@code SensorSampleTime} &ndash; 
  * specifies the timestamp when the source {@link OVRPosef} (used in calculating {@code RenderPose}) was sampled from the SDK. Typically retrieved by calling
  * {@link OVR#ovr_GetTimeInSeconds GetTimeInSeconds} around the instant the application calls {@link OVR#ovr_GetTrackingState GetTrackingState}. The main purpose for this is to accurately track app tracking
  * latency.</li>
- * <li>{@code DepthTexture} &ndash; depth texture for depth composition with overlays. Must map 1:1 to the {@code ColorTexture}.</li>
+ * <li>{@code DepthTexture[ovrEye_Count]} &ndash; depth texture for depth composition with overlays. Must map 1:1 to the {@code ColorTexture}.</li>
  * <li>{@code ProjectionDesc} &ndash; specifies how to convert {@code DepthTexture} information into meters</li>
  * </ul>
  * 

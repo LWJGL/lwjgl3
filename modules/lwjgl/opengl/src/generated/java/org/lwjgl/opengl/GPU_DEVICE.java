@@ -25,10 +25,10 @@ import org.lwjgl.system.windows.*;
  * <ul>
  * <li>{@code cb} &ndash; 
  * the size of the {@code GPU_DEVICE} structure. Before calling {@link WGLNVGPUAffinity#wglEnumGpuDevicesNV EnumGpuDevicesNV}, set {@code cb} to the size, in bytes, of {@code GPU_DEVICE}.</li>
- * <li>{@code DeviceName} &ndash; 
+ * <li>{@code DeviceName[32]} &ndash; 
  * a string identifying the display device name. This will be the same string as stored in the {@code DeviceName} field of the {@code DISPLAY_DEVICE}
  * structure, which is filled in by {@code EnumDisplayDevices}.</li>
- * <li>{@code DeviceString} &ndash; 
+ * <li>{@code DeviceString[128]} &ndash; 
  * a string describing the GPU for this display device. It is the same string as stored in the {@code DeviceString} field in the {@code DISPLAY_DEVICE}
  * structure that is filled in by {@code EnumDisplayDevices} when it describes a display adapter (and not a monitor).</li>
  * <li>{@code Flags} &ndash; indicates the state of the display device</li>

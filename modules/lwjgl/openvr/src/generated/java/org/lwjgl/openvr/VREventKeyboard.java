@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code cNewInput} &ndash; up to 8 bytes of new input</li>
+ * <li>{@code cNewInput[8]} &ndash; up to 8 bytes of new input</li>
  * <li>{@code uUserValue} &ndash; possible flags about the new input</li>
  * </ul>
  * 
