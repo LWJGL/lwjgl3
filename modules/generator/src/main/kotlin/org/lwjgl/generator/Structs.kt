@@ -256,14 +256,14 @@ class Struct(
     fun struct(init: Struct.() -> Unit): StructMember {
         val struct = Struct(module, ANONYMOUS, "", ANONYMOUS, false, false, mutable, null, nativeLayout = false, generateBuffer = false)
         struct.init()
-        return StructType(struct).invoke(ANONYMOUS, ANONYMOUS)
+        return StructType(struct).invoke(ANONYMOUS, "")
     }
 
     /** Anonymous nested member union definition. */
     fun union(init: Struct.() -> Unit): StructMember {
         val struct = Struct(module, ANONYMOUS, "", ANONYMOUS, true, false, mutable, null, nativeLayout = false, generateBuffer = false)
         struct.init()
-        return StructType(struct).invoke(ANONYMOUS, ANONYMOUS)
+        return StructType(struct).invoke(ANONYMOUS, "")
     }
 
     /** Named nested struct/union. */
@@ -511,16 +511,34 @@ $indentation}"""
 
     private fun printMemberDocumentation(prefix: String = "", documentation: MutableList<String> = ArrayList()): List<String> {
         members.forEach {
-            if (it.isNestedStructDefinition)
-                (it.nativeType as StructType).definition.printMemberDocumentation(if (it.name === ANONYMOUS) prefix else "$prefix${it.name}.", documentation)
-            else if (it.documentation.isNotEmpty() || it.links.isNotEmpty()) {
-                val doc = if (it.links.isEmpty())
+            val doc = if (it.documentation.isNotEmpty() || it.links.isNotEmpty()) {
+                if (it.links.isEmpty())
                     it.documentation
                 else
                     it.linkMode.appendLinks(
                         it.documentation,
                         if (!it.links.contains('+')) it.links else linksFromRegex(it.links)
                     )
+            } else
+                null
+
+            if (it.isNestedStructDefinition) {
+                val nestedStruct = (it.nativeType as StructType).definition
+
+                val memberDoc = ArrayList<String>()
+                nestedStruct.printMemberDocumentation(if (it.name === ANONYMOUS) prefix else "$prefix${it.name}.", memberDoc)
+
+                val name = if (it.name === ANONYMOUS)
+                    "${if (prefix.isEmpty()) "" else "{@code $prefix}"}<em>&lt;${if (nestedStruct.union) "union" else "struct"}&gt;</em>"
+                else
+                    "{@code $prefix${it.name}}"
+
+                if (memberDoc.isNotEmpty()) {
+                    documentation.add("$name${if (doc == null) "" else " &ndash; $doc"}\n\n${ul(*memberDoc.toTypedArray())}")
+                } else if (doc != null) {
+                    documentation.add("$name &ndash; $doc")
+                }
+            } else if (doc != null) {
                 documentation.add("{@code $prefix${it.name}} &ndash; $doc")
             }
         }

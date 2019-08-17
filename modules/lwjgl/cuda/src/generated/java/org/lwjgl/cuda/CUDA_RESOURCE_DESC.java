@@ -23,18 +23,38 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code resType} &ndash; Resource type</li>
+ * <li>{@code res}
+ * 
+ * <ul>
+ * <li>{@code res.array}
+ * 
+ * <ul>
  * <li>{@code res.array.hArray} &ndash; CUDA array</li>
+ * </ul></li>
+ * <li>{@code res.mipmap}
+ * 
+ * <ul>
  * <li>{@code res.mipmap.hMipmappedArray} &ndash; CUDA mipmapped array</li>
+ * </ul></li>
+ * <li>{@code res.linear}
+ * 
+ * <ul>
  * <li>{@code res.linear.devPtr} &ndash; Device pointer</li>
  * <li>{@code res.linear.format} &ndash; Array format</li>
  * <li>{@code res.linear.numChannels} &ndash; Channels per array element</li>
  * <li>{@code res.linear.sizeInBytes} &ndash; Size in bytes</li>
+ * </ul></li>
+ * <li>{@code res.pitch2D}
+ * 
+ * <ul>
  * <li>{@code res.pitch2D.devPtr} &ndash; Device pointer</li>
  * <li>{@code res.pitch2D.format} &ndash; Array format</li>
  * <li>{@code res.pitch2D.numChannels} &ndash; Channels per array element</li>
  * <li>{@code res.pitch2D.width} &ndash; Width of the array in elements</li>
  * <li>{@code res.pitch2D.height} &ndash; Height of the array in elements</li>
  * <li>{@code res.pitch2D.pitchInBytes} &ndash; Pitch between two rows in bytes</li>
+ * </ul></li>
+ * </ul></li>
  * <li>{@code flags} &ndash; Flags (must be zero)</li>
  * </ul>
  * 

@@ -21,9 +21,13 @@ import org.lwjgl.system.windows.User32;
  * <h3>Member documentation</h3>
  * 
  * <ul>
+ * <li><em>&lt;union&gt;</em>
+ * 
+ * <ul>
  * <li>{@code hwnd} &ndash; the native window handle</li>
  * <li>{@code hbitmap} &ndash; the DDB handle</li>
  * <li>{@code pbits} &ndash; the DIB handle</li>
+ * </ul></li>
  * <li>{@code hdc} &ndash; the device context handle. This HDC should always be used instead of the HDC returned from {@code BeginPaint()} or any calls to {@link User32#GetDC}.</li>
  * <li>{@code hpalette} &ndash; the palette handle</li>
  * </ul>

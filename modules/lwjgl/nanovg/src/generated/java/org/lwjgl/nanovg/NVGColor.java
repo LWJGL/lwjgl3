@@ -22,11 +22,19 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
+ * <li><em>&lt;union&gt;</em>
+ * 
+ * <ul>
  * <li>{@code rgba} &ndash; an array of 4 color components</li>
+ * <li><em>&lt;struct&gt;</em>
+ * 
+ * <ul>
  * <li>{@code r} &ndash; the color red component</li>
  * <li>{@code g} &ndash; the color green component</li>
  * <li>{@code b} &ndash; the color blue component</li>
  * <li>{@code a} &ndash; the color alpha component</li>
+ * </ul></li>
+ * </ul></li>
  * </ul>
  * 
  * <h3>Layout</h3>

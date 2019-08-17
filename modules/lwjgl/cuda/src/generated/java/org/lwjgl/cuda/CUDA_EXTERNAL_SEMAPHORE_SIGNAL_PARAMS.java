@@ -22,6 +22,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
+ * <li>{@code params} &ndash; Parameters for fence objects
+ * 
+ * <ul>
+ * <li>{@code params.fence} &ndash; Value of fence to be signaled</li>
+ * </ul></li>
  * <li>{@code flags} &ndash; Flags reserved for the future. Must be zero.</li>
  * </ul>
  * 

@@ -22,8 +22,16 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
+ * <li>{@code waitValue}
+ * 
+ * <ul>
  * <li>{@code waitValue.alias} &ndash; For driver internal use. Initial value is unimportant.</li>
+ * </ul></li>
+ * <li>{@code writeValue}
+ * 
+ * <ul>
  * <li>{@code writeValue.alias} &ndash; For driver internal use. Initial value is unimportant.</li>
+ * </ul></li>
  * </ul>
  * 
  * <h3>Layout</h3>

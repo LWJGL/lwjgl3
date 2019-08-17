@@ -23,9 +23,22 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code type} &ndash; type of the handle</li>
+ * <li>{@code handle}
+ * 
+ * <ul>
  * <li>{@code handle.fd} &ndash; File descriptor referencing the semaphore object. Valid when type is ::CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD</li>
+ * <li>{@code handle.win32} &ndash; 
+ * Win32 handle referencing the semaphore object. Valid when type is one of the following:
+ * - ::CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32
+ * - ::CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT
+ * - ::CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE
+ * Exactly one of 'handle' and 'name' must be non-NULL. If type is ::CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT then 'name' must be NULL.
+ * 
+ * <ul>
  * <li>{@code handle.win32.handle} &ndash; Valid NT handle. Must be NULL if 'name' is non-NULL</li>
  * <li>{@code handle.win32.name} &ndash; Name of a valid synchronization primitive. Must be NULL if 'handle' is non-NULL.</li>
+ * </ul></li>
+ * </ul></li>
  * <li>{@code flags} &ndash; Flags reserved for the future. Must be zero.</li>
  * </ul>
  * 
