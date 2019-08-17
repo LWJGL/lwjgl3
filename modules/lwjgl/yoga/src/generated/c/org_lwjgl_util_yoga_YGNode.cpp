@@ -80,128 +80,86 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_yoga_YGNode_offsets(JNIEnv *__env, jc
     return sizeof(YGNodeLWJGL);
 }
 
-JNIEXPORT jboolean JNICALL JavaCritical_org_lwjgl_util_yoga_YGNode_nhasNewLayout__J(jlong bufferAddress) {
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_util_yoga_YGNode_nhasNewLayout__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
+    UNUSED_PARAMS(__env, clazz)
     YGNodeLWJGL *buffer = (YGNodeLWJGL *)(intptr_t)bufferAddress;
     return (jboolean)buffer->hasNewLayout;
 }
-JNIEXPORT jboolean JNICALL Java_org_lwjgl_util_yoga_YGNode_nhasNewLayout__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_yoga_YGNode_nhasNewLayout__J(bufferAddress);
-}
 
-JNIEXPORT jboolean JNICALL JavaCritical_org_lwjgl_util_yoga_YGNode_nisReferenceBaseline__J(jlong bufferAddress) {
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_util_yoga_YGNode_nisReferenceBaseline__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
+    UNUSED_PARAMS(__env, clazz)
     YGNodeLWJGL *buffer = (YGNodeLWJGL *)(intptr_t)bufferAddress;
     return (jboolean)buffer->isReferenceBaseline;
 }
-JNIEXPORT jboolean JNICALL Java_org_lwjgl_util_yoga_YGNode_nisReferenceBaseline__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_yoga_YGNode_nisReferenceBaseline__J(bufferAddress);
-}
 
-JNIEXPORT jboolean JNICALL JavaCritical_org_lwjgl_util_yoga_YGNode_nisDirty__J(jlong bufferAddress) {
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_util_yoga_YGNode_nisDirty__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
+    UNUSED_PARAMS(__env, clazz)
     YGNodeLWJGL *buffer = (YGNodeLWJGL *)(intptr_t)bufferAddress;
     return (jboolean)buffer->isDirty;
 }
-JNIEXPORT jboolean JNICALL Java_org_lwjgl_util_yoga_YGNode_nisDirty__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_yoga_YGNode_nisDirty__J(bufferAddress);
-}
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_yoga_YGNode_nnodeType__J(jlong bufferAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_yoga_YGNode_nnodeType__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
+    UNUSED_PARAMS(__env, clazz)
     YGNodeLWJGL *buffer = (YGNodeLWJGL *)(intptr_t)bufferAddress;
     return (jint)buffer->nodeType;
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_yoga_YGNode_nnodeType__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_yoga_YGNode_nnodeType__J(bufferAddress);
-}
 
-JNIEXPORT jboolean JNICALL JavaCritical_org_lwjgl_util_yoga_YGNode_nmeasureUsesContext__J(jlong bufferAddress) {
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_util_yoga_YGNode_nmeasureUsesContext__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
+    UNUSED_PARAMS(__env, clazz)
     YGNodeLWJGL *buffer = (YGNodeLWJGL *)(intptr_t)bufferAddress;
     return (jboolean)buffer->measureUsesContext;
 }
-JNIEXPORT jboolean JNICALL Java_org_lwjgl_util_yoga_YGNode_nmeasureUsesContext__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_yoga_YGNode_nmeasureUsesContext__J(bufferAddress);
-}
 
-JNIEXPORT jboolean JNICALL JavaCritical_org_lwjgl_util_yoga_YGNode_nbaselineUsesContext__J(jlong bufferAddress) {
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_util_yoga_YGNode_nbaselineUsesContext__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
+    UNUSED_PARAMS(__env, clazz)
     YGNodeLWJGL *buffer = (YGNodeLWJGL *)(intptr_t)bufferAddress;
     return (jboolean)buffer->baselineUsesContext;
 }
-JNIEXPORT jboolean JNICALL Java_org_lwjgl_util_yoga_YGNode_nbaselineUsesContext__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_yoga_YGNode_nbaselineUsesContext__J(bufferAddress);
-}
 
-JNIEXPORT jboolean JNICALL JavaCritical_org_lwjgl_util_yoga_YGNode_nprintUsesContext__J(jlong bufferAddress) {
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_util_yoga_YGNode_nprintUsesContext__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
+    UNUSED_PARAMS(__env, clazz)
     YGNodeLWJGL *buffer = (YGNodeLWJGL *)(intptr_t)bufferAddress;
     return (jboolean)buffer->printUsesContext;
 }
-JNIEXPORT jboolean JNICALL Java_org_lwjgl_util_yoga_YGNode_nprintUsesContext__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_yoga_YGNode_nprintUsesContext__J(bufferAddress);
-}
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_yoga_YGNode_nhasNewLayout__JZ(jlong bufferAddress, jboolean value) {
-    YGNodeLWJGL *buffer = (YGNodeLWJGL *)(intptr_t)bufferAddress;
-    buffer->hasNewLayout = (bool)value;
-}
 JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_YGNode_nhasNewLayout__JZ(JNIEnv *__env, jclass clazz, jlong bufferAddress, jboolean value) {
+    UNUSED_PARAMS(__env, clazz)
     YGNodeLWJGL *buffer = (YGNodeLWJGL *)(intptr_t)bufferAddress;
     buffer->hasNewLayout = (bool)value;
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_yoga_YGNode_nisReferenceBaseline__JZ(jlong bufferAddress, jboolean value) {
-    YGNodeLWJGL *buffer = (YGNodeLWJGL *)(intptr_t)bufferAddress;
-    buffer->isReferenceBaseline = (bool)value;
-}
 JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_YGNode_nisReferenceBaseline__JZ(JNIEnv *__env, jclass clazz, jlong bufferAddress, jboolean value) {
+    UNUSED_PARAMS(__env, clazz)
     YGNodeLWJGL *buffer = (YGNodeLWJGL *)(intptr_t)bufferAddress;
     buffer->isReferenceBaseline = (bool)value;
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_yoga_YGNode_nisDirty__JZ(jlong bufferAddress, jboolean value) {
-    YGNodeLWJGL *buffer = (YGNodeLWJGL *)(intptr_t)bufferAddress;
-    buffer->isDirty = (bool)value;
-}
 JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_YGNode_nisDirty__JZ(JNIEnv *__env, jclass clazz, jlong bufferAddress, jboolean value) {
+    UNUSED_PARAMS(__env, clazz)
     YGNodeLWJGL *buffer = (YGNodeLWJGL *)(intptr_t)bufferAddress;
     buffer->isDirty = (bool)value;
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_yoga_YGNode_nnodeType__JI(jlong bufferAddress, jint value) {
-    YGNodeLWJGL *buffer = (YGNodeLWJGL *)(intptr_t)bufferAddress;
-    buffer->nodeType = (YGNodeType)value;
-}
 JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_YGNode_nnodeType__JI(JNIEnv *__env, jclass clazz, jlong bufferAddress, jint value) {
+    UNUSED_PARAMS(__env, clazz)
     YGNodeLWJGL *buffer = (YGNodeLWJGL *)(intptr_t)bufferAddress;
     buffer->nodeType = (YGNodeType)value;
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_yoga_YGNode_nmeasureUsesContext__JZ(jlong bufferAddress, jboolean value) {
-    YGNodeLWJGL *buffer = (YGNodeLWJGL *)(intptr_t)bufferAddress;
-    buffer->measureUsesContext = (bool)value;
-}
 JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_YGNode_nmeasureUsesContext__JZ(JNIEnv *__env, jclass clazz, jlong bufferAddress, jboolean value) {
+    UNUSED_PARAMS(__env, clazz)
     YGNodeLWJGL *buffer = (YGNodeLWJGL *)(intptr_t)bufferAddress;
     buffer->measureUsesContext = (bool)value;
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_yoga_YGNode_nbaselineUsesContext__JZ(jlong bufferAddress, jboolean value) {
-    YGNodeLWJGL *buffer = (YGNodeLWJGL *)(intptr_t)bufferAddress;
-    buffer->baselineUsesContext = (bool)value;
-}
 JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_YGNode_nbaselineUsesContext__JZ(JNIEnv *__env, jclass clazz, jlong bufferAddress, jboolean value) {
+    UNUSED_PARAMS(__env, clazz)
     YGNodeLWJGL *buffer = (YGNodeLWJGL *)(intptr_t)bufferAddress;
     buffer->baselineUsesContext = (bool)value;
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_yoga_YGNode_nprintUsesContext__JZ(jlong bufferAddress, jboolean value) {
-    YGNodeLWJGL *buffer = (YGNodeLWJGL *)(intptr_t)bufferAddress;
-    buffer->printUsesContext = (bool)value;
-}
 JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_YGNode_nprintUsesContext__JZ(JNIEnv *__env, jclass clazz, jlong bufferAddress, jboolean value) {
+    UNUSED_PARAMS(__env, clazz)
     YGNodeLWJGL *buffer = (YGNodeLWJGL *)(intptr_t)bufferAddress;
     buffer->printUsesContext = (bool)value;
 }

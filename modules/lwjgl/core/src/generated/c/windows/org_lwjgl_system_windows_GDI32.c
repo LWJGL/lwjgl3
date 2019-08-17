@@ -14,72 +14,57 @@ typedef jint (APIENTRY *SwapBuffersPROC) (intptr_t);
 
 EXTERN_C_ENTER
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_system_windows_GDI32_nChoosePixelFormat(jlong hdcAddress, jlong pixelFormatDescriptorAddress, jlong __functionAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_GDI32_nChoosePixelFormat(JNIEnv *__env, jclass clazz, jlong hdcAddress, jlong pixelFormatDescriptorAddress, jlong __functionAddress) {
     ChoosePixelFormatPROC ChoosePixelFormat = (ChoosePixelFormatPROC)(intptr_t)__functionAddress;
     intptr_t hdc = (intptr_t)hdcAddress;
     intptr_t pixelFormatDescriptor = (intptr_t)pixelFormatDescriptorAddress;
     jint __result;
+    UNUSED_PARAMS(__env, clazz)
     __result = (jint)ChoosePixelFormat(hdc, pixelFormatDescriptor);
     saveLastError();
     return __result;
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_GDI32_nChoosePixelFormat(JNIEnv *__env, jclass clazz, jlong hdcAddress, jlong pixelFormatDescriptorAddress, jlong __functionAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_system_windows_GDI32_nChoosePixelFormat(hdcAddress, pixelFormatDescriptorAddress, __functionAddress);
-}
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_system_windows_GDI32_nDescribePixelFormat(jlong hdcAddress, jint pixelFormat, jint bytes, jlong pixelFormatDescriptorAddress, jlong __functionAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_GDI32_nDescribePixelFormat(JNIEnv *__env, jclass clazz, jlong hdcAddress, jint pixelFormat, jint bytes, jlong pixelFormatDescriptorAddress, jlong __functionAddress) {
     DescribePixelFormatPROC DescribePixelFormat = (DescribePixelFormatPROC)(intptr_t)__functionAddress;
     intptr_t hdc = (intptr_t)hdcAddress;
     intptr_t pixelFormatDescriptor = (intptr_t)pixelFormatDescriptorAddress;
     jint __result;
+    UNUSED_PARAMS(__env, clazz)
     __result = (jint)DescribePixelFormat(hdc, pixelFormat, bytes, pixelFormatDescriptor);
     saveLastError();
     return __result;
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_GDI32_nDescribePixelFormat(JNIEnv *__env, jclass clazz, jlong hdcAddress, jint pixelFormat, jint bytes, jlong pixelFormatDescriptorAddress, jlong __functionAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_system_windows_GDI32_nDescribePixelFormat(hdcAddress, pixelFormat, bytes, pixelFormatDescriptorAddress, __functionAddress);
-}
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_system_windows_GDI32_nGetPixelFormat(jlong hdcAddress, jlong __functionAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_GDI32_nGetPixelFormat(JNIEnv *__env, jclass clazz, jlong hdcAddress, jlong __functionAddress) {
     GetPixelFormatPROC GetPixelFormat = (GetPixelFormatPROC)(intptr_t)__functionAddress;
     intptr_t hdc = (intptr_t)hdcAddress;
     jint __result;
+    UNUSED_PARAMS(__env, clazz)
     __result = (jint)GetPixelFormat(hdc);
     saveLastError();
     return __result;
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_GDI32_nGetPixelFormat(JNIEnv *__env, jclass clazz, jlong hdcAddress, jlong __functionAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_system_windows_GDI32_nGetPixelFormat(hdcAddress, __functionAddress);
-}
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_system_windows_GDI32_nSetPixelFormat(jlong hdcAddress, jint pixelFormat, jlong pixelFormatDescriptorAddress, jlong __functionAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_GDI32_nSetPixelFormat(JNIEnv *__env, jclass clazz, jlong hdcAddress, jint pixelFormat, jlong pixelFormatDescriptorAddress, jlong __functionAddress) {
     SetPixelFormatPROC SetPixelFormat = (SetPixelFormatPROC)(intptr_t)__functionAddress;
     intptr_t hdc = (intptr_t)hdcAddress;
     intptr_t pixelFormatDescriptor = (intptr_t)pixelFormatDescriptorAddress;
     jint __result;
+    UNUSED_PARAMS(__env, clazz)
     __result = (jint)SetPixelFormat(hdc, pixelFormat, pixelFormatDescriptor);
     saveLastError();
     return __result;
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_GDI32_nSetPixelFormat(JNIEnv *__env, jclass clazz, jlong hdcAddress, jint pixelFormat, jlong pixelFormatDescriptorAddress, jlong __functionAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_system_windows_GDI32_nSetPixelFormat(hdcAddress, pixelFormat, pixelFormatDescriptorAddress, __functionAddress);
-}
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_system_windows_GDI32_nSwapBuffers(jlong dcAddress, jlong __functionAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_GDI32_nSwapBuffers(JNIEnv *__env, jclass clazz, jlong dcAddress, jlong __functionAddress) {
     SwapBuffersPROC SwapBuffers = (SwapBuffersPROC)(intptr_t)__functionAddress;
     intptr_t dc = (intptr_t)dcAddress;
     jint __result;
+    UNUSED_PARAMS(__env, clazz)
     __result = (jint)SwapBuffers(dc);
     saveLastError();
     return __result;
-}
-JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_GDI32_nSwapBuffers(JNIEnv *__env, jclass clazz, jlong dcAddress, jlong __functionAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_system_windows_GDI32_nSwapBuffers(dcAddress, __functionAddress);
 }
 
 EXTERN_C_EXIT

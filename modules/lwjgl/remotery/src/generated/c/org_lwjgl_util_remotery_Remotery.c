@@ -20,83 +20,56 @@ ENABLE_WARNINGS()
 
 EXTERN_C_ENTER
 
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_remotery_Remotery_nrmt_1Settings(void) {
-    return (jlong)(intptr_t)rmt_Settings();
-}
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_remotery_Remotery_nrmt_1Settings(JNIEnv *__env, jclass clazz) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_remotery_Remotery_nrmt_1Settings();
+    return (jlong)(intptr_t)rmt_Settings();
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_remotery_Remotery_nrmt_1CreateGlobalInstance(jlong remoteryAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_remotery_Remotery_nrmt_1CreateGlobalInstance(JNIEnv *__env, jclass clazz, jlong remoteryAddress) {
     Remotery **remotery = (Remotery **)(intptr_t)remoteryAddress;
+    UNUSED_PARAMS(__env, clazz)
     return (jint)rmt_CreateGlobalInstance(remotery);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_remotery_Remotery_nrmt_1CreateGlobalInstance(JNIEnv *__env, jclass clazz, jlong remoteryAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_remotery_Remotery_nrmt_1CreateGlobalInstance(remoteryAddress);
-}
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_remotery_Remotery_nrmt_1DestroyGlobalInstance(jlong remoteryAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_util_remotery_Remotery_nrmt_1DestroyGlobalInstance(JNIEnv *__env, jclass clazz, jlong remoteryAddress) {
     Remotery *remotery = (Remotery *)(intptr_t)remoteryAddress;
+    UNUSED_PARAMS(__env, clazz)
     rmt_DestroyGlobalInstance(remotery);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_util_remotery_Remotery_nrmt_1DestroyGlobalInstance(JNIEnv *__env, jclass clazz, jlong remoteryAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_util_remotery_Remotery_nrmt_1DestroyGlobalInstance(remoteryAddress);
-}
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_remotery_Remotery_nrmt_1SetGlobalInstance(jlong remoteryAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_util_remotery_Remotery_nrmt_1SetGlobalInstance(JNIEnv *__env, jclass clazz, jlong remoteryAddress) {
     Remotery *remotery = (Remotery *)(intptr_t)remoteryAddress;
+    UNUSED_PARAMS(__env, clazz)
     rmt_SetGlobalInstance(remotery);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_util_remotery_Remotery_nrmt_1SetGlobalInstance(JNIEnv *__env, jclass clazz, jlong remoteryAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_util_remotery_Remotery_nrmt_1SetGlobalInstance(remoteryAddress);
-}
 
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_remotery_Remotery_rmt_1GetGlobalInstance(void) {
-    return (jlong)(intptr_t)rmt_GetGlobalInstance();
-}
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_remotery_Remotery_rmt_1GetGlobalInstance(JNIEnv *__env, jclass clazz) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_remotery_Remotery_rmt_1GetGlobalInstance();
+    return (jlong)(intptr_t)rmt_GetGlobalInstance();
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_remotery_Remotery_nrmt_1SetCurrentThreadName(jlong thread_nameAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_util_remotery_Remotery_nrmt_1SetCurrentThreadName(JNIEnv *__env, jclass clazz, jlong thread_nameAddress) {
     rmtPStr thread_name = (rmtPStr)(intptr_t)thread_nameAddress;
+    UNUSED_PARAMS(__env, clazz)
     rmt_SetCurrentThreadName(thread_name);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_util_remotery_Remotery_nrmt_1SetCurrentThreadName(JNIEnv *__env, jclass clazz, jlong thread_nameAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_util_remotery_Remotery_nrmt_1SetCurrentThreadName(thread_nameAddress);
-}
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_remotery_Remotery_nrmt_1LogText(jlong textAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_util_remotery_Remotery_nrmt_1LogText(JNIEnv *__env, jclass clazz, jlong textAddress) {
     rmtPStr text = (rmtPStr)(intptr_t)textAddress;
+    UNUSED_PARAMS(__env, clazz)
     rmt_LogText(text);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_util_remotery_Remotery_nrmt_1LogText(JNIEnv *__env, jclass clazz, jlong textAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_util_remotery_Remotery_nrmt_1LogText(textAddress);
-}
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_remotery_Remotery_nrmt_1BeginCPUSample(jlong nameAddress, jint flags, jlong hash_cacheAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_util_remotery_Remotery_nrmt_1BeginCPUSample(JNIEnv *__env, jclass clazz, jlong nameAddress, jint flags, jlong hash_cacheAddress) {
     rmtPStr name = (rmtPStr)(intptr_t)nameAddress;
     rmtU32 *hash_cache = (rmtU32 *)(intptr_t)hash_cacheAddress;
+    UNUSED_PARAMS(__env, clazz)
     _rmt_BeginCPUSample(name, flags, hash_cache);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_util_remotery_Remotery_nrmt_1BeginCPUSample(JNIEnv *__env, jclass clazz, jlong nameAddress, jint flags, jlong hash_cacheAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_util_remotery_Remotery_nrmt_1BeginCPUSample(nameAddress, flags, hash_cacheAddress);
-}
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_remotery_Remotery_rmt_1EndCPUSample(void) {
-    rmt_EndCPUSample();
-}
 JNIEXPORT void JNICALL Java_org_lwjgl_util_remotery_Remotery_rmt_1EndCPUSample(JNIEnv *__env, jclass clazz) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_util_remotery_Remotery_rmt_1EndCPUSample();
+    rmt_EndCPUSample();
 }
 
 EXTERN_C_EXIT

@@ -2166,13 +2166,10 @@ EXTERN_C_EXIT""")
                 val signature = "${nativeFileNameJNI}_n${"${prefix.replace('.', '_')}${it.name}".asJNIName}__J"
                 print("""
 
-JNIEXPORT ${it.nativeType.jniFunctionType} JNICALL JavaCritical_$signature(jlong bufferAddress) {
-    $nativeName *buffer = ($nativeName *)(intptr_t)bufferAddress;
-    return (${it.nativeType.jniFunctionType})buffer->$prefix${it.name};
-}
 JNIEXPORT ${it.nativeType.jniFunctionType} JNICALL Java_$signature(JNIEnv *$JNIENV, jclass clazz, jlong bufferAddress) {
     UNUSED_PARAMS($JNIENV, clazz)
-    return JavaCritical_$signature(bufferAddress);
+    $nativeName *buffer = ($nativeName *)(intptr_t)bufferAddress;
+    return (${it.nativeType.jniFunctionType})buffer->$prefix${it.name};
 }""")
             }
         }
@@ -2191,11 +2188,8 @@ JNIEXPORT ${it.nativeType.jniFunctionType} JNICALL Java_$signature(JNIEnv *$JNIE
                 val signature = "${nativeFileNameJNI}_n${"${prefix.replace('.', '_')}${it.name}".asJNIName}__J${it.nativeType.jniSignatureStrict}"
                 print("""
 
-JNIEXPORT void JNICALL JavaCritical_$signature(jlong bufferAddress, ${it.nativeType.jniFunctionType} value) {
-    $nativeName *buffer = ($nativeName *)(intptr_t)bufferAddress;
-    buffer->$prefix${it.name} = (${it.nativeType.name})value;
-}
 JNIEXPORT void JNICALL Java_$signature(JNIEnv *$JNIENV, jclass clazz, jlong bufferAddress, ${it.nativeType.jniFunctionType} value) {
+    UNUSED_PARAMS($JNIENV, clazz)
     $nativeName *buffer = ($nativeName *)(intptr_t)bufferAddress;
     buffer->$prefix${it.name} = (${it.nativeType.name})value;
 }""")

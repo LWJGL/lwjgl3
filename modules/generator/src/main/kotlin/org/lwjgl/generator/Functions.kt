@@ -1807,7 +1807,7 @@ class Func(
 
     internal fun generateFunction(writer: PrintWriter) {
         val hasArrays = hasParam { it.nativeType is ArrayType<*> }
-        val hasCritical = nativeClass.binding?.apiCapabilities != APICapabilities.JNI_CAPABILITIES && !parameters.contains(JNI_ENV)
+        val hasCritical = false && nativeClass.binding?.apiCapabilities != APICapabilities.JNI_CAPABILITIES && !parameters.contains(JNI_ENV)
         if (hasCritical) {
             writer.generateFunctionImpl(hasArrays, hasCritical, critical = true)
         }
@@ -1912,7 +1912,7 @@ class Func(
                 code = code.append(
                     nativeBeforeCall = getParams { it.nativeType is ArrayType<*> }.map {
                         "j${(it.nativeType.mapping as PointerMapping).primitive} *${it.name} = ${
-                        "(*$JNIENV)->GetPrimitiveArrayCritical($JNIENV, ${it.name}$POINTER_POSTFIX, 0)".let { expression ->
+                        "(*$JNIENV)->Get${(it.nativeType as PointerType<*>).mapping.box}ArrayElements($JNIENV, ${it.name}$POINTER_POSTFIX, NULL)".let { expression ->
                             if (it.has<Nullable>())
                                 "${it.name}$POINTER_POSTFIX == NULL ? NULL : $expression"
                             else
@@ -1924,7 +1924,7 @@ class Func(
                         .sortedByDescending { it.index }
                         .map { it.value }
                         .map {
-                            "(*$JNIENV)->ReleasePrimitiveArrayCritical($JNIENV, ${it.name}$POINTER_POSTFIX, ${it.name}, 0);".let { expression ->
+                            "(*$JNIENV)->Release${(it.nativeType as PointerType<*>).mapping.box}ArrayElements($JNIENV, ${it.name}$POINTER_POSTFIX, ${it.name}, 0);".let { expression ->
                                 if (it.has<Nullable>())
                                     "if (${it.name} != NULL) { $expression }"
                                 else

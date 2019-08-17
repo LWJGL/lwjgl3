@@ -17,22 +17,16 @@ ENABLE_WARNINGS()
 
 EXTERN_C_ENTER
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_nanovg_NanoVGGLES2_nnvglCreateImageFromHandle(jlong ctxAddress, jint textureId, jint w, jint h, jint flags) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_nanovg_NanoVGGLES2_nnvglCreateImageFromHandle(JNIEnv *__env, jclass clazz, jlong ctxAddress, jint textureId, jint w, jint h, jint flags) {
     NVGcontext *ctx = (NVGcontext *)(intptr_t)ctxAddress;
+    UNUSED_PARAMS(__env, clazz)
     return (jint)nvglCreateImageFromHandleGLES2(ctx, (GLuint)textureId, w, h, flags);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_nanovg_NanoVGGLES2_nnvglCreateImageFromHandle(JNIEnv *__env, jclass clazz, jlong ctxAddress, jint textureId, jint w, jint h, jint flags) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_nanovg_NanoVGGLES2_nnvglCreateImageFromHandle(ctxAddress, textureId, w, h, flags);
-}
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_nanovg_NanoVGGLES2_nnvglImageHandle(jlong ctxAddress, jint image) {
-    NVGcontext *ctx = (NVGcontext *)(intptr_t)ctxAddress;
-    return (jint)nvglImageHandleGLES2(ctx, image);
-}
 JNIEXPORT jint JNICALL Java_org_lwjgl_nanovg_NanoVGGLES2_nnvglImageHandle(JNIEnv *__env, jclass clazz, jlong ctxAddress, jint image) {
+    NVGcontext *ctx = (NVGcontext *)(intptr_t)ctxAddress;
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_nanovg_NanoVGGLES2_nnvglImageHandle(ctxAddress, image);
+    return (jint)nvglImageHandleGLES2(ctx, image);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_nanovg_NanoVGGLES2_nnvgCreate(JNIEnv *__env, jclass clazz, jint flags) {
@@ -40,42 +34,30 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_nanovg_NanoVGGLES2_nnvgCreate(JNIEnv *__e
     return (jlong)(intptr_t)nvgCreateGLES2(__env, flags);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_nanovg_NanoVGGLES2_nnvgDelete(jlong ctxAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_NanoVGGLES2_nnvgDelete(JNIEnv *__env, jclass clazz, jlong ctxAddress) {
     NVGcontext *ctx = (NVGcontext *)(intptr_t)ctxAddress;
+    UNUSED_PARAMS(__env, clazz)
     nvgDeleteGLES2(ctx);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_NanoVGGLES2_nnvgDelete(JNIEnv *__env, jclass clazz, jlong ctxAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_nanovg_NanoVGGLES2_nnvgDelete(ctxAddress);
-}
 
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_nanovg_NanoVGGLES2_nnvgluCreateFramebuffer(jlong ctxAddress, jint w, jint h, jint imageFlags) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_nanovg_NanoVGGLES2_nnvgluCreateFramebuffer(JNIEnv *__env, jclass clazz, jlong ctxAddress, jint w, jint h, jint imageFlags) {
     NVGcontext *ctx = (NVGcontext *)(intptr_t)ctxAddress;
+    UNUSED_PARAMS(__env, clazz)
     return (jlong)(intptr_t)nvgluCreateFramebufferGLES2(ctx, w, h, imageFlags);
 }
-JNIEXPORT jlong JNICALL Java_org_lwjgl_nanovg_NanoVGGLES2_nnvgluCreateFramebuffer(JNIEnv *__env, jclass clazz, jlong ctxAddress, jint w, jint h, jint imageFlags) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_nanovg_NanoVGGLES2_nnvgluCreateFramebuffer(ctxAddress, w, h, imageFlags);
-}
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_nanovg_NanoVGGLES2_nnvgluBindFramebuffer(jlong ctxAddress, jlong fbAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_NanoVGGLES2_nnvgluBindFramebuffer(JNIEnv *__env, jclass clazz, jlong ctxAddress, jlong fbAddress) {
     NVGcontext *ctx = (NVGcontext *)(intptr_t)ctxAddress;
     NVGLUframebuffer *fb = (NVGLUframebuffer *)(intptr_t)fbAddress;
+    UNUSED_PARAMS(__env, clazz)
     nvgluBindFramebufferGLES2(ctx, fb);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_NanoVGGLES2_nnvgluBindFramebuffer(JNIEnv *__env, jclass clazz, jlong ctxAddress, jlong fbAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_nanovg_NanoVGGLES2_nnvgluBindFramebuffer(ctxAddress, fbAddress);
-}
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_nanovg_NanoVGGLES2_nnvgluDeleteFramebuffer(jlong ctxAddress, jlong fbAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_NanoVGGLES2_nnvgluDeleteFramebuffer(JNIEnv *__env, jclass clazz, jlong ctxAddress, jlong fbAddress) {
     NVGcontext *ctx = (NVGcontext *)(intptr_t)ctxAddress;
     NVGLUframebuffer *fb = (NVGLUframebuffer *)(intptr_t)fbAddress;
-    nvgluDeleteFramebufferGLES2(ctx, fb);
-}
-JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_NanoVGGLES2_nnvgluDeleteFramebuffer(JNIEnv *__env, jclass clazz, jlong ctxAddress, jlong fbAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_nanovg_NanoVGGLES2_nnvgluDeleteFramebuffer(ctxAddress, fbAddress);
+    nvgluDeleteFramebufferGLES2(ctx, fb);
 }
 
 EXTERN_C_EXIT

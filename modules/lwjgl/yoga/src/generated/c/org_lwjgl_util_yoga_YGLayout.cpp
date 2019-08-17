@@ -38,40 +38,28 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_yoga_YGLayout_offsets(JNIEnv *__env, 
     return sizeof(YGLayout);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_yoga_YGLayout_ndirection__J(jlong bufferAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_yoga_YGLayout_ndirection__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
+    UNUSED_PARAMS(__env, clazz)
     YGLayout *buffer = (YGLayout *)(intptr_t)bufferAddress;
     return (jint)buffer->direction;
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_yoga_YGLayout_ndirection__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_yoga_YGLayout_ndirection__J(bufferAddress);
-}
 
-JNIEXPORT jboolean JNICALL JavaCritical_org_lwjgl_util_yoga_YGLayout_ndidUseLegacyFlag__J(jlong bufferAddress) {
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_util_yoga_YGLayout_ndidUseLegacyFlag__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
+    UNUSED_PARAMS(__env, clazz)
     YGLayout *buffer = (YGLayout *)(intptr_t)bufferAddress;
     return (jboolean)buffer->didUseLegacyFlag;
 }
-JNIEXPORT jboolean JNICALL Java_org_lwjgl_util_yoga_YGLayout_ndidUseLegacyFlag__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_yoga_YGLayout_ndidUseLegacyFlag__J(bufferAddress);
-}
 
-JNIEXPORT jboolean JNICALL JavaCritical_org_lwjgl_util_yoga_YGLayout_ndoesLegacyStretchFlagAffectsLayout__J(jlong bufferAddress) {
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_util_yoga_YGLayout_ndoesLegacyStretchFlagAffectsLayout__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
+    UNUSED_PARAMS(__env, clazz)
     YGLayout *buffer = (YGLayout *)(intptr_t)bufferAddress;
     return (jboolean)buffer->doesLegacyStretchFlagAffectsLayout;
 }
-JNIEXPORT jboolean JNICALL Java_org_lwjgl_util_yoga_YGLayout_ndoesLegacyStretchFlagAffectsLayout__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_yoga_YGLayout_ndoesLegacyStretchFlagAffectsLayout__J(bufferAddress);
-}
 
-JNIEXPORT jboolean JNICALL JavaCritical_org_lwjgl_util_yoga_YGLayout_nhadOverflow__J(jlong bufferAddress) {
-    YGLayout *buffer = (YGLayout *)(intptr_t)bufferAddress;
-    return (jboolean)buffer->hadOverflow;
-}
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_util_yoga_YGLayout_nhadOverflow__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_yoga_YGLayout_nhadOverflow__J(bufferAddress);
+    YGLayout *buffer = (YGLayout *)(intptr_t)bufferAddress;
+    return (jboolean)buffer->hadOverflow;
 }
 
 EXTERN_C_EXIT

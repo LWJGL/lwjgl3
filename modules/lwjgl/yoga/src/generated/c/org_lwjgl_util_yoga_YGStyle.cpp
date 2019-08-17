@@ -37,94 +37,64 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_yoga_YGStyle_offsets(JNIEnv *__env, j
     return sizeof(YGStyle);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_yoga_YGStyle_ndirection__J(jlong bufferAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_yoga_YGStyle_ndirection__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
+    UNUSED_PARAMS(__env, clazz)
     YGStyle *buffer = (YGStyle *)(intptr_t)bufferAddress;
     return (jint)buffer->direction;
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_yoga_YGStyle_ndirection__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_yoga_YGStyle_ndirection__J(bufferAddress);
-}
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_yoga_YGStyle_nflexDirection__J(jlong bufferAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_yoga_YGStyle_nflexDirection__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
+    UNUSED_PARAMS(__env, clazz)
     YGStyle *buffer = (YGStyle *)(intptr_t)bufferAddress;
     return (jint)buffer->flexDirection;
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_yoga_YGStyle_nflexDirection__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_yoga_YGStyle_nflexDirection__J(bufferAddress);
-}
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_yoga_YGStyle_njustifyContent__J(jlong bufferAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_yoga_YGStyle_njustifyContent__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
+    UNUSED_PARAMS(__env, clazz)
     YGStyle *buffer = (YGStyle *)(intptr_t)bufferAddress;
     return (jint)buffer->justifyContent;
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_yoga_YGStyle_njustifyContent__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_yoga_YGStyle_njustifyContent__J(bufferAddress);
-}
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_yoga_YGStyle_nalignContent__J(jlong bufferAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_yoga_YGStyle_nalignContent__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
+    UNUSED_PARAMS(__env, clazz)
     YGStyle *buffer = (YGStyle *)(intptr_t)bufferAddress;
     return (jint)buffer->alignContent;
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_yoga_YGStyle_nalignContent__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_yoga_YGStyle_nalignContent__J(bufferAddress);
-}
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_yoga_YGStyle_nalignItems__J(jlong bufferAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_yoga_YGStyle_nalignItems__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
+    UNUSED_PARAMS(__env, clazz)
     YGStyle *buffer = (YGStyle *)(intptr_t)bufferAddress;
     return (jint)buffer->alignItems;
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_yoga_YGStyle_nalignItems__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_yoga_YGStyle_nalignItems__J(bufferAddress);
-}
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_yoga_YGStyle_nalignSelf__J(jlong bufferAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_yoga_YGStyle_nalignSelf__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
+    UNUSED_PARAMS(__env, clazz)
     YGStyle *buffer = (YGStyle *)(intptr_t)bufferAddress;
     return (jint)buffer->alignSelf;
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_yoga_YGStyle_nalignSelf__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_yoga_YGStyle_nalignSelf__J(bufferAddress);
-}
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_yoga_YGStyle_npositionType__J(jlong bufferAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_yoga_YGStyle_npositionType__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
+    UNUSED_PARAMS(__env, clazz)
     YGStyle *buffer = (YGStyle *)(intptr_t)bufferAddress;
     return (jint)buffer->positionType;
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_yoga_YGStyle_npositionType__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_yoga_YGStyle_npositionType__J(bufferAddress);
-}
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_yoga_YGStyle_nflexWrap__J(jlong bufferAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_yoga_YGStyle_nflexWrap__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
+    UNUSED_PARAMS(__env, clazz)
     YGStyle *buffer = (YGStyle *)(intptr_t)bufferAddress;
     return (jint)buffer->flexWrap;
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_yoga_YGStyle_nflexWrap__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_yoga_YGStyle_nflexWrap__J(bufferAddress);
-}
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_yoga_YGStyle_noverflow__J(jlong bufferAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_yoga_YGStyle_noverflow__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
+    UNUSED_PARAMS(__env, clazz)
     YGStyle *buffer = (YGStyle *)(intptr_t)bufferAddress;
     return (jint)buffer->overflow;
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_yoga_YGStyle_noverflow__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_yoga_YGStyle_noverflow__J(bufferAddress);
-}
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_yoga_YGStyle_ndisplay__J(jlong bufferAddress) {
-    YGStyle *buffer = (YGStyle *)(intptr_t)bufferAddress;
-    return (jint)buffer->display;
-}
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_yoga_YGStyle_ndisplay__J(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_yoga_YGStyle_ndisplay__J(bufferAddress);
+    YGStyle *buffer = (YGStyle *)(intptr_t)bufferAddress;
+    return (jint)buffer->display;
 }
 
 EXTERN_C_EXIT

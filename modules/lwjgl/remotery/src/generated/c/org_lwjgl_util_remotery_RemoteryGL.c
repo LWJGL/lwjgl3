@@ -17,38 +17,26 @@ ENABLE_WARNINGS()
 
 EXTERN_C_ENTER
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_remotery_RemoteryGL_rmt_1BindOpenGL(void) {
-    rmt_BindOpenGL();
-}
 JNIEXPORT void JNICALL Java_org_lwjgl_util_remotery_RemoteryGL_rmt_1BindOpenGL(JNIEnv *__env, jclass clazz) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_util_remotery_RemoteryGL_rmt_1BindOpenGL();
+    rmt_BindOpenGL();
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_remotery_RemoteryGL_rmt_1UnbindOpenGL(void) {
-    rmt_UnbindOpenGL();
-}
 JNIEXPORT void JNICALL Java_org_lwjgl_util_remotery_RemoteryGL_rmt_1UnbindOpenGL(JNIEnv *__env, jclass clazz) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_util_remotery_RemoteryGL_rmt_1UnbindOpenGL();
+    rmt_UnbindOpenGL();
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_remotery_RemoteryGL_nrmt_1BeginOpenGLSample(jlong nameAddress, jlong hash_cacheAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_util_remotery_RemoteryGL_nrmt_1BeginOpenGLSample(JNIEnv *__env, jclass clazz, jlong nameAddress, jlong hash_cacheAddress) {
     rmtPStr name = (rmtPStr)(intptr_t)nameAddress;
     rmtU32 *hash_cache = (rmtU32 *)(intptr_t)hash_cacheAddress;
+    UNUSED_PARAMS(__env, clazz)
     _rmt_BeginOpenGLSample(name, hash_cache);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_util_remotery_RemoteryGL_nrmt_1BeginOpenGLSample(JNIEnv *__env, jclass clazz, jlong nameAddress, jlong hash_cacheAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_util_remotery_RemoteryGL_nrmt_1BeginOpenGLSample(nameAddress, hash_cacheAddress);
-}
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_remotery_RemoteryGL_rmt_1EndOpenGLSample(void) {
-    rmt_EndOpenGLSample();
-}
 JNIEXPORT void JNICALL Java_org_lwjgl_util_remotery_RemoteryGL_rmt_1EndOpenGLSample(JNIEnv *__env, jclass clazz) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_util_remotery_RemoteryGL_rmt_1EndOpenGLSample();
+    rmt_EndOpenGLSample();
 }
 
 EXTERN_C_EXIT
