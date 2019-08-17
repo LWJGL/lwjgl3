@@ -70,3 +70,11 @@ This build includes the following changes:
 - Core: Function address parameters in `org.lwjgl.system.JNI` & `org.lwjgl.system.jawt.JAWTFunctions` methods are now last, after normal parameters. **(S)**
     * Enables tail-calls without argument shuffling, when Critical JNI Natives are used.
 - glfw: removed `CharSequence` overload of `glfwUpdateGamepadMappings`. **(S)** (#462)
+
+#### Known Issues
+
+- Core: LWJGL 3.2.2 is incompatible with Java 12 or higher. (#491)
+    * This issue is fixed in LWJGL 3.2.3.
+- Core: Using LWJGL 3.2.2 with a garbage collector that does not support object pinning, may lead to excessive GC-related blocking. (#490)
+    * Workaround: pass `-XX:-CriticalJNINatives` to the JVM.
+    * This issue is fixed in LWJGL 3.2.3.

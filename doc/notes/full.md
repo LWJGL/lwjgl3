@@ -71,6 +71,14 @@ This build includes the following changes:
     * Enables tail-calls without argument shuffling, when Critical JNI Natives are used.
 - glfw: removed `CharSequence` overload of `glfwUpdateGamepadMappings`. **(S)** (#462)
 
+#### Known Issues
+
+- Core: LWJGL 3.2.2 is incompatible with Java 12 or higher. (#491)
+    * This issue is fixed in LWJGL 3.2.3.
+- Core: Using LWJGL 3.2.2 with a garbage collector that does not support object pinning, may lead to excessive GC-related blocking. (#490)
+    * Workaround: pass `-XX:-CriticalJNINatives` to the JVM.
+    * This issue is fixed in LWJGL 3.2.3.
+
 ### 3.2.1
 
 _Released 2018 Dec 08_
@@ -166,6 +174,11 @@ This build includes the following changes:
 
 - Core: `sun.misc.Unsafe` is now required, there is no JNI fallback.
 - vma: The `VmaVulkanFunctions.set` helper method now returns `VmaVulkanFunctions`. **(B)**
+
+#### Known Issues
+
+- Core: LWJGL 3.2.1 is incompatible with Java 12 or higher. (#491)
+    * This issue is fixed in LWJGL 3.2.3.
 
 ### 3.2.0
 
