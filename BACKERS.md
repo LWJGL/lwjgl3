@@ -31,3 +31,4 @@ Special thank you to our sponsors! [[Become a sponsor](https://opencollective.co
 
 <a href="https://opencollective.com/lwjgl/tiers/gold-sponsor/0/website" target="_blank"><img src="https://opencollective.com/lwjgl/tiers/gold-sponsor/0/avatar.svg"></a>
 <a href="https://opencollective.com/lwjgl/tiers/gold-sponsor/1/website" target="_blank"><img src="https://opencollective.com/lwjgl/tiers/gold-sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/tiers/gold-sponsor/2/website" target="_blank"><img src="https://opencollective.com/lwjgl/tiers/gold-sponsor/2/avatar.svg"></a>
