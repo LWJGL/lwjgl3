@@ -992,6 +992,36 @@ public class User32 {
         DISP_CHANGE_BADPARAM    = -5,
         DISP_CHANGE_BADDUALVIEW = -6;
 
+    /** The type of input event. */
+    public static final int
+        INPUT_MOUSE    = 0,
+        INPUT_KEYBOARD = 1,
+        INPUT_HARDWARE = 2;
+
+    /** {@link MOUSEINPUT} flags. */
+    public static final int
+        MOUSEEVENTF_ABSOLUTE        = 0x8000,
+        MOUSEEVENTF_HWHEEL          = 0x1000,
+        MOUSEEVENTF_MOVE            = 0x1,
+        MOUSEEVENTF_MOVE_NOCOALESCE = 0x2000,
+        MOUSEEVENTF_LEFTDOWN        = 0x2,
+        MOUSEEVENTF_LEFTUP          = 0x4,
+        MOUSEEVENTF_RIGHTDOWN       = 0x8,
+        MOUSEEVENTF_RIGHTUP         = 0x10,
+        MOUSEEVENTF_MIDDLEDOWN      = 0x20,
+        MOUSEEVENTF_MIDDLEUP        = 0x40,
+        MOUSEEVENTF_VIRTUALDESK     = 0x4000,
+        MOUSEEVENTF_WHEEL           = 0x800,
+        MOUSEEVENTF_XDOWN           = 0x80,
+        MOUSEEVENTF_XUP             = 0x100;
+
+    /** {@link KEYBDINPUT} flags. */
+    public static final int
+        KEYEVENTF_EXTENDEDKEY = 0x1,
+        KEYEVENTF_KEYUP       = 0x2,
+        KEYEVENTF_SCANCODE    = 0x8,
+        KEYEVENTF_UNICODE     = 0x4;
+
     protected User32() {
         throw new UnsupportedOperationException();
     }
@@ -1056,6 +1086,10 @@ public class User32 {
             ClipCursor                          = apiGetFunctionAddress(USER32, "ClipCursor"),
             ShowCursor                          = apiGetFunctionAddress(USER32, "ShowCursor"),
             SetCursor                           = apiGetFunctionAddress(USER32, "SetCursor"),
+            ClientToScreen                      = apiGetFunctionAddress(USER32, "ClientToScreen"),
+            GetAsyncKeyState                    = apiGetFunctionAddress(USER32, "GetAsyncKeyState"),
+            GetMessageExtraInfo                 = apiGetFunctionAddress(USER32, "GetMessageExtraInfo"),
+            SendInput                           = apiGetFunctionAddress(USER32, "SendInput"),
             GetDpiForSystem                     = USER32.getFunctionAddress("GetDpiForSystem"),
             GetDpiForWindow                     = USER32.getFunctionAddress("GetDpiForWindow"),
             GetAwarenessFromDpiAwarenessContext = USER32.getFunctionAddress("GetAwarenessFromDpiAwarenessContext"),
@@ -2514,6 +2548,133 @@ public class User32 {
     public static long SetCursor(@NativeType("HCURSOR") long hCursor) {
         long __functionAddress = Functions.SetCursor;
         return callPP(hCursor, __functionAddress);
+    }
+
+    // --- [ ClientToScreen ] ---
+
+    /** Unsafe version of: {@link #ClientToScreen} */
+    public static int nClientToScreen(long hWnd, long lpPoint) {
+        long __functionAddress = Functions.ClientToScreen;
+        if (CHECKS) {
+            check(hWnd);
+        }
+        return callPPI(hWnd, lpPoint, __functionAddress);
+    }
+
+    /**
+     * Converts the client-area coordinates of a specified point to screen coordinates.
+     * 
+     * <p>The {@code ClientToScreen} function replaces the client-area coordinates in the {@link POINT} structure with the screen coordinates. The screen coordinates
+     * are relative to the upper-left corner of the screen. Note, a screen-coordinate point that is above the window's client area has a negative
+     * y-coordinate. Similarly, a screen coordinate to the left of a client area has a negative x-coordinate.</p>
+     * 
+     * <p>All coordinates are device coordinates.</p>
+     *
+     * @param hWnd    a handle to the window whose client area is used for the conversion
+     * @param lpPoint a pointer to a {@code POINT} structure that contains the client coordinates to be converted. The new screen coordinates are copied into this
+     *                structure if the function succeeds.
+     */
+    @NativeType("BOOL")
+    public static boolean ClientToScreen(@NativeType("HWND") long hWnd, @NativeType("LPPOINT") POINT lpPoint) {
+        return nClientToScreen(hWnd, lpPoint.address()) != 0;
+    }
+
+    // --- [ GetAsyncKeyState ] ---
+
+    /**
+     * Determines whether a key is up or down at the time the function is called, and whether the key was pressed after a previous call to
+     * {@code GetAsyncKeyState}.
+     * 
+     * <p>The {@code GetAsyncKeyState} function works with mouse buttons. However, it checks on the state of the physical mouse buttons, not on the logical mouse
+     * buttons that the physical buttons are mapped to. For example, the call {@code GetAsyncKeyState(VK_LBUTTON)} always returns the state of the left
+     * physical mouse button, regardless of whether it is mapped to the left or right logical mouse button. You can determine the system's current mapping of
+     * physical mouse buttons to logical mouse buttons by calling {@code GetSystemMetrics(SM_SWAPBUTTON)} which returns {@link WinBase#TRUE} if the mouse buttons have been
+     * swapped.</p>
+     * 
+     * <p>Although the least significant bit of the return value indicates whether the key has been pressed since the last query, due to the pre-emptive
+     * multitasking nature of Windows, another application can call {@code GetAsyncKeyState} and receive the "recently pressed" bit instead of your
+     * application. The behavior of the least significant bit of the return value is retained strictly for compatibility with 16-bit Windows applications
+     * (which are non-preemptive) and should not be relied upon.</p>
+     * 
+     * <p>You can use the virtual-key code constants {@link #VK_SHIFT}, {@link #VK_CONTROL}, and {@link #VK_MENU} as values for the {@code vKey} parameter. This gives the state of the
+     * SHIFT, CTRL, or ALT keys without distinguishing between left and right.</p>
+     *
+     * @param vKey the virtual-key code. You can use left- and right-distinguishing constants to specify certain keys.
+     *
+     * @return if the function succeeds, the return value specifies whether the key was pressed since the last call to {@code GetAsyncKeyState}, and whether the key
+     *         is currently up or down. If the most significant bit is set, the key is down, and if the least significant bit is set, the key was pressed after the
+     *         previous call to {@code GetAsyncKeyState}. However, you should not rely on this last behavior; for more information, see the Remarks.
+     *         
+     *         <p>The return value is zero for the following cases:</p>
+     *         
+     *         <ul>
+     *         <li>The current desktop is not the active desktop</li>
+     *         <li>The foreground thread belongs to another process and the desktop does not allow the hook or the journal record.</li>
+     *         </ul>
+     */
+    @NativeType("SHORT")
+    public static short GetAsyncKeyState(int vKey) {
+        long __functionAddress = Functions.GetAsyncKeyState;
+        return callS(vKey, __functionAddress);
+    }
+
+    // --- [ GetMessageExtraInfo ] ---
+
+    /**
+     * Retrieves the extra message information for the current thread.
+     * 
+     * <p>Extra message information is an application- or driver-defined value associated with the current thread's message queue.</p>
+     *
+     * @return the extra information. The meaning of the extra information is device specific.
+     */
+    @NativeType("LPARAM")
+    public static long GetMessageExtraInfo() {
+        long __functionAddress = Functions.GetMessageExtraInfo;
+        return callP(__functionAddress);
+    }
+
+    // --- [ SendInput ] ---
+
+    /**
+     * Unsafe version of: {@link #SendInput}
+     *
+     * @param cInputs the number of structures in the {@code pInputs} array
+     */
+    public static int nSendInput(int cInputs, long pInputs, int cbSize) {
+        long __functionAddress = Functions.SendInput;
+        return callPI(cInputs, pInputs, cbSize, __functionAddress);
+    }
+
+    /**
+     * Synthesizes keystrokes, mouse motions, and button clicks.
+     * 
+     * <p>This function is subject to UIPI. Applications are permitted to inject input only into applications that are at an equal or lesser integrity level.</p>
+     * 
+     * <p>The {@code SendInput} function inserts the events in the {@link INPUT} structures serially into the keyboard or mouse input stream. These events are not
+     * interspersed with other keyboard or mouse input events inserted either by the user (with the keyboard or mouse) or by calls to {@code keybd_event},
+     * {@code mouse_event}, or other calls to {@code SendInput}.</p>
+     * 
+     * <p>This function does not reset the keyboard's current state. Any keys that are already pressed when the function is called might interfere with the
+     * events that this function generates. To avoid this problem, check the keyboard's state with the {@link #GetAsyncKeyState} function and correct as necessary.</p>
+     * 
+     * <p>Because the touch keyboard uses the surrogate macros defined in {@code winnls.h} to send input to the system, a listener on the keyboard event hook
+     * must decode input originating from the touch keyboard.</p>
+     * 
+     * <p>An accessibility application can use {@code SendInput} to inject keystrokes corresponding to application launch shortcut keys that are handled by the
+     * shell. This functionality is not guaranteed to work for other types of applications.</p>
+     *
+     * @param pInputs an array of {@code INPUT} structures. Each structure represents an event to be inserted into the keyboard or mouse input stream.
+     * @param cbSize  the size, in bytes, of an {@code INPUT} structure. If {@code cbSiz}e is not the size of an {@code INPUT} structure, the function fails.
+     *
+     * @return the number of events that it successfully inserted into the keyboard or mouse input stream. If the function returns zero, the input was already blocked
+     *         by another thread. To get extended error information, call {@link WinBase#GetLastError}.
+     *         
+     *         <p>This function fails when it is blocked by UIPI. Note that neither GetLastError nor the return value will indicate the failure was caused by UIPI
+     *         blocking.</p>
+     */
+    @NativeType("UINT")
+    public static int SendInput(@NativeType("PINPUT") INPUT.Buffer pInputs, int cbSize) {
+        return nSendInput(pInputs.remaining(), pInputs.address(), cbSize);
     }
 
     // --- [ GetDpiForSystem ] ---

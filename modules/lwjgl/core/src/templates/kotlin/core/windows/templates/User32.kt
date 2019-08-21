@@ -2032,6 +2032,150 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         returnDoc = "the handle to the previous cursor, if there was one"
     )
 
+    BOOL(
+        "ClientToScreen",
+        """
+        Converts the client-area coordinates of a specified point to screen coordinates.
+                    
+        The {@code ClientToScreen} function replaces the client-area coordinates in the ##POINT structure with the screen coordinates. The screen coordinates
+        are relative to the upper-left corner of the screen. Note, a screen-coordinate point that is above the window's client area has a negative
+        y-coordinate. Similarly, a screen coordinate to the left of a client area has a negative x-coordinate.
+
+        All coordinates are device coordinates.
+        """,
+
+        HWND("hWnd", "a handle to the window whose client area is used for the conversion"),
+        LPPOINT(
+            "lpPoint",
+            """
+            a pointer to a {@code POINT} structure that contains the client coordinates to be converted. The new screen coordinates are copied into this
+            structure if the function succeeds.
+            """
+        )
+    )
+
+    SHORT(
+        "GetAsyncKeyState",
+        """
+        Determines whether a key is up or down at the time the function is called, and whether the key was pressed after a previous call to
+        {@code GetAsyncKeyState}.
+        
+        The {@code GetAsyncKeyState} function works with mouse buttons. However, it checks on the state of the physical mouse buttons, not on the logical mouse
+        buttons that the physical buttons are mapped to. For example, the call {@code GetAsyncKeyState(VK_LBUTTON)} always returns the state of the left
+        physical mouse button, regardless of whether it is mapped to the left or right logical mouse button. You can determine the system's current mapping of
+        physical mouse buttons to logical mouse buttons by calling {@code GetSystemMetrics(SM_SWAPBUTTON)} which returns #TRUE if the mouse buttons have been
+        swapped.
+
+        Although the least significant bit of the return value indicates whether the key has been pressed since the last query, due to the pre-emptive
+        multitasking nature of Windows, another application can call {@code GetAsyncKeyState} and receive the "recently pressed" bit instead of your
+        application. The behavior of the least significant bit of the return value is retained strictly for compatibility with 16-bit Windows applications
+        (which are non-preemptive) and should not be relied upon.
+
+        You can use the virtual-key code constants #VK_SHIFT, #VK_CONTROL, and #VK_MENU as values for the {@code vKey} parameter. This gives the state of the
+        SHIFT, CTRL, or ALT keys without distinguishing between left and right.
+        """,
+
+        int("vKey", "the virtual-key code. You can use left- and right-distinguishing constants to specify certain keys."),
+        
+        returnDoc =
+        """
+        if the function succeeds, the return value specifies whether the key was pressed since the last call to {@code GetAsyncKeyState}, and whether the key
+        is currently up or down. If the most significant bit is set, the key is down, and if the least significant bit is set, the key was pressed after the
+        previous call to {@code GetAsyncKeyState}. However, you should not rely on this last behavior; for more information, see the Remarks.
+
+        The return value is zero for the following cases:
+        ${ul(
+            "The current desktop is not the active desktop",
+            "The foreground thread belongs to another process and the desktop does not allow the hook or the journal record."
+        )}
+        """
+    )
+
+    IntConstant(
+        "The type of input event.",
+
+        "INPUT_MOUSE".."0",
+        "INPUT_KEYBOARD".."1",
+        "INPUT_HARDWARE".."2"
+    )
+
+    IntConstant(
+        "##MOUSEINPUT flags.",
+
+        "MOUSEEVENTF_ABSOLUTE"..0x8000,
+        "MOUSEEVENTF_HWHEEL"..0x01000,
+        "MOUSEEVENTF_MOVE"..0x0001,
+        "MOUSEEVENTF_MOVE_NOCOALESCE"..0x2000,
+        "MOUSEEVENTF_LEFTDOWN"..0x0002,
+        "MOUSEEVENTF_LEFTUP"..0x0004,
+        "MOUSEEVENTF_RIGHTDOWN"..0x0008,
+        "MOUSEEVENTF_RIGHTUP"..0x0010,
+        "MOUSEEVENTF_MIDDLEDOWN"..0x0020,
+        "MOUSEEVENTF_MIDDLEUP"..0x0040,
+        "MOUSEEVENTF_VIRTUALDESK"..0x4000,
+        "MOUSEEVENTF_WHEEL"..0x0800,
+        "MOUSEEVENTF_XDOWN"..0x0080,
+        "MOUSEEVENTF_XUP"..0x0100
+    )
+
+    IntConstant(
+        "##KEYBDINPUT flags.",
+
+        "KEYEVENTF_EXTENDEDKEY"..0x0001,
+        "KEYEVENTF_KEYUP"..0x0002,
+        "KEYEVENTF_SCANCODE"..0x0008,
+        "KEYEVENTF_UNICODE"..0x0004
+    )
+
+    LPARAM(
+        "GetMessageExtraInfo",
+        """
+        Retrieves the extra message information for the current thread.
+        
+        Extra message information is an application- or driver-defined value associated with the current thread's message queue.
+        """,
+
+        returnDoc = "the extra information. The meaning of the extra information is device specific."
+    )
+
+    UINT(
+        "SendInput",
+        """
+        Synthesizes keystrokes, mouse motions, and button clicks.
+        
+        This function is subject to UIPI. Applications are permitted to inject input only into applications that are at an equal or lesser integrity level.
+
+        The {@code SendInput} function inserts the events in the ##INPUT structures serially into the keyboard or mouse input stream. These events are not
+        interspersed with other keyboard or mouse input events inserted either by the user (with the keyboard or mouse) or by calls to {@code keybd_event},
+        {@code mouse_event}, or other calls to {@code SendInput}.
+
+        This function does not reset the keyboard's current state. Any keys that are already pressed when the function is called might interfere with the
+        events that this function generates. To avoid this problem, check the keyboard's state with the #GetAsyncKeyState() function and correct as necessary.
+
+        Because the touch keyboard uses the surrogate macros defined in {@code winnls.h} to send input to the system, a listener on the keyboard event hook
+        must decode input originating from the touch keyboard.
+
+        An accessibility application can use {@code SendInput} to inject keystrokes corresponding to application launch shortcut keys that are handled by the
+        shell. This functionality is not guaranteed to work for other types of applications.
+        """,
+
+        AutoSize("pInputs")..UINT("cInputs", "the number of structures in the {@code pInputs} array"),
+        LPINPUT("pInputs", "an array of {@code INPUT} structures. Each structure represents an event to be inserted into the keyboard or mouse input stream."),
+        int(
+            "cbSize",
+            "the size, in bytes, of an {@code INPUT} structure. If {@code cbSiz}e is not the size of an {@code INPUT} structure, the function fails."
+        ),
+
+        returnDoc =
+        """
+        the number of events that it successfully inserted into the keyboard or mouse input stream. If the function returns zero, the input was already blocked
+        by another thread. To get extended error information, call #GetLastError().
+
+        This function fails when it is blocked by UIPI. Note that neither GetLastError nor the return value will indicate the failure was caused by UIPI
+        blocking.
+        """
+    )
+
     IgnoreMissing..UINT(
         "GetDpiForSystem",
         """
