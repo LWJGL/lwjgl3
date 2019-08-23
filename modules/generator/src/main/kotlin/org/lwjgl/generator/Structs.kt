@@ -76,6 +76,8 @@ open class StructMember(
         this.links = links
         this.linkMode = linkMode
     }
+
+    internal open fun copy() = StructMember(nativeType, name, documentation, bits)
 }
 
 open class StructMemberArray(
@@ -89,12 +91,16 @@ open class StructMemberArray(
     val primitiveMapping get() = nativeType.let {
         if (it is PointerType<*>) PrimitiveMapping.POINTER else it.mapping as PrimitiveMapping
     }
+
+    override fun copy() = StructMemberArray(arrayType, name, documentation, validSize)
 }
 
 private class StructMemberPadding(size: String, val condition: String?) : StructMemberArray(char[size], ANONYMOUS, "", size) {
     init {
         public = false
     }
+
+    override fun copy() = StructMemberPadding((nativeType as CArrayType<*>).size, condition)
 }
 
 private enum class MultiSetterMode {
@@ -217,6 +223,7 @@ class Struct(
         return this
     }
 
+    infix fun StructType.copy(member: String) = add(definition[member].copy())
     private fun add(member: StructMember): StructMember {
         members.add(member)
         return member
