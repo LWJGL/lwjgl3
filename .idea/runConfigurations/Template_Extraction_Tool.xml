@@ -2,7 +2,7 @@
   <configuration default="false" name="Template Extraction Tool" type="JetRunConfigurationType" factoryName="Kotlin">
     <module name="extract" />
     <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-    <option name="VM_PARAMETERS" value="-Djava.library.path=bin/libs -Dorg.lwjgl.llvm.clang.libname=D:/CLONES/llvm/build/Release/bin/libclang.dll -Dfile.encoding=UTF8" />
+    <option name="VM_PARAMETERS" value="-Djava.library.path=D:/CLONES/llvm/build/Release/bin -Dfile.encoding=UTF8" />
     <option name="PROGRAM_PARAMETERS" value="" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
     <option name="ALTERNATIVE_JRE_PATH" />

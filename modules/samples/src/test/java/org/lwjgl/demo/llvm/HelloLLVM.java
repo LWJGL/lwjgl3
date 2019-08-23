@@ -22,8 +22,13 @@ import static org.testng.Assert.*;
 public class HelloLLVM {
 
     public static void main(String[] args) {
-        if (Configuration.LLVM_LIBRARY_NAME.get() == null) {
-            throw new IllegalStateException("Please configure the LLVM shared library path with -Dorg.lwjgl.llvm.libname=<path>");
+        try {
+            LLVMCore.getLibrary();
+        } catch (UnsatisfiedLinkError e) {
+            throw new IllegalStateException(
+                "Please configure the LLVM shared libraries path with:\n" +
+                "\t-Dorg.lwjgl.llvm.libname=<LLVM shared library path> or\n" +
+                "\t-Dorg.lwjgl.librarypath=<path that contains LLVM shared libraries>", e);
         }
 
         long module = LLVMModuleCreateWithName("LWJGL");

@@ -4,6 +4,7 @@
  */
 package org.lwjgl.extract
 
+import org.lwjgl.llvm.*
 import org.lwjgl.system.*
 import org.lwjgl.system.MemoryUtil.*
 import java.awt.*
@@ -24,6 +25,21 @@ fun main() {
     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
 
     System.setProperty("line.separator", "\n")
+    System.setProperty(
+        "org.lwjgl.librarypath", arrayOf(
+            "bin/libs/native/windows/x64/org/lwjgl",
+            "bin/libs/native/windows/x64/org/lwjgl/llvm"
+        ).joinToString(File.pathSeparator)
+    )
+
+    if (Configuration.LLVM_CLANG_LIBRARY_NAME.get() == null) {
+        try {
+            Library.loadNative(ClangIndex::class.java, "org.lwjgl.llvm", Configuration.LLVM_CLANG_LIBRARY_NAME, "clang", "libclang").use {
+                Configuration.LLVM_CLANG_LIBRARY_NAME.set(it.path)
+            }
+        } catch (ignored: Throwable) {
+        }
+    }
 
     val app = Application()
     app.frame.isVisible = true
@@ -86,7 +102,6 @@ class Application {
     private var lastHeader: File? = null
 
     init {
-        /*
         val preset = Paths.get("modules", "lwjgl", "llvm", "src", "main", "c")
             .let { includePath ->
                 Header(
@@ -111,7 +126,6 @@ class Application {
                 parseFunctions = true
             )
         )
-        */
 
         KeyboardFocusManager.getCurrentKeyboardFocusManager()
             .addKeyEventDispatcher { e ->
