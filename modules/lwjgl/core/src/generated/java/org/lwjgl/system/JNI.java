@@ -96,6 +96,7 @@ public final class JNI {
     public static native int invokePPPPPI(long param0, long param1, long param2, int param3, long param4, int param5, int param6, long param7, long __functionAddress);
     public static native int invokePPPPPPI(long param0, long param1, long param2, long param3, long param4, long param5, long __functionAddress);
     public static native int invokePPPPPPI(long param0, long param1, long param2, long param3, long param4, long param5, int param6, long __functionAddress);
+    public static native int invokePPPPPPI(long param0, long param1, long param2, int param3, int param4, long param5, long param6, long param7, long __functionAddress);
     public static native int invokePPPPPPPI(long param0, long param1, long param2, int param3, int param4, long param5, long param6, int param7, long param8, int param9, long param10, int param11, long __functionAddress);
     public static native int invokePPPPPPPPI(long param0, int param1, int param2, long param3, long param4, long param5, long param6, long param7, long param8, long param9, long __functionAddress);
     public static native long invokeJ(long __functionAddress);
@@ -907,6 +908,7 @@ public final class JNI {
     public static native int invokePPPPI(long param0, long param1, long param2, @Nullable long[] param3, long __functionAddress);
     public static native int invokePPPPI(long param0, long param1, int param2, int param3, @Nullable float[] param4, @Nullable int[] param5, long __functionAddress);
     public static native int invokePPPPI(long param0, long param1, int param2, int param3, @Nullable int[] param4, @Nullable int[] param5, long __functionAddress);
+    public static native int invokePPPPPPI(long param0, long param1, long param2, int param3, int param4, @Nullable int[] param5, @Nullable int[] param6, long param7, long __functionAddress);
     public static native int invokePPPPPPPPI(long param0, int param1, int param2, long param3, @Nullable int[] param4, @Nullable int[] param5, @Nullable float[] param6, @Nullable int[] param7, @Nullable int[] param8, @Nullable int[] param9, long __functionAddress);
     public static native long invokePP(@Nullable double[] param0, int param1, long __functionAddress);
     public static native long invokePP(@Nullable float[] param0, int param1, long __functionAddress);

@@ -7,9 +7,13 @@ package core.linux
 import org.lwjgl.generator.*
 
 val Bool = typedef(intb, "Bool")
+val Status = typedef(int, "Status")
 
 val XID = typedef(unsigned_long, "XID")
+val Mask = typedef(unsigned_long, "Mask")
+val Atom = typedef(unsigned_long, "Atom")
 val VisualID = typedef(unsigned_long, "VisualID")
+val Time = typedef(unsigned_long, "Time")
 
 val Colormap = typedef(XID, "Colormap")
 val Cursor = typedef(XID, "Cursor")

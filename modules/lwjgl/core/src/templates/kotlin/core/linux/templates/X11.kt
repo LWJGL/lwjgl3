@@ -58,7 +58,9 @@ val X11 = "X11".nativeClass(
         "BadIDChoice".."14",
         "BadName".."15",
         "BadLength".."16",
-        "BadImplementation".."17"
+        "BadImplementation".."17",
+        "FirstExtensionError".."128",
+        "LastExtensionError".."255"
     )
 
     IntConstant(
@@ -461,6 +463,24 @@ val X11 = "X11".nativeClass(
         "GCLastBit".."22"
     )
 
+    IntConstant(
+        "",
+
+        "Above".."0",
+        "Below".."1",
+        "TopIf".."2",
+        "BottomIf".."3",
+        "Opposite".."4"
+    )
+
+    IntConstant(
+        "",
+
+        "MappingModifier".."0",
+        "MappingKeyboard".."1",
+        "MappingPointer".."2"
+    )
+
     val DISPLAY = Display.p("display", "the connection to the X server")
     val WINDOW = Window("w", "the window")
     //val DRAWABLE = Drawable("d", "the drawable")
@@ -594,5 +614,105 @@ val X11 = "X11".nativeClass(
         "Free in-memory data that was created by an Xlib function.",
 
         MultiType(PointerMapping.DATA_POINTER)..Unsafe..void.p("data", "the data that is to be freed")
+    )
+
+    Status(
+        "XSendEvent",
+        """
+        The {@code XSendEvent} function identifies the destination window, determines which clients should receive the specified events, and ignores any active
+        grabs. This function requires you to pass an event mask. This function uses the {@code w} argument to identify the destination window as follows:
+        ${ul(
+            "If {@code w} is {@code PointerWindow}, the destination window is the window that contains the pointer.",
+            """
+            If {@code w} is {@code InputFocus} and if the focus window contains the pointer, the destination window is the window that contains the pointer;
+            otherwise, the destination window is the focus window.
+            """
+        )}
+
+        To determine which clients should receive the specified events, {@code XSendEvent} uses the propagate argument as follows:
+        ${ul(
+            """
+            If {@code event_mask} is the empty set, the event is sent to the client that created the destination window. If that client no longer exists, no
+            event is sent.
+            """,
+            """
+            If {@code propagate} is #False, the event is sent to every client selecting on destination any of the event types in the {@code event_mask}
+            argument.
+            """,
+            """
+            If {@code propagate} is #True and no clients have selected on destination any of the event types in event-mask, the destination is replaced with
+            the closest ancestor of destination for which some client has selected a type in event-mask and for which no intervening window has that type in
+            its do-not-propagate-mask. If no such window exists or if the window is an ancestor of the focus window and #InputFocus was originally specified as
+            the destination, the event is not sent to any clients. Otherwise, the event is reported to every client selecting on the final destination any of
+            the types specified in {@code event_mask}.
+            """
+        )}
+
+        The event in the {@code XEvent} structure must be one of the core events or one of the events defined by an extension (or a #BadValue error results) so
+        that the X server can correctly byte-swap the contents as necessary. The contents of the event are otherwise unaltered and unchecked by the X server
+        except to force {@code send_event} to #True in the forwarded event and to set the serial number in the event correctly; therefore these fields and the
+        display field are ignored by {@code XSendEvent}.
+
+        {@code XSendEvent} returns zero if the conversion to wire protocol format failed and returns nonzero otherwise. {@code XSendEvent} can generate
+        #BadValue and #BadWindow errors.
+
+        The server may retain the recent history of the pointer motion and do so to a finer granularity than is reported by #MotionNotify events. The
+        #XGetMotionEvents() function makes this history available.
+        """,
+
+        DISPLAY,
+        Window("w", "specifies the window the event is to be sent to"),
+        Bool("propagate", "specifies a {@code Boolean} value"),
+        long("event_mask", "specifies the event mask"),
+        XEvent.p("event_send", "specifies the event that is to be sent")
+    )
+
+    unsigned_long(
+        "XDisplayMotionBufferSize",
+        "",
+
+        DISPLAY
+    )
+
+    XTimeCoord.p(
+        "XGetMotionEvents",
+        """
+        The {@code XGetMotionEvents} function returns all events in the motion history buffer that fall between the specified start and stop times, inclusive,
+        and that have coordinates that lie within the specified window (including its borders) at its present placement.
+        
+        If the server does not support motion history, if the start time is later than the stop time, or if the start time is in the future, no events are
+        returned; {@code XGetMotionEvents} returns #NULL. If the stop time is in the future, it is equivalent to specifying #CurrentTime.
+        {@code XGetMotionEvents} can generate a #BadWindow error.
+        """,
+
+        DISPLAY,
+        Window("w" ,""),
+        Time("start", ""),
+        Time("stop", ""),
+        AutoSizeResult..Check(1)..int.p("nevents_return", "")
+    )
+
+    Bool(
+        "XTranslateCoordinates",
+        """
+        Translates window coordinates.
+        
+        If {@code XTranslateCoordinates} returns #True, it takes the {@code src_x} and {@code src_y} coordinates relative to the source window's origin and
+        returns these coordinates to {@code dest_x_return} and {@code dest_y_return} relative to the destination window's origin. If
+        {@code XTranslateCoordinates} returns #False, {@code src_w} and {@code dest_w} are on different screens, and {@code dest_x_return} and
+        {@code dest_y_return} are zero. If the coordinates are contained in a mapped child of {@code dest_w}, that child is returned to {@code child_return}.
+        Otherwise, {@code child_return} is set to #None.
+
+        {@code XTranslateCoordinates} can generate a #BadWindow error.
+        """,
+
+        DISPLAY,
+        Window("src_w", "specifies the source window"),
+        Window("dest_w", "specifies the destination window"),
+        int("src_x", "specifies the x coordinate within the source window"),
+        int("src_y", "specifies the x coordinate within the source window"),
+        Check(1)..int.p("dest_x_return", "returns the x coordinate within the destination window"),
+        Check(1)..int.p("dest_y_return", "returns the y coordinate within the destination window"),
+        Check(1)..Window.p("child_return", "returns the child if the coordinates are contained in a mapped child of the destination window")
     )
 }

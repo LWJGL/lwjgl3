@@ -44,24 +44,26 @@ public class X11 {
 
     /** ERROR CODES */
     public static final int
-        Success           = 0,
-        BadRequest        = 1,
-        BadValue          = 2,
-        BadWindow         = 3,
-        BadPixmap         = 4,
-        BadAtom           = 5,
-        BadCursor         = 6,
-        BadFont           = 7,
-        BadMatch          = 8,
-        BadDrawable       = 9,
-        BadAccess         = 10,
-        BadAlloc          = 11,
-        BadColor          = 12,
-        BadGC             = 13,
-        BadIDChoice       = 14,
-        BadName           = 15,
-        BadLength         = 16,
-        BadImplementation = 17;
+        Success             = 0,
+        BadRequest          = 1,
+        BadValue            = 2,
+        BadWindow           = 3,
+        BadPixmap           = 4,
+        BadAtom             = 5,
+        BadCursor           = 6,
+        BadFont             = 7,
+        BadMatch            = 8,
+        BadDrawable         = 9,
+        BadAccess           = 10,
+        BadAlloc            = 11,
+        BadColor            = 12,
+        BadGC               = 13,
+        BadIDChoice         = 14,
+        BadName             = 15,
+        BadLength           = 16,
+        BadImplementation   = 17,
+        FirstExtensionError = 128,
+        LastExtensionError  = 255;
 
     /** Window attributes for CreateWindow and ChangeWindowAttributes */
     public static final int
@@ -397,6 +399,18 @@ public class X11 {
         GCArcMode           = 1<<22,
         GCLastBit           = 22;
 
+    public static final int
+        Above    = 0,
+        Below    = 1,
+        TopIf    = 2,
+        BottomIf = 3,
+        Opposite = 4;
+
+    public static final int
+        MappingModifier = 0,
+        MappingKeyboard = 1,
+        MappingPointer  = 2;
+
     protected X11() {
         throw new UnsupportedOperationException();
     }
@@ -410,15 +424,19 @@ public class X11 {
 
         /** Function address. */
         public static final long
-            XOpenDisplay    = apiGetFunctionAddress(X11, "XOpenDisplay"),
-            XCloseDisplay   = apiGetFunctionAddress(X11, "XCloseDisplay"),
-            XDefaultScreen  = apiGetFunctionAddress(X11, "XDefaultScreen"),
-            XRootWindow     = apiGetFunctionAddress(X11, "XRootWindow"),
-            XCreateColormap = apiGetFunctionAddress(X11, "XCreateColormap"),
-            XFreeColormap   = apiGetFunctionAddress(X11, "XFreeColormap"),
-            XCreateWindow   = apiGetFunctionAddress(X11, "XCreateWindow"),
-            XDestroyWindow  = apiGetFunctionAddress(X11, "XDestroyWindow"),
-            XFree           = apiGetFunctionAddress(X11, "XFree");
+            XOpenDisplay             = apiGetFunctionAddress(X11, "XOpenDisplay"),
+            XCloseDisplay            = apiGetFunctionAddress(X11, "XCloseDisplay"),
+            XDefaultScreen           = apiGetFunctionAddress(X11, "XDefaultScreen"),
+            XRootWindow              = apiGetFunctionAddress(X11, "XRootWindow"),
+            XCreateColormap          = apiGetFunctionAddress(X11, "XCreateColormap"),
+            XFreeColormap            = apiGetFunctionAddress(X11, "XFreeColormap"),
+            XCreateWindow            = apiGetFunctionAddress(X11, "XCreateWindow"),
+            XDestroyWindow           = apiGetFunctionAddress(X11, "XDestroyWindow"),
+            XFree                    = apiGetFunctionAddress(X11, "XFree"),
+            XSendEvent               = apiGetFunctionAddress(X11, "XSendEvent"),
+            XDisplayMotionBufferSize = apiGetFunctionAddress(X11, "XDisplayMotionBufferSize"),
+            XGetMotionEvents         = apiGetFunctionAddress(X11, "XGetMotionEvents"),
+            XTranslateCoordinates    = apiGetFunctionAddress(X11, "XTranslateCoordinates");
 
     }
 
@@ -659,6 +677,163 @@ public class X11 {
      */
     public static int XFree(@NativeType("void *") PointerBuffer data) {
         return nXFree(memAddress(data));
+    }
+
+    // --- [ XSendEvent ] ---
+
+    /** Unsafe version of: {@link #XSendEvent} */
+    public static int nXSendEvent(long display, long w, int propagate, long event_mask, long event_send) {
+        long __functionAddress = Functions.XSendEvent;
+        if (CHECKS) {
+            check(display);
+        }
+        return invokePPPPI(display, w, propagate, event_mask, event_send, __functionAddress);
+    }
+
+    /**
+     * The {@code XSendEvent} function identifies the destination window, determines which clients should receive the specified events, and ignores any active
+     * grabs. This function requires you to pass an event mask. This function uses the {@code w} argument to identify the destination window as follows:
+     * 
+     * <ul>
+     * <li>If {@code w} is {@code PointerWindow}, the destination window is the window that contains the pointer.</li>
+     * <li>If {@code w} is {@code InputFocus} and if the focus window contains the pointer, the destination window is the window that contains the pointer;
+     * otherwise, the destination window is the focus window.</li>
+     * </ul>
+     * 
+     * <p>To determine which clients should receive the specified events, {@code XSendEvent} uses the propagate argument as follows:</p>
+     * 
+     * <ul>
+     * <li>If {@code event_mask} is the empty set, the event is sent to the client that created the destination window. If that client no longer exists, no
+     * event is sent.</li>
+     * <li>If {@code propagate} is {@link #False}, the event is sent to every client selecting on destination any of the event types in the {@code event_mask}
+     * argument.</li>
+     * <li>If {@code propagate} is {@link #True} and no clients have selected on destination any of the event types in event-mask, the destination is replaced with
+     * the closest ancestor of destination for which some client has selected a type in event-mask and for which no intervening window has that type in
+     * its do-not-propagate-mask. If no such window exists or if the window is an ancestor of the focus window and {@link #InputFocus} was originally specified as
+     * the destination, the event is not sent to any clients. Otherwise, the event is reported to every client selecting on the final destination any of
+     * the types specified in {@code event_mask}.</li>
+     * </ul>
+     * 
+     * <p>The event in the {@code XEvent} structure must be one of the core events or one of the events defined by an extension (or a {@link #BadValue} error results) so
+     * that the X server can correctly byte-swap the contents as necessary. The contents of the event are otherwise unaltered and unchecked by the X server
+     * except to force {@code send_event} to {@link #True} in the forwarded event and to set the serial number in the event correctly; therefore these fields and the
+     * display field are ignored by {@code XSendEvent}.</p>
+     * 
+     * <p>{@code XSendEvent} returns zero if the conversion to wire protocol format failed and returns nonzero otherwise. {@code XSendEvent} can generate
+     * {@link #BadValue} and {@link #BadWindow} errors.</p>
+     * 
+     * <p>The server may retain the recent history of the pointer motion and do so to a finer granularity than is reported by {@link #MotionNotify} events. The
+     * {@link #XGetMotionEvents} function makes this history available.</p>
+     *
+     * @param display    the connection to the X server
+     * @param w          specifies the window the event is to be sent to
+     * @param propagate  specifies a {@code Boolean} value
+     * @param event_mask specifies the event mask
+     * @param event_send specifies the event that is to be sent
+     */
+    @NativeType("Status")
+    public static int XSendEvent(@NativeType("Display *") long display, @NativeType("Window") long w, @NativeType("Bool") boolean propagate, long event_mask, @NativeType("XEvent *") XEvent event_send) {
+        return nXSendEvent(display, w, propagate ? 1 : 0, event_mask, event_send.address());
+    }
+
+    // --- [ XDisplayMotionBufferSize ] ---
+
+    /** @param display the connection to the X server */
+    @NativeType("unsigned long")
+    public static long XDisplayMotionBufferSize(@NativeType("Display *") long display) {
+        long __functionAddress = Functions.XDisplayMotionBufferSize;
+        if (CHECKS) {
+            check(display);
+        }
+        return invokePP(display, __functionAddress);
+    }
+
+    // --- [ XGetMotionEvents ] ---
+
+    /** Unsafe version of: {@link #XGetMotionEvents} */
+    public static long nXGetMotionEvents(long display, long w, long start, long stop, long nevents_return) {
+        long __functionAddress = Functions.XGetMotionEvents;
+        if (CHECKS) {
+            check(display);
+        }
+        return invokePPPPPP(display, w, start, stop, nevents_return, __functionAddress);
+    }
+
+    /**
+     * The {@code XGetMotionEvents} function returns all events in the motion history buffer that fall between the specified start and stop times, inclusive,
+     * and that have coordinates that lie within the specified window (including its borders) at its present placement.
+     * 
+     * <p>If the server does not support motion history, if the start time is later than the stop time, or if the start time is in the future, no events are
+     * returned; {@code XGetMotionEvents} returns {@code NULL}. If the stop time is in the future, it is equivalent to specifying {@link #CurrentTime}.
+     * {@code XGetMotionEvents} can generate a {@link #BadWindow} error.</p>
+     *
+     * @param display the connection to the X server
+     */
+    @Nullable
+    @NativeType("XTimeCoord *")
+    public static XTimeCoord.Buffer XGetMotionEvents(@NativeType("Display *") long display, @NativeType("Window") long w, @NativeType("Time") long start, @NativeType("Time") long stop) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        IntBuffer nevents_return = stack.callocInt(1);
+        try {
+            long __result = nXGetMotionEvents(display, w, start, stop, memAddress(nevents_return));
+            return XTimeCoord.createSafe(__result, nevents_return.get(0));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ XTranslateCoordinates ] ---
+
+    /** Unsafe version of: {@link #XTranslateCoordinates} */
+    public static int nXTranslateCoordinates(long display, long src_w, long dest_w, int src_x, int src_y, long dest_x_return, long dest_y_return, long child_return) {
+        long __functionAddress = Functions.XTranslateCoordinates;
+        if (CHECKS) {
+            check(display);
+        }
+        return invokePPPPPPI(display, src_w, dest_w, src_x, src_y, dest_x_return, dest_y_return, child_return, __functionAddress);
+    }
+
+    /**
+     * Translates window coordinates.
+     * 
+     * <p>If {@code XTranslateCoordinates} returns {@link #True}, it takes the {@code src_x} and {@code src_y} coordinates relative to the source window's origin and
+     * returns these coordinates to {@code dest_x_return} and {@code dest_y_return} relative to the destination window's origin. If
+     * {@code XTranslateCoordinates} returns {@link #False}, {@code src_w} and {@code dest_w} are on different screens, and {@code dest_x_return} and
+     * {@code dest_y_return} are zero. If the coordinates are contained in a mapped child of {@code dest_w}, that child is returned to {@code child_return}.
+     * Otherwise, {@code child_return} is set to {@link #None}.</p>
+     * 
+     * <p>{@code XTranslateCoordinates} can generate a {@link #BadWindow} error.</p>
+     *
+     * @param display       the connection to the X server
+     * @param src_w         specifies the source window
+     * @param dest_w        specifies the destination window
+     * @param src_x         specifies the x coordinate within the source window
+     * @param src_y         specifies the x coordinate within the source window
+     * @param dest_x_return returns the x coordinate within the destination window
+     * @param dest_y_return returns the y coordinate within the destination window
+     * @param child_return  returns the child if the coordinates are contained in a mapped child of the destination window
+     */
+    @NativeType("Bool")
+    public static boolean XTranslateCoordinates(@NativeType("Display *") long display, @NativeType("Window") long src_w, @NativeType("Window") long dest_w, int src_x, int src_y, @NativeType("int *") IntBuffer dest_x_return, @NativeType("int *") IntBuffer dest_y_return, @NativeType("Window *") PointerBuffer child_return) {
+        if (CHECKS) {
+            check(dest_x_return, 1);
+            check(dest_y_return, 1);
+            check(child_return, 1);
+        }
+        return nXTranslateCoordinates(display, src_w, dest_w, src_x, src_y, memAddress(dest_x_return), memAddress(dest_y_return), memAddress(child_return)) != 0;
+    }
+
+    /** Array version of: {@link #XTranslateCoordinates} */
+    @NativeType("Bool")
+    public static boolean XTranslateCoordinates(@NativeType("Display *") long display, @NativeType("Window") long src_w, @NativeType("Window") long dest_w, int src_x, int src_y, @NativeType("int *") int[] dest_x_return, @NativeType("int *") int[] dest_y_return, @NativeType("Window *") PointerBuffer child_return) {
+        long __functionAddress = Functions.XTranslateCoordinates;
+        if (CHECKS) {
+            check(display);
+            check(dest_x_return, 1);
+            check(dest_y_return, 1);
+            check(child_return, 1);
+        }
+        return invokePPPPPPI(display, src_w, dest_w, src_x, src_y, dest_x_return, dest_y_return, memAddress(child_return), __functionAddress) != 0;
     }
 
 }
