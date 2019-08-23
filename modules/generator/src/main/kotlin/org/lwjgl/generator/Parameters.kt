@@ -70,8 +70,8 @@ class Parameter(
     )
 
     init {
-        if (name.isEmpty()) {
-            throw IllegalArgumentException("Parameter name cannot be empty.")
+        require(name.isNotEmpty()) {
+            "Parameter name cannot be empty."
         }
     }
 

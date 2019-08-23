@@ -15,8 +15,8 @@ class CallbackFunction internal constructor(
 ) : GeneratorTargetNative(module, className) {
 
     init {
-        if (!skipNative && signature.singleOrNull { it.has<UserData>() } == null) {
-            throw IllegalArgumentException("Callbacks with struct-by-value results or parameters must specify the user data parameter. [$className, module: ${module.java}]")
+        require(skipNative || signature.singleOrNull { it.has<UserData>() } != null) {
+            "Callbacks with struct-by-value results or parameters must specify the user data parameter. [$className, module: ${module.java}]"
         }
     }
 

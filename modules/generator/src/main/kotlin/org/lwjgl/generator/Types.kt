@@ -111,7 +111,7 @@ class CArrayType<T : DataType> internal constructor(
     override val const: NativeType get() { throw UnsupportedOperationException() }
 
     val size: String get() = dimensions.joinToString(" * ")
-    val def: String get() = dimensions.joinToString("") { it -> "[$it]" }
+    val def: String get() = dimensions.joinToString("") { "[$it]" }
 }
 operator fun <T : DataType> T.get(size: Int) = this[size.toString()]
 operator fun <T : DataType> T.get(size: String) = CArrayType(this.name, this, arrayOf(size))
@@ -326,7 +326,7 @@ open class PointerMapping private constructor(
     internal val supportsArrayOverload: Boolean = false
 ) : TypeMapping("jlong", Long::class, javaMethodType) {
 
-    private constructor(javaMethodType: KClass<*>, byteShift: Int) : this(javaMethodType, Integer.toString(byteShift), byteShift != 0)
+    private constructor(javaMethodType: KClass<*>, byteShift: Int) : this(javaMethodType, byteShift.toString(), byteShift != 0)
 
     companion object {
         internal val OPAQUE_POINTER = PointerMapping(Long::class, "POINTER_SHIFT")
@@ -343,7 +343,7 @@ open class PointerMapping private constructor(
         val DATA_DOUBLE = PointerMapping(DoubleBuffer::class, 3)
     }
 
-    internal val isMultiByte get() = this !== PointerMapping.OPAQUE_POINTER && byteShift != "0"
+    internal val isMultiByte get() = this !== OPAQUE_POINTER && byteShift != "0"
 
     internal val box = super.javaMethodName.substringBefore("Buffer")
     internal val primitive get() = when (this) {

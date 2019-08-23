@@ -13,7 +13,6 @@ import java.awt.event.*
 import java.awt.event.MouseEvent.*
 import java.io.*
 import java.nio.file.*
-import java.util.*
 import javax.imageio.*
 import javax.swing.*
 import javax.swing.JFileChooser.*
@@ -443,11 +442,9 @@ class Application {
         frame.contentPane = mainSplit
 
         val cl = Thread.currentThread().contextClassLoader
-        frame.setIconImages(
-            Arrays.asList(
-                ImageIO.read(Objects.requireNonNull(cl.getResource("lwjgl16.png"))),
-                ImageIO.read(Objects.requireNonNull(cl.getResource("lwjgl32.png")))
-            )
+        frame.iconImages = listOf(
+            ImageIO.read(checkNotNull(cl.getResource("lwjgl16.png"))),
+            ImageIO.read(checkNotNull(cl.getResource("lwjgl32.png")))
         )
 
         frame.defaultCloseOperation = WindowConstants.DISPOSE_ON_CLOSE

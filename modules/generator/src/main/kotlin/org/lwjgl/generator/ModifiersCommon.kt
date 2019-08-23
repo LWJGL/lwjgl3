@@ -14,27 +14,32 @@ interface MemberParamModifier : StructMemberModifier, ParameterModifier
 object Unsafe : MemberParamModifier {
     override val isSpecial = true
     override fun validate(param: Parameter) {
-        if (param.nativeType !is PointerType<*>)
-            throw IllegalArgumentException("The Unsafe modifier can only be applied to pointer types.")
+        require(param.nativeType is PointerType<*>) {
+            "The Unsafe modifier can only be applied to pointer types."
+        }
 
-        if (param.nativeType.mapping === PointerMapping.OPAQUE_POINTER)
-            throw IllegalArgumentException("The Unsafe modifier cannot be applied to opaque pointer types.")
+        require(param.nativeType.mapping !== PointerMapping.OPAQUE_POINTER) {
+            "The Unsafe modifier cannot be applied to opaque pointer types."
+        }
     }
     override fun validate(member: StructMember) {
-        if (member.nativeType !is PointerType<*> || member.nativeType.elementType !is StructType)
-            throw IllegalArgumentException("The Unsafe modifier can only be applied to pointer to struct members.")
+        require(member.nativeType is PointerType<*> && member.nativeType.elementType is StructType) {
+            "The Unsafe modifier can only be applied to pointer to struct members."
+        }
     }
 }
 
 class Nullable internal constructor(val optional: Boolean) : MemberParamModifier {
     override val isSpecial = optional
     override fun validate(param: Parameter) {
-        if (param.nativeType !is PointerType<*>)
-            throw IllegalArgumentException("The nullable modifier can only be applied to pointer types.")
+        require(param.nativeType is PointerType<*>) {
+            "The nullable modifier can only be applied to pointer types."
+        }
     }
     override fun validate(member: StructMember) {
-        if (member.nativeType !is PointerType<*> && !(member.nativeType is CArrayType<*> && member.nativeType.elementType is PointerType<*>))
-            throw IllegalArgumentException("The nullable modifier can only be applied to pointer or pointer array members.")
+        require(member.nativeType is PointerType<*> || (member.nativeType is CArrayType<*> && member.nativeType.elementType is PointerType<*>)) {
+            "The nullable modifier can only be applied to pointer or pointer array members."
+        }
     }
 }
 

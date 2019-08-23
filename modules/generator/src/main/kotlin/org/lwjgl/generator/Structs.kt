@@ -640,8 +640,8 @@ $indentation}"""
 
         val nativeLayout = !skipNative
         if (nativeLayout) {
-            if (module.library == null) {
-                throw IllegalStateException("${t}Missing module library for native layout of struct: ${module.packageKotlin}.$className")
+            checkNotNull(module.library) {
+                "${t}Missing module library for native layout of struct: ${module.packageKotlin}.$className"
             }
         } else if (preamble.hasNativeDirectives) {
             kotlin.io.println("${t}Unnecessary native directives in struct: ${module.packageKotlin}.$className")

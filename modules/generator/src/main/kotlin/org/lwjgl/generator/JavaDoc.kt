@@ -4,7 +4,7 @@
  */
 package org.lwjgl.generator
 
-import java.lang.Math.*
+import kotlin.math.*
 
 private val REDUNDANT_WHITESPACE = "^[ \\t]+$".toRegex(RegexOption.MULTILINE)
 private const val BLOCK_NODE = "(?:div|h[1-6]|pre|table|thead|tfoot|tbody|td|tr|ul|li|ol|dl|dt|dd)" // TODO: add more here if necessary
@@ -50,7 +50,7 @@ private fun StringBuilder.layoutDOM(dom: String, linePrefix: String): StringBuil
         val (tag, text) = match.destructured
 
         if (tag.isNotEmpty()) {
-            if (startNewLine(dom, match.range.start)) {
+            if (startNewLine(dom, match.range.first)) {
                 if (!tag.startsWith("</") && !tag.matches(CHILD_NODE)) {
                     append('\n')
                     append(linePrefix)
@@ -89,11 +89,11 @@ private fun StringBuilder.layoutText(text: String, linePrefix: String, forcePara
     var to: Int = -1
 
     PARAGRAPH_PATTERN.findAll(text).forEach { match ->
-        val from = match.range.start
+        val from = match.range.first
         if (to == -1 && from > 0)
             appendParagraphFirst(linePrefix, text, from, forceParagraph)
 
-        to = match.range.endInclusive + 1
+        to = match.range.last + 1
         appendParagraph(linePrefix, text, from, to)
     }
 
@@ -145,7 +145,7 @@ fun String.toJavaDoc(indentation: String = t, see: Array<String>? = null, since:
                     }
                 }
 
-                if (!since.isEmpty()) {
+                if (since.isNotEmpty()) {
                     if (isNotEmpty()) append("\n$indentation *\n$indentation * ")
                     append("@since ")
                     append(since)
@@ -176,15 +176,15 @@ internal fun GeneratorTarget.toJavaDoc(
     return StringBuilder(if (documentation.isEmpty()) "" else documentation.cleanup())
         .apply {
             val paramsWithJavadoc = params.filter { it.documentation != null }
-            val returnsStructValue = !returnDoc.isEmpty() && returns is StructType
+            val returnsStructValue = returnDoc.isNotEmpty() && returns is StructType
 
             if (paramsWithJavadoc.any() || returnsStructValue) {
                 // Find maximum param name length
                 var alignment = paramsWithJavadoc
                     .map { it.name.length }
-                    .fold(0) { left, right -> Math.max(left, right) }
+                    .fold(0) { left, right -> max(left, right) }
                 if (returnsStructValue)
-                    alignment = Math.max(alignment, RESULT.length)
+                    alignment = max(alignment, RESULT.length)
 
                 val multilineAligment = paramMultilineAligment(alignment)
 
@@ -197,7 +197,7 @@ internal fun GeneratorTarget.toJavaDoc(
                     printParam(RESULT, processDocumentation(returnDoc), alignment, multilineAligment)
             }
 
-            if (!returnDoc.isEmpty() && !returnsStructValue) {
+            if (returnDoc.isNotEmpty() && !returnsStructValue) {
                 if (isNotEmpty()) append("\n$t *\n$t * ")
                 append("@return ")
                 append(processDocumentation(returnDoc).cleanup("$t *         "))
@@ -212,7 +212,7 @@ internal fun GeneratorTarget.toJavaDoc(
                 }
             }
 
-            if (!since.isEmpty()) {
+            if (since.isNotEmpty()) {
                 if (isNotEmpty()) append("\n$t *\n$t * ")
                 append("@since ")
                 append(since)
@@ -288,7 +288,7 @@ enum class LinkMode {
         builder.append("<br><table><tr>")
 
         val theLinks = WHITESPACE.split(links.trim()).asSequence()
-        val columns = max(1, 80 / round(theLinks.map { it.length - it.indexOf('#') - 1 }.average()).toInt())
+        val columns = max(1, 80 / theLinks.map { it.length - it.indexOf('#') - 1 }.average().roundToInt())
 
         theLinks.forEachIndexed { i, link ->
             if (i > 0 && i % columns == 0)

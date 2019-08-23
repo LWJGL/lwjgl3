@@ -78,8 +78,8 @@ internal class ExtractionContext(val header: Header, val options: Options, error
             CXTranslationUnit_DetailedPreprocessingRecord,
             pp
         )
-        if (err != CXError_Success) {
-            throw IllegalStateException("Failed to parse header. Error code: $err")
+        check(err == CXError_Success) {
+            "Failed to parse header. Error code: $err"
         }
         pp[0]
     }.let { tu ->
@@ -215,9 +215,7 @@ internal fun parse(
             }
 
             stack.push().use { frame ->
-                val kind = clang_getCursorKind(cursor)
-
-                when (kind) {
+                when (clang_getCursorKind(cursor)) {
                     CXCursor_EnumDecl        -> {
                         if (options.parseConstants) {
                             cursor.spelling.let { name ->

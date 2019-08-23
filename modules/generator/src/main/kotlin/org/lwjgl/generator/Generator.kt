@@ -5,7 +5,6 @@
 package org.lwjgl.generator
 
 import java.io.*
-import java.lang.Math.*
 import java.lang.reflect.*
 import java.nio.*
 import java.nio.file.*
@@ -13,6 +12,7 @@ import java.nio.file.attribute.*
 import java.util.concurrent.*
 import java.util.concurrent.atomic.*
 import java.util.function.*
+import kotlin.math.*
 
 /*
     A template will be generated in the following cases:
@@ -32,11 +32,12 @@ import java.util.function.*
     - Target source (C)     -> <module>/src/generated/c/opengl/org_lwjgl_opengl_ARBImaging.c
 */
 fun main(args: Array<String>) {
-    if (args.isEmpty())
-        throw IllegalArgumentException("Module root path not specified")
+    require(args.isNotEmpty()) {
+        "Module root path not specified"
+    }
 
-    if (!Files.isDirectory(Paths.get(args[0]))) {
-        throw IllegalArgumentException("Invalid module root path: ${args[0]}")
+    require(Files.isDirectory(Paths.get(args[0]))) {
+        "Invalid module root path: ${args[0]}"
     }
 
     Generator(args[0]).apply {
@@ -167,8 +168,7 @@ class Generator(private val moduleRoot: String) {
 
     private fun apply(packagePath: String, packageName: String, consume: Sequence<Method>.() -> Unit) {
         val packageDirectory = Paths.get(packagePath)
-        if (!Files.isDirectory(packageDirectory))
-            throw IllegalStateException()
+        check(Files.isDirectory(packageDirectory))
 
         Files.list(packageDirectory)
             .filter { KOTLIN_PATH_MATCHER.matches(it) }
@@ -232,8 +232,9 @@ class Generator(private val moduleRoot: String) {
         for (template in templates) {
             val nativeClass = template.invoke(null) as NativeClass? ?: continue
 
-            if (nativeClass.module !== module)
-                throw IllegalStateException("NativeClass ${nativeClass.className} has invalid module [${nativeClass.module.name}]. Should be: [${module.name}]")
+            check(nativeClass.module === module) {
+                "NativeClass ${nativeClass.className} has invalid module [${nativeClass.module.name}]. Should be: [${module.name}]"
+            }
 
             if (nativeClass.hasBody) {
                 classes.add(nativeClass)
@@ -344,8 +345,9 @@ internal fun Path.lastModified(
     glob: String? = null,
     matcher: PathMatcher = if (glob == null) KOTLIN_PATH_MATCHER else FileSystems.getDefault().getPathMatcher("glob:$glob")
 ): Long {
-    if (!Files.isDirectory(this))
-        throw IllegalStateException("$this is not a directory")
+    check(Files.isDirectory(this)) {
+        "$this is not a directory"
+    }
 
     return Files
         .find(this, maxDepth, BiPredicate { path, _ -> matcher.matches(path) })

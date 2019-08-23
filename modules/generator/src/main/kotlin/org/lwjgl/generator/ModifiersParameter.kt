@@ -14,16 +14,16 @@ object Virtual : ParameterModifier {
 object Input : ParameterModifier {
     override val isSpecial = false
     override fun validate(param: Parameter) {
-        if (param.nativeType !is PointerType<*>) {
-            throw IllegalArgumentException("The Input modifier can only be applied to pointer parameters.")
+        require(param.nativeType is PointerType<*>) {
+            "The Input modifier can only be applied to pointer parameters."
         }
 
-        if (!param.nativeType.elementType.let { it is StructType || it is CharType }) {
-            throw IllegalArgumentException("The Input modifier is only necessary on struct or string parameters.")
+        require(param.nativeType.elementType.let { it is StructType || it is CharType }) {
+            "The Input modifier is only necessary on struct or string parameters."
         }
 
-        if (isInput(param.nativeType)) {
-            throw IllegalArgumentException("The Input modifier is not necessary on pointer-to-const parameters.")
+        require(!isInput(param.nativeType)) {
+            "The Input modifier is not necessary on pointer-to-const parameters."
         }
     }
 
@@ -35,8 +35,9 @@ object Input : ParameterModifier {
 object MapToInt : ParameterModifier {
     override val isSpecial = true
     override fun validate(param: Parameter) {
-        if (param.nativeType.mapping !== PrimitiveMapping.BYTE && param.nativeType.mapping !== PrimitiveMapping.SHORT)
-            throw IllegalArgumentException("The MapToInt modifier can only be applied to byte or short parameters.")
+        require(param.nativeType.mapping === PrimitiveMapping.BYTE || param.nativeType.mapping === PrimitiveMapping.SHORT) {
+            "The MapToInt modifier can only be applied to byte or short parameters."
+        }
     }
 }
 
@@ -91,8 +92,8 @@ class AutoSize(
     override fun validate(param: Parameter) {
         if (param.nativeType is PointerType<*>) {
             if (param.isInput) {
-                if (dependent.isNotEmpty()) {
-                    throw IllegalArgumentException("Input pointer parameters with the AutoSize modifier cannot reference dependent parameters.")
+                require(dependent.isEmpty()) {
+                    "Input pointer parameters with the AutoSize modifier cannot reference dependent parameters."
                 }
             } else {
                 when (param.nativeType.mapping) {
@@ -130,8 +131,9 @@ class AutoSizeResultParam(val expression: String?) : ParameterModifier {
                 }
             }
 
-            if (param has nullable)
-                throw IllegalArgumentException("The AutoSizeResult modifier cannot be applied to nullable parameters.")
+            require(!(param has nullable)) {
+                "The AutoSizeResult modifier cannot be applied to nullable parameters."
+            }
         } else {
             if (param.nativeType.mapping.nativeMethodType.isPrimitive) {
                 when (param.nativeType.mapping) {
@@ -160,26 +162,30 @@ class Check(
 ) : ParameterModifier {
     override val isSpecial = expression != "0"
     override fun validate(param: Parameter) {
-        if (param.nativeType !is PointerType<*>)
-            throw IllegalArgumentException("The Check modifier can only be applied to pointer types.")
+        require(param.nativeType is PointerType<*>) {
+            "The Check modifier can only be applied to pointer types."
+        }
 
-        if (param.nativeType.mapping === PointerMapping.OPAQUE_POINTER)
-            throw IllegalArgumentException("The Check modifier cannot be applied to opaque pointer types.")
+        require(param.nativeType.mapping !== PointerMapping.OPAQUE_POINTER) {
+            "The Check modifier cannot be applied to opaque pointer types."
+        }
     }
 }
 
 /** Factory method for Check modifiers with integer expressions. */
-fun Check(value: Int) = Check(Integer.toString(value))
+fun Check(value: Int) = Check(value.toString())
 
 /** Marks a buffer parameter as terminated by the specified value. */
 class Terminated(val value: String) : ParameterModifier {
     override val isSpecial = true
     override fun validate(param: Parameter) {
-        if (param.nativeType !is PointerType<*>)
-            throw IllegalArgumentException("The NullTerminated modifier can only be applied to pointer types.")
+        require(param.nativeType is PointerType<*>) {
+            "The NullTerminated modifier can only be applied to pointer types."
+        }
 
-        if (param.nativeType.mapping === PointerMapping.OPAQUE_POINTER)
-            throw IllegalArgumentException("The NullTerminated modifier cannot be applied to opaque pointer types.")
+        require(param.nativeType.mapping !== PointerMapping.OPAQUE_POINTER) {
+            "The NullTerminated modifier cannot be applied to opaque pointer types."
+        }
     }
 }
 
@@ -212,13 +218,15 @@ class AutoType(override val reference: String, vararg val types: AutoTypeToken) 
     override val isSpecial = false
 
     init {
-        if (types.isEmpty())
-            throw IllegalArgumentException("No types specified.")
+        require(types.isNotEmpty()) {
+            "No types specified."
+        }
     }
 
     override fun validate(param: Parameter) {
-        if (param.nativeType !is IntegerType || !param.nativeType.unsigned)
-            throw IllegalArgumentException("The AutoType modifier can only be applied to unsigned integer parameters.")
+        require(param.nativeType is IntegerType && param.nativeType.unsigned) {
+            "The AutoType modifier can only be applied to unsigned integer parameters."
+        }
     }
 }
 
@@ -229,25 +237,30 @@ class MultiType(
     val byteArray: Boolean = false
 ) : ParameterModifier {
     init {
-        if (types.isEmpty())
-            throw IllegalArgumentException("No buffer types specified.")
+        require(types.isNotEmpty()) {
+            "No buffer types specified."
+        }
 
         for (t in types) {
-            if (t === PointerMapping.DATA_BYTE)
-                throw IllegalArgumentException("The DATA_BYTE mapping cannot be used with the MultiType modifier.")
+            require(t !== PointerMapping.DATA_BYTE) {
+                "The DATA_BYTE mapping cannot be used with the MultiType modifier."
+            }
 
-            if (t === PointerMapping.OPAQUE_POINTER)
-                throw IllegalArgumentException("The MultiType modifier can only be applied with concrete PointerMappings.")
+            require(t !== PointerMapping.OPAQUE_POINTER) {
+                "The MultiType modifier can only be applied with concrete PointerMappings."
+            }
         }
     }
 
     override val isSpecial = true
     override fun validate(param: Parameter) {
-        if (param.nativeType !is PointerType<*>)
-            throw IllegalArgumentException("The MultiType modifier can only be applied to pointer types.")
+        require(param.nativeType is PointerType<*>) {
+            "The MultiType modifier can only be applied to pointer types."
+        }
 
-        if (param.nativeType.mapping === PointerMapping.OPAQUE_POINTER)
-            throw IllegalArgumentException("The MultiType modifier cannot be applied to opaque pointer types.")
+        require(param.nativeType.mapping !== PointerMapping.OPAQUE_POINTER) {
+            "The MultiType modifier cannot be applied to opaque pointer types."
+        }
     }
 
 }
@@ -264,8 +277,8 @@ val MultiTypeAll = MultiType(
 object RawPointer : ParameterModifier {
     override val isSpecial = true
     override fun validate(param: Parameter) {
-        if (!param.nativeType.isPointerData) {
-            throw IllegalStateException("The RawPointer modifier can only modifier to data pointer parameters.")
+        check(param.nativeType.isPointerData) {
+            "The RawPointer modifier can only modifier to data pointer parameters."
         }
     }
 }
@@ -284,23 +297,29 @@ class Return(
     override val isSpecial = true
     override fun validate(param: Parameter) {
         if (param.nativeType is PointerType<*>) {
-            if (param.isInput)
-                throw IllegalArgumentException("The Return modifier can only be applied to output parameters.")
+            require(!param.isInput) {
+                "The Return modifier can only be applied to output parameters."
+            }
 
-            if (param.nativeType.mapping === PointerMapping.OPAQUE_POINTER)
-                throw IllegalArgumentException("The Return modifier cannot be applied to opaque pointer types.")
+            require(param.nativeType.mapping !== PointerMapping.OPAQUE_POINTER) {
+                "The Return modifier cannot be applied to opaque pointer types."
+            }
 
-            if (this !== ReturnParam && param.nativeType !is CharSequenceType && !lengthParam.startsWith(RESULT))
-                throw IllegalArgumentException("The Return modifier can only be applied to CharSequence parameters.")
+            require(this === ReturnParam || param.nativeType is CharSequenceType || lengthParam.startsWith(RESULT)) {
+                "The Return modifier can only be applied to CharSequence parameters."
+            }
 
-            if (heapAllocate && param.nativeType !is CharSequenceType)
-                throw IllegalArgumentException("The heapAllocate option can only be enabled with CharSequence parameters.")
+            require(!heapAllocate || param.nativeType is CharSequenceType) {
+                "The heapAllocate option can only be enabled with CharSequence parameters."
+            }
 
-            if (includesNT && param.nativeType !is CharSequenceType)
-                throw IllegalArgumentException("The includesNT option can only be enabled with CharSequence parameters.")
+            require(!includesNT || param.nativeType is CharSequenceType) {
+                "The includesNT option can only be enabled with CharSequence parameters."
+            }
         } else {
-            if (this !== ReturnParam || param.nativeType !is StructType)
-                throw IllegalArgumentException("The ReturnParam modifier can only be used on struct value parameters.")
+            require(this === ReturnParam && param.nativeType is StructType) {
+                "The ReturnParam modifier can only be used on struct value parameters."
+            }
         }
     }
 }
@@ -312,11 +331,13 @@ val ReturnParam = Return("", null)
 class SingleValue(val newName: String) : ParameterModifier {
     override val isSpecial = true
     override fun validate(param: Parameter) {
-        if (param.nativeType !is PointerType<*>)
-            throw IllegalArgumentException("The SingleValue modifier can only be applied to pointer types.")
+        require(param.nativeType is PointerType<*>) {
+            "The SingleValue modifier can only be applied to pointer types."
+        }
 
-        if (param.nativeType.mapping === PointerMapping.OPAQUE_POINTER)
-            throw IllegalArgumentException("The SingleValue modifier cannot be applied to opaque pointer types.")
+        require(param.nativeType.mapping !== PointerMapping.OPAQUE_POINTER) {
+            "The SingleValue modifier cannot be applied to opaque pointer types."
+        }
     }
 }
 
@@ -331,14 +352,17 @@ class PointerArray(
 ) : ParameterModifier {
     override val isSpecial = true
     override fun validate(param: Parameter) {
-        if (param.nativeType !is PointerType<*>)
-            throw IllegalArgumentException("The PointerArray modifier can only be applied to pointer types.")
+        require(param.nativeType is PointerType<*>) {
+            "The PointerArray modifier can only be applied to pointer types."
+        }
 
-        if (param.nativeType.mapping != PointerMapping.DATA_POINTER)
-            throw IllegalArgumentException("The PointerArray modifier can only be applied to pointer-to-pointer types.")
+        require(param.nativeType.mapping === PointerMapping.DATA_POINTER) {
+            "The PointerArray modifier can only be applied to pointer-to-pointer types."
+        }
 
-        if (!param.isInput)
-            throw IllegalArgumentException("The PointerArray modifier can only be applied to input parameters.")
+        require(param.isInput) {
+            "The PointerArray modifier can only be applied to input parameters."
+        }
     }
 }
 
@@ -348,8 +372,8 @@ class UserData(
 ) : ParameterModifier, ReferenceModifier {
     override val isSpecial = false
     override fun validate(param: Parameter) {
-        if (!(param.nativeType is PointerType<*> && param.nativeType.elementType is OpaqueType)) {
-            throw IllegalArgumentException("The UserData modifier can only be applied to opaque pointer parameters.")
+        require(param.nativeType is PointerType<*> && param.nativeType.elementType is OpaqueType) {
+            "The UserData modifier can only be applied to opaque pointer parameters."
         }
     }
 }

@@ -5,8 +5,8 @@
 package org.lwjgl.generator
 
 import java.io.*
-import java.lang.Math.*
 import java.nio.file.*
+import kotlin.math.*
 
 const val EXT_FLAG = ""
 
@@ -205,7 +205,7 @@ class NativeClass internal constructor(
     private val customMethods = ArrayList<String>()
 
     internal val hasBody
-        get() = binding is SimpleBinding || !constantBlocks.isEmpty() || hasNativeFunctions || customMethods.isNotEmpty()
+        get() = binding is SimpleBinding || constantBlocks.isNotEmpty() || hasNativeFunctions || customMethods.isNotEmpty()
 
     val hasNativeFunctions
         get() = _functions.isNotEmpty()
@@ -802,8 +802,8 @@ class NativeClass internal constructor(
             parameters = *params
         )
 
-        if ((_functions.put(name, func)) != null) {
-            throw IllegalArgumentException("The $name function is already defined in ${this@NativeClass.className}.")
+        require(_functions.put(name, func) == null) {
+            "The $name function is already defined in ${this@NativeClass.className}."
         }
         return func
     }

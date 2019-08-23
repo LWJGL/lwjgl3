@@ -71,7 +71,7 @@ class Preamble {
         fun List<String>.print() = this.forEach { writer.println("import $it;") }
 
         val static = javaImports.filter { it.startsWith("static ") }
-        if (!static.isEmpty() && static.size < javaImports.size) {
+        if (static.isNotEmpty() && static.size < javaImports.size) {
             // Separate plain from static imports
             javaImports.filter { !it.startsWith("static ") }.print()
             writer.println()
@@ -154,8 +154,9 @@ abstract class GeneratorTarget(
 
     var access = Access.PUBLIC
         set(access) {
-            if (access === Access.PRIVATE)
-                throw IllegalArgumentException("The private access modifier is illegal on top-level classes.")
+            require(access !== Access.PRIVATE) {
+                "The private access modifier is illegal on top-level classes."
+            }
             field = access
         }
 
@@ -250,8 +251,11 @@ abstract class GeneratorTarget(
                             else
                                 classElement.lastIndexOf('(') + 2
                             )
-                        } else if (module !== Module.VULKAN)
-                            throw IllegalStateException("Failed to resolve link: ${match.value} in ${this.className}")
+                        } else {
+                            check(module === Module.VULKAN) {
+                                "Failed to resolve link: ${match.value} in ${this.className}"
+                            }
+                        }
                     } else {
                         if (classElement.startsWith(prefix))
                             classElement = classElement.substring(prefix.length)
@@ -287,8 +291,9 @@ abstract class GeneratorTarget(
                 val prefix = if (custom) "" else sourcePrefix
 
                 val parentheses = classElement.indexOf('(')
-                if (parentheses == -1)
-                    throw IllegalStateException("Invalid method link: $this#$prefix$classElement")
+                check(parentheses != -1) {
+                    "Invalid method link: $this#$prefix$classElement"
+                }
 
                 val name = classElement.substring(0, parentheses)
 

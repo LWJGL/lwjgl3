@@ -5,6 +5,7 @@
 package org.lwjgl.generator
 
 import java.io.*
+import kotlin.math.*
 import kotlin.reflect.*
 
 // Extension properties for numeric literals.
@@ -125,7 +126,7 @@ class ConstantBlock<T : Any>(
                         }
                         else                      -> {
                             if (formatType == 1)
-                                ConstantExpression(c.name, Integer.toString(value++), false)
+                                ConstantExpression(c.name, (value++).toString(), false)
                             else
                                 Constant(c.name, value++)
                         }
@@ -192,7 +193,7 @@ class ConstantBlock<T : Any>(
         val alignment = constants.map {
             it.name.length
         }.fold(0) { left, right ->
-            Math.max(left, right)
+            max(left, right)
         }
 
         constants.forEachWithMore { it, more ->

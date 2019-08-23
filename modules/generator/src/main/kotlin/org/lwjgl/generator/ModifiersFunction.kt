@@ -50,11 +50,11 @@ enum class ApplyTo(
 }
 
 class Code(
-    val javaInit: List<Code.Statement> = Code.NO_STATEMENTS,
+    val javaInit: List<Statement> = NO_STATEMENTS,
 
-    val javaBeforeNative: List<Code.Statement> = Code.NO_STATEMENTS,
-    val javaAfterNative: List<Code.Statement> = Code.NO_STATEMENTS,
-    val javaFinally: List<Code.Statement> = Code.NO_STATEMENTS,
+    val javaBeforeNative: List<Statement> = NO_STATEMENTS,
+    val javaAfterNative: List<Statement> = NO_STATEMENTS,
+    val javaFinally: List<Statement> = NO_STATEMENTS,
 
     val nativeBeforeCall: String? = null,
     val nativeCall: String? = null,
@@ -71,20 +71,21 @@ class Code(
         val applyTo: ApplyTo = ApplyTo.BOTH
     )
 
-    override val isSpecial get() =
-    Code.NO_STATEMENTS !== javaInit ||
-    Code.NO_STATEMENTS !== javaBeforeNative ||
-    Code.NO_STATEMENTS !== javaAfterNative ||
-    Code.NO_STATEMENTS !== javaFinally
+    override val isSpecial
+        get() =
+            NO_STATEMENTS !== javaInit ||
+            NO_STATEMENTS !== javaBeforeNative ||
+            NO_STATEMENTS !== javaAfterNative ||
+            NO_STATEMENTS !== javaFinally
 
-    internal fun hasStatements(statements: List<Code.Statement>, alternative: Boolean, arrays: Boolean) =
+    internal fun hasStatements(statements: List<Statement>, alternative: Boolean, arrays: Boolean) =
         if (statements === NO_STATEMENTS) false else statements.any { it.applyTo.filter(alternative, arrays) }
 
-    internal fun getStatements(statements: List<Code.Statement>, alternative: Boolean, arrays: Boolean) =
+    internal fun getStatements(statements: List<Statement>, alternative: Boolean, arrays: Boolean) =
         if (statements === NO_STATEMENTS) statements else statements.filter { it.applyTo.filter(alternative, arrays) }
 
-    private fun List<Code.Statement>.append(other: List<Code.Statement>) =
-        if (this === Code.NO_STATEMENTS && other === Code.NO_STATEMENTS) Code.NO_STATEMENTS else this + other
+    private fun List<Statement>.append(other: List<Statement>) =
+        if (this === NO_STATEMENTS && other === NO_STATEMENTS) NO_STATEMENTS else this + other
 
     private fun String?.append(other: String?) = when {
         this == null  -> other
@@ -93,11 +94,11 @@ class Code(
     }
 
     internal fun append(
-        javaInit: List<Code.Statement> = Code.NO_STATEMENTS,
+        javaInit: List<Statement> = NO_STATEMENTS,
 
-        javaBeforeNative: List<Code.Statement> = Code.NO_STATEMENTS,
-        javaAfterNative: List<Code.Statement> = Code.NO_STATEMENTS,
-        javaFinally: List<Code.Statement> = Code.NO_STATEMENTS,
+        javaBeforeNative: List<Statement> = NO_STATEMENTS,
+        javaAfterNative: List<Statement> = NO_STATEMENTS,
+        javaFinally: List<Statement> = NO_STATEMENTS,
 
         nativeBeforeCall: String? = null,
         nativeCall: String? = null,
@@ -130,8 +131,9 @@ class Macro internal constructor(val function: Boolean, val constant: Boolean, v
     override val isSpecial = false
 
     override fun validate(func: Func) {
-        if (constant && func.parameters.isNotEmpty())
-            throw IllegalArgumentException("The constant macro modifier can only be applied to functions with no arguments.")
+        require(!constant || func.parameters.isEmpty()) {
+            "The constant macro modifier can only be applied to functions with no arguments."
+        }
     }
 }
 
@@ -178,9 +180,9 @@ class MapPointer(
 ) : FunctionModifier {
     override val isSpecial = true
     override fun validate(func: Func) {
-        val returnType = func.returns.nativeType
-        if (returnType !is PointerType<*>)
-            throw IllegalArgumentException("The MapPointer modifier can only be applied to functions with pointer return types.")
+        require(func.returns.nativeType is PointerType<*>) {
+            "The MapPointer modifier can only be applied to functions with pointer return types."
+        }
     }
 }
 
@@ -190,8 +192,9 @@ class Construct(
 ) : FunctionModifier {
     override val isSpecial = true
     override fun validate(func: Func) {
-        if (func.returns.nativeType !is WrappedPointerType)
-            throw IllegalArgumentException("The Construct modifier can only be applied to functions with object return types.")
+        require(func.returns.nativeType is WrappedPointerType) {
+            "The Construct modifier can only be applied to functions with object return types."
+        }
     }
 }
 
@@ -205,8 +208,9 @@ object Nonnull : FunctionModifier {
     override val isSpecial = false
 
     override fun validate(func: Func) {
-        if (func.returns.nativeType !is PointerType<*> && func.returns.nativeType !is JObjectType)
-            throw IllegalArgumentException("The Nonnull modifier can only be applied to functions with pointer or Java instance return types.")
+        require(func.returns.nativeType is PointerType<*> || func.returns.nativeType is JObjectType) {
+            "The Nonnull modifier can only be applied to functions with pointer or Java instance return types."
+        }
     }
 }
 
@@ -215,7 +219,8 @@ object MustBeDisposed/*tentative name*/ : FunctionModifier {
     override val isSpecial = false
 
     override fun validate(func: Func) {
-        if (func.returns.nativeType !is CharSequenceType)
-            throw IllegalArgumentException("The MustBeDisposed modifier can only be applied to functions with character sequence return types.")
+        require(func.returns.nativeType is CharSequenceType) {
+            "The MustBeDisposed modifier can only be applied to functions with character sequence return types."
+        }
     }
 }

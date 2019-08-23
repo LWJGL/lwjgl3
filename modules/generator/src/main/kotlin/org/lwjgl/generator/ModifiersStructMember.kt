@@ -38,16 +38,19 @@ class AutoSizeMember(
     override fun hasReference(reference: String) = this.reference == reference || dependent.any { it == reference }
 
     override fun validate(member: StructMember) {
-        if (when (member.nativeType.mapping) {
-            PrimitiveMapping.BYTE,
-            PrimitiveMapping.SHORT,
-            PrimitiveMapping.INT,
-            PrimitiveMapping.LONG,
-            PrimitiveMapping.CLONG,
-            PrimitiveMapping.POINTER -> false
-            else                     -> true
-        })
-            throw IllegalArgumentException("Members with the AutoSizeMember modifier must be integer primitive types.")
+        require(
+            when (member.nativeType.mapping) {
+                PrimitiveMapping.BYTE,
+                PrimitiveMapping.SHORT,
+                PrimitiveMapping.INT,
+                PrimitiveMapping.LONG,
+                PrimitiveMapping.CLONG,
+                PrimitiveMapping.POINTER -> true
+                else                     -> false
+            }
+        ) {
+            "Members with the AutoSizeMember modifier must be integer primitive types."
+        }
     }
 }
 
@@ -64,16 +67,19 @@ class AutoSizeIndirect(
     override fun hasReference(reference: String) = this.reference == reference || dependent.any { it == reference }
 
     override fun validate(member: StructMember) {
-        if (when (member.nativeType.mapping) {
-            PrimitiveMapping.BYTE,
-            PrimitiveMapping.SHORT,
-            PrimitiveMapping.INT,
-            PrimitiveMapping.LONG,
-            PrimitiveMapping.CLONG,
-            PrimitiveMapping.POINTER -> false
-            else                     -> true
-        })
-            throw IllegalArgumentException("Members with the AutoSizeIndirect modifier must be integer primitive types.")
+        require(
+            when (member.nativeType.mapping) {
+                PrimitiveMapping.BYTE,
+                PrimitiveMapping.SHORT,
+                PrimitiveMapping.INT,
+                PrimitiveMapping.LONG,
+                PrimitiveMapping.CLONG,
+                PrimitiveMapping.POINTER -> true
+                else                     -> false
+            }
+        ) {
+            "Members with the AutoSizeIndirect modifier must be integer primitive types."
+        }
     }
 }
 
@@ -83,8 +89,8 @@ class UserDataMember(
 ) : StructMemberModifier, ReferenceModifier {
     override val isSpecial = true
     override fun validate(member: StructMember) {
-        if (!(member.nativeType is PointerType<*> && member.nativeType.elementType is OpaqueType)) {
-            throw IllegalArgumentException("The UserData modifier can only be applied to opaque pointer parameters.")
+        require(member.nativeType is PointerType<*> && member.nativeType.elementType is OpaqueType) {
+            "The UserData modifier can only be applied to opaque pointer parameters."
         }
     }
 }
@@ -93,8 +99,9 @@ class UserDataMember(
 class TerminatedMember(val value: String) : StructMemberModifier {
     override val isSpecial = true
     override fun validate(member: StructMember) {
-        if (member !is StructMemberArray)
-            throw IllegalArgumentException("The NullTerminated modifier can only be applied to array members.")
+        require(member is StructMemberArray) {
+            "The NullTerminated modifier can only be applied to array members."
+        }
     }
 }
 val NullTerminatedMember = TerminatedMember("")

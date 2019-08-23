@@ -883,7 +883,7 @@ class Func(
         }
 
         if (returns.isStructValue && !hasParam { it has ReturnParam }) {
-            if (!parameters.isEmpty()) print(", ")
+            if (parameters.isNotEmpty()) print(", ")
             print("${returns.nativeType.annotate(retType)} $RESULT")
         }
 
@@ -1187,7 +1187,7 @@ class Func(
         }
 
         // Check if we have any basic transformations to apply
-        if (!transforms.isEmpty())
+        if (transforms.isNotEmpty())
             generateAlternativeMethod(name, transforms)
 
         // Generate more complex alternatives if necessary
@@ -1275,8 +1275,9 @@ class Func(
                     transforms[returns] = BufferAutoSizeReturnTransform(it, returnMod.lengthParam)
                     transforms[it] = BufferReplaceReturnTransform
                     generateAlternativeMethod(name, transforms)
-                } else if (returns.isVoid)
-                    throw IllegalStateException()
+                } else {
+                    check(!returns.isVoid)
+                }
             } else if (it.has<AutoType>()) {
                 // Generate AutoType alternatives
 
@@ -1304,8 +1305,9 @@ class Func(
             if (params.isEmpty())
                 return@let
 
-            if (params.groupBy { it.get<MultiType>().types.contentHashCode() }.size != 1)
-                throw IllegalStateException("All MultiType modifiers in a function must have the same structure.")
+            check(params.groupBy { it.get<MultiType>().types.contentHashCode() }.size == 1) {
+                "All MultiType modifiers in a function must have the same structure."
+            }
 
             // Add the AutoSize transformation if we skipped it above
             getParams { it.has<AutoSize>() }.forEach {
@@ -1541,16 +1543,15 @@ class Func(
             }
         }
         // Update Reuse delegation if the code below changes
-        val returnTransform = transforms[returns]
-        when (returnTransform) {
+        when (val returnTransform = transforms[returns]) {
             is MapPointerTransform         -> {
                 if (returnTransform.useOldBuffer) {
-                    if (!parameters.isEmpty()) print(", ")
+                    if (parameters.isNotEmpty()) print(", ")
                     print("@Nullable ByteBuffer $MAP_OLD")
                 }
             }
             is MapPointerExplicitTransform -> {
-                var hasParams = !parameters.isEmpty()
+                var hasParams = parameters.isNotEmpty()
                 if (returnTransform.addParam) {
                     if (hasParams) print(", ") else hasParams = true
                     print("long ${returnTransform.lengthParam}")
@@ -1562,7 +1563,7 @@ class Func(
             }
         }
         if (returns.isStructValue) {
-            if (!parameters.isEmpty()) print(", ")
+            if (parameters.isNotEmpty()) print(", ")
             print("${returns.nativeType.annotate(retType)} $RESULT")
         }
         println(") {")
@@ -1591,16 +1592,15 @@ class Func(
                     name?.substring(name.lastIndexOf(' ') + 1)
                 }
             }
-            val returnTransform = transforms[returns]
-            when (returnTransform) {
+            when (val returnTransform = transforms[returns]) {
                 is MapPointerTransform         -> {
                     if (returnTransform.useOldBuffer) {
-                        if (!parameters.isEmpty()) print(", ")
+                        if (parameters.isNotEmpty()) print(", ")
                         print(MAP_OLD)
                     }
                 }
                 is MapPointerExplicitTransform -> {
-                    var hasParams = !parameters.isEmpty()
+                    var hasParams = parameters.isNotEmpty()
                     if (returnTransform.addParam) {
                         if (hasParams) print(", ") else hasParams = true
                         print(returnTransform.lengthParam)
@@ -1612,7 +1612,7 @@ class Func(
                 }
             }
             if (returns.isStructValue) {
-                if (!parameters.isEmpty()) print(", ")
+                if (parameters.isNotEmpty()) print(", ")
                 print(RESULT)
             }
             println(");\n$t}")
@@ -1695,7 +1695,7 @@ class Func(
         if (returns.isVoid || returns.isStructValue) {
             // TODO: struct value + custom transform?
             val result = returns.transformCallOrElse(transforms, "")
-            if (!result.isEmpty()) {
+            if (result.isNotEmpty()) {
                 println(if (hasFinally) result.replace(TRY_FINALLY_ALIGN, "$t$1") else result)
             } else if (returns.isStructValue)
                 println("${if (hasFinally) "$t$t$t" else "$t$t"}return $RESULT;")
@@ -1734,8 +1734,10 @@ class Func(
                             val params = getParams { it.has<AutoSizeResultParam>() }
                             val single = params.count() == 1
                             builder.append(", ${params.map { getAutoSizeResultExpression(single, it) }.joinToString(" * ")}")
-                        } else if (returns.nativeType.dereference !is StructType) {
-                            throw IllegalStateException("No AutoSizeResult parameter could be found.")
+                        } else {
+                            check(returns.nativeType.dereference is StructType) {
+                                "No AutoSizeResult parameter could be found."
+                            }
                         }
                     }
                 }
@@ -2020,7 +2022,7 @@ class Func(
         println("}")
     }
 
-    private fun workaroundJDK8167409(ignoreArrayType: Boolean = false): Boolean = parameters.count().let {
+    private fun workaroundJDK8167409(ignoreArrayType: Boolean = false): Boolean = parameters.size.let {
         6 <= it || (5 <= it && returns.isStructValue && !hasParam { param -> param has ReturnParam })
     } && parameters[0].nativeType.let { type ->
         (type is PointerType<*> && (ignoreArrayType || type !is ArrayType<*>)) || type.mapping.let { it is PrimitiveMapping && 4 < it.bytes }

@@ -75,9 +75,7 @@ private fun CXComment.parseChildren(doc: Documentation, builder: StringBuilder, 
 
 private fun CXComment.parse(doc: Documentation, builder: StringBuilder, context: DocContext): Documentation {
     stackPush().use { stack ->
-        val kind = clang_Comment_getKind(this)
-        //println(kind)
-        when (kind) {
+        when (val kind = clang_Comment_getKind(this)) {
             CXComment_Null                 -> {
                 if (clang_Comment_getNumChildren(this) != 0) {
                     TODO()
@@ -87,9 +85,7 @@ private fun CXComment.parse(doc: Documentation, builder: StringBuilder, context:
                 if (clang_Comment_isWhitespace(this)) {
                     //builder.append(" ")
                 } else {
-                    val text = clang_TextComment_getText(this, stack.str).str.trim()
-                    //println("$t$text")
-                    when (text) {
+                    when (val text = clang_TextComment_getText(this, stack.str).str.trim()) {
                         "\\" -> {
                             if (builder.isNotEmpty() && builder.last().let { it.isLetter() || it == ':' }) {
                                 builder.append(" ")
@@ -158,8 +154,7 @@ private fun CXComment.parse(doc: Documentation, builder: StringBuilder, context:
                         }
                     }
                     CXCommentInlineCommandRenderKind_Emphasized -> {
-                        val cmd = clang_InlineCommandComment_getCommandName(this, stack.str).str
-                        when (cmd) {
+                        when (val cmd = clang_InlineCommandComment_getCommandName(this, stack.str).str) {
                             "a"  -> {
                                 builder.append(" #")
                                 for (i in 0 until clang_InlineCommandComment_getNumArgs(this)) {
@@ -172,7 +167,7 @@ private fun CXComment.parse(doc: Documentation, builder: StringBuilder, context:
                                 closeInlineCommand(builder, index, "</em>")
                             }
                             else -> {
-                                System.err.println("Unsupported CXCommentInlineCommandRenderKind_Emphasized command: " + cmd)
+                                System.err.println("Unsupported CXCommentInlineCommandRenderKind_Emphasized command: $cmd")
                                 TODO()
                             }
                         }
