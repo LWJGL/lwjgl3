@@ -6,7 +6,7 @@ package llvm
 
 import org.lwjgl.generator.*
 
-val LLVM_BINDING = simpleBinding(Module.LLVM, libraryName = "LLVM", libraryExpression = "Configuration.LLVM_LIBRARY_NAME, \"libLLVM\"")
+val LLVM_BINDING = simpleBinding(Module.LLVM, libraryName = "LLVM", libraryExpression = "Configuration.LLVM_LIBRARY_NAME, \"LLVM\", \"LLVM-C\"")
 val LLVM_BINDING_DELEGATE = LLVM_BINDING.delegate("LLVMCore.getLibrary()")
 
 val LLVMAttributeRef = "LLVMAttributeRef".handle

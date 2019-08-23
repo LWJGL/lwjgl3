@@ -6,7 +6,7 @@ package llvm
 
 import org.lwjgl.generator.*
 
-val LTO_BINDING = simpleBinding(Module.LLVM, libraryName = "LTO", libraryExpression = "Configuration.LLVM_LTO_LIBRARY_NAME, \"libLTO\"")
+val LTO_BINDING = simpleBinding(Module.LLVM, libraryName = "LTO", libraryExpression = "Configuration.LLVM_LTO_LIBRARY_NAME, \"LTO\"")
 
 val lto_code_gen_t = "lto_code_gen_t".handle
 val lto_module_t = "lto_module_t".handle

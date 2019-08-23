@@ -6,7 +6,7 @@ package llvm
 
 import org.lwjgl.generator.*
 
-val CLANG_BINDING = simpleBinding(Module.LLVM, libraryName = "CLANG", libraryExpression = "Configuration.LLVM_CLANG_LIBRARY_NAME, \"libclang\"")
+val CLANG_BINDING = simpleBinding(Module.LLVM, libraryName = "CLANG", libraryExpression = "Configuration.LLVM_CLANG_LIBRARY_NAME, \"clang\", \"libclang\"")
 val CLANG_BINDING_DELEGATE = CLANG_BINDING.delegate("ClangIndex.getLibrary()")
 
 val CXIndex = "CXIndex".handle
