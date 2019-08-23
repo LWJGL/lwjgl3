@@ -619,6 +619,14 @@
             </and>
         </condition>
 
+        <local name="test.hashing"/>
+        <condition property="test.hashing">
+            <and>
+                <istrue value="${binding.xxhash}"/>
+                <istrue value="${binding.meow}"/>
+            </and>
+        </condition>
+
         <mkdir dir="${bin.samples}"/>
         <lwjgl.javac srcdir="modules/samples/src/test/java" destdir="${bin.samples}" taskname="javac: Samples">
             <classpath>
@@ -675,6 +683,7 @@
 
             <!-- Benchmarks -->
             <include name="org/lwjgl/jmh/**"/>
+            <exclude name="org/lwjgl/jmh/Hashing*" unless:true="${test.hashing}"/>
             <exclude name="org/lwjgl/jmh/VarHandle*" unless:set="jdk9"/>
         </lwjgl.javac>
     </target>
