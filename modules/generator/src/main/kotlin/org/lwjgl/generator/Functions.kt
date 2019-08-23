@@ -149,7 +149,7 @@ class Func(
     internal val hasCustomJNIWithIgnoreAddress get() = (this.returns.isStructValue || hasNativeCode) && (!has<Macro> { expression != null })
 
     internal val hasCustomJNI: Boolean by lazy(LazyThreadSafetyMode.NONE) {
-        (!hasFunctionAddressParam || returns.isStructValue || hasNativeCode) && (!has<Macro> { expression != null })
+        (!hasFunctionAddressParam || returns.isStructValue || hasNativeCode || hasParam { it.nativeType is StructType }) && (!has<Macro> { expression != null })
     }
 
     private val isNativeOnly: Boolean by lazy(LazyThreadSafetyMode.NONE) {

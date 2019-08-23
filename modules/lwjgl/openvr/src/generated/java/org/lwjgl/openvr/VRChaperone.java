@@ -24,6 +24,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class VRChaperone {
 
+    static { OpenVR.initialize(); }
+
     protected VRChaperone() {
         throw new UnsupportedOperationException();
     }
@@ -97,12 +99,15 @@ public class VRChaperone {
     // --- [ VRChaperone_SetSceneColor ] ---
 
     /** Unsafe version of: {@link #VRChaperone_SetSceneColor SetSceneColor} */
+    public static native void nVRChaperone_SetSceneColor(long color, long __functionAddress);
+
+    /** Unsafe version of: {@link #VRChaperone_SetSceneColor SetSceneColor} */
     public static void nVRChaperone_SetSceneColor(long color) {
         long __functionAddress = OpenVR.VRChaperone.SetSceneColor;
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(color, __functionAddress);
+        nVRChaperone_SetSceneColor(color, __functionAddress);
     }
 
     /** Optionally give the chaperone system a hit about the color and brightness in the scene. */

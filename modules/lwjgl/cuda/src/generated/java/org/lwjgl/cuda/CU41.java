@@ -7,8 +7,6 @@ package org.lwjgl.cuda;
 
 import java.nio.*;
 
-import org.lwjgl.*;
-
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -47,9 +45,7 @@ public class CU41 extends CU40 {
             DeviceGetByPCIBusId = apiGetFunctionAddress(CU.getLibrary(), "cuDeviceGetByPCIBusId"),
             DeviceGetPCIBusId   = apiGetFunctionAddress(CU.getLibrary(), "cuDeviceGetPCIBusId"),
             IpcGetEventHandle   = apiGetFunctionAddress(CU.getLibrary(), "cuIpcGetEventHandle"),
-            IpcOpenEventHandle  = apiGetFunctionAddress(CU.getLibrary(), "cuIpcOpenEventHandle"),
             IpcGetMemHandle     = apiGetFunctionAddress(CU.getLibrary(), "cuIpcGetMemHandle"),
-            IpcOpenMemHandle    = apiGetFunctionAddress(CU.getLibrary(), "cuIpcOpenMemHandle"),
             IpcCloseMemHandle   = apiGetFunctionAddress(CU.getLibrary(), "cuIpcCloseMemHandle");
 
     }
@@ -112,21 +108,6 @@ public class CU41 extends CU40 {
         return ncuIpcGetEventHandle(pHandle.address(), event);
     }
 
-    // --- [ cuIpcOpenEventHandle ] ---
-
-    public static int ncuIpcOpenEventHandle(long phEvent, long handle) {
-        long __functionAddress = Functions.IpcOpenEventHandle;
-        return callPPI(phEvent, handle, __functionAddress);
-    }
-
-    @NativeType("CUresult")
-    public static int cuIpcOpenEventHandle(@NativeType("CUevent *") PointerBuffer phEvent, @NativeType("CUipcEventHandle") CUIPCEventHandle handle) {
-        if (CHECKS) {
-            check(phEvent, 1);
-        }
-        return ncuIpcOpenEventHandle(memAddress(phEvent), handle.address());
-    }
-
     // --- [ cuIpcGetMemHandle ] ---
 
     public static int ncuIpcGetMemHandle(long pHandle, long dptr) {
@@ -140,21 +121,6 @@ public class CU41 extends CU40 {
     @NativeType("CUresult")
     public static int cuIpcGetMemHandle(@NativeType("CUipcMemHandle *") CUIPCMemHandle pHandle, @NativeType("CUdeviceptr") long dptr) {
         return ncuIpcGetMemHandle(pHandle.address(), dptr);
-    }
-
-    // --- [ cuIpcOpenMemHandle ] ---
-
-    public static int ncuIpcOpenMemHandle(long pdptr, long handle, int Flags) {
-        long __functionAddress = Functions.IpcOpenMemHandle;
-        return callPPI(pdptr, handle, Flags, __functionAddress);
-    }
-
-    @NativeType("CUresult")
-    public static int cuIpcOpenMemHandle(@NativeType("CUdeviceptr *") PointerBuffer pdptr, @NativeType("CUipcMemHandle") CUIPCMemHandle handle, @NativeType("unsigned int") int Flags) {
-        if (CHECKS) {
-            check(pdptr, 1);
-        }
-        return ncuIpcOpenMemHandle(memAddress(pdptr), handle.address(), Flags);
     }
 
     // --- [ cuIpcCloseMemHandle ] ---

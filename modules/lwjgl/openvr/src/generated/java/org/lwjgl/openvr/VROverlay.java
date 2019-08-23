@@ -21,6 +21,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Overlay management methods. */
 public class VROverlay {
 
+    static { OpenVR.initialize(); }
+
     protected VROverlay() {
         throw new UnsupportedOperationException();
     }
@@ -946,12 +948,15 @@ public class VROverlay {
     // --- [ VROverlay_GetTransformForOverlayCoordinates ] ---
 
     /** Unsafe version of: {@link #VROverlay_GetTransformForOverlayCoordinates GetTransformForOverlayCoordinates} */
+    public static native int nVROverlay_GetTransformForOverlayCoordinates(long ulOverlayHandle, int eTrackingOrigin, long coordinatesInOverlay, long pmatTransform, long __functionAddress);
+
+    /** Unsafe version of: {@link #VROverlay_GetTransformForOverlayCoordinates GetTransformForOverlayCoordinates} */
     public static int nVROverlay_GetTransformForOverlayCoordinates(long ulOverlayHandle, int eTrackingOrigin, long coordinatesInOverlay, long pmatTransform) {
         long __functionAddress = OpenVR.VROverlay.GetTransformForOverlayCoordinates;
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPPI(ulOverlayHandle, eTrackingOrigin, coordinatesInOverlay, pmatTransform, __functionAddress);
+        return nVROverlay_GetTransformForOverlayCoordinates(ulOverlayHandle, eTrackingOrigin, coordinatesInOverlay, pmatTransform, __functionAddress);
     }
 
     /**
@@ -1669,12 +1674,15 @@ public class VROverlay {
     // --- [ VROverlay_SetKeyboardPositionForOverlay ] ---
 
     /** Unsafe version of: {@link #VROverlay_SetKeyboardPositionForOverlay SetKeyboardPositionForOverlay} */
+    public static native void nVROverlay_SetKeyboardPositionForOverlay(long ulOverlayHandle, long avoidRect, long __functionAddress);
+
+    /** Unsafe version of: {@link #VROverlay_SetKeyboardPositionForOverlay SetKeyboardPositionForOverlay} */
     public static void nVROverlay_SetKeyboardPositionForOverlay(long ulOverlayHandle, long avoidRect) {
         long __functionAddress = OpenVR.VROverlay.SetKeyboardPositionForOverlay;
         if (CHECKS) {
             check(__functionAddress);
         }
-        callJPV(ulOverlayHandle, avoidRect, __functionAddress);
+        nVROverlay_SetKeyboardPositionForOverlay(ulOverlayHandle, avoidRect, __functionAddress);
     }
 
     /** Set the position of the keyboard in overlay space by telling it to avoid a rectangle in the overlay. Rectangle coords have (0,0) in the bottom left. */

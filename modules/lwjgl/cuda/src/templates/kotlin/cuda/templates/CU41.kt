@@ -44,13 +44,14 @@ val CU41 = "CU41".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         CUevent("event", "")
     )
 
+    /* TODO: fix in LWJGL 3.3
     CUresult(
         "IpcOpenEventHandle",
         "",
 
         Check(1)..CUevent.p("phEvent", ""),
         CUipcEventHandle("handle", "")
-    )
+    )*/
 
     CUresult(
         "IpcGetMemHandle",
@@ -60,6 +61,7 @@ val CU41 = "CU41".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         CUdeviceptr("dptr", "")
     )
 
+    /* TODO: fix in LWJGL 3.3
     CUresult(
         "IpcOpenMemHandle",
         "",
@@ -67,7 +69,7 @@ val CU41 = "CU41".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         Check(1)..CUdeviceptr.p("pdptr", ""),
         CUipcMemHandle("handle", ""),
         unsigned_int("Flags", "")
-    )
+    )*/
 
     CUresult(
         "IpcCloseMemHandle",

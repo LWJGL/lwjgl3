@@ -21,6 +21,20 @@ val VRChaperone = "VRChaperone".nativeClass(
             "-Z is the preferred forward facing direction."
         )}
         """
+    nativeDirective("""
+#ifdef LWJGL_WINDOWS
+    #define APIENTRY __stdcall
+#else
+    #define APIENTRY
+#endif
+
+typedef struct HmdColor_t
+{
+	float r;
+	float g;
+	float b;
+	float a;
+} HmdColor_t;""")
 
     ChaperoneCalibrationState(
         "GetCalibrationState",

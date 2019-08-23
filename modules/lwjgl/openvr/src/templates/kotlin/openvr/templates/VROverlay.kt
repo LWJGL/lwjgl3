@@ -13,6 +13,23 @@ val VROverlay = "VROverlay".nativeClass(
     binding = OPENVR_FNTABLE_BINDING
 ) {
     documentation = "Overlay management methods."
+    nativeDirective("""
+#ifdef LWJGL_WINDOWS
+    #define APIENTRY __stdcall
+#else
+    #define APIENTRY
+#endif
+
+typedef struct HmdVector2_t
+{
+    float v[2];
+} HmdVector2_t;
+
+typedef struct HmdRect2_t
+{
+	struct HmdVector2_t vTopLeft;
+	struct HmdVector2_t vBottomRight;
+} HmdRect2_t;""")
 
     EVROverlayError(
         "FindOverlay",

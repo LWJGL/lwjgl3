@@ -8,7 +8,6 @@ package org.lwjgl.llvm;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.APIUtil.*;
-import static org.lwjgl.system.JNI.*;
 
 public class ClangDocumentation {
 
@@ -202,9 +201,12 @@ public class ClangDocumentation {
     // --- [ clang_Comment_getKind ] ---
 
     /** Unsafe version of: {@link #clang_Comment_getKind Comment_getKind} */
+    public static native int nclang_Comment_getKind(long Comment, long __functionAddress);
+
+    /** Unsafe version of: {@link #clang_Comment_getKind Comment_getKind} */
     public static int nclang_Comment_getKind(long Comment) {
         long __functionAddress = Functions.Comment_getKind;
-        return invokePI(Comment, __functionAddress);
+        return nclang_Comment_getKind(Comment, __functionAddress);
     }
 
     /**
@@ -220,9 +222,12 @@ public class ClangDocumentation {
     // --- [ clang_Comment_getNumChildren ] ---
 
     /** Unsafe version of: {@link #clang_Comment_getNumChildren Comment_getNumChildren} */
+    public static native int nclang_Comment_getNumChildren(long Comment, long __functionAddress);
+
+    /** Unsafe version of: {@link #clang_Comment_getNumChildren Comment_getNumChildren} */
     public static int nclang_Comment_getNumChildren(long Comment) {
         long __functionAddress = Functions.Comment_getNumChildren;
-        return invokePI(Comment, __functionAddress);
+        return nclang_Comment_getNumChildren(Comment, __functionAddress);
     }
 
     /**
@@ -259,9 +264,12 @@ public class ClangDocumentation {
     // --- [ clang_Comment_isWhitespace ] ---
 
     /** Unsafe version of: {@link #clang_Comment_isWhitespace Comment_isWhitespace} */
+    public static native int nclang_Comment_isWhitespace(long Comment, long __functionAddress);
+
+    /** Unsafe version of: {@link #clang_Comment_isWhitespace Comment_isWhitespace} */
     public static int nclang_Comment_isWhitespace(long Comment) {
         long __functionAddress = Functions.Comment_isWhitespace;
-        return invokePI(Comment, __functionAddress);
+        return nclang_Comment_isWhitespace(Comment, __functionAddress);
     }
 
     /**
@@ -279,9 +287,12 @@ public class ClangDocumentation {
     // --- [ clang_InlineContentComment_hasTrailingNewline ] ---
 
     /** Unsafe version of: {@link #clang_InlineContentComment_hasTrailingNewline InlineContentComment_hasTrailingNewline} */
+    public static native int nclang_InlineContentComment_hasTrailingNewline(long Comment, long __functionAddress);
+
+    /** Unsafe version of: {@link #clang_InlineContentComment_hasTrailingNewline InlineContentComment_hasTrailingNewline} */
     public static int nclang_InlineContentComment_hasTrailingNewline(long Comment) {
         long __functionAddress = Functions.InlineContentComment_hasTrailingNewline;
-        return invokePI(Comment, __functionAddress);
+        return nclang_InlineContentComment_hasTrailingNewline(Comment, __functionAddress);
     }
 
     /** @return non-zero if {@code Comment} is inline content and has a newline immediately following it in the comment text. Newlines between paragraphs do not count. */
@@ -333,9 +344,12 @@ public class ClangDocumentation {
     // --- [ clang_InlineCommandComment_getRenderKind ] ---
 
     /** Unsafe version of: {@link #clang_InlineCommandComment_getRenderKind InlineCommandComment_getRenderKind} */
+    public static native int nclang_InlineCommandComment_getRenderKind(long Comment, long __functionAddress);
+
+    /** Unsafe version of: {@link #clang_InlineCommandComment_getRenderKind InlineCommandComment_getRenderKind} */
     public static int nclang_InlineCommandComment_getRenderKind(long Comment) {
         long __functionAddress = Functions.InlineCommandComment_getRenderKind;
-        return invokePI(Comment, __functionAddress);
+        return nclang_InlineCommandComment_getRenderKind(Comment, __functionAddress);
     }
 
     /**
@@ -351,9 +365,12 @@ public class ClangDocumentation {
     // --- [ clang_InlineCommandComment_getNumArgs ] ---
 
     /** Unsafe version of: {@link #clang_InlineCommandComment_getNumArgs InlineCommandComment_getNumArgs} */
+    public static native int nclang_InlineCommandComment_getNumArgs(long Comment, long __functionAddress);
+
+    /** Unsafe version of: {@link #clang_InlineCommandComment_getNumArgs InlineCommandComment_getNumArgs} */
     public static int nclang_InlineCommandComment_getNumArgs(long Comment) {
         long __functionAddress = Functions.InlineCommandComment_getNumArgs;
-        return invokePI(Comment, __functionAddress);
+        return nclang_InlineCommandComment_getNumArgs(Comment, __functionAddress);
     }
 
     /**
@@ -410,9 +427,12 @@ public class ClangDocumentation {
     // --- [ clang_HTMLStartTagComment_isSelfClosing ] ---
 
     /** Unsafe version of: {@link #clang_HTMLStartTagComment_isSelfClosing HTMLStartTagComment_isSelfClosing} */
+    public static native int nclang_HTMLStartTagComment_isSelfClosing(long Comment, long __functionAddress);
+
+    /** Unsafe version of: {@link #clang_HTMLStartTagComment_isSelfClosing HTMLStartTagComment_isSelfClosing} */
     public static int nclang_HTMLStartTagComment_isSelfClosing(long Comment) {
         long __functionAddress = Functions.HTMLStartTagComment_isSelfClosing;
-        return invokePI(Comment, __functionAddress);
+        return nclang_HTMLStartTagComment_isSelfClosing(Comment, __functionAddress);
     }
 
     /**
@@ -428,9 +448,12 @@ public class ClangDocumentation {
     // --- [ clang_HTMLStartTag_getNumAttrs ] ---
 
     /** Unsafe version of: {@link #clang_HTMLStartTag_getNumAttrs HTMLStartTag_getNumAttrs} */
+    public static native int nclang_HTMLStartTag_getNumAttrs(long Comment, long __functionAddress);
+
+    /** Unsafe version of: {@link #clang_HTMLStartTag_getNumAttrs HTMLStartTag_getNumAttrs} */
     public static int nclang_HTMLStartTag_getNumAttrs(long Comment) {
         long __functionAddress = Functions.HTMLStartTag_getNumAttrs;
-        return invokePI(Comment, __functionAddress);
+        return nclang_HTMLStartTag_getNumAttrs(Comment, __functionAddress);
     }
 
     /**
@@ -508,9 +531,12 @@ public class ClangDocumentation {
     // --- [ clang_BlockCommandComment_getNumArgs ] ---
 
     /** Unsafe version of: {@link #clang_BlockCommandComment_getNumArgs BlockCommandComment_getNumArgs} */
+    public static native int nclang_BlockCommandComment_getNumArgs(long Comment, long __functionAddress);
+
+    /** Unsafe version of: {@link #clang_BlockCommandComment_getNumArgs BlockCommandComment_getNumArgs} */
     public static int nclang_BlockCommandComment_getNumArgs(long Comment) {
         long __functionAddress = Functions.BlockCommandComment_getNumArgs;
-        return invokePI(Comment, __functionAddress);
+        return nclang_BlockCommandComment_getNumArgs(Comment, __functionAddress);
     }
 
     /**
@@ -587,9 +613,12 @@ public class ClangDocumentation {
     // --- [ clang_ParamCommandComment_isParamIndexValid ] ---
 
     /** Unsafe version of: {@link #clang_ParamCommandComment_isParamIndexValid ParamCommandComment_isParamIndexValid} */
+    public static native int nclang_ParamCommandComment_isParamIndexValid(long Comment, long __functionAddress);
+
+    /** Unsafe version of: {@link #clang_ParamCommandComment_isParamIndexValid ParamCommandComment_isParamIndexValid} */
     public static int nclang_ParamCommandComment_isParamIndexValid(long Comment) {
         long __functionAddress = Functions.ParamCommandComment_isParamIndexValid;
-        return invokePI(Comment, __functionAddress);
+        return nclang_ParamCommandComment_isParamIndexValid(Comment, __functionAddress);
     }
 
     /**
@@ -606,9 +635,12 @@ public class ClangDocumentation {
     // --- [ clang_ParamCommandComment_getParamIndex ] ---
 
     /** Unsafe version of: {@link #clang_ParamCommandComment_getParamIndex ParamCommandComment_getParamIndex} */
+    public static native int nclang_ParamCommandComment_getParamIndex(long Comment, long __functionAddress);
+
+    /** Unsafe version of: {@link #clang_ParamCommandComment_getParamIndex ParamCommandComment_getParamIndex} */
     public static int nclang_ParamCommandComment_getParamIndex(long Comment) {
         long __functionAddress = Functions.ParamCommandComment_getParamIndex;
-        return invokePI(Comment, __functionAddress);
+        return nclang_ParamCommandComment_getParamIndex(Comment, __functionAddress);
     }
 
     /**
@@ -624,9 +656,12 @@ public class ClangDocumentation {
     // --- [ clang_ParamCommandComment_isDirectionExplicit ] ---
 
     /** Unsafe version of: {@link #clang_ParamCommandComment_isDirectionExplicit ParamCommandComment_isDirectionExplicit} */
+    public static native int nclang_ParamCommandComment_isDirectionExplicit(long Comment, long __functionAddress);
+
+    /** Unsafe version of: {@link #clang_ParamCommandComment_isDirectionExplicit ParamCommandComment_isDirectionExplicit} */
     public static int nclang_ParamCommandComment_isDirectionExplicit(long Comment) {
         long __functionAddress = Functions.ParamCommandComment_isDirectionExplicit;
-        return invokePI(Comment, __functionAddress);
+        return nclang_ParamCommandComment_isDirectionExplicit(Comment, __functionAddress);
     }
 
     /**
@@ -642,9 +677,12 @@ public class ClangDocumentation {
     // --- [ clang_ParamCommandComment_getDirection ] ---
 
     /** Unsafe version of: {@link #clang_ParamCommandComment_getDirection ParamCommandComment_getDirection} */
+    public static native int nclang_ParamCommandComment_getDirection(long Comment, long __functionAddress);
+
+    /** Unsafe version of: {@link #clang_ParamCommandComment_getDirection ParamCommandComment_getDirection} */
     public static int nclang_ParamCommandComment_getDirection(long Comment) {
         long __functionAddress = Functions.ParamCommandComment_getDirection;
-        return invokePI(Comment, __functionAddress);
+        return nclang_ParamCommandComment_getDirection(Comment, __functionAddress);
     }
 
     /**
@@ -680,9 +718,12 @@ public class ClangDocumentation {
     // --- [ clang_TParamCommandComment_isParamPositionValid ] ---
 
     /** Unsafe version of: {@link #clang_TParamCommandComment_isParamPositionValid TParamCommandComment_isParamPositionValid} */
+    public static native int nclang_TParamCommandComment_isParamPositionValid(long Comment, long __functionAddress);
+
+    /** Unsafe version of: {@link #clang_TParamCommandComment_isParamPositionValid TParamCommandComment_isParamPositionValid} */
     public static int nclang_TParamCommandComment_isParamPositionValid(long Comment) {
         long __functionAddress = Functions.TParamCommandComment_isParamPositionValid;
-        return invokePI(Comment, __functionAddress);
+        return nclang_TParamCommandComment_isParamPositionValid(Comment, __functionAddress);
     }
 
     /**
@@ -699,9 +740,12 @@ public class ClangDocumentation {
     // --- [ clang_TParamCommandComment_getDepth ] ---
 
     /** Unsafe version of: {@link #clang_TParamCommandComment_getDepth TParamCommandComment_getDepth} */
+    public static native int nclang_TParamCommandComment_getDepth(long Comment, long __functionAddress);
+
+    /** Unsafe version of: {@link #clang_TParamCommandComment_getDepth TParamCommandComment_getDepth} */
     public static int nclang_TParamCommandComment_getDepth(long Comment) {
         long __functionAddress = Functions.TParamCommandComment_getDepth;
-        return invokePI(Comment, __functionAddress);
+        return nclang_TParamCommandComment_getDepth(Comment, __functionAddress);
     }
 
     /**
@@ -725,9 +769,12 @@ public class ClangDocumentation {
     // --- [ clang_TParamCommandComment_getIndex ] ---
 
     /** Unsafe version of: {@link #clang_TParamCommandComment_getIndex TParamCommandComment_getIndex} */
+    public static native int nclang_TParamCommandComment_getIndex(long Comment, int Depth, long __functionAddress);
+
+    /** Unsafe version of: {@link #clang_TParamCommandComment_getIndex TParamCommandComment_getIndex} */
     public static int nclang_TParamCommandComment_getIndex(long Comment, int Depth) {
         long __functionAddress = Functions.TParamCommandComment_getIndex;
-        return invokePI(Comment, Depth, __functionAddress);
+        return nclang_TParamCommandComment_getIndex(Comment, Depth, __functionAddress);
     }
 
     /**
