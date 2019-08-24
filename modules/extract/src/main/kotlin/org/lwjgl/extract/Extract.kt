@@ -166,6 +166,85 @@ internal class ExtractionContext(val header: Header, val options: Options, error
 
 internal const val t = "    "
 
+internal class Parsed {
+    val structDeclarations = HashMap<String, Struct>()
+    val enumDeclarations = HashMap<String, Enum>()
+
+    val handles = ArrayList<String>()
+    val typedefs = ArrayList<String>()
+    val aggregateTypes = LinkedHashMap<String, Any>() // struct/union/function
+    val constants = ArrayList<String>()
+    val enums = LinkedHashMap<String, Enum>()
+    val functions = ArrayList<String>()
+	
+	internal fun print(output: PrintStream, context: ExtractionContext){
+		if (handles.isNotEmpty()) {
+			handles
+				.sorted()
+				.forEach {
+					output.println(it)
+				}
+			output.println()
+		}
+
+		if (typedefs.isNotEmpty()) {
+			typedefs
+				.sorted()
+				.forEach {
+					output.println(it)
+				}
+			output.println()
+		}
+
+		if (enums.isNotEmpty()) {
+			enums
+				.mapNotNull { (_, enum) -> if (enum.name.isNotEmpty()) enum.getTypedef() else null }
+				.sorted()
+				.forEach {
+					output.println(it)
+				}
+			output.println()
+		}
+
+		if (aggregateTypes.isNotEmpty()) {
+			aggregateTypes.forEach { (_, type) ->
+				output.println(if (type is Struct) type.getDeclaration(context) else type.toString())
+				output.println()
+			}
+		}
+
+		if (constants.isNotEmpty()) {
+			constants.forEach {
+				output.println(it)
+			}
+			output.println()
+		}
+
+		if (enums.isNotEmpty()) {
+			enums.forEach { (_, enum) ->
+				output.println(enum.getDeclaration(context))
+				output.println()
+			}
+		}
+
+		if (functions.isNotEmpty()) {
+			functions.forEach {
+				output.println(it)
+				output.println()
+			}
+		}
+	}
+}
+internal fun getFile(cursor: CXCursor): Path = stackPush().use { stack ->
+		val location = clang_getCursorLocation(cursor, CXSourceLocation.mallocStack(stack))
+		val pp = stack.mallocPointer(1)
+		clang_getFileLocation(location, pp, null, null, null)
+		if(pp[0] == NULL){ 
+			Paths.get("null")
+		} else { 
+			Paths.get(clang_getFileName(pp[0], stack.str).str).toAbsolutePath()
+		}
+	}
 internal fun parse(
     header: Header,
     options: Options,
@@ -177,35 +256,31 @@ internal fun parse(
     } catch (e: CompilationError) {
         return
     }
-
-    val structDeclarations = HashMap<String, Struct>()
-    val enumDeclarations = HashMap<String, Enum>()
-
-    val handles = ArrayList<String>()
-    val typedefs = ArrayList<String>()
-    val aggregateTypes = LinkedHashMap<String, Any>() // struct/union/function
-    val constants = ArrayList<String>()
-    val enums = LinkedHashMap<String, Enum>()
-    val functions = ArrayList<String>()
-
+	val parsed = HashMap<Path, Parsed>()
+	
+	fun file(cursor: CXCursor): Parsed {
+		return parsed.computeIfAbsent(getFile(cursor), { _ -> Parsed() })
+	}
     fun structTypedef(cursor: CXCursor, name: String) {
+		val p = file(cursor)
         val declarationName = cursor.spelling
-        val declaration = structDeclarations[declarationName]
+        val declaration = p.structDeclarations[declarationName]
         if (declaration == null) {
             TODO()
         }
-        aggregateTypes.remove(declarationName)
-        aggregateTypes[name] = Struct(name, true, declaration.documentation, declaration.kind, declaration.members)
+        p.aggregateTypes.remove(declarationName)
+        p.aggregateTypes[name] = Struct(name, true, declaration.documentation, declaration.kind, declaration.members)
     }
 
     fun enumTypedef(cursor: CXCursor, name: String) {
+		val p = file(cursor)
         val declarationName = cursor.spelling
-        val declaration = enumDeclarations[declarationName]
+        val declaration = p.enumDeclarations[declarationName]
         if (declaration == null) {
             TODO()
         }
-        enums.remove(declarationName)
-        enums[name] = Enum(name, true, declaration.doc, declaration.constants)
+        p.enums.remove(declarationName)
+        p.enums[name] = Enum(name, true, declaration.doc, declaration.constants)
     }
 
     stackPush().use { stack ->
@@ -220,8 +295,9 @@ internal fun parse(
                         if (options.parseConstants) {
                             cursor.spelling.let { name ->
                                 cursor.parseEnum(context, name, false).let {
-                                    enumDeclarations[name] = it
-                                    enums[name] = it
+									val p = file(cursor)
+                                    p.enumDeclarations[name] = it
+                                    p.enums[name] = it
                                 }
                             }
                         }
@@ -230,10 +306,11 @@ internal fun parse(
                     CXCursor_UnionDecl       -> {
                         if (options.parseStructs) {
                             cursor.spelling.let { name ->
-                                cursor.parseStruct(context, name, false, handles).let {
+								val p = file(cursor)
+                                cursor.parseStruct(context, name, false, p.handles).let {
                                     if (it != null) {
-                                        structDeclarations[name] = it
-                                        aggregateTypes[name] = it
+                                        p.structDeclarations[name] = it
+                                        p.aggregateTypes[name] = it
                                     }
                                 }
                             }
@@ -253,12 +330,13 @@ internal fun parse(
                                         }
                                         CXCursor_StructDecl,
                                         CXCursor_UnionDecl -> {
-                                            if (structDeclarations.containsKey(child.spelling)) {
+											val p = file(child)
+                                            if (p.structDeclarations.containsKey(child.spelling)) {
                                                 if (options.parseStructs) {
                                                     structTypedef(child, name)
                                                 }
                                             } else if (options.parseTypes) {
-                                                typedefs.add(parseSimpleType(name, name, "opaque"))
+                                                p.typedefs.add(parseSimpleType(name, name, "opaque"))
                                             }
                                         }
                                         CXCursor_TypeRef   -> {
@@ -269,18 +347,19 @@ internal fun parse(
                                                     }
                                                 }
                                                 CXType_Record -> {
+													val p = file(child)
                                                     val record = clang_getCursorReferenced(child, CXCursor.mallocStack(frame))
-                                                    if (structDeclarations.containsKey(record.spelling)) {
+                                                    if (p.structDeclarations.containsKey(record.spelling)) {
                                                         if (options.parseStructs) {
                                                             structTypedef(record, name)
                                                         }
                                                     } else if (options.parseTypes) {
-                                                        typedefs.add(parseSimpleType(name, name, "opaque"))
+                                                        p.typedefs.add(parseSimpleType(name, name, "opaque"))
                                                     }
                                                 }
                                                 else          -> {
                                                     if (options.parseTypes) {
-                                                        typedefs.add(parseTypedef(name, underlyingType))
+                                                        file(child).typedefs.add(parseTypedef(name, underlyingType))
                                                     }
                                                 }
                                             }
@@ -291,31 +370,32 @@ internal fun parse(
                                 }
                             }
                             CXType_Pointer    -> {
+								val p = file(cursor)
                                 val pointee = clang_getPointeeType(underlyingType, CXType.mallocStack(frame))
                                 when (pointee.kind()) {
                                     CXType_Void,
                                     CXType_Elaborated,
                                     CXType_Typedef       -> {
                                         if (options.parseTypes) {
-                                            handles.add(parseSimpleType(name, name, "handle"))
+                                            p.handles.add(parseSimpleType(name, name, "handle"))
                                         }
                                     }
                                     CXType_FunctionNoProto,
                                     CXType_FunctionProto -> {
                                         if (options.parseTypes) {
-                                            aggregateTypes[name] = cursor.parseCallback(header, pointee, name)
+                                            p.aggregateTypes[name] = cursor.parseCallback(header, pointee, name)
                                         }
                                     }
                                     else                 -> {
                                         if (options.parseTypes) {
-                                            typedefs.add(parseTypedef(name, pointee))
+                                            p.typedefs.add(parseTypedef(name, pointee))
                                         }
                                     }
                                 }
                             }
                             else              -> {
                                 if (options.parseTypes) {
-                                    typedefs.add(parseTypedef(name, underlyingType))
+                                    file(cursor).typedefs.add(parseTypedef(name, underlyingType))
                                 }
                             }
                         }
@@ -323,12 +403,12 @@ internal fun parse(
                     CXCursor_FunctionDecl    -> {
                         // TODO: filter by clang_Cursor_getStorageClass
                         if (options.parseFunctions) {
-                            functions.add(cursor.parseFunction(header))
+                            file(cursor).functions.add(cursor.parseFunction(header))
                         }
                     }
                     CXCursor_MacroDefinition -> {
                         if (options.parseConstants && !clang_Cursor_isMacroFunctionLike(cursor)) {
-                            cursor.parseMacro(context, constants)
+                            cursor.parseMacro(context, file(cursor).constants)
                         }
                     }
                     CXCursor_InclusionDirective,
@@ -350,61 +430,29 @@ internal fun parse(
         }
     }
 
-    if (handles.isNotEmpty()) {
-        handles
-            .sorted()
-            .forEach {
-                output.println(it)
-            }
-        output.println()
-    }
+	parsed.forEach({k, v -> 
+		v.print(output, context)
+		val f = k.getFileName().toString()
+		var n = f.substring(0, f.length - (if(f.endsWith("_wrap.h")) 7 else 2))
+		val ps = PrintStream(Paths.get("C:\\Users\\Alex\\Desktop\\projects\\lwjgl3\\modules\\lwjgl\\bullet\\src\\main\\out")
+			.resolve(n + ".kt").toFile())
+		ps.println(
+"""/*
+ * Copyright LWJGL. All rights reserved.
+ * License terms: https://www.lwjgl.org/license
+ */
+package bullet.templates
 
-    if (typedefs.isNotEmpty()) {
-        typedefs
-            .sorted()
-            .forEach {
-                output.println(it)
-            }
-        output.println()
-    }
+import bullet.*
+import org.lwjgl.generator.*
 
-    if (enums.isNotEmpty()) {
-        enums
-            .mapNotNull { (_, enum) -> if (enum.name.isNotEmpty()) enum.getTypedef() else null }
-            .sorted()
-            .forEach {
-                output.println(it)
-            }
-        output.println()
-    }
-
-    if (aggregateTypes.isNotEmpty()) {
-        aggregateTypes.forEach { (_, type) ->
-            output.println(if (type is Struct) type.getDeclaration(context) else type.toString())
-            output.println()
-        }
-    }
-
-    if (constants.isNotEmpty()) {
-        constants.forEach {
-            output.println(it)
-        }
-        output.println()
-    }
-
-    if (enums.isNotEmpty()) {
-        enums.forEach { (_, enum) ->
-            output.println(enum.getDeclaration(context))
-            output.println()
-        }
-    }
-
-    if (functions.isNotEmpty()) {
-        functions.forEach {
-            output.println(it)
-            output.println()
-        }
-    }
+"""
+		+ "val " + n + " = \"" + n + "\".nativeClass(Module.BULLET, prefixConstant = \"\", prefixMethod = \"b3\") {")
+		v.print(ps, context)
+		ps.println("}")
+		ps.flush()
+		ps.close()
+	})
 
     output.flush()
 

@@ -171,33 +171,6 @@ EXPORTS
             </link>
         </build>
 
-        <!-- BULLET -->
-        <build module="bullet" simple="true" if:true="${binding.bullet}">
-            <beforeLink>
-                <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-dependencies-uptodate">
-                    <update-dependency module="bullet" artifact="bullet/Bullet3Common.lib"/>
-                    <update-dependency module="bullet" artifact="bullet/BulletCollision.lib"/>
-                    <update-dependency module="bullet" artifact="bullet/BulletDynamics.lib"/>
-                    <update-dependency module="bullet" artifact="bullet/BulletFileLoader.lib"/>
-                    <update-dependency module="bullet" artifact="bullet/BulletInverseDynamics.lib"/>
-                    <update-dependency module="bullet" artifact="bullet/BulletInverseDynamicsUtils.lib"/>
-                    <update-dependency module="bullet" artifact="bullet/BulletRobotics.lib"/>
-                    <update-dependency module="bullet" artifact="bullet/BulletSoftBody.lib"/>
-                    <update-dependency module="bullet" artifact="bullet/BulletWorldImporter.lib"/>
-                    <update-dependency module="bullet" artifact="bullet/LinearMath.lib"/>
-                </parallel>
-            </beforeLink>
-            <link>
-                <fileset dir="${lib.native}/org/lwjgl/bullet">
-                    <include name="*.lib"/>
-                </fileset>
-            </link>
-            <linkargs>
-                <arg value="winmm.lib"/>
-                <arg value="ws2_32.lib"/>
-            </linkargs>
-        </build>
-
         <!-- DriftFX -->
         <build module="driftfx" if:true="${binding.driftfx}">
             <beforeCompile>
@@ -485,6 +458,7 @@ EXPORTS
 
             <update-dependency module="assimp" artifact="assimp.dll"/>
             <update-dependency module="bgfx" artifact="bgfx.dll"/>
+            <update-dependency module="bullet" artifact="bulletc.dll"/>
             <update-dependency module="jemalloc" artifact="jemalloc.dll"/>
             <update-dependency module="glfw" artifact="glfw.dll"/>
             <update-dependency module="openal" artifact="OpenAL.dll"/>

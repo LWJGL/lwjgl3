@@ -7,19 +7,18 @@ package org.lwjgl.bullet;
 
 import org.lwjgl.system.*;
 
-/** Initializes the bullet shared library. */
-final class LibBullet {
 
-    static {
-        String libName = Platform.mapLibraryNameBundled("lwjgl_bullet");
-        Library.loadSystem(System::load, System::loadLibrary, LibBullet.class, "org.lwjgl.bullet", libName);
-    }
+public final class LibBullet {
 
     private LibBullet() {
+        throw new UnsupportedOperationException();
     }
 
-    static void initialize() {
-        // intentionally empty to trigger static initializer
+    private static final SharedLibrary BULLET = Library.loadNative(LibBullet.class, "org.lwjgl.bullet", Configuration.BULLET_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("bulletc")), true);
+
+    /** Returns the bullet {@link SharedLibrary}. */
+    public static SharedLibrary getLibrary() {
+        return BULLET;
     }
 
 }

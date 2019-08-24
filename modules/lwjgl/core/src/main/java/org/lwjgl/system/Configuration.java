@@ -291,6 +291,11 @@ public class Configuration<T> {
     /** Similar to {@link #LIBRARY_NAME} for the BGFX library (<b>org.lwjgl.bgfx.libname</b>). */
     public static final Configuration<String> BGFX_LIBRARY_NAME = new Configuration<>("org.lwjgl.bgfx.libname", StateInit.STRING);
 
+    // -- BULLET
+
+    /** Similar to {@link #LIBRARY_NAME} for the Bullet library (<b>org.lwjgl.bullet.libname</b>). */
+    public static final Configuration<String> BULLET_LIBRARY_NAME = new Configuration<>("org.lwjgl.bullet.libname", StateInit.STRING);
+
     // -- CUDA
 
     /** Similar to {@link #LIBRARY_NAME} for the CUDA Driver library &ndash; nvcuda (<b>org.lwjgl.cuda.libname</b>). */

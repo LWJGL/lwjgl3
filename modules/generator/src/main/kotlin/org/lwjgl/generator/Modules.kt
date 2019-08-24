@@ -109,7 +109,6 @@ enum class Module(
 
         Until these bindings are sufficiently tested, this API should be considered unstable.
 		""",
-        library = JNILibrary.create("LibBullet"),
         arrayOverloads = false
     ),
     CUDA(

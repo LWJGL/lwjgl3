@@ -422,7 +422,8 @@ class NativeClass internal constructor(
                 println("import javax.annotation.*;\n")
             }
 
-            val hasBuffers = functions.any { it.returns.nativeType.isPointerData || it.hasParam { param -> param.nativeType.isPointerData } }
+            val hasBuffers = functions.any { it.returns.nativeType.isPointerData || it.returns.nativeType is CArrayType<*> || 
+				it.hasParam { param -> param.nativeType.isPointerData || param.nativeType is CArrayType<*> } }
 
             if (hasBuffers) {
                 if (functions.any {
@@ -436,8 +437,9 @@ class NativeClass internal constructor(
                     this is PointerType<*> && this.elementType.run { this is PointerType<*> || (mapping == PrimitiveMapping.POINTER && this !is StructType) || mapping == PrimitiveMapping.CLONG }
                 }
                 if (functions.any {
-                    it.returns.nativeType.needsCustomBuffer() || it.hasParam { param ->
-                        param.nativeType.needsCustomBuffer() || param.has<MultiType> { types.contains(PointerMapping.DATA_POINTER) || types.contains(PointerMapping.DATA_CLONG) }
+                    it.returns.nativeType.needsCustomBuffer() || (it.returns.nativeType is CArrayType<*> && it.returns.nativeType.mapping == PointerMapping.DATA_POINTER) 
+						|| it.hasParam { param ->
+							param.nativeType.needsCustomBuffer() || param.has<MultiType> { types.contains(PointerMapping.DATA_POINTER) || types.contains(PointerMapping.DATA_CLONG) }
                     }
                 })
                     println("import org.lwjgl.*;\n")

@@ -13,7 +13,8 @@ internal val QualifiedType.hasUnsafe
     get() = (nativeType is PointerType<*> && (nativeType.mapping !== PointerMapping.OPAQUE_POINTER || nativeType is FunctionType)) || nativeType is StructType
 
 internal val QualifiedType.isBufferPointer
-    get() = nativeType.let { it is PointerType<*> && it.mapping !== PointerMapping.OPAQUE_POINTER && it.elementType !is StructType }
+    get() = nativeType.let { (it is PointerType<*> && it.mapping !== PointerMapping.OPAQUE_POINTER && it.elementType !is StructType)
+		|| (it is CArrayType<*> && it.mapping !== PointerMapping.OPAQUE_POINTER && it.elementType !is StructType) }
 
 internal val QualifiedType.javaMethodType
     get() = nativeType.javaMethodType
