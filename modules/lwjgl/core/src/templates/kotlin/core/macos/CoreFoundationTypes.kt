@@ -9,6 +9,8 @@ import org.lwjgl.generator.*
 val CFTypeRef = "CFTypeRef".handle
 val CFAllocatorRef = "CFAllocatorRef".handle
 
+val CFDataRef = "CFDataRef".handle
+
 val CFStringEncoding = typedef(UInt32, "CFStringEncoding")
 val CFStringRef = "CFStringRef".handle
 

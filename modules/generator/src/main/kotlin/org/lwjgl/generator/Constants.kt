@@ -9,9 +9,9 @@ import kotlin.math.*
 import kotlin.reflect.*
 
 // Extension properties for numeric literals.
-val Int.b get() = this.toByte()
-val Int.s get() = this.toShort()
-val Long.i get() = this.toInt()
+inline val Int.b get() = this.toByte()
+inline val Int.s get() = this.toShort()
+inline val Long.i get() = this.toInt()
 
 open class ConstantType<T : Any>(
     val javaType: String,
