@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>{@code maxTextures} &ndash; maximum number of texture handles</li>
  * <li>{@code maxTextureSamplers} &ndash; maximum number of texture samplers</li>
  * <li>{@code maxComputeBindings} &ndash; maximum number of compute bindings</li>
- * <li>{@code maxVertexDecls} &ndash; maximum number of vertex format declarations</li>
+ * <li>{@code maxVertexLayouts} &ndash; maximum number of vertex format layouts</li>
  * <li>{@code maxVertexStreams} &ndash; maximum number of vertex streams</li>
  * <li>{@code maxIndexBuffers} &ndash; maximum number of index buffer handles</li>
  * <li>{@code maxVertexBuffers} &ndash; maximum number of vertex buffer handles</li>
@@ -60,7 +60,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     uint32_t maxTextures;
  *     uint32_t maxTextureSamplers;
  *     uint32_t maxComputeBindings;
- *     uint32_t maxVertexDecls;
+ *     uint32_t maxVertexLayouts;
  *     uint32_t maxVertexStreams;
  *     uint32_t maxIndexBuffers;
  *     uint32_t maxVertexBuffers;
@@ -96,7 +96,7 @@ public class BGFXCapsLimits extends Struct {
         MAXTEXTURES,
         MAXTEXTURESAMPLERS,
         MAXCOMPUTEBINDINGS,
-        MAXVERTEXDECLS,
+        MAXVERTEXLAYOUTS,
         MAXVERTEXSTREAMS,
         MAXINDEXBUFFERS,
         MAXVERTEXBUFFERS,
@@ -150,7 +150,7 @@ public class BGFXCapsLimits extends Struct {
         MAXTEXTURES = layout.offsetof(9);
         MAXTEXTURESAMPLERS = layout.offsetof(10);
         MAXCOMPUTEBINDINGS = layout.offsetof(11);
-        MAXVERTEXDECLS = layout.offsetof(12);
+        MAXVERTEXLAYOUTS = layout.offsetof(12);
         MAXVERTEXSTREAMS = layout.offsetof(13);
         MAXINDEXBUFFERS = layout.offsetof(14);
         MAXVERTEXBUFFERS = layout.offsetof(15);
@@ -212,9 +212,9 @@ public class BGFXCapsLimits extends Struct {
     /** Returns the value of the {@code maxComputeBindings} field. */
     @NativeType("uint32_t")
     public int maxComputeBindings() { return nmaxComputeBindings(address()); }
-    /** Returns the value of the {@code maxVertexDecls} field. */
+    /** Returns the value of the {@code maxVertexLayouts} field. */
     @NativeType("uint32_t")
-    public int maxVertexDecls() { return nmaxVertexDecls(address()); }
+    public int maxVertexLayouts() { return nmaxVertexLayouts(address()); }
     /** Returns the value of the {@code maxVertexStreams} field. */
     @NativeType("uint32_t")
     public int maxVertexStreams() { return nmaxVertexStreams(address()); }
@@ -301,8 +301,8 @@ public class BGFXCapsLimits extends Struct {
     public static int nmaxTextureSamplers(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MAXTEXTURESAMPLERS); }
     /** Unsafe version of {@link #maxComputeBindings}. */
     public static int nmaxComputeBindings(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MAXCOMPUTEBINDINGS); }
-    /** Unsafe version of {@link #maxVertexDecls}. */
-    public static int nmaxVertexDecls(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MAXVERTEXDECLS); }
+    /** Unsafe version of {@link #maxVertexLayouts}. */
+    public static int nmaxVertexLayouts(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MAXVERTEXLAYOUTS); }
     /** Unsafe version of {@link #maxVertexStreams}. */
     public static int nmaxVertexStreams(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MAXVERTEXSTREAMS); }
     /** Unsafe version of {@link #maxIndexBuffers}. */
@@ -398,9 +398,9 @@ public class BGFXCapsLimits extends Struct {
         /** Returns the value of the {@code maxComputeBindings} field. */
         @NativeType("uint32_t")
         public int maxComputeBindings() { return BGFXCapsLimits.nmaxComputeBindings(address()); }
-        /** Returns the value of the {@code maxVertexDecls} field. */
+        /** Returns the value of the {@code maxVertexLayouts} field. */
         @NativeType("uint32_t")
-        public int maxVertexDecls() { return BGFXCapsLimits.nmaxVertexDecls(address()); }
+        public int maxVertexLayouts() { return BGFXCapsLimits.nmaxVertexLayouts(address()); }
         /** Returns the value of the {@code maxVertexStreams} field. */
         @NativeType("uint32_t")
         public int maxVertexStreams() { return BGFXCapsLimits.nmaxVertexStreams(address()); }

@@ -47,7 +47,7 @@ val bgfx_shader_handle_t = BGFX_HANDLE_T("shader")
 val bgfx_texture_handle_t = BGFX_HANDLE_T("texture")
 val bgfx_uniform_handle_t = BGFX_HANDLE_T("uniform")
 val bgfx_vertex_buffer_handle_t = BGFX_HANDLE_T("vertex_buffer")
-val bgfx_vertex_decl_handle_t = BGFX_HANDLE_T("vertex_decl")
+val bgfx_vertex_layout_handle_t = BGFX_HANDLE_T("vertex_layout")
 
 val bgfx_release_fn_t = Module.BGFX.callback {
     void(
@@ -133,7 +133,7 @@ val bgfx_stats_t = struct(Module.BGFX, "BGFXStats", nativeName = "bgfx_stats_t",
     uint16_t("numTextures", "number of used textures")
     uint16_t("numUniforms", "number of used uniforms")
     uint16_t("numVertexBuffers", "number of used vertex buffers")
-    uint16_t("numVertexDecls", "number of used vertex declarations")
+    uint16_t("numVertexLayouts", "number of used vertex layouts")
 
     int64_t("textureMemoryUsed", "estimate of texture memory used")
     int64_t("rtMemoryUsed", "estimate of render target memory used")
@@ -157,9 +157,9 @@ val bgfx_stats_t = struct(Module.BGFX, "BGFXStats", nativeName = "bgfx_stats_t",
     bgfx_encoder_stats_t.p("encoderStats", "array of encoder stats")
 }
 
-val bgfx_vertex_decl_t = struct(Module.BGFX, "BGFXVertexDecl", nativeName = "bgfx_vertex_decl_t") {
+val bgfx_vertex_layout_t = struct(Module.BGFX, "BGFXVertexLayout", nativeName = "bgfx_vertex_layout_t") {
     javaImport("static org.lwjgl.bgfx.BGFX.BGFX_ATTRIB_COUNT")
-    documentation = "Vertex declaration."
+    documentation = "Vertex layout."
 
     uint32_t("hash", "")
     uint16_t("stride", "vertex stride")
@@ -184,7 +184,7 @@ val bgfx_transient_vertex_buffer_t = struct(Module.BGFX, "BGFXTransientVertexBuf
     uint32_t("startVertex", "first vertex")
     uint16_t("stride", "vertex stride")
     bgfx_vertex_buffer_handle_t("handle", "vertex buffer handle")
-    bgfx_vertex_decl_handle_t("decl", "vertex declaration handle")
+    bgfx_vertex_layout_handle_t("layoutHandle", "vertex layout handle")
 }
 
 val bgfx_instance_data_buffer_t = struct(Module.BGFX, "BGFXInstanceDataBuffer", nativeName = "bgfx_instance_data_buffer_t") {
@@ -252,7 +252,7 @@ val bgfx_caps_limits_t = struct(Module.BGFX, "BGFXCapsLimits", nativeName = "bgf
     uint32_t("maxTextures", "maximum number of texture handles")
     uint32_t("maxTextureSamplers", "maximum number of texture samplers")
     uint32_t("maxComputeBindings", "maximum number of compute bindings")
-    uint32_t("maxVertexDecls", "maximum number of vertex format declarations")
+    uint32_t("maxVertexLayouts", "maximum number of vertex format layouts")
     uint32_t("maxVertexStreams", "maximum number of vertex streams")
     uint32_t("maxIndexBuffers", "maximum number of index buffer handles")
     uint32_t("maxVertexBuffers", "maximum number of vertex buffer handles")

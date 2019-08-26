@@ -47,7 +47,7 @@ import static org.lwjgl.bgfx.BGFX.BGFX_TOPOLOGY_COUNT;
  * <li>{@code numTextures} &ndash; number of used textures</li>
  * <li>{@code numUniforms} &ndash; number of used uniforms</li>
  * <li>{@code numVertexBuffers} &ndash; number of used vertex buffers</li>
- * <li>{@code numVertexDecls} &ndash; number of used vertex declarations</li>
+ * <li>{@code numVertexLayouts} &ndash; number of used vertex layouts</li>
  * <li>{@code textureMemoryUsed} &ndash; estimate of texture memory used</li>
  * <li>{@code rtMemoryUsed} &ndash; estimate of render target memory used</li>
  * <li>{@code transientVbUsed} &ndash; amount of transient vertex buffer used</li>
@@ -92,7 +92,7 @@ import static org.lwjgl.bgfx.BGFX.BGFX_TOPOLOGY_COUNT;
  *     uint16_t numTextures;
  *     uint16_t numUniforms;
  *     uint16_t numVertexBuffers;
- *     uint16_t numVertexDecls;
+ *     uint16_t numVertexLayouts;
  *     int64_t textureMemoryUsed;
  *     int64_t rtMemoryUsed;
  *     int32_t transientVbUsed;
@@ -144,7 +144,7 @@ public class BGFXStats extends Struct {
         NUMTEXTURES,
         NUMUNIFORMS,
         NUMVERTEXBUFFERS,
-        NUMVERTEXDECLS,
+        NUMVERTEXLAYOUTS,
         TEXTUREMEMORYUSED,
         RTMEMORYUSED,
         TRANSIENTVBUSED,
@@ -230,7 +230,7 @@ public class BGFXStats extends Struct {
         NUMTEXTURES = layout.offsetof(20);
         NUMUNIFORMS = layout.offsetof(21);
         NUMVERTEXBUFFERS = layout.offsetof(22);
-        NUMVERTEXDECLS = layout.offsetof(23);
+        NUMVERTEXLAYOUTS = layout.offsetof(23);
         TEXTUREMEMORYUSED = layout.offsetof(24);
         RTMEMORYUSED = layout.offsetof(25);
         TRANSIENTVBUSED = layout.offsetof(26);
@@ -330,9 +330,9 @@ public class BGFXStats extends Struct {
     /** Returns the value of the {@code numVertexBuffers} field. */
     @NativeType("uint16_t")
     public short numVertexBuffers() { return nnumVertexBuffers(address()); }
-    /** Returns the value of the {@code numVertexDecls} field. */
+    /** Returns the value of the {@code numVertexLayouts} field. */
     @NativeType("uint16_t")
-    public short numVertexDecls() { return nnumVertexDecls(address()); }
+    public short numVertexLayouts() { return nnumVertexLayouts(address()); }
     /** Returns the value of the {@code textureMemoryUsed} field. */
     @NativeType("int64_t")
     public long textureMemoryUsed() { return ntextureMemoryUsed(address()); }
@@ -459,8 +459,8 @@ public class BGFXStats extends Struct {
     public static short nnumUniforms(long struct) { return UNSAFE.getShort(null, struct + BGFXStats.NUMUNIFORMS); }
     /** Unsafe version of {@link #numVertexBuffers}. */
     public static short nnumVertexBuffers(long struct) { return UNSAFE.getShort(null, struct + BGFXStats.NUMVERTEXBUFFERS); }
-    /** Unsafe version of {@link #numVertexDecls}. */
-    public static short nnumVertexDecls(long struct) { return UNSAFE.getShort(null, struct + BGFXStats.NUMVERTEXDECLS); }
+    /** Unsafe version of {@link #numVertexLayouts}. */
+    public static short nnumVertexLayouts(long struct) { return UNSAFE.getShort(null, struct + BGFXStats.NUMVERTEXLAYOUTS); }
     /** Unsafe version of {@link #textureMemoryUsed}. */
     public static long ntextureMemoryUsed(long struct) { return UNSAFE.getLong(null, struct + BGFXStats.TEXTUREMEMORYUSED); }
     /** Unsafe version of {@link #rtMemoryUsed}. */
@@ -603,9 +603,9 @@ public class BGFXStats extends Struct {
         /** Returns the value of the {@code numVertexBuffers} field. */
         @NativeType("uint16_t")
         public short numVertexBuffers() { return BGFXStats.nnumVertexBuffers(address()); }
-        /** Returns the value of the {@code numVertexDecls} field. */
+        /** Returns the value of the {@code numVertexLayouts} field. */
         @NativeType("uint16_t")
-        public short numVertexDecls() { return BGFXStats.nnumVertexDecls(address()); }
+        public short numVertexLayouts() { return BGFXStats.nnumVertexLayouts(address()); }
         /** Returns the value of the {@code textureMemoryUsed} field. */
         @NativeType("int64_t")
         public long textureMemoryUsed() { return BGFXStats.ntextureMemoryUsed(address()); }
