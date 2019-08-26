@@ -1060,6 +1060,16 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         "AI_CONFIG_GLOBAL_SCALE_FACTOR_KEY".."GLOBAL_SCALE_FACTOR"
     ).noPrefix()
 
+    StringConstant(
+        """
+        Specifies an application key factor for scale.
+
+        Property type: float. Default value: 1.0f
+        """,
+
+        "AI_CONFIG_APP_SCALE_KEY".."APP_SCALE_FACTOR"
+    ).noPrefix()
+
     IntConstant(
         "Default values for configuration properties.",
 
@@ -1076,7 +1086,8 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
 
         "AI_DEBONE_THRESHOLD"..1.0f,
         "AI_IMPORT_IFC_DEFAULT_SMOOTHING_ANGLE"..10.0f,
-        "AI_CONFIG_GLOBAL_SCALE_FACTOR_DEFAULT"..1.0f
+        "AI_CONFIG_GLOBAL_SCALE_FACTOR_DEFAULT"..1.0f,
+        "AI_CONFIG_APP_SCALE_DEFAULT"..1.0f
     ).noPrefix()
 
     IntConstant(
