@@ -495,6 +495,8 @@ public class EGLCapabilities {
     public final boolean EGL_NV_stream_cross_process;
     /** See {@link NVStreamRemote NV_stream_remote}. */
     public final boolean EGL_NV_stream_cross_system;
+    /** When true, {@link NVStreamDMA} is supported. */
+    public final boolean EGL_NV_stream_dma;
     /** When true, {@link NVStreamFIFONext} is supported. */
     public final boolean EGL_NV_stream_fifo_next;
     /** When true, {@link NVStreamFIFOSynchronous} is supported. */
@@ -1075,6 +1077,7 @@ public class EGLCapabilities {
         EGL_NV_stream_cross_partition = ext.contains("EGL_NV_stream_cross_partition");
         EGL_NV_stream_cross_process = ext.contains("EGL_NV_stream_cross_process");
         EGL_NV_stream_cross_system = ext.contains("EGL_NV_stream_cross_system");
+        EGL_NV_stream_dma = ext.contains("EGL_NV_stream_dma");
         EGL_NV_stream_fifo_next = ext.contains("EGL_NV_stream_fifo_next");
         EGL_NV_stream_fifo_synchronous = ext.contains("EGL_NV_stream_fifo_synchronous");
         EGL_NV_stream_flush = ext.contains("EGL_NV_stream_flush") && EGL.checkExtension("EGL_NV_stream_flush", NVStreamFlush.isAvailable(this));
