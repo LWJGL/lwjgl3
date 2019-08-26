@@ -172,7 +172,9 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
                 .joinToString(", ", prefix = "(", postfix = ")") { arg -> arg.nativeType })
             print(")(intptr_t)$FUNCTION_ADDRESS)(")
             print(it.arguments.asSequence()
-                .mapIndexed { i, param -> if (param.isPointer)
+                .mapIndexed { i, param -> if (param is ArrayType<*>)
+                    "(intptr_t)paramArray$i"
+                else if (param.isPointer)
                     "(intptr_t)param$i"
                 else if (param.mapping === PrimitiveMapping.CLONG)
                     "(long)param$i"
