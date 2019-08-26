@@ -11,7 +11,7 @@ import vulkan.*
 val NV_shader_image_footprint = "NVShaderImageFootprint".nativeClassVK("NV_shader_image_footprint", type = "device", postfix = NV) {
     documentation =
         """
-        This extension adds Vulkan support for the {@code SPV_NV_shader_image_footprint} SPIR-V extension. That SPIR-V extension provides a new instruction {@code OpImageSampleFootprintNV} allowing shaders to determine the set of texels that would be accessed by an equivalent filtered texture lookup.
+        This extension adds Vulkan support for the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/NV/SPV_NV_shader_image_footprint.html">{@code SPV_NV_shader_image_footprint}</a> SPIR-V extension. That SPIR-V extension provides a new instruction {@code OpImageSampleFootprintNV} allowing shaders to determine the set of texels that would be accessed by an equivalent filtered texture lookup.
 
         Instead of returning a filtered texture value, the instruction returns a structure that can be interpreted by shader code to determine the footprint of a filtered texture lookup. This structure includes integer values that identify a small neighborhood of texels in the image being accessed and a bitfield that indicates which texels in that neighborhood would be used. The structure also includes a bitfield where each bit identifies whether any texel in a small aligned block of texels would be fetched by the texture lookup. The size of each block is specified by an access <em>granularity</em> provided by the shader. The minimum granularity supported by this extension is 2x2 (for 2D textures) and 2x2x2 (for 3D textures); the maximum granularity is 256x256 (for 2D textures) or 64x32x32 (for 3D textures). Each footprint query returns the footprint from a single texture level. When using minification filters that combine accesses from multiple mipmap levels, shaders must perform separate queries for the two levels accessed ("{@code fine}" and "{@code coarse}"). The footprint query also returns a flag indicating if the texture lookup would access texels from only one mipmap level or from two neighboring levels.
 
@@ -35,7 +35,7 @@ val NV_shader_image_footprint = "NVShaderImageFootprint".nativeClassVK("NV_shade
             <dd>205</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -67,7 +67,7 @@ val NV_shader_image_footprint = "NVShaderImageFootprint".nativeClassVK("NV_shade
     IntConstant(
         "The extension specification version.",
 
-        "NV_SHADER_IMAGE_FOOTPRINT_SPEC_VERSION".."1"
+        "NV_SHADER_IMAGE_FOOTPRINT_SPEC_VERSION".."2"
     )
 
     StringConstant(

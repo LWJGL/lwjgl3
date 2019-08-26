@@ -28,7 +28,7 @@ val EXT_validation_features = "EXTValidationFeatures".nativeClassVK("EXT_validat
             <dd>248</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -51,6 +51,7 @@ val EXT_validation_features = "EXTValidationFeatures".nativeClassVK("EXT_validat
                 <li>Karl Schultz, LunarG</li>
                 <li>Dave Houlton, LunarG</li>
                 <li>Mark Lobodzinski, LunarG</li>
+                <li>Camden Stocker, LunarG</li>
             </ul></dd>
         </dl>
         """
@@ -58,7 +59,7 @@ val EXT_validation_features = "EXTValidationFeatures".nativeClassVK("EXT_validat
     IntConstant(
         "The extension specification version.",
 
-        "EXT_VALIDATION_FEATURES_SPEC_VERSION".."1"
+        "EXT_VALIDATION_FEATURES_SPEC_VERSION".."2"
     )
 
     StringConstant(
@@ -81,6 +82,7 @@ val EXT_validation_features = "EXTValidationFeatures".nativeClassVK("EXT_validat
         <ul>
             <li>#VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_EXT specifies that GPU-assisted validation is enabled. Activating this feature instruments shader programs to generate additional diagnostic data. This feature is disabled by default.</li>
             <li>#VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_RESERVE_BINDING_SLOT_EXT specifies that the validation layers reserve a descriptor set binding slot for their own use. The layer reports a value for ##VkPhysicalDeviceLimits{@code ::maxBoundDescriptorSets} that is one less than the value reported by the device. If the device supports the binding of only one descriptor set, the validation layer does not perform GPU-assisted validation. This feature is disabled by default. The GPU-assisted validation feature must be enabled in order to use this feature.</li>
+            <li>#VALIDATION_FEATURE_ENABLE_BEST_PRACTICES_EXT specifies that Vulkan best-practices validation is enabled. Activating this feature enables the output of warnings related to common misuse of the API, but which are not explicitly prohibited by the specification. This feature is disabled by default.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -88,7 +90,8 @@ val EXT_validation_features = "EXTValidationFeatures".nativeClassVK("EXT_validat
         """,
 
         "VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_EXT".."0",
-        "VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_RESERVE_BINDING_SLOT_EXT".."1"
+        "VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_RESERVE_BINDING_SLOT_EXT".."1",
+        "VALIDATION_FEATURE_ENABLE_BEST_PRACTICES_EXT".."2"
     )
 
     EnumConstant(

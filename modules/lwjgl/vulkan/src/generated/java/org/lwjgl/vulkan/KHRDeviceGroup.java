@@ -59,7 +59,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>61</dd>
  * <dt><b>Revision</b></dt>
- * <dd>3</dd>
+ * <dd>4</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -74,7 +74,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_device_group:%20&amp;body=@jeffbolznv%20">jeffbolznv</a></li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2017-10-06</dd>
+ * <dd>2017-10-10</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
@@ -91,7 +91,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class KHRDeviceGroup {
 
     /** The extension specification version. */
-    public static final int VK_KHR_DEVICE_GROUP_SPEC_VERSION = 3;
+    public static final int VK_KHR_DEVICE_GROUP_SPEC_VERSION = 4;
 
     /** The extension name. */
     public static final String VK_KHR_DEVICE_GROUP_EXTENSION_NAME = "VK_KHR_device_group";

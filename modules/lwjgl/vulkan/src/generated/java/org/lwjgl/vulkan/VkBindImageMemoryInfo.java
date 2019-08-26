@@ -42,6 +42,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code image} was created with a valid swapchain handle in {@link VkImageSwapchainCreateInfoKHR}{@code ::swapchain}, then the {@code pNext} chain <b>must</b> include a valid instance of {@link VkBindImageMemorySwapchainInfoKHR} containing the same swapchain handle.</li>
  * <li>If the {@code pNext} chain includes an instance of {@link VkBindImageMemorySwapchainInfoKHR}, {@code memory} <b>must</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
  * <li>If the {@code pNext} chain does not include an instance of {@link VkBindImageMemorySwapchainInfoKHR}, {@code memory} <b>must</b> be a valid {@code VkDeviceMemory} handle</li>
+ * <li>If the value of {@link VkExportMemoryAllocateInfo}{@code ::handleTypes} used to allocate {@code memory} is not 0, it <b>must</b> include at least one of the handles set in {@link VkExternalMemoryImageCreateInfo}{@code ::handleTypes} when {@code image} was created</li>
+ * <li>If {@code memory} was created by a memory import operation, the external handle type of the imported memory <b>must</b> also have been set in {@link VkExternalMemoryImageCreateInfo}{@code ::handleTypes} when {@code image} was created</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

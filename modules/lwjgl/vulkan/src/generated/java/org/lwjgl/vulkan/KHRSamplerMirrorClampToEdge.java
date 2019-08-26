@@ -39,7 +39,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>15</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>3</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -49,23 +49,35 @@ package org.lwjgl.vulkan;
  * <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_sampler_mirror_clamp_to_edge:%20&amp;body=@tobski%20">tobski</a></li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2016-02-16</dd>
+ * <dd>2019-08-17</dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
  * <li>Tobias Hector, Imagination Technologies</li>
+ * <li>Jon Leech, Khronos</li>
  * </ul></dd>
  * </dl>
  */
 public final class KHRSamplerMirrorClampToEdge {
 
     /** The extension specification version. */
-    public static final int VK_KHR_SAMPLER_MIRROR_CLAMP_TO_EDGE_SPEC_VERSION = 1;
+    public static final int VK_KHR_SAMPLER_MIRROR_CLAMP_TO_EDGE_SPEC_VERSION = 3;
 
     /** The extension name. */
     public static final String VK_KHR_SAMPLER_MIRROR_CLAMP_TO_EDGE_EXTENSION_NAME = "VK_KHR_sampler_mirror_clamp_to_edge";
 
-    /** Extends {@code VkSamplerAddressMode}. */
-    public static final int VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE = 4;
+    /**
+     * Extends {@code VkSamplerAddressMode}.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE}</li>
+     * <li>{@link #VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE_KHR SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE_KHR}</li>
+     * </ul>
+     */
+    public static final int
+        VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE     = 4,
+        VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE_KHR = 4;
 
     private KHRSamplerMirrorClampToEdge() {}
 

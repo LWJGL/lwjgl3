@@ -57,7 +57,7 @@ val NV_viewport_array2 = "NVViewportArray2".nativeClassVK("NV_viewport_array2", 
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/NV/SPV_NV_viewport_array2.html">{@code SPV_NV_viewport_array2}</a> SPIR-V extension.</li>
+                <li>This extension requires the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/NV/SPV_NV_viewport_array2.html">{@code SPV_NV_viewport_array2}</a> SPIR-V extension.</li>
                 <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_viewport_array2.txt">{@code GL_NV_viewport_array2}</a> extension for GLSL source languages.</li>
                 <li>This extension requires the {@code geometryShader} and {@code multiViewport} features.</li>
                 <li>This extension interacts with the {@code tessellationShader} feature.</li>

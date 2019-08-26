@@ -155,7 +155,7 @@ val NV_win32_keyed_mutex = "NVWin32KeyedMutex".nativeClassVK("NV_win32_keyed_mut
             <dd>59</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -190,7 +190,7 @@ val NV_win32_keyed_mutex = "NVWin32KeyedMutex".nativeClassVK("NV_win32_keyed_mut
     IntConstant(
         "The extension specification version.",
 
-        "NV_WIN32_KEYED_MUTEX_SPEC_VERSION".."1"
+        "NV_WIN32_KEYED_MUTEX_SPEC_VERSION".."2"
     )
 
     StringConstant(

@@ -49,7 +49,7 @@ val EXT_shader_viewport_index_layer = "EXTShaderViewportIndexLayer".nativeClassV
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/EXT/SPV_EXT_shader_viewport_index_layer.html">{@code SPV_EXT_shader_viewport_index_layer}</a> SPIR-V extension.</li>
+                <li>This extension requires the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/EXT/SPV_EXT_shader_viewport_index_layer.html">{@code SPV_EXT_shader_viewport_index_layer}</a> SPIR-V extension.</li>
                 <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_viewport_layer_array.txt">{@code GL_ARB_shader_viewport_layer_array}</a>, <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_vertex_shader_layer.txt">{@code GL_AMD_vertex_shader_layer}</a>, <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_vertex_shader_viewport_index.txt">{@code GL_AMD_vertex_shader_viewport_index}</a>, or <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_viewport_array2.txt">{@code GL_NV_viewport_array2}</a> extensions for GLSL source languages.</li>
                 <li>This extension requires the {@code multiViewport} feature.</li>
                 <li>This extension interacts with the {@code tessellationShader} feature.</li>

@@ -90,7 +90,7 @@ val EXT_shader_subgroup_vote = "EXTShaderSubgroupVote".nativeClassVK("EXT_shader
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/KHR/SPV_KHR_subgroup_vote.html">{@code SPV_KHR_subgroup_vote}</a> SPIR-V extension.</li>
+                <li>This extension requires the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_subgroup_vote.html">{@code SPV_KHR_subgroup_vote}</a> SPIR-V extension.</li>
                 <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_group_vote.txt">{@code GL_ARB_shader_group_vote}</a> extension for GLSL source languages.</li>
             </ul></dd>
 

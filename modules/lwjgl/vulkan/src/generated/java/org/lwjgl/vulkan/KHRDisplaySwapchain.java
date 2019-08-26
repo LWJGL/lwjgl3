@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>4</dd>
  * <dt><b>Revision</b></dt>
- * <dd>9</dd>
+ * <dd>10</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -59,7 +59,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class KHRDisplaySwapchain {
 
     /** The extension specification version. */
-    public static final int VK_KHR_DISPLAY_SWAPCHAIN_SPEC_VERSION = 9;
+    public static final int VK_KHR_DISPLAY_SWAPCHAIN_SPEC_VERSION = 10;
 
     /** The extension name. */
     public static final String VK_KHR_DISPLAY_SWAPCHAIN_EXTENSION_NAME = "VK_KHR_display_swapchain";

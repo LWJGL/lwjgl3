@@ -27,7 +27,7 @@ val AMD_draw_indirect_count = "AMDDrawIndirectCount".nativeClassVK("AMD_draw_ind
             <dd>34</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -64,7 +64,7 @@ val AMD_draw_indirect_count = "AMDDrawIndirectCount".nativeClassVK("AMD_draw_ind
     IntConstant(
         "The extension specification version.",
 
-        "AMD_DRAW_INDIRECT_COUNT_SPEC_VERSION".."1"
+        "AMD_DRAW_INDIRECT_COUNT_SPEC_VERSION".."2"
     )
 
     StringConstant(

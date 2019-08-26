@@ -57,11 +57,11 @@ val VkCoverageModulationModeNV = "VkCoverageModulationModeNV".enumType
 val VkValidationCacheHeaderVersionEXT = "VkValidationCacheHeaderVersionEXT".enumType
 val VkShadingRatePaletteEntryNV = "VkShadingRatePaletteEntryNV".enumType
 val VkCoarseSampleOrderTypeNV = "VkCoarseSampleOrderTypeNV".enumType
+val VkAccelerationStructureTypeNV = "VkAccelerationStructureTypeNV".enumType
 val VkRayTracingShaderGroupTypeNV = "VkRayTracingShaderGroupTypeNV".enumType
 val VkGeometryTypeNV = "VkGeometryTypeNV".enumType
 val VkGeometryFlagBitsNV = "VkGeometryFlagBitsNV".enumType
 val VkGeometryInstanceFlagBitsNV = "VkGeometryInstanceFlagBitsNV".enumType
-val VkAccelerationStructureTypeNV = "VkAccelerationStructureTypeNV".enumType
 val VkBuildAccelerationStructureFlagBitsNV = "VkBuildAccelerationStructureFlagBitsNV".enumType
 val VkCopyAccelerationStructureModeNV = "VkCopyAccelerationStructureModeNV".enumType
 val VkAccelerationStructureMemoryRequirementsTypeNV = "VkAccelerationStructureMemoryRequirementsTypeNV".enumType
@@ -5403,7 +5403,7 @@ val VkImageDrmFormatModifierExplicitCreateInfoEXT = struct(Module.VULKAN, "VkIma
         <h5>Description</h5>
         The {@code i}<sup>th</sup> member of {@code pPlaneLayouts} describes the layout of the image's {@code i}<sup>th</sup> <em>memory plane</em> (that is, {@code VK_IMAGE_ASPECT_MEMORY_PLANE_i_BIT_EXT}). In each element of {@code pPlaneLayouts}, the implementation <b>must</b> ignore {@code size}. The implementation calculates the size of each plane, which the application <b>can</b> query with #GetImageSubresourceLayout().
 
-        When creating an image with ##VkImageDrmFormatModifierExplicitCreateInfoEXT, it is the application's responsibility to satisfy all +Valid Usage+ requirements. However, the implementation <b>must</b> validate that the provided {@code pPlaneLayouts}, when combined with the provided {@code drmFormatModifier} and other creation parameters in ##VkImageCreateInfo and its {@code pNext} chain, produce a valid image. (This validation is necessarily implementation-dependent and outside the scope of Vulkan, and therefore not described by +Valid Usage+ requirements). If this validation fails, then #CreateImage() returns #ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT.
+        When creating an image with ##VkImageDrmFormatModifierExplicitCreateInfoEXT, it is the application's responsibility to satisfy all valid usage requirements. However, the implementation <b>must</b> validate that the provided {@code pPlaneLayouts}, when combined with the provided {@code drmFormatModifier} and other creation parameters in ##VkImageCreateInfo and its {@code pNext} chain, produce a valid image. (This validation is necessarily implementation-dependent and outside the scope of Vulkan, and therefore not described by valid usage requirements). If this validation fails, then #CreateImage() returns #ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -6496,7 +6496,7 @@ val VkPipelineCompilerControlCreateInfoAMD = struct(Module.VULKAN, "VkPipelineCo
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD</li>
-            <li>{@code compilerControlFlags} <b>must</b> be a valid combination of {@code VkPipelineCompilerControlFlagBitsAMD} values</li>
+            <li>{@code compilerControlFlags} <b>must</b> be 0</li>
         </ul>
         """
 
@@ -7529,6 +7529,22 @@ val VkPhysicalDeviceShaderCoreProperties2AMD = struct(Module.VULKAN, "VkPhysical
     uint32_t("activeComputeUnitCount", "an unsigned integer value indicating the number of compute units that have been enabled.")
 }
 
+val VkPhysicalDeviceCoherentMemoryFeaturesAMD = struct(Module.VULKAN, "VkPhysicalDeviceCoherentMemoryFeaturesAMD") {
+    documentation =
+        """
+        Structure describing whether device coherent memory can be supported by an implementation.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_COHERENT_MEMORY_FEATURES_AMD</li>
+        </ul>
+        """
+
+    VkStructureType("sType", "")
+    nullable..opaque_p("pNext", "")
+    VkBool32("deviceCoherentMemory", "indicates that the implementation supports <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\\#VkMemoryPropertyFlagBits\">device coherent memory</a>.")
+}
+
 val VkPhysicalDeviceMemoryBudgetPropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceMemoryBudgetPropertiesEXT", mutable = false) {
     javaImport("static org.lwjgl.vulkan.VK10.*")
     documentation =
@@ -8196,7 +8212,6 @@ val VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR = struct(Module.VULK
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
         </ul>
         """
 
@@ -8260,7 +8275,7 @@ val VkPipelineExecutableInfoKHR = struct(Module.VULKAN, "VkPipelineExecutableInf
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code executableIndex} <b>must</b> be less than or equal to the number of executables associated with {@code pipeline} as returned in the {@code pExecutableCount} parameter of {@code vkGetPipelineExecutablePropertiesKHR}.</li>
+            <li>{@code executableIndex} <b>must</b> be less than the number of executables associated with {@code pipeline} as returned in the {@code pExecutableCount} parameter of {@code vkGetPipelineExecutablePropertiesKHR}.</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -8329,8 +8344,8 @@ val VkPipelineExecutableInternalRepresentationKHR = struct(Module.VULKAN, "VkPip
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>Any given element of {@code name} <b>must</b> be a valid</li>
-            <li>Any given element of {@code description} <b>must</b> be a valid</li>
+            <li>{@code name} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to VK_MAX_DESCRIPTION_SIZE</li>
+            <li>{@code description} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to VK_MAX_DESCRIPTION_SIZE</li>
             <li>If {@code dataSize} is not 0, and {@code pData} is not {@code NULL}, {@code pData} <b>must</b> be a valid pointer to an array of {@code dataSize} bytes</li>
         </ul>
 

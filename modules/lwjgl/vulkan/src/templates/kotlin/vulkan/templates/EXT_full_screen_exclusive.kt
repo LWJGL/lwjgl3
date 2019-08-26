@@ -27,7 +27,7 @@ val EXT_full_screen_exclusive = "EXTFullScreenExclusive".nativeClassVK("EXT_full
             <dd>256</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>3</dd>
+            <dd>4</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -71,7 +71,7 @@ val EXT_full_screen_exclusive = "EXTFullScreenExclusive".nativeClassVK("EXT_full
     IntConstant(
         "The extension specification version.",
 
-        "EXT_FULL_SCREEN_EXCLUSIVE_SPEC_VERSION".."3"
+        "EXT_FULL_SCREEN_EXCLUSIVE_SPEC_VERSION".."4"
     )
 
     StringConstant(

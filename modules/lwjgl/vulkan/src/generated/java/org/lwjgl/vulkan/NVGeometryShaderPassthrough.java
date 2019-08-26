@@ -99,7 +99,7 @@ package org.lwjgl.vulkan;
  * <dd>2017-02-15</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/NV/SPV_NV_geometry_shader_passthrough.html">{@code SPV_NV_geometry_shader_passthrough}</a> SPIR-V extension.</li>
+ * <li>This extension requires the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/NV/SPV_NV_geometry_shader_passthrough.html">{@code SPV_NV_geometry_shader_passthrough}</a> SPIR-V extension.</li>
  * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_geometry_shader_passthrough.txt">{@code GL_NV_geometry_shader_passthrough}</a> extension for GLSL source languages.</li>
  * <li>This extension requires the {@code geometryShader} feature.</li>
  * </ul></dd>

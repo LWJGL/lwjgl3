@@ -39,7 +39,7 @@ package org.lwjgl.vulkan;
  * <dd>2017-07-17</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/KHR/SPV_KHR_post_depth_coverage.html">{@code SPV_KHR_post_depth_coverage}</a> SPIR-V extension.</li>
+ * <li>This extension requires the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_post_depth_coverage.html">{@code SPV_KHR_post_depth_coverage}</a> SPIR-V extension.</li>
  * <li>This extension requires <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_post_depth_coverage.txt">{@code GL_ARB_post_depth_coverage}</a> or <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_post_depth_coverage.txt">{@code GL_EXT_post_depth_coverage}</a> for GLSL-based source languages.</li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>

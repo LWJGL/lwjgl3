@@ -267,7 +267,7 @@ public class INTELPerformanceQuery {
      * 
      * <ul>
      * <li>{@link #VK_PERFORMANCE_PARAMETER_TYPE_HW_COUNTERS_SUPPORTED_INTEL PERFORMANCE_PARAMETER_TYPE_HW_COUNTERS_SUPPORTED_INTEL} has a boolean result which tells whether hardware counters can be captured.</li>
-     * <li>{@link #VK_PERFORMANCE_PARAMETER_TYPE_STREAM_MARKER_VALID_BITS_INTEL PERFORMANCE_PARAMETER_TYPE_STREAM_MARKER_VALID_BITS_INTEL} has a 32 bits integer result which tells how many bits can be written into the {@code VkStreamPerformanceMarkerInfoINTEL} value.</li>
+     * <li>{@link #VK_PERFORMANCE_PARAMETER_TYPE_STREAM_MARKER_VALID_BITS_INTEL PERFORMANCE_PARAMETER_TYPE_STREAM_MARKER_VALID_BITS_INTEL} has a 32 bits integer result which tells how many bits can be written into the {@link VkPerformanceValueINTEL} value.</li>
      * </ul>
      * 
      * <h5>See Also</h5>

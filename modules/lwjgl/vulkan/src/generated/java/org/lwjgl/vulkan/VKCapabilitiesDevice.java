@@ -453,6 +453,8 @@ public class VKCapabilitiesDevice {
     public final boolean Vulkan11;
     /** When true, {@link AMDBufferMarker} is supported. */
     public final boolean VK_AMD_buffer_marker;
+    /** When true, {@link AMDDeviceCoherentMemory} is supported. */
+    public final boolean VK_AMD_device_coherent_memory;
     /** When true, {@link AMDDisplayNativeHdr} is supported. */
     public final boolean VK_AMD_display_native_hdr;
     /** When true, {@link AMDDrawIndirectCount} is supported. */
@@ -760,6 +762,7 @@ public class VKCapabilitiesDevice {
         Vulkan10 = VK10.checkCapsDevice(provider, caps, ext);
         Vulkan11 = VK11.checkCapsDevice(provider, caps, ext);
         VK_AMD_buffer_marker = AMDBufferMarker.checkCapsDevice(provider, caps, ext);
+        VK_AMD_device_coherent_memory = ext.contains("VK_AMD_device_coherent_memory");
         VK_AMD_display_native_hdr = AMDDisplayNativeHdr.checkCapsDevice(provider, caps, ext);
         VK_AMD_draw_indirect_count = AMDDrawIndirectCount.checkCapsDevice(provider, caps, ext);
         VK_AMD_gcn_shader = ext.contains("VK_AMD_gcn_shader");

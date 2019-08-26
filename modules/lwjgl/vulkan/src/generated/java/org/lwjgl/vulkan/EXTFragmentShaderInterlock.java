@@ -34,8 +34,8 @@ package org.lwjgl.vulkan;
  * <dd>2019-05-02</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/EXT/SPV_EXT_fragment_shader_interlock.html">SPV_EXT_fragment_shader_interlock</a> SPIR-V extension.</li>
- * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_fragment_shader_interlock.txt">GL_ARB_fragment_shader_interlock</a>, extensions for GLSL source languages.</li>
+ * <li>This extension requires the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/EXT/SPV_EXT_fragment_shader_interlock.html">{@code SPV_EXT_fragment_shader_interlock}</a> SPIR-V extension.</li>
+ * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_fragment_shader_interlock.txt">{@code GL_ARB_fragment_shader_interlock}</a>, extensions for GLSL source languages.</li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

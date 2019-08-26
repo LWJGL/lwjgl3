@@ -15,7 +15,11 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <p>There are new programmable shader types -- the task and mesh shader -- to generate these collections to be processed by fixed-function primitive assembly and rasterization logic. When the task and mesh shaders are dispatched, they replace the standard programmable vertex processing pipeline, including vertex array attribute fetching, vertex shader processing, tessellation, and the geometry shader processing.</p>
  * 
- * <p>This extension also adds support for the following SPIR-V extension in Vulkan:  * SPV_NV_mesh_shader</p>
+ * <p>This extension also adds support for the following SPIR-V extension in Vulkan:</p>
+ * 
+ * <ul>
+ * <li><a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/NV/SPV_NV_mesh_shader.html">{@code SPV_NV_mesh_shader}</a></li>
+ * </ul>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>

@@ -55,7 +55,7 @@ val KHR_device_group = "KHRDeviceGroup".nativeClassVK("KHR_device_group", type =
             <dd>61</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>3</dd>
+            <dd>4</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -74,7 +74,7 @@ val KHR_device_group = "KHRDeviceGroup".nativeClassVK("KHR_device_group", type =
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
-            <dd>2017-10-06</dd>
+            <dd>2017-10-10</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -95,7 +95,7 @@ val KHR_device_group = "KHRDeviceGroup".nativeClassVK("KHR_device_group", type =
     IntConstant(
         "The extension specification version.",
 
-        "KHR_DEVICE_GROUP_SPEC_VERSION".."3"
+        "KHR_DEVICE_GROUP_SPEC_VERSION".."4"
     )
 
     StringConstant(

@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>106</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>Courtney Goeltzenleuchter <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_hdr_metadata:%20&amp;body=@courtney-g%20">courtney-g</a></li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2017-03-04</dd>
+ * <dd>2018-12-19</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
@@ -49,7 +49,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class EXTHdrMetadata {
 
     /** The extension specification version. */
-    public static final int VK_EXT_HDR_METADATA_SPEC_VERSION = 1;
+    public static final int VK_EXT_HDR_METADATA_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String VK_EXT_HDR_METADATA_EXTENSION_NAME = "VK_EXT_hdr_metadata";

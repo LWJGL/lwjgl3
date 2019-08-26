@@ -274,7 +274,7 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassVK("INTEL_perfo
         <h5>Description</h5>
         <ul>
             <li>#PERFORMANCE_PARAMETER_TYPE_HW_COUNTERS_SUPPORTED_INTEL has a boolean result which tells whether hardware counters can be captured.</li>
-            <li>#PERFORMANCE_PARAMETER_TYPE_STREAM_MARKER_VALID_BITS_INTEL has a 32 bits integer result which tells how many bits can be written into the {@code VkStreamPerformanceMarkerInfoINTEL} value.</li>
+            <li>#PERFORMANCE_PARAMETER_TYPE_STREAM_MARKER_VALID_BITS_INTEL has a 32 bits integer result which tells how many bits can be written into the ##VkPerformanceValueINTEL value.</li>
         </ul>
 
         <h5>See Also</h5>

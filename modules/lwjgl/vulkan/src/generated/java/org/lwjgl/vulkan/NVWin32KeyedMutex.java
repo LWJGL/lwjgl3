@@ -148,7 +148,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>59</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -176,7 +176,7 @@ package org.lwjgl.vulkan;
 public final class NVWin32KeyedMutex {
 
     /** The extension specification version. */
-    public static final int VK_NV_WIN32_KEYED_MUTEX_SPEC_VERSION = 1;
+    public static final int VK_NV_WIN32_KEYED_MUTEX_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String VK_NV_WIN32_KEYED_MUTEX_EXTENSION_NAME = "VK_NV_win32_keyed_mutex";

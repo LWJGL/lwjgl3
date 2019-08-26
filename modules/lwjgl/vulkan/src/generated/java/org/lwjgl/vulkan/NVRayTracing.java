@@ -218,6 +218,24 @@ public class NVRayTracing {
     public static final int VK_INDEX_TYPE_NONE_NV = 1000165000;
 
     /**
+     * VkAccelerationStructureTypeNV - Type of acceleration structure
+     * 
+     * <h5>Description</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV} is a top-level acceleration structure containing instance data referring to bottom-level level acceleration structures.</li>
+     * <li>{@link #VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV} is a bottom-level acceleration structure containing the AABBs or geometry to be intersected.</li>
+     * </ul>
+     * 
+     * <h5>See Also</h5>
+     * 
+     * <p>{@link VkAccelerationStructureInfoNV}</p>
+     */
+    public static final int
+        VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV    = 0,
+        VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV = 1;
+
+    /**
      * VkRayTracingShaderGroupTypeNV - Shader group types
      * 
      * <h5>Description</h5>
@@ -301,24 +319,6 @@ public class NVRayTracing {
         VK_GEOMETRY_INSTANCE_TRIANGLE_FRONT_COUNTERCLOCKWISE_BIT_NV = 0x2,
         VK_GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_NV                    = 0x4,
         VK_GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_NV                 = 0x8;
-
-    /**
-     * VkAccelerationStructureTypeNV - Type of acceleration structure
-     * 
-     * <h5>Description</h5>
-     * 
-     * <ul>
-     * <li>{@link #VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV} is a top-level acceleration structure containing instance data referring to bottom-level level acceleration structures.</li>
-     * <li>{@link #VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV} is a bottom-level acceleration structure containing the AABBs or geometry to be intersected.</li>
-     * </ul>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link VkAccelerationStructureInfoNV}</p>
-     */
-    public static final int
-        VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV    = 0,
-        VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV = 1;
 
     /**
      * VkBuildAccelerationStructureFlagBitsNV - Bitmask specifying additional parameters for acceleration structure builds
@@ -696,6 +696,7 @@ public class NVRayTracing {
      * <li>{@code scratch} <b>must</b> be a valid {@code VkBuffer} handle</li>
      * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
      * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support compute operations</li>
+     * <li>This command <b>must</b> only be called outside of a render pass instance</li>
      * <li>Each of {@code commandBuffer}, {@code dst}, {@code instanceData}, {@code scratch}, and {@code src} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
      * </ul>
      * 
@@ -709,7 +710,7 @@ public class NVRayTracing {
      * 
      * <table class="lwjgl">
      * <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-pipeline-stages-types">Pipeline Type</a></th></tr></thead>
-     * <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Compute</td><td></td></tr></tbody>
+     * <tbody><tr><td>Primary Secondary</td><td>Outside</td><td>Compute</td><td></td></tr></tbody>
      * </table>
      * 
      * <h5>See Also</h5>
@@ -762,6 +763,7 @@ public class NVRayTracing {
      * <li>{@code mode} <b>must</b> be a valid {@code VkCopyAccelerationStructureModeNV} value</li>
      * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
      * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support compute operations</li>
+     * <li>This command <b>must</b> only be called outside of a render pass instance</li>
      * <li>Each of {@code commandBuffer}, {@code dst}, and {@code src} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
      * </ul>
      * 
@@ -775,7 +777,7 @@ public class NVRayTracing {
      * 
      * <table class="lwjgl">
      * <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-pipeline-stages-types">Pipeline Type</a></th></tr></thead>
-     * <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Compute</td><td></td></tr></tbody>
+     * <tbody><tr><td>Primary Secondary</td><td>Outside</td><td>Compute</td><td></td></tr></tbody>
      * </table>
      *
      * @param commandBuffer the command buffer into which the command will be recorded.
@@ -873,6 +875,7 @@ public class NVRayTracing {
      * <li>If {@code callableShaderBindingTableBuffer} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code callableShaderBindingTableBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
      * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
      * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support compute operations</li>
+     * <li>This command <b>must</b> only be called outside of a render pass instance</li>
      * <li>Each of {@code callableShaderBindingTableBuffer}, {@code commandBuffer}, {@code hitShaderBindingTableBuffer}, {@code missShaderBindingTableBuffer}, and {@code raygenShaderBindingTableBuffer} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
      * </ul>
      * 
@@ -886,7 +889,7 @@ public class NVRayTracing {
      * 
      * <table class="lwjgl">
      * <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-pipeline-stages-types">Pipeline Type</a></th></tr></thead>
-     * <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Compute</td><td></td></tr></tbody>
+     * <tbody><tr><td>Primary Secondary</td><td>Outside</td><td>Compute</td><td></td></tr></tbody>
      * </table>
      *
      * @param commandBuffer                    the command buffer into which the command will be recorded.
@@ -1243,6 +1246,7 @@ public class NVRayTracing {
      * <li>{@code queryPool} <b>must</b> be a valid {@code VkQueryPool} handle</li>
      * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
      * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support compute operations</li>
+     * <li>This command <b>must</b> only be called outside of a render pass instance</li>
      * <li>{@code accelerationStructureCount} <b>must</b> be greater than 0</li>
      * <li>Each of {@code commandBuffer}, {@code queryPool}, and the elements of {@code pAccelerationStructures} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
      * </ul>
@@ -1257,7 +1261,7 @@ public class NVRayTracing {
      * 
      * <table class="lwjgl">
      * <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-pipeline-stages-types">Pipeline Type</a></th></tr></thead>
-     * <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Compute</td><td></td></tr></tbody>
+     * <tbody><tr><td>Primary Secondary</td><td>Outside</td><td>Compute</td><td></td></tr></tbody>
      * </table>
      *
      * @param commandBuffer           the command buffer into which the command will be recorded.

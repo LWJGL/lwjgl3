@@ -29,7 +29,7 @@ val EXT_sampler_filter_minmax = "EXTSamplerFilterMinmax".nativeClassVK("EXT_samp
             <dd>131</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -59,7 +59,7 @@ val EXT_sampler_filter_minmax = "EXTSamplerFilterMinmax".nativeClassVK("EXT_samp
     IntConstant(
         "The extension specification version.",
 
-        "EXT_SAMPLER_FILTER_MINMAX_SPEC_VERSION".."1"
+        "EXT_SAMPLER_FILTER_MINMAX_SPEC_VERSION".."2"
     )
 
     StringConstant(

@@ -76,7 +76,7 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
             <dd>60</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -115,7 +115,7 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
     IntConstant(
         "The extension specification version.",
 
-        "KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_SPEC_VERSION".."1"
+        "KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_SPEC_VERSION".."2"
     )
 
     StringConstant(

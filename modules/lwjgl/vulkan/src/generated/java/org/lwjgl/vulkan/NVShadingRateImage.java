@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * This extension allows applications to use a variable shading rate when processing fragments of rasterized primitives. By default, Vulkan will spawn one fragment shader for each pixel covered by a primitive. In this extension, applications can bind a <em>shading rate image</em> that can be used to vary the number of fragment shader invocations across the framebuffer. Some portions of the screen may be configured to spawn up to 16 fragment shaders for each pixel, while other portions may use a single fragment shader invocation for a 4x4 block of pixels. This can be useful for use cases like eye tracking, where the portion of the framebuffer that the user is looking at directly can be processed at high frequency, while distant corners of the image can be processed at lower frequency. Each texel in the shading rate image represents a fixed-size rectangle in the framebuffer, covering 16x16 pixels in the initial implementation of this extension. When rasterizing a primitive covering one of these rectangles, the Vulkan implementation reads a texel in the bound shading rate image and looks up the fetched value in a palette to determine a base shading rate.
  * 
- * <p>In addition to the API support controlling rasterization, this extension also adds Vulkan support for the {@code SPV_NV_shading_rate} extension to SPIR-V. That extension provides two fragment shader variable decorations that allow fragment shaders to determine the shading rate used for processing the fragment:</p>
+ * <p>In addition to the API support controlling rasterization, this extension also adds Vulkan support for the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/NV/SPV_NV_shading_rate.html">{@code SPV_NV_shading_rate}</a> extension to SPIR-V. That extension provides two fragment shader variable decorations that allow fragment shaders to determine the shading rate used for processing the fragment:</p>
  * 
  * <ul>
  * <li>{@code FragmentSizeNV}, which indicates the width and height of the set of pixels processed by the fragment shader.</li>
@@ -44,7 +44,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>Pat Brown <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_shading_rate_image:%20&amp;body=@nvpbrown%20">nvpbrown</a></li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2018-09-13</dd>
+ * <dd>2019-07-18</dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
  * <li>Pat Brown, NVIDIA</li>

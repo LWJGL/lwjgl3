@@ -46,7 +46,7 @@ val KHR_sampler_mirror_clamp_to_edge = "KHRSamplerMirrorClampToEdge".nativeClass
             <dd>15</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>3</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -59,11 +59,12 @@ val KHR_sampler_mirror_clamp_to_edge = "KHRSamplerMirrorClampToEdge".nativeClass
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
-            <dd>2016-02-16</dd>
+            <dd>2019-08-17</dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Tobias Hector, Imagination Technologies</li>
+                <li>Jon Leech, Khronos</li>
             </ul></dd>
         </dl>
         """
@@ -71,7 +72,7 @@ val KHR_sampler_mirror_clamp_to_edge = "KHRSamplerMirrorClampToEdge".nativeClass
     IntConstant(
         "The extension specification version.",
 
-        "KHR_SAMPLER_MIRROR_CLAMP_TO_EDGE_SPEC_VERSION".."1"
+        "KHR_SAMPLER_MIRROR_CLAMP_TO_EDGE_SPEC_VERSION".."3"
     )
 
     StringConstant(
@@ -83,6 +84,7 @@ val KHR_sampler_mirror_clamp_to_edge = "KHRSamplerMirrorClampToEdge".nativeClass
     EnumConstant(
         "Extends {@code VkSamplerAddressMode}.",
 
-        "SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE".."4"
+        "SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE".."4",
+        "SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE_KHR".."4"
     )
 }

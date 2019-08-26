@@ -54,7 +54,7 @@ val KHR_16bit_storage = "KHR16bitStorage".nativeClassVK("KHR_16bit_storage", typ
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension requires <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/KHR/SPV_KHR_16bit_storage.html">{@code SPV_KHR_16bit_storage}</a></li>
+                <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_16bit_storage.html">{@code SPV_KHR_16bit_storage}</a></li>
                 <li>Promoted to Vulkan 1.1 Core</li>
             </ul></dd>
 

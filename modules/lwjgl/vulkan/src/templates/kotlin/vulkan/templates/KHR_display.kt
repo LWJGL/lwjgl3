@@ -29,7 +29,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
             <dd>3</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>21</dd>
+            <dd>23</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -62,7 +62,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
     IntConstant(
         "The extension specification version.",
 
-        "KHR_DISPLAY_SPEC_VERSION".."21"
+        "KHR_DISPLAY_SPEC_VERSION".."23"
     )
 
     StringConstant(

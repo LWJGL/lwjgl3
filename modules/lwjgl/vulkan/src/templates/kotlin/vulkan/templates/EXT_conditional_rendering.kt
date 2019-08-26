@@ -27,7 +27,7 @@ val EXT_conditional_rendering = "EXTConditionalRendering".nativeClassVK("EXT_con
             <dd>82</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -60,7 +60,7 @@ val EXT_conditional_rendering = "EXTConditionalRendering".nativeClassVK("EXT_con
     IntConstant(
         "The extension specification version.",
 
-        "EXT_CONDITIONAL_RENDERING_SPEC_VERSION".."1"
+        "EXT_CONDITIONAL_RENDERING_SPEC_VERSION".."2"
     )
 
     StringConstant(

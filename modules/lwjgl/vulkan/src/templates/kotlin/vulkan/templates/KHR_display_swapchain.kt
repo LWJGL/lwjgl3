@@ -29,7 +29,7 @@ val KHR_display_swapchain = "KHRDisplaySwapchain".nativeClassVK("KHR_display_swa
             <dd>4</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>9</dd>
+            <dd>10</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -61,7 +61,7 @@ val KHR_display_swapchain = "KHRDisplaySwapchain".nativeClassVK("KHR_display_swa
     IntConstant(
         "The extension specification version.",
 
-        "KHR_DISPLAY_SWAPCHAIN_SPEC_VERSION".."9"
+        "KHR_DISPLAY_SWAPCHAIN_SPEC_VERSION".."10"
     )
 
     StringConstant(

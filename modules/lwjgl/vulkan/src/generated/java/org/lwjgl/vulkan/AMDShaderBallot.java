@@ -9,7 +9,7 @@ package org.lwjgl.vulkan;
  * This extension adds support for the following SPIR-V extension in Vulkan:
  * 
  * <ul>
- * <li><a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/AMD/SPV_AMD_shader_ballot.html">{@code SPV_AMD_shader_ballot}</a></li>
+ * <li><a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/AMD/SPV_AMD_shader_ballot.html">{@code SPV_AMD_shader_ballot}</a></li>
  * </ul>
  * 
  * <dl>

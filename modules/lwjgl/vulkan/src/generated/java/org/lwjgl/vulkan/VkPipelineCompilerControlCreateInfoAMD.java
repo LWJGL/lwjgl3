@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link AMDPipelineCompilerControl#VK_STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD}</li>
- * <li>{@code compilerControlFlags} <b>must</b> be a valid combination of {@code VkPipelineCompilerControlFlagBitsAMD} values</li>
+ * <li>{@code compilerControlFlags} <b>must</b> be 0</li>
  * </ul>
  * 
  * <h3>Member documentation</h3>

@@ -21,7 +21,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>248</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -39,13 +39,14 @@ package org.lwjgl.vulkan;
  * <li>Karl Schultz, LunarG</li>
  * <li>Dave Houlton, LunarG</li>
  * <li>Mark Lobodzinski, LunarG</li>
+ * <li>Camden Stocker, LunarG</li>
  * </ul></dd>
  * </dl>
  */
 public final class EXTValidationFeatures {
 
     /** The extension specification version. */
-    public static final int VK_EXT_VALIDATION_FEATURES_SPEC_VERSION = 1;
+    public static final int VK_EXT_VALIDATION_FEATURES_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String VK_EXT_VALIDATION_FEATURES_EXTENSION_NAME = "VK_EXT_validation_features";
@@ -61,6 +62,7 @@ public final class EXTValidationFeatures {
      * <ul>
      * <li>{@link #VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_EXT VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_EXT} specifies that GPU-assisted validation is enabled. Activating this feature instruments shader programs to generate additional diagnostic data. This feature is disabled by default.</li>
      * <li>{@link #VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_RESERVE_BINDING_SLOT_EXT VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_RESERVE_BINDING_SLOT_EXT} specifies that the validation layers reserve a descriptor set binding slot for their own use. The layer reports a value for {@link VkPhysicalDeviceLimits}{@code ::maxBoundDescriptorSets} that is one less than the value reported by the device. If the device supports the binding of only one descriptor set, the validation layer does not perform GPU-assisted validation. This feature is disabled by default. The GPU-assisted validation feature must be enabled in order to use this feature.</li>
+     * <li>{@link #VK_VALIDATION_FEATURE_ENABLE_BEST_PRACTICES_EXT VALIDATION_FEATURE_ENABLE_BEST_PRACTICES_EXT} specifies that Vulkan best-practices validation is enabled. Activating this feature enables the output of warnings related to common misuse of the API, but which are not explicitly prohibited by the specification. This feature is disabled by default.</li>
      * </ul>
      * 
      * <h5>See Also</h5>
@@ -69,7 +71,8 @@ public final class EXTValidationFeatures {
      */
     public static final int
         VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_EXT                      = 0,
-        VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_RESERVE_BINDING_SLOT_EXT = 1;
+        VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_RESERVE_BINDING_SLOT_EXT = 1,
+        VK_VALIDATION_FEATURE_ENABLE_BEST_PRACTICES_EXT                    = 2;
 
     /**
      * VkValidationFeatureDisableEXT - Specify validation features to disable

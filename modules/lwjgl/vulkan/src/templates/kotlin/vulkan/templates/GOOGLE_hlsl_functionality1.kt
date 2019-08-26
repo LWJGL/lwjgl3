@@ -44,7 +44,7 @@ val GOOGLE_hlsl_functionality1 = "GOOGLEHlslFunctionality1".nativeClassVK("GOOGL
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>Requires the <a target="_blank" href="https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/GOOGLE/SPV_GOOGLE_hlsl_functionality1.asciidoc">{@code SPV_GOOGLE_hlsl_functionality1}</a> SPIR-V extension.</li>
+                <li>Requires the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/GOOGLE/SPV_GOOGLE_hlsl_functionality1.html">{@code SPV_GOOGLE_hlsl_functionality1}</a> SPIR-V extension.</li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

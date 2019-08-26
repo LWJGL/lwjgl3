@@ -30,8 +30,8 @@ import static org.lwjgl.vulkan.VK10.*;
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRPipelineExecutableProperties#VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR}</li>
  * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>Any given element of {@code name} <b>must</b> be a valid</li>
- * <li>Any given element of {@code description} <b>must</b> be a valid</li>
+ * <li>{@code name} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to VK_MAX_DESCRIPTION_SIZE</li>
+ * <li>{@code description} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to VK_MAX_DESCRIPTION_SIZE</li>
  * <li>If {@code dataSize} is not 0, and {@code pData} is not {@code NULL}, {@code pData} <b>must</b> be a valid pointer to an array of {@code dataSize} bytes</li>
  * </ul>
  * 

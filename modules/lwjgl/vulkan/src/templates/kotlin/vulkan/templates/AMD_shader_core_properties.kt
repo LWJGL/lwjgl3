@@ -89,7 +89,7 @@ val AMD_shader_core_properties = "AMDShaderCoreProperties".nativeClassVK("AMD_sh
             <dd>186</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -119,7 +119,7 @@ val AMD_shader_core_properties = "AMDShaderCoreProperties".nativeClassVK("AMD_sh
     IntConstant(
         "The extension specification version.",
 
-        "AMD_SHADER_CORE_PROPERTIES_SPEC_VERSION".."1"
+        "AMD_SHADER_CORE_PROPERTIES_SPEC_VERSION".."2"
     )
 
     StringConstant(

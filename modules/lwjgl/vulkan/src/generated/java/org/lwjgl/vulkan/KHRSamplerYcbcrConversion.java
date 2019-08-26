@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>157</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>14</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -80,7 +80,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class KHRSamplerYcbcrConversion {
 
     /** The extension specification version. */
-    public static final int VK_KHR_SAMPLER_YCBCR_CONVERSION_SPEC_VERSION = 1;
+    public static final int VK_KHR_SAMPLER_YCBCR_CONVERSION_SPEC_VERSION = 14;
 
     /** The extension name. */
     public static final String VK_KHR_SAMPLER_YCBCR_CONVERSION_EXTENSION_NAME = "VK_KHR_sampler_ycbcr_conversion";

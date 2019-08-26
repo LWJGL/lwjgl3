@@ -25,7 +25,7 @@ import static org.lwjgl.system.JNI.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>34</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -55,7 +55,7 @@ import static org.lwjgl.system.JNI.*;
 public class AMDDrawIndirectCount {
 
     /** The extension specification version. */
-    public static final int VK_AMD_DRAW_INDIRECT_COUNT_SPEC_VERSION = 1;
+    public static final int VK_AMD_DRAW_INDIRECT_COUNT_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String VK_AMD_DRAW_INDIRECT_COUNT_EXTENSION_NAME = "VK_AMD_draw_indirect_count";

@@ -28,7 +28,7 @@ val NV_representative_fragment_test = "NVRepresentativeFragmentTest".nativeClass
             <dd>167</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -58,7 +58,7 @@ val NV_representative_fragment_test = "NVRepresentativeFragmentTest".nativeClass
     IntConstant(
         "The extension specification version.",
 
-        "NV_REPRESENTATIVE_FRAGMENT_TEST_SPEC_VERSION".."1"
+        "NV_REPRESENTATIVE_FRAGMENT_TEST_SPEC_VERSION".."2"
     )
 
     StringConstant(

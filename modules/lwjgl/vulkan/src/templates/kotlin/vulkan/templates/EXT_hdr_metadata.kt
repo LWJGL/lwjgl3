@@ -26,7 +26,7 @@ val EXT_hdr_metadata = "EXTHdrMetadata".nativeClassVK("EXT_hdr_metadata", type =
             <dd>106</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -40,7 +40,7 @@ val EXT_hdr_metadata = "EXTHdrMetadata".nativeClassVK("EXT_hdr_metadata", type =
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
-            <dd>2017-03-04</dd>
+            <dd>2018-12-19</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -55,7 +55,7 @@ val EXT_hdr_metadata = "EXTHdrMetadata".nativeClassVK("EXT_hdr_metadata", type =
     IntConstant(
         "The extension specification version.",
 
-        "EXT_HDR_METADATA_SPEC_VERSION".."1"
+        "EXT_HDR_METADATA_SPEC_VERSION".."2"
     )
 
     StringConstant(

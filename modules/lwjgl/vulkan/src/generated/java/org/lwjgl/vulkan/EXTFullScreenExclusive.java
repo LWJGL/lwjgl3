@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>256</dd>
  * <dt><b>Revision</b></dt>
- * <dd>3</dd>
+ * <dd>4</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -65,7 +65,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class EXTFullScreenExclusive {
 
     /** The extension specification version. */
-    public static final int VK_EXT_FULL_SCREEN_EXCLUSIVE_SPEC_VERSION = 3;
+    public static final int VK_EXT_FULL_SCREEN_EXCLUSIVE_SPEC_VERSION = 4;
 
     /** The extension name. */
     public static final String VK_EXT_FULL_SCREEN_EXCLUSIVE_EXTENSION_NAME = "VK_EXT_full_screen_exclusive";

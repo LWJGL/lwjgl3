@@ -46,8 +46,8 @@ val NV_shader_sm_builtins = "NVShaderSmBuiltins".nativeClassVK("NV_shader_sm_bui
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension requires <a target="_blank" href="http://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/NV/SPV_NV_shader_sm_builtins.html">SPV_NV_shader_sm_builtins</a>.</li>
-                <li>This extension enables <a target="_blank" href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/nv/GLSL_NV_shader_sm_builtins.txt">GL_NV_shader_sm_builtins</a> for GLSL source languages.</li>
+                <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/NV/SPV_NV_shader_sm_builtins.html">{@code SPV_NV_shader_sm_builtins}</a>.</li>
+                <li>This extension enables <a target="_blank" href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/nv/GLSL_NV_shader_sm_builtins.txt">{@code GL_NV_shader_sm_builtins}</a> for GLSL source languages.</li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

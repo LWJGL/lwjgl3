@@ -27,7 +27,7 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
             <dd>157</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>14</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -85,7 +85,7 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
     IntConstant(
         "The extension specification version.",
 
-        "KHR_SAMPLER_YCBCR_CONVERSION_SPEC_VERSION".."1"
+        "KHR_SAMPLER_YCBCR_CONVERSION_SPEC_VERSION".."14"
     )
 
     StringConstant(
