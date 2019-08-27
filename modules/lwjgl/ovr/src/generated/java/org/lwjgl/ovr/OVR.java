@@ -93,6 +93,7 @@ public class OVR {
      * <li>{@link #ovrHmd_ES09 Hmd_ES09}</li>
      * <li>{@link #ovrHmd_ES11 Hmd_ES11}</li>
      * <li>{@link #ovrHmd_CV1 Hmd_CV1}</li>
+     * <li>{@link #ovrHmd_RiftS Hmd_RiftS}</li>
      * </ul>
      */
     public static final int
@@ -106,7 +107,8 @@ public class OVR {
         ovrHmd_ES06    = 11,
         ovrHmd_ES09    = 12,
         ovrHmd_ES11    = 13,
-        ovrHmd_CV1     = 14;
+        ovrHmd_CV1     = 14,
+        ovrHmd_RiftS   = 15;
 
     /**
      * HMD capability bits reported by device. ({@code ovrHmdCaps})
@@ -201,13 +203,35 @@ public class OVR {
      * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #ovrStatus_OrientationTracked Status_OrientationTracked} - Orientation is currently tracked (connected and in use).</li>
-     * <li>{@link #ovrStatus_PositionTracked Status_PositionTracked} - Position is currently tracked (false if out of range).</li>
+     * <li>{@link #ovrStatus_OrientationTracked Status_OrientationTracked} - 
+     * Device orientation is currently tracked.
+     * 
+     * <p>It's possible that the device orientation is not tracked, but its reported orientation is nevertheless valid (e.g. due to estimation).</p>
+     * </li>
+     * <li>{@link #ovrStatus_PositionTracked Status_PositionTracked} - 
+     * Device position is currently tracked.
+     * 
+     * <p>It's possible that the device position is not tracked, but its reported position is nevertheless valid (e.g. due to estimation).</p>
+     * </li>
+     * <li>{@link #ovrStatus_OrientationValid Status_OrientationValid} - 
+     * The reported device orientation is valid for application use.
+     * 
+     * <p>In the case that {@code OrientationValid} is true and {@code OrientationTracked} is false, the runtime may be estimating the orientation of the
+     * device. In the case that {@code OrientationValid} is false, the application should not use the returned orientation value.</p>
+     * </li>
+     * <li>{@link #ovrStatus_PositionValid Status_PositionValid} - 
+     * The reported device orientation is valid for application use.
+     * 
+     * <p>In the case that {@code PositionValid} is true and {@code PositionTracked} is false, the runtime may be estimating the position of the device. In
+     * the case that {@code PositionValid} is false, the application should not use the returned position value.</p>
+     * </li>
      * </ul>
      */
     public static final int
         ovrStatus_OrientationTracked = 0x1,
-        ovrStatus_PositionTracked    = 0x2;
+        ovrStatus_PositionTracked    = 0x2,
+        ovrStatus_OrientationValid   = 0x4,
+        ovrStatus_PositionValid      = 0x8;
 
     /**
      * Specifies sensor flags. ({@code ovrTrackerFlags})
@@ -1061,6 +1085,8 @@ public class OVR {
      * 
      * <p>{@link #ovr_Initialize Initialize} must be called prior to calling this function, otherwise {@code ovrHmdDesc::Type} will be set to {@link #ovrHmd_None Hmd_None} without checking for the HMD
      * presence.</p>
+     * 
+     * <p>For newer headsets being used on a game built against an old SDK version, we may return the {@code ovrHmdType} as {@link #ovrHmd_CV1 Hmd_CV1} for backwards compatibility.</p>
      *
      * @param session  an {@code ovrSession} previously returned by {@link #ovr_Create Create} or {@code NULL}
      * @param __result an {@link OVRHmdDesc}. If invoked with {@code NULL} session argument, {@code ovrHmdDesc::Type} to {@link #ovrHmd_None Hmd_None} indicates that the HMD is not connected.
@@ -1080,6 +1106,8 @@ public class OVR {
      * Returns the number of attached trackers.
      * 
      * <p>The number of trackers may change at any time, so this function should be called before use as opposed to once on startup.</p>
+     * 
+     * <p>For newer headsets being used on a game built against an old SDK version, we may simulate three CV1 trackers to maintain backwards compatibility.</p>
      *
      * @param session an {@code ovrSession} previously returned by {@link #ovr_Create Create}
      */
@@ -1101,6 +1129,8 @@ public class OVR {
      * 
      * <p>{@link #ovr_Initialize Initialize} must have first been called in order for this to succeed, otherwise the returned {@code trackerDescArray} will be zero-initialized. The
      * data returned by this function can change at runtime.</p>
+     * 
+     * <p>For newer headsets being used on a game built against an old SDK version, we may simulate three CV1 trackers to maintain backwards compatibility.</p>
      *
      * @param session          an {@code ovrSession} previously returned by {@link #ovr_Create Create}
      * @param trackerDescIndex a tracker index. The valid indexes are in the range of 0 to the tracker count returned by {@link #ovr_GetTrackerCount GetTrackerCount}.
@@ -1423,6 +1453,8 @@ public class OVR {
 
     /**
      * Returns the {@link OVRTrackerPose} for the given attached tracker.
+     * 
+     * <p>For newer headsets being used on a game built against an old SDK version, we may simulate three CV1 trackers to maintain backwards compatibility.</p>
      *
      * @param session          an {@code ovrSession} previously returned by {@link #ovr_Create Create}
      * @param trackerPoseIndex index of the tracker being requested.

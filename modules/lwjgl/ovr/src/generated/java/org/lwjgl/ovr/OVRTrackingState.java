@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code HandPoses[2]} &ndash; 
  * The most recent calculated pose for each hand when hand controller tracking is present. {@code HandPoses[ovrHand_Left]} refers to the left hand and
  * {@code HandPoses[ovrHand_Right]} to the right hand. These values can be combined with {@code ovrInputState} for complete hand controller information.</li>
- * <li>{@code HandStatusFlags[2]} &ndash; {@code HandPoses} status flags described by {@code ovrStatusBits}. Only {@link OVR#ovrStatus_OrientationTracked Status_OrientationTracked} and {@link OVR#ovrStatus_PositionTracked Status_PositionTracked} are reported.</li>
+ * <li>{@code HandStatusFlags[2]} &ndash; {@code HandPoses} status flags described by {@code ovrStatusBits}.</li>
  * <li>{@code CalibratedOrigin} &ndash; 
  * the pose of the origin captured during calibration.
  * 

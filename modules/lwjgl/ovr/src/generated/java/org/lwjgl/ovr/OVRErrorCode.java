@@ -61,6 +61,7 @@ public class OVRErrorCode {
      * <li>{@link #ovrError_ExternalCameraNameListsMistmatch Error_ExternalCameraNameListsMistmatch} - The external camera friendly name list is not the same size as the external camera name list.</li>
      * <li>{@link #ovrError_ExternalCameraNotCalibrated Error_ExternalCameraNotCalibrated} - The external camera property has not been sent to OVRServer when the user tries to open the camera.</li>
      * <li>{@link #ovrError_ExternalCameraNameWrongSize Error_ExternalCameraNameWrongSize} - The external camera name is larger than {@link OVR#OVR_EXTERNAL_CAMERA_NAME_SIZE}-1</li>
+     * <li>{@link #ovrError_AccessDenied Error_AccessDenied} - The caller doesn't have permissions for the requested action.</li>
      * <li>{@link #ovrError_AudioDeviceNotFound Error_AudioDeviceNotFound} - Failure to find the specified audio device.</li>
      * <li>{@link #ovrError_AudioComError Error_AudioComError} - Generic COM error.</li>
      * <li>{@link #ovrError_Initialize Error_Initialize} - Generic initialization error.</li>
@@ -132,6 +133,7 @@ public class OVRErrorCode {
         ovrError_ExternalCameraNameListsMistmatch  = -1022,
         ovrError_ExternalCameraNotCalibrated       = -1023,
         ovrError_ExternalCameraNameWrongSize       = -1024,
+        ovrError_AccessDenied                      = -1025,
         ovrError_AudioDeviceNotFound               = -2001,
         ovrError_AudioComError                     = -2002,
         ovrError_Initialize                        = -3000,

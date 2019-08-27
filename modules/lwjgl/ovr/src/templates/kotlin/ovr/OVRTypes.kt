@@ -334,11 +334,7 @@ val ovrTrackingState = struct(Module.OVR, "OVRTrackingState", nativeName = "ovrT
         """
     )[2]
 
-    unsigned_int(
-        "HandStatusFlags",
-        "{@code HandPoses} status flags described by {@code ovrStatusBits}. Only #Status_OrientationTracked and #Status_PositionTracked are reported."
-    )[2]
-
+    unsigned_int("HandStatusFlags", "{@code HandPoses} status flags described by {@code ovrStatusBits}.")[2]
 
     ovrPosef(
         "CalibratedOrigin",

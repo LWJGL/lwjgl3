@@ -61,6 +61,7 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(Module.OVR, prefixMethod = "OVR_"
             "-1023"
         ),
         "Error_ExternalCameraNameWrongSize".enum("The external camera name is larger than #OVR_EXTERNAL_CAMERA_NAME_SIZE-1", "-1024"),
+        "Error_AccessDenied".enum("The caller doesn't have permissions for the requested action.", "-1025"),
 
         /* Audio error range, reserved for Audio errors. */
         "Error_AudioDeviceNotFound".enum("Failure to find the specified audio device.", "-2001"),

@@ -80,7 +80,8 @@ ENABLE_WARNINGS()""")
         "Hmd_ES06".enum,
         "Hmd_ES09".enum,
         "Hmd_ES11".enum,
-        "Hmd_CV1".enum
+        "Hmd_CV1".enum,
+        "Hmd_RiftS".enum
     )
 
     EnumConstant(
@@ -150,8 +151,41 @@ ENABLE_WARNINGS()""")
     EnumConstant(
         "Bit flags describing the current status of sensor tracking. ({@code ovrStatusBits}",
 
-        "Status_OrientationTracked".enum("Orientation is currently tracked (connected and in use).", 0x0001),
-        "Status_PositionTracked".enum("Position is currently tracked (false if out of range).", 0x0002)
+        "Status_OrientationTracked".enum(
+            """
+            Device orientation is currently tracked.
+            
+            It's possible that the device orientation is not tracked, but its reported orientation is nevertheless valid (e.g. due to estimation).
+            """,
+            0x0001
+        ),
+        "Status_PositionTracked".enum(
+            """
+            Device position is currently tracked.
+            
+            It's possible that the device position is not tracked, but its reported position is nevertheless valid (e.g. due to estimation).
+            """,
+            0x0002
+        ),
+
+        "Status_OrientationValid".enum(
+            """
+            The reported device orientation is valid for application use.
+            
+            In the case that {@code OrientationValid} is true and {@code OrientationTracked} is false, the runtime may be estimating the orientation of the
+            device. In the case that {@code OrientationValid} is false, the application should not use the returned orientation value.            
+            """,
+            0x0004
+        ),
+        "Status_PositionValid".enum(
+            """
+            The reported device orientation is valid for application use.
+            
+            In the case that {@code PositionValid} is true and {@code PositionTracked} is false, the runtime may be estimating the position of the device. In
+            the case that {@code PositionValid} is false, the application should not use the returned position value.         
+            """,
+            0x0008
+        )
     )
 
     EnumConstant(
@@ -641,6 +675,8 @@ ovr_IdentifyClient(
 
         #Initialize() must be called prior to calling this function, otherwise {@code ovrHmdDesc::Type} will be set to #Hmd_None without checking for the HMD
         presence.
+        
+        For newer headsets being used on a game built against an old SDK version, we may return the {@code ovrHmdType} as #Hmd_CV1 for backwards compatibility.
         """,
 
         nullable..ovrSession("session", "an {@code ovrSession} previously returned by #Create() or #NULL"),
@@ -657,6 +693,8 @@ ovr_IdentifyClient(
         Returns the number of attached trackers.
 
         The number of trackers may change at any time, so this function should be called before use as opposed to once on startup.
+        
+        For newer headsets being used on a game built against an old SDK version, we may simulate three CV1 trackers to maintain backwards compatibility.
         """,
 
         session
@@ -669,6 +707,8 @@ ovr_IdentifyClient(
 
         #Initialize() must have first been called in order for this to succeed, otherwise the returned {@code trackerDescArray} will be zero-initialized. The
         data returned by this function can change at runtime.
+        
+        For newer headsets being used on a game built against an old SDK version, we may simulate three CV1 trackers to maintain backwards compatibility.
         """,
 
         session,
@@ -879,7 +919,11 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
 
     ovrTrackerPose(
         "GetTrackerPose",
-        "Returns the ##OVRTrackerPose for the given attached tracker.",
+        """
+        Returns the ##OVRTrackerPose for the given attached tracker.
+        
+        For newer headsets being used on a game built against an old SDK version, we may simulate three CV1 trackers to maintain backwards compatibility.
+        """,
 
         session,
         unsigned_int("trackerPoseIndex", "index of the tracker being requested.")
