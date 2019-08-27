@@ -82,7 +82,8 @@ import org.lwjgl.vulkan.*;
  * Usage of this function is not recommended and usually not needed. {@link #vmaAllocateMemoryPages AllocateMemoryPages} function is also provided for creating multiple
  * allocations at once, which may be useful for sparse binding.</li>
  * <li>If you already have a buffer or an image created, you want to allocate memory for it and then you will bind it yourself, you can use function
- * {@link #vmaAllocateMemoryForBuffer AllocateMemoryForBuffer}, {@link #vmaAllocateMemoryForImage AllocateMemoryForImage}. For binding you should use functions: {@link #vmaBindBufferMemory BindBufferMemory}, {@link #vmaBindImageMemory BindImageMemory}.</li>
+ * {@link #vmaAllocateMemoryForBuffer AllocateMemoryForBuffer}, {@link #vmaAllocateMemoryForImage AllocateMemoryForImage}. For binding you should use functions: {@link #vmaBindBufferMemory BindBufferMemory}, {@link #vmaBindImageMemory BindImageMemory} or their
+ * extended versions: {@link #vmaBindBufferMemory2 BindBufferMemory2}, {@link #vmaBindImageMemory2 BindImageMemory2}.</li>
  * <li>If you want to create a buffer or an image, allocate memory for it and bind them together, all in one call, you can use function {@link #vmaCreateBuffer CreateBuffer},
  * {@link #vmaCreateImage CreateImage}. This is the easiest and recommended way to use this library.</li>
  * </ol>
@@ -534,8 +535,9 @@ import org.lwjgl.vulkan.*;
  * 
  * <ul>
  * <li>Recreate buffers and images that were bound to allocations that were defragmented and bind them with their new places in memory. You must use
- * {@code vkDestroyBuffer()}, {@code vkDestroyImage()}, {@code vkCreateBuffer()}, {@code vkCreateImage()} for that purpose and NOT {@link #vmaDestroyBuffer DestroyBuffer},
- * {@link #vmaDestroyImage DestroyImage}, {@link #vmaCreateBuffer CreateBuffer}, {@link #vmaCreateImage CreateImage}, because you don't need to destroy or create allocation objects!</li>
+ * {@code vkDestroyBuffer()}, {@code vkDestroyImage()}, {@code vkCreateBuffer()}, {@code vkCreateImage()}, {@link #vmaBindBufferMemory BindBufferMemory}, {@link #vmaBindImageMemory BindImageMemory} for
+ * that purpose and NOT {@link #vmaDestroyBuffer DestroyBuffer}, {@link #vmaDestroyImage DestroyImage}, {@link #vmaCreateBuffer CreateBuffer}, {@link #vmaCreateImage CreateImage}, because you don't need to destroy or create allocation
+ * objects!</li>
  * <li>Recreate views and update descriptors that point to these buffers and images.</li>
  * </ul>
  * 
@@ -589,7 +591,7 @@ import org.lwjgl.vulkan.*;
  *         // Bind new buffer to new memory region. Data contained in it is already moved.
  *         VmaAllocationInfo allocInfo;
  *         vmaGetAllocationInfo(allocator, allocations[i], &amp;allocInfo);
- *         vkBindBufferMemory(device, buffers[i], allocInfo.deviceMemory, allocInfo.offset);
+ *         vmaBindBufferMemory(allocator, allocations[i], buffers[i]);
  *     }
  * }</code></pre>
  * 
@@ -663,7 +665,7 @@ import org.lwjgl.vulkan.*;
  *         // Bind new buffer to new memory region. Data contained in it is already moved.
  *         VmaAllocationInfo allocInfo;
  *         vmaGetAllocationInfo(allocator, allocations[i], &amp;allocInfo);
- *         vkBindBufferMemory(device, buffers[i], allocInfo.deviceMemory, allocInfo.offset);
+ *         vmaBindBufferMemory(allocator, allocations[i], buffers[i]);
  *     }
  * }</code></pre>
  * 
@@ -978,6 +980,11 @@ import org.lwjgl.vulkan.*;
  * 
  * <h4>Usage</h4>
  * 
+ * <p>Recording functionality is disabled by default. To enable it, define following macro before every include of this library:</p>
+ * 
+ * <pre><code>
+ * #define VMA_RECORDING_ENABLED 1</code></pre>
+ * 
  * <p><b>To record sequence of calls to a file:</b> Fill in {@link VmaAllocatorCreateInfo}{@code ::pRecordSettings} member while creating {@code VmaAllocator}
  * object. File is opened and written during whole lifetime of the allocator.</p>
  * 
@@ -999,13 +1006,28 @@ import org.lwjgl.vulkan.*;
  * errors.</li>
  * <li>Current implementation of recording in VMA, as well as {@code VmaReplay} application, is coded and tested only on Windows. Inclusion of recording
  * code is driven by {@code VMA_RECORDING_ENABLED} macro. Support for other platforms should be easy to add. Contributions are welcomed.</li>
- * <li>Currently calls to {@link #vmaDefragment Defragment} function are not recorded.</li>
  * </ul>
  * 
  * <h3>Recommended usage patterns</h3>
  * 
  * <p>See also slides from talk: <a href="https://www.gdcvault.com/play/1025458/Advanced-Graphics-Techniques-Tutorial-New">Sawicki, Adam. Advanced Graphics
  * Techniques Tutorial: Memory management in Vulkan and DX12. Game Developers Conference, 2018</a></p>
+ * 
+ * <h4>Common mistakes</h4>
+ * 
+ * <p><b>Use of {@code CPU_TO_GPU} instead of {@code CPU_ONLY} memory</b></p>
+ * 
+ * <p>{@link #VMA_MEMORY_USAGE_CPU_TO_GPU MEMORY_USAGE_CPU_TO_GPU} is recommended only for resources that will be mapped and written by the CPU, as well as read directly by the GPU - like some
+ * buffers or textures updated every frame (dynamic). If you create a staging copy of a resource to be written by CPU and then used as a source of
+ * transfer to another resource placed in the GPU memory, that staging resource should be created with {@link #VMA_MEMORY_USAGE_CPU_ONLY MEMORY_USAGE_CPU_ONLY}. Please read the
+ * descriptions of these enums carefully for details.</p>
+ * 
+ * <p><b>Unnecessary use of custom pools</b></p>
+ * 
+ * <p>Custom memory pools may be useful for special purposes - when you want to keep certain type of resources separate e.g. to reserve minimum amount of
+ * memory for them, limit maximum amount of memory they can occupy, or make some of them push out the other through the mechanism of lost allocations. For
+ * most resources this is not needed and so it is not recommended to create {@code VmaPool} objects and allocations out of them. Allocating from the
+ * default pool is sufficient.</p>
  * 
  * <h4>Simple patterns</h4>
  * 
@@ -1117,7 +1139,7 @@ import org.lwjgl.vulkan.*;
  * existing memory blocks from GPU VRAM to system RAM (which degrades performance). This behavior is implementation-dependant - it depends on GPU vendor
  * and graphics driver.</p>
  * 
- * <p>On AMD cards it can be controlled while creating Vulkan device object by using {@code VK_AMD_memory_allocation_behavior} extension, if available.</p>
+ * <p>On AMD cards it can be controlled while creating Vulkan device object by using {@code VK_AMD_memory_overallocation_behavior} extension, if available.</p>
  * 
  * <p>Alternatively, if you want to test how your program behaves with limited amount of Vulkan devicememory available without switching your graphics card
  * to one that really has smaller VRAM, you can use a feature of this library intended for this purpose. To do it, fill optional member
@@ -1290,11 +1312,21 @@ public class Vma {
      * <pre><code>
      * &gt; vkBindBufferMemory(): Binding memory to buffer 0x2d but vkGetBufferMemoryRequirements() has not been called on that buffer.</code></pre>
      * </li>
+     * <li>{@link #VMA_ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT} - 
+     * Enables usage of {@code VK_KHR_bind_memory2} extension.
+     * 
+     * <p>You may set this flag only if you found out that this device extension is supported, you enabled it while creating Vulkan device passed as
+     * {@link VmaAllocatorCreateInfo}{@code ::device}, and you want it to be used internally by this library.</p>
+     * 
+     * <p>The extension provides functions {@code vkBindBufferMemory2KHR} and {@code vkBindImageMemory2KHR}, which allow to pass a chain of {@code pNext}
+     * structures while binding. This flag is required if you use {@code pNext} parameter in {@link #vmaBindBufferMemory2 BindBufferMemory2} or {@link #vmaBindImageMemory2 BindImageMemory2}.</p>
+     * </li>
      * </ul>
      */
     public static final int
         VMA_ALLOCATOR_CREATE_EXTERNALLY_SYNCHRONIZED_BIT  = 0x1,
-        VMA_ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT = 0x2;
+        VMA_ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT = 0x2,
+        VMA_ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT         = 0x4;
 
     /**
      * {@code VmaMemoryUsage}
@@ -2018,20 +2050,11 @@ public class Vma {
     public static native int nvmaResizeAllocation(long allocator, long allocation, long newSize);
 
     /**
-     * Tries to resize an allocation in place, if there is enough free memory after it.
+     * Deprecated.
      * 
-     * <p>Tries to change allocation's size without moving or reallocating it. You can both shrink and grow allocation size. When growing, it succeeds only when
-     * the allocation belongs to a memory block with enough free space after it.</p>
-     * 
-     * <p>After successful call to this function, {@link VmaAllocationInfo}{@code ::size} of this allocation changes. All other parameters stay the same: memory pool
-     * and type, alignment, offset, mapped pointer.</p>
-     * 
-     * <ul>
-     * <li>Calling this function on allocation that is in lost state fails with result {@code VK_ERROR_VALIDATION_FAILED_EXT}.</li>
-     * <li>Calling this function with {@code newSize} same as current allocation size does nothing and returns {@code VK_SUCCESS}.</li>
-     * <li>Resizing dedicated allocations, as well as allocations created in pools that use linear or buddy algorithm, is not supported. The function returns
-     * {@code VK_ERROR_FEATURE_NOT_PRESENT} in such cases. Support may be added in the future.</li>
-     * </ul>
+     * <p>In version 2.2.0 it used to try to change allocation's size without moving or reallocating it. In current version it returns {@code VK_SUCCESS} only if
+     * {@code newSize} equals current allocation's size. Otherwise returns {@code VK_ERROR_OUT_OF_POOL_MEMORY}, indicating that allocation's size could not be
+     * changed.</p>
      *
      * @return {@code VK_SUCCESS} if allocation's size has been successfully changed. Returns {@code VK_ERROR_OUT_OF_POOL_MEMORY} if allocation's size could not be
      *         changed.
@@ -2436,6 +2459,31 @@ public class Vma {
         return nvmaBindBufferMemory(allocator, allocation, buffer);
     }
 
+    // --- [ vmaBindBufferMemory2 ] ---
+
+    /** Unsafe version of: {@link #vmaBindBufferMemory2 BindBufferMemory2} */
+    public static native int nvmaBindBufferMemory2(long allocator, long allocation, long allocationLocalOffset, long buffer, long pNext);
+
+    /**
+     * Binds buffer to allocation with additional parameters.
+     * 
+     * <p>This function is similar to {@link #vmaBindBufferMemory BindBufferMemory}, but it provides additional parameters.</p>
+     * 
+     * <p>If {@code pNext} is not null, {@code VmaAllocator} object must have been created with {@link #VMA_ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT} flag. Otherwise the call
+     * fails.</p>
+     *
+     * @param allocationLocalOffset additional offset to be added while binding, relative to the beginning of the {@code allocatio}n. Normally it should be 0.
+     * @param pNext                 a chain of structures to be attached to {@code VkBindBufferMemoryInfoKHR} structure used internally. Normally it should be {@code null}.
+     */
+    @NativeType("VkResult")
+    public static int vmaBindBufferMemory2(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation, @NativeType("VkDeviceSize") long allocationLocalOffset, @NativeType("VkBuffer") long buffer, @NativeType("void const *") long pNext) {
+        if (CHECKS) {
+            check(allocator);
+            check(allocation);
+        }
+        return nvmaBindBufferMemory2(allocator, allocation, allocationLocalOffset, buffer, pNext);
+    }
+
     // --- [ vmaBindImageMemory ] ---
 
     /** Unsafe version of: {@link #vmaBindImageMemory BindImageMemory} */
@@ -2458,6 +2506,31 @@ public class Vma {
             check(allocation);
         }
         return nvmaBindImageMemory(allocator, allocation, image);
+    }
+
+    // --- [ vmaBindImageMemory2 ] ---
+
+    /** Unsafe version of: {@link #vmaBindImageMemory2 BindImageMemory2} */
+    public static native int nvmaBindImageMemory2(long allocator, long allocation, long allocationLocalOffset, long image, long pNext);
+
+    /**
+     * Binds image to allocation with additional parameters.
+     * 
+     * <p>This function is similar to {@link #vmaBindImageMemory BindImageMemory}, but it provides additional parameters.</p>
+     * 
+     * <p>If {@code pNext} is not null, {@code VmaAllocator} object must have been created with {@link #VMA_ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT} flag. Otherwise the call
+     * fails.</p>
+     *
+     * @param allocationLocalOffset additional offset to be added while binding, relative to the beginning of the {@code allocatio}n. Normally it should be 0.
+     * @param pNext                 a chain of structures to be attached to {@code VkBindImageMemoryInfoKHR} structure used internally. Normally it should be null.
+     */
+    @NativeType("VkResult")
+    public static int vmaBindImageMemory2(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation, @NativeType("VkDeviceSize") long allocationLocalOffset, @NativeType("VkImage") long image, @NativeType("void const *") long pNext) {
+        if (CHECKS) {
+            check(allocator);
+            check(allocation);
+        }
+        return nvmaBindImageMemory2(allocator, allocation, allocationLocalOffset, image, pNext);
     }
 
     // --- [ vmaCreateBuffer ] ---

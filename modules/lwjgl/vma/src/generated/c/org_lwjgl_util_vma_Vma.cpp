@@ -11,6 +11,7 @@ DISABLE_WARNINGS()
 #define VMA_SYSTEM_ALIGNED_MALLOC(size, alignment) org_lwjgl_aligned_alloc((alignment), (size))
 #define VMA_SYSTEM_FREE(ptr) org_lwjgl_aligned_free(ptr)
 #define VMA_DEDICATED_ALLOCATION 1
+#define VMA_BIND_MEMORY2 1
 #include "vk_mem_alloc.h"
 ENABLE_WARNINGS()
 
@@ -298,11 +299,27 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaBindBufferMemory(JNIEnv *
     return (jint)vmaBindBufferMemory(allocator, allocation, (VkBuffer)buffer);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaBindBufferMemory2(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong allocationAddress, jlong allocationLocalOffset, jlong buffer, jlong pNextAddress) {
+    VmaAllocator allocator = (VmaAllocator)(intptr_t)allocatorAddress;
+    VmaAllocation allocation = (VmaAllocation)(intptr_t)allocationAddress;
+    void const *pNext = (void const *)(intptr_t)pNextAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)vmaBindBufferMemory2(allocator, allocation, (VkDeviceSize)allocationLocalOffset, (VkBuffer)buffer, pNext);
+}
+
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaBindImageMemory(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong allocationAddress, jlong image) {
     VmaAllocator allocator = (VmaAllocator)(intptr_t)allocatorAddress;
     VmaAllocation allocation = (VmaAllocation)(intptr_t)allocationAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jint)vmaBindImageMemory(allocator, allocation, (VkImage)image);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaBindImageMemory2(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong allocationAddress, jlong allocationLocalOffset, jlong image, jlong pNextAddress) {
+    VmaAllocator allocator = (VmaAllocator)(intptr_t)allocatorAddress;
+    VmaAllocation allocation = (VmaAllocation)(intptr_t)allocationAddress;
+    void const *pNext = (void const *)(intptr_t)pNextAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)vmaBindImageMemory2(allocator, allocation, (VkDeviceSize)allocationLocalOffset, (VkImage)image, pNext);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaCreateBuffer(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong pBufferCreateInfoAddress, jlong pAllocationCreateInfoAddress, jlong pBufferAddress, jlong pAllocationAddress, jlong pAllocationInfoAddress) {
