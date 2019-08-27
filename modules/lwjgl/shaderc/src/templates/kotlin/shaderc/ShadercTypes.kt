@@ -18,6 +18,8 @@ val shaderc_optimization_level = "shaderc_optimization_level".enumType
 val shaderc_profile = "shaderc_profile".enumType
 val shaderc_shader_kind = "shaderc_shader_kind".enumType
 val shaderc_source_language = "shaderc_source_language".enumType
+val shaderc_spirv_version = "shaderc_spirv_version".enumType
+val shaderc_spvc_msl_platform = "shaderc_spvc_msl_platform".enumType
 val shaderc_target_env = "shaderc_target_env".enumType
 val shaderc_uniform_kind = "shaderc_uniform_kind".enumType
 

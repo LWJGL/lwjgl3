@@ -26,9 +26,10 @@ public class Shaderc {
      * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #shaderc_target_env_vulkan target_env_vulkan} - create SPIR-V under Vulkan semantics</li>
-     * <li>{@link #shaderc_target_env_opengl target_env_opengl} - create SPIR-V under OpenGL semantics. SPIR-V code generation is not supported for shaders under OpenGL compatibility profile.</li>
-     * <li>{@link #shaderc_target_env_opengl_compat target_env_opengl_compat} - create SPIR-V under OpenGL semantics, including compatibility profile functions</li>
+     * <li>{@link #shaderc_target_env_vulkan target_env_vulkan} - SPIR-V under Vulkan semantics</li>
+     * <li>{@link #shaderc_target_env_opengl target_env_opengl} - SPIR-V under OpenGL semantics. SPIR-V code generation is not supported for shaders under OpenGL compatibility profile.</li>
+     * <li>{@link #shaderc_target_env_opengl_compat target_env_opengl_compat} - SPIR-V under OpenGL semantics, including compatibility profile functions</li>
+     * <li>{@link #shaderc_target_env_webgpu target_env_webgpu} - SPIR-V under WebGPU semantics</li>
      * <li>{@link #shaderc_target_env_default target_env_default}</li>
      * </ul>
      */
@@ -36,6 +37,7 @@ public class Shaderc {
         shaderc_target_env_vulkan        = 0,
         shaderc_target_env_opengl        = 1,
         shaderc_target_env_opengl_compat = 2,
+        shaderc_target_env_webgpu        = 3,
         shaderc_target_env_default       = shaderc_target_env_vulkan;
 
     /**
@@ -47,12 +49,34 @@ public class Shaderc {
      * <li>{@link #shaderc_env_version_vulkan_1_0 env_version_vulkan_1_0}</li>
      * <li>{@link #shaderc_env_version_vulkan_1_1 env_version_vulkan_1_1}</li>
      * <li>{@link #shaderc_env_version_opengl_4_5 env_version_opengl_4_5}</li>
+     * <li>{@link #shaderc_env_version_webgpu env_version_webgpu}</li>
      * </ul>
      */
     public static final int
         shaderc_env_version_vulkan_1_0 = ((1 << 22)),
         shaderc_env_version_vulkan_1_1 = ((1 << 22) | (1 << 12)),
-        shaderc_env_version_opengl_4_5 = 450;
+        shaderc_env_version_opengl_4_5 = 450,
+        shaderc_env_version_webgpu     = 451;
+
+    /**
+     * The known versions of SPIR-V. ({@code shaderc_spirv_version}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #shaderc_spirv_version_1_0 spirv_version_1_0}</li>
+     * <li>{@link #shaderc_spirv_version_1_1 spirv_version_1_1}</li>
+     * <li>{@link #shaderc_spirv_version_1_2 spirv_version_1_2}</li>
+     * <li>{@link #shaderc_spirv_version_1_3 spirv_version_1_3}</li>
+     * <li>{@link #shaderc_spirv_version_1_4 spirv_version_1_4}</li>
+     * </ul>
+     */
+    public static final int
+        shaderc_spirv_version_1_0 = 0x10000,
+        shaderc_spirv_version_1_1 = 0x10100,
+        shaderc_spirv_version_1_2 = 0x10200,
+        shaderc_spirv_version_1_3 = 0x10300,
+        shaderc_spirv_version_1_4 = 0x10400;
 
     /**
      * Indicate the status of a compilation. ({@code shaderc_compilation_status})
@@ -67,16 +91,18 @@ public class Shaderc {
      * <li>{@link #shaderc_compilation_status_null_result_object compilation_status_null_result_object}</li>
      * <li>{@link #shaderc_compilation_status_invalid_assembly compilation_status_invalid_assembly}</li>
      * <li>{@link #shaderc_compilation_status_validation_error compilation_status_validation_error}</li>
+     * <li>{@link #shaderc_compilation_status_transformation_error compilation_status_transformation_error}</li>
      * </ul>
      */
     public static final int
-        shaderc_compilation_status_success            = 0,
-        shaderc_compilation_status_invalid_stage      = 1,
-        shaderc_compilation_status_compilation_error  = 2,
-        shaderc_compilation_status_internal_error     = 3,
-        shaderc_compilation_status_null_result_object = 4,
-        shaderc_compilation_status_invalid_assembly   = 5,
-        shaderc_compilation_status_validation_error   = 6;
+        shaderc_compilation_status_success              = 0,
+        shaderc_compilation_status_invalid_stage        = 1,
+        shaderc_compilation_status_compilation_error    = 2,
+        shaderc_compilation_status_internal_error       = 3,
+        shaderc_compilation_status_null_result_object   = 4,
+        shaderc_compilation_status_invalid_assembly     = 5,
+        shaderc_compilation_status_validation_error     = 6,
+        shaderc_compilation_status_transformation_error = 7;
 
     /**
      * Source language kind. ({@code shaderc_source_language})
@@ -487,6 +513,7 @@ public class Shaderc {
             compile_options_set_include_callbacks                       = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_include_callbacks"),
             compile_options_set_suppress_warnings                       = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_suppress_warnings"),
             compile_options_set_target_env                              = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_target_env"),
+            compile_options_set_target_spirv                            = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_target_spirv"),
             compile_options_set_warnings_as_errors                      = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_warnings_as_errors"),
             compile_options_set_limit                                   = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_limit"),
             compile_options_set_auto_bind_uniforms                      = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_auto_bind_uniforms"),
@@ -498,6 +525,8 @@ public class Shaderc {
             compile_options_set_hlsl_register_set_and_binding_for_stage = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_hlsl_register_set_and_binding_for_stage"),
             compile_options_set_hlsl_register_set_and_binding           = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_hlsl_register_set_and_binding"),
             compile_options_set_hlsl_functionality1                     = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_hlsl_functionality1"),
+            compile_options_set_invert_y                                = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_invert_y"),
+            compile_options_set_nan_clamp                               = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_nan_clamp"),
             compile_into_spv                                            = apiGetFunctionAddress(SHADERC, "shaderc_compile_into_spv"),
             compile_into_spv_assembly                                   = apiGetFunctionAddress(SHADERC, "shaderc_compile_into_spv_assembly"),
             compile_into_preprocessed_text                              = apiGetFunctionAddress(SHADERC, "shaderc_compile_into_preprocessed_text"),
@@ -742,6 +771,23 @@ public class Shaderc {
         invokePV(options, target, version, __functionAddress);
     }
 
+    // --- [ shaderc_compile_options_set_target_spirv ] ---
+
+    /**
+     * Sets the target SPIR-V version.
+     * 
+     * <p>The generated module will use this version of SPIR-V. Each target environment determines what versions of SPIR-V it can consume. Defaults to the
+     * highest version of SPIR-V 1.0 which is required to be supported by the target environment. E.g. Default to SPIR-V 1.0 for Vulkan 1.0 and SPIR-V 1.3 for
+     * Vulkan 1.1.</p>
+     */
+    public static void shaderc_compile_options_set_target_spirv(@NativeType("shaderc_compile_options_t") long options, @NativeType("shaderc_spirv_version") int version) {
+        long __functionAddress = Functions.compile_options_set_target_spirv;
+        if (CHECKS) {
+            check(options);
+        }
+        invokePV(options, version, __functionAddress);
+    }
+
     // --- [ shaderc_compile_options_set_warnings_as_errors ] ---
 
     /**
@@ -931,6 +977,33 @@ public class Shaderc {
     /** Sets whether the compiler should enable extension {@code SPV_GOOGLE_hlsl_functionality1}. */
     public static void shaderc_compile_options_set_hlsl_functionality1(@NativeType("shaderc_compile_options_t") long options, @NativeType("bool") boolean enable) {
         long __functionAddress = Functions.compile_options_set_hlsl_functionality1;
+        if (CHECKS) {
+            check(options);
+        }
+        invokePV(options, enable, __functionAddress);
+    }
+
+    // --- [ shaderc_compile_options_set_invert_y ] ---
+
+    /** Sets whether the compiler should invert {@code position.Y} output in vertex shader. */
+    public static void shaderc_compile_options_set_invert_y(@NativeType("shaderc_compile_options_t") long options, @NativeType("bool") boolean enable) {
+        long __functionAddress = Functions.compile_options_set_invert_y;
+        if (CHECKS) {
+            check(options);
+        }
+        invokePV(options, enable, __functionAddress);
+    }
+
+    // --- [ shaderc_compile_options_set_nan_clamp ] ---
+
+    /**
+     * Sets whether the compiler generates code for {@code max} and {@code min} builtins which, if given a {@code NaN} operand, will return the other operand.
+     * 
+     * <p>Similarly, the {@code clamp} builtin will favour the non-{@code NaN} operands, as if {@code clamp} were implemented as a composition of {@code max} and
+     * {@code min}.</p>
+     */
+    public static void shaderc_compile_options_set_nan_clamp(@NativeType("shaderc_compile_options_t") long options, @NativeType("bool") boolean enable) {
+        long __functionAddress = Functions.compile_options_set_nan_clamp;
         if (CHECKS) {
             check(options);
         }

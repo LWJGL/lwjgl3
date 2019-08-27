@@ -16,6 +16,13 @@ val ShadercSpvc = "ShadercSpvc".nativeClass(Module.SHADERC, prefix = "shaderc_sp
     documentation =
         "Native bindings to the libshaderc_spvc C API of the ${url("https://github.com/google/shaderc/", "shaderc")} library."
 
+    EnumConstant(
+        "",
+
+        "msl_platform_ios".enum,
+        "msl_platform_macos".enum
+    )
+
     shaderc_spvc_compiler_t(
         "compiler_initialize",
         """
@@ -93,11 +100,38 @@ val ShadercSpvc = "ShadercSpvc".nativeClass(Module.SHADERC, prefix = "shaderc_sp
     )
 
     void(
+        "compile_options_set_robust_buffer_access_pass",
+        """
+        If true, enable robust buffer access pass in the spirv-opt, meaning:
+ 
+        Inject code to clamp indexed accesses to buffers and internal arrays, providing guarantees satisfying Vulkan's {@code robustBufferAccess} rules. This
+        is useful when an implementation does not support robust-buffer access as a driver option.
+        """,
+
+        shaderc_spvc_compile_options_t("options", ""),
+        bool("b", "")
+    )
+
+    void(
         "compile_options_set_source_env",
         """
         Sets the source shader environment, affecting which warnings or errors will be issued during validation.
 
         Default value for environment is Vulkan 1.0.
+        """,
+
+        shaderc_spvc_compile_options_t("options", ""),
+        shaderc_target_env("env", ""),
+        shaderc_env_version("version", "")
+    )
+
+    void(
+        "compile_options_set_target_env",
+        """
+        Sets the target shader environment, if this is different from the source environment, then a transform between the environments will be performed if
+        possible.
+        
+        Currently only WebGPU <-> Vulkan 1.1 are defined. Default value for environment is Vulkan 1.0.
         """,
 
         shaderc_spvc_compile_options_t("options", ""),
@@ -145,6 +179,31 @@ val ShadercSpvc = "ShadercSpvc".nativeClass(Module.SHADERC, prefix = "shaderc_sp
         uint32_t("version", "")
     )
 
+    //
+    void(
+        "compile_options_set_flatten_multidimensional_arrays",
+        "If true, flatten multidimensional arrays, e.g. {@code foo[a][b][c] -> foo[a*b*c]}. Default is false.",
+
+        shaderc_spvc_compile_options_t("options", ""),
+        bool("b", "")
+    )
+
+    void(
+        "compile_options_set_es",
+        "Force interpretion as ES, or not.  Default is to detect from source.",
+
+        shaderc_spvc_compile_options_t("options", ""),
+        bool("b", "")
+    )
+
+    void(
+        "compile_options_set_glsl_emit_push_constant_as_ubo",
+        "If true, emit push constants as uniform buffer objects.  Default is false.",
+
+        shaderc_spvc_compile_options_t("options", ""),
+        bool("b", "")
+    )
+
     void(
         "compile_options_set_msl_language_version",
         """
@@ -158,7 +217,67 @@ val ShadercSpvc = "ShadercSpvc".nativeClass(Module.SHADERC, prefix = "shaderc_sp
     )
 
     void(
-        "compile_options_set_shader_model",
+        "compile_options_set_msl_swizzle_texture_samples",
+        "If true, swizzle MSL texture samples.  Default is false.",
+
+        shaderc_spvc_compile_options_t("options", ""),
+        bool("b", "")
+    )
+
+    void(
+        "compile_options_set_msl_platform",
+        "Choose MSL platform.  Default is MacOS.",
+
+        shaderc_spvc_compile_options_t("options", ""),
+        shaderc_spvc_msl_platform("platform", "")
+    )
+
+    void(
+        "compile_options_set_msl_pad_fragment_output",
+        "If true, pad MSL fragment output. Default is false.",
+
+        shaderc_spvc_compile_options_t("options", ""),
+        bool("b", "")
+    )
+
+    void(
+        "compile_options_set_msl_capture",
+        "If true, capture MSL output to buffer. Default is false.",
+
+        shaderc_spvc_compile_options_t("options", ""),
+        bool("b", "")
+    )
+
+    void(
+        "compile_options_set_msl_domain_lower_left",
+        "If true, flip the Y-coord of the built-in {@code TessCoord}. Default is top left.",
+
+        shaderc_spvc_compile_options_t("options", ""),
+        bool("b", "")
+    )
+
+    void(
+        "compile_options_set_msl_argument_buffers",
+        "Enable use of MSL 2.0 indirect argument buffers. Default is not to use them.",
+
+        shaderc_spvc_compile_options_t("options", ""),
+        bool("b", "")
+    )
+
+    void(
+        "compile_options_set_msl_discrete_descriptor_sets",
+        """
+        When using MSL argument buffers, force "classic" MSL 1.0 binding for the given descriptor sets. This corresponds to {@code VK_KHR_push_descriptor} in
+        Vulkan.
+        """,
+
+        shaderc_spvc_compile_options_t("options", ""),
+        uint32_t.const.p("descriptors", ""),
+        AutoSize("descriptors")..size_t("num_descriptors", "")
+    )
+
+    void(
+        "compile_options_set_hlsl_shader_model",
         """
         Set HLSL shader model.
 
@@ -167,6 +286,22 @@ val ShadercSpvc = "ShadercSpvc".nativeClass(Module.SHADERC, prefix = "shaderc_sp
 
         shaderc_spvc_compile_options_t("options", ""),
         uint32_t("model", "")
+    )
+
+    void(
+        "compile_options_set_hlsl_point_size_compat",
+        "If true, ignore {@code PointSize}. Default is false.",
+
+        shaderc_spvc_compile_options_t("options", ""),
+        bool("b", "")
+    )
+
+    void(
+        "compile_options_set_hlsl_point_coord_compat",
+        "If true, ignore {@code PointCoord}. Default is false.",
+
+        shaderc_spvc_compile_options_t("options", ""),
+        bool("b", "")
     )
 
     void(
@@ -191,6 +326,14 @@ val ShadercSpvc = "ShadercSpvc".nativeClass(Module.SHADERC, prefix = "shaderc_sp
 
         Default is false.
         """,
+
+        shaderc_spvc_compile_options_t("options", ""),
+        bool("b", "")
+    )
+
+    void(
+        "compile_options_set_validate",
+        "Set if validation should be performed. Default is true.",
 
         shaderc_spvc_compile_options_t("options", ""),
         bool("b", "")

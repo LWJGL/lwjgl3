@@ -19,11 +19,10 @@ val Shaderc = "Shaderc".nativeClass(Module.SHADERC, prefix = "shaderc_", prefixM
     EnumConstant(
         "{@code shaderc_target_env}",
 
-        "target_env_vulkan".enum("create SPIR-V under Vulkan semantics", "0"),
-        "target_env_opengl".enum(
-            "create SPIR-V under OpenGL semantics. SPIR-V code generation is not supported for shaders under OpenGL compatibility profile."
-        ),
-        "target_env_opengl_compat".enum("create SPIR-V under OpenGL semantics, including compatibility profile functions"),
+        "target_env_vulkan".enum("SPIR-V under Vulkan semantics", "0"),
+        "target_env_opengl".enum("SPIR-V under OpenGL semantics. SPIR-V code generation is not supported for shaders under OpenGL compatibility profile."),
+        "target_env_opengl_compat".enum("SPIR-V under OpenGL semantics, including compatibility profile functions"),
+        "target_env_webgpu".enum("SPIR-V under WebGPU semantics"),
         "target_env_default".enum("", "shaderc_target_env_vulkan")
     )
 
@@ -32,7 +31,18 @@ val Shaderc = "Shaderc".nativeClass(Module.SHADERC, prefix = "shaderc_", prefixM
 
         "env_version_vulkan_1_0".enum("", "((1 << 22))"),
         "env_version_vulkan_1_1".enum("", "((1 << 22) | (1 << 12))"),
-        "env_version_opengl_4_5".enum("", "450")
+        "env_version_opengl_4_5".enum("", "450"),
+        "env_version_webgpu".enum
+    )
+
+    EnumConstant(
+        "The known versions of SPIR-V. ({@code shaderc_spirv_version}",
+
+        "spirv_version_1_0".enum("", 0x010000),
+        "spirv_version_1_1".enum("", 0x010100),
+        "spirv_version_1_2".enum("", 0x010200),
+        "spirv_version_1_3".enum("", 0x010300),
+        "spirv_version_1_4".enum("", 0x010400)
     )
 
     EnumConstant(
@@ -44,7 +54,8 @@ val Shaderc = "Shaderc".nativeClass(Module.SHADERC, prefix = "shaderc_", prefixM
         "compilation_status_internal_error".enum("unexpected failure"),
         "compilation_status_null_result_object".enum,
         "compilation_status_invalid_assembly".enum,
-        "compilation_status_validation_error".enum
+        "compilation_status_validation_error".enum,
+        "compilation_status_transformation_error".enum
     )
 
     EnumConstant(
@@ -440,6 +451,20 @@ val Shaderc = "Shaderc".nativeClass(Module.SHADERC, prefix = "shaderc_", prefixM
     )
 
     void(
+        "compile_options_set_target_spirv",
+        """
+        Sets the target SPIR-V version.
+        
+        The generated module will use this version of SPIR-V. Each target environment determines what versions of SPIR-V it can consume. Defaults to the
+        highest version of SPIR-V 1.0 which is required to be supported by the target environment. E.g. Default to SPIR-V 1.0 for Vulkan 1.0 and SPIR-V 1.3 for
+        Vulkan 1.1.
+        """,
+
+        shaderc_compile_options_t("options", ""),
+        shaderc_spirv_version("version", "")
+    )
+
+    void(
         "compile_options_set_warnings_as_errors",
         """
         Sets the compiler mode to treat all warnings as errors.
@@ -552,6 +577,27 @@ val Shaderc = "Shaderc".nativeClass(Module.SHADERC, prefix = "shaderc_", prefixM
     void(
         "compile_options_set_hlsl_functionality1",
         "Sets whether the compiler should enable extension {@code SPV_GOOGLE_hlsl_functionality1}.",
+
+        shaderc_compile_options_t("options", ""),
+        bool("enable", "")
+    )
+
+    void(
+        "compile_options_set_invert_y",
+        "Sets whether the compiler should invert {@code position.Y} output in vertex shader.",
+
+        shaderc_compile_options_t("options", ""),
+        bool("enable", "")
+    )
+
+    void(
+        "compile_options_set_nan_clamp",
+        """
+        Sets whether the compiler generates code for {@code max} and {@code min} builtins which, if given a {@code NaN} operand, will return the other operand.
+        
+        Similarly, the {@code clamp} builtin will favour the non-{@code NaN} operands, as if {@code clamp} were implemented as a composition of {@code max} and
+        {@code min}.
+        """,
 
         shaderc_compile_options_t("options", ""),
         bool("enable", "")
