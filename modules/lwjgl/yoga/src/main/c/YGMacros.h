@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) Facebook, Inc. and its affiliates.
  *
  * This source code is licensed under the MIT license found in the LICENSE
@@ -26,10 +26,19 @@
 // the header is a missmatch for the Yoga ABI.
 #define YG_ENUM_BEGIN(name) NS_ENUM(int, name)
 #define YG_ENUM_END(name)
-#elif defined(LWJGL_WINDOWS)
-#define YG_ENUM_BEGIN(name) enum name : unsigned
-#define YG_ENUM_END(name) name
 #else
 #define YG_ENUM_BEGIN(name) enum name
 #define YG_ENUM_END(name) name
+#endif
+
+#ifdef __GNUC__
+#define YG_DEPRECATED __attribute__((deprecated))
+#elif defined(_MSC_VER)
+#define YG_DEPRECATED __declspec(deprecated)
+#elif __cplusplus >= 201402L
+#if defined(__has_cpp_attribute)
+#if __has_cpp_attribute(deprecated)
+#define YG_DEPRECATED [[deprecated]]
+#endif
+#endif
 #endif

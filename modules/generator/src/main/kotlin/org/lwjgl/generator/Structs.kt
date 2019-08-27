@@ -2145,6 +2145,8 @@ EXTERN_C_EXIT""")
         members.forEach {
             if (it.name === ANONYMOUS && it.isNestedStruct) {
                 index = generateNativeMembers((it.nativeType as StructType).definition.members, index + 1, prefix) // recursion
+            } else if (it is StructMemberPadding) {
+                index++
             } else if (it.bits == -1) {
                 println("${t}buffer[$index] = (jint)offsetof($nativeName, $prefix${if (it.has<NativeName>()) it.get<NativeName>().nativeName else it.name});")
                 index++

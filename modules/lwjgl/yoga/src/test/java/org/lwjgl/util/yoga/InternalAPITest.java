@@ -17,72 +17,6 @@ public class InternalAPITest {
 
         YGStyle style = YGNode.create(node).style();
 
-        YGNodeStyleSetDirection(node, YGDirectionRTL);
-        assertEquals(style.direction(), YGDirectionRTL);
-        YGNodeStyleSetDirection(node, YGDirectionLTR);
-        assertEquals(style.direction(), YGDirectionLTR);
-        YGNodeStyleSetDirection(node, YGDirectionInherit);
-        assertEquals(style.direction(), YGDirectionInherit);
-
-        YGNodeStyleSetFlexDirection(node, YGFlexDirectionRowReverse);
-        assertEquals(style.flexDirection(), YGFlexDirectionRowReverse);
-        YGNodeStyleSetFlexDirection(node, YGFlexDirectionColumnReverse);
-        assertEquals(style.flexDirection(), YGFlexDirectionColumnReverse);
-        YGNodeStyleSetFlexDirection(node, YGFlexDirectionColumn);
-        assertEquals(style.flexDirection(), YGFlexDirectionColumn);
-
-        YGNodeStyleSetJustifyContent(node, YGJustifySpaceEvenly);
-        assertEquals(style.justifyContent(), YGJustifySpaceEvenly);
-        YGNodeStyleSetJustifyContent(node, YGJustifyCenter);
-        assertEquals(style.justifyContent(), YGJustifyCenter);
-        YGNodeStyleSetJustifyContent(node, YGJustifyFlexStart);
-        assertEquals(style.justifyContent(), YGJustifyFlexStart);
-
-        YGNodeStyleSetAlignContent(node, YGAlignSpaceAround);
-        assertEquals(style.alignContent(), YGAlignSpaceAround);
-        YGNodeStyleSetAlignContent(node, YGAlignFlexStart);
-        assertEquals(style.alignContent(), YGAlignFlexStart);
-        YGNodeStyleSetAlignContent(node, YGAlignAuto);
-        assertEquals(style.alignContent(), YGAlignAuto);
-
-        YGNodeStyleSetAlignItems(node, YGAlignSpaceAround);
-        assertEquals(style.alignItems(), YGAlignSpaceAround);
-        YGNodeStyleSetAlignItems(node, YGAlignFlexStart);
-        assertEquals(style.alignItems(), YGAlignFlexStart);
-        YGNodeStyleSetAlignItems(node, YGAlignAuto);
-        assertEquals(style.alignItems(), YGAlignAuto);
-
-        YGNodeStyleSetAlignSelf(node, YGAlignSpaceAround);
-        assertEquals(style.alignSelf(), YGAlignSpaceAround);
-        YGNodeStyleSetAlignSelf(node, YGAlignFlexStart);
-        assertEquals(style.alignSelf(), YGAlignFlexStart);
-        YGNodeStyleSetAlignSelf(node, YGAlignAuto);
-        assertEquals(style.alignSelf(), YGAlignAuto);
-
-        YGNodeStyleSetPositionType(node, YGPositionTypeAbsolute);
-        assertEquals(style.positionType(), YGPositionTypeAbsolute);
-        YGNodeStyleSetPositionType(node, YGPositionTypeRelative);
-        assertEquals(style.positionType(), YGPositionTypeRelative);
-
-        YGNodeStyleSetFlexWrap(node, YGWrapReverse);
-        assertEquals(style.flexWrap(), YGWrapReverse);
-        YGNodeStyleSetFlexWrap(node, YGWrapWrap);
-        assertEquals(style.flexWrap(), YGWrapWrap);
-        YGNodeStyleSetFlexWrap(node, YGWrapNoWrap);
-        assertEquals(style.flexWrap(), YGWrapNoWrap);
-
-        YGNodeStyleSetOverflow(node, YGOverflowScroll);
-        assertEquals(style.overflow(), YGOverflowScroll);
-        YGNodeStyleSetOverflow(node, YGOverflowHidden);
-        assertEquals(style.overflow(), YGOverflowHidden);
-        YGNodeStyleSetOverflow(node, YGOverflowVisible);
-        assertEquals(style.overflow(), YGOverflowVisible);
-
-        YGNodeStyleSetDisplay(node, YGDisplayNone);
-        assertEquals(style.display(), YGDisplayNone);
-        YGNodeStyleSetDisplay(node, YGDisplayFlex);
-        assertEquals(style.display(), YGDisplayFlex);
-
         float MAGICF = 12345678.9f;
 
         YGNodeStyleSetFlex(node, MAGICF);
@@ -196,20 +130,20 @@ public class InternalAPITest {
         assertEquals(layout.dimensions(0), YGNodeLayoutGetWidth(node));
         assertEquals(layout.dimensions(1), YGNodeLayoutGetHeight(node));
 
+        assertEquals(layout.margin(YGEdgeLeft), YGNodeLayoutGetMargin(node, YGEdgeLeft));
         assertEquals(layout.margin(YGEdgeTop), YGNodeLayoutGetMargin(node, YGEdgeTop));
+        assertEquals(layout.margin(YGEdgeRight), YGNodeLayoutGetMargin(node, YGEdgeRight));
         assertEquals(layout.margin(YGEdgeBottom), YGNodeLayoutGetMargin(node, YGEdgeBottom));
-        assertEquals(layout.margin(YGEdgeStart), YGNodeLayoutGetMargin(node, YGEdgeStart));
-        assertEquals(layout.margin(YGEdgeEnd), YGNodeLayoutGetMargin(node, YGEdgeEnd));
 
+        assertEquals(layout.border(YGEdgeLeft), YGNodeLayoutGetBorder(node, YGEdgeLeft));
         assertEquals(layout.border(YGEdgeTop), YGNodeLayoutGetBorder(node, YGEdgeTop));
+        assertEquals(layout.border(YGEdgeRight), YGNodeLayoutGetBorder(node, YGEdgeRight));
         assertEquals(layout.border(YGEdgeBottom), YGNodeLayoutGetBorder(node, YGEdgeBottom));
-        assertEquals(layout.border(YGEdgeStart), YGNodeLayoutGetBorder(node, YGEdgeStart));
-        assertEquals(layout.border(YGEdgeEnd), YGNodeLayoutGetBorder(node, YGEdgeEnd));
 
+        assertEquals(layout.padding(YGEdgeLeft), YGNodeLayoutGetPadding(node, YGEdgeLeft));
         assertEquals(layout.padding(YGEdgeTop), YGNodeLayoutGetPadding(node, YGEdgeTop));
+        assertEquals(layout.padding(YGEdgeRight), YGNodeLayoutGetPadding(node, YGEdgeRight));
         assertEquals(layout.padding(YGEdgeBottom), YGNodeLayoutGetPadding(node, YGEdgeBottom));
-        assertEquals(layout.padding(YGEdgeStart), YGNodeLayoutGetPadding(node, YGEdgeStart));
-        assertEquals(layout.padding(YGEdgeEnd), YGNodeLayoutGetPadding(node, YGEdgeEnd));
 
         YGNodeFree(node);
         YGNodeFree(root);

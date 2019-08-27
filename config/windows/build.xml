@@ -396,7 +396,7 @@ EXPORTS
             <beforeCompile>
                 <compile>
                     <arg value="/I${src.main}"/>
-                    <fileset dir="." includes="${src.main}/*.cpp"/>
+                    <fileset dir="." includes="${src.main}/**/*.cpp"/>
                 </compile>
             </beforeCompile>
         </build>

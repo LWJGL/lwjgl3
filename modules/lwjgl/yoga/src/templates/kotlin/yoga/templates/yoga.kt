@@ -12,7 +12,6 @@ val yoga = "Yoga".nativeClass(Module.YOGA, prefix = "YG", prefixConstant = "YG",
 #define YG_ASSERT(X, message)
 DISABLE_WARNINGS()
 #include "Yoga.h"
-#include "YGMarker.h"
 ENABLE_WARNINGS()""")
 
     cpp = true
@@ -201,31 +200,24 @@ div {
         "WrapReverse".enum
     )
 
-    EnumConstant(
-        "{@code YGMarker}",
-
-        "MarkerLayout".enum,
-        "MarkerMeasure".enum,
-        "MarkerBaselineFn".enum
-    )
-
     YGNodeRef("NodeNew", "", void())
 
     YGNodeRef(
         "NodeNewWithConfig",
         "",
 
-        YGConfigRef.const("config", "")
+        YGConfigRef("config", "")
     )
 
     YGNodeRef(
         "NodeClone",
         "",
 
-        YGNodeRef.const("node", "")
+        YGNodeRef("node", "")
     )
 
-    val node = YGNodeRef.const("node", "")
+    val node = YGNodeRef("node", "")
+    val constNode = YGNodeConstRef("node", "")
 
     void(
         "NodeFree",
@@ -256,14 +248,12 @@ div {
         node
     )
 
-    int32_t("NodeGetInstanceCount", "", void())
-
     void(
         "NodeInsertChild",
         "",
 
         node,
-        YGNodeRef.const("child", ""),
+        YGNodeRef("child", ""),
         uint32_t("index", "")
     )
 
@@ -272,14 +262,14 @@ div {
         "",
 
         node,
-        YGNodeRef.const("child", "")
+        YGNodeRef("child", "")
     )
 
     void(
         "NodeRemoveAllChildren",
         "",
 
-        YGNodeRef.const("node", "")
+        YGNodeRef("node", "")
     )
 
     YGNodeRef(
@@ -315,7 +305,7 @@ div {
         "NodeSetChildren",
         "",
 
-        YGNodeRef.const("owner", ""),
+        YGNodeRef("owner", ""),
         YGNodeRef.const.p("children", ""),
         AutoSize("children")..uint32_t("count", "")
     )
@@ -394,15 +384,15 @@ div {
         float("lastComputedHeight", ""),
         float("marginRow", ""),
         float("marginColumn", ""),
-        YGConfigRef.const("config", "")
+        YGConfigRef("config", "")
     )
 
     void(
         "NodeCopyStyle",
         "",
 
-        YGNodeRef.const("dstNode", ""),
-        YGNodeRef.const("srcNode", "")
+        YGNodeRef("dstNode", ""),
+        YGNodeRef("srcNode", "")
     )
 
     opaque_p(
@@ -530,7 +520,7 @@ div {
         "NodeStyleGetDirection",
         "",
 
-        node
+        constNode
     )
 
     void(
@@ -544,7 +534,7 @@ div {
         "NodeStyleGetFlexDirection",
         "",
 
-        node
+        constNode
     )
 
     void(
@@ -558,7 +548,7 @@ div {
         "NodeStyleGetJustifyContent",
         "",
 
-        node
+        constNode
     )
 
     void(
@@ -572,7 +562,7 @@ div {
         "NodeStyleGetAlignContent",
         "",
 
-        node
+        constNode
     )
 
     void(
@@ -586,7 +576,7 @@ div {
         "NodeStyleGetAlignItems",
         "",
 
-        node
+        constNode
     )
 
     void(
@@ -600,7 +590,7 @@ div {
         "NodeStyleGetAlignSelf",
         "",
 
-        node
+        constNode
     )
 
     void(
@@ -614,7 +604,7 @@ div {
         "NodeStyleGetPositionType",
         "",
 
-        node
+        constNode
     )
 
     void(
@@ -628,7 +618,7 @@ div {
         "NodeStyleGetFlexWrap",
         "",
 
-        node
+        constNode
     )
 
     void(
@@ -642,7 +632,7 @@ div {
         "NodeStyleGetOverflow",
         "",
 
-        node
+        constNode
     )
 
     void(
@@ -656,7 +646,7 @@ div {
         "NodeStyleGetDisplay",
         "",
 
-        node
+        constNode
     )
 
     void(
@@ -670,7 +660,7 @@ div {
         "NodeStyleGetFlex",
         "",
 
-        node
+        constNode
     )
 
     void(
@@ -684,7 +674,7 @@ div {
         "NodeStyleGetFlexGrow",
         "",
 
-        node
+        constNode
     )
 
     void(
@@ -698,7 +688,7 @@ div {
         "NodeStyleGetFlexShrink",
         "",
 
-        node
+        constNode
     )
 
     void(
@@ -725,7 +715,7 @@ div {
         "NodeStyleGetFlexBasis",
         "",
 
-        node
+        constNode
     )
 
     void(
@@ -748,7 +738,7 @@ div {
         "NodeStyleGetPosition",
         "",
 
-        node,
+        constNode,
         YGEdge("edge", "", Edges)
     )
 
@@ -779,7 +769,7 @@ div {
         "NodeStyleGetMargin",
         "",
 
-        node,
+        constNode,
         YGEdge("edge", "", Edges)
     )
 
@@ -803,7 +793,7 @@ div {
         "NodeStyleGetPadding",
         "",
 
-        node,
+        constNode,
         YGEdge("edge", "", Edges)
     )
 
@@ -819,7 +809,7 @@ div {
         "NodeStyleGetBorder",
         "",
 
-        node,
+        constNode,
         YGEdge("edge", "", Edges)
     )
 
@@ -847,7 +837,7 @@ div {
         "NodeStyleGetWidth",
         "",
 
-        node
+        constNode
     )
 
     void(
@@ -874,7 +864,7 @@ div {
         "NodeStyleGetHeight",
         "",
 
-        node
+        constNode
     )
 
     void(
@@ -895,7 +885,7 @@ div {
         "NodeStyleGetMinWidth",
         "",
 
-        node
+        constNode
     )
 
     void(
@@ -916,7 +906,7 @@ div {
         "NodeStyleGetMinHeight",
         "",
 
-        node
+        constNode
     )
 
     void(
@@ -937,7 +927,7 @@ div {
         "NodeStyleGetMaxWidth",
         "",
 
-        node
+        constNode
     )
 
     void(
@@ -958,7 +948,7 @@ div {
         "NodeStyleGetMaxHeight",
         "",
 
-        node
+        constNode
     )
 
     void(
@@ -984,7 +974,7 @@ div {
         "NodeStyleGetAspectRatio",
         "",
 
-        node
+        constNode
     )
 
     float(
@@ -1077,7 +1067,7 @@ div {
         "ConfigSetLogger",
         "",
 
-        YGConfigRef.const("config", ""),
+        YGConfigRef("config", ""),
         nullable..YGLogger("logger", "")
     )
 
@@ -1093,7 +1083,7 @@ div {
         "AssertWithNode",
         "",
 
-        YGNodeRef.const("node", ""),
+        YGNodeRef("node", ""),
         bool("condition", ""),
         charUTF8.const.p("message", "")
     )
@@ -1102,7 +1092,7 @@ div {
         "AssertWithConfig",
         "",
 
-        YGConfigRef.const("config", ""),
+        YGConfigRef("config", ""),
         bool("condition", ""),
         charUTF8.const.p("message", "")
     )
@@ -1111,7 +1101,7 @@ div {
         "ConfigSetPointScaleFactor",
         "Set this to number of pixels in 1 point to round calculation results. If you want to avoid rounding set {@code PointScaleFactor} to 0.",
 
-        YGConfigRef.const("config", ""),
+        YGConfigRef("config", ""),
         float("pixelsInPoint", "")
     )
 
@@ -1119,7 +1109,7 @@ div {
         "ConfigSetShouldDiffLayoutWithoutLegacyStretchBehaviour",
         "",
 
-        YGConfigRef.const("config", ""),
+        YGConfigRef("config", ""),
         bool("shouldDiffLayout", "")
     )
 
@@ -1131,7 +1121,7 @@ div {
         this behaviour.
         """,
 
-        YGConfigRef.const("config", ""),
+        YGConfigRef("config", ""),
         bool("useLegacyStretchBehaviour", "")
     )
 
@@ -1139,15 +1129,15 @@ div {
 
     void("ConfigFree",
         "",
-        YGConfigRef.const("config", "")
+        YGConfigRef("config", "")
     )
 
     void(
         "ConfigCopy",
         "",
 
-        YGConfigRef.const("dest", ""),
-        YGConfigRef.const("src", "")
+        YGConfigRef("dest", ""),
+        YGConfigRef("src", "")
     )
 
     int32_t("ConfigGetInstanceCount", "", void())
@@ -1156,7 +1146,7 @@ div {
         "ConfigSetExperimentalFeatureEnabled",
         "",
 
-        YGConfigRef.const("config", ""),
+        YGConfigRef("config", ""),
         YGExperimentalFeature("feature", "", "ExperimentalFeature\\w+"),
         bool("enabled", "")
     )
@@ -1164,29 +1154,29 @@ div {
         "ConfigIsExperimentalFeatureEnabled",
         "",
 
-        YGConfigRef.const("config", ""),
+        YGConfigRef("config", ""),
         YGExperimentalFeature("feature", "", "ExperimentalFeature\\w+")
     )
 
     void(
         "ConfigSetUseWebDefaults",
-        "Using the web defaults is the prefered configuration for new projects. Usage of non web defaults should be considered as legacy.",
+        "Using the web defaults is the preferred configuration for new projects. Usage of non web defaults should be considered as legacy.",
 
-        YGConfigRef.const("config", ""),
+        YGConfigRef("config", ""),
         bool("enabled", "")
     )
     bool(
         "ConfigGetUseWebDefaults",
         "",
 
-        YGConfigRef.const("config", "")
+        YGConfigRef("config", "")
     )
 
     void(
         "ConfigSetCloneNodeFunc",
         "",
 
-        YGConfigRef.const("config", ""),
+        YGConfigRef("config", ""),
         nullable..YGCloneNodeFunc("callback", "") // const function pointer in Yoga sources
     )
 
@@ -1196,22 +1186,14 @@ div {
         "ConfigSetContext",
         "",
 
-        YGConfigRef.const("config", ""),
+        YGConfigRef("config", ""),
         opaque_p("context", "")
     )
     opaque_p(
         "ConfigGetContext",
         "",
 
-        YGConfigRef.const("config", "")
-    )
-
-    void(
-        "ConfigSetMarkerCallbacks",
-        "",
-
-        YGConfigRef("config", ""),
-        YGMarkerCallbacks("callbacks", "")
+        YGConfigRef("config", "")
     )
 
     float(

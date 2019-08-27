@@ -14,8 +14,8 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * 
  * <pre><code>
  * int (*) (
- *     YGConfigRef const config,
- *     YGNodeRef const node,
+ *     YGConfigRef config,
+ *     YGNodeRef node,
  *     YGLogLevel level,
  *     char const *format,
  *     va_list args
@@ -41,6 +41,6 @@ public interface YGLoggerI extends CallbackI.I {
         );
     }
 
-    int invoke(@NativeType("YGConfigRef const") long config, @NativeType("YGNodeRef const") long node, @NativeType("YGLogLevel") int level, @NativeType("char const *") long format, @NativeType("va_list") long args);
+    int invoke(@NativeType("YGConfigRef") long config, @NativeType("YGNodeRef") long node, @NativeType("YGLogLevel") int level, @NativeType("char const *") long format, @NativeType("va_list") long args);
 
 }

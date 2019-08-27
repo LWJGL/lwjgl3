@@ -25,13 +25,6 @@ import static org.testng.AssertJUnit.*;
 public class YogaNodeTest {
 
     @Test
-    public void testInit() {
-        int refCount = YGNodeGetInstanceCount();
-        createNode();
-        assertEquals(refCount + 1, YGNodeGetInstanceCount());
-    }
-
-    @Test
     public void testBaseline() {
         YogaNode root = createNode();
         root.setFlexDirection(YogaFlexDirection.ROW);
@@ -340,7 +333,7 @@ public class YogaNodeTest {
         root_child0_child0_child0.setFlexShrink(1);
         root_child0_child0.addChildAt(root_child0_child0_child0, 0);
         root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
-        assertFalse(root.getDoesLegacyStretchFlagAffectsLayout());
+        assertTrue(root.getDoesLegacyStretchFlagAffectsLayout());
     }
 
     @Test
