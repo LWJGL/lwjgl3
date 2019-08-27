@@ -109,7 +109,7 @@ ENABLE_WARNINGS()""")
 
         "VERSION_MAJOR".."1",
         "VERSION_MINOR".."4",
-        "VERSION_RELEASE".."0"
+        "VERSION_RELEASE".."3"
     )
 
     IntConstant("Version number.", "VERSION_NUMBER".."(ZSTD_VERSION_MAJOR *100*100 + ZSTD_VERSION_MINOR *100 + ZSTD_VERSION_RELEASE)")
@@ -302,7 +302,8 @@ ENABLE_WARNINGS()""")
         "c_experimentalParam2".enum("", "10"),
         "c_experimentalParam3".enum("", "1000"),
         "c_experimentalParam4".enum,
-        "c_experimentalParam5".enum
+        "c_experimentalParam5".enum,
+        "c_experimentalParam6".enum
     ).javaDocLinks
 
     val resetDirectives = EnumConstant(
@@ -784,13 +785,24 @@ ENABLE_WARNINGS()""")
 
     size_t(
         "CStreamInSize",
-        "Returns the recommended size for input buffer.",
+        """
+        Returns the recommended size for input buffer.
+        
+        These buffer sizes are softly recommended. They are not required: {@code ZSTD_compressStream*()} happily accepts any buffer size, for both input and
+        output. Respecting the recommended size just makes it a bit easier for {@code ZSTD_compressStream*()}, reducing the amount of memory shuffling and
+        buffering, resulting in minor performance savings.
+
+        However, note that these recommendations are from the perspective of a C caller program. If the streaming interface is invoked from some other
+        language, especially managed ones such as Java or Go, through a foreign function interface such as jni or cgo, a major performance rule is to reduce
+        crossing such interface to an absolute minimum. It's not rare that performance ends being spent more into the interface, rather than compression
+        itself. In which cases, prefer using large buffers, as large as practical, for both input and output, to reduce the nb of roundtrips.
+        """,
         void()
     )
 
     size_t(
         "CStreamOutSize",
-        "Returns the recommended size for output buffer. Guarantee to successfully flush at least one complete compressed block in all circumstances.",
+        "Returns the recommended size for output buffer. Guarantee to successfully flush at least one complete compressed block.",
         void()
     )
 

@@ -102,12 +102,67 @@ ENABLE_WARNINGS()""")
     IntConstant("", "LDM_BUCKETSIZELOG_MIN".."1")
     IntConstant("", "LDM_BUCKETSIZELOG_MAX".."8")
     IntConstant("", "LDM_HASHRATELOG_MIN".."0")
+    IntConstant("", "TARGETCBLOCKSIZE_MIN".."64")
+    IntConstant("", "TARGETCBLOCKSIZE_MAX".."ZSTD_BLOCKSIZE_MAX")
     IntConstant("", "HASHLOG3_MAX".."17")
-    IntConstant("", "c_rsyncable".."ZSTD_c_experimentalParam1")
-    IntConstant("", "c_format".."ZSTD_c_experimentalParam2")
-    IntConstant("", "c_forceMaxWindow".."ZSTD_c_experimentalParam3")
-    IntConstant("", "c_forceAttachDict".."ZSTD_c_experimentalParam4")
-    IntConstant("", "c_literalCompressionMode".."ZSTD_c_experimentalParam5")
+
+    IntConstant(
+        """
+        Enables {@code rsyncable mode, which makes compressed files more rsync friendly by adding periodic synchronization points to the compressed data.
+        }
+        The target average block size is #c_jobSize / 2. It's possible to modify the job size to increase or decrease the granularity of the synchronization
+        point. Once the {@code jobSize} is smaller than the window size, it will result in compression ratio degradation.
+
+        NOTE 1: {@code rsyncable} mode only works when multithreading is enabled.
+
+        NOTE 2: {@code rsyncable} performs poorly in combination with long range mode, since it will decrease the effectiveness of synchronization points,
+        though mileage may vary.
+
+        NOTE 3: {@code Rsyncable} mode limits maximum compression speed to ~400 MB/s. If the selected compression level is already running significantly
+        slower, the overall speed won't be significantly impacted.
+        """,
+
+        "c_rsyncable".."ZSTD_c_experimentalParam1"
+    )
+    IntConstant(
+        """
+        Select a compression format.
+
+        The value must be of type {@code ZSTD_format_e}.
+        """,
+
+        "c_format".."ZSTD_c_experimentalParam2"
+    )
+    IntConstant(
+        "Force back-reference distances to remain &lt; {@code windowSize}, even when referencing into Dictionary content. (default:0)",
+        
+        "c_forceMaxWindow".."ZSTD_c_experimentalParam3"
+    )
+    IntConstant(
+        """
+        Controls whether the contents of a {@code CDict} are used in place, or copied into the working context.
+
+        Accepts values from the {@code ZSTD_dictAttachPref_e} enum.
+        """,
+        
+        "c_forceAttachDict".."ZSTD_c_experimentalParam4"
+    )
+    IntConstant(
+        """
+        Controls how the literals are compressed (default is {@code auto}).
+
+        The value must be of type {@code ZSTD_literalCompressionMode_e}.
+        """,
+        "c_literalCompressionMode".."ZSTD_c_experimentalParam5"
+    )
+    IntConstant(
+        """
+        Tries to fit compressed block size to be around {@code targetCBlockSize}.
+
+        No target when {@code targetCBlockSize == 0}. There is no guarantee on compressed block size. (default:0)
+        """,
+        "c_targetCBlockSize".."ZSTD_c_experimentalParam6"
+    )
     IntConstant("", "d_format".."ZSTD_d_experimentalParam1")
 
     EnumConstant(

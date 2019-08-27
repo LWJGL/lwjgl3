@@ -110,7 +110,7 @@ public class Zstd {
     public static final int
         ZSTD_VERSION_MAJOR   = 1,
         ZSTD_VERSION_MINOR   = 4,
-        ZSTD_VERSION_RELEASE = 0;
+        ZSTD_VERSION_RELEASE = 3;
 
     /** Version number. */
     public static final int ZSTD_VERSION_NUMBER = (ZSTD_VERSION_MAJOR *100*100 + ZSTD_VERSION_MINOR *100 + ZSTD_VERSION_RELEASE);
@@ -278,6 +278,7 @@ public class Zstd {
      * <li>{@link #ZSTD_c_experimentalParam3 c_experimentalParam3}</li>
      * <li>{@link #ZSTD_c_experimentalParam4 c_experimentalParam4}</li>
      * <li>{@link #ZSTD_c_experimentalParam5 c_experimentalParam5}</li>
+     * <li>{@link #ZSTD_c_experimentalParam6 c_experimentalParam6}</li>
      * </ul>
      */
     public static final int
@@ -304,7 +305,8 @@ public class Zstd {
         ZSTD_c_experimentalParam2         = 10,
         ZSTD_c_experimentalParam3         = 1000,
         ZSTD_c_experimentalParam4         = 1001,
-        ZSTD_c_experimentalParam5         = 1002;
+        ZSTD_c_experimentalParam5         = 1002,
+        ZSTD_c_experimentalParam6         = 1003;
 
     /**
      * {@code ZSTD_ResetDirective}
@@ -624,7 +626,7 @@ public class Zstd {
     /**
      * All parameters must belong to an interval with lower and upper bounds, otherwise they will either trigger an error or be automatically clamped.
      *
-     * @param cParam   one of:<br><table><tr><td>{@link #ZSTD_c_compressionLevel c_compressionLevel}</td><td>{@link #ZSTD_c_windowLog c_windowLog}</td><td>{@link #ZSTD_c_hashLog c_hashLog}</td><td>{@link #ZSTD_c_chainLog c_chainLog}</td><td>{@link #ZSTD_c_searchLog c_searchLog}</td></tr><tr><td>{@link #ZSTD_c_minMatch c_minMatch}</td><td>{@link #ZSTD_c_targetLength c_targetLength}</td><td>{@link #ZSTD_c_strategy c_strategy}</td><td>{@link #ZSTD_c_enableLongDistanceMatching c_enableLongDistanceMatching}</td><td>{@link #ZSTD_c_ldmHashLog c_ldmHashLog}</td></tr><tr><td>{@link #ZSTD_c_ldmMinMatch c_ldmMinMatch}</td><td>{@link #ZSTD_c_ldmBucketSizeLog c_ldmBucketSizeLog}</td><td>{@link #ZSTD_c_ldmHashRateLog c_ldmHashRateLog}</td><td>{@link #ZSTD_c_contentSizeFlag c_contentSizeFlag}</td><td>{@link #ZSTD_c_checksumFlag c_checksumFlag}</td></tr><tr><td>{@link #ZSTD_c_dictIDFlag c_dictIDFlag}</td><td>{@link #ZSTD_c_nbWorkers c_nbWorkers}</td><td>{@link #ZSTD_c_jobSize c_jobSize}</td><td>{@link #ZSTD_c_overlapLog c_overlapLog}</td><td>{@link #ZSTD_c_experimentalParam1 c_experimentalParam1}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam2 c_experimentalParam2}</td><td>{@link #ZSTD_c_experimentalParam3 c_experimentalParam3}</td><td>{@link #ZSTD_c_experimentalParam4 c_experimentalParam4}</td><td>{@link #ZSTD_c_experimentalParam5 c_experimentalParam5}</td></tr></table>
+     * @param cParam   one of:<br><table><tr><td>{@link #ZSTD_c_compressionLevel c_compressionLevel}</td><td>{@link #ZSTD_c_windowLog c_windowLog}</td><td>{@link #ZSTD_c_hashLog c_hashLog}</td><td>{@link #ZSTD_c_chainLog c_chainLog}</td><td>{@link #ZSTD_c_searchLog c_searchLog}</td></tr><tr><td>{@link #ZSTD_c_minMatch c_minMatch}</td><td>{@link #ZSTD_c_targetLength c_targetLength}</td><td>{@link #ZSTD_c_strategy c_strategy}</td><td>{@link #ZSTD_c_enableLongDistanceMatching c_enableLongDistanceMatching}</td><td>{@link #ZSTD_c_ldmHashLog c_ldmHashLog}</td></tr><tr><td>{@link #ZSTD_c_ldmMinMatch c_ldmMinMatch}</td><td>{@link #ZSTD_c_ldmBucketSizeLog c_ldmBucketSizeLog}</td><td>{@link #ZSTD_c_ldmHashRateLog c_ldmHashRateLog}</td><td>{@link #ZSTD_c_contentSizeFlag c_contentSizeFlag}</td><td>{@link #ZSTD_c_checksumFlag c_checksumFlag}</td></tr><tr><td>{@link #ZSTD_c_dictIDFlag c_dictIDFlag}</td><td>{@link #ZSTD_c_nbWorkers c_nbWorkers}</td><td>{@link #ZSTD_c_jobSize c_jobSize}</td><td>{@link #ZSTD_c_overlapLog c_overlapLog}</td><td>{@link #ZSTD_c_experimentalParam1 c_experimentalParam1}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam2 c_experimentalParam2}</td><td>{@link #ZSTD_c_experimentalParam3 c_experimentalParam3}</td><td>{@link #ZSTD_c_experimentalParam4 c_experimentalParam4}</td><td>{@link #ZSTD_c_experimentalParam5 c_experimentalParam5}</td><td>{@link #ZSTD_c_experimentalParam6 c_experimentalParam6}</td></tr></table>
      * @param __result a structure, {@code ZSTD_bounds}, which contains
      *                 
      *                 <ul>
@@ -652,7 +654,7 @@ public class Zstd {
      * compressionLevel, hashLog, chainLog, searchLog, minMatch, targetLength and strategy. new parameters will be active for next job only (after a
      * {@code flush()}).</p>
      *
-     * @param param one of:<br><table><tr><td>{@link #ZSTD_c_compressionLevel c_compressionLevel}</td><td>{@link #ZSTD_c_windowLog c_windowLog}</td><td>{@link #ZSTD_c_hashLog c_hashLog}</td><td>{@link #ZSTD_c_chainLog c_chainLog}</td><td>{@link #ZSTD_c_searchLog c_searchLog}</td></tr><tr><td>{@link #ZSTD_c_minMatch c_minMatch}</td><td>{@link #ZSTD_c_targetLength c_targetLength}</td><td>{@link #ZSTD_c_strategy c_strategy}</td><td>{@link #ZSTD_c_enableLongDistanceMatching c_enableLongDistanceMatching}</td><td>{@link #ZSTD_c_ldmHashLog c_ldmHashLog}</td></tr><tr><td>{@link #ZSTD_c_ldmMinMatch c_ldmMinMatch}</td><td>{@link #ZSTD_c_ldmBucketSizeLog c_ldmBucketSizeLog}</td><td>{@link #ZSTD_c_ldmHashRateLog c_ldmHashRateLog}</td><td>{@link #ZSTD_c_contentSizeFlag c_contentSizeFlag}</td><td>{@link #ZSTD_c_checksumFlag c_checksumFlag}</td></tr><tr><td>{@link #ZSTD_c_dictIDFlag c_dictIDFlag}</td><td>{@link #ZSTD_c_nbWorkers c_nbWorkers}</td><td>{@link #ZSTD_c_jobSize c_jobSize}</td><td>{@link #ZSTD_c_overlapLog c_overlapLog}</td><td>{@link #ZSTD_c_experimentalParam1 c_experimentalParam1}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam2 c_experimentalParam2}</td><td>{@link #ZSTD_c_experimentalParam3 c_experimentalParam3}</td><td>{@link #ZSTD_c_experimentalParam4 c_experimentalParam4}</td><td>{@link #ZSTD_c_experimentalParam5 c_experimentalParam5}</td></tr></table>
+     * @param param one of:<br><table><tr><td>{@link #ZSTD_c_compressionLevel c_compressionLevel}</td><td>{@link #ZSTD_c_windowLog c_windowLog}</td><td>{@link #ZSTD_c_hashLog c_hashLog}</td><td>{@link #ZSTD_c_chainLog c_chainLog}</td><td>{@link #ZSTD_c_searchLog c_searchLog}</td></tr><tr><td>{@link #ZSTD_c_minMatch c_minMatch}</td><td>{@link #ZSTD_c_targetLength c_targetLength}</td><td>{@link #ZSTD_c_strategy c_strategy}</td><td>{@link #ZSTD_c_enableLongDistanceMatching c_enableLongDistanceMatching}</td><td>{@link #ZSTD_c_ldmHashLog c_ldmHashLog}</td></tr><tr><td>{@link #ZSTD_c_ldmMinMatch c_ldmMinMatch}</td><td>{@link #ZSTD_c_ldmBucketSizeLog c_ldmBucketSizeLog}</td><td>{@link #ZSTD_c_ldmHashRateLog c_ldmHashRateLog}</td><td>{@link #ZSTD_c_contentSizeFlag c_contentSizeFlag}</td><td>{@link #ZSTD_c_checksumFlag c_checksumFlag}</td></tr><tr><td>{@link #ZSTD_c_dictIDFlag c_dictIDFlag}</td><td>{@link #ZSTD_c_nbWorkers c_nbWorkers}</td><td>{@link #ZSTD_c_jobSize c_jobSize}</td><td>{@link #ZSTD_c_overlapLog c_overlapLog}</td><td>{@link #ZSTD_c_experimentalParam1 c_experimentalParam1}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam2 c_experimentalParam2}</td><td>{@link #ZSTD_c_experimentalParam3 c_experimentalParam3}</td><td>{@link #ZSTD_c_experimentalParam4 c_experimentalParam4}</td><td>{@link #ZSTD_c_experimentalParam5 c_experimentalParam5}</td><td>{@link #ZSTD_c_experimentalParam6 c_experimentalParam6}</td></tr></table>
      *
      * @return an error code (which can be tested using {@link #ZSTD_isError isError})
      */
@@ -879,13 +881,24 @@ public class Zstd {
 
     // --- [ ZSTD_CStreamInSize ] ---
 
-    /** Returns the recommended size for input buffer. */
+    /**
+     * Returns the recommended size for input buffer.
+     * 
+     * <p>These buffer sizes are softly recommended. They are not required: {@code ZSTD_compressStream*()} happily accepts any buffer size, for both input and
+     * output. Respecting the recommended size just makes it a bit easier for {@code ZSTD_compressStream*()}, reducing the amount of memory shuffling and
+     * buffering, resulting in minor performance savings.</p>
+     * 
+     * <p>However, note that these recommendations are from the perspective of a C caller program. If the streaming interface is invoked from some other
+     * language, especially managed ones such as Java or Go, through a foreign function interface such as jni or cgo, a major performance rule is to reduce
+     * crossing such interface to an absolute minimum. It's not rare that performance ends being spent more into the interface, rather than compression
+     * itself. In which cases, prefer using large buffers, as large as practical, for both input and output, to reduce the nb of roundtrips.</p>
+     */
     @NativeType("size_t")
     public static native long ZSTD_CStreamInSize();
 
     // --- [ ZSTD_CStreamOutSize ] ---
 
-    /** Returns the recommended size for output buffer. Guarantee to successfully flush at least one complete compressed block in all circumstances. */
+    /** Returns the recommended size for output buffer. Guarantee to successfully flush at least one complete compressed block. */
     @NativeType("size_t")
     public static native long ZSTD_CStreamOutSize();
 

@@ -79,6 +79,7 @@ size_t ZSTD_decodeLiteralsBlock(ZSTD_DCtx* dctx,
 size_t ZSTD_decodeLiteralsBlock(ZSTD_DCtx* dctx,
                           const void* src, size_t srcSize)   /* note : srcSize < BLOCKSIZE */
 {
+    DEBUGLOG(5, "ZSTD_decodeLiteralsBlock");
     RETURN_ERROR_IF(srcSize < MIN_CBLOCK_SIZE, corruption_detected);
 
     {   const BYTE* const istart = (const BYTE*) src;
@@ -87,6 +88,7 @@ size_t ZSTD_decodeLiteralsBlock(ZSTD_DCtx* dctx,
         switch(litEncType)
         {
         case set_repeat:
+            DEBUGLOG(5, "set_repeat flag : re-using stats from previous compressed literals block");
             RETURN_ERROR_IF(dctx->litEntropy==0, dictionary_corrupted);
             /* fall-through */
 
@@ -116,7 +118,7 @@ size_t ZSTD_decodeLiteralsBlock(ZSTD_DCtx* dctx,
                     /* 2 - 2 - 18 - 18 */
                     lhSize = 5;
                     litSize  = (lhc >> 4) & 0x3FFFF;
-                    litCSize = (lhc >> 22) + (istart[4] << 10);
+                    litCSize = (lhc >> 22) + ((size_t)istart[4] << 10);
                     break;
                 }
                 RETURN_ERROR_IF(litSize > ZSTD_BLOCKSIZE_MAX, corruption_detected);
@@ -391,7 +393,8 @@ ZSTD_buildFSETable(ZSTD_seqSymbol* dt,
                     symbolNext[s] = 1;
                 } else {
                     if (normalizedCounter[s] >= largeLimit) DTableH.fastMode=0;
-                    symbolNext[s] = normalizedCounter[s];
+                    assert(normalizedCounter[s]>=0);
+                    symbolNext[s] = (U16)normalizedCounter[s];
         }   }   }
         memcpy(dt, &DTableH, sizeof(DTableH));
     }
@@ -505,7 +508,7 @@ size_t ZSTD_decodeSeqHeaders(ZSTD_DCtx* dctx, int* nbSeqPtr,
     *nbSeqPtr = nbSeq;
 
     /* FSE table descriptors */
-    RETURN_ERROR_IF(ip+4 > iend, srcSize_wrong); /* minimum possible size */
+    RETURN_ERROR_IF(ip+1 > iend, srcSize_wrong); /* minimum possible size: 1 byte for symbol encoding types */
     {   symbolEncodingType_e const LLtype = (symbolEncodingType_e)(*ip >> 6);
         symbolEncodingType_e const OFtype = (symbolEncodingType_e)((*ip >> 4) & 3);
         symbolEncodingType_e const MLtype = (symbolEncodingType_e)((*ip >> 2) & 3);
@@ -637,9 +640,10 @@ size_t ZSTD_execSequence(BYTE* op,
     if (oLitEnd>oend_w) return ZSTD_execSequenceLast7(op, oend, sequence, litPtr, litLimit, prefixStart, virtualStart, dictEnd);
 
     /* copy Literals */
-    ZSTD_copy8(op, *litPtr);
     if (sequence.litLength > 8)
-        ZSTD_wildcopy(op+8, (*litPtr)+8, sequence.litLength - 8);   /* note : since oLitEnd <= oend-WILDCOPY_OVERLENGTH, no risk of overwrite beyond oend */
+        ZSTD_wildcopy_16min(op, (*litPtr), sequence.litLength, ZSTD_no_overlap);   /* note : since oLitEnd <= oend-WILDCOPY_OVERLENGTH, no risk of overwrite beyond oend */
+    else
+        ZSTD_copy8(op, *litPtr);
     op = oLitEnd;
     *litPtr = iLitEnd;   /* update for next sequence */
 
@@ -686,13 +690,13 @@ size_t ZSTD_execSequence(BYTE* op,
 
     if (oMatchEnd > oend-(16-MINMATCH)) {
         if (op < oend_w) {
-            ZSTD_wildcopy(op, match, oend_w - op);
+            ZSTD_wildcopy(op, match, oend_w - op, ZSTD_overlap_src_before_dst);
             match += oend_w - op;
             op = oend_w;
         }
         while (op < oMatchEnd) *op++ = *match++;
     } else {
-        ZSTD_wildcopy(op, match, (ptrdiff_t)sequence.matchLength-8);   /* works even if matchLength < 8 */
+        ZSTD_wildcopy(op, match, (ptrdiff_t)sequence.matchLength-8, ZSTD_overlap_src_before_dst);   /* works even if matchLength < 8 */
     }
     return sequenceLength;
 }
@@ -717,9 +721,11 @@ size_t ZSTD_execSequenceLong(BYTE* op,
     if (oLitEnd > oend_w) return ZSTD_execSequenceLast7(op, oend, sequence, litPtr, litLimit, prefixStart, dictStart, dictEnd);
 
     /* copy Literals */
-    ZSTD_copy8(op, *litPtr);  /* note : op <= oLitEnd <= oend_w == oend - 8 */
     if (sequence.litLength > 8)
-        ZSTD_wildcopy(op+8, (*litPtr)+8, sequence.litLength - 8);   /* note : since oLitEnd <= oend-WILDCOPY_OVERLENGTH, no risk of overwrite beyond oend */
+        ZSTD_wildcopy_16min(op, *litPtr, sequence.litLength, ZSTD_no_overlap);   /* note : since oLitEnd <= oend-WILDCOPY_OVERLENGTH, no risk of overwrite beyond oend */
+    else
+        ZSTD_copy8(op, *litPtr);  /* note : op <= oLitEnd <= oend_w == oend - 8 */
+
     op = oLitEnd;
     *litPtr = iLitEnd;   /* update for next sequence */
 
@@ -766,13 +772,13 @@ size_t ZSTD_execSequenceLong(BYTE* op,
 
     if (oMatchEnd > oend-(16-MINMATCH)) {
         if (op < oend_w) {
-            ZSTD_wildcopy(op, match, oend_w - op);
+            ZSTD_wildcopy(op, match, oend_w - op, ZSTD_overlap_src_before_dst);
             match += oend_w - op;
             op = oend_w;
         }
         while (op < oMatchEnd) *op++ = *match++;
     } else {
-        ZSTD_wildcopy(op, match, (ptrdiff_t)sequence.matchLength-8);   /* works even if matchLength < 8 */
+        ZSTD_wildcopy(op, match, (ptrdiff_t)sequence.matchLength-8, ZSTD_overlap_src_before_dst);   /* works even if matchLength < 8 */
     }
     return sequenceLength;
 }
@@ -889,6 +895,7 @@ ZSTD_decodeSequence(seqState_t* seqState, const ZSTD_longOffset_e longOffsets)
 }
 
 FORCE_INLINE_TEMPLATE size_t
+DONT_VECTORIZE
 ZSTD_decompressSequences_body( ZSTD_DCtx* dctx,
                                void* dst, size_t maxDstSize,
                          const void* seqStart, size_t seqSize, int nbSeq,
@@ -918,6 +925,11 @@ ZSTD_decompressSequences_body( ZSTD_DCtx* dctx,
         ZSTD_initFseState(&seqState.stateOffb, &seqState.DStream, dctx->OFTptr);
         ZSTD_initFseState(&seqState.stateML, &seqState.DStream, dctx->MLTptr);
 
+        ZSTD_STATIC_ASSERT(
+                BIT_DStream_unfinished < BIT_DStream_completed &&
+                BIT_DStream_endOfBuffer < BIT_DStream_completed &&
+                BIT_DStream_completed < BIT_DStream_overflow);
+
         for ( ; (BIT_reloadDStream(&(seqState.DStream)) <= BIT_DStream_completed) && nbSeq ; ) {
             nbSeq--;
             {   seq_t const sequence = ZSTD_decodeSequence(&seqState, isLongOffset);
@@ -930,6 +942,7 @@ ZSTD_decompressSequences_body( ZSTD_DCtx* dctx,
         /* check if reached exact end */
         DEBUGLOG(5, "ZSTD_decompressSequences_body: after decode loop, remaining nbSeq : %i", nbSeq);
         RETURN_ERROR_IF(nbSeq, corruption_detected);
+        RETURN_ERROR_IF(BIT_reloadDStream(&seqState.DStream) < BIT_DStream_completed, corruption_detected);
         /* save reps for next block */
         { U32 i; for (i=0; i<ZSTD_REP_NUM; i++) dctx->entropy.rep[i] = (U32)(seqState.prevOffset[i]); }
     }
@@ -1131,6 +1144,7 @@ ZSTD_decompressSequencesLong_default(ZSTD_DCtx* dctx,
 
 #ifndef ZSTD_FORCE_DECOMPRESS_SEQUENCES_LONG
 static TARGET_ATTRIBUTE("bmi2") size_t
+DONT_VECTORIZE
 ZSTD_decompressSequences_bmi2(ZSTD_DCtx* dctx,
                                  void* dst, size_t maxDstSize,
                            const void* seqStart, size_t seqSize, int nbSeq,

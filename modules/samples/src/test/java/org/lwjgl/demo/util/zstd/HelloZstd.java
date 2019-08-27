@@ -9,8 +9,6 @@ import org.lwjgl.system.*;
 
 import java.io.*;
 import java.nio.*;
-import java.nio.file.*;
-import java.util.stream.*;
 import java.util.zip.*;
 
 import static org.lwjgl.demo.util.IOUtil.*;
@@ -33,23 +31,7 @@ public final class HelloZstd {
             String filePath;
             if (args.length == 0) {
                 System.out.println("Use 'ant demo -Dclass=org.lwjgl.demo.util.zstd.HelloZstd -Dargs=<path>' to test a different file.");
-
-                try (Stream<Path> files = Files.list(Paths.get("bin/libs"))) {
-                    filePath = files
-                        .filter(path -> Files.isRegularFile(path) && !path.toString().endsWith(".zip"))
-                        .max((a, b) -> {
-                            try {
-                                return Long.compare(
-                                    Files.size(a),
-                                    Files.size(b)
-                                );
-                            } catch (IOException e) {
-                                return a.compareTo(b);
-                            }
-                        })
-                        .map(Path::toString)
-                        .orElse("demo/FiraSans.ttf");
-                }
+                filePath = "demo/FiraSans.ttf";
             } else {
                 filePath = args[0];
             }
