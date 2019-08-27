@@ -104,4 +104,15 @@ public class VRDriverManager {
         }
     }
 
+    // --- [ VRDriverManager_IsEnabled ] ---
+
+    @NativeType("bool")
+    public static boolean VRDriverManager_IsEnabled(@NativeType("DriverId_t") int nDriver) {
+        long __functionAddress = OpenVR.VRDriverManager.IsEnabled;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callZ(nDriver, __functionAddress);
+    }
+
 }

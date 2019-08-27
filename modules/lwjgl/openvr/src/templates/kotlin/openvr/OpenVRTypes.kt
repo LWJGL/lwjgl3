@@ -32,6 +32,7 @@ val EVRApplicationType = "EVRApplicationType".enumType
 val EVRButtonId = "EVRButtonId".enumType
 val EVRCompositorTimingMode = "EVRCompositorTimingMode".enumType
 val EVRControllerAxisType = "EVRControllerAxisType".enumType
+val EVRDebugError = "EVRDebugError".enumType
 val EVREye = "EVREye".enumType
 val EVREventType = "EVREventType".enumType
 val EVRNotificationStyle = "EVRNotificationStyle".enumType
@@ -40,6 +41,7 @@ val EVROverlayIntersectionMaskPrimitiveType = "EVROverlayIntersectionMaskPrimiti
 val EVRScreenshotPropertyFilenames = "EVRScreenshotPropertyFilenames".enumType
 val EVRScreenshotType = "EVRScreenshotType".enumType
 val EVRSubmitFlags = "EVRSubmitFlags".enumType
+val EVRSummaryType = "EVRSummaryType".enumType
 val EVRTrackedCameraFrameType = "EVRTrackedCameraFrameType".enumType
 val EVRSkeletalTransformSpace = "EVRSkeletalTransformSpace".enumType
 val EVRSkeletalMotionRange = "EVRSkeletalMotionRange".enumType
@@ -90,6 +92,7 @@ val VRNotificationId = typedef(uint32_t, "VRNotificationId")
 val VROverlayHandle_t = typedef(uint64_t, "VROverlayHandle_t")
 val BoneIndex_t = typedef(int32_t, "BoneIndex_t")
 val IOBufferHandle_t = typedef(uint64_t, "IOBufferHandle_t")
+val VrProfilerEventHandle_t = typedef(uint64_t, "VrProfilerEventHandle_t")
 
 val SpatialAnchorHandle_t = typedef(uint32_t, "SpatialAnchorHandle_t")
 val glSharedTextureHandle_t = typedef(opaque_p, "glSharedTextureHandle_t")
@@ -570,11 +573,6 @@ val VRBoneTransform_t = struct(Module.OPENVR, "VRBoneTransform", nativeName = "V
 	HmdQuaternionf_t("orientation", "")
 }
 
-val AppOverrideKeys_t = struct(Module.OPENVR, "AppOverrideKeys", nativeName = "AppOverrideKeys_t") {
-    charASCII.p("pchKey", "")
-    char.p("pchValue", "")
-}
-
 val Compositor_FrameTiming = struct(Module.OPENVR, "CompositorFrameTiming", nativeName = "Compositor_FrameTiming", mutable = false) {
     documentation = "Provides a single frame's timing information to the app."
 
@@ -695,6 +693,13 @@ val InputOriginInfo_t = struct(Module.OPENVR, "InputOriginInfo", nativeName = "I
     VRInputValueHandle_t("devicePath", "")
 	TrackedDeviceIndex_t("trackedDeviceIndex", "")
     charUTF8("rchRenderModelComponentName", "")[128]
+}
+
+val InputBindingInfo_t = struct(Module.OPENVR, "InputBindingInfo", nativeName = "InputBindingInfo_t", mutable = false) {
+    charASCII("rchDevicePathName", "")[128]
+	charASCII("rchInputPathName", "")[128]
+	charASCII("rchModeName", "")[128]
+	charASCII("rchSlotName", "")[128]
 }
 
 val VRActiveActionSet_t = struct(Module.OPENVR, "VRActiveActionSet", nativeName = "VRActiveActionSet_t") {
@@ -818,6 +823,11 @@ val ImuSample_t = struct(Module.OPENVR, "ImuSample", nativeName = "ImuSample_t",
 	HmdVector3d_t("vAccel", "")
 	HmdVector3d_t("vGyro", "")
 	uint32_t("unOffScaleFlags", "")
+}
+
+val AppOverrideKeys_t = struct(Module.OPENVR, "AppOverrideKeys", nativeName = "AppOverrideKeys_t") {
+    charASCII.p("pchKey", "")
+    char.p("pchValue", "")
 }
 
 val VROverlayIntersectionParams_t = struct(Module.OPENVR, "VROverlayIntersectionParams", nativeName = "VROverlayIntersectionParams_t") {

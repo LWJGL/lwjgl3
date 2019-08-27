@@ -29,6 +29,33 @@ typedef struct HmdColor_t
 
     documentation = "Allows the application to interact with the compositor."
 
+/*
+/** Compositor frame timing reprojection flags. */
+const uint32_t VRCompositor_ReprojectionReason_Cpu = 0x01;
+const uint32_t VRCompositor_ReprojectionReason_Gpu = 0x02;
+const uint32_t VRCompositor_ReprojectionAsync = 0x04;	// This flag indicates the async reprojection mode is active,
+															// but does not indicate if reprojection actually happened or not.
+															// Use the ReprojectionReason flags above to check if reprojection
+															// was actually applied (i.e. scene texture was reused).
+															// NumFramePresents > 1 also indicates the scene texture was reused,
+															// and also the number of times that it was presented in total.
+
+const uint32_t VRCompositor_ReprojectionMotion = 0x08;	// This flag indicates whether or not motion smoothing was triggered for this frame
+
+const uint32_t VRCompositor_PredictionMask = 0x30;	// The runtime may predict more than one frame (up to four) ahead if
+															// it detects the application is taking too long to render. These two
+															// bits will contain the count of additional frames (normally zero).
+															// Use the VR_COMPOSITOR_ADDITIONAL_PREDICTED_FRAMES macro to read from
+															// the latest frame timing entry.
+
+const uint32_t VRCompositor_ThrottleMask = 0xC0;	// Number of frames the compositor is throttling the application.
+															// Use the VR_COMPOSITOR_NUMBER_OF_THROTTLED_FRAMES macro to read from
+															// the latest frame timing entry.
+
+#define VR_COMPOSITOR_ADDITIONAL_PREDICTED_FRAMES( timing ) ( ( ( timing ).m_nReprojectionFlags & vr::VRCompositor_PredictionMask ) >> 4 )
+#define VR_COMPOSITOR_NUMBER_OF_THROTTLED_FRAMES( timing ) ( ( ( timing ).m_nReprojectionFlags & vr::VRCompositor_ThrottleMask ) >> 6 )
+ */
+
     void(
         "SetTrackingSpace",
         "Sets tracking space returned by #WaitGetPoses().",
@@ -277,19 +304,19 @@ typedef struct HmdColor_t
 
     void(
         "ShowMirrorWindow",
-        "Creates a window on the primary monitor to display what is being shown in the headset.",
+        "Opens the headset view (as either a window or docked widget depending on user's preferences) that displays what the user sees in the headset.",
         void()
     )
 
     void(
         "HideMirrorWindow",
-        "Closes the mirror window.",
+        "Closes the headset view, either as a window or docked widget.",
         void()
     )
 
     bool(
         "IsMirrorWindowVisible",
-        "Returns true if the mirror window is shown.",
+        "Returns true if the headset view (either as a window or docked widget) is shown.",
         void()
     )
 
@@ -450,6 +477,25 @@ typedef struct HmdColor_t
 
         If you want to know if motion smoothing actually triggered due to a late frame, check ##CompositorFrameTiming {@code m_nReprojectionFlags} &amp;
         {@code VRCompositor_ReprojectionMotion} instead.
+        """,
+
+        void()
+    )
+
+    bool(
+        "IsMotionSmoothingSupported",
+        "Indicates whether or not motion smoothing is supported by the current hardware.",
+
+        void()
+    )
+
+    bool(
+        "IsCurrentSceneFocusAppLoading",
+        """
+        Indicates whether or not the current scene focus app is currently loading.
+        
+        This is inferred from its use of {@code FadeGrid} to explicitly fade to the compositor to cover up the fact that it cannot render at a sustained full
+        framerate during this time.
         """,
 
         void()

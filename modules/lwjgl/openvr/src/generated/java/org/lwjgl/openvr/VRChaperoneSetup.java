@@ -342,4 +342,20 @@ public class VRChaperoneSetup {
         callV(__functionAddress);
     }
 
+    // --- [ VRChaperoneSetup_RoomSetupStarting ] ---
+
+    /**
+     * Fires an event that the tracking system can use to know room setup is about to begin.
+     * 
+     * <p>This lets the tracking system make any last minute adjustments that should be incorporated into the new setup. If the user is adjusting live in HMD
+     * using a tweak tool, keep in mind that calling this might cause the user to see the room jump.</p>
+     */
+    public static void VRChaperoneSetup_RoomSetupStarting() {
+        long __functionAddress = OpenVR.VRChaperoneSetup.RoomSetupStarting;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callV(__functionAddress);
+    }
+
 }

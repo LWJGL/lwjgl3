@@ -35,4 +35,11 @@ val VRDriverManager = "VRDriverManager".nativeClass(
 
         charASCII.const.p("pchDriverName", "the driver name")
     )
+
+    bool(
+        "IsEnabled",
+        "",
+
+        DriverId_t("nDriver", "")
+    )
 }

@@ -74,6 +74,7 @@ val OPENVR_FNTABLE_BINDING: APIBinding = Generator.register(object : APIBinding(
             VRInput,
             VRIOBuffer,
             VRSpatialAnchors,
+            VRDebug,
             VRNotifications
         )
 

@@ -92,12 +92,31 @@ val VRInput = "VRInput".nativeClass(
     )
 
     EVRInputError(
-        "GetPoseActionData",
-        "Reads the state of a pose action given its handle.",
+        "GetPoseActionDataRelativeToNow",
+        """
+        Reads the state of a pose action given its handle for the number of seconds relative to now.
+        
+        This will generally be called with negative times from the {@code fUpdateTime} fields in other actions.
+        """,
 
         VRActionHandle_t("action", ""),
         ETrackingUniverseOrigin("eOrigin", "", "ETrackingUniverseOrigin_\\w+"),
         float("fPredictedSecondsFromNow", ""),
+        InputPoseActionData_t.p("pActionData", ""),
+        Expression("InputPoseActionData.SIZEOF")..uint32_t("unActionDataSize", ""),
+        VRInputValueHandle_t("ulRestrictToDevice", "")
+    )
+
+    EVRInputError(
+        "GetPoseActionDataForNextFrame",
+        """
+        Reads the state of a pose action given its handle.
+
+        The returned values will match the values returned by the last call to #WaitGetPoses().
+        """,
+
+        VRActionHandle_t("action", ""),
+        ETrackingUniverseOrigin("eOrigin", "", "ETrackingUniverseOrigin_\\w+"),
         InputPoseActionData_t.p("pActionData", ""),
         Expression("InputPoseActionData.SIZEOF")..uint32_t("unActionDataSize", ""),
         VRInputValueHandle_t("ulRestrictToDevice", "")
@@ -174,6 +193,7 @@ val VRInput = "VRInput".nativeClass(
         "Reads summary information about the current pose of the skeleton associated with the given action.",
 
         VRActionHandle_t("action", ""),
+        EVRSummaryType("eSummaryType", ""),
         VRSkeletalSummaryData_t.p("pSkeletalSummaryData", "")
     )
 
@@ -248,6 +268,17 @@ val VRInput = "VRInput".nativeClass(
         VRInputValueHandle_t("origin", ""),
         InputOriginInfo_t.p("pOriginInfo", ""),
         Expression("InputOriginInfo.SIZEOF")..uint32_t("unOriginInfoSize", "")
+    )
+
+    EVRInputError(
+        "GetActionBindingInfo",
+        "Retrieves useful information about the bindings for an action.",
+
+        VRActionHandle_t("action", ""),
+        InputBindingInfo_t.p("pOriginInfo", ""),
+        Expression("InputBindingInfo.SIZEOF")..uint32_t("unBindingInfoSize", ""),
+        AutoSize("pOriginInfo")..uint32_t("unBindingInfoCount", ""),
+        Check(1)..uint32_t.p("punReturnedBindingInfoCount", "")
     )
 
     EVRInputError(

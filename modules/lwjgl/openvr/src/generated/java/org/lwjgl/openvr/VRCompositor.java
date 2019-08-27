@@ -450,7 +450,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_ShowMirrorWindow ] ---
 
-    /** Creates a window on the primary monitor to display what is being shown in the headset. */
+    /** Opens the headset view (as either a window or docked widget depending on user's preferences) that displays what the user sees in the headset. */
     public static void VRCompositor_ShowMirrorWindow() {
         long __functionAddress = OpenVR.VRCompositor.ShowMirrorWindow;
         if (CHECKS) {
@@ -461,7 +461,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_HideMirrorWindow ] ---
 
-    /** Closes the mirror window. */
+    /** Closes the headset view, either as a window or docked widget. */
     public static void VRCompositor_HideMirrorWindow() {
         long __functionAddress = OpenVR.VRCompositor.HideMirrorWindow;
         if (CHECKS) {
@@ -472,7 +472,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_IsMirrorWindowVisible ] ---
 
-    /** Returns true if the mirror window is shown. */
+    /** Returns true if the headset view (either as a window or docked widget) is shown. */
     @NativeType("bool")
     public static boolean VRCompositor_IsMirrorWindowVisible() {
         long __functionAddress = OpenVR.VRCompositor.IsMirrorWindowVisible;
@@ -768,6 +768,35 @@ public class VRCompositor {
     @NativeType("bool")
     public static boolean VRCompositor_IsMotionSmoothingEnabled() {
         long __functionAddress = OpenVR.VRCompositor.IsMotionSmoothingEnabled;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callZ(__functionAddress);
+    }
+
+    // --- [ VRCompositor_IsMotionSmoothingSupported ] ---
+
+    /** Indicates whether or not motion smoothing is supported by the current hardware. */
+    @NativeType("bool")
+    public static boolean VRCompositor_IsMotionSmoothingSupported() {
+        long __functionAddress = OpenVR.VRCompositor.IsMotionSmoothingSupported;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callZ(__functionAddress);
+    }
+
+    // --- [ VRCompositor_IsCurrentSceneFocusAppLoading ] ---
+
+    /**
+     * Indicates whether or not the current scene focus app is currently loading.
+     * 
+     * <p>This is inferred from its use of {@code FadeGrid} to explicitly fade to the compositor to cover up the fact that it cannot render at a sustained full
+     * framerate during this time.</p>
+     */
+    @NativeType("bool")
+    public static boolean VRCompositor_IsCurrentSceneFocusAppLoading() {
+        long __functionAddress = OpenVR.VRCompositor.IsCurrentSceneFocusAppLoading;
         if (CHECKS) {
             check(__functionAddress);
         }

@@ -256,11 +256,11 @@ public class VRInput {
         return nVRInput_GetAnalogActionData(action, pActionData.address(), InputAnalogActionData.SIZEOF, ulRestrictToDevice);
     }
 
-    // --- [ VRInput_GetPoseActionData ] ---
+    // --- [ VRInput_GetPoseActionDataRelativeToNow ] ---
 
-    /** Unsafe version of: {@link #VRInput_GetPoseActionData GetPoseActionData} */
-    public static int nVRInput_GetPoseActionData(long action, int eOrigin, float fPredictedSecondsFromNow, long pActionData, int unActionDataSize, long ulRestrictToDevice) {
-        long __functionAddress = OpenVR.VRInput.GetPoseActionData;
+    /** Unsafe version of: {@link #VRInput_GetPoseActionDataRelativeToNow GetPoseActionDataRelativeToNow} */
+    public static int nVRInput_GetPoseActionDataRelativeToNow(long action, int eOrigin, float fPredictedSecondsFromNow, long pActionData, int unActionDataSize, long ulRestrictToDevice) {
+        long __functionAddress = OpenVR.VRInput.GetPoseActionDataRelativeToNow;
         if (CHECKS) {
             check(__functionAddress);
         }
@@ -268,23 +268,62 @@ public class VRInput {
     }
 
     /**
-     * Reads the state of a pose action given its handle.
+     * Reads the state of a pose action given its handle for the number of seconds relative to now.
+     * 
+     * <p>This will generally be called with negative times from the {@code fUpdateTime} fields in other actions.</p>
      *
      * @param eOrigin one of:<br><table><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseSeated}</td></tr><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseStanding}</td></tr><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseRawAndUncalibrated}</td></tr></table>
      */
     @NativeType("EVRInputError")
-    public static int VRInput_GetPoseActionData(@NativeType("VRActionHandle_t") long action, @NativeType("ETrackingUniverseOrigin") int eOrigin, float fPredictedSecondsFromNow, @NativeType("InputPoseActionData_t *") InputPoseActionData pActionData, @NativeType("uint32_t") int unActionDataSize, @NativeType("VRInputValueHandle_t") long ulRestrictToDevice) {
-        return nVRInput_GetPoseActionData(action, eOrigin, fPredictedSecondsFromNow, pActionData.address(), unActionDataSize, ulRestrictToDevice);
+    public static int VRInput_GetPoseActionDataRelativeToNow(@NativeType("VRActionHandle_t") long action, @NativeType("ETrackingUniverseOrigin") int eOrigin, float fPredictedSecondsFromNow, @NativeType("InputPoseActionData_t *") InputPoseActionData pActionData, @NativeType("uint32_t") int unActionDataSize, @NativeType("VRInputValueHandle_t") long ulRestrictToDevice) {
+        return nVRInput_GetPoseActionDataRelativeToNow(action, eOrigin, fPredictedSecondsFromNow, pActionData.address(), unActionDataSize, ulRestrictToDevice);
+    }
+
+    /**
+     * Reads the state of a pose action given its handle for the number of seconds relative to now.
+     * 
+     * <p>This will generally be called with negative times from the {@code fUpdateTime} fields in other actions.</p>
+     *
+     * @param eOrigin one of:<br><table><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseSeated}</td></tr><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseStanding}</td></tr><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseRawAndUncalibrated}</td></tr></table>
+     */
+    @NativeType("EVRInputError")
+    public static int VRInput_GetPoseActionDataRelativeToNow(@NativeType("VRActionHandle_t") long action, @NativeType("ETrackingUniverseOrigin") int eOrigin, float fPredictedSecondsFromNow, @NativeType("InputPoseActionData_t *") InputPoseActionData pActionData, @NativeType("VRInputValueHandle_t") long ulRestrictToDevice) {
+        return nVRInput_GetPoseActionDataRelativeToNow(action, eOrigin, fPredictedSecondsFromNow, pActionData.address(), InputPoseActionData.SIZEOF, ulRestrictToDevice);
+    }
+
+    // --- [ VRInput_GetPoseActionDataForNextFrame ] ---
+
+    /** Unsafe version of: {@link #VRInput_GetPoseActionDataForNextFrame GetPoseActionDataForNextFrame} */
+    public static int nVRInput_GetPoseActionDataForNextFrame(long action, int eOrigin, long pActionData, int unActionDataSize, long ulRestrictToDevice) {
+        long __functionAddress = OpenVR.VRInput.GetPoseActionDataForNextFrame;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callJPJI(action, eOrigin, pActionData, unActionDataSize, ulRestrictToDevice, __functionAddress);
     }
 
     /**
      * Reads the state of a pose action given its handle.
+     * 
+     * <p>The returned values will match the values returned by the last call to {@link VRCompositor#VRCompositor_WaitGetPoses WaitGetPoses}.</p>
      *
      * @param eOrigin one of:<br><table><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseSeated}</td></tr><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseStanding}</td></tr><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseRawAndUncalibrated}</td></tr></table>
      */
     @NativeType("EVRInputError")
-    public static int VRInput_GetPoseActionData(@NativeType("VRActionHandle_t") long action, @NativeType("ETrackingUniverseOrigin") int eOrigin, float fPredictedSecondsFromNow, @NativeType("InputPoseActionData_t *") InputPoseActionData pActionData, @NativeType("VRInputValueHandle_t") long ulRestrictToDevice) {
-        return nVRInput_GetPoseActionData(action, eOrigin, fPredictedSecondsFromNow, pActionData.address(), InputPoseActionData.SIZEOF, ulRestrictToDevice);
+    public static int VRInput_GetPoseActionDataForNextFrame(@NativeType("VRActionHandle_t") long action, @NativeType("ETrackingUniverseOrigin") int eOrigin, @NativeType("InputPoseActionData_t *") InputPoseActionData pActionData, @NativeType("uint32_t") int unActionDataSize, @NativeType("VRInputValueHandle_t") long ulRestrictToDevice) {
+        return nVRInput_GetPoseActionDataForNextFrame(action, eOrigin, pActionData.address(), unActionDataSize, ulRestrictToDevice);
+    }
+
+    /**
+     * Reads the state of a pose action given its handle.
+     * 
+     * <p>The returned values will match the values returned by the last call to {@link VRCompositor#VRCompositor_WaitGetPoses WaitGetPoses}.</p>
+     *
+     * @param eOrigin one of:<br><table><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseSeated}</td></tr><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseStanding}</td></tr><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseRawAndUncalibrated}</td></tr></table>
+     */
+    @NativeType("EVRInputError")
+    public static int VRInput_GetPoseActionDataForNextFrame(@NativeType("VRActionHandle_t") long action, @NativeType("ETrackingUniverseOrigin") int eOrigin, @NativeType("InputPoseActionData_t *") InputPoseActionData pActionData, @NativeType("VRInputValueHandle_t") long ulRestrictToDevice) {
+        return nVRInput_GetPoseActionDataForNextFrame(action, eOrigin, pActionData.address(), InputPoseActionData.SIZEOF, ulRestrictToDevice);
     }
 
     // --- [ VRInput_GetSkeletalActionData ] ---
@@ -431,18 +470,18 @@ public class VRInput {
     // --- [ VRInput_GetSkeletalSummaryData ] ---
 
     /** Unsafe version of: {@link #VRInput_GetSkeletalSummaryData GetSkeletalSummaryData} */
-    public static int nVRInput_GetSkeletalSummaryData(long action, long pSkeletalSummaryData) {
+    public static int nVRInput_GetSkeletalSummaryData(long action, int eSummaryType, long pSkeletalSummaryData) {
         long __functionAddress = OpenVR.VRInput.GetSkeletalSummaryData;
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(action, pSkeletalSummaryData, __functionAddress);
+        return callJPI(action, eSummaryType, pSkeletalSummaryData, __functionAddress);
     }
 
     /** Reads summary information about the current pose of the skeleton associated with the given action. */
     @NativeType("EVRInputError")
-    public static int VRInput_GetSkeletalSummaryData(@NativeType("VRActionHandle_t") long action, @NativeType("VRSkeletalSummaryData_t *") VRSkeletalSummaryData pSkeletalSummaryData) {
-        return nVRInput_GetSkeletalSummaryData(action, pSkeletalSummaryData.address());
+    public static int VRInput_GetSkeletalSummaryData(@NativeType("VRActionHandle_t") long action, @NativeType("EVRSummaryType") int eSummaryType, @NativeType("VRSkeletalSummaryData_t *") VRSkeletalSummaryData pSkeletalSummaryData) {
+        return nVRInput_GetSkeletalSummaryData(action, eSummaryType, pSkeletalSummaryData.address());
     }
 
     // --- [ VRInput_GetSkeletalBoneDataCompressed ] ---
@@ -563,6 +602,26 @@ public class VRInput {
     @NativeType("EVRInputError")
     public static int VRInput_GetOriginTrackedDeviceInfo(@NativeType("VRInputValueHandle_t") long origin, @NativeType("InputOriginInfo_t *") InputOriginInfo pOriginInfo) {
         return nVRInput_GetOriginTrackedDeviceInfo(origin, pOriginInfo.address(), InputOriginInfo.SIZEOF);
+    }
+
+    // --- [ VRInput_GetActionBindingInfo ] ---
+
+    /** Unsafe version of: {@link #VRInput_GetActionBindingInfo GetActionBindingInfo} */
+    public static int nVRInput_GetActionBindingInfo(long action, long pOriginInfo, int unBindingInfoSize, int unBindingInfoCount, long punReturnedBindingInfoCount) {
+        long __functionAddress = OpenVR.VRInput.GetActionBindingInfo;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callJPPI(action, pOriginInfo, unBindingInfoSize, unBindingInfoCount, punReturnedBindingInfoCount, __functionAddress);
+    }
+
+    /** Retrieves useful information about the bindings for an action. */
+    @NativeType("EVRInputError")
+    public static int VRInput_GetActionBindingInfo(@NativeType("VRActionHandle_t") long action, @NativeType("InputBindingInfo_t *") InputBindingInfo.Buffer pOriginInfo, @NativeType("uint32_t *") IntBuffer punReturnedBindingInfoCount) {
+        if (CHECKS) {
+            check(punReturnedBindingInfoCount, 1);
+        }
+        return nVRInput_GetActionBindingInfo(action, pOriginInfo.address(), InputBindingInfo.SIZEOF, pOriginInfo.remaining(), memAddress(punReturnedBindingInfoCount));
     }
 
     // --- [ VRInput_ShowActionOrigins ] ---

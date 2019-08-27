@@ -576,21 +576,6 @@ typedef struct HiddenAreaMesh_t
         void()
     )
 
-    uint32_t(
-        "DriverDebugRequest",
-        """
-        Sends a request to the driver for the specified device and returns the response. The maximum response size is 32k, but this method can be called with a
-        smaller buffer. If the response exceeds the size of the buffer, it is truncated.
-        """,
-
-        TrackedDeviceIndex_t("unDeviceIndex", ""),
-        charASCII.const.p("pchRequest", ""),
-        Return(RESULT, "VR.k_unMaxDriverDebugResponseSize", includesNT = true)..nullable..charASCII.p("pchResponseBuffer", ""),
-        AutoSize("pchResponseBuffer")..uint32_t("unResponseBufferSize", ""),
-
-        returnDoc = "the size of the response including its terminating null"
-    )
-
     EVRFirmwareError(
         "PerformFirmwareUpdate",
         """
@@ -620,6 +605,29 @@ typedef struct HiddenAreaMesh_t
         """
         Call this to tell the system that the user is being prompted to save data. This halts the timeout and dismisses the dashboard (if it was up).
         Applications should be sure to actually prompt the user to save and then exit afterward, otherwise the user will be left in a confusing state.
+        """
+    )
+
+    uint32_t(
+        "GetAppContainerFilePaths",
+        """
+        Retrieves a null-terminated, semicolon-delimited list of UTF8 file paths that an application must have read access to when running inside of an app
+        container.
+        """,
+
+        Return(RESULT, includesNT = true)..nullable..charUTF8.p("pchBuffer", ""),
+        AutoSize("pchBuffer")..uint32_t("unBufferSize", ""),
+
+        returnDoc = "the number of bytes needed to hold the list"
+    )
+
+	charASCII.p(
+        "GetRuntimeVersion",
+        """
+        Returns the current version of the SteamVR runtime. The returned string will remain valid until #Shutdown() is called.
+
+        NOTE: Is it not appropriate t\o use this version to test for the presence of any SteamVR feature. Only use this version number for logging or showing to
+        a user, and not to try to detect anything at runtime. When appropriate, feature-specific presence information is provided by other APIs.
         """
     )
 }
