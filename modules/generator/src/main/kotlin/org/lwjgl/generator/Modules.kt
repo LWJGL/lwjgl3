@@ -328,7 +328,7 @@ enum class Module(
         scalable with multi-cores CPU. It features an extremely fast decoder, with speed in multiple GB/s per core, typically reaching RAM speed limits on
         multi-core systems.
         """,
-        library = JNILibrary.create("LibLZ4"),
+        library = JNILibrary.create("LibLZ4", setupAllocator = true),
         arrayOverloads = false
     ),
     MEOW(

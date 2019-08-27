@@ -31,8 +31,20 @@ public class LZ4Frame {
      */
     public static final int LZ4F_VERSION = 100;
 
+    /** Minimum header size. */
+    public static final int LZ4F_HEADER_SIZE_MIN = 7;
+
     /** Maximum header size. */
     public static final int LZ4F_HEADER_SIZE_MAX = 19;
+
+    /** Size in bytes of a block header in little-endian format. Highest bit indicates if block data is uncompressed. */
+    public static final int LZ4F_BLOCK_HEADER_SIZE = 4;
+
+    /** Size in bytes of a block checksum footer in little-endian format. */
+    public static final int LZ4F_BLOCK_CHECKSUM_SIZE = 4;
+
+    /** Size in bytes of the content checksum. */
+    public static final int LZ4F_CONTENT_CHECKSUM_SIZE = 4;
 
     /**
      * {@code LZ4F_blockSizeID_t}

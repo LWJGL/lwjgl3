@@ -49,8 +49,8 @@ val LZ4F_preferences_t = struct(Module.LZ4, "LZ4FPreferences", nativeName = "LZ4
         "compressionLevel",
         "0: default (fast mode); values &gt; #CLEVEL_MAX count as #CLEVEL_MAX; values &gt; 0 trigger \"fast acceleration\""
     )
-    unsigned("autoFlush", "1: always flush, reduces usage of internal buffers")
-    unsigned("favorDecSpeed", "1: parser favors decompression speed vs compression ratio. Only works for high compression modes (&ge; #CLEVEL_OPT_MIN). Since version 1.8.2.")
+    unsignedb("autoFlush", "1: always flush, reduces usage of internal buffers")
+    unsignedb("favorDecSpeed", "1: parser favors decompression speed vs compression ratio. Only works for high compression modes (&ge; #CLEVEL_OPT_MIN). Since version 1.8.2.")
     unsigned("reserved", "must be zero for forward compatibility")[3]
 }
 

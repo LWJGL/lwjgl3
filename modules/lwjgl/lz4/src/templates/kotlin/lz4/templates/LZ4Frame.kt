@@ -32,11 +32,11 @@ ENABLE_WARNINGS()""")
         "VERSION".."100"
     )
 
-    IntConstant(
-        "Maximum header size.",
-
-        "HEADER_SIZE_MAX".."19"
-    )
+    IntConstant("Minimum header size.", "HEADER_SIZE_MIN".."7")
+    IntConstant("Maximum header size.", "HEADER_SIZE_MAX".."19")
+    IntConstant("Size in bytes of a block header in little-endian format. Highest bit indicates if block data is uncompressed.", "BLOCK_HEADER_SIZE".."4")
+    IntConstant("Size in bytes of a block checksum footer in little-endian format.", "BLOCK_CHECKSUM_SIZE".."4")
+    IntConstant("Size in bytes of the content checksum.", "CONTENT_CHECKSUM_SIZE".."4")
 
     EnumConstant(
         """

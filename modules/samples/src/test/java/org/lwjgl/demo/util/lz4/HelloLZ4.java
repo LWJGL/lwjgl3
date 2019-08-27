@@ -93,6 +93,7 @@ public class HelloLZ4 {
         time = benchGZIPDecompression(compressedArray, uncompressedArray);
         System.out.format("Decompression Gzip: %d MB/s (%d us/file)\n", getThroughput(uncompressedArray.length, time), time / 1_000);
 
+        memFree(compressedHC);
         memFree(compressed);
     }
 
@@ -198,7 +199,7 @@ public class HelloLZ4 {
             cctx = pp.get(0);
             for (int i = 0; i < iterations; i++) {
                 size = (int)checkLZ4F(LZ4F_compressBegin(cctx, compressed, LZ4FPreferences.callocStack(stack)
-                    .frameInfo(LZ4FFrameInfo.mallocStack(stack)
+                    .frameInfo(LZ4FFrameInfo.callocStack(stack)
                         .blockChecksumFlag(LZ4F_blockChecksumEnabled)
                         .contentChecksumFlag(LZ4F_contentChecksumEnabled)
                         .contentSize(uncompressed.remaining())

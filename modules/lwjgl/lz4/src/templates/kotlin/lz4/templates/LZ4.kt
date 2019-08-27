@@ -33,6 +33,46 @@ ENABLE_WARNINGS()""")
         Arbitrarily long files or data streams are compressed using multiple blocks, for streaming requirements. These blocks are organized into a frame,
         defined into ${url("https://github.com/lz4/lz4/blob/dev/doc/lz4_Frame_format.md", "lz4_Frame_format")}. Interoperable versions of LZ4 must also respect
         the frame format.
+        
+        <h3>In-place compression and decompression</h3>
+
+        It's possible to have input and output sharing the same buffer, for highly contrained memory environments. In both cases, it requires input to lay at
+        the end of the buffer, and decompression to start at beginning of the buffer. Buffer size must feature some margin, hence be larger than final size.
+        ${codeBlock("""
+|<------------------------buffer--------------------------------->|
+                            |<-----------compressed data--------->|
+|<-----------decompressed size------------------>|
+                                                 |<----margin---->|""")}
+
+        This technique is more useful for decompression, since decompressed size is typically larger, and margin is short.
+
+        In-place decompression will work inside any buffer which size is &ge; {@code LZ4_DECOMPRESS_INPLACE_BUFFER_SIZE(decompressedSize)}. This presumes that
+        {@code decompressedSize} &gt; {@code compressedSize}. Otherwise, it means compression actually expanded data, and it would be more efficient to store
+        such data with a flag indicating it's not compressed. This can happen when data is not compressible (already compressed, or encrypted).
+
+        For in-place compression, margin is larger, as it must be able to cope with both history preservation, requiring input data to remain unmodified up to
+        #DISTANCE_MAX, and data expansion, which can happen when input is not compressible. As a consequence, buffer size requirements are much higher, and
+        memory savings offered by in-place compression are more limited.
+
+        There are ways to limit this cost for compression:
+        ${ul(
+            """
+            Reduce history size, by modifying {@code LZ4_DISTANCE_MAX}. Note that it is a compile-time constant, so all compressions will apply this limit.
+            Lower values will reduce compression ratio, except when input_size &lt; {@code LZ4_DISTANCE_MAX}, so it's a reasonable trick when inputs are known
+            to be small.            
+            """,
+            """
+            Require the compressor to deliver a "maximum compressed size". This is the {@code dstCapacity} parameter in {@code LZ4_compress*()}. When this size
+            is &lt; {@code LZ4_COMPRESSBOUND(inputSize)}, then compression can fail, in which case, the return code will be 0 (zero). The caller must be ready
+            for these cases to happen, and typically design a backup scheme to send data uncompressed.            
+            """
+        )}
+
+        The combination of both techniques can significantly reduce the amount of margin required for in-place compression.
+
+        In-place compression can work in any buffer which size is &ge; {@code (maxCompressedSize)} with {@code maxCompressedSize == LZ4_COMPRESSBOUND(srcSize)}
+        for guaranteed compression success. #COMPRESS_INPLACE_BUFFER_SIZE() depends on both {@code maxCompressedSize} and {@code LZ4_DISTANCE_MAX}, so it's
+        possible to reduce memory requirements by playing with them.
         """
 
     IntConstant(
@@ -40,7 +80,7 @@ ENABLE_WARNINGS()""")
 
         "VERSION_MAJOR".."1",
         "VERSION_MINOR".."9",
-        "VERSION_RELEASE".."1"
+        "VERSION_RELEASE".."2"
     )
 
     IntConstant("Version number.", "VERSION_NUMBER".."(LZ4_VERSION_MAJOR *100*100 + LZ4_VERSION_MINOR *100 + LZ4_VERSION_RELEASE)")
@@ -75,6 +115,8 @@ ENABLE_WARNINGS()""")
     IntConstant("", "STREAMDECODESIZE_U64".."4 + (Pointer.POINTER_SIZE == 16 ? 2 : 0)")
     IntConstant("", "STREAMDECODESIZE".."(LZ4_STREAMDECODESIZE_U64 * Long.BYTES)")
 
+    IntConstant("History window size; can be user-defined at compile time.", "DISTANCE_MAX".."64")
+
     int(
         "compress_default",
         """
@@ -103,13 +145,22 @@ ENABLE_WARNINGS()""")
 
         If the source stream is detected malformed, the function will stop decoding and return a negative result.
 
-        This function is protected against malicious data packets (never writes outside {@code dst} buffer, nor read outside {@code src} buffer).
+        Note 1: This function is protected against malicious data packets: it will never write outside {@code dst} buffer, nor read outside {@code source}
+        buffer, even if the compressed block is maliciously modified to order the decoder to do these actions. In such case, the decoder stops immediately, and
+        considers the compressed block malformed.
+ 
+        Note 2: {@code compressedSize} and {@code dstCapacity} must be provided to the function, the compressed block does not contain them. The implementation
+        is free to send / store / derive this information in whichever way is most beneficial. If there is a need for a different format which bundles together
+        both compressed data and its metadata, consider looking at {@code lz4frame.h} instead.
         """,
 
         char.const.p("src", ""),
         char.p("dst", ""),
         AutoSize("src")..int("compressedSize", "is the exact complete size of the compressed block"),
-        AutoSize("dst")..int("dstCapacity", "is the size of destination buffer, which must be already allocated"),
+        AutoSize("dst")..int(
+            "dstCapacity",
+            "is the size of destination buffer (which must be already allocated), presumed an upper bound of decompressed size"
+        ),
 
         returnDoc = "the number of bytes decompressed into destination buffer (necessarily &le; {@code dstCapacity})"
     )
@@ -498,5 +549,40 @@ ENABLE_WARNINGS()""")
         AutoSize("buffer")..size_t("size", ""),
 
         since = "1.9.0"
+    )
+
+    macro(expression = "(compressedSize >>> 8) + 32")..int(
+        "DECOMPRESS_INPLACE_MARGIN",
+        "",
+
+        int("compressedSize", "")
+    )
+
+    macro(expression = "decompressedSize + LZ4_DECOMPRESS_INPLACE_MARGIN(decompressedSize)")..int(
+        "DECOMPRESS_INPLACE_BUFFER_SIZE",
+        """
+        Note: presumes that {@code compressedSize} &lt; {@code decompressedSize}.
+        
+        Note 2: margin is overestimated a bit, since it could use {@code compressedSize instead}.
+        """,
+
+        int("decompressedSize", "")
+    )
+
+    macro(expression = "LZ4_DISTANCE_MAX + 32")..int(
+        "COMPRESS_INPLACE_MARGIN",
+        "",
+
+        void()
+    )
+
+    macro(expression = "maxCompressedSize + LZ4_COMPRESS_INPLACE_MARGIN()")..int(
+        "COMPRESS_INPLACE_BUFFER_SIZE",
+        "",
+
+        int(
+            "maxCompressedSize",
+            "is generally #COMPRESSBOUND(){@code (inputSize)}, but can be set to any lower value, with the risk that compression can fail (return code 0)"
+        )
     )
 }
