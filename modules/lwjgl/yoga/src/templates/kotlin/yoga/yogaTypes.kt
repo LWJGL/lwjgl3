@@ -137,12 +137,76 @@ val YGCloneNodeFunc = Module.YOGA.callback {
 // Internal API, exposed for efficiency.
 
 val CompactValue = struct(Module.YOGA, "CompactValue", mutable = false) {
+    javaImport("static org.lwjgl.util.yoga.Yoga.*")
     documentation = "Unstable/private API."
 
     union {
         float("value", "")
         uint32_t("repr", "")
     }
+
+    customMethod("""
+    private static final int BIAS        = 0x20000000;
+    private static final int PERCENT_BIT = 0x40000000;
+
+    private static final int AUTO_BITS         = 0x7faaaaaa;
+    private static final int ZERO_BITS_POINT   = 0x7f8f0f0f;
+    private static final int ZERO_BITS_PERCENT = 0x7f80f0f0;
+
+    public float decode() {
+        int repr = repr();
+
+        switch (repr) {
+            case AUTO_BITS:
+                return Float.NaN;
+            case ZERO_BITS_POINT:
+            case ZERO_BITS_PERCENT:
+                return 0.0f;
+        }
+
+        if (Float.isNaN(value())) {
+            return Float.NaN;
+        }
+
+        repr &= ~PERCENT_BIT;
+        repr += BIAS;
+
+        return Float.intBitsToFloat(repr);
+    }
+
+    public YGValue decode(YGValue __result) {
+        int repr = repr();
+
+        switch (repr) {
+            case AUTO_BITS:
+                return __result
+                    .value(YGUndefined)
+                    .unit(YGUnitAuto);
+            case ZERO_BITS_POINT:
+                return __result
+                    .value(0.0f)
+                    .unit(YGUnitPoint);
+            case ZERO_BITS_PERCENT:
+                return __result
+                    .value(0.0f)
+                    .unit(YGUnitPercent);
+        }
+
+        if (Float.isNaN(value())) {
+            return __result
+                .value(YGUndefined)
+                .unit(YGUnitUndefined);
+        }
+
+        int data = repr;
+        data &= ~PERCENT_BIT;
+        data += BIAS;
+
+        return __result
+            .value(Float.intBitsToFloat(data))
+            .unit((repr & PERCENT_BIT) != 0 ? YGUnitPercent : YGUnitPoint);
+    }
+    """)
 }
 
 val YGCachedMeasurement = struct(Module.YOGA, "YGCachedMeasurement", mutable = false) {
@@ -159,6 +223,11 @@ val YGCachedMeasurement = struct(Module.YOGA, "YGCachedMeasurement", mutable = f
 
 val YGFloatOptional = struct(Module.YOGA, "YGFloatOptional", mutable = false) {
     float("value", "")
+
+    customMethod("""
+    public boolean isUndefined() {
+        return Float.isNaN(value());
+    }""")
 }
 
 const val YG_MAX_CACHED_RESULT_COUNT = 16
@@ -171,7 +240,11 @@ val YGLayout = struct(Module.YOGA, "YGLayout", mutable = false) {
     float("border", "")[4]
     float("padding", "")[4]
 
-    uint32_t("bitfield", "")
+    uint8_t("bitfield", "").virtual()
+    YGDirection("direction", "", bits = 2).getter("(nbitfield(struct) >>> 3) & 0b11")
+    bool("didUseLegacyFlag", "", bits = 1).getter("((nbitfield(struct) >>> 2) & 0b1) != 0")
+    bool("doesLegacyStretchFlagAffectsLayout", "", bits = 1).getter("((nbitfield(struct) >>> 1) & 0b1) != 0")
+    bool("hadOverflow", "", bits = 1).getter("(nbitfield(struct) & 0b1) != 0")
 
     uint32_t("computedFlexBasisGeneration", "")
     YGFloatOptional("computedFlexBasis", "")
@@ -190,7 +263,17 @@ const val YGEdgeCount = 9
 val YGStyle = struct(Module.YOGA, "YGStyle", mutable = false) {
     documentation = "Unstable/private API."
 
-    uint32_t("bitfield", "")
+    uint32_t("bitfield", "").virtual()
+    YGDirection("direction", "", bits = 2).getter("(nbitfield(struct) >>> 20) & 0b11")
+    YGFlexDirection("flexDirection", "", bits = 2).getter("(nbitfield(struct) >>> 18) & 0b11")
+    YGJustify("justifyContent", "", bits = 3).getter("(nbitfield(struct) >>> 15) & 0b111")
+    YGAlign("alignContent", "", bits = 3).getter("(nbitfield(struct) >>> 12) & 0b111")
+    YGAlign("alignItems", "", bits = 3).getter("(nbitfield(struct) >>> 9) & 0b111")
+    YGAlign("alignSelf", "", bits = 3).getter("(nbitfield(struct) >>> 6) & 0b111")
+    YGPositionType("positionType", "", bits = 1).getter("(nbitfield(struct) >>> 5) & 0b1")
+    YGWrap("flexWrap", "", bits = 2).getter("(nbitfield(struct) >>> 3) & 0b11")
+    YGOverflow("overflow", "", bits = 2).getter("(nbitfield(struct) >>> 1) & 0b11")
+    YGDisplay("display", "", bits = 1).getter("nbitfield(struct) & 0b1")
     YGFloatOptional("flex", "")
     YGFloatOptional("flexGrow", "")
     YGFloatOptional("flexShrink", "")
@@ -211,7 +294,15 @@ val YGNode = struct(Module.YOGA, "YGNode", nativeName = "YGNodeLWJGL") {
 
     nullable..opaque_p("context", "")
 
-    uint8_t("bitfield", "")
+    uint8_t("bitfield", "").virtual()
+    bool("hasNewLayout", "", bits = 1).getter("((nbitfield(struct) >>> 7) & 0b1) != 0")
+    bool("isReferenceBaseline", "", bits = 1).getter("((nbitfield(struct) >>> 6) & 0b1) != 0")
+    bool("isDirty", "", bits = 1).getter("((nbitfield(struct) >>> 5) & 0b1) != 0")
+    YGNodeType("nodeType", "", bits = 1).getter("(nbitfield(struct) >>> 4) & 0b1")
+    bool("measureUsesContext", "", bits = 1).getter("((nbitfield(struct) >>> 3) & 0b1) != 0")
+    bool("baselineUsesContext", "", bits = 1).getter("((nbitfield(struct) >>> 2) & 0b1) != 0")
+    bool("printUsesContext", "", bits = 1).getter("((nbitfield(struct) >>> 1) & 0b1) != 0")
+    bool("useWebDefaults", "", bits = 1).getter("(nbitfield(struct) & 0b1) != 0")
     padding(1)
 
     union {

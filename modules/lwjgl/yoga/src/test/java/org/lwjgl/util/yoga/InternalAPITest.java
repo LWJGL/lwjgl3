@@ -17,6 +17,72 @@ public class InternalAPITest {
 
         YGStyle style = YGNode.create(node).style();
 
+        YGNodeStyleSetDirection(node, YGDirectionRTL);
+        assertEquals(style.direction(), YGDirectionRTL);
+        YGNodeStyleSetDirection(node, YGDirectionLTR);
+        assertEquals(style.direction(), YGDirectionLTR);
+        YGNodeStyleSetDirection(node, YGDirectionInherit);
+        assertEquals(style.direction(), YGDirectionInherit);
+
+        YGNodeStyleSetFlexDirection(node, YGFlexDirectionRowReverse);
+        assertEquals(style.flexDirection(), YGFlexDirectionRowReverse);
+        YGNodeStyleSetFlexDirection(node, YGFlexDirectionColumnReverse);
+        assertEquals(style.flexDirection(), YGFlexDirectionColumnReverse);
+        YGNodeStyleSetFlexDirection(node, YGFlexDirectionColumn);
+        assertEquals(style.flexDirection(), YGFlexDirectionColumn);
+
+        YGNodeStyleSetJustifyContent(node, YGJustifySpaceEvenly);
+        assertEquals(style.justifyContent(), YGJustifySpaceEvenly);
+        YGNodeStyleSetJustifyContent(node, YGJustifyCenter);
+        assertEquals(style.justifyContent(), YGJustifyCenter);
+        YGNodeStyleSetJustifyContent(node, YGJustifyFlexStart);
+        assertEquals(style.justifyContent(), YGJustifyFlexStart);
+
+        YGNodeStyleSetAlignContent(node, YGAlignSpaceAround);
+        assertEquals(style.alignContent(), YGAlignSpaceAround);
+        YGNodeStyleSetAlignContent(node, YGAlignFlexStart);
+        assertEquals(style.alignContent(), YGAlignFlexStart);
+        YGNodeStyleSetAlignContent(node, YGAlignAuto);
+        assertEquals(style.alignContent(), YGAlignAuto);
+
+        YGNodeStyleSetAlignItems(node, YGAlignSpaceAround);
+        assertEquals(style.alignItems(), YGAlignSpaceAround);
+        YGNodeStyleSetAlignItems(node, YGAlignFlexStart);
+        assertEquals(style.alignItems(), YGAlignFlexStart);
+        YGNodeStyleSetAlignItems(node, YGAlignAuto);
+        assertEquals(style.alignItems(), YGAlignAuto);
+
+        YGNodeStyleSetAlignSelf(node, YGAlignSpaceAround);
+        assertEquals(style.alignSelf(), YGAlignSpaceAround);
+        YGNodeStyleSetAlignSelf(node, YGAlignFlexStart);
+        assertEquals(style.alignSelf(), YGAlignFlexStart);
+        YGNodeStyleSetAlignSelf(node, YGAlignAuto);
+        assertEquals(style.alignSelf(), YGAlignAuto);
+
+        YGNodeStyleSetPositionType(node, YGPositionTypeAbsolute);
+        assertEquals(style.positionType(), YGPositionTypeAbsolute);
+        YGNodeStyleSetPositionType(node, YGPositionTypeRelative);
+        assertEquals(style.positionType(), YGPositionTypeRelative);
+
+        YGNodeStyleSetFlexWrap(node, YGWrapReverse);
+        assertEquals(style.flexWrap(), YGWrapReverse);
+        YGNodeStyleSetFlexWrap(node, YGWrapWrap);
+        assertEquals(style.flexWrap(), YGWrapWrap);
+        YGNodeStyleSetFlexWrap(node, YGWrapNoWrap);
+        assertEquals(style.flexWrap(), YGWrapNoWrap);
+
+        YGNodeStyleSetOverflow(node, YGOverflowScroll);
+        assertEquals(style.overflow(), YGOverflowScroll);
+        YGNodeStyleSetOverflow(node, YGOverflowHidden);
+        assertEquals(style.overflow(), YGOverflowHidden);
+        YGNodeStyleSetOverflow(node, YGOverflowVisible);
+        assertEquals(style.overflow(), YGOverflowVisible);
+
+        YGNodeStyleSetDisplay(node, YGDisplayNone);
+        assertEquals(style.display(), YGDisplayNone);
+        YGNodeStyleSetDisplay(node, YGDisplayFlex);
+        assertEquals(style.display(), YGDisplayFlex);
+
         float MAGICF = 12345678.9f;
 
         YGNodeStyleSetFlex(node, MAGICF);
@@ -35,58 +101,58 @@ public class InternalAPITest {
         assertEquals(style.flexShrink().value(), 0.0f);
 
         YGNodeStyleSetFlexBasis(node, MAGICF);
-        assertEquals(decode(style.flexBasis()), MAGICF);
+        assertEquals(style.flexBasis().decode(), MAGICF);
         YGNodeStyleSetFlexBasis(node, 0.0f);
-        assertEquals(decode(style.flexBasis()), 0.0f);
+        assertEquals(style.flexBasis().decode(), 0.0f);
 
         for (int i = 0; i <= YGEdgeAll; i++) {
             YGNodeStyleSetMargin(node, i, MAGICF);
-            assertEquals(decode(style.margin(i)), MAGICF);
+            assertEquals(style.margin(i).decode(), MAGICF);
             YGNodeStyleSetMargin(node, i, 0.0f);
-            assertEquals(decode(style.margin(i)), 0.0f);
+            assertEquals(style.margin(i).decode(), 0.0f);
 
             YGNodeStyleSetPosition(node, i, MAGICF);
-            assertEquals(decode(style.positions(i)), MAGICF);
+            assertEquals(style.positions(i).decode(), MAGICF);
             YGNodeStyleSetPosition(node, i, 0.0f);
-            assertEquals(decode(style.positions(i)), 0.0f);
+            assertEquals(style.positions(i).decode(), 0.0f);
 
             YGNodeStyleSetPadding(node, i, MAGICF);
-            assertEquals(decode(style.padding(i)), MAGICF);
+            assertEquals(style.padding(i).decode(), MAGICF);
             YGNodeStyleSetPadding(node, i, 0.0f);
-            assertEquals(decode(style.padding(i)), 0.0f);
+            assertEquals(style.padding(i).decode(), 0.0f);
 
             YGNodeStyleSetBorder(node, i, MAGICF);
-            assertEquals(decode(style.border(i)), MAGICF);
+            assertEquals(style.border(i).decode(), MAGICF);
             YGNodeStyleSetBorder(node, i, 0.0f);
-            assertEquals(decode(style.border(i)), 0.0f);
+            assertEquals(style.border(i).decode(), 0.0f);
         }
 
         YGNodeStyleSetWidth(node, MAGICF);
         YGNodeStyleSetHeight(node, MAGICF);
-        assertEquals(decode(style.dimensions(0)), MAGICF);
-        assertEquals(decode(style.dimensions(1)), MAGICF);
+        assertEquals(style.dimensions(0).decode(), MAGICF);
+        assertEquals(style.dimensions(1).decode(), MAGICF);
         YGNodeStyleSetWidth(node, 0.0f);
         YGNodeStyleSetHeight(node, 0.0f);
-        assertEquals(decode(style.dimensions(0)), 0.0f);
-        assertEquals(decode(style.dimensions(1)), 0.0f);
+        assertEquals(style.dimensions(0).decode(), 0.0f);
+        assertEquals(style.dimensions(1).decode(), 0.0f);
 
         YGNodeStyleSetMinWidth(node, MAGICF);
         YGNodeStyleSetMinHeight(node, MAGICF);
-        assertEquals(decode(style.minDimensions(0)), MAGICF);
-        assertEquals(decode(style.minDimensions(1)), MAGICF);
+        assertEquals(style.minDimensions(0).decode(), MAGICF);
+        assertEquals(style.minDimensions(1).decode(), MAGICF);
         YGNodeStyleSetMinWidth(node, 0.0f);
         YGNodeStyleSetMinHeight(node, 0.0f);
-        assertEquals(decode(style.minDimensions(0)), 0.0f);
-        assertEquals(decode(style.minDimensions(1)), 0.0f);
+        assertEquals(style.minDimensions(0).decode(), 0.0f);
+        assertEquals(style.minDimensions(1).decode(), 0.0f);
 
         YGNodeStyleSetMaxWidth(node, MAGICF);
         YGNodeStyleSetMaxHeight(node, MAGICF);
-        assertEquals(decode(style.maxDimensions(0)), MAGICF);
-        assertEquals(decode(style.maxDimensions(1)), MAGICF);
+        assertEquals(style.maxDimensions(0).decode(), MAGICF);
+        assertEquals(style.maxDimensions(1).decode(), MAGICF);
         YGNodeStyleSetMaxWidth(node, 0.0f);
         YGNodeStyleSetMaxHeight(node, 0.0f);
-        assertEquals(decode(style.maxDimensions(0)), 0.0f);
-        assertEquals(decode(style.maxDimensions(1)), 0.0f);
+        assertEquals(style.maxDimensions(0).decode(), 0.0f);
+        assertEquals(style.maxDimensions(1).decode(), 0.0f);
 
         YGNodeStyleSetAspectRatio(node, MAGICF);
         assertEquals(style.aspectRatio().value(), MAGICF);
@@ -147,34 +213,6 @@ public class InternalAPITest {
 
         YGNodeFree(node);
         YGNodeFree(root);
-    }
-
-    private static final int BIAS        = 0x20000000;
-    private static final int PERCENT_BIT = 0x40000000;
-
-    private static final int AUTO_BITS         = 0x7faaaaaa;
-    private static final int ZERO_BITS_POINT   = 0x7f8f0f0f;
-    private static final int ZERO_BITS_PERCENT = 0x7f80f0f0;
-
-    private static float decode(CompactValue value) {
-        int repr = value.repr();
-
-        switch (repr) {
-            case AUTO_BITS:
-                return Float.NaN;
-            case ZERO_BITS_POINT:
-            case ZERO_BITS_PERCENT:
-                return 0.0f;
-        }
-
-        if (Float.isNaN(value.value())) {
-            return Float.NaN;
-        }
-
-        repr &= ~PERCENT_BIT;
-        repr += BIAS;
-
-        return Float.intBitsToFloat(repr);
     }
 
 }

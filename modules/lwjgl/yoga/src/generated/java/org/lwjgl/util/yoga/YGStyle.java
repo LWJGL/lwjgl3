@@ -21,7 +21,16 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <pre><code>
  * struct YGStyle {
- *     uint32_t bitfield;
+ *     YGDirection direction : 2;
+ *     YGFlexDirection flexDirection : 2;
+ *     YGJustify justifyContent : 3;
+ *     YGAlign alignContent : 3;
+ *     YGAlign alignItems : 3;
+ *     YGAlign alignSelf : 3;
+ *     YGPositionType positionType : 1;
+ *     YGWrap flexWrap : 2;
+ *     YGOverflow overflow : 2;
+ *     YGDisplay display : 1;
  *     {@link YGFloatOptional YGFloatOptional} flex;
  *     {@link YGFloatOptional YGFloatOptional} flexGrow;
  *     {@link YGFloatOptional YGFloatOptional} flexShrink;
@@ -108,9 +117,36 @@ public class YGStyle extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code bitfield} field. */
-    @NativeType("uint32_t")
-    public int bitfield() { return nbitfield(address()); }
+    /** Returns the value of the {@code direction} field. */
+    @NativeType("YGDirection")
+    public int direction() { return ndirection(address()); }
+    /** Returns the value of the {@code flexDirection} field. */
+    @NativeType("YGFlexDirection")
+    public int flexDirection() { return nflexDirection(address()); }
+    /** Returns the value of the {@code justifyContent} field. */
+    @NativeType("YGJustify")
+    public int justifyContent() { return njustifyContent(address()); }
+    /** Returns the value of the {@code alignContent} field. */
+    @NativeType("YGAlign")
+    public int alignContent() { return nalignContent(address()); }
+    /** Returns the value of the {@code alignItems} field. */
+    @NativeType("YGAlign")
+    public int alignItems() { return nalignItems(address()); }
+    /** Returns the value of the {@code alignSelf} field. */
+    @NativeType("YGAlign")
+    public int alignSelf() { return nalignSelf(address()); }
+    /** Returns the value of the {@code positionType} field. */
+    @NativeType("YGPositionType")
+    public int positionType() { return npositionType(address()); }
+    /** Returns the value of the {@code flexWrap} field. */
+    @NativeType("YGWrap")
+    public int flexWrap() { return nflexWrap(address()); }
+    /** Returns the value of the {@code overflow} field. */
+    @NativeType("YGOverflow")
+    public int overflow() { return noverflow(address()); }
+    /** Returns the value of the {@code display} field. */
+    @NativeType("YGDisplay")
+    public int display() { return ndisplay(address()); }
     /** Returns a {@link YGFloatOptional} view of the {@code flex} field. */
     public YGFloatOptional flex() { return nflex(address()); }
     /** Returns a {@link YGFloatOptional} view of the {@code flexGrow} field. */
@@ -188,8 +224,27 @@ public class YGStyle extends Struct {
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #bitfield}. */
     public static int nbitfield(long struct) { return UNSAFE.getInt(null, struct + YGStyle.BITFIELD); }
+    /** Unsafe version of {@link #direction}. */
+    public static int ndirection(long struct) { return (nbitfield(struct) >>> 20) & 0b11; }
+    /** Unsafe version of {@link #flexDirection}. */
+    public static int nflexDirection(long struct) { return (nbitfield(struct) >>> 18) & 0b11; }
+    /** Unsafe version of {@link #justifyContent}. */
+    public static int njustifyContent(long struct) { return (nbitfield(struct) >>> 15) & 0b111; }
+    /** Unsafe version of {@link #alignContent}. */
+    public static int nalignContent(long struct) { return (nbitfield(struct) >>> 12) & 0b111; }
+    /** Unsafe version of {@link #alignItems}. */
+    public static int nalignItems(long struct) { return (nbitfield(struct) >>> 9) & 0b111; }
+    /** Unsafe version of {@link #alignSelf}. */
+    public static int nalignSelf(long struct) { return (nbitfield(struct) >>> 6) & 0b111; }
+    /** Unsafe version of {@link #positionType}. */
+    public static int npositionType(long struct) { return (nbitfield(struct) >>> 5) & 0b1; }
+    /** Unsafe version of {@link #flexWrap}. */
+    public static int nflexWrap(long struct) { return (nbitfield(struct) >>> 3) & 0b11; }
+    /** Unsafe version of {@link #overflow}. */
+    public static int noverflow(long struct) { return (nbitfield(struct) >>> 1) & 0b11; }
+    /** Unsafe version of {@link #display}. */
+    public static int ndisplay(long struct) { return nbitfield(struct) & 0b1; }
     /** Unsafe version of {@link #flex}. */
     public static YGFloatOptional nflex(long struct) { return YGFloatOptional.create(struct + YGStyle.FLEX); }
     /** Unsafe version of {@link #flexGrow}. */
@@ -281,9 +336,36 @@ public class YGStyle extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code bitfield} field. */
-        @NativeType("uint32_t")
-        public int bitfield() { return YGStyle.nbitfield(address()); }
+        /** Returns the value of the {@code direction} field. */
+        @NativeType("YGDirection")
+        public int direction() { return YGStyle.ndirection(address()); }
+        /** Returns the value of the {@code flexDirection} field. */
+        @NativeType("YGFlexDirection")
+        public int flexDirection() { return YGStyle.nflexDirection(address()); }
+        /** Returns the value of the {@code justifyContent} field. */
+        @NativeType("YGJustify")
+        public int justifyContent() { return YGStyle.njustifyContent(address()); }
+        /** Returns the value of the {@code alignContent} field. */
+        @NativeType("YGAlign")
+        public int alignContent() { return YGStyle.nalignContent(address()); }
+        /** Returns the value of the {@code alignItems} field. */
+        @NativeType("YGAlign")
+        public int alignItems() { return YGStyle.nalignItems(address()); }
+        /** Returns the value of the {@code alignSelf} field. */
+        @NativeType("YGAlign")
+        public int alignSelf() { return YGStyle.nalignSelf(address()); }
+        /** Returns the value of the {@code positionType} field. */
+        @NativeType("YGPositionType")
+        public int positionType() { return YGStyle.npositionType(address()); }
+        /** Returns the value of the {@code flexWrap} field. */
+        @NativeType("YGWrap")
+        public int flexWrap() { return YGStyle.nflexWrap(address()); }
+        /** Returns the value of the {@code overflow} field. */
+        @NativeType("YGOverflow")
+        public int overflow() { return YGStyle.noverflow(address()); }
+        /** Returns the value of the {@code display} field. */
+        @NativeType("YGDisplay")
+        public int display() { return YGStyle.ndisplay(address()); }
         /** Returns a {@link YGFloatOptional} view of the {@code flex} field. */
         public YGFloatOptional flex() { return YGStyle.nflex(address()); }
         /** Returns a {@link YGFloatOptional} view of the {@code flexGrow} field. */

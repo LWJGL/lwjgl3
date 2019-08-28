@@ -13,6 +13,8 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
+import static org.lwjgl.util.yoga.Yoga.*;
+
 /**
  * Unstable/private API.
  * 
@@ -108,6 +110,67 @@ public class CompactValue extends Struct {
     public static float nvalue(long struct) { return UNSAFE.getFloat(null, struct + CompactValue.VALUE); }
     /** Unsafe version of {@link #repr}. */
     public static int nrepr(long struct) { return UNSAFE.getInt(null, struct + CompactValue.REPR); }
+
+    private static final int BIAS        = 0x20000000;
+    private static final int PERCENT_BIT = 0x40000000;
+
+    private static final int AUTO_BITS         = 0x7faaaaaa;
+    private static final int ZERO_BITS_POINT   = 0x7f8f0f0f;
+    private static final int ZERO_BITS_PERCENT = 0x7f80f0f0;
+
+    public float decode() {
+        int repr = repr();
+
+        switch (repr) {
+            case AUTO_BITS:
+                return Float.NaN;
+            case ZERO_BITS_POINT:
+            case ZERO_BITS_PERCENT:
+                return 0.0f;
+        }
+
+        if (Float.isNaN(value())) {
+            return Float.NaN;
+        }
+
+        repr &= ~PERCENT_BIT;
+        repr += BIAS;
+
+        return Float.intBitsToFloat(repr);
+    }
+
+    public YGValue decode(YGValue __result) {
+        int repr = repr();
+
+        switch (repr) {
+            case AUTO_BITS:
+                return __result
+                    .value(YGUndefined)
+                    .unit(YGUnitAuto);
+            case ZERO_BITS_POINT:
+                return __result
+                    .value(0.0f)
+                    .unit(YGUnitPoint);
+            case ZERO_BITS_PERCENT:
+                return __result
+                    .value(0.0f)
+                    .unit(YGUnitPercent);
+        }
+
+        if (Float.isNaN(value())) {
+            return __result
+                .value(YGUndefined)
+                .unit(YGUnitUndefined);
+        }
+
+        int data = repr;
+        data &= ~PERCENT_BIT;
+        data += BIAS;
+
+        return __result
+            .value(Float.intBitsToFloat(data))
+            .unit((repr & PERCENT_BIT) != 0 ? YGUnitPercent : YGUnitPoint);
+    }
 
     // -----------------------------------
 

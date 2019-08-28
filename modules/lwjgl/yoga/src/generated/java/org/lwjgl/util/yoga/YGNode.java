@@ -24,7 +24,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre><code>
  * struct YGNodeLWJGL {
  *     void * context;
- *     uint8_t bitfield;
+ *     bool hasNewLayout : 1;
+ *     bool isReferenceBaseline : 1;
+ *     bool isDirty : 1;
+ *     YGNodeType nodeType : 1;
+ *     bool measureUsesContext : 1;
+ *     bool baselineUsesContext : 1;
+ *     bool printUsesContext : 1;
+ *     bool useWebDefaults : 1;
  *     char[1];
  *     union {
  *         {@link YGMeasureFuncI YGMeasureFunc} noContext;
@@ -146,9 +153,30 @@ public class YGNode extends Struct implements NativeResource {
     /** Returns the value of the {@code context} field. */
     @NativeType("void *")
     public long context() { return ncontext(address()); }
-    /** Returns the value of the {@code bitfield} field. */
-    @NativeType("uint8_t")
-    public byte bitfield() { return nbitfield(address()); }
+    /** Returns the value of the {@code hasNewLayout} field. */
+    @NativeType("bool")
+    public boolean hasNewLayout() { return nhasNewLayout(address()); }
+    /** Returns the value of the {@code isReferenceBaseline} field. */
+    @NativeType("bool")
+    public boolean isReferenceBaseline() { return nisReferenceBaseline(address()); }
+    /** Returns the value of the {@code isDirty} field. */
+    @NativeType("bool")
+    public boolean isDirty() { return nisDirty(address()); }
+    /** Returns the value of the {@code nodeType} field. */
+    @NativeType("YGNodeType")
+    public int nodeType() { return nnodeType(address()); }
+    /** Returns the value of the {@code measureUsesContext} field. */
+    @NativeType("bool")
+    public boolean measureUsesContext() { return nmeasureUsesContext(address()); }
+    /** Returns the value of the {@code baselineUsesContext} field. */
+    @NativeType("bool")
+    public boolean baselineUsesContext() { return nbaselineUsesContext(address()); }
+    /** Returns the value of the {@code printUsesContext} field. */
+    @NativeType("bool")
+    public boolean printUsesContext() { return nprintUsesContext(address()); }
+    /** Returns the value of the {@code useWebDefaults} field. */
+    @NativeType("bool")
+    public boolean useWebDefaults() { return nuseWebDefaults(address()); }
     /** Returns the value of the {@code measure.noContext} field. */
     @Nullable
     public YGMeasureFunc measure_noContext() { return nmeasure_noContext(address()); }
@@ -191,8 +219,22 @@ public class YGNode extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@code context} field. */
     public YGNode context(@NativeType("void *") long value) { ncontext(address(), value); return this; }
-    /** Sets the specified value to the {@code bitfield} field. */
-    public YGNode bitfield(@NativeType("uint8_t") byte value) { nbitfield(address(), value); return this; }
+    /** Sets the specified value to the {@code hasNewLayout} field. */
+    public YGNode hasNewLayout(@NativeType("bool") boolean value) { nhasNewLayout(address(), value); return this; }
+    /** Sets the specified value to the {@code isReferenceBaseline} field. */
+    public YGNode isReferenceBaseline(@NativeType("bool") boolean value) { nisReferenceBaseline(address(), value); return this; }
+    /** Sets the specified value to the {@code isDirty} field. */
+    public YGNode isDirty(@NativeType("bool") boolean value) { nisDirty(address(), value); return this; }
+    /** Sets the specified value to the {@code nodeType} field. */
+    public YGNode nodeType(@NativeType("YGNodeType") int value) { nnodeType(address(), value); return this; }
+    /** Sets the specified value to the {@code measureUsesContext} field. */
+    public YGNode measureUsesContext(@NativeType("bool") boolean value) { nmeasureUsesContext(address(), value); return this; }
+    /** Sets the specified value to the {@code baselineUsesContext} field. */
+    public YGNode baselineUsesContext(@NativeType("bool") boolean value) { nbaselineUsesContext(address(), value); return this; }
+    /** Sets the specified value to the {@code printUsesContext} field. */
+    public YGNode printUsesContext(@NativeType("bool") boolean value) { nprintUsesContext(address(), value); return this; }
+    /** Sets the specified value to the {@code useWebDefaults} field. */
+    public YGNode useWebDefaults(@NativeType("bool") boolean value) { nuseWebDefaults(address(), value); return this; }
     /** Sets the specified value to the {@code measure.noContext} field. */
     public YGNode measure_noContext(@Nullable @NativeType("YGMeasureFunc") YGMeasureFuncI value) { nmeasure_noContext(address(), value); return this; }
     /** Sets the specified value to the {@code measure.withContext} field. */
@@ -383,8 +425,23 @@ public class YGNode extends Struct implements NativeResource {
 
     /** Unsafe version of {@link #context}. */
     public static long ncontext(long struct) { return memGetAddress(struct + YGNode.CONTEXT); }
-    /** Unsafe version of {@link #bitfield}. */
     public static byte nbitfield(long struct) { return UNSAFE.getByte(null, struct + YGNode.BITFIELD); }
+    /** Unsafe version of {@link #hasNewLayout}. */
+    public static boolean nhasNewLayout(long struct) { return ((nbitfield(struct) >>> 7) & 0b1) != 0; }
+    /** Unsafe version of {@link #isReferenceBaseline}. */
+    public static boolean nisReferenceBaseline(long struct) { return ((nbitfield(struct) >>> 6) & 0b1) != 0; }
+    /** Unsafe version of {@link #isDirty}. */
+    public static boolean nisDirty(long struct) { return ((nbitfield(struct) >>> 5) & 0b1) != 0; }
+    /** Unsafe version of {@link #nodeType}. */
+    public static int nnodeType(long struct) { return (nbitfield(struct) >>> 4) & 0b1; }
+    /** Unsafe version of {@link #measureUsesContext}. */
+    public static boolean nmeasureUsesContext(long struct) { return ((nbitfield(struct) >>> 3) & 0b1) != 0; }
+    /** Unsafe version of {@link #baselineUsesContext}. */
+    public static boolean nbaselineUsesContext(long struct) { return ((nbitfield(struct) >>> 2) & 0b1) != 0; }
+    /** Unsafe version of {@link #printUsesContext}. */
+    public static boolean nprintUsesContext(long struct) { return ((nbitfield(struct) >>> 1) & 0b1) != 0; }
+    /** Unsafe version of {@link #useWebDefaults}. */
+    public static boolean nuseWebDefaults(long struct) { return (nbitfield(struct) & 0b1) != 0; }
     /** Unsafe version of {@link #measure_noContext}. */
     @Nullable public static YGMeasureFunc nmeasure_noContext(long struct) { return YGMeasureFunc.createSafe(memGetAddress(struct + YGNode.MEASURE_NOCONTEXT)); }
     /** Unsafe version of {@link #measure_withContext}. */
@@ -419,8 +476,23 @@ public class YGNode extends Struct implements NativeResource {
 
     /** Unsafe version of {@link #context(long) context}. */
     public static void ncontext(long struct, long value) { memPutAddress(struct + YGNode.CONTEXT, value); }
-    /** Unsafe version of {@link #bitfield(byte) bitfield}. */
     public static void nbitfield(long struct, byte value) { UNSAFE.putByte(null, struct + YGNode.BITFIELD, value); }
+    /** Unsafe version of {@link #hasNewLayout(boolean) hasNewLayout}. */
+    public static native void nhasNewLayout(long struct, boolean value);
+    /** Unsafe version of {@link #isReferenceBaseline(boolean) isReferenceBaseline}. */
+    public static native void nisReferenceBaseline(long struct, boolean value);
+    /** Unsafe version of {@link #isDirty(boolean) isDirty}. */
+    public static native void nisDirty(long struct, boolean value);
+    /** Unsafe version of {@link #nodeType(int) nodeType}. */
+    public static native void nnodeType(long struct, int value);
+    /** Unsafe version of {@link #measureUsesContext(boolean) measureUsesContext}. */
+    public static native void nmeasureUsesContext(long struct, boolean value);
+    /** Unsafe version of {@link #baselineUsesContext(boolean) baselineUsesContext}. */
+    public static native void nbaselineUsesContext(long struct, boolean value);
+    /** Unsafe version of {@link #printUsesContext(boolean) printUsesContext}. */
+    public static native void nprintUsesContext(long struct, boolean value);
+    /** Unsafe version of {@link #useWebDefaults(boolean) useWebDefaults}. */
+    public static native void nuseWebDefaults(long struct, boolean value);
     /** Unsafe version of {@link #measure_noContext(YGMeasureFuncI) measure_noContext}. */
     public static void nmeasure_noContext(long struct, @Nullable YGMeasureFuncI value) { memPutAddress(struct + YGNode.MEASURE_NOCONTEXT, memAddressSafe(value)); }
     /** Unsafe version of {@link #measure_withContext(long) measure_withContext}. */
@@ -497,9 +569,30 @@ public class YGNode extends Struct implements NativeResource {
         /** Returns the value of the {@code context} field. */
         @NativeType("void *")
         public long context() { return YGNode.ncontext(address()); }
-        /** Returns the value of the {@code bitfield} field. */
-        @NativeType("uint8_t")
-        public byte bitfield() { return YGNode.nbitfield(address()); }
+        /** Returns the value of the {@code hasNewLayout} field. */
+        @NativeType("bool")
+        public boolean hasNewLayout() { return YGNode.nhasNewLayout(address()); }
+        /** Returns the value of the {@code isReferenceBaseline} field. */
+        @NativeType("bool")
+        public boolean isReferenceBaseline() { return YGNode.nisReferenceBaseline(address()); }
+        /** Returns the value of the {@code isDirty} field. */
+        @NativeType("bool")
+        public boolean isDirty() { return YGNode.nisDirty(address()); }
+        /** Returns the value of the {@code nodeType} field. */
+        @NativeType("YGNodeType")
+        public int nodeType() { return YGNode.nnodeType(address()); }
+        /** Returns the value of the {@code measureUsesContext} field. */
+        @NativeType("bool")
+        public boolean measureUsesContext() { return YGNode.nmeasureUsesContext(address()); }
+        /** Returns the value of the {@code baselineUsesContext} field. */
+        @NativeType("bool")
+        public boolean baselineUsesContext() { return YGNode.nbaselineUsesContext(address()); }
+        /** Returns the value of the {@code printUsesContext} field. */
+        @NativeType("bool")
+        public boolean printUsesContext() { return YGNode.nprintUsesContext(address()); }
+        /** Returns the value of the {@code useWebDefaults} field. */
+        @NativeType("bool")
+        public boolean useWebDefaults() { return YGNode.nuseWebDefaults(address()); }
         /** Returns the value of the {@code measure.noContext} field. */
         @Nullable
         public YGMeasureFunc measure_noContext() { return YGNode.nmeasure_noContext(address()); }
@@ -542,8 +635,22 @@ public class YGNode extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@code context} field. */
         public YGNode.Buffer context(@NativeType("void *") long value) { YGNode.ncontext(address(), value); return this; }
-        /** Sets the specified value to the {@code bitfield} field. */
-        public YGNode.Buffer bitfield(@NativeType("uint8_t") byte value) { YGNode.nbitfield(address(), value); return this; }
+        /** Sets the specified value to the {@code hasNewLayout} field. */
+        public YGNode.Buffer hasNewLayout(@NativeType("bool") boolean value) { YGNode.nhasNewLayout(address(), value); return this; }
+        /** Sets the specified value to the {@code isReferenceBaseline} field. */
+        public YGNode.Buffer isReferenceBaseline(@NativeType("bool") boolean value) { YGNode.nisReferenceBaseline(address(), value); return this; }
+        /** Sets the specified value to the {@code isDirty} field. */
+        public YGNode.Buffer isDirty(@NativeType("bool") boolean value) { YGNode.nisDirty(address(), value); return this; }
+        /** Sets the specified value to the {@code nodeType} field. */
+        public YGNode.Buffer nodeType(@NativeType("YGNodeType") int value) { YGNode.nnodeType(address(), value); return this; }
+        /** Sets the specified value to the {@code measureUsesContext} field. */
+        public YGNode.Buffer measureUsesContext(@NativeType("bool") boolean value) { YGNode.nmeasureUsesContext(address(), value); return this; }
+        /** Sets the specified value to the {@code baselineUsesContext} field. */
+        public YGNode.Buffer baselineUsesContext(@NativeType("bool") boolean value) { YGNode.nbaselineUsesContext(address(), value); return this; }
+        /** Sets the specified value to the {@code printUsesContext} field. */
+        public YGNode.Buffer printUsesContext(@NativeType("bool") boolean value) { YGNode.nprintUsesContext(address(), value); return this; }
+        /** Sets the specified value to the {@code useWebDefaults} field. */
+        public YGNode.Buffer useWebDefaults(@NativeType("bool") boolean value) { YGNode.nuseWebDefaults(address(), value); return this; }
         /** Sets the specified value to the {@code measure.noContext} field. */
         public YGNode.Buffer measure_noContext(@Nullable @NativeType("YGMeasureFunc") YGMeasureFuncI value) { YGNode.nmeasure_noContext(address(), value); return this; }
         /** Sets the specified value to the {@code measure.withContext} field. */

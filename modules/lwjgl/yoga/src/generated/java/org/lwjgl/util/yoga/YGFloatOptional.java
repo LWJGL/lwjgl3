@@ -94,6 +94,10 @@ public class YGFloatOptional extends Struct {
     /** Unsafe version of {@link #value}. */
     public static float nvalue(long struct) { return UNSAFE.getFloat(null, struct + YGFloatOptional.VALUE); }
 
+    public boolean isUndefined() {
+        return Float.isNaN(value());
+    }
+
     // -----------------------------------
 
     /** An array of {@link YGFloatOptional} structs. */
