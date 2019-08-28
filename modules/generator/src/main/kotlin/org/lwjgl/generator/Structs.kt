@@ -45,6 +45,16 @@ open class StructMember(
 
     override fun validate(modifier: StructMemberModifier) = modifier.validate(this)
 
+    internal var getter: String? = null
+    fun getter(expression: String) {
+        this.getter = expression;
+    }
+
+    internal var setter: String? = null
+    fun setter(expression: String) {
+        this.setter = expression;
+    }
+
     internal val offsetField
         get() = name.toUpperCase()
 
@@ -60,6 +70,13 @@ open class StructMember(
     fun private(): StructMember {
         public = false
         return this
+    }
+
+    /** private + hidden from struct layout javadoc */
+    internal var virtual = false
+    fun virtual(): StructMember {
+        virtual = true
+        return private()
     }
 
     /** mutable if true, even if the parent struct is not mutable */
@@ -504,7 +521,9 @@ $indent}"""
     private fun printStructLayout(indentation: String = "", parent: String = ""): String {
         val memberIndentation = "$indentation    "
         return """$nativeNameQualified {
-${members.joinToString(";\n$memberIndentation", prefix = memberIndentation, postfix = ";") {member ->
+${members.asSequence()
+        .filter { !it.virtual }
+        .joinToString(";\n$memberIndentation", prefix = memberIndentation, postfix = ";") { member ->
             if (member.isNestedStructDefinition || (member is StructMemberArray && member.nativeType is StructType && member.nativeType.name === ANONYMOUS)) {
                 val struct = (member.nativeType as StructType).definition
                 "${struct.printStructLayout(memberIndentation, "$parent${struct.className}.")}${if (member.name === ANONYMOUS) "" else " ${member.name.let {
@@ -1231,37 +1250,39 @@ ${validations.joinToString("\n")}
         if (pack != null || alignas != null) {
             println("$indentation$t${pack ?: "DEFAULT_PACK_ALIGNMENT"}, ${alignas ?: "DEFAULT_ALIGN_AS"},")
         }
-        struct.members.forEachWithMore { it, more ->
-            val field = it.offsetField(parentField)
+        struct.members
+            .filter { it.bits == -1 }
+            .forEachWithMore { it, more ->
+                val field = it.offsetField(parentField)
 
-            if (more)
-                println(",")
-            if (it is StructMemberPadding) {
-                print("$indentation${t}__padding(${it.size}, ${it.condition ?: "true"})")
-            } else if (it.isNestedStructDefinition) {
-                print("$indentation$t")
-                generateLayout((it.nativeType as StructType).definition, "$indentation$t", field)
-            } else {
-                val size: String
-                val alignment: String
-
-                if (it.nativeType is StructType) {
-                    size = "${it.nativeType.javaMethodType}.SIZEOF"
-                    alignment = "${it.nativeType.javaMethodType}.ALIGNOF${if (it.nativeType.definition.alignas != null) ", true" else ""}"
+                if (more)
+                    println(",")
+                if (it is StructMemberPadding) {
+                    print("$indentation${t}__padding(${it.size}, ${it.condition ?: "true"})")
+                } else if (it.isNestedStructDefinition) {
+                    print("$indentation$t")
+                    generateLayout((it.nativeType as StructType).definition, "$indentation$t", field)
                 } else {
-                    size = if (it.nativeType.isPointer)
-                        "POINTER_SIZE"
-                    else
-                        (it.nativeType.mapping as PrimitiveMapping).bytesExpression
-                    alignment = size
-                }
+                    val size: String
+                    val alignment: String
 
-                if (it is StructMemberArray)
-                    print("$indentation${t}__array($size${if (size != alignment) ", $alignment" else ""}, ${it.size})")
-                else
-                    print("$indentation${t}__member($size${if (size != alignment) ", $alignment" else ""})")
+                    if (it.nativeType is StructType) {
+                        size = "${it.nativeType.javaMethodType}.SIZEOF"
+                        alignment = "${it.nativeType.javaMethodType}.ALIGNOF${if (it.nativeType.definition.alignas != null) ", true" else ""}"
+                    } else {
+                        size = if (it.nativeType.isPointer)
+                            "POINTER_SIZE"
+                        else
+                            (it.nativeType.mapping as PrimitiveMapping).bytesExpression
+                        alignment = size
+                    }
+
+                    if (it is StructMemberArray)
+                        print("$indentation${t}__array($size${if (size != alignment) ", $alignment" else ""}, ${it.size})")
+                    else
+                        print("$indentation${t}__member($size${if (size != alignment) ", $alignment" else ""})")
+                }
             }
-        }
         print("\n$indentation)")
     }
 
@@ -1509,7 +1530,9 @@ ${validations.joinToString("\n")}
                                 else
                                     "$t/** Unsafe version of {@link #$setter(${if (it.nativeType.mapping == PrimitiveMapping.BOOLEAN4) "boolean" else javaType}) $setter}. */"
                             )
-                        if (it.bits != -1) {
+                        if (it.setter != null) {
+                            println("${t}public static void n$setter(long $STRUCT, $javaType value) { ${it.setter}; }")
+                        } else if (it.bits != -1) {
                             println("${t}public static native void n$setter(long $STRUCT, $javaType value);")
                         } else {
                             print("${t}public static void n$setter(long $STRUCT, $javaType value) { ${getBufferMethod("put", it, javaType)}$STRUCT + $field, ")
@@ -1826,6 +1849,8 @@ ${validations.joinToString("\n")}
                                 getFieldOffset(userDataMember, parentStruct, parentField)
                         }
                         println("$t${it.nullable("public")} static ${it.nativeType.className} n$getter(long $STRUCT) { return ${it.construct(it.nativeType.className)}(memGetAddress($STRUCT + $callbackField)); }")
+                    } else if (it.getter != null) {
+                        println("${t}public static ${it.nativeType.nativeMethodType} n$getter(long $STRUCT) { return ${it.getter}; }")
                     } else if (it.bits != -1) {
                         println("${t}public static native ${it.nativeType.nativeMethodType} n$getter(long $STRUCT);")
                     } else {
@@ -2087,7 +2112,7 @@ $indent */""")
         bufferMethodMap[javaType] ?: throw UnsupportedOperationException("Unsupported struct member java type: $className.${member.name} ($javaType)")
         }(null, "
 
-    override val skipNative get() = !nativeLayout && members.isNotEmpty() && members.none { it.bits != -1 }
+    override val skipNative get() = !nativeLayout && members.isNotEmpty() && members.none { it.bits != -1 && it.getter == null }
 
     override fun PrintWriter.generateNative() {
         print(HEADER)
@@ -2171,7 +2196,7 @@ EXTERN_C_EXIT""")
                 val structType = it.nativeType as StructType
                 if (structType.name === ANONYMOUS)
                     generateNativeGetters(structType.definition.members, "$prefix${it.name}.") // recursion
-            } else if (it.bits != -1) {
+            } else if (it.bits != -1 && it.getter == null) {
                 val signature = "${nativeFileNameJNI}_n${"${prefix.replace('.', '_')}${it.name}".asJNIName}__J"
                 print("""
 
@@ -2193,7 +2218,7 @@ JNIEXPORT ${it.nativeType.jniFunctionType} JNICALL Java_$signature(JNIEnv *$JNIE
                 val structType = it.nativeType as StructType
                 if (structType.name === ANONYMOUS)
                     generateNativeSetters(structType.definition.mutableMembers(), "$prefix${it.name}.") // recursion
-            } else if (it.bits != -1) {
+            } else if (it.bits != -1 && it.setter == null) {
                 val signature = "${nativeFileNameJNI}_n${"${prefix.replace('.', '_')}${it.name}".asJNIName}__J${it.nativeType.jniSignatureStrict}"
                 print("""
 
