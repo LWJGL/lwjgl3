@@ -22,6 +22,17 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="KotlinRuntime" level="project" />
+    <orderEntry type="module" module-name="lwjgl.core" />
+    <orderEntry type="module" module-name="lwjgl.llvm" />
+    <orderEntry type="module-library" scope="RUNTIME">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../bin/libs/native" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntry type="module-library" scope="RUNTIME">
       <library>
         <CLASSES>
@@ -31,7 +42,5 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module" module-name="lwjgl.core" />
-    <orderEntry type="module" module-name="lwjgl.llvm" />
   </component>
 </module>

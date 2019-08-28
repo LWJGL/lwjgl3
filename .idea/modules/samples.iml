@@ -14,6 +14,15 @@
     <orderEntry type="library" scope="TEST" name="JOML" level="project" />
     <orderEntry type="library" scope="TEST" name="jsr305" level="project" />
     <orderEntry type="library" name="JMH" level="project" />
+    <orderEntry type="module-library" scope="RUNTIME">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../bin/libs/native" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntry type="module" module-name="lwjgl.core" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.assimp" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.bgfx" scope="TEST" />

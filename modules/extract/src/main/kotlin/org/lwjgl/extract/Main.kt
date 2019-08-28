@@ -24,12 +24,6 @@ fun main() {
     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
 
     System.setProperty("line.separator", "\n")
-    System.setProperty(
-        "org.lwjgl.librarypath", arrayOf(
-            "bin/libs/native/windows/x64/org/lwjgl",
-            "bin/libs/native/windows/x64/org/lwjgl/llvm"
-        ).joinToString(File.pathSeparator)
-    )
 
     if (Configuration.LLVM_CLANG_LIBRARY_NAME.get() == null) {
         try {
