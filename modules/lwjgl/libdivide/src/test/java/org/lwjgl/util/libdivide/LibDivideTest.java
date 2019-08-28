@@ -13,7 +13,6 @@ import java.util.function.*;
 import static java.lang.Math.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.util.libdivide.LibDivide.*;
 import static org.testng.Assert.*;
 
 @Test()
@@ -66,31 +65,6 @@ public class LibDivideTest {
             doNative,
             LibDivide::libdivide_s32_branchfree_do_ref,
             LibDivide::libdivide_s32_branchfree_do,
-            true
-        );
-
-        test32(
-            LibDivideS32::mallocStack,
-            LibDivide::libdivide_s32_gen_ref,
-            LibDivide::libdivide_s32_gen,
-            doNative,
-            LibDivide::libdivide_s32_do_ref,
-            (numer, denom) -> {
-                switch (libdivide_s32_get_algorithm(denom)) {
-                    case 0:
-                        return libdivide_s32_do_alg0(numer, denom);
-                    case 1:
-                        return libdivide_s32_do_alg1(numer, denom);
-                    case 2:
-                        return libdivide_s32_do_alg2(numer, denom);
-                    case 3:
-                        return libdivide_s32_do_alg3(numer, denom);
-                    case 4:
-                        return libdivide_s32_do_alg4(numer, denom);
-                    default:
-                        throw new UnsupportedOperationException();
-                }
-            },
             false
         );
     }
@@ -117,27 +91,6 @@ public class LibDivideTest {
             LibDivide::libdivide_u32_branchfree_do,
             true
         );
-
-        test32(
-            LibDivideU32::mallocStack,
-            LibDivide::libdivide_u32_gen_ref,
-            LibDivide::libdivide_u32_gen,
-            doNative,
-            LibDivide::libdivide_u32_do_ref,
-            (numer, denom) -> {
-                switch (libdivide_u32_get_algorithm(denom)) {
-                    case 0:
-                        return libdivide_u32_do_alg0(numer, denom);
-                    case 1:
-                        return libdivide_u32_do_alg1(numer, denom);
-                    case 2:
-                        return libdivide_u32_do_alg2(numer, denom);
-                    default:
-                        throw new UnsupportedOperationException();
-                }
-            },
-            false
-        );
     }
 
     public void testS64() {
@@ -160,31 +113,6 @@ public class LibDivideTest {
             doNative,
             LibDivide::libdivide_s64_branchfree_do_ref,
             LibDivide::libdivide_s64_branchfree_do,
-            true
-        );
-
-        test64(
-            LibDivideS64::mallocStack,
-            LibDivide::libdivide_s64_gen_ref,
-            LibDivide::libdivide_s64_gen,
-            doNative,
-            LibDivide::libdivide_s64_do_ref,
-            (numer, denom) -> {
-                switch (libdivide_s64_get_algorithm(denom)) {
-                    case 0:
-                        return libdivide_s64_do_alg0(numer, denom);
-                    case 1:
-                        return libdivide_s64_do_alg1(numer, denom);
-                    case 2:
-                        return libdivide_s64_do_alg2(numer, denom);
-                    case 3:
-                        return libdivide_s64_do_alg3(numer, denom);
-                    case 4:
-                        return libdivide_s64_do_alg4(numer, denom);
-                    default:
-                        throw new UnsupportedOperationException();
-                }
-            },
             false
         );
     }
@@ -211,27 +139,6 @@ public class LibDivideTest {
             LibDivide::libdivide_u64_branchfree_do,
             true
         );
-
-        test64(
-            LibDivideU64::mallocStack,
-            LibDivide::libdivide_u64_gen_ref,
-            LibDivide::libdivide_u64_gen,
-            doNative,
-            LibDivide::libdivide_u64_do_ref,
-            (numer, denom) -> {
-                switch (libdivide_u64_get_algorithm(denom)) {
-                    case 0:
-                        return libdivide_u64_do_alg0(numer, denom);
-                    case 1:
-                        return libdivide_u64_do_alg1(numer, denom);
-                    case 2:
-                        return libdivide_u64_do_alg2(numer, denom);
-                    default:
-                        throw new UnsupportedOperationException();
-                }
-            },
-            false
-        );
     }
 
     private interface Gen32<T extends Struct> {
@@ -250,7 +157,7 @@ public class LibDivideTest {
         Function<MemoryStack, T> malloc,
         Gen32<T> genRef, Gen32<T> gen,
         Native32 doNative, Do32<T> doRef, Do32<T> doJava,
-        boolean branchFree
+        boolean skipOne
     ) {
         try (MemoryStack stack = stackPush()) {
             T magic = malloc.apply(stack);
@@ -258,7 +165,7 @@ public class LibDivideTest {
             // Corner cases
             int[] numers = {0, -1, 1, -2, 2, -3, 3, Integer.MIN_VALUE, Integer.MAX_VALUE};
             for (int d : numers) {
-                if (d == 0 || (branchFree && abs(d) == 1)) {
+                if (d == 0 || (skipOne && d == 1)) {
                     continue;
                 }
                 test32(magic, genRef, gen, d);
@@ -273,7 +180,7 @@ public class LibDivideTest {
                 int d;
                 do {
                     d = rand.nextInt();
-                } while (branchFree && abs(d) == 1);
+                } while (skipOne && d == 1);
 
                 test32(magic, genRef, gen, d);
                 for (int j = 0; j < RANDOM_NUMERS; j++) {
@@ -328,7 +235,7 @@ public class LibDivideTest {
         Function<MemoryStack, T> malloc,
         Gen64<T> genRef, Gen64<T> gen,
         Native64 doNative, Do64<T> doRef, Do64<T> doJava,
-        boolean branchFree
+        boolean skipOne
     ) {
         try (MemoryStack stack = stackPush()) {
 
@@ -337,7 +244,7 @@ public class LibDivideTest {
             // Corner cases
             long[] numers = {0L, -1L, 1L, -2L, 2L, -3L, 3L, Integer.MIN_VALUE, Integer.MAX_VALUE, Long.MIN_VALUE, Long.MAX_VALUE};
             for (long d : numers) {
-                if (d == 0L || (branchFree && abs(d) == 1L)) {
+                if (d == 0L || (skipOne && d == 1L)) {
                     continue;
                 }
                 test64(magic, genRef, gen, d);
@@ -352,7 +259,7 @@ public class LibDivideTest {
                 long d;
                 do {
                     d = rand.nextLong();
-                } while (branchFree && abs(d) == 1L);
+                } while (skipOne && d == 1L);
 
                 test64(magic, genRef, gen, d);
                 for (int j = 0; j < RANDOM_NUMERS; j++) {

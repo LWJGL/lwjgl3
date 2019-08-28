@@ -24,15 +24,19 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         these methods.
         """
 
+    IntConstant(
+        "Library version.",
+
+        "VERSION_MAJOR".."2",
+        "VERSION_MINOR".."0"
+    )
+
     EnumConstant(
         "",
         
         "32_SHIFT_MASK".enum(0x1F),
         "64_SHIFT_MASK".enum(0x3F),
         "ADD_MARKER".enum(0x40),
-        "U32_SHIFT_PATH".enum(0x80),
-        "U64_SHIFT_PATH".enum(0x80),
-        "S32_SHIFT_PATH".enum(0x20),
         "NEGATIVE_DIVISOR".enum(0x80)
     )
 
@@ -51,7 +55,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
 
         if ((absD & (absD - 1)) == 0) {
             magic = 0;
-            more = floor_log_2_d | (denom < 0 ? LIBDIVIDE_NEGATIVE_DIVISOR : 0) | LIBDIVIDE_S32_SHIFT_PATH;
+            more = floor_log_2_d | (denom < 0 ? LIBDIVIDE_NEGATIVE_DIVISOR : 0);
         } else {
             long l = 1L << (31 + floor_log_2_d);
 
@@ -94,7 +98,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
 
         if ((denom & (denom - 1)) == 0) {
             magic = 0;
-            more = floor_log_2_d | LIBDIVIDE_U32_SHIFT_PATH;
+            more = floor_log_2_d;
         } else {
             long l = 1L << (32 + floor_log_2_d);
 
@@ -177,7 +181,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
 
         if ((denom & (denom - 1)) == 0) {
             magic = 0;
-            more = floor_log_2_d | LIBDIVIDE_U64_SHIFT_PATH;
+            more = floor_log_2_d;
         } else {
             magic = libdivide_128_div_64_to_64(1L << floor_log_2_d, 0L, denom, __result.address());
             long rem = __result.magic();
@@ -207,12 +211,6 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         if (denom == 0) {
             throw new IllegalArgumentException("divider must be != 0");
         }
-        if (denom == 1) {
-            throw new IllegalArgumentException("divider must be != 1");
-        }
-        if (denom == -1) {
-            throw new IllegalArgumentException("divider must be != -1");
-        }
 
         int magic, more;
 
@@ -221,7 +219,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
 
         if ((absD & (absD - 1)) == 0) {
             magic = 0;
-            more = floor_log_2_d | (denom < 0 ? LIBDIVIDE_NEGATIVE_DIVISOR : 0) | LIBDIVIDE_S32_SHIFT_PATH;
+            more = floor_log_2_d | (denom < 0 ? LIBDIVIDE_NEGATIVE_DIVISOR : 0);
         } else {
             long l = 1L << (31 + floor_log_2_d);
 
@@ -252,10 +250,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
             throw new IllegalArgumentException("divider must be != 0");
         }
         if (denom == 1) {
-            throw new IllegalArgumentException("divider must be != 1");
-        }
-        if (denom == -1) {
-            throw new IllegalArgumentException("divider must be != -1");
+            throw new IllegalArgumentException("branchfree divider must be != 1");
         }
 
         int magic, more;
@@ -264,7 +259,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
 
         if ((denom & (denom - 1)) == 0) {
             magic = 0;
-            more = (floor_log_2_d - 1) | LIBDIVIDE_U32_SHIFT_PATH;
+            more = floor_log_2_d - 1;
         } else {
             long l = 1L << (32 + floor_log_2_d);
 
@@ -290,12 +285,6 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
     public static LibDivideS64BranchFree libdivide_s64_branchfree_gen(@NativeType("int64_t") long denom, @NativeType("struct libdivide_s64_branchfree_t") LibDivideS64BranchFree __result) {
         if (denom == 0L) {
             throw new IllegalArgumentException("divider must be != 0");
-        }
-        if (denom == 1L) {
-            throw new IllegalArgumentException("divider must be != 1");
-        }
-        if (denom == -1L) {
-            throw new IllegalArgumentException("divider must be != -1");
         }
 
         long magic;
@@ -333,6 +322,9 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         if (denom == 0L) {
             throw new IllegalArgumentException("divider must be != 0");
         }
+        if (denom == 1L) {
+            throw new IllegalArgumentException("branchfree divider must be != 1");
+        }
 
         long magic;
         int  more;
@@ -341,7 +333,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
 
         if ((denom & (denom - 1)) == 0) {
             magic = 0;
-            more = (floor_log_2_d - 1) | LIBDIVIDE_U64_SHIFT_PATH;
+            more = floor_log_2_d - 1;
         } else {
             magic = (libdivide_128_div_64_to_64(1L << floor_log_2_d, 0L, denom, __result.address()) << 1) + 1;
             long rem = __result.magic();
@@ -361,24 +353,24 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
     customMethod(
         """
     public static int libdivide_s32_do(@NativeType("int32_t") int numer, @NativeType("struct libdivide_s32_t const *") LibDivideS32 denom) {
-        byte more = denom.more();
-        if ((more & LIBDIVIDE_S32_SHIFT_PATH) != 0) {
-            int sign    = more >> 7;
-            int shifter = (byte)(more & LIBDIVIDE_32_SHIFT_MASK);
-            int q       = (numer + ((numer >> 31) & ((1 << shifter) - 1)));
-            q >>= shifter;
+        byte more  = denom.more();
+        int  shift = more & LIBDIVIDE_32_SHIFT_MASK;
+
+        if (denom.magic() == 0) {
+            int sign = more >> 7;
+            int mask = (1 << shift) - 1;
+            int q    = numer + ((numer >> 31) & mask);
+            q >>= shift;
             q = (q ^ sign) - sign;
             return q;
         } else {
-            int uq = libdivide__mullhi_s32(denom.magic(), numer);
+            int uq = libdivide_mullhi_s32(denom.magic(), numer);
             if ((more & LIBDIVIDE_ADD_MARKER) != 0) {
-                // must be arithmetic shift and then sign extend
                 int sign = more >> 7;
-                // q += (more < 0 ? -numer : numer), casts to avoid UB
                 uq += (numer ^ sign) - sign;
             }
             int q = uq;
-            q >>= more & LIBDIVIDE_32_SHIFT_MASK;
+            q >>= shift;
             q += (q < 0 ? 1 : 0);
             return q;
         }
@@ -389,15 +381,14 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         """
     public static int libdivide_u32_do(@NativeType("uint32_t") int numer, @NativeType("struct libdivide_u32_t const *") LibDivideU32 denom) {
         byte more = denom.more();
-        if ((more & LIBDIVIDE_U32_SHIFT_PATH) != 0) {
-            return numer >>> (more & LIBDIVIDE_32_SHIFT_MASK);
+        if (denom.magic() == 0) {
+            return numer >>> more;
         } else {
-            int q = libdivide__mullhi_u32(denom.magic(), numer);
+            int q = libdivide_mullhi_u32(denom.magic(), numer);
             if ((more & LIBDIVIDE_ADD_MARKER) != 0) {
                 int t = ((numer - q) >>> 1) + q;
                 return t >>> (more & LIBDIVIDE_32_SHIFT_MASK);
             } else {
-                // all upper bits are 0 - don't need to mask them off
                 return q >>> more;
             }
         }
@@ -409,23 +400,23 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
     public static long libdivide_s64_do(@NativeType("int64_t") long numer, @NativeType("struct libdivide_s64_t const *") LibDivideS64 denom) {
         byte more  = denom.more();
         long magic = denom.magic();
-        if (magic == 0L) { //shift path
-            int  shifter = more & LIBDIVIDE_64_SHIFT_MASK;
-            long q       = numer + ((numer >> 63) & ((1L << shifter) - 1L));
-            q >>= shifter;
-            // must be arithmetic shift and then sign-extend
-            long shiftMask = more >> 7;
-            q = (q ^ shiftMask) - shiftMask;
+        int  shift = more & LIBDIVIDE_64_SHIFT_MASK;
+
+        if (magic == 0L) {
+            long mask = (1L << shift) - 1L;
+            long q    = numer + ((numer >> 63) & mask);
+            q >>= shift;
+            long sign = more >> 7;
+            q = (q ^ sign) - sign;
             return q;
         } else {
             long uq = mathMultiplyHighS64(magic, numer);
             if ((more & LIBDIVIDE_ADD_MARKER) != 0) {
-                // must be arithmetic shift and then sign extend
                 long sign = more >> 7;
                 uq += (numer ^ sign) - sign;
             }
             long q = uq;
-            q >>= more & LIBDIVIDE_64_SHIFT_MASK;
+            q >>= shift;
             q += (q < 0 ? 1 : 0);
             return q;
         }
@@ -436,15 +427,14 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         """
     public static long libdivide_u64_do(@NativeType("uint64_t") long numer, @NativeType("struct libdivide_u64_t const *") LibDivideU64 denom) {
         byte more = denom.more();
-        if ((more & LIBDIVIDE_U64_SHIFT_PATH) != 0) {
-            return numer >>> (more & LIBDIVIDE_64_SHIFT_MASK);
+        if (denom.magic() == 0L) {
+            return numer >>> more;
         } else {
             long q = mathMultiplyHighU64(denom.magic(), numer);
             if ((more & LIBDIVIDE_ADD_MARKER) != 0) {
                 long t = ((numer - q) >>> 1) + q;
                 return t >>> (more & LIBDIVIDE_64_SHIFT_MASK);
             } else {
-                // all upper bits are 0 - don't need to mask them off
                 return q >>> more;
             }
         }
@@ -458,12 +448,11 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         int  shift = more & LIBDIVIDE_32_SHIFT_MASK;
         int  sign  = more >> 7;
         int  magic = denom.magic();
-        int  q     = libdivide__mullhi_s32(magic, numer);
+        int  q     = libdivide_mullhi_s32(magic, numer);
         q += numer;
 
-        int is_power_of_2 = (more & LIBDIVIDE_S32_SHIFT_PATH) >>> 5;
-        int q_sign        = q >> 31;
-        q += q_sign & ((1 << shift) - is_power_of_2);
+        int q_sign = q >> 31;
+        q += q_sign & ((1 << shift) - (magic == 0 ? 1 : 0));
 
         q >>= shift;
 
@@ -476,7 +465,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
     customMethod(
         """
     public static int libdivide_u32_branchfree_do(@NativeType("uint32_t") int numer, @NativeType("struct libdivide_u32_branchfree_t const *") LibDivideU32BranchFree denom) {
-        int q = libdivide__mullhi_u32(denom.magic(), numer);
+        int q = libdivide_mullhi_u32(denom.magic(), numer);
         int t = ((numer - q) >>> 1) + q;
         return t >>> denom.more();
     }""")
@@ -492,9 +481,8 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         long q     = mathMultiplyHighS64(magic, numer);
         q += numer;
 
-        int  is_power_of_2 = magic == 0 ? 1 : 0;
-        long q_sign        = q >> 63;
-        q += q_sign & ((1L << shift) - is_power_of_2);
+        long q_sign = q >> 63;
+        q += q_sign & ((1L << shift) - (magic == 0 ? 1 : 0));
 
         q >>= shift;
 
@@ -520,179 +508,6 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
     uint32_t("u32_branchfree_recover", "", libdivide_u32_branchfree_t.const.p("denom", ""))
     int64_t("s64_branchfree_recover", "", libdivide_s64_branchfree_t.const.p("denom", ""))
     uint64_t("u64_branchfree_recover", "", libdivide_u64_branchfree_t.const.p("denom", ""))
-
-    //int("u32_get_algorithm", "", libdivide_u32_t.const.p("denom", ""))
-    //uint32_t("u32_do_alg0", "", uint32_t("numer", ""), libdivide_u32_t.const.p("denom", ""))
-    //uint32_t("u32_do_alg1", "", uint32_t("numer", ""), libdivide_u32_t.const.p("denom", ""))
-    //uint32_t("u32_do_alg2", "", uint32_t("numer", ""), libdivide_u32_t.const.p("denom", ""))
-    customMethod(
-        """
-    public static int libdivide_u32_get_algorithm(@NativeType("struct libdivide_u32_t const *") LibDivideU32 denom) {
-        byte more = denom.more();
-        if ((more & LIBDIVIDE_U32_SHIFT_PATH) != 0) {
-            return 0;
-        } else if ((more & LIBDIVIDE_ADD_MARKER) == 0) {
-            return 1;
-        } else {
-            return 2;
-        }
-    }
-
-    public static int libdivide_u32_do_alg0(@NativeType("uint32_t") int numer, @NativeType("struct libdivide_u32_t const *") LibDivideU32 denom) {
-        return numer >>> (denom.more() & LIBDIVIDE_32_SHIFT_MASK);
-    }
-
-    public static int libdivide_u32_do_alg1(@NativeType("uint32_t") int numer, @NativeType("struct libdivide_u32_t const *") LibDivideU32 denom) {
-        int q = libdivide__mullhi_u32(denom.magic(), numer);
-        return q >>> denom.more();
-    }
-
-    public static int libdivide_u32_do_alg2(@NativeType("uint32_t") int numer, @NativeType("struct libdivide_u32_t const *") LibDivideU32 denom) {
-        // denom->add != 0
-        int q = libdivide__mullhi_u32(denom.magic(), numer);
-        int t = ((numer - q) >>> 1) + q;
-        // Note that this mask is typically free. Only the low bits are meaningful
-        // to a shift, so compilers can optimize out this AND.
-        return t >>> (denom.more() & LIBDIVIDE_32_SHIFT_MASK);
-    }""")
-
-    //int("u64_get_algorithm", "", libdivide_u64_t.const.p("denom", ""))
-    //uint64_t("u64_do_alg0", "", uint64_t("numer", ""), libdivide_u64_t.const.p("denom", ""))
-    //uint64_t("u64_do_alg1", "", uint64_t("numer", ""), libdivide_u64_t.const.p("denom", ""))
-    //uint64_t("u64_do_alg2", "", uint64_t("numer", ""), libdivide_u64_t.const.p("denom", ""))
-    customMethod(
-        """
-    public static int libdivide_u64_get_algorithm(@NativeType("struct libdivide_u64_t const *") LibDivideU64 denom) {
-        byte more = denom.more();
-        if ((more & LIBDIVIDE_U64_SHIFT_PATH) != 0) {
-            return 0;
-        } else if ((more & LIBDIVIDE_ADD_MARKER) == 0) {
-            return 1;
-        } else {
-            return 2;
-        }
-    }
-
-    public static long libdivide_u64_do_alg0(@NativeType("uint64_t") long numer, @NativeType("struct libdivide_u64_t const *") LibDivideU64 denom) {
-        return numer >>> (denom.more() & LIBDIVIDE_64_SHIFT_MASK);
-    }
-
-    public static long libdivide_u64_do_alg1(@NativeType("uint64_t") long numer, @NativeType("struct libdivide_u64_t const *") LibDivideU64 denom) {
-        long q = mathMultiplyHighU64(denom.magic(), numer);
-        return q >>> denom.more();
-    }
-
-    public static long libdivide_u64_do_alg2(@NativeType("uint64_t") long numer, @NativeType("struct libdivide_u64_t const *") LibDivideU64 denom) {
-        long q = mathMultiplyHighU64(denom.magic(), numer);
-        long t = ((numer - q) >>> 1) + q;
-        return t >>> (denom.more() & LIBDIVIDE_64_SHIFT_MASK);
-    }""")
-
-    //int("s32_get_algorithm", "", libdivide_s32_t.const.p("denom", ""))
-    //int32_t("s32_do_alg0", "", int32_t("numer", ""), libdivide_s32_t.const.p("denom", ""))
-    //int32_t("s32_do_alg1", "", int32_t("numer", ""), libdivide_s32_t.const.p("denom", ""))
-    //int32_t("s32_do_alg2", "", int32_t("numer", ""), libdivide_s32_t.const.p("denom", ""))
-    //int32_t("s32_do_alg3", "", int32_t("numer", ""), libdivide_s32_t.const.p("denom", ""))
-    //int32_t("s32_do_alg4", "", int32_t("numer", ""), libdivide_s32_t.const.p("denom", ""))
-    customMethod(
-        """
-    public static int libdivide_s32_get_algorithm(@NativeType("struct libdivide_s32_t const *") LibDivideS32 denom) {
-        byte    more            = denom.more();
-        boolean positiveDivisor = (more & LIBDIVIDE_NEGATIVE_DIVISOR) == 0;
-        if ((more & LIBDIVIDE_S32_SHIFT_PATH) != 0) {
-            return (positiveDivisor ? 0 : 1);
-        } else if ((more & LIBDIVIDE_ADD_MARKER) != 0) {
-            return (positiveDivisor ? 2 : 3);
-        } else {
-            return 4;
-        }
-    }
-
-    public static int libdivide_s32_do_alg0(@NativeType("int32_t") int numer, @NativeType("struct libdivide_s32_t const *") LibDivideS32 denom) {
-        int shifter = denom.more() & LIBDIVIDE_32_SHIFT_MASK;
-        return (numer + ((numer >> 31) & ((1 << shifter) - 1))) >> shifter;
-    }
-
-    public static int libdivide_s32_do_alg1(@NativeType("int32_t") int numer, @NativeType("struct libdivide_s32_t const *") LibDivideS32 denom) {
-        int shifter = denom.more() & LIBDIVIDE_32_SHIFT_MASK;
-        return -((numer + ((numer >> 31) & ((1 << shifter) - 1))) >> shifter);
-    }
-
-    public static int libdivide_s32_do_alg2(@NativeType("int32_t") int numer, @NativeType("struct libdivide_s32_t const *") LibDivideS32 denom) {
-        int q = libdivide__mullhi_s32(denom.magic(), numer);
-        q += numer;
-        q >>= denom.more() & LIBDIVIDE_32_SHIFT_MASK;
-        q += (q < 0 ? 1 : 0);
-        return q;
-    }
-
-    public static int libdivide_s32_do_alg3(@NativeType("int32_t") int numer, @NativeType("struct libdivide_s32_t const *") LibDivideS32 denom) {
-        int q = libdivide__mullhi_s32(denom.magic(), numer);
-        q -= numer;
-        q >>= denom.more() & LIBDIVIDE_32_SHIFT_MASK;
-        q += (q < 0 ? 1 : 0);
-        return q;
-    }
-
-    public static int libdivide_s32_do_alg4(@NativeType("int32_t") int numer, @NativeType("struct libdivide_s32_t const *") LibDivideS32 denom) {
-        int q = libdivide__mullhi_s32(denom.magic(), numer);
-        q >>= denom.more() & LIBDIVIDE_32_SHIFT_MASK;
-        q += (q < 0 ? 1 : 0);
-        return q;
-    }""")
-
-    //int("s64_get_algorithm", "", libdivide_s64_t.const.p("denom", ""))
-    //int64_t("s64_do_alg0", "", int64_t("numer", ""), libdivide_s64_t.const.p("denom", ""))
-    //int64_t("s64_do_alg1", "", int64_t("numer", ""), libdivide_s64_t.const.p("denom", ""))
-    //int64_t("s64_do_alg2", "", int64_t("numer", ""), libdivide_s64_t.const.p("denom", ""))
-    //int64_t("s64_do_alg3", "", int64_t("numer", ""), libdivide_s64_t.const.p("denom", ""))
-    //int64_t("s64_do_alg4", "", int64_t("numer", ""), libdivide_s64_t.const.p("denom", ""))
-    customMethod(
-        """
-    public static int libdivide_s64_get_algorithm(@NativeType("struct libdivide_s64_t const *") LibDivideS64 denom) {
-        byte    more            = denom.more();
-        boolean positiveDivisor = (more & LIBDIVIDE_NEGATIVE_DIVISOR) == 0;
-        if (denom.magic() == 0) {
-            return (positiveDivisor ? 0 : 1); // shift path
-        } else if ((more & LIBDIVIDE_ADD_MARKER) != 0) {
-            return (positiveDivisor ? 2 : 3);
-        } else {
-            return 4;
-        }
-    }
-
-    public static long libdivide_s64_do_alg0(@NativeType("int64_t") long numer, @NativeType("struct libdivide_s64_t const *") LibDivideS64 denom) {
-        int shifter = denom.more() & LIBDIVIDE_64_SHIFT_MASK;
-        return (numer + ((numer >> 63) & ((1L << shifter) - 1L))) >> shifter;
-    }
-
-    public static long libdivide_s64_do_alg1(@NativeType("int64_t") long numer, @NativeType("struct libdivide_s64_t const *") LibDivideS64 denom) {
-        int shifter = denom.more() & LIBDIVIDE_64_SHIFT_MASK;
-        return -((numer + ((numer >> 63) & ((1L << shifter) - 1L))) >> shifter);
-    }
-
-    public static long libdivide_s64_do_alg2(@NativeType("int64_t") long numer, @NativeType("struct libdivide_s64_t const *") LibDivideS64 denom) {
-        long q = mathMultiplyHighS64(denom.magic(), numer);
-        q += numer;
-        q >>= denom.more() & LIBDIVIDE_64_SHIFT_MASK;
-        q += (q < 0 ? 1 : 0);
-        return q;
-    }
-
-    public static long libdivide_s64_do_alg3(@NativeType("int64_t") long numer, @NativeType("struct libdivide_s64_t const *") LibDivideS64 denom) {
-        long q = mathMultiplyHighS64(denom.magic(), numer);
-        q -= numer;
-        q >>= denom.more() & LIBDIVIDE_64_SHIFT_MASK;
-        q += (q < 0 ? 1 : 0);
-        return q;
-    }
-
-    public static long libdivide_s64_do_alg4(@NativeType("int64_t") long numer, @NativeType("struct libdivide_s64_t const *") LibDivideS64 denom) {
-        long q = mathMultiplyHighS64(denom.magic(), numer);
-        q >>= denom.more() & LIBDIVIDE_64_SHIFT_MASK;
-        q += (q < 0 ? 1 : 0);
-        return q;
-    }""")
 
     // Helper methods
 
@@ -746,11 +561,11 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         return q1 * b + q0;
     }
 
-    private static int libdivide__mullhi_s32(int x, int y) {
-        return (int)(((long)x * (long)y) >> 32);
+    private static int libdivide_mullhi_s32(int x, int y) {
+        return (int)(((long)x * y) >> 32);
     }
 
-    private static int libdivide__mullhi_u32(int x, int y) {
+    private static int libdivide_mullhi_u32(int x, int y) {
         return (int)(((x & 0xFFFF_FFFFL) * (y & 0xFFFF_FFFFL)) >>> 32);
     }""")
 
