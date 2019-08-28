@@ -15,6 +15,7 @@ import java.util.*;
 import java.util.concurrent.*;
 
 import static org.lwjgl.demo.opencl.CLGLInteropDemo.*;
+import static org.lwjgl.demo.opencl.InfoUtil.*;
 import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.glfw.GLFWNativeGLX.*;
@@ -22,7 +23,6 @@ import static org.lwjgl.glfw.GLFWNativeWGL.*;
 import static org.lwjgl.glfw.GLFWNativeX11.*;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CL10GL.*;
-import static org.lwjgl.opencl.InfoUtil.*;
 import static org.lwjgl.opencl.KHRGLSharing.*;
 import static org.lwjgl.opengl.ARBCLEvent.*;
 import static org.lwjgl.opengl.CGL.*;

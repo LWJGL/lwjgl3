@@ -11,12 +11,11 @@ import org.lwjgl.system.*;
 import java.nio.*;
 import java.util.concurrent.*;
 
+import static org.lwjgl.demo.opencl.InfoUtil.*;
 import static org.lwjgl.opencl.CL11.*;
-import static org.lwjgl.opencl.InfoUtil.*;
 import static org.lwjgl.opencl.KHRICD.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.Pointer.*;
 
 public final class CLDemo {
 

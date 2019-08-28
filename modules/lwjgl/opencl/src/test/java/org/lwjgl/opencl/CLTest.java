@@ -14,10 +14,8 @@ import java.nio.*;
 import java.util.concurrent.*;
 
 import static org.lwjgl.opencl.CL11.*;
-import static org.lwjgl.opencl.InfoUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.Pointer.*;
 import static org.testng.Assert.*;
 
 @Test(singleThreaded = true)
@@ -332,6 +330,40 @@ public class CLTest {
             checkCLError(clReleaseMemObject(subbuffer));
             checkCLError(clReleaseContext(context));
         });
+    }
+
+    private static void checkCLError(IntBuffer errcode) {
+        checkCLError(errcode.get(errcode.position()));
+    }
+
+    private static void checkCLError(int errcode) {
+        if (errcode != CL_SUCCESS) {
+            throw new RuntimeException(String.format("OpenCL error [%d]", errcode));
+        }
+    }
+
+    private static long getDeviceInfoLong(long cl_device_id, int param_name) {
+        try (MemoryStack stack = stackPush()) {
+            LongBuffer pl = stack.mallocLong(1);
+            checkCLError(clGetDeviceInfo(cl_device_id, param_name, pl, null));
+            return pl.get(0);
+        }
+    }
+
+    private static long getMemObjectInfoPointer(long cl_mem, int param_name) {
+        try (MemoryStack stack = stackPush()) {
+            PointerBuffer pp = stack.mallocPointer(1);
+            checkCLError(clGetMemObjectInfo(cl_mem, param_name, pp, null));
+            return pp.get(0);
+        }
+    }
+
+    public static long getMemObjectInfoInt(long cl_mem, int param_name) {
+        try (MemoryStack stack = stackPush()) {
+            IntBuffer pi = stack.mallocInt(1);
+            checkCLError(clGetMemObjectInfo(cl_mem, param_name, pi, null));
+            return pi.get(0);
+        }
     }
 
 }
