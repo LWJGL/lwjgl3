@@ -131,7 +131,7 @@ val ShadercSpvc = "ShadercSpvc".nativeClass(Module.SHADERC, prefix = "shaderc_sp
         Sets the target shader environment, if this is different from the source environment, then a transform between the environments will be performed if
         possible.
         
-        Currently only WebGPU <-> Vulkan 1.1 are defined. Default value for environment is Vulkan 1.0.
+        Currently only WebGPU &lt;-&gt; Vulkan 1.1 are defined. Default value for environment is Vulkan 1.0.
         """,
 
         shaderc_spvc_compile_options_t("options", ""),

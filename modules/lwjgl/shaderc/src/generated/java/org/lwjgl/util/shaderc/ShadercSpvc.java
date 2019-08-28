@@ -239,7 +239,7 @@ public class ShadercSpvc {
      * Sets the target shader environment, if this is different from the source environment, then a transform between the environments will be performed if
      * possible.
      * 
-     * <p>Currently only WebGPU <-> Vulkan 1.1 are defined. Default value for environment is Vulkan 1.0.</p>
+     * <p>Currently only WebGPU &lt;-&gt; Vulkan 1.1 are defined. Default value for environment is Vulkan 1.0.</p>
      */
     public static void shaderc_spvc_compile_options_set_target_env(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("shaderc_target_env") int env, @NativeType("shaderc_env_version") int version) {
         long __functionAddress = Functions.compile_options_set_target_env;

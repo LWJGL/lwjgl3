@@ -19,13 +19,13 @@ val NV_stream_dma = "NVStreamDMA".nativeClassEGL("NV_stream_dma", postfix = NV) 
         extension. Transferring buffer contents through sockets is slower compared to DMA transfers. Since DMA transfers have higher throughput compared to
         sockets, using {@code EGL_NV_stream_dma} extension, applications can request EGL to utilize DMA channels to perform buffer copies.        
 
-        Requires ${NV_stream_remote.link} and ${NV_stream_cross_system.link}.
+        Requires ${NV_stream_remote.link} and {@code NV_stream_cross_system}.
         """
 
     IntConstant(
         "Accepted as attribute names in #CreateStreamKHR(), #CreateStreamAttribKHR(), #QueryStreamKHR(), and #QueryStreamAttribKHR().",
 
-        "EGL_STREAM_DMA_NV"..0x3371,
-        "EGL_STREAM_DMA_SERVER_NV"..0x3372
+        "STREAM_DMA_NV"..0x3371,
+        "STREAM_DMA_SERVER_NV"..0x3372
     )
 }
