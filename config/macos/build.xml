@@ -355,7 +355,7 @@
             <beforeCompile>
                 <compile lang="c++">
                     <arg value="-I${src.main.rel}"/>
-                    <fileset dir="." includes="${src.main}/*.cpp"/>
+                    <fileset dir="." includes="${src.main}/**/*.cpp"/>
                 </compile>
             </beforeCompile>
         </build>

@@ -78,6 +78,10 @@ public class VKCapabilitiesInstance {
     public final long
         vkCreateHeadlessSurfaceEXT;
 
+    // EXT_metal_surface
+    public final long
+        vkCreateMetalSurfaceEXT;
+
     // EXT_sample_locations
     public final long
         vkGetPhysicalDeviceMultisamplePropertiesEXT;
@@ -196,6 +200,8 @@ public class VKCapabilitiesInstance {
     public final boolean VK_EXT_display_surface_counter;
     /** When true, {@link EXTHeadlessSurface} is supported. */
     public final boolean VK_EXT_headless_surface;
+    /** When true, {@link EXTMetalSurface} is supported. */
+    public final boolean VK_EXT_metal_surface;
     /** When true, {@link EXTSwapchainColorspace} is supported. */
     public final boolean VK_EXT_swapchain_colorspace;
     /** When true, {@link EXTValidationFeatures} is supported. */
@@ -236,7 +242,7 @@ public class VKCapabilitiesInstance {
     VKCapabilitiesInstance(FunctionProvider provider, int apiVersion, Set<String> ext, Set<String> deviceExt) {
         this.apiVersion = apiVersion;
 
-        Map<String, Long> caps = new HashMap<>(78);
+        Map<String, Long> caps = new HashMap<>(79);
 
         Vulkan10 = VK10.checkCapsInstance(provider, caps, ext);
         Vulkan11 = VK11.checkCapsInstance(provider, caps, ext);
@@ -248,6 +254,7 @@ public class VKCapabilitiesInstance {
         VK_EXT_display_surface_counter = EXTDisplaySurfaceCounter.checkCapsInstance(provider, caps, ext);
         EXTFullScreenExclusive.checkCapsInstance(provider, caps, deviceExt);
         VK_EXT_headless_surface = EXTHeadlessSurface.checkCapsInstance(provider, caps, ext);
+        VK_EXT_metal_surface = EXTMetalSurface.checkCapsInstance(provider, caps, ext);
         EXTSampleLocations.checkCapsInstance(provider, caps, deviceExt);
         VK_EXT_swapchain_colorspace = ext.contains("VK_EXT_swapchain_colorspace");
         VK_EXT_validation_features = ext.contains("VK_EXT_validation_features");
@@ -309,6 +316,7 @@ public class VKCapabilitiesInstance {
         vkGetPhysicalDeviceSurfaceCapabilities2EXT = VK.get(caps, "vkGetPhysicalDeviceSurfaceCapabilities2EXT");
         vkGetPhysicalDeviceSurfacePresentModes2EXT = VK.get(caps, "vkGetPhysicalDeviceSurfacePresentModes2EXT");
         vkCreateHeadlessSurfaceEXT = VK.get(caps, "vkCreateHeadlessSurfaceEXT");
+        vkCreateMetalSurfaceEXT = VK.get(caps, "vkCreateMetalSurfaceEXT");
         vkGetPhysicalDeviceMultisamplePropertiesEXT = VK.get(caps, "vkGetPhysicalDeviceMultisamplePropertiesEXT");
         vkGetPhysicalDevicePresentRectanglesKHR = VK.get(caps, "vkGetPhysicalDevicePresentRectanglesKHR");
         vkEnumeratePhysicalDeviceGroupsKHR = VK.get(caps, "vkEnumeratePhysicalDeviceGroupsKHR");
