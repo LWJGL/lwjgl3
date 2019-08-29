@@ -80,10 +80,13 @@ public class ShadercSpvc {
             compile_into_glsl                                   = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_into_glsl"),
             compile_into_hlsl                                   = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_into_hlsl"),
             compile_into_msl                                    = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_into_msl"),
+            compile_into_vulkan                                 = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_into_vulkan"),
             result_release                                      = apiGetFunctionAddress(SHADERC, "shaderc_spvc_result_release"),
             result_get_status                                   = apiGetFunctionAddress(SHADERC, "shaderc_spvc_result_get_status"),
             result_get_messages                                 = apiGetFunctionAddress(SHADERC, "shaderc_spvc_result_get_messages"),
-            result_get_output                                   = apiGetFunctionAddress(SHADERC, "shaderc_spvc_result_get_output");
+            result_get_string_output                            = apiGetFunctionAddress(SHADERC, "shaderc_spvc_result_get_string_output"),
+            result_get_binary_output                            = apiGetFunctionAddress(SHADERC, "shaderc_spvc_result_get_binary_output"),
+            result_get_binary_length                            = apiGetFunctionAddress(SHADERC, "shaderc_spvc_result_get_binary_length");
 
     }
 
@@ -591,6 +594,24 @@ public class ShadercSpvc {
         return nshaderc_spvc_compile_into_msl(compiler, memAddress(source), source.remaining(), options);
     }
 
+    // --- [ shaderc_spvc_compile_into_vulkan ] ---
+
+    /** Unsafe version of: {@link #shaderc_spvc_compile_into_vulkan compile_into_vulkan} */
+    public static long nshaderc_spvc_compile_into_vulkan(long compiler, long source, long source_len, long options) {
+        long __functionAddress = Functions.compile_into_vulkan;
+        if (CHECKS) {
+            check(compiler);
+            check(options);
+        }
+        return invokePPPPP(compiler, source, source_len, options, __functionAddress);
+    }
+
+    /** Takes SPIR-V as a sequence of 32-bit words, validates it, then compiles to Vulkan specific SPIR-V. */
+    @NativeType("shaderc_spvc_compilation_result_t")
+    public static long shaderc_spvc_compile_into_vulkan(@NativeType("shaderc_spvc_compiler_t const") long compiler, @NativeType("uint32_t const *") IntBuffer source, @NativeType("shaderc_spvc_compile_options_t") long options) {
+        return nshaderc_spvc_compile_into_vulkan(compiler, memAddress(source), source.remaining(), options);
+    }
+
     // --- [ shaderc_spvc_result_release ] ---
 
     /**
@@ -640,23 +661,78 @@ public class ShadercSpvc {
         return memUTF8Safe(__result);
     }
 
-    // --- [ shaderc_spvc_result_get_output ] ---
+    // --- [ shaderc_spvc_result_get_string_output ] ---
 
-    /** Unsafe version of: {@link #shaderc_spvc_result_get_output result_get_output} */
-    public static long nshaderc_spvc_result_get_output(long result) {
-        long __functionAddress = Functions.result_get_output;
+    /** Unsafe version of: {@link #shaderc_spvc_result_get_string_output result_get_string_output} */
+    public static long nshaderc_spvc_result_get_string_output(long result) {
+        long __functionAddress = Functions.result_get_string_output;
         if (CHECKS) {
             check(result);
         }
         return invokePP(result, __functionAddress);
     }
 
-    /** Get validation/compilation result as a string. */
+    /**
+     * Get validation/compilation result as a string.
+     * 
+     * <p>This is only supported compiling to GLSL, HSL, and MSL.</p>
+     */
     @Nullable
     @NativeType("char const *")
-    public static String shaderc_spvc_result_get_output(@NativeType("shaderc_spvc_compilation_result_t const") long result) {
-        long __result = nshaderc_spvc_result_get_output(result);
+    public static String shaderc_spvc_result_get_string_output(@NativeType("shaderc_spvc_compilation_result_t const") long result) {
+        long __result = nshaderc_spvc_result_get_string_output(result);
         return memUTF8Safe(__result);
+    }
+
+    // --- [ shaderc_spvc_result_get_binary_output ] ---
+
+    /** Unsafe version of: {@link #shaderc_spvc_result_get_binary_output result_get_binary_output} */
+    public static long nshaderc_spvc_result_get_binary_output(long result) {
+        long __functionAddress = Functions.result_get_binary_output;
+        if (CHECKS) {
+            check(result);
+        }
+        return invokePP(result, __functionAddress);
+    }
+
+    /**
+     * Get validation/compilation result as a binary buffer.
+     * 
+     * <p>This is only supported compiling to Vulkan.</p>
+     */
+    @Nullable
+    @NativeType("uint32_t const *")
+    public static IntBuffer shaderc_spvc_result_get_binary_output(@NativeType("shaderc_spvc_compilation_result_t const") long result) {
+        long __result = nshaderc_spvc_result_get_binary_output(result);
+        return memIntBufferSafe(__result, shaderc_spvc_result_get_binary_length(result));
+    }
+
+    /**
+     * Get validation/compilation result as a binary buffer.
+     * 
+     * <p>This is only supported compiling to Vulkan.</p>
+     */
+    @Nullable
+    @NativeType("uint32_t const *")
+    public static IntBuffer shaderc_spvc_result_get_binary_output(@NativeType("shaderc_spvc_compilation_result_t const") long result, long length) {
+        long __result = nshaderc_spvc_result_get_binary_output(result);
+        return memIntBufferSafe(__result, (int)length);
+    }
+
+    // --- [ shaderc_spvc_result_get_binary_length ] ---
+
+    /**
+     * Get length of validation/compilation result as a binary buffer.
+     * 
+     * <p>This is only supported compiling to Vulkan.</p>
+     */
+    @NativeType("uint32_t")
+    public static int shaderc_spvc_result_get_binary_length(@NativeType("shaderc_spvc_compilation_result_t const") long result) {
+        long __functionAddress = Functions.result_get_binary_length;
+        if (CHECKS) {
+            check(result);
+        }
+        return invokePI(result, __functionAddress);
     }
 
 }

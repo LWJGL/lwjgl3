@@ -92,6 +92,7 @@ public class Shaderc {
      * <li>{@link #shaderc_compilation_status_invalid_assembly compilation_status_invalid_assembly}</li>
      * <li>{@link #shaderc_compilation_status_validation_error compilation_status_validation_error}</li>
      * <li>{@link #shaderc_compilation_status_transformation_error compilation_status_transformation_error}</li>
+     * <li>{@link #shaderc_compilation_status_configuration_error compilation_status_configuration_error}</li>
      * </ul>
      */
     public static final int
@@ -102,7 +103,8 @@ public class Shaderc {
         shaderc_compilation_status_null_result_object   = 4,
         shaderc_compilation_status_invalid_assembly     = 5,
         shaderc_compilation_status_validation_error     = 6,
-        shaderc_compilation_status_transformation_error = 7;
+        shaderc_compilation_status_transformation_error = 7,
+        shaderc_compilation_status_configuration_error  = 8;
 
     /**
      * Source language kind. ({@code shaderc_source_language})

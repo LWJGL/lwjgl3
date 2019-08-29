@@ -380,6 +380,16 @@ val ShadercSpvc = "ShadercSpvc".nativeClass(Module.SHADERC, prefix = "shaderc_sp
         shaderc_spvc_compile_options_t("options", "")
     )
 
+    shaderc_spvc_compilation_result_t(
+        "compile_into_vulkan",
+        "Takes SPIR-V as a sequence of 32-bit words, validates it, then compiles to Vulkan specific SPIR-V.",
+
+        shaderc_spvc_compiler_t.const("compiler", ""),
+        uint32_t.const.p("source", ""),
+        AutoSize("source")..size_t("source_len", ""),
+        shaderc_spvc_compile_options_t("options", "")
+    )
+
     void(
         "result_release",
         """
@@ -409,8 +419,34 @@ val ShadercSpvc = "ShadercSpvc".nativeClass(Module.SHADERC, prefix = "shaderc_sp
     )
 
     charUTF8.const.p(
-        "result_get_output",
-        "Get validation/compilation result as a string.",
+        "result_get_string_output",
+        """
+        Get validation/compilation result as a string.
+        
+        This is only supported compiling to GLSL, HSL, and MSL.
+        """,
+
+        shaderc_spvc_compilation_result_t.const("result", "")
+    )
+
+    MapPointer("shaderc_spvc_result_get_binary_length(result)")..uint32_t.const.p(
+        "result_get_binary_output",
+        """
+        Get validation/compilation result as a binary buffer.
+        
+        This is only supported compiling to Vulkan.
+        """,
+
+        shaderc_spvc_compilation_result_t.const("result", "")
+    )
+
+    uint32_t(
+        "result_get_binary_length",
+        """
+        Get length of validation/compilation result as a binary buffer.
+        
+        This is only supported compiling to Vulkan.
+        """,
 
         shaderc_spvc_compilation_result_t.const("result", "")
     )

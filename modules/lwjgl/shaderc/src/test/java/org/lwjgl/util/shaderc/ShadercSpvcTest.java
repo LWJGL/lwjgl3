@@ -57,7 +57,7 @@ public class ShadercSpvcTest {
 
         shaderc_result_release(result);
 
-        String glsl = Objects.requireNonNull(shaderc_spvc_result_get_output(spvc_result));
+        String glsl = Objects.requireNonNull(shaderc_spvc_result_get_string_output(spvc_result));
 
         assertTrue(glsl.contains("#version 450"));
         assertTrue(glsl.contains("layout(location = 0) in vec4 vtxColor"));

@@ -7,16 +7,17 @@ package org.lwjgl.util.libdivide;
 
 import org.lwjgl.system.*;
 
+
 import static org.lwjgl.system.MathUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to <a target="_blank" href="https://libdivide.com/">libdivide</a>.
- *
+ * 
  * <p>libdivide allows you to replace expensive integer divides with comparatively cheap multiplication and bitshifts. Compilers usually do this, but
  * only when the divisor is known at compile time. libdivide allows you to take advantage of it at runtime. The result is that integer division can become
  * faster - a lot faster.</p>
- *
+ * 
  * <p><b>LWJGL</b>: This is a hybrid implementation. Divider recovery methods use standard JNI bindings. All {@code *_gen}, {@code *_do} &amp;
  * {@code *_get_algorithm} functions have been ported to pure Java. This eliminates the JNI overhead and enables the JVM to inline and further optimize
  * these methods.</p>
@@ -30,7 +31,7 @@ public class LibDivide {
 
     /**
      * <h5>Enum values:</h5>
-     *
+     * 
      * <ul>
      * <li>{@link #LIBDIVIDE_32_SHIFT_MASK 32_SHIFT_MASK}</li>
      * <li>{@link #LIBDIVIDE_64_SHIFT_MASK 64_SHIFT_MASK}</li>
@@ -44,9 +45,7 @@ public class LibDivide {
         LIBDIVIDE_ADD_MARKER       = 0x40,
         LIBDIVIDE_NEGATIVE_DIVISOR = 0x80;
 
-    static {
-        Library.loadSystem(System::load, System::loadLibrary, LibDivide.class, "org.lwjgl.libdivide", Platform.mapLibraryNameBundled("lwjgl_libdivide"));
-    }
+    static { Library.loadSystem(System::load, System::loadLibrary, LibDivide.class, "org.lwjgl.libdivide", Platform.mapLibraryNameBundled("lwjgl_libdivide")); }
 
     protected LibDivide() {
         throw new UnsupportedOperationException();

@@ -55,7 +55,8 @@ val Shaderc = "Shaderc".nativeClass(Module.SHADERC, prefix = "shaderc_", prefixM
         "compilation_status_null_result_object".enum,
         "compilation_status_invalid_assembly".enum,
         "compilation_status_validation_error".enum,
-        "compilation_status_transformation_error".enum
+        "compilation_status_transformation_error".enum,
+        "compilation_status_configuration_error".enum
     )
 
     EnumConstant(
