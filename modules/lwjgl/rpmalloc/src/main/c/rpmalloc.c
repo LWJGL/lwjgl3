@@ -1274,6 +1274,9 @@ _memory_allocate_from_heap_fallback(heap_t* heap, uint32_t class_idx) {
 	//Find a span in one of the cache levels
 	active_span = _memory_heap_extract_new_span(heap, 1, class_idx);
 
+	if (!active_span)
+		return active_span;
+
 	//Mark span as owned by this heap and set base data, return first block
 	return _memory_span_set_new_active(heap, heap_class, active_span, class_idx);
 }
@@ -1315,6 +1318,9 @@ _memory_allocate_large(heap_t* heap, size_t size) {
 
 	//Find a span in one of the cache levels
 	span_t* span = _memory_heap_extract_new_span(heap, span_count, SIZE_CLASS_COUNT);
+
+	if (!span)
+		return span;
 
 	//Mark span as owned by this heap and set base data
 	assert(span->span_count == span_count);
