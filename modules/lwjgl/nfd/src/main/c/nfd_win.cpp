@@ -372,7 +372,7 @@ nfdresult_t NFD_OpenDialog( const nfdchar_t *filterList,
 
     ::IFileOpenDialog *fileOpenDialog(NULL);
 
-    if ( !SUCCEEDED(coResult))
+    if ( !SUCCEEDED(coResult) && coResult != RPC_E_CHANGED_MODE )
     {
         fileOpenDialog = NULL;
         NFDi_SetError("Could not initialize COM.");
@@ -465,7 +465,7 @@ nfdresult_t NFD_OpenDialogMultiple( const nfdchar_t *filterList,
     HRESULT coResult = ::CoInitializeEx(NULL,
                                         ::COINIT_APARTMENTTHREADED |
                                         ::COINIT_DISABLE_OLE1DDE );
-    if ( !SUCCEEDED(coResult))
+    if ( !SUCCEEDED(coResult) && coResult != RPC_E_CHANGED_MODE )
     {
         NFDi_SetError("Could not initialize COM.");
         return NFD_ERROR;
@@ -563,7 +563,7 @@ nfdresult_t NFD_SaveDialog( const nfdchar_t *filterList,
     HRESULT coResult = ::CoInitializeEx(NULL,
                                         ::COINIT_APARTMENTTHREADED |
                                         ::COINIT_DISABLE_OLE1DDE );
-    if ( !SUCCEEDED(coResult))
+    if ( !SUCCEEDED(coResult) && coResult != RPC_E_CHANGED_MODE )
     {
         NFDi_SetError("Could not initialize COM.");
         return NFD_ERROR;
@@ -666,7 +666,9 @@ public:
         }
     }
 
-    HRESULT Result() const { return mResult; }
+    // Eat RPC_E_CHANGED_MODE - it means we couldn't change the mode, but COM still works
+    // for our purposes.
+    HRESULT Result() const { return mResult == RPC_E_CHANGED_MODE ? S_OK : mResult; }
 private:
     HRESULT mResult;
 };
