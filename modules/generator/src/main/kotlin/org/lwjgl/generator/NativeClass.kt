@@ -786,7 +786,7 @@ class NativeClass internal constructor(
         val overload = name.indexOf('@').let { if (it == -1) name else name.substring(0, it) }
         val func = Func(
             returns = returns,
-            simpleName = overload,
+            simpleName = if (noPrefix || (overload[0].isJavaIdentifierStart() && !JAVA_KEYWORDS.contains(overload))) overload else "$prefixMethod$overload",
             name = if (noPrefix) overload else "$prefixMethod$overload",
             documentation = { parameterFilter ->
                 this@NativeClass.toJavaDoc(

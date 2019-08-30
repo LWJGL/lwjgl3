@@ -78,7 +78,7 @@ public class XXHash {
     // --- [ XXH32 ] ---
 
     /**
-     * Unsafe version of: {@link #XXH32 32}
+     * Unsafe version of: {@link #XXH32}
      *
      * @param length the number of bytes stored at memory address {@code input}
      */
@@ -97,7 +97,7 @@ public class XXHash {
 
     // --- [ XXH32_createState ] ---
 
-    /** Unsafe version of: {@link #XXH32_createState 32_createState} */
+    /** Unsafe version of: {@link #XXH32_createState} */
     public static native long nXXH32_createState();
 
     /**
@@ -114,7 +114,7 @@ public class XXHash {
 
     // --- [ XXH32_freeState ] ---
 
-    /** Unsafe version of: {@link #XXH32_freeState 32_freeState} */
+    /** Unsafe version of: {@link #XXH32_freeState} */
     public static native int nXXH32_freeState(long statePtr);
 
     /**
@@ -137,7 +137,7 @@ public class XXHash {
 
     // --- [ XXH32_reset ] ---
 
-    /** Unsafe version of: {@link #XXH32_reset 32_reset} */
+    /** Unsafe version of: {@link #XXH32_reset} */
     public static native int nXXH32_reset(long statePtr, int seed);
 
     /**
@@ -154,7 +154,7 @@ public class XXHash {
     // --- [ XXH32_update ] ---
 
     /**
-     * Unsafe version of: {@link #XXH32_update 32_update}
+     * Unsafe version of: {@link #XXH32_update}
      *
      * @param length the number of bytes stored at memory address {@code input}
      */
@@ -188,7 +188,7 @@ public class XXHash {
 
     // --- [ XXH32_digest ] ---
 
-    /** Unsafe version of: {@link #XXH32_digest 32_digest} */
+    /** Unsafe version of: {@link #XXH32_digest} */
     public static native int nXXH32_digest(long statePtr);
 
     /**
@@ -203,7 +203,7 @@ public class XXHash {
 
     // --- [ XXH32_canonicalFromHash ] ---
 
-    /** Unsafe version of: {@link #XXH32_canonicalFromHash 32_canonicalFromHash} */
+    /** Unsafe version of: {@link #XXH32_canonicalFromHash} */
     public static native void nXXH32_canonicalFromHash(long dst, int hash);
 
     /**
@@ -221,7 +221,7 @@ public class XXHash {
 
     // --- [ XXH32_hashFromCanonical ] ---
 
-    /** Unsafe version of: {@link #XXH32_hashFromCanonical 32_hashFromCanonical} */
+    /** Unsafe version of: {@link #XXH32_hashFromCanonical} */
     public static native int nXXH32_hashFromCanonical(long src);
 
     /**
@@ -237,7 +237,7 @@ public class XXHash {
     // --- [ XXH64 ] ---
 
     /**
-     * Unsafe version of: {@link #XXH64 64}
+     * Unsafe version of: {@link #XXH64}
      *
      * @param length the number of bytes stored at memory address {@code input}
      */
@@ -258,7 +258,7 @@ public class XXHash {
 
     // --- [ XXH64_createState ] ---
 
-    /** Unsafe version of: {@link #XXH64_createState 64_createState} */
+    /** Unsafe version of: {@link #XXH64_createState} */
     public static native long nXXH64_createState();
 
     /** 64-bit version of {@link #XXH32_createState 32_createState}. */
@@ -271,7 +271,7 @@ public class XXHash {
 
     // --- [ XXH64_freeState ] ---
 
-    /** Unsafe version of: {@link #XXH64_freeState 64_freeState} */
+    /** Unsafe version of: {@link #XXH64_freeState} */
     public static native int nXXH64_freeState(long statePtr);
 
     /**
@@ -294,7 +294,7 @@ public class XXHash {
 
     // --- [ XXH64_reset ] ---
 
-    /** Unsafe version of: {@link #XXH64_reset 64_reset} */
+    /** Unsafe version of: {@link #XXH64_reset} */
     public static native int nXXH64_reset(long statePtr, long seed);
 
     /**
@@ -311,7 +311,7 @@ public class XXHash {
     // --- [ XXH64_update ] ---
 
     /**
-     * Unsafe version of: {@link #XXH64_update 64_update}
+     * Unsafe version of: {@link #XXH64_update}
      *
      * @param length the number of bytes stored at memory address {@code input}
      */
@@ -330,7 +330,7 @@ public class XXHash {
 
     // --- [ XXH64_digest ] ---
 
-    /** Unsafe version of: {@link #XXH64_digest 64_digest} */
+    /** Unsafe version of: {@link #XXH64_digest} */
     public static native long nXXH64_digest(long statePtr);
 
     /**
@@ -345,7 +345,7 @@ public class XXHash {
 
     // --- [ XXH64_canonicalFromHash ] ---
 
-    /** Unsafe version of: {@link #XXH64_canonicalFromHash 64_canonicalFromHash} */
+    /** Unsafe version of: {@link #XXH64_canonicalFromHash} */
     public static native void nXXH64_canonicalFromHash(long dst, long hash);
 
     /**
@@ -360,7 +360,7 @@ public class XXHash {
 
     // --- [ XXH64_hashFromCanonical ] ---
 
-    /** Unsafe version of: {@link #XXH64_hashFromCanonical 64_hashFromCanonical} */
+    /** Unsafe version of: {@link #XXH64_hashFromCanonical} */
     public static native long nXXH64_hashFromCanonical(long src);
 
     /**
@@ -375,7 +375,7 @@ public class XXHash {
 
     // --- [ XXH3_64bits ] ---
 
-    /** Unsafe version of: {@link #XXH3_64bits 3_64bits} */
+    /** Unsafe version of: {@link #XXH3_64bits} */
     public static native long nXXH3_64bits(long data, long len);
 
     /**
@@ -390,7 +390,7 @@ public class XXHash {
 
     // --- [ XXH3_64bits_withSecret ] ---
 
-    /** Unsafe version of: {@link #XXH3_64bits_withSecret 3_64bits_withSecret} */
+    /** Unsafe version of: {@link #XXH3_64bits_withSecret} */
     public static native long nXXH3_64bits_withSecret(long data, long len, long secret, long secretSize);
 
     /**
@@ -407,7 +407,7 @@ public class XXHash {
 
     // --- [ XXH3_64bits_withSeed ] ---
 
-    /** Unsafe version of: {@link #XXH3_64bits_withSeed 3_64bits_withSeed} */
+    /** Unsafe version of: {@link #XXH3_64bits_withSeed} */
     public static native long nXXH3_64bits_withSeed(long data, long len, long seed);
 
     /**
@@ -450,7 +450,7 @@ public class XXHash {
 
     // --- [ XXH3_64bits_reset ] ---
 
-    /** Unsafe version of: {@link #XXH3_64bits_reset 3_64bits_reset} */
+    /** Unsafe version of: {@link #XXH3_64bits_reset} */
     public static native int nXXH3_64bits_reset(long statePtr);
 
     /**
@@ -465,7 +465,7 @@ public class XXHash {
 
     // --- [ XXH3_64bits_reset_withSeed ] ---
 
-    /** Unsafe version of: {@link #XXH3_64bits_reset_withSeed 3_64bits_reset_withSeed} */
+    /** Unsafe version of: {@link #XXH3_64bits_reset_withSeed} */
     public static native int nXXH3_64bits_reset_withSeed(long statePtr, long seed);
 
     /**
@@ -480,7 +480,7 @@ public class XXHash {
 
     // --- [ XXH3_64bits_reset_withSecret ] ---
 
-    /** Unsafe version of: {@link #XXH3_64bits_reset_withSecret 3_64bits_reset_withSecret} */
+    /** Unsafe version of: {@link #XXH3_64bits_reset_withSecret} */
     public static native int nXXH3_64bits_reset_withSecret(long statePtr, long secret, long secretSize);
 
     /**
@@ -599,7 +599,7 @@ public class XXHash {
 
     // --- [ XXH128_isEqual ] ---
 
-    /** Unsafe version of: {@link #XXH128_isEqual 128_isEqual} */
+    /** Unsafe version of: {@link #XXH128_isEqual} */
     public static native int nXXH128_isEqual(long h1, long h2);
 
     /** Returns 1 if equal, 0 if different. */
@@ -610,7 +610,7 @@ public class XXHash {
 
     // --- [ XXH128_cmp ] ---
 
-    /** Unsafe version of: {@link #XXH128_cmp 128_cmp} */
+    /** Unsafe version of: {@link #XXH128_cmp} */
     public static native int nXXH128_cmp(long h128_1, long h128_2);
 
     /** This comparator is compatible with stdlib's {@code qsort()}. */
