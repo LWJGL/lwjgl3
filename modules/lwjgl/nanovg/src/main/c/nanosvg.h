@@ -201,6 +201,7 @@ void nsvgDelete(NSVGimage* image);
 
 #define NSVG_NOTUSED(v) do { (void)(1 ? (void)0 : ( (void)(v) ) ); } while(0)
 #define NSVG_RGB(r, g, b) (((unsigned int)r) | ((unsigned int)g << 8) | ((unsigned int)b << 16))
+#define NSVG_RGBA(r, g, b, a) (((unsigned int)r) | ((unsigned int)g << 8) | ((unsigned int)b << 16) | ((unsigned int)a << 24))
 
 #ifdef _MSC_VER
 	#pragma warning (disable: 4996) // Switch off security warnings
@@ -881,8 +882,8 @@ static NSVGgradient* nsvg__createGradient(NSVGparser* p, const char* id, const f
 		grad->xform[0] = r; grad->xform[1] = 0;
 		grad->xform[2] = 0; grad->xform[3] = r;
 		grad->xform[4] = cx; grad->xform[5] = cy;
-		grad->fx = fx / r;
-		grad->fy = fy / r;
+		grad->fx = (fx - cx) / r;
+		grad->fy = (fy - cy) / r;
 	}
 
 	nsvg__xformMultiply(grad->xform, data->xform);
@@ -1236,6 +1237,19 @@ static unsigned int nsvg__parseColorRGB(const char* str)
 	}
 }
 
+static unsigned int nsvg__parseColorRGBA(const char* str)
+{
+	int r = -1, g = -1, b = -1;
+	float a = -1;
+	char s1[32]="", s2[32]="", s3[32]="";
+	sscanf(str + 5, "%d%[%%, \t]%d%[%%, \t]%d%[%%, \t]%f", &r, s1, &g, s2, &b, s3, &a);
+	if (strchr(s1, '%')) {
+		return NSVG_RGBA((r*255)/100,(g*255)/100,(b*255)/100,(a*255)/100);
+	} else {
+		return NSVG_RGBA(r,g,b,(a*255));
+	}
+}
+
 typedef struct NSVGNamedColor {
 	const char* name;
 	unsigned int color;
@@ -1417,6 +1431,8 @@ static unsigned int nsvg__parseColor(const char* str)
 		return nsvg__parseColorHex(str);
 	else if (len >= 4 && str[0] == 'r' && str[1] == 'g' && str[2] == 'b' && str[3] == '(')
 		return nsvg__parseColorRGB(str);
+	else if (len >= 5 && str[0] == 'r' && str[1] == 'g' && str[2] == 'b' && str[3] == 'a' && str[4] == '(')
+		return nsvg__parseColorRGBA(str);
 	return nsvg__parseColorName(str);
 }
 
@@ -1734,6 +1750,13 @@ static int nsvg__parseAttr(NSVGparser* p, const char* name, const char* value)
 		} else {
 			attr->hasFill = 1;
 			attr->fillColor = nsvg__parseColor(value);
+			// if the fillColor has an alpha value then use it to
+			// set the fillOpacity
+			if (attr->fillColor & 0xFF000000) {
+				attr->fillOpacity = ((attr->fillColor >> 24) & 0xFF) / 255.0;
+				// remove the alpha value from the color
+				attr->fillColor &= 0x00FFFFFF;
+			}
 		}
 	} else if (strcmp(name, "opacity") == 0) {
 		attr->opacity = nsvg__parseOpacity(value);
@@ -1748,6 +1771,13 @@ static int nsvg__parseAttr(NSVGparser* p, const char* name, const char* value)
 		} else {
 			attr->hasStroke = 1;
 			attr->strokeColor = nsvg__parseColor(value);
+			// if the strokeColor has an alpha value then use it to
+			// set the strokeOpacity
+			if (attr->strokeColor & 0xFF000000) {
+				attr->strokeOpacity = ((attr->strokeColor >> 24) & 0xFF) / 255.0;
+				// remove the alpha value from the color
+				attr->strokeColor &= 0x00FFFFFF;
+			}
 		}
 	} else if (strcmp(name, "stroke-width") == 0) {
 		attr->strokeWidth = nsvg__parseCoordinate(p, value, 0.0f, nsvg__actualLength(p));
