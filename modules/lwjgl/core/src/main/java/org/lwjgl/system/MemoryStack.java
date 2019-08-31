@@ -467,6 +467,33 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
 
     // -------------------------------------------------
 
+    /** CLong version of {@link #malloc(int)}. */
+    public CLongBuffer mallocCLong(int size) { return wrap(CLongBuffer.class, nmalloc(CLONG_SIZE, size << CLONG_SHIFT), size); }
+    /** CLong version of {@link #calloc(int)}. */
+    public CLongBuffer callocCLong(int size) {
+        int  bytes   = size * CLONG_SIZE;
+        long address = nmalloc(CLONG_SIZE, bytes);
+        memSet(address, 0, bytes);
+        return wrap(CLongBuffer.class, address, size);
+    }
+
+    /** Single value version of {@link #mallocCLong}. */
+    public CLongBuffer clongs(long x) { return mallocCLong(1).put(0, x); }
+    /** Two value version of {@link #mallocCLong}. */
+    public CLongBuffer clongs(long x, long y) { return mallocCLong(2).put(0, x).put(1, y); }
+    /** Three value version of {@link #mallocCLong}. */
+    public CLongBuffer clongs(long x, long y, long z) { return mallocCLong(3).put(0, x).put(1, y).put(2, z); }
+    /** Four value version of {@link #mallocCLong}. */
+    public CLongBuffer clongs(long x, long y, long z, long w) { return mallocCLong(4).put(0, x).put(1, y).put(2, z).put(3, w); }
+    /** Vararg version of {@link #mallocCLong}. */
+    public CLongBuffer clongs(long... values) {
+        CLongBuffer buffer = mallocCLong(values.length).put(values);
+        buffer.flip();
+        return buffer;
+    }
+
+    // -------------------------------------------------
+
     /** Float version of {@link #malloc(int)}. */
     public FloatBuffer mallocFloat(int size) { return MemoryUtil.wrap(BUFFER_FLOAT, nmalloc(4, size << 2), size); }
     /** Float version of {@link #calloc(int)}. */
@@ -859,6 +886,24 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     public static LongBuffer stackLongs(long x, long y, long z, long w) { return stackGet().longs(x, y, z, w); }
     /** Thread-local version of {@link #longs(long...)}. */
     public static LongBuffer stackLongs(long... values) { return stackGet().longs(values); }
+    
+    // -------------------------------------------------
+
+    /** Thread-local version of {@link #mallocCLong}. */
+    public static CLongBuffer stackMallocCLong(int size) { return stackGet().mallocCLong(size); }
+    /** Thread-local version of {@link #callocCLong}. */
+    public static CLongBuffer stackCallocCLong(int size) { return stackGet().callocCLong(size); }
+
+    /** Thread-local version of {@link #longs(long)}. */
+    public static CLongBuffer stackCLongs(long x) { return stackGet().clongs(x); }
+    /** Thread-local version of {@link #longs(long, long)}. */
+    public static CLongBuffer stackCLongs(long x, long y) { return stackGet().clongs(x, y); }
+    /** Thread-local version of {@link #longs(long, long, long)}. */
+    public static CLongBuffer stackCLongs(long x, long y, long z) { return stackGet().clongs(x, y, z); }
+    /** Thread-local version of {@link #longs(long, long, long, long)}. */
+    public static CLongBuffer stackCLongs(long x, long y, long z, long w) { return stackGet().clongs(x, y, z, w); }
+    /** Thread-local version of {@link #longs(long...)}. */
+    public static CLongBuffer stackCLongs(long... values) { return stackGet().clongs(values); }
 
     // -------------------------------------------------
 

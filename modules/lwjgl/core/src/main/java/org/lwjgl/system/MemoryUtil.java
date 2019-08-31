@@ -305,6 +305,15 @@ public final class MemoryUtil {
     }
 
     /**
+     * {@code CLongBuffer} version of {@link #memAlloc}.
+     *
+     * @param size the number of C long values to allocate.
+     */
+    public static CLongBuffer memAllocCLong(int size) {
+        return Pointer.Default.wrap(CLongBuffer.class, nmemAllocChecked(getAllocationSize(size, CLONG_SHIFT)), size);
+    }
+
+    /**
      * DoubleBuffer version of {@link #memAlloc}.
      *
      * @param size the number of double values to allocate.
@@ -343,8 +352,8 @@ public final class MemoryUtil {
         }
     }
 
-    /** PointerBuffer version of {@link #memFree}. */
-    public static void memFree(@Nullable PointerBuffer ptr) {
+    /** {@code CustomBuffer} version of {@link #memFree}. */
+    public static void memFree(@Nullable CustomBuffer ptr) {
         if (ptr != null) {
             nmemFree(ptr.address);
         }
@@ -444,6 +453,15 @@ public final class MemoryUtil {
     }
 
     /**
+     * {@code CLongBuffer} version of {@link #memCalloc}.
+     *
+     * @param num the number of C long values to allocate.
+     */
+    public static CLongBuffer memCallocCLong(int num) {
+        return Pointer.Default.wrap(CLongBuffer.class, nmemCallocChecked(num, CLONG_SIZE), num);
+    }
+
+    /**
      * DoubleBuffer version of {@link #memCalloc}.
      *
      * @param num the number of double values to allocate.
@@ -539,6 +557,19 @@ public final class MemoryUtil {
      */
     public static LongBuffer memRealloc(@Nullable LongBuffer ptr, int size) {
         return realloc(ptr, memLongBuffer(nmemReallocChecked(ptr == null ? NULL : UNSAFE.getLong(ptr, ADDRESS), getAllocationSize(size, 3)), size), size);
+    }
+
+    /**
+     * {@code CLongBuffer} version of {@link #memRealloc}.
+     *
+     * @param size the number of C long values to allocate.
+     */
+    public static CLongBuffer memRealloc(@Nullable CLongBuffer ptr, int size) {
+        CLongBuffer buffer = memCLongBuffer(nmemReallocChecked(ptr == null ? NULL : ptr.address, getAllocationSize(size, CLONG_SIZE)), size);
+        if (ptr != null) {
+            buffer.position(min(ptr.position(), size));
+        }
+        return buffer;
     }
 
     /**
@@ -1053,6 +1084,29 @@ public final class MemoryUtil {
     @Nullable
     public static LongBuffer memLongBufferSafe(long address, int capacity) {
         return address == NULL ? null : wrap(BUFFER_LONG, address, capacity);
+    }
+
+    /**
+     * Creates a new direct {@code CLongBuffer} that starts at the specified memory address and has the specified capacity.
+     *
+     * <p>The {@code address} specified must be aligned to 8 bytes. If not, use {@code memByteBuffer(address, capacity * 8).asLongBuffer()}.</p>
+     *
+     * @param address  the starting memory address
+     * @param capacity the buffer capacity
+     *
+     * @return the new {@code CLongBuffer}
+     */
+    public static CLongBuffer memCLongBuffer(long address, int capacity) {
+        if (CHECKS) {
+            check(address);
+        }
+        return Pointer.Default.wrap(CLongBuffer.class, address, capacity);
+    }
+
+    /** Like {@link #memCLongBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
+    @Nullable
+    public static CLongBuffer memCLongBufferSafe(long address, int capacity) {
+        return address == NULL ? null : Pointer.Default.wrap(CLongBuffer.class, address, capacity);
     }
 
     /**
@@ -1818,14 +1872,14 @@ public final class MemoryUtil {
     public static double memGetDouble(long ptr)   { return UNSAFE.getDouble(null, ptr); }
     public static long memGetCLong(long ptr) {
         return CLONG_SIZE == 8
-            ? UNSAFE.getLong(null, ptr) :
-            UNSAFE.getInt(null, ptr);
+            ? UNSAFE.getLong(null, ptr)
+            : UNSAFE.getInt(null, ptr);
     }
 
     public static long memGetAddress(long ptr) {
         return BITS64
-            ? UNSAFE.getLong(null, ptr) :
-            UNSAFE.getInt(null, ptr) & 0xFFFF_FFFFL;
+            ? UNSAFE.getLong(null, ptr)
+            : UNSAFE.getInt(null, ptr) & 0xFFFF_FFFFL;
     }
 
     public static void memPutByte(long ptr, byte value)     { UNSAFE.putByte(null, ptr, value); }

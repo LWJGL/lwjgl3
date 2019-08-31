@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *
  * <p>In addition to the standard NIO buffer classes, LWJGL provides a {@link PointerBuffer} class for storing pointer data in an architecture independent way.
  * It is used in bindings for pointer-to-pointers arguments, usually to provide arrays of data (input parameter) or to store returned pointer values (output
- * parameter).</p>
+ * parameter). Also, there's the {@link CLongBuffer} class which is similar to {@code PointerBuffer}, but for C {@code long} data.</p>
  *
  * <h3>Memory management</h3>
  *
@@ -65,11 +65,11 @@ public final class BufferUtils {
     private BufferUtils() {}
 
     /**
-     * Allocates a direct native-ordered bytebuffer with the specified capacity.
+     * Allocates a direct native-ordered {@code ByteBuffer} with the specified capacity.
      *
-     * @param capacity The capacity, in bytes
+     * @param capacity the capacity, in bytes
      *
-     * @return a ByteBuffer
+     * @return a {@code ByteBuffer}
      */
     public static ByteBuffer createByteBuffer(int capacity) {
         return ByteBuffer.allocateDirect(capacity).order(ByteOrder.nativeOrder());
@@ -81,58 +81,64 @@ public final class BufferUtils {
     }
 
     /**
-     * Allocates a direct native-order shortbuffer with the specified number
-     * of elements.
+     * Allocates a direct native-order {@code ShortBuffer} with the specified number of elements.
      *
-     * @param capacity The capacity, in shorts
+     * @param capacity the capacity, in shorts
      *
-     * @return a ShortBuffer
+     * @return a {@code ShortBuffer}
      */
     public static ShortBuffer createShortBuffer(int capacity) {
         return createByteBuffer(getAllocationSize(capacity, 1)).asShortBuffer();
     }
 
     /**
-     * Allocates a direct native-order charbuffer with the specified number
-     * of elements.
+     * Allocates a direct native-order {@code CharBuffer} with the specified number of elements.
      *
-     * @param capacity The capacity, in chars
+     * @param capacity the capacity, in chars
      *
-     * @return an CharBuffer
+     * @return a {@code CharBuffer}
      */
     public static CharBuffer createCharBuffer(int capacity) {
         return createByteBuffer(getAllocationSize(capacity, 1)).asCharBuffer();
     }
 
     /**
-     * Allocates a direct native-order intbuffer with the specified number
-     * of elements.
+     * Allocates a direct native-order {@code IntBuffer} with the specified number of elements.
      *
-     * @param capacity The capacity, in ints
+     * @param capacity the capacity, in ints
      *
-     * @return an IntBuffer
+     * @return an {@code IntBuffer}
      */
     public static IntBuffer createIntBuffer(int capacity) {
         return createByteBuffer(getAllocationSize(capacity, 2)).asIntBuffer();
     }
 
     /**
-     * Allocates a direct native-order longbuffer with the specified number
-     * of elements.
+     * Allocates a direct native-order {@code LongBuffer} with the specified number of elements.
      *
-     * @param capacity The capacity, in longs
+     * @param capacity the capacity, in longs
      *
-     * @return an LongBuffer
+     * @return a {@code LongBuffer}
      */
     public static LongBuffer createLongBuffer(int capacity) {
         return createByteBuffer(getAllocationSize(capacity, 3)).asLongBuffer();
     }
 
     /**
-     * Allocates a direct native-order floatbuffer with the specified number
-     * of elements.
+     * Allocates a {@code CLongBuffer} with the specified number of elements.
      *
-     * @param capacity The capacity, in floats
+     * @param capacity the capacity, in memory addresses
+     *
+     * @return a {@code CLongBuffer}
+     */
+    public static CLongBuffer createCLongBuffer(int capacity) {
+        return CLongBuffer.allocateDirect(capacity);
+    }
+
+    /**
+     * Allocates a direct native-order {@code FloatBuffer} with the specified number of elements.
+     *
+     * @param capacity the capacity, in floats
      *
      * @return a FloatBuffer
      */
@@ -141,24 +147,22 @@ public final class BufferUtils {
     }
 
     /**
-     * Allocates a direct native-order doublebuffer with the specified number
-     * of elements.
+     * Allocates a direct native-order {@code DoubleBuffer} with the specified number of elements.
      *
-     * @param capacity The capacity, in doubles
+     * @param capacity the capacity, in doubles
      *
-     * @return a DoubleBuffer
+     * @return a {@code DoubleBuffer}
      */
     public static DoubleBuffer createDoubleBuffer(int capacity) {
         return createByteBuffer(getAllocationSize(capacity, 3)).asDoubleBuffer();
     }
 
     /**
-     * Allocates a PointerBuffer with the specified number
-     * of elements.
+     * Allocates a {@code PointerBuffer} with the specified number of elements.
      *
-     * @param capacity The capacity, in memory addresses
+     * @param capacity the capacity, in memory addresses
      *
-     * @return a PointerBuffer
+     * @return a {@code PointerBuffer}
      */
     public static PointerBuffer createPointerBuffer(int capacity) {
         return PointerBuffer.allocateDirect(capacity);

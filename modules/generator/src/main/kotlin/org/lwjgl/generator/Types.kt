@@ -395,12 +395,15 @@ internal val NativeType.jniSignatureStrict
         else                -> "L${this.mapping.nativeMethodType.name};"
     }
 internal val NativeType.jniSignature
-    get() = if (mapping.nativeMethodType === Long::class.java && mapping !== PrimitiveMapping.LONG) "P" else jniSignatureStrict
+    get() = if (mapping.nativeMethodType === Long::class.java && mapping !== PrimitiveMapping.LONG)
+        if (mapping === PrimitiveMapping.CLONG) "N" else "P"
+    else
+        jniSignatureStrict
 internal val NativeType.jniSignatureJava
     get() = if (mapping.nativeMethodType === Long::class.java)
         when (mapping) {
             PrimitiveMapping.LONG  -> "J"
-            PrimitiveMapping.CLONG -> "C"
+            PrimitiveMapping.CLONG -> "N"
             else                   -> "P"
         }
     else
