@@ -104,6 +104,18 @@ public interface CallbackI extends Pointer {
         long callback(long args);
     }
 
+    /** A {@code Callback} that returns a C long value. */
+    interface N extends CallbackI {
+        /**
+         * Will be called by native code.
+         *
+         * @param args pointer to a {@code DCArgs} iterator
+         *
+         * @return the value to store to the result {@code DCValue}
+         */
+        long callback(long args);
+    }
+
     /** A {@code Callback} that returns a float value. */
     interface F extends CallbackI {
         /**

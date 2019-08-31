@@ -55,7 +55,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_dyncall_DynCall_ndcArgInt(JNIEnv *_
     dcArgInt(vm, (DCint)value);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_system_dyncall_DynCall_ndcArgLong(JNIEnv *__env, jclass clazz, jlong vmAddress, jint value) {
+JNIEXPORT void JNICALL Java_org_lwjgl_system_dyncall_DynCall_ndcArgLong(JNIEnv *__env, jclass clazz, jlong vmAddress, jlong value) {
     DCCallVM *vm = (DCCallVM *)(intptr_t)vmAddress;
     UNUSED_PARAMS(__env, clazz)
     dcArgLong(vm, (DClong)value);
@@ -129,11 +129,11 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_dyncall_DynCall_ndcCallInt(JNIEnv *
     return (jint)dcCallInt(vm, funcptr);
 }
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_system_dyncall_DynCall_ndcCallLong(JNIEnv *__env, jclass clazz, jlong vmAddress, jlong funcptrAddress) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_dyncall_DynCall_ndcCallLong(JNIEnv *__env, jclass clazz, jlong vmAddress, jlong funcptrAddress) {
     DCCallVM *vm = (DCCallVM *)(intptr_t)vmAddress;
     DCpointer funcptr = (DCpointer)(intptr_t)funcptrAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)dcCallLong(vm, funcptr);
+    return (jlong)dcCallLong(vm, funcptr);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_dyncall_DynCall_ndcCallLongLong(JNIEnv *__env, jclass clazz, jlong vmAddress, jlong funcptrAddress) {

@@ -15,6 +15,7 @@ static jmethodID
     javaCallbackS,
     javaCallbackI,
     javaCallbackJ,
+    javaCallbackN,
     javaCallbackF,
     javaCallbackD,
     javaCallbackP;
@@ -83,6 +84,7 @@ DEFINE_CB_HANDLER(B, jbyte,    'c', Byte)
 DEFINE_CB_HANDLER(S, jshort,   's', Short)
 DEFINE_CB_HANDLER(I, jint,     'i', Int)
 DEFINE_CB_HANDLER(J, jlong,    'l', Long)
+DEFINE_CB_HANDLER(N, long,     'j', Long)
 DEFINE_CB_HANDLER(F, jfloat,   'f', Float)
 DEFINE_CB_HANDLER(D, jdouble,  'd', Double)
 DEFINE_CB_HANDLER(P, intptr_t, 'p', Long)
@@ -104,9 +106,10 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_Callback_getNativeCallbacks(JNIEnv 
     SETUP_CALLBACK(3, S)
     SETUP_CALLBACK(4, I)
     SETUP_CALLBACK(5, J)
-    SETUP_CALLBACK(6, F)
-    SETUP_CALLBACK(7, D)
-    SETUP_CALLBACK(8, P)
+    SETUP_CALLBACK(6, N)
+    SETUP_CALLBACK(7, F)
+    SETUP_CALLBACK(8, D)
+    SETUP_CALLBACK(9, P)
 }
 
 EXTERN_C_EXIT

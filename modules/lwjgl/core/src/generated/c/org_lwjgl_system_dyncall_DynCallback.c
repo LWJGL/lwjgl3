@@ -61,10 +61,10 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_dyncall_DynCallback_ndcbArgInt(JNIE
     return (jint)dcbArgInt(args);
 }
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_system_dyncall_DynCallback_ndcbArgLong(JNIEnv *__env, jclass clazz, jlong argsAddress) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_dyncall_DynCallback_ndcbArgLong(JNIEnv *__env, jclass clazz, jlong argsAddress) {
     DCArgs *args = (DCArgs *)(intptr_t)argsAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)dcbArgLong(args);
+    return (jlong)dcbArgLong(args);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_dyncall_DynCallback_ndcbArgLongLong(JNIEnv *__env, jclass clazz, jlong argsAddress) {
@@ -91,10 +91,10 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_dyncall_DynCallback_ndcbArgUInt(JNI
     return (jint)dcbArgUInt(args);
 }
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_system_dyncall_DynCallback_ndcbArgULong(JNIEnv *__env, jclass clazz, jlong argsAddress) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_dyncall_DynCallback_ndcbArgULong(JNIEnv *__env, jclass clazz, jlong argsAddress) {
     DCArgs *args = (DCArgs *)(intptr_t)argsAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)dcbArgULong(args);
+    return (jlong)dcbArgULong(args);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_dyncall_DynCallback_ndcbArgULongLong(JNIEnv *__env, jclass clazz, jlong argsAddress) {

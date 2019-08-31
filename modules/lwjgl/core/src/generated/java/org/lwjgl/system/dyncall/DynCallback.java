@@ -242,7 +242,7 @@ public class DynCallback {
     // --- [ dcbArgLong ] ---
 
     /** Unsafe version of: {@link #dcbArgLong ArgLong} */
-    public static native int ndcbArgLong(long args);
+    public static native long ndcbArgLong(long args);
 
     /**
      * Returns the next {@code long} argument.
@@ -250,7 +250,7 @@ public class DynCallback {
      * @param args the function arguments
      */
     @NativeType("DClong")
-    public static int dcbArgLong(@NativeType("DCArgs *") long args) {
+    public static long dcbArgLong(@NativeType("DCArgs *") long args) {
         if (CHECKS) {
             check(args);
         }
@@ -332,7 +332,7 @@ public class DynCallback {
     // --- [ dcbArgULong ] ---
 
     /** Unsafe version of: {@link #dcbArgULong ArgULong} */
-    public static native int ndcbArgULong(long args);
+    public static native long ndcbArgULong(long args);
 
     /**
      * Returns the next {@code unsigned long} argument.
@@ -340,7 +340,7 @@ public class DynCallback {
      * @param args the function arguments
      */
     @NativeType("DClong")
-    public static int dcbArgULong(@NativeType("DCArgs *") long args) {
+    public static long dcbArgULong(@NativeType("DCArgs *") long args) {
         if (CHECKS) {
             check(args);
         }

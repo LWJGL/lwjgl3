@@ -31,6 +31,7 @@ public abstract class Callback implements Pointer, NativeResource {
         SHORT,
         INT,
         LONG,
+        CLONG,
         FLOAT,
         DOUBLE,
         PTR;
@@ -47,6 +48,7 @@ public abstract class Callback implements Pointer, NativeResource {
                 CallbackI.S.class.getDeclaredMethod("callback", params),
                 CallbackI.I.class.getDeclaredMethod("callback", params),
                 CallbackI.J.class.getDeclaredMethod("callback", params),
+                CallbackI.N.class.getDeclaredMethod("callback", params),
                 CallbackI.F.class.getDeclaredMethod("callback", params),
                 CallbackI.D.class.getDeclaredMethod("callback", params),
                 CallbackI.P.class.getDeclaredMethod("callback", params)
@@ -62,6 +64,7 @@ public abstract class Callback implements Pointer, NativeResource {
             SHORT = callbacks.get();
             INT = callbacks.get();
             LONG = callbacks.get();
+            CLONG = callbacks.get();
             FLOAT = callbacks.get();
             DOUBLE = callbacks.get();
             PTR = callbacks.get();
@@ -150,6 +153,8 @@ public abstract class Callback implements Pointer, NativeResource {
                 return INT;
             case 'l':
                 return LONG;
+            case 'j':
+                return CLONG;
             case 'p':
                 return PTR;
             case 'f':

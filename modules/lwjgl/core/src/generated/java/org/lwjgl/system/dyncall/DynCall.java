@@ -251,7 +251,7 @@ public class DynCall {
     // --- [ dcArgLong ] ---
 
     /** Unsafe version of: {@link #dcArgLong ArgLong} */
-    public static native void ndcArgLong(long vm, int value);
+    public static native void ndcArgLong(long vm, long value);
 
     /**
      * Binds a {@code long} argument.
@@ -259,7 +259,7 @@ public class DynCall {
      * @param vm    a {@code CallVM} instance
      * @param value the argument value
      */
-    public static void dcArgLong(@NativeType("DCCallVM *") long vm, @NativeType("DClong") int value) {
+    public static void dcArgLong(@NativeType("DCCallVM *") long vm, @NativeType("DClong") long value) {
         if (CHECKS) {
             check(vm);
         }
@@ -476,7 +476,7 @@ public class DynCall {
     // --- [ dcCallLong ] ---
 
     /** Unsafe version of: {@link #dcCallLong CallLong} */
-    public static native int ndcCallLong(long vm, long funcptr);
+    public static native long ndcCallLong(long vm, long funcptr);
 
     /**
      * Calls the function specified by {@code funcptr} with the arguments bound to the {@code CallVM} and returns.
@@ -488,7 +488,7 @@ public class DynCall {
      * @param funcptr the function pointer
      */
     @NativeType("DClong")
-    public static int dcCallLong(@NativeType("DCCallVM *") long vm, @NativeType("DCpointer") long funcptr) {
+    public static long dcCallLong(@NativeType("DCCallVM *") long vm, @NativeType("DCpointer") long funcptr) {
         if (CHECKS) {
             check(vm);
             check(funcptr);
