@@ -64,11 +64,11 @@ public class XColormapEvent extends Struct implements NativeResource {
     static {
         Layout layout = __struct(
             __member(4),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(4)
         );
@@ -319,15 +319,15 @@ public class XColormapEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XColormapEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
-    public static long nserial(long struct) { return memGetAddress(struct + XColormapEvent.SERIAL); }
+    public static long nserial(long struct) { return memGetCLong(struct + XColormapEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
     public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XColormapEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XColormapEvent.DISPLAY); }
     /** Unsafe version of {@link #window}. */
-    public static long nwindow(long struct) { return memGetAddress(struct + XColormapEvent.WINDOW); }
+    public static long nwindow(long struct) { return memGetCLong(struct + XColormapEvent.WINDOW); }
     /** Unsafe version of {@link #colormap}. */
-    public static long ncolormap(long struct) { return memGetAddress(struct + XColormapEvent.COLORMAP); }
+    public static long ncolormap(long struct) { return memGetCLong(struct + XColormapEvent.COLORMAP); }
     /** Unsafe version of {@link #new$}. */
     public static int nnew$(long struct) { return UNSAFE.getInt(null, struct + XColormapEvent.NEW); }
     /** Unsafe version of {@link #state}. */
@@ -336,15 +336,15 @@ public class XColormapEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XColormapEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
-    public static void nserial(long struct, long value) { memPutAddress(struct + XColormapEvent.SERIAL, value); }
+    public static void nserial(long struct, long value) { memPutCLong(struct + XColormapEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
     public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XColormapEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XColormapEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #window(long) window}. */
-    public static void nwindow(long struct, long value) { memPutAddress(struct + XColormapEvent.WINDOW, value); }
+    public static void nwindow(long struct, long value) { memPutCLong(struct + XColormapEvent.WINDOW, value); }
     /** Unsafe version of {@link #colormap(long) colormap}. */
-    public static void ncolormap(long struct, long value) { memPutAddress(struct + XColormapEvent.COLORMAP, value); }
+    public static void ncolormap(long struct, long value) { memPutCLong(struct + XColormapEvent.COLORMAP, value); }
     /** Unsafe version of {@link #new$(int) new$}. */
     public static void nnew$(long struct, int value) { UNSAFE.putInt(null, struct + XColormapEvent.NEW, value); }
     /** Unsafe version of {@link #state(int) state}. */

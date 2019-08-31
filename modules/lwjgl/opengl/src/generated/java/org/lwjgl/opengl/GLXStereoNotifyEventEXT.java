@@ -63,7 +63,7 @@ public class GLXStereoNotifyEventEXT extends Struct {
     static {
         Layout layout = __struct(
             __member(4),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(POINTER_SIZE),
             __member(4),
@@ -154,7 +154,7 @@ public class GLXStereoNotifyEventEXT extends Struct {
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return UNSAFE.getInt(null, struct + GLXStereoNotifyEventEXT.TYPE); }
     /** Unsafe version of {@link #serial}. */
-    public static long nserial(long struct) { return memGetAddress(struct + GLXStereoNotifyEventEXT.SERIAL); }
+    public static long nserial(long struct) { return memGetCLong(struct + GLXStereoNotifyEventEXT.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
     public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + GLXStereoNotifyEventEXT.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */

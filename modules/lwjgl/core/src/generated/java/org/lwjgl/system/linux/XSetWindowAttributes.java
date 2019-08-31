@@ -67,21 +67,21 @@ public class XSetWindowAttributes extends Struct implements NativeResource {
 
     static {
         Layout layout = __struct(
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(4),
             __member(4),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE)
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE)
         );
 
         SIZEOF = layout.getSize();
@@ -382,13 +382,13 @@ public class XSetWindowAttributes extends Struct implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #background_pixmap}. */
-    public static long nbackground_pixmap(long struct) { return memGetAddress(struct + XSetWindowAttributes.BACKGROUND_PIXMAP); }
+    public static long nbackground_pixmap(long struct) { return memGetCLong(struct + XSetWindowAttributes.BACKGROUND_PIXMAP); }
     /** Unsafe version of {@link #background_pixel}. */
-    public static long nbackground_pixel(long struct) { return memGetAddress(struct + XSetWindowAttributes.BACKGROUND_PIXEL); }
+    public static long nbackground_pixel(long struct) { return memGetCLong(struct + XSetWindowAttributes.BACKGROUND_PIXEL); }
     /** Unsafe version of {@link #border_pixmap}. */
-    public static long nborder_pixmap(long struct) { return memGetAddress(struct + XSetWindowAttributes.BORDER_PIXMAP); }
+    public static long nborder_pixmap(long struct) { return memGetCLong(struct + XSetWindowAttributes.BORDER_PIXMAP); }
     /** Unsafe version of {@link #border_pixel}. */
-    public static long nborder_pixel(long struct) { return memGetAddress(struct + XSetWindowAttributes.BORDER_PIXEL); }
+    public static long nborder_pixel(long struct) { return memGetCLong(struct + XSetWindowAttributes.BORDER_PIXEL); }
     /** Unsafe version of {@link #bit_gravity}. */
     public static int nbit_gravity(long struct) { return UNSAFE.getInt(null, struct + XSetWindowAttributes.BIT_GRAVITY); }
     /** Unsafe version of {@link #win_gravity}. */
@@ -396,30 +396,30 @@ public class XSetWindowAttributes extends Struct implements NativeResource {
     /** Unsafe version of {@link #backing_store}. */
     public static int nbacking_store(long struct) { return UNSAFE.getInt(null, struct + XSetWindowAttributes.BACKING_STORE); }
     /** Unsafe version of {@link #backing_planes}. */
-    public static long nbacking_planes(long struct) { return memGetAddress(struct + XSetWindowAttributes.BACKING_PLANES); }
+    public static long nbacking_planes(long struct) { return memGetCLong(struct + XSetWindowAttributes.BACKING_PLANES); }
     /** Unsafe version of {@link #backing_pixel}. */
-    public static long nbacking_pixel(long struct) { return memGetAddress(struct + XSetWindowAttributes.BACKING_PIXEL); }
+    public static long nbacking_pixel(long struct) { return memGetCLong(struct + XSetWindowAttributes.BACKING_PIXEL); }
     /** Unsafe version of {@link #save_under}. */
     public static int nsave_under(long struct) { return UNSAFE.getInt(null, struct + XSetWindowAttributes.SAVE_UNDER); }
     /** Unsafe version of {@link #event_mask}. */
-    public static long nevent_mask(long struct) { return memGetAddress(struct + XSetWindowAttributes.EVENT_MASK); }
+    public static long nevent_mask(long struct) { return memGetCLong(struct + XSetWindowAttributes.EVENT_MASK); }
     /** Unsafe version of {@link #do_not_propagate_mask}. */
-    public static long ndo_not_propagate_mask(long struct) { return memGetAddress(struct + XSetWindowAttributes.DO_NOT_PROPAGATE_MASK); }
+    public static long ndo_not_propagate_mask(long struct) { return memGetCLong(struct + XSetWindowAttributes.DO_NOT_PROPAGATE_MASK); }
     /** Unsafe version of {@link #override_redirect}. */
     public static int noverride_redirect(long struct) { return UNSAFE.getInt(null, struct + XSetWindowAttributes.OVERRIDE_REDIRECT); }
     /** Unsafe version of {@link #colormap}. */
-    public static long ncolormap(long struct) { return memGetAddress(struct + XSetWindowAttributes.COLORMAP); }
+    public static long ncolormap(long struct) { return memGetCLong(struct + XSetWindowAttributes.COLORMAP); }
     /** Unsafe version of {@link #cursor}. */
-    public static long ncursor(long struct) { return memGetAddress(struct + XSetWindowAttributes.CURSOR); }
+    public static long ncursor(long struct) { return memGetCLong(struct + XSetWindowAttributes.CURSOR); }
 
     /** Unsafe version of {@link #background_pixmap(long) background_pixmap}. */
-    public static void nbackground_pixmap(long struct, long value) { memPutAddress(struct + XSetWindowAttributes.BACKGROUND_PIXMAP, value); }
+    public static void nbackground_pixmap(long struct, long value) { memPutCLong(struct + XSetWindowAttributes.BACKGROUND_PIXMAP, value); }
     /** Unsafe version of {@link #background_pixel(long) background_pixel}. */
-    public static void nbackground_pixel(long struct, long value) { memPutAddress(struct + XSetWindowAttributes.BACKGROUND_PIXEL, value); }
+    public static void nbackground_pixel(long struct, long value) { memPutCLong(struct + XSetWindowAttributes.BACKGROUND_PIXEL, value); }
     /** Unsafe version of {@link #border_pixmap(long) border_pixmap}. */
-    public static void nborder_pixmap(long struct, long value) { memPutAddress(struct + XSetWindowAttributes.BORDER_PIXMAP, value); }
+    public static void nborder_pixmap(long struct, long value) { memPutCLong(struct + XSetWindowAttributes.BORDER_PIXMAP, value); }
     /** Unsafe version of {@link #border_pixel(long) border_pixel}. */
-    public static void nborder_pixel(long struct, long value) { memPutAddress(struct + XSetWindowAttributes.BORDER_PIXEL, value); }
+    public static void nborder_pixel(long struct, long value) { memPutCLong(struct + XSetWindowAttributes.BORDER_PIXEL, value); }
     /** Unsafe version of {@link #bit_gravity(int) bit_gravity}. */
     public static void nbit_gravity(long struct, int value) { UNSAFE.putInt(null, struct + XSetWindowAttributes.BIT_GRAVITY, value); }
     /** Unsafe version of {@link #win_gravity(int) win_gravity}. */
@@ -427,21 +427,21 @@ public class XSetWindowAttributes extends Struct implements NativeResource {
     /** Unsafe version of {@link #backing_store(int) backing_store}. */
     public static void nbacking_store(long struct, int value) { UNSAFE.putInt(null, struct + XSetWindowAttributes.BACKING_STORE, value); }
     /** Unsafe version of {@link #backing_planes(long) backing_planes}. */
-    public static void nbacking_planes(long struct, long value) { memPutAddress(struct + XSetWindowAttributes.BACKING_PLANES, value); }
+    public static void nbacking_planes(long struct, long value) { memPutCLong(struct + XSetWindowAttributes.BACKING_PLANES, value); }
     /** Unsafe version of {@link #backing_pixel(long) backing_pixel}. */
-    public static void nbacking_pixel(long struct, long value) { memPutAddress(struct + XSetWindowAttributes.BACKING_PIXEL, value); }
+    public static void nbacking_pixel(long struct, long value) { memPutCLong(struct + XSetWindowAttributes.BACKING_PIXEL, value); }
     /** Unsafe version of {@link #save_under(boolean) save_under}. */
     public static void nsave_under(long struct, int value) { UNSAFE.putInt(null, struct + XSetWindowAttributes.SAVE_UNDER, value); }
     /** Unsafe version of {@link #event_mask(long) event_mask}. */
-    public static void nevent_mask(long struct, long value) { memPutAddress(struct + XSetWindowAttributes.EVENT_MASK, value); }
+    public static void nevent_mask(long struct, long value) { memPutCLong(struct + XSetWindowAttributes.EVENT_MASK, value); }
     /** Unsafe version of {@link #do_not_propagate_mask(long) do_not_propagate_mask}. */
-    public static void ndo_not_propagate_mask(long struct, long value) { memPutAddress(struct + XSetWindowAttributes.DO_NOT_PROPAGATE_MASK, value); }
+    public static void ndo_not_propagate_mask(long struct, long value) { memPutCLong(struct + XSetWindowAttributes.DO_NOT_PROPAGATE_MASK, value); }
     /** Unsafe version of {@link #override_redirect(boolean) override_redirect}. */
     public static void noverride_redirect(long struct, int value) { UNSAFE.putInt(null, struct + XSetWindowAttributes.OVERRIDE_REDIRECT, value); }
     /** Unsafe version of {@link #colormap(long) colormap}. */
-    public static void ncolormap(long struct, long value) { memPutAddress(struct + XSetWindowAttributes.COLORMAP, value); }
+    public static void ncolormap(long struct, long value) { memPutCLong(struct + XSetWindowAttributes.COLORMAP, value); }
     /** Unsafe version of {@link #cursor(long) cursor}. */
-    public static void ncursor(long struct, long value) { memPutAddress(struct + XSetWindowAttributes.CURSOR, value); }
+    public static void ncursor(long struct, long value) { memPutCLong(struct + XSetWindowAttributes.CURSOR, value); }
 
     // -----------------------------------
 

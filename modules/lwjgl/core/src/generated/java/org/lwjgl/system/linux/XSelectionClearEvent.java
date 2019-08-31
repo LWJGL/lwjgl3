@@ -60,12 +60,12 @@ public class XSelectionClearEvent extends Struct implements NativeResource {
     static {
         Layout layout = __struct(
             __member(4),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE)
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE)
         );
 
         SIZEOF = layout.getSize();
@@ -308,32 +308,32 @@ public class XSelectionClearEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XSelectionClearEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
-    public static long nserial(long struct) { return memGetAddress(struct + XSelectionClearEvent.SERIAL); }
+    public static long nserial(long struct) { return memGetCLong(struct + XSelectionClearEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
     public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XSelectionClearEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XSelectionClearEvent.DISPLAY); }
     /** Unsafe version of {@link #window}. */
-    public static long nwindow(long struct) { return memGetAddress(struct + XSelectionClearEvent.WINDOW); }
+    public static long nwindow(long struct) { return memGetCLong(struct + XSelectionClearEvent.WINDOW); }
     /** Unsafe version of {@link #selection}. */
-    public static long nselection(long struct) { return memGetAddress(struct + XSelectionClearEvent.SELECTION); }
+    public static long nselection(long struct) { return memGetCLong(struct + XSelectionClearEvent.SELECTION); }
     /** Unsafe version of {@link #time}. */
-    public static long ntime(long struct) { return memGetAddress(struct + XSelectionClearEvent.TIME); }
+    public static long ntime(long struct) { return memGetCLong(struct + XSelectionClearEvent.TIME); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XSelectionClearEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
-    public static void nserial(long struct, long value) { memPutAddress(struct + XSelectionClearEvent.SERIAL, value); }
+    public static void nserial(long struct, long value) { memPutCLong(struct + XSelectionClearEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
     public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XSelectionClearEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XSelectionClearEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #window(long) window}. */
-    public static void nwindow(long struct, long value) { memPutAddress(struct + XSelectionClearEvent.WINDOW, value); }
+    public static void nwindow(long struct, long value) { memPutCLong(struct + XSelectionClearEvent.WINDOW, value); }
     /** Unsafe version of {@link #selection(long) selection}. */
-    public static void nselection(long struct, long value) { memPutAddress(struct + XSelectionClearEvent.SELECTION, value); }
+    public static void nselection(long struct, long value) { memPutCLong(struct + XSelectionClearEvent.SELECTION, value); }
     /** Unsafe version of {@link #time(long) time}. */
-    public static void ntime(long struct, long value) { memPutAddress(struct + XSelectionClearEvent.TIME, value); }
+    public static void ntime(long struct, long value) { memPutCLong(struct + XSelectionClearEvent.TIME, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

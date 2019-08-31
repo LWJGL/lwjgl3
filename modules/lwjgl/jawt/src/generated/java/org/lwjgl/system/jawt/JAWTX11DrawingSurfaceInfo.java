@@ -56,10 +56,10 @@ public class JAWTX11DrawingSurfaceInfo extends Struct {
 
     static {
         Layout layout = __struct(
+            __member(CLONG_SIZE),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
             __member(4)
         );
 
@@ -133,13 +133,13 @@ public class JAWTX11DrawingSurfaceInfo extends Struct {
     // -----------------------------------
 
     /** Unsafe version of {@link #drawable}. */
-    public static long ndrawable(long struct) { return memGetAddress(struct + JAWTX11DrawingSurfaceInfo.DRAWABLE); }
+    public static long ndrawable(long struct) { return memGetCLong(struct + JAWTX11DrawingSurfaceInfo.DRAWABLE); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + JAWTX11DrawingSurfaceInfo.DISPLAY); }
     /** Unsafe version of {@link #visualID}. */
-    public static long nvisualID(long struct) { return memGetAddress(struct + JAWTX11DrawingSurfaceInfo.VISUALID); }
+    public static long nvisualID(long struct) { return memGetCLong(struct + JAWTX11DrawingSurfaceInfo.VISUALID); }
     /** Unsafe version of {@link #colormapID}. */
-    public static long ncolormapID(long struct) { return memGetAddress(struct + JAWTX11DrawingSurfaceInfo.COLORMAPID); }
+    public static long ncolormapID(long struct) { return memGetCLong(struct + JAWTX11DrawingSurfaceInfo.COLORMAPID); }
     /** Unsafe version of {@link #depth}. */
     public static int ndepth(long struct) { return UNSAFE.getInt(null, struct + JAWTX11DrawingSurfaceInfo.DEPTH); }
 

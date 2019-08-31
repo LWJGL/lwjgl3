@@ -60,11 +60,11 @@ public class XCirculateRequestEvent extends Struct implements NativeResource {
     static {
         Layout layout = __struct(
             __member(4),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
             __member(4)
         );
 
@@ -307,30 +307,30 @@ public class XCirculateRequestEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XCirculateRequestEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
-    public static long nserial(long struct) { return memGetAddress(struct + XCirculateRequestEvent.SERIAL); }
+    public static long nserial(long struct) { return memGetCLong(struct + XCirculateRequestEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
     public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XCirculateRequestEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XCirculateRequestEvent.DISPLAY); }
     /** Unsafe version of {@link #parent}. */
-    public static long nparent(long struct) { return memGetAddress(struct + XCirculateRequestEvent.PARENT); }
+    public static long nparent(long struct) { return memGetCLong(struct + XCirculateRequestEvent.PARENT); }
     /** Unsafe version of {@link #window}. */
-    public static long nwindow(long struct) { return memGetAddress(struct + XCirculateRequestEvent.WINDOW); }
+    public static long nwindow(long struct) { return memGetCLong(struct + XCirculateRequestEvent.WINDOW); }
     /** Unsafe version of {@link #place}. */
     public static int nplace(long struct) { return UNSAFE.getInt(null, struct + XCirculateRequestEvent.PLACE); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XCirculateRequestEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
-    public static void nserial(long struct, long value) { memPutAddress(struct + XCirculateRequestEvent.SERIAL, value); }
+    public static void nserial(long struct, long value) { memPutCLong(struct + XCirculateRequestEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
     public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XCirculateRequestEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XCirculateRequestEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #parent(long) parent}. */
-    public static void nparent(long struct, long value) { memPutAddress(struct + XCirculateRequestEvent.PARENT, value); }
+    public static void nparent(long struct, long value) { memPutCLong(struct + XCirculateRequestEvent.PARENT, value); }
     /** Unsafe version of {@link #window(long) window}. */
-    public static void nwindow(long struct, long value) { memPutAddress(struct + XCirculateRequestEvent.WINDOW, value); }
+    public static void nwindow(long struct, long value) { memPutCLong(struct + XCirculateRequestEvent.WINDOW, value); }
     /** Unsafe version of {@link #place(int) place}. */
     public static void nplace(long struct, int value) { UNSAFE.putInt(null, struct + XCirculateRequestEvent.PLACE, value); }
 

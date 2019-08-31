@@ -60,11 +60,11 @@ public class XMapEvent extends Struct implements NativeResource {
     static {
         Layout layout = __struct(
             __member(4),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
             __member(4)
         );
 
@@ -307,30 +307,30 @@ public class XMapEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XMapEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
-    public static long nserial(long struct) { return memGetAddress(struct + XMapEvent.SERIAL); }
+    public static long nserial(long struct) { return memGetCLong(struct + XMapEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
     public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XMapEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XMapEvent.DISPLAY); }
     /** Unsafe version of {@link #event}. */
-    public static long nevent(long struct) { return memGetAddress(struct + XMapEvent.EVENT); }
+    public static long nevent(long struct) { return memGetCLong(struct + XMapEvent.EVENT); }
     /** Unsafe version of {@link #window}. */
-    public static long nwindow(long struct) { return memGetAddress(struct + XMapEvent.WINDOW); }
+    public static long nwindow(long struct) { return memGetCLong(struct + XMapEvent.WINDOW); }
     /** Unsafe version of {@link #override_redirect}. */
     public static int noverride_redirect(long struct) { return UNSAFE.getInt(null, struct + XMapEvent.OVERRIDE_REDIRECT); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XMapEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
-    public static void nserial(long struct, long value) { memPutAddress(struct + XMapEvent.SERIAL, value); }
+    public static void nserial(long struct, long value) { memPutCLong(struct + XMapEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
     public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XMapEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XMapEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #event(long) event}. */
-    public static void nevent(long struct, long value) { memPutAddress(struct + XMapEvent.EVENT, value); }
+    public static void nevent(long struct, long value) { memPutCLong(struct + XMapEvent.EVENT, value); }
     /** Unsafe version of {@link #window(long) window}. */
-    public static void nwindow(long struct, long value) { memPutAddress(struct + XMapEvent.WINDOW, value); }
+    public static void nwindow(long struct, long value) { memPutCLong(struct + XMapEvent.WINDOW, value); }
     /** Unsafe version of {@link #override_redirect(int) override_redirect}. */
     public static void noverride_redirect(long struct, int value) { UNSAFE.putInt(null, struct + XMapEvent.OVERRIDE_REDIRECT, value); }
 

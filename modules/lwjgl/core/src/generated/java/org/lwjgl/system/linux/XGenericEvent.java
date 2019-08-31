@@ -62,7 +62,7 @@ public class XGenericEvent extends Struct implements NativeResource {
     static {
         Layout layout = __struct(
             __member(4),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(POINTER_SIZE),
             __member(4),
@@ -299,7 +299,7 @@ public class XGenericEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XGenericEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
-    public static long nserial(long struct) { return memGetAddress(struct + XGenericEvent.SERIAL); }
+    public static long nserial(long struct) { return memGetCLong(struct + XGenericEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
     public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XGenericEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
@@ -312,7 +312,7 @@ public class XGenericEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XGenericEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
-    public static void nserial(long struct, long value) { memPutAddress(struct + XGenericEvent.SERIAL, value); }
+    public static void nserial(long struct, long value) { memPutCLong(struct + XGenericEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
     public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XGenericEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */

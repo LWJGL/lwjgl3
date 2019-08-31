@@ -137,7 +137,7 @@ public class EXTAcquireXlibDisplay {
             check(__functionAddress);
             check(dpy);
         }
-        return callPPPPI(physicalDevice.address(), dpy, rrOutput, pDisplay, __functionAddress);
+        return callPPNPI(physicalDevice.address(), dpy, rrOutput, pDisplay, __functionAddress);
     }
 
     /**
@@ -197,7 +197,7 @@ public class EXTAcquireXlibDisplay {
             check(dpy);
             check(pDisplay, 1);
         }
-        return callPPPPI(physicalDevice.address(), dpy, rrOutput, pDisplay, __functionAddress);
+        return callPPNPI(physicalDevice.address(), dpy, rrOutput, pDisplay, __functionAddress);
     }
 
 }

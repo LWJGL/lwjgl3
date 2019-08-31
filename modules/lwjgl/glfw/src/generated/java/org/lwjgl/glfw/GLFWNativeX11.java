@@ -76,7 +76,7 @@ public class GLFWNativeX11 {
         if (CHECKS) {
             check(monitor);
         }
-        return invokePP(monitor, __functionAddress);
+        return invokePN(monitor, __functionAddress);
     }
 
     // --- [ glfwGetX11Monitor ] ---
@@ -98,7 +98,7 @@ public class GLFWNativeX11 {
         if (CHECKS) {
             check(monitor);
         }
-        return invokePP(monitor, __functionAddress);
+        return invokePN(monitor, __functionAddress);
     }
 
     // --- [ glfwGetX11Window ] ---
@@ -120,7 +120,7 @@ public class GLFWNativeX11 {
         if (CHECKS) {
             check(window);
         }
-        return invokePP(window, __functionAddress);
+        return invokePN(window, __functionAddress);
     }
 
     // --- [ glfwSetX11SelectionString ] ---

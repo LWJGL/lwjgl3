@@ -77,11 +77,11 @@ public class XCreateWindowEvent extends Struct implements NativeResource {
     static {
         Layout layout = __struct(
             __member(4),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(4),
             __member(4),
@@ -364,15 +364,15 @@ public class XCreateWindowEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XCreateWindowEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
-    public static long nserial(long struct) { return memGetAddress(struct + XCreateWindowEvent.SERIAL); }
+    public static long nserial(long struct) { return memGetCLong(struct + XCreateWindowEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
     public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XCreateWindowEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XCreateWindowEvent.DISPLAY); }
     /** Unsafe version of {@link #parent}. */
-    public static long nparent(long struct) { return memGetAddress(struct + XCreateWindowEvent.PARENT); }
+    public static long nparent(long struct) { return memGetCLong(struct + XCreateWindowEvent.PARENT); }
     /** Unsafe version of {@link #window}. */
-    public static long nwindow(long struct) { return memGetAddress(struct + XCreateWindowEvent.WINDOW); }
+    public static long nwindow(long struct) { return memGetCLong(struct + XCreateWindowEvent.WINDOW); }
     /** Unsafe version of {@link #x}. */
     public static int nx(long struct) { return UNSAFE.getInt(null, struct + XCreateWindowEvent.X); }
     /** Unsafe version of {@link #y}. */
@@ -389,15 +389,15 @@ public class XCreateWindowEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XCreateWindowEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
-    public static void nserial(long struct, long value) { memPutAddress(struct + XCreateWindowEvent.SERIAL, value); }
+    public static void nserial(long struct, long value) { memPutCLong(struct + XCreateWindowEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
     public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XCreateWindowEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XCreateWindowEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #parent(long) parent}. */
-    public static void nparent(long struct, long value) { memPutAddress(struct + XCreateWindowEvent.PARENT, value); }
+    public static void nparent(long struct, long value) { memPutCLong(struct + XCreateWindowEvent.PARENT, value); }
     /** Unsafe version of {@link #window(long) window}. */
-    public static void nwindow(long struct, long value) { memPutAddress(struct + XCreateWindowEvent.WINDOW, value); }
+    public static void nwindow(long struct, long value) { memPutCLong(struct + XCreateWindowEvent.WINDOW, value); }
     /** Unsafe version of {@link #x(int) x}. */
     public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + XCreateWindowEvent.X, value); }
     /** Unsafe version of {@link #y(int) y}. */

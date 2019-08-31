@@ -543,7 +543,7 @@ public class X11 {
         if (CHECKS) {
             check(display);
         }
-        return invokePP(display, screen_number, __functionAddress);
+        return invokePN(display, screen_number, __functionAddress);
     }
 
     // --- [ XCreateColormap ] ---
@@ -554,7 +554,7 @@ public class X11 {
         if (CHECKS) {
             check(display);
         }
-        return invokePPPP(display, w, visual, alloc, __functionAddress);
+        return invokePNPN(display, w, visual, alloc, __functionAddress);
     }
 
     /**
@@ -587,7 +587,7 @@ public class X11 {
         if (CHECKS) {
             check(display);
         }
-        return invokePPI(display, colormap, __functionAddress);
+        return invokePNI(display, colormap, __functionAddress);
     }
 
     // --- [ XCreateWindow ] ---
@@ -598,7 +598,7 @@ public class X11 {
         if (CHECKS) {
             check(display);
         }
-        return invokePPPPPP(display, parent, x, y, width, height, border_width, depth, windowClass, visual, valuemask, attributes, __functionAddress);
+        return invokePNPNPN(display, parent, x, y, width, height, border_width, depth, windowClass, visual, valuemask, attributes, __functionAddress);
     }
 
     /**
@@ -650,7 +650,7 @@ public class X11 {
         if (CHECKS) {
             check(display);
         }
-        return invokePPI(display, w, __functionAddress);
+        return invokePNI(display, w, __functionAddress);
     }
 
     // --- [ XFree ] ---
@@ -687,7 +687,7 @@ public class X11 {
         if (CHECKS) {
             check(display);
         }
-        return invokePPPPI(display, w, propagate, event_mask, event_send, __functionAddress);
+        return invokePNNPI(display, w, propagate, event_mask, event_send, __functionAddress);
     }
 
     /**
@@ -745,7 +745,7 @@ public class X11 {
         if (CHECKS) {
             check(display);
         }
-        return invokePP(display, __functionAddress);
+        return invokePN(display, __functionAddress);
     }
 
     // --- [ XGetMotionEvents ] ---
@@ -756,7 +756,7 @@ public class X11 {
         if (CHECKS) {
             check(display);
         }
-        return invokePPPPPP(display, w, start, stop, nevents_return, __functionAddress);
+        return invokePNNNPP(display, w, start, stop, nevents_return, __functionAddress);
     }
 
     /**
@@ -790,7 +790,7 @@ public class X11 {
         if (CHECKS) {
             check(display);
         }
-        return invokePPPPPPI(display, src_w, dest_w, src_x, src_y, dest_x_return, dest_y_return, child_return, __functionAddress);
+        return invokePNNPPPI(display, src_w, dest_w, src_x, src_y, dest_x_return, dest_y_return, child_return, __functionAddress);
     }
 
     /**
@@ -814,7 +814,7 @@ public class X11 {
      * @param child_return  returns the child if the coordinates are contained in a mapped child of the destination window
      */
     @NativeType("Bool")
-    public static boolean XTranslateCoordinates(@NativeType("Display *") long display, @NativeType("Window") long src_w, @NativeType("Window") long dest_w, int src_x, int src_y, @NativeType("int *") IntBuffer dest_x_return, @NativeType("int *") IntBuffer dest_y_return, @NativeType("Window *") PointerBuffer child_return) {
+    public static boolean XTranslateCoordinates(@NativeType("Display *") long display, @NativeType("Window") long src_w, @NativeType("Window") long dest_w, int src_x, int src_y, @NativeType("int *") IntBuffer dest_x_return, @NativeType("int *") IntBuffer dest_y_return, @NativeType("Window *") CLongBuffer child_return) {
         if (CHECKS) {
             check(dest_x_return, 1);
             check(dest_y_return, 1);
@@ -825,7 +825,7 @@ public class X11 {
 
     /** Array version of: {@link #XTranslateCoordinates} */
     @NativeType("Bool")
-    public static boolean XTranslateCoordinates(@NativeType("Display *") long display, @NativeType("Window") long src_w, @NativeType("Window") long dest_w, int src_x, int src_y, @NativeType("int *") int[] dest_x_return, @NativeType("int *") int[] dest_y_return, @NativeType("Window *") PointerBuffer child_return) {
+    public static boolean XTranslateCoordinates(@NativeType("Display *") long display, @NativeType("Window") long src_w, @NativeType("Window") long dest_w, int src_x, int src_y, @NativeType("int *") int[] dest_x_return, @NativeType("int *") int[] dest_y_return, @NativeType("Window *") CLongBuffer child_return) {
         long __functionAddress = Functions.XTranslateCoordinates;
         if (CHECKS) {
             check(display);
@@ -833,7 +833,7 @@ public class X11 {
             check(dest_y_return, 1);
             check(child_return, 1);
         }
-        return invokePPPPPPI(display, src_w, dest_w, src_x, src_y, dest_x_return, dest_y_return, memAddress(child_return), __functionAddress) != 0;
+        return invokePNNPPPI(display, src_w, dest_w, src_x, src_y, dest_x_return, dest_y_return, memAddress(child_return), __functionAddress) != 0;
     }
 
 }

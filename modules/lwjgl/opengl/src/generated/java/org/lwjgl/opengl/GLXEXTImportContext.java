@@ -92,7 +92,7 @@ public class GLXEXTImportContext {
             check(__functionAddress);
             check(context);
         }
-        return callPP(context, __functionAddress);
+        return callPN(context, __functionAddress);
     }
 
     // --- [ glXImportContextEXT ] ---
@@ -110,7 +110,7 @@ public class GLXEXTImportContext {
             check(__functionAddress);
             check(display);
         }
-        return callPPP(display, contextID, __functionAddress);
+        return callPNP(display, contextID, __functionAddress);
     }
 
     // --- [ glXFreeContextEXT ] ---

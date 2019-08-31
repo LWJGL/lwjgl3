@@ -178,7 +178,7 @@ public class GLXSGIXPbuffer {
             check(display);
             check(drawable);
         }
-        callPPPV(display, drawable, mask, __functionAddress);
+        callPPNV(display, drawable, mask, __functionAddress);
     }
 
     // --- [ glXGetSelectedEventSGIX ] ---
@@ -201,7 +201,7 @@ public class GLXSGIXPbuffer {
      * @param drawable the GLXDrawable
      * @param mask     returns the selection mask
      */
-    public static void glXGetSelectedEventSGIX(@NativeType("Display *") long display, @NativeType("GLXDrawable") long drawable, @NativeType("unsigned long *") PointerBuffer mask) {
+    public static void glXGetSelectedEventSGIX(@NativeType("Display *") long display, @NativeType("GLXDrawable") long drawable, @NativeType("unsigned long *") CLongBuffer mask) {
         if (CHECKS) {
             check(mask, 1);
         }

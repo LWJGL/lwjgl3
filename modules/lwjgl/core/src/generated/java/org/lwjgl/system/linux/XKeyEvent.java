@@ -89,13 +89,13 @@ public class XKeyEvent extends Struct implements NativeResource {
     static {
         Layout layout = __struct(
             __member(4),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(4),
             __member(4),
@@ -405,19 +405,19 @@ public class XKeyEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XKeyEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
-    public static long nserial(long struct) { return memGetAddress(struct + XKeyEvent.SERIAL); }
+    public static long nserial(long struct) { return memGetCLong(struct + XKeyEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
     public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XKeyEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XKeyEvent.DISPLAY); }
     /** Unsafe version of {@link #window}. */
-    public static long nwindow(long struct) { return memGetAddress(struct + XKeyEvent.WINDOW); }
+    public static long nwindow(long struct) { return memGetCLong(struct + XKeyEvent.WINDOW); }
     /** Unsafe version of {@link #root}. */
-    public static long nroot(long struct) { return memGetAddress(struct + XKeyEvent.ROOT); }
+    public static long nroot(long struct) { return memGetCLong(struct + XKeyEvent.ROOT); }
     /** Unsafe version of {@link #subwindow}. */
-    public static long nsubwindow(long struct) { return memGetAddress(struct + XKeyEvent.SUBWINDOW); }
+    public static long nsubwindow(long struct) { return memGetCLong(struct + XKeyEvent.SUBWINDOW); }
     /** Unsafe version of {@link #time}. */
-    public static long ntime(long struct) { return memGetAddress(struct + XKeyEvent.TIME); }
+    public static long ntime(long struct) { return memGetCLong(struct + XKeyEvent.TIME); }
     /** Unsafe version of {@link #x}. */
     public static int nx(long struct) { return UNSAFE.getInt(null, struct + XKeyEvent.X); }
     /** Unsafe version of {@link #y}. */
@@ -436,19 +436,19 @@ public class XKeyEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XKeyEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
-    public static void nserial(long struct, long value) { memPutAddress(struct + XKeyEvent.SERIAL, value); }
+    public static void nserial(long struct, long value) { memPutCLong(struct + XKeyEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
     public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XKeyEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XKeyEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #window(long) window}. */
-    public static void nwindow(long struct, long value) { memPutAddress(struct + XKeyEvent.WINDOW, value); }
+    public static void nwindow(long struct, long value) { memPutCLong(struct + XKeyEvent.WINDOW, value); }
     /** Unsafe version of {@link #root(long) root}. */
-    public static void nroot(long struct, long value) { memPutAddress(struct + XKeyEvent.ROOT, value); }
+    public static void nroot(long struct, long value) { memPutCLong(struct + XKeyEvent.ROOT, value); }
     /** Unsafe version of {@link #subwindow(long) subwindow}. */
-    public static void nsubwindow(long struct, long value) { memPutAddress(struct + XKeyEvent.SUBWINDOW, value); }
+    public static void nsubwindow(long struct, long value) { memPutCLong(struct + XKeyEvent.SUBWINDOW, value); }
     /** Unsafe version of {@link #time(long) time}. */
-    public static void ntime(long struct, long value) { memPutAddress(struct + XKeyEvent.TIME, value); }
+    public static void ntime(long struct, long value) { memPutCLong(struct + XKeyEvent.TIME, value); }
     /** Unsafe version of {@link #x(int) x}. */
     public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + XKeyEvent.X, value); }
     /** Unsafe version of {@link #y(int) y}. */

@@ -8,17 +8,17 @@ import org.lwjgl.generator.*
 
 // numeric
 
-val cl_char = IntegerType("cl_char", PrimitiveMapping.BYTE)
-val cl_uchar = IntegerType("cl_uchar", PrimitiveMapping.BYTE, unsigned = true)
-val cl_short = IntegerType("cl_short", PrimitiveMapping.SHORT)
-val cl_ushort = IntegerType("cl_ushort", PrimitiveMapping.SHORT, unsigned = true)
-val cl_int = IntegerType("cl_int", PrimitiveMapping.INT)
-val cl_uint = IntegerType("cl_uint", PrimitiveMapping.INT, unsigned = true)
-val cl_long = IntegerType("cl_long", PrimitiveMapping.LONG)
-val cl_ulong = IntegerType("cl_ulong", PrimitiveMapping.LONG, unsigned = true)
+val cl_char = typedef(int8_t, "cl_char")
+val cl_uchar = typedef(uint8_t, "cl_uchar")
+val cl_short = typedef(int16_t, "cl_short")
+val cl_ushort = typedef(uint16_t, "cl_ushort")
+val cl_int = typedef(int32_t, "cl_int")
+val cl_uint = typedef(uint32_t, "cl_uint")
+val cl_long = typedef(int64_t, "cl_long")
+val cl_ulong = typedef(uint64_t, "cl_ulong")
 val cl_half = PrimitiveType("cl_half", PrimitiveMapping.SHORT)
-val cl_float = PrimitiveType("cl_float", PrimitiveMapping.FLOAT)
-val cl_double = PrimitiveType("cl_double", PrimitiveMapping.DOUBLE)
+val cl_float = typedef(float, "cl_float")
+val cl_double = typedef(double, "cl_double")
 
 // objects
 

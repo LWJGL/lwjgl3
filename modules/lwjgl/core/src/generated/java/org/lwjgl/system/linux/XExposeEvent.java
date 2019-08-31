@@ -67,10 +67,10 @@ public class XExposeEvent extends Struct implements NativeResource {
     static {
         Layout layout = __struct(
             __member(4),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(4),
             __member(4),
@@ -337,13 +337,13 @@ public class XExposeEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XExposeEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
-    public static long nserial(long struct) { return memGetAddress(struct + XExposeEvent.SERIAL); }
+    public static long nserial(long struct) { return memGetCLong(struct + XExposeEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
     public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XExposeEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XExposeEvent.DISPLAY); }
     /** Unsafe version of {@link #window}. */
-    public static long nwindow(long struct) { return memGetAddress(struct + XExposeEvent.WINDOW); }
+    public static long nwindow(long struct) { return memGetCLong(struct + XExposeEvent.WINDOW); }
     /** Unsafe version of {@link #x}. */
     public static int nx(long struct) { return UNSAFE.getInt(null, struct + XExposeEvent.X); }
     /** Unsafe version of {@link #y}. */
@@ -358,13 +358,13 @@ public class XExposeEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XExposeEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
-    public static void nserial(long struct, long value) { memPutAddress(struct + XExposeEvent.SERIAL, value); }
+    public static void nserial(long struct, long value) { memPutCLong(struct + XExposeEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
     public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XExposeEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XExposeEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #window(long) window}. */
-    public static void nwindow(long struct, long value) { memPutAddress(struct + XExposeEvent.WINDOW, value); }
+    public static void nwindow(long struct, long value) { memPutCLong(struct + XExposeEvent.WINDOW, value); }
     /** Unsafe version of {@link #x(int) x}. */
     public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + XExposeEvent.X, value); }
     /** Unsafe version of {@link #y(int) y}. */

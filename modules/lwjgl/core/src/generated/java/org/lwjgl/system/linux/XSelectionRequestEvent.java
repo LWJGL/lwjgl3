@@ -67,15 +67,15 @@ public class XSelectionRequestEvent extends Struct implements NativeResource {
     static {
         Layout layout = __struct(
             __member(4),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE)
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE)
         );
 
         SIZEOF = layout.getSize();
@@ -342,44 +342,44 @@ public class XSelectionRequestEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XSelectionRequestEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
-    public static long nserial(long struct) { return memGetAddress(struct + XSelectionRequestEvent.SERIAL); }
+    public static long nserial(long struct) { return memGetCLong(struct + XSelectionRequestEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
     public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XSelectionRequestEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XSelectionRequestEvent.DISPLAY); }
     /** Unsafe version of {@link #owner}. */
-    public static long nowner(long struct) { return memGetAddress(struct + XSelectionRequestEvent.OWNER); }
+    public static long nowner(long struct) { return memGetCLong(struct + XSelectionRequestEvent.OWNER); }
     /** Unsafe version of {@link #requestor}. */
-    public static long nrequestor(long struct) { return memGetAddress(struct + XSelectionRequestEvent.REQUESTOR); }
+    public static long nrequestor(long struct) { return memGetCLong(struct + XSelectionRequestEvent.REQUESTOR); }
     /** Unsafe version of {@link #selection}. */
-    public static long nselection(long struct) { return memGetAddress(struct + XSelectionRequestEvent.SELECTION); }
+    public static long nselection(long struct) { return memGetCLong(struct + XSelectionRequestEvent.SELECTION); }
     /** Unsafe version of {@link #target}. */
-    public static long ntarget(long struct) { return memGetAddress(struct + XSelectionRequestEvent.TARGET); }
+    public static long ntarget(long struct) { return memGetCLong(struct + XSelectionRequestEvent.TARGET); }
     /** Unsafe version of {@link #property}. */
-    public static long nproperty(long struct) { return memGetAddress(struct + XSelectionRequestEvent.PROPERTY); }
+    public static long nproperty(long struct) { return memGetCLong(struct + XSelectionRequestEvent.PROPERTY); }
     /** Unsafe version of {@link #time}. */
-    public static long ntime(long struct) { return memGetAddress(struct + XSelectionRequestEvent.TIME); }
+    public static long ntime(long struct) { return memGetCLong(struct + XSelectionRequestEvent.TIME); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XSelectionRequestEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
-    public static void nserial(long struct, long value) { memPutAddress(struct + XSelectionRequestEvent.SERIAL, value); }
+    public static void nserial(long struct, long value) { memPutCLong(struct + XSelectionRequestEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
     public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XSelectionRequestEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XSelectionRequestEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #owner(long) owner}. */
-    public static void nowner(long struct, long value) { memPutAddress(struct + XSelectionRequestEvent.OWNER, value); }
+    public static void nowner(long struct, long value) { memPutCLong(struct + XSelectionRequestEvent.OWNER, value); }
     /** Unsafe version of {@link #requestor(long) requestor}. */
-    public static void nrequestor(long struct, long value) { memPutAddress(struct + XSelectionRequestEvent.REQUESTOR, value); }
+    public static void nrequestor(long struct, long value) { memPutCLong(struct + XSelectionRequestEvent.REQUESTOR, value); }
     /** Unsafe version of {@link #selection(long) selection}. */
-    public static void nselection(long struct, long value) { memPutAddress(struct + XSelectionRequestEvent.SELECTION, value); }
+    public static void nselection(long struct, long value) { memPutCLong(struct + XSelectionRequestEvent.SELECTION, value); }
     /** Unsafe version of {@link #target(long) target}. */
-    public static void ntarget(long struct, long value) { memPutAddress(struct + XSelectionRequestEvent.TARGET, value); }
+    public static void ntarget(long struct, long value) { memPutCLong(struct + XSelectionRequestEvent.TARGET, value); }
     /** Unsafe version of {@link #property(long) property}. */
-    public static void nproperty(long struct, long value) { memPutAddress(struct + XSelectionRequestEvent.PROPERTY, value); }
+    public static void nproperty(long struct, long value) { memPutCLong(struct + XSelectionRequestEvent.PROPERTY, value); }
     /** Unsafe version of {@link #time(long) time}. */
-    public static void ntime(long struct, long value) { memPutAddress(struct + XSelectionRequestEvent.TIME, value); }
+    public static void ntime(long struct, long value) { memPutCLong(struct + XSelectionRequestEvent.TIME, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

@@ -195,7 +195,7 @@ public class KHRXlibSurface {
             check(__functionAddress);
             check(dpy);
         }
-        return callPPPI(physicalDevice.address(), queueFamilyIndex, dpy, visualID, __functionAddress) != 0;
+        return callPPNI(physicalDevice.address(), queueFamilyIndex, dpy, visualID, __functionAddress) != 0;
     }
 
     /** Array version of: {@link #vkCreateXlibSurfaceKHR CreateXlibSurfaceKHR} */

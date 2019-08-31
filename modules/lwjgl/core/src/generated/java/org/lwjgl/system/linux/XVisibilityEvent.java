@@ -59,10 +59,10 @@ public class XVisibilityEvent extends Struct implements NativeResource {
     static {
         Layout layout = __struct(
             __member(4),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4)
         );
 
@@ -297,26 +297,26 @@ public class XVisibilityEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XVisibilityEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
-    public static long nserial(long struct) { return memGetAddress(struct + XVisibilityEvent.SERIAL); }
+    public static long nserial(long struct) { return memGetCLong(struct + XVisibilityEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
     public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XVisibilityEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XVisibilityEvent.DISPLAY); }
     /** Unsafe version of {@link #window}. */
-    public static long nwindow(long struct) { return memGetAddress(struct + XVisibilityEvent.WINDOW); }
+    public static long nwindow(long struct) { return memGetCLong(struct + XVisibilityEvent.WINDOW); }
     /** Unsafe version of {@link #state}. */
     public static int nstate(long struct) { return UNSAFE.getInt(null, struct + XVisibilityEvent.STATE); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XVisibilityEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
-    public static void nserial(long struct, long value) { memPutAddress(struct + XVisibilityEvent.SERIAL, value); }
+    public static void nserial(long struct, long value) { memPutCLong(struct + XVisibilityEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
     public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XVisibilityEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XVisibilityEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #window(long) window}. */
-    public static void nwindow(long struct, long value) { memPutAddress(struct + XVisibilityEvent.WINDOW, value); }
+    public static void nwindow(long struct, long value) { memPutCLong(struct + XVisibilityEvent.WINDOW, value); }
     /** Unsafe version of {@link #state(int) state}. */
     public static void nstate(long struct, int value) { UNSAFE.putInt(null, struct + XVisibilityEvent.STATE, value); }
 

@@ -92,13 +92,13 @@ public class XCrossingEvent extends Struct implements NativeResource {
     static {
         Layout layout = __struct(
             __member(4),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(4),
             __member(4),
@@ -422,19 +422,19 @@ public class XCrossingEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XCrossingEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
-    public static long nserial(long struct) { return memGetAddress(struct + XCrossingEvent.SERIAL); }
+    public static long nserial(long struct) { return memGetCLong(struct + XCrossingEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
     public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XCrossingEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XCrossingEvent.DISPLAY); }
     /** Unsafe version of {@link #window}. */
-    public static long nwindow(long struct) { return memGetAddress(struct + XCrossingEvent.WINDOW); }
+    public static long nwindow(long struct) { return memGetCLong(struct + XCrossingEvent.WINDOW); }
     /** Unsafe version of {@link #root}. */
-    public static long nroot(long struct) { return memGetAddress(struct + XCrossingEvent.ROOT); }
+    public static long nroot(long struct) { return memGetCLong(struct + XCrossingEvent.ROOT); }
     /** Unsafe version of {@link #subwindow}. */
-    public static long nsubwindow(long struct) { return memGetAddress(struct + XCrossingEvent.SUBWINDOW); }
+    public static long nsubwindow(long struct) { return memGetCLong(struct + XCrossingEvent.SUBWINDOW); }
     /** Unsafe version of {@link #time}. */
-    public static long ntime(long struct) { return memGetAddress(struct + XCrossingEvent.TIME); }
+    public static long ntime(long struct) { return memGetCLong(struct + XCrossingEvent.TIME); }
     /** Unsafe version of {@link #x}. */
     public static int nx(long struct) { return UNSAFE.getInt(null, struct + XCrossingEvent.X); }
     /** Unsafe version of {@link #y}. */
@@ -457,19 +457,19 @@ public class XCrossingEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XCrossingEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
-    public static void nserial(long struct, long value) { memPutAddress(struct + XCrossingEvent.SERIAL, value); }
+    public static void nserial(long struct, long value) { memPutCLong(struct + XCrossingEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
     public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XCrossingEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XCrossingEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #window(long) window}. */
-    public static void nwindow(long struct, long value) { memPutAddress(struct + XCrossingEvent.WINDOW, value); }
+    public static void nwindow(long struct, long value) { memPutCLong(struct + XCrossingEvent.WINDOW, value); }
     /** Unsafe version of {@link #root(long) root}. */
-    public static void nroot(long struct, long value) { memPutAddress(struct + XCrossingEvent.ROOT, value); }
+    public static void nroot(long struct, long value) { memPutCLong(struct + XCrossingEvent.ROOT, value); }
     /** Unsafe version of {@link #subwindow(long) subwindow}. */
-    public static void nsubwindow(long struct, long value) { memPutAddress(struct + XCrossingEvent.SUBWINDOW, value); }
+    public static void nsubwindow(long struct, long value) { memPutCLong(struct + XCrossingEvent.SUBWINDOW, value); }
     /** Unsafe version of {@link #time(long) time}. */
-    public static void ntime(long struct, long value) { memPutAddress(struct + XCrossingEvent.TIME, value); }
+    public static void ntime(long struct, long value) { memPutCLong(struct + XCrossingEvent.TIME, value); }
     /** Unsafe version of {@link #x(int) x}. */
     public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + XCrossingEvent.X, value); }
     /** Unsafe version of {@link #y(int) y}. */

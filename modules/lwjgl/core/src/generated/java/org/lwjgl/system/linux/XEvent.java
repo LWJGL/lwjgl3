@@ -142,7 +142,7 @@ public class XEvent extends Struct implements NativeResource {
             __member(XKeymapEvent.SIZEOF, XKeymapEvent.ALIGNOF),
             __member(XGenericEvent.SIZEOF, XGenericEvent.ALIGNOF),
             __member(XGenericEventCookie.SIZEOF, XGenericEventCookie.ALIGNOF),
-            __array(POINTER_SIZE, 24)
+            __array(CLONG_SIZE, 24)
         );
 
         SIZEOF = layout.getSize();
@@ -478,9 +478,9 @@ public class XEvent extends Struct implements NativeResource {
     public static XGenericEvent nxgeneric(long struct) { return XGenericEvent.create(struct + XEvent.XGENERIC); }
     /** Unsafe version of {@link #xcookie}. */
     public static XGenericEventCookie nxcookie(long struct) { return XGenericEventCookie.create(struct + XEvent.XCOOKIE); }
-    public static PointerBuffer npad(long struct) { return memPointerBuffer(struct + XEvent.PAD, 24); }
+    public static CLongBuffer npad(long struct) { return memCLongBuffer(struct + XEvent.PAD, 24); }
     public static long npad(long struct, int index) {
-        return memGetAddress(struct + XEvent.PAD + check(index, 24) * POINTER_SIZE);
+        return memGetCLong(struct + XEvent.PAD + check(index, 24) * CLONG_SIZE);
     }
 
     // -----------------------------------

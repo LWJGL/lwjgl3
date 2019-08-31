@@ -59,13 +59,13 @@ public class XVisualInfo extends Struct implements NativeResource {
     static {
         Layout layout = __struct(
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(4),
             __member(4),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(4)
         );
@@ -330,7 +330,7 @@ public class XVisualInfo extends Struct implements NativeResource {
     /** Unsafe version of {@link #visual}. */
     public static Visual nvisual(long struct) { return Visual.create(memGetAddress(struct + XVisualInfo.VISUAL)); }
     /** Unsafe version of {@link #visualid}. */
-    public static long nvisualid(long struct) { return memGetAddress(struct + XVisualInfo.VISUALID); }
+    public static long nvisualid(long struct) { return memGetCLong(struct + XVisualInfo.VISUALID); }
     /** Unsafe version of {@link #screen}. */
     public static int nscreen(long struct) { return UNSAFE.getInt(null, struct + XVisualInfo.SCREEN); }
     /** Unsafe version of {@link #depth}. */
@@ -338,11 +338,11 @@ public class XVisualInfo extends Struct implements NativeResource {
     /** Unsafe version of {@link #class$}. */
     public static int nclass$(long struct) { return UNSAFE.getInt(null, struct + XVisualInfo.CLASS); }
     /** Unsafe version of {@link #red_mask}. */
-    public static long nred_mask(long struct) { return memGetAddress(struct + XVisualInfo.RED_MASK); }
+    public static long nred_mask(long struct) { return memGetCLong(struct + XVisualInfo.RED_MASK); }
     /** Unsafe version of {@link #green_mask}. */
-    public static long ngreen_mask(long struct) { return memGetAddress(struct + XVisualInfo.GREEN_MASK); }
+    public static long ngreen_mask(long struct) { return memGetCLong(struct + XVisualInfo.GREEN_MASK); }
     /** Unsafe version of {@link #blue_mask}. */
-    public static long nblue_mask(long struct) { return memGetAddress(struct + XVisualInfo.BLUE_MASK); }
+    public static long nblue_mask(long struct) { return memGetCLong(struct + XVisualInfo.BLUE_MASK); }
     /** Unsafe version of {@link #colormap_size}. */
     public static int ncolormap_size(long struct) { return UNSAFE.getInt(null, struct + XVisualInfo.COLORMAP_SIZE); }
     /** Unsafe version of {@link #bits_per_rgb}. */
@@ -351,7 +351,7 @@ public class XVisualInfo extends Struct implements NativeResource {
     /** Unsafe version of {@link #visual(Visual) visual}. */
     public static void nvisual(long struct, Visual value) { memPutAddress(struct + XVisualInfo.VISUAL, value.address()); }
     /** Unsafe version of {@link #visualid(long) visualid}. */
-    public static void nvisualid(long struct, long value) { memPutAddress(struct + XVisualInfo.VISUALID, value); }
+    public static void nvisualid(long struct, long value) { memPutCLong(struct + XVisualInfo.VISUALID, value); }
     /** Unsafe version of {@link #screen(int) screen}. */
     public static void nscreen(long struct, int value) { UNSAFE.putInt(null, struct + XVisualInfo.SCREEN, value); }
     /** Unsafe version of {@link #depth(int) depth}. */
@@ -359,11 +359,11 @@ public class XVisualInfo extends Struct implements NativeResource {
     /** Unsafe version of {@link #class$(int) class$}. */
     public static void nclass$(long struct, int value) { UNSAFE.putInt(null, struct + XVisualInfo.CLASS, value); }
     /** Unsafe version of {@link #red_mask(long) red_mask}. */
-    public static void nred_mask(long struct, long value) { memPutAddress(struct + XVisualInfo.RED_MASK, value); }
+    public static void nred_mask(long struct, long value) { memPutCLong(struct + XVisualInfo.RED_MASK, value); }
     /** Unsafe version of {@link #green_mask(long) green_mask}. */
-    public static void ngreen_mask(long struct, long value) { memPutAddress(struct + XVisualInfo.GREEN_MASK, value); }
+    public static void ngreen_mask(long struct, long value) { memPutCLong(struct + XVisualInfo.GREEN_MASK, value); }
     /** Unsafe version of {@link #blue_mask(long) blue_mask}. */
-    public static void nblue_mask(long struct, long value) { memPutAddress(struct + XVisualInfo.BLUE_MASK, value); }
+    public static void nblue_mask(long struct, long value) { memPutCLong(struct + XVisualInfo.BLUE_MASK, value); }
     /** Unsafe version of {@link #colormap_size(int) colormap_size}. */
     public static void ncolormap_size(long struct, int value) { UNSAFE.putInt(null, struct + XVisualInfo.COLORMAP_SIZE, value); }
     /** Unsafe version of {@link #bits_per_rgb(int) bits_per_rgb}. */

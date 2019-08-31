@@ -65,12 +65,12 @@ public class XReparentEvent extends Struct implements NativeResource {
     static {
         Layout layout = __struct(
             __member(4),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(4),
             __member(4)
@@ -337,17 +337,17 @@ public class XReparentEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XReparentEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
-    public static long nserial(long struct) { return memGetAddress(struct + XReparentEvent.SERIAL); }
+    public static long nserial(long struct) { return memGetCLong(struct + XReparentEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
     public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XReparentEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XReparentEvent.DISPLAY); }
     /** Unsafe version of {@link #event}. */
-    public static long nevent(long struct) { return memGetAddress(struct + XReparentEvent.EVENT); }
+    public static long nevent(long struct) { return memGetCLong(struct + XReparentEvent.EVENT); }
     /** Unsafe version of {@link #window}. */
-    public static long nwindow(long struct) { return memGetAddress(struct + XReparentEvent.WINDOW); }
+    public static long nwindow(long struct) { return memGetCLong(struct + XReparentEvent.WINDOW); }
     /** Unsafe version of {@link #parent}. */
-    public static long nparent(long struct) { return memGetAddress(struct + XReparentEvent.PARENT); }
+    public static long nparent(long struct) { return memGetCLong(struct + XReparentEvent.PARENT); }
     /** Unsafe version of {@link #x}. */
     public static int nx(long struct) { return UNSAFE.getInt(null, struct + XReparentEvent.X); }
     /** Unsafe version of {@link #y}. */
@@ -358,17 +358,17 @@ public class XReparentEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XReparentEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
-    public static void nserial(long struct, long value) { memPutAddress(struct + XReparentEvent.SERIAL, value); }
+    public static void nserial(long struct, long value) { memPutCLong(struct + XReparentEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
     public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XReparentEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XReparentEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #event(long) event}. */
-    public static void nevent(long struct, long value) { memPutAddress(struct + XReparentEvent.EVENT, value); }
+    public static void nevent(long struct, long value) { memPutCLong(struct + XReparentEvent.EVENT, value); }
     /** Unsafe version of {@link #window(long) window}. */
-    public static void nwindow(long struct, long value) { memPutAddress(struct + XReparentEvent.WINDOW, value); }
+    public static void nwindow(long struct, long value) { memPutCLong(struct + XReparentEvent.WINDOW, value); }
     /** Unsafe version of {@link #parent(long) parent}. */
-    public static void nparent(long struct, long value) { memPutAddress(struct + XReparentEvent.PARENT, value); }
+    public static void nparent(long struct, long value) { memPutCLong(struct + XReparentEvent.PARENT, value); }
     /** Unsafe version of {@link #x(int) x}. */
     public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + XReparentEvent.X, value); }
     /** Unsafe version of {@link #y(int) y}. */

@@ -59,10 +59,10 @@ public class XAnyEvent extends Struct implements NativeResource {
     static {
         Layout layout = __struct(
             __member(4),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE)
+            __member(CLONG_SIZE)
         );
 
         SIZEOF = layout.getSize();
@@ -289,24 +289,24 @@ public class XAnyEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XAnyEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
-    public static long nserial(long struct) { return memGetAddress(struct + XAnyEvent.SERIAL); }
+    public static long nserial(long struct) { return memGetCLong(struct + XAnyEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
     public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XAnyEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XAnyEvent.DISPLAY); }
     /** Unsafe version of {@link #window}. */
-    public static long nwindow(long struct) { return memGetAddress(struct + XAnyEvent.WINDOW); }
+    public static long nwindow(long struct) { return memGetCLong(struct + XAnyEvent.WINDOW); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XAnyEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
-    public static void nserial(long struct, long value) { memPutAddress(struct + XAnyEvent.SERIAL, value); }
+    public static void nserial(long struct, long value) { memPutCLong(struct + XAnyEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
     public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XAnyEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XAnyEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #window(long) window}. */
-    public static void nwindow(long struct, long value) { memPutAddress(struct + XAnyEvent.WINDOW, value); }
+    public static void nwindow(long struct, long value) { memPutCLong(struct + XAnyEvent.WINDOW, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

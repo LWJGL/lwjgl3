@@ -47,7 +47,7 @@ public class XTimeCoord extends Struct {
 
     static {
         Layout layout = __struct(
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(2),
             __member(2)
         );
@@ -113,7 +113,7 @@ public class XTimeCoord extends Struct {
     // -----------------------------------
 
     /** Unsafe version of {@link #time}. */
-    public static long ntime(long struct) { return memGetAddress(struct + XTimeCoord.TIME); }
+    public static long ntime(long struct) { return memGetCLong(struct + XTimeCoord.TIME); }
     /** Unsafe version of {@link #x}. */
     public static short nx(long struct) { return UNSAFE.getShort(null, struct + XTimeCoord.X); }
     /** Unsafe version of {@link #y}. */

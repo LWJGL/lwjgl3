@@ -232,7 +232,7 @@ public class GLX13 extends GLX12 {
             check(display);
             check(config);
         }
-        return callPPPPP(display, config, win, attrib_list, __functionAddress);
+        return callPPNPP(display, config, win, attrib_list, __functionAddress);
     }
 
     /**
@@ -261,7 +261,7 @@ public class GLX13 extends GLX12 {
             check(display);
             check(config);
         }
-        return callPPPPP(display, config, pixmap, attrib_list, __functionAddress);
+        return callPPNPP(display, config, pixmap, attrib_list, __functionAddress);
     }
 
     /**
@@ -489,7 +489,7 @@ public class GLX13 extends GLX12 {
             check(display);
             check(draw);
         }
-        callPPPV(display, draw, event_mask, __functionAddress);
+        callPPNV(display, draw, event_mask, __functionAddress);
     }
 
     // --- [ glXGetSelectedEvent ] ---
@@ -512,7 +512,7 @@ public class GLX13 extends GLX12 {
      * @param draw       the GLXDrawable
      * @param event_mask returns the selection mask
      */
-    public static void glXGetSelectedEvent(@NativeType("Display *") long display, @NativeType("GLXDrawable") long draw, @NativeType("unsigned long *") PointerBuffer event_mask) {
+    public static void glXGetSelectedEvent(@NativeType("Display *") long display, @NativeType("GLXDrawable") long draw, @NativeType("unsigned long *") CLongBuffer event_mask) {
         if (CHECKS) {
             check(event_mask, 1);
         }
@@ -561,7 +561,7 @@ public class GLX13 extends GLX12 {
             check(config);
             checkNTSafe(attrib_list);
         }
-        return callPPPPP(display, config, win, attrib_list, __functionAddress);
+        return callPPNPP(display, config, win, attrib_list, __functionAddress);
     }
 
     /** Array version of: {@link #glXCreatePixmap CreatePixmap} */
@@ -574,7 +574,7 @@ public class GLX13 extends GLX12 {
             check(config);
             checkNTSafe(attrib_list);
         }
-        return callPPPPP(display, config, pixmap, attrib_list, __functionAddress);
+        return callPPNPP(display, config, pixmap, attrib_list, __functionAddress);
     }
 
     /** Array version of: {@link #glXCreatePbuffer CreatePbuffer} */

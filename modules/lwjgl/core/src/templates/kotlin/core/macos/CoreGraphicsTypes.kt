@@ -13,7 +13,7 @@ val CGEventTimestamp = typedef(uint64_t, "CGEventTimestamp")
 val CGFloat = typedef(double, "CGFloat")
 val CGKeyCode = typedef(uint16_t, "CGKeyCode")
 val UniChar = typedef(UInt16, "UniChar")
-val UniCharCount = typedef(IntegerType("unsigned long", PrimitiveMapping.LONG, unsigned = true), "UniCharCount")
+val UniCharCount = typedef(unsigned_long, "UniCharCount")
 
 val CFMachPortRef = "CFMachPortRef".handle
 val CGEventRef = "CGEventRef".handle

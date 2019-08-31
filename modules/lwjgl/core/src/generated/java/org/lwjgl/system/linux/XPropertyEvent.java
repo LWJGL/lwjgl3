@@ -65,12 +65,12 @@ public class XPropertyEvent extends Struct implements NativeResource {
     static {
         Layout layout = __struct(
             __member(4),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
             __member(4)
         );
 
@@ -321,34 +321,34 @@ public class XPropertyEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XPropertyEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
-    public static long nserial(long struct) { return memGetAddress(struct + XPropertyEvent.SERIAL); }
+    public static long nserial(long struct) { return memGetCLong(struct + XPropertyEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
     public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XPropertyEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XPropertyEvent.DISPLAY); }
     /** Unsafe version of {@link #window}. */
-    public static long nwindow(long struct) { return memGetAddress(struct + XPropertyEvent.WINDOW); }
+    public static long nwindow(long struct) { return memGetCLong(struct + XPropertyEvent.WINDOW); }
     /** Unsafe version of {@link #atom}. */
-    public static long natom(long struct) { return memGetAddress(struct + XPropertyEvent.ATOM); }
+    public static long natom(long struct) { return memGetCLong(struct + XPropertyEvent.ATOM); }
     /** Unsafe version of {@link #time}. */
-    public static long ntime(long struct) { return memGetAddress(struct + XPropertyEvent.TIME); }
+    public static long ntime(long struct) { return memGetCLong(struct + XPropertyEvent.TIME); }
     /** Unsafe version of {@link #state}. */
     public static int nstate(long struct) { return UNSAFE.getInt(null, struct + XPropertyEvent.STATE); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XPropertyEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
-    public static void nserial(long struct, long value) { memPutAddress(struct + XPropertyEvent.SERIAL, value); }
+    public static void nserial(long struct, long value) { memPutCLong(struct + XPropertyEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
     public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XPropertyEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XPropertyEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #window(long) window}. */
-    public static void nwindow(long struct, long value) { memPutAddress(struct + XPropertyEvent.WINDOW, value); }
+    public static void nwindow(long struct, long value) { memPutCLong(struct + XPropertyEvent.WINDOW, value); }
     /** Unsafe version of {@link #atom(long) atom}. */
-    public static void natom(long struct, long value) { memPutAddress(struct + XPropertyEvent.ATOM, value); }
+    public static void natom(long struct, long value) { memPutCLong(struct + XPropertyEvent.ATOM, value); }
     /** Unsafe version of {@link #time(long) time}. */
-    public static void ntime(long struct, long value) { memPutAddress(struct + XPropertyEvent.TIME, value); }
+    public static void ntime(long struct, long value) { memPutCLong(struct + XPropertyEvent.TIME, value); }
     /** Unsafe version of {@link #state(int) state}. */
     public static void nstate(long struct, int value) { UNSAFE.putInt(null, struct + XPropertyEvent.STATE, value); }
 

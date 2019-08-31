@@ -61,10 +61,10 @@ public class XNoExposeEvent extends Struct implements NativeResource {
     static {
         Layout layout = __struct(
             __member(4),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(4)
         );
@@ -307,13 +307,13 @@ public class XNoExposeEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XNoExposeEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
-    public static long nserial(long struct) { return memGetAddress(struct + XNoExposeEvent.SERIAL); }
+    public static long nserial(long struct) { return memGetCLong(struct + XNoExposeEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
     public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XNoExposeEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XNoExposeEvent.DISPLAY); }
     /** Unsafe version of {@link #drawable}. */
-    public static long ndrawable(long struct) { return memGetAddress(struct + XNoExposeEvent.DRAWABLE); }
+    public static long ndrawable(long struct) { return memGetCLong(struct + XNoExposeEvent.DRAWABLE); }
     /** Unsafe version of {@link #major_code}. */
     public static int nmajor_code(long struct) { return UNSAFE.getInt(null, struct + XNoExposeEvent.MAJOR_CODE); }
     /** Unsafe version of {@link #minor_code}. */
@@ -322,13 +322,13 @@ public class XNoExposeEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XNoExposeEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
-    public static void nserial(long struct, long value) { memPutAddress(struct + XNoExposeEvent.SERIAL, value); }
+    public static void nserial(long struct, long value) { memPutCLong(struct + XNoExposeEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
     public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XNoExposeEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XNoExposeEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #drawable(long) drawable}. */
-    public static void ndrawable(long struct, long value) { memPutAddress(struct + XNoExposeEvent.DRAWABLE, value); }
+    public static void ndrawable(long struct, long value) { memPutCLong(struct + XNoExposeEvent.DRAWABLE, value); }
     /** Unsafe version of {@link #major_code(int) major_code}. */
     public static void nmajor_code(long struct, int value) { UNSAFE.putInt(null, struct + XNoExposeEvent.MAJOR_CODE, value); }
     /** Unsafe version of {@link #minor_code(int) minor_code}. */

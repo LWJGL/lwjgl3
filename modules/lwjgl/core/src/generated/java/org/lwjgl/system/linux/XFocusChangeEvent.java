@@ -63,10 +63,10 @@ public class XFocusChangeEvent extends Struct implements NativeResource {
     static {
         Layout layout = __struct(
             __member(4),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(4)
         );
@@ -309,13 +309,13 @@ public class XFocusChangeEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XFocusChangeEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
-    public static long nserial(long struct) { return memGetAddress(struct + XFocusChangeEvent.SERIAL); }
+    public static long nserial(long struct) { return memGetCLong(struct + XFocusChangeEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
     public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XFocusChangeEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XFocusChangeEvent.DISPLAY); }
     /** Unsafe version of {@link #window}. */
-    public static long nwindow(long struct) { return memGetAddress(struct + XFocusChangeEvent.WINDOW); }
+    public static long nwindow(long struct) { return memGetCLong(struct + XFocusChangeEvent.WINDOW); }
     /** Unsafe version of {@link #mode}. */
     public static int nmode(long struct) { return UNSAFE.getInt(null, struct + XFocusChangeEvent.MODE); }
     /** Unsafe version of {@link #detail}. */
@@ -324,13 +324,13 @@ public class XFocusChangeEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XFocusChangeEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
-    public static void nserial(long struct, long value) { memPutAddress(struct + XFocusChangeEvent.SERIAL, value); }
+    public static void nserial(long struct, long value) { memPutCLong(struct + XFocusChangeEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
     public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XFocusChangeEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XFocusChangeEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #window(long) window}. */
-    public static void nwindow(long struct, long value) { memPutAddress(struct + XFocusChangeEvent.WINDOW, value); }
+    public static void nwindow(long struct, long value) { memPutCLong(struct + XFocusChangeEvent.WINDOW, value); }
     /** Unsafe version of {@link #mode(int) mode}. */
     public static void nmode(long struct, int value) { UNSAFE.putInt(null, struct + XFocusChangeEvent.MODE, value); }
     /** Unsafe version of {@link #detail(int) detail}. */

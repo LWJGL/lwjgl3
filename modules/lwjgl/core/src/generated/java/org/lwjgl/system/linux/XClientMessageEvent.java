@@ -77,16 +77,16 @@ public class XClientMessageEvent extends Struct implements NativeResource {
     static {
         Layout layout = __struct(
             __member(4),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __struct(
                 __array(1, 20),
                 __array(2, 10),
-                __array(POINTER_SIZE, 5)
+                __array(CLONG_SIZE, 5)
             )
         );
 
@@ -149,9 +149,9 @@ public class XClientMessageEvent extends Struct implements NativeResource {
     public ShortBuffer data_s() { return ndata_s(address()); }
     /** Returns the value at the specified index of the {@code data.s} field. */
     public short data_s(int index) { return ndata_s(address(), index); }
-    /** Returns a {@link PointerBuffer} view of the {@code data.l} field. */
+    /** Returns a {@link CLongBuffer} view of the {@code data.l} field. */
     @NativeType("long[5]")
-    public PointerBuffer data_l() { return ndata_l(address()); }
+    public CLongBuffer data_l() { return ndata_l(address()); }
     /** Returns the value at the specified index of the {@code data.l} field. */
     public long data_l(int index) { return ndata_l(address(), index); }
 
@@ -177,8 +177,8 @@ public class XClientMessageEvent extends Struct implements NativeResource {
     public XClientMessageEvent data_s(@NativeType("short[10]") ShortBuffer value) { ndata_s(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code data.s} field. */
     public XClientMessageEvent data_s(int index, short value) { ndata_s(address(), index, value); return this; }
-    /** Copies the specified {@link PointerBuffer} to the {@code data.l} field. */
-    public XClientMessageEvent data_l(@NativeType("long[5]") PointerBuffer value) { ndata_l(address(), value); return this; }
+    /** Copies the specified {@link CLongBuffer} to the {@code data.l} field. */
+    public XClientMessageEvent data_l(@NativeType("long[5]") CLongBuffer value) { ndata_l(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code data.l} field. */
     public XClientMessageEvent data_l(int index, long value) { ndata_l(address(), index, value); return this; }
 
@@ -193,7 +193,7 @@ public class XClientMessageEvent extends Struct implements NativeResource {
         int format,
         ByteBuffer data_b,
         ShortBuffer data_s,
-        PointerBuffer data_l
+        CLongBuffer data_l
     ) {
         type(type);
         serial(serial);
@@ -367,15 +367,15 @@ public class XClientMessageEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XClientMessageEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
-    public static long nserial(long struct) { return memGetAddress(struct + XClientMessageEvent.SERIAL); }
+    public static long nserial(long struct) { return memGetCLong(struct + XClientMessageEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
     public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XClientMessageEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XClientMessageEvent.DISPLAY); }
     /** Unsafe version of {@link #window}. */
-    public static long nwindow(long struct) { return memGetAddress(struct + XClientMessageEvent.WINDOW); }
+    public static long nwindow(long struct) { return memGetCLong(struct + XClientMessageEvent.WINDOW); }
     /** Unsafe version of {@link #message_type}. */
-    public static long nmessage_type(long struct) { return memGetAddress(struct + XClientMessageEvent.MESSAGE_TYPE); }
+    public static long nmessage_type(long struct) { return memGetCLong(struct + XClientMessageEvent.MESSAGE_TYPE); }
     /** Unsafe version of {@link #format}. */
     public static int nformat(long struct) { return UNSAFE.getInt(null, struct + XClientMessageEvent.FORMAT); }
     /** Unsafe version of {@link #data_b}. */
@@ -391,24 +391,24 @@ public class XClientMessageEvent extends Struct implements NativeResource {
         return UNSAFE.getShort(null, struct + XClientMessageEvent.DATA_S + check(index, 10) * 2);
     }
     /** Unsafe version of {@link #data_l}. */
-    public static PointerBuffer ndata_l(long struct) { return memPointerBuffer(struct + XClientMessageEvent.DATA_L, 5); }
+    public static CLongBuffer ndata_l(long struct) { return memCLongBuffer(struct + XClientMessageEvent.DATA_L, 5); }
     /** Unsafe version of {@link #data_l(int) data_l}. */
     public static long ndata_l(long struct, int index) {
-        return memGetAddress(struct + XClientMessageEvent.DATA_L + check(index, 5) * POINTER_SIZE);
+        return memGetCLong(struct + XClientMessageEvent.DATA_L + check(index, 5) * CLONG_SIZE);
     }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XClientMessageEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
-    public static void nserial(long struct, long value) { memPutAddress(struct + XClientMessageEvent.SERIAL, value); }
+    public static void nserial(long struct, long value) { memPutCLong(struct + XClientMessageEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
     public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XClientMessageEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XClientMessageEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #window(long) window}. */
-    public static void nwindow(long struct, long value) { memPutAddress(struct + XClientMessageEvent.WINDOW, value); }
+    public static void nwindow(long struct, long value) { memPutCLong(struct + XClientMessageEvent.WINDOW, value); }
     /** Unsafe version of {@link #message_type(long) message_type}. */
-    public static void nmessage_type(long struct, long value) { memPutAddress(struct + XClientMessageEvent.MESSAGE_TYPE, value); }
+    public static void nmessage_type(long struct, long value) { memPutCLong(struct + XClientMessageEvent.MESSAGE_TYPE, value); }
     /** Unsafe version of {@link #format(int) format}. */
     public static void nformat(long struct, int value) { UNSAFE.putInt(null, struct + XClientMessageEvent.FORMAT, value); }
     /** Unsafe version of {@link #data_b(ByteBuffer) data_b}. */
@@ -429,14 +429,14 @@ public class XClientMessageEvent extends Struct implements NativeResource {
     public static void ndata_s(long struct, int index, short value) {
         UNSAFE.putShort(null, struct + XClientMessageEvent.DATA_S + check(index, 10) * 2, value);
     }
-    /** Unsafe version of {@link #data_l(PointerBuffer) data_l}. */
-    public static void ndata_l(long struct, PointerBuffer value) {
+    /** Unsafe version of {@link #data_l(CLongBuffer) data_l}. */
+    public static void ndata_l(long struct, CLongBuffer value) {
         if (CHECKS) { checkGT(value, 5); }
-        memCopy(memAddress(value), struct + XClientMessageEvent.DATA_L, value.remaining() * POINTER_SIZE);
+        memCopy(memAddress(value), struct + XClientMessageEvent.DATA_L, value.remaining() * CLONG_SIZE);
     }
     /** Unsafe version of {@link #data_l(int, long) data_l}. */
     public static void ndata_l(long struct, int index, long value) {
-        memPutAddress(struct + XClientMessageEvent.DATA_L + check(index, 5) * POINTER_SIZE, value);
+        memPutCLong(struct + XClientMessageEvent.DATA_L + check(index, 5) * CLONG_SIZE, value);
     }
 
     /**
@@ -528,9 +528,9 @@ public class XClientMessageEvent extends Struct implements NativeResource {
         public ShortBuffer data_s() { return XClientMessageEvent.ndata_s(address()); }
         /** Returns the value at the specified index of the {@code data.s} field. */
         public short data_s(int index) { return XClientMessageEvent.ndata_s(address(), index); }
-        /** Returns a {@link PointerBuffer} view of the {@code data.l} field. */
+        /** Returns a {@link CLongBuffer} view of the {@code data.l} field. */
         @NativeType("long[5]")
-        public PointerBuffer data_l() { return XClientMessageEvent.ndata_l(address()); }
+        public CLongBuffer data_l() { return XClientMessageEvent.ndata_l(address()); }
         /** Returns the value at the specified index of the {@code data.l} field. */
         public long data_l(int index) { return XClientMessageEvent.ndata_l(address(), index); }
 
@@ -556,8 +556,8 @@ public class XClientMessageEvent extends Struct implements NativeResource {
         public XClientMessageEvent.Buffer data_s(@NativeType("short[10]") ShortBuffer value) { XClientMessageEvent.ndata_s(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code data.s} field. */
         public XClientMessageEvent.Buffer data_s(int index, short value) { XClientMessageEvent.ndata_s(address(), index, value); return this; }
-        /** Copies the specified {@link PointerBuffer} to the {@code data.l} field. */
-        public XClientMessageEvent.Buffer data_l(@NativeType("long[5]") PointerBuffer value) { XClientMessageEvent.ndata_l(address(), value); return this; }
+        /** Copies the specified {@link CLongBuffer} to the {@code data.l} field. */
+        public XClientMessageEvent.Buffer data_l(@NativeType("long[5]") CLongBuffer value) { XClientMessageEvent.ndata_l(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code data.l} field. */
         public XClientMessageEvent.Buffer data_l(int index, long value) { XClientMessageEvent.ndata_l(address(), index, value); return this; }
 

@@ -60,10 +60,10 @@ public class XKeymapEvent extends Struct implements NativeResource {
     static {
         Layout layout = __struct(
             __member(4),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __array(1, 32)
         );
 
@@ -304,13 +304,13 @@ public class XKeymapEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XKeymapEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
-    public static long nserial(long struct) { return memGetAddress(struct + XKeymapEvent.SERIAL); }
+    public static long nserial(long struct) { return memGetCLong(struct + XKeymapEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
     public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XKeymapEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XKeymapEvent.DISPLAY); }
     /** Unsafe version of {@link #window}. */
-    public static long nwindow(long struct) { return memGetAddress(struct + XKeymapEvent.WINDOW); }
+    public static long nwindow(long struct) { return memGetCLong(struct + XKeymapEvent.WINDOW); }
     /** Unsafe version of {@link #key_vector}. */
     public static ByteBuffer nkey_vector(long struct) { return memByteBuffer(struct + XKeymapEvent.KEY_VECTOR, 32); }
     /** Unsafe version of {@link #key_vector(int) key_vector}. */
@@ -321,13 +321,13 @@ public class XKeymapEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XKeymapEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
-    public static void nserial(long struct, long value) { memPutAddress(struct + XKeymapEvent.SERIAL, value); }
+    public static void nserial(long struct, long value) { memPutCLong(struct + XKeymapEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
     public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XKeymapEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XKeymapEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #window(long) window}. */
-    public static void nwindow(long struct, long value) { memPutAddress(struct + XKeymapEvent.WINDOW, value); }
+    public static void nwindow(long struct, long value) { memPutCLong(struct + XKeymapEvent.WINDOW, value); }
     /** Unsafe version of {@link #key_vector(ByteBuffer) key_vector}. */
     public static void nkey_vector(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 32); }

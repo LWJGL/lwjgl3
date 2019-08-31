@@ -161,7 +161,7 @@ public class GLXSGIXFBConfig {
             check(display);
             check(config);
         }
-        return callPPPP(display, config, pixmap, __functionAddress);
+        return callPPNP(display, config, pixmap, __functionAddress);
     }
 
     // --- [ glXCreateContextWithConfigSGIX ] ---

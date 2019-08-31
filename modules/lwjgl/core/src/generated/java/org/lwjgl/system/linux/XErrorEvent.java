@@ -65,8 +65,8 @@ public class XErrorEvent extends Struct implements NativeResource {
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
             __member(1),
             __member(1),
             __member(1)
@@ -314,9 +314,9 @@ public class XErrorEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XErrorEvent.DISPLAY); }
     /** Unsafe version of {@link #resourceid}. */
-    public static long nresourceid(long struct) { return memGetAddress(struct + XErrorEvent.RESOURCEID); }
+    public static long nresourceid(long struct) { return memGetCLong(struct + XErrorEvent.RESOURCEID); }
     /** Unsafe version of {@link #serial}. */
-    public static long nserial(long struct) { return memGetAddress(struct + XErrorEvent.SERIAL); }
+    public static long nserial(long struct) { return memGetCLong(struct + XErrorEvent.SERIAL); }
     /** Unsafe version of {@link #error_code}. */
     public static byte nerror_code(long struct) { return UNSAFE.getByte(null, struct + XErrorEvent.ERROR_CODE); }
     /** Unsafe version of {@link #request_code}. */
@@ -329,9 +329,9 @@ public class XErrorEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XErrorEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #resourceid(long) resourceid}. */
-    public static void nresourceid(long struct, long value) { memPutAddress(struct + XErrorEvent.RESOURCEID, value); }
+    public static void nresourceid(long struct, long value) { memPutCLong(struct + XErrorEvent.RESOURCEID, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
-    public static void nserial(long struct, long value) { memPutAddress(struct + XErrorEvent.SERIAL, value); }
+    public static void nserial(long struct, long value) { memPutCLong(struct + XErrorEvent.SERIAL, value); }
     /** Unsafe version of {@link #error_code(byte) error_code}. */
     public static void nerror_code(long struct, byte value) { UNSAFE.putByte(null, struct + XErrorEvent.ERROR_CODE, value); }
     /** Unsafe version of {@link #request_code(byte) request_code}. */

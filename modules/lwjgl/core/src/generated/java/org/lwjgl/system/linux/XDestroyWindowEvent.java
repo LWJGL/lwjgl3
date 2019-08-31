@@ -57,11 +57,11 @@ public class XDestroyWindowEvent extends Struct implements NativeResource {
     static {
         Layout layout = __struct(
             __member(4),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE)
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE)
         );
 
         SIZEOF = layout.getSize();
@@ -296,28 +296,28 @@ public class XDestroyWindowEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XDestroyWindowEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
-    public static long nserial(long struct) { return memGetAddress(struct + XDestroyWindowEvent.SERIAL); }
+    public static long nserial(long struct) { return memGetCLong(struct + XDestroyWindowEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
     public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XDestroyWindowEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XDestroyWindowEvent.DISPLAY); }
     /** Unsafe version of {@link #event}. */
-    public static long nevent(long struct) { return memGetAddress(struct + XDestroyWindowEvent.EVENT); }
+    public static long nevent(long struct) { return memGetCLong(struct + XDestroyWindowEvent.EVENT); }
     /** Unsafe version of {@link #window}. */
-    public static long nwindow(long struct) { return memGetAddress(struct + XDestroyWindowEvent.WINDOW); }
+    public static long nwindow(long struct) { return memGetCLong(struct + XDestroyWindowEvent.WINDOW); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XDestroyWindowEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
-    public static void nserial(long struct, long value) { memPutAddress(struct + XDestroyWindowEvent.SERIAL, value); }
+    public static void nserial(long struct, long value) { memPutCLong(struct + XDestroyWindowEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
     public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XDestroyWindowEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XDestroyWindowEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #event(long) event}. */
-    public static void nevent(long struct, long value) { memPutAddress(struct + XDestroyWindowEvent.EVENT, value); }
+    public static void nevent(long struct, long value) { memPutCLong(struct + XDestroyWindowEvent.EVENT, value); }
     /** Unsafe version of {@link #window(long) window}. */
-    public static void nwindow(long struct, long value) { memPutAddress(struct + XDestroyWindowEvent.WINDOW, value); }
+    public static void nwindow(long struct, long value) { memPutCLong(struct + XDestroyWindowEvent.WINDOW, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

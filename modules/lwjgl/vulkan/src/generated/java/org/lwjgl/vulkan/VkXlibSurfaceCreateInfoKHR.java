@@ -83,7 +83,7 @@ public class VkXlibSurfaceCreateInfoKHR extends Struct implements NativeResource
             __member(POINTER_SIZE),
             __member(4),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE)
+            __member(CLONG_SIZE)
         );
 
         SIZEOF = layout.getSize();
@@ -317,7 +317,7 @@ public class VkXlibSurfaceCreateInfoKHR extends Struct implements NativeResource
     /** Unsafe version of {@link #dpy}. */
     public static long ndpy(long struct) { return memGetAddress(struct + VkXlibSurfaceCreateInfoKHR.DPY); }
     /** Unsafe version of {@link #window}. */
-    public static long nwindow(long struct) { return memGetAddress(struct + VkXlibSurfaceCreateInfoKHR.WINDOW); }
+    public static long nwindow(long struct) { return memGetCLong(struct + VkXlibSurfaceCreateInfoKHR.WINDOW); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkXlibSurfaceCreateInfoKHR.STYPE, value); }
@@ -328,7 +328,7 @@ public class VkXlibSurfaceCreateInfoKHR extends Struct implements NativeResource
     /** Unsafe version of {@link #dpy(long) dpy}. */
     public static void ndpy(long struct, long value) { memPutAddress(struct + VkXlibSurfaceCreateInfoKHR.DPY, check(value)); }
     /** Unsafe version of {@link #window(long) window}. */
-    public static void nwindow(long struct, long value) { memPutAddress(struct + VkXlibSurfaceCreateInfoKHR.WINDOW, value); }
+    public static void nwindow(long struct, long value) { memPutCLong(struct + VkXlibSurfaceCreateInfoKHR.WINDOW, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

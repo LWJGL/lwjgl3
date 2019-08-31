@@ -61,11 +61,11 @@ public class XGravityEvent extends Struct implements NativeResource {
     static {
         Layout layout = __struct(
             __member(4),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(4)
         );
@@ -316,15 +316,15 @@ public class XGravityEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XGravityEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
-    public static long nserial(long struct) { return memGetAddress(struct + XGravityEvent.SERIAL); }
+    public static long nserial(long struct) { return memGetCLong(struct + XGravityEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
     public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XGravityEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XGravityEvent.DISPLAY); }
     /** Unsafe version of {@link #event}. */
-    public static long nevent(long struct) { return memGetAddress(struct + XGravityEvent.EVENT); }
+    public static long nevent(long struct) { return memGetCLong(struct + XGravityEvent.EVENT); }
     /** Unsafe version of {@link #window}. */
-    public static long nwindow(long struct) { return memGetAddress(struct + XGravityEvent.WINDOW); }
+    public static long nwindow(long struct) { return memGetCLong(struct + XGravityEvent.WINDOW); }
     /** Unsafe version of {@link #x}. */
     public static int nx(long struct) { return UNSAFE.getInt(null, struct + XGravityEvent.X); }
     /** Unsafe version of {@link #y}. */
@@ -333,15 +333,15 @@ public class XGravityEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XGravityEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
-    public static void nserial(long struct, long value) { memPutAddress(struct + XGravityEvent.SERIAL, value); }
+    public static void nserial(long struct, long value) { memPutCLong(struct + XGravityEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
     public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XGravityEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XGravityEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #event(long) event}. */
-    public static void nevent(long struct, long value) { memPutAddress(struct + XGravityEvent.EVENT, value); }
+    public static void nevent(long struct, long value) { memPutCLong(struct + XGravityEvent.EVENT, value); }
     /** Unsafe version of {@link #window(long) window}. */
-    public static void nwindow(long struct, long value) { memPutAddress(struct + XGravityEvent.WINDOW, value); }
+    public static void nwindow(long struct, long value) { memPutCLong(struct + XGravityEvent.WINDOW, value); }
     /** Unsafe version of {@link #x(int) x}. */
     public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + XGravityEvent.X, value); }
     /** Unsafe version of {@link #y(int) y}. */

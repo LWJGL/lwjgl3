@@ -59,11 +59,11 @@ public class XUnmapEvent extends Struct implements NativeResource {
     static {
         Layout layout = __struct(
             __member(4),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
+            __member(CLONG_SIZE),
             __member(4)
         );
 
@@ -306,30 +306,30 @@ public class XUnmapEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XUnmapEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
-    public static long nserial(long struct) { return memGetAddress(struct + XUnmapEvent.SERIAL); }
+    public static long nserial(long struct) { return memGetCLong(struct + XUnmapEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
     public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XUnmapEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XUnmapEvent.DISPLAY); }
     /** Unsafe version of {@link #event}. */
-    public static long nevent(long struct) { return memGetAddress(struct + XUnmapEvent.EVENT); }
+    public static long nevent(long struct) { return memGetCLong(struct + XUnmapEvent.EVENT); }
     /** Unsafe version of {@link #window}. */
-    public static long nwindow(long struct) { return memGetAddress(struct + XUnmapEvent.WINDOW); }
+    public static long nwindow(long struct) { return memGetCLong(struct + XUnmapEvent.WINDOW); }
     /** Unsafe version of {@link #from_configure}. */
     public static int nfrom_configure(long struct) { return UNSAFE.getInt(null, struct + XUnmapEvent.FROM_CONFIGURE); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XUnmapEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
-    public static void nserial(long struct, long value) { memPutAddress(struct + XUnmapEvent.SERIAL, value); }
+    public static void nserial(long struct, long value) { memPutCLong(struct + XUnmapEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
     public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XUnmapEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XUnmapEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #event(long) event}. */
-    public static void nevent(long struct, long value) { memPutAddress(struct + XUnmapEvent.EVENT, value); }
+    public static void nevent(long struct, long value) { memPutCLong(struct + XUnmapEvent.EVENT, value); }
     /** Unsafe version of {@link #window(long) window}. */
-    public static void nwindow(long struct, long value) { memPutAddress(struct + XUnmapEvent.WINDOW, value); }
+    public static void nwindow(long struct, long value) { memPutCLong(struct + XUnmapEvent.WINDOW, value); }
     /** Unsafe version of {@link #from_configure(int) from_configure}. */
     public static void nfrom_configure(long struct, int value) { UNSAFE.putInt(null, struct + XUnmapEvent.FROM_CONFIGURE, value); }
 

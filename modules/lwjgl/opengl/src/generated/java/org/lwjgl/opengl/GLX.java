@@ -270,7 +270,7 @@ public class GLX {
             check(source);
             check(dest);
         }
-        callPPPPV(display, source, dest, mask, __functionAddress);
+        callPPPNV(display, source, dest, mask, __functionAddress);
     }
 
     // --- [ glXIsDirect ] ---
@@ -388,7 +388,7 @@ public class GLX {
      */
     public static void glXUseXFont(@NativeType("Font") long font, int first, int count, int list_base) {
         long __functionAddress = Functions.UseXFont;
-        callPV(font, first, count, list_base, __functionAddress);
+        callNV(font, first, count, list_base, __functionAddress);
     }
 
     // --- [ glXCreateGLXPixmap ] ---
@@ -400,7 +400,7 @@ public class GLX {
             check(display);
             XVisualInfo.validate(visual);
         }
-        return callPPPP(display, visual, pixmap, __functionAddress);
+        return callPPNP(display, visual, pixmap, __functionAddress);
     }
 
     /**

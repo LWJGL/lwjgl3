@@ -72,16 +72,16 @@ public class XConfigureEvent extends Struct implements NativeResource {
     static {
         Layout layout = __struct(
             __member(4),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4),
             __member(4),
             __member(4),
             __member(4),
             __member(4),
-            __member(POINTER_SIZE),
+            __member(CLONG_SIZE),
             __member(4)
         );
 
@@ -360,13 +360,13 @@ public class XConfigureEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return UNSAFE.getInt(null, struct + XConfigureEvent.TYPE); }
     /** Unsafe version of {@link #serial}. */
-    public static long nserial(long struct) { return memGetAddress(struct + XConfigureEvent.SERIAL); }
+    public static long nserial(long struct) { return memGetCLong(struct + XConfigureEvent.SERIAL); }
     /** Unsafe version of {@link #send_event}. */
     public static int nsend_event(long struct) { return UNSAFE.getInt(null, struct + XConfigureEvent.SEND_EVENT); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + XConfigureEvent.DISPLAY); }
     /** Unsafe version of {@link #window}. */
-    public static long nwindow(long struct) { return memGetAddress(struct + XConfigureEvent.WINDOW); }
+    public static long nwindow(long struct) { return memGetCLong(struct + XConfigureEvent.WINDOW); }
     /** Unsafe version of {@link #x}. */
     public static int nx(long struct) { return UNSAFE.getInt(null, struct + XConfigureEvent.X); }
     /** Unsafe version of {@link #y}. */
@@ -378,20 +378,20 @@ public class XConfigureEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #border_width}. */
     public static int nborder_width(long struct) { return UNSAFE.getInt(null, struct + XConfigureEvent.BORDER_WIDTH); }
     /** Unsafe version of {@link #above}. */
-    public static long nabove(long struct) { return memGetAddress(struct + XConfigureEvent.ABOVE); }
+    public static long nabove(long struct) { return memGetCLong(struct + XConfigureEvent.ABOVE); }
     /** Unsafe version of {@link #override_redirect}. */
     public static int noverride_redirect(long struct) { return UNSAFE.getInt(null, struct + XConfigureEvent.OVERRIDE_REDIRECT); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XConfigureEvent.TYPE, value); }
     /** Unsafe version of {@link #serial(long) serial}. */
-    public static void nserial(long struct, long value) { memPutAddress(struct + XConfigureEvent.SERIAL, value); }
+    public static void nserial(long struct, long value) { memPutCLong(struct + XConfigureEvent.SERIAL, value); }
     /** Unsafe version of {@link #send_event(boolean) send_event}. */
     public static void nsend_event(long struct, int value) { UNSAFE.putInt(null, struct + XConfigureEvent.SEND_EVENT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XConfigureEvent.DISPLAY, check(value)); }
     /** Unsafe version of {@link #window(long) window}. */
-    public static void nwindow(long struct, long value) { memPutAddress(struct + XConfigureEvent.WINDOW, value); }
+    public static void nwindow(long struct, long value) { memPutCLong(struct + XConfigureEvent.WINDOW, value); }
     /** Unsafe version of {@link #x(int) x}. */
     public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + XConfigureEvent.X, value); }
     /** Unsafe version of {@link #y(int) y}. */
@@ -403,7 +403,7 @@ public class XConfigureEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #border_width(int) border_width}. */
     public static void nborder_width(long struct, int value) { UNSAFE.putInt(null, struct + XConfigureEvent.BORDER_WIDTH, value); }
     /** Unsafe version of {@link #above(long) above}. */
-    public static void nabove(long struct, long value) { memPutAddress(struct + XConfigureEvent.ABOVE, value); }
+    public static void nabove(long struct, long value) { memPutCLong(struct + XConfigureEvent.ABOVE, value); }
     /** Unsafe version of {@link #override_redirect(boolean) override_redirect}. */
     public static void noverride_redirect(long struct, int value) { UNSAFE.putInt(null, struct + XConfigureEvent.OVERRIDE_REDIRECT, value); }
 
