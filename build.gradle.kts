@@ -88,11 +88,11 @@ enum class Artifacts(
         "A cross-platform, graphics API agnostic rendering library. It provides a high performance, low level abstraction for common platform graphics APIs like OpenGL, Direct3D and Apple Metal.",
         *Platforms.ALL
     ),
-    BULLET(
+    /*BULLET(
         "lwjgl-bullet", "LWJGL - Bullet bindings",
         "Real-time collision detection and multi-physics simulation for VR, games, visual effects, robotics, machine learning etc.",
         *Platforms.ALL
-    ),
+    ),*/
     CUDA(
         "lwjgl-cuda", "LWJGL - CUDA bindings",
         "A parallel computing platform and programming model developed by NVIDIA for general computing on GPUs."

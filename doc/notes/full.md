@@ -1,3 +1,103 @@
+### 3.2.3
+
+_Released 2019 Sep 01_
+
+This build includes the following changes:
+
+#### Bindings
+
+- Added [Shaderc](https://github.com/google/shaderc) bindings. (#77)
+- Added bindings to platform APIs that can be used to programmatically generate input events.
+- Assimp: Updated to 5.0.0rc2 (up from 5.0.0rc1).
+- bgfx: Updated to API version 100 (up from 99)
+- glfw: Updated to 3.4.0 pre-release (up from 3.3.0)
+- EGL: Added `EGL_NV_stream_dma`.
+- jemalloc: Updated to 5.2.1 (up from 5.2.0)
+- LibOVR: Updated to 1.39.0 (up from 1.35.0)
+- libdivide: Updated to 2.0 (up from 1.0)
+- lz4: Updated to 1.9.2 (up from 1.9.1)
+    * Also, the LWJGL memory allocator is now used for internal allocations.
+- nuklear: Updated to 4.01.0 (up from 4.00.2)
+- OpenGL(ES): Added latest extensions.
+    * `GL_EXT_multiview_tessellation_geometry_shader`
+    * `GL_EXT_multiview_texture_multisample`
+    * `GL_EXT_multiview_timer_query`
+    * `GL_EXT_texture_shadow_lod`
+    * `GL_EXT_texture_sRGB_R8`
+    * `GL_KHR_shader_subgroup`
+    * `GL_NV_shader_subgroup_partitioned`
+    * `GL_NVX_gpu_multicast2`
+    * `GL_NVX_progress_fence`
+- OpenVR: Updated to 1.6.10 (up from 1.3.22)
+- par: Updated `par_shapes` to latest version.
+    * Added `par_shapes_create_cone`. 
+- par: Added [par_streamlines](https://prideout.net/blog/par_streamlines) bindings.
+- rpmalloc: Updated to 1.4.0 (up from 1.3.2)
+- stb
+    * Updated `stb_image` to 2.23 (up from 2.22)
+    * Updated `stb_truetype` to 1.22 (up from 1.21)
+    * Updated `stb_vorbis` to 1.17 (up from 1.16)
+- Vulkan: Updated to 1.1.121 (up from 1.0.107)
+    * Includes MoltenVK 1.0.36
+- xxhash: Updated to 0.7.1 (up from 0.7.0)
+- Zstd: Updated to 1.4.3 (up from 1.4.0)
+
+#### Improvements
+
+- Linux: Added support for ARM builds.
+    * 32-bit: ARMv7/armhf architecture. Maven classifier: `linux-arm32`
+    * 64-bit: ARMv8/AArch64 architecture. Maven classifier: `linux-arm64`
+- Windows: There is now a separate native JAR file per architecture.
+    * The default contains x64 shared libraries only. Maven classifier: `windows`
+    * `lwjgl-natives-windows-x86.jar` contains x86 shared libraries only. Maven classifier: `windows-x86`
+    * The `32` suffix has been dropped from x86 shared library names.
+- Windows: Shared libraries are now built with Visual Studio 2019 (up from 2017)
+- Maven: LWJGL artifacts now include a Bill of Materials (`lwjgl-bom`). (#481)
+    * The [build customizer](https://www.lwjgl.org/customize) may be used to migrate Maven/Gradle scripts. 
+- Refactored the layout of native JAR files.
+    * Shared libraries have been moved from the root to a `<platform>/<arch>/<module>/` subfolder.
+        * `<platform>`: one of `linux`, `macos`, `windows`.
+        * `<arch>`: one of `x64`, `x86`, `arm64`, `arm32`.
+        * `<module>`: the corresponding Java module name as a package hierarchy.
+        * Example: `glfw.so` in `lwjgl-glfw-natives-linux.jar` is under the `linux/x64/org/lwjgl/glfw` folder.
+    * The new layout allows multiple native JAR files to be combined for custom deployment.
+    * Custom (or the old) layout may be used with newly exposed `Configuration` options.
+- Core: Added `enum Platform.Architecture` and `Platform.getArchitecture()` API.
+- Core: Added relative & absolute `apply(Consumer<T>)` methods to `StructBuffer<T>`. 
+- Core: Added `Consumer<T>` setters to structs with nested arrays of structs.
+- Core: Added `memByteBuffer` overloads that return `ByteBuffer` views of other buffer types.
+- Core: Added `CLongBuffer`, a class similar to `PointerBuffer` but for C `long` values.
+
+#### Fixes
+
+- Core: Removed support for Critical JNI Natives. (#490)
+    * Will be restored in LWJGL 3.3 (disabled by default, enabled with a `Configuration` option). 
+- Core: Fixed buffer attachment offset detection on JDK 12+. (#491)
+- Core: Fixed `ByteBuffer` attachments in `memSlice` & `memDuplicate`.
+- Generator: Fixed invalid generation of functions with struct parameters passed by value. (#496)
+    * Affected bindings: OpenVR and LLVM/Clang.
+- Generator: Improved javadoc for array and nested struct members.
+- EGL/GLES: Fixed bootstrapping code.
+    * Regression caused by `org.lwjgl.system.JNI` refactoring in `3.2.2`.
+- LLVM: Fixed default library names.
+- lmdb: Reverted to the official release. (#482)
+    * Windows: Performance issues are eliminated, but sparse database mappings & incremental file growth are not supported anymore.
+- OpenGL: Fixed signatures of `glGetnUniformiv` and `glGetnUniformuiv`.
+
+#### Breaking Changes
+
+```
+(B): binary incompatible change
+(S): source incompatible change
+```
+
+- Core: The `Library.loadSystem` & `Library.loadNative` methods now require a module name parameter. **(S)**
+- Core: Removed `Consumer<T>` overloads from read-only structs with nested struct members. **(S)**
+- Core: `MemoryUtil.memFree(PointerBuffer)` changed to `memFree(CustomBuffer)`. **(B)**
+- LZ4: The `autoFlush` and `favorDecSpeed` members of `LZ4F_preferences_t` are now mapped to Java `boolean`. **(S)**
+- Vulkan: The `descriptorCount` member of `VkWriteDescriptorSet` must now be set explicitly. **(S)**
+    * The semantics of `descriptorCount` may change via extensions, which invalidates auto-sizing.
+
 ### 3.2.2
 
 _Released 2019 May 05_
@@ -61,11 +161,6 @@ This build includes the following changes:
 - vma: Fixed `VmaMemoryUsage` enumeration values. (#458)
 
 #### Breaking Changes
-
-```
-(B): binary incompatible change
-(S): source incompatible change
-```
 
 - Core: Function address parameters in `org.lwjgl.system.JNI` & `org.lwjgl.system.jawt.JAWTFunctions` methods are now last, after normal parameters. **(S)**
     * Enables tail-calls without argument shuffling, when Critical JNI Natives are used.
@@ -166,11 +261,6 @@ This build includes the following changes:
 - vma: Nullability of `VmaAllocationCreateInfo` & `VmaAllocationInfo` members.
 
 #### Breaking Changes
-
-```
-(B): binary incompatible change
-(S): source incompatible change
-```
 
 - Core: `sun.misc.Unsafe` is now required, there is no JNI fallback.
 - vma: The `VmaVulkanFunctions.set` helper method now returns `VmaVulkanFunctions`. **(B)**

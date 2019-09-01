@@ -1,64 +1,88 @@
-### 3.2.2
+### 3.2.3
 
-_Released 2019 May 05_
+_Released 2019 Sep 01_
 
 This build includes the following changes:
 
 #### Bindings
 
-- bgfx: Updated to API version 99 (up from 90)
-- CUDA: Updated to 10.1 (up from 10.0)
-- glfw: Updated to 3.3.0 (up from 3.3.0 pre-release):
-    * Added `GLFW_RAW_MOUSE_MOTION`.
-    * Added `glfwGetMonitorWorkarea`.
-    * Added `glfwRawMouseMotionSupported`.
-- jemalloc: Updated to 5.2.0 (up from pre-release 5.2.0)
-- LibOVR: Updated to 1.35.0 (up from 1.31.0)
-- LLVM/Clang: Updated to 8.0 (up from 7.0)
-- lmdb: Updated to 0.9.24 (up from 0.9.23)
-- lz4: Updated to 1.9.1 (up from 1.8.3)
-- NanoVG: Added support for using bgfx as the rendering back-end.
-- NanoVG: Added Blendish & OUI bindings. 
-- NativeFileDialog: Updated to 1.1.4 (up from 1.1.3)
-- OpenVR: Updated to 1.3.22 (up from 1.1.3b)
-- Opus: Updated to 1.3.1 (up from 1.3.0)
+- Added [Shaderc](https://github.com/google/shaderc) bindings. (#77)
+- Added bindings to platform APIs that can be used to programmatically generate input events.
+- Assimp: Updated to 5.0.0rc2 (up from 5.0.0rc1).
+- bgfx: Updated to API version 100 (up from 99)
+- glfw: Updated to 3.4.0 pre-release (up from 3.3.0)
+- EGL: Added `EGL_NV_stream_dma`.
+- jemalloc: Updated to 5.2.1 (up from 5.2.0)
+- LibOVR: Updated to 1.39.0 (up from 1.35.0)
+- libdivide: Updated to 2.0 (up from 1.0)
+- lz4: Updated to 1.9.2 (up from 1.9.1)
+    * Also, the LWJGL memory allocator is now used for internal allocations.
+- nuklear: Updated to 4.01.0 (up from 4.00.2)
+- OpenGL(ES): Added latest extensions.
+    * `GL_EXT_multiview_tessellation_geometry_shader`
+    * `GL_EXT_multiview_texture_multisample`
+    * `GL_EXT_multiview_timer_query`
+    * `GL_EXT_texture_shadow_lod`
+    * `GL_EXT_texture_sRGB_R8`
+    * `GL_KHR_shader_subgroup`
+    * `GL_NV_shader_subgroup_partitioned`
+    * `GL_NVX_gpu_multicast2`
+    * `GL_NVX_progress_fence`
+- OpenVR: Updated to 1.6.10 (up from 1.3.22)
+- par: Updated `par_shapes` to latest version.
+    * Added `par_shapes_create_cone`. 
+- par: Added [par_streamlines](https://prideout.net/blog/par_streamlines) bindings.
+- rpmalloc: Updated to 1.4.0 (up from 1.3.2)
 - stb
-    * Updated `stb_image` to 2.22 (up from 2.19)
-    * Updated `stb_image_resize` to 0.96 (up from 0.95)
-    * Updated `stb_image_write` to 1.13 (up from 1.09)
-    * Updated `stb_perlin` to 0.4 (up from 0.3)
-    * Updated `stb_rect_pack` to 1.00 (up from 0.11)
-    * Updated `stb_truetype` to 1.21 (up from 1.19)
-    * Updated `stb_vorbis` to 1.16 (up from 1.14)
-- tinyfiledialogs: Updated to 3.3.9 (up from 3.3.8)
-- vma: Updated to 2.2.0 (up from 2.1.0)
-- Vulkan: Updated to 1.1.107 (up from 1.0.95)
-    * Includes MoltenVK 1.0.35 (up from 1.0.27)
-- xxhash: Updated to 0.7.0 (up from 0.6.5)
-- Yoga: Updated to 1.14.0 (up from 1.10.0)
-- Zstd: Updated to 1.4.0 (up from 1.3.7)
+    * Updated `stb_image` to 2.23 (up from 2.22)
+    * Updated `stb_truetype` to 1.22 (up from 1.21)
+    * Updated `stb_vorbis` to 1.17 (up from 1.16)
+- Vulkan: Updated to 1.1.121 (up from 1.0.107)
+    * Includes MoltenVK 1.0.36
+- xxhash: Updated to 0.7.1 (up from 0.7.0)
+- Zstd: Updated to 1.4.3 (up from 1.4.0)
 
 #### Improvements
 
-- build(ant): The `release` target now works in offline mode (`LWJGL_BUILD_OFFLINE=true`).
-    * The build can be incomplete. Missing natives will be ignored and javadoc generation can be disabled for faster builds.
-- build(gradle): Deployments of incomplete builds to the local Maven repository are now allowed.
-- Core: Implemented workaround for [JDK-8195129](https://bugs.openjdk.java.net/browse/JDK-8195129) in the `SharedLibraryLoader`.
-- perf: Critical JNI Natives are now generated for primitive-only functions.
-- LLVM: The bindings can now be used with LLVM/Clang version 5.0 or newer (down from 8.0).
+- Linux: Added support for ARM builds.
+    * 32-bit: ARMv7/armhf architecture. Maven classifier: `linux-arm32`
+    * 64-bit: ARMv8/AArch64 architecture. Maven classifier: `linux-arm64`
+- Windows: There is now a separate native JAR file per architecture.
+    * The default contains x64 shared libraries only. Maven classifier: `windows`
+    * `lwjgl-natives-windows-x86.jar` contains x86 shared libraries only. Maven classifier: `windows-x86`
+    * The `32` suffix has been dropped from x86 shared library names.
+- Windows: Shared libraries are now built with Visual Studio 2019 (up from 2017)
+- Maven: LWJGL artifacts now include a Bill of Materials (`lwjgl-bom`). (#481)
+    * The [build customizer](https://www.lwjgl.org/customize) may be used to migrate Maven/Gradle scripts. 
+- Refactored the layout of native JAR files.
+    * Shared libraries have been moved from the root to a `<platform>/<arch>/<module>/` subfolder.
+        * `<platform>`: one of `linux`, `macos`, `windows`.
+        * `<arch>`: one of `x64`, `x86`, `arm64`, `arm32`.
+        * `<module>`: the corresponding Java module name as a package hierarchy.
+        * Example: `glfw.so` in `lwjgl-glfw-natives-linux.jar` is under the `linux/x64/org/lwjgl/glfw` folder.
+    * The new layout allows multiple native JAR files to be combined for custom deployment.
+    * Custom (or the old) layout may be used with newly exposed `Configuration` options.
+- Core: Added `enum Platform.Architecture` and `Platform.getArchitecture()` API.
+- Core: Added relative & absolute `apply(Consumer<T>)` methods to `StructBuffer<T>`. 
+- Core: Added `Consumer<T>` setters to structs with nested arrays of structs.
+- Core: Added `memByteBuffer` overloads that return `ByteBuffer` views of other buffer types.
+- Core: Added `CLongBuffer`, a class similar to `PointerBuffer` but for C `long` values.
 
 #### Fixes
 
-- build(ant): Fixed building on Linux & macOS when the path to LWJGL's root directory is shallow. (#442)
-- Core: Fixed race condition in callback deallocation when the debug allocator is enabled. (#444)
-- Generator: The workaround for [JDK-8167409](https://bugs.openjdk.java.net/browse/JDK-8167409) is now applicable to functions with 5 parameters + 1 implicit parameter (function address or struct value result).
-- Generator: Support `void()` in callback functions without parameters. 
-- Assimp: Added missing members to various struct types.
-- LLVM: `LLVMGetErrorMessage` now returns `ByteBuffer` instead of `String`, so that `LLVMDisposeErrorMessage` can be used.
-- nuklear: The `nk_text_edit`, `nk_text_undo_state` and `nk_text_undo_record` structs are now public.
-- OpenCL: Array overloads of `EnqueueRead/Write` functions cannot be used to perform non-blocking reads/writes anymore.  
-- OpenGL: Added `GL_DRAW_INDIRECT_BUFFER` overloads to `NV_bindless_multi_draw_indirect` & `NV_bindless_multi_draw_indirect_count` extensions.
-- vma: Fixed `VmaMemoryUsage` enumeration values. (#458)
+- Core: Removed support for Critical JNI Natives. (#490)
+    * Will be restored in LWJGL 3.3 (disabled by default, enabled with a `Configuration` option). 
+- Core: Fixed buffer attachment offset detection on JDK 12+. (#491)
+- Core: Fixed `ByteBuffer` attachments in `memSlice` & `memDuplicate`.
+- Generator: Fixed invalid generation of functions with struct parameters passed by value. (#496)
+    * Affected bindings: OpenVR and LLVM/Clang.
+- Generator: Improved javadoc for array and nested struct members.
+- EGL/GLES: Fixed bootstrapping code.
+    * Regression caused by `org.lwjgl.system.JNI` refactoring in `3.2.2`.
+- LLVM: Fixed default library names.
+- lmdb: Reverted to the official release. (#482)
+    * Windows: Performance issues are eliminated, but sparse database mappings & incremental file growth are not supported anymore.
+- OpenGL: Fixed signatures of `glGetnUniformiv` and `glGetnUniformuiv`.
 
 #### Breaking Changes
 
@@ -67,14 +91,9 @@ This build includes the following changes:
 (S): source incompatible change
 ```
 
-- Core: Function address parameters in `org.lwjgl.system.JNI` & `org.lwjgl.system.jawt.JAWTFunctions` methods are now last, after normal parameters. **(S)**
-    * Enables tail-calls without argument shuffling, when Critical JNI Natives are used.
-- glfw: removed `CharSequence` overload of `glfwUpdateGamepadMappings`. **(S)** (#462)
-
-#### Known Issues
-
-- Core: LWJGL 3.2.2 is incompatible with Java 12 or higher. (#491)
-    * This issue is fixed in LWJGL 3.2.3.
-- Core: Using LWJGL 3.2.2 with a garbage collector that does not support object pinning, may lead to excessive GC-related blocking. (#490)
-    * Workaround: pass `-XX:-CriticalJNINatives` to the JVM.
-    * This issue is fixed in LWJGL 3.2.3.
+- Core: The `Library.loadSystem` & `Library.loadNative` methods now require a module name parameter. **(S)**
+- Core: Removed `Consumer<T>` overloads from read-only structs with nested struct members. **(S)**
+- Core: `MemoryUtil.memFree(PointerBuffer)` changed to `memFree(CustomBuffer)`. **(B)**
+- LZ4: The `autoFlush` and `favorDecSpeed` members of `LZ4F_preferences_t` are now mapped to Java `boolean`. **(S)**
+- Vulkan: The `descriptorCount` member of `VkWriteDescriptorSet` must now be set explicitly. **(S)**
+    * The semantics of `descriptorCount` may change via extensions, which invalidates auto-sizing.
