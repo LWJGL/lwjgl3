@@ -255,7 +255,7 @@ static rmtU32 msTimer_Get()
         #endif
 
         return msTime;
-        
+
     #endif
 }
 
@@ -322,7 +322,7 @@ static rmtU64 usTimer_Get(usTimer* timer)
         rmtU64 curr_time = mach_absolute_time();
         return (rmtU64)((curr_time - timer->counter_start) * timer->counter_scale);
 
-    #elif defined(RMT_PLATFORM_LINUX)
+    #elif defined(RMT_PLATFORM_LINUX) || defined(__FreeBSD__)
 
         struct timespec tv;
         clock_gettime(CLOCK_REALTIME, &tv);
@@ -3274,10 +3274,10 @@ static void WebSocket_PrepareBuffer(Buffer* buffer)
     char empty_frame_header[WEBSOCKET_MAX_FRAME_HEADER_SIZE];
 
     assert(buffer != NULL);
- 
+
     // Reset to start
     buffer->bytes_used = 0;
- 
+
     // Allocate enough space for a maximum-sized frame header
     Buffer_Write(buffer, empty_frame_header, sizeof(empty_frame_header));
 }
@@ -3299,7 +3299,7 @@ static void WebSocket_WriteFrameHeader(WebSocket* web_socket, rmtU8* dest, rmtU3
     rmtU8 frame_type = (rmtU8)web_socket->mode;
 
     dest[0] = final_fragment | frame_type;
- 
+
      // Construct the frame header, correctly applying the narrowest size
      if (length <= 125)
      {
@@ -4577,7 +4577,7 @@ static rmtError Remotery_SendLogTextMessage(Remotery* rmt, Message* message)
 
     assert(rmt != NULL);
     assert(message != NULL);
-    
+
     bin_buf = rmt->server->bin_buf;
     WebSocket_PrepareBuffer(bin_buf);
     Buffer_Write(bin_buf, message->payload, message->payload_size);
@@ -4734,6 +4734,8 @@ static rmtError Remotery_ConsumeMessageQueue(Remotery* rmt)
                 error = Remotery_SendSampleTreeMessage(rmt, message);
                 rmt_EndCPUSample();
                 break;
+      	    default:
+		            break;
         }
 
         // Consume the message before reacting to any errors
@@ -4771,6 +4773,8 @@ static void Remotery_FlushMessageQueue(Remotery* rmt)
                 FreeSampleTree(sample_tree->root_sample, sample_tree->allocator);
                 break;
             }
+	          default:
+                break;
         }
 
         rmtMessageQueue_ConsumeNextMessage(rmt->mq_to_rmt_thread, message);
@@ -5461,7 +5465,7 @@ static void MapMessageQueueAndWait(Remotery* rmt, void (*map_message_queue_fn)(R
     // Basic spin lock on the map function itself
     while (AtomicCompareAndSwapPointer((long* volatile*)&rmt->map_message_queue_fn, NULL, (long*)map_message_queue_fn) == RMT_FALSE)
         msSleep(1);
-    
+
     StoreReleasePointer((long* volatile*)&rmt->map_message_queue_data, (long*)data);
 
     // Wait until map completes
@@ -6246,10 +6250,10 @@ RMT_API void _rmt_UnbindD3D11(void)
         // Stall waiting for the D3D queue to empty into the Remotery queue
         while (!rmtMessageQueue_IsEmpty(d3d11->mq_to_d3d11_main))
             UpdateD3D11Frame();
-        
+
         // There will be a whole bunch of D3D11 sample trees queued up the remotery queue that need releasing
         FreePendingSampleTrees(g_Remotery, SampleType_D3D11, d3d11->flush_samples);
-        
+
         // Inform sampler to not add any more samples
         d3d11->device = NULL;
         d3d11->context = NULL;
@@ -6881,7 +6885,7 @@ RMT_API void _rmt_UnbindOpenGL(void)
 
         // There will be a whole bunch of OpenGL sample trees queued up the remotery queue that need releasing
         FreePendingSampleTrees(g_Remotery, SampleType_OpenGL, opengl->flush_samples);
-        
+
         // Forcefully delete sample tree on this thread to release time stamps from
         // the same thread that created them
         Remotery_DeleteSampleTree(g_Remotery, SampleType_OpenGL);
@@ -7343,7 +7347,7 @@ RMT_API void _rmt_EndMetalSample(void)
         {
             if (metal_sample->timestamp != NULL)
                 MetalTimestamp_End(metal_sample->timestamp);
-            
+
             // Send to the update loop for ready-polling
             if (ThreadSampler_Pop(ts, g_Remotery->metal->mq_to_metal_main, (Sample*)metal_sample))
                 // Perform ready-polling on popping of the root sample
@@ -7358,4 +7362,3 @@ RMT_API void _rmt_EndMetalSample(void)
 
 
 #endif // RMT_ENABLED
-

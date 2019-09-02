@@ -96,6 +96,9 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <condition property="platform.linux">
         <os name="Linux"/>
     </condition>
+    <condition property="platform.freebsd">
+        <os name="FreeBSD"/>
+    </condition>
     <condition property="platform.macos">
         <os name="Mac OS X"/>
     </condition>
@@ -104,10 +107,12 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     </condition>
 
     <property name="platform" value="linux" if:set="platform.linux"/>
+    <property name="platform" value="freebsd" if:set="platform.freebsd"/>
     <property name="platform" value="macos" if:set="platform.macos"/>
     <property name="platform" value="windows" if:set="platform.windows"/>
 
     <property name="platform.remote" value="macosx" if:set="platform.macos"/>
+    <property name="platform.remote" value="linux" if:set="platform.freebsd"/>
     <property name="platform.remote" value="${platform}"/>
 
     <property name="platform.linux.remote" value="linux"/>
