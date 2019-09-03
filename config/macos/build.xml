@@ -239,7 +239,7 @@
         <build module="meow" simple="true" flags="-Werror -Wfatal-errors -maes" if:true="${binding.meow}"/>
 
         <!-- meshoptimizer -->
-        <build module="meshoptimizer" simple="true" lang="c++" if:true="${binding.meshoptimizer}">
+        <build module="meshoptimizer" simple="true" linker="clang++" if:true="${binding.meshoptimizer}">
             <beforeCompile>
                 <compile lang="c++">
                     <arg value="-I${src.main.rel}"/>
