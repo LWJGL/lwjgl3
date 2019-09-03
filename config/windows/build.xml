@@ -237,6 +237,16 @@ EXPORTS
         <!-- Meow -->
         <build_simple module="meow"/>
 
+        <!-- meshoptimizer -->
+        <build module="meshoptimizer" simple="true" if:true="${binding.meshoptimizer}">
+            <beforeCompile>
+                <compile>
+                    <arg value="/I${src.main}"/>
+                    <fileset dir="." includes="${src.main}/*.cpp"/>
+                </compile>
+            </beforeCompile>
+        </build>
+
         <!-- NanoVG -->
         <build module="nanovg" simple="true" if:true="${binding.nanovg}">
             <compileargs>

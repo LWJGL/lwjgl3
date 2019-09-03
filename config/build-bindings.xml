@@ -40,6 +40,7 @@ This script is included in /config/build-definitions.xml.
             <isset property="build.arch.arm64"/>
         </or>
     </condition>
+    <property name="binding.meshoptimizer" value="true"/>
     <property name="binding.nanovg" value="true"/>
     <condition property="binding.nfd" value="true" else="false"><isset property="notARM"/></condition>
     <property name="binding.nuklear" value="true"/>
@@ -175,6 +176,7 @@ This script is included in /config/build-definitions.xml.
                 <sequential if:true="${binding.lmdb}"><local name="module"/><property name="module" value="lmdb"/><body/></sequential>
                 <sequential if:true="${binding.lz4}"><local name="module"/><property name="module" value="lz4"/><body/></sequential>
                 <sequential if:true="${binding.meow}"><local name="module"/><property name="module" value="meow"/><body/></sequential>
+                <sequential if:true="${binding.meshoptimizer}"><local name="module"/><property name="module" value="meshoptimizer"/><body/></sequential>
                 <sequential if:true="${binding.nanovg}"><local name="module"/><property name="module" value="nanovg"/><body/></sequential>
                 <sequential if:true="${binding.nfd}"><local name="module"/><property name="module" value="nfd"/><body/></sequential>
                 <sequential if:true="${binding.nuklear}"><local name="module"/><property name="module" value="nuklear"/><body/></sequential>

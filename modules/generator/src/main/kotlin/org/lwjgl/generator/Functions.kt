@@ -582,7 +582,7 @@ class Func(
                                     else
                                         @Suppress("UNCHECKED_CAST") (transform as FunctionTransform<Parameter>).transformCall(autoSize, autoSize.name)
                                 }.let { name ->
-                                    if (autoSize.nativeType.mapping === PrimitiveMapping.INT)
+                                    if (autoSize.nativeType.mapping === PrimitiveMapping.INT || name.endsWith(".remaining()"))
                                         name
                                     else
                                         "(int)$name"

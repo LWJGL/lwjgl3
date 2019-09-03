@@ -363,6 +363,7 @@
             <compileBinding binding="lmdb"/>
             <compileBinding binding="lz4"/>
             <compileBinding binding="meow"/>
+            <compileBinding binding="meshoptimizer"/>
             <compileBinding binding="nanovg"/>
             <compileBinding binding="nfd"/>
             <compileBinding binding="nuklear"/>
@@ -670,6 +671,7 @@
             <include name="org/lwjgl/demo/util/lmdb/**" if:true="${binding.lmdb}"/>
             <include name="org/lwjgl/demo/util/lz4/**" if:true="${binding.lz4}"/>
             <include name="org/lwjgl/demo/util/meow/**" if:true="${binding.meow}"/>
+            <include name="org/lwjgl/demo/util/meshoptimizer/**" if:true="${binding.meshoptimizer}"/>
             <include name="org/lwjgl/demo/util/nfd/**" if:set="test.nfd"/>
             <include name="org/lwjgl/demo/util/par/**" if:set="test.par"/>
             <include name="org/lwjgl/demo/util/tinyexr/**" if:set="test.tinyexr"/>
@@ -1297,6 +1299,9 @@
                 <get-release platform="windows" arch="x86" file="lwjgl_meow.dll"/>
             </natives>
         </release-module>
+
+        <!-- meshoptimizer -->
+        <release-module name="meshoptimizer" native-library="lwjgl_meshoptimizer" title="meshoptimizer" if:true="${binding.meshoptimizer}"/>
 
         <!-- NanoVG -->
         <release-module name="nanovg" native-library="lwjgl_nanovg" title="NanoVG" if:true="${binding.nanovg}"/>

@@ -18,6 +18,11 @@
             <package name="org.lwjgl.util.libdivide"/>
         </packages>
     </test>
+    <test name="meshoptimizer">
+        <packages>
+            <package name="org.lwjgl.util.meshoptimizer"/>
+        </packages>
+    </test>
     <test name="opencl">
         <packages>
             <package name="org.lwjgl.opencl"/>

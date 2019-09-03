@@ -338,6 +338,13 @@ enum class Module(
         library = JNILibrary.create("LibMeow"),
         arrayOverloads = false
     ),
+    MESHOPTIMIZER(
+        "meshoptimizer",
+        "org.lwjgl.util.meshoptimizer",
+        "Contains bindings to ${url("https://github.com/zeux/meshoptimizer", "meshoptimizer")}, a library that provides algorithms to help optimize meshes.",
+        library = JNILibrary.create("LibMeshOptimizer"),
+        arrayOverloads = false
+    ),
     NANOVG(
         "nanovg",
         "org.lwjgl.nanovg",

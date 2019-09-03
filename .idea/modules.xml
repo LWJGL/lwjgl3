@@ -23,6 +23,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.lmdb.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.lmdb.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.lz4.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.lz4.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.meow.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.meow.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.meshoptimizer.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.meshoptimizer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.nanovg.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.nanovg.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.nfd.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.nfd.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.nuklear.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.nuklear.iml" />
@@ -69,6 +70,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.lmdb.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.lmdb.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.lz4.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.lz4.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.meow.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.meow.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.meshoptimizer.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.meshoptimizer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.nanovg.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.nanovg.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.nfd.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.nfd.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.nuklear.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.nuklear.iml" />

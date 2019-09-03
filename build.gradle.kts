@@ -140,6 +140,11 @@ enum class Artifacts(
         "An extremely fast non-cryptographic hash.",
         Platforms.LINUX, Platforms.LINUX_ARM64, Platforms.MACOS, Platforms.WINDOWS, Platforms.WINDOWS_X86
     ),
+    MESHOPTIMIZER(
+        "lwjgl-meshoptimizer", "LWJGL - meshoptimizer bindings",
+        "A library that provides algorithms to help optimize meshes.",
+        *Platforms.ALL
+    ),
     NANOVG(
         "lwjgl-nanovg", "LWJGL - NanoVG & NanoSVG bindings",
         "A small antialiased vector graphics rendering library for OpenGL. Also includes NanoSVG, a simple SVG parser.",

@@ -353,7 +353,7 @@ public final class MemoryUtil {
     }
 
     /** {@code CustomBuffer} version of {@link #memFree}. */
-    public static void memFree(@Nullable CustomBuffer ptr) {
+    public static void memFree(@Nullable CustomBuffer<?> ptr) {
         if (ptr != null) {
             nmemFree(ptr.address);
         }

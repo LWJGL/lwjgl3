@@ -6,9 +6,16 @@
 .gradle
 .DS_Store
 *.bat
+*.conf
+*.dll
+*.dylib
+*.jar
 *.jpg
+*.mhr
+*.obj
 *.ogg
 *.sh
+*.so
 *.ttf
 *.wav
 *.zip

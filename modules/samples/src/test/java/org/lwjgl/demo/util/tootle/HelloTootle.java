@@ -38,6 +38,7 @@ public final class HelloTootle {
 
     private ParShapesMesh mesh;
     private ParShapesMesh meshOptimized;
+    private ParShapesMesh meshRender;
 
     private boolean hasNormals;
 
@@ -194,6 +195,7 @@ public final class HelloTootle {
                         updateMesh();
                     }
                     break;
+                case GLFW_KEY_MINUS:
                 case GLFW_KEY_KP_SUBTRACT:
                     if ((mods & GLFW_MOD_CONTROL) != 0) {
                         if (1 < cubeSize) {
@@ -204,6 +206,7 @@ public final class HelloTootle {
                         setMesh(mesh);
                     }
                     break;
+                case GLFW_KEY_EQUAL:
                 case GLFW_KEY_KP_ADD:
                     if ((mods & GLFW_MOD_CONTROL) != 0) {
                         setCubeSize(cubeSize + 1);
@@ -267,6 +270,7 @@ public final class HelloTootle {
             this.width = width;
             this.height = height;
             updateViewport(width, height);
+            updateHUD();
         });
 
         // center window
@@ -531,14 +535,14 @@ public final class HelloTootle {
         glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
         if (hasNormals) {
             glEnableVertexAttribArray(1);
-            glVertexAttribPointer(1, 3, GL_FLOAT, false, 0, mesh.npoints() * 3 * 4);
+            glVertexAttribPointer(1, 3, GL_FLOAT, false, 0, meshRender.npoints() * 3 * 4);
         } else {
             setDefaultNormal();
         }
 
         gpuTimer.startGPUTimer();
 
-        glDrawElementsInstanced(GL_TRIANGLES, mesh.ntriangles() * 3, GL_UNSIGNED_INT, 0, cubeSize * cubeSize * cubeSize);
+        glDrawElementsInstanced(GL_TRIANGLES, meshRender.ntriangles() * 3, GL_UNSIGNED_INT, 0, cubeSize * cubeSize * cubeSize);
 
         if (hasNormals) {
             glDisableVertexAttribArray(1);
@@ -552,7 +556,7 @@ public final class HelloTootle {
             if (hasNormals) {
                 setDefaultNormal();
             }
-            glDrawElementsInstanced(GL_TRIANGLES, mesh.ntriangles() * 3, GL_UNSIGNED_INT, 0, cubeSize * cubeSize * cubeSize);
+            glDrawElementsInstanced(GL_TRIANGLES, meshRender.ntriangles() * 3, GL_UNSIGNED_INT, 0, cubeSize * cubeSize * cubeSize);
 
             glPolygonOffset(0.0f, 0.0f);
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -734,7 +738,7 @@ public final class HelloTootle {
     }
 
     private void updateMeshGPU() {
-        ParShapesMesh mesh = optimized ? meshOptimized : this.mesh;
+        ParShapesMesh mesh = meshRender = optimized ? meshOptimized : this.mesh;
 
         int vc = mesh.npoints();
 
@@ -790,9 +794,9 @@ public final class HelloTootle {
 
         if (mesh != null) {
             setColor(color, 255, 255, 255, 255);
-            print(4, i * 10, "Vertices: " + mesh.npoints(), color, buffer);
+            print(4, i * 10, "Vertices: " + meshRender.npoints(), color, buffer);
             i++;
-            print(0, i * 10, "Triangles: " + mesh.ntriangles(), color, buffer);
+            print(0, i * 10, "Triangles: " + meshRender.ntriangles(), color, buffer);
         }
 
         String[] controls = {
@@ -932,7 +936,7 @@ public final class HelloTootle {
         try (MemoryStack stack = stackPush()) {
             PointerBuffer pp = stack.mallocPointer(1);
 
-            int result = NFD_OpenDialog(null, Paths.get("modules/samples/src/test/resources/demo").toString(), pp);
+            int result = NFD_OpenDialog(null, Paths.get("modules/samples/src/test/resources/demo").toAbsolutePath().toString(), pp);
             switch (result) {
                 case NFD_OKAY:
                     AIScene scene = aiImportFileExWithProperties(pp.getStringUTF8(0),
@@ -1128,11 +1132,10 @@ public final class HelloTootle {
                         buffer.flip();
                         for (int i = 0; i < nVertices; i++) {
                             int n = pnVertexRemap.get(i) * 3;
-                            buffer.put(n + 0, normals.get());
-                            buffer.put(n + 1, normals.get());
-                            buffer.put(n + 2, normals.get());
+                            buffer.put(n + 0, normals.get(i * 3 + 0));
+                            buffer.put(n + 1, normals.get(i * 3 + 1));
+                            buffer.put(n + 2, normals.get(i * 3 + 2));
                         }
-                        normals.flip();
                         normals.put(buffer);
                     }
                 } finally {

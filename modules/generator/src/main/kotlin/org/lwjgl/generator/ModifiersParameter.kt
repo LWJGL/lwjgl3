@@ -278,7 +278,7 @@ object RawPointer : ParameterModifier {
     override val isSpecial = true
     override fun validate(param: Parameter) {
         check(param.nativeType.isPointerData) {
-            "The RawPointer modifier can only modifier to data pointer parameters."
+            "The RawPointer modifier can only be applied to data pointer parameters."
         }
     }
 }
