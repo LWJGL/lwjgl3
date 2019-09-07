@@ -97,3 +97,8 @@ This build includes the following changes:
 - LZ4: The `autoFlush` and `favorDecSpeed` members of `LZ4F_preferences_t` are now mapped to Java `boolean`. **(S)**
 - Vulkan: The `descriptorCount` member of `VkWriteDescriptorSet` must now be set explicitly. **(S)**
     * The semantics of `descriptorCount` may change via extensions, which invalidates auto-sizing.
+
+#### Known Issues
+
+- Vulkan: GLFW configuration for MoltenVK is broken in LWJGL 3.2.3. (#502)
+    * This issue is fixed in LWJGL 3.2.4.

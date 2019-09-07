@@ -396,6 +396,8 @@
             </compileBinding>
             <compileBinding binding="glfw">
                 <pathelement path="${bin.lwjgl}/egl"/>
+                <pathelement path="${bin.lwjgl}/opengl"/>
+                <pathelement path="${bin.lwjgl}/opengles"/>
                 <pathelement path="${bin.lwjgl}/vulkan"/>
             </compileBinding>
             <compileBinding binding="ovr">

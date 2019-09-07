@@ -17,20 +17,7 @@ val GLFWVulkan = "GLFWVulkan".dependsOn(Module.VULKAN)?.nativeClass(Module.GLFW,
     customMethod("""
     static {
         if (Platform.get() == Platform.MACOSX) {
-            // Force GLFW to initialize Vulkan using the same library used by LWJGL.
-            FunctionProvider fp = VK.getFunctionProvider();
-            if (fp instanceof SharedLibrary) {
-                String path = ((SharedLibrary)fp).getPath();
-                if (path != null) {
-                    try (MemoryStack stack = stackPush()) {
-                        long _glfw_vulkan_library = apiGetFunctionAddress(GLFW.getLibrary(), "_glfw_vulkan_library");
-
-                        memPutAddress(_glfw_vulkan_library, memAddress(stack.UTF8(path)));
-                        glfwVulkanSupported();
-                        memPutAddress(_glfw_vulkan_library, NULL);
-                    }
-                }
-            }
+            setPathLWJGL();
         }
     }""")
 
@@ -171,4 +158,48 @@ val GLFWVulkan = "GLFWVulkan".dependsOn(Module.VULKAN)?.nativeClass(Module.GLFW,
         returnDoc = "VK10#VK_SUCCESS if successful, or a Vulkan error code if an error occurred",
         since = "version 3.2"
     )
+
+    customMethod("""
+    /** Calls {@link #setPath(String)} with the path of the Vulkan shared library loaded by LWJGL. */
+    public static void setPathLWJGL() {
+        FunctionProvider fp = VK.getFunctionProvider();
+        if (!(fp instanceof SharedLibrary)) {
+            apiLog("GLFW Vulkan path override not set: Vulkan function provider is not a shared library.");
+            return;
+
+        }
+
+        String path = ((SharedLibrary)fp).getPath();
+        if (path == null) {
+            apiLog("GLFW Vulkan path override not set: Could not resolve the Vulkan shared library path.");
+            return;
+
+        }
+
+        setPath(path);
+    }
+
+    /**
+     * Overrides the Vulkan shared library that GLFW loads internally.
+     *
+     * <p>This is useful when there's a mismatch between the shared libraries loaded by LWJGL and GLFW.</p>
+     *
+     * <p>This method must be called before GLFW initializes Vulkan. The override is available only in the default GLFW build bundled with LWJGL. Using the
+     * override with a custom GLFW build will produce a warning in {@code DEBUG} mode (but not an error).</p>
+     *
+     * @param path the Vulkan shared library path, or {@code null} to remove the override.
+     */
+    public static void setPath(@Nullable String path) {
+        long override = GLFW.getLibrary().getFunctionAddress("_glfw_vulkan_library");
+        if (override == NULL) {
+            apiLog("GLFW Vulkan path override not set: Could not resolve override symbol.");
+            return;
+        }
+
+        long a = memGetAddress(override);
+        if (a != NULL) {
+            nmemFree(a);
+        }
+        memPutAddress(override, path == null ? NULL : memAddress(memUTF8(path)));
+    }""")
 }

@@ -10,7 +10,11 @@ import glfw.*
 
 val GLFWNativeEGL = "GLFWNativeEGL".nativeClass(Module.GLFW, nativeSubPath = "egl", prefix = "GLFW", binding = GLFW_BINDING_DELEGATE) {
     javaImport(
-        "org.lwjgl.egl.EGL10"
+        "javax.annotation.*",
+        "org.lwjgl.egl.EGL",
+        "org.lwjgl.egl.EGL10",
+        "org.lwjgl.opengles.GLES",
+        "static org.lwjgl.system.MemoryUtil.*"
     )
 
     documentation = "Native bindings to the GLFW library's EGL native access functions."
@@ -54,4 +58,89 @@ val GLFWNativeEGL = "GLFWNativeEGL".nativeClass(Module.GLFW, nativeSubPath = "eg
         returnDoc = "the {@code EGLSurface} of the specified window, or EGL10#EGL_NO_SURFACE if an error occurred",
         since = "version 3.0"
     )
+
+    customMethod("""
+    /** Calls {@link #setEGLPath(String)} with the path of the EGL shared library loaded by LWJGL. */
+    public static void setEGLPathLWJGL() {
+        FunctionProvider fp = EGL.getFunctionProvider();
+        if (!(fp instanceof SharedLibrary)) {
+            apiLog("GLFW EGL path override not set: EGL function provider is not a shared library.");
+            return;
+
+        }
+
+        String path = ((SharedLibrary)fp).getPath();
+        if (path == null) {
+            apiLog("GLFW EGL path override not set: Could not resolve the EGL shared library path.");
+            return;
+
+        }
+
+        setEGLPath(path);
+    }
+
+    /**
+     * Overrides the EGL shared library that GLFW loads internally.
+     *
+     * <p>This is useful when there's a mismatch between the shared libraries loaded by LWJGL and GLFW.</p>
+     *
+     * <p>This method must be called before GLFW initializes EGL. The override is available only in the default GLFW build bundled with LWJGL. Using the
+     * override with a custom GLFW build will produce a warning in {@code DEBUG} mode (but not an error).</p>
+     *
+     * @param path the EGL shared library path, or {@code null} to remove the override.
+     */
+    public static void setEGLPath(@Nullable String path) {
+        if (!override("_glfw_egl_library", path)) {
+            apiLog("GLFW EGL path override not set: Could not resolve override symbol.");
+        }
+    }
+    
+    /** Calls {@link #setGLESPath(String)} with the path of the OpenGL ES shared library loaded by LWJGL. */
+    public static void setGLESPathLWJGL() {
+        FunctionProvider fp = GLES.getFunctionProvider();
+        if (!(fp instanceof SharedLibrary)) {
+            apiLog("GLFW OpenGL ES path override not set: OpenGL ES function provider is not a shared library.");
+            return;
+
+        }
+
+        String path = ((SharedLibrary)fp).getPath();
+        if (path == null) {
+            apiLog("GLFW OpenGL ES path override not set: Could not resolve the OpenGL ES shared library path.");
+            return;
+
+        }
+
+        setGLESPath(path);
+    }
+
+    /**
+     * Overrides the OpenGL ES shared library that GLFW loads internally.
+     *
+     * <p>This is useful when there's a mismatch between the shared libraries loaded by LWJGL and GLFW.</p>
+     *
+     * <p>This method must be called before GLFW initializes OpenGL ES. The override is available only in the default GLFW build bundled with LWJGL. Using the
+     * override with a custom GLFW build will produce a warning in {@code DEBUG} mode (but not an error).</p>
+     *
+     * @param path the OpenGL ES shared library path, or {@code null} to remove the override.
+     */
+    public static void setGLESPath(@Nullable String path) {
+        if (!override("_glfw_opengles_library", path)) {
+            apiLog("GLFW OpenGL ES path override not set: Could not resolve override symbol.");
+        }
+    }
+    
+    private static boolean override(String symbol, @Nullable String path) {
+        long override = GLFW.getLibrary().getFunctionAddress(symbol);
+        if (override == NULL) {
+            return false;
+        }
+
+        long a = memGetAddress(override);
+        if (a != NULL) {
+            nmemFree(a);
+        }
+        memPutAddress(override, path == null ? NULL : memAddress(memUTF8(path)));
+        return true;
+    }""")
 }

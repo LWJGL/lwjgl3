@@ -12,6 +12,8 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="lwjgl.core" />
     <orderEntry type="module" module-name="lwjgl.egl" />
+    <orderEntry type="module" module-name="lwjgl.opengl" />
+    <orderEntry type="module" module-name="lwjgl.opengles" />
     <orderEntry type="module" module-name="lwjgl.vulkan" />
     <orderEntry type="library" scope="PROVIDED" name="jsr305" level="project" />
   </component>

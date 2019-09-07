@@ -2438,8 +2438,9 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         Names for printable keys depend on keyboard layout, while names for non-printable keys are the same across layouts but depend on the application
         language and should be localized along with other user interface text.
 
-        The returned string is allocated and freed by GLFW. You should not free it yourself. It is valid until the next call to #GetKeyName(), or until the
-        library is terminated.
+        The contents of the returned string may change when a keyboard layout change event is received.
+ 
+        The returned string is allocated and freed by GLFW. You should not free it yourself. It is valid until the library is terminated.
 
         This function must only be called from the main thread.
         """,
