@@ -14,6 +14,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.bullet.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.bullet.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.core.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.core.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.cuda.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.cuda.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.driftfx.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.driftfx.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.egl.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.egl.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.glfw.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.glfw.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.jawt.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.jawt.iml" />
@@ -62,6 +63,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.core10.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.core10.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.core9.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.core9.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.cuda.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.cuda.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.driftfx.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.driftfx.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.egl.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.egl.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.glfw.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.glfw.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.jawt.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.jawt.iml" />

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/../../../bin/classes/lwjgl/driftfx" />
+    <output-test url="file://$MODULE_DIR$/../../../bin/classes/test" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../modules/lwjgl/driftfx">
+      <sourceFolder url="file://$MODULE_DIR$/../../../modules/lwjgl/driftfx/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../modules/lwjgl/driftfx/src/generated/java" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="lwjgl.core" />
+    <orderEntry type="library" scope="PROVIDED" name="jsr305" level="project" />
+  </component>
+</module>

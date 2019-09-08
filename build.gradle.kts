@@ -97,6 +97,10 @@ enum class Artifacts(
         "lwjgl-cuda", "LWJGL - CUDA bindings",
         "A parallel computing platform and programming model developed by NVIDIA for general computing on GPUs."
     ),
+    DRIFTFX(
+        "lwjgl-driftfx", "LWJGL - DriftFX bindings",
+        "A library that allows you to render any OpenGL content directly into JavaFX nodes."
+    ),
     EGL(
         "lwjgl-egl", "LWJGL - EGL bindings",
         "An interface between Khronos rendering APIs such as OpenGL ES or OpenVG and the underlying native platform window system."

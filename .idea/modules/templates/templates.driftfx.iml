@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/../../../bin/classes/templates" />
+    <output-test url="file://$MODULE_DIR$/../../../bin/classes/templates" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../modules/lwjgl/driftfx/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../../modules/lwjgl/driftfx/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="KotlinRuntime" level="project" />
+    <orderEntry type="module" module-name="generator" />
+  </component>
+</module>

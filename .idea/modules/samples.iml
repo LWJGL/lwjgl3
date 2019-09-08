@@ -28,6 +28,7 @@
     <orderEntry type="module" module-name="lwjgl.bgfx" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.bullet" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.cuda" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.driftfx" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.egl" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.glfw" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.jawt" scope="TEST" />

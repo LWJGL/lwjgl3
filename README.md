@@ -138,6 +138,7 @@ improve the chances of a quick and useful response.
 |-------|-----------|
 |[Assimp](http://www.assimp.org/)|A portable Open Source library to import various well-known 3D model formats in a uniform manner.|
 |[bgfx](https://bkaradzic.github.io/bgfx/)|Cross-platform, graphics API agnostic, “Bring Your Own Engine/Framework” style rendering library, licensed under permissive BSD-2 clause open source license.|
+|[DriftFX](https://github.com/eclipse-efx/efxclipse-drift)|A library that allows you to render any OpenGL content directly into JavaFX nodes.|
 |[LibOVR](https://developer.oculus.com/documentation/)|The API of the Oculus SDK.|
 |[meshoptimizer](https://github.com/zeux/meshoptimizer)|A library that provides algorithms to help optimize meshes.|
 |[NanoSVG](https://github.com/memononen/nanosvg)|A simple stupid SVG parser.|

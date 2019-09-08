@@ -126,6 +126,18 @@ enum class Module(
         CallingConvention.STDCALL,
         arrayOverloads = false
     ),
+    DRIFTFX(
+        "driftfx",
+        "org.lwjgl.driftfx",
+        """
+        Contains bindings to <a href="https://github.com/eclipse-efx/efxclipse-drift">DriftFX</a>.
+
+        DriftFX allows you to render any OpenGL content directly into JavaFX nodes. Direct means that there is no transfer between GPU and main memory. The
+        textures never leave the GPU.
+        """,
+        library = JNILibrary.create("LibDriftFX"),
+        arrayOverloads = false
+    ),
     EGL(
         "egl",
         "org.lwjgl.egl",

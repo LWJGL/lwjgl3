@@ -225,6 +225,37 @@
             </link>
         </build>
 
+        <!-- DriftFX -->
+        <build module="driftfx" lang="c++" if:true="${binding.driftfx}">
+            <beforeCompile>
+                <compile lang="c++" flags="-DGLEW_STATIC -DBUILDING_DLL">
+                    <arg value="-I${src.main.rel}/include"/>
+                    <arg value="-I${src.main.rel}/src"/>
+                    <arg value="-I${src.main.rel}/lib/glew/include"/>
+                    <arg value="-I${src.main.rel}/lib/utils/include"/>
+                    <fileset dir="." includes="${src.main}/lib/glew/src/*"/>
+                    <fileset dir="." includes="${src.main}/lib/utils/src/*"/>
+                    <fileset dir=".">
+                        <include name="${src.main}/src/**/*.cpp"/>
+                        <exclude name="${src.main}/src/gl/cgl/*"/>
+                        <exclude name="${src.main}/src/gl/wgl/*"/>
+                        <exclude name="${src.main}/src/prism/d3d/*"/>
+                        <exclude name="${src.main}/src/prism/es2/cgl/*"/>
+                        <exclude name="${src.main}/src/win32/*"/>
+                    </fileset>
+                </compile>
+            </beforeCompile>
+            <source>
+                <arg value="-I${src.main.rel}/include"/>
+                <fileset dir="." includes="${src.generated}/*"/>
+            </source>
+            <link>
+                <arg value="-latomic"/>
+                <arg value="-l:libGL.so.1" unless:set="gcc.libpath.opengl"/>
+                <arg line="-L ${gcc.libpath.opengl} -l:libGL.so.1" if:set="gcc.libpath.opengl"/>
+            </link>
+        </build>
+
         <!-- LIBDIVIDE -->
         <build_simple module="libdivide"/>
 

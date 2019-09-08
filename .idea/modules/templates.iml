@@ -13,6 +13,7 @@
     <orderEntry type="module" module-name="templates.bullet" />
     <orderEntry type="module" module-name="templates.core" />
     <orderEntry type="module" module-name="templates.cuda" />
+    <orderEntry type="module" module-name="templates.driftfx" />
     <orderEntry type="module" module-name="templates.egl" />
     <orderEntry type="module" module-name="templates.glfw" />
     <orderEntry type="module" module-name="templates.jawt" />

@@ -355,6 +355,7 @@
             <compileBinding binding="bgfx"/>
             <compileBinding binding="bullet"/>
             <compileBinding binding="cuda"/>
+            <compileBinding binding="driftfx"/>
             <compileBinding binding="egl"/>
             <compileBinding binding="jawt"/>
             <compileBinding binding="jemalloc"/>
@@ -649,6 +650,7 @@
             <include name="org/lwjgl/demo/bgfx/**" if:set="test.bgfx"/>
             <include name="org/lwjgl/demo/bullet/**" if:true="${binding.bullet}"/>
             <include name="org/lwjgl/demo/cuda/**" if:true="${binding.cuda}"/>
+            <include name="org/lwjgl/demo/driftfx/**" if:true="${binding.driftfx}"/>
             <include name="org/lwjgl/demo/egl/**" if:set="test.egl"/>
             <include name="org/lwjgl/demo/glfw/**" if:set="test.glfw"/>
             <include name="org/lwjgl/demo/llvm/**" if:true="${binding.llvm}"/>
@@ -775,7 +777,7 @@
         <delete dir="${bin.javadoc}"/>
 
         <path id="javadoc.sources">
-            <pathelement path="${module.sourcepath}"/>
+            <pathelement path="${module.javadocsourcepath}"/>
         </path>
 
         <javadoc
@@ -1092,6 +1094,8 @@
 
             <local name="hasMain"/>
             <available file="${module.lwjgl}/@{name}/src/main/java" type="dir" property="hasMain"/>
+            <local name="hasMain.javadoc"/>
+            <available file="${module.lwjgl}/@{name}/src/main/java/org/lwjgl" type="dir" property="hasMain"/>
 
             <!-- Bundle javadoc -->
             <!-- This is slow, use -Djavadoc.skip=true for fast local builds -->
@@ -1118,7 +1122,7 @@
                     <pathelement path="${lib}/java/jsr305.jar"/>
                 </classpath>
 
-                <fileset dir="${module.lwjgl}/@{name}/src/main/java" includes="**" if:set="hasMain"/>
+                <fileset dir="${module.lwjgl}/@{name}/src/main/java/org/lwjgl" includes="**" if:set="hasMain.javadoc"/>
                 <fileset dir="${module.lwjgl}/@{name}/src/generated/java" includes="**"/>
 
                 <arg value="-XDignore.symbol.file"/> <!-- Suppresses internal API (e.g. Unsafe) usage warnings -->
@@ -1242,6 +1246,9 @@
 
         <!-- CUDA -->
         <release-module name="cuda" title="CUDA" if:true="${binding.cuda}"/>
+
+        <!-- DriftFX -->
+        <release-module name="driftfx" native-library="lwjgl_driftfx" title="DriftFX" if:true="${binding.driftfx}"/>
 
         <!-- EGL -->
         <release-module name="egl" title="EGL" if:true="${binding.egl}"/>

@@ -208,6 +208,38 @@
             </link>
         </build>
 
+        <!-- DriftFX -->
+        <build module="driftfx" lang="c++" if:true="${binding.driftfx}">
+            <beforeCompile>
+                <compile lang="c++" flags="-DGLEW_STATIC -DBUILDING_DLL">
+                    <arg value="-I${src.main.rel}/include"/>
+                    <arg value="-I${src.main.rel}/src"/>
+                    <arg value="-I${src.main.rel}/lib/glew/include"/>
+                    <arg value="-I${src.main.rel}/lib/utils/include"/>
+                    <fileset dir="." includes="${src.main}/lib/glew/src/*"/>
+                    <fileset dir="." includes="${src.main}/lib/utils/src/*"/>
+                    <fileset dir=".">
+                        <include name="${src.main}/src/**/*.cpp"/>
+                        <exclude name="${src.main}/src/gl/glx/*"/>
+                        <exclude name="${src.main}/src/gl/wgl/*"/>
+                        <exclude name="${src.main}/src/prism/d3d/*"/>
+                        <exclude name="${src.main}/src/prism/es2/glx/*"/>
+                        <exclude name="${src.main}/src/win32/*"/>
+                    </fileset>
+                </compile>
+            </beforeCompile>
+            <source>
+                <arg value="-I${src.main.rel}/include"/>
+                <fileset dir="." includes="${src.generated}/*"/>
+            </source>
+            <link>
+                <arg line="-framework OpenGL"/>
+                <arg line="-framework Cocoa"/>
+                <arg line="-framework IOSurface"/>
+                <arg line="-framework CoreFoundation"/>
+            </link>
+        </build>
+
         <!-- LIBDIVIDE -->
         <build_simple module="libdivide"/>
 
