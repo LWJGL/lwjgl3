@@ -19,7 +19,6 @@ import java.util.*;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.glfw.GLFWNativeWin32.*;
-import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GLX13.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -37,7 +36,7 @@ public class LWJGLCanvas extends Canvas {
 
     private JAWTDrawingSurface ds;
 
-    private final AbstractGears gears;
+    private GLXGears gears;
 
     private long context;
 
@@ -49,8 +48,6 @@ public class LWJGLCanvas extends Canvas {
         if (!JAWT_GetAWT(awt)) {
             throw new IllegalStateException("GetAWT failed");
         }
-
-        gears = new AbstractGears();
 
         // AWT event listeners are invoked in the EDT
 
@@ -173,7 +170,7 @@ public class LWJGLCanvas extends Canvas {
 
                         if (context == NULL) {
                             createContextGLX(dsi_x11);
-                            gears.initGLState();
+                            gears = new GLXGears();
                         } else {
                             if (!glXMakeCurrent(dsi_x11.display(), drawable, context)) {
                                 throw new IllegalStateException("glXMakeCurrent() failed");
@@ -199,7 +196,7 @@ public class LWJGLCanvas extends Canvas {
                         // The render method is invoked in the EDT
                         if (context == NULL) {
                             createContextGLFW(dsi_win);
-                            gears.initGLState();
+                            gears = new GLXGears();
                         } else {
                             glfwMakeContextCurrent(context);
                             GL.setCapabilities(caps);
@@ -230,16 +227,9 @@ public class LWJGLCanvas extends Canvas {
     }
 
     private void render(int width, int height) {
-        glViewport(0, 0, width, height);
-
-        float f = height / (float)width;
-
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        glFrustum(-1.0f, 1.0f, -f, f, 5.0f, 100.0f);
-        glMatrixMode(GL_MODELVIEW);
-
-        gears.renderLoop();
+        gears.setSize(width, height);
+        gears.render();
+        gears.animate();
     }
 
     private void createContextGLFW(JAWTWin32DrawingSurfaceInfo dsi_win) {

@@ -17,13 +17,14 @@ import java.util.concurrent.*;
 import static org.lwjgl.demo.system.jawt.EmbeddedFrameUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** AWT frame embedded in GLFW using jawt. */
 public final class EmbeddedFrameDemo {
 
     private static boolean focused;
+
+    private static GLXGears gears;
 
     private EmbeddedFrameDemo() {
     }
@@ -78,14 +79,7 @@ public final class EmbeddedFrameDemo {
                 return;
             }
 
-            float f = height / (float)width;
-
-            glMatrixMode(GL_PROJECTION);
-            glLoadIdentity();
-            glFrustum(-1.0f, 1.0f, -f, f, 5.0f, 100.0f);
-            glMatrixMode(GL_MODELVIEW);
-
-            glViewport(0, 0, width, height);
+            gears.setSize(width, height);
 
             EventQueue.invokeLater(() -> {
                 embeddedFrameSetBounds(ef, width - FRAME_WIDTH, height - FRAME_HEIGHT, FRAME_WIDTH, FRAME_HEIGHT);
@@ -119,11 +113,11 @@ public final class EmbeddedFrameDemo {
         GL.createCapabilities();
         Callback debugProc = GLUtil.setupDebugMessageCallback();
 
-        AbstractGears gears = new AbstractGears();
-        gears.initGLState();
+        gears = new GLXGears();
 
         glfwSetWindowRefreshCallback(window, windowHnd -> {
-            gears.renderLoop();
+            gears.render();
+            gears.animate();
             glfwSwapBuffers(windowHnd);
         });
 
@@ -133,7 +127,8 @@ public final class EmbeddedFrameDemo {
         while (!glfwWindowShouldClose(window)) {
             glfwPollEvents();
 
-            gears.renderLoop();
+            gears.render();
+            gears.animate();
 
             glfwSwapBuffers(window);
         }

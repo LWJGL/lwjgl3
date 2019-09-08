@@ -15,12 +15,11 @@ import java.util.*;
 import static org.lwjgl.demo.glfw.GLFWUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** The Gears demo implemented using GLFW. */
-public class Gears extends AbstractGears {
+public class Gears {
 
     private Callback debugProc;
 
@@ -31,6 +30,8 @@ public class Gears extends AbstractGears {
     private int width;
     private int height;
 
+    private GLXGears gears;
+
     public static void main(String[] args) {
         new Gears().run();
     }
@@ -38,7 +39,6 @@ public class Gears extends AbstractGears {
     private void run() {
         try {
             init();
-            initGLState();
 
             loop();
         } finally {
@@ -50,19 +50,12 @@ public class Gears extends AbstractGears {
         }
     }
 
-    private static void framebufferSizeChanged(long window, int width, int height) {
+    private void framebufferSizeChanged(long window, int width, int height) {
         if (width == 0 || height == 0) {
             return;
         }
 
-        float f = height / (float)width;
-
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        glFrustum(-1.0f, 1.0f, -f, f, 5.0f, 100.0f);
-        glMatrixMode(GL_MODELVIEW);
-
-        glViewport(0, 0, width, height);
+        gears.setSize(width, height);
     }
 
     private void init() {
@@ -169,10 +162,11 @@ public class Gears extends AbstractGears {
             }
         });
 
-        glfwSetFramebufferSizeCallback(window, Gears::framebufferSizeChanged);
+        glfwSetFramebufferSizeCallback(window, this::framebufferSizeChanged);
 
         glfwSetWindowRefreshCallback(window, windowHnd -> {
-            renderLoop();
+            gears.render();
+            gears.animate();
             glfwSwapBuffers(windowHnd);
         });
 
@@ -180,10 +174,12 @@ public class Gears extends AbstractGears {
         GL.createCapabilities();
         debugProc = GLUtil.setupDebugMessageCallback();
 
+        gears = new GLXGears();
+
         glfwSwapInterval(1);
         glfwShowWindow(window);
 
-        glfwInvoke(window, null, Gears::framebufferSizeChanged);
+        glfwInvoke(window, null, this::framebufferSizeChanged);
 
         this.window = window;
     }
@@ -195,7 +191,8 @@ public class Gears extends AbstractGears {
         while (!glfwWindowShouldClose(window)) {
             glfwPollEvents();
 
-            renderLoop();
+            gears.render();
+            gears.animate();
 
             glfwSwapBuffers(window);
 
