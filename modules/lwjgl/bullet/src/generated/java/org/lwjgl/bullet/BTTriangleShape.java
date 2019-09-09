@@ -54,7 +54,7 @@ public class BTTriangleShape {
     }
 
     @NativeType("void *")
-    public static long btTriangleShape_new2(@NativeType("btVector3 const *") ΒΤVector3 p0, @NativeType("btVector3 const *") ΒΤVector3 p1, @NativeType("btVector3 const *") ΒΤVector3 p2) {
+    public static long btTriangleShape_new2(@NativeType("btVector3 const *") BTVector3 p0, @NativeType("btVector3 const *") BTVector3 p1, @NativeType("btVector3 const *") BTVector3 p2) {
         return nbtTriangleShape_new2(p0.address(), p1.address(), p2.address());
     }
 
@@ -68,7 +68,7 @@ public class BTTriangleShape {
         invokePPV(obj, normal, __functionAddress);
     }
 
-    public static void btTriangleShape_calcNormal(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 normal) {
+    public static void btTriangleShape_calcNormal(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 normal) {
         nbtTriangleShape_calcNormal(obj, normal.address());
     }
 
@@ -82,7 +82,7 @@ public class BTTriangleShape {
         invokePPPV(obj, i, planeNormal, planeSupport, __functionAddress);
     }
 
-    public static void btTriangleShape_getPlaneEquation(@NativeType("void *") long obj, int i, @NativeType("btVector3 *") ΒΤVector3 planeNormal, @NativeType("btVector3 *") ΒΤVector3 planeSupport) {
+    public static void btTriangleShape_getPlaneEquation(@NativeType("void *") long obj, int i, @NativeType("btVector3 *") BTVector3 planeNormal, @NativeType("btVector3 *") BTVector3 planeSupport) {
         nbtTriangleShape_getPlaneEquation(obj, i, planeNormal.address(), planeSupport.address());
     }
 
@@ -110,9 +110,9 @@ public class BTTriangleShape {
 
     @Nullable
     @NativeType("btVector3 *")
-    public static ΒΤVector3 btTriangleShape_getVertices1(@NativeType("void *") long obj) {
+    public static BTVector3 btTriangleShape_getVertices1(@NativeType("void *") long obj) {
         long __result = nbtTriangleShape_getVertices1(obj);
-        return ΒΤVector3.createSafe(__result);
+        return BTVector3.createSafe(__result);
     }
 
 }

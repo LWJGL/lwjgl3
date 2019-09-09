@@ -153,7 +153,7 @@ public class BTWheelInfo {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btWheelInfoConstructionInfo_getChassisConnectionCS(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btWheelInfoConstructionInfo_getChassisConnectionCS(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtWheelInfoConstructionInfo_getChassisConnectionCS(obj, value.address());
     }
 
@@ -222,7 +222,7 @@ public class BTWheelInfo {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btWheelInfoConstructionInfo_getWheelAxleCS(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btWheelInfoConstructionInfo_getWheelAxleCS(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtWheelInfoConstructionInfo_getWheelAxleCS(obj, value.address());
     }
 
@@ -236,7 +236,7 @@ public class BTWheelInfo {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btWheelInfoConstructionInfo_getWheelDirectionCS(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btWheelInfoConstructionInfo_getWheelDirectionCS(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtWheelInfoConstructionInfo_getWheelDirectionCS(obj, value.address());
     }
 
@@ -293,7 +293,7 @@ public class BTWheelInfo {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btWheelInfoConstructionInfo_setChassisConnectionCS(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btWheelInfoConstructionInfo_setChassisConnectionCS(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtWheelInfoConstructionInfo_setChassisConnectionCS(obj, value.address());
     }
 
@@ -357,7 +357,7 @@ public class BTWheelInfo {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btWheelInfoConstructionInfo_setWheelAxleCS(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btWheelInfoConstructionInfo_setWheelAxleCS(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtWheelInfoConstructionInfo_setWheelAxleCS(obj, value.address());
     }
 
@@ -371,7 +371,7 @@ public class BTWheelInfo {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btWheelInfoConstructionInfo_setWheelDirectionCS(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btWheelInfoConstructionInfo_setWheelDirectionCS(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtWheelInfoConstructionInfo_setWheelDirectionCS(obj, value.address());
     }
 
@@ -433,7 +433,7 @@ public class BTWheelInfo {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btWheelInfo_RaycastInfo_getContactNormalWS(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btWheelInfo_RaycastInfo_getContactNormalWS(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtWheelInfo_RaycastInfo_getContactNormalWS(obj, value.address());
     }
 
@@ -447,7 +447,7 @@ public class BTWheelInfo {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btWheelInfo_RaycastInfo_getContactPointWS(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btWheelInfo_RaycastInfo_getContactPointWS(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtWheelInfo_RaycastInfo_getContactPointWS(obj, value.address());
     }
 
@@ -472,7 +472,7 @@ public class BTWheelInfo {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btWheelInfo_RaycastInfo_getHardPointWS(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btWheelInfo_RaycastInfo_getHardPointWS(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtWheelInfo_RaycastInfo_getHardPointWS(obj, value.address());
     }
 
@@ -508,7 +508,7 @@ public class BTWheelInfo {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btWheelInfo_RaycastInfo_getWheelAxleWS(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btWheelInfo_RaycastInfo_getWheelAxleWS(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtWheelInfo_RaycastInfo_getWheelAxleWS(obj, value.address());
     }
 
@@ -522,7 +522,7 @@ public class BTWheelInfo {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btWheelInfo_RaycastInfo_getWheelDirectionWS(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btWheelInfo_RaycastInfo_getWheelDirectionWS(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtWheelInfo_RaycastInfo_getWheelDirectionWS(obj, value.address());
     }
 
@@ -536,7 +536,7 @@ public class BTWheelInfo {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btWheelInfo_RaycastInfo_setContactNormalWS(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btWheelInfo_RaycastInfo_setContactNormalWS(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtWheelInfo_RaycastInfo_setContactNormalWS(obj, value.address());
     }
 
@@ -550,7 +550,7 @@ public class BTWheelInfo {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btWheelInfo_RaycastInfo_setContactPointWS(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btWheelInfo_RaycastInfo_setContactPointWS(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtWheelInfo_RaycastInfo_setContactPointWS(obj, value.address());
     }
 
@@ -575,7 +575,7 @@ public class BTWheelInfo {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btWheelInfo_RaycastInfo_setHardPointWS(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btWheelInfo_RaycastInfo_setHardPointWS(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtWheelInfo_RaycastInfo_setHardPointWS(obj, value.address());
     }
 
@@ -609,7 +609,7 @@ public class BTWheelInfo {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btWheelInfo_RaycastInfo_setWheelAxleWS(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btWheelInfo_RaycastInfo_setWheelAxleWS(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtWheelInfo_RaycastInfo_setWheelAxleWS(obj, value.address());
     }
 
@@ -623,7 +623,7 @@ public class BTWheelInfo {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btWheelInfo_RaycastInfo_setWheelDirectionWS(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btWheelInfo_RaycastInfo_setWheelDirectionWS(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtWheelInfo_RaycastInfo_setWheelDirectionWS(obj, value.address());
     }
 
@@ -680,7 +680,7 @@ public class BTWheelInfo {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btWheelInfo_getChassisConnectionPointCS(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btWheelInfo_getChassisConnectionPointCS(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtWheelInfo_getChassisConnectionPointCS(obj, value.address());
     }
 
@@ -870,7 +870,7 @@ public class BTWheelInfo {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btWheelInfo_getWheelAxleCS(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btWheelInfo_getWheelAxleCS(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtWheelInfo_getWheelAxleCS(obj, value.address());
     }
 
@@ -884,7 +884,7 @@ public class BTWheelInfo {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btWheelInfo_getWheelDirectionCS(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btWheelInfo_getWheelDirectionCS(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtWheelInfo_getWheelDirectionCS(obj, value.address());
     }
 
@@ -976,7 +976,7 @@ public class BTWheelInfo {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btWheelInfo_setChassisConnectionPointCS(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btWheelInfo_setChassisConnectionPointCS(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtWheelInfo_setChassisConnectionPointCS(obj, value.address());
     }
 
@@ -1131,7 +1131,7 @@ public class BTWheelInfo {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btWheelInfo_setWheelAxleCS(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btWheelInfo_setWheelAxleCS(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtWheelInfo_setWheelAxleCS(obj, value.address());
     }
 
@@ -1145,7 +1145,7 @@ public class BTWheelInfo {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btWheelInfo_setWheelDirectionCS(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btWheelInfo_setWheelDirectionCS(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtWheelInfo_setWheelDirectionCS(obj, value.address());
     }
 

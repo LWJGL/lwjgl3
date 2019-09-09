@@ -69,7 +69,7 @@ public class BTCharacterControllerInterface {
         invokePPV(obj, dir, __functionAddress);
     }
 
-    public static void btCharacterControllerInterface_jump2(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 dir) {
+    public static void btCharacterControllerInterface_jump2(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 dir) {
         nbtCharacterControllerInterface_jump2(obj, dir.address());
     }
 
@@ -137,7 +137,7 @@ public class BTCharacterControllerInterface {
         invokePPV(obj, walkDirection, __functionAddress);
     }
 
-    public static void btCharacterControllerInterface_setWalkDirection(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 walkDirection) {
+    public static void btCharacterControllerInterface_setWalkDirection(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 walkDirection) {
         nbtCharacterControllerInterface_setWalkDirection(obj, walkDirection.address());
     }
 
@@ -151,7 +151,7 @@ public class BTCharacterControllerInterface {
         invokePPV(obj, velocity, timeInterval, __functionAddress);
     }
 
-    public static void btCharacterControllerInterface_setVelocityForTimeInterval(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 velocity, @NativeType("btScalar") float timeInterval) {
+    public static void btCharacterControllerInterface_setVelocityForTimeInterval(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 velocity, @NativeType("btScalar") float timeInterval) {
         nbtCharacterControllerInterface_setVelocityForTimeInterval(obj, velocity.address(), timeInterval);
     }
 
@@ -165,7 +165,7 @@ public class BTCharacterControllerInterface {
         invokePPV(obj, origin, __functionAddress);
     }
 
-    public static void btCharacterControllerInterface_warp(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 origin) {
+    public static void btCharacterControllerInterface_warp(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 origin) {
         nbtCharacterControllerInterface_warp(obj, origin.address());
     }
 

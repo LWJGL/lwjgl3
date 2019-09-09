@@ -44,7 +44,7 @@ public class BTConvexInternalShape {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btConvexInternalShape_getImplicitShapeDimensions(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btConvexInternalShape_getImplicitShapeDimensions(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtConvexInternalShape_getImplicitShapeDimensions(obj, value.address());
     }
 
@@ -58,7 +58,7 @@ public class BTConvexInternalShape {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btConvexInternalShape_getLocalScalingNV(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btConvexInternalShape_getLocalScalingNV(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtConvexInternalShape_getLocalScalingNV(obj, value.address());
     }
 
@@ -83,7 +83,7 @@ public class BTConvexInternalShape {
         invokePPV(obj, dimensions, __functionAddress);
     }
 
-    public static void btConvexInternalShape_setImplicitShapeDimensions(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 dimensions) {
+    public static void btConvexInternalShape_setImplicitShapeDimensions(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 dimensions) {
         nbtConvexInternalShape_setImplicitShapeDimensions(obj, dimensions.address());
     }
 
@@ -107,7 +107,7 @@ public class BTConvexInternalShape {
         invokePPV(obj, halfExtents, defaultMarginMultiplier, __functionAddress);
     }
 
-    public static void btConvexInternalShape_setSafeMargin2(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 halfExtents, @NativeType("btScalar") float defaultMarginMultiplier) {
+    public static void btConvexInternalShape_setSafeMargin2(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 halfExtents, @NativeType("btScalar") float defaultMarginMultiplier) {
         nbtConvexInternalShape_setSafeMargin2(obj, halfExtents.address(), defaultMarginMultiplier);
     }
 

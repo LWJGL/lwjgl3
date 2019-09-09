@@ -78,7 +78,7 @@ public class BTCollections {
         invokePPV(a, n, value, __functionAddress);
     }
 
-    public static void btVector3_array_at(@NativeType("btVector3 const *") ΒΤVector3 a, int n, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btVector3_array_at(@NativeType("btVector3 const *") BTVector3 a, int n, @NativeType("btVector3 *") BTVector3 value) {
         nbtVector3_array_at(a.address(), n, value.address());
     }
 
@@ -89,7 +89,7 @@ public class BTCollections {
         invokePPV(obj, n, value, __functionAddress);
     }
 
-    public static void btVector3_array_set(@NativeType("btVector3 *") ΒΤVector3 obj, int n, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btVector3_array_set(@NativeType("btVector3 *") BTVector3 obj, int n, @NativeType("btVector3 const *") BTVector3 value) {
         nbtVector3_array_set(obj.address(), n, value.address());
     }
 
@@ -103,7 +103,7 @@ public class BTCollections {
         invokePPV(obj, n, value, __functionAddress);
     }
 
-    public static void btAlignedObjectArray_btVector3_at(@NativeType("void *") long obj, int n, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btAlignedObjectArray_btVector3_at(@NativeType("void *") long obj, int n, @NativeType("btVector3 *") BTVector3 value) {
         nbtAlignedObjectArray_btVector3_at(obj, n, value.address());
     }
 
@@ -117,7 +117,7 @@ public class BTCollections {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btAlignedObjectArray_btVector3_push_back(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btAlignedObjectArray_btVector3_push_back(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtAlignedObjectArray_btVector3_push_back(obj, value.address());
     }
 
@@ -131,7 +131,7 @@ public class BTCollections {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btAlignedObjectArray_btVector3_push_back2(@NativeType("void *") long obj, @NativeType("btVector4 const *") ΒΤVector3 value) {
+    public static void btAlignedObjectArray_btVector3_push_back2(@NativeType("void *") long obj, @NativeType("btVector4 const *") BTVector3 value) {
         nbtAlignedObjectArray_btVector3_push_back2(obj, value.address());
     }
 
@@ -145,7 +145,7 @@ public class BTCollections {
         invokePPV(obj, n, value, __functionAddress);
     }
 
-    public static void btAlignedObjectArray_btVector3_set(@NativeType("void *") long obj, int n, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btAlignedObjectArray_btVector3_set(@NativeType("void *") long obj, int n, @NativeType("btVector3 const *") BTVector3 value) {
         nbtAlignedObjectArray_btVector3_set(obj, n, value.address());
     }
 

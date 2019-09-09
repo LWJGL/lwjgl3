@@ -106,7 +106,7 @@ public class BTManifoldPoint {
     }
 
     @NativeType("void *")
-    public static long btManifoldPoint_new2(@NativeType("btVector3 const *") ΒΤVector3 pointA, @NativeType("btVector3 const *") ΒΤVector3 pointB, @NativeType("btVector3 const *") ΒΤVector3 normal, @NativeType("btScalar") float distance) {
+    public static long btManifoldPoint_new2(@NativeType("btVector3 const *") BTVector3 pointA, @NativeType("btVector3 const *") BTVector3 pointB, @NativeType("btVector3 const *") BTVector3 normal, @NativeType("btScalar") float distance) {
         return nbtManifoldPoint_new2(pointA.address(), pointB.address(), normal.address(), distance);
     }
 
@@ -315,7 +315,7 @@ public class BTManifoldPoint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btManifoldPoint_getLateralFrictionDir1(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btManifoldPoint_getLateralFrictionDir1(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtManifoldPoint_getLateralFrictionDir1(obj, value.address());
     }
 
@@ -329,7 +329,7 @@ public class BTManifoldPoint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btManifoldPoint_getLateralFrictionDir2(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btManifoldPoint_getLateralFrictionDir2(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtManifoldPoint_getLateralFrictionDir2(obj, value.address());
     }
 
@@ -353,7 +353,7 @@ public class BTManifoldPoint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btManifoldPoint_getLocalPointA(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btManifoldPoint_getLocalPointA(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtManifoldPoint_getLocalPointA(obj, value.address());
     }
 
@@ -367,7 +367,7 @@ public class BTManifoldPoint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btManifoldPoint_getLocalPointB(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btManifoldPoint_getLocalPointB(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtManifoldPoint_getLocalPointB(obj, value.address());
     }
 
@@ -381,7 +381,7 @@ public class BTManifoldPoint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btManifoldPoint_getNormalWorldOnB(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btManifoldPoint_getNormalWorldOnB(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtManifoldPoint_getNormalWorldOnB(obj, value.address());
     }
 
@@ -415,7 +415,7 @@ public class BTManifoldPoint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btManifoldPoint_getPositionWorldOnA(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btManifoldPoint_getPositionWorldOnA(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtManifoldPoint_getPositionWorldOnA(obj, value.address());
     }
 
@@ -429,7 +429,7 @@ public class BTManifoldPoint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btManifoldPoint_getPositionWorldOnB(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btManifoldPoint_getPositionWorldOnB(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtManifoldPoint_getPositionWorldOnB(obj, value.address());
     }
 
@@ -634,7 +634,7 @@ public class BTManifoldPoint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btManifoldPoint_setLateralFrictionDir1(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btManifoldPoint_setLateralFrictionDir1(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtManifoldPoint_setLateralFrictionDir1(obj, value.address());
     }
 
@@ -648,7 +648,7 @@ public class BTManifoldPoint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btManifoldPoint_setLateralFrictionDir2(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btManifoldPoint_setLateralFrictionDir2(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtManifoldPoint_setLateralFrictionDir2(obj, value.address());
     }
 
@@ -672,7 +672,7 @@ public class BTManifoldPoint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btManifoldPoint_setLocalPointA(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btManifoldPoint_setLocalPointA(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtManifoldPoint_setLocalPointA(obj, value.address());
     }
 
@@ -686,7 +686,7 @@ public class BTManifoldPoint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btManifoldPoint_setLocalPointB(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btManifoldPoint_setLocalPointB(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtManifoldPoint_setLocalPointB(obj, value.address());
     }
 
@@ -700,7 +700,7 @@ public class BTManifoldPoint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btManifoldPoint_setNormalWorldOnB(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btManifoldPoint_setNormalWorldOnB(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtManifoldPoint_setNormalWorldOnB(obj, value.address());
     }
 
@@ -734,7 +734,7 @@ public class BTManifoldPoint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btManifoldPoint_setPositionWorldOnA(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btManifoldPoint_setPositionWorldOnA(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtManifoldPoint_setPositionWorldOnA(obj, value.address());
     }
 
@@ -748,7 +748,7 @@ public class BTManifoldPoint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btManifoldPoint_setPositionWorldOnB(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btManifoldPoint_setPositionWorldOnB(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtManifoldPoint_setPositionWorldOnB(obj, value.address());
     }
 

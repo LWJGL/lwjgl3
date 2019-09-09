@@ -61,7 +61,7 @@ public class BTStridingMeshInterface {
         invokePPPV(obj, aabbMin, aabbMax, __functionAddress);
     }
 
-    public static void btStridingMeshInterface_calculateAabbBruteForce(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 aabbMin, @NativeType("btVector3 *") ΒΤVector3 aabbMax) {
+    public static void btStridingMeshInterface_calculateAabbBruteForce(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 aabbMin, @NativeType("btVector3 *") BTVector3 aabbMax) {
         nbtStridingMeshInterface_calculateAabbBruteForce(obj, aabbMin.address(), aabbMax.address());
     }
 
@@ -143,7 +143,7 @@ public class BTStridingMeshInterface {
         invokePPPV(obj, aabbMin, aabbMax, __functionAddress);
     }
 
-    public static void btStridingMeshInterface_getPremadeAabb(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 aabbMin, @NativeType("btVector3 *") ΒΤVector3 aabbMax) {
+    public static void btStridingMeshInterface_getPremadeAabb(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 aabbMin, @NativeType("btVector3 *") BTVector3 aabbMax) {
         nbtStridingMeshInterface_getPremadeAabb(obj, aabbMin.address(), aabbMax.address());
     }
 
@@ -157,7 +157,7 @@ public class BTStridingMeshInterface {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btStridingMeshInterface_getScaling(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btStridingMeshInterface_getScaling(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtStridingMeshInterface_getScaling(obj, value.address());
     }
 
@@ -183,7 +183,7 @@ public class BTStridingMeshInterface {
         invokePPPPV(obj, callback, aabbMin, aabbMax, __functionAddress);
     }
 
-    public static void btStridingMeshInterface_InternalProcessAllTriangles(@NativeType("void *") long obj, @NativeType("void *") long callback, @NativeType("btVector3 const *") ΒΤVector3 aabbMin, @NativeType("btVector3 const *") ΒΤVector3 aabbMax) {
+    public static void btStridingMeshInterface_InternalProcessAllTriangles(@NativeType("void *") long obj, @NativeType("void *") long callback, @NativeType("btVector3 const *") BTVector3 aabbMin, @NativeType("btVector3 const *") BTVector3 aabbMax) {
         nbtStridingMeshInterface_InternalProcessAllTriangles(obj, callback, aabbMin.address(), aabbMax.address());
     }
 
@@ -236,7 +236,7 @@ public class BTStridingMeshInterface {
         invokePPPV(obj, aabbMin, aabbMax, __functionAddress);
     }
 
-    public static void btStridingMeshInterface_setPremadeAabb(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 aabbMin, @NativeType("btVector3 const *") ΒΤVector3 aabbMax) {
+    public static void btStridingMeshInterface_setPremadeAabb(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 aabbMin, @NativeType("btVector3 const *") BTVector3 aabbMax) {
         nbtStridingMeshInterface_setPremadeAabb(obj, aabbMin.address(), aabbMax.address());
     }
 
@@ -250,7 +250,7 @@ public class BTStridingMeshInterface {
         invokePPV(obj, scaling, __functionAddress);
     }
 
-    public static void btStridingMeshInterface_setScaling(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 scaling) {
+    public static void btStridingMeshInterface_setScaling(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 scaling) {
         nbtStridingMeshInterface_setScaling(obj, scaling.address());
     }
 

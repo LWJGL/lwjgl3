@@ -162,7 +162,7 @@ public class BTSliderConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSliderConstraint_getAncorInA(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSliderConstraint_getAncorInA(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSliderConstraint_getAncorInA(obj, value.address());
     }
 
@@ -176,7 +176,7 @@ public class BTSliderConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSliderConstraint_getAncorInB(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSliderConstraint_getAncorInB(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSliderConstraint_getAncorInB(obj, value.address());
     }
 
@@ -356,7 +356,7 @@ public class BTSliderConstraint {
         invokePPPPPPV(obj, info, transA, transB, linVelA, linVelB, rbAinvMass, rbBinvMass, __functionAddress);
     }
 
-    public static void btSliderConstraint_getInfo2NonVirtual(@NativeType("void *") long obj, @NativeType("void *") long info, @NativeType("btTransform const *") BTTransform transA, @NativeType("btTransform const *") BTTransform transB, @NativeType("btVector3 const *") ΒΤVector3 linVelA, @NativeType("btVector3 const *") ΒΤVector3 linVelB, @NativeType("btScalar") float rbAinvMass, @NativeType("btScalar") float rbBinvMass) {
+    public static void btSliderConstraint_getInfo2NonVirtual(@NativeType("void *") long obj, @NativeType("void *") long info, @NativeType("btTransform const *") BTTransform transA, @NativeType("btTransform const *") BTTransform transB, @NativeType("btVector3 const *") BTVector3 linVelA, @NativeType("btVector3 const *") BTVector3 linVelB, @NativeType("btScalar") float rbAinvMass, @NativeType("btScalar") float rbBinvMass) {
         nbtSliderConstraint_getInfo2NonVirtual(obj, info, transA.address(), transB.address(), linVelA.address(), linVelB.address(), rbAinvMass, rbBinvMass);
     }
 

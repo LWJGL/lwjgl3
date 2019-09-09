@@ -38,7 +38,7 @@ public class BTStaticPlaneShape {
     }
 
     @NativeType("void *")
-    public static long btStaticPlaneShape_new(@NativeType("btVector3 const *") ΒΤVector3 planeNormal, @NativeType("btScalar") float planeConstant) {
+    public static long btStaticPlaneShape_new(@NativeType("btVector3 const *") BTVector3 planeNormal, @NativeType("btScalar") float planeConstant) {
         return nbtStaticPlaneShape_new(planeNormal.address(), planeConstant);
     }
 
@@ -63,7 +63,7 @@ public class BTStaticPlaneShape {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btStaticPlaneShape_getPlaneNormal(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btStaticPlaneShape_getPlaneNormal(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtStaticPlaneShape_getPlaneNormal(obj, value.address());
     }
 

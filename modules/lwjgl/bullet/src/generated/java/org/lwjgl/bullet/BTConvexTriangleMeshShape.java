@@ -54,7 +54,7 @@ public class BTConvexTriangleMeshShape {
         invokePPPPV(obj, principal, inertia, volume, __functionAddress);
     }
 
-    public static void btConvexTriangleMeshShape_calculatePrincipalAxisTransform(@NativeType("void *") long obj, @NativeType("btTransform *") BTTransform principal, @NativeType("btVector3 *") ΒΤVector3 inertia, @NativeType("btScalar *") FloatBuffer volume) {
+    public static void btConvexTriangleMeshShape_calculatePrincipalAxisTransform(@NativeType("void *") long obj, @NativeType("btTransform *") BTTransform principal, @NativeType("btVector3 *") BTVector3 inertia, @NativeType("btScalar *") FloatBuffer volume) {
         if (CHECKS) {
             check(volume, 1);
         }

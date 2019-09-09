@@ -39,7 +39,7 @@ public class BTConcaveShape {
         invokePPPPV(obj, callback, aabbMin, aabbMax, __functionAddress);
     }
 
-    public static void btConcaveShape_processAllTriangles(@NativeType("void *") long obj, @NativeType("void *") long callback, @NativeType("btVector3 const *") ΒΤVector3 aabbMin, @NativeType("btVector3 const *") ΒΤVector3 aabbMax) {
+    public static void btConcaveShape_processAllTriangles(@NativeType("void *") long obj, @NativeType("void *") long callback, @NativeType("btVector3 const *") BTVector3 aabbMin, @NativeType("btVector3 const *") BTVector3 aabbMax) {
         nbtConcaveShape_processAllTriangles(obj, callback, aabbMin.address(), aabbMax.address());
     }
 

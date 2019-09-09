@@ -95,7 +95,7 @@ public class BTConvexHullShape {
         invokePPV(obj, point, recalculateLocalAabb, __functionAddress);
     }
 
-    public static void btConvexHullShape_addPoint(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 point, @NativeType("bool") boolean recalculateLocalAabb) {
+    public static void btConvexHullShape_addPoint(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 point, @NativeType("bool") boolean recalculateLocalAabb) {
         nbtConvexHullShape_addPoint(obj, point.address(), recalculateLocalAabb);
     }
 
@@ -119,7 +119,7 @@ public class BTConvexHullShape {
         invokePPV(obj, i, value, __functionAddress);
     }
 
-    public static void btConvexHullShape_getScaledPoint(@NativeType("void *") long obj, int i, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btConvexHullShape_getScaledPoint(@NativeType("void *") long obj, int i, @NativeType("btVector3 *") BTVector3 value) {
         nbtConvexHullShape_getScaledPoint(obj, i, value.address());
     }
 
@@ -135,9 +135,9 @@ public class BTConvexHullShape {
 
     @Nullable
     @NativeType("btVector3 *")
-    public static ΒΤVector3 btConvexHullShape_getUnscaledPoints(@NativeType("void *") long obj) {
+    public static BTVector3 btConvexHullShape_getUnscaledPoints(@NativeType("void *") long obj) {
         long __result = nbtConvexHullShape_getUnscaledPoints(obj);
-        return ΒΤVector3.createSafe(__result);
+        return BTVector3.createSafe(__result);
     }
 
     // --- [ btConvexHullShape_optimizeConvexHull ] ---

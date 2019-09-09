@@ -47,7 +47,7 @@ public class BTBox2dShape {
     }
 
     @NativeType("void *")
-    public static long btBox2dShape_new(@NativeType("btVector3 const *") ΒΤVector3 boxHalfExtents) {
+    public static long btBox2dShape_new(@NativeType("btVector3 const *") BTVector3 boxHalfExtents) {
         return nbtBox2dShape_new(boxHalfExtents.address());
     }
 
@@ -77,7 +77,7 @@ public class BTBox2dShape {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btBox2dShape_getCentroid(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btBox2dShape_getCentroid(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtBox2dShape_getCentroid(obj, value.address());
     }
 
@@ -91,7 +91,7 @@ public class BTBox2dShape {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btBox2dShape_getHalfExtentsWithMargin(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btBox2dShape_getHalfExtentsWithMargin(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtBox2dShape_getHalfExtentsWithMargin(obj, value.address());
     }
 
@@ -105,7 +105,7 @@ public class BTBox2dShape {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btBox2dShape_getHalfExtentsWithoutMargin(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btBox2dShape_getHalfExtentsWithoutMargin(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtBox2dShape_getHalfExtentsWithoutMargin(obj, value.address());
     }
 
@@ -121,9 +121,9 @@ public class BTBox2dShape {
 
     @Nullable
     @NativeType("btVector3 const *")
-    public static ΒΤVector3 btBox2dShape_getNormals(@NativeType("void *") long obj) {
+    public static BTVector3 btBox2dShape_getNormals(@NativeType("void *") long obj) {
         long __result = nbtBox2dShape_getNormals(obj);
-        return ΒΤVector3.createSafe(__result);
+        return BTVector3.createSafe(__result);
     }
 
     // --- [ btBox2dShape_getPlaneEquation ] ---
@@ -136,7 +136,7 @@ public class BTBox2dShape {
         invokePPV(obj, plane, i, __functionAddress);
     }
 
-    public static void btBox2dShape_getPlaneEquation(@NativeType("void *") long obj, @NativeType("btVector4 *") ΒΤVector3 plane, int i) {
+    public static void btBox2dShape_getPlaneEquation(@NativeType("void *") long obj, @NativeType("btVector4 *") BTVector3 plane, int i) {
         nbtBox2dShape_getPlaneEquation(obj, plane.address(), i);
     }
 
@@ -162,9 +162,9 @@ public class BTBox2dShape {
 
     @Nullable
     @NativeType("btVector3 const *")
-    public static ΒΤVector3 btBox2dShape_getVertices(@NativeType("void *") long obj) {
+    public static BTVector3 btBox2dShape_getVertices(@NativeType("void *") long obj) {
         long __result = nbtBox2dShape_getVertices(obj);
-        return ΒΤVector3.createSafe(__result);
+        return BTVector3.createSafe(__result);
     }
 
 }

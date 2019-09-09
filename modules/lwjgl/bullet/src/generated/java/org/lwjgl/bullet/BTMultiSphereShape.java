@@ -55,7 +55,7 @@ public class BTMultiSphereShape {
     }
 
     @NativeType("void *")
-    public static long btMultiSphereShape_new2(@NativeType("btVector3 const *") ΒΤVector3.Buffer positions, @NativeType("btScalar const *") FloatBuffer radi) {
+    public static long btMultiSphereShape_new2(@NativeType("btVector3 const *") BTVector3.Buffer positions, @NativeType("btScalar const *") FloatBuffer radi) {
         if (CHECKS) {
             check(radi, positions.remaining());
         }
@@ -82,7 +82,7 @@ public class BTMultiSphereShape {
         invokePPV(obj, index, value, __functionAddress);
     }
 
-    public static void btMultiSphereShape_getSpherePosition(@NativeType("void *") long obj, int index, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btMultiSphereShape_getSpherePosition(@NativeType("void *") long obj, int index, @NativeType("btVector3 *") BTVector3 value) {
         nbtMultiSphereShape_getSpherePosition(obj, index, value.address());
     }
 

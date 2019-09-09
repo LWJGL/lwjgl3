@@ -66,7 +66,7 @@ public class BTVehicleRaycaster {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btVehicleRaycaster_btVehicleRaycasterResult_getHitNormalInWorld(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btVehicleRaycaster_btVehicleRaycasterResult_getHitNormalInWorld(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtVehicleRaycaster_btVehicleRaycasterResult_getHitNormalInWorld(obj, value.address());
     }
 
@@ -80,7 +80,7 @@ public class BTVehicleRaycaster {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btVehicleRaycaster_btVehicleRaycasterResult_getHitPointInWorld(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btVehicleRaycaster_btVehicleRaycasterResult_getHitPointInWorld(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtVehicleRaycaster_btVehicleRaycasterResult_getHitPointInWorld(obj, value.address());
     }
 
@@ -104,7 +104,7 @@ public class BTVehicleRaycaster {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btVehicleRaycaster_btVehicleRaycasterResult_setHitNormalInWorld(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btVehicleRaycaster_btVehicleRaycasterResult_setHitNormalInWorld(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtVehicleRaycaster_btVehicleRaycasterResult_setHitNormalInWorld(obj, value.address());
     }
 
@@ -118,7 +118,7 @@ public class BTVehicleRaycaster {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btVehicleRaycaster_btVehicleRaycasterResult_setHitPointInWorld(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btVehicleRaycaster_btVehicleRaycasterResult_setHitPointInWorld(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtVehicleRaycaster_btVehicleRaycasterResult_setHitPointInWorld(obj, value.address());
     }
 
@@ -144,7 +144,7 @@ public class BTVehicleRaycaster {
     }
 
     @NativeType("void *")
-    public static long btVehicleRaycaster_castRay(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 from, @NativeType("btVector3 const *") ΒΤVector3 to, @NativeType("void *") long result) {
+    public static long btVehicleRaycaster_castRay(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 from, @NativeType("btVector3 const *") BTVector3 to, @NativeType("void *") long result) {
         return nbtVehicleRaycaster_castRay(obj, from.address(), to.address(), result);
     }
 

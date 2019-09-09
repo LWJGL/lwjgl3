@@ -134,7 +134,7 @@ public class BTDynamicsWorld {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btDynamicsWorld_getGravity(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btDynamicsWorld_getGravity(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtDynamicsWorld_getGravity(obj, value.address());
     }
 
@@ -234,7 +234,7 @@ public class BTDynamicsWorld {
         invokePPV(obj, gravity, __functionAddress);
     }
 
-    public static void btDynamicsWorld_setGravity(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 gravity) {
+    public static void btDynamicsWorld_setGravity(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 gravity) {
         nbtDynamicsWorld_setGravity(obj, gravity.address());
     }
 

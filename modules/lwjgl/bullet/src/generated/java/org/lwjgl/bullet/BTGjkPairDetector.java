@@ -85,7 +85,7 @@ public class BTGjkPairDetector {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btGjkPairDetector_getCachedSeparatingAxis(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btGjkPairDetector_getCachedSeparatingAxis(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtGjkPairDetector_getCachedSeparatingAxis(obj, value.address());
     }
 
@@ -173,7 +173,7 @@ public class BTGjkPairDetector {
         invokePPV(obj, seperatingAxis, __functionAddress);
     }
 
-    public static void btGjkPairDetector_setCachedSeparatingAxis(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 seperatingAxis) {
+    public static void btGjkPairDetector_setCachedSeparatingAxis(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 seperatingAxis) {
         nbtGjkPairDetector_setCachedSeparatingAxis(obj, seperatingAxis.address());
     }
 

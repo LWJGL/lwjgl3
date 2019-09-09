@@ -15,7 +15,7 @@ val BULLET_BINDING_DELEGATE = BULLET_BINDING.delegate("LibBullet.getLibrary()")
 
 val btScalar = typedef(float, "btScalar")
 
-val btVector3 = struct(Module.BULLET, "ΒΤVector3", nativeName = "btVector3") {
+val btVector3 = struct(Module.BULLET, "BTVector3", nativeName = "btVector3") {
     documentation = ""
 
     btScalar("m_floats", "")[4]

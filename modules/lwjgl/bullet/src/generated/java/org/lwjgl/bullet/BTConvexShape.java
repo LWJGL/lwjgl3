@@ -51,7 +51,7 @@ public class BTConvexShape {
         invokePPPV(obj, vectors, supportVerticesOut, numVectors, __functionAddress);
     }
 
-    public static void btConvexShape_batchedUnitVectorGetSupportingVertexWithoutMargin(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 vectors, @NativeType("btVector3 *") ΒΤVector3 supportVerticesOut, int numVectors) {
+    public static void btConvexShape_batchedUnitVectorGetSupportingVertexWithoutMargin(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 vectors, @NativeType("btVector3 *") BTVector3 supportVerticesOut, int numVectors) {
         nbtConvexShape_batchedUnitVectorGetSupportingVertexWithoutMargin(obj, vectors.address(), supportVerticesOut.address(), numVectors);
     }
 
@@ -65,7 +65,7 @@ public class BTConvexShape {
         invokePPPPV(obj, t, aabbMin, aabbMax, __functionAddress);
     }
 
-    public static void btConvexShape_getAabbNonVirtual(@NativeType("void *") long obj, @NativeType("btTransform const *") BTTransform t, @NativeType("btVector3 *") ΒΤVector3 aabbMin, @NativeType("btVector3 *") ΒΤVector3 aabbMax) {
+    public static void btConvexShape_getAabbNonVirtual(@NativeType("void *") long obj, @NativeType("btTransform const *") BTTransform t, @NativeType("btVector3 *") BTVector3 aabbMin, @NativeType("btVector3 *") BTVector3 aabbMax) {
         nbtConvexShape_getAabbNonVirtual(obj, t.address(), aabbMin.address(), aabbMax.address());
     }
 
@@ -79,7 +79,7 @@ public class BTConvexShape {
         invokePPPPV(obj, t, aabbMin, aabbMax, __functionAddress);
     }
 
-    public static void btConvexShape_getAabbSlow(@NativeType("void *") long obj, @NativeType("btTransform const *") BTTransform t, @NativeType("btVector3 *") ΒΤVector3 aabbMin, @NativeType("btVector3 *") ΒΤVector3 aabbMax) {
+    public static void btConvexShape_getAabbSlow(@NativeType("void *") long obj, @NativeType("btTransform const *") BTTransform t, @NativeType("btVector3 *") BTVector3 aabbMin, @NativeType("btVector3 *") BTVector3 aabbMax) {
         nbtConvexShape_getAabbSlow(obj, t.address(), aabbMin.address(), aabbMax.address());
     }
 
@@ -114,7 +114,7 @@ public class BTConvexShape {
         invokePPV(obj, index, penetrationVector, __functionAddress);
     }
 
-    public static void btConvexShape_getPreferredPenetrationDirection(@NativeType("void *") long obj, int index, @NativeType("btVector3 *") ΒΤVector3 penetrationVector) {
+    public static void btConvexShape_getPreferredPenetrationDirection(@NativeType("void *") long obj, int index, @NativeType("btVector3 *") BTVector3 penetrationVector) {
         nbtConvexShape_getPreferredPenetrationDirection(obj, index, penetrationVector.address());
     }
 
@@ -128,7 +128,7 @@ public class BTConvexShape {
         invokePPPV(obj, vec, value, __functionAddress);
     }
 
-    public static void btConvexShape_localGetSupportingVertex(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 vec, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btConvexShape_localGetSupportingVertex(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 vec, @NativeType("btVector3 *") BTVector3 value) {
         nbtConvexShape_localGetSupportingVertex(obj, vec.address(), value.address());
     }
 
@@ -142,7 +142,7 @@ public class BTConvexShape {
         invokePPPV(obj, vec, value, __functionAddress);
     }
 
-    public static void btConvexShape_localGetSupportingVertexWithoutMargin(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 vec, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btConvexShape_localGetSupportingVertexWithoutMargin(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 vec, @NativeType("btVector3 *") BTVector3 value) {
         nbtConvexShape_localGetSupportingVertexWithoutMargin(obj, vec.address(), value.address());
     }
 
@@ -156,7 +156,7 @@ public class BTConvexShape {
         invokePPPV(obj, vec, value, __functionAddress);
     }
 
-    public static void btConvexShape_localGetSupportVertexNonVirtual(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 vec, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btConvexShape_localGetSupportVertexNonVirtual(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 vec, @NativeType("btVector3 *") BTVector3 value) {
         nbtConvexShape_localGetSupportVertexNonVirtual(obj, vec.address(), value.address());
     }
 
@@ -170,7 +170,7 @@ public class BTConvexShape {
         invokePPPV(obj, vec, value, __functionAddress);
     }
 
-    public static void btConvexShape_localGetSupportVertexWithoutMarginNonVirtual(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 vec, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btConvexShape_localGetSupportVertexWithoutMarginNonVirtual(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 vec, @NativeType("btVector3 *") BTVector3 value) {
         nbtConvexShape_localGetSupportVertexWithoutMarginNonVirtual(obj, vec.address(), value.address());
     }
 
@@ -184,7 +184,7 @@ public class BTConvexShape {
         invokePPPPPPPV(obj, trans, dir, minProj, maxProj, witnesPtMin, witnesPtMax, __functionAddress);
     }
 
-    public static void btConvexShape_project(@NativeType("void *") long obj, @NativeType("btTransform const *") BTTransform trans, @NativeType("btVector3 const *") ΒΤVector3 dir, @NativeType("btScalar *") FloatBuffer minProj, @NativeType("btScalar *") FloatBuffer maxProj, @NativeType("btVector3 *") ΒΤVector3 witnesPtMin, @NativeType("btVector3 *") ΒΤVector3 witnesPtMax) {
+    public static void btConvexShape_project(@NativeType("void *") long obj, @NativeType("btTransform const *") BTTransform trans, @NativeType("btVector3 const *") BTVector3 dir, @NativeType("btScalar *") FloatBuffer minProj, @NativeType("btScalar *") FloatBuffer maxProj, @NativeType("btVector3 *") BTVector3 witnesPtMin, @NativeType("btVector3 *") BTVector3 witnesPtMax) {
         if (CHECKS) {
             check(minProj, 1);
             check(maxProj, 1);

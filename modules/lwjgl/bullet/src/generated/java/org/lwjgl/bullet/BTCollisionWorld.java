@@ -161,7 +161,7 @@ public class BTCollisionWorld {
     }
 
     @NativeType("void *")
-    public static long btCollisionWorld_AllHitsRayResultCallback_new(@NativeType("btVector3 const *") ΒΤVector3 rayFromWorld, @NativeType("btVector3 const *") ΒΤVector3 rayToWorld) {
+    public static long btCollisionWorld_AllHitsRayResultCallback_new(@NativeType("btVector3 const *") BTVector3 rayFromWorld, @NativeType("btVector3 const *") BTVector3 rayToWorld) {
         return nbtCollisionWorld_AllHitsRayResultCallback_new(rayFromWorld.address(), rayToWorld.address());
     }
 
@@ -197,7 +197,7 @@ public class BTCollisionWorld {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionWorld_AllHitsRayResultCallback_getRayFromWorld(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btCollisionWorld_AllHitsRayResultCallback_getRayFromWorld(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtCollisionWorld_AllHitsRayResultCallback_getRayFromWorld(obj, value.address());
     }
 
@@ -211,7 +211,7 @@ public class BTCollisionWorld {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionWorld_AllHitsRayResultCallback_getRayToWorld(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btCollisionWorld_AllHitsRayResultCallback_getRayToWorld(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtCollisionWorld_AllHitsRayResultCallback_getRayToWorld(obj, value.address());
     }
 
@@ -225,7 +225,7 @@ public class BTCollisionWorld {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionWorld_AllHitsRayResultCallback_setRayFromWorld(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btCollisionWorld_AllHitsRayResultCallback_setRayFromWorld(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtCollisionWorld_AllHitsRayResultCallback_setRayFromWorld(obj, value.address());
     }
 
@@ -239,7 +239,7 @@ public class BTCollisionWorld {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionWorld_AllHitsRayResultCallback_setRayToWorld(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btCollisionWorld_AllHitsRayResultCallback_setRayToWorld(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtCollisionWorld_AllHitsRayResultCallback_setRayToWorld(obj, value.address());
     }
 
@@ -251,7 +251,7 @@ public class BTCollisionWorld {
     }
 
     @NativeType("void *")
-    public static long btCollisionWorld_ClosestConvexResultCallback_new(@NativeType("btVector3 const *") ΒΤVector3 convexFromWorld, @NativeType("btVector3 const *") ΒΤVector3 convexToWorld) {
+    public static long btCollisionWorld_ClosestConvexResultCallback_new(@NativeType("btVector3 const *") BTVector3 convexFromWorld, @NativeType("btVector3 const *") BTVector3 convexToWorld) {
         return nbtCollisionWorld_ClosestConvexResultCallback_new(convexFromWorld.address(), convexToWorld.address());
     }
 
@@ -265,7 +265,7 @@ public class BTCollisionWorld {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionWorld_ClosestConvexResultCallback_getConvexFromWorld(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btCollisionWorld_ClosestConvexResultCallback_getConvexFromWorld(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtCollisionWorld_ClosestConvexResultCallback_getConvexFromWorld(obj, value.address());
     }
 
@@ -279,7 +279,7 @@ public class BTCollisionWorld {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionWorld_ClosestConvexResultCallback_getConvexToWorld(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btCollisionWorld_ClosestConvexResultCallback_getConvexToWorld(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtCollisionWorld_ClosestConvexResultCallback_getConvexToWorld(obj, value.address());
     }
 
@@ -304,7 +304,7 @@ public class BTCollisionWorld {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionWorld_ClosestConvexResultCallback_getHitNormalWorld(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btCollisionWorld_ClosestConvexResultCallback_getHitNormalWorld(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtCollisionWorld_ClosestConvexResultCallback_getHitNormalWorld(obj, value.address());
     }
 
@@ -318,7 +318,7 @@ public class BTCollisionWorld {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionWorld_ClosestConvexResultCallback_getHitPointWorld(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btCollisionWorld_ClosestConvexResultCallback_getHitPointWorld(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtCollisionWorld_ClosestConvexResultCallback_getHitPointWorld(obj, value.address());
     }
 
@@ -332,7 +332,7 @@ public class BTCollisionWorld {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionWorld_ClosestConvexResultCallback_setConvexFromWorld(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btCollisionWorld_ClosestConvexResultCallback_setConvexFromWorld(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtCollisionWorld_ClosestConvexResultCallback_setConvexFromWorld(obj, value.address());
     }
 
@@ -346,7 +346,7 @@ public class BTCollisionWorld {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionWorld_ClosestConvexResultCallback_setConvexToWorld(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btCollisionWorld_ClosestConvexResultCallback_setConvexToWorld(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtCollisionWorld_ClosestConvexResultCallback_setConvexToWorld(obj, value.address());
     }
 
@@ -371,7 +371,7 @@ public class BTCollisionWorld {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionWorld_ClosestConvexResultCallback_setHitNormalWorld(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btCollisionWorld_ClosestConvexResultCallback_setHitNormalWorld(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtCollisionWorld_ClosestConvexResultCallback_setHitNormalWorld(obj, value.address());
     }
 
@@ -385,7 +385,7 @@ public class BTCollisionWorld {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionWorld_ClosestConvexResultCallback_setHitPointWorld(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btCollisionWorld_ClosestConvexResultCallback_setHitPointWorld(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtCollisionWorld_ClosestConvexResultCallback_setHitPointWorld(obj, value.address());
     }
 
@@ -397,7 +397,7 @@ public class BTCollisionWorld {
     }
 
     @NativeType("void *")
-    public static long btCollisionWorld_ClosestRayResultCallback_new(@NativeType("btVector3 const *") ΒΤVector3 rayFromWorld, @NativeType("btVector3 const *") ΒΤVector3 rayToWorld) {
+    public static long btCollisionWorld_ClosestRayResultCallback_new(@NativeType("btVector3 const *") BTVector3 rayFromWorld, @NativeType("btVector3 const *") BTVector3 rayToWorld) {
         return nbtCollisionWorld_ClosestRayResultCallback_new(rayFromWorld.address(), rayToWorld.address());
     }
 
@@ -411,7 +411,7 @@ public class BTCollisionWorld {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionWorld_ClosestRayResultCallback_getHitNormalWorld(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btCollisionWorld_ClosestRayResultCallback_getHitNormalWorld(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtCollisionWorld_ClosestRayResultCallback_getHitNormalWorld(obj, value.address());
     }
 
@@ -425,7 +425,7 @@ public class BTCollisionWorld {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionWorld_ClosestRayResultCallback_getHitPointWorld(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btCollisionWorld_ClosestRayResultCallback_getHitPointWorld(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtCollisionWorld_ClosestRayResultCallback_getHitPointWorld(obj, value.address());
     }
 
@@ -439,7 +439,7 @@ public class BTCollisionWorld {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionWorld_ClosestRayResultCallback_getRayFromWorld(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btCollisionWorld_ClosestRayResultCallback_getRayFromWorld(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtCollisionWorld_ClosestRayResultCallback_getRayFromWorld(obj, value.address());
     }
 
@@ -453,7 +453,7 @@ public class BTCollisionWorld {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionWorld_ClosestRayResultCallback_getRayToWorld(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btCollisionWorld_ClosestRayResultCallback_getRayToWorld(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtCollisionWorld_ClosestRayResultCallback_getRayToWorld(obj, value.address());
     }
 
@@ -467,7 +467,7 @@ public class BTCollisionWorld {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionWorld_ClosestRayResultCallback_setHitNormalWorld(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btCollisionWorld_ClosestRayResultCallback_setHitNormalWorld(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtCollisionWorld_ClosestRayResultCallback_setHitNormalWorld(obj, value.address());
     }
 
@@ -481,7 +481,7 @@ public class BTCollisionWorld {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionWorld_ClosestRayResultCallback_setHitPointWorld(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btCollisionWorld_ClosestRayResultCallback_setHitPointWorld(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtCollisionWorld_ClosestRayResultCallback_setHitPointWorld(obj, value.address());
     }
 
@@ -495,7 +495,7 @@ public class BTCollisionWorld {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionWorld_ClosestRayResultCallback_setRayFromWorld(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btCollisionWorld_ClosestRayResultCallback_setRayFromWorld(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtCollisionWorld_ClosestRayResultCallback_setRayFromWorld(obj, value.address());
     }
 
@@ -509,7 +509,7 @@ public class BTCollisionWorld {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionWorld_ClosestRayResultCallback_setRayToWorld(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btCollisionWorld_ClosestRayResultCallback_setRayToWorld(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtCollisionWorld_ClosestRayResultCallback_setRayToWorld(obj, value.address());
     }
 
@@ -776,7 +776,7 @@ public class BTCollisionWorld {
     }
 
     @NativeType("void *")
-    public static long btCollisionWorld_LocalConvexResult_new(@NativeType("void *") long hitCollisionObject, @NativeType("void *") long localShapeInfo, @NativeType("btVector3 const *") ΒΤVector3 hitNormalLocal, @NativeType("btVector3 const *") ΒΤVector3 hitPointLocal, @NativeType("btScalar") float hitFraction) {
+    public static long btCollisionWorld_LocalConvexResult_new(@NativeType("void *") long hitCollisionObject, @NativeType("void *") long localShapeInfo, @NativeType("btVector3 const *") BTVector3 hitNormalLocal, @NativeType("btVector3 const *") BTVector3 hitPointLocal, @NativeType("btScalar") float hitFraction) {
         return nbtCollisionWorld_LocalConvexResult_new(hitCollisionObject, localShapeInfo, hitNormalLocal.address(), hitPointLocal.address(), hitFraction);
     }
 
@@ -812,7 +812,7 @@ public class BTCollisionWorld {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionWorld_LocalConvexResult_getHitNormalLocal(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btCollisionWorld_LocalConvexResult_getHitNormalLocal(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtCollisionWorld_LocalConvexResult_getHitNormalLocal(obj, value.address());
     }
 
@@ -826,7 +826,7 @@ public class BTCollisionWorld {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionWorld_LocalConvexResult_getHitPointLocal(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btCollisionWorld_LocalConvexResult_getHitPointLocal(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtCollisionWorld_LocalConvexResult_getHitPointLocal(obj, value.address());
     }
 
@@ -872,7 +872,7 @@ public class BTCollisionWorld {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionWorld_LocalConvexResult_setHitNormalLocal(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btCollisionWorld_LocalConvexResult_setHitNormalLocal(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtCollisionWorld_LocalConvexResult_setHitNormalLocal(obj, value.address());
     }
 
@@ -886,7 +886,7 @@ public class BTCollisionWorld {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionWorld_LocalConvexResult_setHitPointLocal(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btCollisionWorld_LocalConvexResult_setHitPointLocal(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtCollisionWorld_LocalConvexResult_setHitPointLocal(obj, value.address());
     }
 
@@ -923,7 +923,7 @@ public class BTCollisionWorld {
     }
 
     @NativeType("void *")
-    public static long btCollisionWorld_LocalRayResult_new(@NativeType("void *") long collisionObject, @NativeType("void *") long localShapeInfo, @NativeType("btVector3 const *") ΒΤVector3 hitNormalLocal, @NativeType("btScalar") float hitFraction) {
+    public static long btCollisionWorld_LocalRayResult_new(@NativeType("void *") long collisionObject, @NativeType("void *") long localShapeInfo, @NativeType("btVector3 const *") BTVector3 hitNormalLocal, @NativeType("btScalar") float hitFraction) {
         return nbtCollisionWorld_LocalRayResult_new(collisionObject, localShapeInfo, hitNormalLocal.address(), hitFraction);
     }
 
@@ -959,7 +959,7 @@ public class BTCollisionWorld {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionWorld_LocalRayResult_getHitNormalLocal(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btCollisionWorld_LocalRayResult_getHitNormalLocal(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtCollisionWorld_LocalRayResult_getHitNormalLocal(obj, value.address());
     }
 
@@ -1005,7 +1005,7 @@ public class BTCollisionWorld {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionWorld_LocalRayResult_setHitNormalLocal(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btCollisionWorld_LocalRayResult_setHitNormalLocal(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtCollisionWorld_LocalRayResult_setHitNormalLocal(obj, value.address());
     }
 
@@ -1369,7 +1369,7 @@ public class BTCollisionWorld {
         invokePPPPV(obj, worldTransform, shape, color, __functionAddress);
     }
 
-    public static void btCollisionWorld_debugDrawObject(@NativeType("void *") long obj, @NativeType("btTransform const *") BTTransform worldTransform, @NativeType("void *") long shape, @NativeType("btVector3 const *") ΒΤVector3 color) {
+    public static void btCollisionWorld_debugDrawObject(@NativeType("void *") long obj, @NativeType("btTransform const *") BTTransform worldTransform, @NativeType("void *") long shape, @NativeType("btVector3 const *") BTVector3 color) {
         nbtCollisionWorld_debugDrawObject(obj, worldTransform.address(), shape, color.address());
     }
 
@@ -1524,7 +1524,7 @@ public class BTCollisionWorld {
         invokePPPPV(obj, rayFromWorld, rayToWorld, resultCallback, __functionAddress);
     }
 
-    public static void btCollisionWorld_rayTest(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 rayFromWorld, @NativeType("btVector3 const *") ΒΤVector3 rayToWorld, @NativeType("void *") long resultCallback) {
+    public static void btCollisionWorld_rayTest(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 rayFromWorld, @NativeType("btVector3 const *") BTVector3 rayToWorld, @NativeType("void *") long resultCallback) {
         nbtCollisionWorld_rayTest(obj, rayFromWorld.address(), rayToWorld.address(), resultCallback);
     }
 

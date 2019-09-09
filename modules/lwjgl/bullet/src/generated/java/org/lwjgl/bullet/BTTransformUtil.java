@@ -47,7 +47,7 @@ public class BTTransformUtil {
         invokePPPPV(transform0, transform1, axis, angle, __functionAddress);
     }
 
-    public static void btTransformUtil_calculateDiffAxisAngle(@NativeType("btTransform const *") BTTransform transform0, @NativeType("btTransform const *") BTTransform transform1, @NativeType("btVector3 *") ΒΤVector3 axis, @NativeType("btScalar *") FloatBuffer angle) {
+    public static void btTransformUtil_calculateDiffAxisAngle(@NativeType("btTransform const *") BTTransform transform0, @NativeType("btTransform const *") BTTransform transform1, @NativeType("btVector3 *") BTVector3 axis, @NativeType("btScalar *") FloatBuffer angle) {
         if (CHECKS) {
             check(angle, 1);
         }
@@ -61,7 +61,7 @@ public class BTTransformUtil {
         invokePPPPV(orn0, orn1a, axis, angle, __functionAddress);
     }
 
-    public static void btTransformUtil_calculateDiffAxisAngleQuaternion(@NativeType("btQuaternion const *") ΒΤVector3 orn0, @NativeType("btQuaternion const *") ΒΤVector3 orn1a, @NativeType("btVector3 *") ΒΤVector3 axis, @NativeType("btScalar *") FloatBuffer angle) {
+    public static void btTransformUtil_calculateDiffAxisAngleQuaternion(@NativeType("btQuaternion const *") BTVector3 orn0, @NativeType("btQuaternion const *") BTVector3 orn1a, @NativeType("btVector3 *") BTVector3 axis, @NativeType("btScalar *") FloatBuffer angle) {
         if (CHECKS) {
             check(angle, 1);
         }
@@ -75,7 +75,7 @@ public class BTTransformUtil {
         invokePPPPV(transform0, transform1, timeStep, linVel, angVel, __functionAddress);
     }
 
-    public static void btTransformUtil_calculateVelocity(@NativeType("btTransform const *") BTTransform transform0, @NativeType("btTransform const *") BTTransform transform1, @NativeType("btScalar") float timeStep, @NativeType("btVector3 *") ΒΤVector3 linVel, @NativeType("btVector3 *") ΒΤVector3 angVel) {
+    public static void btTransformUtil_calculateVelocity(@NativeType("btTransform const *") BTTransform transform0, @NativeType("btTransform const *") BTTransform transform1, @NativeType("btScalar") float timeStep, @NativeType("btVector3 *") BTVector3 linVel, @NativeType("btVector3 *") BTVector3 angVel) {
         nbtTransformUtil_calculateVelocity(transform0.address(), transform1.address(), timeStep, linVel.address(), angVel.address());
     }
 
@@ -86,7 +86,7 @@ public class BTTransformUtil {
         invokePPPPPPV(pos0, pos1, orn0, orn1, timeStep, linVel, angVel, __functionAddress);
     }
 
-    public static void btTransformUtil_calculateVelocityQuaternion(@NativeType("btVector3 const *") ΒΤVector3 pos0, @NativeType("btVector3 const *") ΒΤVector3 pos1, @NativeType("btQuaternion const *") ΒΤVector3 orn0, @NativeType("btQuaternion const *") ΒΤVector3 orn1, @NativeType("btScalar") float timeStep, @NativeType("btVector3 *") ΒΤVector3 linVel, @NativeType("btVector3 *") ΒΤVector3 angVel) {
+    public static void btTransformUtil_calculateVelocityQuaternion(@NativeType("btVector3 const *") BTVector3 pos0, @NativeType("btVector3 const *") BTVector3 pos1, @NativeType("btQuaternion const *") BTVector3 orn0, @NativeType("btQuaternion const *") BTVector3 orn1, @NativeType("btScalar") float timeStep, @NativeType("btVector3 *") BTVector3 linVel, @NativeType("btVector3 *") BTVector3 angVel) {
         nbtTransformUtil_calculateVelocityQuaternion(pos0.address(), pos1.address(), orn0.address(), orn1.address(), timeStep, linVel.address(), angVel.address());
     }
 
@@ -97,7 +97,7 @@ public class BTTransformUtil {
         invokePPPPV(curTrans, linvel, angvel, timeStep, predictedTransform, __functionAddress);
     }
 
-    public static void btTransformUtil_integrateTransform(@NativeType("btTransform const *") BTTransform curTrans, @NativeType("btVector3 const *") ΒΤVector3 linvel, @NativeType("btVector3 const *") ΒΤVector3 angvel, @NativeType("btScalar") float timeStep, @NativeType("btTransform *") BTTransform predictedTransform) {
+    public static void btTransformUtil_integrateTransform(@NativeType("btTransform const *") BTTransform curTrans, @NativeType("btVector3 const *") BTVector3 linvel, @NativeType("btVector3 const *") BTVector3 angvel, @NativeType("btScalar") float timeStep, @NativeType("btTransform *") BTTransform predictedTransform) {
         nbtTransformUtil_integrateTransform(curTrans.address(), linvel.address(), angvel.address(), timeStep, predictedTransform.address());
     }
 
@@ -130,7 +130,7 @@ public class BTTransformUtil {
         invokePPPPV(obj, separatingVector, separatingDistance, transA, transB, __functionAddress);
     }
 
-    public static void btConvexSeparatingDistanceUtil_initSeparatingDistance(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 separatingVector, @NativeType("btScalar") float separatingDistance, @NativeType("btTransform const *") BTTransform transA, @NativeType("btTransform const *") BTTransform transB) {
+    public static void btConvexSeparatingDistanceUtil_initSeparatingDistance(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 separatingVector, @NativeType("btScalar") float separatingDistance, @NativeType("btTransform const *") BTTransform transA, @NativeType("btTransform const *") BTTransform transB) {
         nbtConvexSeparatingDistanceUtil_initSeparatingDistance(obj, separatingVector.address(), separatingDistance, transA.address(), transB.address());
     }
 

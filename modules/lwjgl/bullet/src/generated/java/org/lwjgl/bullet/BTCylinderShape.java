@@ -45,7 +45,7 @@ public class BTCylinderShape {
     }
 
     @NativeType("void *")
-    public static long btCylinderShape_new(@NativeType("btVector3 const *") ΒΤVector3 halfExtents) {
+    public static long btCylinderShape_new(@NativeType("btVector3 const *") BTVector3 halfExtents) {
         return nbtCylinderShape_new(halfExtents.address());
     }
 
@@ -67,7 +67,7 @@ public class BTCylinderShape {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCylinderShape_getHalfExtentsWithMargin(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btCylinderShape_getHalfExtentsWithMargin(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtCylinderShape_getHalfExtentsWithMargin(obj, value.address());
     }
 
@@ -81,7 +81,7 @@ public class BTCylinderShape {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCylinderShape_getHalfExtentsWithoutMargin(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btCylinderShape_getHalfExtentsWithoutMargin(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtCylinderShape_getHalfExtentsWithoutMargin(obj, value.address());
     }
 
@@ -114,7 +114,7 @@ public class BTCylinderShape {
     }
 
     @NativeType("void *")
-    public static long btCylinderShapeX_new(@NativeType("btVector3 const *") ΒΤVector3 halfExtents) {
+    public static long btCylinderShapeX_new(@NativeType("btVector3 const *") BTVector3 halfExtents) {
         return nbtCylinderShapeX_new(halfExtents.address());
     }
 
@@ -134,7 +134,7 @@ public class BTCylinderShape {
     }
 
     @NativeType("void *")
-    public static long btCylinderShapeZ_new(@NativeType("btVector3 const *") ΒΤVector3 halfExtents) {
+    public static long btCylinderShapeZ_new(@NativeType("btVector3 const *") BTVector3 halfExtents) {
         return nbtCylinderShapeZ_new(halfExtents.address());
     }
 

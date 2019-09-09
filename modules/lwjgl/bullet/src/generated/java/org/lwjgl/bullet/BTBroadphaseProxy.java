@@ -69,7 +69,7 @@ public class BTBroadphaseProxy {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btBroadphaseProxy_getAabbMax(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btBroadphaseProxy_getAabbMax(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtBroadphaseProxy_getAabbMax(obj, value.address());
     }
 
@@ -83,7 +83,7 @@ public class BTBroadphaseProxy {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btBroadphaseProxy_getAabbMin(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btBroadphaseProxy_getAabbMin(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtBroadphaseProxy_getAabbMin(obj, value.address());
     }
 
@@ -212,7 +212,7 @@ public class BTBroadphaseProxy {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btBroadphaseProxy_setAabbMax(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btBroadphaseProxy_setAabbMax(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtBroadphaseProxy_setAabbMax(obj, value.address());
     }
 
@@ -226,7 +226,7 @@ public class BTBroadphaseProxy {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btBroadphaseProxy_setAabbMin(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btBroadphaseProxy_setAabbMin(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtBroadphaseProxy_setAabbMin(obj, value.address());
     }
 

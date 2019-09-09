@@ -60,7 +60,7 @@ public class BTPolyhedralConvexShape {
         invokePPPV(obj, i, pa, pb, __functionAddress);
     }
 
-    public static void btPolyhedralConvexShape_getEdge(@NativeType("void *") long obj, int i, @NativeType("btVector3 *") ΒΤVector3 pa, @NativeType("btVector3 *") ΒΤVector3 pb) {
+    public static void btPolyhedralConvexShape_getEdge(@NativeType("void *") long obj, int i, @NativeType("btVector3 *") BTVector3 pa, @NativeType("btVector3 *") BTVector3 pb) {
         nbtPolyhedralConvexShape_getEdge(obj, i, pa.address(), pb.address());
     }
 
@@ -104,7 +104,7 @@ public class BTPolyhedralConvexShape {
         invokePPPV(obj, planeNormal, planeSupport, i, __functionAddress);
     }
 
-    public static void btPolyhedralConvexShape_getPlane(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 planeNormal, @NativeType("btVector3 *") ΒΤVector3 planeSupport, int i) {
+    public static void btPolyhedralConvexShape_getPlane(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 planeNormal, @NativeType("btVector3 *") BTVector3 planeSupport, int i) {
         nbtPolyhedralConvexShape_getPlane(obj, planeNormal.address(), planeSupport.address(), i);
     }
 
@@ -118,7 +118,7 @@ public class BTPolyhedralConvexShape {
         invokePPV(obj, i, vtx, __functionAddress);
     }
 
-    public static void btPolyhedralConvexShape_getVertex(@NativeType("void *") long obj, int i, @NativeType("btVector3 *") ΒΤVector3 vtx) {
+    public static void btPolyhedralConvexShape_getVertex(@NativeType("void *") long obj, int i, @NativeType("btVector3 *") BTVector3 vtx) {
         nbtPolyhedralConvexShape_getVertex(obj, i, vtx.address());
     }
 
@@ -144,7 +144,7 @@ public class BTPolyhedralConvexShape {
     }
 
     @NativeType("bool")
-    public static boolean btPolyhedralConvexShape_isInside(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 pt, @NativeType("btScalar") float tolerance) {
+    public static boolean btPolyhedralConvexShape_isInside(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 pt, @NativeType("btScalar") float tolerance) {
         return nbtPolyhedralConvexShape_isInside(obj, pt.address(), tolerance);
     }
 
@@ -169,7 +169,7 @@ public class BTPolyhedralConvexShape {
         invokePPPPV(obj, trans, aabbMin, aabbMax, margin, __functionAddress);
     }
 
-    public static void btPolyhedralConvexAabbCachingShape_getNonvirtualAabb(@NativeType("void *") long obj, @NativeType("btTransform const *") BTTransform trans, @NativeType("btVector3 *") ΒΤVector3 aabbMin, @NativeType("btVector3 *") ΒΤVector3 aabbMax, @NativeType("btScalar") float margin) {
+    public static void btPolyhedralConvexAabbCachingShape_getNonvirtualAabb(@NativeType("void *") long obj, @NativeType("btTransform const *") BTTransform trans, @NativeType("btVector3 *") BTVector3 aabbMin, @NativeType("btVector3 *") BTVector3 aabbMax, @NativeType("btScalar") float margin) {
         nbtPolyhedralConvexAabbCachingShape_getNonvirtualAabb(obj, trans.address(), aabbMin.address(), aabbMax.address(), margin);
     }
 

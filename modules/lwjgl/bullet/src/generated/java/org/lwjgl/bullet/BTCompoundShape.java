@@ -211,7 +211,7 @@ public class BTCompoundShape {
         invokePPPPV(obj, masses, principal, inertia, __functionAddress);
     }
 
-    public static void btCompoundShape_calculatePrincipalAxisTransform(@NativeType("void *") long obj, @NativeType("btScalar *") FloatBuffer masses, @NativeType("btTransform *") BTTransform principal, @NativeType("btVector3 *") ΒΤVector3 inertia) {
+    public static void btCompoundShape_calculatePrincipalAxisTransform(@NativeType("void *") long obj, @NativeType("btScalar *") FloatBuffer masses, @NativeType("btTransform *") BTTransform principal, @NativeType("btVector3 *") BTVector3 inertia) {
         nbtCompoundShape_calculatePrincipalAxisTransform(obj, memAddress(masses), principal.address(), inertia.address());
     }
 

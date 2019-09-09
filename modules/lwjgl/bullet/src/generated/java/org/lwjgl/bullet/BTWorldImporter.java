@@ -116,7 +116,7 @@ public class BTWorldImporter {
     }
 
     @NativeType("void *")
-    public static long btWorldImporter_createBoxShape(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 halfExtents) {
+    public static long btWorldImporter_createBoxShape(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 halfExtents) {
         return nbtWorldImporter_createBoxShape(obj, halfExtents.address());
     }
 
@@ -343,7 +343,7 @@ public class BTWorldImporter {
     }
 
     @NativeType("void *")
-    public static long btWorldImporter_createGearConstraint(@NativeType("void *") long obj, @NativeType("void *") long rbA, @NativeType("void *") long rbB, @NativeType("btVector3 const *") ΒΤVector3 axisInA, @NativeType("btVector3 const *") ΒΤVector3 axisInB, @NativeType("btScalar") float ratio) {
+    public static long btWorldImporter_createGearConstraint(@NativeType("void *") long obj, @NativeType("void *") long rbA, @NativeType("void *") long rbB, @NativeType("btVector3 const *") BTVector3 axisInA, @NativeType("btVector3 const *") BTVector3 axisInB, @NativeType("btScalar") float ratio) {
         return nbtWorldImporter_createGearConstraint(obj, rbA, rbB, axisInA.address(), axisInB.address(), ratio);
     }
 
@@ -515,7 +515,7 @@ public class BTWorldImporter {
     }
 
     @NativeType("void *")
-    public static long btWorldImporter_createMultiSphereShape(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3.Buffer positions, @NativeType("btScalar const *") FloatBuffer radi) {
+    public static long btWorldImporter_createMultiSphereShape(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3.Buffer positions, @NativeType("btScalar const *") FloatBuffer radi) {
         if (CHECKS) {
             check(radi, positions.remaining());
         }
@@ -544,7 +544,7 @@ public class BTWorldImporter {
     }
 
     @NativeType("void *")
-    public static long btWorldImporter_createPlaneShape(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 planeNormal, @NativeType("btScalar") float planeConstant) {
+    public static long btWorldImporter_createPlaneShape(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 planeNormal, @NativeType("btScalar") float planeConstant) {
         return nbtWorldImporter_createPlaneShape(obj, planeNormal.address(), planeConstant);
     }
 
@@ -560,7 +560,7 @@ public class BTWorldImporter {
     }
 
     @NativeType("void *")
-    public static long btWorldImporter_createPoint2PointConstraint(@NativeType("void *") long obj, @NativeType("void *") long rbA, @NativeType("btVector3 const *") ΒΤVector3 pivotInA) {
+    public static long btWorldImporter_createPoint2PointConstraint(@NativeType("void *") long obj, @NativeType("void *") long rbA, @NativeType("btVector3 const *") BTVector3 pivotInA) {
         return nbtWorldImporter_createPoint2PointConstraint(obj, rbA, pivotInA.address());
     }
 
@@ -577,7 +577,7 @@ public class BTWorldImporter {
     }
 
     @NativeType("void *")
-    public static long btWorldImporter_createPoint2PointConstraint2(@NativeType("void *") long obj, @NativeType("void *") long rbA, @NativeType("void *") long rbB, @NativeType("btVector3 const *") ΒΤVector3 pivotInA, @NativeType("btVector3 const *") ΒΤVector3 pivotInB) {
+    public static long btWorldImporter_createPoint2PointConstraint2(@NativeType("void *") long obj, @NativeType("void *") long rbA, @NativeType("void *") long rbB, @NativeType("btVector3 const *") BTVector3 pivotInA, @NativeType("btVector3 const *") BTVector3 pivotInB) {
         return nbtWorldImporter_createPoint2PointConstraint2(obj, rbA, rbB, pivotInA.address(), pivotInB.address());
     }
 
@@ -624,7 +624,7 @@ public class BTWorldImporter {
     }
 
     @NativeType("void *")
-    public static long btWorldImporter_createScaledTrangleMeshShape(@NativeType("void *") long obj, @NativeType("void *") long meshShape, @NativeType("btVector3 const *") ΒΤVector3 localScalingbtBvhTriangleMeshShape) {
+    public static long btWorldImporter_createScaledTrangleMeshShape(@NativeType("void *") long obj, @NativeType("void *") long meshShape, @NativeType("btVector3 const *") BTVector3 localScalingbtBvhTriangleMeshShape) {
         return nbtWorldImporter_createScaledTrangleMeshShape(obj, meshShape, localScalingbtBvhTriangleMeshShape.address());
     }
 
@@ -950,7 +950,7 @@ public class BTWorldImporter {
         invokePPPV(obj, gravity, solverInfo, __functionAddress);
     }
 
-    public static void btWorldImporter_setDynamicsWorldInfo(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 gravity, @NativeType("void *") long solverInfo) {
+    public static void btWorldImporter_setDynamicsWorldInfo(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 gravity, @NativeType("void *") long solverInfo) {
         nbtWorldImporter_setDynamicsWorldInfo(obj, gravity.address(), solverInfo);
     }
 

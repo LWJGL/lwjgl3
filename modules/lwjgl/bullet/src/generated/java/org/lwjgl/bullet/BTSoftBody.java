@@ -629,7 +629,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBodyWorldInfo_getGravity(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBodyWorldInfo_getGravity(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBodyWorldInfo_getGravity(obj, value.address());
     }
 
@@ -676,7 +676,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBodyWorldInfo_getWater_normal(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBodyWorldInfo_getWater_normal(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBodyWorldInfo_getWater_normal(obj, value.address());
     }
 
@@ -733,7 +733,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBodyWorldInfo_setGravity(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBodyWorldInfo_setGravity(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBodyWorldInfo_setGravity(obj, value.address());
     }
 
@@ -767,7 +767,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBodyWorldInfo_setWater_normal(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBodyWorldInfo_setWater_normal(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBodyWorldInfo_setWater_normal(obj, value.address());
     }
 
@@ -892,7 +892,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_AJoint_Specs_getAxis(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_AJoint_Specs_getAxis(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_AJoint_Specs_getAxis(obj, value.address());
     }
 
@@ -917,7 +917,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_AJoint_Specs_setAxis(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBody_AJoint_Specs_setAxis(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBody_AJoint_Specs_setAxis(obj, value.address());
     }
 
@@ -944,9 +944,9 @@ public class BTSoftBody {
 
     @Nullable
     @NativeType("btVector3 *")
-    public static ΒΤVector3 btSoftBody_AJoint_getAxis(@NativeType("void *") long obj) {
+    public static BTVector3 btSoftBody_AJoint_getAxis(@NativeType("void *") long obj) {
         long __result = nbtSoftBody_AJoint_getAxis(obj);
-        return ΒΤVector3.createSafe(__result);
+        return BTVector3.createSafe(__result);
     }
 
     // --- [ btSoftBody_AJoint_getIcontrol ] ---
@@ -1006,7 +1006,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Anchor_getC1(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_Anchor_getC1(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_Anchor_getC1(obj, value.address());
     }
 
@@ -1042,7 +1042,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Anchor_getLocal(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_Anchor_getLocal(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_Anchor_getLocal(obj, value.address());
     }
 
@@ -1092,7 +1092,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Anchor_setC1(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBody_Anchor_setC1(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBody_Anchor_setC1(obj, value.address());
     }
 
@@ -1126,7 +1126,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Anchor_setLocal(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBody_Anchor_setLocal(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBody_Anchor_setLocal(obj, value.address());
     }
 
@@ -1191,7 +1191,7 @@ public class BTSoftBody {
         invokePPPV(obj, rpos, value, __functionAddress);
     }
 
-    public static void btSoftBody_Body_angularVelocity(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 rpos, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_Body_angularVelocity(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 rpos, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_Body_angularVelocity(obj, rpos.address(), value.address());
     }
 
@@ -1205,7 +1205,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Body_angularVelocity2(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_Body_angularVelocity2(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_Body_angularVelocity2(obj, value.address());
     }
 
@@ -1230,7 +1230,7 @@ public class BTSoftBody {
         invokePPV(obj, impulse, __functionAddress);
     }
 
-    public static void btSoftBody_Body_applyDAImpulse(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 impulse) {
+    public static void btSoftBody_Body_applyDAImpulse(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 impulse) {
         nbtSoftBody_Body_applyDAImpulse(obj, impulse.address());
     }
 
@@ -1244,7 +1244,7 @@ public class BTSoftBody {
         invokePPV(obj, impulse, __functionAddress);
     }
 
-    public static void btSoftBody_Body_applyDCImpulse(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 impulse) {
+    public static void btSoftBody_Body_applyDCImpulse(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 impulse) {
         nbtSoftBody_Body_applyDCImpulse(obj, impulse.address());
     }
 
@@ -1258,7 +1258,7 @@ public class BTSoftBody {
         invokePPPV(obj, impulse, rpos, __functionAddress);
     }
 
-    public static void btSoftBody_Body_applyDImpulse(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 impulse, @NativeType("btVector3 const *") ΒΤVector3 rpos) {
+    public static void btSoftBody_Body_applyDImpulse(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 impulse, @NativeType("btVector3 const *") BTVector3 rpos) {
         nbtSoftBody_Body_applyDImpulse(obj, impulse.address(), rpos.address());
     }
 
@@ -1273,7 +1273,7 @@ public class BTSoftBody {
         invokePPPV(obj, impulse, rpos, __functionAddress);
     }
 
-    public static void btSoftBody_Body_applyImpulse(@NativeType("void *") long obj, @NativeType("void *") long impulse, @NativeType("btVector3 const *") ΒΤVector3 rpos) {
+    public static void btSoftBody_Body_applyImpulse(@NativeType("void *") long obj, @NativeType("void *") long impulse, @NativeType("btVector3 const *") BTVector3 rpos) {
         nbtSoftBody_Body_applyImpulse(obj, impulse, rpos.address());
     }
 
@@ -1287,7 +1287,7 @@ public class BTSoftBody {
         invokePPV(obj, impulse, __functionAddress);
     }
 
-    public static void btSoftBody_Body_applyVAImpulse(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 impulse) {
+    public static void btSoftBody_Body_applyVAImpulse(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 impulse) {
         nbtSoftBody_Body_applyVAImpulse(obj, impulse.address());
     }
 
@@ -1301,7 +1301,7 @@ public class BTSoftBody {
         invokePPPV(obj, impulse, rpos, __functionAddress);
     }
 
-    public static void btSoftBody_Body_applyVImpulse(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 impulse, @NativeType("btVector3 const *") ΒΤVector3 rpos) {
+    public static void btSoftBody_Body_applyVImpulse(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 impulse, @NativeType("btVector3 const *") BTVector3 rpos) {
         nbtSoftBody_Body_applyVImpulse(obj, impulse.address(), rpos.address());
     }
 
@@ -1373,7 +1373,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Body_linearVelocity(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_Body_linearVelocity(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_Body_linearVelocity(obj, value.address());
     }
 
@@ -1420,7 +1420,7 @@ public class BTSoftBody {
         invokePPPV(obj, rpos, value, __functionAddress);
     }
 
-    public static void btSoftBody_Body_velocity(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 rpos, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_Body_velocity(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 rpos, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_Body_velocity(obj, rpos.address(), value.address());
     }
 
@@ -1500,7 +1500,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_CJoint_getNormal(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_CJoint_getNormal(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_CJoint_getNormal(obj, value.address());
     }
 
@@ -1516,9 +1516,9 @@ public class BTSoftBody {
 
     @Nullable
     @NativeType("btVector3 *")
-    public static ΒΤVector3 btSoftBody_CJoint_getRpos(@NativeType("void *") long obj) {
+    public static BTVector3 btSoftBody_CJoint_getRpos(@NativeType("void *") long obj) {
         long __result = nbtSoftBody_CJoint_getRpos(obj);
-        return ΒΤVector3.createSafe(__result);
+        return BTVector3.createSafe(__result);
     }
 
     // --- [ btSoftBody_CJoint_setFriction ] ---
@@ -1561,7 +1561,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_CJoint_setNormal(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBody_CJoint_setNormal(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBody_CJoint_setNormal(obj, value.address());
     }
 
@@ -1586,7 +1586,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Cluster_getAv(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_Cluster_getAv(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_Cluster_getAv(obj, value.address());
     }
 
@@ -1621,7 +1621,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Cluster_getCom(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_Cluster_getCom(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_Cluster_getCom(obj, value.address());
     }
 
@@ -1744,7 +1744,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Cluster_getLv(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_Cluster_getLv(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_Cluster_getLv(obj, value.address());
     }
 
@@ -1866,7 +1866,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Cluster_setAv(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBody_Cluster_setAv(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBody_Cluster_setAv(obj, value.address());
     }
 
@@ -1900,7 +1900,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Cluster_setCom(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBody_Cluster_setCom(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBody_Cluster_setCom(obj, value.address());
     }
 
@@ -2007,7 +2007,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Cluster_setLv(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBody_Cluster_setLv(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBody_Cluster_setLv(obj, value.address());
     }
 
@@ -2709,7 +2709,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Face_getNormal(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_Face_getNormal(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_Face_getNormal(obj, value.address());
     }
 
@@ -2745,7 +2745,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Face_setNormal(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBody_Face_setNormal(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBody_Face_setNormal(obj, value.address());
     }
 
@@ -2803,7 +2803,7 @@ public class BTSoftBody {
     }
 
     @NativeType("btScalar")
-    public static float btSoftBody_ImplicitFn_Eval(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 x) {
+    public static float btSoftBody_ImplicitFn_Eval(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 x) {
         return nbtSoftBody_ImplicitFn_Eval(obj, x.address());
     }
 
@@ -2855,7 +2855,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Impulse_getDrift(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_Impulse_getDrift(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_Impulse_getDrift(obj, value.address());
     }
 
@@ -2869,7 +2869,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Impulse_getVelocity(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_Impulse_getVelocity(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_Impulse_getVelocity(obj, value.address());
     }
 
@@ -2925,7 +2925,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Impulse_setDrift(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBody_Impulse_setDrift(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBody_Impulse_setDrift(obj, value.address());
     }
 
@@ -2939,7 +2939,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Impulse_setVelocity(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBody_Impulse_setVelocity(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBody_Impulse_setVelocity(obj, value.address());
     }
 
@@ -3077,7 +3077,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Joint_getDrift(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_Joint_getDrift(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_Joint_getDrift(obj, value.address());
     }
 
@@ -3118,9 +3118,9 @@ public class BTSoftBody {
 
     @Nullable
     @NativeType("btVector3 *")
-    public static ΒΤVector3 btSoftBody_Joint_getRefs(@NativeType("void *") long obj) {
+    public static BTVector3 btSoftBody_Joint_getRefs(@NativeType("void *") long obj) {
         long __result = nbtSoftBody_Joint_getRefs(obj);
-        return ΒΤVector3.createSafe(__result);
+        return BTVector3.createSafe(__result);
     }
 
     // --- [ btSoftBody_Joint_getSdrift ] ---
@@ -3133,7 +3133,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Joint_getSdrift(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_Joint_getSdrift(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_Joint_getSdrift(obj, value.address());
     }
 
@@ -3188,7 +3188,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Joint_setDrift(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBody_Joint_setDrift(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBody_Joint_setDrift(obj, value.address());
     }
 
@@ -3226,7 +3226,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Joint_setSdrift(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBody_Joint_setSdrift(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBody_Joint_setSdrift(obj, value.address());
     }
 
@@ -3352,7 +3352,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Link_getC3(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_Link_getC3(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_Link_getC3(obj, value.address());
     }
 
@@ -3429,7 +3429,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Link_setC3(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBody_Link_setC3(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBody_Link_setC3(obj, value.address());
     }
 
@@ -3471,7 +3471,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_LJoint_Specs_getPosition(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_LJoint_Specs_getPosition(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_LJoint_Specs_getPosition(obj, value.address());
     }
 
@@ -3485,7 +3485,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_LJoint_Specs_setPosition(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBody_LJoint_Specs_setPosition(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBody_LJoint_Specs_setPosition(obj, value.address());
     }
 
@@ -3501,9 +3501,9 @@ public class BTSoftBody {
 
     @Nullable
     @NativeType("btVector3 *")
-    public static ΒΤVector3 btSoftBody_LJoint_getRpos(@NativeType("void *") long obj) {
+    public static BTVector3 btSoftBody_LJoint_getRpos(@NativeType("void *") long obj) {
         long __result = nbtSoftBody_LJoint_getRpos(obj);
-        return ΒΤVector3.createSafe(__result);
+        return BTVector3.createSafe(__result);
     }
 
     // --- [ btSoftBody_Material_getFlags ] ---
@@ -3620,7 +3620,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Node_getF(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_Node_getF(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_Node_getF(obj, value.address());
     }
 
@@ -3656,7 +3656,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Node_getN(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_Node_getN(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_Node_getN(obj, value.address());
     }
 
@@ -3670,7 +3670,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Node_getQ(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_Node_getQ(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_Node_getQ(obj, value.address());
     }
 
@@ -3684,7 +3684,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Node_getV(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_Node_getV(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_Node_getV(obj, value.address());
     }
 
@@ -3698,7 +3698,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Node_getX(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_Node_getX(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_Node_getX(obj, value.address());
     }
 
@@ -3732,7 +3732,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Node_setF(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBody_Node_setF(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBody_Node_setF(obj, value.address());
     }
 
@@ -3767,7 +3767,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Node_setN(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBody_Node_setN(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBody_Node_setN(obj, value.address());
     }
 
@@ -3781,7 +3781,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Node_setQ(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBody_Node_setQ(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBody_Node_setQ(obj, value.address());
     }
 
@@ -3795,7 +3795,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Node_setV(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBody_Node_setV(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBody_Node_setV(obj, value.address());
     }
 
@@ -3809,7 +3809,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Node_setX(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBody_Node_setX(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBody_Node_setX(obj, value.address());
     }
 
@@ -3847,7 +3847,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Note_getOffset(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_Note_getOffset(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_Note_getOffset(obj, value.address());
     }
 
@@ -3888,7 +3888,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Note_setOffset(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBody_Note_setOffset(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBody_Note_setOffset(obj, value.address());
     }
 
@@ -3976,7 +3976,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Pose_getCom(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_Pose_getCom(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_Pose_getCom(obj, value.address());
     }
 
@@ -4074,7 +4074,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_Pose_setCom(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBody_Pose_setCom(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBody_Pose_setCom(obj, value.address());
     }
 
@@ -4124,7 +4124,7 @@ public class BTSoftBody {
     }
 
     @NativeType("void *")
-    public static long btSoftBody_RayFromToCaster_new(@NativeType("btVector3 const *") ΒΤVector3 rayFrom, @NativeType("btVector3 const *") ΒΤVector3 rayTo, @NativeType("btScalar") float mxt) {
+    public static long btSoftBody_RayFromToCaster_new(@NativeType("btVector3 const *") BTVector3 rayFrom, @NativeType("btVector3 const *") BTVector3 rayTo, @NativeType("btScalar") float mxt) {
         return nbtSoftBody_RayFromToCaster_new(rayFrom.address(), rayTo.address(), mxt);
     }
 
@@ -4160,7 +4160,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_RayFromToCaster_getRayFrom(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_RayFromToCaster_getRayFrom(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_RayFromToCaster_getRayFrom(obj, value.address());
     }
 
@@ -4174,7 +4174,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_RayFromToCaster_getRayNormalizedDirection(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_RayFromToCaster_getRayNormalizedDirection(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_RayFromToCaster_getRayNormalizedDirection(obj, value.address());
     }
 
@@ -4188,7 +4188,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_RayFromToCaster_getRayTo(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_RayFromToCaster_getRayTo(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_RayFromToCaster_getRayTo(obj, value.address());
     }
 
@@ -4210,7 +4210,7 @@ public class BTSoftBody {
     }
 
     @NativeType("btScalar")
-    public static float btSoftBody_RayFromToCaster_rayFromToTriangle(@NativeType("btVector3 const *") ΒΤVector3 rayFrom, @NativeType("btVector3 const *") ΒΤVector3 rayTo, @NativeType("btVector3 const *") ΒΤVector3 rayNormalizedDirection, @NativeType("btVector3 const *") ΒΤVector3 a, @NativeType("btVector3 const *") ΒΤVector3 b, @NativeType("btVector3 const *") ΒΤVector3 c) {
+    public static float btSoftBody_RayFromToCaster_rayFromToTriangle(@NativeType("btVector3 const *") BTVector3 rayFrom, @NativeType("btVector3 const *") BTVector3 rayTo, @NativeType("btVector3 const *") BTVector3 rayNormalizedDirection, @NativeType("btVector3 const *") BTVector3 a, @NativeType("btVector3 const *") BTVector3 b, @NativeType("btVector3 const *") BTVector3 c) {
         return nbtSoftBody_RayFromToCaster_rayFromToTriangle(rayFrom.address(), rayTo.address(), rayNormalizedDirection.address(), a.address(), b.address(), c.address());
     }
 
@@ -4222,7 +4222,7 @@ public class BTSoftBody {
     }
 
     @NativeType("btScalar")
-    public static float btSoftBody_RayFromToCaster_rayFromToTriangle2(@NativeType("btVector3 const *") ΒΤVector3 rayFrom, @NativeType("btVector3 const *") ΒΤVector3 rayTo, @NativeType("btVector3 const *") ΒΤVector3 rayNormalizedDirection, @NativeType("btVector3 const *") ΒΤVector3 a, @NativeType("btVector3 const *") ΒΤVector3 b, @NativeType("btVector3 const *") ΒΤVector3 c, @NativeType("btScalar") float maxt) {
+    public static float btSoftBody_RayFromToCaster_rayFromToTriangle2(@NativeType("btVector3 const *") BTVector3 rayFrom, @NativeType("btVector3 const *") BTVector3 rayTo, @NativeType("btVector3 const *") BTVector3 rayNormalizedDirection, @NativeType("btVector3 const *") BTVector3 a, @NativeType("btVector3 const *") BTVector3 b, @NativeType("btVector3 const *") BTVector3 c, @NativeType("btScalar") float maxt) {
         return nbtSoftBody_RayFromToCaster_rayFromToTriangle2(rayFrom.address(), rayTo.address(), rayNormalizedDirection.address(), a.address(), b.address(), c.address(), maxt);
     }
 
@@ -4257,7 +4257,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_RayFromToCaster_setRayFrom(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBody_RayFromToCaster_setRayFrom(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBody_RayFromToCaster_setRayFrom(obj, value.address());
     }
 
@@ -4271,7 +4271,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_RayFromToCaster_setRayNormalizedDirection(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBody_RayFromToCaster_setRayNormalizedDirection(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBody_RayFromToCaster_setRayNormalizedDirection(obj, value.address());
     }
 
@@ -4285,7 +4285,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_RayFromToCaster_setRayTo(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBody_RayFromToCaster_setRayTo(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBody_RayFromToCaster_setRayTo(obj, value.address());
     }
 
@@ -4331,7 +4331,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_RContact_getC1(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_RContact_getC1(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_RContact_getC1(obj, value.address());
     }
 
@@ -4414,7 +4414,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_RContact_setC1(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBody_RContact_setC1(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBody_RContact_setC1(obj, value.address());
     }
 
@@ -4543,7 +4543,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_SContact_getNormal(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_SContact_getNormal(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_SContact_getNormal(obj, value.address());
     }
 
@@ -4557,7 +4557,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_SContact_getWeights(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_SContact_getWeights(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_SContact_getWeights(obj, value.address());
     }
 
@@ -4613,7 +4613,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_SContact_setNormal(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBody_SContact_setNormal(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBody_SContact_setNormal(obj, value.address());
     }
 
@@ -4627,7 +4627,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_SContact_setWeights(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBody_SContact_setWeights(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBody_SContact_setWeights(obj, value.address());
     }
 
@@ -4670,7 +4670,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_sCti_getNormal(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_sCti_getNormal(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_sCti_getNormal(obj, value.address());
     }
 
@@ -4706,7 +4706,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_sCti_setNormal(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSoftBody_sCti_setNormal(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSoftBody_sCti_setNormal(obj, value.address());
     }
 
@@ -5081,7 +5081,7 @@ public class BTSoftBody {
         invokePPV(obj, windVelocity, faceIndex, __functionAddress);
     }
 
-    public static void btSoftBody_addAeroForceToFace(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 windVelocity, int faceIndex) {
+    public static void btSoftBody_addAeroForceToFace(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 windVelocity, int faceIndex) {
         nbtSoftBody_addAeroForceToFace(obj, windVelocity.address(), faceIndex);
     }
 
@@ -5095,7 +5095,7 @@ public class BTSoftBody {
         invokePPV(obj, windVelocity, nodeIndex, __functionAddress);
     }
 
-    public static void btSoftBody_addAeroForceToNode(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 windVelocity, int nodeIndex) {
+    public static void btSoftBody_addAeroForceToNode(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 windVelocity, int nodeIndex) {
         nbtSoftBody_addAeroForceToNode(obj, windVelocity.address(), nodeIndex);
     }
 
@@ -5109,7 +5109,7 @@ public class BTSoftBody {
         invokePPV(obj, force, __functionAddress);
     }
 
-    public static void btSoftBody_addForce(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 force) {
+    public static void btSoftBody_addForce(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 force) {
         nbtSoftBody_addForce(obj, force.address());
     }
 
@@ -5123,7 +5123,7 @@ public class BTSoftBody {
         invokePPV(obj, force, node, __functionAddress);
     }
 
-    public static void btSoftBody_addForce2(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 force, int node) {
+    public static void btSoftBody_addForce2(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 force, int node) {
         nbtSoftBody_addForce2(obj, force.address(), node);
     }
 
@@ -5137,7 +5137,7 @@ public class BTSoftBody {
         invokePPV(obj, velocity, __functionAddress);
     }
 
-    public static void btSoftBody_addVelocity(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 velocity) {
+    public static void btSoftBody_addVelocity(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 velocity) {
         nbtSoftBody_addVelocity(obj, velocity.address());
     }
 
@@ -5151,7 +5151,7 @@ public class BTSoftBody {
         invokePPV(obj, velocity, node, __functionAddress);
     }
 
-    public static void btSoftBody_addVelocity2(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 velocity, int node) {
+    public static void btSoftBody_addVelocity2(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 velocity, int node) {
         nbtSoftBody_addVelocity2(obj, velocity.address(), node);
     }
 
@@ -5166,7 +5166,7 @@ public class BTSoftBody {
         invokePPPV(obj, node, body, localPivot, disableCollisionBetweenLinkedBodies, influence, __functionAddress);
     }
 
-    public static void btSoftBody_appendAnchor(@NativeType("void *") long obj, int node, @NativeType("void *") long body, @NativeType("btVector3 const *") ΒΤVector3 localPivot, @NativeType("bool") boolean disableCollisionBetweenLinkedBodies, @NativeType("btScalar") float influence) {
+    public static void btSoftBody_appendAnchor(@NativeType("void *") long obj, int node, @NativeType("void *") long body, @NativeType("btVector3 const *") BTVector3 localPivot, @NativeType("bool") boolean disableCollisionBetweenLinkedBodies, @NativeType("btScalar") float influence) {
         nbtSoftBody_appendAnchor(obj, node, body, localPivot.address(), disableCollisionBetweenLinkedBodies, influence);
     }
 
@@ -5355,7 +5355,7 @@ public class BTSoftBody {
         invokePPV(obj, x, m, __functionAddress);
     }
 
-    public static void btSoftBody_appendNode(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 x, @NativeType("btScalar") float m) {
+    public static void btSoftBody_appendNode(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 x, @NativeType("btScalar") float m) {
         nbtSoftBody_appendNode(obj, x.address(), m);
     }
 
@@ -5370,14 +5370,14 @@ public class BTSoftBody {
         invokePPPPV(obj, text, o, feature, __functionAddress);
     }
 
-    public static void btSoftBody_appendNote(@NativeType("void *") long obj, @NativeType("char const *") ByteBuffer text, @NativeType("btVector3 const *") ΒΤVector3 o, @NativeType("void *") long feature) {
+    public static void btSoftBody_appendNote(@NativeType("void *") long obj, @NativeType("char const *") ByteBuffer text, @NativeType("btVector3 const *") BTVector3 o, @NativeType("void *") long feature) {
         if (CHECKS) {
             checkNT1(text);
         }
         nbtSoftBody_appendNote(obj, memAddress(text), o.address(), feature);
     }
 
-    public static void btSoftBody_appendNote(@NativeType("void *") long obj, @NativeType("char const *") CharSequence text, @NativeType("btVector3 const *") ΒΤVector3 o, @NativeType("void *") long feature) {
+    public static void btSoftBody_appendNote(@NativeType("void *") long obj, @NativeType("char const *") CharSequence text, @NativeType("btVector3 const *") BTVector3 o, @NativeType("void *") long feature) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8(text, true);
@@ -5399,14 +5399,14 @@ public class BTSoftBody {
         invokePPPPV(obj, text, o, feature, __functionAddress);
     }
 
-    public static void btSoftBody_appendNote2(@NativeType("void *") long obj, @NativeType("char const *") ByteBuffer text, @NativeType("btVector3 const *") ΒΤVector3 o, @NativeType("void *") long feature) {
+    public static void btSoftBody_appendNote2(@NativeType("void *") long obj, @NativeType("char const *") ByteBuffer text, @NativeType("btVector3 const *") BTVector3 o, @NativeType("void *") long feature) {
         if (CHECKS) {
             checkNT1(text);
         }
         nbtSoftBody_appendNote2(obj, memAddress(text), o.address(), feature);
     }
 
-    public static void btSoftBody_appendNote2(@NativeType("void *") long obj, @NativeType("char const *") CharSequence text, @NativeType("btVector3 const *") ΒΤVector3 o, @NativeType("void *") long feature) {
+    public static void btSoftBody_appendNote2(@NativeType("void *") long obj, @NativeType("char const *") CharSequence text, @NativeType("btVector3 const *") BTVector3 o, @NativeType("void *") long feature) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8(text, true);
@@ -5428,14 +5428,14 @@ public class BTSoftBody {
         invokePPPPV(obj, text, o, feature, __functionAddress);
     }
 
-    public static void btSoftBody_appendNote3(@NativeType("void *") long obj, @NativeType("char const *") ByteBuffer text, @NativeType("btVector3 const *") ΒΤVector3 o, @NativeType("void *") long feature) {
+    public static void btSoftBody_appendNote3(@NativeType("void *") long obj, @NativeType("char const *") ByteBuffer text, @NativeType("btVector3 const *") BTVector3 o, @NativeType("void *") long feature) {
         if (CHECKS) {
             checkNT1(text);
         }
         nbtSoftBody_appendNote3(obj, memAddress(text), o.address(), feature);
     }
 
-    public static void btSoftBody_appendNote3(@NativeType("void *") long obj, @NativeType("char const *") CharSequence text, @NativeType("btVector3 const *") ΒΤVector3 o, @NativeType("void *") long feature) {
+    public static void btSoftBody_appendNote3(@NativeType("void *") long obj, @NativeType("char const *") CharSequence text, @NativeType("btVector3 const *") BTVector3 o, @NativeType("void *") long feature) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8(text, true);
@@ -5456,14 +5456,14 @@ public class BTSoftBody {
         invokePPPV(obj, text, o, __functionAddress);
     }
 
-    public static void btSoftBody_appendNote4(@NativeType("void *") long obj, @NativeType("char const *") ByteBuffer text, @NativeType("btVector3 const *") ΒΤVector3 o) {
+    public static void btSoftBody_appendNote4(@NativeType("void *") long obj, @NativeType("char const *") ByteBuffer text, @NativeType("btVector3 const *") BTVector3 o) {
         if (CHECKS) {
             checkNT1(text);
         }
         nbtSoftBody_appendNote4(obj, memAddress(text), o.address());
     }
 
-    public static void btSoftBody_appendNote4(@NativeType("void *") long obj, @NativeType("char const *") CharSequence text, @NativeType("btVector3 const *") ΒΤVector3 o) {
+    public static void btSoftBody_appendNote4(@NativeType("void *") long obj, @NativeType("char const *") CharSequence text, @NativeType("btVector3 const *") BTVector3 o) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8(text, true);
@@ -5488,14 +5488,14 @@ public class BTSoftBody {
         invokePPPPPPPPV(obj, text, o, c, n0, n1, n2, n3, __functionAddress);
     }
 
-    public static void btSoftBody_appendNote5(@NativeType("void *") long obj, @NativeType("char const *") ByteBuffer text, @NativeType("btVector3 const *") ΒΤVector3 o, @NativeType("btVector4 const *") ΒΤVector3 c, @NativeType("void *") long n0, @NativeType("void *") long n1, @NativeType("void *") long n2, @NativeType("void *") long n3) {
+    public static void btSoftBody_appendNote5(@NativeType("void *") long obj, @NativeType("char const *") ByteBuffer text, @NativeType("btVector3 const *") BTVector3 o, @NativeType("btVector4 const *") BTVector3 c, @NativeType("void *") long n0, @NativeType("void *") long n1, @NativeType("void *") long n2, @NativeType("void *") long n3) {
         if (CHECKS) {
             checkNT1(text);
         }
         nbtSoftBody_appendNote5(obj, memAddress(text), o.address(), c.address(), n0, n1, n2, n3);
     }
 
-    public static void btSoftBody_appendNote5(@NativeType("void *") long obj, @NativeType("char const *") CharSequence text, @NativeType("btVector3 const *") ΒΤVector3 o, @NativeType("btVector4 const *") ΒΤVector3 c, @NativeType("void *") long n0, @NativeType("void *") long n1, @NativeType("void *") long n2, @NativeType("void *") long n3) {
+    public static void btSoftBody_appendNote5(@NativeType("void *") long obj, @NativeType("char const *") CharSequence text, @NativeType("btVector3 const *") BTVector3 o, @NativeType("btVector4 const *") BTVector3 c, @NativeType("void *") long n0, @NativeType("void *") long n1, @NativeType("void *") long n2, @NativeType("void *") long n3) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8(text, true);
@@ -5561,7 +5561,7 @@ public class BTSoftBody {
     }
 
     @NativeType("bool")
-    public static boolean btSoftBody_checkContact(@NativeType("void *") long obj, @NativeType("void *") long colObjWrap, @NativeType("btVector3 const *") ΒΤVector3 x, @NativeType("btScalar") float margin, @NativeType("void *") long cti) {
+    public static boolean btSoftBody_checkContact(@NativeType("void *") long obj, @NativeType("void *") long colObjWrap, @NativeType("btVector3 const *") BTVector3 x, @NativeType("btScalar") float margin, @NativeType("void *") long cti) {
         return nbtSoftBody_checkContact(obj, colObjWrap, x.address(), margin, cti);
     }
 
@@ -5631,7 +5631,7 @@ public class BTSoftBody {
         invokePPV(obj, cluster, value, __functionAddress);
     }
 
-    public static void btSoftBody_clusterCom(@NativeType("void *") long obj, int cluster, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_clusterCom(@NativeType("void *") long obj, int cluster, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_clusterCom(obj, cluster, value.address());
     }
 
@@ -5645,7 +5645,7 @@ public class BTSoftBody {
         invokePPV(cluster, value, __functionAddress);
     }
 
-    public static void btSoftBody_clusterCom2(@NativeType("void *") long cluster, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_clusterCom2(@NativeType("void *") long cluster, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_clusterCom2(cluster, value.address());
     }
 
@@ -5669,7 +5669,7 @@ public class BTSoftBody {
         invokePPV(cluster, impulse, __functionAddress);
     }
 
-    public static void btSoftBody_clusterDAImpulse(@NativeType("void *") long cluster, @NativeType("btVector3 const *") ΒΤVector3 impulse) {
+    public static void btSoftBody_clusterDAImpulse(@NativeType("void *") long cluster, @NativeType("btVector3 const *") BTVector3 impulse) {
         nbtSoftBody_clusterDAImpulse(cluster, impulse.address());
     }
 
@@ -5683,7 +5683,7 @@ public class BTSoftBody {
         invokePPV(cluster, impulse, __functionAddress);
     }
 
-    public static void btSoftBody_clusterDCImpulse(@NativeType("void *") long cluster, @NativeType("btVector3 const *") ΒΤVector3 impulse) {
+    public static void btSoftBody_clusterDCImpulse(@NativeType("void *") long cluster, @NativeType("btVector3 const *") BTVector3 impulse) {
         nbtSoftBody_clusterDCImpulse(cluster, impulse.address());
     }
 
@@ -5697,7 +5697,7 @@ public class BTSoftBody {
         invokePPPV(cluster, rpos, impulse, __functionAddress);
     }
 
-    public static void btSoftBody_clusterDImpulse(@NativeType("void *") long cluster, @NativeType("btVector3 const *") ΒΤVector3 rpos, @NativeType("btVector3 const *") ΒΤVector3 impulse) {
+    public static void btSoftBody_clusterDImpulse(@NativeType("void *") long cluster, @NativeType("btVector3 const *") BTVector3 rpos, @NativeType("btVector3 const *") BTVector3 impulse) {
         nbtSoftBody_clusterDImpulse(cluster, rpos.address(), impulse.address());
     }
 
@@ -5712,7 +5712,7 @@ public class BTSoftBody {
         invokePPPV(cluster, rpos, impulse, __functionAddress);
     }
 
-    public static void btSoftBody_clusterImpulse(@NativeType("void *") long cluster, @NativeType("btVector3 const *") ΒΤVector3 rpos, @NativeType("void *") long impulse) {
+    public static void btSoftBody_clusterImpulse(@NativeType("void *") long cluster, @NativeType("btVector3 const *") BTVector3 rpos, @NativeType("void *") long impulse) {
         nbtSoftBody_clusterImpulse(cluster, rpos.address(), impulse);
     }
 
@@ -5726,7 +5726,7 @@ public class BTSoftBody {
         invokePPV(cluster, impulse, __functionAddress);
     }
 
-    public static void btSoftBody_clusterVAImpulse(@NativeType("void *") long cluster, @NativeType("btVector3 const *") ΒΤVector3 impulse) {
+    public static void btSoftBody_clusterVAImpulse(@NativeType("void *") long cluster, @NativeType("btVector3 const *") BTVector3 impulse) {
         nbtSoftBody_clusterVAImpulse(cluster, impulse.address());
     }
 
@@ -5740,7 +5740,7 @@ public class BTSoftBody {
         invokePPPV(cluster, rpos, value, __functionAddress);
     }
 
-    public static void btSoftBody_clusterVelocity(@NativeType("void *") long cluster, @NativeType("btVector3 const *") ΒΤVector3 rpos, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_clusterVelocity(@NativeType("void *") long cluster, @NativeType("btVector3 const *") BTVector3 rpos, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_clusterVelocity(cluster, rpos.address(), value.address());
     }
 
@@ -5754,7 +5754,7 @@ public class BTSoftBody {
         invokePPPV(cluster, rpos, impulse, __functionAddress);
     }
 
-    public static void btSoftBody_clusterVImpulse(@NativeType("void *") long cluster, @NativeType("btVector3 const *") ΒΤVector3 rpos, @NativeType("btVector3 const *") ΒΤVector3 impulse) {
+    public static void btSoftBody_clusterVImpulse(@NativeType("void *") long cluster, @NativeType("btVector3 const *") BTVector3 rpos, @NativeType("btVector3 const *") BTVector3 impulse) {
         nbtSoftBody_clusterVImpulse(cluster, rpos.address(), impulse.address());
     }
 
@@ -5824,7 +5824,7 @@ public class BTSoftBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSoftBody_evaluateCom(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSoftBody_evaluateCom(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSoftBody_evaluateCom(obj, value.address());
     }
 
@@ -5869,7 +5869,7 @@ public class BTSoftBody {
         invokePPPV(obj, aabbMin, aabbMax, __functionAddress);
     }
 
-    public static void btSoftBody_getAabb(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 aabbMin, @NativeType("btVector3 *") ΒΤVector3 aabbMax) {
+    public static void btSoftBody_getAabb(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 aabbMin, @NativeType("btVector3 *") BTVector3 aabbMax) {
         nbtSoftBody_getAabb(obj, aabbMin.address(), aabbMax.address());
     }
 
@@ -5896,9 +5896,9 @@ public class BTSoftBody {
 
     @Nullable
     @NativeType("btVector3 *")
-    public static ΒΤVector3 btSoftBody_getBounds(@NativeType("void *") long obj) {
+    public static BTVector3 btSoftBody_getBounds(@NativeType("void *") long obj) {
         long __result = nbtSoftBody_getBounds(obj);
-        return ΒΤVector3.createSafe(__result);
+        return BTVector3.createSafe(__result);
     }
 
     // --- [ btSoftBody_getBUpdateRtCst ] ---
@@ -6215,7 +6215,7 @@ public class BTSoftBody {
         invokePPV(obj, velocity, __functionAddress);
     }
 
-    public static void btSoftBody_getWindVelocity(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 velocity) {
+    public static void btSoftBody_getWindVelocity(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 velocity) {
         nbtSoftBody_getWindVelocity(obj, velocity.address());
     }
 
@@ -6387,7 +6387,7 @@ public class BTSoftBody {
     }
 
     @NativeType("bool")
-    public static boolean btSoftBody_rayTest(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 rayFrom, @NativeType("btVector3 const *") ΒΤVector3 rayTo, @NativeType("void *") long results) {
+    public static boolean btSoftBody_rayTest(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 rayFrom, @NativeType("btVector3 const *") BTVector3 rayTo, @NativeType("void *") long results) {
         return nbtSoftBody_rayTest(obj, rayFrom.address(), rayTo.address(), results);
     }
 
@@ -6401,7 +6401,7 @@ public class BTSoftBody {
         return invokePPPPPPI(obj, rayFrom, rayTo, mint, feature, index, bcountonly, __functionAddress);
     }
 
-    public static int btSoftBody_rayTest2(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 rayFrom, @NativeType("btVector3 const *") ΒΤVector3 rayTo, @NativeType("btScalar *") FloatBuffer mint, @NativeType("int *") IntBuffer feature, @NativeType("int *") IntBuffer index, @NativeType("bool") boolean bcountonly) {
+    public static int btSoftBody_rayTest2(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 rayFrom, @NativeType("btVector3 const *") BTVector3 rayTo, @NativeType("btScalar *") FloatBuffer mint, @NativeType("int *") IntBuffer feature, @NativeType("int *") IntBuffer index, @NativeType("bool") boolean bcountonly) {
         if (CHECKS) {
             check(mint, 1);
             check(feature, 1);
@@ -6461,7 +6461,7 @@ public class BTSoftBody {
         invokePPV(obj, rot, __functionAddress);
     }
 
-    public static void btSoftBody_rotate(@NativeType("void *") long obj, @NativeType("btQuaternion const *") ΒΤVector3 rot) {
+    public static void btSoftBody_rotate(@NativeType("void *") long obj, @NativeType("btQuaternion const *") BTVector3 rot) {
         nbtSoftBody_rotate(obj, rot.address());
     }
 
@@ -6475,7 +6475,7 @@ public class BTSoftBody {
         invokePPV(obj, scl, __functionAddress);
     }
 
-    public static void btSoftBody_scale(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 scl) {
+    public static void btSoftBody_scale(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 scl) {
         nbtSoftBody_scale(obj, scl.address());
     }
 
@@ -6591,7 +6591,7 @@ public class BTSoftBody {
         invokePPV(obj, velocity, __functionAddress);
     }
 
-    public static void btSoftBody_setVelocity(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 velocity) {
+    public static void btSoftBody_setVelocity(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 velocity) {
         nbtSoftBody_setVelocity(obj, velocity.address());
     }
 
@@ -6605,7 +6605,7 @@ public class BTSoftBody {
         invokePPV(obj, velocity, __functionAddress);
     }
 
-    public static void btSoftBody_setWindVelocity(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 velocity) {
+    public static void btSoftBody_setWindVelocity(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 velocity) {
         nbtSoftBody_setWindVelocity(obj, velocity.address());
     }
 
@@ -6715,7 +6715,7 @@ public class BTSoftBody {
         invokePPV(obj, trs, __functionAddress);
     }
 
-    public static void btSoftBody_translate(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 trs) {
+    public static void btSoftBody_translate(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 trs) {
         nbtSoftBody_translate(obj, trs.address());
     }
 

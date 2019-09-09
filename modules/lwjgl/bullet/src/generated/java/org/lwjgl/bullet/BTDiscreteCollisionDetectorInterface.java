@@ -152,7 +152,7 @@ public class BTDiscreteCollisionDetectorInterface {
         invokePPPV(obj, normalOnBInWorld, pointInWorld, depth, __functionAddress);
     }
 
-    public static void btDiscreteCollisionDetectorInterface_Result_addContactPoint(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 normalOnBInWorld, @NativeType("btVector3 const *") ΒΤVector3 pointInWorld, @NativeType("btScalar") float depth) {
+    public static void btDiscreteCollisionDetectorInterface_Result_addContactPoint(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 normalOnBInWorld, @NativeType("btVector3 const *") BTVector3 pointInWorld, @NativeType("btScalar") float depth) {
         nbtDiscreteCollisionDetectorInterface_Result_addContactPoint(obj, normalOnBInWorld.address(), pointInWorld.address(), depth);
     }
 
@@ -219,7 +219,7 @@ public class BTDiscreteCollisionDetectorInterface {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btStorageResult_getClosestPointInB(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btStorageResult_getClosestPointInB(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtStorageResult_getClosestPointInB(obj, value.address());
     }
 
@@ -244,7 +244,7 @@ public class BTDiscreteCollisionDetectorInterface {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btStorageResult_getNormalOnSurfaceB(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btStorageResult_getNormalOnSurfaceB(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtStorageResult_getNormalOnSurfaceB(obj, value.address());
     }
 
@@ -258,7 +258,7 @@ public class BTDiscreteCollisionDetectorInterface {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btStorageResult_setClosestPointInB(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btStorageResult_setClosestPointInB(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtStorageResult_setClosestPointInB(obj, value.address());
     }
 
@@ -282,7 +282,7 @@ public class BTDiscreteCollisionDetectorInterface {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btStorageResult_setNormalOnSurfaceB(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btStorageResult_setNormalOnSurfaceB(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtStorageResult_setNormalOnSurfaceB(obj, value.address());
     }
 

@@ -46,7 +46,7 @@ public class BTGearConstraint {
     }
 
     @NativeType("void *")
-    public static long btGearConstraint_new(@NativeType("void *") long rbA, @NativeType("void *") long rbB, @NativeType("btVector3 const *") ΒΤVector3 axisInA, @NativeType("btVector3 const *") ΒΤVector3 axisInB, @NativeType("btScalar") float ratio) {
+    public static long btGearConstraint_new(@NativeType("void *") long rbA, @NativeType("void *") long rbB, @NativeType("btVector3 const *") BTVector3 axisInA, @NativeType("btVector3 const *") BTVector3 axisInB, @NativeType("btScalar") float ratio) {
         return nbtGearConstraint_new(rbA, rbB, axisInA.address(), axisInB.address(), ratio);
     }
 
@@ -60,7 +60,7 @@ public class BTGearConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btGearConstraint_getAxisA(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btGearConstraint_getAxisA(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtGearConstraint_getAxisA(obj, value.address());
     }
 
@@ -74,7 +74,7 @@ public class BTGearConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btGearConstraint_getAxisB(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btGearConstraint_getAxisB(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtGearConstraint_getAxisB(obj, value.address());
     }
 
@@ -99,7 +99,7 @@ public class BTGearConstraint {
         invokePPV(obj, axisA, __functionAddress);
     }
 
-    public static void btGearConstraint_setAxisA(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 axisA) {
+    public static void btGearConstraint_setAxisA(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 axisA) {
         nbtGearConstraint_setAxisA(obj, axisA.address());
     }
 
@@ -113,7 +113,7 @@ public class BTGearConstraint {
         invokePPV(obj, axisB, __functionAddress);
     }
 
-    public static void btGearConstraint_setAxisB(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 axisB) {
+    public static void btGearConstraint_setAxisB(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 axisB) {
         nbtGearConstraint_setAxisB(obj, axisB.address());
     }
 

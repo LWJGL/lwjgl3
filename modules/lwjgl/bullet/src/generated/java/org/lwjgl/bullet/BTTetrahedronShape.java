@@ -51,7 +51,7 @@ public class BTTetrahedronShape {
     }
 
     @NativeType("void *")
-    public static long btBU_Simplex1to4_new2(@NativeType("btVector3 const *") ΒΤVector3 pt0) {
+    public static long btBU_Simplex1to4_new2(@NativeType("btVector3 const *") BTVector3 pt0) {
         return nbtBU_Simplex1to4_new2(pt0.address());
     }
 
@@ -63,7 +63,7 @@ public class BTTetrahedronShape {
     }
 
     @NativeType("void *")
-    public static long btBU_Simplex1to4_new3(@NativeType("btVector3 const *") ΒΤVector3 pt0, @NativeType("btVector3 const *") ΒΤVector3 pt1) {
+    public static long btBU_Simplex1to4_new3(@NativeType("btVector3 const *") BTVector3 pt0, @NativeType("btVector3 const *") BTVector3 pt1) {
         return nbtBU_Simplex1to4_new3(pt0.address(), pt1.address());
     }
 
@@ -75,7 +75,7 @@ public class BTTetrahedronShape {
     }
 
     @NativeType("void *")
-    public static long btBU_Simplex1to4_new4(@NativeType("btVector3 const *") ΒΤVector3 pt0, @NativeType("btVector3 const *") ΒΤVector3 pt1, @NativeType("btVector3 const *") ΒΤVector3 pt2) {
+    public static long btBU_Simplex1to4_new4(@NativeType("btVector3 const *") BTVector3 pt0, @NativeType("btVector3 const *") BTVector3 pt1, @NativeType("btVector3 const *") BTVector3 pt2) {
         return nbtBU_Simplex1to4_new4(pt0.address(), pt1.address(), pt2.address());
     }
 
@@ -87,7 +87,7 @@ public class BTTetrahedronShape {
     }
 
     @NativeType("void *")
-    public static long btBU_Simplex1to4_new5(@NativeType("btVector3 const *") ΒΤVector3 pt0, @NativeType("btVector3 const *") ΒΤVector3 pt1, @NativeType("btVector3 const *") ΒΤVector3 pt2, @NativeType("btVector3 const *") ΒΤVector3 pt3) {
+    public static long btBU_Simplex1to4_new5(@NativeType("btVector3 const *") BTVector3 pt0, @NativeType("btVector3 const *") BTVector3 pt1, @NativeType("btVector3 const *") BTVector3 pt2, @NativeType("btVector3 const *") BTVector3 pt3) {
         return nbtBU_Simplex1to4_new5(pt0.address(), pt1.address(), pt2.address(), pt3.address());
     }
 
@@ -101,7 +101,7 @@ public class BTTetrahedronShape {
         invokePPV(obj, pt, __functionAddress);
     }
 
-    public static void btBU_Simplex1to4_addVertex(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 pt) {
+    public static void btBU_Simplex1to4_addVertex(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 pt) {
         nbtBU_Simplex1to4_addVertex(obj, pt.address());
     }
 

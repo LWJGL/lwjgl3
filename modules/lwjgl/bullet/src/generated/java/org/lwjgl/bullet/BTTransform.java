@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre><code>
  * struct btTransform {
  *     {@link BTMatrix3x3 btMatrix3x3} m_basis;
- *     {@link ΒΤVector3 btVector3} m_origin;
+ *     {@link BTVector3 btVector3} m_origin;
  * }</code></pre>
  */
 @NativeType("struct btTransform")
@@ -41,7 +41,7 @@ public class BTTransform extends Struct implements NativeResource {
     static {
         Layout layout = __struct(
             __member(BTMatrix3x3.SIZEOF, BTMatrix3x3.ALIGNOF),
-            __member(ΒΤVector3.SIZEOF, ΒΤVector3.ALIGNOF)
+            __member(BTVector3.SIZEOF, BTVector3.ALIGNOF)
         );
 
         SIZEOF = layout.getSize();
@@ -67,23 +67,23 @@ public class BTTransform extends Struct implements NativeResource {
     /** Returns a {@link BTMatrix3x3} view of the {@code m_basis} field. */
     @NativeType("btMatrix3x3")
     public BTMatrix3x3 m_basis() { return nm_basis(address()); }
-    /** Returns a {@link ΒΤVector3} view of the {@code m_origin} field. */
+    /** Returns a {@link BTVector3} view of the {@code m_origin} field. */
     @NativeType("btVector3")
-    public ΒΤVector3 m_origin() { return nm_origin(address()); }
+    public BTVector3 m_origin() { return nm_origin(address()); }
 
     /** Copies the specified {@link BTMatrix3x3} to the {@code m_basis} field. */
     public BTTransform m_basis(@NativeType("btMatrix3x3") BTMatrix3x3 value) { nm_basis(address(), value); return this; }
     /** Passes the {@code m_basis} field to the specified {@link java.util.function.Consumer Consumer}. */
     public BTTransform m_basis(java.util.function.Consumer<BTMatrix3x3> consumer) { consumer.accept(m_basis()); return this; }
-    /** Copies the specified {@link ΒΤVector3} to the {@code m_origin} field. */
-    public BTTransform m_origin(@NativeType("btVector3") ΒΤVector3 value) { nm_origin(address(), value); return this; }
+    /** Copies the specified {@link BTVector3} to the {@code m_origin} field. */
+    public BTTransform m_origin(@NativeType("btVector3") BTVector3 value) { nm_origin(address(), value); return this; }
     /** Passes the {@code m_origin} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public BTTransform m_origin(java.util.function.Consumer<ΒΤVector3> consumer) { consumer.accept(m_origin()); return this; }
+    public BTTransform m_origin(java.util.function.Consumer<BTVector3> consumer) { consumer.accept(m_origin()); return this; }
 
     /** Initializes this struct with the specified values. */
     public BTTransform set(
         BTMatrix3x3 m_basis,
-        ΒΤVector3 m_origin
+        BTVector3 m_origin
     ) {
         m_basis(m_basis);
         m_origin(m_origin);
@@ -249,12 +249,12 @@ public class BTTransform extends Struct implements NativeResource {
     /** Unsafe version of {@link #m_basis}. */
     public static BTMatrix3x3 nm_basis(long struct) { return BTMatrix3x3.create(struct + BTTransform.M_BASIS); }
     /** Unsafe version of {@link #m_origin}. */
-    public static ΒΤVector3 nm_origin(long struct) { return ΒΤVector3.create(struct + BTTransform.M_ORIGIN); }
+    public static BTVector3 nm_origin(long struct) { return BTVector3.create(struct + BTTransform.M_ORIGIN); }
 
     /** Unsafe version of {@link #m_basis(BTMatrix3x3) m_basis}. */
     public static void nm_basis(long struct, BTMatrix3x3 value) { memCopy(value.address(), struct + BTTransform.M_BASIS, BTMatrix3x3.SIZEOF); }
-    /** Unsafe version of {@link #m_origin(ΒΤVector3) m_origin}. */
-    public static void nm_origin(long struct, ΒΤVector3 value) { memCopy(value.address(), struct + BTTransform.M_ORIGIN, ΒΤVector3.SIZEOF); }
+    /** Unsafe version of {@link #m_origin(BTVector3) m_origin}. */
+    public static void nm_origin(long struct, BTVector3 value) { memCopy(value.address(), struct + BTTransform.M_ORIGIN, BTVector3.SIZEOF); }
 
     // -----------------------------------
 
@@ -297,18 +297,18 @@ public class BTTransform extends Struct implements NativeResource {
         /** Returns a {@link BTMatrix3x3} view of the {@code m_basis} field. */
         @NativeType("btMatrix3x3")
         public BTMatrix3x3 m_basis() { return BTTransform.nm_basis(address()); }
-        /** Returns a {@link ΒΤVector3} view of the {@code m_origin} field. */
+        /** Returns a {@link BTVector3} view of the {@code m_origin} field. */
         @NativeType("btVector3")
-        public ΒΤVector3 m_origin() { return BTTransform.nm_origin(address()); }
+        public BTVector3 m_origin() { return BTTransform.nm_origin(address()); }
 
         /** Copies the specified {@link BTMatrix3x3} to the {@code m_basis} field. */
         public BTTransform.Buffer m_basis(@NativeType("btMatrix3x3") BTMatrix3x3 value) { BTTransform.nm_basis(address(), value); return this; }
         /** Passes the {@code m_basis} field to the specified {@link java.util.function.Consumer Consumer}. */
         public BTTransform.Buffer m_basis(java.util.function.Consumer<BTMatrix3x3> consumer) { consumer.accept(m_basis()); return this; }
-        /** Copies the specified {@link ΒΤVector3} to the {@code m_origin} field. */
-        public BTTransform.Buffer m_origin(@NativeType("btVector3") ΒΤVector3 value) { BTTransform.nm_origin(address(), value); return this; }
+        /** Copies the specified {@link BTVector3} to the {@code m_origin} field. */
+        public BTTransform.Buffer m_origin(@NativeType("btVector3") BTVector3 value) { BTTransform.nm_origin(address(), value); return this; }
         /** Passes the {@code m_origin} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public BTTransform.Buffer m_origin(java.util.function.Consumer<ΒΤVector3> consumer) { consumer.accept(m_origin()); return this; }
+        public BTTransform.Buffer m_origin(java.util.function.Consumer<BTVector3> consumer) { consumer.accept(m_origin()); return this; }
 
     }
 

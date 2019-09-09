@@ -65,7 +65,7 @@ public class BTTriangleMesh {
         invokePPPPV(obj, vertex0, vertex1, vertex2, removeDuplicateVertices, __functionAddress);
     }
 
-    public static void btTriangleMesh_addTriangle(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 vertex0, @NativeType("btVector3 const *") ΒΤVector3 vertex1, @NativeType("btVector3 const *") ΒΤVector3 vertex2, @NativeType("bool") boolean removeDuplicateVertices) {
+    public static void btTriangleMesh_addTriangle(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 vertex0, @NativeType("btVector3 const *") BTVector3 vertex1, @NativeType("btVector3 const *") BTVector3 vertex2, @NativeType("bool") boolean removeDuplicateVertices) {
         nbtTriangleMesh_addTriangle(obj, vertex0.address(), vertex1.address(), vertex2.address(), removeDuplicateVertices);
     }
 
@@ -89,7 +89,7 @@ public class BTTriangleMesh {
         return invokePPI(obj, vertex, removeDuplicateVertices, __functionAddress);
     }
 
-    public static int btTriangleMesh_findOrAddVertex(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 vertex, @NativeType("bool") boolean removeDuplicateVertices) {
+    public static int btTriangleMesh_findOrAddVertex(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 vertex, @NativeType("bool") boolean removeDuplicateVertices) {
         return nbtTriangleMesh_findOrAddVertex(obj, vertex.address(), removeDuplicateVertices);
     }
 

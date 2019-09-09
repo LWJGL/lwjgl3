@@ -147,7 +147,7 @@ public class BTTypedConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btJointFeedback_getAppliedForceBodyA(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btJointFeedback_getAppliedForceBodyA(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtJointFeedback_getAppliedForceBodyA(obj, value.address());
     }
 
@@ -161,7 +161,7 @@ public class BTTypedConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btJointFeedback_getAppliedForceBodyB(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btJointFeedback_getAppliedForceBodyB(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtJointFeedback_getAppliedForceBodyB(obj, value.address());
     }
 
@@ -175,7 +175,7 @@ public class BTTypedConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btJointFeedback_getAppliedTorqueBodyA(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btJointFeedback_getAppliedTorqueBodyA(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtJointFeedback_getAppliedTorqueBodyA(obj, value.address());
     }
 
@@ -189,7 +189,7 @@ public class BTTypedConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btJointFeedback_getAppliedTorqueBodyB(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btJointFeedback_getAppliedTorqueBodyB(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtJointFeedback_getAppliedTorqueBodyB(obj, value.address());
     }
 
@@ -203,7 +203,7 @@ public class BTTypedConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btJointFeedback_setAppliedForceBodyA(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btJointFeedback_setAppliedForceBodyA(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtJointFeedback_setAppliedForceBodyA(obj, value.address());
     }
 
@@ -217,7 +217,7 @@ public class BTTypedConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btJointFeedback_setAppliedForceBodyB(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btJointFeedback_setAppliedForceBodyB(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtJointFeedback_setAppliedForceBodyB(obj, value.address());
     }
 
@@ -231,7 +231,7 @@ public class BTTypedConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btJointFeedback_setAppliedTorqueBodyA(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btJointFeedback_setAppliedTorqueBodyA(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtJointFeedback_setAppliedTorqueBodyA(obj, value.address());
     }
 
@@ -245,7 +245,7 @@ public class BTTypedConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btJointFeedback_setAppliedTorqueBodyB(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btJointFeedback_setAppliedTorqueBodyB(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtJointFeedback_setAppliedTorqueBodyB(obj, value.address());
     }
 

@@ -81,7 +81,7 @@ public class BTTriangleBuffer {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTriangle_getVertex0(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTriangle_getVertex0(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTriangle_getVertex0(obj, value.address());
     }
 
@@ -95,7 +95,7 @@ public class BTTriangleBuffer {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTriangle_getVertex1(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTriangle_getVertex1(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTriangle_getVertex1(obj, value.address());
     }
 
@@ -109,7 +109,7 @@ public class BTTriangleBuffer {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTriangle_getVertex2(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTriangle_getVertex2(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTriangle_getVertex2(obj, value.address());
     }
 
@@ -143,7 +143,7 @@ public class BTTriangleBuffer {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTriangle_setVertex0(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTriangle_setVertex0(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTriangle_setVertex0(obj, value.address());
     }
 
@@ -157,7 +157,7 @@ public class BTTriangleBuffer {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTriangle_setVertex1(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTriangle_setVertex1(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTriangle_setVertex1(obj, value.address());
     }
 
@@ -171,7 +171,7 @@ public class BTTriangleBuffer {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTriangle_setVertex2(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTriangle_setVertex2(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTriangle_setVertex2(obj, value.address());
     }
 

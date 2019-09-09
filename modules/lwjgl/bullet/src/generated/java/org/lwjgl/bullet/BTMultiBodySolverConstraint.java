@@ -109,7 +109,7 @@ public class BTMultiBodySolverConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultiBodySolverConstraint_getAngularComponentA(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btMultiBodySolverConstraint_getAngularComponentA(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtMultiBodySolverConstraint_getAngularComponentA(obj, value.address());
     }
 
@@ -123,7 +123,7 @@ public class BTMultiBodySolverConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultiBodySolverConstraint_getAngularComponentB(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btMultiBodySolverConstraint_getAngularComponentB(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtMultiBodySolverConstraint_getAngularComponentB(obj, value.address());
     }
 
@@ -170,7 +170,7 @@ public class BTMultiBodySolverConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultiBodySolverConstraint_getContactNormal1(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btMultiBodySolverConstraint_getContactNormal1(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtMultiBodySolverConstraint_getContactNormal1(obj, value.address());
     }
 
@@ -184,7 +184,7 @@ public class BTMultiBodySolverConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultiBodySolverConstraint_getContactNormal2(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btMultiBodySolverConstraint_getContactNormal2(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtMultiBodySolverConstraint_getContactNormal2(obj, value.address());
     }
 
@@ -365,7 +365,7 @@ public class BTMultiBodySolverConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultiBodySolverConstraint_getRelpos1CrossNormal(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btMultiBodySolverConstraint_getRelpos1CrossNormal(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtMultiBodySolverConstraint_getRelpos1CrossNormal(obj, value.address());
     }
 
@@ -379,7 +379,7 @@ public class BTMultiBodySolverConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultiBodySolverConstraint_getRelpos2CrossNormal(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btMultiBodySolverConstraint_getRelpos2CrossNormal(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtMultiBodySolverConstraint_getRelpos2CrossNormal(obj, value.address());
     }
 
@@ -457,7 +457,7 @@ public class BTMultiBodySolverConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultiBodySolverConstraint_setAngularComponentA(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btMultiBodySolverConstraint_setAngularComponentA(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtMultiBodySolverConstraint_setAngularComponentA(obj, value.address());
     }
 
@@ -471,7 +471,7 @@ public class BTMultiBodySolverConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultiBodySolverConstraint_setAngularComponentB(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btMultiBodySolverConstraint_setAngularComponentB(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtMultiBodySolverConstraint_setAngularComponentB(obj, value.address());
     }
 
@@ -515,7 +515,7 @@ public class BTMultiBodySolverConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultiBodySolverConstraint_setContactNormal1(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btMultiBodySolverConstraint_setContactNormal1(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtMultiBodySolverConstraint_setContactNormal1(obj, value.address());
     }
 
@@ -529,7 +529,7 @@ public class BTMultiBodySolverConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultiBodySolverConstraint_setContactNormal2(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btMultiBodySolverConstraint_setContactNormal2(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtMultiBodySolverConstraint_setContactNormal2(obj, value.address());
     }
 
@@ -707,7 +707,7 @@ public class BTMultiBodySolverConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultiBodySolverConstraint_setRelpos1CrossNormal(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btMultiBodySolverConstraint_setRelpos1CrossNormal(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtMultiBodySolverConstraint_setRelpos1CrossNormal(obj, value.address());
     }
 
@@ -721,7 +721,7 @@ public class BTMultiBodySolverConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultiBodySolverConstraint_setRelpos2CrossNormal(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btMultiBodySolverConstraint_setRelpos2CrossNormal(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtMultiBodySolverConstraint_setRelpos2CrossNormal(obj, value.address());
     }
 

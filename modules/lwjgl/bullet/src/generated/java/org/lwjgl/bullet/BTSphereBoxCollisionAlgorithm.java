@@ -68,7 +68,7 @@ public class BTSphereBoxCollisionAlgorithm {
     }
 
     @NativeType("bool")
-    public static boolean btSphereBoxCollisionAlgorithm_getSphereDistance(@NativeType("void *") long obj, @NativeType("void *") long boxObjWrap, @NativeType("btVector3 *") ΒΤVector3 v3PointOnBox, @NativeType("btVector3 *") ΒΤVector3 normal, @NativeType("btScalar *") FloatBuffer penetrationDepth, @NativeType("btVector3 const *") ΒΤVector3 v3SphereCenter, @NativeType("btScalar") float fRadius, @NativeType("btScalar") float maxContactDistance) {
+    public static boolean btSphereBoxCollisionAlgorithm_getSphereDistance(@NativeType("void *") long obj, @NativeType("void *") long boxObjWrap, @NativeType("btVector3 *") BTVector3 v3PointOnBox, @NativeType("btVector3 *") BTVector3 normal, @NativeType("btScalar *") FloatBuffer penetrationDepth, @NativeType("btVector3 const *") BTVector3 v3SphereCenter, @NativeType("btScalar") float fRadius, @NativeType("btScalar") float maxContactDistance) {
         if (CHECKS) {
             check(penetrationDepth, 1);
         }
@@ -86,7 +86,7 @@ public class BTSphereBoxCollisionAlgorithm {
     }
 
     @NativeType("btScalar")
-    public static float btSphereBoxCollisionAlgorithm_getSpherePenetration(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 boxHalfExtent, @NativeType("btVector3 const *") ΒΤVector3 sphereRelPos, @NativeType("btVector3 *") ΒΤVector3 closestPoint, @NativeType("btVector3 *") ΒΤVector3 normal) {
+    public static float btSphereBoxCollisionAlgorithm_getSpherePenetration(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 boxHalfExtent, @NativeType("btVector3 const *") BTVector3 sphereRelPos, @NativeType("btVector3 *") BTVector3 closestPoint, @NativeType("btVector3 *") BTVector3 normal) {
         return nbtSphereBoxCollisionAlgorithm_getSpherePenetration(obj, boxHalfExtent.address(), sphereRelPos.address(), closestPoint.address(), normal.address());
     }
 

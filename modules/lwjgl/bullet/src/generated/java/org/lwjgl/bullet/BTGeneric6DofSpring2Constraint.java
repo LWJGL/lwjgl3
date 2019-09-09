@@ -713,7 +713,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_getBounce(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_getBounce(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTranslationalLimitMotor2_getBounce(obj, value.address());
     }
 
@@ -739,7 +739,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_getCurrentLimitError(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_getCurrentLimitError(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTranslationalLimitMotor2_getCurrentLimitError(obj, value.address());
     }
 
@@ -753,7 +753,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_getCurrentLimitErrorHi(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_getCurrentLimitErrorHi(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTranslationalLimitMotor2_getCurrentLimitErrorHi(obj, value.address());
     }
 
@@ -767,7 +767,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_getCurrentLinearDiff(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_getCurrentLinearDiff(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTranslationalLimitMotor2_getCurrentLinearDiff(obj, value.address());
     }
 
@@ -805,7 +805,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_getEquilibriumPoint(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_getEquilibriumPoint(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTranslationalLimitMotor2_getEquilibriumPoint(obj, value.address());
     }
 
@@ -819,7 +819,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_getLowerLimit(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_getLowerLimit(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTranslationalLimitMotor2_getLowerLimit(obj, value.address());
     }
 
@@ -833,7 +833,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_getMaxMotorForce(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_getMaxMotorForce(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTranslationalLimitMotor2_getMaxMotorForce(obj, value.address());
     }
 
@@ -847,7 +847,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_getMotorCFM(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_getMotorCFM(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTranslationalLimitMotor2_getMotorCFM(obj, value.address());
     }
 
@@ -861,7 +861,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_getMotorERP(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_getMotorERP(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTranslationalLimitMotor2_getMotorERP(obj, value.address());
     }
 
@@ -887,7 +887,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_getServoTarget(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_getServoTarget(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTranslationalLimitMotor2_getServoTarget(obj, value.address());
     }
 
@@ -901,7 +901,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_getSpringDamping(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_getSpringDamping(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTranslationalLimitMotor2_getSpringDamping(obj, value.address());
     }
 
@@ -927,7 +927,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_getSpringStiffness(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_getSpringStiffness(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTranslationalLimitMotor2_getSpringStiffness(obj, value.address());
     }
 
@@ -953,7 +953,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_getStopCFM(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_getStopCFM(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTranslationalLimitMotor2_getStopCFM(obj, value.address());
     }
 
@@ -967,7 +967,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_getStopERP(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_getStopERP(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTranslationalLimitMotor2_getStopERP(obj, value.address());
     }
 
@@ -981,7 +981,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_getTargetVelocity(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_getTargetVelocity(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTranslationalLimitMotor2_getTargetVelocity(obj, value.address());
     }
 
@@ -995,7 +995,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_getUpperLimit(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_getUpperLimit(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTranslationalLimitMotor2_getUpperLimit(obj, value.address());
     }
 
@@ -1020,7 +1020,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_setBounce(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_setBounce(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTranslationalLimitMotor2_setBounce(obj, value.address());
     }
 
@@ -1034,7 +1034,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_setCurrentLimitError(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_setCurrentLimitError(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTranslationalLimitMotor2_setCurrentLimitError(obj, value.address());
     }
 
@@ -1048,7 +1048,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_setCurrentLimitErrorHi(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_setCurrentLimitErrorHi(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTranslationalLimitMotor2_setCurrentLimitErrorHi(obj, value.address());
     }
 
@@ -1062,7 +1062,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_setCurrentLinearDiff(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_setCurrentLinearDiff(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTranslationalLimitMotor2_setCurrentLinearDiff(obj, value.address());
     }
 
@@ -1076,7 +1076,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_setEquilibriumPoint(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_setEquilibriumPoint(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTranslationalLimitMotor2_setEquilibriumPoint(obj, value.address());
     }
 
@@ -1090,7 +1090,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_setLowerLimit(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_setLowerLimit(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTranslationalLimitMotor2_setLowerLimit(obj, value.address());
     }
 
@@ -1104,7 +1104,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_setMaxMotorForce(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_setMaxMotorForce(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTranslationalLimitMotor2_setMaxMotorForce(obj, value.address());
     }
 
@@ -1118,7 +1118,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_setMotorCFM(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_setMotorCFM(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTranslationalLimitMotor2_setMotorCFM(obj, value.address());
     }
 
@@ -1132,7 +1132,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_setMotorERP(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_setMotorERP(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTranslationalLimitMotor2_setMotorERP(obj, value.address());
     }
 
@@ -1146,7 +1146,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_setServoTarget(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_setServoTarget(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTranslationalLimitMotor2_setServoTarget(obj, value.address());
     }
 
@@ -1160,7 +1160,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_setSpringDamping(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_setSpringDamping(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTranslationalLimitMotor2_setSpringDamping(obj, value.address());
     }
 
@@ -1174,7 +1174,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_setSpringStiffness(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_setSpringStiffness(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTranslationalLimitMotor2_setSpringStiffness(obj, value.address());
     }
 
@@ -1188,7 +1188,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_setStopCFM(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_setStopCFM(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTranslationalLimitMotor2_setStopCFM(obj, value.address());
     }
 
@@ -1202,7 +1202,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_setStopERP(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_setStopERP(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTranslationalLimitMotor2_setStopERP(obj, value.address());
     }
 
@@ -1216,7 +1216,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_setTargetVelocity(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_setTargetVelocity(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTranslationalLimitMotor2_setTargetVelocity(obj, value.address());
     }
 
@@ -1230,7 +1230,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor2_setUpperLimit(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor2_setUpperLimit(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTranslationalLimitMotor2_setUpperLimit(obj, value.address());
     }
 
@@ -1362,7 +1362,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, angularLower, __functionAddress);
     }
 
-    public static void btGeneric6DofSpring2Constraint_getAngularLowerLimit(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 angularLower) {
+    public static void btGeneric6DofSpring2Constraint_getAngularLowerLimit(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 angularLower) {
         nbtGeneric6DofSpring2Constraint_getAngularLowerLimit(obj, angularLower.address());
     }
 
@@ -1376,7 +1376,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, angularLower, __functionAddress);
     }
 
-    public static void btGeneric6DofSpring2Constraint_getAngularLowerLimitReversed(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 angularLower) {
+    public static void btGeneric6DofSpring2Constraint_getAngularLowerLimitReversed(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 angularLower) {
         nbtGeneric6DofSpring2Constraint_getAngularLowerLimitReversed(obj, angularLower.address());
     }
 
@@ -1390,7 +1390,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, angularUpper, __functionAddress);
     }
 
-    public static void btGeneric6DofSpring2Constraint_getAngularUpperLimit(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 angularUpper) {
+    public static void btGeneric6DofSpring2Constraint_getAngularUpperLimit(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 angularUpper) {
         nbtGeneric6DofSpring2Constraint_getAngularUpperLimit(obj, angularUpper.address());
     }
 
@@ -1404,7 +1404,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, angularUpper, __functionAddress);
     }
 
-    public static void btGeneric6DofSpring2Constraint_getAngularUpperLimitReversed(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 angularUpper) {
+    public static void btGeneric6DofSpring2Constraint_getAngularUpperLimitReversed(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 angularUpper) {
         nbtGeneric6DofSpring2Constraint_getAngularUpperLimitReversed(obj, angularUpper.address());
     }
 
@@ -1418,7 +1418,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, axis_index, value, __functionAddress);
     }
 
-    public static void btGeneric6DofSpring2Constraint_getAxis(@NativeType("void *") long obj, int axis_index, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btGeneric6DofSpring2Constraint_getAxis(@NativeType("void *") long obj, int axis_index, @NativeType("btVector3 *") BTVector3 value) {
         nbtGeneric6DofSpring2Constraint_getAxis(obj, axis_index, value.address());
     }
 
@@ -1488,7 +1488,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, linearLower, __functionAddress);
     }
 
-    public static void btGeneric6DofSpring2Constraint_getLinearLowerLimit(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 linearLower) {
+    public static void btGeneric6DofSpring2Constraint_getLinearLowerLimit(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 linearLower) {
         nbtGeneric6DofSpring2Constraint_getLinearLowerLimit(obj, linearLower.address());
     }
 
@@ -1502,7 +1502,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, linearUpper, __functionAddress);
     }
 
-    public static void btGeneric6DofSpring2Constraint_getLinearUpperLimit(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 linearUpper) {
+    public static void btGeneric6DofSpring2Constraint_getLinearUpperLimit(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 linearUpper) {
         nbtGeneric6DofSpring2Constraint_getLinearUpperLimit(obj, linearUpper.address());
     }
 
@@ -1568,7 +1568,7 @@ public class BTGeneric6DofSpring2Constraint {
     }
 
     @NativeType("bool")
-    public static boolean btGeneric6DofSpring2Constraint_matrixToEulerZXY(@NativeType("btMatrix3x3 const *") BTMatrix3x3 mat, @NativeType("btVector3 *") ΒΤVector3 xyz) {
+    public static boolean btGeneric6DofSpring2Constraint_matrixToEulerZXY(@NativeType("btMatrix3x3 const *") BTMatrix3x3 mat, @NativeType("btVector3 *") BTVector3 xyz) {
         return nbtGeneric6DofSpring2Constraint_matrixToEulerZXY(mat.address(), xyz.address());
     }
 
@@ -1580,7 +1580,7 @@ public class BTGeneric6DofSpring2Constraint {
     }
 
     @NativeType("bool")
-    public static boolean btGeneric6DofSpring2Constraint_matrixToEulerZYX(@NativeType("btMatrix3x3 const *") BTMatrix3x3 mat, @NativeType("btVector3 *") ΒΤVector3 xyz) {
+    public static boolean btGeneric6DofSpring2Constraint_matrixToEulerZYX(@NativeType("btMatrix3x3 const *") BTMatrix3x3 mat, @NativeType("btVector3 *") BTVector3 xyz) {
         return nbtGeneric6DofSpring2Constraint_matrixToEulerZYX(mat.address(), xyz.address());
     }
 
@@ -1592,7 +1592,7 @@ public class BTGeneric6DofSpring2Constraint {
     }
 
     @NativeType("bool")
-    public static boolean btGeneric6DofSpring2Constraint_matrixToEulerXZY(@NativeType("btMatrix3x3 const *") BTMatrix3x3 mat, @NativeType("btVector3 *") ΒΤVector3 xyz) {
+    public static boolean btGeneric6DofSpring2Constraint_matrixToEulerXZY(@NativeType("btMatrix3x3 const *") BTMatrix3x3 mat, @NativeType("btVector3 *") BTVector3 xyz) {
         return nbtGeneric6DofSpring2Constraint_matrixToEulerXZY(mat.address(), xyz.address());
     }
 
@@ -1604,7 +1604,7 @@ public class BTGeneric6DofSpring2Constraint {
     }
 
     @NativeType("bool")
-    public static boolean btGeneric6DofSpring2Constraint_matrixToEulerXYZ(@NativeType("btMatrix3x3 const *") BTMatrix3x3 mat, @NativeType("btVector3 *") ΒΤVector3 xyz) {
+    public static boolean btGeneric6DofSpring2Constraint_matrixToEulerXYZ(@NativeType("btMatrix3x3 const *") BTMatrix3x3 mat, @NativeType("btVector3 *") BTVector3 xyz) {
         return nbtGeneric6DofSpring2Constraint_matrixToEulerXYZ(mat.address(), xyz.address());
     }
 
@@ -1616,7 +1616,7 @@ public class BTGeneric6DofSpring2Constraint {
     }
 
     @NativeType("bool")
-    public static boolean btGeneric6DofSpring2Constraint_matrixToEulerYZX(@NativeType("btMatrix3x3 const *") BTMatrix3x3 mat, @NativeType("btVector3 *") ΒΤVector3 xyz) {
+    public static boolean btGeneric6DofSpring2Constraint_matrixToEulerYZX(@NativeType("btMatrix3x3 const *") BTMatrix3x3 mat, @NativeType("btVector3 *") BTVector3 xyz) {
         return nbtGeneric6DofSpring2Constraint_matrixToEulerYZX(mat.address(), xyz.address());
     }
 
@@ -1628,7 +1628,7 @@ public class BTGeneric6DofSpring2Constraint {
     }
 
     @NativeType("bool")
-    public static boolean btGeneric6DofSpring2Constraint_matrixToEulerYXZ(@NativeType("btMatrix3x3 const *") BTMatrix3x3 mat, @NativeType("btVector3 *") ΒΤVector3 xyz) {
+    public static boolean btGeneric6DofSpring2Constraint_matrixToEulerYXZ(@NativeType("btMatrix3x3 const *") BTMatrix3x3 mat, @NativeType("btVector3 *") BTVector3 xyz) {
         return nbtGeneric6DofSpring2Constraint_matrixToEulerYXZ(mat.address(), xyz.address());
     }
 
@@ -1642,7 +1642,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, angularLower, __functionAddress);
     }
 
-    public static void btGeneric6DofSpring2Constraint_setAngularLowerLimit(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 angularLower) {
+    public static void btGeneric6DofSpring2Constraint_setAngularLowerLimit(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 angularLower) {
         nbtGeneric6DofSpring2Constraint_setAngularLowerLimit(obj, angularLower.address());
     }
 
@@ -1656,7 +1656,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, angularLower, __functionAddress);
     }
 
-    public static void btGeneric6DofSpring2Constraint_setAngularLowerLimitReversed(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 angularLower) {
+    public static void btGeneric6DofSpring2Constraint_setAngularLowerLimitReversed(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 angularLower) {
         nbtGeneric6DofSpring2Constraint_setAngularLowerLimitReversed(obj, angularLower.address());
     }
 
@@ -1670,7 +1670,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, angularUpper, __functionAddress);
     }
 
-    public static void btGeneric6DofSpring2Constraint_setAngularUpperLimit(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 angularUpper) {
+    public static void btGeneric6DofSpring2Constraint_setAngularUpperLimit(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 angularUpper) {
         nbtGeneric6DofSpring2Constraint_setAngularUpperLimit(obj, angularUpper.address());
     }
 
@@ -1684,7 +1684,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, angularUpper, __functionAddress);
     }
 
-    public static void btGeneric6DofSpring2Constraint_setAngularUpperLimitReversed(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 angularUpper) {
+    public static void btGeneric6DofSpring2Constraint_setAngularUpperLimitReversed(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 angularUpper) {
         nbtGeneric6DofSpring2Constraint_setAngularUpperLimitReversed(obj, angularUpper.address());
     }
 
@@ -1698,7 +1698,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPPV(obj, axis1, axis2, __functionAddress);
     }
 
-    public static void btGeneric6DofSpring2Constraint_setAxis(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 axis1, @NativeType("btVector3 const *") ΒΤVector3 axis2) {
+    public static void btGeneric6DofSpring2Constraint_setAxis(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 axis1, @NativeType("btVector3 const *") BTVector3 axis2) {
         nbtGeneric6DofSpring2Constraint_setAxis(obj, axis1.address(), axis2.address());
     }
 
@@ -1796,7 +1796,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, linearLower, __functionAddress);
     }
 
-    public static void btGeneric6DofSpring2Constraint_setLinearLowerLimit(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 linearLower) {
+    public static void btGeneric6DofSpring2Constraint_setLinearLowerLimit(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 linearLower) {
         nbtGeneric6DofSpring2Constraint_setLinearLowerLimit(obj, linearLower.address());
     }
 
@@ -1810,7 +1810,7 @@ public class BTGeneric6DofSpring2Constraint {
         invokePPV(obj, linearUpper, __functionAddress);
     }
 
-    public static void btGeneric6DofSpring2Constraint_setLinearUpperLimit(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 linearUpper) {
+    public static void btGeneric6DofSpring2Constraint_setLinearUpperLimit(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 linearUpper) {
         nbtGeneric6DofSpring2Constraint_setLinearUpperLimit(obj, linearUpper.address());
     }
 

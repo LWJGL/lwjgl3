@@ -52,7 +52,7 @@ public class BTConvexPointCloudShape {
     }
 
     @NativeType("void *")
-    public static long btConvexPointCloudShape_new2(@NativeType("btVector3 *") ΒΤVector3 points, int numPoints, @NativeType("btVector3 const *") ΒΤVector3 localScaling, @NativeType("bool") boolean computeAabb) {
+    public static long btConvexPointCloudShape_new2(@NativeType("btVector3 *") BTVector3 points, int numPoints, @NativeType("btVector3 const *") BTVector3 localScaling, @NativeType("bool") boolean computeAabb) {
         return nbtConvexPointCloudShape_new2(points.address(), numPoints, localScaling.address(), computeAabb);
     }
 
@@ -76,7 +76,7 @@ public class BTConvexPointCloudShape {
         invokePPV(obj, index, value, __functionAddress);
     }
 
-    public static void btConvexPointCloudShape_getScaledPoint(@NativeType("void *") long obj, int index, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btConvexPointCloudShape_getScaledPoint(@NativeType("void *") long obj, int index, @NativeType("btVector3 *") BTVector3 value) {
         nbtConvexPointCloudShape_getScaledPoint(obj, index, value.address());
     }
 
@@ -92,9 +92,9 @@ public class BTConvexPointCloudShape {
 
     @Nullable
     @NativeType("btVector3 *")
-    public static ΒΤVector3 btConvexPointCloudShape_getUnscaledPoints(@NativeType("void *") long obj) {
+    public static BTVector3 btConvexPointCloudShape_getUnscaledPoints(@NativeType("void *") long obj) {
         long __result = nbtConvexPointCloudShape_getUnscaledPoints(obj);
-        return ΒΤVector3.createSafe(__result);
+        return BTVector3.createSafe(__result);
     }
 
     // --- [ btConvexPointCloudShape_setPoints ] ---
@@ -107,7 +107,7 @@ public class BTConvexPointCloudShape {
         invokePPV(obj, points, numPoints, computeAabb, __functionAddress);
     }
 
-    public static void btConvexPointCloudShape_setPoints(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 points, int numPoints, @NativeType("bool") boolean computeAabb) {
+    public static void btConvexPointCloudShape_setPoints(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 points, int numPoints, @NativeType("bool") boolean computeAabb) {
         nbtConvexPointCloudShape_setPoints(obj, points.address(), numPoints, computeAabb);
     }
 
@@ -121,7 +121,7 @@ public class BTConvexPointCloudShape {
         invokePPPV(obj, points, numPoints, computeAabb, localScaling, __functionAddress);
     }
 
-    public static void btConvexPointCloudShape_setPoints2(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 points, int numPoints, @NativeType("bool") boolean computeAabb, @NativeType("btVector3 const *") ΒΤVector3 localScaling) {
+    public static void btConvexPointCloudShape_setPoints2(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 points, int numPoints, @NativeType("bool") boolean computeAabb, @NativeType("btVector3 const *") BTVector3 localScaling) {
         nbtConvexPointCloudShape_setPoints2(obj, points.address(), numPoints, computeAabb, localScaling.address());
     }
 

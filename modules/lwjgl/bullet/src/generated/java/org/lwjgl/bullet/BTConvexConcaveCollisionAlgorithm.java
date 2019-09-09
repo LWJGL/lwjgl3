@@ -84,7 +84,7 @@ public class BTConvexConcaveCollisionAlgorithm {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btConvexTriangleCallback_getAabbMax(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btConvexTriangleCallback_getAabbMax(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtConvexTriangleCallback_getAabbMax(obj, value.address());
     }
 
@@ -98,7 +98,7 @@ public class BTConvexConcaveCollisionAlgorithm {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btConvexTriangleCallback_getAabbMin(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btConvexTriangleCallback_getAabbMin(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtConvexTriangleCallback_getAabbMin(obj, value.address());
     }
 

@@ -71,7 +71,7 @@ public class BTCollisionShape {
         invokePPV(obj, mass, inertia, __functionAddress);
     }
 
-    public static void btCollisionShape_calculateLocalInertia(@NativeType("void *") long obj, @NativeType("btScalar") float mass, @NativeType("btVector3 *") ΒΤVector3 inertia) {
+    public static void btCollisionShape_calculateLocalInertia(@NativeType("void *") long obj, @NativeType("btScalar") float mass, @NativeType("btVector3 *") BTVector3 inertia) {
         nbtCollisionShape_calculateLocalInertia(obj, mass, inertia.address());
     }
 
@@ -95,7 +95,7 @@ public class BTCollisionShape {
         invokePPPPPPV(obj, curTrans, linvel, angvel, timeStep, temporalAabbMin, temporalAabbMax, __functionAddress);
     }
 
-    public static void btCollisionShape_calculateTemporalAabb(@NativeType("void *") long obj, @NativeType("btTransform const *") BTTransform curTrans, @NativeType("btVector3 const *") ΒΤVector3 linvel, @NativeType("btVector3 const *") ΒΤVector3 angvel, @NativeType("btScalar") float timeStep, @NativeType("btVector3 *") ΒΤVector3 temporalAabbMin, @NativeType("btVector3 *") ΒΤVector3 temporalAabbMax) {
+    public static void btCollisionShape_calculateTemporalAabb(@NativeType("void *") long obj, @NativeType("btTransform const *") BTTransform curTrans, @NativeType("btVector3 const *") BTVector3 linvel, @NativeType("btVector3 const *") BTVector3 angvel, @NativeType("btScalar") float timeStep, @NativeType("btVector3 *") BTVector3 temporalAabbMin, @NativeType("btVector3 *") BTVector3 temporalAabbMax) {
         nbtCollisionShape_calculateTemporalAabb(obj, curTrans.address(), linvel.address(), angvel.address(), timeStep, temporalAabbMin.address(), temporalAabbMax.address());
     }
 
@@ -109,7 +109,7 @@ public class BTCollisionShape {
         invokePPPPV(obj, t, aabbMin, aabbMax, __functionAddress);
     }
 
-    public static void btCollisionShape_getAabb(@NativeType("void *") long obj, @NativeType("btTransform const *") BTTransform t, @NativeType("btVector3 *") ΒΤVector3 aabbMin, @NativeType("btVector3 *") ΒΤVector3 aabbMax) {
+    public static void btCollisionShape_getAabb(@NativeType("void *") long obj, @NativeType("btTransform const *") BTTransform t, @NativeType("btVector3 *") BTVector3 aabbMin, @NativeType("btVector3 *") BTVector3 aabbMax) {
         nbtCollisionShape_getAabb(obj, t.address(), aabbMin.address(), aabbMax.address());
     }
 
@@ -134,7 +134,7 @@ public class BTCollisionShape {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionShape_getAnisotropicRollingFrictionDirection(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btCollisionShape_getAnisotropicRollingFrictionDirection(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtCollisionShape_getAnisotropicRollingFrictionDirection(obj, value.address());
     }
 
@@ -148,7 +148,7 @@ public class BTCollisionShape {
         invokePPPV(obj, center, radius, __functionAddress);
     }
 
-    public static void btCollisionShape_getBoundingSphere(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 center, @NativeType("btScalar *") FloatBuffer radius) {
+    public static void btCollisionShape_getBoundingSphere(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 center, @NativeType("btScalar *") FloatBuffer radius) {
         if (CHECKS) {
             check(radius, 1);
         }
@@ -176,7 +176,7 @@ public class BTCollisionShape {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionShape_getLocalScaling(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btCollisionShape_getLocalScaling(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtCollisionShape_getLocalScaling(obj, value.address());
     }
 
@@ -367,7 +367,7 @@ public class BTCollisionShape {
         invokePPV(obj, scaling, __functionAddress);
     }
 
-    public static void btCollisionShape_setLocalScaling(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 scaling) {
+    public static void btCollisionShape_setLocalScaling(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 scaling) {
         nbtCollisionShape_setLocalScaling(obj, scaling.address());
     }
 

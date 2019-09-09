@@ -825,7 +825,7 @@ public class BTGImpactBvh {
     }
 
     @NativeType("bool")
-    public static boolean btGImpactBvh_rayQuery(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 ray_dir, @NativeType("btVector3 const *") ΒΤVector3 ray_origin, @NativeType("void *") long collided_results) {
+    public static boolean btGImpactBvh_rayQuery(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 ray_dir, @NativeType("btVector3 const *") BTVector3 ray_origin, @NativeType("void *") long collided_results) {
         return nbtGImpactBvh_rayQuery(obj, ray_dir.address(), ray_origin.address(), collided_results);
     }
 

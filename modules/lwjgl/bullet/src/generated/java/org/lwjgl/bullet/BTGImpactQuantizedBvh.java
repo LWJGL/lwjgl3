@@ -355,7 +355,7 @@ public class BTGImpactQuantizedBvh {
         invokePPPV(obj, quantizedpoint, point, __functionAddress);
     }
 
-    public static void btQuantizedBvhTree_quantizePoint(@NativeType("void *") long obj, @NativeType("unsigned short *") ShortBuffer quantizedpoint, @NativeType("btVector3 const *") ΒΤVector3 point) {
+    public static void btQuantizedBvhTree_quantizePoint(@NativeType("void *") long obj, @NativeType("unsigned short *") ShortBuffer quantizedpoint, @NativeType("btVector3 const *") BTVector3 point) {
         if (CHECKS) {
             check(quantizedpoint, 3);
         }
@@ -627,7 +627,7 @@ public class BTGImpactQuantizedBvh {
     }
 
     @NativeType("bool")
-    public static boolean btGImpactQuantizedBvh_rayQuery(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 ray_dir, @NativeType("btVector3 const *") ΒΤVector3 ray_origin, @NativeType("void *") long collided_results) {
+    public static boolean btGImpactQuantizedBvh_rayQuery(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 ray_dir, @NativeType("btVector3 const *") BTVector3 ray_origin, @NativeType("void *") long collided_results) {
         return nbtGImpactQuantizedBvh_rayQuery(obj, ray_dir.address(), ray_origin.address(), collided_results);
     }
 

@@ -153,7 +153,7 @@ public class BTBoxCollision {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btBT_BOX_BOX_TRANSFORM_CACHE_getT1to0(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btBT_BOX_BOX_TRANSFORM_CACHE_getT1to0(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtBT_BOX_BOX_TRANSFORM_CACHE_getT1to0(obj, value.address());
     }
 
@@ -195,7 +195,7 @@ public class BTBoxCollision {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btBT_BOX_BOX_TRANSFORM_CACHE_setT1to0(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btBT_BOX_BOX_TRANSFORM_CACHE_setT1to0(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtBT_BOX_BOX_TRANSFORM_CACHE_setT1to0(obj, value.address());
     }
 
@@ -209,7 +209,7 @@ public class BTBoxCollision {
         invokePPPV(obj, point, value, __functionAddress);
     }
 
-    public static void btBT_BOX_BOX_TRANSFORM_CACHE_transform(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 point, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btBT_BOX_BOX_TRANSFORM_CACHE_transform(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 point, @NativeType("btVector3 *") BTVector3 value) {
         nbtBT_BOX_BOX_TRANSFORM_CACHE_transform(obj, point.address(), value.address());
     }
 
@@ -239,7 +239,7 @@ public class BTBoxCollision {
     }
 
     @NativeType("void *")
-    public static long btAABB_new2(@NativeType("btVector3 const *") ΒΤVector3 V1, @NativeType("btVector3 const *") ΒΤVector3 V2, @NativeType("btVector3 const *") ΒΤVector3 V3) {
+    public static long btAABB_new2(@NativeType("btVector3 const *") BTVector3 V1, @NativeType("btVector3 const *") BTVector3 V2, @NativeType("btVector3 const *") BTVector3 V3) {
         return nbtAABB_new2(V1.address(), V2.address(), V3.address());
     }
 
@@ -251,7 +251,7 @@ public class BTBoxCollision {
     }
 
     @NativeType("void *")
-    public static long btAABB_new3(@NativeType("btVector3 const *") ΒΤVector3 V1, @NativeType("btVector3 const *") ΒΤVector3 V2, @NativeType("btVector3 const *") ΒΤVector3 V3, @NativeType("btScalar") float margin) {
+    public static long btAABB_new3(@NativeType("btVector3 const *") BTVector3 V1, @NativeType("btVector3 const *") BTVector3 V2, @NativeType("btVector3 const *") BTVector3 V3, @NativeType("btScalar") float margin) {
         return nbtAABB_new3(V1.address(), V2.address(), V3.address(), margin);
     }
 
@@ -313,7 +313,7 @@ public class BTBoxCollision {
     }
 
     @NativeType("bool")
-    public static boolean btAABB_collide_plane(@NativeType("void *") long obj, @NativeType("btVector4 const *") ΒΤVector3 plane) {
+    public static boolean btAABB_collide_plane(@NativeType("void *") long obj, @NativeType("btVector4 const *") BTVector3 plane) {
         return nbtAABB_collide_plane(obj, plane.address());
     }
 
@@ -328,7 +328,7 @@ public class BTBoxCollision {
     }
 
     @NativeType("bool")
-    public static boolean btAABB_collide_ray(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 vorigin, @NativeType("btVector3 const *") ΒΤVector3 vdir) {
+    public static boolean btAABB_collide_ray(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 vorigin, @NativeType("btVector3 const *") BTVector3 vdir) {
         return nbtAABB_collide_ray(obj, vorigin.address(), vdir.address());
     }
 
@@ -343,7 +343,7 @@ public class BTBoxCollision {
     }
 
     @NativeType("bool")
-    public static boolean btAABB_collide_triangle_exact(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 p1, @NativeType("btVector3 const *") ΒΤVector3 p2, @NativeType("btVector3 const *") ΒΤVector3 p3, @NativeType("btVector4 const *") ΒΤVector3 triangle_plane) {
+    public static boolean btAABB_collide_triangle_exact(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 p1, @NativeType("btVector3 const *") BTVector3 p2, @NativeType("btVector3 const *") BTVector3 p3, @NativeType("btVector4 const *") BTVector3 triangle_plane) {
         return nbtAABB_collide_triangle_exact(obj, p1.address(), p2.address(), p3.address(), triangle_plane.address());
     }
 
@@ -380,7 +380,7 @@ public class BTBoxCollision {
         invokePPPV(obj, center, extend, __functionAddress);
     }
 
-    public static void btAABB_get_center_extend(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 center, @NativeType("btVector3 *") ΒΤVector3 extend) {
+    public static void btAABB_get_center_extend(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 center, @NativeType("btVector3 *") BTVector3 extend) {
         nbtAABB_get_center_extend(obj, center.address(), extend.address());
     }
 
@@ -394,7 +394,7 @@ public class BTBoxCollision {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btAABB_getMax(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btAABB_getMax(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtAABB_getMax(obj, value.address());
     }
 
@@ -408,7 +408,7 @@ public class BTBoxCollision {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btAABB_getMin(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btAABB_getMin(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtAABB_getMin(obj, value.address());
     }
 
@@ -507,7 +507,7 @@ public class BTBoxCollision {
         return invokePPI(obj, plane, __functionAddress);
     }
 
-    public static int btAABB_plane_classify(@NativeType("void *") long obj, @NativeType("btVector4 const *") ΒΤVector3 plane) {
+    public static int btAABB_plane_classify(@NativeType("void *") long obj, @NativeType("btVector4 const *") BTVector3 plane) {
         return nbtAABB_plane_classify(obj, plane.address());
     }
 
@@ -521,7 +521,7 @@ public class BTBoxCollision {
         invokePPPPV(obj, direction, vmin, vmax, __functionAddress);
     }
 
-    public static void btAABB_projection_interval(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 direction, @NativeType("btScalar *") FloatBuffer vmin, @NativeType("btScalar *") FloatBuffer vmax) {
+    public static void btAABB_projection_interval(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 direction, @NativeType("btScalar *") FloatBuffer vmin, @NativeType("btScalar *") FloatBuffer vmax) {
         if (CHECKS) {
             check(vmin, 1);
             check(vmax, 1);
@@ -539,7 +539,7 @@ public class BTBoxCollision {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btAABB_setMax(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btAABB_setMax(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtAABB_setMax(obj, value.address());
     }
 
@@ -553,7 +553,7 @@ public class BTBoxCollision {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btAABB_setMin(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btAABB_setMin(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtAABB_setMin(obj, value.address());
     }
 

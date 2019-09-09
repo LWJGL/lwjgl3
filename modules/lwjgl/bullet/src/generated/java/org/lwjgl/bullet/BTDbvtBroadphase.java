@@ -407,7 +407,7 @@ public class BTDbvtBroadphase {
         invokePPPPPV(obj, absproxy, aabbMin, aabbMax, __unnamed3, __functionAddress);
     }
 
-    public static void btDbvtBroadphase_setAabbForceUpdate(@NativeType("void *") long obj, @NativeType("void *") long absproxy, @NativeType("btVector3 const *") ΒΤVector3 aabbMin, @NativeType("btVector3 const *") ΒΤVector3 aabbMax, @NativeType("void *") long __unnamed3) {
+    public static void btDbvtBroadphase_setAabbForceUpdate(@NativeType("void *") long obj, @NativeType("void *") long absproxy, @NativeType("btVector3 const *") BTVector3 aabbMin, @NativeType("btVector3 const *") BTVector3 aabbMax, @NativeType("void *") long __unnamed3) {
         nbtDbvtBroadphase_setAabbForceUpdate(obj, absproxy, aabbMin.address(), aabbMax.address(), __unnamed3);
     }
 

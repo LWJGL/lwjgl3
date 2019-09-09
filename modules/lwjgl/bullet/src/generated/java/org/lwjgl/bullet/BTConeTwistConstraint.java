@@ -314,7 +314,7 @@ public class BTConeTwistConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btConeTwistConstraint_getMotorTarget(@NativeType("void *") long obj, @NativeType("btQuaternion *") ΒΤVector3 value) {
+    public static void btConeTwistConstraint_getMotorTarget(@NativeType("void *") long obj, @NativeType("btQuaternion *") BTVector3 value) {
         nbtConeTwistConstraint_getMotorTarget(obj, value.address());
     }
 
@@ -328,7 +328,7 @@ public class BTConeTwistConstraint {
         invokePPV(obj, fAngleInRadians, fLength, value, __functionAddress);
     }
 
-    public static void btConeTwistConstraint_GetPointForAngle(@NativeType("void *") long obj, @NativeType("btScalar") float fAngleInRadians, @NativeType("btScalar") float fLength, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btConeTwistConstraint_GetPointForAngle(@NativeType("void *") long obj, @NativeType("btScalar") float fAngleInRadians, @NativeType("btScalar") float fLength, @NativeType("btVector3 *") BTVector3 value) {
         nbtConeTwistConstraint_GetPointForAngle(obj, fAngleInRadians, fLength, value.address());
     }
 
@@ -545,7 +545,7 @@ public class BTConeTwistConstraint {
         invokePPV(obj, q, __functionAddress);
     }
 
-    public static void btConeTwistConstraint_setMotorTarget(@NativeType("void *") long obj, @NativeType("btQuaternion const *") ΒΤVector3 q) {
+    public static void btConeTwistConstraint_setMotorTarget(@NativeType("void *") long obj, @NativeType("btQuaternion const *") BTVector3 q) {
         nbtConeTwistConstraint_setMotorTarget(obj, q.address());
     }
 
@@ -559,7 +559,7 @@ public class BTConeTwistConstraint {
         invokePPV(obj, q, __functionAddress);
     }
 
-    public static void btConeTwistConstraint_setMotorTargetInConstraintSpace(@NativeType("void *") long obj, @NativeType("btQuaternion const *") ΒΤVector3 q) {
+    public static void btConeTwistConstraint_setMotorTargetInConstraintSpace(@NativeType("void *") long obj, @NativeType("btQuaternion const *") BTVector3 q) {
         nbtConeTwistConstraint_setMotorTargetInConstraintSpace(obj, q.address());
     }
 

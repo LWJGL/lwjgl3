@@ -118,7 +118,7 @@ public class BTGhostObject {
         invokePPPPV(obj, rayFromWorld, rayToWorld, resultCallback, __functionAddress);
     }
 
-    public static void btGhostObject_rayTest(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 rayFromWorld, @NativeType("btVector3 const *") ΒΤVector3 rayToWorld, @NativeType("void *") long resultCallback) {
+    public static void btGhostObject_rayTest(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 rayFromWorld, @NativeType("btVector3 const *") BTVector3 rayToWorld, @NativeType("void *") long resultCallback) {
         nbtGhostObject_rayTest(obj, rayFromWorld.address(), rayToWorld.address(), resultCallback);
     }
 

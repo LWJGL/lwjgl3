@@ -63,7 +63,7 @@ public class BTAxisSweep3 {
     }
 
     @NativeType("void *")
-    public static long btAxisSweep3_new(@NativeType("btVector3 const *") ΒΤVector3 worldAabbMin, @NativeType("btVector3 const *") ΒΤVector3 worldAabbMax, @NativeType("unsigned short") short maxHandles, @NativeType("void *") long pairCache, @NativeType("bool") boolean disableRaycastAccelerator) {
+    public static long btAxisSweep3_new(@NativeType("btVector3 const *") BTVector3 worldAabbMin, @NativeType("btVector3 const *") BTVector3 worldAabbMax, @NativeType("unsigned short") short maxHandles, @NativeType("void *") long pairCache, @NativeType("bool") boolean disableRaycastAccelerator) {
         return nbtAxisSweep3_new(worldAabbMin.address(), worldAabbMax.address(), maxHandles, pairCache, disableRaycastAccelerator);
     }
 
@@ -80,7 +80,7 @@ public class BTAxisSweep3 {
     }
 
     @NativeType("unsigned short")
-    public static short btAxisSweep3_addHandle(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 aabbMin, @NativeType("btVector3 const *") ΒΤVector3 aabbMax, @NativeType("void *") long pOwner, int collisionFilterGroup, int collisionFilterMask, @NativeType("void *") long dispatcher) {
+    public static short btAxisSweep3_addHandle(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 aabbMin, @NativeType("btVector3 const *") BTVector3 aabbMax, @NativeType("void *") long pOwner, int collisionFilterGroup, int collisionFilterMask, @NativeType("void *") long dispatcher) {
         return nbtAxisSweep3_addHandle(obj, aabbMin.address(), aabbMax.address(), pOwner, collisionFilterGroup, collisionFilterMask, dispatcher);
     }
 
@@ -127,7 +127,7 @@ public class BTAxisSweep3 {
         invokePPPV(obj, out, point, isMax, __functionAddress);
     }
 
-    public static void btAxisSweep3_quantize(@NativeType("void *") long obj, @NativeType("unsigned short *") ShortBuffer out, @NativeType("btVector3 const *") ΒΤVector3 point, int isMax) {
+    public static void btAxisSweep3_quantize(@NativeType("void *") long obj, @NativeType("unsigned short *") ShortBuffer out, @NativeType("btVector3 const *") BTVector3 point, int isMax) {
         nbtAxisSweep3_quantize(obj, memAddress(out), point.address(), isMax);
     }
 
@@ -177,7 +177,7 @@ public class BTAxisSweep3 {
         invokePPPPV(obj, proxy, aabbMin, aabbMax, __functionAddress);
     }
 
-    public static void btAxisSweep3_unQuantize(@NativeType("void *") long obj, @NativeType("void *") long proxy, @NativeType("btVector3 *") ΒΤVector3 aabbMin, @NativeType("btVector3 *") ΒΤVector3 aabbMax) {
+    public static void btAxisSweep3_unQuantize(@NativeType("void *") long obj, @NativeType("void *") long proxy, @NativeType("btVector3 *") BTVector3 aabbMin, @NativeType("btVector3 *") BTVector3 aabbMax) {
         nbtAxisSweep3_unQuantize(obj, proxy, aabbMin.address(), aabbMax.address());
     }
 
@@ -192,7 +192,7 @@ public class BTAxisSweep3 {
         invokePPPPV(obj, handle, aabbMin, aabbMax, dispatcher, __functionAddress);
     }
 
-    public static void btAxisSweep3_updateHandle(@NativeType("void *") long obj, @NativeType("unsigned short") short handle, @NativeType("btVector3 const *") ΒΤVector3 aabbMin, @NativeType("btVector3 const *") ΒΤVector3 aabbMax, @NativeType("void *") long dispatcher) {
+    public static void btAxisSweep3_updateHandle(@NativeType("void *") long obj, @NativeType("unsigned short") short handle, @NativeType("btVector3 const *") BTVector3 aabbMin, @NativeType("btVector3 const *") BTVector3 aabbMax, @NativeType("void *") long dispatcher) {
         nbtAxisSweep3_updateHandle(obj, handle, aabbMin.address(), aabbMax.address(), dispatcher);
     }
 
@@ -207,7 +207,7 @@ public class BTAxisSweep3 {
     }
 
     @NativeType("void *")
-    public static long bt32BitAxisSweep3_new(@NativeType("btVector3 const *") ΒΤVector3 worldAabbMin, @NativeType("btVector3 const *") ΒΤVector3 worldAabbMax, @NativeType("unsigned int") int maxHandles, @NativeType("void *") long pairCache, @NativeType("bool") boolean disableRaycastAccelerator) {
+    public static long bt32BitAxisSweep3_new(@NativeType("btVector3 const *") BTVector3 worldAabbMin, @NativeType("btVector3 const *") BTVector3 worldAabbMax, @NativeType("unsigned int") int maxHandles, @NativeType("void *") long pairCache, @NativeType("bool") boolean disableRaycastAccelerator) {
         return nbt32BitAxisSweep3_new(worldAabbMin.address(), worldAabbMax.address(), maxHandles, pairCache, disableRaycastAccelerator);
     }
 
@@ -224,7 +224,7 @@ public class BTAxisSweep3 {
     }
 
     @NativeType("unsigned int")
-    public static int bt32BitAxisSweep3_addHandle(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 aabbMin, @NativeType("btVector3 const *") ΒΤVector3 aabbMax, @NativeType("void *") long pOwner, int collisionFilterGroup, int collisionFilterMask, @NativeType("void *") long dispatchery) {
+    public static int bt32BitAxisSweep3_addHandle(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 aabbMin, @NativeType("btVector3 const *") BTVector3 aabbMax, @NativeType("void *") long pOwner, int collisionFilterGroup, int collisionFilterMask, @NativeType("void *") long dispatchery) {
         return nbt32BitAxisSweep3_addHandle(obj, aabbMin.address(), aabbMax.address(), pOwner, collisionFilterGroup, collisionFilterMask, dispatchery);
     }
 
@@ -271,7 +271,7 @@ public class BTAxisSweep3 {
         invokePPPV(obj, out, point, isMax, __functionAddress);
     }
 
-    public static void bt32BitAxisSweep3_quantize(@NativeType("void *") long obj, @NativeType("unsigned int *") IntBuffer out, @NativeType("btVector3 const *") ΒΤVector3 point, int isMax) {
+    public static void bt32BitAxisSweep3_quantize(@NativeType("void *") long obj, @NativeType("unsigned int *") IntBuffer out, @NativeType("btVector3 const *") BTVector3 point, int isMax) {
         nbt32BitAxisSweep3_quantize(obj, memAddress(out), point.address(), isMax);
     }
 
@@ -321,7 +321,7 @@ public class BTAxisSweep3 {
         invokePPPPV(obj, proxy, aabbMin, aabbMax, __functionAddress);
     }
 
-    public static void bt32BitAxisSweep3_unQuantize(@NativeType("void *") long obj, @NativeType("void *") long proxy, @NativeType("btVector3 *") ΒΤVector3 aabbMin, @NativeType("btVector3 *") ΒΤVector3 aabbMax) {
+    public static void bt32BitAxisSweep3_unQuantize(@NativeType("void *") long obj, @NativeType("void *") long proxy, @NativeType("btVector3 *") BTVector3 aabbMin, @NativeType("btVector3 *") BTVector3 aabbMax) {
         nbt32BitAxisSweep3_unQuantize(obj, proxy, aabbMin.address(), aabbMax.address());
     }
 
@@ -336,7 +336,7 @@ public class BTAxisSweep3 {
         invokePPPPV(obj, handle, aabbMin, aabbMax, dispatcher, __functionAddress);
     }
 
-    public static void bt32BitAxisSweep3_updateHandle(@NativeType("void *") long obj, @NativeType("unsigned int") int handle, @NativeType("btVector3 const *") ΒΤVector3 aabbMin, @NativeType("btVector3 const *") ΒΤVector3 aabbMax, @NativeType("void *") long dispatcher) {
+    public static void bt32BitAxisSweep3_updateHandle(@NativeType("void *") long obj, @NativeType("unsigned int") int handle, @NativeType("btVector3 const *") BTVector3 aabbMin, @NativeType("btVector3 const *") BTVector3 aabbMax, @NativeType("void *") long dispatcher) {
         nbt32BitAxisSweep3_updateHandle(obj, handle, aabbMin.address(), aabbMax.address(), dispatcher);
     }
 

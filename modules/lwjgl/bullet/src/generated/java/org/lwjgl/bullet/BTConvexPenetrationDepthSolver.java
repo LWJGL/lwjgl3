@@ -44,7 +44,7 @@ public class BTConvexPenetrationDepthSolver {
     }
 
     @NativeType("bool")
-    public static boolean btConvexPenetrationDepthSolver_calcPenDepth(@NativeType("void *") long obj, @NativeType("void *") long simplexSolver, @NativeType("void *") long convexA, @NativeType("void *") long convexB, @NativeType("btTransform const *") BTTransform transA, @NativeType("btTransform const *") BTTransform transB, @NativeType("btVector3 *") ΒΤVector3 v, @NativeType("btVector3 *") ΒΤVector3 pa, @NativeType("btVector3 *") ΒΤVector3 pb, @NativeType("void *") long debugDraw) {
+    public static boolean btConvexPenetrationDepthSolver_calcPenDepth(@NativeType("void *") long obj, @NativeType("void *") long simplexSolver, @NativeType("void *") long convexA, @NativeType("void *") long convexB, @NativeType("btTransform const *") BTTransform transA, @NativeType("btTransform const *") BTTransform transB, @NativeType("btVector3 *") BTVector3 v, @NativeType("btVector3 *") BTVector3 pa, @NativeType("btVector3 *") BTVector3 pb, @NativeType("void *") long debugDraw) {
         return nbtConvexPenetrationDepthSolver_calcPenDepth(obj, simplexSolver, convexA, convexB, transA.address(), transB.address(), v.address(), pa.address(), pb.address(), debugDraw);
     }
 

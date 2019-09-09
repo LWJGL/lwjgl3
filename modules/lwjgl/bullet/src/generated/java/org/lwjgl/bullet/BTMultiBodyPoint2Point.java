@@ -43,7 +43,7 @@ public class BTMultiBodyPoint2Point {
     }
 
     @NativeType("void *")
-    public static long btMultiBodyPoint2Point_new(@NativeType("void *") long body, int link, @NativeType("void *") long bodyB, @NativeType("btVector3 const *") ΒΤVector3 pivotInA, @NativeType("btVector3 const *") ΒΤVector3 pivotInB) {
+    public static long btMultiBodyPoint2Point_new(@NativeType("void *") long body, int link, @NativeType("void *") long bodyB, @NativeType("btVector3 const *") BTVector3 pivotInA, @NativeType("btVector3 const *") BTVector3 pivotInB) {
         return nbtMultiBodyPoint2Point_new(body, link, bodyB, pivotInA.address(), pivotInB.address());
     }
 
@@ -59,7 +59,7 @@ public class BTMultiBodyPoint2Point {
     }
 
     @NativeType("void *")
-    public static long btMultiBodyPoint2Point_new2(@NativeType("void *") long bodyA, int linkA, @NativeType("void *") long bodyB, int linkB, @NativeType("btVector3 const *") ΒΤVector3 pivotInA, @NativeType("btVector3 const *") ΒΤVector3 pivotInB) {
+    public static long btMultiBodyPoint2Point_new2(@NativeType("void *") long bodyA, int linkA, @NativeType("void *") long bodyB, int linkB, @NativeType("btVector3 const *") BTVector3 pivotInA, @NativeType("btVector3 const *") BTVector3 pivotInB) {
         return nbtMultiBodyPoint2Point_new2(bodyA, linkA, bodyB, linkB, pivotInA.address(), pivotInB.address());
     }
 
@@ -73,7 +73,7 @@ public class BTMultiBodyPoint2Point {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultiBodyPoint2Point_getPivotInB(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btMultiBodyPoint2Point_getPivotInB(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtMultiBodyPoint2Point_getPivotInB(obj, value.address());
     }
 
@@ -87,7 +87,7 @@ public class BTMultiBodyPoint2Point {
         invokePPV(obj, pivotInB, __functionAddress);
     }
 
-    public static void btMultiBodyPoint2Point_setPivotInB(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 pivotInB) {
+    public static void btMultiBodyPoint2Point_setPivotInB(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 pivotInB) {
         nbtMultiBodyPoint2Point_setPivotInB(obj, pivotInB.address());
     }
 

@@ -76,7 +76,7 @@ public class BTPointCollector {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btPointCollector_getNormalOnBInWorld(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btPointCollector_getNormalOnBInWorld(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtPointCollector_getNormalOnBInWorld(obj, value.address());
     }
 
@@ -90,7 +90,7 @@ public class BTPointCollector {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btPointCollector_getPointInWorld(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btPointCollector_getPointInWorld(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtPointCollector_getPointInWorld(obj, value.address());
     }
 
@@ -124,7 +124,7 @@ public class BTPointCollector {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btPointCollector_setNormalOnBInWorld(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btPointCollector_setNormalOnBInWorld(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtPointCollector_setNormalOnBInWorld(obj, value.address());
     }
 
@@ -138,7 +138,7 @@ public class BTPointCollector {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btPointCollector_setPointInWorld(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btPointCollector_setPointInWorld(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtPointCollector_setPointInWorld(obj, value.address());
     }
 

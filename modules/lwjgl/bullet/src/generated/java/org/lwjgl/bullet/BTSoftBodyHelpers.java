@@ -65,7 +65,7 @@ public class BTSoftBodyHelpers {
 
     /** @param tex_coords size   (resx-1)*(resy-1)*12 */
     @NativeType("void *")
-    public static long btSoftBodyHelpers_CreatePatchUV(@NativeType("void *") long worldInfo, @NativeType("btVector3 const *") ΒΤVector3 corner00, @NativeType("btVector3 const *") ΒΤVector3 corner10, @NativeType("btVector3 const *") ΒΤVector3 corner01, @NativeType("btVector3 const *") ΒΤVector3 corner11, int resx, int resy, int fixeds, @NativeType("bool") boolean gendiags, @NativeType("float *") FloatBuffer tex_coords) {
+    public static long btSoftBodyHelpers_CreatePatchUV(@NativeType("void *") long worldInfo, @NativeType("btVector3 const *") BTVector3 corner00, @NativeType("btVector3 const *") BTVector3 corner10, @NativeType("btVector3 const *") BTVector3 corner01, @NativeType("btVector3 const *") BTVector3 corner11, int resx, int resy, int fixeds, @NativeType("bool") boolean gendiags, @NativeType("float *") FloatBuffer tex_coords) {
         return nbtSoftBodyHelpers_CreatePatchUV(worldInfo, corner00.address(), corner10.address(), corner01.address(), corner11.address(), resx, resy, fixeds, gendiags, memAddress(tex_coords));
     }
 

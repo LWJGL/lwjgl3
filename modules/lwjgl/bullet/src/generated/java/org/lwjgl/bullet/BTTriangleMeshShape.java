@@ -43,7 +43,7 @@ public class BTTriangleMeshShape {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTriangleMeshShape_getLocalAabbMax(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTriangleMeshShape_getLocalAabbMax(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTriangleMeshShape_getLocalAabbMax(obj, value.address());
     }
 
@@ -57,7 +57,7 @@ public class BTTriangleMeshShape {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTriangleMeshShape_getLocalAabbMin(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTriangleMeshShape_getLocalAabbMin(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTriangleMeshShape_getLocalAabbMin(obj, value.address());
     }
 
@@ -82,7 +82,7 @@ public class BTTriangleMeshShape {
         invokePPPV(obj, vec, value, __functionAddress);
     }
 
-    public static void btTriangleMeshShape_localGetSupportingVertex(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 vec, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTriangleMeshShape_localGetSupportingVertex(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 vec, @NativeType("btVector3 *") BTVector3 value) {
         nbtTriangleMeshShape_localGetSupportingVertex(obj, vec.address(), value.address());
     }
 
@@ -96,7 +96,7 @@ public class BTTriangleMeshShape {
         invokePPPV(obj, vec, value, __functionAddress);
     }
 
-    public static void btTriangleMeshShape_localGetSupportingVertexWithoutMargin(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 vec, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTriangleMeshShape_localGetSupportingVertexWithoutMargin(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 vec, @NativeType("btVector3 *") BTVector3 value) {
         nbtTriangleMeshShape_localGetSupportingVertexWithoutMargin(obj, vec.address(), value.address());
     }
 

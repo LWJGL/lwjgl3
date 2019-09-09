@@ -531,7 +531,7 @@ public class BTGeneric6DofConstraint {
     }
 
     @NativeType("btScalar")
-    public static float btRotationalLimitMotor_solveAngularLimits(@NativeType("void *") long obj, @NativeType("btScalar") float timeStep, @NativeType("btVector3 *") ΒΤVector3 axis, @NativeType("btScalar") float jacDiagABInv, @NativeType("void *") long body0, @NativeType("void *") long body1) {
+    public static float btRotationalLimitMotor_solveAngularLimits(@NativeType("void *") long obj, @NativeType("btScalar") float timeStep, @NativeType("btVector3 *") BTVector3 axis, @NativeType("btScalar") float jacDiagABInv, @NativeType("void *") long body0, @NativeType("void *") long body1) {
         return nbtRotationalLimitMotor_solveAngularLimits(obj, timeStep, axis.address(), jacDiagABInv, body0, body1);
     }
 
@@ -584,7 +584,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor_getAccumulatedImpulse(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor_getAccumulatedImpulse(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTranslationalLimitMotor_getAccumulatedImpulse(obj, value.address());
     }
 
@@ -610,7 +610,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor_getCurrentLimitError(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor_getCurrentLimitError(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTranslationalLimitMotor_getCurrentLimitError(obj, value.address());
     }
 
@@ -624,7 +624,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor_getCurrentLinearDiff(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor_getCurrentLinearDiff(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTranslationalLimitMotor_getCurrentLinearDiff(obj, value.address());
     }
 
@@ -672,7 +672,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor_getLowerLimit(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor_getLowerLimit(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTranslationalLimitMotor_getLowerLimit(obj, value.address());
     }
 
@@ -686,7 +686,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor_getMaxMotorForce(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor_getMaxMotorForce(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTranslationalLimitMotor_getMaxMotorForce(obj, value.address());
     }
 
@@ -700,7 +700,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor_getNormalCFM(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor_getNormalCFM(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTranslationalLimitMotor_getNormalCFM(obj, value.address());
     }
 
@@ -725,7 +725,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor_getStopCFM(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor_getStopCFM(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTranslationalLimitMotor_getStopCFM(obj, value.address());
     }
 
@@ -739,7 +739,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor_getStopERP(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor_getStopERP(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTranslationalLimitMotor_getStopERP(obj, value.address());
     }
 
@@ -753,7 +753,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor_getTargetVelocity(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor_getTargetVelocity(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTranslationalLimitMotor_getTargetVelocity(obj, value.address());
     }
 
@@ -767,7 +767,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor_getUpperLimit(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor_getUpperLimit(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtTranslationalLimitMotor_getUpperLimit(obj, value.address());
     }
 
@@ -803,7 +803,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor_setAccumulatedImpulse(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor_setAccumulatedImpulse(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTranslationalLimitMotor_setAccumulatedImpulse(obj, value.address());
     }
 
@@ -817,7 +817,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor_setCurrentLimitError(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor_setCurrentLimitError(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTranslationalLimitMotor_setCurrentLimitError(obj, value.address());
     }
 
@@ -831,7 +831,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor_setCurrentLinearDiff(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor_setCurrentLinearDiff(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTranslationalLimitMotor_setCurrentLinearDiff(obj, value.address());
     }
 
@@ -865,7 +865,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor_setLowerLimit(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor_setLowerLimit(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTranslationalLimitMotor_setLowerLimit(obj, value.address());
     }
 
@@ -879,7 +879,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor_setMaxMotorForce(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor_setMaxMotorForce(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTranslationalLimitMotor_setMaxMotorForce(obj, value.address());
     }
 
@@ -893,7 +893,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor_setNormalCFM(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor_setNormalCFM(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTranslationalLimitMotor_setNormalCFM(obj, value.address());
     }
 
@@ -917,7 +917,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor_setStopCFM(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor_setStopCFM(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTranslationalLimitMotor_setStopCFM(obj, value.address());
     }
 
@@ -931,7 +931,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor_setStopERP(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor_setStopERP(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTranslationalLimitMotor_setStopERP(obj, value.address());
     }
 
@@ -945,7 +945,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor_setTargetVelocity(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor_setTargetVelocity(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTranslationalLimitMotor_setTargetVelocity(obj, value.address());
     }
 
@@ -959,7 +959,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btTranslationalLimitMotor_setUpperLimit(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btTranslationalLimitMotor_setUpperLimit(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtTranslationalLimitMotor_setUpperLimit(obj, value.address());
     }
 
@@ -976,7 +976,7 @@ public class BTGeneric6DofConstraint {
     }
 
     @NativeType("btScalar")
-    public static float btTranslationalLimitMotor_solveLinearAxis(@NativeType("void *") long obj, @NativeType("btScalar") float timeStep, @NativeType("btScalar") float jacDiagABInv, @NativeType("void *") long body1, @NativeType("btVector3 const *") ΒΤVector3 pointInA, @NativeType("void *") long body2, @NativeType("btVector3 const *") ΒΤVector3 pointInB, int limit_index, @NativeType("btVector3 const *") ΒΤVector3 axis_normal_on_a, @NativeType("btVector3 const *") ΒΤVector3 anchorPos) {
+    public static float btTranslationalLimitMotor_solveLinearAxis(@NativeType("void *") long obj, @NativeType("btScalar") float timeStep, @NativeType("btScalar") float jacDiagABInv, @NativeType("void *") long body1, @NativeType("btVector3 const *") BTVector3 pointInA, @NativeType("void *") long body2, @NativeType("btVector3 const *") BTVector3 pointInB, int limit_index, @NativeType("btVector3 const *") BTVector3 axis_normal_on_a, @NativeType("btVector3 const *") BTVector3 anchorPos) {
         return nbtTranslationalLimitMotor_solveLinearAxis(obj, timeStep, jacDiagABInv, body1, pointInA.address(), body2, pointInB.address(), limit_index, axis_normal_on_a.address(), anchorPos.address());
     }
 
@@ -1077,7 +1077,7 @@ public class BTGeneric6DofConstraint {
         return invokePPPPPPPPPPI(obj, limot, transA, transB, linVelA, linVelB, angVelA, angVelB, info, row, ax1, rotational, rotAllowed, __functionAddress);
     }
 
-    public static int btGeneric6DofConstraint_get_limit_motor_info2(@NativeType("void *") long obj, @NativeType("void *") long limot, @NativeType("btTransform const *") BTTransform transA, @NativeType("btTransform const *") BTTransform transB, @NativeType("btVector3 const *") ΒΤVector3 linVelA, @NativeType("btVector3 const *") ΒΤVector3 linVelB, @NativeType("btVector3 const *") ΒΤVector3 angVelA, @NativeType("btVector3 const *") ΒΤVector3 angVelB, @NativeType("void *") long info, int row, @NativeType("btVector3 *") ΒΤVector3 ax1, int rotational, int rotAllowed) {
+    public static int btGeneric6DofConstraint_get_limit_motor_info2(@NativeType("void *") long obj, @NativeType("void *") long limot, @NativeType("btTransform const *") BTTransform transA, @NativeType("btTransform const *") BTTransform transB, @NativeType("btVector3 const *") BTVector3 linVelA, @NativeType("btVector3 const *") BTVector3 linVelB, @NativeType("btVector3 const *") BTVector3 angVelA, @NativeType("btVector3 const *") BTVector3 angVelB, @NativeType("void *") long info, int row, @NativeType("btVector3 *") BTVector3 ax1, int rotational, int rotAllowed) {
         return nbtGeneric6DofConstraint_get_limit_motor_info2(obj, limot, transA.address(), transB.address(), linVelA.address(), linVelB.address(), angVelA.address(), angVelB.address(), info, row, ax1.address(), rotational, rotAllowed);
     }
 
@@ -1102,7 +1102,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, angularLower, __functionAddress);
     }
 
-    public static void btGeneric6DofConstraint_getAngularLowerLimit(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 angularLower) {
+    public static void btGeneric6DofConstraint_getAngularLowerLimit(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 angularLower) {
         nbtGeneric6DofConstraint_getAngularLowerLimit(obj, angularLower.address());
     }
 
@@ -1116,7 +1116,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, angularUpper, __functionAddress);
     }
 
-    public static void btGeneric6DofConstraint_getAngularUpperLimit(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 angularUpper) {
+    public static void btGeneric6DofConstraint_getAngularUpperLimit(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 angularUpper) {
         nbtGeneric6DofConstraint_getAngularUpperLimit(obj, angularUpper.address());
     }
 
@@ -1130,7 +1130,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, axis_index, value, __functionAddress);
     }
 
-    public static void btGeneric6DofConstraint_getAxis(@NativeType("void *") long obj, int axis_index, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btGeneric6DofConstraint_getAxis(@NativeType("void *") long obj, int axis_index, @NativeType("btVector3 *") BTVector3 value) {
         nbtGeneric6DofConstraint_getAxis(obj, axis_index, value.address());
     }
 
@@ -1222,7 +1222,7 @@ public class BTGeneric6DofConstraint {
         invokePPPPPPPPV(obj, info, transA, transB, linVelA, linVelB, angVelA, angVelB, __functionAddress);
     }
 
-    public static void btGeneric6DofConstraint_getInfo2NonVirtual(@NativeType("void *") long obj, @NativeType("void *") long info, @NativeType("btTransform const *") BTTransform transA, @NativeType("btTransform const *") BTTransform transB, @NativeType("btVector3 const *") ΒΤVector3 linVelA, @NativeType("btVector3 const *") ΒΤVector3 linVelB, @NativeType("btVector3 const *") ΒΤVector3 angVelA, @NativeType("btVector3 const *") ΒΤVector3 angVelB) {
+    public static void btGeneric6DofConstraint_getInfo2NonVirtual(@NativeType("void *") long obj, @NativeType("void *") long info, @NativeType("btTransform const *") BTTransform transA, @NativeType("btTransform const *") BTTransform transB, @NativeType("btVector3 const *") BTVector3 linVelA, @NativeType("btVector3 const *") BTVector3 linVelB, @NativeType("btVector3 const *") BTVector3 angVelA, @NativeType("btVector3 const *") BTVector3 angVelB) {
         nbtGeneric6DofConstraint_getInfo2NonVirtual(obj, info, transA.address(), transB.address(), linVelA.address(), linVelB.address(), angVelA.address(), angVelB.address());
     }
 
@@ -1236,7 +1236,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, linearLower, __functionAddress);
     }
 
-    public static void btGeneric6DofConstraint_getLinearLowerLimit(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 linearLower) {
+    public static void btGeneric6DofConstraint_getLinearLowerLimit(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 linearLower) {
         nbtGeneric6DofConstraint_getLinearLowerLimit(obj, linearLower.address());
     }
 
@@ -1250,7 +1250,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, linearUpper, __functionAddress);
     }
 
-    public static void btGeneric6DofConstraint_getLinearUpperLimit(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 linearUpper) {
+    public static void btGeneric6DofConstraint_getLinearUpperLimit(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 linearUpper) {
         nbtGeneric6DofConstraint_getLinearUpperLimit(obj, linearUpper.address());
     }
 
@@ -1341,7 +1341,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, angularLower, __functionAddress);
     }
 
-    public static void btGeneric6DofConstraint_setAngularLowerLimit(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 angularLower) {
+    public static void btGeneric6DofConstraint_setAngularLowerLimit(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 angularLower) {
         nbtGeneric6DofConstraint_setAngularLowerLimit(obj, angularLower.address());
     }
 
@@ -1355,7 +1355,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, angularUpper, __functionAddress);
     }
 
-    public static void btGeneric6DofConstraint_setAngularUpperLimit(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 angularUpper) {
+    public static void btGeneric6DofConstraint_setAngularUpperLimit(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 angularUpper) {
         nbtGeneric6DofConstraint_setAngularUpperLimit(obj, angularUpper.address());
     }
 
@@ -1369,7 +1369,7 @@ public class BTGeneric6DofConstraint {
         invokePPPV(obj, axis1, axis2, __functionAddress);
     }
 
-    public static void btGeneric6DofConstraint_setAxis(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 axis1, @NativeType("btVector3 const *") ΒΤVector3 axis2) {
+    public static void btGeneric6DofConstraint_setAxis(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 axis1, @NativeType("btVector3 const *") BTVector3 axis2) {
         nbtGeneric6DofConstraint_setAxis(obj, axis1.address(), axis2.address());
     }
 
@@ -1407,7 +1407,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, linearLower, __functionAddress);
     }
 
-    public static void btGeneric6DofConstraint_setLinearLowerLimit(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 linearLower) {
+    public static void btGeneric6DofConstraint_setLinearLowerLimit(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 linearLower) {
         nbtGeneric6DofConstraint_setLinearLowerLimit(obj, linearLower.address());
     }
 
@@ -1421,7 +1421,7 @@ public class BTGeneric6DofConstraint {
         invokePPV(obj, linearUpper, __functionAddress);
     }
 
-    public static void btGeneric6DofConstraint_setLinearUpperLimit(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 linearUpper) {
+    public static void btGeneric6DofConstraint_setLinearUpperLimit(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 linearUpper) {
         nbtGeneric6DofConstraint_setLinearUpperLimit(obj, linearUpper.address());
     }
 

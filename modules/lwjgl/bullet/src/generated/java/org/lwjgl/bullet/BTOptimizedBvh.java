@@ -53,7 +53,7 @@ public class BTOptimizedBvh {
         invokePPPPV(obj, triangles, useQuantizedAabbCompression, bvhAabbMin, bvhAabbMax, __functionAddress);
     }
 
-    public static void btOptimizedBvh_build(@NativeType("void *") long obj, @NativeType("void *") long triangles, @NativeType("bool") boolean useQuantizedAabbCompression, @NativeType("btVector3 const *") ΒΤVector3 bvhAabbMin, @NativeType("btVector3 const *") ΒΤVector3 bvhAabbMax) {
+    public static void btOptimizedBvh_build(@NativeType("void *") long obj, @NativeType("void *") long triangles, @NativeType("bool") boolean useQuantizedAabbCompression, @NativeType("btVector3 const *") BTVector3 bvhAabbMin, @NativeType("btVector3 const *") BTVector3 bvhAabbMax) {
         nbtOptimizedBvh_build(obj, triangles, useQuantizedAabbCompression, bvhAabbMin.address(), bvhAabbMax.address());
     }
 
@@ -79,7 +79,7 @@ public class BTOptimizedBvh {
         invokePPPPV(obj, triangles, aabbMin, aabbMax, __functionAddress);
     }
 
-    public static void btOptimizedBvh_refit(@NativeType("void *") long obj, @NativeType("void *") long triangles, @NativeType("btVector3 const *") ΒΤVector3 aabbMin, @NativeType("btVector3 const *") ΒΤVector3 aabbMax) {
+    public static void btOptimizedBvh_refit(@NativeType("void *") long obj, @NativeType("void *") long triangles, @NativeType("btVector3 const *") BTVector3 aabbMin, @NativeType("btVector3 const *") BTVector3 aabbMax) {
         nbtOptimizedBvh_refit(obj, triangles, aabbMin.address(), aabbMax.address());
     }
 
@@ -94,7 +94,7 @@ public class BTOptimizedBvh {
         invokePPPPV(obj, triangles, aabbMin, aabbMax, __functionAddress);
     }
 
-    public static void btOptimizedBvh_refitPartial(@NativeType("void *") long obj, @NativeType("void *") long triangles, @NativeType("btVector3 const *") ΒΤVector3 aabbMin, @NativeType("btVector3 const *") ΒΤVector3 aabbMax) {
+    public static void btOptimizedBvh_refitPartial(@NativeType("void *") long obj, @NativeType("void *") long triangles, @NativeType("btVector3 const *") BTVector3 aabbMin, @NativeType("btVector3 const *") BTVector3 aabbMax) {
         nbtOptimizedBvh_refitPartial(obj, triangles, aabbMin.address(), aabbMax.address());
     }
 

@@ -110,7 +110,7 @@ public class BTConvexPlaneCollisionAlgorithm {
         invokePPPPPPV(obj, perturbeRot, body0Wrap, body1Wrap, dispatchInfo, resultOut, __functionAddress);
     }
 
-    public static void btConvexPlaneCollisionAlgorithm_collideSingleContact(@NativeType("void *") long obj, @NativeType("btQuaternion const *") ΒΤVector3 perturbeRot, @NativeType("void *") long body0Wrap, @NativeType("void *") long body1Wrap, @NativeType("void *") long dispatchInfo, @NativeType("void *") long resultOut) {
+    public static void btConvexPlaneCollisionAlgorithm_collideSingleContact(@NativeType("void *") long obj, @NativeType("btQuaternion const *") BTVector3 perturbeRot, @NativeType("void *") long body0Wrap, @NativeType("void *") long body1Wrap, @NativeType("void *") long dispatchInfo, @NativeType("void *") long resultOut) {
         nbtConvexPlaneCollisionAlgorithm_collideSingleContact(obj, perturbeRot.address(), body0Wrap, body1Wrap, dispatchInfo, resultOut);
     }
 

@@ -129,7 +129,7 @@ public class BTMultiBodyLink {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultibodyLink_getAppliedConstraintForce(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btMultibodyLink_getAppliedConstraintForce(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtMultibodyLink_getAppliedConstraintForce(obj, value.address());
     }
 
@@ -143,7 +143,7 @@ public class BTMultiBodyLink {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultibodyLink_getAppliedConstraintTorque(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btMultibodyLink_getAppliedConstraintTorque(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtMultibodyLink_getAppliedConstraintTorque(obj, value.address());
     }
 
@@ -157,7 +157,7 @@ public class BTMultiBodyLink {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultibodyLink_getAppliedForce(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btMultibodyLink_getAppliedForce(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtMultibodyLink_getAppliedForce(obj, value.address());
     }
 
@@ -171,7 +171,7 @@ public class BTMultiBodyLink {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultibodyLink_getAppliedTorque(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btMultibodyLink_getAppliedTorque(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtMultibodyLink_getAppliedTorque(obj, value.address());
     }
 
@@ -196,7 +196,7 @@ public class BTMultiBodyLink {
         invokePPV(obj, dof, value, __functionAddress);
     }
 
-    public static void btMultibodyLink_getAxisBottom(@NativeType("void *") long obj, int dof, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btMultibodyLink_getAxisBottom(@NativeType("void *") long obj, int dof, @NativeType("btVector3 *") BTVector3 value) {
         nbtMultibodyLink_getAxisBottom(obj, dof, value.address());
     }
 
@@ -210,7 +210,7 @@ public class BTMultiBodyLink {
         invokePPV(obj, dof, value, __functionAddress);
     }
 
-    public static void btMultibodyLink_getAxisTop(@NativeType("void *") long obj, int dof, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btMultibodyLink_getAxisTop(@NativeType("void *") long obj, int dof, @NativeType("btVector3 *") BTVector3 value) {
         nbtMultibodyLink_getAxisTop(obj, dof, value.address());
     }
 
@@ -224,7 +224,7 @@ public class BTMultiBodyLink {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultibodyLink_getCachedRotParentToThis(@NativeType("void *") long obj, @NativeType("btQuaternion *") ΒΤVector3 value) {
+    public static void btMultibodyLink_getCachedRotParentToThis(@NativeType("void *") long obj, @NativeType("btQuaternion *") BTVector3 value) {
         nbtMultibodyLink_getCachedRotParentToThis(obj, value.address());
     }
 
@@ -238,7 +238,7 @@ public class BTMultiBodyLink {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultibodyLink_getCachedRVector(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btMultibodyLink_getCachedRVector(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtMultibodyLink_getCachedRVector(obj, value.address());
     }
 
@@ -307,7 +307,7 @@ public class BTMultiBodyLink {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultibodyLink_getDVector(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btMultibodyLink_getDVector(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtMultibodyLink_getDVector(obj, value.address());
     }
 
@@ -321,7 +321,7 @@ public class BTMultiBodyLink {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultibodyLink_getEVector(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btMultibodyLink_getEVector(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtMultibodyLink_getEVector(obj, value.address());
     }
 
@@ -345,7 +345,7 @@ public class BTMultiBodyLink {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultibodyLink_getInertiaLocal(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btMultibodyLink_getInertiaLocal(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtMultibodyLink_getInertiaLocal(obj, value.address());
     }
 
@@ -491,7 +491,7 @@ public class BTMultiBodyLink {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultibodyLink_getZeroRotParentToThis(@NativeType("void *") long obj, @NativeType("btQuaternion *") ΒΤVector3 value) {
+    public static void btMultibodyLink_getZeroRotParentToThis(@NativeType("void *") long obj, @NativeType("btQuaternion *") BTVector3 value) {
         nbtMultibodyLink_getZeroRotParentToThis(obj, value.address());
     }
 
@@ -516,7 +516,7 @@ public class BTMultiBodyLink {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultibodyLink_setAppliedConstraintForce(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btMultibodyLink_setAppliedConstraintForce(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtMultibodyLink_setAppliedConstraintForce(obj, value.address());
     }
 
@@ -530,7 +530,7 @@ public class BTMultiBodyLink {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultibodyLink_setAppliedConstraintTorque(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btMultibodyLink_setAppliedConstraintTorque(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtMultibodyLink_setAppliedConstraintTorque(obj, value.address());
     }
 
@@ -544,7 +544,7 @@ public class BTMultiBodyLink {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultibodyLink_setAppliedForce(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btMultibodyLink_setAppliedForce(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtMultibodyLink_setAppliedForce(obj, value.address());
     }
 
@@ -558,7 +558,7 @@ public class BTMultiBodyLink {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultibodyLink_setAppliedTorque(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btMultibodyLink_setAppliedTorque(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtMultibodyLink_setAppliedTorque(obj, value.address());
     }
 
@@ -582,7 +582,7 @@ public class BTMultiBodyLink {
         invokePPV(obj, dof, axis, __functionAddress);
     }
 
-    public static void btMultibodyLink_setAxisBottom2(@NativeType("void *") long obj, int dof, @NativeType("btVector3 const *") ΒΤVector3 axis) {
+    public static void btMultibodyLink_setAxisBottom2(@NativeType("void *") long obj, int dof, @NativeType("btVector3 const *") BTVector3 axis) {
         nbtMultibodyLink_setAxisBottom2(obj, dof, axis.address());
     }
 
@@ -606,7 +606,7 @@ public class BTMultiBodyLink {
         invokePPV(obj, dof, axis, __functionAddress);
     }
 
-    public static void btMultibodyLink_setAxisTop2(@NativeType("void *") long obj, int dof, @NativeType("btVector3 const *") ΒΤVector3 axis) {
+    public static void btMultibodyLink_setAxisTop2(@NativeType("void *") long obj, int dof, @NativeType("btVector3 const *") BTVector3 axis) {
         nbtMultibodyLink_setAxisTop2(obj, dof, axis.address());
     }
 
@@ -620,7 +620,7 @@ public class BTMultiBodyLink {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultibodyLink_setCachedRotParentToThis(@NativeType("void *") long obj, @NativeType("btQuaternion const *") ΒΤVector3 value) {
+    public static void btMultibodyLink_setCachedRotParentToThis(@NativeType("void *") long obj, @NativeType("btQuaternion const *") BTVector3 value) {
         nbtMultibodyLink_setCachedRotParentToThis(obj, value.address());
     }
 
@@ -634,7 +634,7 @@ public class BTMultiBodyLink {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultibodyLink_setCachedRVector(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btMultibodyLink_setCachedRVector(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtMultibodyLink_setCachedRVector(obj, value.address());
     }
 
@@ -703,7 +703,7 @@ public class BTMultiBodyLink {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultibodyLink_setDVector(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btMultibodyLink_setDVector(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtMultibodyLink_setDVector(obj, value.address());
     }
 
@@ -717,7 +717,7 @@ public class BTMultiBodyLink {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultibodyLink_setEVector(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btMultibodyLink_setEVector(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtMultibodyLink_setEVector(obj, value.address());
     }
 
@@ -741,7 +741,7 @@ public class BTMultiBodyLink {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultibodyLink_setInertiaLocal(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btMultibodyLink_setInertiaLocal(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtMultibodyLink_setInertiaLocal(obj, value.address());
     }
 
@@ -882,7 +882,7 @@ public class BTMultiBodyLink {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultibodyLink_setZeroRotParentToThis(@NativeType("void *") long obj, @NativeType("btQuaternion const *") ΒΤVector3 value) {
+    public static void btMultibodyLink_setZeroRotParentToThis(@NativeType("void *") long obj, @NativeType("btQuaternion const *") BTVector3 value) {
         nbtMultibodyLink_setZeroRotParentToThis(obj, value.address());
     }
 

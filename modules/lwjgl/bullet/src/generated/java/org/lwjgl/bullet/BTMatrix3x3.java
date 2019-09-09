@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct btMatrix3x3 {
- *     {@link ΒΤVector3 btVector3} m_el[3];
+ *     {@link BTVector3 btVector3} m_el[3];
  * }</code></pre>
  */
 @NativeType("struct btMatrix3x3")
@@ -39,7 +39,7 @@ public class BTMatrix3x3 extends Struct implements NativeResource {
 
     static {
         Layout layout = __struct(
-            __array(ΒΤVector3.SIZEOF, ΒΤVector3.ALIGNOF, 3)
+            __array(BTVector3.SIZEOF, BTVector3.ALIGNOF, 3)
         );
 
         SIZEOF = layout.getSize();
@@ -61,21 +61,21 @@ public class BTMatrix3x3 extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ΒΤVector3}.Buffer view of the {@code m_el} field. */
+    /** Returns a {@link BTVector3}.Buffer view of the {@code m_el} field. */
     @NativeType("btVector3[3]")
-    public ΒΤVector3.Buffer m_el() { return nm_el(address()); }
-    /** Returns a {@link ΒΤVector3} view of the struct at the specified index of the {@code m_el} field. */
+    public BTVector3.Buffer m_el() { return nm_el(address()); }
+    /** Returns a {@link BTVector3} view of the struct at the specified index of the {@code m_el} field. */
     @NativeType("btVector3")
-    public ΒΤVector3 m_el(int index) { return nm_el(address(), index); }
+    public BTVector3 m_el(int index) { return nm_el(address(), index); }
 
-    /** Copies the specified {@link ΒΤVector3.Buffer} to the {@code m_el} field. */
-    public BTMatrix3x3 m_el(@NativeType("btVector3[3]") ΒΤVector3.Buffer value) { nm_el(address(), value); return this; }
-    /** Copies the specified {@link ΒΤVector3} at the specified index of the {@code m_el} field. */
-    public BTMatrix3x3 m_el(int index, @NativeType("btVector3") ΒΤVector3 value) { nm_el(address(), index, value); return this; }
+    /** Copies the specified {@link BTVector3.Buffer} to the {@code m_el} field. */
+    public BTMatrix3x3 m_el(@NativeType("btVector3[3]") BTVector3.Buffer value) { nm_el(address(), value); return this; }
+    /** Copies the specified {@link BTVector3} at the specified index of the {@code m_el} field. */
+    public BTMatrix3x3 m_el(int index, @NativeType("btVector3") BTVector3 value) { nm_el(address(), index, value); return this; }
     /** Passes the {@code m_el} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public BTMatrix3x3 m_el(java.util.function.Consumer<ΒΤVector3.Buffer> consumer) { consumer.accept(m_el()); return this; }
+    public BTMatrix3x3 m_el(java.util.function.Consumer<BTVector3.Buffer> consumer) { consumer.accept(m_el()); return this; }
     /** Passes the element at {@code index} of the {@code m_el} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public BTMatrix3x3 m_el(int index, java.util.function.Consumer<ΒΤVector3> consumer) { consumer.accept(m_el(index)); return this; }
+    public BTMatrix3x3 m_el(int index, java.util.function.Consumer<BTVector3> consumer) { consumer.accept(m_el(index)); return this; }
 
     /**
      * Copies the specified struct data to this struct.
@@ -233,20 +233,20 @@ public class BTMatrix3x3 extends Struct implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #m_el}. */
-    public static ΒΤVector3.Buffer nm_el(long struct) { return ΒΤVector3.create(struct + BTMatrix3x3.M_EL, 3); }
+    public static BTVector3.Buffer nm_el(long struct) { return BTVector3.create(struct + BTMatrix3x3.M_EL, 3); }
     /** Unsafe version of {@link #m_el(int) m_el}. */
-    public static ΒΤVector3 nm_el(long struct, int index) {
-        return ΒΤVector3.create(struct + BTMatrix3x3.M_EL + check(index, 3) * ΒΤVector3.SIZEOF);
+    public static BTVector3 nm_el(long struct, int index) {
+        return BTVector3.create(struct + BTMatrix3x3.M_EL + check(index, 3) * BTVector3.SIZEOF);
     }
 
-    /** Unsafe version of {@link #m_el(ΒΤVector3.Buffer) m_el}. */
-    public static void nm_el(long struct, ΒΤVector3.Buffer value) {
+    /** Unsafe version of {@link #m_el(BTVector3.Buffer) m_el}. */
+    public static void nm_el(long struct, BTVector3.Buffer value) {
         if (CHECKS) { checkGT(value, 3); }
-        memCopy(value.address(), struct + BTMatrix3x3.M_EL, value.remaining() * ΒΤVector3.SIZEOF);
+        memCopy(value.address(), struct + BTMatrix3x3.M_EL, value.remaining() * BTVector3.SIZEOF);
     }
-    /** Unsafe version of {@link #m_el(int, ΒΤVector3) m_el}. */
-    public static void nm_el(long struct, int index, ΒΤVector3 value) {
-        memCopy(value.address(), struct + BTMatrix3x3.M_EL + check(index, 3) * ΒΤVector3.SIZEOF, ΒΤVector3.SIZEOF);
+    /** Unsafe version of {@link #m_el(int, BTVector3) m_el}. */
+    public static void nm_el(long struct, int index, BTVector3 value) {
+        memCopy(value.address(), struct + BTMatrix3x3.M_EL + check(index, 3) * BTVector3.SIZEOF, BTVector3.SIZEOF);
     }
 
     // -----------------------------------
@@ -287,21 +287,21 @@ public class BTMatrix3x3 extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ΒΤVector3}.Buffer view of the {@code m_el} field. */
+        /** Returns a {@link BTVector3}.Buffer view of the {@code m_el} field. */
         @NativeType("btVector3[3]")
-        public ΒΤVector3.Buffer m_el() { return BTMatrix3x3.nm_el(address()); }
-        /** Returns a {@link ΒΤVector3} view of the struct at the specified index of the {@code m_el} field. */
+        public BTVector3.Buffer m_el() { return BTMatrix3x3.nm_el(address()); }
+        /** Returns a {@link BTVector3} view of the struct at the specified index of the {@code m_el} field. */
         @NativeType("btVector3")
-        public ΒΤVector3 m_el(int index) { return BTMatrix3x3.nm_el(address(), index); }
+        public BTVector3 m_el(int index) { return BTMatrix3x3.nm_el(address(), index); }
 
-        /** Copies the specified {@link ΒΤVector3.Buffer} to the {@code m_el} field. */
-        public BTMatrix3x3.Buffer m_el(@NativeType("btVector3[3]") ΒΤVector3.Buffer value) { BTMatrix3x3.nm_el(address(), value); return this; }
-        /** Copies the specified {@link ΒΤVector3} at the specified index of the {@code m_el} field. */
-        public BTMatrix3x3.Buffer m_el(int index, @NativeType("btVector3") ΒΤVector3 value) { BTMatrix3x3.nm_el(address(), index, value); return this; }
+        /** Copies the specified {@link BTVector3.Buffer} to the {@code m_el} field. */
+        public BTMatrix3x3.Buffer m_el(@NativeType("btVector3[3]") BTVector3.Buffer value) { BTMatrix3x3.nm_el(address(), value); return this; }
+        /** Copies the specified {@link BTVector3} at the specified index of the {@code m_el} field. */
+        public BTMatrix3x3.Buffer m_el(int index, @NativeType("btVector3") BTVector3 value) { BTMatrix3x3.nm_el(address(), index, value); return this; }
         /** Passes the {@code m_el} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public BTMatrix3x3.Buffer m_el(java.util.function.Consumer<ΒΤVector3.Buffer> consumer) { consumer.accept(m_el()); return this; }
+        public BTMatrix3x3.Buffer m_el(java.util.function.Consumer<BTVector3.Buffer> consumer) { consumer.accept(m_el()); return this; }
         /** Passes the element at {@code index} of the {@code m_el} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public BTMatrix3x3.Buffer m_el(int index, java.util.function.Consumer<ΒΤVector3> consumer) { consumer.accept(m_el(index)); return this; }
+        public BTMatrix3x3.Buffer m_el(int index, java.util.function.Consumer<BTVector3> consumer) { consumer.accept(m_el(index)); return this; }
 
     }
 

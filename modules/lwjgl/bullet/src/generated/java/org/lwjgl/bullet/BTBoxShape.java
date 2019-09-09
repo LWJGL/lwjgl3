@@ -41,7 +41,7 @@ public class BTBoxShape {
     }
 
     @NativeType("void *")
-    public static long btBoxShape_new(@NativeType("btVector3 const *") ΒΤVector3 boxHalfExtents) {
+    public static long btBoxShape_new(@NativeType("btVector3 const *") BTVector3 boxHalfExtents) {
         return nbtBoxShape_new(boxHalfExtents.address());
     }
 
@@ -71,7 +71,7 @@ public class BTBoxShape {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btBoxShape_getHalfExtentsWithMargin(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btBoxShape_getHalfExtentsWithMargin(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtBoxShape_getHalfExtentsWithMargin(obj, value.address());
     }
 
@@ -85,7 +85,7 @@ public class BTBoxShape {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btBoxShape_getHalfExtentsWithoutMargin(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btBoxShape_getHalfExtentsWithoutMargin(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtBoxShape_getHalfExtentsWithoutMargin(obj, value.address());
     }
 
@@ -99,7 +99,7 @@ public class BTBoxShape {
         invokePPV(obj, plane, i, __functionAddress);
     }
 
-    public static void btBoxShape_getPlaneEquation(@NativeType("void *") long obj, @NativeType("btVector4 *") ΒΤVector3 plane, int i) {
+    public static void btBoxShape_getPlaneEquation(@NativeType("void *") long obj, @NativeType("btVector4 *") BTVector3 plane, int i) {
         nbtBoxShape_getPlaneEquation(obj, plane.address(), i);
     }
 

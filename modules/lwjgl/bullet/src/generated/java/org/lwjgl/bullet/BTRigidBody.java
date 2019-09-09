@@ -158,7 +158,7 @@ public class BTRigidBody {
     }
 
     @NativeType("void *")
-    public static long btRigidBody_btRigidBodyConstructionInfo_new2(@NativeType("btScalar") float mass, @NativeType("void *") long motionState, @NativeType("void *") long collisionShape, @NativeType("btVector3 const *") ΒΤVector3 localInertia) {
+    public static long btRigidBody_btRigidBodyConstructionInfo_new2(@NativeType("btScalar") float mass, @NativeType("void *") long motionState, @NativeType("void *") long collisionShape, @NativeType("btVector3 const *") BTVector3 localInertia) {
         return nbtRigidBody_btRigidBodyConstructionInfo_new2(mass, motionState, collisionShape, localInertia.address());
     }
 
@@ -293,7 +293,7 @@ public class BTRigidBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btRigidBody_btRigidBodyConstructionInfo_getLocalInertia(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btRigidBody_btRigidBodyConstructionInfo_getLocalInertia(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtRigidBody_btRigidBodyConstructionInfo_getLocalInertia(obj, value.address());
     }
 
@@ -476,7 +476,7 @@ public class BTRigidBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btRigidBody_btRigidBodyConstructionInfo_setLocalInertia(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btRigidBody_btRigidBodyConstructionInfo_setLocalInertia(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtRigidBody_btRigidBodyConstructionInfo_setLocalInertia(obj, value.address());
     }
 
@@ -577,7 +577,7 @@ public class BTRigidBody {
         invokePPV(obj, force, __functionAddress);
     }
 
-    public static void btRigidBody_applyCentralForce(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 force) {
+    public static void btRigidBody_applyCentralForce(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 force) {
         nbtRigidBody_applyCentralForce(obj, force.address());
     }
 
@@ -591,7 +591,7 @@ public class BTRigidBody {
         invokePPV(obj, impulse, __functionAddress);
     }
 
-    public static void btRigidBody_applyCentralImpulse(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 impulse) {
+    public static void btRigidBody_applyCentralImpulse(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 impulse) {
         nbtRigidBody_applyCentralImpulse(obj, impulse.address());
     }
 
@@ -615,7 +615,7 @@ public class BTRigidBody {
         invokePPPV(obj, force, rel_pos, __functionAddress);
     }
 
-    public static void btRigidBody_applyForce(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 force, @NativeType("btVector3 const *") ΒΤVector3 rel_pos) {
+    public static void btRigidBody_applyForce(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 force, @NativeType("btVector3 const *") BTVector3 rel_pos) {
         nbtRigidBody_applyForce(obj, force.address(), rel_pos.address());
     }
 
@@ -639,7 +639,7 @@ public class BTRigidBody {
         invokePPPV(obj, impulse, rel_pos, __functionAddress);
     }
 
-    public static void btRigidBody_applyImpulse(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 impulse, @NativeType("btVector3 const *") ΒΤVector3 rel_pos) {
+    public static void btRigidBody_applyImpulse(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 impulse, @NativeType("btVector3 const *") BTVector3 rel_pos) {
         nbtRigidBody_applyImpulse(obj, impulse.address(), rel_pos.address());
     }
 
@@ -653,7 +653,7 @@ public class BTRigidBody {
         invokePPV(obj, torque, __functionAddress);
     }
 
-    public static void btRigidBody_applyTorque(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 torque) {
+    public static void btRigidBody_applyTorque(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 torque) {
         nbtRigidBody_applyTorque(obj, torque.address());
     }
 
@@ -667,7 +667,7 @@ public class BTRigidBody {
         invokePPV(obj, torque, __functionAddress);
     }
 
-    public static void btRigidBody_applyTorqueImpulse(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 torque) {
+    public static void btRigidBody_applyTorqueImpulse(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 torque) {
         nbtRigidBody_applyTorqueImpulse(obj, torque.address());
     }
 
@@ -692,7 +692,7 @@ public class BTRigidBody {
     }
 
     @NativeType("btScalar")
-    public static float btRigidBody_computeAngularImpulseDenominator(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 axis) {
+    public static float btRigidBody_computeAngularImpulseDenominator(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 axis) {
         return nbtRigidBody_computeAngularImpulseDenominator(obj, axis.address());
     }
 
@@ -706,7 +706,7 @@ public class BTRigidBody {
         invokePPV(obj, maxGyroscopicForce, value, __functionAddress);
     }
 
-    public static void btRigidBody_computeGyroscopicForceExplicit(@NativeType("void *") long obj, @NativeType("btScalar") float maxGyroscopicForce, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btRigidBody_computeGyroscopicForceExplicit(@NativeType("void *") long obj, @NativeType("btScalar") float maxGyroscopicForce, @NativeType("btVector3 *") BTVector3 value) {
         nbtRigidBody_computeGyroscopicForceExplicit(obj, maxGyroscopicForce, value.address());
     }
 
@@ -720,7 +720,7 @@ public class BTRigidBody {
         invokePPV(obj, step, value, __functionAddress);
     }
 
-    public static void btRigidBody_computeGyroscopicImpulseImplicit_Body(@NativeType("void *") long obj, @NativeType("btScalar") float step, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btRigidBody_computeGyroscopicImpulseImplicit_Body(@NativeType("void *") long obj, @NativeType("btScalar") float step, @NativeType("btVector3 *") BTVector3 value) {
         nbtRigidBody_computeGyroscopicImpulseImplicit_Body(obj, step, value.address());
     }
 
@@ -734,7 +734,7 @@ public class BTRigidBody {
         invokePPV(obj, dt, value, __functionAddress);
     }
 
-    public static void btRigidBody_computeGyroscopicImpulseImplicit_World(@NativeType("void *") long obj, @NativeType("btScalar") float dt, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btRigidBody_computeGyroscopicImpulseImplicit_World(@NativeType("void *") long obj, @NativeType("btScalar") float dt, @NativeType("btVector3 *") BTVector3 value) {
         nbtRigidBody_computeGyroscopicImpulseImplicit_World(obj, dt, value.address());
     }
 
@@ -749,7 +749,7 @@ public class BTRigidBody {
     }
 
     @NativeType("btScalar")
-    public static float btRigidBody_computeImpulseDenominator(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 pos, @NativeType("btVector3 const *") ΒΤVector3 normal) {
+    public static float btRigidBody_computeImpulseDenominator(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 pos, @NativeType("btVector3 const *") BTVector3 normal) {
         return nbtRigidBody_computeImpulseDenominator(obj, pos.address(), normal.address());
     }
 
@@ -763,7 +763,7 @@ public class BTRigidBody {
         invokePPPV(obj, aabbMin, aabbMax, __functionAddress);
     }
 
-    public static void btRigidBody_getAabb(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 aabbMin, @NativeType("btVector3 *") ΒΤVector3 aabbMax) {
+    public static void btRigidBody_getAabb(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 aabbMin, @NativeType("btVector3 *") BTVector3 aabbMax) {
         nbtRigidBody_getAabb(obj, aabbMin.address(), aabbMax.address());
     }
 
@@ -788,7 +788,7 @@ public class BTRigidBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btRigidBody_getAngularFactor(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btRigidBody_getAngularFactor(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtRigidBody_getAngularFactor(obj, value.address());
     }
 
@@ -813,7 +813,7 @@ public class BTRigidBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btRigidBody_getAngularVelocity(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btRigidBody_getAngularVelocity(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtRigidBody_getAngularVelocity(obj, value.address());
     }
 
@@ -838,7 +838,7 @@ public class BTRigidBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btRigidBody_getCenterOfMassPosition(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btRigidBody_getCenterOfMassPosition(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtRigidBody_getCenterOfMassPosition(obj, value.address());
     }
 
@@ -907,7 +907,7 @@ public class BTRigidBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btRigidBody_getGravity(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btRigidBody_getGravity(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtRigidBody_getGravity(obj, value.address());
     }
 
@@ -921,7 +921,7 @@ public class BTRigidBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btRigidBody_getInvInertiaDiagLocal(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btRigidBody_getInvInertiaDiagLocal(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtRigidBody_getInvInertiaDiagLocal(obj, value.address());
     }
 
@@ -971,7 +971,7 @@ public class BTRigidBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btRigidBody_getLinearFactor(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btRigidBody_getLinearFactor(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtRigidBody_getLinearFactor(obj, value.address());
     }
 
@@ -996,7 +996,7 @@ public class BTRigidBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btRigidBody_getLinearVelocity(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btRigidBody_getLinearVelocity(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtRigidBody_getLinearVelocity(obj, value.address());
     }
 
@@ -1010,7 +1010,7 @@ public class BTRigidBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btRigidBody_getLocalInertia(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btRigidBody_getLocalInertia(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtRigidBody_getLocalInertia(obj, value.address());
     }
 
@@ -1045,7 +1045,7 @@ public class BTRigidBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btRigidBody_getOrientation(@NativeType("void *") long obj, @NativeType("btQuaternion *") ΒΤVector3 value) {
+    public static void btRigidBody_getOrientation(@NativeType("void *") long obj, @NativeType("btQuaternion *") BTVector3 value) {
         nbtRigidBody_getOrientation(obj, value.address());
     }
 
@@ -1059,7 +1059,7 @@ public class BTRigidBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btRigidBody_getTotalForce(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btRigidBody_getTotalForce(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtRigidBody_getTotalForce(obj, value.address());
     }
 
@@ -1073,7 +1073,7 @@ public class BTRigidBody {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btRigidBody_getTotalTorque(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btRigidBody_getTotalTorque(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtRigidBody_getTotalTorque(obj, value.address());
     }
 
@@ -1087,7 +1087,7 @@ public class BTRigidBody {
         invokePPPV(obj, rel_pos, value, __functionAddress);
     }
 
-    public static void btRigidBody_getVelocityInLocalPoint(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 rel_pos, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btRigidBody_getVelocityInLocalPoint(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 rel_pos, @NativeType("btVector3 *") BTVector3 value) {
         nbtRigidBody_getVelocityInLocalPoint(obj, rel_pos.address(), value.address());
     }
 
@@ -1171,7 +1171,7 @@ public class BTRigidBody {
         invokePPV(obj, angFac, __functionAddress);
     }
 
-    public static void btRigidBody_setAngularFactor(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 angFac) {
+    public static void btRigidBody_setAngularFactor(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 angFac) {
         nbtRigidBody_setAngularFactor(obj, angFac.address());
     }
 
@@ -1195,7 +1195,7 @@ public class BTRigidBody {
         invokePPV(obj, ang_vel, __functionAddress);
     }
 
-    public static void btRigidBody_setAngularVelocity(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 ang_vel) {
+    public static void btRigidBody_setAngularVelocity(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 ang_vel) {
         nbtRigidBody_setAngularVelocity(obj, ang_vel.address());
     }
 
@@ -1263,7 +1263,7 @@ public class BTRigidBody {
         invokePPV(obj, acceleration, __functionAddress);
     }
 
-    public static void btRigidBody_setGravity(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 acceleration) {
+    public static void btRigidBody_setGravity(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 acceleration) {
         nbtRigidBody_setGravity(obj, acceleration.address());
     }
 
@@ -1277,7 +1277,7 @@ public class BTRigidBody {
         invokePPV(obj, diagInvInertia, __functionAddress);
     }
 
-    public static void btRigidBody_setInvInertiaDiagLocal(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 diagInvInertia) {
+    public static void btRigidBody_setInvInertiaDiagLocal(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 diagInvInertia) {
         nbtRigidBody_setInvInertiaDiagLocal(obj, diagInvInertia.address());
     }
 
@@ -1291,7 +1291,7 @@ public class BTRigidBody {
         invokePPV(obj, linearFactor, __functionAddress);
     }
 
-    public static void btRigidBody_setLinearFactor(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 linearFactor) {
+    public static void btRigidBody_setLinearFactor(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 linearFactor) {
         nbtRigidBody_setLinearFactor(obj, linearFactor.address());
     }
 
@@ -1305,7 +1305,7 @@ public class BTRigidBody {
         invokePPV(obj, lin_vel, __functionAddress);
     }
 
-    public static void btRigidBody_setLinearVelocity(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 lin_vel) {
+    public static void btRigidBody_setLinearVelocity(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 lin_vel) {
         nbtRigidBody_setLinearVelocity(obj, lin_vel.address());
     }
 
@@ -1319,7 +1319,7 @@ public class BTRigidBody {
         invokePPV(obj, mass, inertia, __functionAddress);
     }
 
-    public static void btRigidBody_setMassProps(@NativeType("void *") long obj, @NativeType("btScalar") float mass, @NativeType("btVector3 const *") ΒΤVector3 inertia) {
+    public static void btRigidBody_setMassProps(@NativeType("void *") long obj, @NativeType("btScalar") float mass, @NativeType("btVector3 const *") BTVector3 inertia) {
         nbtRigidBody_setMassProps(obj, mass, inertia.address());
     }
 
@@ -1365,7 +1365,7 @@ public class BTRigidBody {
         invokePPV(obj, v, __functionAddress);
     }
 
-    public static void btRigidBody_translate(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 v) {
+    public static void btRigidBody_translate(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 v) {
         nbtRigidBody_translate(obj, v.address());
     }
 

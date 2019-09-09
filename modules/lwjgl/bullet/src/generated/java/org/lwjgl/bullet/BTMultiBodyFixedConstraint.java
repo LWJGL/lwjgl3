@@ -49,7 +49,7 @@ public class BTMultiBodyFixedConstraint {
     }
 
     @NativeType("void *")
-    public static long btMultiBodyFixedConstraint_new(@NativeType("void *") long body, int link, @NativeType("void *") long bodyB, @NativeType("btVector3 const *") ΒΤVector3 pivotInA, @NativeType("btVector3 const *") ΒΤVector3 pivotInB, @NativeType("btMatrix3x3 const *") BTMatrix3x3 frameInA, @NativeType("btMatrix3x3 const *") BTMatrix3x3 frameInB) {
+    public static long btMultiBodyFixedConstraint_new(@NativeType("void *") long body, int link, @NativeType("void *") long bodyB, @NativeType("btVector3 const *") BTVector3 pivotInA, @NativeType("btVector3 const *") BTVector3 pivotInB, @NativeType("btMatrix3x3 const *") BTMatrix3x3 frameInA, @NativeType("btMatrix3x3 const *") BTMatrix3x3 frameInB) {
         return nbtMultiBodyFixedConstraint_new(body, link, bodyB, pivotInA.address(), pivotInB.address(), frameInA.address(), frameInB.address());
     }
 
@@ -65,7 +65,7 @@ public class BTMultiBodyFixedConstraint {
     }
 
     @NativeType("void *")
-    public static long btMultiBodyFixedConstraint_new2(@NativeType("void *") long bodyA, int linkA, @NativeType("void *") long bodyB, int linkB, @NativeType("btVector3 const *") ΒΤVector3 pivotInA, @NativeType("btVector3 const *") ΒΤVector3 pivotInB, @NativeType("btMatrix3x3 const *") BTMatrix3x3 frameInA, @NativeType("btMatrix3x3 const *") BTMatrix3x3 frameInB) {
+    public static long btMultiBodyFixedConstraint_new2(@NativeType("void *") long bodyA, int linkA, @NativeType("void *") long bodyB, int linkB, @NativeType("btVector3 const *") BTVector3 pivotInA, @NativeType("btVector3 const *") BTVector3 pivotInB, @NativeType("btMatrix3x3 const *") BTMatrix3x3 frameInA, @NativeType("btMatrix3x3 const *") BTMatrix3x3 frameInB) {
         return nbtMultiBodyFixedConstraint_new2(bodyA, linkA, bodyB, linkB, pivotInA.address(), pivotInB.address(), frameInA.address(), frameInB.address());
     }
 
@@ -107,7 +107,7 @@ public class BTMultiBodyFixedConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultiBodyFixedConstraint_getPivotInA(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btMultiBodyFixedConstraint_getPivotInA(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtMultiBodyFixedConstraint_getPivotInA(obj, value.address());
     }
 
@@ -121,7 +121,7 @@ public class BTMultiBodyFixedConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultiBodyFixedConstraint_getPivotInB(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btMultiBodyFixedConstraint_getPivotInB(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtMultiBodyFixedConstraint_getPivotInB(obj, value.address());
     }
 
@@ -163,7 +163,7 @@ public class BTMultiBodyFixedConstraint {
         invokePPV(obj, pivotInA, __functionAddress);
     }
 
-    public static void btMultiBodyFixedConstraint_setPivotInA(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 pivotInA) {
+    public static void btMultiBodyFixedConstraint_setPivotInA(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 pivotInA) {
         nbtMultiBodyFixedConstraint_setPivotInA(obj, pivotInA.address());
     }
 
@@ -177,7 +177,7 @@ public class BTMultiBodyFixedConstraint {
         invokePPV(obj, pivotInB, __functionAddress);
     }
 
-    public static void btMultiBodyFixedConstraint_setPivotInB(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 pivotInB) {
+    public static void btMultiBodyFixedConstraint_setPivotInB(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 pivotInB) {
         nbtMultiBodyFixedConstraint_setPivotInB(obj, pivotInB.address());
     }
 

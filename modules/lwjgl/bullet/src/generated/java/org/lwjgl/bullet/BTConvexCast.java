@@ -123,7 +123,7 @@ public class BTConvexCast {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btConvexCast_CastResult_getHitPoint(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btConvexCast_CastResult_getHitPoint(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtConvexCast_CastResult_getHitPoint(obj, value.address());
     }
 
@@ -165,7 +165,7 @@ public class BTConvexCast {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btConvexCast_CastResult_getNormal(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btConvexCast_CastResult_getNormal(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtConvexCast_CastResult_getNormal(obj, value.address());
     }
 
@@ -220,7 +220,7 @@ public class BTConvexCast {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btConvexCast_CastResult_setHitPoint(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btConvexCast_CastResult_setHitPoint(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtConvexCast_CastResult_setHitPoint(obj, value.address());
     }
 
@@ -262,7 +262,7 @@ public class BTConvexCast {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btConvexCast_CastResult_setNormal(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btConvexCast_CastResult_setNormal(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtConvexCast_CastResult_setNormal(obj, value.address());
     }
 

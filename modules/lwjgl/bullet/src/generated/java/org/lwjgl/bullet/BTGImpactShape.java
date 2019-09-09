@@ -126,7 +126,7 @@ public class BTGImpactShape {
         invokePPPPPV(obj, v0, v1, v2, v3, __functionAddress);
     }
 
-    public static void btTetrahedronShapeEx_setVertices(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 v0, @NativeType("btVector3 const *") ΒΤVector3 v1, @NativeType("btVector3 const *") ΒΤVector3 v2, @NativeType("btVector3 const *") ΒΤVector3 v3) {
+    public static void btTetrahedronShapeEx_setVertices(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 v0, @NativeType("btVector3 const *") BTVector3 v1, @NativeType("btVector3 const *") BTVector3 v2, @NativeType("btVector3 const *") BTVector3 v3) {
         nbtTetrahedronShapeEx_setVertices(obj, v0.address(), v1.address(), v2.address(), v3.address());
     }
 
@@ -184,7 +184,7 @@ public class BTGImpactShape {
         invokePPPPV(obj, child_index, t, aabbMin, aabbMax, __functionAddress);
     }
 
-    public static void btGImpactShapeInterface_getChildAabb(@NativeType("void *") long obj, int child_index, @NativeType("btTransform const *") BTTransform t, @NativeType("btVector3 *") ΒΤVector3 aabbMin, @NativeType("btVector3 *") ΒΤVector3 aabbMax) {
+    public static void btGImpactShapeInterface_getChildAabb(@NativeType("void *") long obj, int child_index, @NativeType("btTransform const *") BTTransform t, @NativeType("btVector3 *") BTVector3 aabbMin, @NativeType("btVector3 *") BTVector3 aabbMax) {
         nbtGImpactShapeInterface_getChildAabb(obj, child_index, t.address(), aabbMin.address(), aabbMax.address());
     }
 
@@ -330,7 +330,7 @@ public class BTGImpactShape {
         invokePPPPV(obj, __unnamed0, __unnamed1, __unnamed2, __functionAddress);
     }
 
-    public static void btGImpactShapeInterface_processAllTrianglesRay(@NativeType("void *") long obj, @NativeType("void *") long __unnamed0, @NativeType("btVector3 const *") ΒΤVector3 __unnamed1, @NativeType("btVector3 const *") ΒΤVector3 __unnamed2) {
+    public static void btGImpactShapeInterface_processAllTrianglesRay(@NativeType("void *") long obj, @NativeType("void *") long __unnamed0, @NativeType("btVector3 const *") BTVector3 __unnamed1, @NativeType("btVector3 const *") BTVector3 __unnamed2) {
         nbtGImpactShapeInterface_processAllTrianglesRay(obj, __unnamed0, __unnamed1.address(), __unnamed2.address());
     }
 
@@ -345,7 +345,7 @@ public class BTGImpactShape {
         invokePPPPV(obj, rayFrom, rayTo, resultCallback, __functionAddress);
     }
 
-    public static void btGImpactShapeInterface_rayTest(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 rayFrom, @NativeType("btVector3 const *") ΒΤVector3 rayTo, @NativeType("void *") long resultCallback) {
+    public static void btGImpactShapeInterface_rayTest(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 rayFrom, @NativeType("btVector3 const *") BTVector3 rayTo, @NativeType("void *") long resultCallback) {
         nbtGImpactShapeInterface_rayTest(obj, rayFrom.address(), rayTo.address(), resultCallback);
     }
 
@@ -550,7 +550,7 @@ public class BTGImpactShape {
         invokePPV(obj, vertex_index, vertex, __functionAddress);
     }
 
-    public static void btGImpactMeshShapePart_TrimeshPrimitiveManager_get_vertex(@NativeType("void *") long obj, @NativeType("unsigned int") int vertex_index, @NativeType("btVector3 *") ΒΤVector3 vertex) {
+    public static void btGImpactMeshShapePart_TrimeshPrimitiveManager_get_vertex(@NativeType("void *") long obj, @NativeType("unsigned int") int vertex_index, @NativeType("btVector3 *") BTVector3 vertex) {
         nbtGImpactMeshShapePart_TrimeshPrimitiveManager_get_vertex(obj, vertex_index, vertex.address());
     }
 
@@ -667,7 +667,7 @@ public class BTGImpactShape {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btGImpactMeshShapePart_TrimeshPrimitiveManager_getScale(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btGImpactMeshShapePart_TrimeshPrimitiveManager_getScale(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtGImpactMeshShapePart_TrimeshPrimitiveManager_getScale(obj, value.address());
     }
 
@@ -817,7 +817,7 @@ public class BTGImpactShape {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btGImpactMeshShapePart_TrimeshPrimitiveManager_setScale(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btGImpactMeshShapePart_TrimeshPrimitiveManager_setScale(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtGImpactMeshShapePart_TrimeshPrimitiveManager_setScale(obj, value.address());
     }
 
@@ -915,7 +915,7 @@ public class BTGImpactShape {
         invokePPV(obj, vertex_index, vertex, __functionAddress);
     }
 
-    public static void btGImpactMeshShapePart_getVertex(@NativeType("void *") long obj, int vertex_index, @NativeType("btVector3 *") ΒΤVector3 vertex) {
+    public static void btGImpactMeshShapePart_getVertex(@NativeType("void *") long obj, int vertex_index, @NativeType("btVector3 *") BTVector3 vertex) {
         nbtGImpactMeshShapePart_getVertex(obj, vertex_index, vertex.address());
     }
 

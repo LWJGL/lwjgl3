@@ -243,7 +243,7 @@ public class BTRaycastVehicle {
     }
 
     @NativeType("void *")
-    public static long btRaycastVehicle_addWheel(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 connectionPointCS0, @NativeType("btVector3 const *") ΒΤVector3 wheelDirectionCS0, @NativeType("btVector3 const *") ΒΤVector3 wheelAxleCS, @NativeType("btScalar") float suspensionRestLength, @NativeType("btScalar") float wheelRadius, @NativeType("void *") long tuning, @NativeType("bool") boolean isFrontWheel) {
+    public static long btRaycastVehicle_addWheel(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 connectionPointCS0, @NativeType("btVector3 const *") BTVector3 wheelDirectionCS0, @NativeType("btVector3 const *") BTVector3 wheelAxleCS, @NativeType("btScalar") float suspensionRestLength, @NativeType("btScalar") float wheelRadius, @NativeType("void *") long tuning, @NativeType("bool") boolean isFrontWheel) {
         return nbtRaycastVehicle_addWheel(obj, connectionPointCS0.address(), wheelDirectionCS0.address(), wheelAxleCS.address(), suspensionRestLength, wheelRadius, tuning, isFrontWheel);
     }
 
@@ -302,7 +302,7 @@ public class BTRaycastVehicle {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btRaycastVehicle_getForwardVector(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btRaycastVehicle_getForwardVector(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtRaycastVehicle_getForwardVector(obj, value.address());
     }
 

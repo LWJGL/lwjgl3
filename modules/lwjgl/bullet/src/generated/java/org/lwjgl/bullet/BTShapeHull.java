@@ -82,9 +82,9 @@ public class BTShapeHull {
 
     @Nullable
     @NativeType("btVector3 const *")
-    public static ΒΤVector3 btShapeHull_getVertexPointer(@NativeType("void *") long obj) {
+    public static BTVector3 btShapeHull_getVertexPointer(@NativeType("void *") long obj) {
         long __result = nbtShapeHull_getVertexPointer(obj);
-        return ΒΤVector3.createSafe(__result);
+        return BTVector3.createSafe(__result);
     }
 
     // --- [ btShapeHull_numIndices ] ---

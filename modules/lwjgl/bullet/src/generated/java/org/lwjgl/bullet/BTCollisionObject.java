@@ -187,7 +187,7 @@ public class BTCollisionObject {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionObject_getAnisotropicFriction(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btCollisionObject_getAnisotropicFriction(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtCollisionObject_getAnisotropicFriction(obj, value.address());
     }
 
@@ -310,7 +310,7 @@ public class BTCollisionObject {
     }
 
     @NativeType("bool")
-    public static boolean btCollisionObject_getCustomDebugColor(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 colorRGB) {
+    public static boolean btCollisionObject_getCustomDebugColor(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 colorRGB) {
         return nbtCollisionObject_getCustomDebugColor(obj, colorRGB.address());
     }
 
@@ -367,7 +367,7 @@ public class BTCollisionObject {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionObject_getInterpolationAngularVelocity(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btCollisionObject_getInterpolationAngularVelocity(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtCollisionObject_getInterpolationAngularVelocity(obj, value.address());
     }
 
@@ -381,7 +381,7 @@ public class BTCollisionObject {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btCollisionObject_getInterpolationLinearVelocity(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btCollisionObject_getInterpolationLinearVelocity(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtCollisionObject_getInterpolationLinearVelocity(obj, value.address());
     }
 
@@ -656,7 +656,7 @@ public class BTCollisionObject {
         invokePPV(obj, anisotropicFriction, frictionMode, __functionAddress);
     }
 
-    public static void btCollisionObject_setAnisotropicFriction(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 anisotropicFriction, int frictionMode) {
+    public static void btCollisionObject_setAnisotropicFriction(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 anisotropicFriction, int frictionMode) {
         nbtCollisionObject_setAnisotropicFriction(obj, anisotropicFriction.address(), frictionMode);
     }
 
@@ -752,7 +752,7 @@ public class BTCollisionObject {
         invokePPV(obj, colorRGB, __functionAddress);
     }
 
-    public static void btCollisionObject_setCustomDebugColor(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 colorRGB) {
+    public static void btCollisionObject_setCustomDebugColor(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 colorRGB) {
         nbtCollisionObject_setCustomDebugColor(obj, colorRGB.address());
     }
 
@@ -807,7 +807,7 @@ public class BTCollisionObject {
         invokePPV(obj, angvel, __functionAddress);
     }
 
-    public static void btCollisionObject_setInterpolationAngularVelocity(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 angvel) {
+    public static void btCollisionObject_setInterpolationAngularVelocity(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 angvel) {
         nbtCollisionObject_setInterpolationAngularVelocity(obj, angvel.address());
     }
 
@@ -821,7 +821,7 @@ public class BTCollisionObject {
         invokePPV(obj, linvel, __functionAddress);
     }
 
-    public static void btCollisionObject_setInterpolationLinearVelocity(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 linvel) {
+    public static void btCollisionObject_setInterpolationLinearVelocity(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 linvel) {
         nbtCollisionObject_setInterpolationLinearVelocity(obj, linvel.address());
     }
 

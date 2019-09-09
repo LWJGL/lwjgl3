@@ -71,7 +71,7 @@ public class BTHeightfieldTerrainShape {
         invokePPPPV(obj, callback, raySource, rayTarget, __functionAddress);
     }
 
-    public static void btHeightfieldTerrainShape_performRaycast(@NativeType("void *") long obj, @NativeType("void *") long callback, @NativeType("btVector3 const *") ΒΤVector3 raySource, @NativeType("btVector3 const *") ΒΤVector3 rayTarget) {
+    public static void btHeightfieldTerrainShape_performRaycast(@NativeType("void *") long obj, @NativeType("void *") long callback, @NativeType("btVector3 const *") BTVector3 raySource, @NativeType("btVector3 const *") BTVector3 rayTarget) {
         nbtHeightfieldTerrainShape_performRaycast(obj, callback, raySource.address(), rayTarget.address());
     }
 

@@ -40,7 +40,7 @@ public class BTScaledBvhTriangleMeshShape {
     }
 
     @NativeType("void *")
-    public static long btScaledBvhTriangleMeshShape_new(@NativeType("void *") long childShape, @NativeType("btVector3 const *") ΒΤVector3 localScaling) {
+    public static long btScaledBvhTriangleMeshShape_new(@NativeType("void *") long childShape, @NativeType("btVector3 const *") BTVector3 localScaling) {
         return nbtScaledBvhTriangleMeshShape_new(childShape, localScaling.address());
     }
 

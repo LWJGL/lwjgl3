@@ -52,7 +52,7 @@ public class BTMultimaterialTriangleMeshShape {
     }
 
     @NativeType("void *")
-    public static long btMultimaterialTriangleMeshShape_new2(@NativeType("void *") long meshInterface, @NativeType("bool") boolean useQuantizedAabbCompression, @NativeType("btVector3 const *") ΒΤVector3 bvhAabbMin, @NativeType("btVector3 const *") ΒΤVector3 bvhAabbMax, @NativeType("bool") boolean buildBvh) {
+    public static long btMultimaterialTriangleMeshShape_new2(@NativeType("void *") long meshInterface, @NativeType("bool") boolean useQuantizedAabbCompression, @NativeType("btVector3 const *") BTVector3 bvhAabbMin, @NativeType("btVector3 const *") BTVector3 bvhAabbMax, @NativeType("bool") boolean buildBvh) {
         return nbtMultimaterialTriangleMeshShape_new2(meshInterface, useQuantizedAabbCompression, bvhAabbMin.address(), bvhAabbMax.address(), buildBvh);
     }
 

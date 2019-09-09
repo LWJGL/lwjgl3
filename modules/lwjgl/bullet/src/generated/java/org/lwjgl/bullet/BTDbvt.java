@@ -161,7 +161,7 @@ public class BTDbvt {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btDbvtAabbMm_Center(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btDbvtAabbMm_Center(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtDbvtAabbMm_Center(obj, value.address());
     }
 
@@ -175,7 +175,7 @@ public class BTDbvt {
         return invokePPI(obj, n, o, s, __functionAddress);
     }
 
-    public static int btDbvtAabbMm_Classify(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 n, @NativeType("btScalar") float o, int s) {
+    public static int btDbvtAabbMm_Classify(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 n, @NativeType("btScalar") float o, int s) {
         return nbtDbvtAabbMm_Classify(obj, n.address(), o, s);
     }
 
@@ -201,7 +201,7 @@ public class BTDbvt {
         invokePPV(obj, e, __functionAddress);
     }
 
-    public static void btDbvtAabbMm_Expand(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 e) {
+    public static void btDbvtAabbMm_Expand(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 e) {
         nbtDbvtAabbMm_Expand(obj, e.address());
     }
 
@@ -215,7 +215,7 @@ public class BTDbvt {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btDbvtAabbMm_Extents(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btDbvtAabbMm_Extents(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtDbvtAabbMm_Extents(obj, value.address());
     }
 
@@ -227,7 +227,7 @@ public class BTDbvt {
     }
 
     @NativeType("void *")
-    public static long btDbvtAabbMm_FromCE(@NativeType("btVector3 const *") ΒΤVector3 c, @NativeType("btVector3 const *") ΒΤVector3 e) {
+    public static long btDbvtAabbMm_FromCE(@NativeType("btVector3 const *") BTVector3 c, @NativeType("btVector3 const *") BTVector3 e) {
         return nbtDbvtAabbMm_FromCE(c.address(), e.address());
     }
 
@@ -239,7 +239,7 @@ public class BTDbvt {
     }
 
     @NativeType("void *")
-    public static long btDbvtAabbMm_FromCR(@NativeType("btVector3 const *") ΒΤVector3 c, @NativeType("btScalar") float r) {
+    public static long btDbvtAabbMm_FromCR(@NativeType("btVector3 const *") BTVector3 c, @NativeType("btScalar") float r) {
         return nbtDbvtAabbMm_FromCR(c.address(), r);
     }
 
@@ -251,7 +251,7 @@ public class BTDbvt {
     }
 
     @NativeType("void *")
-    public static long btDbvtAabbMm_FromMM(@NativeType("btVector3 const *") ΒΤVector3 mi, @NativeType("btVector3 const *") ΒΤVector3 mx) {
+    public static long btDbvtAabbMm_FromMM(@NativeType("btVector3 const *") BTVector3 mi, @NativeType("btVector3 const *") BTVector3 mx) {
         return nbtDbvtAabbMm_FromMM(mi.address(), mx.address());
     }
 
@@ -275,7 +275,7 @@ public class BTDbvt {
     }
 
     @NativeType("void *")
-    public static long btDbvtAabbMm_FromPoints2(@NativeType("btVector3 const *") ΒΤVector3.Buffer pts) {
+    public static long btDbvtAabbMm_FromPoints2(@NativeType("btVector3 const *") BTVector3.Buffer pts) {
         return nbtDbvtAabbMm_FromPoints2(pts.address(), pts.remaining());
     }
 
@@ -289,7 +289,7 @@ public class BTDbvt {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btDbvtAabbMm_Lengths(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btDbvtAabbMm_Lengths(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtDbvtAabbMm_Lengths(obj, value.address());
     }
 
@@ -303,7 +303,7 @@ public class BTDbvt {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btDbvtAabbMm_Maxs(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btDbvtAabbMm_Maxs(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtDbvtAabbMm_Maxs(obj, value.address());
     }
 
@@ -317,7 +317,7 @@ public class BTDbvt {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btDbvtAabbMm_Mins(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btDbvtAabbMm_Mins(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtDbvtAabbMm_Mins(obj, value.address());
     }
 
@@ -332,7 +332,7 @@ public class BTDbvt {
     }
 
     @NativeType("btScalar")
-    public static float btDbvtAabbMm_ProjectMinimum(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 v, @NativeType("unsigned int") int signs) {
+    public static float btDbvtAabbMm_ProjectMinimum(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 v, @NativeType("unsigned int") int signs) {
         return nbtDbvtAabbMm_ProjectMinimum(obj, v.address(), signs);
     }
 
@@ -346,7 +346,7 @@ public class BTDbvt {
         invokePPV(obj, e, __functionAddress);
     }
 
-    public static void btDbvtAabbMm_SignedExpand(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 e) {
+    public static void btDbvtAabbMm_SignedExpand(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 e) {
         nbtDbvtAabbMm_SignedExpand(obj, e.address());
     }
 
@@ -360,7 +360,7 @@ public class BTDbvt {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btDbvtAabbMm_tMaxs(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btDbvtAabbMm_tMaxs(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtDbvtAabbMm_tMaxs(obj, value.address());
     }
 
@@ -374,7 +374,7 @@ public class BTDbvt {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btDbvtAabbMm_tMins(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btDbvtAabbMm_tMins(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtDbvtAabbMm_tMins(obj, value.address());
     }
 
@@ -1319,7 +1319,7 @@ public class BTDbvt {
     }
 
     @NativeType("bool")
-    public static boolean btDbvt_update5(@NativeType("void *") long obj, @NativeType("void *") long leaf, @NativeType("void *") long volume, @NativeType("btVector3 const *") ΒΤVector3 velocity) {
+    public static boolean btDbvt_update5(@NativeType("void *") long obj, @NativeType("void *") long leaf, @NativeType("void *") long volume, @NativeType("btVector3 const *") BTVector3 velocity) {
         return nbtDbvt_update5(obj, leaf, volume, velocity.address());
     }
 
@@ -1336,7 +1336,7 @@ public class BTDbvt {
     }
 
     @NativeType("bool")
-    public static boolean btDbvt_update6(@NativeType("void *") long obj, @NativeType("void *") long leaf, @NativeType("void *") long volume, @NativeType("btVector3 const *") ΒΤVector3 velocity, @NativeType("btScalar") float margin) {
+    public static boolean btDbvt_update6(@NativeType("void *") long obj, @NativeType("void *") long leaf, @NativeType("void *") long volume, @NativeType("btVector3 const *") BTVector3 velocity, @NativeType("btScalar") float margin) {
         return nbtDbvt_update6(obj, leaf, volume, velocity.address(), margin);
     }
 

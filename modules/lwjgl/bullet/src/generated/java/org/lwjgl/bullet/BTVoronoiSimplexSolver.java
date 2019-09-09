@@ -313,7 +313,7 @@ public class BTVoronoiSimplexSolver {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSubSimplexClosestResult_getClosestPointOnSimplex(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btSubSimplexClosestResult_getClosestPointOnSimplex(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtSubSimplexClosestResult_getClosestPointOnSimplex(obj, value.address());
     }
 
@@ -420,7 +420,7 @@ public class BTVoronoiSimplexSolver {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btSubSimplexClosestResult_setClosestPointOnSimplex(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btSubSimplexClosestResult_setClosestPointOnSimplex(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtSubSimplexClosestResult_setClosestPointOnSimplex(obj, value.address());
     }
 
@@ -473,7 +473,7 @@ public class BTVoronoiSimplexSolver {
         invokePPPPV(obj, w, p, q, __functionAddress);
     }
 
-    public static void btVoronoiSimplexSolver_addVertex(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 w, @NativeType("btVector3 const *") ΒΤVector3 p, @NativeType("btVector3 const *") ΒΤVector3 q) {
+    public static void btVoronoiSimplexSolver_addVertex(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 w, @NativeType("btVector3 const *") BTVector3 p, @NativeType("btVector3 const *") BTVector3 q) {
         nbtVoronoiSimplexSolver_addVertex(obj, w.address(), p.address(), q.address());
     }
 
@@ -487,7 +487,7 @@ public class BTVoronoiSimplexSolver {
         invokePPV(obj, v, __functionAddress);
     }
 
-    public static void btVoronoiSimplexSolver_backup_closest(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 v) {
+    public static void btVoronoiSimplexSolver_backup_closest(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 v) {
         nbtVoronoiSimplexSolver_backup_closest(obj, v.address());
     }
 
@@ -502,7 +502,7 @@ public class BTVoronoiSimplexSolver {
     }
 
     @NativeType("bool")
-    public static boolean btVoronoiSimplexSolver_closest(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 v) {
+    public static boolean btVoronoiSimplexSolver_closest(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 v) {
         return nbtVoronoiSimplexSolver_closest(obj, v.address());
     }
 
@@ -518,7 +518,7 @@ public class BTVoronoiSimplexSolver {
     }
 
     @NativeType("bool")
-    public static boolean btVoronoiSimplexSolver_closestPtPointTetrahedron(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 p, @NativeType("btVector3 const *") ΒΤVector3 a, @NativeType("btVector3 const *") ΒΤVector3 b, @NativeType("btVector3 const *") ΒΤVector3 c, @NativeType("btVector3 const *") ΒΤVector3 d, @NativeType("void *") long finalResult) {
+    public static boolean btVoronoiSimplexSolver_closestPtPointTetrahedron(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 p, @NativeType("btVector3 const *") BTVector3 a, @NativeType("btVector3 const *") BTVector3 b, @NativeType("btVector3 const *") BTVector3 c, @NativeType("btVector3 const *") BTVector3 d, @NativeType("void *") long finalResult) {
         return nbtVoronoiSimplexSolver_closestPtPointTetrahedron(obj, p.address(), a.address(), b.address(), c.address(), d.address(), finalResult);
     }
 
@@ -534,7 +534,7 @@ public class BTVoronoiSimplexSolver {
     }
 
     @NativeType("bool")
-    public static boolean btVoronoiSimplexSolver_closestPtPointTriangle(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 p, @NativeType("btVector3 const *") ΒΤVector3 a, @NativeType("btVector3 const *") ΒΤVector3 b, @NativeType("btVector3 const *") ΒΤVector3 c, @NativeType("void *") long result) {
+    public static boolean btVoronoiSimplexSolver_closestPtPointTriangle(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 p, @NativeType("btVector3 const *") BTVector3 a, @NativeType("btVector3 const *") BTVector3 b, @NativeType("btVector3 const *") BTVector3 c, @NativeType("void *") long result) {
         return nbtVoronoiSimplexSolver_closestPtPointTriangle(obj, p.address(), a.address(), b.address(), c.address(), result);
     }
 
@@ -548,7 +548,7 @@ public class BTVoronoiSimplexSolver {
         invokePPPV(obj, p1, p2, __functionAddress);
     }
 
-    public static void btVoronoiSimplexSolver_compute_points(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 p1, @NativeType("btVector3 *") ΒΤVector3 p2) {
+    public static void btVoronoiSimplexSolver_compute_points(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 p1, @NativeType("btVector3 *") BTVector3 p2) {
         nbtVoronoiSimplexSolver_compute_points(obj, p1.address(), p2.address());
     }
 
@@ -595,7 +595,7 @@ public class BTVoronoiSimplexSolver {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btVoronoiSimplexSolver_getCachedP1(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btVoronoiSimplexSolver_getCachedP1(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtVoronoiSimplexSolver_getCachedP1(obj, value.address());
     }
 
@@ -609,7 +609,7 @@ public class BTVoronoiSimplexSolver {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btVoronoiSimplexSolver_getCachedP2(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btVoronoiSimplexSolver_getCachedP2(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtVoronoiSimplexSolver_getCachedP2(obj, value.address());
     }
 
@@ -623,7 +623,7 @@ public class BTVoronoiSimplexSolver {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btVoronoiSimplexSolver_getCachedV(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btVoronoiSimplexSolver_getCachedV(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtVoronoiSimplexSolver_getCachedV(obj, value.address());
     }
 
@@ -659,7 +659,7 @@ public class BTVoronoiSimplexSolver {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btVoronoiSimplexSolver_getLastW(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btVoronoiSimplexSolver_getLastW(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtVoronoiSimplexSolver_getLastW(obj, value.address());
     }
 
@@ -694,7 +694,7 @@ public class BTVoronoiSimplexSolver {
         return invokePPPPI(obj, pBuf, qBuf, yBuf, __functionAddress);
     }
 
-    public static int btVoronoiSimplexSolver_getSimplex(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 pBuf, @NativeType("btVector3 *") ΒΤVector3 qBuf, @NativeType("btVector3 *") ΒΤVector3 yBuf) {
+    public static int btVoronoiSimplexSolver_getSimplex(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 pBuf, @NativeType("btVector3 *") BTVector3 qBuf, @NativeType("btVector3 *") BTVector3 yBuf) {
         return nbtVoronoiSimplexSolver_getSimplex(obj, pBuf.address(), qBuf.address(), yBuf.address());
     }
 
@@ -710,9 +710,9 @@ public class BTVoronoiSimplexSolver {
 
     @Nullable
     @NativeType("btVector3 *")
-    public static ΒΤVector3 btVoronoiSimplexSolver_getSimplexPointsP(@NativeType("void *") long obj) {
+    public static BTVector3 btVoronoiSimplexSolver_getSimplexPointsP(@NativeType("void *") long obj) {
         long __result = nbtVoronoiSimplexSolver_getSimplexPointsP(obj);
-        return ΒΤVector3.createSafe(__result);
+        return BTVector3.createSafe(__result);
     }
 
     // --- [ btVoronoiSimplexSolver_getSimplexPointsQ ] ---
@@ -727,9 +727,9 @@ public class BTVoronoiSimplexSolver {
 
     @Nullable
     @NativeType("btVector3 *")
-    public static ΒΤVector3 btVoronoiSimplexSolver_getSimplexPointsQ(@NativeType("void *") long obj) {
+    public static BTVector3 btVoronoiSimplexSolver_getSimplexPointsQ(@NativeType("void *") long obj) {
         long __result = nbtVoronoiSimplexSolver_getSimplexPointsQ(obj);
-        return ΒΤVector3.createSafe(__result);
+        return BTVector3.createSafe(__result);
     }
 
     // --- [ btVoronoiSimplexSolver_getSimplexVectorW ] ---
@@ -744,9 +744,9 @@ public class BTVoronoiSimplexSolver {
 
     @Nullable
     @NativeType("btVector3 *")
-    public static ΒΤVector3 btVoronoiSimplexSolver_getSimplexVectorW(@NativeType("void *") long obj) {
+    public static BTVector3 btVoronoiSimplexSolver_getSimplexVectorW(@NativeType("void *") long obj) {
         long __result = nbtVoronoiSimplexSolver_getSimplexVectorW(obj);
-        return ΒΤVector3.createSafe(__result);
+        return BTVector3.createSafe(__result);
     }
 
     // --- [ btVoronoiSimplexSolver_inSimplex ] ---
@@ -760,7 +760,7 @@ public class BTVoronoiSimplexSolver {
     }
 
     @NativeType("bool")
-    public static boolean btVoronoiSimplexSolver_inSimplex(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 w) {
+    public static boolean btVoronoiSimplexSolver_inSimplex(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 w) {
         return nbtVoronoiSimplexSolver_inSimplex(obj, w.address());
     }
 
@@ -795,7 +795,7 @@ public class BTVoronoiSimplexSolver {
         return invokePPPPPPI(obj, p, a, b, c, d, __functionAddress);
     }
 
-    public static int btVoronoiSimplexSolver_pointOutsideOfPlane(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 p, @NativeType("btVector3 const *") ΒΤVector3 a, @NativeType("btVector3 const *") ΒΤVector3 b, @NativeType("btVector3 const *") ΒΤVector3 c, @NativeType("btVector3 const *") ΒΤVector3 d) {
+    public static int btVoronoiSimplexSolver_pointOutsideOfPlane(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 p, @NativeType("btVector3 const *") BTVector3 a, @NativeType("btVector3 const *") BTVector3 b, @NativeType("btVector3 const *") BTVector3 c, @NativeType("btVector3 const *") BTVector3 d) {
         return nbtVoronoiSimplexSolver_pointOutsideOfPlane(obj, p.address(), a.address(), b.address(), c.address(), d.address());
     }
 
@@ -851,7 +851,7 @@ public class BTVoronoiSimplexSolver {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btVoronoiSimplexSolver_setCachedP1(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btVoronoiSimplexSolver_setCachedP1(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtVoronoiSimplexSolver_setCachedP1(obj, value.address());
     }
 
@@ -865,7 +865,7 @@ public class BTVoronoiSimplexSolver {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btVoronoiSimplexSolver_setCachedP2(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btVoronoiSimplexSolver_setCachedP2(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtVoronoiSimplexSolver_setCachedP2(obj, value.address());
     }
 
@@ -879,7 +879,7 @@ public class BTVoronoiSimplexSolver {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btVoronoiSimplexSolver_setCachedV(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btVoronoiSimplexSolver_setCachedV(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtVoronoiSimplexSolver_setCachedV(obj, value.address());
     }
 
@@ -913,7 +913,7 @@ public class BTVoronoiSimplexSolver {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btVoronoiSimplexSolver_setLastW(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btVoronoiSimplexSolver_setLastW(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtVoronoiSimplexSolver_setLastW(obj, value.address());
     }
 

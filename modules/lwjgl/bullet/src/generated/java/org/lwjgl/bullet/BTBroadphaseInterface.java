@@ -118,7 +118,7 @@ public class BTBroadphaseInterface {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btBroadphaseRayCallback_getRayDirectionInverse(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btBroadphaseRayCallback_getRayDirectionInverse(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtBroadphaseRayCallback_getRayDirectionInverse(obj, value.address());
     }
 
@@ -154,7 +154,7 @@ public class BTBroadphaseInterface {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btBroadphaseRayCallback_setRayDirectionInverse(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btBroadphaseRayCallback_setRayDirectionInverse(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtBroadphaseRayCallback_setRayDirectionInverse(obj, value.address());
     }
 
@@ -169,7 +169,7 @@ public class BTBroadphaseInterface {
         invokePPPPV(obj, aabbMin, aabbMax, callback, __functionAddress);
     }
 
-    public static void btBroadphaseInterface_aabbTest(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 aabbMin, @NativeType("btVector3 const *") ΒΤVector3 aabbMax, @NativeType("void *") long callback) {
+    public static void btBroadphaseInterface_aabbTest(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 aabbMin, @NativeType("btVector3 const *") BTVector3 aabbMax, @NativeType("void *") long callback) {
         nbtBroadphaseInterface_aabbTest(obj, aabbMin.address(), aabbMax.address(), callback);
     }
 
@@ -197,7 +197,7 @@ public class BTBroadphaseInterface {
     }
 
     @NativeType("void *")
-    public static long btBroadphaseInterface_createProxy(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 aabbMin, @NativeType("btVector3 const *") ΒΤVector3 aabbMax, int shapeType, @NativeType("void *") long userPtr, int collisionFilterGroup, int collisionFilterMask, @NativeType("void *") long dispatcher) {
+    public static long btBroadphaseInterface_createProxy(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 aabbMin, @NativeType("btVector3 const *") BTVector3 aabbMax, int shapeType, @NativeType("void *") long userPtr, int collisionFilterGroup, int collisionFilterMask, @NativeType("void *") long dispatcher) {
         return nbtBroadphaseInterface_createProxy(obj, aabbMin.address(), aabbMax.address(), shapeType, userPtr, collisionFilterGroup, collisionFilterMask, dispatcher);
     }
 
@@ -224,7 +224,7 @@ public class BTBroadphaseInterface {
         invokePPPPV(obj, proxy, aabbMin, aabbMax, __functionAddress);
     }
 
-    public static void btBroadphaseInterface_getAabb(@NativeType("void *") long obj, @NativeType("void *") long proxy, @NativeType("btVector3 *") ΒΤVector3 aabbMin, @NativeType("btVector3 *") ΒΤVector3 aabbMax) {
+    public static void btBroadphaseInterface_getAabb(@NativeType("void *") long obj, @NativeType("void *") long proxy, @NativeType("btVector3 *") BTVector3 aabbMin, @NativeType("btVector3 *") BTVector3 aabbMax) {
         nbtBroadphaseInterface_getAabb(obj, proxy, aabbMin.address(), aabbMax.address());
     }
 
@@ -238,7 +238,7 @@ public class BTBroadphaseInterface {
         invokePPPV(obj, aabbMin, aabbMax, __functionAddress);
     }
 
-    public static void btBroadphaseInterface_getBroadphaseAabb(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 aabbMin, @NativeType("btVector3 *") ΒΤVector3 aabbMax) {
+    public static void btBroadphaseInterface_getBroadphaseAabb(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 aabbMin, @NativeType("btVector3 *") BTVector3 aabbMax) {
         nbtBroadphaseInterface_getBroadphaseAabb(obj, aabbMin.address(), aabbMax.address());
     }
 
@@ -274,7 +274,7 @@ public class BTBroadphaseInterface {
         invokePPPPV(obj, rayFrom, rayTo, rayCallback, __functionAddress);
     }
 
-    public static void btBroadphaseInterface_rayTest(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 rayFrom, @NativeType("btVector3 const *") ΒΤVector3 rayTo, @NativeType("void *") long rayCallback) {
+    public static void btBroadphaseInterface_rayTest(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 rayFrom, @NativeType("btVector3 const *") BTVector3 rayTo, @NativeType("void *") long rayCallback) {
         nbtBroadphaseInterface_rayTest(obj, rayFrom.address(), rayTo.address(), rayCallback);
     }
 
@@ -289,7 +289,7 @@ public class BTBroadphaseInterface {
         invokePPPPPV(obj, rayFrom, rayTo, rayCallback, aabbMin, __functionAddress);
     }
 
-    public static void btBroadphaseInterface_rayTest2(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 rayFrom, @NativeType("btVector3 const *") ΒΤVector3 rayTo, @NativeType("void *") long rayCallback, @NativeType("btVector3 const *") ΒΤVector3 aabbMin) {
+    public static void btBroadphaseInterface_rayTest2(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 rayFrom, @NativeType("btVector3 const *") BTVector3 rayTo, @NativeType("void *") long rayCallback, @NativeType("btVector3 const *") BTVector3 aabbMin) {
         nbtBroadphaseInterface_rayTest2(obj, rayFrom.address(), rayTo.address(), rayCallback, aabbMin.address());
     }
 
@@ -304,7 +304,7 @@ public class BTBroadphaseInterface {
         invokePPPPPPV(obj, rayFrom, rayTo, rayCallback, aabbMin, aabbMax, __functionAddress);
     }
 
-    public static void btBroadphaseInterface_rayTest3(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 rayFrom, @NativeType("btVector3 const *") ΒΤVector3 rayTo, @NativeType("void *") long rayCallback, @NativeType("btVector3 const *") ΒΤVector3 aabbMin, @NativeType("btVector3 const *") ΒΤVector3 aabbMax) {
+    public static void btBroadphaseInterface_rayTest3(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 rayFrom, @NativeType("btVector3 const *") BTVector3 rayTo, @NativeType("void *") long rayCallback, @NativeType("btVector3 const *") BTVector3 aabbMin, @NativeType("btVector3 const *") BTVector3 aabbMax) {
         nbtBroadphaseInterface_rayTest3(obj, rayFrom.address(), rayTo.address(), rayCallback, aabbMin.address(), aabbMax.address());
     }
 
@@ -331,7 +331,7 @@ public class BTBroadphaseInterface {
         invokePPPPPV(obj, proxy, aabbMin, aabbMax, dispatcher, __functionAddress);
     }
 
-    public static void btBroadphaseInterface_setAabb(@NativeType("void *") long obj, @NativeType("void *") long proxy, @NativeType("btVector3 const *") ΒΤVector3 aabbMin, @NativeType("btVector3 const *") ΒΤVector3 aabbMax, @NativeType("void *") long dispatcher) {
+    public static void btBroadphaseInterface_setAabb(@NativeType("void *") long obj, @NativeType("void *") long proxy, @NativeType("btVector3 const *") BTVector3 aabbMin, @NativeType("btVector3 const *") BTVector3 aabbMax, @NativeType("void *") long dispatcher) {
         nbtBroadphaseInterface_setAabb(obj, proxy, aabbMin.address(), aabbMax.address(), dispatcher);
     }
 

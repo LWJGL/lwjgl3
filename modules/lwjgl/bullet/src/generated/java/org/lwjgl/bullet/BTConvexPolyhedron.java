@@ -110,7 +110,7 @@ public class BTConvexPolyhedron {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btConvexPolyhedron_getExtents(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btConvexPolyhedron_getExtents(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtConvexPolyhedron_getExtents(obj, value.address());
     }
 
@@ -135,7 +135,7 @@ public class BTConvexPolyhedron {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btConvexPolyhedron_getLocalCenter(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btConvexPolyhedron_getLocalCenter(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtConvexPolyhedron_getLocalCenter(obj, value.address());
     }
 
@@ -149,7 +149,7 @@ public class BTConvexPolyhedron {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btConvexPolyhedron_getMC(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btConvexPolyhedron_getMC(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtConvexPolyhedron_getMC(obj, value.address());
     }
 
@@ -163,7 +163,7 @@ public class BTConvexPolyhedron {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btConvexPolyhedron_getME(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btConvexPolyhedron_getME(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtConvexPolyhedron_getME(obj, value.address());
     }
 
@@ -208,7 +208,7 @@ public class BTConvexPolyhedron {
         invokePPPPPPPV(obj, trans, dir, minProj, maxProj, witnesPtMin, witnesPtMax, __functionAddress);
     }
 
-    public static void btConvexPolyhedron_project(@NativeType("void *") long obj, @NativeType("btTransform const *") BTTransform trans, @NativeType("btVector3 const *") ΒΤVector3 dir, @NativeType("btScalar *") FloatBuffer minProj, @NativeType("btScalar *") FloatBuffer maxProj, @NativeType("btVector3 *") ΒΤVector3 witnesPtMin, @NativeType("btVector3 *") ΒΤVector3 witnesPtMax) {
+    public static void btConvexPolyhedron_project(@NativeType("void *") long obj, @NativeType("btTransform const *") BTTransform trans, @NativeType("btVector3 const *") BTVector3 dir, @NativeType("btScalar *") FloatBuffer minProj, @NativeType("btScalar *") FloatBuffer maxProj, @NativeType("btVector3 *") BTVector3 witnesPtMin, @NativeType("btVector3 *") BTVector3 witnesPtMax) {
         if (CHECKS) {
             check(minProj, 1);
             check(maxProj, 1);
@@ -226,7 +226,7 @@ public class BTConvexPolyhedron {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btConvexPolyhedron_setExtents(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btConvexPolyhedron_setExtents(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtConvexPolyhedron_setExtents(obj, value.address());
     }
 
@@ -240,7 +240,7 @@ public class BTConvexPolyhedron {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btConvexPolyhedron_setLocalCenter(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btConvexPolyhedron_setLocalCenter(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtConvexPolyhedron_setLocalCenter(obj, value.address());
     }
 
@@ -254,7 +254,7 @@ public class BTConvexPolyhedron {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btConvexPolyhedron_setMC(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btConvexPolyhedron_setMC(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtConvexPolyhedron_setMC(obj, value.address());
     }
 
@@ -268,7 +268,7 @@ public class BTConvexPolyhedron {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btConvexPolyhedron_setME(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btConvexPolyhedron_setME(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtConvexPolyhedron_setME(obj, value.address());
     }
 

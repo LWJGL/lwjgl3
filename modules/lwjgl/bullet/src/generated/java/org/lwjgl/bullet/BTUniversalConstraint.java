@@ -48,7 +48,7 @@ public class BTUniversalConstraint {
     }
 
     @NativeType("void *")
-    public static long btUniversalConstraint_new(@NativeType("void *") long rbA, @NativeType("void *") long rbB, @NativeType("btVector3 const *") ΒΤVector3 anchor, @NativeType("btVector3 const *") ΒΤVector3 axis1, @NativeType("btVector3 const *") ΒΤVector3 axis2) {
+    public static long btUniversalConstraint_new(@NativeType("void *") long rbA, @NativeType("void *") long rbB, @NativeType("btVector3 const *") BTVector3 anchor, @NativeType("btVector3 const *") BTVector3 axis1, @NativeType("btVector3 const *") BTVector3 axis2) {
         return nbtUniversalConstraint_new(rbA, rbB, anchor.address(), axis1.address(), axis2.address());
     }
 
@@ -62,7 +62,7 @@ public class BTUniversalConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btUniversalConstraint_getAnchor(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btUniversalConstraint_getAnchor(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtUniversalConstraint_getAnchor(obj, value.address());
     }
 
@@ -76,7 +76,7 @@ public class BTUniversalConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btUniversalConstraint_getAnchor2(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btUniversalConstraint_getAnchor2(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtUniversalConstraint_getAnchor2(obj, value.address());
     }
 
@@ -112,7 +112,7 @@ public class BTUniversalConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btUniversalConstraint_getAxis1(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btUniversalConstraint_getAxis1(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtUniversalConstraint_getAxis1(obj, value.address());
     }
 
@@ -126,7 +126,7 @@ public class BTUniversalConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btUniversalConstraint_getAxis2(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btUniversalConstraint_getAxis2(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtUniversalConstraint_getAxis2(obj, value.address());
     }
 

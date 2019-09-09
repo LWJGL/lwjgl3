@@ -79,7 +79,7 @@ public class BTKinematicCharacterController {
     }
 
     @NativeType("void *")
-    public static long btKinematicCharacterController_new2(@NativeType("void *") long ghostObject, @NativeType("void *") long convexShape, @NativeType("btScalar") float stepHeight, @NativeType("btVector3 const *") ΒΤVector3 up) {
+    public static long btKinematicCharacterController_new2(@NativeType("void *") long ghostObject, @NativeType("void *") long convexShape, @NativeType("btScalar") float stepHeight, @NativeType("btVector3 const *") BTVector3 up) {
         return nbtKinematicCharacterController_new2(ghostObject, convexShape, stepHeight, up.address());
     }
 
@@ -93,7 +93,7 @@ public class BTKinematicCharacterController {
         invokePPV(obj, v, __functionAddress);
     }
 
-    public static void btKinematicCharacterController_applyImpulse(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 v) {
+    public static void btKinematicCharacterController_applyImpulse(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 v) {
         nbtKinematicCharacterController_applyImpulse(obj, v.address());
     }
 
@@ -118,7 +118,7 @@ public class BTKinematicCharacterController {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btKinematicCharacterController_getAngularVelocity(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btKinematicCharacterController_getAngularVelocity(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtKinematicCharacterController_getAngularVelocity(obj, value.address());
     }
 
@@ -154,7 +154,7 @@ public class BTKinematicCharacterController {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btKinematicCharacterController_getGravity(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btKinematicCharacterController_getGravity(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtKinematicCharacterController_getGravity(obj, value.address());
     }
 
@@ -190,7 +190,7 @@ public class BTKinematicCharacterController {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btKinematicCharacterController_getLinearVelocity(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btKinematicCharacterController_getLinearVelocity(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtKinematicCharacterController_getLinearVelocity(obj, value.address());
     }
 
@@ -237,7 +237,7 @@ public class BTKinematicCharacterController {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btKinematicCharacterController_getUp(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btKinematicCharacterController_getUp(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtKinematicCharacterController_getUp(obj, value.address());
     }
 
@@ -261,7 +261,7 @@ public class BTKinematicCharacterController {
         invokePPV(obj, velocity, __functionAddress);
     }
 
-    public static void btKinematicCharacterController_setAngularVelocity(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 velocity) {
+    public static void btKinematicCharacterController_setAngularVelocity(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 velocity) {
         nbtKinematicCharacterController_setAngularVelocity(obj, velocity.address());
     }
 
@@ -285,7 +285,7 @@ public class BTKinematicCharacterController {
         invokePPV(obj, gravity, __functionAddress);
     }
 
-    public static void btKinematicCharacterController_setGravity(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 gravity) {
+    public static void btKinematicCharacterController_setGravity(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 gravity) {
         nbtKinematicCharacterController_setGravity(obj, gravity.address());
     }
 
@@ -319,7 +319,7 @@ public class BTKinematicCharacterController {
         invokePPV(obj, velocity, __functionAddress);
     }
 
-    public static void btKinematicCharacterController_setLinearVelocity(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 velocity) {
+    public static void btKinematicCharacterController_setLinearVelocity(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 velocity) {
         nbtKinematicCharacterController_setLinearVelocity(obj, velocity.address());
     }
 
@@ -373,7 +373,7 @@ public class BTKinematicCharacterController {
         invokePPV(obj, up, __functionAddress);
     }
 
-    public static void btKinematicCharacterController_setUp(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 up) {
+    public static void btKinematicCharacterController_setUp(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 up) {
         nbtKinematicCharacterController_setUp(obj, up.address());
     }
 

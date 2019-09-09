@@ -141,7 +141,7 @@ public class BTPoint2PointConstraint {
     }
 
     @NativeType("void *")
-    public static long btPoint2PointConstraint_new(@NativeType("void *") long rbA, @NativeType("void *") long rbB, @NativeType("btVector3 const *") ΒΤVector3 pivotInA, @NativeType("btVector3 const *") ΒΤVector3 pivotInB) {
+    public static long btPoint2PointConstraint_new(@NativeType("void *") long rbA, @NativeType("void *") long rbB, @NativeType("btVector3 const *") BTVector3 pivotInA, @NativeType("btVector3 const *") BTVector3 pivotInB) {
         return nbtPoint2PointConstraint_new(rbA, rbB, pivotInA.address(), pivotInB.address());
     }
 
@@ -156,7 +156,7 @@ public class BTPoint2PointConstraint {
     }
 
     @NativeType("void *")
-    public static long btPoint2PointConstraint_new2(@NativeType("void *") long rbA, @NativeType("btVector3 const *") ΒΤVector3 pivotInA) {
+    public static long btPoint2PointConstraint_new2(@NativeType("void *") long rbA, @NativeType("btVector3 const *") BTVector3 pivotInA) {
         return nbtPoint2PointConstraint_new2(rbA, pivotInA.address());
     }
 
@@ -206,7 +206,7 @@ public class BTPoint2PointConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btPoint2PointConstraint_getPivotInA(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btPoint2PointConstraint_getPivotInA(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtPoint2PointConstraint_getPivotInA(obj, value.address());
     }
 
@@ -220,7 +220,7 @@ public class BTPoint2PointConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btPoint2PointConstraint_getPivotInB(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btPoint2PointConstraint_getPivotInB(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtPoint2PointConstraint_getPivotInB(obj, value.address());
     }
 
@@ -256,7 +256,7 @@ public class BTPoint2PointConstraint {
         invokePPV(obj, pivotA, __functionAddress);
     }
 
-    public static void btPoint2PointConstraint_setPivotA(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 pivotA) {
+    public static void btPoint2PointConstraint_setPivotA(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 pivotA) {
         nbtPoint2PointConstraint_setPivotA(obj, pivotA.address());
     }
 
@@ -270,7 +270,7 @@ public class BTPoint2PointConstraint {
         invokePPV(obj, pivotB, __functionAddress);
     }
 
-    public static void btPoint2PointConstraint_setPivotB(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 pivotB) {
+    public static void btPoint2PointConstraint_setPivotB(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 pivotB) {
         nbtPoint2PointConstraint_setPivotB(obj, pivotB.address());
     }
 

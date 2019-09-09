@@ -125,9 +125,9 @@ public class BTTriangleShapeEx {
 
     @Nullable
     @NativeType("btVector3 *")
-    public static ΒΤVector3 btGIM_TRIANGLE_CONTACT_getPoints(@NativeType("void *") long obj) {
+    public static BTVector3 btGIM_TRIANGLE_CONTACT_getPoints(@NativeType("void *") long obj) {
         long __result = nbtGIM_TRIANGLE_CONTACT_getPoints(obj);
-        return ΒΤVector3.createSafe(__result);
+        return BTVector3.createSafe(__result);
     }
 
     // --- [ btGIM_TRIANGLE_CONTACT_getSeparating_normal ] ---
@@ -140,7 +140,7 @@ public class BTTriangleShapeEx {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btGIM_TRIANGLE_CONTACT_getSeparating_normal(@NativeType("void *") long obj, @NativeType("btVector4 *") ΒΤVector3 value) {
+    public static void btGIM_TRIANGLE_CONTACT_getSeparating_normal(@NativeType("void *") long obj, @NativeType("btVector4 *") BTVector3 value) {
         nbtGIM_TRIANGLE_CONTACT_getSeparating_normal(obj, value.address());
     }
 
@@ -154,7 +154,7 @@ public class BTTriangleShapeEx {
         invokePPPV(obj, plane, margin, points, point_count, __functionAddress);
     }
 
-    public static void btGIM_TRIANGLE_CONTACT_merge_points(@NativeType("void *") long obj, @NativeType("btVector4 const *") ΒΤVector3 plane, @NativeType("btScalar") float margin, @NativeType("btVector3 const *") ΒΤVector3 points, int point_count) {
+    public static void btGIM_TRIANGLE_CONTACT_merge_points(@NativeType("void *") long obj, @NativeType("btVector4 const *") BTVector3 plane, @NativeType("btScalar") float margin, @NativeType("btVector3 const *") BTVector3 points, int point_count) {
         nbtGIM_TRIANGLE_CONTACT_merge_points(obj, plane.address(), margin, points.address(), point_count);
     }
 
@@ -188,7 +188,7 @@ public class BTTriangleShapeEx {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btGIM_TRIANGLE_CONTACT_setSeparating_normal(@NativeType("void *") long obj, @NativeType("btVector4 const *") ΒΤVector3 value) {
+    public static void btGIM_TRIANGLE_CONTACT_setSeparating_normal(@NativeType("void *") long obj, @NativeType("btVector4 const *") BTVector3 value) {
         nbtGIM_TRIANGLE_CONTACT_setSeparating_normal(obj, value.address());
     }
 
@@ -245,7 +245,7 @@ public class BTTriangleShapeEx {
         return invokePPPI(obj, other, clipped_points, __functionAddress);
     }
 
-    public static int btPrimitiveTriangle_clip_triangle(@NativeType("void *") long obj, @NativeType("void *") long other, @NativeType("btVector3 *") ΒΤVector3 clipped_points) {
+    public static int btPrimitiveTriangle_clip_triangle(@NativeType("void *") long obj, @NativeType("void *") long other, @NativeType("btVector3 *") BTVector3 clipped_points) {
         return nbtPrimitiveTriangle_clip_triangle(obj, other, clipped_points.address());
     }
 
@@ -272,7 +272,7 @@ public class BTTriangleShapeEx {
         invokePPV(obj, edge_index, plane, __functionAddress);
     }
 
-    public static void btPrimitiveTriangle_get_edge_plane(@NativeType("void *") long obj, int edge_index, @NativeType("btVector4 *") ΒΤVector3 plane) {
+    public static void btPrimitiveTriangle_get_edge_plane(@NativeType("void *") long obj, int edge_index, @NativeType("btVector4 *") BTVector3 plane) {
         nbtPrimitiveTriangle_get_edge_plane(obj, edge_index, plane.address());
     }
 
@@ -308,7 +308,7 @@ public class BTTriangleShapeEx {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btPrimitiveTriangle_getPlane(@NativeType("void *") long obj, @NativeType("btVector4 *") ΒΤVector3 value) {
+    public static void btPrimitiveTriangle_getPlane(@NativeType("void *") long obj, @NativeType("btVector4 *") BTVector3 value) {
         nbtPrimitiveTriangle_getPlane(obj, value.address());
     }
 
@@ -324,9 +324,9 @@ public class BTTriangleShapeEx {
 
     @Nullable
     @NativeType("btVector3 *")
-    public static ΒΤVector3 btPrimitiveTriangle_getVertices(@NativeType("void *") long obj) {
+    public static BTVector3 btPrimitiveTriangle_getVertices(@NativeType("void *") long obj) {
         long __result = nbtPrimitiveTriangle_getVertices(obj);
-        return ΒΤVector3.createSafe(__result);
+        return BTVector3.createSafe(__result);
     }
 
     // --- [ btPrimitiveTriangle_overlap_test_conservative ] ---
@@ -371,7 +371,7 @@ public class BTTriangleShapeEx {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btPrimitiveTriangle_setPlane(@NativeType("void *") long obj, @NativeType("btVector4 const *") ΒΤVector3 value) {
+    public static void btPrimitiveTriangle_setPlane(@NativeType("void *") long obj, @NativeType("btVector4 const *") BTVector3 value) {
         nbtPrimitiveTriangle_setPlane(obj, value.address());
     }
 
@@ -401,7 +401,7 @@ public class BTTriangleShapeEx {
     }
 
     @NativeType("void *")
-    public static long btTriangleShapeEx_new2(@NativeType("btVector3 const *") ΒΤVector3 p0, @NativeType("btVector3 const *") ΒΤVector3 p1, @NativeType("btVector3 const *") ΒΤVector3 p2) {
+    public static long btTriangleShapeEx_new2(@NativeType("btVector3 const *") BTVector3 p0, @NativeType("btVector3 const *") BTVector3 p1, @NativeType("btVector3 const *") BTVector3 p2) {
         return nbtTriangleShapeEx_new2(p0.address(), p1.address(), p2.address());
     }
 
@@ -440,7 +440,7 @@ public class BTTriangleShapeEx {
         invokePPV(obj, plane, __functionAddress);
     }
 
-    public static void btTriangleShapeEx_buildTriPlane(@NativeType("void *") long obj, @NativeType("btVector4 *") ΒΤVector3 plane) {
+    public static void btTriangleShapeEx_buildTriPlane(@NativeType("void *") long obj, @NativeType("btVector4 *") BTVector3 plane) {
         nbtTriangleShapeEx_buildTriPlane(obj, plane.address());
     }
 

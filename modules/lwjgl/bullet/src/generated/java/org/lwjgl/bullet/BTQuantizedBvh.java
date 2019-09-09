@@ -200,7 +200,7 @@ public class BTQuantizedBvh {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btOptimizedBvhNode_getAabbMaxOrg(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btOptimizedBvhNode_getAabbMaxOrg(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtOptimizedBvhNode_getAabbMaxOrg(obj, value.address());
     }
 
@@ -214,7 +214,7 @@ public class BTQuantizedBvh {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btOptimizedBvhNode_getAabbMinOrg(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btOptimizedBvhNode_getAabbMinOrg(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtOptimizedBvhNode_getAabbMinOrg(obj, value.address());
     }
 
@@ -258,7 +258,7 @@ public class BTQuantizedBvh {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btOptimizedBvhNode_setAabbMaxOrg(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btOptimizedBvhNode_setAabbMaxOrg(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtOptimizedBvhNode_setAabbMaxOrg(obj, value.address());
     }
 
@@ -272,7 +272,7 @@ public class BTQuantizedBvh {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btOptimizedBvhNode_setAabbMinOrg(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 value) {
+    public static void btOptimizedBvhNode_setAabbMinOrg(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 value) {
         nbtOptimizedBvhNode_setAabbMinOrg(obj, value.address());
     }
 
@@ -470,7 +470,7 @@ public class BTQuantizedBvh {
         invokePPPV(obj, out, point, isMax, __functionAddress);
     }
 
-    public static void btQuantizedBvh_quantize(@NativeType("void *") long obj, @NativeType("unsigned short *") ShortBuffer out, @NativeType("btVector3 const *") ΒΤVector3 point, int isMax) {
+    public static void btQuantizedBvh_quantize(@NativeType("void *") long obj, @NativeType("unsigned short *") ShortBuffer out, @NativeType("btVector3 const *") BTVector3 point, int isMax) {
         if (CHECKS) {
             check(out, 3);
         }
@@ -487,7 +487,7 @@ public class BTQuantizedBvh {
         invokePPPV(obj, out, point2, isMax, __functionAddress);
     }
 
-    public static void btQuantizedBvh_quantizeWithClamp(@NativeType("void *") long obj, @NativeType("unsigned short *") ShortBuffer out, @NativeType("btVector3 const *") ΒΤVector3 point2, int isMax) {
+    public static void btQuantizedBvh_quantizeWithClamp(@NativeType("void *") long obj, @NativeType("unsigned short *") ShortBuffer out, @NativeType("btVector3 const *") BTVector3 point2, int isMax) {
         if (CHECKS) {
             check(out, 3);
         }
@@ -505,7 +505,7 @@ public class BTQuantizedBvh {
         invokePPPPV(obj, nodeCallback, aabbMin, aabbMax, __functionAddress);
     }
 
-    public static void btQuantizedBvh_reportAabbOverlappingNodex(@NativeType("void *") long obj, @NativeType("void *") long nodeCallback, @NativeType("btVector3 const *") ΒΤVector3 aabbMin, @NativeType("btVector3 const *") ΒΤVector3 aabbMax) {
+    public static void btQuantizedBvh_reportAabbOverlappingNodex(@NativeType("void *") long obj, @NativeType("void *") long nodeCallback, @NativeType("btVector3 const *") BTVector3 aabbMin, @NativeType("btVector3 const *") BTVector3 aabbMax) {
         nbtQuantizedBvh_reportAabbOverlappingNodex(obj, nodeCallback, aabbMin.address(), aabbMax.address());
     }
 
@@ -520,7 +520,7 @@ public class BTQuantizedBvh {
         invokePPPPPPV(obj, nodeCallback, raySource, rayTarget, aabbMin, aabbMax, __functionAddress);
     }
 
-    public static void btQuantizedBvh_reportBoxCastOverlappingNodex(@NativeType("void *") long obj, @NativeType("void *") long nodeCallback, @NativeType("btVector3 const *") ΒΤVector3 raySource, @NativeType("btVector3 const *") ΒΤVector3 rayTarget, @NativeType("btVector3 const *") ΒΤVector3 aabbMin, @NativeType("btVector3 const *") ΒΤVector3 aabbMax) {
+    public static void btQuantizedBvh_reportBoxCastOverlappingNodex(@NativeType("void *") long obj, @NativeType("void *") long nodeCallback, @NativeType("btVector3 const *") BTVector3 raySource, @NativeType("btVector3 const *") BTVector3 rayTarget, @NativeType("btVector3 const *") BTVector3 aabbMin, @NativeType("btVector3 const *") BTVector3 aabbMax) {
         nbtQuantizedBvh_reportBoxCastOverlappingNodex(obj, nodeCallback, raySource.address(), rayTarget.address(), aabbMin.address(), aabbMax.address());
     }
 
@@ -535,7 +535,7 @@ public class BTQuantizedBvh {
         invokePPPPV(obj, nodeCallback, raySource, rayTarget, __functionAddress);
     }
 
-    public static void btQuantizedBvh_reportRayOverlappingNodex(@NativeType("void *") long obj, @NativeType("void *") long nodeCallback, @NativeType("btVector3 const *") ΒΤVector3 raySource, @NativeType("btVector3 const *") ΒΤVector3 rayTarget) {
+    public static void btQuantizedBvh_reportRayOverlappingNodex(@NativeType("void *") long obj, @NativeType("void *") long nodeCallback, @NativeType("btVector3 const *") BTVector3 raySource, @NativeType("btVector3 const *") BTVector3 rayTarget) {
         nbtQuantizedBvh_reportRayOverlappingNodex(obj, nodeCallback, raySource.address(), rayTarget.address());
     }
 
@@ -580,7 +580,7 @@ public class BTQuantizedBvh {
         invokePPPV(obj, bvhAabbMin, bvhAabbMax, quantizationMargin, __functionAddress);
     }
 
-    public static void btQuantizedBvh_setQuantizationValues(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 bvhAabbMin, @NativeType("btVector3 const *") ΒΤVector3 bvhAabbMax, @NativeType("btScalar") float quantizationMargin) {
+    public static void btQuantizedBvh_setQuantizationValues(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 bvhAabbMin, @NativeType("btVector3 const *") BTVector3 bvhAabbMax, @NativeType("btScalar") float quantizationMargin) {
         nbtQuantizedBvh_setQuantizationValues(obj, bvhAabbMin.address(), bvhAabbMax.address(), quantizationMargin);
     }
 
@@ -604,7 +604,7 @@ public class BTQuantizedBvh {
         invokePPPV(obj, vecIn, value, __functionAddress);
     }
 
-    public static void btQuantizedBvh_unQuantize(@NativeType("void *") long obj, @NativeType("unsigned short const *") ShortBuffer vecIn, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btQuantizedBvh_unQuantize(@NativeType("void *") long obj, @NativeType("unsigned short const *") ShortBuffer vecIn, @NativeType("btVector3 *") BTVector3 value) {
         if (CHECKS) {
             check(vecIn, 3);
         }

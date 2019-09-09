@@ -91,7 +91,7 @@ public class BTHingeConstraint {
     }
 
     @NativeType("void *")
-    public static long btHingeConstraint_new(@NativeType("void *") long rbA, @NativeType("void *") long rbB, @NativeType("btVector3 const *") ΒΤVector3 pivotInA, @NativeType("btVector3 const *") ΒΤVector3 pivotInB, @NativeType("btVector3 const *") ΒΤVector3 axisInA, @NativeType("btVector3 const *") ΒΤVector3 axisInB, @NativeType("bool") boolean useReferenceFrameA) {
+    public static long btHingeConstraint_new(@NativeType("void *") long rbA, @NativeType("void *") long rbB, @NativeType("btVector3 const *") BTVector3 pivotInA, @NativeType("btVector3 const *") BTVector3 pivotInB, @NativeType("btVector3 const *") BTVector3 axisInA, @NativeType("btVector3 const *") BTVector3 axisInB, @NativeType("bool") boolean useReferenceFrameA) {
         return nbtHingeConstraint_new(rbA, rbB, pivotInA.address(), pivotInB.address(), axisInA.address(), axisInB.address(), useReferenceFrameA);
     }
 
@@ -106,7 +106,7 @@ public class BTHingeConstraint {
     }
 
     @NativeType("void *")
-    public static long btHingeConstraint_new2(@NativeType("void *") long rbA, @NativeType("btVector3 const *") ΒΤVector3 pivotInA, @NativeType("btVector3 const *") ΒΤVector3 axisInA, @NativeType("bool") boolean useReferenceFrameA) {
+    public static long btHingeConstraint_new2(@NativeType("void *") long rbA, @NativeType("btVector3 const *") BTVector3 pivotInA, @NativeType("btVector3 const *") BTVector3 axisInA, @NativeType("bool") boolean useReferenceFrameA) {
         return nbtHingeConstraint_new2(rbA, pivotInA.address(), axisInA.address(), useReferenceFrameA);
     }
 
@@ -297,7 +297,7 @@ public class BTHingeConstraint {
         invokePPPPPPV(obj, info, transA, transB, angVelA, angVelB, __functionAddress);
     }
 
-    public static void btHingeConstraint_getInfo2Internal(@NativeType("void *") long obj, @NativeType("void *") long info, @NativeType("btTransform const *") BTTransform transA, @NativeType("btTransform const *") BTTransform transB, @NativeType("btVector3 const *") ΒΤVector3 angVelA, @NativeType("btVector3 const *") ΒΤVector3 angVelB) {
+    public static void btHingeConstraint_getInfo2Internal(@NativeType("void *") long obj, @NativeType("void *") long info, @NativeType("btTransform const *") BTTransform transA, @NativeType("btTransform const *") BTTransform transB, @NativeType("btVector3 const *") BTVector3 angVelA, @NativeType("btVector3 const *") BTVector3 angVelB) {
         nbtHingeConstraint_getInfo2Internal(obj, info, transA.address(), transB.address(), angVelA.address(), angVelB.address());
     }
 
@@ -312,7 +312,7 @@ public class BTHingeConstraint {
         invokePPPPPPV(obj, info, transA, transB, angVelA, angVelB, __functionAddress);
     }
 
-    public static void btHingeConstraint_getInfo2InternalUsingFrameOffset(@NativeType("void *") long obj, @NativeType("void *") long info, @NativeType("btTransform const *") BTTransform transA, @NativeType("btTransform const *") BTTransform transB, @NativeType("btVector3 const *") ΒΤVector3 angVelA, @NativeType("btVector3 const *") ΒΤVector3 angVelB) {
+    public static void btHingeConstraint_getInfo2InternalUsingFrameOffset(@NativeType("void *") long obj, @NativeType("void *") long info, @NativeType("btTransform const *") BTTransform transA, @NativeType("btTransform const *") BTTransform transB, @NativeType("btVector3 const *") BTVector3 angVelA, @NativeType("btVector3 const *") BTVector3 angVelB) {
         nbtHingeConstraint_getInfo2InternalUsingFrameOffset(obj, info, transA.address(), transB.address(), angVelA.address(), angVelB.address());
     }
 
@@ -327,7 +327,7 @@ public class BTHingeConstraint {
         invokePPPPPPV(obj, info, transA, transB, angVelA, angVelB, __functionAddress);
     }
 
-    public static void btHingeConstraint_getInfo2NonVirtual(@NativeType("void *") long obj, @NativeType("void *") long info, @NativeType("btTransform const *") BTTransform transA, @NativeType("btTransform const *") BTTransform transB, @NativeType("btVector3 const *") ΒΤVector3 angVelA, @NativeType("btVector3 const *") ΒΤVector3 angVelB) {
+    public static void btHingeConstraint_getInfo2NonVirtual(@NativeType("void *") long obj, @NativeType("void *") long info, @NativeType("btTransform const *") BTTransform transA, @NativeType("btTransform const *") BTTransform transB, @NativeType("btVector3 const *") BTVector3 angVelA, @NativeType("btVector3 const *") BTVector3 angVelB) {
         nbtHingeConstraint_getInfo2NonVirtual(obj, info, transA.address(), transB.address(), angVelA.address(), angVelB.address());
     }
 
@@ -482,7 +482,7 @@ public class BTHingeConstraint {
         invokePPV(obj, axisInA, __functionAddress);
     }
 
-    public static void btHingeConstraint_setAxis(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 axisInA) {
+    public static void btHingeConstraint_setAxis(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 axisInA) {
         nbtHingeConstraint_setAxis(obj, axisInA.address());
     }
 
@@ -570,7 +570,7 @@ public class BTHingeConstraint {
         invokePPV(obj, qAinB, dt, __functionAddress);
     }
 
-    public static void btHingeConstraint_setMotorTarget2(@NativeType("void *") long obj, @NativeType("btQuaternion const *") ΒΤVector3 qAinB, @NativeType("btScalar") float dt) {
+    public static void btHingeConstraint_setMotorTarget2(@NativeType("void *") long obj, @NativeType("btQuaternion const *") BTVector3 qAinB, @NativeType("btScalar") float dt) {
         nbtHingeConstraint_setMotorTarget2(obj, qAinB.address(), dt);
     }
 
@@ -640,7 +640,7 @@ public class BTHingeConstraint {
     }
 
     @NativeType("void *")
-    public static long btHingeAccumulatedAngleConstraint_new(@NativeType("void *") long rbA, @NativeType("void *") long rbB, @NativeType("btVector3 const *") ΒΤVector3 pivotInA, @NativeType("btVector3 const *") ΒΤVector3 pivotInB, @NativeType("btVector3 const *") ΒΤVector3 axisInA, @NativeType("btVector3 const *") ΒΤVector3 axisInB, @NativeType("bool") boolean useReferenceFrameA) {
+    public static long btHingeAccumulatedAngleConstraint_new(@NativeType("void *") long rbA, @NativeType("void *") long rbB, @NativeType("btVector3 const *") BTVector3 pivotInA, @NativeType("btVector3 const *") BTVector3 pivotInB, @NativeType("btVector3 const *") BTVector3 axisInA, @NativeType("btVector3 const *") BTVector3 axisInB, @NativeType("bool") boolean useReferenceFrameA) {
         return nbtHingeAccumulatedAngleConstraint_new(rbA, rbB, pivotInA.address(), pivotInB.address(), axisInA.address(), axisInB.address(), useReferenceFrameA);
     }
 
@@ -655,7 +655,7 @@ public class BTHingeConstraint {
     }
 
     @NativeType("void *")
-    public static long btHingeAccumulatedAngleConstraint_new2(@NativeType("void *") long rbA, @NativeType("btVector3 const *") ΒΤVector3 pivotInA, @NativeType("btVector3 const *") ΒΤVector3 axisInA, @NativeType("bool") boolean useReferenceFrameA) {
+    public static long btHingeAccumulatedAngleConstraint_new2(@NativeType("void *") long rbA, @NativeType("btVector3 const *") BTVector3 pivotInA, @NativeType("btVector3 const *") BTVector3 axisInA, @NativeType("bool") boolean useReferenceFrameA) {
         return nbtHingeAccumulatedAngleConstraint_new2(rbA, pivotInA.address(), axisInA.address(), useReferenceFrameA);
     }
 

@@ -51,7 +51,7 @@ public class BTMultiBodySliderConstraint {
     }
 
     @NativeType("void *")
-    public static long btMultiBodySliderConstraint_new(@NativeType("void *") long body, int link, @NativeType("void *") long bodyB, @NativeType("btVector3 const *") ΒΤVector3 pivotInA, @NativeType("btVector3 const *") ΒΤVector3 pivotInB, @NativeType("btMatrix3x3 const *") BTMatrix3x3 frameInA, @NativeType("btMatrix3x3 const *") BTMatrix3x3 frameInB, @NativeType("btVector3 const *") ΒΤVector3 jointAxis) {
+    public static long btMultiBodySliderConstraint_new(@NativeType("void *") long body, int link, @NativeType("void *") long bodyB, @NativeType("btVector3 const *") BTVector3 pivotInA, @NativeType("btVector3 const *") BTVector3 pivotInB, @NativeType("btMatrix3x3 const *") BTMatrix3x3 frameInA, @NativeType("btMatrix3x3 const *") BTMatrix3x3 frameInB, @NativeType("btVector3 const *") BTVector3 jointAxis) {
         return nbtMultiBodySliderConstraint_new(body, link, bodyB, pivotInA.address(), pivotInB.address(), frameInA.address(), frameInB.address(), jointAxis.address());
     }
 
@@ -67,7 +67,7 @@ public class BTMultiBodySliderConstraint {
     }
 
     @NativeType("void *")
-    public static long btMultiBodySliderConstraint_new2(@NativeType("void *") long bodyA, int linkA, @NativeType("void *") long bodyB, int linkB, @NativeType("btVector3 const *") ΒΤVector3 pivotInA, @NativeType("btVector3 const *") ΒΤVector3 pivotInB, @NativeType("btMatrix3x3 const *") BTMatrix3x3 frameInA, @NativeType("btMatrix3x3 const *") BTMatrix3x3 frameInB, @NativeType("btVector3 const *") ΒΤVector3 jointAxis) {
+    public static long btMultiBodySliderConstraint_new2(@NativeType("void *") long bodyA, int linkA, @NativeType("void *") long bodyB, int linkB, @NativeType("btVector3 const *") BTVector3 pivotInA, @NativeType("btVector3 const *") BTVector3 pivotInB, @NativeType("btMatrix3x3 const *") BTMatrix3x3 frameInA, @NativeType("btMatrix3x3 const *") BTMatrix3x3 frameInB, @NativeType("btVector3 const *") BTVector3 jointAxis) {
         return nbtMultiBodySliderConstraint_new2(bodyA, linkA, bodyB, linkB, pivotInA.address(), pivotInB.address(), frameInA.address(), frameInB.address(), jointAxis.address());
     }
 
@@ -109,7 +109,7 @@ public class BTMultiBodySliderConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultiBodySliderConstraint_getJointAxis(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btMultiBodySliderConstraint_getJointAxis(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtMultiBodySliderConstraint_getJointAxis(obj, value.address());
     }
 
@@ -123,7 +123,7 @@ public class BTMultiBodySliderConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultiBodySliderConstraint_getPivotInA(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btMultiBodySliderConstraint_getPivotInA(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtMultiBodySliderConstraint_getPivotInA(obj, value.address());
     }
 
@@ -137,7 +137,7 @@ public class BTMultiBodySliderConstraint {
         invokePPV(obj, value, __functionAddress);
     }
 
-    public static void btMultiBodySliderConstraint_getPivotInB(@NativeType("void *") long obj, @NativeType("btVector3 *") ΒΤVector3 value) {
+    public static void btMultiBodySliderConstraint_getPivotInB(@NativeType("void *") long obj, @NativeType("btVector3 *") BTVector3 value) {
         nbtMultiBodySliderConstraint_getPivotInB(obj, value.address());
     }
 
@@ -179,7 +179,7 @@ public class BTMultiBodySliderConstraint {
         invokePPV(obj, jointAxis, __functionAddress);
     }
 
-    public static void btMultiBodySliderConstraint_setJointAxis(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 jointAxis) {
+    public static void btMultiBodySliderConstraint_setJointAxis(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 jointAxis) {
         nbtMultiBodySliderConstraint_setJointAxis(obj, jointAxis.address());
     }
 
@@ -193,7 +193,7 @@ public class BTMultiBodySliderConstraint {
         invokePPV(obj, pivotInA, __functionAddress);
     }
 
-    public static void btMultiBodySliderConstraint_setPivotInA(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 pivotInA) {
+    public static void btMultiBodySliderConstraint_setPivotInA(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 pivotInA) {
         nbtMultiBodySliderConstraint_setPivotInA(obj, pivotInA.address());
     }
 
@@ -207,7 +207,7 @@ public class BTMultiBodySliderConstraint {
         invokePPV(obj, pivotInB, __functionAddress);
     }
 
-    public static void btMultiBodySliderConstraint_setPivotInB(@NativeType("void *") long obj, @NativeType("btVector3 const *") ΒΤVector3 pivotInB) {
+    public static void btMultiBodySliderConstraint_setPivotInB(@NativeType("void *") long obj, @NativeType("btVector3 const *") BTVector3 pivotInB) {
         nbtMultiBodySliderConstraint_setPivotInB(obj, pivotInB.address());
     }
 
