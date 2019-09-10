@@ -14,14 +14,15 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * 
  * <pre><code>
  * void (*) (
- *     btCollisionWorld *collisionWorld
+ *     btCollisionWorld *collisionWorld,
+ *     btScalar deltaTimeStep
  * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("p_btActionInterface_updateAction")
 public interface BTActionInterfaceUpdateActionI extends CallbackI.V {
 
-    String SIGNATURE = "(p)v";
+    String SIGNATURE = "(pf)v";
 
     @Override
     default String getSignature() { return SIGNATURE; }
@@ -29,10 +30,11 @@ public interface BTActionInterfaceUpdateActionI extends CallbackI.V {
     @Override
     default void callback(long args) {
         invoke(
-            dcbArgPointer(args)
+            dcbArgPointer(args),
+            dcbArgFloat(args)
         );
     }
 
-    void invoke(@NativeType("btCollisionWorld *") long collisionWorld);
+    void invoke(@NativeType("btCollisionWorld *") long collisionWorld, @NativeType("btScalar") float deltaTimeStep);
 
 }

@@ -7,16 +7,16 @@ package bullet.templates
 import bullet.*
 import org.lwjgl.generator.*
 
-val btPersistentManifold = "BTPersistentManifold".nativeClass(Module.BULLET, prefixMethod = "bt", binding = BULLET_BINDING_DELEGATE) {
+val btPersistentManifold = "BTPersistentManifold".nativeClass(Module.BULLET, prefixMethod = "", binding = BULLET_BINDING_DELEGATE) {
     opaque_p(
-        "PersistentManifold_new",
+        "btPersistentManifold_new",
         "",
 
         void()
     )
 
     opaque_p(
-        "PersistentManifold_new2",
+        "btPersistentManifold_new2",
         "",
 
         opaque_p("body0", ""),
@@ -27,7 +27,7 @@ val btPersistentManifold = "BTPersistentManifold".nativeClass(Module.BULLET, pre
     )
 
     int(
-        "PersistentManifold_addManifoldPoint",
+        "btPersistentManifold_addManifoldPoint",
         "",
 
         opaque_p("obj", ""),
@@ -36,14 +36,14 @@ val btPersistentManifold = "BTPersistentManifold".nativeClass(Module.BULLET, pre
     )
 
     void(
-        "PersistentManifold_clearManifold",
+        "btPersistentManifold_clearManifold",
         "",
 
         opaque_p("obj", "")
     )
 
     void(
-        "PersistentManifold_clearUserCache",
+        "btPersistentManifold_clearUserCache",
         "",
 
         opaque_p("obj", ""),
@@ -51,21 +51,21 @@ val btPersistentManifold = "BTPersistentManifold".nativeClass(Module.BULLET, pre
     )
 
     opaque_p(
-        "PersistentManifold_getBody0",
+        "btPersistentManifold_getBody0",
         "",
 
         opaque_p("obj", "")
     )
 
     opaque_p(
-        "PersistentManifold_getBody1",
+        "btPersistentManifold_getBody1",
         "",
 
         opaque_p("obj", "")
     )
 
     int(
-        "PersistentManifold_getCacheEntry",
+        "btPersistentManifold_getCacheEntry",
         "",
 
         opaque_p("obj", ""),
@@ -73,28 +73,28 @@ val btPersistentManifold = "BTPersistentManifold".nativeClass(Module.BULLET, pre
     )
 
     int(
-        "PersistentManifold_getCompanionIdA",
+        "btPersistentManifold_getCompanionIdA",
         "",
 
         opaque_p("obj", "")
     )
 
     int(
-        "PersistentManifold_getCompanionIdB",
+        "btPersistentManifold_getCompanionIdB",
         "",
 
         opaque_p("obj", "")
     )
 
     btScalar(
-        "PersistentManifold_getContactBreakingThreshold",
+        "btPersistentManifold_getContactBreakingThreshold",
         "",
 
         opaque_p("obj", "")
     )
 
     opaque_p(
-        "PersistentManifold_getContactPoint",
+        "btPersistentManifold_getContactPoint",
         "",
 
         opaque_p("obj", ""),
@@ -102,28 +102,28 @@ val btPersistentManifold = "BTPersistentManifold".nativeClass(Module.BULLET, pre
     )
 
     btScalar(
-        "PersistentManifold_getContactProcessingThreshold",
+        "btPersistentManifold_getContactProcessingThreshold",
         "",
 
         opaque_p("obj", "")
     )
 
     int(
-        "PersistentManifold_getIndex1a",
+        "btPersistentManifold_getIndex1a",
         "",
 
         opaque_p("obj", "")
     )
 
     int(
-        "PersistentManifold_getNumContacts",
+        "btPersistentManifold_getNumContacts",
         "",
 
         opaque_p("obj", "")
     )
 
     void(
-        "PersistentManifold_refreshContactPoints",
+        "btPersistentManifold_refreshContactPoints",
         "",
 
         opaque_p("obj", ""),
@@ -132,7 +132,7 @@ val btPersistentManifold = "BTPersistentManifold".nativeClass(Module.BULLET, pre
     )
 
     void(
-        "PersistentManifold_removeContactPoint",
+        "btPersistentManifold_removeContactPoint",
         "",
 
         opaque_p("obj", ""),
@@ -140,7 +140,7 @@ val btPersistentManifold = "BTPersistentManifold".nativeClass(Module.BULLET, pre
     )
 
     void(
-        "PersistentManifold_replaceContactPoint",
+        "btPersistentManifold_replaceContactPoint",
         "",
 
         opaque_p("obj", ""),
@@ -149,7 +149,7 @@ val btPersistentManifold = "BTPersistentManifold".nativeClass(Module.BULLET, pre
     )
 
     void(
-        "PersistentManifold_setBodies",
+        "btPersistentManifold_setBodies",
         "",
 
         opaque_p("obj", ""),
@@ -158,7 +158,7 @@ val btPersistentManifold = "BTPersistentManifold".nativeClass(Module.BULLET, pre
     )
 
     void(
-        "PersistentManifold_setCompanionIdA",
+        "btPersistentManifold_setCompanionIdA",
         "",
 
         opaque_p("obj", ""),
@@ -166,7 +166,7 @@ val btPersistentManifold = "BTPersistentManifold".nativeClass(Module.BULLET, pre
     )
 
     void(
-        "PersistentManifold_setCompanionIdB",
+        "btPersistentManifold_setCompanionIdB",
         "",
 
         opaque_p("obj", ""),
@@ -174,7 +174,7 @@ val btPersistentManifold = "BTPersistentManifold".nativeClass(Module.BULLET, pre
     )
 
     void(
-        "PersistentManifold_setContactBreakingThreshold",
+        "btPersistentManifold_setContactBreakingThreshold",
         "",
 
         opaque_p("obj", ""),
@@ -182,7 +182,7 @@ val btPersistentManifold = "BTPersistentManifold".nativeClass(Module.BULLET, pre
     )
 
     void(
-        "PersistentManifold_setContactProcessingThreshold",
+        "btPersistentManifold_setContactProcessingThreshold",
         "",
 
         opaque_p("obj", ""),
@@ -190,7 +190,7 @@ val btPersistentManifold = "BTPersistentManifold".nativeClass(Module.BULLET, pre
     )
 
     void(
-        "PersistentManifold_setIndex1a",
+        "btPersistentManifold_setIndex1a",
         "",
 
         opaque_p("obj", ""),
@@ -198,7 +198,7 @@ val btPersistentManifold = "BTPersistentManifold".nativeClass(Module.BULLET, pre
     )
 
     void(
-        "PersistentManifold_setNumContacts",
+        "btPersistentManifold_setNumContacts",
         "",
 
         opaque_p("obj", ""),
@@ -206,7 +206,7 @@ val btPersistentManifold = "BTPersistentManifold".nativeClass(Module.BULLET, pre
     )
 
     bool(
-        "PersistentManifold_validContactDistance",
+        "btPersistentManifold_validContactDistance",
         "",
 
         opaque_p("obj", ""),
@@ -214,7 +214,7 @@ val btPersistentManifold = "BTPersistentManifold".nativeClass(Module.BULLET, pre
     )
 
     void(
-        "PersistentManifold_delete",
+        "btPersistentManifold_delete",
         "",
 
         opaque_p("obj", "")

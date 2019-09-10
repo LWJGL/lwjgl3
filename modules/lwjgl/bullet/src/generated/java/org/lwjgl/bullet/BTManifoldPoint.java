@@ -24,69 +24,69 @@ public class BTManifoldPoint {
 
         /** Function address. */
         public static final long
-            ManifoldPoint_new                          = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_new"),
-            ManifoldPoint_new2                         = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_new2"),
-            ManifoldPoint_getAppliedImpulse            = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getAppliedImpulse"),
-            ManifoldPoint_getAppliedImpulseLateral1    = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getAppliedImpulseLateral1"),
-            ManifoldPoint_getAppliedImpulseLateral2    = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getAppliedImpulseLateral2"),
-            ManifoldPoint_getCombinedContactDamping1   = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getCombinedContactDamping1"),
-            ManifoldPoint_getCombinedContactStiffness1 = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getCombinedContactStiffness1"),
-            ManifoldPoint_getCombinedFriction          = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getCombinedFriction"),
-            ManifoldPoint_getCombinedRestitution       = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getCombinedRestitution"),
-            ManifoldPoint_getCombinedRollingFriction   = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getCombinedRollingFriction"),
-            ManifoldPoint_getContactCFM                = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getContactCFM"),
-            ManifoldPoint_getContactERP                = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getContactERP"),
-            ManifoldPoint_getContactMotion1            = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getContactMotion1"),
-            ManifoldPoint_getContactMotion2            = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getContactMotion2"),
-            ManifoldPoint_getContactPointFlags         = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getContactPointFlags"),
-            ManifoldPoint_getDistance                  = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getDistance"),
-            ManifoldPoint_getDistance1                 = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getDistance1"),
-            ManifoldPoint_getFrictionCFM               = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getFrictionCFM"),
-            ManifoldPoint_getIndex0                    = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getIndex0"),
-            ManifoldPoint_getIndex1                    = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getIndex1"),
-            ManifoldPoint_getLateralFrictionDir1       = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getLateralFrictionDir1"),
-            ManifoldPoint_getLateralFrictionDir2       = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getLateralFrictionDir2"),
-            ManifoldPoint_getLifeTime                  = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getLifeTime"),
-            ManifoldPoint_getLocalPointA               = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getLocalPointA"),
-            ManifoldPoint_getLocalPointB               = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getLocalPointB"),
-            ManifoldPoint_getNormalWorldOnB            = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getNormalWorldOnB"),
-            ManifoldPoint_getPartId0                   = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getPartId0"),
-            ManifoldPoint_getPartId1                   = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getPartId1"),
-            ManifoldPoint_getPositionWorldOnA          = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getPositionWorldOnA"),
-            ManifoldPoint_getPositionWorldOnB          = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getPositionWorldOnB"),
-            ManifoldPoint_getUserPersistentData        = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getUserPersistentData"),
-            ManifoldPoint_setAppliedImpulse            = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setAppliedImpulse"),
-            ManifoldPoint_setAppliedImpulseLateral1    = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setAppliedImpulseLateral1"),
-            ManifoldPoint_setAppliedImpulseLateral2    = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setAppliedImpulseLateral2"),
-            ManifoldPoint_setCombinedContactDamping1   = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setCombinedContactDamping1"),
-            ManifoldPoint_setCombinedContactStiffness1 = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setCombinedContactStiffness1"),
-            ManifoldPoint_setCombinedFriction          = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setCombinedFriction"),
-            ManifoldPoint_setCombinedRestitution       = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setCombinedRestitution"),
-            ManifoldPoint_setCombinedRollingFriction   = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setCombinedRollingFriction"),
-            ManifoldPoint_setContactCFM                = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setContactCFM"),
-            ManifoldPoint_setContactERP                = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setContactERP"),
-            ManifoldPoint_setContactMotion1            = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setContactMotion1"),
-            ManifoldPoint_setContactMotion2            = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setContactMotion2"),
-            ManifoldPoint_setContactPointFlags         = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setContactPointFlags"),
-            ManifoldPoint_setDistance                  = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setDistance"),
-            ManifoldPoint_setDistance1                 = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setDistance1"),
-            ManifoldPoint_setFrictionCFM               = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setFrictionCFM"),
-            ManifoldPoint_setIndex0                    = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setIndex0"),
-            ManifoldPoint_setIndex1                    = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setIndex1"),
-            ManifoldPoint_setLateralFrictionDir1       = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setLateralFrictionDir1"),
-            ManifoldPoint_setLateralFrictionDir2       = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setLateralFrictionDir2"),
-            ManifoldPoint_setLifeTime                  = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setLifeTime"),
-            ManifoldPoint_setLocalPointA               = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setLocalPointA"),
-            ManifoldPoint_setLocalPointB               = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setLocalPointB"),
-            ManifoldPoint_setNormalWorldOnB            = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setNormalWorldOnB"),
-            ManifoldPoint_setPartId0                   = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setPartId0"),
-            ManifoldPoint_setPartId1                   = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setPartId1"),
-            ManifoldPoint_setPositionWorldOnA          = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setPositionWorldOnA"),
-            ManifoldPoint_setPositionWorldOnB          = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setPositionWorldOnB"),
-            ManifoldPoint_setUserPersistentData        = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setUserPersistentData"),
-            ManifoldPoint_delete                       = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_delete"),
-            getGContactAddedCallback                   = apiGetFunctionAddress(LibBullet.getLibrary(), "btgetGContactAddedCallback"),
-            setGContactAddedCallback                   = apiGetFunctionAddress(LibBullet.getLibrary(), "btsetGContactAddedCallback");
+            btManifoldPoint_new                          = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_new"),
+            btManifoldPoint_new2                         = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_new2"),
+            btManifoldPoint_getAppliedImpulse            = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getAppliedImpulse"),
+            btManifoldPoint_getAppliedImpulseLateral1    = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getAppliedImpulseLateral1"),
+            btManifoldPoint_getAppliedImpulseLateral2    = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getAppliedImpulseLateral2"),
+            btManifoldPoint_getCombinedContactDamping1   = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getCombinedContactDamping1"),
+            btManifoldPoint_getCombinedContactStiffness1 = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getCombinedContactStiffness1"),
+            btManifoldPoint_getCombinedFriction          = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getCombinedFriction"),
+            btManifoldPoint_getCombinedRestitution       = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getCombinedRestitution"),
+            btManifoldPoint_getCombinedRollingFriction   = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getCombinedRollingFriction"),
+            btManifoldPoint_getContactCFM                = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getContactCFM"),
+            btManifoldPoint_getContactERP                = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getContactERP"),
+            btManifoldPoint_getContactMotion1            = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getContactMotion1"),
+            btManifoldPoint_getContactMotion2            = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getContactMotion2"),
+            btManifoldPoint_getContactPointFlags         = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getContactPointFlags"),
+            btManifoldPoint_getDistance                  = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getDistance"),
+            btManifoldPoint_getDistance1                 = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getDistance1"),
+            btManifoldPoint_getFrictionCFM               = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getFrictionCFM"),
+            btManifoldPoint_getIndex0                    = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getIndex0"),
+            btManifoldPoint_getIndex1                    = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getIndex1"),
+            btManifoldPoint_getLateralFrictionDir1       = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getLateralFrictionDir1"),
+            btManifoldPoint_getLateralFrictionDir2       = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getLateralFrictionDir2"),
+            btManifoldPoint_getLifeTime                  = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getLifeTime"),
+            btManifoldPoint_getLocalPointA               = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getLocalPointA"),
+            btManifoldPoint_getLocalPointB               = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getLocalPointB"),
+            btManifoldPoint_getNormalWorldOnB            = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getNormalWorldOnB"),
+            btManifoldPoint_getPartId0                   = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getPartId0"),
+            btManifoldPoint_getPartId1                   = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getPartId1"),
+            btManifoldPoint_getPositionWorldOnA          = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getPositionWorldOnA"),
+            btManifoldPoint_getPositionWorldOnB          = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getPositionWorldOnB"),
+            btManifoldPoint_getUserPersistentData        = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_getUserPersistentData"),
+            btManifoldPoint_setAppliedImpulse            = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setAppliedImpulse"),
+            btManifoldPoint_setAppliedImpulseLateral1    = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setAppliedImpulseLateral1"),
+            btManifoldPoint_setAppliedImpulseLateral2    = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setAppliedImpulseLateral2"),
+            btManifoldPoint_setCombinedContactDamping1   = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setCombinedContactDamping1"),
+            btManifoldPoint_setCombinedContactStiffness1 = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setCombinedContactStiffness1"),
+            btManifoldPoint_setCombinedFriction          = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setCombinedFriction"),
+            btManifoldPoint_setCombinedRestitution       = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setCombinedRestitution"),
+            btManifoldPoint_setCombinedRollingFriction   = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setCombinedRollingFriction"),
+            btManifoldPoint_setContactCFM                = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setContactCFM"),
+            btManifoldPoint_setContactERP                = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setContactERP"),
+            btManifoldPoint_setContactMotion1            = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setContactMotion1"),
+            btManifoldPoint_setContactMotion2            = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setContactMotion2"),
+            btManifoldPoint_setContactPointFlags         = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setContactPointFlags"),
+            btManifoldPoint_setDistance                  = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setDistance"),
+            btManifoldPoint_setDistance1                 = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setDistance1"),
+            btManifoldPoint_setFrictionCFM               = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setFrictionCFM"),
+            btManifoldPoint_setIndex0                    = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setIndex0"),
+            btManifoldPoint_setIndex1                    = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setIndex1"),
+            btManifoldPoint_setLateralFrictionDir1       = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setLateralFrictionDir1"),
+            btManifoldPoint_setLateralFrictionDir2       = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setLateralFrictionDir2"),
+            btManifoldPoint_setLifeTime                  = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setLifeTime"),
+            btManifoldPoint_setLocalPointA               = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setLocalPointA"),
+            btManifoldPoint_setLocalPointB               = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setLocalPointB"),
+            btManifoldPoint_setNormalWorldOnB            = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setNormalWorldOnB"),
+            btManifoldPoint_setPartId0                   = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setPartId0"),
+            btManifoldPoint_setPartId1                   = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setPartId1"),
+            btManifoldPoint_setPositionWorldOnA          = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setPositionWorldOnA"),
+            btManifoldPoint_setPositionWorldOnB          = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setPositionWorldOnB"),
+            btManifoldPoint_setUserPersistentData        = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_setUserPersistentData"),
+            btManifoldPoint_delete                       = apiGetFunctionAddress(LibBullet.getLibrary(), "btManifoldPoint_delete"),
+            getGContactAddedCallback                     = apiGetFunctionAddress(LibBullet.getLibrary(), "getGContactAddedCallback"),
+            setGContactAddedCallback                     = apiGetFunctionAddress(LibBullet.getLibrary(), "setGContactAddedCallback");
 
     }
 
@@ -94,14 +94,14 @@ public class BTManifoldPoint {
 
     @NativeType("void *")
     public static long btManifoldPoint_new() {
-        long __functionAddress = Functions.ManifoldPoint_new;
+        long __functionAddress = Functions.btManifoldPoint_new;
         return invokeP(__functionAddress);
     }
 
     // --- [ btManifoldPoint_new2 ] ---
 
     public static long nbtManifoldPoint_new2(long pointA, long pointB, long normal, float distance) {
-        long __functionAddress = Functions.ManifoldPoint_new2;
+        long __functionAddress = Functions.btManifoldPoint_new2;
         return invokePPPP(pointA, pointB, normal, distance, __functionAddress);
     }
 
@@ -114,7 +114,7 @@ public class BTManifoldPoint {
 
     @NativeType("btScalar")
     public static float btManifoldPoint_getAppliedImpulse(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.ManifoldPoint_getAppliedImpulse;
+        long __functionAddress = Functions.btManifoldPoint_getAppliedImpulse;
         if (CHECKS) {
             check(obj);
         }
@@ -125,7 +125,7 @@ public class BTManifoldPoint {
 
     @NativeType("btScalar")
     public static float btManifoldPoint_getAppliedImpulseLateral1(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.ManifoldPoint_getAppliedImpulseLateral1;
+        long __functionAddress = Functions.btManifoldPoint_getAppliedImpulseLateral1;
         if (CHECKS) {
             check(obj);
         }
@@ -136,7 +136,7 @@ public class BTManifoldPoint {
 
     @NativeType("btScalar")
     public static float btManifoldPoint_getAppliedImpulseLateral2(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.ManifoldPoint_getAppliedImpulseLateral2;
+        long __functionAddress = Functions.btManifoldPoint_getAppliedImpulseLateral2;
         if (CHECKS) {
             check(obj);
         }
@@ -147,7 +147,7 @@ public class BTManifoldPoint {
 
     @NativeType("btScalar")
     public static float btManifoldPoint_getCombinedContactDamping1(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.ManifoldPoint_getCombinedContactDamping1;
+        long __functionAddress = Functions.btManifoldPoint_getCombinedContactDamping1;
         if (CHECKS) {
             check(obj);
         }
@@ -158,7 +158,7 @@ public class BTManifoldPoint {
 
     @NativeType("btScalar")
     public static float btManifoldPoint_getCombinedContactStiffness1(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.ManifoldPoint_getCombinedContactStiffness1;
+        long __functionAddress = Functions.btManifoldPoint_getCombinedContactStiffness1;
         if (CHECKS) {
             check(obj);
         }
@@ -169,7 +169,7 @@ public class BTManifoldPoint {
 
     @NativeType("btScalar")
     public static float btManifoldPoint_getCombinedFriction(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.ManifoldPoint_getCombinedFriction;
+        long __functionAddress = Functions.btManifoldPoint_getCombinedFriction;
         if (CHECKS) {
             check(obj);
         }
@@ -180,7 +180,7 @@ public class BTManifoldPoint {
 
     @NativeType("btScalar")
     public static float btManifoldPoint_getCombinedRestitution(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.ManifoldPoint_getCombinedRestitution;
+        long __functionAddress = Functions.btManifoldPoint_getCombinedRestitution;
         if (CHECKS) {
             check(obj);
         }
@@ -191,7 +191,7 @@ public class BTManifoldPoint {
 
     @NativeType("btScalar")
     public static float btManifoldPoint_getCombinedRollingFriction(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.ManifoldPoint_getCombinedRollingFriction;
+        long __functionAddress = Functions.btManifoldPoint_getCombinedRollingFriction;
         if (CHECKS) {
             check(obj);
         }
@@ -202,7 +202,7 @@ public class BTManifoldPoint {
 
     @NativeType("btScalar")
     public static float btManifoldPoint_getContactCFM(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.ManifoldPoint_getContactCFM;
+        long __functionAddress = Functions.btManifoldPoint_getContactCFM;
         if (CHECKS) {
             check(obj);
         }
@@ -213,7 +213,7 @@ public class BTManifoldPoint {
 
     @NativeType("btScalar")
     public static float btManifoldPoint_getContactERP(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.ManifoldPoint_getContactERP;
+        long __functionAddress = Functions.btManifoldPoint_getContactERP;
         if (CHECKS) {
             check(obj);
         }
@@ -224,7 +224,7 @@ public class BTManifoldPoint {
 
     @NativeType("btScalar")
     public static float btManifoldPoint_getContactMotion1(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.ManifoldPoint_getContactMotion1;
+        long __functionAddress = Functions.btManifoldPoint_getContactMotion1;
         if (CHECKS) {
             check(obj);
         }
@@ -235,7 +235,7 @@ public class BTManifoldPoint {
 
     @NativeType("btScalar")
     public static float btManifoldPoint_getContactMotion2(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.ManifoldPoint_getContactMotion2;
+        long __functionAddress = Functions.btManifoldPoint_getContactMotion2;
         if (CHECKS) {
             check(obj);
         }
@@ -245,7 +245,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_getContactPointFlags ] ---
 
     public static int btManifoldPoint_getContactPointFlags(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.ManifoldPoint_getContactPointFlags;
+        long __functionAddress = Functions.btManifoldPoint_getContactPointFlags;
         if (CHECKS) {
             check(obj);
         }
@@ -256,7 +256,7 @@ public class BTManifoldPoint {
 
     @NativeType("btScalar")
     public static float btManifoldPoint_getDistance(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.ManifoldPoint_getDistance;
+        long __functionAddress = Functions.btManifoldPoint_getDistance;
         if (CHECKS) {
             check(obj);
         }
@@ -267,7 +267,7 @@ public class BTManifoldPoint {
 
     @NativeType("btScalar")
     public static float btManifoldPoint_getDistance1(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.ManifoldPoint_getDistance1;
+        long __functionAddress = Functions.btManifoldPoint_getDistance1;
         if (CHECKS) {
             check(obj);
         }
@@ -278,7 +278,7 @@ public class BTManifoldPoint {
 
     @NativeType("btScalar")
     public static float btManifoldPoint_getFrictionCFM(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.ManifoldPoint_getFrictionCFM;
+        long __functionAddress = Functions.btManifoldPoint_getFrictionCFM;
         if (CHECKS) {
             check(obj);
         }
@@ -288,7 +288,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_getIndex0 ] ---
 
     public static int btManifoldPoint_getIndex0(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.ManifoldPoint_getIndex0;
+        long __functionAddress = Functions.btManifoldPoint_getIndex0;
         if (CHECKS) {
             check(obj);
         }
@@ -298,7 +298,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_getIndex1 ] ---
 
     public static int btManifoldPoint_getIndex1(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.ManifoldPoint_getIndex1;
+        long __functionAddress = Functions.btManifoldPoint_getIndex1;
         if (CHECKS) {
             check(obj);
         }
@@ -308,7 +308,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_getLateralFrictionDir1 ] ---
 
     public static void nbtManifoldPoint_getLateralFrictionDir1(long obj, long value) {
-        long __functionAddress = Functions.ManifoldPoint_getLateralFrictionDir1;
+        long __functionAddress = Functions.btManifoldPoint_getLateralFrictionDir1;
         if (CHECKS) {
             check(obj);
         }
@@ -322,7 +322,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_getLateralFrictionDir2 ] ---
 
     public static void nbtManifoldPoint_getLateralFrictionDir2(long obj, long value) {
-        long __functionAddress = Functions.ManifoldPoint_getLateralFrictionDir2;
+        long __functionAddress = Functions.btManifoldPoint_getLateralFrictionDir2;
         if (CHECKS) {
             check(obj);
         }
@@ -336,7 +336,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_getLifeTime ] ---
 
     public static int btManifoldPoint_getLifeTime(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.ManifoldPoint_getLifeTime;
+        long __functionAddress = Functions.btManifoldPoint_getLifeTime;
         if (CHECKS) {
             check(obj);
         }
@@ -346,7 +346,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_getLocalPointA ] ---
 
     public static void nbtManifoldPoint_getLocalPointA(long obj, long value) {
-        long __functionAddress = Functions.ManifoldPoint_getLocalPointA;
+        long __functionAddress = Functions.btManifoldPoint_getLocalPointA;
         if (CHECKS) {
             check(obj);
         }
@@ -360,7 +360,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_getLocalPointB ] ---
 
     public static void nbtManifoldPoint_getLocalPointB(long obj, long value) {
-        long __functionAddress = Functions.ManifoldPoint_getLocalPointB;
+        long __functionAddress = Functions.btManifoldPoint_getLocalPointB;
         if (CHECKS) {
             check(obj);
         }
@@ -374,7 +374,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_getNormalWorldOnB ] ---
 
     public static void nbtManifoldPoint_getNormalWorldOnB(long obj, long value) {
-        long __functionAddress = Functions.ManifoldPoint_getNormalWorldOnB;
+        long __functionAddress = Functions.btManifoldPoint_getNormalWorldOnB;
         if (CHECKS) {
             check(obj);
         }
@@ -388,7 +388,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_getPartId0 ] ---
 
     public static int btManifoldPoint_getPartId0(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.ManifoldPoint_getPartId0;
+        long __functionAddress = Functions.btManifoldPoint_getPartId0;
         if (CHECKS) {
             check(obj);
         }
@@ -398,7 +398,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_getPartId1 ] ---
 
     public static int btManifoldPoint_getPartId1(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.ManifoldPoint_getPartId1;
+        long __functionAddress = Functions.btManifoldPoint_getPartId1;
         if (CHECKS) {
             check(obj);
         }
@@ -408,7 +408,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_getPositionWorldOnA ] ---
 
     public static void nbtManifoldPoint_getPositionWorldOnA(long obj, long value) {
-        long __functionAddress = Functions.ManifoldPoint_getPositionWorldOnA;
+        long __functionAddress = Functions.btManifoldPoint_getPositionWorldOnA;
         if (CHECKS) {
             check(obj);
         }
@@ -422,7 +422,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_getPositionWorldOnB ] ---
 
     public static void nbtManifoldPoint_getPositionWorldOnB(long obj, long value) {
-        long __functionAddress = Functions.ManifoldPoint_getPositionWorldOnB;
+        long __functionAddress = Functions.btManifoldPoint_getPositionWorldOnB;
         if (CHECKS) {
             check(obj);
         }
@@ -437,7 +437,7 @@ public class BTManifoldPoint {
 
     @NativeType("void *")
     public static long btManifoldPoint_getUserPersistentData(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.ManifoldPoint_getUserPersistentData;
+        long __functionAddress = Functions.btManifoldPoint_getUserPersistentData;
         if (CHECKS) {
             check(obj);
         }
@@ -447,7 +447,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setAppliedImpulse ] ---
 
     public static void btManifoldPoint_setAppliedImpulse(@NativeType("void *") long obj, @NativeType("btScalar") float value) {
-        long __functionAddress = Functions.ManifoldPoint_setAppliedImpulse;
+        long __functionAddress = Functions.btManifoldPoint_setAppliedImpulse;
         if (CHECKS) {
             check(obj);
         }
@@ -457,7 +457,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setAppliedImpulseLateral1 ] ---
 
     public static void btManifoldPoint_setAppliedImpulseLateral1(@NativeType("void *") long obj, @NativeType("btScalar") float value) {
-        long __functionAddress = Functions.ManifoldPoint_setAppliedImpulseLateral1;
+        long __functionAddress = Functions.btManifoldPoint_setAppliedImpulseLateral1;
         if (CHECKS) {
             check(obj);
         }
@@ -467,7 +467,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setAppliedImpulseLateral2 ] ---
 
     public static void btManifoldPoint_setAppliedImpulseLateral2(@NativeType("void *") long obj, @NativeType("btScalar") float value) {
-        long __functionAddress = Functions.ManifoldPoint_setAppliedImpulseLateral2;
+        long __functionAddress = Functions.btManifoldPoint_setAppliedImpulseLateral2;
         if (CHECKS) {
             check(obj);
         }
@@ -477,7 +477,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setCombinedContactDamping1 ] ---
 
     public static void btManifoldPoint_setCombinedContactDamping1(@NativeType("void *") long obj, @NativeType("btScalar") float value) {
-        long __functionAddress = Functions.ManifoldPoint_setCombinedContactDamping1;
+        long __functionAddress = Functions.btManifoldPoint_setCombinedContactDamping1;
         if (CHECKS) {
             check(obj);
         }
@@ -487,7 +487,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setCombinedContactStiffness1 ] ---
 
     public static void btManifoldPoint_setCombinedContactStiffness1(@NativeType("void *") long obj, @NativeType("btScalar") float value) {
-        long __functionAddress = Functions.ManifoldPoint_setCombinedContactStiffness1;
+        long __functionAddress = Functions.btManifoldPoint_setCombinedContactStiffness1;
         if (CHECKS) {
             check(obj);
         }
@@ -497,7 +497,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setCombinedFriction ] ---
 
     public static void btManifoldPoint_setCombinedFriction(@NativeType("void *") long obj, @NativeType("btScalar") float value) {
-        long __functionAddress = Functions.ManifoldPoint_setCombinedFriction;
+        long __functionAddress = Functions.btManifoldPoint_setCombinedFriction;
         if (CHECKS) {
             check(obj);
         }
@@ -507,7 +507,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setCombinedRestitution ] ---
 
     public static void btManifoldPoint_setCombinedRestitution(@NativeType("void *") long obj, @NativeType("btScalar") float value) {
-        long __functionAddress = Functions.ManifoldPoint_setCombinedRestitution;
+        long __functionAddress = Functions.btManifoldPoint_setCombinedRestitution;
         if (CHECKS) {
             check(obj);
         }
@@ -517,7 +517,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setCombinedRollingFriction ] ---
 
     public static void btManifoldPoint_setCombinedRollingFriction(@NativeType("void *") long obj, @NativeType("btScalar") float value) {
-        long __functionAddress = Functions.ManifoldPoint_setCombinedRollingFriction;
+        long __functionAddress = Functions.btManifoldPoint_setCombinedRollingFriction;
         if (CHECKS) {
             check(obj);
         }
@@ -527,7 +527,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setContactCFM ] ---
 
     public static void btManifoldPoint_setContactCFM(@NativeType("void *") long obj, @NativeType("btScalar") float value) {
-        long __functionAddress = Functions.ManifoldPoint_setContactCFM;
+        long __functionAddress = Functions.btManifoldPoint_setContactCFM;
         if (CHECKS) {
             check(obj);
         }
@@ -537,7 +537,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setContactERP ] ---
 
     public static void btManifoldPoint_setContactERP(@NativeType("void *") long obj, @NativeType("btScalar") float value) {
-        long __functionAddress = Functions.ManifoldPoint_setContactERP;
+        long __functionAddress = Functions.btManifoldPoint_setContactERP;
         if (CHECKS) {
             check(obj);
         }
@@ -547,7 +547,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setContactMotion1 ] ---
 
     public static void btManifoldPoint_setContactMotion1(@NativeType("void *") long obj, @NativeType("btScalar") float value) {
-        long __functionAddress = Functions.ManifoldPoint_setContactMotion1;
+        long __functionAddress = Functions.btManifoldPoint_setContactMotion1;
         if (CHECKS) {
             check(obj);
         }
@@ -557,7 +557,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setContactMotion2 ] ---
 
     public static void btManifoldPoint_setContactMotion2(@NativeType("void *") long obj, @NativeType("btScalar") float value) {
-        long __functionAddress = Functions.ManifoldPoint_setContactMotion2;
+        long __functionAddress = Functions.btManifoldPoint_setContactMotion2;
         if (CHECKS) {
             check(obj);
         }
@@ -567,7 +567,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setContactPointFlags ] ---
 
     public static void btManifoldPoint_setContactPointFlags(@NativeType("void *") long obj, int value) {
-        long __functionAddress = Functions.ManifoldPoint_setContactPointFlags;
+        long __functionAddress = Functions.btManifoldPoint_setContactPointFlags;
         if (CHECKS) {
             check(obj);
         }
@@ -577,7 +577,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setDistance ] ---
 
     public static void btManifoldPoint_setDistance(@NativeType("void *") long obj, @NativeType("btScalar") float dist) {
-        long __functionAddress = Functions.ManifoldPoint_setDistance;
+        long __functionAddress = Functions.btManifoldPoint_setDistance;
         if (CHECKS) {
             check(obj);
         }
@@ -587,7 +587,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setDistance1 ] ---
 
     public static void btManifoldPoint_setDistance1(@NativeType("void *") long obj, @NativeType("btScalar") float value) {
-        long __functionAddress = Functions.ManifoldPoint_setDistance1;
+        long __functionAddress = Functions.btManifoldPoint_setDistance1;
         if (CHECKS) {
             check(obj);
         }
@@ -597,7 +597,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setFrictionCFM ] ---
 
     public static void btManifoldPoint_setFrictionCFM(@NativeType("void *") long obj, @NativeType("btScalar") float value) {
-        long __functionAddress = Functions.ManifoldPoint_setFrictionCFM;
+        long __functionAddress = Functions.btManifoldPoint_setFrictionCFM;
         if (CHECKS) {
             check(obj);
         }
@@ -607,7 +607,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setIndex0 ] ---
 
     public static void btManifoldPoint_setIndex0(@NativeType("void *") long obj, int value) {
-        long __functionAddress = Functions.ManifoldPoint_setIndex0;
+        long __functionAddress = Functions.btManifoldPoint_setIndex0;
         if (CHECKS) {
             check(obj);
         }
@@ -617,7 +617,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setIndex1 ] ---
 
     public static void btManifoldPoint_setIndex1(@NativeType("void *") long obj, int value) {
-        long __functionAddress = Functions.ManifoldPoint_setIndex1;
+        long __functionAddress = Functions.btManifoldPoint_setIndex1;
         if (CHECKS) {
             check(obj);
         }
@@ -627,7 +627,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setLateralFrictionDir1 ] ---
 
     public static void nbtManifoldPoint_setLateralFrictionDir1(long obj, long value) {
-        long __functionAddress = Functions.ManifoldPoint_setLateralFrictionDir1;
+        long __functionAddress = Functions.btManifoldPoint_setLateralFrictionDir1;
         if (CHECKS) {
             check(obj);
         }
@@ -641,7 +641,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setLateralFrictionDir2 ] ---
 
     public static void nbtManifoldPoint_setLateralFrictionDir2(long obj, long value) {
-        long __functionAddress = Functions.ManifoldPoint_setLateralFrictionDir2;
+        long __functionAddress = Functions.btManifoldPoint_setLateralFrictionDir2;
         if (CHECKS) {
             check(obj);
         }
@@ -655,7 +655,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setLifeTime ] ---
 
     public static void btManifoldPoint_setLifeTime(@NativeType("void *") long obj, int value) {
-        long __functionAddress = Functions.ManifoldPoint_setLifeTime;
+        long __functionAddress = Functions.btManifoldPoint_setLifeTime;
         if (CHECKS) {
             check(obj);
         }
@@ -665,7 +665,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setLocalPointA ] ---
 
     public static void nbtManifoldPoint_setLocalPointA(long obj, long value) {
-        long __functionAddress = Functions.ManifoldPoint_setLocalPointA;
+        long __functionAddress = Functions.btManifoldPoint_setLocalPointA;
         if (CHECKS) {
             check(obj);
         }
@@ -679,7 +679,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setLocalPointB ] ---
 
     public static void nbtManifoldPoint_setLocalPointB(long obj, long value) {
-        long __functionAddress = Functions.ManifoldPoint_setLocalPointB;
+        long __functionAddress = Functions.btManifoldPoint_setLocalPointB;
         if (CHECKS) {
             check(obj);
         }
@@ -693,7 +693,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setNormalWorldOnB ] ---
 
     public static void nbtManifoldPoint_setNormalWorldOnB(long obj, long value) {
-        long __functionAddress = Functions.ManifoldPoint_setNormalWorldOnB;
+        long __functionAddress = Functions.btManifoldPoint_setNormalWorldOnB;
         if (CHECKS) {
             check(obj);
         }
@@ -707,7 +707,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setPartId0 ] ---
 
     public static void btManifoldPoint_setPartId0(@NativeType("void *") long obj, int value) {
-        long __functionAddress = Functions.ManifoldPoint_setPartId0;
+        long __functionAddress = Functions.btManifoldPoint_setPartId0;
         if (CHECKS) {
             check(obj);
         }
@@ -717,7 +717,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setPartId1 ] ---
 
     public static void btManifoldPoint_setPartId1(@NativeType("void *") long obj, int value) {
-        long __functionAddress = Functions.ManifoldPoint_setPartId1;
+        long __functionAddress = Functions.btManifoldPoint_setPartId1;
         if (CHECKS) {
             check(obj);
         }
@@ -727,7 +727,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setPositionWorldOnA ] ---
 
     public static void nbtManifoldPoint_setPositionWorldOnA(long obj, long value) {
-        long __functionAddress = Functions.ManifoldPoint_setPositionWorldOnA;
+        long __functionAddress = Functions.btManifoldPoint_setPositionWorldOnA;
         if (CHECKS) {
             check(obj);
         }
@@ -741,7 +741,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setPositionWorldOnB ] ---
 
     public static void nbtManifoldPoint_setPositionWorldOnB(long obj, long value) {
-        long __functionAddress = Functions.ManifoldPoint_setPositionWorldOnB;
+        long __functionAddress = Functions.btManifoldPoint_setPositionWorldOnB;
         if (CHECKS) {
             check(obj);
         }
@@ -755,7 +755,7 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_setUserPersistentData ] ---
 
     public static void btManifoldPoint_setUserPersistentData(@NativeType("void *") long obj, @NativeType("void *") long value) {
-        long __functionAddress = Functions.ManifoldPoint_setUserPersistentData;
+        long __functionAddress = Functions.btManifoldPoint_setUserPersistentData;
         if (CHECKS) {
             check(obj);
             check(value);
@@ -766,24 +766,24 @@ public class BTManifoldPoint {
     // --- [ btManifoldPoint_delete ] ---
 
     public static void btManifoldPoint_delete(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.ManifoldPoint_delete;
+        long __functionAddress = Functions.btManifoldPoint_delete;
         if (CHECKS) {
             check(obj);
         }
         invokePV(obj, __functionAddress);
     }
 
-    // --- [ btgetGContactAddedCallback ] ---
+    // --- [ getGContactAddedCallback ] ---
 
     @NativeType("void *")
-    public static long btgetGContactAddedCallback() {
+    public static long getGContactAddedCallback() {
         long __functionAddress = Functions.getGContactAddedCallback;
         return invokeP(__functionAddress);
     }
 
-    // --- [ btsetGContactAddedCallback ] ---
+    // --- [ setGContactAddedCallback ] ---
 
-    public static void btsetGContactAddedCallback(@NativeType("void *") long value) {
+    public static void setGContactAddedCallback(@NativeType("void *") long value) {
         long __functionAddress = Functions.setGContactAddedCallback;
         if (CHECKS) {
             check(value);

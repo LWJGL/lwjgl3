@@ -24,37 +24,37 @@ public class BTPersistentManifold {
 
         /** Function address. */
         public static final long
-            PersistentManifold_new                           = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_new"),
-            PersistentManifold_new2                          = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_new2"),
-            PersistentManifold_addManifoldPoint              = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_addManifoldPoint"),
-            PersistentManifold_clearManifold                 = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_clearManifold"),
-            PersistentManifold_clearUserCache                = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_clearUserCache"),
-            PersistentManifold_getBody0                      = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_getBody0"),
-            PersistentManifold_getBody1                      = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_getBody1"),
-            PersistentManifold_getCacheEntry                 = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_getCacheEntry"),
-            PersistentManifold_getCompanionIdA               = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_getCompanionIdA"),
-            PersistentManifold_getCompanionIdB               = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_getCompanionIdB"),
-            PersistentManifold_getContactBreakingThreshold   = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_getContactBreakingThreshold"),
-            PersistentManifold_getContactPoint               = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_getContactPoint"),
-            PersistentManifold_getContactProcessingThreshold = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_getContactProcessingThreshold"),
-            PersistentManifold_getIndex1a                    = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_getIndex1a"),
-            PersistentManifold_getNumContacts                = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_getNumContacts"),
-            PersistentManifold_refreshContactPoints          = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_refreshContactPoints"),
-            PersistentManifold_removeContactPoint            = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_removeContactPoint"),
-            PersistentManifold_replaceContactPoint           = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_replaceContactPoint"),
-            PersistentManifold_setBodies                     = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_setBodies"),
-            PersistentManifold_setCompanionIdA               = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_setCompanionIdA"),
-            PersistentManifold_setCompanionIdB               = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_setCompanionIdB"),
-            PersistentManifold_setContactBreakingThreshold   = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_setContactBreakingThreshold"),
-            PersistentManifold_setContactProcessingThreshold = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_setContactProcessingThreshold"),
-            PersistentManifold_setIndex1a                    = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_setIndex1a"),
-            PersistentManifold_setNumContacts                = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_setNumContacts"),
-            PersistentManifold_validContactDistance          = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_validContactDistance"),
-            PersistentManifold_delete                        = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_delete"),
-            getGContactDestroyedCallback                     = apiGetFunctionAddress(LibBullet.getLibrary(), "btgetGContactDestroyedCallback"),
-            getGContactProcessedCallback                     = apiGetFunctionAddress(LibBullet.getLibrary(), "btgetGContactProcessedCallback"),
-            setGContactDestroyedCallback                     = apiGetFunctionAddress(LibBullet.getLibrary(), "btsetGContactDestroyedCallback"),
-            setGContactProcessedCallback                     = apiGetFunctionAddress(LibBullet.getLibrary(), "btsetGContactProcessedCallback");
+            btPersistentManifold_new                           = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_new"),
+            btPersistentManifold_new2                          = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_new2"),
+            btPersistentManifold_addManifoldPoint              = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_addManifoldPoint"),
+            btPersistentManifold_clearManifold                 = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_clearManifold"),
+            btPersistentManifold_clearUserCache                = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_clearUserCache"),
+            btPersistentManifold_getBody0                      = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_getBody0"),
+            btPersistentManifold_getBody1                      = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_getBody1"),
+            btPersistentManifold_getCacheEntry                 = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_getCacheEntry"),
+            btPersistentManifold_getCompanionIdA               = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_getCompanionIdA"),
+            btPersistentManifold_getCompanionIdB               = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_getCompanionIdB"),
+            btPersistentManifold_getContactBreakingThreshold   = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_getContactBreakingThreshold"),
+            btPersistentManifold_getContactPoint               = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_getContactPoint"),
+            btPersistentManifold_getContactProcessingThreshold = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_getContactProcessingThreshold"),
+            btPersistentManifold_getIndex1a                    = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_getIndex1a"),
+            btPersistentManifold_getNumContacts                = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_getNumContacts"),
+            btPersistentManifold_refreshContactPoints          = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_refreshContactPoints"),
+            btPersistentManifold_removeContactPoint            = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_removeContactPoint"),
+            btPersistentManifold_replaceContactPoint           = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_replaceContactPoint"),
+            btPersistentManifold_setBodies                     = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_setBodies"),
+            btPersistentManifold_setCompanionIdA               = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_setCompanionIdA"),
+            btPersistentManifold_setCompanionIdB               = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_setCompanionIdB"),
+            btPersistentManifold_setContactBreakingThreshold   = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_setContactBreakingThreshold"),
+            btPersistentManifold_setContactProcessingThreshold = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_setContactProcessingThreshold"),
+            btPersistentManifold_setIndex1a                    = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_setIndex1a"),
+            btPersistentManifold_setNumContacts                = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_setNumContacts"),
+            btPersistentManifold_validContactDistance          = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_validContactDistance"),
+            btPersistentManifold_delete                        = apiGetFunctionAddress(LibBullet.getLibrary(), "btPersistentManifold_delete"),
+            getGContactDestroyedCallback                       = apiGetFunctionAddress(LibBullet.getLibrary(), "getGContactDestroyedCallback"),
+            getGContactProcessedCallback                       = apiGetFunctionAddress(LibBullet.getLibrary(), "getGContactProcessedCallback"),
+            setGContactDestroyedCallback                       = apiGetFunctionAddress(LibBullet.getLibrary(), "setGContactDestroyedCallback"),
+            setGContactProcessedCallback                       = apiGetFunctionAddress(LibBullet.getLibrary(), "setGContactProcessedCallback");
 
     }
 
@@ -62,7 +62,7 @@ public class BTPersistentManifold {
 
     @NativeType("void *")
     public static long btPersistentManifold_new() {
-        long __functionAddress = Functions.PersistentManifold_new;
+        long __functionAddress = Functions.btPersistentManifold_new;
         return invokeP(__functionAddress);
     }
 
@@ -70,7 +70,7 @@ public class BTPersistentManifold {
 
     @NativeType("void *")
     public static long btPersistentManifold_new2(@NativeType("void *") long body0, @NativeType("void *") long body1, int __unnamed2, @NativeType("btScalar") float contactBreakingThreshold, @NativeType("btScalar") float contactProcessingThreshold) {
-        long __functionAddress = Functions.PersistentManifold_new2;
+        long __functionAddress = Functions.btPersistentManifold_new2;
         if (CHECKS) {
             check(body0);
             check(body1);
@@ -81,7 +81,7 @@ public class BTPersistentManifold {
     // --- [ btPersistentManifold_addManifoldPoint ] ---
 
     public static int btPersistentManifold_addManifoldPoint(@NativeType("void *") long obj, @NativeType("void *") long newPoint, @NativeType("bool") boolean isPredictive) {
-        long __functionAddress = Functions.PersistentManifold_addManifoldPoint;
+        long __functionAddress = Functions.btPersistentManifold_addManifoldPoint;
         if (CHECKS) {
             check(obj);
             check(newPoint);
@@ -92,7 +92,7 @@ public class BTPersistentManifold {
     // --- [ btPersistentManifold_clearManifold ] ---
 
     public static void btPersistentManifold_clearManifold(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.PersistentManifold_clearManifold;
+        long __functionAddress = Functions.btPersistentManifold_clearManifold;
         if (CHECKS) {
             check(obj);
         }
@@ -102,7 +102,7 @@ public class BTPersistentManifold {
     // --- [ btPersistentManifold_clearUserCache ] ---
 
     public static void btPersistentManifold_clearUserCache(@NativeType("void *") long obj, @NativeType("void *") long pt) {
-        long __functionAddress = Functions.PersistentManifold_clearUserCache;
+        long __functionAddress = Functions.btPersistentManifold_clearUserCache;
         if (CHECKS) {
             check(obj);
             check(pt);
@@ -114,7 +114,7 @@ public class BTPersistentManifold {
 
     @NativeType("void *")
     public static long btPersistentManifold_getBody0(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.PersistentManifold_getBody0;
+        long __functionAddress = Functions.btPersistentManifold_getBody0;
         if (CHECKS) {
             check(obj);
         }
@@ -125,7 +125,7 @@ public class BTPersistentManifold {
 
     @NativeType("void *")
     public static long btPersistentManifold_getBody1(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.PersistentManifold_getBody1;
+        long __functionAddress = Functions.btPersistentManifold_getBody1;
         if (CHECKS) {
             check(obj);
         }
@@ -135,7 +135,7 @@ public class BTPersistentManifold {
     // --- [ btPersistentManifold_getCacheEntry ] ---
 
     public static int btPersistentManifold_getCacheEntry(@NativeType("void *") long obj, @NativeType("void *") long newPoint) {
-        long __functionAddress = Functions.PersistentManifold_getCacheEntry;
+        long __functionAddress = Functions.btPersistentManifold_getCacheEntry;
         if (CHECKS) {
             check(obj);
             check(newPoint);
@@ -146,7 +146,7 @@ public class BTPersistentManifold {
     // --- [ btPersistentManifold_getCompanionIdA ] ---
 
     public static int btPersistentManifold_getCompanionIdA(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.PersistentManifold_getCompanionIdA;
+        long __functionAddress = Functions.btPersistentManifold_getCompanionIdA;
         if (CHECKS) {
             check(obj);
         }
@@ -156,7 +156,7 @@ public class BTPersistentManifold {
     // --- [ btPersistentManifold_getCompanionIdB ] ---
 
     public static int btPersistentManifold_getCompanionIdB(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.PersistentManifold_getCompanionIdB;
+        long __functionAddress = Functions.btPersistentManifold_getCompanionIdB;
         if (CHECKS) {
             check(obj);
         }
@@ -167,7 +167,7 @@ public class BTPersistentManifold {
 
     @NativeType("btScalar")
     public static float btPersistentManifold_getContactBreakingThreshold(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.PersistentManifold_getContactBreakingThreshold;
+        long __functionAddress = Functions.btPersistentManifold_getContactBreakingThreshold;
         if (CHECKS) {
             check(obj);
         }
@@ -178,7 +178,7 @@ public class BTPersistentManifold {
 
     @NativeType("void *")
     public static long btPersistentManifold_getContactPoint(@NativeType("void *") long obj, int index) {
-        long __functionAddress = Functions.PersistentManifold_getContactPoint;
+        long __functionAddress = Functions.btPersistentManifold_getContactPoint;
         if (CHECKS) {
             check(obj);
         }
@@ -189,7 +189,7 @@ public class BTPersistentManifold {
 
     @NativeType("btScalar")
     public static float btPersistentManifold_getContactProcessingThreshold(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.PersistentManifold_getContactProcessingThreshold;
+        long __functionAddress = Functions.btPersistentManifold_getContactProcessingThreshold;
         if (CHECKS) {
             check(obj);
         }
@@ -199,7 +199,7 @@ public class BTPersistentManifold {
     // --- [ btPersistentManifold_getIndex1a ] ---
 
     public static int btPersistentManifold_getIndex1a(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.PersistentManifold_getIndex1a;
+        long __functionAddress = Functions.btPersistentManifold_getIndex1a;
         if (CHECKS) {
             check(obj);
         }
@@ -209,7 +209,7 @@ public class BTPersistentManifold {
     // --- [ btPersistentManifold_getNumContacts ] ---
 
     public static int btPersistentManifold_getNumContacts(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.PersistentManifold_getNumContacts;
+        long __functionAddress = Functions.btPersistentManifold_getNumContacts;
         if (CHECKS) {
             check(obj);
         }
@@ -219,7 +219,7 @@ public class BTPersistentManifold {
     // --- [ btPersistentManifold_refreshContactPoints ] ---
 
     public static void nbtPersistentManifold_refreshContactPoints(long obj, long trA, long trB) {
-        long __functionAddress = Functions.PersistentManifold_refreshContactPoints;
+        long __functionAddress = Functions.btPersistentManifold_refreshContactPoints;
         if (CHECKS) {
             check(obj);
         }
@@ -233,7 +233,7 @@ public class BTPersistentManifold {
     // --- [ btPersistentManifold_removeContactPoint ] ---
 
     public static void btPersistentManifold_removeContactPoint(@NativeType("void *") long obj, int index) {
-        long __functionAddress = Functions.PersistentManifold_removeContactPoint;
+        long __functionAddress = Functions.btPersistentManifold_removeContactPoint;
         if (CHECKS) {
             check(obj);
         }
@@ -243,7 +243,7 @@ public class BTPersistentManifold {
     // --- [ btPersistentManifold_replaceContactPoint ] ---
 
     public static void btPersistentManifold_replaceContactPoint(@NativeType("void *") long obj, @NativeType("void *") long newPoint, int insertIndex) {
-        long __functionAddress = Functions.PersistentManifold_replaceContactPoint;
+        long __functionAddress = Functions.btPersistentManifold_replaceContactPoint;
         if (CHECKS) {
             check(obj);
             check(newPoint);
@@ -254,7 +254,7 @@ public class BTPersistentManifold {
     // --- [ btPersistentManifold_setBodies ] ---
 
     public static void btPersistentManifold_setBodies(@NativeType("void *") long obj, @NativeType("void *") long body0, @NativeType("void *") long body1) {
-        long __functionAddress = Functions.PersistentManifold_setBodies;
+        long __functionAddress = Functions.btPersistentManifold_setBodies;
         if (CHECKS) {
             check(obj);
             check(body0);
@@ -266,7 +266,7 @@ public class BTPersistentManifold {
     // --- [ btPersistentManifold_setCompanionIdA ] ---
 
     public static void btPersistentManifold_setCompanionIdA(@NativeType("void *") long obj, int value) {
-        long __functionAddress = Functions.PersistentManifold_setCompanionIdA;
+        long __functionAddress = Functions.btPersistentManifold_setCompanionIdA;
         if (CHECKS) {
             check(obj);
         }
@@ -276,7 +276,7 @@ public class BTPersistentManifold {
     // --- [ btPersistentManifold_setCompanionIdB ] ---
 
     public static void btPersistentManifold_setCompanionIdB(@NativeType("void *") long obj, int value) {
-        long __functionAddress = Functions.PersistentManifold_setCompanionIdB;
+        long __functionAddress = Functions.btPersistentManifold_setCompanionIdB;
         if (CHECKS) {
             check(obj);
         }
@@ -286,7 +286,7 @@ public class BTPersistentManifold {
     // --- [ btPersistentManifold_setContactBreakingThreshold ] ---
 
     public static void btPersistentManifold_setContactBreakingThreshold(@NativeType("void *") long obj, @NativeType("btScalar") float contactBreakingThreshold) {
-        long __functionAddress = Functions.PersistentManifold_setContactBreakingThreshold;
+        long __functionAddress = Functions.btPersistentManifold_setContactBreakingThreshold;
         if (CHECKS) {
             check(obj);
         }
@@ -296,7 +296,7 @@ public class BTPersistentManifold {
     // --- [ btPersistentManifold_setContactProcessingThreshold ] ---
 
     public static void btPersistentManifold_setContactProcessingThreshold(@NativeType("void *") long obj, @NativeType("btScalar") float contactProcessingThreshold) {
-        long __functionAddress = Functions.PersistentManifold_setContactProcessingThreshold;
+        long __functionAddress = Functions.btPersistentManifold_setContactProcessingThreshold;
         if (CHECKS) {
             check(obj);
         }
@@ -306,7 +306,7 @@ public class BTPersistentManifold {
     // --- [ btPersistentManifold_setIndex1a ] ---
 
     public static void btPersistentManifold_setIndex1a(@NativeType("void *") long obj, int value) {
-        long __functionAddress = Functions.PersistentManifold_setIndex1a;
+        long __functionAddress = Functions.btPersistentManifold_setIndex1a;
         if (CHECKS) {
             check(obj);
         }
@@ -316,7 +316,7 @@ public class BTPersistentManifold {
     // --- [ btPersistentManifold_setNumContacts ] ---
 
     public static void btPersistentManifold_setNumContacts(@NativeType("void *") long obj, int cachedPoints) {
-        long __functionAddress = Functions.PersistentManifold_setNumContacts;
+        long __functionAddress = Functions.btPersistentManifold_setNumContacts;
         if (CHECKS) {
             check(obj);
         }
@@ -327,7 +327,7 @@ public class BTPersistentManifold {
 
     @NativeType("bool")
     public static boolean btPersistentManifold_validContactDistance(@NativeType("void *") long obj, @NativeType("void *") long pt) {
-        long __functionAddress = Functions.PersistentManifold_validContactDistance;
+        long __functionAddress = Functions.btPersistentManifold_validContactDistance;
         if (CHECKS) {
             check(obj);
             check(pt);
@@ -338,32 +338,32 @@ public class BTPersistentManifold {
     // --- [ btPersistentManifold_delete ] ---
 
     public static void btPersistentManifold_delete(@NativeType("void *") long obj) {
-        long __functionAddress = Functions.PersistentManifold_delete;
+        long __functionAddress = Functions.btPersistentManifold_delete;
         if (CHECKS) {
             check(obj);
         }
         invokePV(obj, __functionAddress);
     }
 
-    // --- [ btgetGContactDestroyedCallback ] ---
+    // --- [ getGContactDestroyedCallback ] ---
 
     @NativeType("void *")
-    public static long btgetGContactDestroyedCallback() {
+    public static long getGContactDestroyedCallback() {
         long __functionAddress = Functions.getGContactDestroyedCallback;
         return invokeP(__functionAddress);
     }
 
-    // --- [ btgetGContactProcessedCallback ] ---
+    // --- [ getGContactProcessedCallback ] ---
 
     @NativeType("void *")
-    public static long btgetGContactProcessedCallback() {
+    public static long getGContactProcessedCallback() {
         long __functionAddress = Functions.getGContactProcessedCallback;
         return invokeP(__functionAddress);
     }
 
-    // --- [ btsetGContactDestroyedCallback ] ---
+    // --- [ setGContactDestroyedCallback ] ---
 
-    public static void btsetGContactDestroyedCallback(@NativeType("void *") long callback) {
+    public static void setGContactDestroyedCallback(@NativeType("void *") long callback) {
         long __functionAddress = Functions.setGContactDestroyedCallback;
         if (CHECKS) {
             check(callback);
@@ -371,9 +371,9 @@ public class BTPersistentManifold {
         invokePV(callback, __functionAddress);
     }
 
-    // --- [ btsetGContactProcessedCallback ] ---
+    // --- [ setGContactProcessedCallback ] ---
 
-    public static void btsetGContactProcessedCallback(@NativeType("void *") long callback) {
+    public static void setGContactProcessedCallback(@NativeType("void *") long callback) {
         long __functionAddress = Functions.setGContactProcessedCallback;
         if (CHECKS) {
             check(callback);

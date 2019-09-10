@@ -81,6 +81,7 @@ val p_btActionInterface_updateAction = Module.BULLET.callback {
         "",
 
         btCollisionWorld.p("collisionWorld", ""),
+        btScalar("deltaTimeStep", ""),
         nativeType = "p_btActionInterface_updateAction"
     )
 }

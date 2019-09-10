@@ -7,16 +7,16 @@ package bullet.templates
 import bullet.*
 import org.lwjgl.generator.*
 
-val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod = "bt", binding = BULLET_BINDING_DELEGATE) {
+val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod = "", binding = BULLET_BINDING_DELEGATE) {
     opaque_p(
-        "ManifoldPoint_new",
+        "btManifoldPoint_new",
         "",
 
         void()
     )
 
     opaque_p(
-        "ManifoldPoint_new2",
+        "btManifoldPoint_new2",
         "",
 
         btVector3.const.p("pointA", ""),
@@ -26,133 +26,133 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     btScalar(
-        "ManifoldPoint_getAppliedImpulse",
+        "btManifoldPoint_getAppliedImpulse",
         "",
 
         opaque_p("obj", "")
     )
 
     btScalar(
-        "ManifoldPoint_getAppliedImpulseLateral1",
+        "btManifoldPoint_getAppliedImpulseLateral1",
         "",
 
         opaque_p("obj", "")
     )
 
     btScalar(
-        "ManifoldPoint_getAppliedImpulseLateral2",
+        "btManifoldPoint_getAppliedImpulseLateral2",
         "",
 
         opaque_p("obj", "")
     )
 
     btScalar(
-        "ManifoldPoint_getCombinedContactDamping1",
+        "btManifoldPoint_getCombinedContactDamping1",
         "",
 
         opaque_p("obj", "")
     )
 
     btScalar(
-        "ManifoldPoint_getCombinedContactStiffness1",
+        "btManifoldPoint_getCombinedContactStiffness1",
         "",
 
         opaque_p("obj", "")
     )
 
     btScalar(
-        "ManifoldPoint_getCombinedFriction",
+        "btManifoldPoint_getCombinedFriction",
         "",
 
         opaque_p("obj", "")
     )
 
     btScalar(
-        "ManifoldPoint_getCombinedRestitution",
+        "btManifoldPoint_getCombinedRestitution",
         "",
 
         opaque_p("obj", "")
     )
 
     btScalar(
-        "ManifoldPoint_getCombinedRollingFriction",
+        "btManifoldPoint_getCombinedRollingFriction",
         "",
 
         opaque_p("obj", "")
     )
 
     btScalar(
-        "ManifoldPoint_getContactCFM",
+        "btManifoldPoint_getContactCFM",
         "",
 
         opaque_p("obj", "")
     )
 
     btScalar(
-        "ManifoldPoint_getContactERP",
+        "btManifoldPoint_getContactERP",
         "",
 
         opaque_p("obj", "")
     )
 
     btScalar(
-        "ManifoldPoint_getContactMotion1",
+        "btManifoldPoint_getContactMotion1",
         "",
 
         opaque_p("obj", "")
     )
 
     btScalar(
-        "ManifoldPoint_getContactMotion2",
+        "btManifoldPoint_getContactMotion2",
         "",
 
         opaque_p("obj", "")
     )
 
     int(
-        "ManifoldPoint_getContactPointFlags",
+        "btManifoldPoint_getContactPointFlags",
         "",
 
         opaque_p("obj", "")
     )
 
     btScalar(
-        "ManifoldPoint_getDistance",
+        "btManifoldPoint_getDistance",
         "",
 
         opaque_p("obj", "")
     )
 
     btScalar(
-        "ManifoldPoint_getDistance1",
+        "btManifoldPoint_getDistance1",
         "",
 
         opaque_p("obj", "")
     )
 
     btScalar(
-        "ManifoldPoint_getFrictionCFM",
+        "btManifoldPoint_getFrictionCFM",
         "",
 
         opaque_p("obj", "")
     )
 
     int(
-        "ManifoldPoint_getIndex0",
+        "btManifoldPoint_getIndex0",
         "",
 
         opaque_p("obj", "")
     )
 
     int(
-        "ManifoldPoint_getIndex1",
+        "btManifoldPoint_getIndex1",
         "",
 
         opaque_p("obj", "")
     )
 
     void(
-        "ManifoldPoint_getLateralFrictionDir1",
+        "btManifoldPoint_getLateralFrictionDir1",
         "",
 
         opaque_p("obj", ""),
@@ -160,7 +160,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_getLateralFrictionDir2",
+        "btManifoldPoint_getLateralFrictionDir2",
         "",
 
         opaque_p("obj", ""),
@@ -168,14 +168,14 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     int(
-        "ManifoldPoint_getLifeTime",
+        "btManifoldPoint_getLifeTime",
         "",
 
         opaque_p("obj", "")
     )
 
     void(
-        "ManifoldPoint_getLocalPointA",
+        "btManifoldPoint_getLocalPointA",
         "",
 
         opaque_p("obj", ""),
@@ -183,7 +183,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_getLocalPointB",
+        "btManifoldPoint_getLocalPointB",
         "",
 
         opaque_p("obj", ""),
@@ -191,7 +191,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_getNormalWorldOnB",
+        "btManifoldPoint_getNormalWorldOnB",
         "",
 
         opaque_p("obj", ""),
@@ -199,21 +199,21 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     int(
-        "ManifoldPoint_getPartId0",
+        "btManifoldPoint_getPartId0",
         "",
 
         opaque_p("obj", "")
     )
 
     int(
-        "ManifoldPoint_getPartId1",
+        "btManifoldPoint_getPartId1",
         "",
 
         opaque_p("obj", "")
     )
 
     void(
-        "ManifoldPoint_getPositionWorldOnA",
+        "btManifoldPoint_getPositionWorldOnA",
         "",
 
         opaque_p("obj", ""),
@@ -221,7 +221,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_getPositionWorldOnB",
+        "btManifoldPoint_getPositionWorldOnB",
         "",
 
         opaque_p("obj", ""),
@@ -229,14 +229,14 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     opaque_p(
-        "ManifoldPoint_getUserPersistentData",
+        "btManifoldPoint_getUserPersistentData",
         "",
 
         opaque_p("obj", "")
     )
 
     void(
-        "ManifoldPoint_setAppliedImpulse",
+        "btManifoldPoint_setAppliedImpulse",
         "",
 
         opaque_p("obj", ""),
@@ -244,7 +244,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_setAppliedImpulseLateral1",
+        "btManifoldPoint_setAppliedImpulseLateral1",
         "",
 
         opaque_p("obj", ""),
@@ -252,7 +252,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_setAppliedImpulseLateral2",
+        "btManifoldPoint_setAppliedImpulseLateral2",
         "",
 
         opaque_p("obj", ""),
@@ -260,7 +260,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_setCombinedContactDamping1",
+        "btManifoldPoint_setCombinedContactDamping1",
         "",
 
         opaque_p("obj", ""),
@@ -268,7 +268,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_setCombinedContactStiffness1",
+        "btManifoldPoint_setCombinedContactStiffness1",
         "",
 
         opaque_p("obj", ""),
@@ -276,7 +276,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_setCombinedFriction",
+        "btManifoldPoint_setCombinedFriction",
         "",
 
         opaque_p("obj", ""),
@@ -284,7 +284,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_setCombinedRestitution",
+        "btManifoldPoint_setCombinedRestitution",
         "",
 
         opaque_p("obj", ""),
@@ -292,7 +292,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_setCombinedRollingFriction",
+        "btManifoldPoint_setCombinedRollingFriction",
         "",
 
         opaque_p("obj", ""),
@@ -300,7 +300,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_setContactCFM",
+        "btManifoldPoint_setContactCFM",
         "",
 
         opaque_p("obj", ""),
@@ -308,7 +308,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_setContactERP",
+        "btManifoldPoint_setContactERP",
         "",
 
         opaque_p("obj", ""),
@@ -316,7 +316,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_setContactMotion1",
+        "btManifoldPoint_setContactMotion1",
         "",
 
         opaque_p("obj", ""),
@@ -324,7 +324,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_setContactMotion2",
+        "btManifoldPoint_setContactMotion2",
         "",
 
         opaque_p("obj", ""),
@@ -332,7 +332,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_setContactPointFlags",
+        "btManifoldPoint_setContactPointFlags",
         "",
 
         opaque_p("obj", ""),
@@ -340,7 +340,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_setDistance",
+        "btManifoldPoint_setDistance",
         "",
 
         opaque_p("obj", ""),
@@ -348,7 +348,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_setDistance1",
+        "btManifoldPoint_setDistance1",
         "",
 
         opaque_p("obj", ""),
@@ -356,7 +356,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_setFrictionCFM",
+        "btManifoldPoint_setFrictionCFM",
         "",
 
         opaque_p("obj", ""),
@@ -364,7 +364,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_setIndex0",
+        "btManifoldPoint_setIndex0",
         "",
 
         opaque_p("obj", ""),
@@ -372,7 +372,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_setIndex1",
+        "btManifoldPoint_setIndex1",
         "",
 
         opaque_p("obj", ""),
@@ -380,7 +380,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_setLateralFrictionDir1",
+        "btManifoldPoint_setLateralFrictionDir1",
         "",
 
         opaque_p("obj", ""),
@@ -388,7 +388,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_setLateralFrictionDir2",
+        "btManifoldPoint_setLateralFrictionDir2",
         "",
 
         opaque_p("obj", ""),
@@ -396,7 +396,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_setLifeTime",
+        "btManifoldPoint_setLifeTime",
         "",
 
         opaque_p("obj", ""),
@@ -404,7 +404,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_setLocalPointA",
+        "btManifoldPoint_setLocalPointA",
         "",
 
         opaque_p("obj", ""),
@@ -412,7 +412,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_setLocalPointB",
+        "btManifoldPoint_setLocalPointB",
         "",
 
         opaque_p("obj", ""),
@@ -420,7 +420,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_setNormalWorldOnB",
+        "btManifoldPoint_setNormalWorldOnB",
         "",
 
         opaque_p("obj", ""),
@@ -428,7 +428,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_setPartId0",
+        "btManifoldPoint_setPartId0",
         "",
 
         opaque_p("obj", ""),
@@ -436,7 +436,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_setPartId1",
+        "btManifoldPoint_setPartId1",
         "",
 
         opaque_p("obj", ""),
@@ -444,7 +444,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_setPositionWorldOnA",
+        "btManifoldPoint_setPositionWorldOnA",
         "",
 
         opaque_p("obj", ""),
@@ -452,7 +452,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_setPositionWorldOnB",
+        "btManifoldPoint_setPositionWorldOnB",
         "",
 
         opaque_p("obj", ""),
@@ -460,7 +460,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_setUserPersistentData",
+        "btManifoldPoint_setUserPersistentData",
         "",
 
         opaque_p("obj", ""),
@@ -468,7 +468,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
     )
 
     void(
-        "ManifoldPoint_delete",
+        "btManifoldPoint_delete",
         "",
 
         opaque_p("obj", "")

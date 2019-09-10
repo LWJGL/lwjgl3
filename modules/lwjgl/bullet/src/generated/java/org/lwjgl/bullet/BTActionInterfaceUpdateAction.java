@@ -16,7 +16,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <pre><code>
  * void (*) (
- *     btCollisionWorld *collisionWorld
+ *     btCollisionWorld *collisionWorld,
+ *     btScalar deltaTimeStep
  * )</code></pre>
  */
 public abstract class BTActionInterfaceUpdateAction extends Callback implements BTActionInterfaceUpdateActionI {
@@ -64,8 +65,8 @@ public abstract class BTActionInterfaceUpdateAction extends Callback implements 
         }
 
         @Override
-        public void invoke(long collisionWorld) {
-            delegate.invoke(collisionWorld);
+        public void invoke(long collisionWorld, float deltaTimeStep) {
+            delegate.invoke(collisionWorld, deltaTimeStep);
         }
 
     }
