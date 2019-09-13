@@ -394,12 +394,6 @@
             <compileBinding binding="opengles">
                 <pathelement path="${bin.lwjgl}/egl"/>
             </compileBinding>
-            <compileBinding binding="glfw">
-                <pathelement path="${bin.lwjgl}/egl"/>
-                <pathelement path="${bin.lwjgl}/opengl"/>
-                <pathelement path="${bin.lwjgl}/opengles"/>
-                <pathelement path="${bin.lwjgl}/vulkan"/>
-            </compileBinding>
             <compileBinding binding="ovr">
                 <pathelement path="${bin.lwjgl}/vulkan"/>
             </compileBinding>
@@ -407,6 +401,13 @@
                 <pathelement path="${bin.lwjgl}/vulkan"/>
             </compileBinding>
         </parallel>
+
+        <compileBinding binding="glfw">
+            <pathelement path="${bin.lwjgl}/egl"/>
+            <pathelement path="${bin.lwjgl}/opengl"/>
+            <pathelement path="${bin.lwjgl}/opengles"/>
+            <pathelement path="${bin.lwjgl}/vulkan"/>
+        </compileBinding>
     </target>
 
     <target name="compile-native" description="Compiles the native source code" depends="init, compile">
