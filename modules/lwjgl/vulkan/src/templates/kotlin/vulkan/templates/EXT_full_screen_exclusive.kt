@@ -168,7 +168,7 @@ val EXT_full_screen_exclusive = "EXTFullScreenExclusive".nativeClassVK("EXT_full
         """,
 
         VkPhysicalDevice("physicalDevice", "the physical device that will be associated with the swapchain to be created, as described for #CreateSwapchainKHR()."),
-        VkPhysicalDeviceSurfaceInfo2KHR.const.p("pSurfaceInfo", "points to an instance of the ##VkPhysicalDeviceSurfaceInfo2KHR structure, describing the surface and other fixed parameters that would be consumed by #CreateSwapchainKHR()."),
+        VkPhysicalDeviceSurfaceInfo2KHR.const.p("pSurfaceInfo", "a pointer to a ##VkPhysicalDeviceSurfaceInfo2KHR structure describing the surface and other fixed parameters that would be consumed by #CreateSwapchainKHR()."),
         AutoSize("pPresentModes")..Check(1)..uint32_t.p("pPresentModeCount", "a pointer to an integer related to the number of presentation modes available or queried, as described below."),
         nullable..VkPresentModeKHR.p("pPresentModes", "either {@code NULL} or a pointer to an array of {@code VkPresentModeKHR} values, indicating the supported presentation modes.")
     )
@@ -298,7 +298,7 @@ val EXT_full_screen_exclusive = "EXTFullScreenExclusive".nativeClassVK("EXT_full
         """,
 
         VkDevice("device", "the logical device."),
-        VkPhysicalDeviceSurfaceInfo2KHR.const.p("pSurfaceInfo", "points to an instance of the VkPhysicalDeviceSurfaceInfo2KHR structure, describing the surface and other fixed parameters that would be consumed by vkCreateSwapchainKHR."),
-        Check(1)..VkDeviceGroupPresentModeFlagsKHR.p("pModes", "a pointer to a value of type {@code VkDeviceGroupPresentModeFlagsKHR} that is filled with the supported device group present modes for the surface.")
+        VkPhysicalDeviceSurfaceInfo2KHR.const.p("pSurfaceInfo", "a pointer to a ##VkPhysicalDeviceSurfaceInfo2KHR structure describing the surface and other fixed parameters that would be consumed by #CreateSwapchainKHR()."),
+        Check(1)..VkDeviceGroupPresentModeFlagsKHR.p("pModes", "a pointer to a {@code VkDeviceGroupPresentModeFlagsKHR} in which the supported device group present modes for the surface are returned.")
     )
 }

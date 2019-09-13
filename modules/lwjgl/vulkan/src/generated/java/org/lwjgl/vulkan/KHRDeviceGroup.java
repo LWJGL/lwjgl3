@@ -236,7 +236,7 @@ public class KHRDeviceGroup {
      * @param heapIndex           the index of the memory heap from which the memory is allocated.
      * @param localDeviceIndex    the device index of the physical device that performs the memory access.
      * @param remoteDeviceIndex   the device index of the physical device that the memory is allocated for.
-     * @param pPeerMemoryFeatures a pointer to a bitmask of {@code VkPeerMemoryFeatureFlagBits} indicating which types of memory accesses are supported for the combination of heap, local, and remote devices.
+     * @param pPeerMemoryFeatures a pointer to a {@code VkPeerMemoryFeatureFlags} bitmask indicating which types of memory accesses are supported for the combination of heap, local, and remote devices.
      */
     public static void vkGetDeviceGroupPeerMemoryFeaturesKHR(VkDevice device, @NativeType("uint32_t") int heapIndex, @NativeType("uint32_t") int localDeviceIndex, @NativeType("uint32_t") int remoteDeviceIndex, @NativeType("VkPeerMemoryFeatureFlags *") IntBuffer pPeerMemoryFeatures) {
         if (CHECKS) {
@@ -333,7 +333,7 @@ public class KHRDeviceGroup {
      * <p>{@link VkDeviceGroupPresentCapabilitiesKHR}</p>
      *
      * @param device                          the logical device.
-     * @param pDeviceGroupPresentCapabilities a pointer to a structure of type {@link VkDeviceGroupPresentCapabilitiesKHR} that is filled with the logical device&#8217;s capabilities.
+     * @param pDeviceGroupPresentCapabilities a pointer to a {@link VkDeviceGroupPresentCapabilitiesKHR} structure in which the device&#8217;s capabilities are returned.
      */
     @NativeType("VkResult")
     public static int vkGetDeviceGroupPresentCapabilitiesKHR(VkDevice device, @NativeType("VkDeviceGroupPresentCapabilitiesKHR *") VkDeviceGroupPresentCapabilitiesKHR pDeviceGroupPresentCapabilities) {
@@ -402,7 +402,7 @@ public class KHRDeviceGroup {
      *
      * @param device  the logical device.
      * @param surface the surface.
-     * @param pModes  a pointer to a value of type {@code VkDeviceGroupPresentModeFlagsKHR} that is filled with the supported device group present modes for the surface.
+     * @param pModes  a pointer to a {@code VkDeviceGroupPresentModeFlagsKHR} in which the supported device group present modes for the surface are returned.
      */
     @NativeType("VkResult")
     public static int vkGetDeviceGroupSurfacePresentModesKHR(VkDevice device, @NativeType("VkSurfaceKHR") long surface, @NativeType("VkDeviceGroupPresentModeFlagsKHR *") IntBuffer pModes) {
@@ -564,7 +564,7 @@ public class KHRDeviceGroup {
      * <p>{@link VkAcquireNextImageInfoKHR}</p>
      *
      * @param device       the device associated with {@code swapchain}.
-     * @param pAcquireInfo a pointer to a structure of type {@link VkAcquireNextImageInfoKHR} containing parameters of the acquire.
+     * @param pAcquireInfo a pointer to a {@link VkAcquireNextImageInfoKHR} structure containing parameters of the acquire.
      * @param pImageIndex  a pointer to a {@code uint32_t} that is set to the index of the next image to use.
      */
     @NativeType("VkResult")

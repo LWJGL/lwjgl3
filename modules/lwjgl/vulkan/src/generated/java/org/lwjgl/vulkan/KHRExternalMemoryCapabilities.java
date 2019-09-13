@@ -153,8 +153,8 @@ public class KHRExternalMemoryCapabilities {
      * See {@link VK11#vkGetPhysicalDeviceExternalBufferProperties GetPhysicalDeviceExternalBufferProperties}.
      *
      * @param physicalDevice            the physical device from which to query the buffer capabilities.
-     * @param pExternalBufferInfo       points to an instance of the {@link VkPhysicalDeviceExternalBufferInfo} structure, describing the parameters that would be consumed by {@link VK10#vkCreateBuffer CreateBuffer}.
-     * @param pExternalBufferProperties points to an instance of the {@link VkExternalBufferProperties} structure in which capabilities are returned.
+     * @param pExternalBufferInfo       a pointer to a {@link VkPhysicalDeviceExternalBufferInfo} structure describing the parameters that would be consumed by {@link VK10#vkCreateBuffer CreateBuffer}.
+     * @param pExternalBufferProperties a pointer to a {@link VkExternalBufferProperties} structure in which capabilities are returned.
      */
     public static void vkGetPhysicalDeviceExternalBufferPropertiesKHR(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceExternalBufferInfo const *") VkPhysicalDeviceExternalBufferInfo pExternalBufferInfo, @NativeType("VkExternalBufferProperties *") VkExternalBufferProperties pExternalBufferProperties) {
         nvkGetPhysicalDeviceExternalBufferPropertiesKHR(physicalDevice, pExternalBufferInfo.address(), pExternalBufferProperties.address());

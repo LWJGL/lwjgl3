@@ -42,7 +42,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code image} &ndash; the {@code VkImage} object to be bound.</li>
  * <li>{@code bindCount} &ndash; the number of {@link VkSparseMemoryBind} structures in the {@code pBinds} array.</li>
- * <li>{@code pBinds} &ndash; a pointer to array of {@link VkSparseMemoryBind} structures.</li>
+ * <li>{@code pBinds} &ndash; a pointer to an array of {@link VkSparseMemoryBind} structures.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

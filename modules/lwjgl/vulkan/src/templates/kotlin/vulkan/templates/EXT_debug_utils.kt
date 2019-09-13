@@ -23,7 +23,7 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
 
         The main difference between this extension and {@link EXTDebugReport VK_EXT_debug_report} and {@link EXTDebugMarker VK_EXT_debug_marker} is that those extensions use {@code VkDebugReportObjectTypeEXT} to identify objects. This extension uses the core {@code VkObjectType} in place of {@code VkDebugReportObjectTypeEXT}. The primary reason for this move is that no future object type handle enumeration values will be added to {@code VkDebugReportObjectTypeEXT} since the creation of {@code VkObjectType}.
 
-        In addition, this extension combines the functionality of both {@link EXTDebugReport VK_EXT_debug_report} and {@link EXTDebugMarker VK_EXT_debug_marker} by allowing object name and debug markers (now called labels) to be returned to the application's callback function. This should assist in clarifying the details of a debug message including: what objects are involved and potentially which location within a VkQueue or VkCommandBuffer the message occurred.
+        In addition, this extension combines the functionality of both {@link EXTDebugReport VK_EXT_debug_report} and {@link EXTDebugMarker VK_EXT_debug_marker} by allowing object name and debug markers (now called labels) to be returned to the application's callback function. This should assist in clarifying the details of a debug message including: what objects are involved and potentially which location within a {@code VkQueue} or {@code VkCommandBuffer} the message occurred.
 
         <h5>Examples</h5>
         <b>Example 1</b>
@@ -387,7 +387,7 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         """,
 
         VkDevice("device", "the device that created the object."),
-        VkDebugUtilsObjectNameInfoEXT.const.p("pNameInfo", "a pointer to an instance of the ##VkDebugUtilsObjectNameInfoEXT structure specifying the parameters of the name to set on the object.")
+        VkDebugUtilsObjectNameInfoEXT.const.p("pNameInfo", "a pointer to a ##VkDebugUtilsObjectNameInfoEXT structure specifying parameters of the name to set on the object.")
     )
 
     VkResult(
@@ -431,7 +431,7 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         """,
 
         VkDevice("device", "the device that created the object."),
-        VkDebugUtilsObjectTagInfoEXT.const.p("pTagInfo", "a pointer to an instance of the ##VkDebugUtilsObjectTagInfoEXT structure specifying the parameters of the tag to attach to the object.")
+        VkDebugUtilsObjectTagInfoEXT.const.p("pTagInfo", "a pointer to a ##VkDebugUtilsObjectTagInfoEXT structure specifying parameters of the tag to attach to the object.")
     )
 
     void(
@@ -464,7 +464,7 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         """,
 
         VkQueue("queue", "the queue in which to start a debug label region."),
-        VkDebugUtilsLabelEXT.const.p("pLabelInfo", "a pointer to an instance of the ##VkDebugUtilsLabelEXT structure specifying the parameters of the label region to open.")
+        VkDebugUtilsLabelEXT.const.p("pLabelInfo", "a pointer to a ##VkDebugUtilsLabelEXT structure specifying parameters of the label region to open.")
     )
 
     void(
@@ -532,7 +532,7 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         """,
 
         VkQueue("queue", "the queue into which a debug label will be inserted."),
-        VkDebugUtilsLabelEXT.const.p("pLabelInfo", "a pointer to an instance of the ##VkDebugUtilsLabelEXT structure specifying the parameters of the label to insert.")
+        VkDebugUtilsLabelEXT.const.p("pLabelInfo", "a pointer to a ##VkDebugUtilsLabelEXT structure specifying parameters of the label to insert.")
     )
 
     void(
@@ -572,7 +572,7 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         """,
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command is recorded."),
-        VkDebugUtilsLabelEXT.const.p("pLabelInfo", "a pointer to an instance of the ##VkDebugUtilsLabelEXT structure specifying the parameters of the label region to open.")
+        VkDebugUtilsLabelEXT.const.p("pLabelInfo", "a pointer to a ##VkDebugUtilsLabelEXT structure specifying parameters of the label region to open.")
     )
 
     void(
@@ -701,9 +701,9 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         """,
 
         VkInstance("instance", "the instance the messenger will be used with."),
-        VkDebugUtilsMessengerCreateInfoEXT.const.p("pCreateInfo", "points to a ##VkDebugUtilsMessengerCreateInfoEXT structure which contains the callback pointer as well as defines the conditions under which this messenger will trigger the callback."),
+        VkDebugUtilsMessengerCreateInfoEXT.const.p("pCreateInfo", "a pointer to a ##VkDebugUtilsMessengerCreateInfoEXT structure containing the callback pointer, as well as defining conditions under which this messenger will trigger the callback."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkDebugUtilsMessengerEXT.p("pMessenger", "a pointer to record the {@code VkDebugUtilsMessengerEXT} object created.")
+        Check(1)..VkDebugUtilsMessengerEXT.p("pMessenger", "a pointer to a {@code VkDebugUtilsMessengerEXT} handle in which the created object is returned.")
     )
 
     void(

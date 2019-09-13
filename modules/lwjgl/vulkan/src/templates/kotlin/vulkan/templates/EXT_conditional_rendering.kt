@@ -154,7 +154,7 @@ val EXT_conditional_rendering = "EXTConditionalRendering".nativeClassVK("EXT_con
         """,
 
         VkCommandBuffer("commandBuffer", "the command buffer into which this command will be recorded."),
-        VkConditionalRenderingBeginInfoEXT.const.p("pConditionalRenderingBegin", "a pointer to an instance of the ##VkConditionalRenderingBeginInfoEXT structure specifying the parameters of conditional rendering.")
+        VkConditionalRenderingBeginInfoEXT.const.p("pConditionalRenderingBegin", "a pointer to a ##VkConditionalRenderingBeginInfoEXT structure specifying parameters of conditional rendering.")
     )
 
     void(

@@ -218,7 +218,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         """,
 
         VkDevice("device", "the device to create the swapchain for."),
-        VkSwapchainCreateInfoKHR.const.p("pCreateInfo", "a pointer to an instance of the ##VkSwapchainCreateInfoKHR structure specifying the parameters of the created swapchain."),
+        VkSwapchainCreateInfoKHR.const.p("pCreateInfo", "a pointer to a ##VkSwapchainCreateInfoKHR structure specifying the parameters of the created swapchain."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "the allocator used for host memory allocated for the swapchain object when there is no more specific allocator available (see <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a>)."),
         Check(1)..VkSwapchainKHR.p("pSwapchain", "a pointer to a {@code VkSwapchainKHR} handle in which the created swapchain object will be returned.")
     )
@@ -256,7 +256,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
             <li>If {@code swapchain} is not #NULL_HANDLE, {@code swapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
             <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid ##VkAllocationCallbacks structure</li>
-            <li>Both of {@code device}, and {@code swapchain} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
+            <li>Both of {@code device}, and {@code swapchain} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
         </ul>
 
         <h5>Host Synchronization</h5>
@@ -358,7 +358,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
             <li>{@code pImageIndex} <b>must</b> be a valid pointer to a {@code uint32_t} value</li>
             <li>If {@code semaphore} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
             <li>If {@code fence} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
-            <li>Both of {@code device}, and {@code swapchain} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
+            <li>Both of {@code device}, and {@code swapchain} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
         </ul>
 
         <h5>Host Synchronization</h5>
@@ -395,7 +395,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         uint64_t("timeout", "specifies how long the function waits, in nanoseconds, if no image is available."),
         VkSemaphore("semaphore", "#NULL_HANDLE or a semaphore to signal."),
         VkFence("fence", "#NULL_HANDLE or a fence to signal."),
-        Check(1)..uint32_t.p("pImageIndex", "a pointer to a {@code uint32_t} that is set to the index of the next image to use (i.e. an index into the array of images returned by {@code vkGetSwapchainImagesKHR}).")
+        Check(1)..uint32_t.p("pImageIndex", "a pointer to a {@code uint32_t} in which the index of the next image to use (i.e. an index into the array of images returned by {@code vkGetSwapchainImagesKHR}) is returned.")
     )
 
     VkResult(
@@ -479,7 +479,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         """,
 
         VkQueue("queue", "a queue that is capable of presentation to the target surface&#8217;s platform on the same device as the image&#8217;s swapchain."),
-        VkPresentInfoKHR.const.p("pPresentInfo", "a pointer to an instance of the ##VkPresentInfoKHR structure specifying the parameters of the presentation.")
+        VkPresentInfoKHR.const.p("pPresentInfo", "a pointer to a ##VkPresentInfoKHR structure specifying parameters of the presentation.")
     )
 
     DependsOn("Vulkan11")..VkResult(
@@ -522,7 +522,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         """,
 
         VkDevice("device", "the logical device."),
-        VkDeviceGroupPresentCapabilitiesKHR.p("pDeviceGroupPresentCapabilities", "a pointer to a structure of type ##VkDeviceGroupPresentCapabilitiesKHR that is filled with the logical device&#8217;s capabilities.")
+        VkDeviceGroupPresentCapabilitiesKHR.p("pDeviceGroupPresentCapabilities", "a pointer to a ##VkDeviceGroupPresentCapabilitiesKHR structure in which the device&#8217;s capabilities are returned.")
     )
 
     DependsOn("Vulkan11")..VkResult(
@@ -575,7 +575,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
 
         VkDevice("device", "the logical device."),
         VkSurfaceKHR("surface", "the surface."),
-        Check(1)..VkDeviceGroupPresentModeFlagsKHR.p("pModes", "a pointer to a value of type {@code VkDeviceGroupPresentModeFlagsKHR} that is filled with the supported device group present modes for the surface.")
+        Check(1)..VkDeviceGroupPresentModeFlagsKHR.p("pModes", "a pointer to a {@code VkDeviceGroupPresentModeFlagsKHR} in which the supported device group present modes for the surface are returned.")
     )
 
     DependsOn("Vulkan11")..VkResult(
@@ -693,7 +693,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         """,
 
         VkDevice("device", "the device associated with {@code swapchain}."),
-        VkAcquireNextImageInfoKHR.const.p("pAcquireInfo", "a pointer to a structure of type ##VkAcquireNextImageInfoKHR containing parameters of the acquire."),
+        VkAcquireNextImageInfoKHR.const.p("pAcquireInfo", "a pointer to a ##VkAcquireNextImageInfoKHR structure containing parameters of the acquire."),
         Check(1)..uint32_t.p("pImageIndex", "a pointer to a {@code uint32_t} that is set to the index of the next image to use.")
     )
 }

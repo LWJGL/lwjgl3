@@ -121,7 +121,7 @@ val KHR_external_fence_fd = "KHRExternalFenceFd".nativeClassVK("KHR_external_fen
         """,
 
         VkDevice("device", "the logical device that created the fence."),
-        VkImportFenceFdInfoKHR.const.p("pImportFenceFdInfo", "points to a ##VkImportFenceFdInfoKHR structure specifying the fence and import parameters.")
+        VkImportFenceFdInfoKHR.const.p("pImportFenceFdInfo", "a pointer to a ##VkImportFenceFdInfoKHR structure specifying the fence and import parameters.")
     )
 
     VkResult(
@@ -177,7 +177,7 @@ val KHR_external_fence_fd = "KHRExternalFenceFd".nativeClassVK("KHR_external_fen
         """,
 
         VkDevice("device", "the logical device that created the fence being exported."),
-        VkFenceGetFdInfoKHR.const.p("pGetFdInfo", "a pointer to an instance of the ##VkFenceGetFdInfoKHR structure containing parameters of the export operation."),
+        VkFenceGetFdInfoKHR.const.p("pGetFdInfo", "a pointer to a ##VkFenceGetFdInfoKHR structure containing parameters of the export operation."),
         Check(1)..int.p("pFd", "will return the file descriptor representing the fence payload.")
     )
 }

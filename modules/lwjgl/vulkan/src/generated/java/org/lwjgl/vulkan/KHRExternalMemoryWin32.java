@@ -138,7 +138,7 @@ public class KHRExternalMemoryWin32 {
      * <p>{@link VkMemoryGetWin32HandleInfoKHR}</p>
      *
      * @param device              the logical device that created the device memory being exported.
-     * @param pGetWin32HandleInfo a pointer to an instance of the {@link VkMemoryGetWin32HandleInfoKHR} structure containing parameters of the export operation.
+     * @param pGetWin32HandleInfo a pointer to a {@link VkMemoryGetWin32HandleInfoKHR} structure containing parameters of the export operation.
      * @param pHandle             will return the Windows handle representing the underlying resources of the device memory object.
      */
     @NativeType("VkResult")

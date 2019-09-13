@@ -51,7 +51,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code shadingRate} &ndash; a shading rate palette entry that identifies the fragment width and height for the combination of fragment area and per-pixel coverage sample count to control.</li>
  * <li>{@code sampleCount} &ndash; identifies the per-pixel coverage sample count for the combination of fragment area and coverage sample count to control.</li>
  * <li>{@code sampleLocationCount} &ndash; specifies the number of sample locations in the custom ordering.</li>
- * <li>{@code pSampleLocations} &ndash; a pointer to an array of {@link VkCoarseSampleOrderCustomNV} structures that specifies the location of each sample in the custom ordering.</li>
+ * <li>{@code pSampleLocations} &ndash; a pointer to an array of {@link VkCoarseSampleOrderCustomNV} structures specifying the location of each sample in the custom ordering.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

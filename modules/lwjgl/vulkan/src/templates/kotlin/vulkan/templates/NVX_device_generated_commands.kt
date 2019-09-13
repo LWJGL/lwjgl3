@@ -331,7 +331,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         """,
 
         VkCommandBuffer("commandBuffer", "the primary command buffer in which the generation process takes space."),
-        VkCmdProcessCommandsInfoNVX.const.p("pProcessCommandsInfo", "a pointer to an instance of the ##VkCmdProcessCommandsInfoNVX structure containing parameters affecting the processing of commands.")
+        VkCmdProcessCommandsInfoNVX.const.p("pProcessCommandsInfo", "a pointer to a ##VkCmdProcessCommandsInfoNVX structure containing parameters affecting the processing of commands.")
     )
 
     void(
@@ -425,9 +425,9 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         """,
 
         VkDevice("device", "the logical device that creates the indirect command layout."),
-        VkIndirectCommandsLayoutCreateInfoNVX.const.p("pCreateInfo", "a pointer to an instance of the ##VkIndirectCommandsLayoutCreateInfoNVX structure containing parameters affecting creation of the indirect command layout."),
+        VkIndirectCommandsLayoutCreateInfoNVX.const.p("pCreateInfo", "a pointer to a ##VkIndirectCommandsLayoutCreateInfoNVX structure containing parameters affecting creation of the indirect command layout."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkIndirectCommandsLayoutNVX.p("pIndirectCommandsLayout", "points to a {@code VkIndirectCommandsLayoutNVX} handle in which the resulting indirect command layout is returned.")
+        Check(1)..VkIndirectCommandsLayoutNVX.p("pIndirectCommandsLayout", "a pointer to a {@code VkIndirectCommandsLayoutNVX} handle in which the resulting indirect command layout is returned.")
     )
 
     void(
@@ -510,9 +510,9 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         """,
 
         VkDevice("device", "the logical device that creates the object table."),
-        VkObjectTableCreateInfoNVX.const.p("pCreateInfo", "a pointer to an instance of the ##VkObjectTableCreateInfoNVX structure containing parameters affecting creation of the table."),
+        VkObjectTableCreateInfoNVX.const.p("pCreateInfo", "a pointer to a ##VkObjectTableCreateInfoNVX structure containing parameters affecting creation of the table."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkObjectTableNVX.p("pObjectTable", "points to a {@code VkObjectTableNVX} handle in which the resulting object table is returned.")
+        Check(1)..VkObjectTableNVX.p("pObjectTable", "a pointer to a {@code VkObjectTableNVX} handle in which the resulting object table is returned.")
     )
 
     void(
@@ -617,7 +617,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         VkDevice("device", "the logical device that creates the object table."),
         VkObjectTableNVX("objectTable", "the table for which the resources are registered."),
         AutoSize("ppObjectTableEntries", "pObjectIndices")..uint32_t("objectCount", "the number of resources to register."),
-        VkObjectTableEntryNVX.const.p.const.p("ppObjectTableEntries", "provides an array for detailed binding informations, each array element is a pointer to a struct of type ##VkObjectTablePipelineEntryNVX, ##VkObjectTableDescriptorSetEntryNVX, ##VkObjectTableVertexBufferEntryNVX, ##VkObjectTableIndexBufferEntryNVX or ##VkObjectTablePushConstantEntryNVX (see below for details)."),
+        VkObjectTableEntryNVX.const.p.const.p("ppObjectTableEntries", "provides an array for detailed binding informations. Each array element is a pointer to a structure of type ##VkObjectTablePipelineEntryNVX, ##VkObjectTableDescriptorSetEntryNVX, ##VkObjectTableVertexBufferEntryNVX, ##VkObjectTableIndexBufferEntryNVX or ##VkObjectTablePushConstantEntryNVX (see below for details)."),
         uint32_t.const.p("pObjectIndices", "are the indices at which each resource is registered.")
     )
 
@@ -707,7 +707,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         """,
 
         VkPhysicalDevice("physicalDevice", "the handle to the physical device whose properties will be queried."),
-        VkDeviceGeneratedCommandsFeaturesNVX.p("pFeatures", "points to an instance of the ##VkDeviceGeneratedCommandsFeaturesNVX structure, that will be filled with returned information."),
-        VkDeviceGeneratedCommandsLimitsNVX.p("pLimits", "points to an instance of the ##VkDeviceGeneratedCommandsLimitsNVX structure, that will be filled with returned information.")
+        VkDeviceGeneratedCommandsFeaturesNVX.p("pFeatures", "a pointer to a ##VkDeviceGeneratedCommandsFeaturesNVX structure in which features are returned."),
+        VkDeviceGeneratedCommandsLimitsNVX.p("pLimits", "a pointer to a ##VkDeviceGeneratedCommandsLimitsNVX structure in which limitations are returned.")
     )
 }

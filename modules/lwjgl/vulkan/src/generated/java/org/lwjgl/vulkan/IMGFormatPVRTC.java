@@ -5,7 +5,36 @@
  */
 package org.lwjgl.vulkan;
 
-/** The IMG_format_pvrtc extension. */
+/**
+ * {@code VK_IMG_format_pvrtc} provides additional texture compression functionality specific to Imagination Technologies PowerVR Texture compression format (called PVRTC).
+ * 
+ * <dl>
+ * <dt><b>Name String</b></dt>
+ * <dd>{@code VK_IMG_format_pvrtc}</dd>
+ * <dt><b>Extension Type</b></dt>
+ * <dd>Device extension</dd>
+ * <dt><b>Registered Extension Number</b></dt>
+ * <dd>55</dd>
+ * <dt><b>Revision</b></dt>
+ * <dd>1</dd>
+ * <dt><b>Extension and Version Dependencies</b></dt>
+ * <dd><ul>
+ * <li>Requires Vulkan 1.0</li>
+ * </ul></dd>
+ * <dt><b>Contact</b></dt>
+ * <dd><ul>
+ * <li>Stuart Smith</li>
+ * </ul></dd>
+ * <dt><b>Last Modified Date</b></dt>
+ * <dd>2019-09-02</dd>
+ * <dt><b>IP Status</b></dt>
+ * <dd>Imagination Technologies Proprietary</dd>
+ * <dt><b>Contributors</b></dt>
+ * <dd><ul>
+ * <li>Stuart Smith, Imagination Technologies</li>
+ * </ul></dd>
+ * </dl>
+ */
 public final class IMGFormatPVRTC {
 
     /** The extension specification version. */

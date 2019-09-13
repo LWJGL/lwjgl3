@@ -36,11 +36,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code pUserData} &ndash; a value to be interpreted by the implementation of the callbacks. When any of the callbacks in {@link VkAllocationCallbacks} are called, the Vulkan implementation will pass this value as the first parameter to the callback. This value <b>can</b> vary each time an allocator is passed into a command, even when the same object takes an allocator in multiple commands.</li>
- * <li>{@code pfnAllocation} &ndash; a pointer to an application-defined memory allocation function of type {@link VkAllocationFunction}.</li>
- * <li>{@code pfnReallocation} &ndash; a pointer to an application-defined memory reallocation function of type {@link VkReallocationFunction}.</li>
- * <li>{@code pfnFree} &ndash; a pointer to an application-defined memory free function of type {@link VkFreeFunction}.</li>
- * <li>{@code pfnInternalAllocation} &ndash; a pointer to an application-defined function that is called by the implementation when the implementation makes internal allocations, and it is of type {@link VkInternalAllocationNotification}.</li>
- * <li>{@code pfnInternalFree} &ndash; a pointer to an application-defined function that is called by the implementation when the implementation frees internal allocations, and it is of type {@link VkInternalFreeNotification}.</li>
+ * <li>{@code pfnAllocation} &ndash; a {@link VkAllocationFunction} pointer to an application-defined memory allocation function.</li>
+ * <li>{@code pfnReallocation} &ndash; a {@link VkReallocationFunction} pointer to an application-defined memory reallocation function.</li>
+ * <li>{@code pfnFree} &ndash; a {@link VkFreeFunction} pointer to an application-defined memory free function.</li>
+ * <li>{@code pfnInternalAllocation} &ndash; a {@link VkInternalAllocationNotification} pointer to an application-defined function that is called by the implementation when the implementation makes internal allocations.</li>
+ * <li>{@code pfnInternalFree} &ndash; a {@link VkInternalFreeNotification} pointer to an application-defined function that is called by the implementation when the implementation frees internal allocations.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

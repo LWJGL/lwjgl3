@@ -277,7 +277,7 @@ public class KHRSwapchain {
      * <p>{@link VkAllocationCallbacks}, {@link VkSwapchainCreateInfoKHR}</p>
      *
      * @param device      the device to create the swapchain for.
-     * @param pCreateInfo a pointer to an instance of the {@link VkSwapchainCreateInfoKHR} structure specifying the parameters of the created swapchain.
+     * @param pCreateInfo a pointer to a {@link VkSwapchainCreateInfoKHR} structure specifying the parameters of the created swapchain.
      * @param pAllocator  the allocator used for host memory allocated for the swapchain object when there is no more specific allocator available (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a>).
      * @param pSwapchain  a pointer to a {@code VkSwapchainKHR} handle in which the created swapchain object will be returned.
      */
@@ -336,7 +336,7 @@ public class KHRSwapchain {
      * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
      * <li>If {@code swapchain} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code swapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
      * <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid {@link VkAllocationCallbacks} structure</li>
-     * <li>Both of {@code device}, and {@code swapchain} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
+     * <li>Both of {@code device}, and {@code swapchain} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
      * </ul>
      * 
      * <h5>Host Synchronization</h5>
@@ -477,7 +477,7 @@ public class KHRSwapchain {
      * <li>{@code pImageIndex} <b>must</b> be a valid pointer to a {@code uint32_t} value</li>
      * <li>If {@code semaphore} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
      * <li>If {@code fence} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
-     * <li>Both of {@code device}, and {@code swapchain} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
+     * <li>Both of {@code device}, and {@code swapchain} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
      * </ul>
      * 
      * <h5>Host Synchronization</h5>
@@ -514,7 +514,7 @@ public class KHRSwapchain {
      * @param timeout     specifies how long the function waits, in nanoseconds, if no image is available.
      * @param semaphore   {@link VK10#VK_NULL_HANDLE NULL_HANDLE} or a semaphore to signal.
      * @param fence       {@link VK10#VK_NULL_HANDLE NULL_HANDLE} or a fence to signal.
-     * @param pImageIndex a pointer to a {@code uint32_t} that is set to the index of the next image to use (i.e. an index into the array of images returned by {@code vkGetSwapchainImagesKHR}).
+     * @param pImageIndex a pointer to a {@code uint32_t} in which the index of the next image to use (i.e. an index into the array of images returned by {@code vkGetSwapchainImagesKHR}) is returned.
      */
     @NativeType("VkResult")
     public static int vkAcquireNextImageKHR(VkDevice device, @NativeType("VkSwapchainKHR") long swapchain, @NativeType("uint64_t") long timeout, @NativeType("VkSemaphore") long semaphore, @NativeType("VkFence") long fence, @NativeType("uint32_t *") IntBuffer pImageIndex) {
@@ -622,7 +622,7 @@ public class KHRSwapchain {
      * <p>{@link VkPresentInfoKHR}</p>
      *
      * @param queue        a queue that is capable of presentation to the target surface&#8217;s platform on the same device as the image&#8217;s swapchain.
-     * @param pPresentInfo a pointer to an instance of the {@link VkPresentInfoKHR} structure specifying the parameters of the presentation.
+     * @param pPresentInfo a pointer to a {@link VkPresentInfoKHR} structure specifying parameters of the presentation.
      */
     @NativeType("VkResult")
     public static int vkQueuePresentKHR(VkQueue queue, @NativeType("VkPresentInfoKHR const *") VkPresentInfoKHR pPresentInfo) {
@@ -680,7 +680,7 @@ public class KHRSwapchain {
      * <p>{@link VkDeviceGroupPresentCapabilitiesKHR}</p>
      *
      * @param device                          the logical device.
-     * @param pDeviceGroupPresentCapabilities a pointer to a structure of type {@link VkDeviceGroupPresentCapabilitiesKHR} that is filled with the logical device&#8217;s capabilities.
+     * @param pDeviceGroupPresentCapabilities a pointer to a {@link VkDeviceGroupPresentCapabilitiesKHR} structure in which the device&#8217;s capabilities are returned.
      */
     @NativeType("VkResult")
     public static int vkGetDeviceGroupPresentCapabilitiesKHR(VkDevice device, @NativeType("VkDeviceGroupPresentCapabilitiesKHR *") VkDeviceGroupPresentCapabilitiesKHR pDeviceGroupPresentCapabilities) {
@@ -749,7 +749,7 @@ public class KHRSwapchain {
      *
      * @param device  the logical device.
      * @param surface the surface.
-     * @param pModes  a pointer to a value of type {@code VkDeviceGroupPresentModeFlagsKHR} that is filled with the supported device group present modes for the surface.
+     * @param pModes  a pointer to a {@code VkDeviceGroupPresentModeFlagsKHR} in which the supported device group present modes for the surface are returned.
      */
     @NativeType("VkResult")
     public static int vkGetDeviceGroupSurfacePresentModesKHR(VkDevice device, @NativeType("VkSurfaceKHR") long surface, @NativeType("VkDeviceGroupPresentModeFlagsKHR *") IntBuffer pModes) {
@@ -911,7 +911,7 @@ public class KHRSwapchain {
      * <p>{@link VkAcquireNextImageInfoKHR}</p>
      *
      * @param device       the device associated with {@code swapchain}.
-     * @param pAcquireInfo a pointer to a structure of type {@link VkAcquireNextImageInfoKHR} containing parameters of the acquire.
+     * @param pAcquireInfo a pointer to a {@link VkAcquireNextImageInfoKHR} structure containing parameters of the acquire.
      * @param pImageIndex  a pointer to a {@code uint32_t} that is set to the index of the next image to use.
      */
     @NativeType("VkResult")

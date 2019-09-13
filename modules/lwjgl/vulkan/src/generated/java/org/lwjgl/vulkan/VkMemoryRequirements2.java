@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code memoryRequirements} &ndash; a structure of type {@link VkMemoryRequirements} describing the memory requirements of the resource.</li>
+ * <li>{@code memoryRequirements} &ndash; a {@link VkMemoryRequirements} structure describing the memory requirements of the resource.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

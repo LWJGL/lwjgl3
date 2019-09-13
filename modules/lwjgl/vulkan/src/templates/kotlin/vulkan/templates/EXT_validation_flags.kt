@@ -11,7 +11,10 @@ import vulkan.*
 val EXT_validation_flags = "EXTValidationFlags".nativeClassVK("EXT_validation_flags", type = "instance", postfix = EXT) {
     documentation =
         """
-        This extension provides the ##VkValidationFlagsEXT struct that can be included in the {@code pNext} chain of the ##VkInstanceCreateInfo structure passed as the {@code pCreateInfo} parameter of #CreateInstance(). The new struct contains an array of {@code VkValidationCheckEXT} values that will be disabled by the validation layers.
+        This extension provides the ##VkValidationFlagsEXT struct that can be included in the {@code pNext} chain of the ##VkInstanceCreateInfo structure passed as the {@code pCreateInfo} parameter of #CreateInstance(). The structure contains an array of {@code VkValidationCheckEXT} values that will be disabled by the validation layers.
+
+        <h5>Deprecation by VK_EXT_validation_features</h5>
+        Functionality in this extension is subsumed into the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#VK_EXT_validation_features">VK_EXT_validation_features</a> extension.
 
         <dl>
             <dt><b>Name String</b></dt>
@@ -24,11 +27,16 @@ val EXT_validation_flags = "EXTValidationFlags".nativeClassVK("EXT_validation_fl
             <dd>62</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
+            </ul></dd>
+
+            <dt><b>Deprecation state</b></dt>
+            <dd><ul>
+                <li><em>Deprecated</em> by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#VK_EXT_validation_features">VK_EXT_validation_features</a> extension</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -37,7 +45,7 @@ val EXT_validation_flags = "EXTValidationFlags".nativeClassVK("EXT_validation_fl
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
-            <dd>2016-09-06</dd>
+            <dd>2019-08-19</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -53,7 +61,7 @@ val EXT_validation_flags = "EXTValidationFlags".nativeClassVK("EXT_validation_fl
     IntConstant(
         "The extension specification version.",
 
-        "EXT_VALIDATION_FLAGS_SPEC_VERSION".."1"
+        "EXT_VALIDATION_FLAGS_SPEC_VERSION".."2"
     )
 
     StringConstant(

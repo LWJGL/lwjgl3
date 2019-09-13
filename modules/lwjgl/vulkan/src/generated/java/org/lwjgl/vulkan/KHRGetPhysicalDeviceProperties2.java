@@ -196,7 +196,7 @@ public class KHRGetPhysicalDeviceProperties2 {
      * See {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}.
      *
      * @param physicalDevice the handle to the physical device whose properties will be queried.
-     * @param pProperties    points to an instance of the {@link VkPhysicalDeviceProperties2} structure, that will be filled with returned information.
+     * @param pProperties    a pointer to a {@link VkPhysicalDeviceProperties2} structure in which properties are returned.
      */
     public static void vkGetPhysicalDeviceProperties2KHR(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceProperties2 *") VkPhysicalDeviceProperties2 pProperties) {
         nvkGetPhysicalDeviceProperties2KHR(physicalDevice, pProperties.address());
@@ -239,8 +239,8 @@ public class KHRGetPhysicalDeviceProperties2 {
      * See {@link VK11#vkGetPhysicalDeviceImageFormatProperties2 GetPhysicalDeviceImageFormatProperties2}.
      *
      * @param physicalDevice         the physical device from which to query the image capabilities.
-     * @param pImageFormatInfo       points to an instance of the {@link VkPhysicalDeviceImageFormatInfo2} structure, describing the parameters that would be consumed by {@link VK10#vkCreateImage CreateImage}.
-     * @param pImageFormatProperties points to an instance of the {@link VkImageFormatProperties2} structure in which capabilities are returned.
+     * @param pImageFormatInfo       a pointer to a {@link VkPhysicalDeviceImageFormatInfo2} structure describing the parameters that would be consumed by {@link VK10#vkCreateImage CreateImage}.
+     * @param pImageFormatProperties a pointer to a {@link VkImageFormatProperties2} structure in which capabilities are returned.
      */
     @NativeType("VkResult")
     public static int vkGetPhysicalDeviceImageFormatProperties2KHR(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceImageFormatInfo2 const *") VkPhysicalDeviceImageFormatInfo2 pImageFormatInfo, @NativeType("VkImageFormatProperties2 *") VkImageFormatProperties2 pImageFormatProperties) {
@@ -292,7 +292,7 @@ public class KHRGetPhysicalDeviceProperties2 {
      * See {@link VK11#vkGetPhysicalDeviceMemoryProperties2 GetPhysicalDeviceMemoryProperties2}.
      *
      * @param physicalDevice    the handle to the device to query.
-     * @param pMemoryProperties points to an instance of the {@link VkPhysicalDeviceMemoryProperties2} structure in which the properties are returned.
+     * @param pMemoryProperties a pointer to a {@link VkPhysicalDeviceMemoryProperties2} structure in which the properties are returned.
      */
     public static void vkGetPhysicalDeviceMemoryProperties2KHR(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceMemoryProperties2 *") VkPhysicalDeviceMemoryProperties2 pMemoryProperties) {
         nvkGetPhysicalDeviceMemoryProperties2KHR(physicalDevice, pMemoryProperties.address());
@@ -317,7 +317,7 @@ public class KHRGetPhysicalDeviceProperties2 {
      * See {@link VK11#vkGetPhysicalDeviceSparseImageFormatProperties2 GetPhysicalDeviceSparseImageFormatProperties2}.
      *
      * @param physicalDevice the physical device from which to query the sparse image capabilities.
-     * @param pFormatInfo    a pointer to a structure of type {@link VkPhysicalDeviceSparseImageFormatInfo2} containing input parameters to the command.
+     * @param pFormatInfo    a pointer to a {@link VkPhysicalDeviceSparseImageFormatInfo2} structure containing input parameters to the command.
      * @param pPropertyCount a pointer to an integer related to the number of sparse format properties available or queried, as described below.
      * @param pProperties    either {@code NULL} or a pointer to an array of {@link VkSparseImageFormatProperties2} structures.
      */

@@ -43,7 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code descriptorSetCount} &ndash; zero or the number of elements in {@code pDescriptorCounts}.</li>
- * <li>{@code pDescriptorCounts} &ndash; an array of descriptor counts, with each member specifying the number of descriptors in a variable descriptor count binding in the corresponding descriptor set being allocated.</li>
+ * <li>{@code pDescriptorCounts} &ndash; a pointer to an array of descriptor counts, with each member specifying the number of descriptors in a variable descriptor count binding in the corresponding descriptor set being allocated.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

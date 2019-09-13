@@ -312,9 +312,9 @@ public class KHRSamplerYcbcrConversion {
      * See {@link VK11#vkCreateSamplerYcbcrConversion CreateSamplerYcbcrConversion}.
      *
      * @param device           the logical device that creates the sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion.
-     * @param pCreateInfo      a pointer to an instance of the {@link VkSamplerYcbcrConversionCreateInfo} specifying the requested sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion.
+     * @param pCreateInfo      a pointer to a {@link VkSamplerYcbcrConversionCreateInfo} structure specifying the requested sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion.
      * @param pAllocator       controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pYcbcrConversion points to a {@code VkSamplerYcbcrConversion} handle in which the resulting sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion is returned.
+     * @param pYcbcrConversion a pointer to a {@code VkSamplerYcbcrConversion} handle in which the resulting sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion is returned.
      */
     @NativeType("VkResult")
     public static int vkCreateSamplerYcbcrConversionKHR(VkDevice device, @NativeType("VkSamplerYcbcrConversionCreateInfo const *") VkSamplerYcbcrConversionCreateInfo pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkSamplerYcbcrConversion *") LongBuffer pYcbcrConversion) {

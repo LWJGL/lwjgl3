@@ -145,7 +145,7 @@ val EXT_validation_cache = "EXTValidationCache".nativeClassVK("EXT_validation_ca
         """,
 
         VkDevice("device", "the logical device that creates the validation cache object."),
-        VkValidationCacheCreateInfoEXT.const.p("pCreateInfo", "a pointer to a ##VkValidationCacheCreateInfoEXT structure that contains the initial parameters for the validation cache object."),
+        VkValidationCacheCreateInfoEXT.const.p("pCreateInfo", "a pointer to a ##VkValidationCacheCreateInfoEXT structure containing the initial parameters for the validation cache object."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
         Check(1)..VkValidationCacheEXT.p("pValidationCache", "a pointer to a {@code VkValidationCacheEXT} handle in which the resulting validation cache object is returned.")
     )
@@ -250,7 +250,7 @@ val EXT_validation_cache = "EXTValidationCache".nativeClassVK("EXT_validation_ca
         VkDevice("device", "the logical device that owns the validation cache objects."),
         VkValidationCacheEXT("dstCache", "the handle of the validation cache to merge results into."),
         AutoSize("pSrcCaches")..uint32_t("srcCacheCount", "the length of the {@code pSrcCaches} array."),
-        VkValidationCacheEXT.const.p("pSrcCaches", "an array of validation cache handles, which will be merged into {@code dstCache}. The previous contents of {@code dstCache} are included after the merge.")
+        VkValidationCacheEXT.const.p("pSrcCaches", "a pointer to an array of validation cache handles, which will be merged into {@code dstCache}. The previous contents of {@code dstCache} are included after the merge.")
     )
 
     VkResult(

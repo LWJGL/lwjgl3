@@ -43,9 +43,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code waitSemaphoreValuesCount} &ndash; the number of semaphore wait values specified in {@code pWaitSemaphoreValues}.</li>
- * <li>{@code pWaitSemaphoreValues} &ndash; an array of length {@code waitSemaphoreValuesCount} containing values for the corresponding semaphores in {@link VkSubmitInfo}{@code ::pWaitSemaphores} to wait for.</li>
+ * <li>{@code pWaitSemaphoreValues} &ndash; a pointer to an array of {@code waitSemaphoreValuesCount} values for the corresponding semaphores in {@link VkSubmitInfo}{@code ::pWaitSemaphores} to wait for.</li>
  * <li>{@code signalSemaphoreValuesCount} &ndash; the number of semaphore signal values specified in {@code pSignalSemaphoreValues}.</li>
- * <li>{@code pSignalSemaphoreValues} &ndash; an array of length {@code signalSemaphoreValuesCount} containing values for the corresponding semaphores in {@link VkSubmitInfo}{@code ::pSignalSemaphores} to set when signaled.</li>
+ * <li>{@code pSignalSemaphoreValues} &ndash; a pointer to an array of {@code signalSemaphoreValuesCount} values for the corresponding semaphores in {@link VkSubmitInfo}{@code ::pSignalSemaphores} to set when signaled.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

@@ -202,9 +202,9 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
         """,
 
         VkDevice("device", "a logical device on which the event <b>may</b> occur."),
-        VkDeviceEventInfoEXT.const.p("pDeviceEventInfo", "a pointer to an instance of the ##VkDeviceEventInfoEXT structure describing the event of interest to the application."),
+        VkDeviceEventInfoEXT.const.p("pDeviceEventInfo", "a pointer to a ##VkDeviceEventInfoEXT structure describing the event of interest to the application."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkFence.p("pFence", "points to a handle in which the resulting fence object is returned.")
+        Check(1)..VkFence.p("pFence", "a pointer to a handle in which the resulting fence object is returned.")
     )
 
     VkResult(
@@ -246,9 +246,9 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
 
         VkDevice("device", "a logical device associated with {@code display}"),
         VkDisplayKHR("display", "the display on which the event <b>may</b> occur."),
-        VkDisplayEventInfoEXT.const.p("pDisplayEventInfo", "a pointer to an instance of the ##VkDisplayEventInfoEXT structure describing the event of interest to the application."),
+        VkDisplayEventInfoEXT.const.p("pDisplayEventInfo", "a pointer to a ##VkDisplayEventInfoEXT structure describing the event of interest to the application."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkFence.p("pFence", "points to a handle in which the resulting fence object is returned.")
+        Check(1)..VkFence.p("pFence", "a pointer to a handle in which the resulting fence object is returned.")
     )
 
     VkResult(

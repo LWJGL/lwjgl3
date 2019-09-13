@@ -35,7 +35,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code surfaceCapabilities} &ndash; a structure of type {@link VkSurfaceCapabilitiesKHR} describing the capabilities of the specified surface.</li>
+ * <li>{@code surfaceCapabilities} &ndash; a {@link VkSurfaceCapabilitiesKHR} structure describing the capabilities of the specified surface.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

@@ -54,7 +54,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code deviceMask} &ndash; the device mask for the render pass instance.</li>
  * <li>{@code deviceRenderAreaCount} &ndash; the number of elements in the {@code pDeviceRenderAreas} array.</li>
- * <li>{@code pDeviceRenderAreas} &ndash; an array of structures of type {@link VkRect2D} defining the render area for each physical device.</li>
+ * <li>{@code pDeviceRenderAreas} &ndash; a pointer to an array of {@link VkRect2D} structures defining the render area for each physical device.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

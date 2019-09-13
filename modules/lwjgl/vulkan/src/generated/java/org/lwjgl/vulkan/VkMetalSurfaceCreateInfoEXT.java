@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code flags} &ndash; reserved for future use.</li>
- * <li>{@code pLayer} &ndash; a reference to a {@code CAMetalLayer} object that represents a renderable surface.</li>
+ * <li>{@code pLayer} &ndash; a reference to a dlink:CAMetalLayer object representing a renderable surface.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

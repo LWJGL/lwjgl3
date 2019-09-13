@@ -220,7 +220,7 @@ public class EXTTransformFeedback {
      * @param firstBinding  the index of the first transform feedback binding whose state is updated by the command.
      * @param pBuffers      a pointer to an array of buffer handles.
      * @param pOffsets      a pointer to an array of buffer offsets.
-     * @param pSizes        an optional array of buffer sizes, which specifies the maximum number of bytes to capture to the corresponding transform feedback buffer. If {@code pSizes} is {@code NULL}, or the value of the {@code pSizes} array element is {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, then the maximum bytes captured will be the size of the corresponding buffer minus the buffer offset.
+     * @param pSizes        an optional array of buffer sizes, specifying the maximum number of bytes to capture to the corresponding transform feedback buffer. If {@code pSizes} is {@code NULL}, or the value of the {@code pSizes} array element is {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, then the maximum bytes captured will be the size of the corresponding buffer minus the buffer offset.
      */
     public static void vkCmdBindTransformFeedbackBuffersEXT(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int firstBinding, @NativeType("VkBuffer const *") LongBuffer pBuffers, @NativeType("VkDeviceSize const *") LongBuffer pOffsets, @Nullable @NativeType("VkDeviceSize const *") LongBuffer pSizes) {
         if (CHECKS) {
@@ -286,7 +286,7 @@ public class EXTTransformFeedback {
      * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
      * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
      * <li>This command <b>must</b> only be called inside of a render pass instance</li>
-     * <li>Both of {@code commandBuffer}, and the elements of {@code pCounterBuffers} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+     * <li>Both of {@code commandBuffer}, and the elements of {@code pCounterBuffers} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
      * </ul>
      * 
      * <h5>Host Synchronization</h5>
@@ -366,7 +366,7 @@ public class EXTTransformFeedback {
      * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
      * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
      * <li>This command <b>must</b> only be called inside of a render pass instance</li>
-     * <li>Both of {@code commandBuffer}, and the elements of {@code pCounterBuffers} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+     * <li>Both of {@code commandBuffer}, and the elements of {@code pCounterBuffers} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
      * </ul>
      * 
      * <h5>Host Synchronization</h5>

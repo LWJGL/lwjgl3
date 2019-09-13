@@ -53,7 +53,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code drmFormatModifier} &ndash; the <em>Linux DRM format modifier</em> with which the image will be created.</li>
  * <li>{@code drmFormatModifierPlaneCount} &ndash; the number of <em>memory planes</em> in the image (as reported by {@link VkDrmFormatModifierPropertiesEXT}) as well as the length of the {@code pPlaneLayouts} array.</li>
- * <li>{@code pPlaneLayouts} &ndash; an array of {@link VkSubresourceLayout} structures that describe the image&#8217;s <em>memory planes</em>.</li>
+ * <li>{@code pPlaneLayouts} &ndash; a pointer to an array of {@link VkSubresourceLayout} structures describing the image&#8217;s <em>memory planes</em>.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

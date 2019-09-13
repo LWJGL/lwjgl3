@@ -98,7 +98,7 @@ val EXT_hdr_metadata = "EXTHdrMetadata".nativeClassVK("EXT_hdr_metadata", type =
 
         VkDevice("device", "the logical device where the swapchain(s) were created."),
         AutoSize("pSwapchains", "pMetadata")..uint32_t("swapchainCount", "the number of swapchains included in {@code pSwapchains}."),
-        VkSwapchainKHR.const.p("pSwapchains", "a pointer to the array of {@code swapchainCount} {@code VkSwapchainKHR} handles."),
-        VkHdrMetadataEXT.const.p("pMetadata", "a pointer to the array of {@code swapchainCount} ##VkHdrMetadataEXT structures.")
+        VkSwapchainKHR.const.p("pSwapchains", "a pointer to an array of {@code swapchainCount} {@code VkSwapchainKHR} handles."),
+        VkHdrMetadataEXT.const.p("pMetadata", "a pointer to an array of {@code swapchainCount} ##VkHdrMetadataEXT structures.")
     )
 }

@@ -130,6 +130,6 @@ val EXT_buffer_device_address = "EXTBufferDeviceAddress".nativeClassVK("EXT_buff
         """,
 
         VkDevice("device", "the logical device that the buffer was created on."),
-        VkBufferDeviceAddressInfoEXT.const.p("pInfo", "a pointer to an instance of the ##VkBufferDeviceAddressInfoEXT structure specifying the buffer to retrieve an address for.")
+        VkBufferDeviceAddressInfoEXT.const.p("pInfo", "a pointer to a ##VkBufferDeviceAddressInfoEXT structure specifying the buffer to retrieve an address for.")
     )
 }

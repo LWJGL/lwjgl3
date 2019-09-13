@@ -120,7 +120,7 @@ val KHR_external_memory_capabilities = "KHRExternalMemoryCapabilities".nativeCla
         "See #GetPhysicalDeviceExternalBufferProperties().",
 
         VkPhysicalDevice("physicalDevice", "the physical device from which to query the buffer capabilities."),
-        VkPhysicalDeviceExternalBufferInfo.const.p("pExternalBufferInfo", "points to an instance of the ##VkPhysicalDeviceExternalBufferInfo structure, describing the parameters that would be consumed by #CreateBuffer()."),
-        VkExternalBufferProperties.p("pExternalBufferProperties", "points to an instance of the ##VkExternalBufferProperties structure in which capabilities are returned.")
+        VkPhysicalDeviceExternalBufferInfo.const.p("pExternalBufferInfo", "a pointer to a ##VkPhysicalDeviceExternalBufferInfo structure describing the parameters that would be consumed by #CreateBuffer()."),
+        VkExternalBufferProperties.p("pExternalBufferProperties", "a pointer to a ##VkExternalBufferProperties structure in which capabilities are returned.")
     )
 }

@@ -32,8 +32,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code type} &ndash; an {@code VkPerformanceValueTypeINTEL} value specifying the type of the returned data.</li>
- * <li>{@code data} &ndash; an {@link VkPerformanceValueDataINTEL} union specifying the value of the returned data.</li>
+ * <li>{@code type} &ndash; a {@code VkPerformanceValueTypeINTEL} value specifying the type of the returned data.</li>
+ * <li>{@code data} &ndash; a {@link VkPerformanceValueDataINTEL} union specifying the value of the returned data.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

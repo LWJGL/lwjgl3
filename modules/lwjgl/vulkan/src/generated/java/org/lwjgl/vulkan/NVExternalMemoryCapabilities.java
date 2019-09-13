@@ -188,7 +188,7 @@ public class NVExternalMemoryCapabilities {
      * @param usage                          the intended usage of the image, corresponding to {@link VkImageCreateInfo}{@code ::usage}.
      * @param flags                          a bitmask describing additional parameters of the image, corresponding to {@link VkImageCreateInfo}{@code ::flags}.
      * @param externalHandleType             either one of the bits from {@code VkExternalMemoryHandleTypeFlagBitsNV}, or 0.
-     * @param pExternalImageFormatProperties points to an instance of the {@link VkExternalImageFormatPropertiesNV} structure in which capabilities are returned.
+     * @param pExternalImageFormatProperties a pointer to a {@link VkExternalImageFormatPropertiesNV} structure in which capabilities are returned.
      */
     @NativeType("VkResult")
     public static int vkGetPhysicalDeviceExternalImageFormatPropertiesNV(VkPhysicalDevice physicalDevice, @NativeType("VkFormat") int format, @NativeType("VkImageType") int type, @NativeType("VkImageTiling") int tiling, @NativeType("VkImageUsageFlags") int usage, @NativeType("VkImageCreateFlags") int flags, @NativeType("VkExternalMemoryHandleTypeFlagsNV") int externalHandleType, @NativeType("VkExternalImageFormatPropertiesNV *") VkExternalImageFormatPropertiesNV pExternalImageFormatProperties) {

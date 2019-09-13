@@ -362,7 +362,7 @@ public class KHRGetDisplayProperties2 {
      * <p>{@link VkDisplayPlaneCapabilities2KHR}, {@link VkDisplayPlaneInfo2KHR}</p>
      *
      * @param physicalDevice    the physical device associated with {@code pDisplayPlaneInfo}.
-     * @param pDisplayPlaneInfo a pointer to an instance of the {@link VkDisplayPlaneInfo2KHR} structure describing the plane and mode.
+     * @param pDisplayPlaneInfo a pointer to a {@link VkDisplayPlaneInfo2KHR} structure describing the plane and mode.
      * @param pCapabilities     a pointer to a {@link VkDisplayPlaneCapabilities2KHR} structure in which the capabilities are returned.
      */
     @NativeType("VkResult")

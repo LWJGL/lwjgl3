@@ -71,13 +71,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code flags} &ndash; reserved for future use.</li>
  * <li>{@code attachmentCount} &ndash; the number of attachments used by this render pass.</li>
- * <li>{@code pAttachments} &ndash; points to an array of {@code attachmentCount} {@link VkAttachmentDescription2KHR} structures describing the attachments used by the render pass.</li>
+ * <li>{@code pAttachments} &ndash; a pointer to an array of {@code attachmentCount} {@link VkAttachmentDescription2KHR} structures describing the attachments used by the render pass.</li>
  * <li>{@code subpassCount} &ndash; the number of subpasses to create.</li>
- * <li>{@code pSubpasses} &ndash; points to an array of {@code subpassCount} {@link VkSubpassDescription2KHR} structures describing each subpass.</li>
+ * <li>{@code pSubpasses} &ndash; a pointer to an array of {@code subpassCount} {@link VkSubpassDescription2KHR} structures describing each subpass.</li>
  * <li>{@code dependencyCount} &ndash; the number of dependencies between pairs of subpasses.</li>
- * <li>{@code pDependencies} &ndash; points to an array of {@code dependencyCount} {@link VkSubpassDependency2KHR} structures describing dependencies between pairs of subpasses.</li>
+ * <li>{@code pDependencies} &ndash; a pointer to an array of {@code dependencyCount} {@link VkSubpassDependency2KHR} structures describing dependencies between pairs of subpasses.</li>
  * <li>{@code correlatedViewMaskCount} &ndash; the number of correlation masks.</li>
- * <li>{@code pCorrelatedViewMasks} &ndash; an array of view masks indicating sets of views that <b>may</b> be more efficient to render concurrently.</li>
+ * <li>{@code pCorrelatedViewMasks} &ndash; a pointer to an array of view masks indicating sets of views that <b>may</b> be more efficient to render concurrently.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

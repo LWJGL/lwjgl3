@@ -73,13 +73,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code pipelineBindPoint} &ndash; a {@code VkPipelineBindPoint} value specifying the pipeline type supported for this subpass.</li>
  * <li>{@code viewMask} &ndash; a bitfield of view indices describing which views rendering is broadcast to in this subpass, when multiview is enabled.</li>
  * <li>{@code inputAttachmentCount} &ndash; the number of input attachments.</li>
- * <li>{@code pInputAttachments} &ndash; an array of {@link VkAttachmentReference2KHR} structures defining the input attachments for this subpass and their layouts.</li>
+ * <li>{@code pInputAttachments} &ndash; a pointer to an array of {@link VkAttachmentReference2KHR} structures defining the input attachments for this subpass and their layouts.</li>
  * <li>{@code colorAttachmentCount} &ndash; the number of color attachments.</li>
- * <li>{@code pColorAttachments} &ndash; an array of {@link VkAttachmentReference2KHR} structures defining the color attachments for this subpass and their layouts.</li>
+ * <li>{@code pColorAttachments} &ndash; a pointer to an array of {@link VkAttachmentReference2KHR} structures defining the color attachments for this subpass and their layouts.</li>
  * <li>{@code pResolveAttachments} &ndash; an optional array of {@code colorAttachmentCount} {@link VkAttachmentReference2KHR} structures defining the resolve attachments for this subpass and their layouts.</li>
- * <li>{@code pDepthStencilAttachment} &ndash; a pointer to a {@link VkAttachmentReference2KHR} specifying the depth/stencil attachment for this subpass and its layout.</li>
+ * <li>{@code pDepthStencilAttachment} &ndash; a pointer to a {@link VkAttachmentReference2KHR} structure specifying the depth/stencil attachment for this subpass and its layout.</li>
  * <li>{@code preserveAttachmentCount} &ndash; the number of preserved attachments.</li>
- * <li>{@code pPreserveAttachments} &ndash; an array of {@code preserveAttachmentCount} render pass attachment indices identifying attachments that are not used by this subpass, but whose contents <b>must</b> be preserved throughout the subpass.</li>
+ * <li>{@code pPreserveAttachments} &ndash; a pointer to an array of {@code preserveAttachmentCount} render pass attachment indices identifying attachments that are not used by this subpass, but whose contents <b>must</b> be preserved throughout the subpass.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

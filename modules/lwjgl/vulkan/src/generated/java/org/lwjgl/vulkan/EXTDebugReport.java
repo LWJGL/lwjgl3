@@ -338,9 +338,9 @@ public class EXTDebugReport {
      * <p>{@link VkAllocationCallbacks}, {@link VkDebugReportCallbackCreateInfoEXT}</p>
      *
      * @param instance    the instance the callback will be logged on.
-     * @param pCreateInfo points to a {@link VkDebugReportCallbackCreateInfoEXT} structure which defines the conditions under which this callback will be called.
+     * @param pCreateInfo a pointer to a {@link VkDebugReportCallbackCreateInfoEXT} structure defining the conditions under which this callback will be called.
      * @param pAllocator  controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pCallback   a pointer to record the {@code VkDebugReportCallbackEXT} object created.
+     * @param pCallback   a pointer to a {@code VkDebugReportCallbackEXT} handle in which the created object is returned.
      */
     @NativeType("VkResult")
     public static int vkCreateDebugReportCallbackEXT(VkInstance instance, @NativeType("VkDebugReportCallbackCreateInfoEXT const *") VkDebugReportCallbackCreateInfoEXT pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkDebugReportCallbackEXT *") LongBuffer pCallback) {

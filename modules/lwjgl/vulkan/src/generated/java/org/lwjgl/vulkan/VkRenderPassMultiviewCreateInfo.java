@@ -57,12 +57,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code subpassCount} &ndash; zero or is the number of subpasses in the render pass.</li>
- * <li>{@code pViewMasks} &ndash; points to an array of {@code subpassCount} number of view masks, where each mask is a bitfield of view indices describing which views rendering is broadcast to in each subpass, when multiview is enabled. If {@code subpassCount} is zero, each view mask is treated as zero.</li>
+ * <li>{@code subpassCount} &ndash; zero or the number of subpasses in the render pass.</li>
+ * <li>{@code pViewMasks} &ndash; a pointer to an array of {@code subpassCount} view masks, where each mask is a bitfield of view indices describing which views rendering is broadcast to in each subpass, when multiview is enabled. If {@code subpassCount} is zero, each view mask is treated as zero.</li>
  * <li>{@code dependencyCount} &ndash; zero or the number of dependencies in the render pass.</li>
- * <li>{@code pViewOffsets} &ndash; points to an array of {@code dependencyCount} view offsets, one for each dependency. If {@code dependencyCount} is zero, each dependency&#8217;s view offset is treated as zero. Each view offset controls which views in the source subpass the views in the destination subpass depend on.</li>
- * <li>{@code correlationMaskCount} &ndash; zero or a number of correlation masks.</li>
- * <li>{@code pCorrelationMasks} &ndash; an array of view masks indicating sets of views that <b>may</b> be more efficient to render concurrently.</li>
+ * <li>{@code pViewOffsets} &ndash; a pointer to an array of {@code dependencyCount} view offsets, one for each dependency. If {@code dependencyCount} is zero, each dependency&#8217;s view offset is treated as zero. Each view offset controls which views in the source subpass the views in the destination subpass depend on.</li>
+ * <li>{@code correlationMaskCount} &ndash; zero or the number of correlation masks.</li>
+ * <li>{@code pCorrelationMasks} &ndash; a pointer to an array of {@code correlationMaskCount} view masks indicating sets of views that <b>may</b> be more efficient to render concurrently.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

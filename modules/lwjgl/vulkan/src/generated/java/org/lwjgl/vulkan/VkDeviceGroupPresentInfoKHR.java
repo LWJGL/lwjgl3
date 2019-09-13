@@ -57,7 +57,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code swapchainCount} &ndash; zero or the number of elements in {@code pDeviceMasks}.</li>
- * <li>{@code pDeviceMasks} &ndash; an array of device masks, one for each element of {@link VkPresentInfoKHR}::pSwapchains.</li>
+ * <li>{@code pDeviceMasks} &ndash; a pointer to an array of device masks, one for each element of {@link VkPresentInfoKHR}::pSwapchains.</li>
  * <li>{@code mode} &ndash; the device group present mode that will be used for this present.</li>
  * </ul>
  * 

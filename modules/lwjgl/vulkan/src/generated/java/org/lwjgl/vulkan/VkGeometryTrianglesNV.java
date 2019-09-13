@@ -48,7 +48,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code indexData} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code indexData} <b>must</b> be a valid {@code VkBuffer} handle</li>
  * <li>{@code indexType} <b>must</b> be a valid {@code VkIndexType} value</li>
  * <li>If {@code transformData} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code transformData} <b>must</b> be a valid {@code VkBuffer} handle</li>
- * <li>Each of {@code indexData}, {@code transformData}, and {@code vertexData} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+ * <li>Each of {@code indexData}, {@code transformData}, and {@code vertexData} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
  * </ul>
  * 
  * <h5>See Also</h5>

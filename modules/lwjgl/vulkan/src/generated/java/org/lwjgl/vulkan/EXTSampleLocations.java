@@ -207,7 +207,7 @@ public class EXTSampleLocations {
      *
      * @param physicalDevice         the physical device from which to query the additional multisampling capabilities.
      * @param samples                the sample count to query the capabilities for.
-     * @param pMultisampleProperties a pointer to a structure of type {@link VkMultisamplePropertiesEXT}, in which information about the additional multisampling capabilities specific to the sample count is returned.
+     * @param pMultisampleProperties a pointer to a {@link VkMultisamplePropertiesEXT} structure in which information about the additional multisampling capabilities specific to the sample count is returned.
      */
     public static void vkGetPhysicalDeviceMultisamplePropertiesEXT(VkPhysicalDevice physicalDevice, @NativeType("VkSampleCountFlagBits") int samples, @NativeType("VkMultisamplePropertiesEXT *") VkMultisamplePropertiesEXT pMultisampleProperties) {
         nvkGetPhysicalDeviceMultisamplePropertiesEXT(physicalDevice, samples, pMultisampleProperties.address());

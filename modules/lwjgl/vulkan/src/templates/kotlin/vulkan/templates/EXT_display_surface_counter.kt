@@ -135,6 +135,6 @@ val EXT_display_surface_counter = "EXTDisplaySurfaceCounter".nativeClassVK("EXT_
 
         VkPhysicalDevice("physicalDevice", "the physical device that will be associated with the swapchain to be created, as described for #CreateSwapchainKHR()."),
         VkSurfaceKHR("surface", "the surface that will be associated with the swapchain."),
-        VkSurfaceCapabilities2EXT.p("pSurfaceCapabilities", "a pointer to an instance of the ##VkSurfaceCapabilities2EXT structure in which the capabilities are returned.")
+        VkSurfaceCapabilities2EXT.p("pSurfaceCapabilities", "a pointer to a ##VkSurfaceCapabilities2EXT structure in which the capabilities are returned.")
     )
 }

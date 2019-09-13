@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>257</dd>
  * <dt><b>Revision</b></dt>
- * <dd>0</dd>
+ * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -53,7 +53,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class EXTHeadlessSurface {
 
     /** The extension specification version. */
-    public static final int VK_EXT_HEADLESS_SURFACE_SPEC_VERSION = 0;
+    public static final int VK_EXT_HEADLESS_SURFACE_SPEC_VERSION = 1;
 
     /** The extension name. */
     public static final String VK_EXT_HEADLESS_SURFACE_EXTENSION_NAME = "VK_EXT_headless_surface";
@@ -125,9 +125,9 @@ public class EXTHeadlessSurface {
      * <p>{@link VkAllocationCallbacks}, {@link VkHeadlessSurfaceCreateInfoEXT}</p>
      *
      * @param instance    the instance to associate the surface with.
-     * @param pCreateInfo a pointer to an instance of the {@link VkHeadlessSurfaceCreateInfoEXT} structure containing parameters affecting the creation of the surface object.
+     * @param pCreateInfo a pointer to a {@link VkHeadlessSurfaceCreateInfoEXT} structure containing parameters affecting the creation of the surface object.
      * @param pAllocator  the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a>).
-     * @param pSurface    points to a {@code VkSurfaceKHR} handle in which the created surface object is returned.
+     * @param pSurface    a pointer to a {@code VkSurfaceKHR} handle in which the created surface object is returned.
      */
     @NativeType("VkResult")
     public static int vkCreateHeadlessSurfaceEXT(VkInstance instance, @NativeType("VkHeadlessSurfaceCreateInfoEXT const *") VkHeadlessSurfaceCreateInfoEXT pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkSurfaceKHR *") LongBuffer pSurface) {

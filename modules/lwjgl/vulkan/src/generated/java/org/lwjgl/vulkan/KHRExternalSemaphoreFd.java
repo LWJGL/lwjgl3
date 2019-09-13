@@ -141,7 +141,7 @@ public class KHRExternalSemaphoreFd {
      * <p>{@link VkImportSemaphoreFdInfoKHR}</p>
      *
      * @param device                 the logical device that created the semaphore.
-     * @param pImportSemaphoreFdInfo points to a {@link VkImportSemaphoreFdInfoKHR} structure specifying the semaphore and import parameters.
+     * @param pImportSemaphoreFdInfo a pointer to a {@link VkImportSemaphoreFdInfoKHR} structure specifying the semaphore and import parameters.
      */
     @NativeType("VkResult")
     public static int vkImportSemaphoreFdKHR(VkDevice device, @NativeType("VkImportSemaphoreFdInfoKHR const *") VkImportSemaphoreFdInfoKHR pImportSemaphoreFdInfo) {
@@ -212,7 +212,7 @@ public class KHRExternalSemaphoreFd {
      * <p>{@link VkSemaphoreGetFdInfoKHR}</p>
      *
      * @param device     the logical device that created the semaphore being exported.
-     * @param pGetFdInfo a pointer to an instance of the {@link VkSemaphoreGetFdInfoKHR} structure containing parameters of the export operation.
+     * @param pGetFdInfo a pointer to a {@link VkSemaphoreGetFdInfoKHR} structure containing parameters of the export operation.
      * @param pFd        will return the file descriptor representing the semaphore payload.
      */
     @NativeType("VkResult")

@@ -48,7 +48,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code descriptorPool} &ndash; the pool which the sets will be allocated from.</li>
  * <li>{@code descriptorSetCount} &ndash; determines the number of descriptor sets to be allocated from the pool.</li>
- * <li>{@code pSetLayouts} &ndash; an array of descriptor set layouts, with each member specifying how the corresponding descriptor set is allocated.</li>
+ * <li>{@code pSetLayouts} &ndash; a pointer to an array of descriptor set layouts, with each member specifying how the corresponding descriptor set is allocated.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

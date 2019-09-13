@@ -110,7 +110,7 @@ public class KHRBindMemory2 {
      * See {@link VK11#vkBindBufferMemory2 BindBufferMemory2}.
      *
      * @param device     the logical device that owns the buffers and memory.
-     * @param pBindInfos a pointer to an array of structures of type {@link VkBindBufferMemoryInfo}, describing buffers and memory to bind.
+     * @param pBindInfos a pointer to an array of {@code bindInfoCount} {@link VkBindBufferMemoryInfo} structures describing buffers and memory to bind.
      */
     @NativeType("VkResult")
     public static int vkBindBufferMemory2KHR(VkDevice device, @NativeType("VkBindBufferMemoryInfo const *") VkBindBufferMemoryInfo.Buffer pBindInfos) {
@@ -136,7 +136,7 @@ public class KHRBindMemory2 {
      * See {@link VK11#vkBindImageMemory2 BindImageMemory2}.
      *
      * @param device     the logical device that owns the images and memory.
-     * @param pBindInfos a pointer to an array of structures of type {@link VkBindImageMemoryInfo}, describing images and memory to bind.
+     * @param pBindInfos a pointer to an array of {@link VkBindImageMemoryInfo} structures, describing images and memory to bind.
      */
     @NativeType("VkResult")
     public static int vkBindImageMemory2KHR(VkDevice device, @NativeType("VkBindImageMemoryInfo const *") VkBindImageMemoryInfo.Buffer pBindInfos) {

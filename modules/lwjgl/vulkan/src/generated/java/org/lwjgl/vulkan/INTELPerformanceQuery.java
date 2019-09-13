@@ -369,7 +369,7 @@ public class INTELPerformanceQuery {
      * <p>{@link VkInitializePerformanceApiInfoINTEL}</p>
      *
      * @param device          the logical device used for the queries.
-     * @param pInitializeInfo a pointer to the initialization parameters.
+     * @param pInitializeInfo a pointer to a {@link VkInitializePerformanceApiInfoINTEL} structure specifying initialization parameters.
      */
     @NativeType("VkResult")
     public static int vkInitializePerformanceApiINTEL(VkDevice device, @NativeType("VkInitializePerformanceApiInfoINTEL const *") VkInitializePerformanceApiInfoINTEL pInitializeInfo) {
@@ -611,7 +611,7 @@ public class INTELPerformanceQuery {
      * <p>{@link VkPerformanceOverrideInfoINTEL}</p>
      *
      * @param commandBuffer the command buffer where the override takes place.
-     * @param pOverrideInfo a pointer to a {@link VkPerformanceOverrideInfoINTEL} selecting the parameter to override.
+     * @param pOverrideInfo a pointer to a {@link VkPerformanceOverrideInfoINTEL} structure selecting the parameter to override.
      */
     @NativeType("VkResult")
     public static int vkCmdSetPerformanceOverrideINTEL(VkCommandBuffer commandBuffer, @NativeType("VkPerformanceOverrideInfoINTEL const *") VkPerformanceOverrideInfoINTEL pOverrideInfo) {
@@ -669,7 +669,7 @@ public class INTELPerformanceQuery {
      * <p>{@link VkPerformanceConfigurationAcquireInfoINTEL}</p>
      *
      * @param device         the logical device that the performance query commands will be submitted to.
-     * @param pAcquireInfo   a pointer to {@link VkPerformanceConfigurationAcquireInfoINTEL}.
+     * @param pAcquireInfo   a pointer to a {@link VkPerformanceConfigurationAcquireInfoINTEL} structure, specifying the performance configuration to acquire.
      * @param pConfiguration a pointer to a {@code VkPerformanceConfigurationINTEL} handle in which the resulting configuration object is returned.
      */
     @NativeType("VkResult")
@@ -841,7 +841,7 @@ public class INTELPerformanceQuery {
      *
      * @param device    the logical device to query.
      * @param parameter the parameter to query.
-     * @param pValue    points to an instance of the {@link VkPerformanceValueINTEL} structure in which the type and value of the parameter are returned.
+     * @param pValue    a pointer to a {@link VkPerformanceValueINTEL} structure in which the type and value of the parameter are returned.
      */
     @NativeType("VkResult")
     public static int vkGetPerformanceParameterINTEL(VkDevice device, @NativeType("VkPerformanceParameterTypeINTEL") int parameter, @NativeType("VkPerformanceValueINTEL *") VkPerformanceValueINTEL pValue) {

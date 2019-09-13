@@ -52,9 +52,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code objectCount} &ndash; the number of entry configurations that the object table supports.</li>
- * <li>{@code pObjectEntryTypes} &ndash; an array of {@code VkObjectEntryTypeNVX} values providing the entry type of a given configuration.</li>
- * <li>{@code pObjectEntryCounts} &ndash; an array of counts of how many objects can be registered in the table.</li>
- * <li>{@code pObjectEntryUsageFlags} &ndash; an array of bitmasks of {@code VkObjectEntryUsageFlagBitsNVX} specifying the binding usage of the entry.</li>
+ * <li>{@code pObjectEntryTypes} &ndash; a pointer to an array of {@code VkObjectEntryTypeNVX} values providing the entry type of a given configuration.</li>
+ * <li>{@code pObjectEntryCounts} &ndash; a pointer to an array of counts of how many objects can be registered in the table.</li>
+ * <li>{@code pObjectEntryUsageFlags} &ndash; a pointer to an array of bitmasks of {@code VkObjectEntryUsageFlagBitsNVX} specifying the binding usage of the entry.</li>
  * <li>{@code maxUniformBuffersPerDescriptor} &ndash; the maximum number of {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER DESCRIPTOR_TYPE_UNIFORM_BUFFER} or {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC} used by any single registered {@code VkDescriptorSet} in this table.</li>
  * <li>{@code maxStorageBuffersPerDescriptor} &ndash; the maximum number of {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER DESCRIPTOR_TYPE_STORAGE_BUFFER} or {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC} used by any single registered {@code VkDescriptorSet} in this table.</li>
  * <li>{@code maxStorageImagesPerDescriptor} &ndash; the maximum number of {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE} or {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER} used by any single registered {@code VkDescriptorSet} in this table.</li>

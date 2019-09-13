@@ -140,7 +140,7 @@ public class EXTBufferDeviceAddress {
      * <p>{@link VkBufferDeviceAddressInfoEXT}</p>
      *
      * @param device the logical device that the buffer was created on.
-     * @param pInfo  a pointer to an instance of the {@link VkBufferDeviceAddressInfoEXT} structure specifying the buffer to retrieve an address for.
+     * @param pInfo  a pointer to a {@link VkBufferDeviceAddressInfoEXT} structure specifying the buffer to retrieve an address for.
      */
     @NativeType("VkDeviceAddress")
     public static long vkGetBufferDeviceAddressEXT(VkDevice device, @NativeType("VkBufferDeviceAddressInfoEXT const *") VkBufferDeviceAddressInfoEXT pInfo) {

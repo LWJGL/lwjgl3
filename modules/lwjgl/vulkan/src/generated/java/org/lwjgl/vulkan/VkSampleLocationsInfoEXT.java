@@ -54,7 +54,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sampleLocationsPerPixel} &ndash; a {@code VkSampleCountFlagBits} specifying the number of sample locations per pixel.</li>
  * <li>{@code sampleLocationGridSize} &ndash; the size of the sample location grid to select custom sample locations for.</li>
  * <li>{@code sampleLocationsCount} &ndash; the number of sample locations in {@code pSampleLocations}.</li>
- * <li>{@code pSampleLocations} &ndash; an array of {@code sampleLocationsCount} {@link VkSampleLocationEXT} structures.</li>
+ * <li>{@code pSampleLocations} &ndash; a pointer to an array of {@code sampleLocationsCount} {@link VkSampleLocationEXT} structures.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

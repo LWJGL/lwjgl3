@@ -142,7 +142,7 @@ public class KHRExternalFenceFd {
      * <p>{@link VkImportFenceFdInfoKHR}</p>
      *
      * @param device             the logical device that created the fence.
-     * @param pImportFenceFdInfo points to a {@link VkImportFenceFdInfoKHR} structure specifying the fence and import parameters.
+     * @param pImportFenceFdInfo a pointer to a {@link VkImportFenceFdInfoKHR} structure specifying the fence and import parameters.
      */
     @NativeType("VkResult")
     public static int vkImportFenceFdKHR(VkDevice device, @NativeType("VkImportFenceFdInfoKHR const *") VkImportFenceFdInfoKHR pImportFenceFdInfo) {
@@ -215,7 +215,7 @@ public class KHRExternalFenceFd {
      * <p>{@link VkFenceGetFdInfoKHR}</p>
      *
      * @param device     the logical device that created the fence being exported.
-     * @param pGetFdInfo a pointer to an instance of the {@link VkFenceGetFdInfoKHR} structure containing parameters of the export operation.
+     * @param pGetFdInfo a pointer to a {@link VkFenceGetFdInfoKHR} structure containing parameters of the export operation.
      * @param pFd        will return the file descriptor representing the fence payload.
      */
     @NativeType("VkResult")

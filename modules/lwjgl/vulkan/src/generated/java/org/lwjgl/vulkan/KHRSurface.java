@@ -456,7 +456,7 @@ public class KHRSurface {
      *
      * @param physicalDevice       the physical device that will be associated with the swapchain to be created, as described for {@link KHRSwapchain#vkCreateSwapchainKHR CreateSwapchainKHR}.
      * @param surface              the surface that will be associated with the swapchain.
-     * @param pSurfaceCapabilities a pointer to an instance of the {@link VkSurfaceCapabilitiesKHR} structure in which the capabilities are returned.
+     * @param pSurfaceCapabilities a pointer to a {@link VkSurfaceCapabilitiesKHR} structure in which the capabilities are returned.
      */
     @NativeType("VkResult")
     public static int vkGetPhysicalDeviceSurfaceCapabilitiesKHR(VkPhysicalDevice physicalDevice, @NativeType("VkSurfaceKHR") long surface, @NativeType("VkSurfaceCapabilitiesKHR *") VkSurfaceCapabilitiesKHR pSurfaceCapabilities) {

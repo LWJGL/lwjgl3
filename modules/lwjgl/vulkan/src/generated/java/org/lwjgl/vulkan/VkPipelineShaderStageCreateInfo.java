@@ -76,9 +76,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code flags} &ndash; a bitmask of {@code VkPipelineShaderStageCreateFlagBits} specifying how the pipeline shader stage will be generated.</li>
  * <li>{@code stage} &ndash; a {@code VkShaderStageFlagBits} value specifying a single pipeline stage.</li>
- * <li>{@code module} &ndash; a {@code VkShaderModule} object that contains the shader for this stage.</li>
+ * <li>{@code module} &ndash; a {@code VkShaderModule} object containing the shader for this stage.</li>
  * <li>{@code pName} &ndash; a pointer to a null-terminated UTF-8 string specifying the entry point name of the shader for this stage.</li>
- * <li>{@code pSpecializationInfo} &ndash; a pointer to {@link VkSpecializationInfo}, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#pipelines-specialization-constants">Specialization Constants</a>, and <b>can</b> be {@code NULL}.</li>
+ * <li>{@code pSpecializationInfo} &ndash; a pointer to a {@link VkSpecializationInfo} structure, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#pipelines-specialization-constants">Specialization Constants</a>, or {@code NULL}.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>The main difference between this extension and {@link EXTDebugReport VK_EXT_debug_report} and {@link EXTDebugMarker VK_EXT_debug_marker} is that those extensions use {@code VkDebugReportObjectTypeEXT} to identify objects. This extension uses the core {@code VkObjectType} in place of {@code VkDebugReportObjectTypeEXT}. The primary reason for this move is that no future object type handle enumeration values will be added to {@code VkDebugReportObjectTypeEXT} since the creation of {@code VkObjectType}.</p>
  * 
- * <p>In addition, this extension combines the functionality of both {@link EXTDebugReport VK_EXT_debug_report} and {@link EXTDebugMarker VK_EXT_debug_marker} by allowing object name and debug markers (now called labels) to be returned to the application's callback function. This should assist in clarifying the details of a debug message including: what objects are involved and potentially which location within a VkQueue or VkCommandBuffer the message occurred.</p>
+ * <p>In addition, this extension combines the functionality of both {@link EXTDebugReport VK_EXT_debug_report} and {@link EXTDebugMarker VK_EXT_debug_marker} by allowing object name and debug markers (now called labels) to be returned to the application's callback function. This should assist in clarifying the details of a debug message including: what objects are involved and potentially which location within a {@code VkQueue} or {@code VkCommandBuffer} the message occurred.</p>
  * 
  * <h5>Examples</h5>
  * 
@@ -423,7 +423,7 @@ public class EXTDebugUtils {
      * <p>{@link VkDebugUtilsObjectNameInfoEXT}</p>
      *
      * @param device    the device that created the object.
-     * @param pNameInfo a pointer to an instance of the {@link VkDebugUtilsObjectNameInfoEXT} structure specifying the parameters of the name to set on the object.
+     * @param pNameInfo a pointer to a {@link VkDebugUtilsObjectNameInfoEXT} structure specifying parameters of the name to set on the object.
      */
     @NativeType("VkResult")
     public static int vkSetDebugUtilsObjectNameEXT(VkDevice device, @NativeType("VkDebugUtilsObjectNameInfoEXT const *") VkDebugUtilsObjectNameInfoEXT pNameInfo) {
@@ -484,7 +484,7 @@ public class EXTDebugUtils {
      * <p>{@link VkDebugUtilsObjectTagInfoEXT}</p>
      *
      * @param device   the device that created the object.
-     * @param pTagInfo a pointer to an instance of the {@link VkDebugUtilsObjectTagInfoEXT} structure specifying the parameters of the tag to attach to the object.
+     * @param pTagInfo a pointer to a {@link VkDebugUtilsObjectTagInfoEXT} structure specifying parameters of the tag to attach to the object.
      */
     @NativeType("VkResult")
     public static int vkSetDebugUtilsObjectTagEXT(VkDevice device, @NativeType("VkDebugUtilsObjectTagInfoEXT const *") VkDebugUtilsObjectTagInfoEXT pTagInfo) {
@@ -534,7 +534,7 @@ public class EXTDebugUtils {
      * <p>{@link VkDebugUtilsLabelEXT}</p>
      *
      * @param queue      the queue in which to start a debug label region.
-     * @param pLabelInfo a pointer to an instance of the {@link VkDebugUtilsLabelEXT} structure specifying the parameters of the label region to open.
+     * @param pLabelInfo a pointer to a {@link VkDebugUtilsLabelEXT} structure specifying parameters of the label region to open.
      */
     public static void vkQueueBeginDebugUtilsLabelEXT(VkQueue queue, @NativeType("VkDebugUtilsLabelEXT const *") VkDebugUtilsLabelEXT pLabelInfo) {
         nvkQueueBeginDebugUtilsLabelEXT(queue, pLabelInfo.address());
@@ -629,7 +629,7 @@ public class EXTDebugUtils {
      * <p>{@link VkDebugUtilsLabelEXT}</p>
      *
      * @param queue      the queue into which a debug label will be inserted.
-     * @param pLabelInfo a pointer to an instance of the {@link VkDebugUtilsLabelEXT} structure specifying the parameters of the label to insert.
+     * @param pLabelInfo a pointer to a {@link VkDebugUtilsLabelEXT} structure specifying parameters of the label to insert.
      */
     public static void vkQueueInsertDebugUtilsLabelEXT(VkQueue queue, @NativeType("VkDebugUtilsLabelEXT const *") VkDebugUtilsLabelEXT pLabelInfo) {
         nvkQueueInsertDebugUtilsLabelEXT(queue, pLabelInfo.address());
@@ -686,7 +686,7 @@ public class EXTDebugUtils {
      * <p>{@link VkDebugUtilsLabelEXT}</p>
      *
      * @param commandBuffer the command buffer into which the command is recorded.
-     * @param pLabelInfo    a pointer to an instance of the {@link VkDebugUtilsLabelEXT} structure specifying the parameters of the label region to open.
+     * @param pLabelInfo    a pointer to a {@link VkDebugUtilsLabelEXT} structure specifying parameters of the label region to open.
      */
     public static void vkCmdBeginDebugUtilsLabelEXT(VkCommandBuffer commandBuffer, @NativeType("VkDebugUtilsLabelEXT const *") VkDebugUtilsLabelEXT pLabelInfo) {
         nvkCmdBeginDebugUtilsLabelEXT(commandBuffer, pLabelInfo.address());
@@ -859,9 +859,9 @@ public class EXTDebugUtils {
      * <p>{@link VkAllocationCallbacks}, {@link VkDebugUtilsMessengerCreateInfoEXT}</p>
      *
      * @param instance    the instance the messenger will be used with.
-     * @param pCreateInfo points to a {@link VkDebugUtilsMessengerCreateInfoEXT} structure which contains the callback pointer as well as defines the conditions under which this messenger will trigger the callback.
+     * @param pCreateInfo a pointer to a {@link VkDebugUtilsMessengerCreateInfoEXT} structure containing the callback pointer, as well as defining conditions under which this messenger will trigger the callback.
      * @param pAllocator  controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pMessenger  a pointer to record the {@code VkDebugUtilsMessengerEXT} object created.
+     * @param pMessenger  a pointer to a {@code VkDebugUtilsMessengerEXT} handle in which the created object is returned.
      */
     @NativeType("VkResult")
     public static int vkCreateDebugUtilsMessengerEXT(VkInstance instance, @NativeType("VkDebugUtilsMessengerCreateInfoEXT const *") VkDebugUtilsMessengerCreateInfoEXT pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkDebugUtilsMessengerEXT *") LongBuffer pMessenger) {

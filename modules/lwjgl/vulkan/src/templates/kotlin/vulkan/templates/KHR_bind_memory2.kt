@@ -96,7 +96,7 @@ val KHR_bind_memory2 = "KHRBindMemory2".nativeClassVK("KHR_bind_memory2", type =
 
         VkDevice("device", "the logical device that owns the buffers and memory."),
         AutoSize("pBindInfos")..uint32_t("bindInfoCount", "the number of elements in {@code pBindInfos}."),
-        VkBindBufferMemoryInfo.const.p("pBindInfos", "a pointer to an array of structures of type ##VkBindBufferMemoryInfo, describing buffers and memory to bind.")
+        VkBindBufferMemoryInfo.const.p("pBindInfos", "a pointer to an array of {@code bindInfoCount} ##VkBindBufferMemoryInfo structures describing buffers and memory to bind.")
     )
 
     VkResult(
@@ -105,6 +105,6 @@ val KHR_bind_memory2 = "KHRBindMemory2".nativeClassVK("KHR_bind_memory2", type =
 
         VkDevice("device", "the logical device that owns the images and memory."),
         AutoSize("pBindInfos")..uint32_t("bindInfoCount", "the number of elements in {@code pBindInfos}."),
-        VkBindImageMemoryInfo.const.p("pBindInfos", "a pointer to an array of structures of type ##VkBindImageMemoryInfo, describing images and memory to bind.")
+        VkBindImageMemoryInfo.const.p("pBindInfos", "a pointer to an array of ##VkBindImageMemoryInfo structures, describing images and memory to bind.")
     )
 }

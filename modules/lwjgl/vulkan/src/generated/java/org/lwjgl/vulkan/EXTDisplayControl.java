@@ -243,9 +243,9 @@ public class EXTDisplayControl {
      * <p>{@link VkAllocationCallbacks}, {@link VkDeviceEventInfoEXT}</p>
      *
      * @param device           a logical device on which the event <b>may</b> occur.
-     * @param pDeviceEventInfo a pointer to an instance of the {@link VkDeviceEventInfoEXT} structure describing the event of interest to the application.
+     * @param pDeviceEventInfo a pointer to a {@link VkDeviceEventInfoEXT} structure describing the event of interest to the application.
      * @param pAllocator       controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pFence           points to a handle in which the resulting fence object is returned.
+     * @param pFence           a pointer to a handle in which the resulting fence object is returned.
      */
     @NativeType("VkResult")
     public static int vkRegisterDeviceEventEXT(VkDevice device, @NativeType("VkDeviceEventInfoEXT const *") VkDeviceEventInfoEXT pDeviceEventInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkFence *") LongBuffer pFence) {
@@ -307,9 +307,9 @@ public class EXTDisplayControl {
      *
      * @param device            a logical device associated with {@code display}
      * @param display           the display on which the event <b>may</b> occur.
-     * @param pDisplayEventInfo a pointer to an instance of the {@link VkDisplayEventInfoEXT} structure describing the event of interest to the application.
+     * @param pDisplayEventInfo a pointer to a {@link VkDisplayEventInfoEXT} structure describing the event of interest to the application.
      * @param pAllocator        controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pFence            points to a handle in which the resulting fence object is returned.
+     * @param pFence            a pointer to a handle in which the resulting fence object is returned.
      */
     @NativeType("VkResult")
     public static int vkRegisterDisplayEventEXT(VkDevice device, @NativeType("VkDisplayKHR") long display, @NativeType("VkDisplayEventInfoEXT const *") VkDisplayEventInfoEXT pDisplayEventInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkFence *") LongBuffer pFence) {

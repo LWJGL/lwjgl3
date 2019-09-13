@@ -125,7 +125,7 @@ val GOOGLE_display_timing = "GOOGLEDisplayTiming".nativeClassVK("GOOGLE_display_
 
         VkDevice("device", "the device associated with {@code swapchain}."),
         VkSwapchainKHR("swapchain", "the swapchain to obtain the refresh duration for."),
-        VkRefreshCycleDurationGOOGLE.p("pDisplayTimingProperties", "a pointer to an instance of the ##VkRefreshCycleDurationGOOGLE structure.")
+        VkRefreshCycleDurationGOOGLE.p("pDisplayTimingProperties", "a pointer to a ##VkRefreshCycleDurationGOOGLE structure.")
     )
 
     VkResult(

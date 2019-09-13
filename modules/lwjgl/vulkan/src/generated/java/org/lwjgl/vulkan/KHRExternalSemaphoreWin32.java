@@ -139,7 +139,7 @@ public class KHRExternalSemaphoreWin32 {
      * <p>{@link VkImportSemaphoreWin32HandleInfoKHR}</p>
      *
      * @param device                          the logical device that created the semaphore.
-     * @param pImportSemaphoreWin32HandleInfo points to a {@link VkImportSemaphoreWin32HandleInfoKHR} structure specifying the semaphore and import parameters.
+     * @param pImportSemaphoreWin32HandleInfo a pointer to a {@link VkImportSemaphoreWin32HandleInfoKHR} structure specifying the semaphore and import parameters.
      */
     @NativeType("VkResult")
     public static int vkImportSemaphoreWin32HandleKHR(VkDevice device, @NativeType("VkImportSemaphoreWin32HandleInfoKHR const *") VkImportSemaphoreWin32HandleInfoKHR pImportSemaphoreWin32HandleInfo) {
@@ -203,7 +203,7 @@ public class KHRExternalSemaphoreWin32 {
      * <p>{@link VkSemaphoreGetWin32HandleInfoKHR}</p>
      *
      * @param device              the logical device that created the semaphore being exported.
-     * @param pGetWin32HandleInfo a pointer to an instance of the {@link VkSemaphoreGetWin32HandleInfoKHR} structure containing parameters of the export operation.
+     * @param pGetWin32HandleInfo a pointer to a {@link VkSemaphoreGetWin32HandleInfoKHR} structure containing parameters of the export operation.
      * @param pHandle             will return the Windows handle representing the semaphore state.
      */
     @NativeType("VkResult")

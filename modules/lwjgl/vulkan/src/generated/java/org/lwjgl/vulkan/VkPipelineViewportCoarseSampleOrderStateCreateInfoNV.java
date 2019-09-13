@@ -53,7 +53,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code sampleOrderType} &ndash; specifies the mechanism used to order coverage samples in fragments larger than one pixel.</li>
  * <li>{@code customSampleOrderCount} &ndash; specifies the number of custom sample orderings to use when ordering coverage samples.</li>
- * <li>{@code pCustomSampleOrders} &ndash; a pointer to an array of {@link VkCoarseSampleOrderCustomNV} structures, each of which specifies the coverage sample order for a single combination of fragment area and coverage sample count.</li>
+ * <li>{@code pCustomSampleOrders} &ndash; a pointer to an array of {@code customSampleOrderCount} {@link VkCoarseSampleOrderCustomNV} structures, each of which specifies the coverage sample order for a single combination of fragment area and coverage sample count.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

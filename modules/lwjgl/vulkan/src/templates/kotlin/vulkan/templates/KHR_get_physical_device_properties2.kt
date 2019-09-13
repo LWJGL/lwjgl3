@@ -151,7 +151,7 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
         "See #GetPhysicalDeviceProperties2().",
 
         VkPhysicalDevice("physicalDevice", "the handle to the physical device whose properties will be queried."),
-        VkPhysicalDeviceProperties2.p("pProperties", "points to an instance of the ##VkPhysicalDeviceProperties2 structure, that will be filled with returned information.")
+        VkPhysicalDeviceProperties2.p("pProperties", "a pointer to a ##VkPhysicalDeviceProperties2 structure in which properties are returned.")
     )
 
     void(
@@ -168,8 +168,8 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
         "See #GetPhysicalDeviceImageFormatProperties2().",
 
         VkPhysicalDevice("physicalDevice", "the physical device from which to query the image capabilities."),
-        VkPhysicalDeviceImageFormatInfo2.const.p("pImageFormatInfo", "points to an instance of the ##VkPhysicalDeviceImageFormatInfo2 structure, describing the parameters that would be consumed by #CreateImage()."),
-        VkImageFormatProperties2.p("pImageFormatProperties", "points to an instance of the ##VkImageFormatProperties2 structure in which capabilities are returned.")
+        VkPhysicalDeviceImageFormatInfo2.const.p("pImageFormatInfo", "a pointer to a ##VkPhysicalDeviceImageFormatInfo2 structure describing the parameters that would be consumed by #CreateImage()."),
+        VkImageFormatProperties2.p("pImageFormatProperties", "a pointer to a ##VkImageFormatProperties2 structure in which capabilities are returned.")
     )
 
     void(
@@ -186,7 +186,7 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
         "See #GetPhysicalDeviceMemoryProperties2().",
 
         VkPhysicalDevice("physicalDevice", "the handle to the device to query."),
-        VkPhysicalDeviceMemoryProperties2.p("pMemoryProperties", "points to an instance of the ##VkPhysicalDeviceMemoryProperties2 structure in which the properties are returned.")
+        VkPhysicalDeviceMemoryProperties2.p("pMemoryProperties", "a pointer to a ##VkPhysicalDeviceMemoryProperties2 structure in which the properties are returned.")
     )
 
     void(
@@ -194,7 +194,7 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
         "See #GetPhysicalDeviceSparseImageFormatProperties2().",
 
         VkPhysicalDevice("physicalDevice", "the physical device from which to query the sparse image capabilities."),
-        VkPhysicalDeviceSparseImageFormatInfo2.const.p("pFormatInfo", "a pointer to a structure of type ##VkPhysicalDeviceSparseImageFormatInfo2 containing input parameters to the command."),
+        VkPhysicalDeviceSparseImageFormatInfo2.const.p("pFormatInfo", "a pointer to a ##VkPhysicalDeviceSparseImageFormatInfo2 structure containing input parameters to the command."),
         AutoSize("pProperties")..Check(1)..uint32_t.p("pPropertyCount", "a pointer to an integer related to the number of sparse format properties available or queried, as described below."),
         nullable..VkSparseImageFormatProperties2.p("pProperties", "either {@code NULL} or a pointer to an array of ##VkSparseImageFormatProperties2 structures.")
     )

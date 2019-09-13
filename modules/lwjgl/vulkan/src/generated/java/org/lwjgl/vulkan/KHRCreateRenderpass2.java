@@ -161,9 +161,9 @@ public class KHRCreateRenderpass2 {
      * <p>{@link VkAllocationCallbacks}, {@link VkRenderPassCreateInfo2KHR}</p>
      *
      * @param device      the logical device that creates the render pass.
-     * @param pCreateInfo a pointer to an instance of the {@link VkRenderPassCreateInfo2KHR} structure that describes the parameters of the render pass.
+     * @param pCreateInfo a pointer to a {@link VkRenderPassCreateInfo2KHR} structure describing the parameters of the render pass.
      * @param pAllocator  controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pRenderPass points to a {@code VkRenderPass} handle in which the resulting render pass object is returned.
+     * @param pRenderPass a pointer to a {@code VkRenderPass} handle in which the resulting render pass object is returned.
      */
     @NativeType("VkResult")
     public static int vkCreateRenderPass2KHR(VkDevice device, @NativeType("VkRenderPassCreateInfo2KHR const *") VkRenderPassCreateInfo2KHR pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkRenderPass *") LongBuffer pRenderPass) {
@@ -247,8 +247,8 @@ public class KHRCreateRenderpass2 {
      * <p>{@link VkRenderPassBeginInfo}, {@link VkSubpassBeginInfoKHR}</p>
      *
      * @param commandBuffer     the command buffer in which to record the command.
-     * @param pRenderPassBegin  a pointer to a {@link VkRenderPassBeginInfo} structure (defined below) which indicates the render pass to begin an instance of, and the framebuffer the instance uses.
-     * @param pSubpassBeginInfo a pointer to a {@link VkSubpassBeginInfoKHR} structure which contains information about the subpass which is about to begin rendering.
+     * @param pRenderPassBegin  a pointer to a {@link VkRenderPassBeginInfo} structure specifying the render pass to begin an instance of, and the framebuffer the instance uses.
+     * @param pSubpassBeginInfo a pointer to a {@link VkSubpassBeginInfoKHR} structure containing information about the subpass which is about to begin rendering.
      */
     public static void vkCmdBeginRenderPass2KHR(VkCommandBuffer commandBuffer, @NativeType("VkRenderPassBeginInfo const *") VkRenderPassBeginInfo pRenderPassBegin, @NativeType("VkSubpassBeginInfoKHR const *") VkSubpassBeginInfoKHR pSubpassBeginInfo) {
         nvkCmdBeginRenderPass2KHR(commandBuffer, pRenderPassBegin.address(), pSubpassBeginInfo.address());
@@ -320,8 +320,8 @@ public class KHRCreateRenderpass2 {
      * <p>{@link VkSubpassBeginInfoKHR}, {@link VkSubpassEndInfoKHR}</p>
      *
      * @param commandBuffer     the command buffer in which to record the command.
-     * @param pSubpassBeginInfo a pointer to a {@link VkSubpassBeginInfoKHR} structure which contains information about the subpass which is about to begin rendering.
-     * @param pSubpassEndInfo   a pointer to a {@link VkSubpassEndInfoKHR} structure which contains information about how the previous subpass will be ended.
+     * @param pSubpassBeginInfo a pointer to a {@link VkSubpassBeginInfoKHR} structure containing information about the subpass which is about to begin rendering.
+     * @param pSubpassEndInfo   a pointer to a {@link VkSubpassEndInfoKHR} structure containing information about how the previous subpass will be ended.
      */
     public static void vkCmdNextSubpass2KHR(VkCommandBuffer commandBuffer, @NativeType("VkSubpassBeginInfoKHR const *") VkSubpassBeginInfoKHR pSubpassBeginInfo, @NativeType("VkSubpassEndInfoKHR const *") VkSubpassEndInfoKHR pSubpassEndInfo) {
         nvkCmdNextSubpass2KHR(commandBuffer, pSubpassBeginInfo.address(), pSubpassEndInfo.address());
@@ -391,7 +391,7 @@ public class KHRCreateRenderpass2 {
      * <p>{@link VkSubpassEndInfoKHR}</p>
      *
      * @param commandBuffer   the command buffer in which to end the current render pass instance.
-     * @param pSubpassEndInfo a pointer to a {@link VkSubpassEndInfoKHR} structure which contains information about how the previous subpass will be ended.
+     * @param pSubpassEndInfo a pointer to a {@link VkSubpassEndInfoKHR} structure containing information about how the previous subpass will be ended.
      */
     public static void vkCmdEndRenderPass2KHR(VkCommandBuffer commandBuffer, @NativeType("VkSubpassEndInfoKHR const *") VkSubpassEndInfoKHR pSubpassEndInfo) {
         nvkCmdEndRenderPass2KHR(commandBuffer, pSubpassEndInfo.address());

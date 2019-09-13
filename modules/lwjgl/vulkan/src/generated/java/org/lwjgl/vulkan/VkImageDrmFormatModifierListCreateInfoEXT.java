@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code drmFormatModifierCount} &ndash; the length of the {@code pDrmFormatModifiers} array.</li>
- * <li>{@code pDrmFormatModifiers} &ndash; an array of <em>Linux DRM format modifiers</em>.</li>
+ * <li>{@code pDrmFormatModifiers} &ndash; a pointer to an array of <em>Linux DRM format modifiers</em>.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

@@ -108,8 +108,8 @@ public class KHRMaintenance3 {
      * See {@link VK11#vkGetDescriptorSetLayoutSupport GetDescriptorSetLayoutSupport}.
      *
      * @param device      the logical device that would create the descriptor set layout.
-     * @param pCreateInfo a pointer to an instance of the {@link VkDescriptorSetLayoutCreateInfo} structure specifying the state of the descriptor set layout object.
-     * @param pSupport    points to a {@link VkDescriptorSetLayoutSupport} structure in which information about support for the descriptor set layout object is returned.
+     * @param pCreateInfo a pointer to a {@link VkDescriptorSetLayoutCreateInfo} structure specifying the state of the descriptor set layout object.
+     * @param pSupport    a pointer to a {@link VkDescriptorSetLayoutSupport} structure, in which information about support for the descriptor set layout object is returned.
      */
     public static void vkGetDescriptorSetLayoutSupportKHR(VkDevice device, @NativeType("VkDescriptorSetLayoutCreateInfo const *") VkDescriptorSetLayoutCreateInfo pCreateInfo, @NativeType("VkDescriptorSetLayoutSupport *") VkDescriptorSetLayoutSupport pSupport) {
         nvkGetDescriptorSetLayoutSupportKHR(device, pCreateInfo.address(), pSupport.address());

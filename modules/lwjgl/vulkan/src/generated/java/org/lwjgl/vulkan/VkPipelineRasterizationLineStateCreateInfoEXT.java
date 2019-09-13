@@ -42,7 +42,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code lineRasterizationMode} &ndash; selects the style of line rasterization and is of type {@code VkLineRasterizationModeEXT}.</li>
+ * <li>{@code lineRasterizationMode} &ndash; a {@code VkLineRasterizationModeEXT} value selecting the style of line rasterization.</li>
  * <li>{@code stippledLineEnable} &ndash; enables <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#primsrast-lines-stipple">stippled line rasterization</a>.</li>
  * <li>{@code lineStippleFactor} &ndash; the repeat factor used in stippled line rasterization.</li>
  * <li>{@code lineStipplePattern} &ndash; the bit pattern used in stippled line rasterization.</li>

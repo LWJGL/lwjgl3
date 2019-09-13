@@ -139,7 +139,7 @@ public class KHRExternalFenceWin32 {
      * <p>{@link VkImportFenceWin32HandleInfoKHR}</p>
      *
      * @param device                      the logical device that created the fence.
-     * @param pImportFenceWin32HandleInfo points to a {@link VkImportFenceWin32HandleInfoKHR} structure specifying the fence and import parameters.
+     * @param pImportFenceWin32HandleInfo a pointer to a {@link VkImportFenceWin32HandleInfoKHR} structure specifying the fence and import parameters.
      */
     @NativeType("VkResult")
     public static int vkImportFenceWin32HandleKHR(VkDevice device, @NativeType("VkImportFenceWin32HandleInfoKHR const *") VkImportFenceWin32HandleInfoKHR pImportFenceWin32HandleInfo) {
@@ -203,7 +203,7 @@ public class KHRExternalFenceWin32 {
      * <p>{@link VkFenceGetWin32HandleInfoKHR}</p>
      *
      * @param device              the logical device that created the fence being exported.
-     * @param pGetWin32HandleInfo a pointer to an instance of the {@link VkFenceGetWin32HandleInfoKHR} structure containing parameters of the export operation.
+     * @param pGetWin32HandleInfo a pointer to a {@link VkFenceGetWin32HandleInfoKHR} structure containing parameters of the export operation.
      * @param pHandle             will return the Windows handle representing the fence state.
      */
     @NativeType("VkResult")

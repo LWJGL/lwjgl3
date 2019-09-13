@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code coverageReductionMode} &ndash; specifies the coverage reduction mode and is of type {@code VkCoverageReductionModeNV}.</li>
+ * <li>{@code coverageReductionMode} &ndash; a {@code VkCoverageReductionModeNV} value specifying the coverage reduction mode.</li>
  * <li>{@code rasterizationSamples} &ndash; specifies the number of rasterization samples in the supported combination.</li>
  * <li>{@code depthStencilSamples} &ndash; specifies the number of samples in the depth stencil attachment in the supported combination. A value of 0 indicates the combination does not have a depth stencil attachment.</li>
  * <li>{@code colorSamples} &ndash; specifies the number of color samples in a color attachment in the supported combination. A value of 0 indicates the combination does not have a color attachment.</li>

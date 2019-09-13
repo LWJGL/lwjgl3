@@ -610,15 +610,15 @@ public class VK11 extends VK10 {
      * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_SUBGROUP_FEATURE_BASIC_BIT SUBGROUP_FEATURE_BASIC_BIT} specifies the device will accept SPIR-V shader modules that contain the {@code GroupNonUniform} capability.</li>
-     * <li>{@link #VK_SUBGROUP_FEATURE_VOTE_BIT SUBGROUP_FEATURE_VOTE_BIT} specifies the device will accept SPIR-V shader modules that contain the {@code GroupNonUniformVote} capability.</li>
-     * <li>{@link #VK_SUBGROUP_FEATURE_ARITHMETIC_BIT SUBGROUP_FEATURE_ARITHMETIC_BIT} specifies the device will accept SPIR-V shader modules that contain the {@code GroupNonUniformArithmetic} capability.</li>
-     * <li>{@link #VK_SUBGROUP_FEATURE_BALLOT_BIT SUBGROUP_FEATURE_BALLOT_BIT} specifies the device will accept SPIR-V shader modules that contain the {@code GroupNonUniformBallot} capability.</li>
-     * <li>{@link #VK_SUBGROUP_FEATURE_SHUFFLE_BIT SUBGROUP_FEATURE_SHUFFLE_BIT} specifies the device will accept SPIR-V shader modules that contain the {@code GroupNonUniformShuffle} capability.</li>
-     * <li>{@link #VK_SUBGROUP_FEATURE_SHUFFLE_RELATIVE_BIT SUBGROUP_FEATURE_SHUFFLE_RELATIVE_BIT} specifies the device will accept SPIR-V shader modules that contain the {@code GroupNonUniformShuffleRelative} capability.</li>
-     * <li>{@link #VK_SUBGROUP_FEATURE_CLUSTERED_BIT SUBGROUP_FEATURE_CLUSTERED_BIT} specifies the device will accept SPIR-V shader modules that contain the {@code GroupNonUniformClustered} capability.</li>
-     * <li>{@link #VK_SUBGROUP_FEATURE_QUAD_BIT SUBGROUP_FEATURE_QUAD_BIT} specifies the device will accept SPIR-V shader modules that contain the {@code GroupNonUniformQuad} capability.</li>
-     * <li>{@link NVShaderSubgroupPartitioned#VK_SUBGROUP_FEATURE_PARTITIONED_BIT_NV SUBGROUP_FEATURE_PARTITIONED_BIT_NV} specifies the device will accept SPIR-V shader modules that contain the {@code GroupNonUniformPartitionedNV} capability.</li>
+     * <li>{@link #VK_SUBGROUP_FEATURE_BASIC_BIT SUBGROUP_FEATURE_BASIC_BIT} specifies the device will accept SPIR-V shader modules containing the {@code GroupNonUniform} capability.</li>
+     * <li>{@link #VK_SUBGROUP_FEATURE_VOTE_BIT SUBGROUP_FEATURE_VOTE_BIT} specifies the device will accept SPIR-V shader modules containing the {@code GroupNonUniformVote} capability.</li>
+     * <li>{@link #VK_SUBGROUP_FEATURE_ARITHMETIC_BIT SUBGROUP_FEATURE_ARITHMETIC_BIT} specifies the device will accept SPIR-V shader modules containing the {@code GroupNonUniformArithmetic} capability.</li>
+     * <li>{@link #VK_SUBGROUP_FEATURE_BALLOT_BIT SUBGROUP_FEATURE_BALLOT_BIT} specifies the device will accept SPIR-V shader modules containing the {@code GroupNonUniformBallot} capability.</li>
+     * <li>{@link #VK_SUBGROUP_FEATURE_SHUFFLE_BIT SUBGROUP_FEATURE_SHUFFLE_BIT} specifies the device will accept SPIR-V shader modules containing the {@code GroupNonUniformShuffle} capability.</li>
+     * <li>{@link #VK_SUBGROUP_FEATURE_SHUFFLE_RELATIVE_BIT SUBGROUP_FEATURE_SHUFFLE_RELATIVE_BIT} specifies the device will accept SPIR-V shader modules containing the {@code GroupNonUniformShuffleRelative} capability.</li>
+     * <li>{@link #VK_SUBGROUP_FEATURE_CLUSTERED_BIT SUBGROUP_FEATURE_CLUSTERED_BIT} specifies the device will accept SPIR-V shader modules containing the {@code GroupNonUniformClustered} capability.</li>
+     * <li>{@link #VK_SUBGROUP_FEATURE_QUAD_BIT SUBGROUP_FEATURE_QUAD_BIT} specifies the device will accept SPIR-V shader modules containing the {@code GroupNonUniformQuad} capability.</li>
+     * <li>{@link NVShaderSubgroupPartitioned#VK_SUBGROUP_FEATURE_PARTITIONED_BIT_NV SUBGROUP_FEATURE_PARTITIONED_BIT_NV} specifies the device will accept SPIR-V shader modules containing the {@code GroupNonUniformPartitionedNV} capability.</li>
      * </ul>
      * 
      * <h5>See Also</h5>
@@ -1146,7 +1146,7 @@ public class VK11 extends VK10 {
      * </ul></dd>
      * </dl>
      *
-     * @param pApiVersion points to a {@code uint32_t}, which is the version of Vulkan supported by instance-level functionality, encoded as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#extendingvulkan-coreversions-versionnumbers">Version Numbers</a>.
+     * @param pApiVersion a pointer to a {@code uint32_t}, which is the version of Vulkan supported by instance-level functionality, encoded as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#extendingvulkan-coreversions-versionnumbers">Version Numbers</a>.
      */
     @NativeType("VkResult")
     public static int vkEnumerateInstanceVersion(@NativeType("uint32_t *") IntBuffer pApiVersion) {
@@ -1223,7 +1223,7 @@ public class VK11 extends VK10 {
      * <p>{@link VkBindBufferMemoryInfo}</p>
      *
      * @param device     the logical device that owns the buffers and memory.
-     * @param pBindInfos a pointer to an array of structures of type {@link VkBindBufferMemoryInfo}, describing buffers and memory to bind.
+     * @param pBindInfos a pointer to an array of {@code bindInfoCount} {@link VkBindBufferMemoryInfo} structures describing buffers and memory to bind.
      */
     @NativeType("VkResult")
     public static int vkBindBufferMemory2(VkDevice device, @NativeType("VkBindBufferMemoryInfo const *") VkBindBufferMemoryInfo.Buffer pBindInfos) {
@@ -1297,7 +1297,7 @@ public class VK11 extends VK10 {
      * <p>{@link VkBindImageMemoryInfo}</p>
      *
      * @param device     the logical device that owns the images and memory.
-     * @param pBindInfos a pointer to an array of structures of type {@link VkBindImageMemoryInfo}, describing images and memory to bind.
+     * @param pBindInfos a pointer to an array of {@link VkBindImageMemoryInfo} structures, describing images and memory to bind.
      */
     @NativeType("VkResult")
     public static int vkBindImageMemory2(VkDevice device, @NativeType("VkBindImageMemoryInfo const *") VkBindImageMemoryInfo.Buffer pBindInfos) {
@@ -1362,7 +1362,7 @@ public class VK11 extends VK10 {
      * @param heapIndex           the index of the memory heap from which the memory is allocated.
      * @param localDeviceIndex    the device index of the physical device that performs the memory access.
      * @param remoteDeviceIndex   the device index of the physical device that the memory is allocated for.
-     * @param pPeerMemoryFeatures a pointer to a bitmask of {@code VkPeerMemoryFeatureFlagBits} indicating which types of memory accesses are supported for the combination of heap, local, and remote devices.
+     * @param pPeerMemoryFeatures a pointer to a {@code VkPeerMemoryFeatureFlags} bitmask indicating which types of memory accesses are supported for the combination of heap, local, and remote devices.
      */
     public static void vkGetDeviceGroupPeerMemoryFeatures(VkDevice device, @NativeType("uint32_t") int heapIndex, @NativeType("uint32_t") int localDeviceIndex, @NativeType("uint32_t") int remoteDeviceIndex, @NativeType("VkPeerMemoryFeatureFlags *") IntBuffer pPeerMemoryFeatures) {
         if (CHECKS) {
@@ -1669,8 +1669,8 @@ public class VK11 extends VK10 {
      * <p>{@link VkImageMemoryRequirementsInfo2}, {@link VkMemoryRequirements2}</p>
      *
      * @param device              the logical device that owns the image.
-     * @param pInfo               a pointer to an instance of the {@link VkImageMemoryRequirementsInfo2} structure containing parameters required for the memory requirements query.
-     * @param pMemoryRequirements points to an instance of the {@link VkMemoryRequirements2} structure in which the memory requirements of the image object are returned.
+     * @param pInfo               a pointer to a {@link VkImageMemoryRequirementsInfo2} structure containing parameters required for the memory requirements query.
+     * @param pMemoryRequirements a pointer to a {@link VkMemoryRequirements2} structure in which the memory requirements of the image object are returned.
      */
     public static void vkGetImageMemoryRequirements2(VkDevice device, @NativeType("VkImageMemoryRequirementsInfo2 const *") VkImageMemoryRequirementsInfo2 pInfo, @NativeType("VkMemoryRequirements2 *") VkMemoryRequirements2 pMemoryRequirements) {
         nvkGetImageMemoryRequirements2(device, pInfo.address(), pMemoryRequirements.address());
@@ -1721,8 +1721,8 @@ public class VK11 extends VK10 {
      * <p>{@link VkBufferMemoryRequirementsInfo2}, {@link VkMemoryRequirements2}</p>
      *
      * @param device              the logical device that owns the buffer.
-     * @param pInfo               a pointer to an instance of the {@link VkBufferMemoryRequirementsInfo2} structure containing parameters required for the memory requirements query.
-     * @param pMemoryRequirements points to an instance of the {@link VkMemoryRequirements2} structure in which the memory requirements of the buffer object are returned.
+     * @param pInfo               a pointer to a {@link VkBufferMemoryRequirementsInfo2} structure containing parameters required for the memory requirements query.
+     * @param pMemoryRequirements a pointer to a {@link VkMemoryRequirements2} structure in which the memory requirements of the buffer object are returned.
      */
     public static void vkGetBufferMemoryRequirements2(VkDevice device, @NativeType("VkBufferMemoryRequirementsInfo2 const *") VkBufferMemoryRequirementsInfo2 pInfo, @NativeType("VkMemoryRequirements2 *") VkMemoryRequirements2 pMemoryRequirements) {
         nvkGetBufferMemoryRequirements2(device, pInfo.address(), pMemoryRequirements.address());
@@ -1780,7 +1780,7 @@ public class VK11 extends VK10 {
      * <p>{@link VkImageSparseMemoryRequirementsInfo2}, {@link VkSparseImageMemoryRequirements2}</p>
      *
      * @param device                        the logical device that owns the image.
-     * @param pInfo                         a pointer to an instance of the {@link VkImageSparseMemoryRequirementsInfo2} structure containing parameters required for the memory requirements query.
+     * @param pInfo                         a pointer to a {@link VkImageSparseMemoryRequirementsInfo2} structure containing parameters required for the memory requirements query.
      * @param pSparseMemoryRequirementCount a pointer to an integer related to the number of sparse memory requirements available or queried, as described below.
      * @param pSparseMemoryRequirements     either {@code NULL} or a pointer to an array of {@link VkSparseImageMemoryRequirements2} structures.
      */
@@ -1890,7 +1890,7 @@ public class VK11 extends VK10 {
      * <p>{@link VkPhysicalDeviceProperties2}</p>
      *
      * @param physicalDevice the handle to the physical device whose properties will be queried.
-     * @param pProperties    points to an instance of the {@link VkPhysicalDeviceProperties2} structure, that will be filled with returned information.
+     * @param pProperties    a pointer to a {@link VkPhysicalDeviceProperties2} structure in which properties are returned.
      */
     public static void vkGetPhysicalDeviceProperties2(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceProperties2 *") VkPhysicalDeviceProperties2 pProperties) {
         nvkGetPhysicalDeviceProperties2(physicalDevice, pProperties.address());
@@ -2016,8 +2016,8 @@ public class VK11 extends VK10 {
      * <p>{@link VkImageFormatProperties2}, {@link VkPhysicalDeviceImageFormatInfo2}</p>
      *
      * @param physicalDevice         the physical device from which to query the image capabilities.
-     * @param pImageFormatInfo       points to an instance of the {@link VkPhysicalDeviceImageFormatInfo2} structure, describing the parameters that would be consumed by {@link VK10#vkCreateImage CreateImage}.
-     * @param pImageFormatProperties points to an instance of the {@link VkImageFormatProperties2} structure in which capabilities are returned.
+     * @param pImageFormatInfo       a pointer to a {@link VkPhysicalDeviceImageFormatInfo2} structure describing the parameters that would be consumed by {@link VK10#vkCreateImage CreateImage}.
+     * @param pImageFormatProperties a pointer to a {@link VkImageFormatProperties2} structure in which capabilities are returned.
      */
     @NativeType("VkResult")
     public static int vkGetPhysicalDeviceImageFormatProperties2(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceImageFormatInfo2 const *") VkPhysicalDeviceImageFormatInfo2 pImageFormatInfo, @NativeType("VkImageFormatProperties2 *") VkImageFormatProperties2 pImageFormatProperties) {
@@ -2134,7 +2134,7 @@ public class VK11 extends VK10 {
      * <p>{@link VkPhysicalDeviceMemoryProperties2}</p>
      *
      * @param physicalDevice    the handle to the device to query.
-     * @param pMemoryProperties points to an instance of the {@link VkPhysicalDeviceMemoryProperties2} structure in which the properties are returned.
+     * @param pMemoryProperties a pointer to a {@link VkPhysicalDeviceMemoryProperties2} structure in which the properties are returned.
      */
     public static void vkGetPhysicalDeviceMemoryProperties2(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceMemoryProperties2 *") VkPhysicalDeviceMemoryProperties2 pMemoryProperties) {
         nvkGetPhysicalDeviceMemoryProperties2(physicalDevice, pMemoryProperties.address());
@@ -2196,7 +2196,7 @@ public class VK11 extends VK10 {
      * <p>{@link VkPhysicalDeviceSparseImageFormatInfo2}, {@link VkSparseImageFormatProperties2}</p>
      *
      * @param physicalDevice the physical device from which to query the sparse image capabilities.
-     * @param pFormatInfo    a pointer to a structure of type {@link VkPhysicalDeviceSparseImageFormatInfo2} containing input parameters to the command.
+     * @param pFormatInfo    a pointer to a {@link VkPhysicalDeviceSparseImageFormatInfo2} structure containing input parameters to the command.
      * @param pPropertyCount a pointer to an integer related to the number of sparse format properties available or queried, as described below.
      * @param pProperties    either {@code NULL} or a pointer to an array of {@link VkSparseImageFormatProperties2} structures.
      */
@@ -2314,7 +2314,7 @@ public class VK11 extends VK10 {
      * <p>{@link VkDeviceQueueInfo2}</p>
      *
      * @param device     the logical device that owns the queue.
-     * @param pQueueInfo points to an instance of the {@link VkDeviceQueueInfo2} structure, describing the parameters used to create the device queue.
+     * @param pQueueInfo a pointer to a {@link VkDeviceQueueInfo2} structure, describing the parameters used to create the device queue.
      * @param pQueue     a pointer to a {@code VkQueue} object that will be filled with the handle for the requested queue.
      */
     public static void vkGetDeviceQueue2(VkDevice device, @NativeType("VkDeviceQueueInfo2 const *") VkDeviceQueueInfo2 pQueueInfo, @NativeType("VkQueue *") PointerBuffer pQueue) {
@@ -2397,9 +2397,9 @@ public class VK11 extends VK10 {
      * <p>{@link VkAllocationCallbacks}, {@link VkSamplerYcbcrConversionCreateInfo}</p>
      *
      * @param device           the logical device that creates the sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion.
-     * @param pCreateInfo      a pointer to an instance of the {@link VkSamplerYcbcrConversionCreateInfo} specifying the requested sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion.
+     * @param pCreateInfo      a pointer to a {@link VkSamplerYcbcrConversionCreateInfo} structure specifying the requested sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion.
      * @param pAllocator       controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pYcbcrConversion points to a {@code VkSamplerYcbcrConversion} handle in which the resulting sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion is returned.
+     * @param pYcbcrConversion a pointer to a {@code VkSamplerYcbcrConversion} handle in which the resulting sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion is returned.
      */
     @NativeType("VkResult")
     public static int vkCreateSamplerYcbcrConversion(VkDevice device, @NativeType("VkSamplerYcbcrConversionCreateInfo const *") VkSamplerYcbcrConversionCreateInfo pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkSamplerYcbcrConversion *") LongBuffer pYcbcrConversion) {
@@ -2537,9 +2537,9 @@ public class VK11 extends VK10 {
      * <p>{@link VkAllocationCallbacks}, {@link VkDescriptorUpdateTemplateCreateInfo}</p>
      *
      * @param device                    the logical device that creates the descriptor update template.
-     * @param pCreateInfo               a pointer to an instance of the {@link VkDescriptorUpdateTemplateCreateInfo} structure specifying the set of descriptors to update with a single call to {@link KHRPushDescriptor#vkCmdPushDescriptorSetWithTemplateKHR CmdPushDescriptorSetWithTemplateKHR} or {@link #vkUpdateDescriptorSetWithTemplate UpdateDescriptorSetWithTemplate}.
+     * @param pCreateInfo               a pointer to a {@link VkDescriptorUpdateTemplateCreateInfo} structure specifying the set of descriptors to update with a single call to {@link KHRPushDescriptor#vkCmdPushDescriptorSetWithTemplateKHR CmdPushDescriptorSetWithTemplateKHR} or {@link #vkUpdateDescriptorSetWithTemplate UpdateDescriptorSetWithTemplate}.
      * @param pAllocator                controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pDescriptorUpdateTemplate points to a {@code VkDescriptorUpdateTemplate} handle in which the resulting descriptor update template object is returned.
+     * @param pDescriptorUpdateTemplate a pointer to a {@code VkDescriptorUpdateTemplate} handle in which the resulting descriptor update template object is returned.
      */
     @NativeType("VkResult")
     public static int vkCreateDescriptorUpdateTemplate(VkDevice device, @NativeType("VkDescriptorUpdateTemplateCreateInfo const *") VkDescriptorUpdateTemplateCreateInfo pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkDescriptorUpdateTemplate *") LongBuffer pDescriptorUpdateTemplate) {
@@ -2644,7 +2644,7 @@ public class VK11 extends VK10 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>{@code pData} <b>must</b> be a valid pointer to a memory that contains one or more valid instances of {@link VkDescriptorImageInfo}, {@link VkDescriptorBufferInfo}, or {@code VkBufferView} in a layout defined by {@code descriptorUpdateTemplate} when it was created with {@link #vkCreateDescriptorUpdateTemplate CreateDescriptorUpdateTemplate}</li>
+     * <li>{@code pData} <b>must</b> be a valid pointer to a memory containing one or more valid instances of {@link VkDescriptorImageInfo}, {@link VkDescriptorBufferInfo}, or {@code VkBufferView} in a layout defined by {@code descriptorUpdateTemplate} when it was created with {@link #vkCreateDescriptorUpdateTemplate CreateDescriptorUpdateTemplate}</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -2741,8 +2741,8 @@ public class VK11 extends VK10 {
      *
      * @param device                   the logical device that updates the descriptor sets.
      * @param descriptorSet            the descriptor set to update
-     * @param descriptorUpdateTemplate the {@code VkDescriptorUpdateTemplate} which specifies the update mapping between {@code pData} and the descriptor set to update.
-     * @param pData                    a pointer to memory which contains one or more structures of {@link VkDescriptorImageInfo}, {@link VkDescriptorBufferInfo}, or {@code VkBufferView} used to write the descriptors.
+     * @param descriptorUpdateTemplate a {@code VkDescriptorUpdateTemplate} object specifying the update mapping between {@code pData} and the descriptor set to update.
+     * @param pData                    a pointer to memory containing one or more {@link VkDescriptorImageInfo}, {@link VkDescriptorBufferInfo}, or {@code VkBufferView} structures used to write the descriptors.
      */
     public static void vkUpdateDescriptorSetWithTemplate(VkDevice device, @NativeType("VkDescriptorSet") long descriptorSet, @NativeType("VkDescriptorUpdateTemplate") long descriptorUpdateTemplate, @NativeType("void const *") long pData) {
         long __functionAddress = device.getCapabilities().vkUpdateDescriptorSetWithTemplate;
@@ -2798,8 +2798,8 @@ public class VK11 extends VK10 {
      * <p>{@link VkExternalBufferProperties}, {@link VkPhysicalDeviceExternalBufferInfo}</p>
      *
      * @param physicalDevice            the physical device from which to query the buffer capabilities.
-     * @param pExternalBufferInfo       points to an instance of the {@link VkPhysicalDeviceExternalBufferInfo} structure, describing the parameters that would be consumed by {@link VK10#vkCreateBuffer CreateBuffer}.
-     * @param pExternalBufferProperties points to an instance of the {@link VkExternalBufferProperties} structure in which capabilities are returned.
+     * @param pExternalBufferInfo       a pointer to a {@link VkPhysicalDeviceExternalBufferInfo} structure describing the parameters that would be consumed by {@link VK10#vkCreateBuffer CreateBuffer}.
+     * @param pExternalBufferProperties a pointer to a {@link VkExternalBufferProperties} structure in which capabilities are returned.
      */
     public static void vkGetPhysicalDeviceExternalBufferProperties(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceExternalBufferInfo const *") VkPhysicalDeviceExternalBufferInfo pExternalBufferInfo, @NativeType("VkExternalBufferProperties *") VkExternalBufferProperties pExternalBufferProperties) {
         nvkGetPhysicalDeviceExternalBufferProperties(physicalDevice, pExternalBufferInfo.address(), pExternalBufferProperties.address());
@@ -2850,8 +2850,8 @@ public class VK11 extends VK10 {
      * <p>{@link VkExternalFenceProperties}, {@link VkPhysicalDeviceExternalFenceInfo}</p>
      *
      * @param physicalDevice           the physical device from which to query the fence capabilities.
-     * @param pExternalFenceInfo       points to an instance of the {@link VkPhysicalDeviceExternalFenceInfo} structure, describing the parameters that would be consumed by {@link VK10#vkCreateFence CreateFence}.
-     * @param pExternalFenceProperties points to an instance of the {@link VkExternalFenceProperties} structure in which capabilities are returned.
+     * @param pExternalFenceInfo       a pointer to a {@link VkPhysicalDeviceExternalFenceInfo} structure describing the parameters that would be consumed by {@link VK10#vkCreateFence CreateFence}.
+     * @param pExternalFenceProperties a pointer to a {@link VkExternalFenceProperties} structure in which capabilities are returned.
      */
     public static void vkGetPhysicalDeviceExternalFenceProperties(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceExternalFenceInfo const *") VkPhysicalDeviceExternalFenceInfo pExternalFenceInfo, @NativeType("VkExternalFenceProperties *") VkExternalFenceProperties pExternalFenceProperties) {
         nvkGetPhysicalDeviceExternalFenceProperties(physicalDevice, pExternalFenceInfo.address(), pExternalFenceProperties.address());
@@ -2902,8 +2902,8 @@ public class VK11 extends VK10 {
      * <p>{@link VkExternalSemaphoreProperties}, {@link VkPhysicalDeviceExternalSemaphoreInfo}</p>
      *
      * @param physicalDevice               the physical device from which to query the semaphore capabilities.
-     * @param pExternalSemaphoreInfo       points to an instance of the {@link VkPhysicalDeviceExternalSemaphoreInfo} structure, describing the parameters that would be consumed by {@link VK10#vkCreateSemaphore CreateSemaphore}.
-     * @param pExternalSemaphoreProperties points to an instance of the {@link VkExternalSemaphoreProperties} structure in which capabilities are returned.
+     * @param pExternalSemaphoreInfo       a pointer to a {@link VkPhysicalDeviceExternalSemaphoreInfo} structure describing the parameters that would be consumed by {@link VK10#vkCreateSemaphore CreateSemaphore}.
+     * @param pExternalSemaphoreProperties a pointer to a {@link VkExternalSemaphoreProperties} structure in which capabilities are returned.
      */
     public static void vkGetPhysicalDeviceExternalSemaphoreProperties(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceExternalSemaphoreInfo const *") VkPhysicalDeviceExternalSemaphoreInfo pExternalSemaphoreInfo, @NativeType("VkExternalSemaphoreProperties *") VkExternalSemaphoreProperties pExternalSemaphoreProperties) {
         nvkGetPhysicalDeviceExternalSemaphoreProperties(physicalDevice, pExternalSemaphoreInfo.address(), pExternalSemaphoreProperties.address());
@@ -2966,8 +2966,8 @@ public class VK11 extends VK10 {
      * <p>{@link VkDescriptorSetLayoutCreateInfo}, {@link VkDescriptorSetLayoutSupport}</p>
      *
      * @param device      the logical device that would create the descriptor set layout.
-     * @param pCreateInfo a pointer to an instance of the {@link VkDescriptorSetLayoutCreateInfo} structure specifying the state of the descriptor set layout object.
-     * @param pSupport    points to a {@link VkDescriptorSetLayoutSupport} structure in which information about support for the descriptor set layout object is returned.
+     * @param pCreateInfo a pointer to a {@link VkDescriptorSetLayoutCreateInfo} structure specifying the state of the descriptor set layout object.
+     * @param pSupport    a pointer to a {@link VkDescriptorSetLayoutSupport} structure, in which information about support for the descriptor set layout object is returned.
      */
     public static void vkGetDescriptorSetLayoutSupport(VkDevice device, @NativeType("VkDescriptorSetLayoutCreateInfo const *") VkDescriptorSetLayoutCreateInfo pCreateInfo, @NativeType("VkDescriptorSetLayoutSupport *") VkDescriptorSetLayoutSupport pSupport) {
         nvkGetDescriptorSetLayoutSupport(device, pCreateInfo.address(), pSupport.address());

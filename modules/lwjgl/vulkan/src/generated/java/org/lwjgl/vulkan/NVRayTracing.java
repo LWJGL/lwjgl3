@@ -468,9 +468,9 @@ public class NVRayTracing {
      * <p>{@link VkAccelerationStructureCreateInfoNV}, {@link VkAllocationCallbacks}</p>
      *
      * @param device                 the logical device that creates the buffer object.
-     * @param pCreateInfo            a pointer to an instance of the {@link VkAccelerationStructureCreateInfoNV} structure containing parameters affecting creation of the acceleration structure.
+     * @param pCreateInfo            a pointer to a {@link VkAccelerationStructureCreateInfoNV} structure containing parameters affecting creation of the acceleration structure.
      * @param pAllocator             controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pAccelerationStructure points to a {@code VkAccelerationStructureNV} handle in which the resulting acceleration structure object is returned.
+     * @param pAccelerationStructure a pointer to a {@code VkAccelerationStructureNV} handle in which the resulting acceleration structure object is returned.
      */
     @NativeType("VkResult")
     public static int vkCreateAccelerationStructureNV(VkDevice device, @NativeType("VkAccelerationStructureCreateInfoNV const *") VkAccelerationStructureCreateInfoNV pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkAccelerationStructureNV *") LongBuffer pAccelerationStructure) {
@@ -636,7 +636,7 @@ public class NVRayTracing {
      * <p>{@link VkBindAccelerationStructureMemoryInfoNV}</p>
      *
      * @param device     the logical device that owns the acceleration structures and memory.
-     * @param pBindInfos a pointer to an array of structures of type {@link VkBindAccelerationStructureMemoryInfoNV}, describing images and memory to bind.
+     * @param pBindInfos a pointer to an array of {@link VkBindAccelerationStructureMemoryInfoNV} structures describing images and memory to bind.
      */
     @NativeType("VkResult")
     public static int vkBindAccelerationStructureMemoryNV(VkDevice device, @NativeType("VkBindAccelerationStructureMemoryInfoNV const *") VkBindAccelerationStructureMemoryInfoNV.Buffer pBindInfos) {
@@ -697,7 +697,7 @@ public class NVRayTracing {
      * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
      * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support compute operations</li>
      * <li>This command <b>must</b> only be called outside of a render pass instance</li>
-     * <li>Each of {@code commandBuffer}, {@code dst}, {@code instanceData}, {@code scratch}, and {@code src} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+     * <li>Each of {@code commandBuffer}, {@code dst}, {@code instanceData}, {@code scratch}, and {@code src} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
      * </ul>
      * 
      * <h5>Host Synchronization</h5>
@@ -722,8 +722,8 @@ public class NVRayTracing {
      * @param instanceData   the buffer containing instance data that will be used to build the acceleration structure as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#acceleration-structure-instance">Accelerator structure instances.</a> This parameter <b>must</b> be {@code NULL} for bottom level acceleration structures.
      * @param instanceOffset the offset in bytes (relative to the start of {@code instanceData}) at which the instance data is located.
      * @param update         specifies whether to update the {@code dst} acceleration structure with the data in {@code src}.
-     * @param dst            points to the target acceleration structure for the build.
-     * @param src            points to an existing acceleration structure that is to be used to update the {@code dst} acceleration structure.
+     * @param dst            a pointer to the target acceleration structure for the build.
+     * @param src            a pointer to an existing acceleration structure that is to be used to update the {@code dst} acceleration structure.
      * @param scratch        the {@code VkBuffer} that will be used as scratch memory for the build.
      * @param scratchOffset  the offset in bytes relative to the start of {@code scratch} that will be used as a scratch memory.
      */
@@ -781,9 +781,9 @@ public class NVRayTracing {
      * </table>
      *
      * @param commandBuffer the command buffer into which the command will be recorded.
-     * @param dst           points to the target acceleration structure for the copy.
-     * @param src           points to the source acceleration structure for the copy.
-     * @param mode          a {@code VkCopyAccelerationStructureModeNV} value that specifies additional operations to perform during the copy.
+     * @param dst           a pointer to the target acceleration structure for the copy.
+     * @param src           a pointer to the source acceleration structure for the copy.
+     * @param mode          a {@code VkCopyAccelerationStructureModeNV} value specifying additional operations to perform during the copy.
      */
     public static void vkCmdCopyAccelerationStructureNV(VkCommandBuffer commandBuffer, @NativeType("VkAccelerationStructureNV") long dst, @NativeType("VkAccelerationStructureNV") long src, @NativeType("VkCopyAccelerationStructureModeNV") int mode) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdCopyAccelerationStructureNV;
@@ -876,7 +876,7 @@ public class NVRayTracing {
      * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
      * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support compute operations</li>
      * <li>This command <b>must</b> only be called outside of a render pass instance</li>
-     * <li>Each of {@code callableShaderBindingTableBuffer}, {@code commandBuffer}, {@code hitShaderBindingTableBuffer}, {@code missShaderBindingTableBuffer}, and {@code raygenShaderBindingTableBuffer} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+     * <li>Each of {@code callableShaderBindingTableBuffer}, {@code commandBuffer}, {@code hitShaderBindingTableBuffer}, {@code missShaderBindingTableBuffer}, and {@code raygenShaderBindingTableBuffer} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
      * </ul>
      * 
      * <h5>Host Synchronization</h5>
@@ -989,7 +989,7 @@ public class NVRayTracing {
      *
      * @param device        the logical device that creates the ray tracing pipelines.
      * @param pipelineCache either {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, indicating that pipeline caching is disabled, or the handle of a valid <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#pipelines-cache">pipeline cache</a> object, in which case use of that cache is enabled for the duration of the command.
-     * @param pCreateInfos  an array of {@link VkRayTracingPipelineCreateInfoNV} structures.
+     * @param pCreateInfos  a pointer to an array of {@link VkRayTracingPipelineCreateInfoNV} structures.
      * @param pAllocator    controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      * @param pPipelines    a pointer to an array in which the resulting ray tracing pipeline objects are returned.
      */
@@ -1063,8 +1063,8 @@ public class NVRayTracing {
      * </ul></dd>
      * </dl>
      *
-     * @param device     the logical device that contains the ray tracing pipeline.
-     * @param pipeline   the ray tracing pipeline object that contains the shaders.
+     * @param device     the logical device containing the ray tracing pipeline.
+     * @param pipeline   the ray tracing pipeline object containing the shaders.
      * @param firstGroup the index of the first group to retrieve a handle for from the {@link VkRayTracingShaderGroupCreateInfoNV}{@code ::pGroups} array.
      * @param groupCount the number of shader handles to retrieve.
      * @param pData      a pointer to a user-allocated buffer where the results will be written.
@@ -1265,7 +1265,7 @@ public class NVRayTracing {
      * </table>
      *
      * @param commandBuffer           the command buffer into which the command will be recorded.
-     * @param pAccelerationStructures points to an array of existing previously built acceleration structures.
+     * @param pAccelerationStructures a pointer to an array of existing previously built acceleration structures.
      * @param queryType               a {@code VkQueryType} value specifying the type of queries managed by the pool.
      * @param queryPool               the query pool that will manage the results of the query.
      * @param firstQuery              the first query index within the query pool that will contain the {@code accelerationStructureCount} number of results.
@@ -1318,8 +1318,8 @@ public class NVRayTracing {
      * </ul></dd>
      * </dl>
      *
-     * @param device   the logical device that contains the ray tracing pipeline.
-     * @param pipeline the ray tracing pipeline object that contains the shaders.
+     * @param device   the logical device containing the ray tracing pipeline.
+     * @param pipeline the ray tracing pipeline object containing the shaders.
      * @param shader   the index of the shader to compile.
      */
     @NativeType("VkResult")

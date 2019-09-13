@@ -46,7 +46,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code physicalDeviceCount} &ndash; the number of elements in the {@code pPhysicalDevices} array.</li>
- * <li>{@code pPhysicalDevices} &ndash; an array of physical device handles belonging to the same device group.</li>
+ * <li>{@code pPhysicalDevices} &ndash; a pointer to an array of physical device handles belonging to the same device group.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

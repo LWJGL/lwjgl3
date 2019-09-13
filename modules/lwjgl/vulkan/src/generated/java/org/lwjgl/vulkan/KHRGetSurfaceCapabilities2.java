@@ -145,8 +145,8 @@ public class KHRGetSurfaceCapabilities2 {
      * <p>{@link VkPhysicalDeviceSurfaceInfo2KHR}, {@link VkSurfaceCapabilities2KHR}</p>
      *
      * @param physicalDevice       the physical device that will be associated with the swapchain to be created, as described for {@link KHRSwapchain#vkCreateSwapchainKHR CreateSwapchainKHR}.
-     * @param pSurfaceInfo         points to an instance of the {@link VkPhysicalDeviceSurfaceInfo2KHR} structure, describing the surface and other fixed parameters that would be consumed by {@link KHRSwapchain#vkCreateSwapchainKHR CreateSwapchainKHR}.
-     * @param pSurfaceCapabilities points to an instance of the {@link VkSurfaceCapabilities2KHR} structure in which the capabilities are returned.
+     * @param pSurfaceInfo         a pointer to a {@link VkPhysicalDeviceSurfaceInfo2KHR} structure describing the surface and other fixed parameters that would be consumed by {@link KHRSwapchain#vkCreateSwapchainKHR CreateSwapchainKHR}.
+     * @param pSurfaceCapabilities a pointer to a {@link VkSurfaceCapabilities2KHR} structure in which the capabilities are returned.
      */
     @NativeType("VkResult")
     public static int vkGetPhysicalDeviceSurfaceCapabilities2KHR(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceSurfaceInfo2KHR const *") VkPhysicalDeviceSurfaceInfo2KHR pSurfaceInfo, @NativeType("VkSurfaceCapabilities2KHR *") VkSurfaceCapabilities2KHR pSurfaceCapabilities) {
@@ -222,7 +222,7 @@ public class KHRGetSurfaceCapabilities2 {
      * <p>{@link VkPhysicalDeviceSurfaceInfo2KHR}, {@link VkSurfaceFormat2KHR}</p>
      *
      * @param physicalDevice      the physical device that will be associated with the swapchain to be created, as described for {@link KHRSwapchain#vkCreateSwapchainKHR CreateSwapchainKHR}.
-     * @param pSurfaceInfo        points to an instance of the {@link VkPhysicalDeviceSurfaceInfo2KHR} structure, describing the surface and other fixed parameters that would be consumed by {@link KHRSwapchain#vkCreateSwapchainKHR CreateSwapchainKHR}.
+     * @param pSurfaceInfo        a pointer to a {@link VkPhysicalDeviceSurfaceInfo2KHR} structure describing the surface and other fixed parameters that would be consumed by {@link KHRSwapchain#vkCreateSwapchainKHR CreateSwapchainKHR}.
      * @param pSurfaceFormatCount a pointer to an integer related to the number of format tuples available or queried, as described below.
      * @param pSurfaceFormats     either {@code NULL} or a pointer to an array of {@link VkSurfaceFormat2KHR} structures.
      */

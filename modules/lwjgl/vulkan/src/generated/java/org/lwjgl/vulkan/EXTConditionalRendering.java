@@ -165,7 +165,7 @@ public class EXTConditionalRendering {
      * <p>{@link VkConditionalRenderingBeginInfoEXT}</p>
      *
      * @param commandBuffer              the command buffer into which this command will be recorded.
-     * @param pConditionalRenderingBegin a pointer to an instance of the {@link VkConditionalRenderingBeginInfoEXT} structure specifying the parameters of conditional rendering.
+     * @param pConditionalRenderingBegin a pointer to a {@link VkConditionalRenderingBeginInfoEXT} structure specifying parameters of conditional rendering.
      */
     public static void vkCmdBeginConditionalRenderingEXT(VkCommandBuffer commandBuffer, @NativeType("VkConditionalRenderingBeginInfoEXT const *") VkConditionalRenderingBeginInfoEXT pConditionalRenderingBegin) {
         nvkCmdBeginConditionalRenderingEXT(commandBuffer, pConditionalRenderingBegin.address());

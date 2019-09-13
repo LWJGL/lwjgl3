@@ -258,8 +258,8 @@ public class EXTCalibratedTimestamps {
      * <p>{@link VkCalibratedTimestampInfoEXT}</p>
      *
      * @param device          the logical device used to perform the query.
-     * @param pTimestampInfos a pointer to an array of {@code timestampCount} number of structures of type {@link VkCalibratedTimestampInfoEXT}, describing the time domains the calibrated timestamps should be captured from.
-     * @param pTimestamps     a pointer to an array of {@code timestampCount} number of 64-bit unsigned integer values in which the requested calibrated timestamp values are returned.
+     * @param pTimestampInfos a pointer to an array of {@code timestampCount} {@link VkCalibratedTimestampInfoEXT} structures, describing the time domains the calibrated timestamps should be captured from.
+     * @param pTimestamps     a pointer to an array of {@code timestampCount} 64-bit unsigned integer values in which the requested calibrated timestamp values are returned.
      * @param pMaxDeviation   a pointer to a 64-bit unsigned integer value in which the strictly positive maximum deviation, in nanoseconds, of the calibrated timestamp values is returned.
      */
     @NativeType("VkResult")

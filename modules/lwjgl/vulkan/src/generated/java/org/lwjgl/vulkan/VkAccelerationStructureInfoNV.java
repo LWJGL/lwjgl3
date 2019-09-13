@@ -60,7 +60,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code flags} &ndash; a bitmask of {@code VkBuildAccelerationStructureFlagBitsNV} specifying additional parameters of the acceleration structure.</li>
  * <li>{@code instanceCount} &ndash; specifies the number of instances that will be in the new acceleration structure.</li>
  * <li>{@code geometryCount} &ndash; specifies the number of geometries that will be in the new acceleration structure.</li>
- * <li>{@code pGeometries} &ndash; an array of {@link VkGeometryNV} structures, which contain the scene data being passed into the acceleration structure.</li>
+ * <li>{@code pGeometries} &ndash; a pointer to an array of {@code geometryCount} {@link VkGeometryNV} structures containing the scene data being passed into the acceleration structure.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

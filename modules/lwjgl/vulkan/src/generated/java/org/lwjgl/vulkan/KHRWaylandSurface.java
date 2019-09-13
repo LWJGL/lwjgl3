@@ -139,9 +139,9 @@ public class KHRWaylandSurface {
      * <p>{@link VkAllocationCallbacks}, {@link VkWaylandSurfaceCreateInfoKHR}</p>
      *
      * @param instance    the instance to associate the surface with.
-     * @param pCreateInfo a pointer to an instance of the {@link VkWaylandSurfaceCreateInfoKHR} structure containing parameters affecting the creation of the surface object.
+     * @param pCreateInfo a pointer to a {@link VkWaylandSurfaceCreateInfoKHR} structure containing parameters affecting the creation of the surface object.
      * @param pAllocator  the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a>).
-     * @param pSurface    points to a {@code VkSurfaceKHR} handle in which the created surface object is returned.
+     * @param pSurface    a pointer to a {@code VkSurfaceKHR} handle in which the created surface object is returned.
      */
     @NativeType("VkResult")
     public static int vkCreateWaylandSurfaceKHR(VkInstance instance, @NativeType("VkWaylandSurfaceCreateInfoKHR const *") VkWaylandSurfaceCreateInfoKHR pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkSurfaceKHR *") LongBuffer pSurface) {

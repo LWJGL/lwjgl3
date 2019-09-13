@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code deviceIndexCount} is the number of elements in {@code pDeviceIndices}.</li>
  * <li>{@code pDeviceIndices} is a pointer to an array of device indices.</li>
  * <li>{@code splitInstanceBindRegionCount} is the number of elements in {@code pSplitInstanceBindRegions}.</li>
- * <li>{@code pSplitInstanceBindRegions} is a pointer to an array of rectangles describing which regions of the image are attached to each instance of memory.</li>
+ * <li>{@code pSplitInstanceBindRegions} is a pointer to an array of {@link VkRect2D} structures describing which regions of the image are attached to each instance of memory.</li>
  * </ul>
  * 
  * <p>If {@code deviceIndexCount} is greater than zero, then on device index <code>i</code> {@code image} is attached to the instance of the memory on the physical device with device index <code>pDeviceIndices[i]</code>.</p>
@@ -51,7 +51,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>The {@code offset.x} member of any element of {@code pSplitInstanceBindRegions} <b>must</b> be a multiple of the sparse image block width ({@link VkSparseImageFormatProperties}{@code ::imageGranularity}.width) of all non-metadata aspects of the image</li>
  * <li>The {@code offset.y} member of any element of {@code pSplitInstanceBindRegions} <b>must</b> be a multiple of the sparse image block height ({@link VkSparseImageFormatProperties}{@code ::imageGranularity}.height) of all non-metadata aspects of the image</li>
  * <li>The {@code extent.width} member of any element of {@code pSplitInstanceBindRegions} <b>must</b> either be a multiple of the sparse image block width of all non-metadata aspects of the image, or else {@code extent.width} + {@code offset.x} <b>must</b> equal the width of the image subresource</li>
- * <li>The {@code extent.height} member of any element of {@code pSplitInstanceBindRegions} <b>must</b> either be a multiple of the sparse image block height of all non-metadata aspects of the image, or else {@code extent.height} {@code offset.y} <b>must</b> equal the width of the image subresource</li>
+ * <li>The {@code extent.height} member of any element of {@code pSplitInstanceBindRegions} <b>must</b> either be a multiple of the sparse image block height of all non-metadata aspects of the image, or else {@code extent.height} + {@code offset.y} <b>must</b> equal the width of the image subresource</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

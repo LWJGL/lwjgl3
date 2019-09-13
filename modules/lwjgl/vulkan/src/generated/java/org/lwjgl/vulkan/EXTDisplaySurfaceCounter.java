@@ -150,7 +150,7 @@ public class EXTDisplaySurfaceCounter {
      *
      * @param physicalDevice       the physical device that will be associated with the swapchain to be created, as described for {@link KHRSwapchain#vkCreateSwapchainKHR CreateSwapchainKHR}.
      * @param surface              the surface that will be associated with the swapchain.
-     * @param pSurfaceCapabilities a pointer to an instance of the {@link VkSurfaceCapabilities2EXT} structure in which the capabilities are returned.
+     * @param pSurfaceCapabilities a pointer to a {@link VkSurfaceCapabilities2EXT} structure in which the capabilities are returned.
      */
     @NativeType("VkResult")
     public static int vkGetPhysicalDeviceSurfaceCapabilities2EXT(VkPhysicalDevice physicalDevice, @NativeType("VkSurfaceKHR") long surface, @NativeType("VkSurfaceCapabilities2EXT *") VkSurfaceCapabilities2EXT pSurfaceCapabilities) {

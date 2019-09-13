@@ -114,8 +114,8 @@ public class KHRGetMemoryRequirements2 {
      * See {@link VK11#vkGetImageMemoryRequirements2 GetImageMemoryRequirements2}.
      *
      * @param device              the logical device that owns the image.
-     * @param pInfo               a pointer to an instance of the {@link VkImageMemoryRequirementsInfo2} structure containing parameters required for the memory requirements query.
-     * @param pMemoryRequirements points to an instance of the {@link VkMemoryRequirements2} structure in which the memory requirements of the image object are returned.
+     * @param pInfo               a pointer to a {@link VkImageMemoryRequirementsInfo2} structure containing parameters required for the memory requirements query.
+     * @param pMemoryRequirements a pointer to a {@link VkMemoryRequirements2} structure in which the memory requirements of the image object are returned.
      */
     public static void vkGetImageMemoryRequirements2KHR(VkDevice device, @NativeType("VkImageMemoryRequirementsInfo2 const *") VkImageMemoryRequirementsInfo2 pInfo, @NativeType("VkMemoryRequirements2 *") VkMemoryRequirements2 pMemoryRequirements) {
         nvkGetImageMemoryRequirements2KHR(device, pInfo.address(), pMemoryRequirements.address());
@@ -136,8 +136,8 @@ public class KHRGetMemoryRequirements2 {
      * See {@link VK11#vkGetBufferMemoryRequirements2 GetBufferMemoryRequirements2}.
      *
      * @param device              the logical device that owns the buffer.
-     * @param pInfo               a pointer to an instance of the {@link VkBufferMemoryRequirementsInfo2} structure containing parameters required for the memory requirements query.
-     * @param pMemoryRequirements points to an instance of the {@link VkMemoryRequirements2} structure in which the memory requirements of the buffer object are returned.
+     * @param pInfo               a pointer to a {@link VkBufferMemoryRequirementsInfo2} structure containing parameters required for the memory requirements query.
+     * @param pMemoryRequirements a pointer to a {@link VkMemoryRequirements2} structure in which the memory requirements of the buffer object are returned.
      */
     public static void vkGetBufferMemoryRequirements2KHR(VkDevice device, @NativeType("VkBufferMemoryRequirementsInfo2 const *") VkBufferMemoryRequirementsInfo2 pInfo, @NativeType("VkMemoryRequirements2 *") VkMemoryRequirements2 pMemoryRequirements) {
         nvkGetBufferMemoryRequirements2KHR(device, pInfo.address(), pMemoryRequirements.address());
@@ -162,7 +162,7 @@ public class KHRGetMemoryRequirements2 {
      * See {@link VK11#vkGetImageSparseMemoryRequirements2 GetImageSparseMemoryRequirements2}.
      *
      * @param device                        the logical device that owns the image.
-     * @param pInfo                         a pointer to an instance of the {@link VkImageSparseMemoryRequirementsInfo2} structure containing parameters required for the memory requirements query.
+     * @param pInfo                         a pointer to a {@link VkImageSparseMemoryRequirementsInfo2} structure containing parameters required for the memory requirements query.
      * @param pSparseMemoryRequirementCount a pointer to an integer related to the number of sparse memory requirements available or queried, as described below.
      * @param pSparseMemoryRequirements     either {@code NULL} or a pointer to an array of {@link VkSparseImageMemoryRequirements2} structures.
      */

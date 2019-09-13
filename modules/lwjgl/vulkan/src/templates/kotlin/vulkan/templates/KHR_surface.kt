@@ -387,7 +387,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
 
         VkPhysicalDevice("physicalDevice", "the physical device that will be associated with the swapchain to be created, as described for #CreateSwapchainKHR()."),
         VkSurfaceKHR("surface", "the surface that will be associated with the swapchain."),
-        VkSurfaceCapabilitiesKHR.p("pSurfaceCapabilities", "a pointer to an instance of the ##VkSurfaceCapabilitiesKHR structure in which the capabilities are returned.")
+        VkSurfaceCapabilitiesKHR.p("pSurfaceCapabilities", "a pointer to a ##VkSurfaceCapabilitiesKHR structure in which the capabilities are returned.")
     )
 
     VkResult(

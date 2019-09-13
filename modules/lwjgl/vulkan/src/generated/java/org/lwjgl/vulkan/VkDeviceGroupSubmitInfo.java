@@ -48,11 +48,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code waitSemaphoreCount} &ndash; the number of elements in the {@code pWaitSemaphoreDeviceIndices} array.</li>
- * <li>{@code pWaitSemaphoreDeviceIndices} &ndash; an array of device indices indicating which physical device executes the semaphore wait operation in the corresponding element of {@link VkSubmitInfo}{@code ::pWaitSemaphores}.</li>
+ * <li>{@code pWaitSemaphoreDeviceIndices} &ndash; a pointer to an array of {@code waitSemaphoreCount} device indices indicating which physical device executes the semaphore wait operation in the corresponding element of {@link VkSubmitInfo}{@code ::pWaitSemaphores}.</li>
  * <li>{@code commandBufferCount} &ndash; the number of elements in the {@code pCommandBufferDeviceMasks} array.</li>
- * <li>{@code pCommandBufferDeviceMasks} &ndash; an array of device masks indicating which physical devices execute the command buffer in the corresponding element of {@link VkSubmitInfo}{@code ::pCommandBuffers}. A physical device executes the command buffer if the corresponding bit is set in the mask.</li>
+ * <li>{@code pCommandBufferDeviceMasks} &ndash; a pointer to an array of {@code commandBufferCount} device masks indicating which physical devices execute the command buffer in the corresponding element of {@link VkSubmitInfo}{@code ::pCommandBuffers}. A physical device executes the command buffer if the corresponding bit is set in the mask.</li>
  * <li>{@code signalSemaphoreCount} &ndash; the number of elements in the {@code pSignalSemaphoreDeviceIndices} array.</li>
- * <li>{@code pSignalSemaphoreDeviceIndices} &ndash; an array of device indices indicating which physical device executes the semaphore signal operation in the corresponding element of {@link VkSubmitInfo}{@code ::pSignalSemaphores}.</li>
+ * <li>{@code pSignalSemaphoreDeviceIndices} &ndash; a pointer to an array of {@code signalSemaphoreCount} device indices indicating which physical device executes the semaphore signal operation in the corresponding element of {@link VkSubmitInfo}{@code ::pSignalSemaphores}.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

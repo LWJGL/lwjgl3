@@ -78,7 +78,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code descriptorType} <b>must</b> be a valid {@code VkDescriptorType} value</li>
  * <li>{@code descriptorCount} <b>must</b> be greater than 0</li>
- * <li>Both of {@code dstSet}, and the elements of {@code pTexelBufferView} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+ * <li>Both of {@code dstSet}, and the elements of {@code pTexelBufferView} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -95,9 +95,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code dstArrayElement} &ndash; the starting element in that array. If the descriptor binding identified by {@code dstSet} and {@code dstBinding} has a descriptor type of {@link EXTInlineUniformBlock#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT} then {@code dstArrayElement} specifies the starting byte offset within the binding.</li>
  * <li>{@code descriptorCount} &ndash; the number of descriptors to update (the number of elements in {@code pImageInfo}, {@code pBufferInfo}, or {@code pTexelBufferView} , or a value matching the {@code dataSize} member of an instance of {@link VkWriteDescriptorSetInlineUniformBlockEXT} in the {@code pNext} chain , or a value matching the {@code accelerationStructureCount} of an instance of {@link VkWriteDescriptorSetAccelerationStructureNV} in the {@code pNext} chain ). If the descriptor binding identified by {@code dstSet} and {@code dstBinding} has a descriptor type of {@link EXTInlineUniformBlock#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT} then {@code descriptorCount} specifies the number of bytes to update.</li>
  * <li>{@code descriptorType} &ndash; a {@code VkDescriptorType} specifying the type of each descriptor in {@code pImageInfo}, {@code pBufferInfo}, or {@code pTexelBufferView}, as described below. It <b>must</b> be the same type as that specified in {@link VkDescriptorSetLayoutBinding} for {@code dstSet} at {@code dstBinding}. The type of the descriptor also controls which array the descriptors are taken from.</li>
- * <li>{@code pImageInfo} &ndash; points to an array of {@link VkDescriptorImageInfo} structures or is ignored, as described below.</li>
- * <li>{@code pBufferInfo} &ndash; points to an array of {@link VkDescriptorBufferInfo} structures or is ignored, as described below.</li>
- * <li>{@code pTexelBufferView} &ndash; points to an array of {@code VkBufferView} handles as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#resources-buffer-views">Buffer Views</a> section or is ignored, as described below.</li>
+ * <li>{@code pImageInfo} &ndash; a pointer to an array of {@link VkDescriptorImageInfo} structures or is ignored, as described below.</li>
+ * <li>{@code pBufferInfo} &ndash; a pointer to an array of {@link VkDescriptorBufferInfo} structures or is ignored, as described below.</li>
+ * <li>{@code pTexelBufferView} &ndash; a pointer to an array of {@code VkBufferView} handles as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#resources-buffer-views">Buffer Views</a> section or is ignored, as described below.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

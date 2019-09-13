@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code domainOrigin} &ndash; controls the origin of the tessellation domain space, and is of type {@code VkTessellationDomainOrigin}.</li>
+ * <li>{@code domainOrigin} &ndash; a {@code VkTessellationDomainOrigin} value controlling the origin of the tessellation domain space.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

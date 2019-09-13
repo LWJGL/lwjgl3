@@ -28,7 +28,7 @@ val EXT_headless_surface = "EXTHeadlessSurface".nativeClassVK("EXT_headless_surf
             <dd>257</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>0</dd>
+            <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -57,7 +57,7 @@ val EXT_headless_surface = "EXTHeadlessSurface".nativeClassVK("EXT_headless_surf
     IntConstant(
         "The extension specification version.",
 
-        "EXT_HEADLESS_SURFACE_SPEC_VERSION".."0"
+        "EXT_HEADLESS_SURFACE_SPEC_VERSION".."1"
     )
 
     StringConstant(
@@ -114,8 +114,8 @@ val EXT_headless_surface = "EXTHeadlessSurface".nativeClassVK("EXT_headless_surf
         """,
 
         VkInstance("instance", "the instance to associate the surface with."),
-        VkHeadlessSurfaceCreateInfoEXT.const.p("pCreateInfo", "a pointer to an instance of the ##VkHeadlessSurfaceCreateInfoEXT structure containing parameters affecting the creation of the surface object."),
+        VkHeadlessSurfaceCreateInfoEXT.const.p("pCreateInfo", "a pointer to a ##VkHeadlessSurfaceCreateInfoEXT structure containing parameters affecting the creation of the surface object."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a>)."),
-        Check(1)..VkSurfaceKHR.p("pSurface", "points to a {@code VkSurfaceKHR} handle in which the created surface object is returned.")
+        Check(1)..VkSurfaceKHR.p("pSurface", "a pointer to a {@code VkSurfaceKHR} handle in which the created surface object is returned.")
     )
 }

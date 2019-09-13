@@ -219,7 +219,7 @@ public class NVShadingRateImage {
      * <li>{@code imageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
      * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
      * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
-     * <li>Both of {@code commandBuffer}, and {@code imageView} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+     * <li>Both of {@code commandBuffer}, and {@code imageView} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
      * </ul>
      * 
      * <h5>Host Synchronization</h5>
@@ -237,7 +237,7 @@ public class NVShadingRateImage {
      * </table>
      *
      * @param commandBuffer the command buffer into which the command will be recorded.
-     * @param imageView     an image view handle that specifies the shading rate image. {@code imageView} <b>may</b> be set to {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, which is equivalent to specifying a view of an image filled with zero values.
+     * @param imageView     an image view handle specifying the shading rate image. {@code imageView} <b>may</b> be set to {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, which is equivalent to specifying a view of an image filled with zero values.
      * @param imageLayout   the layout that the image subresources accessible from {@code imageView} will be in when the shading rate image is accessed.
      */
     public static void vkCmdBindShadingRateImageNV(VkCommandBuffer commandBuffer, @NativeType("VkImageView") long imageView, @NativeType("VkImageLayout") int imageLayout) {

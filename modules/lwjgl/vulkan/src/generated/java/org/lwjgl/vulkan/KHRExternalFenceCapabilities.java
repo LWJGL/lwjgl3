@@ -139,8 +139,8 @@ public class KHRExternalFenceCapabilities {
      * See {@link VK11#vkGetPhysicalDeviceExternalFenceProperties GetPhysicalDeviceExternalFenceProperties}.
      *
      * @param physicalDevice           the physical device from which to query the fence capabilities.
-     * @param pExternalFenceInfo       points to an instance of the {@link VkPhysicalDeviceExternalFenceInfo} structure, describing the parameters that would be consumed by {@link VK10#vkCreateFence CreateFence}.
-     * @param pExternalFenceProperties points to an instance of the {@link VkExternalFenceProperties} structure in which capabilities are returned.
+     * @param pExternalFenceInfo       a pointer to a {@link VkPhysicalDeviceExternalFenceInfo} structure describing the parameters that would be consumed by {@link VK10#vkCreateFence CreateFence}.
+     * @param pExternalFenceProperties a pointer to a {@link VkExternalFenceProperties} structure in which capabilities are returned.
      */
     public static void vkGetPhysicalDeviceExternalFencePropertiesKHR(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceExternalFenceInfo const *") VkPhysicalDeviceExternalFenceInfo pExternalFenceInfo, @NativeType("VkExternalFenceProperties *") VkExternalFenceProperties pExternalFenceProperties) {
         nvkGetPhysicalDeviceExternalFencePropertiesKHR(physicalDevice, pExternalFenceInfo.address(), pExternalFenceProperties.address());

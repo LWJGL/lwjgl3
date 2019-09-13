@@ -139,7 +139,7 @@ public class GOOGLEDisplayTiming {
      *
      * @param device                   the device associated with {@code swapchain}.
      * @param swapchain                the swapchain to obtain the refresh duration for.
-     * @param pDisplayTimingProperties a pointer to an instance of the {@link VkRefreshCycleDurationGOOGLE} structure.
+     * @param pDisplayTimingProperties a pointer to a {@link VkRefreshCycleDurationGOOGLE} structure.
      */
     @NativeType("VkResult")
     public static int vkGetRefreshCycleDurationGOOGLE(VkDevice device, @NativeType("VkSwapchainKHR") long swapchain, @NativeType("VkRefreshCycleDurationGOOGLE *") VkRefreshCycleDurationGOOGLE pDisplayTimingProperties) {

@@ -54,7 +54,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code object} &ndash; the object to be tagged.</li>
  * <li>{@code tagName} &ndash; a numerical identifier of the tag.</li>
  * <li>{@code tagSize} &ndash; the number of bytes of data to attach to the object.</li>
- * <li>{@code pTag} &ndash; an array of {@code tagSize} bytes containing the data to be associated with the object.</li>
+ * <li>{@code pTag} &ndash; a pointer to an array of {@code tagSize} bytes containing the data to be associated with the object.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

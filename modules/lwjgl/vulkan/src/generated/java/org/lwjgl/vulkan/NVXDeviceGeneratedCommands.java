@@ -387,7 +387,7 @@ public class NVXDeviceGeneratedCommands {
      * <p>{@link VkCmdProcessCommandsInfoNVX}</p>
      *
      * @param commandBuffer        the primary command buffer in which the generation process takes space.
-     * @param pProcessCommandsInfo a pointer to an instance of the {@link VkCmdProcessCommandsInfoNVX} structure containing parameters affecting the processing of commands.
+     * @param pProcessCommandsInfo a pointer to a {@link VkCmdProcessCommandsInfoNVX} structure containing parameters affecting the processing of commands.
      */
     public static void vkCmdProcessCommandsNVX(VkCommandBuffer commandBuffer, @NativeType("VkCmdProcessCommandsInfoNVX const *") VkCmdProcessCommandsInfoNVX pProcessCommandsInfo) {
         nvkCmdProcessCommandsNVX(commandBuffer, pProcessCommandsInfo.address());
@@ -513,9 +513,9 @@ public class NVXDeviceGeneratedCommands {
      * <p>{@link VkAllocationCallbacks}, {@link VkIndirectCommandsLayoutCreateInfoNVX}</p>
      *
      * @param device                  the logical device that creates the indirect command layout.
-     * @param pCreateInfo             a pointer to an instance of the {@link VkIndirectCommandsLayoutCreateInfoNVX} structure containing parameters affecting creation of the indirect command layout.
+     * @param pCreateInfo             a pointer to a {@link VkIndirectCommandsLayoutCreateInfoNVX} structure containing parameters affecting creation of the indirect command layout.
      * @param pAllocator              controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pIndirectCommandsLayout points to a {@code VkIndirectCommandsLayoutNVX} handle in which the resulting indirect command layout is returned.
+     * @param pIndirectCommandsLayout a pointer to a {@code VkIndirectCommandsLayoutNVX} handle in which the resulting indirect command layout is returned.
      */
     @NativeType("VkResult")
     public static int vkCreateIndirectCommandsLayoutNVX(VkDevice device, @NativeType("VkIndirectCommandsLayoutCreateInfoNVX const *") VkIndirectCommandsLayoutCreateInfoNVX pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkIndirectCommandsLayoutNVX *") LongBuffer pIndirectCommandsLayout) {
@@ -634,9 +634,9 @@ public class NVXDeviceGeneratedCommands {
      * <p>{@link VkAllocationCallbacks}, {@link VkObjectTableCreateInfoNVX}</p>
      *
      * @param device       the logical device that creates the object table.
-     * @param pCreateInfo  a pointer to an instance of the {@link VkObjectTableCreateInfoNVX} structure containing parameters affecting creation of the table.
+     * @param pCreateInfo  a pointer to a {@link VkObjectTableCreateInfoNVX} structure containing parameters affecting creation of the table.
      * @param pAllocator   controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pObjectTable points to a {@code VkObjectTableNVX} handle in which the resulting object table is returned.
+     * @param pObjectTable a pointer to a {@code VkObjectTableNVX} handle in which the resulting object table is returned.
      */
     @NativeType("VkResult")
     public static int vkCreateObjectTableNVX(VkDevice device, @NativeType("VkObjectTableCreateInfoNVX const *") VkObjectTableCreateInfoNVX pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkObjectTableNVX *") LongBuffer pObjectTable) {
@@ -781,7 +781,7 @@ public class NVXDeviceGeneratedCommands {
      *
      * @param device               the logical device that creates the object table.
      * @param objectTable          the table for which the resources are registered.
-     * @param ppObjectTableEntries provides an array for detailed binding informations, each array element is a pointer to a struct of type {@link VkObjectTablePipelineEntryNVX}, {@link VkObjectTableDescriptorSetEntryNVX}, {@link VkObjectTableVertexBufferEntryNVX}, {@link VkObjectTableIndexBufferEntryNVX} or {@link VkObjectTablePushConstantEntryNVX} (see below for details).
+     * @param ppObjectTableEntries provides an array for detailed binding informations. Each array element is a pointer to a structure of type {@link VkObjectTablePipelineEntryNVX}, {@link VkObjectTableDescriptorSetEntryNVX}, {@link VkObjectTableVertexBufferEntryNVX}, {@link VkObjectTableIndexBufferEntryNVX} or {@link VkObjectTablePushConstantEntryNVX} (see below for details).
      * @param pObjectIndices       are the indices at which each resource is registered.
      */
     @NativeType("VkResult")
@@ -910,8 +910,8 @@ public class NVXDeviceGeneratedCommands {
      * <p>{@link VkDeviceGeneratedCommandsFeaturesNVX}, {@link VkDeviceGeneratedCommandsLimitsNVX}</p>
      *
      * @param physicalDevice the handle to the physical device whose properties will be queried.
-     * @param pFeatures      points to an instance of the {@link VkDeviceGeneratedCommandsFeaturesNVX} structure, that will be filled with returned information.
-     * @param pLimits        points to an instance of the {@link VkDeviceGeneratedCommandsLimitsNVX} structure, that will be filled with returned information.
+     * @param pFeatures      a pointer to a {@link VkDeviceGeneratedCommandsFeaturesNVX} structure in which features are returned.
+     * @param pLimits        a pointer to a {@link VkDeviceGeneratedCommandsLimitsNVX} structure in which limitations are returned.
      */
     public static void vkGetPhysicalDeviceGeneratedCommandsPropertiesNVX(VkPhysicalDevice physicalDevice, @NativeType("VkDeviceGeneratedCommandsFeaturesNVX *") VkDeviceGeneratedCommandsFeaturesNVX pFeatures, @NativeType("VkDeviceGeneratedCommandsLimitsNVX *") VkDeviceGeneratedCommandsLimitsNVX pLimits) {
         nvkGetPhysicalDeviceGeneratedCommandsPropertiesNVX(physicalDevice, pFeatures.address(), pLimits.address());

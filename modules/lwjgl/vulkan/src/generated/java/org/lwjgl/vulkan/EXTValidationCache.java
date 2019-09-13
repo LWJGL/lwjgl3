@@ -171,7 +171,7 @@ public class EXTValidationCache {
      * <p>{@link VkAllocationCallbacks}, {@link VkValidationCacheCreateInfoEXT}</p>
      *
      * @param device           the logical device that creates the validation cache object.
-     * @param pCreateInfo      a pointer to a {@link VkValidationCacheCreateInfoEXT} structure that contains the initial parameters for the validation cache object.
+     * @param pCreateInfo      a pointer to a {@link VkValidationCacheCreateInfoEXT} structure containing the initial parameters for the validation cache object.
      * @param pAllocator       controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      * @param pValidationCache a pointer to a {@code VkValidationCacheEXT} handle in which the resulting validation cache object is returned.
      */
@@ -317,7 +317,7 @@ public class EXTValidationCache {
      *
      * @param device     the logical device that owns the validation cache objects.
      * @param dstCache   the handle of the validation cache to merge results into.
-     * @param pSrcCaches an array of validation cache handles, which will be merged into {@code dstCache}. The previous contents of {@code dstCache} are included after the merge.
+     * @param pSrcCaches a pointer to an array of validation cache handles, which will be merged into {@code dstCache}. The previous contents of {@code dstCache} are included after the merge.
      */
     @NativeType("VkResult")
     public static int vkMergeValidationCachesEXT(VkDevice device, @NativeType("VkValidationCacheEXT") long dstCache, @NativeType("VkValidationCacheEXT const *") LongBuffer pSrcCaches) {

@@ -212,7 +212,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
         """,
 
         VkDevice("device", "the device that created the object."),
-        VkDebugMarkerObjectTagInfoEXT.const.p("pTagInfo", "a pointer to an instance of the ##VkDebugMarkerObjectTagInfoEXT structure specifying the parameters of the tag to attach to the object.")
+        VkDebugMarkerObjectTagInfoEXT.const.p("pTagInfo", "a pointer to a ##VkDebugMarkerObjectTagInfoEXT structure specifying the parameters of the tag to attach to the object.")
     )
 
     VkResult(
@@ -258,7 +258,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
         """,
 
         VkDevice("device", "the device that created the object."),
-        VkDebugMarkerObjectNameInfoEXT.const.p("pNameInfo", "a pointer to an instance of the ##VkDebugMarkerObjectNameInfoEXT structure specifying the parameters of the name to set on the object.")
+        VkDebugMarkerObjectNameInfoEXT.const.p("pNameInfo", "a pointer to a ##VkDebugMarkerObjectNameInfoEXT structure specifying the parameters of the name to set on the object.")
     )
 
     void(
@@ -298,7 +298,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
         """,
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command is recorded."),
-        VkDebugMarkerMarkerInfoEXT.const.p("pMarkerInfo", "a pointer to an instance of the ##VkDebugMarkerMarkerInfoEXT structure specifying the parameters of the marker region to open.")
+        VkDebugMarkerMarkerInfoEXT.const.p("pMarkerInfo", "a pointer to a ##VkDebugMarkerMarkerInfoEXT structure specifying the parameters of the marker region to open.")
     )
 
     void(
@@ -381,6 +381,6 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
         """,
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command is recorded."),
-        VkDebugMarkerMarkerInfoEXT.const.p("pMarkerInfo", "a pointer to an instance of the ##VkDebugMarkerMarkerInfoEXT structure specifying the parameters of the marker to insert.")
+        VkDebugMarkerMarkerInfoEXT.const.p("pMarkerInfo", "a pointer to a ##VkDebugMarkerMarkerInfoEXT structure specifying the parameters of the marker to insert.")
     )
 }

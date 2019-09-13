@@ -118,7 +118,7 @@ val KHR_external_fence_win32 = "KHRExternalFenceWin32".nativeClassVK("KHR_extern
         """,
 
         VkDevice("device", "the logical device that created the fence."),
-        VkImportFenceWin32HandleInfoKHR.const.p("pImportFenceWin32HandleInfo", "points to a ##VkImportFenceWin32HandleInfoKHR structure specifying the fence and import parameters.")
+        VkImportFenceWin32HandleInfoKHR.const.p("pImportFenceWin32HandleInfo", "a pointer to a ##VkImportFenceWin32HandleInfoKHR structure specifying the fence and import parameters.")
     )
 
     VkResult(
@@ -166,7 +166,7 @@ val KHR_external_fence_win32 = "KHRExternalFenceWin32".nativeClassVK("KHR_extern
         """,
 
         VkDevice("device", "the logical device that created the fence being exported."),
-        VkFenceGetWin32HandleInfoKHR.const.p("pGetWin32HandleInfo", "a pointer to an instance of the ##VkFenceGetWin32HandleInfoKHR structure containing parameters of the export operation."),
+        VkFenceGetWin32HandleInfoKHR.const.p("pGetWin32HandleInfo", "a pointer to a ##VkFenceGetWin32HandleInfoKHR structure containing parameters of the export operation."),
         Check(1)..HANDLE.p("pHandle", "will return the Windows handle representing the fence state.")
     )
 }

@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code reductionMode} &ndash; an enum of type {@code VkSamplerReductionModeEXT} that controls how texture filtering combines texel values.</li>
+ * <li>{@code reductionMode} &ndash; a {@code VkSamplerReductionModeEXT} value controlling how texture filtering combines texel values.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

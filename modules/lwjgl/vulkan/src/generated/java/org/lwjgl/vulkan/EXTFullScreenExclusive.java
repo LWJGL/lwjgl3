@@ -193,7 +193,7 @@ public class EXTFullScreenExclusive {
      * <p>{@link VkPhysicalDeviceSurfaceInfo2KHR}</p>
      *
      * @param physicalDevice    the physical device that will be associated with the swapchain to be created, as described for {@link KHRSwapchain#vkCreateSwapchainKHR CreateSwapchainKHR}.
-     * @param pSurfaceInfo      points to an instance of the {@link VkPhysicalDeviceSurfaceInfo2KHR} structure, describing the surface and other fixed parameters that would be consumed by {@link KHRSwapchain#vkCreateSwapchainKHR CreateSwapchainKHR}.
+     * @param pSurfaceInfo      a pointer to a {@link VkPhysicalDeviceSurfaceInfo2KHR} structure describing the surface and other fixed parameters that would be consumed by {@link KHRSwapchain#vkCreateSwapchainKHR CreateSwapchainKHR}.
      * @param pPresentModeCount a pointer to an integer related to the number of presentation modes available or queried, as described below.
      * @param pPresentModes     either {@code NULL} or a pointer to an array of {@code VkPresentModeKHR} values, indicating the supported presentation modes.
      */
@@ -364,8 +364,8 @@ public class EXTFullScreenExclusive {
      * <p>{@link VkPhysicalDeviceSurfaceInfo2KHR}</p>
      *
      * @param device       the logical device.
-     * @param pSurfaceInfo points to an instance of the VkPhysicalDeviceSurfaceInfo2KHR structure, describing the surface and other fixed parameters that would be consumed by vkCreateSwapchainKHR.
-     * @param pModes       a pointer to a value of type {@code VkDeviceGroupPresentModeFlagsKHR} that is filled with the supported device group present modes for the surface.
+     * @param pSurfaceInfo a pointer to a {@link VkPhysicalDeviceSurfaceInfo2KHR} structure describing the surface and other fixed parameters that would be consumed by {@link KHRSwapchain#vkCreateSwapchainKHR CreateSwapchainKHR}.
+     * @param pModes       a pointer to a {@code VkDeviceGroupPresentModeFlagsKHR} in which the supported device group present modes for the surface are returned.
      */
     @NativeType("VkResult")
     public static int vkGetDeviceGroupSurfacePresentModes2EXT(VkDevice device, @NativeType("VkPhysicalDeviceSurfaceInfo2KHR const *") VkPhysicalDeviceSurfaceInfo2KHR pSurfaceInfo, @NativeType("VkDeviceGroupPresentModeFlagsKHR *") IntBuffer pModes) {

@@ -338,7 +338,7 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassVK("INTEL_perfo
         """,
 
         VkDevice("device", "the logical device used for the queries."),
-        VkInitializePerformanceApiInfoINTEL.const.p("pInitializeInfo", "a pointer to the initialization parameters.")
+        VkInitializePerformanceApiInfoINTEL.const.p("pInitializeInfo", "a pointer to a ##VkInitializePerformanceApiInfoINTEL structure specifying initialization parameters.")
     )
 
     void(
@@ -526,7 +526,7 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassVK("INTEL_perfo
         """,
 
         VkCommandBuffer("commandBuffer", "the command buffer where the override takes place."),
-        VkPerformanceOverrideInfoINTEL.const.p("pOverrideInfo", "a pointer to a ##VkPerformanceOverrideInfoINTEL selecting the parameter to override.")
+        VkPerformanceOverrideInfoINTEL.const.p("pOverrideInfo", "a pointer to a ##VkPerformanceOverrideInfoINTEL structure selecting the parameter to override.")
     )
 
     VkResult(
@@ -569,7 +569,7 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassVK("INTEL_perfo
         """,
 
         VkDevice("device", "the logical device that the performance query commands will be submitted to."),
-        VkPerformanceConfigurationAcquireInfoINTEL.const.p("pAcquireInfo", "a pointer to ##VkPerformanceConfigurationAcquireInfoINTEL."),
+        VkPerformanceConfigurationAcquireInfoINTEL.const.p("pAcquireInfo", "a pointer to a ##VkPerformanceConfigurationAcquireInfoINTEL structure, specifying the performance configuration to acquire."),
         Check(1)..VkPerformanceConfigurationINTEL.p("pConfiguration", "a pointer to a {@code VkPerformanceConfigurationINTEL} handle in which the resulting configuration object is returned.")
     )
 
@@ -703,6 +703,6 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassVK("INTEL_perfo
 
         VkDevice("device", "the logical device to query."),
         VkPerformanceParameterTypeINTEL("parameter", "the parameter to query."),
-        VkPerformanceValueINTEL.p("pValue", "points to an instance of the ##VkPerformanceValueINTEL structure in which the type and value of the parameter are returned.")
+        VkPerformanceValueINTEL.p("pValue", "a pointer to a ##VkPerformanceValueINTEL structure in which the type and value of the parameter are returned.")
     )
 }

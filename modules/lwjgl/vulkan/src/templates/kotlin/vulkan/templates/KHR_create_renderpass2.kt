@@ -129,9 +129,9 @@ val KHR_create_renderpass2 = "KHRCreateRenderpass2".nativeClassVK("KHR_create_re
         """,
 
         VkDevice("device", "the logical device that creates the render pass."),
-        VkRenderPassCreateInfo2KHR.const.p("pCreateInfo", "a pointer to an instance of the ##VkRenderPassCreateInfo2KHR structure that describes the parameters of the render pass."),
+        VkRenderPassCreateInfo2KHR.const.p("pCreateInfo", "a pointer to a ##VkRenderPassCreateInfo2KHR structure describing the parameters of the render pass."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkRenderPass.p("pRenderPass", "points to a {@code VkRenderPass} handle in which the resulting render pass object is returned.")
+        Check(1)..VkRenderPass.p("pRenderPass", "a pointer to a {@code VkRenderPass} handle in which the resulting render pass object is returned.")
     )
 
     void(
@@ -192,8 +192,8 @@ val KHR_create_renderpass2 = "KHRCreateRenderpass2".nativeClassVK("KHR_create_re
         """,
 
         VkCommandBuffer("commandBuffer", "the command buffer in which to record the command."),
-        VkRenderPassBeginInfo.const.p("pRenderPassBegin", "a pointer to a ##VkRenderPassBeginInfo structure (defined below) which indicates the render pass to begin an instance of, and the framebuffer the instance uses."),
-        VkSubpassBeginInfoKHR.const.p("pSubpassBeginInfo", "a pointer to a ##VkSubpassBeginInfoKHR structure which contains information about the subpass which is about to begin rendering.")
+        VkRenderPassBeginInfo.const.p("pRenderPassBegin", "a pointer to a ##VkRenderPassBeginInfo structure specifying the render pass to begin an instance of, and the framebuffer the instance uses."),
+        VkSubpassBeginInfoKHR.const.p("pSubpassBeginInfo", "a pointer to a ##VkSubpassBeginInfoKHR structure containing information about the subpass which is about to begin rendering.")
     )
 
     void(
@@ -247,8 +247,8 @@ val KHR_create_renderpass2 = "KHRCreateRenderpass2".nativeClassVK("KHR_create_re
         """,
 
         VkCommandBuffer("commandBuffer", "the command buffer in which to record the command."),
-        VkSubpassBeginInfoKHR.const.p("pSubpassBeginInfo", "a pointer to a ##VkSubpassBeginInfoKHR structure which contains information about the subpass which is about to begin rendering."),
-        VkSubpassEndInfoKHR.const.p("pSubpassEndInfo", "a pointer to a ##VkSubpassEndInfoKHR structure which contains information about how the previous subpass will be ended.")
+        VkSubpassBeginInfoKHR.const.p("pSubpassBeginInfo", "a pointer to a ##VkSubpassBeginInfoKHR structure containing information about the subpass which is about to begin rendering."),
+        VkSubpassEndInfoKHR.const.p("pSubpassEndInfo", "a pointer to a ##VkSubpassEndInfoKHR structure containing information about how the previous subpass will be ended.")
     )
 
     void(
@@ -300,6 +300,6 @@ val KHR_create_renderpass2 = "KHRCreateRenderpass2".nativeClassVK("KHR_create_re
         """,
 
         VkCommandBuffer("commandBuffer", "the command buffer in which to end the current render pass instance."),
-        VkSubpassEndInfoKHR.const.p("pSubpassEndInfo", "a pointer to a ##VkSubpassEndInfoKHR structure which contains information about how the previous subpass will be ended.")
+        VkSubpassEndInfoKHR.const.p("pSubpassEndInfo", "a pointer to a ##VkSubpassEndInfoKHR structure containing information about how the previous subpass will be ended.")
     )
 }

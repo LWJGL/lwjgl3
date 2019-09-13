@@ -240,7 +240,7 @@ public class VK10 {
      * 
      * <ul>
      * <li>If an allocation is scoped to the duration of a command, the allocator will use the {@link #VK_SYSTEM_ALLOCATION_SCOPE_COMMAND SYSTEM_ALLOCATION_SCOPE_COMMAND} allocation scope. The most specific allocator available is used: if the object being created or manipulated has an allocator, that object&#8217;s allocator will be used, else if the parent {@code VkDevice} has an allocator it will be used, else if the parent {@code VkInstance} has an allocator it will be used. Else,</li>
-     * <li>If an allocation is associated with an object of type {@code VkValidationCacheEXT} or {@code VkPipelineCache}, the allocator will use the {@link #VK_SYSTEM_ALLOCATION_SCOPE_CACHE SYSTEM_ALLOCATION_SCOPE_CACHE} allocation scope. The most specific allocator available is used (cache, else device, else instance). Else,</li>
+     * <li>If an allocation is associated with a {@code VkValidationCacheEXT} or {@code VkPipelineCache} object, the allocator will use the {@link #VK_SYSTEM_ALLOCATION_SCOPE_CACHE SYSTEM_ALLOCATION_SCOPE_CACHE} allocation scope. The most specific allocator available is used (cache, else device, else instance). Else,</li>
      * <li>If an allocation is scoped to the lifetime of an object, that object is being created or manipulated by the command, and that object&#8217;s type is not {@code VkDevice} or {@code VkInstance}, the allocator will use an allocation scope of {@link #VK_SYSTEM_ALLOCATION_SCOPE_OBJECT SYSTEM_ALLOCATION_SCOPE_OBJECT}. The most specific allocator available is used (object, else device, else instance). Else,</li>
      * <li>If an allocation is scoped to the lifetime of a device, the allocator will use an allocation scope of {@link #VK_SYSTEM_ALLOCATION_SCOPE_DEVICE SYSTEM_ALLOCATION_SCOPE_DEVICE}. The most specific allocator available is used (device, else instance). Else,</li>
      * <li>If the allocation is scoped to the lifetime of an instance and the instance has an allocator, its allocator will be used with an allocation scope of {@link #VK_SYSTEM_ALLOCATION_SCOPE_INSTANCE SYSTEM_ALLOCATION_SCOPE_INSTANCE}.</li>
@@ -512,6 +512,14 @@ public class VK10 {
      * <li>{@link VK11#VK_FORMAT_G16_B16_R16_3PLANE_422_UNORM FORMAT_G16_B16_R16_3PLANE_422_UNORM} specifies an unsigned normalized <em>multi-planar format</em> that has a 16-bit G component in each 16-bit word of plane 0, a 16-bit B component in each 16-bit word of plane 1, and a 16-bit R component in each 16-bit word of plane 2. The horizontal dimension of the R and B plane is halved relative to the image dimensions, and each R and B value is shared with the G components for which <code>floor(i<sub>G</sub> &times; 0.5) = i<sub>B</sub> = i<sub>R</sub></code>. The location of each plane when this image is in linear layout can be determined via {@link #vkGetImageSubresourceLayout GetImageSubresourceLayout}, using {@link VK11#VK_IMAGE_ASPECT_PLANE_0_BIT IMAGE_ASPECT_PLANE_0_BIT} for the G plane, {@link VK11#VK_IMAGE_ASPECT_PLANE_1_BIT IMAGE_ASPECT_PLANE_1_BIT} for the B plane, and {@link VK11#VK_IMAGE_ASPECT_PLANE_2_BIT IMAGE_ASPECT_PLANE_2_BIT} for the R plane. Images in this format <b>must</b> be defined with a width that is a multiple of two.</li>
      * <li>{@link VK11#VK_FORMAT_G16_B16R16_2PLANE_422_UNORM FORMAT_G16_B16R16_2PLANE_422_UNORM} specifies an unsigned normalized <em>multi-planar format</em> that has a 16-bit G component in each 16-bit word of plane 0, and a two-component, 32-bit BR plane 1 consisting of a 16-bit B component in the word in bytes 0..1, and a 16-bit R component in the word in bytes 2..3. The horizontal dimensions of the BR plane is halved relative to the image dimensions, and each R and B value is shared with the G components for which <code>floor(i<sub>G</sub> &times; 0.5) = i<sub>B</sub> = i<sub>R</sub></code>. The location of each plane when this image is in linear layout can be determined via {@link #vkGetImageSubresourceLayout GetImageSubresourceLayout}, using {@link VK11#VK_IMAGE_ASPECT_PLANE_0_BIT IMAGE_ASPECT_PLANE_0_BIT} for the G plane, and {@link VK11#VK_IMAGE_ASPECT_PLANE_1_BIT IMAGE_ASPECT_PLANE_1_BIT} for the BR plane. Images in this format <b>must</b> be defined with a width that is a multiple of two.</li>
      * <li>{@link VK11#VK_FORMAT_G16_B16_R16_3PLANE_444_UNORM FORMAT_G16_B16_R16_3PLANE_444_UNORM} specifies an unsigned normalized <em>multi-planar format</em> that has a 16-bit G component in each 16-bit word of plane 0, a 16-bit B component in each 16-bit word of plane 1, and a 16-bit R component in each 16-bit word of plane 2. Each plane has the same dimensions and each R, G and B component contributes to a single texel. The location of each plane when this image is in linear layout can be determined via {@link #vkGetImageSubresourceLayout GetImageSubresourceLayout}, using {@link VK11#VK_IMAGE_ASPECT_PLANE_0_BIT IMAGE_ASPECT_PLANE_0_BIT} for the G plane, {@link VK11#VK_IMAGE_ASPECT_PLANE_1_BIT IMAGE_ASPECT_PLANE_1_BIT} for the B plane, and {@link VK11#VK_IMAGE_ASPECT_PLANE_2_BIT IMAGE_ASPECT_PLANE_2_BIT} for the R plane.</li>
+     * <li>{@link IMGFormatPVRTC#VK_FORMAT_PVRTC1_2BPP_UNORM_BLOCK_IMG FORMAT_PVRTC1_2BPP_UNORM_BLOCK_IMG} specifies a four-component, PVRTC compressed format where each 64-bit compressed texel block encodes an 8×4 rectangle of unsigned normalized RGBA texel data.</li>
+     * <li>{@link IMGFormatPVRTC#VK_FORMAT_PVRTC1_4BPP_UNORM_BLOCK_IMG FORMAT_PVRTC1_4BPP_UNORM_BLOCK_IMG} specifies a four-component, PVRTC compressed format where each 64-bit compressed texel block encodes a 4×4 rectangle of unsigned normalized RGBA texel data.</li>
+     * <li>{@link IMGFormatPVRTC#VK_FORMAT_PVRTC2_2BPP_UNORM_BLOCK_IMG FORMAT_PVRTC2_2BPP_UNORM_BLOCK_IMG} specifies a four-component, PVRTC compressed format where each 64-bit compressed texel block encodes an 8×4 rectangle of unsigned normalized RGBA texel data.</li>
+     * <li>{@link IMGFormatPVRTC#VK_FORMAT_PVRTC2_4BPP_UNORM_BLOCK_IMG FORMAT_PVRTC2_4BPP_UNORM_BLOCK_IMG} specifies a four-component, PVRTC compressed format where each 64-bit compressed texel block encodes a 4×4 rectangle of unsigned normalized RGBA texel data.</li>
+     * <li>{@link IMGFormatPVRTC#VK_FORMAT_PVRTC1_2BPP_SRGB_BLOCK_IMG FORMAT_PVRTC1_2BPP_SRGB_BLOCK_IMG} specifies a four-component, PVRTC compressed format where each 64-bit compressed texel block encodes an 8×4 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</li>
+     * <li>{@link IMGFormatPVRTC#VK_FORMAT_PVRTC1_4BPP_SRGB_BLOCK_IMG FORMAT_PVRTC1_4BPP_SRGB_BLOCK_IMG} specifies a four-component, PVRTC compressed format where each 64-bit compressed texel block encodes a 4×4 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</li>
+     * <li>{@link IMGFormatPVRTC#VK_FORMAT_PVRTC2_2BPP_SRGB_BLOCK_IMG FORMAT_PVRTC2_2BPP_SRGB_BLOCK_IMG} specifies a four-component, PVRTC compressed format where each 64-bit compressed texel block encodes an 8×4 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</li>
+     * <li>{@link IMGFormatPVRTC#VK_FORMAT_PVRTC2_4BPP_SRGB_BLOCK_IMG FORMAT_PVRTC2_4BPP_SRGB_BLOCK_IMG} specifies a four-component, PVRTC compressed format where each 64-bit compressed texel block encodes a 4×4 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</li>
      * </ul>
      * 
      * <h5>See Also</h5>
@@ -1117,6 +1125,13 @@ public class VK10 {
      * <li>{@link #VK_IMAGE_ASPECT_DEPTH_BIT IMAGE_ASPECT_DEPTH_BIT} specifies the depth aspect.</li>
      * <li>{@link #VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT} specifies the stencil aspect.</li>
      * <li>{@link #VK_IMAGE_ASPECT_METADATA_BIT IMAGE_ASPECT_METADATA_BIT} specifies the metadata aspect, used for sparse <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#sparsememory">sparse resource</a> operations.</li>
+     * <li>{@link VK11#VK_IMAGE_ASPECT_PLANE_0_BIT IMAGE_ASPECT_PLANE_0_BIT} specifies plane 0 of a <em>multi-planar</em> image format.</li>
+     * <li>{@link VK11#VK_IMAGE_ASPECT_PLANE_1_BIT IMAGE_ASPECT_PLANE_1_BIT} specifies plane 1 of a <em>multi-planar</em> image format.</li>
+     * <li>{@link VK11#VK_IMAGE_ASPECT_PLANE_2_BIT IMAGE_ASPECT_PLANE_2_BIT} specifies plane 2 of a <em>multi-planar</em> image format.</li>
+     * <li>{@link EXTImageDrmFormatModifier#VK_IMAGE_ASPECT_MEMORY_PLANE_0_BIT_EXT IMAGE_ASPECT_MEMORY_PLANE_0_BIT_EXT} specifies <em>memory plane</em> 0.</li>
+     * <li>{@link EXTImageDrmFormatModifier#VK_IMAGE_ASPECT_MEMORY_PLANE_1_BIT_EXT IMAGE_ASPECT_MEMORY_PLANE_1_BIT_EXT} specifies <em>memory plane</em> 1.</li>
+     * <li>{@link EXTImageDrmFormatModifier#VK_IMAGE_ASPECT_MEMORY_PLANE_2_BIT_EXT IMAGE_ASPECT_MEMORY_PLANE_2_BIT_EXT} specifies <em>memory plane</em> 2.</li>
+     * <li>{@link EXTImageDrmFormatModifier#VK_IMAGE_ASPECT_MEMORY_PLANE_3_BIT_EXT IMAGE_ASPECT_MEMORY_PLANE_3_BIT_EXT} specifies <em>memory plane</em> 3.</li>
      * </ul>
      * 
      * <h5>See Also</h5>
@@ -2646,7 +2661,7 @@ public class VK10 {
     public static final int VK_API_VERSION_1_0 = VK_MAKE_VERSION(1, 0, 0);
 
     /** The Vulkan registry version used to generate the LWJGL bindings. */
-    public static final int VK_HEADER_VERSION = 121;
+    public static final int VK_HEADER_VERSION = 122;
 
     /**
      * The reserved handle {@code VK_NULL_HANDLE} <b>can</b> be passed in place of valid object handles when explicitly called out in the specification. Any
@@ -2889,7 +2904,7 @@ public class VK10 {
      * 
      * <p>{@link VkAllocationCallbacks}, {@link VkInstanceCreateInfo}</p>
      *
-     * @param pCreateInfo points to an instance of {@link VkInstanceCreateInfo} controlling creation of the instance.
+     * @param pCreateInfo a pointer to a {@link VkInstanceCreateInfo} structure controlling creation of the instance.
      * @param pAllocator  controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      * @param pInstance   points a {@code VkInstance} handle in which the resulting instance is returned.
      */
@@ -3178,7 +3193,7 @@ public class VK10 {
      * @param tiling                 a {@code VkImageTiling} value specifying the image tiling, corresponding to {@link VkImageCreateInfo}{@code ::tiling}.
      * @param usage                  a bitmask of {@code VkImageUsageFlagBits} specifying the intended usage of the image, corresponding to {@link VkImageCreateInfo}{@code ::usage}.
      * @param flags                  a bitmask of {@code VkImageCreateFlagBits} specifying additional parameters of the image, corresponding to {@link VkImageCreateInfo}{@code ::flags}.
-     * @param pImageFormatProperties points to an instance of the {@link VkImageFormatProperties} structure in which capabilities are returned.
+     * @param pImageFormatProperties a pointer to a {@link VkImageFormatProperties} structure in which capabilities are returned.
      */
     @NativeType("VkResult")
     public static int vkGetPhysicalDeviceImageFormatProperties(VkPhysicalDevice physicalDevice, @NativeType("VkFormat") int format, @NativeType("VkImageType") int type, @NativeType("VkImageTiling") int tiling, @NativeType("VkImageUsageFlags") int usage, @NativeType("VkImageCreateFlags") int flags, @NativeType("VkImageFormatProperties *") VkImageFormatProperties pImageFormatProperties) {
@@ -3217,7 +3232,7 @@ public class VK10 {
      * <p>{@link VkPhysicalDeviceProperties}</p>
      *
      * @param physicalDevice the handle to the physical device whose properties will be queried.
-     * @param pProperties    points to an instance of the {@link VkPhysicalDeviceProperties} structure, that will be filled with returned information.
+     * @param pProperties    a pointer to a {@link VkPhysicalDeviceProperties} structure in which properties are returned.
      */
     public static void vkGetPhysicalDeviceProperties(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceProperties *") VkPhysicalDeviceProperties pProperties) {
         nvkGetPhysicalDeviceProperties(physicalDevice, pProperties.address());
@@ -3308,7 +3323,7 @@ public class VK10 {
      * <p>{@link VkPhysicalDeviceMemoryProperties}</p>
      *
      * @param physicalDevice    the handle to the device to query.
-     * @param pMemoryProperties points to an instance of the {@link VkPhysicalDeviceMemoryProperties} structure in which the properties are returned.
+     * @param pMemoryProperties a pointer to a {@link VkPhysicalDeviceMemoryProperties} structure in which the properties are returned.
      */
     public static void vkGetPhysicalDeviceMemoryProperties(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceMemoryProperties *") VkPhysicalDeviceMemoryProperties pMemoryProperties) {
         nvkGetPhysicalDeviceMemoryProperties(physicalDevice, pMemoryProperties.address());
@@ -3493,8 +3508,8 @@ public class VK10 {
      * <table class="lwjgl">
      * <thead><tr><th>{@code device}</th><th>{@code pName}</th><th>return value</th></tr></thead>
      * <tbody>
-     * <tr><td>{@code NULL}</td><td>*&lt;1&gt;</td><td>undefined</td></tr>
-     * <tr><td>invalid device</td><td>*&lt;1&gt;</td><td>undefined</td></tr>
+     * <tr><td>{@code NULL}</td><td>*<sup>1</sup></td><td>undefined</td></tr>
+     * <tr><td>invalid device</td><td>*<sup>1</sup></td><td>undefined</td></tr>
      * <tr><td>device</td><td>{@code NULL}</td><td>undefined</td></tr>
      * <tr><td>device</td><td>core device-level Vulkan command</td><td>fp<sup>2</sup></td></tr>
      * <tr><td>device</td><td>enabled device extension device-level commands</td><td>fp<sup>2</sup></td></tr>
@@ -3549,8 +3564,8 @@ public class VK10 {
      * <table class="lwjgl">
      * <thead><tr><th>{@code device}</th><th>{@code pName}</th><th>return value</th></tr></thead>
      * <tbody>
-     * <tr><td>{@code NULL}</td><td>*&lt;1&gt;</td><td>undefined</td></tr>
-     * <tr><td>invalid device</td><td>*&lt;1&gt;</td><td>undefined</td></tr>
+     * <tr><td>{@code NULL}</td><td>*<sup>1</sup></td><td>undefined</td></tr>
+     * <tr><td>invalid device</td><td>*<sup>1</sup></td><td>undefined</td></tr>
      * <tr><td>device</td><td>{@code NULL}</td><td>undefined</td></tr>
      * <tr><td>device</td><td>core device-level Vulkan command</td><td>fp<sup>2</sup></td></tr>
      * <tr><td>device</td><td>enabled device extension device-level commands</td><td>fp<sup>2</sup></td></tr>
@@ -3663,7 +3678,7 @@ public class VK10 {
      * @param physicalDevice <b>must</b> be one of the device handles returned from a call to {@code vkEnumeratePhysicalDevices} (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#devsandqueues-physical-device-enumeration">Physical Device Enumeration</a>).
      * @param pCreateInfo    a pointer to a {@link VkDeviceCreateInfo} structure containing information about how to create the device.
      * @param pAllocator     controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pDevice        points to a handle in which the created {@code VkDevice} is returned.
+     * @param pDevice        a pointer to a handle in which the created {@code VkDevice} is returned.
      */
     @NativeType("VkResult")
     public static int vkCreateDevice(VkPhysicalDevice physicalDevice, @NativeType("VkDeviceCreateInfo const *") VkDeviceCreateInfo pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkDevice *") PointerBuffer pDevice) {
@@ -4294,7 +4309,7 @@ public class VK10 {
      * <li>{@code queue} <b>must</b> be a valid {@code VkQueue} handle</li>
      * <li>If {@code submitCount} is not 0, {@code pSubmits} <b>must</b> be a valid pointer to an array of {@code submitCount} valid {@link VkSubmitInfo} structures</li>
      * <li>If {@code fence} is not {@link #VK_NULL_HANDLE NULL_HANDLE}, {@code fence} <b>must</b> be a valid {@code VkFence} handle</li>
-     * <li>Both of {@code fence}, and {@code queue} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+     * <li>Both of {@code fence}, and {@code queue} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
      * </ul>
      * 
      * <h5>Host Synchronization</h5>
@@ -4396,7 +4411,7 @@ public class VK10 {
      * <li>{@code queue} <b>must</b> be a valid {@code VkQueue} handle</li>
      * <li>If {@code submitCount} is not 0, {@code pSubmits} <b>must</b> be a valid pointer to an array of {@code submitCount} valid {@link VkSubmitInfo} structures</li>
      * <li>If {@code fence} is not {@link #VK_NULL_HANDLE NULL_HANDLE}, {@code fence} <b>must</b> be a valid {@code VkFence} handle</li>
-     * <li>Both of {@code fence}, and {@code queue} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+     * <li>Both of {@code fence}, and {@code queue} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
      * </ul>
      * 
      * <h5>Host Synchronization</h5>
@@ -4635,7 +4650,7 @@ public class VK10 {
      * <p>{@link VkAllocationCallbacks}, {@link VkMemoryAllocateInfo}</p>
      *
      * @param device        the logical device that owns the memory.
-     * @param pAllocateInfo a pointer to an instance of the {@link VkMemoryAllocateInfo} structure describing parameters of the allocation. A successful returned allocation <b>must</b> use the requested parameters&#8201;&#8212;&#8201;no substitution is permitted by the implementation.
+     * @param pAllocateInfo a pointer to a {@link VkMemoryAllocateInfo} structure describing parameters of the allocation. A successful returned allocation <b>must</b> use the requested parameters&#8201;&#8212;&#8201;no substitution is permitted by the implementation.
      * @param pAllocator    controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      * @param pMemory       a pointer to a {@code VkDeviceMemory} handle in which information about the allocated memory is returned.
      */
@@ -4806,7 +4821,7 @@ public class VK10 {
      * @param offset a zero-based byte offset from the beginning of the memory object.
      * @param size   the size of the memory range to map, or {@link #VK_WHOLE_SIZE WHOLE_SIZE} to map from {@code offset} to the end of the allocation.
      * @param flags  reserved for future use.
-     * @param ppData points to a pointer in which is returned a host-accessible pointer to the beginning of the mapped range. This pointer minus {@code offset} <b>must</b> be aligned to at least {@link VkPhysicalDeviceLimits}{@code ::minMemoryMapAlignment}.
+     * @param ppData a pointer to a {@code void *} variable in which is returned a host-accessible pointer to the beginning of the mapped range. This pointer minus {@code offset} <b>must</b> be aligned to at least {@link VkPhysicalDeviceLimits}{@code ::minMemoryMapAlignment}.
      */
     @NativeType("VkResult")
     public static int vkMapMemory(VkDevice device, @NativeType("VkDeviceMemory") long memory, @NativeType("VkDeviceSize") long offset, @NativeType("VkDeviceSize") long size, @NativeType("VkMemoryMapFlags") int flags, @NativeType("void **") PointerBuffer ppData) {
@@ -5365,7 +5380,7 @@ public class VK10 {
      *
      * @param device              the logical device that owns the buffer.
      * @param buffer              the buffer to query.
-     * @param pMemoryRequirements points to an instance of the {@link VkMemoryRequirements} structure in which the memory requirements of the buffer object are returned.
+     * @param pMemoryRequirements a pointer to a {@link VkMemoryRequirements} structure in which the memory requirements of the buffer object are returned.
      */
     public static void vkGetBufferMemoryRequirements(VkDevice device, @NativeType("VkBuffer") long buffer, @NativeType("VkMemoryRequirements *") VkMemoryRequirements pMemoryRequirements) {
         nvkGetBufferMemoryRequirements(device, buffer, pMemoryRequirements.address());
@@ -5413,7 +5428,7 @@ public class VK10 {
      *
      * @param device              the logical device that owns the image.
      * @param image               the image to query.
-     * @param pMemoryRequirements points to an instance of the {@link VkMemoryRequirements} structure in which the memory requirements of the image object are returned.
+     * @param pMemoryRequirements a pointer to a {@link VkMemoryRequirements} structure in which the memory requirements of the image object are returned.
      */
     public static void vkGetImageMemoryRequirements(VkDevice device, @NativeType("VkImage") long image, @NativeType("VkMemoryRequirements *") VkMemoryRequirements pMemoryRequirements) {
         nvkGetImageMemoryRequirements(device, image, pMemoryRequirements.address());
@@ -5620,7 +5635,7 @@ public class VK10 {
      * <li>If {@code bindInfoCount} is not 0, {@code pBindInfo} <b>must</b> be a valid pointer to an array of {@code bindInfoCount} valid {@link VkBindSparseInfo} structures</li>
      * <li>If {@code fence} is not {@link #VK_NULL_HANDLE NULL_HANDLE}, {@code fence} <b>must</b> be a valid {@code VkFence} handle</li>
      * <li>The {@code queue} <b>must</b> support sparse binding operations</li>
-     * <li>Both of {@code fence}, and {@code queue} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+     * <li>Both of {@code fence}, and {@code queue} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
      * </ul>
      * 
      * <h5>Host Synchronization</h5>
@@ -5660,7 +5675,7 @@ public class VK10 {
      * <p>{@link VkBindSparseInfo}</p>
      *
      * @param queue     the queue that the sparse binding operations will be submitted to.
-     * @param pBindInfo an array of {@link VkBindSparseInfo} structures, each specifying a sparse binding submission batch.
+     * @param pBindInfo a pointer to an array of {@link VkBindSparseInfo} structures, each specifying a sparse binding submission batch.
      * @param fence     an optional: handle to a fence to be signaled. If {@code fence} is not {@link #VK_NULL_HANDLE NULL_HANDLE}, it defines a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-fences-signaling">fence signal operation</a>.
      */
     @NativeType("VkResult")
@@ -5709,7 +5724,7 @@ public class VK10 {
      * <li>If {@code bindInfoCount} is not 0, {@code pBindInfo} <b>must</b> be a valid pointer to an array of {@code bindInfoCount} valid {@link VkBindSparseInfo} structures</li>
      * <li>If {@code fence} is not {@link #VK_NULL_HANDLE NULL_HANDLE}, {@code fence} <b>must</b> be a valid {@code VkFence} handle</li>
      * <li>The {@code queue} <b>must</b> support sparse binding operations</li>
-     * <li>Both of {@code fence}, and {@code queue} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+     * <li>Both of {@code fence}, and {@code queue} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
      * </ul>
      * 
      * <h5>Host Synchronization</h5>
@@ -5749,7 +5764,7 @@ public class VK10 {
      * <p>{@link VkBindSparseInfo}</p>
      *
      * @param queue     the queue that the sparse binding operations will be submitted to.
-     * @param pBindInfo an array of {@link VkBindSparseInfo} structures, each specifying a sparse binding submission batch.
+     * @param pBindInfo a pointer to an array of {@link VkBindSparseInfo} structures, each specifying a sparse binding submission batch.
      * @param fence     an optional: handle to a fence to be signaled. If {@code fence} is not {@link #VK_NULL_HANDLE NULL_HANDLE}, it defines a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-fences-signaling">fence signal operation</a>.
      */
     @NativeType("VkResult")
@@ -5810,9 +5825,9 @@ public class VK10 {
      * <p>{@link VkAllocationCallbacks}, {@link VkFenceCreateInfo}</p>
      *
      * @param device      the logical device that creates the fence.
-     * @param pCreateInfo a pointer to an instance of the {@link VkFenceCreateInfo} structure which contains information about how the fence is to be created.
+     * @param pCreateInfo a pointer to a {@link VkFenceCreateInfo} structure containing information about how the fence is to be created.
      * @param pAllocator  controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pFence      points to a handle in which the resulting fence object is returned.
+     * @param pFence      a pointer to a handle in which the resulting fence object is returned.
      */
     @NativeType("VkResult")
     public static int vkCreateFence(VkDevice device, @NativeType("VkFenceCreateInfo const *") VkFenceCreateInfo pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkFence *") LongBuffer pFence) {
@@ -6296,9 +6311,9 @@ public class VK10 {
      * <p>{@link VkAllocationCallbacks}, {@link VkSemaphoreCreateInfo}</p>
      *
      * @param device      the logical device that creates the semaphore.
-     * @param pCreateInfo a pointer to an instance of the {@link VkSemaphoreCreateInfo} structure which contains information about how the semaphore is to be created.
+     * @param pCreateInfo a pointer to a {@link VkSemaphoreCreateInfo} structure containing information about how the semaphore is to be created.
      * @param pAllocator  controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pSemaphore  points to a handle in which the resulting semaphore object is returned.
+     * @param pSemaphore  a pointer to a handle in which the resulting semaphore object is returned.
      */
     @NativeType("VkResult")
     public static int vkCreateSemaphore(VkDevice device, @NativeType("VkSemaphoreCreateInfo const *") VkSemaphoreCreateInfo pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkSemaphore *") LongBuffer pSemaphore) {
@@ -6424,9 +6439,9 @@ public class VK10 {
      * <p>{@link VkAllocationCallbacks}, {@link VkEventCreateInfo}</p>
      *
      * @param device      the logical device that creates the event.
-     * @param pCreateInfo a pointer to an instance of the {@link VkEventCreateInfo} structure which contains information about how the event is to be created.
+     * @param pCreateInfo a pointer to a {@link VkEventCreateInfo} structure containing information about how the event is to be created.
      * @param pAllocator  controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pEvent      points to a handle in which the resulting event object is returned.
+     * @param pEvent      a pointer to a handle in which the resulting event object is returned.
      */
     @NativeType("VkResult")
     public static int vkCreateEvent(VkDevice device, @NativeType("VkEventCreateInfo const *") VkEventCreateInfo pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkEvent *") LongBuffer pEvent) {
@@ -6733,7 +6748,7 @@ public class VK10 {
      * <p>{@link VkAllocationCallbacks}, {@link VkQueryPoolCreateInfo}</p>
      *
      * @param device      the logical device that creates the query pool.
-     * @param pCreateInfo a pointer to an instance of the {@link VkQueryPoolCreateInfo} structure containing the number and type of queries to be managed by the pool.
+     * @param pCreateInfo a pointer to a {@link VkQueryPoolCreateInfo} structure containing the number and type of queries to be managed by the pool.
      * @param pAllocator  controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      * @param pQueryPool  a pointer to a {@code VkQueryPool} handle in which the resulting query pool object is returned.
      */
@@ -7195,9 +7210,9 @@ public class VK10 {
      * <p>{@link VkAllocationCallbacks}, {@link VkBufferCreateInfo}</p>
      *
      * @param device      the logical device that creates the buffer object.
-     * @param pCreateInfo a pointer to an instance of the {@link VkBufferCreateInfo} structure containing parameters affecting creation of the buffer.
+     * @param pCreateInfo a pointer to a {@link VkBufferCreateInfo} structure containing parameters affecting creation of the buffer.
      * @param pAllocator  controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pBuffer     points to a {@code VkBuffer} handle in which the resulting buffer object is returned.
+     * @param pBuffer     a pointer to a {@code VkBuffer} handle in which the resulting buffer object is returned.
      */
     @NativeType("VkResult")
     public static int vkCreateBuffer(VkDevice device, @NativeType("VkBufferCreateInfo const *") VkBufferCreateInfo pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkBuffer *") LongBuffer pBuffer) {
@@ -7319,9 +7334,9 @@ public class VK10 {
      * <p>{@link VkAllocationCallbacks}, {@link VkBufferViewCreateInfo}</p>
      *
      * @param device      the logical device that creates the buffer view.
-     * @param pCreateInfo a pointer to an instance of the {@link VkBufferViewCreateInfo} structure containing parameters to be used to create the buffer.
+     * @param pCreateInfo a pointer to a {@link VkBufferViewCreateInfo} structure containing parameters to be used to create the buffer.
      * @param pAllocator  controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pView       points to a {@code VkBufferView} handle in which the resulting buffer view object is returned.
+     * @param pView       a pointer to a {@code VkBufferView} handle in which the resulting buffer view object is returned.
      */
     @NativeType("VkResult")
     public static int vkCreateBufferView(VkDevice device, @NativeType("VkBufferViewCreateInfo const *") VkBufferViewCreateInfo pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkBufferView *") LongBuffer pView) {
@@ -7450,9 +7465,9 @@ public class VK10 {
      * <p>{@link VkAllocationCallbacks}, {@link VkImageCreateInfo}</p>
      *
      * @param device      the logical device that creates the image.
-     * @param pCreateInfo a pointer to an instance of the {@link VkImageCreateInfo} structure containing parameters to be used to create the image.
+     * @param pCreateInfo a pointer to a {@link VkImageCreateInfo} structure containing parameters to be used to create the image.
      * @param pAllocator  controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pImage      points to a {@code VkImage} handle in which the resulting image object is returned.
+     * @param pImage      a pointer to a {@code VkImage} handle in which the resulting image object is returned.
      */
     @NativeType("VkResult")
     public static int vkCreateImage(VkDevice device, @NativeType("VkImageCreateInfo const *") VkImageCreateInfo pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkImage *") LongBuffer pImage) {
@@ -7580,7 +7595,7 @@ public class VK10 {
      * @param device       the logical device that owns the image.
      * @param image        the image whose layout is being queried.
      * @param pSubresource a pointer to a {@link VkImageSubresource} structure selecting a specific image for the image subresource.
-     * @param pLayout      points to a {@link VkSubresourceLayout} structure in which the layout is returned.
+     * @param pLayout      a pointer to a {@link VkSubresourceLayout} structure in which the layout is returned.
      */
     public static void vkGetImageSubresourceLayout(VkDevice device, @NativeType("VkImage") long image, @NativeType("VkImageSubresource const *") VkImageSubresource pSubresource, @NativeType("VkSubresourceLayout *") VkSubresourceLayout pLayout) {
         nvkGetImageSubresourceLayout(device, image, pSubresource.address(), pLayout.address());
@@ -7639,9 +7654,9 @@ public class VK10 {
      * <p>{@link VkAllocationCallbacks}, {@link VkImageViewCreateInfo}</p>
      *
      * @param device      the logical device that creates the image view.
-     * @param pCreateInfo a pointer to an instance of the {@link VkImageViewCreateInfo} structure containing parameters to be used to create the image view.
+     * @param pCreateInfo a pointer to a {@link VkImageViewCreateInfo} structure containing parameters to be used to create the image view.
      * @param pAllocator  controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pView       points to a {@code VkImageView} handle in which the resulting image view object is returned.
+     * @param pView       a pointer to a {@code VkImageView} handle in which the resulting image view object is returned.
      */
     @NativeType("VkResult")
     public static int vkCreateImageView(VkDevice device, @NativeType("VkImageViewCreateInfo const *") VkImageViewCreateInfo pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkImageView *") LongBuffer pView) {
@@ -7771,9 +7786,9 @@ public class VK10 {
      * <p>{@link VkAllocationCallbacks}, {@link VkShaderModuleCreateInfo}</p>
      *
      * @param device        the logical device that creates the shader module.
-     * @param pCreateInfo   a pointer to an instance of the {@link VkShaderModuleCreateInfo} structure.
+     * @param pCreateInfo   a pointer to a {@link VkShaderModuleCreateInfo} structure.
      * @param pAllocator    controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pShaderModule points to a {@code VkShaderModule} handle in which the resulting shader module object is returned.
+     * @param pShaderModule a pointer to a {@code VkShaderModule} handle in which the resulting shader module object is returned.
      */
     @NativeType("VkResult")
     public static int vkCreateShaderModule(VkDevice device, @NativeType("VkShaderModuleCreateInfo const *") VkShaderModuleCreateInfo pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkShaderModule *") LongBuffer pShaderModule) {
@@ -7913,7 +7928,7 @@ public class VK10 {
      * <p>{@link VkAllocationCallbacks}, {@link VkPipelineCacheCreateInfo}</p>
      *
      * @param device         the logical device that creates the pipeline cache object.
-     * @param pCreateInfo    a pointer to a {@link VkPipelineCacheCreateInfo} structure that contains the initial parameters for the pipeline cache object.
+     * @param pCreateInfo    a pointer to a {@link VkPipelineCacheCreateInfo} structure containing initial parameters for the pipeline cache object.
      * @param pAllocator     controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      * @param pPipelineCache a pointer to a {@code VkPipelineCache} handle in which the resulting pipeline cache object is returned.
      */
@@ -7988,7 +8003,7 @@ public class VK10 {
     /**
      * Unsafe version of: {@link #vkGetPipelineCacheData GetPipelineCacheData}
      *
-     * @param pDataSize a pointer to a value related to the amount of data in the pipeline cache, as described below.
+     * @param pDataSize a pointer to a {@code size_t} value related to the amount of data in the pipeline cache, as described below.
      */
     public static int nvkGetPipelineCacheData(VkDevice device, long pipelineCache, long pDataSize, long pData) {
         long __functionAddress = device.getCapabilities().vkGetPipelineCacheData;
@@ -8065,7 +8080,7 @@ public class VK10 {
      *
      * @param device        the logical device that owns the pipeline cache.
      * @param pipelineCache the pipeline cache to retrieve data from.
-     * @param pDataSize     a pointer to a value related to the amount of data in the pipeline cache, as described below.
+     * @param pDataSize     a pointer to a {@code size_t} value related to the amount of data in the pipeline cache, as described below.
      * @param pData         either {@code NULL} or a pointer to a buffer.
      */
     @NativeType("VkResult")
@@ -8149,7 +8164,7 @@ public class VK10 {
      *
      * @param device     the logical device that owns the pipeline cache objects.
      * @param dstCache   the handle of the pipeline cache to merge results into.
-     * @param pSrcCaches an array of pipeline cache handles, which will be merged into {@code dstCache}. The previous contents of {@code dstCache} are included after the merge.
+     * @param pSrcCaches a pointer to an array of pipeline cache handles, which will be merged into {@code dstCache}. The previous contents of {@code dstCache} are included after the merge.
      */
     @NativeType("VkResult")
     public static int vkMergePipelineCaches(VkDevice device, @NativeType("VkPipelineCache") long dstCache, @NativeType("VkPipelineCache const *") LongBuffer pSrcCaches) {
@@ -8232,9 +8247,9 @@ public class VK10 {
      *
      * @param device        the logical device that creates the graphics pipelines.
      * @param pipelineCache either {@link #VK_NULL_HANDLE NULL_HANDLE}, indicating that pipeline caching is disabled; or the handle of a valid <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#pipelines-cache">pipeline cache</a> object, in which case use of that cache is enabled for the duration of the command.
-     * @param pCreateInfos  an array of {@link VkGraphicsPipelineCreateInfo} structures.
+     * @param pCreateInfos  a pointer to an array of {@link VkGraphicsPipelineCreateInfo} structures.
      * @param pAllocator    controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pPipelines    a pointer to an array in which the resulting graphics pipeline objects are returned.
+     * @param pPipelines    a pointer to an array of {@code VkPipeline} handles in which the resulting graphics pipeline objects are returned.
      */
     @NativeType("VkResult")
     public static int vkCreateGraphicsPipelines(VkDevice device, @NativeType("VkPipelineCache") long pipelineCache, @NativeType("VkGraphicsPipelineCreateInfo const *") VkGraphicsPipelineCreateInfo.Buffer pCreateInfos, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkPipeline *") LongBuffer pPipelines) {
@@ -8316,9 +8331,9 @@ public class VK10 {
      *
      * @param device        the logical device that creates the compute pipelines.
      * @param pipelineCache either {@link #VK_NULL_HANDLE NULL_HANDLE}, indicating that pipeline caching is disabled; or the handle of a valid <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#pipelines-cache">pipeline cache</a> object, in which case use of that cache is enabled for the duration of the command.
-     * @param pCreateInfos  an array of {@link VkComputePipelineCreateInfo} structures.
+     * @param pCreateInfos  a pointer to an array of {@link VkComputePipelineCreateInfo} structures.
      * @param pAllocator    controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pPipelines    a pointer to an array in which the resulting compute pipeline objects are returned.
+     * @param pPipelines    a pointer to an array of {@code VkPipeline} handles in which the resulting compute pipeline objects are returned.
      */
     @NativeType("VkResult")
     public static int vkCreateComputePipelines(VkDevice device, @NativeType("VkPipelineCache") long pipelineCache, @NativeType("VkComputePipelineCreateInfo const *") VkComputePipelineCreateInfo.Buffer pCreateInfos, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkPipeline *") LongBuffer pPipelines) {
@@ -8441,9 +8456,9 @@ public class VK10 {
      * <p>{@link VkAllocationCallbacks}, {@link VkPipelineLayoutCreateInfo}</p>
      *
      * @param device          the logical device that creates the pipeline layout.
-     * @param pCreateInfo     a pointer to an instance of the {@link VkPipelineLayoutCreateInfo} structure specifying the state of the pipeline layout object.
+     * @param pCreateInfo     a pointer to a {@link VkPipelineLayoutCreateInfo} structure specifying the state of the pipeline layout object.
      * @param pAllocator      controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pPipelineLayout points to a {@code VkPipelineLayout} handle in which the resulting pipeline layout object is returned.
+     * @param pPipelineLayout a pointer to a {@code VkPipelineLayout} handle in which the resulting pipeline layout object is returned.
      */
     @NativeType("VkResult")
     public static int vkCreatePipelineLayout(VkDevice device, @NativeType("VkPipelineLayoutCreateInfo const *") VkPipelineLayoutCreateInfo pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkPipelineLayout *") LongBuffer pPipelineLayout) {
@@ -8566,9 +8581,9 @@ public class VK10 {
      * <p>{@link VkAllocationCallbacks}, {@link VkSamplerCreateInfo}</p>
      *
      * @param device      the logical device that creates the sampler.
-     * @param pCreateInfo a pointer to an instance of the {@link VkSamplerCreateInfo} structure specifying the state of the sampler object.
+     * @param pCreateInfo a pointer to a {@link VkSamplerCreateInfo} structure specifying the state of the sampler object.
      * @param pAllocator  controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pSampler    points to a {@code VkSampler} handle in which the resulting sampler object is returned.
+     * @param pSampler    a pointer to a {@code VkSampler} handle in which the resulting sampler object is returned.
      */
     @NativeType("VkResult")
     public static int vkCreateSampler(VkDevice device, @NativeType("VkSamplerCreateInfo const *") VkSamplerCreateInfo pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkSampler *") LongBuffer pSampler) {
@@ -8691,9 +8706,9 @@ public class VK10 {
      * <p>{@link VkAllocationCallbacks}, {@link VkDescriptorSetLayoutCreateInfo}</p>
      *
      * @param device      the logical device that creates the descriptor set layout.
-     * @param pCreateInfo a pointer to an instance of the {@link VkDescriptorSetLayoutCreateInfo} structure specifying the state of the descriptor set layout object.
+     * @param pCreateInfo a pointer to a {@link VkDescriptorSetLayoutCreateInfo} structure specifying the state of the descriptor set layout object.
      * @param pAllocator  controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pSetLayout  points to a {@code VkDescriptorSetLayout} handle in which the resulting descriptor set layout object is returned.
+     * @param pSetLayout  a pointer to a {@code VkDescriptorSetLayout} handle in which the resulting descriptor set layout object is returned.
      */
     @NativeType("VkResult")
     public static int vkCreateDescriptorSetLayout(VkDevice device, @NativeType("VkDescriptorSetLayoutCreateInfo const *") VkDescriptorSetLayoutCreateInfo pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkDescriptorSetLayout *") LongBuffer pSetLayout) {
@@ -8822,9 +8837,9 @@ public class VK10 {
      * <p>{@link VkAllocationCallbacks}, {@link VkDescriptorPoolCreateInfo}</p>
      *
      * @param device          the logical device that creates the descriptor pool.
-     * @param pCreateInfo     a pointer to an instance of the {@link VkDescriptorPoolCreateInfo} structure specifying the state of the descriptor pool object.
+     * @param pCreateInfo     a pointer to a {@link VkDescriptorPoolCreateInfo} structure specifying the state of the descriptor pool object.
      * @param pAllocator      controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pDescriptorPool points to a {@code VkDescriptorPool} handle in which the resulting descriptor pool object is returned.
+     * @param pDescriptorPool a pointer to a {@code VkDescriptorPool} handle in which the resulting descriptor pool object is returned.
      */
     @NativeType("VkResult")
     public static int vkCreateDescriptorPool(VkDevice device, @NativeType("VkDescriptorPoolCreateInfo const *") VkDescriptorPoolCreateInfo pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkDescriptorPool *") LongBuffer pDescriptorPool) {
@@ -9043,7 +9058,7 @@ public class VK10 {
      * <p>{@link VkDescriptorSetAllocateInfo}</p>
      *
      * @param device          the logical device that owns the descriptor pool.
-     * @param pAllocateInfo   a pointer to an instance of the {@link VkDescriptorSetAllocateInfo} structure describing parameters of the allocation.
+     * @param pAllocateInfo   a pointer to a {@link VkDescriptorSetAllocateInfo} structure describing parameters of the allocation.
      * @param pDescriptorSets a pointer to an array of {@code VkDescriptorSet} handles in which the resulting descriptor set objects are returned.
      */
     @NativeType("VkResult")
@@ -9126,7 +9141,7 @@ public class VK10 {
      *
      * @param device          the logical device that owns the descriptor pool.
      * @param descriptorPool  the descriptor pool from which the descriptor sets were allocated.
-     * @param pDescriptorSets an array of handles to {@code VkDescriptorSet} objects.
+     * @param pDescriptorSets a pointer to an array of handles to {@code VkDescriptorSet} objects.
      */
     @NativeType("VkResult")
     public static int vkFreeDescriptorSets(VkDevice device, @NativeType("VkDescriptorPool") long descriptorPool, @NativeType("VkDescriptorSet const *") LongBuffer pDescriptorSets) {
@@ -9336,9 +9351,9 @@ public class VK10 {
      * <p>{@link VkAllocationCallbacks}, {@link VkFramebufferCreateInfo}</p>
      *
      * @param device       the logical device that creates the framebuffer.
-     * @param pCreateInfo  points to a {@link VkFramebufferCreateInfo} structure which describes additional information about framebuffer creation.
+     * @param pCreateInfo  a pointer to a {@link VkFramebufferCreateInfo} structure describing additional information about framebuffer creation.
      * @param pAllocator   controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pFramebuffer points to a {@code VkFramebuffer} handle in which the resulting framebuffer object is returned.
+     * @param pFramebuffer a pointer to a {@code VkFramebuffer} handle in which the resulting framebuffer object is returned.
      */
     @NativeType("VkResult")
     public static int vkCreateFramebuffer(VkDevice device, @NativeType("VkFramebufferCreateInfo const *") VkFramebufferCreateInfo pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkFramebuffer *") LongBuffer pFramebuffer) {
@@ -9461,9 +9476,9 @@ public class VK10 {
      * <p>{@link VkAllocationCallbacks}, {@link VkRenderPassCreateInfo}</p>
      *
      * @param device      the logical device that creates the render pass.
-     * @param pCreateInfo a pointer to an instance of the {@link VkRenderPassCreateInfo} structure that describes the parameters of the render pass.
+     * @param pCreateInfo a pointer to a {@link VkRenderPassCreateInfo} structure describing the parameters of the render pass.
      * @param pAllocator  controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pRenderPass points to a {@code VkRenderPass} handle in which the resulting render pass object is returned.
+     * @param pRenderPass a pointer to a {@code VkRenderPass} handle in which the resulting render pass object is returned.
      */
     @NativeType("VkResult")
     public static int vkCreateRenderPass(VkDevice device, @NativeType("VkRenderPassCreateInfo const *") VkRenderPassCreateInfo pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkRenderPass *") LongBuffer pRenderPass) {
@@ -9581,7 +9596,7 @@ public class VK10 {
      *
      * @param device       the logical device that owns the render pass.
      * @param renderPass   a handle to a render pass.
-     * @param pGranularity points to a {@link VkExtent2D} structure in which the granularity is returned.
+     * @param pGranularity a pointer to a {@link VkExtent2D} structure in which the granularity is returned.
      */
     public static void vkGetRenderAreaGranularity(VkDevice device, @NativeType("VkRenderPass") long renderPass, @NativeType("VkExtent2D *") VkExtent2D pGranularity) {
         nvkGetRenderAreaGranularity(device, renderPass, pGranularity.address());
@@ -9646,9 +9661,9 @@ public class VK10 {
      * <p>{@link VkAllocationCallbacks}, {@link VkCommandPoolCreateInfo}</p>
      *
      * @param device       the logical device that creates the command pool.
-     * @param pCreateInfo  a pointer to an instance of the {@link VkCommandPoolCreateInfo} structure specifying the state of the command pool object.
+     * @param pCreateInfo  a pointer to a {@link VkCommandPoolCreateInfo} structure specifying the state of the command pool object.
      * @param pAllocator   controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pCommandPool points to a {@code VkCommandPool} handle in which the created pool is returned.
+     * @param pCommandPool a pointer to a {@code VkCommandPool} handle in which the created pool is returned.
      */
     @NativeType("VkResult")
     public static int vkCreateCommandPool(VkDevice device, @NativeType("VkCommandPoolCreateInfo const *") VkCommandPoolCreateInfo pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkCommandPool *") LongBuffer pCommandPool) {
@@ -9850,7 +9865,7 @@ public class VK10 {
      * <p>{@link VkCommandBufferAllocateInfo}</p>
      *
      * @param device          the logical device that owns the command pool.
-     * @param pAllocateInfo   a pointer to an instance of the {@link VkCommandBufferAllocateInfo} structure describing parameters of the allocation.
+     * @param pAllocateInfo   a pointer to a {@link VkCommandBufferAllocateInfo} structure describing parameters of the allocation.
      * @param pCommandBuffers a pointer to an array of {@code VkCommandBuffer} handles in which the resulting command buffer objects are returned. The array <b>must</b> be at least the length specified by the {@code commandBufferCount} member of {@code pAllocateInfo}. Each allocated command buffer begins in the initial state.
      */
     @NativeType("VkResult")
@@ -9917,7 +9932,7 @@ public class VK10 {
      *
      * @param device          the logical device that owns the command pool.
      * @param commandPool     the command pool from which the command buffers were allocated.
-     * @param pCommandBuffers an array of handles of command buffers to free.
+     * @param pCommandBuffers a pointer to an array of handles of command buffers to free.
      */
     public static void vkFreeCommandBuffers(VkDevice device, @NativeType("VkCommandPool") long commandPool, @NativeType("VkCommandBuffer const *") PointerBuffer pCommandBuffers) {
         nvkFreeCommandBuffers(device, commandPool, pCommandBuffers.remaining(), memAddress(pCommandBuffers));
@@ -10040,7 +10055,7 @@ public class VK10 {
      * <p>{@link VkCommandBufferBeginInfo}</p>
      *
      * @param commandBuffer the handle of the command buffer which is to be put in the recording state.
-     * @param pBeginInfo    an instance of the {@link VkCommandBufferBeginInfo} structure, which defines additional information about how the command buffer begins recording.
+     * @param pBeginInfo    points to a {@link VkCommandBufferBeginInfo} structure defining additional information about how the command buffer begins recording.
      */
     @NativeType("VkResult")
     public static int vkBeginCommandBuffer(VkCommandBuffer commandBuffer, @NativeType("VkCommandBufferBeginInfo const *") VkCommandBufferBeginInfo pBeginInfo) {
@@ -10591,7 +10606,7 @@ public class VK10 {
      * </table>
      *
      * @param commandBuffer  the command buffer into which the command will be recorded.
-     * @param blendConstants an array of four values specifying the R, G, B, and A components of the blend constant color used in blending, depending on the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#framebuffer-blendfactors">blend factor</a>.
+     * @param blendConstants a pointer to an array of four values specifying the R, G, B, and A components of the blend constant color used in blending, depending on the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#framebuffer-blendfactors">blend factor</a>.
      */
     public static void vkCmdSetBlendConstants(VkCommandBuffer commandBuffer, @NativeType("float const *") FloatBuffer blendConstants) {
         if (CHECKS) {
@@ -10916,7 +10931,7 @@ public class VK10 {
      * @param pipelineBindPoint a {@code VkPipelineBindPoint} indicating whether the descriptors will be used by graphics pipelines or compute pipelines. There is a separate set of bind points for each of graphics and compute, so binding one does not disturb the other.
      * @param layout            a {@code VkPipelineLayout} object used to program the bindings.
      * @param firstSet          the set number of the first descriptor set to be bound.
-     * @param pDescriptorSets   an array of handles to {@code VkDescriptorSet} objects describing the descriptor sets to write to.
+     * @param pDescriptorSets   a pointer to an array of handles to {@code VkDescriptorSet} objects describing the descriptor sets to write to.
      * @param pDynamicOffsets   a pointer to an array of {@code uint32_t} values specifying dynamic offsets.
      */
     public static void vkCmdBindDescriptorSets(VkCommandBuffer commandBuffer, @NativeType("VkPipelineBindPoint") int pipelineBindPoint, @NativeType("VkPipelineLayout") long layout, @NativeType("uint32_t") int firstSet, @NativeType("VkDescriptorSet const *") LongBuffer pDescriptorSets, @Nullable @NativeType("uint32_t const *") IntBuffer pDynamicOffsets) {
@@ -11173,7 +11188,7 @@ public class VK10 {
      * 
      * <p>When the command is executed, primitives are assembled using the current primitive topology and {@code indexCount} vertices whose indices are retrieved from the index buffer. The index buffer is treated as an array of tightly packed unsigned integers of size defined by the {@link #vkCmdBindIndexBuffer CmdBindIndexBuffer}{@code ::indexType} parameter with which the buffer was bound.</p>
      * 
-     * <p>The first vertex index is at an offset of {@code firstIndex} * {@code indexSize} + {@code offset} within the bound index buffer, where {@code offset} is the offset specified by {@code vkCmdBindIndexBuffer} and {@code indexSize} is the byte size of the type specified by {@code indexType}. Subsequent index values are retrieved from consecutive locations in the index buffer. Indices are first compared to the primitive restart value, then zero extended to 32 bits (if the {@code indexType} is {@link EXTIndexTypeUint8#VK_INDEX_TYPE_UINT8_EXT INDEX_TYPE_UINT8_EXT} or {@link #VK_INDEX_TYPE_UINT16 INDEX_TYPE_UINT16}) and have {@code vertexOffset} added to them, before being supplied as the {@code vertexIndex} value.</p>
+     * <p>The first vertex index is at an offset of {@code firstIndex} * {@code indexSize} {plus} {@code offset} within the bound index buffer, where {@code offset} is the offset specified by {@code vkCmdBindIndexBuffer} and {@code indexSize} is the byte size of the type specified by {@code indexType}. Subsequent index values are retrieved from consecutive locations in the index buffer. Indices are first compared to the primitive restart value, then zero extended to 32 bits (if the {@code indexType} is {@link EXTIndexTypeUint8#VK_INDEX_TYPE_UINT8_EXT INDEX_TYPE_UINT8_EXT} or {@link #VK_INDEX_TYPE_UINT16 INDEX_TYPE_UINT16}) and have {@code vertexOffset} added to them, before being supplied as the {@code vertexIndex} value.</p>
      * 
      * <p>The primitives are drawn {@code instanceCount} times with {@code instanceIndex} starting with {@code firstInstance} and increasing sequentially for each instance. The assembled primitives execute the bound graphics pipeline.</p>
      * 
@@ -12880,8 +12895,8 @@ public class VK10 {
      * @param commandBuffer the command buffer into which the command will be recorded.
      * @param image         the image to be cleared.
      * @param imageLayout   specifies the current layout of the image subresource ranges to be cleared, and <b>must</b> be {@link KHRSharedPresentableImage#VK_IMAGE_LAYOUT_SHARED_PRESENT_KHR IMAGE_LAYOUT_SHARED_PRESENT_KHR}, {@link #VK_IMAGE_LAYOUT_GENERAL IMAGE_LAYOUT_GENERAL} or {@link #VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL}.
-     * @param pColor        a pointer to a {@link VkClearColorValue} structure that contains the values the image subresource ranges will be cleared to (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#clears-values">Clear Values</a> below).
-     * @param pRanges       points to an array of {@link VkImageSubresourceRange} structures that describe a range of mipmap levels, array layers, and aspects to be cleared, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#resources-image-views">Image Views</a>.
+     * @param pColor        a pointer to a {@link VkClearColorValue} structure containing the values that the image subresource ranges will be cleared to (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#clears-values">Clear Values</a> below).
+     * @param pRanges       a pointer to an array of {@link VkImageSubresourceRange} structures describing a range of mipmap levels, array layers, and aspects to be cleared, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#resources-image-views">Image Views</a>.
      */
     public static void vkCmdClearColorImage(VkCommandBuffer commandBuffer, @NativeType("VkImage") long image, @NativeType("VkImageLayout") int imageLayout, @NativeType("VkClearColorValue const *") VkClearColorValue pColor, @NativeType("VkImageSubresourceRange const *") VkImageSubresourceRange.Buffer pRanges) {
         nvkCmdClearColorImage(commandBuffer, image, imageLayout, pColor.address(), pRanges.remaining(), pRanges.address());
@@ -12962,7 +12977,7 @@ public class VK10 {
      * @param commandBuffer the command buffer into which the command will be recorded.
      * @param image         the image to be cleared.
      * @param imageLayout   specifies the current layout of the image subresource ranges to be cleared, and <b>must</b> be {@link KHRSharedPresentableImage#VK_IMAGE_LAYOUT_SHARED_PRESENT_KHR IMAGE_LAYOUT_SHARED_PRESENT_KHR}, {@link #VK_IMAGE_LAYOUT_GENERAL IMAGE_LAYOUT_GENERAL} or {@link #VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL}.
-     * @param pColor        a pointer to a {@link VkClearColorValue} structure that contains the values the image subresource ranges will be cleared to (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#clears-values">Clear Values</a> below).
+     * @param pColor        a pointer to a {@link VkClearColorValue} structure containing the values that the image subresource ranges will be cleared to (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#clears-values">Clear Values</a> below).
      */
     public static void vkCmdClearColorImage(VkCommandBuffer commandBuffer, @NativeType("VkImage") long image, @NativeType("VkImageLayout") int imageLayout, @NativeType("VkClearColorValue const *") VkClearColorValue pColor, @NativeType("VkImageSubresourceRange const *") VkImageSubresourceRange pRange) {
         nvkCmdClearColorImage(commandBuffer, image, imageLayout, pColor.address(), 1, pRange.address());
@@ -13053,8 +13068,8 @@ public class VK10 {
      * @param commandBuffer the command buffer into which the command will be recorded.
      * @param image         the image to be cleared.
      * @param imageLayout   specifies the current layout of the image subresource ranges to be cleared, and <b>must</b> be {@link #VK_IMAGE_LAYOUT_GENERAL IMAGE_LAYOUT_GENERAL} or {@link #VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL}.
-     * @param pDepthStencil a pointer to a {@link VkClearDepthStencilValue} structure that contains the values the depth and stencil image subresource ranges will be cleared to (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#clears-values">Clear Values</a> below).
-     * @param pRanges       points to an array of {@link VkImageSubresourceRange} structures that describe a range of mipmap levels, array layers, and aspects to be cleared, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#resources-image-views">Image Views</a>.
+     * @param pDepthStencil a pointer to a {@link VkClearDepthStencilValue} structure containing the values that the depth and stencil image subresource ranges will be cleared to (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#clears-values">Clear Values</a> below).
+     * @param pRanges       a pointer to an array of {@link VkImageSubresourceRange} structures describing a range of mipmap levels, array layers, and aspects to be cleared, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#resources-image-views">Image Views</a>.
      */
     public static void vkCmdClearDepthStencilImage(VkCommandBuffer commandBuffer, @NativeType("VkImage") long image, @NativeType("VkImageLayout") int imageLayout, @NativeType("VkClearDepthStencilValue const *") VkClearDepthStencilValue pDepthStencil, @NativeType("VkImageSubresourceRange const *") VkImageSubresourceRange.Buffer pRanges) {
         nvkCmdClearDepthStencilImage(commandBuffer, image, imageLayout, pDepthStencil.address(), pRanges.remaining(), pRanges.address());
@@ -13133,7 +13148,7 @@ public class VK10 {
      * @param commandBuffer the command buffer into which the command will be recorded.
      * @param image         the image to be cleared.
      * @param imageLayout   specifies the current layout of the image subresource ranges to be cleared, and <b>must</b> be {@link #VK_IMAGE_LAYOUT_GENERAL IMAGE_LAYOUT_GENERAL} or {@link #VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL}.
-     * @param pDepthStencil a pointer to a {@link VkClearDepthStencilValue} structure that contains the values the depth and stencil image subresource ranges will be cleared to (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#clears-values">Clear Values</a> below).
+     * @param pDepthStencil a pointer to a {@link VkClearDepthStencilValue} structure containing the values that the depth and stencil image subresource ranges will be cleared to (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#clears-values">Clear Values</a> below).
      */
     public static void vkCmdClearDepthStencilImage(VkCommandBuffer commandBuffer, @NativeType("VkImage") long image, @NativeType("VkImageLayout") int imageLayout, @NativeType("VkClearDepthStencilValue const *") VkClearDepthStencilValue pDepthStencil, @NativeType("VkImageSubresourceRange const *") VkImageSubresourceRange pRange) {
         nvkCmdClearDepthStencilImage(commandBuffer, image, imageLayout, pDepthStencil.address(), 1, pRange.address());
@@ -13224,7 +13239,7 @@ public class VK10 {
      *
      * @param commandBuffer the command buffer into which the command will be recorded.
      * @param pAttachments  a pointer to an array of {@link VkClearAttachment} structures defining the attachments to clear and the clear values to use. If any attachment to be cleared in the current subpass is {@link #VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, then the clear has no effect on that attachment.
-     * @param pRects        points to an array of {@link VkClearRect} structures defining regions within each selected attachment to clear.
+     * @param pRects        a pointer to an array of {@link VkClearRect} structures defining regions within each selected attachment to clear.
      */
     public static void vkCmdClearAttachments(VkCommandBuffer commandBuffer, @NativeType("VkClearAttachment const *") VkClearAttachment.Buffer pAttachments, @NativeType("VkClearRect const *") VkClearRect.Buffer pRects) {
         nvkCmdClearAttachments(commandBuffer, pAttachments.remaining(), pAttachments.address(), pRects.remaining(), pRects.address());
@@ -13692,7 +13707,7 @@ public class VK10 {
      * <p>{@link VkBufferMemoryBarrier}, {@link VkImageMemoryBarrier}, {@link VkMemoryBarrier}</p>
      *
      * @param commandBuffer         the command buffer into which the command is recorded.
-     * @param pEvents               an array of event object handles to wait on.
+     * @param pEvents               a pointer to an array of event object handles to wait on.
      * @param srcStageMask          a bitmask of {@code VkPipelineStageFlagBits} specifying the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-pipeline-stages">source stage mask</a>.
      * @param dstStageMask          a bitmask of {@code VkPipelineStageFlagBits} specifying the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-pipeline-stages">destination stage mask</a>.
      * @param pMemoryBarriers       a pointer to an array of {@link VkMemoryBarrier} structures.
@@ -14286,7 +14301,7 @@ public class VK10 {
      * @param layout        the pipeline layout used to program the push constant updates.
      * @param stageFlags    a bitmask of {@code VkShaderStageFlagBits} specifying the shader stages that will use the push constants in the updated range.
      * @param offset        the start offset of the push constant range to update, in units of bytes.
-     * @param pValues       an array of {@code size} bytes containing the new push constant values.
+     * @param pValues       a pointer to an array of {@code size} bytes containing the new push constant values.
      */
     public static void vkCmdPushConstants(VkCommandBuffer commandBuffer, @NativeType("VkPipelineLayout") long layout, @NativeType("VkShaderStageFlags") int stageFlags, @NativeType("uint32_t") int offset, @NativeType("void const *") ByteBuffer pValues) {
         nvkCmdPushConstants(commandBuffer, layout, stageFlags, offset, pValues.remaining(), memAddress(pValues));
@@ -14358,7 +14373,7 @@ public class VK10 {
      * @param layout        the pipeline layout used to program the push constant updates.
      * @param stageFlags    a bitmask of {@code VkShaderStageFlagBits} specifying the shader stages that will use the push constants in the updated range.
      * @param offset        the start offset of the push constant range to update, in units of bytes.
-     * @param pValues       an array of {@code size} bytes containing the new push constant values.
+     * @param pValues       a pointer to an array of {@code size} bytes containing the new push constant values.
      */
     public static void vkCmdPushConstants(VkCommandBuffer commandBuffer, @NativeType("VkPipelineLayout") long layout, @NativeType("VkShaderStageFlags") int stageFlags, @NativeType("uint32_t") int offset, @NativeType("void const *") ShortBuffer pValues) {
         nvkCmdPushConstants(commandBuffer, layout, stageFlags, offset, pValues.remaining() << 1, memAddress(pValues));
@@ -14430,7 +14445,7 @@ public class VK10 {
      * @param layout        the pipeline layout used to program the push constant updates.
      * @param stageFlags    a bitmask of {@code VkShaderStageFlagBits} specifying the shader stages that will use the push constants in the updated range.
      * @param offset        the start offset of the push constant range to update, in units of bytes.
-     * @param pValues       an array of {@code size} bytes containing the new push constant values.
+     * @param pValues       a pointer to an array of {@code size} bytes containing the new push constant values.
      */
     public static void vkCmdPushConstants(VkCommandBuffer commandBuffer, @NativeType("VkPipelineLayout") long layout, @NativeType("VkShaderStageFlags") int stageFlags, @NativeType("uint32_t") int offset, @NativeType("void const *") IntBuffer pValues) {
         nvkCmdPushConstants(commandBuffer, layout, stageFlags, offset, pValues.remaining() << 2, memAddress(pValues));
@@ -14502,7 +14517,7 @@ public class VK10 {
      * @param layout        the pipeline layout used to program the push constant updates.
      * @param stageFlags    a bitmask of {@code VkShaderStageFlagBits} specifying the shader stages that will use the push constants in the updated range.
      * @param offset        the start offset of the push constant range to update, in units of bytes.
-     * @param pValues       an array of {@code size} bytes containing the new push constant values.
+     * @param pValues       a pointer to an array of {@code size} bytes containing the new push constant values.
      */
     public static void vkCmdPushConstants(VkCommandBuffer commandBuffer, @NativeType("VkPipelineLayout") long layout, @NativeType("VkShaderStageFlags") int stageFlags, @NativeType("uint32_t") int offset, @NativeType("void const *") LongBuffer pValues) {
         nvkCmdPushConstants(commandBuffer, layout, stageFlags, offset, pValues.remaining() << 3, memAddress(pValues));
@@ -14574,7 +14589,7 @@ public class VK10 {
      * @param layout        the pipeline layout used to program the push constant updates.
      * @param stageFlags    a bitmask of {@code VkShaderStageFlagBits} specifying the shader stages that will use the push constants in the updated range.
      * @param offset        the start offset of the push constant range to update, in units of bytes.
-     * @param pValues       an array of {@code size} bytes containing the new push constant values.
+     * @param pValues       a pointer to an array of {@code size} bytes containing the new push constant values.
      */
     public static void vkCmdPushConstants(VkCommandBuffer commandBuffer, @NativeType("VkPipelineLayout") long layout, @NativeType("VkShaderStageFlags") int stageFlags, @NativeType("uint32_t") int offset, @NativeType("void const *") FloatBuffer pValues) {
         nvkCmdPushConstants(commandBuffer, layout, stageFlags, offset, pValues.remaining() << 2, memAddress(pValues));
@@ -14646,7 +14661,7 @@ public class VK10 {
      * @param layout        the pipeline layout used to program the push constant updates.
      * @param stageFlags    a bitmask of {@code VkShaderStageFlagBits} specifying the shader stages that will use the push constants in the updated range.
      * @param offset        the start offset of the push constant range to update, in units of bytes.
-     * @param pValues       an array of {@code size} bytes containing the new push constant values.
+     * @param pValues       a pointer to an array of {@code size} bytes containing the new push constant values.
      */
     public static void vkCmdPushConstants(VkCommandBuffer commandBuffer, @NativeType("VkPipelineLayout") long layout, @NativeType("VkShaderStageFlags") int stageFlags, @NativeType("uint32_t") int offset, @NativeType("void const *") DoubleBuffer pValues) {
         nvkCmdPushConstants(commandBuffer, layout, stageFlags, offset, pValues.remaining() << 3, memAddress(pValues));
@@ -14724,7 +14739,7 @@ public class VK10 {
      * <p>{@link VkRenderPassBeginInfo}</p>
      *
      * @param commandBuffer    the command buffer in which to record the command.
-     * @param pRenderPassBegin a pointer to a {@link VkRenderPassBeginInfo} structure (defined below) which specifies the render pass to begin an instance of, and the framebuffer the instance uses.
+     * @param pRenderPassBegin a pointer to a {@link VkRenderPassBeginInfo} structure specifying the render pass to begin an instance of, and the framebuffer the instance uses.
      * @param contents         a {@code VkSubpassContents} value specifying how the commands in the first subpass will be provided.
      */
     public static void vkCmdBeginRenderPass(VkCommandBuffer commandBuffer, @NativeType("VkRenderPassBeginInfo const *") VkRenderPassBeginInfo pRenderPassBegin, @NativeType("VkSubpassContents") int contents) {
@@ -14931,7 +14946,7 @@ public class VK10 {
      * </table>
      *
      * @param commandBuffer   a handle to a primary command buffer that the secondary command buffers are executed in.
-     * @param pCommandBuffers an array of secondary command buffer handles, which are recorded to execute in the primary command buffer in the order they are listed in the array.
+     * @param pCommandBuffers a pointer to an array of {@code commandBufferCount} secondary command buffer handles, which are recorded to execute in the primary command buffer in the order they are listed in the array.
      */
     public static void vkCmdExecuteCommands(VkCommandBuffer commandBuffer, @NativeType("VkCommandBuffer const *") PointerBuffer pCommandBuffers) {
         nvkCmdExecuteCommands(commandBuffer, pCommandBuffers.remaining(), memAddress(pCommandBuffers));

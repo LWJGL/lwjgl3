@@ -58,9 +58,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code srcSubresource} &ndash; the subresource to blit from.</li>
- * <li>{@code srcOffsets[2]} &ndash; an array of two {@link VkOffset3D} structures specifying the bounds of the source region within {@code srcSubresource}.</li>
+ * <li>{@code srcOffsets[2]} &ndash; a pointer to an array of two {@link VkOffset3D} structures specifying the bounds of the source region within {@code srcSubresource}.</li>
  * <li>{@code dstSubresource} &ndash; the subresource to blit into.</li>
- * <li>{@code dstOffsets[2]} &ndash; an array of two {@link VkOffset3D} structures specifying the bounds of the destination region within {@code dstSubresource}.</li>
+ * <li>{@code dstOffsets[2]} &ndash; a pointer to an array of two {@link VkOffset3D} structures specifying the bounds of the destination region within {@code dstSubresource}.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

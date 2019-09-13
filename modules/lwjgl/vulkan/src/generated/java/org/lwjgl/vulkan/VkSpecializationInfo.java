@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>{@code pMapEntries} points to a structure of type {@link VkSpecializationMapEntry}.</p>
+ * <p>{@code pMapEntries} is a pointer to a {@link VkSpecializationMapEntry} structure.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
@@ -45,7 +45,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code mapEntryCount} &ndash; the number of entries in the {@code pMapEntries} array.</li>
- * <li>{@code pMapEntries} &ndash; a pointer to an array of {@link VkSpecializationMapEntry} which maps constant IDs to offsets in {@code pData}.</li>
+ * <li>{@code pMapEntries} &ndash; a pointer to an array of {@link VkSpecializationMapEntry} structures which map constant IDs to offsets in {@code pData}.</li>
  * <li>{@code dataSize} &ndash; the byte size of the {@code pData} buffer.</li>
  * <li>{@code pData} &ndash; contains the actual constant values to specialize with.</li>
  * </ul>

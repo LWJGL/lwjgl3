@@ -6,7 +6,11 @@
 package org.lwjgl.vulkan;
 
 /**
- * This extension provides the {@link VkValidationFlagsEXT} struct that can be included in the {@code pNext} chain of the {@link VkInstanceCreateInfo} structure passed as the {@code pCreateInfo} parameter of {@link VK10#vkCreateInstance CreateInstance}. The new struct contains an array of {@code VkValidationCheckEXT} values that will be disabled by the validation layers.
+ * This extension provides the {@link VkValidationFlagsEXT} struct that can be included in the {@code pNext} chain of the {@link VkInstanceCreateInfo} structure passed as the {@code pCreateInfo} parameter of {@link VK10#vkCreateInstance CreateInstance}. The structure contains an array of {@code VkValidationCheckEXT} values that will be disabled by the validation layers.
+ * 
+ * <h5>Deprecation by VK_EXT_validation_features</h5>
+ * 
+ * <p>Functionality in this extension is subsumed into the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_validation_features">VK_EXT_validation_features</a> extension.</p>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -16,17 +20,21 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>62</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
+ * </ul></dd>
+ * <dt><b>Deprecation state</b></dt>
+ * <dd><ul>
+ * <li><em>Deprecated</em> by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_validation_features">VK_EXT_validation_features</a> extension</li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Tobin Ehlis <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_validation_flags:%20&amp;body=@tobine%20">tobine</a></li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2016-09-06</dd>
+ * <dd>2019-08-19</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
@@ -39,7 +47,7 @@ package org.lwjgl.vulkan;
 public final class EXTValidationFlags {
 
     /** The extension specification version. */
-    public static final int VK_EXT_VALIDATION_FLAGS_SPEC_VERSION = 1;
+    public static final int VK_EXT_VALIDATION_FLAGS_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String VK_EXT_VALIDATION_FLAGS_EXTENSION_NAME = "VK_EXT_validation_flags";

@@ -135,7 +135,7 @@ public class KHRExternalMemoryFd {
      * <p>{@link VkMemoryGetFdInfoKHR}</p>
      *
      * @param device     the logical device that created the device memory being exported.
-     * @param pGetFdInfo a pointer to an instance of the {@link VkMemoryGetFdInfoKHR} structure containing parameters of the export operation.
+     * @param pGetFdInfo a pointer to a {@link VkMemoryGetFdInfoKHR} structure containing parameters of the export operation.
      * @param pFd        will return a file descriptor representing the underlying resources of the device memory object.
      */
     @NativeType("VkResult")

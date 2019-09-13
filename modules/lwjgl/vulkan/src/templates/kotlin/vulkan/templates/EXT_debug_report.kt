@@ -302,9 +302,9 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
         """,
 
         VkInstance("instance", "the instance the callback will be logged on."),
-        VkDebugReportCallbackCreateInfoEXT.const.p("pCreateInfo", "points to a ##VkDebugReportCallbackCreateInfoEXT structure which defines the conditions under which this callback will be called."),
+        VkDebugReportCallbackCreateInfoEXT.const.p("pCreateInfo", "a pointer to a ##VkDebugReportCallbackCreateInfoEXT structure defining the conditions under which this callback will be called."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkDebugReportCallbackEXT.p("pCallback", "a pointer to record the {@code VkDebugReportCallbackEXT} object created.")
+        Check(1)..VkDebugReportCallbackEXT.p("pCallback", "a pointer to a {@code VkDebugReportCallbackEXT} handle in which the created object is returned.")
     )
 
     void(

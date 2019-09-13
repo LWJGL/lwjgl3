@@ -58,7 +58,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code pPipelineCreationFeedback} &ndash; a pointer to a {@link VkPipelineCreationFeedbackEXT} structure.</li>
  * <li>{@code pipelineStageCreationFeedbackCount} &ndash; the number of elements in {@code pPipelineStageCreationFeedbacks}.</li>
- * <li>{@code pPipelineStageCreationFeedbacks} &ndash; an array of size {@code pipelineStageCreationFeedbackCount} of {@link VkPipelineCreationFeedbackEXT} structures.</li>
+ * <li>{@code pPipelineStageCreationFeedbacks} &ndash; a pointer to an array of {@code pipelineStageCreationFeedbackCount} {@link VkPipelineCreationFeedbackEXT} structures.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

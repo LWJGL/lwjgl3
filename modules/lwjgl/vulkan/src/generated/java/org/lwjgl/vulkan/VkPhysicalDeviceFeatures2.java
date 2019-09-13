@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code features} &ndash; a structure of type {@link VkPhysicalDeviceFeatures} describing the fine-grained features of the Vulkan 1.0 API.</li>
+ * <li>{@code features} &ndash; a {@link VkPhysicalDeviceFeatures} structure describing the fine-grained features of the Vulkan 1.0 API.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

@@ -62,7 +62,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code flags} &ndash; reserved for future use.</li>
- * <li>{@code coverageModulationMode} &ndash; controls which color components are modulated and is of type {@code VkCoverageModulationModeNV}.</li>
+ * <li>{@code coverageModulationMode} &ndash; a {@code VkCoverageModulationModeNV} value controlling which color components are modulated.</li>
  * <li>{@code coverageModulationTableEnable} &ndash; controls whether the modulation factor is looked up from a table in {@code pCoverageModulationTable}.</li>
  * <li>{@code coverageModulationTableCount} &ndash; the number of elements in {@code pCoverageModulationTable}.</li>
  * <li>{@code pCoverageModulationTable} &ndash; a table of modulation factors containing a value for each number of covered samples.</li>

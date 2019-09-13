@@ -123,9 +123,9 @@ public class EXTMetalSurface {
      * <p>{@link VkAllocationCallbacks}, {@link VkMetalSurfaceCreateInfoEXT}</p>
      *
      * @param instance    the instance with which to associate the surface.
-     * @param pCreateInfo a pointer to an instance of the {@link VkMetalSurfaceCreateInfoEXT} structure containing the parameters affecting the creation of the surface object.
+     * @param pCreateInfo a pointer to a {@link VkMetalSurfaceCreateInfoEXT} structure specifying parameters affecting the creation of the surface object.
      * @param pAllocator  the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a>).
-     * @param pSurface    points to a {@code VkSurfaceKHR} handle in which the created surface object is returned.
+     * @param pSurface    a pointer to a {@code VkSurfaceKHR} handle in which the created surface object is returned.
      */
     @NativeType("VkResult")
     public static int vkCreateMetalSurfaceEXT(VkInstance instance, @NativeType("VkMetalSurfaceCreateInfoEXT const *") VkMetalSurfaceCreateInfoEXT pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkSurfaceKHR *") LongBuffer pSurface) {

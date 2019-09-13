@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code attachmentCount} &ndash; the number of attachments.</li>
- * <li>{@code pAttachments} &ndash; an array of {@code VkImageView} handles, each of which will be used as the corresponding attachment in the render pass instance.</li>
+ * <li>{@code pAttachments} &ndash; a pointer to an array of {@code VkImageView} handles, each of which will be used as the corresponding attachment in the render pass instance.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

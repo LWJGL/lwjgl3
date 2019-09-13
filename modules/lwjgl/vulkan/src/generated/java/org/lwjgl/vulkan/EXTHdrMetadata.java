@@ -109,8 +109,8 @@ public class EXTHdrMetadata {
      * <p>{@link VkHdrMetadataEXT}</p>
      *
      * @param device      the logical device where the swapchain(s) were created.
-     * @param pSwapchains a pointer to the array of {@code swapchainCount} {@code VkSwapchainKHR} handles.
-     * @param pMetadata   a pointer to the array of {@code swapchainCount} {@link VkHdrMetadataEXT} structures.
+     * @param pSwapchains a pointer to an array of {@code swapchainCount} {@code VkSwapchainKHR} handles.
+     * @param pMetadata   a pointer to an array of {@code swapchainCount} {@link VkHdrMetadataEXT} structures.
      */
     public static void vkSetHdrMetadataEXT(VkDevice device, @NativeType("VkSwapchainKHR const *") LongBuffer pSwapchains, @NativeType("VkHdrMetadataEXT const *") VkHdrMetadataEXT.Buffer pMetadata) {
         if (CHECKS) {
