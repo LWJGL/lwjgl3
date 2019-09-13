@@ -2040,55 +2040,53 @@ aiAttachLogStream(&c);""")}
             Dummy value. No texture, but the value to be used as 'texture semantic' (##AIMaterialProperty{@code ::mSemantic}) for all material properties *not*
             related to textures.
             """,
-            0x0
+            "0"
         ),
-        "TextureType_DIFFUSE".enum("The texture is combined with the result of the diffuse lighting equation.", 0x1),
-        "TextureType_SPECULAR".enum("The texture is combined with the result of the specular lighting equation.", 0x2),
-        "TextureType_AMBIENT".enum("The texture is combined with the result of the ambient lighting equation.", 0x3),
-        "TextureType_EMISSIVE".enum("The texture is added to the result of the lighting calculation. It isn't influenced by incoming light.", 0x4),
-        "TextureType_HEIGHT".enum(
-            "The texture is a height map. By convention, higher gray-scale values stand for higher elevations from the base height.",
-            0x5
-        ),
+        "TextureType_DIFFUSE".enum("The texture is combined with the result of the diffuse lighting equation."),
+        "TextureType_SPECULAR".enum("The texture is combined with the result of the specular lighting equation."),
+        "TextureType_AMBIENT".enum("The texture is combined with the result of the ambient lighting equation."),
+        "TextureType_EMISSIVE".enum("The texture is added to the result of the lighting calculation. It isn't influenced by incoming light."),
+        "TextureType_HEIGHT".enum("The texture is a height map. By convention, higher gray-scale values stand for higher elevations from the base height."),
         "TextureType_NORMALS".enum(
             """
             The texture is a (tangent space) normal-map. Again, there are several conventions for tangent-space normal maps. Assimp does (intentionally) not
             distinguish here.
-            """,
-            0x6
+            """
         ),
         "TextureType_SHININESS".enum(
             """
             The texture defines the glossiness of the material. The glossiness is in fact the exponent of the specular (phong) lighting equation. Usually there
             is a conversion function defined to map the linear color values in the texture to a suitable exponent. Have fun.
-            """,
-            0x7
+            """
         ),
         "TextureType_OPACITY".enum(
-            "The texture defines per-pixel opacity. Usually 'white' means opaque and 'black' means 'transparency'. Or quite the opposite. Have fun.",
-            0x8
+            "The texture defines per-pixel opacity. Usually 'white' means opaque and 'black' means 'transparency'. Or quite the opposite. Have fun."
         ),
         "TextureType_DISPLACEMENT".enum(
-            "Displacement texture. The exact purpose and format is application-dependent. Higher color values stand for higher vertex displacements.",
-            0x9
+            "Displacement texture. The exact purpose and format is application-dependent. Higher color values stand for higher vertex displacements."
         ),
         "TextureType_LIGHTMAP".enum(
             """
             Lightmap texture (aka Ambient Occlusion). Both 'Lightmaps' and dedicated 'ambient occlusion maps' are covered by this material property. The
             texture contains a scaling value for the final color value of a pixel. Its intensity is not affected by incoming light.
-            """,
-            0xA
+            """
         ),
         "TextureType_REFLECTION".enum(
-            "Reflection texture. Contains the color of a perfect mirror reflection. Rarely used, almost never for real-time applications.",
-            0xB
+            "Reflection texture. Contains the color of a perfect mirror reflection. Rarely used, almost never for real-time applications."
         ),
+
+        "TextureType_BASE_COLOR".enum("PBR material."),
+        "TextureType_NORMAL_CAMERA".enum("PBR material."),
+        "TextureType_EMISSION_COLOR".enum("PBR material."),
+        "TextureType_METALNESS".enum("PBR material."),
+        "TextureType_DIFFUSE_ROUGHNESS".enum("PBR material."),
+        "TextureType_AMBIENT_OCCLUSION".enum("PBR material."),
+
         "TextureType_UNKNOWN".enum(
             """
             Unknown texture. A texture reference that does not match any of the definitions above is considered to be 'unknown'. It is still imported, but is
             excluded from any further post-processing.
-            """,
-            0xC
+            """
         )
     ).javaDocLinks
 
