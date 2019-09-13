@@ -121,9 +121,11 @@ public class GLXGears {
         float h = height / (float)width;
 
         glViewport(0, 0, width, height);
-        P.setFrustum(-1.0, 1.0, -h, h, 5.0, 100.0);
-
-        distance = 40.0 / h;
+        if (h < 1.0f) {
+            P.setFrustum(-1.0 / h, 1.0 / h, -1.0, 1.0, 5.0, 100.0);
+        } else {
+            P.setFrustum(-1.0, 1.0, -h, h, 5.0, 100.0);
+        }
     }
 
     public void render() {
