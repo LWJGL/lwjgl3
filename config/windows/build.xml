@@ -240,7 +240,7 @@ EXPORTS
         <!-- meshoptimizer -->
         <build module="meshoptimizer" simple="true" if:true="${binding.meshoptimizer}">
             <beforeCompile>
-                <compile>
+                <compile flags="/DMESHOPTIMIZER_NO_WRAPPERS">
                     <arg value="/I${src.main}"/>
                     <fileset dir="." includes="${src.main}/*.cpp"/>
                 </compile>
