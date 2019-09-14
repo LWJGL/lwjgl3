@@ -178,6 +178,7 @@
             </beforeLink>
             <link>
                 <arg line="-framework CoreFoundation"/>
+                <arg line="-framework QuartzCore"/>
                 <fileset dir="${lib.native}/org/lwjgl">
                     <include name="libdyn*.a"/>
                 </fileset>

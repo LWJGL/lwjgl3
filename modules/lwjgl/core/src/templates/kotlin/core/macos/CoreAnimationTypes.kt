@@ -6,4 +6,6 @@ package core.macos
 
 import org.lwjgl.generator.*
 
-val CAMetalLayer = "CAMetalLayer".handle
+val CALayer = "CALayer".opaque
+val CAMetalLayer = "CAMetalLayer".opaque
+val CAMetalDrawable = "CAMetalDrawable".opaque

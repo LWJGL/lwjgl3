@@ -36,6 +36,16 @@ val CGPoint = struct(Module.CORE_MACOS, "CGPoint") {
     CGFloat("y", "the y-coordinate of the point")
 }
 
+val CGSize = struct(Module.CORE_MACOS, "CGSize") {
+    CGFloat("width", "")
+    CGFloat("height", "")
+}
+
+val CGRect = struct(Module.CORE_MACOS, "CGRect") {
+    CGPoint("origin", "")
+    CGSize("size", "")
+}
+
 val CGEventTapInformation = struct(Module.CORE_MACOS, "CGEventTapInformation", mutable = false) {
     documentation = "The structure used to report information about event taps."
 
