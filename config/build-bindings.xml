@@ -55,6 +55,7 @@ This script is included in /config/build-definitions.xml.
     <property name="binding.remotery" value="true"/>
     <property name="binding.rpmalloc" value="true"/>
     <property name="binding.shaderc" value="true"/>
+    <property name="binding.spvc" value="true"/>
     <condition property="binding.sse" value="true" else="false"><isset property="notARM"/></condition>
     <property name="binding.stb" value="true"/>
     <property name="binding.tinyexr" value="true"/>
@@ -192,6 +193,7 @@ This script is included in /config/build-definitions.xml.
                 <sequential if:true="${binding.remotery}"><local name="module"/><property name="module" value="remotery"/><body/></sequential>
                 <sequential if:true="${binding.rpmalloc}"><local name="module"/><property name="module" value="rpmalloc"/><body/></sequential>
                 <sequential if:true="${binding.shaderc}"><local name="module"/><property name="module" value="shaderc"/><body/></sequential>
+                <sequential if:true="${binding.spvc}"><local name="module"/><property name="module" value="spvc"/><body/></sequential>
                 <sequential if:true="${binding.sse}"><local name="module"/><property name="module" value="sse"/><body/></sequential>
                 <sequential if:true="${binding.stb}"><local name="module"/><property name="module" value="stb"/><body/></sequential>
                 <sequential if:true="${binding.tinyexr}"><local name="module"/><property name="module" value="tinyexr"/><body/></sequential>

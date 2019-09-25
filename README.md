@@ -147,6 +147,7 @@ improve the chances of a quick and useful response.
 |[par_streamlines](https://prideout.net/blog/par_streamlines/)|Triangulate wide lines and curves.|
 |[OpenVR](https://github.com/ValveSoftware/openvr)|An API and runtime that allows access to VR hardware from multiple vendors without requiring that applications have specific knowledge of the hardware they are targeting.|
 |[Shaderc](https://github.com/google/shaderc)|A collection of libraries for shader compilation.|
+|[SPIRV-Cross](https://github.com/KhronosGroup/SPIRV-Cross)|A library for performing reflection on SPIR-V and disassembling SPIR-V back to high level languages.|
 |[Tiny OpenEXR](https://github.com/syoyo/tinyexr)|A small, single header-only library to load and save OpenEXR(.exr) images.|
 |[Tootle (AMD)](https://github.com/GPUOpen-Tools/amd-tootle)|A 3D triangle mesh optimization library that improves on existing mesh preprocessing techniques.|
 |[Vulkan Memory Allocator](https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator)|An easy to integrate Vulkan memory allocation library.|

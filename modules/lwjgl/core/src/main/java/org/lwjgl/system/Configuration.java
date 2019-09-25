@@ -455,6 +455,11 @@ public class Configuration<T> {
     /** Similar to {@link #LIBRARY_NAME} for the Shaderc libshaderc_spvc library (<b>org.lwjgl.shaderc_spvc.libname</b>). */
     public static final Configuration<String> SHADERC_SPVC_LIBRARY_NAME = new Configuration<>("org.lwjgl.shaderc.spvc.libname", StateInit.STRING);
 
+    // -- SPVC
+
+    /** Similar to {@link #LIBRARY_NAME} for the SPIRV-Cross library (<b>org.lwjgl.spvc.libname</b>). */
+    public static final Configuration<String> SPVC_LIBRARY_NAME = new Configuration<>("org.lwjgl.spvc.libname", StateInit.STRING);
+
     // -- VULKAN
 
     /** Similar to {@link #EGL_EXPLICIT_INIT} for the Vulkan library (<b>org.lwjgl.vulkan.explicitInit</b>). */

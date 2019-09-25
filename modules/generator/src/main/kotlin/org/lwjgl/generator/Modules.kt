@@ -553,6 +553,15 @@ enum class Module(
         """,
         arrayOverloads = false
     ),
+    SPVC(
+        "spvc",
+        "org.lwjgl.util.spvc",
+        """
+        Contains bindings to ${url("https://github.com/KhronosGroup/SPIRV-Cross", "SPIRV-Cross")}, a library for performing reflection on SPIR-V and
+        disassembling SPIR-V back to high level languages.
+        """,
+        arrayOverloads = false
+    ),
     SSE(
         "sse",
         "org.lwjgl.util.simd",

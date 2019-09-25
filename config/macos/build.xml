@@ -418,6 +418,7 @@
             <update-dependency module="opus" artifact="libopus.dylib"/>
             <update-dependency module="shaderc" artifact="libshaderc.dylib"/>
             <update-dependency module="shaderc" artifact="libshaderc_spvc.dylib"/>
+            <update-dependency module="spvc" artifact="libspirv-cross.dylib"/>
 
             <update-dependency module="vulkan" artifact="libMoltenVK.dylib"/>
 
