@@ -458,6 +458,7 @@ EXPORTS
             <update-dependency module="opus" artifact="opus.dll"/>
             <update-dependency module="shaderc" artifact="shaderc.dll"/>
             <update-dependency module="shaderc" artifact="shaderc_spvc.dll"/>
+            <update-dependency module="spvc" artifact="spirv-cross.dll"/>
 
             </parallel>
 

@@ -376,6 +376,7 @@
             <compileBinding binding="remotery"/>
             <compileBinding binding="rpmalloc"/>
             <compileBinding binding="shaderc"/>
+            <compileBinding binding="spvc"/>
             <compileBinding binding="sse"/>
             <compileBinding binding="stb"/>
             <compileBinding binding="tinyexr"/>
@@ -1426,6 +1427,9 @@
                 <get-release platform="windows" arch="x86" file="shaderc_spvc.dll"/>
             </natives>
         </release-module>
+
+        <!-- SPIRV-Cross -->
+        <release-module name="spvc" native-library="spirv-cross" title="SPIRV-Cross" if:true="${binding.spvc}"/>
 
         <!-- SSE -->
         <release-module name="sse" title="SSE" if:true="${binding.sse}">

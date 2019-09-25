@@ -39,6 +39,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.remotery.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.remotery.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.rpmalloc.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.rpmalloc.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.shaderc.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.shaderc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.spvc.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.spvc.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.sse.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.sse.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.stb.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.stb.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.tinyexr.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.tinyexr.iml" />
@@ -86,6 +87,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.remotery.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.remotery.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.rpmalloc.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.rpmalloc.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.shaderc.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.shaderc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.spvc.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.spvc.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.sse.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.sse.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.stb.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.stb.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.tinyexr.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.tinyexr.iml" />

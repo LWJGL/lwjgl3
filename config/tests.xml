@@ -48,6 +48,11 @@
             <package name="org.lwjgl.util.shaderc"/>
         </packages>
     </test>
+    <test name="spvc">
+        <packages>
+            <package name="org.lwjgl.util.spvc"/>
+        </packages>
+    </test>
     <test name="sse">
         <packages>
             <package name="org.lwjgl.util.simd"/>
