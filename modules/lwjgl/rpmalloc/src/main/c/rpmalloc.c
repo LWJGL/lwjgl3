@@ -714,7 +714,7 @@ _memory_unmap_span(span_t* span) {
 	assert(!(span->flags & SPAN_FLAG_MASTER) || !(span->flags & SPAN_FLAG_SUBSPAN));
 
 	int is_master = !!(span->flags & SPAN_FLAG_MASTER);
-	span_t* master = is_master ? span : (pointer_offset(span, -(int32_t)(span->total_spans_or_distance * _memory_span_size)));
+	span_t* master = is_master ? span : (pointer_offset(span, -(intptr_t)((uintptr_t)span->total_spans_or_distance * _memory_span_size)));
 	assert(is_master || (span->flags & SPAN_FLAG_SUBSPAN));
 	assert(master->flags & SPAN_FLAG_MASTER);
 
@@ -1077,7 +1077,7 @@ _memory_heap_extract_new_span(heap_t* heap, size_t span_count, uint32_t class_id
 	if (spans_current > heap->size_class_use[class_idx].spans_peak)
 		heap->size_class_use[class_idx].spans_peak = spans_current;
 #endif
-#endif	
+#endif
 	span_t* span = _memory_heap_thread_cache_extract(heap, span_count);
 	if (EXPECTED(span != 0)) {
 		_memory_statistics_inc(heap->size_class_use[class_idx].spans_from_cache, 1);
@@ -1162,7 +1162,7 @@ _memory_span_set_new_active(heap_t* heap, heap_class_t* heap_class, span_t* span
 
 	//Setup free list. Only initialize one system page worth of free blocks in list
 	void* block;
-	span->free_list_limit = free_list_partial_init(&heap_class->free_list, &block, 
+	span->free_list_limit = free_list_partial_init(&heap_class->free_list, &block,
 		span, pointer_offset(span, SPAN_HEADER_SIZE), size_class->block_count, size_class->block_size);
 	atomic_store_ptr(&span->free_list_deferred, 0);
 	span->list_size = 0;
@@ -1501,8 +1501,8 @@ _memory_deallocate_large(span_t* span) {
 		if (span->flags & SPAN_FLAG_MASTER) {
 			heap->span_reserve_master = span;
 		} else { //SPAN_FLAG_SUBSPAN
-			uint32_t distance = span->total_spans_or_distance;
-			span_t* master = pointer_offset(span, -(int32_t)(distance * _memory_span_size));
+			uintptr_t distance = span->total_spans_or_distance;
+			span_t* master = pointer_offset(span, -(intptr_t)(distance * _memory_span_size));
 			heap->span_reserve_master = master;
 			assert(master->flags & SPAN_FLAG_MASTER);
 			assert(atomic_load32(&master->remaining_spans) >= (int32_t)span->span_count);
@@ -1839,10 +1839,15 @@ rpmalloc_initialize_config(const rpmalloc_config_t* config) {
 	}
 
 	//The ABA counter in heap orphan list is tied to using 512 (bitmask 0x1FF)
-	if (_memory_page_size < 512)
-		_memory_page_size = 512;
-	if (_memory_page_size > (64 * 1024 * 1024))
-		_memory_page_size = (64 * 1024 * 1024);
+	size_t min_span_size = 512;
+	size_t max_page_size = 4 * 1024 * 1024;
+	const size_t ptrbits = sizeof(void*);
+	if (ptrbits > 4)
+		max_page_size = 4096ULL * 1024ULL * 1024ULL;
+	if (_memory_page_size < min_span_size)
+		_memory_page_size = min_span_size;
+	if (_memory_page_size > max_page_size)
+		_memory_page_size = max_page_size;
 	_memory_page_size_shift = 0;
 	size_t page_size_bit = _memory_page_size;
 	while (page_size_bit != 1) {
