@@ -710,6 +710,30 @@ public class MeshOptimizer {
         return nmeshopt_simplifySloppy(memAddress(destination), memAddress(indices), indices.remaining(), memAddress(vertex_positions), vertex_count, vertex_positions_stride, target_index_count);
     }
 
+    // --- [ meshopt_simplifyPoints ] ---
+
+    /** Unsafe version of: {@link #meshopt_simplifyPoints simplifyPoints} */
+    public static native long nmeshopt_simplifyPoints(long destination, long vertex_positions, long vertex_count, long vertex_positions_stride, long target_vertex_count);
+
+    /**
+     * Experimental: Point cloud simplifier. Reduces the number of points in the cloud to reach the given target.
+     * 
+     * <p>Returns the number of points after simplification, with {@code destination} containing new index data. The resulting index buffer references vertices
+     * from the original vertex buffer. If the original vertex data isn't required, creating a compact vertex buffer using {@link #meshopt_optimizeVertexFetch optimizeVertexFetch} is
+     * recommended.</p>
+     * 
+     * <p>{@code destination} must contain enough space for the target index buffer. {@code vertex_positions} should have {@code float3} position in the first 12
+     * bytes of each vertex - similar to {@code glVertexPointer}.</p>
+     */
+    @NativeType("size_t")
+    public static long meshopt_simplifyPoints(@NativeType("unsigned int *") IntBuffer destination, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("size_t") long target_vertex_count) {
+        if (CHECKS) {
+            check(destination, target_vertex_count);
+            check(vertex_positions, vertex_count * vertex_positions_stride);
+        }
+        return nmeshopt_simplifyPoints(memAddress(destination), memAddress(vertex_positions), vertex_count, vertex_positions_stride, target_vertex_count);
+    }
+
     // --- [ meshopt_stripify ] ---
 
     /** Unsafe version of: {@link #meshopt_stripify stripify} */

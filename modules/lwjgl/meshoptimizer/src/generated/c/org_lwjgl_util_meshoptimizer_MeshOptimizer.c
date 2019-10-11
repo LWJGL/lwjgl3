@@ -147,6 +147,13 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt
     return (jlong)meshopt_simplifySloppy(destination, indices, (size_t)index_count, vertex_positions, (size_t)vertex_count, (size_t)vertex_positions_stride, (size_t)target_index_count);
 }
 
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1simplifyPoints(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong vertex_positionsAddress, jlong vertex_count, jlong vertex_positions_stride, jlong target_vertex_count) {
+    unsigned int *destination = (unsigned int *)(intptr_t)destinationAddress;
+    float const *vertex_positions = (float const *)(intptr_t)vertex_positionsAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)meshopt_simplifyPoints(destination, vertex_positions, (size_t)vertex_count, (size_t)vertex_positions_stride, (size_t)target_vertex_count);
+}
+
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1stripify(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong indicesAddress, jlong index_count, jlong vertex_count, jint restart_index) {
     unsigned int *destination = (unsigned int *)(intptr_t)destinationAddress;
     unsigned int const *indices = (unsigned int const *)(intptr_t)indicesAddress;

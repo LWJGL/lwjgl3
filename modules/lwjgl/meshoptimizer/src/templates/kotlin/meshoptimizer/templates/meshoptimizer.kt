@@ -651,6 +651,26 @@ nmeshopt_setAllocator(
     )
 
     size_t(
+        "simplifyPoints",
+        """
+        Experimental: Point cloud simplifier. Reduces the number of points in the cloud to reach the given target.
+
+        Returns the number of points after simplification, with {@code destination} containing new index data. The resulting index buffer references vertices
+        from the original vertex buffer. If the original vertex data isn't required, creating a compact vertex buffer using #optimizeVertexFetch() is
+        recommended.
+
+        {@code destination} must contain enough space for the target index buffer. {@code vertex_positions} should have {@code float3} position in the first 12
+        bytes of each vertex - similar to {@code glVertexPointer}.
+        """,
+
+        Check("target_vertex_count")..unsigned_int.p("destination", ""),
+        Check("vertex_count * vertex_positions_stride")..float.const.p("vertex_positions", ""),
+        size_t("vertex_count", ""),
+        size_t("vertex_positions_stride", ""),
+        size_t("target_vertex_count", "")
+    )
+
+    size_t(
         "stripify",
         """
         Mesh stripifier. Converts a previously vertex cache optimized triangle list to triangle strip, stitching strips using restart index or degenerate
