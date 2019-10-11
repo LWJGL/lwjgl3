@@ -304,19 +304,19 @@ const uint32_t VRCompositor_ThrottleMask = 0xC0;	// Number of frames the composi
 
     void(
         "ShowMirrorWindow",
-        "Opens the headset view (as either a window or docked widget depending on user's preferences) that displays what the user sees in the headset.",
+        "DEPRECATED: Opens the headset view (as either a window or docked widget depending on user's preferences) that displays what the user sees in the headset.",
         void()
     )
 
     void(
         "HideMirrorWindow",
-        "Closes the headset view, either as a window or docked widget.",
+        "DEPRECATED: Closes the headset view, either as a window or docked widget.",
         void()
     )
 
     bool(
         "IsMirrorWindowVisible",
-        "Returns true if the headset view (either as a window or docked widget) is shown.",
+        "DEPRECATED: Returns true if the headset view (either as a window or docked widget) is shown.",
         void()
     )
 

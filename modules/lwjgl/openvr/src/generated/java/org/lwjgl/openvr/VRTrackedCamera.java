@@ -317,4 +317,26 @@ public class VRTrackedCamera {
         return callJI(hTrackedCamera, glTextureId, __functionAddress);
     }
 
+    // --- [ VRTrackedCamera_SetCameraTrackingSpace ] ---
+
+    /** @param eUniverse one of:<br><table><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseSeated}</td></tr><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseStanding}</td></tr><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseRawAndUncalibrated}</td></tr></table> */
+    public static void VRTrackedCamera_SetCameraTrackingSpace(@NativeType("ETrackingUniverseOrigin") int eUniverse) {
+        long __functionAddress = OpenVR.VRTrackedCamera.SetCameraTrackingSpace;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callV(eUniverse, __functionAddress);
+    }
+
+    // --- [ VRTrackedCamera_GetCameraTrackingSpace ] ---
+
+    @NativeType("ETrackingUniverseOrigin")
+    public static int VRTrackedCamera_GetCameraTrackingSpace() {
+        long __functionAddress = OpenVR.VRTrackedCamera.GetCameraTrackingSpace;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callI(__functionAddress);
+    }
+
 }

@@ -55,29 +55,6 @@ typedef struct HmdRect2_t
         VROverlayHandle_t("ulOverlayHandle", "")
     )
 
-    EVROverlayError(
-        "SetHighQualityOverlay",
-        """
-        Specify which overlay to use the high quality render path.
-
-        This overlay will be composited in during the distortion pass which results in it drawing on top of everything else, but also at a higher quality as it
-        samples the source texture directly rather than rasterizing into each eye's render texture first. Because if this, only one of these is supported at
-        any given time. It is most useful for overlays that are expected to take up most of the user's view (e.g. streaming video). This mode does not support
-        mouse input to your overlay.
-        """,
-
-        VROverlayHandle_t("ulOverlayHandle", "")
-    )
-
-    VROverlayHandle_t(
-        "GetHighQualityOverlay",
-        """
-        Returns the overlay handle of the current overlay being rendered using the single high quality overlay render path. Otherwise it will return
-        #k_ulOverlayHandleInvalid.
-        """,
-        void()
-    )
-
     uint32_t(
         "GetOverlayKey",
         """

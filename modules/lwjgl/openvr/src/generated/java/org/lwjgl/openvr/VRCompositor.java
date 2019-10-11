@@ -450,7 +450,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_ShowMirrorWindow ] ---
 
-    /** Opens the headset view (as either a window or docked widget depending on user's preferences) that displays what the user sees in the headset. */
+    /** DEPRECATED: Opens the headset view (as either a window or docked widget depending on user's preferences) that displays what the user sees in the headset. */
     public static void VRCompositor_ShowMirrorWindow() {
         long __functionAddress = OpenVR.VRCompositor.ShowMirrorWindow;
         if (CHECKS) {
@@ -461,7 +461,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_HideMirrorWindow ] ---
 
-    /** Closes the headset view, either as a window or docked widget. */
+    /** DEPRECATED: Closes the headset view, either as a window or docked widget. */
     public static void VRCompositor_HideMirrorWindow() {
         long __functionAddress = OpenVR.VRCompositor.HideMirrorWindow;
         if (CHECKS) {
@@ -472,7 +472,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_IsMirrorWindowVisible ] ---
 
-    /** Returns true if the headset view (either as a window or docked widget) is shown. */
+    /** DEPRECATED: Returns true if the headset view (either as a window or docked widget) is shown. */
     @NativeType("bool")
     public static boolean VRCompositor_IsMirrorWindowVisible() {
         long __functionAddress = OpenVR.VRCompositor.IsMirrorWindowVisible;

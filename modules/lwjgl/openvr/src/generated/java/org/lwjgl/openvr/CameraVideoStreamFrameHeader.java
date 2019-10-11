@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t nHeight;
  *     uint32_t nBytesPerPixel;
  *     uint32_t nFrameSequence;
- *     {@link TrackedDevicePose TrackedDevicePose_t} standingTrackedDevicePose;
+ *     {@link TrackedDevicePose TrackedDevicePose_t} trackedDevicePose;
  *     uint64_t ulFrameExposureTime;
  * }</code></pre>
  */
@@ -51,7 +51,7 @@ public class CameraVideoStreamFrameHeader extends Struct implements NativeResour
         NHEIGHT,
         NBYTESPERPIXEL,
         NFRAMESEQUENCE,
-        STANDINGTRACKEDDEVICEPOSE,
+        TRACKEDDEVICEPOSE,
         ULFRAMEEXPOSURETIME;
 
     static {
@@ -73,7 +73,7 @@ public class CameraVideoStreamFrameHeader extends Struct implements NativeResour
         NHEIGHT = layout.offsetof(2);
         NBYTESPERPIXEL = layout.offsetof(3);
         NFRAMESEQUENCE = layout.offsetof(4);
-        STANDINGTRACKEDDEVICEPOSE = layout.offsetof(5);
+        TRACKEDDEVICEPOSE = layout.offsetof(5);
         ULFRAMEEXPOSURETIME = layout.offsetof(6);
     }
 
@@ -105,9 +105,9 @@ public class CameraVideoStreamFrameHeader extends Struct implements NativeResour
     /** Returns the value of the {@code nFrameSequence} field. */
     @NativeType("uint32_t")
     public int nFrameSequence() { return nnFrameSequence(address()); }
-    /** Returns a {@link TrackedDevicePose} view of the {@code standingTrackedDevicePose} field. */
+    /** Returns a {@link TrackedDevicePose} view of the {@code trackedDevicePose} field. */
     @NativeType("TrackedDevicePose_t")
-    public TrackedDevicePose standingTrackedDevicePose() { return nstandingTrackedDevicePose(address()); }
+    public TrackedDevicePose trackedDevicePose() { return ntrackedDevicePose(address()); }
     /** Returns the value of the {@code ulFrameExposureTime} field. */
     @NativeType("uint64_t")
     public long ulFrameExposureTime() { return nulFrameExposureTime(address()); }
@@ -265,8 +265,8 @@ public class CameraVideoStreamFrameHeader extends Struct implements NativeResour
     public static int nnBytesPerPixel(long struct) { return UNSAFE.getInt(null, struct + CameraVideoStreamFrameHeader.NBYTESPERPIXEL); }
     /** Unsafe version of {@link #nFrameSequence}. */
     public static int nnFrameSequence(long struct) { return UNSAFE.getInt(null, struct + CameraVideoStreamFrameHeader.NFRAMESEQUENCE); }
-    /** Unsafe version of {@link #standingTrackedDevicePose}. */
-    public static TrackedDevicePose nstandingTrackedDevicePose(long struct) { return TrackedDevicePose.create(struct + CameraVideoStreamFrameHeader.STANDINGTRACKEDDEVICEPOSE); }
+    /** Unsafe version of {@link #trackedDevicePose}. */
+    public static TrackedDevicePose ntrackedDevicePose(long struct) { return TrackedDevicePose.create(struct + CameraVideoStreamFrameHeader.TRACKEDDEVICEPOSE); }
     /** Unsafe version of {@link #ulFrameExposureTime}. */
     public static long nulFrameExposureTime(long struct) { return UNSAFE.getLong(null, struct + CameraVideoStreamFrameHeader.ULFRAMEEXPOSURETIME); }
 
@@ -323,9 +323,9 @@ public class CameraVideoStreamFrameHeader extends Struct implements NativeResour
         /** Returns the value of the {@code nFrameSequence} field. */
         @NativeType("uint32_t")
         public int nFrameSequence() { return CameraVideoStreamFrameHeader.nnFrameSequence(address()); }
-        /** Returns a {@link TrackedDevicePose} view of the {@code standingTrackedDevicePose} field. */
+        /** Returns a {@link TrackedDevicePose} view of the {@code trackedDevicePose} field. */
         @NativeType("TrackedDevicePose_t")
-        public TrackedDevicePose standingTrackedDevicePose() { return CameraVideoStreamFrameHeader.nstandingTrackedDevicePose(address()); }
+        public TrackedDevicePose trackedDevicePose() { return CameraVideoStreamFrameHeader.ntrackedDevicePose(address()); }
         /** Returns the value of the {@code ulFrameExposureTime} field. */
         @NativeType("uint64_t")
         public long ulFrameExposureTime() { return CameraVideoStreamFrameHeader.nulFrameExposureTime(address()); }

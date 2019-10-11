@@ -116,40 +116,6 @@ public class VROverlay {
         return callJI(ulOverlayHandle, __functionAddress);
     }
 
-    // --- [ VROverlay_SetHighQualityOverlay ] ---
-
-    /**
-     * Specify which overlay to use the high quality render path.
-     * 
-     * <p>This overlay will be composited in during the distortion pass which results in it drawing on top of everything else, but also at a higher quality as it
-     * samples the source texture directly rather than rasterizing into each eye's render texture first. Because if this, only one of these is supported at
-     * any given time. It is most useful for overlays that are expected to take up most of the user's view (e.g. streaming video). This mode does not support
-     * mouse input to your overlay.</p>
-     */
-    @NativeType("EVROverlayError")
-    public static int VROverlay_SetHighQualityOverlay(@NativeType("VROverlayHandle_t") long ulOverlayHandle) {
-        long __functionAddress = OpenVR.VROverlay.SetHighQualityOverlay;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        return callJI(ulOverlayHandle, __functionAddress);
-    }
-
-    // --- [ VROverlay_GetHighQualityOverlay ] ---
-
-    /**
-     * Returns the overlay handle of the current overlay being rendered using the single high quality overlay render path. Otherwise it will return
-     * {@link VR#k_ulOverlayHandleInvalid}.
-     */
-    @NativeType("VROverlayHandle_t")
-    public static long VROverlay_GetHighQualityOverlay() {
-        long __functionAddress = OpenVR.VROverlay.GetHighQualityOverlay;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        return callJ(__functionAddress);
-    }
-
     // --- [ VROverlay_GetOverlayKey ] ---
 
     /** Unsafe version of: {@link #VROverlay_GetOverlayKey GetOverlayKey} */
@@ -346,7 +312,7 @@ public class VROverlay {
     /**
      * Specify flag setting for a given overlay.
      *
-     * @param eOverlayFlag one of:<br><table><tr><td>{@link VR#VROverlayFlags_None}</td><td>{@link VR#VROverlayFlags_Curved}</td></tr><tr><td>{@link VR#VROverlayFlags_RGSS4X}</td><td>{@link VR#VROverlayFlags_NoDashboardTab}</td></tr><tr><td>{@link VR#VROverlayFlags_AcceptsGamepadEvents}</td><td>{@link VR#VROverlayFlags_ShowGamepadFocus}</td></tr><tr><td>{@link VR#VROverlayFlags_SendVRDiscreteScrollEvents}</td><td>{@link VR#VROverlayFlags_SendVRTouchpadEvents}</td></tr><tr><td>{@link VR#VROverlayFlags_ShowTouchPadScrollWheel}</td><td>{@link VR#VROverlayFlags_TransferOwnershipToInternalProcess}</td></tr><tr><td>{@link VR#VROverlayFlags_SideBySide_Parallel}</td><td>{@link VR#VROverlayFlags_SideBySide_Crossed}</td></tr><tr><td>{@link VR#VROverlayFlags_Panorama}</td><td>{@link VR#VROverlayFlags_StereoPanorama}</td></tr><tr><td>{@link VR#VROverlayFlags_SortWithNonSceneOverlays}</td><td>{@link VR#VROverlayFlags_VisibleInDashboard}</td></tr><tr><td>{@link VR#VROverlayFlags_MakeOverlaysInteractiveIfVisible}</td><td>{@link VR#VROverlayFlags_SendVRSmoothScrollEvents}</td></tr><tr><td>{@link VR#VROverlayFlags_ProtectedContent}</td></tr></table>
+     * @param eOverlayFlag one of:<br><table><tr><td>{@link VR#VROverlayFlags_None}</td><td>{@link VR#VROverlayFlags_NoDashboardTab}</td></tr><tr><td>{@link VR#VROverlayFlags_AcceptsGamepadEvents}</td><td>{@link VR#VROverlayFlags_ShowGamepadFocus}</td></tr><tr><td>{@link VR#VROverlayFlags_SendVRDiscreteScrollEvents}</td><td>{@link VR#VROverlayFlags_SendVRTouchpadEvents}</td></tr><tr><td>{@link VR#VROverlayFlags_ShowTouchPadScrollWheel}</td><td>{@link VR#VROverlayFlags_TransferOwnershipToInternalProcess}</td></tr><tr><td>{@link VR#VROverlayFlags_SideBySide_Parallel}</td><td>{@link VR#VROverlayFlags_SideBySide_Crossed}</td></tr><tr><td>{@link VR#VROverlayFlags_Panorama}</td><td>{@link VR#VROverlayFlags_StereoPanorama}</td></tr><tr><td>{@link VR#VROverlayFlags_SortWithNonSceneOverlays}</td><td>{@link VR#VROverlayFlags_VisibleInDashboard}</td></tr><tr><td>{@link VR#VROverlayFlags_MakeOverlaysInteractiveIfVisible}</td><td>{@link VR#VROverlayFlags_SendVRSmoothScrollEvents}</td></tr><tr><td>{@link VR#VROverlayFlags_ProtectedContent}</td></tr></table>
      */
     @NativeType("EVROverlayError")
     public static int VROverlay_SetOverlayFlag(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("VROverlayFlags") int eOverlayFlag, @NativeType("bool") boolean bEnabled) {
@@ -371,7 +337,7 @@ public class VROverlay {
     /**
      * Sets flag setting for a given overlay.
      *
-     * @param eOverlayFlag one of:<br><table><tr><td>{@link VR#VROverlayFlags_None}</td><td>{@link VR#VROverlayFlags_Curved}</td></tr><tr><td>{@link VR#VROverlayFlags_RGSS4X}</td><td>{@link VR#VROverlayFlags_NoDashboardTab}</td></tr><tr><td>{@link VR#VROverlayFlags_AcceptsGamepadEvents}</td><td>{@link VR#VROverlayFlags_ShowGamepadFocus}</td></tr><tr><td>{@link VR#VROverlayFlags_SendVRDiscreteScrollEvents}</td><td>{@link VR#VROverlayFlags_SendVRTouchpadEvents}</td></tr><tr><td>{@link VR#VROverlayFlags_ShowTouchPadScrollWheel}</td><td>{@link VR#VROverlayFlags_TransferOwnershipToInternalProcess}</td></tr><tr><td>{@link VR#VROverlayFlags_SideBySide_Parallel}</td><td>{@link VR#VROverlayFlags_SideBySide_Crossed}</td></tr><tr><td>{@link VR#VROverlayFlags_Panorama}</td><td>{@link VR#VROverlayFlags_StereoPanorama}</td></tr><tr><td>{@link VR#VROverlayFlags_SortWithNonSceneOverlays}</td><td>{@link VR#VROverlayFlags_VisibleInDashboard}</td></tr><tr><td>{@link VR#VROverlayFlags_MakeOverlaysInteractiveIfVisible}</td><td>{@link VR#VROverlayFlags_SendVRSmoothScrollEvents}</td></tr><tr><td>{@link VR#VROverlayFlags_ProtectedContent}</td></tr></table>
+     * @param eOverlayFlag one of:<br><table><tr><td>{@link VR#VROverlayFlags_None}</td><td>{@link VR#VROverlayFlags_NoDashboardTab}</td></tr><tr><td>{@link VR#VROverlayFlags_AcceptsGamepadEvents}</td><td>{@link VR#VROverlayFlags_ShowGamepadFocus}</td></tr><tr><td>{@link VR#VROverlayFlags_SendVRDiscreteScrollEvents}</td><td>{@link VR#VROverlayFlags_SendVRTouchpadEvents}</td></tr><tr><td>{@link VR#VROverlayFlags_ShowTouchPadScrollWheel}</td><td>{@link VR#VROverlayFlags_TransferOwnershipToInternalProcess}</td></tr><tr><td>{@link VR#VROverlayFlags_SideBySide_Parallel}</td><td>{@link VR#VROverlayFlags_SideBySide_Crossed}</td></tr><tr><td>{@link VR#VROverlayFlags_Panorama}</td><td>{@link VR#VROverlayFlags_StereoPanorama}</td></tr><tr><td>{@link VR#VROverlayFlags_SortWithNonSceneOverlays}</td><td>{@link VR#VROverlayFlags_VisibleInDashboard}</td></tr><tr><td>{@link VR#VROverlayFlags_MakeOverlaysInteractiveIfVisible}</td><td>{@link VR#VROverlayFlags_SendVRSmoothScrollEvents}</td></tr><tr><td>{@link VR#VROverlayFlags_ProtectedContent}</td></tr></table>
      */
     @NativeType("EVROverlayError")
     public static int VROverlay_GetOverlayFlag(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("VROverlayFlags") int eOverlayFlag, @NativeType("bool *") ByteBuffer pbEnabled) {

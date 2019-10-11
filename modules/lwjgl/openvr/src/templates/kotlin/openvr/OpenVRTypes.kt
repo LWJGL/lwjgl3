@@ -804,7 +804,7 @@ val CameraVideoStreamFrameHeader_t = struct(Module.OPENVR, "CameraVideoStreamFra
 
     uint32_t("nFrameSequence", "")
 
-    TrackedDevicePose_t("standingTrackedDevicePose", "")
+    TrackedDevicePose_t("trackedDevicePose", "")
     uint64_t("ulFrameExposureTime", "mid-point of the exposure of the image in host system ticks")
 }
 

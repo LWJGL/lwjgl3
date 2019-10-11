@@ -153,4 +153,18 @@ val VRTrackedCamera = "VRTrackedCamera".nativeClass(
         TrackedCameraHandle_t("hTrackedCamera", ""),
         glUInt_t("glTextureId", "")
     )
+
+    void(
+        "SetCameraTrackingSpace",
+        "",
+
+        ETrackingUniverseOrigin("eUniverse", "", "ETrackingUniverseOrigin_\\w+")
+    )
+
+	ETrackingUniverseOrigin(
+        "GetCameraTrackingSpace",
+        "",
+
+        void()
+    )
 }
