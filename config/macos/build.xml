@@ -29,6 +29,7 @@
         </sequential>
     </macrodef>
 
+    <find-sdkroot version="10.15"/>
     <find-sdkroot version="10.14"/>
     <find-sdkroot version="10.13"/>
     <find-sdkroot version="10.12"/>
