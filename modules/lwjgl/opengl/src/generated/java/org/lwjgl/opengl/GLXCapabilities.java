@@ -178,6 +178,8 @@ public final class GLXCapabilities {
     public final boolean GLX_NV_delay_before_swap;
     /** When true, {@link GLXNVFloatBuffer} is supported. */
     public final boolean GLX_NV_float_buffer;
+    /** When true, {@link GLXNVMultiGPUContext} is supported. */
+    public final boolean GLX_NV_multigpu_context;
     /** When true, {@link GLXNVMultisampleCoverage} is supported. */
     public final boolean GLX_NV_multisample_coverage;
     /** When true, {@link GLXNVRobustnessVideoMemoryPurge} is supported. */
@@ -306,6 +308,7 @@ public final class GLXCapabilities {
         GLX_NV_copy_image = ext.contains("GLX_NV_copy_image") && checkExtension("GLX_NV_copy_image", GLXNVCopyImage.isAvailable(this));
         GLX_NV_delay_before_swap = ext.contains("GLX_NV_delay_before_swap") && checkExtension("GLX_NV_delay_before_swap", GLXNVDelayBeforeSwap.isAvailable(this));
         GLX_NV_float_buffer = ext.contains("GLX_NV_float_buffer");
+        GLX_NV_multigpu_context = ext.contains("GLX_NV_multigpu_context");
         GLX_NV_multisample_coverage = ext.contains("GLX_NV_multisample_coverage");
         GLX_NV_robustness_video_memory_purge = ext.contains("GLX_NV_robustness_video_memory_purge");
         GLX_NV_swap_group = ext.contains("GLX_NV_swap_group") && checkExtension("GLX_NV_swap_group", GLXNVSwapGroup.isAvailable(this));
