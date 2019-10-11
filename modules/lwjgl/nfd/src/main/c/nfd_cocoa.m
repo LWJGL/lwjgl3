@@ -22,8 +22,10 @@ static NSArray *BuildAllowedFileTypes( const char *filterList )
     {
         if ( filterList[i] == ',' || filterList[i] == ';' || filterList[i] == '\0' )
         {
-            ++p_typebuf;
+            if (filterList[i] != '\0')
+                ++p_typebuf;
             *p_typebuf = '\0';
+
             NSString *thisType = [NSString stringWithUTF8String: typebuf];
             [buildFilterList addObject:thisType];
             p_typebuf = typebuf;

@@ -12,6 +12,8 @@
 
 #include "nfd.h"
 
+#include <stdint.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -26,7 +28,7 @@ void  *NFDi_Malloc( size_t bytes );
 void   NFDi_Free( void *ptr );
 void   NFDi_SetError( const char *msg );
 int    NFDi_SafeStrncpy( char *dst, const char *src, size_t maxCopy );
-size_t NFDi_UTF8_Strlen( const nfdchar_t *str );
+int32_t NFDi_UTF8_Strlen( const nfdchar_t *str );
 int    NFDi_IsFilterSegmentChar( char ch );
     
 #ifdef __cplusplus

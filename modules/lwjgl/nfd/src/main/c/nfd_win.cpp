@@ -4,19 +4,20 @@
   http://www.frogtoss.com/labs
  */
 
-#define _CRTDBG_MAP_ALLOC  
-#include <stdlib.h>  
-#include <crtdbg.h>  
-
-/* only locally define UNICODE in this compilation unit */
-#ifndef UNICODE
-#define UNICODE
-#endif
 
 #ifdef __MINGW32__
 // Explicitly setting NTDDI version, this is necessary for the MinGW compiler
 #define NTDDI_VERSION NTDDI_VISTA
 #define _WIN32_WINNT _WIN32_WINNT_VISTA
+#endif
+
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+
+/* only locally define UNICODE in this compilation unit */
+#ifndef UNICODE
+#define UNICODE
 #endif
 
 #include <wchar.h>
@@ -26,6 +27,33 @@
 #include <shobjidl.h>
 #include "nfd_common.h"
 
+
+#define COM_INITFLAGS ::COINIT_APARTMENTTHREADED | ::COINIT_DISABLE_OLE1DDE
+
+static BOOL COMIsInitialized(HRESULT coResult)
+{
+    if (coResult == RPC_E_CHANGED_MODE)
+    {
+        // If COM was previously initialized with different init flags,
+        // NFD still needs to operate. Eat this warning.
+        return TRUE;
+    }
+
+    return SUCCEEDED(coResult);
+}
+
+static HRESULT COMInit(void)
+{
+    return ::CoInitializeEx(NULL, COM_INITFLAGS);
+}
+
+static void COMUninit(HRESULT coResult)
+{
+    // do not uninitialize if RPC_E_CHANGED_MODE occurred -- this
+    // case does not refcount COM.
+    if (SUCCEEDED(coResult))
+        ::CoUninitialize();
+}
 
 // allocs the space in outPath -- call free()
 static void CopyWCharToNFDChar( const wchar_t *inStr, nfdchar_t **outStr )
@@ -58,11 +86,9 @@ static size_t GetUTF8ByteCountForWChar( const wchar_t *str )
     return bytesNeeded+1;
 }
 
-// write to outPtr -- no free() necessary.  No memory stomp tests are done -- they must be done
-// before entering this function.
+// write to outPtr -- no free() necessary.
 static int CopyWCharToExistingNFDCharBuffer( const wchar_t *inStr, nfdchar_t *outPtr )
 {
-    int inStrCharacterCount = static_cast<int>(wcslen(inStr));
     int bytesNeeded = static_cast<int>(GetUTF8ByteCountForWChar( inStr ));
 
     /* invocation copies null term */
@@ -120,7 +146,8 @@ static int AppendExtensionToSpecBuf( const char *ext, char *specBuf, size_t spec
 
     char extWildcard[NFD_MAX_STRLEN];
     int bytesWritten = sprintf_s( extWildcard, NFD_MAX_STRLEN, "*.%s", ext );
-    assert( bytesWritten == strlen(ext)+2 );
+    assert( bytesWritten == (int)(strlen(ext)+2) );
+    _NFD_UNUSED(bytesWritten);
     
     strncat( specBuf, extWildcard, specBufLen - strlen(specBuf) - 1 );
 
@@ -129,7 +156,6 @@ static int AppendExtensionToSpecBuf( const char *ext, char *specBuf, size_t spec
 
 static nfdresult_t AddFiltersToDialog( ::IFileDialog *fileOpenDialog, const char *filterList )
 {
-    const wchar_t EMPTY_WSTR[] = L"";
     const wchar_t WILDCARD[] = L"*.*";
 
     if ( !filterList || strlen(filterList) == 0 )
@@ -167,7 +193,6 @@ static nfdresult_t AddFiltersToDialog( ::IFileDialog *fileOpenDialog, const char
     p_filterList = filterList;
     char typebuf[NFD_MAX_STRLEN] = {0};  /* one per comma or semicolon */
     char *p_typebuf = typebuf;
-    char filterName[NFD_MAX_STRLEN] = {0};
 
     char specbuf[NFD_MAX_STRLEN] = {0}; /* one per semicolon */
 
@@ -364,22 +389,17 @@ nfdresult_t NFD_OpenDialog( const nfdchar_t *filterList,
                             nfdchar_t **outPath )
 {
     nfdresult_t nfdResult = NFD_ERROR;
+
     
-    // Init COM library.
-    HRESULT coResult = ::CoInitializeEx(NULL,
-                                        ::COINIT_APARTMENTTHREADED |
-                                        ::COINIT_DISABLE_OLE1DDE );
-
-    ::IFileOpenDialog *fileOpenDialog(NULL);
-
-    if ( !SUCCEEDED(coResult) && coResult != RPC_E_CHANGED_MODE )
-    {
-        fileOpenDialog = NULL;
+    HRESULT coResult = COMInit();
+    if (!COMIsInitialized(coResult))
+    {        
         NFDi_SetError("Could not initialize COM.");
-        goto end;
+        return nfdResult;
     }
 
     // Create dialog
+    ::IFileOpenDialog *fileOpenDialog(NULL);    
     HRESULT result = ::CoCreateInstance(::CLSID_FileOpenDialog, NULL,
                                         CLSCTX_ALL, ::IID_IFileOpenDialog,
                                         reinterpret_cast<void**>(&fileOpenDialog) );
@@ -449,8 +469,7 @@ end:
     if (fileOpenDialog)
         fileOpenDialog->Release();
 
-    if (SUCCEEDED(coResult))
-        ::CoUninitialize();
+    COMUninit(coResult);
     
     return nfdResult;
 }
@@ -460,20 +479,17 @@ nfdresult_t NFD_OpenDialogMultiple( const nfdchar_t *filterList,
                                     nfdpathset_t *outPaths )
 {
     nfdresult_t nfdResult = NFD_ERROR;
-    
-    // Init COM library.
-    HRESULT coResult = ::CoInitializeEx(NULL,
-                                        ::COINIT_APARTMENTTHREADED |
-                                        ::COINIT_DISABLE_OLE1DDE );
-    if ( !SUCCEEDED(coResult) && coResult != RPC_E_CHANGED_MODE )
+
+
+    HRESULT coResult = COMInit();
+    if (!COMIsInitialized(coResult))
     {
-        NFDi_SetError("Could not initialize COM.");
-        return NFD_ERROR;
+        NFDi_SetError("Could not initialize COM.");        
+        return nfdResult;
     }
 
-    ::IFileOpenDialog *fileOpenDialog(NULL);
-
     // Create dialog
+    ::IFileOpenDialog *fileOpenDialog(NULL);    
     HRESULT result = ::CoCreateInstance(::CLSID_FileOpenDialog, NULL,
                                         CLSCTX_ALL, ::IID_IFileOpenDialog,
                                         reinterpret_cast<void**>(&fileOpenDialog) );
@@ -547,8 +563,7 @@ end:
     if ( fileOpenDialog )
         fileOpenDialog->Release();
 
-    if (SUCCEEDED(coResult))
-        ::CoUninitialize();
+    COMUninit(coResult);
     
     return nfdResult;
 }
@@ -558,20 +573,16 @@ nfdresult_t NFD_SaveDialog( const nfdchar_t *filterList,
                             nfdchar_t **outPath )
 {
     nfdresult_t nfdResult = NFD_ERROR;
-    
-    // Init COM library.
-    HRESULT coResult = ::CoInitializeEx(NULL,
-                                        ::COINIT_APARTMENTTHREADED |
-                                        ::COINIT_DISABLE_OLE1DDE );
-    if ( !SUCCEEDED(coResult) && coResult != RPC_E_CHANGED_MODE )
+
+    HRESULT coResult = COMInit();
+    if (!COMIsInitialized(coResult))
     {
         NFDi_SetError("Could not initialize COM.");
-        return NFD_ERROR;
+        return nfdResult;        
     }
-
-    ::IFileSaveDialog *fileSaveDialog(NULL);
-
+    
     // Create dialog
+    ::IFileSaveDialog *fileSaveDialog(NULL);    
     HRESULT result = ::CoCreateInstance(::CLSID_FileSaveDialog, NULL,
                                         CLSCTX_ALL, ::IID_IFileSaveDialog,
                                         reinterpret_cast<void**>(&fileSaveDialog) );
@@ -642,141 +653,110 @@ end:
     if ( fileSaveDialog )
         fileSaveDialog->Release();
 
-    if (SUCCEEDED(coResult))
-        ::CoUninitialize();
-        
+    COMUninit(coResult);
+    
     return nfdResult;
 }
 
-class AutoCoInit
-{
-public:
-    AutoCoInit()
-    {
-        mResult = ::CoInitializeEx(NULL,
-            ::COINIT_APARTMENTTHREADED |
-            ::COINIT_DISABLE_OLE1DDE);
-    }
 
-    ~AutoCoInit()
-    {
-        if (SUCCEEDED(mResult))
-        {
-            ::CoUninitialize();
-        }
-    }
-
-    // Eat RPC_E_CHANGED_MODE - it means we couldn't change the mode, but COM still works
-    // for our purposes.
-    HRESULT Result() const { return mResult == RPC_E_CHANGED_MODE ? S_OK : mResult; }
-private:
-    HRESULT mResult;
-};
-
-// VS2010 hasn't got a copy of CComPtr - this was first added in the 2003 SDK, so we make our own small CComPtr instead
-template<class T>
-class ComPtr
-{
-public:
-    ComPtr() : mPtr(NULL) { }
-    ~ComPtr()
-    {
-        if (mPtr)
-        {
-            mPtr->Release();
-        }
-    }
-
-    T* Ptr() const { return mPtr; }
-    T** operator&() { return &mPtr; }
-    T* operator->() const { return mPtr; }
-private:
-    // Don't allow copy or assignment
-    ComPtr(const ComPtr&);
-    ComPtr& operator = (const ComPtr&) const;
-    T* mPtr;
-};
 
 nfdresult_t NFD_PickFolder(const nfdchar_t *defaultPath,
     nfdchar_t **outPath)
 {
-    // Init COM
-    AutoCoInit autoCoInit;
-    if (!SUCCEEDED(autoCoInit.Result()))
+    nfdresult_t nfdResult = NFD_ERROR;
+    DWORD dwOptions = 0;
+
+    HRESULT coResult = COMInit();
+    if (!COMIsInitialized(coResult))
     {
         NFDi_SetError("CoInitializeEx failed.");
-        return NFD_ERROR;
+        return nfdResult;
     }
 
-    // Create the file dialog COM object
-    ComPtr<IFileDialog> pFileDialog;
-    if (!SUCCEEDED(CoCreateInstance(CLSID_FileOpenDialog,
-                                    NULL,
-                                    CLSCTX_ALL,
-                                    IID_PPV_ARGS(&pFileDialog))))
-    {
+    // Create dialog
+    ::IFileOpenDialog *fileDialog(NULL);
+    HRESULT result = CoCreateInstance(CLSID_FileOpenDialog,
+                                      NULL,
+                                      CLSCTX_ALL,
+                                      IID_PPV_ARGS(&fileDialog));
+    if ( !SUCCEEDED(result) )
+    {        
         NFDi_SetError("CoCreateInstance for CLSID_FileOpenDialog failed.");
-        return NFD_ERROR;
+        goto end;
     }
 
     // Set the default path
-    if (SetDefaultPath(pFileDialog.Ptr(), defaultPath) != NFD_OKAY)
+    if (SetDefaultPath(fileDialog, defaultPath) != NFD_OKAY)
     {
         NFDi_SetError("SetDefaultPath failed.");
-        return NFD_ERROR;
+        goto end;
     }
 
     // Get the dialogs options
-    DWORD dwOptions = 0;
-    if (!SUCCEEDED(pFileDialog->GetOptions(&dwOptions)))
+    if (!SUCCEEDED(fileDialog->GetOptions(&dwOptions)))
     {
         NFDi_SetError("GetOptions for IFileDialog failed.");
-        return NFD_ERROR;
+        goto end;
     }
 
     // Add in FOS_PICKFOLDERS which hides files and only allows selection of folders
-    if (!SUCCEEDED(pFileDialog->SetOptions(dwOptions | FOS_PICKFOLDERS)))
+    if (!SUCCEEDED(fileDialog->SetOptions(dwOptions | FOS_PICKFOLDERS)))
     {
         NFDi_SetError("SetOptions for IFileDialog failed.");
-        return NFD_ERROR;
+        goto end;
     }
 
     // Show the dialog to the user
-    const HRESULT result = pFileDialog->Show(NULL);
-    if (result == HRESULT_FROM_WIN32(ERROR_CANCELLED))
+    result = fileDialog->Show(NULL);
+    if ( SUCCEEDED(result) )
     {
-        return NFD_CANCEL;
+        // Get the folder name
+        ::IShellItem *shellItem(NULL);
+
+        result = fileDialog->GetResult(&shellItem);
+        if ( !SUCCEEDED(result) )
+        {
+            NFDi_SetError("Could not get file path for selected.");
+            shellItem->Release();
+            goto end;
+        }
+
+        wchar_t *path = NULL;
+        result = shellItem->GetDisplayName(SIGDN_DESKTOPABSOLUTEPARSING, &path);
+        if ( !SUCCEEDED(result) )
+        {
+            NFDi_SetError("GetDisplayName for IShellItem failed.");            
+            shellItem->Release();
+            goto end;
+        }
+
+        CopyWCharToNFDChar(path, outPath);
+        CoTaskMemFree(path);
+        if ( !*outPath )
+        {
+            shellItem->Release();
+            goto end;
+        }
+
+        nfdResult = NFD_OKAY;
+        shellItem->Release();
     }
-    else if (!SUCCEEDED(result))
+    else if (result == HRESULT_FROM_WIN32(ERROR_CANCELLED) )
+    {
+        nfdResult = NFD_CANCEL;
+    }
+    else
     {
         NFDi_SetError("Show for IFileDialog failed.");
-        return NFD_ERROR;
+        nfdResult = NFD_ERROR;
     }
 
-    // Get the shell item result
-    ComPtr<IShellItem> pShellItem;
-    if (!SUCCEEDED(pFileDialog->GetResult(&pShellItem)))
-    {
-        NFDi_SetError("Could not get shell item from dialog.");
-        return NFD_ERROR;
-    }
+ end:
 
-    // Finally get the path
-    wchar_t *path = NULL;
-    if (!SUCCEEDED(pShellItem->GetDisplayName(SIGDN_DESKTOPABSOLUTEPARSING, &path)))
-    {
-        NFDi_SetError("GetDisplayName for IShellItem failed.");
-        return NFD_ERROR;
-    }
+    if (fileDialog)
+        fileDialog->Release();
 
-    // Convert string
-    CopyWCharToNFDChar(path, outPath);
-    CoTaskMemFree(path);
-    if (!*outPath)
-    {
-        // error is malloc-based, error message would be redundant
-        return NFD_ERROR;
-    }
+    COMUninit(coResult);
 
-    return NFD_OKAY;
+    return nfdResult;
 }
