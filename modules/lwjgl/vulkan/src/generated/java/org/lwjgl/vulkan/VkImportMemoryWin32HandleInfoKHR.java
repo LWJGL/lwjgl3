@@ -55,7 +55,7 @@ import org.lwjgl.system.windows.*;
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code handleType} &ndash; specifies the type of {@code handle} or {@code name}.</li>
  * <li>{@code handle} &ndash; the external handle to import, or {@code NULL}.</li>
- * <li>{@code name} &ndash; a NULL-terminated UTF-16 string naming the underlying memory resource to import, or {@code NULL}.</li>
+ * <li>{@code name} &ndash; a null-terminated UTF-16 string naming the underlying memory resource to import, or {@code NULL}.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

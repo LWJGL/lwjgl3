@@ -46,6 +46,9 @@ import org.lwjgl.system.windows.*;
  * <li>If {@code handle} is not {@code NULL}, {@code name} must be {@code NULL}.</li>
  * <li>If {@code handle} is not {@code NULL}, it <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#external-semaphore-handle-types-compatibility">external semaphore handle types compatibility</a>.</li>
  * <li>If {@code name} is not {@code NULL}, it <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#external-semaphore-handle-types-compatibility">external semaphore handle types compatibility</a>.</li>
+ * <li>If {@code handleType} is {@link VK11#VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT} or {@link VK11#VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT}, the {@link VkSemaphoreCreateInfo}{@code ::flags} field <b>must</b> match that of the semaphore from which {@code handle} or {@code name} was exported.</li>
+ * <li>If {@code handleType} is {@link VK11#VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT} or {@link VK11#VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT}, the {@link VkSemaphoreTypeCreateInfoKHR}{@code ::semaphoreType} field <b>must</b> match that of the semaphore from which {@code handle} or {@code name} was exported.</li>
+ * <li>If {@code flags} contains VK_SEMAPHORE_IMPORT_TEMPORARY_BIT, the {@link VkSemaphoreTypeCreateInfoKHR}{@code ::semaphoreType} field of the semaphore from which {@code handle} or {@code name} was exported <b>must</b> not be {@link KHRTimelineSemaphore#VK_SEMAPHORE_TYPE_TIMELINE_KHR SEMAPHORE_TYPE_TIMELINE_KHR}.</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -77,7 +80,7 @@ import org.lwjgl.system.windows.*;
  * <li>{@code flags} &ndash; a bitmask of {@code VkSemaphoreImportFlagBits} specifying additional parameters for the semaphore payload import operation.</li>
  * <li>{@code handleType} &ndash; specifies the type of {@code handle}.</li>
  * <li>{@code handle} &ndash; the external handle to import, or {@code NULL}.</li>
- * <li>{@code name} &ndash; a NULL-terminated UTF-16 string naming the underlying synchronization primitive to import, or {@code NULL}.</li>
+ * <li>{@code name} &ndash; a null-terminated UTF-16 string naming the underlying synchronization primitive to import, or {@code NULL}.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

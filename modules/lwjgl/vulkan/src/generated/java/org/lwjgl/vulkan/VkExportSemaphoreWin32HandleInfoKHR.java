@@ -64,7 +64,7 @@ import org.lwjgl.system.windows.*;
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code pAttributes} &ndash; a pointer to a Windows {@code SECURITY_ATTRIBUTES} structure specifying security attributes of the handle.</li>
  * <li>{@code dwAccess} &ndash; a {@code DWORD} specifying access rights of the handle.</li>
- * <li>{@code name} &ndash; a NULL-terminated UTF-16 string to associate with the underlying synchronization primitive referenced by NT handles exported from the created semaphore.</li>
+ * <li>{@code name} &ndash; a null-terminated UTF-16 string to associate with the underlying synchronization primitive referenced by NT handles exported from the created semaphore.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

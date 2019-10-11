@@ -74,6 +74,8 @@ val VkPipelineCreationFeedbackFlagBitsEXT = "VkPipelineCreationFeedbackFlagBitsE
 val VkDriverIdKHR = "VkDriverIdKHR".enumType
 val VkShaderFloatControlsIndependenceKHR = "VkShaderFloatControlsIndependenceKHR".enumType
 val VkResolveModeFlagBitsKHR = "VkResolveModeFlagBitsKHR".enumType
+val VkSemaphoreTypeKHR = "VkSemaphoreTypeKHR".enumType
+val VkSemaphoreWaitFlagBitsKHR = "VkSemaphoreWaitFlagBitsKHR".enumType
 val VkPerformanceConfigurationTypeINTEL = "VkPerformanceConfigurationTypeINTEL".enumType
 val VkQueryPoolSamplingModeINTEL = "VkQueryPoolSamplingModeINTEL".enumType
 val VkPerformanceOverrideTypeINTEL = "VkPerformanceOverrideTypeINTEL".enumType
@@ -139,6 +141,7 @@ val VkBuildAccelerationStructureFlagsNV = typedef(VkFlags, "VkBuildAccelerationS
 val VkPipelineCompilerControlFlagsAMD = typedef(VkFlags, "VkPipelineCompilerControlFlagsAMD")
 val VkPipelineCreationFeedbackFlagsEXT = typedef(VkFlags, "VkPipelineCreationFeedbackFlagsEXT")
 val VkResolveModeFlagsKHR = typedef(VkFlags, "VkResolveModeFlagsKHR")
+val VkSemaphoreWaitFlagsKHR = typedef(VkFlags, "VkSemaphoreWaitFlagsKHR")
 val VkMetalSurfaceCreateFlagsEXT = typedef(VkFlags, "VkMetalSurfaceCreateFlagsEXT")
 val VkShaderCorePropertiesFlagsAMD = typedef(VkFlags, "VkShaderCorePropertiesFlagsAMD")
 val VkPipelineCoverageReductionStateCreateFlagsNV = typedef(VkFlags, "VkPipelineCoverageReductionStateCreateFlagsNV")
@@ -361,6 +364,7 @@ val VkPresentInfoKHR = struct(Module.VULKAN, "VkPresentInfoKHR") {
         <h5>Valid Usage</h5>
         <ul>
             <li>Each element of {@code pImageIndices} <b>must</b> be the index of a presentable image acquired from the swapchain specified by the corresponding element of the {@code pSwapchains} array, and the presented image subresource <b>must</b> be in the #IMAGE_LAYOUT_PRESENT_SRC_KHR or #IMAGE_LAYOUT_SHARED_PRESENT_KHR layout at the time the operation is executed on a {@code VkDevice}</li>
+            <li>All elements of the {@code pWaitSemaphores} <b>must</b> have a {@code VkSemaphoreTypeKHR} of #SEMAPHORE_TYPE_BINARY_KHR</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -466,6 +470,7 @@ val VkAcquireNextImageInfoKHR = struct(Module.VULKAN, "VkAcquireNextImageInfoKHR
             <li>{@code semaphore} and {@code fence} <b>must</b> not both be equal to #NULL_HANDLE</li>
             <li>{@code deviceMask} <b>must</b> be a valid device mask</li>
             <li>{@code deviceMask} <b>must</b> not be zero</li>
+            <li>{@code semaphore} <b>must</b> have a {@code VkSemaphoreTypeKHR} of #SEMAPHORE_TYPE_BINARY_KHR</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -597,7 +602,7 @@ val VkDisplayPropertiesKHR = struct(Module.VULKAN, "VkDisplayPropertiesKHR", mut
         """
 
     VkDisplayKHR("display", "a handle that is used to refer to the display described here. This handle will be valid for the lifetime of the Vulkan instance.")
-    charUTF8.const.p("displayName", "a pointer to a NULL-terminated string containing the name of the display. Generally, this will be the name provided by the display&#8217;s EDID. It <b>can</b> be {@code NULL} if no suitable name is available. If not {@code NULL}, the memory it points to <b>must</b> remain accessible as long as {@code display} is valid.")
+    charUTF8.const.p("displayName", "a pointer to a null-terminated UTF-8 string containing the name of the display. Generally, this will be the name provided by the display&#8217;s EDID. It <b>can</b> be {@code NULL} if no suitable name is available. If not {@code NULL}, the memory it points to <b>must</b> remain accessible as long as {@code display} is valid.")
     VkExtent2D("physicalDimensions", "describes the physical width and height of the visible portion of the display, in millimeters.")
     VkExtent2D("physicalResolution", """describes the physical, native, or preferred resolution of the display.
 
@@ -1817,7 +1822,7 @@ val VkImportMemoryWin32HandleInfoKHR = struct(Module.VULKAN, "VkImportMemoryWin3
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkExternalMemoryHandleTypeFlagBits("handleType", "specifies the type of {@code handle} or {@code name}.")
     HANDLE("handle", "the external handle to import, or {@code NULL}.")
-    LPCWSTR("name", "a NULL-terminated UTF-16 string naming the underlying memory resource to import, or {@code NULL}.")
+    LPCWSTR("name", "a null-terminated UTF-16 string naming the underlying memory resource to import, or {@code NULL}.")
 }
 
 val VkExportMemoryWin32HandleInfoKHR = struct(Module.VULKAN, "VkExportMemoryWin32HandleInfoKHR") {
@@ -1864,7 +1869,7 @@ val VkExportMemoryWin32HandleInfoKHR = struct(Module.VULKAN, "VkExportMemoryWin3
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     nullable..SECURITY_ATTRIBUTES.const.p("pAttributes", "a pointer to a Windows {@code SECURITY_ATTRIBUTES} structure specifying security attributes of the handle.")
     DWORD("dwAccess", "a {@code DWORD} specifying access rights of the handle.")
-    LPCWSTR("name", "a NULL-terminated UTF-16 string to associate with the underlying resource referenced by NT handles exported from the created memory.")
+    LPCWSTR("name", "a null-terminated UTF-16 string to associate with the underlying resource referenced by NT handles exported from the created memory.")
 }
 
 val VkMemoryWin32HandlePropertiesKHR = struct(Module.VULKAN, "VkMemoryWin32HandlePropertiesKHR", mutable = false) {
@@ -2096,6 +2101,9 @@ val VkImportSemaphoreWin32HandleInfoKHR = struct(Module.VULKAN, "VkImportSemapho
             <li>If {@code handle} is not {@code NULL}, {@code name} must be {@code NULL}.</li>
             <li>If {@code handle} is not {@code NULL}, it <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#external-semaphore-handle-types-compatibility">external semaphore handle types compatibility</a>.</li>
             <li>If {@code name} is not {@code NULL}, it <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#external-semaphore-handle-types-compatibility">external semaphore handle types compatibility</a>.</li>
+            <li>If {@code handleType} is #EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT or #EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT, the ##VkSemaphoreCreateInfo{@code ::flags} field <b>must</b> match that of the semaphore from which {@code handle} or {@code name} was exported.</li>
+            <li>If {@code handleType} is #EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT or #EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT, the ##VkSemaphoreTypeCreateInfoKHR{@code ::semaphoreType} field <b>must</b> match that of the semaphore from which {@code handle} or {@code name} was exported.</li>
+            <li>If {@code flags} contains VK_SEMAPHORE_IMPORT_TEMPORARY_BIT, the ##VkSemaphoreTypeCreateInfoKHR{@code ::semaphoreType} field of the semaphore from which {@code handle} or {@code name} was exported <b>must</b> not be #SEMAPHORE_TYPE_TIMELINE_KHR.</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -2122,7 +2130,7 @@ val VkImportSemaphoreWin32HandleInfoKHR = struct(Module.VULKAN, "VkImportSemapho
     VkSemaphoreImportFlags("flags", "a bitmask of {@code VkSemaphoreImportFlagBits} specifying additional parameters for the semaphore payload import operation.")
     VkExternalSemaphoreHandleTypeFlagBits("handleType", "specifies the type of {@code handle}.")
     HANDLE("handle", "the external handle to import, or {@code NULL}.")
-    LPCWSTR("name", "a NULL-terminated UTF-16 string naming the underlying synchronization primitive to import, or {@code NULL}.")
+    LPCWSTR("name", "a null-terminated UTF-16 string naming the underlying synchronization primitive to import, or {@code NULL}.")
 }
 
 val VkExportSemaphoreWin32HandleInfoKHR = struct(Module.VULKAN, "VkExportSemaphoreWin32HandleInfoKHR") {
@@ -2169,7 +2177,7 @@ val VkExportSemaphoreWin32HandleInfoKHR = struct(Module.VULKAN, "VkExportSemapho
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     nullable..SECURITY_ATTRIBUTES.const.p("pAttributes", "a pointer to a Windows {@code SECURITY_ATTRIBUTES} structure specifying security attributes of the handle.")
     DWORD("dwAccess", "a {@code DWORD} specifying access rights of the handle.")
-    LPCWSTR("name", "a NULL-terminated UTF-16 string to associate with the underlying synchronization primitive referenced by NT handles exported from the created semaphore.")
+    LPCWSTR("name", "a null-terminated UTF-16 string to associate with the underlying synchronization primitive referenced by NT handles exported from the created semaphore.")
 }
 
 val VkD3D12FenceSubmitInfoKHR = struct(Module.VULKAN, "VkD3D12FenceSubmitInfoKHR") {
@@ -2179,6 +2187,10 @@ val VkD3D12FenceSubmitInfoKHR = struct(Module.VULKAN, "VkD3D12FenceSubmitInfoKHR
 
         <h5>Description</h5>
         If the semaphore in ##VkSubmitInfo{@code ::pWaitSemaphores} or ##VkSubmitInfo{@code ::pSignalSemaphores} corresponding to an entry in {@code pWaitSemaphoreValues} or {@code pSignalSemaphoreValues} respectively does not currently have a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#synchronization-semaphores-payloads">payload</a> referring to a Direct3D 12 fence, the implementation <b>must</b> ignore the value in the {@code pWaitSemaphoreValues} or {@code pSignalSemaphoreValues} entry.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        As the introduction of the external semaphore handle type #EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT predates that of timeline semaphores, support for importing semaphore payloads from external handles of that type into semaphores created (implicitly or explicitly) with a {@code VkSemaphoreTypeKHR} of #SEMAPHORE_TYPE_BINARY_KHR is preserved for backwards compatibility. However, applications <b>should</b> prefer importing such handle types into semaphores created with a {@code VkSemaphoreTypeKHR} of #SEMAPHORE_TYPE_TIMELINE_KHR, and use the ##VkTimelineSemaphoreSubmitInfoKHR structure instead of the ##VkD3D12FenceSubmitInfoKHR structure to specify the values to use when waiting for and signaling such semaphores.
+        </div>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -2259,6 +2271,9 @@ val VkImportSemaphoreFdInfoKHR = struct(Module.VULKAN, "VkImportSemaphoreFdInfoK
         <ul>
             <li>{@code handleType} <b>must</b> be a value included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#synchronization-semaphore-handletypes-fd">Handle Types Supported by VkImportSemaphoreFdInfoKHR</a> table.</li>
             <li>{@code fd} <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#external-semaphore-handle-types-compatibility">external semaphore handle types compatibility</a>.</li>
+            <li>If {@code handleType} is #EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT, the ##VkSemaphoreCreateInfo{@code ::flags} field <b>must</b> match that of the semaphore from which {@code fd} was exported.</li>
+            <li>If {@code handleType} is #EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT, the ##VkSemaphoreTypeCreateInfoKHR{@code ::semaphoreType} field <b>must</b> match that of the semaphore from which {@code fd} was exported.</li>
+            <li>If {@code flags} contains VK_SEMAPHORE_IMPORT_TEMPORARY_BIT, the ##VkSemaphoreTypeCreateInfoKHR{@code ::semaphoreType} field of the semaphore from which {@code fd} was exported <b>must</b> not be #SEMAPHORE_TYPE_TIMELINE_KHR.</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -2302,6 +2317,8 @@ val VkSemaphoreGetFdInfoKHR = struct(Module.VULKAN, "VkSemaphoreGetFdInfoKHR") {
             <li>If {@code handleType} refers to a handle type with copy payload transference semantics, as defined below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#synchronization-semaphores-importing">Importing Semaphore Payloads</a>, there <b>must</b> be no queue waiting on {@code semaphore}.</li>
             <li>If {@code handleType} refers to a handle type with copy payload transference semantics, {@code semaphore} <b>must</b> be signaled, or have an associated <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#synchronization-semaphores-signaling">semaphore signal operation</a> pending execution.</li>
             <li>{@code handleType} <b>must</b> be defined as a POSIX file descriptor handle.</li>
+            <li>If {@code handleType} refers to a handle type with copy payload transference semantics, {@code semaphore} <b>must</b> have been created with a {@code VkSemaphoreTypeKHR} of #SEMAPHORE_TYPE_BINARY_KHR.</li>
+            <li>If {@code handleType} refers to a handle type with copy payload transference semantics, {@code semaphore} <b>must</b> have an associated semaphore signal operation that has been submitted for execution and any semaphore signal operations on which it depends (if any) <b>must</b> have also been submitted for execution.</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -2433,8 +2450,8 @@ val VkPhysicalDeviceShaderFloat16Int8FeaturesKHR = struct(Module.VULKAN, "VkPhys
 
     VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkBool32("shaderFloat16", "indicates whether 16-bit floats (halfs) are supported in shader code. This also indicates whether shader modules <b>can</b> declare the {@code Float16} capability.")
-    VkBool32("shaderInt8", "indicates whether 8-bit integers (signed and unsigned) are supported in shader code. This also indicates whether shader modules <b>can</b> declare the {@code Int8} capability.")
+    VkBool32("shaderFloat16", "indicates whether 16-bit floats (halfs) are supported in shader code. This also indicates whether shader modules <b>can</b> declare the {@code Float16} capability. However, this only enables a subset of the storage classes that SPIR-V allows for the {@code Float16} SPIR-V capability: Declaring and using 16-bit floats in the {@code Private}, {@code Workgroup}, and {@code Function} storage classes is enabled, while declaring them in the interface storage classes (e.g., {@code UniformConstant}, {@code Uniform}, {@code StorageBuffer}, {@code Input}, {@code Output}, and {@code PushConstant}) is not enabled.")
+    VkBool32("shaderInt8", "indicates whether 8-bit integers (signed and unsigned) are supported in shader code. This also indicates whether shader modules <b>can</b> declare the {@code Int8} capability. However, this only enables a subset of the storage classes that SPIR-V allows for the {@code Int8} SPIR-V capability: Declaring and using 8-bit integers in the {@code Private}, {@code Workgroup}, and {@code Function} storage classes is enabled, while declaring them in the interface storage classes (e.g., {@code UniformConstant}, {@code Uniform}, {@code StorageBuffer}, {@code Input}, {@code Output}, and {@code PushConstant}) is not enabled.")
 }
 
 val VkPhysicalDeviceFloat16Int8FeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceFloat16Int8FeaturesKHR", alias = VkPhysicalDeviceShaderFloat16Int8FeaturesKHR) {
@@ -3464,7 +3481,7 @@ val VkPhysicalDeviceImagelessFramebufferFeaturesKHR = struct(Module.VULKAN, "VkP
         Structure indicating support for imageless framebuffers.
 
         <h5>Description</h5>
-        If the ##VkPhysicalDeviceImagelessFramebufferFeaturesKHR structure is included in the {@code pNext} chain of ##VkPhysicalDeviceFeatures2KHR, it is filled with values indicating whether the feature is supported. ##VkPhysicalDeviceImagelessFramebufferFeaturesKHR <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to enable this feature.
+        If the ##VkPhysicalDeviceImagelessFramebufferFeaturesKHR structure is included in the {@code pNext} chain of ##VkPhysicalDeviceFeatures2, it is filled with values indicating whether the feature is supported. ##VkPhysicalDeviceImagelessFramebufferFeaturesKHR <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to enable this feature.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -3657,9 +3674,9 @@ val VkSubpassDescription2KHR = struct(Module.VULKAN, "VkSubpassDescription2KHR")
             <li>Any given element of {@code pPreserveAttachments} <b>must</b> not also be an element of any other member of the subpass description</li>
             <li>If any attachment is used by more than one ##VkAttachmentReference member, then each use <b>must</b> use the same {@code layout}</li>
             <li>If {@code flags} includes #SUBPASS_DESCRIPTION_PER_VIEW_POSITION_X_ONLY_BIT_NVX, it <b>must</b> also include #SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX.</li>
-            <li>The {@code aspectMask} member of any element of {@code pInputAttachments} <b>must</b> be a valid combination of {@code VkImageAspectFlagBits}</li>
-            <li>The {@code aspectMask} member of any element of {@code pInputAttachments} <b>must</b> not be 0</li>
-            <li>The {@code aspectMask} member of each element of {@code pInputAttachments} <b>must</b> not include #IMAGE_ASPECT_METADATA_BIT</li>
+            <li>If the {@code attachment} member of any element of {@code pInputAttachments} is not #ATTACHMENT_UNUSED, then the {@code aspectMask} member <b>must</b> be a valid combination of {@code VkImageAspectFlagBits}</li>
+            <li>If the {@code attachment} member of any element of {@code pInputAttachments} is not #ATTACHMENT_UNUSED, then the {@code aspectMask} member <b>must</b> not be 0</li>
+            <li>If the {@code attachment} member of any element of {@code pInputAttachments} is not #ATTACHMENT_UNUSED, then the {@code aspectMask} member <b>must</b> not include #IMAGE_ASPECT_METADATA_BIT</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -3949,7 +3966,7 @@ val VkImportFenceWin32HandleInfoKHR = struct(Module.VULKAN, "VkImportFenceWin32H
     VkFenceImportFlags("flags", "a bitmask of {@code VkFenceImportFlagBits} specifying additional parameters for the fence payload import operation.")
     VkExternalFenceHandleTypeFlagBits("handleType", "specifies the type of {@code handle}.")
     HANDLE("handle", "the external handle to import, or {@code NULL}.")
-    LPCWSTR("name", "the NULL-terminated UTF-16 string naming the underlying synchronization primitive to import, or {@code NULL}.")
+    LPCWSTR("name", "a null-terminated UTF-16 string naming the underlying synchronization primitive to import, or {@code NULL}.")
 }
 
 val VkExportFenceWin32HandleInfoKHR = struct(Module.VULKAN, "VkExportFenceWin32HandleInfoKHR") {
@@ -3988,7 +4005,7 @@ val VkExportFenceWin32HandleInfoKHR = struct(Module.VULKAN, "VkExportFenceWin32H
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     nullable..SECURITY_ATTRIBUTES.const.p("pAttributes", "a pointer to a Windows {@code SECURITY_ATTRIBUTES} structure specifying security attributes of the handle.")
     DWORD("dwAccess", "a {@code DWORD} specifying access rights of the handle.")
-    LPCWSTR("name", "a NULL-terminated UTF-16 string to associate with the underlying synchronization primitive referenced by NT handles exported from the created fence.")
+    LPCWSTR("name", "a null-terminated UTF-16 string to associate with the underlying synchronization primitive referenced by NT handles exported from the created fence.")
 }
 
 val VkFenceGetWin32HandleInfoKHR = struct(Module.VULKAN, "VkFenceGetWin32HandleInfoKHR") {
@@ -6377,6 +6394,25 @@ val VkDeviceQueueGlobalPriorityCreateInfoEXT = struct(Module.VULKAN, "VkDeviceQu
     VkQueueGlobalPriorityEXT("globalPriority", "the system-wide priority associated to this queue as specified by {@code VkQueueGlobalPriorityEXT}")
 }
 
+val VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR") {
+    documentation =
+        """
+        Structure describing the extended types subgroups support feature for an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR structure is included in the {@code pNext} chain of ##VkPhysicalDeviceFeatures2, it is filled with values indicating whether each feature is supported. ##VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to enable features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES_KHR</li>
+        </ul>
+        """
+
+    VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkBool32("shaderSubgroupExtendedTypes", "a boolean that specifies whether subgroup operations can use 8-bit integer, 16-bit integer, 64-bit integer, 16-bit floating-point, and vectors of these types if the implementation supports the types.")
+}
+
 val VkPhysicalDevice8BitStorageFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDevice8BitStorageFeaturesKHR") {
     documentation =
         """
@@ -6488,6 +6524,26 @@ val VkPhysicalDeviceShaderAtomicInt64FeaturesKHR = struct(Module.VULKAN, "VkPhys
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkBool32("shaderBufferInt64Atomics", "indicates whether shaders <b>can</b> support 64-bit unsigned and signed integer atomic operations on buffers.")
     VkBool32("shaderSharedInt64Atomics", "indicates whether shaders <b>can</b> support 64-bit unsigned and signed integer atomic operations on shared memory.")
+}
+
+val VkPhysicalDeviceShaderClockFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceShaderClockFeaturesKHR") {
+    documentation =
+        """
+        Structure describing features supported by VK_KHR_shader_clock.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceShaderClockFeaturesKHR structure is included in the {@code pNext} chain of ##VkPhysicalDeviceFeatures2, it is filled with values indicating whether each feature is supported. ##VkPhysicalDeviceShaderClockFeaturesKHR can also be used in {@code pNext} chain of ##VkDeviceCreateInfo to enable the features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CLOCK_FEATURES_KHR</li>
+        </ul>
+        """
+
+    VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkBool32("shaderSubgroupClock", "indicates whether shaders <b>can</b> support {@code Subgroup} scoped clock reads.")
+    VkBool32("shaderDeviceClock", "indicates whether shaders <b>can</b> support {@code Device} scoped clock reads.")
 }
 
 val VkPipelineCompilerControlCreateInfoAMD = struct(Module.VULKAN, "VkPipelineCompilerControlCreateInfoAMD") {
@@ -6623,7 +6679,7 @@ val VkVertexInputBindingDivisorDescriptionEXT = struct(Module.VULKAN, "VkVertexI
         """
 
     uint32_t("binding", "the binding number for which the divisor is specified.")
-    uint32_t("divisor", "the number of successive instances that will use the same value of the vertex attribute when instanced rendering is enabled. For example, if the divisor is N, the same vertex attribute will applied to N successive instances before moving on to the next vertex attribute. The maximum value of divisor is implementation dependent and can be queried using ##VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT{@code ::maxVertexAttribDivisor}. A value of 0 <b>can</b> be used for the divisor if the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\\#features-vertexAttributeInstanceRateZeroDivisor\">{@code vertexAttributeInstanceRateZeroDivisor}</a> feature is enabled. In this case, the same vertex attribute will be applied to all instances.")
+    uint32_t("divisor", "the number of successive instances that will use the same value of the vertex attribute when instanced rendering is enabled. For example, if the divisor is N, the same vertex attribute will be applied to N successive instances before moving on to the next vertex attribute. The maximum value of divisor is implementation dependent and can be queried using ##VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT{@code ::maxVertexAttribDivisor}. A value of 0 <b>can</b> be used for the divisor if the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\\#features-vertexAttributeInstanceRateZeroDivisor\">{@code vertexAttributeInstanceRateZeroDivisor}</a> feature is enabled. In this case, the same vertex attribute will be applied to all instances.")
 }
 
 val VkPipelineVertexInputDivisorStateCreateInfoEXT = struct(Module.VULKAN, "VkPipelineVertexInputDivisorStateCreateInfoEXT") {
@@ -6757,8 +6813,8 @@ val VkPhysicalDeviceDriverPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDevic
     VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to an extension specific structure.").mutable()
     VkDriverIdKHR("driverID", "a unique identifier for the driver of the physical device.")
-    charUTF8("driverName", "a null-terminated UTF-8 string containing the name of the driver.")["VK_MAX_DRIVER_NAME_SIZE_KHR"]
-    charUTF8("driverInfo", "a null-terminated UTF-8 string containing additional information about the driver.")["VK_MAX_DRIVER_INFO_SIZE_KHR"]
+    charUTF8("driverName", "an array of #MAX_DRIVER_NAME_SIZE_KHR {@code char} containing a null-terminated UTF-8 string which is the name of the driver.")["VK_MAX_DRIVER_NAME_SIZE_KHR"]
+    charUTF8("driverInfo", "an array of #MAX_DRIVER_INFO_SIZE_KHR {@code char} containing a null-terminated UTF-8 string with additional information about the driver.")["VK_MAX_DRIVER_INFO_SIZE_KHR"]
     VkConformanceVersionKHR("conformanceVersion", "the version of the Vulkan conformance test this driver is conformant against (see ##VkConformanceVersionKHR).")
 }
 
@@ -7081,6 +7137,153 @@ val VkCheckpointDataNV = struct(Module.VULKAN, "VkCheckpointDataNV", mutable = f
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
     VkPipelineStageFlagBits("stage", "indicates which pipeline stage the checkpoint marker data refers to.")
     opaque_p("pCheckpointMarker", "contains the value of the last checkpoint marker executed in the stage that {@code stage} refers to.")
+}
+
+val VkPhysicalDeviceTimelineSemaphoreFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceTimelineSemaphoreFeaturesKHR") {
+    documentation =
+        """
+        Structure describing timeline semaphore features that can be supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceTimelineSemaphoreFeaturesKHR structure is included in the {@code pNext} chain of ##VkPhysicalDeviceFeatures2, it is filled with values indicating whether each feature is supported. ##VkPhysicalDeviceTimelineSemaphoreFeaturesKHR <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to enable features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES_KHR</li>
+        </ul>
+        """
+
+    VkStructureType("sType", "")
+    nullable..opaque_p("pNext", "")
+    VkBool32("timelineSemaphore", "")
+}
+
+val VkPhysicalDeviceTimelineSemaphorePropertiesKHR = struct(Module.VULKAN, "VkPhysicalDeviceTimelineSemaphorePropertiesKHR", mutable = false) {
+    documentation =
+        """
+        Structure describing timeline semaphore properties that can be supported by an implementation.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES_KHR</li>
+        </ul>
+        """
+
+    VkStructureType("sType", "").mutable()
+    nullable..opaque_p("pNext", "").mutable()
+    uint64_t("maxTimelineSemaphoreValueDifference", "indicates the maximum difference allowed by the implementation between the current value of a timeline semaphore and any pending signal or wait operations.")
+}
+
+val VkSemaphoreTypeCreateInfoKHR = struct(Module.VULKAN, "VkSemaphoreTypeCreateInfoKHR") {
+    documentation =
+        """
+        Structure specifying the type of a newly created semaphore.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO_KHR</li>
+            <li>{@code semaphoreType} <b>must</b> be a valid {@code VkSemaphoreTypeKHR} value</li>
+        </ul>
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#features-features-timelineSemaphore">{@code timelineSemaphore}</a> feature is not enabled, {@code semaphoreType} <b>must</b> not equal #SEMAPHORE_TYPE_TIMELINE_KHR</li>
+            <li>If {@code semaphoreType} is #SEMAPHORE_TYPE_BINARY_KHR, {@code initialValue} <b>must</b> be zero.</li>
+        </ul>
+
+        If no instance of the ##VkSemaphoreTypeCreateInfoKHR structure is present in the {@code pNext} chain of ##VkSemaphoreCreateInfo then the created semaphore will have a default {@code VkSemaphoreTypeKHR} of #SEMAPHORE_TYPE_BINARY_KHR.
+        """
+
+    VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkSemaphoreTypeKHR("semaphoreType", "a {@code VkSemaphoreTypeKHR} value specifying the type of the semaphore.")
+    uint64_t("initialValue", "the initial payload value if {@code semaphoreType} is #SEMAPHORE_TYPE_TIMELINE_KHR.")
+}
+
+val VkTimelineSemaphoreSubmitInfoKHR = struct(Module.VULKAN, "VkTimelineSemaphoreSubmitInfoKHR") {
+    documentation =
+        """
+        Structure specifying signal and wait values for timeline semaphores.
+
+        <h5>Description</h5>
+        If the semaphore in ##VkSubmitInfo{@code ::pWaitSemaphores} or ##VkSubmitInfo{@code ::pSignalSemaphores} corresponding to an entry in {@code pWaitSemaphoreValues} or {@code pSignalSemaphoreValues} respectively was not created with a {@code VkSemaphoreTypeKHR} of #SEMAPHORE_TYPE_TIMELINE_KHR, the implementation <b>must</b> ignore the value in the {@code pWaitSemaphoreValues} or {@code pSignalSemaphoreValues} entry.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO_KHR</li>
+            <li>If {@code waitSemaphoreValueCount} is not 0, and {@code pWaitSemaphoreValues} is not {@code NULL}, {@code pWaitSemaphoreValues} <b>must</b> be a valid pointer to an array of {@code waitSemaphoreValueCount} {@code uint64_t} values</li>
+            <li>If {@code signalSemaphoreValueCount} is not 0, and {@code pSignalSemaphoreValues} is not {@code NULL}, {@code pSignalSemaphoreValues} <b>must</b> be a valid pointer to an array of {@code signalSemaphoreValueCount} {@code uint64_t} values</li>
+        </ul>
+        """
+
+    VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    AutoSize("pWaitSemaphoreValues", optional = true)..uint32_t("waitSemaphoreValueCount", "the number of semaphore wait values specified in {@code pWaitSemaphoreValues}.")
+    nullable..uint64_t.const.p("pWaitSemaphoreValues", "an array of length {@code waitSemaphoreValueCount} containing values for the corresponding semaphores in ##VkSubmitInfo{@code ::pWaitSemaphores} to wait for.")
+    AutoSize("pSignalSemaphoreValues", optional = true)..uint32_t("signalSemaphoreValueCount", "the number of semaphore signal values specified in {@code pSignalSemaphoreValues}.")
+    nullable..uint64_t.const.p("pSignalSemaphoreValues", "an array of length {@code signalSemaphoreValueCount} containing values for the corresponding semaphores in ##VkSubmitInfo{@code ::pSignalSemaphores} to set when signaled.")
+}
+
+val VkSemaphoreWaitInfoKHR = struct(Module.VULKAN, "VkSemaphoreWaitInfoKHR") {
+    documentation =
+        """
+        Structure containing information about the semaphore wait condition.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>All of the elements of {@code pSemaphores} <b>must</b> reference a semaphore that was created with a {@code VkSemaphoreTypeKHR} of #SEMAPHORE_TYPE_TIMELINE_KHR</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO_KHR</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code flags} <b>must</b> be a valid combination of {@code VkSemaphoreWaitFlagBitsKHR} values</li>
+            <li>{@code pSemaphores} <b>must</b> be a valid pointer to an array of {@code semaphoreCount} valid {@code VkSemaphore} handles</li>
+            <li>{@code pValues} <b>must</b> be a valid pointer to an array of {@code semaphoreCount} {@code uint64_t} values</li>
+            <li>{@code semaphoreCount} <b>must</b> be greater than 0</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #WaitSemaphoresKHR()
+        """
+
+    VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkSemaphoreWaitFlagsKHR("flags", "a bitmask of {@code VkSemaphoreWaitFlagBitsKHR} specifying additional parameters for the semaphore wait operation.")
+    AutoSize("pSemaphores", "pValues")..uint32_t("semaphoreCount", "the number of semaphores to wait on.")
+    VkSemaphore.const.p("pSemaphores", "a pointer to an array of {@code semaphoreCount} semaphore handles to wait on.")
+    uint64_t.const.p("pValues", "a pointer to an array of {@code semaphoreCount} timeline semaphore values.")
+}
+
+val VkSemaphoreSignalInfoKHR = struct(Module.VULKAN, "VkSemaphoreSignalInfoKHR") {
+    documentation =
+        """
+        Structure containing information about a semaphore signal operation.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code semaphore} <b>must</b> have been created with a {@code VkSemaphoreTypeKHR} of #SEMAPHORE_TYPE_TIMELINE_KHR</li>
+            <li>{@code value} <b>must</b> have a value greater than the current value of the semaphore</li>
+            <li>{@code value} <b>must</b> be less than the value of any pending semaphore signal operations</li>
+            <li>{@code value} <b>must</b> have a value which does not differ from the current value of the semaphore or the value of any outstanding semaphore wait or signal operation on {@code semaphore} by more than <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#limits-maxTimelineSemaphoreValueDifference">{@code maxTimelineSemaphoreValueDifference}</a>.</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO_KHR</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code semaphore} <b>must</b> be a valid {@code VkSemaphore} handle</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #SignalSemaphoreKHR()
+        """
+
+    VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkSemaphore("semaphore", "the handle of the semaphore to signal.")
+    uint64_t("value", "the value to signal.")
 }
 
 val VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL = struct(Module.VULKAN, "VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL") {
@@ -7511,8 +7714,8 @@ val VkPhysicalDeviceSubgroupSizeControlPropertiesEXT = struct(Module.VULKAN, "Vk
 
     VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
-    uint32_t("minSubgroupSize", "the minimum subgroup size supported by this device. {@code minSubgroupSize} is at least one if any of the physical device&#8217;s queues support #QUEUE_GRAPHICS_BIT or #QUEUE_COMPUTE_BIT. {@code minSubgroupSize} is less than or equal to {@code maxSubgroupSize}. {@code minSubgroupSize} is less than or equal to <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\\#limits-subgroup-size\">subgroupSize</a>.")
-    uint32_t("maxSubgroupSize", "the maximum subgroup size supported by this device. {@code maxSubgroupSize} is at least one if any of the physical device&#8217;s queues support #QUEUE_GRAPHICS_BIT or #QUEUE_COMPUTE_BIT. {@code maxSubgroupSize} is greater than or equal to {@code minSubgroupSize}. {@code maxSubgroupSize} is greater than or equal to <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\\#limits-subgroup-size\">subgroupSize</a>.")
+    uint32_t("minSubgroupSize", "the minimum subgroup size supported by this device. {@code minSubgroupSize} is at least one if any of the physical device&#8217;s queues support #QUEUE_GRAPHICS_BIT or #QUEUE_COMPUTE_BIT. {@code minSubgroupSize} is a power-of-two. {@code minSubgroupSize} is less than or equal to {@code maxSubgroupSize}. {@code minSubgroupSize} is less than or equal to <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\\#limits-subgroup-size\">subgroupSize</a>.")
+    uint32_t("maxSubgroupSize", "the maximum subgroup size supported by this device. {@code maxSubgroupSize} is at least one if any of the physical device&#8217;s queues support #QUEUE_GRAPHICS_BIT or #QUEUE_COMPUTE_BIT. {@code maxSubgroupSize} is a power-of-two. {@code maxSubgroupSize} is greater than or equal to {@code minSubgroupSize}. {@code maxSubgroupSize} is greater than or equal to <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\\#limits-subgroup-size\">subgroupSize</a>.")
     uint32_t("maxComputeWorkgroupSubgroups", "the maximum number of subgroups supported by the implementation within a workgroup.")
     VkShaderStageFlags("requiredSubgroupSizeStages", "a bitfield of what shader stages support having a required subgroup size specified.")
 }
@@ -8122,7 +8325,7 @@ val VkPhysicalDeviceLineRasterizationFeaturesEXT = struct(Module.VULKAN, "VkPhys
         Structure describing the line rasterization features that can be supported by an implementation.
 
         <h5>Description</h5>
-        If the ##VkPhysicalDeviceLineRasterizationFeaturesEXT structure is included in the {@code pNext} chain of ##VkPhysicalDeviceFeatures2KHR, it is filled with values indicating whether the feature is supported. ##VkPhysicalDeviceLineRasterizationFeaturesEXT <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to enable the feature.
+        If the ##VkPhysicalDeviceLineRasterizationFeaturesEXT structure is included in the {@code pNext} chain of ##VkPhysicalDeviceFeatures2, it is filled with values indicating whether the feature is supported. ##VkPhysicalDeviceLineRasterizationFeaturesEXT <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to enable the feature.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -8290,8 +8493,8 @@ val VkPipelineExecutablePropertiesKHR = struct(Module.VULKAN, "VkPipelineExecuta
     VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
     VkShaderStageFlags("stages", "a bitmask of {@code VkShaderStageFlagBits} indicating which shader stages (if any) were principally used as inputs to compile this pipeline executable.")
-    charUTF8("name", "a short human readable name for this executable.")["VK_MAX_DESCRIPTION_SIZE"]
-    charUTF8("description", "a human readable description for this executable.")["VK_MAX_DESCRIPTION_SIZE"]
+    charUTF8("name", "an array of #MAX_DESCRIPTION_SIZE {@code char} containing a null-terminated UTF-8 string which is a short human readable name for this executable.")["VK_MAX_DESCRIPTION_SIZE"]
+    charUTF8("description", "an array of #MAX_DESCRIPTION_SIZE {@code char} containing a null-terminated UTF-8 string which is a human readable description for this executable.")["VK_MAX_DESCRIPTION_SIZE"]
     uint32_t("subgroupSize", "the subgroup size with which this executable is dispatched.")
 }
 
@@ -8352,8 +8555,8 @@ val VkPipelineExecutableStatisticKHR = struct(Module.VULKAN, "VkPipelineExecutab
 
     VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
-    charUTF8("name", "a short human readable name for this statistic.")["VK_MAX_DESCRIPTION_SIZE"]
-    charUTF8("description", "a human readable description for this statistic.")["VK_MAX_DESCRIPTION_SIZE"]
+    charUTF8("name", "an array of #MAX_DESCRIPTION_SIZE {@code char} containing a null-terminated UTF-8 string which is a short human readable name for this statistic.")["VK_MAX_DESCRIPTION_SIZE"]
+    charUTF8("description", "an array of #MAX_DESCRIPTION_SIZE {@code char} containing a null-terminated UTF-8 string which is a human readable description for this statistic.")["VK_MAX_DESCRIPTION_SIZE"]
     VkPipelineExecutableStatisticFormatKHR("format", "a {@code VkPipelineExecutableStatisticFormatKHR} value specifying the format of the data found in {@code value}.")
     VkPipelineExecutableStatisticValueKHR("value", "the value of this statistic.")
 }
@@ -8382,8 +8585,8 @@ val VkPipelineExecutableInternalRepresentationKHR = struct(Module.VULKAN, "VkPip
 
     VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    charUTF8("name", "a short human readable name for this internal representation.")["VK_MAX_DESCRIPTION_SIZE"]
-    charUTF8("description", "a human readable description for this internal representation.")["VK_MAX_DESCRIPTION_SIZE"]
+    charUTF8("name", "an array of #MAX_DESCRIPTION_SIZE {@code char} containing a null-terminated UTF-8 string which is a short human readable name for this internal representation.")["VK_MAX_DESCRIPTION_SIZE"]
+    charUTF8("description", "an array of #MAX_DESCRIPTION_SIZE {@code char} containing a null-terminated UTF-8 string which is a human readable description for this internal representation.")["VK_MAX_DESCRIPTION_SIZE"]
     VkBool32("isText", "specifies whether the returned data is text or opaque data. If {@code isText} is #TRUE then the data returned in {@code pData} is text and is guaranteed to be a null-terminated UTF-8 string.")
     AutoSize("pData", optional = true)..size_t("dataSize", "an integer related to the size, in bytes, of the internal representation data, as described below.")
     nullable..void.p("pData", "either {@code NULL} or a pointer to an block of data into which the implementation will write the textual form of the internal representation.")

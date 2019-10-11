@@ -76,7 +76,7 @@ import org.lwjgl.system.windows.*;
  * <li>{@code flags} &ndash; a bitmask of {@code VkFenceImportFlagBits} specifying additional parameters for the fence payload import operation.</li>
  * <li>{@code handleType} &ndash; specifies the type of {@code handle}.</li>
  * <li>{@code handle} &ndash; the external handle to import, or {@code NULL}.</li>
- * <li>{@code name} &ndash; the NULL-terminated UTF-16 string naming the underlying synchronization primitive to import, or {@code NULL}.</li>
+ * <li>{@code name} &ndash; a null-terminated UTF-16 string naming the underlying synchronization primitive to import, or {@code NULL}.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

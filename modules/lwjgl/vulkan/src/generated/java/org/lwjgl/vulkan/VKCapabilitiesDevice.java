@@ -385,6 +385,12 @@ public class VKCapabilitiesDevice {
         vkAcquireNextImageKHR,
         vkQueuePresentKHR;
 
+    // KHR_timeline_semaphore
+    public final long
+        vkGetSemaphoreCounterValueKHR,
+        vkWaitSemaphoresKHR,
+        vkSignalSemaphoreKHR;
+
     // NV_clip_space_w_scaling
     public final long
         vkCmdSetViewportWScalingNV;
@@ -593,6 +599,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_GOOGLE_display_timing;
     /** When true, {@link GOOGLEHlslFunctionality1} is supported. */
     public final boolean VK_GOOGLE_hlsl_functionality1;
+    /** When true, {@link GOOGLEUserType} is supported. */
+    public final boolean VK_GOOGLE_user_type;
     /** When true, {@link IMGFilterCubic} is supported. */
     public final boolean VK_IMG_filter_cubic;
     /** When true, {@link IMGFormatPVRTC} is supported. */
@@ -669,12 +677,16 @@ public class VKCapabilitiesDevice {
     public final boolean VK_KHR_sampler_ycbcr_conversion;
     /** When true, {@link KHRShaderAtomicInt64} is supported. */
     public final boolean VK_KHR_shader_atomic_int64;
+    /** When true, {@link KHRShaderClock} is supported. */
+    public final boolean VK_KHR_shader_clock;
     /** When true, {@link KHRShaderDrawParameters} is supported. */
     public final boolean VK_KHR_shader_draw_parameters;
     /** When true, {@link KHRShaderFloat16Int8} is supported. */
     public final boolean VK_KHR_shader_float16_int8;
     /** When true, {@link KHRShaderFloatControls} is supported. */
     public final boolean VK_KHR_shader_float_controls;
+    /** When true, {@link KHRShaderSubgroupExtendedTypes} is supported. */
+    public final boolean VK_KHR_shader_subgroup_extended_types;
     /** When true, {@link KHRSharedPresentableImage} is supported. */
     public final boolean VK_KHR_shared_presentable_image;
     /** When true, {@link KHRStorageBufferStorageClass} is supported. */
@@ -683,6 +695,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_KHR_swapchain;
     /** When true, {@link KHRSwapchainMutableFormat} is supported. */
     public final boolean VK_KHR_swapchain_mutable_format;
+    /** When true, {@link KHRTimelineSemaphore} is supported. */
+    public final boolean VK_KHR_timeline_semaphore;
     /** When true, {@link KHRUniformBufferStandardLayout} is supported. */
     public final boolean VK_KHR_uniform_buffer_standard_layout;
     /** When true, {@link KHRVariablePointers} is supported. */
@@ -757,7 +771,7 @@ public class VKCapabilitiesDevice {
     VKCapabilitiesDevice(FunctionProvider provider, VKCapabilitiesInstance capsInstance, Set<String> ext) {
         this.apiVersion = capsInstance.apiVersion;
 
-        Map<String, Long> caps = new HashMap<>(274);
+        Map<String, Long> caps = new HashMap<>(277);
 
         Vulkan10 = VK10.checkCapsDevice(provider, caps, ext);
         Vulkan11 = VK11.checkCapsDevice(provider, caps, ext);
@@ -833,6 +847,7 @@ public class VKCapabilitiesDevice {
         VK_GOOGLE_decorate_string = ext.contains("VK_GOOGLE_decorate_string");
         VK_GOOGLE_display_timing = GOOGLEDisplayTiming.checkCapsDevice(provider, caps, ext);
         VK_GOOGLE_hlsl_functionality1 = ext.contains("VK_GOOGLE_hlsl_functionality1");
+        VK_GOOGLE_user_type = ext.contains("VK_GOOGLE_user_type");
         VK_IMG_filter_cubic = ext.contains("VK_IMG_filter_cubic");
         VK_IMG_format_pvrtc = ext.contains("VK_IMG_format_pvrtc");
         VK_INTEL_performance_query = INTELPerformanceQuery.checkCapsDevice(provider, caps, ext);
@@ -871,13 +886,16 @@ public class VKCapabilitiesDevice {
         VK_KHR_sampler_mirror_clamp_to_edge = ext.contains("VK_KHR_sampler_mirror_clamp_to_edge");
         VK_KHR_sampler_ycbcr_conversion = KHRSamplerYcbcrConversion.checkCapsDevice(provider, caps, ext);
         VK_KHR_shader_atomic_int64 = ext.contains("VK_KHR_shader_atomic_int64");
+        VK_KHR_shader_clock = ext.contains("VK_KHR_shader_clock");
         VK_KHR_shader_draw_parameters = ext.contains("VK_KHR_shader_draw_parameters");
         VK_KHR_shader_float16_int8 = ext.contains("VK_KHR_shader_float16_int8");
         VK_KHR_shader_float_controls = ext.contains("VK_KHR_shader_float_controls");
+        VK_KHR_shader_subgroup_extended_types = ext.contains("VK_KHR_shader_subgroup_extended_types");
         VK_KHR_shared_presentable_image = KHRSharedPresentableImage.checkCapsDevice(provider, caps, ext);
         VK_KHR_storage_buffer_storage_class = ext.contains("VK_KHR_storage_buffer_storage_class");
         VK_KHR_swapchain = KHRSwapchain.checkCapsDevice(provider, caps, ext);
         VK_KHR_swapchain_mutable_format = ext.contains("VK_KHR_swapchain_mutable_format");
+        VK_KHR_timeline_semaphore = KHRTimelineSemaphore.checkCapsDevice(provider, caps, ext);
         VK_KHR_uniform_buffer_standard_layout = ext.contains("VK_KHR_uniform_buffer_standard_layout");
         VK_KHR_variable_pointers = ext.contains("VK_KHR_variable_pointers");
         VK_KHR_vulkan_memory_model = ext.contains("VK_KHR_vulkan_memory_model");
@@ -1156,6 +1174,9 @@ public class VKCapabilitiesDevice {
         vkGetSwapchainImagesKHR = VK.get(caps, "vkGetSwapchainImagesKHR");
         vkAcquireNextImageKHR = VK.get(caps, "vkAcquireNextImageKHR");
         vkQueuePresentKHR = VK.get(caps, "vkQueuePresentKHR");
+        vkGetSemaphoreCounterValueKHR = VK.get(caps, "vkGetSemaphoreCounterValueKHR");
+        vkWaitSemaphoresKHR = VK.get(caps, "vkWaitSemaphoresKHR");
+        vkSignalSemaphoreKHR = VK.get(caps, "vkSignalSemaphoreKHR");
         vkCmdSetViewportWScalingNV = VK.get(caps, "vkCmdSetViewportWScalingNV");
         vkCmdSetCheckpointNV = VK.get(caps, "vkCmdSetCheckpointNV");
         vkGetQueueCheckpointDataNV = VK.get(caps, "vkGetQueueCheckpointDataNV");
