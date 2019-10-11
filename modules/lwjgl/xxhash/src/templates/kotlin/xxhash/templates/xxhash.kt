@@ -35,9 +35,9 @@ ENABLE_WARNINGS()""")
         XXH3 offers 2 variants, {@code _64bits} and {@code _128bits}. When only 64 bits are needed, prefer calling the {@code _64bits} variant: it reduces the
         amount of mixing, resulting in faster speed on small inputs. It's also generally simpler to manipulate a scalar return type than a struct.
 
-        The XXH3 algorithm is still considered experimental. Produced results can still change between versions. For example, results produced by v0.7.1 are
-        not comparable with results from v0.7.0 . It's nonetheless possible to use XXH3 for ephemeral data (local sessions), but avoid storing values in
-        long-term storage for later re-use.
+        The XXH3 algorithm is still considered experimental. Produced results can still change between versions. Results produced by v0.7.x are not comparable
+        with results from v0.7.y. It's nonetheless possible to use XXH3 for ephemeral data (local sessions), but avoid storing values in long-term storage for
+        later reads.
 
         The API supports one-shot hashing, streaming mode, and custom secrets.
         """
@@ -51,7 +51,7 @@ ENABLE_WARNINGS()""")
 
     IntConstant("The major version number.", "VERSION_MAJOR".."0")
     IntConstant("The minor version number.", "VERSION_MINOR".."7")
-    IntConstant("The release version number.", "VERSION_RELEASE".."1")
+    IntConstant("The release version number.", "VERSION_RELEASE".."2")
 
     IntConstant(
         "The version number",
@@ -74,7 +74,7 @@ ENABLE_WARNINGS()""")
             "the bytes to hash. The memory between {@code input} &amp; {@code input+length} must be valid (allocated and read-accessible)."
         ),
         AutoSize("input")..size_t("length", "the number of bytes stored at memory address {@code input}"),
-        unsigned_int("seed", "the seed that can be used to alter the result predictably")
+        XXH32_hash_t("seed", "the seed that can be used to alter the result predictably")
     )
 
     XXH32_state_t.p(
@@ -107,14 +107,14 @@ ENABLE_WARNINGS()""")
         "Resets the specified {@code XXH32_state_t}.",
 
         XXH32_state_t.p("statePtr", "the {@code XXH32_state_t} to reset"),
-        unsigned_int("seed", "the seed that can be used to alter the hashing result predictably")
+        XXH32_hash_t("seed", "the seed that can be used to alter the hashing result predictably")
     )
 
     XXH_errorcode(
         "32_update",
         """
-        These functions generate the xxHash of an input provided in multiple segments. Note that, for small input, they are slower than single-call functions,
-        due to state management. For small input, prefer #32().
+        Streaming functions generate the xxHash value from an incrememtal input. This method is slower than single-call functions, due to state management. For
+        small inputs, prefer #32().
 
         XXH state must first be allocated, using #32_createState().
 
@@ -125,10 +125,10 @@ ENABLE_WARNINGS()""")
 
         Finally, a hash value can be produced anytime, by using #32_digest(). This function returns the 32-bits hash as an int.
 
-        It's still possible to continue inserting input into the hash state after a digest, and generate some new hashes later on, by calling again
+        It's still possible to continue inserting input into the hash state after a digest, and generate some new hash values later on, by calling again
         #32_digest().
 
-        When done, free XXH state space.
+        When done, release the state, using #32_freeState().
         """,
 
         XXH32_state_t.p("statePtr", "the {@code XXH32_state_t} to use"),
@@ -146,10 +146,14 @@ ENABLE_WARNINGS()""")
     void(
         "32_canonicalFromHash",
         """
-        Default result type for XXH functions are primitive unsigned 32 and 64 bits.
+        Default return values from XXH functions are basic unsigned 32 and 64 bits. This the simplest and fastest format for further post-processing. However,
+        this leaves open the question of what is the order of bytes, since little and big endian conventions will write the same number differently.
 
-        The canonical representation uses human-readable write convention, aka big-endian (large digits first). These functions allow transformation of hash
-        result into and from its canonical format. This way, hash values can be written into a file / memory, remaining comparable across different systems.
+        The canonical representation settles this issue, by mandating big-endian convention, aka, the same convention as human-readable numbers (large digits
+        first). When writing hash values to storage, sending them over a network, or printing them, it's highly recommended to use the canonical
+        representation, to ensure portability across a wider range of systems, present and future.
+
+        The following functions allow transformation of hash values into and from canonical format.
         """,
 
         XXH32_canonical_t.p("dst", "the destination canonical representation"),
@@ -175,7 +179,7 @@ ENABLE_WARNINGS()""")
 
         XXH32["input"],
         XXH32["length"],
-        unsigned_long_long("seed", "the seed that can be used to alter the result predictably")
+        XXH64_hash_t("seed", "the seed that can be used to alter the result predictably")
     )
 
     XXH64_state_t.p(
@@ -204,7 +208,7 @@ ENABLE_WARNINGS()""")
         "64-bit version of #32_reset().",
 
         XXH64_state_t.p("statePtr", "the {@code XXH64_state_t} to reset"),
-        unsigned_long_long("seed", "the seed that can be used to alter the hashing result predictably")
+        XXH64_hash_t("seed", "the seed that can be used to alter the hashing result predictably")
     )
 
     XXH_errorcode(

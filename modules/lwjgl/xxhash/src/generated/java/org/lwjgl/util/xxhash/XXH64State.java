@@ -19,6 +19,13 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * 64-bit XXH state for stack allocation. Unstable API.
  * 
+ * <h3>Member documentation</h3>
+ * 
+ * <ul>
+ * <li>{@code reserved32} &ndash; required for padding anyway</li>
+ * <li>{@code reserved64} &ndash; never read nor write, might be removed in a future version</li>
+ * </ul>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
@@ -30,7 +37,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XXH32_hash_t v4;
  *     XXH32_hash_t mem64[4];
  *     XXH32_hash_t memsize;
- *     XXH32_hash_t reserved[2];
+ *     XXH32_hash_t reserved32;
+ *     XXH32_hash_t reserved64;
  * }</code></pre>
  */
 @NativeType("struct XXH64_state_t")
@@ -51,7 +59,8 @@ public class XXH64State extends Struct implements NativeResource {
         V4,
         MEM64,
         MEMSIZE,
-        RESERVED;
+        RESERVED32,
+        RESERVED64;
 
     static {
         Layout layout = __struct(
@@ -62,7 +71,8 @@ public class XXH64State extends Struct implements NativeResource {
             __member(8),
             __array(8, 4),
             __member(4),
-            __array(4, 2)
+            __member(4),
+            __member(8)
         );
 
         SIZEOF = layout.getSize();
@@ -75,7 +85,8 @@ public class XXH64State extends Struct implements NativeResource {
         V4 = layout.offsetof(4);
         MEM64 = layout.offsetof(5);
         MEMSIZE = layout.offsetof(6);
-        RESERVED = layout.offsetof(7);
+        RESERVED32 = layout.offsetof(7);
+        RESERVED64 = layout.offsetof(8);
     }
 
     /**
@@ -115,12 +126,12 @@ public class XXH64State extends Struct implements NativeResource {
     /** Returns the value of the {@code memsize} field. */
     @NativeType("XXH32_hash_t")
     public int memsize() { return nmemsize(address()); }
-    /** Returns a {@link IntBuffer} view of the {@code reserved} field. */
-    @NativeType("XXH32_hash_t[2]")
-    public IntBuffer reserved() { return nreserved(address()); }
-    /** Returns the value at the specified index of the {@code reserved} field. */
+    /** Returns the value of the {@code reserved32} field. */
     @NativeType("XXH32_hash_t")
-    public int reserved(int index) { return nreserved(address(), index); }
+    public int reserved32() { return nreserved32(address()); }
+    /** Returns the value of the {@code reserved64} field. */
+    @NativeType("XXH32_hash_t")
+    public long reserved64() { return nreserved64(address()); }
 
     // -----------------------------------
 
@@ -283,12 +294,10 @@ public class XXH64State extends Struct implements NativeResource {
     }
     /** Unsafe version of {@link #memsize}. */
     public static int nmemsize(long struct) { return UNSAFE.getInt(null, struct + XXH64State.MEMSIZE); }
-    /** Unsafe version of {@link #reserved}. */
-    public static IntBuffer nreserved(long struct) { return memIntBuffer(struct + XXH64State.RESERVED, 2); }
-    /** Unsafe version of {@link #reserved(int) reserved}. */
-    public static int nreserved(long struct, int index) {
-        return UNSAFE.getInt(null, struct + XXH64State.RESERVED + check(index, 2) * 4);
-    }
+    /** Unsafe version of {@link #reserved32}. */
+    public static int nreserved32(long struct) { return UNSAFE.getInt(null, struct + XXH64State.RESERVED32); }
+    /** Unsafe version of {@link #reserved64}. */
+    public static long nreserved64(long struct) { return UNSAFE.getLong(null, struct + XXH64State.RESERVED64); }
 
     // -----------------------------------
 
@@ -352,12 +361,12 @@ public class XXH64State extends Struct implements NativeResource {
         /** Returns the value of the {@code memsize} field. */
         @NativeType("XXH32_hash_t")
         public int memsize() { return XXH64State.nmemsize(address()); }
-        /** Returns a {@link IntBuffer} view of the {@code reserved} field. */
-        @NativeType("XXH32_hash_t[2]")
-        public IntBuffer reserved() { return XXH64State.nreserved(address()); }
-        /** Returns the value at the specified index of the {@code reserved} field. */
+        /** Returns the value of the {@code reserved32} field. */
         @NativeType("XXH32_hash_t")
-        public int reserved(int index) { return XXH64State.nreserved(address(), index); }
+        public int reserved32() { return XXH64State.nreserved32(address()); }
+        /** Returns the value of the {@code reserved64} field. */
+        @NativeType("XXH32_hash_t")
+        public long reserved64() { return XXH64State.nreserved64(address()); }
 
     }
 
