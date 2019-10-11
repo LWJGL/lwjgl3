@@ -173,9 +173,10 @@ namespace
 
             for (size_t vert = 0; vert < nVerts; ++vert)
             {
-                uint32_t hashKey = (*reinterpret_cast<const uint32_t*>(&positions[vert].x)
-                    + *reinterpret_cast<const uint32_t*>(&positions[vert].y)
-                    + *reinterpret_cast<const uint32_t*>(&positions[vert].z)) % uint32_t(hashSize);
+                auto px = reinterpret_cast<const uint32_t*>(&positions[vert].x);
+                auto py = reinterpret_cast<const uint32_t*>(&positions[vert].y);
+                auto pz = reinterpret_cast<const uint32_t*>(&positions[vert].z);
+                uint32_t hashKey = (*px + *py + *pz) % uint32_t(hashSize);
 
                 uint32_t found = UNUSED32;
 

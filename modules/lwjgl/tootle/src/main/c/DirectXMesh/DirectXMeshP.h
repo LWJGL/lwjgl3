@@ -46,6 +46,15 @@
 #pragma warning(disable : 4643)
 // C4643 Forward declaring in namespace std is not permitted by the C++ Standard
 
+#ifdef __clang__
+#pragma clang diagnostic ignored "-Wc++98-compat"
+#pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
+#pragma clang diagnostic ignored "-Wc++98-compat-local-type-template-args"
+#pragma clang diagnostic ignored "-Wcovered-switch-default"
+#pragma clang diagnostic ignored "-Wfloat-equal"
+#pragma clang diagnostic ignored "-Wreserved-id-macro"
+#endif
+
 #pragma warning(push)
 #pragma warning(disable : 4005)
 #define WIN32_LEAN_AND_MEAN
@@ -62,7 +71,7 @@
 #define _WIN32_WINNT_WIN10 0x0A00
 #endif
 
-#include <windows.h>
+#include <Windows.h>
 
 #if defined(_XBOX_ONE) && defined(_TITLE)
 #include <d3d12_x.h>
@@ -76,8 +85,8 @@
 
 #define _XM_NO_XMVECTOR_OVERLOADS_
 
-#include <directxmath.h>
-#include <directxpackedvector.h>
+#include <DirectXMath.h>
+#include <DirectXPackedVector.h>
 
 #include <assert.h>
 #include <malloc.h>
@@ -87,7 +96,7 @@
 #include <string>
 #include <unordered_map>
 
-#include "directxmesh.h"
+#include "DirectXMesh.h"
 
 #include "scoped.h"
 

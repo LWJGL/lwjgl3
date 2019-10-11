@@ -403,7 +403,7 @@ std::vector<std::pair<size_t, size_t>> DirectX::ComputeSubsets(const uint32_t* a
 
     if (!attributes)
     {
-        subsets.emplace_back(std::pair<size_t, size_t>(0, nFaces));
+        subsets.emplace_back(std::pair<size_t, size_t>(0u, nFaces));
         return subsets;
     }
 

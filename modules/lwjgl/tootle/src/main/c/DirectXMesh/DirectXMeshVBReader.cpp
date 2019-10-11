@@ -355,7 +355,7 @@ HRESULT VBReader::Impl::Read(XMVECTOR* buffer, const char* semanticName, unsigne
         LOAD_VERTS3_X2(XMUDECN4, XMLoadUDecN4, x2bias)
 
     case DXGI_FORMAT_R10G10B10A2_UINT:
-        LOAD_VERTS(XMUDEC4, XMLoadUDec4);
+        LOAD_VERTS(XMUDEC4, XMLoadUDec4)
 
     case DXGI_FORMAT_R11G11B10_FLOAT:
         LOAD_VERTS3_X2(XMFLOAT3PK, XMLoadFloat3PK, x2bias)
@@ -628,7 +628,7 @@ HRESULT VBReader::Impl::Read(XMVECTOR* buffer, const char* semanticName, unsigne
 
     case XBOX_DXGI_FORMAT_R10G10B10_SNORM_A2_UNORM:
         // Xbox One specific format
-        LOAD_VERTS(XMXDECN4, XMLoadXDecN4);
+        LOAD_VERTS(XMXDECN4, XMLoadXDecN4)
 
     default:
         return E_FAIL;

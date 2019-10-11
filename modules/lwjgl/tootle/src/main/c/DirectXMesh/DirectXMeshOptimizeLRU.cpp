@@ -22,13 +22,13 @@ namespace
 
     // code for computing vertex score was taken, as much as possible
     // directly from the original publication.
-    float ComputeVertexCacheScore(int cachePosition, uint32_t vertexCacheSize)
+    float ComputeVertexCacheScore(uint32_t cachePosition, uint32_t vertexCacheSize)
     {
         const float FindVertexScore_CacheDecayPower = 1.5f;
         const float FindVertexScore_LastTriScore = 0.75f;
 
         float score = 0.0f;
-        if (cachePosition < 0)
+        if (cachePosition >= vertexCacheSize)
         {
             // Vertex is not in FIFO cache - no score.
         }
@@ -46,8 +46,6 @@ namespace
             }
             else
             {
-                assert(cachePosition < int(vertexCacheSize));
-
                 // Points for being high in the cache.
                 const float scaler = 1.0f / (vertexCacheSize - 3);
                 score = 1.0f - (cachePosition - 3) * scaler;
@@ -172,8 +170,8 @@ namespace
             const OptimizeVertexData<IndexType> *vA = _vertexData + size_t(a) * 3;
             const OptimizeVertexData<IndexType> *vB = _vertexData + size_t(b) * 3;
 
-            int aValence = vA[0].activeFaceListSize + vA[1].activeFaceListSize + vA[2].activeFaceListSize;
-            int bValence = vB[0].activeFaceListSize + vB[1].activeFaceListSize + vB[2].activeFaceListSize;
+            uint32_t aValence = vA[0].activeFaceListSize + vA[1].activeFaceListSize + vA[2].activeFaceListSize;
+            uint32_t bValence = vB[0].activeFaceListSize + vB[1].activeFaceListSize + vB[2].activeFaceListSize;
 
             // higher scoring faces are those with lower valence totals
 

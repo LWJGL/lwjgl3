@@ -21,15 +21,14 @@
 #if !defined(__d3d11_h__) && !defined(__d3d11_x_h__) && !defined(__d3d12_h__) && !defined(__d3d12_x_h__)
 #if defined(_XBOX_ONE) && defined(_TITLE)
 #include <d3d11_x.h>
-#define DCOMMON_H_INCLUDED
 #else
 #include <d3d11_1.h>
 #endif
 #endif
 
-#include <directxmath.h>
+#include <DirectXMath.h>
 
-#define DIRECTX_MESH_VERSION 120
+#define DIRECTX_MESH_VERSION 130
 
 
 namespace DirectX
@@ -233,7 +232,7 @@ namespace DirectX
     //---------------------------------------------------------------------------------
     // Normals, Tangents, and Bi-Tangents Computation
 
-    enum CNORM_FLAGS
+    enum CNORM_FLAGS : uint32_t
     {
         CNORM_DEFAULT                   = 0x0,
             // Default is to compute normals using weight-by-angle
@@ -305,7 +304,7 @@ namespace DirectX
     //---------------------------------------------------------------------------------
     // Mesh clean-up and validation
 
-    enum VALIDATE_FLAGS
+    enum VALIDATE_FLAGS : uint32_t
     {
         VALIDATE_DEFAULT                = 0x0,
 
@@ -370,7 +369,7 @@ namespace DirectX
         _Out_writes_(nFaces) uint32_t* faceRemap);
         // Reorders faces by attribute id
 
-    enum OPTFACES
+    enum OPTFACES : uint32_t
     {
         OPTFACES_V_DEFAULT      = 12,
         OPTFACES_R_DEFAULT      = 7,
