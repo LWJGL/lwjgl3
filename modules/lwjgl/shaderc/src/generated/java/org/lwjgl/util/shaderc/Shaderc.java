@@ -69,6 +69,7 @@ public class Shaderc {
      * <li>{@link #shaderc_spirv_version_1_2 spirv_version_1_2}</li>
      * <li>{@link #shaderc_spirv_version_1_3 spirv_version_1_3}</li>
      * <li>{@link #shaderc_spirv_version_1_4 spirv_version_1_4}</li>
+     * <li>{@link #shaderc_spirv_version_1_5 spirv_version_1_5}</li>
      * </ul>
      */
     public static final int
@@ -76,7 +77,8 @@ public class Shaderc {
         shaderc_spirv_version_1_1 = 0x10100,
         shaderc_spirv_version_1_2 = 0x10200,
         shaderc_spirv_version_1_3 = 0x10300,
-        shaderc_spirv_version_1_4 = 0x10400;
+        shaderc_spirv_version_1_4 = 0x10400,
+        shaderc_spirv_version_1_5 = 0x10500;
 
     /**
      * Indicate the status of a compilation. ({@code shaderc_compilation_status})

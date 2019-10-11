@@ -76,6 +76,7 @@ public class ShadercSpvc {
             compile_options_set_fixup_clipspace                 = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_fixup_clipspace"),
             compile_options_set_flip_vert_y                     = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_flip_vert_y"),
             compile_options_set_validate                        = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_validate"),
+            compile_options_set_optimize                        = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_optimize"),
             compile_options_set_for_fuzzing                     = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_for_fuzzing"),
             compile_into_glsl                                   = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_into_glsl"),
             compile_into_hlsl                                   = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_into_hlsl"),
@@ -513,6 +514,17 @@ public class ShadercSpvc {
     /** Set if validation should be performed. Default is true. */
     public static void shaderc_spvc_compile_options_set_validate(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
         long __functionAddress = Functions.compile_options_set_validate;
+        if (CHECKS) {
+            check(options);
+        }
+        invokePV(options, b, __functionAddress);
+    }
+
+    // --- [ shaderc_spvc_compile_options_set_optimize ] ---
+
+    /** Set if optimization should be performed. Default is true. */
+    public static void shaderc_spvc_compile_options_set_optimize(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
+        long __functionAddress = Functions.compile_options_set_optimize;
         if (CHECKS) {
             check(options);
         }

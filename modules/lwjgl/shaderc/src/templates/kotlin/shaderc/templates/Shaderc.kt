@@ -42,7 +42,8 @@ val Shaderc = "Shaderc".nativeClass(Module.SHADERC, prefix = "shaderc_", prefixM
         "spirv_version_1_1".enum("", 0x010100),
         "spirv_version_1_2".enum("", 0x010200),
         "spirv_version_1_3".enum("", 0x010300),
-        "spirv_version_1_4".enum("", 0x010400)
+        "spirv_version_1_4".enum("", 0x010400),
+        "spirv_version_1_5".enum("", 0x010500)
     )
 
     EnumConstant(

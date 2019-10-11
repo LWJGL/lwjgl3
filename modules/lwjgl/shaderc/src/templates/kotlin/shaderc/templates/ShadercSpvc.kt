@@ -339,6 +339,14 @@ val ShadercSpvc = "ShadercSpvc".nativeClass(Module.SHADERC, prefix = "shaderc_sp
         bool("b", "")
     )
 
+    void(
+        "compile_options_set_optimize",
+        "Set if optimization should be performed. Default is true.",
+
+        shaderc_spvc_compile_options_t("options", ""),
+        bool("b", "")
+    )
+
     size_t(
         "compile_options_set_for_fuzzing",
         "Fill options with given data.",
