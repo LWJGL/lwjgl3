@@ -67,7 +67,7 @@ public final class ModuleInfoGen implements AutoCloseable {
         }
 
         @Override public boolean equals(Object other) {
-            return name.equals(((Module)other).name);
+            return (other instanceof Module) && Objects.equals(name, ((Module)other).name);
         }
 
         @Override public int hashCode() {
@@ -75,7 +75,7 @@ public final class ModuleInfoGen implements AutoCloseable {
         }
 
         @Override public int compareTo(Module other) {
-            return this.name.compareTo(other.name);
+            return other == null ? 1 : this.name.compareTo(other.name);
         }
 
         @Override public String toString() {

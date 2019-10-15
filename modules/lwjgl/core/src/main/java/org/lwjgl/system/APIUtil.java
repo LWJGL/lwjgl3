@@ -241,7 +241,22 @@ public final class APIUtil {
                 return Integer.compare(this.minor, other.minor);
             }
 
-            return 0;
+            int tmpCompareResult =
+                this.revision == other.revision ?
+                    0 :
+                    this.revision == null ?
+                        -1 :
+                        this.revision.compareTo(other.revision);
+
+            if (tmpCompareResult != 0) {
+                return tmpCompareResult;
+            }
+
+            return this.implementation == other.implementation ?
+                0 :
+                this.implementation == null ?
+                    -1 :
+                    this.implementation.compareTo(other.implementation);
         }
     }
 
