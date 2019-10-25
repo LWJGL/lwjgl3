@@ -1,0 +1,45 @@
+version: '{build}'
+skip_tags: true
+image: Visual Studio 2019
+clone_depth: 3
+environment:
+  AWS_ACCESS_KEY_ID:
+    secure: 7jhk0oV/vjFsOcsAHLMUcNGUGLuGmnuPxGH0ce/Vky8=
+  AWS_SECRET_ACCESS_KEY:
+    secure: 5KKYpsIHwYHHh5ud0U7Ss0rLumv6G8tkS6abh1B9aq4wY6+1kq5fN/3E5BsdBVKy
+  AWS_DEFAULT_REGION: us-east-1
+  matrix:
+  - ARCH: x64
+    PLATFORM: amd64
+    JAVA_HOME: C:\Program Files\Java\jdk1.8.0
+  - ARCH: x86
+    PLATFORM: amd64_x86
+    JAVA_HOME: C:\Program Files (x86)\Java\jdk1.8.0
+matrix:
+  fast_finish: true
+build_script:
+- cmd: >-
+    appveyor DownloadFile https://www.apache.org/dist/ant/binaries/%APACHE_ANT%-bin.zip -FileName ant.zip
+
+    7z x ant.zip
+
+    move %APACHE_ANT% ant
+
+    set PATH=%PATH%;ant\bin
+
+    set ANT_OPTS=-Xmx1G
+
+    "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" %PLATFORM%
+
+    git clone https://github.com/LWJGL-CI/OculusSDK.git ../OculusSDK
+
+    ant compile-templates tests upload-native
+test: off
+notifications:
+- provider: Email
+  to:
+  - iotsakp@gmail.com
+  subject: LWJGL 3 CI
+  on_build_success: true
+  on_build_failure: true
+  on_build_status_changed: true

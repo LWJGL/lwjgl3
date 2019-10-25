@@ -1,0 +1,123 @@
+git:
+  depth: 3
+env:
+  global:
+  - secure: "AzM98HKS2RDP+/WdvsFiEqTbVPwLBEAtNXDQPR7cV1gAEZoNhri/iINnRAHtECgVQDt2gKmxEiyOA07zMKPpt5PwhoyZUnICwxl1t2FOkTL4LlfI+3ew1rf4F8wmaSQX/BRT7b3IgyEI0RFRCow8KH49X8xdEtAFYJB3YFu2Y6M="
+  - secure: "BDNmD9y3mdZEQoFgXW2dC1FawofkThFwbITidMqeKLxSstNxQGKCpxOFAV604kaTGsf7ihpdm8WYE5IjHKTaoewdQ9hLXZPtswWXq5Ebe2gKHqJVNZa2bFD6hQBD2S7BLWWeAVIoLkyfV/QLnplOquUZTXWZ3TW2A+IXzQE+AnE="
+  - AWS_DEFAULT_REGION: "us-east-1"
+
+matrix:
+  include:
+
+  # -----------------
+  - name: "Linux x64"
+  # -----------------
+    dist: xenial
+    language: java
+    jdk: openjdk8
+
+    addons:
+      apt:
+        packages:
+        - ant
+        - gcc-4.8
+        - g++-4.8
+        - gcc-4.9
+        - g++-4.9
+        - xorg-dev
+        - libgtk-3-dev
+        - libgl1-mesa-glx
+
+    before_install:
+    - pip install --user awscli
+    - export PATH=$PATH:$HOME/.local/bin
+
+    script:
+    - export LWJGL_BUILD_TYPE=nightly
+    - ant compile-templates tests upload-native -Dgcc.version=4.8 -Dgcc.libpath.opengl=/usr/lib/x86_64-linux-gnu/mesa
+
+  # -----------------
+  - name: "Linux arm32"
+  # -----------------
+    dist: xenial
+    language: java
+    jdk: openjdk8
+
+    addons:
+      apt:
+        packages:
+        - ant
+        - gcc-4.8-arm-linux-gnueabihf
+        - g++-4.8-arm-linux-gnueabihf
+        - gcc-4.9-arm-linux-gnueabihf
+        - g++-4.9-arm-linux-gnueabihf
+        - libc6-dev-armhf-cross
+
+    before_install:
+    - pip install --user awscli
+    - export PATH=$PATH:$HOME/.local/bin
+    - sudo sed -i 's/deb http/deb [arch=amd64,i386] http/' /etc/apt/sources.list
+    - sudo grep "ubuntu.com/ubuntu" /etc/apt/sources.list | sudo tee /etc/apt/sources.list.d/ports.list
+    - sudo sed -i 's/amd64,i386/armhf,arm64/' /etc/apt/sources.list.d/ports.list
+    - sudo sed -i 's#http://.*/ubuntu#http://ports.ubuntu.com/ubuntu-ports#' /etc/apt/sources.list.d/ports.list
+    - sudo dpkg --add-architecture armhf
+    - sudo apt-get update || true
+    - sudo apt-get -yq install libgl1-mesa-glx:armhf -o Dpkg::Options::="--force-overwrite"
+
+    script:
+    - export LWJGL_BUILD_TYPE=nightly
+    - export LWJGL_BUILD_ARCH=arm32
+    - ant compile-templates upload-native -Dgcc.version=4.8 -Dgcc.libpath.opengl=/usr/lib/arm-linux-gnueabihf/mesa
+
+  # -----------------
+  - name: "Linux arm64"
+  # -----------------
+    dist: xenial
+    language: java
+    jdk: openjdk8
+
+    addons:
+      apt:
+        packages:
+        - ant
+        - gcc-4.8-aarch64-linux-gnu
+        - g++-4.8-aarch64-linux-gnu
+        - gcc-4.9-aarch64-linux-gnu
+        - g++-4.9-aarch64-linux-gnu
+        - libc6-dev-arm64-cross
+
+    before_install:
+    - pip install --user awscli
+    - export PATH=$PATH:$HOME/.local/bin
+    - sudo sed -i 's/deb http/deb [arch=amd64,i386] http/' /etc/apt/sources.list
+    - sudo grep "ubuntu.com/ubuntu" /etc/apt/sources.list | sudo tee /etc/apt/sources.list.d/ports.list
+    - sudo sed -i 's/amd64,i386/armhf,arm64/' /etc/apt/sources.list.d/ports.list
+    - sudo sed -i 's#http://.*/ubuntu#http://ports.ubuntu.com/ubuntu-ports#' /etc/apt/sources.list.d/ports.list
+    - sudo dpkg --add-architecture arm64
+    - sudo apt-get update || true
+    - sudo apt-get -yq install libgl1-mesa-glx:arm64 -o Dpkg::Options::="--force-overwrite"
+
+    script:
+    - export LWJGL_BUILD_TYPE=nightly
+    - export LWJGL_BUILD_ARCH=arm64
+    - ant compile-templates upload-native -Dgcc.version=4.8 -Dgcc.libpath.opengl=/usr/lib/aarch64-linux-gnu/mesa
+
+  # -----------------
+  - name: "macOS"
+  # -----------------
+    language: objective-c
+    osx_image: xcode10
+    compiler: clang
+    jdk: oraclejdk8
+
+    before_install:
+    - brew update
+
+    install:
+    - brew install ant
+    - brew install awscli
+
+    script:
+    - export JAVA_HOME=$(/usr/libexec/java_home)
+    - export LWJGL_BUILD_TYPE=nightly
+    - ant compile-templates tests upload-native
