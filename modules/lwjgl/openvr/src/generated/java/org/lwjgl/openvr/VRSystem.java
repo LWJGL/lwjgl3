@@ -1240,4 +1240,28 @@ public class VRSystem {
         }
     }
 
+    // --- [ VRSystem_GetRuntimeVersion ] ---
+
+    /** Unsafe version of: {@link #VRSystem_GetRuntimeVersion GetRuntimeVersion} */
+    public static long nVRSystem_GetRuntimeVersion() {
+        long __functionAddress = OpenVR.VRSystem.GetRuntimeVersion;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callP(__functionAddress);
+    }
+
+    /**
+     * Returns the current version of the SteamVR runtime. The returned string will remain valid until {@link VR#VR_ShutdownInternal ShutdownInternal} is called.
+     * 
+     * <p>NOTE: Is it not appropriate to use this version to test for the presence of any SteamVR feature. Only use this version number for logging or showing to
+     * a user, and not to try to detect anything at runtime. When appropriate, feature-specific presence information is provided by other APIs.</p>
+     */
+    @Nullable
+    @NativeType("char *")
+    public static String VRSystem_GetRuntimeVersion() {
+        long __result = nVRSystem_GetRuntimeVersion();
+        return memASCIISafe(__result);
+    }
+
 }

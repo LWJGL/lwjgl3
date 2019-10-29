@@ -168,10 +168,11 @@ public final class OpenVR {
             PerformFirmwareUpdate,
             AcknowledgeQuit_Exiting,
             AcknowledgeQuit_UserPrompt,
-            GetAppContainerFilePaths;
+            GetAppContainerFilePaths,
+            GetRuntimeVersion;
 
         public IVRSystem(long tableAddress) {
-            PointerBuffer table = memPointerBuffer(tableAddress, 47);
+            PointerBuffer table = memPointerBuffer(tableAddress, 48);
             GetRecommendedRenderTargetSize = table.get(0);
             GetProjectionMatrix = table.get(1);
             GetProjectionRaw = table.get(2);
@@ -219,6 +220,7 @@ public final class OpenVR {
             AcknowledgeQuit_Exiting = table.get(44);
             AcknowledgeQuit_UserPrompt = table.get(45);
             GetAppContainerFilePaths = table.get(46);
+            GetRuntimeVersion = table.get(47);
         }
 
     }

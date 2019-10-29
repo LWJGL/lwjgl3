@@ -624,10 +624,11 @@ typedef struct HiddenAreaMesh_t
 	charASCII.p(
         "GetRuntimeVersion",
         """
-        Returns the current version of the SteamVR runtime. The returned string will remain valid until #Shutdown() is called.
+        Returns the current version of the SteamVR runtime. The returned string will remain valid until #ShutdownInternal() is called.
 
-        NOTE: Is it not appropriate t\o use this version to test for the presence of any SteamVR feature. Only use this version number for logging or showing to
+        NOTE: Is it not appropriate to use this version to test for the presence of any SteamVR feature. Only use this version number for logging or showing to
         a user, and not to try to detect anything at runtime. When appropriate, feature-specific presence information is provided by other APIs.
-        """
+        """,
+        void()
     )
 }
