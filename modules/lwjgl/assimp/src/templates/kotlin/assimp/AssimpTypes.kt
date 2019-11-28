@@ -12,6 +12,9 @@ val ASSIMP_BINDING = simpleBinding(
     bundledWithLWJGL = true
 )
 
+val ai_int32 = typedef(int32_t, "ai_int32")
+val ai_uint32 = typedef(uint32_t, "ai_uint32")
+
 /*val aiPlane = struct(Binding.ASSIMP, "AIPlane", nativeName = "struct aiPlane") {
     documentation = "Represents a plane in a three-dimensional, euclidean space."
 
@@ -55,7 +58,7 @@ val aiColor3D = struct(Module.ASSIMP, "AIColor3D", nativeName = "struct aiColor3
 val aiString = struct(Module.ASSIMP, "AIString", nativeName = "struct aiString") {
     documentation = "Represents an UTF-8 string, zero byte terminated."
 
-    AutoSize("data")..size_t("length", "Binary length of the string excluding the terminal 0.")
+    AutoSize("data")..ai_uint32("length", "Binary length of the string excluding the terminal 0.")
     NullTerminatedMember..charUTF8("data", "String buffer.")["Assimp.MAXLEN"]
 }
 

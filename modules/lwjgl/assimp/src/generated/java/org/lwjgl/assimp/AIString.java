@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct aiString {
- *     size_t length;
+ *     ai_uint32 length;
  *     char data[Assimp.MAXLEN];
  * }</code></pre>
  */
@@ -50,7 +50,7 @@ public class AIString extends Struct implements NativeResource {
 
     static {
         Layout layout = __struct(
-            __member(POINTER_SIZE),
+            __member(4),
             __array(1, Assimp.MAXLEN)
         );
 
@@ -75,8 +75,8 @@ public class AIString extends Struct implements NativeResource {
     public int sizeof() { return SIZEOF; }
 
     /** Returns the value of the {@code length} field. */
-    @NativeType("size_t")
-    public long length() { return nlength(address()); }
+    @NativeType("ai_uint32")
+    public int length() { return nlength(address()); }
     /** Returns a {@link ByteBuffer} view of the {@code data} field. */
     @NativeType("char[Assimp.MAXLEN]")
     public ByteBuffer data() { return ndata(address()); }
@@ -243,14 +243,14 @@ public class AIString extends Struct implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #length}. */
-    public static long nlength(long struct) { return memGetAddress(struct + AIString.LENGTH); }
+    public static int nlength(long struct) { return UNSAFE.getInt(null, struct + AIString.LENGTH); }
     /** Unsafe version of {@link #data}. */
-    public static ByteBuffer ndata(long struct) { return memByteBuffer(struct + AIString.DATA, (int)nlength(struct)); }
+    public static ByteBuffer ndata(long struct) { return memByteBuffer(struct + AIString.DATA, nlength(struct)); }
     /** Unsafe version of {@link #dataString}. */
     public static String ndataString(long struct) { return memUTF8(ndata(struct)); }
 
     /** Sets the specified value to the {@code length} field of the specified {@code struct}. */
-    public static void nlength(long struct, long value) { memPutAddress(struct + AIString.LENGTH, value); }
+    public static void nlength(long struct, int value) { UNSAFE.putInt(null, struct + AIString.LENGTH, value); }
     /** Unsafe version of {@link #data(ByteBuffer) data}. */
     public static void ndata(long struct, ByteBuffer value) {
         if (CHECKS) {
@@ -300,8 +300,8 @@ public class AIString extends Struct implements NativeResource {
         }
 
         /** Returns the value of the {@code length} field. */
-        @NativeType("size_t")
-        public long length() { return AIString.nlength(address()); }
+        @NativeType("ai_uint32")
+        public int length() { return AIString.nlength(address()); }
         /** Returns a {@link ByteBuffer} view of the {@code data} field. */
         @NativeType("char[Assimp.MAXLEN]")
         public ByteBuffer data() { return AIString.ndata(address()); }
