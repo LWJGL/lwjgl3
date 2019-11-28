@@ -42,12 +42,12 @@ open class StructMember(
 
     internal var getter: String? = null
     fun getter(expression: String) {
-        this.getter = expression;
+        this.getter = expression
     }
 
     internal var setter: String? = null
     fun setter(expression: String) {
-        this.setter = expression;
+        this.setter = expression
     }
 
     internal val offsetField
