@@ -2039,7 +2039,7 @@ public final class MemoryUtil {
         return memUTF8(text, true);
     }
 
-    /** Like {@link #memUTF8(CharSequence) memASCII}, but returns {@code null} if {@code text} is {@code null}. */
+    /** Like {@link #memUTF8(CharSequence) memUTF8}, but returns {@code null} if {@code text} is {@code null}. */
     @Nullable
     public static ByteBuffer memUTF8Safe(@Nullable CharSequence text) {
         return text == null ? null : memUTF8(text, true);
@@ -2060,7 +2060,7 @@ public final class MemoryUtil {
         return wrap(BUFFER_BYTE, target, length).order(NATIVE_ORDER);
     }
 
-    /** Like {@link #memUTF8(CharSequence, boolean) memASCII}, but returns {@code null} if {@code text} is {@code null}. */
+    /** Like {@link #memUTF8(CharSequence, boolean) memUTF8}, but returns {@code null} if {@code text} is {@code null}. */
     @Nullable
     public static ByteBuffer memUTF8Safe(@Nullable CharSequence text, boolean nullTerminated) {
         return text == null ? null : memUTF8(text, nullTerminated);
@@ -2204,7 +2204,7 @@ public final class MemoryUtil {
         return memUTF16(text, true);
     }
 
-    /** Like {@link #memUTF16(CharSequence) memASCII}, but returns {@code null} if {@code text} is {@code null}. */
+    /** Like {@link #memUTF16(CharSequence) memUTF16}, but returns {@code null} if {@code text} is {@code null}. */
     @Nullable
     public static ByteBuffer memUTF16Safe(@Nullable CharSequence text) {
         return text == null ? null : memUTF16(text, true);
@@ -2225,7 +2225,7 @@ public final class MemoryUtil {
         return wrap(BUFFER_BYTE, target, length).order(NATIVE_ORDER);
     }
 
-    /** Like {@link #memUTF16(CharSequence, boolean) memASCII}, but returns {@code null} if {@code text} is {@code null}. */
+    /** Like {@link #memUTF16(CharSequence, boolean) memUTF16}, but returns {@code null} if {@code text} is {@code null}. */
     @Nullable
     public static ByteBuffer memUTF16Safe(@Nullable CharSequence text, boolean nullTerminated) {
         return text == null ? null : memUTF16(text, nullTerminated);
