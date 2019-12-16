@@ -2464,6 +2464,36 @@ aiAttachLogStream(&c);""")}
         "AI_META_MAX".enum
     ).noPrefix()
 
+    StringConstant(
+        """
+        Scene metadata holding the name of the importer which loaded the source asset.
+        
+        This is always present if the scene was created from an imported asset.
+        """,
+
+        "AI_METADATA_SOURCE_FORMAT".."SourceAsset_Format"
+    ).noPrefix()
+
+    StringConstant(
+        """
+        Scene metadata holding the version of the source asset as a string, if available.
+
+        Not all formats add this metadata.
+        """,
+
+        "AI_METADATA_SOURCE_FORMAT_VERSION".."SourceAsset_FormatVersion"
+    ).noPrefix()
+
+    StringConstant(
+        """
+        Scene metadata holding the name of the software which generated the source asset, if available.
+
+        Not all formats add this metadata.
+        """,
+
+        "AI_METADATA_SOURCE_GENERATOR".."SourceAsset_Generator"
+    ).noPrefix()
+
     // postprocess.h
 
     EnumConstant(
@@ -2678,6 +2708,17 @@ aiAttachLogStream(&c);""")}
             cases. The step inverts all in-facing normals. Generally it is recommended to enable this step, although the result is not always correct.
             """,
             0x2000
+        ),
+
+        "Process_PopulateArmatureData".enum(
+            """
+            This step generically populates {@code aiBone->mArmature} and {@code aiBone->mNode}.
+
+            The point of these is it saves you later having to calculate these elements. This is useful when handling rest information or skin information. If
+            you have multiple armatures on your models we strongly recommend enabling this. Instead of writing your own multi-root, multi-armature lookups we
+            have done the hard work for you.
+            """,
+            0x4000
         ),
 
         "Process_SortByPType".enum(
@@ -3108,17 +3149,24 @@ x1""")}
     )
 
     unsigned_int(
+        "GetVersionPatch",
+        "Returns the current patch version number of Assimp.",
+
+        returnDoc = "patch version of the Assimp runtime the application was linked/built against"
+    )
+
+    unsigned_int(
         "GetVersionMinor",
         "Returns the current minor version number of Assimp.",
 
-        returnDoc = "Minor version of the Assimp runtime the application was linked/built against"
+        returnDoc = "minor version of the Assimp runtime the application was linked/built against"
     )
 
     unsigned_int(
         "GetVersionMajor",
         "Returns the current major version number of Assimp.",
 
-        returnDoc = "Major version of the Assimp runtime the application was linked/built against"
+        returnDoc = "major version of the Assimp runtime the application was linked/built against"
     )
 
     unsigned_int(
@@ -3139,6 +3187,6 @@ x1""")}
         "GetCompileFlags",
         "Returns assimp's compile flags.",
 
-        returnDoc = "Any bitwise combination of the {@code ASSIMP_CFLAGS_xxx} constants."
+        returnDoc = "any bitwise combination of the {@code ASSIMP_CFLAGS_xxx} constants."
     )
 }

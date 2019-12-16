@@ -299,6 +299,8 @@ val aiBone = struct(Module.ASSIMP, "AIBone", nativeName = "struct aiBone") {
         "mNumWeights",
         "the number of vertices affected by this bone. The maximum value for this member is #AI_MAX_BONE_WEIGHTS."
     )
+    aiNode.p("mArmature", "the bone armature node - used for skeleton conversion you must enable #Process_PopulateArmatureData to populate this");
+    aiNode.p("mNode", "the bone node in the scene - used for skeleton conversion you must enable #Process_PopulateArmatureData to populate this");
     aiVertexWeight.p("mWeights", "the influence weights of this bone, by vertex index")
     aiMatrix4x4(
         "mOffsetMatrix",

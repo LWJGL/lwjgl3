@@ -27,6 +27,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code mName} &ndash; the name of the bone.</li>
  * <li>{@code mNumWeights} &ndash; the number of vertices affected by this bone. The maximum value for this member is {@link Assimp#AI_MAX_BONE_WEIGHTS}.</li>
+ * <li>{@code mArmature} &ndash; the bone armature node - used for skeleton conversion you must enable {@link Assimp#aiProcess_PopulateArmatureData Process_PopulateArmatureData} to populate this</li>
+ * <li>{@code mNode} &ndash; the bone node in the scene - used for skeleton conversion you must enable {@link Assimp#aiProcess_PopulateArmatureData Process_PopulateArmatureData} to populate this</li>
  * <li>{@code mWeights} &ndash; the influence weights of this bone, by vertex index</li>
  * <li>{@code mOffsetMatrix} &ndash; 
  * matrix that transforms from bone space to mesh space in bind pose.
@@ -43,6 +45,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct aiBone {
  *     {@link AIString struct aiString} mName;
  *     unsigned int mNumWeights;
+ *     {@link AINode struct aiNode} * mArmature;
+ *     {@link AINode struct aiNode} * mNode;
  *     {@link AIVertexWeight struct aiVertexWeight} * mWeights;
  *     {@link AIMatrix4x4 struct aiMatrix4x4} mOffsetMatrix;
  * }</code></pre>
@@ -60,6 +64,8 @@ public class AIBone extends Struct implements NativeResource {
     public static final int
         MNAME,
         MNUMWEIGHTS,
+        MARMATURE,
+        MNODE,
         MWEIGHTS,
         MOFFSETMATRIX;
 
@@ -67,6 +73,8 @@ public class AIBone extends Struct implements NativeResource {
         Layout layout = __struct(
             __member(AIString.SIZEOF, AIString.ALIGNOF),
             __member(4),
+            __member(POINTER_SIZE),
+            __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(AIMatrix4x4.SIZEOF, AIMatrix4x4.ALIGNOF)
         );
@@ -76,8 +84,10 @@ public class AIBone extends Struct implements NativeResource {
 
         MNAME = layout.offsetof(0);
         MNUMWEIGHTS = layout.offsetof(1);
-        MWEIGHTS = layout.offsetof(2);
-        MOFFSETMATRIX = layout.offsetof(3);
+        MARMATURE = layout.offsetof(2);
+        MNODE = layout.offsetof(3);
+        MWEIGHTS = layout.offsetof(4);
+        MOFFSETMATRIX = layout.offsetof(5);
     }
 
     /**
@@ -99,6 +109,12 @@ public class AIBone extends Struct implements NativeResource {
     /** Returns the value of the {@code mNumWeights} field. */
     @NativeType("unsigned int")
     public int mNumWeights() { return nmNumWeights(address()); }
+    /** Returns a {@link AINode} view of the struct pointed to by the {@code mArmature} field. */
+    @NativeType("struct aiNode *")
+    public AINode mArmature() { return nmArmature(address()); }
+    /** Returns a {@link AINode} view of the struct pointed to by the {@code mNode} field. */
+    @NativeType("struct aiNode *")
+    public AINode mNode() { return nmNode(address()); }
     /** Returns a {@link AIVertexWeight.Buffer} view of the struct array pointed to by the {@code mWeights} field. */
     @NativeType("struct aiVertexWeight *")
     public AIVertexWeight.Buffer mWeights() { return nmWeights(address()); }
@@ -110,6 +126,10 @@ public class AIBone extends Struct implements NativeResource {
     public AIBone mName(@NativeType("struct aiString") AIString value) { nmName(address(), value); return this; }
     /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
     public AIBone mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
+    /** Sets the address of the specified {@link AINode} to the {@code mArmature} field. */
+    public AIBone mArmature(@NativeType("struct aiNode *") AINode value) { nmArmature(address(), value); return this; }
+    /** Sets the address of the specified {@link AINode} to the {@code mNode} field. */
+    public AIBone mNode(@NativeType("struct aiNode *") AINode value) { nmNode(address(), value); return this; }
     /** Sets the address of the specified {@link AIVertexWeight.Buffer} to the {@code mWeights} field. */
     public AIBone mWeights(@NativeType("struct aiVertexWeight *") AIVertexWeight.Buffer value) { nmWeights(address(), value); return this; }
     /** Copies the specified {@link AIMatrix4x4} to the {@code mOffsetMatrix} field. */
@@ -120,10 +140,14 @@ public class AIBone extends Struct implements NativeResource {
     /** Initializes this struct with the specified values. */
     public AIBone set(
         AIString mName,
+        AINode mArmature,
+        AINode mNode,
         AIVertexWeight.Buffer mWeights,
         AIMatrix4x4 mOffsetMatrix
     ) {
         mName(mName);
+        mArmature(mArmature);
+        mNode(mNode);
         mWeights(mWeights);
         mOffsetMatrix(mOffsetMatrix);
 
@@ -289,6 +313,10 @@ public class AIBone extends Struct implements NativeResource {
     public static AIString nmName(long struct) { return AIString.create(struct + AIBone.MNAME); }
     /** Unsafe version of {@link #mNumWeights}. */
     public static int nmNumWeights(long struct) { return UNSAFE.getInt(null, struct + AIBone.MNUMWEIGHTS); }
+    /** Unsafe version of {@link #mArmature}. */
+    public static AINode nmArmature(long struct) { return AINode.create(memGetAddress(struct + AIBone.MARMATURE)); }
+    /** Unsafe version of {@link #mNode}. */
+    public static AINode nmNode(long struct) { return AINode.create(memGetAddress(struct + AIBone.MNODE)); }
     /** Unsafe version of {@link #mWeights}. */
     public static AIVertexWeight.Buffer nmWeights(long struct) { return AIVertexWeight.create(memGetAddress(struct + AIBone.MWEIGHTS), nmNumWeights(struct)); }
     /** Unsafe version of {@link #mOffsetMatrix}. */
@@ -298,6 +326,10 @@ public class AIBone extends Struct implements NativeResource {
     public static void nmName(long struct, AIString value) { memCopy(value.address(), struct + AIBone.MNAME, AIString.SIZEOF); }
     /** Sets the specified value to the {@code mNumWeights} field of the specified {@code struct}. */
     public static void nmNumWeights(long struct, int value) { UNSAFE.putInt(null, struct + AIBone.MNUMWEIGHTS, value); }
+    /** Unsafe version of {@link #mArmature(AINode) mArmature}. */
+    public static void nmArmature(long struct, AINode value) { memPutAddress(struct + AIBone.MARMATURE, value.address()); }
+    /** Unsafe version of {@link #mNode(AINode) mNode}. */
+    public static void nmNode(long struct, AINode value) { memPutAddress(struct + AIBone.MNODE, value.address()); }
     /** Unsafe version of {@link #mWeights(AIVertexWeight.Buffer) mWeights}. */
     public static void nmWeights(long struct, AIVertexWeight.Buffer value) { memPutAddress(struct + AIBone.MWEIGHTS, value.address()); nmNumWeights(struct, value.remaining()); }
     /** Unsafe version of {@link #mOffsetMatrix(AIMatrix4x4) mOffsetMatrix}. */
@@ -309,6 +341,12 @@ public class AIBone extends Struct implements NativeResource {
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
+        long mArmature = memGetAddress(struct + AIBone.MARMATURE);
+        check(mArmature);
+        AINode.validate(mArmature);
+        long mNode = memGetAddress(struct + AIBone.MNODE);
+        check(mNode);
+        AINode.validate(mNode);
         check(memGetAddress(struct + AIBone.MWEIGHTS));
     }
 
@@ -368,6 +406,12 @@ public class AIBone extends Struct implements NativeResource {
         /** Returns the value of the {@code mNumWeights} field. */
         @NativeType("unsigned int")
         public int mNumWeights() { return AIBone.nmNumWeights(address()); }
+        /** Returns a {@link AINode} view of the struct pointed to by the {@code mArmature} field. */
+        @NativeType("struct aiNode *")
+        public AINode mArmature() { return AIBone.nmArmature(address()); }
+        /** Returns a {@link AINode} view of the struct pointed to by the {@code mNode} field. */
+        @NativeType("struct aiNode *")
+        public AINode mNode() { return AIBone.nmNode(address()); }
         /** Returns a {@link AIVertexWeight.Buffer} view of the struct array pointed to by the {@code mWeights} field. */
         @NativeType("struct aiVertexWeight *")
         public AIVertexWeight.Buffer mWeights() { return AIBone.nmWeights(address()); }
@@ -379,6 +423,10 @@ public class AIBone extends Struct implements NativeResource {
         public AIBone.Buffer mName(@NativeType("struct aiString") AIString value) { AIBone.nmName(address(), value); return this; }
         /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
         public AIBone.Buffer mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
+        /** Sets the address of the specified {@link AINode} to the {@code mArmature} field. */
+        public AIBone.Buffer mArmature(@NativeType("struct aiNode *") AINode value) { AIBone.nmArmature(address(), value); return this; }
+        /** Sets the address of the specified {@link AINode} to the {@code mNode} field. */
+        public AIBone.Buffer mNode(@NativeType("struct aiNode *") AINode value) { AIBone.nmNode(address(), value); return this; }
         /** Sets the address of the specified {@link AIVertexWeight.Buffer} to the {@code mWeights} field. */
         public AIBone.Buffer mWeights(@NativeType("struct aiVertexWeight *") AIVertexWeight.Buffer value) { AIBone.nmWeights(address(), value); return this; }
         /** Copies the specified {@link AIMatrix4x4} to the {@code mOffsetMatrix} field. */
