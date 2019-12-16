@@ -14,7 +14,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     IntConstant(
         "API version",
 
-        "API_VERSION".."100"
+        "API_VERSION".."102"
     )
 
     ShortConstant(
@@ -76,6 +76,8 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "STATE_CONSERVATIVE_RASTER"..0x0400000000000000L,
 
         "STATE_NONE"..0x0000000000000000L,
+
+        "STATE_FRONT_CCW"..0x0000008000000000L,
 
         "STATE_BLEND_INDEPENDENT"..0x0000000400000000L,
         "STATE_BLEND_ALPHA_TO_COVERAGE"..0x0000000800000000L,

@@ -86,8 +86,10 @@ val bgfx_view_stats_t = struct(Module.BGFX, "BGFXViewStats", nativeName = "bgfx_
 
     charASCII("name", "view name")[256]
     bgfx_view_id_t("view", "view id")
-    int64_t("cpuTimeElapsed", "CPU (submit) time elapsed")
-    int64_t("gpuTimeElapsed", "GPU time elapsed")
+    int64_t("cpuTimeBegin", "CPU (submit) begin time")
+    int64_t("cpuTimeEnd", "CPU (submit) end time")
+    int64_t("gpuTimeBegin", "GPU begin time")
+    int64_t("gpuTimeEnd", "GPU end time")
 }
 
 val bgfx_encoder_stats_t = struct(Module.BGFX, "BGFXEncoderStats", nativeName = "bgfx_encoder_stats_t", mutable = false) {
