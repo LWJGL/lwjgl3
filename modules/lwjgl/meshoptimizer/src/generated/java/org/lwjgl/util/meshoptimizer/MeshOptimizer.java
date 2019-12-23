@@ -323,7 +323,7 @@ import static java.lang.Float.*;
  */
 public class MeshOptimizer {
 
-    public static final int MESHOPTIMIZER_VERSION = 120;
+    public static final int MESHOPTIMIZER_VERSION = 130;
 
     static { LibMeshOptimizer.initialize(); }
 

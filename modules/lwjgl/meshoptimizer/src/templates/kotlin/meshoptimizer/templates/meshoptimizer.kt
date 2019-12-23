@@ -301,7 +301,7 @@ nmeshopt_setAllocator(
 );""")}
         """
 
-    IntConstant("", "VERSION".."120")
+    IntConstant("", "VERSION".."130")
 
     size_t(
         "generateVertexRemap",
