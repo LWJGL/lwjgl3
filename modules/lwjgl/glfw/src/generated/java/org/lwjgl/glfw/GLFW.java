@@ -353,6 +353,14 @@ public class GLFW {
      * 
      * <p>Application programmer error. Fix the offending call.</p>
      * </li>
+     * <li>{@link #GLFW_CURSOR_UNAVAILABLE CURSOR_UNAVAILABLE} - 
+     * The specified cursor shape is not available.
+     * 
+     * <p>The specified standard cursor shape is not available, either because the current system cursor theme does not provide it or because it is not
+     * available on the platform.</p>
+     * 
+     * <p>Platform or system settings limitation. Pick another standard cursor shape or create a custom cursor.</p>
+     * </li>
      * </ul>
      */
     public static final int
@@ -366,7 +374,8 @@ public class GLFW {
         GLFW_VERSION_UNAVAILABLE = 0x10007,
         GLFW_PLATFORM_ERROR      = 0x10008,
         GLFW_FORMAT_UNAVAILABLE  = 0x10009,
-        GLFW_NO_WINDOW_CONTEXT   = 0x1000A;
+        GLFW_NO_WINDOW_CONTEXT   = 0x1000A,
+        GLFW_CURSOR_UNAVAILABLE  = 0x1000B;
 
     /**
      * Window attributes.
@@ -460,14 +469,91 @@ public class GLFW {
         GLFW_CURSOR_HIDDEN   = 0x34002,
         GLFW_CURSOR_DISABLED = 0x34003;
 
-    /** Standard cursor shapes. See <a target="_blank" href="http://www.glfw.org/docs/latest/input.html#cursor_standard">standard cursor creation</a> for how these are used. */
-    public static final int
-        GLFW_ARROW_CURSOR     = 0x36001,
-        GLFW_IBEAM_CURSOR     = 0x36002,
-        GLFW_CROSSHAIR_CURSOR = 0x36003,
-        GLFW_HAND_CURSOR      = 0x36004,
-        GLFW_HRESIZE_CURSOR   = 0x36005,
-        GLFW_VRESIZE_CURSOR   = 0x36006;
+    /** The regular arrow cursor shape. */
+    public static final int GLFW_ARROW_CURSOR = 0x36001;
+
+    /** The text input I-beam cursor shape. */
+    public static final int GLFW_IBEAM_CURSOR = 0x36002;
+
+    /** The crosshair cursor shape. */
+    public static final int GLFW_CROSSHAIR_CURSOR = 0x36003;
+
+    /** The pointing hand cursor shape. */
+    public static final int GLFW_POINTING_HAND_CURSOR = 0x36004;
+
+    /**
+     * The horizontal resize/move arrow shape.
+     * 
+     * <p>This is usually a horizontal double-headed arrow.</p>
+     */
+    public static final int GLFW_RESIZE_EW_CURSOR = 0x36005;
+
+    /**
+     * The vertical resize/move shape.
+     * 
+     * <p>This is usually a vertical double-headed arrow.</p>
+     */
+    public static final int GLFW_RESIZE_NS_CURSOR = 0x36006;
+
+    /**
+     * The top-left to bottom-right diagonal resize/move shape.
+     * 
+     * <p>This is usually a diagonal double-headed arrow.</p>
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <ul>
+     * <li><b>macOS</b>: This shape is provided by a private system API and may fail with {@link #GLFW_CURSOR_UNAVAILABLE CURSOR_UNAVAILABLE} in the future.</li>
+     * <li><b>X11</b>: This shape is provided by a newer standard not supported by all cursor themes.</li>
+     * <li><b>Wayland</b>: This shape is provided by a newer standard not supported by all cursor themes.</li>
+     * </ul></div>
+     */
+    public static final int GLFW_RESIZE_NWSE_CURSOR = 0x36007;
+
+    /**
+     * The top-right to bottom-left diagonal resize/move shape.
+     * 
+     * <p>This is usually a diagonal double-headed arrow.</p>
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <ul>
+     * <li><b>macOS</b>: This shape is provided by a private system API and may fail with {@link #GLFW_CURSOR_UNAVAILABLE CURSOR_UNAVAILABLE} in the future.</li>
+     * <li><b>X11</b>: This shape is provided by a newer standard not supported by all cursor themes.</li>
+     * <li><b>Wayland</b>: This shape is provided by a newer standard not supported by all cursor themes.</li>
+     * </ul></div>
+     */
+    public static final int GLFW_RESIZE_NESW_CURSOR = 0x36008;
+
+    /**
+     * The omni-directional resize cursor/move shape.
+     * 
+     * <p>This is usually either a combined horizontal and vertical double-headed arrow or a grabbing hand.</p>
+     */
+    public static final int GLFW_RESIZE_ALL_CURSOR = 0x36009;
+
+    /**
+     * The operation-not-allowed shape.
+     * 
+     * <p>This is usually a circle with a diagonal line through it.</p>
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <ul>
+     * <li><b>X11</b>: This shape is provided by a newer standard not supported by all cursor themes.</li>
+     * <li><b>Wayland</b>: This shape is provided by a newer standard not supported by all cursor themes.</li>
+     * </ul></div>
+     */
+    public static final int GLFW_NOT_ALLOWED_CURSOR = 0x3600A;
+
+    /** Legacy name for compatibility. */
+    public static final int GLFW_HRESIZE_CURSOR = GLFW_RESIZE_EW_CURSOR;
+
+    /** Legacy name for compatibility. */
+    public static final int GLFW_VRESIZE_CURSOR = GLFW_RESIZE_NS_CURSOR;
+
+    /** Legacy name for compatibility. */
+    public static final int GLFW_HAND_CURSOR = GLFW_POINTING_HAND_CURSOR;
 
     /** Monitor events. */
     public static final int
@@ -636,6 +722,13 @@ public class GLFW {
     public static final int
         GLFW_X11_CLASS_NAME    = 0x24001,
         GLFW_X11_INSTANCE_NAME = 0x24002;
+
+    /**
+     * Specifies whether to allow access to the window menu via the Alt+Space and Alt-and-then-Space keyboard shortcuts.
+     * 
+     * <p>This is ignored on other platforms.</p>
+     */
+    public static final int GLFW_WIN32_KEYBOARD_MENU = 0x25001;
 
     /** Values for the {@link #GLFW_CLIENT_API CLIENT_API} hint. */
     public static final int
@@ -1604,6 +1697,7 @@ public class GLFW {
      * <tr><td>{@link #GLFW_OPENGL_FORWARD_COMPAT OPENGL_FORWARD_COMPAT}</td><td>{@link #GLFW_FALSE FALSE}</td><td>{@link #GLFW_TRUE TRUE} or {@link #GLFW_FALSE FALSE}</td></tr>
      * <tr><td>{@link #GLFW_OPENGL_DEBUG_CONTEXT OPENGL_DEBUG_CONTEXT}</td><td>{@link #GLFW_FALSE FALSE}</td><td>{@link #GLFW_TRUE TRUE} or {@link #GLFW_FALSE FALSE}</td></tr>
      * <tr><td>{@link #GLFW_OPENGL_PROFILE OPENGL_PROFILE}</td><td>{@link #GLFW_OPENGL_ANY_PROFILE OPENGL_ANY_PROFILE}</td><td>{@link #GLFW_OPENGL_ANY_PROFILE OPENGL_ANY_PROFILE} {@link #GLFW_OPENGL_CORE_PROFILE OPENGL_CORE_PROFILE} {@link #GLFW_OPENGL_COMPAT_PROFILE OPENGL_COMPAT_PROFILE}</td></tr>
+     * <tr><td>{@link #GLFW_WIN32_KEYBOARD_MENU WIN32_KEYBOARD_MENU}</td><td>{@link #GLFW_FALSE FALSE}</td><td>{@link #GLFW_TRUE TRUE} or {@link #GLFW_FALSE FALSE}</td></tr>
      * <tr><td>{@link #GLFW_COCOA_RETINA_FRAMEBUFFER COCOA_RETINA_FRAMEBUFFER}</td><td>{@link #GLFW_TRUE TRUE}</td><td>{@link #GLFW_TRUE TRUE} or {@link #GLFW_FALSE FALSE}</td></tr>
      * <tr><td>{@link #GLFW_COCOA_GRAPHICS_SWITCHING COCOA_GRAPHICS_SWITCHING}</td><td>{@link #GLFW_FALSE FALSE}</td><td>{@link #GLFW_TRUE TRUE} or {@link #GLFW_FALSE FALSE}</td></tr>
      * </table>
@@ -1757,9 +1851,8 @@ public class GLFW {
      * <li><b>Windows</b>: If the executable has an icon resource named {@code GLFW_ICON}, it will be set as the initial icon for the window. If no such icon
      * is present, the {@code IDI_APPLICATION} icon will be used instead. To set a different icon, see {@link #glfwSetWindowIcon SetWindowIcon}.</li>
      * <li><b>Windows</b>: The context to share resources with may not be current on any other thread.</li>
-     * <li>The OS only supports forward-compatible core profile contexts for OpenGL versions 3.2 and later. Before creating an OpenGL context of version 3.2
-     * or later you must set the {@link #GLFW_OPENGL_FORWARD_COMPAT OPENGL_FORWARD_COMPAT} and {@link #GLFW_OPENGL_PROFILE OPENGL_PROFILE} hints accordingly. OpenGL 3.0 and 3.1 contexts are not supported at all on
-     * macOS.</li>
+     * <li>The OS only supports core profile contexts for OpenGL versions 3.2 and later. Before creating an OpenGL context of version 3.2 or later you must
+     * set the {@link #GLFW_OPENGL_PROFILE OPENGL_PROFILE} hint accordingly. OpenGL 3.0 and 3.1 contexts are not supported at all on macOS.</li>
      * <li><b>macOS</b>: The GLFW window has no icon, as it is not a document window, but the dock icon will be the same as the application bundle's icon. For
      * more information on bundles, see the
      * <a target="_blank" href="https://developer.apple.com/library/content/documentation/CoreFoundation/Conceptual/CFBundles/">Bundle Programming Guide</a> in the Mac
@@ -1848,9 +1941,8 @@ public class GLFW {
      * <li><b>Windows</b>: If the executable has an icon resource named {@code GLFW_ICON}, it will be set as the initial icon for the window. If no such icon
      * is present, the {@code IDI_APPLICATION} icon will be used instead. To set a different icon, see {@link #glfwSetWindowIcon SetWindowIcon}.</li>
      * <li><b>Windows</b>: The context to share resources with may not be current on any other thread.</li>
-     * <li>The OS only supports forward-compatible core profile contexts for OpenGL versions 3.2 and later. Before creating an OpenGL context of version 3.2
-     * or later you must set the {@link #GLFW_OPENGL_FORWARD_COMPAT OPENGL_FORWARD_COMPAT} and {@link #GLFW_OPENGL_PROFILE OPENGL_PROFILE} hints accordingly. OpenGL 3.0 and 3.1 contexts are not supported at all on
-     * macOS.</li>
+     * <li>The OS only supports core profile contexts for OpenGL versions 3.2 and later. Before creating an OpenGL context of version 3.2 or later you must
+     * set the {@link #GLFW_OPENGL_PROFILE OPENGL_PROFILE} hint accordingly. OpenGL 3.0 and 3.1 contexts are not supported at all on macOS.</li>
      * <li><b>macOS</b>: The GLFW window has no icon, as it is not a document window, but the dock icon will be the same as the application bundle's icon. For
      * more information on bundles, see the
      * <a target="_blank" href="https://developer.apple.com/library/content/documentation/CoreFoundation/Conceptual/CFBundles/">Bundle Programming Guide</a> in the Mac
@@ -3545,11 +3637,39 @@ public class GLFW {
     /**
      * Returns a cursor with a standard shape, that can be set for a window with {@link #glfwSetCursor SetCursor}.
      * 
+     * <p>The images for these cursors come from the system cursor theme and their exact appearance will vary between platforms.</p>
+     * 
+     * <p>Most of these shapes are guaranteed to exist on every supported platform but a few may not be present. See the table below for details.</p>
+     * 
+     * <table class=striped>
+     * <tr><th>Cursor shape</th><th>Windows</th><th>macOS</th><th>X11</th><th>Wayland</th></tr>
+     * <tr><td>{@link #GLFW_ARROW_CURSOR ARROW_CURSOR}</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+     * <tr><td>{@link #GLFW_IBEAM_CURSOR IBEAM_CURSOR}</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+     * <tr><td>{@link #GLFW_CROSSHAIR_CURSOR CROSSHAIR_CURSOR}</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+     * <tr><td>{@link #GLFW_POINTING_HAND_CURSOR POINTING_HAND_CURSOR}</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+     * <tr><td>{@link #GLFW_RESIZE_EW_CURSOR RESIZE_EW_CURSOR}</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+     * <tr><td>{@link #GLFW_RESIZE_NS_CURSOR RESIZE_NS_CURSOR}</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+     * <tr><td>{@link #GLFW_RESIZE_NWSE_CURSOR RESIZE_NWSE_CURSOR}</td><td>Yes</td><td>Yes<sup>1</sup></td><td>Maybe<sup>2</sup></td><td>Maybe<sup>2</sup></td></tr>
+     * <tr><td>{@link #GLFW_RESIZE_NESW_CURSOR RESIZE_NESW_CURSOR}</td><td>Yes</td><td>Yes<sup>1</sup></td><td>Maybe<sup>2</sup></td><td>Maybe<sup>2</sup></td></tr>
+     * <tr><td>{@link #GLFW_RESIZE_ALL_CURSOR RESIZE_ALL_CURSOR}</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+     * <tr><td>{@link #GLFW_NOT_ALLOWED_CURSOR NOT_ALLOWED_CURSOR}</td><td>Yes</td><td>Yes</td><td>Maybe<sup>2</sup></td><td>Maybe<sup>2</sup></td></tr>
+     * </table>
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <ol>
+     * <li>This uses a private system API and may fail in the future.</li>
+     * <li>This uses a newer standard that not all cursor themes support.</li>
+     * </ol></div>
+     * 
+     * <p>If the requested shape is not available, this function emits a {@link #GLFW_CURSOR_UNAVAILABLE CURSOR_UNAVAILABLE} error and returns {@code NULL}.</p>
+     * 
      * <p>This function must only be called from the main thread.</p>
      *
-     * @param shape one of the standard shapes. One of:<br><table><tr><td>{@link #GLFW_ARROW_CURSOR ARROW_CURSOR}</td><td>{@link #GLFW_IBEAM_CURSOR IBEAM_CURSOR}</td><td>{@link #GLFW_CROSSHAIR_CURSOR CROSSHAIR_CURSOR}</td><td>{@link #GLFW_HAND_CURSOR HAND_CURSOR}</td><td>{@link #GLFW_HRESIZE_CURSOR HRESIZE_CURSOR}</td><td>{@link #GLFW_VRESIZE_CURSOR VRESIZE_CURSOR}</td></tr></table>
+     * @param shape one of the standard shapes. One of:<br><table><tr><td>{@link #GLFW_ARROW_CURSOR ARROW_CURSOR}</td><td>{@link #GLFW_IBEAM_CURSOR IBEAM_CURSOR}</td><td>{@link #GLFW_CROSSHAIR_CURSOR CROSSHAIR_CURSOR}</td><td>{@link #GLFW_POINTING_HAND_CURSOR POINTING_HAND_CURSOR}</td><td>{@link #GLFW_RESIZE_EW_CURSOR RESIZE_EW_CURSOR}</td></tr><tr><td>{@link #GLFW_RESIZE_NS_CURSOR RESIZE_NS_CURSOR}</td><td>{@link #GLFW_RESIZE_NWSE_CURSOR RESIZE_NWSE_CURSOR}</td><td>{@link #GLFW_RESIZE_NESW_CURSOR RESIZE_NESW_CURSOR}</td><td>{@link #GLFW_RESIZE_ALL_CURSOR RESIZE_ALL_CURSOR}</td><td>{@link #GLFW_NOT_ALLOWED_CURSOR NOT_ALLOWED_CURSOR}</td></tr></table>
      *
-     * @return a new cursor ready to use or {@code NULL} if an error occurred
+     * @return a new cursor ready to use or {@code NULL} if an error occurred. Possible errors include {@link #GLFW_NOT_INITIALIZED NOT_INITIALIZED}, {@link #GLFW_INVALID_ENUM INVALID_ENUM}, {@link #GLFW_CURSOR_UNAVAILABLE CURSOR_UNAVAILABLE} and
+     *         {@link #GLFW_PLATFORM_ERROR PLATFORM_ERROR}.
      *
      * @since version 3.1
      */

@@ -393,6 +393,17 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
             Application programmer error. Fix the offending call.
             """,
             0x0001000A
+        ),
+        "CURSOR_UNAVAILABLE".enum(
+            """
+            The specified cursor shape is not available.
+
+            The specified standard cursor shape is not available, either because the current system cursor theme does not provide it or because it is not
+            available on the platform.
+
+            Platform or system settings limitation. Pick another standard cursor shape or create a custom cursor.
+            """,
+            0x0001000B
         )
     )
 
@@ -498,16 +509,84 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         "CURSOR_DISABLED"..0x00034003
     )
 
-    val CursorShapes = IntConstant(
-        """Standard cursor shapes. See ${url("http://www.glfw.org/docs/latest/input.html\\#cursor_standard", "standard cursor creation")} for how these are used.""",
+    IntConstant("The regular arrow cursor shape.", "ARROW_CURSOR"..0x00036001)
+    IntConstant("The text input I-beam cursor shape.", "IBEAM_CURSOR"..0x00036002)
+    IntConstant("The crosshair cursor shape.", "CROSSHAIR_CURSOR"..0x00036003)
+    IntConstant("The pointing hand cursor shape.", "POINTING_HAND_CURSOR"..0x00036004)
+    IntConstant(
+        """
+        The horizontal resize/move arrow shape.
+        
+        This is usually a horizontal double-headed arrow.
+        """,
 
-        "ARROW_CURSOR"..0x00036001,
-        "IBEAM_CURSOR"..0x00036002,
-        "CROSSHAIR_CURSOR"..0x00036003,
-        "HAND_CURSOR"..0x00036004,
-        "HRESIZE_CURSOR"..0x00036005,
-        "VRESIZE_CURSOR"..0x00036006
-    ).javaDocLinks
+        "RESIZE_EW_CURSOR"..0x00036005
+    )
+    IntConstant(
+        """
+        The vertical resize/move shape.
+
+        This is usually a vertical double-headed arrow.
+        """,
+
+        "RESIZE_NS_CURSOR"..0x00036006
+    )
+    IntConstant(
+        """
+        The top-left to bottom-right diagonal resize/move shape.
+
+        This is usually a diagonal double-headed arrow.
+
+        ${note(ul(
+            "<b>macOS</b>: This shape is provided by a private system API and may fail with #CURSOR_UNAVAILABLE in the future.",
+            "<b>X11</b>: This shape is provided by a newer standard not supported by all cursor themes.",
+            "<b>Wayland</b>: This shape is provided by a newer standard not supported by all cursor themes."
+        ))}
+        """,
+
+        "RESIZE_NWSE_CURSOR"..0x00036007
+    )
+    IntConstant(
+        """
+        The top-right to bottom-left diagonal resize/move shape.
+
+        This is usually a diagonal double-headed arrow.
+
+        ${note(ul(
+            "<b>macOS</b>: This shape is provided by a private system API and may fail with #CURSOR_UNAVAILABLE in the future.",
+            "<b>X11</b>: This shape is provided by a newer standard not supported by all cursor themes.",
+            "<b>Wayland</b>: This shape is provided by a newer standard not supported by all cursor themes."
+        ))}
+        """,
+
+        "RESIZE_NESW_CURSOR"..0x00036008
+    )
+    IntConstant(
+        """
+        The omni-directional resize cursor/move shape.
+
+        This is usually either a combined horizontal and vertical double-headed arrow or a grabbing hand.
+        """,
+
+        "RESIZE_ALL_CURSOR"..0x00036009
+    )
+    IntConstant(
+        """
+        The operation-not-allowed shape.
+
+        This is usually a circle with a diagonal line through it.
+ 
+        ${note(ul(
+            "<b>X11</b>: This shape is provided by a newer standard not supported by all cursor themes.",
+            "<b>Wayland</b>: This shape is provided by a newer standard not supported by all cursor themes."
+        ))}
+        """,
+
+        "NOT_ALLOWED_CURSOR"..0x0003600A
+    )
+    IntConstant("Legacy name for compatibility.", "HRESIZE_CURSOR".."GLFW_RESIZE_EW_CURSOR")
+    IntConstant("Legacy name for compatibility.", "VRESIZE_CURSOR".."GLFW_RESIZE_NS_CURSOR")
+    IntConstant("Legacy name for compatibility.", "HAND_CURSOR".."GLFW_POINTING_HAND_CURSOR")
 
     IntConstant(
         "Monitor events.",
@@ -718,6 +797,16 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
 
         "X11_CLASS_NAME"..0x00024001,
         "X11_INSTANCE_NAME"..0x00024002
+    )
+
+    IntConstant(
+        """
+        Specifies whether to allow access to the window menu via the Alt+Space and Alt-and-then-Space keyboard shortcuts.
+
+        This is ignored on other platforms.
+        """,
+
+        "WIN32_KEYBOARD_MENU"..0x00025001
     )
 
     val ClientAPIValues = IntConstant(
@@ -1287,6 +1376,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
             tr(td("#OPENGL_FORWARD_COMPAT"), td("#FALSE"), td("#TRUE or #FALSE")),
             tr(td("#OPENGL_DEBUG_CONTEXT"), td("#FALSE"), td("#TRUE or #FALSE")),
             tr(td("#OPENGL_PROFILE"), td("#OPENGL_ANY_PROFILE"), td(OpenGLProfileValues)),
+            
+            tr(td("#WIN32_KEYBOARD_MENU"), td("#FALSE"), td("#TRUE or #FALSE")),
 
             tr(td("#COCOA_RETINA_FRAMEBUFFER"), td("#TRUE"), td("#TRUE or #FALSE")),
             tr(td("#COCOA_GRAPHICS_SWITCHING"), td("#FALSE"), td("#TRUE or #FALSE"))
@@ -1389,9 +1480,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
             """,
             "<b>Windows</b>: The context to share resources with may not be current on any other thread.",
             """
-            The OS only supports forward-compatible core profile contexts for OpenGL versions 3.2 and later. Before creating an OpenGL context of version 3.2
-            or later you must set the #OPENGL_FORWARD_COMPAT and #OPENGL_PROFILE hints accordingly. OpenGL 3.0 and 3.1 contexts are not supported at all on
-            macOS.
+            The OS only supports core profile contexts for OpenGL versions 3.2 and later. Before creating an OpenGL context of version 3.2 or later you must
+            set the #OPENGL_PROFILE hint accordingly. OpenGL 3.0 and 3.1 contexts are not supported at all on macOS.
             """,
             """
             <b>macOS</b>: The GLFW window has no icon, as it is not a document window, but the dock icon will be the same as the application bundle's icon. For
@@ -2597,12 +2687,49 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """
         Returns a cursor with a standard shape, that can be set for a window with #SetCursor().
 
+        The images for these cursors come from the system cursor theme and their exact appearance will vary between platforms.
+
+        Most of these shapes are guaranteed to exist on every supported platform but a few may not be present. See the table below for details.
+        ${table(
+            tr(th("Cursor shape"), th("Windows"), th("macOS"), th("X11"), th("Wayland")),
+            tr(td("#ARROW_CURSOR"), td("Yes"), td("Yes"), td("Yes"), td("Yes")),
+            tr(td("#IBEAM_CURSOR"), td("Yes"), td("Yes"), td("Yes"), td("Yes")),
+            tr(td("#CROSSHAIR_CURSOR"), td("Yes"), td("Yes"), td("Yes"), td("Yes")),
+            tr(td("#POINTING_HAND_CURSOR"), td("Yes"), td("Yes"), td("Yes"), td("Yes")),
+            tr(td("#RESIZE_EW_CURSOR"), td("Yes"), td("Yes"), td("Yes"), td("Yes")),
+            tr(td("#RESIZE_NS_CURSOR"), td("Yes"), td("Yes"), td("Yes"), td("Yes")),
+            tr(td("#RESIZE_NWSE_CURSOR"), td("Yes"), td("Yes<sup>1</sup>"), td("Maybe<sup>2</sup>"), td("Maybe<sup>2</sup>")),
+            tr(td("#RESIZE_NESW_CURSOR"), td("Yes"), td("Yes<sup>1</sup>"), td("Maybe<sup>2</sup>"), td("Maybe<sup>2</sup>")),
+            tr(td("#RESIZE_ALL_CURSOR"), td("Yes"), td("Yes"), td("Yes"), td("Yes")),
+            tr(td("#NOT_ALLOWED_CURSOR"), td("Yes"), td("Yes"), td("Maybe<sup>2</sup>"), td("Maybe<sup>2</sup>"))
+        )}
+        
+        ${note(
+            ol(
+                "This uses a private system API and may fail in the future.",
+                "This uses a newer standard that not all cursor themes support."
+            )
+        )}
+ 
+        If the requested shape is not available, this function emits a #CURSOR_UNAVAILABLE error and returns #NULL.
+
         This function must only be called from the main thread.
         """,
 
-        int("shape", "one of the standard shapes", CursorShapes),
+        int(
+            "shape",
+            "one of the standard shapes",
+            """
+            #ARROW_CURSOR #IBEAM_CURSOR #CROSSHAIR_CURSOR #POINTING_HAND_CURSOR #RESIZE_EW_CURSOR #RESIZE_NS_CURSOR #RESIZE_NWSE_CURSOR #RESIZE_NESW_CURSOR
+            #RESIZE_ALL_CURSOR #NOT_ALLOWED_CURSOR
+            """
+        ),
 
-        returnDoc = "a new cursor ready to use or #NULL if an error occurred",
+        returnDoc =
+        """
+        a new cursor ready to use or #NULL if an error occurred. Possible errors include #NOT_INITIALIZED, #INVALID_ENUM, #CURSOR_UNAVAILABLE and
+        #PLATFORM_ERROR.
+        """,
         since = "version 3.1"
     )
 
