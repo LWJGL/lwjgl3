@@ -36,7 +36,8 @@ public class TinyEXR {
         TINYEXR_ERROR_INVALID_HEADER       = -9,
         TINYEXR_ERROR_UNSUPPORTED_FEATURE  = -10,
         TINYEXR_ERROR_CANT_WRITE_FILE      = -11,
-        TINYEXR_ERROR_SERIALZATION_FAILED  = -12;
+        TINYEXR_ERROR_SERIALZATION_FAILED  = -12,
+        TINYEXR_ERROR_LAYER_NOT_FOUND      = -13;
 
     /** Pixel types. */
     public static final int
@@ -78,6 +79,109 @@ public class TinyEXR {
 
     protected TinyEXR() {
         throw new UnsupportedOperationException();
+    }
+
+    // --- [ LoadEXRWithLayer ] ---
+
+    /** Unsafe version of: {@link #LoadEXRWithLayer} */
+    public static native int nLoadEXRWithLayer(long out_rgba, long width, long height, long filename, long layer_name, long err);
+
+    /**
+     * Loads single-frame OpenEXR image by specifing layer name.
+     * 
+     * <p>Assume EXR image contains A(single channel alpha) or RGB(A) channels. Application must free image data as returned by {@code out_rgba}. Result image
+     * format is: float x RGBA x width x height.</p>
+     *
+     * @return negative value and may set error string in {@code err} when there's an error. When the specified layer name is not found in the EXR file, the function
+     *         will return {@link #TINYEXR_ERROR_LAYER_NOT_FOUND ERROR_LAYER_NOT_FOUND}.
+     */
+    public static int LoadEXRWithLayer(@NativeType("float **") PointerBuffer out_rgba, @NativeType("int *") IntBuffer width, @NativeType("int *") IntBuffer height, @NativeType("char const *") ByteBuffer filename, @NativeType("char const *") ByteBuffer layer_name, @NativeType("char const **") PointerBuffer err) {
+        if (CHECKS) {
+            check(out_rgba, 1);
+            check(width, 1);
+            check(height, 1);
+            checkNT1(filename);
+            checkNT1(layer_name);
+            check(err, 1);
+        }
+        return nLoadEXRWithLayer(memAddress(out_rgba), memAddress(width), memAddress(height), memAddress(filename), memAddress(layer_name), memAddress(err));
+    }
+
+    /**
+     * Loads single-frame OpenEXR image by specifing layer name.
+     * 
+     * <p>Assume EXR image contains A(single channel alpha) or RGB(A) channels. Application must free image data as returned by {@code out_rgba}. Result image
+     * format is: float x RGBA x width x height.</p>
+     *
+     * @return negative value and may set error string in {@code err} when there's an error. When the specified layer name is not found in the EXR file, the function
+     *         will return {@link #TINYEXR_ERROR_LAYER_NOT_FOUND ERROR_LAYER_NOT_FOUND}.
+     */
+    public static int LoadEXRWithLayer(@NativeType("float **") PointerBuffer out_rgba, @NativeType("int *") IntBuffer width, @NativeType("int *") IntBuffer height, @NativeType("char const *") CharSequence filename, @NativeType("char const *") CharSequence layer_name, @NativeType("char const **") PointerBuffer err) {
+        if (CHECKS) {
+            check(out_rgba, 1);
+            check(width, 1);
+            check(height, 1);
+            check(err, 1);
+        }
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nASCII(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            stack.nASCII(layer_name, true);
+            long layer_nameEncoded = stack.getPointerAddress();
+            return nLoadEXRWithLayer(memAddress(out_rgba), memAddress(width), memAddress(height), filenameEncoded, layer_nameEncoded, memAddress(err));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ EXRLayers ] ---
+
+    /** Unsafe version of: {@link #EXRLayers} */
+    public static native int nEXRLayers(long filename, long layer_names, long num_layers, long err);
+
+    /**
+     * Get layer infos from EXR file.
+     *
+     * @param layer_names list of layer names. Application must free memory after using this.
+     * @param num_layers  the number of layers
+     * @param err         Error string(wll be filled when the function returns error code). Free it using FreeEXRErrorMessage after using this value.
+     *
+     * @return {@link #TINYEXR_SUCCESS SUCCESS} upon success.
+     */
+    public static int EXRLayers(@NativeType("char const *") ByteBuffer filename, @NativeType("char const ***") PointerBuffer layer_names, @NativeType("int *") IntBuffer num_layers, @NativeType("char const **") PointerBuffer err) {
+        if (CHECKS) {
+            checkNT1(filename);
+            check(layer_names, 1);
+            check(num_layers, 1);
+            check(err, 1);
+        }
+        return nEXRLayers(memAddress(filename), memAddress(layer_names), memAddress(num_layers), memAddress(err));
+    }
+
+    /**
+     * Get layer infos from EXR file.
+     *
+     * @param layer_names list of layer names. Application must free memory after using this.
+     * @param num_layers  the number of layers
+     * @param err         Error string(wll be filled when the function returns error code). Free it using FreeEXRErrorMessage after using this value.
+     *
+     * @return {@link #TINYEXR_SUCCESS SUCCESS} upon success.
+     */
+    public static int EXRLayers(@NativeType("char const *") CharSequence filename, @NativeType("char const ***") PointerBuffer layer_names, @NativeType("int *") IntBuffer num_layers, @NativeType("char const **") PointerBuffer err) {
+        if (CHECKS) {
+            check(layer_names, 1);
+            check(num_layers, 1);
+            check(err, 1);
+        }
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nASCII(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            return nEXRLayers(filenameEncoded, memAddress(layer_names), memAddress(num_layers), memAddress(err));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
     }
 
     // --- [ InitEXRHeader ] ---

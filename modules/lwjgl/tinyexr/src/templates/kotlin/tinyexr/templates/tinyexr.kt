@@ -34,7 +34,8 @@ ENABLE_WARNINGS()""")
         "ERROR_INVALID_HEADER".."-9",
         "ERROR_UNSUPPORTED_FEATURE".."-10",
         "ERROR_CANT_WRITE_FILE".."-11",
-        "ERROR_SERIALZATION_FAILED".."-12"
+        "ERROR_SERIALZATION_FAILED".."-12",
+        "ERROR_LAYER_NOT_FOUND".."-13"
     )
 
     IntConstant(
@@ -84,6 +85,41 @@ ENABLE_WARNINGS()""")
 
         "TILE_ROUND_DOWN".."0",
         "TILE_ROUND_UP".."1"
+    )
+
+    int(
+        "LoadEXRWithLayer",
+        """
+        Loads single-frame OpenEXR image by specifing layer name.
+
+        Assume EXR image contains A(single channel alpha) or RGB(A) channels. Application must free image data as returned by {@code out_rgba}. Result image
+        format is: float x RGBA x width x height.
+        """,
+
+        Check(1)..float.p.p("out_rgba", ""),
+        Check(1)..int.p("width", ""),
+        Check(1)..int.p("height", ""),
+        charASCII.const.p("filename", ""),
+        charASCII.const.p("layer_name", ""),
+        Check(1)..charASCII.const.p.p("err", ""),
+
+        returnDoc =
+        """
+        negative value and may set error string in {@code err} when there's an error. When the specified layer name is not found in the EXR file, the function
+        will return #ERROR_LAYER_NOT_FOUND.
+        """
+    )
+
+    int(
+        "EXRLayers",
+        "Get layer infos from EXR file.",
+
+        charASCII.const.p("filename", ""),
+        Check(1)..charASCII.const.p.p.p("layer_names", "list of layer names. Application must free memory after using this."),
+        Check(1)..int.p("num_layers", "the number of layers"),
+        Check(1)..charASCII.const.p.p("err", "Error string(wll be filled when the function returns error code). Free it using FreeEXRErrorMessage after using this value."),
+
+        returnDoc = "#SUCCESS upon success."
     )
 
     void(

@@ -10,6 +10,26 @@ ENABLE_WARNINGS()
 
 EXTERN_C_ENTER
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nLoadEXRWithLayer(JNIEnv *__env, jclass clazz, jlong out_rgbaAddress, jlong widthAddress, jlong heightAddress, jlong filenameAddress, jlong layer_nameAddress, jlong errAddress) {
+    float **out_rgba = (float **)(intptr_t)out_rgbaAddress;
+    int *width = (int *)(intptr_t)widthAddress;
+    int *height = (int *)(intptr_t)heightAddress;
+    char const *filename = (char const *)(intptr_t)filenameAddress;
+    char const *layer_name = (char const *)(intptr_t)layer_nameAddress;
+    char const **err = (char const **)(intptr_t)errAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)LoadEXRWithLayer(out_rgba, width, height, filename, layer_name, err);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nEXRLayers(JNIEnv *__env, jclass clazz, jlong filenameAddress, jlong layer_namesAddress, jlong num_layersAddress, jlong errAddress) {
+    char const *filename = (char const *)(intptr_t)filenameAddress;
+    char const ***layer_names = (char const ***)(intptr_t)layer_namesAddress;
+    int *num_layers = (int *)(intptr_t)num_layersAddress;
+    char const **err = (char const **)(intptr_t)errAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)EXRLayers(filename, layer_names, num_layers, err);
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nInitEXRHeader(JNIEnv *__env, jclass clazz, jlong exr_headerAddress) {
     EXRHeader *exr_header = (EXRHeader *)(intptr_t)exr_headerAddress;
     UNUSED_PARAMS(__env, clazz)
