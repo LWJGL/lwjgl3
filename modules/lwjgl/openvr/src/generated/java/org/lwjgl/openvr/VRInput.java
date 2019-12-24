@@ -653,4 +653,45 @@ public class VRInput {
         return nVRInput_ShowBindingsForActionSet(pSets.address(), unSizeOfVRSelectedActionSet_t, pSets.remaining(), originToHighlight);
     }
 
+    // --- [ VRInput_OpenBindingUI ] ---
+
+    /** Unsafe version of: {@link #VRInput_OpenBindingUI OpenBindingUI} */
+    public static int nVRInput_OpenBindingUI(long pchAppKey, long ulActionSetHandle, long ulDeviceHandle, boolean bShowOnDesktop) {
+        long __functionAddress = OpenVR.VRInput.OpenBindingUI;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callPJJI(pchAppKey, ulActionSetHandle, ulDeviceHandle, bShowOnDesktop, __functionAddress);
+    }
+
+    /**
+     * Opens the binding user interface.
+     * 
+     * <p>If no app key is provided it will use the key from the calling process. If no set is provided it will open to the root of the app binding page.</p>
+     */
+    @NativeType("EVRInputError")
+    public static int VRInput_OpenBindingUI(@NativeType("char const *") ByteBuffer pchAppKey, @NativeType("VRActionSetHandle_t") long ulActionSetHandle, @NativeType("VRInputValueHandle_t") long ulDeviceHandle, @NativeType("bool") boolean bShowOnDesktop) {
+        if (CHECKS) {
+            checkNT1(pchAppKey);
+        }
+        return nVRInput_OpenBindingUI(memAddress(pchAppKey), ulActionSetHandle, ulDeviceHandle, bShowOnDesktop);
+    }
+
+    /**
+     * Opens the binding user interface.
+     * 
+     * <p>If no app key is provided it will use the key from the calling process. If no set is provided it will open to the root of the app binding page.</p>
+     */
+    @NativeType("EVRInputError")
+    public static int VRInput_OpenBindingUI(@NativeType("char const *") CharSequence pchAppKey, @NativeType("VRActionSetHandle_t") long ulActionSetHandle, @NativeType("VRInputValueHandle_t") long ulDeviceHandle, @NativeType("bool") boolean bShowOnDesktop) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nASCII(pchAppKey, true);
+            long pchAppKeyEncoded = stack.getPointerAddress();
+            return nVRInput_OpenBindingUI(pchAppKeyEncoded, ulActionSetHandle, ulDeviceHandle, bShowOnDesktop);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
 }

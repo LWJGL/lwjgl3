@@ -246,27 +246,24 @@ typedef struct HmdRect2_t
     )
 
     EVROverlayError(
-        "SetOverlayAutoCurveDistanceRangeInMeters",
+        "SetOverlayCurvature",
         """
-        For high-quality curved overlays only, sets the distance range in meters from the overlay used to automatically curve the surface around the viewer.
-        Min is distance is when the surface will be most curved. Max is when least curved.
+        Use to draw overlay as a curved surface.
+
+        Curvature is a percentage from {@code (0..1]} where 1 is a fully closed cylinder. For a specific radius, curvature can be computed as:
+        {@code overlay.width / (2 PI r)}.
         """,
 
         VROverlayHandle_t("ulOverlayHandle", ""),
-        float("fMinDistanceInMeters", ""),
-        float("fMaxDistanceInMeters", "")
+        float("fCurvature", "")
     )
 
     EVROverlayError(
-        "GetOverlayAutoCurveDistanceRangeInMeters",
-        """
-        For high-quality curved overlays only, gets the distance range in meters from the overlay used to automatically curve the surface around the viewer.
-        Min is distance is when the surface will be most curved. Max is when least curved.
-        """,
+        "GetOverlayCurvature",
+        "Returns the curvature of the overlay as a percentage from {@code (0..1]} where 1 is a fully closed cylinder.",
 
         VROverlayHandle_t("ulOverlayHandle", ""),
-        Check(1)..float.p("pfMinDistanceInMeters", ""),
-        Check(1)..float.p("pfMaxDistanceInMeters", "")
+        Check(1)..float.p("pfCurvature", "")
     )
 
     EVROverlayError(
@@ -513,41 +510,6 @@ typedef struct HmdRect2_t
         """,
 
         VROverlayHandle_t("ulOverlayHandle", "")
-    )
-
-    VROverlayHandle_t(
-        "GetGamepadFocusOverlay",
-        "Returns the current Gamepad focus overlay.",
-        void()
-    )
-
-    EVROverlayError(
-        "SetGamepadFocusOverlay",
-        "Sets the current Gamepad focus overlay.",
-
-        VROverlayHandle_t("ulNewFocusOverlay", "")
-    )
-
-    EVROverlayError(
-        "SetOverlayNeighbor",
-        """
-        Sets an overlay's neighbor. This will also set the neighbor of the "to" overlay to point back to the "from" overlay. If an overlay's neighbor is set to
-        invalid both ends will be cleared.
-        """",
-
-        EOverlayDirection("eDirection", "", "EOverlayDirection_\\w+"),
-        VROverlayHandle_t("ulFrom", ""),
-        VROverlayHandle_t("ulTo", "")
-    )
-
-    EVROverlayError(
-        "MoveGamepadFocusToNeighbor",
-        "Changes the Gamepad focus from one overlay to one of its neighbors.",
-
-        EOverlayDirection("eDirection", "", "EOverlayDirection_\\w+"),
-        VROverlayHandle_t("ulFrom", ""),
-
-        returnDoc = "#EVROverlayError_VROverlayError_NoNeighbor if there is no neighbor in that direction"
     )
 
     EVROverlayError(

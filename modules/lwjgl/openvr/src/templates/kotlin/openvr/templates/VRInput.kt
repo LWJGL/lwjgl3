@@ -303,4 +303,18 @@ val VRInput = "VRInput".nativeClass(
         "IsUsingLegacyInput",
         ""
     )
+
+    EVRInputError(
+        "OpenBindingUI",
+        """
+        Opens the binding user interface.
+
+        If no app key is provided it will use the key from the calling process. If no set is provided it will open to the root of the app binding page.
+        """,
+
+        charASCII.const.p("pchAppKey", ""),
+        VRActionSetHandle_t("ulActionSetHandle", ""),
+        VRInputValueHandle_t("ulDeviceHandle", ""),
+        bool("bShowOnDesktop", "")
+    )
 }

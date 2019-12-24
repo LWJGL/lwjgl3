@@ -600,14 +600,6 @@ typedef struct HiddenAreaMesh_t
         """
     )
 
-    void(
-        "AcknowledgeQuit_UserPrompt",
-        """
-        Call this to tell the system that the user is being prompted to save data. This halts the timeout and dismisses the dashboard (if it was up).
-        Applications should be sure to actually prompt the user to save and then exit afterward, otherwise the user will be left in a confusing state.
-        """
-    )
-
     uint32_t(
         "GetAppContainerFilePaths",
         """

@@ -910,12 +910,12 @@ public class VRApplications {
         return nVRApplications_GetStartingApplication(memAddress(pchAppKeyBuffer), pchAppKeyBuffer.remaining());
     }
 
-    // --- [ VRApplications_GetTransitionState ] ---
+    // --- [ VRApplications_GetSceneApplicationState ] ---
 
     /** Returns the application transition state. */
-    @NativeType("EVRApplicationTransitionState")
-    public static int VRApplications_GetTransitionState() {
-        long __functionAddress = OpenVR.VRApplications.GetTransitionState;
+    @NativeType("EVRSceneApplicationState")
+    public static int VRApplications_GetSceneApplicationState() {
+        long __functionAddress = OpenVR.VRApplications.GetSceneApplicationState;
         if (CHECKS) {
             check(__functionAddress);
         }
@@ -981,11 +981,11 @@ public class VRApplications {
         }
     }
 
-    // --- [ VRApplications_GetApplicationsTransitionStateNameFromEnum ] ---
+    // --- [ VRApplications_GetSceneApplicationStateNameFromEnum ] ---
 
-    /** Unsafe version of: {@link #VRApplications_GetApplicationsTransitionStateNameFromEnum GetApplicationsTransitionStateNameFromEnum} */
-    public static long nVRApplications_GetApplicationsTransitionStateNameFromEnum(int state) {
-        long __functionAddress = OpenVR.VRApplications.GetApplicationsTransitionStateNameFromEnum;
+    /** Unsafe version of: {@link #VRApplications_GetSceneApplicationStateNameFromEnum GetSceneApplicationStateNameFromEnum} */
+    public static long nVRApplications_GetSceneApplicationStateNameFromEnum(int state) {
+        long __functionAddress = OpenVR.VRApplications.GetSceneApplicationStateNameFromEnum;
         if (CHECKS) {
             check(__functionAddress);
         }
@@ -995,25 +995,13 @@ public class VRApplications {
     /**
      * Returns a string for an application transition state.
      *
-     * @param state one of:<br><table><tr><td>{@link VR#EVRApplicationTransitionState_VRApplicationTransition_None}</td></tr><tr><td>{@link VR#EVRApplicationTransitionState_VRApplicationTransition_OldAppQuitSent}</td></tr><tr><td>{@link VR#EVRApplicationTransitionState_VRApplicationTransition_WaitingForExternalLaunch}</td></tr><tr><td>{@link VR#EVRApplicationTransitionState_VRApplicationTransition_NewAppLaunched}</td></tr></table>
+     * @param state one of:<br><table><tr><td>{@link VR#EVRSceneApplicationState_None}</td><td>{@link VR#EVRSceneApplicationState_Starting}</td></tr><tr><td>{@link VR#EVRSceneApplicationState_Quitting}</td><td>{@link VR#EVRSceneApplicationState_Running}</td></tr><tr><td>{@link VR#EVRSceneApplicationState_Waiting}</td></tr></table>
      */
     @Nullable
     @NativeType("char const *")
-    public static String VRApplications_GetApplicationsTransitionStateNameFromEnum(@NativeType("EVRApplicationTransitionState") int state) {
-        long __result = nVRApplications_GetApplicationsTransitionStateNameFromEnum(state);
+    public static String VRApplications_GetSceneApplicationStateNameFromEnum(@NativeType("EVRSceneApplicationState") int state) {
+        long __result = nVRApplications_GetSceneApplicationStateNameFromEnum(state);
         return memASCIISafe(__result);
-    }
-
-    // --- [ VRApplications_IsQuitUserPromptRequested ] ---
-
-    /** Returns true if the outgoing scene app has requested a save prompt before exiting. */
-    @NativeType("bool")
-    public static boolean VRApplications_IsQuitUserPromptRequested() {
-        long __functionAddress = OpenVR.VRApplications.IsQuitUserPromptRequested;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        return callZ(__functionAddress);
     }
 
     // --- [ VRApplications_LaunchInternalProcess ] ---

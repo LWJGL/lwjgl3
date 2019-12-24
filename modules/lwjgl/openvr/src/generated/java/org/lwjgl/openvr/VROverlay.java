@@ -312,7 +312,7 @@ public class VROverlay {
     /**
      * Specify flag setting for a given overlay.
      *
-     * @param eOverlayFlag one of:<br><table><tr><td>{@link VR#VROverlayFlags_None}</td><td>{@link VR#VROverlayFlags_NoDashboardTab}</td></tr><tr><td>{@link VR#VROverlayFlags_AcceptsGamepadEvents}</td><td>{@link VR#VROverlayFlags_ShowGamepadFocus}</td></tr><tr><td>{@link VR#VROverlayFlags_SendVRDiscreteScrollEvents}</td><td>{@link VR#VROverlayFlags_SendVRTouchpadEvents}</td></tr><tr><td>{@link VR#VROverlayFlags_ShowTouchPadScrollWheel}</td><td>{@link VR#VROverlayFlags_TransferOwnershipToInternalProcess}</td></tr><tr><td>{@link VR#VROverlayFlags_SideBySide_Parallel}</td><td>{@link VR#VROverlayFlags_SideBySide_Crossed}</td></tr><tr><td>{@link VR#VROverlayFlags_Panorama}</td><td>{@link VR#VROverlayFlags_StereoPanorama}</td></tr><tr><td>{@link VR#VROverlayFlags_SortWithNonSceneOverlays}</td><td>{@link VR#VROverlayFlags_VisibleInDashboard}</td></tr><tr><td>{@link VR#VROverlayFlags_MakeOverlaysInteractiveIfVisible}</td><td>{@link VR#VROverlayFlags_SendVRSmoothScrollEvents}</td></tr><tr><td>{@link VR#VROverlayFlags_ProtectedContent}</td></tr></table>
+     * @param eOverlayFlag one of:<br><table><tr><td>{@link VR#VROverlayFlags_NoDashboardTab}</td><td>{@link VR#VROverlayFlags_SendVRDiscreteScrollEvents}</td></tr><tr><td>{@link VR#VROverlayFlags_SendVRTouchpadEvents}</td><td>{@link VR#VROverlayFlags_ShowTouchPadScrollWheel}</td></tr><tr><td>{@link VR#VROverlayFlags_TransferOwnershipToInternalProcess}</td><td>{@link VR#VROverlayFlags_SideBySide_Parallel}</td></tr><tr><td>{@link VR#VROverlayFlags_SideBySide_Crossed}</td><td>{@link VR#VROverlayFlags_Panorama}</td></tr><tr><td>{@link VR#VROverlayFlags_StereoPanorama}</td><td>{@link VR#VROverlayFlags_SortWithNonSceneOverlays}</td></tr><tr><td>{@link VR#VROverlayFlags_VisibleInDashboard}</td><td>{@link VR#VROverlayFlags_MakeOverlaysInteractiveIfVisible}</td></tr><tr><td>{@link VR#VROverlayFlags_SendVRSmoothScrollEvents}</td><td>{@link VR#VROverlayFlags_ProtectedContent}</td></tr><tr><td>{@link VR#VROverlayFlags_HideLaserIntersection}</td></tr></table>
      */
     @NativeType("EVROverlayError")
     public static int VROverlay_SetOverlayFlag(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("VROverlayFlags") int eOverlayFlag, @NativeType("bool") boolean bEnabled) {
@@ -337,7 +337,7 @@ public class VROverlay {
     /**
      * Sets flag setting for a given overlay.
      *
-     * @param eOverlayFlag one of:<br><table><tr><td>{@link VR#VROverlayFlags_None}</td><td>{@link VR#VROverlayFlags_NoDashboardTab}</td></tr><tr><td>{@link VR#VROverlayFlags_AcceptsGamepadEvents}</td><td>{@link VR#VROverlayFlags_ShowGamepadFocus}</td></tr><tr><td>{@link VR#VROverlayFlags_SendVRDiscreteScrollEvents}</td><td>{@link VR#VROverlayFlags_SendVRTouchpadEvents}</td></tr><tr><td>{@link VR#VROverlayFlags_ShowTouchPadScrollWheel}</td><td>{@link VR#VROverlayFlags_TransferOwnershipToInternalProcess}</td></tr><tr><td>{@link VR#VROverlayFlags_SideBySide_Parallel}</td><td>{@link VR#VROverlayFlags_SideBySide_Crossed}</td></tr><tr><td>{@link VR#VROverlayFlags_Panorama}</td><td>{@link VR#VROverlayFlags_StereoPanorama}</td></tr><tr><td>{@link VR#VROverlayFlags_SortWithNonSceneOverlays}</td><td>{@link VR#VROverlayFlags_VisibleInDashboard}</td></tr><tr><td>{@link VR#VROverlayFlags_MakeOverlaysInteractiveIfVisible}</td><td>{@link VR#VROverlayFlags_SendVRSmoothScrollEvents}</td></tr><tr><td>{@link VR#VROverlayFlags_ProtectedContent}</td></tr></table>
+     * @param eOverlayFlag one of:<br><table><tr><td>{@link VR#VROverlayFlags_NoDashboardTab}</td><td>{@link VR#VROverlayFlags_SendVRDiscreteScrollEvents}</td></tr><tr><td>{@link VR#VROverlayFlags_SendVRTouchpadEvents}</td><td>{@link VR#VROverlayFlags_ShowTouchPadScrollWheel}</td></tr><tr><td>{@link VR#VROverlayFlags_TransferOwnershipToInternalProcess}</td><td>{@link VR#VROverlayFlags_SideBySide_Parallel}</td></tr><tr><td>{@link VR#VROverlayFlags_SideBySide_Crossed}</td><td>{@link VR#VROverlayFlags_Panorama}</td></tr><tr><td>{@link VR#VROverlayFlags_StereoPanorama}</td><td>{@link VR#VROverlayFlags_SortWithNonSceneOverlays}</td></tr><tr><td>{@link VR#VROverlayFlags_VisibleInDashboard}</td><td>{@link VR#VROverlayFlags_MakeOverlaysInteractiveIfVisible}</td></tr><tr><td>{@link VR#VROverlayFlags_SendVRSmoothScrollEvents}</td><td>{@link VR#VROverlayFlags_ProtectedContent}</td></tr><tr><td>{@link VR#VROverlayFlags_HideLaserIntersection}</td></tr></table>
      */
     @NativeType("EVROverlayError")
     public static int VROverlay_GetOverlayFlag(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("VROverlayFlags") int eOverlayFlag, @NativeType("bool *") ByteBuffer pbEnabled) {
@@ -525,43 +525,41 @@ public class VROverlay {
         return nVROverlay_GetOverlayWidthInMeters(ulOverlayHandle, memAddress(pfWidthInMeters));
     }
 
-    // --- [ VROverlay_SetOverlayAutoCurveDistanceRangeInMeters ] ---
+    // --- [ VROverlay_SetOverlayCurvature ] ---
 
     /**
-     * For high-quality curved overlays only, sets the distance range in meters from the overlay used to automatically curve the surface around the viewer.
-     * Min is distance is when the surface will be most curved. Max is when least curved.
+     * Use to draw overlay as a curved surface.
+     * 
+     * <p>Curvature is a percentage from {@code (0..1]} where 1 is a fully closed cylinder. For a specific radius, curvature can be computed as:
+     * {@code overlay.width / (2 PI r)}.</p>
      */
     @NativeType("EVROverlayError")
-    public static int VROverlay_SetOverlayAutoCurveDistanceRangeInMeters(@NativeType("VROverlayHandle_t") long ulOverlayHandle, float fMinDistanceInMeters, float fMaxDistanceInMeters) {
-        long __functionAddress = OpenVR.VROverlay.SetOverlayAutoCurveDistanceRangeInMeters;
+    public static int VROverlay_SetOverlayCurvature(@NativeType("VROverlayHandle_t") long ulOverlayHandle, float fCurvature) {
+        long __functionAddress = OpenVR.VROverlay.SetOverlayCurvature;
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJI(ulOverlayHandle, fMinDistanceInMeters, fMaxDistanceInMeters, __functionAddress);
+        return callJI(ulOverlayHandle, fCurvature, __functionAddress);
     }
 
-    // --- [ VROverlay_GetOverlayAutoCurveDistanceRangeInMeters ] ---
+    // --- [ VROverlay_GetOverlayCurvature ] ---
 
-    /** Unsafe version of: {@link #VROverlay_GetOverlayAutoCurveDistanceRangeInMeters GetOverlayAutoCurveDistanceRangeInMeters} */
-    public static int nVROverlay_GetOverlayAutoCurveDistanceRangeInMeters(long ulOverlayHandle, long pfMinDistanceInMeters, long pfMaxDistanceInMeters) {
-        long __functionAddress = OpenVR.VROverlay.GetOverlayAutoCurveDistanceRangeInMeters;
+    /** Unsafe version of: {@link #VROverlay_GetOverlayCurvature GetOverlayCurvature} */
+    public static int nVROverlay_GetOverlayCurvature(long ulOverlayHandle, long pfCurvature) {
+        long __functionAddress = OpenVR.VROverlay.GetOverlayCurvature;
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPPI(ulOverlayHandle, pfMinDistanceInMeters, pfMaxDistanceInMeters, __functionAddress);
+        return callJPI(ulOverlayHandle, pfCurvature, __functionAddress);
     }
 
-    /**
-     * For high-quality curved overlays only, gets the distance range in meters from the overlay used to automatically curve the surface around the viewer.
-     * Min is distance is when the surface will be most curved. Max is when least curved.
-     */
+    /** Returns the curvature of the overlay as a percentage from {@code (0..1]} where 1 is a fully closed cylinder. */
     @NativeType("EVROverlayError")
-    public static int VROverlay_GetOverlayAutoCurveDistanceRangeInMeters(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("float *") FloatBuffer pfMinDistanceInMeters, @NativeType("float *") FloatBuffer pfMaxDistanceInMeters) {
+    public static int VROverlay_GetOverlayCurvature(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("float *") FloatBuffer pfCurvature) {
         if (CHECKS) {
-            check(pfMinDistanceInMeters, 1);
-            check(pfMaxDistanceInMeters, 1);
+            check(pfCurvature, 1);
         }
-        return nVROverlay_GetOverlayAutoCurveDistanceRangeInMeters(ulOverlayHandle, memAddress(pfMinDistanceInMeters), memAddress(pfMaxDistanceInMeters));
+        return nVROverlay_GetOverlayCurvature(ulOverlayHandle, memAddress(pfCurvature));
     }
 
     // --- [ VROverlay_SetOverlayTextureColorSpace ] ---
@@ -1076,66 +1074,6 @@ public class VROverlay {
             check(__functionAddress);
         }
         return callJZ(ulOverlayHandle, __functionAddress);
-    }
-
-    // --- [ VROverlay_GetGamepadFocusOverlay ] ---
-
-    /** Returns the current Gamepad focus overlay. */
-    @NativeType("VROverlayHandle_t")
-    public static long VROverlay_GetGamepadFocusOverlay() {
-        long __functionAddress = OpenVR.VROverlay.GetGamepadFocusOverlay;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        return callJ(__functionAddress);
-    }
-
-    // --- [ VROverlay_SetGamepadFocusOverlay ] ---
-
-    /** Sets the current Gamepad focus overlay. */
-    @NativeType("EVROverlayError")
-    public static int VROverlay_SetGamepadFocusOverlay(@NativeType("VROverlayHandle_t") long ulNewFocusOverlay) {
-        long __functionAddress = OpenVR.VROverlay.SetGamepadFocusOverlay;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        return callJI(ulNewFocusOverlay, __functionAddress);
-    }
-
-    // --- [ VROverlay_SetOverlayNeighbor ] ---
-
-    /**
-     * Sets an overlay's neighbor. This will also set the neighbor of the "to" overlay to point back to the "from" overlay. If an overlay's neighbor is set to
-     * invalid both ends will be cleared.
-     * "
-     *
-     * @param eDirection one of:<br><table><tr><td>{@link VR#EOverlayDirection_OverlayDirection_Up}</td><td>{@link VR#EOverlayDirection_OverlayDirection_Down}</td></tr><tr><td>{@link VR#EOverlayDirection_OverlayDirection_Left}</td><td>{@link VR#EOverlayDirection_OverlayDirection_Right}</td></tr><tr><td>{@link VR#EOverlayDirection_OverlayDirection_Count}</td></tr></table>
-     */
-    @NativeType("EVROverlayError")
-    public static int VROverlay_SetOverlayNeighbor(@NativeType("EOverlayDirection") int eDirection, @NativeType("VROverlayHandle_t") long ulFrom, @NativeType("VROverlayHandle_t") long ulTo) {
-        long __functionAddress = OpenVR.VROverlay.SetOverlayNeighbor;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        return callJJI(eDirection, ulFrom, ulTo, __functionAddress);
-    }
-
-    // --- [ VROverlay_MoveGamepadFocusToNeighbor ] ---
-
-    /**
-     * Changes the Gamepad focus from one overlay to one of its neighbors.
-     *
-     * @param eDirection one of:<br><table><tr><td>{@link VR#EOverlayDirection_OverlayDirection_Up}</td><td>{@link VR#EOverlayDirection_OverlayDirection_Down}</td></tr><tr><td>{@link VR#EOverlayDirection_OverlayDirection_Left}</td><td>{@link VR#EOverlayDirection_OverlayDirection_Right}</td></tr><tr><td>{@link VR#EOverlayDirection_OverlayDirection_Count}</td></tr></table>
-     *
-     * @return {@link VR#EVROverlayError_VROverlayError_NoNeighbor} if there is no neighbor in that direction
-     */
-    @NativeType("EVROverlayError")
-    public static int VROverlay_MoveGamepadFocusToNeighbor(@NativeType("EOverlayDirection") int eDirection, @NativeType("VROverlayHandle_t") long ulFrom) {
-        long __functionAddress = OpenVR.VROverlay.MoveGamepadFocusToNeighbor;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        return callJI(eDirection, ulFrom, __functionAddress);
     }
 
     // --- [ VROverlay_SetOverlayDualAnalogTransform ] ---

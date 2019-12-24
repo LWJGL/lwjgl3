@@ -242,8 +242,8 @@ val VRApplications = "VRApplications".nativeClass(
         AutoSize("pchAppKeyBuffer")..uint32_t("unAppKeyBufferLen", "")
     )
 
-    EVRApplicationTransitionState(
-        "GetTransitionState",
+    EVRSceneApplicationState(
+        "GetSceneApplicationState",
         "Returns the application transition state.",
         void()
     )
@@ -270,16 +270,10 @@ val VRApplications = "VRApplications".nativeClass(
     )
 
     charASCII.const.p(
-        "GetApplicationsTransitionStateNameFromEnum",
+        "GetSceneApplicationStateNameFromEnum",
         "Returns a string for an application transition state.",
 
-        EVRApplicationTransitionState("state", "", "EVRApplicationTransitionState_\\w+")
-    )
-
-    bool(
-        "IsQuitUserPromptRequested",
-        "Returns true if the outgoing scene app has requested a save prompt before exiting.",
-        void()
+        EVRSceneApplicationState("state", "", "EVRSceneApplicationState_\\w+")
     )
 
     EVRApplicationError(

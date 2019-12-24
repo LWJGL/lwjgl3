@@ -27,7 +27,6 @@ val EIOBufferError = "EIOBufferError".enumType
 val EVRSpatialAnchorError = "EVRSpatialAnchorError".enumType
 
 val EVRApplicationProperty = "EVRApplicationProperty".enumType
-val EVRApplicationTransitionState = "EVRApplicationTransitionState".enumType
 val EVRApplicationType = "EVRApplicationType".enumType
 val EVRButtonId = "EVRButtonId".enumType
 val EVRCompositorTimingMode = "EVRCompositorTimingMode".enumType
@@ -38,6 +37,7 @@ val EVREventType = "EVREventType".enumType
 val EVRNotificationStyle = "EVRNotificationStyle".enumType
 val EVRNotificationType = "EVRNotificationType".enumType
 val EVROverlayIntersectionMaskPrimitiveType = "EVROverlayIntersectionMaskPrimitiveType".enumType
+val EVRSceneApplicationState = "EVRSceneApplicationState".enumType
 val EVRScreenshotPropertyFilenames = "EVRScreenshotPropertyFilenames".enumType
 val EVRScreenshotType = "EVRScreenshotType".enumType
 val EVRSubmitFlags = "EVRSubmitFlags".enumType
