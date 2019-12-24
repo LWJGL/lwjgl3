@@ -219,6 +219,29 @@ public class EXTDisjointTimerQuery {
         }
     }
 
+    // --- [ glGetInteger64vEXT ] ---
+
+    public static native void nglGetInteger64vEXT(int pname, long data);
+
+    public static void glGetInteger64vEXT(@NativeType("GLenum") int pname, @NativeType("GLint64 *") LongBuffer data) {
+        if (CHECKS) {
+            check(data, 1);
+        }
+        nglGetInteger64vEXT(pname, memAddress(data));
+    }
+
+    @NativeType("void")
+    public static long glGetInteger64EXT(@NativeType("GLenum") int pname) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            LongBuffer data = stack.callocLong(1);
+            nglGetInteger64vEXT(pname, memAddress(data));
+            return data.get(0);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     /** Array version of: {@link #glGenQueriesEXT GenQueriesEXT} */
     public static void glGenQueriesEXT(@NativeType("GLuint *") int[] ids) {
         EXTOcclusionQueryBoolean.glGenQueriesEXT(ids);
@@ -267,6 +290,16 @@ public class EXTDisjointTimerQuery {
             check(params, 1);
         }
         callPV(id, pname, params, __functionAddress);
+    }
+
+    /** Array version of: {@link #glGetInteger64vEXT GetInteger64vEXT} */
+    public static void glGetInteger64vEXT(@NativeType("GLenum") int pname, @NativeType("GLint64 *") long[] data) {
+        long __functionAddress = GLES.getICD().glGetInteger64vEXT;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(data, 1);
+        }
+        callPV(pname, data, __functionAddress);
     }
 
 }

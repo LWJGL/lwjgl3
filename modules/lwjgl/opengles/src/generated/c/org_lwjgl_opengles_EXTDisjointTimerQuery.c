@@ -10,6 +10,7 @@ typedef void (APIENTRY *glQueryCounterEXTPROC) (jint, jint);
 typedef void (APIENTRY *glGetQueryObjectivEXTPROC) (jint, jint, intptr_t);
 typedef void (APIENTRY *glGetQueryObjecti64vEXTPROC) (jint, jint, intptr_t);
 typedef void (APIENTRY *glGetQueryObjectui64vEXTPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glGetInteger64vEXTPROC) (jint, intptr_t);
 
 EXTERN_C_ENTER
 
@@ -38,6 +39,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTDisjointTimerQuery_nglGetQuery
     intptr_t params = (intptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetQueryObjectui64vEXT(id, pname, params);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTDisjointTimerQuery_nglGetInteger64vEXT__IJ(JNIEnv *__env, jclass clazz, jint pname, jlong dataAddress) {
+    glGetInteger64vEXTPROC glGetInteger64vEXT = (glGetInteger64vEXTPROC)tlsGetFunction(410);
+    intptr_t data = (intptr_t)dataAddress;
+    UNUSED_PARAM(clazz)
+    glGetInteger64vEXT(pname, data);
 }
 
 EXTERN_C_EXIT

@@ -1150,6 +1150,21 @@ val INTEL_fragment_shader_ordering = EXT_FLAG.nativeClassGL("INTEL_fragment_shad
         """
 }
 
+val INTEL_shader_integer_functions2 = EXT_FLAG.nativeClassGL("INTEL_shader_integer_functions2", postfix = INTEL) {
+    documentation =
+        """
+        When true, the $registryLink extension is supported.
+
+        OpenCL and other GPU programming environments provides a number of useful functions operating on integer data. Many of these functions are supported by
+        specialized instructions various GPUs. Correct GLSL implementations for some of these functions are non-trivial. Recognizing open-coded versions of
+        these functions is often impractical. As a result, potential performance improvements go unrealized.
+
+        This extension makes available a number of functions that have specialized instruction support on Intel GPUs.
+
+        Requires GLSL 1.30 or EXT_gpu_shader4.
+        """
+}
+
 val KHR_robust_buffer_access_behavior = EXT_FLAG.nativeClassGL("KHR_robust_buffer_access_behavior", postfix = KHR) {
     documentation =
         """

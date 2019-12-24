@@ -1353,7 +1353,7 @@ public class ARBDirectStateAccess {
      * @param value       for color buffers, a pointer to a four-element vector specifying R, G, B and A values to clear the buffer to. For stencil buffers, a pointer to a
      *                    single stencil value to clear the buffer to.
      */
-    public static void glClearNamedFramebufferiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint *") IntBuffer value) {
+    public static void glClearNamedFramebufferiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint const *") IntBuffer value) {
         GL45C.glClearNamedFramebufferiv(framebuffer, buffer, drawbuffer, value);
     }
 
@@ -1372,7 +1372,7 @@ public class ARBDirectStateAccess {
      * @param drawbuffer  the draw buffer to clear
      * @param value       a pointer to a four-element vector specifying R, G, B and A values to clear the buffer to
      */
-    public static void glClearNamedFramebufferuiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint *") IntBuffer value) {
+    public static void glClearNamedFramebufferuiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint const *") IntBuffer value) {
         GL45C.glClearNamedFramebufferuiv(framebuffer, buffer, drawbuffer, value);
     }
 
@@ -1392,7 +1392,7 @@ public class ARBDirectStateAccess {
      * @param value       for color buffers, a pointer to a four-element vector specifying R, G, B and A values to clear the buffer to. For depth buffers, a pointer to a
      *                    single depth value to clear the buffer to.
      */
-    public static void glClearNamedFramebufferfv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat *") FloatBuffer value) {
+    public static void glClearNamedFramebufferfv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat const *") FloatBuffer value) {
         GL45C.glClearNamedFramebufferfv(framebuffer, buffer, drawbuffer, value);
     }
 
@@ -3269,17 +3269,17 @@ public class ARBDirectStateAccess {
     }
 
     /** Array version of: {@link #glClearNamedFramebufferiv ClearNamedFramebufferiv} */
-    public static void glClearNamedFramebufferiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint *") int[] value) {
+    public static void glClearNamedFramebufferiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint const *") int[] value) {
         GL45C.glClearNamedFramebufferiv(framebuffer, buffer, drawbuffer, value);
     }
 
     /** Array version of: {@link #glClearNamedFramebufferuiv ClearNamedFramebufferuiv} */
-    public static void glClearNamedFramebufferuiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint *") int[] value) {
+    public static void glClearNamedFramebufferuiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint const *") int[] value) {
         GL45C.glClearNamedFramebufferuiv(framebuffer, buffer, drawbuffer, value);
     }
 
     /** Array version of: {@link #glClearNamedFramebufferfv ClearNamedFramebufferfv} */
-    public static void glClearNamedFramebufferfv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat *") float[] value) {
+    public static void glClearNamedFramebufferfv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat const *") float[] value) {
         GL45C.glClearNamedFramebufferfv(framebuffer, buffer, drawbuffer, value);
     }
 

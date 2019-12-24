@@ -513,7 +513,7 @@ public class GL30C extends GL21C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBuffer">Reference Page</a>
      */
-    public static void glClearBufferiv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint *") IntBuffer value) {
+    public static void glClearBufferiv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint const *") IntBuffer value) {
         if (CHECKS) {
             check(value, 1);
         }
@@ -534,7 +534,7 @@ public class GL30C extends GL21C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBuffer">Reference Page</a>
      */
-    public static void glClearBufferuiv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint *") IntBuffer value) {
+    public static void glClearBufferuiv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint const *") IntBuffer value) {
         if (CHECKS) {
             check(value, 4);
         }
@@ -556,7 +556,7 @@ public class GL30C extends GL21C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBuffer">Reference Page</a>
      */
-    public static void glClearBufferfv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat *") FloatBuffer value) {
+    public static void glClearBufferfv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat const *") FloatBuffer value) {
         if (CHECKS) {
             check(value, 1);
         }
@@ -2441,7 +2441,7 @@ public class GL30C extends GL21C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBuffer">Reference Page</a>
      */
-    public static void glClearBufferiv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint *") int[] value) {
+    public static void glClearBufferiv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint const *") int[] value) {
         long __functionAddress = GL.getICD().glClearBufferiv;
         if (CHECKS) {
             check(__functionAddress);
@@ -2455,7 +2455,7 @@ public class GL30C extends GL21C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBuffer">Reference Page</a>
      */
-    public static void glClearBufferuiv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint *") int[] value) {
+    public static void glClearBufferuiv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint const *") int[] value) {
         long __functionAddress = GL.getICD().glClearBufferuiv;
         if (CHECKS) {
             check(__functionAddress);
@@ -2469,7 +2469,7 @@ public class GL30C extends GL21C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBuffer">Reference Page</a>
      */
-    public static void glClearBufferfv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat *") float[] value) {
+    public static void glClearBufferfv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GL.getICD().glClearBufferfv;
         if (CHECKS) {
             check(__functionAddress);

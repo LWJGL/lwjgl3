@@ -541,7 +541,7 @@ public class GL30 extends GL21 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBuffer">Reference Page</a>
      */
-    public static void glClearBufferiv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint *") IntBuffer value) {
+    public static void glClearBufferiv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint const *") IntBuffer value) {
         GL30C.glClearBufferiv(buffer, drawbuffer, value);
     }
 
@@ -561,7 +561,7 @@ public class GL30 extends GL21 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBuffer">Reference Page</a>
      */
-    public static void glClearBufferuiv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint *") IntBuffer value) {
+    public static void glClearBufferuiv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint const *") IntBuffer value) {
         GL30C.glClearBufferuiv(buffer, drawbuffer, value);
     }
 
@@ -582,7 +582,7 @@ public class GL30 extends GL21 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBuffer">Reference Page</a>
      */
-    public static void glClearBufferfv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat *") FloatBuffer value) {
+    public static void glClearBufferfv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat const *") FloatBuffer value) {
         GL30C.glClearBufferfv(buffer, drawbuffer, value);
     }
 
@@ -2388,7 +2388,7 @@ public class GL30 extends GL21 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBuffer">Reference Page</a>
      */
-    public static void glClearBufferiv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint *") int[] value) {
+    public static void glClearBufferiv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint const *") int[] value) {
         GL30C.glClearBufferiv(buffer, drawbuffer, value);
     }
 
@@ -2397,7 +2397,7 @@ public class GL30 extends GL21 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBuffer">Reference Page</a>
      */
-    public static void glClearBufferuiv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint *") int[] value) {
+    public static void glClearBufferuiv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint const *") int[] value) {
         GL30C.glClearBufferuiv(buffer, drawbuffer, value);
     }
 
@@ -2406,7 +2406,7 @@ public class GL30 extends GL21 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBuffer">Reference Page</a>
      */
-    public static void glClearBufferfv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat *") float[] value) {
+    public static void glClearBufferfv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat const *") float[] value) {
         GL30C.glClearBufferfv(buffer, drawbuffer, value);
     }
 

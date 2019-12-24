@@ -83,7 +83,7 @@ val GL30C = "GL30C".nativeClassGL("GL30C") {
 
         GLenum("buffer", "the buffer to clear", "#COLOR #STENCIL"),
         GLint("drawbuffer", "the draw buffer to clear"),
-        Check(1)..GLint.p(
+        Check(1)..GLint.const.p(
             "value",
             """
             for color buffers, a pointer to a four-element vector specifying R, G, B and A values to clear the buffer to. For stencil buffers, a pointer to a
@@ -98,7 +98,7 @@ val GL30C = "GL30C".nativeClassGL("GL30C") {
 
         GLenum("buffer", "the buffer to clear", "#COLOR"),
         GLint("drawbuffer", "the draw buffer to clear"),
-        Check(4)..GLint.p("value", "a pointer to a four-element vector specifying R, G, B and A values to clear the buffer to")
+        Check(4)..GLint.const.p("value", "a pointer to a four-element vector specifying R, G, B and A values to clear the buffer to")
     )
 
     void(
@@ -107,7 +107,7 @@ val GL30C = "GL30C".nativeClassGL("GL30C") {
 
         GLenum("buffer", "the buffer to clear", "#COLOR #DEPTH"),
         GLint("drawbuffer", "the draw buffer to clear"),
-        Check(1)..GLfloat.p(
+        Check(1)..GLfloat.const.p(
             "value",
             """
             for color buffers, a pointer to a four-element vector specifying R, G, B and A values to clear the buffer to. For depth buffers, a pointer to a

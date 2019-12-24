@@ -3728,6 +3728,18 @@ public final class GLCapabilities {
     public final boolean GL_INTEL_map_texture;
     /** When true, {@link INTELPerformanceQuery} is supported. */
     public final boolean GL_INTEL_performance_query;
+    /**
+     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/INTEL/INTEL_shader_integer_functions2.txt">INTEL_shader_integer_functions2</a> extension is supported.
+     * 
+     * <p>OpenCL and other GPU programming environments provides a number of useful functions operating on integer data. Many of these functions are supported by
+     * specialized instructions various GPUs. Correct GLSL implementations for some of these functions are non-trivial. Recognizing open-coded versions of
+     * these functions is often impractical. As a result, potential performance improvements go unrealized.</p>
+     * 
+     * <p>This extension makes available a number of functions that have specialized instruction support on Intel GPUs.</p>
+     * 
+     * <p>Requires GLSL 1.30 or EXT_gpu_shader4.</p>
+     */
+    public final boolean GL_INTEL_shader_integer_functions2;
     /** When true, {@link KHRBlendEquationAdvanced} is supported. */
     public final boolean GL_KHR_blend_equation_advanced;
     /** When true, {@link KHRBlendEquationAdvancedCoherent} is supported. */
@@ -6719,6 +6731,7 @@ public final class GLCapabilities {
         GL_INTEL_framebuffer_CMAA = ext.contains("GL_INTEL_framebuffer_CMAA") && checkExtension("GL_INTEL_framebuffer_CMAA", INTELFramebufferCMAA.isAvailable(this));
         GL_INTEL_map_texture = ext.contains("GL_INTEL_map_texture") && checkExtension("GL_INTEL_map_texture", INTELMapTexture.isAvailable(this));
         GL_INTEL_performance_query = ext.contains("GL_INTEL_performance_query") && checkExtension("GL_INTEL_performance_query", INTELPerformanceQuery.isAvailable(this));
+        GL_INTEL_shader_integer_functions2 = ext.contains("GL_INTEL_shader_integer_functions2");
         GL_KHR_blend_equation_advanced = ext.contains("GL_KHR_blend_equation_advanced") && checkExtension("GL_KHR_blend_equation_advanced", KHRBlendEquationAdvanced.isAvailable(this));
         GL_KHR_blend_equation_advanced_coherent = ext.contains("GL_KHR_blend_equation_advanced_coherent");
         GL_KHR_context_flush_control = ext.contains("GL_KHR_context_flush_control");

@@ -1576,7 +1576,7 @@ public class GL45C extends GL44C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearFramebuffer">Reference Page</a>
      */
-    public static void glClearNamedFramebufferiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint *") IntBuffer value) {
+    public static void glClearNamedFramebufferiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint const *") IntBuffer value) {
         if (CHECKS) {
             check(value, 1);
         }
@@ -1598,7 +1598,7 @@ public class GL45C extends GL44C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearFramebuffer">Reference Page</a>
      */
-    public static void glClearNamedFramebufferuiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint *") IntBuffer value) {
+    public static void glClearNamedFramebufferuiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint const *") IntBuffer value) {
         if (CHECKS) {
             check(value, 4);
         }
@@ -1621,7 +1621,7 @@ public class GL45C extends GL44C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearFramebuffer">Reference Page</a>
      */
-    public static void glClearNamedFramebufferfv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat *") FloatBuffer value) {
+    public static void glClearNamedFramebufferfv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat const *") FloatBuffer value) {
         if (CHECKS) {
             check(value, 1);
         }
@@ -4827,7 +4827,7 @@ public class GL45C extends GL44C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearFramebuffer">Reference Page</a>
      */
-    public static void glClearNamedFramebufferiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint *") int[] value) {
+    public static void glClearNamedFramebufferiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint const *") int[] value) {
         long __functionAddress = GL.getICD().glClearNamedFramebufferiv;
         if (CHECKS) {
             check(__functionAddress);
@@ -4841,7 +4841,7 @@ public class GL45C extends GL44C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearFramebuffer">Reference Page</a>
      */
-    public static void glClearNamedFramebufferuiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint *") int[] value) {
+    public static void glClearNamedFramebufferuiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint const *") int[] value) {
         long __functionAddress = GL.getICD().glClearNamedFramebufferuiv;
         if (CHECKS) {
             check(__functionAddress);
@@ -4855,7 +4855,7 @@ public class GL45C extends GL44C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearFramebuffer">Reference Page</a>
      */
-    public static void glClearNamedFramebufferfv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat *") float[] value) {
+    public static void glClearNamedFramebufferfv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GL.getICD().glClearNamedFramebufferfv;
         if (CHECKS) {
             check(__functionAddress);

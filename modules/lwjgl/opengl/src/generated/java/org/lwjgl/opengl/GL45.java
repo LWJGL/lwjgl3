@@ -1566,7 +1566,7 @@ public class GL45 extends GL44 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearFramebuffer">Reference Page</a>
      */
-    public static void glClearNamedFramebufferiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint *") IntBuffer value) {
+    public static void glClearNamedFramebufferiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint const *") IntBuffer value) {
         GL45C.glClearNamedFramebufferiv(framebuffer, buffer, drawbuffer, value);
     }
 
@@ -1587,7 +1587,7 @@ public class GL45 extends GL44 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearFramebuffer">Reference Page</a>
      */
-    public static void glClearNamedFramebufferuiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint *") IntBuffer value) {
+    public static void glClearNamedFramebufferuiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint const *") IntBuffer value) {
         GL45C.glClearNamedFramebufferuiv(framebuffer, buffer, drawbuffer, value);
     }
 
@@ -1609,7 +1609,7 @@ public class GL45 extends GL44 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearFramebuffer">Reference Page</a>
      */
-    public static void glClearNamedFramebufferfv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat *") FloatBuffer value) {
+    public static void glClearNamedFramebufferfv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat const *") FloatBuffer value) {
         GL45C.glClearNamedFramebufferfv(framebuffer, buffer, drawbuffer, value);
     }
 
@@ -5048,7 +5048,7 @@ public class GL45 extends GL44 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearFramebuffer">Reference Page</a>
      */
-    public static void glClearNamedFramebufferiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint *") int[] value) {
+    public static void glClearNamedFramebufferiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint const *") int[] value) {
         GL45C.glClearNamedFramebufferiv(framebuffer, buffer, drawbuffer, value);
     }
 
@@ -5057,7 +5057,7 @@ public class GL45 extends GL44 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearFramebuffer">Reference Page</a>
      */
-    public static void glClearNamedFramebufferuiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint *") int[] value) {
+    public static void glClearNamedFramebufferuiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint const *") int[] value) {
         GL45C.glClearNamedFramebufferuiv(framebuffer, buffer, drawbuffer, value);
     }
 
@@ -5066,7 +5066,7 @@ public class GL45 extends GL44 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearFramebuffer">Reference Page</a>
      */
-    public static void glClearNamedFramebufferfv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat *") float[] value) {
+    public static void glClearNamedFramebufferfv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat const *") float[] value) {
         GL45C.glClearNamedFramebufferfv(framebuffer, buffer, drawbuffer, value);
     }
 

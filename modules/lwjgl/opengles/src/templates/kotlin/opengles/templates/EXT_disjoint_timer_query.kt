@@ -105,4 +105,12 @@ val EXT_disjoint_timer_query = "EXTDisjointTimerQuery".nativeClassGLES("EXT_disj
         GLenum("pname", ""),
         ReturnParam..Check(1)..GLuint64.p("params", "")
     )
+
+    IgnoreMissing..void(
+        "GetInteger64vEXT",
+        "",
+
+        GLenum("pname", ""),
+        ReturnParam..Check(1)..GLint64.p("data", "")
+    )
 }
