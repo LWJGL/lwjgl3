@@ -218,7 +218,7 @@ static parsl_position parsl_mul(parsl_position v, float s) {
 #define pa___needgrow(a, n) ((a) == 0 || pa___n(a) + ((int) n) >= pa___m(a))
 #define pa___maybegrow(a, n) (pa___needgrow(a, (n)) ? pa___grow(a, n) : 0)
 #define pa___grow(a, n) (*((void**)& (a)) = pa___growf((void*) (a), (n), \
-        sizeof(*(a))))
+    sizeof(*(a))))
 
 // ptr[-2] is capacity, ptr[-1] is size.
 static void* pa___growf(void* arr, int increment, int itemsize)
@@ -334,8 +334,9 @@ parsl_mesh* parsl_mesh_from_lines(parsl_context* context,
         float dx = src_position[1].x - src_position[0].x;
         float dy = src_position[1].y - src_position[0].y;
         float segment_length = sqrtf(dx * dx + dy * dy);
-        const float nx = -dy / segment_length;
-        const float ny = dx / segment_length;
+        float invlen = segment_length ? 1.0f / segment_length : 0.0f;
+        const float nx = -dy * invlen;
+        const float ny = dx * invlen;
 
         const Position first_src_position = src_position[0];
         const Position last_src_position = src_position[spine_length - 1];
@@ -347,8 +348,9 @@ parsl_mesh* parsl_mesh_from_lines(parsl_context* context,
             const float dx = src_position[0].x - last_src_position.x;
             const float dy = src_position[0].y - last_src_position.y;
             const float segment_length = sqrtf(dx * dx + dy * dy);
-            const float pnx = -dy / segment_length;
-            const float pny = dx / segment_length;
+            float invlen = segment_length ? 1.0f / segment_length : 0.0f;
+            const float pnx = -dy * invlen;
+            const float pny = dx * invlen;
 
             // NOTE: sin(pi / 2 - acos(X) / 2) == sqrt(1 + X) / sqrt(2)
             float extent = 0.5 * thickness;
@@ -362,7 +364,8 @@ parsl_mesh* parsl_mesh_from_lines(parsl_context* context,
 
             ex = pnx + nx;
             ey = pny + ny;
-            const float invlen = 1.0f / sqrtf(ex * ex + ey * ey);
+            const float len = sqrtf(ex * ex + ey * ey);
+            invlen = len == 0.0 ? 0.0 : (1.0f / len);
             ex *= invlen * extent;
             ey *= invlen * extent;
         }
@@ -403,8 +406,9 @@ parsl_mesh* parsl_mesh_from_lines(parsl_context* context,
             const float dx = src_position[1].x - src_position[0].x;
             const float dy = src_position[1].y - src_position[0].y;
             const float segment_length = sqrtf(dx * dx + dy * dy);
-            const float nx = -dy / segment_length;
-            const float ny = dx / segment_length;
+            float invlen = segment_length ? 1.0f / segment_length : 0.0f;
+            const float nx = -dy * invlen;
+            const float ny = dx * invlen;
 
             // NOTE: sin(pi / 2 - acos(X) / 2) == sqrt(1 + X) / sqrt(2)
             float extent = 0.5 * thickness;
@@ -418,7 +422,8 @@ parsl_mesh* parsl_mesh_from_lines(parsl_context* context,
 
             float ex = pnx + nx;
             float ey = pny + ny;
-            const float invlen = 1.0f / sqrtf(ex * ex + ey * ey);
+            const float len = sqrtf(ex * ex + ey * ey);
+            invlen = len == 0.0 ? 0.0 : (1.0f / len);
             ex *= invlen * extent;
             ey *= invlen * extent;
 
@@ -475,8 +480,9 @@ parsl_mesh* parsl_mesh_from_lines(parsl_context* context,
             const float dx = first_src_position.x - src_position[0].x;
             const float dy = first_src_position.y - src_position[0].y;
             segment_length = sqrtf(dx * dx + dy * dy);
-            const float nx = -dy / segment_length;
-            const float ny = dx / segment_length;
+            float invlen = segment_length ? 1.0f / segment_length : 0.0f;
+            const float nx = -dy * invlen;
+            const float ny = dx * invlen;
 
             // NOTE: sin(pi / 2 - acos(X) / 2) == sqrt(1 + X) / sqrt(2)
             float extent = 0.5 * thickness;
@@ -490,7 +496,8 @@ parsl_mesh* parsl_mesh_from_lines(parsl_context* context,
 
             ex = pnx + nx;
             ey = pny + ny;
-            const float invlen = 1.0f / sqrtf(ex * ex + ey * ey);
+            const float len = sqrtf(ex * ex + ey * ey);
+            invlen = len == 0.0 ? 0.0 : (1.0f / len);
             ex *= invlen * extent;
             ey *= invlen * extent;
         }
@@ -1068,9 +1075,9 @@ static parsl_position par__sample_annulus(float radius, parsl_position center,
 }
 
 #define GRIDF(vec) \
-    grid[(int) (vec.x * invcell) + ncols * (int) (vec.y * invcell)]
+    grid [(int) (vec.x * invcell) + ncols * (int) (vec.y * invcell)]
 
-#define GRIDI(vec) grid[(int) vec.y * ncols + (int) vec.x]
+#define GRIDI(vec) grid [(int) vec.y * ncols + (int) vec.x]
 
 static parsl_position* par__generate_pts(float width, float height,
     float radius, int seed, parsl_position* result) {

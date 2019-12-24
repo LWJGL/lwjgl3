@@ -326,4 +326,34 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
 
         Input..par_shapes_mesh.p("mesh", "the mesh")
     )
+
+    void(
+        "set_epsilon_welded_normals",
+        "",
+
+        float("epsilon", "")
+    )
+
+    void(
+        "set_epsilon_degenerate_sphere",
+        "",
+
+        float("epsilon", "")
+    )
+
+    void(
+        "_compute_welded_normals",
+        "",
+
+        par_shapes_mesh.p("m", "")
+    )
+
+    void(
+        "_connect",
+        "",
+
+        par_shapes_mesh.p("scene", ""),
+        par_shapes_mesh.p("cylinder", ""),
+        int("slices", "")
+    )
 }

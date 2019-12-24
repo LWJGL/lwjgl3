@@ -201,6 +201,29 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_par_ParShapes_npar_1shapes_1compute_1
     par_shapes_compute_normals(mesh);
 }
 
+JNIEXPORT void JNICALL Java_org_lwjgl_util_par_ParShapes_par_1shapes_1set_1epsilon_1welded_1normals(JNIEnv *__env, jclass clazz, jfloat epsilon) {
+    UNUSED_PARAMS(__env, clazz)
+    par_shapes_set_epsilon_welded_normals(epsilon);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_par_ParShapes_par_1shapes_1set_1epsilon_1degenerate_1sphere(JNIEnv *__env, jclass clazz, jfloat epsilon) {
+    UNUSED_PARAMS(__env, clazz)
+    par_shapes_set_epsilon_degenerate_sphere(epsilon);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_par_ParShapes_npar_1shapes_1_1compute_1welded_1normals(JNIEnv *__env, jclass clazz, jlong mAddress) {
+    par_shapes_mesh *m = (par_shapes_mesh *)(intptr_t)mAddress;
+    UNUSED_PARAMS(__env, clazz)
+    par_shapes__compute_welded_normals(m);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_par_ParShapes_npar_1shapes_1_1connect(JNIEnv *__env, jclass clazz, jlong sceneAddress, jlong cylinderAddress, jint slices) {
+    par_shapes_mesh *scene = (par_shapes_mesh *)(intptr_t)sceneAddress;
+    par_shapes_mesh *cylinder = (par_shapes_mesh *)(intptr_t)cylinderAddress;
+    UNUSED_PARAMS(__env, clazz)
+    par_shapes__connect(scene, cylinder, slices);
+}
+
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_par_ParShapes_npar_1shapes_1create_1disk__FI_3F_3F(JNIEnv *__env, jclass clazz, jfloat radius, jint slices, jfloatArray centerAddress, jfloatArray normalAddress) {
     jlong __result;
     jfloat *center = (*__env)->GetFloatArrayElements(__env, centerAddress, NULL);

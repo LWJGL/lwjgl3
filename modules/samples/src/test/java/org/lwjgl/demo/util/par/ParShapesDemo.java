@@ -196,6 +196,9 @@ public final class ParShapesDemo {
         ibo = glGenBuffers();
         hudVBO = glGenBuffers();
 
+        par_shapes_set_epsilon_welded_normals(0.00001f);
+        par_shapes_set_epsilon_degenerate_sphere(0.000001f);
+
         updateMesh(GLFW_KEY_1);
 
         int vshader = glCreateShader(GL_VERTEX_SHADER);

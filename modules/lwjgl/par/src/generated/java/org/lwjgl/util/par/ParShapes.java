@@ -631,6 +631,30 @@ public class ParShapes {
         npar_shapes_compute_normals(mesh.address());
     }
 
+    // --- [ par_shapes_set_epsilon_welded_normals ] ---
+
+    public static native void par_shapes_set_epsilon_welded_normals(float epsilon);
+
+    // --- [ par_shapes_set_epsilon_degenerate_sphere ] ---
+
+    public static native void par_shapes_set_epsilon_degenerate_sphere(float epsilon);
+
+    // --- [ par_shapes__compute_welded_normals ] ---
+
+    public static native void npar_shapes__compute_welded_normals(long m);
+
+    public static void par_shapes__compute_welded_normals(@NativeType("par_shapes_mesh *") ParShapesMesh m) {
+        npar_shapes__compute_welded_normals(m.address());
+    }
+
+    // --- [ par_shapes__connect ] ---
+
+    public static native void npar_shapes__connect(long scene, long cylinder, int slices);
+
+    public static void par_shapes__connect(@NativeType("par_shapes_mesh *") ParShapesMesh scene, @NativeType("par_shapes_mesh *") ParShapesMesh cylinder, int slices) {
+        npar_shapes__connect(scene.address(), cylinder.address(), slices);
+    }
+
     /** Array version of: {@link #npar_shapes_create_disk} */
     public static native long npar_shapes_create_disk(float radius, int slices, float[] center, float[] normal);
 

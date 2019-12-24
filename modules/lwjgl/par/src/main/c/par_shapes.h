@@ -172,6 +172,17 @@ par_shapes_mesh* par_shapes_weld(par_shapes_mesh const*, float epsilon,
 // Compute smooth normals by averaging adjacent facet normals.
 void par_shapes_compute_normals(par_shapes_mesh* m);
 
+// Global Config ---------------------------------------------------------------
+
+void par_shapes_set_epsilon_welded_normals(float epsilon);
+void par_shapes_set_epsilon_degenerate_sphere(float epsilon);
+
+// Advanced --------------------------------------------------------------------
+
+void par_shapes__compute_welded_normals(par_shapes_mesh* m);
+void par_shapes__connect(par_shapes_mesh* scene, par_shapes_mesh* cylinder,
+    int slices);
+
 #ifndef PAR_PI
 #define PAR_PI (3.14159265359)
 #define PAR_MIN(a, b) (a > b ? b : a)
@@ -204,6 +215,9 @@ void par_shapes_compute_normals(par_shapes_mesh* m);
 #include <string.h>
 #include <math.h>
 #include <errno.h>
+
+static float par_shapes__epsilon_welded_normals = 0.001;
+static float par_shapes__epsilon_degenerate_sphere = 0.0001;
 
 static void par_shapes__sphere(float const* uv, float* xyz, void*);
 static void par_shapes__hemisphere(float const* uv, float* xyz, void*);
@@ -299,13 +313,14 @@ static float par_shapes__sqrdist3(float const* a, float const* b)
     return dx * dx + dy * dy + dz * dz;
 }
 
-static void par_shapes__compute_welded_normals(par_shapes_mesh* m)
+void par_shapes__compute_welded_normals(par_shapes_mesh* m)
 {
+    const float epsilon = par_shapes__epsilon_welded_normals;
     if (!m->normals) {
         m->normals = PAR_MALLOC(float, m->npoints * 3);
     }
     PAR_SHAPES_T* weldmap = PAR_MALLOC(PAR_SHAPES_T, m->npoints);
-    par_shapes_mesh* welded = par_shapes_weld(m, 0.000001, weldmap); // LWJGL: smaller epsilon
+    par_shapes_mesh* welded = par_shapes_weld(m, epsilon, weldmap);
     par_shapes_compute_normals(welded);
     float* pdst = m->normals;
     for (int i = 0; i < m->npoints; i++, pdst += 3) {
@@ -344,7 +359,7 @@ par_shapes_mesh* par_shapes_create_parametric_sphere(int slices, int stacks)
     }
     par_shapes_mesh* m = par_shapes_create_parametric(par_shapes__sphere,
         slices, stacks, 0);
-    par_shapes_remove_degenerate(m, 0.0000001);
+    par_shapes_remove_degenerate(m, par_shapes__epsilon_degenerate_sphere);
     return m;
 }
 
@@ -355,7 +370,7 @@ par_shapes_mesh* par_shapes_create_hemisphere(int slices, int stacks)
     }
     par_shapes_mesh* m = par_shapes_create_parametric(par_shapes__hemisphere,
         slices, stacks, 0);
-    par_shapes_remove_degenerate(m, 0.0000001);
+    par_shapes_remove_degenerate(m, par_shapes__epsilon_degenerate_sphere);
     return m;
 }
 
@@ -639,6 +654,14 @@ static void par_shapes__trefoil(float const* uv, float* xyz, void* userdata)
     xyz[0] = x + d * (qvn[0] * cos(v) + ww[0] * sin(v));
     xyz[1] = y + d * (qvn[1] * cos(v) + ww[1] * sin(v));
     xyz[2] = z + d * ww[2] * sin(v);
+}
+
+void par_shapes_set_epsilon_welded_normals(float epsilon) {
+    par_shapes__epsilon_welded_normals = epsilon;
+}
+
+void par_shapes_set_epsilon_degenerate_sphere(float epsilon) {
+    par_shapes__epsilon_degenerate_sphere = epsilon;
 }
 
 void par_shapes_merge(par_shapes_mesh* dst, par_shapes_mesh const* src)
@@ -1132,8 +1155,8 @@ static par_shapes_mesh* par_shapes__apply_turtle(par_shapes_mesh* mesh,
     return m;
 }
 
-static void par_shapes__connect(par_shapes_mesh* scene,
-    par_shapes_mesh* cylinder, int slices)
+void par_shapes__connect(par_shapes_mesh* scene, par_shapes_mesh* cylinder,
+    int slices)
 {
     int stacks = 1;
     int npoints = (slices + 1) * (stacks + 1);
@@ -1487,7 +1510,7 @@ par_shapes_mesh* par_shapes_create_subdivided_sphere(int nsubd)
         mesh->triangles[i] = i;
     }
     par_shapes_mesh* tmp = mesh;
-    mesh = par_shapes_weld(mesh, 0.000001, 0); // LWJGL: smaller epsilon
+    mesh = par_shapes_weld(mesh, par_shapes__epsilon_welded_normals, 0);
     par_shapes_free_mesh(tmp);
     par_shapes_compute_normals(mesh);
     return mesh;
@@ -1675,8 +1698,9 @@ static void par_shapes__weld_points(par_shapes_mesh* mesh, int gridsize,
         // Check for colocated points in each nearby bin.
         for (int b = 0; b < nbins; b++) {
             int binindex = nearby[b];
-            PAR_SHAPES_T binvalue = *(bins + binindex);
+            PAR_SHAPES_T binvalue = bins[binindex];
             PAR_SHAPES_T nindex = binvalue - 1;
+            assert(nindex < mesh->npoints);
             while (true) {
 
                 // If this isn't "self" and it's colocated, then weld it!
@@ -1684,12 +1708,7 @@ static void par_shapes__weld_points(par_shapes_mesh* mesh, int gridsize,
                     float const* thatpt = mesh->points + nindex * 3;
                     float dist2 = par_shapes__sqrdist3(thatpt, pt);
                     if (dist2 < epsilon) {
-                        // LWJGL: With greater epsilons, the check below fails and the condensed_map loop below produces garbage
-                        //if (p < nindex ) {
                         weldmap[nindex] = p;
-                        //} else {
-                            //weldmap[p] = weldmap[nindex];
-                        //}
                         nremoved++;
                     }
                 }
@@ -1747,6 +1766,9 @@ static void par_shapes__weld_points(par_shapes_mesh* mesh, int gridsize,
         PAR_SHAPES_T b = weldmap[tsrc[1]];
         PAR_SHAPES_T c = weldmap[tsrc[2]];
         if (a != b && a != c && b != c) {
+            assert(a < mesh->npoints);
+            assert(b < mesh->npoints);
+            assert(c < mesh->npoints);
             *tdst++ = a;
             *tdst++ = b;
             *tdst++ = c;
