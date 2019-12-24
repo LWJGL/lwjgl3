@@ -1,5 +1,5 @@
 /*_________
- /         \ tinyfiledialogs.h v3.3.9 [Apr 14, 2019] zlib licence
+ /         \ tinyfiledialogs.h v3.4.3 [Dec 8, 2019] zlib licence
  |tiny file| Unique header file created [November 9, 2014]
  | dialogs | Copyright (c) 2014 - 2018 Guillaume Vareille http://ysengrin.com
  \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -217,7 +217,7 @@ wchar_t const * tinyfd_inputBoxW(
 	wchar_t const * const aTitle, /* NULL or L"" */
 	wchar_t const * const aMessage, /* NULL or L"" may NOT contain \n nor \t */
 	wchar_t const * const aDefaultInput ); /* L"" , if NULL it's a passwordBox */
-	
+
 /* windows only - utf-16 version */
 wchar_t const * tinyfd_saveFileDialogW(
 	wchar_t const * const aTitle, /* NULL or L"" */
@@ -320,7 +320,5 @@ char const * tinyfd_arrayDialog(
   It can be found at the bottom of the following page:
   http://andrear.altervista.org/home/cdialog.php
 - If dialog is missing, it will switch to basic console input.
-- You can query the type of dialog that will be use.
-- MinGW needs gcc >= v4.9 otherwise some headers are incomplete.
-- The Hello World (and a bit more) is on the sourceforge site:
+- You can query the type of dialog that will be use (pass "tinyfd_query" as aTitle)
 */
