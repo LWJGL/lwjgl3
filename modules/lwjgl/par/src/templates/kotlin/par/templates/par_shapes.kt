@@ -345,15 +345,15 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
         "_compute_welded_normals",
         "",
 
-        par_shapes_mesh.p("m", "")
+        Input..par_shapes_mesh.p("m", "")
     )
 
     void(
         "_connect",
         "",
 
-        par_shapes_mesh.p("scene", ""),
-        par_shapes_mesh.p("cylinder", ""),
+        Input..par_shapes_mesh.p("scene", ""),
+        Input..par_shapes_mesh.p("cylinder", ""),
         int("slices", "")
     )
 }
