@@ -94,13 +94,14 @@ val VmaVulkanFunctions = struct(Module.VMA, "VmaVulkanFunctions", skipBuffer = t
     nullable.."PFN_vkGetImageMemoryRequirements2KHR".handle("vkGetImageMemoryRequirements2KHR", "")
     nullable.."PFN_vkBindBufferMemory2KHR".handle("vkBindBufferMemory2KHR", "")
     nullable.."PFN_vkBindImageMemory2KHR".handle("vkBindImageMemory2KHR", "")
+    nullable.."PFN_vkGetPhysicalDeviceMemoryProperties2KHR".handle("vkGetPhysicalDeviceMemoryProperties2KHR", "")
 
     customMethod("""
     /**
      * Helper method that populates this struct with required Vulkan function pointers from the specified Vulkan instance and device.
      *
-     * @param instance         a Vulkan instance
-     * @param device           a Vulkan device
+     * @param instance a Vulkan instance
+     * @param device   a Vulkan device
      */
     public VmaVulkanFunctions set(VkInstance instance, VkDevice device) {
         VKCapabilitiesInstance ic = instance.getCapabilities();
@@ -126,7 +127,8 @@ val VmaVulkanFunctions = struct(Module.VMA, "VmaVulkanFunctions", skipBuffer = t
             .vkGetBufferMemoryRequirements2KHR(dc.vkGetBufferMemoryRequirements2 != NULL ? dc.vkGetBufferMemoryRequirements2 : dc.vkGetBufferMemoryRequirements2KHR)
             .vkGetImageMemoryRequirements2KHR(dc.vkGetImageMemoryRequirements2 != NULL ? dc.vkGetImageMemoryRequirements2 : dc.vkGetImageMemoryRequirements2KHR)
             .vkBindBufferMemory2KHR(dc.vkBindBufferMemory2 != NULL ? dc.vkBindBufferMemory2 : dc.vkBindBufferMemory2KHR)
-            .vkBindImageMemory2KHR(dc.vkBindImageMemory2 != NULL ? dc.vkBindImageMemory2 : dc.vkBindImageMemory2KHR);
+            .vkBindImageMemory2KHR(dc.vkBindImageMemory2 != NULL ? dc.vkBindImageMemory2 : dc.vkBindImageMemory2KHR)
+            .vkGetPhysicalDeviceMemoryProperties2KHR(ic.vkGetPhysicalDeviceMemoryProperties2 != NULL ? ic.vkGetPhysicalDeviceMemoryProperties2 : ic.vkGetPhysicalDeviceMemoryProperties2KHR);
         return this;
     }""")
 }
@@ -217,6 +219,27 @@ val VmaAllocatorCreateInfo = struct(Module.VMA, "VmaAllocatorCreateInfo", skipBu
         macro, creation of the allocator object fails with {@code VK_ERROR_FEATURE_NOT_PRESENT}.
         """
     )
+    nullable..VkInstance(
+        "instance",
+        """
+        Optional handle to Vulkan instance object.
+
+        Optional, can be null. Must be set if #ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT flas is used or if {@code vulkanApiVersion >= VK_MAKE_VERSION(1, 1, 0)}.
+        """
+    )
+    uint32_t(
+        "vulkanApiVersion",
+        """
+        Optional. The highest version of Vulkan that the application is designed to use.
+
+        It must be a value in the format as created by macro {@code VK_MAKE_VERSION} or a constant like: {@code VK_API_VERSION_1_1},
+        {@code VK_API_VERSION_1_0}. The patch version number specified is ignored. Only the major and minor versions are considered. It must be less or equal
+        (preferably equal) to value as passed to {@code vkCreateInstance} as {@code VkApplicationInfo::apiVersion}. Only versions 1.0 and 1.1 are supported by
+        the current implementation.
+    
+        Leaving it initialized to zero is equivalent to {@code VK_API_VERSION_1_0}.
+        """
+    )
 }
 
 val VmaStatInfo = struct(Module.VMA, "VmaStatInfo", mutable = false) {
@@ -245,6 +268,46 @@ val VmaStats = struct(Module.VMA, "VmaStats", mutable = false) {
     VmaStatInfo("memoryType", "")[VK_MAX_MEMORY_TYPES]
     VmaStatInfo("memoryHeap", "")[VK_MAX_MEMORY_HEAPS]
     VmaStatInfo("total", "")
+}
+
+val VmaBudget = struct(Module.VMA, "VmaBudget", mutable = false) {
+    documentation = "Statistics of current memory usage and available budget, in bytes, for specific memory heap."
+
+    VkDeviceSize("blockBytes", "Sum size of all {@code VkDeviceMemory} blocks allocated from particular heap, in bytes.")
+    VkDeviceSize(
+        "allocationBytes",
+        """
+        Sum size of all allocations created in particular heap, in bytes.
+
+        Usually less or equal than {@code blockBytes}. Difference {@code blockBytes - allocationBytes} is the amount of memory allocated but unused - available
+        for new allocations or wasted due to fragmentation.
+
+        It might be greater than {@code blockBytes} if there are some allocations in lost state, as they account to this value as well.
+        """
+    )
+    VkDeviceSize(
+        "usage",
+        """
+        Estimated current memory usage of the program, in bytes.
+
+        Fetched from system using {@code VK_EXT_memory_budget} extension if enabled.
+
+        It might be different than {@code blockBytes} (usually higher) due to additional implicit objects also occupying the memory, like swapchain, pipelines,
+        descriptor heaps, command buffers, or {@code VkDeviceMemory} blocks allocated outside of this library, if any.
+        """
+    )
+    VkDeviceSize(
+        "budget",
+        """
+        Estimated amount of memory available to the program, in bytes.
+
+        Fetched from system using {@code VK_EXT_memory_budget} extension if enabled.
+
+        It might be different (most probably smaller) than {@code VkMemoryHeap::size[heapIndex]} due to factors external to the program, like other programs
+        also consuming system resources. Difference {@code budget - usage} is the amount of additional memory that can probably be allocated without problems.
+        Exceeding the budget may result in various problems.
+        """
+    )
 }
 
 val VmaAllocationCreateInfo = struct(Module.VMA, "VmaAllocationCreateInfo") {

@@ -30,7 +30,7 @@ import org.lwjgl.vulkan.*;
  * 
  * <ol>
  * <li>Initialize Vulkan to have {@code VkPhysicalDevice} and {@code VkDevice} object.</li>
- * <li>Fill VmaAllocatorCreateInfo structure and create `VmaAllocator` object by calling vmaCreateAllocator().</li>
+ * <li>Fill {@link VmaAllocatorCreateInfo} structure and create {@code VmaAllocator} object by calling {@link #vmaCreateAllocator CreateAllocator}.</li>
  * </ol>
  * 
  * <pre><code>
@@ -257,11 +257,11 @@ import org.lwjgl.vulkan.*;
  * <li>Keeping many large memory blocks mapped may impact performance or stability of some debugging tools.</li>
  * </ul>
  * 
- * <h4>Cache control</h4>
+ * <h4>Cache flush and invalidate</h4>
  * 
  * <p>Memory in Vulkan doesn't need to be unmapped before using it on GPU, but unless a memory types has {@code VK_MEMORY_PROPERTY_HOST_COHERENT_BIT} flag
- * set, you need to manually invalidate cache before reading of mapped pointer using function {@code vkInvalidateMappedMemoryRanges()} and flush cache
- * after writing to mapped pointer. Vulkan provides following functions for this purpose {@code vkFlushMappedMemoryRangs()},
+ * set, you need to manually <b>invalidate</b> cache before reading of mapped pointer and <b>flush</b> cache after writing to mapped pointer. Map/unmap
+ * operations don't do that automatically. Vulkan provides following functions for this purpose {@code vkFlushMappedMemoryRangs()},
  * {@code vkInvalidateMappedMemoryRanges()}, but this library provides more convenient functions that refer to given allocation object:
  * {@link #vmaFlushAllocation FlushAllocation}, {@link #vmaInvalidateAllocation InvalidateAllocation}.</p>
  * 
@@ -271,7 +271,7 @@ import org.lwjgl.vulkan.*;
  * 
  * <p>Please note that memory allocated with {@link #VMA_MEMORY_USAGE_CPU_ONLY MEMORY_USAGE_CPU_ONLY} is guaranteed to be {@code HOST_COHERENT}.</p>
  * 
- * <p>Also, Windows drivers from all 3 PC GPU vendors (AMD, Intel, NVIDIA) currently provide {@code HOST_COHERENT} flag on all memory types that are
+ * <p>Also, Windows drivers from all 3 <b>PC</b> GPU vendors (AMD, Intel, NVIDIA) currently provide {@code HOST_COHERENT} flag on all memory types that are
  * {@code HOST_VISIBLE}, so on this platform you may not need to bother.</p>
  * 
  * <h4>Finding out if memory is mappable</h4>
@@ -343,6 +343,62 @@ import org.lwjgl.vulkan.*;
  *     // Allocation ended up in non-mappable memory.
  *     // You need to create CPU-side buffer in VMA_MEMORY_USAGE_CPU_ONLY and make a transfer.
  * }</code></pre>
+ * 
+ * <h3>Staying within budget</h3>
+ * 
+ * <p>When developing a graphics-intensive game or program, it is important to avoid allocating more GPU memory than it's physically available. When the
+ * memory is over-committed, various bad things can happen, depending on the specific GPU, graphics driver, and operating system:</p>
+ * 
+ * <ul>
+ * <li>It may just work without any problems.</li>
+ * <li>The application may slow down because some memory blocks are moved to system RAM and the GPU has to access them through PCI Express bus.</li>
+ * <li>A new allocation may take very long time to complete, even few seconds, and possibly freeze entire system.</li>
+ * <li>The new allocation may fail with {@code VK_ERROR_OUT_OF_DEVICE_MEMORY}.</li>
+ * <li>It may even result in GPU crash (TDR), observed as {@code VK_ERROR_DEVICE_LOST} returned somewhere later.</li>
+ * </ul>
+ * 
+ * <h4>Querying for budget</h4>
+ * 
+ * <p>To query for current memory usage and available budget, use function {@link #vmaGetBudget GetBudget}. Returned structure {@link VmaBudget} contains quantities expressed in
+ * bytes, per Vulkan memory heap.</p>
+ * 
+ * <p>Please note that this function returns different information and works faster than {@link #vmaCalculateStats CalculateStats}. {@code vmaGetBudget()} can be called every frame
+ * or even before every allocation, while {@code vmaCalculateStats()} is intended to be used rarely, only to obtain statistical information, e.g. for
+ * debugging purposes.</p>
+ * 
+ * <p>It is recommended to use <b>VK_EXT_memory_budget</b> device extension to obtain information about the budget from Vulkan device. VMA is able to use
+ * this extension automatically. When not enabled, the allocator behaves same way, but then it estimates current usage and available budget based on its
+ * internal information and Vulkan memory heap sizes, which may be less precise. In order to use this extension:</p>
+ * 
+ * <ol>
+ * <li>Make sure extensions {@code VK_EXT_memory_budget} and {@code VK_KHR_get_physical_device_properties2} required by it are available and enable them.
+ * Please note that the first is a device extension and the second is instance extension!</li>
+ * <li>Use flag {@link #VMA_ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT} when creating {@link VmaAllocator} object.</li>
+ * <li>Make sure to call {@link #vmaSetCurrentFrameIndex SetCurrentFrameIndex} every frame. Budget is queried from Vulkan inside of it to avoid overhead of querying it with every
+ * allocation.</li>
+ * </ol>
+ * 
+ * <h4>Controlling memory usage</h4>
+ * 
+ * <p>There are many ways in which you can try to stay within the budget.</p>
+ * 
+ * <p>First, when making new allocation requires allocating a new memory block, the library tries not to exceed the budget automatically. If a block with
+ * default recommended size (e.g. 256 MB) would go over budget, a smaller block is allocated, possibly even dedicated memory for just this resource.</p>
+ * 
+ * <p>If the size of the requested resource plus current memory usage is more than the budget, by default the library still tries to create it, leaving it to
+ * the Vulkan implementation whether the allocation succeeds or fails. You can change this behavior by using {@link #VMA_ALLOCATION_CREATE_WITHIN_BUDGET_BIT ALLOCATION_CREATE_WITHIN_BUDGET_BIT} flag.
+ * With it, the allocation is not made if it would exceed the budget or if the budget is already exceeded. Some other allocations become lost instead to
+ * make room for it, if the mechanism of lost allocations is used. If that is not possible, the allocation fails with
+ * {@code VK_ERROR_OUT_OF_DEVICE_MEMORY}. Example usage pattern may be to pass the {@code VMA_ALLOCATION_CREATE_WITHIN_BUDGET_BIT} flag when creating
+ * resources that are not essential for the application (e.g. the texture of a specific object) and not to pass it when creating critically important
+ * resources (e.g. render targets).</p>
+ * 
+ * <p>Finally, you can also use {@link #VMA_ALLOCATION_CREATE_NEVER_ALLOCATE_BIT ALLOCATION_CREATE_NEVER_ALLOCATE_BIT} flag to make sure a new allocation is created only when it fits inside one of the
+ * existing memory blocks. If it would require to allocate a new block, if fails instead with {@code VK_ERROR_OUT_OF_DEVICE_MEMORY}. This also ensures
+ * that the function call is very fast because it never goes to Vulkan to obtain a new block.</p>
+ * 
+ * <p>Please note that creating custom memory pools with {@link VmaPoolCreateInfo}{@code ::minBlockCount} set to more than 0 will try to allocate memory blocks
+ * without checking whether they fit within budget.</p>
  * 
  * <h3>Custom memory pools</h3>
  * 
@@ -1295,6 +1351,9 @@ public class Vma {
      * <li>{@link #VMA_ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT} - 
      * Enables usage of {@code VK_KHR_dedicated_allocation} extension.
      * 
+     * <p>The flag works only if {@link VmaAllocatorCreateInfo}{@code ::vulkanApiVersion == VK_API_VERSION_1_0}. When it's {@code VK_API_VERSION_1_1}, the flag is
+     * ignored because the extension has been promoted to Vulkan 1.1.</p>
+     * 
      * <p>Using this extenion will automatically allocate dedicated blocks of memory for some buffers and images instead of suballocating place for them out
      * of bigger memory blocks (as if you explicitly used {@link #VMA_ALLOCATION_CREATE_DEDICATED_MEMORY_BIT ALLOCATION_CREATE_DEDICATED_MEMORY_BIT} flag) when it is recommended by the driver. It may
      * improve performance on some GPUs.</p>
@@ -1303,8 +1362,8 @@ public class Vma {
      * {@link VmaAllocatorCreateInfo}{@code ::device}, and you want them to be used internally by this library:</p>
      * 
      * <ul>
-     * <li>{@code VK_KHR_get_memory_requirements2}</li>
-     * <li>{@code VK_KHR_dedicated_allocation}</li>
+     * <li>{@code VK_KHR_get_memory_requirements2} (device extension)</li>
+     * <li>{@code VK_KHR_dedicated_allocation} (device extension)</li>
      * </ul>
      * 
      * <p>When this flag is set, you can experience following warnings reported by Vulkan validation layer. You can ignore them.</p>
@@ -1315,18 +1374,32 @@ public class Vma {
      * <li>{@link #VMA_ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT} - 
      * Enables usage of {@code VK_KHR_bind_memory2} extension.
      * 
+     * <p>The flag works only if {@link VmaAllocatorCreateInfo}{@code ::vulkanApiVersion == VK_API_VERSION_1_0}. When it's {@code VK_API_VERSION_1_1}, the flag is
+     * ignored because the extension has been promoted to Vulkan 1.1.</p>
+     * 
      * <p>You may set this flag only if you found out that this device extension is supported, you enabled it while creating Vulkan device passed as
      * {@link VmaAllocatorCreateInfo}{@code ::device}, and you want it to be used internally by this library.</p>
      * 
      * <p>The extension provides functions {@code vkBindBufferMemory2KHR} and {@code vkBindImageMemory2KHR}, which allow to pass a chain of {@code pNext}
      * structures while binding. This flag is required if you use {@code pNext} parameter in {@link #vmaBindBufferMemory2 BindBufferMemory2} or {@link #vmaBindImageMemory2 BindImageMemory2}.</p>
      * </li>
+     * <li>{@link #VMA_ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT} - 
+     * Enables usage of {@code VK_EXT_memory_budget} extension.
+     * 
+     * <p>You may set this flag only if you found out that this device extension is supported, you enabled it while creating Vulkan device passed as
+     * {@link VmaAllocatorCreateInfo}{@code ::device}, and you want it to be used internally by this library, along with another instance extension
+     * {@code VK_KHR_get_physical_device_properties2}, which is required by it (or Vulkan 1.1, where this extension is promoted).</p>
+     * 
+     * <p>The extension provides query for current memory usage and budget, which will probably be more accurate than an estimation used by the library
+     * otherwise.</p>
+     * </li>
      * </ul>
      */
     public static final int
         VMA_ALLOCATOR_CREATE_EXTERNALLY_SYNCHRONIZED_BIT  = 0x1,
         VMA_ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT = 0x2,
-        VMA_ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT         = 0x4;
+        VMA_ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT         = 0x4,
+        VMA_ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT        = 0x8;
 
     /**
      * {@code VmaMemoryUsage}
@@ -1385,14 +1458,32 @@ public class Vma {
      * detection.</li>
      * </ul>
      * </li>
+     * <li>{@link #VMA_MEMORY_USAGE_CPU_COPY MEMORY_USAGE_CPU_COPY} - 
+     * CPU memory - memory that is preferably not {@code DEVICE_LOCAL}, but also not guaranteed to be {@code HOST_VISIBLE}.
+     * 
+     * <p>Usage: Staging copy of resources moved from GPU memory to CPU memory as part of custom paging/residency mechanism, to be moved back to GPU memory
+     * when needed.</p>
+     * </li>
+     * <li>{@link #VMA_MEMORY_USAGE_GPU_LAZILY_ALLOCATED MEMORY_USAGE_GPU_LAZILY_ALLOCATED} - 
+     * Lazily allocated GPU memory having {@code VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT}.
+     * 
+     * <p>Exists mostly on mobile platforms. Using it on desktop PC or other GPUs with no such memory type present will fail the allocation.</p>
+     * 
+     * <p>Usage: Memory for transient attachment images (color attachments, depth attachments etc.), created with
+     * {@code VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT}.</p>
+     * 
+     * <p>Allocations with this usage are always created as dedicated - it implies {@link #VMA_ALLOCATION_CREATE_DEDICATED_MEMORY_BIT ALLOCATION_CREATE_DEDICATED_MEMORY_BIT}.</p>
+     * </li>
      * </ul>
      */
     public static final int
-        VMA_MEMORY_USAGE_UNKNOWN    = 0,
-        VMA_MEMORY_USAGE_GPU_ONLY   = 1,
-        VMA_MEMORY_USAGE_CPU_ONLY   = 2,
-        VMA_MEMORY_USAGE_CPU_TO_GPU = 3,
-        VMA_MEMORY_USAGE_GPU_TO_CPU = 4;
+        VMA_MEMORY_USAGE_UNKNOWN              = 0,
+        VMA_MEMORY_USAGE_GPU_ONLY             = 1,
+        VMA_MEMORY_USAGE_CPU_ONLY             = 2,
+        VMA_MEMORY_USAGE_CPU_TO_GPU           = 3,
+        VMA_MEMORY_USAGE_GPU_TO_CPU           = 4,
+        VMA_MEMORY_USAGE_CPU_COPY             = 5,
+        VMA_MEMORY_USAGE_GPU_LAZILY_ALLOCATED = 6;
 
     /**
      * Flags to be passed as {@link VmaAllocationCreateInfo}{@code ::flags}. ({@code VmaAllocationCreateFlagBits})
@@ -1458,6 +1549,11 @@ public class Vma {
      * <p>It is useful when you want to bind yourself to do some more advanced binding, e.g. using some extensions. The flag is meaningful only with
      * functions that bind by default: {@link #vmaCreateBuffer CreateBuffer}, {@link #vmaCreateImage CreateImage}. Otherwise it is ignored.</p>
      * </li>
+     * <li>{@link #VMA_ALLOCATION_CREATE_WITHIN_BUDGET_BIT ALLOCATION_CREATE_WITHIN_BUDGET_BIT} - 
+     * Create allocation only if additional device memory required for it, if any, won't exceed memory budget.
+     * 
+     * <p>Otherwise return {@code VK_ERROR_OUT_OF_DEVICE_MEMORY}.</p>
+     * </li>
      * <li>{@link #VMA_ALLOCATION_CREATE_STRATEGY_BEST_FIT_BIT ALLOCATION_CREATE_STRATEGY_BEST_FIT_BIT} - Allocation strategy that chooses smallest possible free range for the allocation.</li>
      * <li>{@link #VMA_ALLOCATION_CREATE_STRATEGY_WORST_FIT_BIT ALLOCATION_CREATE_STRATEGY_WORST_FIT_BIT} - Allocation strategy that chooses biggest possible free range for the allocation.</li>
      * <li>{@link #VMA_ALLOCATION_CREATE_STRATEGY_FIRST_FIT_BIT ALLOCATION_CREATE_STRATEGY_FIRST_FIT_BIT} - 
@@ -1480,6 +1576,7 @@ public class Vma {
         VMA_ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT      = 0x00000020,
         VMA_ALLOCATION_CREATE_UPPER_ADDRESS_BIT              = 0x00000040,
         VMA_ALLOCATION_CREATE_DONT_BIND_BIT                  = 0x00000080,
+        VMA_ALLOCATION_CREATE_WITHIN_BUDGET_BIT              = 0x00000100,
         VMA_ALLOCATION_CREATE_STRATEGY_BEST_FIT_BIT          = 0x00010000,
         VMA_ALLOCATION_CREATE_STRATEGY_WORST_FIT_BIT         = 0x00020000,
         VMA_ALLOCATION_CREATE_STRATEGY_FIRST_FIT_BIT         = 0x00040000,
@@ -1647,12 +1744,41 @@ public class Vma {
     /** Unsafe version of: {@link #vmaCalculateStats CalculateStats} */
     public static native void nvmaCalculateStats(long allocator, long pStats);
 
-    /** Retrieves statistics from current state of the Allocator. */
+    /**
+     * Retrieves statistics from current state of the Allocator.
+     * 
+     * <p>This function is called "calculate" not "get" because it has to traverse all internal data structures, so it may be quite slow. For faster but more
+     * brief statistics suitable to be called every frame or every allocation, use {@link #vmaGetBudget GetBudget}.</p>
+     * 
+     * <p>Note that when using allocator from multiple threads, returned information may immediately become outdated.</p>
+     */
     public static void vmaCalculateStats(@NativeType("VmaAllocator") long allocator, @NativeType("VmaStats *") VmaStats pStats) {
         if (CHECKS) {
             check(allocator);
         }
         nvmaCalculateStats(allocator, pStats.address());
+    }
+
+    // --- [ vmaGetBudget ] ---
+
+    /** Unsafe version of: {@link #vmaGetBudget GetBudget} */
+    public static native void nvmaGetBudget(long allocator, long pBudget);
+
+    /**
+     * Retrieves information about current memory budget for all memory heaps.
+     * 
+     * <p>This function is called "get" not "calculate" because it is very fast, suitable to be called every frame or every allocation. For more detailed
+     * statistics use {@link #vmaCalculateStats CalculateStats}.</p>
+     * 
+     * <p>Note that when using allocator from multiple threads, returned information may immediately become outdated.</p>
+     *
+     * @param pBudget must point to array with number of elements at least equal to number of memory heaps in physical device used
+     */
+    public static void vmaGetBudget(@NativeType("VmaAllocator") long allocator, @NativeType("VmaBudget *") VmaBudget.Buffer pBudget) {
+        if (CHECKS) {
+            check(allocator);
+        }
+        nvmaGetBudget(allocator, pBudget.address());
     }
 
     // --- [ vmaBuildStatsString ] ---
@@ -1899,6 +2025,67 @@ public class Vma {
             check(pool);
         }
         return nvmaCheckPoolCorruption(allocator, pool);
+    }
+
+    // --- [ vmaGetPoolName ] ---
+
+    /** Unsafe version of: {@link #vmaGetPoolName GetPoolName} */
+    public static native void nvmaGetPoolName(long allocator, long pool, long ppName);
+
+    /**
+     * Retrieves name of a custom pool.
+     * 
+     * <p>After the call {@code ppName} is either null or points to an internally-owned null-terminated string containing name of the pool that was previously
+     * set. The pointer becomes invalid when the pool is destroyed or its name is changed using {@link #vmaSetPoolName SetPoolName}.</p>
+     */
+    public static void vmaGetPoolName(@NativeType("VmaAllocator") long allocator, @NativeType("VmaPool") long pool, @NativeType("char const **") PointerBuffer ppName) {
+        if (CHECKS) {
+            check(allocator);
+            check(pool);
+            check(ppName, 1);
+        }
+        nvmaGetPoolName(allocator, pool, memAddress(ppName));
+    }
+
+    // --- [ vmaSetPoolName ] ---
+
+    /** Unsafe version of: {@link #vmaSetPoolName SetPoolName} */
+    public static native void nvmaSetPoolName(long allocator, long pool, long pName);
+
+    /**
+     * Sets name of a custom pool.
+     * 
+     * <p>{@code pName} can be either null or pointer to a null-terminated string with new name for the pool. Function makes internal copy of the string, so it
+     * can be changed or freed immediately after this call.</p>
+     */
+    public static void vmaSetPoolName(@NativeType("VmaAllocator") long allocator, @NativeType("VmaPool") long pool, @Nullable @NativeType("char const *") ByteBuffer pName) {
+        if (CHECKS) {
+            check(allocator);
+            check(pool);
+            checkNT1Safe(pName);
+        }
+        nvmaSetPoolName(allocator, pool, memAddressSafe(pName));
+    }
+
+    /**
+     * Sets name of a custom pool.
+     * 
+     * <p>{@code pName} can be either null or pointer to a null-terminated string with new name for the pool. Function makes internal copy of the string, so it
+     * can be changed or freed immediately after this call.</p>
+     */
+    public static void vmaSetPoolName(@NativeType("VmaAllocator") long allocator, @NativeType("VmaPool") long pool, @Nullable @NativeType("char const *") CharSequence pName) {
+        if (CHECKS) {
+            check(allocator);
+            check(pool);
+        }
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nASCIISafe(pName, true);
+            long pNameEncoded = pName == null ? NULL : stack.getPointerAddress();
+            nvmaSetPoolName(allocator, pool, pNameEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
     }
 
     // --- [ vmaAllocateMemory ] ---
@@ -2201,6 +2388,9 @@ public class Vma {
      * 
      * <p>This function always fails when called for allocation that was created with {@link #VMA_ALLOCATION_CREATE_CAN_BECOME_LOST_BIT ALLOCATION_CREATE_CAN_BECOME_LOST_BIT} flag. Such allocations cannot be
      * mapped.</p>
+     * 
+     * <p>This function doesn't automatically flush or invalidate caches. If the allocation is made from a memory types that is not {@code HOST_COHERENT}, you
+     * also need to use {@link #vmaInvalidateAllocation InvalidateAllocation} / {@link #vmaFlushAllocation FlushAllocation}, as required by Vulkan specification.</p>
      */
     @NativeType("VkResult")
     public static int vmaMapMemory(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation, @NativeType("void **") PointerBuffer ppData) {
@@ -2221,6 +2411,9 @@ public class Vma {
      * Unmaps memory represented by given allocation, mapped previously using {@link #vmaMapMemory MapMemory}.
      * 
      * <p>For details, see description of {@code vmaMapMemory()}.</p>
+     * 
+     * <p>This function doesn't automatically flush or invalidate caches. If the allocation is made from a memory types that is not {@code HOST_COHERENT}, you
+     * also need to use {@link #vmaInvalidateAllocation InvalidateAllocation} / {@link #vmaFlushAllocation FlushAllocation}, as required by Vulkan specification.</p>
      */
     public static void vmaUnmapMemory(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation) {
         if (CHECKS) {
@@ -2238,7 +2431,8 @@ public class Vma {
     /**
      * Flushes memory of given allocation.
      * 
-     * <p>Calls {@code vkFlushMappedMemoryRanges()} for memory associated with given range of given allocation.</p>
+     * <p>Calls {@code vkFlushMappedMemoryRanges()} for memory associated with given range of given allocation. It needs to be called after writing to a mapped
+     * memory for memory types that are not {@code HOST_COHERENT}. Unmap operation doesn't do that automatically.</p>
      * 
      * <ul>
      * <li>{@code offset} must be relative to the beginning of allocation.</li>
@@ -2267,7 +2461,8 @@ public class Vma {
     /**
      * Invalidates memory of given allocation.
      * 
-     * <p>Calls {@code vkInvalidateMappedMemoryRanges()} for memory associated with given range of given allocation.</p>
+     * <p>Calls {@code vkInvalidateMappedMemoryRanges()} for memory associated with given range of given allocation. It needs to be called before reading from a
+     * mapped memory for memory types that are not {@code HOST_COHERENT}. Map operation doesn't do that automatically.</p>
      * 
      * <ul>
      * <li>{@code offset} must be relative to the beginning of allocation.</li>
@@ -2469,8 +2664,8 @@ public class Vma {
      * 
      * <p>This function is similar to {@link #vmaBindBufferMemory BindBufferMemory}, but it provides additional parameters.</p>
      * 
-     * <p>If {@code pNext} is not null, {@code VmaAllocator} object must have been created with {@link #VMA_ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT} flag. Otherwise the call
-     * fails.</p>
+     * <p>If {@code pNext} is not null, {@code VmaAllocator} object must have been created with {@link #VMA_ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT} flag or with
+     * {@link VmaAllocatorCreateInfo}{@code ::vulkanApiVersion == VK_API_VERSION_1_1}. Otherwise the call fails.</p>
      *
      * @param allocationLocalOffset additional offset to be added while binding, relative to the beginning of the {@code allocatio}n. Normally it should be 0.
      * @param pNext                 a chain of structures to be attached to {@code VkBindBufferMemoryInfoKHR} structure used internally. Normally it should be {@code null}.
@@ -2518,8 +2713,8 @@ public class Vma {
      * 
      * <p>This function is similar to {@link #vmaBindImageMemory BindImageMemory}, but it provides additional parameters.</p>
      * 
-     * <p>If {@code pNext} is not null, {@code VmaAllocator} object must have been created with {@link #VMA_ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT} flag. Otherwise the call
-     * fails.</p>
+     * <p>If {@code pNext} is not null, {@code VmaAllocator} object must have been created with {@link #VMA_ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT} flag or with
+     * {@link VmaAllocatorCreateInfo}{@code ::vulkanApiVersion == VK_API_VERSION_1_1}. Otherwise the call fails.</p>
      *
      * @param allocationLocalOffset additional offset to be added while binding, relative to the beginning of the {@code allocatio}n. Normally it should be 0.
      * @param pNext                 a chain of structures to be attached to {@code VkBindImageMemoryInfoKHR} structure used internally. Normally it should be null.

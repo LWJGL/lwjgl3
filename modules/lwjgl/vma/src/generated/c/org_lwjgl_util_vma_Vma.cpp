@@ -10,8 +10,10 @@ DISABLE_WARNINGS()
 #define VMA_STATIC_VULKAN_FUNCTIONS 0
 #define VMA_SYSTEM_ALIGNED_MALLOC(size, alignment) org_lwjgl_aligned_alloc((alignment), (size))
 #define VMA_SYSTEM_FREE(ptr) org_lwjgl_aligned_free(ptr)
+#define VMA_VULKAN_VERSION 1001000
 #define VMA_DEDICATED_ALLOCATION 1
 #define VMA_BIND_MEMORY2 1
+#define VMA_MEMORY_BUDGET 1
 #include "vk_mem_alloc.h"
 ENABLE_WARNINGS()
 
@@ -62,6 +64,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaCalculateStats(JNIEnv *__
     VmaStats *pStats = (VmaStats *)(intptr_t)pStatsAddress;
     UNUSED_PARAMS(__env, clazz)
     vmaCalculateStats(allocator, pStats);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaGetBudget(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong pBudgetAddress) {
+    VmaAllocator allocator = (VmaAllocator)(intptr_t)allocatorAddress;
+    VmaBudget *pBudget = (VmaBudget *)(intptr_t)pBudgetAddress;
+    UNUSED_PARAMS(__env, clazz)
+    vmaGetBudget(allocator, pBudget);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaBuildStatsString(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong ppStatsStringAddress, jint detailedMap) {
@@ -140,6 +149,22 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaCheckPoolCorruption(JNIEn
     VmaPool pool = (VmaPool)(intptr_t)poolAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jint)vmaCheckPoolCorruption(allocator, pool);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaGetPoolName(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong poolAddress, jlong ppNameAddress) {
+    VmaAllocator allocator = (VmaAllocator)(intptr_t)allocatorAddress;
+    VmaPool pool = (VmaPool)(intptr_t)poolAddress;
+    char const **ppName = (char const **)(intptr_t)ppNameAddress;
+    UNUSED_PARAMS(__env, clazz)
+    vmaGetPoolName(allocator, pool, ppName);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaSetPoolName(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong poolAddress, jlong pNameAddress) {
+    VmaAllocator allocator = (VmaAllocator)(intptr_t)allocatorAddress;
+    VmaPool pool = (VmaPool)(intptr_t)poolAddress;
+    char const *pName = (char const *)(intptr_t)pNameAddress;
+    UNUSED_PARAMS(__env, clazz)
+    vmaSetPoolName(allocator, pool, pName);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaAllocateMemory(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong pVkMemoryRequirementsAddress, jlong pCreateInfoAddress, jlong pAllocationAddress, jlong pAllocationInfoAddress) {

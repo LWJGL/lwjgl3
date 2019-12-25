@@ -24,7 +24,7 @@ import org.lwjgl.vulkan.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code flags} &ndash; flags for created allocator. Use {@code VmaAllocatorCreateFlagBits} enum. One of:<br><table><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_EXTERNALLY_SYNCHRONIZED_BIT ALLOCATOR_CREATE_EXTERNALLY_SYNCHRONIZED_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT}</td></tr></table></li>
+ * <li>{@code flags} &ndash; flags for created allocator. Use {@code VmaAllocatorCreateFlagBits} enum. One of:<br><table><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_EXTERNALLY_SYNCHRONIZED_BIT ALLOCATOR_CREATE_EXTERNALLY_SYNCHRONIZED_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT}</td></tr></table></li>
  * <li>{@code physicalDevice} &ndash; Vulkan physical device. It must be valid throughout whole lifetime of created allocator.</li>
  * <li>{@code device} &ndash; Vulkan device. It must be valid throughout whole lifetime of created allocator.</li>
  * <li>{@code preferredLargeHeapBlockSize} &ndash; 
@@ -68,6 +68,19 @@ import org.lwjgl.vulkan.*;
  * 
  * <p>If not null, it enables recording of calls to VMA functions to a file. If support for recording is not enabled using {@code VMA_RECORDING_ENABLED}
  * macro, creation of the allocator object fails with {@code VK_ERROR_FEATURE_NOT_PRESENT}.</p></li>
+ * <li>{@code instance} &ndash; 
+ * Optional handle to Vulkan instance object.
+ * 
+ * <p>Optional, can be null. Must be set if {@link Vma#VMA_ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT} flas is used or if {@code vulkanApiVersion >= VK_MAKE_VERSION(1, 1, 0)}.</p></li>
+ * <li>{@code vulkanApiVersion} &ndash; 
+ * Optional. The highest version of Vulkan that the application is designed to use.
+ * 
+ * <p>It must be a value in the format as created by macro {@code VK_MAKE_VERSION} or a constant like: {@code VK_API_VERSION_1_1},
+ * {@code VK_API_VERSION_1_0}. The patch version number specified is ignored. Only the major and minor versions are considered. It must be less or equal
+ * (preferably equal) to value as passed to {@code vkCreateInstance} as {@code VkApplicationInfo::apiVersion}. Only versions 1.0 and 1.1 are supported by
+ * the current implementation.</p>
+ * 
+ * <p>Leaving it initialized to zero is equivalent to {@code VK_API_VERSION_1_0}.</p></li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -84,6 +97,8 @@ import org.lwjgl.vulkan.*;
  *     VkDeviceSize const * pHeapSizeLimit;
  *     {@link VmaVulkanFunctions VmaVulkanFunctions} const * pVulkanFunctions;
  *     {@link VmaRecordSettings VmaRecordSettings} const * pRecordSettings;
+ *     VkInstance instance;
+ *     uint32_t vulkanApiVersion;
  * }</code></pre>
  */
 public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
@@ -105,7 +120,9 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
         FRAMEINUSECOUNT,
         PHEAPSIZELIMIT,
         PVULKANFUNCTIONS,
-        PRECORDSETTINGS;
+        PRECORDSETTINGS,
+        INSTANCE,
+        VULKANAPIVERSION;
 
     static {
         Layout layout = __struct(
@@ -118,7 +135,9 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
             __member(4),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE)
+            __member(POINTER_SIZE),
+            __member(POINTER_SIZE),
+            __member(4)
         );
 
         SIZEOF = layout.getSize();
@@ -134,6 +153,8 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
         PHEAPSIZELIMIT = layout.offsetof(7);
         PVULKANFUNCTIONS = layout.offsetof(8);
         PRECORDSETTINGS = layout.offsetof(9);
+        INSTANCE = layout.offsetof(10);
+        VULKANAPIVERSION = layout.offsetof(11);
     }
 
     /**
@@ -187,6 +208,13 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
     @Nullable
     @NativeType("VmaRecordSettings const *")
     public VmaRecordSettings pRecordSettings() { return npRecordSettings(address()); }
+    /** Returns the value of the {@code instance} field. */
+    @Nullable
+    @NativeType("VkInstance")
+    public long instance() { return ninstance(address()); }
+    /** Returns the value of the {@code vulkanApiVersion} field. */
+    @NativeType("uint32_t")
+    public int vulkanApiVersion() { return nvulkanApiVersion(address()); }
 
     /** Sets the specified value to the {@code flags} field. */
     public VmaAllocatorCreateInfo flags(@NativeType("VmaAllocatorCreateFlags") int value) { nflags(address(), value); return this; }
@@ -208,6 +236,10 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
     public VmaAllocatorCreateInfo pVulkanFunctions(@NativeType("VmaVulkanFunctions const *") VmaVulkanFunctions value) { npVulkanFunctions(address(), value); return this; }
     /** Sets the address of the specified {@link VmaRecordSettings} to the {@code pRecordSettings} field. */
     public VmaAllocatorCreateInfo pRecordSettings(@Nullable @NativeType("VmaRecordSettings const *") VmaRecordSettings value) { npRecordSettings(address(), value); return this; }
+    /** Sets the specified value to the {@code instance} field. */
+    public VmaAllocatorCreateInfo instance(@Nullable VkInstance value) { ninstance(address(), value); return this; }
+    /** Sets the specified value to the {@code vulkanApiVersion} field. */
+    public VmaAllocatorCreateInfo vulkanApiVersion(@NativeType("uint32_t") int value) { nvulkanApiVersion(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VmaAllocatorCreateInfo set(
@@ -220,7 +252,9 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
         int frameInUseCount,
         @Nullable LongBuffer pHeapSizeLimit,
         VmaVulkanFunctions pVulkanFunctions,
-        @Nullable VmaRecordSettings pRecordSettings
+        @Nullable VmaRecordSettings pRecordSettings,
+        @Nullable VkInstance instance,
+        int vulkanApiVersion
     ) {
         flags(flags);
         physicalDevice(physicalDevice);
@@ -232,6 +266,8 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
         pHeapSizeLimit(pHeapSizeLimit);
         pVulkanFunctions(pVulkanFunctions);
         pRecordSettings(pRecordSettings);
+        instance(instance);
+        vulkanApiVersion(vulkanApiVersion);
 
         return this;
     }
@@ -329,6 +365,10 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
     public static VmaVulkanFunctions npVulkanFunctions(long struct) { return VmaVulkanFunctions.create(memGetAddress(struct + VmaAllocatorCreateInfo.PVULKANFUNCTIONS)); }
     /** Unsafe version of {@link #pRecordSettings}. */
     @Nullable public static VmaRecordSettings npRecordSettings(long struct) { return VmaRecordSettings.createSafe(memGetAddress(struct + VmaAllocatorCreateInfo.PRECORDSETTINGS)); }
+    /** Unsafe version of {@link #instance}. */
+    public static long ninstance(long struct) { return memGetAddress(struct + VmaAllocatorCreateInfo.INSTANCE); }
+    /** Unsafe version of {@link #vulkanApiVersion}. */
+    public static int nvulkanApiVersion(long struct) { return UNSAFE.getInt(null, struct + VmaAllocatorCreateInfo.VULKANAPIVERSION); }
 
     /** Unsafe version of {@link #flags(int) flags}. */
     public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VmaAllocatorCreateInfo.FLAGS, value); }
@@ -350,6 +390,10 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
     public static void npVulkanFunctions(long struct, VmaVulkanFunctions value) { memPutAddress(struct + VmaAllocatorCreateInfo.PVULKANFUNCTIONS, value.address()); }
     /** Unsafe version of {@link #pRecordSettings(VmaRecordSettings) pRecordSettings}. */
     public static void npRecordSettings(long struct, @Nullable VmaRecordSettings value) { memPutAddress(struct + VmaAllocatorCreateInfo.PRECORDSETTINGS, memAddressSafe(value)); }
+    /** Unsafe version of {@link #instance(VkInstance) instance}. */
+    public static void ninstance(long struct, @Nullable VkInstance value) { memPutAddress(struct + VmaAllocatorCreateInfo.INSTANCE, memAddressSafe(value)); }
+    /** Unsafe version of {@link #vulkanApiVersion(int) vulkanApiVersion}. */
+    public static void nvulkanApiVersion(long struct, int value) { UNSAFE.putInt(null, struct + VmaAllocatorCreateInfo.VULKANAPIVERSION, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
