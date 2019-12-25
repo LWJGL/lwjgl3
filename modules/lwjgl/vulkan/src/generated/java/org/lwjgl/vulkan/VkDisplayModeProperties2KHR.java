@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code displayModeProperties} &ndash; an instance of the {@link VkDisplayModePropertiesKHR} structure.</li>
+ * <li>{@code displayModeProperties} &ndash; a {@link VkDisplayModePropertiesKHR} structure.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

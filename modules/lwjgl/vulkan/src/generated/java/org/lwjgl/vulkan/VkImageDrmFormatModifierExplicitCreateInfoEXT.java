@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code drmFormatModifierPlaneCount} <b>must</b> be equal to the {@link VkDrmFormatModifierPropertiesEXT}{@code ::drmFormatModifierPlaneCount} associated with {@link VkImageCreateInfo}{@code ::format} and {@code drmFormatModifier}, as found by querying {@link VkDrmFormatModifierPropertiesListEXT}.</li>
  * <li>For each element of {@code pPlaneLayouts}, {@code size} <b>must</b> be 0</li>
  * <li>For each element of {@code pPlaneLayouts}, {@code arrayPitch} <b>must</b> be 0 if {@link VkImageCreateInfo}{@code ::arrayLayers} is 1.</li>
- * <li>For each element of {@code pPlaneLayouts}, {@code depthPitch} <b>must</b> be 0 if {@link VkImageCreateInfo}{@code ::extent}{@code ::depth} is 1.</li>
+ * <li>For each element of {@code pPlaneLayouts}, {@code depthPitch} <b>must</b> be 0 if {@link VkImageCreateInfo}{@code ::extent}.depth is 1.</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

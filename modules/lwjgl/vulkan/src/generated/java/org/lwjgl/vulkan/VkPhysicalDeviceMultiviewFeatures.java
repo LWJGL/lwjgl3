@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If the {@link VkPhysicalDeviceMultiviewFeatures} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceFeatures2}, it is filled with values indicating whether each feature is supported. {@link VkPhysicalDeviceMultiviewFeatures} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to enable the features.</p>
+ * <p>If the {@link VkPhysicalDeviceMultiviewFeatures} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceFeatures2}, it is filled with values indicating whether each feature is supported. {@link VkPhysicalDeviceMultiviewFeatures} <b>can</b> also be included in the {@code pNext} chain of {@link VkDeviceCreateInfo} to enable the features.</p>
  * 
  * <h5>Valid Usage</h5>
  * 

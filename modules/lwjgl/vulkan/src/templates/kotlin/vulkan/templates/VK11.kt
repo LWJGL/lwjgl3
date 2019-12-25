@@ -61,6 +61,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         "Extends {@code VkPipelineCreateFlagBits}.",
 
         "PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT".enum(0x00000008),
+        "PIPELINE_CREATE_DISPATCH_BASE_BIT".enum(0x00000010),
         "PIPELINE_CREATE_DISPATCH_BASE".enum(0x00000010)
     )
 
@@ -454,6 +455,8 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>Description</h5>
         <ul>
             <li>#MEMORY_ALLOCATE_DEVICE_MASK_BIT specifies that memory will be allocated for the devices in ##VkMemoryAllocateFlagsInfo{@code ::deviceMask}.</li>
+            <li>#MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT_KHR specifies that the memory <b>can</b> be attached to a buffer object created with the #BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_KHR bit set in {@code usage}, and that the memory handle <b>can</b> be used to retrieve an opaque address via #GetDeviceMemoryOpaqueCaptureAddressKHR().</li>
+            <li>#MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR specifies that the memory&#8217;s address <b>can</b> be saved and reused on a subsequent run (e.g. for trace capture and replay), see ##VkBufferOpaqueCaptureAddressCreateInfoKHR for more detail.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -682,6 +685,8 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
             <li>#EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT</li>
             <li>#EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT</li>
         </ul>
+
+        Implementations <b>must</b> not report #EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT for images or buffers with external handle type #EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT, or #EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT.
 
         <h5>See Also</h5>
         {@code VkExternalMemoryFeatureFlags}
@@ -919,6 +924,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
             <dd><ul>
                 <li>#ERROR_OUT_OF_HOST_MEMORY</li>
                 <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+                <li>#ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR</li>
             </ul></dd>
         </dl>
 
@@ -1059,7 +1065,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
 ￿    uint32_t                                    deviceMask);</code></pre>
 
         <h5>Description</h5>
-        {@code deviceMask} is used to filter out subsequent commands from executing on all physical devices whose bit indices are not set in the mask, except commands beginning a render pass instance, commands transitioning to the next subpass in the render pass instance, and commands ending a render pass instance, which always execute on the set of physical devices whose bit indices are included in the {@code deviceMask} member of the instance of the ##VkDeviceGroupRenderPassBeginInfo structure passed to the command beginning the corresponding render pass instance.
+        {@code deviceMask} is used to filter out subsequent commands from executing on all physical devices whose bit indices are not set in the mask, except commands beginning a render pass instance, commands transitioning to the next subpass in the render pass instance, and commands ending a render pass instance, which always execute on the set of physical devices whose bit indices are included in the {@code deviceMask} member of the ##VkDeviceGroupRenderPassBeginInfo structure passed to the command beginning the corresponding render pass instance.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -1388,7 +1394,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
 ￿    VkPhysicalDeviceFeatures2*                  pFeatures);</code></pre>
 
         <h5>Description</h5>
-        Each structure in {@code pFeatures} and its {@code pNext} chain contain members corresponding to fine-grained features. {@code vkGetPhysicalDeviceFeatures2} writes each member to a boolean value indicating whether that feature is supported.
+        Each structure in {@code pFeatures} and its {@code pNext} chain contains members corresponding to fine-grained features. {@code vkGetPhysicalDeviceFeatures2} writes each member to a boolean value indicating whether that feature is supported.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

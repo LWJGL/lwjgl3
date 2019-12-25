@@ -14,7 +14,7 @@ val EXT_validation_flags = "EXTValidationFlags".nativeClassVK("EXT_validation_fl
         This extension provides the ##VkValidationFlagsEXT struct that can be included in the {@code pNext} chain of the ##VkInstanceCreateInfo structure passed as the {@code pCreateInfo} parameter of #CreateInstance(). The structure contains an array of {@code VkValidationCheckEXT} values that will be disabled by the validation layers.
 
         <h5>Deprecation by VK_EXT_validation_features</h5>
-        Functionality in this extension is subsumed into the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#VK_EXT_validation_features">VK_EXT_validation_features</a> extension.
+        Functionality in this extension is subsumed into the {@link EXTValidationFeatures VK_EXT_validation_features} extension.
 
         <dl>
             <dt><b>Name String</b></dt>
@@ -36,7 +36,7 @@ val EXT_validation_flags = "EXTValidationFlags".nativeClassVK("EXT_validation_fl
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
-                <li><em>Deprecated</em> by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#VK_EXT_validation_features">VK_EXT_validation_features</a> extension</li>
+                <li><em>Deprecated</em> by {@link EXTValidationFeatures VK_EXT_validation_features} extension</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

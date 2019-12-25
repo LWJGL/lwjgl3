@@ -33,13 +33,13 @@ import org.lwjgl.system.windows.*;
  * 
  * <dl>
  * <dt>1</dt>
- * <dd><a target="_blank" href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms686670.aspx">https://msdn.microsoft.com/en-us/library/windows/desktop/ms686670.aspx</a></dd>
+ * <dd><a target="_blank" href="https://docs.microsoft.com/en-us/windows/win32/sync/synchronization-object-security-and-access-rights">https://docs.microsoft.com/en-us/windows/win32/sync/synchronization-object-security-and-access-rights</a></dd>
  * </dl>
  * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If {@link VkExportFenceCreateInfo}{@code ::handleTypes} does not include {@link VK11#VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT}, {@link VkExportFenceWin32HandleInfoKHR} <b>must</b> not be in the {@code pNext} chain of {@link VkFenceCreateInfo}.</li>
+ * <li>If {@link VkExportFenceCreateInfo}{@code ::handleTypes} does not include {@link VK11#VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT}, a {@link VkExportFenceWin32HandleInfoKHR} structure <b>must</b> not be included in the {@code pNext} chain of {@link VkFenceCreateInfo}.</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

@@ -353,8 +353,8 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code pNameInfo}-&gt;{@code objectType} <b>must</b> not be #OBJECT_TYPE_UNKNOWN</li>
-            <li>{@code pNameInfo}-&gt;{@code objectHandle} <b>must</b> not be #NULL_HANDLE</li>
+            <li>{@code pNameInfo}-&gt;objectType <b>must</b> not be #OBJECT_TYPE_UNKNOWN</li>
+            <li>{@code pNameInfo}-&gt;objectHandle <b>must</b> not be #NULL_HANDLE</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -770,7 +770,7 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code objectType} member of each element of {@code pCallbackData}-&gt;{@code pObjects} <b>must</b> not be #OBJECT_TYPE_UNKNOWN</li>
+            <li>The {@code objectType} member of each element of {@code pCallbackData}-&gt;pObjects <b>must</b> not be #OBJECT_TYPE_UNKNOWN</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

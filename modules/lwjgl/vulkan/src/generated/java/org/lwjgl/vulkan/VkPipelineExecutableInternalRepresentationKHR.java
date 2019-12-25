@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -30,9 +29,6 @@ import static org.lwjgl.vulkan.VK10.*;
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRPipelineExecutableProperties#VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR}</li>
  * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code name} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to VK_MAX_DESCRIPTION_SIZE</li>
- * <li>{@code description} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to VK_MAX_DESCRIPTION_SIZE</li>
- * <li>If {@code dataSize} is not 0, and {@code pData} is not {@code NULL}, {@code pData} <b>must</b> be a valid pointer to an array of {@code dataSize} bytes</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -151,34 +147,14 @@ public class VkPipelineExecutableInternalRepresentationKHR extends Struct implem
     public VkPipelineExecutableInternalRepresentationKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPipelineExecutableInternalRepresentationKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Copies the specified encoded string to the {@code name} field. */
-    public VkPipelineExecutableInternalRepresentationKHR name(@NativeType("char[VK_MAX_DESCRIPTION_SIZE]") ByteBuffer value) { nname(address(), value); return this; }
-    /** Copies the specified encoded string to the {@code description} field. */
-    public VkPipelineExecutableInternalRepresentationKHR description(@NativeType("char[VK_MAX_DESCRIPTION_SIZE]") ByteBuffer value) { ndescription(address(), value); return this; }
-    /** Sets the specified value to the {@code isText} field. */
-    public VkPipelineExecutableInternalRepresentationKHR isText(@NativeType("VkBool32") boolean value) { nisText(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code dataSize} field. */
-    public VkPipelineExecutableInternalRepresentationKHR dataSize(@NativeType("size_t") long value) { ndataSize(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@code pData} field. */
-    public VkPipelineExecutableInternalRepresentationKHR pData(@Nullable @NativeType("void *") ByteBuffer value) { npData(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPipelineExecutableInternalRepresentationKHR set(
         int sType,
-        long pNext,
-        ByteBuffer name,
-        ByteBuffer description,
-        boolean isText,
-        long dataSize,
-        @Nullable ByteBuffer pData
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        name(name);
-        description(description);
-        isText(isText);
-        dataSize(dataSize);
-        pData(pData);
 
         return this;
     }
@@ -361,28 +337,6 @@ public class VkPipelineExecutableInternalRepresentationKHR extends Struct implem
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineExecutableInternalRepresentationKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineExecutableInternalRepresentationKHR.PNEXT, value); }
-    /** Unsafe version of {@link #name(ByteBuffer) name}. */
-    public static void nname(long struct, ByteBuffer value) {
-        if (CHECKS) {
-            checkNT1(value);
-            checkGT(value, VK_MAX_DESCRIPTION_SIZE);
-        }
-        memCopy(memAddress(value), struct + VkPipelineExecutableInternalRepresentationKHR.NAME, value.remaining());
-    }
-    /** Unsafe version of {@link #description(ByteBuffer) description}. */
-    public static void ndescription(long struct, ByteBuffer value) {
-        if (CHECKS) {
-            checkNT1(value);
-            checkGT(value, VK_MAX_DESCRIPTION_SIZE);
-        }
-        memCopy(memAddress(value), struct + VkPipelineExecutableInternalRepresentationKHR.DESCRIPTION, value.remaining());
-    }
-    /** Unsafe version of {@link #isText(boolean) isText}. */
-    public static void nisText(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineExecutableInternalRepresentationKHR.ISTEXT, value); }
-    /** Sets the specified value to the {@code dataSize} field of the specified {@code struct}. */
-    public static void ndataSize(long struct, long value) { memPutAddress(struct + VkPipelineExecutableInternalRepresentationKHR.DATASIZE, value); }
-    /** Unsafe version of {@link #pData(ByteBuffer) pData}. */
-    public static void npData(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + VkPipelineExecutableInternalRepresentationKHR.PDATA, memAddressSafe(value)); if (value != null) { ndataSize(struct, value.remaining()); } }
 
     // -----------------------------------
 
@@ -455,16 +409,6 @@ public class VkPipelineExecutableInternalRepresentationKHR extends Struct implem
         public VkPipelineExecutableInternalRepresentationKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineExecutableInternalRepresentationKHR.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPipelineExecutableInternalRepresentationKHR.Buffer pNext(@NativeType("void *") long value) { VkPipelineExecutableInternalRepresentationKHR.npNext(address(), value); return this; }
-        /** Copies the specified encoded string to the {@code name} field. */
-        public VkPipelineExecutableInternalRepresentationKHR.Buffer name(@NativeType("char[VK_MAX_DESCRIPTION_SIZE]") ByteBuffer value) { VkPipelineExecutableInternalRepresentationKHR.nname(address(), value); return this; }
-        /** Copies the specified encoded string to the {@code description} field. */
-        public VkPipelineExecutableInternalRepresentationKHR.Buffer description(@NativeType("char[VK_MAX_DESCRIPTION_SIZE]") ByteBuffer value) { VkPipelineExecutableInternalRepresentationKHR.ndescription(address(), value); return this; }
-        /** Sets the specified value to the {@code isText} field. */
-        public VkPipelineExecutableInternalRepresentationKHR.Buffer isText(@NativeType("VkBool32") boolean value) { VkPipelineExecutableInternalRepresentationKHR.nisText(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code dataSize} field. */
-        public VkPipelineExecutableInternalRepresentationKHR.Buffer dataSize(@NativeType("size_t") long value) { VkPipelineExecutableInternalRepresentationKHR.ndataSize(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@code pData} field. */
-        public VkPipelineExecutableInternalRepresentationKHR.Buffer pData(@Nullable @NativeType("void *") ByteBuffer value) { VkPipelineExecutableInternalRepresentationKHR.npData(address(), value); return this; }
 
     }
 

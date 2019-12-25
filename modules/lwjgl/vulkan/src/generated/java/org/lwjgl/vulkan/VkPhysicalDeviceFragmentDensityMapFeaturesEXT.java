@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If the {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceFeatures2}, it is filled with values indicating whether each feature is supported. {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT} <b>can</b> also be used in {@code pNext} chain of {@link VkDeviceCreateInfo} to enable the features.</p>
+ * <p>If the {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceFeatures2}, it is filled with values indicating whether each feature is supported. {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT} <b>can</b> also be included in {@code pNext} chain of {@link VkDeviceCreateInfo} to enable the features.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -31,9 +31,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code fragmentDensityMap} &ndash; specifies whether the implementation supports render passes with a fragment density map attachment. If this feature is not enabled and the {@code pNext} chain of {@link VkRenderPassCreateInfo} contains {@link VkRenderPassFragmentDensityMapCreateInfoEXT}, {@code fragmentDensityMapAttachment} <b>must</b> be {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}.</li>
+ * <li>{@code fragmentDensityMap} &ndash; specifies whether the implementation supports render passes with a fragment density map attachment. If this feature is not enabled and the {@code pNext} chain of {@link VkRenderPassCreateInfo} includes a {@link VkRenderPassFragmentDensityMapCreateInfoEXT} structure, {@code fragmentDensityMapAttachment} <b>must</b> be {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}.</li>
  * <li>{@code fragmentDensityMapDynamic} &ndash; specifies whether the implementation supports dynamic fragment density map image views. If this feature is not enabled, {@link EXTFragmentDensityMap#VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT} <b>must</b> not be included in {@link VkImageViewCreateInfo}{@code ::flags}.</li>
- * <li>{@code fragmentDensityMapNonSubsampledImages} &ndash; specifies whether the implementation supports regular non-subsampled image attachments with fragment density map render passes. If this feature is not enabled, render passes with a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#renderpass-fragmentdensitymapattachment">fragment density map attachment</a> <b>must</b> only have <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#resources-subsampledimages">subsampled attachments</a> bound.</li>
+ * <li>{@code fragmentDensityMapNonSubsampledImages} &ndash; specifies whether the implementation supports regular non-subsampled image attachments with fragment density map render passes. If this feature is not enabled, render passes with a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#renderpass-fragmentdensitymapattachment">fragment density map attachment</a> <b>must</b> only have <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#samplers-subsamplesampler">subsampled attachments</a> bound.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

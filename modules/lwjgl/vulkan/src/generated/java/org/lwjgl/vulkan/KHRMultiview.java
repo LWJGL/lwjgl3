@@ -45,6 +45,8 @@ package org.lwjgl.vulkan;
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
  * <li>Promoted to Vulkan 1.1 Core</li>
+ * <li>Requires the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_multiview.html">{@code SPV_KHR_multiview}</a> SPIR-V extension.</li>
+ * <li>Requires <a target="_blank" href="https://raw.githubusercontent.com/KhronosGroup/GLSL/master/extensions/ext/GL_EXT_multiview.txt">{@code GL_EXT_multiview}</a> for GLSL source languages.</li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

@@ -174,6 +174,10 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
         </ul>
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        In the initial release of the {@code VK_KHR_surface} and {@link KHRSwapchain VK_KHR_swapchain} extensions, the token #COLORSPACE_SRGB_NONLINEAR_KHR was used. Starting in the 2016-05-13 updates to the extension branches, matching release 1.0.13 of the core API specification, #COLOR_SPACE_SRGB_NONLINEAR_KHR is used instead for consistency with Vulkan naming rules. The older enum is still available for backwards compatibility.
+        </div>
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         In older versions of this extension #COLOR_SPACE_DISPLAY_P3_LINEAR_EXT was misnamed #COLOR_SPACE_DCI_P3_LINEAR_EXT. This has been updated to indicate that it uses RGB color encoding, not XYZ. The old name is deprecated but is maintained for backwards compatibility.
         </div>
 
@@ -195,7 +199,19 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
             </tbody>
         </table>
 
-        The transfer functions are described in the "Transfer Functions" chapter of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#data-format">Khronos Data Format Specification</a>.
+        The transfer functions are described in the "{@code Transfer Functions}" chapter of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#data-format">Khronos Data Format Specification</a>.
+
+        Except Display-P3 OETF, which is:
+
+        <pre><code>
+￿E =  1.055 &times; L<sup>1/2.4</sup> - 0.055 for 0.0030186 &le; L &le; 1
+￿    12.92  &times; L for 0 &le; L &lt 0.0030186</code></pre>
+
+        where <code>L</code> is the linear value of a color channel and <code>E</code> is the encoded value (as stored in the image in memory).
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        For most uses, the sRGB OETF is equivalent.
+        </div>
 
         <h5>See Also</h5>
         ##VkSurfaceFormatKHR, ##VkSwapchainCreateInfoKHR
@@ -406,7 +422,11 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
 ￿    VkSurfaceFormatKHR*                         pSurfaceFormats);</code></pre>
 
         <h5>Description</h5>
-        If {@code pSurfaceFormats} is {@code NULL}, then the number of format pairs supported for the given {@code surface} is returned in {@code pSurfaceFormatCount}. Otherwise, {@code pSurfaceFormatCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pSurfaceFormats} array, and on return the variable is overwritten with the number of structures actually written to {@code pSurfaceFormats}. If the value of {@code pSurfaceFormatCount} is less than the number of format pairs supported, at most {@code pSurfaceFormatCount} structures will be written. If {@code pSurfaceFormatCount} is smaller than the number of format pairs supported for the given {@code surface}, #INCOMPLETE will be returned instead of #SUCCESS to indicate that not all the available values were returned. The number of format pairs supported <b>must</b> be greater than or equal to 1.
+        If {@code pSurfaceFormats} is {@code NULL}, then the number of format pairs supported for the given {@code surface} is returned in {@code pSurfaceFormatCount}. Otherwise, {@code pSurfaceFormatCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pSurfaceFormats} array, and on return the variable is overwritten with the number of structures actually written to {@code pSurfaceFormats}. If the value of {@code pSurfaceFormatCount} is less than the number of format pairs supported, at most {@code pSurfaceFormatCount} structures will be written. If {@code pSurfaceFormatCount} is smaller than the number of format pairs supported for the given {@code surface}, #INCOMPLETE will be returned instead of #SUCCESS to indicate that not all the available values were returned.
+
+        The number of format pairs supported <b>must</b> be greater than or equal to 1. {@code pSurfaceFormats} <b>must</b> not contain an entry whose value for {@code format} is #FORMAT_UNDEFINED.
+
+        If {@code pSurfaceFormats} includes an entry whose value for {@code colorSpace} is #COLOR_SPACE_SRGB_NONLINEAR_KHR and whose value for {@code format} is a UNORM (or SRGB) format and the corresponding SRGB (or UNORM) format is a color renderable format for #IMAGE_TILING_OPTIMAL, then {@code pSurfaceFormats} <b>must</b> also contain an entry with the same value for {@code colorSpace} and {@code format} equal to the corresponding SRGB (or UNORM) format.
 
         <h5>Valid Usage</h5>
         <ul>

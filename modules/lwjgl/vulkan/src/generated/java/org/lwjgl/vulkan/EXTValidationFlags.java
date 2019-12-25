@@ -10,7 +10,7 @@ package org.lwjgl.vulkan;
  * 
  * <h5>Deprecation by VK_EXT_validation_features</h5>
  * 
- * <p>Functionality in this extension is subsumed into the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_validation_features">VK_EXT_validation_features</a> extension.</p>
+ * <p>Functionality in this extension is subsumed into the {@link EXTValidationFeatures VK_EXT_validation_features} extension.</p>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -27,7 +27,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Deprecation state</b></dt>
  * <dd><ul>
- * <li><em>Deprecated</em> by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_EXT_validation_features">VK_EXT_validation_features</a> extension</li>
+ * <li><em>Deprecated</em> by {@link EXTValidationFeatures VK_EXT_validation_features} extension</li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>

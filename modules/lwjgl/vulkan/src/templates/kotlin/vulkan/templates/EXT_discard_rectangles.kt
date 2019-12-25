@@ -46,7 +46,7 @@ val EXT_discard_rectangles = "EXTDiscardRectangles".nativeClassVK("EXT_discard_r
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>Interacts with VK_KHR_device_group</li>
+                <li>Interacts with {@link KHRDeviceGroup VK_KHR_device_group}</li>
                 <li>Interacts with Vulkan 1.1</li>
             </ul></dd>
 

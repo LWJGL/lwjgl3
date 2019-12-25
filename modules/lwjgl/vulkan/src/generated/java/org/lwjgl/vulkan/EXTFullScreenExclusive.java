@@ -47,7 +47,9 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd>No known IP claims.</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>Interacts with VK_KHR_device_group, VK_KHR_win32_surface, and Vulkan 1.1</li>
+ * <li>Interacts with Vulkan 1.1</li>
+ * <li>Interacts with {@link KHRDeviceGroup VK_KHR_device_group}</li>
+ * <li>Interacts with {@link KHRWin32Surface VK_KHR_win32_surface}</li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
@@ -224,7 +226,7 @@ public class EXTFullScreenExclusive {
      * 
      * <ul>
      * <li>{@code swapchain} <b>must</b> not be in the retired state</li>
-     * <li>{@code swapchain} <b>must</b> be a swapchain created with an instance of {@link VkSurfaceFullScreenExclusiveInfoEXT}, with {@code fullScreenExclusive} set to {@link #VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT}</li>
+     * <li>{@code swapchain} <b>must</b> be a swapchain created with a {@link VkSurfaceFullScreenExclusiveInfoEXT} structure, with {@code fullScreenExclusive} set to {@link #VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT}</li>
      * <li>{@code swapchain} <b>must</b> not currently have exclusive full-screen access</li>
      * </ul>
      * 
@@ -293,7 +295,7 @@ public class EXTFullScreenExclusive {
      * 
      * <ul>
      * <li>{@code swapchain} <b>must</b> not be in the retired state</li>
-     * <li>{@code swapchain} <b>must</b> be a swapchain created with an instance of {@link VkSurfaceFullScreenExclusiveInfoEXT}, with {@code fullScreenExclusive} set to {@link #VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT}</li>
+     * <li>{@code swapchain} <b>must</b> be a swapchain created with a {@link VkSurfaceFullScreenExclusiveInfoEXT} structure, with {@code fullScreenExclusive} set to {@link #VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT}</li>
      * </ul>
      *
      * @param device    the device associated with {@code swapchain}.

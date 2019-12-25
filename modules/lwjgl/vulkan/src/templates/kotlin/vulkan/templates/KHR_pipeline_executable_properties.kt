@@ -132,7 +132,7 @@ val KHR_pipeline_executable_properties = "KHRPipelineExecutableProperties".nativ
 
         <h5>Valid Usage</h5>
         <ul>
-            <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#features-pipelineExecutableProperties">{@code pipelineExecutableProperties}</a> <b>must</b> be enabled.</li>
+            <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#features-pipelineExecutableInfo">{@code pipelineExecutableInfo}</a> <b>must</b> be enabled.</li>
             <li>{@code pipeline} member of {@code pPipelineInfo} <b>must</b> have been created with {@code device}.</li>
         </ul>
 
@@ -249,7 +249,7 @@ val KHR_pipeline_executable_properties = "KHRPipelineExecutableProperties".nativ
 
         <h5>Valid Usage</h5>
         <ul>
-            <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#features-pipelineExecutableProperties">{@code pipelineExecutableProperties}</a> <b>must</b> be enabled.</li>
+            <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#features-pipelineExecutableInfo">{@code pipelineExecutableInfo}</a> <b>must</b> be enabled.</li>
             <li>{@code pipeline} member of {@code pExecutableInfo} <b>must</b> have been created with {@code device}.</li>
             <li>{@code pipeline} member of {@code pExecutableInfo} <b>must</b> have been created with #PIPELINE_CREATE_CAPTURE_INTERNAL_REPRESENTATIONS_BIT_KHR set in the {@code flags} field of ##VkGraphicsPipelineCreateInfo or ##VkComputePipelineCreateInfo.</li>
         </ul>

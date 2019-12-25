@@ -22,11 +22,14 @@ import org.lwjgl.system.windows.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If this structure is not present, or if {@code pAttributes} is set to {@code NULL}, default security descriptor values will be used, and child processes created by the application will not inherit the handle, as described in the MSDN documentation for "{@code Synchronization Object Security and Access Rights}"[1]. Further, if the structure is not present, the access rights will be</p>
+ * <p>If this structure is not present, or if {@code pAttributes} is set to {@code NULL}, default security descriptor values will be used, and child processes created by the application will not inherit the handle, as described in the MSDN documentation for "{@code Synchronization Object Security and Access Rights}"<sup>1</sup>. Further, if the structure is not present, the access rights will be</p>
  * 
- * <p>DXGI_SHARED_RESOURCE_READ | DXGI_SHARED_RESOURCE_WRITE</p>
+ * <p>{@code DXGI_SHARED_RESOURCE_READ} | {@code DXGI_SHARED_RESOURCE_WRITE}</p>
  * 
- * <p>[1] https://msdn.microsoft.com/en-us/library/windows/desktop/ms686670.aspx</p>
+ * <dl>
+ * <dt>1</dt>
+ * <dd><a target="_blank" href="https://docs.microsoft.com/en-us/windows/win32/sync/synchronization-object-security-and-access-rights">https://docs.microsoft.com/en-us/windows/win32/sync/synchronization-object-security-and-access-rights</a></dd>
+ * </dl>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

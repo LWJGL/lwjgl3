@@ -145,7 +145,7 @@ val KHR_external_fence_fd = "KHRExternalFenceFd".nativeClassVK("KHR_external_fen
         Ownership can be released in many ways. For example, the application can call {@code close}() on the file descriptor, or transfer ownership back to Vulkan by using the file descriptor to import a fence payload.
         </div>
 
-        If {@code pGetFdInfo}-&gt;{@code handleType} is #EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT and the fence is signaled at the time {@code vkGetFenceFdKHR} is called, {@code pFd} <b>may</b> return the value {@code -1} instead of a valid file descriptor.
+        If {@code pGetFdInfo}-&gt;handleType is #EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT and the fence is signaled at the time {@code vkGetFenceFdKHR} is called, {@code pFd} <b>may</b> return the value {@code -1} instead of a valid file descriptor.
 
         Where supported by the operating system, the implementation <b>must</b> set the file descriptor to be closed automatically when an {@code execve} system call is made.
 

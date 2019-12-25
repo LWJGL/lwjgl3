@@ -20,14 +20,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
+ * <p>If the {@link VkPhysicalDeviceBufferDeviceAddressFeaturesEXT} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceFeatures2}, it is filled with values indicating whether the feature is supported. {@link VkPhysicalDeviceBufferDeviceAddressFeaturesEXT} <b>can</b> also be included in the {@code pNext} chain of {@link VkDeviceCreateInfo} to enable features.</p>
+ * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
  * 
- * <p>{@code bufferDeviceAddressMultiDevice} exists to allow certain legacy platforms to be able to support {@code bufferDeviceAddress} without needing to support shared GPU virtual addresses for multi-device configurations.</p>
+ * <p>The {@link VkPhysicalDeviceBufferDeviceAddressFeaturesEXT} structure has the same members as the {@link VkPhysicalDeviceBufferDeviceAddressFeaturesKHR} structure, but the functionality indicated by the members is expressed differently. The features indicated by the {@link VkPhysicalDeviceBufferDeviceAddressFeaturesKHR} structure requires additional flags to be passed at memory allocation time, and the capture and replay mechanism is built around opaque capture addresses for buffer and memory objects.</p>
  * </div>
- * 
- * <p>See {@link EXTBufferDeviceAddress#vkGetBufferDeviceAddressEXT GetBufferDeviceAddressEXT} for more information.</p>
- * 
- * <p>If the {@link VkPhysicalDeviceBufferDeviceAddressFeaturesEXT} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceFeatures2}, it is filled with values indicating whether the feature is supported. {@link VkPhysicalDeviceBufferDeviceAddressFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to enable features.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

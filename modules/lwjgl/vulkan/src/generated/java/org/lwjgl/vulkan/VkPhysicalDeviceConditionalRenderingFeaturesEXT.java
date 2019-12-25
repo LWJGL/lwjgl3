@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If the {@link VkPhysicalDeviceConditionalRenderingFeaturesEXT} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceFeatures2}, it is filled with values indicating the implementation-dependent behavior. {@link VkPhysicalDeviceConditionalRenderingFeaturesEXT} <b>can</b> also be used in {@code pNext} chain of {@link VkDeviceCreateInfo} to enable the features.</p>
+ * <p>If the {@link VkPhysicalDeviceConditionalRenderingFeaturesEXT} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceFeatures2}, it is filled with values indicating the implementation-dependent behavior. {@link VkPhysicalDeviceConditionalRenderingFeaturesEXT} <b>can</b> also be included in {@code pNext} chain of {@link VkDeviceCreateInfo} to enable the features.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

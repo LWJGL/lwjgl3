@@ -163,7 +163,7 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
 
         VkDevice("device", "a logical device associated with {@code display}."),
         VkDisplayKHR("display", "the display whose power state is modified."),
-        VkDisplayPowerInfoEXT.const.p("pDisplayPowerInfo", "an instance of ##VkDisplayPowerInfoEXT specifying the new power state of {@code display}.")
+        VkDisplayPowerInfoEXT.const.p("pDisplayPowerInfo", "a ##VkDisplayPowerInfoEXT structure specifying the new power state of {@code display}.")
     )
 
     VkResult(

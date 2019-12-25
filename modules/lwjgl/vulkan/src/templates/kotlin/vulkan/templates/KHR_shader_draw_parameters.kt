@@ -21,7 +21,7 @@ val KHR_shader_draw_parameters = "KHRShaderDrawParameters".nativeClassVK("KHR_sh
 
         <ul>
             <li>{@code BaseInstance}, which contains the {@code firstInstance} parameter passed to draw commands,</li>
-            <li>{@code BaseVertex}, which contains the {@code firstVertex}/{@code vertexOffset} parameter passed to draw commands, and</li>
+            <li>{@code BaseVertex}, which contains the {@code firstVertex} or {@code vertexOffset} parameter passed to draw commands, and</li>
             <li>{@code DrawIndex}, which contains the index of the draw call currently being processed from an indirect draw call.</li>
         </ul>
 

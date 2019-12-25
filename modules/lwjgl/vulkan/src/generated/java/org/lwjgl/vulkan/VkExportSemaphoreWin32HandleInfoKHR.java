@@ -23,31 +23,31 @@ import org.lwjgl.system.windows.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If this structure is not present, or if {@code pAttributes} is set to {@code NULL}, default security descriptor values will be used, and child processes created by the application will not inherit the handle, as described in the MSDN documentation for "{@code Synchronization Object Security and Access Rights}"<sup>1</sup>. Further, if the structure is not present, the access rights will be</p>
+ * <p>If this structure is not present, or if {@code pAttributes} is set to {@code NULL}, default security descriptor values will be used, and child processes created by the application will not inherit the handle, as described in the MSDN documentation for "{@code Synchronization Object Security and Access Rights}"<sup>1</sup>.</p>
  * 
- * <p>{@code DXGI_SHARED_RESOURCE_READ} | {@code DXGI_SHARED_RESOURCE_WRITE}</p>
- * 
- * <p>for handles of the following types:</p>
+ * <p>For handles of the following types:</p>
  * 
  * <p>{@link VK11#VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT}</p>
  * 
- * <p>And</p>
+ * <p>The implementation <b>must</b> ensure the access rights allow both signal and wait operations on the semaphore.</p>
  * 
- * <p>{@code GENERIC_ALL}</p>
- * 
- * <p>for handles of the following types:</p>
+ * <p>For handles of the following types:</p>
  * 
  * <p>{@link VK11#VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT}</p>
  * 
+ * <p>The access rights <b>must</b> be:</p>
+ * 
+ * <p>{@code GENERIC_ALL}</p>
+ * 
  * <dl>
  * <dt>1</dt>
- * <dd><a target="_blank" href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms686670.aspx">https://msdn.microsoft.com/en-us/library/windows/desktop/ms686670.aspx</a></dd>
+ * <dd><a target="_blank" href="https://docs.microsoft.com/en-us/windows/win32/sync/synchronization-object-security-and-access-rights">https://docs.microsoft.com/en-us/windows/win32/sync/synchronization-object-security-and-access-rights</a></dd>
  * </dl>
  * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If {@link VkExportSemaphoreCreateInfo}{@code ::handleTypes} does not include {@link VK11#VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT} or {@link VK11#VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT}, {@link VkExportSemaphoreWin32HandleInfoKHR} <b>must</b> not be in the {@code pNext} chain of {@link VkSemaphoreCreateInfo}.</li>
+ * <li>If {@link VkExportSemaphoreCreateInfo}{@code ::handleTypes} does not include {@link VK11#VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT} or {@link VK11#VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT}, {@link VkExportSemaphoreWin32HandleInfoKHR} <b>must</b> not be included in the {@code pNext} chain of {@link VkSemaphoreCreateInfo}.</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

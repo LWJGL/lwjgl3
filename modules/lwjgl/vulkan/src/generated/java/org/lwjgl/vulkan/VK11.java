@@ -124,11 +124,13 @@ public class VK11 extends VK10 {
      * 
      * <ul>
      * <li>{@link #VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT}</li>
+     * <li>{@link #VK_PIPELINE_CREATE_DISPATCH_BASE_BIT PIPELINE_CREATE_DISPATCH_BASE_BIT}</li>
      * <li>{@link #VK_PIPELINE_CREATE_DISPATCH_BASE PIPELINE_CREATE_DISPATCH_BASE}</li>
      * </ul>
      */
     public static final int
         VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT = 0x8,
+        VK_PIPELINE_CREATE_DISPATCH_BASE_BIT                = 0x10,
         VK_PIPELINE_CREATE_DISPATCH_BASE                    = 0x10;
 
     /** Extends {@code VkDependencyFlagBits}. */
@@ -673,6 +675,8 @@ public class VK11 extends VK10 {
      * 
      * <ul>
      * <li>{@link #VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT MEMORY_ALLOCATE_DEVICE_MASK_BIT} specifies that memory will be allocated for the devices in {@link VkMemoryAllocateFlagsInfo}{@code ::deviceMask}.</li>
+     * <li>{@link KHRBufferDeviceAddress#VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT_KHR MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT_KHR} specifies that the memory <b>can</b> be attached to a buffer object created with the {@link KHRBufferDeviceAddress#VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_KHR BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_KHR} bit set in {@code usage}, and that the memory handle <b>can</b> be used to retrieve an opaque address via {@link KHRBufferDeviceAddress#vkGetDeviceMemoryOpaqueCaptureAddressKHR GetDeviceMemoryOpaqueCaptureAddressKHR}.</li>
+     * <li>{@link KHRBufferDeviceAddress#VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR} specifies that the memory&#8217;s address <b>can</b> be saved and reused on a subsequent run (e.g. for trace capture and replay), see {@link VkBufferOpaqueCaptureAddressCreateInfoKHR} for more detail.</li>
      * </ul>
      * 
      * <h5>See Also</h5>
@@ -901,6 +905,8 @@ public class VK11 extends VK10 {
      * <li>{@link #VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT}</li>
      * <li>{@link #VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT}</li>
      * </ul>
+     * 
+     * <p>Implementations <b>must</b> not report {@link #VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT} for images or buffers with external handle type {@link EXTExternalMemoryHost#VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT}, or {@link EXTExternalMemoryHost#VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT}.</p>
      * 
      * <h5>See Also</h5>
      * 
@@ -1215,6 +1221,7 @@ public class VK11 extends VK10 {
      * <dd><ul>
      * <li>{@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY}</li>
      * <li>{@link VK10#VK_ERROR_OUT_OF_DEVICE_MEMORY ERROR_OUT_OF_DEVICE_MEMORY}</li>
+     * <li>{@link KHRBufferDeviceAddress#VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR}</li>
      * </ul></dd>
      * </dl>
      * 
@@ -1394,7 +1401,7 @@ public class VK11 extends VK10 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>{@code deviceMask} is used to filter out subsequent commands from executing on all physical devices whose bit indices are not set in the mask, except commands beginning a render pass instance, commands transitioning to the next subpass in the render pass instance, and commands ending a render pass instance, which always execute on the set of physical devices whose bit indices are included in the {@code deviceMask} member of the instance of the {@link VkDeviceGroupRenderPassBeginInfo} structure passed to the command beginning the corresponding render pass instance.</p>
+     * <p>{@code deviceMask} is used to filter out subsequent commands from executing on all physical devices whose bit indices are not set in the mask, except commands beginning a render pass instance, commands transitioning to the next subpass in the render pass instance, and commands ending a render pass instance, which always execute on the set of physical devices whose bit indices are included in the {@code deviceMask} member of the {@link VkDeviceGroupRenderPassBeginInfo} structure passed to the command beginning the corresponding render pass instance.</p>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -1824,7 +1831,7 @@ public class VK11 extends VK10 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>Each structure in {@code pFeatures} and its {@code pNext} chain contain members corresponding to fine-grained features. {@code vkGetPhysicalDeviceFeatures2} writes each member to a boolean value indicating whether that feature is supported.</p>
+     * <p>Each structure in {@code pFeatures} and its {@code pNext} chain contains members corresponding to fine-grained features. {@code vkGetPhysicalDeviceFeatures2} writes each member to a boolean value indicating whether that feature is supported.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

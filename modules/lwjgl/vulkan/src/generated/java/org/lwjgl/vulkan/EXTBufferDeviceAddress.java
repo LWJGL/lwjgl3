@@ -29,6 +29,10 @@ import static org.lwjgl.system.JNI.*;
  * <li>Requires Vulkan 1.0</li>
  * <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</li>
  * </ul></dd>
+ * <dt><b>Deprecation state</b></dt>
+ * <dd><ul>
+ * <li><em>Deprecated</em> by {@link KHRBufferDeviceAddress VK_KHR_buffer_device_address} extension</li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_buffer_device_address:%20&amp;body=@jeffbolznv%20">jeffbolznv</a></li>
@@ -104,46 +108,13 @@ public class EXTBufferDeviceAddress {
     }
 
     /**
-     * Query an address of a buffer.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <p>To query a 64-bit buffer device address value through which buffer memory <b>can</b> be accessed in a shader, call:</p>
-     * 
-     * <pre><code>
-     * VkDeviceAddress vkGetBufferDeviceAddressEXT(
-     *     VkDevice                                    device,
-     *     const VkBufferDeviceAddressInfoEXT*         pInfo);</code></pre>
-     * 
-     * <h5>Description</h5>
-     * 
-     * <p>The 64-bit return value is an address of the start of {@code pInfo}{@code ::buffer}. The address range starting at this value and whose size is the size of the buffer <b>can</b> be used in a shader to access the memory bound to that buffer, using the {@code SPV_EXT_physical_storage_buffer} extension and the {@code PhysicalStorageBufferEXT} storage class. For example, this value <b>can</b> be stored in a uniform buffer, and the shader <b>can</b> read the value from the uniform buffer and use it to do a dependent read/write to this buffer. A value of zero is reserved as a "{@code null}" pointer and <b>must</b> not be returned as a valid buffer device address. All loads, stores, and atomics in a shader through {@code PhysicalStorageBufferEXT} pointers <b>must</b> access addresses in the address range of some buffer.</p>
-     * 
-     * <p>If the buffer was created with a non-zero value of {@link VkBufferDeviceAddressCreateInfoEXT}{@code ::deviceAddress}, the return value will be the same address.</p>
-     * 
-     * <h5>Valid Usage</h5>
-     * 
-     * <ul>
-     * <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#features-bufferDeviceAddress">bufferDeviceAddress</a> feature <b>must</b> be enabled</li>
-     * <li>If {@code device} was created with multiple physical devices, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#features-bufferDeviceAddressMultiDevice">bufferDeviceAddressMultiDevice</a> feature <b>must</b> be enabled</li>
-     * </ul>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-     * <li>{@code pInfo} <b>must</b> be a valid pointer to a valid {@link VkBufferDeviceAddressInfoEXT} structure</li>
-     * </ul>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link VkBufferDeviceAddressInfoEXT}</p>
+     * See {@link KHRBufferDeviceAddress#vkGetBufferDeviceAddressKHR GetBufferDeviceAddressKHR}.
      *
      * @param device the logical device that the buffer was created on.
-     * @param pInfo  a pointer to a {@link VkBufferDeviceAddressInfoEXT} structure specifying the buffer to retrieve an address for.
+     * @param pInfo  a pointer to a {@link VkBufferDeviceAddressInfoKHR} structure specifying the buffer to retrieve an address for.
      */
     @NativeType("VkDeviceAddress")
-    public static long vkGetBufferDeviceAddressEXT(VkDevice device, @NativeType("VkBufferDeviceAddressInfoEXT const *") VkBufferDeviceAddressInfoEXT pInfo) {
+    public static long vkGetBufferDeviceAddressEXT(VkDevice device, @NativeType("VkBufferDeviceAddressInfoKHR const *") VkBufferDeviceAddressInfoKHR pInfo) {
         return nvkGetBufferDeviceAddressEXT(device, pInfo.address());
     }
 

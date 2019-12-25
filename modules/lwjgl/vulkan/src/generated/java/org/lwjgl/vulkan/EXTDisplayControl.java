@@ -187,7 +187,7 @@ public class EXTDisplayControl {
      *
      * @param device            a logical device associated with {@code display}.
      * @param display           the display whose power state is modified.
-     * @param pDisplayPowerInfo an instance of {@link VkDisplayPowerInfoEXT} specifying the new power state of {@code display}.
+     * @param pDisplayPowerInfo a {@link VkDisplayPowerInfoEXT} structure specifying the new power state of {@code display}.
      */
     @NativeType("VkResult")
     public static int vkDisplayPowerControlEXT(VkDevice device, @NativeType("VkDisplayKHR") long display, @NativeType("VkDisplayPowerInfoEXT const *") VkDisplayPowerInfoEXT pDisplayPowerInfo) {

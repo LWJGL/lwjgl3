@@ -282,6 +282,12 @@ public class VKCapabilitiesDevice {
         vkBindBufferMemory2KHR,
         vkBindImageMemory2KHR;
 
+    // KHR_buffer_device_address
+    public final long
+        vkGetBufferDeviceAddressKHR,
+        vkGetBufferOpaqueCaptureAddressKHR,
+        vkGetDeviceMemoryOpaqueCaptureAddressKHR;
+
     // KHR_create_renderpass2
     public final long
         vkCreateRenderPass2KHR,
@@ -357,6 +363,11 @@ public class VKCapabilitiesDevice {
     // KHR_maintenance3
     public final long
         vkGetDescriptorSetLayoutSupportKHR;
+
+    // KHR_performance_query
+    public final long
+        vkAcquireProfilingLockKHR,
+        vkReleaseProfilingLockKHR;
 
     // KHR_pipeline_executable_properties
     public final long
@@ -585,6 +596,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_texel_buffer_alignment;
     /** When true, {@link EXTTextureCompressionAstcHdr} is supported. */
     public final boolean VK_EXT_texture_compression_astc_hdr;
+    /** When true, {@link EXTToolingInfo} is supported. */
+    public final boolean VK_EXT_tooling_info;
     /** When true, {@link EXTTransformFeedback} is supported. */
     public final boolean VK_EXT_transform_feedback;
     /** When true, {@link EXTValidationCache} is supported. */
@@ -615,6 +628,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_KHR_8bit_storage;
     /** When true, {@link KHRBindMemory2} is supported. */
     public final boolean VK_KHR_bind_memory2;
+    /** When true, {@link KHRBufferDeviceAddress} is supported. */
+    public final boolean VK_KHR_buffer_device_address;
     /** When true, {@link KHRCreateRenderpass2} is supported. */
     public final boolean VK_KHR_create_renderpass2;
     /** When true, {@link KHRDedicatedAllocation} is supported. */
@@ -665,6 +680,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_KHR_maintenance3;
     /** When true, {@link KHRMultiview} is supported. */
     public final boolean VK_KHR_multiview;
+    /** When true, {@link KHRPerformanceQuery} is supported. */
+    public final boolean VK_KHR_performance_query;
     /** When true, {@link KHRPipelineExecutableProperties} is supported. */
     public final boolean VK_KHR_pipeline_executable_properties;
     /** When true, {@link KHRPushDescriptor} is supported. */
@@ -675,6 +692,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_KHR_sampler_mirror_clamp_to_edge;
     /** When true, {@link KHRSamplerYcbcrConversion} is supported. */
     public final boolean VK_KHR_sampler_ycbcr_conversion;
+    /** When true, {@link KHRSeparateDepthStencilLayouts} is supported. */
+    public final boolean VK_KHR_separate_depth_stencil_layouts;
     /** When true, {@link KHRShaderAtomicInt64} is supported. */
     public final boolean VK_KHR_shader_atomic_int64;
     /** When true, {@link KHRShaderClock} is supported. */
@@ -689,6 +708,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_KHR_shader_subgroup_extended_types;
     /** When true, {@link KHRSharedPresentableImage} is supported. */
     public final boolean VK_KHR_shared_presentable_image;
+    /** When true, {@link KHRSpirv14} is supported. */
+    public final boolean VK_KHR_spirv_1_4;
     /** When true, {@link KHRStorageBufferStorageClass} is supported. */
     public final boolean VK_KHR_storage_buffer_storage_class;
     /** When true, {@link KHRSwapchain} is supported. */
@@ -771,7 +792,7 @@ public class VKCapabilitiesDevice {
     VKCapabilitiesDevice(FunctionProvider provider, VKCapabilitiesInstance capsInstance, Set<String> ext) {
         this.apiVersion = capsInstance.apiVersion;
 
-        Map<String, Long> caps = new HashMap<>(277);
+        Map<String, Long> caps = new HashMap<>(282);
 
         Vulkan10 = VK10.checkCapsDevice(provider, caps, ext);
         Vulkan11 = VK11.checkCapsDevice(provider, caps, ext);
@@ -840,6 +861,7 @@ public class VKCapabilitiesDevice {
         VK_EXT_subgroup_size_control = ext.contains("VK_EXT_subgroup_size_control");
         VK_EXT_texel_buffer_alignment = ext.contains("VK_EXT_texel_buffer_alignment");
         VK_EXT_texture_compression_astc_hdr = ext.contains("VK_EXT_texture_compression_astc_hdr");
+        VK_EXT_tooling_info = ext.contains("VK_EXT_tooling_info");
         VK_EXT_transform_feedback = EXTTransformFeedback.checkCapsDevice(provider, caps, ext);
         VK_EXT_validation_cache = EXTValidationCache.checkCapsDevice(provider, caps, ext);
         VK_EXT_vertex_attribute_divisor = ext.contains("VK_EXT_vertex_attribute_divisor");
@@ -855,6 +877,7 @@ public class VKCapabilitiesDevice {
         VK_KHR_16bit_storage = ext.contains("VK_KHR_16bit_storage");
         VK_KHR_8bit_storage = ext.contains("VK_KHR_8bit_storage");
         VK_KHR_bind_memory2 = KHRBindMemory2.checkCapsDevice(provider, caps, ext);
+        VK_KHR_buffer_device_address = KHRBufferDeviceAddress.checkCapsDevice(provider, caps, ext);
         VK_KHR_create_renderpass2 = KHRCreateRenderpass2.checkCapsDevice(provider, caps, ext);
         VK_KHR_dedicated_allocation = ext.contains("VK_KHR_dedicated_allocation");
         VK_KHR_depth_stencil_resolve = ext.contains("VK_KHR_depth_stencil_resolve");
@@ -880,11 +903,13 @@ public class VKCapabilitiesDevice {
         VK_KHR_maintenance2 = ext.contains("VK_KHR_maintenance2");
         VK_KHR_maintenance3 = KHRMaintenance3.checkCapsDevice(provider, caps, ext);
         VK_KHR_multiview = ext.contains("VK_KHR_multiview");
+        VK_KHR_performance_query = KHRPerformanceQuery.checkCapsDevice(provider, caps, ext);
         VK_KHR_pipeline_executable_properties = KHRPipelineExecutableProperties.checkCapsDevice(provider, caps, ext);
         VK_KHR_push_descriptor = KHRPushDescriptor.checkCapsDevice(provider, caps, ext);
         VK_KHR_relaxed_block_layout = ext.contains("VK_KHR_relaxed_block_layout");
         VK_KHR_sampler_mirror_clamp_to_edge = ext.contains("VK_KHR_sampler_mirror_clamp_to_edge");
         VK_KHR_sampler_ycbcr_conversion = KHRSamplerYcbcrConversion.checkCapsDevice(provider, caps, ext);
+        VK_KHR_separate_depth_stencil_layouts = ext.contains("VK_KHR_separate_depth_stencil_layouts");
         VK_KHR_shader_atomic_int64 = ext.contains("VK_KHR_shader_atomic_int64");
         VK_KHR_shader_clock = ext.contains("VK_KHR_shader_clock");
         VK_KHR_shader_draw_parameters = ext.contains("VK_KHR_shader_draw_parameters");
@@ -892,6 +917,7 @@ public class VKCapabilitiesDevice {
         VK_KHR_shader_float_controls = ext.contains("VK_KHR_shader_float_controls");
         VK_KHR_shader_subgroup_extended_types = ext.contains("VK_KHR_shader_subgroup_extended_types");
         VK_KHR_shared_presentable_image = KHRSharedPresentableImage.checkCapsDevice(provider, caps, ext);
+        VK_KHR_spirv_1_4 = ext.contains("VK_KHR_spirv_1_4");
         VK_KHR_storage_buffer_storage_class = ext.contains("VK_KHR_storage_buffer_storage_class");
         VK_KHR_swapchain = KHRSwapchain.checkCapsDevice(provider, caps, ext);
         VK_KHR_swapchain_mutable_format = ext.contains("VK_KHR_swapchain_mutable_format");
@@ -1128,6 +1154,9 @@ public class VKCapabilitiesDevice {
         vkGetPerformanceParameterINTEL = VK.get(caps, "vkGetPerformanceParameterINTEL");
         vkBindBufferMemory2KHR = VK.get(caps, "vkBindBufferMemory2KHR");
         vkBindImageMemory2KHR = VK.get(caps, "vkBindImageMemory2KHR");
+        vkGetBufferDeviceAddressKHR = VK.get(caps, "vkGetBufferDeviceAddressKHR");
+        vkGetBufferOpaqueCaptureAddressKHR = VK.get(caps, "vkGetBufferOpaqueCaptureAddressKHR");
+        vkGetDeviceMemoryOpaqueCaptureAddressKHR = VK.get(caps, "vkGetDeviceMemoryOpaqueCaptureAddressKHR");
         vkCreateRenderPass2KHR = VK.get(caps, "vkCreateRenderPass2KHR");
         vkCmdBeginRenderPass2KHR = VK.get(caps, "vkCmdBeginRenderPass2KHR");
         vkCmdNextSubpass2KHR = VK.get(caps, "vkCmdNextSubpass2KHR");
@@ -1162,6 +1191,8 @@ public class VKCapabilitiesDevice {
         vkGetImageSparseMemoryRequirements2KHR = VK.get(caps, "vkGetImageSparseMemoryRequirements2KHR");
         vkTrimCommandPoolKHR = VK.get(caps, "vkTrimCommandPoolKHR");
         vkGetDescriptorSetLayoutSupportKHR = VK.get(caps, "vkGetDescriptorSetLayoutSupportKHR");
+        vkAcquireProfilingLockKHR = VK.get(caps, "vkAcquireProfilingLockKHR");
+        vkReleaseProfilingLockKHR = VK.get(caps, "vkReleaseProfilingLockKHR");
         vkGetPipelineExecutablePropertiesKHR = VK.get(caps, "vkGetPipelineExecutablePropertiesKHR");
         vkGetPipelineExecutableStatisticsKHR = VK.get(caps, "vkGetPipelineExecutableStatisticsKHR");
         vkGetPipelineExecutableInternalRepresentationsKHR = VK.get(caps, "vkGetPipelineExecutableInternalRepresentationsKHR");

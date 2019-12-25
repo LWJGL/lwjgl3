@@ -276,7 +276,7 @@ public class KHRTimelineSemaphore {
      * <p>{@link VkSemaphoreWaitInfoKHR}</p>
      *
      * @param device    the logical device that owns the semaphore.
-     * @param pWaitInfo a pointer to an instance of the {@link VkSemaphoreWaitInfoKHR} structure containing information about the wait condition.
+     * @param pWaitInfo a pointer to a {@link VkSemaphoreWaitInfoKHR} structure containing information about the wait condition.
      * @param timeout   the timeout period in units of nanoseconds. {@code timeout} is adjusted to the closest value allowed by the implementation-dependent timeout accuracy, which <b>may</b> be substantially longer than one nanosecond, and <b>may</b> be longer than the requested period.
      */
     @NativeType("VkResult")
@@ -341,7 +341,7 @@ public class KHRTimelineSemaphore {
      * <p>{@link VkSemaphoreSignalInfoKHR}</p>
      *
      * @param device      the logical device that owns the semaphore.
-     * @param pSignalInfo a pointer to an instance of the {@link VkSemaphoreSignalInfoKHR} structure containing information about the signal operation.
+     * @param pSignalInfo a pointer to a {@link VkSemaphoreSignalInfoKHR} structure containing information about the signal operation.
      */
     @NativeType("VkResult")
     public static int vkSignalSemaphoreKHR(VkDevice device, @NativeType("VkSemaphoreSignalInfoKHR const *") VkSemaphoreSignalInfoKHR pSignalInfo) {

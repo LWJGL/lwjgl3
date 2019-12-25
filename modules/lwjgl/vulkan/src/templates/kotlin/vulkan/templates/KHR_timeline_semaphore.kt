@@ -232,7 +232,7 @@ val KHR_timeline_semaphore = "KHRTimelineSemaphore".nativeClassVK("KHR_timeline_
         """,
 
         VkDevice("device", "the logical device that owns the semaphore."),
-        VkSemaphoreWaitInfoKHR.const.p("pWaitInfo", "a pointer to an instance of the ##VkSemaphoreWaitInfoKHR structure containing information about the wait condition."),
+        VkSemaphoreWaitInfoKHR.const.p("pWaitInfo", "a pointer to a ##VkSemaphoreWaitInfoKHR structure containing information about the wait condition."),
         uint64_t("timeout", "the timeout period in units of nanoseconds. {@code timeout} is adjusted to the closest value allowed by the implementation-dependent timeout accuracy, which <b>may</b> be substantially longer than one nanosecond, and <b>may</b> be longer than the requested period.")
     )
 
@@ -281,6 +281,6 @@ val KHR_timeline_semaphore = "KHRTimelineSemaphore".nativeClassVK("KHR_timeline_
         """,
 
         VkDevice("device", "the logical device that owns the semaphore."),
-        VkSemaphoreSignalInfoKHR.const.p("pSignalInfo", "a pointer to an instance of the ##VkSemaphoreSignalInfoKHR structure containing information about the signal operation.")
+        VkSemaphoreSignalInfoKHR.const.p("pSignalInfo", "a pointer to a ##VkSemaphoreSignalInfoKHR structure containing information about the signal operation.")
     )
 }

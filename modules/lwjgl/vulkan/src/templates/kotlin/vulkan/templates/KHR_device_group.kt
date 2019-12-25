@@ -37,7 +37,7 @@ val KHR_device_group = "KHRDeviceGroup".nativeClassVK("KHR_device_group", type =
             <li>#AcquireNextImage2KHR()</li>
         </ul>
 
-        If Vulkan 1.1 and VK_KHR_swapchain are supported, these are included by VK_KHR_swapchain.
+        If Vulkan 1.1 and {@link KHRSwapchain VK_KHR_swapchain} are supported, these are included by {@code VK_KHR_swapchain}.
 
         The base functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
 

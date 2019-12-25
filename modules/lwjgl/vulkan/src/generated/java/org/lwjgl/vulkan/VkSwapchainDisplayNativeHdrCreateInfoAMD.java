@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If the {@code pNext} chain of {@link VkSwapchainCreateInfoKHR} does not contain this structure, the default value for {@code localDimmingEnable} is {@link VK10#VK_TRUE TRUE}, meaning local dimming is initially enabled for the swapchain.</p>
+ * <p>If the {@code pNext} chain of {@link VkSwapchainCreateInfoKHR} does not include this structure, the default value for {@code localDimmingEnable} is {@link VK10#VK_TRUE TRUE}, meaning local dimming is initially enabled for the swapchain.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

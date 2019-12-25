@@ -31,15 +31,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If either of the calling command&#8217;s {@code srcImage} or {@code dstImage} parameters are of {@code VkImageType} {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D}, the {@code baseArrayLayer} and {@code layerCount} members of both {@code srcSubresource} and {@code dstSubresource} <b>must</b> be 0 and 1, respectively</li>
  * <li>The {@code aspectMask} member of {@code srcSubresource} <b>must</b> specify aspects present in the calling command&#8217;s {@code srcImage}</li>
  * <li>The {@code aspectMask} member of {@code dstSubresource} <b>must</b> specify aspects present in the calling command&#8217;s {@code dstImage}</li>
- * <li>{@code srcOffset}[0].{@code x} and {@code srcOffset}[1].{@code x} <b>must</b> both be greater than or equal to 0 and less than or equal to the source image subresource width</li>
- * <li>{@code srcOffset}[0].{@code y} and {@code srcOffset}[1].{@code y} <b>must</b> both be greater than or equal to 0 and less than or equal to the source image subresource height</li>
+ * <li>{@code srcOffset}[0].x and {@code srcOffset}[1].x <b>must</b> both be greater than or equal to 0 and less than or equal to the source image subresource width</li>
+ * <li>{@code srcOffset}[0].y and {@code srcOffset}[1].y <b>must</b> both be greater than or equal to 0 and less than or equal to the source image subresource height</li>
  * <li>If the calling command&#8217;s {@code srcImage} is of type {@link VK10#VK_IMAGE_TYPE_1D IMAGE_TYPE_1D}, then {@code srcOffset}[0].y <b>must</b> be 0 and {@code srcOffset}[1].y <b>must</b> be 1.</li>
- * <li>{@code srcOffset}[0].{@code z} and {@code srcOffset}[1].{@code z} <b>must</b> both be greater than or equal to 0 and less than or equal to the source image subresource depth</li>
+ * <li>{@code srcOffset}[0].z and {@code srcOffset}[1].z <b>must</b> both be greater than or equal to 0 and less than or equal to the source image subresource depth</li>
  * <li>If the calling command&#8217;s {@code srcImage} is of type {@link VK10#VK_IMAGE_TYPE_1D IMAGE_TYPE_1D} or {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D}, then {@code srcOffset}[0].z <b>must</b> be 0 and {@code srcOffset}[1].z <b>must</b> be 1.</li>
- * <li>{@code dstOffset}[0].{@code x} and {@code dstOffset}[1].{@code x} <b>must</b> both be greater than or equal to 0 and less than or equal to the destination image subresource width</li>
- * <li>{@code dstOffset}[0].{@code y} and {@code dstOffset}[1].{@code y} <b>must</b> both be greater than or equal to 0 and less than or equal to the destination image subresource height</li>
+ * <li>{@code dstOffset}[0].x and {@code dstOffset}[1].x <b>must</b> both be greater than or equal to 0 and less than or equal to the destination image subresource width</li>
+ * <li>{@code dstOffset}[0].y and {@code dstOffset}[1].y <b>must</b> both be greater than or equal to 0 and less than or equal to the destination image subresource height</li>
  * <li>If the calling command&#8217;s {@code dstImage} is of type {@link VK10#VK_IMAGE_TYPE_1D IMAGE_TYPE_1D}, then {@code dstOffset}[0].y <b>must</b> be 0 and {@code dstOffset}[1].y <b>must</b> be 1.</li>
- * <li>{@code dstOffset}[0].{@code z} and {@code dstOffset}[1].{@code z} <b>must</b> both be greater than or equal to 0 and less than or equal to the destination image subresource depth</li>
+ * <li>{@code dstOffset}[0].z and {@code dstOffset}[1].z <b>must</b> both be greater than or equal to 0 and less than or equal to the destination image subresource depth</li>
  * <li>If the calling command&#8217;s {@code dstImage} is of type {@link VK10#VK_IMAGE_TYPE_1D IMAGE_TYPE_1D} or {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D}, then {@code dstOffset}[0].z <b>must</b> be 0 and {@code dstOffset}[1].z <b>must</b> be 1.</li>
  * </ul>
  * 

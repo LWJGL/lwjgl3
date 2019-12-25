@@ -28,7 +28,7 @@ import static org.lwjgl.system.JNI.*;
  * </ul></dd>
  * <dt><b>Deprecation state</b></dt>
  * <dd><ul>
- * <li><em>Deprecated</em> by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VK_KHR_external_memory_capabilities">VK_KHR_external_memory_capabilities</a> extension
+ * <li><em>Deprecated</em> by {@link KHRExternalMemoryCapabilities VK_KHR_external_memory_capabilities} extension
  * 
  * <ul>
  * <li>Which in turn was <em>promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#versions-1.1-promotions">Vulkan 1.1</a></li>
@@ -146,7 +146,7 @@ public class NVExternalMemoryCapabilities {
      * 
      * <h5>Description</h5>
      * 
-     * <p>If {@code externalHandleType} is 0, {@code pExternalImageFormatProperties}::imageFormatProperties will return the same values as a call to {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties}, and the other members of {@code pExternalImageFormatProperties} will all be 0. Otherwise, they are filled in as described for {@link VkExternalImageFormatPropertiesNV}.</p>
+     * <p>If {@code externalHandleType} is 0, {@code pExternalImageFormatProperties}-&gt;imageFormatProperties will return the same values as a call to {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties}, and the other members of {@code pExternalImageFormatProperties} will all be 0. Otherwise, they are filled in as described for {@link VkExternalImageFormatPropertiesNV}.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

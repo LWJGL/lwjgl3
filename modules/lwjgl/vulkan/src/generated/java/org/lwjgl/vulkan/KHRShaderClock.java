@@ -8,6 +8,8 @@ package org.lwjgl.vulkan;
 /**
  * This extension advertises the SPIR-V {@code ShaderClockKHR} capability for Vulkan, which allows a shader to query a real-time or monotonically incrementing counter at the subgroup level or across the device level. The two valid SPIR-V scopes for {@code OpReadClockKHR} are {@code Subgroup} and {@code Device}.
  * 
+ * <p>When using GLSL source-based shading languages, the {@code clockRealtime}*{@code EXT}() timing functions map to the {@code OpReadClockKHR} instruction with a scope of {@code Device}, and the {@code clock}*{@code ARB}() timing functions map to the {@code OpReadClockKHR} instruction with a scope of {@code Subgroup}.</p>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_shader_clock}</dd>
@@ -32,7 +34,9 @@ package org.lwjgl.vulkan;
  * <dd>No known IP claims.</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>This extension requires <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/KHR/SPV_KHR_shader_clock.html">SPV_KHR_shader_clock</a></li>
+ * <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_shader_clock.html">{@code SPV_KHR_shader_clock}</a>.</li>
+ * <li>This extension enables <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_clock.txt">{@code ARB_shader_clock}</a> for GLSL source languages.</li>
+ * <li>This extension enables <a target="_blank" href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GL_EXT_shader_realtime_clock.txt">{@code EXT_shader_realtime_clock}</a> for GLSL source languages.</li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

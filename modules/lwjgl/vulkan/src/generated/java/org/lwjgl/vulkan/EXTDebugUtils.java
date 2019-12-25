@@ -387,8 +387,8 @@ public class EXTDebugUtils {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>{@code pNameInfo}-&gt;{@code objectType} <b>must</b> not be {@link VK10#VK_OBJECT_TYPE_UNKNOWN OBJECT_TYPE_UNKNOWN}</li>
-     * <li>{@code pNameInfo}-&gt;{@code objectHandle} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
+     * <li>{@code pNameInfo}-&gt;objectType <b>must</b> not be {@link VK10#VK_OBJECT_TYPE_UNKNOWN OBJECT_TYPE_UNKNOWN}</li>
+     * <li>{@code pNameInfo}-&gt;objectHandle <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -965,7 +965,7 @@ public class EXTDebugUtils {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>{@code objectType} member of each element of {@code pCallbackData}-&gt;{@code pObjects} <b>must</b> not be {@link VK10#VK_OBJECT_TYPE_UNKNOWN OBJECT_TYPE_UNKNOWN}</li>
+     * <li>The {@code objectType} member of each element of {@code pCallbackData}-&gt;pObjects <b>must</b> not be {@link VK10#VK_OBJECT_TYPE_UNKNOWN OBJECT_TYPE_UNKNOWN}</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>

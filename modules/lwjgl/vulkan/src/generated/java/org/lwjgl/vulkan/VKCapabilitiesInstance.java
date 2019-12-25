@@ -86,6 +86,10 @@ public class VKCapabilitiesInstance {
     public final long
         vkGetPhysicalDeviceMultisamplePropertiesEXT;
 
+    // EXT_tooling_info
+    public final long
+        vkGetPhysicalDeviceToolPropertiesEXT;
+
     // KHR_device_group
     public final long
         vkGetPhysicalDevicePresentRectanglesKHR;
@@ -137,6 +141,11 @@ public class VKCapabilitiesInstance {
     public final long
         vkGetPhysicalDeviceSurfaceCapabilities2KHR,
         vkGetPhysicalDeviceSurfaceFormats2KHR;
+
+    // KHR_performance_query
+    public final long
+        vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR,
+        vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR;
 
     // KHR_surface
     public final long
@@ -242,7 +251,7 @@ public class VKCapabilitiesInstance {
     VKCapabilitiesInstance(FunctionProvider provider, int apiVersion, Set<String> ext, Set<String> deviceExt) {
         this.apiVersion = apiVersion;
 
-        Map<String, Long> caps = new HashMap<>(79);
+        Map<String, Long> caps = new HashMap<>(82);
 
         Vulkan10 = VK10.checkCapsInstance(provider, caps, ext);
         Vulkan11 = VK11.checkCapsInstance(provider, caps, ext);
@@ -257,6 +266,7 @@ public class VKCapabilitiesInstance {
         VK_EXT_metal_surface = EXTMetalSurface.checkCapsInstance(provider, caps, ext);
         EXTSampleLocations.checkCapsInstance(provider, caps, deviceExt);
         VK_EXT_swapchain_colorspace = ext.contains("VK_EXT_swapchain_colorspace");
+        EXTToolingInfo.checkCapsInstance(provider, caps, deviceExt);
         VK_EXT_validation_features = ext.contains("VK_EXT_validation_features");
         VK_EXT_validation_flags = ext.contains("VK_EXT_validation_flags");
         KHRDeviceGroup.checkCapsInstance(provider, caps, deviceExt);
@@ -268,6 +278,7 @@ public class VKCapabilitiesInstance {
         VK_KHR_get_display_properties2 = KHRGetDisplayProperties2.checkCapsInstance(provider, caps, ext);
         VK_KHR_get_physical_device_properties2 = KHRGetPhysicalDeviceProperties2.checkCapsInstance(provider, caps, ext);
         VK_KHR_get_surface_capabilities2 = KHRGetSurfaceCapabilities2.checkCapsInstance(provider, caps, ext);
+        KHRPerformanceQuery.checkCapsInstance(provider, caps, deviceExt);
         VK_KHR_surface = KHRSurface.checkCapsInstance(provider, caps, ext);
         VK_KHR_surface_protected_capabilities = ext.contains("VK_KHR_surface_protected_capabilities");
         KHRSwapchain.checkCapsInstance(provider, caps, deviceExt);
@@ -318,6 +329,7 @@ public class VKCapabilitiesInstance {
         vkCreateHeadlessSurfaceEXT = VK.get(caps, "vkCreateHeadlessSurfaceEXT");
         vkCreateMetalSurfaceEXT = VK.get(caps, "vkCreateMetalSurfaceEXT");
         vkGetPhysicalDeviceMultisamplePropertiesEXT = VK.get(caps, "vkGetPhysicalDeviceMultisamplePropertiesEXT");
+        vkGetPhysicalDeviceToolPropertiesEXT = VK.get(caps, "vkGetPhysicalDeviceToolPropertiesEXT");
         vkGetPhysicalDevicePresentRectanglesKHR = VK.get(caps, "vkGetPhysicalDevicePresentRectanglesKHR");
         vkEnumeratePhysicalDeviceGroupsKHR = VK.get(caps, "vkEnumeratePhysicalDeviceGroupsKHR");
         vkGetPhysicalDeviceDisplayPropertiesKHR = VK.get(caps, "vkGetPhysicalDeviceDisplayPropertiesKHR");
@@ -343,6 +355,8 @@ public class VKCapabilitiesInstance {
         vkGetPhysicalDeviceSparseImageFormatProperties2KHR = VK.get(caps, "vkGetPhysicalDeviceSparseImageFormatProperties2KHR");
         vkGetPhysicalDeviceSurfaceCapabilities2KHR = VK.get(caps, "vkGetPhysicalDeviceSurfaceCapabilities2KHR");
         vkGetPhysicalDeviceSurfaceFormats2KHR = VK.get(caps, "vkGetPhysicalDeviceSurfaceFormats2KHR");
+        vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR = VK.get(caps, "vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR");
+        vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR = VK.get(caps, "vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR");
         vkDestroySurfaceKHR = VK.get(caps, "vkDestroySurfaceKHR");
         vkGetPhysicalDeviceSurfaceSupportKHR = VK.get(caps, "vkGetPhysicalDeviceSurfaceSupportKHR");
         vkGetPhysicalDeviceSurfaceCapabilitiesKHR = VK.get(caps, "vkGetPhysicalDeviceSurfaceCapabilitiesKHR");

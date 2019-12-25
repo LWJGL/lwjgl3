@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure</li>
  * <li>{@code pNext} &ndash; NULL or a pointer to an extension-specific structure.</li>
- * <li>{@code externalMemoryProperties} &ndash; an instance of the {@link VkExternalMemoryProperties} structure specifying various capabilities of the external handle type when used with the specified buffer creation parameters.</li>
+ * <li>{@code externalMemoryProperties} &ndash; a {@link VkExternalMemoryProperties} structure specifying various capabilities of the external handle type when used with the specified buffer creation parameters.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

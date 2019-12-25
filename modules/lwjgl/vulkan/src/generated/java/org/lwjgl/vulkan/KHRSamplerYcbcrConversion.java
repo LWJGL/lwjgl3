@@ -54,7 +54,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
  * <li>Promoted to Vulkan 1.1 Core</li>
- * <li>This extension interacts with {@link EXTDebugReport VK_EXT_debug_report}</li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

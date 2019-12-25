@@ -324,6 +324,7 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassVK("EXT_transform
         <ul>
             <li>{@code queryPool} <b>must</b> have been created with a {@code queryType} that differs from that of any queries that are <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#queries-operation-active">active</a> within {@code commandBuffer}</li>
             <li>All queries used by the command <b>must</b> be unavailable</li>
+            <li>The {@code queryType} used to create {@code queryPool} <b>must</b> not be #QUERY_TYPE_TIMESTAMP</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#features-occlusionQueryPrecise">precise occlusion queries</a> feature is not enabled, or the {@code queryType} used to create {@code queryPool} was not #QUERY_TYPE_OCCLUSION, {@code flags} <b>must</b> not contain #QUERY_CONTROL_PRECISE_BIT</li>
             <li>{@code query} <b>must</b> be less than the number of queries in {@code queryPool}</li>
             <li>If the {@code queryType} used to create {@code queryPool} was #QUERY_TYPE_OCCLUSION, the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
@@ -335,6 +336,10 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassVK("EXT_transform
             <li>If the {@code queryType} used to create {@code queryPool} was #QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT the {@code index} parameter <b>must</b> be less than ##VkPhysicalDeviceTransformFeedbackPropertiesEXT{@code ::maxTransformFeedbackStreams}</li>
             <li>If the {@code queryType} used to create {@code queryPool} was not #QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT the {@code index} <b>must</b> be zero</li>
             <li>If the {@code queryType} used to create {@code queryPool} was #QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT then ##VkPhysicalDeviceTransformFeedbackPropertiesEXT{@code ::transformFeedbackQueries} <b>must</b> be supported</li>
+            <li>If {@code queryPool} was created with a {@code queryType} of #QUERY_TYPE_PERFORMANCE_QUERY_KHR, the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#profiling-lock">profiling lock</a> <b>must</b> have been held before #BeginCommandBuffer() was called on {@code commandBuffer}</li>
+            <li>If {@code queryPool} was created with a {@code queryType} of #QUERY_TYPE_PERFORMANCE_QUERY_KHR and one of the counters used to create {@code queryPool} was #QUERY_SCOPE_COMMAND_BUFFER_KHR, the query begin <b>must</b> be the first recorded command in {@code commandBuffer}</li>
+            <li>If {@code queryPool} was created with a {@code queryType} of #QUERY_TYPE_PERFORMANCE_QUERY_KHR and one of the counters used to create {@code queryPool} was #QUERY_SCOPE_RENDER_PASS_KHR, the begin command <b>must</b> not be recorded within a render pass instance</li>
+            <li>If {@code queryPool} was created with a {@code queryType} of #QUERY_TYPE_PERFORMANCE_QUERY_KHR and another query pool with a {@code queryType} #QUERY_TYPE_PERFORMANCE_QUERY_KHR has been used within {@code commandBuffer}, its parent primary command buffer or secondary command buffer recorded within the same parent primary command buffer as {@code commandBuffer}, the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#features-features-performanceCounterMultipleQueryPools">{@code performanceCounterMultipleQueryPools}</a> feature <b>must</b> be enabled</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

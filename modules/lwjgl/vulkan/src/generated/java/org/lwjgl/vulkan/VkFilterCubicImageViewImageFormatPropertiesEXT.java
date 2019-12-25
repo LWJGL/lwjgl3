@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If the {@code pNext} chain of the {@link VkImageFormatProperties2} structure contains an instance of {@link VkFilterCubicImageViewImageFormatPropertiesEXT}, the {@code pNext} chain of the {@link VkPhysicalDeviceImageFormatInfo2} structure <b>must</b> contain an instance of {@link VkPhysicalDeviceImageViewImageFormatInfoEXT} with an {@code imageViewType} that is compatible with {@code imageType}.</li>
+ * <li>If the {@code pNext} chain of the {@link VkImageFormatProperties2} structure includes a {@link VkFilterCubicImageViewImageFormatPropertiesEXT} structure, the {@code pNext} chain of the {@link VkPhysicalDeviceImageFormatInfo2} structure <b>must</b> include a {@link VkPhysicalDeviceImageViewImageFormatInfoEXT} structure with an {@code imageViewType} that is compatible with {@code imageType}.</li>
  * </ul>
  * 
  * <h3>Member documentation</h3>

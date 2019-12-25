@@ -16,34 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the buffer to query an address for.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code buffer} is non-sparse and was not created with the {@link EXTBufferDeviceAddress#VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT} flag, then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
- * <li>{@code buffer} <b>must</b> have been created with {@link EXTBufferDeviceAddress#VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_EXT BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_EXT}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTBufferDeviceAddress#VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO_EXT STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO_EXT}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link EXTBufferDeviceAddress#vkGetBufferDeviceAddressEXT GetBufferDeviceAddressEXT}</p>
- * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code buffer} &ndash; specifies the buffer whose address is being queried.</li>
- * </ul>
+ * See {@link VkBufferDeviceAddressInfoKHR}.
  * 
  * <h3>Layout</h3>
  * 
@@ -54,34 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBuffer buffer;
  * }</code></pre>
  */
-public class VkBufferDeviceAddressInfoEXT extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        BUFFER;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(8)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        BUFFER = layout.offsetof(2);
-    }
+public class VkBufferDeviceAddressInfoEXT extends VkBufferDeviceAddressInfoKHR {
 
     /**
      * Creates a {@code VkBufferDeviceAddressInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -90,30 +36,21 @@ public class VkBufferDeviceAddressInfoEXT extends Struct implements NativeResour
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkBufferDeviceAddressInfoEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** Returns the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code buffer} field. */
-    @NativeType("VkBuffer")
-    public long buffer() { return nbuffer(address()); }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkBufferDeviceAddressInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkBufferDeviceAddressInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code buffer} field. */
+    @Override
     public VkBufferDeviceAddressInfoEXT buffer(@NativeType("VkBuffer") long value) { nbuffer(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkBufferDeviceAddressInfoEXT set(
         int sType,
         long pNext,
@@ -281,24 +218,8 @@ public class VkBufferDeviceAddressInfoEXT extends Struct implements NativeResour
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkBufferDeviceAddressInfoEXT.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkBufferDeviceAddressInfoEXT.PNEXT); }
-    /** Unsafe version of {@link #buffer}. */
-    public static long nbuffer(long struct) { return UNSAFE.getLong(null, struct + VkBufferDeviceAddressInfoEXT.BUFFER); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkBufferDeviceAddressInfoEXT.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkBufferDeviceAddressInfoEXT.PNEXT, value); }
-    /** Unsafe version of {@link #buffer(long) buffer}. */
-    public static void nbuffer(long struct, long value) { UNSAFE.putLong(null, struct + VkBufferDeviceAddressInfoEXT.BUFFER, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkBufferDeviceAddressInfoEXT} structs. */
-    public static class Buffer extends StructBuffer<VkBufferDeviceAddressInfoEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkBufferDeviceAddressInfoKHR.Buffer {
 
         private static final VkBufferDeviceAddressInfoEXT ELEMENT_FACTORY = VkBufferDeviceAddressInfoEXT.create(-1L);
 
@@ -312,7 +233,7 @@ public class VkBufferDeviceAddressInfoEXT extends Struct implements NativeResour
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -333,21 +254,14 @@ public class VkBufferDeviceAddressInfoEXT extends Struct implements NativeResour
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkBufferDeviceAddressInfoEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkBufferDeviceAddressInfoEXT.npNext(address()); }
-        /** Returns the value of the {@code buffer} field. */
-        @NativeType("VkBuffer")
-        public long buffer() { return VkBufferDeviceAddressInfoEXT.nbuffer(address()); }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkBufferDeviceAddressInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkBufferDeviceAddressInfoEXT.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkBufferDeviceAddressInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkBufferDeviceAddressInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code buffer} field. */
+        @Override
         public VkBufferDeviceAddressInfoEXT.Buffer buffer(@NativeType("VkBuffer") long value) { VkBufferDeviceAddressInfoEXT.nbuffer(address(), value); return this; }
 
     }

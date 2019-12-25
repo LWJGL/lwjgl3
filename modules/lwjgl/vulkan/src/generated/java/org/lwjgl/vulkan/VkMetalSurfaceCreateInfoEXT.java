@@ -19,8 +19,6 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying parameters of a newly created Metal surface object.
  * 
- * <h5>Description</h5>
- * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

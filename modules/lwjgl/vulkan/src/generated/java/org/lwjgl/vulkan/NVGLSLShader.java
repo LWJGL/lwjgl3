@@ -8,6 +8,10 @@ package org.lwjgl.vulkan;
 /**
  * This extension allows GLSL shaders written to the {@code GL_KHR_vulkan_glsl} extension specification to be used instead of SPIR-V. The implementation will automatically detect whether the shader is SPIR-V or GLSL, and compile it appropriately.
  * 
+ * <h5>Deprecation</h5>
+ * 
+ * <p>Functionality in this extension is outside of the scope of Vulkan and is better served by a compiler library such as <a target="_blank" href="https://github.com/KhronosGroup/glslang">glslang</a>. No new implementations will support this extension, so applications <b>should</b> not use it.</p>
+ * 
  * <h5>Examples</h5>
  * 
  * <p><b>Example 1</b></p>

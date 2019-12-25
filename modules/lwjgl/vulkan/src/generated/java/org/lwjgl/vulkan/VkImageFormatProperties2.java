@@ -44,7 +44,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure. The {@code pNext} chain of {@link VkImageFormatProperties2} is used to allow the specification of additional capabilities to be returned from {@code vkGetPhysicalDeviceImageFormatProperties2}.</li>
- * <li>{@code imageFormatProperties} &ndash; an instance of a {@link VkImageFormatProperties} structure in which capabilities are returned.</li>
+ * <li>{@code imageFormatProperties} &ndash; a {@link VkImageFormatProperties} structure in which capabilities are returned.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

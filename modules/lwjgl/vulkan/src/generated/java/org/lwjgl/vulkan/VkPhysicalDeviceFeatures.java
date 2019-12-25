@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure describing the fine-grained features that can be supported by an implementation.
  * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@code VkBool32}, {@link VkDeviceCreateInfo}, {@link VkPhysicalDeviceFeatures2}, {@link VK10#vkGetPhysicalDeviceFeatures GetPhysicalDeviceFeatures}</p>
+ * 
  * <h3>Member documentation</h3>
  * 
  * <ul>
@@ -180,7 +184,44 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code fragmentStoresAndAtomics} &ndash; specifies whether storage buffers and images support stores and atomic operations in the fragment shader stage. If this feature is not enabled, all storage image, storage texel buffers, and storage buffer variables used by the fragment stage in shader modules <b>must</b> be decorated with the {@code NonWritable} decoration (or the {@code readonly} memory qualifier in GLSL).</li>
  * <li>{@code shaderTessellationAndGeometryPointSize} &ndash; specifies whether the {@code PointSize} built-in decoration is available in the tessellation control, tessellation evaluation, and geometry shader stages. If this feature is not enabled, members decorated with the {@code PointSize} built-in decoration <b>must</b> not be read from or written to and all points written from a tessellation or geometry shader will have a size of 1.0. This also specifies whether shader modules <b>can</b> declare the {@code TessellationPointSize} capability for tessellation control and evaluation shaders, or if the shader modules <b>can</b> declare the {@code GeometryPointSize} capability for geometry shaders. An implementation supporting this feature <b>must</b> also support one or both of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#features-tessellationShader">{@code tessellationShader}</a> or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#features-geometryShader">{@code geometryShader}</a> features.</li>
  * <li>{@code shaderImageGatherExtended} &ndash; specifies whether the extended set of image gather instructions are available in shader code. If this feature is not enabled, the {@code OpImage}*{@code Gather} instructions do not support the {@code Offset} and {@code ConstOffsets} operands. This also specifies whether shader modules <b>can</b> declare the {@code ImageGatherExtended} capability.</li>
- * <li>{@code shaderStorageImageExtendedFormats} &ndash; specifies whether all the extended storage image formats are available in shader code. If this feature is enabled then the {@link VK10#VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT FORMAT_FEATURE_STORAGE_IMAGE_BIT} feature <b>must</b> be supported in {@code optimalTilingFeatures} for all of the extended formats. To query for additional properties, or if the feature is not enabled, {@link VK10#vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties} and {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties} <b>can</b> be used to check for supported properties of individual formats as normal.</li>
+ * <li>{@code shaderStorageImageExtendedFormats} &ndash; specifies whether all the “storage image extended formats” below are supported; if this feature is supported, then the {@link VK10#VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT FORMAT_FEATURE_STORAGE_IMAGE_BIT} <b>must</b> be supported in {@code optimalTilingFeatures} for the following formats:
+ * 
+ * <ul>
+ * <li>{@link VK10#VK_FORMAT_R16G16_SFLOAT FORMAT_R16G16_SFLOAT}</li>
+ * <li>{@link VK10#VK_FORMAT_B10G11R11_UFLOAT_PACK32 FORMAT_B10G11R11_UFLOAT_PACK32}</li>
+ * <li>{@link VK10#VK_FORMAT_R16_SFLOAT FORMAT_R16_SFLOAT}</li>
+ * <li>{@link VK10#VK_FORMAT_R16G16B16A16_UNORM FORMAT_R16G16B16A16_UNORM}</li>
+ * <li>{@link VK10#VK_FORMAT_A2B10G10R10_UNORM_PACK32 FORMAT_A2B10G10R10_UNORM_PACK32}</li>
+ * <li>{@link VK10#VK_FORMAT_R16G16_UNORM FORMAT_R16G16_UNORM}</li>
+ * <li>{@link VK10#VK_FORMAT_R8G8_UNORM FORMAT_R8G8_UNORM}</li>
+ * <li>{@link VK10#VK_FORMAT_R16_UNORM FORMAT_R16_UNORM}</li>
+ * <li>{@link VK10#VK_FORMAT_R8_UNORM FORMAT_R8_UNORM}</li>
+ * <li>{@link VK10#VK_FORMAT_R16G16B16A16_SNORM FORMAT_R16G16B16A16_SNORM}</li>
+ * <li>{@link VK10#VK_FORMAT_R16G16_SNORM FORMAT_R16G16_SNORM}</li>
+ * <li>{@link VK10#VK_FORMAT_R8G8_SNORM FORMAT_R8G8_SNORM}</li>
+ * <li>{@link VK10#VK_FORMAT_R16_SNORM FORMAT_R16_SNORM}</li>
+ * <li>{@link VK10#VK_FORMAT_R8_SNORM FORMAT_R8_SNORM}</li>
+ * <li>{@link VK10#VK_FORMAT_R16G16_SINT FORMAT_R16G16_SINT}</li>
+ * <li>{@link VK10#VK_FORMAT_R8G8_SINT FORMAT_R8G8_SINT}</li>
+ * <li>{@link VK10#VK_FORMAT_R16_SINT FORMAT_R16_SINT}</li>
+ * <li>{@link VK10#VK_FORMAT_R8_SINT FORMAT_R8_SINT}</li>
+ * <li>{@link VK10#VK_FORMAT_A2B10G10R10_UINT_PACK32 FORMAT_A2B10G10R10_UINT_PACK32}</li>
+ * <li>{@link VK10#VK_FORMAT_R16G16_UINT FORMAT_R16G16_UINT}</li>
+ * <li>{@link VK10#VK_FORMAT_R8G8_UINT FORMAT_R8G8_UINT}</li>
+ * <li>{@link VK10#VK_FORMAT_R16_UINT FORMAT_R16_UINT}</li>
+ * <li>{@link VK10#VK_FORMAT_R8_UINT FORMAT_R8_UINT}</li>
+ * </ul>
+ * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>{@code shaderStorageImageExtendedFormats} feature only adds a guarantee of format support, which is specified for the whole physical device. Therefore enabling or disabling the feature via {@link VK10#vkCreateDevice CreateDevice} has no practical effect.</p>
+ * 
+ * <p>== Description</p>
+ * 
+ * <p>To query for additional properties, or if the feature is not supported, {@link VK10#vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties} and {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties} <b>can</b> be used to check for supported properties of individual formats, as usual rules allow.</p>
+ * 
+ * <p>{@link VK10#VK_FORMAT_R32G32_UINT FORMAT_R32G32_UINT}, {@link VK10#VK_FORMAT_R32G32_SINT FORMAT_R32G32_SINT}, and {@link VK10#VK_FORMAT_R32G32_SFLOAT FORMAT_R32G32_SFLOAT} from {@code StorageImageExtendedFormats} SPIR-V capability, are already covered by core Vulkan <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#formats-mandatory-features-32bit">mandatory format support</a>.</p>
+ * </div></li>
  * <li>{@code shaderStorageImageMultisample} &ndash; specifies whether multisampled storage images are supported. If this feature is not enabled, images that are created with a {@code usage} that includes {@link VK10#VK_IMAGE_USAGE_STORAGE_BIT IMAGE_USAGE_STORAGE_BIT} <b>must</b> be created with {@code samples} equal to {@link VK10#VK_SAMPLE_COUNT_1_BIT SAMPLE_COUNT_1_BIT}. This also specifies whether shader modules <b>can</b> declare the {@code StorageImageMultisample} capability.</li>
  * <li>{@code shaderStorageImageReadWithoutFormat} &ndash; specifies whether storage images require a format qualifier to be specified when reading from storage images. If this feature is not enabled, the {@code OpImageRead} instruction <b>must</b> not have an {@code OpTypeImage} of {@code Unknown}. This also specifies whether shader modules <b>can</b> declare the {@code StorageImageReadWithoutFormat} capability.</li>
  * <li>{@code shaderStorageImageWriteWithoutFormat} &ndash; specifies whether storage images require a format qualifier to be specified when writing to storage images. If this feature is not enabled, the {@code OpImageWrite} instruction <b>must</b> not have an {@code OpTypeImage} of {@code Unknown}. This also specifies whether shader modules <b>can</b> declare the {@code StorageImageWriteWithoutFormat} capability.</li>

@@ -14,7 +14,7 @@ val AMD_gpu_shader_int16 = "AMDGPUShaderInt16".nativeClassVK("AMD_gpu_shader_int
         This extension adds support for using 16-bit integer variables in shaders.
 
         <h5>Deprecation by VK_KHR_shader_float16_int8</h5>
-        Functionality in this extension was included in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#VK_KHR_shader_float16_int8">VK_KHR_shader_float16_int8</a> extension, when ##VkPhysicalDeviceFeatures{@code ::shaderInt16} and slink::VkPhysicalDeviceShaderFloat16Int8FeaturesKHR{@code ::shaderFloat16} are enabled.
+        Functionality in this extension was included in {@link KHRShaderFloat16Int8 VK_KHR_shader_float16_int8} extension, when ##VkPhysicalDeviceFeatures{@code ::shaderInt16} and ##VkPhysicalDeviceShaderFloat16Int8FeaturesKHR{@code ::shaderFloat16} are enabled.
 
         <dl>
             <dt><b>Name String</b></dt>
@@ -36,7 +36,7 @@ val AMD_gpu_shader_int16 = "AMDGPUShaderInt16".nativeClassVK("AMD_gpu_shader_int
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
-                <li><em>Deprecated</em> by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#VK_KHR_shader_float16_int8">VK_KHR_shader_float16_int8</a> extension</li>
+                <li><em>Deprecated</em> by {@link KHRShaderFloat16Int8 VK_KHR_shader_float16_int8} extension</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

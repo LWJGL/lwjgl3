@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <ul>
  * <li>{@code shaderStageMask} &ndash; are the combination of logical shader stages contained within this shader.</li>
- * <li>{@code resourceUsage} &ndash; an instance of {@link VkShaderResourceUsageAMD} describing internal physical device resources used by this shader.</li>
+ * <li>{@code resourceUsage} &ndash; a {@link VkShaderResourceUsageAMD} structure describing internal physical device resources used by this shader.</li>
  * <li>{@code numPhysicalVgprs} &ndash; the maximum number of vector instruction general-purpose registers (VGPRs) available to the physical device.</li>
  * <li>{@code numPhysicalSgprs} &ndash; the maximum number of scalar instruction general-purpose registers (SGPRs) available to the physical device.</li>
  * <li>{@code numAvailableVgprs} &ndash; the maximum limit of VGPRs made available to the shader compiler.</li>
