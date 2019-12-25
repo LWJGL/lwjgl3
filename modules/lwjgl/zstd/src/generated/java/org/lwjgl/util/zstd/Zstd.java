@@ -110,7 +110,7 @@ public class Zstd {
     public static final int
         ZSTD_VERSION_MAJOR   = 1,
         ZSTD_VERSION_MINOR   = 4,
-        ZSTD_VERSION_RELEASE = 3;
+        ZSTD_VERSION_RELEASE = 4;
 
     /** Version number. */
     public static final int ZSTD_VERSION_NUMBER = (ZSTD_VERSION_MAJOR *100*100 + ZSTD_VERSION_MINOR *100 + ZSTD_VERSION_RELEASE);
@@ -176,34 +176,41 @@ public class Zstd {
      * 
      * <ul>
      * <li>{@link #ZSTD_c_compressionLevel c_compressionLevel} - 
-     * Update all compression parameters according to pre-defined cLevel table Default level is {@link #ZSTD_CLEVEL_DEFAULT CLEVEL_DEFAULT}{@code ==3}. Special: value 0 means
-     * default, which is controlled by {@code ZSTD_CLEVEL_DEFAULT}.
+     * Set compression parameters according to pre-defined {@code cLevel} table.
+     * 
+     * <p>Note that exact compression parameters are dynamically determined, depending on both compression level and {@code srcSize} (when known). Default
+     * level is {@link #ZSTD_CLEVEL_DEFAULT CLEVEL_DEFAULT}{@code ==3}. Special: value 0 means default, which is controlled by {@code ZSTD_CLEVEL_DEFAULT}.</p>
      * 
      * <p>Note 1: it's possible to pass a negative compression level.</p>
      * 
-     * <p>Note 2 : setting a level sets all default values of other compression parameters</p>
+     * <p>Note 2: setting a level resets all other compression parameters to default.</p>
      * </li>
      * <li>{@link #ZSTD_c_windowLog c_windowLog} - 
-     * Maximum allowed back-reference distance, expressed as power of 2. Must be clamped between {@link ZstdX#ZSTD_WINDOWLOG_MIN WINDOWLOG_MIN} and {@link ZstdX#ZSTD_WINDOWLOG_MAX WINDOWLOG_MAX}. Special: value
-     * 0 means "use default {@code windowLog}".
+     * Maximum allowed back-reference distance, expressed as power of 2.
      * 
-     * <p>Note: Using a {@code windowLog} greater than {@link ZstdX#ZSTD_WINDOWLOG_LIMIT_DEFAULT WINDOWLOG_LIMIT_DEFAULT} requires explicitly allowing such window size at decompression stage if using
-     * streaming.</p>
+     * <p>This will set a memory budget for streaming decompression, with larger values requiring more memory and typically compressing more. Must be clamped
+     * between {@link ZstdX#ZSTD_WINDOWLOG_MIN WINDOWLOG_MIN} and {@link ZstdX#ZSTD_WINDOWLOG_MAX WINDOWLOG_MAX}. Special: value 0 means "use default {@code windowLog}".</p>
+     * 
+     * <p>Note: Using a {@code windowLog} greater than {@link ZstdX#ZSTD_WINDOWLOG_LIMIT_DEFAULT WINDOWLOG_LIMIT_DEFAULT} requires explicitly allowing such size at streaming decompression stage.</p>
      * </li>
      * <li>{@link #ZSTD_c_hashLog c_hashLog} - 
-     * Size of the initial probe table, as a power of 2. Resulting memory usage is (1 &lt;&lt; {@code (hashLog+2)}). Must be clamped between {@link ZstdX#ZSTD_HASHLOG_MIN HASHLOG_MIN} and
-     * HASHLOG_MAX. Larger tables improve compression ratio of strategies &le; dFast, and improve speed of strategies &gt; dFast. Special: value 0
-     * means "use default {@code hashLog}".
+     * Size of the initial probe table, as a power of 2.
+     * 
+     * <p>Resulting memory usage is (1 &lt;&lt; {@code (hashLog+2)}). Must be clamped between {@link ZstdX#ZSTD_HASHLOG_MIN HASHLOG_MIN} and {@link ZstdX#ZSTD_HASHLOG_MAX HASHLOG_MAX}. Larger tables improve
+     * compression ratio of strategies &le; dFast, and improve speed of strategies &gt; dFast. Special: value 0 means "use default {@code hashLog}".</p>
      * </li>
      * <li>{@link #ZSTD_c_chainLog c_chainLog} - 
-     * Size of the multi-probe search table, as a power of 2. Resulting memory usage is (1 &lt;&lt; {@code (chainLog+2)}). Must be clamped between
-     * {@link ZstdX#ZSTD_CHAINLOG_MIN CHAINLOG_MIN} and {@link ZstdX#ZSTD_CHAINLOG_MAX CHAINLOG_MAX}. Larger tables result in better and slower compression. This parameter is useless when using "fast"
-     * strategy. It's still useful when using "dfast" strategy, in which case it defines a secondary probe table. Special: value 0 means "use default
-     * {@code chainLog}".
+     * Size of the multi-probe search table, as a power of 2.
+     * 
+     * <p>Resulting memory usage is (1 &lt;&lt; {@code (chainLog+2)}). Must be clamped between {@link ZstdX#ZSTD_CHAINLOG_MIN CHAINLOG_MIN} and {@link ZstdX#ZSTD_CHAINLOG_MAX CHAINLOG_MAX}. Larger tables result in
+     * better and slower compression. This parameter is useless for "fast" strategy. It's still useful when using "dfast" strategy, in which case it
+     * defines a secondary probe table. Special: value 0 means "use default {@code chainLog}".</p>
      * </li>
      * <li>{@link #ZSTD_c_searchLog c_searchLog} - 
-     * Number of search attempts, as a power of 2. More attempts result in better and slower compression. This parameter is useless when using "fast" and
-     * "dFast" strategies. Special: value 0 means "use default {@code searchLog}".
+     * Number of search attempts, as a power of 2.
+     * 
+     * <p>More attempts result in better and slower compression. This parameter is useless for "fast" and "dFast" strategies. Special: value 0 means "use
+     * default {@code searchLog}".</p>
      * </li>
      * <li>{@link #ZSTD_c_minMatch c_minMatch} - 
      * Minimum size of searched matches. Note that Zstandard can still find matches of smaller size, it just tweaks its search algorithm to look for this
@@ -244,7 +251,7 @@ public class Zstd {
      * </li>
      * <li>{@link #ZSTD_c_contentSizeFlag c_contentSizeFlag} - 
      * Content size will be written into frame header _whenever known_ (default:1) Content size must be known at the beginning of compression. This is
-     * automatically the case when using {@link #ZSTD_compress2 compress2}, For streaming variants, content size must be provided with {@link #ZSTD_CCtx_setPledgedSrcSize CCtx_setPledgedSrcSize}.
+     * automatically the case when using {@link #ZSTD_compress2 compress2}, For streaming scenarios, content size must be provided with {@link #ZSTD_CCtx_setPledgedSrcSize CCtx_setPledgedSrcSize}.
      * </li>
      * <li>{@link #ZSTD_c_checksumFlag c_checksumFlag} - A 32-bits checksum of content is written at end of frame (default:0)</li>
      * <li>{@link #ZSTD_c_dictIDFlag c_dictIDFlag} - When applicable, dictionary's ID is written into frame header (default:1)</li>
@@ -279,6 +286,7 @@ public class Zstd {
      * <li>{@link #ZSTD_c_experimentalParam4 c_experimentalParam4}</li>
      * <li>{@link #ZSTD_c_experimentalParam5 c_experimentalParam5}</li>
      * <li>{@link #ZSTD_c_experimentalParam6 c_experimentalParam6}</li>
+     * <li>{@link #ZSTD_c_experimentalParam7 c_experimentalParam7}</li>
      * </ul>
      */
     public static final int
@@ -306,7 +314,8 @@ public class Zstd {
         ZSTD_c_experimentalParam3         = 1000,
         ZSTD_c_experimentalParam4         = 1001,
         ZSTD_c_experimentalParam5         = 1002,
-        ZSTD_c_experimentalParam6         = 1003;
+        ZSTD_c_experimentalParam6         = 1003,
+        ZSTD_c_experimentalParam7         = 1004;
 
     /**
      * {@code ZSTD_ResetDirective}
@@ -570,7 +579,12 @@ public class Zstd {
     /** Unsafe version of: {@link #ZSTD_compressCCtx compressCCtx} */
     public static native long nZSTD_compressCCtx(long ctx, long dst, long dstCapacity, long src, long srcSize, int compressionLevel);
 
-    /** Same as {@link #ZSTD_compress compress}, using an explicit {@code ZSTD_CCtx}. The function will compress at requested compression level, ignoring any other parameter. */
+    /**
+     * Same as {@link #ZSTD_compress compress}, using an explicit {@code ZSTD_CCtx}.
+     * 
+     * <p>Important: in order to behave similarly to {@code ZSTD_compress()}, this function compresses at requested compression level, <b>ignoring any other
+     * parameter</b>. If any advanced parameter was set using the advanced API, they will all be reset. Only {@code compressionLevel} remains.</p>
+     */
     @NativeType("size_t")
     public static long ZSTD_compressCCtx(@NativeType("ZSTD_CCtx *") long ctx, @NativeType("void *") ByteBuffer dst, @NativeType("void const *") ByteBuffer src, int compressionLevel) {
         if (CHECKS) {
@@ -626,7 +640,7 @@ public class Zstd {
     /**
      * All parameters must belong to an interval with lower and upper bounds, otherwise they will either trigger an error or be automatically clamped.
      *
-     * @param cParam   one of:<br><table><tr><td>{@link #ZSTD_c_compressionLevel c_compressionLevel}</td><td>{@link #ZSTD_c_windowLog c_windowLog}</td><td>{@link #ZSTD_c_hashLog c_hashLog}</td><td>{@link #ZSTD_c_chainLog c_chainLog}</td><td>{@link #ZSTD_c_searchLog c_searchLog}</td></tr><tr><td>{@link #ZSTD_c_minMatch c_minMatch}</td><td>{@link #ZSTD_c_targetLength c_targetLength}</td><td>{@link #ZSTD_c_strategy c_strategy}</td><td>{@link #ZSTD_c_enableLongDistanceMatching c_enableLongDistanceMatching}</td><td>{@link #ZSTD_c_ldmHashLog c_ldmHashLog}</td></tr><tr><td>{@link #ZSTD_c_ldmMinMatch c_ldmMinMatch}</td><td>{@link #ZSTD_c_ldmBucketSizeLog c_ldmBucketSizeLog}</td><td>{@link #ZSTD_c_ldmHashRateLog c_ldmHashRateLog}</td><td>{@link #ZSTD_c_contentSizeFlag c_contentSizeFlag}</td><td>{@link #ZSTD_c_checksumFlag c_checksumFlag}</td></tr><tr><td>{@link #ZSTD_c_dictIDFlag c_dictIDFlag}</td><td>{@link #ZSTD_c_nbWorkers c_nbWorkers}</td><td>{@link #ZSTD_c_jobSize c_jobSize}</td><td>{@link #ZSTD_c_overlapLog c_overlapLog}</td><td>{@link #ZSTD_c_experimentalParam1 c_experimentalParam1}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam2 c_experimentalParam2}</td><td>{@link #ZSTD_c_experimentalParam3 c_experimentalParam3}</td><td>{@link #ZSTD_c_experimentalParam4 c_experimentalParam4}</td><td>{@link #ZSTD_c_experimentalParam5 c_experimentalParam5}</td><td>{@link #ZSTD_c_experimentalParam6 c_experimentalParam6}</td></tr></table>
+     * @param cParam   one of:<br><table><tr><td>{@link #ZSTD_c_compressionLevel c_compressionLevel}</td><td>{@link #ZSTD_c_windowLog c_windowLog}</td><td>{@link #ZSTD_c_hashLog c_hashLog}</td><td>{@link #ZSTD_c_chainLog c_chainLog}</td><td>{@link #ZSTD_c_searchLog c_searchLog}</td></tr><tr><td>{@link #ZSTD_c_minMatch c_minMatch}</td><td>{@link #ZSTD_c_targetLength c_targetLength}</td><td>{@link #ZSTD_c_strategy c_strategy}</td><td>{@link #ZSTD_c_enableLongDistanceMatching c_enableLongDistanceMatching}</td><td>{@link #ZSTD_c_ldmHashLog c_ldmHashLog}</td></tr><tr><td>{@link #ZSTD_c_ldmMinMatch c_ldmMinMatch}</td><td>{@link #ZSTD_c_ldmBucketSizeLog c_ldmBucketSizeLog}</td><td>{@link #ZSTD_c_ldmHashRateLog c_ldmHashRateLog}</td><td>{@link #ZSTD_c_contentSizeFlag c_contentSizeFlag}</td><td>{@link #ZSTD_c_checksumFlag c_checksumFlag}</td></tr><tr><td>{@link #ZSTD_c_dictIDFlag c_dictIDFlag}</td><td>{@link #ZSTD_c_nbWorkers c_nbWorkers}</td><td>{@link #ZSTD_c_jobSize c_jobSize}</td><td>{@link #ZSTD_c_overlapLog c_overlapLog}</td><td>{@link #ZSTD_c_experimentalParam1 c_experimentalParam1}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam2 c_experimentalParam2}</td><td>{@link #ZSTD_c_experimentalParam3 c_experimentalParam3}</td><td>{@link #ZSTD_c_experimentalParam4 c_experimentalParam4}</td><td>{@link #ZSTD_c_experimentalParam5 c_experimentalParam5}</td><td>{@link #ZSTD_c_experimentalParam6 c_experimentalParam6}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam7 c_experimentalParam7}</td></tr></table>
      * @param __result a structure, {@code ZSTD_bounds}, which contains
      *                 
      *                 <ul>
@@ -654,7 +668,7 @@ public class Zstd {
      * compressionLevel, hashLog, chainLog, searchLog, minMatch, targetLength and strategy. new parameters will be active for next job only (after a
      * {@code flush()}).</p>
      *
-     * @param param one of:<br><table><tr><td>{@link #ZSTD_c_compressionLevel c_compressionLevel}</td><td>{@link #ZSTD_c_windowLog c_windowLog}</td><td>{@link #ZSTD_c_hashLog c_hashLog}</td><td>{@link #ZSTD_c_chainLog c_chainLog}</td><td>{@link #ZSTD_c_searchLog c_searchLog}</td></tr><tr><td>{@link #ZSTD_c_minMatch c_minMatch}</td><td>{@link #ZSTD_c_targetLength c_targetLength}</td><td>{@link #ZSTD_c_strategy c_strategy}</td><td>{@link #ZSTD_c_enableLongDistanceMatching c_enableLongDistanceMatching}</td><td>{@link #ZSTD_c_ldmHashLog c_ldmHashLog}</td></tr><tr><td>{@link #ZSTD_c_ldmMinMatch c_ldmMinMatch}</td><td>{@link #ZSTD_c_ldmBucketSizeLog c_ldmBucketSizeLog}</td><td>{@link #ZSTD_c_ldmHashRateLog c_ldmHashRateLog}</td><td>{@link #ZSTD_c_contentSizeFlag c_contentSizeFlag}</td><td>{@link #ZSTD_c_checksumFlag c_checksumFlag}</td></tr><tr><td>{@link #ZSTD_c_dictIDFlag c_dictIDFlag}</td><td>{@link #ZSTD_c_nbWorkers c_nbWorkers}</td><td>{@link #ZSTD_c_jobSize c_jobSize}</td><td>{@link #ZSTD_c_overlapLog c_overlapLog}</td><td>{@link #ZSTD_c_experimentalParam1 c_experimentalParam1}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam2 c_experimentalParam2}</td><td>{@link #ZSTD_c_experimentalParam3 c_experimentalParam3}</td><td>{@link #ZSTD_c_experimentalParam4 c_experimentalParam4}</td><td>{@link #ZSTD_c_experimentalParam5 c_experimentalParam5}</td><td>{@link #ZSTD_c_experimentalParam6 c_experimentalParam6}</td></tr></table>
+     * @param param one of:<br><table><tr><td>{@link #ZSTD_c_compressionLevel c_compressionLevel}</td><td>{@link #ZSTD_c_windowLog c_windowLog}</td><td>{@link #ZSTD_c_hashLog c_hashLog}</td><td>{@link #ZSTD_c_chainLog c_chainLog}</td><td>{@link #ZSTD_c_searchLog c_searchLog}</td></tr><tr><td>{@link #ZSTD_c_minMatch c_minMatch}</td><td>{@link #ZSTD_c_targetLength c_targetLength}</td><td>{@link #ZSTD_c_strategy c_strategy}</td><td>{@link #ZSTD_c_enableLongDistanceMatching c_enableLongDistanceMatching}</td><td>{@link #ZSTD_c_ldmHashLog c_ldmHashLog}</td></tr><tr><td>{@link #ZSTD_c_ldmMinMatch c_ldmMinMatch}</td><td>{@link #ZSTD_c_ldmBucketSizeLog c_ldmBucketSizeLog}</td><td>{@link #ZSTD_c_ldmHashRateLog c_ldmHashRateLog}</td><td>{@link #ZSTD_c_contentSizeFlag c_contentSizeFlag}</td><td>{@link #ZSTD_c_checksumFlag c_checksumFlag}</td></tr><tr><td>{@link #ZSTD_c_dictIDFlag c_dictIDFlag}</td><td>{@link #ZSTD_c_nbWorkers c_nbWorkers}</td><td>{@link #ZSTD_c_jobSize c_jobSize}</td><td>{@link #ZSTD_c_overlapLog c_overlapLog}</td><td>{@link #ZSTD_c_experimentalParam1 c_experimentalParam1}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam2 c_experimentalParam2}</td><td>{@link #ZSTD_c_experimentalParam3 c_experimentalParam3}</td><td>{@link #ZSTD_c_experimentalParam4 c_experimentalParam4}</td><td>{@link #ZSTD_c_experimentalParam5 c_experimentalParam5}</td><td>{@link #ZSTD_c_experimentalParam6 c_experimentalParam6}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam7 c_experimentalParam7}</td></tr></table>
      *
      * @return an error code (which can be tested using {@link #ZSTD_isError isError})
      */
@@ -1014,15 +1028,20 @@ public class Zstd {
     public static native long nZSTD_createCDict(long dictBuffer, long dictSize, int compressionLevel);
 
     /**
-     * When compressing multiple messages / blocks using the same dictionary, it's recommended to load it only once.
+     * When compressing multiple messages or blocks using the same dictionary, it's recommended to digest the dictionary only once, since it's a costly
+     * operation. {@code ZSTD_createCDict()} will create a state from digesting a dictionary.
      * 
-     * <p>{@code ZSTD_createCDict()} will create a digested dictionary, ready to start future compression operations without startup cost. {@code ZSTD_CDict}
-     * can be created once and shared by multiple threads concurrently, since its usage is read-only.</p>
+     * <p>The resulting state can be used for future compression operations with very limited startup cost. {@code ZSTD_CDict} can be created once and shared by
+     * multiple threads concurrently, since its usage is read-only.</p>
      * 
      * <p>{@code dictBuffer} can be released after {@code ZSTD_CDict} creation, because its content is copied within CDict. Consider experimental function
      * {@link ZstdX#ZSTD_createCDict_byReference createCDict_byReference} if you prefer to not duplicate {@code dictBuffer} content.</p>
      * 
-     * <p>Note: A {@code ZSTD_CDict} can be created from an empty {@code dictBuffer}, but it is inefficient when used to compress small data.</p>
+     * <p>Note 1: Consider experimental function {@link ZstdX#ZSTD_createCDict_byReference createCDict_byReference} if you prefer to not duplicate {@code dictBuffer} content.</p>
+     * 
+     * <p>Note 2: A {@code ZSTD_CDict} can be created from an empty {@code dictBuffer}, in which case the only thing that it transports is the
+     * {@code compressionLevel}. This can be useful in a pipeline featuring {@link #ZSTD_compress_usingCDict compress_usingCDict} exclusively, expecting a {@code ZSTD_CDict} parameter with
+     * any data, including those without a known dictionary.</p>
      */
     @NativeType("ZSTD_CDict *")
     public static long ZSTD_createCDict(@NativeType("void const *") ByteBuffer dictBuffer, int compressionLevel) {

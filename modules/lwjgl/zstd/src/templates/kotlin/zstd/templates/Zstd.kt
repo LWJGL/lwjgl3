@@ -109,7 +109,7 @@ ENABLE_WARNINGS()""")
 
         "VERSION_MAJOR".."1",
         "VERSION_MINOR".."4",
-        "VERSION_RELEASE".."3"
+        "VERSION_RELEASE".."4"
     )
 
     IntConstant("Version number.", "VERSION_NUMBER".."(ZSTD_VERSION_MAJOR *100*100 + ZSTD_VERSION_MINOR *100 + ZSTD_VERSION_RELEASE)")
@@ -162,43 +162,50 @@ ENABLE_WARNINGS()""")
 
         "c_compressionLevel".enum(
             """
-            Update all compression parameters according to pre-defined cLevel table Default level is #CLEVEL_DEFAULT{@code ==3}. Special: value 0 means
-            default, which is controlled by {@code ZSTD_CLEVEL_DEFAULT}.
+            Set compression parameters according to pre-defined {@code cLevel} table.
+
+            Note that exact compression parameters are dynamically determined, depending on both compression level and {@code srcSize} (when known). Default
+            level is #CLEVEL_DEFAULT{@code ==3}. Special: value 0 means default, which is controlled by {@code ZSTD_CLEVEL_DEFAULT}.
 
             Note 1: it's possible to pass a negative compression level.
 
-            Note 2 : setting a level sets all default values of other compression parameters
+            Note 2: setting a level resets all other compression parameters to default.
             """,
             "100"
         ),
         "c_windowLog".enum(
             """
-            Maximum allowed back-reference distance, expressed as power of 2. Must be clamped between #WINDOWLOG_MIN and #WINDOWLOG_MAX. Special: value
-            0 means "use default {@code windowLog}".
+            Maximum allowed back-reference distance, expressed as power of 2.
 
-            Note: Using a {@code windowLog} greater than #WINDOWLOG_LIMIT_DEFAULT requires explicitly allowing such window size at decompression stage if using
-            streaming.
+            This will set a memory budget for streaming decompression, with larger values requiring more memory and typically compressing more. Must be clamped
+            between #WINDOWLOG_MIN and #WINDOWLOG_MAX. Special: value 0 means "use default {@code windowLog}".
+
+            Note: Using a {@code windowLog} greater than #WINDOWLOG_LIMIT_DEFAULT requires explicitly allowing such size at streaming decompression stage.
             """
         ),
         "c_hashLog".enum(
             """
-            Size of the initial probe table, as a power of 2. Resulting memory usage is (1 &lt;&lt; {@code (hashLog+2)}). Must be clamped between #HASHLOG_MIN and
-            HASHLOG_MAX. Larger tables improve compression ratio of strategies &le; dFast, and improve speed of strategies &gt; dFast. Special: value 0
-            means "use default {@code hashLog}".
+            Size of the initial probe table, as a power of 2.
+
+            Resulting memory usage is (1 &lt;&lt; {@code (hashLog+2)}). Must be clamped between #HASHLOG_MIN and #HASHLOG_MAX. Larger tables improve
+            compression ratio of strategies &le; dFast, and improve speed of strategies &gt; dFast. Special: value 0 means "use default {@code hashLog}".
             """
         ),
         "c_chainLog".enum(
             """
-            Size of the multi-probe search table, as a power of 2. Resulting memory usage is (1 &lt;&lt; {@code (chainLog+2)}). Must be clamped between
-            #CHAINLOG_MIN and #CHAINLOG_MAX. Larger tables result in better and slower compression. This parameter is useless when using "fast"
-            strategy. It's still useful when using "dfast" strategy, in which case it defines a secondary probe table. Special: value 0 means "use default
-            {@code chainLog}".
+            Size of the multi-probe search table, as a power of 2.
+
+            Resulting memory usage is (1 &lt;&lt; {@code (chainLog+2)}). Must be clamped between #CHAINLOG_MIN and #CHAINLOG_MAX. Larger tables result in
+            better and slower compression. This parameter is useless for "fast" strategy. It's still useful when using "dfast" strategy, in which case it
+            defines a secondary probe table. Special: value 0 means "use default {@code chainLog}".
             """
         ),
         "c_searchLog".enum(
             """
-            Number of search attempts, as a power of 2. More attempts result in better and slower compression. This parameter is useless when using "fast" and
-            "dFast" strategies. Special: value 0 means "use default {@code searchLog}".
+            Number of search attempts, as a power of 2.
+
+            More attempts result in better and slower compression. This parameter is useless for "fast" and "dFast" strategies. Special: value 0 means "use
+            default {@code searchLog}".
             """
         ),
         "c_minMatch".enum(
@@ -258,7 +265,7 @@ ENABLE_WARNINGS()""")
         "c_contentSizeFlag".enum(
             """
             Content size will be written into frame header _whenever known_ (default:1) Content size must be known at the beginning of compression. This is
-            automatically the case when using #compress2(), For streaming variants, content size must be provided with #CCtx_setPledgedSrcSize().
+            automatically the case when using #compress2(), For streaming scenarios, content size must be provided with #CCtx_setPledgedSrcSize().
             """,
             "200"
         ),
@@ -303,7 +310,8 @@ ENABLE_WARNINGS()""")
         "c_experimentalParam3".enum("", "1000"),
         "c_experimentalParam4".enum,
         "c_experimentalParam5".enum,
-        "c_experimentalParam6".enum
+        "c_experimentalParam6".enum,
+        "c_experimentalParam7".enum
     ).javaDocLinks
 
     val resetDirectives = EnumConstant(
@@ -524,7 +532,12 @@ ENABLE_WARNINGS()""")
 
     size_t(
         "compressCCtx",
-        "Same as #compress(), using an explicit {@code ZSTD_CCtx}. The function will compress at requested compression level, ignoring any other parameter.",
+        """
+        Same as #compress(), using an explicit {@code ZSTD_CCtx}.
+
+        Important: in order to behave similarly to {@code ZSTD_compress()}, this function compresses at requested compression level, <b>ignoring any other
+        parameter</b>. If any advanced parameter was set using the advanced API, they will all be reset. Only {@code compressionLevel} remains.
+        """,
 
         ZSTD_CCtx.p("ctx", ""),
         compress["dst"],
@@ -911,15 +924,20 @@ ENABLE_WARNINGS()""")
     ZSTD_CDict.p(
         "createCDict",
         """
-        When compressing multiple messages / blocks using the same dictionary, it's recommended to load it only once.
+        When compressing multiple messages or blocks using the same dictionary, it's recommended to digest the dictionary only once, since it's a costly
+        operation. {@code ZSTD_createCDict()} will create a state from digesting a dictionary.
 
-        {@code ZSTD_createCDict()} will create a digested dictionary, ready to start future compression operations without startup cost. {@code ZSTD_CDict}
-        can be created once and shared by multiple threads concurrently, since its usage is read-only.
+        The resulting state can be used for future compression operations with very limited startup cost. {@code ZSTD_CDict} can be created once and shared by
+        multiple threads concurrently, since its usage is read-only.
 
         {@code dictBuffer} can be released after {@code ZSTD_CDict} creation, because its content is copied within CDict. Consider experimental function
         #createCDict_byReference() if you prefer to not duplicate {@code dictBuffer} content.
 
-        Note: A {@code ZSTD_CDict} can be created from an empty {@code dictBuffer}, but it is inefficient when used to compress small data.
+        Note 1: Consider experimental function #createCDict_byReference() if you prefer to not duplicate {@code dictBuffer} content.
+
+        Note 2: A {@code ZSTD_CDict} can be created from an empty {@code dictBuffer}, in which case the only thing that it transports is the
+        {@code compressionLevel}. This can be useful in a pipeline featuring #compress_usingCDict() exclusively, expecting a {@code ZSTD_CDict} parameter with
+        any data, including those without a known dictionary.
         """,
 
         void.const.p("dictBuffer", ""),

@@ -50,6 +50,28 @@ val ZSTD_bounds = struct(Module.ZSTD, "ZSTDBounds", nativeName = "ZSTD_bounds", 
     int("upperBound", "")
 }
 
+val ZSTD_Sequence = struct(Module.ZSTD, "ZSTDSequence", nativeName = "ZSTD_Sequence", mutable = false) {
+    unsigned_int("matchPos", "match pos in {@code dst}")
+
+    unsigned_int(
+        "offset",
+        """
+        if {@code seqDef.offset > 3}, then this is {@code seqDef.offset - 3}. If {@code seqDef.offset < 3}, then this is the corresponding repeat offset. But
+        if {@code seqDef.offset < 3} and {@code litLength == 0}, this is the  repeat offset before the corresponding repeat offset. And if
+        {@code seqDef.offset == 3} and {@code litLength == 0}, this is the most recent repeat {@code offset - 1}.
+        """
+    )
+    unsigned_int("litLength", "literal length")
+    unsigned_int("matchLength", "match length")
+    unsigned_int(
+        "rep",
+        """
+        0 when {@code seq} not {@code rep} and {@code seqDef.offset} otherwise when {@code litLength == 0} this will be {@code <= 4},otherwise {@code <= 3}
+        like normal.
+        """
+    )
+}
+
 val ZSTD_compressionParameters = struct(Module.ZSTD, "ZSTDCompressionParameters", nativeName = "ZSTD_compressionParameters") {
     documentation = ""
 

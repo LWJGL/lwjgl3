@@ -50,7 +50,8 @@ ENABLE_WARNINGS()""")
 
         "dictDefaultAttach".enum("Use the default heuristic.", "0"),
         "dictForceAttach".enum("Never copy the dictionary."),
-        "dictForceCopy".enum("Always copy the dictionary.")
+        "dictForceCopy".enum("Always copy the dictionary."),
+        "dictForceLoad".enum("Always reload the dictionary.")
     )
 
     EnumConstant(
@@ -71,8 +72,14 @@ ENABLE_WARNINGS()""")
         "ZSTDnit_skippableFrame".enum
     ).noPrefix()
 
-    IntConstant("", "FRAMEHEADERSIZE_PREFIX".."5")
-    IntConstant("", "FRAMEHEADERSIZE_MIN".."6")
+    customMethod("""
+    public static int ZSTD_FRAMEHEADERSIZE_PREFIX(int format) {
+        return format == ZSTD_f_zstd1 ? 5 : 1;
+    }
+    
+    public static int ZSTD_FRAMEHEADERSIZE_MIN(int format) {
+        return format == ZSTD_f_zstd1 ? 6 : 2;
+    }""")
     IntConstant("", "FRAMEHEADERSIZE_MAX".."18")
     IntConstant("", "SKIPPABLEHEADERSIZE".."8")
     IntConstant("", "WINDOWLOG_MAX_32".."30")
@@ -104,6 +111,8 @@ ENABLE_WARNINGS()""")
     IntConstant("", "LDM_HASHRATELOG_MIN".."0")
     IntConstant("", "TARGETCBLOCKSIZE_MIN".."64")
     IntConstant("", "TARGETCBLOCKSIZE_MAX".."ZSTD_BLOCKSIZE_MAX")
+    IntConstant("", "SRCSIZEHINT_MIN".."0")
+    IntConstant("", "SRCSIZEHINT_MAX".."Integer.MAX_VALUE")
     IntConstant("", "HASHLOG3_MAX".."17")
 
     IntConstant(
@@ -162,6 +171,15 @@ ENABLE_WARNINGS()""")
         No target when {@code targetCBlockSize == 0}. There is no guarantee on compressed block size. (default:0)
         """,
         "c_targetCBlockSize".."ZSTD_c_experimentalParam6"
+    )
+    IntConstant(
+        """
+        User's best guess of source size.
+
+        Hint is not valid when {@code srcSizeHint == 0}. There is no guarantee that hint is close to actual source size, but compression ratio may regress
+        significantly if guess considerably underestimates.
+        """,
+        "c_srcSizeHint".."ZSTD_c_experimentalParam7"
     )
     IntConstant("", "d_format".."ZSTD_d_experimentalParam1")
 
@@ -237,9 +255,26 @@ ENABLE_WARNINGS()""")
         "",
 
         void.const.p("src", ""),
-        AutoSize("src")..size_t("srcSize", "must be &ge; #FRAMEHEADERSIZE_PREFIX"),
+        AutoSize("src")..size_t("srcSize", "must be &ge; {@link \\#ZSTD_FRAMEHEADERSIZE_PREFIX}"),
 
         returnDoc = ": size of the Frame Header, or an error code (if srcSize is too small)"
+    )
+
+    size_t(
+        "getSequences",
+        """
+        Extract sequences from the sequence store {@code zc} can be used to insert custom compression params.
+ 
+        This function invokes #compress2().
+        """,
+
+        ZSTD_CCtx.p("zc", ""),
+        ZSTD_Sequence.p("outSeqs", ""),
+        AutoSize("outSeqs")..size_t("outSeqsSize", ""),
+        void.const.p("src", ""),
+        AutoSize("src")..size_t("srcSize", ""),
+
+        returnDoc = "number of sequences extracted"
     )
 
     size_t(
@@ -247,14 +282,14 @@ ENABLE_WARNINGS()""")
         """
         Estimages memory usage of a future {@code CCtx}, before its creation.
 
-        {@code ZSTD_estimateCCtxSize()} will provide a budget large enough for any compression level up to selected one. It will also consider {@code src} size
-        to be arbitrarily "large", which is worst case. If {@code srcSize} is known to always be small, #estimateCCtxSize_usingCParams() can provide a tighter
-        estimation. #estimateCCtxSize_usingCParams() can be used in tandem with #getCParams() to create {@code cParams} from compressionLevel.
-        #estimateCCtxSize_usingCCtxParams() can be used in tandem with #CCtxParams_setParameter(). Only single-threaded compression is supported.
+        {@code ZSTD_estimateCCtxSize()} will provide a budget large enough for any compression level up to selected one. Unlike
+        {@code ZSTD_estimateCStreamSize*}, this estimate does not include space for a window buffer, so this estimate is guaranteed to be enough for
+        single-shot compressions, but not streaming compressions. It will however assume the input may be arbitrarily large,  which is the worst case. If
+        {@code srcSize} is known to always be small, #estimateCCtxSize_usingCParams() can provide a tighter estimation. #estimateCCtxSize_usingCParams() can be
+        used in tandem with #getCParams() to create {@code cParams} from compressionLevel. #estimateCCtxSize_usingCCtxParams() can be used in tandem with
+        #CCtxParams_setParameter().
 
-        This function will return an error code if #c_nbWorkers is &ge; 1.
-
-        Note: {@code CCtx} size estimation is only correct for single-threaded compression.
+        Note: only single-threaded compression is supported. This function will return an error code if #c_nbWorkers is &ge; 1.
         """,
 
         int("compressionLevel", "")
@@ -434,6 +469,8 @@ ENABLE_WARNINGS()""")
 
         As a consequence, {@code dictBuffer} <b>must</b> outlive {@code CDict}, and its content must remain unmodified throughout the lifetime of
         {@code CDict}.
+        
+        Note: equivalent to #createCDict_advanced(), with {@code dictLoadMethod==ZSTD_dlm_byRef}.
         """,
 
         void.const.p("dictBuffer", ""),
@@ -479,33 +516,6 @@ ENABLE_WARNINGS()""")
         ZSTD_compressionParameters("cPar", ""),
         unsigned_long_long("srcSize", ""),
         size_t("dictSize", "")
-    )
-
-    size_t(
-        "compress_advanced",
-        "Same as #compress_usingDict(), with fine-tune control over compression parameters (by structure).",
-
-        ZSTD_CCtx.p("cctx", ""),
-        void.p("dst", ""),
-        AutoSize("dst")..size_t("dstCapacity", ""),
-        void.const.p("src", ""),
-        AutoSize("src")..size_t("srcSize", ""),
-        void.const.p("dict", ""),
-        AutoSize("dict")..size_t("dictSize", ""),
-        ZSTD_parameters("params", "")
-    )
-
-    size_t(
-        "compress_usingCDict_advanced",
-        "Same as #compress_usingCDict(), with fine-tune control over frame parameters.",
-
-        ZSTD_CCtx.p("cctx", ""),
-        void.p("dst", ""),
-        AutoSize("dst")..size_t("dstCapacity", ""),
-        void.const.p("src", ""),
-        AutoSize("src")..size_t("srcSize", ""),
-        ZSTD_CDict.const.p("cdict", ""),
-        ZSTD_frameParameters("fParams", "")
     )
 
     size_t(
