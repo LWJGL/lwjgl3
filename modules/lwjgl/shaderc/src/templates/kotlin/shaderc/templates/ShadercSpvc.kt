@@ -17,18 +17,75 @@ val ShadercSpvc = "ShadercSpvc".nativeClass(Module.SHADERC, prefix = "shaderc_sp
         "Native bindings to the libshaderc_spvc C API of the ${url("https://github.com/google/shaderc/", "shaderc")} library."
 
     EnumConstant(
+        """
+        SPIR-V decorations supported by spvc. ({@code shaderc_spvc_decoration}
+
+        This is not an exhaustive list of all of the values in the spec, but more can be added if needed.
+        """,
+
+        "decoration_specid".enum,
+        "decoration_block".enum,
+        "decoration_rowmajor".enum,
+        "decoration_colmajor".enum,
+        "decoration_arraystride".enum,
+        "decoration_matrixstride".enum,
+        "decoration_builtin".enum,
+        "decoration_noperspective".enum,
+        "decoration_flat".enum,
+        "decoration_centroid".enum,
+        "decoration_restrict".enum,
+        "decoration_aliased".enum,
+        "decoration_nonwritable".enum,
+        "decoration_nonreadable".enum,
+        "decoration_uniform".enum,
+        "decoration_location".enum,
+        "decoration_component".enum,
+        "decoration_index".enum,
+        "decoration_binding".enum,
+        "decoration_descriptorset".enum,
+        "decoration_offset".enum,
+        "decoration_nocontraction".enum
+    )
+
+    EnumConstant(
         "",
 
         "msl_platform_ios".enum,
         "msl_platform_macos".enum
     )
 
-    shaderc_spvc_compiler_t(
-        "compiler_initialize",
+    EnumConstant(
         """
-        Create a compiler.
+        Return code for spvc API calls. ({@code shaderc_spvc_status})
+            
+        {@code shaderc_spvc_status_success} indicates success completion of the operation, all others indicate some sort of failure.
+        """,
 
-        A return of #NULL indicates that there was an error. Any function operating on a {@code *_compiler_t} must offer the ${url(
+        "status_success".enum,
+        "status_compilation_error".enum,
+        "status_internal_error".enum,
+        "status_validation_error".enum,
+        "status_transformation_error".enum,
+        "status_configuration_error".enum,
+        "status_uninitialized_compiler_error".enum,
+        "status_missing_context_error".enum,
+        "status_invalid_out_param".enum
+    )
+
+    EnumConstant(
+        "{@code shaderc_spvc_execution_model}",
+
+        "execution_model_vertex".enum,
+        "execution_model_fragment".enum,
+        "execution_model_glcompute".enum
+    )
+
+    shaderc_spvc_context_t(
+        "context_create",
+        """
+        Create a spvc state handle.
+
+        A return of #NULL indicates that there was an error. Any function operating on a {@code *_context_t} must offer the ${url(
             "http://herbsutter.com/2014/01/13/gotw-95-solution-thread-safety-and-synchronization/",
             "basic thread-safety guarantee"
         )}. That is: concurrent invocation of these functions on DIFFERENT objects needs no synchronization; concurrent invocation of these functions on the
@@ -39,20 +96,35 @@ val ShadercSpvc = "ShadercSpvc".nativeClass(Module.SHADERC, prefix = "shaderc_sp
     )
 
     void(
-        "compiler_release",
+        "context_destroy",
         """
         Release resources.
 
         After this the handle cannot be used.
         """,
 
-        shaderc_spvc_compiler_t("compiler", "")
+        shaderc_spvc_context_t("context", "")
+    )
+
+    charASCII.const.p(
+        "context_get_messages",
+        "Get validation/compilation error or informational messages.",
+
+        shaderc_spvc_context_t.const("context", "")
+    )
+
+    void(
+        "context_set_use_spvc_parser",
+        "If true, use spvc built in parser to generate IR for spirv-cross, otherwise use spirv-cross's implementation.",
+
+        shaderc_spvc_context_t("context", ""),
+        bool("b", "")
     )
 
     shaderc_spvc_compile_options_t(
-        "compile_options_initialize",
+        "compile_options_create",
         """
-        Returns default compiler options.
+        Creates default compiler options.
 
         A return of #NULL indicates that there was an error initializing the options. Any function operating on {@code shaderc_spvc_compile_options_t} must
         offer the basic thread-safety guarantee.
@@ -73,9 +145,9 @@ val ShadercSpvc = "ShadercSpvc".nativeClass(Module.SHADERC, prefix = "shaderc_sp
     )
 
     void(
-        "compile_options_release",
+        "compile_options_destroy",
         """
-        Releases the compilation options.
+        Destroys the compilation options.
 
         It is invalid to use the given option object in any future calls. It is safe to pass #NULL to this function, and doing such will have no effect.
         """,
@@ -107,6 +179,14 @@ val ShadercSpvc = "ShadercSpvc".nativeClass(Module.SHADERC, prefix = "shaderc_sp
         Inject code to clamp indexed accesses to buffers and internal arrays, providing guarantees satisfying Vulkan's {@code robustBufferAccess} rules. This
         is useful when an implementation does not support robust-buffer access as a driver option.
         """,
+
+        shaderc_spvc_compile_options_t("options", ""),
+        bool("b", "")
+    )
+
+    void(
+        "compile_options_set_emit_line_directives",
+        "",
 
         shaderc_spvc_compile_options_t("options", ""),
         bool("b", "")
@@ -190,7 +270,7 @@ val ShadercSpvc = "ShadercSpvc".nativeClass(Module.SHADERC, prefix = "shaderc_sp
 
     void(
         "compile_options_set_es",
-        "Force interpretion as ES, or not.  Default is to detect from source.",
+        "Force interpretion as ES, or not. Default is to detect from source.",
 
         shaderc_spvc_compile_options_t("options", ""),
         bool("b", "")
@@ -198,7 +278,7 @@ val ShadercSpvc = "ShadercSpvc".nativeClass(Module.SHADERC, prefix = "shaderc_sp
 
     void(
         "compile_options_set_glsl_emit_push_constant_as_ubo",
-        "If true, emit push constants as uniform buffer objects.  Default is false.",
+        "If true, emit push constants as uniform buffer objects. Default is false.",
 
         shaderc_spvc_compile_options_t("options", ""),
         bool("b", "")
@@ -218,7 +298,7 @@ val ShadercSpvc = "ShadercSpvc".nativeClass(Module.SHADERC, prefix = "shaderc_sp
 
     void(
         "compile_options_set_msl_swizzle_texture_samples",
-        "If true, swizzle MSL texture samples.  Default is false.",
+        "If true, swizzle MSL texture samples. Default is false.",
 
         shaderc_spvc_compile_options_t("options", ""),
         bool("b", "")
@@ -226,7 +306,7 @@ val ShadercSpvc = "ShadercSpvc".nativeClass(Module.SHADERC, prefix = "shaderc_sp
 
     void(
         "compile_options_set_msl_platform",
-        "Choose MSL platform.  Default is MacOS.",
+        "Choose MSL platform. Default is MacOS.",
 
         shaderc_spvc_compile_options_t("options", ""),
         shaderc_spvc_msl_platform("platform", "")
@@ -274,6 +354,22 @@ val ShadercSpvc = "ShadercSpvc".nativeClass(Module.SHADERC, prefix = "shaderc_sp
         shaderc_spvc_compile_options_t("options", ""),
         uint32_t.const.p("descriptors", ""),
         AutoSize("descriptors")..size_t("num_descriptors", "")
+    )
+
+    void(
+        "compile_options_set_msl_enable_point_size_builtin",
+        "Set whether or not {@code PointSize} builtin is used for MSL shaders.",
+
+        shaderc_spvc_compile_options_t("options", ""),
+        bool("b", "")
+    )
+
+    void(
+        "compile_options_set_msl_buffer_size_buffer_index",
+        "Set the index in the buffer size in the buffer for MSL.",
+
+        shaderc_spvc_compile_options_t("options", ""),
+        uint32_t("index", "")
     )
 
     void(
@@ -358,72 +454,175 @@ val ShadercSpvc = "ShadercSpvc".nativeClass(Module.SHADERC, prefix = "shaderc_sp
         returnDoc = "amount of data used, or zero if not enough data was given"
     )
 
-    shaderc_spvc_compilation_result_t(
-        "compile_into_glsl",
-        "Takes SPIR-V as a sequence of 32-bit words, validates it, then compiles to GLSL.",
+    shaderc_spvc_status(
+        "initialize_for_glsl",
+        "Takes SPIR-V as a sequence of 32-bit words, validates it, then creates the internal compiler for translating to GLSL and performing reflection.",
 
-        shaderc_spvc_compiler_t.const("compiler", ""),
+        shaderc_spvc_context_t.const("context", ""),
         uint32_t.const.p("source", ""),
         AutoSize("source")..size_t("source_len", ""),
         shaderc_spvc_compile_options_t("options", "")
     )
 
-    shaderc_spvc_compilation_result_t(
-        "compile_into_hlsl",
-        "Takes SPIR-V as a sequence of 32-bit words, validates it, then compiles to HLSL.",
+    shaderc_spvc_status(
+        "initialize_for_hlsl",
+        "Takes SPIR-V as a sequence of 32-bit words, validates it, then creates the internal compiler for translating to HLSL and performing reflection.",
 
-        shaderc_spvc_compiler_t.const("compiler", ""),
+        shaderc_spvc_context_t.const("context", ""),
         uint32_t.const.p("source", ""),
         AutoSize("source")..size_t("source_len", ""),
         shaderc_spvc_compile_options_t("options", "")
     )
 
-    shaderc_spvc_compilation_result_t(
-        "compile_into_msl",
-        "Takes SPIR-V as a sequence of 32-bit words, validates it, then compiles to MSL.",
+    shaderc_spvc_status(
+        "initialize_for_msl",
+        "Takes SPIR-V as a sequence of 32-bit words, validates it, then creates the internal compiler for translating to MSL and performing reflection.",
 
-        shaderc_spvc_compiler_t.const("compiler", ""),
+        shaderc_spvc_context_t.const("context", ""),
         uint32_t.const.p("source", ""),
         AutoSize("source")..size_t("source_len", ""),
         shaderc_spvc_compile_options_t("options", "")
     )
 
-    shaderc_spvc_compilation_result_t(
-        "compile_into_vulkan",
-        "Takes SPIR-V as a sequence of 32-bit words, validates it, then compiles to Vulkan specific SPIR-V.",
+    shaderc_spvc_status(
+        "initialize_for_vulkan",
+        "Takes SPIR-V as a sequence of 32-bit words, validates it, then creates the internal compiler for translating to Vulkan and performing reflection.",
 
-        shaderc_spvc_compiler_t.const("compiler", ""),
+        shaderc_spvc_context_t.const("context", ""),
         uint32_t.const.p("source", ""),
         AutoSize("source")..size_t("source_len", ""),
         shaderc_spvc_compile_options_t("options", "")
+    )
+
+    shaderc_spvc_status(
+        "compile_shader",
+        "Given an initialized compiler, generates a shader of the appropriate language.",
+
+        shaderc_spvc_context_t.const("context", ""),
+        shaderc_spvc_compilation_result_t("result", "")
+    )
+
+    shaderc_spvc_status(
+        "get_decoration",
+        """
+        Get spirv_cross decoration.
+        
+        Given an id and a decoration, result is sent out through {@code argument}. If {@code id} does not exist, returns an error.
+        """,
+
+        shaderc_spvc_context_t.const("context", ""),
+        uint32_t("id", ""),
+        shaderc_spvc_decoration("decoration", ""),
+        Check(1)..uint32_t.p("argument", "")
+    )
+
+    shaderc_spvc_status(
+        "unset_decoration",
+        """
+        Unset spirv_cross decoration.
+        
+        Given an id and a decoration. Assuming {@code id} is valid.
+        """,
+
+        shaderc_spvc_context_t.const("context", ""),
+        uint32_t("id", ""),
+        shaderc_spvc_decoration("decoration", "")
     )
 
     void(
-        "result_release",
+        "set_name",
         """
-        Releases the resources held by the result object.
+        Set {@code name} on a given {@code id}.
+
+        Assuming {@code id} is valid.        
+        """,
+
+        shaderc_spvc_context_t.const("context", ""),
+        uint32_t("id", ""),
+        charASCII.const.p("name", "")
+    )
+
+    void(
+        "build_combined_image_samplers",
+        "Analyzes all separate image and samplers used from the currently selected entry point, and re-routes them all to a combined image sampler instead.",
+
+        shaderc_spvc_context_t.const("context", "")
+    )
+
+    void(
+        "get_combined_image_samplers",
+        """
+        Returns the combined image samplers.
+        
+        If {@code samplers} is #NULL, then {@code num_samplers} is set, and no data is copied. The caller is responsible for {@code samplers} being large
+        enough to contain all of the data.
+        """,
+
+        shaderc_spvc_context_t.const("context", ""),
+        nullable..shaderc_spvc_combined_image_sampler.p("samplers", ""),
+        Check(1)..size_t.p("num_samplers", "")
+    )
+
+    shaderc_spvc_status(
+        "set_decoration",
+        """
+        Set spirv_cross decoration.
+        
+        Given an {@code id}, {@code decoration} and {@code argument}, the {@code decoration} flag on the {@code id} is set. Assuming {@code id} is valid.
+        """,
+
+        shaderc_spvc_context_t.const("context", ""),
+        uint32_t("id", ""),
+        shaderc_spvc_decoration("decoration", ""),
+        uint32_t("argument", "")
+    )
+
+    shaderc_spvc_status(
+        "add_msl_resource_binding",
+        "Adds a binding to indicate the MSL buffer, texture or sampler index to use for a particular SPIR-V description set and binding.",
+
+        shaderc_spvc_context_t.const("context", ""),
+        shaderc_spvc_msl_resource_binding.const("binding", "")
+    )
+
+    shaderc_spvc_status(
+        "get_workgroup_size",
+        "Gets workgroup size for an entry point defined by a given execution model and function name.",
+
+        shaderc_spvc_context_t.const("context", ""),
+        charASCII.const.p("function_name", ""),
+        shaderc_spvc_execution_model("execution_model", ""),
+        Check(1)..shaderc_spcv_workgroup_size.p("workgroup_size", "")
+    )
+
+    shaderc_spvc_status(
+        "needs_buffer_size_buffer",
+        "Gets whether or not the shader needes a buffer of buffer sizes.",
+
+        shaderc_spvc_context_t.const("context", ""),
+        Check(1)..bool.p("b", ""));
+
+    shaderc_spvc_compilation_result_t(
+        "result_create",
+        """
+        Creates an instant of compilation result data structure.
+        
+        A return of #NULL indicates that there was an error creating the structure. Any function operating on {@code shaderc_spvc_compilation_result_t} must
+        offer the basic thread-safety guarantee.
+        """,
+
+        void()
+    )
+
+    void(
+        "result_destroy",
+        """
+        Destroys the resources held by the result object.
 
         It is invalid to use the result object for any further operations.
         """,
 
         shaderc_spvc_compilation_result_t("result", "")
-    )
-
-    shaderc_compilation_status(
-        "result_get_status",
-        """
-        Returns the compilation status, indicating whether the compilation succeeded, or failed due to some reasons, like invalid shader stage or compilation
-        errors.
-        """,
-
-        shaderc_spvc_compilation_result_t.const("result", "")
-    )
-
-    charUTF8.const.p(
-        "result_get_messages",
-        "Get validation/compilation error or informational messages.",
-
-        shaderc_spvc_compilation_result_t.const("result", "")
     )
 
     charUTF8.const.p(

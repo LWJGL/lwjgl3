@@ -1868,7 +1868,7 @@ rpmalloc_initialize_config(const rpmalloc_config_t* config) {
 	size_t max_page_size = 4 * 1024 * 1024;
 	const size_t ptrbits = sizeof(void*);
 	if (ptrbits > 4)
-		max_page_size = 4096ULL * 1024ULL * 1024ULL;
+		max_page_size = (size_t)(4096ULL * 1024ULL * 1024ULL);
 	if (_memory_page_size < min_span_size)
 		_memory_page_size = min_span_size;
 	if (_memory_page_size > max_page_size)

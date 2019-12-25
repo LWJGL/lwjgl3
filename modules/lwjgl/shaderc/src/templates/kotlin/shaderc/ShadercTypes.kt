@@ -19,13 +19,8 @@ val shaderc_profile = "shaderc_profile".enumType
 val shaderc_shader_kind = "shaderc_shader_kind".enumType
 val shaderc_source_language = "shaderc_source_language".enumType
 val shaderc_spirv_version = "shaderc_spirv_version".enumType
-val shaderc_spvc_msl_platform = "shaderc_spvc_msl_platform".enumType
 val shaderc_target_env = "shaderc_target_env".enumType
 val shaderc_uniform_kind = "shaderc_uniform_kind".enumType
-
-val shaderc_spvc_compilation_result_t = "shaderc_spvc_compilation_result_t".handle
-val shaderc_spvc_compile_options_t = "shaderc_spvc_compile_options_t".handle
-val shaderc_spvc_compiler_t = "shaderc_spvc_compiler_t".handle
 
 val shaderc_include_result = struct(Module.SHADERC, "ShadercIncludeResult", nativeName = "shaderc_include_result") {
     documentation = "An include result."
@@ -81,4 +76,38 @@ val shaderc_include_result_release_fn = Module.SHADERC.callback {
     ) {
         documentation = "Instances of this interface may be passed to the #compile_options_set_include_callbacks() function."
     }
+}
+
+// libshaderc_spvc
+
+val shaderc_spvc_context_t = "shaderc_spvc_context_t".handle
+
+val shaderc_spvc_decoration = "shaderc_spvc_decoration".enumType
+val shaderc_spvc_execution_model = "shaderc_spvc_execution_model".enumType
+val shaderc_spvc_status = "shaderc_spvc_status".enumType
+
+val shaderc_spvc_msl_platform = "shaderc_spvc_msl_platform".enumType
+val shaderc_spvc_compilation_result_t = "shaderc_spvc_compilation_result_t".handle
+val shaderc_spvc_compile_options_t = "shaderc_spvc_compile_options_t".handle
+
+val shaderc_spvc_combined_image_sampler = struct(Module.SHADERC, "ShadercSPVCCombinedImageSampler", nativeName = "shaderc_spvc_combined_image_sampler", mutable = false) {
+    uint32_t("combined_id", "")
+    uint32_t("image_id", "")
+    uint32_t("sampler_id", "")
+}
+
+val shaderc_spvc_msl_resource_binding = struct(Module.SHADERC, "ShadercSPVCMSLResourceBinding", nativeName = "shaderc_spvc_msl_resource_binding") {
+    shaderc_spvc_execution_model("stage", "")
+    uint32_t("desc_set", "")
+    uint32_t("binding", "")
+    uint32_t("msl_buffer", "")
+    uint32_t("msl_texture", "")
+    uint32_t("msl_sampler", "")
+}
+
+val shaderc_spcv_workgroup_size = struct(Module.SHADERC, "ShadercSPVCWorkgroupSize", nativeName = "shaderc_spcv_workgroup_size", mutable = false) {
+    uint32_t("x", "")
+    uint32_t("y", "")
+    uint32_t("z", "")
+    uint32_t("constant", "")
 }

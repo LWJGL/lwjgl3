@@ -48,12 +48,16 @@ public class ShadercSpvcTest {
 
         // shaderc_spvc
 
-        long spvc_compiler = shaderc_spvc_compiler_initialize();
-        long spvc_options  = shaderc_spvc_compile_options_initialize();
-        long spvc_result   = shaderc_spvc_compile_into_glsl(spvc_compiler, bb.asIntBuffer(), spvc_options);
+        long spvc_result = shaderc_spvc_result_create();
 
-        shaderc_spvc_compile_options_release(spvc_options);
-        shaderc_spvc_compiler_release(spvc_compiler);
+        long spvc_context = shaderc_spvc_context_create();
+        long spvc_options = shaderc_spvc_compile_options_create();
+
+        assertEquals(shaderc_spvc_initialize_for_glsl(spvc_context, bb.asIntBuffer(), spvc_options), shaderc_spvc_status_success);
+        assertEquals(shaderc_spvc_compile_shader(spvc_context, spvc_result), shaderc_spvc_status_success);
+
+        shaderc_spvc_compile_options_destroy(spvc_options);
+        shaderc_spvc_context_destroy(spvc_context);
 
         shaderc_result_release(result);
 
@@ -64,7 +68,7 @@ public class ShadercSpvcTest {
         assertTrue(glsl.contains("layout(location = 0) out vec4 outColor"));
         assertTrue(glsl.contains("outColor = vtxColor"));
 
-        shaderc_spvc_result_release(spvc_result);
+        shaderc_spvc_result_destroy(spvc_result);
     }
 
 }
