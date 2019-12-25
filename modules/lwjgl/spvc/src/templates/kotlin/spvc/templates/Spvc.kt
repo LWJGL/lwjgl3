@@ -33,7 +33,7 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         """
 
     IntConstant("", "C_API_VERSION_MAJOR".."0")
-    IntConstant("", "C_API_VERSION_MINOR".."18")
+    IntConstant("", "C_API_VERSION_MINOR".."21")
     IntConstant("", "C_API_VERSION_PATCH".."0")
 
     IntConstant("", "COMPILER_OPTION_COMMON_BIT"..0x1000000)
@@ -334,6 +334,36 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         """
         Maps to the various spirv_cross::Compiler*::Option structures. See C++ API for defaults and details.
 
+        ({@code spvc_hlsl_binding_flags})
+        """,
+
+        "HLSL_BINDING_AUTO_PUSH_CONSTANT_BIT".enum(
+            """
+            Push constant (root constant) resources will be declared as CBVs (b-space) without a register() declaration.
+
+            A register will be automatically assigned by the D3D compiler, but must therefore be reflected in D3D-land. Push constants do not normally have a
+            {@code DecorationBinding} set, but if they do, this can be used to ignore it.
+            """,
+            "1 << 0"
+        ),
+	    "HLSL_BINDING_AUTO_CBV_BIT".enum(
+            """
+            {@code cbuffer} resources will be declared as CBVs (b-space) without a register() declaration.
+
+            A register will be automatically assigned, but must be reflected in D3D-land.
+            """,
+            "1 << 1"
+        ),
+        "HLSL_BINDING_AUTO_SRV_BIT".enum("All SRVs (t-space) will be declared without a {@code register()} declaration.", "1 << 2"),
+        "HLSL_BINDING_AUTO_UAV_BIT".enum("All UAVs (u-space) will be declared without a {@code register()} declaration.", "1 << 3"),
+        "HLSL_BINDING_AUTO_SAMPLER_BIT".enum("All samplers (s-space) will be declared without a {@code register()} declaration.", "1 << 4"),
+        "HLSL_BINDING_AUTO_ALL".enum("No resources will be declared with {@code register()}.", 0x7fffffff)
+    )
+
+    EnumConstant(
+        """
+        Maps to the various spirv_cross::Compiler*::Option structures. See C++ API for defaults and details.
+
         ({@code spvc_compiler_option})
         """,
 
@@ -381,7 +411,13 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         "COMPILER_OPTION_MSL_DEVICE_INDEX".enum("Obsolete, use SWIZZLE_BUFFER_INDEX instead.", "40 | SPVC_COMPILER_OPTION_MSL_BIT"),
         "COMPILER_OPTION_MSL_VIEW_INDEX_FROM_DEVICE_INDEX".enum("Obsolete, use SWIZZLE_BUFFER_INDEX instead.", "41 | SPVC_COMPILER_OPTION_MSL_BIT"),
         "COMPILER_OPTION_MSL_DISPATCH_BASE".enum("Obsolete, use SWIZZLE_BUFFER_INDEX instead.", "42 | SPVC_COMPILER_OPTION_MSL_BIT"),
-        "COMPILER_OPTION_MSL_DYNAMIC_OFFSETS_BUFFER_INDEX".enum("Obsolete, use SWIZZLE_BUFFER_INDEX instead.", "43 | SPVC_COMPILER_OPTION_MSL_BIT")
+        "COMPILER_OPTION_MSL_DYNAMIC_OFFSETS_BUFFER_INDEX".enum("Obsolete, use SWIZZLE_BUFFER_INDEX instead.", "43 | SPVC_COMPILER_OPTION_MSL_BIT"),
+        "COMPILER_OPTION_MSL_TEXTURE_1D_AS_2D".enum("", "44 | SPVC_COMPILER_OPTION_MSL_BIT"),
+        "COMPILER_OPTION_MSL_ENABLE_BASE_INDEX_ZERO".enum("", "45 | SPVC_COMPILER_OPTION_MSL_BIT"),
+        "COMPILER_OPTION_MSL_IOS_FRAMEBUFFER_FETCH_SUBPASS".enum("", "46 | SPVC_COMPILER_OPTION_MSL_BIT"),
+        "COMPILER_OPTION_MSL_INVARIANT_FP_MATH".enum("", "47 | SPVC_COMPILER_OPTION_MSL_BIT"),
+        "COMPILER_OPTION_MSL_EMULATE_CUBEMAP_ARRAY".enum("", "48 | SPVC_COMPILER_OPTION_MSL_BIT"),
+        "COMPILER_OPTION_MSL_ENABLE_DECORATION_BINDING".enum("", "49 | SPVC_COMPILER_OPTION_MSL_BIT")
     )
 
     void(
@@ -602,6 +638,14 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         spvc_compiler("compiler", "")
     )
 
+    spvc_result(
+        "compiler_hlsl_set_resource_binding_flags",
+        "",
+
+        spvc_compiler("compiler", ""),
+        spvc_hlsl_binding_flags("flags", "")
+    )
+
     spvc_bool(
         "compiler_msl_is_rasterization_disabled",
         "MSL specifics. Maps to C++ API.",
@@ -666,6 +710,15 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
 
         spvc_compiler("compiler", ""),
         unsigned_int("desc_set", "")
+    )
+
+    spvc_result(
+        "compiler_msl_set_argument_buffer_device_address_space",
+        "",
+
+        spvc_compiler("compiler", ""),
+        unsigned("desc_set", ""),
+        spvc_bool("device_address", "")
     )
 
     spvc_bool(
@@ -1061,6 +1114,19 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
 
         spvc_compiler("compiler", ""),
         spvc_type_id("id", "")
+    )
+
+    spvc_type_id(
+        "type_get_base_type_id",
+        """
+        Pulls out {@code SPIRType::self}.
+
+        This effectively gives the type ID without array or pointer qualifiers. This is necessary when reflecting decoration/name information on members of a
+        struct, which are placed in the base type, not the qualified type. This is similar to {@code spvc_reflected_resource::base_type_id}.
+            
+        """,
+
+        spvc_type("type", "")
     )
 
     spvc_basetype(

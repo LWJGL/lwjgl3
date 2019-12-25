@@ -42,7 +42,7 @@ public class Spvc {
 
     public static final int SPVC_C_API_VERSION_MAJOR = 0;
 
-    public static final int SPVC_C_API_VERSION_MINOR = 18;
+    public static final int SPVC_C_API_VERSION_MINOR = 21;
 
     public static final int SPVC_C_API_VERSION_PATCH = 0;
 
@@ -484,6 +484,39 @@ public class Spvc {
     /**
      * Maps to the various spirv_cross::Compiler*::Option structures. See C++ API for defaults and details.
      * 
+     * <p>({@code spvc_hlsl_binding_flags})</p>
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #SPVC_HLSL_BINDING_AUTO_PUSH_CONSTANT_BIT HLSL_BINDING_AUTO_PUSH_CONSTANT_BIT} - 
+     * Push constant (root constant) resources will be declared as CBVs (b-space) without a register() declaration.
+     * 
+     * <p>A register will be automatically assigned by the D3D compiler, but must therefore be reflected in D3D-land. Push constants do not normally have a
+     * {@code DecorationBinding} set, but if they do, this can be used to ignore it.</p>
+     * </li>
+     * <li>{@link #SPVC_HLSL_BINDING_AUTO_CBV_BIT HLSL_BINDING_AUTO_CBV_BIT} - 
+     * {@code cbuffer} resources will be declared as CBVs (b-space) without a register() declaration.
+     * 
+     * <p>A register will be automatically assigned, but must be reflected in D3D-land.</p>
+     * </li>
+     * <li>{@link #SPVC_HLSL_BINDING_AUTO_SRV_BIT HLSL_BINDING_AUTO_SRV_BIT} - All SRVs (t-space) will be declared without a {@code register()} declaration.</li>
+     * <li>{@link #SPVC_HLSL_BINDING_AUTO_UAV_BIT HLSL_BINDING_AUTO_UAV_BIT} - All UAVs (u-space) will be declared without a {@code register()} declaration.</li>
+     * <li>{@link #SPVC_HLSL_BINDING_AUTO_SAMPLER_BIT HLSL_BINDING_AUTO_SAMPLER_BIT} - All samplers (s-space) will be declared without a {@code register()} declaration.</li>
+     * <li>{@link #SPVC_HLSL_BINDING_AUTO_ALL HLSL_BINDING_AUTO_ALL} - No resources will be declared with {@code register()}.</li>
+     * </ul>
+     */
+    public static final int
+        SPVC_HLSL_BINDING_AUTO_PUSH_CONSTANT_BIT = 1 << 0,
+        SPVC_HLSL_BINDING_AUTO_CBV_BIT           = 1 << 1,
+        SPVC_HLSL_BINDING_AUTO_SRV_BIT           = 1 << 2,
+        SPVC_HLSL_BINDING_AUTO_UAV_BIT           = 1 << 3,
+        SPVC_HLSL_BINDING_AUTO_SAMPLER_BIT       = 1 << 4,
+        SPVC_HLSL_BINDING_AUTO_ALL               = 0x7FFFFFFF;
+
+    /**
+     * Maps to the various spirv_cross::Compiler*::Option structures. See C++ API for defaults and details.
+     * 
      * <p>({@code spvc_compiler_option})</p>
      * 
      * <h5>Enum values:</h5>
@@ -534,6 +567,12 @@ public class Spvc {
      * <li>{@link #SPVC_COMPILER_OPTION_MSL_VIEW_INDEX_FROM_DEVICE_INDEX COMPILER_OPTION_MSL_VIEW_INDEX_FROM_DEVICE_INDEX} - Obsolete, use SWIZZLE_BUFFER_INDEX instead.</li>
      * <li>{@link #SPVC_COMPILER_OPTION_MSL_DISPATCH_BASE COMPILER_OPTION_MSL_DISPATCH_BASE} - Obsolete, use SWIZZLE_BUFFER_INDEX instead.</li>
      * <li>{@link #SPVC_COMPILER_OPTION_MSL_DYNAMIC_OFFSETS_BUFFER_INDEX COMPILER_OPTION_MSL_DYNAMIC_OFFSETS_BUFFER_INDEX} - Obsolete, use SWIZZLE_BUFFER_INDEX instead.</li>
+     * <li>{@link #SPVC_COMPILER_OPTION_MSL_TEXTURE_1D_AS_2D COMPILER_OPTION_MSL_TEXTURE_1D_AS_2D}</li>
+     * <li>{@link #SPVC_COMPILER_OPTION_MSL_ENABLE_BASE_INDEX_ZERO COMPILER_OPTION_MSL_ENABLE_BASE_INDEX_ZERO}</li>
+     * <li>{@link #SPVC_COMPILER_OPTION_MSL_IOS_FRAMEBUFFER_FETCH_SUBPASS COMPILER_OPTION_MSL_IOS_FRAMEBUFFER_FETCH_SUBPASS}</li>
+     * <li>{@link #SPVC_COMPILER_OPTION_MSL_INVARIANT_FP_MATH COMPILER_OPTION_MSL_INVARIANT_FP_MATH}</li>
+     * <li>{@link #SPVC_COMPILER_OPTION_MSL_EMULATE_CUBEMAP_ARRAY COMPILER_OPTION_MSL_EMULATE_CUBEMAP_ARRAY}</li>
+     * <li>{@link #SPVC_COMPILER_OPTION_MSL_ENABLE_DECORATION_BINDING COMPILER_OPTION_MSL_ENABLE_DECORATION_BINDING}</li>
      * </ul>
      */
     public static final int
@@ -581,7 +620,13 @@ public class Spvc {
         SPVC_COMPILER_OPTION_MSL_DEVICE_INDEX                               = 40 | SPVC_COMPILER_OPTION_MSL_BIT,
         SPVC_COMPILER_OPTION_MSL_VIEW_INDEX_FROM_DEVICE_INDEX               = 41 | SPVC_COMPILER_OPTION_MSL_BIT,
         SPVC_COMPILER_OPTION_MSL_DISPATCH_BASE                              = 42 | SPVC_COMPILER_OPTION_MSL_BIT,
-        SPVC_COMPILER_OPTION_MSL_DYNAMIC_OFFSETS_BUFFER_INDEX               = 43 | SPVC_COMPILER_OPTION_MSL_BIT;
+        SPVC_COMPILER_OPTION_MSL_DYNAMIC_OFFSETS_BUFFER_INDEX               = 43 | SPVC_COMPILER_OPTION_MSL_BIT,
+        SPVC_COMPILER_OPTION_MSL_TEXTURE_1D_AS_2D                           = 44 | SPVC_COMPILER_OPTION_MSL_BIT,
+        SPVC_COMPILER_OPTION_MSL_ENABLE_BASE_INDEX_ZERO                     = 45 | SPVC_COMPILER_OPTION_MSL_BIT,
+        SPVC_COMPILER_OPTION_MSL_IOS_FRAMEBUFFER_FETCH_SUBPASS              = 46 | SPVC_COMPILER_OPTION_MSL_BIT,
+        SPVC_COMPILER_OPTION_MSL_INVARIANT_FP_MATH                          = 47 | SPVC_COMPILER_OPTION_MSL_BIT,
+        SPVC_COMPILER_OPTION_MSL_EMULATE_CUBEMAP_ARRAY                      = 48 | SPVC_COMPILER_OPTION_MSL_BIT,
+        SPVC_COMPILER_OPTION_MSL_ENABLE_DECORATION_BINDING                  = 49 | SPVC_COMPILER_OPTION_MSL_BIT;
 
     protected Spvc() {
         throw new UnsupportedOperationException();
@@ -622,6 +667,7 @@ public class Spvc {
             compiler_hlsl_set_root_constants_layout               = apiGetFunctionAddress(SPVC, "spvc_compiler_hlsl_set_root_constants_layout"),
             compiler_hlsl_add_vertex_attribute_remap              = apiGetFunctionAddress(SPVC, "spvc_compiler_hlsl_add_vertex_attribute_remap"),
             compiler_hlsl_remap_num_workgroups_builtin            = apiGetFunctionAddress(SPVC, "spvc_compiler_hlsl_remap_num_workgroups_builtin"),
+            compiler_hlsl_set_resource_binding_flags              = apiGetFunctionAddress(SPVC, "spvc_compiler_hlsl_set_resource_binding_flags"),
             compiler_msl_is_rasterization_disabled                = apiGetFunctionAddress(SPVC, "spvc_compiler_msl_is_rasterization_disabled"),
             compiler_msl_needs_swizzle_buffer                     = apiGetFunctionAddress(SPVC, "spvc_compiler_msl_needs_swizzle_buffer"),
             compiler_msl_needs_buffer_size_buffer                 = apiGetFunctionAddress(SPVC, "spvc_compiler_msl_needs_buffer_size_buffer"),
@@ -631,6 +677,7 @@ public class Spvc {
             compiler_msl_add_vertex_attribute                     = apiGetFunctionAddress(SPVC, "spvc_compiler_msl_add_vertex_attribute"),
             compiler_msl_add_resource_binding                     = apiGetFunctionAddress(SPVC, "spvc_compiler_msl_add_resource_binding"),
             compiler_msl_add_discrete_descriptor_set              = apiGetFunctionAddress(SPVC, "spvc_compiler_msl_add_discrete_descriptor_set"),
+            compiler_msl_set_argument_buffer_device_address_space = apiGetFunctionAddress(SPVC, "spvc_compiler_msl_set_argument_buffer_device_address_space"),
             compiler_msl_is_vertex_attribute_used                 = apiGetFunctionAddress(SPVC, "spvc_compiler_msl_is_vertex_attribute_used"),
             compiler_msl_is_resource_used                         = apiGetFunctionAddress(SPVC, "spvc_compiler_msl_is_resource_used"),
             compiler_msl_remap_constexpr_sampler                  = apiGetFunctionAddress(SPVC, "spvc_compiler_msl_remap_constexpr_sampler"),
@@ -674,6 +721,7 @@ public class Spvc {
             compiler_get_execution_mode_argument_by_index         = apiGetFunctionAddress(SPVC, "spvc_compiler_get_execution_mode_argument_by_index"),
             compiler_get_execution_model                          = apiGetFunctionAddress(SPVC, "spvc_compiler_get_execution_model"),
             compiler_get_type_handle                              = apiGetFunctionAddress(SPVC, "spvc_compiler_get_type_handle"),
+            type_get_base_type_id                                 = apiGetFunctionAddress(SPVC, "spvc_type_get_base_type_id"),
             type_get_basetype                                     = apiGetFunctionAddress(SPVC, "spvc_type_get_basetype"),
             type_get_bit_width                                    = apiGetFunctionAddress(SPVC, "spvc_type_get_bit_width"),
             type_get_vector_size                                  = apiGetFunctionAddress(SPVC, "spvc_type_get_vector_size"),
@@ -1163,6 +1211,17 @@ public class Spvc {
         return invokePI(compiler, __functionAddress);
     }
 
+    // --- [ spvc_compiler_hlsl_set_resource_binding_flags ] ---
+
+    @NativeType("spvc_result")
+    public static int spvc_compiler_hlsl_set_resource_binding_flags(@NativeType("spvc_compiler") long compiler, @NativeType("spvc_hlsl_binding_flags") int flags) {
+        long __functionAddress = Functions.compiler_hlsl_set_resource_binding_flags;
+        if (CHECKS) {
+            check(compiler);
+        }
+        return invokePI(compiler, flags, __functionAddress);
+    }
+
     // --- [ spvc_compiler_msl_is_rasterization_disabled ] ---
 
     /** MSL specifics. Maps to C++ API. */
@@ -1269,6 +1328,17 @@ public class Spvc {
             check(compiler);
         }
         return invokePI(compiler, desc_set, __functionAddress);
+    }
+
+    // --- [ spvc_compiler_msl_set_argument_buffer_device_address_space ] ---
+
+    @NativeType("spvc_result")
+    public static int spvc_compiler_msl_set_argument_buffer_device_address_space(@NativeType("spvc_compiler") long compiler, @NativeType("unsigned") int desc_set, @NativeType("spvc_bool") boolean device_address) {
+        long __functionAddress = Functions.compiler_msl_set_argument_buffer_device_address_space;
+        if (CHECKS) {
+            check(compiler);
+        }
+        return invokePI(compiler, desc_set, device_address, __functionAddress);
     }
 
     // --- [ spvc_compiler_msl_is_vertex_attribute_used ] ---
@@ -1960,6 +2030,23 @@ public class Spvc {
             check(compiler);
         }
         return invokePP(compiler, id, __functionAddress);
+    }
+
+    // --- [ spvc_type_get_base_type_id ] ---
+
+    /**
+     * Pulls out {@code SPIRType::self}.
+     * 
+     * <p>This effectively gives the type ID without array or pointer qualifiers. This is necessary when reflecting decoration/name information on members of a
+     * struct, which are placed in the base type, not the qualified type. This is similar to {@code spvc_reflected_resource::base_type_id}.</p>
+     */
+    @NativeType("spvc_type_id")
+    public static int spvc_type_get_base_type_id(@NativeType("spvc_type") long type) {
+        long __functionAddress = Functions.type_get_base_type_id;
+        if (CHECKS) {
+            check(type);
+        }
+        return invokePI(type, __functionAddress);
     }
 
     // --- [ spvc_type_get_basetype ] ---

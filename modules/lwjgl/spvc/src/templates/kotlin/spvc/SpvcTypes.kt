@@ -38,6 +38,7 @@ val spvc_backend = "spvc_backend".enumType
 val spvc_basetype = "spvc_basetype".enumType
 val spvc_capture_mode = "spvc_capture_mode".enumType
 val spvc_compiler_option = "spvc_compiler_option".enumType
+val spvc_hlsl_binding_flags = "spvc_hlsl_binding_flags".enumType
 val spvc_msl_chroma_location = "spvc_msl_chroma_location".enumType
 val spvc_msl_component_swizzle = "spvc_msl_component_swizzle".enumType
 val spvc_msl_format_resolution = "spvc_msl_format_resolution".enumType
