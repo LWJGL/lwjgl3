@@ -220,6 +220,7 @@
                     <fileset dir="." includes="${src.main}/lib/utils/src/*"/>
                     <fileset dir=".">
                         <include name="${src.main}/src/**/*.cpp"/>
+                        <include name="${src.main}/src/**/*.m"/>
                         <exclude name="${src.main}/src/gl/glx/*"/>
                         <exclude name="${src.main}/src/gl/wgl/*"/>
                         <exclude name="${src.main}/src/prism/d3d/*"/>
