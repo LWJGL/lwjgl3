@@ -373,7 +373,7 @@ import org.lwjgl.vulkan.*;
  * <ol>
  * <li>Make sure extensions {@code VK_EXT_memory_budget} and {@code VK_KHR_get_physical_device_properties2} required by it are available and enable them.
  * Please note that the first is a device extension and the second is instance extension!</li>
- * <li>Use flag {@link #VMA_ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT} when creating {@link VmaAllocator} object.</li>
+ * <li>Use flag {@link #VMA_ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT} when creating {@code VmaAllocator} object.</li>
  * <li>Make sure to call {@link #vmaSetCurrentFrameIndex SetCurrentFrameIndex} every frame. Budget is queried from Vulkan inside of it to avoid overhead of querying it with every
  * allocation.</li>
  * </ol>
@@ -2524,7 +2524,7 @@ public class Vma {
      * 
      * <p>Use this function instead of old, deprecated {@link #vmaDefragment Defragment}.</p>
      * 
-     * <p>Warning! Between the call to {@link #vmaDefragmentationBegin DefragmentationBegin} and {@link #vmaDefragmentationEnd DefragmentationEnd}:</p>
+     * <p>Warning! Between the call to {@code vmaDefragmentationBegin} and {@link #vmaDefragmentationEnd DefragmentationEnd}:</p>
      * 
      * <ul>
      * <li>You should not use any of allocations passed as {@code pInfo->pAllocations} or any allocations that belong to pools passed as

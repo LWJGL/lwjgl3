@@ -206,7 +206,7 @@ public class KHRSurface {
      * 
      * <pre><code>
      * E =  1.055 &times; L<sup>1/2.4</sup> - 0.055 for 0.0030186 &le; L &le; 1
-     *     12.92  &times; L for 0 &le; L &lt 0.0030186</code></pre>
+     *     12.92  &times; L for 0 &le; L &lt; 0.0030186</code></pre>
      * 
      * <p>where <code>L</code> is the linear value of a color channel and <code>E</code> is the encoded value (as stored in the image in memory).</p>
      * 

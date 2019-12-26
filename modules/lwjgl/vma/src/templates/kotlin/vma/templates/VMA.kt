@@ -397,7 +397,7 @@ else
             Make sure extensions {@code VK_EXT_memory_budget} and {@code VK_KHR_get_physical_device_properties2} required by it are available and enable them.
             Please note that the first is a device extension and the second is instance extension!
             """,
-            "Use flag #ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT when creating ##VmaAllocator object.",
+            "Use flag #ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT when creating {@code VmaAllocator} object.",
             """
             Make sure to call #SetCurrentFrameIndex() every frame. Budget is queried from Vulkan inside of it to avoid overhead of querying it with every
             allocation.
@@ -2362,7 +2362,7 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
 
         Use this function instead of old, deprecated #Defragment().
 
-        Warning! Between the call to #DefragmentationBegin() and #DefragmentationEnd():
+        Warning! Between the call to {@code vmaDefragmentationBegin} and #DefragmentationEnd():
 
         ${ul(
             """
