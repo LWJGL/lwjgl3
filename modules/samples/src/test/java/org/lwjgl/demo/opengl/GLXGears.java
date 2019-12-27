@@ -81,7 +81,7 @@ public class GLXGears {
             if (caps.OpenGL30) {
                 version = 330;
             } else if (caps.OpenGL21) {
-                version = 130;
+                version = 120;
             } else {
                 version = 110;
             }
@@ -102,9 +102,9 @@ public class GLXGears {
         if (caps.OpenGL30) {
             int vao = glGenVertexArrays();
             glBindVertexArray(vao); // bind and forget
-            glEnableVertexAttribArray(positions);
-            glEnableVertexAttribArray(normals);
         }
+        glEnableVertexAttribArray(positions);
+        glEnableVertexAttribArray(normals);
 
         gear1 = new Gear(1.0, 4.0, 1.0, 20, 0.7, new float[] {0.8f, 0.1f, 0.0f, 1.0f});
         gear2 = new Gear(0.5, 2.0, 2.0, 10, 0.7, new float[] {0.0f, 0.8f, 0.2f, 1.0f});
