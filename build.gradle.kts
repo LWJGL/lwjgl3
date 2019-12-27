@@ -99,7 +99,8 @@ enum class Artifacts(
     ),
     DRIFTFX(
         "lwjgl-driftfx", "LWJGL - DriftFX bindings",
-        "A library that allows you to render any OpenGL content directly into JavaFX nodes."
+        "A library that allows you to render any OpenGL content directly into JavaFX nodes.",
+        *Platforms.ALL
     ),
     EGL(
         "lwjgl-egl", "LWJGL - EGL bindings",
