@@ -251,6 +251,7 @@
             </source>
             <link>
                 <arg value="-latomic"/>
+                <arg value="-lX11"/>
                 <arg value="-l:libGL.so.1" unless:set="gcc.libpath.opengl"/>
                 <arg line="-L ${gcc.libpath.opengl} -l:libGL.so.1" if:set="gcc.libpath.opengl"/>
             </link>
