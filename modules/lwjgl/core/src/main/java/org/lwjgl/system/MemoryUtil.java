@@ -41,7 +41,9 @@ import static org.lwjgl.system.libc.LibCString.*;
  * <li>ASCII - Not the original 7bit ASCII, but any character set with a single byte encoding (ISO 8859-1, Windows-1252, etc.)</li>
  * </ul>
  *
- * <p>Methods in bindings that accept/return {@code CharSequence}/{@code String} also support {@code ByteBuffer}, so custom codecs can be used if necessary.</p>
+ * <p>The codec implementations do no codepoint validation, for improved performance. Therefore, if malformed input or unmappable characters are expected, the
+ * JDK {@link CharsetEncoder}/{@link CharsetDecoder} classes should be used instead. Methods in bindings that accept/return {@code CharSequence}/{@code String}
+ * also support {@code ByteBuffer}, so custom codecs can be used if necessary.</p>
  *
  * @see Configuration#MEMORY_ALLOCATOR
  * @see Configuration#DEBUG_MEMORY_ALLOCATOR
@@ -2069,7 +2071,7 @@ public final class MemoryUtil {
     /**
      * Encodes and optionally null-terminates the specified text using UTF-8 encoding. The encoded text is stored in the specified {@link ByteBuffer}, at the
      * current buffer position. The current buffer position is not modified by this operation. The {@code target} buffer is assumed to have enough remaining
-     * space to store the encoded text. The specified text is assumed to be a valid UTF-16 string.
+     * space to store the encoded text.
      *
      * @param text           the text to encode
      * @param nullTerminated if true, the text will be terminated with a '\0'.
@@ -2084,7 +2086,7 @@ public final class MemoryUtil {
     /**
      * Encodes and optionally null-terminates the specified text using UTF-8 encoding. The encoded text is stored in the specified {@link ByteBuffer}, at the
      * specified {@code position} offset. The current buffer position is not modified by this operation. The {@code target} buffer is assumed to have enough
-     * remaining space to store the encoded text. The specified text is assumed to be a valid UTF-16 string.
+     * remaining space to store the encoded text.
      *
      * @param text           the text to encode
      * @param nullTerminated if true, the text will be terminated with a '\0'.
@@ -2133,7 +2135,7 @@ public final class MemoryUtil {
         }
 
         if (nullTerminated) {
-            UNSAFE.putByte(target + p++, (byte)0); // TODO: did we have a bug here?
+            UNSAFE.putByte(target + p++, (byte)0);
         }
 
         return p;
