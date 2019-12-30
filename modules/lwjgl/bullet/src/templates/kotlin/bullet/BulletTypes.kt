@@ -47,7 +47,6 @@ val p_btCollisionWorld_ConvexResultCallback_addSingleResult = Module.BULLET.call
         nativeType = "p_btCollisionWorld_ConvexResultCallback_addSingleResult"
     )
 }
-
 val p_btCollisionWorld_ConvexResultCallback_needsCollision = Module.BULLET.callback {
     bool(
         "BTCollisionWorldConvexResultCallbackNeedsCollision",
@@ -56,6 +55,33 @@ val p_btCollisionWorld_ConvexResultCallback_needsCollision = Module.BULLET.callb
         opaque_p("proxy0", ""),
 
         nativeType = "p_btCollisionWorld_ConvexResultCallback_needsCollision"
+    )
+}
+
+val p_btCollisionWorld_ContactResultCallback_addSingleResult = Module.BULLET.callback {
+    btScalar(
+        "BTCollisionWorldContactResultCallbackAddSingleResult",
+        "",
+
+        opaque_p("cp", ""),
+        opaque_p("colObj0Wrap", ""),
+        int("partId0", ""),
+        int("index0", ""),
+        opaque_p("colObj1Wrap", ""),
+        int("partId1", ""),
+        int("index1", ""),
+
+        nativeType = "p_btCollisionWorld_ContactResultCallback_addSingleResult"
+    )
+}
+val p_btCollisionWorld_ContactResultCallback_needsCollision = Module.BULLET.callback {
+    bool(
+        "BTCollisionWorldContactResultCallbackNeedsCollision",
+        "",
+
+        opaque_p("proxy0", ""),
+
+        nativeType = "p_btCollisionWorld_ContactResultCallback_needsCollision"
     )
 }
 

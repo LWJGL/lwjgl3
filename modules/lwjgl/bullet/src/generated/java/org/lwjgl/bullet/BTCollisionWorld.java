@@ -515,14 +515,14 @@ public class BTCollisionWorld {
 
     // --- [ btCollisionWorld_ContactResultCallbackWrapper_new ] ---
 
-    @NativeType("void *")
-    public static long btCollisionWorld_ContactResultCallbackWrapper_new(@NativeType("void *") long addSingleResultCallback, @NativeType("void *") long needsCollisionCallback) {
+    public static long nbtCollisionWorld_ContactResultCallbackWrapper_new(long addSingleResultCallback, long needsCollisionCallback) {
         long __functionAddress = Functions.CollisionWorld_ContactResultCallbackWrapper_new;
-        if (CHECKS) {
-            check(addSingleResultCallback);
-            check(needsCollisionCallback);
-        }
         return invokePPP(addSingleResultCallback, needsCollisionCallback, __functionAddress);
+    }
+
+    @NativeType("void *")
+    public static long btCollisionWorld_ContactResultCallbackWrapper_new(@NativeType("p_btCollisionWorld_ContactResultCallback_addSingleResult") BTCollisionWorldContactResultCallbackAddSingleResultI addSingleResultCallback, @NativeType("p_btCollisionWorld_ContactResultCallback_needsCollision") BTCollisionWorldContactResultCallbackNeedsCollisionI needsCollisionCallback) {
+        return nbtCollisionWorld_ContactResultCallbackWrapper_new(addSingleResultCallback.address(), needsCollisionCallback.address());
     }
 
     // --- [ btCollisionWorld_ContactResultCallbackWrapper_needsCollision ] ---
