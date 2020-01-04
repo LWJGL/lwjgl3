@@ -207,8 +207,8 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
         private static void reportAsymmetricPop(Object pushed, Object popped) {
             DEBUG_STREAM.format(
                 "[LWJGL] Asymmetric pop detected:\n\tPUSHED: %s\n\tPOPPED: %s\n\tTHREAD: %s\n",
-                pushed.toString(),
-                popped.toString(),
+                pushed,
+                popped,
                 Thread.currentThread()
             );
         }
@@ -645,8 +645,11 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     public ByteBuffer ASCII(CharSequence text, boolean nullTerminated) {
         int  length = memLengthASCII(text, nullTerminated);
         long target = nmalloc(1, length);
-        encodeASCII(text, nullTerminated, target);
-
+        if (BITS64) {
+            encodeASCIIUnsafe64(text, nullTerminated, target);
+        } else {
+            encodeASCIIUnsafe32(text, nullTerminated, (int)target);
+        }
         return MemoryUtil.wrap(BUFFER_BYTE, target, length).order(NATIVE_ORDER);
     }
 
@@ -659,7 +662,10 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
      * @param nullTerminated if true, a null-terminator is included at the end of the encoded text
      */
     public int nASCII(CharSequence text, boolean nullTerminated) {
-        return encodeASCII(text, nullTerminated, nmalloc(1, memLengthASCII(text, nullTerminated)));
+        long target = nmalloc(1, memLengthASCII(text, nullTerminated));
+        return BITS64
+            ? encodeASCIIUnsafe64(text, nullTerminated, target)
+            : encodeASCIIUnsafe32(text, nullTerminated, (int)target);
     }
 
     /** Like {@link #ASCII(CharSequence) ASCII}, but returns {@code null} if {@code text} is {@code null}. */
@@ -697,7 +703,11 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     public ByteBuffer UTF8(CharSequence text, boolean nullTerminated) {
         int  length = memLengthUTF8(text, nullTerminated);
         long target = nmalloc(1, length);
-        encodeUTF8(text, nullTerminated, target);
+        if (BITS64) {
+            encodeUTF8Unsafe64(text, nullTerminated, target);
+        } else {
+            encodeUTF8Unsafe32(text, nullTerminated, (int)target);
+        }
         return MemoryUtil.wrap(BUFFER_BYTE, target, length).order(NATIVE_ORDER);
     }
 
@@ -710,7 +720,10 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
      * @param nullTerminated if true, a null-terminator is included at the end of the encoded text
      */
     public int nUTF8(CharSequence text, boolean nullTerminated) {
-        return encodeUTF8(text, nullTerminated, nmalloc(1, memLengthUTF8(text, nullTerminated)));
+        long target = nmalloc(1, memLengthUTF8(text, nullTerminated));
+        return BITS64
+            ? encodeUTF8Unsafe64(text, nullTerminated, target)
+            : encodeUTF8Unsafe32(text, nullTerminated, (int)target);
     }
 
     /** Like {@link #UTF8(CharSequence) UTF8}, but returns {@code null} if {@code text} is {@code null}. */
@@ -748,7 +761,11 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     public ByteBuffer UTF16(CharSequence text, boolean nullTerminated) {
         int  length = memLengthUTF16(text, nullTerminated);
         long target = nmalloc(2, length);
-        encodeUTF16(text, nullTerminated, target);
+        if (BITS64) {
+            encodeUTF16Unsafe64(text, nullTerminated, target);
+        } else {
+            encodeUTF16Unsafe32(text, nullTerminated, (int)target);
+        }
         return MemoryUtil.wrap(BUFFER_BYTE, target, length).order(NATIVE_ORDER);
     }
 
@@ -761,7 +778,10 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
      * @param nullTerminated if true, a null-terminator is included at the end of the encoded text
      */
     public int nUTF16(CharSequence text, boolean nullTerminated) {
-        return encodeUTF16(text, nullTerminated, nmalloc(2, memLengthUTF16(text, nullTerminated)));
+        long target = nmalloc(2, memLengthUTF16(text, nullTerminated));
+        return BITS64
+            ? encodeUTF16Unsafe64(text, nullTerminated, target)
+            : encodeUTF16Unsafe32(text, nullTerminated, (int)target);
     }
 
     /** Like {@link #UTF16(CharSequence) UTF16}, but returns {@code null} if {@code text} is {@code null}. */
@@ -886,7 +906,7 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     public static LongBuffer stackLongs(long x, long y, long z, long w) { return stackGet().longs(x, y, z, w); }
     /** Thread-local version of {@link #longs(long...)}. */
     public static LongBuffer stackLongs(long... values) { return stackGet().longs(values); }
-    
+
     // -------------------------------------------------
 
     /** Thread-local version of {@link #mallocCLong}. */

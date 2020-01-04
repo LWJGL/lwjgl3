@@ -1946,6 +1946,8 @@ public final class MemoryUtil {
      * @param text the text to encode
      *
      * @return the encoded text. The returned buffer must be deallocated manually with {@link #memFree}.
+     *
+     * @throws BufferOverflowException if more than {@link Integer#MAX_VALUE} bytes are required to encode the text.
      */
     public static ByteBuffer memASCII(CharSequence text) {
         return memASCII(text, true);
@@ -1958,17 +1960,26 @@ public final class MemoryUtil {
     }
 
     /**
-     * Returns a ByteBuffer containing the specified text ASCII encoded and optionally null-terminated.
+     * Returns a {@link ByteBuffer} containing the specified text ASCII encoded and optionally null-terminated.
      *
      * @param text           the text to encode
      * @param nullTerminated if true, the text will be terminated with a '\0'.
      *
      * @return the encoded text. The returned buffer must be deallocated manually with {@link #memFree}.
+     *
+     * @throws BufferOverflowException if more than {@link Integer#MAX_VALUE} bytes are required to encode the text.
      */
     public static ByteBuffer memASCII(CharSequence text, boolean nullTerminated) {
         int  length = memLengthASCII(text, nullTerminated);
         long target = nmemAlloc(length);
-        encodeASCII(text, nullTerminated, target);
+        if (CHECKS && target == NULL) {
+            throw new OutOfMemoryError();
+        }
+        if (BITS64) {
+            encodeASCIIUnsafe64(text, nullTerminated, target);
+        } else {
+            encodeASCIIUnsafe32(text, nullTerminated, (int)target);
+        }
         return wrap(BUFFER_BYTE, target, length).order(NATIVE_ORDER);
     }
 
@@ -1980,42 +1991,69 @@ public final class MemoryUtil {
 
     /**
      * Encodes and optionally null-terminates the specified text using ASCII encoding. The encoded text is stored in the specified {@link ByteBuffer}, at the
-     * current buffer position. The current buffer position is not modified by this operation. The {@code target} buffer is assumed to have enough remaining
-     * space to store the encoded text.
+     * current buffer position. The current buffer position is not modified by this operation.
      *
      * @param text           the text to encode
-     * @param nullTerminated if true, the text will be terminated with a '\0'.
+     * @param nullTerminated if true, the text will be terminated with a '\0'
+     * @param target         the buffer where the encoded text should be stored
      *
      * @return the number of bytes of the encoded string
+     *
+     * @throws BufferOverflowException if more than {@code target.remaining()} bytes are required to encode the text.
      */
     public static int memASCII(CharSequence text, boolean nullTerminated, ByteBuffer target) {
-        return encodeASCII(text, nullTerminated, memAddress(target));
+        if (target.remaining() < memLengthASCII(text, nullTerminated)) {
+            throw new BufferOverflowException();
+        }
+        long address = memAddress(target);
+        return BITS64
+            ? encodeASCIIUnsafe64(text, nullTerminated, address)
+            : encodeASCIIUnsafe32(text, nullTerminated, (int)address);
     }
 
     /**
      * Encodes and optionally null-terminates the specified text using ASCII encoding. The encoded text is stored in the specified {@link ByteBuffer} at the
-     * specified {@code position} offset. The current buffer position is not modified by this operation. The {@code target} buffer is assumed to have enough
-     * remaining space to store the encoded text.
+     * specified {@code position} offset. The current buffer position is not modified by this operation.
      *
      * @param text           the text to encode
      * @param nullTerminated if true, the text will be terminated with a '\0'.
      * @param offset         the buffer position to which the string will be encoded
      *
      * @return the number of bytes of the encoded string
+     *
+     * @throws BufferOverflowException if more than {@code target.capacity() - offset} bytes are required to encode the text.
      */
     public static int memASCII(CharSequence text, boolean nullTerminated, ByteBuffer target, int offset) {
-        return encodeASCII(text, nullTerminated, memAddress(target, offset));
+        if (target.capacity() - offset < memLengthASCII(text, nullTerminated)) {
+            throw new BufferOverflowException();
+        }
+        long address = memAddress(target, offset);
+        return BITS64
+            ? encodeASCIIUnsafe64(text, nullTerminated, address)
+            : encodeASCIIUnsafe32(text, nullTerminated, (int)address);
     }
 
-    static int encodeASCII(CharSequence text, boolean nullTerminated, long target) {
-        int len = text.length();
-        for (int p = 0; p < len; p++) {
-            UNSAFE.putByte(target + p, (byte)text.charAt(p));
+    static int encodeASCIIUnsafe64(CharSequence text, boolean nullTerminated, long target) {
+        long p = target;
+
+        for (int i = 0, len = text.length(); i < len; i++) {
+            UNSAFE.putByte(null, p++, (byte)text.charAt(i));
         }
         if (nullTerminated) {
-            UNSAFE.putByte(target + len++, (byte)0);
+            UNSAFE.putByte(null, p++, (byte)0);
         }
-        return len;
+
+        return (int)(p - target);
+    }
+    static int encodeASCIIUnsafe32(CharSequence text, boolean nullTerminated, int target) {
+        int i = 0;
+        for (int len = text.length(); i < len; i++) {
+            UNSAFE.putByte(null, (long)(target + i), (byte)text.charAt(i));
+        }
+        if (nullTerminated) {
+            UNSAFE.putByte(null, (long)(target + i++), (byte)0);
+        }
+        return i;
     }
 
     /**
@@ -2025,9 +2063,15 @@ public final class MemoryUtil {
      * @param nullTerminated if true, add the number of bytes required for null-termination
      *
      * @return the number of bytes
+     *
+     * @throws BufferOverflowException if more than {@link Integer#MAX_VALUE} bytes are required to encode the text.
      */
     public static int memLengthASCII(CharSequence value, boolean nullTerminated) {
-        return value.length() + (nullTerminated ? 1 : 0);
+        int len = value.length() + (nullTerminated ? 1 : 0);
+        if (len < 0) {
+            throw new BufferOverflowException();
+        }
+        return len;
     }
 
     /**
@@ -2036,6 +2080,8 @@ public final class MemoryUtil {
      * @param text the text to encode
      *
      * @return the encoded text. The returned buffer must be deallocated manually with {@link #memFree}.
+     *
+     * @throws BufferOverflowException if more than {@link Integer#MAX_VALUE} bytes are required to encode the text.
      */
     public static ByteBuffer memUTF8(CharSequence text) {
         return memUTF8(text, true);
@@ -2054,11 +2100,20 @@ public final class MemoryUtil {
      * @param nullTerminated if true, the text will be terminated with a '\0'.
      *
      * @return the encoded text. The returned buffer must be deallocated manually with {@link #memFree}.
+     *
+     * @throws BufferOverflowException if more than {@link Integer#MAX_VALUE} bytes are required to encode the text.
      */
     public static ByteBuffer memUTF8(CharSequence text, boolean nullTerminated) {
         int  length = memLengthUTF8(text, nullTerminated);
         long target = nmemAlloc(length);
-        encodeUTF8(text, nullTerminated, target);
+        if (CHECKS && target == NULL) {
+            throw new OutOfMemoryError();
+        }
+        if (BITS64) {
+            encodeUTF8Unsafe64(text, nullTerminated, target);
+        } else {
+            encodeUTF8Unsafe32(text, nullTerminated, (int)target);
+        }
         return wrap(BUFFER_BYTE, target, length).order(NATIVE_ORDER);
     }
 
@@ -2070,23 +2125,25 @@ public final class MemoryUtil {
 
     /**
      * Encodes and optionally null-terminates the specified text using UTF-8 encoding. The encoded text is stored in the specified {@link ByteBuffer}, at the
-     * current buffer position. The current buffer position is not modified by this operation. The {@code target} buffer is assumed to have enough remaining
-     * space to store the encoded text.
+     * current buffer position. The current buffer position is not modified by this operation.
      *
      * @param text           the text to encode
      * @param nullTerminated if true, the text will be terminated with a '\0'.
      * @param target         the buffer in which to store the encoded text
      *
      * @return the number of bytes of the encoded string
+     *
+     * @throws BufferOverflowException if more than {@code target.remaining} bytes are required to encode the text.
      */
     public static int memUTF8(CharSequence text, boolean nullTerminated, ByteBuffer target) {
-        return encodeUTF8(text, nullTerminated, memAddress(target));
+        return BITS64
+            ? encodeUTF8Safe64(text, nullTerminated, memAddress(target), target.remaining())
+            : encodeUTF8Safe32(text, nullTerminated, (int)memAddress(target), target.remaining());
     }
 
     /**
      * Encodes and optionally null-terminates the specified text using UTF-8 encoding. The encoded text is stored in the specified {@link ByteBuffer}, at the
-     * specified {@code position} offset. The current buffer position is not modified by this operation. The {@code target} buffer is assumed to have enough
-     * remaining space to store the encoded text.
+     * specified {@code position} offset. The current buffer position is not modified by this operation.
      *
      * @param text           the text to encode
      * @param nullTerminated if true, the text will be terminated with a '\0'.
@@ -2094,51 +2151,181 @@ public final class MemoryUtil {
      * @param offset         the buffer position to which the string will be encoded
      *
      * @return the number of bytes of the encoded string
+     *
+     * @throws BufferOverflowException if more than {@code target.capacity() - offset} bytes are required to encode the text.
      */
     public static int memUTF8(CharSequence text, boolean nullTerminated, ByteBuffer target, int offset) {
-        return encodeUTF8(text, nullTerminated, memAddress(target, offset));
+        return BITS64
+            ? encodeUTF8Safe64(text, nullTerminated, memAddress(target, offset), target.capacity() - offset)
+            : encodeUTF8Safe32(text, nullTerminated, (int)memAddress(target, offset), target.capacity() - offset);
     }
 
-    static int encodeUTF8(CharSequence text, boolean nullTerminated, long target) {
-        int i = 0, len = text.length(), p = 0;
+    static int encodeUTF8Unsafe64(CharSequence text, boolean nullTerminated, long target) {
+        long p = target;
 
-        char c;
-
-        // ASCII fast path
-        while (i < len && (c = text.charAt(i)) < 0x80) {
-            UNSAFE.putByte(target + p++, (byte)c);
-            i++;
-        }
-
-        // Slow path
+        int i = 0, len = text.length();
         while (i < len) {
-            c = text.charAt(i++);
+            char c = text.charAt(i++);
             if (c < 0x80) {
-                UNSAFE.putByte(target + p++, (byte)c);
+                UNSAFE.putByte(null, p++, (byte)c);
             } else {
                 int cp = c;
                 if (c < 0x800) {
-                    UNSAFE.putByte(target + p++, (byte)(0xC0 | cp >> 6));
+                    UNSAFE.putByte(null, p++, (byte)(0xC0 | cp >> 6));
                 } else {
                     if (!isHighSurrogate(c)) {
-                        UNSAFE.putByte(target + p++, (byte)(0xE0 | cp >> 12));
+                        UNSAFE.putByte(null, p++, (byte)(0xE0 | cp >> 12));
                     } else {
                         cp = toCodePoint(c, text.charAt(i++));
 
-                        UNSAFE.putByte(target + p++, (byte)(0xF0 | cp >> 18));
-                        UNSAFE.putByte(target + p++, (byte)(0x80 | cp >> 12 & 0x3F));
+                        UNSAFE.putByte(null, p++, (byte)(0xF0 | cp >> 18));
+                        UNSAFE.putByte(null, p++, (byte)(0x80 | cp >> 12 & 0x3F));
                     }
-                    UNSAFE.putByte(target + p++, (byte)(0x80 | cp >> 6 & 0x3F));
+                    UNSAFE.putByte(null, p++, (byte)(0x80 | cp >> 6 & 0x3F));
                 }
-                UNSAFE.putByte(target + p++, (byte)(0x80 | cp & 0x3F));
+                UNSAFE.putByte(null, p++, (byte)(0x80 | cp & 0x3F));
             }
         }
 
         if (nullTerminated) {
-            UNSAFE.putByte(target + p++, (byte)0);
+            UNSAFE.putByte(null, p++, (byte)0);
+        }
+
+        return (int)(p - target);
+    }
+    static int encodeUTF8Unsafe32(CharSequence text, boolean nullTerminated, int target) {
+        int p = 0;
+
+        int i = 0, len = text.length();
+        while (i < len) {
+            char c = text.charAt(i++);
+            if (c < 0x80) {
+                UNSAFE.putByte(null, (long)(target + p++), (byte)c);
+            } else {
+                int cp = c;
+                if (c < 0x800) {
+                    UNSAFE.putByte(null, (long)(target + p++), (byte)(0xC0 | cp >> 6));
+                } else {
+                    if (!isHighSurrogate(c)) {
+                        UNSAFE.putByte(null, (long)(target + p++), (byte)(0xE0 | cp >> 12));
+                    } else {
+                        cp = toCodePoint(c, text.charAt(i++));
+
+                        UNSAFE.putByte(null, (long)(target + p++), (byte)(0xF0 | cp >> 18));
+                        UNSAFE.putByte(null, (long)(target + p++), (byte)(0x80 | cp >> 12 & 0x3F));
+                    }
+                    UNSAFE.putByte(null, (long)(target + p++), (byte)(0x80 | cp >> 6 & 0x3F));
+                }
+                UNSAFE.putByte(null, (long)(target + p++), (byte)(0x80 | cp & 0x3F));
+            }
+        }
+
+        if (nullTerminated) {
+            UNSAFE.putByte(null, (long)(target + p++), (byte)0);
         }
 
         return p;
+    }
+    static int encodeUTF8Safe64(CharSequence text, boolean nullTerminated, long target, int maxLength) {
+        long p = target;
+
+        int i = 0, length = text.length();
+
+        // ASCII fast path
+        char c;
+        while (i < min(length, maxLength) && (c = text.charAt(i)) < 0x80) {
+            UNSAFE.putByte(p++, (byte)c);
+            i++;
+        }
+        maxLength -= i;
+
+        // Slow path
+        while (i < length) {
+            c = text.charAt(i++);
+            if (c < 0x80) {
+                checkBOE(maxLength -= 1);
+                UNSAFE.putByte(null, p++, (byte)c);
+            } else {
+                int cp = c;
+                if (c < 0x800) {
+                    checkBOE(maxLength -= 2);
+                    UNSAFE.putByte(null, p++, (byte)(0xC0 | cp >> 6));
+                } else {
+                    if (!isHighSurrogate(c)) {
+                        checkBOE(maxLength -= 3);
+                        UNSAFE.putByte(null, p++, (byte)(0xE0 | cp >> 12));
+                    } else {
+                        checkBOE(maxLength -= 4);
+                        cp = toCodePoint(c, text.charAt(i++));
+
+                        UNSAFE.putByte(null, p++, (byte)(0xF0 | cp >> 18));
+                        UNSAFE.putByte(null, p++, (byte)(0x80 | cp >> 12 & 0x3F));
+                    }
+                    UNSAFE.putByte(null, p++, (byte)(0x80 | cp >> 6 & 0x3F));
+                }
+                UNSAFE.putByte(null, p++, (byte)(0x80 | cp & 0x3F));
+            }
+        }
+
+        if (nullTerminated) {
+            checkBOE(maxLength - 1);
+            UNSAFE.putByte(null, p++, (byte)0);
+        }
+
+        return (int)(p - target);
+    }
+    static int encodeUTF8Safe32(CharSequence text, boolean nullTerminated, int target, int maxLength) {
+        int p = 0;
+
+        int i = 0, length = text.length();
+
+        // ASCII fast path
+        char c;
+        while (i < min(length, maxLength) && (c = text.charAt(i)) < 0x80) {
+            UNSAFE.putByte(null, (long)(target + p++), (byte)c);
+            i++;
+        }
+        maxLength -= i;
+
+        // Slow path
+        while (i < length) {
+            c = text.charAt(i++);
+            if (c < 0x80) {
+                checkBOE(maxLength -= 1);
+                UNSAFE.putByte(null, (long)(target + p++), (byte)c);
+            } else {
+                int cp = c;
+                if (c < 0x800) {
+                    checkBOE(maxLength -= 2);
+                    UNSAFE.putByte(null, (long)(target + p++), (byte)(0xC0 | cp >> 6));
+                } else {
+                    if (!isHighSurrogate(c)) {
+                        checkBOE(maxLength -= 3);
+                        UNSAFE.putByte(null, (long)(target + p++), (byte)(0xE0 | cp >> 12));
+                    } else {
+                        checkBOE(maxLength -= 4);
+                        cp = toCodePoint(c, text.charAt(i++));
+
+                        UNSAFE.putByte(null, (long)(target + p++), (byte)(0xF0 | cp >> 18));
+                        UNSAFE.putByte(null, (long)(target + p++), (byte)(0x80 | cp >> 12 & 0x3F));
+                    }
+                    UNSAFE.putByte(null, (long)(target + p++), (byte)(0x80 | cp >> 6 & 0x3F));
+                }
+                UNSAFE.putByte(null, (long)(target + p++), (byte)(0x80 | cp & 0x3F));
+            }
+        }
+
+        if (nullTerminated) {
+            checkBOE(maxLength - 1);
+            UNSAFE.putByte(null, (long)(target + p++), (byte)0);
+        }
+
+        return p;
+    }
+    private static void checkBOE(int remainingBytes) {
+        if (remainingBytes < 0) {
+            throw new BufferOverflowException();
+        }
     }
 
     /**
@@ -2148,48 +2335,39 @@ public final class MemoryUtil {
      * @param nullTerminated if true, add the number of bytes required for null-termination
      *
      * @return the number of bytes
+     *
+     * @throws BufferOverflowException if more than {@link Integer#MAX_VALUE} bytes are required to encode the text.
      */
     public static int memLengthUTF8(CharSequence value, boolean nullTerminated) {
-        int i, len = value.length(), bytes = len; // start with 1:1
+        int len   = value.length();
+        int bytes = len + (nullTerminated ? 1 : 0); // start with 1:1
 
-        // ASCII fast path
-        for (i = 0; i < len; i++) {
-            if (0x80 <= value.charAt(i)) {
-                break;
-            }
-        }
-
-        // 1 or 2 bytes fast path
-        for (; i < len; i++) {
+        for (int i = 0; i < len; i++) {
             char c = value.charAt(i);
 
-            // fallback to slow path
-            if (0x800 <= c) {
-                bytes += encodeUTF8LengthSlow(value, i, len);
-                break;
-            }
-
-            // c <= 127: 0
-            // c >= 128: 1
-            bytes += (0x7F - c) >>> 31;
-        }
-
-        return bytes + (nullTerminated ? 1 : 0);
-    }
-
-    private static int encodeUTF8LengthSlow(CharSequence value, int offset, int len) {
-        int bytes = 0;
-
-        for (int i = offset; i < len; i++) {
-            char c = value.charAt(i);
-            if (c < 0x800) {
-                bytes += (0x7F - c) >>> 31;
-            } else if (c < MIN_SURROGATE || MAX_SURROGATE < c) {
-                bytes += 2;
+            if (c < 0x80) {
+                // 1 input char -> 1 output byte
             } else {
-                bytes += 2; // the byte count already includes 2 bytes for the surrogate pair, add 2 more
-                i++;
+                if (c < 0x800) {
+                    // c <= 127: 0 (1 input char -> 1 output byte)
+                    // c >= 128: 1 (1 input char -> 2 output bytes)
+                    bytes += (0x7F - c) >>> 31;
+                } else {
+                    // non-surrogate: 1 input char  -> 3 output bytes
+                    //     surrogate: 2 input chars -> 4 output bytes
+                    bytes += 2;
+                    if (MIN_SURROGATE <= c && c <= MAX_SURROGATE) {
+                        i++;
+                    }
+                }
+                if (bytes < 0) {
+                    throw new BufferOverflowException();
+                }
             }
+        }
+
+        if (bytes < 0) {
+            throw new BufferOverflowException();
         }
 
         return bytes;
@@ -2201,6 +2379,8 @@ public final class MemoryUtil {
      * @param text the text to encode
      *
      * @return the encoded text. The returned buffer must be deallocated manually with {@link #memFree}.
+     *
+     * @throws BufferOverflowException if more than {@link Integer#MAX_VALUE} bytes are required to encode the text.
      */
     public static ByteBuffer memUTF16(CharSequence text) {
         return memUTF16(text, true);
@@ -2219,11 +2399,20 @@ public final class MemoryUtil {
      * @param nullTerminated if true, the text will be terminated with a '\0'.
      *
      * @return the encoded text. The returned buffer must be deallocated manually with {@link #memFree}.
+     *
+     * @throws BufferOverflowException if more than {@link Integer#MAX_VALUE} bytes are required to encode the text.
      */
     public static ByteBuffer memUTF16(CharSequence text, boolean nullTerminated) {
         int  length = memLengthUTF16(text, nullTerminated);
         long target = nmemAlloc(length);
-        encodeUTF16(text, nullTerminated, target);
+        if (CHECKS && target == NULL) {
+            throw new OutOfMemoryError();
+        }
+        if (BITS64) {
+            encodeUTF16Unsafe64(text, nullTerminated, target);
+        } else {
+            encodeUTF16Unsafe32(text, nullTerminated, (int)target);
+        }
         return wrap(BUFFER_BYTE, target, length).order(NATIVE_ORDER);
     }
 
@@ -2243,9 +2432,17 @@ public final class MemoryUtil {
      * @param target         the buffer in which to store the encoded text
      *
      * @return the number of bytes of the encoded string
+     *
+     * @throws BufferOverflowException if more than {@code target.remaining()} bytes are required to encode the text.
      */
     public static int memUTF16(CharSequence text, boolean nullTerminated, ByteBuffer target) {
-        return encodeUTF16(text, nullTerminated, memAddress(target));
+        if (target.remaining() < memLengthUTF16(text, nullTerminated)) {
+            throw new BufferOverflowException();
+        }
+        long address = memAddress(target);
+        return BITS64
+            ? encodeUTF16Unsafe64(text, nullTerminated, address)
+            : encodeUTF16Unsafe32(text, nullTerminated, (int)address);
     }
 
     /**
@@ -2259,20 +2456,46 @@ public final class MemoryUtil {
      * @param offset         the buffer position to which the string will be encoded
      *
      * @return the number of bytes of the encoded string
+     *
+     * @throws BufferOverflowException if more than {@code target.capacity() - offset} bytes are required to encode the text.
      */
     public static int memUTF16(CharSequence text, boolean nullTerminated, ByteBuffer target, int offset) {
-        return encodeUTF16(text, nullTerminated, memAddress(target, offset));
+        if (target.capacity() - offset < memLengthUTF16(text, nullTerminated)) {
+            throw new BufferOverflowException();
+        }
+        long address = memAddress(target, offset);
+        return BITS64
+            ? encodeUTF16Unsafe64(text, nullTerminated, address)
+            : encodeUTF16Unsafe32(text, nullTerminated, (int)address);
     }
 
-    static int encodeUTF16(CharSequence text, boolean nullTerminated, long target) {
-        int len = text.length();
-        for (int i = 0; i < len; i++) {
-            UNSAFE.putShort(target + Integer.toUnsignedLong(i) * 2, (short)text.charAt(i));
+    static int encodeUTF16Unsafe64(CharSequence text, boolean nullTerminated, long target) {
+        long p = target;
+
+        for (int i = 0, len = text.length(); i < len; i++) {
+            UNSAFE.putShort(null, p, (short)text.charAt(i));
+            p += 2;
         }
         if (nullTerminated) {
-            UNSAFE.putShort(target + Integer.toUnsignedLong(len++) * 2, (short)0);
+            UNSAFE.putShort(null, p, (short)0);
+            p += 2;
         }
-        return 2 * len;
+
+        return (int)(p - target);
+    }
+    static int encodeUTF16Unsafe32(CharSequence text, boolean nullTerminated, int target) {
+        int p = 0;
+
+        for (int i = 0, len = text.length(); i < len; i++) {
+            UNSAFE.putShort(null, (long)(target + p), (short)text.charAt(i));
+            p += 2;
+        }
+        if (nullTerminated) {
+            UNSAFE.putShort(null, (long)(target + p), (short)0);
+            p += 2;
+        }
+
+        return p;
     }
 
     /**
@@ -2284,7 +2507,11 @@ public final class MemoryUtil {
      * @return the number of bytes
      */
     public static int memLengthUTF16(CharSequence value, boolean nullTerminated) {
-        return (value.length() + (nullTerminated ? 1 : 0)) << 1;
+        int len = value.length() + (nullTerminated ? 1 : 0);
+        if (len < 0 || 0x3FFFFFFF < len) {
+            throw new BufferOverflowException();
+        }
+        return len << 1;
     }
 
     /*  -------------------------------------
