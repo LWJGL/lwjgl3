@@ -2526,7 +2526,7 @@ public final class MemoryUtil {
         }
         return BITS64
             ? strlen64NT1(address, maxLength)
-            : strlen32NT1(address, maxLength);
+            : strlen32NT1((int)address, maxLength);
     }
 
     private static int strlen64NT1(long address, int maxLength) {
@@ -2537,24 +2537,23 @@ public final class MemoryUtil {
             if (misalignment != 0) {
                 // Align to 8 bytes
                 for (int len = 8 - misalignment; i < len; i++) {
-                    if (UNSAFE.getByte(null, address + i) == 0) {
+                    if (UNSAFE.getByte(null, address++) == 0) {
                         return i;
                     }
                 }
             }
 
             // Aligned longs for performance
-            while (i <= maxLength - 8) {
-                if (mathHasZeroByte(UNSAFE.getLong(null, address + i))) {
+            for (; i <= maxLength - 8; i += 8, address += 8) {
+                if (mathHasZeroByte(UNSAFE.getLong(null, address))) {
                     break;
                 }
-                i += 8;
             }
         }
 
         // Tail
         for (; i < maxLength; i++) {
-            if (UNSAFE.getByte(null, address + i) == 0) {
+            if (UNSAFE.getByte(null, address++) == 0) {
                 break;
             }
         }
@@ -2562,32 +2561,31 @@ public final class MemoryUtil {
         return i;
     }
 
-    private static int strlen32NT1(long address, int maxLength) {
+    private static int strlen32NT1(int address, int maxLength) {
         int i = 0;
 
         if (4 <= maxLength) {
-            int misalignment = (int)address & 3;
+            int misalignment = address & 3;
             if (misalignment != 0) {
                 // Align to 4 bytes
                 for (int len = 4 - misalignment; i < len; i++) {
-                    if (UNSAFE.getByte(null, address + i) == 0) {
+                    if (UNSAFE.getByte(null, (long)(address + i)) == 0) {
                         return i;
                     }
                 }
             }
 
             // Aligned ints for performance
-            while (i <= maxLength - 4) {
-                if (mathHasZeroByte(UNSAFE.getInt(null, address + i))) {
+            for (; i <= maxLength - 4; i += 4) {
+                if (mathHasZeroByte(UNSAFE.getInt(null, (long)(address + i)))) {
                     break;
                 }
-                i += 4;
             }
         }
 
         // Tail
         for (; i < maxLength; i++) {
-            if (UNSAFE.getByte(null, address + i) == 0) {
+            if (UNSAFE.getByte(null, (long)(address + i)) == 0) {
                 break;
             }
         }
@@ -2615,7 +2613,7 @@ public final class MemoryUtil {
         }
         return BITS64
             ? strlen64NT2(address, maxLength)
-            : strlen32NT2(address, maxLength);
+            : strlen32NT2((int)address, maxLength);
     }
 
     private static int strlen64NT2(long address, int maxLength) {
@@ -2625,25 +2623,24 @@ public final class MemoryUtil {
             int misalignment = (int)address & 7;
             if (misalignment != 0) {
                 // Align to 8 bytes
-                for (int len = 8 - misalignment; i < len; i += 2) {
-                    if (UNSAFE.getShort(null, address + i) == 0) {
+                for (int len = 8 - misalignment; i < len; i += 2, address += 2) {
+                    if (UNSAFE.getShort(null, address) == 0) {
                         return i;
                     }
                 }
             }
 
             // Aligned longs for performance
-            while (i <= maxLength - 8) {
-                if (mathHasZeroShort(UNSAFE.getLong(null, address + i))) {
+            for (; i <= maxLength - 8; i += 8, address += 8) {
+                if (mathHasZeroShort(UNSAFE.getLong(null, address))) {
                     break;
                 }
-                i += 8;
             }
         }
 
         // Tail
-        for (; i < maxLength; i += 2) {
-            if (UNSAFE.getShort(null, address + i) == 0) {
+        for (; i < maxLength; i += 2, address += 2) {
+            if (UNSAFE.getShort(null, address) == 0) {
                 break;
             }
         }
@@ -2651,15 +2648,15 @@ public final class MemoryUtil {
         return i;
     }
 
-    private static int strlen32NT2(long address, int maxLength) {
+    private static int strlen32NT2(int address, int maxLength) {
         int i = 0;
 
         if (4 <= maxLength) {
-            int misalignment = (int)address & 3;
+            int misalignment = address & 3;
             if (misalignment != 0) {
                 // Align to 4 bytes
                 for (int len = 4 - misalignment; i < len; i += 2) {
-                    if (UNSAFE.getShort(null, address + i) == 0) {
+                    if (UNSAFE.getShort(null, (long)(address + i)) == 0) {
                         return i;
                     }
                 }
@@ -2667,7 +2664,7 @@ public final class MemoryUtil {
 
             // Aligned longs for performance
             while (i <= maxLength - 4) {
-                if (mathHasZeroShort(UNSAFE.getInt(null, address + i))) {
+                if (mathHasZeroShort(UNSAFE.getInt(null, (long)(address + i)))) {
                     break;
                 }
                 i += 4;
@@ -2676,7 +2673,7 @@ public final class MemoryUtil {
 
         // Tail
         for (; i < maxLength; i += 2) {
-            if (UNSAFE.getShort(null, address + i) == 0) {
+            if (UNSAFE.getShort(null, (long)(address + i)) == 0) {
                 break;
             }
         }

@@ -51,7 +51,7 @@ public final class MathUtil {
     }
 
     public static boolean mathHasZeroShort(int value) {
-        return (value & 0xFFFF) == 0 || (value >>> 16) == 0;
+        return ((value - 0x00010001) & ~value & 0x80008000) != 0;
     }
 
     public static boolean mathHasZeroShort(long value) {
