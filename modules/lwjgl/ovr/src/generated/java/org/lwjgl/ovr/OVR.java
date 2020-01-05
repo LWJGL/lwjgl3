@@ -1684,7 +1684,9 @@ public class OVR {
     public static native int novr_SetBoundaryLookAndFeel(long session, long lookAndFeel);
 
     /**
-     * Sets the look and feel of the Boundary System.
+     * Compatibility stub.
+     * 
+     * <p>Deprecated: previously set the look and feel of the Boundary System - this functionality has been removed.</p>
      *
      * @param session     an {@code ovrSession} previously returned by {@link #ovr_Create Create}
      * @param lookAndFeel the look and feel parameters

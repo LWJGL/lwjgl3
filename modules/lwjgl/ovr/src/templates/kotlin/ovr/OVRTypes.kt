@@ -245,6 +245,14 @@ val ovrFovPort = struct(Module.OVR, "OVRFovPort", nativeName = "ovrFovPort") {
 
 val ovrTrackingOrigin = "ovrTrackingOrigin".enumType
 
+val ovrExtensionProperties = struct(Module.OVR, "OVRExtensionProperties", nativeName = "ovrExtensionProperties", mutable = false) {
+    documentation = "Describes the properties of an API extension."
+
+    int("extensionId", "One of enum {@code ovrExtensions} or a dynamic value.")
+    charASCII("extensionName", "")["OVR_MAX_EXTENSION_NAME_SIZE"]
+    uint32_t("extensionVersion", "OpenXR-like version. Version compatibility is identified by the extension documentation.")
+}
+
 val ovrGraphicsLuid = struct(Module.OVR, "OVRGraphicsLuid", nativeName = "ovrGraphicsLuid", mutable = false) {
     documentation =
         """

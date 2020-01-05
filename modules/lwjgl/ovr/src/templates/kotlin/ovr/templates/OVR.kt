@@ -1070,7 +1070,11 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
 
     ovrResult(
         "SetBoundaryLookAndFeel",
-        "Sets the look and feel of the Boundary System.",
+        """
+        Compatibility stub.
+        
+        Deprecated: previously set the look and feel of the Boundary System - this functionality has been removed.
+        """,
 
         session,
         ovrBoundaryLookAndFeel.const.p("lookAndFeel", "the look and feel parameters"),
