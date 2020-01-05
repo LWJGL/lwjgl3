@@ -139,11 +139,19 @@ typedef struct HmdRect2_t
 
     EVROverlayError(
         "GetOverlayFlag",
-        "Sets flag setting for a given overlay.",
+        "Gets flag setting for a given overlay.",
 
         VROverlayHandle_t("ulOverlayHandle", ""),
         VROverlayFlags("eOverlayFlag", "", "VROverlayFlags_\\w+"),
         Check(1)..bool.p("pbEnabled", "")
+    )
+
+    EVROverlayError(
+        "GetOverlayFlags",
+        "Gets all the flags for a given overlay.",
+
+        VROverlayHandle_t("ulOverlayHandle", ""),
+        Check(1)..uint32_t.p("pFlags", "")
     )
 
     EVROverlayError(
@@ -406,6 +414,26 @@ typedef struct HmdRect2_t
     )
 
     EVROverlayError(
+        "SetOverlayTransformCursor",
+        """
+        Sets the hotspot for the specified overlay when that overlay is used as a cursor.
+
+        These are in texture space with 0,0 in the upper left corner of the texture and 1,1 in the lower right corner of the texture.    
+        """,
+
+        VROverlayHandle_t("ulCursorOverlayHandle", ""),
+        HmdVector2_t.const.p("pvHotspot", "")
+    )
+
+    EVROverlayError(
+        "GetOverlayTransformCursor",
+        "Gets cursor hotspot/transform for the specified overlay.",
+
+        VROverlayHandle_t("ulOverlayHandle", ""),
+        HmdVector2_t.p("pvHotspot", "")
+    )
+
+    EVROverlayError(
         "ShowOverlay",
         "Shows the VR overlay. For dashboard overlays, only the Dashboard Manager is allowed to call this.",
 
@@ -533,6 +561,53 @@ typedef struct HmdRect2_t
     )
 
     EVROverlayError(
+        "SetOverlayIntersectionMask",
+        "Sets a list of primitives to be used for controller ray intersection typically the size of the underlying UI in pixels (not in world space).",
+
+        VROverlayHandle_t("ulOverlayHandle", ""),
+        VROverlayIntersectionMaskPrimitive_t.p("pMaskPrimitives", ""),
+        AutoSize("pMaskPrimitives")..uint32_t("unNumMaskPrimitives", ""),
+        Expression("VROverlayIntersectionMaskPrimitive.SIZEOF")..uint32_t("unPrimitiveSize", "")
+    )
+
+    EVROverlayError(
+        "TriggerLaserMouseHapticVibration",
+        "Triggers a haptic event on the laser mouse controller for the specified overlay.",
+
+        VROverlayHandle_t("ulOverlayHandle", ""),
+        float("fDurationSeconds", ""),
+        float("fFrequency", ""),
+        float("fAmplitude", "")
+    )
+
+    EVROverlayError(
+        "SetOverlayCursor",
+        "Sets the cursor to use for the specified overlay. This will be drawn instead of the generic blob when the laser mouse is pointed at the specified overlay.",
+
+        VROverlayHandle_t("ulOverlayHandle", ""),
+        VROverlayHandle_t("ulCursorHandle", "")
+    )
+
+    EVROverlayError(
+        "SetOverlayCursorPositionOverride",
+        """
+        Sets the override cursor position to use for this overlay in overlay mouse coordinates.
+
+        This position will be used to draw the cursor instead of whatever the laser mouse cursor position is.
+        """,
+
+        VROverlayHandle_t("ulOverlayHandle", ""),
+        HmdVector2_t.const.p("pvCursor", "")
+    )
+
+    EVROverlayError(
+        "ClearOverlayCursorPositionOverride",
+        "Clears the override cursor position for this overlay.",
+
+        VROverlayHandle_t("ulOverlayHandle", "")
+    )
+
+    EVROverlayError(
         "SetOverlayTexture",
         "Texture to draw for the overlay. This function can only be called by the overlay's creator or renderer process (see #SetOverlayRenderingPid()).",
 
@@ -558,7 +633,7 @@ typedef struct HmdRect2_t
         Unsafe..void.p("pvBuffer", ""),
         uint32_t("unWidth", ""),
         uint32_t("unHeight", ""),
-        uint32_t("unDepth", "")
+        uint32_t("unBytesPerPixel", "")
     )
 
     EVROverlayError(
@@ -725,24 +800,6 @@ typedef struct HmdRect2_t
 
         VROverlayHandle_t("ulOverlayHandle", ""),
         HmdRect2_t("avoidRect", "")
-    )
-
-    EVROverlayError(
-        "SetOverlayIntersectionMask",
-        "Sets a list of primitives to be used for controller ray intersection typically the size of the underlying UI in pixels(not in world space).",
-
-        VROverlayHandle_t("ulOverlayHandle", ""),
-        VROverlayIntersectionMaskPrimitive_t.p("pMaskPrimitives", ""),
-        AutoSize("pMaskPrimitives")..uint32_t("unNumMaskPrimitives", ""),
-        Expression("VROverlayIntersectionMaskPrimitive.SIZEOF")..uint32_t("unPrimitiveSize", "")
-    )
-
-    EVROverlayError(
-        "GetOverlayFlags",
-        "",
-
-        VROverlayHandle_t("ulOverlayHandle", ""),
-        Check(1)..uint32_t.p("pFlags", "")
     )
 
     VRMessageOverlayResponse(

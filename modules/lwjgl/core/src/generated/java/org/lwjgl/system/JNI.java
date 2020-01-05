@@ -912,7 +912,6 @@ public final class JNI {
     public static native boolean callJZ(int param0, long param1, long __functionAddress);
     public static native boolean callPZ(int param0, long param1, long __functionAddress);
     public static native boolean callPZ(long param0, int param1, long __functionAddress);
-    public static native boolean callPZ(boolean param0, long param1, long __functionAddress);
     public static native boolean callJZ(int param0, long param1, int param2, long __functionAddress);
     public static native boolean callPZ(int param0, int param1, long param2, long __functionAddress);
     public static native boolean callPZ(int param0, long param1, int param2, long __functionAddress);

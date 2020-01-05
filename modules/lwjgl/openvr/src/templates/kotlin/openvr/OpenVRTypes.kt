@@ -649,6 +649,39 @@ val Compositor_CumulativeStats = struct(Module.OPENVR, "CompositorCumulativeStat
     uint32_t("m_nNumReprojectedFramesTimedOut", "")
 }
 
+val Compositor_StageRenderSettings = struct(Module.OPENVR, "CompositorStageRenderSettings", nativeName = "Compositor_StageRenderSettings", mutable = false) {
+    HmdColor_t("m_PrimaryColor", "Primary color is applied as a tint to (i.e. multiplied with) the model's texture.")
+    HmdColor_t("m_SecondaryColor", "")
+
+    float(
+        "m_flVignetteInnerRadius",
+        "Vignette radius is in meters and is used to fade to the specified secondary solid color over that 3D distance from the origin of the playspace."
+    )
+    float("m_flVignetteOuterRadius", "")
+
+    float(
+        "m_flFresnelStrength",
+        """
+        Fades to the secondary color based on view incidence.
+
+        This variable controls the linearity of the effect. It is mutually exclusive with vignette. Additionally, it treats the mesh as faceted.
+        """
+    )
+
+    bool("m_bBackfaceCulling", "Controls backface culling.")
+
+    bool(
+        "m_bGreyscale",
+        """
+        Converts the render model's texture to luma and applies to rgb equally.
+
+        This is useful to combat compression artifacts that can occur on desaturated source material.
+        """
+    )
+
+    bool("m_bWireframe", "Renders mesh as a wireframe.")
+}
+
 val NotificationBitmap_t = struct(Module.OPENVR, "NotificationBitmap", nativeName = "NotificationBitmap_t") {
     documentation = "Used for passing graphic data."
 

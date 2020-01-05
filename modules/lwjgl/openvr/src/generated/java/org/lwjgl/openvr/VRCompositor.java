@@ -803,4 +803,75 @@ public class VRCompositor {
         return callZ(__functionAddress);
     }
 
+    // --- [ VRCompositor_SetStageOverride_Async ] ---
+
+    /** Unsafe version of: {@link #VRCompositor_SetStageOverride_Async SetStageOverride_Async} */
+    public static int nVRCompositor_SetStageOverride_Async(long pchRenderModelPath, long pTransform, long pRenderSettings, int nSizeOfRenderSettings) {
+        long __functionAddress = OpenVR.VRCompositor.SetStageOverride_Async;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callPPPI(pchRenderModelPath, pTransform, pRenderSettings, nSizeOfRenderSettings, __functionAddress);
+    }
+
+    /**
+     * Override the stage model used in the compositor to replace the grid.
+     * 
+     * <p>{@code RenderModelPath} is a full path the an OBJ file to load. This file will be loaded asynchronously from disk and uploaded to the gpu by the
+     * runtime. Once ready for rendering, the VREvent {@link VR#EVREventType_VREvent_Compositor_StageOverrideReady} will be sent. Use {@code FadeToGrid} to reveal. Call
+     * {@link #VRCompositor_ClearStageOverride ClearStageOverride} to free the associated resources when finished.</p>
+     */
+    @NativeType("EVRCompositorError")
+    public static int VRCompositor_SetStageOverride_Async(@NativeType("char const *") ByteBuffer pchRenderModelPath, @NativeType("HmdMatrix34_t const *") HmdMatrix34 pTransform, @NativeType("Compositor_StageRenderSettings const *") CompositorStageRenderSettings pRenderSettings, @NativeType("uint32_t") int nSizeOfRenderSettings) {
+        if (CHECKS) {
+            checkNT1(pchRenderModelPath);
+        }
+        return nVRCompositor_SetStageOverride_Async(memAddress(pchRenderModelPath), pTransform.address(), pRenderSettings.address(), nSizeOfRenderSettings);
+    }
+
+    /**
+     * Override the stage model used in the compositor to replace the grid.
+     * 
+     * <p>{@code RenderModelPath} is a full path the an OBJ file to load. This file will be loaded asynchronously from disk and uploaded to the gpu by the
+     * runtime. Once ready for rendering, the VREvent {@link VR#EVREventType_VREvent_Compositor_StageOverrideReady} will be sent. Use {@code FadeToGrid} to reveal. Call
+     * {@link #VRCompositor_ClearStageOverride ClearStageOverride} to free the associated resources when finished.</p>
+     */
+    @NativeType("EVRCompositorError")
+    public static int VRCompositor_SetStageOverride_Async(@NativeType("char const *") ByteBuffer pchRenderModelPath, @NativeType("HmdMatrix34_t const *") HmdMatrix34 pTransform, @NativeType("Compositor_StageRenderSettings const *") CompositorStageRenderSettings pRenderSettings) {
+        if (CHECKS) {
+            checkNT1(pchRenderModelPath);
+        }
+        return nVRCompositor_SetStageOverride_Async(memAddress(pchRenderModelPath), pTransform.address(), pRenderSettings.address(), CompositorStageRenderSettings.SIZEOF);
+    }
+
+    /**
+     * Override the stage model used in the compositor to replace the grid.
+     * 
+     * <p>{@code RenderModelPath} is a full path the an OBJ file to load. This file will be loaded asynchronously from disk and uploaded to the gpu by the
+     * runtime. Once ready for rendering, the VREvent {@link VR#EVREventType_VREvent_Compositor_StageOverrideReady} will be sent. Use {@code FadeToGrid} to reveal. Call
+     * {@link #VRCompositor_ClearStageOverride ClearStageOverride} to free the associated resources when finished.</p>
+     */
+    @NativeType("EVRCompositorError")
+    public static int VRCompositor_SetStageOverride_Async(@NativeType("char const *") CharSequence pchRenderModelPath, @NativeType("HmdMatrix34_t const *") HmdMatrix34 pTransform, @NativeType("Compositor_StageRenderSettings const *") CompositorStageRenderSettings pRenderSettings) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nASCII(pchRenderModelPath, true);
+            long pchRenderModelPathEncoded = stack.getPointerAddress();
+            return nVRCompositor_SetStageOverride_Async(pchRenderModelPathEncoded, pTransform.address(), pRenderSettings.address(), CompositorStageRenderSettings.SIZEOF);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ VRCompositor_ClearStageOverride ] ---
+
+    /** Resets the stage to its default user specified setting. */
+    public static void VRCompositor_ClearStageOverride() {
+        long __functionAddress = OpenVR.VRCompositor.ClearStageOverride;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callV(__functionAddress);
+    }
+
 }

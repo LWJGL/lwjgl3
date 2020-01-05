@@ -39,26 +39,6 @@ public class VRSettings {
         return memASCIISafe(__result);
     }
 
-    // --- [ VRSettings_Sync ] ---
-
-    /** Unsafe version of: {@link #VRSettings_Sync Sync} */
-    public static boolean nVRSettings_Sync(boolean bForce, long peError) {
-        long __functionAddress = OpenVR.VRSettings.Sync;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        return callPZ(bForce, peError, __functionAddress);
-    }
-
-    /** Returns true if file sync occurred (force or settings dirty). */
-    @NativeType("bool")
-    public static boolean VRSettings_Sync(@NativeType("bool") boolean bForce, @NativeType("EVRSettingsError *") IntBuffer peError) {
-        if (CHECKS) {
-            check(peError, 1);
-        }
-        return nVRSettings_Sync(bForce, memAddress(peError));
-    }
-
     // --- [ VRSettings_SetBool ] ---
 
     public static void nVRSettings_SetBool(long pchSection, long pchSettingsKey, boolean bValue, long peError) {

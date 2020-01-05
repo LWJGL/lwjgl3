@@ -3507,10 +3507,6 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_system_JNI_callPZ__JIJ(JNIEnv *__env, 
     UNUSED_PARAMS(__env, clazz)
     return ((jboolean (APIENTRY *) (intptr_t, jint))(intptr_t)__functionAddress)((intptr_t)param0, param1);
 }
-JNIEXPORT jboolean JNICALL Java_org_lwjgl_system_JNI_callPZ__ZJJ(JNIEnv *__env, jclass clazz, jboolean param0, jlong param1, jlong __functionAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return ((jboolean (APIENTRY *) (jboolean, intptr_t))(intptr_t)__functionAddress)(param0, (intptr_t)param1);
-}
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_system_JNI_callJZ__IJIJ(JNIEnv *__env, jclass clazz, jint param0, jlong param1, jint param2, jlong __functionAddress) {
     UNUSED_PARAMS(__env, clazz)
     return ((jboolean (APIENTRY *) (jint, jlong, jint))(intptr_t)__functionAddress)(param0, param1, param2);

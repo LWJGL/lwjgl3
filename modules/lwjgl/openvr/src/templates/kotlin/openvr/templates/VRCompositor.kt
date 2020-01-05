@@ -500,4 +500,27 @@ const uint32_t VRCompositor_ThrottleMask = 0xC0;	// Number of frames the composi
 
         void()
     )
+
+    EVRCompositorError(
+        "SetStageOverride_Async",
+        """
+        Override the stage model used in the compositor to replace the grid.
+
+        {@code RenderModelPath} is a full path the an OBJ file to load. This file will be loaded asynchronously from disk and uploaded to the gpu by the
+        runtime. Once ready for rendering, the VREvent #EVREventType_VREvent_Compositor_StageOverrideReady will be sent. Use {@code FadeToGrid} to reveal. Call
+        #ClearStageOverride() to free the associated resources when finished.
+        """,
+
+        charASCII.const.p("pchRenderModelPath", ""),
+        HmdMatrix34_t.const.p("pTransform", ""),
+        Compositor_StageRenderSettings.const.p("pRenderSettings", ""),
+        Expression("CompositorStageRenderSettings.SIZEOF")..uint32_t("nSizeOfRenderSettings", "")
+    )
+
+    void(
+        "ClearStageOverride",
+        "Resets the stage to its default user specified setting.",
+
+        void()
+    )
 }

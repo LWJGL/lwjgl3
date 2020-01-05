@@ -23,14 +23,6 @@ val VRSettings = "VRSettings".nativeClass(
         EVRSettingsError("eError", "")
     )
 
-    bool(
-        "Sync",
-        "Returns true if file sync occurred (force or settings dirty).",
-
-        bool("bForce", ""),
-        Check(1)..EVRSettingsError.p("peError", "")
-    )
-
     void(
         "SetBool",
         "",
