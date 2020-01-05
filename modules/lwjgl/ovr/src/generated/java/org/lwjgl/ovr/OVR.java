@@ -700,6 +700,9 @@ public class OVR {
         OVR_MAX_EXTERNAL_CAMERA_COUNT = 16,
         OVR_EXTERNAL_CAMERA_NAME_SIZE = 32;
 
+    /** Defines the largest size for an extension name string, including the '\0' terminator. */
+    public static final int OVR_MAX_EXTENSION_NAME_SIZE = 128;
+
     /** Specifies the maximum number of layers supported by {@link #ovr_SubmitFrame SubmitFrame}. */
     public static final int ovrMaxLayerCount = 16;
 

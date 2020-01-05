@@ -533,6 +533,12 @@ ENABLE_WARNINGS()""")
         "OVR_EXTERNAL_CAMERA_NAME_SIZE".."32"
     ).noPrefix()
 
+    IntConstant(
+        "Defines the largest size for an extension name string, including the '\\0' terminator.",
+
+        "OVR_MAX_EXTENSION_NAME_SIZE".."128"
+    ).noPrefix()
+
     ovrResult(
         "Initialize",
         """

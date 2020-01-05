@@ -13,6 +13,8 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
+import static org.lwjgl.ovr.OVR.OVR_MAX_EXTENSION_NAME_SIZE;
+
 /**
  * Describes the properties of an API extension.
  * 

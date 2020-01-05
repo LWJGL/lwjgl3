@@ -246,6 +246,7 @@ val ovrFovPort = struct(Module.OVR, "OVRFovPort", nativeName = "ovrFovPort") {
 val ovrTrackingOrigin = "ovrTrackingOrigin".enumType
 
 val ovrExtensionProperties = struct(Module.OVR, "OVRExtensionProperties", nativeName = "ovrExtensionProperties", mutable = false) {
+    javaImport("static org.lwjgl.ovr.OVR.OVR_MAX_EXTENSION_NAME_SIZE")
     documentation = "Describes the properties of an API extension."
 
     int("extensionId", "One of enum {@code ovrExtensions} or a dynamic value.")
