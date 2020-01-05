@@ -1876,7 +1876,7 @@ public final class MemoryUtil {
         MultiReleaseMemCopy.copy(src, dst, bytes);
     }
 
-    static void memCopyAligned(long src, long dst, int bytes) {
+    static void memCopyAligned64(long src, long dst, int bytes) {
         int i = 0;
 
         // Aligned longs for performance
@@ -1891,6 +1891,18 @@ public final class MemoryUtil {
                 UNSAFE.getLong(null, dst + i),
                 SHIFT.right(-1L, bytes - i)
             ));
+        }
+    }
+    static void memCopyAligned32(int src, int dst, int bytes) {
+        int i = 0;
+
+        // Aligned ints for performance
+        for (; i <= bytes - 4; i += 4, dst += 4, src += 4) {
+            UNSAFE.putInt(null, (long)dst, UNSAFE.getInt(null, (long)src));
+        }
+        // Tail
+        for (; i < bytes; i++, dst++, src++) {
+            UNSAFE.putByte(null, (long)dst, UNSAFE.getByte(null, (long)src));
         }
     }
 
