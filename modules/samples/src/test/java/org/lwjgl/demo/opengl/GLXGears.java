@@ -40,8 +40,11 @@ public class GLXGears {
 
     private final Matrix4d
         P   = new Matrix4d(),
-        V   = new Matrix4d(),
         MVP = new Matrix4d();
+    private final Matrix4x3d
+        V   = new Matrix4x3d(),
+        M   = new Matrix4x3d(),
+        MV  = new Matrix4x3d();
 
     private final Matrix3d normal = new Matrix3d();
     private final Vector3d light  = new Vector3d();
@@ -132,34 +135,27 @@ public class GLXGears {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // VIEW
-        V.translation(0.0, 0.0, -distance);
-        V.rotateX(20.0f * PI / 180);
-        V.rotateY(30.0f * PI / 180);
+        V.translation(0.0, 0.0, -distance)
+         .rotateX(20.0f * PI / 180)
+         .rotateY(30.0f * PI / 180);
         //V.rotateZ(0.0f * PI / 180);
 
         // LIGHT
-        V.transformDirection(light.set(5.0, 5.0, 10.0)).normalize();
-        vec3f.put(0, (float)light.x);
-        vec3f.put(1, (float)light.y);
-        vec3f.put(2, (float)light.z);
-        glUniform3fv(u_LIGHT, vec3f);
+        glUniform3fv(u_LIGHT, V.transformDirection(light.set(5.0, 5.0, 10.0)).normalize().get(vec3f));
 
         // GEAR 1
-        MVP
-            .translation(-3.0, -2.0, 0.0)
-            .rotateZ(angle * PI / 180);
+        M.translation(-3.0, -2.0, 0.0)
+         .rotateZ(angle * PI / 180);
         drawGear(gear1);
 
         // GEAR 2
-        MVP
-            .translation(3.1, -2.0, 0.0)
-            .rotateZ((-2.0 * angle - 9.0) * PI / 180);
+        M.translation(3.1, -2.0, 0.0)
+         .rotateZ((-2.0 * angle - 9.0) * PI / 180);
         drawGear(gear2);
 
         // GEAR 3
-        MVP
-            .translation(-3.1, 4.2, 0.0)
-            .rotateZ((-2.0 * angle - 25.0) * PI / 180);
+        M.translation(-3.1, 4.2, 0.0)
+         .rotateZ((-2.0 * angle - 25.0) * PI / 180);
         drawGear(gear3);
 
         count++;
@@ -173,10 +169,8 @@ public class GLXGears {
     }
 
     private void drawGear(Gear gear) {
-        V.mul(MVP, MVP);
-        glUniformMatrix3fv(u_NORMAL, false, MVP.normal(normal).get(mat3f));
-        P.mul(MVP, MVP);
-        glUniformMatrix4fv(u_MVP, false, MVP.get(mat4f));
+        glUniformMatrix3fv(u_NORMAL, false, V.mul(M, MV).normal(normal).get(mat3f));
+        glUniformMatrix4fv(u_MVP, false, P.mul(MV, MVP).get(mat4f));
         glUniform4fv(u_COLOR, gear.color);
 
         gear.bind(positions, normals);
