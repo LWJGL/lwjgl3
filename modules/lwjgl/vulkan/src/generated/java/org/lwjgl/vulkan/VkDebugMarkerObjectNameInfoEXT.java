@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code objectType} <b>must</b> not be {@link EXTDebugReport#VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT}</li>
  * <li>{@code object} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>{@code object} <b>must</b> be a Vulkan object of the type associated with {@code objectType} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#debug-report-object-types">{@code VkDebugReportObjectTypeEXT} and Vulkan Handle Relationship</a>.</li>
+ * <li>{@code object} <b>must</b> be a Vulkan object of the type associated with {@code objectType} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#debug-report-object-types">{@code VkDebugReportObjectTypeEXT} and Vulkan Handle Relationship</a>.</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

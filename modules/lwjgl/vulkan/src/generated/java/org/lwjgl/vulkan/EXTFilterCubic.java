@@ -18,7 +18,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>171</dd>
  * <dt><b>Revision</b></dt>
- * <dd>2</dd>
+ * <dd>3</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -29,7 +29,7 @@ package org.lwjgl.vulkan;
  * <li>Bill Licea-Kane <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_filter_cubic:%20&amp;body=@wwlk%20">wwlk</a></li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2019-01-24</dd>
+ * <dd>2019-12-13</dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
  * <li>Bill Licea-Kane, Qualcomm Technologies, Inc.</li>
@@ -48,7 +48,7 @@ package org.lwjgl.vulkan;
 public final class EXTFilterCubic {
 
     /** The extension specification version. */
-    public static final int VK_EXT_FILTER_CUBIC_SPEC_VERSION = 2;
+    public static final int VK_EXT_FILTER_CUBIC_SPEC_VERSION = 3;
 
     /** The extension name. */
     public static final String VK_EXT_FILTER_CUBIC_EXTENSION_NAME = "VK_EXT_filter_cubic";

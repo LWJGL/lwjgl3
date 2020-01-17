@@ -16,38 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Request a specific address for a buffer.
- * 
- * <h5>Description</h5>
- * 
- * <p>If {@code opaqueCaptureAddress} is zero, no specific address is requested.</p>
- * 
- * <p>If {@code opaqueCaptureAddress} is not zero, then it <b>should</b> be an address retrieved from {@link KHRBufferDeviceAddress#vkGetBufferOpaqueCaptureAddressKHR GetBufferOpaqueCaptureAddressKHR} for an identically created buffer on the same implementation.</p>
- * 
- * <p>If this structure is not present, it is as if {@code opaqueCaptureAddress} is zero.</p>
- * 
- * <p>Apps <b>should</b> avoid creating buffers with app-provided addresses and implementation-provided addresses in the same process, to reduce the likelihood of {@link KHRBufferDeviceAddress#VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR} errors.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>The expected usage for this is that a trace capture/replay tool will add the {@link KHRBufferDeviceAddress#VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR} flag to all buffers that use {@link KHRBufferDeviceAddress#VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_KHR BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_KHR}, and during capture will save the queried opaque device addresses in the trace. During replay, the buffers will be created specifying the original address so any address values stored in the trace data will remain valid.</p>
- * 
- * <p>Implementations are expected to separate such buffers in the GPU address space so normal allocations will avoid using these addresses. Apps/tools should avoid mixing app-provided and implementation-provided addresses for buffers created with {@link KHRBufferDeviceAddress#VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR}, to avoid address space allocation conflicts.</p>
- * </div>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRBufferDeviceAddress#VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO_KHR STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO_KHR}</li>
- * </ul>
- * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code opaqueCaptureAddress} &ndash; the opaque capture address requested for the buffer.</li>
- * </ul>
+ * See {@link VkBufferOpaqueCaptureAddressCreateInfo}.
  * 
  * <h3>Layout</h3>
  * 
@@ -58,34 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint64_t opaqueCaptureAddress;
  * }</code></pre>
  */
-public class VkBufferOpaqueCaptureAddressCreateInfoKHR extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        OPAQUECAPTUREADDRESS;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(8)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        OPAQUECAPTUREADDRESS = layout.offsetof(2);
-    }
+public class VkBufferOpaqueCaptureAddressCreateInfoKHR extends VkBufferOpaqueCaptureAddressCreateInfo {
 
     /**
      * Creates a {@code VkBufferOpaqueCaptureAddressCreateInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -94,30 +36,21 @@ public class VkBufferOpaqueCaptureAddressCreateInfoKHR extends Struct implements
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkBufferOpaqueCaptureAddressCreateInfoKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** Returns the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code opaqueCaptureAddress} field. */
-    @NativeType("uint64_t")
-    public long opaqueCaptureAddress() { return nopaqueCaptureAddress(address()); }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkBufferOpaqueCaptureAddressCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkBufferOpaqueCaptureAddressCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code opaqueCaptureAddress} field. */
+    @Override
     public VkBufferOpaqueCaptureAddressCreateInfoKHR opaqueCaptureAddress(@NativeType("uint64_t") long value) { nopaqueCaptureAddress(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkBufferOpaqueCaptureAddressCreateInfoKHR set(
         int sType,
         long pNext,
@@ -285,24 +218,8 @@ public class VkBufferOpaqueCaptureAddressCreateInfoKHR extends Struct implements
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkBufferOpaqueCaptureAddressCreateInfoKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkBufferOpaqueCaptureAddressCreateInfoKHR.PNEXT); }
-    /** Unsafe version of {@link #opaqueCaptureAddress}. */
-    public static long nopaqueCaptureAddress(long struct) { return UNSAFE.getLong(null, struct + VkBufferOpaqueCaptureAddressCreateInfoKHR.OPAQUECAPTUREADDRESS); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkBufferOpaqueCaptureAddressCreateInfoKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkBufferOpaqueCaptureAddressCreateInfoKHR.PNEXT, value); }
-    /** Unsafe version of {@link #opaqueCaptureAddress(long) opaqueCaptureAddress}. */
-    public static void nopaqueCaptureAddress(long struct, long value) { UNSAFE.putLong(null, struct + VkBufferOpaqueCaptureAddressCreateInfoKHR.OPAQUECAPTUREADDRESS, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkBufferOpaqueCaptureAddressCreateInfoKHR} structs. */
-    public static class Buffer extends StructBuffer<VkBufferOpaqueCaptureAddressCreateInfoKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkBufferOpaqueCaptureAddressCreateInfo.Buffer {
 
         private static final VkBufferOpaqueCaptureAddressCreateInfoKHR ELEMENT_FACTORY = VkBufferOpaqueCaptureAddressCreateInfoKHR.create(-1L);
 
@@ -316,7 +233,7 @@ public class VkBufferOpaqueCaptureAddressCreateInfoKHR extends Struct implements
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -337,21 +254,14 @@ public class VkBufferOpaqueCaptureAddressCreateInfoKHR extends Struct implements
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkBufferOpaqueCaptureAddressCreateInfoKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkBufferOpaqueCaptureAddressCreateInfoKHR.npNext(address()); }
-        /** Returns the value of the {@code opaqueCaptureAddress} field. */
-        @NativeType("uint64_t")
-        public long opaqueCaptureAddress() { return VkBufferOpaqueCaptureAddressCreateInfoKHR.nopaqueCaptureAddress(address()); }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkBufferOpaqueCaptureAddressCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkBufferOpaqueCaptureAddressCreateInfoKHR.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkBufferOpaqueCaptureAddressCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkBufferOpaqueCaptureAddressCreateInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code opaqueCaptureAddress} field. */
+        @Override
         public VkBufferOpaqueCaptureAddressCreateInfoKHR.Buffer opaqueCaptureAddress(@NativeType("uint64_t") long value) { VkBufferOpaqueCaptureAddressCreateInfoKHR.nopaqueCaptureAddress(address(), value); return this; }
 
     }

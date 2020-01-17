@@ -16,46 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying depth/stencil resolve operations for a subpass.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code pDepthStencilResolveAttachment} is not {@code NULL} and does not have the value {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, {@code pDepthStencilAttachment} <b>must</b> not have the value {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}</li>
- * <li>If {@code pDepthStencilResolveAttachment} is not {@code NULL} and does not have the value {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, {@code depthResolveMode} and {@code stencilResolveMode} <b>must</b> not both be {@link KHRDepthStencilResolve#VK_RESOLVE_MODE_NONE_KHR RESOLVE_MODE_NONE_KHR}</li>
- * <li>If {@code pDepthStencilResolveAttachment} is not {@code NULL} and does not have the value {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, {@code pDepthStencilAttachment} <b>must</b> not have a sample count of {@link VK10#VK_SAMPLE_COUNT_1_BIT SAMPLE_COUNT_1_BIT}</li>
- * <li>If {@code pDepthStencilResolveAttachment} is not {@code NULL} and does not have the value {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, {@code pDepthStencilResolveAttachment} <b>must</b> have a sample count of {@link VK10#VK_SAMPLE_COUNT_1_BIT SAMPLE_COUNT_1_BIT}</li>
- * <li>If {@code pDepthStencilResolveAttachment} is not {@code NULL} and does not have the value {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED} then it <b>must</b> have a format whose features contain {@link VK10#VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT}</li>
- * <li>If the {@code VkFormat} of {@code pDepthStencilResolveAttachment} has a depth component, then the {@code VkFormat} of {@code pDepthStencilAttachment} <b>must</b> have a depth component with the same number of bits and numerical type</li>
- * <li>If the {@code VkFormat} of {@code pDepthStencilResolveAttachment} has a stencil component, then the {@code VkFormat} of {@code pDepthStencilAttachment} <b>must</b> have a stencil component with the same number of bits and numerical type</li>
- * <li>The value of {@code depthResolveMode} <b>must</b> be one of the bits set in {@link VkPhysicalDeviceDepthStencilResolvePropertiesKHR}{@code ::supportedDepthResolveModes} or {@link KHRDepthStencilResolve#VK_RESOLVE_MODE_NONE_KHR RESOLVE_MODE_NONE_KHR}</li>
- * <li>The value of {@code stencilResolveMode} <b>must</b> be one of the bits set in {@link VkPhysicalDeviceDepthStencilResolvePropertiesKHR}{@code ::supportedStencilResolveModes} or {@link KHRDepthStencilResolve#VK_RESOLVE_MODE_NONE_KHR RESOLVE_MODE_NONE_KHR}</li>
- * <li>If the {@code VkFormat} of {@code pDepthStencilResolveAttachment} has both depth and stencil components, {@link VkPhysicalDeviceDepthStencilResolvePropertiesKHR}{@code ::independentResolve} is {@link VK10#VK_FALSE FALSE}, and {@link VkPhysicalDeviceDepthStencilResolvePropertiesKHR}{@code ::independentResolveNone} is {@link VK10#VK_FALSE FALSE}, then the values of {@code depthResolveMode} and {@code stencilResolveMode} <b>must</b> be identical</li>
- * <li>If the {@code VkFormat} of {@code pDepthStencilResolveAttachment} has both depth and stencil components, {@link VkPhysicalDeviceDepthStencilResolvePropertiesKHR}{@code ::independentResolve} is {@link VK10#VK_FALSE FALSE} and {@link VkPhysicalDeviceDepthStencilResolvePropertiesKHR}{@code ::independentResolveNone} is {@link VK10#VK_TRUE TRUE}, then the values of {@code depthResolveMode} and {@code stencilResolveMode} <b>must</b> be identical or one of them <b>must</b> be {@link KHRDepthStencilResolve#VK_RESOLVE_MODE_NONE_KHR RESOLVE_MODE_NONE_KHR}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRDepthStencilResolve#VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE_KHR STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE_KHR}</li>
- * <li>{@code depthResolveMode} <b>must</b> be a valid {@code VkResolveModeFlagBitsKHR} value</li>
- * <li>{@code stencilResolveMode} <b>must</b> be a valid {@code VkResolveModeFlagBitsKHR} value</li>
- * <li>If {@code pDepthStencilResolveAttachment} is not {@code NULL}, {@code pDepthStencilResolveAttachment} <b>must</b> be a valid pointer to a valid {@link VkAttachmentReference2KHR} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkAttachmentReference2KHR}</p>
- * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code depthResolveMode} &ndash; a bitmask of {@code VkResolveModeFlagBitsKHR} describing the depth resolve mode.</li>
- * <li>{@code stencilResolveMode} &ndash; a bitmask of {@code VkResolveModeFlagBitsKHR} describing the stencil resolve mode.</li>
- * <li>{@code pDepthStencilResolveAttachment} &ndash; an optional {@link VkAttachmentReference} structure defining the depth/stencil resolve attachment for this subpass and its layout.</li>
- * </ul>
+ * See {@link VkSubpassDescriptionDepthStencilResolve}.
  * 
  * <h3>Layout</h3>
  * 
@@ -63,45 +24,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct VkSubpassDescriptionDepthStencilResolveKHR {
  *     VkStructureType sType;
  *     void const * pNext;
- *     VkResolveModeFlagBitsKHR depthResolveMode;
- *     VkResolveModeFlagBitsKHR stencilResolveMode;
- *     {@link VkAttachmentReference2KHR VkAttachmentReference2KHR} const * pDepthStencilResolveAttachment;
+ *     VkResolveModeFlagBits depthResolveMode;
+ *     VkResolveModeFlagBits stencilResolveMode;
+ *     {@link VkAttachmentReference2 VkAttachmentReference2} const * pDepthStencilResolveAttachment;
  * }</code></pre>
  */
-public class VkSubpassDescriptionDepthStencilResolveKHR extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        DEPTHRESOLVEMODE,
-        STENCILRESOLVEMODE,
-        PDEPTHSTENCILRESOLVEATTACHMENT;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4),
-            __member(4),
-            __member(POINTER_SIZE)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        DEPTHRESOLVEMODE = layout.offsetof(2);
-        STENCILRESOLVEMODE = layout.offsetof(3);
-        PDEPTHSTENCILRESOLVEATTACHMENT = layout.offsetof(4);
-    }
+public class VkSubpassDescriptionDepthStencilResolveKHR extends VkSubpassDescriptionDepthStencilResolve {
 
     /**
      * Creates a {@code VkSubpassDescriptionDepthStencilResolveKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -110,47 +38,33 @@ public class VkSubpassDescriptionDepthStencilResolveKHR extends Struct implement
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkSubpassDescriptionDepthStencilResolveKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** Returns the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code depthResolveMode} field. */
-    @NativeType("VkResolveModeFlagBitsKHR")
-    public int depthResolveMode() { return ndepthResolveMode(address()); }
-    /** Returns the value of the {@code stencilResolveMode} field. */
-    @NativeType("VkResolveModeFlagBitsKHR")
-    public int stencilResolveMode() { return nstencilResolveMode(address()); }
-    /** Returns a {@link VkAttachmentReference2KHR} view of the struct pointed to by the {@code pDepthStencilResolveAttachment} field. */
-    @Nullable
-    @NativeType("VkAttachmentReference2KHR const *")
-    public VkAttachmentReference2KHR pDepthStencilResolveAttachment() { return npDepthStencilResolveAttachment(address()); }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkSubpassDescriptionDepthStencilResolveKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkSubpassDescriptionDepthStencilResolveKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code depthResolveMode} field. */
-    public VkSubpassDescriptionDepthStencilResolveKHR depthResolveMode(@NativeType("VkResolveModeFlagBitsKHR") int value) { ndepthResolveMode(address(), value); return this; }
+    @Override
+    public VkSubpassDescriptionDepthStencilResolveKHR depthResolveMode(@NativeType("VkResolveModeFlagBits") int value) { ndepthResolveMode(address(), value); return this; }
     /** Sets the specified value to the {@code stencilResolveMode} field. */
-    public VkSubpassDescriptionDepthStencilResolveKHR stencilResolveMode(@NativeType("VkResolveModeFlagBitsKHR") int value) { nstencilResolveMode(address(), value); return this; }
-    /** Sets the address of the specified {@link VkAttachmentReference2KHR} to the {@code pDepthStencilResolveAttachment} field. */
-    public VkSubpassDescriptionDepthStencilResolveKHR pDepthStencilResolveAttachment(@Nullable @NativeType("VkAttachmentReference2KHR const *") VkAttachmentReference2KHR value) { npDepthStencilResolveAttachment(address(), value); return this; }
+    @Override
+    public VkSubpassDescriptionDepthStencilResolveKHR stencilResolveMode(@NativeType("VkResolveModeFlagBits") int value) { nstencilResolveMode(address(), value); return this; }
+    /** Sets the address of the specified {@link VkAttachmentReference2} to the {@code pDepthStencilResolveAttachment} field. */
+    @Override
+    public VkSubpassDescriptionDepthStencilResolveKHR pDepthStencilResolveAttachment(@Nullable @NativeType("VkAttachmentReference2 const *") VkAttachmentReference2 value) { npDepthStencilResolveAttachment(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkSubpassDescriptionDepthStencilResolveKHR set(
         int sType,
         long pNext,
         int depthResolveMode,
         int stencilResolveMode,
-        @Nullable VkAttachmentReference2KHR pDepthStencilResolveAttachment
+        @Nullable VkAttachmentReference2 pDepthStencilResolveAttachment
     ) {
         sType(sType);
         pNext(pNext);
@@ -316,32 +230,8 @@ public class VkSubpassDescriptionDepthStencilResolveKHR extends Struct implement
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDescriptionDepthStencilResolveKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkSubpassDescriptionDepthStencilResolveKHR.PNEXT); }
-    /** Unsafe version of {@link #depthResolveMode}. */
-    public static int ndepthResolveMode(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDescriptionDepthStencilResolveKHR.DEPTHRESOLVEMODE); }
-    /** Unsafe version of {@link #stencilResolveMode}. */
-    public static int nstencilResolveMode(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDescriptionDepthStencilResolveKHR.STENCILRESOLVEMODE); }
-    /** Unsafe version of {@link #pDepthStencilResolveAttachment}. */
-    @Nullable public static VkAttachmentReference2KHR npDepthStencilResolveAttachment(long struct) { return VkAttachmentReference2KHR.createSafe(memGetAddress(struct + VkSubpassDescriptionDepthStencilResolveKHR.PDEPTHSTENCILRESOLVEATTACHMENT)); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDescriptionDepthStencilResolveKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkSubpassDescriptionDepthStencilResolveKHR.PNEXT, value); }
-    /** Unsafe version of {@link #depthResolveMode(int) depthResolveMode}. */
-    public static void ndepthResolveMode(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDescriptionDepthStencilResolveKHR.DEPTHRESOLVEMODE, value); }
-    /** Unsafe version of {@link #stencilResolveMode(int) stencilResolveMode}. */
-    public static void nstencilResolveMode(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDescriptionDepthStencilResolveKHR.STENCILRESOLVEMODE, value); }
-    /** Unsafe version of {@link #pDepthStencilResolveAttachment(VkAttachmentReference2KHR) pDepthStencilResolveAttachment}. */
-    public static void npDepthStencilResolveAttachment(long struct, @Nullable VkAttachmentReference2KHR value) { memPutAddress(struct + VkSubpassDescriptionDepthStencilResolveKHR.PDEPTHSTENCILRESOLVEATTACHMENT, memAddressSafe(value)); }
-
-    // -----------------------------------
-
     /** An array of {@link VkSubpassDescriptionDepthStencilResolveKHR} structs. */
-    public static class Buffer extends StructBuffer<VkSubpassDescriptionDepthStencilResolveKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkSubpassDescriptionDepthStencilResolve.Buffer {
 
         private static final VkSubpassDescriptionDepthStencilResolveKHR ELEMENT_FACTORY = VkSubpassDescriptionDepthStencilResolveKHR.create(-1L);
 
@@ -355,7 +245,7 @@ public class VkSubpassDescriptionDepthStencilResolveKHR extends Struct implement
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -376,33 +266,21 @@ public class VkSubpassDescriptionDepthStencilResolveKHR extends Struct implement
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkSubpassDescriptionDepthStencilResolveKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkSubpassDescriptionDepthStencilResolveKHR.npNext(address()); }
-        /** Returns the value of the {@code depthResolveMode} field. */
-        @NativeType("VkResolveModeFlagBitsKHR")
-        public int depthResolveMode() { return VkSubpassDescriptionDepthStencilResolveKHR.ndepthResolveMode(address()); }
-        /** Returns the value of the {@code stencilResolveMode} field. */
-        @NativeType("VkResolveModeFlagBitsKHR")
-        public int stencilResolveMode() { return VkSubpassDescriptionDepthStencilResolveKHR.nstencilResolveMode(address()); }
-        /** Returns a {@link VkAttachmentReference2KHR} view of the struct pointed to by the {@code pDepthStencilResolveAttachment} field. */
-        @Nullable
-        @NativeType("VkAttachmentReference2KHR const *")
-        public VkAttachmentReference2KHR pDepthStencilResolveAttachment() { return VkSubpassDescriptionDepthStencilResolveKHR.npDepthStencilResolveAttachment(address()); }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkSubpassDescriptionDepthStencilResolveKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkSubpassDescriptionDepthStencilResolveKHR.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkSubpassDescriptionDepthStencilResolveKHR.Buffer pNext(@NativeType("void const *") long value) { VkSubpassDescriptionDepthStencilResolveKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code depthResolveMode} field. */
-        public VkSubpassDescriptionDepthStencilResolveKHR.Buffer depthResolveMode(@NativeType("VkResolveModeFlagBitsKHR") int value) { VkSubpassDescriptionDepthStencilResolveKHR.ndepthResolveMode(address(), value); return this; }
+        @Override
+        public VkSubpassDescriptionDepthStencilResolveKHR.Buffer depthResolveMode(@NativeType("VkResolveModeFlagBits") int value) { VkSubpassDescriptionDepthStencilResolveKHR.ndepthResolveMode(address(), value); return this; }
         /** Sets the specified value to the {@code stencilResolveMode} field. */
-        public VkSubpassDescriptionDepthStencilResolveKHR.Buffer stencilResolveMode(@NativeType("VkResolveModeFlagBitsKHR") int value) { VkSubpassDescriptionDepthStencilResolveKHR.nstencilResolveMode(address(), value); return this; }
-        /** Sets the address of the specified {@link VkAttachmentReference2KHR} to the {@code pDepthStencilResolveAttachment} field. */
-        public VkSubpassDescriptionDepthStencilResolveKHR.Buffer pDepthStencilResolveAttachment(@Nullable @NativeType("VkAttachmentReference2KHR const *") VkAttachmentReference2KHR value) { VkSubpassDescriptionDepthStencilResolveKHR.npDepthStencilResolveAttachment(address(), value); return this; }
+        @Override
+        public VkSubpassDescriptionDepthStencilResolveKHR.Buffer stencilResolveMode(@NativeType("VkResolveModeFlagBits") int value) { VkSubpassDescriptionDepthStencilResolveKHR.nstencilResolveMode(address(), value); return this; }
+        /** Sets the address of the specified {@link VkAttachmentReference2} to the {@code pDepthStencilResolveAttachment} field. */
+        @Override
+        public VkSubpassDescriptionDepthStencilResolveKHR.Buffer pDepthStencilResolveAttachment(@Nullable @NativeType("VkAttachmentReference2 const *") VkAttachmentReference2 value) { VkSubpassDescriptionDepthStencilResolveKHR.npDepthStencilResolveAttachment(address(), value); return this; }
 
     }
 

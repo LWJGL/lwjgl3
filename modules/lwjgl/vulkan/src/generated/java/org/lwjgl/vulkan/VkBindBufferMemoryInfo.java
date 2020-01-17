@@ -33,6 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If the {@code pNext} chain includes a {@link VkBindBufferMemoryDeviceGroupInfo} structure, all instances of {@code memory} specified by {@link VkBindBufferMemoryDeviceGroupInfo}{@code ::pDeviceIndices} <b>must</b> have been allocated</li>
  * <li>If the value of {@link VkExportMemoryAllocateInfo}{@code ::handleTypes} used to allocate {@code memory} is not 0, it <b>must</b> include at least one of the handles set in {@link VkExternalMemoryBufferCreateInfo}{@code ::handleTypes} when {@code buffer} was created</li>
  * <li>If {@code memory} was created by a memory import operation, the external handle type of the imported memory <b>must</b> also have been set in {@link VkExternalMemoryBufferCreateInfo}{@code ::handleTypes} when {@code buffer} was created</li>
+ * <li>If the {@link VkPhysicalDeviceBufferDeviceAddressFeaturesKHR}{@code ::bufferDeviceAddress} feature is enabled and {@code buffer} was created with the {@link KHRBufferDeviceAddress#VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_KHR BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_KHR} bit set, {@code memory} <b>must</b> have been allocated with the {@link KHRBufferDeviceAddress#VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT_KHR MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT_KHR} bit set</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

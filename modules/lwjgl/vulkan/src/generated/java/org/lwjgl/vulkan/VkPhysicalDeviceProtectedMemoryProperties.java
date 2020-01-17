@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code protectedNoFault} &ndash; specifies the behavior of the implementation when <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-protected-access-rules">protected memory access rules</a> are broken. If {@code protectedNoFault} is {@link VK10#VK_TRUE TRUE}, breaking those rules will not result in process termination or device loss.</li>
+ * <li>{@code protectedNoFault} &ndash; specifies the behavior of the implementation when <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#memory-protected-access-rules">protected memory access rules</a> are broken. If {@code protectedNoFault} is {@link VK10#VK_TRUE TRUE}, breaking those rules will not result in process termination or device loss.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

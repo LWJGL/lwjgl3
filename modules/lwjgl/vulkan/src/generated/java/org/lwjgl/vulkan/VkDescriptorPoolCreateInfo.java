@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If an allocation failure occurs due to fragmentation, an application <b>can</b> create an additional descriptor pool to perform further descriptor set allocations.</p>
  * 
- * <p>If {@code flags} has the {@link EXTDescriptorIndexing#VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT_EXT DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT_EXT} bit set, descriptor pool creation <b>may</b> fail with the error {@link EXTDescriptorIndexing#VK_ERROR_FRAGMENTATION_EXT ERROR_FRAGMENTATION_EXT} if the total number of descriptors across all pools (including this one) created with this bit set exceeds {@code maxUpdateAfterBindDescriptorsInAllPools}, or if fragmentation of the underlying hardware resources occurs.</p>
+ * <p>If {@code flags} has the {@link VK12#VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT} bit set, descriptor pool creation <b>may</b> fail with the error {@link VK12#VK_ERROR_FRAGMENTATION ERROR_FRAGMENTATION} if the total number of descriptors across all pools (including this one) created with this bit set exceeds {@code maxUpdateAfterBindDescriptorsInAllPools}, or if fragmentation of the underlying hardware resources occurs.</p>
  * 
  * <h5>Valid Usage</h5>
  * 

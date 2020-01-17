@@ -13,6 +13,9 @@ val KHR_separate_depth_stencil_layouts = "KHRSeparateDepthStencilLayouts".native
         """
         This extension allows image memory barriers for depth/stencil images to have just one of the #IMAGE_ASPECT_DEPTH_BIT or #IMAGE_ASPECT_STENCIL_BIT aspect bits set, rather than require both. This allows their layouts to be set independently. To support depth/stencil images with different layouts for the depth and stencil aspects, the depth/stencil attachment interface has been updated to support a separate layout for stencil.
 
+        <h5>Promotion to Vulkan 1.2</h5>
+        All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_separate_depth_stencil_layouts}</dd>
@@ -33,6 +36,11 @@ val KHR_separate_depth_stencil_layouts = "KHRSeparateDepthStencilLayouts".native
                 <li>Requires {@link KHRCreateRenderpass2 VK_KHR_create_renderpass2}</li>
             </ul></dd>
 
+            <dt><b>Deprecation state</b></dt>
+            <dd><ul>
+                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#versions-1.2-promotions">Vulkan 1.2</a></li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_separate_depth_stencil_layouts:%20&amp;body=@pdaniell-nv%20">pdaniell-nv</a></li>
@@ -40,6 +48,11 @@ val KHR_separate_depth_stencil_layouts = "KHRSeparateDepthStencilLayouts".native
 
             <dt><b>Last Modified Data</b></dt>
             <dd>2019-06-25</dd>
+
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
+                <li>Promoted to Vulkan 1.2 Core</li>
+            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>

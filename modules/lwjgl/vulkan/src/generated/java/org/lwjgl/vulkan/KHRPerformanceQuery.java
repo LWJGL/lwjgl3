@@ -356,19 +356,30 @@ public class KHRPerformanceQuery {
      * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_QUERY_SCOPE_COMMAND_BUFFER_KHR QUERY_SCOPE_COMMAND_BUFFER_KHR} - the performance counter scope is a single complete command buffer.</li>
-     * <li>{@link #VK_QUERY_SCOPE_RENDER_PASS_KHR QUERY_SCOPE_RENDER_PASS_KHR} - the performance counter scope is zero or more complete render passes. The performance query containing the performance counter <b>must</b> begin and end outside a render pass instance.</li>
-     * <li>{@link #VK_QUERY_SCOPE_COMMAND_KHR QUERY_SCOPE_COMMAND_KHR} - the performance counter scope is zero or more commands.</li>
+     * <li>{@link #VK_PERFORMANCE_COUNTER_SCOPE_COMMAND_BUFFER_KHR PERFORMANCE_COUNTER_SCOPE_COMMAND_BUFFER_KHR} - the performance counter scope is a single complete command buffer.</li>
+     * <li>{@link #VK_PERFORMANCE_COUNTER_SCOPE_RENDER_PASS_KHR PERFORMANCE_COUNTER_SCOPE_RENDER_PASS_KHR} - the performance counter scope is zero or more complete render passes. The performance query containing the performance counter <b>must</b> begin and end outside a render pass instance.</li>
+     * <li>{@link #VK_PERFORMANCE_COUNTER_SCOPE_COMMAND_KHR PERFORMANCE_COUNTER_SCOPE_COMMAND_KHR} - the performance counter scope is zero or more commands.</li>
      * </ul>
      * 
      * <h5>See Also</h5>
      * 
      * <p>{@link VkPerformanceCounterKHR}</p>
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_QUERY_SCOPE_COMMAND_BUFFER_KHR QUERY_SCOPE_COMMAND_BUFFER_KHR}</li>
+     * <li>{@link #VK_QUERY_SCOPE_RENDER_PASS_KHR QUERY_SCOPE_RENDER_PASS_KHR}</li>
+     * <li>{@link #VK_QUERY_SCOPE_COMMAND_KHR QUERY_SCOPE_COMMAND_KHR}</li>
+     * </ul>
      */
     public static final int
-        VK_QUERY_SCOPE_COMMAND_BUFFER_KHR = 0,
-        VK_QUERY_SCOPE_RENDER_PASS_KHR    = 1,
-        VK_QUERY_SCOPE_COMMAND_KHR        = 2;
+        VK_PERFORMANCE_COUNTER_SCOPE_COMMAND_BUFFER_KHR = 0,
+        VK_PERFORMANCE_COUNTER_SCOPE_RENDER_PASS_KHR    = 1,
+        VK_PERFORMANCE_COUNTER_SCOPE_COMMAND_KHR        = 2,
+        VK_QUERY_SCOPE_COMMAND_BUFFER_KHR               = 0,
+        VK_QUERY_SCOPE_RENDER_PASS_KHR                  = 1,
+        VK_QUERY_SCOPE_COMMAND_KHR                      = 2;
 
     /**
      * VkPerformanceCounterStorageKHR - Supported counter storage types

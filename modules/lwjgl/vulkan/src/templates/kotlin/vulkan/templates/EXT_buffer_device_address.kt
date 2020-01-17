@@ -36,7 +36,12 @@ val EXT_buffer_device_address = "EXTBufferDeviceAddress".nativeClassVK("EXT_buff
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
-                <li><em>Deprecated</em> by {@link KHRBufferDeviceAddress VK_KHR_buffer_device_address} extension</li>
+                <li>
+                    <em>Deprecated</em> by {@link KHRBufferDeviceAddress VK_KHR_buffer_device_address} extension
+                    <ul>
+                        <li>Which in turn was <em>promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#versions-1.2-promotions">Vulkan 1.2</a></li>
+                    </ul>
+                </li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -102,9 +107,9 @@ val EXT_buffer_device_address = "EXTBufferDeviceAddress".nativeClassVK("EXT_buff
 
     VkDeviceAddress(
         "GetBufferDeviceAddressEXT",
-        "See #GetBufferDeviceAddressKHR().",
+        "See #GetBufferDeviceAddress().",
 
         VkDevice("device", "the logical device that the buffer was created on."),
-        VkBufferDeviceAddressInfoKHR.const.p("pInfo", "a pointer to a ##VkBufferDeviceAddressInfoKHR structure specifying the buffer to retrieve an address for.")
+        VkBufferDeviceAddressInfo.const.p("pInfo", "a pointer to a ##VkBufferDeviceAddressInfo structure specifying the buffer to retrieve an address for.")
     )
 }

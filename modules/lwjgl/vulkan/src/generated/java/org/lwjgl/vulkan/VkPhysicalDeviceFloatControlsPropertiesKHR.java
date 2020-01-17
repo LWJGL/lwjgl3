@@ -16,39 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing properties supported by VK_KHR_shader_float_controls.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceFloatControlsPropertiesKHR} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceProperties2}, it is filled with the implementation-dependent limits.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRShaderFloatControls#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES_KHR}</li>
- * </ul>
- * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code denormBehaviorIndependence} &ndash; a {@code VkShaderFloatControlsIndependenceKHR} value indicating whether, and how, denorm behavior can be set independently for different bit widths.</li>
- * <li>{@code roundingModeIndependence} &ndash; a {@code VkShaderFloatControlsIndependenceKHR} value indicating whether, and how, rounding modes can be set independently for different bit widths.</li>
- * <li>{@code shaderSignedZeroInfNanPreserveFloat16} &ndash; a boolean value indicating whether sign of a zero, <code>Nan</code>s and &plusmn;&infin; <b>can</b> be preserved in 16-bit floating-point computations. It also indicates whether the {@code SignedZeroInfNanPreserve} execution mode <b>can</b> be used for 16-bit floating-point types.</li>
- * <li>{@code shaderSignedZeroInfNanPreserveFloat32} &ndash; a boolean value indicating whether sign of a zero, <code>Nan</code>s and &plusmn;&infin; <b>can</b> be preserved in 32-bit floating-point computations. It also indicates whether the {@code SignedZeroInfNanPreserve} execution mode <b>can</b> be used for 32-bit floating-point types.</li>
- * <li>{@code shaderSignedZeroInfNanPreserveFloat64} &ndash; a boolean value indicating whether sign of a zero, <code>Nan</code>s and &plusmn;&infin; <b>can</b> be preserved in 64-bit floating-point computations. It also indicates whether the {@code SignedZeroInfNanPreserve} execution mode <b>can</b> be used for 64-bit floating-point types.</li>
- * <li>{@code shaderDenormPreserveFloat16} &ndash; a boolean value indicating whether denormals <b>can</b> be preserved in 16-bit floating-point computations. It also indicates whether the {@code DenormPreserve} execution mode <b>can</b> be used for 16-bit floating-point types.</li>
- * <li>{@code shaderDenormPreserveFloat32} &ndash; a boolean value indicating whether denormals <b>can</b> be preserved in 32-bit floating-point computations. It also indicates whether the {@code DenormPreserve} execution mode <b>can</b> be used for 32-bit floating-point types.</li>
- * <li>{@code shaderDenormPreserveFloat64} &ndash; a boolean value indicating whether denormals <b>can</b> be preserved in 64-bit floating-point computations. It also indicates whether the {@code DenormPreserve} execution mode <b>can</b> be used for 64-bit floating-point types.</li>
- * <li>{@code shaderDenormFlushToZeroFloat16} &ndash; a boolean value indicating whether denormals <b>can</b> be flushed to zero in 16-bit floating-point computations. It also indicates whether the {@code DenormFlushToZero} execution mode <b>can</b> be used for 16-bit floating-point types.</li>
- * <li>{@code shaderDenormFlushToZeroFloat32} &ndash; a boolean value indicating whether denormals <b>can</b> be flushed to zero in 32-bit floating-point computations. It also indicates whether the {@code DenormFlushToZero} execution mode <b>can</b> be used for 32-bit floating-point types.</li>
- * <li>{@code shaderDenormFlushToZeroFloat64} &ndash; a boolean value indicating whether denormals <b>can</b> be flushed to zero in 64-bit floating-point computations. It also indicates whether the {@code DenormFlushToZero} execution mode <b>can</b> be used for 64-bit floating-point types.</li>
- * <li>{@code shaderRoundingModeRTEFloat16} &ndash; a boolean value indicating whether an implementation supports the round-to-nearest-even rounding mode for 16-bit floating-point arithmetic and conversion instructions. It also indicates whether the {@code RoundingModeRTE} execution mode <b>can</b> be used for 16-bit floating-point types.</li>
- * <li>{@code shaderRoundingModeRTEFloat32} &ndash; a boolean value indicating whether an implementation supports the round-to-nearest-even rounding mode for 32-bit floating-point arithmetic and conversion instructions. It also indicates whether the {@code RoundingModeRTE} execution mode <b>can</b> be used for 32-bit floating-point types.</li>
- * <li>{@code shaderRoundingModeRTEFloat64} &ndash; a boolean value indicating whether an implementation supports the round-to-nearest-even rounding mode for 64-bit floating-point arithmetic and conversion instructions. It also indicates whether the {@code RoundingModeRTE} execution mode <b>can</b> be used for 64-bit floating-point types.</li>
- * <li>{@code shaderRoundingModeRTZFloat16} &ndash; a boolean value indicating whether an implementation supports the round-towards-zero rounding mode for 16-bit floating-point arithmetic and conversion instructions. It also indicates whether the {@code RoundingModeRTZ} execution mode <b>can</b> be used for 16-bit floating-point types.</li>
- * <li>{@code shaderRoundingModeRTZFloat32} &ndash; a boolean value indicating whether an implementation supports the round-towards-zero rounding mode for 32-bit floating-point arithmetic and conversion instructions. It also indicates whether the {@code RoundingModeRTZ} execution mode <b>can</b> be used for 32-bit floating-point types.</li>
- * <li>{@code shaderRoundingModeRTZFloat64} &ndash; a boolean value indicating whether an implementation supports the round-towards-zero rounding mode for 64-bit floating-point arithmetic and conversion instructions. It also indicates whether the {@code RoundingModeRTZ} execution mode <b>can</b> be used for 64-bit floating-point types.</li>
- * </ul>
+ * See {@link VkPhysicalDeviceFloatControlsProperties}.
  * 
  * <h3>Layout</h3>
  * 
@@ -56,8 +24,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct VkPhysicalDeviceFloatControlsPropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkShaderFloatControlsIndependenceKHR denormBehaviorIndependence;
- *     VkShaderFloatControlsIndependenceKHR roundingModeIndependence;
+ *     VkShaderFloatControlsIndependence denormBehaviorIndependence;
+ *     VkShaderFloatControlsIndependence roundingModeIndependence;
  *     VkBool32 shaderSignedZeroInfNanPreserveFloat16;
  *     VkBool32 shaderSignedZeroInfNanPreserveFloat32;
  *     VkBool32 shaderSignedZeroInfNanPreserveFloat64;
@@ -75,82 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 shaderRoundingModeRTZFloat64;
  * }</code></pre>
  */
-public class VkPhysicalDeviceFloatControlsPropertiesKHR extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        DENORMBEHAVIORINDEPENDENCE,
-        ROUNDINGMODEINDEPENDENCE,
-        SHADERSIGNEDZEROINFNANPRESERVEFLOAT16,
-        SHADERSIGNEDZEROINFNANPRESERVEFLOAT32,
-        SHADERSIGNEDZEROINFNANPRESERVEFLOAT64,
-        SHADERDENORMPRESERVEFLOAT16,
-        SHADERDENORMPRESERVEFLOAT32,
-        SHADERDENORMPRESERVEFLOAT64,
-        SHADERDENORMFLUSHTOZEROFLOAT16,
-        SHADERDENORMFLUSHTOZEROFLOAT32,
-        SHADERDENORMFLUSHTOZEROFLOAT64,
-        SHADERROUNDINGMODERTEFLOAT16,
-        SHADERROUNDINGMODERTEFLOAT32,
-        SHADERROUNDINGMODERTEFLOAT64,
-        SHADERROUNDINGMODERTZFLOAT16,
-        SHADERROUNDINGMODERTZFLOAT32,
-        SHADERROUNDINGMODERTZFLOAT64;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        DENORMBEHAVIORINDEPENDENCE = layout.offsetof(2);
-        ROUNDINGMODEINDEPENDENCE = layout.offsetof(3);
-        SHADERSIGNEDZEROINFNANPRESERVEFLOAT16 = layout.offsetof(4);
-        SHADERSIGNEDZEROINFNANPRESERVEFLOAT32 = layout.offsetof(5);
-        SHADERSIGNEDZEROINFNANPRESERVEFLOAT64 = layout.offsetof(6);
-        SHADERDENORMPRESERVEFLOAT16 = layout.offsetof(7);
-        SHADERDENORMPRESERVEFLOAT32 = layout.offsetof(8);
-        SHADERDENORMPRESERVEFLOAT64 = layout.offsetof(9);
-        SHADERDENORMFLUSHTOZEROFLOAT16 = layout.offsetof(10);
-        SHADERDENORMFLUSHTOZEROFLOAT32 = layout.offsetof(11);
-        SHADERDENORMFLUSHTOZEROFLOAT64 = layout.offsetof(12);
-        SHADERROUNDINGMODERTEFLOAT16 = layout.offsetof(13);
-        SHADERROUNDINGMODERTEFLOAT32 = layout.offsetof(14);
-        SHADERROUNDINGMODERTEFLOAT64 = layout.offsetof(15);
-        SHADERROUNDINGMODERTZFLOAT16 = layout.offsetof(16);
-        SHADERROUNDINGMODERTZFLOAT32 = layout.offsetof(17);
-        SHADERROUNDINGMODERTZFLOAT64 = layout.offsetof(18);
-    }
+public class VkPhysicalDeviceFloatControlsPropertiesKHR extends VkPhysicalDeviceFloatControlsProperties {
 
     /**
      * Creates a {@code VkPhysicalDeviceFloatControlsPropertiesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -159,76 +52,18 @@ public class VkPhysicalDeviceFloatControlsPropertiesKHR extends Struct implement
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceFloatControlsPropertiesKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** Returns the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code denormBehaviorIndependence} field. */
-    @NativeType("VkShaderFloatControlsIndependenceKHR")
-    public int denormBehaviorIndependence() { return ndenormBehaviorIndependence(address()); }
-    /** Returns the value of the {@code roundingModeIndependence} field. */
-    @NativeType("VkShaderFloatControlsIndependenceKHR")
-    public int roundingModeIndependence() { return nroundingModeIndependence(address()); }
-    /** Returns the value of the {@code shaderSignedZeroInfNanPreserveFloat16} field. */
-    @NativeType("VkBool32")
-    public boolean shaderSignedZeroInfNanPreserveFloat16() { return nshaderSignedZeroInfNanPreserveFloat16(address()) != 0; }
-    /** Returns the value of the {@code shaderSignedZeroInfNanPreserveFloat32} field. */
-    @NativeType("VkBool32")
-    public boolean shaderSignedZeroInfNanPreserveFloat32() { return nshaderSignedZeroInfNanPreserveFloat32(address()) != 0; }
-    /** Returns the value of the {@code shaderSignedZeroInfNanPreserveFloat64} field. */
-    @NativeType("VkBool32")
-    public boolean shaderSignedZeroInfNanPreserveFloat64() { return nshaderSignedZeroInfNanPreserveFloat64(address()) != 0; }
-    /** Returns the value of the {@code shaderDenormPreserveFloat16} field. */
-    @NativeType("VkBool32")
-    public boolean shaderDenormPreserveFloat16() { return nshaderDenormPreserveFloat16(address()) != 0; }
-    /** Returns the value of the {@code shaderDenormPreserveFloat32} field. */
-    @NativeType("VkBool32")
-    public boolean shaderDenormPreserveFloat32() { return nshaderDenormPreserveFloat32(address()) != 0; }
-    /** Returns the value of the {@code shaderDenormPreserveFloat64} field. */
-    @NativeType("VkBool32")
-    public boolean shaderDenormPreserveFloat64() { return nshaderDenormPreserveFloat64(address()) != 0; }
-    /** Returns the value of the {@code shaderDenormFlushToZeroFloat16} field. */
-    @NativeType("VkBool32")
-    public boolean shaderDenormFlushToZeroFloat16() { return nshaderDenormFlushToZeroFloat16(address()) != 0; }
-    /** Returns the value of the {@code shaderDenormFlushToZeroFloat32} field. */
-    @NativeType("VkBool32")
-    public boolean shaderDenormFlushToZeroFloat32() { return nshaderDenormFlushToZeroFloat32(address()) != 0; }
-    /** Returns the value of the {@code shaderDenormFlushToZeroFloat64} field. */
-    @NativeType("VkBool32")
-    public boolean shaderDenormFlushToZeroFloat64() { return nshaderDenormFlushToZeroFloat64(address()) != 0; }
-    /** Returns the value of the {@code shaderRoundingModeRTEFloat16} field. */
-    @NativeType("VkBool32")
-    public boolean shaderRoundingModeRTEFloat16() { return nshaderRoundingModeRTEFloat16(address()) != 0; }
-    /** Returns the value of the {@code shaderRoundingModeRTEFloat32} field. */
-    @NativeType("VkBool32")
-    public boolean shaderRoundingModeRTEFloat32() { return nshaderRoundingModeRTEFloat32(address()) != 0; }
-    /** Returns the value of the {@code shaderRoundingModeRTEFloat64} field. */
-    @NativeType("VkBool32")
-    public boolean shaderRoundingModeRTEFloat64() { return nshaderRoundingModeRTEFloat64(address()) != 0; }
-    /** Returns the value of the {@code shaderRoundingModeRTZFloat16} field. */
-    @NativeType("VkBool32")
-    public boolean shaderRoundingModeRTZFloat16() { return nshaderRoundingModeRTZFloat16(address()) != 0; }
-    /** Returns the value of the {@code shaderRoundingModeRTZFloat32} field. */
-    @NativeType("VkBool32")
-    public boolean shaderRoundingModeRTZFloat32() { return nshaderRoundingModeRTZFloat32(address()) != 0; }
-    /** Returns the value of the {@code shaderRoundingModeRTZFloat64} field. */
-    @NativeType("VkBool32")
-    public boolean shaderRoundingModeRTZFloat64() { return nshaderRoundingModeRTZFloat64(address()) != 0; }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkPhysicalDeviceFloatControlsPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkPhysicalDeviceFloatControlsPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkPhysicalDeviceFloatControlsPropertiesKHR set(
         int sType,
         long pNext
@@ -394,54 +229,8 @@ public class VkPhysicalDeviceFloatControlsPropertiesKHR extends Struct implement
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsPropertiesKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceFloatControlsPropertiesKHR.PNEXT); }
-    /** Unsafe version of {@link #denormBehaviorIndependence}. */
-    public static int ndenormBehaviorIndependence(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsPropertiesKHR.DENORMBEHAVIORINDEPENDENCE); }
-    /** Unsafe version of {@link #roundingModeIndependence}. */
-    public static int nroundingModeIndependence(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsPropertiesKHR.ROUNDINGMODEINDEPENDENCE); }
-    /** Unsafe version of {@link #shaderSignedZeroInfNanPreserveFloat16}. */
-    public static int nshaderSignedZeroInfNanPreserveFloat16(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsPropertiesKHR.SHADERSIGNEDZEROINFNANPRESERVEFLOAT16); }
-    /** Unsafe version of {@link #shaderSignedZeroInfNanPreserveFloat32}. */
-    public static int nshaderSignedZeroInfNanPreserveFloat32(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsPropertiesKHR.SHADERSIGNEDZEROINFNANPRESERVEFLOAT32); }
-    /** Unsafe version of {@link #shaderSignedZeroInfNanPreserveFloat64}. */
-    public static int nshaderSignedZeroInfNanPreserveFloat64(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsPropertiesKHR.SHADERSIGNEDZEROINFNANPRESERVEFLOAT64); }
-    /** Unsafe version of {@link #shaderDenormPreserveFloat16}. */
-    public static int nshaderDenormPreserveFloat16(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsPropertiesKHR.SHADERDENORMPRESERVEFLOAT16); }
-    /** Unsafe version of {@link #shaderDenormPreserveFloat32}. */
-    public static int nshaderDenormPreserveFloat32(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsPropertiesKHR.SHADERDENORMPRESERVEFLOAT32); }
-    /** Unsafe version of {@link #shaderDenormPreserveFloat64}. */
-    public static int nshaderDenormPreserveFloat64(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsPropertiesKHR.SHADERDENORMPRESERVEFLOAT64); }
-    /** Unsafe version of {@link #shaderDenormFlushToZeroFloat16}. */
-    public static int nshaderDenormFlushToZeroFloat16(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsPropertiesKHR.SHADERDENORMFLUSHTOZEROFLOAT16); }
-    /** Unsafe version of {@link #shaderDenormFlushToZeroFloat32}. */
-    public static int nshaderDenormFlushToZeroFloat32(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsPropertiesKHR.SHADERDENORMFLUSHTOZEROFLOAT32); }
-    /** Unsafe version of {@link #shaderDenormFlushToZeroFloat64}. */
-    public static int nshaderDenormFlushToZeroFloat64(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsPropertiesKHR.SHADERDENORMFLUSHTOZEROFLOAT64); }
-    /** Unsafe version of {@link #shaderRoundingModeRTEFloat16}. */
-    public static int nshaderRoundingModeRTEFloat16(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsPropertiesKHR.SHADERROUNDINGMODERTEFLOAT16); }
-    /** Unsafe version of {@link #shaderRoundingModeRTEFloat32}. */
-    public static int nshaderRoundingModeRTEFloat32(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsPropertiesKHR.SHADERROUNDINGMODERTEFLOAT32); }
-    /** Unsafe version of {@link #shaderRoundingModeRTEFloat64}. */
-    public static int nshaderRoundingModeRTEFloat64(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsPropertiesKHR.SHADERROUNDINGMODERTEFLOAT64); }
-    /** Unsafe version of {@link #shaderRoundingModeRTZFloat16}. */
-    public static int nshaderRoundingModeRTZFloat16(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsPropertiesKHR.SHADERROUNDINGMODERTZFLOAT16); }
-    /** Unsafe version of {@link #shaderRoundingModeRTZFloat32}. */
-    public static int nshaderRoundingModeRTZFloat32(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsPropertiesKHR.SHADERROUNDINGMODERTZFLOAT32); }
-    /** Unsafe version of {@link #shaderRoundingModeRTZFloat64}. */
-    public static int nshaderRoundingModeRTZFloat64(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFloatControlsPropertiesKHR.SHADERROUNDINGMODERTZFLOAT64); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFloatControlsPropertiesKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceFloatControlsPropertiesKHR.PNEXT, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkPhysicalDeviceFloatControlsPropertiesKHR} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceFloatControlsPropertiesKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkPhysicalDeviceFloatControlsProperties.Buffer {
 
         private static final VkPhysicalDeviceFloatControlsPropertiesKHR ELEMENT_FACTORY = VkPhysicalDeviceFloatControlsPropertiesKHR.create(-1L);
 
@@ -455,7 +244,7 @@ public class VkPhysicalDeviceFloatControlsPropertiesKHR extends Struct implement
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -476,67 +265,11 @@ public class VkPhysicalDeviceFloatControlsPropertiesKHR extends Struct implement
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkPhysicalDeviceFloatControlsPropertiesKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkPhysicalDeviceFloatControlsPropertiesKHR.npNext(address()); }
-        /** Returns the value of the {@code denormBehaviorIndependence} field. */
-        @NativeType("VkShaderFloatControlsIndependenceKHR")
-        public int denormBehaviorIndependence() { return VkPhysicalDeviceFloatControlsPropertiesKHR.ndenormBehaviorIndependence(address()); }
-        /** Returns the value of the {@code roundingModeIndependence} field. */
-        @NativeType("VkShaderFloatControlsIndependenceKHR")
-        public int roundingModeIndependence() { return VkPhysicalDeviceFloatControlsPropertiesKHR.nroundingModeIndependence(address()); }
-        /** Returns the value of the {@code shaderSignedZeroInfNanPreserveFloat16} field. */
-        @NativeType("VkBool32")
-        public boolean shaderSignedZeroInfNanPreserveFloat16() { return VkPhysicalDeviceFloatControlsPropertiesKHR.nshaderSignedZeroInfNanPreserveFloat16(address()) != 0; }
-        /** Returns the value of the {@code shaderSignedZeroInfNanPreserveFloat32} field. */
-        @NativeType("VkBool32")
-        public boolean shaderSignedZeroInfNanPreserveFloat32() { return VkPhysicalDeviceFloatControlsPropertiesKHR.nshaderSignedZeroInfNanPreserveFloat32(address()) != 0; }
-        /** Returns the value of the {@code shaderSignedZeroInfNanPreserveFloat64} field. */
-        @NativeType("VkBool32")
-        public boolean shaderSignedZeroInfNanPreserveFloat64() { return VkPhysicalDeviceFloatControlsPropertiesKHR.nshaderSignedZeroInfNanPreserveFloat64(address()) != 0; }
-        /** Returns the value of the {@code shaderDenormPreserveFloat16} field. */
-        @NativeType("VkBool32")
-        public boolean shaderDenormPreserveFloat16() { return VkPhysicalDeviceFloatControlsPropertiesKHR.nshaderDenormPreserveFloat16(address()) != 0; }
-        /** Returns the value of the {@code shaderDenormPreserveFloat32} field. */
-        @NativeType("VkBool32")
-        public boolean shaderDenormPreserveFloat32() { return VkPhysicalDeviceFloatControlsPropertiesKHR.nshaderDenormPreserveFloat32(address()) != 0; }
-        /** Returns the value of the {@code shaderDenormPreserveFloat64} field. */
-        @NativeType("VkBool32")
-        public boolean shaderDenormPreserveFloat64() { return VkPhysicalDeviceFloatControlsPropertiesKHR.nshaderDenormPreserveFloat64(address()) != 0; }
-        /** Returns the value of the {@code shaderDenormFlushToZeroFloat16} field. */
-        @NativeType("VkBool32")
-        public boolean shaderDenormFlushToZeroFloat16() { return VkPhysicalDeviceFloatControlsPropertiesKHR.nshaderDenormFlushToZeroFloat16(address()) != 0; }
-        /** Returns the value of the {@code shaderDenormFlushToZeroFloat32} field. */
-        @NativeType("VkBool32")
-        public boolean shaderDenormFlushToZeroFloat32() { return VkPhysicalDeviceFloatControlsPropertiesKHR.nshaderDenormFlushToZeroFloat32(address()) != 0; }
-        /** Returns the value of the {@code shaderDenormFlushToZeroFloat64} field. */
-        @NativeType("VkBool32")
-        public boolean shaderDenormFlushToZeroFloat64() { return VkPhysicalDeviceFloatControlsPropertiesKHR.nshaderDenormFlushToZeroFloat64(address()) != 0; }
-        /** Returns the value of the {@code shaderRoundingModeRTEFloat16} field. */
-        @NativeType("VkBool32")
-        public boolean shaderRoundingModeRTEFloat16() { return VkPhysicalDeviceFloatControlsPropertiesKHR.nshaderRoundingModeRTEFloat16(address()) != 0; }
-        /** Returns the value of the {@code shaderRoundingModeRTEFloat32} field. */
-        @NativeType("VkBool32")
-        public boolean shaderRoundingModeRTEFloat32() { return VkPhysicalDeviceFloatControlsPropertiesKHR.nshaderRoundingModeRTEFloat32(address()) != 0; }
-        /** Returns the value of the {@code shaderRoundingModeRTEFloat64} field. */
-        @NativeType("VkBool32")
-        public boolean shaderRoundingModeRTEFloat64() { return VkPhysicalDeviceFloatControlsPropertiesKHR.nshaderRoundingModeRTEFloat64(address()) != 0; }
-        /** Returns the value of the {@code shaderRoundingModeRTZFloat16} field. */
-        @NativeType("VkBool32")
-        public boolean shaderRoundingModeRTZFloat16() { return VkPhysicalDeviceFloatControlsPropertiesKHR.nshaderRoundingModeRTZFloat16(address()) != 0; }
-        /** Returns the value of the {@code shaderRoundingModeRTZFloat32} field. */
-        @NativeType("VkBool32")
-        public boolean shaderRoundingModeRTZFloat32() { return VkPhysicalDeviceFloatControlsPropertiesKHR.nshaderRoundingModeRTZFloat32(address()) != 0; }
-        /** Returns the value of the {@code shaderRoundingModeRTZFloat64} field. */
-        @NativeType("VkBool32")
-        public boolean shaderRoundingModeRTZFloat64() { return VkPhysicalDeviceFloatControlsPropertiesKHR.nshaderRoundingModeRTZFloat64(address()) != 0; }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceFloatControlsPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceFloatControlsPropertiesKHR.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkPhysicalDeviceFloatControlsPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceFloatControlsPropertiesKHR.npNext(address(), value); return this; }
 
     }

@@ -16,33 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the memory object to query an address for.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code memory} <b>must</b> have been allocated with {@link KHRBufferDeviceAddress#VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT_KHR MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT_KHR}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRBufferDeviceAddress#VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO_KHR STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code memory} <b>must</b> be a valid {@code VkDeviceMemory} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link KHRBufferDeviceAddress#vkGetDeviceMemoryOpaqueCaptureAddressKHR GetDeviceMemoryOpaqueCaptureAddressKHR}</p>
- * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code memory} &ndash; specifies the memory whose address is being queried.</li>
- * </ul>
+ * See {@link VkDeviceMemoryOpaqueCaptureAddressInfo}.
  * 
  * <h3>Layout</h3>
  * 
@@ -53,34 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkDeviceMemory memory;
  * }</code></pre>
  */
-public class VkDeviceMemoryOpaqueCaptureAddressInfoKHR extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        MEMORY;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(8)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        MEMORY = layout.offsetof(2);
-    }
+public class VkDeviceMemoryOpaqueCaptureAddressInfoKHR extends VkDeviceMemoryOpaqueCaptureAddressInfo {
 
     /**
      * Creates a {@code VkDeviceMemoryOpaqueCaptureAddressInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -89,30 +36,21 @@ public class VkDeviceMemoryOpaqueCaptureAddressInfoKHR extends Struct implements
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkDeviceMemoryOpaqueCaptureAddressInfoKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** Returns the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code memory} field. */
-    @NativeType("VkDeviceMemory")
-    public long memory() { return nmemory(address()); }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkDeviceMemoryOpaqueCaptureAddressInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkDeviceMemoryOpaqueCaptureAddressInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code memory} field. */
+    @Override
     public VkDeviceMemoryOpaqueCaptureAddressInfoKHR memory(@NativeType("VkDeviceMemory") long value) { nmemory(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkDeviceMemoryOpaqueCaptureAddressInfoKHR set(
         int sType,
         long pNext,
@@ -280,24 +218,8 @@ public class VkDeviceMemoryOpaqueCaptureAddressInfoKHR extends Struct implements
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDeviceMemoryOpaqueCaptureAddressInfoKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkDeviceMemoryOpaqueCaptureAddressInfoKHR.PNEXT); }
-    /** Unsafe version of {@link #memory}. */
-    public static long nmemory(long struct) { return UNSAFE.getLong(null, struct + VkDeviceMemoryOpaqueCaptureAddressInfoKHR.MEMORY); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceMemoryOpaqueCaptureAddressInfoKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkDeviceMemoryOpaqueCaptureAddressInfoKHR.PNEXT, value); }
-    /** Unsafe version of {@link #memory(long) memory}. */
-    public static void nmemory(long struct, long value) { UNSAFE.putLong(null, struct + VkDeviceMemoryOpaqueCaptureAddressInfoKHR.MEMORY, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkDeviceMemoryOpaqueCaptureAddressInfoKHR} structs. */
-    public static class Buffer extends StructBuffer<VkDeviceMemoryOpaqueCaptureAddressInfoKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkDeviceMemoryOpaqueCaptureAddressInfo.Buffer {
 
         private static final VkDeviceMemoryOpaqueCaptureAddressInfoKHR ELEMENT_FACTORY = VkDeviceMemoryOpaqueCaptureAddressInfoKHR.create(-1L);
 
@@ -311,7 +233,7 @@ public class VkDeviceMemoryOpaqueCaptureAddressInfoKHR extends Struct implements
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -332,21 +254,14 @@ public class VkDeviceMemoryOpaqueCaptureAddressInfoKHR extends Struct implements
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkDeviceMemoryOpaqueCaptureAddressInfoKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkDeviceMemoryOpaqueCaptureAddressInfoKHR.npNext(address()); }
-        /** Returns the value of the {@code memory} field. */
-        @NativeType("VkDeviceMemory")
-        public long memory() { return VkDeviceMemoryOpaqueCaptureAddressInfoKHR.nmemory(address()); }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkDeviceMemoryOpaqueCaptureAddressInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceMemoryOpaqueCaptureAddressInfoKHR.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkDeviceMemoryOpaqueCaptureAddressInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkDeviceMemoryOpaqueCaptureAddressInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code memory} field. */
+        @Override
         public VkDeviceMemoryOpaqueCaptureAddressInfoKHR.Buffer memory(@NativeType("VkDeviceMemory") long value) { VkDeviceMemoryOpaqueCaptureAddressInfoKHR.nmemory(address(), value); return this; }
 
     }

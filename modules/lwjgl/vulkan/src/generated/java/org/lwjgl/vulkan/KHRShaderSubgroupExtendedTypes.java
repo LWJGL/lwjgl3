@@ -8,6 +8,10 @@ package org.lwjgl.vulkan;
 /**
  * This extension enables the Non Uniform Group Operations in SPIR-V to support 8-bit integer, 16-bit integer, 64-bit integer, 16-bit floating-point, and vectors of these types.
  * 
+ * <h5>Promotion to Vulkan 1.2</h5>
+ * 
+ * <p>All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.</p>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_shader_subgroup_extended_types}</dd>
@@ -21,6 +25,10 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Requires Vulkan 1.1</li>
  * </ul></dd>
+ * <dt><b>Deprecation state</b></dt>
+ * <dd><ul>
+ * <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#versions-1.2-promotions">Vulkan 1.2</a></li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Neil Henning <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_shader_subgroup_extended_types:%20&amp;body=@sheredom%20">sheredom</a></li>
@@ -30,7 +38,9 @@ package org.lwjgl.vulkan;
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
- * <dd>None.</dd>
+ * <dd><ul>
+ * <li>Promoted to Vulkan 1.2 Core</li>
+ * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
  * <li>Jeff Bolz, NVIDIA</li>

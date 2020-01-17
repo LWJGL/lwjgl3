@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceShaderFloat16Int8FeaturesKHR}.
+ * See {@link VkPhysicalDeviceShaderFloat16Int8Features}.
  * 
  * <h3>Layout</h3>
  * 
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 shaderInt8;
  * }</code></pre>
  */
-public class VkPhysicalDeviceFloat16Int8FeaturesKHR extends VkPhysicalDeviceShaderFloat16Int8FeaturesKHR {
+public class VkPhysicalDeviceFloat16Int8FeaturesKHR extends VkPhysicalDeviceShaderFloat16Int8Features {
 
     /**
      * Creates a {@code VkPhysicalDeviceFloat16Int8FeaturesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -225,7 +225,7 @@ public class VkPhysicalDeviceFloat16Int8FeaturesKHR extends VkPhysicalDeviceShad
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceFloat16Int8FeaturesKHR} structs. */
-    public static class Buffer extends VkPhysicalDeviceShaderFloat16Int8FeaturesKHR.Buffer {
+    public static class Buffer extends VkPhysicalDeviceShaderFloat16Int8Features.Buffer {
 
         private static final VkPhysicalDeviceFloat16Int8FeaturesKHR ELEMENT_FACTORY = VkPhysicalDeviceFloat16Int8FeaturesKHR.create(-1L);
 

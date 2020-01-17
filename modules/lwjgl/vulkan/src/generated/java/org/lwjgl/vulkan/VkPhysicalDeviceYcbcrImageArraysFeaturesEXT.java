@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing extended Y.
+ * Structure describing extended Y'CbCr image creation features that can be supported by an implementation.
  * 
  * <h5>Description</h5>
  * 
@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code ycbcrImageArrays} &ndash; indicates that the implementation supports creating images with a format that requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a> and has multiple array layers.</li>
+ * <li>{@code ycbcrImageArrays} &ndash; indicates that the implementation supports creating images with a format that requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">Y′C<sub>B</sub>C<sub>R</sub> conversion</a> and has multiple array layers.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

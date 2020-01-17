@@ -15,6 +15,9 @@ val KHR_buffer_device_address = "KHRBufferDeviceAddress".nativeClassVK("KHR_buff
 
         This extension also allows opaque addresses for buffers and memory objects to be queried and later supplied by a trace capture and replay tool, so that addresses used at replay time match the addresses used when the trace was captured. To enable tools to insert these queries, new memory allocation flags must be specified for memory objects that will be bound to buffers accessed via the {@code PhysicalStorageBuffer} storage class.
 
+        <h5>Promotion to Vulkan 1.2</h5>
+        All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_buffer_device_address}</dd>
@@ -34,6 +37,11 @@ val KHR_buffer_device_address = "KHRBufferDeviceAddress".nativeClassVK("KHR_buff
                 <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</li>
             </ul></dd>
 
+            <dt><b>Deprecation state</b></dt>
+            <dd><ul>
+                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#versions-1.2-promotions">Vulkan 1.2</a></li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_buffer_device_address:%20&amp;body=@jeffbolznv%20">jeffbolznv</a></li>
@@ -44,6 +52,11 @@ val KHR_buffer_device_address = "KHRBufferDeviceAddress".nativeClassVK("KHR_buff
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
+
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
+                <li>Promoted to Vulkan 1.2 Core</li>
+            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
@@ -73,7 +86,7 @@ val KHR_buffer_device_address = "KHRBufferDeviceAddress".nativeClassVK("KHR_buff
         "Extends {@code VkStructureType}.",
 
         "STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_KHR".."1000257000",
-        "STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO_KHR".."1000244001",
+        "STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO_KHR".."1000257001",
         "STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO_KHR".."1000257002",
         "STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO_KHR".."1000257003",
         "STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO_KHR".."1000257004"
@@ -101,131 +114,30 @@ val KHR_buffer_device_address = "KHRBufferDeviceAddress".nativeClassVK("KHR_buff
     EnumConstant(
         "Extends {@code VkResult}.",
 
-        "ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR".."-1000244000"
+        "ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR".."-1000257000"
     )
 
     VkDeviceAddress(
         "GetBufferDeviceAddressKHR",
-        """
-        Query an address of a buffer.
-
-        <h5>C Specification</h5>
-        To query a 64-bit buffer device address value through which buffer memory <b>can</b> be accessed in a shader, call:
-
-        <pre><code>
-￿VkDeviceAddress vkGetBufferDeviceAddressKHR(
-￿    VkDevice                                    device,
-￿    const VkBufferDeviceAddressInfoKHR*         pInfo);</code></pre>
-
-        or the equivalent command
-
-        <pre><code>
-￿VkDeviceAddress vkGetBufferDeviceAddressEXT(
-￿    VkDevice                                    device,
-￿    const VkBufferDeviceAddressInfoKHR*         pInfo);</code></pre>
-
-        <h5>Description</h5>
-        The 64-bit return value is an address of the start of {@code pInfo}-&gt;buffer. The address range starting at this value and whose size is the size of the buffer <b>can</b> be used in a shader to access the memory bound to that buffer, using the {@code SPV_KHR_physical_storage_buffer} extension or the equivalent {@code SPV_EXT_physical_storage_buffer} extension and the {@code PhysicalStorageBuffer} storage class. For example, this value <b>can</b> be stored in a uniform buffer, and the shader <b>can</b> read the value from the uniform buffer and use it to do a dependent read/write to this buffer. A value of zero is reserved as a "{@code null}" pointer and <b>must</b> not be returned as a valid buffer device address. All loads, stores, and atomics in a shader through {@code PhysicalStorageBuffer} pointers <b>must</b> access addresses in the address range of some buffer.
-
-        If the buffer was created with a non-zero value of ##VkBufferOpaqueCaptureAddressCreateInfoKHR{@code ::opaqueCaptureAddress} or ##VkBufferDeviceAddressCreateInfoEXT{@code ::deviceAddress} the return value will be the same address that was returned at capture time.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#features-bufferDeviceAddress">bufferDeviceAddress</a> or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#features-bufferDeviceAddressEXT">##VkPhysicalDeviceBufferDeviceAddressFeaturesEXT{@code ::bufferDeviceAddress}</a> feature <b>must</b> be enabled</li>
-            <li>If {@code device} was created with multiple physical devices, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#features-bufferDeviceAddressMultiDevice">bufferDeviceAddressMultiDevice</a> or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#features-bufferDeviceAddressMultiDeviceEXT">##VkPhysicalDeviceBufferDeviceAddressFeaturesEXT{@code ::bufferDeviceAddressMultiDevice}</a> feature <b>must</b> be enabled</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pInfo} <b>must</b> be a valid pointer to a valid ##VkBufferDeviceAddressInfoKHR structure</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##VkBufferDeviceAddressInfoKHR
-        """,
+        "See #GetBufferDeviceAddress().",
 
         VkDevice("device", "the logical device that the buffer was created on."),
-        VkBufferDeviceAddressInfoKHR.const.p("pInfo", "a pointer to a ##VkBufferDeviceAddressInfoKHR structure specifying the buffer to retrieve an address for.")
+        VkBufferDeviceAddressInfo.const.p("pInfo", "a pointer to a ##VkBufferDeviceAddressInfo structure specifying the buffer to retrieve an address for.")
     )
 
     uint64_t(
         "GetBufferOpaqueCaptureAddressKHR",
-        """
-        Query an opaque capture address of a buffer.
-
-        <h5>C Specification</h5>
-        To query a 64-bit buffer opaque capture address, call:
-
-        <pre><code>
-￿uint64_t vkGetBufferOpaqueCaptureAddressKHR(
-￿    VkDevice                                    device,
-￿    const VkBufferDeviceAddressInfoKHR*         pInfo);</code></pre>
-
-        <h5>Description</h5>
-        The 64-bit return value is an opaque capture address of the start of {@code pInfo}-&gt;buffer.
-
-        If the buffer was created with a non-zero value of ##VkBufferOpaqueCaptureAddressCreateInfoKHR{@code ::opaqueCaptureAddress} the return value <b>must</b> be the same address.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#features-bufferDeviceAddress">bufferDeviceAddress</a> feature <b>must</b> be enabled</li>
-            <li>If {@code device} was created with multiple physical devices, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#features-bufferDeviceAddressMultiDevice">bufferDeviceAddressMultiDevice</a> feature <b>must</b> be enabled</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pInfo} <b>must</b> be a valid pointer to a valid ##VkBufferDeviceAddressInfoKHR structure</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##VkBufferDeviceAddressInfoKHR
-        """,
+        "See #GetBufferOpaqueCaptureAddress().",
 
         VkDevice("device", "the logical device that the buffer was created on."),
-        VkBufferDeviceAddressInfoKHR.const.p("pInfo", "a pointer to a ##VkBufferDeviceAddressInfoKHR structure specifying the buffer to retrieve an address for.")
+        VkBufferDeviceAddressInfo.const.p("pInfo", "a pointer to a ##VkBufferDeviceAddressInfo structure specifying the buffer to retrieve an address for.")
     )
 
     uint64_t(
         "GetDeviceMemoryOpaqueCaptureAddressKHR",
-        """
-        Query an opaque capture address of a memory object.
-
-        <h5>C Specification</h5>
-        To query a 64-bit opaque capture address value from a memory object, call:
-
-        <pre><code>
-￿uint64_t vkGetDeviceMemoryOpaqueCaptureAddressKHR(
-￿    VkDevice                                    device,
-￿    const VkDeviceMemoryOpaqueCaptureAddressInfoKHR* pInfo);</code></pre>
-
-        <h5>Description</h5>
-        The 64-bit return value is an opaque address representing the start of {@code pInfo}-&gt;memory.
-
-        If the memory object was allocated with a non-zero value of ##VkMemoryOpaqueCaptureAddressAllocateInfoKHR{@code ::opaqueCaptureAddress}, the return value <b>must</b> be the same address.
-
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        The expected usage for these opaque addresses is only for trace capture/replay tools to store these addresses in a trace and subsequently specify them during replay.
-        </div>
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#features-bufferDeviceAddress">bufferDeviceAddress</a> feature <b>must</b> be enabled</li>
-            <li>If {@code device} was created with multiple physical devices, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#features-bufferDeviceAddressMultiDevice">bufferDeviceAddressMultiDevice</a> feature <b>must</b> be enabled</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pInfo} <b>must</b> be a valid pointer to a valid ##VkDeviceMemoryOpaqueCaptureAddressInfoKHR structure</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##VkDeviceMemoryOpaqueCaptureAddressInfoKHR
-        """,
+        "See #GetDeviceMemoryOpaqueCaptureAddress().",
 
         VkDevice("device", "the logical device that the memory object was allocated on."),
-        VkDeviceMemoryOpaqueCaptureAddressInfoKHR.const.p("pInfo", "a pointer to a ##VkDeviceMemoryOpaqueCaptureAddressInfoKHR structure specifying the memory object to retrieve an address for.")
+        VkDeviceMemoryOpaqueCaptureAddressInfo.const.p("pInfo", "a pointer to a ##VkDeviceMemoryOpaqueCaptureAddressInfo structure specifying the memory object to retrieve an address for.")
     )
 }

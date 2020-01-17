@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
  * 
- * <p>The {@link VkPhysicalDeviceBufferDeviceAddressFeaturesEXT} structure has the same members as the {@link VkPhysicalDeviceBufferDeviceAddressFeaturesKHR} structure, but the functionality indicated by the members is expressed differently. The features indicated by the {@link VkPhysicalDeviceBufferDeviceAddressFeaturesKHR} structure requires additional flags to be passed at memory allocation time, and the capture and replay mechanism is built around opaque capture addresses for buffer and memory objects.</p>
+ * <p>The {@link VkPhysicalDeviceBufferDeviceAddressFeaturesEXT} structure has the same members as the {@link VkPhysicalDeviceBufferDeviceAddressFeatures} structure, but the functionality indicated by the members is expressed differently. The features indicated by the {@link VkPhysicalDeviceBufferDeviceAddressFeatures} structure requires additional flags to be passed at memory allocation time, and the capture and replay mechanism is built around opaque capture addresses for buffer and memory objects.</p>
  * </div>
  * 
  * <h5>Valid Usage (Implicit)</h5>

@@ -16,69 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a subpass dependency.
- * 
- * <h5>Description</h5>
- * 
- * <p>Parameters defined by this structure with the same name as those in {@link VkSubpassDependency} have the identical effect to those parameters.</p>
- * 
- * <p>{@code viewOffset} has the same effect for the described subpass dependency as {@link VkRenderPassMultiviewCreateInfo}{@code ::pViewOffsets} has on each corresponding subpass dependency.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#features-geometryShader">geometry shaders</a> feature is not enabled, {@code srcStageMask} <b>must</b> not contain {@link VK10#VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT PIPELINE_STAGE_GEOMETRY_SHADER_BIT}</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#features-geometryShader">geometry shaders</a> feature is not enabled, {@code dstStageMask} <b>must</b> not contain {@link VK10#VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT PIPELINE_STAGE_GEOMETRY_SHADER_BIT}</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#features-tessellationShader">tessellation shaders</a> feature is not enabled, {@code srcStageMask} <b>must</b> not contain {@link VK10#VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT} or {@link VK10#VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT}</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#features-tessellationShader">tessellation shaders</a> feature is not enabled, {@code dstStageMask} <b>must</b> not contain {@link VK10#VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT} or {@link VK10#VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT}</li>
- * <li>{@code srcSubpass} <b>must</b> be less than or equal to {@code dstSubpass}, unless one of them is {@link VK10#VK_SUBPASS_EXTERNAL SUBPASS_EXTERNAL}, to avoid cyclic dependencies and ensure a valid execution order</li>
- * <li>{@code srcSubpass} and {@code dstSubpass} <b>must</b> not both be equal to {@link VK10#VK_SUBPASS_EXTERNAL SUBPASS_EXTERNAL}</li>
- * <li>If {@code srcSubpass} is equal to {@code dstSubpass} and not all of the stages in {@code srcStageMask} and {@code dstStageMask} are <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-framebuffer-regions">framebuffer-space stages</a>, the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-pipeline-stages-order">logically latest</a> pipeline stage in {@code srcStageMask} <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-pipeline-stages-order">logically earlier</a> than or equal to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-pipeline-stages-order">logically earliest</a> pipeline stage in {@code dstStageMask}</li>
- * <li>Any access flag included in {@code srcAccessMask} <b>must</b> be supported by one of the pipeline stages in {@code srcStageMask}, as specified in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-access-types-supported">table of supported access types</a></li>
- * <li>Any access flag included in {@code dstAccessMask} <b>must</b> be supported by one of the pipeline stages in {@code dstStageMask}, as specified in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-access-types-supported">table of supported access types</a></li>
- * <li>If {@code dependencyFlags} includes {@link VK11#VK_DEPENDENCY_VIEW_LOCAL_BIT DEPENDENCY_VIEW_LOCAL_BIT}, {@code srcSubpass} <b>must</b> not be equal to {@link VK10#VK_SUBPASS_EXTERNAL SUBPASS_EXTERNAL}</li>
- * <li>If {@code dependencyFlags} includes {@link VK11#VK_DEPENDENCY_VIEW_LOCAL_BIT DEPENDENCY_VIEW_LOCAL_BIT}, {@code dstSubpass} <b>must</b> not be equal to {@link VK10#VK_SUBPASS_EXTERNAL SUBPASS_EXTERNAL}</li>
- * <li>If {@code srcSubpass} equals {@code dstSubpass}, and {@code srcStageMask} and {@code dstStageMask} both include a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-framebuffer-regions">framebuffer-space stage</a>, then {@code dependencyFlags} <b>must</b> include {@link VK10#VK_DEPENDENCY_BY_REGION_BIT DEPENDENCY_BY_REGION_BIT}</li>
- * <li>If {@code viewOffset} is not equal to 0, {@code srcSubpass} <b>must</b> not be equal to {@code dstSubpass}</li>
- * <li>If {@code dependencyFlags} does not include {@link VK11#VK_DEPENDENCY_VIEW_LOCAL_BIT DEPENDENCY_VIEW_LOCAL_BIT}, {@code viewOffset} <b>must</b> be 0</li>
- * <li>If {@code viewOffset} is not 0, {@code srcSubpass} <b>must</b> not be equal to {@code dstSubpass}.</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#features-meshShader">mesh shaders</a> feature is not enabled, {@code srcStageMask} <b>must</b> not contain {@link NVMeshShader#VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV PIPELINE_STAGE_MESH_SHADER_BIT_NV}</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#features-taskShader">task shaders</a> feature is not enabled, {@code srcStageMask} <b>must</b> not contain {@link NVMeshShader#VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV PIPELINE_STAGE_TASK_SHADER_BIT_NV}</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#features-meshShader">mesh shaders</a> feature is not enabled, {@code dstStageMask} <b>must</b> not contain {@link NVMeshShader#VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV PIPELINE_STAGE_MESH_SHADER_BIT_NV}</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#features-taskShader">task shaders</a> feature is not enabled, {@code dstStageMask} <b>must</b> not contain {@link NVMeshShader#VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV PIPELINE_STAGE_TASK_SHADER_BIT_NV}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRCreateRenderpass2#VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2_KHR STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2_KHR}</li>
- * <li>{@code srcStageMask} <b>must</b> be a valid combination of {@code VkPipelineStageFlagBits} values</li>
- * <li>{@code srcStageMask} <b>must</b> not be 0</li>
- * <li>{@code dstStageMask} <b>must</b> be a valid combination of {@code VkPipelineStageFlagBits} values</li>
- * <li>{@code dstStageMask} <b>must</b> not be 0</li>
- * <li>{@code srcAccessMask} <b>must</b> be a valid combination of {@code VkAccessFlagBits} values</li>
- * <li>{@code dstAccessMask} <b>must</b> be a valid combination of {@code VkAccessFlagBits} values</li>
- * <li>{@code dependencyFlags} <b>must</b> be a valid combination of {@code VkDependencyFlagBits} values</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkRenderPassCreateInfo2KHR}</p>
- * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code srcSubpass} &ndash; the subpass index of the first subpass in the dependency, or {@link VK10#VK_SUBPASS_EXTERNAL SUBPASS_EXTERNAL}.</li>
- * <li>{@code dstSubpass} &ndash; the subpass index of the second subpass in the dependency, or {@link VK10#VK_SUBPASS_EXTERNAL SUBPASS_EXTERNAL}.</li>
- * <li>{@code srcStageMask} &ndash; a bitmask of {@code VkPipelineStageFlagBits} specifying the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-pipeline-stages-masks">source stage mask</a>.</li>
- * <li>{@code dstStageMask} &ndash; a bitmask of {@code VkPipelineStageFlagBits} specifying the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-pipeline-stages-masks">destination stage mask</a></li>
- * <li>{@code srcAccessMask} &ndash; a bitmask of {@code VkAccessFlagBits} specifying a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-access-masks">source access mask</a>.</li>
- * <li>{@code dstAccessMask} &ndash; a bitmask of {@code VkAccessFlagBits} specifying a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-access-masks">destination access mask</a>.</li>
- * <li>{@code dependencyFlags} &ndash; a bitmask of {@code VkDependencyFlagBits}.</li>
- * <li>{@code viewOffset} &ndash; controls which views in the source subpass the views in the destination subpass depend on.</li>
- * </ul>
+ * See {@link VkSubpassDependency2}.
  * 
  * <h3>Layout</h3>
  * 
@@ -96,55 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int32_t viewOffset;
  * }</code></pre>
  */
-public class VkSubpassDependency2KHR extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        SRCSUBPASS,
-        DSTSUBPASS,
-        SRCSTAGEMASK,
-        DSTSTAGEMASK,
-        SRCACCESSMASK,
-        DSTACCESSMASK,
-        DEPENDENCYFLAGS,
-        VIEWOFFSET;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        SRCSUBPASS = layout.offsetof(2);
-        DSTSUBPASS = layout.offsetof(3);
-        SRCSTAGEMASK = layout.offsetof(4);
-        DSTSTAGEMASK = layout.offsetof(5);
-        SRCACCESSMASK = layout.offsetof(6);
-        DSTACCESSMASK = layout.offsetof(7);
-        DEPENDENCYFLAGS = layout.offsetof(8);
-        VIEWOFFSET = layout.offsetof(9);
-    }
+public class VkSubpassDependency2KHR extends VkSubpassDependency2 {
 
     /**
      * Creates a {@code VkSubpassDependency2KHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -153,65 +43,42 @@ public class VkSubpassDependency2KHR extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkSubpassDependency2KHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** Returns the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code srcSubpass} field. */
-    @NativeType("uint32_t")
-    public int srcSubpass() { return nsrcSubpass(address()); }
-    /** Returns the value of the {@code dstSubpass} field. */
-    @NativeType("uint32_t")
-    public int dstSubpass() { return ndstSubpass(address()); }
-    /** Returns the value of the {@code srcStageMask} field. */
-    @NativeType("VkPipelineStageFlags")
-    public int srcStageMask() { return nsrcStageMask(address()); }
-    /** Returns the value of the {@code dstStageMask} field. */
-    @NativeType("VkPipelineStageFlags")
-    public int dstStageMask() { return ndstStageMask(address()); }
-    /** Returns the value of the {@code srcAccessMask} field. */
-    @NativeType("VkAccessFlags")
-    public int srcAccessMask() { return nsrcAccessMask(address()); }
-    /** Returns the value of the {@code dstAccessMask} field. */
-    @NativeType("VkAccessFlags")
-    public int dstAccessMask() { return ndstAccessMask(address()); }
-    /** Returns the value of the {@code dependencyFlags} field. */
-    @NativeType("VkDependencyFlags")
-    public int dependencyFlags() { return ndependencyFlags(address()); }
-    /** Returns the value of the {@code viewOffset} field. */
-    @NativeType("int32_t")
-    public int viewOffset() { return nviewOffset(address()); }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkSubpassDependency2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkSubpassDependency2KHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code srcSubpass} field. */
+    @Override
     public VkSubpassDependency2KHR srcSubpass(@NativeType("uint32_t") int value) { nsrcSubpass(address(), value); return this; }
     /** Sets the specified value to the {@code dstSubpass} field. */
+    @Override
     public VkSubpassDependency2KHR dstSubpass(@NativeType("uint32_t") int value) { ndstSubpass(address(), value); return this; }
     /** Sets the specified value to the {@code srcStageMask} field. */
+    @Override
     public VkSubpassDependency2KHR srcStageMask(@NativeType("VkPipelineStageFlags") int value) { nsrcStageMask(address(), value); return this; }
     /** Sets the specified value to the {@code dstStageMask} field. */
+    @Override
     public VkSubpassDependency2KHR dstStageMask(@NativeType("VkPipelineStageFlags") int value) { ndstStageMask(address(), value); return this; }
     /** Sets the specified value to the {@code srcAccessMask} field. */
+    @Override
     public VkSubpassDependency2KHR srcAccessMask(@NativeType("VkAccessFlags") int value) { nsrcAccessMask(address(), value); return this; }
     /** Sets the specified value to the {@code dstAccessMask} field. */
+    @Override
     public VkSubpassDependency2KHR dstAccessMask(@NativeType("VkAccessFlags") int value) { ndstAccessMask(address(), value); return this; }
     /** Sets the specified value to the {@code dependencyFlags} field. */
+    @Override
     public VkSubpassDependency2KHR dependencyFlags(@NativeType("VkDependencyFlags") int value) { ndependencyFlags(address(), value); return this; }
     /** Sets the specified value to the {@code viewOffset} field. */
+    @Override
     public VkSubpassDependency2KHR viewOffset(@NativeType("int32_t") int value) { nviewOffset(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkSubpassDependency2KHR set(
         int sType,
         long pNext,
@@ -393,52 +260,8 @@ public class VkSubpassDependency2KHR extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDependency2KHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkSubpassDependency2KHR.PNEXT); }
-    /** Unsafe version of {@link #srcSubpass}. */
-    public static int nsrcSubpass(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDependency2KHR.SRCSUBPASS); }
-    /** Unsafe version of {@link #dstSubpass}. */
-    public static int ndstSubpass(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDependency2KHR.DSTSUBPASS); }
-    /** Unsafe version of {@link #srcStageMask}. */
-    public static int nsrcStageMask(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDependency2KHR.SRCSTAGEMASK); }
-    /** Unsafe version of {@link #dstStageMask}. */
-    public static int ndstStageMask(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDependency2KHR.DSTSTAGEMASK); }
-    /** Unsafe version of {@link #srcAccessMask}. */
-    public static int nsrcAccessMask(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDependency2KHR.SRCACCESSMASK); }
-    /** Unsafe version of {@link #dstAccessMask}. */
-    public static int ndstAccessMask(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDependency2KHR.DSTACCESSMASK); }
-    /** Unsafe version of {@link #dependencyFlags}. */
-    public static int ndependencyFlags(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDependency2KHR.DEPENDENCYFLAGS); }
-    /** Unsafe version of {@link #viewOffset}. */
-    public static int nviewOffset(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDependency2KHR.VIEWOFFSET); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDependency2KHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkSubpassDependency2KHR.PNEXT, value); }
-    /** Unsafe version of {@link #srcSubpass(int) srcSubpass}. */
-    public static void nsrcSubpass(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDependency2KHR.SRCSUBPASS, value); }
-    /** Unsafe version of {@link #dstSubpass(int) dstSubpass}. */
-    public static void ndstSubpass(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDependency2KHR.DSTSUBPASS, value); }
-    /** Unsafe version of {@link #srcStageMask(int) srcStageMask}. */
-    public static void nsrcStageMask(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDependency2KHR.SRCSTAGEMASK, value); }
-    /** Unsafe version of {@link #dstStageMask(int) dstStageMask}. */
-    public static void ndstStageMask(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDependency2KHR.DSTSTAGEMASK, value); }
-    /** Unsafe version of {@link #srcAccessMask(int) srcAccessMask}. */
-    public static void nsrcAccessMask(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDependency2KHR.SRCACCESSMASK, value); }
-    /** Unsafe version of {@link #dstAccessMask(int) dstAccessMask}. */
-    public static void ndstAccessMask(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDependency2KHR.DSTACCESSMASK, value); }
-    /** Unsafe version of {@link #dependencyFlags(int) dependencyFlags}. */
-    public static void ndependencyFlags(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDependency2KHR.DEPENDENCYFLAGS, value); }
-    /** Unsafe version of {@link #viewOffset(int) viewOffset}. */
-    public static void nviewOffset(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDependency2KHR.VIEWOFFSET, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkSubpassDependency2KHR} structs. */
-    public static class Buffer extends StructBuffer<VkSubpassDependency2KHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkSubpassDependency2.Buffer {
 
         private static final VkSubpassDependency2KHR ELEMENT_FACTORY = VkSubpassDependency2KHR.create(-1L);
 
@@ -452,7 +275,7 @@ public class VkSubpassDependency2KHR extends Struct implements NativeResource {
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -473,56 +296,35 @@ public class VkSubpassDependency2KHR extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkSubpassDependency2KHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkSubpassDependency2KHR.npNext(address()); }
-        /** Returns the value of the {@code srcSubpass} field. */
-        @NativeType("uint32_t")
-        public int srcSubpass() { return VkSubpassDependency2KHR.nsrcSubpass(address()); }
-        /** Returns the value of the {@code dstSubpass} field. */
-        @NativeType("uint32_t")
-        public int dstSubpass() { return VkSubpassDependency2KHR.ndstSubpass(address()); }
-        /** Returns the value of the {@code srcStageMask} field. */
-        @NativeType("VkPipelineStageFlags")
-        public int srcStageMask() { return VkSubpassDependency2KHR.nsrcStageMask(address()); }
-        /** Returns the value of the {@code dstStageMask} field. */
-        @NativeType("VkPipelineStageFlags")
-        public int dstStageMask() { return VkSubpassDependency2KHR.ndstStageMask(address()); }
-        /** Returns the value of the {@code srcAccessMask} field. */
-        @NativeType("VkAccessFlags")
-        public int srcAccessMask() { return VkSubpassDependency2KHR.nsrcAccessMask(address()); }
-        /** Returns the value of the {@code dstAccessMask} field. */
-        @NativeType("VkAccessFlags")
-        public int dstAccessMask() { return VkSubpassDependency2KHR.ndstAccessMask(address()); }
-        /** Returns the value of the {@code dependencyFlags} field. */
-        @NativeType("VkDependencyFlags")
-        public int dependencyFlags() { return VkSubpassDependency2KHR.ndependencyFlags(address()); }
-        /** Returns the value of the {@code viewOffset} field. */
-        @NativeType("int32_t")
-        public int viewOffset() { return VkSubpassDependency2KHR.nviewOffset(address()); }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkSubpassDependency2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkSubpassDependency2KHR.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkSubpassDependency2KHR.Buffer pNext(@NativeType("void const *") long value) { VkSubpassDependency2KHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code srcSubpass} field. */
+        @Override
         public VkSubpassDependency2KHR.Buffer srcSubpass(@NativeType("uint32_t") int value) { VkSubpassDependency2KHR.nsrcSubpass(address(), value); return this; }
         /** Sets the specified value to the {@code dstSubpass} field. */
+        @Override
         public VkSubpassDependency2KHR.Buffer dstSubpass(@NativeType("uint32_t") int value) { VkSubpassDependency2KHR.ndstSubpass(address(), value); return this; }
         /** Sets the specified value to the {@code srcStageMask} field. */
+        @Override
         public VkSubpassDependency2KHR.Buffer srcStageMask(@NativeType("VkPipelineStageFlags") int value) { VkSubpassDependency2KHR.nsrcStageMask(address(), value); return this; }
         /** Sets the specified value to the {@code dstStageMask} field. */
+        @Override
         public VkSubpassDependency2KHR.Buffer dstStageMask(@NativeType("VkPipelineStageFlags") int value) { VkSubpassDependency2KHR.ndstStageMask(address(), value); return this; }
         /** Sets the specified value to the {@code srcAccessMask} field. */
+        @Override
         public VkSubpassDependency2KHR.Buffer srcAccessMask(@NativeType("VkAccessFlags") int value) { VkSubpassDependency2KHR.nsrcAccessMask(address(), value); return this; }
         /** Sets the specified value to the {@code dstAccessMask} field. */
+        @Override
         public VkSubpassDependency2KHR.Buffer dstAccessMask(@NativeType("VkAccessFlags") int value) { VkSubpassDependency2KHR.ndstAccessMask(address(), value); return this; }
         /** Sets the specified value to the {@code dependencyFlags} field. */
+        @Override
         public VkSubpassDependency2KHR.Buffer dependencyFlags(@NativeType("VkDependencyFlags") int value) { VkSubpassDependency2KHR.ndependencyFlags(address(), value); return this; }
         /** Sets the specified value to the {@code viewOffset} field. */
+        @Override
         public VkSubpassDependency2KHR.Buffer viewOffset(@NativeType("int32_t") int value) { VkSubpassDependency2KHR.nviewOffset(address(), value); return this; }
 
     }

@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code inlineUniformBlock} &ndash; indicates whether the implementation supports inline uniform block descriptors. If this feature is not enabled, {@link EXTInlineUniformBlock#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT} <b>must</b> not be used.</li>
- * <li>{@code descriptorBindingInlineUniformBlockUpdateAfterBind} &ndash; indicates whether the implementation supports updating inline uniform block descriptors after a set is bound. If this feature is not enabled, {@link EXTDescriptorIndexing#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT} <b>must</b> not be used with {@link EXTInlineUniformBlock#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT}.</li>
+ * <li>{@code descriptorBindingInlineUniformBlockUpdateAfterBind} &ndash; indicates whether the implementation supports updating inline uniform block descriptors after a set is bound. If this feature is not enabled, {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT} <b>must</b> not be used with {@link EXTInlineUniformBlock#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT}.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

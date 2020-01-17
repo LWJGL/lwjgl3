@@ -42,7 +42,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If this structure is not present, it is as if {@code coverageModulationMode} is {@link NVFramebufferMixedSamples#VK_COVERAGE_MODULATION_MODE_NONE_NV COVERAGE_MODULATION_MODE_NONE_NV}.</p>
  * 
- * <p>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#fragops-coverage-reduction">coverage reduction mode</a> is {@link NVCoverageReductionMode#VK_COVERAGE_REDUCTION_MODE_TRUNCATE_NV COVERAGE_REDUCTION_MODE_TRUNCATE_NV}, each color sample is associated with only a single coverage sample. In this case, it is as if {@code coverageModulationMode} is {@link NVFramebufferMixedSamples#VK_COVERAGE_MODULATION_MODE_NONE_NV COVERAGE_MODULATION_MODE_NONE_NV}.</p>
+ * <p>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-coverage-reduction">coverage reduction mode</a> is {@link NVCoverageReductionMode#VK_COVERAGE_REDUCTION_MODE_TRUNCATE_NV COVERAGE_REDUCTION_MODE_TRUNCATE_NV}, each color sample is associated with only a single coverage sample. In this case, it is as if {@code coverageModulationMode} is {@link NVFramebufferMixedSamples#VK_COVERAGE_MODULATION_MODE_NONE_NV COVERAGE_MODULATION_MODE_NONE_NV}.</p>
  * 
  * <h5>Valid Usage</h5>
  * 

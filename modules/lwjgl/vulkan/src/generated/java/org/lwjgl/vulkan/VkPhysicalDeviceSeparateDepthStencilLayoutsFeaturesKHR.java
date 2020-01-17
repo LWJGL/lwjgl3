@@ -16,23 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether the implementation can do depth and stencil image barriers separately.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceFeatures2}, it is filled with values indicating whether the feature is supported. {@link VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR} <b>can</b> also be included in the {@code pNext} chain of {@link VkDeviceCreateInfo} to enable the feature.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRSeparateDepthStencilLayouts#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES_KHR}</li>
- * </ul>
- * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code separateDepthStencilLayouts} &ndash; indicates whether the implementation supports a {@link VkImageMemoryBarrier} for a depth/stencil image with only one of {@link VK10#VK_IMAGE_ASPECT_DEPTH_BIT IMAGE_ASPECT_DEPTH_BIT} or {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT} set, and whether {@link KHRSeparateDepthStencilLayouts#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR}, {@link KHRSeparateDepthStencilLayouts#VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR}, {@link KHRSeparateDepthStencilLayouts#VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL_KHR IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL_KHR}, or {@link KHRSeparateDepthStencilLayouts#VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR} can be used.</li>
- * </ul>
+ * See {@link VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures}.
  * 
  * <h3>Layout</h3>
  * 
@@ -43,34 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 separateDepthStencilLayouts;
  * }</code></pre>
  */
-public class VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        SEPARATEDEPTHSTENCILLAYOUTS;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        SEPARATEDEPTHSTENCILLAYOUTS = layout.offsetof(2);
-    }
+public class VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR extends VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures {
 
     /**
      * Creates a {@code VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -79,30 +36,21 @@ public class VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR extends Stru
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** Returns the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code separateDepthStencilLayouts} field. */
-    @NativeType("VkBool32")
-    public boolean separateDepthStencilLayouts() { return nseparateDepthStencilLayouts(address()) != 0; }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code separateDepthStencilLayouts} field. */
+    @Override
     public VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR separateDepthStencilLayouts(@NativeType("VkBool32") boolean value) { nseparateDepthStencilLayouts(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR set(
         int sType,
         long pNext,
@@ -270,24 +218,8 @@ public class VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR extends Stru
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR.PNEXT); }
-    /** Unsafe version of {@link #separateDepthStencilLayouts}. */
-    public static int nseparateDepthStencilLayouts(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR.SEPARATEDEPTHSTENCILLAYOUTS); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR.PNEXT, value); }
-    /** Unsafe version of {@link #separateDepthStencilLayouts(boolean) separateDepthStencilLayouts}. */
-    public static void nseparateDepthStencilLayouts(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR.SEPARATEDEPTHSTENCILLAYOUTS, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures.Buffer {
 
         private static final VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR ELEMENT_FACTORY = VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR.create(-1L);
 
@@ -301,7 +233,7 @@ public class VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR extends Stru
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -322,21 +254,14 @@ public class VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR extends Stru
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR.npNext(address()); }
-        /** Returns the value of the {@code separateDepthStencilLayouts} field. */
-        @NativeType("VkBool32")
-        public boolean separateDepthStencilLayouts() { return VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR.nseparateDepthStencilLayouts(address()) != 0; }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code separateDepthStencilLayouts} field. */
+        @Override
         public VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR.Buffer separateDepthStencilLayouts(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR.nseparateDepthStencilLayouts(address(), value ? 1 : 0); return this; }
 
     }

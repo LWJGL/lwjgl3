@@ -36,7 +36,12 @@ val AMD_gpu_shader_half_float = "AMDGPUShaderHalfFloat".nativeClassVK("AMD_gpu_s
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
-                <li><em>Deprecated</em> by {@link KHRShaderFloat16Int8 VK_KHR_shader_float16_int8} extension</li>
+                <li>
+                    <em>Deprecated</em> by {@link KHRShaderFloat16Int8 VK_KHR_shader_float16_int8} extension
+                    <ul>
+                        <li>Which in turn was <em>promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#versions-1.2-promotions">Vulkan 1.2</a></li>
+                    </ul>
+                </li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

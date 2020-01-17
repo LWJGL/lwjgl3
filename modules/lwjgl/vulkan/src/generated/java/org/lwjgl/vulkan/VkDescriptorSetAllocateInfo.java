@@ -23,14 +23,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>Each element of {@code pSetLayouts} <b>must</b> not have been created with {@link KHRPushDescriptor#VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR} set</li>
- * <li>If any element of {@code pSetLayouts} was created with the {@link EXTDescriptorIndexing#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT} bit set, {@code descriptorPool} <b>must</b> have been created with the {@link EXTDescriptorIndexing#VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT_EXT DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT_EXT} flag set</li>
+ * <li>If any element of {@code pSetLayouts} was created with the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set, {@code descriptorPool} <b>must</b> have been created with the {@link VK12#VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT} flag set</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkDescriptorSetVariableDescriptorCountAllocateInfoEXT}</li>
+ * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkDescriptorSetVariableDescriptorCountAllocateInfo}</li>
  * <li>{@code descriptorPool} <b>must</b> be a valid {@code VkDescriptorPool} handle</li>
  * <li>{@code pSetLayouts} <b>must</b> be a valid pointer to an array of {@code descriptorSetCount} valid {@code VkDescriptorSetLayout} handles</li>
  * <li>{@code descriptorSetCount} <b>must</b> be greater than 0</li>

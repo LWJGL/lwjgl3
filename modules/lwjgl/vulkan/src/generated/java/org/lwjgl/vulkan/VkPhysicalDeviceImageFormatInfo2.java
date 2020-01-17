@@ -26,14 +26,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code tiling} <b>must</b> be {@link EXTImageDrmFormatModifier#VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT} if and only if the {@code pNext} chain includes {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT}.</li>
- * <li>If {@code tiling} is {@link EXTImageDrmFormatModifier#VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT} and {@code flags} contains {@link VK10#VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT IMAGE_CREATE_MUTABLE_FORMAT_BIT}, then the {@code pNext} chain <b>must</b> include {@link VkImageFormatListCreateInfoKHR} with non-zero {@code viewFormatCount}.</li>
+ * <li>If {@code tiling} is {@link EXTImageDrmFormatModifier#VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT} and {@code flags} contains {@link VK10#VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT IMAGE_CREATE_MUTABLE_FORMAT_BIT}, then the {@code pNext} chain <b>must</b> include a {@link VkImageFormatListCreateInfo} structure with non-zero {@code viewFormatCount}.</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2 STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkImageFormatListCreateInfoKHR}, {@link VkImageStencilUsageCreateInfoEXT}, {@link VkPhysicalDeviceExternalImageFormatInfo}, {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT}, or {@link VkPhysicalDeviceImageViewImageFormatInfoEXT}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkImageFormatListCreateInfo}, {@link VkImageStencilUsageCreateInfo}, {@link VkPhysicalDeviceExternalImageFormatInfo}, {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT}, or {@link VkPhysicalDeviceImageViewImageFormatInfoEXT}</li>
  * <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code format} <b>must</b> be a valid {@code VkFormat} value</li>
  * <li>{@code type} <b>must</b> be a valid {@code VkImageType} value</li>

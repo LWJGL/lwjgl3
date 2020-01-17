@@ -12,7 +12,7 @@ package org.lwjgl.vulkan;
  * 
  * <h5>Promotion to Vulkan 1.1</h5>
  * 
- * <p>All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted, however support for the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#features-variablePointersStorageBuffer"> {@code variablePointersStorageBuffer}</a> feature is made optional. The original type, enum and command names are still available as aliases of the core functionality.</p>
+ * <p>All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted, however support for the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-variablePointersStorageBuffer"> {@code variablePointersStorageBuffer}</a> feature is made optional. The original type, enum and command names are still available as aliases of the core functionality.</p>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -31,7 +31,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Deprecation state</b></dt>
  * <dd><ul>
- * <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#versions-1.1-promotions">Vulkan 1.1</a></li>
+ * <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#versions-1.1-promotions">Vulkan 1.1</a></li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>

@@ -138,7 +138,7 @@ val KHR_external_fence_win32 = "KHRExternalFenceWin32".nativeClassVK("KHR_extern
         <h5>Description</h5>
         For handle types defined as NT handles, the handles returned by {@code vkGetFenceWin32HandleKHR} are owned by the application. To avoid leaking resources, the application <b>must</b> release ownership of them using the {@code CloseHandle} system call when they are no longer needed.
 
-        Exporting a Windows handle from a fence <b>may</b> have side effects depending on the transference of the specified handle type, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#synchronization-fences-importing">Importing Fence Payloads</a>.
+        Exporting a Windows handle from a fence <b>may</b> have side effects depending on the transference of the specified handle type, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-fences-importing">Importing Fence Payloads</a>.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

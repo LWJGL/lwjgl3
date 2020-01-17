@@ -154,6 +154,22 @@ public class VKCapabilitiesDevice {
         vkUpdateDescriptorSetWithTemplate,
         vkGetDescriptorSetLayoutSupport;
 
+    // VK12
+    public final long
+        vkCmdDrawIndirectCount,
+        vkCmdDrawIndexedIndirectCount,
+        vkCreateRenderPass2,
+        vkCmdBeginRenderPass2,
+        vkCmdNextSubpass2,
+        vkCmdEndRenderPass2,
+        vkResetQueryPool,
+        vkGetSemaphoreCounterValue,
+        vkWaitSemaphores,
+        vkSignalSemaphore,
+        vkGetBufferDeviceAddress,
+        vkGetBufferOpaqueCaptureAddress,
+        vkGetDeviceMemoryOpaqueCaptureAddress;
+
     // AMD_buffer_marker
     public final long
         vkCmdWriteBufferMarkerAMD;
@@ -468,6 +484,8 @@ public class VKCapabilitiesDevice {
     public final boolean Vulkan10;
     /** When true, {@link VK11} is supported. */
     public final boolean Vulkan11;
+    /** When true, {@link VK12} is supported. */
+    public final boolean Vulkan12;
     /** When true, {@link AMDBufferMarker} is supported. */
     public final boolean VK_AMD_buffer_marker;
     /** When true, {@link AMDDeviceCoherentMemory} is supported. */
@@ -792,10 +810,11 @@ public class VKCapabilitiesDevice {
     VKCapabilitiesDevice(FunctionProvider provider, VKCapabilitiesInstance capsInstance, Set<String> ext) {
         this.apiVersion = capsInstance.apiVersion;
 
-        Map<String, Long> caps = new HashMap<>(282);
+        Map<String, Long> caps = new HashMap<>(295);
 
         Vulkan10 = VK10.checkCapsDevice(provider, caps, ext);
         Vulkan11 = VK11.checkCapsDevice(provider, caps, ext);
+        Vulkan12 = VK12.checkCapsDevice(provider, caps, ext);
         VK_AMD_buffer_marker = AMDBufferMarker.checkCapsDevice(provider, caps, ext);
         VK_AMD_device_coherent_memory = ext.contains("VK_AMD_device_coherent_memory");
         VK_AMD_display_native_hdr = AMDDisplayNativeHdr.checkCapsDevice(provider, caps, ext);
@@ -1095,6 +1114,19 @@ public class VKCapabilitiesDevice {
         vkDestroyDescriptorUpdateTemplate = VK.get(caps, "vkDestroyDescriptorUpdateTemplate");
         vkUpdateDescriptorSetWithTemplate = VK.get(caps, "vkUpdateDescriptorSetWithTemplate");
         vkGetDescriptorSetLayoutSupport = VK.get(caps, "vkGetDescriptorSetLayoutSupport");
+        vkCmdDrawIndirectCount = VK.get(caps, "vkCmdDrawIndirectCount");
+        vkCmdDrawIndexedIndirectCount = VK.get(caps, "vkCmdDrawIndexedIndirectCount");
+        vkCreateRenderPass2 = VK.get(caps, "vkCreateRenderPass2");
+        vkCmdBeginRenderPass2 = VK.get(caps, "vkCmdBeginRenderPass2");
+        vkCmdNextSubpass2 = VK.get(caps, "vkCmdNextSubpass2");
+        vkCmdEndRenderPass2 = VK.get(caps, "vkCmdEndRenderPass2");
+        vkResetQueryPool = VK.get(caps, "vkResetQueryPool");
+        vkGetSemaphoreCounterValue = VK.get(caps, "vkGetSemaphoreCounterValue");
+        vkWaitSemaphores = VK.get(caps, "vkWaitSemaphores");
+        vkSignalSemaphore = VK.get(caps, "vkSignalSemaphore");
+        vkGetBufferDeviceAddress = VK.get(caps, "vkGetBufferDeviceAddress");
+        vkGetBufferOpaqueCaptureAddress = VK.get(caps, "vkGetBufferOpaqueCaptureAddress");
+        vkGetDeviceMemoryOpaqueCaptureAddress = VK.get(caps, "vkGetDeviceMemoryOpaqueCaptureAddress");
         vkCmdWriteBufferMarkerAMD = VK.get(caps, "vkCmdWriteBufferMarkerAMD");
         vkSetLocalDimmingAMD = VK.get(caps, "vkSetLocalDimmingAMD");
         vkCmdDrawIndirectCountAMD = VK.get(caps, "vkCmdDrawIndirectCountAMD");

@@ -197,6 +197,8 @@ public class VKCapabilitiesInstance {
     public final boolean Vulkan10;
     /** When true, {@link VK11} is supported. */
     public final boolean Vulkan11;
+    /** When true, {@link VK12} is supported. */
+    public final boolean Vulkan12;
     /** When true, {@link EXTAcquireXlibDisplay} is supported. */
     public final boolean VK_EXT_acquire_xlib_display;
     /** When true, {@link EXTDebugReport} is supported. */
@@ -255,6 +257,7 @@ public class VKCapabilitiesInstance {
 
         Vulkan10 = VK10.checkCapsInstance(provider, caps, ext);
         Vulkan11 = VK11.checkCapsInstance(provider, caps, ext);
+        Vulkan12 = ext.contains("Vulkan12");
         VK_EXT_acquire_xlib_display = EXTAcquireXlibDisplay.checkCapsInstance(provider, caps, ext);
         EXTCalibratedTimestamps.checkCapsInstance(provider, caps, deviceExt);
         VK_EXT_debug_report = EXTDebugReport.checkCapsInstance(provider, caps, ext);

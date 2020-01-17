@@ -119,7 +119,7 @@ public class NVCooperativeMatrix {
      * <li>{@link #VK_SCOPE_DEVICE_NV SCOPE_DEVICE_NV} corresponds to SPIR-V {@code Device} scope.</li>
      * <li>{@link #VK_SCOPE_WORKGROUP_NV SCOPE_WORKGROUP_NV} corresponds to SPIR-V {@code Workgroup} scope.</li>
      * <li>{@link #VK_SCOPE_SUBGROUP_NV SCOPE_SUBGROUP_NV} corresponds to SPIR-V {@code Subgroup} scope.</li>
-     * <li>{@link #VK_SCOPE_QUEUE_FAMILY_NV SCOPE_QUEUE_FAMILY_NV} corresponds to SPIR-V {@code QueueFamilyKHR} scope.</li>
+     * <li>{@link #VK_SCOPE_QUEUE_FAMILY_NV SCOPE_QUEUE_FAMILY_NV} corresponds to SPIR-V {@code QueueFamily} scope.</li>
      * </ul>
      * 
      * <p>All enum values match the corresponding SPIR-V value.</p>

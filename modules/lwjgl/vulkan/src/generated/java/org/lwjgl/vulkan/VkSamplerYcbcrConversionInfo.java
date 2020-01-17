@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying Y'CbCr conversion to a sampler or image view.
+ * Structure specifying Y′C<sub>B</sub>C<sub>R</sub> conversion to a sampler or image view.
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

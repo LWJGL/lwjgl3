@@ -16,35 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Specify separate usage flags for the stencil aspect of a depth-stencil image.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure specifies image usages which only apply to the stencil aspect of a depth/stencil format image. When this structure is included in the {@code pNext} chain of {@link VkImageCreateInfo}, the stencil aspect of the image <b>must</b> only be used as specified by {@code stencilUsage}. When this structure is not included in the {@code pNext} chain of {@link VkImageCreateInfo}, the stencil aspect of an image <b>must</b> only be used as specified {@link VkImageCreateInfo}{@code ::usage}. Use of other aspects of an image are unaffected by this structure.</p>
- * 
- * <p>This structure <b>can</b> also be included in the {@code pNext} chain of {@link VkPhysicalDeviceImageFormatInfo2} to query additional capabilities specific to image creation parameter combinations including a separate set of usage flags for the stencil aspect of the image using {@link VK11#vkGetPhysicalDeviceImageFormatProperties2 GetPhysicalDeviceImageFormatProperties2}. When this structure is not included in the {@code pNext} chain of {@link VkPhysicalDeviceImageFormatInfo2} then the implicit value of {@code stencilUsage} matches that of {@link VkPhysicalDeviceImageFormatInfo2}{@code ::usage}.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code stencilUsage} includes {@link VK10#VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT}, it <b>must</b> not include bits other than {@link VK10#VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT} or {@link VK10#VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT IMAGE_USAGE_INPUT_ATTACHMENT_BIT}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTSeparateStencilUsage#VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO_EXT STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO_EXT}</li>
- * <li>{@code stencilUsage} <b>must</b> be a valid combination of {@code VkImageUsageFlagBits} values</li>
- * <li>{@code stencilUsage} <b>must</b> not be 0</li>
- * </ul>
- * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code stencilUsage} &ndash; a bitmask of {@code VkImageUsageFlagBits} describing the intended usage of the stencil aspect of the image.</li>
- * </ul>
+ * See {@link VkImageStencilUsageCreateInfo}.
  * 
  * <h3>Layout</h3>
  * 
@@ -55,34 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkImageUsageFlags stencilUsage;
  * }</code></pre>
  */
-public class VkImageStencilUsageCreateInfoEXT extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        STENCILUSAGE;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        STENCILUSAGE = layout.offsetof(2);
-    }
+public class VkImageStencilUsageCreateInfoEXT extends VkImageStencilUsageCreateInfo {
 
     /**
      * Creates a {@code VkImageStencilUsageCreateInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -91,30 +36,21 @@ public class VkImageStencilUsageCreateInfoEXT extends Struct implements NativeRe
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkImageStencilUsageCreateInfoEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** Returns the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code stencilUsage} field. */
-    @NativeType("VkImageUsageFlags")
-    public int stencilUsage() { return nstencilUsage(address()); }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkImageStencilUsageCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkImageStencilUsageCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code stencilUsage} field. */
+    @Override
     public VkImageStencilUsageCreateInfoEXT stencilUsage(@NativeType("VkImageUsageFlags") int value) { nstencilUsage(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkImageStencilUsageCreateInfoEXT set(
         int sType,
         long pNext,
@@ -282,24 +218,8 @@ public class VkImageStencilUsageCreateInfoEXT extends Struct implements NativeRe
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImageStencilUsageCreateInfoEXT.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkImageStencilUsageCreateInfoEXT.PNEXT); }
-    /** Unsafe version of {@link #stencilUsage}. */
-    public static int nstencilUsage(long struct) { return UNSAFE.getInt(null, struct + VkImageStencilUsageCreateInfoEXT.STENCILUSAGE); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageStencilUsageCreateInfoEXT.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkImageStencilUsageCreateInfoEXT.PNEXT, value); }
-    /** Unsafe version of {@link #stencilUsage(int) stencilUsage}. */
-    public static void nstencilUsage(long struct, int value) { UNSAFE.putInt(null, struct + VkImageStencilUsageCreateInfoEXT.STENCILUSAGE, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkImageStencilUsageCreateInfoEXT} structs. */
-    public static class Buffer extends StructBuffer<VkImageStencilUsageCreateInfoEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkImageStencilUsageCreateInfo.Buffer {
 
         private static final VkImageStencilUsageCreateInfoEXT ELEMENT_FACTORY = VkImageStencilUsageCreateInfoEXT.create(-1L);
 
@@ -313,7 +233,7 @@ public class VkImageStencilUsageCreateInfoEXT extends Struct implements NativeRe
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -334,21 +254,14 @@ public class VkImageStencilUsageCreateInfoEXT extends Struct implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkImageStencilUsageCreateInfoEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkImageStencilUsageCreateInfoEXT.npNext(address()); }
-        /** Returns the value of the {@code stencilUsage} field. */
-        @NativeType("VkImageUsageFlags")
-        public int stencilUsage() { return VkImageStencilUsageCreateInfoEXT.nstencilUsage(address()); }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkImageStencilUsageCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkImageStencilUsageCreateInfoEXT.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkImageStencilUsageCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkImageStencilUsageCreateInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code stencilUsage} field. */
+        @Override
         public VkImageStencilUsageCreateInfoEXT.Buffer stencilUsage(@NativeType("VkImageUsageFlags") int value) { VkImageStencilUsageCreateInfoEXT.nstencilUsage(address(), value); return this; }
 
     }

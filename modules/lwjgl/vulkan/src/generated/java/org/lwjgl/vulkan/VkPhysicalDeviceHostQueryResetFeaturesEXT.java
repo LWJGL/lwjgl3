@@ -16,23 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether queries can be reset from the host.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceHostQueryResetFeaturesEXT} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceFeatures2}, it is filled with values indicating whether the feature is supported. {@link VkPhysicalDeviceHostQueryResetFeaturesEXT} <b>can</b> also be included in the {@code pNext} chain of {@link VkDeviceCreateInfo} to enable features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTHostQueryReset#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES_EXT}</li>
- * </ul>
- * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code hostQueryReset} &ndash; indicates that the implementation supports resetting queries from the host with {@link EXTHostQueryReset#vkResetQueryPoolEXT ResetQueryPoolEXT}.</li>
- * </ul>
+ * See {@link VkPhysicalDeviceHostQueryResetFeatures}.
  * 
  * <h3>Layout</h3>
  * 
@@ -43,34 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 hostQueryReset;
  * }</code></pre>
  */
-public class VkPhysicalDeviceHostQueryResetFeaturesEXT extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        HOSTQUERYRESET;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        HOSTQUERYRESET = layout.offsetof(2);
-    }
+public class VkPhysicalDeviceHostQueryResetFeaturesEXT extends VkPhysicalDeviceHostQueryResetFeatures {
 
     /**
      * Creates a {@code VkPhysicalDeviceHostQueryResetFeaturesEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -79,30 +36,21 @@ public class VkPhysicalDeviceHostQueryResetFeaturesEXT extends Struct implements
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceHostQueryResetFeaturesEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** Returns the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code hostQueryReset} field. */
-    @NativeType("VkBool32")
-    public boolean hostQueryReset() { return nhostQueryReset(address()) != 0; }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkPhysicalDeviceHostQueryResetFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkPhysicalDeviceHostQueryResetFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code hostQueryReset} field. */
+    @Override
     public VkPhysicalDeviceHostQueryResetFeaturesEXT hostQueryReset(@NativeType("VkBool32") boolean value) { nhostQueryReset(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkPhysicalDeviceHostQueryResetFeaturesEXT set(
         int sType,
         long pNext,
@@ -270,24 +218,8 @@ public class VkPhysicalDeviceHostQueryResetFeaturesEXT extends Struct implements
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceHostQueryResetFeaturesEXT.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceHostQueryResetFeaturesEXT.PNEXT); }
-    /** Unsafe version of {@link #hostQueryReset}. */
-    public static int nhostQueryReset(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceHostQueryResetFeaturesEXT.HOSTQUERYRESET); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceHostQueryResetFeaturesEXT.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceHostQueryResetFeaturesEXT.PNEXT, value); }
-    /** Unsafe version of {@link #hostQueryReset(boolean) hostQueryReset}. */
-    public static void nhostQueryReset(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceHostQueryResetFeaturesEXT.HOSTQUERYRESET, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkPhysicalDeviceHostQueryResetFeaturesEXT} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceHostQueryResetFeaturesEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkPhysicalDeviceHostQueryResetFeatures.Buffer {
 
         private static final VkPhysicalDeviceHostQueryResetFeaturesEXT ELEMENT_FACTORY = VkPhysicalDeviceHostQueryResetFeaturesEXT.create(-1L);
 
@@ -301,7 +233,7 @@ public class VkPhysicalDeviceHostQueryResetFeaturesEXT extends Struct implements
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -322,21 +254,14 @@ public class VkPhysicalDeviceHostQueryResetFeaturesEXT extends Struct implements
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkPhysicalDeviceHostQueryResetFeaturesEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkPhysicalDeviceHostQueryResetFeaturesEXT.npNext(address()); }
-        /** Returns the value of the {@code hostQueryReset} field. */
-        @NativeType("VkBool32")
-        public boolean hostQueryReset() { return VkPhysicalDeviceHostQueryResetFeaturesEXT.nhostQueryReset(address()) != 0; }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceHostQueryResetFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceHostQueryResetFeaturesEXT.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkPhysicalDeviceHostQueryResetFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceHostQueryResetFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code hostQueryReset} field. */
+        @Override
         public VkPhysicalDeviceHostQueryResetFeaturesEXT.Buffer hostQueryReset(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceHostQueryResetFeaturesEXT.nhostQueryReset(address(), value ? 1 : 0); return this; }
 
     }

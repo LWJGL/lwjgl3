@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkBufferDeviceAddressInfoKHR}.
+ * See {@link VkBufferDeviceAddressInfo}.
  * 
  * <h3>Layout</h3>
  * 
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBuffer buffer;
  * }</code></pre>
  */
-public class VkBufferDeviceAddressInfoEXT extends VkBufferDeviceAddressInfoKHR {
+public class VkBufferDeviceAddressInfoEXT extends VkBufferDeviceAddressInfo {
 
     /**
      * Creates a {@code VkBufferDeviceAddressInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -219,7 +219,7 @@ public class VkBufferDeviceAddressInfoEXT extends VkBufferDeviceAddressInfoKHR {
     // -----------------------------------
 
     /** An array of {@link VkBufferDeviceAddressInfoEXT} structs. */
-    public static class Buffer extends VkBufferDeviceAddressInfoKHR.Buffer {
+    public static class Buffer extends VkBufferDeviceAddressInfo.Buffer {
 
         private static final VkBufferDeviceAddressInfoEXT ELEMENT_FACTORY = VkBufferDeviceAddressInfoEXT.create(-1L);
 

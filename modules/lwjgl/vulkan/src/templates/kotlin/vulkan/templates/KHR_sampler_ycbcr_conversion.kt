@@ -40,7 +40,7 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
-                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#versions-1.1-promotions">Vulkan 1.1</a></li>
+                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#versions-1.1-promotions">Vulkan 1.1</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -215,18 +215,18 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
         "CreateSamplerYcbcrConversionKHR",
         "See #CreateSamplerYcbcrConversion().",
 
-        VkDevice("device", "the logical device that creates the sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion."),
-        VkSamplerYcbcrConversionCreateInfo.const.p("pCreateInfo", "a pointer to a ##VkSamplerYcbcrConversionCreateInfo structure specifying the requested sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion."),
-        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkSamplerYcbcrConversion.p("pYcbcrConversion", "a pointer to a {@code VkSamplerYcbcrConversion} handle in which the resulting sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion is returned.")
+        VkDevice("device", "the logical device that creates the sampler Y′C<sub>B</sub>C<sub>R</sub> conversion."),
+        VkSamplerYcbcrConversionCreateInfo.const.p("pCreateInfo", "a pointer to a ##VkSamplerYcbcrConversionCreateInfo structure specifying the requested sampler Y′C<sub>B</sub>C<sub>R</sub> conversion."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+        Check(1)..VkSamplerYcbcrConversion.p("pYcbcrConversion", "a pointer to a {@code VkSamplerYcbcrConversion} handle in which the resulting sampler Y′C<sub>B</sub>C<sub>R</sub> conversion is returned.")
     )
 
     void(
         "DestroySamplerYcbcrConversionKHR",
         "See #DestroySamplerYcbcrConversion().",
 
-        VkDevice("device", "the logical device that destroys the Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion."),
+        VkDevice("device", "the logical device that destroys the Y′C<sub>B</sub>C<sub>R</sub> conversion."),
         VkSamplerYcbcrConversion("ycbcrConversion", "the conversion to destroy."),
-        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
     )
 }

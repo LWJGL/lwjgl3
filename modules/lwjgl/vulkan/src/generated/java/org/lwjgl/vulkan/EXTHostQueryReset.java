@@ -13,6 +13,10 @@ import static org.lwjgl.system.JNI.*;
 /**
  * This extension adds a new function to reset queries from the host.
  * 
+ * <h5>Promotion to Vulkan 1.2</h5>
+ * 
+ * <p>All functionality in this extension is included in core Vulkan 1.2, with the EXT suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.</p>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_host_query_reset}</dd>
@@ -27,6 +31,10 @@ import static org.lwjgl.system.JNI.*;
  * <li>Requires Vulkan 1.0</li>
  * <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</li>
  * </ul></dd>
+ * <dt><b>Deprecation state</b></dt>
+ * <dd><ul>
+ * <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#versions-1.2-promotions">Vulkan 1.2</a></li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Bas Nieuwenhuizen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_host_query_reset:%20&amp;body=@BNieuwenhuizen%20">BNieuwenhuizen</a></li>
@@ -35,6 +43,10 @@ import static org.lwjgl.system.JNI.*;
  * <dd>2019-03-06</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
+ * <dt><b>Interactions and External Dependencies</b></dt>
+ * <dd><ul>
+ * <li>Promoted to Vulkan 1.2 Core</li>
+ * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
  * <li>Bas Nieuwenhuizen, Google</li>
@@ -68,40 +80,7 @@ public class EXTHostQueryReset {
     // --- [ vkResetQueryPoolEXT ] ---
 
     /**
-     * Reset queries in a query pool.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <p>To reset a range of queries in a query pool on the host, call:</p>
-     * 
-     * <pre><code>
-     * void vkResetQueryPoolEXT(
-     *     VkDevice                                    device,
-     *     VkQueryPool                                 queryPool,
-     *     uint32_t                                    firstQuery,
-     *     uint32_t                                    queryCount);</code></pre>
-     * 
-     * <h5>Description</h5>
-     * 
-     * <p>This command sets the status of query indices <code>[firstQuery, firstQuery + queryCount - 1]</code> to unavailable.</p>
-     * 
-     * <h5>Valid Usage</h5>
-     * 
-     * <ul>
-     * <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#features-hostQueryReset">hostQueryReset</a> feature <b>must</b> be enabled</li>
-     * <li>{@code firstQuery} <b>must</b> be less than the number of queries in {@code queryPool}</li>
-     * <li>The sum of {@code firstQuery} and {@code queryCount} <b>must</b> be less than or equal to the number of queries in {@code queryPool}</li>
-     * <li>Submitted commands that refer to the range specified by {@code firstQuery} and {@code queryCount} in {@code queryPool} <b>must</b> have completed execution</li>
-     * <li>The range of queries specified by {@code firstQuery} and {@code queryCount} in {@code queryPool} <b>must</b> not be in use by calls to {@link VK10#vkGetQueryPoolResults GetQueryPoolResults} or {@code vkResetQueryPoolEXT} in other threads</li>
-     * </ul>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-     * <li>{@code queryPool} <b>must</b> be a valid {@code VkQueryPool} handle</li>
-     * <li>{@code queryPool} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
-     * </ul>
+     * See {@link VK12#vkResetQueryPool ResetQueryPool}.
      *
      * @param device     the logical device that owns the query pool.
      * @param queryPool  the handle of the query pool managing the queries being reset.

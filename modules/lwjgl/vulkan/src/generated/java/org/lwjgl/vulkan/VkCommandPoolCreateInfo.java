@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code flags} &ndash; a bitmask of {@code VkCommandPoolCreateFlagBits} indicating usage behavior for the pool and command buffers allocated from it.</li>
- * <li>{@code queueFamilyIndex} &ndash; designates a queue family as described in section <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#devsandqueues-queueprops">Queue Family Properties</a>. All command buffers allocated from this command pool <b>must</b> be submitted on queues from the same queue family.</li>
+ * <li>{@code queueFamilyIndex} &ndash; designates a queue family as described in section <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#devsandqueues-queueprops">Queue Family Properties</a>. All command buffers allocated from this command pool <b>must</b> be submitted on queues from the same queue family.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

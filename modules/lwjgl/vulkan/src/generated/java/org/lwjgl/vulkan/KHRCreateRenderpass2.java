@@ -29,6 +29,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>The details of these mappings are explained fully in the new structures.</p>
  * 
+ * <h5>Promotion to Vulkan 1.2</h5>
+ * 
+ * <p>All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.</p>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_create_renderpass2}</dd>
@@ -44,12 +48,20 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>Requires {@link KHRMultiview VK_KHR_multiview}</li>
  * <li>Requires {@link KHRMaintenance2 VK_KHR_maintenance2}</li>
  * </ul></dd>
+ * <dt><b>Deprecation state</b></dt>
+ * <dd><ul>
+ * <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#versions-1.2-promotions">Vulkan 1.2</a></li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_create_renderpass2:%20&amp;body=@tobias%20">tobias</a></li>
  * </ul></dd>
  * <dt>Last Modified Date</dt>
  * <dd>2018-02-07</dd>
+ * <dt><b>Interactions and External Dependencies</b></dt>
+ * <dd><ul>
+ * <li>Promoted to Vulkan 1.2 Core</li>
+ * </ul></dd>
  * <dt>Contributors</dt>
  * <dd><ul>
  * <li>Tobias Hector</li>
@@ -109,64 +121,22 @@ public class KHRCreateRenderpass2 {
         long __functionAddress = device.getCapabilities().vkCreateRenderPass2KHR;
         if (CHECKS) {
             check(__functionAddress);
-            VkRenderPassCreateInfo2KHR.validate(pCreateInfo);
+            VkRenderPassCreateInfo2.validate(pCreateInfo);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPPPPI(device.address(), pCreateInfo, pAllocator, pRenderPass, __functionAddress);
     }
 
     /**
-     * Create a new render pass object.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <p>To create a render pass, call:</p>
-     * 
-     * <pre><code>
-     * VkResult vkCreateRenderPass2KHR(
-     *     VkDevice                                    device,
-     *     const VkRenderPassCreateInfo2KHR*           pCreateInfo,
-     *     const VkAllocationCallbacks*                pAllocator,
-     *     VkRenderPass*                               pRenderPass);</code></pre>
-     * 
-     * <h5>Description</h5>
-     * 
-     * <p>This command is functionally identical to {@link VK10#vkCreateRenderPass CreateRenderPass}, but includes extensible sub-structures that include {@code sType} and {@code pNext} parameters, allowing them to be more easily extended.</p>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-     * <li>{@code pCreateInfo} <b>must</b> be a valid pointer to a valid {@link VkRenderPassCreateInfo2KHR} structure</li>
-     * <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid {@link VkAllocationCallbacks} structure</li>
-     * <li>{@code pRenderPass} <b>must</b> be a valid pointer to a {@code VkRenderPass} handle</li>
-     * </ul>
-     * 
-     * <h5>Return Codes</h5>
-     * 
-     * <dl>
-     * <dt>On success, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link VK10#VK_SUCCESS SUCCESS}</li>
-     * </ul></dd>
-     * <dt>On failure, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY}</li>
-     * <li>{@link VK10#VK_ERROR_OUT_OF_DEVICE_MEMORY ERROR_OUT_OF_DEVICE_MEMORY}</li>
-     * </ul></dd>
-     * </dl>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link VkAllocationCallbacks}, {@link VkRenderPassCreateInfo2KHR}</p>
+     * See {@link VK12#vkCreateRenderPass2 CreateRenderPass2}.
      *
      * @param device      the logical device that creates the render pass.
-     * @param pCreateInfo a pointer to a {@link VkRenderPassCreateInfo2KHR} structure describing the parameters of the render pass.
-     * @param pAllocator  controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
+     * @param pCreateInfo a pointer to a {@link VkRenderPassCreateInfo2} structure describing the parameters of the render pass.
+     * @param pAllocator  controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      * @param pRenderPass a pointer to a {@code VkRenderPass} handle in which the resulting render pass object is returned.
      */
     @NativeType("VkResult")
-    public static int vkCreateRenderPass2KHR(VkDevice device, @NativeType("VkRenderPassCreateInfo2KHR const *") VkRenderPassCreateInfo2KHR pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkRenderPass *") LongBuffer pRenderPass) {
+    public static int vkCreateRenderPass2KHR(VkDevice device, @NativeType("VkRenderPassCreateInfo2 const *") VkRenderPassCreateInfo2 pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkRenderPass *") LongBuffer pRenderPass) {
         if (CHECKS) {
             check(pRenderPass, 1);
         }
@@ -186,71 +156,13 @@ public class KHRCreateRenderpass2 {
     }
 
     /**
-     * Begin a new render pass.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <p>Alternatively to begin a render pass, call:</p>
-     * 
-     * <pre><code>
-     * void vkCmdBeginRenderPass2KHR(
-     *     VkCommandBuffer                             commandBuffer,
-     *     const VkRenderPassBeginInfo*                pRenderPassBegin,
-     *     const VkSubpassBeginInfoKHR*                pSubpassBeginInfo);</code></pre>
-     * 
-     * <h5>Description</h5>
-     * 
-     * <p>After beginning a render pass instance, the command buffer is ready to record the commands for the first subpass of that render pass.</p>
-     * 
-     * <h5>Valid Usage</h5>
-     * 
-     * <ul>
-     * <li>Both the {@code framebuffer} and {@code renderPass} members of {@code pRenderPassBegin} <b>must</b> have been created on the same {@code VkDevice} that {@code commandBuffer} was allocated on</li>
-     * <li>If any of the {@code initialLayout} or {@code finalLayout} member of the {@link VkAttachmentDescription} structures or the {@code layout} member of the {@link VkAttachmentReference} structures specified when creating the render pass specified in the {@code renderPass} member of {@code pRenderPassBegin} is {@link VK10#VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL} then the corresponding attachment image view of the framebuffer specified in the {@code framebuffer} member of {@code pRenderPassBegin} <b>must</b> have been created with a {@code usage} value including {@link VK10#VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT IMAGE_USAGE_COLOR_ATTACHMENT_BIT}</li>
-     * <li>If any of the {@code initialLayout} or {@code finalLayout} member of the {@link VkAttachmentDescription} structures or the {@code layout} member of the {@link VkAttachmentReference} structures specified when creating the render pass specified in the {@code renderPass} member of {@code pRenderPassBegin} is {@link VK11#VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL}, {@link VK11#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL}, {@link VK10#VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL}, or {@link VK10#VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL} then the corresponding attachment image view of the framebuffer specified in the {@code framebuffer} member of {@code pRenderPassBegin} <b>must</b> have been created with a {@code usage} value including {@link VK10#VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT}</li>
-     * <li>If any of the {@code initialLayout} or {@code finalLayout} member of the {@link VkAttachmentDescription} structures or the {@code layout} member of the {@link VkAttachmentReference} structures specified when creating the render pass specified in the {@code renderPass} member of {@code pRenderPassBegin} is {@link VK10#VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL} then the corresponding attachment image view of the framebuffer specified in the {@code framebuffer} member of {@code pRenderPassBegin} <b>must</b> have been created with a {@code usage} value including {@link VK10#VK_IMAGE_USAGE_SAMPLED_BIT IMAGE_USAGE_SAMPLED_BIT} or {@link VK10#VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT IMAGE_USAGE_INPUT_ATTACHMENT_BIT}</li>
-     * <li>If any of the {@code initialLayout} or {@code finalLayout} member of the {@link VkAttachmentDescription} structures or the {@code layout} member of the {@link VkAttachmentReference} structures specified when creating the render pass specified in the {@code renderPass} member of {@code pRenderPassBegin} is {@link VK10#VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL} then the corresponding attachment image view of the framebuffer specified in the {@code framebuffer} member of {@code pRenderPassBegin} <b>must</b> have been created with a {@code usage} value including {@link VK10#VK_IMAGE_USAGE_TRANSFER_SRC_BIT IMAGE_USAGE_TRANSFER_SRC_BIT}</li>
-     * <li>If any of the {@code initialLayout} or {@code finalLayout} member of the {@link VkAttachmentDescription} structures or the {@code layout} member of the {@link VkAttachmentReference} structures specified when creating the render pass specified in the {@code renderPass} member of {@code pRenderPassBegin} is {@link VK10#VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL} then the corresponding attachment image view of the framebuffer specified in the {@code framebuffer} member of {@code pRenderPassBegin} <b>must</b> have been created with a {@code usage} value including {@link VK10#VK_IMAGE_USAGE_TRANSFER_DST_BIT IMAGE_USAGE_TRANSFER_DST_BIT}</li>
-     * <li>If any of the {@code initialLayout} members of the {@link VkAttachmentDescription} structures specified when creating the render pass specified in the {@code renderPass} member of {@code pRenderPassBegin} is not {@link VK10#VK_IMAGE_LAYOUT_UNDEFINED IMAGE_LAYOUT_UNDEFINED}, then each such {@code initialLayout} <b>must</b> be equal to the current layout of the corresponding attachment image subresource of the framebuffer specified in the {@code framebuffer} member of {@code pRenderPassBegin}</li>
-     * <li>The {@code srcStageMask} and {@code dstStageMask} members of any element of the {@code pDependencies} member of {@link VkRenderPassCreateInfo} used to create {@code renderPass} <b>must</b> be supported by the capabilities of the queue family identified by the {@code queueFamilyIndex} member of the {@link VkCommandPoolCreateInfo} used to create the command pool which {@code commandBuffer} was allocated from</li>
-     * <li>For any attachment in {@code framebuffer} that is used by {@code renderPass} and is bound to memory locations that are also bound to another attachment used by {@code renderPass}, and if at least one of those uses causes either attachment to be written to, both attachments <b>must</b> have had the {@link VK10#VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT} set</li>
-     * </ul>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-     * <li>{@code pRenderPassBegin} <b>must</b> be a valid pointer to a valid {@link VkRenderPassBeginInfo} structure</li>
-     * <li>{@code pSubpassBeginInfo} <b>must</b> be a valid pointer to a valid {@link VkSubpassBeginInfoKHR} structure</li>
-     * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
-     * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
-     * <li>This command <b>must</b> only be called outside of a render pass instance</li>
-     * <li>{@code commandBuffer} <b>must</b> be a primary {@code VkCommandBuffer}</li>
-     * </ul>
-     * 
-     * <h5>Host Synchronization</h5>
-     * 
-     * <ul>
-     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
-     * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
-     * </ul>
-     * 
-     * <h5>Command Properties</h5>
-     * 
-     * <table class="lwjgl">
-     * <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-pipeline-stages-types">Pipeline Type</a></th></tr></thead>
-     * <tbody><tr><td>Primary</td><td>Outside</td><td>Graphics</td><td>Graphics</td></tr></tbody>
-     * </table>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link VkRenderPassBeginInfo}, {@link VkSubpassBeginInfoKHR}</p>
+     * See {@link VK12#vkCmdBeginRenderPass2 CmdBeginRenderPass2}.
      *
      * @param commandBuffer     the command buffer in which to record the command.
      * @param pRenderPassBegin  a pointer to a {@link VkRenderPassBeginInfo} structure specifying the render pass to begin an instance of, and the framebuffer the instance uses.
-     * @param pSubpassBeginInfo a pointer to a {@link VkSubpassBeginInfoKHR} structure containing information about the subpass which is about to begin rendering.
+     * @param pSubpassBeginInfo a pointer to a {@link VkSubpassBeginInfo} structure containing information about the subpass which is about to begin rendering.
      */
-    public static void vkCmdBeginRenderPass2KHR(VkCommandBuffer commandBuffer, @NativeType("VkRenderPassBeginInfo const *") VkRenderPassBeginInfo pRenderPassBegin, @NativeType("VkSubpassBeginInfoKHR const *") VkSubpassBeginInfoKHR pSubpassBeginInfo) {
+    public static void vkCmdBeginRenderPass2KHR(VkCommandBuffer commandBuffer, @NativeType("VkRenderPassBeginInfo const *") VkRenderPassBeginInfo pRenderPassBegin, @NativeType("VkSubpassBeginInfo const *") VkSubpassBeginInfo pSubpassBeginInfo) {
         nvkCmdBeginRenderPass2KHR(commandBuffer, pRenderPassBegin.address(), pSubpassBeginInfo.address());
     }
 
@@ -266,64 +178,13 @@ public class KHRCreateRenderpass2 {
     }
 
     /**
-     * Transition to the next subpass of a render pass.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <p>To transition to the next subpass in the render pass instance after recording the commands for a subpass, call:</p>
-     * 
-     * <pre><code>
-     * void vkCmdNextSubpass2KHR(
-     *     VkCommandBuffer                             commandBuffer,
-     *     const VkSubpassBeginInfoKHR*                pSubpassBeginInfo,
-     *     const VkSubpassEndInfoKHR*                  pSubpassEndInfo);</code></pre>
-     * 
-     * <h5>Description</h5>
-     * 
-     * <p>{@code vkCmdNextSubpass2KHR} is semantically identical to {@link VK10#vkCmdNextSubpass CmdNextSubpass}, except that it is extensible, and that {@code contents} is provided as part of an extensible structure instead of as a flat parameter.</p>
-     * 
-     * <h5>Valid Usage</h5>
-     * 
-     * <ul>
-     * <li>The current subpass index <b>must</b> be less than the number of subpasses in the render pass minus one</li>
-     * <li>This command <b>must</b> not be recorded when transform feedback is active</li>
-     * </ul>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-     * <li>{@code pSubpassBeginInfo} <b>must</b> be a valid pointer to a valid {@link VkSubpassBeginInfoKHR} structure</li>
-     * <li>{@code pSubpassEndInfo} <b>must</b> be a valid pointer to a valid {@link VkSubpassEndInfoKHR} structure</li>
-     * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
-     * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
-     * <li>This command <b>must</b> only be called inside of a render pass instance</li>
-     * <li>{@code commandBuffer} <b>must</b> be a primary {@code VkCommandBuffer}</li>
-     * </ul>
-     * 
-     * <h5>Host Synchronization</h5>
-     * 
-     * <ul>
-     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
-     * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
-     * </ul>
-     * 
-     * <h5>Command Properties</h5>
-     * 
-     * <table class="lwjgl">
-     * <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-pipeline-stages-types">Pipeline Type</a></th></tr></thead>
-     * <tbody><tr><td>Primary</td><td>Inside</td><td>Graphics</td><td>Graphics</td></tr></tbody>
-     * </table>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link VkSubpassBeginInfoKHR}, {@link VkSubpassEndInfoKHR}</p>
+     * See {@link VK12#vkCmdNextSubpass2 CmdNextSubpass2}.
      *
      * @param commandBuffer     the command buffer in which to record the command.
-     * @param pSubpassBeginInfo a pointer to a {@link VkSubpassBeginInfoKHR} structure containing information about the subpass which is about to begin rendering.
-     * @param pSubpassEndInfo   a pointer to a {@link VkSubpassEndInfoKHR} structure containing information about how the previous subpass will be ended.
+     * @param pSubpassBeginInfo a pointer to a {@link VkSubpassBeginInfo} structure containing information about the subpass which is about to begin rendering.
+     * @param pSubpassEndInfo   a pointer to a {@link VkSubpassEndInfo} structure containing information about how the previous subpass will be ended.
      */
-    public static void vkCmdNextSubpass2KHR(VkCommandBuffer commandBuffer, @NativeType("VkSubpassBeginInfoKHR const *") VkSubpassBeginInfoKHR pSubpassBeginInfo, @NativeType("VkSubpassEndInfoKHR const *") VkSubpassEndInfoKHR pSubpassEndInfo) {
+    public static void vkCmdNextSubpass2KHR(VkCommandBuffer commandBuffer, @NativeType("VkSubpassBeginInfo const *") VkSubpassBeginInfo pSubpassBeginInfo, @NativeType("VkSubpassEndInfo const *") VkSubpassEndInfo pSubpassEndInfo) {
         nvkCmdNextSubpass2KHR(commandBuffer, pSubpassBeginInfo.address(), pSubpassEndInfo.address());
     }
 
@@ -339,72 +200,23 @@ public class KHRCreateRenderpass2 {
     }
 
     /**
-     * End the current render pass.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <p>To record a command to end a render pass instance after recording the commands for the last subpass, call:</p>
-     * 
-     * <pre><code>
-     * void vkCmdEndRenderPass2KHR(
-     *     VkCommandBuffer                             commandBuffer,
-     *     const VkSubpassEndInfoKHR*                  pSubpassEndInfo);</code></pre>
-     * 
-     * <h5>Description</h5>
-     * 
-     * <p>{@code vkCmdEndRenderPass2KHR} is semantically identical to {@link VK10#vkCmdEndRenderPass CmdEndRenderPass}, except that it is extensible.</p>
-     * 
-     * <h5>Valid Usage</h5>
-     * 
-     * <ul>
-     * <li>The current subpass index <b>must</b> be equal to the number of subpasses in the render pass minus one</li>
-     * <li>This command <b>must</b> not be recorded when transform feedback is active</li>
-     * </ul>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-     * <li>{@code pSubpassEndInfo} <b>must</b> be a valid pointer to a valid {@link VkSubpassEndInfoKHR} structure</li>
-     * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
-     * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
-     * <li>This command <b>must</b> only be called inside of a render pass instance</li>
-     * <li>{@code commandBuffer} <b>must</b> be a primary {@code VkCommandBuffer}</li>
-     * </ul>
-     * 
-     * <h5>Host Synchronization</h5>
-     * 
-     * <ul>
-     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
-     * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
-     * </ul>
-     * 
-     * <h5>Command Properties</h5>
-     * 
-     * <table class="lwjgl">
-     * <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-pipeline-stages-types">Pipeline Type</a></th></tr></thead>
-     * <tbody><tr><td>Primary</td><td>Inside</td><td>Graphics</td><td>Graphics</td></tr></tbody>
-     * </table>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link VkSubpassEndInfoKHR}</p>
+     * See {@link VK12#vkCmdEndRenderPass2 CmdEndRenderPass2}.
      *
      * @param commandBuffer   the command buffer in which to end the current render pass instance.
-     * @param pSubpassEndInfo a pointer to a {@link VkSubpassEndInfoKHR} structure containing information about how the previous subpass will be ended.
+     * @param pSubpassEndInfo a pointer to a {@link VkSubpassEndInfo} structure containing information about how the previous subpass will be ended.
      */
-    public static void vkCmdEndRenderPass2KHR(VkCommandBuffer commandBuffer, @NativeType("VkSubpassEndInfoKHR const *") VkSubpassEndInfoKHR pSubpassEndInfo) {
+    public static void vkCmdEndRenderPass2KHR(VkCommandBuffer commandBuffer, @NativeType("VkSubpassEndInfo const *") VkSubpassEndInfo pSubpassEndInfo) {
         nvkCmdEndRenderPass2KHR(commandBuffer, pSubpassEndInfo.address());
     }
 
     /** Array version of: {@link #vkCreateRenderPass2KHR CreateRenderPass2KHR} */
     @NativeType("VkResult")
-    public static int vkCreateRenderPass2KHR(VkDevice device, @NativeType("VkRenderPassCreateInfo2KHR const *") VkRenderPassCreateInfo2KHR pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkRenderPass *") long[] pRenderPass) {
+    public static int vkCreateRenderPass2KHR(VkDevice device, @NativeType("VkRenderPassCreateInfo2 const *") VkRenderPassCreateInfo2 pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkRenderPass *") long[] pRenderPass) {
         long __functionAddress = device.getCapabilities().vkCreateRenderPass2KHR;
         if (CHECKS) {
             check(__functionAddress);
             check(pRenderPass, 1);
-            VkRenderPassCreateInfo2KHR.validate(pCreateInfo.address());
+            VkRenderPassCreateInfo2.validate(pCreateInfo.address());
             if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pRenderPass, __functionAddress);

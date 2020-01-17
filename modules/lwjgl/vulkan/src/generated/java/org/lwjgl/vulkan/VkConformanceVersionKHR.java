@@ -16,16 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure containing the conformance test suite version the implementation is compliant with.
- * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code major} &ndash; the major version number of the conformance test suite.</li>
- * <li>{@code minor} &ndash; the minor version number of the conformance test suite.</li>
- * <li>{@code subminor} &ndash; the subminor version number of the conformance test suite.</li>
- * <li>{@code patch} &ndash; the patch version number of the conformance test suite.</li>
- * </ul>
+ * See {@link VkConformanceVersion}.
  * 
  * <h3>Layout</h3>
  * 
@@ -37,37 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint8_t patch;
  * }</code></pre>
  */
-public class VkConformanceVersionKHR extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        MAJOR,
-        MINOR,
-        SUBMINOR,
-        PATCH;
-
-    static {
-        Layout layout = __struct(
-            __member(1),
-            __member(1),
-            __member(1),
-            __member(1)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        MAJOR = layout.offsetof(0);
-        MINOR = layout.offsetof(1);
-        SUBMINOR = layout.offsetof(2);
-        PATCH = layout.offsetof(3);
-    }
+public class VkConformanceVersionKHR extends VkConformanceVersion {
 
     /**
      * Creates a {@code VkConformanceVersionKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -76,35 +37,24 @@ public class VkConformanceVersionKHR extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkConformanceVersionKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** Returns the value of the {@code major} field. */
-    @NativeType("uint8_t")
-    public byte major() { return nmajor(address()); }
-    /** Returns the value of the {@code minor} field. */
-    @NativeType("uint8_t")
-    public byte minor() { return nminor(address()); }
-    /** Returns the value of the {@code subminor} field. */
-    @NativeType("uint8_t")
-    public byte subminor() { return nsubminor(address()); }
-    /** Returns the value of the {@code patch} field. */
-    @NativeType("uint8_t")
-    public byte patch() { return npatch(address()); }
-
     /** Sets the specified value to the {@code major} field. */
+    @Override
     public VkConformanceVersionKHR major(@NativeType("uint8_t") byte value) { nmajor(address(), value); return this; }
     /** Sets the specified value to the {@code minor} field. */
+    @Override
     public VkConformanceVersionKHR minor(@NativeType("uint8_t") byte value) { nminor(address(), value); return this; }
     /** Sets the specified value to the {@code subminor} field. */
+    @Override
     public VkConformanceVersionKHR subminor(@NativeType("uint8_t") byte value) { nsubminor(address(), value); return this; }
     /** Sets the specified value to the {@code patch} field. */
+    @Override
     public VkConformanceVersionKHR patch(@NativeType("uint8_t") byte value) { npatch(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkConformanceVersionKHR set(
         byte major,
         byte minor,
@@ -274,28 +224,8 @@ public class VkConformanceVersionKHR extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #major}. */
-    public static byte nmajor(long struct) { return UNSAFE.getByte(null, struct + VkConformanceVersionKHR.MAJOR); }
-    /** Unsafe version of {@link #minor}. */
-    public static byte nminor(long struct) { return UNSAFE.getByte(null, struct + VkConformanceVersionKHR.MINOR); }
-    /** Unsafe version of {@link #subminor}. */
-    public static byte nsubminor(long struct) { return UNSAFE.getByte(null, struct + VkConformanceVersionKHR.SUBMINOR); }
-    /** Unsafe version of {@link #patch}. */
-    public static byte npatch(long struct) { return UNSAFE.getByte(null, struct + VkConformanceVersionKHR.PATCH); }
-
-    /** Unsafe version of {@link #major(byte) major}. */
-    public static void nmajor(long struct, byte value) { UNSAFE.putByte(null, struct + VkConformanceVersionKHR.MAJOR, value); }
-    /** Unsafe version of {@link #minor(byte) minor}. */
-    public static void nminor(long struct, byte value) { UNSAFE.putByte(null, struct + VkConformanceVersionKHR.MINOR, value); }
-    /** Unsafe version of {@link #subminor(byte) subminor}. */
-    public static void nsubminor(long struct, byte value) { UNSAFE.putByte(null, struct + VkConformanceVersionKHR.SUBMINOR, value); }
-    /** Unsafe version of {@link #patch(byte) patch}. */
-    public static void npatch(long struct, byte value) { UNSAFE.putByte(null, struct + VkConformanceVersionKHR.PATCH, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkConformanceVersionKHR} structs. */
-    public static class Buffer extends StructBuffer<VkConformanceVersionKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkConformanceVersion.Buffer {
 
         private static final VkConformanceVersionKHR ELEMENT_FACTORY = VkConformanceVersionKHR.create(-1L);
 
@@ -309,7 +239,7 @@ public class VkConformanceVersionKHR extends Struct implements NativeResource {
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -330,26 +260,17 @@ public class VkConformanceVersionKHR extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code major} field. */
-        @NativeType("uint8_t")
-        public byte major() { return VkConformanceVersionKHR.nmajor(address()); }
-        /** Returns the value of the {@code minor} field. */
-        @NativeType("uint8_t")
-        public byte minor() { return VkConformanceVersionKHR.nminor(address()); }
-        /** Returns the value of the {@code subminor} field. */
-        @NativeType("uint8_t")
-        public byte subminor() { return VkConformanceVersionKHR.nsubminor(address()); }
-        /** Returns the value of the {@code patch} field. */
-        @NativeType("uint8_t")
-        public byte patch() { return VkConformanceVersionKHR.npatch(address()); }
-
         /** Sets the specified value to the {@code major} field. */
+        @Override
         public VkConformanceVersionKHR.Buffer major(@NativeType("uint8_t") byte value) { VkConformanceVersionKHR.nmajor(address(), value); return this; }
         /** Sets the specified value to the {@code minor} field. */
+        @Override
         public VkConformanceVersionKHR.Buffer minor(@NativeType("uint8_t") byte value) { VkConformanceVersionKHR.nminor(address(), value); return this; }
         /** Sets the specified value to the {@code subminor} field. */
+        @Override
         public VkConformanceVersionKHR.Buffer subminor(@NativeType("uint8_t") byte value) { VkConformanceVersionKHR.nsubminor(address(), value); return this; }
         /** Sets the specified value to the {@code patch} field. */
+        @Override
         public VkConformanceVersionKHR.Buffer patch(@NativeType("uint8_t") byte value) { VkConformanceVersionKHR.npatch(address(), value); return this; }
 
     }

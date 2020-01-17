@@ -15,6 +15,9 @@ val KHR_imageless_framebuffer = "KHRImagelessFramebuffer".nativeClassVK("KHR_ima
 
         Framebuffers are now created with a small amount of additional metadata about the image views that will be used in ##VkFramebufferAttachmentsCreateInfoKHR, and the actual image views are provided at render pass begin time via ##VkRenderPassAttachmentBeginInfoKHR.
 
+        <h5>Promotion to Vulkan 1.2</h5>
+        All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_imageless_framebuffer}</dd>
@@ -35,6 +38,11 @@ val KHR_imageless_framebuffer = "KHRImagelessFramebuffer".nativeClassVK("KHR_ima
                 <li>Requires {@link KHRImageFormatList VK_KHR_image_format_list}</li>
             </ul></dd>
 
+            <dt><b>Deprecation state</b></dt>
+            <dd><ul>
+                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#versions-1.2-promotions">Vulkan 1.2</a></li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_imageless_framebuffer:%20&amp;body=@tobias%20">tobias</a></li>
@@ -42,6 +50,11 @@ val KHR_imageless_framebuffer = "KHRImagelessFramebuffer".nativeClassVK("KHR_ima
 
             <dt>Last Modified Date</dt>
             <dd>2018-12-14</dd>
+
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
+                <li>Promoted to Vulkan 1.2 Core</li>
+            </ul></dd>
 
             <dt>Contributors</dt>
             <dd><ul>

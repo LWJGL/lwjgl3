@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code coverageReductionMode} &ndash; indicates whether the implementation supports coverage reduction modes. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#fragops-coverage-reduction">Coverage Reduction</a>.</li>
+ * <li>{@code coverageReductionMode} &ndash; indicates whether the implementation supports coverage reduction modes. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-coverage-reduction">Coverage Reduction</a>.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

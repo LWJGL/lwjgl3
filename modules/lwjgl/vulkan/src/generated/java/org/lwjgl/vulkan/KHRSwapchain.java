@@ -278,7 +278,7 @@ public class KHRSwapchain {
      *
      * @param device      the device to create the swapchain for.
      * @param pCreateInfo a pointer to a {@link VkSwapchainCreateInfoKHR} structure specifying the parameters of the created swapchain.
-     * @param pAllocator  the allocator used for host memory allocated for the swapchain object when there is no more specific allocator available (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a>).
+     * @param pAllocator  the allocator used for host memory allocated for the swapchain object when there is no more specific allocator available (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a>).
      * @param pSwapchain  a pointer to a {@code VkSwapchainKHR} handle in which the created swapchain object will be returned.
      */
     @NativeType("VkResult")
@@ -351,7 +351,7 @@ public class KHRSwapchain {
      *
      * @param device     the {@code VkDevice} associated with {@code swapchain}.
      * @param swapchain  the swapchain to destroy.
-     * @param pAllocator the allocator used for host memory allocated for the swapchain object when there is no more specific allocator available (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a>).
+     * @param pAllocator the allocator used for host memory allocated for the swapchain object when there is no more specific allocator available (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a>).
      */
     public static void vkDestroySwapchainKHR(VkDevice device, @NativeType("VkSwapchainKHR") long swapchain, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
         nvkDestroySwapchainKHR(device, swapchain, memAddressSafe(pAllocator));
@@ -465,7 +465,7 @@ public class KHRSwapchain {
      * <li>If {@code fence} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE} it <b>must</b> be unsignaled and <b>must</b> not be associated with any other queue command that has not yet completed execution on that queue</li>
      * <li>{@code semaphore} and {@code fence} <b>must</b> not both be equal to {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
      * <li>If the number of currently acquired images is greater than the difference between the number of images in {@code swapchain} and the value of {@link VkSurfaceCapabilitiesKHR}{@code ::minImageCount} as returned by a call to {@link KHRGetSurfaceCapabilities2#vkGetPhysicalDeviceSurfaceCapabilities2KHR GetPhysicalDeviceSurfaceCapabilities2KHR} with the {@code surface} used to create {@code swapchain}, {@code timeout} <b>must</b> not be {@code UINT64_MAX}</li>
-     * <li>{@code semaphore} <b>must</b> have a {@code VkSemaphoreTypeKHR} of {@link KHRTimelineSemaphore#VK_SEMAPHORE_TYPE_BINARY_KHR SEMAPHORE_TYPE_BINARY_KHR}</li>
+     * <li>{@code semaphore} <b>must</b> have a {@code VkSemaphoreType} of {@link VK12#VK_SEMAPHORE_TYPE_BINARY SEMAPHORE_TYPE_BINARY}</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -562,8 +562,8 @@ public class KHRSwapchain {
      * <li>Each element of {@code pSwapchains} member of {@code pPresentInfo} <b>must</b> be a swapchain that is created for a surface for which presentation is supported from {@code queue} as determined using a call to {@code vkGetPhysicalDeviceSurfaceSupportKHR}</li>
      * <li>If more than one member of {@code pSwapchains} was created from a display surface, all display surfaces referenced that refer to the same display <b>must</b> use the same display mode</li>
      * <li>When a semaphore wait operation referring to a binary semaphore defined by the elements of the {@code pWaitSemaphores} member of {@code pPresentInfo} executes on {@code queue}, there <b>must</b> be no other queues waiting on the same semaphore.</li>
-     * <li>All elements of the {@code pWaitSemaphores} member of {@code pPresentInfo} <b>must</b> be semaphores that are signaled, or have <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-semaphores-signaling">semaphore signal operations</a> previously submitted for execution.</li>
-     * <li>All elements of the {@code pWaitSemaphores} member of {@code pPresentInfo} <b>must</b> be created with a {@code VkSemaphoreTypeKHR} of {@link KHRTimelineSemaphore#VK_SEMAPHORE_TYPE_BINARY_KHR SEMAPHORE_TYPE_BINARY_KHR}.</li>
+     * <li>All elements of the {@code pWaitSemaphores} member of {@code pPresentInfo} <b>must</b> be semaphores that are signaled, or have <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-semaphores-signaling">semaphore signal operations</a> previously submitted for execution.</li>
+     * <li>All elements of the {@code pWaitSemaphores} member of {@code pPresentInfo} <b>must</b> be created with a {@code VkSemaphoreType} of {@link VK12#VK_SEMAPHORE_TYPE_BINARY SEMAPHORE_TYPE_BINARY}.</li>
      * <li>All elements of the {@code pWaitSemaphores} member of {@code pPresentInfo} <b>must</b> reference a semaphore signal operation that has been submitted for execution and any semaphore signal operations on which it depends (if any) <b>must</b> have also been submitted for execution.</li>
      * </ul>
      * 
@@ -597,7 +597,7 @@ public class KHRSwapchain {
      * <h5>Command Properties</h5>
      * 
      * <table class="lwjgl">
-     * <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-pipeline-stages-types">Pipeline Type</a></th></tr></thead>
+     * <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-pipeline-stages-types">Pipeline Type</a></th></tr></thead>
      * <tbody><tr><td>-</td><td>-</td><td>Any</td><td>-</td></tr></tbody>
      * </table>
      * 

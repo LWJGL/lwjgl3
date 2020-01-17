@@ -17,27 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of images that will be used with a framebuffer.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRImagelessFramebuffer#VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO_KHR STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO_KHR}</li>
- * <li>If {@code attachmentImageInfoCount} is not 0, {@code pAttachmentImageInfos} <b>must</b> be a valid pointer to an array of {@code attachmentImageInfoCount} valid {@link VkFramebufferAttachmentImageInfoKHR} structures</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkFramebufferAttachmentImageInfoKHR}</p>
- * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code attachmentImageInfoCount} &ndash; the number of attachments being described.</li>
- * <li>{@code pAttachmentImageInfos} &ndash; a pointer to an array of {@link VkFramebufferAttachmentImageInfoKHR} instances, each of which describes a number of parameters of the corresponding attachment in a render pass instance.</li>
- * </ul>
+ * See {@link VkFramebufferAttachmentsCreateInfo}.
  * 
  * <h3>Layout</h3>
  * 
@@ -46,40 +26,10 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t attachmentImageInfoCount;
- *     {@link VkFramebufferAttachmentImageInfoKHR VkFramebufferAttachmentImageInfoKHR} const * pAttachmentImageInfos;
+ *     {@link VkFramebufferAttachmentImageInfo VkFramebufferAttachmentImageInfo} const * pAttachmentImageInfos;
  * }</code></pre>
  */
-public class VkFramebufferAttachmentsCreateInfoKHR extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        ATTACHMENTIMAGEINFOCOUNT,
-        PATTACHMENTIMAGEINFOS;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4),
-            __member(POINTER_SIZE)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        ATTACHMENTIMAGEINFOCOUNT = layout.offsetof(2);
-        PATTACHMENTIMAGEINFOS = layout.offsetof(3);
-    }
+public class VkFramebufferAttachmentsCreateInfoKHR extends VkFramebufferAttachmentsCreateInfo {
 
     /**
      * Creates a {@code VkFramebufferAttachmentsCreateInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -88,38 +38,25 @@ public class VkFramebufferAttachmentsCreateInfoKHR extends Struct implements Nat
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkFramebufferAttachmentsCreateInfoKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** Returns the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code attachmentImageInfoCount} field. */
-    @NativeType("uint32_t")
-    public int attachmentImageInfoCount() { return nattachmentImageInfoCount(address()); }
-    /** Returns a {@link VkFramebufferAttachmentImageInfoKHR.Buffer} view of the struct array pointed to by the {@code pAttachmentImageInfos} field. */
-    @Nullable
-    @NativeType("VkFramebufferAttachmentImageInfoKHR const *")
-    public VkFramebufferAttachmentImageInfoKHR.Buffer pAttachmentImageInfos() { return npAttachmentImageInfos(address()); }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkFramebufferAttachmentsCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkFramebufferAttachmentsCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link VkFramebufferAttachmentImageInfoKHR.Buffer} to the {@code pAttachmentImageInfos} field. */
-    public VkFramebufferAttachmentsCreateInfoKHR pAttachmentImageInfos(@Nullable @NativeType("VkFramebufferAttachmentImageInfoKHR const *") VkFramebufferAttachmentImageInfoKHR.Buffer value) { npAttachmentImageInfos(address(), value); return this; }
+    /** Sets the address of the specified {@link VkFramebufferAttachmentImageInfo.Buffer} to the {@code pAttachmentImageInfos} field. */
+    @Override
+    public VkFramebufferAttachmentsCreateInfoKHR pAttachmentImageInfos(@Nullable @NativeType("VkFramebufferAttachmentImageInfo const *") VkFramebufferAttachmentImageInfo.Buffer value) { npAttachmentImageInfos(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkFramebufferAttachmentsCreateInfoKHR set(
         int sType,
         long pNext,
-        @Nullable VkFramebufferAttachmentImageInfoKHR.Buffer pAttachmentImageInfos
+        @Nullable VkFramebufferAttachmentImageInfo.Buffer pAttachmentImageInfos
     ) {
         sType(sType);
         pNext(pNext);
@@ -283,54 +220,8 @@ public class VkFramebufferAttachmentsCreateInfoKHR extends Struct implements Nat
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkFramebufferAttachmentsCreateInfoKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkFramebufferAttachmentsCreateInfoKHR.PNEXT); }
-    /** Unsafe version of {@link #attachmentImageInfoCount}. */
-    public static int nattachmentImageInfoCount(long struct) { return UNSAFE.getInt(null, struct + VkFramebufferAttachmentsCreateInfoKHR.ATTACHMENTIMAGEINFOCOUNT); }
-    /** Unsafe version of {@link #pAttachmentImageInfos}. */
-    @Nullable public static VkFramebufferAttachmentImageInfoKHR.Buffer npAttachmentImageInfos(long struct) { return VkFramebufferAttachmentImageInfoKHR.createSafe(memGetAddress(struct + VkFramebufferAttachmentsCreateInfoKHR.PATTACHMENTIMAGEINFOS), nattachmentImageInfoCount(struct)); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkFramebufferAttachmentsCreateInfoKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkFramebufferAttachmentsCreateInfoKHR.PNEXT, value); }
-    /** Sets the specified value to the {@code attachmentImageInfoCount} field of the specified {@code struct}. */
-    public static void nattachmentImageInfoCount(long struct, int value) { UNSAFE.putInt(null, struct + VkFramebufferAttachmentsCreateInfoKHR.ATTACHMENTIMAGEINFOCOUNT, value); }
-    /** Unsafe version of {@link #pAttachmentImageInfos(VkFramebufferAttachmentImageInfoKHR.Buffer) pAttachmentImageInfos}. */
-    public static void npAttachmentImageInfos(long struct, @Nullable VkFramebufferAttachmentImageInfoKHR.Buffer value) { memPutAddress(struct + VkFramebufferAttachmentsCreateInfoKHR.PATTACHMENTIMAGEINFOS, memAddressSafe(value)); nattachmentImageInfoCount(struct, value == null ? 0 : value.remaining()); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        int attachmentImageInfoCount = nattachmentImageInfoCount(struct);
-        if (attachmentImageInfoCount != 0) {
-            long pAttachmentImageInfos = memGetAddress(struct + VkFramebufferAttachmentsCreateInfoKHR.PATTACHMENTIMAGEINFOS);
-            check(pAttachmentImageInfos);
-            VkFramebufferAttachmentImageInfoKHR.validate(pAttachmentImageInfos, attachmentImageInfoCount);
-        }
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
-        }
-    }
-
-    // -----------------------------------
-
     /** An array of {@link VkFramebufferAttachmentsCreateInfoKHR} structs. */
-    public static class Buffer extends StructBuffer<VkFramebufferAttachmentsCreateInfoKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkFramebufferAttachmentsCreateInfo.Buffer {
 
         private static final VkFramebufferAttachmentsCreateInfoKHR ELEMENT_FACTORY = VkFramebufferAttachmentsCreateInfoKHR.create(-1L);
 
@@ -344,7 +235,7 @@ public class VkFramebufferAttachmentsCreateInfoKHR extends Struct implements Nat
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -365,26 +256,15 @@ public class VkFramebufferAttachmentsCreateInfoKHR extends Struct implements Nat
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkFramebufferAttachmentsCreateInfoKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkFramebufferAttachmentsCreateInfoKHR.npNext(address()); }
-        /** Returns the value of the {@code attachmentImageInfoCount} field. */
-        @NativeType("uint32_t")
-        public int attachmentImageInfoCount() { return VkFramebufferAttachmentsCreateInfoKHR.nattachmentImageInfoCount(address()); }
-        /** Returns a {@link VkFramebufferAttachmentImageInfoKHR.Buffer} view of the struct array pointed to by the {@code pAttachmentImageInfos} field. */
-        @Nullable
-        @NativeType("VkFramebufferAttachmentImageInfoKHR const *")
-        public VkFramebufferAttachmentImageInfoKHR.Buffer pAttachmentImageInfos() { return VkFramebufferAttachmentsCreateInfoKHR.npAttachmentImageInfos(address()); }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkFramebufferAttachmentsCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkFramebufferAttachmentsCreateInfoKHR.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkFramebufferAttachmentsCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkFramebufferAttachmentsCreateInfoKHR.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link VkFramebufferAttachmentImageInfoKHR.Buffer} to the {@code pAttachmentImageInfos} field. */
-        public VkFramebufferAttachmentsCreateInfoKHR.Buffer pAttachmentImageInfos(@Nullable @NativeType("VkFramebufferAttachmentImageInfoKHR const *") VkFramebufferAttachmentImageInfoKHR.Buffer value) { VkFramebufferAttachmentsCreateInfoKHR.npAttachmentImageInfos(address(), value); return this; }
+        /** Sets the address of the specified {@link VkFramebufferAttachmentImageInfo.Buffer} to the {@code pAttachmentImageInfos} field. */
+        @Override
+        public VkFramebufferAttachmentsCreateInfoKHR.Buffer pAttachmentImageInfos(@Nullable @NativeType("VkFramebufferAttachmentImageInfo const *") VkFramebufferAttachmentImageInfo.Buffer value) { VkFramebufferAttachmentsCreateInfoKHR.npAttachmentImageInfos(address(), value); return this; }
 
     }
 

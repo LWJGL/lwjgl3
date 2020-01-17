@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code deviceCoherentMemory} &ndash; indicates that the implementation supports <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkMemoryPropertyFlagBits">device coherent memory</a>.</li>
+ * <li>{@code deviceCoherentMemory} &ndash; indicates that the implementation supports <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkMemoryPropertyFlagBits">device coherent memory</a>.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

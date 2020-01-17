@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code semaphore} and {@code fence} <b>must</b> not both be equal to {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
  * <li>{@code deviceMask} <b>must</b> be a valid device mask</li>
  * <li>{@code deviceMask} <b>must</b> not be zero</li>
- * <li>{@code semaphore} <b>must</b> have a {@code VkSemaphoreTypeKHR} of {@link KHRTimelineSemaphore#VK_SEMAPHORE_TYPE_BINARY_KHR SEMAPHORE_TYPE_BINARY_KHR}</li>
+ * <li>{@code semaphore} <b>must</b> have a {@code VkSemaphoreType} of {@link VK12#VK_SEMAPHORE_TYPE_BINARY SEMAPHORE_TYPE_BINARY}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

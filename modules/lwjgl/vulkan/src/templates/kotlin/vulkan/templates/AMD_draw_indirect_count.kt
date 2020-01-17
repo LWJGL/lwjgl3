@@ -36,7 +36,12 @@ val AMD_draw_indirect_count = "AMDDrawIndirectCount".nativeClassVK("AMD_draw_ind
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
-                <li><em>Promoted</em> to {@link KHRDrawIndirectCount VK_KHR_draw_indirect_count} extension</li>
+                <li>
+                    <em>Promoted</em> to {@link KHRDrawIndirectCount VK_KHR_draw_indirect_count} extension
+                    <ul>
+                        <li>Which in turn was <em>promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#versions-1.2-promotions">Vulkan 1.2</a></li>
+                    </ul>
+                </li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -46,6 +51,11 @@ val AMD_draw_indirect_count = "AMDDrawIndirectCount".nativeClassVK("AMD_draw_ind
 
             <dt><b>Last Modified Date</b></dt>
             <dd>2016-08-23</dd>
+
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
+                <li>Promoted to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VK_KHR_draw_indirect_count">VK_KHR_draw_indirect_count</a></li>
+            </ul></dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -75,7 +85,7 @@ val AMD_draw_indirect_count = "AMDDrawIndirectCount".nativeClassVK("AMD_draw_ind
 
     void(
         "CmdDrawIndirectCountAMD",
-        "See #CmdDrawIndirectCountKHR().",
+        "See #CmdDrawIndirectCount().",
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command is recorded."),
         VkBuffer("buffer", "the buffer containing draw parameters."),

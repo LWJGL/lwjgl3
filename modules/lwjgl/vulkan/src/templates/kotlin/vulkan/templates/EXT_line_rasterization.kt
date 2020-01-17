@@ -84,10 +84,10 @@ val EXT_line_rasterization = "EXTLineRasterization".nativeClassVK("EXT_line_rast
 
         <h5>Description</h5>
         <ul>
-            <li>#LINE_RASTERIZATION_MODE_DEFAULT_EXT is equivalent to #LINE_RASTERIZATION_MODE_RECTANGULAR_EXT if ##VkPhysicalDeviceLimits{@code ::strictLines} is #TRUE, otherwise lines are drawn as non-{@code strictLines} parallelograms. Both of these modes are defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#primsrast-lines-basic">Basic Line Segment Rasterization</a>.</li>
+            <li>#LINE_RASTERIZATION_MODE_DEFAULT_EXT is equivalent to #LINE_RASTERIZATION_MODE_RECTANGULAR_EXT if ##VkPhysicalDeviceLimits{@code ::strictLines} is #TRUE, otherwise lines are drawn as non-{@code strictLines} parallelograms. Both of these modes are defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#primsrast-lines-basic">Basic Line Segment Rasterization</a>.</li>
             <li>#LINE_RASTERIZATION_MODE_RECTANGULAR_EXT specifies lines drawn as if they were rectangles extruded from the line</li>
-            <li>#LINE_RASTERIZATION_MODE_BRESENHAM_EXT specifies lines drawn by determining which pixel diamonds the line intersects and exits, as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#primsrast-lines-bresenham">Bresenham Line Segment Rasterization</a>.</li>
-            <li>#LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_EXT specifies lines drawn if they were rectangles extruded from the line, with alpha falloff, as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#primsrast-lines-smooth">Smooth Lines</a>.</li>
+            <li>#LINE_RASTERIZATION_MODE_BRESENHAM_EXT specifies lines drawn by determining which pixel diamonds the line intersects and exits, as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#primsrast-lines-bresenham">Bresenham Line Segment Rasterization</a>.</li>
+            <li>#LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_EXT specifies lines drawn if they were rectangles extruded from the line, with alpha falloff, as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#primsrast-lines-smooth">Smooth Lines</a>.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -125,7 +125,7 @@ val EXT_line_rasterization = "EXTLineRasterization".nativeClassVK("EXT_line_rast
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
+            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
             <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
         </ul>
 
@@ -137,7 +137,7 @@ val EXT_line_rasterization = "EXTLineRasterization".nativeClassVK("EXT_line_rast
 
         <h5>Command Properties</h5>
         <table class="lwjgl">
-            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#synchronization-pipeline-stages-types">Pipeline Type</a></th></tr></thead>
+            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-pipeline-stages-types">Pipeline Type</a></th></tr></thead>
             <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Graphics</td><td></td></tr></tbody>
         </table>
         """,

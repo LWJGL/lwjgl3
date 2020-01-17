@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code minFragmentDensityTexelSize} &ndash; the minimum <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#glossary-fragment-density-texel-size">fragment density texel size</a>.</li>
+ * <li>{@code minFragmentDensityTexelSize} &ndash; the minimum <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#glossary-fragment-density-texel-size">fragment density texel size</a>.</li>
  * <li>{@code maxFragmentDensityTexelSize} &ndash; the maximum fragment density texel size.</li>
  * <li>{@code fragmentDensityInvocations} &ndash; specifies whether the implementation <b>may</b> invoke additional fragment shader invocations for each covered sample.</li>
  * </ul>

@@ -118,7 +118,7 @@ val NV_cooperative_matrix = "NVCooperativeMatrix".nativeClassVK("NV_cooperative_
             <li>#SCOPE_DEVICE_NV corresponds to SPIR-V {@code Device} scope.</li>
             <li>#SCOPE_WORKGROUP_NV corresponds to SPIR-V {@code Workgroup} scope.</li>
             <li>#SCOPE_SUBGROUP_NV corresponds to SPIR-V {@code Subgroup} scope.</li>
-            <li>#SCOPE_QUEUE_FAMILY_NV corresponds to SPIR-V {@code QueueFamilyKHR} scope.</li>
+            <li>#SCOPE_QUEUE_FAMILY_NV corresponds to SPIR-V {@code QueueFamily} scope.</li>
         </ul>
 
         All enum values match the corresponding SPIR-V value.

@@ -354,15 +354,18 @@ val KHR_performance_query = "KHRPerformanceQuery".nativeClassVK("KHR_performance
 
         <h5>Description</h5>
         <ul>
-            <li>#QUERY_SCOPE_COMMAND_BUFFER_KHR - the performance counter scope is a single complete command buffer.</li>
-            <li>#QUERY_SCOPE_RENDER_PASS_KHR - the performance counter scope is zero or more complete render passes. The performance query containing the performance counter <b>must</b> begin and end outside a render pass instance.</li>
-            <li>#QUERY_SCOPE_COMMAND_KHR - the performance counter scope is zero or more commands.</li>
+            <li>#PERFORMANCE_COUNTER_SCOPE_COMMAND_BUFFER_KHR - the performance counter scope is a single complete command buffer.</li>
+            <li>#PERFORMANCE_COUNTER_SCOPE_RENDER_PASS_KHR - the performance counter scope is zero or more complete render passes. The performance query containing the performance counter <b>must</b> begin and end outside a render pass instance.</li>
+            <li>#PERFORMANCE_COUNTER_SCOPE_COMMAND_KHR - the performance counter scope is zero or more commands.</li>
         </ul>
 
         <h5>See Also</h5>
         ##VkPerformanceCounterKHR
         """,
 
+        "PERFORMANCE_COUNTER_SCOPE_COMMAND_BUFFER_KHR".."0",
+        "PERFORMANCE_COUNTER_SCOPE_RENDER_PASS_KHR".."1",
+        "PERFORMANCE_COUNTER_SCOPE_COMMAND_KHR".."2",
         "QUERY_SCOPE_COMMAND_BUFFER_KHR".."0",
         "QUERY_SCOPE_RENDER_PASS_KHR".."1",
         "QUERY_SCOPE_COMMAND_KHR".."2"

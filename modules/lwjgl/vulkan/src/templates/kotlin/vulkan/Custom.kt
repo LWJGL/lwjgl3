@@ -45,7 +45,7 @@ fun templateCustomization() {
 
         IntConstant(
             "The Vulkan registry version used to generate the LWJGL bindings.",
-            "HEADER_VERSION".."130"
+            "HEADER_VERSION".."131"
         )
 
         LongConstant(
@@ -199,9 +199,9 @@ fun templateCustomization() {
             )}
 
             The only changes to the functionality added by these extensions were to {@code VK_KHR_shader_draw_parameters}, which had a
-            <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#features-features-shaderDrawParameters">feature bit</a>
+            <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-features-shaderDrawParameters">feature bit</a>
             added to determine support in the core API, and
-            <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#features-features-variablePointersStorageBuffer">{@code variablePointersStorageBuffer}</a>
+            <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-features-variablePointersStorageBuffer">{@code variablePointersStorageBuffer}</a>
             from {@code VK_KHR_variable_pointers} was made optional.
 
             Additionally, Vulkan 1.1 added support for {@link VkPhysicalDeviceSubgroupProperties subgroup operations},
@@ -220,6 +220,142 @@ fun templateCustomization() {
             "LUID_SIZE".."8",
             "QUEUE_FAMILY_EXTERNAL".."(~0-1)",
             "MAX_DEVICE_GROUP_SIZE".."32"
+        )
+    }
+
+    VK12.apply {
+        documentation =
+            """
+            The core Vulkan 1.2 functionality.
+
+            Vulkan Version 1.2 <em>promoted</em> a number of key extensions into the core API:
+
+            ${ul(
+                KHR_8bit_storage.link,
+                KHR_buffer_device_address.link,
+                KHR_create_renderpass2.link,
+                KHR_depth_stencil_resolve.link,
+                KHR_draw_indirect_count.link,
+                KHR_driver_properties.link,
+                KHR_image_format_list.link,
+                KHR_imageless_framebuffer.link,
+                KHR_sampler_mirror_clamp_to_edge.link,
+                KHR_separate_depth_stencil_layouts.link,
+                KHR_shader_atomic_int64.link,
+                KHR_shader_float16_int8.link,
+                KHR_shader_float_controls.link,
+                KHR_shader_subgroup_extended_types.link,
+                KHR_spirv_1_4.link,
+                KHR_timeline_semaphore.link,
+                KHR_uniform_buffer_standard_layout.link,
+                KHR_vulkan_memory_model.link,
+                EXT_descriptor_indexing.link,
+                EXT_host_query_reset.link,
+                EXT_sampler_filter_minmax.link,
+                EXT_scalar_block_layout.link,
+                EXT_separate_stencil_usage.link,
+                EXT_shader_viewport_index_layer.link
+            )}
+
+            All differences in behavior between these extensions and the corresponding Vulkan 1.2 functionality are summarized below.
+
+            <h3>Differences relative to {@code VK_KHR_8bit_storage}</h3> 
+            
+            If the {@code VK_KHR_8bit_storage} extension is not supported, support for the SPIR-V {@code StorageBuffer8BitAccess} capability in shader modules
+            is optional. Support for this feature is defined by ##VkPhysicalDeviceVulkan12Features{@code ::storageBuffer8BitAccess} when queried via
+            #GetPhysicalDeviceFeatures2().
+            
+            <h3>Differences relative to {@code VK_KHR_draw_indirect_count}</h3>
+            
+            If the {@code VK_KHR_draw_indirect_count} extension is not supported, support for the entry points #CmdDrawIndirectCount() and
+            #CmdDrawIndexedIndirectCount() is optional. Support for this feature is defined by ##VkPhysicalDeviceVulkan12Features{@code ::drawIndirectCount}
+            when queried via #GetPhysicalDeviceFeatures2().
+            
+            <h3>Differences relative to {@code VK_KHR_sampler_mirror_clamp_to_edge}</h3> 
+            
+            If the {@code VK_KHR_sampler_mirror_clamp_to_edge} extension is not supported, support for the {@code VkSamplerAddressMode}
+            #SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE is optional. Support for this feature is defined by
+            ##VkPhysicalDeviceVulkan12Features{@code ::samplerMirrorClampToEdge} when queried via #GetPhysicalDeviceFeatures2().
+            
+            <h3>Differences relative to {@code VK_EXT_descriptor_indexing}</h3> 
+            
+            If the {@code VK_EXT_descriptor_indexing} extension is not supported, support for the {@code descriptorIndexing} feature is optional. Support for
+            this feature is defined by ##VkPhysicalDeviceVulkan12Features{@code ::descriptorIndexing} when queried via #GetPhysicalDeviceFeatures2().
+            
+            <h3>Differences relative to {@code VK_EXT_scalar_block_layout}</h3>
+            
+            If the {@code VK_EXT_scalar_block_layout} extension is not supported, support for the {@code scalarBlockLayout} feature is optional. Support for
+            this feature is defined by ##VkPhysicalDeviceVulkan12Features{@code ::scalarBlockLayout} when queried via #GetPhysicalDeviceFeatures2().
+            
+            <h3>Differences relative to {@code VK_EXT_shader_viewport_index_layer}</h3>
+            
+            If the {@code VK_EXT_shader_viewport_index_layer} extension is not supported, support for the {@code ShaderViewportIndexLayerEXT} SPIR-V capability
+            is optional. Support for this feature is defined by ##VkPhysicalDeviceVulkan12Features{@code ::shaderOutputViewportIndex} and
+            ##VkPhysicalDeviceVulkan12Features{@code ::shaderOutputLayer} when queried via #GetPhysicalDeviceFeatures2().
+            
+            <h3>Additional Vulkan 1.2 Feature Support</h3>
+            
+            In addition to the promoted extensions described above, Vulkan 1.2 added support for:
+            ${ul(
+                "SPIR-V version 1.4.",
+                "SPIR-V version 1.5.",
+                """
+                The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-samplerMirrorClampToEdge">samplerMirrorClampToEdge</a>
+                feature which indicates whether the implementation supports the #SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE sampler address mode.
+                """,
+                "The {@code ShaderNonUniform} capability in SPIR-V version 1.5.",
+                """
+                The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-shaderOutputViewportIndex">shaderOutputViewportIndex</a>
+                feature which indicates that the
+                <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#spirvenv-capabilities-table-shader-viewport-index">{@code ShaderViewportIndex}</a>
+                capability can be used.
+                """,
+                """
+                The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-shaderOutputLayer">shaderOutputLayer</a>
+                feature which indicates that the
+                <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#spirvenv-capabilities-table-shader-layer">{@code ShaderLayer}</a>
+                capability can be used.
+                """,
+                """
+                The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-subgroupBroadcastDynamicId">subgroupBroadcastDynamicId</a> 
+                feature which allows the "{@code Id}" operand of {@code OpGroupNonUniformBroadcast} to be dynamically uniform within a subgroup, and the
+                "{@code Index}" operand of {@code OpGroupNonUniformQuadBroadcast} to be dynamically uniform within a derivative group, in shader modules of
+                version 1.5 or higher.
+                """,
+                """
+                The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-drawIndirectCount">drawIndirectCount</a>
+                feature which indicates whether the #CmdDrawIndirectCount() and #CmdDrawIndexedIndirectCount() functions can be used.
+                """,
+                """
+                The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-descriptorIndexing">descriptorIndexing</a>
+                feature which indicates the implementation supports the minimum number of descriptor indexing features as defined in the
+                <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-requirements">Feature Requirements</a>
+                section.
+                """,
+                """
+                The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-samplerFilterMinmax">samplerFilterMinmax</a>
+                feature which indicates whether the implementation supports the minimum number of image formats that support the
+                #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT feature bit as defined by the
+                <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-filterMinmaxSingleComponentFormats-minimum-requirements">{@code filterMinmaxSingleComponentFormats}</a>
+                property minimum requirements.
+                """,
+                """
+                The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-framebufferIntegerColorSampleCounts">framebufferIntegerColorSampleCounts</a>
+                limit which indicates the color sample counts that are supported for all framebuffer color attachments with integer formats.
+                """
+            )}
+            """
+
+        IntConstant(
+            "The API version number for Vulkan 1.2.",
+            "API_VERSION_1_2".."VK10.VK_MAKE_VERSION(1, 2, 0)"
+        )
+
+        IntConstant(
+            "API Constants",
+
+            "MAX_DRIVER_NAME_SIZE".."256",
+            "MAX_DRIVER_INFO_SIZE".."256"
         )
     }
 

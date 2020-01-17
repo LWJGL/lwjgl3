@@ -17,30 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying images to be used as framebuffer attachments.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>Each element of {@code pAttachments} <b>must</b> only specify a single mip level</li>
- * <li>Each element of {@code pAttachments} <b>must</b> have been created with the identity swizzle</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRImagelessFramebuffer#VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO_KHR STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO_KHR}</li>
- * <li>If {@code attachmentCount} is not 0, {@code pAttachments} <b>must</b> be a valid pointer to an array of {@code attachmentCount} valid {@code VkImageView} handles</li>
- * </ul>
- * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code attachmentCount} &ndash; the number of attachments.</li>
- * <li>{@code pAttachments} &ndash; a pointer to an array of {@code VkImageView} handles, each of which will be used as the corresponding attachment in the render pass instance.</li>
- * </ul>
+ * See {@link VkRenderPassAttachmentBeginInfo}.
  * 
  * <h3>Layout</h3>
  * 
@@ -52,37 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkImageView const * pAttachments;
  * }</code></pre>
  */
-public class VkRenderPassAttachmentBeginInfoKHR extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        ATTACHMENTCOUNT,
-        PATTACHMENTS;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4),
-            __member(POINTER_SIZE)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        ATTACHMENTCOUNT = layout.offsetof(2);
-        PATTACHMENTS = layout.offsetof(3);
-    }
+public class VkRenderPassAttachmentBeginInfoKHR extends VkRenderPassAttachmentBeginInfo {
 
     /**
      * Creates a {@code VkRenderPassAttachmentBeginInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -91,34 +38,21 @@ public class VkRenderPassAttachmentBeginInfoKHR extends Struct implements Native
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkRenderPassAttachmentBeginInfoKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** Returns the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code attachmentCount} field. */
-    @NativeType("uint32_t")
-    public int attachmentCount() { return nattachmentCount(address()); }
-    /** Returns a {@link LongBuffer} view of the data pointed to by the {@code pAttachments} field. */
-    @Nullable
-    @NativeType("VkImageView const *")
-    public LongBuffer pAttachments() { return npAttachments(address()); }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkRenderPassAttachmentBeginInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkRenderPassAttachmentBeginInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link LongBuffer} to the {@code pAttachments} field. */
+    @Override
     public VkRenderPassAttachmentBeginInfoKHR pAttachments(@Nullable @NativeType("VkImageView const *") LongBuffer value) { npAttachments(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkRenderPassAttachmentBeginInfoKHR set(
         int sType,
         long pNext,
@@ -286,51 +220,8 @@ public class VkRenderPassAttachmentBeginInfoKHR extends Struct implements Native
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassAttachmentBeginInfoKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkRenderPassAttachmentBeginInfoKHR.PNEXT); }
-    /** Unsafe version of {@link #attachmentCount}. */
-    public static int nattachmentCount(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassAttachmentBeginInfoKHR.ATTACHMENTCOUNT); }
-    /** Unsafe version of {@link #pAttachments() pAttachments}. */
-    @Nullable public static LongBuffer npAttachments(long struct) { return memLongBufferSafe(memGetAddress(struct + VkRenderPassAttachmentBeginInfoKHR.PATTACHMENTS), nattachmentCount(struct)); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassAttachmentBeginInfoKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkRenderPassAttachmentBeginInfoKHR.PNEXT, value); }
-    /** Sets the specified value to the {@code attachmentCount} field of the specified {@code struct}. */
-    public static void nattachmentCount(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassAttachmentBeginInfoKHR.ATTACHMENTCOUNT, value); }
-    /** Unsafe version of {@link #pAttachments(LongBuffer) pAttachments}. */
-    public static void npAttachments(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkRenderPassAttachmentBeginInfoKHR.PATTACHMENTS, memAddressSafe(value)); nattachmentCount(struct, value == null ? 0 : value.remaining()); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        if (nattachmentCount(struct) != 0) {
-            check(memGetAddress(struct + VkRenderPassAttachmentBeginInfoKHR.PATTACHMENTS));
-        }
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
-        }
-    }
-
-    // -----------------------------------
-
     /** An array of {@link VkRenderPassAttachmentBeginInfoKHR} structs. */
-    public static class Buffer extends StructBuffer<VkRenderPassAttachmentBeginInfoKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkRenderPassAttachmentBeginInfo.Buffer {
 
         private static final VkRenderPassAttachmentBeginInfoKHR ELEMENT_FACTORY = VkRenderPassAttachmentBeginInfoKHR.create(-1L);
 
@@ -344,7 +235,7 @@ public class VkRenderPassAttachmentBeginInfoKHR extends Struct implements Native
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -365,25 +256,14 @@ public class VkRenderPassAttachmentBeginInfoKHR extends Struct implements Native
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkRenderPassAttachmentBeginInfoKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkRenderPassAttachmentBeginInfoKHR.npNext(address()); }
-        /** Returns the value of the {@code attachmentCount} field. */
-        @NativeType("uint32_t")
-        public int attachmentCount() { return VkRenderPassAttachmentBeginInfoKHR.nattachmentCount(address()); }
-        /** Returns a {@link LongBuffer} view of the data pointed to by the {@code pAttachments} field. */
-        @Nullable
-        @NativeType("VkImageView const *")
-        public LongBuffer pAttachments() { return VkRenderPassAttachmentBeginInfoKHR.npAttachments(address()); }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkRenderPassAttachmentBeginInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderPassAttachmentBeginInfoKHR.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkRenderPassAttachmentBeginInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkRenderPassAttachmentBeginInfoKHR.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link LongBuffer} to the {@code pAttachments} field. */
+        @Override
         public VkRenderPassAttachmentBeginInfoKHR.Buffer pAttachments(@Nullable @NativeType("VkImageView const *") LongBuffer value) { VkRenderPassAttachmentBeginInfoKHR.npAttachments(address(), value); return this; }
 
     }

@@ -16,19 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing timeline semaphore properties that can be supported by an implementation.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRTimelineSemaphore#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES_KHR}</li>
- * </ul>
- * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code maxTimelineSemaphoreValueDifference} &ndash; indicates the maximum difference allowed by the implementation between the current value of a timeline semaphore and any pending signal or wait operations.</li>
- * </ul>
+ * See {@link VkPhysicalDeviceTimelineSemaphoreProperties}.
  * 
  * <h3>Layout</h3>
  * 
@@ -39,34 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint64_t maxTimelineSemaphoreValueDifference;
  * }</code></pre>
  */
-public class VkPhysicalDeviceTimelineSemaphorePropertiesKHR extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        MAXTIMELINESEMAPHOREVALUEDIFFERENCE;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(8)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        MAXTIMELINESEMAPHOREVALUEDIFFERENCE = layout.offsetof(2);
-    }
+public class VkPhysicalDeviceTimelineSemaphorePropertiesKHR extends VkPhysicalDeviceTimelineSemaphoreProperties {
 
     /**
      * Creates a {@code VkPhysicalDeviceTimelineSemaphorePropertiesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -75,28 +36,18 @@ public class VkPhysicalDeviceTimelineSemaphorePropertiesKHR extends Struct imple
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceTimelineSemaphorePropertiesKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** Returns the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code maxTimelineSemaphoreValueDifference} field. */
-    @NativeType("uint64_t")
-    public long maxTimelineSemaphoreValueDifference() { return nmaxTimelineSemaphoreValueDifference(address()); }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkPhysicalDeviceTimelineSemaphorePropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkPhysicalDeviceTimelineSemaphorePropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkPhysicalDeviceTimelineSemaphorePropertiesKHR set(
         int sType,
         long pNext
@@ -262,22 +213,8 @@ public class VkPhysicalDeviceTimelineSemaphorePropertiesKHR extends Struct imple
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceTimelineSemaphorePropertiesKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceTimelineSemaphorePropertiesKHR.PNEXT); }
-    /** Unsafe version of {@link #maxTimelineSemaphoreValueDifference}. */
-    public static long nmaxTimelineSemaphoreValueDifference(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceTimelineSemaphorePropertiesKHR.MAXTIMELINESEMAPHOREVALUEDIFFERENCE); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceTimelineSemaphorePropertiesKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceTimelineSemaphorePropertiesKHR.PNEXT, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkPhysicalDeviceTimelineSemaphorePropertiesKHR} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceTimelineSemaphorePropertiesKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkPhysicalDeviceTimelineSemaphoreProperties.Buffer {
 
         private static final VkPhysicalDeviceTimelineSemaphorePropertiesKHR ELEMENT_FACTORY = VkPhysicalDeviceTimelineSemaphorePropertiesKHR.create(-1L);
 
@@ -291,7 +228,7 @@ public class VkPhysicalDeviceTimelineSemaphorePropertiesKHR extends Struct imple
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -312,19 +249,11 @@ public class VkPhysicalDeviceTimelineSemaphorePropertiesKHR extends Struct imple
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkPhysicalDeviceTimelineSemaphorePropertiesKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkPhysicalDeviceTimelineSemaphorePropertiesKHR.npNext(address()); }
-        /** Returns the value of the {@code maxTimelineSemaphoreValueDifference} field. */
-        @NativeType("uint64_t")
-        public long maxTimelineSemaphoreValueDifference() { return VkPhysicalDeviceTimelineSemaphorePropertiesKHR.nmaxTimelineSemaphoreValueDifference(address()); }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceTimelineSemaphorePropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceTimelineSemaphorePropertiesKHR.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkPhysicalDeviceTimelineSemaphorePropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceTimelineSemaphorePropertiesKHR.npNext(address(), value); return this; }
 
     }

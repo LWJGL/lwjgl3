@@ -112,7 +112,7 @@ val MVK_macos_surface = "MVKMacosSurface".nativeClassVK("MVK_macos_surface", typ
 
         VkInstance("instance", "the instance with which to associate the surface."),
         VkMacOSSurfaceCreateInfoMVK.const.p("pCreateInfo", "a pointer to a ##VkMacOSSurfaceCreateInfoMVK structure containing parameters affecting the creation of the surface object."),
-        nullable..VkAllocationCallbacks.const.p("pAllocator", "the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a>)."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a>)."),
         Check(1)..VkSurfaceKHR.p("pSurface", "a pointer to a {@code VkSurfaceKHR} handle in which the created surface object is returned.")
     )
 }

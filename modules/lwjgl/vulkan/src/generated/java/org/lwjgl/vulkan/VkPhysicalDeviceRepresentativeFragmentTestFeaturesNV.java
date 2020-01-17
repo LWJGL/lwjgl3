@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code representativeFragmentTest} &ndash; indicates whether the implementation supports the representative fragment test. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#fragops-rep-frag-test">Representative Fragment Test</a>.</li>
+ * <li>{@code representativeFragmentTest} &ndash; indicates whether the implementation supports the representative fragment test. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-rep-frag-test">Representative Fragment Test</a>.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

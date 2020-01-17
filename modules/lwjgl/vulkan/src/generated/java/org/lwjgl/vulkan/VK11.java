@@ -49,9 +49,9 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul>
  * 
  * <p>The only changes to the functionality added by these extensions were to {@code VK_KHR_shader_draw_parameters}, which had a
- * <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#features-features-shaderDrawParameters">feature bit</a>
+ * <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-features-shaderDrawParameters">feature bit</a>
  * added to determine support in the core API, and
- * <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#features-features-variablePointersStorageBuffer">{@code variablePointersStorageBuffer}</a>
+ * <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-features-variablePointersStorageBuffer">{@code variablePointersStorageBuffer}</a>
  * from {@code VK_KHR_variable_pointers} was made optional.</p>
  * 
  * <p>Additionally, Vulkan 1.1 added support for {@link VkPhysicalDeviceSubgroupProperties subgroup operations},
@@ -651,7 +651,7 @@ public class VK11 extends VK10 {
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
-     * <p>The peer memory features of a memory heap also apply to any accesses that <b>may</b> be performed during <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-image-layout-transitions">image layout transitions</a>.</p>
+     * <p>The peer memory features of a memory heap also apply to any accesses that <b>may</b> be performed during <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-image-layout-transitions">image layout transitions</a>.</p>
      * </div>
      * 
      * <p>{@link #VK_PEER_MEMORY_FEATURE_COPY_DST_BIT PEER_MEMORY_FEATURE_COPY_DST_BIT} <b>must</b> be supported for all host local heaps and for at least one device local heap.</p>
@@ -675,8 +675,8 @@ public class VK11 extends VK10 {
      * 
      * <ul>
      * <li>{@link #VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT MEMORY_ALLOCATE_DEVICE_MASK_BIT} specifies that memory will be allocated for the devices in {@link VkMemoryAllocateFlagsInfo}{@code ::deviceMask}.</li>
-     * <li>{@link KHRBufferDeviceAddress#VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT_KHR MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT_KHR} specifies that the memory <b>can</b> be attached to a buffer object created with the {@link KHRBufferDeviceAddress#VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_KHR BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_KHR} bit set in {@code usage}, and that the memory handle <b>can</b> be used to retrieve an opaque address via {@link KHRBufferDeviceAddress#vkGetDeviceMemoryOpaqueCaptureAddressKHR GetDeviceMemoryOpaqueCaptureAddressKHR}.</li>
-     * <li>{@link KHRBufferDeviceAddress#VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR} specifies that the memory&#8217;s address <b>can</b> be saved and reused on a subsequent run (e.g. for trace capture and replay), see {@link VkBufferOpaqueCaptureAddressCreateInfoKHR} for more detail.</li>
+     * <li>{@link VK12#VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT} specifies that the memory <b>can</b> be attached to a buffer object created with the {@link VK12#VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT} bit set in {@code usage}, and that the memory handle <b>can</b> be used to retrieve an opaque address via {@link VK12#vkGetDeviceMemoryOpaqueCaptureAddress GetDeviceMemoryOpaqueCaptureAddress}.</li>
+     * <li>{@link VK12#VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT} specifies that the memory&#8217;s address <b>can</b> be saved and reused on a subsequent run (e.g. for trace capture and replay), see {@link VkBufferOpaqueCaptureAddressCreateInfo} for more detail.</li>
      * </ul>
      * 
      * <h5>See Also</h5>
@@ -697,7 +697,7 @@ public class VK11 extends VK10 {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link VkPhysicalDevicePointClippingProperties}</p>
+     * <p>{@link VkPhysicalDevicePointClippingProperties}, {@link VkPhysicalDeviceVulkan11Properties}</p>
      */
     public static final int
         VK_POINT_CLIPPING_BEHAVIOR_ALL_CLIP_PLANES       = 0,
@@ -709,8 +709,8 @@ public class VK11 extends VK10 {
      * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT} specifies that the origin of the domain space is in the upper left corner, as shown in figure <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#img-tessellation-topology-ul">Domain parameterization for tessellation primitive modes (upper-left origin)</a>.</li>
-     * <li>{@link #VK_TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT} specifies that the origin of the domain space is in the lower left corner, as shown in figure <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#img-tessellation-topology-ll">Domain parameterization for tessellation primitive modes (lower-left origin)</a>.</li>
+     * <li>{@link #VK_TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT} specifies that the origin of the domain space is in the upper left corner, as shown in figure <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#img-tessellation-topology-ul">Domain parameterization for tessellation primitive modes (upper-left origin)</a>.</li>
+     * <li>{@link #VK_TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT} specifies that the origin of the domain space is in the lower left corner, as shown in figure <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#img-tessellation-topology-ll">Domain parameterization for tessellation primitive modes (lower-left origin)</a>.</li>
      * </ul>
      * 
      * <p>This enum affects how the {@code VertexOrderCw} and {@code VertexOrderCcw} tessellation execution modes are interpreted, since the winding is defined relative to the orientation of the domain.</p>
@@ -730,16 +730,16 @@ public class VK11 extends VK10 {
      * 
      * <ul>
      * <li>{@link #VK_SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY} specifies that the input values to the conversion are unmodified.</li>
-     * <li>{@link #VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_IDENTITY SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_IDENTITY} specifies no model conversion but the inputs are range expanded as for Y&#8217;C<sub>B</sub>C<sub>R</sub>.</li>
-     * <li>{@link #VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709 SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709} specifies the color model conversion from Y&#8217;C<sub>B</sub>C<sub>R</sub> to R&#8217;G&#8217;B' defined in BT.709 and described in the “BT.709 Y’C<sub>B</sub>C<sub>R</sub> conversion” section of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#data-format">Khronos Data Format Specification</a>.</li>
-     * <li>{@link #VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601 SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601} specifies the color model conversion from Y&#8217;C<sub>B</sub>C<sub>R</sub> to R&#8217;G&#8217;B' defined in BT.601 and described in the “BT.601 Y’C<sub>B</sub>C<sub>R</sub> conversion” section of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#data-format">Khronos Data Format Specification</a>.</li>
-     * <li>{@link #VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020 SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020} specifies the color model conversion from Y&#8217;C<sub>B</sub>C<sub>R</sub> to R&#8217;G&#8217;B' defined in BT.2020 and described in the “BT.2020 Y’C<sub>B</sub>C<sub>R</sub> conversion” section of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#data-format">Khronos Data Format Specification</a>.</li>
+     * <li>{@link #VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_IDENTITY SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_IDENTITY} specifies no model conversion but the inputs are range expanded as for Y′C<sub>B</sub>C<sub>R</sub>.</li>
+     * <li>{@link #VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709 SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709} specifies the color model conversion from Y′C<sub>B</sub>C<sub>R</sub> to R′G′B′ defined in BT.709 and described in the “BT.709 Y’C<sub>B</sub>C<sub>R</sub> conversion” section of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#data-format">Khronos Data Format Specification</a>.</li>
+     * <li>{@link #VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601 SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601} specifies the color model conversion from Y′C<sub>B</sub>C<sub>R</sub> to R′G′B′ defined in BT.601 and described in the “BT.601 Y’C<sub>B</sub>C<sub>R</sub> conversion” section of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#data-format">Khronos Data Format Specification</a>.</li>
+     * <li>{@link #VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020 SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020} specifies the color model conversion from Y′C<sub>B</sub>C<sub>R</sub> to R′G′B′ defined in BT.2020 and described in the “BT.2020 Y’C<sub>B</sub>C<sub>R</sub> conversion” section of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#data-format">Khronos Data Format Specification</a>.</li>
      * </ul>
      * 
-     * <p>In the {@code VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_*} color models, for the input to the sampler Y'C<sub>B</sub>C<sub>R</sub> range expansion and model conversion:</p>
+     * <p>In the {@code VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_*} color models, for the input to the sampler Y′C<sub>B</sub>C<sub>R</sub> range expansion and model conversion:</p>
      * 
      * <ul>
-     * <li>the Y (Y' luma) channel corresponds to the G channel of an RGB image.</li>
+     * <li>the Y (Y′ luma) channel corresponds to the G channel of an RGB image.</li>
      * <li>the CB (C<sub>B</sub> or “U” blue color difference) channel corresponds to the B channel of an RGB image.</li>
      * <li>the CR (C<sub>R</sub> or “V” red color difference) channel corresponds to the R channel of an RGB image.</li>
      * <li>the alpha channel, if present, is not modified by color model conversion.</li>
@@ -780,7 +780,7 @@ public class VK11 extends VK10 {
      * <li>{@link #VK_SAMPLER_YCBCR_RANGE_ITU_NARROW SAMPLER_YCBCR_RANGE_ITU_NARROW} specifies that headroom and foot room are reserved in the numerical range of encoded values, and the remaining values are expanded according to the ITU “narrow range” quantization rules.</li>
      * </ul>
      * 
-     * <p>The formulae for these conversions is described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#textures-sampler-YCbCr-conversion-rangeexpand">Sampler Y'C<sub>B</sub>C<sub>R</sub> Range Expansion</a> section of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#textures">Image Operations</a> chapter.</p>
+     * <p>The formulae for these conversions is described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures-sampler-YCbCr-conversion-rangeexpand">Sampler Y′C<sub>B</sub>C<sub>R</sub> Range Expansion</a> section of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures">Image Operations</a> chapter.</p>
      * 
      * <p>No range modification takes place if {@code ycbcrModel} is {@link #VK_SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY}; the {@code ycbcrRange} field of {@link VkSamplerYcbcrConversionCreateInfo} is ignored in this case.</p>
      * 
@@ -977,7 +977,7 @@ public class VK11 extends VK10 {
      * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_FENCE_IMPORT_TEMPORARY_BIT FENCE_IMPORT_TEMPORARY_BIT} specifies that the fence payload will be imported only temporarily, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-fences-importing">Importing Fence Payloads</a>, regardless of the permanence of {@code handleType}.</li>
+     * <li>{@link #VK_FENCE_IMPORT_TEMPORARY_BIT FENCE_IMPORT_TEMPORARY_BIT} specifies that the fence payload will be imported only temporarily, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-fences-importing">Importing Fence Payloads</a>, regardless of the permanence of {@code handleType}.</li>
      * </ul>
      * 
      * <h5>See Also</h5>
@@ -994,7 +994,7 @@ public class VK11 extends VK10 {
      * <p>These bits have the following meanings:</p>
      * 
      * <ul>
-     * <li>{@link #VK_SEMAPHORE_IMPORT_TEMPORARY_BIT SEMAPHORE_IMPORT_TEMPORARY_BIT} specifies that the semaphore payload will be imported only temporarily, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-semaphores-importing">Importing Semaphore Payloads</a>, regardless of the permanence of {@code handleType}.</li>
+     * <li>{@link #VK_SEMAPHORE_IMPORT_TEMPORARY_BIT SEMAPHORE_IMPORT_TEMPORARY_BIT} specifies that the semaphore payload will be imported only temporarily, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-semaphores-importing">Importing Semaphore Payloads</a>, regardless of the permanence of {@code handleType}.</li>
      * </ul>
      * 
      * <h5>See Also</h5>
@@ -1152,7 +1152,7 @@ public class VK11 extends VK10 {
      * </ul></dd>
      * </dl>
      *
-     * @param pApiVersion a pointer to a {@code uint32_t}, which is the version of Vulkan supported by instance-level functionality, encoded as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#extendingvulkan-coreversions-versionnumbers">Version Numbers</a>.
+     * @param pApiVersion a pointer to a {@code uint32_t}, which is the version of Vulkan supported by instance-level functionality, encoded as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#extendingvulkan-coreversions-versionnumbers">Version Numbers</a>.
      */
     @NativeType("VkResult")
     public static int vkEnumerateInstanceVersion(@NativeType("uint32_t *") IntBuffer pApiVersion) {
@@ -1416,7 +1416,7 @@ public class VK11 extends VK10 {
      * 
      * <ul>
      * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-     * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
+     * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
      * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, compute, or transfer operations</li>
      * </ul>
      * 
@@ -1430,7 +1430,7 @@ public class VK11 extends VK10 {
      * <h5>Command Properties</h5>
      * 
      * <table class="lwjgl">
-     * <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-pipeline-stages-types">Pipeline Type</a></th></tr></thead>
+     * <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-pipeline-stages-types">Pipeline Type</a></th></tr></thead>
      * <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Graphics Compute Transfer</td><td></td></tr></tbody>
      * </table>
      *
@@ -1483,22 +1483,22 @@ public class VK11 extends VK10 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>If a {@code VkImageView} is sampled with {@link VK10#VK_FILTER_LINEAR FILTER_LINEAR} as a result of this command, then the image view&#8217;s <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#resources-image-view-format-features">format features</a> <b>must</b> contain {@link VK10#VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT}</li>
-     * <li>If a {@code VkImageView} is accessed using atomic operations as a result of this command, then the image view&#8217;s <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#resources-image-view-format-features">format features</a> <b>must</b> contain {@link VK10#VK_FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT}</li>
-     * <li>If a {@code VkImageView} is sampled with {@link EXTFilterCubic#VK_FILTER_CUBIC_EXT FILTER_CUBIC_EXT} as a result of this command, then the image view&#8217;s <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#resources-image-view-format-features">format features</a> <b>must</b> contain {@link EXTFilterCubic#VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT}</li>
+     * <li>If a {@code VkImageView} is sampled with {@link VK10#VK_FILTER_LINEAR FILTER_LINEAR} as a result of this command, then the image view&#8217;s <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#resources-image-view-format-features">format features</a> <b>must</b> contain {@link VK10#VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT}</li>
+     * <li>If a {@code VkImageView} is accessed using atomic operations as a result of this command, then the image view&#8217;s <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#resources-image-view-format-features">format features</a> <b>must</b> contain {@link VK10#VK_FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT}</li>
+     * <li>If a {@code VkImageView} is sampled with {@link EXTFilterCubic#VK_FILTER_CUBIC_EXT FILTER_CUBIC_EXT} as a result of this command, then the image view&#8217;s <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#resources-image-view-format-features">format features</a> <b>must</b> contain {@link EXTFilterCubic#VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT}</li>
      * <li>Any {@code VkImageView} being sampled with {@link EXTFilterCubic#VK_FILTER_CUBIC_EXT FILTER_CUBIC_EXT} as a result of this command <b>must</b> have a {@code VkImageViewType} and format that supports cubic filtering, as specified by {@link VkFilterCubicImageViewImageFormatPropertiesEXT}{@code ::filterCubic} returned by {@code vkGetPhysicalDeviceImageFormatProperties2}</li>
-     * <li>Any {@code VkImageView} being sampled with {@link EXTFilterCubic#VK_FILTER_CUBIC_EXT FILTER_CUBIC_EXT} with a reduction mode of either {@link EXTSamplerFilterMinmax#VK_SAMPLER_REDUCTION_MODE_MIN_EXT SAMPLER_REDUCTION_MODE_MIN_EXT} or {@link EXTSamplerFilterMinmax#VK_SAMPLER_REDUCTION_MODE_MAX_EXT SAMPLER_REDUCTION_MODE_MAX_EXT} as a result of this command <b>must</b> have a {@code VkImageViewType} and format that supports cubic filtering together with minmax filtering, as specified by {@link VkFilterCubicImageViewImageFormatPropertiesEXT}{@code ::filterCubicMinmax} returned by {@code vkGetPhysicalDeviceImageFormatProperties2}</li>
+     * <li>Any {@code VkImageView} being sampled with {@link EXTFilterCubic#VK_FILTER_CUBIC_EXT FILTER_CUBIC_EXT} with a reduction mode of either {@link VK12#VK_SAMPLER_REDUCTION_MODE_MIN SAMPLER_REDUCTION_MODE_MIN} or {@link VK12#VK_SAMPLER_REDUCTION_MODE_MAX SAMPLER_REDUCTION_MODE_MAX} as a result of this command <b>must</b> have a {@code VkImageViewType} and format that supports cubic filtering together with minmax filtering, as specified by {@link VkFilterCubicImageViewImageFormatPropertiesEXT}{@code ::filterCubicMinmax} returned by {@code vkGetPhysicalDeviceImageFormatProperties2}</li>
      * <li>Any {@code VkImage} created with a {@link VkImageCreateInfo}{@code ::flags} containing {@link NVCornerSampledImage#VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV IMAGE_CREATE_CORNER_SAMPLED_BIT_NV} sampled as a result of this command <b>must</b> only be sampled using a {@code VkSamplerAddressMode} of {@link VK10#VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE}.</li>
-     * <li>For each set <em>n</em> that is statically used by the {@code VkPipeline} bound to the pipeline bind point used by this command, a descriptor set <b>must</b> have been bound to <em>n</em> at the same pipeline bind point, with a {@code VkPipelineLayout} that is compatible for set <em>n</em>, with the {@code VkPipelineLayout} used to create the current {@code VkPipeline}, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#descriptorsets-compatibility">Pipeline Layout Compatibility</a></li>
-     * <li>For each push constant that is statically used by the {@code VkPipeline} bound to the pipeline bind point used by this command, a push constant value <b>must</b> have been set for the same pipeline bind point, with a {@code VkPipelineLayout} that is compatible for push constants, with the {@code VkPipelineLayout} used to create the current {@code VkPipeline}, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#descriptorsets-compatibility">Pipeline Layout Compatibility</a></li>
+     * <li>For each set <em>n</em> that is statically used by the {@code VkPipeline} bound to the pipeline bind point used by this command, a descriptor set <b>must</b> have been bound to <em>n</em> at the same pipeline bind point, with a {@code VkPipelineLayout} that is compatible for set <em>n</em>, with the {@code VkPipelineLayout} used to create the current {@code VkPipeline}, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#descriptorsets-compatibility">Pipeline Layout Compatibility</a></li>
+     * <li>For each push constant that is statically used by the {@code VkPipeline} bound to the pipeline bind point used by this command, a push constant value <b>must</b> have been set for the same pipeline bind point, with a {@code VkPipelineLayout} that is compatible for push constants, with the {@code VkPipelineLayout} used to create the current {@code VkPipeline}, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#descriptorsets-compatibility">Pipeline Layout Compatibility</a></li>
      * <li>Descriptors in each bound descriptor set, specified via {@code vkCmdBindDescriptorSets}, <b>must</b> be valid if they are statically used by the {@code VkPipeline} bound to the pipeline bind point used by this command</li>
      * <li>A valid pipeline <b>must</b> be bound to the pipeline bind point used by this command</li>
      * <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command requires any dynamic state, that state <b>must</b> have been set for {@code commandBuffer}</li>
      * <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a {@code VkSampler} object that uses unnormalized coordinates, that sampler <b>must</b> not be used to sample from any {@code VkImage} with a {@code VkImageView} of the type {@link VK10#VK_IMAGE_VIEW_TYPE_3D IMAGE_VIEW_TYPE_3D}, {@link VK10#VK_IMAGE_VIEW_TYPE_CUBE IMAGE_VIEW_TYPE_CUBE}, {@link VK10#VK_IMAGE_VIEW_TYPE_1D_ARRAY IMAGE_VIEW_TYPE_1D_ARRAY}, {@link VK10#VK_IMAGE_VIEW_TYPE_2D_ARRAY IMAGE_VIEW_TYPE_2D_ARRAY} or {@link VK10#VK_IMAGE_VIEW_TYPE_CUBE_ARRAY IMAGE_VIEW_TYPE_CUBE_ARRAY}, in any shader stage</li>
      * <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a {@code VkSampler} object that uses unnormalized coordinates, that sampler <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with {@code ImplicitLod}, {@code Dref} or {@code Proj} in their name, in any shader stage</li>
      * <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a {@code VkSampler} object that uses unnormalized coordinates, that sampler <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that includes a LOD bias or any offset values, in any shader stage</li>
-     * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#features-robustBufferAccess">robust buffer access</a> feature is not enabled, and if the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a uniform buffer, it <b>must</b> not access values outside of the range of the buffer as specified in the descriptor set bound to the same pipeline bind point</li>
-     * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#features-robustBufferAccess">robust buffer access</a> feature is not enabled, and if the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a storage buffer, it <b>must</b> not access values outside of the range of the buffer as specified in the descriptor set bound to the same pipeline bind point</li>
+     * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess">robust buffer access</a> feature is not enabled, and if the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a uniform buffer, it <b>must</b> not access values outside of the range of the buffer as specified in the descriptor set bound to the same pipeline bind point</li>
+     * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess">robust buffer access</a> feature is not enabled, and if the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a storage buffer, it <b>must</b> not access values outside of the range of the buffer as specified in the descriptor set bound to the same pipeline bind point</li>
      * <li>If {@code commandBuffer} is an unprotected command buffer, any resource accessed by the {@code VkPipeline} object bound to the pipeline bind point used by this command <b>must</b> not be a protected resource</li>
      * <li>{@code baseGroupX} <b>must</b> be less than {@link VkPhysicalDeviceLimits}{@code ::maxComputeWorkGroupCount}[0]</li>
      * <li>{@code baseGroupX} <b>must</b> be less than {@link VkPhysicalDeviceLimits}{@code ::maxComputeWorkGroupCount}[1]</li>
@@ -1513,7 +1513,7 @@ public class VK11 extends VK10 {
      * 
      * <ul>
      * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-     * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
+     * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
      * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support compute operations</li>
      * <li>This command <b>must</b> only be called outside of a render pass instance</li>
      * </ul>
@@ -1528,7 +1528,7 @@ public class VK11 extends VK10 {
      * <h5>Command Properties</h5>
      * 
      * <table class="lwjgl">
-     * <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-pipeline-stages-types">Pipeline Type</a></th></tr></thead>
+     * <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-pipeline-stages-types">Pipeline Type</a></th></tr></thead>
      * <tbody><tr><td>Primary Secondary</td><td>Outside</td><td>Compute</td><td></td></tr></tbody>
      * </table>
      *
@@ -2344,7 +2344,7 @@ public class VK11 extends VK10 {
     }
 
     /**
-     * Create a new Ycbcr conversion.
+     * Create a new Y′C<sub>B</sub>C<sub>R</sub> conversion.
      * 
      * <h5>C Specification</h5>
      * 
@@ -2368,12 +2368,12 @@ public class VK11 extends VK10 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>The interpretation of the configured sampler Y'C<sub>B</sub>C<sub>R</sub> conversion is described in more detail in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#textures-sampler-YCbCr-conversion">the description of sampler Y'C<sub>B</sub>C<sub>R</sub> conversion</a> in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#textures">Image Operations</a> chapter.</p>
+     * <p>The interpretation of the configured sampler Y′C<sub>B</sub>C<sub>R</sub> conversion is described in more detail in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures-sampler-YCbCr-conversion">the description of sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a> in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures">Image Operations</a> chapter.</p>
      * 
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#features-sampler-YCbCr-conversion">sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion feature</a> <b>must</b> be enabled</li>
+     * <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-sampler-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion feature</a> <b>must</b> be enabled</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -2403,10 +2403,10 @@ public class VK11 extends VK10 {
      * 
      * <p>{@link VkAllocationCallbacks}, {@link VkSamplerYcbcrConversionCreateInfo}</p>
      *
-     * @param device           the logical device that creates the sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion.
-     * @param pCreateInfo      a pointer to a {@link VkSamplerYcbcrConversionCreateInfo} structure specifying the requested sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion.
-     * @param pAllocator       controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
-     * @param pYcbcrConversion a pointer to a {@code VkSamplerYcbcrConversion} handle in which the resulting sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion is returned.
+     * @param device           the logical device that creates the sampler Y′C<sub>B</sub>C<sub>R</sub> conversion.
+     * @param pCreateInfo      a pointer to a {@link VkSamplerYcbcrConversionCreateInfo} structure specifying the requested sampler Y′C<sub>B</sub>C<sub>R</sub> conversion.
+     * @param pAllocator       controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
+     * @param pYcbcrConversion a pointer to a {@code VkSamplerYcbcrConversion} handle in which the resulting sampler Y′C<sub>B</sub>C<sub>R</sub> conversion is returned.
      */
     @NativeType("VkResult")
     public static int vkCreateSamplerYcbcrConversion(VkDevice device, @NativeType("VkSamplerYcbcrConversionCreateInfo const *") VkSamplerYcbcrConversionCreateInfo pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkSamplerYcbcrConversion *") LongBuffer pYcbcrConversion) {
@@ -2429,11 +2429,11 @@ public class VK11 extends VK10 {
     }
 
     /**
-     * Destroy a created Y'CbCr conversion.
+     * Destroy a created Y′C<sub>B</sub>C<sub>R</sub> conversion.
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>To destroy a sampler Y'C<sub>B</sub>C<sub>R</sub> conversion, call:</p>
+     * <p>To destroy a sampler Y′C<sub>B</sub>C<sub>R</sub> conversion, call:</p>
      * 
      * <pre><code>
      * void vkDestroySamplerYcbcrConversion(
@@ -2468,9 +2468,9 @@ public class VK11 extends VK10 {
      * 
      * <p>{@link VkAllocationCallbacks}</p>
      *
-     * @param device          the logical device that destroys the Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion.
+     * @param device          the logical device that destroys the Y′C<sub>B</sub>C<sub>R</sub> conversion.
      * @param ycbcrConversion the conversion to destroy.
-     * @param pAllocator      controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
+     * @param pAllocator      controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      */
     public static void vkDestroySamplerYcbcrConversion(VkDevice device, @NativeType("VkSamplerYcbcrConversion") long ycbcrConversion, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
         nvkDestroySamplerYcbcrConversion(device, ycbcrConversion, memAddressSafe(pAllocator));
@@ -2545,7 +2545,7 @@ public class VK11 extends VK10 {
      *
      * @param device                    the logical device that creates the descriptor update template.
      * @param pCreateInfo               a pointer to a {@link VkDescriptorUpdateTemplateCreateInfo} structure specifying the set of descriptors to update with a single call to {@link KHRPushDescriptor#vkCmdPushDescriptorSetWithTemplateKHR CmdPushDescriptorSetWithTemplateKHR} or {@link #vkUpdateDescriptorSetWithTemplate UpdateDescriptorSetWithTemplate}.
-     * @param pAllocator                controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
+     * @param pAllocator                controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      * @param pDescriptorUpdateTemplate a pointer to a {@code VkDescriptorUpdateTemplate} handle in which the resulting descriptor update template object is returned.
      */
     @NativeType("VkResult")
@@ -2617,7 +2617,7 @@ public class VK11 extends VK10 {
      *
      * @param device                   the logical device that has been used to create the descriptor update template
      * @param descriptorUpdateTemplate the descriptor update template to destroy.
-     * @param pAllocator               controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
+     * @param pAllocator               controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      */
     public static void vkDestroyDescriptorUpdateTemplate(VkDevice device, @NativeType("VkDescriptorUpdateTemplate") long descriptorUpdateTemplate, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
         nvkDestroyDescriptorUpdateTemplate(device, descriptorUpdateTemplate, memAddressSafe(pAllocator));
@@ -2828,7 +2828,7 @@ public class VK11 extends VK10 {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>Fences <b>may</b> support import and export of their <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-fences-payloads">payload</a> to external handles. To query the external handle types supported by fences, call:</p>
+     * <p>Fences <b>may</b> support import and export of their <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-fences-payloads">payload</a> to external handles. To query the external handle types supported by fences, call:</p>
      * 
      * <pre><code>
      * void vkGetPhysicalDeviceExternalFenceProperties(
@@ -2880,7 +2880,7 @@ public class VK11 extends VK10 {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>Semaphores <b>may</b> support import and export of their <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#synchronization-semaphores-payloads">payload</a> to external handles. To query the external handle types supported by semaphores, call:</p>
+     * <p>Semaphores <b>may</b> support import and export of their <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-semaphores-payloads">payload</a> to external handles. To query the external handle types supported by semaphores, call:</p>
      * 
      * <pre><code>
      * void vkGetPhysicalDeviceExternalSemaphoreProperties(

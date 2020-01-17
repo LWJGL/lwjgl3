@@ -17,6 +17,9 @@ val KHR_spirv_1_4 = "KHRSpirv14".nativeClassVK("KHR_spirv_1_4", type = "device",
 
         SPIR-V 1.4 introduces new floating point execution mode capabilities, also available via {@code SPV_KHR_float_controls}. Implementations are not required to support all of these new capabilities; support can be queried using ##VkPhysicalDeviceFloatControlsPropertiesKHR from the {@link KHRShaderFloatControls VK_KHR_shader_float_controls} extension.
 
+        <h5>Promotion to Vulkan 1.2</h5>
+        All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_spirv_1_4}</dd>
@@ -36,6 +39,11 @@ val KHR_spirv_1_4 = "KHRSpirv14".nativeClassVK("KHR_spirv_1_4", type = "device",
                 <li>Requires {@link KHRShaderFloatControls VK_KHR_shader_float_controls}</li>
             </ul></dd>
 
+            <dt><b>Deprecation state</b></dt>
+            <dd><ul>
+                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#versions-1.2-promotions">Vulkan 1.2</a></li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Jesse Hall <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_spirv_1_4:%20&amp;body=@critsec%20">critsec</a></li>
@@ -50,6 +58,7 @@ val KHR_spirv_1_4 = "KHRSpirv14".nativeClassVK("KHR_spirv_1_4", type = "device",
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
                 <li>Requires SPIR-V 1.4.</li>
+                <li>Promoted to Vulkan 1.2 Core</li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

@@ -11,7 +11,10 @@ import vulkan.*
 val KHR_vulkan_memory_model = "KHRVulkanMemoryModel".nativeClassVK("KHR_vulkan_memory_model", type = "device", postfix = KHR) {
     documentation =
         """
-        The {@code VK_KHR_vulkan_memory_model} extension allows use of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#memory-model">Vulkan Memory Model</a>, which formally defines how to synchronize memory accesses to the same memory locations performed by multiple shader invocations.
+        The {@code VK_KHR_vulkan_memory_model} extension allows use of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#memory-model">Vulkan Memory Model</a>, which formally defines how to synchronize memory accesses to the same memory locations performed by multiple shader invocations.
+
+        <h5>Promotion to Vulkan 1.2</h5>
+        All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
 
         <dl>
             <dt><b>Name String</b></dt>
@@ -31,6 +34,11 @@ val KHR_vulkan_memory_model = "KHRVulkanMemoryModel".nativeClassVK("KHR_vulkan_m
                 <li>Requires Vulkan 1.0</li>
             </ul></dd>
 
+            <dt><b>Deprecation state</b></dt>
+            <dd><ul>
+                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#versions-1.2-promotions">Vulkan 1.2</a></li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_vulkan_memory_model:%20&amp;body=@jeffbolznv%20">jeffbolznv</a></li>
@@ -44,6 +52,7 @@ val KHR_vulkan_memory_model = "KHRVulkanMemoryModel".nativeClassVK("KHR_vulkan_m
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
+                <li>Promoted to Vulkan 1.2 Core</li>
                 <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_vulkan_memory_model.html">{@code SPV_KHR_vulkan_memory_model}</a></li>
             </ul></dd>
 

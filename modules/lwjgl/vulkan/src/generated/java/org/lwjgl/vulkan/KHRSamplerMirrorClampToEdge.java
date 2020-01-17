@@ -10,6 +10,10 @@ package org.lwjgl.vulkan;
  * 
  * <p>This new mode relaxes the need to generate images whose opposite edges match by using the original image to generate a matching "{@code mirror image}". This mode allows the texture to be mirrored only once in the negative s, t, and r directions.</p>
  * 
+ * <h5>Promotion to Vulkan 1.2</h5>
+ * 
+ * <p>All functionality in this extension is included in core Vulkan 1.2. However, if Vulkan 1.2 is supported and this extension is not, the {@code VkSamplerAddressMode} {@link #VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE} is optional. Since the original extension did not use an author suffix on the enum {@link #VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE}, it is used by both core and extension implementations.</p>
+ * 
  * <h5>Example</h5>
  * 
  * <p>Creating a sampler with the new address mode in each dimension</p>
@@ -44,12 +48,20 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
  * </ul></dd>
+ * <dt><b>Deprecation state</b></dt>
+ * <dd><ul>
+ * <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#versions-1.2-promotions">Vulkan 1.2</a></li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_sampler_mirror_clamp_to_edge:%20&amp;body=@tobski%20">tobski</a></li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2019-08-17</dd>
+ * <dt><b>Interactions and External Dependencies</b></dt>
+ * <dd><ul>
+ * <li>Promoted to Vulkan 1.2 Core</li>
+ * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
  * <li>Tobias Hector, Imagination Technologies</li>

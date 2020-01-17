@@ -10,6 +10,10 @@ package org.lwjgl.vulkan;
  * 
  * <p>The {@code VK_KHR_shader_float_controls} extension enables efficient use of floating-point computations through the ability to query and override the implementation's default behavior for rounding modes, denormals, signed zero, and infinity.</p>
  * 
+ * <h5>Promotion to Vulkan 1.2</h5>
+ * 
+ * <p>All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.</p>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_shader_float_controls}</dd>
@@ -24,12 +28,20 @@ package org.lwjgl.vulkan;
  * <li>Requires Vulkan 1.0</li>
  * <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</li>
  * </ul></dd>
+ * <dt><b>Deprecation state</b></dt>
+ * <dd><ul>
+ * <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#versions-1.2-promotions">Vulkan 1.2</a></li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Alexander Galazin <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_shader_float_controls:%20&amp;body=@alegal-arm%20">alegal-arm</a></li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2018-09-11</dd>
+ * <dt><b>Interactions and External Dependencies</b></dt>
+ * <dd><ul>
+ * <li>Promoted to Vulkan 1.2 Core</li>
+ * </ul></dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
@@ -58,19 +70,15 @@ public final class KHRShaderFloatControls {
     public static final int VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES_KHR = 1000197000;
 
     /**
-     * VkShaderFloatControlsIndependenceKHR - Enum specifying whether, and how, shader float controls can be set separately
+     * Extends {@code VkShaderFloatControlsIndependence}.
      * 
-     * <h5>Description</h5>
+     * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY_KHR SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY_KHR} specifies that shader float controls for 32-bit floating point <b>can</b> be set independently; other bit widths <b>must</b> be set identically to each other.</li>
-     * <li>{@link #VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_ALL_KHR SHADER_FLOAT_CONTROLS_INDEPENDENCE_ALL_KHR} specifies that shader float controls for all bit widths <b>can</b> be set independently.</li>
-     * <li>{@link #VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE_KHR SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE_KHR} specifies that shader float controls for all bit widths <b>must</b> be set identically.</li>
+     * <li>{@link #VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY_KHR SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY_KHR}</li>
+     * <li>{@link #VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_ALL_KHR SHADER_FLOAT_CONTROLS_INDEPENDENCE_ALL_KHR}</li>
+     * <li>{@link #VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE_KHR SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE_KHR}</li>
      * </ul>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link VkPhysicalDeviceFloatControlsPropertiesKHR}</p>
      */
     public static final int
         VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY_KHR = 0,

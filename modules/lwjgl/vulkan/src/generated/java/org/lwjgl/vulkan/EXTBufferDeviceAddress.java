@@ -31,7 +31,12 @@ import static org.lwjgl.system.JNI.*;
  * </ul></dd>
  * <dt><b>Deprecation state</b></dt>
  * <dd><ul>
- * <li><em>Deprecated</em> by {@link KHRBufferDeviceAddress VK_KHR_buffer_device_address} extension</li>
+ * <li><em>Deprecated</em> by {@link KHRBufferDeviceAddress VK_KHR_buffer_device_address} extension
+ * 
+ * <ul>
+ * <li>Which in turn was <em>promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#versions-1.2-promotions">Vulkan 1.2</a></li>
+ * </ul>
+ * </li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
@@ -108,13 +113,13 @@ public class EXTBufferDeviceAddress {
     }
 
     /**
-     * See {@link KHRBufferDeviceAddress#vkGetBufferDeviceAddressKHR GetBufferDeviceAddressKHR}.
+     * See {@link VK12#vkGetBufferDeviceAddress GetBufferDeviceAddress}.
      *
      * @param device the logical device that the buffer was created on.
-     * @param pInfo  a pointer to a {@link VkBufferDeviceAddressInfoKHR} structure specifying the buffer to retrieve an address for.
+     * @param pInfo  a pointer to a {@link VkBufferDeviceAddressInfo} structure specifying the buffer to retrieve an address for.
      */
     @NativeType("VkDeviceAddress")
-    public static long vkGetBufferDeviceAddressEXT(VkDevice device, @NativeType("VkBufferDeviceAddressInfoKHR const *") VkBufferDeviceAddressInfoKHR pInfo) {
+    public static long vkGetBufferDeviceAddressEXT(VkDevice device, @NativeType("VkBufferDeviceAddressInfo const *") VkBufferDeviceAddressInfo pInfo) {
         return nvkGetBufferDeviceAddressEXT(device, pInfo.address());
     }
 

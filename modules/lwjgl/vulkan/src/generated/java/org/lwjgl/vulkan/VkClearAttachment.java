@@ -51,7 +51,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code aspectMask} &ndash; a mask selecting the color, depth and/or stencil aspects of the attachment to be cleared.</li>
  * <li>{@code colorAttachment} &ndash; only meaningful if {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT} is set in {@code aspectMask}, in which case it is an index to the {@code pColorAttachments} array in the {@link VkSubpassDescription} structure of the current subpass which selects the color attachment to clear.</li>
- * <li>{@code clearValue} &ndash; the color or depth/stencil value to clear the attachment to, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#clears-values">Clear Values</a> below.</li>
+ * <li>{@code clearValue} &ndash; the color or depth/stencil value to clear the attachment to, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#clears-values">Clear Values</a> below.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

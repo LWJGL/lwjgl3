@@ -16,27 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying subpass begin info.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRCreateRenderpass2#VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO_KHR STRUCTURE_TYPE_SUBPASS_BEGIN_INFO_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code contents} <b>must</b> be a valid {@code VkSubpassContents} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link KHRCreateRenderpass2#vkCmdBeginRenderPass2KHR CmdBeginRenderPass2KHR}, {@link KHRCreateRenderpass2#vkCmdNextSubpass2KHR CmdNextSubpass2KHR}</p>
- * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code contents} &ndash; a {@code VkSubpassContents} value specifying how the commands in the next subpass will be provided.</li>
- * </ul>
+ * See {@link VkSubpassBeginInfo}.
  * 
  * <h3>Layout</h3>
  * 
@@ -47,34 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkSubpassContents contents;
  * }</code></pre>
  */
-public class VkSubpassBeginInfoKHR extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        CONTENTS;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        CONTENTS = layout.offsetof(2);
-    }
+public class VkSubpassBeginInfoKHR extends VkSubpassBeginInfo {
 
     /**
      * Creates a {@code VkSubpassBeginInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -83,30 +36,21 @@ public class VkSubpassBeginInfoKHR extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkSubpassBeginInfoKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** Returns the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code contents} field. */
-    @NativeType("VkSubpassContents")
-    public int contents() { return ncontents(address()); }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkSubpassBeginInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkSubpassBeginInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code contents} field. */
+    @Override
     public VkSubpassBeginInfoKHR contents(@NativeType("VkSubpassContents") int value) { ncontents(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkSubpassBeginInfoKHR set(
         int sType,
         long pNext,
@@ -274,24 +218,8 @@ public class VkSubpassBeginInfoKHR extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSubpassBeginInfoKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkSubpassBeginInfoKHR.PNEXT); }
-    /** Unsafe version of {@link #contents}. */
-    public static int ncontents(long struct) { return UNSAFE.getInt(null, struct + VkSubpassBeginInfoKHR.CONTENTS); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassBeginInfoKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkSubpassBeginInfoKHR.PNEXT, value); }
-    /** Unsafe version of {@link #contents(int) contents}. */
-    public static void ncontents(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassBeginInfoKHR.CONTENTS, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkSubpassBeginInfoKHR} structs. */
-    public static class Buffer extends StructBuffer<VkSubpassBeginInfoKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkSubpassBeginInfo.Buffer {
 
         private static final VkSubpassBeginInfoKHR ELEMENT_FACTORY = VkSubpassBeginInfoKHR.create(-1L);
 
@@ -305,7 +233,7 @@ public class VkSubpassBeginInfoKHR extends Struct implements NativeResource {
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -326,21 +254,14 @@ public class VkSubpassBeginInfoKHR extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkSubpassBeginInfoKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkSubpassBeginInfoKHR.npNext(address()); }
-        /** Returns the value of the {@code contents} field. */
-        @NativeType("VkSubpassContents")
-        public int contents() { return VkSubpassBeginInfoKHR.ncontents(address()); }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkSubpassBeginInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkSubpassBeginInfoKHR.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkSubpassBeginInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkSubpassBeginInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code contents} field. */
+        @Override
         public VkSubpassBeginInfoKHR.Buffer contents(@NativeType("VkSubpassContents") int value) { VkSubpassBeginInfoKHR.ncontents(address(), value); return this; }
 
     }

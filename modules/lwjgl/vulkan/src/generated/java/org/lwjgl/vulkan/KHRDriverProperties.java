@@ -8,6 +8,10 @@ package org.lwjgl.vulkan;
 /**
  * This extension provides a new physical device query which allows retrieving information about the driver implementation, allowing applications to determine which physical device corresponds to which particular vendor's driver, and which conformance test suite version the driver implementation is compliant with.
  * 
+ * <h5>Promotion to Vulkan 1.2</h5>
+ * 
+ * <p>All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.</p>
+ * 
  * <h5>Examples</h5>
  * 
  * <p>None.</p>
@@ -26,12 +30,20 @@ package org.lwjgl.vulkan;
  * <li>Requires Vulkan 1.0</li>
  * <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</li>
  * </ul></dd>
+ * <dt><b>Deprecation state</b></dt>
+ * <dd><ul>
+ * <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#versions-1.2-promotions">Vulkan 1.2</a></li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Daniel Rakos <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_driver_properties:%20&amp;body=@drakos-amd%20">drakos-amd</a></li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2018-04-11</dd>
+ * <dt><b>Interactions and External Dependencies</b></dt>
+ * <dd><ul>
+ * <li>Promoted to Vulkan 1.2 Core</li>
+ * </ul></dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
@@ -63,20 +75,7 @@ public final class KHRDriverProperties {
     public static final int VK_MAX_DRIVER_INFO_SIZE_KHR = 256;
 
     /**
-     * VkDriverIdKHR - Khronos driver IDs
-     * 
-     * <h5>Description</h5>
-     * 
-     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-     * 
-     * <p>Khronos driver IDs may be allocated by vendors at any time. There may be multiple driver IDs for the same vendor, representing different drivers (for e.g. different platforms, proprietary or open source, etc.). Only the latest canonical versions of this Specification, of the corresponding {@code vk.xml} API Registry, and of the corresponding {@code vulkan_core.h} header file <b>must</b> contain all reserved Khronos driver IDs.</p>
-     * 
-     * <p>Only driver IDs registered with Khronos are given symbolic names. There <b>may</b> be unregistered driver IDs returned.</p>
-     * </div>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link VkPhysicalDeviceDriverPropertiesKHR}</p>
+     * Extends {@code VkDriverId}.
      * 
      * <h5>Enum values:</h5>
      * 

@@ -13,6 +13,9 @@ val KHR_depth_stencil_resolve = "KHRDepthStencilResolve".nativeClassVK("KHR_dept
         """
         This extension adds support for automatically resolving multisampled depth/stencil attachments in a subpass in a similar manner as for color attachments.
 
+        <h5>Promotion to Vulkan 1.2</h5>
+        All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_depth_stencil_resolve}</dd>
@@ -32,6 +35,11 @@ val KHR_depth_stencil_resolve = "KHRDepthStencilResolve".nativeClassVK("KHR_dept
                 <li>Requires {@link KHRCreateRenderpass2 VK_KHR_create_renderpass2}</li>
             </ul></dd>
 
+            <dt><b>Deprecation state</b></dt>
+            <dd><ul>
+                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#versions-1.2-promotions">Vulkan 1.2</a></li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Jan-Harald Fredriksen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_depth_stencil_resolve:%20&amp;body=@janharald%20">janharald</a></li>
@@ -39,6 +47,11 @@ val KHR_depth_stencil_resolve = "KHRDepthStencilResolve".nativeClassVK("KHR_dept
 
             <dt>Last Modified Date</dt>
             <dd>2018-04-09</dd>
+
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
+                <li>Promoted to Vulkan 1.2 Core</li>
+            </ul></dd>
 
             <dt>Contributors</dt>
             <dd><ul>
@@ -71,21 +84,7 @@ val KHR_depth_stencil_resolve = "KHRDepthStencilResolve".nativeClassVK("KHR_dept
     )
 
     EnumConstant(
-        """
-        VkResolveModeFlagBitsKHR - Bitmask indicating supported depth and stencil resolve modes
-
-        <h5>Description</h5>
-        <ul>
-            <li>#RESOLVE_MODE_NONE_KHR indicates that no resolve operation is done.</li>
-            <li>#RESOLVE_MODE_SAMPLE_ZERO_BIT_KHR indicates that result of the resolve operation is equal to the value of sample 0.</li>
-            <li>#RESOLVE_MODE_AVERAGE_BIT_KHR indicates that result of the resolve operation is the average of the sample values.</li>
-            <li>#RESOLVE_MODE_MIN_BIT_KHR indicates that result of the resolve operation is the minimum of the sample values.</li>
-            <li>#RESOLVE_MODE_MAX_BIT_KHR indicates that result of the resolve operation is the maximum of the sample values.</li>
-        </ul>
-
-        <h5>See Also</h5>
-        {@code VkResolveModeFlagsKHR}, ##VkSubpassDescriptionDepthStencilResolveKHR
-        """,
+        "Extends {@code VkResolveModeFlagBits}.",
 
         "RESOLVE_MODE_NONE_KHR".."0",
         "RESOLVE_MODE_SAMPLE_ZERO_BIT_KHR".enum(0x00000001),

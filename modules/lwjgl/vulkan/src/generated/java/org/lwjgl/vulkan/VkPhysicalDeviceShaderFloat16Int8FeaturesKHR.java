@@ -16,22 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing features supported by VK_KHR_shader_float16_int8.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRShaderFloat16Int8#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES_KHR}</li>
- * </ul>
- * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code shaderFloat16} &ndash; indicates whether 16-bit floats (halfs) are supported in shader code. This also indicates whether shader modules <b>can</b> declare the {@code Float16} capability. However, this only enables a subset of the storage classes that SPIR-V allows for the {@code Float16} SPIR-V capability: Declaring and using 16-bit floats in the {@code Private}, {@code Workgroup}, and {@code Function} storage classes is enabled, while declaring them in the interface storage classes (e.g., {@code UniformConstant}, {@code Uniform}, {@code StorageBuffer}, {@code Input}, {@code Output}, and {@code PushConstant}) is not enabled.</li>
- * <li>{@code shaderInt8} &ndash; indicates whether 8-bit integers (signed and unsigned) are supported in shader code. This also indicates whether shader modules <b>can</b> declare the {@code Int8} capability. However, this only enables a subset of the storage classes that SPIR-V allows for the {@code Int8} SPIR-V capability: Declaring and using 8-bit integers in the {@code Private}, {@code Workgroup}, and {@code Function} storage classes is enabled, while declaring them in the interface storage classes (e.g., {@code UniformConstant}, {@code Uniform}, {@code StorageBuffer}, {@code Input}, {@code Output}, and {@code PushConstant}) is not enabled.</li>
- * </ul>
+ * See {@link VkPhysicalDeviceShaderFloat16Int8Features}.
  * 
  * <h3>Layout</h3>
  * 
@@ -43,37 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 shaderInt8;
  * }</code></pre>
  */
-public class VkPhysicalDeviceShaderFloat16Int8FeaturesKHR extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        SHADERFLOAT16,
-        SHADERINT8;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        SHADERFLOAT16 = layout.offsetof(2);
-        SHADERINT8 = layout.offsetof(3);
-    }
+public class VkPhysicalDeviceShaderFloat16Int8FeaturesKHR extends VkPhysicalDeviceShaderFloat16Int8Features {
 
     /**
      * Creates a {@code VkPhysicalDeviceShaderFloat16Int8FeaturesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -82,35 +37,24 @@ public class VkPhysicalDeviceShaderFloat16Int8FeaturesKHR extends Struct impleme
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceShaderFloat16Int8FeaturesKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** Returns the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code shaderFloat16} field. */
-    @NativeType("VkBool32")
-    public boolean shaderFloat16() { return nshaderFloat16(address()) != 0; }
-    /** Returns the value of the {@code shaderInt8} field. */
-    @NativeType("VkBool32")
-    public boolean shaderInt8() { return nshaderInt8(address()) != 0; }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkPhysicalDeviceShaderFloat16Int8FeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkPhysicalDeviceShaderFloat16Int8FeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code shaderFloat16} field. */
+    @Override
     public VkPhysicalDeviceShaderFloat16Int8FeaturesKHR shaderFloat16(@NativeType("VkBool32") boolean value) { nshaderFloat16(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code shaderInt8} field. */
+    @Override
     public VkPhysicalDeviceShaderFloat16Int8FeaturesKHR shaderInt8(@NativeType("VkBool32") boolean value) { nshaderInt8(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkPhysicalDeviceShaderFloat16Int8FeaturesKHR set(
         int sType,
         long pNext,
@@ -280,28 +224,8 @@ public class VkPhysicalDeviceShaderFloat16Int8FeaturesKHR extends Struct impleme
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderFloat16Int8FeaturesKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderFloat16Int8FeaturesKHR.PNEXT); }
-    /** Unsafe version of {@link #shaderFloat16}. */
-    public static int nshaderFloat16(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderFloat16Int8FeaturesKHR.SHADERFLOAT16); }
-    /** Unsafe version of {@link #shaderInt8}. */
-    public static int nshaderInt8(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderFloat16Int8FeaturesKHR.SHADERINT8); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderFloat16Int8FeaturesKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderFloat16Int8FeaturesKHR.PNEXT, value); }
-    /** Unsafe version of {@link #shaderFloat16(boolean) shaderFloat16}. */
-    public static void nshaderFloat16(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderFloat16Int8FeaturesKHR.SHADERFLOAT16, value); }
-    /** Unsafe version of {@link #shaderInt8(boolean) shaderInt8}. */
-    public static void nshaderInt8(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderFloat16Int8FeaturesKHR.SHADERINT8, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkPhysicalDeviceShaderFloat16Int8FeaturesKHR} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceShaderFloat16Int8FeaturesKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkPhysicalDeviceShaderFloat16Int8Features.Buffer {
 
         private static final VkPhysicalDeviceShaderFloat16Int8FeaturesKHR ELEMENT_FACTORY = VkPhysicalDeviceShaderFloat16Int8FeaturesKHR.create(-1L);
 
@@ -315,7 +239,7 @@ public class VkPhysicalDeviceShaderFloat16Int8FeaturesKHR extends Struct impleme
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -336,26 +260,17 @@ public class VkPhysicalDeviceShaderFloat16Int8FeaturesKHR extends Struct impleme
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkPhysicalDeviceShaderFloat16Int8FeaturesKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkPhysicalDeviceShaderFloat16Int8FeaturesKHR.npNext(address()); }
-        /** Returns the value of the {@code shaderFloat16} field. */
-        @NativeType("VkBool32")
-        public boolean shaderFloat16() { return VkPhysicalDeviceShaderFloat16Int8FeaturesKHR.nshaderFloat16(address()) != 0; }
-        /** Returns the value of the {@code shaderInt8} field. */
-        @NativeType("VkBool32")
-        public boolean shaderInt8() { return VkPhysicalDeviceShaderFloat16Int8FeaturesKHR.nshaderInt8(address()) != 0; }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceShaderFloat16Int8FeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderFloat16Int8FeaturesKHR.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkPhysicalDeviceShaderFloat16Int8FeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderFloat16Int8FeaturesKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code shaderFloat16} field. */
+        @Override
         public VkPhysicalDeviceShaderFloat16Int8FeaturesKHR.Buffer shaderFloat16(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderFloat16Int8FeaturesKHR.nshaderFloat16(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code shaderInt8} field. */
+        @Override
         public VkPhysicalDeviceShaderFloat16Int8FeaturesKHR.Buffer shaderInt8(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderFloat16Int8FeaturesKHR.nshaderInt8(address(), value ? 1 : 0); return this; }
 
     }

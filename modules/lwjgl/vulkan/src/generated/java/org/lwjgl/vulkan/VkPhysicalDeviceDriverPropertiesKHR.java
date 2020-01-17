@@ -15,35 +15,10 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
-import static org.lwjgl.vulkan.KHRDriverProperties.*;
+import static org.lwjgl.vulkan.VK10.*;
 
 /**
- * Structure containing driver identification information.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@code driverID} <b>must</b> be immutable for a given driver across instances, processes, driver versions, and system reboots.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRDriverProperties#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkConformanceVersionKHR}</p>
- * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension specific structure.</li>
- * <li>{@code driverID} &ndash; a unique identifier for the driver of the physical device.</li>
- * <li>{@code driverName[VK_MAX_DRIVER_NAME_SIZE_KHR]} &ndash; an array of {@link KHRDriverProperties#VK_MAX_DRIVER_NAME_SIZE_KHR MAX_DRIVER_NAME_SIZE_KHR} {@code char} containing a null-terminated UTF-8 string which is the name of the driver.</li>
- * <li>{@code driverInfo[VK_MAX_DRIVER_INFO_SIZE_KHR]} &ndash; an array of {@link KHRDriverProperties#VK_MAX_DRIVER_INFO_SIZE_KHR MAX_DRIVER_INFO_SIZE_KHR} {@code char} containing a null-terminated UTF-8 string with additional information about the driver.</li>
- * <li>{@code conformanceVersion} &ndash; the version of the Vulkan conformance test this driver is conformant against (see {@link VkConformanceVersionKHR}).</li>
- * </ul>
+ * See {@link VkPhysicalDeviceDriverProperties}.
  * 
  * <h3>Layout</h3>
  * 
@@ -51,49 +26,13 @@ import static org.lwjgl.vulkan.KHRDriverProperties.*;
  * struct VkPhysicalDeviceDriverPropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkDriverIdKHR driverID;
- *     char driverName[VK_MAX_DRIVER_NAME_SIZE_KHR];
- *     char driverInfo[VK_MAX_DRIVER_INFO_SIZE_KHR];
- *     {@link VkConformanceVersionKHR VkConformanceVersionKHR} conformanceVersion;
+ *     VkDriverId driverID;
+ *     char driverName[VK_MAX_DRIVER_NAME_SIZE];
+ *     char driverInfo[VK_MAX_DRIVER_INFO_SIZE];
+ *     {@link VkConformanceVersion VkConformanceVersion} conformanceVersion;
  * }</code></pre>
  */
-public class VkPhysicalDeviceDriverPropertiesKHR extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        DRIVERID,
-        DRIVERNAME,
-        DRIVERINFO,
-        CONFORMANCEVERSION;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4),
-            __array(1, VK_MAX_DRIVER_NAME_SIZE_KHR),
-            __array(1, VK_MAX_DRIVER_INFO_SIZE_KHR),
-            __member(VkConformanceVersionKHR.SIZEOF, VkConformanceVersionKHR.ALIGNOF)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        DRIVERID = layout.offsetof(2);
-        DRIVERNAME = layout.offsetof(3);
-        DRIVERINFO = layout.offsetof(4);
-        CONFORMANCEVERSION = layout.offsetof(5);
-    }
+public class VkPhysicalDeviceDriverPropertiesKHR extends VkPhysicalDeviceDriverProperties {
 
     /**
      * Creates a {@code VkPhysicalDeviceDriverPropertiesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -102,42 +41,18 @@ public class VkPhysicalDeviceDriverPropertiesKHR extends Struct implements Nativ
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceDriverPropertiesKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** Returns the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code driverID} field. */
-    @NativeType("VkDriverIdKHR")
-    public int driverID() { return ndriverID(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code driverName} field. */
-    @NativeType("char[VK_MAX_DRIVER_NAME_SIZE_KHR]")
-    public ByteBuffer driverName() { return ndriverName(address()); }
-    /** Decodes the null-terminated string stored in the {@code driverName} field. */
-    @NativeType("char[VK_MAX_DRIVER_NAME_SIZE_KHR]")
-    public String driverNameString() { return ndriverNameString(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code driverInfo} field. */
-    @NativeType("char[VK_MAX_DRIVER_INFO_SIZE_KHR]")
-    public ByteBuffer driverInfo() { return ndriverInfo(address()); }
-    /** Decodes the null-terminated string stored in the {@code driverInfo} field. */
-    @NativeType("char[VK_MAX_DRIVER_INFO_SIZE_KHR]")
-    public String driverInfoString() { return ndriverInfoString(address()); }
-    /** Returns a {@link VkConformanceVersionKHR} view of the {@code conformanceVersion} field. */
-    public VkConformanceVersionKHR conformanceVersion() { return nconformanceVersion(address()); }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkPhysicalDeviceDriverPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkPhysicalDeviceDriverPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkPhysicalDeviceDriverPropertiesKHR set(
         int sType,
         long pNext
@@ -303,32 +218,8 @@ public class VkPhysicalDeviceDriverPropertiesKHR extends Struct implements Nativ
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDriverPropertiesKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceDriverPropertiesKHR.PNEXT); }
-    /** Unsafe version of {@link #driverID}. */
-    public static int ndriverID(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDriverPropertiesKHR.DRIVERID); }
-    /** Unsafe version of {@link #driverName}. */
-    public static ByteBuffer ndriverName(long struct) { return memByteBuffer(struct + VkPhysicalDeviceDriverPropertiesKHR.DRIVERNAME, VK_MAX_DRIVER_NAME_SIZE_KHR); }
-    /** Unsafe version of {@link #driverNameString}. */
-    public static String ndriverNameString(long struct) { return memUTF8(struct + VkPhysicalDeviceDriverPropertiesKHR.DRIVERNAME); }
-    /** Unsafe version of {@link #driverInfo}. */
-    public static ByteBuffer ndriverInfo(long struct) { return memByteBuffer(struct + VkPhysicalDeviceDriverPropertiesKHR.DRIVERINFO, VK_MAX_DRIVER_INFO_SIZE_KHR); }
-    /** Unsafe version of {@link #driverInfoString}. */
-    public static String ndriverInfoString(long struct) { return memUTF8(struct + VkPhysicalDeviceDriverPropertiesKHR.DRIVERINFO); }
-    /** Unsafe version of {@link #conformanceVersion}. */
-    public static VkConformanceVersionKHR nconformanceVersion(long struct) { return VkConformanceVersionKHR.create(struct + VkPhysicalDeviceDriverPropertiesKHR.CONFORMANCEVERSION); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDriverPropertiesKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceDriverPropertiesKHR.PNEXT, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkPhysicalDeviceDriverPropertiesKHR} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceDriverPropertiesKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkPhysicalDeviceDriverProperties.Buffer {
 
         private static final VkPhysicalDeviceDriverPropertiesKHR ELEMENT_FACTORY = VkPhysicalDeviceDriverPropertiesKHR.create(-1L);
 
@@ -342,7 +233,7 @@ public class VkPhysicalDeviceDriverPropertiesKHR extends Struct implements Nativ
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -363,33 +254,11 @@ public class VkPhysicalDeviceDriverPropertiesKHR extends Struct implements Nativ
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkPhysicalDeviceDriverPropertiesKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkPhysicalDeviceDriverPropertiesKHR.npNext(address()); }
-        /** Returns the value of the {@code driverID} field. */
-        @NativeType("VkDriverIdKHR")
-        public int driverID() { return VkPhysicalDeviceDriverPropertiesKHR.ndriverID(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code driverName} field. */
-        @NativeType("char[VK_MAX_DRIVER_NAME_SIZE_KHR]")
-        public ByteBuffer driverName() { return VkPhysicalDeviceDriverPropertiesKHR.ndriverName(address()); }
-        /** Decodes the null-terminated string stored in the {@code driverName} field. */
-        @NativeType("char[VK_MAX_DRIVER_NAME_SIZE_KHR]")
-        public String driverNameString() { return VkPhysicalDeviceDriverPropertiesKHR.ndriverNameString(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code driverInfo} field. */
-        @NativeType("char[VK_MAX_DRIVER_INFO_SIZE_KHR]")
-        public ByteBuffer driverInfo() { return VkPhysicalDeviceDriverPropertiesKHR.ndriverInfo(address()); }
-        /** Decodes the null-terminated string stored in the {@code driverInfo} field. */
-        @NativeType("char[VK_MAX_DRIVER_INFO_SIZE_KHR]")
-        public String driverInfoString() { return VkPhysicalDeviceDriverPropertiesKHR.ndriverInfoString(address()); }
-        /** Returns a {@link VkConformanceVersionKHR} view of the {@code conformanceVersion} field. */
-        public VkConformanceVersionKHR conformanceVersion() { return VkPhysicalDeviceDriverPropertiesKHR.nconformanceVersion(address()); }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceDriverPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDriverPropertiesKHR.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkPhysicalDeviceDriverPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDriverPropertiesKHR.npNext(address(), value); return this; }
 
     }

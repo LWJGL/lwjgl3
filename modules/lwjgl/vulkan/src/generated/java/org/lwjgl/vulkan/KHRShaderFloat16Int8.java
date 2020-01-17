@@ -10,7 +10,11 @@ package org.lwjgl.vulkan;
  * 
  * <p>The {@code VK_KHR_shader_float16_int8} extension allows use of 16-bit floating-point types and 8-bit integer types in shaders for arithmetic operations.</p>
  * 
- * <p>It introduces two new optional features {@code shaderFloat16} and {@code shaderInt8} which directly map to the {@code Float16} and the {@code Int8} SPIR-V capabilities. The {@code VK_KHR_shader_float16_int8} extension also specifies precision requirements for half-precision floating-point SPIR-V operations. This extension does not enable use of 8-bit integer types or 16-bit floating-point types in any <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#interfaces-iointerfaces"> shader input and output interfaces</a> and therefore does not supersede the {@link KHR8bitStorage VK_KHR_8bit_storage} or {@link KHR16bitStorage VK_KHR_16bit_storage} extensions.</p>
+ * <p>It introduces two new optional features {@code shaderFloat16} and {@code shaderInt8} which directly map to the {@code Float16} and the {@code Int8} SPIR-V capabilities. The {@code VK_KHR_shader_float16_int8} extension also specifies precision requirements for half-precision floating-point SPIR-V operations. This extension does not enable use of 8-bit integer types or 16-bit floating-point types in any <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#interfaces-iointerfaces"> shader input and output interfaces</a> and therefore does not supersede the {@link KHR8bitStorage VK_KHR_8bit_storage} or {@link KHR16bitStorage VK_KHR_16bit_storage} extensions.</p>
+ * 
+ * <h5>Promotion to Vulkan 1.2</h5>
+ * 
+ * <p>All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.</p>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -26,12 +30,20 @@ package org.lwjgl.vulkan;
  * <li>Requires Vulkan 1.0</li>
  * <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</li>
  * </ul></dd>
+ * <dt><b>Deprecation state</b></dt>
+ * <dd><ul>
+ * <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#versions-1.2-promotions">Vulkan 1.2</a></li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Alexander Galazin <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_shader_float16_int8:%20&amp;body=@alegal-arm%20">alegal-arm</a></li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2018-03-07</dd>
+ * <dt><b>Interactions and External Dependencies</b></dt>
+ * <dd><ul>
+ * <li>Promoted to Vulkan 1.2 Core</li>
+ * </ul></dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>

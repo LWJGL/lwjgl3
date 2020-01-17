@@ -15,6 +15,9 @@ val KHR_8bit_storage = "KHR8bitStorage".nativeClassVK("KHR_8bit_storage", type =
 
         The {@code StorageBuffer8BitAccess} capability <b>must</b> be supported by all implementations of this extension. The other capabilities are optional.
 
+        <h5>Promotion to Vulkan 1.2</h5>
+        Functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. However, if Vulkan 1.2 is supported and this extension is not, the {@code StorageBuffer8BitAccess} capability is optional. The original type, enum and command names are still available as aliases of the core functionality.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_8bit_storage}</dd>
@@ -35,6 +38,11 @@ val KHR_8bit_storage = "KHR8bitStorage".nativeClassVK("KHR_8bit_storage", type =
                 <li>Requires {@link KHRStorageBufferStorageClass VK_KHR_storage_buffer_storage_class}</li>
             </ul></dd>
 
+            <dt><b>Deprecation state</b></dt>
+            <dd><ul>
+                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#versions-1.2-promotions">Vulkan 1.2</a></li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Alexander Galazin <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_8bit_storage:%20&amp;body=@alegal-arm%20">alegal-arm</a></li>
@@ -42,6 +50,11 @@ val KHR_8bit_storage = "KHR8bitStorage".nativeClassVK("KHR_8bit_storage", type =
 
             <dt><b>Last Modified Date</b></dt>
             <dd>2018-02-05</dd>
+
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
+                <li>Promoted to Vulkan 1.2 Core</li>
+            </ul></dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>

@@ -21,8 +21,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#features-multiViewport">multiple viewports</a> feature is not enabled, {@code viewportCount} <b>must</b> be 1</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#features-multiViewport">multiple viewports</a> feature is not enabled, {@code scissorCount} <b>must</b> be 1</li>
+ * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-multiViewport">multiple viewports</a> feature is not enabled, {@code viewportCount} <b>must</b> be 1</li>
+ * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-multiViewport">multiple viewports</a> feature is not enabled, {@code scissorCount} <b>must</b> be 1</li>
  * <li>{@code viewportCount} <b>must</b> be between 1 and {@link VkPhysicalDeviceLimits}{@code ::maxViewports}, inclusive</li>
  * <li>{@code scissorCount} <b>must</b> be between 1 and {@link VkPhysicalDeviceLimits}{@code ::maxViewports}, inclusive</li>
  * <li>{@code scissorCount} and {@code viewportCount} <b>must</b> be identical</li>
@@ -55,7 +55,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code flags} &ndash; reserved for future use.</li>
  * <li>{@code viewportCount} &ndash; the number of viewports used by the pipeline.</li>
  * <li>{@code pViewports} &ndash; a pointer to an array of {@link VkViewport} structures, defining the viewport transforms. If the viewport state is dynamic, this member is ignored.</li>
- * <li>{@code scissorCount} &ndash; the number of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#fragops-scissor">scissors</a> and <b>must</b> match the number of viewports.</li>
+ * <li>{@code scissorCount} &ndash; the number of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-scissor">scissors</a> and <b>must</b> match the number of viewports.</li>
  * <li>{@code pScissors} &ndash; a pointer to an array of {@link VkRect2D} structures defining the rectangular bounds of the scissor for the corresponding viewport. If the scissor state is dynamic, this member is ignored.</li>
  * </ul>
  * 

@@ -16,32 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the type of a newly created semaphore.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRTimelineSemaphore#VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO_KHR STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO_KHR}</li>
- * <li>{@code semaphoreType} <b>must</b> be a valid {@code VkSemaphoreTypeKHR} value</li>
- * </ul>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#features-timelineSemaphore">{@code timelineSemaphore}</a> feature is not enabled, {@code semaphoreType} <b>must</b> not equal {@link KHRTimelineSemaphore#VK_SEMAPHORE_TYPE_TIMELINE_KHR SEMAPHORE_TYPE_TIMELINE_KHR}</li>
- * <li>If {@code semaphoreType} is {@link KHRTimelineSemaphore#VK_SEMAPHORE_TYPE_BINARY_KHR SEMAPHORE_TYPE_BINARY_KHR}, {@code initialValue} <b>must</b> be zero.</li>
- * </ul>
- * 
- * <p>If no {@link VkSemaphoreTypeCreateInfoKHR} structure is included in the {@code pNext} chain of {@link VkSemaphoreCreateInfo}, then the created semaphore will have a default {@code VkSemaphoreTypeKHR} of {@link KHRTimelineSemaphore#VK_SEMAPHORE_TYPE_BINARY_KHR SEMAPHORE_TYPE_BINARY_KHR}.</p>
- * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code semaphoreType} &ndash; a {@code VkSemaphoreTypeKHR} value specifying the type of the semaphore.</li>
- * <li>{@code initialValue} &ndash; the initial payload value if {@code semaphoreType} is {@link KHRTimelineSemaphore#VK_SEMAPHORE_TYPE_TIMELINE_KHR SEMAPHORE_TYPE_TIMELINE_KHR}.</li>
- * </ul>
+ * See {@link VkSemaphoreTypeCreateInfo}.
  * 
  * <h3>Layout</h3>
  * 
@@ -49,41 +24,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct VkSemaphoreTypeCreateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
- *     VkSemaphoreTypeKHR semaphoreType;
+ *     VkSemaphoreType semaphoreType;
  *     uint64_t initialValue;
  * }</code></pre>
  */
-public class VkSemaphoreTypeCreateInfoKHR extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        SEMAPHORETYPE,
-        INITIALVALUE;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4),
-            __member(8)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        SEMAPHORETYPE = layout.offsetof(2);
-        INITIALVALUE = layout.offsetof(3);
-    }
+public class VkSemaphoreTypeCreateInfoKHR extends VkSemaphoreTypeCreateInfo {
 
     /**
      * Creates a {@code VkSemaphoreTypeCreateInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -92,35 +37,24 @@ public class VkSemaphoreTypeCreateInfoKHR extends Struct implements NativeResour
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkSemaphoreTypeCreateInfoKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** Returns the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code semaphoreType} field. */
-    @NativeType("VkSemaphoreTypeKHR")
-    public int semaphoreType() { return nsemaphoreType(address()); }
-    /** Returns the value of the {@code initialValue} field. */
-    @NativeType("uint64_t")
-    public long initialValue() { return ninitialValue(address()); }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkSemaphoreTypeCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkSemaphoreTypeCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code semaphoreType} field. */
-    public VkSemaphoreTypeCreateInfoKHR semaphoreType(@NativeType("VkSemaphoreTypeKHR") int value) { nsemaphoreType(address(), value); return this; }
+    @Override
+    public VkSemaphoreTypeCreateInfoKHR semaphoreType(@NativeType("VkSemaphoreType") int value) { nsemaphoreType(address(), value); return this; }
     /** Sets the specified value to the {@code initialValue} field. */
+    @Override
     public VkSemaphoreTypeCreateInfoKHR initialValue(@NativeType("uint64_t") long value) { ninitialValue(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkSemaphoreTypeCreateInfoKHR set(
         int sType,
         long pNext,
@@ -290,28 +224,8 @@ public class VkSemaphoreTypeCreateInfoKHR extends Struct implements NativeResour
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSemaphoreTypeCreateInfoKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkSemaphoreTypeCreateInfoKHR.PNEXT); }
-    /** Unsafe version of {@link #semaphoreType}. */
-    public static int nsemaphoreType(long struct) { return UNSAFE.getInt(null, struct + VkSemaphoreTypeCreateInfoKHR.SEMAPHORETYPE); }
-    /** Unsafe version of {@link #initialValue}. */
-    public static long ninitialValue(long struct) { return UNSAFE.getLong(null, struct + VkSemaphoreTypeCreateInfoKHR.INITIALVALUE); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSemaphoreTypeCreateInfoKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkSemaphoreTypeCreateInfoKHR.PNEXT, value); }
-    /** Unsafe version of {@link #semaphoreType(int) semaphoreType}. */
-    public static void nsemaphoreType(long struct, int value) { UNSAFE.putInt(null, struct + VkSemaphoreTypeCreateInfoKHR.SEMAPHORETYPE, value); }
-    /** Unsafe version of {@link #initialValue(long) initialValue}. */
-    public static void ninitialValue(long struct, long value) { UNSAFE.putLong(null, struct + VkSemaphoreTypeCreateInfoKHR.INITIALVALUE, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkSemaphoreTypeCreateInfoKHR} structs. */
-    public static class Buffer extends StructBuffer<VkSemaphoreTypeCreateInfoKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkSemaphoreTypeCreateInfo.Buffer {
 
         private static final VkSemaphoreTypeCreateInfoKHR ELEMENT_FACTORY = VkSemaphoreTypeCreateInfoKHR.create(-1L);
 
@@ -325,7 +239,7 @@ public class VkSemaphoreTypeCreateInfoKHR extends Struct implements NativeResour
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -346,26 +260,17 @@ public class VkSemaphoreTypeCreateInfoKHR extends Struct implements NativeResour
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkSemaphoreTypeCreateInfoKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkSemaphoreTypeCreateInfoKHR.npNext(address()); }
-        /** Returns the value of the {@code semaphoreType} field. */
-        @NativeType("VkSemaphoreTypeKHR")
-        public int semaphoreType() { return VkSemaphoreTypeCreateInfoKHR.nsemaphoreType(address()); }
-        /** Returns the value of the {@code initialValue} field. */
-        @NativeType("uint64_t")
-        public long initialValue() { return VkSemaphoreTypeCreateInfoKHR.ninitialValue(address()); }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkSemaphoreTypeCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkSemaphoreTypeCreateInfoKHR.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkSemaphoreTypeCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkSemaphoreTypeCreateInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code semaphoreType} field. */
-        public VkSemaphoreTypeCreateInfoKHR.Buffer semaphoreType(@NativeType("VkSemaphoreTypeKHR") int value) { VkSemaphoreTypeCreateInfoKHR.nsemaphoreType(address(), value); return this; }
+        @Override
+        public VkSemaphoreTypeCreateInfoKHR.Buffer semaphoreType(@NativeType("VkSemaphoreType") int value) { VkSemaphoreTypeCreateInfoKHR.nsemaphoreType(address(), value); return this; }
         /** Sets the specified value to the {@code initialValue} field. */
+        @Override
         public VkSemaphoreTypeCreateInfoKHR.Buffer initialValue(@NativeType("uint64_t") long value) { VkSemaphoreTypeCreateInfoKHR.ninitialValue(address(), value); return this; }
 
     }

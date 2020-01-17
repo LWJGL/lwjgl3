@@ -16,28 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying an attachment description.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code stencilLayout} <b>must</b> not be {@link VK10#VK_IMAGE_LAYOUT_UNDEFINED IMAGE_LAYOUT_UNDEFINED}, {@link VK10#VK_IMAGE_LAYOUT_PREINITIALIZED IMAGE_LAYOUT_PREINITIALIZED}, {@link VK10#VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL}, {@link KHRSeparateDepthStencilLayouts#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR}, {@link KHRSeparateDepthStencilLayouts#VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR}, {@link VK10#VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL}, {@link VK10#VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL}, {@link VK11#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL}, {@link VK11#VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL}, or {@link KHRSwapchain#VK_IMAGE_LAYOUT_PRESENT_SRC_KHR IMAGE_LAYOUT_PRESENT_SRC_KHR}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRSeparateDepthStencilLayouts#VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT_KHR STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT_KHR}</li>
- * <li>{@code stencilLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
- * </ul>
- * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code stencilLayout} &ndash; a {@code VkImageLayout} value specifying the layout the stencil aspect of the attachment uses during the subpass.</li>
- * </ul>
+ * See {@link VkAttachmentReferenceStencilLayout}.
  * 
  * <h3>Layout</h3>
  * 
@@ -48,34 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkImageLayout stencilLayout;
  * }</code></pre>
  */
-public class VkAttachmentReferenceStencilLayoutKHR extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        STENCILLAYOUT;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        STENCILLAYOUT = layout.offsetof(2);
-    }
+public class VkAttachmentReferenceStencilLayoutKHR extends VkAttachmentReferenceStencilLayout {
 
     /**
      * Creates a {@code VkAttachmentReferenceStencilLayoutKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -84,30 +36,21 @@ public class VkAttachmentReferenceStencilLayoutKHR extends Struct implements Nat
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkAttachmentReferenceStencilLayoutKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** Returns the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code stencilLayout} field. */
-    @NativeType("VkImageLayout")
-    public int stencilLayout() { return nstencilLayout(address()); }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkAttachmentReferenceStencilLayoutKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkAttachmentReferenceStencilLayoutKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code stencilLayout} field. */
+    @Override
     public VkAttachmentReferenceStencilLayoutKHR stencilLayout(@NativeType("VkImageLayout") int value) { nstencilLayout(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkAttachmentReferenceStencilLayoutKHR set(
         int sType,
         long pNext,
@@ -275,24 +218,8 @@ public class VkAttachmentReferenceStencilLayoutKHR extends Struct implements Nat
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentReferenceStencilLayoutKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkAttachmentReferenceStencilLayoutKHR.PNEXT); }
-    /** Unsafe version of {@link #stencilLayout}. */
-    public static int nstencilLayout(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentReferenceStencilLayoutKHR.STENCILLAYOUT); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentReferenceStencilLayoutKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkAttachmentReferenceStencilLayoutKHR.PNEXT, value); }
-    /** Unsafe version of {@link #stencilLayout(int) stencilLayout}. */
-    public static void nstencilLayout(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentReferenceStencilLayoutKHR.STENCILLAYOUT, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkAttachmentReferenceStencilLayoutKHR} structs. */
-    public static class Buffer extends StructBuffer<VkAttachmentReferenceStencilLayoutKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkAttachmentReferenceStencilLayout.Buffer {
 
         private static final VkAttachmentReferenceStencilLayoutKHR ELEMENT_FACTORY = VkAttachmentReferenceStencilLayoutKHR.create(-1L);
 
@@ -306,7 +233,7 @@ public class VkAttachmentReferenceStencilLayoutKHR extends Struct implements Nat
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -327,21 +254,14 @@ public class VkAttachmentReferenceStencilLayoutKHR extends Struct implements Nat
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkAttachmentReferenceStencilLayoutKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkAttachmentReferenceStencilLayoutKHR.npNext(address()); }
-        /** Returns the value of the {@code stencilLayout} field. */
-        @NativeType("VkImageLayout")
-        public int stencilLayout() { return VkAttachmentReferenceStencilLayoutKHR.nstencilLayout(address()); }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkAttachmentReferenceStencilLayoutKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkAttachmentReferenceStencilLayoutKHR.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkAttachmentReferenceStencilLayoutKHR.Buffer pNext(@NativeType("void *") long value) { VkAttachmentReferenceStencilLayoutKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code stencilLayout} field. */
+        @Override
         public VkAttachmentReferenceStencilLayoutKHR.Buffer stencilLayout(@NativeType("VkImageLayout") int value) { VkAttachmentReferenceStencilLayoutKHR.nstencilLayout(address(), value); return this; }
 
     }

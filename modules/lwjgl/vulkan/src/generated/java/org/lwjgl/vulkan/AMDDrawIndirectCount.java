@@ -32,7 +32,12 @@ import static org.lwjgl.system.JNI.*;
  * </ul></dd>
  * <dt><b>Deprecation state</b></dt>
  * <dd><ul>
- * <li><em>Promoted</em> to {@link KHRDrawIndirectCount VK_KHR_draw_indirect_count} extension</li>
+ * <li><em>Promoted</em> to {@link KHRDrawIndirectCount VK_KHR_draw_indirect_count} extension
+ * 
+ * <ul>
+ * <li>Which in turn was <em>promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#versions-1.2-promotions">Vulkan 1.2</a></li>
+ * </ul>
+ * </li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
@@ -40,6 +45,10 @@ import static org.lwjgl.system.JNI.*;
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2016-08-23</dd>
+ * <dt><b>Interactions and External Dependencies</b></dt>
+ * <dd><ul>
+ * <li>Promoted to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_draw_indirect_count">VK_KHR_draw_indirect_count</a></li>
+ * </ul></dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
@@ -74,7 +83,7 @@ public class AMDDrawIndirectCount {
     // --- [ vkCmdDrawIndirectCountAMD ] ---
 
     /**
-     * See {@link KHRDrawIndirectCount#vkCmdDrawIndirectCountKHR CmdDrawIndirectCountKHR}.
+     * See {@link VK12#vkCmdDrawIndirectCount CmdDrawIndirectCount}.
      *
      * @param commandBuffer     the command buffer into which the command is recorded.
      * @param buffer            the buffer containing draw parameters.

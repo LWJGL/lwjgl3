@@ -17,6 +17,14 @@ package org.lwjgl.vulkan;
  * <p>The {@code ShaderViewportIndexLayerEXT} capability is equivalent to the {@code ShaderViewportIndexLayerNV} capability added by {@link NVViewportArray2 VK_NV_viewport_array2}.</p>
  * </div>
  * 
+ * <h5>Promotion to Vulkan 1.2</h5>
+ * 
+ * <p>All functionality in this extension is included in core Vulkan 1.2.</p>
+ * 
+ * <p>The single {@code ShaderViewportIndexLayerEXT} capability from the {@code SPV_EXT_shader_viewport_index_layer} extension is replaced by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#spirvenv-capabilities-table-shader-viewport-index">{@code ShaderViewportIndex}</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#spirvenv-capabilities-table-shader-layer">{@code ShaderLayer}</a> capabilities from SPIR-V 1.5 which are enabled by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-shaderOutputViewportIndex">shaderOutputViewportIndex</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-shaderOutputLayer">shaderOutputLayer</a> features, respectively. Additionally, if Vulkan 1.2 is supported but this extension is not, these capabilities are optional.</p>
+ * 
+ * <p>Enabling both features is equivalent to enabling the VK_EXT_shader_viewport_index_layer extension.</p>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_shader_viewport_index_layer}</dd>
@@ -30,12 +38,20 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
  * </ul></dd>
+ * <dt><b>Deprecation state</b></dt>
+ * <dd><ul>
+ * <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#versions-1.2-promotions">Vulkan 1.2</a></li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Daniel Koch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_shader_viewport_index_layer:%20&amp;body=@dgkoch%20">dgkoch</a></li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-08-08</dd>
+ * <dt><b>Interactions and External Dependencies</b></dt>
+ * <dd><ul>
+ * <li>Promoted to Vulkan 1.2 Core</li>
+ * </ul></dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
  * <li>This extension requires the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/EXT/SPV_EXT_shader_viewport_index_layer.html">{@code SPV_EXT_shader_viewport_index_layer}</a> SPIR-V extension.</li>

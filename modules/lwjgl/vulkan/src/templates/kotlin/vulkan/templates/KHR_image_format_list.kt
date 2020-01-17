@@ -15,6 +15,9 @@ val KHR_image_format_list = "KHRImageFormatList".nativeClassVK("KHR_image_format
 
         This extension allows an application to provide the list of all formats that <b>can</b> be used with an image when it is created. The implementation may then be able to create a more efficient image that supports the subset of formats required by the application without having to support all formats in the format compatibility class of the image format.
 
+        <h5>Promotion to Vulkan 1.2</h5>
+        All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_image_format_list}</dd>
@@ -33,6 +36,11 @@ val KHR_image_format_list = "KHRImageFormatList".nativeClassVK("KHR_image_format
                 <li>Requires Vulkan 1.0</li>
             </ul></dd>
 
+            <dt><b>Deprecation state</b></dt>
+            <dd><ul>
+                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#versions-1.2-promotions">Vulkan 1.2</a></li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Jason Ekstrand <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_image_format_list:%20&amp;body=@jekstrand%20">jekstrand</a></li>
@@ -40,6 +48,11 @@ val KHR_image_format_list = "KHRImageFormatList".nativeClassVK("KHR_image_format
 
             <dt><b>Last Modified Date</b></dt>
             <dd>2017-03-20</dd>
+
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
+                <li>Promoted to Vulkan 1.2 Core</li>
+            </ul></dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>

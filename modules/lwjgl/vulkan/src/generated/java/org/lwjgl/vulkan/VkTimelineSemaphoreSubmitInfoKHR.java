@@ -16,30 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying signal and wait values for timeline semaphores.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the semaphore in {@link VkSubmitInfo}{@code ::pWaitSemaphores} or {@link VkSubmitInfo}{@code ::pSignalSemaphores} corresponding to an entry in {@code pWaitSemaphoreValues} or {@code pSignalSemaphoreValues} respectively was not created with a {@code VkSemaphoreTypeKHR} of {@link KHRTimelineSemaphore#VK_SEMAPHORE_TYPE_TIMELINE_KHR SEMAPHORE_TYPE_TIMELINE_KHR}, the implementation <b>must</b> ignore the value in the {@code pWaitSemaphoreValues} or {@code pSignalSemaphoreValues} entry.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRTimelineSemaphore#VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO_KHR STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO_KHR}</li>
- * <li>If {@code waitSemaphoreValueCount} is not 0, and {@code pWaitSemaphoreValues} is not {@code NULL}, {@code pWaitSemaphoreValues} <b>must</b> be a valid pointer to an array of {@code waitSemaphoreValueCount} {@code uint64_t} values</li>
- * <li>If {@code signalSemaphoreValueCount} is not 0, and {@code pSignalSemaphoreValues} is not {@code NULL}, {@code pSignalSemaphoreValues} <b>must</b> be a valid pointer to an array of {@code signalSemaphoreValueCount} {@code uint64_t} values</li>
- * </ul>
- * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code waitSemaphoreValueCount} &ndash; the number of semaphore wait values specified in {@code pWaitSemaphoreValues}.</li>
- * <li>{@code pWaitSemaphoreValues} &ndash; an array of length {@code waitSemaphoreValueCount} containing values for the corresponding semaphores in {@link VkSubmitInfo}{@code ::pWaitSemaphores} to wait for.</li>
- * <li>{@code signalSemaphoreValueCount} &ndash; the number of semaphore signal values specified in {@code pSignalSemaphoreValues}.</li>
- * <li>{@code pSignalSemaphoreValues} &ndash; an array of length {@code signalSemaphoreValueCount} containing values for the corresponding semaphores in {@link VkSubmitInfo}{@code ::pSignalSemaphores} to set when signaled.</li>
- * </ul>
+ * See {@link VkTimelineSemaphoreSubmitInfo}.
  * 
  * <h3>Layout</h3>
  * 
@@ -53,43 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint64_t const * pSignalSemaphoreValues;
  * }</code></pre>
  */
-public class VkTimelineSemaphoreSubmitInfoKHR extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        WAITSEMAPHOREVALUECOUNT,
-        PWAITSEMAPHOREVALUES,
-        SIGNALSEMAPHOREVALUECOUNT,
-        PSIGNALSEMAPHOREVALUES;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4),
-            __member(POINTER_SIZE)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        WAITSEMAPHOREVALUECOUNT = layout.offsetof(2);
-        PWAITSEMAPHOREVALUES = layout.offsetof(3);
-        SIGNALSEMAPHOREVALUECOUNT = layout.offsetof(4);
-        PSIGNALSEMAPHOREVALUES = layout.offsetof(5);
-    }
+public class VkTimelineSemaphoreSubmitInfoKHR extends VkTimelineSemaphoreSubmitInfo {
 
     /**
      * Creates a {@code VkTimelineSemaphoreSubmitInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -98,47 +39,30 @@ public class VkTimelineSemaphoreSubmitInfoKHR extends Struct implements NativeRe
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkTimelineSemaphoreSubmitInfoKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** Returns the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code waitSemaphoreValueCount} field. */
-    @NativeType("uint32_t")
-    public int waitSemaphoreValueCount() { return nwaitSemaphoreValueCount(address()); }
-    /** Returns a {@link LongBuffer} view of the data pointed to by the {@code pWaitSemaphoreValues} field. */
-    @Nullable
-    @NativeType("uint64_t const *")
-    public LongBuffer pWaitSemaphoreValues() { return npWaitSemaphoreValues(address()); }
-    /** Returns the value of the {@code signalSemaphoreValueCount} field. */
-    @NativeType("uint32_t")
-    public int signalSemaphoreValueCount() { return nsignalSemaphoreValueCount(address()); }
-    /** Returns a {@link LongBuffer} view of the data pointed to by the {@code pSignalSemaphoreValues} field. */
-    @Nullable
-    @NativeType("uint64_t const *")
-    public LongBuffer pSignalSemaphoreValues() { return npSignalSemaphoreValues(address()); }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkTimelineSemaphoreSubmitInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkTimelineSemaphoreSubmitInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code waitSemaphoreValueCount} field. */
+    @Override
     public VkTimelineSemaphoreSubmitInfoKHR waitSemaphoreValueCount(@NativeType("uint32_t") int value) { nwaitSemaphoreValueCount(address(), value); return this; }
     /** Sets the address of the specified {@link LongBuffer} to the {@code pWaitSemaphoreValues} field. */
+    @Override
     public VkTimelineSemaphoreSubmitInfoKHR pWaitSemaphoreValues(@Nullable @NativeType("uint64_t const *") LongBuffer value) { npWaitSemaphoreValues(address(), value); return this; }
     /** Sets the specified value to the {@code signalSemaphoreValueCount} field. */
+    @Override
     public VkTimelineSemaphoreSubmitInfoKHR signalSemaphoreValueCount(@NativeType("uint32_t") int value) { nsignalSemaphoreValueCount(address(), value); return this; }
     /** Sets the address of the specified {@link LongBuffer} to the {@code pSignalSemaphoreValues} field. */
+    @Override
     public VkTimelineSemaphoreSubmitInfoKHR pSignalSemaphoreValues(@Nullable @NativeType("uint64_t const *") LongBuffer value) { npSignalSemaphoreValues(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkTimelineSemaphoreSubmitInfoKHR set(
         int sType,
         long pNext,
@@ -312,36 +236,8 @@ public class VkTimelineSemaphoreSubmitInfoKHR extends Struct implements NativeRe
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkTimelineSemaphoreSubmitInfoKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkTimelineSemaphoreSubmitInfoKHR.PNEXT); }
-    /** Unsafe version of {@link #waitSemaphoreValueCount}. */
-    public static int nwaitSemaphoreValueCount(long struct) { return UNSAFE.getInt(null, struct + VkTimelineSemaphoreSubmitInfoKHR.WAITSEMAPHOREVALUECOUNT); }
-    /** Unsafe version of {@link #pWaitSemaphoreValues() pWaitSemaphoreValues}. */
-    @Nullable public static LongBuffer npWaitSemaphoreValues(long struct) { return memLongBufferSafe(memGetAddress(struct + VkTimelineSemaphoreSubmitInfoKHR.PWAITSEMAPHOREVALUES), nwaitSemaphoreValueCount(struct)); }
-    /** Unsafe version of {@link #signalSemaphoreValueCount}. */
-    public static int nsignalSemaphoreValueCount(long struct) { return UNSAFE.getInt(null, struct + VkTimelineSemaphoreSubmitInfoKHR.SIGNALSEMAPHOREVALUECOUNT); }
-    /** Unsafe version of {@link #pSignalSemaphoreValues() pSignalSemaphoreValues}. */
-    @Nullable public static LongBuffer npSignalSemaphoreValues(long struct) { return memLongBufferSafe(memGetAddress(struct + VkTimelineSemaphoreSubmitInfoKHR.PSIGNALSEMAPHOREVALUES), nsignalSemaphoreValueCount(struct)); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkTimelineSemaphoreSubmitInfoKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkTimelineSemaphoreSubmitInfoKHR.PNEXT, value); }
-    /** Sets the specified value to the {@code waitSemaphoreValueCount} field of the specified {@code struct}. */
-    public static void nwaitSemaphoreValueCount(long struct, int value) { UNSAFE.putInt(null, struct + VkTimelineSemaphoreSubmitInfoKHR.WAITSEMAPHOREVALUECOUNT, value); }
-    /** Unsafe version of {@link #pWaitSemaphoreValues(LongBuffer) pWaitSemaphoreValues}. */
-    public static void npWaitSemaphoreValues(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkTimelineSemaphoreSubmitInfoKHR.PWAITSEMAPHOREVALUES, memAddressSafe(value)); if (value != null) { nwaitSemaphoreValueCount(struct, value.remaining()); } }
-    /** Sets the specified value to the {@code signalSemaphoreValueCount} field of the specified {@code struct}. */
-    public static void nsignalSemaphoreValueCount(long struct, int value) { UNSAFE.putInt(null, struct + VkTimelineSemaphoreSubmitInfoKHR.SIGNALSEMAPHOREVALUECOUNT, value); }
-    /** Unsafe version of {@link #pSignalSemaphoreValues(LongBuffer) pSignalSemaphoreValues}. */
-    public static void npSignalSemaphoreValues(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkTimelineSemaphoreSubmitInfoKHR.PSIGNALSEMAPHOREVALUES, memAddressSafe(value)); if (value != null) { nsignalSemaphoreValueCount(struct, value.remaining()); } }
-
-    // -----------------------------------
-
     /** An array of {@link VkTimelineSemaphoreSubmitInfoKHR} structs. */
-    public static class Buffer extends StructBuffer<VkTimelineSemaphoreSubmitInfoKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkTimelineSemaphoreSubmitInfo.Buffer {
 
         private static final VkTimelineSemaphoreSubmitInfoKHR ELEMENT_FACTORY = VkTimelineSemaphoreSubmitInfoKHR.create(-1L);
 
@@ -355,7 +251,7 @@ public class VkTimelineSemaphoreSubmitInfoKHR extends Struct implements NativeRe
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -376,38 +272,23 @@ public class VkTimelineSemaphoreSubmitInfoKHR extends Struct implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkTimelineSemaphoreSubmitInfoKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkTimelineSemaphoreSubmitInfoKHR.npNext(address()); }
-        /** Returns the value of the {@code waitSemaphoreValueCount} field. */
-        @NativeType("uint32_t")
-        public int waitSemaphoreValueCount() { return VkTimelineSemaphoreSubmitInfoKHR.nwaitSemaphoreValueCount(address()); }
-        /** Returns a {@link LongBuffer} view of the data pointed to by the {@code pWaitSemaphoreValues} field. */
-        @Nullable
-        @NativeType("uint64_t const *")
-        public LongBuffer pWaitSemaphoreValues() { return VkTimelineSemaphoreSubmitInfoKHR.npWaitSemaphoreValues(address()); }
-        /** Returns the value of the {@code signalSemaphoreValueCount} field. */
-        @NativeType("uint32_t")
-        public int signalSemaphoreValueCount() { return VkTimelineSemaphoreSubmitInfoKHR.nsignalSemaphoreValueCount(address()); }
-        /** Returns a {@link LongBuffer} view of the data pointed to by the {@code pSignalSemaphoreValues} field. */
-        @Nullable
-        @NativeType("uint64_t const *")
-        public LongBuffer pSignalSemaphoreValues() { return VkTimelineSemaphoreSubmitInfoKHR.npSignalSemaphoreValues(address()); }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkTimelineSemaphoreSubmitInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkTimelineSemaphoreSubmitInfoKHR.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkTimelineSemaphoreSubmitInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkTimelineSemaphoreSubmitInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code waitSemaphoreValueCount} field. */
+        @Override
         public VkTimelineSemaphoreSubmitInfoKHR.Buffer waitSemaphoreValueCount(@NativeType("uint32_t") int value) { VkTimelineSemaphoreSubmitInfoKHR.nwaitSemaphoreValueCount(address(), value); return this; }
         /** Sets the address of the specified {@link LongBuffer} to the {@code pWaitSemaphoreValues} field. */
+        @Override
         public VkTimelineSemaphoreSubmitInfoKHR.Buffer pWaitSemaphoreValues(@Nullable @NativeType("uint64_t const *") LongBuffer value) { VkTimelineSemaphoreSubmitInfoKHR.npWaitSemaphoreValues(address(), value); return this; }
         /** Sets the specified value to the {@code signalSemaphoreValueCount} field. */
+        @Override
         public VkTimelineSemaphoreSubmitInfoKHR.Buffer signalSemaphoreValueCount(@NativeType("uint32_t") int value) { VkTimelineSemaphoreSubmitInfoKHR.nsignalSemaphoreValueCount(address(), value); return this; }
         /** Sets the address of the specified {@link LongBuffer} to the {@code pSignalSemaphoreValues} field. */
+        @Override
         public VkTimelineSemaphoreSubmitInfoKHR.Buffer pSignalSemaphoreValues(@Nullable @NativeType("uint64_t const *") LongBuffer value) { VkTimelineSemaphoreSubmitInfoKHR.npSignalSemaphoreValues(address(), value); return this; }
 
     }
