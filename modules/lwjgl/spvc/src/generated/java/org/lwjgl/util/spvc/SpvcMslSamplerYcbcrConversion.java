@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Maps to the sampler Y'CbCr conversion-related portions of MSLConstexprSampler.
+ * Maps to the sampler Y'CbCr conversion-related portions of {@code MSLConstexprSampler}.
  * 
  * <h3>Layout</h3>
  * 

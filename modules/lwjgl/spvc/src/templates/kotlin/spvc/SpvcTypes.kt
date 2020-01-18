@@ -185,7 +185,7 @@ val spvc_msl_constexpr_sampler = struct(Module.SPVC, "SpvcMslConstexprSampler") 
 }
 
 val spvc_msl_sampler_ycbcr_conversion = struct(Module.SPVC, "SpvcMslSamplerYcbcrConversion") {
-    documentation = "Maps to the sampler Y'CbCr conversion-related portions of MSLConstexprSampler."
+    documentation = "Maps to the sampler Y'CbCr conversion-related portions of {@code MSLConstexprSampler}."
 
     unsigned_int("planes", "")
     spvc_msl_format_resolution("resolution", "")
@@ -196,6 +196,22 @@ val spvc_msl_sampler_ycbcr_conversion = struct(Module.SPVC, "SpvcMslSamplerYcbcr
     spvc_msl_sampler_ycbcr_model_conversion("ycbcr_model", "")
     spvc_msl_sampler_ycbcr_range("ycbcr_range", "")
     unsigned_int("bpc", "")
+}
+
+val spvc_hlsl_resource_binding_mapping = struct(Module.SPVC, "SpvcHLSLResourceBindingMapping", nativeName = "spvc_hlsl_resource_binding_mapping") {
+    unsigned("register_space", "")
+    unsigned("register_binding", "")
+}
+
+val spvc_hlsl_resource_binding = struct(Module.SPVC, "SpvcHLSLResourceBinding", nativeName = "spvc_hlsl_resource_binding") {
+    SpvExecutionModel("stage", "")
+    unsigned("desc_set", "")
+    unsigned("binding", "")
+
+    spvc_hlsl_resource_binding_mapping("cbv", "")
+    spvc_hlsl_resource_binding_mapping("uav", "")
+    spvc_hlsl_resource_binding_mapping("srv", "")
+    spvc_hlsl_resource_binding_mapping("sampler", "")
 }
 
 val spvc_error_callback = Module.SPVC.callback {

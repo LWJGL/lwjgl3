@@ -42,7 +42,7 @@ public class Spvc {
 
     public static final int SPVC_C_API_VERSION_MAJOR = 0;
 
-    public static final int SPVC_C_API_VERSION_MINOR = 21;
+    public static final int SPVC_C_API_VERSION_MINOR = 23;
 
     public static final int SPVC_C_API_VERSION_PATCH = 0;
 
@@ -489,6 +489,7 @@ public class Spvc {
      * <h5>Enum values:</h5>
      * 
      * <ul>
+     * <li>{@link #SPVC_HLSL_BINDING_AUTO_NONE_BIT HLSL_BINDING_AUTO_NONE_BIT}</li>
      * <li>{@link #SPVC_HLSL_BINDING_AUTO_PUSH_CONSTANT_BIT HLSL_BINDING_AUTO_PUSH_CONSTANT_BIT} - 
      * Push constant (root constant) resources will be declared as CBVs (b-space) without a register() declaration.
      * 
@@ -507,12 +508,19 @@ public class Spvc {
      * </ul>
      */
     public static final int
+        SPVC_HLSL_BINDING_AUTO_NONE_BIT          = 0,
         SPVC_HLSL_BINDING_AUTO_PUSH_CONSTANT_BIT = 1 << 0,
         SPVC_HLSL_BINDING_AUTO_CBV_BIT           = 1 << 1,
         SPVC_HLSL_BINDING_AUTO_SRV_BIT           = 1 << 2,
         SPVC_HLSL_BINDING_AUTO_UAV_BIT           = 1 << 3,
         SPVC_HLSL_BINDING_AUTO_SAMPLER_BIT       = 1 << 4,
         SPVC_HLSL_BINDING_AUTO_ALL               = 0x7FFFFFFF;
+
+    /** Special constant used in an HLSL {@code ResourceBinding} {@code desc_set} element to indicate the bindings for the push constants. */
+    public static final int SPVC_HLSL_PUSH_CONSTANT_DESC_SET = ~0;
+
+    /** Special constant used in an HLSL {@code ResourceBinding} binding element to indicate the bindings for the push constants. */
+    public static final int SPVC_HLSL_PUSH_CONSTANT_BINDING = 0;
 
     /**
      * Maps to the various spirv_cross::Compiler*::Option structures. See C++ API for defaults and details.
@@ -573,6 +581,7 @@ public class Spvc {
      * <li>{@link #SPVC_COMPILER_OPTION_MSL_INVARIANT_FP_MATH COMPILER_OPTION_MSL_INVARIANT_FP_MATH}</li>
      * <li>{@link #SPVC_COMPILER_OPTION_MSL_EMULATE_CUBEMAP_ARRAY COMPILER_OPTION_MSL_EMULATE_CUBEMAP_ARRAY}</li>
      * <li>{@link #SPVC_COMPILER_OPTION_MSL_ENABLE_DECORATION_BINDING COMPILER_OPTION_MSL_ENABLE_DECORATION_BINDING}</li>
+     * <li>{@link #SPVC_COMPILER_OPTION_MSL_FORCE_ACTIVE_ARGUMENT_BUFFER_RESOURCES COMPILER_OPTION_MSL_FORCE_ACTIVE_ARGUMENT_BUFFER_RESOURCES}</li>
      * </ul>
      */
     public static final int
@@ -626,7 +635,8 @@ public class Spvc {
         SPVC_COMPILER_OPTION_MSL_IOS_FRAMEBUFFER_FETCH_SUBPASS              = 46 | SPVC_COMPILER_OPTION_MSL_BIT,
         SPVC_COMPILER_OPTION_MSL_INVARIANT_FP_MATH                          = 47 | SPVC_COMPILER_OPTION_MSL_BIT,
         SPVC_COMPILER_OPTION_MSL_EMULATE_CUBEMAP_ARRAY                      = 48 | SPVC_COMPILER_OPTION_MSL_BIT,
-        SPVC_COMPILER_OPTION_MSL_ENABLE_DECORATION_BINDING                  = 49 | SPVC_COMPILER_OPTION_MSL_BIT;
+        SPVC_COMPILER_OPTION_MSL_ENABLE_DECORATION_BINDING                  = 49 | SPVC_COMPILER_OPTION_MSL_BIT,
+        SPVC_COMPILER_OPTION_MSL_FORCE_ACTIVE_ARGUMENT_BUFFER_RESOURCES     = 50 | SPVC_COMPILER_OPTION_MSL_BIT;
 
     protected Spvc() {
         throw new UnsupportedOperationException();
@@ -648,6 +658,7 @@ public class Spvc {
             msl_get_aux_buffer_struct_version                     = apiGetFunctionAddress(SPVC, "spvc_msl_get_aux_buffer_struct_version"),
             msl_constexpr_sampler_init                            = apiGetFunctionAddress(SPVC, "spvc_msl_constexpr_sampler_init"),
             msl_sampler_ycbcr_conversion_init                     = apiGetFunctionAddress(SPVC, "spvc_msl_sampler_ycbcr_conversion_init"),
+            hlsl_resource_binding_init                            = apiGetFunctionAddress(SPVC, "spvc_hlsl_resource_binding_init"),
             context_create                                        = apiGetFunctionAddress(SPVC, "spvc_context_create"),
             context_destroy                                       = apiGetFunctionAddress(SPVC, "spvc_context_destroy"),
             context_release_allocations                           = apiGetFunctionAddress(SPVC, "spvc_context_release_allocations"),
@@ -668,6 +679,8 @@ public class Spvc {
             compiler_hlsl_add_vertex_attribute_remap              = apiGetFunctionAddress(SPVC, "spvc_compiler_hlsl_add_vertex_attribute_remap"),
             compiler_hlsl_remap_num_workgroups_builtin            = apiGetFunctionAddress(SPVC, "spvc_compiler_hlsl_remap_num_workgroups_builtin"),
             compiler_hlsl_set_resource_binding_flags              = apiGetFunctionAddress(SPVC, "spvc_compiler_hlsl_set_resource_binding_flags"),
+            compiler_hlsl_add_resource_binding                    = apiGetFunctionAddress(SPVC, "spvc_compiler_hlsl_add_resource_binding"),
+            compiler_hlsl_is_resource_used                        = apiGetFunctionAddress(SPVC, "spvc_compiler_hlsl_is_resource_used"),
             compiler_msl_is_rasterization_disabled                = apiGetFunctionAddress(SPVC, "spvc_compiler_msl_is_rasterization_disabled"),
             compiler_msl_needs_swizzle_buffer                     = apiGetFunctionAddress(SPVC, "spvc_compiler_msl_needs_swizzle_buffer"),
             compiler_msl_needs_buffer_size_buffer                 = apiGetFunctionAddress(SPVC, "spvc_compiler_msl_needs_buffer_size_buffer"),
@@ -872,6 +885,23 @@ public class Spvc {
     /** Initializes the {@code constexpr} sampler struct. The defaults are non-zero. */
     public static void spvc_msl_sampler_ycbcr_conversion_init(@NativeType("SpvcMslSamplerYcbcrConversion *") SpvcMslSamplerYcbcrConversion conv) {
         nspvc_msl_sampler_ycbcr_conversion_init(conv.address());
+    }
+
+    // --- [ spvc_hlsl_resource_binding_init ] ---
+
+    /** Unsafe version of: {@link #spvc_hlsl_resource_binding_init hlsl_resource_binding_init} */
+    public static void nspvc_hlsl_resource_binding_init(long binding) {
+        long __functionAddress = Functions.hlsl_resource_binding_init;
+        invokePV(binding, __functionAddress);
+    }
+
+    /**
+     * Initializes the resource binding struct.
+     * 
+     * <p>The defaults are non-zero.</p>
+     */
+    public static void spvc_hlsl_resource_binding_init(@NativeType("spvc_hlsl_resource_binding *") SpvcHLSLResourceBinding binding) {
+        nspvc_hlsl_resource_binding_init(binding.address());
     }
 
     // --- [ spvc_context_create ] ---
@@ -1220,6 +1250,32 @@ public class Spvc {
             check(compiler);
         }
         return invokePI(compiler, flags, __functionAddress);
+    }
+
+    // --- [ spvc_compiler_hlsl_add_resource_binding ] ---
+
+    public static int nspvc_compiler_hlsl_add_resource_binding(long compiler, long binding) {
+        long __functionAddress = Functions.compiler_hlsl_add_resource_binding;
+        if (CHECKS) {
+            check(compiler);
+        }
+        return invokePPI(compiler, binding, __functionAddress);
+    }
+
+    @NativeType("spvc_result")
+    public static int spvc_compiler_hlsl_add_resource_binding(@NativeType("spvc_compiler") long compiler, @NativeType("spvc_hlsl_resource_binding const *") SpvcHLSLResourceBinding binding) {
+        return nspvc_compiler_hlsl_add_resource_binding(compiler, binding.address());
+    }
+
+    // --- [ spvc_compiler_hlsl_is_resource_used ] ---
+
+    @NativeType("spvc_bool")
+    public static boolean spvc_compiler_hlsl_is_resource_used(@NativeType("spvc_compiler") long compiler, @NativeType("SpvExecutionModel") int model, @NativeType("unsigned") int set, @NativeType("unsigned") int binding) {
+        long __functionAddress = Functions.compiler_hlsl_is_resource_used;
+        if (CHECKS) {
+            check(compiler);
+        }
+        return invokePZ(compiler, model, set, binding, __functionAddress);
     }
 
     // --- [ spvc_compiler_msl_is_rasterization_disabled ] ---

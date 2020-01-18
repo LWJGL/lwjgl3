@@ -33,7 +33,7 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         """
 
     IntConstant("", "C_API_VERSION_MAJOR".."0")
-    IntConstant("", "C_API_VERSION_MINOR".."21")
+    IntConstant("", "C_API_VERSION_MINOR".."23")
     IntConstant("", "C_API_VERSION_PATCH".."0")
 
     IntConstant("", "COMPILER_OPTION_COMMON_BIT"..0x1000000)
@@ -337,6 +337,7 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         ({@code spvc_hlsl_binding_flags})
         """,
 
+        "HLSL_BINDING_AUTO_NONE_BIT".enum("", "0"),
         "HLSL_BINDING_AUTO_PUSH_CONSTANT_BIT".enum(
             """
             Push constant (root constant) resources will be declared as CBVs (b-space) without a register() declaration.
@@ -358,6 +359,18 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         "HLSL_BINDING_AUTO_UAV_BIT".enum("All UAVs (u-space) will be declared without a {@code register()} declaration.", "1 << 3"),
         "HLSL_BINDING_AUTO_SAMPLER_BIT".enum("All samplers (s-space) will be declared without a {@code register()} declaration.", "1 << 4"),
         "HLSL_BINDING_AUTO_ALL".enum("No resources will be declared with {@code register()}.", 0x7fffffff)
+    )
+
+    IntConstant(
+        "Special constant used in an HLSL {@code ResourceBinding} {@code desc_set} element to indicate the bindings for the push constants.",
+
+        "HLSL_PUSH_CONSTANT_DESC_SET".."~0"
+    )
+
+    IntConstant(
+        "Special constant used in an HLSL {@code ResourceBinding} binding element to indicate the bindings for the push constants.",
+
+        "HLSL_PUSH_CONSTANT_BINDING".."0"
     )
 
     EnumConstant(
@@ -417,7 +430,8 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         "COMPILER_OPTION_MSL_IOS_FRAMEBUFFER_FETCH_SUBPASS".enum("", "46 | SPVC_COMPILER_OPTION_MSL_BIT"),
         "COMPILER_OPTION_MSL_INVARIANT_FP_MATH".enum("", "47 | SPVC_COMPILER_OPTION_MSL_BIT"),
         "COMPILER_OPTION_MSL_EMULATE_CUBEMAP_ARRAY".enum("", "48 | SPVC_COMPILER_OPTION_MSL_BIT"),
-        "COMPILER_OPTION_MSL_ENABLE_DECORATION_BINDING".enum("", "49 | SPVC_COMPILER_OPTION_MSL_BIT")
+        "COMPILER_OPTION_MSL_ENABLE_DECORATION_BINDING".enum("", "49 | SPVC_COMPILER_OPTION_MSL_BIT"),
+        "COMPILER_OPTION_MSL_FORCE_ACTIVE_ARGUMENT_BUFFER_RESOURCES".enum("", "50 | SPVC_COMPILER_OPTION_MSL_BIT")
     )
 
     void(
@@ -469,6 +483,17 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         "Initializes the {@code constexpr} sampler struct. The defaults are non-zero.",
 
         spvc_msl_sampler_ycbcr_conversion.p("conv", "")
+    )
+
+    void(
+        "hlsl_resource_binding_init",
+        """
+        Initializes the resource binding struct.
+
+        The defaults are non-zero.
+        """,
+
+        spvc_hlsl_resource_binding.p("binding", "")
     )
 
     spvc_result(
@@ -644,6 +669,24 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
 
         spvc_compiler("compiler", ""),
         spvc_hlsl_binding_flags("flags", "")
+    )
+
+    spvc_result(
+        "compiler_hlsl_add_resource_binding",
+        "",
+
+        spvc_compiler("compiler", ""),
+        spvc_hlsl_resource_binding.const.p("binding", "")
+    )
+
+    spvc_bool(
+        "compiler_hlsl_is_resource_used",
+        "",
+
+        spvc_compiler("compiler", ""),
+        SpvExecutionModel("model", ""),
+        unsigned("set", ""),
+        unsigned("binding", "")
     )
 
     spvc_bool(
