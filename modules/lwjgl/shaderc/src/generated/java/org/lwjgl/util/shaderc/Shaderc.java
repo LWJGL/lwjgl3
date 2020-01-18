@@ -48,6 +48,7 @@ public class Shaderc {
      * <ul>
      * <li>{@link #shaderc_env_version_vulkan_1_0 env_version_vulkan_1_0}</li>
      * <li>{@link #shaderc_env_version_vulkan_1_1 env_version_vulkan_1_1}</li>
+     * <li>{@link #shaderc_env_version_vulkan_1_2 env_version_vulkan_1_2}</li>
      * <li>{@link #shaderc_env_version_opengl_4_5 env_version_opengl_4_5}</li>
      * <li>{@link #shaderc_env_version_webgpu env_version_webgpu}</li>
      * </ul>
@@ -55,6 +56,7 @@ public class Shaderc {
     public static final int
         shaderc_env_version_vulkan_1_0 = ((1 << 22)),
         shaderc_env_version_vulkan_1_1 = ((1 << 22) | (1 << 12)),
+        shaderc_env_version_vulkan_1_2 = ((1 << 22) | (2 << 12)),
         shaderc_env_version_opengl_4_5 = 450,
         shaderc_env_version_webgpu     = 451;
 

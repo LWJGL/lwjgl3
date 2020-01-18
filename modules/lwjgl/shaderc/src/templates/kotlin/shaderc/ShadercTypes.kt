@@ -82,9 +82,13 @@ val shaderc_include_result_release_fn = Module.SHADERC.callback {
 
 val shaderc_spvc_context_t = "shaderc_spvc_context_t".handle
 
+val shaderc_spvc_binding_type = "shaderc_spvc_binding_type".enumType
 val shaderc_spvc_decoration = "shaderc_spvc_decoration".enumType
 val shaderc_spvc_execution_model = "shaderc_spvc_execution_model".enumType
+val shaderc_spvc_shader_resource = "shaderc_spvc_shader_resource".enumType
 val shaderc_spvc_status = "shaderc_spvc_status".enumType
+val shaderc_spvc_texture_format_type = "shaderc_spvc_texture_format_type".enumType
+val shaderc_spvc_texture_view_dimension = "shaderc_spvc_texture_view_dimension".enumType
 
 val shaderc_spvc_msl_platform = "shaderc_spvc_msl_platform".enumType
 val shaderc_spvc_compilation_result_t = "shaderc_spvc_compilation_result_t".handle
@@ -105,9 +109,31 @@ val shaderc_spvc_msl_resource_binding = struct(Module.SHADERC, "ShadercSPVCMSLRe
     uint32_t("msl_sampler", "")
 }
 
-val shaderc_spcv_workgroup_size = struct(Module.SHADERC, "ShadercSPVCWorkgroupSize", nativeName = "shaderc_spcv_workgroup_size", mutable = false) {
+val shaderc_spvc_workgroup_size = struct(Module.SHADERC, "ShadercSPVCWorkgroupSize", nativeName = "shaderc_spvc_workgroup_size", mutable = false) {
     uint32_t("x", "")
     uint32_t("y", "")
     uint32_t("z", "")
     uint32_t("constant", "")
+}
+
+val shaderc_spvc_binding_info = struct(Module.SHADERC, "ShadercSPVCBindingInfo", nativeName = "shaderc_spvc_binding_info", mutable = false) {
+    uint32_t("set", "")
+    uint32_t("binding", "")
+    uint32_t("id", "")
+    uint32_t("base_type_id", "")
+    shaderc_spvc_binding_type("binding_type", "")
+    shaderc_spvc_texture_view_dimension("texture_dimension", "")
+    shaderc_spvc_texture_format_type("texture_component_type", "")
+    bool("multisampled", "")
+}
+
+val shaderc_spvc_resource_location_info = struct(Module.SHADERC, "ShadercSPVCResourceLocationInfo", nativeName = "shaderc_spvc_resource_location_info", mutable = false) {
+    uint32_t("id", "")
+    bool("has_location", "")
+    uint32_t("location", "")
+}
+
+val shaderc_spvc_resource_type_info = struct(Module.SHADERC, "ShadercSPVCResourceTypeInfo", nativeName = "shaderc_spvc_resource_type_info", mutable = false) {
+    uint32_t("location", "")
+    shaderc_spvc_texture_format_type("type", "")
 }

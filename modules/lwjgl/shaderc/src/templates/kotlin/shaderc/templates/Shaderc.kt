@@ -31,6 +31,7 @@ val Shaderc = "Shaderc".nativeClass(Module.SHADERC, prefix = "shaderc_", prefixM
 
         "env_version_vulkan_1_0".enum("", "((1 << 22))"),
         "env_version_vulkan_1_1".enum("", "((1 << 22) | (1 << 12))"),
+        "env_version_vulkan_1_2".enum("", "((1 << 22) | (2 << 12))"),
         "env_version_opengl_4_5".enum("", "450"),
         "env_version_webgpu".enum
     )

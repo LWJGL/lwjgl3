@@ -19,14 +19,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Layout</h3>
  * 
  * <pre><code>
- * struct shaderc_spcv_workgroup_size {
+ * struct shaderc_spvc_workgroup_size {
  *     uint32_t x;
  *     uint32_t y;
  *     uint32_t z;
  *     uint32_t constant;
  * }</code></pre>
  */
-@NativeType("struct shaderc_spcv_workgroup_size")
+@NativeType("struct shaderc_spvc_workgroup_size")
 public class ShadercSPVCWorkgroupSize extends Struct implements NativeResource {
 
     /** The struct size in bytes. */

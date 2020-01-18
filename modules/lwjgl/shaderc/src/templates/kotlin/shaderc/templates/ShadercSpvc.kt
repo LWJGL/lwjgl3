@@ -77,7 +77,49 @@ val ShadercSpvc = "ShadercSpvc".nativeClass(Module.SHADERC, prefix = "shaderc_sp
 
         "execution_model_vertex".enum,
         "execution_model_fragment".enum,
-        "execution_model_glcompute".enum
+        "execution_model_glcompute".enum,
+        "execution_model_invalid".enum
+    )
+    
+    EnumConstant(
+        "{@code shaderc_spvc_binding_type}",
+
+        "binding_type_uniform_buffer".enum("", 0x00000000),
+        "binding_type_storage_buffer".enum("", 0x00000001),
+        "binding_type_readonly_storage_buffer".enum("", 0x00000002),
+        "binding_type_sampler".enum("", 0x00000003),
+        "binding_type_sampled_texture".enum("", 0x00000004),
+        "binding_type_storage_texture".enum("", 0x00000005)
+    )
+
+    EnumConstant(
+        "{@code shaderc_spvc_texture_view_dimension}",
+        
+        "texture_view_dimension_undefined".enum("", 0x00000000),
+        "texture_view_dimension_e1D".enum("", 0x00000001),
+        "texture_view_dimension_e2D".enum("", 0x00000002),
+        "texture_view_dimension_e2D_array".enum("", 0x00000003),
+        "texture_view_dimension_cube".enum("", 0x00000004),
+        "texture_view_dimension_cube_array".enum("", 0x00000005),
+        "texture_view_dimension_e3D".enum("", 0x00000006)
+    )
+
+    EnumConstant(
+        "{@code shaderc_spvc_texture_format_type}",
+
+        "shaderc_spvc_texture_format_type_float".enum,
+        "shaderc_spvc_texture_format_type_sint".enum,
+        "shaderc_spvc_texture_format_type_uint".enum,
+        "shaderc_spvc_texture_format_type_other".enum
+    )
+
+    EnumConstant(
+        "{@code shaderc_spvc_shader_resource}",
+
+        "shaderc_spvc_shader_resource_uniform_buffers".enum,
+        "shaderc_spvc_shader_resource_separate_images".enum,
+        "shaderc_spvc_shader_resource_separate_samplers".enum,
+        "shaderc_spvc_shader_resource_storage_buffers".enum
     )
 
     shaderc_spvc_context_t(
@@ -513,7 +555,7 @@ val ShadercSpvc = "ShadercSpvc".nativeClass(Module.SHADERC, prefix = "shaderc_sp
         shaderc_spvc_context_t.const("context", ""),
         uint32_t("id", ""),
         shaderc_spvc_decoration("decoration", ""),
-        Check(1)..uint32_t.p("argument", "")
+        Check(1)..uint32_t.p("value", "")
     )
 
     shaderc_spvc_status(
@@ -592,7 +634,7 @@ val ShadercSpvc = "ShadercSpvc".nativeClass(Module.SHADERC, prefix = "shaderc_sp
         shaderc_spvc_context_t.const("context", ""),
         charASCII.const.p("function_name", ""),
         shaderc_spvc_execution_model("execution_model", ""),
-        Check(1)..shaderc_spcv_workgroup_size.p("workgroup_size", "")
+        Check(1)..shaderc_spvc_workgroup_size.p("workgroup_size", "")
     )
 
     shaderc_spvc_status(
@@ -600,7 +642,82 @@ val ShadercSpvc = "ShadercSpvc".nativeClass(Module.SHADERC, prefix = "shaderc_sp
         "Gets whether or not the shader needes a buffer of buffer sizes.",
 
         shaderc_spvc_context_t.const("context", ""),
-        Check(1)..bool.p("b", ""));
+        Check(1)..bool.p("b", "")
+    )
+
+    shaderc_spvc_status(
+        "get_execution_model",
+        "Gets the execution model for the shader parsed by the compiler.",
+
+        shaderc_spvc_context_t.const("context", ""),
+        Check(1)..shaderc_spvc_execution_model.p("execution_model", "")
+    )
+
+    shaderc_spvc_status(
+        "get_push_constant_buffer_count",
+        "Gets the number of push constants buffers used by the shader.",
+
+        shaderc_spvc_context_t.const("context", ""),
+        Check(1)..size_t.p("count", "")
+    )
+
+    shaderc_spvc_status(
+        "get_binding_info",
+        """
+        Fetches all of the binding info for a given shader resource.
+        
+        If {@code bindings} is null, then {@code binding_count} is populated with the number of entries that would have been written out. The caller is
+        responsible for ensuring that {@code bindings} has enough space allocated to contain all of the entries.
+        """,
+
+        shaderc_spvc_context_t.const("context", ""),
+        shaderc_spvc_shader_resource("resource", ""),
+        shaderc_spvc_binding_type("binding_type", ""),
+        nullable..shaderc_spvc_binding_info.p("bindings", ""),
+        AutoSize("bindings")..Check(1)..size_t.p("binding_count", "")
+    )
+
+    shaderc_spvc_status(
+        "get_input_stage_location_info",
+        """
+        Fetches the Location decoration information for the stage inputs.
+
+        If {@code locations} is null, then {@code location_count} is populated with the number of entries that would have been written out. The caller is
+        responsible for ensuring that {@code locations} has enough space allocated to contain all of the entries.
+        """,
+
+        shaderc_spvc_context_t.const("context", ""),
+        nullable..shaderc_spvc_resource_location_info.p("locations", ""),
+        AutoSize("locations")..Check(1)..size_t.p("location_count", "")
+    )
+
+    shaderc_spvc_status(
+        "get_output_stage_location_info",
+        """
+        Fetches the Location decoration information for the stage outputs.
+        
+        If {@code locations} is null, then {@code location_count} is populated with the number of entries that would have been written out. The caller is
+        responsible for ensuring that {@code locations} has enough space allocated to contain all of the entries.
+        """,
+
+        shaderc_spvc_context_t.const("context", ""),
+        nullable..shaderc_spvc_resource_location_info.p("locations", ""),
+        AutoSize("locations")..Check(1)..size_t.p("location_count", "")
+    )
+
+    shaderc_spvc_status(
+        "get_output_stage_type_info",
+        """
+        Fetches the type information for the stage outputs.
+        
+        If {@code types} is null, then {@code type_count} is populated with the number of entries that would have been written out. The caller is responsible
+        for ensuring that {@code types} has enough space allocated to contain all of the entries.
+        """,
+
+        shaderc_spvc_context_t.const("context", ""),
+        nullable..shaderc_spvc_resource_type_info.p("types", ""),
+        AutoSize("types")..Check(1)..size_t.p("type_count", "")
+    )
 
     shaderc_spvc_compilation_result_t(
         "result_create",
