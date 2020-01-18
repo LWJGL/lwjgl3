@@ -79,6 +79,8 @@ fun config() {
     })
 }
 
+val rpmalloc_heap_t = "rpmalloc_heap_t".opaque
+
 val rpmalloc_config_t = struct(Module.RPMALLOC, "RPMallocConfig", nativeName = "rpmalloc_config_t", skipBuffer = true) {
     documentation =
         """
