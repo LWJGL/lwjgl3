@@ -720,6 +720,92 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
 
     StringConstant(
         """
+        Set whether the MDL (HL1) importer will read animations.
+
+        Property type: bool. Default value: true.
+        """,
+
+        "AI_CONFIG_IMPORT_MDL_HL1_READ_ANIMATIONS".."IMPORT_MDL_HL1_READ_ANIMATIONS"
+    ).noPrefix()
+
+    StringConstant(
+        """
+        Set whether the MDL (HL1) importer will read animation events.
+        
+        This property requires #AI_CONFIG_IMPORT_MDL_HL1_READ_ANIMATIONS to be set to true.
+
+        Property type: bool. Default value: true.
+        """,
+
+        "AI_CONFIG_IMPORT_MDL_HL1_READ_ANIMATION_EVENTS".."IMPORT_MDL_HL1_READ_ANIMATION_EVENTS"
+    ).noPrefix()
+
+    StringConstant(
+        """
+        Set whether the MDL (HL1) importer will read blend controllers.
+        
+        This property requires #AI_CONFIG_IMPORT_MDL_HL1_READ_ANIMATIONS to be set to true.
+
+        Property type: bool. Default value: true.
+        """,
+
+        "AI_CONFIG_IMPORT_MDL_HL1_READ_BLEND_CONTROLLERS".."IMPORT_MDL_HL1_READ_BLEND_CONTROLLERS"
+    ).noPrefix()
+
+    StringConstant(
+        """
+        Set whether the MDL (HL1) importer will read sequence transition graph.
+        
+        This property requires #AI_CONFIG_IMPORT_MDL_HL1_READ_ANIMATIONS to be set to true.
+
+        Property type: bool. Default value: true.
+        """,
+
+        "AI_CONFIG_IMPORT_MDL_HL1_READ_SEQUENCE_TRANSITIONS".."IMPORT_MDL_HL1_READ_SEQUENCE_TRANSITIONS"
+    ).noPrefix()
+
+    StringConstant(
+        """
+        Set whether the MDL (HL1) importer will read attachments info.
+
+        Property type: bool. Default value: true.
+        """,
+
+        "AI_CONFIG_IMPORT_MDL_HL1_READ_ATTACHMENTS".."IMPORT_MDL_HL1_READ_ATTACHMENTS"
+    ).noPrefix()
+
+    StringConstant(
+        """
+        Set whether the MDL (HL1) importer will read bone controllers info.
+
+        Property type: bool. Default value: true.
+        """,
+
+        "AI_CONFIG_IMPORT_MDL_HL1_READ_BONE_CONTROLLERS".."IMPORT_MDL_HL1_READ_BONE_CONTROLLERS"
+    ).noPrefix()
+
+    StringConstant(
+        """
+        Set whether the MDL (HL1) importer will read hitboxes info.
+
+        Property type: bool. Default value: true.
+        """,
+
+        "AI_CONFIG_IMPORT_MDL_HL1_READ_HITBOXES".."IMPORT_MDL_HL1_READ_HITBOXES"
+    ).noPrefix()
+
+    StringConstant(
+        """
+        Set whether the MDL (HL1) importer will read miscellaneous global model info.
+
+        Property type: bool. Default value: true.
+        """,
+
+        "AI_CONFIG_IMPORT_MDL_HL1_READ_MISC_GLOBAL_INFO".."IMPORT_MDL_HL1_READ_MISC_GLOBAL_INFO"
+    ).noPrefix()
+
+    StringConstant(
+        """
         Smd load multiple animations.
 
         Property type: bool. Default value: true.
@@ -2492,6 +2578,16 @@ aiAttachLogStream(&c);""")}
         """,
 
         "AI_METADATA_SOURCE_GENERATOR".."SourceAsset_Generator"
+    ).noPrefix()
+
+    StringConstant(
+        """
+        Scene metadata holding the source asset copyright statement, if available.
+
+        Not all formats add this metadata.
+        """,
+
+        "AI_METADATA_SOURCE_COPYRIGHT".."SourceAsset_Copyright"
     ).noPrefix()
 
     // postprocess.h
