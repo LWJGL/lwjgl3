@@ -86,7 +86,7 @@ public class GLFWVulkan {
 
     /**
      * Returns an array of names of Vulkan instance extensions required by GLFW for creating Vulkan surfaces for GLFW windows. If successful, the list will
-     * always contain {@code VK_KHR_surface}, so if you don't require any additional extensions you can pass this list directly to the    {@link VkInstanceCreateInfo}
+     * always contain {@code VK_KHR_surface}, so if you don't require any additional extensions you can pass this list directly to the {@link VkInstanceCreateInfo}
      * struct.
      * 
      * <p>If Vulkan is not available on the machine, this function returns {@code NULL} and generates a {@link GLFW#GLFW_API_UNAVAILABLE API_UNAVAILABLE} error. Call {@link #glfwVulkanSupported VulkanSupported} to check whether
@@ -97,6 +97,8 @@ public class GLFWVulkan {
      * 
      * <p>Additional extensions may be required by future versions of GLFW. You should check if any extensions you wish to enable are already in the returned
      * array, as it is an error to specify an extension more than once in the {@code VkInstanceCreateInfo} struct.</p>
+     * 
+     * <p>macOS: This function currently supports either the {@code VK_MVK_macos_surface} extension from MoltenVK or {@code VK_EXT_metal_surface} extension.</p>
      * 
      * <p>The returned array is allocated and freed by GLFW. You should not free it yourself. It is guaranteed to be valid only until the library is terminated.</p>
      * 
