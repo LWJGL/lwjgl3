@@ -110,10 +110,12 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_par_ParShapes_npar_1shapes_1create_1
     return (jlong)(intptr_t)par_shapes_create_rock(seed, nsubdivisions);
 }
 
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_par_ParShapes_npar_1shapes_1create_1lsystem(JNIEnv *__env, jclass clazz, jlong programAddress, jint slices, jint maxdepth) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_par_ParShapes_npar_1shapes_1create_1lsystem(JNIEnv *__env, jclass clazz, jlong programAddress, jint slices, jint maxdepth, jlong rand_fnAddress, jlong contextAddress) {
     char const *program = (char const *)(intptr_t)programAddress;
+    par_shapes_rand_fn rand_fn = (par_shapes_rand_fn)(intptr_t)rand_fnAddress;
+    void *context = (void *)(intptr_t)contextAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jlong)(intptr_t)par_shapes_create_lsystem(program, slices, maxdepth);
+    return (jlong)(intptr_t)par_shapes_create_lsystem(program, slices, maxdepth, rand_fn, context);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_util_par_ParShapes_npar_1shapes_1export(JNIEnv *__env, jclass clazz, jlong meshAddress, jlong objfileAddress) {

@@ -6,6 +6,32 @@ package par
 
 import org.lwjgl.generator.*
 
+// par_octasphere
+
+val par_octasphere_uv_mode = "par_octasphere_uv_mode".enumType
+val par_octasphere_normals_mode = "par_octasphere_normals_mode".enumType
+
+val par_octasphere_config = struct(Module.PAR, "ParOctasphereConfig", nativeName = "par_octasphere_config") {
+    float("corner_radius", "")
+    float("width", "")
+    float("height", "")
+    float("depth", "")
+    int("num_subdivisions", "")
+    par_octasphere_uv_mode("uv_mode", "")
+    par_octasphere_normals_mode("normals_mode", "")
+}
+
+val par_octasphere_mesh = struct(Module.PAR, "ParOctasphereMesh", nativeName = "par_octasphere_mesh", mutable = false) {
+    float.p("positions", "").mutable()
+    nullable..float.p("normals", "").mutable()
+    nullable..float.p("texcoords", "").mutable()
+    uint16_t.p("indices", "").mutable()
+    uint32_t("num_indices", "")
+    uint32_t("num_vertices", "")
+}
+
+// par_shapes
+
 val PAR_SHAPES_T = typedef(uint32_t, "PAR_SHAPES_T")
 
 val par_shapes_mesh = struct(Module.PAR, "ParShapesMesh", nativeName = "par_shapes_mesh", mutable = false) {
@@ -23,6 +49,21 @@ val par_shapes_mesh = struct(Module.PAR, "ParShapesMesh", nativeName = "par_shap
     nullable..float.p("normals", "an optional list of 3-tuples (X Y Z X Y Z...) for the vertex normals")
     nullable..float.p("tcoords", "an optional list of 2-tuples (U V U V U V...) for the vertex texture coordinates")
 }
+
+val par_shapes_rand_fn = Module.PAR.callback {
+    float(
+        "ParShapesRandFn",
+        "",
+
+        nullable..opaque_p("context", ""),
+
+        nativeType = "par_shapes_rand_fn"
+    ) {
+        documentation = "Instances of this interface may be passed to the #create_lsystem() method."
+    }
+}
+
+// par_streamlines
 
 val parsl_annotation = struct(Module.PAR, "ParSLAnnotation", nativeName = "parsl_annotation", mutable = false) {
     documentation = "Layout for generated vertex attributes."

@@ -16,26 +16,20 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Bindings to <a target="_blank" href="https://github.com/prideout/par/blob/master/par_shapes.h">par_shapes.h</a>, a single-file, zero-dependency, C99 library that can
- * generate simple shapes and perform basic operations on them. These operations include:
+ * Bindings to <a target="_blank" href="https://prideout.net/shapes">par_shapes.h</a>, a simple C library for creation and manipulation of triangle meshes.
+ * 
+ * <p>The par_shapes API is divided into three sections:</p>
  * 
  * <ul>
- * <li>Applying affine transformations</li>
- * <li>Computing surface normals</li>
- * <li>Welding colocated vertices</li>
+ * <li>Generators - Create parametric surfaces, platonic solids, etc.</li>
+ * <li>Queries - Ask a mesh for its axis-aligned bounding box, etc.</li>
+ * <li>Transforms - Rotate a mesh, merge it with another, add normals, etc.</li>
  * </ul>
  * 
- * <p>The library provides a set of functions that populate fields of the {@link ParShapesMesh} structure.</p>
+ * <p>For our purposes, a "mesh" is a list of points and a list of triangles; the former is a flattened list of three-tuples (32-bit floats) and the latter
+ * is also a flattened list of three-tuples (16-bit {@code uints}). Triangles are always oriented such that their front face winds counter-clockwise.</p>
  * 
- * <p>The {@code normals} and {@code tcoords} fields might be null, but every other field is guaranteed to have valid values. This mesh representation is
- * very limited: indices must be unsigned 32-bit integers, points must be three-tuples, and there is no support for face-varying data.</p>
- * 
- * <p>When you’re done extracting the data you need from the mesh, be sure to free it:</p>
- * 
- * <pre><code>
- * par_shapes_mesh* m = par_shapes_create_subdivided_sphere(1);
- * // ...
- * par_shapes_free_mesh(m);</code></pre>
+ * <p>Depending on which generator function is used, meshes may or may not contain normals and texture coordinates (one per vertex).</p>
  */
 public class ParShapes {
 
@@ -348,44 +342,52 @@ public class ParShapes {
     // --- [ par_shapes_create_lsystem ] ---
 
     /** Unsafe version of: {@link #par_shapes_create_lsystem create_lsystem} */
-    public static native long npar_shapes_create_lsystem(long program, int slices, int maxdepth);
+    public static native long npar_shapes_create_lsystem(long program, int slices, int maxdepth, long rand_fn, long context);
 
     /**
-     * Creates trees or vegetation by executing a recursive turtle graphics program. The program is a list of command-argument pairs. See the
-     * <a target="_blank" href="https://github.com/LWJGL/lwjgl3/blob/master/modules/lwjgl/par/src/test/java/org/lwjgl/util/par/ParTest.java#L263">unit test</a> for an example.
-     * Texture coordinates and normals are not generated.
+     * Creates trees or vegetation by executing a recursive turtle graphics program.
+     * 
+     * <p>The program is a list of command-argument pairs. See the
+     * <a target="_blank" href="https://github.com/LWJGL/lwjgl3/blob/master/modules/lwjgl/par/src/test/java/org/lwjgl/util/par/ParTest.java#L263">unit test</a> for an
+     * example. Texture coordinates and normals are not generated.</p>
      *
      * @param program  the list of command-argument pairs
      * @param slices   the number of slices
      * @param maxdepth the maximum depth
+     * @param rand_fn  is expected to return a value between 0 and 1, or can be {@code NULL} (in which case {@code (float) rand() / RAND_MAX} will be used)
+     * @param context  passed unmodified to {@code rand_fn}
      */
     @Nullable
     @NativeType("par_shapes_mesh *")
-    public static ParShapesMesh par_shapes_create_lsystem(@NativeType("char const *") ByteBuffer program, int slices, int maxdepth) {
+    public static ParShapesMesh par_shapes_create_lsystem(@NativeType("char const *") ByteBuffer program, int slices, int maxdepth, @Nullable @NativeType("par_shapes_rand_fn") ParShapesRandFnI rand_fn, @NativeType("void *") long context) {
         if (CHECKS) {
             checkNT1(program);
         }
-        long __result = npar_shapes_create_lsystem(memAddress(program), slices, maxdepth);
+        long __result = npar_shapes_create_lsystem(memAddress(program), slices, maxdepth, memAddressSafe(rand_fn), context);
         return ParShapesMesh.createSafe(__result);
     }
 
     /**
-     * Creates trees or vegetation by executing a recursive turtle graphics program. The program is a list of command-argument pairs. See the
-     * <a target="_blank" href="https://github.com/LWJGL/lwjgl3/blob/master/modules/lwjgl/par/src/test/java/org/lwjgl/util/par/ParTest.java#L263">unit test</a> for an example.
-     * Texture coordinates and normals are not generated.
+     * Creates trees or vegetation by executing a recursive turtle graphics program.
+     * 
+     * <p>The program is a list of command-argument pairs. See the
+     * <a target="_blank" href="https://github.com/LWJGL/lwjgl3/blob/master/modules/lwjgl/par/src/test/java/org/lwjgl/util/par/ParTest.java#L263">unit test</a> for an
+     * example. Texture coordinates and normals are not generated.</p>
      *
      * @param program  the list of command-argument pairs
      * @param slices   the number of slices
      * @param maxdepth the maximum depth
+     * @param rand_fn  is expected to return a value between 0 and 1, or can be {@code NULL} (in which case {@code (float) rand() / RAND_MAX} will be used)
+     * @param context  passed unmodified to {@code rand_fn}
      */
     @Nullable
     @NativeType("par_shapes_mesh *")
-    public static ParShapesMesh par_shapes_create_lsystem(@NativeType("char const *") CharSequence program, int slices, int maxdepth) {
+    public static ParShapesMesh par_shapes_create_lsystem(@NativeType("char const *") CharSequence program, int slices, int maxdepth, @Nullable @NativeType("par_shapes_rand_fn") ParShapesRandFnI rand_fn, @NativeType("void *") long context) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCII(program, true);
             long programEncoded = stack.getPointerAddress();
-            long __result = npar_shapes_create_lsystem(programEncoded, slices, maxdepth);
+            long __result = npar_shapes_create_lsystem(programEncoded, slices, maxdepth, memAddressSafe(rand_fn), context);
             return ParShapesMesh.createSafe(__result);
         } finally {
             stack.setPointer(stackPointer);

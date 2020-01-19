@@ -22,24 +22,19 @@ ENABLE_WARNINGS()""")
 
     documentation =
         """
-        Bindings to ${url("https://github.com/prideout/par/blob/master/par_shapes.h", "par_shapes.h")}, a single-file, zero-dependency, C99 library that can
-        generate simple shapes and perform basic operations on them. These operations include:
+        Bindings to ${url("https://prideout.net/shapes", "par_shapes.h")}, a simple C library for creation and manipulation of triangle meshes.
+
+        The par_shapes API is divided into three sections:
         ${ul(
-            "Applying affine transformations",
-            "Computing surface normals",
-            "Welding colocated vertices"
+            "Generators - Create parametric surfaces, platonic solids, etc.",
+            "Queries - Ask a mesh for its axis-aligned bounding box, etc.",
+            "Transforms - Rotate a mesh, merge it with another, add normals, etc."
         )}
 
-        The library provides a set of functions that populate fields of the ##ParShapesMesh structure.
+        For our purposes, a "mesh" is a list of points and a list of triangles; the former is a flattened list of three-tuples (32-bit floats) and the latter
+        is also a flattened list of three-tuples (16-bit {@code uints}). Triangles are always oriented such that their front face winds counter-clockwise.
 
-        The {@code normals} and {@code tcoords} fields might be null, but every other field is guaranteed to have valid values. This mesh representation is
-        very limited: indices must be unsigned 32-bit integers, points must be three-tuples, and there is no support for face-varying data.
-
-        When you’re done extracting the data you need from the mesh, be sure to free it:
-        ${codeBlock("""
-par_shapes_mesh* m = par_shapes_create_subdivided_sphere(1);
-// ...
-par_shapes_free_mesh(m);""")}
+        Depending on which generator function is used, meshes may or may not contain normals and texture coordinates (one per vertex).
         """
 
     void(
@@ -199,14 +194,21 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
     par_shapes_mesh.p(
         "create_lsystem",
         """
-        Creates trees or vegetation by executing a recursive turtle graphics program. The program is a list of command-argument pairs. See the
-        ${url("https://github.com/LWJGL/lwjgl3/blob/master/modules/lwjgl/par/src/test/java/org/lwjgl/util/par/ParTest.java\\#L263", "unit test")} for an example.
-        Texture coordinates and normals are not generated.
+        Creates trees or vegetation by executing a recursive turtle graphics program.
+
+        The program is a list of command-argument pairs. See the
+        ${url("https://github.com/LWJGL/lwjgl3/blob/master/modules/lwjgl/par/src/test/java/org/lwjgl/util/par/ParTest.java\\#L263", "unit test")} for an
+        example. Texture coordinates and normals are not generated.
         """,
 
         charASCII.const.p("program", "the list of command-argument pairs"),
         shapes_create_ss["slices"],
-        int("maxdepth", "the maximum depth")
+        int("maxdepth", "the maximum depth"),
+        nullable..par_shapes_rand_fn(
+            "rand_fn",
+            "is expected to return a value between 0 and 1, or can be #NULL (in which case {@code (float) rand() / RAND_MAX} will be used)"
+        ),
+        nullable..opaque_p("context", "passed unmodified to {@code rand_fn}")
     )
 
     void(

@@ -307,33 +307,33 @@ public final class ParShapesDemo {
                 break;
             case GLFW_KEY_8:
                 String program =
-                    " sx 2 sy 2" +
-                    " ry 90 rx 90" +
-                    " shape tube rx 15  call rlimb rx -15" +
-                    " shape tube rx -15 call llimb rx 15" +
-                    " shape tube ry 15  call rlimb ry -15" +
-                    " shape tube ry 15  call llimb ry -15" +
-                    " rule rlimb" +
-                    "     sx 0.925 sy 0.925 tz 1 rx 1.2" +
-                    "     call rlimb2" +
-                    " rule rlimb2.1" +
-                    "     shape connect" +
-                    "     call rlimb" +
-                    " rule rlimb2.1" +
-                    "     rx 15  shape tube call rlimb rx -15" +
-                    "     rx -15 shape tube call llimb rx 15" +
-                    " rule rlimb.1" +
-                    "     call llimb" +
-                    " rule llimb.1" +
-                    "     call rlimb" +
-                    " rule llimb.10" +
-                    "     sx 0.925 sy 0.925" +
-                    "     tz 1" +
-                    "     rx -1.2" +
-                    "     shape connect" +
-                    "     call llimb";
+                    "sx 2 sy 2\n" +
+                    "ry 90 rx 90\n" +
+                    "shape tube rx 15  call rlimb rx -15\n" +
+                    "shape tube rx -15 call llimb rx 15\n" +
+                    "shape tube ry 15  call rlimb ry -15\n" +
+                    "shape tube ry 15  call llimb ry -15\n" +
+                    "rule rlimb\n" +
+                    "    sx 0.925 sy 0.925 tz 1 rx 1.2\n" +
+                    "    call rlimb2\n" +
+                    "rule rlimb2.1\n" +
+                    "    shape connect\n" +
+                    "    call rlimb\n" +
+                    "rule rlimb2.1\n" +
+                    "    rx 15  shape tube call rlimb rx -15\n" +
+                    "    rx -15 shape tube call llimb rx 15\n" +
+                    "rule rlimb.1\n" +
+                    "    call llimb\n" +
+                    "rule llimb.1\n" +
+                    "    call rlimb\n" +
+                    "rule llimb.10\n" +
+                    "    sx 0.925 sy 0.925\n" +
+                    "    tz 1\n" +
+                    "    rx -1.2\n" +
+                    "    shape connect\n" +
+                    "    call llimb";
 
-                mesh = par_shapes_create_lsystem(program, slices, 60);
+                mesh = par_shapes_create_lsystem(program, slices, 60, null, NULL);
                 if (mesh != null) {
                     par_shapes_scale(mesh, 0.05f, 0.05f, 0.05f);
                     par_shapes_translate(mesh, 0.0f, -1.0f, 0.0f);

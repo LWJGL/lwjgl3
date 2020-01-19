@@ -6958,6 +6958,10 @@ void *mz_zip_extract_archive_file_to_heap(const char *pZip_filename,
 }
 #endif
 
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
+
 #endif  // MINIZ_HEADER_FILE_ONLY
 
 /*
@@ -6993,9 +6997,6 @@ void *mz_zip_extract_archive_file_to_heap(const char *pZip_filename,
 #pragma clang diagnostic pop
 #endif
 
-#ifdef _MSC_VER
-#pragma warning(pop)
-#endif
 }  // namespace miniz
 #else
 

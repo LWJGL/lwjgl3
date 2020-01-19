@@ -1,25 +1,22 @@
-// SHAPES :: https://github.com/prideout/par
+// SHAPES :: https://prideout.net/shapes
 // Simple C library for creation and manipulation of triangle meshes.
 //
-// The API is divided into three sections:
+// See also par_octasphere.h, which is a newer, more lean-and-mean library
+// that can tessellate spheres, boxes, capsule, and rounded boxes.
+//
+// The par_shapes API is divided into three sections:
 //
 //   - Generators.  Create parametric surfaces, platonic solids, etc.
 //   - Queries.     Ask a mesh for its axis-aligned bounding box, etc.
 //   - Transforms.  Rotate a mesh, merge it with another, add normals, etc.
-//
-// In addition to the comment block above each function declaration, the API
-// has informal documentation here:
-//
-//     https://prideout.net/shapes
 //
 // For our purposes, a "mesh" is a list of points and a list of triangles; the
 // former is a flattened list of three-tuples (32-bit floats) and the latter is
 // also a flattened list of three-tuples (16-bit uints).  Triangles are always
 // oriented such that their front face winds counter-clockwise.
 //
-// Optionally, meshes can contain 3D normals (one per vertex), and 2D texture
-// coordinates (one per vertex).  That's it!  If you need something fancier,
-// look elsewhere.
+// Depending on which generator function is used, meshes may or may not contain
+// normals and texture coordinates (one per vertex).
 //
 // Distributed under the MIT License, see bottom of file.
 
@@ -125,8 +122,12 @@ par_shapes_mesh* par_shapes_create_rock(int seed, int nsubdivisions);
 // Create trees or vegetation by executing a recursive turtle graphics program.
 // The program is a list of command-argument pairs.  See the unit test for
 // an example.  Texture coordinates and normals are not generated.
+// rand_fn is expected to return a value between 0 and 1,
+// or can be NULL (in which case `(float) rand() / RAND_MAX` will be used).
+// context is passed unmodified to rand_fn.
+typedef float (*par_shapes_rand_fn)(void* context);
 par_shapes_mesh* par_shapes_create_lsystem(char const* program, int slices,
-    int maxdepth);
+    int maxdepth, par_shapes_rand_fn rand_fn, void* context);
 
 // Queries ---------------------------------------------------------------------
 
@@ -1099,7 +1100,7 @@ typedef struct {
 } par_shapes__stackframe;
 
 static par_shapes__rule* par_shapes__pick_rule(const char* name,
-    par_shapes__rule* rules, int nrules)
+    par_shapes__rule* rules, int nrules, par_shapes_rand_fn rand_fn, void* context)
 {
     par_shapes__rule* rule = 0;
     int total = 0;
@@ -1109,7 +1110,12 @@ static par_shapes__rule* par_shapes__pick_rule(const char* name,
             total += rule->weight;
         }
     }
-    float r = (float) rand() / RAND_MAX;
+    float r;
+    if (rand_fn) {
+        r = rand_fn(context);
+    } else {
+        r = (float) rand() / RAND_MAX;
+    }
     float t = 0;
     for (int i = 0; i < nrules; i++) {
         rule = rules + i;
@@ -1192,18 +1198,19 @@ void par_shapes__connect(par_shapes_mesh* scene, par_shapes_mesh* cylinder,
 }
 
 par_shapes_mesh* par_shapes_create_lsystem(char const* text, int slices,
-    int maxdepth)
+    int maxdepth, par_shapes_rand_fn rand_fn, void* context)
 {
     char* program;
     program = PAR_MALLOC(char, strlen(text) + 1);
 
     // The first pass counts the number of rules and commands.
     strcpy(program, text);
-    char *cmd = strtok(program, " ");
+    const char *delimiters = " \t\n";
+    char *cmd = strtok(program, delimiters);
     int nrules = 1;
     int ncommands = 0;
     while (cmd) {
-        char *arg = strtok(0, " ");
+        char *arg = strtok(0, delimiters);
         if (!arg) {
             puts("lsystem error: unexpected end of program.");
             break;
@@ -1213,7 +1220,7 @@ par_shapes_mesh* par_shapes_create_lsystem(char const* text, int slices,
         } else {
             ncommands++;
         }
-        cmd = strtok(0, " ");
+        cmd = strtok(0, delimiters);
     }
 
     // Allocate space.
@@ -1232,9 +1239,9 @@ par_shapes_mesh* par_shapes_create_lsystem(char const* text, int slices,
 
     // The second pass fills in the structures.
     strcpy(program, text);
-    cmd = strtok(program, " ");
+    cmd = strtok(program, delimiters);
     while (cmd) {
-        char *arg = strtok(0, " ");
+        char *arg = strtok(0, delimiters);
         if (!strcmp(cmd, "rule")) {
             current_rule++;
 
@@ -1270,7 +1277,7 @@ par_shapes_mesh* par_shapes_create_lsystem(char const* text, int slices,
 
             current_command++;
         }
-        cmd = strtok(0, " ");
+        cmd = strtok(0, delimiters);
     }
 
     // For testing purposes, dump out the parsed program.
@@ -1337,7 +1344,7 @@ par_shapes_mesh* par_shapes_create_lsystem(char const* text, int slices,
             }
             par_shapes_free_mesh(m);
         } else if (!strcmp(cmd->cmd, "call") && stackptr < maxdepth - 1) {
-            rule = par_shapes__pick_rule(cmd->arg, rules, nrules);
+            rule = par_shapes__pick_rule(cmd->arg, rules, nrules, rand_fn, context);
             frame = &stack[++stackptr];
             frame->rule = rule;
             frame->orientation = par_shapes_clone(turtle, 0);
@@ -2122,7 +2129,7 @@ void par_shapes_remove_degenerate(par_shapes_mesh* mesh, float mintriarea)
 
 // par_shapes is distributed under the MIT license:
 //
-// Copyright (c) 2019 Philip Rideout
+// Copyright (c) 2020 Philip Rideout
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
