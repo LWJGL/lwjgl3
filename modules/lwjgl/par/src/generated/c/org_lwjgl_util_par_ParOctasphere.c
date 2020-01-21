@@ -5,7 +5,9 @@
  */
 #include "common_tools.h"
 #define PAR_OCTASPHERE_IMPLEMENTATION
+DISABLE_WARNINGS()
 #include "par_octasphere.h"
+ENABLE_WARNINGS()
 
 EXTERN_C_ENTER
 

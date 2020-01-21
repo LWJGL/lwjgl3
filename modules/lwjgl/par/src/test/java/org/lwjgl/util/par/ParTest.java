@@ -302,7 +302,7 @@ public class ParTest {
             .put(1, 1.0f)
             .put(2, 0.0f);
 
-        ParShapesMesh mesh = Objects.requireNonNull(par_shapes_create_lsystem(program, 5, 60));
+        ParShapesMesh mesh = Objects.requireNonNull(par_shapes_create_lsystem(program, 5, 60, null, NULL));
         ParShapesMesh disk = Objects.requireNonNull(par_shapes_create_disk(10, 30, O, J));
 
         par_shapes_merge(mesh, disk);

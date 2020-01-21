@@ -10,7 +10,9 @@ import par.*
 val par_octasphere = "ParOctasphere".nativeClass(Module.PAR, prefix = "par_octasphere_") {
     nativeDirective(
         """#define PAR_OCTASPHERE_IMPLEMENTATION
-#include "par_octasphere.h"""")
+DISABLE_WARNINGS()
+#include "par_octasphere.h"
+ENABLE_WARNINGS()""")
 
     documentation =
         """
