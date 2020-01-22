@@ -2394,10 +2394,10 @@ public final class MemoryUtil {
                     // c >= 128: 1 (1 input char -> 2 output bytes)
                     bytes += (0x7F - c) >>> 31;
                 } else {
-                    // non-surrogate: 1 input char  -> 3 output bytes
-                    //     surrogate: 2 input chars -> 4 output bytes
+                    // non-high-surrogate: 1 input char  -> 3 output bytes
+                    //     surrogate-pair: 2 input chars -> 4 output bytes
                     bytes += 2;
-                    if (MIN_SURROGATE <= c && c <= MAX_SURROGATE) {
+                    if (isHighSurrogate(c)) {
                         i++;
                     }
                 }
