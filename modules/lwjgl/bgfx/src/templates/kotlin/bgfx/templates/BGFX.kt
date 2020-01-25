@@ -14,7 +14,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     IntConstant(
         "API version",
 
-        "API_VERSION".."102"
+        "API_VERSION".."103"
     )
 
     ShortConstant(
@@ -221,6 +221,28 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         """
     ).javaDocLinks
 
+    val DiscardFlags = ByteConstant(
+        """
+        Rendering state discard.
+
+        When state is preserved in submit, rendering states can be discarded on a finer grain.
+        """,
+
+        "DISCARD_INDEX_BUFFER"..0x01.b,
+        "DISCARD_VERTEX_STREAMS"..0x02.b,
+        "DISCARD_TEXTURE_SAMPLERS"..0x04.b,
+        "DISCARD_COMPUTE"..0x08.b,
+        "DISCARD_STATE"..0x10.b,
+
+        "DISCARD_ALL".."""(0
+        | BGFX_DISCARD_INDEX_BUFFER
+        | BGFX_DISCARD_VERTEX_STREAMS
+        | BGFX_DISCARD_TEXTURE_SAMPLERS
+        | BGFX_DISCARD_COMPUTE
+        | BGFX_DISCARD_STATE)
+        """
+    ).javaDocLinks
+
     val DebugFlags = EnumConstant(
         "Debug",
 
@@ -278,7 +300,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
 
     val TextureFlags = LongConstant(
         "Texture creation flags.",
-        
+
         "TEXTURE_NONE"..0x0000000000000000L,
         "TEXTURE_MSAA_SAMPLE"..0x0000000800000000L,
         "TEXTURE_RT"..0x0000001000000000L,
@@ -2438,7 +2460,8 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_discard",
         "Discards all previously set state for draw or compute call.",
 
-        bgfx_encoder_s.p("_this", "the encoder")
+        bgfx_encoder_s.p("_this", "the encoder"),
+        MapToInt..uint8_t("_flags", "draw/compute states to discard", DiscardFlags, LinkMode.BITFIELD)
     )
 
     void(
@@ -2847,7 +2870,9 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
 
     void(
         "discard",
-        "Discards all previously set state for draw or compute call."
+        "Discards all previously set state for draw or compute call.",
+
+        MapToInt..uint8_t("_flags", "draw/compute states to discard", DiscardFlags, LinkMode.BITFIELD)
     )
 
     void(

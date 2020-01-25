@@ -24,7 +24,7 @@ import static org.lwjgl.system.Pointer.*;
 public class BGFX {
 
     /** API version */
-    public static final int BGFX_API_VERSION = 102;
+    public static final int BGFX_API_VERSION = 103;
 
     /** Invalid handle */
     public static final short BGFX_INVALID_HANDLE = (short)0xFFFF;
@@ -192,6 +192,25 @@ public class BGFX {
         | BGFX_CLEAR_DISCARD_COLOR_MASK
         | BGFX_CLEAR_DISCARD_DEPTH
         | BGFX_CLEAR_DISCARD_STENCIL)
+        ;
+
+    /**
+     * Rendering state discard.
+     * 
+     * <p>When state is preserved in submit, rendering states can be discarded on a finer grain.</p>
+     */
+    public static final byte
+        BGFX_DISCARD_INDEX_BUFFER     = 0x1,
+        BGFX_DISCARD_VERTEX_STREAMS   = 0x2,
+        BGFX_DISCARD_TEXTURE_SAMPLERS = 0x4,
+        BGFX_DISCARD_COMPUTE          = 0x8,
+        BGFX_DISCARD_STATE            = 0x10,
+        BGFX_DISCARD_ALL              = (0
+        | BGFX_DISCARD_INDEX_BUFFER
+        | BGFX_DISCARD_VERTEX_STREAMS
+        | BGFX_DISCARD_TEXTURE_SAMPLERS
+        | BGFX_DISCARD_COMPUTE
+        | BGFX_DISCARD_STATE)
         ;
 
     /**
@@ -4827,17 +4846,23 @@ public class BGFX {
 
     // --- [ bgfx_encoder_discard ] ---
 
-    /**
-     * Discards all previously set state for draw or compute call.
-     *
-     * @param _this the encoder
-     */
-    public static void bgfx_encoder_discard(@NativeType("struct bgfx_encoder_s *") long _this) {
+    /** Unsafe version of: {@link #bgfx_encoder_discard encoder_discard} */
+    public static void nbgfx_encoder_discard(long _this, byte _flags) {
         long __functionAddress = Functions.encoder_discard;
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, __functionAddress);
+        invokePV(_this, _flags, __functionAddress);
+    }
+
+    /**
+     * Discards all previously set state for draw or compute call.
+     *
+     * @param _this  the encoder
+     * @param _flags draw/compute states to discard. One or more of:<br><table><tr><td>{@link #BGFX_DISCARD_INDEX_BUFFER DISCARD_INDEX_BUFFER}</td><td>{@link #BGFX_DISCARD_VERTEX_STREAMS DISCARD_VERTEX_STREAMS}</td><td>{@link #BGFX_DISCARD_TEXTURE_SAMPLERS DISCARD_TEXTURE_SAMPLERS}</td><td>{@link #BGFX_DISCARD_COMPUTE DISCARD_COMPUTE}</td></tr><tr><td>{@link #BGFX_DISCARD_STATE DISCARD_STATE}</td><td>{@link #BGFX_DISCARD_ALL DISCARD_ALL}</td></tr></table>
+     */
+    public static void bgfx_encoder_discard(@NativeType("struct bgfx_encoder_s *") long _this, @NativeType("uint8_t") int _flags) {
+        nbgfx_encoder_discard(_this, (byte)_flags);
     }
 
     // --- [ bgfx_encoder_blit ] ---
@@ -5651,10 +5676,19 @@ public class BGFX {
 
     // --- [ bgfx_discard ] ---
 
-    /** Discards all previously set state for draw or compute call. */
-    public static void bgfx_discard() {
+    /** Unsafe version of: {@link #bgfx_discard discard} */
+    public static void nbgfx_discard(byte _flags) {
         long __functionAddress = Functions.discard;
-        invokeV(__functionAddress);
+        invokeV(_flags, __functionAddress);
+    }
+
+    /**
+     * Discards all previously set state for draw or compute call.
+     *
+     * @param _flags draw/compute states to discard. One or more of:<br><table><tr><td>{@link #BGFX_DISCARD_INDEX_BUFFER DISCARD_INDEX_BUFFER}</td><td>{@link #BGFX_DISCARD_VERTEX_STREAMS DISCARD_VERTEX_STREAMS}</td><td>{@link #BGFX_DISCARD_TEXTURE_SAMPLERS DISCARD_TEXTURE_SAMPLERS}</td><td>{@link #BGFX_DISCARD_COMPUTE DISCARD_COMPUTE}</td></tr><tr><td>{@link #BGFX_DISCARD_STATE DISCARD_STATE}</td><td>{@link #BGFX_DISCARD_ALL DISCARD_ALL}</td></tr></table>
+     */
+    public static void bgfx_discard(@NativeType("uint8_t") int _flags) {
+        nbgfx_discard((byte)_flags);
     }
 
     // --- [ bgfx_blit ] ---
