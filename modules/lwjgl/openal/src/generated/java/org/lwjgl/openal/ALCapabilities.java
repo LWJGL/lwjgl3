@@ -118,6 +118,11 @@ public final class ALCapabilities {
         alGetAuxiliaryEffectSlotf,
         alGetAuxiliaryEffectSlotfv,
         alBufferDataStatic,
+        alBufferSamplesSOFT,
+        alBufferSubSamplesSOFT,
+        alGetBufferSamplesSOFT,
+        alIsBufferFormatSupportedSOFT,
+        alBufferSubDataSOFT,
         alDeferUpdatesSOFT,
         alProcessUpdatesSOFT,
         alSourcedSOFT,
@@ -138,6 +143,8 @@ public final class ALCapabilities {
     public final boolean OpenAL10;
     /** When true, {@link AL11} is supported. */
     public final boolean OpenAL11;
+    /** When true, {@link SOFTBformatEx} is supported. */
+    public final boolean OpenAL_SOFT_bformat_ex;
     /** When true, {@link EXTAlaw} is supported. */
     public final boolean AL_EXT_ALAW;
     /** When true, {@link EXTBFormat} is supported. */
@@ -182,10 +189,16 @@ public final class ALCapabilities {
     public final boolean AL_LOKI_WAVE_format;
     /** When true, {@link SOFTBlockAlignment} is supported. */
     public final boolean AL_SOFT_block_alignment;
+    /** When true, {@link SOFTBufferSamples} is supported. */
+    public final boolean AL_SOFT_buffer_samples;
+    /** When true, {@link SOFTBufferSubData} is supported. */
+    public final boolean AL_SOFT_buffer_sub_data;
     /** When true, {@link SOFTDeferredUpdates} is supported. */
     public final boolean AL_SOFT_deferred_updates;
     /** When true, {@link SOFTDirectChannels} is supported. */
     public final boolean AL_SOFT_direct_channels;
+    /** When true, {@link SOFTDirectChannelsRemix} is supported. */
+    public final boolean AL_SOFT_direct_channels_remix;
     /** When true, {@link SOFTGainClampEx} is supported. */
     public final boolean AL_SOFT_gain_clamp_ex;
     /** When true, {@link SOFTLoopPoints} is supported. */
@@ -308,6 +321,11 @@ public final class ALCapabilities {
         alGetAuxiliaryEffectSlotf = provider.getFunctionAddress("alGetAuxiliaryEffectSlotf");
         alGetAuxiliaryEffectSlotfv = provider.getFunctionAddress("alGetAuxiliaryEffectSlotfv");
         alBufferDataStatic = provider.getFunctionAddress("alBufferDataStatic");
+        alBufferSamplesSOFT = provider.getFunctionAddress("alBufferSamplesSOFT");
+        alBufferSubSamplesSOFT = provider.getFunctionAddress("alBufferSubSamplesSOFT");
+        alGetBufferSamplesSOFT = provider.getFunctionAddress("alGetBufferSamplesSOFT");
+        alIsBufferFormatSupportedSOFT = provider.getFunctionAddress("alIsBufferFormatSupportedSOFT");
+        alBufferSubDataSOFT = provider.getFunctionAddress("alBufferSubDataSOFT");
         alDeferUpdatesSOFT = provider.getFunctionAddress("alDeferUpdatesSOFT");
         alProcessUpdatesSOFT = provider.getFunctionAddress("alProcessUpdatesSOFT");
         alSourcedSOFT = provider.getFunctionAddress("alSourcedSOFT");
@@ -326,6 +344,7 @@ public final class ALCapabilities {
 
         OpenAL10 = ext.contains("OpenAL10") && checkExtension("OpenAL10", AL10.isAvailable(this));
         OpenAL11 = ext.contains("OpenAL11") && checkExtension("OpenAL11", AL11.isAvailable(this));
+        OpenAL_SOFT_bformat_ex = ext.contains("OpenAL_SOFT_bformat_ex");
         AL_EXT_ALAW = ext.contains("AL_EXT_ALAW");
         AL_EXT_BFORMAT = ext.contains("AL_EXT_BFORMAT");
         AL_EXT_DOUBLE = ext.contains("AL_EXT_DOUBLE");
@@ -348,8 +367,11 @@ public final class ALCapabilities {
         AL_LOKI_quadriphonic = ext.contains("AL_LOKI_quadriphonic");
         AL_LOKI_WAVE_format = ext.contains("AL_LOKI_WAVE_format");
         AL_SOFT_block_alignment = ext.contains("AL_SOFT_block_alignment");
+        AL_SOFT_buffer_samples = ext.contains("AL_SOFT_buffer_samples") && checkExtension("AL_SOFT_buffer_samples", SOFTBufferSamples.isAvailable(this));
+        AL_SOFT_buffer_sub_data = ext.contains("AL_SOFT_buffer_sub_data") && checkExtension("AL_SOFT_buffer_sub_data", SOFTBufferSubData.isAvailable(this));
         AL_SOFT_deferred_updates = ext.contains("AL_SOFT_deferred_updates") && checkExtension("AL_SOFT_deferred_updates", SOFTDeferredUpdates.isAvailable(this));
         AL_SOFT_direct_channels = ext.contains("AL_SOFT_direct_channels");
+        AL_SOFT_direct_channels_remix = ext.contains("AL_SOFT_direct_channels_remix");
         AL_SOFT_gain_clamp_ex = ext.contains("AL_SOFT_gain_clamp_ex");
         AL_SOFT_loop_points = ext.contains("AL_SOFT_loop_points");
         AL_SOFT_MSADPCM = ext.contains("AL_SOFT_MSADPCM");
