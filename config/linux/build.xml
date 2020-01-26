@@ -7,6 +7,7 @@
 
     <property name="gcc.prefix" value="aarch64-linux-gnu-" if:set="build.arch.arm64"/>
     <property name="gcc.prefix" value="arm-linux-gnueabihf-" if:set="build.arch.arm32"/>
+    <property name="gcc.prefix" value="mips64el-linux-gnuabi64-" if:set="build.arch.mips64"/>
 
     <condition property="gcc.prefix" value="${gcc.prefix}" else="">
         <isset property="gcc.prefix"/>

@@ -951,6 +951,7 @@
         <element name="linux-content" optional="true"/>
         <element name="linux-arm64-content" optional="true"/>
         <element name="linux-arm32-content" optional="true"/>
+        <element name="linux-mips64-content" optional="true"/>
         <element name="macos-content" optional="true"/>
         <element name="windows-content" optional="true"/>
         <element name="windows-x86-content" optional="true"/>
@@ -978,6 +979,10 @@
 
                 <get-release platform="linux" arch="arm32" file="lib@{native-library}.so" if:set="auto-natives"/>
                 <get-release platform="linux" arch="arm32" file="lib@{native-library}.so.git" if:set="git-revision"/>
+
+
+                <get-release platform="linux" arch="mips64" file="lib@{native-library}.so" if:set="auto-natives"/>
+                <get-release platform="linux" arch="mips64" file="lib@{native-library}.so.git" if:set="git-revision"/>
 
                 <get-release platform="macos" arch="x64" file="lib@{native-library}.dylib" if:set="auto-natives"/>
                 <get-release platform="macos" arch="x64" file="lib@{native-library}.dylib.git" if:set="git-revision"/>
@@ -1036,6 +1041,9 @@
                 <natives-jar name="@{name}" title="@{title}" platform="linux-arm32" path="linux/arm32" type="so">
                     <linux-arm32-content/>
                 </natives-jar>
+                <natives-jar name="@{name}" title="@{title}" platform="linux-mips64" path="linux/mips64" type="so">
+                    <linux-mips64-content/>
+                </natives-jar>
                 <natives-jar name="@{name}" title="@{title}" platform="macos" path="macos/x64" type="dylib">
                     <macos-content/>
                 </natives-jar>
@@ -1057,6 +1065,7 @@
         <element name="linux" optional="true"/>
         <element name="linux-arm64" optional="true"/>
         <element name="linux-arm32" optional="true"/>
+        <element name="linux-mips64" optional="true"/>
         <element name="macos" optional="true"/>
         <element name="windows" optional="true"/>
         <element name="windows-x86" optional="true"/>
@@ -1078,6 +1087,7 @@
                 <linux-content><linux/></linux-content>
                 <linux-arm64-content><linux-arm64/></linux-arm64-content>
                 <linux-arm32-content><linux-arm32/></linux-arm32-content>
+                <linux-mips64-content><linux-mips64/></linux-mips64-content>
                 <macos-content><macos/></macos-content>
                 <windows-content><windows/></windows-content>
                 <windows-x86-content><windows-x86/></windows-x86-content>
@@ -1271,6 +1281,11 @@
                 <get-release platform="linux" arch="arm32" file="libglfw_wayland.so"/>
                 <get-release platform="linux" arch="arm32" file="libglfw_wayland.so.git"/>
 
+                <get-release platform="linux" arch="mips64" file="libglfw.so"/>
+                <get-release platform="linux" arch="mips64" file="libglfw.so.git"/>
+                <get-release platform="linux" arch="mips64" file="libglfw_wayland.so"/>
+                <get-release platform="linux" arch="mips64" file="libglfw_wayland.so.git"/>
+
                 <get-release platform="macos" arch="x64" file="libglfw.dylib"/>
                 <get-release platform="macos" arch="x64" file="libglfw.dylib.git"/>
 
@@ -1344,6 +1359,9 @@
 
                 <get-release platform="linux" arch="arm32" file="libopenal.so"/>
                 <get-release platform="linux" arch="arm32" file="libopenal.so.git"/>
+
+                <get-release platform="linux" arch="mips64" file="libopenal.so"/>
+                <get-release platform="linux" arch="mips64" file="libopenal.so.git"/>
 
                 <get-release platform="macos" arch="x64" file="libopenal.dylib"/>
                 <get-release platform="macos" arch="x64" file="libopenal.dylib.git"/>
@@ -1420,6 +1438,10 @@
                 <get-release platform="linux" arch="arm32" file="libshaderc.so"/>
                 <get-release platform="linux" arch="arm32" file="libshaderc.so.git"/>
                 <get-release platform="linux" arch="arm32" file="libshaderc_spvc.so"/>
+
+                <get-release platform="linux" arch="mips64" file="libshaderc.so"/>
+                <get-release platform="linux" arch="mips64" file="libshaderc.so.git"/>
+                <get-release platform="linux" arch="mips64" file="libshaderc_spvc.so"/>
 
                 <get-release platform="macos" arch="x64" file="libshaderc.dylib"/>
                 <get-release platform="macos" arch="x64" file="libshaderc.dylib.git"/>

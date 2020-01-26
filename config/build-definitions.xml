@@ -16,15 +16,15 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 
         By default, os.arch of the JVM that runs ANT is used, but this can be overridden for cross-compiling to another architecture.
 
-        Valid values: x64, x86, arm64, arm32
+        Valid values: x64, x86, arm64, arm32, mips64
     -->
     <property name="build.arch" value="${env.LWJGL_BUILD_ARCH}" if:set="env.LWJGL_BUILD_ARCH"/>
     <condition property="build.arch" value="x64" else="x86" unless:set="build.arch"> <!-- Normalize os.arch -->
         <contains string="${os.arch}" substring="64"/>
     </condition>
 
-    <fail message="Invalid or unsupported build architecture: ${build.arch}. Supported: x64, x86, arm64, arm32">
-        <condition><not><matches string="${build.arch}" pattern="^(x64|x86|arm64|arm32)$"/></not></condition>
+    <fail message="Invalid or unsupported build architecture: ${build.arch}. Supported: x64, x86, arm64, arm32, mips64">
+        <condition><not><matches string="${build.arch}" pattern="^(x64|x86|arm64|arm32|mips64)$"/></not></condition>
     </fail>
 
     <property name="build.arch.${build.arch}" value="true"/>
