@@ -378,7 +378,13 @@ public final class GL {
                         throw new IllegalStateException("There is no OpenGL context current in the current thread.");
                     }
 
-                    APIVersion apiVersion = apiParseVersion(versionString);
+                    APIVersion apiVersion = null;
+                    try {
+                    	apiVersion = apiParseVersion(versionString);
+                    } catch (IllegalArgumentException iae) {
+                    	// fallback for some drivers that hand out OpenGL ES contexts
+                    	apiVersion = apiParseVersion(versionString, "OpenGL ES");
+                    }
 
                     majorVersion = apiVersion.major;
                     minorVersion = apiVersion.minor;
