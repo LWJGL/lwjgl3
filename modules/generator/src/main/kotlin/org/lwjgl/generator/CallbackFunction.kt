@@ -183,6 +183,14 @@ import static org.lwjgl.system.MemoryUtil.*;
             }}) {
             ${if (returns.mapping != TypeMapping.VOID) "return " else ""}delegate.invoke(${javaSignature.map { it.name }.joinToString(", ")});
         }
+        
+        @Override
+        public void free() {
+            if (this.delegate instanceof ${className}) {
+                this.delegate.free();
+            }
+            super.free();
+        }
 
     }
 
