@@ -186,8 +186,8 @@ import static org.lwjgl.system.MemoryUtil.*;
         
         @Override
         public void free() {
-            if (this.delegate instanceof ${className}) {
-                this.delegate.free();
+            if (this.delegate instanceof Callback) {
+                ((Callback)this.delegate).free();
             }
             super.free();
         }
