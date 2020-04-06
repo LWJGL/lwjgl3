@@ -92,7 +92,7 @@ static rmtBool g_SettingsInitialized = RMT_FALSE;
         #include <mach/mach.h>
         #include <sys/time.h>
     #else
-        #ifndef __FreeBSD__
+        #if !defined(__FreeBSD__) && !defined(__OpenBSD__)
             #include <malloc.h>
         #endif
     #endif
@@ -113,7 +113,7 @@ static rmtBool g_SettingsInitialized = RMT_FALSE;
 
     #ifdef RMT_PLATFORM_LINUX
         #include <time.h>
-        #ifdef __FreeBSD__
+        #if defined(__FreeBSD__) || defined(__OpenBSD__)
             #include <pthread_np.h>
         #else
             #include <sys/prctl.h>
@@ -248,7 +248,7 @@ static rmtU32 msTimer_Get()
         clock_t time = clock();
 
         // CLOCKS_PER_SEC is 128 on FreeBSD, causing div/0
-        #ifdef __FreeBSD__
+        #if defined(__FreeBSD__) || defined(__OpenBSD__)
             rmtU32 msTime = (rmtU32) (time * 1000 / CLOCKS_PER_SEC);
         #else
             rmtU32 msTime = (rmtU32) (time / (CLOCKS_PER_SEC / 1000));
@@ -698,7 +698,7 @@ static rmtError VirtualMirrorBuffer_Constructor(VirtualMirrorBuffer* buffer, rmt
     RMT_UNREFERENCED_PARAMETER(nb_attempts);
 
 #ifdef RMT_PLATFORM_LINUX
-    #ifdef __FreeBSD__
+    #if defined(__FreeBSD__) || defined(__OpenBSD__)
         char path[] = "/tmp/ring-buffer-XXXXXX";
     #else
         char path[] = "/dev/shm/ring-buffer-XXXXXX";
@@ -4338,7 +4338,7 @@ static rmtError ThreadSampler_Constructor(ThreadSampler* thread_sampler)
 
     // Set the initial name to Thread0 etc. or use the existing Linux name.
     thread_sampler->name[0] = 0;
-    #if defined(RMT_PLATFORM_LINUX) && RMT_USE_POSIX_THREADNAMES && !defined(__FreeBSD__)
+    #if defined(RMT_PLATFORM_LINUX) && RMT_USE_POSIX_THREADNAMES && !defined(__FreeBSD__) && !defined(__OpenBSD__)
     prctl(PR_GET_NAME,thread_sampler->name,0,0,0);
     #else
     {
@@ -5254,7 +5254,7 @@ static void SetDebuggerThreadName(const char* name)
         char name_clamp[16];
         name_clamp[0] = 0;
         strncat_s(name_clamp, sizeof(name_clamp), name, 15);
-        #ifdef __FreeBSD__
+        #if defined(__FreeBSD__) || defined(__OpenBSD__)
             pthread_set_name_np(pthread_self(), name_clamp);
         #else
             prctl(PR_SET_NAME,name_clamp,0,0,0);
