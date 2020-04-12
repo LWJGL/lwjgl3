@@ -295,9 +295,9 @@ public final class APIUtil {
             pattern = "(?:" + prefix + "\\s+)?" + pattern;
         }
 
-        Matcher matcher = Pattern.compile(pattern).matcher(version);
+        Matcher matcher = Pattern.compile(pattern).matcher(version.trim());
         if (!matcher.matches()) {
-            throw new IllegalArgumentException(String.format("Malformed API version string [%s]", version));
+            throw new IllegalArgumentException(String.format("Malformed API version string [%s]", version.trim()));
         }
 
         return new APIVersion(
