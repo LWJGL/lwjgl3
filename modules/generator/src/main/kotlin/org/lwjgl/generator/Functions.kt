@@ -40,6 +40,7 @@ val EXPLICIT_FUNCTION_ADDRESS = Parameter(opaque_p, FUNCTION_ADDRESS, "the funct
 /** Special parameter that will accept the JNI function's JNIEnv* parameter. Hidden in Java code. */
 val JNI_ENV = Parameter("JNIEnv".opaque.p, JNIENV, "the JNI environment struct")
 
+private val TRY_FINALLY_RESULT_REFERENCE = """(?<=^|\W)$RESULT(?=\W|$)""".toRegex()
 private val TRY_FINALLY_ALIGN = "^(\\s+)".toRegex(RegexOption.MULTILINE)
 
 enum class GenerationMode {
@@ -936,6 +937,7 @@ class Func(
 
         if (hasCustomJNI || !has<Address>()) {
             generateNativeMethodCall(
+                code,
                 code.hasStatements(code.javaAfterNative, false, hasArrays),
                 hasStack || code.hasStatements(code.javaFinally, false, hasArrays)
             ) {
@@ -1048,8 +1050,15 @@ class Func(
     private fun PrintWriter.generateCodeBeforeNative(code: Code, alternative: Boolean, arrays: Boolean, hasFinally: Boolean) {
         printCode(code.javaBeforeNative, alternative, arrays , "")
 
-        if (hasFinally)
+        if (hasFinally) {
+            if (code.javaFinally.any { TRY_FINALLY_RESULT_REFERENCE.containsMatchIn(it.code) }) {
+                val returnsObject = returns.nativeType is WrappedPointerType
+                val returnType = if (returnsObject) (returns.nativeType as WrappedPointerType).className else returns.nativeMethodType
+
+                println("$t${t}$returnType $RESULT = ${if (returnsObject) "null" else "NULL"};") // TODO: support more types if necessary
+            }
             println("$t${t}try {")
+        }
     }
 
     private fun PrintWriter.generateCodeAfterNative(code: Code, alternative: Boolean, arrays: Boolean, hasFinally: Boolean) {
@@ -1070,6 +1079,7 @@ class Func(
     }
 
     private fun PrintWriter.generateNativeMethodCall(
+        code: Code,
         returnLater: Boolean,
         hasFinally: Boolean,
         printParams: PrintWriter.() -> Unit
@@ -1082,7 +1092,10 @@ class Func(
         print("$t$t")
         if (!(returns.isVoid || returns.isStructValue)) {
             if (returnLater || returns.nativeType.isPointerData) {
-                print("$returnType $RESULT = ")
+                if (!hasFinally || code.javaFinally.none { TRY_FINALLY_RESULT_REFERENCE.containsMatchIn(it.code) }) {
+                    print("$returnType ")
+                }
+                print("$RESULT = ")
                 if (returnsObject)
                     print("$returnType.createSafe(")
             } else {
@@ -1682,7 +1695,7 @@ class Func(
         }
 
         val returnLater = code.hasStatements(code.javaAfterNative, true, hasArrays) || transforms[returns] is ReturnLaterTransform
-        generateNativeMethodCall(returnLater, hasFinally) {
+        generateNativeMethodCall(code, returnLater, hasFinally) {
             printList(getNativeParams()) {
                 it.transformCallOrElse(transforms, it.asNativeMethodArgument(ALTERNATIVE))
             }
