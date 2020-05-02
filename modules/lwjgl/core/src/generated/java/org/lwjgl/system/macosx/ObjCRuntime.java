@@ -2023,8 +2023,13 @@ public class ObjCRuntime {
     @Nullable
     @NativeType("char *")
     public static String method_copyArgumentType(@NativeType("Method") long m, @NativeType("unsigned int") int index) {
-        long __result = nmethod_copyArgumentType(m, index);
-        return memUTF8Safe(__result);
+        long __result = NULL;
+        try {
+            __result = nmethod_copyArgumentType(m, index);
+            return memUTF8Safe(__result);
+        } finally {
+            if (__result != NULL) org.lwjgl.system.libc.LibCStdlib.nfree(__result);
+        }
     }
 
     // --- [ method_getReturnType ] ---
@@ -2344,8 +2349,13 @@ public class ObjCRuntime {
         if (CHECKS) {
             checkNT1(attributeName);
         }
-        long __result = nproperty_copyAttributeValue(property, memAddress(attributeName));
-        return memUTF8Safe(__result);
+        long __result = NULL;
+        try {
+            __result = nproperty_copyAttributeValue(property, memAddress(attributeName));
+            return memUTF8Safe(__result);
+        } finally {
+            if (__result != NULL) org.lwjgl.system.libc.LibCStdlib.nfree(__result);
+        }
     }
 
     /**
@@ -2361,12 +2371,14 @@ public class ObjCRuntime {
     @NativeType("char *")
     public static String property_copyAttributeValue(@NativeType("objc_property_t") long property, @NativeType("char const *") CharSequence attributeName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        long __result = NULL;
         try {
             stack.nUTF8(attributeName, true);
             long attributeNameEncoded = stack.getPointerAddress();
-            long __result = nproperty_copyAttributeValue(property, attributeNameEncoded);
+            __result = nproperty_copyAttributeValue(property, attributeNameEncoded);
             return memUTF8Safe(__result);
         } finally {
+            if (__result != NULL) org.lwjgl.system.libc.LibCStdlib.nfree(__result);
             stack.setPointer(stackPointer);
         }
     }

@@ -886,7 +886,9 @@ void myMethodIMP(id self, SEL _cmd)
         returnDoc = "a C string describing the return type. You must free the string with free()."
     )
 
-    charUTF8.p(
+    Code(
+        javaFinally = statement("            if ($RESULT != NULL) org.lwjgl.system.libc.LibCStdlib.nfree($RESULT);")
+    )..charUTF8.p(
         "method_copyArgumentType",
         "Returns a string describing a single parameter type of a method.",
 
@@ -1010,7 +1012,9 @@ void myMethodIMP(id self, SEL _cmd)
         returnDoc = "an array of property attributes. You must free the array with free()."
     )
 
-    charUTF8.p(
+    Code(
+        javaFinally = statement("            if ($RESULT != NULL) org.lwjgl.system.libc.LibCStdlib.nfree($RESULT);")
+    )..charUTF8.p(
         "property_copyAttributeValue",
         "Returns the value of a property attribute given the attribute name.",
 
