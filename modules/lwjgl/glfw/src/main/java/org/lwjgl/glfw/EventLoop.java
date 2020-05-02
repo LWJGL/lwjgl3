@@ -7,9 +7,7 @@ package org.lwjgl.glfw;
 import org.lwjgl.system.*;
 import org.lwjgl.system.macosx.*;
 
-import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
-import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.macosx.LibC.*;
 import static org.lwjgl.system.macosx.ObjCRuntime.*;
 
@@ -29,23 +27,13 @@ final class EventLoop {
         static {
             if (Platform.get() == Platform.MACOSX && !isMainThread()) {
                 // The only way to avoid a crash is if the shared application (NSApp) has been created by something else
-                SharedLibrary AppKit = MacOSXLibrary.getWithIdentifier("com.apple.AppKit");
-                try {
-                    long NSApp = AppKit.getFunctionAddress("NSApp"); // The NSApp global variable is an exported symbol
-                    if (memGetAddress(NSApp) == NULL) {
-                        throw new IllegalStateException(
-                            isJavaStartedOnFirstThread()
-                                ? "GLFW windows may only be created on the main thread."
-                                : "GLFW windows may only be created on the main thread and that thread must be the first thread in the process. Please run " +
-                                  "the JVM with -XstartOnFirstThread. For offscreen rendering, make sure another window toolkit (e.g. AWT or JavaFX) is " +
-                                  "initialized before GLFW."
-                        );
-                    }
-
-                    apiLog("GLFW can only be used for offscreen rendering.");
-                } finally {
-                    AppKit.free();
-                }
+                throw new IllegalStateException(
+                    isJavaStartedOnFirstThread()
+                        ? "GLFW windows may only be created on the main thread."
+                        : "GLFW windows may only be created on the main thread and that thread must be the first thread in the process. Please run " +
+                          "the JVM with -XstartOnFirstThread. For offscreen rendering, make sure another window toolkit (e.g. AWT or JavaFX) is " +
+                          "initialized before GLFW and Configuration.GLFW_CHECK_THREAD0 is set to false."
+                );
             }
         }
 
