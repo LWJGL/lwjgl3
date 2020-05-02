@@ -20,7 +20,6 @@ public final class MathUtil {
         apiLog("Java 10 multiplyHigh enabled");
     }
 
-
     private MathUtil() {
     }
 
@@ -59,7 +58,7 @@ public final class MathUtil {
     }
 
     public static boolean mathHasZeroShort(int value) {
-        return (value & 0xFFFF) == 0 || (value >>> 16) == 0;
+        return ((value - 0x00010001) & ~value & 0x80008000) != 0;
     }
 
     public static boolean mathHasZeroShort(long value) {
@@ -67,7 +66,7 @@ public final class MathUtil {
     }
 
     /**
-     * Returns as the most significant 64 bits of the 128-bit product of two {@code uint64_t} factors.
+     * Returns as a {@code long} the most significant 64 bits of the 128-bit product of two {@code uint64_t} factors.
      *
      * @param x the first value
      * @param y the second value
@@ -86,7 +85,7 @@ public final class MathUtil {
     }
 
     /**
-     * Returns as the most significant 64 bits of the 128-bit product of two {@code int64_t} factors.
+     * Returns as a {@code long} the most significant 64 bits of the 128-bit product of two {@code int64_t} factors.
      *
      * @param x the first value
      * @param y the second value
@@ -110,11 +109,9 @@ public final class MathUtil {
      */
     public static long mathDivideUnsigned(long dividend, long divisor) {
         if (0L <= divisor) {
-            if (0L <= dividend) {
-                return dividend / divisor;
-            } else {
-                return udivdi3(dividend, divisor);
-            }
+            return 0L <= dividend
+                ? dividend / divisor
+                : udivdi3(dividend, divisor);
         } else {
             return Long.compareUnsigned(dividend, divisor) < 0 ? 0L : 1L;
         }

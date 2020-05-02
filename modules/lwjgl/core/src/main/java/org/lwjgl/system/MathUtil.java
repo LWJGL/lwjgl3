@@ -59,7 +59,7 @@ public final class MathUtil {
     }
 
     /**
-     * Returns as the most significant 64 bits of the 128-bit product of two {@code uint64_t} factors.
+     * Returns as a {@code long} the most significant 64 bits of the 128-bit product of two {@code uint64_t} factors.
      *
      * @param x the first value
      * @param y the second value
@@ -78,7 +78,7 @@ public final class MathUtil {
     }
 
     /**
-     * Returns as the most significant 64 bits of the 128-bit product of two {@code int64_t} factors.
+     * Returns as a {@code long} the most significant 64 bits of the 128-bit product of two {@code int64_t} factors.
      *
      * @param x the first value
      * @param y the second value
