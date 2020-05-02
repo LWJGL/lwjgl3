@@ -46,7 +46,7 @@ public interface GLFWMouseButtonCallbackI extends CallbackI.V {
      *
      * @param window the window that received the event
      * @param button the mouse button that was pressed or released
-     * @param action the button action. One of:<br><table><tr><td>{@link GLFW#GLFW_PRESS PRESS}</td><td>{@link GLFW#GLFW_RELEASE RELEASE}</td><td>{@link GLFW#GLFW_REPEAT REPEAT}</td></tr></table>
+     * @param action the button action. One of:<br><table><tr><td>{@link GLFW#GLFW_PRESS PRESS}</td><td>{@link GLFW#GLFW_RELEASE RELEASE}</td></tr></table>
      * @param mods   bitfield describing which modifiers keys were held down
      */
     void invoke(@NativeType("GLFWwindow *") long window, int button, int action, int mods);

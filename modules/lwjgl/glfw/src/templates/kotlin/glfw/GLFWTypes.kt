@@ -494,7 +494,7 @@ val GLFWmousebuttonfun = Module.GLFW.callback {
 
         GLFWwindow.p("window", "the window that received the event"),
         int("button", "the mouse button that was pressed or released"),
-        int("action", "the button action", "#PRESS #RELEASE #REPEAT"),
+        int("action", "the button action", "#PRESS #RELEASE"),
         int("mods", "bitfield describing which modifiers keys were held down"),
 
         nativeType = "GLFWmousebuttonfun"
