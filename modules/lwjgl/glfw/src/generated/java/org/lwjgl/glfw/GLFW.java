@@ -911,6 +911,12 @@ public class GLFW {
      * <li>This function must only be called from the main thread.</li>
      * <li><b>macOS</b>: This function will change the current directory of the application to the `Contents/Resources` subdirectory of the application's
      * bundle, if present. This can be disabled with the {@link #GLFW_COCOA_CHDIR_RESOURCES COCOA_CHDIR_RESOURCES} init hint.</li>
+     * <li><b>macOS</b>: This function will create the main menu and dock icon for the application. If GLFW finds a {@code MainMenu.nib} it is loaded and
+     * assumed to contain a menu bar. Otherwise a minimal menu bar is created manually with common commands like Hide, Quit and About. The About entry
+     * opens a minimal about dialog with information from the application's bundle. The menu bar and dock icon can be disabled entirely with the
+     * {@link #GLFW_COCOA_MENUBAR COCOA_MENUBAR} init hint.</li>
+     * <li><b>x11</b>: This function will set the {@code LC_CTYPE} category of the application locale according to the current environment if that category is
+     * still "C". This is because the "C" locale breaks Unicode text input.</li>
      * </ul></div>
      *
      * @return {@link #GLFW_TRUE TRUE} if successful, or {@link #GLFW_FALSE FALSE} if an error occurred.
@@ -1857,9 +1863,6 @@ public class GLFW {
      * more information on bundles, see the
      * <a target="_blank" href="https://developer.apple.com/library/content/documentation/CoreFoundation/Conceptual/CFBundles/">Bundle Programming Guide</a> in the Mac
      * Developer Library.</li>
-     * <li><b>macOS</b>: The first time a window is created the menu bar is created. If GLFW finds a {@code `MainMenu.nib`} it is loaded and assumed to
-     * contain a menu bar. Otherwise a minimal menu bar is created manually with common commands like Hide, Quit and About. The About entry opens a
-     * minimal about dialog with information from the application's bundle. Menu bar creation can be disabled entirely with the {@link #GLFW_COCOA_MENUBAR COCOA_MENUBAR} init hint.</li>
      * <li><b>macOS</b>: On macOS 10.10 and later the window frame will not be rendered at full resolution on Retina displays unless the
      * {@link #GLFW_COCOA_RETINA_FRAMEBUFFER COCOA_RETINA_FRAMEBUFFER} hint is {@link #GLFW_TRUE TRUE} and the {@code NSHighResolutionCapable} key is enabled in the application bundle's {@code Info.plist}. For
      * more information, see <a target="_blank" href="https://developer.apple.com/library/content/documentation/GraphicsAnimation/Conceptual/HighResolutionOSX/Explained/Explained.html">High Resolution Guidelines for macOS</a> in the Mac Developer Library.</li>
@@ -1947,9 +1950,6 @@ public class GLFW {
      * more information on bundles, see the
      * <a target="_blank" href="https://developer.apple.com/library/content/documentation/CoreFoundation/Conceptual/CFBundles/">Bundle Programming Guide</a> in the Mac
      * Developer Library.</li>
-     * <li><b>macOS</b>: The first time a window is created the menu bar is created. If GLFW finds a {@code `MainMenu.nib`} it is loaded and assumed to
-     * contain a menu bar. Otherwise a minimal menu bar is created manually with common commands like Hide, Quit and About. The About entry opens a
-     * minimal about dialog with information from the application's bundle. Menu bar creation can be disabled entirely with the {@link #GLFW_COCOA_MENUBAR COCOA_MENUBAR} init hint.</li>
      * <li><b>macOS</b>: On macOS 10.10 and later the window frame will not be rendered at full resolution on Retina displays unless the
      * {@link #GLFW_COCOA_RETINA_FRAMEBUFFER COCOA_RETINA_FRAMEBUFFER} hint is {@link #GLFW_TRUE TRUE} and the {@code NSHighResolutionCapable} key is enabled in the application bundle's {@code Info.plist}. For
      * more information, see <a target="_blank" href="https://developer.apple.com/library/content/documentation/GraphicsAnimation/Conceptual/HighResolutionOSX/Explained/Explained.html">High Resolution Guidelines for macOS</a> in the Mac Developer Library.</li>

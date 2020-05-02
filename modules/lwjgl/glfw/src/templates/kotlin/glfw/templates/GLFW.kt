@@ -864,6 +864,16 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
             """
             <b>macOS</b>: This function will change the current directory of the application to the `Contents/Resources` subdirectory of the application's
             bundle, if present. This can be disabled with the #COCOA_CHDIR_RESOURCES init hint.
+            """,
+            """
+            <b>macOS</b>: This function will create the main menu and dock icon for the application. If GLFW finds a {@code MainMenu.nib} it is loaded and
+            assumed to contain a menu bar. Otherwise a minimal menu bar is created manually with common commands like Hide, Quit and About. The About entry
+            opens a minimal about dialog with information from the application's bundle. The menu bar and dock icon can be disabled entirely with the
+            #COCOA_MENUBAR init hint.
+            """,
+            """
+            <b>x11</b>: This function will set the {@code LC_CTYPE} category of the application locale according to the current environment if that category is
+            still "C". This is because the "C" locale breaks Unicode text input.
             """
         ))}
         """,
@@ -1488,11 +1498,6 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
             more information on bundles, see the
             ${url("https://developer.apple.com/library/content/documentation/CoreFoundation/Conceptual/CFBundles/", "Bundle Programming Guide")} in the Mac
             Developer Library.
-            """,
-            """
-            <b>macOS</b>: The first time a window is created the menu bar is created. If GLFW finds a {@code `MainMenu.nib`} it is loaded and assumed to
-            contain a menu bar. Otherwise a minimal menu bar is created manually with common commands like Hide, Quit and About. The About entry opens a
-            minimal about dialog with information from the application's bundle. Menu bar creation can be disabled entirely with the #COCOA_MENUBAR init hint.
             """,
             """
             <b>macOS</b>: On macOS 10.10 and later the window frame will not be rendered at full resolution on Retina displays unless the
