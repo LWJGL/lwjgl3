@@ -148,7 +148,11 @@ public class EGLCapabilities {
         eglSignalSyncNV,
         eglGetSyncAttribNV,
         eglGetSystemTimeFrequencyNV,
-        eglGetSystemTimeNV;
+        eglGetSystemTimeNV,
+        eglBindWaylandDisplayWL,
+        eglUnbindWaylandDisplayWL,
+        eglQueryWaylandBufferWL,
+        eglCreateWaylandBufferFromImageWL;
 
     /** When true, {@link EGL10} is supported. */
     public final boolean EGL10;
@@ -188,6 +192,8 @@ public class EGLCapabilities {
     public final boolean EGL_ANGLE_surface_d3d_texture_2d_share_handle;
     /** When true, {@link ANGLEWindowFixedSize} is supported. */
     public final boolean EGL_ANGLE_window_fixed_size;
+    /** When true, {@link ARMImageFormat} is supported. */
+    public final boolean EGL_ARM_image_format;
     /** When true, {@link ARMPixmapMultisampleDiscard} is supported. */
     public final boolean EGL_ARM_pixmap_multisample_discard;
     /** When true, {@link EXTBindToFront} is supported. */
@@ -529,6 +535,10 @@ public class EGLCapabilities {
     public final boolean EGL_TIZEN_image_native_buffer;
     /** When true, {@link TIZENImageNativeSurface} is supported. */
     public final boolean EGL_TIZEN_image_native_surface;
+    /** When true, {@link WLBindWaylandDisplay} is supported. */
+    public final boolean EGL_WL_bind_wayland_display;
+    /** When true, {@link WLCreateWaylandBufferFromImage} is supported. */
+    public final boolean EGL_WL_create_wayland_buffer_from_image;
 
     EGLCapabilities(FunctionProvider provider, Set<String> ext) {
         this(ext,
@@ -668,7 +678,11 @@ public class EGLCapabilities {
             provider.getFunctionAddress("eglSignalSyncNV"),
             provider.getFunctionAddress("eglGetSyncAttribNV"),
             provider.getFunctionAddress("eglGetSystemTimeFrequencyNV"),
-            provider.getFunctionAddress("eglGetSystemTimeNV")
+            provider.getFunctionAddress("eglGetSystemTimeNV"),
+            provider.getFunctionAddress("eglBindWaylandDisplayWL"),
+            provider.getFunctionAddress("eglUnbindWaylandDisplayWL"),
+            provider.getFunctionAddress("eglQueryWaylandBufferWL"),
+            provider.getFunctionAddress("eglCreateWaylandBufferFromImageWL")
         );
     }
 
@@ -810,7 +824,11 @@ public class EGLCapabilities {
             caps.eglSignalSyncNV,
             caps.eglGetSyncAttribNV,
             caps.eglGetSystemTimeFrequencyNV,
-            caps.eglGetSystemTimeNV
+            caps.eglGetSystemTimeNV,
+            caps.eglBindWaylandDisplayWL,
+            caps.eglUnbindWaylandDisplayWL,
+            caps.eglQueryWaylandBufferWL,
+            caps.eglCreateWaylandBufferFromImageWL
         );
     }
 
@@ -952,6 +970,10 @@ public class EGLCapabilities {
         eglGetSyncAttribNV = functions[134];
         eglGetSystemTimeFrequencyNV = functions[135];
         eglGetSystemTimeNV = functions[136];
+        eglBindWaylandDisplayWL = functions[137];
+        eglUnbindWaylandDisplayWL = functions[138];
+        eglQueryWaylandBufferWL = functions[139];
+        eglCreateWaylandBufferFromImageWL = functions[140];
 
         EGL10 = ext.contains("EGL10") && EGL.checkExtension("EGL10", org.lwjgl.egl.EGL10.isAvailable(this));
         EGL11 = ext.contains("EGL11") && EGL.checkExtension("EGL11", org.lwjgl.egl.EGL11.isAvailable(this));
@@ -972,6 +994,7 @@ public class EGLCapabilities {
         EGL_ANGLE_query_surface_pointer = ext.contains("EGL_ANGLE_query_surface_pointer") && EGL.checkExtension("EGL_ANGLE_query_surface_pointer", ANGLEQuerySurfacePointer.isAvailable(this));
         EGL_ANGLE_surface_d3d_texture_2d_share_handle = ext.contains("EGL_ANGLE_surface_d3d_texture_2d_share_handle");
         EGL_ANGLE_window_fixed_size = ext.contains("EGL_ANGLE_window_fixed_size");
+        EGL_ARM_image_format = ext.contains("EGL_ARM_image_format");
         EGL_ARM_pixmap_multisample_discard = ext.contains("EGL_ARM_pixmap_multisample_discard");
         EGL_EXT_bind_to_front = ext.contains("EGL_EXT_bind_to_front");
         EGL_EXT_buffer_age = ext.contains("EGL_EXT_buffer_age");
@@ -1094,6 +1117,8 @@ public class EGLCapabilities {
         EGL_NV_triple_buffer = ext.contains("EGL_NV_triple_buffer");
         EGL_TIZEN_image_native_buffer = ext.contains("EGL_TIZEN_image_native_buffer");
         EGL_TIZEN_image_native_surface = ext.contains("EGL_TIZEN_image_native_surface");
+        EGL_WL_bind_wayland_display = ext.contains("EGL_WL_bind_wayland_display") && EGL.checkExtension("EGL_WL_bind_wayland_display", WLBindWaylandDisplay.isAvailable(this));
+        EGL_WL_create_wayland_buffer_from_image = ext.contains("EGL_WL_create_wayland_buffer_from_image") && EGL.checkExtension("EGL_WL_create_wayland_buffer_from_image", WLCreateWaylandBufferFromImage.isAvailable(this));
     }
 
 }

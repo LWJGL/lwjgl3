@@ -20,6 +20,7 @@ val NOK = "NOK"
 val NV = "NV"
 val OVR = "OVR"
 val TIZEN = "TIZEN"
+val WL = "WL"
 
 private val NativeClass.cap: String get() = "{@link #$capName $templateName}"
 
