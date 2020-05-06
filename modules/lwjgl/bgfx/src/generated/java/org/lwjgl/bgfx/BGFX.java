@@ -24,7 +24,7 @@ import static org.lwjgl.system.Pointer.*;
 public class BGFX {
 
     /** API version */
-    public static final int BGFX_API_VERSION = 103;
+    public static final int BGFX_API_VERSION = 106;
 
     /** Invalid handle */
     public static final short BGFX_INVALID_HANDLE = (short)0xFFFF;
@@ -200,18 +200,14 @@ public class BGFX {
      * <p>When state is preserved in submit, rendering states can be discarded on a finer grain.</p>
      */
     public static final byte
-        BGFX_DISCARD_INDEX_BUFFER     = 0x1,
-        BGFX_DISCARD_VERTEX_STREAMS   = 0x2,
-        BGFX_DISCARD_TEXTURE_SAMPLERS = 0x4,
-        BGFX_DISCARD_COMPUTE          = 0x8,
-        BGFX_DISCARD_STATE            = 0x10,
-        BGFX_DISCARD_ALL              = (0
-        | BGFX_DISCARD_INDEX_BUFFER
-        | BGFX_DISCARD_VERTEX_STREAMS
-        | BGFX_DISCARD_TEXTURE_SAMPLERS
-        | BGFX_DISCARD_COMPUTE
-        | BGFX_DISCARD_STATE)
-        ;
+        BGFX_DISCARD_NONE           = 0x0,
+        BGFX_DISCARD_BINDINGS       = 0x1,
+        BGFX_DISCARD_INDEX_BUFFER   = 0x2,
+        BGFX_DISCARD_INSTANCE_DATA  = 0x4,
+        BGFX_DISCARD_STATE          = 0x8,
+        BGFX_DISCARD_TRANSFORM      = 0x10,
+        BGFX_DISCARD_VERTEX_STREAMS = 0x20,
+        BGFX_DISCARD_ALL            = (byte)0xFF;
 
     /**
      * Debug
@@ -1084,6 +1080,7 @@ public class BGFX {
             set_view_frame_buffer                                = apiGetFunctionAddress(BGFX, "bgfx_set_view_frame_buffer"),
             set_view_transform                                   = apiGetFunctionAddress(BGFX, "bgfx_set_view_transform"),
             set_view_order                                       = apiGetFunctionAddress(BGFX, "bgfx_set_view_order"),
+            reset_view                                           = apiGetFunctionAddress(BGFX, "bgfx_reset_view"),
             encoder_begin                                        = apiGetFunctionAddress(BGFX, "bgfx_encoder_begin"),
             encoder_end                                          = apiGetFunctionAddress(BGFX, "bgfx_encoder_end"),
             encoder_set_marker                                   = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_marker"),
@@ -3941,6 +3938,23 @@ public class BGFX {
         nbgfx_set_view_order((short)_id, (short)_num, memAddressSafe(_order));
     }
 
+    // --- [ bgfx_reset_view ] ---
+
+    /** Unsafe version of: {@link #bgfx_reset_view reset_view} */
+    public static void nbgfx_reset_view(short _id) {
+        long __functionAddress = Functions.reset_view;
+        invokeV(_id, __functionAddress);
+    }
+
+    /**
+     * Reset all view settings to default.
+     *
+     * @param _id view id
+     */
+    public static void bgfx_reset_view(@NativeType("bgfx_view_id_t") int _id) {
+        nbgfx_reset_view((short)_id);
+    }
+
     // --- [ bgfx_encoder_begin ] ---
 
     /**
@@ -4378,7 +4392,7 @@ public class BGFX {
      * @param _handle       vertex buffer
      * @param _startVertex  first vertex to render
      * @param _numVertices  number of vertices to render
-     * @param _layoutHandle vertex layout for aliasing vertex buffer
+     * @param _layoutHandle vertex layout for aliasing vertex buffer. If invalid handle is used, vertex layout used for creation of vertex buffer will be used.
      */
     public static void bgfx_encoder_set_vertex_buffer(@NativeType("struct bgfx_encoder_s *") long _this, @NativeType("uint8_t") int _stream, @NativeType("bgfx_vertex_buffer_handle_t") short _handle, @NativeType("uint32_t") int _startVertex, @NativeType("uint32_t") int _numVertices, @NativeType("bgfx_vertex_layout_handle_t") short _layoutHandle) {
         nbgfx_encoder_set_vertex_buffer(_this, (byte)_stream, _handle, _startVertex, _numVertices, _layoutHandle);
@@ -4403,7 +4417,7 @@ public class BGFX {
      * @param _handle       dynamic vertex buffer
      * @param _startVertex  first vertex to render
      * @param _numVertices  number of vertices to render
-     * @param _layoutHandle vertex layout for aliasing vertex buffer
+     * @param _layoutHandle vertex layout for aliasing vertex buffer. If invalid handle is used, vertex layout used for creation of vertex buffer will be used.
      */
     public static void bgfx_encoder_set_dynamic_vertex_buffer(@NativeType("struct bgfx_encoder_s *") long _this, @NativeType("uint8_t") int _stream, @NativeType("bgfx_dynamic_vertex_buffer_handle_t") short _handle, @NativeType("uint32_t") int _startVertex, @NativeType("uint32_t") int _numVertices, @NativeType("bgfx_vertex_layout_handle_t") short _layoutHandle) {
         nbgfx_encoder_set_dynamic_vertex_buffer(_this, (byte)_stream, _handle, _startVertex, _numVertices, _layoutHandle);
@@ -4429,7 +4443,7 @@ public class BGFX {
      * @param _tvb          transient vertex buffer
      * @param _startVertex  first vertex to render
      * @param _numVertices  number of vertices to render
-     * @param _layoutHandle vertex layout for aliasing vertex buffer
+     * @param _layoutHandle vertex layout for aliasing vertex buffer. If invalid handle is used, vertex layout used for creation of vertex buffer will be used.
      */
     public static void bgfx_encoder_set_transient_vertex_buffer(@NativeType("struct bgfx_encoder_s *") long _this, @NativeType("uint8_t") int _stream, @NativeType("bgfx_transient_vertex_buffer_t const *") BGFXTransientVertexBuffer _tvb, @NativeType("uint32_t") int _startVertex, @NativeType("uint32_t") int _numVertices, @NativeType("bgfx_vertex_layout_handle_t") short _layoutHandle) {
         nbgfx_encoder_set_transient_vertex_buffer(_this, (byte)_stream, _tvb.address(), _startVertex, _numVertices, _layoutHandle);
@@ -4567,7 +4581,10 @@ public class BGFX {
     }
 
     /**
-     * Submits an empty primitive for rendering. Uniforms and draw state will be applied but no geometry will be submitted.
+     * Submits an empty primitive for rendering.
+     * 
+     * <p>Uniforms and draw state will be applied but no geometry will be submitted. Useful in cases when no other draw/compute primitive is submitted to view,
+     * but it's desired to execute clear view.</p>
      * 
      * <p>These empty draw calls will sort before ordinary draw calls.</p>
      *
@@ -4581,36 +4598,36 @@ public class BGFX {
     // --- [ bgfx_encoder_submit ] ---
 
     /** Unsafe version of: {@link #bgfx_encoder_submit encoder_submit} */
-    public static void nbgfx_encoder_submit(long _this, short _id, short _handle, int _depth, boolean _preserveState) {
+    public static void nbgfx_encoder_submit(long _this, short _id, short _handle, int _depth, byte _flags) {
         long __functionAddress = Functions.encoder_submit;
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _id, _handle, _depth, _preserveState, __functionAddress);
+        invokePV(_this, _id, _handle, _depth, _flags, __functionAddress);
     }
 
     /**
      * Submits primitive for rendering.
      *
-     * @param _this          the encoder
-     * @param _id            view id
-     * @param _handle        program
-     * @param _depth         depth for sorting
-     * @param _preserveState preserve internal draw state for next draw call submit
+     * @param _this   the encoder
+     * @param _id     view id
+     * @param _handle program
+     * @param _depth  depth for sorting
+     * @param _flags  discard or preserve states. One or more of:<br><table><tr><td>{@link #BGFX_DISCARD_NONE DISCARD_NONE}</td><td>{@link #BGFX_DISCARD_BINDINGS DISCARD_BINDINGS}</td><td>{@link #BGFX_DISCARD_INDEX_BUFFER DISCARD_INDEX_BUFFER}</td><td>{@link #BGFX_DISCARD_INSTANCE_DATA DISCARD_INSTANCE_DATA}</td></tr><tr><td>{@link #BGFX_DISCARD_STATE DISCARD_STATE}</td><td>{@link #BGFX_DISCARD_TRANSFORM DISCARD_TRANSFORM}</td><td>{@link #BGFX_DISCARD_VERTEX_STREAMS DISCARD_VERTEX_STREAMS}</td><td>{@link #BGFX_DISCARD_ALL DISCARD_ALL}</td></tr></table>
      */
-    public static void bgfx_encoder_submit(@NativeType("struct bgfx_encoder_s *") long _this, @NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _handle, @NativeType("uint32_t") int _depth, @NativeType("bool") boolean _preserveState) {
-        nbgfx_encoder_submit(_this, (short)_id, _handle, _depth, _preserveState);
+    public static void bgfx_encoder_submit(@NativeType("struct bgfx_encoder_s *") long _this, @NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _handle, @NativeType("uint32_t") int _depth, @NativeType("uint8_t") int _flags) {
+        nbgfx_encoder_submit(_this, (short)_id, _handle, _depth, (byte)_flags);
     }
 
     // --- [ bgfx_encoder_submit_occlusion_query ] ---
 
     /** Unsafe version of: {@link #bgfx_encoder_submit_occlusion_query encoder_submit_occlusion_query} */
-    public static void nbgfx_encoder_submit_occlusion_query(long _this, short _id, short _program, short _occlusionQuery, int _depth, boolean _preserveState) {
+    public static void nbgfx_encoder_submit_occlusion_query(long _this, short _id, short _program, short _occlusionQuery, int _depth, byte _flags) {
         long __functionAddress = Functions.encoder_submit_occlusion_query;
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _id, _program, _occlusionQuery, _depth, _preserveState, __functionAddress);
+        invokePV(_this, _id, _program, _occlusionQuery, _depth, _flags, __functionAddress);
     }
 
     /**
@@ -4621,21 +4638,21 @@ public class BGFX {
      * @param _program        program
      * @param _occlusionQuery occlusion query
      * @param _depth          depth for sorting
-     * @param _preserveState  preserve internal draw state for next draw call submit
+     * @param _flags          discard or preserve states. One or more of:<br><table><tr><td>{@link #BGFX_DISCARD_NONE DISCARD_NONE}</td><td>{@link #BGFX_DISCARD_BINDINGS DISCARD_BINDINGS}</td><td>{@link #BGFX_DISCARD_INDEX_BUFFER DISCARD_INDEX_BUFFER}</td><td>{@link #BGFX_DISCARD_INSTANCE_DATA DISCARD_INSTANCE_DATA}</td></tr><tr><td>{@link #BGFX_DISCARD_STATE DISCARD_STATE}</td><td>{@link #BGFX_DISCARD_TRANSFORM DISCARD_TRANSFORM}</td><td>{@link #BGFX_DISCARD_VERTEX_STREAMS DISCARD_VERTEX_STREAMS}</td><td>{@link #BGFX_DISCARD_ALL DISCARD_ALL}</td></tr></table>
      */
-    public static void bgfx_encoder_submit_occlusion_query(@NativeType("struct bgfx_encoder_s *") long _this, @NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _program, @NativeType("bgfx_occlusion_query_handle_t") short _occlusionQuery, @NativeType("uint32_t") int _depth, @NativeType("bool") boolean _preserveState) {
-        nbgfx_encoder_submit_occlusion_query(_this, (short)_id, _program, _occlusionQuery, _depth, _preserveState);
+    public static void bgfx_encoder_submit_occlusion_query(@NativeType("struct bgfx_encoder_s *") long _this, @NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _program, @NativeType("bgfx_occlusion_query_handle_t") short _occlusionQuery, @NativeType("uint32_t") int _depth, @NativeType("uint8_t") int _flags) {
+        nbgfx_encoder_submit_occlusion_query(_this, (short)_id, _program, _occlusionQuery, _depth, (byte)_flags);
     }
 
     // --- [ bgfx_encoder_submit_indirect ] ---
 
     /** Unsafe version of: {@link #bgfx_encoder_submit_indirect encoder_submit_indirect} */
-    public static void nbgfx_encoder_submit_indirect(long _this, short _id, short _handle, short _indirectHandle, short _start, short _num, int _depth, boolean _preserveState) {
+    public static void nbgfx_encoder_submit_indirect(long _this, short _id, short _handle, short _indirectHandle, short _start, short _num, int _depth, byte _flags) {
         long __functionAddress = Functions.encoder_submit_indirect;
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _id, _handle, _indirectHandle, _start, _num, _depth, _preserveState, __functionAddress);
+        invokePV(_this, _id, _handle, _indirectHandle, _start, _num, _depth, _flags, __functionAddress);
     }
 
     /**
@@ -4648,10 +4665,10 @@ public class BGFX {
      * @param _start          first element in indirect buffer
      * @param _num            number of dispatches
      * @param _depth          depth for sorting
-     * @param _preserveState  preserve internal draw state for next draw call submit
+     * @param _flags          discard or preserve states. One or more of:<br><table><tr><td>{@link #BGFX_DISCARD_NONE DISCARD_NONE}</td><td>{@link #BGFX_DISCARD_BINDINGS DISCARD_BINDINGS}</td><td>{@link #BGFX_DISCARD_INDEX_BUFFER DISCARD_INDEX_BUFFER}</td><td>{@link #BGFX_DISCARD_INSTANCE_DATA DISCARD_INSTANCE_DATA}</td></tr><tr><td>{@link #BGFX_DISCARD_STATE DISCARD_STATE}</td><td>{@link #BGFX_DISCARD_TRANSFORM DISCARD_TRANSFORM}</td><td>{@link #BGFX_DISCARD_VERTEX_STREAMS DISCARD_VERTEX_STREAMS}</td><td>{@link #BGFX_DISCARD_ALL DISCARD_ALL}</td></tr></table>
      */
-    public static void bgfx_encoder_submit_indirect(@NativeType("struct bgfx_encoder_s *") long _this, @NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _handle, @NativeType("bgfx_indirect_buffer_handle_t") short _indirectHandle, @NativeType("uint16_t") int _start, @NativeType("uint16_t") int _num, @NativeType("uint32_t") int _depth, @NativeType("bool") boolean _preserveState) {
-        nbgfx_encoder_submit_indirect(_this, (short)_id, _handle, _indirectHandle, (short)_start, (short)_num, _depth, _preserveState);
+    public static void bgfx_encoder_submit_indirect(@NativeType("struct bgfx_encoder_s *") long _this, @NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _handle, @NativeType("bgfx_indirect_buffer_handle_t") short _indirectHandle, @NativeType("uint16_t") int _start, @NativeType("uint16_t") int _num, @NativeType("uint32_t") int _depth, @NativeType("uint8_t") int _flags) {
+        nbgfx_encoder_submit_indirect(_this, (short)_id, _handle, _indirectHandle, (short)_start, (short)_num, _depth, (byte)_flags);
     }
 
     // --- [ bgfx_encoder_set_compute_index_buffer ] ---
@@ -4797,12 +4814,12 @@ public class BGFX {
     // --- [ bgfx_encoder_dispatch ] ---
 
     /** Unsafe version of: {@link #bgfx_encoder_dispatch encoder_dispatch} */
-    public static void nbgfx_encoder_dispatch(long _this, short _id, short _handle, int _numX, int _numY, int _numZ) {
+    public static void nbgfx_encoder_dispatch(long _this, short _id, short _handle, int _numX, int _numY, int _numZ, byte _flags) {
         long __functionAddress = Functions.encoder_dispatch;
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _id, _handle, _numX, _numY, _numZ, __functionAddress);
+        invokePV(_this, _id, _handle, _numX, _numY, _numZ, _flags, __functionAddress);
     }
 
     /**
@@ -4814,20 +4831,21 @@ public class BGFX {
      * @param _numX   number of groups X
      * @param _numY   number of groups Y
      * @param _numZ   number of groups Z
+     * @param _flags  discard or preserve states. One or more of:<br><table><tr><td>{@link #BGFX_DISCARD_NONE DISCARD_NONE}</td><td>{@link #BGFX_DISCARD_BINDINGS DISCARD_BINDINGS}</td><td>{@link #BGFX_DISCARD_INDEX_BUFFER DISCARD_INDEX_BUFFER}</td><td>{@link #BGFX_DISCARD_INSTANCE_DATA DISCARD_INSTANCE_DATA}</td></tr><tr><td>{@link #BGFX_DISCARD_STATE DISCARD_STATE}</td><td>{@link #BGFX_DISCARD_TRANSFORM DISCARD_TRANSFORM}</td><td>{@link #BGFX_DISCARD_VERTEX_STREAMS DISCARD_VERTEX_STREAMS}</td><td>{@link #BGFX_DISCARD_ALL DISCARD_ALL}</td></tr></table>
      */
-    public static void bgfx_encoder_dispatch(@NativeType("struct bgfx_encoder_s *") long _this, @NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _handle, @NativeType("uint32_t") int _numX, @NativeType("uint32_t") int _numY, @NativeType("uint32_t") int _numZ) {
-        nbgfx_encoder_dispatch(_this, (short)_id, _handle, _numX, _numY, _numZ);
+    public static void bgfx_encoder_dispatch(@NativeType("struct bgfx_encoder_s *") long _this, @NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _handle, @NativeType("uint32_t") int _numX, @NativeType("uint32_t") int _numY, @NativeType("uint32_t") int _numZ, @NativeType("uint8_t") int _flags) {
+        nbgfx_encoder_dispatch(_this, (short)_id, _handle, _numX, _numY, _numZ, (byte)_flags);
     }
 
     // --- [ bgfx_encoder_dispatch_indirect ] ---
 
     /** Unsafe version of: {@link #bgfx_encoder_dispatch_indirect encoder_dispatch_indirect} */
-    public static void nbgfx_encoder_dispatch_indirect(long _this, short _id, short _handle, short _indirectHandle, short _start, short _num) {
+    public static void nbgfx_encoder_dispatch_indirect(long _this, short _id, short _handle, short _indirectHandle, short _start, short _num, byte _flags) {
         long __functionAddress = Functions.encoder_dispatch_indirect;
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _id, _handle, _indirectHandle, _start, _num, __functionAddress);
+        invokePV(_this, _id, _handle, _indirectHandle, _start, _num, _flags, __functionAddress);
     }
 
     /**
@@ -4839,9 +4857,10 @@ public class BGFX {
      * @param _indirectHandle indirect buffer
      * @param _start          first element in indirect buffer
      * @param _num            number of dispatches
+     * @param _flags          discard or preserve states. One or more of:<br><table><tr><td>{@link #BGFX_DISCARD_NONE DISCARD_NONE}</td><td>{@link #BGFX_DISCARD_BINDINGS DISCARD_BINDINGS}</td><td>{@link #BGFX_DISCARD_INDEX_BUFFER DISCARD_INDEX_BUFFER}</td><td>{@link #BGFX_DISCARD_INSTANCE_DATA DISCARD_INSTANCE_DATA}</td></tr><tr><td>{@link #BGFX_DISCARD_STATE DISCARD_STATE}</td><td>{@link #BGFX_DISCARD_TRANSFORM DISCARD_TRANSFORM}</td><td>{@link #BGFX_DISCARD_VERTEX_STREAMS DISCARD_VERTEX_STREAMS}</td><td>{@link #BGFX_DISCARD_ALL DISCARD_ALL}</td></tr></table>
      */
-    public static void bgfx_encoder_dispatch_indirect(@NativeType("struct bgfx_encoder_s *") long _this, @NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _handle, @NativeType("bgfx_indirect_buffer_handle_t") short _indirectHandle, @NativeType("uint16_t") int _start, @NativeType("uint16_t") int _num) {
-        nbgfx_encoder_dispatch_indirect(_this, (short)_id, _handle, _indirectHandle, (short)_start, (short)_num);
+    public static void bgfx_encoder_dispatch_indirect(@NativeType("struct bgfx_encoder_s *") long _this, @NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _handle, @NativeType("bgfx_indirect_buffer_handle_t") short _indirectHandle, @NativeType("uint16_t") int _start, @NativeType("uint16_t") int _num, @NativeType("uint8_t") int _flags) {
+        nbgfx_encoder_dispatch_indirect(_this, (short)_id, _handle, _indirectHandle, (short)_start, (short)_num, (byte)_flags);
     }
 
     // --- [ bgfx_encoder_discard ] ---
@@ -4859,7 +4878,7 @@ public class BGFX {
      * Discards all previously set state for draw or compute call.
      *
      * @param _this  the encoder
-     * @param _flags draw/compute states to discard. One or more of:<br><table><tr><td>{@link #BGFX_DISCARD_INDEX_BUFFER DISCARD_INDEX_BUFFER}</td><td>{@link #BGFX_DISCARD_VERTEX_STREAMS DISCARD_VERTEX_STREAMS}</td><td>{@link #BGFX_DISCARD_TEXTURE_SAMPLERS DISCARD_TEXTURE_SAMPLERS}</td><td>{@link #BGFX_DISCARD_COMPUTE DISCARD_COMPUTE}</td></tr><tr><td>{@link #BGFX_DISCARD_STATE DISCARD_STATE}</td><td>{@link #BGFX_DISCARD_ALL DISCARD_ALL}</td></tr></table>
+     * @param _flags discard or preserve states. One or more of:<br><table><tr><td>{@link #BGFX_DISCARD_NONE DISCARD_NONE}</td><td>{@link #BGFX_DISCARD_BINDINGS DISCARD_BINDINGS}</td><td>{@link #BGFX_DISCARD_INDEX_BUFFER DISCARD_INDEX_BUFFER}</td><td>{@link #BGFX_DISCARD_INSTANCE_DATA DISCARD_INSTANCE_DATA}</td></tr><tr><td>{@link #BGFX_DISCARD_STATE DISCARD_STATE}</td><td>{@link #BGFX_DISCARD_TRANSFORM DISCARD_TRANSFORM}</td><td>{@link #BGFX_DISCARD_VERTEX_STREAMS DISCARD_VERTEX_STREAMS}</td><td>{@link #BGFX_DISCARD_ALL DISCARD_ALL}</td></tr></table>
      */
     public static void bgfx_encoder_discard(@NativeType("struct bgfx_encoder_s *") long _this, @NativeType("uint8_t") int _flags) {
         nbgfx_encoder_discard(_this, (byte)_flags);
@@ -5455,29 +5474,29 @@ public class BGFX {
     // --- [ bgfx_submit ] ---
 
     /** Unsafe version of: {@link #bgfx_submit submit} */
-    public static void nbgfx_submit(short _id, short _program, int _depth, boolean _preserveState) {
+    public static void nbgfx_submit(short _id, short _program, int _depth, byte _flags) {
         long __functionAddress = Functions.submit;
-        invokeV(_id, _program, _depth, _preserveState, __functionAddress);
+        invokeV(_id, _program, _depth, _flags, __functionAddress);
     }
 
     /**
      * Submits primitive for rendering.
      *
-     * @param _id            view id
-     * @param _program       program
-     * @param _depth         depth for sorting
-     * @param _preserveState preserve internal draw state for next draw call submit
+     * @param _id      view id
+     * @param _program program
+     * @param _depth   depth for sorting
+     * @param _flags   which states to discard for next draw. One or more of:<br><table><tr><td>{@link #BGFX_DISCARD_NONE DISCARD_NONE}</td><td>{@link #BGFX_DISCARD_BINDINGS DISCARD_BINDINGS}</td><td>{@link #BGFX_DISCARD_INDEX_BUFFER DISCARD_INDEX_BUFFER}</td><td>{@link #BGFX_DISCARD_INSTANCE_DATA DISCARD_INSTANCE_DATA}</td></tr><tr><td>{@link #BGFX_DISCARD_STATE DISCARD_STATE}</td><td>{@link #BGFX_DISCARD_TRANSFORM DISCARD_TRANSFORM}</td><td>{@link #BGFX_DISCARD_VERTEX_STREAMS DISCARD_VERTEX_STREAMS}</td><td>{@link #BGFX_DISCARD_ALL DISCARD_ALL}</td></tr></table>
      */
-    public static void bgfx_submit(@NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _program, @NativeType("uint32_t") int _depth, @NativeType("bool") boolean _preserveState) {
-        nbgfx_submit((short)_id, _program, _depth, _preserveState);
+    public static void bgfx_submit(@NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _program, @NativeType("uint32_t") int _depth, @NativeType("uint8_t") int _flags) {
+        nbgfx_submit((short)_id, _program, _depth, (byte)_flags);
     }
 
     // --- [ bgfx_submit_occlusion_query ] ---
 
     /** Unsafe version of: {@link #bgfx_submit_occlusion_query submit_occlusion_query} */
-    public static void nbgfx_submit_occlusion_query(short _id, short _program, short _occlusionQuery, int _depth, boolean _preserveState) {
+    public static void nbgfx_submit_occlusion_query(short _id, short _program, short _occlusionQuery, int _depth, byte _flags) {
         long __functionAddress = Functions.submit_occlusion_query;
-        invokeV(_id, _program, _occlusionQuery, _depth, _preserveState, __functionAddress);
+        invokeV(_id, _program, _occlusionQuery, _depth, _flags, __functionAddress);
     }
 
     /**
@@ -5487,18 +5506,18 @@ public class BGFX {
      * @param _program        program
      * @param _occlusionQuery occlusion query
      * @param _depth          depth for sorting
-     * @param _preserveState  preserve internal draw state for next draw call submit
+     * @param _flags          which states to discard for next draw. One or more of:<br><table><tr><td>{@link #BGFX_DISCARD_NONE DISCARD_NONE}</td><td>{@link #BGFX_DISCARD_BINDINGS DISCARD_BINDINGS}</td><td>{@link #BGFX_DISCARD_INDEX_BUFFER DISCARD_INDEX_BUFFER}</td><td>{@link #BGFX_DISCARD_INSTANCE_DATA DISCARD_INSTANCE_DATA}</td></tr><tr><td>{@link #BGFX_DISCARD_STATE DISCARD_STATE}</td><td>{@link #BGFX_DISCARD_TRANSFORM DISCARD_TRANSFORM}</td><td>{@link #BGFX_DISCARD_VERTEX_STREAMS DISCARD_VERTEX_STREAMS}</td><td>{@link #BGFX_DISCARD_ALL DISCARD_ALL}</td></tr></table>
      */
-    public static void bgfx_submit_occlusion_query(@NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _program, @NativeType("bgfx_occlusion_query_handle_t") short _occlusionQuery, @NativeType("uint32_t") int _depth, @NativeType("bool") boolean _preserveState) {
-        nbgfx_submit_occlusion_query((short)_id, _program, _occlusionQuery, _depth, _preserveState);
+    public static void bgfx_submit_occlusion_query(@NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _program, @NativeType("bgfx_occlusion_query_handle_t") short _occlusionQuery, @NativeType("uint32_t") int _depth, @NativeType("uint8_t") int _flags) {
+        nbgfx_submit_occlusion_query((short)_id, _program, _occlusionQuery, _depth, (byte)_flags);
     }
 
     // --- [ bgfx_submit_indirect ] ---
 
     /** Unsafe version of: {@link #bgfx_submit_indirect submit_indirect} */
-    public static void nbgfx_submit_indirect(short _id, short _program, short _indirectHandle, short _start, short _num, int _depth, boolean _preserveState) {
+    public static void nbgfx_submit_indirect(short _id, short _program, short _indirectHandle, short _start, short _num, int _depth, byte _flags) {
         long __functionAddress = Functions.submit_indirect;
-        invokeV(_id, _program, _indirectHandle, _start, _num, _depth, _preserveState, __functionAddress);
+        invokeV(_id, _program, _indirectHandle, _start, _num, _depth, _flags, __functionAddress);
     }
 
     /**
@@ -5510,10 +5529,10 @@ public class BGFX {
      * @param _start          first element in indirect buffer
      * @param _num            number of dispatches
      * @param _depth          depth for sorting
-     * @param _preserveState  preserve internal draw state for next draw call submit
+     * @param _flags          which states to discard for next draw. One or more of:<br><table><tr><td>{@link #BGFX_DISCARD_NONE DISCARD_NONE}</td><td>{@link #BGFX_DISCARD_BINDINGS DISCARD_BINDINGS}</td><td>{@link #BGFX_DISCARD_INDEX_BUFFER DISCARD_INDEX_BUFFER}</td><td>{@link #BGFX_DISCARD_INSTANCE_DATA DISCARD_INSTANCE_DATA}</td></tr><tr><td>{@link #BGFX_DISCARD_STATE DISCARD_STATE}</td><td>{@link #BGFX_DISCARD_TRANSFORM DISCARD_TRANSFORM}</td><td>{@link #BGFX_DISCARD_VERTEX_STREAMS DISCARD_VERTEX_STREAMS}</td><td>{@link #BGFX_DISCARD_ALL DISCARD_ALL}</td></tr></table>
      */
-    public static void bgfx_submit_indirect(@NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _program, @NativeType("bgfx_indirect_buffer_handle_t") short _indirectHandle, @NativeType("uint16_t") int _start, @NativeType("uint16_t") int _num, @NativeType("uint32_t") int _depth, @NativeType("bool") boolean _preserveState) {
-        nbgfx_submit_indirect((short)_id, _program, _indirectHandle, (short)_start, (short)_num, _depth, _preserveState);
+    public static void bgfx_submit_indirect(@NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _program, @NativeType("bgfx_indirect_buffer_handle_t") short _indirectHandle, @NativeType("uint16_t") int _start, @NativeType("uint16_t") int _num, @NativeType("uint32_t") int _depth, @NativeType("uint8_t") int _flags) {
+        nbgfx_submit_indirect((short)_id, _program, _indirectHandle, (short)_start, (short)_num, _depth, (byte)_flags);
     }
 
     // --- [ bgfx_set_compute_index_buffer ] ---
@@ -5635,9 +5654,9 @@ public class BGFX {
     // --- [ bgfx_dispatch ] ---
 
     /** Unsafe version of: {@link #bgfx_dispatch dispatch} */
-    public static void nbgfx_dispatch(short _id, short _program, int _numX, int _numY, int _numZ) {
+    public static void nbgfx_dispatch(short _id, short _program, int _numX, int _numY, int _numZ, byte _flags) {
         long __functionAddress = Functions.dispatch;
-        invokeV(_id, _program, _numX, _numY, _numZ, __functionAddress);
+        invokeV(_id, _program, _numX, _numY, _numZ, _flags, __functionAddress);
     }
 
     /**
@@ -5648,17 +5667,18 @@ public class BGFX {
      * @param _numX    number of groups X
      * @param _numY    number of groups Y
      * @param _numZ    number of groups Z
+     * @param _flags   discard or preserve states. One or more of:<br><table><tr><td>{@link #BGFX_DISCARD_NONE DISCARD_NONE}</td><td>{@link #BGFX_DISCARD_BINDINGS DISCARD_BINDINGS}</td><td>{@link #BGFX_DISCARD_INDEX_BUFFER DISCARD_INDEX_BUFFER}</td><td>{@link #BGFX_DISCARD_INSTANCE_DATA DISCARD_INSTANCE_DATA}</td></tr><tr><td>{@link #BGFX_DISCARD_STATE DISCARD_STATE}</td><td>{@link #BGFX_DISCARD_TRANSFORM DISCARD_TRANSFORM}</td><td>{@link #BGFX_DISCARD_VERTEX_STREAMS DISCARD_VERTEX_STREAMS}</td><td>{@link #BGFX_DISCARD_ALL DISCARD_ALL}</td></tr></table>
      */
-    public static void bgfx_dispatch(@NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _program, @NativeType("uint32_t") int _numX, @NativeType("uint32_t") int _numY, @NativeType("uint32_t") int _numZ) {
-        nbgfx_dispatch((short)_id, _program, _numX, _numY, _numZ);
+    public static void bgfx_dispatch(@NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _program, @NativeType("uint32_t") int _numX, @NativeType("uint32_t") int _numY, @NativeType("uint32_t") int _numZ, @NativeType("uint8_t") int _flags) {
+        nbgfx_dispatch((short)_id, _program, _numX, _numY, _numZ, (byte)_flags);
     }
 
     // --- [ bgfx_dispatch_indirect ] ---
 
     /** Unsafe version of: {@link #bgfx_dispatch_indirect dispatch_indirect} */
-    public static void nbgfx_dispatch_indirect(short _id, short _program, short _indirectHandle, short _start, short _num) {
+    public static void nbgfx_dispatch_indirect(short _id, short _program, short _indirectHandle, short _start, short _num, byte _flags) {
         long __functionAddress = Functions.dispatch_indirect;
-        invokeV(_id, _program, _indirectHandle, _start, _num, __functionAddress);
+        invokeV(_id, _program, _indirectHandle, _start, _num, _flags, __functionAddress);
     }
 
     /**
@@ -5669,9 +5689,10 @@ public class BGFX {
      * @param _indirectHandle indirect buffer
      * @param _start          first element in indirect buffer
      * @param _num            number of dispatches
+     * @param _flags          discard or preserve states. One or more of:<br><table><tr><td>{@link #BGFX_DISCARD_NONE DISCARD_NONE}</td><td>{@link #BGFX_DISCARD_BINDINGS DISCARD_BINDINGS}</td><td>{@link #BGFX_DISCARD_INDEX_BUFFER DISCARD_INDEX_BUFFER}</td><td>{@link #BGFX_DISCARD_INSTANCE_DATA DISCARD_INSTANCE_DATA}</td></tr><tr><td>{@link #BGFX_DISCARD_STATE DISCARD_STATE}</td><td>{@link #BGFX_DISCARD_TRANSFORM DISCARD_TRANSFORM}</td><td>{@link #BGFX_DISCARD_VERTEX_STREAMS DISCARD_VERTEX_STREAMS}</td><td>{@link #BGFX_DISCARD_ALL DISCARD_ALL}</td></tr></table>
      */
-    public static void bgfx_dispatch_indirect(@NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _program, @NativeType("bgfx_indirect_buffer_handle_t") short _indirectHandle, @NativeType("uint16_t") int _start, @NativeType("uint16_t") int _num) {
-        nbgfx_dispatch_indirect((short)_id, _program, _indirectHandle, (short)_start, (short)_num);
+    public static void bgfx_dispatch_indirect(@NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _program, @NativeType("bgfx_indirect_buffer_handle_t") short _indirectHandle, @NativeType("uint16_t") int _start, @NativeType("uint16_t") int _num, @NativeType("uint8_t") int _flags) {
+        nbgfx_dispatch_indirect((short)_id, _program, _indirectHandle, (short)_start, (short)_num, (byte)_flags);
     }
 
     // --- [ bgfx_discard ] ---
@@ -5685,7 +5706,7 @@ public class BGFX {
     /**
      * Discards all previously set state for draw or compute call.
      *
-     * @param _flags draw/compute states to discard. One or more of:<br><table><tr><td>{@link #BGFX_DISCARD_INDEX_BUFFER DISCARD_INDEX_BUFFER}</td><td>{@link #BGFX_DISCARD_VERTEX_STREAMS DISCARD_VERTEX_STREAMS}</td><td>{@link #BGFX_DISCARD_TEXTURE_SAMPLERS DISCARD_TEXTURE_SAMPLERS}</td><td>{@link #BGFX_DISCARD_COMPUTE DISCARD_COMPUTE}</td></tr><tr><td>{@link #BGFX_DISCARD_STATE DISCARD_STATE}</td><td>{@link #BGFX_DISCARD_ALL DISCARD_ALL}</td></tr></table>
+     * @param _flags draw/compute states to discard. One or more of:<br><table><tr><td>{@link #BGFX_DISCARD_NONE DISCARD_NONE}</td><td>{@link #BGFX_DISCARD_BINDINGS DISCARD_BINDINGS}</td><td>{@link #BGFX_DISCARD_INDEX_BUFFER DISCARD_INDEX_BUFFER}</td><td>{@link #BGFX_DISCARD_INSTANCE_DATA DISCARD_INSTANCE_DATA}</td></tr><tr><td>{@link #BGFX_DISCARD_STATE DISCARD_STATE}</td><td>{@link #BGFX_DISCARD_TRANSFORM DISCARD_TRANSFORM}</td><td>{@link #BGFX_DISCARD_VERTEX_STREAMS DISCARD_VERTEX_STREAMS}</td><td>{@link #BGFX_DISCARD_ALL DISCARD_ALL}</td></tr></table>
      */
     public static void bgfx_discard(@NativeType("uint8_t") int _flags) {
         nbgfx_discard((byte)_flags);

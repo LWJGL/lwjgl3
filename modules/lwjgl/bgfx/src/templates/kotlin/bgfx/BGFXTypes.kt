@@ -240,7 +240,7 @@ val bgfx_caps_gpu_t = struct(Module.BGFX, "BGFXCapsGPU", nativeName = "bgfx_caps
 }
 
 val bgfx_caps_limits_t = struct(Module.BGFX, "BGFXCapsLimits", nativeName = "bgfx_caps_limits_t", mutable = false) {
-    documentation = "Rendering limits."
+    documentation = "Renderer runtime limits."
 
     uint32_t("maxDrawCalls", "maximum number of draw calls")
     uint32_t("maxBlits", "maximum number of blit calls")
@@ -282,7 +282,7 @@ val bgfx_caps_t = struct(Module.BGFX, "BGFXCaps", nativeName = "bgfx_caps_t", mu
     AutoSize("gpu")..uint8_t("numGPUs", "number of enumerated GPUs")
 
     bgfx_caps_gpu_t("gpu", "enumerated GPUs")[4]
-    bgfx_caps_limits_t("limits", "rendering limits")
+    bgfx_caps_limits_t("limits", "renderer runtime limits")
 
     uint16_t("formats", "supported texture formats")["BGFX_TEXTURE_FORMAT_COUNT"]
 }
@@ -536,6 +536,8 @@ val bgfx_resolution_t = struct(Module.BGFX, "BGFXResolution", nativeName = "bgfx
 }
 
 val bgfx_init_limits_t = struct(Module.BGFX, "BGFXInitLimits", nativeName = "bgfx_init_limits_t", skipBuffer = true)  {
+    documentation = "Configurable runtime limits parameters."
+
     uint16_t("maxEncoders", "maximum number of encoder threads")
     uint32_t("transientVbSize", "maximum transient vertex buffer size")
     uint32_t("transientIbSize", "maximum transient index buffer size")
@@ -544,11 +546,11 @@ val bgfx_init_limits_t = struct(Module.BGFX, "BGFXInitLimits", nativeName = "bgf
 val bgfx_platform_data_t = struct(Module.BGFX, "BGFXPlatformData", nativeName = "bgfx_platform_data_t", skipBuffer = true) {
     documentation = "Platform data."
 
-    nullable..opaque_p("ndt", "native display type")
-    nullable..opaque_p("nwh", "native window handle")
-    nullable..opaque_p("context", "GL context, or D3D device")
-    nullable..opaque_p("backBuffer", "GL backbuffer, or D3D render target view")
-    nullable..opaque_p("backBufferDS", "Backbuffer depth/stencil")
+    nullable..opaque_p("ndt", "native display type (*nix specific)")
+    nullable..opaque_p("nwh", "native window handle. If #NULL bgfx will create headless context/device if renderer API supports it.")
+    nullable..opaque_p("context", "GL context, or D3D device. If #NULL, bgfx will create context/device.")
+    nullable..opaque_p("backBuffer", "GL back-buffer, or D3D render target view. If #NULL bgfx will create back-buffer color surface.")
+    nullable..opaque_p("backBufferDS", "backbuffer depth/stencil. If #NULL bgfx will create back-buffer depth/stencil surface.")
 }
 
 val bgfx_init_t = struct(Module.BGFX, "BGFXInit", nativeName = "bgfx_init_t", skipBuffer = true) {
@@ -565,7 +567,7 @@ val bgfx_init_t = struct(Module.BGFX, "BGFXInit", nativeName = "bgfx_init_t", sk
 
     bgfx_platform_data_t("platformData", "platform data")
     bgfx_resolution_t("resolution", "backbuffer resolution and reset parameters")
-    bgfx_init_limits_t("limits", "")
+    bgfx_init_limits_t("limits", "configurable runtime limits parameters")
 
     nullable..bgfx_callback_interface_t.p("callback", "provide application specific callback interface")
     nullable..bgfx_allocator_interface_t.p(

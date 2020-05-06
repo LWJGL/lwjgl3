@@ -14,7 +14,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     IntConstant(
         "API version",
 
-        "API_VERSION".."103"
+        "API_VERSION".."106"
     )
 
     ShortConstant(
@@ -228,19 +228,14 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         When state is preserved in submit, rendering states can be discarded on a finer grain.
         """,
 
-        "DISCARD_INDEX_BUFFER"..0x01.b,
-        "DISCARD_VERTEX_STREAMS"..0x02.b,
-        "DISCARD_TEXTURE_SAMPLERS"..0x04.b,
-        "DISCARD_COMPUTE"..0x08.b,
-        "DISCARD_STATE"..0x10.b,
-
-        "DISCARD_ALL".."""(0
-        | BGFX_DISCARD_INDEX_BUFFER
-        | BGFX_DISCARD_VERTEX_STREAMS
-        | BGFX_DISCARD_TEXTURE_SAMPLERS
-        | BGFX_DISCARD_COMPUTE
-        | BGFX_DISCARD_STATE)
-        """
+        "DISCARD_NONE"..0x00.b,
+        "DISCARD_BINDINGS"..0x01.b,
+        "DISCARD_INDEX_BUFFER"..0x02.b,
+        "DISCARD_INSTANCE_DATA"..0x04.b,
+        "DISCARD_STATE"..0x08.b,
+        "DISCARD_TRANSFORM"..0x10.b,
+        "DISCARD_VERTEX_STREAMS"..0x20.b,
+        "DISCARD_ALL"..0xff.b
     ).javaDocLinks
 
     val DebugFlags = EnumConstant(
@@ -2044,6 +2039,13 @@ RGBA16S
         Check("_num")..nullable..bgfx_view_id_t.const.p("_order", "view remap id table. Passing #NULL will reset view ids to default state")
     )
 
+    void(
+        "reset_view",
+        "Reset all view settings to default.",
+
+        MapToInt..bgfx_view_id_t("_id", "view id")
+    )
+
     bgfx_encoder_s.p(
         "encoder_begin",
         "Begin submitting draw calls from thread.",
@@ -2229,7 +2231,10 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         bgfx_vertex_buffer_handle_t("_handle", "vertex buffer"),
         uint32_t("_startVertex", "first vertex to render"),
         uint32_t("_numVertices", "number of vertices to render"),
-        bgfx_vertex_layout_handle_t("_layoutHandle", "vertex layout for aliasing vertex buffer")
+        bgfx_vertex_layout_handle_t(
+            "_layoutHandle",
+            "vertex layout for aliasing vertex buffer. If invalid handle is used, vertex layout used for creation of vertex buffer will be used."
+        )
     )
 
     void(
@@ -2241,7 +2246,10 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         bgfx_dynamic_vertex_buffer_handle_t("_handle", "dynamic vertex buffer"),
         uint32_t("_startVertex", "first vertex to render"),
         uint32_t("_numVertices", "number of vertices to render"),
-        bgfx_vertex_layout_handle_t("_layoutHandle", "vertex layout for aliasing vertex buffer")
+        bgfx_vertex_layout_handle_t(
+            "_layoutHandle",
+            "vertex layout for aliasing vertex buffer. If invalid handle is used, vertex layout used for creation of vertex buffer will be used."
+        )
     )
 
     void(
@@ -2253,7 +2261,10 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         bgfx_transient_vertex_buffer_t.const.p("_tvb", "transient vertex buffer"),
         uint32_t("_startVertex", "first vertex to render"),
         uint32_t("_numVertices", "number of vertices to render"),
-        bgfx_vertex_layout_handle_t("_layoutHandle", "vertex layout for aliasing vertex buffer")
+        bgfx_vertex_layout_handle_t(
+            "_layoutHandle",
+            "vertex layout for aliasing vertex buffer. If invalid handle is used, vertex layout used for creation of vertex buffer will be used."
+        )
     )
 
     void(
@@ -2324,7 +2335,10 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
     void(
         "encoder_touch",
         """
-        Submits an empty primitive for rendering. Uniforms and draw state will be applied but no geometry will be submitted.
+        Submits an empty primitive for rendering.
+
+        Uniforms and draw state will be applied but no geometry will be submitted. Useful in cases when no other draw/compute primitive is submitted to view,
+        but it's desired to execute clear view.
 
         These empty draw calls will sort before ordinary draw calls.
         """,
@@ -2341,7 +2355,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         MapToInt..bgfx_view_id_t("_id", "view id"),
         bgfx_program_handle_t("_handle", "program"),
         uint32_t("_depth", "depth for sorting"),
-        bool("_preserveState", "preserve internal draw state for next draw call submit")
+        MapToInt..uint8_t("_flags", "discard or preserve states", DiscardFlags, LinkMode.BITFIELD)
     )
 
     void(
@@ -2353,7 +2367,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         bgfx_program_handle_t("_program", "program"),
         bgfx_occlusion_query_handle_t("_occlusionQuery", "occlusion query"),
         uint32_t("_depth", "depth for sorting"),
-        bool("_preserveState", "preserve internal draw state for next draw call submit")
+        MapToInt..uint8_t("_flags", "discard or preserve states", DiscardFlags, LinkMode.BITFIELD)
     )
 
     void(
@@ -2367,7 +2381,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         MapToInt..uint16_t("_start", "first element in indirect buffer"),
         MapToInt..uint16_t("_num", "number of dispatches"),
         uint32_t("_depth", "depth for sorting"),
-        bool("_preserveState", "preserve internal draw state for next draw call submit")
+        MapToInt..uint8_t("_flags", "discard or preserve states", DiscardFlags, LinkMode.BITFIELD)
     )
 
     void(
@@ -2441,7 +2455,8 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         bgfx_program_handle_t("_handle", "compute program"),
         uint32_t("_numX", "number of groups X"),
         uint32_t("_numY", "number of groups Y"),
-        uint32_t("_numZ", "number of groups Z")
+        uint32_t("_numZ", "number of groups Z"),
+        MapToInt..uint8_t("_flags", "discard or preserve states", DiscardFlags, LinkMode.BITFIELD)
     )
 
     void(
@@ -2453,7 +2468,8 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         bgfx_program_handle_t("_handle", "compute program"),
         bgfx_indirect_buffer_handle_t("_indirectHandle", "indirect buffer"),
         MapToInt..uint16_t("_start", "first element in indirect buffer"),
-        MapToInt..uint16_t("_num", "number of dispatches")
+        MapToInt..uint16_t("_num", "number of dispatches"),
+        MapToInt..uint8_t("_flags", "discard or preserve states", DiscardFlags, LinkMode.BITFIELD)
     )
 
     void(
@@ -2461,7 +2477,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "Discards all previously set state for draw or compute call.",
 
         bgfx_encoder_s.p("_this", "the encoder"),
-        MapToInt..uint8_t("_flags", "draw/compute states to discard", DiscardFlags, LinkMode.BITFIELD)
+        MapToInt..uint8_t("_flags", "discard or preserve states", DiscardFlags, LinkMode.BITFIELD)
     )
 
     void(
@@ -2763,7 +2779,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         MapToInt..bgfx_view_id_t("_id", "view id"),
         bgfx_program_handle_t("_program", "program"),
         uint32_t("_depth", "depth for sorting"),
-        bool("_preserveState", "preserve internal draw state for next draw call submit")
+        MapToInt..uint8_t("_flags", "which states to discard for next draw", DiscardFlags, LinkMode.BITFIELD)
     )
 
     void(
@@ -2774,7 +2790,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         bgfx_program_handle_t("_program", "program"),
         bgfx_occlusion_query_handle_t("_occlusionQuery", "occlusion query"),
         uint32_t("_depth", "depth for sorting"),
-        bool("_preserveState", "preserve internal draw state for next draw call submit")
+        MapToInt..uint8_t("_flags", "which states to discard for next draw", DiscardFlags, LinkMode.BITFIELD)
     )
 
     void(
@@ -2787,7 +2803,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         MapToInt..uint16_t("_start", "first element in indirect buffer"),
         MapToInt..uint16_t("_num", "number of dispatches"),
         uint32_t("_depth", "depth for sorting"),
-        bool("_preserveState", "preserve internal draw state for next draw call submit")
+        MapToInt..uint8_t("_flags", "which states to discard for next draw", DiscardFlags, LinkMode.BITFIELD)
     )
 
     void(
@@ -2854,7 +2870,8 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         bgfx_program_handle_t("_program", "compute program"),
         uint32_t("_numX", "number of groups X"),
         uint32_t("_numY", "number of groups Y"),
-        uint32_t("_numZ", "number of groups Z")
+        uint32_t("_numZ", "number of groups Z"),
+        MapToInt..uint8_t("_flags", "discard or preserve states", DiscardFlags, LinkMode.BITFIELD)
     )
 
     void(
@@ -2865,7 +2882,8 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         bgfx_program_handle_t("_program", "compute program"),
         bgfx_indirect_buffer_handle_t("_indirectHandle", "indirect buffer"),
         MapToInt..uint16_t("_start", "first element in indirect buffer"),
-        MapToInt..uint16_t("_num", "number of dispatches")
+        MapToInt..uint16_t("_num", "number of dispatches"),
+        MapToInt..uint8_t("_flags", "discard or preserve states", DiscardFlags, LinkMode.BITFIELD)
     )
 
     void(

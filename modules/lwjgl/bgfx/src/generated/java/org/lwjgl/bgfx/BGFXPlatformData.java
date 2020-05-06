@@ -21,11 +21,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code ndt} &ndash; native display type</li>
- * <li>{@code nwh} &ndash; native window handle</li>
- * <li>{@code context} &ndash; GL context, or D3D device</li>
- * <li>{@code backBuffer} &ndash; GL backbuffer, or D3D render target view</li>
- * <li>{@code backBufferDS} &ndash; Backbuffer depth/stencil</li>
+ * <li>{@code ndt} &ndash; native display type (*nix specific)</li>
+ * <li>{@code nwh} &ndash; native window handle. If {@code NULL} bgfx will create headless context/device if renderer API supports it.</li>
+ * <li>{@code context} &ndash; GL context, or D3D device. If {@code NULL}, bgfx will create context/device.</li>
+ * <li>{@code backBuffer} &ndash; GL back-buffer, or D3D render target view. If {@code NULL} bgfx will create back-buffer color surface.</li>
+ * <li>{@code backBufferDS} &ndash; backbuffer depth/stencil. If {@code NULL} bgfx will create back-buffer depth/stencil surface.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

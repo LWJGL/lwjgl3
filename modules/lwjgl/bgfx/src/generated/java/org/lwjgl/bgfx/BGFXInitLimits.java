@@ -16,6 +16,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
+ * Configurable runtime limits parameters.
+ * 
  * <h3>Member documentation</h3>
  * 
  * <ul>

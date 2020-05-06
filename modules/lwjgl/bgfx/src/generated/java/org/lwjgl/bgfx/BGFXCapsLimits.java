@@ -14,7 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Rendering limits.
+ * Renderer runtime limits.
  * 
  * <h3>Member documentation</h3>
  * 

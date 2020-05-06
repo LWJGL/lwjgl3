@@ -28,6 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code profile} &ndash; enable device for profiling</li>
  * <li>{@code platformData} &ndash; platform data</li>
  * <li>{@code resolution} &ndash; backbuffer resolution and reset parameters</li>
+ * <li>{@code limits} &ndash; configurable runtime limits parameters</li>
  * <li>{@code callback} &ndash; provide application specific callback interface</li>
  * <li>{@code allocator} &ndash; custom allocator. When a custom allocator is not specified, bgfx uses the CRT allocator. Bgfx assumes	custom allocator is thread safe.</li>
  * </ul>

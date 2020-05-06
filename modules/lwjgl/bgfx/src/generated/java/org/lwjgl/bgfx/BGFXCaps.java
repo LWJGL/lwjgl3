@@ -30,7 +30,7 @@ import static org.lwjgl.bgfx.BGFX.BGFX_TEXTURE_FORMAT_COUNT;
  * <li>{@code originBottomLeft} &ndash; true when NDC origin is at bottom left</li>
  * <li>{@code numGPUs} &ndash; number of enumerated GPUs</li>
  * <li>{@code gpu[4]} &ndash; enumerated GPUs</li>
- * <li>{@code limits} &ndash; rendering limits</li>
+ * <li>{@code limits} &ndash; renderer runtime limits</li>
  * <li>{@code formats[BGFX_TEXTURE_FORMAT_COUNT]} &ndash; supported texture formats</li>
  * </ul>
  * 
