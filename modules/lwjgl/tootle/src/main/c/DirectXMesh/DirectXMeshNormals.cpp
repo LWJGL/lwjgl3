@@ -22,7 +22,7 @@ namespace
     HRESULT ComputeNormalsEqualWeight(
         _In_reads_(nFaces * 3) const index_t* indices, size_t nFaces,
         _In_reads_(nVerts) const XMFLOAT3* positions, size_t nVerts,
-        bool cw, _Out_writes_(nVerts) XMFLOAT3* normals)
+        bool cw, _Out_writes_(nVerts) XMFLOAT3* normals) noexcept
     {
         ScopedAlignedArrayXMVECTOR temp(static_cast<XMVECTOR*>(_aligned_malloc(sizeof(XMVECTOR) * nVerts, 16)));
         if (!temp)
@@ -91,7 +91,7 @@ namespace
     HRESULT ComputeNormalsWeightedByAngle(
         _In_reads_(nFaces * 3) const index_t* indices, size_t nFaces,
         _In_reads_(nVerts) const XMFLOAT3* positions, size_t nVerts,
-        bool cw, _Out_writes_(nVerts) XMFLOAT3* normals)
+        bool cw, _Out_writes_(nVerts) XMFLOAT3* normals) noexcept
     {
         ScopedAlignedArrayXMVECTOR temp(static_cast<XMVECTOR*>(_aligned_malloc(sizeof(XMVECTOR) * nVerts, 16)));
         if (!temp)
@@ -181,7 +181,7 @@ namespace
     HRESULT ComputeNormalsWeightedByArea(
         _In_reads_(nFaces * 3) const index_t* indices, size_t nFaces,
         _In_reads_(nVerts) const XMFLOAT3* positions, size_t nVerts,
-        bool cw, _Out_writes_(nVerts) XMFLOAT3* normals)
+        bool cw, _Out_writes_(nVerts) XMFLOAT3* normals) noexcept
     {
         ScopedAlignedArrayXMVECTOR temp(static_cast<XMVECTOR*>(_aligned_malloc(sizeof(XMVECTOR) * nVerts, 16)));
         if (!temp)
@@ -266,10 +266,12 @@ namespace
 //-------------------------------------------------------------------------------------
 _Use_decl_annotations_
 HRESULT DirectX::ComputeNormals(
-    const uint16_t* indices, size_t nFaces,
-    const XMFLOAT3* positions, size_t nVerts,
+    const uint16_t* indices,
+    size_t nFaces,
+    const XMFLOAT3* positions,
+    size_t nVerts,
     DWORD flags,
-    XMFLOAT3* normals)
+    XMFLOAT3* normals) noexcept
 {
     if (!indices || !positions || !nFaces || !nVerts || !normals)
         return E_INVALIDARG;
@@ -298,10 +300,12 @@ HRESULT DirectX::ComputeNormals(
 
 _Use_decl_annotations_
 HRESULT DirectX::ComputeNormals(
-    const uint32_t* indices, size_t nFaces,
-    const XMFLOAT3* positions, size_t nVerts,
+    const uint32_t* indices,
+    size_t nFaces,
+    const XMFLOAT3* positions,
+    size_t nVerts,
     DWORD flags,
-    XMFLOAT3* normals)
+    XMFLOAT3* normals) noexcept
 {
     if (!indices || !positions || !nFaces || !nVerts || !normals)
         return E_INVALIDARG;

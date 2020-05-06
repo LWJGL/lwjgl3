@@ -357,8 +357,12 @@ namespace
 //-------------------------------------------------------------------------------------
 _Use_decl_annotations_
 HRESULT DirectX::Validate(
-    const uint16_t* indices, size_t nFaces, size_t nVerts,
-    const uint32_t* adjacency, DWORD flags, std::wstring* msgs)
+    const uint16_t* indices,
+    size_t nFaces,
+    size_t nVerts,
+    const uint32_t* adjacency,
+    DWORD flags,
+    std::wstring* msgs)
 {
     if (!indices || !nFaces || !nVerts)
         return E_INVALIDARG;
@@ -390,8 +394,12 @@ HRESULT DirectX::Validate(
 //-------------------------------------------------------------------------------------
 _Use_decl_annotations_
 HRESULT DirectX::Validate(
-    const uint32_t* indices, size_t nFaces, size_t nVerts,
-    const uint32_t* adjacency, DWORD flags, std::wstring* msgs)
+    const uint32_t* indices,
+    size_t nFaces,
+    size_t nVerts,
+    const uint32_t* adjacency,
+    DWORD flags,
+    std::wstring* msgs)
 {
     if (!indices || !nFaces || !nVerts)
         return E_INVALIDARG;

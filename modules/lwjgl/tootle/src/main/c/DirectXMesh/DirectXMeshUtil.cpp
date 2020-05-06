@@ -25,7 +25,7 @@ static_assert(XBOX_DXGI_FORMAT_R10G10B10_SNORM_A2_UNORM == DXGI_FORMAT_R10G10B10
 // Returns bytes-per-element for a given DXGI format, or 0 on failure
 //-------------------------------------------------------------------------------------
 _Use_decl_annotations_
-size_t DirectX::BytesPerElement(DXGI_FORMAT fmt)
+size_t DirectX::BytesPerElement(DXGI_FORMAT fmt) noexcept
 {
     // This list only includes those formats that are valid for use by IB or VB
 
@@ -110,7 +110,7 @@ size_t DirectX::BytesPerElement(DXGI_FORMAT fmt)
 
 #if defined(__d3d11_h__) || defined(__d3d11_x_h__)
 _Use_decl_annotations_
-bool DirectX::IsValid(const D3D11_INPUT_ELEMENT_DESC* vbDecl, size_t nDecl)
+bool DirectX::IsValid(const D3D11_INPUT_ELEMENT_DESC* vbDecl, size_t nDecl) noexcept
 {
     if (!vbDecl || !nDecl)
     {
@@ -184,8 +184,8 @@ bool DirectX::IsValid(const D3D11_INPUT_ELEMENT_DESC* vbDecl, size_t nDecl)
 }
 #endif
 
-#if defined(__d3d12_h__) || defined(__d3d12_x_h__)
-bool DirectX::IsValid(const D3D12_INPUT_LAYOUT_DESC& vbDecl)
+#if defined(__d3d12_h__) || defined(__d3d12_x_h__) || defined(__XBOX_D3D12_X__)
+bool DirectX::IsValid(const D3D12_INPUT_LAYOUT_DESC& vbDecl) noexcept
 {
     if (!vbDecl.pInputElementDescs || !vbDecl.NumElements)
     {
@@ -266,7 +266,7 @@ bool DirectX::IsValid(const D3D12_INPUT_LAYOUT_DESC& vbDecl)
 _Use_decl_annotations_
 void DirectX::ComputeInputLayout(
     const D3D11_INPUT_ELEMENT_DESC* vbDecl, size_t nDecl,
-    uint32_t* offsets, uint32_t* strides)
+    uint32_t* offsets, uint32_t* strides) noexcept
 {
     assert(IsValid(vbDecl, nDecl));
 
@@ -327,10 +327,10 @@ void DirectX::ComputeInputLayout(
 }
 #endif
 
-#if defined(__d3d12_h__) || defined(__d3d12_x_h__)
+#if defined(__d3d12_h__) || defined(__d3d12_x_h__) || defined(__XBOX_D3D12_X__)
 _Use_decl_annotations_
 void DirectX::ComputeInputLayout(const D3D12_INPUT_LAYOUT_DESC& vbDecl,
-    uint32_t* offsets, uint32_t* strides)
+    uint32_t* offsets, uint32_t* strides) noexcept
 {
     assert(IsValid(vbDecl));
 
@@ -443,7 +443,7 @@ namespace
     template<class index_t>
     void ComputeVertexCacheMissRateImpl(
         _In_reads_(nFaces * 3) const index_t* indices, size_t nFaces, size_t nVerts, size_t cacheSize,
-        float& acmr, float& atvr)
+        float& acmr, float& atvr) noexcept
     {
         acmr = -1.f;
         atvr = -1.f;
@@ -459,7 +459,10 @@ namespace
 
         size_t misses = 0;
 
-        std::unique_ptr<uint32_t[]> fifo(new uint32_t[cacheSize]);
+        std::unique_ptr<uint32_t[]> fifo(new (std::nothrow) uint32_t[cacheSize]);
+        if (!fifo)
+            return;
+
         size_t tail = 0;
 
         memset(fifo.get(), 0xff, sizeof(uint32_t) * cacheSize);

@@ -408,10 +408,13 @@ namespace
 //-------------------------------------------------------------------------------------
 _Use_decl_annotations_
 HRESULT DirectX::Clean(
-    uint16_t* indices, size_t nFaces,
+    uint16_t* indices,
+    size_t nFaces,
     size_t nVerts,
-    uint32_t* adjacency, const uint32_t* attributes,
-    std::vector<uint32_t>& dupVerts, bool breakBowties)
+    uint32_t* adjacency,
+    const uint32_t* attributes,
+    std::vector<uint32_t>& dupVerts,
+    bool breakBowties)
 {
     HRESULT hr = Validate(indices, nFaces, nVerts, adjacency, VALIDATE_DEFAULT);
     if (FAILED(hr))
@@ -424,10 +427,13 @@ HRESULT DirectX::Clean(
 //-------------------------------------------------------------------------------------
 _Use_decl_annotations_
 HRESULT DirectX::Clean(
-    uint32_t* indices, size_t nFaces,
+    uint32_t* indices,
+    size_t nFaces,
     size_t nVerts,
-    uint32_t* adjacency, const uint32_t* attributes,
-    std::vector<uint32_t>& dupVerts, bool breakBowties)
+    uint32_t* adjacency,
+    const uint32_t* attributes,
+    std::vector<uint32_t>& dupVerts,
+    bool breakBowties)
 {
     HRESULT hr = Validate(indices, nFaces, nVerts, adjacency, VALIDATE_DEFAULT);
     if (FAILED(hr))

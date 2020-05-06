@@ -12,7 +12,7 @@
 #pragma once
 
 // Off by default warnings
-#pragma warning(disable : 4619 4616 4061 4365 4514 4571 4623 4625 4626 4628 4668 4710 4711 4746 4774 4820 4987 5026 5027 5031 5032 5039 5045)
+#pragma warning(disable : 4619 4616 4061 4365 4514 4571 4623 4625 4626 4628 4668 4710 4711 4746 4774 4820 4987 5026 5027 5031 5032 5039 5045 26812)
 // C4619/4616 #pragma warning warnings
 // C4061 enumerator 'X' in switch of enum 'X' is not explicitly handled by a case label
 // C4365 signed/unsigned mismatch
@@ -34,6 +34,7 @@
 // C5031/5032 push/pop mismatches in windows headers
 // C5039 pointer or reference to potentially throwing function passed to extern C function under - EHc
 // C5045 Spectre mitigation warning
+// 26812: The enum type 'x' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
 
 // Windows 8.1 SDK related Off by default warnings
 #pragma warning(disable : 4471 4917 4986 5029)
@@ -108,7 +109,7 @@
 namespace DirectX
 {
     //---------------------------------------------------------------------------------
-    const uint32_t UNUSED32 = uint32_t(-1);
+    constexpr uint32_t UNUSED32 = uint32_t(-1);
 
 #if defined(__d3d11_h__) || defined(__d3d11_x_h__)
     static_assert(D3D11_16BIT_INDEX_STRIP_CUT_VALUE == uint16_t(-1), "Mismatch with Direct3D11");
@@ -118,7 +119,7 @@ namespace DirectX
     static_assert(D3D11_32BIT_INDEX_STRIP_CUT_VALUE == UINT32_MAX, "Mismatch with Direct3D11");
 #endif
 
-#if defined(__d3d12_h__) || defined(__d3d12_x_h__)
+#if defined(__d3d12_h__) || defined(__d3d12_x_h__) || defined(__XBOX_D3D12_X__)
     static_assert(D3D12_16BIT_INDEX_STRIP_CUT_VALUE == uint16_t(-1), "Mismatch with Direct3D12");
     static_assert(D3D12_16BIT_INDEX_STRIP_CUT_VALUE == UINT16_MAX, "Mismatch with Direct3D12");
 
@@ -140,7 +141,7 @@ namespace DirectX
             CCW
         };
 
-        orbit_iterator(_In_reads_(nFaces * 3) const uint32_t* adjacency, _In_reads_(nFaces * 3) const index_t* indices, size_t nFaces) :
+        orbit_iterator(_In_reads_(nFaces * 3) const uint32_t* adjacency, _In_reads_(nFaces * 3) const index_t* indices, size_t nFaces) noexcept :
             m_face(UNUSED32),
             m_pointIndex(UNUSED32),
             m_currentFace(UNUSED32),
@@ -152,7 +153,7 @@ namespace DirectX
             m_clockWise(false),
             m_stopOnBoundary(false) {}
 
-        void initialize(uint32_t face, uint32_t point, WalkType wtype)
+        void initialize(uint32_t face, uint32_t point, WalkType wtype) noexcept
         {
             m_face = m_currentFace = face;
             m_pointIndex = point;
@@ -171,7 +172,7 @@ namespace DirectX
             m_currentEdge = m_nextEdge;
         }
 
-        uint32_t find(uint32_t face, uint32_t point)
+        uint32_t find(uint32_t face, uint32_t point) noexcept
         {
             assert(face < m_nFaces);
             _Analysis_assume_(face < m_nFaces);
@@ -187,7 +188,7 @@ namespace DirectX
             }
         }
 
-        uint32_t nextFace()
+        uint32_t nextFace() noexcept
         {
             assert(!done());
 
@@ -260,7 +261,7 @@ namespace DirectX
             return ret;
         }
 
-        bool moveToCCW()
+        bool moveToCCW() noexcept
         {
             m_currentFace = m_face;
 
@@ -315,8 +316,8 @@ namespace DirectX
             return ret;
         }
 
-        bool done() const { return (m_currentFace == UNUSED32); }
-        uint32_t getpoint() const { return m_clockWise ? m_currentEdge : ((m_currentEdge + 1) % 3); }
+        bool done() const noexcept { return (m_currentFace == UNUSED32); }
+        uint32_t getpoint() const noexcept { return m_clockWise ? m_currentEdge : ((m_currentEdge + 1) % 3); }
 
     private:
         uint32_t        m_face;
@@ -336,7 +337,7 @@ namespace DirectX
 
     //-------------------------------------------------------------------------------------
     template<class index_t>
-    inline uint32_t find_edge(_In_reads_(3) const index_t* indices, index_t search)
+    inline uint32_t find_edge(_In_reads_(3) const index_t* indices, index_t search) noexcept
     {
         assert(indices != nullptr);
 

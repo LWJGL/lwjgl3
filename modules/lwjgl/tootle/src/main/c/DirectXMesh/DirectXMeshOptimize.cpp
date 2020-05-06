@@ -19,7 +19,7 @@ namespace
     HRESULT OptimizeVerticesImpl(
         _In_reads_(nFaces * 3) const index_t* indices, size_t nFaces,
         size_t nVerts, _Out_writes_(nVerts) uint32_t* vertexRemap,
-        _Out_opt_ size_t* trailingUnused)
+        _Out_opt_ size_t* trailingUnused) noexcept
     {
         if (!indices || !nFaces || !nVerts || !vertexRemap)
             return E_INVALIDARG;
@@ -94,7 +94,9 @@ namespace
 
 _Use_decl_annotations_
 HRESULT DirectX::AttributeSort(
-    size_t nFaces, uint32_t* attributes, uint32_t* faceRemap)
+    size_t nFaces,
+    uint32_t* attributes,
+    uint32_t* faceRemap)
 {
     if (!nFaces || !attributes || !faceRemap)
         return E_INVALIDARG;
@@ -102,7 +104,7 @@ HRESULT DirectX::AttributeSort(
     if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
         return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
 
-    typedef std::pair<uint32_t, uint32_t> intpair_t;
+    using intpair_t = std::pair<uint32_t, uint32_t>;
 
     std::vector<intpair_t> list;
     list.reserve(nFaces);
@@ -111,7 +113,7 @@ HRESULT DirectX::AttributeSort(
         list.emplace_back(intpair_t(attributes[j], j));
     }
 
-    std::stable_sort(list.begin(), list.end(), [](const intpair_t& a, const intpair_t& b) -> bool
+    std::stable_sort(list.begin(), list.end(), [](const intpair_t& a, const intpair_t& b) noexcept -> bool
     {
         return (a.first < b.first);
     });
@@ -130,16 +132,22 @@ HRESULT DirectX::AttributeSort(
 //-------------------------------------------------------------------------------------
 _Use_decl_annotations_
 HRESULT DirectX::OptimizeVertices(
-    const uint16_t* indices, size_t nFaces,
-    size_t nVerts, uint32_t* vertexRemap, size_t* trailingUnused)
+    const uint16_t* indices,
+    size_t nFaces,
+    size_t nVerts,
+    uint32_t* vertexRemap,
+    size_t* trailingUnused) noexcept
 {
     return OptimizeVerticesImpl<uint16_t>(indices, nFaces, nVerts, vertexRemap, trailingUnused);
 }
 
 _Use_decl_annotations_
 HRESULT DirectX::OptimizeVertices(
-    const uint32_t* indices, size_t nFaces,
-    size_t nVerts, uint32_t* vertexRemap, size_t* trailingUnused)
+    const uint32_t* indices,
+    size_t nFaces,
+    size_t nVerts,
+    uint32_t* vertexRemap,
+    size_t* trailingUnused) noexcept
 {
     return OptimizeVerticesImpl<uint32_t>(indices, nFaces, nVerts, vertexRemap, trailingUnused);
 }

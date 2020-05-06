@@ -162,7 +162,7 @@ namespace
 
         HRESULT setSubset(
             _In_reads_(nFaces * 3) const index_t* indices, size_t nFaces,
-            size_t faceOffset, size_t faceCount)
+            size_t faceOffset, size_t faceCount) noexcept
         {
             if (!faceCount || !indices || !nFaces)
                 return E_INVALIDARG;
@@ -226,21 +226,21 @@ namespace
             return S_OK;
         }
 
-        bool isprocessed(uint32_t face) const
+        bool isprocessed(uint32_t face) const noexcept
         {
             assert(face < mTotalFaces);
             assert((face >= mFaceOffset) || (face < (mFaceOffset + mFaceCount)));
             return mListElements[face - mFaceOffset].processed;
         }
 
-        uint32_t unprocessed_count(uint32_t face) const
+        uint32_t unprocessed_count(uint32_t face) const noexcept
         {
             assert(face < mTotalFaces);
             assert((face >= mFaceOffset) || (face < (mFaceOffset + mFaceCount)));
             return mListElements[face - mFaceOffset].unprocessed;
         }
 
-        uint32_t find_initial() const
+        uint32_t find_initial() const noexcept
         {
             for (size_t j = 0; j < 4; ++j)
             {
@@ -251,7 +251,7 @@ namespace
             return UNUSED32;
         }
 
-        void mark(uint32_t face)
+        void mark(uint32_t face) noexcept
         {
             assert(face < mTotalFaces);
             assert((face >= mFaceOffset) || (face < (mFaceOffset + mFaceCount)));
@@ -273,7 +273,7 @@ namespace
             }
         }
 
-        uint32_t find_next(uint32_t face) const
+        uint32_t find_next(uint32_t face) const noexcept
         {
             assert(face < mTotalFaces);
             assert((face >= mFaceOffset) || (face < (mFaceOffset + mFaceCount)));
@@ -325,7 +325,7 @@ namespace
             return iret;
         }
 
-        uint32_t get_neighbors(uint32_t face, uint32_t n) const
+        uint32_t get_neighbors(uint32_t face, uint32_t n) const noexcept
         {
             assert(face < mTotalFaces);
             assert(n < 3);
@@ -334,14 +334,14 @@ namespace
             return mPhysicalNeighbors[face].neighbors[n];
         }
 
-        const uint32_t* get_neighborsPtr(uint32_t face) const
+        const uint32_t* get_neighborsPtr(uint32_t face) const noexcept
         {
             assert(face < mTotalFaces);
             return &mPhysicalNeighbors[face].neighbors[0];
         }
 
     private:
-        void push_front(uint32_t faceIndex)
+        void push_front(uint32_t faceIndex) noexcept
         {
             assert(faceIndex < mFaceCount);
 
@@ -358,7 +358,7 @@ namespace
             mListElements[faceIndex].prev = UNUSED32;
         }
 
-        void remove(uint32_t faceIndex)
+        void remove(uint32_t faceIndex) noexcept
         {
             assert(faceIndex < mFaceCount);
 
@@ -395,7 +395,7 @@ namespace
                 mListElements[faceIndex].next = UNUSED32;
         }
 
-        void decrement(uint32_t face)
+        void decrement(uint32_t face) noexcept
         {
             assert(face < mTotalFaces);
             assert((face >= mFaceOffset) || (face < (mFaceOffset + mFaceCount)));
@@ -436,10 +436,10 @@ namespace
 
 
     //---------------------------------------------------------------------------------
-    typedef std::pair<uint32_t, uint32_t> facecorner_t;
+    using facecorner_t = std::pair<uint32_t, uint32_t>;
 
     template<class index_t>
-    inline facecorner_t counterclockwise_corner(facecorner_t corner, mesh_status<index_t>& status)
+    inline facecorner_t counterclockwise_corner(facecorner_t corner, mesh_status<index_t>& status) noexcept
     {
         assert(corner.second != UNUSED32);
         uint32_t edge = (corner.second + 2) % 3;
@@ -455,7 +455,7 @@ namespace
     public:
         sim_vcache() noexcept : mTail(0), mCacheSize(0) {}
 
-        HRESULT initialize(uint32_t cacheSize)
+        HRESULT initialize(uint32_t cacheSize) noexcept
         {
             if (!cacheSize)
                 return E_INVALIDARG;
@@ -471,14 +471,14 @@ namespace
             return S_OK;
         }
 
-        void clear()
+        void clear() noexcept
         {
             assert(mFIFO != nullptr);
             mTail = 0;
             memset(mFIFO.get(), 0xff, sizeof(uint32_t) * mCacheSize);
         }
 
-        bool access(uint32_t vertex)
+        bool access(uint32_t vertex) noexcept
         {
             assert(vertex != UNUSED32);
             assert(mFIFO != nullptr);
@@ -770,8 +770,12 @@ namespace
 
 _Use_decl_annotations_
 HRESULT DirectX::OptimizeFaces(
-    const uint16_t* indices, size_t nFaces, const uint32_t* adjacency,
-    uint32_t* faceRemap, uint32_t vertexCache, uint32_t restart)
+    const uint16_t* indices,
+    size_t nFaces,
+    const uint32_t* adjacency,
+    uint32_t* faceRemap,
+    uint32_t vertexCache,
+    uint32_t restart)
 {
     if (!indices || !nFaces || !adjacency || !faceRemap)
         return E_INVALIDARG;
@@ -794,8 +798,12 @@ HRESULT DirectX::OptimizeFaces(
 
 _Use_decl_annotations_
 HRESULT DirectX::OptimizeFaces(
-    const uint32_t* indices, size_t nFaces, const uint32_t* adjacency,
-    uint32_t* faceRemap, uint32_t vertexCache, uint32_t restart)
+    const uint32_t* indices,
+    size_t nFaces,
+    const uint32_t* adjacency,
+    uint32_t* faceRemap,
+    uint32_t vertexCache,
+    uint32_t restart)
 {
     if (!indices || !nFaces || !adjacency || !faceRemap)
         return E_INVALIDARG;
@@ -820,8 +828,13 @@ HRESULT DirectX::OptimizeFaces(
 //-------------------------------------------------------------------------------------
 _Use_decl_annotations_
 HRESULT DirectX::OptimizeFacesEx(
-    const uint16_t* indices, size_t nFaces, const uint32_t* adjacency, const uint32_t* attributes,
-    uint32_t* faceRemap, uint32_t vertexCache, uint32_t restart)
+    const uint16_t* indices,
+    size_t nFaces,
+    const uint32_t* adjacency,
+    const uint32_t* attributes,
+    uint32_t* faceRemap,
+    uint32_t vertexCache,
+    uint32_t restart)
 {
     if (!indices || !nFaces || !adjacency || !attributes || !faceRemap)
         return E_INVALIDARG;
@@ -844,8 +857,13 @@ HRESULT DirectX::OptimizeFacesEx(
 
 _Use_decl_annotations_
 HRESULT DirectX::OptimizeFacesEx(
-    const uint32_t* indices, size_t nFaces, const uint32_t* adjacency, const uint32_t* attributes,
-    uint32_t* faceRemap, uint32_t vertexCache, uint32_t restart)
+    const uint32_t* indices,
+    size_t nFaces,
+    const uint32_t* adjacency,
+    const uint32_t* attributes,
+    uint32_t* faceRemap,
+    uint32_t vertexCache,
+    uint32_t restart)
 {
     if (!indices || !nFaces || !adjacency || !attributes || !faceRemap)
         return E_INVALIDARG;

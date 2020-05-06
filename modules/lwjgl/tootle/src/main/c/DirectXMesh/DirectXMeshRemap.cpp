@@ -15,13 +15,13 @@ using namespace DirectX;
 
 namespace
 {
-    const size_t c_MaxStride = 2048;
+    constexpr size_t c_MaxStride = 2048;
 
 #if defined(__d3d11_h__) || defined(__d3d11_x_h__)
     static_assert(c_MaxStride == D3D11_REQ_MULTI_ELEMENT_STRUCTURE_SIZE_IN_BYTES, "D3D11 mismatch");
 #endif
 
-#if defined(__d3d12_h__) || defined(__d3d12_x_h__)
+#if defined(__d3d12_h__) || defined(__d3d12_x_h__) || defined(__XBOX_D3D12_X__)
     static_assert(c_MaxStride == D3D12_REQ_MULTI_ELEMENT_STRUCTURE_SIZE_IN_BYTES, "D3D12 mismatch");
 #endif
 
@@ -35,7 +35,7 @@ namespace
         _In_reads_opt_(nFaces * 3) const uint32_t* adjin,
         _In_reads_(nFaces) const uint32_t* faceRemap,
         _Out_writes_(nFaces * 3) index_t* ibout,
-        _Out_writes_opt_(nFaces * 3) uint32_t* adjout)
+        _Out_writes_opt_(nFaces * 3) uint32_t* adjout) noexcept
     {
         assert(ibin != nullptr && faceRemap != nullptr && ibout != nullptr && ibin != ibout);
         _Analysis_assume_(ibin != nullptr && faceRemap != nullptr && ibout != nullptr && ibin != ibout);
@@ -78,7 +78,7 @@ namespace
     HRESULT SwapFaces(
         _Inout_updates_all_(nFaces * 3) index_t* ib, _In_ size_t nFaces,
         _Inout_updates_all_opt_(nFaces * 3) uint32_t* adj,
-        _In_reads_(nFaces) const uint32_t* faceRemap)
+        _In_reads_(nFaces) const uint32_t* faceRemap) noexcept
     {
         assert(ib != nullptr && faceRemap != nullptr);
         _Analysis_assume_(ib != nullptr && faceRemap != nullptr);
@@ -168,7 +168,7 @@ namespace
     //---------------------------------------------------------------------------------
     HRESULT SwapVertices(
         _Inout_updates_bytes_all_(nVerts*stride) void* vb, size_t stride, size_t nVerts,
-        _Inout_updates_all_opt_(nVerts) uint32_t* pointRep, _In_reads_(nVerts) const uint32_t* vertexRemap)
+        _Inout_updates_all_opt_(nVerts) uint32_t* pointRep, _In_reads_(nVerts) const uint32_t* vertexRemap) noexcept
     {
         if (!vb || !stride || !nVerts || !vertexRemap)
             return E_INVALIDARG;
@@ -279,7 +279,7 @@ namespace
     HRESULT FinalizeIBImpl(
         _In_reads_(nFaces * 3) const index_t* ibin, size_t nFaces,
         _In_reads_(nVerts) const uint32_t* vertexRemap, size_t nVerts,
-        _Out_writes_(nFaces * 3) index_t* ibout)
+        _Out_writes_(nFaces * 3) index_t* ibout) noexcept
     {
         if (!ibin || !nFaces || !vertexRemap || !nVerts || !ibout)
             return E_INVALIDARG;
@@ -342,7 +342,7 @@ namespace
     template<class index_t>
     HRESULT FinalizeIBImpl(
         _Inout_updates_all_(nFaces * 3) index_t* ib, size_t nFaces,
-        _In_reads_(nVerts) const uint32_t* vertexRemap, size_t nVerts)
+        _In_reads_(nVerts) const uint32_t* vertexRemap, size_t nVerts) noexcept
     {
         if (!ib || !nFaces || !vertexRemap || !nVerts)
             return E_INVALIDARG;
@@ -404,8 +404,10 @@ namespace
 //-------------------------------------------------------------------------------------
 _Use_decl_annotations_
 HRESULT DirectX::ReorderIB(
-    const uint16_t* ibin, size_t nFaces, const uint32_t* faceRemap,
-    uint16_t* ibout)
+    const uint16_t* ibin,
+    size_t nFaces,
+    const uint32_t* faceRemap,
+    uint16_t* ibout) noexcept
 {
     if (!ibin || !nFaces || !faceRemap || !ibout)
         return E_INVALIDARG;
@@ -421,8 +423,9 @@ HRESULT DirectX::ReorderIB(
 
 _Use_decl_annotations_
 HRESULT DirectX::ReorderIB(
-    uint16_t* ib, size_t nFaces,
-    const uint32_t* faceRemap)
+    uint16_t* ib,
+    size_t nFaces,
+    const uint32_t* faceRemap) noexcept
 {
     if (!ib || !nFaces || !faceRemap)
         return E_INVALIDARG;
@@ -437,8 +440,10 @@ HRESULT DirectX::ReorderIB(
 //-------------------------------------------------------------------------------------
 _Use_decl_annotations_
 HRESULT DirectX::ReorderIB(
-    const uint32_t* ibin, size_t nFaces, const uint32_t* faceRemap,
-    uint32_t* ibout)
+    const uint32_t* ibin,
+    size_t nFaces,
+    const uint32_t* faceRemap,
+    uint32_t* ibout) noexcept
 {
     if (!ibin || !nFaces || !faceRemap || !ibout)
         return E_INVALIDARG;
@@ -454,7 +459,9 @@ HRESULT DirectX::ReorderIB(
 
 _Use_decl_annotations_
 HRESULT DirectX::ReorderIB(
-    uint32_t* ib, size_t nFaces, const uint32_t* faceRemap)
+    uint32_t* ib,
+    size_t nFaces,
+    const uint32_t* faceRemap) noexcept
 {
     if (!ib || !nFaces || !faceRemap)
         return E_INVALIDARG;
@@ -471,8 +478,12 @@ HRESULT DirectX::ReorderIB(
 //-------------------------------------------------------------------------------------
 _Use_decl_annotations_
 HRESULT DirectX::ReorderIBAndAdjacency(
-    const uint16_t* ibin, size_t nFaces, const uint32_t* adjin, const uint32_t* faceRemap,
-    uint16_t* ibout, uint32_t* adjout)
+    const uint16_t* ibin,
+    size_t nFaces,
+    const uint32_t* adjin,
+    const uint32_t* faceRemap,
+    uint16_t* ibout,
+    uint32_t* adjout) noexcept
 {
     if (!ibin || !nFaces || !adjin || !faceRemap || !ibout || !adjout)
         return E_INVALIDARG;
@@ -488,8 +499,10 @@ HRESULT DirectX::ReorderIBAndAdjacency(
 
 _Use_decl_annotations_
 HRESULT DirectX::ReorderIBAndAdjacency(
-    uint16_t* ib, size_t nFaces, uint32_t* adj,
-    const uint32_t* faceRemap)
+    uint16_t* ib,
+    size_t nFaces,
+    uint32_t* adj,
+    const uint32_t* faceRemap) noexcept
 {
     if (!ib || !nFaces || !adj || !faceRemap)
         return E_INVALIDARG;
@@ -504,8 +517,12 @@ HRESULT DirectX::ReorderIBAndAdjacency(
 //-------------------------------------------------------------------------------------
 _Use_decl_annotations_
 HRESULT DirectX::ReorderIBAndAdjacency(
-    const uint32_t* ibin, size_t nFaces, const uint32_t* adjin, const uint32_t* faceRemap,
-    uint32_t* ibout, uint32_t* adjout)
+    const uint32_t* ibin,
+    size_t nFaces,
+    const uint32_t* adjin,
+    const uint32_t* faceRemap,
+    uint32_t* ibout,
+    uint32_t* adjout) noexcept
 {
     if (!ibin || !nFaces || !adjin || !faceRemap || !ibout || !adjout)
         return E_INVALIDARG;
@@ -521,8 +538,10 @@ HRESULT DirectX::ReorderIBAndAdjacency(
 
 _Use_decl_annotations_
 HRESULT DirectX::ReorderIBAndAdjacency(
-    uint32_t* ib, size_t nFaces, uint32_t* adj,
-    const uint32_t* faceRemap)
+    uint32_t* ib,
+    size_t nFaces,
+    uint32_t* adj,
+    const uint32_t* faceRemap) noexcept
 {
     if (!ib || !nFaces || !adj || !faceRemap)
         return E_INVALIDARG;
@@ -539,17 +558,21 @@ HRESULT DirectX::ReorderIBAndAdjacency(
 //-------------------------------------------------------------------------------------
 _Use_decl_annotations_
 HRESULT DirectX::FinalizeIB(
-    const uint16_t* ibin, size_t nFaces,
-    const uint32_t* vertexRemap, size_t nVerts,
-    uint16_t* ibout)
+    const uint16_t* ibin,
+    size_t nFaces,
+    const uint32_t* vertexRemap,
+    size_t nVerts,
+    uint16_t* ibout) noexcept
 {
     return FinalizeIBImpl<uint16_t>(ibin, nFaces, vertexRemap, nVerts, ibout);
 }
 
 _Use_decl_annotations_
 HRESULT DirectX::FinalizeIB(
-    uint16_t* ib, size_t nFaces,
-    const uint32_t* vertexRemap, size_t nVerts)
+    uint16_t* ib,
+    size_t nFaces,
+    const uint32_t* vertexRemap,
+    size_t nVerts) noexcept
 {
     return FinalizeIBImpl<uint16_t>(ib, nFaces, vertexRemap, nVerts);
 }
@@ -558,17 +581,21 @@ HRESULT DirectX::FinalizeIB(
 //-------------------------------------------------------------------------------------
 _Use_decl_annotations_
 HRESULT DirectX::FinalizeIB(
-    const uint32_t* ibin, size_t nFaces,
-    const uint32_t* vertexRemap, size_t nVerts,
-    uint32_t* ibout)
+    const uint32_t* ibin,
+    size_t nFaces,
+    const uint32_t* vertexRemap,
+    size_t nVerts,
+    uint32_t* ibout) noexcept
 {
     return FinalizeIBImpl<uint32_t>(ibin, nFaces, vertexRemap, nVerts, ibout);
 }
 
 _Use_decl_annotations_
 HRESULT DirectX::FinalizeIB(
-    uint32_t* ib, size_t nFaces,
-    const uint32_t* vertexRemap, size_t nVerts)
+    uint32_t* ib,
+    size_t nFaces,
+    const uint32_t* vertexRemap,
+    size_t nVerts) noexcept
 {
     return FinalizeIBImpl<uint32_t>(ib, nFaces, vertexRemap, nVerts);
 }
@@ -582,9 +609,13 @@ HRESULT DirectX::FinalizeIB(
 
 _Use_decl_annotations_
 HRESULT DirectX::FinalizeVB(
-    const void* vbin, size_t stride, size_t nVerts,
-    const uint32_t* dupVerts, size_t nDupVerts,
-    const uint32_t* vertexRemap, void* vbout)
+    const void* vbin,
+    size_t stride,
+    size_t nVerts,
+    const uint32_t* dupVerts,
+    size_t nDupVerts,
+    const uint32_t* vertexRemap,
+    void* vbout) noexcept
 {
     if (!vbin || !stride || !nVerts || !vbout)
         return E_INVALIDARG;
@@ -653,8 +684,10 @@ HRESULT DirectX::FinalizeVB(
 
 _Use_decl_annotations_
 HRESULT DirectX::FinalizeVB(
-    void* vb, size_t stride,
-    size_t nVerts, const uint32_t* vertexRemap)
+    void* vb,
+    size_t stride,
+    size_t nVerts,
+    const uint32_t* vertexRemap) noexcept
 {
     if (nVerts >= UINT32_MAX)
         return E_INVALIDARG;
@@ -672,9 +705,15 @@ HRESULT DirectX::FinalizeVB(
 
 _Use_decl_annotations_
 HRESULT DirectX::FinalizeVBAndPointReps(
-    const void* vbin, size_t stride, size_t nVerts, const uint32_t* prin,
-    const uint32_t* dupVerts, size_t nDupVerts, const uint32_t* vertexRemap,
-    void* vbout, uint32_t* prout)
+    const void* vbin,
+    size_t stride,
+    size_t nVerts,
+    const uint32_t* prin,
+    const uint32_t* dupVerts,
+    size_t nDupVerts,
+    const uint32_t* vertexRemap,
+    void* vbout,
+    uint32_t* prout) noexcept
 {
     if (!vbin || !stride || !nVerts || !prin || !vbout || !prout)
         return E_INVALIDARG;
@@ -730,8 +769,12 @@ HRESULT DirectX::FinalizeVBAndPointReps(
     memset(vbout, 0, newVerts * stride);
 #endif
 
-    std::unique_ptr<uint32_t[]> pointRep(new uint32_t[nVerts + nDupVerts]);
+    std::unique_ptr<uint32_t[]> pointRep(new (std::nothrow) uint32_t[nVerts + nDupVerts]);
+    if (!pointRep)
+        return E_OUTOFMEMORY;
+
     memcpy(pointRep.get(), prin, sizeof(uint32_t) * nVerts);
+
     for (size_t i = 0; i < nDupVerts; ++i)
     {
         pointRep[i + nVerts] = prin[dupVerts[i]];
@@ -795,8 +838,11 @@ HRESULT DirectX::FinalizeVBAndPointReps(
 
 _Use_decl_annotations_
 HRESULT DirectX::FinalizeVBAndPointReps(
-    void* vb, size_t stride, size_t nVerts,
-    uint32_t* pointRep, const uint32_t* vertexRemap)
+    void* vb,
+    size_t stride,
+    size_t nVerts,
+    uint32_t* pointRep,
+    const uint32_t* vertexRemap) noexcept
 {
     if (nVerts >= UINT32_MAX)
         return E_INVALIDARG;
@@ -824,9 +870,12 @@ HRESULT DirectX::FinalizeVBAndPointReps(
 //-------------------------------------------------------------------------------------
 _Use_decl_annotations_
 HRESULT DirectX::CompactVB(
-    const void* vbin, size_t stride, size_t nVerts,
+    const void* vbin,
+    size_t stride,
+    size_t nVerts,
     size_t trailingUnused,
-    const uint32_t* vertexRemap, void* vbout)
+    const uint32_t* vertexRemap,
+    void* vbout) noexcept
 {
     if (!vbin || !stride || !nVerts || !vbout || !vertexRemap)
         return E_INVALIDARG;
