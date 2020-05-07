@@ -73,7 +73,7 @@ fun templateCustomization() {
             noPrefix = true
         )
 
-        macro(expression = "version >> 22")..uint32_t(
+        macro(expression = "version >>> 22")..uint32_t(
             "VK_VERSION_MAJOR",
             "Extracts the API major version number from a packed version number.",
 
@@ -82,7 +82,7 @@ fun templateCustomization() {
             noPrefix = true
         )
 
-        macro(expression = "(version >> 12) & 0x3FF")..uint32_t(
+        macro(expression = "(version >>> 12) & 0x3FF")..uint32_t(
             "VK_VERSION_MINOR",
             "Extracts the API minor version number from a packed version number.",
 

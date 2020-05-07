@@ -15100,7 +15100,7 @@ public class VK10 {
      */
     @NativeType("uint32_t")
     public static int VK_VERSION_MAJOR(@NativeType("uint32_t") int version) {
-        return version >> 22;
+        return version >>> 22;
     }
 
     // --- [ VK_VERSION_MINOR ] ---
@@ -15112,7 +15112,7 @@ public class VK10 {
      */
     @NativeType("uint32_t")
     public static int VK_VERSION_MINOR(@NativeType("uint32_t") int version) {
-        return (version >> 12) & 0x3FF;
+        return (version >>> 12) & 0x3FF;
     }
 
     // --- [ VK_VERSION_PATCH ] ---
