@@ -480,6 +480,24 @@ public class MeshOptimizer {
         nmeshopt_optimizeVertexCache(memAddress(destination), memAddress(indices), destination.remaining(), vertex_count);
     }
 
+    // --- [ meshopt_optimizeVertexCacheStrip ] ---
+
+    /** Unsafe version of: {@link #meshopt_optimizeVertexCacheStrip optimizeVertexCacheStrip} */
+    public static native void nmeshopt_optimizeVertexCacheStrip(long destination, long indices, long index_count, long vertex_count);
+
+    /**
+     * Vertex transform cache optimizer for strip-like caches.
+     * 
+     * <p>Produces inferior results to {@link #meshopt_optimizeVertexCache optimizeVertexCache} from the GPU vertex cache perspective. However, the resulting index order is more optimal if the
+     * goal is to reduce the triangle strip length or improve compression efficiency.</p>
+     */
+    public static void meshopt_optimizeVertexCacheStrip(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("size_t") long vertex_count) {
+        if (CHECKS) {
+            check(indices, destination.remaining());
+        }
+        nmeshopt_optimizeVertexCacheStrip(memAddress(destination), memAddress(indices), destination.remaining(), vertex_count);
+    }
+
     // --- [ meshopt_optimizeVertexCacheFifo ] ---
 
     /** Unsafe version of: {@link #meshopt_optimizeVertexCacheFifo optimizeVertexCacheFifo} */
@@ -578,8 +596,8 @@ public class MeshOptimizer {
      * Index buffer encoder.
      * 
      * <p>Encodes index data into an array of bytes that is generally much smaller (&lt;1.5 bytes/triangle) and compresses better (&lt;1 bytes/triangle) compared
-     * to original. Returns encoded data size on success, 0 on error; the only error condition is if buffer doesn't have enough space. For maximum efficiency
-     * the index buffer being encoded has to be optimized for vertex cache and vertex fetch first.</p>
+     * to original. Input index buffer must represent a triangle list. Returns encoded data size on success, 0 on error; the only error condition is if buffer
+     * doesn't have enough space. For maximum efficiency the index buffer being encoded has to be optimized for vertex cache and vertex fetch first.</p>
      * 
      * <p>{@code buffer} must contain enough space for the encoded index buffer (use {@link #meshopt_encodeIndexBufferBound encodeIndexBufferBound} to compute worst case size).</p>
      */
@@ -592,6 +610,15 @@ public class MeshOptimizer {
 
     @NativeType("size_t")
     public static native long meshopt_encodeIndexBufferBound(@NativeType("size_t") long index_count, @NativeType("size_t") long vertex_count);
+
+    // --- [ meshopt_encodeIndexVersion ] ---
+
+    /**
+     * Experimental: Set index encoder format version.
+     *
+     * @param version must specify the data format version to encode; valid values are 0 (decodable by all library versions) and 1 (decodable by 0.14+)
+     */
+    public static native void meshopt_encodeIndexVersion(int version);
 
     // --- [ meshopt_decodeIndexBuffer ] ---
 
@@ -611,6 +638,50 @@ public class MeshOptimizer {
             check(destination, index_count * index_size);
         }
         return nmeshopt_decodeIndexBuffer(memAddress(destination), index_count, index_size, memAddress(buffer), buffer.remaining());
+    }
+
+    // --- [ meshopt_encodeIndexSequence ] ---
+
+    /** Unsafe version of: {@link #meshopt_encodeIndexSequence encodeIndexSequence} */
+    public static native long nmeshopt_encodeIndexSequence(long buffer, long buffer_size, long indices, long index_count);
+
+    /**
+     * Experimental: Index sequence encoder.
+     * 
+     * <p>Encodes index sequence into an array of bytes that is generally smaller and compresses better compared to original. Input index sequence can represent
+     * arbitrary topology; for triangle lists {@link #meshopt_encodeIndexBuffer encodeIndexBuffer} is likely to be better. Returns encoded data size on success, 0 on error; the only error
+     * condition is if buffer doesn't have enough space.</p>
+     *
+     * @param buffer must contain enough space for the encoded index sequence (use {@link #meshopt_encodeIndexSequenceBound encodeIndexSequenceBound} to compute worst case size)
+     */
+    @NativeType("size_t")
+    public static long meshopt_encodeIndexSequence(@NativeType("unsigned char *") ByteBuffer buffer, @NativeType("unsigned int const *") IntBuffer indices) {
+        return nmeshopt_encodeIndexSequence(memAddress(buffer), buffer.remaining(), memAddress(indices), indices.remaining());
+    }
+
+    // --- [ meshopt_encodeIndexSequenceBound ] ---
+
+    @NativeType("size_t")
+    public static native long meshopt_encodeIndexSequenceBound(@NativeType("size_t") long index_count, @NativeType("size_t") long vertex_count);
+
+    // --- [ meshopt_decodeIndexSequence ] ---
+
+    /** Unsafe version of: {@link #meshopt_decodeIndexSequence decodeIndexSequence} */
+    public static native int nmeshopt_decodeIndexSequence(long destination, long index_count, long index_size, long buffer, long buffer_size);
+
+    /**
+     * Index sequence decoder.
+     * 
+     * <p>Decodes index data from an array of bytes generated by {@link #meshopt_encodeIndexSequence encodeIndexSequence}. Returns 0 if decoding was successful, and an error code otherwise. The
+     * decoder is safe to use for untrusted input, but it may produce garbage data (e.g. out of range indices).</p>
+     *
+     * @param destination must contain enough space for the resulting index sequence ({@code index_count} elements)
+     */
+    public static int meshopt_decodeIndexSequence(@NativeType("void *") ByteBuffer destination, @NativeType("size_t") long index_count, @NativeType("size_t") long index_size, @NativeType("unsigned char const *") ByteBuffer buffer) {
+        if (CHECKS) {
+            check(destination, index_count * index_size);
+        }
+        return nmeshopt_decodeIndexSequence(memAddress(destination), index_count, index_size, memAddress(buffer), buffer.remaining());
     }
 
     // --- [ meshopt_encodeVertexBuffer ] ---
@@ -640,6 +711,15 @@ public class MeshOptimizer {
     @NativeType("size_t")
     public static native long meshopt_encodeVertexBufferBound(@NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_size);
 
+    // --- [ meshopt_encodeVertexVersion ] ---
+
+    /**
+     * Experimental: Set vertex encoder format version.
+     *
+     * @param version must specify the data format version to encode; valid values are 0 (decodable by all library versions)
+     */
+    public static native void meshopt_encodeVertexVersion(int version);
+
     // --- [ meshopt_decodeVertexBuffer ] ---
 
     /** Unsafe version of: {@link #meshopt_decodeVertexBuffer decodeVertexBuffer} */
@@ -658,6 +738,58 @@ public class MeshOptimizer {
             check(destination, vertex_count * vertex_size);
         }
         return nmeshopt_decodeVertexBuffer(memAddress(destination), vertex_count, vertex_size, memAddress(buffer), buffer.remaining());
+    }
+
+    // --- [ meshopt_decodeFilterOct ] ---
+
+    /** Unsafe version of: {@link #meshopt_decodeFilterOct decodeFilterOct} */
+    public static native void nmeshopt_decodeFilterOct(long buffer, long vertex_count, long vertex_size);
+
+    /**
+     * Experimental: Decodes octahedral encoding of a unit vector with K-bit (K &le; 16) signed X/Y as an input; Z must store 1.0f.
+     * 
+     * <p>Each component is stored as an 8-bit or 16-bit normalized integer; stride must be equal to 4 or 8. W is preserved as is.</p>
+     */
+    public static void meshopt_decodeFilterOct(@NativeType("void *") ByteBuffer buffer, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_size) {
+        if (CHECKS) {
+            check(buffer, vertex_count * vertex_size);
+        }
+        nmeshopt_decodeFilterOct(memAddress(buffer), vertex_count, vertex_size);
+    }
+
+    // --- [ meshopt_decodeFilterQuat ] ---
+
+    /** Unsafe version of: {@link #meshopt_decodeFilterQuat decodeFilterQuat} */
+    public static native void nmeshopt_decodeFilterQuat(long buffer, long vertex_count, long vertex_size);
+
+    /**
+     * Experimental: Decodes 3-component quaternion encoding with K-bit (4 &le; K &le; 16) component encoding and a 2-bit component index indicating which
+     * component to reconstruct.
+     * 
+     * <p>Each component is stored as an 16-bit integer; stride must be equal to 8.</p>
+     */
+    public static void meshopt_decodeFilterQuat(@NativeType("void *") ByteBuffer buffer, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_size) {
+        if (CHECKS) {
+            check(buffer, vertex_count * vertex_size);
+        }
+        nmeshopt_decodeFilterQuat(memAddress(buffer), vertex_count, vertex_size);
+    }
+
+    // --- [ meshopt_decodeFilterExp ] ---
+
+    /** Unsafe version of: {@link #meshopt_decodeFilterExp decodeFilterExp} */
+    public static native void nmeshopt_decodeFilterExp(long buffer, long vertex_count, long vertex_size);
+
+    /**
+     * Experimental: Decodes exponential encoding of floating-point data with 8-bit exponent and 24-bit integer mantissa as {@code 2^E*M}.
+     * 
+     * <p>Each 32-bit component is decoded in isolation; stride must be divisible by 4.</p>
+     */
+    public static void meshopt_decodeFilterExp(@NativeType("void *") ByteBuffer buffer, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_size) {
+        if (CHECKS) {
+            check(buffer, vertex_count * vertex_size);
+        }
+        nmeshopt_decodeFilterExp(memAddress(buffer), vertex_count, vertex_size);
     }
 
     // --- [ meshopt_simplify ] ---
@@ -936,9 +1068,8 @@ public class MeshOptimizer {
      * 
      * <p>The resulting index buffer can be used with other functions like {@link #meshopt_optimizeVertexCache optimizeVertexCache}.</p>
      * 
-     * <p>{@code destination} must contain enough space for the resulting index buffer ({@code index_count} elements). {@code indices} must contain index data
-     * that is the result of {@code meshopt_optimizeVertexCache} (<b>not</b> the original mesh indices!). {@code vertex_positions} should have {@code float3}
-     * position in the first 12 bytes of each vertex - similar to {@code glVertexPointer}.</p>
+     * <p>{@code destination} must contain enough space for the resulting index buffer ({@code index_count} elements). {@code vertex_positions} should have
+     * {@code float3} position in the first 12 bytes of each vertex - similar to {@code glVertexPointer}.</p>
      */
     public static void meshopt_spatialSortTriangles(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride) {
         if (CHECKS) {
