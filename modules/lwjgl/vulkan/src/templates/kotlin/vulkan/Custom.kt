@@ -130,6 +130,8 @@ fun templateCustomization() {
             "WHOLE_SIZE".."(~0L)"
         )
 
+        nullable..this["GetInstanceProcAddr"].getParam("instance")
+
         MultiType(
             PointerMapping.DATA_INT,
             PointerMapping.DATA_LONG

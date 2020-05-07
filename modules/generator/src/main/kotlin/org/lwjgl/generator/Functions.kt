@@ -277,7 +277,7 @@ class Func(
     }
 
     private val Parameter.isFunctionProvider
-        get() = nativeType is WrappedPointerType && nativeClass.binding != null && nativeClass.binding.apiCapabilities === APICapabilities.PARAM_CAPABILITIES
+        get() = nativeType is WrappedPointerType && nativeClass.binding != null && nativeClass.binding.apiCapabilities === APICapabilities.PARAM_CAPABILITIES && !has(nullable)
 
     /** Validates parameters with modifiers that reference other parameters. */
     private fun validate() {

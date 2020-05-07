@@ -3349,9 +3349,9 @@ public class VK10 {
     // --- [ vkGetInstanceProcAddr ] ---
 
     /** Unsafe version of: {@link #vkGetInstanceProcAddr GetInstanceProcAddr} */
-    public static long nvkGetInstanceProcAddr(VkInstance instance, long pName) {
+    public static long nvkGetInstanceProcAddr(long instance, long pName) {
         long __functionAddress = VK.getGlobalCommands().vkGetInstanceProcAddr;
-        return callPPP(instance.address(), pName, __functionAddress);
+        return callPPP(instance, pName, __functionAddress);
     }
 
     /**
@@ -3416,11 +3416,11 @@ public class VK10 {
      * @param pName    the name of the command to obtain.
      */
     @NativeType("PFN_vkVoidFunction")
-    public static long vkGetInstanceProcAddr(VkInstance instance, @NativeType("char const *") ByteBuffer pName) {
+    public static long vkGetInstanceProcAddr(@Nullable VkInstance instance, @NativeType("char const *") ByteBuffer pName) {
         if (CHECKS) {
             checkNT1(pName);
         }
-        return nvkGetInstanceProcAddr(instance, memAddress(pName));
+        return nvkGetInstanceProcAddr(memAddressSafe(instance), memAddress(pName));
     }
 
     /**
@@ -3485,12 +3485,12 @@ public class VK10 {
      * @param pName    the name of the command to obtain.
      */
     @NativeType("PFN_vkVoidFunction")
-    public static long vkGetInstanceProcAddr(VkInstance instance, @NativeType("char const *") CharSequence pName) {
+    public static long vkGetInstanceProcAddr(@Nullable VkInstance instance, @NativeType("char const *") CharSequence pName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCII(pName, true);
             long pNameEncoded = stack.getPointerAddress();
-            return nvkGetInstanceProcAddr(instance, pNameEncoded);
+            return nvkGetInstanceProcAddr(memAddressSafe(instance), pNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
