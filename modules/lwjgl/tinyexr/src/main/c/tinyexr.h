@@ -287,7 +287,7 @@ typedef struct _DeepImage {
 extern int LoadEXR(float **out_rgba, int *width, int *height,
                    const char *filename, const char **err);
 
-// Loads single-frame OpenEXR image by specifing layer name. Assume EXR image contains A(single channel
+// Loads single-frame OpenEXR image by specifying layer name. Assume EXR image contains A(single channel
 // alpha) or RGB(A) channels.
 // Application must free image data as returned by `out_rgba`
 // Result image format is: float x RGBA x width x hight
@@ -302,7 +302,7 @@ extern int LoadEXRWithLayer(float **out_rgba, int *width, int *height,
 //
 // @param[out] layer_names List of layer names. Application must free memory after using this.
 // @param[out] num_layers The number of layers
-// @param[out] err Error string(wll be filled when the function returns error code). Free it using FreeEXRErrorMessage after using this value.
+// @param[out] err Error string(will be filled when the function returns error code). Free it using FreeEXRErrorMessage after using this value.
 //
 // @return TINYEXR_SUCCEES upon success.
 //
@@ -497,8 +497,8 @@ extern int LoadEXRFromMemory(float **out_rgba, int *width, int *height,
 #endif  // TINYEXR_H_
 
 #ifdef TINYEXR_IMPLEMENTATION
-#ifndef TINYEXR_IMPLEMENTATION_DEIFNED
-#define TINYEXR_IMPLEMENTATION_DEIFNED
+#ifndef TINYEXR_IMPLEMENTATION_DEFINED
+#define TINYEXR_IMPLEMENTATION_DEFINED
 
 #include <algorithm>
 #include <cassert>
@@ -619,7 +619,7 @@ namespace miniz {
        - Critical fix for the MZ_ZIP_FLAG_DO_NOT_SORT_CENTRAL_DIRECTORY bug
    (thanks kahmyong.moon@hp.com) which could cause locate files to not find
    files. This bug
-        would only have occured in earlier versions if you explicitly used this
+        would only have occurred in earlier versions if you explicitly used this
    flag, OR if you used mz_zip_extract_archive_file_to_heap() or
    mz_zip_add_mem_to_archive_file_in_place()
         (which used this flag). If you can't switch to v1.15 but want to fix
@@ -7712,7 +7712,7 @@ static int rleCompress(int inLength, const char in[], signed char out[]) {
 
     if (runEnd - runStart >= MIN_RUN_LENGTH) {
       //
-      // Compressable run
+      // Compressible run
       //
 
       *outWrite++ = static_cast<char>(runEnd - runStart) - 1;
@@ -8056,7 +8056,7 @@ static void wav2Encode(
   int p2 = 2;  // == 1 << (level+1)
 
   //
-  // Hierachical loop on smaller dimension n
+  // Hierarchical loop on smaller dimension n
   //
 
   while (p2 <= n) {
@@ -9582,7 +9582,7 @@ static bool DecompressZfp(float *dst, int dst_width, int dst_num_lines,
   zfp = zfp_stream_open(NULL);
 
   if (param.type == TINYEXR_ZFP_COMPRESSIONTYPE_RATE) {
-    zfp_stream_set_rate(zfp, param.rate, zfp_type_float, /* dimention */ 2,
+    zfp_stream_set_rate(zfp, param.rate, zfp_type_float, /* dimension */ 2,
                         /* write random access */ 0);
   } else if (param.type == TINYEXR_ZFP_COMPRESSIONTYPE_PRECISION) {
     zfp_stream_set_precision(zfp, param.precision, zfp_type_float);
@@ -10798,7 +10798,7 @@ static void ConvertHeader(EXRHeader *exr_header, const HeaderInfo &info) {
       memcpy(exr_header->custom_attributes[i].type, info.attributes[i].type,
              256);
       exr_header->custom_attributes[i].size = info.attributes[i].size;
-      // Just copy poiner
+      // Just copy pointer
       exr_header->custom_attributes[i].value = info.attributes[i].value;
     }
 
@@ -11601,7 +11601,7 @@ int LoadEXRWithLayer(float **out_rgba, int *width, int *height, const char *file
       }
     } else {
       for (int i = 0; i < exr_image.width * exr_image.height; i++) {
-        const float val = reinterpret_cast<float **>(exr_image.images)[0][i];
+        const float val = reinterpret_cast<float **>(exr_image.images)[chIdx][i];
         (*out_rgba)[4 * i + 0] = val;
         (*out_rgba)[4 * i + 1] = val;
         (*out_rgba)[4 * i + 2] = val;
@@ -12225,7 +12225,7 @@ size_t SaveEXRImageToMemory(const EXRImage *exr_image,
   }
 #endif
 
-  // TOOD(LTE): C++11 thread
+  // TODO(LTE): C++11 thread
 
 // Use signed int since some OpenMP compiler doesn't allow unsigned type for
 // `parallel for`
@@ -13582,5 +13582,5 @@ int SaveEXR(const float *data, int width, int height, int components,
 #pragma clang diagnostic pop
 #endif
 
-#endif  // TINYEXR_IMPLEMENTATION_DEIFNED
+#endif  // TINYEXR_IMPLEMENTATION_DEFINED
 #endif  // TINYEXR_IMPLEMENTATION

@@ -90,7 +90,7 @@ ENABLE_WARNINGS()""")
     int(
         "LoadEXRWithLayer",
         """
-        Loads single-frame OpenEXR image by specifing layer name.
+        Loads single-frame OpenEXR image by specifying layer name.
 
         Assume EXR image contains A(single channel alpha) or RGB(A) channels. Application must free image data as returned by {@code out_rgba}. Result image
         format is: float x RGBA x width x height.
@@ -117,7 +117,7 @@ ENABLE_WARNINGS()""")
         charASCII.const.p("filename", ""),
         Check(1)..charASCII.const.p.p.p("layer_names", "list of layer names. Application must free memory after using this."),
         Check(1)..int.p("num_layers", "the number of layers"),
-        Check(1)..charASCII.const.p.p("err", "Error string(wll be filled when the function returns error code). Free it using FreeEXRErrorMessage after using this value."),
+        Check(1)..charASCII.const.p.p("err", "Error string(will be filled when the function returns error code). Free it using FreeEXRErrorMessage after using this value."),
 
         returnDoc = "#SUCCESS upon success."
     )

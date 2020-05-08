@@ -87,7 +87,7 @@ public class TinyEXR {
     public static native int nLoadEXRWithLayer(long out_rgba, long width, long height, long filename, long layer_name, long err);
 
     /**
-     * Loads single-frame OpenEXR image by specifing layer name.
+     * Loads single-frame OpenEXR image by specifying layer name.
      * 
      * <p>Assume EXR image contains A(single channel alpha) or RGB(A) channels. Application must free image data as returned by {@code out_rgba}. Result image
      * format is: float x RGBA x width x height.</p>
@@ -108,7 +108,7 @@ public class TinyEXR {
     }
 
     /**
-     * Loads single-frame OpenEXR image by specifing layer name.
+     * Loads single-frame OpenEXR image by specifying layer name.
      * 
      * <p>Assume EXR image contains A(single channel alpha) or RGB(A) channels. Application must free image data as returned by {@code out_rgba}. Result image
      * format is: float x RGBA x width x height.</p>
@@ -145,7 +145,7 @@ public class TinyEXR {
      *
      * @param layer_names list of layer names. Application must free memory after using this.
      * @param num_layers  the number of layers
-     * @param err         Error string(wll be filled when the function returns error code). Free it using FreeEXRErrorMessage after using this value.
+     * @param err         Error string(will be filled when the function returns error code). Free it using FreeEXRErrorMessage after using this value.
      *
      * @return {@link #TINYEXR_SUCCESS SUCCESS} upon success.
      */
@@ -164,7 +164,7 @@ public class TinyEXR {
      *
      * @param layer_names list of layer names. Application must free memory after using this.
      * @param num_layers  the number of layers
-     * @param err         Error string(wll be filled when the function returns error code). Free it using FreeEXRErrorMessage after using this value.
+     * @param err         Error string(will be filled when the function returns error code). Free it using FreeEXRErrorMessage after using this value.
      *
      * @return {@link #TINYEXR_SUCCESS SUCCESS} upon success.
      */
