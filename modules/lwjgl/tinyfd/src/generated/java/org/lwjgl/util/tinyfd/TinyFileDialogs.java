@@ -94,6 +94,19 @@ public class TinyFileDialogs {
     /** 1 (default) or 0 : on unix, hide errors and warnings from called dialog. */
     public static final IntBuffer tinyfd_silent = tinyfd_silent();
 
+    // --- [ tinyfd_allowCursesDialogs ] ---
+
+    private static native long ntinyfd_allowCursesDialogs();
+
+    @NativeType("int *")
+    private static IntBuffer tinyfd_allowCursesDialogs() {
+        long __result = ntinyfd_allowCursesDialogs();
+        return memIntBuffer(__result, 1);
+    }
+
+    /** 0 (default) or 1 : curses dialogs are difficult to use, on windows they are only ascii. */
+    public static final IntBuffer tinyfd_allowCursesDialogs = tinyfd_allowCursesDialogs();
+
     // --- [ tinyfd_winUtf8 ] ---
 
     private static native long ntinyfd_winUtf8();
