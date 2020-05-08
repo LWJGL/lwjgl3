@@ -437,8 +437,8 @@ void par_octasphere_populate(const par_octasphere_config* config, par_octasphere
     float* write_ptr = mesh->positions;
     for (int i = 0; i < n; i++) {
         const float theta = PARO_PI * 0.5 * i / (n - 1);
-        const float point_a[] = {0, sin(theta), cos(theta)};
-        const float point_b[] = {cos(theta), sin(theta), 0};
+        const float point_a[] = {0, sinf(theta), cosf(theta)};
+        const float point_b[] = {cosf(theta), sinf(theta), 0};
         const int num_segments = n - 1 - i;
         write_ptr = paro_write_geodesic(write_ptr, point_a, point_b, num_segments);
     }
