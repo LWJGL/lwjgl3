@@ -404,6 +404,13 @@ N=\#channels_in_file     components
         intb("flag_true_if_should_flip", "the flip vertically on load flag")
     )
 
+    void(
+        "set_flip_vertically_on_load_thread",
+        "As #set_flip_vertically_on_load(), but only applies to images loaded on the thread that calls the function.",
+
+        int("flag_true_if_should_flip", "the flip vertically on load flag")
+    )
+
     char.p(
         "zlib_decode_malloc_guesssize",
         "ZLIB client - used by PNG, available for other purposes",

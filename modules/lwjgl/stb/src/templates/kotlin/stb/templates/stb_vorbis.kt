@@ -96,6 +96,13 @@ val _stb_vorbis = "STBVorbis".nativeClass(Module.STB, prefixMethod = "stb_vorbis
         DECODER
     )
 
+    stb_vorbis_comment(
+        "get_comment",
+        "Returns ogg comments.",
+
+        DECODER
+    )
+
     int(
         "get_error",
         "Returns the last error detected (clears it, too).",

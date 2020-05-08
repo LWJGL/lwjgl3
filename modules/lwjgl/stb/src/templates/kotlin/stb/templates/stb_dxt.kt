@@ -27,8 +27,10 @@ val stb_dxt = "STBDXT".nativeClass(Module.STB, prefix = "STB", prefixMethod = "s
     void(
         "compress_dxt_block",
         """
-        Call this function for every block (you must pad). The source should be a 4x4 block of RGBA data in row-major order; A is ignored if you specify
-        {@code alpha=0}; you can turn on dithering and "high quality" using {@code mode}.
+        Call this function for every block (you must pad).
+
+        The source should be a 4x4 block of RGBA data in row-major order. Alpha channel is not stored if you specify {@code alpha=0} (but you must supply some
+        constant alpha in the alpha channel). You can turn on dithering and "high quality" using {@code mode}.
         """,
 
         Check("alpha ? 16 : 8")..unsigned_char.p("dest", "a buffer in which to store the compressed block"),

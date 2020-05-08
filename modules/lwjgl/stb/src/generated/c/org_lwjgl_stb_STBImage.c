@@ -228,6 +228,11 @@ JNIEXPORT void JNICALL Java_org_lwjgl_stb_STBImage_nstbi_1set_1flip_1vertically_
     stbi_set_flip_vertically_on_load(flag_true_if_should_flip);
 }
 
+JNIEXPORT void JNICALL Java_org_lwjgl_stb_STBImage_stbi_1set_1flip_1vertically_1on_1load_1thread(JNIEnv *__env, jclass clazz, jint flag_true_if_should_flip) {
+    UNUSED_PARAMS(__env, clazz)
+    stbi_set_flip_vertically_on_load_thread(flag_true_if_should_flip);
+}
+
 JNIEXPORT jlong JNICALL Java_org_lwjgl_stb_STBImage_nstbi_1zlib_1decode_1malloc_1guesssize(JNIEnv *__env, jclass clazz, jlong bufferAddress, jint len, jint initial_size, jlong outlenAddress) {
     char const *buffer = (char const *)(intptr_t)bufferAddress;
     int *outlen = (int *)(intptr_t)outlenAddress;

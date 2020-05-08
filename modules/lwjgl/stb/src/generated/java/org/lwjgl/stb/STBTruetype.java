@@ -1037,6 +1037,29 @@ public class STBTruetype {
         return nstbtt_GetGlyphBox(info.address(), glyph_index, memAddressSafe(x0), memAddressSafe(y0), memAddressSafe(x1), memAddressSafe(y1)) != 0;
     }
 
+    // --- [ stbtt_GetKerningTableLength ] ---
+
+    public static native int nstbtt_GetKerningTableLength(long info);
+
+    public static int stbtt_GetKerningTableLength(@NativeType("stbtt_fontinfo const *") STBTTFontinfo info) {
+        return nstbtt_GetKerningTableLength(info.address());
+    }
+
+    // --- [ stbtt_GetKerningTable ] ---
+
+    /** Unsafe version of: {@link #stbtt_GetKerningTable GetKerningTable} */
+    public static native int nstbtt_GetKerningTable(long info, long table, int table_length);
+
+    /**
+     * Retrieves a complete list of all of the kerning pairs provided by the font.
+     * 
+     * <p>{@code stbtt_GetKerningTable} never writes more than {@code table_length} entries and returns how many entries it did write. The table will be sorted
+     * by {@code (a.glyph1 == b.glyph1)?(a.glyph2 < b.glyph2):(a.glyph1 < b.glyph1)}</p>
+     */
+    public static int stbtt_GetKerningTable(@NativeType("stbtt_fontinfo const *") STBTTFontinfo info, @NativeType("stbtt_kerningentry *") STBTTKerningentry.Buffer table) {
+        return nstbtt_GetKerningTable(info.address(), table.address(), table.remaining());
+    }
+
     // --- [ stbtt_IsGlyphEmpty ] ---
 
     /** Unsafe version of: {@link #stbtt_IsGlyphEmpty IsGlyphEmpty} */
@@ -1157,6 +1180,40 @@ public class STBTruetype {
             check(vertices, 1);
         }
         nstbtt_FreeShape(info.address(), vertices.address());
+    }
+
+    // --- [ stbtt_GetCodepointSVG ] ---
+
+    /** Unsafe version of: {@link #stbtt_GetCodepointSVG GetCodepointSVG} */
+    public static native int nstbtt_GetCodepointSVG(long info, int unicode_codepoint, long svg);
+
+    /**
+     * Fills {@code svg} with the character's SVG data.
+     *
+     * @return data size or 0 if SVG not found
+     */
+    public static int stbtt_GetCodepointSVG(@NativeType("stbtt_fontinfo const *") STBTTFontinfo info, int unicode_codepoint, @NativeType("char const **") PointerBuffer svg) {
+        if (CHECKS) {
+            check(svg, 1);
+        }
+        return nstbtt_GetCodepointSVG(info.address(), unicode_codepoint, memAddress(svg));
+    }
+
+    // --- [ stbtt_GetGlyphSVG ] ---
+
+    /** Unsafe version of: {@link #stbtt_GetGlyphSVG GetGlyphSVG} */
+    public static native int nstbtt_GetGlyphSVG(long info, int gl, long svg);
+
+    /**
+     * Fills {@code svg} with the character's SVG data.
+     *
+     * @return data size or 0 if SVG not found
+     */
+    public static int stbtt_GetGlyphSVG(@NativeType("stbtt_fontinfo const *") STBTTFontinfo info, int gl, @NativeType("char const **") PointerBuffer svg) {
+        if (CHECKS) {
+            check(svg, 1);
+        }
+        return nstbtt_GetGlyphSVG(info.address(), gl, memAddress(svg));
     }
 
     // --- [ stbtt_FreeBitmap ] ---

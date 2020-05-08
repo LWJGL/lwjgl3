@@ -684,6 +684,26 @@ int main(int arg, char **argv)
         nullable..Check(1)..int.p("y1", "returns the top coordinate")
     )
 
+    int(
+        "GetKerningTableLength",
+        "",
+
+        stbtt_fontinfo.const.p("info", "")
+    )
+    int(
+        "GetKerningTable",
+        """
+        Retrieves a complete list of all of the kerning pairs provided by the font.
+        
+        {@code stbtt_GetKerningTable} never writes more than {@code table_length} entries and returns how many entries it did write. The table will be sorted
+        by {@code (a.glyph1 == b.glyph1)?(a.glyph2 < b.glyph2):(a.glyph1 < b.glyph1)}        
+        """,
+
+        stbtt_fontinfo.const.p("info", ""),
+        stbtt_kerningentry.p("table", ""),
+        AutoSize("table")..int("table_length", "")
+    )
+
     // GLYPH SHAPES
 
     ByteConstant(
@@ -735,6 +755,28 @@ int main(int arg, char **argv)
 
         stbtt_fontinfo.const.p("info", "an ##STBTTFontinfo struct"),
         Check(1)..stbtt_vertex.p("vertices", "the array of ##STBTTVertex structs to free")
+    )
+
+    int(
+        "GetCodepointSVG",
+        "Fills {@code svg} with the character's SVG data.",
+
+        stbtt_fontinfo.const.p("info", ""),
+        int("unicode_codepoint", ""),
+        Check(1)..char.const.p.p("svg", ""),
+
+        returnDoc = "data size or 0 if SVG not found"
+    )
+
+    int(
+        "GetGlyphSVG",
+        "Fills {@code svg} with the character's SVG data.",
+
+        stbtt_fontinfo.const.p("info", ""),
+        int("gl", ""),
+        Check(1)..char.const.p.p("svg", ""),
+
+        returnDoc = "data size or 0 if SVG not found"
     )
 
     // BITMAP RENDERING

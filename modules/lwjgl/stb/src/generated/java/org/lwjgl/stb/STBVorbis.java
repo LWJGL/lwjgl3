@@ -129,6 +129,25 @@ public class STBVorbis {
         return __result;
     }
 
+    // --- [ stb_vorbis_get_comment ] ---
+
+    /** Unsafe version of: {@link #stb_vorbis_get_comment get_comment} */
+    public static native void nstb_vorbis_get_comment(long f, long __result);
+
+    /**
+     * Returns ogg comments.
+     *
+     * @param f an ogg vorbis file decoder
+     */
+    @NativeType("stb_vorbis_comment")
+    public static STBVorbisComment stb_vorbis_get_comment(@NativeType("stb_vorbis *") long f, @NativeType("stb_vorbis_comment") STBVorbisComment __result) {
+        if (CHECKS) {
+            check(f);
+        }
+        nstb_vorbis_get_comment(f, __result.address());
+        return __result;
+    }
+
     // --- [ stb_vorbis_get_error ] ---
 
     /** Unsafe version of: {@link #stb_vorbis_get_error get_error} */

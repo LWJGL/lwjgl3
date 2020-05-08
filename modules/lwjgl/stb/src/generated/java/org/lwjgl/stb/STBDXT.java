@@ -39,8 +39,10 @@ public class STBDXT {
     public static native void nstb_compress_dxt_block(long dest, long src_rgba_four_bytes_per_pixel, int alpha, int mode);
 
     /**
-     * Call this function for every block (you must pad). The source should be a 4x4 block of RGBA data in row-major order; A is ignored if you specify
-     * {@code alpha=0}; you can turn on dithering and "high quality" using {@code mode}.
+     * Call this function for every block (you must pad).
+     * 
+     * <p>The source should be a 4x4 block of RGBA data in row-major order. Alpha channel is not stored if you specify {@code alpha=0} (but you must supply some
+     * constant alpha in the alpha channel). You can turn on dithering and "high quality" using {@code mode}.</p>
      *
      * @param dest                          a buffer in which to store the compressed block
      * @param src_rgba_four_bytes_per_pixel the block to compress

@@ -933,6 +933,15 @@ public class STBImage {
         nstbi_set_flip_vertically_on_load(flag_true_if_should_flip ? 1 : 0);
     }
 
+    // --- [ stbi_set_flip_vertically_on_load_thread ] ---
+
+    /**
+     * As {@link #stbi_set_flip_vertically_on_load set_flip_vertically_on_load}, but only applies to images loaded on the thread that calls the function.
+     *
+     * @param flag_true_if_should_flip the flip vertically on load flag
+     */
+    public static native void stbi_set_flip_vertically_on_load_thread(int flag_true_if_should_flip);
+
     // --- [ stbi_zlib_decode_malloc_guesssize ] ---
 
     /** Unsafe version of: {@link #stbi_zlib_decode_malloc_guesssize zlib_decode_malloc_guesssize} */

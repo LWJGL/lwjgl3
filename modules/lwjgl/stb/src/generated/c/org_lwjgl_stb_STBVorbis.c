@@ -19,6 +19,12 @@ JNIEXPORT void JNICALL Java_org_lwjgl_stb_STBVorbis_nstb_1vorbis_1get_1info(JNIE
     *((stb_vorbis_info*)(intptr_t)__result) = stb_vorbis_get_info(f);
 }
 
+JNIEXPORT void JNICALL Java_org_lwjgl_stb_STBVorbis_nstb_1vorbis_1get_1comment(JNIEnv *__env, jclass clazz, jlong fAddress, jlong __result) {
+    stb_vorbis *f = (stb_vorbis *)(intptr_t)fAddress;
+    UNUSED_PARAMS(__env, clazz)
+    *((stb_vorbis_comment*)(intptr_t)__result) = stb_vorbis_get_comment(f);
+}
+
 JNIEXPORT jint JNICALL Java_org_lwjgl_stb_STBVorbis_nstb_1vorbis_1get_1error(JNIEnv *__env, jclass clazz, jlong fAddress) {
     stb_vorbis *f = (stb_vorbis *)(intptr_t)fAddress;
     UNUSED_PARAMS(__env, clazz)

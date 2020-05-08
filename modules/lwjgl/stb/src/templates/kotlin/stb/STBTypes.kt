@@ -244,6 +244,12 @@ val stbtt_fontinfo = struct(Module.STB, "STBTTFontinfo", nativeName = "stbtt_fon
     includeSTBAPI("#include \"stb_truetype.h\"")
 }
 
+val stbtt_kerningentry = struct(Module.STB, "STBTTKerningentry", nativeName = "stbtt_kerningentry", mutable = false) {
+    int("glyph1", "")
+    int("glyph2", "")
+    int("advance", "")
+}
+
 val stbtt_vertex_type = IntegerType("stbtt_vertex_type", PrimitiveMapping.SHORT)
 
 val stbtt_vertex = struct(Module.STB, "STBTTVertex", nativeName = "stbtt_vertex", mutable = false) {
@@ -287,4 +293,11 @@ val stb_vorbis_info = struct(Module.STB, "STBVorbisInfo", nativeName = "stb_vorb
     unsigned_int("setup_temp_memory_required", "")
     unsigned_int("temp_memory_required", "")
     int("max_frame_size", "")
+}
+
+val stb_vorbis_comment = struct(Module.STB, "STBVorbisComment", nativeName = "stb_vorbis_comment", mutable = false) {
+    charASCII.p("vendor", "");
+
+    AutoSize("comment_list")..int("comment_list_length", "")
+    charASCII.p.p("comment_list", "")
 }

@@ -232,6 +232,19 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_stb_STBTruetype_nstbtt_1GetGlyphBox__JIJJJ
     return (jint)stbtt_GetGlyphBox(info, glyph_index, x0, y0, x1, y1);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_stb_STBTruetype_nstbtt_1GetKerningTableLength(JNIEnv *__env, jclass clazz, jlong infoAddress) {
+    stbtt_fontinfo const *info = (stbtt_fontinfo const *)(intptr_t)infoAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)stbtt_GetKerningTableLength(info);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_stb_STBTruetype_nstbtt_1GetKerningTable(JNIEnv *__env, jclass clazz, jlong infoAddress, jlong tableAddress, jint table_length) {
+    stbtt_fontinfo const *info = (stbtt_fontinfo const *)(intptr_t)infoAddress;
+    stbtt_kerningentry *table = (stbtt_kerningentry *)(intptr_t)tableAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)stbtt_GetKerningTable(info, table, table_length);
+}
+
 JNIEXPORT jint JNICALL Java_org_lwjgl_stb_STBTruetype_nstbtt_1IsGlyphEmpty(JNIEnv *__env, jclass clazz, jlong infoAddress, jint glyph_index) {
     stbtt_fontinfo const *info = (stbtt_fontinfo const *)(intptr_t)infoAddress;
     UNUSED_PARAMS(__env, clazz)
@@ -257,6 +270,20 @@ JNIEXPORT void JNICALL Java_org_lwjgl_stb_STBTruetype_nstbtt_1FreeShape(JNIEnv *
     stbtt_vertex *vertices = (stbtt_vertex *)(intptr_t)verticesAddress;
     UNUSED_PARAMS(__env, clazz)
     stbtt_FreeShape(info, vertices);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_stb_STBTruetype_nstbtt_1GetCodepointSVG(JNIEnv *__env, jclass clazz, jlong infoAddress, jint unicode_codepoint, jlong svgAddress) {
+    stbtt_fontinfo const *info = (stbtt_fontinfo const *)(intptr_t)infoAddress;
+    char const **svg = (char const **)(intptr_t)svgAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)stbtt_GetCodepointSVG(info, unicode_codepoint, svg);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_stb_STBTruetype_nstbtt_1GetGlyphSVG(JNIEnv *__env, jclass clazz, jlong infoAddress, jint gl, jlong svgAddress) {
+    stbtt_fontinfo const *info = (stbtt_fontinfo const *)(intptr_t)infoAddress;
+    char const **svg = (char const **)(intptr_t)svgAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)stbtt_GetGlyphSVG(info, gl, svg);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_stb_STBTruetype_nstbtt_1FreeBitmap(JNIEnv *__env, jclass clazz, jlong bitmapAddress, jlong userdataAddress) {
