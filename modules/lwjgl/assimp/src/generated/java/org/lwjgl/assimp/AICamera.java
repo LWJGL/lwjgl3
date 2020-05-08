@@ -48,6 +48,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code mAspect} &ndash; 
  * Screen aspect ratio. This is the ration between the width and the height of the screen. Typical values are 4/3, 1/2 or 1/1. This value is 0 if the
  * aspect ratio is not defined in the source file. 0 is also the default value.</li>
+ * <li>{@code mOrthographicWidth} &ndash; 
+ * Half horizontal orthographic width, in scene units.
+ * 
+ * <p>The orthographic width specifies the half width of the orthographic view box. If non-zero the camera is orthographic and the {@code mAspect} should
+ * define to the ratio between the orthographic width and height and {@code mHorizontalFOV} should be set to 0. The default value is 0 (not orthographic).</p></li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -62,6 +67,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float mClipPlaneNear;
  *     float mClipPlaneFar;
  *     float mAspect;
+ *     float mOrthographicWidth;
  * }</code></pre>
  */
 @NativeType("struct aiCamera")
@@ -82,7 +88,8 @@ public class AICamera extends Struct implements NativeResource {
         MHORIZONTALFOV,
         MCLIPPLANENEAR,
         MCLIPPLANEFAR,
-        MASPECT;
+        MASPECT,
+        MORTHOGRAPHICWIDTH;
 
     static {
         Layout layout = __struct(
@@ -90,6 +97,7 @@ public class AICamera extends Struct implements NativeResource {
             __member(AIVector3D.SIZEOF, AIVector3D.ALIGNOF),
             __member(AIVector3D.SIZEOF, AIVector3D.ALIGNOF),
             __member(AIVector3D.SIZEOF, AIVector3D.ALIGNOF),
+            __member(4),
             __member(4),
             __member(4),
             __member(4),
@@ -107,6 +115,7 @@ public class AICamera extends Struct implements NativeResource {
         MCLIPPLANENEAR = layout.offsetof(5);
         MCLIPPLANEFAR = layout.offsetof(6);
         MASPECT = layout.offsetof(7);
+        MORTHOGRAPHICWIDTH = layout.offsetof(8);
     }
 
     /**
@@ -142,6 +151,8 @@ public class AICamera extends Struct implements NativeResource {
     public float mClipPlaneFar() { return nmClipPlaneFar(address()); }
     /** Returns the value of the {@code mAspect} field. */
     public float mAspect() { return nmAspect(address()); }
+    /** Returns the value of the {@code mOrthographicWidth} field. */
+    public float mOrthographicWidth() { return nmOrthographicWidth(address()); }
 
     /** Copies the specified {@link AIString} to the {@code mName} field. */
     public AICamera mName(@NativeType("struct aiString") AIString value) { nmName(address(), value); return this; }
@@ -167,6 +178,8 @@ public class AICamera extends Struct implements NativeResource {
     public AICamera mClipPlaneFar(float value) { nmClipPlaneFar(address(), value); return this; }
     /** Sets the specified value to the {@code mAspect} field. */
     public AICamera mAspect(float value) { nmAspect(address(), value); return this; }
+    /** Sets the specified value to the {@code mOrthographicWidth} field. */
+    public AICamera mOrthographicWidth(float value) { nmOrthographicWidth(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public AICamera set(
@@ -177,7 +190,8 @@ public class AICamera extends Struct implements NativeResource {
         float mHorizontalFOV,
         float mClipPlaneNear,
         float mClipPlaneFar,
-        float mAspect
+        float mAspect,
+        float mOrthographicWidth
     ) {
         mName(mName);
         mPosition(mPosition);
@@ -187,6 +201,7 @@ public class AICamera extends Struct implements NativeResource {
         mClipPlaneNear(mClipPlaneNear);
         mClipPlaneFar(mClipPlaneFar);
         mAspect(mAspect);
+        mOrthographicWidth(mOrthographicWidth);
 
         return this;
     }
@@ -362,6 +377,8 @@ public class AICamera extends Struct implements NativeResource {
     public static float nmClipPlaneFar(long struct) { return UNSAFE.getFloat(null, struct + AICamera.MCLIPPLANEFAR); }
     /** Unsafe version of {@link #mAspect}. */
     public static float nmAspect(long struct) { return UNSAFE.getFloat(null, struct + AICamera.MASPECT); }
+    /** Unsafe version of {@link #mOrthographicWidth}. */
+    public static float nmOrthographicWidth(long struct) { return UNSAFE.getFloat(null, struct + AICamera.MORTHOGRAPHICWIDTH); }
 
     /** Unsafe version of {@link #mName(AIString) mName}. */
     public static void nmName(long struct, AIString value) { memCopy(value.address(), struct + AICamera.MNAME, AIString.SIZEOF); }
@@ -379,6 +396,8 @@ public class AICamera extends Struct implements NativeResource {
     public static void nmClipPlaneFar(long struct, float value) { UNSAFE.putFloat(null, struct + AICamera.MCLIPPLANEFAR, value); }
     /** Unsafe version of {@link #mAspect(float) mAspect}. */
     public static void nmAspect(long struct, float value) { UNSAFE.putFloat(null, struct + AICamera.MASPECT, value); }
+    /** Unsafe version of {@link #mOrthographicWidth(float) mOrthographicWidth}. */
+    public static void nmOrthographicWidth(long struct, float value) { UNSAFE.putFloat(null, struct + AICamera.MORTHOGRAPHICWIDTH, value); }
 
     // -----------------------------------
 
@@ -438,6 +457,8 @@ public class AICamera extends Struct implements NativeResource {
         public float mClipPlaneFar() { return AICamera.nmClipPlaneFar(address()); }
         /** Returns the value of the {@code mAspect} field. */
         public float mAspect() { return AICamera.nmAspect(address()); }
+        /** Returns the value of the {@code mOrthographicWidth} field. */
+        public float mOrthographicWidth() { return AICamera.nmOrthographicWidth(address()); }
 
         /** Copies the specified {@link AIString} to the {@code mName} field. */
         public AICamera.Buffer mName(@NativeType("struct aiString") AIString value) { AICamera.nmName(address(), value); return this; }
@@ -463,6 +484,8 @@ public class AICamera extends Struct implements NativeResource {
         public AICamera.Buffer mClipPlaneFar(float value) { AICamera.nmClipPlaneFar(address(), value); return this; }
         /** Sets the specified value to the {@code mAspect} field. */
         public AICamera.Buffer mAspect(float value) { AICamera.nmAspect(address(), value); return this; }
+        /** Sets the specified value to the {@code mOrthographicWidth} field. */
+        public AICamera.Buffer mOrthographicWidth(float value) { AICamera.nmOrthographicWidth(address(), value); return this; }
 
     }
 

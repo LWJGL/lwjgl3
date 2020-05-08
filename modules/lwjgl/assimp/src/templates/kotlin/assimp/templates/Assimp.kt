@@ -1419,7 +1419,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
             enforce it by specifying the #Process_Triangulate flag, most export formats support only triangulate data so they would run the step anyway.
 
             If assimp detects that the input scene was directly taken from the importer side of the library (i.e. not copied using #CopyScene() and potentially
-            modified afterwards), any postprocessing steps already applied to the scene will not be applied again, unless they show non-idempotent behaviour
+            modified afterwards), any post-processing steps already applied to the scene will not be applied again, unless they show non-idempotent behavior
             (#Process_MakeLeftHanded, #Process_FlipUVs and #Process_FlipWindingOrder).
             """,
             "Process(Preset)?_\\w+", LinkMode.BITFIELD
@@ -1972,6 +1972,567 @@ aiAttachLogStream(&c);""")}
         returnDoc = "A description of that specific import format. #NULL if {@code pIndex} is out of range."
     )
 
+    intb(
+        "Vector2AreEqual",
+        "Check if 2D vectors are equal.",
+
+        aiVector2D.const.p("a", "first vector to compare"),
+        aiVector2D.const.p("b", "second vector to compare")
+    )
+
+    intb(
+        "Vector2AreEqualEpsilon",
+        "Check if 2D vectors are equal using epsilon.",
+
+        aiVector2D.const.p("a", "first vector to compare"),
+        aiVector2D.const.p("b", "second vector to compare"),
+        float("epsilon", "")
+    )
+
+    void(
+        "Vector2Add",
+        "Add 2D vectors.",
+
+        aiVector2D.p("dst", "first addend, receives result"),
+        aiVector2D.const.p("src", "vector to be added to {@code dst}")
+    )
+
+    void(
+        "Vector2Subtract",
+        "Subtract 2D vectors.",
+
+        aiVector2D.p("dst", "minuend, receives result"),
+        aiVector2D.const.p("src", "vector to be subtracted from {@code dst}")
+    )
+
+    void(
+        "Vector2Scale",
+        "Multiply a 2D vector by a scalar.",
+
+        aiVector2D.p("dst", "vector to be scaled by {@code s}"),
+        float("s", "scale factor")
+    )
+
+    void(
+        "Vector2SymMul",
+        "Multiply each component of a 2D vector with the components of another vector.",
+
+        aiVector2D.p("dst", "first vector, receives result"),
+        aiVector2D.const.p("other", "second vector")
+    )
+
+    void(
+        "Vector2DivideByScalar",
+        "Divide a 2D vector by a scalar.",
+
+        aiVector2D.p("dst", "vector to be divided by {@code s}"),
+        float("s", "scalar divisor")
+    )
+
+    void(
+        "Vector2DivideByVector",
+        "Divide each component of a 2D vector by the components of another vector.",
+
+        aiVector2D.p("dst", "vector as the dividend"),
+        aiVector2D.p("v", "vector as the divisor")
+    )
+
+    float(
+        "Vector2Length",
+        "Get the length of a 2D vector.",
+
+        aiVector2D.const.p("v", "vector to evaluate")
+    )
+
+    float(
+        "Vector2SquareLength",
+        "Get the squared length of a 2D vector.",
+
+        aiVector2D.const.p("v", "vector to evaluate")
+    )
+
+    void(
+        "Vector2Negate",
+        "Negate a 2D vector.",
+
+        aiVector2D.p("dst", "vector to be negated")
+    )
+
+    float(
+        "Vector2DotProduct",
+        "Get the dot product of 2D vectors.",
+
+        aiVector2D.const.p("a", "first vector"),
+        aiVector2D.const.p("b", "second vector"),
+
+        returnDoc = "the dot product of vectors"
+    )
+
+    void(
+        "Vector2Normalize",
+        "Normalize a 2D vector.",
+
+        aiVector2D.p("v", "vector to normalize")
+    )
+
+    intb(
+        "Vector3AreEqual",
+        "Check if 3D vectors are equal.",
+
+        aiVector3D.const.p("a", "first vector to compare"),
+        aiVector3D.const.p("b", "second vector to compare")
+    )
+
+    intb(
+        "Vector3AreEqualEpsilon",
+        "Check if 3D vectors are equal using epsilon.",
+
+        aiVector3D.const.p("a", "first vector to compare"),
+        aiVector3D.const.p("b", "second vector to compare"),
+        float.const("epsilon", "epsilon")
+    )
+
+    intb(
+        "Vector3LessThan",
+        "Check if vector {@code a} is less than vector {@code b}.",
+
+        aiVector3D.const.p("a", "first vector to compare"),
+        aiVector3D.const.p("b", "second vector to compare")
+    )
+
+    void(
+        "Vector3Add",
+        "Add 3D vectors.",
+
+        aiVector3D.p("dst", "first addend, receives result"),
+        aiVector3D.const.p("src", "vector to be added to {@code dst}")
+    )
+
+    void(
+        "Vector3Subtract",
+        "Subtract 3D vectors.",
+
+        aiVector3D.p("dst", "minuend, receives result"),
+        aiVector3D.const.p("src", "vector to be subtracted from {@code dst}")
+    )
+
+    void(
+        "Vector3Scale",
+        "Multiply a 3D vector by a scalar.",
+
+        aiVector3D.p("dst", "vector to be scaled by {@code s}"),
+        float.const("s", "scale factor")
+    )
+
+    void(
+        "Vector3SymMul",
+        "Multiply each component of a 3D vector with the components of another vector.",
+
+        aiVector3D.p("dst", "first vector, receives result"),
+        aiVector3D.const.p("other", "second vector")
+    )
+
+    void(
+        "Vector3DivideByScalar",
+        "Divide a 3D vector by a scalar.",
+
+        aiVector3D.p("dst", "vector to be divided by {@code s}"),
+        float.const("s", "scalar divisor")
+    )
+
+    void(
+        "Vector3DivideByVector",
+        "Divide each component of a 3D vector by the components of another vector.",
+
+        aiVector3D.p("dst", "vector as the dividend"),
+        aiVector3D.p("v", "vector as the divisor")
+    )
+
+    float(
+        "Vector3Length",
+        "Get the length of a 3D vector.",
+
+        aiVector3D.const.p("v", "vector to evaluate")
+    )
+
+    float(
+        "Vector3SquareLength",
+        "Get the squared length of a 3D vector.",
+
+        aiVector3D.const.p("v", "vector to evaluate")
+    )
+
+    void(
+        "Vector3Negate",
+        "Negate a 3D vector.",
+
+        aiVector3D.p("dst", "vector to be negated")
+    )
+
+    float(
+        "Vector3DotProduct",
+        "Get the dot product of 3D vectors.",
+
+        aiVector3D.const.p("a", "first vector"),
+        aiVector3D.const.p("b", "second vector"),
+
+        returnDoc = "the dot product of vectors"
+    )
+
+    void(
+        "Vector3CrossProduct",
+        "Get cross product of 3D vectors.",
+
+        aiVector3D.p("dst", "vector to receive the result"),
+        aiVector3D.const.p("a", "first vector"),
+        aiVector3D.const.p("b", "second vector"),
+
+        returnDoc = "the dot product of vectors"
+    )
+
+    void(
+        "Vector3Normalize",
+        "Normalize a 3D vector.",
+
+        aiVector3D.p("v", "vector to normalize")
+    )
+
+    void(
+        "Vector3NormalizeSafe",
+        "Check for division by zero and normalize a 3D vector.",
+
+        aiVector3D.p("v", "vector to normalize")
+    )
+
+    void(
+        "Vector3RotateByQuaternion",
+        "Rotate a 3D vector by a quaternion.",
+
+        aiVector3D.p("v", "the vector to rotate by {@code q}"),
+        aiQuaternion.const.p("q", "quaternion to use to rotate {@code v}")
+    )
+
+    void(
+        "Matrix3FromMatrix4",
+        "Construct a 3x3 matrix from a 4x4 matrix.",
+
+        aiMatrix3x3.p("dst", "receives the output matrix"),
+        aiMatrix4x4.const.p("mat", "the 4x4 matrix to use")
+    )
+
+    void(
+        "Matrix3FromQuaternion",
+        "Construct a 3x3 matrix from a quaternion.",
+
+        aiMatrix3x3.p("mat", "receives the output matrix"),
+        aiQuaternion.const.p("q", "the quaternion matrix to use")
+    )
+
+    intb(
+        "Matrix3AreEqual",
+        "Check if 3x3 matrices are equal.",
+
+        aiMatrix3x3.const.p("a", "first matrix to compare"),
+        aiMatrix3x3.const.p("b", "second matrix to compare")
+    )
+
+    intb(
+        "Matrix3AreEqualEpsilon",
+        "Check if 3x3 matrices are equal.",
+
+        aiMatrix3x3.const.p("a", "first matrix to compare"),
+        aiMatrix3x3.const.p("b", "second matrix to compare"),
+        float.const("epsilon", "epsilon")
+    )
+
+    void(
+        "Matrix3Inverse",
+        "Invert a 3x3 matrix.",
+
+        aiMatrix3x3.p("mat", "matrix to invert")
+    )
+
+    float(
+        "Matrix3Determinant",
+        "Get the determinant of a 3x3 matrix.",
+
+        aiMatrix3x3.const.p("mat", "matrix to get the determinant from")
+    )
+
+    void(
+        "Matrix3RotationZ",
+        "Get a 3x3 rotation matrix around the Z axis.",
+
+        aiMatrix3x3.p("mat", "receives the output matrix"),
+        float("angle", "rotation angle, in radians")
+    )
+
+    void(
+        "Matrix3FromRotationAroundAxis",
+        "Returns a 3x3 rotation matrix for a rotation around an arbitrary axis.",
+
+        aiMatrix3x3.p("mat", "receives the output matrix"),
+        aiVector3D.const.p("axis", "rotation axis, should be a normalized vector"),
+        float("angle", "rotation angle, in radians")
+    )
+
+    void(
+        "Matrix3Translation",
+        "Get a 3x3 translation matrix.",
+
+        aiMatrix3x3.p("mat", "receives the output matrix"),
+        aiVector2D.const.p("translation", "the translation vector")
+    )
+
+    void(
+        "Matrix3FromTo",
+        "Create a 3x3 matrix that rotates one vector to another vector.",
+
+        aiMatrix3x3.p("mat", "receives the output matrix"),
+        aiVector3D.const.p("from", "vector to rotate from"),
+        aiVector3D.const.p("to", "vector to rotate to")
+    )
+
+    void(
+        "Matrix4FromMatrix3",
+        "Construct a 4x4 matrix from a 3x3 matrix.",
+
+        aiMatrix4x4.p("dst", "receives the output matrix"),
+        aiMatrix3x3.const.p("mat", "the 3x3 matrix to use")
+    )
+
+    void(
+        "Matrix4FromScalingQuaternionPosition",
+        "Construct a 4x4 matrix from scaling, rotation and position.",
+
+        aiMatrix4x4.p("mat", "receives the output matrix"),
+        aiVector3D.const.p("scaling", "the scaling for the x,y,z axes"),
+        aiQuaternion.const.p("rotation", "the rotation as a hamilton quaternion"),
+        aiVector3D.const.p("position", "the position for the x,y,z axes")
+    )
+
+    void(
+        "Matrix4Add",
+        "Add 4x4 matrices.",
+
+        aiMatrix4x4.p("dst", "first addend, receives result"),
+        aiMatrix4x4.const.p("src", "matrix to be added to {@code dst}")
+    )
+
+    intb(
+        "Matrix4AreEqual",
+        "Check if 4x4 matrices are equal.",
+
+        aiMatrix4x4.const.p("a", "first matrix to compare"),
+        aiMatrix4x4.const.p("b", "second matrix to compare")
+    )
+
+    intb(
+        "Matrix4AreEqualEpsilon",
+        "Check if 4x4 matrices are equal.",
+
+        aiMatrix4x4.const.p("a", "first matrix to compare"),
+        aiMatrix4x4.const.p("b", "second matrix to compare"),
+        float.const("epsilon", "epsilon")
+    )
+
+    void(
+        "Matrix4Inverse",
+        "Invert a 4x4 matrix.",
+
+        aiMatrix4x4.p("mat", "matrix to invert")
+    )
+
+    float(
+        "Matrix4Determinant",
+        "Get the determinant of a 4x4 matrix.",
+
+        aiMatrix4x4.const.p("mat", "matrix to get the determinant from"),
+
+        returnDoc = "the determinant of the matrix"
+    )
+
+    intb(
+        "Matrix4IsIdentity",
+        "Returns true of the matrix is the identity matrix.",
+
+        aiMatrix4x4.const.p("mat", "matrix to get the determinant from")
+    )
+
+    void(
+        "Matrix4DecomposeIntoScalingEulerAnglesPosition",
+        "Decompose a transformation matrix into its scaling, rotational as euler angles, and translational components.",
+
+        aiMatrix4x4.const.p("mat", "matrix to decompose"),
+        aiVector3D.p("scaling", "receives the output scaling for the x,y,z axes"),
+        aiVector3D.p("rotation", "receives the output rotation as a Euler angles"),
+        aiVector3D.p("position", "receives the output position for the x,y,z axes")
+    )
+
+    void(
+        "Matrix4DecomposeIntoScalingAxisAnglePosition",
+        "Decompose a transformation matrix into its scaling, rotational split into an axis and rotational angle, and it's translational components.",
+
+        aiMatrix4x4.const.p("mat", "matrix to decompose"),
+        aiVector3D.p("scaling", "receives the rotational component"),
+        aiVector3D.p("axis", "receives the output rotation axis"),
+        Check(1)..float.p("angle", "receives the output rotation angle"),
+        aiVector3D.p("position", "receives the output position for the x,y,z axes")
+    )
+
+    void(
+        "Matrix4DecomposeNoScaling",
+        "Decompose a transformation matrix into its rotational and translational components.",
+
+        aiMatrix4x4.const.p("mat", "matrix to decompose"),
+        aiQuaternion.p("rotation", "receives the rotational component"),
+        aiVector3D.p("position", "receives the translational component")
+    )
+
+    void(
+        "Matrix4FromEulerAngles",
+        "Creates a 4x4 matrix from a set of euler angles.",
+
+        aiMatrix4x4.p("mat", "receives the output matrix"),
+        float("x", "rotation angle for the x-axis, in radians"),
+        float("y", "rotation angle for the y-axis, in radians"),
+        float("z", "rotation angle for the z-axis, in radians")
+    )
+
+    void(
+        "Matrix4RotationX",
+        "Get a 4x4 rotation matrix around the X axis.",
+
+        aiMatrix4x4.p("mat", "receives the output matrix"),
+        float("angle", "rotation angle, in radians")
+    )
+
+    void(
+        "Matrix4RotationY",
+        "Get a 4x4 rotation matrix around the Y axis.",
+
+        aiMatrix4x4.p("mat", "receives the output matrix"),
+        float("angle", "rotation angle, in radians")
+    )
+
+    void(
+        "Matrix4RotationZ",
+        "Get a 4x4 rotation matrix around the Z axis.",
+
+        aiMatrix4x4.p("mat", "receives the output matrix"),
+        float("angle", "rotation angle, in radians")
+    )
+
+    void(
+        "Matrix4FromRotationAroundAxis",
+        "Returns a 4x4 rotation matrix for a rotation around an arbitrary axis.",
+
+        aiMatrix4x4.p("mat", "receives the output matrix"),
+        aiVector3D.const.p("axis", "rotation axis, should be a normalized vector"),
+        float("angle", "rotation angle, in radians")
+    )
+
+    void(
+        "Matrix4Translation",
+        "Get a 4x4 translation matrix.",
+
+        aiMatrix4x4.p("mat", "receives the output matrix"),
+        aiVector3D.const.p("translation", "the translation vector")
+    )
+
+    void(
+        "Matrix4Scaling",
+        "Get a 4x4 scaling matrix.",
+
+        aiMatrix4x4.p("mat", "receives the output matrix"),
+        aiVector3D.const.p("scaling", "the scaling vector")
+    )
+
+    void(
+        "Matrix4FromTo",
+        "Create a 4x4 matrix that rotates one vector to another vector.",
+
+        aiMatrix4x4.p("mat", "receives the output matrix"),
+        aiVector3D.const.p("from", "vector to rotate from"),
+        aiVector3D.const.p("to", "vector to rotate to")
+    )
+
+    void(
+        "QuaternionFromEulerAngles",
+        "Create a Quaternion from euler angles.",
+
+        aiQuaternion.p("q", "receives the output quaternion"),
+        float("x", "rotation angle for the x-axis, in radians"),
+        float("y", "rotation angle for the y-axis, in radians"),
+        float("z", "rotation angle for the z-axis, in radians")
+    )
+
+    void(
+        "QuaternionFromAxisAngle",
+        "Create a Quaternion from an axis angle pair.",
+
+        aiQuaternion.p("q", "receives the output quaternion"),
+        aiVector3D.const.p("axis", "the orientation axis"),
+        float("angle", "the rotation angle, in radians")
+    )
+
+    void(
+        "QuaternionFromNormalizedQuaternion",
+        "Create a Quaternion from a normalized quaternion stored in a 3D vector.",
+
+        aiQuaternion.p("q", "receives the output quaternion"),
+        aiVector3D.const.p("normalized", "the vector that stores the quaternion")
+    )
+
+    intb(
+        "QuaternionAreEqual",
+        "Check if quaternions are equal.",
+
+        aiQuaternion.const.p("a", "first quaternion to compare"),
+        aiQuaternion.const.p("b", "second quaternion to compare")
+    )
+
+    intb(
+        "QuaternionAreEqualEpsilon",
+        "Check if quaternions are equal using epsilon.",
+
+        aiQuaternion.const.p("a", "first quaternion to compare"),
+        aiQuaternion.const.p("b", "second quaternion to compare"),
+        float.const("epsilon", "epsilon")
+    )
+
+    void(
+        "QuaternionNormalize",
+        "Normalize a quaternion.",
+
+        aiQuaternion.p("q", "quaternion to normalize")
+    )
+
+    void(
+        "QuaternionConjugate",
+        "Compute quaternion conjugate.",
+
+        aiQuaternion.p("q", "quaternion to compute conjugate, receives the output quaternion")
+    )
+
+    void(
+        "QuaternionMultiply",
+        "Multiply quaternions.",
+
+        aiQuaternion.p("dst", "first quaternion, receives the output quaternion"),
+        aiQuaternion.const.p("q", "second quaternion")
+    )
+
+    void(
+        "QuaternionInterpolate",
+        "Performs a spherical interpolation between two quaternions.",
+
+        aiQuaternion.p("dst", "receives the quaternion resulting from the interpolation"),
+        aiQuaternion.const.p("start", "quaternion when {@code factor == 0}"),
+        aiQuaternion.const.p("end", "quaternion when {@code factor == 1}"),
+        float("factor", "interpolation factor between 0 and 1")
+    )
+
     // importerdesc.h
 
     EnumConstant(
@@ -2294,10 +2855,10 @@ aiAttachLogStream(&c);""")}
         "_AI_MATKEY_UVTRANSFORM_BASE".."\$tex.uvtrafo",
         "_AI_MATKEY_TEXFLAGS_BASE".."\$tex.flags"
     ).noPrefix()
-    
+
     StringConstant(
         "PBR Material keys",
-        
+
         "AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_BASE_COLOR_FACTOR".."\$mat.gltf.pbrMetallicRoughness.baseColorFactor",
         "AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLIC_FACTOR".."\$mat.gltf.pbrMetallicRoughness.metallicFactor",
         "AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_ROUGHNESS_FACTOR".."\$mat.gltf.pbrMetallicRoughness.roughnessFactor",
@@ -2321,6 +2882,15 @@ aiAttachLogStream(&c);""")}
         "AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_BASE_COLOR_TEXTURE".."aiTextureType_DIFFUSE",
         "AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLICROUGHNESS_TEXTURE".."aiTextureType_UNKNOWN"
     ).noPrefix()
+
+    charASCII.const.p(
+        "TextureTypeToString",
+        "Get a string for a given {@code aiTextureType}.",
+
+        aiTextureType("in", ""),
+
+        noPrefix = true
+    )
 
     val GetMaterialProperty = aiReturn(
         "GetMaterialProperty",

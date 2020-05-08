@@ -9,9 +9,11 @@ import javax.annotation.*;
 
 import java.nio.*;
 
+import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
 
 /**
  * <h3>Layout</h3>
@@ -23,7 +25,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct aiVector2D")
-public class AIVector2D extends Struct {
+public class AIVector2D extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -69,6 +71,22 @@ public class AIVector2D extends Struct {
 
     // -----------------------------------
 
+    /** Returns a new {@code AIVector2D} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    public static AIVector2D malloc() {
+        return wrap(AIVector2D.class, nmemAllocChecked(SIZEOF));
+    }
+
+    /** Returns a new {@code AIVector2D} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    public static AIVector2D calloc() {
+        return wrap(AIVector2D.class, nmemCallocChecked(1, SIZEOF));
+    }
+
+    /** Returns a new {@code AIVector2D} instance allocated with {@link BufferUtils}. */
+    public static AIVector2D create() {
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(AIVector2D.class, memAddress(container), container);
+    }
+
     /** Returns a new {@code AIVector2D} instance for the specified memory address. */
     public static AIVector2D create(long address) {
         return wrap(AIVector2D.class, address);
@@ -78,6 +96,34 @@ public class AIVector2D extends Struct {
     @Nullable
     public static AIVector2D createSafe(long address) {
         return address == NULL ? null : wrap(AIVector2D.class, address);
+    }
+
+    /**
+     * Returns a new {@link AIVector2D.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static AIVector2D.Buffer malloc(int capacity) {
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+    }
+
+    /**
+     * Returns a new {@link AIVector2D.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static AIVector2D.Buffer calloc(int capacity) {
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link AIVector2D.Buffer} instance allocated with {@link BufferUtils}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static AIVector2D.Buffer create(int capacity) {
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -98,6 +144,74 @@ public class AIVector2D extends Struct {
 
     // -----------------------------------
 
+    /** Returns a new {@code AIVector2D} instance allocated on the thread-local {@link MemoryStack}. */
+    public static AIVector2D mallocStack() {
+        return mallocStack(stackGet());
+    }
+
+    /** Returns a new {@code AIVector2D} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    public static AIVector2D callocStack() {
+        return callocStack(stackGet());
+    }
+
+    /**
+     * Returns a new {@code AIVector2D} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static AIVector2D mallocStack(MemoryStack stack) {
+        return wrap(AIVector2D.class, stack.nmalloc(ALIGNOF, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@code AIVector2D} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static AIVector2D callocStack(MemoryStack stack) {
+        return wrap(AIVector2D.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@link AIVector2D.Buffer} instance allocated on the thread-local {@link MemoryStack}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static AIVector2D.Buffer mallocStack(int capacity) {
+        return mallocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link AIVector2D.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static AIVector2D.Buffer callocStack(int capacity) {
+        return callocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link AIVector2D.Buffer} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static AIVector2D.Buffer mallocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link AIVector2D.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static AIVector2D.Buffer callocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+    }
+
+    // -----------------------------------
+
     /** Unsafe version of {@link #x}. */
     public static float nx(long struct) { return UNSAFE.getFloat(null, struct + AIVector2D.X); }
     /** Unsafe version of {@link #y}. */
@@ -106,7 +220,7 @@ public class AIVector2D extends Struct {
     // -----------------------------------
 
     /** An array of {@link AIVector2D} structs. */
-    public static class Buffer extends StructBuffer<AIVector2D, Buffer> {
+    public static class Buffer extends StructBuffer<AIVector2D, Buffer> implements NativeResource {
 
         private static final AIVector2D ELEMENT_FACTORY = AIVector2D.create(-1L);
 

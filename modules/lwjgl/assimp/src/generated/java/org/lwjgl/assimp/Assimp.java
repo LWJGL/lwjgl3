@@ -2102,64 +2102,133 @@ public class Assimp {
 
         /** Function address. */
         public static final long
-            GetExportFormatCount               = apiGetFunctionAddress(ASSIMP, "aiGetExportFormatCount"),
-            GetExportFormatDescription         = apiGetFunctionAddress(ASSIMP, "aiGetExportFormatDescription"),
-            ReleaseExportFormatDescription     = apiGetFunctionAddress(ASSIMP, "aiReleaseExportFormatDescription"),
-            CopyScene                          = apiGetFunctionAddress(ASSIMP, "aiCopyScene"),
-            FreeScene                          = apiGetFunctionAddress(ASSIMP, "aiFreeScene"),
-            ExportScene                        = apiGetFunctionAddress(ASSIMP, "aiExportScene"),
-            ExportSceneEx                      = apiGetFunctionAddress(ASSIMP, "aiExportSceneEx"),
-            ExportSceneToBlob                  = apiGetFunctionAddress(ASSIMP, "aiExportSceneToBlob"),
-            ReleaseExportBlob                  = apiGetFunctionAddress(ASSIMP, "aiReleaseExportBlob"),
-            ImportFile                         = apiGetFunctionAddress(ASSIMP, "aiImportFile"),
-            ImportFileEx                       = apiGetFunctionAddress(ASSIMP, "aiImportFileEx"),
-            ImportFileExWithProperties         = apiGetFunctionAddress(ASSIMP, "aiImportFileExWithProperties"),
-            ImportFileFromMemory               = apiGetFunctionAddress(ASSIMP, "aiImportFileFromMemory"),
-            ImportFileFromMemoryWithProperties = apiGetFunctionAddress(ASSIMP, "aiImportFileFromMemoryWithProperties"),
-            ApplyPostProcessing                = apiGetFunctionAddress(ASSIMP, "aiApplyPostProcessing"),
-            AttachLogStream                    = apiGetFunctionAddress(ASSIMP, "aiAttachLogStream"),
-            EnableVerboseLogging               = apiGetFunctionAddress(ASSIMP, "aiEnableVerboseLogging"),
-            DetachLogStream                    = apiGetFunctionAddress(ASSIMP, "aiDetachLogStream"),
-            DetachAllLogStreams                = apiGetFunctionAddress(ASSIMP, "aiDetachAllLogStreams"),
-            ReleaseImport                      = apiGetFunctionAddress(ASSIMP, "aiReleaseImport"),
-            GetErrorString                     = apiGetFunctionAddress(ASSIMP, "aiGetErrorString"),
-            IsExtensionSupported               = apiGetFunctionAddress(ASSIMP, "aiIsExtensionSupported"),
-            GetExtensionList                   = apiGetFunctionAddress(ASSIMP, "aiGetExtensionList"),
-            GetMemoryRequirements              = apiGetFunctionAddress(ASSIMP, "aiGetMemoryRequirements"),
-            CreatePropertyStore                = apiGetFunctionAddress(ASSIMP, "aiCreatePropertyStore"),
-            ReleasePropertyStore               = apiGetFunctionAddress(ASSIMP, "aiReleasePropertyStore"),
-            SetImportPropertyInteger           = apiGetFunctionAddress(ASSIMP, "aiSetImportPropertyInteger"),
-            SetImportPropertyFloat             = apiGetFunctionAddress(ASSIMP, "aiSetImportPropertyFloat"),
-            SetImportPropertyString            = apiGetFunctionAddress(ASSIMP, "aiSetImportPropertyString"),
-            SetImportPropertyMatrix            = apiGetFunctionAddress(ASSIMP, "aiSetImportPropertyMatrix"),
-            CreateQuaternionFromMatrix         = apiGetFunctionAddress(ASSIMP, "aiCreateQuaternionFromMatrix"),
-            DecomposeMatrix                    = apiGetFunctionAddress(ASSIMP, "aiDecomposeMatrix"),
-            TransposeMatrix4                   = apiGetFunctionAddress(ASSIMP, "aiTransposeMatrix4"),
-            TransposeMatrix3                   = apiGetFunctionAddress(ASSIMP, "aiTransposeMatrix3"),
-            TransformVecByMatrix3              = apiGetFunctionAddress(ASSIMP, "aiTransformVecByMatrix3"),
-            TransformVecByMatrix4              = apiGetFunctionAddress(ASSIMP, "aiTransformVecByMatrix4"),
-            MultiplyMatrix4                    = apiGetFunctionAddress(ASSIMP, "aiMultiplyMatrix4"),
-            MultiplyMatrix3                    = apiGetFunctionAddress(ASSIMP, "aiMultiplyMatrix3"),
-            IdentityMatrix3                    = apiGetFunctionAddress(ASSIMP, "aiIdentityMatrix3"),
-            IdentityMatrix4                    = apiGetFunctionAddress(ASSIMP, "aiIdentityMatrix4"),
-            GetImportFormatCount               = apiGetFunctionAddress(ASSIMP, "aiGetImportFormatCount"),
-            GetImportFormatDescription         = apiGetFunctionAddress(ASSIMP, "aiGetImportFormatDescription"),
-            GetImporterDesc                    = apiGetFunctionAddress(ASSIMP, "aiGetImporterDesc"),
-            GetMaterialProperty                = apiGetFunctionAddress(ASSIMP, "aiGetMaterialProperty"),
-            GetMaterialFloatArray              = apiGetFunctionAddress(ASSIMP, "aiGetMaterialFloatArray"),
-            GetMaterialIntegerArray            = apiGetFunctionAddress(ASSIMP, "aiGetMaterialIntegerArray"),
-            GetMaterialColor                   = apiGetFunctionAddress(ASSIMP, "aiGetMaterialColor"),
-            GetMaterialUVTransform             = apiGetFunctionAddress(ASSIMP, "aiGetMaterialUVTransform"),
-            GetMaterialString                  = apiGetFunctionAddress(ASSIMP, "aiGetMaterialString"),
-            GetMaterialTextureCount            = apiGetFunctionAddress(ASSIMP, "aiGetMaterialTextureCount"),
-            GetMaterialTexture                 = apiGetFunctionAddress(ASSIMP, "aiGetMaterialTexture"),
-            GetLegalString                     = apiGetFunctionAddress(ASSIMP, "aiGetLegalString"),
-            GetVersionPatch                    = apiGetFunctionAddress(ASSIMP, "aiGetVersionPatch"),
-            GetVersionMinor                    = apiGetFunctionAddress(ASSIMP, "aiGetVersionMinor"),
-            GetVersionMajor                    = apiGetFunctionAddress(ASSIMP, "aiGetVersionMajor"),
-            GetVersionRevision                 = apiGetFunctionAddress(ASSIMP, "aiGetVersionRevision"),
-            GetBranchName                      = apiGetFunctionAddress(ASSIMP, "aiGetBranchName"),
-            GetCompileFlags                    = apiGetFunctionAddress(ASSIMP, "aiGetCompileFlags");
+            GetExportFormatCount                           = apiGetFunctionAddress(ASSIMP, "aiGetExportFormatCount"),
+            GetExportFormatDescription                     = apiGetFunctionAddress(ASSIMP, "aiGetExportFormatDescription"),
+            ReleaseExportFormatDescription                 = apiGetFunctionAddress(ASSIMP, "aiReleaseExportFormatDescription"),
+            CopyScene                                      = apiGetFunctionAddress(ASSIMP, "aiCopyScene"),
+            FreeScene                                      = apiGetFunctionAddress(ASSIMP, "aiFreeScene"),
+            ExportScene                                    = apiGetFunctionAddress(ASSIMP, "aiExportScene"),
+            ExportSceneEx                                  = apiGetFunctionAddress(ASSIMP, "aiExportSceneEx"),
+            ExportSceneToBlob                              = apiGetFunctionAddress(ASSIMP, "aiExportSceneToBlob"),
+            ReleaseExportBlob                              = apiGetFunctionAddress(ASSIMP, "aiReleaseExportBlob"),
+            ImportFile                                     = apiGetFunctionAddress(ASSIMP, "aiImportFile"),
+            ImportFileEx                                   = apiGetFunctionAddress(ASSIMP, "aiImportFileEx"),
+            ImportFileExWithProperties                     = apiGetFunctionAddress(ASSIMP, "aiImportFileExWithProperties"),
+            ImportFileFromMemory                           = apiGetFunctionAddress(ASSIMP, "aiImportFileFromMemory"),
+            ImportFileFromMemoryWithProperties             = apiGetFunctionAddress(ASSIMP, "aiImportFileFromMemoryWithProperties"),
+            ApplyPostProcessing                            = apiGetFunctionAddress(ASSIMP, "aiApplyPostProcessing"),
+            AttachLogStream                                = apiGetFunctionAddress(ASSIMP, "aiAttachLogStream"),
+            EnableVerboseLogging                           = apiGetFunctionAddress(ASSIMP, "aiEnableVerboseLogging"),
+            DetachLogStream                                = apiGetFunctionAddress(ASSIMP, "aiDetachLogStream"),
+            DetachAllLogStreams                            = apiGetFunctionAddress(ASSIMP, "aiDetachAllLogStreams"),
+            ReleaseImport                                  = apiGetFunctionAddress(ASSIMP, "aiReleaseImport"),
+            GetErrorString                                 = apiGetFunctionAddress(ASSIMP, "aiGetErrorString"),
+            IsExtensionSupported                           = apiGetFunctionAddress(ASSIMP, "aiIsExtensionSupported"),
+            GetExtensionList                               = apiGetFunctionAddress(ASSIMP, "aiGetExtensionList"),
+            GetMemoryRequirements                          = apiGetFunctionAddress(ASSIMP, "aiGetMemoryRequirements"),
+            CreatePropertyStore                            = apiGetFunctionAddress(ASSIMP, "aiCreatePropertyStore"),
+            ReleasePropertyStore                           = apiGetFunctionAddress(ASSIMP, "aiReleasePropertyStore"),
+            SetImportPropertyInteger                       = apiGetFunctionAddress(ASSIMP, "aiSetImportPropertyInteger"),
+            SetImportPropertyFloat                         = apiGetFunctionAddress(ASSIMP, "aiSetImportPropertyFloat"),
+            SetImportPropertyString                        = apiGetFunctionAddress(ASSIMP, "aiSetImportPropertyString"),
+            SetImportPropertyMatrix                        = apiGetFunctionAddress(ASSIMP, "aiSetImportPropertyMatrix"),
+            CreateQuaternionFromMatrix                     = apiGetFunctionAddress(ASSIMP, "aiCreateQuaternionFromMatrix"),
+            DecomposeMatrix                                = apiGetFunctionAddress(ASSIMP, "aiDecomposeMatrix"),
+            TransposeMatrix4                               = apiGetFunctionAddress(ASSIMP, "aiTransposeMatrix4"),
+            TransposeMatrix3                               = apiGetFunctionAddress(ASSIMP, "aiTransposeMatrix3"),
+            TransformVecByMatrix3                          = apiGetFunctionAddress(ASSIMP, "aiTransformVecByMatrix3"),
+            TransformVecByMatrix4                          = apiGetFunctionAddress(ASSIMP, "aiTransformVecByMatrix4"),
+            MultiplyMatrix4                                = apiGetFunctionAddress(ASSIMP, "aiMultiplyMatrix4"),
+            MultiplyMatrix3                                = apiGetFunctionAddress(ASSIMP, "aiMultiplyMatrix3"),
+            IdentityMatrix3                                = apiGetFunctionAddress(ASSIMP, "aiIdentityMatrix3"),
+            IdentityMatrix4                                = apiGetFunctionAddress(ASSIMP, "aiIdentityMatrix4"),
+            GetImportFormatCount                           = apiGetFunctionAddress(ASSIMP, "aiGetImportFormatCount"),
+            GetImportFormatDescription                     = apiGetFunctionAddress(ASSIMP, "aiGetImportFormatDescription"),
+            Vector2AreEqual                                = apiGetFunctionAddress(ASSIMP, "aiVector2AreEqual"),
+            Vector2AreEqualEpsilon                         = apiGetFunctionAddress(ASSIMP, "aiVector2AreEqualEpsilon"),
+            Vector2Add                                     = apiGetFunctionAddress(ASSIMP, "aiVector2Add"),
+            Vector2Subtract                                = apiGetFunctionAddress(ASSIMP, "aiVector2Subtract"),
+            Vector2Scale                                   = apiGetFunctionAddress(ASSIMP, "aiVector2Scale"),
+            Vector2SymMul                                  = apiGetFunctionAddress(ASSIMP, "aiVector2SymMul"),
+            Vector2DivideByScalar                          = apiGetFunctionAddress(ASSIMP, "aiVector2DivideByScalar"),
+            Vector2DivideByVector                          = apiGetFunctionAddress(ASSIMP, "aiVector2DivideByVector"),
+            Vector2Length                                  = apiGetFunctionAddress(ASSIMP, "aiVector2Length"),
+            Vector2SquareLength                            = apiGetFunctionAddress(ASSIMP, "aiVector2SquareLength"),
+            Vector2Negate                                  = apiGetFunctionAddress(ASSIMP, "aiVector2Negate"),
+            Vector2DotProduct                              = apiGetFunctionAddress(ASSIMP, "aiVector2DotProduct"),
+            Vector2Normalize                               = apiGetFunctionAddress(ASSIMP, "aiVector2Normalize"),
+            Vector3AreEqual                                = apiGetFunctionAddress(ASSIMP, "aiVector3AreEqual"),
+            Vector3AreEqualEpsilon                         = apiGetFunctionAddress(ASSIMP, "aiVector3AreEqualEpsilon"),
+            Vector3LessThan                                = apiGetFunctionAddress(ASSIMP, "aiVector3LessThan"),
+            Vector3Add                                     = apiGetFunctionAddress(ASSIMP, "aiVector3Add"),
+            Vector3Subtract                                = apiGetFunctionAddress(ASSIMP, "aiVector3Subtract"),
+            Vector3Scale                                   = apiGetFunctionAddress(ASSIMP, "aiVector3Scale"),
+            Vector3SymMul                                  = apiGetFunctionAddress(ASSIMP, "aiVector3SymMul"),
+            Vector3DivideByScalar                          = apiGetFunctionAddress(ASSIMP, "aiVector3DivideByScalar"),
+            Vector3DivideByVector                          = apiGetFunctionAddress(ASSIMP, "aiVector3DivideByVector"),
+            Vector3Length                                  = apiGetFunctionAddress(ASSIMP, "aiVector3Length"),
+            Vector3SquareLength                            = apiGetFunctionAddress(ASSIMP, "aiVector3SquareLength"),
+            Vector3Negate                                  = apiGetFunctionAddress(ASSIMP, "aiVector3Negate"),
+            Vector3DotProduct                              = apiGetFunctionAddress(ASSIMP, "aiVector3DotProduct"),
+            Vector3CrossProduct                            = apiGetFunctionAddress(ASSIMP, "aiVector3CrossProduct"),
+            Vector3Normalize                               = apiGetFunctionAddress(ASSIMP, "aiVector3Normalize"),
+            Vector3NormalizeSafe                           = apiGetFunctionAddress(ASSIMP, "aiVector3NormalizeSafe"),
+            Vector3RotateByQuaternion                      = apiGetFunctionAddress(ASSIMP, "aiVector3RotateByQuaternion"),
+            Matrix3FromMatrix4                             = apiGetFunctionAddress(ASSIMP, "aiMatrix3FromMatrix4"),
+            Matrix3FromQuaternion                          = apiGetFunctionAddress(ASSIMP, "aiMatrix3FromQuaternion"),
+            Matrix3AreEqual                                = apiGetFunctionAddress(ASSIMP, "aiMatrix3AreEqual"),
+            Matrix3AreEqualEpsilon                         = apiGetFunctionAddress(ASSIMP, "aiMatrix3AreEqualEpsilon"),
+            Matrix3Inverse                                 = apiGetFunctionAddress(ASSIMP, "aiMatrix3Inverse"),
+            Matrix3Determinant                             = apiGetFunctionAddress(ASSIMP, "aiMatrix3Determinant"),
+            Matrix3RotationZ                               = apiGetFunctionAddress(ASSIMP, "aiMatrix3RotationZ"),
+            Matrix3FromRotationAroundAxis                  = apiGetFunctionAddress(ASSIMP, "aiMatrix3FromRotationAroundAxis"),
+            Matrix3Translation                             = apiGetFunctionAddress(ASSIMP, "aiMatrix3Translation"),
+            Matrix3FromTo                                  = apiGetFunctionAddress(ASSIMP, "aiMatrix3FromTo"),
+            Matrix4FromMatrix3                             = apiGetFunctionAddress(ASSIMP, "aiMatrix4FromMatrix3"),
+            Matrix4FromScalingQuaternionPosition           = apiGetFunctionAddress(ASSIMP, "aiMatrix4FromScalingQuaternionPosition"),
+            Matrix4Add                                     = apiGetFunctionAddress(ASSIMP, "aiMatrix4Add"),
+            Matrix4AreEqual                                = apiGetFunctionAddress(ASSIMP, "aiMatrix4AreEqual"),
+            Matrix4AreEqualEpsilon                         = apiGetFunctionAddress(ASSIMP, "aiMatrix4AreEqualEpsilon"),
+            Matrix4Inverse                                 = apiGetFunctionAddress(ASSIMP, "aiMatrix4Inverse"),
+            Matrix4Determinant                             = apiGetFunctionAddress(ASSIMP, "aiMatrix4Determinant"),
+            Matrix4IsIdentity                              = apiGetFunctionAddress(ASSIMP, "aiMatrix4IsIdentity"),
+            Matrix4DecomposeIntoScalingEulerAnglesPosition = apiGetFunctionAddress(ASSIMP, "aiMatrix4DecomposeIntoScalingEulerAnglesPosition"),
+            Matrix4DecomposeIntoScalingAxisAnglePosition   = apiGetFunctionAddress(ASSIMP, "aiMatrix4DecomposeIntoScalingAxisAnglePosition"),
+            Matrix4DecomposeNoScaling                      = apiGetFunctionAddress(ASSIMP, "aiMatrix4DecomposeNoScaling"),
+            Matrix4FromEulerAngles                         = apiGetFunctionAddress(ASSIMP, "aiMatrix4FromEulerAngles"),
+            Matrix4RotationX                               = apiGetFunctionAddress(ASSIMP, "aiMatrix4RotationX"),
+            Matrix4RotationY                               = apiGetFunctionAddress(ASSIMP, "aiMatrix4RotationY"),
+            Matrix4RotationZ                               = apiGetFunctionAddress(ASSIMP, "aiMatrix4RotationZ"),
+            Matrix4FromRotationAroundAxis                  = apiGetFunctionAddress(ASSIMP, "aiMatrix4FromRotationAroundAxis"),
+            Matrix4Translation                             = apiGetFunctionAddress(ASSIMP, "aiMatrix4Translation"),
+            Matrix4Scaling                                 = apiGetFunctionAddress(ASSIMP, "aiMatrix4Scaling"),
+            Matrix4FromTo                                  = apiGetFunctionAddress(ASSIMP, "aiMatrix4FromTo"),
+            QuaternionFromEulerAngles                      = apiGetFunctionAddress(ASSIMP, "aiQuaternionFromEulerAngles"),
+            QuaternionFromAxisAngle                        = apiGetFunctionAddress(ASSIMP, "aiQuaternionFromAxisAngle"),
+            QuaternionFromNormalizedQuaternion             = apiGetFunctionAddress(ASSIMP, "aiQuaternionFromNormalizedQuaternion"),
+            QuaternionAreEqual                             = apiGetFunctionAddress(ASSIMP, "aiQuaternionAreEqual"),
+            QuaternionAreEqualEpsilon                      = apiGetFunctionAddress(ASSIMP, "aiQuaternionAreEqualEpsilon"),
+            QuaternionNormalize                            = apiGetFunctionAddress(ASSIMP, "aiQuaternionNormalize"),
+            QuaternionConjugate                            = apiGetFunctionAddress(ASSIMP, "aiQuaternionConjugate"),
+            QuaternionMultiply                             = apiGetFunctionAddress(ASSIMP, "aiQuaternionMultiply"),
+            QuaternionInterpolate                          = apiGetFunctionAddress(ASSIMP, "aiQuaternionInterpolate"),
+            GetImporterDesc                                = apiGetFunctionAddress(ASSIMP, "aiGetImporterDesc"),
+            TextureTypeToString                            = apiGetFunctionAddress(ASSIMP, "TextureTypeToString"),
+            GetMaterialProperty                            = apiGetFunctionAddress(ASSIMP, "aiGetMaterialProperty"),
+            GetMaterialFloatArray                          = apiGetFunctionAddress(ASSIMP, "aiGetMaterialFloatArray"),
+            GetMaterialIntegerArray                        = apiGetFunctionAddress(ASSIMP, "aiGetMaterialIntegerArray"),
+            GetMaterialColor                               = apiGetFunctionAddress(ASSIMP, "aiGetMaterialColor"),
+            GetMaterialUVTransform                         = apiGetFunctionAddress(ASSIMP, "aiGetMaterialUVTransform"),
+            GetMaterialString                              = apiGetFunctionAddress(ASSIMP, "aiGetMaterialString"),
+            GetMaterialTextureCount                        = apiGetFunctionAddress(ASSIMP, "aiGetMaterialTextureCount"),
+            GetMaterialTexture                             = apiGetFunctionAddress(ASSIMP, "aiGetMaterialTexture"),
+            GetLegalString                                 = apiGetFunctionAddress(ASSIMP, "aiGetLegalString"),
+            GetVersionPatch                                = apiGetFunctionAddress(ASSIMP, "aiGetVersionPatch"),
+            GetVersionMinor                                = apiGetFunctionAddress(ASSIMP, "aiGetVersionMinor"),
+            GetVersionMajor                                = apiGetFunctionAddress(ASSIMP, "aiGetVersionMajor"),
+            GetVersionRevision                             = apiGetFunctionAddress(ASSIMP, "aiGetVersionRevision"),
+            GetBranchName                                  = apiGetFunctionAddress(ASSIMP, "aiGetBranchName"),
+            GetCompileFlags                                = apiGetFunctionAddress(ASSIMP, "aiGetCompileFlags");
 
     }
 
@@ -2371,7 +2440,7 @@ public class Assimp {
      *                       enforce it by specifying the {@link #aiProcess_Triangulate Process_Triangulate} flag, most export formats support only triangulate data so they would run the step anyway.
      *                       
      *                       <p>If assimp detects that the input scene was directly taken from the importer side of the library (i.e. not copied using {@link #aiCopyScene CopyScene} and potentially
-     *                       modified afterwards), any postprocessing steps already applied to the scene will not be applied again, unless they show non-idempotent behaviour
+     *                       modified afterwards), any post-processing steps already applied to the scene will not be applied again, unless they show non-idempotent behavior
      *                       ({@link #aiProcess_MakeLeftHanded Process_MakeLeftHanded}, {@link #aiProcess_FlipUVs Process_FlipUVs} and {@link #aiProcess_FlipWindingOrder Process_FlipWindingOrder}). One or more of:<br></p><table><tr><td>{@link #aiProcess_CalcTangentSpace Process_CalcTangentSpace}</td><td>{@link #aiProcess_JoinIdenticalVertices Process_JoinIdenticalVertices}</td><td>{@link #aiProcess_MakeLeftHanded Process_MakeLeftHanded}</td></tr><tr><td>{@link #aiProcess_Triangulate Process_Triangulate}</td><td>{@link #aiProcess_RemoveComponent Process_RemoveComponent}</td><td>{@link #aiProcess_GenNormals Process_GenNormals}</td></tr><tr><td>{@link #aiProcess_GenSmoothNormals Process_GenSmoothNormals}</td><td>{@link #aiProcess_SplitLargeMeshes Process_SplitLargeMeshes}</td><td>{@link #aiProcess_PreTransformVertices Process_PreTransformVertices}</td></tr><tr><td>{@link #aiProcess_LimitBoneWeights Process_LimitBoneWeights}</td><td>{@link #aiProcess_ValidateDataStructure Process_ValidateDataStructure}</td><td>{@link #aiProcess_ImproveCacheLocality Process_ImproveCacheLocality}</td></tr><tr><td>{@link #aiProcess_RemoveRedundantMaterials Process_RemoveRedundantMaterials}</td><td>{@link #aiProcess_FixInfacingNormals Process_FixInfacingNormals}</td><td>{@link #aiProcess_PopulateArmatureData Process_PopulateArmatureData}</td></tr><tr><td>{@link #aiProcess_SortByPType Process_SortByPType}</td><td>{@link #aiProcess_FindDegenerates Process_FindDegenerates}</td><td>{@link #aiProcess_FindInvalidData Process_FindInvalidData}</td></tr><tr><td>{@link #aiProcess_GenUVCoords Process_GenUVCoords}</td><td>{@link #aiProcess_TransformUVCoords Process_TransformUVCoords}</td><td>{@link #aiProcess_FindInstances Process_FindInstances}</td></tr><tr><td>{@link #aiProcess_OptimizeMeshes Process_OptimizeMeshes}</td><td>{@link #aiProcess_OptimizeGraph Process_OptimizeGraph}</td><td>{@link #aiProcess_FlipUVs Process_FlipUVs}</td></tr><tr><td>{@link #aiProcess_FlipWindingOrder Process_FlipWindingOrder}</td><td>{@link #aiProcess_SplitByBoneCount Process_SplitByBoneCount}</td><td>{@link #aiProcess_Debone Process_Debone}</td></tr><tr><td>{@link #aiProcess_GlobalScale Process_GlobalScale}</td><td>{@link #aiProcess_EmbedTextures Process_EmbedTextures}</td><td>{@link #aiProcess_ForceGenNormals Process_ForceGenNormals}</td></tr><tr><td>{@link #aiProcess_DropNormals Process_DropNormals}</td><td>{@link #aiProcess_GenBoundingBoxes Process_GenBoundingBoxes}</td><td>{@link #aiProcess_ConvertToLeftHanded Process_ConvertToLeftHanded}</td></tr><tr><td>{@link #aiProcessPreset_TargetRealtime_Fast ProcessPreset_TargetRealtime_Fast}</td><td>{@link #aiProcessPreset_TargetRealtime_Quality ProcessPreset_TargetRealtime_Quality}</td><td>{@link #aiProcessPreset_TargetRealtime_MaxQuality ProcessPreset_TargetRealtime_MaxQuality}</td></tr></table>
      *
      * @return a status code indicating the result of the export
@@ -2410,7 +2479,7 @@ public class Assimp {
      *                       enforce it by specifying the {@link #aiProcess_Triangulate Process_Triangulate} flag, most export formats support only triangulate data so they would run the step anyway.
      *                       
      *                       <p>If assimp detects that the input scene was directly taken from the importer side of the library (i.e. not copied using {@link #aiCopyScene CopyScene} and potentially
-     *                       modified afterwards), any postprocessing steps already applied to the scene will not be applied again, unless they show non-idempotent behaviour
+     *                       modified afterwards), any post-processing steps already applied to the scene will not be applied again, unless they show non-idempotent behavior
      *                       ({@link #aiProcess_MakeLeftHanded Process_MakeLeftHanded}, {@link #aiProcess_FlipUVs Process_FlipUVs} and {@link #aiProcess_FlipWindingOrder Process_FlipWindingOrder}). One or more of:<br></p><table><tr><td>{@link #aiProcess_CalcTangentSpace Process_CalcTangentSpace}</td><td>{@link #aiProcess_JoinIdenticalVertices Process_JoinIdenticalVertices}</td><td>{@link #aiProcess_MakeLeftHanded Process_MakeLeftHanded}</td></tr><tr><td>{@link #aiProcess_Triangulate Process_Triangulate}</td><td>{@link #aiProcess_RemoveComponent Process_RemoveComponent}</td><td>{@link #aiProcess_GenNormals Process_GenNormals}</td></tr><tr><td>{@link #aiProcess_GenSmoothNormals Process_GenSmoothNormals}</td><td>{@link #aiProcess_SplitLargeMeshes Process_SplitLargeMeshes}</td><td>{@link #aiProcess_PreTransformVertices Process_PreTransformVertices}</td></tr><tr><td>{@link #aiProcess_LimitBoneWeights Process_LimitBoneWeights}</td><td>{@link #aiProcess_ValidateDataStructure Process_ValidateDataStructure}</td><td>{@link #aiProcess_ImproveCacheLocality Process_ImproveCacheLocality}</td></tr><tr><td>{@link #aiProcess_RemoveRedundantMaterials Process_RemoveRedundantMaterials}</td><td>{@link #aiProcess_FixInfacingNormals Process_FixInfacingNormals}</td><td>{@link #aiProcess_PopulateArmatureData Process_PopulateArmatureData}</td></tr><tr><td>{@link #aiProcess_SortByPType Process_SortByPType}</td><td>{@link #aiProcess_FindDegenerates Process_FindDegenerates}</td><td>{@link #aiProcess_FindInvalidData Process_FindInvalidData}</td></tr><tr><td>{@link #aiProcess_GenUVCoords Process_GenUVCoords}</td><td>{@link #aiProcess_TransformUVCoords Process_TransformUVCoords}</td><td>{@link #aiProcess_FindInstances Process_FindInstances}</td></tr><tr><td>{@link #aiProcess_OptimizeMeshes Process_OptimizeMeshes}</td><td>{@link #aiProcess_OptimizeGraph Process_OptimizeGraph}</td><td>{@link #aiProcess_FlipUVs Process_FlipUVs}</td></tr><tr><td>{@link #aiProcess_FlipWindingOrder Process_FlipWindingOrder}</td><td>{@link #aiProcess_SplitByBoneCount Process_SplitByBoneCount}</td><td>{@link #aiProcess_Debone Process_Debone}</td></tr><tr><td>{@link #aiProcess_GlobalScale Process_GlobalScale}</td><td>{@link #aiProcess_EmbedTextures Process_EmbedTextures}</td><td>{@link #aiProcess_ForceGenNormals Process_ForceGenNormals}</td></tr><tr><td>{@link #aiProcess_DropNormals Process_DropNormals}</td><td>{@link #aiProcess_GenBoundingBoxes Process_GenBoundingBoxes}</td><td>{@link #aiProcess_ConvertToLeftHanded Process_ConvertToLeftHanded}</td></tr><tr><td>{@link #aiProcessPreset_TargetRealtime_Fast ProcessPreset_TargetRealtime_Fast}</td><td>{@link #aiProcessPreset_TargetRealtime_Quality ProcessPreset_TargetRealtime_Quality}</td><td>{@link #aiProcessPreset_TargetRealtime_MaxQuality ProcessPreset_TargetRealtime_MaxQuality}</td></tr></table>
      *
      * @return a status code indicating the result of the export
@@ -2468,7 +2537,7 @@ public class Assimp {
      *                       enforce it by specifying the {@link #aiProcess_Triangulate Process_Triangulate} flag, most export formats support only triangulate data so they would run the step anyway.
      *                       
      *                       <p>If assimp detects that the input scene was directly taken from the importer side of the library (i.e. not copied using {@link #aiCopyScene CopyScene} and potentially
-     *                       modified afterwards), any postprocessing steps already applied to the scene will not be applied again, unless they show non-idempotent behaviour
+     *                       modified afterwards), any post-processing steps already applied to the scene will not be applied again, unless they show non-idempotent behavior
      *                       ({@link #aiProcess_MakeLeftHanded Process_MakeLeftHanded}, {@link #aiProcess_FlipUVs Process_FlipUVs} and {@link #aiProcess_FlipWindingOrder Process_FlipWindingOrder}). One or more of:<br></p><table><tr><td>{@link #aiProcess_CalcTangentSpace Process_CalcTangentSpace}</td><td>{@link #aiProcess_JoinIdenticalVertices Process_JoinIdenticalVertices}</td><td>{@link #aiProcess_MakeLeftHanded Process_MakeLeftHanded}</td></tr><tr><td>{@link #aiProcess_Triangulate Process_Triangulate}</td><td>{@link #aiProcess_RemoveComponent Process_RemoveComponent}</td><td>{@link #aiProcess_GenNormals Process_GenNormals}</td></tr><tr><td>{@link #aiProcess_GenSmoothNormals Process_GenSmoothNormals}</td><td>{@link #aiProcess_SplitLargeMeshes Process_SplitLargeMeshes}</td><td>{@link #aiProcess_PreTransformVertices Process_PreTransformVertices}</td></tr><tr><td>{@link #aiProcess_LimitBoneWeights Process_LimitBoneWeights}</td><td>{@link #aiProcess_ValidateDataStructure Process_ValidateDataStructure}</td><td>{@link #aiProcess_ImproveCacheLocality Process_ImproveCacheLocality}</td></tr><tr><td>{@link #aiProcess_RemoveRedundantMaterials Process_RemoveRedundantMaterials}</td><td>{@link #aiProcess_FixInfacingNormals Process_FixInfacingNormals}</td><td>{@link #aiProcess_PopulateArmatureData Process_PopulateArmatureData}</td></tr><tr><td>{@link #aiProcess_SortByPType Process_SortByPType}</td><td>{@link #aiProcess_FindDegenerates Process_FindDegenerates}</td><td>{@link #aiProcess_FindInvalidData Process_FindInvalidData}</td></tr><tr><td>{@link #aiProcess_GenUVCoords Process_GenUVCoords}</td><td>{@link #aiProcess_TransformUVCoords Process_TransformUVCoords}</td><td>{@link #aiProcess_FindInstances Process_FindInstances}</td></tr><tr><td>{@link #aiProcess_OptimizeMeshes Process_OptimizeMeshes}</td><td>{@link #aiProcess_OptimizeGraph Process_OptimizeGraph}</td><td>{@link #aiProcess_FlipUVs Process_FlipUVs}</td></tr><tr><td>{@link #aiProcess_FlipWindingOrder Process_FlipWindingOrder}</td><td>{@link #aiProcess_SplitByBoneCount Process_SplitByBoneCount}</td><td>{@link #aiProcess_Debone Process_Debone}</td></tr><tr><td>{@link #aiProcess_GlobalScale Process_GlobalScale}</td><td>{@link #aiProcess_EmbedTextures Process_EmbedTextures}</td><td>{@link #aiProcess_ForceGenNormals Process_ForceGenNormals}</td></tr><tr><td>{@link #aiProcess_DropNormals Process_DropNormals}</td><td>{@link #aiProcess_GenBoundingBoxes Process_GenBoundingBoxes}</td><td>{@link #aiProcess_ConvertToLeftHanded Process_ConvertToLeftHanded}</td></tr><tr><td>{@link #aiProcessPreset_TargetRealtime_Fast ProcessPreset_TargetRealtime_Fast}</td><td>{@link #aiProcessPreset_TargetRealtime_Quality ProcessPreset_TargetRealtime_Quality}</td><td>{@link #aiProcessPreset_TargetRealtime_MaxQuality ProcessPreset_TargetRealtime_MaxQuality}</td></tr></table>
      *
      * @return a status code indicating the result of the export
@@ -2509,7 +2578,7 @@ public class Assimp {
      *                       enforce it by specifying the {@link #aiProcess_Triangulate Process_Triangulate} flag, most export formats support only triangulate data so they would run the step anyway.
      *                       
      *                       <p>If assimp detects that the input scene was directly taken from the importer side of the library (i.e. not copied using {@link #aiCopyScene CopyScene} and potentially
-     *                       modified afterwards), any postprocessing steps already applied to the scene will not be applied again, unless they show non-idempotent behaviour
+     *                       modified afterwards), any post-processing steps already applied to the scene will not be applied again, unless they show non-idempotent behavior
      *                       ({@link #aiProcess_MakeLeftHanded Process_MakeLeftHanded}, {@link #aiProcess_FlipUVs Process_FlipUVs} and {@link #aiProcess_FlipWindingOrder Process_FlipWindingOrder}). One or more of:<br></p><table><tr><td>{@link #aiProcess_CalcTangentSpace Process_CalcTangentSpace}</td><td>{@link #aiProcess_JoinIdenticalVertices Process_JoinIdenticalVertices}</td><td>{@link #aiProcess_MakeLeftHanded Process_MakeLeftHanded}</td></tr><tr><td>{@link #aiProcess_Triangulate Process_Triangulate}</td><td>{@link #aiProcess_RemoveComponent Process_RemoveComponent}</td><td>{@link #aiProcess_GenNormals Process_GenNormals}</td></tr><tr><td>{@link #aiProcess_GenSmoothNormals Process_GenSmoothNormals}</td><td>{@link #aiProcess_SplitLargeMeshes Process_SplitLargeMeshes}</td><td>{@link #aiProcess_PreTransformVertices Process_PreTransformVertices}</td></tr><tr><td>{@link #aiProcess_LimitBoneWeights Process_LimitBoneWeights}</td><td>{@link #aiProcess_ValidateDataStructure Process_ValidateDataStructure}</td><td>{@link #aiProcess_ImproveCacheLocality Process_ImproveCacheLocality}</td></tr><tr><td>{@link #aiProcess_RemoveRedundantMaterials Process_RemoveRedundantMaterials}</td><td>{@link #aiProcess_FixInfacingNormals Process_FixInfacingNormals}</td><td>{@link #aiProcess_PopulateArmatureData Process_PopulateArmatureData}</td></tr><tr><td>{@link #aiProcess_SortByPType Process_SortByPType}</td><td>{@link #aiProcess_FindDegenerates Process_FindDegenerates}</td><td>{@link #aiProcess_FindInvalidData Process_FindInvalidData}</td></tr><tr><td>{@link #aiProcess_GenUVCoords Process_GenUVCoords}</td><td>{@link #aiProcess_TransformUVCoords Process_TransformUVCoords}</td><td>{@link #aiProcess_FindInstances Process_FindInstances}</td></tr><tr><td>{@link #aiProcess_OptimizeMeshes Process_OptimizeMeshes}</td><td>{@link #aiProcess_OptimizeGraph Process_OptimizeGraph}</td><td>{@link #aiProcess_FlipUVs Process_FlipUVs}</td></tr><tr><td>{@link #aiProcess_FlipWindingOrder Process_FlipWindingOrder}</td><td>{@link #aiProcess_SplitByBoneCount Process_SplitByBoneCount}</td><td>{@link #aiProcess_Debone Process_Debone}</td></tr><tr><td>{@link #aiProcess_GlobalScale Process_GlobalScale}</td><td>{@link #aiProcess_EmbedTextures Process_EmbedTextures}</td><td>{@link #aiProcess_ForceGenNormals Process_ForceGenNormals}</td></tr><tr><td>{@link #aiProcess_DropNormals Process_DropNormals}</td><td>{@link #aiProcess_GenBoundingBoxes Process_GenBoundingBoxes}</td><td>{@link #aiProcess_ConvertToLeftHanded Process_ConvertToLeftHanded}</td></tr><tr><td>{@link #aiProcessPreset_TargetRealtime_Fast ProcessPreset_TargetRealtime_Fast}</td><td>{@link #aiProcessPreset_TargetRealtime_Quality ProcessPreset_TargetRealtime_Quality}</td><td>{@link #aiProcessPreset_TargetRealtime_MaxQuality ProcessPreset_TargetRealtime_MaxQuality}</td></tr></table>
      *
      * @return a status code indicating the result of the export
@@ -2560,7 +2629,7 @@ public class Assimp {
      *                       enforce it by specifying the {@link #aiProcess_Triangulate Process_Triangulate} flag, most export formats support only triangulate data so they would run the step anyway.
      *                       
      *                       <p>If assimp detects that the input scene was directly taken from the importer side of the library (i.e. not copied using {@link #aiCopyScene CopyScene} and potentially
-     *                       modified afterwards), any postprocessing steps already applied to the scene will not be applied again, unless they show non-idempotent behaviour
+     *                       modified afterwards), any post-processing steps already applied to the scene will not be applied again, unless they show non-idempotent behavior
      *                       ({@link #aiProcess_MakeLeftHanded Process_MakeLeftHanded}, {@link #aiProcess_FlipUVs Process_FlipUVs} and {@link #aiProcess_FlipWindingOrder Process_FlipWindingOrder}). One or more of:<br></p><table><tr><td>{@link #aiProcess_CalcTangentSpace Process_CalcTangentSpace}</td><td>{@link #aiProcess_JoinIdenticalVertices Process_JoinIdenticalVertices}</td><td>{@link #aiProcess_MakeLeftHanded Process_MakeLeftHanded}</td></tr><tr><td>{@link #aiProcess_Triangulate Process_Triangulate}</td><td>{@link #aiProcess_RemoveComponent Process_RemoveComponent}</td><td>{@link #aiProcess_GenNormals Process_GenNormals}</td></tr><tr><td>{@link #aiProcess_GenSmoothNormals Process_GenSmoothNormals}</td><td>{@link #aiProcess_SplitLargeMeshes Process_SplitLargeMeshes}</td><td>{@link #aiProcess_PreTransformVertices Process_PreTransformVertices}</td></tr><tr><td>{@link #aiProcess_LimitBoneWeights Process_LimitBoneWeights}</td><td>{@link #aiProcess_ValidateDataStructure Process_ValidateDataStructure}</td><td>{@link #aiProcess_ImproveCacheLocality Process_ImproveCacheLocality}</td></tr><tr><td>{@link #aiProcess_RemoveRedundantMaterials Process_RemoveRedundantMaterials}</td><td>{@link #aiProcess_FixInfacingNormals Process_FixInfacingNormals}</td><td>{@link #aiProcess_PopulateArmatureData Process_PopulateArmatureData}</td></tr><tr><td>{@link #aiProcess_SortByPType Process_SortByPType}</td><td>{@link #aiProcess_FindDegenerates Process_FindDegenerates}</td><td>{@link #aiProcess_FindInvalidData Process_FindInvalidData}</td></tr><tr><td>{@link #aiProcess_GenUVCoords Process_GenUVCoords}</td><td>{@link #aiProcess_TransformUVCoords Process_TransformUVCoords}</td><td>{@link #aiProcess_FindInstances Process_FindInstances}</td></tr><tr><td>{@link #aiProcess_OptimizeMeshes Process_OptimizeMeshes}</td><td>{@link #aiProcess_OptimizeGraph Process_OptimizeGraph}</td><td>{@link #aiProcess_FlipUVs Process_FlipUVs}</td></tr><tr><td>{@link #aiProcess_FlipWindingOrder Process_FlipWindingOrder}</td><td>{@link #aiProcess_SplitByBoneCount Process_SplitByBoneCount}</td><td>{@link #aiProcess_Debone Process_Debone}</td></tr><tr><td>{@link #aiProcess_GlobalScale Process_GlobalScale}</td><td>{@link #aiProcess_EmbedTextures Process_EmbedTextures}</td><td>{@link #aiProcess_ForceGenNormals Process_ForceGenNormals}</td></tr><tr><td>{@link #aiProcess_DropNormals Process_DropNormals}</td><td>{@link #aiProcess_GenBoundingBoxes Process_GenBoundingBoxes}</td><td>{@link #aiProcess_ConvertToLeftHanded Process_ConvertToLeftHanded}</td></tr><tr><td>{@link #aiProcessPreset_TargetRealtime_Fast ProcessPreset_TargetRealtime_Fast}</td><td>{@link #aiProcessPreset_TargetRealtime_Quality ProcessPreset_TargetRealtime_Quality}</td><td>{@link #aiProcessPreset_TargetRealtime_MaxQuality ProcessPreset_TargetRealtime_MaxQuality}</td></tr></table>
      *
      * @return the exported data or {@code NULL} in case of error
@@ -2596,7 +2665,7 @@ public class Assimp {
      *                       enforce it by specifying the {@link #aiProcess_Triangulate Process_Triangulate} flag, most export formats support only triangulate data so they would run the step anyway.
      *                       
      *                       <p>If assimp detects that the input scene was directly taken from the importer side of the library (i.e. not copied using {@link #aiCopyScene CopyScene} and potentially
-     *                       modified afterwards), any postprocessing steps already applied to the scene will not be applied again, unless they show non-idempotent behaviour
+     *                       modified afterwards), any post-processing steps already applied to the scene will not be applied again, unless they show non-idempotent behavior
      *                       ({@link #aiProcess_MakeLeftHanded Process_MakeLeftHanded}, {@link #aiProcess_FlipUVs Process_FlipUVs} and {@link #aiProcess_FlipWindingOrder Process_FlipWindingOrder}). One or more of:<br></p><table><tr><td>{@link #aiProcess_CalcTangentSpace Process_CalcTangentSpace}</td><td>{@link #aiProcess_JoinIdenticalVertices Process_JoinIdenticalVertices}</td><td>{@link #aiProcess_MakeLeftHanded Process_MakeLeftHanded}</td></tr><tr><td>{@link #aiProcess_Triangulate Process_Triangulate}</td><td>{@link #aiProcess_RemoveComponent Process_RemoveComponent}</td><td>{@link #aiProcess_GenNormals Process_GenNormals}</td></tr><tr><td>{@link #aiProcess_GenSmoothNormals Process_GenSmoothNormals}</td><td>{@link #aiProcess_SplitLargeMeshes Process_SplitLargeMeshes}</td><td>{@link #aiProcess_PreTransformVertices Process_PreTransformVertices}</td></tr><tr><td>{@link #aiProcess_LimitBoneWeights Process_LimitBoneWeights}</td><td>{@link #aiProcess_ValidateDataStructure Process_ValidateDataStructure}</td><td>{@link #aiProcess_ImproveCacheLocality Process_ImproveCacheLocality}</td></tr><tr><td>{@link #aiProcess_RemoveRedundantMaterials Process_RemoveRedundantMaterials}</td><td>{@link #aiProcess_FixInfacingNormals Process_FixInfacingNormals}</td><td>{@link #aiProcess_PopulateArmatureData Process_PopulateArmatureData}</td></tr><tr><td>{@link #aiProcess_SortByPType Process_SortByPType}</td><td>{@link #aiProcess_FindDegenerates Process_FindDegenerates}</td><td>{@link #aiProcess_FindInvalidData Process_FindInvalidData}</td></tr><tr><td>{@link #aiProcess_GenUVCoords Process_GenUVCoords}</td><td>{@link #aiProcess_TransformUVCoords Process_TransformUVCoords}</td><td>{@link #aiProcess_FindInstances Process_FindInstances}</td></tr><tr><td>{@link #aiProcess_OptimizeMeshes Process_OptimizeMeshes}</td><td>{@link #aiProcess_OptimizeGraph Process_OptimizeGraph}</td><td>{@link #aiProcess_FlipUVs Process_FlipUVs}</td></tr><tr><td>{@link #aiProcess_FlipWindingOrder Process_FlipWindingOrder}</td><td>{@link #aiProcess_SplitByBoneCount Process_SplitByBoneCount}</td><td>{@link #aiProcess_Debone Process_Debone}</td></tr><tr><td>{@link #aiProcess_GlobalScale Process_GlobalScale}</td><td>{@link #aiProcess_EmbedTextures Process_EmbedTextures}</td><td>{@link #aiProcess_ForceGenNormals Process_ForceGenNormals}</td></tr><tr><td>{@link #aiProcess_DropNormals Process_DropNormals}</td><td>{@link #aiProcess_GenBoundingBoxes Process_GenBoundingBoxes}</td><td>{@link #aiProcess_ConvertToLeftHanded Process_ConvertToLeftHanded}</td></tr><tr><td>{@link #aiProcessPreset_TargetRealtime_Fast ProcessPreset_TargetRealtime_Fast}</td><td>{@link #aiProcessPreset_TargetRealtime_Quality ProcessPreset_TargetRealtime_Quality}</td><td>{@link #aiProcessPreset_TargetRealtime_MaxQuality ProcessPreset_TargetRealtime_MaxQuality}</td></tr></table>
      *
      * @return the exported data or {@code NULL} in case of error
@@ -3624,6 +3693,1261 @@ public class Assimp {
         return AIImporterDesc.createSafe(__result);
     }
 
+    // --- [ aiVector2AreEqual ] ---
+
+    /** Unsafe version of: {@link #aiVector2AreEqual Vector2AreEqual} */
+    public static int naiVector2AreEqual(long a, long b) {
+        long __functionAddress = Functions.Vector2AreEqual;
+        return invokePPI(a, b, __functionAddress);
+    }
+
+    /**
+     * Check if 2D vectors are equal.
+     *
+     * @param a first vector to compare
+     * @param b second vector to compare
+     */
+    @NativeType("int")
+    public static boolean aiVector2AreEqual(@NativeType("struct aiVector2D const *") AIVector2D a, @NativeType("struct aiVector2D const *") AIVector2D b) {
+        return naiVector2AreEqual(a.address(), b.address()) != 0;
+    }
+
+    // --- [ aiVector2AreEqualEpsilon ] ---
+
+    /** Unsafe version of: {@link #aiVector2AreEqualEpsilon Vector2AreEqualEpsilon} */
+    public static int naiVector2AreEqualEpsilon(long a, long b, float epsilon) {
+        long __functionAddress = Functions.Vector2AreEqualEpsilon;
+        return invokePPI(a, b, epsilon, __functionAddress);
+    }
+
+    /**
+     * Check if 2D vectors are equal using epsilon.
+     *
+     * @param a first vector to compare
+     * @param b second vector to compare
+     */
+    @NativeType("int")
+    public static boolean aiVector2AreEqualEpsilon(@NativeType("struct aiVector2D const *") AIVector2D a, @NativeType("struct aiVector2D const *") AIVector2D b, float epsilon) {
+        return naiVector2AreEqualEpsilon(a.address(), b.address(), epsilon) != 0;
+    }
+
+    // --- [ aiVector2Add ] ---
+
+    /** Unsafe version of: {@link #aiVector2Add Vector2Add} */
+    public static void naiVector2Add(long dst, long src) {
+        long __functionAddress = Functions.Vector2Add;
+        invokePPV(dst, src, __functionAddress);
+    }
+
+    /**
+     * Add 2D vectors.
+     *
+     * @param dst first addend, receives result
+     * @param src vector to be added to {@code dst}
+     */
+    public static void aiVector2Add(@NativeType("struct aiVector2D *") AIVector2D dst, @NativeType("struct aiVector2D const *") AIVector2D src) {
+        naiVector2Add(dst.address(), src.address());
+    }
+
+    // --- [ aiVector2Subtract ] ---
+
+    /** Unsafe version of: {@link #aiVector2Subtract Vector2Subtract} */
+    public static void naiVector2Subtract(long dst, long src) {
+        long __functionAddress = Functions.Vector2Subtract;
+        invokePPV(dst, src, __functionAddress);
+    }
+
+    /**
+     * Subtract 2D vectors.
+     *
+     * @param dst minuend, receives result
+     * @param src vector to be subtracted from {@code dst}
+     */
+    public static void aiVector2Subtract(@NativeType("struct aiVector2D *") AIVector2D dst, @NativeType("struct aiVector2D const *") AIVector2D src) {
+        naiVector2Subtract(dst.address(), src.address());
+    }
+
+    // --- [ aiVector2Scale ] ---
+
+    /** Unsafe version of: {@link #aiVector2Scale Vector2Scale} */
+    public static void naiVector2Scale(long dst, float s) {
+        long __functionAddress = Functions.Vector2Scale;
+        invokePV(dst, s, __functionAddress);
+    }
+
+    /**
+     * Multiply a 2D vector by a scalar.
+     *
+     * @param dst vector to be scaled by {@code s}
+     * @param s   scale factor
+     */
+    public static void aiVector2Scale(@NativeType("struct aiVector2D *") AIVector2D dst, float s) {
+        naiVector2Scale(dst.address(), s);
+    }
+
+    // --- [ aiVector2SymMul ] ---
+
+    /** Unsafe version of: {@link #aiVector2SymMul Vector2SymMul} */
+    public static void naiVector2SymMul(long dst, long other) {
+        long __functionAddress = Functions.Vector2SymMul;
+        invokePPV(dst, other, __functionAddress);
+    }
+
+    /**
+     * Multiply each component of a 2D vector with the components of another vector.
+     *
+     * @param dst   first vector, receives result
+     * @param other second vector
+     */
+    public static void aiVector2SymMul(@NativeType("struct aiVector2D *") AIVector2D dst, @NativeType("struct aiVector2D const *") AIVector2D other) {
+        naiVector2SymMul(dst.address(), other.address());
+    }
+
+    // --- [ aiVector2DivideByScalar ] ---
+
+    /** Unsafe version of: {@link #aiVector2DivideByScalar Vector2DivideByScalar} */
+    public static void naiVector2DivideByScalar(long dst, float s) {
+        long __functionAddress = Functions.Vector2DivideByScalar;
+        invokePV(dst, s, __functionAddress);
+    }
+
+    /**
+     * Divide a 2D vector by a scalar.
+     *
+     * @param dst vector to be divided by {@code s}
+     * @param s   scalar divisor
+     */
+    public static void aiVector2DivideByScalar(@NativeType("struct aiVector2D *") AIVector2D dst, float s) {
+        naiVector2DivideByScalar(dst.address(), s);
+    }
+
+    // --- [ aiVector2DivideByVector ] ---
+
+    /** Unsafe version of: {@link #aiVector2DivideByVector Vector2DivideByVector} */
+    public static void naiVector2DivideByVector(long dst, long v) {
+        long __functionAddress = Functions.Vector2DivideByVector;
+        invokePPV(dst, v, __functionAddress);
+    }
+
+    /**
+     * Divide each component of a 2D vector by the components of another vector.
+     *
+     * @param dst vector as the dividend
+     * @param v   vector as the divisor
+     */
+    public static void aiVector2DivideByVector(@NativeType("struct aiVector2D *") AIVector2D dst, @NativeType("struct aiVector2D *") AIVector2D v) {
+        naiVector2DivideByVector(dst.address(), v.address());
+    }
+
+    // --- [ aiVector2Length ] ---
+
+    /** Unsafe version of: {@link #aiVector2Length Vector2Length} */
+    public static float naiVector2Length(long v) {
+        long __functionAddress = Functions.Vector2Length;
+        return invokePF(v, __functionAddress);
+    }
+
+    /**
+     * Get the length of a 2D vector.
+     *
+     * @param v vector to evaluate
+     */
+    public static float aiVector2Length(@NativeType("struct aiVector2D const *") AIVector2D v) {
+        return naiVector2Length(v.address());
+    }
+
+    // --- [ aiVector2SquareLength ] ---
+
+    /** Unsafe version of: {@link #aiVector2SquareLength Vector2SquareLength} */
+    public static float naiVector2SquareLength(long v) {
+        long __functionAddress = Functions.Vector2SquareLength;
+        return invokePF(v, __functionAddress);
+    }
+
+    /**
+     * Get the squared length of a 2D vector.
+     *
+     * @param v vector to evaluate
+     */
+    public static float aiVector2SquareLength(@NativeType("struct aiVector2D const *") AIVector2D v) {
+        return naiVector2SquareLength(v.address());
+    }
+
+    // --- [ aiVector2Negate ] ---
+
+    /** Unsafe version of: {@link #aiVector2Negate Vector2Negate} */
+    public static void naiVector2Negate(long dst) {
+        long __functionAddress = Functions.Vector2Negate;
+        invokePV(dst, __functionAddress);
+    }
+
+    /**
+     * Negate a 2D vector.
+     *
+     * @param dst vector to be negated
+     */
+    public static void aiVector2Negate(@NativeType("struct aiVector2D *") AIVector2D dst) {
+        naiVector2Negate(dst.address());
+    }
+
+    // --- [ aiVector2DotProduct ] ---
+
+    /** Unsafe version of: {@link #aiVector2DotProduct Vector2DotProduct} */
+    public static float naiVector2DotProduct(long a, long b) {
+        long __functionAddress = Functions.Vector2DotProduct;
+        return invokePPF(a, b, __functionAddress);
+    }
+
+    /**
+     * Get the dot product of 2D vectors.
+     *
+     * @param a first vector
+     * @param b second vector
+     *
+     * @return the dot product of vectors
+     */
+    public static float aiVector2DotProduct(@NativeType("struct aiVector2D const *") AIVector2D a, @NativeType("struct aiVector2D const *") AIVector2D b) {
+        return naiVector2DotProduct(a.address(), b.address());
+    }
+
+    // --- [ aiVector2Normalize ] ---
+
+    /** Unsafe version of: {@link #aiVector2Normalize Vector2Normalize} */
+    public static void naiVector2Normalize(long v) {
+        long __functionAddress = Functions.Vector2Normalize;
+        invokePV(v, __functionAddress);
+    }
+
+    /**
+     * Normalize a 2D vector.
+     *
+     * @param v vector to normalize
+     */
+    public static void aiVector2Normalize(@NativeType("struct aiVector2D *") AIVector2D v) {
+        naiVector2Normalize(v.address());
+    }
+
+    // --- [ aiVector3AreEqual ] ---
+
+    /** Unsafe version of: {@link #aiVector3AreEqual Vector3AreEqual} */
+    public static int naiVector3AreEqual(long a, long b) {
+        long __functionAddress = Functions.Vector3AreEqual;
+        return invokePPI(a, b, __functionAddress);
+    }
+
+    /**
+     * Check if 3D vectors are equal.
+     *
+     * @param a first vector to compare
+     * @param b second vector to compare
+     */
+    @NativeType("int")
+    public static boolean aiVector3AreEqual(@NativeType("struct aiVector3D const *") AIVector3D a, @NativeType("struct aiVector3D const *") AIVector3D b) {
+        return naiVector3AreEqual(a.address(), b.address()) != 0;
+    }
+
+    // --- [ aiVector3AreEqualEpsilon ] ---
+
+    /** Unsafe version of: {@link #aiVector3AreEqualEpsilon Vector3AreEqualEpsilon} */
+    public static int naiVector3AreEqualEpsilon(long a, long b, float epsilon) {
+        long __functionAddress = Functions.Vector3AreEqualEpsilon;
+        return invokePPI(a, b, epsilon, __functionAddress);
+    }
+
+    /**
+     * Check if 3D vectors are equal using epsilon.
+     *
+     * @param a       first vector to compare
+     * @param b       second vector to compare
+     * @param epsilon epsilon
+     */
+    @NativeType("int")
+    public static boolean aiVector3AreEqualEpsilon(@NativeType("struct aiVector3D const *") AIVector3D a, @NativeType("struct aiVector3D const *") AIVector3D b, @NativeType("float const") float epsilon) {
+        return naiVector3AreEqualEpsilon(a.address(), b.address(), epsilon) != 0;
+    }
+
+    // --- [ aiVector3LessThan ] ---
+
+    /** Unsafe version of: {@link #aiVector3LessThan Vector3LessThan} */
+    public static int naiVector3LessThan(long a, long b) {
+        long __functionAddress = Functions.Vector3LessThan;
+        return invokePPI(a, b, __functionAddress);
+    }
+
+    /**
+     * Check if vector {@code a} is less than vector {@code b}.
+     *
+     * @param a first vector to compare
+     * @param b second vector to compare
+     */
+    @NativeType("int")
+    public static boolean aiVector3LessThan(@NativeType("struct aiVector3D const *") AIVector3D a, @NativeType("struct aiVector3D const *") AIVector3D b) {
+        return naiVector3LessThan(a.address(), b.address()) != 0;
+    }
+
+    // --- [ aiVector3Add ] ---
+
+    /** Unsafe version of: {@link #aiVector3Add Vector3Add} */
+    public static void naiVector3Add(long dst, long src) {
+        long __functionAddress = Functions.Vector3Add;
+        invokePPV(dst, src, __functionAddress);
+    }
+
+    /**
+     * Add 3D vectors.
+     *
+     * @param dst first addend, receives result
+     * @param src vector to be added to {@code dst}
+     */
+    public static void aiVector3Add(@NativeType("struct aiVector3D *") AIVector3D dst, @NativeType("struct aiVector3D const *") AIVector3D src) {
+        naiVector3Add(dst.address(), src.address());
+    }
+
+    // --- [ aiVector3Subtract ] ---
+
+    /** Unsafe version of: {@link #aiVector3Subtract Vector3Subtract} */
+    public static void naiVector3Subtract(long dst, long src) {
+        long __functionAddress = Functions.Vector3Subtract;
+        invokePPV(dst, src, __functionAddress);
+    }
+
+    /**
+     * Subtract 3D vectors.
+     *
+     * @param dst minuend, receives result
+     * @param src vector to be subtracted from {@code dst}
+     */
+    public static void aiVector3Subtract(@NativeType("struct aiVector3D *") AIVector3D dst, @NativeType("struct aiVector3D const *") AIVector3D src) {
+        naiVector3Subtract(dst.address(), src.address());
+    }
+
+    // --- [ aiVector3Scale ] ---
+
+    /** Unsafe version of: {@link #aiVector3Scale Vector3Scale} */
+    public static void naiVector3Scale(long dst, float s) {
+        long __functionAddress = Functions.Vector3Scale;
+        invokePV(dst, s, __functionAddress);
+    }
+
+    /**
+     * Multiply a 3D vector by a scalar.
+     *
+     * @param dst vector to be scaled by {@code s}
+     * @param s   scale factor
+     */
+    public static void aiVector3Scale(@NativeType("struct aiVector3D *") AIVector3D dst, @NativeType("float const") float s) {
+        naiVector3Scale(dst.address(), s);
+    }
+
+    // --- [ aiVector3SymMul ] ---
+
+    /** Unsafe version of: {@link #aiVector3SymMul Vector3SymMul} */
+    public static void naiVector3SymMul(long dst, long other) {
+        long __functionAddress = Functions.Vector3SymMul;
+        invokePPV(dst, other, __functionAddress);
+    }
+
+    /**
+     * Multiply each component of a 3D vector with the components of another vector.
+     *
+     * @param dst   first vector, receives result
+     * @param other second vector
+     */
+    public static void aiVector3SymMul(@NativeType("struct aiVector3D *") AIVector3D dst, @NativeType("struct aiVector3D const *") AIVector3D other) {
+        naiVector3SymMul(dst.address(), other.address());
+    }
+
+    // --- [ aiVector3DivideByScalar ] ---
+
+    /** Unsafe version of: {@link #aiVector3DivideByScalar Vector3DivideByScalar} */
+    public static void naiVector3DivideByScalar(long dst, float s) {
+        long __functionAddress = Functions.Vector3DivideByScalar;
+        invokePV(dst, s, __functionAddress);
+    }
+
+    /**
+     * Divide a 3D vector by a scalar.
+     *
+     * @param dst vector to be divided by {@code s}
+     * @param s   scalar divisor
+     */
+    public static void aiVector3DivideByScalar(@NativeType("struct aiVector3D *") AIVector3D dst, @NativeType("float const") float s) {
+        naiVector3DivideByScalar(dst.address(), s);
+    }
+
+    // --- [ aiVector3DivideByVector ] ---
+
+    /** Unsafe version of: {@link #aiVector3DivideByVector Vector3DivideByVector} */
+    public static void naiVector3DivideByVector(long dst, long v) {
+        long __functionAddress = Functions.Vector3DivideByVector;
+        invokePPV(dst, v, __functionAddress);
+    }
+
+    /**
+     * Divide each component of a 3D vector by the components of another vector.
+     *
+     * @param dst vector as the dividend
+     * @param v   vector as the divisor
+     */
+    public static void aiVector3DivideByVector(@NativeType("struct aiVector3D *") AIVector3D dst, @NativeType("struct aiVector3D *") AIVector3D v) {
+        naiVector3DivideByVector(dst.address(), v.address());
+    }
+
+    // --- [ aiVector3Length ] ---
+
+    /** Unsafe version of: {@link #aiVector3Length Vector3Length} */
+    public static float naiVector3Length(long v) {
+        long __functionAddress = Functions.Vector3Length;
+        return invokePF(v, __functionAddress);
+    }
+
+    /**
+     * Get the length of a 3D vector.
+     *
+     * @param v vector to evaluate
+     */
+    public static float aiVector3Length(@NativeType("struct aiVector3D const *") AIVector3D v) {
+        return naiVector3Length(v.address());
+    }
+
+    // --- [ aiVector3SquareLength ] ---
+
+    /** Unsafe version of: {@link #aiVector3SquareLength Vector3SquareLength} */
+    public static float naiVector3SquareLength(long v) {
+        long __functionAddress = Functions.Vector3SquareLength;
+        return invokePF(v, __functionAddress);
+    }
+
+    /**
+     * Get the squared length of a 3D vector.
+     *
+     * @param v vector to evaluate
+     */
+    public static float aiVector3SquareLength(@NativeType("struct aiVector3D const *") AIVector3D v) {
+        return naiVector3SquareLength(v.address());
+    }
+
+    // --- [ aiVector3Negate ] ---
+
+    /** Unsafe version of: {@link #aiVector3Negate Vector3Negate} */
+    public static void naiVector3Negate(long dst) {
+        long __functionAddress = Functions.Vector3Negate;
+        invokePV(dst, __functionAddress);
+    }
+
+    /**
+     * Negate a 3D vector.
+     *
+     * @param dst vector to be negated
+     */
+    public static void aiVector3Negate(@NativeType("struct aiVector3D *") AIVector3D dst) {
+        naiVector3Negate(dst.address());
+    }
+
+    // --- [ aiVector3DotProduct ] ---
+
+    /** Unsafe version of: {@link #aiVector3DotProduct Vector3DotProduct} */
+    public static float naiVector3DotProduct(long a, long b) {
+        long __functionAddress = Functions.Vector3DotProduct;
+        return invokePPF(a, b, __functionAddress);
+    }
+
+    /**
+     * Get the dot product of 3D vectors.
+     *
+     * @param a first vector
+     * @param b second vector
+     *
+     * @return the dot product of vectors
+     */
+    public static float aiVector3DotProduct(@NativeType("struct aiVector3D const *") AIVector3D a, @NativeType("struct aiVector3D const *") AIVector3D b) {
+        return naiVector3DotProduct(a.address(), b.address());
+    }
+
+    // --- [ aiVector3CrossProduct ] ---
+
+    /** Unsafe version of: {@link #aiVector3CrossProduct Vector3CrossProduct} */
+    public static void naiVector3CrossProduct(long dst, long a, long b) {
+        long __functionAddress = Functions.Vector3CrossProduct;
+        invokePPPV(dst, a, b, __functionAddress);
+    }
+
+    /**
+     * Get cross product of 3D vectors.
+     *
+     * @param dst vector to receive the result
+     * @param a   first vector
+     * @param b   second vector
+     *
+     * @return the dot product of vectors
+     */
+    public static void aiVector3CrossProduct(@NativeType("struct aiVector3D *") AIVector3D dst, @NativeType("struct aiVector3D const *") AIVector3D a, @NativeType("struct aiVector3D const *") AIVector3D b) {
+        naiVector3CrossProduct(dst.address(), a.address(), b.address());
+    }
+
+    // --- [ aiVector3Normalize ] ---
+
+    /** Unsafe version of: {@link #aiVector3Normalize Vector3Normalize} */
+    public static void naiVector3Normalize(long v) {
+        long __functionAddress = Functions.Vector3Normalize;
+        invokePV(v, __functionAddress);
+    }
+
+    /**
+     * Normalize a 3D vector.
+     *
+     * @param v vector to normalize
+     */
+    public static void aiVector3Normalize(@NativeType("struct aiVector3D *") AIVector3D v) {
+        naiVector3Normalize(v.address());
+    }
+
+    // --- [ aiVector3NormalizeSafe ] ---
+
+    /** Unsafe version of: {@link #aiVector3NormalizeSafe Vector3NormalizeSafe} */
+    public static void naiVector3NormalizeSafe(long v) {
+        long __functionAddress = Functions.Vector3NormalizeSafe;
+        invokePV(v, __functionAddress);
+    }
+
+    /**
+     * Check for division by zero and normalize a 3D vector.
+     *
+     * @param v vector to normalize
+     */
+    public static void aiVector3NormalizeSafe(@NativeType("struct aiVector3D *") AIVector3D v) {
+        naiVector3NormalizeSafe(v.address());
+    }
+
+    // --- [ aiVector3RotateByQuaternion ] ---
+
+    /** Unsafe version of: {@link #aiVector3RotateByQuaternion Vector3RotateByQuaternion} */
+    public static void naiVector3RotateByQuaternion(long v, long q) {
+        long __functionAddress = Functions.Vector3RotateByQuaternion;
+        invokePPV(v, q, __functionAddress);
+    }
+
+    /**
+     * Rotate a 3D vector by a quaternion.
+     *
+     * @param v the vector to rotate by {@code q}
+     * @param q quaternion to use to rotate {@code v}
+     */
+    public static void aiVector3RotateByQuaternion(@NativeType("struct aiVector3D *") AIVector3D v, @NativeType("struct aiQuaternion const *") AIQuaternion q) {
+        naiVector3RotateByQuaternion(v.address(), q.address());
+    }
+
+    // --- [ aiMatrix3FromMatrix4 ] ---
+
+    /** Unsafe version of: {@link #aiMatrix3FromMatrix4 Matrix3FromMatrix4} */
+    public static void naiMatrix3FromMatrix4(long dst, long mat) {
+        long __functionAddress = Functions.Matrix3FromMatrix4;
+        invokePPV(dst, mat, __functionAddress);
+    }
+
+    /**
+     * Construct a 3x3 matrix from a 4x4 matrix.
+     *
+     * @param dst receives the output matrix
+     * @param mat the 4x4 matrix to use
+     */
+    public static void aiMatrix3FromMatrix4(@NativeType("struct aiMatrix3x3 *") AIMatrix3x3 dst, @NativeType("struct aiMatrix4x4 const *") AIMatrix4x4 mat) {
+        naiMatrix3FromMatrix4(dst.address(), mat.address());
+    }
+
+    // --- [ aiMatrix3FromQuaternion ] ---
+
+    /** Unsafe version of: {@link #aiMatrix3FromQuaternion Matrix3FromQuaternion} */
+    public static void naiMatrix3FromQuaternion(long mat, long q) {
+        long __functionAddress = Functions.Matrix3FromQuaternion;
+        invokePPV(mat, q, __functionAddress);
+    }
+
+    /**
+     * Construct a 3x3 matrix from a quaternion.
+     *
+     * @param mat receives the output matrix
+     * @param q   the quaternion matrix to use
+     */
+    public static void aiMatrix3FromQuaternion(@NativeType("struct aiMatrix3x3 *") AIMatrix3x3 mat, @NativeType("struct aiQuaternion const *") AIQuaternion q) {
+        naiMatrix3FromQuaternion(mat.address(), q.address());
+    }
+
+    // --- [ aiMatrix3AreEqual ] ---
+
+    /** Unsafe version of: {@link #aiMatrix3AreEqual Matrix3AreEqual} */
+    public static int naiMatrix3AreEqual(long a, long b) {
+        long __functionAddress = Functions.Matrix3AreEqual;
+        return invokePPI(a, b, __functionAddress);
+    }
+
+    /**
+     * Check if 3x3 matrices are equal.
+     *
+     * @param a first matrix to compare
+     * @param b second matrix to compare
+     */
+    @NativeType("int")
+    public static boolean aiMatrix3AreEqual(@NativeType("struct aiMatrix3x3 const *") AIMatrix3x3 a, @NativeType("struct aiMatrix3x3 const *") AIMatrix3x3 b) {
+        return naiMatrix3AreEqual(a.address(), b.address()) != 0;
+    }
+
+    // --- [ aiMatrix3AreEqualEpsilon ] ---
+
+    /** Unsafe version of: {@link #aiMatrix3AreEqualEpsilon Matrix3AreEqualEpsilon} */
+    public static int naiMatrix3AreEqualEpsilon(long a, long b, float epsilon) {
+        long __functionAddress = Functions.Matrix3AreEqualEpsilon;
+        return invokePPI(a, b, epsilon, __functionAddress);
+    }
+
+    /**
+     * Check if 3x3 matrices are equal.
+     *
+     * @param a       first matrix to compare
+     * @param b       second matrix to compare
+     * @param epsilon epsilon
+     */
+    @NativeType("int")
+    public static boolean aiMatrix3AreEqualEpsilon(@NativeType("struct aiMatrix3x3 const *") AIMatrix3x3 a, @NativeType("struct aiMatrix3x3 const *") AIMatrix3x3 b, @NativeType("float const") float epsilon) {
+        return naiMatrix3AreEqualEpsilon(a.address(), b.address(), epsilon) != 0;
+    }
+
+    // --- [ aiMatrix3Inverse ] ---
+
+    /** Unsafe version of: {@link #aiMatrix3Inverse Matrix3Inverse} */
+    public static void naiMatrix3Inverse(long mat) {
+        long __functionAddress = Functions.Matrix3Inverse;
+        invokePV(mat, __functionAddress);
+    }
+
+    /**
+     * Invert a 3x3 matrix.
+     *
+     * @param mat matrix to invert
+     */
+    public static void aiMatrix3Inverse(@NativeType("struct aiMatrix3x3 *") AIMatrix3x3 mat) {
+        naiMatrix3Inverse(mat.address());
+    }
+
+    // --- [ aiMatrix3Determinant ] ---
+
+    /** Unsafe version of: {@link #aiMatrix3Determinant Matrix3Determinant} */
+    public static float naiMatrix3Determinant(long mat) {
+        long __functionAddress = Functions.Matrix3Determinant;
+        return invokePF(mat, __functionAddress);
+    }
+
+    /**
+     * Get the determinant of a 3x3 matrix.
+     *
+     * @param mat matrix to get the determinant from
+     */
+    public static float aiMatrix3Determinant(@NativeType("struct aiMatrix3x3 const *") AIMatrix3x3 mat) {
+        return naiMatrix3Determinant(mat.address());
+    }
+
+    // --- [ aiMatrix3RotationZ ] ---
+
+    /** Unsafe version of: {@link #aiMatrix3RotationZ Matrix3RotationZ} */
+    public static void naiMatrix3RotationZ(long mat, float angle) {
+        long __functionAddress = Functions.Matrix3RotationZ;
+        invokePV(mat, angle, __functionAddress);
+    }
+
+    /**
+     * Get a 3x3 rotation matrix around the Z axis.
+     *
+     * @param mat   receives the output matrix
+     * @param angle rotation angle, in radians
+     */
+    public static void aiMatrix3RotationZ(@NativeType("struct aiMatrix3x3 *") AIMatrix3x3 mat, float angle) {
+        naiMatrix3RotationZ(mat.address(), angle);
+    }
+
+    // --- [ aiMatrix3FromRotationAroundAxis ] ---
+
+    /** Unsafe version of: {@link #aiMatrix3FromRotationAroundAxis Matrix3FromRotationAroundAxis} */
+    public static void naiMatrix3FromRotationAroundAxis(long mat, long axis, float angle) {
+        long __functionAddress = Functions.Matrix3FromRotationAroundAxis;
+        invokePPV(mat, axis, angle, __functionAddress);
+    }
+
+    /**
+     * Returns a 3x3 rotation matrix for a rotation around an arbitrary axis.
+     *
+     * @param mat   receives the output matrix
+     * @param axis  rotation axis, should be a normalized vector
+     * @param angle rotation angle, in radians
+     */
+    public static void aiMatrix3FromRotationAroundAxis(@NativeType("struct aiMatrix3x3 *") AIMatrix3x3 mat, @NativeType("struct aiVector3D const *") AIVector3D axis, float angle) {
+        naiMatrix3FromRotationAroundAxis(mat.address(), axis.address(), angle);
+    }
+
+    // --- [ aiMatrix3Translation ] ---
+
+    /** Unsafe version of: {@link #aiMatrix3Translation Matrix3Translation} */
+    public static void naiMatrix3Translation(long mat, long translation) {
+        long __functionAddress = Functions.Matrix3Translation;
+        invokePPV(mat, translation, __functionAddress);
+    }
+
+    /**
+     * Get a 3x3 translation matrix.
+     *
+     * @param mat         receives the output matrix
+     * @param translation the translation vector
+     */
+    public static void aiMatrix3Translation(@NativeType("struct aiMatrix3x3 *") AIMatrix3x3 mat, @NativeType("struct aiVector2D const *") AIVector2D translation) {
+        naiMatrix3Translation(mat.address(), translation.address());
+    }
+
+    // --- [ aiMatrix3FromTo ] ---
+
+    /** Unsafe version of: {@link #aiMatrix3FromTo Matrix3FromTo} */
+    public static void naiMatrix3FromTo(long mat, long from, long to) {
+        long __functionAddress = Functions.Matrix3FromTo;
+        invokePPPV(mat, from, to, __functionAddress);
+    }
+
+    /**
+     * Create a 3x3 matrix that rotates one vector to another vector.
+     *
+     * @param mat  receives the output matrix
+     * @param from vector to rotate from
+     * @param to   vector to rotate to
+     */
+    public static void aiMatrix3FromTo(@NativeType("struct aiMatrix3x3 *") AIMatrix3x3 mat, @NativeType("struct aiVector3D const *") AIVector3D from, @NativeType("struct aiVector3D const *") AIVector3D to) {
+        naiMatrix3FromTo(mat.address(), from.address(), to.address());
+    }
+
+    // --- [ aiMatrix4FromMatrix3 ] ---
+
+    /** Unsafe version of: {@link #aiMatrix4FromMatrix3 Matrix4FromMatrix3} */
+    public static void naiMatrix4FromMatrix3(long dst, long mat) {
+        long __functionAddress = Functions.Matrix4FromMatrix3;
+        invokePPV(dst, mat, __functionAddress);
+    }
+
+    /**
+     * Construct a 4x4 matrix from a 3x3 matrix.
+     *
+     * @param dst receives the output matrix
+     * @param mat the 3x3 matrix to use
+     */
+    public static void aiMatrix4FromMatrix3(@NativeType("struct aiMatrix4x4 *") AIMatrix4x4 dst, @NativeType("struct aiMatrix3x3 const *") AIMatrix3x3 mat) {
+        naiMatrix4FromMatrix3(dst.address(), mat.address());
+    }
+
+    // --- [ aiMatrix4FromScalingQuaternionPosition ] ---
+
+    /** Unsafe version of: {@link #aiMatrix4FromScalingQuaternionPosition Matrix4FromScalingQuaternionPosition} */
+    public static void naiMatrix4FromScalingQuaternionPosition(long mat, long scaling, long rotation, long position) {
+        long __functionAddress = Functions.Matrix4FromScalingQuaternionPosition;
+        invokePPPPV(mat, scaling, rotation, position, __functionAddress);
+    }
+
+    /**
+     * Construct a 4x4 matrix from scaling, rotation and position.
+     *
+     * @param mat      receives the output matrix
+     * @param scaling  the scaling for the x,y,z axes
+     * @param rotation the rotation as a hamilton quaternion
+     * @param position the position for the x,y,z axes
+     */
+    public static void aiMatrix4FromScalingQuaternionPosition(@NativeType("struct aiMatrix4x4 *") AIMatrix4x4 mat, @NativeType("struct aiVector3D const *") AIVector3D scaling, @NativeType("struct aiQuaternion const *") AIQuaternion rotation, @NativeType("struct aiVector3D const *") AIVector3D position) {
+        naiMatrix4FromScalingQuaternionPosition(mat.address(), scaling.address(), rotation.address(), position.address());
+    }
+
+    // --- [ aiMatrix4Add ] ---
+
+    /** Unsafe version of: {@link #aiMatrix4Add Matrix4Add} */
+    public static void naiMatrix4Add(long dst, long src) {
+        long __functionAddress = Functions.Matrix4Add;
+        invokePPV(dst, src, __functionAddress);
+    }
+
+    /**
+     * Add 4x4 matrices.
+     *
+     * @param dst first addend, receives result
+     * @param src matrix to be added to {@code dst}
+     */
+    public static void aiMatrix4Add(@NativeType("struct aiMatrix4x4 *") AIMatrix4x4 dst, @NativeType("struct aiMatrix4x4 const *") AIMatrix4x4 src) {
+        naiMatrix4Add(dst.address(), src.address());
+    }
+
+    // --- [ aiMatrix4AreEqual ] ---
+
+    /** Unsafe version of: {@link #aiMatrix4AreEqual Matrix4AreEqual} */
+    public static int naiMatrix4AreEqual(long a, long b) {
+        long __functionAddress = Functions.Matrix4AreEqual;
+        return invokePPI(a, b, __functionAddress);
+    }
+
+    /**
+     * Check if 4x4 matrices are equal.
+     *
+     * @param a first matrix to compare
+     * @param b second matrix to compare
+     */
+    @NativeType("int")
+    public static boolean aiMatrix4AreEqual(@NativeType("struct aiMatrix4x4 const *") AIMatrix4x4 a, @NativeType("struct aiMatrix4x4 const *") AIMatrix4x4 b) {
+        return naiMatrix4AreEqual(a.address(), b.address()) != 0;
+    }
+
+    // --- [ aiMatrix4AreEqualEpsilon ] ---
+
+    /** Unsafe version of: {@link #aiMatrix4AreEqualEpsilon Matrix4AreEqualEpsilon} */
+    public static int naiMatrix4AreEqualEpsilon(long a, long b, float epsilon) {
+        long __functionAddress = Functions.Matrix4AreEqualEpsilon;
+        return invokePPI(a, b, epsilon, __functionAddress);
+    }
+
+    /**
+     * Check if 4x4 matrices are equal.
+     *
+     * @param a       first matrix to compare
+     * @param b       second matrix to compare
+     * @param epsilon epsilon
+     */
+    @NativeType("int")
+    public static boolean aiMatrix4AreEqualEpsilon(@NativeType("struct aiMatrix4x4 const *") AIMatrix4x4 a, @NativeType("struct aiMatrix4x4 const *") AIMatrix4x4 b, @NativeType("float const") float epsilon) {
+        return naiMatrix4AreEqualEpsilon(a.address(), b.address(), epsilon) != 0;
+    }
+
+    // --- [ aiMatrix4Inverse ] ---
+
+    /** Unsafe version of: {@link #aiMatrix4Inverse Matrix4Inverse} */
+    public static void naiMatrix4Inverse(long mat) {
+        long __functionAddress = Functions.Matrix4Inverse;
+        invokePV(mat, __functionAddress);
+    }
+
+    /**
+     * Invert a 4x4 matrix.
+     *
+     * @param mat matrix to invert
+     */
+    public static void aiMatrix4Inverse(@NativeType("struct aiMatrix4x4 *") AIMatrix4x4 mat) {
+        naiMatrix4Inverse(mat.address());
+    }
+
+    // --- [ aiMatrix4Determinant ] ---
+
+    /** Unsafe version of: {@link #aiMatrix4Determinant Matrix4Determinant} */
+    public static float naiMatrix4Determinant(long mat) {
+        long __functionAddress = Functions.Matrix4Determinant;
+        return invokePF(mat, __functionAddress);
+    }
+
+    /**
+     * Get the determinant of a 4x4 matrix.
+     *
+     * @param mat matrix to get the determinant from
+     *
+     * @return the determinant of the matrix
+     */
+    public static float aiMatrix4Determinant(@NativeType("struct aiMatrix4x4 const *") AIMatrix4x4 mat) {
+        return naiMatrix4Determinant(mat.address());
+    }
+
+    // --- [ aiMatrix4IsIdentity ] ---
+
+    /** Unsafe version of: {@link #aiMatrix4IsIdentity Matrix4IsIdentity} */
+    public static int naiMatrix4IsIdentity(long mat) {
+        long __functionAddress = Functions.Matrix4IsIdentity;
+        return invokePI(mat, __functionAddress);
+    }
+
+    /**
+     * Returns true of the matrix is the identity matrix.
+     *
+     * @param mat matrix to get the determinant from
+     */
+    @NativeType("int")
+    public static boolean aiMatrix4IsIdentity(@NativeType("struct aiMatrix4x4 const *") AIMatrix4x4 mat) {
+        return naiMatrix4IsIdentity(mat.address()) != 0;
+    }
+
+    // --- [ aiMatrix4DecomposeIntoScalingEulerAnglesPosition ] ---
+
+    /** Unsafe version of: {@link #aiMatrix4DecomposeIntoScalingEulerAnglesPosition Matrix4DecomposeIntoScalingEulerAnglesPosition} */
+    public static void naiMatrix4DecomposeIntoScalingEulerAnglesPosition(long mat, long scaling, long rotation, long position) {
+        long __functionAddress = Functions.Matrix4DecomposeIntoScalingEulerAnglesPosition;
+        invokePPPPV(mat, scaling, rotation, position, __functionAddress);
+    }
+
+    /**
+     * Decompose a transformation matrix into its scaling, rotational as euler angles, and translational components.
+     *
+     * @param mat      matrix to decompose
+     * @param scaling  receives the output scaling for the x,y,z axes
+     * @param rotation receives the output rotation as a Euler angles
+     * @param position receives the output position for the x,y,z axes
+     */
+    public static void aiMatrix4DecomposeIntoScalingEulerAnglesPosition(@NativeType("struct aiMatrix4x4 const *") AIMatrix4x4 mat, @NativeType("struct aiVector3D *") AIVector3D scaling, @NativeType("struct aiVector3D *") AIVector3D rotation, @NativeType("struct aiVector3D *") AIVector3D position) {
+        naiMatrix4DecomposeIntoScalingEulerAnglesPosition(mat.address(), scaling.address(), rotation.address(), position.address());
+    }
+
+    // --- [ aiMatrix4DecomposeIntoScalingAxisAnglePosition ] ---
+
+    /** Unsafe version of: {@link #aiMatrix4DecomposeIntoScalingAxisAnglePosition Matrix4DecomposeIntoScalingAxisAnglePosition} */
+    public static void naiMatrix4DecomposeIntoScalingAxisAnglePosition(long mat, long scaling, long axis, long angle, long position) {
+        long __functionAddress = Functions.Matrix4DecomposeIntoScalingAxisAnglePosition;
+        invokePPPPPV(mat, scaling, axis, angle, position, __functionAddress);
+    }
+
+    /**
+     * Decompose a transformation matrix into its scaling, rotational split into an axis and rotational angle, and it's translational components.
+     *
+     * @param mat      matrix to decompose
+     * @param scaling  receives the rotational component
+     * @param axis     receives the output rotation axis
+     * @param angle    receives the output rotation angle
+     * @param position receives the output position for the x,y,z axes
+     */
+    public static void aiMatrix4DecomposeIntoScalingAxisAnglePosition(@NativeType("struct aiMatrix4x4 const *") AIMatrix4x4 mat, @NativeType("struct aiVector3D *") AIVector3D scaling, @NativeType("struct aiVector3D *") AIVector3D axis, @NativeType("float *") FloatBuffer angle, @NativeType("struct aiVector3D *") AIVector3D position) {
+        if (CHECKS) {
+            check(angle, 1);
+        }
+        naiMatrix4DecomposeIntoScalingAxisAnglePosition(mat.address(), scaling.address(), axis.address(), memAddress(angle), position.address());
+    }
+
+    // --- [ aiMatrix4DecomposeNoScaling ] ---
+
+    /** Unsafe version of: {@link #aiMatrix4DecomposeNoScaling Matrix4DecomposeNoScaling} */
+    public static void naiMatrix4DecomposeNoScaling(long mat, long rotation, long position) {
+        long __functionAddress = Functions.Matrix4DecomposeNoScaling;
+        invokePPPV(mat, rotation, position, __functionAddress);
+    }
+
+    /**
+     * Decompose a transformation matrix into its rotational and translational components.
+     *
+     * @param mat      matrix to decompose
+     * @param rotation receives the rotational component
+     * @param position receives the translational component
+     */
+    public static void aiMatrix4DecomposeNoScaling(@NativeType("struct aiMatrix4x4 const *") AIMatrix4x4 mat, @NativeType("struct aiQuaternion *") AIQuaternion rotation, @NativeType("struct aiVector3D *") AIVector3D position) {
+        naiMatrix4DecomposeNoScaling(mat.address(), rotation.address(), position.address());
+    }
+
+    // --- [ aiMatrix4FromEulerAngles ] ---
+
+    /** Unsafe version of: {@link #aiMatrix4FromEulerAngles Matrix4FromEulerAngles} */
+    public static void naiMatrix4FromEulerAngles(long mat, float x, float y, float z) {
+        long __functionAddress = Functions.Matrix4FromEulerAngles;
+        invokePV(mat, x, y, z, __functionAddress);
+    }
+
+    /**
+     * Creates a 4x4 matrix from a set of euler angles.
+     *
+     * @param mat receives the output matrix
+     * @param x   rotation angle for the x-axis, in radians
+     * @param y   rotation angle for the y-axis, in radians
+     * @param z   rotation angle for the z-axis, in radians
+     */
+    public static void aiMatrix4FromEulerAngles(@NativeType("struct aiMatrix4x4 *") AIMatrix4x4 mat, float x, float y, float z) {
+        naiMatrix4FromEulerAngles(mat.address(), x, y, z);
+    }
+
+    // --- [ aiMatrix4RotationX ] ---
+
+    /** Unsafe version of: {@link #aiMatrix4RotationX Matrix4RotationX} */
+    public static void naiMatrix4RotationX(long mat, float angle) {
+        long __functionAddress = Functions.Matrix4RotationX;
+        invokePV(mat, angle, __functionAddress);
+    }
+
+    /**
+     * Get a 4x4 rotation matrix around the X axis.
+     *
+     * @param mat   receives the output matrix
+     * @param angle rotation angle, in radians
+     */
+    public static void aiMatrix4RotationX(@NativeType("struct aiMatrix4x4 *") AIMatrix4x4 mat, float angle) {
+        naiMatrix4RotationX(mat.address(), angle);
+    }
+
+    // --- [ aiMatrix4RotationY ] ---
+
+    /** Unsafe version of: {@link #aiMatrix4RotationY Matrix4RotationY} */
+    public static void naiMatrix4RotationY(long mat, float angle) {
+        long __functionAddress = Functions.Matrix4RotationY;
+        invokePV(mat, angle, __functionAddress);
+    }
+
+    /**
+     * Get a 4x4 rotation matrix around the Y axis.
+     *
+     * @param mat   receives the output matrix
+     * @param angle rotation angle, in radians
+     */
+    public static void aiMatrix4RotationY(@NativeType("struct aiMatrix4x4 *") AIMatrix4x4 mat, float angle) {
+        naiMatrix4RotationY(mat.address(), angle);
+    }
+
+    // --- [ aiMatrix4RotationZ ] ---
+
+    /** Unsafe version of: {@link #aiMatrix4RotationZ Matrix4RotationZ} */
+    public static void naiMatrix4RotationZ(long mat, float angle) {
+        long __functionAddress = Functions.Matrix4RotationZ;
+        invokePV(mat, angle, __functionAddress);
+    }
+
+    /**
+     * Get a 4x4 rotation matrix around the Z axis.
+     *
+     * @param mat   receives the output matrix
+     * @param angle rotation angle, in radians
+     */
+    public static void aiMatrix4RotationZ(@NativeType("struct aiMatrix4x4 *") AIMatrix4x4 mat, float angle) {
+        naiMatrix4RotationZ(mat.address(), angle);
+    }
+
+    // --- [ aiMatrix4FromRotationAroundAxis ] ---
+
+    /** Unsafe version of: {@link #aiMatrix4FromRotationAroundAxis Matrix4FromRotationAroundAxis} */
+    public static void naiMatrix4FromRotationAroundAxis(long mat, long axis, float angle) {
+        long __functionAddress = Functions.Matrix4FromRotationAroundAxis;
+        invokePPV(mat, axis, angle, __functionAddress);
+    }
+
+    /**
+     * Returns a 4x4 rotation matrix for a rotation around an arbitrary axis.
+     *
+     * @param mat   receives the output matrix
+     * @param axis  rotation axis, should be a normalized vector
+     * @param angle rotation angle, in radians
+     */
+    public static void aiMatrix4FromRotationAroundAxis(@NativeType("struct aiMatrix4x4 *") AIMatrix4x4 mat, @NativeType("struct aiVector3D const *") AIVector3D axis, float angle) {
+        naiMatrix4FromRotationAroundAxis(mat.address(), axis.address(), angle);
+    }
+
+    // --- [ aiMatrix4Translation ] ---
+
+    /** Unsafe version of: {@link #aiMatrix4Translation Matrix4Translation} */
+    public static void naiMatrix4Translation(long mat, long translation) {
+        long __functionAddress = Functions.Matrix4Translation;
+        invokePPV(mat, translation, __functionAddress);
+    }
+
+    /**
+     * Get a 4x4 translation matrix.
+     *
+     * @param mat         receives the output matrix
+     * @param translation the translation vector
+     */
+    public static void aiMatrix4Translation(@NativeType("struct aiMatrix4x4 *") AIMatrix4x4 mat, @NativeType("struct aiVector3D const *") AIVector3D translation) {
+        naiMatrix4Translation(mat.address(), translation.address());
+    }
+
+    // --- [ aiMatrix4Scaling ] ---
+
+    /** Unsafe version of: {@link #aiMatrix4Scaling Matrix4Scaling} */
+    public static void naiMatrix4Scaling(long mat, long scaling) {
+        long __functionAddress = Functions.Matrix4Scaling;
+        invokePPV(mat, scaling, __functionAddress);
+    }
+
+    /**
+     * Get a 4x4 scaling matrix.
+     *
+     * @param mat     receives the output matrix
+     * @param scaling the scaling vector
+     */
+    public static void aiMatrix4Scaling(@NativeType("struct aiMatrix4x4 *") AIMatrix4x4 mat, @NativeType("struct aiVector3D const *") AIVector3D scaling) {
+        naiMatrix4Scaling(mat.address(), scaling.address());
+    }
+
+    // --- [ aiMatrix4FromTo ] ---
+
+    /** Unsafe version of: {@link #aiMatrix4FromTo Matrix4FromTo} */
+    public static void naiMatrix4FromTo(long mat, long from, long to) {
+        long __functionAddress = Functions.Matrix4FromTo;
+        invokePPPV(mat, from, to, __functionAddress);
+    }
+
+    /**
+     * Create a 4x4 matrix that rotates one vector to another vector.
+     *
+     * @param mat  receives the output matrix
+     * @param from vector to rotate from
+     * @param to   vector to rotate to
+     */
+    public static void aiMatrix4FromTo(@NativeType("struct aiMatrix4x4 *") AIMatrix4x4 mat, @NativeType("struct aiVector3D const *") AIVector3D from, @NativeType("struct aiVector3D const *") AIVector3D to) {
+        naiMatrix4FromTo(mat.address(), from.address(), to.address());
+    }
+
+    // --- [ aiQuaternionFromEulerAngles ] ---
+
+    /** Unsafe version of: {@link #aiQuaternionFromEulerAngles QuaternionFromEulerAngles} */
+    public static void naiQuaternionFromEulerAngles(long q, float x, float y, float z) {
+        long __functionAddress = Functions.QuaternionFromEulerAngles;
+        invokePV(q, x, y, z, __functionAddress);
+    }
+
+    /**
+     * Create a Quaternion from euler angles.
+     *
+     * @param q receives the output quaternion
+     * @param x rotation angle for the x-axis, in radians
+     * @param y rotation angle for the y-axis, in radians
+     * @param z rotation angle for the z-axis, in radians
+     */
+    public static void aiQuaternionFromEulerAngles(@NativeType("struct aiQuaternion *") AIQuaternion q, float x, float y, float z) {
+        naiQuaternionFromEulerAngles(q.address(), x, y, z);
+    }
+
+    // --- [ aiQuaternionFromAxisAngle ] ---
+
+    /** Unsafe version of: {@link #aiQuaternionFromAxisAngle QuaternionFromAxisAngle} */
+    public static void naiQuaternionFromAxisAngle(long q, long axis, float angle) {
+        long __functionAddress = Functions.QuaternionFromAxisAngle;
+        invokePPV(q, axis, angle, __functionAddress);
+    }
+
+    /**
+     * Create a Quaternion from an axis angle pair.
+     *
+     * @param q     receives the output quaternion
+     * @param axis  the orientation axis
+     * @param angle the rotation angle, in radians
+     */
+    public static void aiQuaternionFromAxisAngle(@NativeType("struct aiQuaternion *") AIQuaternion q, @NativeType("struct aiVector3D const *") AIVector3D axis, float angle) {
+        naiQuaternionFromAxisAngle(q.address(), axis.address(), angle);
+    }
+
+    // --- [ aiQuaternionFromNormalizedQuaternion ] ---
+
+    /** Unsafe version of: {@link #aiQuaternionFromNormalizedQuaternion QuaternionFromNormalizedQuaternion} */
+    public static void naiQuaternionFromNormalizedQuaternion(long q, long normalized) {
+        long __functionAddress = Functions.QuaternionFromNormalizedQuaternion;
+        invokePPV(q, normalized, __functionAddress);
+    }
+
+    /**
+     * Create a Quaternion from a normalized quaternion stored in a 3D vector.
+     *
+     * @param q          receives the output quaternion
+     * @param normalized the vector that stores the quaternion
+     */
+    public static void aiQuaternionFromNormalizedQuaternion(@NativeType("struct aiQuaternion *") AIQuaternion q, @NativeType("struct aiVector3D const *") AIVector3D normalized) {
+        naiQuaternionFromNormalizedQuaternion(q.address(), normalized.address());
+    }
+
+    // --- [ aiQuaternionAreEqual ] ---
+
+    /** Unsafe version of: {@link #aiQuaternionAreEqual QuaternionAreEqual} */
+    public static int naiQuaternionAreEqual(long a, long b) {
+        long __functionAddress = Functions.QuaternionAreEqual;
+        return invokePPI(a, b, __functionAddress);
+    }
+
+    /**
+     * Check if quaternions are equal.
+     *
+     * @param a first quaternion to compare
+     * @param b second quaternion to compare
+     */
+    @NativeType("int")
+    public static boolean aiQuaternionAreEqual(@NativeType("struct aiQuaternion const *") AIQuaternion a, @NativeType("struct aiQuaternion const *") AIQuaternion b) {
+        return naiQuaternionAreEqual(a.address(), b.address()) != 0;
+    }
+
+    // --- [ aiQuaternionAreEqualEpsilon ] ---
+
+    /** Unsafe version of: {@link #aiQuaternionAreEqualEpsilon QuaternionAreEqualEpsilon} */
+    public static int naiQuaternionAreEqualEpsilon(long a, long b, float epsilon) {
+        long __functionAddress = Functions.QuaternionAreEqualEpsilon;
+        return invokePPI(a, b, epsilon, __functionAddress);
+    }
+
+    /**
+     * Check if quaternions are equal using epsilon.
+     *
+     * @param a       first quaternion to compare
+     * @param b       second quaternion to compare
+     * @param epsilon epsilon
+     */
+    @NativeType("int")
+    public static boolean aiQuaternionAreEqualEpsilon(@NativeType("struct aiQuaternion const *") AIQuaternion a, @NativeType("struct aiQuaternion const *") AIQuaternion b, @NativeType("float const") float epsilon) {
+        return naiQuaternionAreEqualEpsilon(a.address(), b.address(), epsilon) != 0;
+    }
+
+    // --- [ aiQuaternionNormalize ] ---
+
+    /** Unsafe version of: {@link #aiQuaternionNormalize QuaternionNormalize} */
+    public static void naiQuaternionNormalize(long q) {
+        long __functionAddress = Functions.QuaternionNormalize;
+        invokePV(q, __functionAddress);
+    }
+
+    /**
+     * Normalize a quaternion.
+     *
+     * @param q quaternion to normalize
+     */
+    public static void aiQuaternionNormalize(@NativeType("struct aiQuaternion *") AIQuaternion q) {
+        naiQuaternionNormalize(q.address());
+    }
+
+    // --- [ aiQuaternionConjugate ] ---
+
+    /** Unsafe version of: {@link #aiQuaternionConjugate QuaternionConjugate} */
+    public static void naiQuaternionConjugate(long q) {
+        long __functionAddress = Functions.QuaternionConjugate;
+        invokePV(q, __functionAddress);
+    }
+
+    /**
+     * Compute quaternion conjugate.
+     *
+     * @param q quaternion to compute conjugate, receives the output quaternion
+     */
+    public static void aiQuaternionConjugate(@NativeType("struct aiQuaternion *") AIQuaternion q) {
+        naiQuaternionConjugate(q.address());
+    }
+
+    // --- [ aiQuaternionMultiply ] ---
+
+    /** Unsafe version of: {@link #aiQuaternionMultiply QuaternionMultiply} */
+    public static void naiQuaternionMultiply(long dst, long q) {
+        long __functionAddress = Functions.QuaternionMultiply;
+        invokePPV(dst, q, __functionAddress);
+    }
+
+    /**
+     * Multiply quaternions.
+     *
+     * @param dst first quaternion, receives the output quaternion
+     * @param q   second quaternion
+     */
+    public static void aiQuaternionMultiply(@NativeType("struct aiQuaternion *") AIQuaternion dst, @NativeType("struct aiQuaternion const *") AIQuaternion q) {
+        naiQuaternionMultiply(dst.address(), q.address());
+    }
+
+    // --- [ aiQuaternionInterpolate ] ---
+
+    /** Unsafe version of: {@link #aiQuaternionInterpolate QuaternionInterpolate} */
+    public static void naiQuaternionInterpolate(long dst, long start, long end, float factor) {
+        long __functionAddress = Functions.QuaternionInterpolate;
+        invokePPPV(dst, start, end, factor, __functionAddress);
+    }
+
+    /**
+     * Performs a spherical interpolation between two quaternions.
+     *
+     * @param dst    receives the quaternion resulting from the interpolation
+     * @param start  quaternion when {@code factor == 0}
+     * @param end    quaternion when {@code factor == 1}
+     * @param factor interpolation factor between 0 and 1
+     */
+    public static void aiQuaternionInterpolate(@NativeType("struct aiQuaternion *") AIQuaternion dst, @NativeType("struct aiQuaternion const *") AIQuaternion start, @NativeType("struct aiQuaternion const *") AIQuaternion end, float factor) {
+        naiQuaternionInterpolate(dst.address(), start.address(), end.address(), factor);
+    }
+
     // --- [ aiGetImporterDesc ] ---
 
     /** Unsafe version of: {@link #aiGetImporterDesc GetImporterDesc} */
@@ -3672,6 +4996,22 @@ public class Assimp {
         } finally {
             stack.setPointer(stackPointer);
         }
+    }
+
+    // --- [ TextureTypeToString ] ---
+
+    /** Unsafe version of: {@link #TextureTypeToString} */
+    public static long nTextureTypeToString(int in) {
+        long __functionAddress = Functions.TextureTypeToString;
+        return invokeP(in, __functionAddress);
+    }
+
+    /** Get a string for a given {@code aiTextureType}. */
+    @Nullable
+    @NativeType("char const *")
+    public static String TextureTypeToString(@NativeType("aiTextureType") int in) {
+        long __result = nTextureTypeToString(in);
+        return memASCIISafe(__result);
     }
 
     // --- [ aiGetMaterialProperty ] ---
@@ -4223,6 +5563,15 @@ public class Assimp {
     public static int aiGetCompileFlags() {
         long __functionAddress = Functions.GetCompileFlags;
         return invokeI(__functionAddress);
+    }
+
+    /** Array version of: {@link #aiMatrix4DecomposeIntoScalingAxisAnglePosition Matrix4DecomposeIntoScalingAxisAnglePosition} */
+    public static void aiMatrix4DecomposeIntoScalingAxisAnglePosition(@NativeType("struct aiMatrix4x4 const *") AIMatrix4x4 mat, @NativeType("struct aiVector3D *") AIVector3D scaling, @NativeType("struct aiVector3D *") AIVector3D axis, @NativeType("float *") float[] angle, @NativeType("struct aiVector3D *") AIVector3D position) {
+        long __functionAddress = Functions.Matrix4DecomposeIntoScalingAxisAnglePosition;
+        if (CHECKS) {
+            check(angle, 1);
+        }
+        invokePPPPPV(mat.address(), scaling.address(), axis.address(), angle, position.address(), __functionAddress);
     }
 
     /** Array version of: {@link #aiGetMaterialFloatArray GetMaterialFloatArray} */

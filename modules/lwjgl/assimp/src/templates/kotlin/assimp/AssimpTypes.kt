@@ -915,6 +915,15 @@ val aiCamera = struct(Module.ASSIMP, "AICamera", nativeName = "struct aiCamera")
         aspect ratio is not defined in the source file. 0 is also the default value.
         """
     )
+    float(
+        "mOrthographicWidth",
+        """
+        Half horizontal orthographic width, in scene units.
+
+        The orthographic width specifies the half width of the orthographic view box. If non-zero the camera is orthographic and the {@code mAspect} should
+        define to the ratio between the orthographic width and height and {@code mHorizontalFOV} should be set to 0. The default value is 0 (not orthographic).
+        """
+    )
 }
 
 val aiScene = struct(Module.ASSIMP, "AIScene", nativeName = "struct aiScene") {
@@ -1193,8 +1202,8 @@ val aiDefaultLogStream = "aiDefaultLogStream".enumType
 
 val aiExportFormatDesc = struct(Module.ASSIMP, "AIExportFormatDesc", nativeName = "struct aiExportFormatDesc") {
     documentation = """
-        Describes an file format which Assimp can export to. Use #GetExportFormatCount() to learn how many export formats the current Assimp build supports and
-        #GetExportFormatDescription() to retrieve a description of an export format option.
+        Describes an file format which Assimp can export to. Use #GetExportFormatCount() to learn how many export-formats are supported by the current
+        Assimp-build and #GetExportFormatDescription() to retrieve the description of the export format option.
         """
 
     charUTF8.const.p(

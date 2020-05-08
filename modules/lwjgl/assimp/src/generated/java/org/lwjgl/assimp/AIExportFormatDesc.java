@@ -17,8 +17,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes an file format which Assimp can export to. Use {@link Assimp#aiGetExportFormatCount GetExportFormatCount} to learn how many export formats the current Assimp build supports and
- * {@link Assimp#aiGetExportFormatDescription GetExportFormatDescription} to retrieve a description of an export format option.
+ * Describes an file format which Assimp can export to. Use {@link Assimp#aiGetExportFormatCount GetExportFormatCount} to learn how many export-formats are supported by the current
+ * Assimp-build and {@link Assimp#aiGetExportFormatDescription GetExportFormatDescription} to retrieve the description of the export format option.
  * 
  * <h3>Member documentation</h3>
  * 
