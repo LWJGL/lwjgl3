@@ -8,12 +8,15 @@ package org.lwjgl.opengles;
 import org.lwjgl.system.*;
 import java.util.Set;
 import org.lwjgl.*;
+import javax.annotation.*;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** Defines the capabilities of an OpenGL ES context. */
 public final class GLESCapabilities {
+
+    public static final int ADDRESS_BUFFER_SIZE = 852;
 
     public final long
         glActiveTexture,
@@ -2331,7 +2334,7 @@ public final class GLESCapabilities {
     /** Off-heap array of the above function addresses. */
     final PointerBuffer addresses;
 
-    GLESCapabilities(FunctionProvider provider, Set<String> ext) {
+    GLESCapabilities(FunctionProvider provider, Set<String> ext, @Nullable PointerBuffer addressBuffer) {
         glActiveTexture = provider.getFunctionAddress("glActiveTexture");
         glAttachShader = provider.getFunctionAddress("glAttachShader");
         glBindAttribLocation = provider.getFunctionAddress("glBindAttribLocation");
@@ -3489,7 +3492,14 @@ public final class GLESCapabilities {
         GL_QCOM_YUV_texture_gather = ext.contains("GL_QCOM_YUV_texture_gather");
         GL_VIV_shader_binary = ext.contains("GL_VIV_shader_binary");
 
-        addresses = ThreadLocalUtil.getAddressesFromCapabilities(this);
+        addresses = ThreadLocalUtil.getAddressesFromCapabilities(this, addressBuffer == null
+            ? BufferUtils.createPointerBuffer(ADDRESS_BUFFER_SIZE)
+            : addressBuffer);
+    }
+
+    /** Returns the buffer of OpenGL ES function pointers. */
+    public PointerBuffer getAddressBuffer() {
+        return addresses;
     }
 
     boolean hasDSA(Set<String> ext) {

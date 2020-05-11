@@ -4,6 +4,7 @@
  */
 package org.lwjgl.openal;
 
+import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import javax.annotation.*;
@@ -142,6 +143,18 @@ public final class AL {
      * @return the ALCapabilities instance
      */
     public static ALCapabilities createCapabilities(ALCCapabilities alcCaps) {
+        return createCapabilities(alcCaps, null);
+    }
+
+    /**
+     * Creates a new {@link ALCapabilities} instance for the OpenAL context that is current in the current thread or process.
+     *
+     * @param alcCaps       the {@link ALCCapabilities} of the device associated with the current context
+     * @param addressBuffer a buffer of size {@link ALCapabilities#ADDRESS_BUFFER_SIZE}. If {@code null}, LWJGL will allocate a GC-managed buffer internally.
+     *
+     * @return the ALCapabilities instance
+     */
+    public static ALCapabilities createCapabilities(ALCCapabilities alcCaps, @Nullable PointerBuffer addressBuffer) {
         FunctionProvider functionProvider = ALC.check(AL.functionProvider);
 
         ALCapabilities caps = null;
@@ -199,7 +212,7 @@ public final class AL {
                 supportedExtensions.add("ALC_EXT_EFX");
             }
 
-            return caps = new ALCapabilities(functionProvider, supportedExtensions);
+            return caps = new ALCapabilities(functionProvider, supportedExtensions, addressBuffer);
         } finally {
             if (alcCaps.ALC_EXT_thread_local_context && alcGetThreadContext() != NULL) {
                 setCurrentThread(caps);

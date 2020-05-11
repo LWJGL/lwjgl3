@@ -4,6 +4,7 @@
  */
 package org.lwjgl.opengl;
 
+import org.lwjgl.*;
 import org.lwjgl.system.*;
 import org.lwjgl.system.macosx.*;
 import org.lwjgl.system.windows.*;
@@ -319,7 +320,22 @@ public final class GL {
      * @return the GLCapabilities instance
      */
     public static GLCapabilities createCapabilities() {
-        return createCapabilities(false);
+        return createCapabilities(null);
+    }
+
+    /**
+     * Creates a new {@link GLCapabilities} instance for the OpenGL context that is current in the current thread.
+     *
+     * <p>Depending on the current context, the instance returned may or may not contain the deprecated functionality removed since OpenGL version 3.1.</p>
+     *
+     * <p>This method calls {@link #setCapabilities(GLCapabilities)} with the new instance before returning.</p>
+     *
+     * @param addressBuffer a buffer of size {@link GLCapabilities#ADDRESS_BUFFER_SIZE}. If {@code null}, LWJGL will allocate a GC-managed buffer internally.
+     *
+     * @return the GLCapabilities instance
+     */
+    public static GLCapabilities createCapabilities(@Nullable PointerBuffer addressBuffer) {
+        return createCapabilities(false, addressBuffer);
     }
 
     /**
@@ -334,8 +350,26 @@ public final class GL {
      *
      * @return the GLCapabilities instance
      */
-    @SuppressWarnings("AssignmentToMethodParameter")
     public static GLCapabilities createCapabilities(boolean forwardCompatible) {
+        return createCapabilities(forwardCompatible, null);
+    }
+
+    /**
+     * Creates a new {@link GLCapabilities} instance for the OpenGL context that is current in the current thread.
+     *
+     * <p>Depending on the current context, the instance returned may or may not contain the deprecated functionality removed since OpenGL version 3.1. The
+     * {@code forwardCompatible} flag will force LWJGL to not load the deprecated functions, even if the current context exposes them.</p>
+     *
+     * <p>This method calls {@link #setCapabilities(GLCapabilities)} with the new instance before returning.</p>
+     *
+     * @param forwardCompatible if true, LWJGL will create forward compatible capabilities
+     * @param addressBuffer     a buffer of size {@link GLCapabilities#ADDRESS_BUFFER_SIZE}. If {@code null}, LWJGL will allocate a GC-managed buffer
+     *                          internally.
+     *
+     * @return the GLCapabilities instance
+     */
+    @SuppressWarnings("AssignmentToMethodParameter")
+    public static GLCapabilities createCapabilities(boolean forwardCompatible, @Nullable PointerBuffer addressBuffer) {
         FunctionProvider functionProvider = GL.functionProvider;
         if (functionProvider == null) {
             throw new IllegalStateException("OpenGL library has not been loaded.");
@@ -463,7 +497,7 @@ public final class GL {
                 }
             }
 
-            return caps = new GLCapabilities(functionProvider, supportedExtensions, forwardCompatible);
+            return caps = new GLCapabilities(functionProvider, supportedExtensions, forwardCompatible, addressBuffer);
         } finally {
             setCapabilities(caps);
         }

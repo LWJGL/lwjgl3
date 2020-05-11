@@ -200,9 +200,11 @@ public final class ThreadLocalUtil {
         }
     }
 
-    public static PointerBuffer getAddressesFromCapabilities(Object caps) {
-        List<Field>   fields    = getFieldsFromCapabilities(caps.getClass());
-        PointerBuffer addresses = BufferUtils.createPointerBuffer(fields.size());
+    public static PointerBuffer getAddressesFromCapabilities(Object caps, PointerBuffer addresses) {
+        List<Field> fields = getFieldsFromCapabilities(caps.getClass());
+        if (addresses.remaining() < fields.size()) {
+            throw new IllegalArgumentException("The address buffer must have at least " + fields.size() + " elements remaining.");
+        }
 
         try {
             for (int i = 0; i < fields.size(); i++) {

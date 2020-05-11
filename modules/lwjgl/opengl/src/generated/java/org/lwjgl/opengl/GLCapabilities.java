@@ -8,12 +8,15 @@ package org.lwjgl.opengl;
 import org.lwjgl.system.*;
 import java.util.Set;
 import org.lwjgl.*;
+import javax.annotation.*;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** Defines the capabilities of an OpenGL context. */
 public final class GLCapabilities {
+
+    public static final int ADDRESS_BUFFER_SIZE = 2211;
 
     public final long
         glAccum,
@@ -4202,7 +4205,7 @@ public final class GLCapabilities {
     /** Off-heap array of the above function addresses. */
     final PointerBuffer addresses;
 
-    GLCapabilities(FunctionProvider provider, Set<String> ext, boolean fc) {
+    GLCapabilities(FunctionProvider provider, Set<String> ext, boolean fc, @Nullable PointerBuffer addressBuffer) {
         forwardCompatible = fc;
 
         glAccum = getFunctionAddress(fc, provider, "glAccum");
@@ -6839,7 +6842,14 @@ public final class GLCapabilities {
         GL_OVR_multiview = ext.contains("GL_OVR_multiview") && checkExtension("GL_OVR_multiview", OVRMultiview.isAvailable(this, ext));
         GL_OVR_multiview2 = ext.contains("GL_OVR_multiview2");
 
-        addresses = ThreadLocalUtil.getAddressesFromCapabilities(this);
+        addresses = ThreadLocalUtil.getAddressesFromCapabilities(this, addressBuffer == null
+            ? BufferUtils.createPointerBuffer(ADDRESS_BUFFER_SIZE)
+            : addressBuffer);
+    }
+
+    /** Returns the buffer of OpenGL function pointers. */
+    public PointerBuffer getAddressBuffer() {
+        return addresses;
     }
 
     boolean hasDSA(Set<String> ext) {

@@ -32,6 +32,7 @@ private val ALBinding = Generator.register(object : APIBinding(
     init {
         javaImport(
             "org.lwjgl.*",
+            "javax.annotation.*",
             "static org.lwjgl.system.APIUtil.*"
         )
 
@@ -39,12 +40,14 @@ private val ALBinding = Generator.register(object : APIBinding(
     }
 
     override fun PrintWriter.generateJava() {
-        generateJavaPreamble()
-        println("public final class $CAPABILITIES_CLASS {\n")
-
         val classes = super.getClasses("AL")
-
         val addresses = classes.getFunctionPointers()
+
+        generateJavaPreamble()
+        println("""public final class $CAPABILITIES_CLASS {
+
+    public static final int ADDRESS_BUFFER_SIZE = ${addresses.size};
+""")
 
         println("${t}public final long")
         println(addresses.map(Func::name).joinToString(",\n$t$t", prefix = "$t$t", postfix = ";\n"))
@@ -58,7 +61,8 @@ private val ALBinding = Generator.register(object : APIBinding(
     /** Off-heap array of the above function addresses. */
     final PointerBuffer addresses;
 
-    $CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext) {""")
+    $CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext, @Nullable PointerBuffer addressBuffer) {"""
+        )
 
         println(addresses.joinToString("\n$t$t", prefix = "$t$t") { "${it.name} = provider.getFunctionAddress(${it.functionAddress});" })
 
@@ -71,7 +75,14 @@ private val ALBinding = Generator.register(object : APIBinding(
         }
         print("""
 
-        addresses = ThreadLocalUtil.getAddressesFromCapabilities(this);
+        addresses = ThreadLocalUtil.getAddressesFromCapabilities(this, addressBuffer == null
+            ? BufferUtils.createPointerBuffer(ADDRESS_BUFFER_SIZE)
+            : addressBuffer);
+    }
+
+    /** Returns the buffer of OpenAL function pointers. */
+    public PointerBuffer getAddressBuffer() {
+        return addresses;
     }
 
     private static boolean checkExtension(String extension, boolean supported) {

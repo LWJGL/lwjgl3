@@ -171,7 +171,7 @@ public class Gears {
         });
 
         glfwMakeContextCurrent(window);
-        GL.createCapabilities();
+        GL.createCapabilities(memAllocPointer(GLCapabilities.ADDRESS_BUFFER_SIZE));
         debugProc = GLUtil.setupDebugMessageCallback();
 
         gears = new GLXGears();
@@ -211,6 +211,7 @@ public class Gears {
     }
 
     private void destroy() {
+        memFree(GL.getCapabilities().getAddressBuffer());
         GL.setCapabilities(null);
 
         if (debugProc != null) {

@@ -57,7 +57,7 @@ public final class ALCDemo {
 
         long context = alcCreateContext(device, (IntBuffer)null);
         alcSetThreadContext(context);
-        AL.createCapabilities(deviceCaps);
+        ALCapabilities caps = AL.createCapabilities(deviceCaps, memAllocPointer(ALCapabilities.ADDRESS_BUFFER_SIZE));
 
         System.out.println("ALC_FREQUENCY: " + alcGetInteger(device, ALC_FREQUENCY) + "Hz");
         System.out.println("ALC_REFRESH: " + alcGetInteger(device, ALC_REFRESH) + "Hz");
@@ -69,6 +69,8 @@ public final class ALCDemo {
             testPlayback();
         } finally {
             alcMakeContextCurrent(NULL);
+            memFree(caps.getAddressBuffer());
+            AL.setCurrentThread(null);
             alcDestroyContext(context);
             alcCloseDevice(device);
         }

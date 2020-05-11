@@ -4,6 +4,7 @@
  */
 package org.lwjgl.opengles;
 
+import org.lwjgl.*;
 import org.lwjgl.egl.*;
 import org.lwjgl.system.*;
 
@@ -205,6 +206,21 @@ public final class GLES {
      * @throws IllegalStateException if no OpenGL ES context is current in the current thread
      */
     public static GLESCapabilities createCapabilities() {
+        return createCapabilities(null);
+    }
+
+    /**
+     * Creates a new {@link GLESCapabilities} instance for the OpenGL ES context that is current in the current thread.
+     *
+     * <p>This method calls {@link #setCapabilities(GLESCapabilities)} with the new instance before returning.</p>
+     *
+     * @param addressBuffer a buffer of size {@link GLESCapabilities#ADDRESS_BUFFER_SIZE}. If {@code null}, LWJGL will allocate a GC-managed buffer internally.
+     *
+     * @return the {@code GLESCapabilities} instance
+     *
+     * @throws IllegalStateException if no OpenGL ES context is current in the current thread
+     */
+    public static GLESCapabilities createCapabilities(@Nullable PointerBuffer addressBuffer) {
         FunctionProvider functionProvider = GLES.functionProvider;
         if (functionProvider == null) {
             throw new IllegalStateException("OpenGL ES library not been loaded.");
@@ -312,7 +328,7 @@ public final class GLES {
                 }
             }
 
-            caps = new GLESCapabilities(functionProvider, supportedExtensions);
+            caps = new GLESCapabilities(functionProvider, supportedExtensions, addressBuffer);
         } finally {
             setCapabilities(caps);
         }

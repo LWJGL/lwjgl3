@@ -8,11 +8,14 @@ package org.lwjgl.openal;
 import org.lwjgl.system.*;
 import java.util.Set;
 import org.lwjgl.*;
+import javax.annotation.*;
 
 import static org.lwjgl.system.APIUtil.*;
 
 /** Defines the capabilities of an OpenAL context. */
 public final class ALCapabilities {
+
+    public static final int ADDRESS_BUFFER_SIZE = 123;
 
     public final long
         alGetError,
@@ -217,7 +220,7 @@ public final class ALCapabilities {
     /** Off-heap array of the above function addresses. */
     final PointerBuffer addresses;
 
-    ALCapabilities(FunctionProvider provider, Set<String> ext) {
+    ALCapabilities(FunctionProvider provider, Set<String> ext, @Nullable PointerBuffer addressBuffer) {
         alGetError = provider.getFunctionAddress("alGetError");
         alEnable = provider.getFunctionAddress("alEnable");
         alDisable = provider.getFunctionAddress("alDisable");
@@ -380,7 +383,14 @@ public final class ALCapabilities {
         AL_SOFT_source_resampler = ext.contains("AL_SOFT_source_resampler") && checkExtension("AL_SOFT_source_resampler", SOFTSourceResampler.isAvailable(this));
         AL_SOFT_source_spatialize = ext.contains("AL_SOFT_source_spatialize");
 
-        addresses = ThreadLocalUtil.getAddressesFromCapabilities(this);
+        addresses = ThreadLocalUtil.getAddressesFromCapabilities(this, addressBuffer == null
+            ? BufferUtils.createPointerBuffer(ADDRESS_BUFFER_SIZE)
+            : addressBuffer);
+    }
+
+    /** Returns the buffer of OpenAL function pointers. */
+    public PointerBuffer getAddressBuffer() {
+        return addresses;
     }
 
     private static boolean checkExtension(String extension, boolean supported) {
