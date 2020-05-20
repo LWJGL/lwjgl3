@@ -8,7 +8,7 @@ package org.lwjgl.opengl;
 import org.lwjgl.system.*;
 import java.util.Set;
 import org.lwjgl.*;
-import javax.annotation.*;
+import java.util.function.*;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -4205,7 +4205,7 @@ public final class GLCapabilities {
     /** Off-heap array of the above function addresses. */
     final PointerBuffer addresses;
 
-    GLCapabilities(FunctionProvider provider, Set<String> ext, boolean fc, @Nullable PointerBuffer addressBuffer) {
+    GLCapabilities(FunctionProvider provider, Set<String> ext, boolean fc, IntFunction<PointerBuffer> bufferFactory) {
         forwardCompatible = fc;
 
         glAccum = getFunctionAddress(fc, provider, "glAccum");
@@ -6842,9 +6842,7 @@ public final class GLCapabilities {
         GL_OVR_multiview = ext.contains("GL_OVR_multiview") && checkExtension("GL_OVR_multiview", OVRMultiview.isAvailable(this, ext));
         GL_OVR_multiview2 = ext.contains("GL_OVR_multiview2");
 
-        addresses = ThreadLocalUtil.getAddressesFromCapabilities(this, addressBuffer == null
-            ? BufferUtils.createPointerBuffer(ADDRESS_BUFFER_SIZE)
-            : addressBuffer);
+        addresses = ThreadLocalUtil.getAddressesFromCapabilities(this, bufferFactory.apply(ADDRESS_BUFFER_SIZE));
     }
 
     /** Returns the buffer of OpenGL function pointers. */

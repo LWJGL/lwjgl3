@@ -12,6 +12,7 @@ import org.lwjgl.system.windows.*;
 import javax.annotation.*;
 import java.nio.*;
 import java.util.*;
+import java.util.function.*;
 
 import static java.lang.Math.*;
 import static org.lwjgl.opengl.GL32C.*;
@@ -330,12 +331,13 @@ public final class GL {
      *
      * <p>This method calls {@link #setCapabilities(GLCapabilities)} with the new instance before returning.</p>
      *
-     * @param addressBuffer a buffer of size {@link GLCapabilities#ADDRESS_BUFFER_SIZE}. If {@code null}, LWJGL will allocate a GC-managed buffer internally.
+     * @param bufferFactory a function that allocates a {@link PointerBuffer} given a size. If {@code null}, LWJGL will allocate a GC-managed buffer
+     *                      internally.
      *
      * @return the GLCapabilities instance
      */
-    public static GLCapabilities createCapabilities(@Nullable PointerBuffer addressBuffer) {
-        return createCapabilities(false, addressBuffer);
+    public static GLCapabilities createCapabilities(@Nullable IntFunction<PointerBuffer> bufferFactory) {
+        return createCapabilities(false, bufferFactory);
     }
 
     /**
@@ -363,13 +365,13 @@ public final class GL {
      * <p>This method calls {@link #setCapabilities(GLCapabilities)} with the new instance before returning.</p>
      *
      * @param forwardCompatible if true, LWJGL will create forward compatible capabilities
-     * @param addressBuffer     a buffer of size {@link GLCapabilities#ADDRESS_BUFFER_SIZE}. If {@code null}, LWJGL will allocate a GC-managed buffer
+     * @param bufferFactory     a function that allocates a {@link PointerBuffer} given a size. If {@code null}, LWJGL will allocate a GC-managed buffer
      *                          internally.
      *
      * @return the GLCapabilities instance
      */
     @SuppressWarnings("AssignmentToMethodParameter")
-    public static GLCapabilities createCapabilities(boolean forwardCompatible, @Nullable PointerBuffer addressBuffer) {
+    public static GLCapabilities createCapabilities(boolean forwardCompatible, @Nullable IntFunction<PointerBuffer> bufferFactory) {
         FunctionProvider functionProvider = GL.functionProvider;
         if (functionProvider == null) {
             throw new IllegalStateException("OpenGL library has not been loaded.");
@@ -497,7 +499,9 @@ public final class GL {
                 }
             }
 
-            return caps = new GLCapabilities(functionProvider, supportedExtensions, forwardCompatible, addressBuffer);
+            return caps = new GLCapabilities(functionProvider, supportedExtensions, forwardCompatible, bufferFactory == null
+                ? BufferUtils::createPointerBuffer
+                : bufferFactory);
         } finally {
             setCapabilities(caps);
         }

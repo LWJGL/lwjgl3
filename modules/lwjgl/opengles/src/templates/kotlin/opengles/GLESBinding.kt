@@ -116,7 +116,7 @@ private val GLESBinding = register(object : APIBinding(
     init {
         javaImport(
             "org.lwjgl.*",
-            "javax.annotation.*",
+            "java.util.function.*",
             "static org.lwjgl.system.APIUtil.*",
             "static org.lwjgl.system.MemoryUtil.*"
         )
@@ -145,7 +145,7 @@ private val GLESBinding = register(object : APIBinding(
     /** Off-heap array of the above function addresses. */
     final PointerBuffer addresses;
 
-    $CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext, @Nullable PointerBuffer addressBuffer) {
+    $CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext, IntFunction<PointerBuffer> bufferFactory) {
 """)
 
         println(functions.joinToString(prefix = "$t$t", separator = "\n$t$t") { "${it.name} = provider.getFunctionAddress(${it.functionAddress});" })
@@ -161,9 +161,7 @@ private val GLESBinding = register(object : APIBinding(
         }
         print("""
 
-        addresses = ThreadLocalUtil.getAddressesFromCapabilities(this, addressBuffer == null
-            ? BufferUtils.createPointerBuffer(ADDRESS_BUFFER_SIZE)
-            : addressBuffer);
+        addresses = ThreadLocalUtil.getAddressesFromCapabilities(this, bufferFactory.apply(ADDRESS_BUFFER_SIZE));
     }
 
     /** Returns the buffer of OpenGL ES function pointers. */

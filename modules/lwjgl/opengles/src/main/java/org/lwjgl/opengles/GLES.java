@@ -11,6 +11,7 @@ import org.lwjgl.system.*;
 import javax.annotation.*;
 import java.nio.*;
 import java.util.*;
+import java.util.function.*;
 
 import static java.lang.Math.*;
 import static org.lwjgl.opengles.GLES30.*;
@@ -214,13 +215,13 @@ public final class GLES {
      *
      * <p>This method calls {@link #setCapabilities(GLESCapabilities)} with the new instance before returning.</p>
      *
-     * @param addressBuffer a buffer of size {@link GLESCapabilities#ADDRESS_BUFFER_SIZE}. If {@code null}, LWJGL will allocate a GC-managed buffer internally.
+     * @param bufferFactory a function that allocates a {@link PointerBuffer} given a size. If {@code null}, LWJGL will allocate a GC-managed buffer internally.
      *
      * @return the {@code GLESCapabilities} instance
      *
      * @throws IllegalStateException if no OpenGL ES context is current in the current thread
      */
-    public static GLESCapabilities createCapabilities(@Nullable PointerBuffer addressBuffer) {
+    public static GLESCapabilities createCapabilities(@Nullable IntFunction<PointerBuffer> bufferFactory) {
         FunctionProvider functionProvider = GLES.functionProvider;
         if (functionProvider == null) {
             throw new IllegalStateException("OpenGL ES library not been loaded.");
@@ -328,7 +329,7 @@ public final class GLES {
                 }
             }
 
-            caps = new GLESCapabilities(functionProvider, supportedExtensions, addressBuffer);
+            caps = new GLESCapabilities(functionProvider, supportedExtensions, bufferFactory == null ? BufferUtils::createPointerBuffer : bufferFactory);
         } finally {
             setCapabilities(caps);
         }

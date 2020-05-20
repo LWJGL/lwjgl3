@@ -8,7 +8,7 @@ package org.lwjgl.openal;
 import org.lwjgl.system.*;
 import java.util.Set;
 import org.lwjgl.*;
-import javax.annotation.*;
+import java.util.function.*;
 
 import static org.lwjgl.system.APIUtil.*;
 
@@ -220,7 +220,7 @@ public final class ALCapabilities {
     /** Off-heap array of the above function addresses. */
     final PointerBuffer addresses;
 
-    ALCapabilities(FunctionProvider provider, Set<String> ext, @Nullable PointerBuffer addressBuffer) {
+    ALCapabilities(FunctionProvider provider, Set<String> ext, IntFunction<PointerBuffer> bufferFactory) {
         alGetError = provider.getFunctionAddress("alGetError");
         alEnable = provider.getFunctionAddress("alEnable");
         alDisable = provider.getFunctionAddress("alDisable");
@@ -383,9 +383,7 @@ public final class ALCapabilities {
         AL_SOFT_source_resampler = ext.contains("AL_SOFT_source_resampler") && checkExtension("AL_SOFT_source_resampler", SOFTSourceResampler.isAvailable(this));
         AL_SOFT_source_spatialize = ext.contains("AL_SOFT_source_spatialize");
 
-        addresses = ThreadLocalUtil.getAddressesFromCapabilities(this, addressBuffer == null
-            ? BufferUtils.createPointerBuffer(ADDRESS_BUFFER_SIZE)
-            : addressBuffer);
+        addresses = ThreadLocalUtil.getAddressesFromCapabilities(this, bufferFactory.apply(ADDRESS_BUFFER_SIZE));
     }
 
     /** Returns the buffer of OpenAL function pointers. */

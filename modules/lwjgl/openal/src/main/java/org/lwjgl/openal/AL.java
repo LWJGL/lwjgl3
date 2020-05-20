@@ -10,6 +10,7 @@ import org.lwjgl.system.*;
 import javax.annotation.*;
 import java.nio.*;
 import java.util.*;
+import java.util.function.*;
 
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.EXTThreadLocalContext.*;
@@ -150,11 +151,11 @@ public final class AL {
      * Creates a new {@link ALCapabilities} instance for the OpenAL context that is current in the current thread or process.
      *
      * @param alcCaps       the {@link ALCCapabilities} of the device associated with the current context
-     * @param addressBuffer a buffer of size {@link ALCapabilities#ADDRESS_BUFFER_SIZE}. If {@code null}, LWJGL will allocate a GC-managed buffer internally.
+     * @param bufferFactory a function that allocates a {@link PointerBuffer} given a size. If {@code null}, LWJGL will allocate a GC-managed buffer internally.
      *
      * @return the ALCapabilities instance
      */
-    public static ALCapabilities createCapabilities(ALCCapabilities alcCaps, @Nullable PointerBuffer addressBuffer) {
+    public static ALCapabilities createCapabilities(ALCCapabilities alcCaps, @Nullable IntFunction<PointerBuffer> bufferFactory) {
         FunctionProvider functionProvider = ALC.check(AL.functionProvider);
 
         ALCapabilities caps = null;
@@ -212,7 +213,7 @@ public final class AL {
                 supportedExtensions.add("ALC_EXT_EFX");
             }
 
-            return caps = new ALCapabilities(functionProvider, supportedExtensions, addressBuffer);
+            return caps = new ALCapabilities(functionProvider, supportedExtensions, bufferFactory == null ? BufferUtils::createPointerBuffer : bufferFactory);
         } finally {
             if (alcCaps.ALC_EXT_thread_local_context && alcGetThreadContext() != NULL) {
                 setCurrentThread(caps);
