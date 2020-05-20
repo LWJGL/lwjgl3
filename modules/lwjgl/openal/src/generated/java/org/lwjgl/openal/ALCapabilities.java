@@ -8,14 +8,16 @@ package org.lwjgl.openal;
 import org.lwjgl.system.*;
 import java.util.Set;
 import org.lwjgl.*;
-import java.util.function.*;
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.function.IntFunction;
 
 import static org.lwjgl.system.APIUtil.*;
 
 /** Defines the capabilities of an OpenAL context. */
 public final class ALCapabilities {
 
-    public static final int ADDRESS_BUFFER_SIZE = 123;
+    static final List<Field> ADDRESS_FIELDS = ThreadLocalUtil.getFieldsFromCapabilities(ALCapabilities.class, 123);
 
     public final long
         alGetError,
@@ -383,7 +385,7 @@ public final class ALCapabilities {
         AL_SOFT_source_resampler = ext.contains("AL_SOFT_source_resampler") && checkExtension("AL_SOFT_source_resampler", SOFTSourceResampler.isAvailable(this));
         AL_SOFT_source_spatialize = ext.contains("AL_SOFT_source_spatialize");
 
-        addresses = ThreadLocalUtil.getAddressesFromCapabilities(this, bufferFactory.apply(ADDRESS_BUFFER_SIZE));
+        addresses = ThreadLocalUtil.getAddressesFromCapabilities(this, ADDRESS_FIELDS, bufferFactory);
     }
 
     /** Returns the buffer of OpenAL function pointers. */

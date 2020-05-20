@@ -8,7 +8,9 @@ package org.lwjgl.opengles;
 import org.lwjgl.system.*;
 import java.util.Set;
 import org.lwjgl.*;
-import java.util.function.*;
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.function.IntFunction;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -16,7 +18,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Defines the capabilities of an OpenGL ES context. */
 public final class GLESCapabilities {
 
-    public static final int ADDRESS_BUFFER_SIZE = 852;
+    static final List<Field> ADDRESS_FIELDS = ThreadLocalUtil.getFieldsFromCapabilities(GLESCapabilities.class, 852);
 
     public final long
         glActiveTexture,
@@ -3492,7 +3494,7 @@ public final class GLESCapabilities {
         GL_QCOM_YUV_texture_gather = ext.contains("GL_QCOM_YUV_texture_gather");
         GL_VIV_shader_binary = ext.contains("GL_VIV_shader_binary");
 
-        addresses = ThreadLocalUtil.getAddressesFromCapabilities(this, bufferFactory.apply(ADDRESS_BUFFER_SIZE));
+        addresses = ThreadLocalUtil.getAddressesFromCapabilities(this, ADDRESS_FIELDS, bufferFactory);
     }
 
     /** Returns the buffer of OpenGL ES function pointers. */

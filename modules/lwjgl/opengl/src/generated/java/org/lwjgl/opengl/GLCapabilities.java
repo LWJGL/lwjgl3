@@ -8,7 +8,9 @@ package org.lwjgl.opengl;
 import org.lwjgl.system.*;
 import java.util.Set;
 import org.lwjgl.*;
-import java.util.function.*;
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.function.IntFunction;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -16,7 +18,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Defines the capabilities of an OpenGL context. */
 public final class GLCapabilities {
 
-    public static final int ADDRESS_BUFFER_SIZE = 2211;
+    static final List<Field> ADDRESS_FIELDS = ThreadLocalUtil.getFieldsFromCapabilities(GLCapabilities.class, 2211);
 
     public final long
         glAccum,
@@ -6842,7 +6844,7 @@ public final class GLCapabilities {
         GL_OVR_multiview = ext.contains("GL_OVR_multiview") && checkExtension("GL_OVR_multiview", OVRMultiview.isAvailable(this, ext));
         GL_OVR_multiview2 = ext.contains("GL_OVR_multiview2");
 
-        addresses = ThreadLocalUtil.getAddressesFromCapabilities(this, bufferFactory.apply(ADDRESS_BUFFER_SIZE));
+        addresses = ThreadLocalUtil.getAddressesFromCapabilities(this, ADDRESS_FIELDS, bufferFactory);
     }
 
     /** Returns the buffer of OpenGL function pointers. */

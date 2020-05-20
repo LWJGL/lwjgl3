@@ -143,7 +143,7 @@ public final class GLES {
         }
 
         GLES.functionProvider = functionProvider;
-        ThreadLocalUtil.setFunctionMissingAddresses(GLESCapabilities.class, 3);
+        ThreadLocalUtil.setFunctionMissingAddresses(GLESCapabilities.ADDRESS_FIELDS.size(), 3);
     }
     /** Unloads the OpenGL ES native library. */
     public static void destroy() {
@@ -151,7 +151,7 @@ public final class GLES {
             return;
         }
 
-        ThreadLocalUtil.setFunctionMissingAddresses(null, 3);
+        ThreadLocalUtil.setFunctionMissingAddresses(0, 3);
 
         if (functionProvider instanceof NativeResource) {
             ((NativeResource)functionProvider).free();

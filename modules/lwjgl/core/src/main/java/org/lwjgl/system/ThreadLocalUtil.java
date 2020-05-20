@@ -6,9 +6,9 @@ package org.lwjgl.system;
 
 import org.lwjgl.*;
 
-import javax.annotation.*;
 import java.lang.reflect.*;
 import java.util.*;
+import java.util.function.*;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -170,8 +170,8 @@ public final class ThreadLocalUtil {
         }
     }
 
-    private static List<Field> getFieldsFromCapabilities(Class<?> capabilitiesClass) {
-        List<Field> fields = new ArrayList<>();
+    public static List<Field> getFieldsFromCapabilities(Class<?> capabilitiesClass, int functionCount) {
+        List<Field> fields = new ArrayList<>(functionCount);
         for (Field field : capabilitiesClass.getFields()) {
             if (field.getType() == long.class) {
                 fields.add(field);
@@ -181,16 +181,14 @@ public final class ThreadLocalUtil {
     }
 
     // Ensures FUNCTION_MISSING_ABORT will be called even if no context is current,
-    public static void setFunctionMissingAddresses(@Nullable Class<?> capabilitiesClass, int index) {
-        if (capabilitiesClass == null) {
+    public static void setFunctionMissingAddresses(int functionCount, int index) {
+        if (functionCount == 0) {
             long missingCaps = memGetAddress(JNI_NATIVE_INTERFACE + Integer.toUnsignedLong(index) * POINTER_SIZE);
             if (missingCaps != NULL) {
                 getAllocator().free(missingCaps);
                 memPutAddress(JNI_NATIVE_INTERFACE + Integer.toUnsignedLong(index) * POINTER_SIZE, NULL);
             }
         } else {
-            int functionCount = getFieldsFromCapabilities(capabilitiesClass).size();
-
             long missingCaps = getAllocator().malloc(Integer.toUnsignedLong(functionCount) * POINTER_SIZE);
             for (int i = 0; i < functionCount; i++) {
                 memPutAddress(missingCaps + Integer.toUnsignedLong(i) * POINTER_SIZE, FUNCTION_MISSING_ABORT);
@@ -200,11 +198,8 @@ public final class ThreadLocalUtil {
         }
     }
 
-    public static PointerBuffer getAddressesFromCapabilities(Object caps, PointerBuffer addresses) {
-        List<Field> fields = getFieldsFromCapabilities(caps.getClass());
-        if (addresses.remaining() < fields.size()) {
-            throw new IllegalArgumentException("The address buffer must have at least " + fields.size() + " elements remaining.");
-        }
+    public static PointerBuffer getAddressesFromCapabilities(Object caps, List<Field> fields, IntFunction<PointerBuffer> bufferFactory) {
+        PointerBuffer addresses = bufferFactory.apply(fields.size());
 
         try {
             for (int i = 0; i < fields.size(); i++) {

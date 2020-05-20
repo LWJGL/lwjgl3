@@ -116,7 +116,9 @@ private val GLESBinding = register(object : APIBinding(
     init {
         javaImport(
             "org.lwjgl.*",
-            "java.util.function.*",
+            "java.lang.reflect.Field",
+            "java.util.List",
+            "java.util.function.IntFunction",
             "static org.lwjgl.system.APIUtil.*",
             "static org.lwjgl.system.MemoryUtil.*"
         )
@@ -128,7 +130,7 @@ private val GLESBinding = register(object : APIBinding(
         generateJavaPreamble()
         println("""public final class $CAPABILITIES_CLASS {
 
-    public static final int ADDRESS_BUFFER_SIZE = ${functions.size};
+    static final List<Field> ADDRESS_FIELDS = ThreadLocalUtil.getFieldsFromCapabilities($CAPABILITIES_CLASS.class, ${functions.size});
 """)
 
         println("${t}public final long")
@@ -161,7 +163,7 @@ private val GLESBinding = register(object : APIBinding(
         }
         print("""
 
-        addresses = ThreadLocalUtil.getAddressesFromCapabilities(this, bufferFactory.apply(ADDRESS_BUFFER_SIZE));
+        addresses = ThreadLocalUtil.getAddressesFromCapabilities(this, ADDRESS_FIELDS, bufferFactory);
     }
 
     /** Returns the buffer of OpenGL ES function pointers. */
