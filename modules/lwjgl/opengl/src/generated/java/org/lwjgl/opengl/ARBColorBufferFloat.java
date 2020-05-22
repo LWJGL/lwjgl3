@@ -7,8 +7,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_color_buffer_float.txt">ARB_color_buffer_float</a> extension.
  * 
@@ -49,12 +47,6 @@ public class ARBColorBufferFloat {
 
     protected ARBColorBufferFloat() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glClampColorARB
-        );
     }
 
     // --- [ glClampColorARB ] ---

@@ -44,12 +44,6 @@ public class EXTExternalBuffer {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps, java.util.Set<String> ext) {
-        return checkFunctions(
-            caps.glBufferStorageExternalEXT, caps.hasDSA(ext) ? caps.glNamedBufferStorageExternalEXT : -1L
-        );
-    }
-
     // --- [ glBufferStorageExternalEXT ] ---
 
     public static native void nglBufferStorageExternalEXT(int target, long offset, long size, long clientBuffer, int flags);

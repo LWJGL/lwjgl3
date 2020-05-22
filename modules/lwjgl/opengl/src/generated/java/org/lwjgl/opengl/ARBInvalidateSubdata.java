@@ -9,8 +9,6 @@ import java.nio.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_invalidate_subdata.txt">ARB_invalidate_subdata</a> extension.
  * 
@@ -50,13 +48,6 @@ public class ARBInvalidateSubdata {
 
     protected ARBInvalidateSubdata() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glInvalidateTexSubImage, caps.glInvalidateTexImage, caps.glInvalidateBufferSubData, caps.glInvalidateBufferData, caps.glInvalidateFramebuffer, 
-            caps.glInvalidateSubFramebuffer
-        );
     }
 
     // --- [ glInvalidateTexSubImage ] ---

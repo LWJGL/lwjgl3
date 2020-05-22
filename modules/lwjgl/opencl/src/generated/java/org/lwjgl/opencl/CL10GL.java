@@ -78,13 +78,6 @@ public class CL10GL {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(CLCapabilities caps) {
-        return checkFunctions(
-            caps.clCreateFromGLBuffer, caps.clCreateFromGLTexture2D, caps.clCreateFromGLTexture3D, caps.clCreateFromGLRenderbuffer, caps.clGetGLObjectInfo, 
-            caps.clGetGLTextureInfo, caps.clEnqueueAcquireGLObjects, caps.clEnqueueReleaseGLObjects
-        );
-    }
-
     // --- [ clCreateFromGLBuffer ] ---
 
     /** Unsafe version of: {@link #clCreateFromGLBuffer CreateFromGLBuffer} */

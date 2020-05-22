@@ -42,12 +42,6 @@ public class EXTTimerQuery {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glGetQueryObjecti64vEXT, caps.glGetQueryObjectui64vEXT
-        );
-    }
-
     // --- [ glGetQueryObjecti64vEXT ] ---
 
     public static native void nglGetQueryObjecti64vEXT(int id, int pname, long params);

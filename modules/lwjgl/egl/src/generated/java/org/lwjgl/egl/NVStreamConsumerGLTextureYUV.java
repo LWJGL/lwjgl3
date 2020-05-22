@@ -46,12 +46,6 @@ public class NVStreamConsumerGLTextureYUV {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglStreamConsumerGLTextureExternalAttribsNV
-        );
-    }
-
     // --- [ eglStreamConsumerGLTextureExternalAttribsNV ] ---
 
     public static int neglStreamConsumerGLTextureExternalAttribsNV(long dpy, long stream, long attrib_list) {

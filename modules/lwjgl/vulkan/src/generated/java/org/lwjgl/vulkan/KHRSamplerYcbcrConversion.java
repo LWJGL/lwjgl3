@@ -288,13 +288,6 @@ public class KHRSamplerYcbcrConversion {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_sampler_ycbcr_conversion") && VK.checkExtension("VK_KHR_sampler_ycbcr_conversion",
-               VK.isSupported(provider, "vkCreateSamplerYcbcrConversionKHR", caps)
-            && VK.isSupported(provider, "vkDestroySamplerYcbcrConversionKHR", caps)
-        );
-    }
-
     // --- [ vkCreateSamplerYcbcrConversionKHR ] ---
 
     /** Unsafe version of: {@link #vkCreateSamplerYcbcrConversionKHR CreateSamplerYcbcrConversionKHR} */

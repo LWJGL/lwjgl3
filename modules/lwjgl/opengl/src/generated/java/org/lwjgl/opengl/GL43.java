@@ -11,8 +11,6 @@ import java.nio.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * The OpenGL functionality up to version 4.3. Includes the deprecated symbols of the Compatibility Profile.
  * 
@@ -448,21 +446,6 @@ public class GL43 extends GL42 {
 
     protected GL43() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glClearBufferData, caps.glClearBufferSubData, caps.glDispatchCompute, caps.glDispatchComputeIndirect, caps.glCopyImageSubData, 
-            caps.glDebugMessageControl, caps.glDebugMessageInsert, caps.glDebugMessageCallback, caps.glGetDebugMessageLog, caps.glPushDebugGroup, 
-            caps.glPopDebugGroup, caps.glObjectLabel, caps.glGetObjectLabel, caps.glObjectPtrLabel, caps.glGetObjectPtrLabel, caps.glFramebufferParameteri, 
-            caps.glGetFramebufferParameteriv, caps.glGetInternalformati64v, caps.glInvalidateTexSubImage, caps.glInvalidateTexImage, 
-            caps.glInvalidateBufferSubData, caps.glInvalidateBufferData, caps.glInvalidateFramebuffer, caps.glInvalidateSubFramebuffer, 
-            caps.glMultiDrawArraysIndirect, caps.glMultiDrawElementsIndirect, caps.glGetProgramInterfaceiv, caps.glGetProgramResourceIndex, 
-            caps.glGetProgramResourceName, caps.glGetProgramResourceiv, caps.glGetProgramResourceLocation, caps.glGetProgramResourceLocationIndex, 
-            caps.glShaderStorageBlockBinding, caps.glTexBufferRange, caps.glTexStorage2DMultisample, caps.glTexStorage3DMultisample, caps.glTextureView, 
-            caps.glBindVertexBuffer, caps.glVertexAttribFormat, caps.glVertexAttribIFormat, caps.glVertexAttribLFormat, caps.glVertexAttribBinding, 
-            caps.glVertexBindingDivisor
-        );
     }
 
     // --- [ glClearBufferData ] ---

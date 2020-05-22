@@ -49,12 +49,6 @@ public class NVSync {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglCreateFenceSyncNV, caps.eglDestroySyncNV, caps.eglFenceNV, caps.eglClientWaitSyncNV, caps.eglSignalSyncNV, caps.eglGetSyncAttribNV
-        );
-    }
-
     // --- [ eglCreateFenceSyncNV ] ---
 
     public static long neglCreateFenceSyncNV(long dpy, int condition, long attrib_list) {

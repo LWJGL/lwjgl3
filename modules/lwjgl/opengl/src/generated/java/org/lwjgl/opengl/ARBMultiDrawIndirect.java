@@ -9,8 +9,6 @@ import java.nio.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_multi_draw_indirect.txt">ARB_multi_draw_indirect</a> extension.
  * 
@@ -30,12 +28,6 @@ public class ARBMultiDrawIndirect {
 
     protected ARBMultiDrawIndirect() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glMultiDrawArraysIndirect, caps.glMultiDrawElementsIndirect
-        );
     }
 
     // --- [ glMultiDrawArraysIndirect ] ---

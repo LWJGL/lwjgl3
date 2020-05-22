@@ -46,12 +46,6 @@ public class KHRFenceSync {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglCreateSyncKHR, caps.eglDestroySyncKHR, caps.eglClientWaitSyncKHR, caps.eglGetSyncAttribKHR
-        );
-    }
-
     // --- [ eglCreateSyncKHR ] ---
 
     public static long neglCreateSyncKHR(long dpy, int type, long attrib_list) {

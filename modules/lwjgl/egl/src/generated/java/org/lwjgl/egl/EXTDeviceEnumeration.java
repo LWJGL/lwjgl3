@@ -38,12 +38,6 @@ public class EXTDeviceEnumeration {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglQueryDevicesEXT
-        );
-    }
-
     // --- [ eglQueryDevicesEXT ] ---
 
     public static int neglQueryDevicesEXT(int max_devices, long devices, long num_devices) {

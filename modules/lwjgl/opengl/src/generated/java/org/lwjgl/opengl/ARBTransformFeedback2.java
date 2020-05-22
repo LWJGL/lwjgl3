@@ -9,8 +9,6 @@ import java.nio.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_transform_feedback2.txt">ARB_transform_feedback2</a> extension.
  * 
@@ -46,13 +44,6 @@ public class ARBTransformFeedback2 {
 
     protected ARBTransformFeedback2() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glBindTransformFeedback, caps.glDeleteTransformFeedbacks, caps.glGenTransformFeedbacks, caps.glIsTransformFeedback, 
-            caps.glPauseTransformFeedback, caps.glResumeTransformFeedback, caps.glDrawTransformFeedback
-        );
     }
 
     // --- [ glBindTransformFeedback ] ---

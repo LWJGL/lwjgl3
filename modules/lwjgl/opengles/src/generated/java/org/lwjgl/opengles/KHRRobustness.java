@@ -78,12 +78,6 @@ public class KHRRobustness {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glGetGraphicsResetStatusKHR, caps.glReadnPixelsKHR, caps.glGetnUniformfvKHR, caps.glGetnUniformivKHR, caps.glGetnUniformuivKHR
-        );
-    }
-
     // --- [ glGetGraphicsResetStatusKHR ] ---
 
     /**

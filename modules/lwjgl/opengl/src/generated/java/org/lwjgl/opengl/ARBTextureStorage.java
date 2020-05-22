@@ -7,8 +7,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_storage.txt">ARB_texture_storage</a> extension.
  * 
@@ -36,14 +34,6 @@ public class ARBTextureStorage {
 
     protected ARBTextureStorage() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps, java.util.Set<String> ext) {
-        return checkFunctions(
-            caps.glTexStorage1D, caps.glTexStorage2D, caps.glTexStorage3D, ext.contains("GL_EXT_direct_state_access") ? caps.glTextureStorage1DEXT : -1L, 
-            ext.contains("GL_EXT_direct_state_access") ? caps.glTextureStorage2DEXT : -1L, 
-            ext.contains("GL_EXT_direct_state_access") ? caps.glTextureStorage3DEXT : -1L
-        );
     }
 
     // --- [ glTexStorage1D ] ---

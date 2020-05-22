@@ -38,12 +38,6 @@ public class EXTEGLImageStorage {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps, java.util.Set<String> ext) {
-        return checkFunctions(
-            caps.glEGLImageTargetTexStorageEXT, caps.hasDSA(ext) ? caps.glEGLImageTargetTextureStorageEXT : -1L
-        );
-    }
-
     // --- [ glEGLImageTargetTexStorageEXT ] ---
 
     public static native void nglEGLImageTargetTexStorageEXT(int target, long image, long attrib_list);

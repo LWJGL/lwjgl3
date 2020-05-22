@@ -127,17 +127,6 @@ public class EXTTransformFeedback {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_transform_feedback") && VK.checkExtension("VK_EXT_transform_feedback",
-               VK.isSupported(provider, "vkCmdBindTransformFeedbackBuffersEXT", caps)
-            && VK.isSupported(provider, "vkCmdBeginTransformFeedbackEXT", caps)
-            && VK.isSupported(provider, "vkCmdEndTransformFeedbackEXT", caps)
-            && VK.isSupported(provider, "vkCmdBeginQueryIndexedEXT", caps)
-            && VK.isSupported(provider, "vkCmdEndQueryIndexedEXT", caps)
-            && VK.isSupported(provider, "vkCmdDrawIndirectByteCountEXT", caps)
-        );
-    }
-
     // --- [ vkCmdBindTransformFeedbackBuffersEXT ] ---
 
     /**

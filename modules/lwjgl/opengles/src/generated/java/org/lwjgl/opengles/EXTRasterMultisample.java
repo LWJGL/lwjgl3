@@ -7,8 +7,6 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_raster_multisample.txt">EXT_raster_multisample</a> extension.
  * 
@@ -42,12 +40,6 @@ public class EXTRasterMultisample {
 
     protected EXTRasterMultisample() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glRasterSamplesEXT
-        );
     }
 
     // --- [ glRasterSamplesEXT ] ---

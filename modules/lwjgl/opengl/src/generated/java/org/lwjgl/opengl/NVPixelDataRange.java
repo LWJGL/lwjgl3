@@ -9,7 +9,6 @@ import java.nio.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -71,12 +70,6 @@ public class NVPixelDataRange {
 
     protected NVPixelDataRange() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glPixelDataRangeNV, caps.glFlushPixelDataRangeNV
-        );
     }
 
     // --- [ glPixelDataRangeNV ] ---

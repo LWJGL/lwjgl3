@@ -7,8 +7,6 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_tessellation_shader.txt">OES_tessellation_shader</a> extension.
  * 
@@ -133,12 +131,6 @@ public class OESTessellationShader {
 
     protected OESTessellationShader() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glPatchParameteriOES
-        );
     }
 
     // --- [ glPatchParameteriOES ] ---

@@ -56,12 +56,6 @@ public class INTELSubgroups {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(CLCapabilities caps) {
-        return checkFunctions(
-            caps.clGetKernelSubGroupInfoKHR
-        );
-    }
-
     // --- [ clGetKernelSubGroupInfoKHR ] ---
 
     /**

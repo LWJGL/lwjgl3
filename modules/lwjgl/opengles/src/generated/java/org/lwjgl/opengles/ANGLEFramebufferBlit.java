@@ -7,8 +7,6 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ANGLE/ANGLE_framebuffer_blit.txt">ANGLE_framebuffer_blit</a> extension.
  * 
@@ -37,12 +35,6 @@ public class ANGLEFramebufferBlit {
 
     protected ANGLEFramebufferBlit() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glBlitFramebufferANGLE
-        );
     }
 
     // --- [ glBlitFramebufferANGLE ] ---

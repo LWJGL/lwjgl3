@@ -117,13 +117,6 @@ public class ARBVertexBufferObject {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glBindBufferARB, caps.glDeleteBuffersARB, caps.glGenBuffersARB, caps.glIsBufferARB, caps.glBufferDataARB, caps.glBufferSubDataARB, 
-            caps.glGetBufferSubDataARB, caps.glMapBufferARB, caps.glUnmapBufferARB, caps.glGetBufferParameterivARB, caps.glGetBufferPointervARB
-        );
-    }
-
     // --- [ glBindBufferARB ] ---
 
     /**

@@ -76,13 +76,6 @@ public class KHRExternalSemaphoreWin32 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_external_semaphore_win32") && VK.checkExtension("VK_KHR_external_semaphore_win32",
-               VK.isSupported(provider, "vkImportSemaphoreWin32HandleKHR", caps)
-            && VK.isSupported(provider, "vkGetSemaphoreWin32HandleKHR", caps)
-        );
-    }
-
     // --- [ vkImportSemaphoreWin32HandleKHR ] ---
 
     /** Unsafe version of: {@link #vkImportSemaphoreWin32HandleKHR ImportSemaphoreWin32HandleKHR} */

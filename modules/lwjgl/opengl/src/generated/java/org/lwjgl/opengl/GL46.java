@@ -11,8 +11,6 @@ import java.nio.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * The OpenGL functionality up to version 4.6. Includes the deprecated symbols of the Compatibility Profile.
  * 
@@ -97,12 +95,6 @@ public class GL46 extends GL45 {
 
     protected GL46() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glMultiDrawArraysIndirectCount, caps.glMultiDrawElementsIndirectCount, caps.glPolygonOffsetClamp, caps.glSpecializeShader
-        );
     }
 
     // --- [ glMultiDrawArraysIndirectCount ] ---

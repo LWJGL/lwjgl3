@@ -7,8 +7,6 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_sample_shading.txt">OES_sample_shading</a> extension.
  * 
@@ -40,12 +38,6 @@ public class OESSampleShading {
 
     protected OESSampleShading() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glMinSampleShadingOES
-        );
     }
 
     // --- [ glMinSampleShadingOES ] ---

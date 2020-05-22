@@ -78,12 +78,6 @@ public class AMDDebugOutput {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glDebugMessageEnableAMD, caps.glDebugMessageInsertAMD, caps.glDebugMessageCallbackAMD, caps.glGetDebugMessageLogAMD
-        );
-    }
-
     // --- [ glDebugMessageEnableAMD ] ---
 
     /**

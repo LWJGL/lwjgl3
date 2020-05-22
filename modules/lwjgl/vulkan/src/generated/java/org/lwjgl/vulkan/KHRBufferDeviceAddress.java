@@ -115,14 +115,6 @@ public class KHRBufferDeviceAddress {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_buffer_device_address") && VK.checkExtension("VK_KHR_buffer_device_address",
-               VK.isSupported(provider, "vkGetBufferDeviceAddressKHR", caps)
-            && VK.isSupported(provider, "vkGetBufferOpaqueCaptureAddressKHR", caps)
-            && VK.isSupported(provider, "vkGetDeviceMemoryOpaqueCaptureAddressKHR", caps)
-        );
-    }
-
     // --- [ vkGetBufferDeviceAddressKHR ] ---
 
     /** Unsafe version of: {@link #vkGetBufferDeviceAddressKHR GetBufferDeviceAddressKHR} */

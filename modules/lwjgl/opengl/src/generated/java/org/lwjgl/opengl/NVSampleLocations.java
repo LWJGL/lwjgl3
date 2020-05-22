@@ -59,12 +59,6 @@ public class NVSampleLocations {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glFramebufferSampleLocationsfvNV, caps.glNamedFramebufferSampleLocationsfvNV, caps.glResolveDepthValuesNV
-        );
-    }
-
     // --- [ glFramebufferSampleLocationsfvNV ] ---
 
     /**

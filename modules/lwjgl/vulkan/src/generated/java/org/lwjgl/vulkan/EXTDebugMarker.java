@@ -168,16 +168,6 @@ public class EXTDebugMarker {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_debug_marker") && VK.checkExtension("VK_EXT_debug_marker",
-               VK.isSupported(provider, "vkDebugMarkerSetObjectTagEXT", caps)
-            && VK.isSupported(provider, "vkDebugMarkerSetObjectNameEXT", caps)
-            && VK.isSupported(provider, "vkCmdDebugMarkerBeginEXT", caps)
-            && VK.isSupported(provider, "vkCmdDebugMarkerEndEXT", caps)
-            && VK.isSupported(provider, "vkCmdDebugMarkerInsertEXT", caps)
-        );
-    }
-
     // --- [ vkDebugMarkerSetObjectTagEXT ] ---
 
     /** Unsafe version of: {@link #vkDebugMarkerSetObjectTagEXT DebugMarkerSetObjectTagEXT} */

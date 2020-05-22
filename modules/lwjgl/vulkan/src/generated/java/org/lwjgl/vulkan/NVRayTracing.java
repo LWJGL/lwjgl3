@@ -391,23 +391,6 @@ public class NVRayTracing {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_NV_ray_tracing") && VK.checkExtension("VK_NV_ray_tracing",
-               VK.isSupported(provider, "vkCreateAccelerationStructureNV", caps)
-            && VK.isSupported(provider, "vkDestroyAccelerationStructureNV", caps)
-            && VK.isSupported(provider, "vkGetAccelerationStructureMemoryRequirementsNV", caps)
-            && VK.isSupported(provider, "vkBindAccelerationStructureMemoryNV", caps)
-            && VK.isSupported(provider, "vkCmdBuildAccelerationStructureNV", caps)
-            && VK.isSupported(provider, "vkCmdCopyAccelerationStructureNV", caps)
-            && VK.isSupported(provider, "vkCmdTraceRaysNV", caps)
-            && VK.isSupported(provider, "vkCreateRayTracingPipelinesNV", caps)
-            && VK.isSupported(provider, "vkGetRayTracingShaderGroupHandlesNV", caps)
-            && VK.isSupported(provider, "vkGetAccelerationStructureHandleNV", caps)
-            && VK.isSupported(provider, "vkCmdWriteAccelerationStructuresPropertiesNV", caps)
-            && VK.isSupported(provider, "vkCompileDeferredNV", caps)
-        );
-    }
-
     // --- [ vkCreateAccelerationStructureNV ] ---
 
     /** Unsafe version of: {@link #vkCreateAccelerationStructureNV CreateAccelerationStructureNV} */

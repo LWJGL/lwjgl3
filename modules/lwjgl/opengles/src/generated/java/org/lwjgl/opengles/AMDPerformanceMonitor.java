@@ -48,14 +48,6 @@ public class AMDPerformanceMonitor {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glGetPerfMonitorGroupsAMD, caps.glGetPerfMonitorCountersAMD, caps.glGetPerfMonitorGroupStringAMD, caps.glGetPerfMonitorCounterStringAMD, 
-            caps.glGetPerfMonitorCounterInfoAMD, caps.glGenPerfMonitorsAMD, caps.glDeletePerfMonitorsAMD, caps.glSelectPerfMonitorCountersAMD, 
-            caps.glBeginPerfMonitorAMD, caps.glEndPerfMonitorAMD, caps.glGetPerfMonitorCounterDataAMD
-        );
-    }
-
     // --- [ glGetPerfMonitorGroupsAMD ] ---
 
     public static native void nglGetPerfMonitorGroupsAMD(long numGroups, int groupsSize, long groups);

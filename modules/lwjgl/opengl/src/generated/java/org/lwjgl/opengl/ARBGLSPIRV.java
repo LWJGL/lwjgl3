@@ -44,12 +44,6 @@ public class ARBGLSPIRV {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glSpecializeShaderARB
-        );
-    }
-
     // --- [ glSpecializeShaderARB ] ---
 
     /**

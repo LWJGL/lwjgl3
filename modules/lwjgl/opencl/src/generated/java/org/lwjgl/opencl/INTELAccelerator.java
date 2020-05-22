@@ -58,12 +58,6 @@ public class INTELAccelerator {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(CLCapabilities caps) {
-        return checkFunctions(
-            caps.clCreateAcceleratorINTEL, caps.clRetainAcceleratorINTEL, caps.clReleaseAcceleratorINTEL, caps.clGetAcceleratorInfoINTEL
-        );
-    }
-
     // --- [ clCreateAcceleratorINTEL ] ---
 
     /**

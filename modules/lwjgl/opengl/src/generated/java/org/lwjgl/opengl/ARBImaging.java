@@ -207,20 +207,6 @@ public class ARBImaging {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps, boolean fc) {
-        return (fc || checkFunctions(
-            caps.glColorTable, caps.glCopyColorTable, caps.glColorTableParameteriv, caps.glColorTableParameterfv, caps.glGetColorTable, 
-            caps.glGetColorTableParameteriv, caps.glGetColorTableParameterfv, caps.glColorSubTable, caps.glCopyColorSubTable, caps.glConvolutionFilter1D, 
-            caps.glConvolutionFilter2D, caps.glCopyConvolutionFilter1D, caps.glCopyConvolutionFilter2D, caps.glGetConvolutionFilter, caps.glSeparableFilter2D, 
-            caps.glGetSeparableFilter, caps.glConvolutionParameteri, caps.glConvolutionParameteriv, caps.glConvolutionParameterf, caps.glConvolutionParameterfv, 
-            caps.glGetConvolutionParameteriv, caps.glGetConvolutionParameterfv, caps.glHistogram, caps.glResetHistogram, caps.glGetHistogram, 
-            caps.glGetHistogramParameteriv, caps.glGetHistogramParameterfv, caps.glMinmax, caps.glResetMinmax, caps.glGetMinmax, caps.glGetMinmaxParameteriv, 
-            caps.glGetMinmaxParameterfv
-        )) && checkFunctions(
-            caps.glBlendColor, caps.glBlendEquation
-        );
-    }
-
     // --- [ glColorTable ] ---
 
     /** Unsafe version of: {@link #glColorTable ColorTable} */

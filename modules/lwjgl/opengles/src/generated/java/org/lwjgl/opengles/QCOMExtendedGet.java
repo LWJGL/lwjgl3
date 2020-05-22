@@ -46,13 +46,6 @@ public class QCOMExtendedGet {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glExtGetTexturesQCOM, caps.glExtGetBuffersQCOM, caps.glExtGetRenderbuffersQCOM, caps.glExtGetFramebuffersQCOM, 
-            caps.glExtGetTexLevelParameterivQCOM, caps.glExtTexObjectStateOverrideiQCOM, caps.glExtGetTexSubImageQCOM, caps.glExtGetBufferPointervQCOM
-        );
-    }
-
     // --- [ glExtGetTexturesQCOM ] ---
 
     public static native void nglExtGetTexturesQCOM(long textures, int maxTextures, long numTextures);

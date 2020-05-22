@@ -27,12 +27,6 @@ public class GLXARBGetProcAddress {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLXCapabilities caps) {
-        return checkFunctions(
-            caps.glXGetProcAddressARB
-        );
-    }
-
     // --- [ glXGetProcAddressARB ] ---
 
     /** Unsafe version of: {@link #glXGetProcAddressARB GetProcAddressARB} */

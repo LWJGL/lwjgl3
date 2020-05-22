@@ -101,13 +101,6 @@ public class EXTConditionalRendering {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_conditional_rendering") && VK.checkExtension("VK_EXT_conditional_rendering",
-               VK.isSupported(provider, "vkCmdBeginConditionalRenderingEXT", caps)
-            && VK.isSupported(provider, "vkCmdEndConditionalRenderingEXT", caps)
-        );
-    }
-
     // --- [ vkCmdBeginConditionalRenderingEXT ] ---
 
     /** Unsafe version of: {@link #vkCmdBeginConditionalRenderingEXT CmdBeginConditionalRenderingEXT} */

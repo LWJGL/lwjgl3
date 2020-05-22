@@ -52,12 +52,6 @@ public class QCOMEXTHostPtr {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(CLCapabilities caps) {
-        return checkFunctions(
-            caps.clGetDeviceImageInfoQCOM
-        );
-    }
-
     // --- [ clGetDeviceImageInfoQCOM ] ---
 
     /**

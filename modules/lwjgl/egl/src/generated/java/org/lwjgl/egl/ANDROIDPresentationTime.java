@@ -22,12 +22,6 @@ public class ANDROIDPresentationTime {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglPresentationTimeANDROID
-        );
-    }
-
     // --- [ eglPresentationTimeANDROID ] ---
 
     /**

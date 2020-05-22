@@ -76,13 +76,6 @@ public class KHRExternalFenceWin32 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_external_fence_win32") && VK.checkExtension("VK_KHR_external_fence_win32",
-               VK.isSupported(provider, "vkImportFenceWin32HandleKHR", caps)
-            && VK.isSupported(provider, "vkGetFenceWin32HandleKHR", caps)
-        );
-    }
-
     // --- [ vkImportFenceWin32HandleKHR ] ---
 
     /** Unsafe version of: {@link #vkImportFenceWin32HandleKHR ImportFenceWin32HandleKHR} */

@@ -38,12 +38,6 @@ public class SOFTSourceResampler {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(ALCapabilities caps) {
-        return checkFunctions(
-            caps.alGetStringiSOFT
-        );
-    }
-
     // --- [ alGetStringiSOFT ] ---
 
     public static long nalGetStringiSOFT(int pname, int index) {

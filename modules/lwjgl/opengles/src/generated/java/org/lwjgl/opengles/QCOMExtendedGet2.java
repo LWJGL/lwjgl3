@@ -28,12 +28,6 @@ public class QCOMExtendedGet2 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glExtGetShadersQCOM, caps.glExtGetProgramsQCOM, caps.glExtIsProgramBinaryQCOM, caps.glExtGetProgramBinarySourceQCOM
-        );
-    }
-
     // --- [ glExtGetShadersQCOM ] ---
 
     public static native void nglExtGetShadersQCOM(long shaders, int maxShaders, long numShaders);

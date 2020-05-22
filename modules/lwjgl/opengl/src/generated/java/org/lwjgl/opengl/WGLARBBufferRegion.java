@@ -32,12 +32,6 @@ public class WGLARBBufferRegion {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(WGLCapabilities caps) {
-        return checkFunctions(
-            caps.wglCreateBufferRegionARB, caps.wglDeleteBufferRegionARB, caps.wglSaveBufferRegionARB, caps.wglRestoreBufferRegionARB
-        );
-    }
-
     // --- [ wglCreateBufferRegionARB ] ---
 
     /**

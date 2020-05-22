@@ -29,12 +29,6 @@ public class EXTMultiDrawArrays {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glMultiDrawArraysEXT, caps.glMultiDrawElementsEXT
-        );
-    }
-
     // --- [ glMultiDrawArraysEXT ] ---
 
     public static native void nglMultiDrawArraysEXT(int mode, long first, long count, int drawcount);

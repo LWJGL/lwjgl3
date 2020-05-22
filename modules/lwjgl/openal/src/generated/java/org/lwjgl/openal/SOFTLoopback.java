@@ -52,12 +52,6 @@ public class SOFTLoopback {
         throw new UnsupportedOperationException();
     }
 
-	static boolean isAvailable(ALCCapabilities caps) {
-		return checkFunctions(
-            caps.alcLoopbackOpenDeviceSOFT, caps.alcIsRenderFormatSupportedSOFT, caps.alcRenderSamplesSOFT
-        );
-	}
-
     // --- [ alcLoopbackOpenDeviceSOFT ] ---
 
     /** Unsafe version of: {@link #alcLoopbackOpenDeviceSOFT LoopbackOpenDeviceSOFT} */

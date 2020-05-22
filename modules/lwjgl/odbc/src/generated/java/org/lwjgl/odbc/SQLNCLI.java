@@ -7,7 +7,6 @@ package org.lwjgl.odbc;
 
 import org.lwjgl.system.*;
 
-
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**

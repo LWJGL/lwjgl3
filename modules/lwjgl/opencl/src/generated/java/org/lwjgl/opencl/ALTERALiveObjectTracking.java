@@ -37,12 +37,6 @@ public class ALTERALiveObjectTracking {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(CLCapabilities caps) {
-        return checkFunctions(
-            caps.clTrackLiveObjectsAltera, caps.clReportLiveObjectsAltera
-        );
-    }
-
     // --- [ clTrackLiveObjectsAltera ] ---
 
     /**

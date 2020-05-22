@@ -7,8 +7,6 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_copy_buffer.txt">NV_copy_buffer</a> extension.
  * 
@@ -29,12 +27,6 @@ public class NVCopyBuffer {
 
     protected NVCopyBuffer() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glCopyBufferSubDataNV
-        );
     }
 
     // --- [ glCopyBufferSubDataNV ] ---

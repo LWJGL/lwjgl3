@@ -73,13 +73,6 @@ public class KHRExternalSemaphoreFd {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_external_semaphore_fd") && VK.checkExtension("VK_KHR_external_semaphore_fd",
-               VK.isSupported(provider, "vkImportSemaphoreFdKHR", caps)
-            && VK.isSupported(provider, "vkGetSemaphoreFdKHR", caps)
-        );
-    }
-
     // --- [ vkImportSemaphoreFdKHR ] ---
 
     /** Unsafe version of: {@link #vkImportSemaphoreFdKHR ImportSemaphoreFdKHR} */

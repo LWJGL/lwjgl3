@@ -7,8 +7,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_external_objects_fd.txt">EXT_semaphore_fd</a> extension.
  * 
@@ -26,12 +24,6 @@ public class EXTSemaphoreFD {
 
     protected EXTSemaphoreFD() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glImportSemaphoreFdEXT
-        );
     }
 
     // --- [ glImportSemaphoreFdEXT ] ---

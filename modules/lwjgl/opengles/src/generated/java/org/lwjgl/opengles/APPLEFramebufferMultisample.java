@@ -7,8 +7,6 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/APPLE/APPLE_framebuffer_multisample.txt">APPLE_framebuffer_multisample</a> extension.
  * 
@@ -58,12 +56,6 @@ public class APPLEFramebufferMultisample {
 
     protected APPLEFramebufferMultisample() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glRenderbufferStorageMultisampleAPPLE, caps.glResolveMultisampleFramebufferAPPLE
-        );
     }
 
     // --- [ glRenderbufferStorageMultisampleAPPLE ] ---

@@ -25,12 +25,6 @@ public class GLXNVDelayBeforeSwap {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLXCapabilities caps) {
-        return checkFunctions(
-            caps.glXDelayBeforeSwapNV
-        );
-    }
-
     // --- [ glXDelayBeforeSwapNV ] ---
 
     /**

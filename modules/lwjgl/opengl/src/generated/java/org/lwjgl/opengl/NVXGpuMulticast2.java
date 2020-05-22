@@ -28,13 +28,6 @@ public class NVXGpuMulticast2 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glAsyncCopyImageSubDataNVX, caps.glAsyncCopyBufferSubDataNVX, caps.glUploadGpuMaskNVX, caps.glMulticastViewportArrayvNVX, 
-            caps.glMulticastScissorArrayvNVX, caps.glMulticastViewportPositionWScaleNVX
-        );
-    }
-
     // --- [ glAsyncCopyImageSubDataNVX ] ---
 
     public static native int nglAsyncCopyImageSubDataNVX(int waitSemaphoreCount, long waitSemaphoreArray, long waitValueArray, int srcGpu, int dstGpuMask, int srcName, int srcTarget, int srcLevel, int srcX, int srcY, int srcZ, int dstName, int dstTarget, int dstLevel, int dstX, int dstY, int dstZ, int srcWidth, int srcHeight, int srcDepth, int signalSemaphoreCount, long signalSemaphoreArray, long signalValueArray);

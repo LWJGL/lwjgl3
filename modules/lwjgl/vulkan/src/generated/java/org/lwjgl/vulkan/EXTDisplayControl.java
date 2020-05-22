@@ -131,15 +131,6 @@ public class EXTDisplayControl {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_display_control") && VK.checkExtension("VK_EXT_display_control",
-               VK.isSupported(provider, "vkDisplayPowerControlEXT", caps)
-            && VK.isSupported(provider, "vkRegisterDeviceEventEXT", caps)
-            && VK.isSupported(provider, "vkRegisterDisplayEventEXT", caps)
-            && VK.isSupported(provider, "vkGetSwapchainCounterEXT", caps)
-        );
-    }
-
     // --- [ vkDisplayPowerControlEXT ] ---
 
     /** Unsafe version of: {@link #vkDisplayPowerControlEXT DisplayPowerControlEXT} */

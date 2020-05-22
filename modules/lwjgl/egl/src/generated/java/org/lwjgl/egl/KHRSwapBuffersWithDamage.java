@@ -32,12 +32,6 @@ public class KHRSwapBuffersWithDamage {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglSwapBuffersWithDamageKHR
-        );
-    }
-
     // --- [ eglSwapBuffersWithDamageKHR ] ---
 
     public static int neglSwapBuffersWithDamageKHR(long dpy, long surface, long rects, int n_rects) {

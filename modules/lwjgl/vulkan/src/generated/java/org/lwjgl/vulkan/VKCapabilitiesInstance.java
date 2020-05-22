@@ -9,6 +9,9 @@ import org.lwjgl.system.*;
 import java.util.Set;
 import java.util.*;
 
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.Checks.*;
+
 /** Defines the capabilities of a Vulkan {@code VkInstance}. */
 public class VKCapabilitiesInstance {
 
@@ -255,44 +258,44 @@ public class VKCapabilitiesInstance {
 
         Map<String, Long> caps = new HashMap<>(82);
 
-        Vulkan10 = VK10.checkCapsInstance(provider, caps, ext);
-        Vulkan11 = VK11.checkCapsInstance(provider, caps, ext);
+        Vulkan10 = check_VK10(provider, caps, ext);
+        Vulkan11 = check_VK11(provider, caps, ext);
         Vulkan12 = ext.contains("Vulkan12");
-        VK_EXT_acquire_xlib_display = EXTAcquireXlibDisplay.checkCapsInstance(provider, caps, ext);
-        EXTCalibratedTimestamps.checkCapsInstance(provider, caps, deviceExt);
-        VK_EXT_debug_report = EXTDebugReport.checkCapsInstance(provider, caps, ext);
-        VK_EXT_debug_utils = EXTDebugUtils.checkCapsInstance(provider, caps, ext);
-        VK_EXT_direct_mode_display = EXTDirectModeDisplay.checkCapsInstance(provider, caps, ext);
-        VK_EXT_display_surface_counter = EXTDisplaySurfaceCounter.checkCapsInstance(provider, caps, ext);
-        EXTFullScreenExclusive.checkCapsInstance(provider, caps, deviceExt);
-        VK_EXT_headless_surface = EXTHeadlessSurface.checkCapsInstance(provider, caps, ext);
-        VK_EXT_metal_surface = EXTMetalSurface.checkCapsInstance(provider, caps, ext);
-        EXTSampleLocations.checkCapsInstance(provider, caps, deviceExt);
+        VK_EXT_acquire_xlib_display = check_EXT_acquire_xlib_display(provider, caps, ext);
+        check_EXT_calibrated_timestamps(provider, caps, deviceExt);
+        VK_EXT_debug_report = check_EXT_debug_report(provider, caps, ext);
+        VK_EXT_debug_utils = check_EXT_debug_utils(provider, caps, ext);
+        VK_EXT_direct_mode_display = check_EXT_direct_mode_display(provider, caps, ext);
+        VK_EXT_display_surface_counter = check_EXT_display_surface_counter(provider, caps, ext);
+        check_EXT_full_screen_exclusive(provider, caps, deviceExt);
+        VK_EXT_headless_surface = check_EXT_headless_surface(provider, caps, ext);
+        VK_EXT_metal_surface = check_EXT_metal_surface(provider, caps, ext);
+        check_EXT_sample_locations(provider, caps, deviceExt);
         VK_EXT_swapchain_colorspace = ext.contains("VK_EXT_swapchain_colorspace");
-        EXTToolingInfo.checkCapsInstance(provider, caps, deviceExt);
+        check_EXT_tooling_info(provider, caps, deviceExt);
         VK_EXT_validation_features = ext.contains("VK_EXT_validation_features");
         VK_EXT_validation_flags = ext.contains("VK_EXT_validation_flags");
-        KHRDeviceGroup.checkCapsInstance(provider, caps, deviceExt);
-        VK_KHR_device_group_creation = KHRDeviceGroupCreation.checkCapsInstance(provider, caps, ext);
-        VK_KHR_display = KHRDisplay.checkCapsInstance(provider, caps, ext);
-        VK_KHR_external_fence_capabilities = KHRExternalFenceCapabilities.checkCapsInstance(provider, caps, ext);
-        VK_KHR_external_memory_capabilities = KHRExternalMemoryCapabilities.checkCapsInstance(provider, caps, ext);
-        VK_KHR_external_semaphore_capabilities = KHRExternalSemaphoreCapabilities.checkCapsInstance(provider, caps, ext);
-        VK_KHR_get_display_properties2 = KHRGetDisplayProperties2.checkCapsInstance(provider, caps, ext);
-        VK_KHR_get_physical_device_properties2 = KHRGetPhysicalDeviceProperties2.checkCapsInstance(provider, caps, ext);
-        VK_KHR_get_surface_capabilities2 = KHRGetSurfaceCapabilities2.checkCapsInstance(provider, caps, ext);
-        KHRPerformanceQuery.checkCapsInstance(provider, caps, deviceExt);
-        VK_KHR_surface = KHRSurface.checkCapsInstance(provider, caps, ext);
+        check_KHR_device_group(provider, caps, deviceExt);
+        VK_KHR_device_group_creation = check_KHR_device_group_creation(provider, caps, ext);
+        VK_KHR_display = check_KHR_display(provider, caps, ext);
+        VK_KHR_external_fence_capabilities = check_KHR_external_fence_capabilities(provider, caps, ext);
+        VK_KHR_external_memory_capabilities = check_KHR_external_memory_capabilities(provider, caps, ext);
+        VK_KHR_external_semaphore_capabilities = check_KHR_external_semaphore_capabilities(provider, caps, ext);
+        VK_KHR_get_display_properties2 = check_KHR_get_display_properties2(provider, caps, ext);
+        VK_KHR_get_physical_device_properties2 = check_KHR_get_physical_device_properties2(provider, caps, ext);
+        VK_KHR_get_surface_capabilities2 = check_KHR_get_surface_capabilities2(provider, caps, ext);
+        check_KHR_performance_query(provider, caps, deviceExt);
+        VK_KHR_surface = check_KHR_surface(provider, caps, ext);
         VK_KHR_surface_protected_capabilities = ext.contains("VK_KHR_surface_protected_capabilities");
-        KHRSwapchain.checkCapsInstance(provider, caps, deviceExt);
-        VK_KHR_wayland_surface = KHRWaylandSurface.checkCapsInstance(provider, caps, ext);
-        VK_KHR_win32_surface = KHRWin32Surface.checkCapsInstance(provider, caps, ext);
-        VK_KHR_xlib_surface = KHRXlibSurface.checkCapsInstance(provider, caps, ext);
-        VK_MVK_macos_surface = MVKMacosSurface.checkCapsInstance(provider, caps, ext);
-        NVCooperativeMatrix.checkCapsInstance(provider, caps, deviceExt);
-        NVCoverageReductionMode.checkCapsInstance(provider, caps, deviceExt);
-        VK_NV_external_memory_capabilities = NVExternalMemoryCapabilities.checkCapsInstance(provider, caps, ext);
-        NVXDeviceGeneratedCommands.checkCapsInstance(provider, caps, deviceExt);
+        check_KHR_swapchain(provider, caps, deviceExt);
+        VK_KHR_wayland_surface = check_KHR_wayland_surface(provider, caps, ext);
+        VK_KHR_win32_surface = check_KHR_win32_surface(provider, caps, ext);
+        VK_KHR_xlib_surface = check_KHR_xlib_surface(provider, caps, ext);
+        VK_MVK_macos_surface = check_MVK_macos_surface(provider, caps, ext);
+        check_NV_cooperative_matrix(provider, caps, deviceExt);
+        check_NV_coverage_reduction_mode(provider, caps, deviceExt);
+        VK_NV_external_memory_capabilities = check_NV_external_memory_capabilities(provider, caps, ext);
+        check_NVX_device_generated_commands(provider, caps, deviceExt);
 
         vkDestroyInstance = VK.get(caps, "vkDestroyInstance");
         vkEnumeratePhysicalDevices = VK.get(caps, "vkEnumeratePhysicalDevices");
@@ -376,6 +379,254 @@ public class VKCapabilitiesInstance {
         vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV = VK.get(caps, "vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV");
         vkGetPhysicalDeviceExternalImageFormatPropertiesNV = VK.get(caps, "vkGetPhysicalDeviceExternalImageFormatPropertiesNV");
         vkGetPhysicalDeviceGeneratedCommandsPropertiesNVX = VK.get(caps, "vkGetPhysicalDeviceGeneratedCommandsPropertiesNVX");
+    }
+
+    private static boolean check_VK10(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("Vulkan10") && VK.checkExtension("Vulkan10",
+               VK.isSupported(provider, "vkDestroyInstance", caps)
+            && VK.isSupported(provider, "vkEnumeratePhysicalDevices", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceFeatures", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceFormatProperties", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceImageFormatProperties", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceProperties", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceQueueFamilyProperties", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceMemoryProperties", caps)
+            && VK.isSupported(provider, "vkCreateDevice", caps)
+            && VK.isSupported(provider, "vkEnumerateDeviceExtensionProperties", caps)
+            && VK.isSupported(provider, "vkEnumerateDeviceLayerProperties", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceSparseImageFormatProperties", caps)
+        );
+    }
+
+    private static boolean check_VK11(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("Vulkan11") && VK.checkExtension("Vulkan11",
+               VK.isSupported(provider, "vkEnumeratePhysicalDeviceGroups", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceFeatures2", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceProperties2", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceFormatProperties2", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceImageFormatProperties2", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceQueueFamilyProperties2", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceMemoryProperties2", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceSparseImageFormatProperties2", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceExternalBufferProperties", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceExternalFenceProperties", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceExternalSemaphoreProperties", caps)
+        );
+    }
+
+    private static boolean check_EXT_acquire_xlib_display(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_EXT_acquire_xlib_display") && VK.checkExtension("VK_EXT_acquire_xlib_display",
+               VK.isSupported(provider, "vkAcquireXlibDisplayEXT", caps)
+            && VK.isSupported(provider, "vkGetRandROutputDisplayEXT", caps)
+        );
+    }
+
+    private static boolean check_EXT_calibrated_timestamps(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_EXT_calibrated_timestamps") && VK.checkExtension("VK_EXT_calibrated_timestamps",
+               VK.isSupported(provider, "vkGetPhysicalDeviceCalibrateableTimeDomainsEXT", caps)
+        );
+    }
+
+    private static boolean check_EXT_debug_report(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_EXT_debug_report") && VK.checkExtension("VK_EXT_debug_report",
+               VK.isSupported(provider, "vkCreateDebugReportCallbackEXT", caps)
+            && VK.isSupported(provider, "vkDestroyDebugReportCallbackEXT", caps)
+            && VK.isSupported(provider, "vkDebugReportMessageEXT", caps)
+        );
+    }
+
+    private static boolean check_EXT_debug_utils(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_EXT_debug_utils") && VK.checkExtension("VK_EXT_debug_utils",
+               VK.isSupported(provider, "vkCreateDebugUtilsMessengerEXT", caps)
+            && VK.isSupported(provider, "vkDestroyDebugUtilsMessengerEXT", caps)
+            && VK.isSupported(provider, "vkSubmitDebugUtilsMessageEXT", caps)
+        );
+    }
+
+    private static boolean check_EXT_direct_mode_display(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_EXT_direct_mode_display") && VK.checkExtension("VK_EXT_direct_mode_display",
+               VK.isSupported(provider, "vkReleaseDisplayEXT", caps)
+        );
+    }
+
+    private static boolean check_EXT_display_surface_counter(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_EXT_display_surface_counter") && VK.checkExtension("VK_EXT_display_surface_counter",
+               VK.isSupported(provider, "vkGetPhysicalDeviceSurfaceCapabilities2EXT", caps)
+        );
+    }
+
+    private static boolean check_EXT_full_screen_exclusive(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_EXT_full_screen_exclusive") && VK.checkExtension("VK_EXT_full_screen_exclusive",
+               VK.isSupported(provider, "vkGetPhysicalDeviceSurfacePresentModes2EXT", caps)
+        );
+    }
+
+    private static boolean check_EXT_headless_surface(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_EXT_headless_surface") && VK.checkExtension("VK_EXT_headless_surface",
+               VK.isSupported(provider, "vkCreateHeadlessSurfaceEXT", caps)
+        );
+    }
+
+    private static boolean check_EXT_metal_surface(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_EXT_metal_surface") && VK.checkExtension("VK_EXT_metal_surface",
+               VK.isSupported(provider, "vkCreateMetalSurfaceEXT", caps)
+        );
+    }
+
+    private static boolean check_EXT_sample_locations(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_EXT_sample_locations") && VK.checkExtension("VK_EXT_sample_locations",
+               VK.isSupported(provider, "vkGetPhysicalDeviceMultisamplePropertiesEXT", caps)
+        );
+    }
+
+    private static boolean check_EXT_tooling_info(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_EXT_tooling_info") && VK.checkExtension("VK_EXT_tooling_info",
+               VK.isSupported(provider, "vkGetPhysicalDeviceToolPropertiesEXT", caps)
+        );
+    }
+
+    private static boolean check_KHR_device_group(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_KHR_device_group") && VK.checkExtension("VK_KHR_device_group",
+               VK.isSupported(provider, "vkGetPhysicalDevicePresentRectanglesKHR", caps, ext.contains("VK_KHR_surface"))
+        );
+    }
+
+    private static boolean check_KHR_device_group_creation(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_KHR_device_group_creation") && VK.checkExtension("VK_KHR_device_group_creation",
+               VK.isSupported(provider, "vkEnumeratePhysicalDeviceGroupsKHR", caps)
+        );
+    }
+
+    private static boolean check_KHR_display(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_KHR_display") && VK.checkExtension("VK_KHR_display",
+               VK.isSupported(provider, "vkGetPhysicalDeviceDisplayPropertiesKHR", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceDisplayPlanePropertiesKHR", caps)
+            && VK.isSupported(provider, "vkGetDisplayPlaneSupportedDisplaysKHR", caps)
+            && VK.isSupported(provider, "vkGetDisplayModePropertiesKHR", caps)
+            && VK.isSupported(provider, "vkCreateDisplayModeKHR", caps)
+            && VK.isSupported(provider, "vkGetDisplayPlaneCapabilitiesKHR", caps)
+            && VK.isSupported(provider, "vkCreateDisplayPlaneSurfaceKHR", caps)
+        );
+    }
+
+    private static boolean check_KHR_external_fence_capabilities(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_KHR_external_fence_capabilities") && VK.checkExtension("VK_KHR_external_fence_capabilities",
+               VK.isSupported(provider, "vkGetPhysicalDeviceExternalFencePropertiesKHR", caps)
+        );
+    }
+
+    private static boolean check_KHR_external_memory_capabilities(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_KHR_external_memory_capabilities") && VK.checkExtension("VK_KHR_external_memory_capabilities",
+               VK.isSupported(provider, "vkGetPhysicalDeviceExternalBufferPropertiesKHR", caps)
+        );
+    }
+
+    private static boolean check_KHR_external_semaphore_capabilities(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_KHR_external_semaphore_capabilities") && VK.checkExtension("VK_KHR_external_semaphore_capabilities",
+               VK.isSupported(provider, "vkGetPhysicalDeviceExternalSemaphorePropertiesKHR", caps)
+        );
+    }
+
+    private static boolean check_KHR_get_display_properties2(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_KHR_get_display_properties2") && VK.checkExtension("VK_KHR_get_display_properties2",
+               VK.isSupported(provider, "vkGetPhysicalDeviceDisplayProperties2KHR", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceDisplayPlaneProperties2KHR", caps)
+            && VK.isSupported(provider, "vkGetDisplayModeProperties2KHR", caps)
+            && VK.isSupported(provider, "vkGetDisplayPlaneCapabilities2KHR", caps)
+        );
+    }
+
+    private static boolean check_KHR_get_physical_device_properties2(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_KHR_get_physical_device_properties2") && VK.checkExtension("VK_KHR_get_physical_device_properties2",
+               VK.isSupported(provider, "vkGetPhysicalDeviceFeatures2KHR", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceProperties2KHR", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceFormatProperties2KHR", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceImageFormatProperties2KHR", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceQueueFamilyProperties2KHR", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceMemoryProperties2KHR", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceSparseImageFormatProperties2KHR", caps)
+        );
+    }
+
+    private static boolean check_KHR_get_surface_capabilities2(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_KHR_get_surface_capabilities2") && VK.checkExtension("VK_KHR_get_surface_capabilities2",
+               VK.isSupported(provider, "vkGetPhysicalDeviceSurfaceCapabilities2KHR", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceSurfaceFormats2KHR", caps)
+        );
+    }
+
+    private static boolean check_KHR_performance_query(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_KHR_performance_query") && VK.checkExtension("VK_KHR_performance_query",
+               VK.isSupported(provider, "vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR", caps)
+        );
+    }
+
+    private static boolean check_KHR_surface(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_KHR_surface") && VK.checkExtension("VK_KHR_surface",
+               VK.isSupported(provider, "vkDestroySurfaceKHR", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceSurfaceSupportKHR", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceSurfaceCapabilitiesKHR", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceSurfaceFormatsKHR", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceSurfacePresentModesKHR", caps)
+        );
+    }
+
+    private static boolean check_KHR_swapchain(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_KHR_swapchain") && VK.checkExtension("VK_KHR_swapchain",
+               VK.isSupported(provider, "vkGetPhysicalDevicePresentRectanglesKHR", caps, ext.contains("Vulkan11"))
+        );
+    }
+
+    private static boolean check_KHR_wayland_surface(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_KHR_wayland_surface") && VK.checkExtension("VK_KHR_wayland_surface",
+               VK.isSupported(provider, "vkCreateWaylandSurfaceKHR", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceWaylandPresentationSupportKHR", caps)
+        );
+    }
+
+    private static boolean check_KHR_win32_surface(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_KHR_win32_surface") && VK.checkExtension("VK_KHR_win32_surface",
+               VK.isSupported(provider, "vkCreateWin32SurfaceKHR", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceWin32PresentationSupportKHR", caps)
+        );
+    }
+
+    private static boolean check_KHR_xlib_surface(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_KHR_xlib_surface") && VK.checkExtension("VK_KHR_xlib_surface",
+               VK.isSupported(provider, "vkCreateXlibSurfaceKHR", caps)
+            && VK.isSupported(provider, "vkGetPhysicalDeviceXlibPresentationSupportKHR", caps)
+        );
+    }
+
+    private static boolean check_MVK_macos_surface(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_MVK_macos_surface") && VK.checkExtension("VK_MVK_macos_surface",
+               VK.isSupported(provider, "vkCreateMacOSSurfaceMVK", caps)
+        );
+    }
+
+    private static boolean check_NV_cooperative_matrix(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_NV_cooperative_matrix") && VK.checkExtension("VK_NV_cooperative_matrix",
+               VK.isSupported(provider, "vkGetPhysicalDeviceCooperativeMatrixPropertiesNV", caps)
+        );
+    }
+
+    private static boolean check_NV_coverage_reduction_mode(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_NV_coverage_reduction_mode") && VK.checkExtension("VK_NV_coverage_reduction_mode",
+               VK.isSupported(provider, "vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV", caps)
+        );
+    }
+
+    private static boolean check_NV_external_memory_capabilities(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_NV_external_memory_capabilities") && VK.checkExtension("VK_NV_external_memory_capabilities",
+               VK.isSupported(provider, "vkGetPhysicalDeviceExternalImageFormatPropertiesNV", caps)
+        );
+    }
+
+    private static boolean check_NVX_device_generated_commands(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("VK_NVX_device_generated_commands") && VK.checkExtension("VK_NVX_device_generated_commands",
+               VK.isSupported(provider, "vkGetPhysicalDeviceGeneratedCommandsPropertiesNVX", caps)
+        );
     }
 
 }

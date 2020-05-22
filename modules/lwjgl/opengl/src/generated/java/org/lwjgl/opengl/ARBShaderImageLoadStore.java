@@ -7,8 +7,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_image_load_store.txt">ARB_shader_image_load_store</a> extension.
  * 
@@ -127,12 +125,6 @@ public class ARBShaderImageLoadStore {
 
     protected ARBShaderImageLoadStore() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glBindImageTexture, caps.glMemoryBarrier
-        );
     }
 
     // --- [ glBindImageTexture ] ---

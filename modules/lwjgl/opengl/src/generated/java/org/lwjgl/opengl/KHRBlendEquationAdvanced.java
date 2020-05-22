@@ -7,8 +7,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_blend_equation_advanced.txt">KHR_blend_equation_advanced</a> extension.
  * 
@@ -74,12 +72,6 @@ public class KHRBlendEquationAdvanced {
 
     protected KHRBlendEquationAdvanced() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glBlendBarrierKHR
-        );
     }
 
     // --- [ glBlendBarrierKHR ] ---

@@ -67,13 +67,6 @@ public class SOFTSourceLatency {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(ALCapabilities caps) {
-        return checkFunctions(
-            caps.alSourcedSOFT, caps.alSource3dSOFT, caps.alSourcedvSOFT, caps.alGetSourcedSOFT, caps.alGetSource3dSOFT, caps.alGetSourcedvSOFT, 
-            caps.alSourcei64SOFT, caps.alSource3i64SOFT, caps.alSourcei64vSOFT, caps.alGetSourcei64SOFT, caps.alGetSource3i64SOFT, caps.alGetSourcei64vSOFT
-        );
-    }
-
     // --- [ alSourcedSOFT ] ---
 
     /**

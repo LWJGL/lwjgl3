@@ -25,12 +25,6 @@ public class WGLARBExtensionsString {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(WGLCapabilities caps) {
-        return checkFunctions(
-            caps.wglGetExtensionsStringARB
-        );
-    }
-
     // --- [ wglGetExtensionsStringARB ] ---
 
     /** Unsafe version of: {@link #wglGetExtensionsStringARB GetExtensionsStringARB} */

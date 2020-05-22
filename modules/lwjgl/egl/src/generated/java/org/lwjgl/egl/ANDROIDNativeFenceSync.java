@@ -35,12 +35,6 @@ public class ANDROIDNativeFenceSync {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglDupNativeFenceFDANDROID
-        );
-    }
-
     // --- [ eglDupNativeFenceFDANDROID ] ---
 
     @NativeType("EGLint")

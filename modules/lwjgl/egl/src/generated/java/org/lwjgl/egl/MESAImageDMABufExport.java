@@ -32,12 +32,6 @@ public class MESAImageDMABufExport {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglExportDMABUFImageQueryMESA, caps.eglExportDMABUFImageMESA
-        );
-    }
-
     // --- [ eglExportDMABUFImageQueryMESA ] ---
 
     public static int neglExportDMABUFImageQueryMESA(long dpy, long image, long fourcc, long num_planes, long modifiers) {

@@ -105,14 +105,6 @@ public class NVMeshShader {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_NV_mesh_shader") && VK.checkExtension("VK_NV_mesh_shader",
-               VK.isSupported(provider, "vkCmdDrawMeshTasksNV", caps)
-            && VK.isSupported(provider, "vkCmdDrawMeshTasksIndirectNV", caps)
-            && VK.isSupported(provider, "vkCmdDrawMeshTasksIndirectCountNV", caps)
-        );
-    }
-
     // --- [ vkCmdDrawMeshTasksNV ] ---
 
     /**

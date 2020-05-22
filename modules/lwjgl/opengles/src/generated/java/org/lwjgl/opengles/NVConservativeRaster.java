@@ -7,8 +7,6 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_conservative_raster.txt">NV_conservative_raster</a> extension.
  * 
@@ -39,12 +37,6 @@ public class NVConservativeRaster {
 
     protected NVConservativeRaster() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glSubpixelPrecisionBiasNV
-        );
     }
 
     // --- [ glSubpixelPrecisionBiasNV ] ---

@@ -7,7 +7,6 @@ package org.lwjgl.ovr;
 
 import org.lwjgl.system.*;
 
-
 /** LibOVR error code declarations. */
 public class OVRErrorCode {
 

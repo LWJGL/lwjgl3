@@ -9,7 +9,6 @@ import java.nio.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -33,12 +32,6 @@ public class EXTBaseInstance {
 
     protected EXTBaseInstance() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glDrawArraysInstancedBaseInstanceEXT, caps.glDrawElementsInstancedBaseInstanceEXT, caps.glDrawElementsInstancedBaseVertexBaseInstanceEXT
-        );
     }
 
     // --- [ glDrawArraysInstancedBaseInstanceEXT ] ---

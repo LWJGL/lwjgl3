@@ -32,12 +32,6 @@ public class GLXEXTImportContext {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLXCapabilities caps) {
-        return checkFunctions(
-            caps.glXGetCurrentDisplayEXT, caps.glXQueryContextInfoEXT, caps.glXGetContextIDEXT, caps.glXImportContextEXT, caps.glXFreeContextEXT
-        );
-    }
-
     // --- [ glXGetCurrentDisplayEXT ] ---
 
     /** Returns the display associated with the current context. */

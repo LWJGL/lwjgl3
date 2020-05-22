@@ -173,12 +173,6 @@ public class EXTImageDrmFormatModifier {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_image_drm_format_modifier") && VK.checkExtension("VK_EXT_image_drm_format_modifier",
-               VK.isSupported(provider, "vkGetImageDrmFormatModifierPropertiesEXT", caps)
-        );
-    }
-
     // --- [ vkGetImageDrmFormatModifierPropertiesEXT ] ---
 
     /** Unsafe version of: {@link #vkGetImageDrmFormatModifierPropertiesEXT GetImageDrmFormatModifierPropertiesEXT} */

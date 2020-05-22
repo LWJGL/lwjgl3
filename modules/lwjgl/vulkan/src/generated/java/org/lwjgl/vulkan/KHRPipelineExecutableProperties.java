@@ -126,14 +126,6 @@ public class KHRPipelineExecutableProperties {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_pipeline_executable_properties") && VK.checkExtension("VK_KHR_pipeline_executable_properties",
-               VK.isSupported(provider, "vkGetPipelineExecutablePropertiesKHR", caps)
-            && VK.isSupported(provider, "vkGetPipelineExecutableStatisticsKHR", caps)
-            && VK.isSupported(provider, "vkGetPipelineExecutableInternalRepresentationsKHR", caps)
-        );
-    }
-
     // --- [ vkGetPipelineExecutablePropertiesKHR ] ---
 
     /**

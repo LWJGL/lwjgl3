@@ -33,12 +33,6 @@ public class EXTCapture {
         throw new UnsupportedOperationException();
     }
 
-	static boolean isAvailable(ALCCapabilities caps) {
-		return checkFunctions(
-            caps.alcCaptureOpenDevice, caps.alcCaptureCloseDevice, caps.alcCaptureStart, caps.alcCaptureStop, caps.alcCaptureSamples
-        );
-	}
-
     // --- [ alcCaptureOpenDevice ] ---
 
     /** Unsafe version of: {@link #alcCaptureOpenDevice CaptureOpenDevice} */

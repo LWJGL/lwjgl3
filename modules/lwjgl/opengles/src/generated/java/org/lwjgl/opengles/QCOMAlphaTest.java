@@ -7,8 +7,6 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_alpha_test.txt">QCOM_alpha_test</a> extension.
  * 
@@ -32,12 +30,6 @@ public class QCOMAlphaTest {
 
     protected QCOMAlphaTest() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glAlphaFuncQCOM
-        );
     }
 
     // --- [ glAlphaFuncQCOM ] ---

@@ -201,23 +201,6 @@ public class KHRDeviceGroup {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsInstance(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_device_group") && VK.checkExtension("VK_KHR_device_group",
-               VK.isSupported(provider, "vkGetPhysicalDevicePresentRectanglesKHR", caps, ext.contains("VK_KHR_surface"))
-        );
-    }
-
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_device_group") && VK.checkExtension("VK_KHR_device_group",
-               VK.isSupported(provider, "vkGetDeviceGroupPeerMemoryFeaturesKHR", caps)
-            && VK.isSupported(provider, "vkCmdSetDeviceMaskKHR", caps)
-            && VK.isSupported(provider, "vkCmdDispatchBaseKHR", caps)
-            && VK.isSupported(provider, "vkGetDeviceGroupPresentCapabilitiesKHR", caps, ext.contains("VK_KHR_surface"))
-            && VK.isSupported(provider, "vkGetDeviceGroupSurfacePresentModesKHR", caps, ext.contains("VK_KHR_surface"))
-            && VK.isSupported(provider, "vkAcquireNextImage2KHR", caps, ext.contains("VK_KHR_swapchain"))
-        );
-    }
-
     // --- [ vkGetDeviceGroupPeerMemoryFeaturesKHR ] ---
 
     /** Unsafe version of: {@link #vkGetDeviceGroupPeerMemoryFeaturesKHR GetDeviceGroupPeerMemoryFeaturesKHR} */

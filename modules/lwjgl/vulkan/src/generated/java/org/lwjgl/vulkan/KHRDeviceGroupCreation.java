@@ -120,12 +120,6 @@ public class KHRDeviceGroupCreation {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsInstance(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_device_group_creation") && VK.checkExtension("VK_KHR_device_group_creation",
-               VK.isSupported(provider, "vkEnumeratePhysicalDeviceGroupsKHR", caps)
-        );
-    }
-
     // --- [ vkEnumeratePhysicalDeviceGroupsKHR ] ---
 
     /**

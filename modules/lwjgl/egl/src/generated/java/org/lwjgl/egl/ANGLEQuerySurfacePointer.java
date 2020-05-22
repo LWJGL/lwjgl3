@@ -24,12 +24,6 @@ public class ANGLEQuerySurfacePointer {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglQuerySurfacePointerANGLE
-        );
-    }
-
     // --- [ eglQuerySurfacePointerANGLE ] ---
 
     public static int neglQuerySurfacePointerANGLE(long dpy, long surface, int attribute, long value) {

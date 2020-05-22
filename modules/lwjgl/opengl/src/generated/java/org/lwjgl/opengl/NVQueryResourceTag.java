@@ -31,12 +31,6 @@ public class NVQueryResourceTag {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glGenQueryResourceTagNV, caps.glDeleteQueryResourceTagNV, caps.glQueryResourceTagNV
-        );
-    }
-
     // --- [ glGenQueryResourceTagNV ] ---
 
     public static native void nglGenQueryResourceTagNV(int n, long tagIds);

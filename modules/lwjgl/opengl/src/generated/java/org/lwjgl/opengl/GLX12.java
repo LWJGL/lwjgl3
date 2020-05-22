@@ -17,12 +17,6 @@ public class GLX12 extends GLX11 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLXCapabilities caps) {
-        return checkFunctions(
-            caps.glXGetCurrentDisplay
-        );
-    }
-
     // --- [ glXGetCurrentDisplay ] ---
 
     /** Returns the display associated with the current context and drawable. */

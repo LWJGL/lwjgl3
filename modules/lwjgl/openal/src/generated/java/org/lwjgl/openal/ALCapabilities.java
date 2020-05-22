@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.function.IntFunction;
 
 import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.Checks.*;
 
 /** Defines the capabilities of an OpenAL context. */
 public final class ALCapabilities {
@@ -347,13 +348,13 @@ public final class ALCapabilities {
         alGetSourcei64vSOFT = provider.getFunctionAddress("alGetSourcei64vSOFT");
         alGetStringiSOFT = provider.getFunctionAddress("alGetStringiSOFT");
 
-        OpenAL10 = ext.contains("OpenAL10") && checkExtension("OpenAL10", AL10.isAvailable(this));
-        OpenAL11 = ext.contains("OpenAL11") && checkExtension("OpenAL11", AL11.isAvailable(this));
+        OpenAL10 = check_AL10(ext);
+        OpenAL11 = check_AL11(ext);
         OpenAL_SOFT_bformat_ex = ext.contains("OpenAL_SOFT_bformat_ex");
         AL_EXT_ALAW = ext.contains("AL_EXT_ALAW");
         AL_EXT_BFORMAT = ext.contains("AL_EXT_BFORMAT");
         AL_EXT_DOUBLE = ext.contains("AL_EXT_DOUBLE");
-        ALC_EXT_EFX = ext.contains("ALC_EXT_EFX") && checkExtension("ALC_EXT_EFX", EXTEfx.isAvailable(this));
+        ALC_EXT_EFX = check_EXT_EFX(ext);
         AL_EXT_EXPONENT_DISTANCE = ext.contains("AL_EXT_EXPONENT_DISTANCE");
         AL_EXT_FLOAT32 = ext.contains("AL_EXT_FLOAT32");
         AL_EXT_IMA4 = ext.contains("AL_EXT_IMA4");
@@ -365,24 +366,24 @@ public final class ALCapabilities {
         AL_EXT_OFFSET = ext.contains("AL_EXT_OFFSET");
         AL_EXT_source_distance_model = ext.contains("AL_EXT_source_distance_model");
         AL_EXT_SOURCE_RADIUS = ext.contains("AL_EXT_SOURCE_RADIUS");
-        AL_EXT_static_buffer = ext.contains("AL_EXT_static_buffer") && checkExtension("AL_EXT_static_buffer", EXTStaticBuffer.isAvailable(this));
+        AL_EXT_static_buffer = check_EXT_static_buffer(ext);
         AL_EXT_STEREO_ANGLES = ext.contains("AL_EXT_STEREO_ANGLES");
         AL_EXT_vorbis = ext.contains("AL_EXT_vorbis");
         AL_LOKI_IMA_ADPCM = ext.contains("AL_LOKI_IMA_ADPCM");
         AL_LOKI_quadriphonic = ext.contains("AL_LOKI_quadriphonic");
         AL_LOKI_WAVE_format = ext.contains("AL_LOKI_WAVE_format");
         AL_SOFT_block_alignment = ext.contains("AL_SOFT_block_alignment");
-        AL_SOFT_buffer_samples = ext.contains("AL_SOFT_buffer_samples") && checkExtension("AL_SOFT_buffer_samples", SOFTBufferSamples.isAvailable(this));
-        AL_SOFT_buffer_sub_data = ext.contains("AL_SOFT_buffer_sub_data") && checkExtension("AL_SOFT_buffer_sub_data", SOFTBufferSubData.isAvailable(this));
-        AL_SOFT_deferred_updates = ext.contains("AL_SOFT_deferred_updates") && checkExtension("AL_SOFT_deferred_updates", SOFTDeferredUpdates.isAvailable(this));
+        AL_SOFT_buffer_samples = check_SOFT_buffer_samples(ext);
+        AL_SOFT_buffer_sub_data = check_SOFT_buffer_sub_data(ext);
+        AL_SOFT_deferred_updates = check_SOFT_deferred_updates(ext);
         AL_SOFT_direct_channels = ext.contains("AL_SOFT_direct_channels");
         AL_SOFT_direct_channels_remix = ext.contains("AL_SOFT_direct_channels_remix");
         AL_SOFT_gain_clamp_ex = ext.contains("AL_SOFT_gain_clamp_ex");
         AL_SOFT_loop_points = ext.contains("AL_SOFT_loop_points");
         AL_SOFT_MSADPCM = ext.contains("AL_SOFT_MSADPCM");
-        AL_SOFT_source_latency = ext.contains("AL_SOFT_source_latency") && checkExtension("AL_SOFT_source_latency", SOFTSourceLatency.isAvailable(this));
+        AL_SOFT_source_latency = check_SOFT_source_latency(ext);
         AL_SOFT_source_length = ext.contains("AL_SOFT_source_length");
-        AL_SOFT_source_resampler = ext.contains("AL_SOFT_source_resampler") && checkExtension("AL_SOFT_source_resampler", SOFTSourceResampler.isAvailable(this));
+        AL_SOFT_source_resampler = check_SOFT_source_resampler(ext);
         AL_SOFT_source_spatialize = ext.contains("AL_SOFT_source_spatialize");
 
         addresses = ThreadLocalUtil.getAddressesFromCapabilities(this, ADDRESS_FIELDS, bufferFactory);
@@ -400,6 +401,71 @@ public final class ALCapabilities {
 
         apiLog("[AL] " + extension + " was reported as available but an entry point is missing.");
         return false;
+    }
+
+    private boolean check_AL10(java.util.Set<String> ext) {
+        return ext.contains("OpenAL10") && checkExtension("OpenAL10", checkFunctions(
+            alGetError, alEnable, alDisable, alIsEnabled, alGetBoolean, alGetInteger, alGetFloat, alGetDouble, alGetBooleanv, alGetIntegerv, alGetFloatv, 
+            alGetDoublev, alGetString, alDistanceModel, alDopplerFactor, alDopplerVelocity, alListenerf, alListeneri, alListener3f, alListenerfv, 
+            alGetListenerf, alGetListeneri, alGetListener3f, alGetListenerfv, alGenSources, alDeleteSources, alIsSource, alSourcef, alSource3f, alSourcefv, 
+            alSourcei, alGetSourcef, alGetSource3f, alGetSourcefv, alGetSourcei, alGetSourceiv, alSourceQueueBuffers, alSourceUnqueueBuffers, alSourcePlay, 
+            alSourcePause, alSourceStop, alSourceRewind, alSourcePlayv, alSourcePausev, alSourceStopv, alSourceRewindv, alGenBuffers, alDeleteBuffers, 
+            alIsBuffer, alGetBufferf, alGetBufferi, alBufferData, alGetEnumValue, alGetProcAddress, alIsExtensionPresent
+        ));
+    }
+
+    private boolean check_AL11(java.util.Set<String> ext) {
+        return ext.contains("OpenAL11") && checkExtension("OpenAL11", checkFunctions(
+            alListener3i, alGetListeneriv, alSource3i, alListeneriv, alSourceiv, alBufferf, alBuffer3f, alBufferfv, alBufferi, alBuffer3i, alBufferiv, 
+            alGetBufferiv, alGetBufferfv, alSpeedOfSound
+        ));
+    }
+
+    private boolean check_EXT_EFX(java.util.Set<String> ext) {
+        return ext.contains("ALC_EXT_EFX") && checkExtension("ALC_EXT_EFX", checkFunctions(
+            alGenEffects, alDeleteEffects, alIsEffect, alEffecti, alEffectiv, alEffectf, alEffectfv, alGetEffecti, alGetEffectiv, alGetEffectf, alGetEffectfv, 
+            alGenFilters, alDeleteFilters, alIsFilter, alFilteri, alFilteriv, alFilterf, alFilterfv, alGetFilteri, alGetFilteriv, alGetFilterf, alGetFilterfv, 
+            alGenAuxiliaryEffectSlots, alDeleteAuxiliaryEffectSlots, alIsAuxiliaryEffectSlot, alAuxiliaryEffectSloti, alAuxiliaryEffectSlotiv, 
+            alAuxiliaryEffectSlotf, alAuxiliaryEffectSlotfv, alGetAuxiliaryEffectSloti, alGetAuxiliaryEffectSlotiv, alGetAuxiliaryEffectSlotf, 
+            alGetAuxiliaryEffectSlotfv
+        ));
+    }
+
+    private boolean check_EXT_static_buffer(java.util.Set<String> ext) {
+        return ext.contains("AL_EXT_static_buffer") && checkExtension("AL_EXT_static_buffer", checkFunctions(
+            alBufferDataStatic
+        ));
+    }
+
+    private boolean check_SOFT_buffer_samples(java.util.Set<String> ext) {
+        return ext.contains("AL_SOFT_buffer_samples") && checkExtension("AL_SOFT_buffer_samples", checkFunctions(
+            alBufferSamplesSOFT, alBufferSubSamplesSOFT, alGetBufferSamplesSOFT, alIsBufferFormatSupportedSOFT
+        ));
+    }
+
+    private boolean check_SOFT_buffer_sub_data(java.util.Set<String> ext) {
+        return ext.contains("AL_SOFT_buffer_sub_data") && checkExtension("AL_SOFT_buffer_sub_data", checkFunctions(
+            alBufferSubDataSOFT
+        ));
+    }
+
+    private boolean check_SOFT_deferred_updates(java.util.Set<String> ext) {
+        return ext.contains("AL_SOFT_deferred_updates") && checkExtension("AL_SOFT_deferred_updates", checkFunctions(
+            alDeferUpdatesSOFT, alProcessUpdatesSOFT
+        ));
+    }
+
+    private boolean check_SOFT_source_latency(java.util.Set<String> ext) {
+        return ext.contains("AL_SOFT_source_latency") && checkExtension("AL_SOFT_source_latency", checkFunctions(
+            alSourcedSOFT, alSource3dSOFT, alSourcedvSOFT, alGetSourcedSOFT, alGetSource3dSOFT, alGetSourcedvSOFT, alSourcei64SOFT, alSource3i64SOFT, 
+            alSourcei64vSOFT, alGetSourcei64SOFT, alGetSource3i64SOFT, alGetSourcei64vSOFT
+        ));
+    }
+
+    private boolean check_SOFT_source_resampler(java.util.Set<String> ext) {
+        return ext.contains("AL_SOFT_source_resampler") && checkExtension("AL_SOFT_source_resampler", checkFunctions(
+            alGetStringiSOFT
+        ));
     }
 
 }

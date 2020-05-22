@@ -7,8 +7,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/GREMEDY/GREMEDY_frame_terminator.txt">GREMEDY_frame_terminator</a> extension.
  * 
@@ -31,12 +29,6 @@ public class GREMEDYFrameTerminator {
 
     protected GREMEDYFrameTerminator() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glFrameTerminatorGREMEDY
-        );
     }
 
     // --- [ glFrameTerminatorGREMEDY ] ---

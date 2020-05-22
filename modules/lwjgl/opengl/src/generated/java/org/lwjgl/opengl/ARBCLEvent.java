@@ -32,12 +32,6 @@ public class ARBCLEvent {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glCreateSyncFromCLeventARB
-        );
-    }
-
     // --- [ glCreateSyncFromCLeventARB ] ---
 
     /** Unsafe version of: {@link #glCreateSyncFromCLeventARB CreateSyncFromCLeventARB} */

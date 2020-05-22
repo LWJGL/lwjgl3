@@ -51,13 +51,6 @@ public class OESTextureBorderClamp {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glTexParameterIivOES, caps.glTexParameterIuivOES, caps.glGetTexParameterIivOES, caps.glGetTexParameterIuivOES, caps.glSamplerParameterIivOES, 
-            caps.glSamplerParameterIuivOES, caps.glGetSamplerParameterIivOES, caps.glGetSamplerParameterIuivOES
-        );
-    }
-
     // --- [ glTexParameterIivOES ] ---
 
     public static native void nglTexParameterIivOES(int target, int pname, long params);

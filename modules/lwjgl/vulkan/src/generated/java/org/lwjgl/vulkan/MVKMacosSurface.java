@@ -61,12 +61,6 @@ public class MVKMacosSurface {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsInstance(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_MVK_macos_surface") && VK.checkExtension("VK_MVK_macos_surface",
-               VK.isSupported(provider, "vkCreateMacOSSurfaceMVK", caps)
-        );
-    }
-
     // --- [ vkCreateMacOSSurfaceMVK ] ---
 
     /** Unsafe version of: {@link #vkCreateMacOSSurfaceMVK CreateMacOSSurfaceMVK} */

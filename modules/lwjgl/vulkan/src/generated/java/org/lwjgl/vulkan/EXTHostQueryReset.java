@@ -71,12 +71,6 @@ public class EXTHostQueryReset {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_host_query_reset") && VK.checkExtension("VK_EXT_host_query_reset",
-               VK.isSupported(provider, "vkResetQueryPoolEXT", caps)
-        );
-    }
-
     // --- [ vkResetQueryPoolEXT ] ---
 
     /**

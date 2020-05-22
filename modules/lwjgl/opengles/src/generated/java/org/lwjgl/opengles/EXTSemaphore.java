@@ -69,13 +69,6 @@ public class EXTSemaphore {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glGetUnsignedBytevEXT, caps.glGetUnsignedBytei_vEXT, caps.glGenSemaphoresEXT, caps.glDeleteSemaphoresEXT, caps.glIsSemaphoreEXT, 
-            caps.glSemaphoreParameterui64vEXT, caps.glGetSemaphoreParameterui64vEXT, caps.glWaitSemaphoreEXT, caps.glSignalSemaphoreEXT
-        );
-    }
-
     // --- [ glGetUnsignedBytevEXT ] ---
 
     public static void nglGetUnsignedBytevEXT(int pname, long data) {

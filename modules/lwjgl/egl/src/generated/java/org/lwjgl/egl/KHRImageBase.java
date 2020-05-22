@@ -34,12 +34,6 @@ public class KHRImageBase {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglCreateImageKHR, caps.eglDestroyImageKHR
-        );
-    }
-
     // --- [ eglCreateImageKHR ] ---
 
     public static long neglCreateImageKHR(long dpy, long ctx, int target, long buffer, long attrib_list) {

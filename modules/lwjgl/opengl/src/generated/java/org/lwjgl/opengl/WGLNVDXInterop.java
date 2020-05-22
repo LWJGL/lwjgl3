@@ -33,13 +33,6 @@ public class WGLNVDXInterop {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(WGLCapabilities caps) {
-        return checkFunctions(
-            caps.wglDXSetResourceShareHandleNV, caps.wglDXOpenDeviceNV, caps.wglDXCloseDeviceNV, caps.wglDXRegisterObjectNV, caps.wglDXUnregisterObjectNV, 
-            caps.wglDXObjectAccessNV, caps.wglDXLockObjectsNV, caps.wglDXUnlockObjectsNV
-        );
-    }
-
     // --- [ wglDXSetResourceShareHandleNV ] ---
 
     /**

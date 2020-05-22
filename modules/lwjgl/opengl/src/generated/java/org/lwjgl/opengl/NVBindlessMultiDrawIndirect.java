@@ -36,12 +36,6 @@ public class NVBindlessMultiDrawIndirect {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glMultiDrawArraysIndirectBindlessNV, caps.glMultiDrawElementsIndirectBindlessNV
-        );
-    }
-
     // --- [ glMultiDrawArraysIndirectBindlessNV ] ---
 
     /** Unsafe version of: {@link #glMultiDrawArraysIndirectBindlessNV MultiDrawArraysIndirectBindlessNV} */

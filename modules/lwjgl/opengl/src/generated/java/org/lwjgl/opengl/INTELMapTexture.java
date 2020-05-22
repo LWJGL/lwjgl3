@@ -48,12 +48,6 @@ public class INTELMapTexture {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glSyncTextureINTEL, caps.glUnmapTexture2DINTEL, caps.glMapTexture2DINTEL
-        );
-    }
-
     // --- [ glSyncTextureINTEL ] ---
 
     /**

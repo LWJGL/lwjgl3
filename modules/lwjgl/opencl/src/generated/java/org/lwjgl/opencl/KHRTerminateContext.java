@@ -39,12 +39,6 @@ public class KHRTerminateContext {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(CLCapabilities caps) {
-        return checkFunctions(
-            caps.clTerminateContextKHR
-        );
-    }
-
     // --- [ clTerminateContextKHR ] ---
 
     /**

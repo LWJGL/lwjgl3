@@ -143,12 +143,6 @@ public class ARBDebugOutput {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glDebugMessageControlARB, caps.glDebugMessageInsertARB, caps.glDebugMessageCallbackARB, caps.glGetDebugMessageLogARB
-        );
-    }
-
     // --- [ glDebugMessageControlARB ] ---
 
     /**

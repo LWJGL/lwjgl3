@@ -168,14 +168,6 @@ public class KHRDebug {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glDebugMessageControlKHR, caps.glDebugMessageInsertKHR, caps.glDebugMessageCallbackKHR, caps.glGetDebugMessageLogKHR, caps.glGetPointervKHR, 
-            caps.glPushDebugGroupKHR, caps.glPopDebugGroupKHR, caps.glObjectLabelKHR, caps.glGetObjectLabelKHR, caps.glObjectPtrLabelKHR, 
-            caps.glGetObjectPtrLabelKHR
-        );
-    }
-
     // --- [ glDebugMessageControlKHR ] ---
 
     /**

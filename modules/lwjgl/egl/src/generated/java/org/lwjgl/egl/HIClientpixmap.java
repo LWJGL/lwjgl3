@@ -23,12 +23,6 @@ public class HIClientpixmap {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglCreatePixmapSurfaceHI
-        );
-    }
-
     // --- [ eglCreatePixmapSurfaceHI ] ---
 
     public static long neglCreatePixmapSurfaceHI(long dpy, long config, long pixmap) {

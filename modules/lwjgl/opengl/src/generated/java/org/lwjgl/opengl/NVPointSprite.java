@@ -57,12 +57,6 @@ public class NVPointSprite {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glPointParameteriNV, caps.glPointParameterivNV
-        );
-    }
-
     // --- [ glPointParameteriNV ] ---
 
     public static native void glPointParameteriNV(@NativeType("GLenum") int pname, @NativeType("GLint") int param);

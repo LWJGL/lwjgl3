@@ -49,13 +49,6 @@ public class NVTransformFeedback2 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glBindTransformFeedbackNV, caps.glDeleteTransformFeedbacksNV, caps.glGenTransformFeedbacksNV, caps.glIsTransformFeedbackNV, 
-            caps.glPauseTransformFeedbackNV, caps.glResumeTransformFeedbackNV, caps.glDrawTransformFeedbackNV
-        );
-    }
-
     // --- [ glBindTransformFeedbackNV ] ---
 
     public static native void glBindTransformFeedbackNV(@NativeType("GLenum") int target, @NativeType("GLuint") int id);

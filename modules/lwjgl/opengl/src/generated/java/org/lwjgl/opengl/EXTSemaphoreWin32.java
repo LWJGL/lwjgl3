@@ -49,12 +49,6 @@ public class EXTSemaphoreWin32 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glImportSemaphoreWin32HandleEXT, caps.glImportSemaphoreWin32NameEXT
-        );
-    }
-
     // --- [ glImportSemaphoreWin32HandleEXT ] ---
 
     public static native void nglImportSemaphoreWin32HandleEXT(int semaphore, int handleType, long handle);

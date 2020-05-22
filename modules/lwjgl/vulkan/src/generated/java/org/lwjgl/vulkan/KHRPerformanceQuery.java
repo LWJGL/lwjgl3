@@ -429,20 +429,6 @@ public class KHRPerformanceQuery {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsInstance(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_performance_query") && VK.checkExtension("VK_KHR_performance_query",
-               VK.isSupported(provider, "vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR", caps)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR", caps)
-        );
-    }
-
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_performance_query") && VK.checkExtension("VK_KHR_performance_query",
-               VK.isSupported(provider, "vkAcquireProfilingLockKHR", caps)
-            && VK.isSupported(provider, "vkReleaseProfilingLockKHR", caps)
-        );
-    }
-
     // --- [ vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR ] ---
 
     /**

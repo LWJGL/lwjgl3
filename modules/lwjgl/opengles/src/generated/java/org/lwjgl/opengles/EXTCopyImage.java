@@ -7,8 +7,6 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_copy_image.txt">EXT_copy_image</a> extension.
  * 
@@ -32,12 +30,6 @@ public class EXTCopyImage {
 
     protected EXTCopyImage() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glCopyImageSubDataEXT
-        );
     }
 
     // --- [ glCopyImageSubDataEXT ] ---

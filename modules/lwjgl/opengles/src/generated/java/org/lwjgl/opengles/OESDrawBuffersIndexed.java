@@ -7,8 +7,6 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_draw_buffers_indexed.txt">OES_draw_buffers_indexed</a> extension.
  * 
@@ -33,13 +31,6 @@ public class OESDrawBuffersIndexed {
 
     protected OESDrawBuffersIndexed() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glEnableiOES, caps.glDisableiOES, caps.glBlendEquationiOES, caps.glBlendEquationSeparateiOES, caps.glBlendFunciOES, 
-            caps.glBlendFuncSeparateiOES, caps.glColorMaskiOES, caps.glIsEnablediOES
-        );
     }
 
     // --- [ glEnableiOES ] ---

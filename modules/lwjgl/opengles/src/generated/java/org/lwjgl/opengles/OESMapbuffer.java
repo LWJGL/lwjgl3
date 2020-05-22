@@ -43,12 +43,6 @@ public class OESMapbuffer {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glMapBufferOES, caps.glUnmapBufferOES, caps.glGetBufferPointervOES
-        );
-    }
-
     // --- [ glMapBufferOES ] ---
 
     public static native long nglMapBufferOES(int target, int access);

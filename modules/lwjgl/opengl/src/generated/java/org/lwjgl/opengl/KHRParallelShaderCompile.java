@@ -7,8 +7,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_parallel_shader_compile.txt">KHR_parallel_shader_compile</a> extension.
  * 
@@ -28,12 +26,6 @@ public class KHRParallelShaderCompile {
 
     protected KHRParallelShaderCompile() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glMaxShaderCompilerThreadsKHR
-        );
     }
 
     // --- [ glMaxShaderCompilerThreadsKHR ] ---

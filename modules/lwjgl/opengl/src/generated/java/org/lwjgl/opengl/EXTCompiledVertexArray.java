@@ -7,8 +7,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_compiled_vertex_array.txt">EXT_compiled_vertex_array</a> extension.
  * 
@@ -32,12 +30,6 @@ public class EXTCompiledVertexArray {
 
     protected EXTCompiledVertexArray() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glLockArraysEXT, caps.glUnlockArraysEXT
-        );
     }
 
     // --- [ glLockArraysEXT ] ---

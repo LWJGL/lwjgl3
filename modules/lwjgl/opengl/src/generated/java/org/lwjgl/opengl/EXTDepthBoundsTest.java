@@ -7,8 +7,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_depth_bounds_test.txt">EXT_depth_bounds_test</a> extension.
  * 
@@ -50,12 +48,6 @@ public class EXTDepthBoundsTest {
 
     protected EXTDepthBoundsTest() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glDepthBoundsEXT
-        );
     }
 
     // --- [ glDepthBoundsEXT ] ---

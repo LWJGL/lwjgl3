@@ -24,12 +24,6 @@ public class GLXSGIXSwapGroup {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLXCapabilities caps) {
-        return checkFunctions(
-            caps.glXJoinSwapGroupSGIX
-        );
-    }
-
     // --- [ glXJoinSwapGroupSGIX ] ---
 
     /**

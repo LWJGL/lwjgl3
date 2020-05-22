@@ -59,12 +59,6 @@ public class NVStreamMetadata {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglQueryDisplayAttribNV, caps.eglSetStreamMetadataNV, caps.eglQueryStreamMetadataNV
-        );
-    }
-
     // --- [ eglQueryDisplayAttribNV ] ---
 
     public static int neglQueryDisplayAttribNV(long dpy, int attribute, long value) {

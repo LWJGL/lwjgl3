@@ -37,13 +37,6 @@ public class NVNonSquareMatrices {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glUniformMatrix2x3fvNV, caps.glUniformMatrix3x2fvNV, caps.glUniformMatrix2x4fvNV, caps.glUniformMatrix4x2fvNV, caps.glUniformMatrix3x4fvNV, 
-            caps.glUniformMatrix4x3fvNV
-        );
-    }
-
     // --- [ glUniformMatrix2x3fvNV ] ---
 
     public static native void nglUniformMatrix2x3fvNV(int location, int count, boolean transpose, long value);

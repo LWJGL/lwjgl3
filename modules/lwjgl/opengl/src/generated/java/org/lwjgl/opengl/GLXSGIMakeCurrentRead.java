@@ -23,12 +23,6 @@ public class GLXSGIMakeCurrentRead {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLXCapabilities caps) {
-        return checkFunctions(
-            caps.glXMakeCurrentReadSGI, caps.glXGetCurrentReadDrawableSGI
-        );
-    }
-
     // --- [ glXMakeCurrentReadSGI ] ---
 
     /**

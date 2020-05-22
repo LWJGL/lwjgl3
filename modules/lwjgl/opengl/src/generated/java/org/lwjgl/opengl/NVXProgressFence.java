@@ -37,12 +37,6 @@ public class NVXProgressFence {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glCreateProgressFenceNVX, caps.glSignalSemaphoreui64NVX, caps.glWaitSemaphoreui64NVX, caps.glClientWaitSemaphoreui64NVX
-        );
-    }
-
     // --- [ glCreateProgressFenceNVX ] ---
 
     @NativeType("GLuint")

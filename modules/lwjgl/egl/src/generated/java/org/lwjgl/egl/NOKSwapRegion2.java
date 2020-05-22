@@ -37,12 +37,6 @@ public class NOKSwapRegion2 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglSwapBuffersRegion2NOK
-        );
-    }
-
     // --- [ eglSwapBuffersRegion2NOK ] ---
 
     public static int neglSwapBuffersRegion2NOK(long dpy, long surface, int numRects, long rects) {

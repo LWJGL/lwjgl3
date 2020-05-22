@@ -7,8 +7,6 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_polygon_offset_clamp.txt">EXT_polygon_offset_clamp</a> extension.
  * 
@@ -26,12 +24,6 @@ public class EXTPolygonOffsetClamp {
 
     protected EXTPolygonOffsetClamp() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glPolygonOffsetClampEXT
-        );
     }
 
     // --- [ glPolygonOffsetClampEXT ] ---

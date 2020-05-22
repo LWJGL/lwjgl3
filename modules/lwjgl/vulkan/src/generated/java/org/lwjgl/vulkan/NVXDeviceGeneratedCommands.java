@@ -315,25 +315,6 @@ public class NVXDeviceGeneratedCommands {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsInstance(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_NVX_device_generated_commands") && VK.checkExtension("VK_NVX_device_generated_commands",
-               VK.isSupported(provider, "vkGetPhysicalDeviceGeneratedCommandsPropertiesNVX", caps)
-        );
-    }
-
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_NVX_device_generated_commands") && VK.checkExtension("VK_NVX_device_generated_commands",
-               VK.isSupported(provider, "vkCmdProcessCommandsNVX", caps)
-            && VK.isSupported(provider, "vkCmdReserveSpaceForCommandsNVX", caps)
-            && VK.isSupported(provider, "vkCreateIndirectCommandsLayoutNVX", caps)
-            && VK.isSupported(provider, "vkDestroyIndirectCommandsLayoutNVX", caps)
-            && VK.isSupported(provider, "vkCreateObjectTableNVX", caps)
-            && VK.isSupported(provider, "vkDestroyObjectTableNVX", caps)
-            && VK.isSupported(provider, "vkRegisterObjectsNVX", caps)
-            && VK.isSupported(provider, "vkUnregisterObjectsNVX", caps)
-        );
-    }
-
     // --- [ vkCmdProcessCommandsNVX ] ---
 
     /** Unsafe version of: {@link #vkCmdProcessCommandsNVX CmdProcessCommandsNVX} */

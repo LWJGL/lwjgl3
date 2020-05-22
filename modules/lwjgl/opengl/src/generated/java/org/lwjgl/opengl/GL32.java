@@ -13,8 +13,6 @@ import org.lwjgl.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * The OpenGL functionality up to version 3.2. Includes the deprecated symbols of the Compatibility Profile.
  * 
@@ -193,15 +191,6 @@ public class GL32 extends GL31 {
 
     protected GL32() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glGetBufferParameteri64v, caps.glDrawElementsBaseVertex, caps.glDrawRangeElementsBaseVertex, caps.glDrawElementsInstancedBaseVertex, 
-            caps.glMultiDrawElementsBaseVertex, caps.glProvokingVertex, caps.glTexImage2DMultisample, caps.glTexImage3DMultisample, caps.glGetMultisamplefv, 
-            caps.glSampleMaski, caps.glFramebufferTexture, caps.glFenceSync, caps.glIsSync, caps.glDeleteSync, caps.glClientWaitSync, caps.glWaitSync, 
-            caps.glGetInteger64v, caps.glGetInteger64i_v, caps.glGetSynciv
-        );
     }
 
     // --- [ glGetBufferParameteri64v ] ---

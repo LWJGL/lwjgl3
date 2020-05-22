@@ -69,15 +69,6 @@ public class NVGPUMulticast {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glRenderGpuMaskNV, caps.glMulticastBufferSubDataNV, caps.glMulticastCopyBufferSubDataNV, caps.glMulticastCopyImageSubDataNV, 
-            caps.glMulticastBlitFramebufferNV, caps.glMulticastFramebufferSampleLocationsfvNV, caps.glMulticastBarrierNV, caps.glMulticastWaitSyncNV, 
-            caps.glMulticastGetQueryObjectivNV, caps.glMulticastGetQueryObjectuivNV, caps.glMulticastGetQueryObjecti64vNV, 
-            caps.glMulticastGetQueryObjectui64vNV
-        );
-    }
-
     // --- [ glRenderGpuMaskNV ] ---
 
     /** Restricts render commands to a specific set of GPUs. */

@@ -32,12 +32,6 @@ public class OESVertexArrayObject {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glBindVertexArrayOES, caps.glDeleteVertexArraysOES, caps.glGenVertexArraysOES, caps.glIsVertexArrayOES
-        );
-    }
-
     // --- [ glBindVertexArrayOES ] ---
 
     public static native void glBindVertexArrayOES(@NativeType("GLuint") int array);

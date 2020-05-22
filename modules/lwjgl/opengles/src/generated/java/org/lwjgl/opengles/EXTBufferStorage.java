@@ -53,12 +53,6 @@ public class EXTBufferStorage {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps, java.util.Set<String> ext) {
-        return checkFunctions(
-            caps.glBufferStorageEXT, caps.hasDSA(ext) ? caps.glNamedBufferStorageEXT : -1L
-        );
-    }
-
     // --- [ glBufferStorageEXT ] ---
 
     public static native void nglBufferStorageEXT(int target, long size, long data, int flags);

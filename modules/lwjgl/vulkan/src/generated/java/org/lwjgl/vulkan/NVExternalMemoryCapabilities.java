@@ -109,12 +109,6 @@ public class NVExternalMemoryCapabilities {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsInstance(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_NV_external_memory_capabilities") && VK.checkExtension("VK_NV_external_memory_capabilities",
-               VK.isSupported(provider, "vkGetPhysicalDeviceExternalImageFormatPropertiesNV", caps)
-        );
-    }
-
     // --- [ vkGetPhysicalDeviceExternalImageFormatPropertiesNV ] ---
 
     /** Unsafe version of: {@link #vkGetPhysicalDeviceExternalImageFormatPropertiesNV GetPhysicalDeviceExternalImageFormatPropertiesNV} */

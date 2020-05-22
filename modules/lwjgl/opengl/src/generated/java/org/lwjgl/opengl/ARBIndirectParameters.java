@@ -46,12 +46,6 @@ public class ARBIndirectParameters {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glMultiDrawArraysIndirectCountARB, caps.glMultiDrawElementsIndirectCountARB
-        );
-    }
-
     // --- [ glMultiDrawArraysIndirectCountARB ] ---
 
     /** Unsafe version of: {@link #glMultiDrawArraysIndirectCountARB MultiDrawArraysIndirectCountARB} */

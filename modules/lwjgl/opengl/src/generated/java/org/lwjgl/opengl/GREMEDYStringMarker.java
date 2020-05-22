@@ -9,7 +9,6 @@ import java.nio.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
@@ -35,12 +34,6 @@ public class GREMEDYStringMarker {
 
     protected GREMEDYStringMarker() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glStringMarkerGREMEDY
-        );
     }
 
     // --- [ glStringMarkerGREMEDY ] ---

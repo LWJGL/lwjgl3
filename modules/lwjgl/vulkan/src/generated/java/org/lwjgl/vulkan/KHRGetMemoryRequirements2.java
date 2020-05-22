@@ -91,14 +91,6 @@ public class KHRGetMemoryRequirements2 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_get_memory_requirements2") && VK.checkExtension("VK_KHR_get_memory_requirements2",
-               VK.isSupported(provider, "vkGetImageMemoryRequirements2KHR", caps)
-            && VK.isSupported(provider, "vkGetBufferMemoryRequirements2KHR", caps)
-            && VK.isSupported(provider, "vkGetImageSparseMemoryRequirements2KHR", caps)
-        );
-    }
-
     // --- [ vkGetImageMemoryRequirements2KHR ] ---
 
     /** Unsafe version of: {@link #vkGetImageMemoryRequirements2KHR GetImageMemoryRequirements2KHR} */

@@ -47,12 +47,6 @@ public class ARBPointParameters {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glPointParameterfARB, caps.glPointParameterfvARB
-        );
-    }
-
     // --- [ glPointParameterfARB ] ---
 
     /**

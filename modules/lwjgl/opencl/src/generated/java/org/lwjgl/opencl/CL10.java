@@ -367,23 +367,6 @@ public class CL10 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(CLCapabilities caps) {
-        return checkFunctions(
-            caps.clGetPlatformIDs, caps.clGetPlatformInfo, caps.clGetDeviceIDs, caps.clGetDeviceInfo, caps.clCreateContext, caps.clCreateContextFromType, 
-            caps.clRetainContext, caps.clReleaseContext, caps.clGetContextInfo, caps.clCreateCommandQueue, caps.clRetainCommandQueue, 
-            caps.clReleaseCommandQueue, caps.clGetCommandQueueInfo, caps.clCreateBuffer, caps.clEnqueueReadBuffer, caps.clEnqueueWriteBuffer, 
-            caps.clEnqueueCopyBuffer, caps.clEnqueueMapBuffer, caps.clCreateImage2D, caps.clCreateImage3D, caps.clGetSupportedImageFormats, 
-            caps.clEnqueueReadImage, caps.clEnqueueWriteImage, caps.clEnqueueCopyImage, caps.clEnqueueCopyImageToBuffer, caps.clEnqueueCopyBufferToImage, 
-            caps.clEnqueueMapImage, caps.clGetImageInfo, caps.clRetainMemObject, caps.clReleaseMemObject, caps.clEnqueueUnmapMemObject, caps.clGetMemObjectInfo, 
-            caps.clCreateSampler, caps.clRetainSampler, caps.clReleaseSampler, caps.clGetSamplerInfo, caps.clCreateProgramWithSource, 
-            caps.clCreateProgramWithBinary, caps.clRetainProgram, caps.clReleaseProgram, caps.clBuildProgram, caps.clUnloadCompiler, caps.clGetProgramInfo, 
-            caps.clGetProgramBuildInfo, caps.clCreateKernel, caps.clCreateKernelsInProgram, caps.clRetainKernel, caps.clReleaseKernel, caps.clSetKernelArg, 
-            caps.clGetKernelInfo, caps.clGetKernelWorkGroupInfo, caps.clEnqueueNDRangeKernel, caps.clEnqueueTask, caps.clEnqueueNativeKernel, 
-            caps.clWaitForEvents, caps.clGetEventInfo, caps.clRetainEvent, caps.clReleaseEvent, caps.clEnqueueMarker, caps.clEnqueueBarrier, 
-            caps.clEnqueueWaitForEvents, caps.clGetEventProfilingInfo, caps.clFlush, caps.clFinish, caps.clGetExtensionFunctionAddress
-        );
-    }
-
     // --- [ clGetPlatformIDs ] ---
 
     /**

@@ -23,12 +23,6 @@ public class GLXNVCopyImage {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLXCapabilities caps) {
-        return checkFunctions(
-            caps.glXCopyImageSubDataNV
-        );
-    }
-
     // --- [ glXCopyImageSubDataNV ] ---
 
     /**

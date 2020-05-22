@@ -7,8 +7,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_array.txt">EXT_texture_array</a> extension.
  * 
@@ -81,12 +79,6 @@ public class EXTTextureArray {
 
     protected EXTTextureArray() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glFramebufferTextureLayerEXT
-        );
     }
 
     // --- [ glFramebufferTextureLayerEXT ] ---

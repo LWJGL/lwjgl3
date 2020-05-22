@@ -40,12 +40,6 @@ public class EXTSyncReuse {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglUnsignalSyncEXT
-        );
-    }
-
     // --- [ eglUnsignalSyncEXT ] ---
 
     public static int neglUnsignalSyncEXT(long dpy, long sync, long attrib_list) {

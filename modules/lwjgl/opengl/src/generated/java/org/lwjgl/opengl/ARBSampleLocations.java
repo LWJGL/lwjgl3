@@ -57,12 +57,6 @@ public class ARBSampleLocations {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glFramebufferSampleLocationsfvARB, caps.glNamedFramebufferSampleLocationsfvARB, caps.glEvaluateDepthValuesARB
-        );
-    }
-
     // --- [ glFramebufferSampleLocationsfvARB ] ---
 
     /**

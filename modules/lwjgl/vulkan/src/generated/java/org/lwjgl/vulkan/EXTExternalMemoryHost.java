@@ -88,12 +88,6 @@ public class EXTExternalMemoryHost {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_external_memory_host") && VK.checkExtension("VK_EXT_external_memory_host",
-               VK.isSupported(provider, "vkGetMemoryHostPointerPropertiesEXT", caps)
-        );
-    }
-
     // --- [ vkGetMemoryHostPointerPropertiesEXT ] ---
 
     /** Unsafe version of: {@link #vkGetMemoryHostPointerPropertiesEXT GetMemoryHostPointerPropertiesEXT} */

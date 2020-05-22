@@ -77,13 +77,6 @@ public class ARBOcclusionQuery {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glGenQueriesARB, caps.glDeleteQueriesARB, caps.glIsQueryARB, caps.glBeginQueryARB, caps.glEndQueryARB, caps.glGetQueryivARB, 
-            caps.glGetQueryObjectivARB, caps.glGetQueryObjectuivARB
-        );
-    }
-
     // --- [ glGenQueriesARB ] ---
 
     /**

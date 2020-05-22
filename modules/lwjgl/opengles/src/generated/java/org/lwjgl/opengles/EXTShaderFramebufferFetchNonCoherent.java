@@ -7,8 +7,6 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shader_framebuffer_fetch_non_coherent.txt">EXT_shader_framebuffer_fetch_non_coherent</a> extension.
  * 
@@ -20,12 +18,6 @@ public class EXTShaderFramebufferFetchNonCoherent {
 
     protected EXTShaderFramebufferFetchNonCoherent() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glFramebufferFetchBarrierEXT
-        );
     }
 
     // --- [ glFramebufferFetchBarrierEXT ] ---

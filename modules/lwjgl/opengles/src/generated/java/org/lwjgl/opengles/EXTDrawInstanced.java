@@ -9,8 +9,6 @@ import java.nio.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_draw_instanced.txt">EXT_draw_instanced</a> extension.
  * 
@@ -23,12 +21,6 @@ public class EXTDrawInstanced {
 
     protected EXTDrawInstanced() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glDrawArraysInstancedEXT, caps.glDrawElementsInstancedEXT
-        );
     }
 
     // --- [ glDrawArraysInstancedEXT ] ---

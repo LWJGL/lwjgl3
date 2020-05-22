@@ -49,12 +49,6 @@ public class NVQueryResource {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glQueryResourceNV
-        );
-    }
-
     // --- [ glQueryResourceNV ] ---
 
     /** Unsafe version of: {@link #glQueryResourceNV QueryResourceNV} */

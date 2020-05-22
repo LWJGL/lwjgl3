@@ -26,12 +26,6 @@ public class KHRWaitSync {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglWaitSyncKHR
-        );
-    }
-
     // --- [ eglWaitSyncKHR ] ---
 
     @NativeType("EGLint")

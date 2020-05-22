@@ -88,14 +88,6 @@ public class INTELPerformanceQuery {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glBeginPerfQueryINTEL, caps.glCreatePerfQueryINTEL, caps.glDeletePerfQueryINTEL, caps.glEndPerfQueryINTEL, caps.glGetFirstPerfQueryIdINTEL, 
-            caps.glGetNextPerfQueryIdINTEL, caps.glGetPerfCounterInfoINTEL, caps.glGetPerfQueryDataINTEL, caps.glGetPerfQueryIdByNameINTEL, 
-            caps.glGetPerfQueryInfoINTEL
-        );
-    }
-
     // --- [ glBeginPerfQueryINTEL ] ---
 
     public static native void glBeginPerfQueryINTEL(@NativeType("GLuint") int queryHandle);

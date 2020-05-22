@@ -29,12 +29,6 @@ public class CL12GL extends CL10GL {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(CLCapabilities caps) {
-        return checkFunctions(
-            caps.clCreateFromGLTexture
-        );
-    }
-
     // --- [ clCreateFromGLTexture ] ---
 
     /** Unsafe version of: {@link #clCreateFromGLTexture CreateFromGLTexture} */

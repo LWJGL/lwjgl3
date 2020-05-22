@@ -7,8 +7,6 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_blend_equation_advanced.txt">NV_blend_equation_advanced</a> extension.
  * 
@@ -126,12 +124,6 @@ public class NVBlendEquationAdvanced {
 
     protected NVBlendEquationAdvanced() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glBlendParameteriNV, caps.glBlendBarrierNV
-        );
     }
 
     // --- [ glBlendParameteriNV ] ---

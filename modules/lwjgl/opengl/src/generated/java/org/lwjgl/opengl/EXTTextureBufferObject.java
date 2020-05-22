@@ -7,8 +7,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_buffer_object.txt">EXT_texture_buffer_object</a> extension.
  * 
@@ -52,12 +50,6 @@ public class EXTTextureBufferObject {
 
     protected EXTTextureBufferObject() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glTexBufferEXT
-        );
     }
 
     // --- [ glTexBufferEXT ] ---

@@ -28,12 +28,6 @@ public class EGL14 extends EGL13 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglGetCurrentContext
-        );
-    }
-
     // --- [ eglGetCurrentContext ] ---
 
     /** <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglGetCurrentContext.xhtml">Reference Page</a> */

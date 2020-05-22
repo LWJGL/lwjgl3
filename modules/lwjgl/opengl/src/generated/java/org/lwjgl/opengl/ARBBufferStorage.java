@@ -53,12 +53,6 @@ public class ARBBufferStorage {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps, java.util.Set<String> ext) {
-        return checkFunctions(
-            caps.glBufferStorage, ext.contains("GL_EXT_direct_state_access") ? caps.glNamedBufferStorageEXT : -1L
-        );
-    }
-
     // --- [ glBufferStorage ] ---
 
     /**

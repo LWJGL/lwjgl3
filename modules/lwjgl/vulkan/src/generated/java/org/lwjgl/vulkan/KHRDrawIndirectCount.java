@@ -69,13 +69,6 @@ public class KHRDrawIndirectCount {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_draw_indirect_count") && VK.checkExtension("VK_KHR_draw_indirect_count",
-               VK.isSupported(provider, "vkCmdDrawIndirectCountKHR", caps)
-            && VK.isSupported(provider, "vkCmdDrawIndexedIndirectCountKHR", caps)
-        );
-    }
-
     // --- [ vkCmdDrawIndirectCountKHR ] ---
 
     /**

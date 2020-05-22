@@ -203,15 +203,6 @@ public class CL12 extends CL11 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(CLCapabilities caps) {
-        return checkFunctions(
-            caps.clGetExtensionFunctionAddressForPlatform, caps.clRetainDevice, caps.clReleaseDevice, caps.clCreateSubDevices, caps.clCreateImage, 
-            caps.clCreateProgramWithBuiltInKernels, caps.clCompileProgram, caps.clLinkProgram, caps.clUnloadPlatformCompiler, caps.clGetKernelArgInfo, 
-            caps.clEnqueueFillBuffer, caps.clEnqueueFillImage, caps.clEnqueueMigrateMemObjects, caps.clEnqueueMarkerWithWaitList, 
-            caps.clEnqueueBarrierWithWaitList
-        );
-    }
-
     // --- [ clGetExtensionFunctionAddressForPlatform ] ---
 
     /** Unsafe version of: {@link #clGetExtensionFunctionAddressForPlatform GetExtensionFunctionAddressForPlatform} */

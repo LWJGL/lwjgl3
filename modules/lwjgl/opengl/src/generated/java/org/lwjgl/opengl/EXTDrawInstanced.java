@@ -9,7 +9,6 @@ import java.nio.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -26,12 +25,6 @@ public class EXTDrawInstanced {
 
     protected EXTDrawInstanced() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glDrawArraysInstancedEXT, caps.glDrawElementsInstancedEXT
-        );
     }
 
     // --- [ glDrawArraysInstancedEXT ] ---

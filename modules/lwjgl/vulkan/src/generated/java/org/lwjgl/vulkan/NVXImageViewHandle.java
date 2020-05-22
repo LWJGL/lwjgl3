@@ -55,12 +55,6 @@ public class NVXImageViewHandle {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_NVX_image_view_handle") && VK.checkExtension("VK_NVX_image_view_handle",
-               VK.isSupported(provider, "vkGetImageViewHandleNVX", caps)
-        );
-    }
-
     // --- [ vkGetImageViewHandleNVX ] ---
 
     /** Unsafe version of: {@link #vkGetImageViewHandleNVX GetImageViewHandleNVX} */

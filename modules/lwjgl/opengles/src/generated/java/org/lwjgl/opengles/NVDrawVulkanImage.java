@@ -39,12 +39,6 @@ public class NVDrawVulkanImage {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glDrawVkImageNV, caps.glGetVkProcAddrNV, caps.glWaitVkSemaphoreNV, caps.glSignalVkSemaphoreNV, caps.glSignalVkFenceNV
-        );
-    }
-
     // --- [ glDrawVkImageNV ] ---
 
     /**

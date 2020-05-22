@@ -30,13 +30,6 @@ public class GLXNVSwapGroup {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLXCapabilities caps) {
-        return checkFunctions(
-            caps.glXJoinSwapGroupNV, caps.glXBindSwapBarrierNV, caps.glXQuerySwapGroupNV, caps.glXQueryMaxSwapGroupsNV, caps.glXQueryFrameCountNV, 
-            caps.glXResetFrameCountNV
-        );
-    }
-
     // --- [ glXJoinSwapGroupNV ] ---
 
     /** @param display the connection to the X server */

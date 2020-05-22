@@ -32,12 +32,6 @@ public class WLBindWaylandDisplay {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglBindWaylandDisplayWL, caps.eglUnbindWaylandDisplayWL, caps.eglQueryWaylandBufferWL
-        );
-    }
-
     // --- [ eglBindWaylandDisplayWL ] ---
 
     @NativeType("EGLBoolean")

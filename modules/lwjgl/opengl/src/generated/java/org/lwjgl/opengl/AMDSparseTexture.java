@@ -7,8 +7,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_sparse_texture.txt">AMD_sparse_texture</a> extension.
  * 
@@ -51,12 +49,6 @@ public class AMDSparseTexture {
 
     protected AMDSparseTexture() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glTexStorageSparseAMD, caps.glTextureStorageSparseAMD
-        );
     }
 
     // --- [ glTexStorageSparseAMD ] ---

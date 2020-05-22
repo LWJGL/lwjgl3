@@ -78,13 +78,6 @@ public class APPLESync {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glFenceSyncAPPLE, caps.glIsSyncAPPLE, caps.glDeleteSyncAPPLE, caps.glClientWaitSyncAPPLE, caps.glWaitSyncAPPLE, caps.glGetInteger64vAPPLE, 
-            caps.glGetSyncivAPPLE
-        );
-    }
-
     // --- [ glFenceSyncAPPLE ] ---
 
     @NativeType("GLsync")

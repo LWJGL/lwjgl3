@@ -43,12 +43,6 @@ public class EXTClearTexture {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glClearTexImageEXT, caps.glClearTexSubImageEXT
-        );
-    }
-
     // --- [ glClearTexImageEXT ] ---
 
     public static native void nglClearTexImageEXT(int texture, int level, int format, int type, long data);

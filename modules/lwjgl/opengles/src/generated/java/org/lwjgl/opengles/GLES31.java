@@ -202,26 +202,6 @@ public class GLES31 extends GLES30 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glDispatchCompute, caps.glDispatchComputeIndirect, caps.glDrawArraysIndirect, caps.glDrawElementsIndirect, caps.glFramebufferParameteri, 
-            caps.glGetFramebufferParameteriv, caps.glGetProgramInterfaceiv, caps.glGetProgramResourceIndex, caps.glGetProgramResourceName, 
-            caps.glGetProgramResourceiv, caps.glGetProgramResourceLocation, caps.glUseProgramStages, caps.glActiveShaderProgram, caps.glCreateShaderProgramv, 
-            caps.glBindProgramPipeline, caps.glDeleteProgramPipelines, caps.glGenProgramPipelines, caps.glIsProgramPipeline, caps.glGetProgramPipelineiv, 
-            caps.glProgramUniform1i, caps.glProgramUniform2i, caps.glProgramUniform3i, caps.glProgramUniform4i, caps.glProgramUniform1ui, 
-            caps.glProgramUniform2ui, caps.glProgramUniform3ui, caps.glProgramUniform4ui, caps.glProgramUniform1f, caps.glProgramUniform2f, 
-            caps.glProgramUniform3f, caps.glProgramUniform4f, caps.glProgramUniform1iv, caps.glProgramUniform2iv, caps.glProgramUniform3iv, 
-            caps.glProgramUniform4iv, caps.glProgramUniform1uiv, caps.glProgramUniform2uiv, caps.glProgramUniform3uiv, caps.glProgramUniform4uiv, 
-            caps.glProgramUniform1fv, caps.glProgramUniform2fv, caps.glProgramUniform3fv, caps.glProgramUniform4fv, caps.glProgramUniformMatrix2fv, 
-            caps.glProgramUniformMatrix3fv, caps.glProgramUniformMatrix4fv, caps.glProgramUniformMatrix2x3fv, caps.glProgramUniformMatrix3x2fv, 
-            caps.glProgramUniformMatrix2x4fv, caps.glProgramUniformMatrix4x2fv, caps.glProgramUniformMatrix3x4fv, caps.glProgramUniformMatrix4x3fv, 
-            caps.glValidateProgramPipeline, caps.glGetProgramPipelineInfoLog, caps.glBindImageTexture, caps.glGetBooleani_v, caps.glMemoryBarrier, 
-            caps.glMemoryBarrierByRegion, caps.glTexStorage2DMultisample, caps.glGetMultisamplefv, caps.glSampleMaski, caps.glGetTexLevelParameteriv, 
-            caps.glGetTexLevelParameterfv, caps.glBindVertexBuffer, caps.glVertexAttribFormat, caps.glVertexAttribIFormat, caps.glVertexAttribBinding, 
-            caps.glVertexBindingDivisor
-        );
-    }
-
     // --- [ glDispatchCompute ] ---
 
     /** <a target="_blank" href="http://docs.gl/es3/glDispatchCompute">Reference Page</a> */

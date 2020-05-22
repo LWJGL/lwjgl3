@@ -7,8 +7,6 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_win32_keyed_mutex.txt">EXT_win32_keyed_mutex</a> extension.
  * 
@@ -24,12 +22,6 @@ public class EXTWin32KeyedMutex {
 
     protected EXTWin32KeyedMutex() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glAcquireKeyedMutexWin32EXT, caps.glReleaseKeyedMutexWin32EXT
-        );
     }
 
     // --- [ glAcquireKeyedMutexWin32EXT ] ---

@@ -86,12 +86,6 @@ public class KHRMaintenance3 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_maintenance3") && VK.checkExtension("VK_KHR_maintenance3",
-               VK.isSupported(provider, "vkGetDescriptorSetLayoutSupportKHR", caps)
-        );
-    }
-
     // --- [ vkGetDescriptorSetLayoutSupportKHR ] ---
 
     /** Unsafe version of: {@link #vkGetDescriptorSetLayoutSupportKHR GetDescriptorSetLayoutSupportKHR} */

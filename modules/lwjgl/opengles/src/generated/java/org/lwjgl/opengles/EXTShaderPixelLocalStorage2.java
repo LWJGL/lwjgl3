@@ -46,12 +46,6 @@ public class EXTShaderPixelLocalStorage2 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glFramebufferPixelLocalStorageSizeEXT, caps.glGetFramebufferPixelLocalStorageSizeEXT, caps.glClearPixelLocalStorageuiEXT
-        );
-    }
-
     // --- [ glFramebufferPixelLocalStorageSizeEXT ] ---
 
     public static native void glFramebufferPixelLocalStorageSizeEXT(@NativeType("GLuint") int target, @NativeType("GLsizei") int size);

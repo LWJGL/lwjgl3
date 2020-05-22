@@ -9,8 +9,6 @@ import java.nio.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_tessellation_shader.txt">ARB_tessellation_shader</a> extension.
  * 
@@ -114,12 +112,6 @@ public class ARBTessellationShader {
 
     protected ARBTessellationShader() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glPatchParameteri, caps.glPatchParameterfv
-        );
     }
 
     // --- [ glPatchParameteri ] ---

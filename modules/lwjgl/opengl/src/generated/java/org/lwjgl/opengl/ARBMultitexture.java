@@ -69,18 +69,6 @@ public class ARBMultitexture {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glActiveTextureARB, caps.glClientActiveTextureARB, caps.glMultiTexCoord1fARB, caps.glMultiTexCoord1sARB, caps.glMultiTexCoord1iARB, 
-            caps.glMultiTexCoord1dARB, caps.glMultiTexCoord1fvARB, caps.glMultiTexCoord1svARB, caps.glMultiTexCoord1ivARB, caps.glMultiTexCoord1dvARB, 
-            caps.glMultiTexCoord2fARB, caps.glMultiTexCoord2sARB, caps.glMultiTexCoord2iARB, caps.glMultiTexCoord2dARB, caps.glMultiTexCoord2fvARB, 
-            caps.glMultiTexCoord2svARB, caps.glMultiTexCoord2ivARB, caps.glMultiTexCoord2dvARB, caps.glMultiTexCoord3fARB, caps.glMultiTexCoord3sARB, 
-            caps.glMultiTexCoord3iARB, caps.glMultiTexCoord3dARB, caps.glMultiTexCoord3fvARB, caps.glMultiTexCoord3svARB, caps.glMultiTexCoord3ivARB, 
-            caps.glMultiTexCoord3dvARB, caps.glMultiTexCoord4fARB, caps.glMultiTexCoord4sARB, caps.glMultiTexCoord4iARB, caps.glMultiTexCoord4dARB, 
-            caps.glMultiTexCoord4fvARB, caps.glMultiTexCoord4svARB, caps.glMultiTexCoord4ivARB, caps.glMultiTexCoord4dvARB
-        );
-    }
-
     // --- [ glActiveTextureARB ] ---
 
     /**

@@ -24,12 +24,6 @@ public class GLXSGIVideoSync {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLXCapabilities caps) {
-        return checkFunctions(
-            caps.glXGetVideoSyncSGI, caps.glXWaitVideoSyncSGI
-        );
-    }
-
     // --- [ glXGetVideoSyncSGI ] ---
 
     /** Unsafe version of: {@link #glXGetVideoSyncSGI GetVideoSyncSGI} */

@@ -7,8 +7,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_sparse_texture.txt">ARB_sparse_texture</a> extension.
  * 
@@ -50,12 +48,6 @@ public class ARBSparseTexture {
 
     protected ARBSparseTexture() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps, java.util.Set<String> ext) {
-        return checkFunctions(
-            caps.glTexPageCommitmentARB, ext.contains("GL_EXT_direct_state_access") ? caps.glTexturePageCommitmentEXT : -1L
-        );
     }
 
     // --- [ glTexPageCommitmentARB ] ---

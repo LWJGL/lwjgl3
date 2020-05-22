@@ -43,12 +43,6 @@ public class EXTImageDMABufImportModifiers {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglQueryDmaBufFormatsEXT, caps.eglQueryDmaBufModifiersEXT
-        );
-    }
-
     // --- [ eglQueryDmaBufFormatsEXT ] ---
 
     public static int neglQueryDmaBufFormatsEXT(long dpy, int max_formats, long formats, long num_formats) {

@@ -48,13 +48,6 @@ public class EXTOutputBase {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglGetOutputLayersEXT, caps.eglGetOutputPortsEXT, caps.eglOutputLayerAttribEXT, caps.eglQueryOutputLayerAttribEXT, 
-            caps.eglQueryOutputLayerStringEXT, caps.eglOutputPortAttribEXT, caps.eglQueryOutputPortAttribEXT, caps.eglQueryOutputPortStringEXT
-        );
-    }
-
     // --- [ eglGetOutputLayersEXT ] ---
 
     public static int neglGetOutputLayersEXT(long dpy, long attrib_list, long layers, int max_layers, long num_layers) {

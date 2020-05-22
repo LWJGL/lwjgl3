@@ -69,13 +69,6 @@ public class EGL15 extends EGL14 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglCreateSync, caps.eglDestroySync, caps.eglClientWaitSync, caps.eglGetSyncAttrib, caps.eglCreateImage, caps.eglDestroyImage, 
-            caps.eglGetPlatformDisplay, caps.eglCreatePlatformWindowSurface, caps.eglCreatePlatformPixmapSurface, caps.eglWaitSync
-        );
-    }
-
     // --- [ eglCreateSync ] ---
 
     public static long neglCreateSync(long dpy, int type, long attrib_list) {

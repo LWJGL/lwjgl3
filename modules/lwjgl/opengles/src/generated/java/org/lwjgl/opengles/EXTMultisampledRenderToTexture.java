@@ -7,8 +7,6 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_multisampled_render_to_texture.txt">EXT_multisampled_render_to_texture</a> extension.
  * 
@@ -49,12 +47,6 @@ public class EXTMultisampledRenderToTexture {
 
     protected EXTMultisampledRenderToTexture() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glRenderbufferStorageMultisampleEXT, caps.glFramebufferTexture2DMultisampleEXT
-        );
     }
 
     // --- [ glRenderbufferStorageMultisampleEXT ] ---

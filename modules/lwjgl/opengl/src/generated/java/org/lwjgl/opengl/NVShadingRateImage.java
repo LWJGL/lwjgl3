@@ -89,13 +89,6 @@ public class NVShadingRateImage {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glBindShadingRateImageNV, caps.glShadingRateImagePaletteNV, caps.glGetShadingRateImagePaletteNV, caps.glShadingRateImageBarrierNV, 
-            caps.glShadingRateSampleOrderNV, caps.glShadingRateSampleOrderCustomNV, caps.glGetShadingRateSampleLocationivNV
-        );
-    }
-
     // --- [ glBindShadingRateImageNV ] ---
 
     public static native void glBindShadingRateImageNV(@NativeType("GLuint") int texture);

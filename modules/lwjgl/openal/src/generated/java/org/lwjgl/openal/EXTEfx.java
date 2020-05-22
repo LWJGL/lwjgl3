@@ -649,17 +649,6 @@ public class EXTEfx {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(ALCapabilities caps) {
-        return checkFunctions(
-            caps.alGenEffects, caps.alDeleteEffects, caps.alIsEffect, caps.alEffecti, caps.alEffectiv, caps.alEffectf, caps.alEffectfv, caps.alGetEffecti, 
-            caps.alGetEffectiv, caps.alGetEffectf, caps.alGetEffectfv, caps.alGenFilters, caps.alDeleteFilters, caps.alIsFilter, caps.alFilteri, 
-            caps.alFilteriv, caps.alFilterf, caps.alFilterfv, caps.alGetFilteri, caps.alGetFilteriv, caps.alGetFilterf, caps.alGetFilterfv, 
-            caps.alGenAuxiliaryEffectSlots, caps.alDeleteAuxiliaryEffectSlots, caps.alIsAuxiliaryEffectSlot, caps.alAuxiliaryEffectSloti, 
-            caps.alAuxiliaryEffectSlotiv, caps.alAuxiliaryEffectSlotf, caps.alAuxiliaryEffectSlotfv, caps.alGetAuxiliaryEffectSloti, 
-            caps.alGetAuxiliaryEffectSlotiv, caps.alGetAuxiliaryEffectSlotf, caps.alGetAuxiliaryEffectSlotfv
-        );
-    }
-
     // --- [ alGenEffects ] ---
 
     /**

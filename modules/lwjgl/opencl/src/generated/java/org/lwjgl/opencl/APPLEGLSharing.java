@@ -47,12 +47,6 @@ public class APPLEGLSharing {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(CLCapabilities caps) {
-        return checkFunctions(
-            caps.clGetGLContextInfoAPPLE
-        );
-    }
-
     // --- [ clGetGLContextInfoAPPLE ] ---
 
     /**

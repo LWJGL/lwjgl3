@@ -7,8 +7,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_stencil_clear_tag.txt">EXT_stencil_clear_tag</a> extension.
  * 
@@ -56,12 +54,6 @@ public class EXTStencilClearTag {
 
     protected EXTStencilClearTag() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glStencilClearTagEXT
-        );
     }
 
     // --- [ glStencilClearTagEXT ] ---

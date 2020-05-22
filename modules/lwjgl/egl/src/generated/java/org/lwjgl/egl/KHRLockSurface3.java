@@ -55,12 +55,6 @@ public class KHRLockSurface3 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglLockSurfaceKHR, caps.eglUnlockSurfaceKHR, caps.eglQuerySurface64KHR
-        );
-    }
-
     // --- [ eglLockSurfaceKHR ] ---
 
     public static int neglLockSurfaceKHR(long dpy, long surface, long attrib_list) {

@@ -87,18 +87,6 @@ public class EXTSampleLocations {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsInstance(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_sample_locations") && VK.checkExtension("VK_EXT_sample_locations",
-               VK.isSupported(provider, "vkGetPhysicalDeviceMultisamplePropertiesEXT", caps)
-        );
-    }
-
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_sample_locations") && VK.checkExtension("VK_EXT_sample_locations",
-               VK.isSupported(provider, "vkCmdSetSampleLocationsEXT", caps)
-        );
-    }
-
     // --- [ vkCmdSetSampleLocationsEXT ] ---
 
     /** Unsafe version of: {@link #vkCmdSetSampleLocationsEXT CmdSetSampleLocationsEXT} */

@@ -42,12 +42,6 @@ public class KHRPartialUpdate {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglSetDamageRegionKHR
-        );
-    }
-
     // --- [ eglSetDamageRegionKHR ] ---
 
     public static int neglSetDamageRegionKHR(long dpy, long surface, long rects, int n_rects) {

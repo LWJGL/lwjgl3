@@ -34,12 +34,6 @@ public class ANDROIDBlobCache {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglSetBlobCacheFuncsANDROID
-        );
-    }
-
     // --- [ eglSetBlobCacheFuncsANDROID ] ---
 
     public static void neglSetBlobCacheFuncsANDROID(long dpy, long set, long get) {

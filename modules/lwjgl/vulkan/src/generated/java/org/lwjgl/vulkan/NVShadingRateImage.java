@@ -177,14 +177,6 @@ public class NVShadingRateImage {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_NV_shading_rate_image") && VK.checkExtension("VK_NV_shading_rate_image",
-               VK.isSupported(provider, "vkCmdBindShadingRateImageNV", caps)
-            && VK.isSupported(provider, "vkCmdSetViewportShadingRatePaletteNV", caps)
-            && VK.isSupported(provider, "vkCmdSetCoarseSampleOrderNV", caps)
-        );
-    }
-
     // --- [ vkCmdBindShadingRateImageNV ] ---
 
     /**

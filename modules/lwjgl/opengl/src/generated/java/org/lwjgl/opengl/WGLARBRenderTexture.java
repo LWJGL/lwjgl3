@@ -112,12 +112,6 @@ public class WGLARBRenderTexture {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(WGLCapabilities caps) {
-        return checkFunctions(
-            caps.wglBindTexImageARB, caps.wglReleaseTexImageARB, caps.wglSetPbufferAttribARB
-        );
-    }
-
     // --- [ wglBindTexImageARB ] ---
 
     /**

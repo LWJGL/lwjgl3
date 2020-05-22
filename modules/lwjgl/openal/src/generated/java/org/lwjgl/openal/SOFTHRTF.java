@@ -60,12 +60,6 @@ public class SOFTHRTF {
         throw new UnsupportedOperationException();
     }
 
-	static boolean isAvailable(ALCCapabilities caps) {
-		return checkFunctions(
-            caps.alcGetStringiSOFT, caps.alcResetDeviceSOFT
-        );
-	}
-
     // --- [ alcGetStringiSOFT ] ---
 
     /** Unsafe version of: {@link #alcGetStringiSOFT GetStringiSOFT} */

@@ -7,8 +7,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_sparse_buffer.txt">ARB_sparse_buffer</a> extension.
  * 
@@ -30,12 +28,6 @@ public class ARBSparseBuffer {
 
     protected ARBSparseBuffer() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps, java.util.Set<String> ext) {
-        return checkFunctions(
-            caps.glBufferPageCommitmentARB
-        );
     }
 
     // --- [ glBufferPageCommitmentARB ] ---

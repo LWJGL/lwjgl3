@@ -7,8 +7,6 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_clip_control.txt">EXT_clip_control</a> extension.
  * 
@@ -43,12 +41,6 @@ public class EXTClipControl {
 
     protected EXTClipControl() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glClipControlEXT
-        );
     }
 
     // --- [ glClipControlEXT ] ---

@@ -27,12 +27,6 @@ public class KHRStreamConsumerGLTexture {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglStreamConsumerGLTextureExternalKHR, caps.eglStreamConsumerAcquireKHR, caps.eglStreamConsumerReleaseKHR
-        );
-    }
-
     // --- [ eglStreamConsumerGLTextureExternalKHR ] ---
 
     @NativeType("EGLBoolean")

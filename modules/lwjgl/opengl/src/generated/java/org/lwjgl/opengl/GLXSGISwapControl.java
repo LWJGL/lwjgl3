@@ -21,12 +21,6 @@ public class GLXSGISwapControl {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLXCapabilities caps) {
-        return checkFunctions(
-            caps.glXSwapIntervalSGI
-        );
-    }
-
     // --- [ glXSwapIntervalSGI ] ---
 
     /**

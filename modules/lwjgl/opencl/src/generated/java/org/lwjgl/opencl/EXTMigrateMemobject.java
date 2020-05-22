@@ -32,12 +32,6 @@ public class EXTMigrateMemobject {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(CLCapabilities caps) {
-        return checkFunctions(
-            caps.clEnqueueMigrateMemObjectEXT
-        );
-    }
-
     // --- [ clEnqueueMigrateMemObjectEXT ] ---
 
     /**

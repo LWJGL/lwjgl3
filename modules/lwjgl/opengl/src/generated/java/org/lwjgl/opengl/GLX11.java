@@ -26,12 +26,6 @@ public class GLX11 extends GLX {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLXCapabilities caps) {
-        return checkFunctions(
-            caps.glXQueryExtensionsString, caps.glXGetClientString, caps.glXQueryServerString
-        );
-    }
-
     // --- [ glXQueryExtensionsString ] ---
 
     /** Unsafe version of: {@link #glXQueryExtensionsString QueryExtensionsString} */

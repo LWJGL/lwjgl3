@@ -7,8 +7,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_framebuffer_multisample_coverage.txt">NV_framebuffer_multisample_coverage</a> extension.
  * 
@@ -41,12 +39,6 @@ public class NVFramebufferMultisampleCoverage {
 
     protected NVFramebufferMultisampleCoverage() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glRenderbufferStorageMultisampleCoverageNV
-        );
     }
 
     // --- [ glRenderbufferStorageMultisampleCoverageNV ] ---

@@ -34,12 +34,6 @@ public class KHREGLEvent {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(CLCapabilities caps) {
-        return checkFunctions(
-            caps.clCreateEventFromEGLSyncKHR
-        );
-    }
-
     // --- [ clCreateEventFromEGLSyncKHR ] ---
 
     /** Unsafe version of: {@link #clCreateEventFromEGLSyncKHR CreateEventFromEGLSyncKHR} */

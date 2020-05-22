@@ -23,12 +23,6 @@ public class WGLEXTSwapControl {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(WGLCapabilities caps) {
-        return checkFunctions(
-            caps.wglSwapIntervalEXT, caps.wglGetSwapIntervalEXT
-        );
-    }
-
     // --- [ wglSwapIntervalEXT ] ---
 
     /**

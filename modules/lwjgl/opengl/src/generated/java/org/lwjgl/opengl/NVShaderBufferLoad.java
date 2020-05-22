@@ -104,15 +104,6 @@ public class NVShaderBufferLoad {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glMakeBufferResidentNV, caps.glMakeBufferNonResidentNV, caps.glIsBufferResidentNV, caps.glMakeNamedBufferResidentNV, 
-            caps.glMakeNamedBufferNonResidentNV, caps.glIsNamedBufferResidentNV, caps.glGetBufferParameterui64vNV, caps.glGetNamedBufferParameterui64vNV, 
-            caps.glGetIntegerui64vNV, caps.glUniformui64NV, caps.glUniformui64vNV, caps.glGetUniformui64vNV, caps.glProgramUniformui64NV, 
-            caps.glProgramUniformui64vNV
-        );
-    }
-
     // --- [ glMakeBufferResidentNV ] ---
 
     public static native void glMakeBufferResidentNV(@NativeType("GLenum") int target, @NativeType("GLenum") int access);

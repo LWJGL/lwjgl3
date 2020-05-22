@@ -23,12 +23,6 @@ public class SOFTPauseDevice {
         throw new UnsupportedOperationException();
     }
 
-	static boolean isAvailable(ALCCapabilities caps) {
-		return checkFunctions(
-            caps.alcDevicePauseSOFT, caps.alcDeviceResumeSOFT
-        );
-	}
-
     // --- [ alcDevicePauseSOFT ] ---
 
     /**

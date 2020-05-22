@@ -48,12 +48,6 @@ public class KHRStreamFIFO {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglQueryStreamTimeKHR
-        );
-    }
-
     // --- [ eglQueryStreamTimeKHR ] ---
 
     public static int neglQueryStreamTimeKHR(long dpy, long stream, int attribute, long value) {

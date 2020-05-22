@@ -65,12 +65,6 @@ public class EXTHeadlessSurface {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsInstance(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_headless_surface") && VK.checkExtension("VK_EXT_headless_surface",
-               VK.isSupported(provider, "vkCreateHeadlessSurfaceEXT", caps)
-        );
-    }
-
     // --- [ vkCreateHeadlessSurfaceEXT ] ---
 
     /** Unsafe version of: {@link #vkCreateHeadlessSurfaceEXT CreateHeadlessSurfaceEXT} */

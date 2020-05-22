@@ -9,8 +9,6 @@ import java.nio.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_timer_query.txt">ARB_timer_query</a> extension.
  * 
@@ -43,12 +41,6 @@ public class ARBTimerQuery {
 
     protected ARBTimerQuery() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glQueryCounter, caps.glGetQueryObjecti64v, caps.glGetQueryObjectui64v
-        );
     }
 
     // --- [ glQueryCounter ] ---

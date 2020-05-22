@@ -67,13 +67,6 @@ public class KHRPushDescriptor {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_push_descriptor") && VK.checkExtension("VK_KHR_push_descriptor",
-               VK.isSupported(provider, "vkCmdPushDescriptorSetKHR", caps)
-            && VK.isSupported(provider, "vkCmdPushDescriptorSetWithTemplateKHR", caps, ext.contains("Vulkan11"))
-        );
-    }
-
     // --- [ vkCmdPushDescriptorSetKHR ] ---
 
     /**

@@ -125,19 +125,6 @@ public class AL10 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(ALCapabilities caps) {
-        return checkFunctions(
-            caps.alGetError, caps.alEnable, caps.alDisable, caps.alIsEnabled, caps.alGetBoolean, caps.alGetInteger, caps.alGetFloat, caps.alGetDouble, 
-            caps.alGetBooleanv, caps.alGetIntegerv, caps.alGetFloatv, caps.alGetDoublev, caps.alGetString, caps.alDistanceModel, caps.alDopplerFactor, 
-            caps.alDopplerVelocity, caps.alListenerf, caps.alListeneri, caps.alListener3f, caps.alListenerfv, caps.alGetListenerf, caps.alGetListeneri, 
-            caps.alGetListener3f, caps.alGetListenerfv, caps.alGenSources, caps.alDeleteSources, caps.alIsSource, caps.alSourcef, caps.alSource3f, 
-            caps.alSourcefv, caps.alSourcei, caps.alGetSourcef, caps.alGetSource3f, caps.alGetSourcefv, caps.alGetSourcei, caps.alGetSourceiv, 
-            caps.alSourceQueueBuffers, caps.alSourceUnqueueBuffers, caps.alSourcePlay, caps.alSourcePause, caps.alSourceStop, caps.alSourceRewind, 
-            caps.alSourcePlayv, caps.alSourcePausev, caps.alSourceStopv, caps.alSourceRewindv, caps.alGenBuffers, caps.alDeleteBuffers, caps.alIsBuffer, 
-            caps.alGetBufferf, caps.alGetBufferi, caps.alBufferData, caps.alGetEnumValue, caps.alGetProcAddress, caps.alIsExtensionPresent
-        );
-    }
-
     // --- [ alGetError ] ---
 
     /**

@@ -57,13 +57,6 @@ public class CL21 extends CL20 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(CLCapabilities caps) {
-        return checkFunctions(
-            caps.clSetDefaultDeviceCommandQueue, caps.clGetDeviceAndHostTimer, caps.clGetHostTimer, caps.clCreateProgramWithIL, caps.clCloneKernel, 
-            caps.clGetKernelSubGroupInfo, caps.clEnqueueSVMMigrateMem
-        );
-    }
-
     // --- [ clSetDefaultDeviceCommandQueue ] ---
 
     /**

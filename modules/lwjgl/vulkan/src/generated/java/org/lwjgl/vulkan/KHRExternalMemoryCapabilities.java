@@ -132,12 +132,6 @@ public class KHRExternalMemoryCapabilities {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsInstance(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_external_memory_capabilities") && VK.checkExtension("VK_KHR_external_memory_capabilities",
-               VK.isSupported(provider, "vkGetPhysicalDeviceExternalBufferPropertiesKHR", caps)
-        );
-    }
-
     // --- [ vkGetPhysicalDeviceExternalBufferPropertiesKHR ] ---
 
     /** Unsafe version of: {@link #vkGetPhysicalDeviceExternalBufferPropertiesKHR GetPhysicalDeviceExternalBufferPropertiesKHR} */

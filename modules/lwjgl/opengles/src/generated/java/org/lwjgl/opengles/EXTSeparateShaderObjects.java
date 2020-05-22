@@ -79,21 +79,6 @@ public class EXTSeparateShaderObjects {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glActiveShaderProgramEXT, caps.glBindProgramPipelineEXT, caps.glCreateShaderProgramvEXT, caps.glDeleteProgramPipelinesEXT, 
-            caps.glGenProgramPipelinesEXT, caps.glGetProgramPipelineInfoLogEXT, caps.glGetProgramPipelineivEXT, caps.glIsProgramPipelineEXT, 
-            caps.glProgramParameteriEXT, caps.glProgramUniform1fEXT, caps.glProgramUniform1fvEXT, caps.glProgramUniform1iEXT, caps.glProgramUniform1ivEXT, 
-            caps.glProgramUniform2fEXT, caps.glProgramUniform2fvEXT, caps.glProgramUniform2iEXT, caps.glProgramUniform2ivEXT, caps.glProgramUniform3fEXT, 
-            caps.glProgramUniform3fvEXT, caps.glProgramUniform3iEXT, caps.glProgramUniform3ivEXT, caps.glProgramUniform4fEXT, caps.glProgramUniform4fvEXT, 
-            caps.glProgramUniform4iEXT, caps.glProgramUniform4ivEXT, caps.glProgramUniformMatrix2fvEXT, caps.glProgramUniformMatrix3fvEXT, 
-            caps.glProgramUniformMatrix4fvEXT, caps.glUseProgramStagesEXT, caps.glValidateProgramPipelineEXT, caps.glProgramUniform1uiEXT, 
-            caps.glProgramUniform2uiEXT, caps.glProgramUniform3uiEXT, caps.glProgramUniform4uiEXT, caps.glProgramUniform1uivEXT, caps.glProgramUniform2uivEXT, 
-            caps.glProgramUniform3uivEXT, caps.glProgramUniform4uivEXT, caps.glProgramUniformMatrix2x3fvEXT, caps.glProgramUniformMatrix3x2fvEXT, 
-            caps.glProgramUniformMatrix2x4fvEXT, caps.glProgramUniformMatrix4x2fvEXT, caps.glProgramUniformMatrix3x4fvEXT, caps.glProgramUniformMatrix4x3fvEXT
-        );
-    }
-
     // --- [ glActiveShaderProgramEXT ] ---
 
     public static native void glActiveShaderProgramEXT(@NativeType("GLuint") int pipeline, @NativeType("GLuint") int program);

@@ -89,12 +89,6 @@ public class EXTDeviceFission {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(CLCapabilities caps) {
-        return checkFunctions(
-            caps.clReleaseDeviceEXT, caps.clRetainDeviceEXT, caps.clCreateSubDevicesEXT
-        );
-    }
-
     // --- [ clReleaseDeviceEXT ] ---
 
     @NativeType("cl_int")

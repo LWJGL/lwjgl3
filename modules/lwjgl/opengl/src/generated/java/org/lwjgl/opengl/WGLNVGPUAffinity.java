@@ -37,12 +37,6 @@ public class WGLNVGPUAffinity {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(WGLCapabilities caps) {
-        return checkFunctions(
-            caps.wglEnumGpusNV, caps.wglEnumGpuDevicesNV, caps.wglCreateAffinityDCNV, caps.wglEnumGpusFromAffinityDCNV, caps.wglDeleteDCNV
-        );
-    }
-
     // --- [ wglEnumGpusNV ] ---
 
     /** Unsafe version of: {@link #wglEnumGpusNV EnumGpusNV} */

@@ -22,12 +22,6 @@ public class EXTThreadLocalContext {
         throw new UnsupportedOperationException();
     }
 
-	static boolean isAvailable(ALCCapabilities caps) {
-		return checkFunctions(
-            caps.alcSetThreadContext, caps.alcGetThreadContext
-        );
-	}
-
     // --- [ alcSetThreadContext ] ---
 
     /**

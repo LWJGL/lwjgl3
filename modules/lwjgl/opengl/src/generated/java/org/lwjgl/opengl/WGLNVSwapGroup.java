@@ -30,13 +30,6 @@ public class WGLNVSwapGroup {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(WGLCapabilities caps) {
-        return checkFunctions(
-            caps.wglJoinSwapGroupNV, caps.wglBindSwapBarrierNV, caps.wglQuerySwapGroupNV, caps.wglQueryMaxSwapGroupsNV, caps.wglQueryFrameCountNV, 
-            caps.wglResetFrameCountNV
-        );
-    }
-
     // --- [ wglJoinSwapGroupNV ] ---
 
     @NativeType("BOOL")

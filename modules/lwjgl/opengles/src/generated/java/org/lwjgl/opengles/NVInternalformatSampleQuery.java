@@ -51,12 +51,6 @@ public class NVInternalformatSampleQuery {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glGetInternalformatSampleivNV
-        );
-    }
-
     // --- [ glGetInternalformatSampleivNV ] ---
 
     public static native void nglGetInternalformatSampleivNV(int target, int internalformat, int samples, int pname, int bufSize, long params);

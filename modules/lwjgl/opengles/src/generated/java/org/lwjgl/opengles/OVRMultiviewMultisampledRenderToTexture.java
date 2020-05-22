@@ -7,8 +7,6 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OVR/OVR_multiview_multisampled_render_to_texture.txt">OVR_multiview_multisampled_render_to_texture</a> extension.
  * 
@@ -21,12 +19,6 @@ public class OVRMultiviewMultisampledRenderToTexture {
 
     protected OVRMultiviewMultisampledRenderToTexture() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glFramebufferTextureMultisampleMultiviewOVR
-        );
     }
 
     // --- [ glFramebufferTextureMultisampleMultiviewOVR ] ---

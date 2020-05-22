@@ -48,12 +48,6 @@ public class KHRReusableSync {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglCreateSyncKHR, caps.eglDestroySyncKHR, caps.eglClientWaitSyncKHR, caps.eglSignalSyncKHR, caps.eglGetSyncAttribKHR
-        );
-    }
-
     // --- [ eglCreateSyncKHR ] ---
 
     public static long neglCreateSyncKHR(long dpy, int type, long attrib_list) {

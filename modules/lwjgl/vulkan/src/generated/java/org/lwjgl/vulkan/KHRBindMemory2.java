@@ -84,13 +84,6 @@ public class KHRBindMemory2 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_bind_memory2") && VK.checkExtension("VK_KHR_bind_memory2",
-               VK.isSupported(provider, "vkBindBufferMemory2KHR", caps)
-            && VK.isSupported(provider, "vkBindImageMemory2KHR", caps)
-        );
-    }
-
     // --- [ vkBindBufferMemory2KHR ] ---
 
     /**

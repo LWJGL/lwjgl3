@@ -89,15 +89,6 @@ public class EGL10 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglChooseConfig, caps.eglCopyBuffers, caps.eglCreateContext, caps.eglCreatePbufferSurface, caps.eglCreatePixmapSurface, 
-            caps.eglCreateWindowSurface, caps.eglDestroyContext, caps.eglDestroySurface, caps.eglGetConfigAttrib, caps.eglGetConfigs, caps.eglGetCurrentDisplay, 
-            caps.eglGetCurrentSurface, caps.eglGetDisplay, caps.eglGetError, caps.eglGetProcAddress, caps.eglInitialize, caps.eglMakeCurrent, 
-            caps.eglQueryContext, caps.eglQueryString, caps.eglQuerySurface, caps.eglSwapBuffers, caps.eglTerminate, caps.eglWaitGL, caps.eglWaitNative
-        );
-    }
-
     // --- [ eglChooseConfig ] ---
 
     public static int neglChooseConfig(long dpy, long attrib_list, long configs, int config_size, long num_config) {

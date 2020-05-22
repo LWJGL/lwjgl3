@@ -43,12 +43,6 @@ public class EXTDebugLabel {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glLabelObjectEXT, caps.glGetObjectLabelEXT
-        );
-    }
-
     // --- [ glLabelObjectEXT ] ---
 
     public static native void nglLabelObjectEXT(int type, int object, int length, long label);

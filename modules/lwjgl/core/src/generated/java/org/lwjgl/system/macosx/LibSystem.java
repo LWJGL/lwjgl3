@@ -7,7 +7,6 @@ package org.lwjgl.system.macosx;
 
 import org.lwjgl.system.*;
 
-
 /**
  * Native bindings to libSystem, the MacOS system library.
  * 

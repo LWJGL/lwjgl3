@@ -70,13 +70,6 @@ public class GLXSGIXFBConfig {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLXCapabilities caps) {
-        return checkFunctions(
-            caps.glXGetFBConfigAttribSGIX, caps.glXChooseFBConfigSGIX, caps.glXCreateGLXPixmapWithConfigSGIX, caps.glXCreateContextWithConfigSGIX, 
-            caps.glXGetVisualFromFBConfigSGIX, caps.glXGetFBConfigFromVisualSGIX
-        );
-    }
-
     // --- [ glXGetFBConfigAttribSGIX ] ---
 
     /** Unsafe version of: {@link #glXGetFBConfigAttribSGIX GetFBConfigAttribSGIX} */

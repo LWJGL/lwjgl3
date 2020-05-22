@@ -45,13 +45,6 @@ public class EXTCompositor {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglCompositorSetContextListEXT, caps.eglCompositorSetContextAttributesEXT, caps.eglCompositorSetWindowListEXT, 
-            caps.eglCompositorSetWindowAttributesEXT, caps.eglCompositorBindTexWindowEXT, caps.eglCompositorSetSizeEXT, caps.eglCompositorSwapPolicyEXT
-        );
-    }
-
     // --- [ eglCompositorSetContextListEXT ] ---
 
     public static int neglCompositorSetContextListEXT(long external_ref_ids, int num_entries) {

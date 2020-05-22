@@ -74,12 +74,6 @@ public class KHRDisplaySwapchain {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_display_swapchain") && VK.checkExtension("VK_KHR_display_swapchain",
-               VK.isSupported(provider, "vkCreateSharedSwapchainsKHR", caps)
-        );
-    }
-
     // --- [ vkCreateSharedSwapchainsKHR ] ---
 
     /**

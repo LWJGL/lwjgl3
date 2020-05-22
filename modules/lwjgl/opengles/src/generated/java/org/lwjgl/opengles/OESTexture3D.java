@@ -47,13 +47,6 @@ public class OESTexture3D {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glTexImage3DOES, caps.glTexSubImage3DOES, caps.glCopyTexSubImage3DOES, caps.glCompressedTexImage3DOES, caps.glCompressedTexSubImage3DOES, 
-            caps.glFramebufferTexture3DOES
-        );
-    }
-
     // --- [ glTexImage3DOES ] ---
 
     public static native void nglTexImage3DOES(int target, int level, int internalformat, int width, int height, int depth, int border, int format, int type, long pixels);

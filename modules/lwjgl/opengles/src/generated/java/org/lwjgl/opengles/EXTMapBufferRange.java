@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.APIUtil.*;
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -48,12 +47,6 @@ public class EXTMapBufferRange {
 
     protected EXTMapBufferRange() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glMapBufferRangeEXT, caps.glFlushMappedBufferRangeEXT
-        );
     }
 
     // --- [ glMapBufferRangeEXT ] ---

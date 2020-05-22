@@ -79,15 +79,6 @@ public class KHRGetDisplayProperties2 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsInstance(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_get_display_properties2") && VK.checkExtension("VK_KHR_get_display_properties2",
-               VK.isSupported(provider, "vkGetPhysicalDeviceDisplayProperties2KHR", caps)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceDisplayPlaneProperties2KHR", caps)
-            && VK.isSupported(provider, "vkGetDisplayModeProperties2KHR", caps)
-            && VK.isSupported(provider, "vkGetDisplayPlaneCapabilities2KHR", caps)
-        );
-    }
-
     // --- [ vkGetPhysicalDeviceDisplayProperties2KHR ] ---
 
     /**

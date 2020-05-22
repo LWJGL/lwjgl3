@@ -76,13 +76,6 @@ public class KHRExternalMemoryWin32 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_external_memory_win32") && VK.checkExtension("VK_KHR_external_memory_win32",
-               VK.isSupported(provider, "vkGetMemoryWin32HandleKHR", caps)
-            && VK.isSupported(provider, "vkGetMemoryWin32HandlePropertiesKHR", caps)
-        );
-    }
-
     // --- [ vkGetMemoryWin32HandleKHR ] ---
 
     /** Unsafe version of: {@link #vkGetMemoryWin32HandleKHR GetMemoryWin32HandleKHR} */

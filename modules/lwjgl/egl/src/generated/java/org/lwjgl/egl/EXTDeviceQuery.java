@@ -37,12 +37,6 @@ public class EXTDeviceQuery {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglQueryDeviceAttribEXT, caps.eglQueryDeviceStringEXT, caps.eglQueryDisplayAttribEXT
-        );
-    }
-
     // --- [ eglQueryDeviceAttribEXT ] ---
 
     public static int neglQueryDeviceAttribEXT(long device, int attribute, long value) {

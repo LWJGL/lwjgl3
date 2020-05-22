@@ -7,8 +7,6 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_draw_transform_feedback.txt">EXT_draw_transform_feedback</a> extension.
  * 
@@ -25,12 +23,6 @@ public class EXTDrawTransformFeedback {
 
     protected EXTDrawTransformFeedback() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glDrawTransformFeedbackEXT, caps.glDrawTransformFeedbackInstancedEXT
-        );
     }
 
     // --- [ glDrawTransformFeedbackEXT ] ---

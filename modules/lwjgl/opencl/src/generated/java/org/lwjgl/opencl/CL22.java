@@ -33,12 +33,6 @@ public class CL22 extends CL21 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(CLCapabilities caps) {
-        return checkFunctions(
-            caps.clSetProgramReleaseCallback, caps.clSetProgramSpecializationConstant
-        );
-    }
-
     // --- [ clSetProgramReleaseCallback ] ---
 
     /** Unsafe version of: {@link #clSetProgramReleaseCallback SetProgramReleaseCallback} */

@@ -9,6 +9,7 @@ import org.lwjgl.system.*;
 import java.util.Set;
 
 import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.Checks.*;
 
 /** Defines the GLX capabilities of a connection. */
 public final class GLXCapabilities {
@@ -272,19 +273,19 @@ public final class GLXCapabilities {
         glXQueryMaxSwapBarriersSGIX = provider.getFunctionAddress("glXQueryMaxSwapBarriersSGIX");
         glXJoinSwapGroupSGIX = provider.getFunctionAddress("glXJoinSwapGroupSGIX");
 
-        GLX11 = ext.contains("GLX11") && checkExtension("GLX11", org.lwjgl.opengl.GLX11.isAvailable(this));
-        GLX12 = ext.contains("GLX12") && checkExtension("GLX12", org.lwjgl.opengl.GLX12.isAvailable(this));
-        GLX13 = ext.contains("GLX13") && checkExtension("GLX13", org.lwjgl.opengl.GLX13.isAvailable(this));
-        GLX14 = ext.contains("GLX14") && checkExtension("GLX14", org.lwjgl.opengl.GLX14.isAvailable(this));
-        GLX_AMD_gpu_association = ext.contains("GLX_AMD_gpu_association") && checkExtension("GLX_AMD_gpu_association", GLXAMDGPUAssociation.isAvailable(this));
+        GLX11 = check_GLX11(ext);
+        GLX12 = check_GLX12(ext);
+        GLX13 = check_GLX13(ext);
+        GLX14 = check_GLX14(ext);
+        GLX_AMD_gpu_association = check_GLX_AMD_gpu_association(ext);
         GLX_ARB_context_flush_control = ext.contains("GLX_ARB_context_flush_control");
-        GLX_ARB_create_context = ext.contains("GLX_ARB_create_context") && checkExtension("GLX_ARB_create_context", GLXARBCreateContext.isAvailable(this));
+        GLX_ARB_create_context = check_GLX_ARB_create_context(ext);
         GLX_ARB_create_context_no_error = ext.contains("GLX_ARB_create_context_no_error");
         GLX_ARB_create_context_profile = ext.contains("GLX_ARB_create_context_profile");
         GLX_ARB_create_context_robustness = ext.contains("GLX_ARB_create_context_robustness");
         GLX_ARB_fbconfig_float = ext.contains("GLX_ARB_fbconfig_float");
         GLX_ARB_framebuffer_sRGB = ext.contains("GLX_ARB_framebuffer_sRGB");
-        GLX_ARB_get_proc_address = ext.contains("GLX_ARB_get_proc_address") && checkExtension("GLX_ARB_get_proc_address", GLXARBGetProcAddress.isAvailable(this));
+        GLX_ARB_get_proc_address = check_GLX_ARB_get_proc_address(ext);
         GLX_ARB_multisample = ext.contains("GLX_ARB_multisample");
         GLX_ARB_robustness_application_isolation = ext.contains("GLX_ARB_robustness_application_isolation");
         GLX_ARB_robustness_share_group_isolation = ext.contains("GLX_ARB_robustness_share_group_isolation");
@@ -295,30 +296,30 @@ public final class GLXCapabilities {
         GLX_EXT_create_context_es_profile = ext.contains("GLX_EXT_create_context_es_profile");
         GLX_EXT_fbconfig_packed_float = ext.contains("GLX_EXT_fbconfig_packed_float");
         GLX_EXT_framebuffer_sRGB = ext.contains("GLX_EXT_framebuffer_sRGB");
-        GLX_EXT_import_context = ext.contains("GLX_EXT_import_context") && checkExtension("GLX_EXT_import_context", GLXEXTImportContext.isAvailable(this));
+        GLX_EXT_import_context = check_GLX_EXT_import_context(ext);
         GLX_EXT_no_config_context = ext.contains("GLX_EXT_no_config_context");
         GLX_EXT_stereo_tree = ext.contains("GLX_EXT_stereo_tree");
-        GLX_EXT_swap_control = ext.contains("GLX_EXT_swap_control") && checkExtension("GLX_EXT_swap_control", GLXEXTSwapControl.isAvailable(this));
+        GLX_EXT_swap_control = check_GLX_EXT_swap_control(ext);
         GLX_EXT_swap_control_tear = ext.contains("GLX_EXT_swap_control_tear");
-        GLX_EXT_texture_from_pixmap = ext.contains("GLX_EXT_texture_from_pixmap") && checkExtension("GLX_EXT_texture_from_pixmap", GLXEXTTextureFromPixmap.isAvailable(this));
+        GLX_EXT_texture_from_pixmap = check_GLX_EXT_texture_from_pixmap(ext);
         GLX_EXT_visual_info = ext.contains("GLX_EXT_visual_info");
         GLX_EXT_visual_rating = ext.contains("GLX_EXT_visual_rating");
         GLX_INTEL_swap_event = ext.contains("GLX_INTEL_swap_event");
-        GLX_NV_copy_buffer = ext.contains("GLX_NV_copy_buffer") && checkExtension("GLX_NV_copy_buffer", GLXNVCopyBuffer.isAvailable(this));
-        GLX_NV_copy_image = ext.contains("GLX_NV_copy_image") && checkExtension("GLX_NV_copy_image", GLXNVCopyImage.isAvailable(this));
-        GLX_NV_delay_before_swap = ext.contains("GLX_NV_delay_before_swap") && checkExtension("GLX_NV_delay_before_swap", GLXNVDelayBeforeSwap.isAvailable(this));
+        GLX_NV_copy_buffer = check_GLX_NV_copy_buffer(ext);
+        GLX_NV_copy_image = check_GLX_NV_copy_image(ext);
+        GLX_NV_delay_before_swap = check_GLX_NV_delay_before_swap(ext);
         GLX_NV_float_buffer = ext.contains("GLX_NV_float_buffer");
         GLX_NV_multigpu_context = ext.contains("GLX_NV_multigpu_context");
         GLX_NV_multisample_coverage = ext.contains("GLX_NV_multisample_coverage");
         GLX_NV_robustness_video_memory_purge = ext.contains("GLX_NV_robustness_video_memory_purge");
-        GLX_NV_swap_group = ext.contains("GLX_NV_swap_group") && checkExtension("GLX_NV_swap_group", GLXNVSwapGroup.isAvailable(this));
-        GLX_SGI_make_current_read = ext.contains("GLX_SGI_make_current_read") && checkExtension("GLX_SGI_make_current_read", GLXSGIMakeCurrentRead.isAvailable(this));
-        GLX_SGI_swap_control = ext.contains("GLX_SGI_swap_control") && checkExtension("GLX_SGI_swap_control", GLXSGISwapControl.isAvailable(this));
-        GLX_SGI_video_sync = ext.contains("GLX_SGI_video_sync") && checkExtension("GLX_SGI_video_sync", GLXSGIVideoSync.isAvailable(this));
-        GLX_SGIX_fbconfig = ext.contains("GLX_SGIX_fbconfig") && checkExtension("GLX_SGIX_fbconfig", GLXSGIXFBConfig.isAvailable(this));
-        GLX_SGIX_pbuffer = ext.contains("GLX_SGIX_pbuffer") && checkExtension("GLX_SGIX_pbuffer", GLXSGIXPbuffer.isAvailable(this));
-        GLX_SGIX_swap_barrier = ext.contains("GLX_SGIX_swap_barrier") && checkExtension("GLX_SGIX_swap_barrier", GLXSGIXSwapBarrier.isAvailable(this));
-        GLX_SGIX_swap_group = ext.contains("GLX_SGIX_swap_group") && checkExtension("GLX_SGIX_swap_group", GLXSGIXSwapGroup.isAvailable(this));
+        GLX_NV_swap_group = check_GLX_NV_swap_group(ext);
+        GLX_SGI_make_current_read = check_GLX_SGI_make_current_read(ext);
+        GLX_SGI_swap_control = check_GLX_SGI_swap_control(ext);
+        GLX_SGI_video_sync = check_GLX_SGI_video_sync(ext);
+        GLX_SGIX_fbconfig = check_GLX_SGIX_fbconfig(ext);
+        GLX_SGIX_pbuffer = check_GLX_SGIX_pbuffer(ext);
+        GLX_SGIX_swap_barrier = check_GLX_SGIX_swap_barrier(ext);
+        GLX_SGIX_swap_group = check_GLX_SGIX_swap_group(ext);
     }
 
     private static boolean checkExtension(String extension, boolean supported) {
@@ -328,6 +329,136 @@ public final class GLXCapabilities {
 
         apiLog("[GLX] " + extension + " was reported as available but an entry point is missing.");
         return false;
+    }
+
+    private boolean check_GLX11(java.util.Set<String> ext) {
+        return ext.contains("GLX11") && checkExtension("GLX11", checkFunctions(
+            glXQueryExtensionsString, glXGetClientString, glXQueryServerString
+        ));
+    }
+
+    private boolean check_GLX12(java.util.Set<String> ext) {
+        return ext.contains("GLX12") && checkExtension("GLX12", checkFunctions(
+            glXGetCurrentDisplay
+        ));
+    }
+
+    private boolean check_GLX13(java.util.Set<String> ext) {
+        return ext.contains("GLX13") && checkExtension("GLX13", checkFunctions(
+            glXGetFBConfigs, glXChooseFBConfig, glXGetFBConfigAttrib, glXGetVisualFromFBConfig, glXCreateWindow, glXCreatePixmap, glXDestroyPixmap, 
+            glXCreatePbuffer, glXDestroyPbuffer, glXQueryDrawable, glXCreateNewContext, glXMakeContextCurrent, glXGetCurrentReadDrawable, glXQueryContext, 
+            glXSelectEvent, glXGetSelectedEvent
+        ));
+    }
+
+    private boolean check_GLX14(java.util.Set<String> ext) {
+        return ext.contains("GLX14") && checkExtension("GLX14", checkFunctions(
+            glXGetProcAddress
+        ));
+    }
+
+    private boolean check_GLX_AMD_gpu_association(java.util.Set<String> ext) {
+        return ext.contains("GLX_AMD_gpu_association") && checkExtension("GLX_AMD_gpu_association", checkFunctions(
+            glXBlitContextFramebufferAMD, glXCreateAssociatedContextAMD, glXCreateAssociatedContextAttribsAMD, glXDeleteAssociatedContextAMD, 
+            glXGetContextGPUIDAMD, glXGetCurrentAssociatedContextAMD, glXGetGPUIDsAMD, glXGetGPUInfoAMD, glXMakeAssociatedContextCurrentAMD
+        ));
+    }
+
+    private boolean check_GLX_ARB_create_context(java.util.Set<String> ext) {
+        return ext.contains("GLX_ARB_create_context") && checkExtension("GLX_ARB_create_context", checkFunctions(
+            glXCreateContextAttribsARB
+        ));
+    }
+
+    private boolean check_GLX_ARB_get_proc_address(java.util.Set<String> ext) {
+        return ext.contains("GLX_ARB_get_proc_address") && checkExtension("GLX_ARB_get_proc_address", checkFunctions(
+            glXGetProcAddressARB
+        ));
+    }
+
+    private boolean check_GLX_EXT_import_context(java.util.Set<String> ext) {
+        return ext.contains("GLX_EXT_import_context") && checkExtension("GLX_EXT_import_context", checkFunctions(
+            glXGetCurrentDisplayEXT, glXQueryContextInfoEXT, glXGetContextIDEXT, glXImportContextEXT, glXFreeContextEXT
+        ));
+    }
+
+    private boolean check_GLX_EXT_swap_control(java.util.Set<String> ext) {
+        return ext.contains("GLX_EXT_swap_control") && checkExtension("GLX_EXT_swap_control", checkFunctions(
+            glXSwapIntervalEXT
+        ));
+    }
+
+    private boolean check_GLX_EXT_texture_from_pixmap(java.util.Set<String> ext) {
+        return ext.contains("GLX_EXT_texture_from_pixmap") && checkExtension("GLX_EXT_texture_from_pixmap", checkFunctions(
+            glXBindTexImageEXT, glXReleaseTexImageEXT
+        ));
+    }
+
+    private boolean check_GLX_NV_copy_buffer(java.util.Set<String> ext) {
+        return ext.contains("GLX_NV_copy_buffer") && checkExtension("GLX_NV_copy_buffer", checkFunctions(
+            glXCopyBufferSubDataNV, glXNamedCopyBufferSubDataNV
+        ));
+    }
+
+    private boolean check_GLX_NV_copy_image(java.util.Set<String> ext) {
+        return ext.contains("GLX_NV_copy_image") && checkExtension("GLX_NV_copy_image", checkFunctions(
+            glXCopyImageSubDataNV
+        ));
+    }
+
+    private boolean check_GLX_NV_delay_before_swap(java.util.Set<String> ext) {
+        return ext.contains("GLX_NV_delay_before_swap") && checkExtension("GLX_NV_delay_before_swap", checkFunctions(
+            glXDelayBeforeSwapNV
+        ));
+    }
+
+    private boolean check_GLX_NV_swap_group(java.util.Set<String> ext) {
+        return ext.contains("GLX_NV_swap_group") && checkExtension("GLX_NV_swap_group", checkFunctions(
+            glXJoinSwapGroupNV, glXBindSwapBarrierNV, glXQuerySwapGroupNV, glXQueryMaxSwapGroupsNV, glXQueryFrameCountNV, glXResetFrameCountNV
+        ));
+    }
+
+    private boolean check_GLX_SGI_make_current_read(java.util.Set<String> ext) {
+        return ext.contains("GLX_SGI_make_current_read") && checkExtension("GLX_SGI_make_current_read", checkFunctions(
+            glXMakeCurrentReadSGI, glXGetCurrentReadDrawableSGI
+        ));
+    }
+
+    private boolean check_GLX_SGI_swap_control(java.util.Set<String> ext) {
+        return ext.contains("GLX_SGI_swap_control") && checkExtension("GLX_SGI_swap_control", checkFunctions(
+            glXSwapIntervalSGI
+        ));
+    }
+
+    private boolean check_GLX_SGI_video_sync(java.util.Set<String> ext) {
+        return ext.contains("GLX_SGI_video_sync") && checkExtension("GLX_SGI_video_sync", checkFunctions(
+            glXGetVideoSyncSGI, glXWaitVideoSyncSGI
+        ));
+    }
+
+    private boolean check_GLX_SGIX_fbconfig(java.util.Set<String> ext) {
+        return ext.contains("GLX_SGIX_fbconfig") && checkExtension("GLX_SGIX_fbconfig", checkFunctions(
+            glXGetFBConfigAttribSGIX, glXChooseFBConfigSGIX, glXCreateGLXPixmapWithConfigSGIX, glXCreateContextWithConfigSGIX, glXGetVisualFromFBConfigSGIX, 
+            glXGetFBConfigFromVisualSGIX
+        ));
+    }
+
+    private boolean check_GLX_SGIX_pbuffer(java.util.Set<String> ext) {
+        return ext.contains("GLX_SGIX_pbuffer") && checkExtension("GLX_SGIX_pbuffer", checkFunctions(
+            glXCreateGLXPbufferSGIX, glXDestroyGLXPbufferSGIX, glXQueryGLXPbufferSGIX, glXSelectEventSGIX, glXGetSelectedEventSGIX
+        ));
+    }
+
+    private boolean check_GLX_SGIX_swap_barrier(java.util.Set<String> ext) {
+        return ext.contains("GLX_SGIX_swap_barrier") && checkExtension("GLX_SGIX_swap_barrier", checkFunctions(
+            glXBindSwapBarrierSGIX, glXQueryMaxSwapBarriersSGIX
+        ));
+    }
+
+    private boolean check_GLX_SGIX_swap_group(java.util.Set<String> ext) {
+        return ext.contains("GLX_SGIX_swap_group") && checkExtension("GLX_SGIX_swap_group", checkFunctions(
+            glXJoinSwapGroupSGIX
+        ));
     }
 
 }

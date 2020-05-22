@@ -93,12 +93,6 @@ public class WGLARBPixelFormat {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(WGLCapabilities caps) {
-        return checkFunctions(
-            caps.wglGetPixelFormatAttribivARB, caps.wglGetPixelFormatAttribfvARB, caps.wglChoosePixelFormatARB
-        );
-    }
-
     // --- [ wglGetPixelFormatAttribivARB ] ---
 
     /**

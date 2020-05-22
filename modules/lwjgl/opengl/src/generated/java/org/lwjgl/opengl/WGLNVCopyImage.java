@@ -23,12 +23,6 @@ public class WGLNVCopyImage {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(WGLCapabilities caps) {
-        return checkFunctions(
-            caps.wglCopyImageSubDataNV
-        );
-    }
-
     // --- [ wglCopyImageSubDataNV ] ---
 
     /**

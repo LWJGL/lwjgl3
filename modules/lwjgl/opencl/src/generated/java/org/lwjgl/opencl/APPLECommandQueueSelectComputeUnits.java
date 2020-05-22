@@ -24,12 +24,6 @@ public class APPLECommandQueueSelectComputeUnits {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(CLCapabilities caps) {
-        return checkFunctions(
-            caps.clCreateCommandQueueWithPropertiesAPPLE
-        );
-    }
-
     // --- [ clCreateCommandQueueWithPropertiesAPPLE ] ---
 
     /** Unsafe version of: {@link #clCreateCommandQueueWithPropertiesAPPLE CreateCommandQueueWithPropertiesAPPLE} */

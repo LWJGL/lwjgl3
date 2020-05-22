@@ -31,12 +31,6 @@ public class KHRStreamProducerEGLSurface {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglCreateStreamProducerSurfaceKHR
-        );
-    }
-
     // --- [ eglCreateStreamProducerSurfaceKHR ] ---
 
     public static long neglCreateStreamProducerSurfaceKHR(long dpy, long config, long stream, long attrib_list) {

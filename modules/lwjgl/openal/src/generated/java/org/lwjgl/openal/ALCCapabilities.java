@@ -9,6 +9,7 @@ import org.lwjgl.system.*;
 import java.util.Set;
 
 import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.Checks.*;
 
 /** Defines the capabilities of the OpenAL Context API. */
 public final class ALCCapabilities {
@@ -114,22 +115,22 @@ public final class ALCCapabilities {
 		alcDevicePauseSOFT = provider.getFunctionAddress(device, "alcDevicePauseSOFT");
 		alcDeviceResumeSOFT = provider.getFunctionAddress(device, "alcDeviceResumeSOFT");
 
-		OpenALC10 = ext.contains("OpenALC10") && checkExtension("OpenALC10", ALC10.isAvailable(this));
-		OpenALC11 = ext.contains("OpenALC11") && checkExtension("OpenALC11", ALC11.isAvailable(this));
-		ALC_ENUMERATE_ALL_EXT = ext.contains("ALC_ENUMERATE_ALL_EXT");
-		ALC_ENUMERATION_EXT = ext.contains("ALC_ENUMERATION_EXT");
-		ALC_EXT_CAPTURE = ext.contains("ALC_EXT_CAPTURE") && checkExtension("ALC_EXT_CAPTURE", EXTCapture.isAvailable(this));
-		ALC_EXT_DEDICATED = ext.contains("ALC_EXT_DEDICATED");
-		ALC_EXT_DEFAULT_FILTER_ORDER = ext.contains("ALC_EXT_DEFAULT_FILTER_ORDER");
-		ALC_EXT_disconnect = ext.contains("ALC_EXT_disconnect");
-		ALC_EXT_EFX = ext.contains("ALC_EXT_EFX");
-		ALC_EXT_thread_local_context = ext.contains("ALC_EXT_thread_local_context") && checkExtension("ALC_EXT_thread_local_context", EXTThreadLocalContext.isAvailable(this));
-		ALC_LOKI_audio_channel = ext.contains("ALC_LOKI_audio_channel");
-		ALC_SOFT_device_clock = ext.contains("ALC_SOFT_device_clock") && checkExtension("ALC_SOFT_device_clock", SOFTDeviceClock.isAvailable(this));
-		ALC_SOFT_HRTF = ext.contains("ALC_SOFT_HRTF") && checkExtension("ALC_SOFT_HRTF", SOFTHRTF.isAvailable(this));
-		ALC_SOFT_loopback = ext.contains("ALC_SOFT_loopback") && checkExtension("ALC_SOFT_loopback", SOFTLoopback.isAvailable(this));
-		ALC_SOFT_output_limiter = ext.contains("ALC_SOFT_output_limiter");
-		ALC_SOFT_pause_device = ext.contains("ALC_SOFT_pause_device") && checkExtension("ALC_SOFT_pause_device", SOFTPauseDevice.isAvailable(this));
+        OpenALC10 = check_ALC10(ext);
+        OpenALC11 = check_ALC11(ext);
+        ALC_ENUMERATE_ALL_EXT = ext.contains("ALC_ENUMERATE_ALL_EXT");
+        ALC_ENUMERATION_EXT = ext.contains("ALC_ENUMERATION_EXT");
+        ALC_EXT_CAPTURE = check_EXT_CAPTURE(ext);
+        ALC_EXT_DEDICATED = ext.contains("ALC_EXT_DEDICATED");
+        ALC_EXT_DEFAULT_FILTER_ORDER = ext.contains("ALC_EXT_DEFAULT_FILTER_ORDER");
+        ALC_EXT_disconnect = ext.contains("ALC_EXT_disconnect");
+        ALC_EXT_EFX = ext.contains("ALC_EXT_EFX");
+        ALC_EXT_thread_local_context = check_EXT_thread_local_context(ext);
+        ALC_LOKI_audio_channel = ext.contains("ALC_LOKI_audio_channel");
+        ALC_SOFT_device_clock = check_SOFT_device_clock(ext);
+        ALC_SOFT_HRTF = check_SOFT_HRTF(ext);
+        ALC_SOFT_loopback = check_SOFT_loopback(ext);
+        ALC_SOFT_output_limiter = ext.contains("ALC_SOFT_output_limiter");
+        ALC_SOFT_pause_device = check_SOFT_pause_device(ext);
     }
 
     private static boolean checkExtension(String extension, boolean supported) {
@@ -140,5 +141,54 @@ public final class ALCCapabilities {
         apiLog("[ALC] " + extension + " was reported as available but an entry point is missing.");
         return false;
     }
+
+	private boolean check_ALC10(java.util.Set<String> ext) {
+		return ext.contains("OpenALC10") && checkExtension("OpenALC10", checkFunctions(
+            alcOpenDevice, alcCloseDevice, alcCreateContext, alcMakeContextCurrent, alcProcessContext, alcSuspendContext, alcDestroyContext, 
+            alcGetCurrentContext, alcGetContextsDevice, alcIsExtensionPresent, alcGetProcAddress, alcGetEnumValue, alcGetError, alcGetString, alcGetIntegerv
+        ));
+	}
+
+	private boolean check_ALC11(java.util.Set<String> ext) {
+		return ext.contains("OpenALC11") && checkExtension("OpenALC11", checkFunctions(
+            alcCaptureOpenDevice, alcCaptureCloseDevice, alcCaptureStart, alcCaptureStop, alcCaptureSamples
+        ));
+	}
+
+	private boolean check_EXT_CAPTURE(java.util.Set<String> ext) {
+		return ext.contains("ALC_EXT_CAPTURE") && checkExtension("ALC_EXT_CAPTURE", checkFunctions(
+            alcCaptureOpenDevice, alcCaptureCloseDevice, alcCaptureStart, alcCaptureStop, alcCaptureSamples
+        ));
+	}
+
+	private boolean check_EXT_thread_local_context(java.util.Set<String> ext) {
+		return ext.contains("ALC_EXT_thread_local_context") && checkExtension("ALC_EXT_thread_local_context", checkFunctions(
+            alcSetThreadContext, alcGetThreadContext
+        ));
+	}
+
+	private boolean check_SOFT_device_clock(java.util.Set<String> ext) {
+		return ext.contains("ALC_SOFT_device_clock") && checkExtension("ALC_SOFT_device_clock", checkFunctions(
+            alcGetInteger64vSOFT
+        ));
+	}
+
+	private boolean check_SOFT_HRTF(java.util.Set<String> ext) {
+		return ext.contains("ALC_SOFT_HRTF") && checkExtension("ALC_SOFT_HRTF", checkFunctions(
+            alcGetStringiSOFT, alcResetDeviceSOFT
+        ));
+	}
+
+	private boolean check_SOFT_loopback(java.util.Set<String> ext) {
+		return ext.contains("ALC_SOFT_loopback") && checkExtension("ALC_SOFT_loopback", checkFunctions(
+            alcLoopbackOpenDeviceSOFT, alcIsRenderFormatSupportedSOFT, alcRenderSamplesSOFT
+        ));
+	}
+
+	private boolean check_SOFT_pause_device(java.util.Set<String> ext) {
+		return ext.contains("ALC_SOFT_pause_device") && checkExtension("ALC_SOFT_pause_device", checkFunctions(
+            alcDevicePauseSOFT, alcDeviceResumeSOFT
+        ));
+	}
 
 }

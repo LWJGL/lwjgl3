@@ -46,12 +46,6 @@ public class NVStreamReset {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglResetStreamNV
-        );
-    }
-
     // --- [ eglResetStreamNV ] ---
 
     @NativeType("EGLBoolean")

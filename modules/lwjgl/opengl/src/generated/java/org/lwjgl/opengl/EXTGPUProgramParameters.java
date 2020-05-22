@@ -31,12 +31,6 @@ public class EXTGPUProgramParameters {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glProgramEnvParameters4fvEXT, caps.glProgramLocalParameters4fvEXT
-        );
-    }
-
     // --- [ glProgramEnvParameters4fvEXT ] ---
 
     public static native void nglProgramEnvParameters4fvEXT(int target, int index, int count, long params);

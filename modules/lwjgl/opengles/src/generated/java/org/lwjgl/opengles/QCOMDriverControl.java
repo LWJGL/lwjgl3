@@ -36,12 +36,6 @@ public class QCOMDriverControl {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glGetDriverControlsQCOM, caps.glGetDriverControlStringQCOM, caps.glEnableDriverControlQCOM, caps.glDisableDriverControlQCOM
-        );
-    }
-
     // --- [ glGetDriverControlsQCOM ] ---
 
     public static native void nglGetDriverControlsQCOM(long num, int size, long driverControls);

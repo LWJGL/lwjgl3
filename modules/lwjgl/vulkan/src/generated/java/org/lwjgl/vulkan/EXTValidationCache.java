@@ -94,15 +94,6 @@ public class EXTValidationCache {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_validation_cache") && VK.checkExtension("VK_EXT_validation_cache",
-               VK.isSupported(provider, "vkCreateValidationCacheEXT", caps)
-            && VK.isSupported(provider, "vkDestroyValidationCacheEXT", caps)
-            && VK.isSupported(provider, "vkMergeValidationCachesEXT", caps)
-            && VK.isSupported(provider, "vkGetValidationCacheDataEXT", caps)
-        );
-    }
-
     // --- [ vkCreateValidationCacheEXT ] ---
 
     /** Unsafe version of: {@link #vkCreateValidationCacheEXT CreateValidationCacheEXT} */

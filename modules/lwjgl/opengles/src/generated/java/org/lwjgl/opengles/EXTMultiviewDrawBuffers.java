@@ -55,12 +55,6 @@ public class EXTMultiviewDrawBuffers {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glReadBufferIndexedEXT, caps.glDrawBuffersIndexedEXT, caps.glGetIntegeri_vEXT
-        );
-    }
-
     // --- [ glReadBufferIndexedEXT ] ---
 
     public static native void glReadBufferIndexedEXT(@NativeType("GLenum") int src, @NativeType("GLint") int index);

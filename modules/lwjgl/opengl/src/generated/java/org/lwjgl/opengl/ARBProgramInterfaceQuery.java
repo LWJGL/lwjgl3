@@ -11,8 +11,6 @@ import java.nio.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_program_interface_query.txt">ARB_program_interface_query</a> extension.
  * 
@@ -102,13 +100,6 @@ public class ARBProgramInterfaceQuery {
 
     protected ARBProgramInterfaceQuery() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glGetProgramInterfaceiv, caps.glGetProgramResourceIndex, caps.glGetProgramResourceName, caps.glGetProgramResourceiv, 
-            caps.glGetProgramResourceLocation, caps.glGetProgramResourceLocationIndex
-        );
     }
 
     // --- [ glGetProgramInterfaceiv ] ---

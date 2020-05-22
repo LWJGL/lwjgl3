@@ -13,8 +13,6 @@ import org.lwjgl.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_direct_state_access.txt">ARB_direct_state_access</a> extension.
  * 
@@ -42,52 +40,6 @@ public class ARBDirectStateAccess {
 
     protected ARBDirectStateAccess() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps, java.util.Set<String> ext) {
-        return checkFunctions(
-            ARB_transform_feedback2(ext) ? caps.glCreateTransformFeedbacks : -1L, ARB_uniform_buffer_object(ext) ? caps.glTransformFeedbackBufferBase : -1L, 
-            ARB_uniform_buffer_object(ext) ? caps.glTransformFeedbackBufferRange : -1L, ARB_transform_feedback2(ext) ? caps.glGetTransformFeedbackiv : -1L, 
-            ARB_transform_feedback2(ext) ? caps.glGetTransformFeedbacki_v : -1L, ARB_transform_feedback2(ext) ? caps.glGetTransformFeedbacki64_v : -1L, 
-            caps.glCreateBuffers, ARB_buffer_storage(ext) ? caps.glNamedBufferStorage : -1L, caps.glNamedBufferData, caps.glNamedBufferSubData, 
-            ARB_copy_buffer(ext) ? caps.glCopyNamedBufferSubData : -1L, ARB_clear_texture(ext) ? caps.glClearNamedBufferData : -1L, 
-            ARB_clear_texture(ext) ? caps.glClearNamedBufferSubData : -1L, caps.glMapNamedBuffer, ARB_map_buffer_range(ext) ? caps.glMapNamedBufferRange : -1L, 
-            caps.glUnmapNamedBuffer, ARB_map_buffer_range(ext) ? caps.glFlushMappedNamedBufferRange : -1L, caps.glGetNamedBufferParameteriv, 
-            caps.glGetNamedBufferParameteri64v, caps.glGetNamedBufferPointerv, caps.glGetNamedBufferSubData, 
-            ARB_framebuffer_object(ext) ? caps.glCreateFramebuffers : -1L, ARB_framebuffer_object(ext) ? caps.glNamedFramebufferRenderbuffer : -1L, 
-            ARB_framebuffer_no_attachments(ext) ? caps.glNamedFramebufferParameteri : -1L, ARB_framebuffer_object(ext) ? caps.glNamedFramebufferTexture : -1L, 
-            ARB_framebuffer_object(ext) ? caps.glNamedFramebufferTextureLayer : -1L, ARB_framebuffer_object(ext) ? caps.glNamedFramebufferDrawBuffer : -1L, 
-            ARB_framebuffer_object(ext) ? caps.glNamedFramebufferDrawBuffers : -1L, ARB_framebuffer_object(ext) ? caps.glNamedFramebufferReadBuffer : -1L, 
-            ARB_invalidate_subdata(ext) ? caps.glInvalidateNamedFramebufferData : -1L, 
-            ARB_invalidate_subdata(ext) ? caps.glInvalidateNamedFramebufferSubData : -1L, ARB_framebuffer_object(ext) ? caps.glClearNamedFramebufferiv : -1L, 
-            ARB_framebuffer_object(ext) ? caps.glClearNamedFramebufferuiv : -1L, ARB_framebuffer_object(ext) ? caps.glClearNamedFramebufferfv : -1L, 
-            ARB_framebuffer_object(ext) ? caps.glClearNamedFramebufferfi : -1L, ARB_framebuffer_object(ext) ? caps.glBlitNamedFramebuffer : -1L, 
-            ARB_framebuffer_object(ext) ? caps.glCheckNamedFramebufferStatus : -1L, 
-            ARB_framebuffer_no_attachments(ext) ? caps.glGetNamedFramebufferParameteriv : -1L, 
-            ARB_framebuffer_object(ext) ? caps.glGetNamedFramebufferAttachmentParameteriv : -1L, ARB_framebuffer_object(ext) ? caps.glCreateRenderbuffers : -1L, 
-            ARB_framebuffer_object(ext) ? caps.glNamedRenderbufferStorage : -1L, ARB_framebuffer_object(ext) ? caps.glNamedRenderbufferStorageMultisample : -1L, 
-            ARB_framebuffer_object(ext) ? caps.glGetNamedRenderbufferParameteriv : -1L, caps.glCreateTextures, 
-            ARB_texture_buffer_object(ext) ? caps.glTextureBuffer : -1L, ARB_texture_buffer_range(ext) ? caps.glTextureBufferRange : -1L, 
-            ARB_texture_storage(ext) ? caps.glTextureStorage1D : -1L, ARB_texture_storage(ext) ? caps.glTextureStorage2D : -1L, 
-            ARB_texture_storage(ext) ? caps.glTextureStorage3D : -1L, ARB_texture_storage_multisample(ext) ? caps.glTextureStorage2DMultisample : -1L, 
-            ARB_texture_storage_multisample(ext) ? caps.glTextureStorage3DMultisample : -1L, caps.glTextureSubImage1D, caps.glTextureSubImage2D, 
-            caps.glTextureSubImage3D, caps.glCompressedTextureSubImage1D, caps.glCompressedTextureSubImage2D, caps.glCompressedTextureSubImage3D, 
-            caps.glCopyTextureSubImage1D, caps.glCopyTextureSubImage2D, caps.glCopyTextureSubImage3D, caps.glTextureParameterf, caps.glTextureParameterfv, 
-            caps.glTextureParameteri, caps.glTextureParameterIiv, caps.glTextureParameterIuiv, caps.glTextureParameteriv, 
-            ARB_framebuffer_object(ext) ? caps.glGenerateTextureMipmap : -1L, caps.glBindTextureUnit, caps.glGetTextureImage, caps.glGetCompressedTextureImage, 
-            caps.glGetTextureLevelParameterfv, caps.glGetTextureLevelParameteriv, caps.glGetTextureParameterfv, caps.glGetTextureParameterIiv, 
-            caps.glGetTextureParameterIuiv, caps.glGetTextureParameteriv, ARB_vertex_array_object(ext) ? caps.glCreateVertexArrays : -1L, 
-            ARB_vertex_array_object(ext) ? caps.glDisableVertexArrayAttrib : -1L, ARB_vertex_array_object(ext) ? caps.glEnableVertexArrayAttrib : -1L, 
-            ARB_vertex_array_object(ext) ? caps.glVertexArrayElementBuffer : -1L, ARB_vertex_attrib_binding(ext) ? caps.glVertexArrayVertexBuffer : -1L, 
-            ARB_multi_bind(ext) ? caps.glVertexArrayVertexBuffers : -1L, ARB_vertex_attrib_binding(ext) ? caps.glVertexArrayAttribFormat : -1L, 
-            ARB_vertex_attrib_binding(ext) ? caps.glVertexArrayAttribIFormat : -1L, ARB_vertex_attrib_binding(ext) ? caps.glVertexArrayAttribLFormat : -1L, 
-            ARB_vertex_attrib_binding(ext) ? caps.glVertexArrayAttribBinding : -1L, ARB_vertex_attrib_binding(ext) ? caps.glVertexArrayBindingDivisor : -1L, 
-            ARB_vertex_array_object(ext) ? caps.glGetVertexArrayiv : -1L, ARB_vertex_array_object(ext) ? caps.glGetVertexArrayIndexediv : -1L, 
-            ARB_vertex_array_object(ext) ? caps.glGetVertexArrayIndexed64iv : -1L, ARB_sampler_objects(ext) ? caps.glCreateSamplers : -1L, 
-            ARB_separate_shader_objects(ext) ? caps.glCreateProgramPipelines : -1L, caps.glCreateQueries, 
-            ARB_query_buffer_object(ext) ? caps.glGetQueryBufferObjecti64v : -1L, ARB_query_buffer_object(ext) ? caps.glGetQueryBufferObjectiv : -1L, 
-            ARB_query_buffer_object(ext) ? caps.glGetQueryBufferObjectui64v : -1L, ARB_query_buffer_object(ext) ? caps.glGetQueryBufferObjectuiv : -1L
-        );
     }
 
     // --- [ glCreateTransformFeedbacks ] ---
@@ -3476,94 +3428,6 @@ public class ARBDirectStateAccess {
     /** Array version of: {@link #glCreateQueries CreateQueries} */
     public static void glCreateQueries(@NativeType("GLenum") int target, @NativeType("GLuint *") int[] ids) {
         GL45C.glCreateQueries(target, ids);
-    }
-
-    private static boolean ARB_framebuffer_object(java.util.Set<String> ext) {
-        return ext.contains("OpenGL30") || ext.contains("GL_ARB_framebuffer_object");
-    }
-
-    private static boolean ARB_map_buffer_range(java.util.Set<String> ext) {
-        return ext.contains("OpenGL30") || ext.contains("GL_ARB_map_buffer_range");
-    }
-
-    private static boolean ARB_vertex_array_object(java.util.Set<String> ext) {
-        return ext.contains("OpenGL30") || ext.contains("GL_ARB_vertex_array_object");
-    }
-
-    private static boolean ARB_copy_buffer(java.util.Set<String> ext) {
-        return ext.contains("OpenGL31") || ext.contains("GL_ARB_copy_buffer");
-    }
-
-    private static boolean ARB_texture_buffer_object(java.util.Set<String> ext) {
-        return ext.contains("OpenGL31") || ext.contains("GL_ARB_texture_buffer_object");
-    }
-
-    private static boolean ARB_uniform_buffer_object(java.util.Set<String> ext) {
-        return ext.contains("OpenGL31") || ext.contains("GL_ARB_uniform_buffer_object");
-    }
-
-    private static boolean ARB_instanced_arrays(java.util.Set<String> ext) {
-        return ext.contains("OpenGL33") || ext.contains("GL_ARB_instanced_arrays");
-    }
-
-    private static boolean ARB_sampler_objects(java.util.Set<String> ext) {
-        return ext.contains("OpenGL33") || ext.contains("GL_ARB_sampler_objects");
-    }
-
-    private static boolean ARB_transform_feedback2(java.util.Set<String> ext) {
-        return ext.contains("OpenGL40") || ext.contains("GL_ARB_transform_feedback2");
-    }
-
-    private static boolean ARB_vertex_attrib_64bit(java.util.Set<String> ext) {
-        return ext.contains("OpenGL41") || ext.contains("GL_ARB_vertex_attrib_64bit");
-    }
-
-    private static boolean ARB_separate_shader_objects(java.util.Set<String> ext) {
-        return ext.contains("OpenGL41") || ext.contains("GL_ARB_separate_shader_objects");
-    }
-
-    private static boolean ARB_texture_storage(java.util.Set<String> ext) {
-        return ext.contains("OpenGL42") || ext.contains("GL_ARB_texture_storage");
-    }
-
-    private static boolean ARB_texture_storage_multisample(java.util.Set<String> ext) {
-        return ext.contains("OpenGL43") || ext.contains("GL_ARB_texture_storage_multisample");
-    }
-
-    private static boolean ARB_vertex_attrib_binding(java.util.Set<String> ext) {
-        return ext.contains("OpenGL43") || ext.contains("GL_ARB_vertex_attrib_binding");
-    }
-
-    private static boolean ARB_invalidate_subdata(java.util.Set<String> ext) {
-        return ext.contains("OpenGL43") || ext.contains("GL_ARB_invalidate_subdata");
-    }
-
-    private static boolean ARB_texture_buffer_range(java.util.Set<String> ext) {
-        return ext.contains("OpenGL43") || ext.contains("GL_ARB_texture_buffer_range");
-    }
-
-    private static boolean ARB_clear_buffer_object(java.util.Set<String> ext) {
-        return ext.contains("OpenGL43") || ext.contains("GL_ARB_clear_buffer_object");
-    }
-
-    private static boolean ARB_framebuffer_no_attachments(java.util.Set<String> ext) {
-        return ext.contains("OpenGL43") || ext.contains("GL_ARB_framebuffer_no_attachments");
-    }
-
-    private static boolean ARB_buffer_storage(java.util.Set<String> ext) {
-        return ext.contains("OpenGL44") || ext.contains("GL_ARB_buffer_storage");
-    }
-
-    private static boolean ARB_clear_texture(java.util.Set<String> ext) {
-        return ext.contains("OpenGL44") || ext.contains("GL_ARB_clear_texture");
-    }
-
-    private static boolean ARB_multi_bind(java.util.Set<String> ext) {
-        return ext.contains("OpenGL44") || ext.contains("GL_ARB_multi_bind");
-    }
-
-    private static boolean ARB_query_buffer_object(java.util.Set<String> ext) {
-        return ext.contains("OpenGL44") || ext.contains("GL_ARB_query_buffer_object");
     }
 
 }

@@ -49,12 +49,6 @@ public class NVFence {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glDeleteFencesNV, caps.glGenFencesNV, caps.glIsFenceNV, caps.glTestFenceNV, caps.glGetFenceivNV, caps.glFinishFenceNV, caps.glSetFenceNV
-        );
-    }
-
     // --- [ glDeleteFencesNV ] ---
 
     public static native void nglDeleteFencesNV(int n, long fences);

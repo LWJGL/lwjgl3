@@ -54,12 +54,6 @@ public class NVFramebufferMixedSamples {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glRasterSamplesEXT, caps.glCoverageModulationTableNV, caps.glGetCoverageModulationTableNV, caps.glCoverageModulationNV
-        );
-    }
-
     // --- [ glRasterSamplesEXT ] ---
 
     /**

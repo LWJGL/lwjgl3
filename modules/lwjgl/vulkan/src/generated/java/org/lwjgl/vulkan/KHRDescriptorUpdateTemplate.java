@@ -88,15 +88,6 @@ public class KHRDescriptorUpdateTemplate {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_descriptor_update_template") && VK.checkExtension("VK_KHR_descriptor_update_template",
-               VK.isSupported(provider, "vkCreateDescriptorUpdateTemplateKHR", caps)
-            && VK.isSupported(provider, "vkDestroyDescriptorUpdateTemplateKHR", caps)
-            && VK.isSupported(provider, "vkUpdateDescriptorSetWithTemplateKHR", caps)
-            && VK.isSupported(provider, "vkCmdPushDescriptorSetWithTemplateKHR", caps, ext.contains("VK_KHR_push_descriptor"))
-        );
-    }
-
     // --- [ vkCreateDescriptorUpdateTemplateKHR ] ---
 
     /** Unsafe version of: {@link #vkCreateDescriptorUpdateTemplateKHR CreateDescriptorUpdateTemplateKHR} */

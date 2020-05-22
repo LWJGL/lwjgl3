@@ -119,14 +119,6 @@ public class CL20 extends CL12 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(CLCapabilities caps) {
-        return checkFunctions(
-            caps.clCreateCommandQueueWithProperties, caps.clCreatePipe, caps.clGetPipeInfo, caps.clSVMAlloc, caps.clSVMFree, caps.clEnqueueSVMFree, 
-            caps.clEnqueueSVMMemcpy, caps.clEnqueueSVMMemFill, caps.clEnqueueSVMMap, caps.clEnqueueSVMUnmap, caps.clSetKernelArgSVMPointer, 
-            caps.clSetKernelExecInfo, caps.clCreateSamplerWithProperties
-        );
-    }
-
     // --- [ clCreateCommandQueueWithProperties ] ---
 
     /** Unsafe version of: {@link #clCreateCommandQueueWithProperties CreateCommandQueueWithProperties} */

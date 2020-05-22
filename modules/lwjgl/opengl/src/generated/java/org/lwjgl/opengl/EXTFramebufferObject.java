@@ -147,15 +147,6 @@ public class EXTFramebufferObject {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glIsRenderbufferEXT, caps.glBindRenderbufferEXT, caps.glDeleteRenderbuffersEXT, caps.glGenRenderbuffersEXT, caps.glRenderbufferStorageEXT, 
-            caps.glGetRenderbufferParameterivEXT, caps.glIsFramebufferEXT, caps.glBindFramebufferEXT, caps.glDeleteFramebuffersEXT, caps.glGenFramebuffersEXT, 
-            caps.glCheckFramebufferStatusEXT, caps.glFramebufferTexture1DEXT, caps.glFramebufferTexture2DEXT, caps.glFramebufferTexture3DEXT, 
-            caps.glFramebufferRenderbufferEXT, caps.glGetFramebufferAttachmentParameterivEXT, caps.glGenerateMipmapEXT
-        );
-    }
-
     // --- [ glIsRenderbufferEXT ] ---
 
     @NativeType("GLboolean")

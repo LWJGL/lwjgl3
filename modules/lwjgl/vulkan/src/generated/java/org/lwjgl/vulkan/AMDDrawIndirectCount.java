@@ -73,13 +73,6 @@ public class AMDDrawIndirectCount {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_AMD_draw_indirect_count") && VK.checkExtension("VK_AMD_draw_indirect_count",
-               VK.isSupported(provider, "vkCmdDrawIndirectCountAMD", caps)
-            && VK.isSupported(provider, "vkCmdDrawIndexedIndirectCountAMD", caps)
-        );
-    }
-
     // --- [ vkCmdDrawIndirectCountAMD ] ---
 
     /**

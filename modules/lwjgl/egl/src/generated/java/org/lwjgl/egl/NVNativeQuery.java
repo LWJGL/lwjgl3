@@ -24,12 +24,6 @@ public class NVNativeQuery {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglQueryNativeDisplayNV, caps.eglQueryNativeWindowNV, caps.eglQueryNativePixmapNV
-        );
-    }
-
     // --- [ eglQueryNativeDisplayNV ] ---
 
     public static int neglQueryNativeDisplayNV(long dpy, long display_id) {

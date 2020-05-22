@@ -13,8 +13,6 @@ import org.lwjgl.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * The OpenGL functionality up to version 3.1. Includes the deprecated symbols of the Compatibility Profile.
  * 
@@ -165,14 +163,6 @@ public class GL31 extends GL30 {
 
     protected GL31() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glDrawArraysInstanced, caps.glDrawElementsInstanced, caps.glCopyBufferSubData, caps.glPrimitiveRestartIndex, caps.glTexBuffer, 
-            caps.glGetUniformIndices, caps.glGetActiveUniformsiv, caps.glGetActiveUniformName, caps.glGetUniformBlockIndex, caps.glGetActiveUniformBlockiv, 
-            caps.glGetActiveUniformBlockName, caps.glUniformBlockBinding
-        );
     }
 
     // --- [ glDrawArraysInstanced ] ---

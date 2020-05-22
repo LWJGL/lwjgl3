@@ -13,8 +13,6 @@ import org.lwjgl.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * The OpenGL functionality up to version 4.4. Includes the deprecated symbols of the Compatibility Profile.
  * 
@@ -103,13 +101,6 @@ public class GL44 extends GL43 {
 
     protected GL44() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glBufferStorage, caps.glClearTexSubImage, caps.glClearTexImage, caps.glBindBuffersBase, caps.glBindBuffersRange, caps.glBindTextures, 
-            caps.glBindSamplers, caps.glBindImageTextures, caps.glBindVertexBuffers
-        );
     }
 
     // --- [ glBufferStorage ] ---

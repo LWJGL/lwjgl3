@@ -184,15 +184,6 @@ public class NVCommandList {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glCreateStatesNV, caps.glDeleteStatesNV, caps.glIsStateNV, caps.glStateCaptureNV, caps.glGetCommandHeaderNV, caps.glGetStageIndexNV, 
-            caps.glDrawCommandsNV, caps.glDrawCommandsAddressNV, caps.glDrawCommandsStatesNV, caps.glDrawCommandsStatesAddressNV, caps.glCreateCommandListsNV, 
-            caps.glDeleteCommandListsNV, caps.glIsCommandListNV, caps.glListDrawCommandsStatesClientNV, caps.glCommandListSegmentsNV, 
-            caps.glCompileCommandListNV, caps.glCallCommandListNV
-        );
-    }
-
     // --- [ glCreateStatesNV ] ---
 
     /**

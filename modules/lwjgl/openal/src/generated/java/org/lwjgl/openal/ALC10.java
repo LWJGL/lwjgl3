@@ -57,14 +57,6 @@ public class ALC10 {
         throw new UnsupportedOperationException();
     }
 
-	static boolean isAvailable(ALCCapabilities caps) {
-		return checkFunctions(
-            caps.alcOpenDevice, caps.alcCloseDevice, caps.alcCreateContext, caps.alcMakeContextCurrent, caps.alcProcessContext, caps.alcSuspendContext, 
-            caps.alcDestroyContext, caps.alcGetCurrentContext, caps.alcGetContextsDevice, caps.alcIsExtensionPresent, caps.alcGetProcAddress, 
-            caps.alcGetEnumValue, caps.alcGetError, caps.alcGetString, caps.alcGetIntegerv
-        );
-	}
-
     // --- [ alcOpenDevice ] ---
 
     /** Unsafe version of: {@link #alcOpenDevice OpenDevice} */

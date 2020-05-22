@@ -7,8 +7,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_ES3_2_compatibility.txt">ARB_ES3_2_compatibility</a> extension.
  * 
@@ -40,12 +38,6 @@ public class ARBES32Compatibility {
 
     protected ARBES32Compatibility() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glPrimitiveBoundingBoxARB
-        );
     }
 
     // --- [ glPrimitiveBoundingBoxARB ] ---

@@ -9,7 +9,6 @@ import java.nio.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -36,12 +35,6 @@ public class ARBDrawInstanced {
 
     protected ARBDrawInstanced() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glDrawArraysInstancedARB, caps.glDrawElementsInstancedARB
-        );
     }
 
     // --- [ glDrawArraysInstancedARB ] ---

@@ -108,12 +108,6 @@ public class KHRMaintenance1 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_maintenance1") && VK.checkExtension("VK_KHR_maintenance1",
-               VK.isSupported(provider, "vkTrimCommandPoolKHR", caps)
-        );
-    }
-
     // --- [ vkTrimCommandPoolKHR ] ---
 
     /**

@@ -69,14 +69,6 @@ public class ARBFramebufferNoAttachments {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps, java.util.Set<String> ext) {
-        return checkFunctions(
-            caps.glFramebufferParameteri, caps.glGetFramebufferParameteriv, 
-            ext.contains("GL_EXT_direct_state_access") ? caps.glNamedFramebufferParameteriEXT : -1L, 
-            ext.contains("GL_EXT_direct_state_access") ? caps.glGetNamedFramebufferParameterivEXT : -1L
-        );
-    }
-
     // --- [ glFramebufferParameteri ] ---
 
     /**

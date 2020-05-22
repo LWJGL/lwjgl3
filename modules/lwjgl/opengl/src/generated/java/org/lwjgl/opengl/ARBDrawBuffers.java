@@ -49,12 +49,6 @@ public class ARBDrawBuffers {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glDrawBuffersARB
-        );
-    }
-
     // --- [ glDrawBuffersARB ] ---
 
     /**

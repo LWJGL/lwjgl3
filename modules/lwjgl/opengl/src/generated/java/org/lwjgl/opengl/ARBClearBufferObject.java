@@ -36,13 +36,6 @@ public class ARBClearBufferObject {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps, java.util.Set<String> ext) {
-        return checkFunctions(
-            caps.glClearBufferData, caps.glClearBufferSubData, ext.contains("GL_EXT_direct_state_access") ? caps.glClearNamedBufferDataEXT : -1L, 
-            ext.contains("GL_EXT_direct_state_access") ? caps.glClearNamedBufferSubDataEXT : -1L
-        );
-    }
-
     // --- [ glClearBufferData ] ---
 
     /** Unsafe version of: {@link #glClearBufferData ClearBufferData} */

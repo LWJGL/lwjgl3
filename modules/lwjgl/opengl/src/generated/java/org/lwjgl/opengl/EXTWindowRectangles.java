@@ -60,12 +60,6 @@ public class EXTWindowRectangles {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glWindowRectanglesEXT
-        );
-    }
-
     // --- [ glWindowRectanglesEXT ] ---
 
     /**

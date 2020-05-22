@@ -9,6 +9,7 @@ import org.lwjgl.system.*;
 import java.util.Set;
 
 import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.Checks.*;
 
 /** Defines the WGL capabilities of an OpenGL device. */
 public final class WGLCapabilities {
@@ -235,21 +236,21 @@ public final class WGLCapabilities {
         wglAllocateMemoryNV = provider.getFunctionAddress("wglAllocateMemoryNV");
         wglFreeMemoryNV = provider.getFunctionAddress("wglFreeMemoryNV");
 
-        WGL_AMD_gpu_association = ext.contains("WGL_AMD_gpu_association") && checkExtension("WGL_AMD_gpu_association", WGLAMDGPUAssociation.isAvailable(this));
-        WGL_ARB_buffer_region = ext.contains("WGL_ARB_buffer_region") && checkExtension("WGL_ARB_buffer_region", WGLARBBufferRegion.isAvailable(this));
+        WGL_AMD_gpu_association = check_WGL_AMD_gpu_association(ext);
+        WGL_ARB_buffer_region = check_WGL_ARB_buffer_region(ext);
         WGL_ARB_context_flush_control = ext.contains("WGL_ARB_context_flush_control");
-        WGL_ARB_create_context = ext.contains("WGL_ARB_create_context") && checkExtension("WGL_ARB_create_context", WGLARBCreateContext.isAvailable(this));
+        WGL_ARB_create_context = check_WGL_ARB_create_context(ext);
         WGL_ARB_create_context_no_error = ext.contains("WGL_ARB_create_context_no_error");
         WGL_ARB_create_context_profile = ext.contains("WGL_ARB_create_context_profile");
         WGL_ARB_create_context_robustness = ext.contains("WGL_ARB_create_context_robustness");
-        WGL_ARB_extensions_string = ext.contains("WGL_ARB_extensions_string") && checkExtension("WGL_ARB_extensions_string", WGLARBExtensionsString.isAvailable(this));
+        WGL_ARB_extensions_string = check_WGL_ARB_extensions_string(ext);
         WGL_ARB_framebuffer_sRGB = ext.contains("WGL_ARB_framebuffer_sRGB");
-        WGL_ARB_make_current_read = ext.contains("WGL_ARB_make_current_read") && checkExtension("WGL_ARB_make_current_read", WGLARBMakeCurrentRead.isAvailable(this));
+        WGL_ARB_make_current_read = check_WGL_ARB_make_current_read(ext);
         WGL_ARB_multisample = ext.contains("WGL_ARB_multisample");
-        WGL_ARB_pbuffer = ext.contains("WGL_ARB_pbuffer") && checkExtension("WGL_ARB_pbuffer", WGLARBPbuffer.isAvailable(this));
-        WGL_ARB_pixel_format = ext.contains("WGL_ARB_pixel_format") && checkExtension("WGL_ARB_pixel_format", WGLARBPixelFormat.isAvailable(this));
+        WGL_ARB_pbuffer = check_WGL_ARB_pbuffer(ext);
+        WGL_ARB_pixel_format = check_WGL_ARB_pixel_format(ext);
         WGL_ARB_pixel_format_float = ext.contains("WGL_ARB_pixel_format_float");
-        WGL_ARB_render_texture = ext.contains("WGL_ARB_render_texture") && checkExtension("WGL_ARB_render_texture", WGLARBRenderTexture.isAvailable(this));
+        WGL_ARB_render_texture = check_WGL_ARB_render_texture(ext);
         WGL_ARB_robustness_application_isolation = ext.contains("WGL_ARB_robustness_application_isolation");
         WGL_ARB_robustness_share_group_isolation = ext.contains("WGL_ARB_robustness_share_group_isolation");
         WGL_ATI_pixel_format_float = ext.contains("WGL_ATI_pixel_format_float");
@@ -258,23 +259,23 @@ public final class WGLCapabilities {
         WGL_EXT_create_context_es2_profile = ext.contains("WGL_EXT_create_context_es2_profile");
         WGL_EXT_create_context_es_profile = ext.contains("WGL_EXT_create_context_es_profile");
         WGL_EXT_depth_float = ext.contains("WGL_EXT_depth_float");
-        WGL_EXT_extensions_string = ext.contains("WGL_EXT_extensions_string") && checkExtension("WGL_EXT_extensions_string", WGLEXTExtensionsString.isAvailable(this));
+        WGL_EXT_extensions_string = check_WGL_EXT_extensions_string(ext);
         WGL_EXT_framebuffer_sRGB = ext.contains("WGL_EXT_framebuffer_sRGB");
         WGL_EXT_pixel_format_packed_float = ext.contains("WGL_EXT_pixel_format_packed_float");
-        WGL_EXT_swap_control = ext.contains("WGL_EXT_swap_control") && checkExtension("WGL_EXT_swap_control", WGLEXTSwapControl.isAvailable(this));
+        WGL_EXT_swap_control = check_WGL_EXT_swap_control(ext);
         WGL_EXT_swap_control_tear = ext.contains("WGL_EXT_swap_control_tear");
-        WGL_NV_copy_image = ext.contains("WGL_NV_copy_image") && checkExtension("WGL_NV_copy_image", WGLNVCopyImage.isAvailable(this));
-        WGL_NV_delay_before_swap = ext.contains("WGL_NV_delay_before_swap") && checkExtension("WGL_NV_delay_before_swap", WGLNVDelayBeforeSwap.isAvailable(this));
-        WGL_NV_DX_interop = ext.contains("WGL_NV_DX_interop") && checkExtension("WGL_NV_DX_interop", WGLNVDXInterop.isAvailable(this));
+        WGL_NV_copy_image = check_WGL_NV_copy_image(ext);
+        WGL_NV_delay_before_swap = check_WGL_NV_delay_before_swap(ext);
+        WGL_NV_DX_interop = check_WGL_NV_DX_interop(ext);
         WGL_NV_DX_interop2 = ext.contains("WGL_NV_DX_interop2");
         WGL_NV_float_buffer = ext.contains("WGL_NV_float_buffer");
-        WGL_NV_gpu_affinity = ext.contains("WGL_NV_gpu_affinity") && checkExtension("WGL_NV_gpu_affinity", WGLNVGPUAffinity.isAvailable(this));
+        WGL_NV_gpu_affinity = check_WGL_NV_gpu_affinity(ext);
         WGL_NV_multigpu_context = ext.contains("WGL_NV_multigpu_context");
         WGL_NV_multisample_coverage = ext.contains("WGL_NV_multisample_coverage");
         WGL_NV_render_depth_texture = ext.contains("WGL_NV_render_depth_texture");
         WGL_NV_render_texture_rectangle = ext.contains("WGL_NV_render_texture_rectangle");
-        WGL_NV_swap_group = ext.contains("WGL_NV_swap_group") && checkExtension("WGL_NV_swap_group", WGLNVSwapGroup.isAvailable(this));
-        WGL_NV_vertex_array_range = ext.contains("WGL_NV_vertex_array_range") && checkExtension("WGL_NV_vertex_array_range", WGLNVVertexArrayRange.isAvailable(this));
+        WGL_NV_swap_group = check_WGL_NV_swap_group(ext);
+        WGL_NV_vertex_array_range = check_WGL_NV_vertex_array_range(ext);
     }
 
     private static boolean checkExtension(String extension, boolean supported) {
@@ -284,6 +285,104 @@ public final class WGLCapabilities {
 
         apiLog("[WGL] " + extension + " was reported as available but an entry point is missing.");
         return false;
+    }
+
+    private boolean check_WGL_AMD_gpu_association(java.util.Set<String> ext) {
+        return ext.contains("WGL_AMD_gpu_association") && checkExtension("WGL_AMD_gpu_association", checkFunctions(
+            wglGetGPUIDsAMD, wglGetGPUInfoAMD, wglGetContextGPUIDAMD, wglCreateAssociatedContextAMD, wglCreateAssociatedContextAttribsAMD, 
+            wglDeleteAssociatedContextAMD, wglMakeAssociatedContextCurrentAMD, wglGetCurrentAssociatedContextAMD
+        ));
+    }
+
+    private boolean check_WGL_ARB_buffer_region(java.util.Set<String> ext) {
+        return ext.contains("WGL_ARB_buffer_region") && checkExtension("WGL_ARB_buffer_region", checkFunctions(
+            wglCreateBufferRegionARB, wglDeleteBufferRegionARB, wglSaveBufferRegionARB, wglRestoreBufferRegionARB
+        ));
+    }
+
+    private boolean check_WGL_ARB_create_context(java.util.Set<String> ext) {
+        return ext.contains("WGL_ARB_create_context") && checkExtension("WGL_ARB_create_context", checkFunctions(
+            wglCreateContextAttribsARB
+        ));
+    }
+
+    private boolean check_WGL_ARB_extensions_string(java.util.Set<String> ext) {
+        return ext.contains("WGL_ARB_extensions_string") && checkExtension("WGL_ARB_extensions_string", checkFunctions(
+            wglGetExtensionsStringARB
+        ));
+    }
+
+    private boolean check_WGL_ARB_make_current_read(java.util.Set<String> ext) {
+        return ext.contains("WGL_ARB_make_current_read") && checkExtension("WGL_ARB_make_current_read", checkFunctions(
+            wglMakeContextCurrentARB, wglGetCurrentReadDCARB
+        ));
+    }
+
+    private boolean check_WGL_ARB_pbuffer(java.util.Set<String> ext) {
+        return ext.contains("WGL_ARB_pbuffer") && checkExtension("WGL_ARB_pbuffer", checkFunctions(
+            wglCreatePbufferARB, wglGetPbufferDCARB, wglReleasePbufferDCARB, wglDestroyPbufferARB, wglQueryPbufferARB
+        ));
+    }
+
+    private boolean check_WGL_ARB_pixel_format(java.util.Set<String> ext) {
+        return ext.contains("WGL_ARB_pixel_format") && checkExtension("WGL_ARB_pixel_format", checkFunctions(
+            wglGetPixelFormatAttribivARB, wglGetPixelFormatAttribfvARB, wglChoosePixelFormatARB
+        ));
+    }
+
+    private boolean check_WGL_ARB_render_texture(java.util.Set<String> ext) {
+        return ext.contains("WGL_ARB_render_texture") && checkExtension("WGL_ARB_render_texture", checkFunctions(
+            wglBindTexImageARB, wglReleaseTexImageARB, wglSetPbufferAttribARB
+        ));
+    }
+
+    private boolean check_WGL_EXT_extensions_string(java.util.Set<String> ext) {
+        return ext.contains("WGL_EXT_extensions_string") && checkExtension("WGL_EXT_extensions_string", checkFunctions(
+            wglGetExtensionsStringEXT
+        ));
+    }
+
+    private boolean check_WGL_EXT_swap_control(java.util.Set<String> ext) {
+        return ext.contains("WGL_EXT_swap_control") && checkExtension("WGL_EXT_swap_control", checkFunctions(
+            wglSwapIntervalEXT, wglGetSwapIntervalEXT
+        ));
+    }
+
+    private boolean check_WGL_NV_copy_image(java.util.Set<String> ext) {
+        return ext.contains("WGL_NV_copy_image") && checkExtension("WGL_NV_copy_image", checkFunctions(
+            wglCopyImageSubDataNV
+        ));
+    }
+
+    private boolean check_WGL_NV_delay_before_swap(java.util.Set<String> ext) {
+        return ext.contains("WGL_NV_delay_before_swap") && checkExtension("WGL_NV_delay_before_swap", checkFunctions(
+            wglDelayBeforeSwapNV
+        ));
+    }
+
+    private boolean check_WGL_NV_DX_interop(java.util.Set<String> ext) {
+        return ext.contains("WGL_NV_DX_interop") && checkExtension("WGL_NV_DX_interop", checkFunctions(
+            wglDXSetResourceShareHandleNV, wglDXOpenDeviceNV, wglDXCloseDeviceNV, wglDXRegisterObjectNV, wglDXUnregisterObjectNV, wglDXObjectAccessNV, 
+            wglDXLockObjectsNV, wglDXUnlockObjectsNV
+        ));
+    }
+
+    private boolean check_WGL_NV_gpu_affinity(java.util.Set<String> ext) {
+        return ext.contains("WGL_NV_gpu_affinity") && checkExtension("WGL_NV_gpu_affinity", checkFunctions(
+            wglEnumGpusNV, wglEnumGpuDevicesNV, wglCreateAffinityDCNV, wglEnumGpusFromAffinityDCNV, wglDeleteDCNV
+        ));
+    }
+
+    private boolean check_WGL_NV_swap_group(java.util.Set<String> ext) {
+        return ext.contains("WGL_NV_swap_group") && checkExtension("WGL_NV_swap_group", checkFunctions(
+            wglJoinSwapGroupNV, wglBindSwapBarrierNV, wglQuerySwapGroupNV, wglQueryMaxSwapGroupsNV, wglQueryFrameCountNV, wglResetFrameCountNV
+        ));
+    }
+
+    private boolean check_WGL_NV_vertex_array_range(java.util.Set<String> ext) {
+        return ext.contains("WGL_NV_vertex_array_range") && checkExtension("WGL_NV_vertex_array_range", checkFunctions(
+            wglAllocateMemoryNV, wglFreeMemoryNV
+        ));
     }
 
 }

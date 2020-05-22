@@ -85,12 +85,6 @@ public class GLXEXTTextureFromPixmap {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLXCapabilities caps) {
-        return checkFunctions(
-            caps.glXBindTexImageEXT, caps.glXReleaseTexImageEXT
-        );
-    }
-
     // --- [ glXBindTexImageEXT ] ---
 
     /** Unsafe version of: {@link #glXBindTexImageEXT BindTexImageEXT} */

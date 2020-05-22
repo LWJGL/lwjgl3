@@ -7,8 +7,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_compute_shader.txt">ARB_compute_shader</a> extension.
  * 
@@ -78,12 +76,6 @@ public class ARBComputeShader {
 
     protected ARBComputeShader() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glDispatchCompute, caps.glDispatchComputeIndirect
-        );
     }
 
     // --- [ glDispatchCompute ] ---

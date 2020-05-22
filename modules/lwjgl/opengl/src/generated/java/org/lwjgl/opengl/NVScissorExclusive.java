@@ -49,12 +49,6 @@ public class NVScissorExclusive {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glScissorExclusiveArrayvNV, caps.glScissorExclusiveNV
-        );
-    }
-
     // --- [ glScissorExclusiveArrayvNV ] ---
 
     public static native void nglScissorExclusiveArrayvNV(int first, int count, long v);

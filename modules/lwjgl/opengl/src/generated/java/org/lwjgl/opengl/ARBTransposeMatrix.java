@@ -41,12 +41,6 @@ public class ARBTransposeMatrix {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glLoadTransposeMatrixfARB, caps.glLoadTransposeMatrixdARB, caps.glMultTransposeMatrixfARB, caps.glMultTransposeMatrixdARB
-        );
-    }
-
     // --- [ glLoadTransposeMatrixfARB ] ---
 
     /** Unsafe version of: {@link #glLoadTransposeMatrixfARB LoadTransposeMatrixfARB} */

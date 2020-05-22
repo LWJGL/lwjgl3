@@ -46,12 +46,6 @@ public class EXTPlatformBase {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglGetPlatformDisplayEXT, caps.eglCreatePlatformWindowSurfaceEXT, caps.eglCreatePlatformPixmapSurfaceEXT
-        );
-    }
-
     // --- [ eglGetPlatformDisplayEXT ] ---
 
     public static long neglGetPlatformDisplayEXT(int platform, long native_display, long attrib_list) {

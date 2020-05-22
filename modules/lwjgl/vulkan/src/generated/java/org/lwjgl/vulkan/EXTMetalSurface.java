@@ -61,12 +61,6 @@ public class EXTMetalSurface {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsInstance(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_metal_surface") && VK.checkExtension("VK_EXT_metal_surface",
-               VK.isSupported(provider, "vkCreateMetalSurfaceEXT", caps)
-        );
-    }
-
     // --- [ vkCreateMetalSurfaceEXT ] ---
 
     /** Unsafe version of: {@link #vkCreateMetalSurfaceEXT CreateMetalSurfaceEXT} */

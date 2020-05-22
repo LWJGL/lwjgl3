@@ -71,12 +71,6 @@ public class KHRDebug {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglDebugMessageControlKHR, caps.eglQueryDebugKHR, caps.eglLabelObjectKHR
-        );
-    }
-
     // --- [ eglDebugMessageControlKHR ] ---
 
     public static int neglDebugMessageControlKHR(long callback, long attrib_list) {

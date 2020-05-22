@@ -26,12 +26,6 @@ public class EXTStaticBuffer {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(ALCapabilities caps) {
-        return checkFunctions(
-            caps.alBufferDataStatic
-        );
-    }
-
     // --- [ alBufferDataStatic ] ---
 
     /**

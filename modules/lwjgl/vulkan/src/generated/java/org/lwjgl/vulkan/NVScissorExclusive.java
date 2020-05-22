@@ -75,12 +75,6 @@ public class NVScissorExclusive {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_NV_scissor_exclusive") && VK.checkExtension("VK_NV_scissor_exclusive",
-               VK.isSupported(provider, "vkCmdSetExclusiveScissorNV", caps)
-        );
-    }
-
     // --- [ vkCmdSetExclusiveScissorNV ] ---
 
     /**

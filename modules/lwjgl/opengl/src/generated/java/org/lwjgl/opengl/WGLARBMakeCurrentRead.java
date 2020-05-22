@@ -29,12 +29,6 @@ public class WGLARBMakeCurrentRead {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(WGLCapabilities caps) {
-        return checkFunctions(
-            caps.wglMakeContextCurrentARB, caps.wglGetCurrentReadDCARB
-        );
-    }
-
     // --- [ wglMakeContextCurrentARB ] ---
 
     /**

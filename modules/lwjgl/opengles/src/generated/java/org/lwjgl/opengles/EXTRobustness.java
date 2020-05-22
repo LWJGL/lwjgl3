@@ -73,12 +73,6 @@ public class EXTRobustness {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glGetGraphicsResetStatusEXT, caps.glReadnPixelsEXT, caps.glGetnUniformfvEXT, caps.glGetnUniformivEXT
-        );
-    }
-
     // --- [ glGetGraphicsResetStatusEXT ] ---
 
     @NativeType("GLenum")

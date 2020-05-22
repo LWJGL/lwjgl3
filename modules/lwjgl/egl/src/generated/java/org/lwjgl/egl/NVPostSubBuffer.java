@@ -28,12 +28,6 @@ public class NVPostSubBuffer {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglPostSubBufferNV
-        );
-    }
-
     // --- [ eglPostSubBufferNV ] ---
 
     @NativeType("EGLBoolean")

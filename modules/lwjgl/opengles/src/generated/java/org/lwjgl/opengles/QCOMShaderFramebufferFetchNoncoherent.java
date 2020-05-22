@@ -7,8 +7,6 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/QCOM/QCOM_shader_framebuffer_fetch_noncoherent.txt">QCOM_shader_framebuffer_fetch_noncoherent</a> extension.
  * 
@@ -25,12 +23,6 @@ public class QCOMShaderFramebufferFetchNoncoherent {
 
     protected QCOMShaderFramebufferFetchNoncoherent() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glFramebufferFetchBarrierQCOM
-        );
     }
 
     // --- [ glFramebufferFetchBarrierQCOM ] ---

@@ -7,8 +7,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_geometry_shader4.txt">ARB_geometry_shader4</a> extension.
  * 
@@ -78,12 +76,6 @@ public class ARBGeometryShader4 {
 
     protected ARBGeometryShader4() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glProgramParameteriARB, caps.glFramebufferTextureARB, caps.glFramebufferTextureLayerARB, caps.glFramebufferTextureFaceARB
-        );
     }
 
     // --- [ glProgramParameteriARB ] ---

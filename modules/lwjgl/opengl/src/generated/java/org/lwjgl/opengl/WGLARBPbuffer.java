@@ -65,12 +65,6 @@ public class WGLARBPbuffer {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(WGLCapabilities caps) {
-        return checkFunctions(
-            caps.wglCreatePbufferARB, caps.wglGetPbufferDCARB, caps.wglReleasePbufferDCARB, caps.wglDestroyPbufferARB, caps.wglQueryPbufferARB
-        );
-    }
-
     // --- [ wglCreatePbufferARB ] ---
 
     /** Unsafe version of: {@link #wglCreatePbufferARB CreatePbufferARB} */

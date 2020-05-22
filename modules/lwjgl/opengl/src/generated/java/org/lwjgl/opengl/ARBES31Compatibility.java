@@ -7,8 +7,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_ES3_1_compatibility.txt">ARB_ES3_1_compatibility</a> extension.
  * 
@@ -42,12 +40,6 @@ public class ARBES31Compatibility {
 
     protected ARBES31Compatibility() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glMemoryBarrierByRegion
-        );
     }
 
     // --- [ glMemoryBarrierByRegion ] ---

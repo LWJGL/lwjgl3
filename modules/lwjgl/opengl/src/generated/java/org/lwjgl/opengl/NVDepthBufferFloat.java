@@ -7,8 +7,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_depth_buffer_float.txt">NV_depth_buffer_float</a> extension.
  * 
@@ -50,12 +48,6 @@ public class NVDepthBufferFloat {
 
     protected NVDepthBufferFloat() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glDepthRangedNV, caps.glClearDepthdNV, caps.glDepthBoundsdNV
-        );
     }
 
     // --- [ glDepthRangedNV ] ---

@@ -30,12 +30,6 @@ public class EXTStreamConsumerEGLOutput {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglStreamConsumerOutputEXT
-        );
-    }
-
     // --- [ eglStreamConsumerOutputEXT ] ---
 
     @NativeType("EGLBoolean")

@@ -26,12 +26,6 @@ public class GLX14 extends GLX13 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLXCapabilities caps) {
-        return checkFunctions(
-            caps.glXGetProcAddress
-        );
-    }
-
     // --- [ glXGetProcAddress ] ---
 
     /** Unsafe version of: {@link #glXGetProcAddress GetProcAddress} */

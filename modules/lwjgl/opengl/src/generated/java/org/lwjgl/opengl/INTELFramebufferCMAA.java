@@ -7,8 +7,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/INTEL/INTEL_framebuffer_CMAA.txt">INTEL_framebuffer_CMAA</a> extension.
  * 
@@ -32,12 +30,6 @@ public class INTELFramebufferCMAA {
 
     protected INTELFramebufferCMAA() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glApplyFramebufferAttachmentCMAAINTEL
-        );
     }
 
     // --- [ glApplyFramebufferAttachmentCMAAINTEL ] ---

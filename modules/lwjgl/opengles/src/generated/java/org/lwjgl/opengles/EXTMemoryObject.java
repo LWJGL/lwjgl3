@@ -85,16 +85,6 @@ public class EXTMemoryObject {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps, java.util.Set<String> ext) {
-        return checkFunctions(
-            caps.glGetUnsignedBytevEXT, caps.glGetUnsignedBytei_vEXT, caps.glDeleteMemoryObjectsEXT, caps.glIsMemoryObjectEXT, caps.glCreateMemoryObjectsEXT, 
-            caps.glMemoryObjectParameterivEXT, caps.glGetMemoryObjectParameterivEXT, caps.glTexStorageMem2DEXT, caps.glTexStorageMem2DMultisampleEXT, 
-            caps.glTexStorageMem3DEXT, caps.glTexStorageMem3DMultisampleEXT, caps.glBufferStorageMemEXT, caps.hasDSA(ext) ? caps.glTextureStorageMem2DEXT : -1L, 
-            caps.hasDSA(ext) ? caps.glTextureStorageMem2DMultisampleEXT : -1L, caps.hasDSA(ext) ? caps.glTextureStorageMem3DEXT : -1L, 
-            caps.hasDSA(ext) ? caps.glTextureStorageMem3DMultisampleEXT : -1L, caps.hasDSA(ext) ? caps.glNamedBufferStorageMemEXT : -1L
-        );
-    }
-
     // --- [ glGetUnsignedBytevEXT ] ---
 
     public static native void nglGetUnsignedBytevEXT(int pname, long data);

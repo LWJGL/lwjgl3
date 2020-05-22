@@ -176,25 +176,6 @@ public class KHRSwapchain {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsInstance(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_swapchain") && VK.checkExtension("VK_KHR_swapchain",
-               VK.isSupported(provider, "vkGetPhysicalDevicePresentRectanglesKHR", caps, ext.contains("Vulkan11"))
-        );
-    }
-
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_swapchain") && VK.checkExtension("VK_KHR_swapchain",
-               VK.isSupported(provider, "vkCreateSwapchainKHR", caps)
-            && VK.isSupported(provider, "vkDestroySwapchainKHR", caps)
-            && VK.isSupported(provider, "vkGetSwapchainImagesKHR", caps)
-            && VK.isSupported(provider, "vkAcquireNextImageKHR", caps)
-            && VK.isSupported(provider, "vkQueuePresentKHR", caps)
-            && VK.isSupported(provider, "vkGetDeviceGroupPresentCapabilitiesKHR", caps, ext.contains("Vulkan11"))
-            && VK.isSupported(provider, "vkGetDeviceGroupSurfacePresentModesKHR", caps, ext.contains("Vulkan11"))
-            && VK.isSupported(provider, "vkAcquireNextImage2KHR", caps, ext.contains("Vulkan11"))
-        );
-    }
-
     // --- [ vkCreateSwapchainKHR ] ---
 
     /** Unsafe version of: {@link #vkCreateSwapchainKHR CreateSwapchainKHR} */

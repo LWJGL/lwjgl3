@@ -108,18 +108,6 @@ public class EXTCalibratedTimestamps {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsInstance(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_calibrated_timestamps") && VK.checkExtension("VK_EXT_calibrated_timestamps",
-               VK.isSupported(provider, "vkGetPhysicalDeviceCalibrateableTimeDomainsEXT", caps)
-        );
-    }
-
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_calibrated_timestamps") && VK.checkExtension("VK_EXT_calibrated_timestamps",
-               VK.isSupported(provider, "vkGetCalibratedTimestampsEXT", caps)
-        );
-    }
-
     // --- [ vkGetPhysicalDeviceCalibrateableTimeDomainsEXT ] ---
 
     /**

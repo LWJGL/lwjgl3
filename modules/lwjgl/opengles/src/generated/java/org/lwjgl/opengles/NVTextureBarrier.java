@@ -7,8 +7,6 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_texture_barrier.txt">NV_texture_barrier</a> extension.
  * 
@@ -20,12 +18,6 @@ public class NVTextureBarrier {
 
     protected NVTextureBarrier() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glTextureBarrierNV
-        );
     }
 
     // --- [ glTextureBarrierNV ] ---

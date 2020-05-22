@@ -342,27 +342,6 @@ public class EXTDebugUtils {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsInstance(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_debug_utils") && VK.checkExtension("VK_EXT_debug_utils",
-               VK.isSupported(provider, "vkCreateDebugUtilsMessengerEXT", caps)
-            && VK.isSupported(provider, "vkDestroyDebugUtilsMessengerEXT", caps)
-            && VK.isSupported(provider, "vkSubmitDebugUtilsMessageEXT", caps)
-        );
-    }
-
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, VKCapabilitiesInstance capsInstance) {
-        return capsInstance.VK_EXT_debug_utils && VK.checkExtension("VK_EXT_debug_utils",
-               VK.isSupported(provider, "vkSetDebugUtilsObjectNameEXT", caps)
-            && VK.isSupported(provider, "vkSetDebugUtilsObjectTagEXT", caps)
-            && VK.isSupported(provider, "vkQueueBeginDebugUtilsLabelEXT", caps)
-            && VK.isSupported(provider, "vkQueueEndDebugUtilsLabelEXT", caps)
-            && VK.isSupported(provider, "vkQueueInsertDebugUtilsLabelEXT", caps)
-            && VK.isSupported(provider, "vkCmdBeginDebugUtilsLabelEXT", caps)
-            && VK.isSupported(provider, "vkCmdEndDebugUtilsLabelEXT", caps)
-            && VK.isSupported(provider, "vkCmdInsertDebugUtilsLabelEXT", caps)
-        );
-    }
-
     // --- [ vkSetDebugUtilsObjectNameEXT ] ---
 
     /** Unsafe version of: {@link #vkSetDebugUtilsObjectNameEXT SetDebugUtilsObjectNameEXT} */

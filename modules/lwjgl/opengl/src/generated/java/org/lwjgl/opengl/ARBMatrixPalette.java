@@ -60,12 +60,6 @@ public class ARBMatrixPalette {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glCurrentPaletteMatrixARB, caps.glMatrixIndexuivARB, caps.glMatrixIndexubvARB, caps.glMatrixIndexusvARB, caps.glMatrixIndexPointerARB
-        );
-    }
-
     // --- [ glCurrentPaletteMatrixARB ] ---
 
     /**

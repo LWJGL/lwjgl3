@@ -11,8 +11,6 @@ import java.nio.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_map_buffer_range.txt">ARB_map_buffer_range</a> extension.
  * 
@@ -46,12 +44,6 @@ public class ARBMapBufferRange {
 
     protected ARBMapBufferRange() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glMapBufferRange, caps.glFlushMappedBufferRange
-        );
     }
 
     // --- [ glMapBufferRange ] ---

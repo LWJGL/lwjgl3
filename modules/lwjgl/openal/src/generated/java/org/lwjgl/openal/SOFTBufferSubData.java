@@ -29,12 +29,6 @@ public class SOFTBufferSubData {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(ALCapabilities caps) {
-        return checkFunctions(
-            caps.alBufferSubDataSOFT
-        );
-    }
-
     // --- [ alBufferSubDataSOFT ] ---
 
     public static void nalBufferSubDataSOFT(int buffer, int format, long data, int offset, int length) {

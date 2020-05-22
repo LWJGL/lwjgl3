@@ -7,7 +7,6 @@ package org.lwjgl.util.libdivide;
 
 import org.lwjgl.system.*;
 
-
 import static org.lwjgl.system.MathUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 

@@ -48,12 +48,6 @@ public class KHRGLSharing {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(CLCapabilities caps) {
-        return checkFunctions(
-            caps.clGetGLContextInfoKHR
-        );
-    }
-
     // --- [ clGetGLContextInfoKHR ] ---
 
     /**

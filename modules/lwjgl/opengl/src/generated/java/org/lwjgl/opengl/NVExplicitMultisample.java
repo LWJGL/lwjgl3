@@ -64,12 +64,6 @@ public class NVExplicitMultisample {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glGetMultisamplefvNV, caps.glSampleMaskIndexedNV, caps.glTexRenderbufferNV
-        );
-    }
-
     // --- [ glGetMultisamplefvNV ] ---
 
     public static native void nglGetMultisamplefvNV(int pname, int index, long val);

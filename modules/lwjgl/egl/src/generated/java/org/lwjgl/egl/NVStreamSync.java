@@ -31,12 +31,6 @@ public class NVStreamSync {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglCreateStreamSyncNV
-        );
-    }
-
     // --- [ eglCreateStreamSyncNV ] ---
 
     public static long neglCreateStreamSyncNV(long dpy, long stream, int type, long attrib_list) {

@@ -7,7 +7,6 @@ package org.lwjgl.util.simd;
 
 import org.lwjgl.system.*;
 
-
 /** Bindings to SSE macros. */
 public class SSE {
 

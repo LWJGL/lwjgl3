@@ -86,14 +86,6 @@ public class GLX13 extends GLX12 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLXCapabilities caps) {
-        return checkFunctions(
-            caps.glXGetFBConfigs, caps.glXChooseFBConfig, caps.glXGetFBConfigAttrib, caps.glXGetVisualFromFBConfig, caps.glXCreateWindow, caps.glXCreatePixmap, 
-            caps.glXDestroyPixmap, caps.glXCreatePbuffer, caps.glXDestroyPbuffer, caps.glXQueryDrawable, caps.glXCreateNewContext, caps.glXMakeContextCurrent, 
-            caps.glXGetCurrentReadDrawable, caps.glXQueryContext, caps.glXSelectEvent, caps.glXGetSelectedEvent
-        );
-    }
-
     // --- [ glXGetFBConfigs ] ---
 
     /**

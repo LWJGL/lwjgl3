@@ -7,8 +7,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_mesh_shader.txt">NV_mesh_shader</a> extension.
  * 
@@ -103,12 +101,6 @@ public class NVMeshShader {
 
     protected NVMeshShader() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glDrawMeshTasksNV, caps.glDrawMeshTasksIndirectNV, caps.glMultiDrawMeshTasksIndirectNV, caps.glMultiDrawMeshTasksIndirectCountNV
-        );
     }
 
     // --- [ glDrawMeshTasksNV ] ---

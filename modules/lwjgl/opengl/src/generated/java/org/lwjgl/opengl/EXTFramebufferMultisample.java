@@ -7,8 +7,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_framebuffer_multisample.txt">EXT_framebuffer_multisample</a> extension.
  * 
@@ -69,12 +67,6 @@ public class EXTFramebufferMultisample {
 
     protected EXTFramebufferMultisample() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glRenderbufferStorageMultisampleEXT
-        );
     }
 
     // --- [ glRenderbufferStorageMultisampleEXT ] ---

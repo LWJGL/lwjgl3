@@ -13,8 +13,6 @@ import org.lwjgl.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_multi_bind.txt">ARB_multi_bind</a> extension.
  * 
@@ -39,12 +37,6 @@ public class ARBMultiBind {
 
     protected ARBMultiBind() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glBindBuffersBase, caps.glBindBuffersRange, caps.glBindTextures, caps.glBindSamplers, caps.glBindImageTextures, caps.glBindVertexBuffers
-        );
     }
 
     // --- [ glBindBuffersBase ] ---

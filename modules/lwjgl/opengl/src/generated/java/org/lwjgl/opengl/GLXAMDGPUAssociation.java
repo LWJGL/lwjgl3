@@ -44,14 +44,6 @@ public class GLXAMDGPUAssociation {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLXCapabilities caps) {
-        return checkFunctions(
-            caps.glXBlitContextFramebufferAMD, caps.glXCreateAssociatedContextAMD, caps.glXCreateAssociatedContextAttribsAMD, 
-            caps.glXDeleteAssociatedContextAMD, caps.glXGetContextGPUIDAMD, caps.glXGetCurrentAssociatedContextAMD, caps.glXGetGPUIDsAMD, caps.glXGetGPUInfoAMD, 
-            caps.glXMakeAssociatedContextCurrentAMD
-        );
-    }
-
     // --- [ glXBlitContextFramebufferAMD ] ---
 
     public static void glXBlitContextFramebufferAMD(@NativeType("GLXContext") long dstCtx, @NativeType("GLint") int srcX0, @NativeType("GLint") int srcY0, @NativeType("GLint") int srcX1, @NativeType("GLint") int srcY1, @NativeType("GLint") int dstX0, @NativeType("GLint") int dstY0, @NativeType("GLint") int dstX1, @NativeType("GLint") int dstY1, @NativeType("GLbitfield") int mask, @NativeType("GLenum") int filter) {

@@ -34,12 +34,6 @@ public class AMDSamplePositions {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glSetMultisamplefvAMD
-        );
-    }
-
     // --- [ glSetMultisamplefvAMD ] ---
 
     public static native void nglSetMultisamplefvAMD(int pname, int index, long val);

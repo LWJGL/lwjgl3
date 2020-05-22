@@ -40,12 +40,6 @@ public class EXTClientSync {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglClientSignalSyncEXT
-        );
-    }
-
     // --- [ eglClientSignalSyncEXT ] ---
 
     public static int neglClientSignalSyncEXT(long dpy, long sync, long attrib_list) {

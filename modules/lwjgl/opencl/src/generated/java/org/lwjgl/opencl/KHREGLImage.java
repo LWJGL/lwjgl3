@@ -39,12 +39,6 @@ public class KHREGLImage {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(CLCapabilities caps) {
-        return checkFunctions(
-            caps.clCreateFromEGLImageKHR, caps.clEnqueueAcquireEGLObjectsKHR, caps.clEnqueueReleaseEGLObjectsKHR
-        );
-    }
-
     // --- [ clCreateFromEGLImageKHR ] ---
 
     /** Unsafe version of: {@link #clCreateFromEGLImageKHR CreateFromEGLImageKHR} */

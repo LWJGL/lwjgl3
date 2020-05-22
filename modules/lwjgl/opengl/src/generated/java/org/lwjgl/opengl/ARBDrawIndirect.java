@@ -9,8 +9,6 @@ import java.nio.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_draw_indirect.txt">ARB_draw_indirect</a> extension.
  * 
@@ -43,12 +41,6 @@ public class ARBDrawIndirect {
 
     protected ARBDrawIndirect() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glDrawArraysIndirect, caps.glDrawElementsIndirect
-        );
     }
 
     // --- [ glDrawArraysIndirect ] ---

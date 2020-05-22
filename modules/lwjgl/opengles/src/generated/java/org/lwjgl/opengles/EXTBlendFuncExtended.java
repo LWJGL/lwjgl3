@@ -56,12 +56,6 @@ public class EXTBlendFuncExtended {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glBindFragDataLocationIndexedEXT, caps.glGetFragDataIndexEXT, caps.glBindFragDataLocationEXT, caps.glGetProgramResourceLocationIndexEXT
-        );
-    }
-
     // --- [ glBindFragDataLocationIndexedEXT ] ---
 
     public static native void nglBindFragDataLocationIndexedEXT(int program, int colorNumber, int index, long name);

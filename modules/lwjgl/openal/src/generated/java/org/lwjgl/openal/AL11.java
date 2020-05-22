@@ -35,13 +35,6 @@ public class AL11 extends AL10 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(ALCapabilities caps) {
-        return checkFunctions(
-            caps.alListener3i, caps.alGetListeneriv, caps.alSource3i, caps.alListeneriv, caps.alSourceiv, caps.alBufferf, caps.alBuffer3f, caps.alBufferfv, 
-            caps.alBufferi, caps.alBuffer3i, caps.alBufferiv, caps.alGetBufferiv, caps.alGetBufferfv, caps.alSpeedOfSound
-        );
-    }
-
     // --- [ alListener3i ] ---
 
     /**

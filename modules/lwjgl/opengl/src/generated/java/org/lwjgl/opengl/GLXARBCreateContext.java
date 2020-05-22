@@ -42,12 +42,6 @@ public class GLXARBCreateContext {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLXCapabilities caps) {
-        return checkFunctions(
-            caps.glXCreateContextAttribsARB
-        );
-    }
-
     // --- [ glXCreateContextAttribsARB ] ---
 
     /** Unsafe version of: {@link #glXCreateContextAttribsARB CreateContextAttribsARB} */

@@ -61,12 +61,6 @@ public class EXTSeparateShaderObjects {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glUseShaderProgramEXT, caps.glActiveProgramEXT, caps.glCreateShaderProgramEXT
-        );
-    }
-
     // --- [ glUseShaderProgramEXT ] ---
 
     public static native void glUseShaderProgramEXT(@NativeType("GLenum") int type, @NativeType("GLuint") int program);

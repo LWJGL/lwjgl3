@@ -96,13 +96,6 @@ public class ARBVertexBlend {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glWeightfvARB, caps.glWeightbvARB, caps.glWeightubvARB, caps.glWeightsvARB, caps.glWeightusvARB, caps.glWeightivARB, caps.glWeightuivARB, 
-            caps.glWeightdvARB, caps.glWeightPointerARB, caps.glVertexBlendARB
-        );
-    }
-
     // --- [ glWeightfvARB ] ---
 
     /**

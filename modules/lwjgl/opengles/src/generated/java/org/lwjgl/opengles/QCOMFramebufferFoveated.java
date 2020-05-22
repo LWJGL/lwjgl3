@@ -52,12 +52,6 @@ public class QCOMFramebufferFoveated {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glFramebufferFoveationConfigQCOM, caps.glFramebufferFoveationParametersQCOM
-        );
-    }
-
     // --- [ glFramebufferFoveationConfigQCOM ] ---
 
     public static native void nglFramebufferFoveationConfigQCOM(int fbo, int numLayers, int focalPointsPerLayer, int requestedFeatures, long providedFeatures);

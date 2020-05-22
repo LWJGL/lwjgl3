@@ -46,14 +46,6 @@ public class WGLAMDGPUAssociation {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(WGLCapabilities caps) {
-        return checkFunctions(
-            caps.wglGetGPUIDsAMD, caps.wglGetGPUInfoAMD, caps.wglGetContextGPUIDAMD, caps.wglCreateAssociatedContextAMD, 
-            caps.wglCreateAssociatedContextAttribsAMD, caps.wglDeleteAssociatedContextAMD, caps.wglMakeAssociatedContextCurrentAMD, 
-            caps.wglGetCurrentAssociatedContextAMD
-        );
-    }
-
     // --- [ wglGetGPUIDsAMD ] ---
 
     /**

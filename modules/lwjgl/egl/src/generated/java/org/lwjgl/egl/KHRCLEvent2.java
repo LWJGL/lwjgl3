@@ -38,12 +38,6 @@ public class KHRCLEvent2 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglCreateSync64KHR
-        );
-    }
-
     // --- [ eglCreateSync64KHR ] ---
 
     public static long neglCreateSync64KHR(long dpy, int type, long attrib_list) {

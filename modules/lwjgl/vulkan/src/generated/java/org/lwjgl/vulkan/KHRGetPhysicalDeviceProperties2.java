@@ -148,18 +148,6 @@ public class KHRGetPhysicalDeviceProperties2 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsInstance(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_get_physical_device_properties2") && VK.checkExtension("VK_KHR_get_physical_device_properties2",
-               VK.isSupported(provider, "vkGetPhysicalDeviceFeatures2KHR", caps)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceProperties2KHR", caps)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceFormatProperties2KHR", caps)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceImageFormatProperties2KHR", caps)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceQueueFamilyProperties2KHR", caps)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceMemoryProperties2KHR", caps)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceSparseImageFormatProperties2KHR", caps)
-        );
-    }
-
     // --- [ vkGetPhysicalDeviceFeatures2KHR ] ---
 
     /** Unsafe version of: {@link #vkGetPhysicalDeviceFeatures2KHR GetPhysicalDeviceFeatures2KHR} */

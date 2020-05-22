@@ -1078,43 +1078,6 @@ public class VK11 extends VK10 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsInstance(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("Vulkan11") && VK.checkExtension("Vulkan11",
-               VK.isSupported(provider, "vkEnumeratePhysicalDeviceGroups", caps)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceFeatures2", caps)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceProperties2", caps)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceFormatProperties2", caps)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceImageFormatProperties2", caps)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceQueueFamilyProperties2", caps)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceMemoryProperties2", caps)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceSparseImageFormatProperties2", caps)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceExternalBufferProperties", caps)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceExternalFenceProperties", caps)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceExternalSemaphoreProperties", caps)
-        );
-    }
-
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("Vulkan11") && VK.checkExtension("Vulkan11",
-               VK.isSupported(provider, "vkBindBufferMemory2", caps)
-            && VK.isSupported(provider, "vkBindImageMemory2", caps)
-            && VK.isSupported(provider, "vkGetDeviceGroupPeerMemoryFeatures", caps)
-            && VK.isSupported(provider, "vkCmdSetDeviceMask", caps)
-            && VK.isSupported(provider, "vkCmdDispatchBase", caps)
-            && VK.isSupported(provider, "vkGetImageMemoryRequirements2", caps)
-            && VK.isSupported(provider, "vkGetBufferMemoryRequirements2", caps)
-            && VK.isSupported(provider, "vkGetImageSparseMemoryRequirements2", caps)
-            && VK.isSupported(provider, "vkTrimCommandPool", caps)
-            && VK.isSupported(provider, "vkGetDeviceQueue2", caps)
-            && VK.isSupported(provider, "vkCreateSamplerYcbcrConversion", caps)
-            && VK.isSupported(provider, "vkDestroySamplerYcbcrConversion", caps)
-            && VK.isSupported(provider, "vkCreateDescriptorUpdateTemplate", caps)
-            && VK.isSupported(provider, "vkDestroyDescriptorUpdateTemplate", caps)
-            && VK.isSupported(provider, "vkUpdateDescriptorSetWithTemplate", caps)
-            && VK.isSupported(provider, "vkGetDescriptorSetLayoutSupport", caps)
-        );
-    }
-
     // --- [ vkEnumerateInstanceVersion ] ---
 
     /** Unsafe version of: {@link #vkEnumerateInstanceVersion EnumerateInstanceVersion} */

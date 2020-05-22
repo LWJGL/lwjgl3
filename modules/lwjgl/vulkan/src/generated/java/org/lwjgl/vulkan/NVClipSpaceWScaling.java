@@ -145,12 +145,6 @@ public class NVClipSpaceWScaling {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_NV_clip_space_w_scaling") && VK.checkExtension("VK_NV_clip_space_w_scaling",
-               VK.isSupported(provider, "vkCmdSetViewportWScalingNV", caps)
-        );
-    }
-
     // --- [ vkCmdSetViewportWScalingNV ] ---
 
     /**

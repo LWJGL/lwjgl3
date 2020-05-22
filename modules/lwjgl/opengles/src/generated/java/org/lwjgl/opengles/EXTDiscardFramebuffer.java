@@ -47,12 +47,6 @@ public class EXTDiscardFramebuffer {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glDiscardFramebufferEXT
-        );
-    }
-
     // --- [ glDiscardFramebufferEXT ] ---
 
     public static native void nglDiscardFramebufferEXT(int target, int numAttachments, long attachments);

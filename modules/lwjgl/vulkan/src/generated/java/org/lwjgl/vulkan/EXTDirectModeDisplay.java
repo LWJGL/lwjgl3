@@ -57,12 +57,6 @@ public class EXTDirectModeDisplay {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsInstance(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_direct_mode_display") && VK.checkExtension("VK_EXT_direct_mode_display",
-               VK.isSupported(provider, "vkReleaseDisplayEXT", caps)
-        );
-    }
-
     // --- [ vkReleaseDisplayEXT ] ---
 
     /**

@@ -80,12 +80,6 @@ public class GLXSGIXPbuffer {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLXCapabilities caps) {
-        return checkFunctions(
-            caps.glXCreateGLXPbufferSGIX, caps.glXDestroyGLXPbufferSGIX, caps.glXQueryGLXPbufferSGIX, caps.glXSelectEventSGIX, caps.glXGetSelectedEventSGIX
-        );
-    }
-
     // --- [ glXCreateGLXPbufferSGIX ] ---
 
     /** Unsafe version of: {@link #glXCreateGLXPbufferSGIX CreateGLXPbufferSGIX} */

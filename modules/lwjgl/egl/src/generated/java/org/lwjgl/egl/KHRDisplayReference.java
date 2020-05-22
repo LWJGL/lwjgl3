@@ -42,12 +42,6 @@ public class KHRDisplayReference {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglQueryDisplayAttribKHR
-        );
-    }
-
     // --- [ eglQueryDisplayAttribKHR ] ---
 
     public static int neglQueryDisplayAttribKHR(long dpy, int name, long value) {

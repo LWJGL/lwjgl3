@@ -9,7 +9,6 @@ import java.nio.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
@@ -30,12 +29,6 @@ public class EXTDebugMarker {
 
     protected EXTDebugMarker() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glInsertEventMarkerEXT, caps.glPushGroupMarkerEXT, caps.glPopGroupMarkerEXT
-        );
     }
 
     // --- [ glInsertEventMarkerEXT ] ---

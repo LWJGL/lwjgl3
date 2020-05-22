@@ -78,12 +78,6 @@ public class EXTDrawBuffers {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glDrawBuffersEXT
-        );
-    }
-
     // --- [ glDrawBuffersEXT ] ---
 
     public static native void nglDrawBuffersEXT(int n, long bufs);

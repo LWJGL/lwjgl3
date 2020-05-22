@@ -138,12 +138,6 @@ public class NVCooperativeMatrix {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsInstance(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_NV_cooperative_matrix") && VK.checkExtension("VK_NV_cooperative_matrix",
-               VK.isSupported(provider, "vkGetPhysicalDeviceCooperativeMatrixPropertiesNV", caps)
-        );
-    }
-
     // --- [ vkGetPhysicalDeviceCooperativeMatrixPropertiesNV ] ---
 
     /**

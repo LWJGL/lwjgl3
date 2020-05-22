@@ -306,20 +306,6 @@ public class INTELPerformanceQuery {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_INTEL_performance_query") && VK.checkExtension("VK_INTEL_performance_query",
-               VK.isSupported(provider, "vkInitializePerformanceApiINTEL", caps)
-            && VK.isSupported(provider, "vkUninitializePerformanceApiINTEL", caps)
-            && VK.isSupported(provider, "vkCmdSetPerformanceMarkerINTEL", caps)
-            && VK.isSupported(provider, "vkCmdSetPerformanceStreamMarkerINTEL", caps)
-            && VK.isSupported(provider, "vkCmdSetPerformanceOverrideINTEL", caps)
-            && VK.isSupported(provider, "vkAcquirePerformanceConfigurationINTEL", caps)
-            && VK.isSupported(provider, "vkReleasePerformanceConfigurationINTEL", caps)
-            && VK.isSupported(provider, "vkQueueSetPerformanceConfigurationINTEL", caps)
-            && VK.isSupported(provider, "vkGetPerformanceParameterINTEL", caps)
-        );
-    }
-
     // --- [ vkInitializePerformanceApiINTEL ] ---
 
     /** Unsafe version of: {@link #vkInitializePerformanceApiINTEL InitializePerformanceApiINTEL} */

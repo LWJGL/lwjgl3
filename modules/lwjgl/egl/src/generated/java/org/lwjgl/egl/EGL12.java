@@ -53,12 +53,6 @@ public class EGL12 extends EGL11 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglBindAPI, caps.eglQueryAPI, caps.eglCreatePbufferFromClientBuffer, caps.eglReleaseThread, caps.eglWaitClient
-        );
-    }
-
     // --- [ eglBindAPI ] ---
 
     /** <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglBindAPI.xhtml">Reference Page</a> */

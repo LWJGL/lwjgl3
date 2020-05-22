@@ -49,12 +49,6 @@ public class OESGetProgramBinary {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glGetProgramBinaryOES, caps.glProgramBinaryOES
-        );
-    }
-
     // --- [ glGetProgramBinaryOES ] ---
 
     public static native void nglGetProgramBinaryOES(int program, int bufSize, long length, long binaryFormat, long binary);

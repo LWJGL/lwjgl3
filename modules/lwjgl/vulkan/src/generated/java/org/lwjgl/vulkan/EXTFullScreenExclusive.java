@@ -118,20 +118,6 @@ public class EXTFullScreenExclusive {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsInstance(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_full_screen_exclusive") && VK.checkExtension("VK_EXT_full_screen_exclusive",
-               VK.isSupported(provider, "vkGetPhysicalDeviceSurfacePresentModes2EXT", caps)
-        );
-    }
-
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_full_screen_exclusive") && VK.checkExtension("VK_EXT_full_screen_exclusive",
-               VK.isSupported(provider, "vkAcquireFullScreenExclusiveModeEXT", caps)
-            && VK.isSupported(provider, "vkReleaseFullScreenExclusiveModeEXT", caps)
-            && VK.isSupported(provider, "vkGetDeviceGroupSurfacePresentModes2EXT", caps, ext.contains("Vulkan11") || ext.contains("VK_KHR_device_group"))
-        );
-    }
-
     // --- [ vkGetPhysicalDeviceSurfacePresentModes2EXT ] ---
 
     /**

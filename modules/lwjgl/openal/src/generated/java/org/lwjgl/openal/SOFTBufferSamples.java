@@ -103,12 +103,6 @@ public class SOFTBufferSamples {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(ALCapabilities caps) {
-        return checkFunctions(
-            caps.alBufferSamplesSOFT, caps.alBufferSubSamplesSOFT, caps.alGetBufferSamplesSOFT, caps.alIsBufferFormatSupportedSOFT
-        );
-    }
-
     // --- [ alBufferSamplesSOFT ] ---
 
     /** Unsafe version of: {@link #alBufferSamplesSOFT BufferSamplesSOFT} */

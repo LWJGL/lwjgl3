@@ -54,15 +54,6 @@ public class ARBBindlessTexture {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glGetTextureHandleARB, caps.glGetTextureSamplerHandleARB, caps.glMakeTextureHandleResidentARB, caps.glMakeTextureHandleNonResidentARB, 
-            caps.glGetImageHandleARB, caps.glMakeImageHandleResidentARB, caps.glMakeImageHandleNonResidentARB, caps.glUniformHandleui64ARB, 
-            caps.glUniformHandleui64vARB, caps.glProgramUniformHandleui64ARB, caps.glProgramUniformHandleui64vARB, caps.glIsTextureHandleResidentARB, 
-            caps.glIsImageHandleResidentARB, caps.glVertexAttribL1ui64ARB, caps.glVertexAttribL1ui64vARB, caps.glGetVertexAttribLui64vARB
-        );
-    }
-
     // --- [ glGetTextureHandleARB ] ---
 
     /**

@@ -118,12 +118,6 @@ public class KHRExternalSemaphoreCapabilities {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsInstance(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_external_semaphore_capabilities") && VK.checkExtension("VK_KHR_external_semaphore_capabilities",
-               VK.isSupported(provider, "vkGetPhysicalDeviceExternalSemaphorePropertiesKHR", caps)
-        );
-    }
-
     // --- [ vkGetPhysicalDeviceExternalSemaphorePropertiesKHR ] ---
 
     /** Unsafe version of: {@link #vkGetPhysicalDeviceExternalSemaphorePropertiesKHR GetPhysicalDeviceExternalSemaphorePropertiesKHR} */

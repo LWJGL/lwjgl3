@@ -29,12 +29,6 @@ public class OESEGLImage {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glEGLImageTargetTexture2DOES, caps.glEGLImageTargetRenderbufferStorageOES
-        );
-    }
-
     // --- [ glEGLImageTargetTexture2DOES ] ---
 
     public static native void nglEGLImageTargetTexture2DOES(int target, long image);

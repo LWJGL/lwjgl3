@@ -52,12 +52,6 @@ public class EXTMemoryObjectWin32 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glImportMemoryWin32HandleEXT, caps.glImportMemoryWin32NameEXT
-        );
-    }
-
     // --- [ glImportMemoryWin32HandleEXT ] ---
 
     public static native void nglImportMemoryWin32HandleEXT(int memory, long size, int handleType, long handle);

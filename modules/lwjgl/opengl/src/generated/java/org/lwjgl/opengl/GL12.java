@@ -11,8 +11,6 @@ import java.nio.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * The OpenGL functionality up to version 1.2. Includes the deprecated symbols of the Compatibility Profile.
  * 
@@ -140,12 +138,6 @@ public class GL12 extends GL11 {
 
     protected GL12() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glTexImage3D, caps.glTexSubImage3D, caps.glCopyTexSubImage3D, caps.glDrawRangeElements
-        );
     }
 
     // --- [ glTexImage3D ] ---

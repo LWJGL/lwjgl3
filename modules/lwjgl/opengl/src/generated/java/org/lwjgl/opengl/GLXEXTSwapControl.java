@@ -27,12 +27,6 @@ public class GLXEXTSwapControl {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLXCapabilities caps) {
-        return checkFunctions(
-            caps.glXSwapIntervalEXT
-        );
-    }
-
     // --- [ glXSwapIntervalEXT ] ---
 
     /**

@@ -98,18 +98,6 @@ public class NVGPUShader5 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glUniform1i64NV, caps.glUniform2i64NV, caps.glUniform3i64NV, caps.glUniform4i64NV, caps.glUniform1i64vNV, caps.glUniform2i64vNV, 
-            caps.glUniform3i64vNV, caps.glUniform4i64vNV, caps.glUniform1ui64NV, caps.glUniform2ui64NV, caps.glUniform3ui64NV, caps.glUniform4ui64NV, 
-            caps.glUniform1ui64vNV, caps.glUniform2ui64vNV, caps.glUniform3ui64vNV, caps.glUniform4ui64vNV, caps.glGetUniformi64vNV, caps.glGetUniformui64vNV, 
-            caps.glProgramUniform1i64NV, caps.glProgramUniform2i64NV, caps.glProgramUniform3i64NV, caps.glProgramUniform4i64NV, caps.glProgramUniform1i64vNV, 
-            caps.glProgramUniform2i64vNV, caps.glProgramUniform3i64vNV, caps.glProgramUniform4i64vNV, caps.glProgramUniform1ui64NV, 
-            caps.glProgramUniform2ui64NV, caps.glProgramUniform3ui64NV, caps.glProgramUniform4ui64NV, caps.glProgramUniform1ui64vNV, 
-            caps.glProgramUniform2ui64vNV, caps.glProgramUniform3ui64vNV, caps.glProgramUniform4ui64vNV
-        );
-    }
-
     // --- [ glUniform1i64NV ] ---
 
     public static native void glUniform1i64NV(@NativeType("GLint") int location, @NativeType("GLint64") long x);

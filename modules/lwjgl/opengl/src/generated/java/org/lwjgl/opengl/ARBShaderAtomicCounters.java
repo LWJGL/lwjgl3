@@ -9,8 +9,6 @@ import java.nio.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_atomic_counters.txt">ARB_shader_atomic_counters</a> extension.
  * 
@@ -97,12 +95,6 @@ public class ARBShaderAtomicCounters {
 
     protected ARBShaderAtomicCounters() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glGetActiveAtomicCounterBufferiv
-        );
     }
 
     // --- [ glGetActiveAtomicCounterBufferiv ] ---

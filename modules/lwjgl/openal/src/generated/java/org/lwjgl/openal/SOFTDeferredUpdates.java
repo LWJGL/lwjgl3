@@ -27,12 +27,6 @@ public class SOFTDeferredUpdates {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(ALCapabilities caps) {
-        return checkFunctions(
-            caps.alDeferUpdatesSOFT, caps.alProcessUpdatesSOFT
-        );
-    }
-
     // --- [ alDeferUpdatesSOFT ] ---
 
     /**

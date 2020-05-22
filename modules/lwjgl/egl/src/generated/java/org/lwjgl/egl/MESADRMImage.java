@@ -38,12 +38,6 @@ public class MESADRMImage {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglCreateDRMImageMESA, caps.eglExportDRMImageMESA
-        );
-    }
-
     // --- [ eglCreateDRMImageMESA ] ---
 
     public static long neglCreateDRMImageMESA(long dpy, long attrib_list) {

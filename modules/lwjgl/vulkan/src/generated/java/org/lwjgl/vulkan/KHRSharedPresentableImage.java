@@ -87,12 +87,6 @@ public class KHRSharedPresentableImage {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_shared_presentable_image") && VK.checkExtension("VK_KHR_shared_presentable_image",
-               VK.isSupported(provider, "vkGetSwapchainStatusKHR", caps)
-        );
-    }
-
     // --- [ vkGetSwapchainStatusKHR ] ---
 
     /**

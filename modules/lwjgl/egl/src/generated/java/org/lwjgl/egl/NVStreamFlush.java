@@ -36,12 +36,6 @@ public class NVStreamFlush {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglStreamFlush
-        );
-    }
-
     // --- [ eglStreamFlush ] ---
 
     @NativeType("EGLBoolean")

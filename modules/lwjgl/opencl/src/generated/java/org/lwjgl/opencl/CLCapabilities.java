@@ -8,6 +8,9 @@ package org.lwjgl.opencl;
 import org.lwjgl.system.*;
 import java.util.Set;
 
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.Checks.*;
+
 /**
  * Defines the capabilities of an OpenCL platform or device.
  * 
@@ -1329,18 +1332,18 @@ public class CLCapabilities {
         clTerminateContextKHR = functions[148];
         clGetDeviceImageInfoQCOM = functions[149];
 
-        OpenCL10 = ext.contains("OpenCL10") && CL.checkExtension("OpenCL10", CL10.isAvailable(this));
-        OpenCL10GL = ext.contains("OpenCL10GL") && CL.checkExtension("OpenCL10GL", CL10GL.isAvailable(this));
-        OpenCL11 = ext.contains("OpenCL11") && CL.checkExtension("OpenCL11", CL11.isAvailable(this));
-        OpenCL12 = ext.contains("OpenCL12") && CL.checkExtension("OpenCL12", CL12.isAvailable(this));
-        OpenCL12GL = ext.contains("OpenCL12GL") && CL.checkExtension("OpenCL12GL", CL12GL.isAvailable(this));
-        OpenCL20 = ext.contains("OpenCL20") && CL.checkExtension("OpenCL20", CL20.isAvailable(this));
-        OpenCL21 = ext.contains("OpenCL21") && CL.checkExtension("OpenCL21", CL21.isAvailable(this));
-        OpenCL22 = ext.contains("OpenCL22") && CL.checkExtension("OpenCL22", CL22.isAvailable(this));
+        OpenCL10 = check_CL10(ext);
+        OpenCL10GL = check_CL10GL(ext);
+        OpenCL11 = check_CL11(ext);
+        OpenCL12 = check_CL12(ext);
+        OpenCL12GL = check_CL12GL(ext);
+        OpenCL20 = check_CL20(ext);
+        OpenCL21 = check_CL21(ext);
+        OpenCL22 = check_CL22(ext);
         cl_altera_compiler_mode = ext.contains("cl_altera_compiler_mode");
         cl_altera_device_temperature = ext.contains("cl_altera_device_temperature");
-        cl_altera_live_object_tracking = ext.contains("cl_altera_live_object_tracking") && CL.checkExtension("cl_altera_live_object_tracking", ALTERALiveObjectTracking.isAvailable(this));
-        cl_amd_bus_addressable_memory = ext.contains("cl_amd_bus_addressable_memory") && CL.checkExtension("cl_amd_bus_addressable_memory", AMDBusAddressableMemory.isAvailable(this));
+        cl_altera_live_object_tracking = check_altera_live_object_tracking(ext);
+        cl_amd_bus_addressable_memory = check_amd_bus_addressable_memory(ext);
         cl_amd_compile_options = ext.contains("cl_amd_compile_options");
         cl_amd_device_attribute_query = ext.contains("cl_amd_device_attribute_query");
         cl_amd_device_board_name = ext.contains("cl_amd_device_board_name");
@@ -1357,20 +1360,20 @@ public class CLCapabilities {
         cl_amd_printf = ext.contains("cl_amd_printf");
         cl_amd_vec3 = ext.contains("cl_amd_vec3");
         cl_APPLE_biased_fixed_point_image_formats = ext.contains("cl_APPLE_biased_fixed_point_image_formats");
-        cl_APPLE_command_queue_priority = ext.contains("cl_APPLE_command_queue_priority") && CL.checkExtension("cl_APPLE_command_queue_priority", APPLECommandQueuePriority.isAvailable(this));
-        cl_APPLE_command_queue_select_compute_units = ext.contains("cl_APPLE_command_queue_select_compute_units") && CL.checkExtension("cl_APPLE_command_queue_select_compute_units", APPLECommandQueueSelectComputeUnits.isAvailable(this));
-        cl_APPLE_ContextLoggingFunctions = ext.contains("cl_APPLE_ContextLoggingFunctions") && CL.checkExtension("cl_APPLE_ContextLoggingFunctions", APPLEContextLoggingFunctions.isAvailable(this));
+        cl_APPLE_command_queue_priority = check_APPLE_command_queue_priority(ext);
+        cl_APPLE_command_queue_select_compute_units = check_APPLE_command_queue_select_compute_units(ext);
+        cl_APPLE_ContextLoggingFunctions = check_APPLE_ContextLoggingFunctions(ext);
         cl_APPLE_fixed_alpha_channel_orders = ext.contains("cl_APPLE_fixed_alpha_channel_orders");
         cl_APPLE_fp64_basic_ops = ext.contains("cl_APPLE_fp64_basic_ops");
-        cl_APPLE_gl_sharing = ext.contains("cl_APPLE_gl_sharing") && CL.checkExtension("cl_APPLE_gl_sharing", APPLEGLSharing.isAvailable(this));
+        cl_APPLE_gl_sharing = check_APPLE_gl_sharing(ext);
         cl_APPLE_query_kernel_names = ext.contains("cl_APPLE_query_kernel_names");
         cl_arm_core_id = ext.contains("cl_arm_core_id");
         cl_arm_printf = ext.contains("cl_arm_printf");
         cl_ext_atomic_counters_32 = ext.contains("cl_ext_atomic_counters_32");
         cl_ext_atomic_counters_64 = ext.contains("cl_ext_atomic_counters_64");
-        cl_ext_device_fission = ext.contains("cl_ext_device_fission") && CL.checkExtension("cl_ext_device_fission", EXTDeviceFission.isAvailable(this));
-        cl_ext_migrate_memobject = ext.contains("cl_ext_migrate_memobject") && CL.checkExtension("cl_ext_migrate_memobject", EXTMigrateMemobject.isAvailable(this));
-        cl_intel_accelerator = ext.contains("cl_intel_accelerator") && CL.checkExtension("cl_intel_accelerator", INTELAccelerator.isAvailable(this));
+        cl_ext_device_fission = check_ext_device_fission(ext);
+        cl_ext_migrate_memobject = check_ext_migrate_memobject(ext);
+        cl_intel_accelerator = check_intel_accelerator(ext);
         cl_intel_advanced_motion_estimation = ext.contains("cl_intel_advanced_motion_estimation");
         cl_intel_device_partition_by_names = ext.contains("cl_intel_device_partition_by_names");
         cl_intel_device_side_avc_motion_estimation = ext.contains("cl_intel_device_side_avc_motion_estimation");
@@ -1383,22 +1386,22 @@ public class CLCapabilities {
         cl_intel_printf = ext.contains("cl_intel_printf");
         cl_intel_required_subgroup_size = ext.contains("cl_intel_required_subgroup_size");
         cl_intel_simultaneous_sharing = ext.contains("cl_intel_simultaneous_sharing");
-        cl_intel_subgroups = ext.contains("cl_intel_subgroups") && CL.checkExtension("cl_intel_subgroups", INTELSubgroups.isAvailable(this));
+        cl_intel_subgroups = check_intel_subgroups(ext);
         cl_intel_subgroups_short = ext.contains("cl_intel_subgroups_short");
         cl_intel_thread_local_exec = ext.contains("cl_intel_thread_local_exec");
-        cl_intel_va_api_media_sharing = ext.contains("cl_intel_va_api_media_sharing") && CL.checkExtension("cl_intel_va_api_media_sharing", INTELVAAPIMediaSharing.isAvailable(this));
+        cl_intel_va_api_media_sharing = check_intel_va_api_media_sharing(ext);
         cl_khr_3d_image_writes = ext.contains("cl_khr_3d_image_writes");
         cl_khr_byte_addressable_store = ext.contains("cl_khr_byte_addressable_store");
         cl_khr_depth_images = ext.contains("cl_khr_depth_images");
         cl_khr_device_enqueue_local_arg_types = ext.contains("cl_khr_device_enqueue_local_arg_types");
-        cl_khr_egl_event = ext.contains("cl_khr_egl_event") && CL.checkExtension("cl_khr_egl_event", KHREGLEvent.isAvailable(this));
-        cl_khr_egl_image = ext.contains("cl_khr_egl_image") && CL.checkExtension("cl_khr_egl_image", KHREGLImage.isAvailable(this));
+        cl_khr_egl_event = check_khr_egl_event(ext);
+        cl_khr_egl_image = check_khr_egl_image(ext);
         cl_khr_fp16 = ext.contains("cl_khr_fp16");
         cl_khr_fp64 = ext.contains("cl_khr_fp64");
         cl_khr_gl_depth_images = ext.contains("cl_khr_gl_depth_images");
-        cl_khr_gl_event = ext.contains("cl_khr_gl_event") && CL.checkExtension("cl_khr_gl_event", KHRGLEvent.isAvailable(this));
+        cl_khr_gl_event = check_khr_gl_event(ext);
         cl_khr_gl_msaa_sharing = ext.contains("cl_khr_gl_msaa_sharing");
-        cl_khr_gl_sharing = ext.contains("cl_khr_gl_sharing") && CL.checkExtension("cl_khr_gl_sharing", KHRGLSharing.isAvailable(this));
+        cl_khr_gl_sharing = check_khr_gl_sharing(ext);
         cl_khr_global_int32_base_atomics = ext.contains("cl_khr_global_int32_base_atomics");
         cl_khr_global_int32_extended_atomics = ext.contains("cl_khr_global_int32_extended_atomics");
         cl_khr_icd = ext.contains("cl_khr_icd");
@@ -1414,13 +1417,188 @@ public class CLCapabilities {
         cl_khr_select_fprounding_mode = ext.contains("cl_khr_select_fprounding_mode");
         cl_khr_spir = ext.contains("cl_khr_spir");
         cl_khr_subgroup_named_barrier = ext.contains("cl_khr_subgroup_named_barrier");
-        cl_khr_terminate_context = ext.contains("cl_khr_terminate_context") && CL.checkExtension("cl_khr_terminate_context", KHRTerminateContext.isAvailable(this));
+        cl_khr_terminate_context = check_khr_terminate_context(ext);
         cl_khr_throttle_hints = ext.contains("cl_khr_throttle_hints");
         cl_nv_compiler_options = ext.contains("cl_nv_compiler_options");
         cl_nv_device_attribute_query = ext.contains("cl_nv_device_attribute_query");
         cl_nv_pragma_unroll = ext.contains("cl_nv_pragma_unroll");
-        cl_qcom_ext_host_ptr = ext.contains("cl_qcom_ext_host_ptr") && CL.checkExtension("cl_qcom_ext_host_ptr", QCOMEXTHostPtr.isAvailable(this));
+        cl_qcom_ext_host_ptr = check_qcom_ext_host_ptr(ext);
         cl_qcom_ext_host_ptr_iocoherent = ext.contains("cl_qcom_ext_host_ptr_iocoherent");
+    }
+
+    private static boolean checkExtension(String extension, boolean supported) {
+        if (supported) {
+            return true;
+        }
+
+        apiLog("[CL] " + extension + " was reported as available but an entry point is missing.");
+        return false;
+    }
+
+    private boolean check_CL10(java.util.Set<String> ext) {
+        return ext.contains("OpenCL10") && checkExtension("OpenCL10", checkFunctions(
+            clGetPlatformIDs, clGetPlatformInfo, clGetDeviceIDs, clGetDeviceInfo, clCreateContext, clCreateContextFromType, clRetainContext, clReleaseContext, 
+            clGetContextInfo, clCreateCommandQueue, clRetainCommandQueue, clReleaseCommandQueue, clGetCommandQueueInfo, clCreateBuffer, clEnqueueReadBuffer, 
+            clEnqueueWriteBuffer, clEnqueueCopyBuffer, clEnqueueMapBuffer, clCreateImage2D, clCreateImage3D, clGetSupportedImageFormats, clEnqueueReadImage, 
+            clEnqueueWriteImage, clEnqueueCopyImage, clEnqueueCopyImageToBuffer, clEnqueueCopyBufferToImage, clEnqueueMapImage, clGetImageInfo, 
+            clRetainMemObject, clReleaseMemObject, clEnqueueUnmapMemObject, clGetMemObjectInfo, clCreateSampler, clRetainSampler, clReleaseSampler, 
+            clGetSamplerInfo, clCreateProgramWithSource, clCreateProgramWithBinary, clRetainProgram, clReleaseProgram, clBuildProgram, clUnloadCompiler, 
+            clGetProgramInfo, clGetProgramBuildInfo, clCreateKernel, clCreateKernelsInProgram, clRetainKernel, clReleaseKernel, clSetKernelArg, clGetKernelInfo, 
+            clGetKernelWorkGroupInfo, clEnqueueNDRangeKernel, clEnqueueTask, clEnqueueNativeKernel, clWaitForEvents, clGetEventInfo, clRetainEvent, 
+            clReleaseEvent, clEnqueueMarker, clEnqueueBarrier, clEnqueueWaitForEvents, clGetEventProfilingInfo, clFlush, clFinish, 
+            clGetExtensionFunctionAddress
+        ));
+    }
+
+    private boolean check_CL10GL(java.util.Set<String> ext) {
+        return ext.contains("OpenCL10GL") && checkExtension("OpenCL10GL", checkFunctions(
+            clCreateFromGLBuffer, clCreateFromGLTexture2D, clCreateFromGLTexture3D, clCreateFromGLRenderbuffer, clGetGLObjectInfo, clGetGLTextureInfo, 
+            clEnqueueAcquireGLObjects, clEnqueueReleaseGLObjects
+        ));
+    }
+
+    private boolean check_CL11(java.util.Set<String> ext) {
+        return ext.contains("OpenCL11") && checkExtension("OpenCL11", checkFunctions(
+            clCreateSubBuffer, clSetMemObjectDestructorCallback, clEnqueueReadBufferRect, clEnqueueWriteBufferRect, clEnqueueCopyBufferRect, clCreateUserEvent, 
+            clSetUserEventStatus, clSetEventCallback
+        ));
+    }
+
+    private boolean check_CL12(java.util.Set<String> ext) {
+        return ext.contains("OpenCL12") && checkExtension("OpenCL12", checkFunctions(
+            clGetExtensionFunctionAddressForPlatform, clRetainDevice, clReleaseDevice, clCreateSubDevices, clCreateImage, clCreateProgramWithBuiltInKernels, 
+            clCompileProgram, clLinkProgram, clUnloadPlatformCompiler, clGetKernelArgInfo, clEnqueueFillBuffer, clEnqueueFillImage, clEnqueueMigrateMemObjects, 
+            clEnqueueMarkerWithWaitList, clEnqueueBarrierWithWaitList
+        ));
+    }
+
+    private boolean check_CL12GL(java.util.Set<String> ext) {
+        return ext.contains("OpenCL12GL") && checkExtension("OpenCL12GL", checkFunctions(
+            clCreateFromGLTexture
+        ));
+    }
+
+    private boolean check_CL20(java.util.Set<String> ext) {
+        return ext.contains("OpenCL20") && checkExtension("OpenCL20", checkFunctions(
+            clCreateCommandQueueWithProperties, clCreatePipe, clGetPipeInfo, clSVMAlloc, clSVMFree, clEnqueueSVMFree, clEnqueueSVMMemcpy, clEnqueueSVMMemFill, 
+            clEnqueueSVMMap, clEnqueueSVMUnmap, clSetKernelArgSVMPointer, clSetKernelExecInfo, clCreateSamplerWithProperties
+        ));
+    }
+
+    private boolean check_CL21(java.util.Set<String> ext) {
+        return ext.contains("OpenCL21") && checkExtension("OpenCL21", checkFunctions(
+            clSetDefaultDeviceCommandQueue, clGetDeviceAndHostTimer, clGetHostTimer, clCreateProgramWithIL, clCloneKernel, clGetKernelSubGroupInfo, 
+            clEnqueueSVMMigrateMem
+        ));
+    }
+
+    private boolean check_CL22(java.util.Set<String> ext) {
+        return ext.contains("OpenCL22") && checkExtension("OpenCL22", checkFunctions(
+            clSetProgramReleaseCallback, clSetProgramSpecializationConstant
+        ));
+    }
+
+    private boolean check_altera_live_object_tracking(java.util.Set<String> ext) {
+        return ext.contains("cl_altera_live_object_tracking") && checkExtension("cl_altera_live_object_tracking", checkFunctions(
+            clTrackLiveObjectsAltera, clReportLiveObjectsAltera
+        ));
+    }
+
+    private boolean check_amd_bus_addressable_memory(java.util.Set<String> ext) {
+        return ext.contains("cl_amd_bus_addressable_memory") && checkExtension("cl_amd_bus_addressable_memory", checkFunctions(
+            clEnqueueWaitSignalAMD, clEnqueueWriteSignalAMD, clEnqueueMakeBuffersResidentAMD
+        ));
+    }
+
+    private boolean check_APPLE_command_queue_priority(java.util.Set<String> ext) {
+        return ext.contains("cl_APPLE_command_queue_priority") && checkExtension("cl_APPLE_command_queue_priority", checkFunctions(
+            clCreateCommandQueueWithPropertiesAPPLE
+        ));
+    }
+
+    private boolean check_APPLE_command_queue_select_compute_units(java.util.Set<String> ext) {
+        return ext.contains("cl_APPLE_command_queue_select_compute_units") && checkExtension("cl_APPLE_command_queue_select_compute_units", checkFunctions(
+            clCreateCommandQueueWithPropertiesAPPLE
+        ));
+    }
+
+    private boolean check_APPLE_ContextLoggingFunctions(java.util.Set<String> ext) {
+        return ext.contains("cl_APPLE_ContextLoggingFunctions") && checkExtension("cl_APPLE_ContextLoggingFunctions", checkFunctions(
+            clLogMessagesToSystemLogAPPLE, clLogMessagesToStdoutAPPLE, clLogMessagesToStderrAPPLE
+        ));
+    }
+
+    private boolean check_APPLE_gl_sharing(java.util.Set<String> ext) {
+        return ext.contains("cl_APPLE_gl_sharing") && checkExtension("cl_APPLE_gl_sharing", checkFunctions(
+            clGetGLContextInfoAPPLE
+        ));
+    }
+
+    private boolean check_ext_device_fission(java.util.Set<String> ext) {
+        return ext.contains("cl_ext_device_fission") && checkExtension("cl_ext_device_fission", checkFunctions(
+            clReleaseDeviceEXT, clRetainDeviceEXT, clCreateSubDevicesEXT
+        ));
+    }
+
+    private boolean check_ext_migrate_memobject(java.util.Set<String> ext) {
+        return ext.contains("cl_ext_migrate_memobject") && checkExtension("cl_ext_migrate_memobject", checkFunctions(
+            clEnqueueMigrateMemObjectEXT
+        ));
+    }
+
+    private boolean check_intel_accelerator(java.util.Set<String> ext) {
+        return ext.contains("cl_intel_accelerator") && checkExtension("cl_intel_accelerator", checkFunctions(
+            clCreateAcceleratorINTEL, clRetainAcceleratorINTEL, clReleaseAcceleratorINTEL, clGetAcceleratorInfoINTEL
+        ));
+    }
+
+    private boolean check_intel_subgroups(java.util.Set<String> ext) {
+        return ext.contains("cl_intel_subgroups") && checkExtension("cl_intel_subgroups", checkFunctions(
+            clGetKernelSubGroupInfoKHR
+        ));
+    }
+
+    private boolean check_intel_va_api_media_sharing(java.util.Set<String> ext) {
+        return ext.contains("cl_intel_va_api_media_sharing") && checkExtension("cl_intel_va_api_media_sharing", checkFunctions(
+            clGetDeviceIDsFromVA_APIMediaAdapterINTEL, clCreateFromVA_APIMediaSurfaceINTEL, clEnqueueAcquireVA_APIMediaSurfacesINTEL, 
+            clEnqueueReleaseVA_APIMediaSurfacesINTEL
+        ));
+    }
+
+    private boolean check_khr_egl_event(java.util.Set<String> ext) {
+        return ext.contains("cl_khr_egl_event") && checkExtension("cl_khr_egl_event", checkFunctions(
+            clCreateEventFromEGLSyncKHR
+        ));
+    }
+
+    private boolean check_khr_egl_image(java.util.Set<String> ext) {
+        return ext.contains("cl_khr_egl_image") && checkExtension("cl_khr_egl_image", checkFunctions(
+            clCreateFromEGLImageKHR, clEnqueueAcquireEGLObjectsKHR, clEnqueueReleaseEGLObjectsKHR
+        ));
+    }
+
+    private boolean check_khr_gl_event(java.util.Set<String> ext) {
+        return ext.contains("cl_khr_gl_event") && checkExtension("cl_khr_gl_event", checkFunctions(
+            clCreateEventFromGLsyncKHR
+        ));
+    }
+
+    private boolean check_khr_gl_sharing(java.util.Set<String> ext) {
+        return ext.contains("cl_khr_gl_sharing") && checkExtension("cl_khr_gl_sharing", checkFunctions(
+            clGetGLContextInfoKHR
+        ));
+    }
+
+    private boolean check_khr_terminate_context(java.util.Set<String> ext) {
+        return ext.contains("cl_khr_terminate_context") && checkExtension("cl_khr_terminate_context", checkFunctions(
+            clTerminateContextKHR
+        ));
+    }
+
+    private boolean check_qcom_ext_host_ptr(java.util.Set<String> ext) {
+        return ext.contains("cl_qcom_ext_host_ptr") && checkExtension("cl_qcom_ext_host_ptr", checkFunctions(
+            clGetDeviceImageInfoQCOM
+        ));
     }
 
 }

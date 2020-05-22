@@ -114,13 +114,6 @@ public class EXTTextureInteger {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glClearColorIiEXT, caps.glClearColorIuiEXT, caps.glTexParameterIivEXT, caps.glTexParameterIuivEXT, caps.glGetTexParameterIivEXT, 
-            caps.glGetTexParameterIuivEXT
-        );
-    }
-
     // --- [ glClearColorIiEXT ] ---
 
     public static native void glClearColorIiEXT(@NativeType("GLint") int r, @NativeType("GLint") int g, @NativeType("GLint") int b, @NativeType("GLint") int a);

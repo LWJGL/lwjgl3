@@ -566,24 +566,6 @@ public class VK12 extends VK10 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("Vulkan12") && VK.checkExtension("Vulkan12",
-               VK.isSupported(provider, "vkCmdDrawIndirectCount", caps)
-            && VK.isSupported(provider, "vkCmdDrawIndexedIndirectCount", caps)
-            && VK.isSupported(provider, "vkCreateRenderPass2", caps)
-            && VK.isSupported(provider, "vkCmdBeginRenderPass2", caps)
-            && VK.isSupported(provider, "vkCmdNextSubpass2", caps)
-            && VK.isSupported(provider, "vkCmdEndRenderPass2", caps)
-            && VK.isSupported(provider, "vkResetQueryPool", caps)
-            && VK.isSupported(provider, "vkGetSemaphoreCounterValue", caps)
-            && VK.isSupported(provider, "vkWaitSemaphores", caps)
-            && VK.isSupported(provider, "vkSignalSemaphore", caps)
-            && VK.isSupported(provider, "vkGetBufferDeviceAddress", caps)
-            && VK.isSupported(provider, "vkGetBufferOpaqueCaptureAddress", caps)
-            && VK.isSupported(provider, "vkGetDeviceMemoryOpaqueCaptureAddress", caps)
-        );
-    }
-
     // --- [ vkCmdDrawIndirectCount ] ---
 
     /**

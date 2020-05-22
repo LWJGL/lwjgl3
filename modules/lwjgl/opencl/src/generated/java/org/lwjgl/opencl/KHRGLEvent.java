@@ -34,12 +34,6 @@ public class KHRGLEvent {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(CLCapabilities caps) {
-        return checkFunctions(
-            caps.clCreateEventFromGLsyncKHR
-        );
-    }
-
     // --- [ clCreateEventFromGLsyncKHR ] ---
 
     /** Unsafe version of: {@link #clCreateEventFromGLsyncKHR CreateEventFromGLsyncKHR} */

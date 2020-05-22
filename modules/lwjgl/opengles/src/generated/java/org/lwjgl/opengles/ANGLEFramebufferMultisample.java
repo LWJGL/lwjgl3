@@ -7,8 +7,6 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ANGLE/ANGLE_framebuffer_multisample.txt">ANGLE_framebuffer_multisample</a> extension.
  * 
@@ -43,12 +41,6 @@ public class ANGLEFramebufferMultisample {
 
     protected ANGLEFramebufferMultisample() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glRenderbufferStorageMultisampleANGLE
-        );
     }
 
     // --- [ glRenderbufferStorageMultisampleANGLE ] ---

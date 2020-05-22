@@ -7,8 +7,6 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_copy_image.txt">OES_copy_image</a> extension.
  * 
@@ -32,12 +30,6 @@ public class OESCopyImage {
 
     protected OESCopyImage() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glCopyImageSubDataOES
-        );
     }
 
     // --- [ glCopyImageSubDataOES ] ---

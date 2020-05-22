@@ -21,12 +21,6 @@ public class WGLNVVertexArrayRange {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(WGLCapabilities caps) {
-        return checkFunctions(
-            caps.wglAllocateMemoryNV, caps.wglFreeMemoryNV
-        );
-    }
-
     // --- [ wglAllocateMemoryNV ] ---
 
     public static long nwglAllocateMemoryNV(int size, float readfreq, float writefreq, float priority) {

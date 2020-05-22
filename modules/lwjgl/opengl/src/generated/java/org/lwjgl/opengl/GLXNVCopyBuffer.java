@@ -21,12 +21,6 @@ public class GLXNVCopyBuffer {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLXCapabilities caps) {
-        return checkFunctions(
-            caps.glXCopyBufferSubDataNV, caps.glXNamedCopyBufferSubDataNV
-        );
-    }
-
     // --- [ glXCopyBufferSubDataNV ] ---
 
     /** @param display the connection to the X server */

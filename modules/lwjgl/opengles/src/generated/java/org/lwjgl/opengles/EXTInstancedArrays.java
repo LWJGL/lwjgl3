@@ -9,7 +9,6 @@ import java.nio.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -38,12 +37,6 @@ public class EXTInstancedArrays {
 
     protected EXTInstancedArrays() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glDrawArraysInstancedEXT, caps.glDrawElementsInstancedEXT, caps.glVertexAttribDivisorEXT
-        );
     }
 
     // --- [ glDrawArraysInstancedEXT ] ---

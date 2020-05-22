@@ -63,12 +63,6 @@ public class SOFTDeviceClock {
         throw new UnsupportedOperationException();
     }
 
-	static boolean isAvailable(ALCCapabilities caps) {
-		return checkFunctions(
-            caps.alcGetInteger64vSOFT
-        );
-	}
-
     // --- [ alcGetInteger64vSOFT ] ---
 
     /** Unsafe version of: {@link #alcGetInteger64vSOFT GetInteger64vSOFT} */

@@ -7,8 +7,6 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_instanced_arrays.txt">NV_instanced_arrays</a> extension.
  * 
@@ -38,12 +36,6 @@ public class NVInstancedArrays {
 
     protected NVInstancedArrays() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glVertexAttribDivisorNV
-        );
     }
 
     // --- [ glVertexAttribDivisorNV ] ---

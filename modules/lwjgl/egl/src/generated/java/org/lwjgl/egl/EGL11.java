@@ -33,12 +33,6 @@ public class EGL11 extends EGL10 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglBindTexImage, caps.eglReleaseTexImage, caps.eglSurfaceAttrib, caps.eglSwapInterval
-        );
-    }
-
     // --- [ eglBindTexImage ] ---
 
     /** <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglBindTexImage.xhtml">Reference Page</a> */

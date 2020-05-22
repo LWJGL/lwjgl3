@@ -73,13 +73,6 @@ public class INTELVAAPIMediaSharing {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(CLCapabilities caps) {
-        return checkFunctions(
-            caps.clGetDeviceIDsFromVA_APIMediaAdapterINTEL, caps.clCreateFromVA_APIMediaSurfaceINTEL, caps.clEnqueueAcquireVA_APIMediaSurfacesINTEL, 
-            caps.clEnqueueReleaseVA_APIMediaSurfacesINTEL
-        );
-    }
-
     // --- [ clGetDeviceIDsFromVA_APIMediaAdapterINTEL ] ---
 
     /**

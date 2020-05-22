@@ -45,13 +45,6 @@ public class EXTOcclusionQueryBoolean {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glGenQueriesEXT, caps.glDeleteQueriesEXT, caps.glIsQueryEXT, caps.glBeginQueryEXT, caps.glEndQueryEXT, caps.glGetQueryivEXT, 
-            caps.glGetQueryObjectuivEXT
-        );
-    }
-
     // --- [ glGenQueriesEXT ] ---
 
     public static native void nglGenQueriesEXT(int n, long ids);

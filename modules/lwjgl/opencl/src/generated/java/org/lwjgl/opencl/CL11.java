@@ -84,13 +84,6 @@ public class CL11 extends CL10 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(CLCapabilities caps) {
-        return checkFunctions(
-            caps.clCreateSubBuffer, caps.clSetMemObjectDestructorCallback, caps.clEnqueueReadBufferRect, caps.clEnqueueWriteBufferRect, 
-            caps.clEnqueueCopyBufferRect, caps.clCreateUserEvent, caps.clSetUserEventStatus, caps.clSetEventCallback
-        );
-    }
-
     // --- [ clCreateSubBuffer ] ---
 
     /** Unsafe version of: {@link #clCreateSubBuffer CreateSubBuffer} */

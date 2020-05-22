@@ -7,8 +7,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_stencil_two_side.txt">EXT_stencil_two_side</a> extension.
  * 
@@ -31,12 +29,6 @@ public class EXTStencilTwoSide {
 
     protected EXTStencilTwoSide() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glActiveStencilFaceEXT
-        );
     }
 
     // --- [ glActiveStencilFaceEXT ] ---

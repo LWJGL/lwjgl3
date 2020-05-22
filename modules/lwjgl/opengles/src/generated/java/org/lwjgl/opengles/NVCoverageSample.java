@@ -7,8 +7,6 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/EGL_NV_coverage_sample.txt">NV_coverage_sample</a> extension.
  * 
@@ -64,12 +62,6 @@ public class NVCoverageSample {
 
     protected NVCoverageSample() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glCoverageMaskNV, caps.glCoverageOperationNV
-        );
     }
 
     // --- [ glCoverageMaskNV ] ---

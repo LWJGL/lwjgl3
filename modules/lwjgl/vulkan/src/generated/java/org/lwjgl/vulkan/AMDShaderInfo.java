@@ -138,12 +138,6 @@ public class AMDShaderInfo {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_AMD_shader_info") && VK.checkExtension("VK_AMD_shader_info",
-               VK.isSupported(provider, "vkGetShaderInfoAMD", caps)
-        );
-    }
-
     // --- [ vkGetShaderInfoAMD ] ---
 
     /**

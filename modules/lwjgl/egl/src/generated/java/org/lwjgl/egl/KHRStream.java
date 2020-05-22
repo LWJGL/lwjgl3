@@ -71,12 +71,6 @@ public class KHRStream {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglCreateStreamKHR, caps.eglDestroyStreamKHR, caps.eglStreamAttribKHR, caps.eglQueryStreamKHR, caps.eglQueryStreamu64KHR
-        );
-    }
-
     // --- [ eglCreateStreamKHR ] ---
 
     public static long neglCreateStreamKHR(long dpy, long attrib_list) {

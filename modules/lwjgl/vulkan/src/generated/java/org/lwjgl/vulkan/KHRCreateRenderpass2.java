@@ -105,15 +105,6 @@ public class KHRCreateRenderpass2 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_create_renderpass2") && VK.checkExtension("VK_KHR_create_renderpass2",
-               VK.isSupported(provider, "vkCreateRenderPass2KHR", caps)
-            && VK.isSupported(provider, "vkCmdBeginRenderPass2KHR", caps)
-            && VK.isSupported(provider, "vkCmdNextSubpass2KHR", caps)
-            && VK.isSupported(provider, "vkCmdEndRenderPass2KHR", caps)
-        );
-    }
-
     // --- [ vkCreateRenderPass2KHR ] ---
 
     /** Unsafe version of: {@link #vkCreateRenderPass2KHR CreateRenderPass2KHR} */

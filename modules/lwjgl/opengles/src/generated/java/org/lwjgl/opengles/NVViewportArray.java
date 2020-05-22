@@ -47,14 +47,6 @@ public class NVViewportArray {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glViewportArrayvNV, caps.glViewportIndexedfNV, caps.glViewportIndexedfvNV, caps.glScissorArrayvNV, caps.glScissorIndexedNV, 
-            caps.glScissorIndexedvNV, caps.glDepthRangeArrayfvNV, caps.glDepthRangeIndexedfNV, caps.glGetFloati_vNV, caps.glEnableiNV, caps.glDisableiNV, 
-            caps.glIsEnablediNV
-        );
-    }
-
     // --- [ glViewportArrayvNV ] ---
 
     public static native void nglViewportArrayvNV(int first, int count, long v);

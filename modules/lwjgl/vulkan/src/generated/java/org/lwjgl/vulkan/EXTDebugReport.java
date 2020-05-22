@@ -274,14 +274,6 @@ public class EXTDebugReport {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsInstance(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_debug_report") && VK.checkExtension("VK_EXT_debug_report",
-               VK.isSupported(provider, "vkCreateDebugReportCallbackEXT", caps)
-            && VK.isSupported(provider, "vkDestroyDebugReportCallbackEXT", caps)
-            && VK.isSupported(provider, "vkDebugReportMessageEXT", caps)
-        );
-    }
-
     // --- [ vkCreateDebugReportCallbackEXT ] ---
 
     /** Unsafe version of: {@link #vkCreateDebugReportCallbackEXT CreateDebugReportCallbackEXT} */

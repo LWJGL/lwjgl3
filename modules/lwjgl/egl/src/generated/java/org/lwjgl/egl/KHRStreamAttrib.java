@@ -22,13 +22,6 @@ public class KHRStreamAttrib {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglCreateStreamAttribKHR, caps.eglSetStreamAttribKHR, caps.eglQueryStreamAttribKHR, caps.eglStreamConsumerAcquireAttribKHR, 
-            caps.eglStreamConsumerReleaseAttribKHR
-        );
-    }
-
     // --- [ eglCreateStreamAttribKHR ] ---
 
     public static long neglCreateStreamAttribKHR(long dpy, long attrib_list) {

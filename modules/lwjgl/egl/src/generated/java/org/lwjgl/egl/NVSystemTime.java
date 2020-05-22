@@ -23,12 +23,6 @@ public class NVSystemTime {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglGetSystemTimeFrequencyNV, caps.eglGetSystemTimeNV
-        );
-    }
-
     // --- [ eglGetSystemTimeFrequencyNV ] ---
 
     @NativeType("EGLuint64NV")

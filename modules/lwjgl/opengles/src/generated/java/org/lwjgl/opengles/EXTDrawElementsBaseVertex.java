@@ -77,14 +77,6 @@ public class EXTDrawElementsBaseVertex {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps, java.util.Set<String> ext) {
-        return checkFunctions(
-            caps.glDrawElementsBaseVertexEXT, ext.contains("GLES30") ? caps.glDrawRangeElementsBaseVertexEXT : -1L, 
-            ext.contains("GLES30") ? caps.glDrawElementsInstancedBaseVertexEXT : -1L, 
-            ext.contains("GL_EXT_multi_draw_arrays") ? caps.glMultiDrawElementsBaseVertexEXT : -1L
-        );
-    }
-
     // --- [ glDrawElementsBaseVertexEXT ] ---
 
     public static native void nglDrawElementsBaseVertexEXT(int mode, int count, int type, long indices, int basevertex);

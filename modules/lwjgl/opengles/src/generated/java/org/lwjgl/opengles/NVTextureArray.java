@@ -59,13 +59,6 @@ public class NVTextureArray {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glTexImage3DNV, caps.glTexSubImage3DNV, caps.glCopyTexSubImage3DNV, caps.glCompressedTexImage3DNV, caps.glCompressedTexSubImage3DNV, 
-            caps.glFramebufferTextureLayerNV
-        );
-    }
-
     // --- [ glTexImage3DNV ] ---
 
     public static native void nglTexImage3DNV(int target, int level, int internalFormat, int width, int height, int depth, int border, int format, int type, long pixels);

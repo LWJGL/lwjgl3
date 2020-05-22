@@ -70,12 +70,6 @@ public class NVDrawBuffers {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glDrawBuffersNV
-        );
-    }
-
     // --- [ glDrawBuffersNV ] ---
 
     public static native void nglDrawBuffersNV(int n, long bufs);

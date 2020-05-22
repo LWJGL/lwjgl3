@@ -20,12 +20,6 @@ public class WGLEXTExtensionsString {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(WGLCapabilities caps) {
-        return checkFunctions(
-            caps.wglGetExtensionsStringEXT
-        );
-    }
-
     // --- [ wglGetExtensionsStringEXT ] ---
 
     /** Unsafe version of: {@link #wglGetExtensionsStringEXT GetExtensionsStringEXT} */

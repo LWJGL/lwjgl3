@@ -13,8 +13,6 @@ import org.lwjgl.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_uniform_buffer_object.txt">ARB_uniform_buffer_object</a> extension.
  * 
@@ -149,13 +147,6 @@ public class ARBUniformBufferObject {
 
     protected ARBUniformBufferObject() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glGetUniformIndices, caps.glGetActiveUniformsiv, caps.glGetActiveUniformName, caps.glGetUniformBlockIndex, caps.glGetActiveUniformBlockiv, 
-            caps.glGetActiveUniformBlockName, caps.glBindBufferRange, caps.glBindBufferBase, caps.glGetIntegeri_v, caps.glUniformBlockBinding
-        );
     }
 
     // --- [ glGetUniformIndices ] ---

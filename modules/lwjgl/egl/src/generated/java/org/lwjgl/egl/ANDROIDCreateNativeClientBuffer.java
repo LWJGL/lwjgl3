@@ -42,12 +42,6 @@ public class ANDROIDCreateNativeClientBuffer {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglCreateNativeClientBufferANDROID
-        );
-    }
-
     // --- [ eglCreateNativeClientBufferANDROID ] ---
 
     /** Unsafe version of: {@link #eglCreateNativeClientBufferANDROID CreateNativeClientBufferANDROID} */

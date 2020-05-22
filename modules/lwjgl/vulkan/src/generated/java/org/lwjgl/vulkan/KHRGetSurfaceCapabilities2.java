@@ -76,13 +76,6 @@ public class KHRGetSurfaceCapabilities2 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsInstance(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_get_surface_capabilities2") && VK.checkExtension("VK_KHR_get_surface_capabilities2",
-               VK.isSupported(provider, "vkGetPhysicalDeviceSurfaceCapabilities2KHR", caps)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceSurfaceFormats2KHR", caps)
-        );
-    }
-
     // --- [ vkGetPhysicalDeviceSurfaceCapabilities2KHR ] ---
 
     /** Unsafe version of: {@link #vkGetPhysicalDeviceSurfaceCapabilities2KHR GetPhysicalDeviceSurfaceCapabilities2KHR} */

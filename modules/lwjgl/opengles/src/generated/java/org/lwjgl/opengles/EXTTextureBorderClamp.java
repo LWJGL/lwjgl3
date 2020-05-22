@@ -51,13 +51,6 @@ public class EXTTextureBorderClamp {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glTexParameterIivEXT, caps.glTexParameterIuivEXT, caps.glGetTexParameterIivEXT, caps.glGetTexParameterIuivEXT, caps.glSamplerParameterIivEXT, 
-            caps.glSamplerParameterIuivEXT, caps.glGetSamplerParameterIivEXT, caps.glGetSamplerParameterIuivEXT
-        );
-    }
-
     // --- [ glTexParameterIivEXT ] ---
 
     public static native void nglTexParameterIivEXT(int target, int pname, long params);

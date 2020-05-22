@@ -88,13 +88,6 @@ public class ARBShadingLanguageInclude {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glNamedStringARB, caps.glDeleteNamedStringARB, caps.glCompileShaderIncludeARB, caps.glIsNamedStringARB, caps.glGetNamedStringARB, 
-            caps.glGetNamedStringivARB
-        );
-    }
-
     // --- [ glNamedStringARB ] ---
 
     /**

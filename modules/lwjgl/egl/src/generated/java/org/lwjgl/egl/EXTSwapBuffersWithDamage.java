@@ -32,12 +32,6 @@ public class EXTSwapBuffersWithDamage {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(EGLCapabilities caps) {
-        return checkFunctions(
-            caps.eglSwapBuffersWithDamageEXT
-        );
-    }
-
     // --- [ eglSwapBuffersWithDamageEXT ] ---
 
     public static int neglSwapBuffersWithDamageEXT(long dpy, long surface, long rects, int n_rects) {

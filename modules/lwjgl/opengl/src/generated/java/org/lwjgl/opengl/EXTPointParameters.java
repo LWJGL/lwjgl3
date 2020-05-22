@@ -72,12 +72,6 @@ public class EXTPointParameters {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glPointParameterfEXT, caps.glPointParameterfvEXT
-        );
-    }
-
     // --- [ glPointParameterfEXT ] ---
 
     public static native void glPointParameterfEXT(@NativeType("GLenum") int pname, @NativeType("GLfloat") float param);

@@ -9,8 +9,6 @@ import java.nio.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * The OpenGL functionality up to version 2.1. Includes the deprecated symbols of the Compatibility Profile.
  * 
@@ -69,13 +67,6 @@ public class GL21 extends GL20 {
 
     protected GL21() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glUniformMatrix2x3fv, caps.glUniformMatrix3x2fv, caps.glUniformMatrix2x4fv, caps.glUniformMatrix4x2fv, caps.glUniformMatrix3x4fv, 
-            caps.glUniformMatrix4x3fv
-        );
     }
 
     // --- [ glUniformMatrix2x3fv ] ---

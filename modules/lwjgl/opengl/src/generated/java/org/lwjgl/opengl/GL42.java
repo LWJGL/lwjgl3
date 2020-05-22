@@ -9,8 +9,6 @@ import java.nio.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * The OpenGL functionality up to version 4.2. Includes the deprecated symbols of the Compatibility Profile.
  * 
@@ -209,14 +207,6 @@ public class GL42 extends GL41 {
 
     protected GL42() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glGetActiveAtomicCounterBufferiv, caps.glTexStorage1D, caps.glTexStorage2D, caps.glTexStorage3D, caps.glDrawTransformFeedbackInstanced, 
-            caps.glDrawTransformFeedbackStreamInstanced, caps.glDrawArraysInstancedBaseInstance, caps.glDrawElementsInstancedBaseInstance, 
-            caps.glDrawElementsInstancedBaseVertexBaseInstance, caps.glBindImageTexture, caps.glMemoryBarrier, caps.glGetInternalformativ
-        );
     }
 
     // --- [ glGetActiveAtomicCounterBufferiv ] ---

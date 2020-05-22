@@ -414,20 +414,6 @@ public class GLES32 extends GLES31 {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glBlendBarrier, caps.glCopyImageSubData, caps.glDebugMessageControl, caps.glDebugMessageInsert, caps.glDebugMessageCallback, 
-            caps.glGetDebugMessageLog, caps.glGetPointerv, caps.glPushDebugGroup, caps.glPopDebugGroup, caps.glObjectLabel, caps.glGetObjectLabel, 
-            caps.glObjectPtrLabel, caps.glGetObjectPtrLabel, caps.glEnablei, caps.glDisablei, caps.glBlendEquationi, caps.glBlendEquationSeparatei, 
-            caps.glBlendFunci, caps.glBlendFuncSeparatei, caps.glColorMaski, caps.glIsEnabledi, caps.glDrawElementsBaseVertex, 
-            caps.glDrawRangeElementsBaseVertex, caps.glDrawElementsInstancedBaseVertex, caps.glFramebufferTexture, caps.glPrimitiveBoundingBox, 
-            caps.glGetGraphicsResetStatus, caps.glReadnPixels, caps.glGetnUniformfv, caps.glGetnUniformiv, caps.glGetnUniformuiv, caps.glMinSampleShading, 
-            caps.glPatchParameteri, caps.glTexParameterIiv, caps.glTexParameterIuiv, caps.glGetTexParameterIiv, caps.glGetTexParameterIuiv, 
-            caps.glSamplerParameterIiv, caps.glSamplerParameterIuiv, caps.glGetSamplerParameterIiv, caps.glGetSamplerParameterIuiv, caps.glTexBuffer, 
-            caps.glTexBufferRange, caps.glTexStorage3DMultisample
-        );
-    }
-
     // --- [ glBlendBarrier ] ---
 
     /**

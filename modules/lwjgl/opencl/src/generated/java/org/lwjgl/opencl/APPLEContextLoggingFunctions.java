@@ -34,12 +34,6 @@ public class APPLEContextLoggingFunctions {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(CLCapabilities caps) {
-        return checkFunctions(
-            caps.clLogMessagesToSystemLogAPPLE, caps.clLogMessagesToStdoutAPPLE, caps.clLogMessagesToStderrAPPLE
-        );
-    }
-
     // --- [ clLogMessagesToSystemLogAPPLE ] ---
 
     private static void clLogMessagesToSystemLogAPPLE() {

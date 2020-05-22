@@ -59,13 +59,6 @@ public class NVMemoryAttachment {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps, java.util.Set<String> ext) {
-        return checkFunctions(
-            caps.glGetMemoryObjectDetachedResourcesuivNV, caps.glResetMemoryObjectParameterNV, caps.glTexAttachMemoryNV, caps.glBufferAttachMemoryNV, 
-            caps.hasDSA(ext) ? caps.glTextureAttachMemoryNV : -1L, caps.hasDSA(ext) ? caps.glNamedBufferAttachMemoryNV : -1L
-        );
-    }
-
     // --- [ glGetMemoryObjectDetachedResourcesuivNV ] ---
 
     public static native void nglGetMemoryObjectDetachedResourcesuivNV(int memory, int pname, int first, int count, long params);

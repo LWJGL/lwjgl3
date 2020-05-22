@@ -57,12 +57,6 @@ public class AMDBusAddressableMemory {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(CLCapabilities caps) {
-        return checkFunctions(
-            caps.clEnqueueWaitSignalAMD, caps.clEnqueueWriteSignalAMD, caps.clEnqueueMakeBuffersResidentAMD
-        );
-    }
-
     // --- [ clEnqueueWaitSignalAMD ] ---
 
     /**

@@ -7,8 +7,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_occlusion_query_event.txt">AMD_occlusion_query_event</a> extension.
  * 
@@ -38,12 +36,6 @@ public class AMDOcclusionQueryEvent {
 
     protected AMDOcclusionQueryEvent() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glQueryObjectParameteruiAMD
-        );
     }
 
     // --- [ glQueryObjectParameteruiAMD ] ---

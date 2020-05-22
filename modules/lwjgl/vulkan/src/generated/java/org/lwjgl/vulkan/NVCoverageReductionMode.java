@@ -100,12 +100,6 @@ public class NVCoverageReductionMode {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsInstance(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_NV_coverage_reduction_mode") && VK.checkExtension("VK_NV_coverage_reduction_mode",
-               VK.isSupported(provider, "vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV", caps)
-        );
-    }
-
     // --- [ vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV ] ---
 
     /**

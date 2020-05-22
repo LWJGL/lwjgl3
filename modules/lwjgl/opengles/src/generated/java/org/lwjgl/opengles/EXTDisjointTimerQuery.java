@@ -61,13 +61,6 @@ public class EXTDisjointTimerQuery {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glGenQueriesEXT, caps.glDeleteQueriesEXT, caps.glIsQueryEXT, caps.glBeginQueryEXT, caps.glEndQueryEXT, caps.glGetQueryivEXT, 
-            caps.glGetQueryObjectuivEXT, caps.glQueryCounterEXT, caps.glGetQueryObjecti64vEXT, caps.glGetQueryObjectui64vEXT
-        );
-    }
-
     // --- [ glGenQueriesEXT ] ---
 
     public static void nglGenQueriesEXT(int n, long ids) {

@@ -7,8 +7,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_compute_variable_group_size.txt">ARB_compute_variable_group_size</a> extension.
  * 
@@ -39,12 +37,6 @@ public class ARBComputeVariableGroupSize {
 
     protected ARBComputeVariableGroupSize() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glDispatchComputeGroupSizeARB
-        );
     }
 
     // --- [ glDispatchComputeGroupSizeARB ] ---

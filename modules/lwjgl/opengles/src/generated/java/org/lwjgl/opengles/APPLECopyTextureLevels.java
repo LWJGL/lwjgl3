@@ -7,8 +7,6 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/APPLE/APPLE_copy_texture_levels.txt">APPLE_copy_texture_levels</a> extension.
  * 
@@ -36,12 +34,6 @@ public class APPLECopyTextureLevels {
 
     protected APPLECopyTextureLevels() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glCopyTextureLevelsAPPLE
-        );
     }
 
     // --- [ glCopyTextureLevelsAPPLE ] ---

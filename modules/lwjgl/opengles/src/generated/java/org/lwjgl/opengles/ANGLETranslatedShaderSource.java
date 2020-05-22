@@ -38,12 +38,6 @@ public class ANGLETranslatedShaderSource {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glGetTranslatedShaderSourceANGLE
-        );
-    }
-
     // --- [ glGetTranslatedShaderSourceANGLE ] ---
 
     public static native void nglGetTranslatedShaderSourceANGLE(int shader, int bufsize, long length, long source);

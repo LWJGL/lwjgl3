@@ -7,8 +7,6 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_conditional_render.txt">NV_conditional_render</a> extension.
  * 
@@ -42,12 +40,6 @@ public class NVConditionalRender {
 
     protected NVConditionalRender() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glBeginConditionalRenderNV, caps.glEndConditionalRenderNV
-        );
     }
 
     // --- [ glBeginConditionalRenderNV ] ---

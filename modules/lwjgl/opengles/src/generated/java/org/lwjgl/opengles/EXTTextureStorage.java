@@ -7,8 +7,6 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_storage.txt">EXT_texture_storage</a> extension.
  * 
@@ -62,13 +60,6 @@ public class EXTTextureStorage {
 
     protected EXTTextureStorage() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLESCapabilities caps, java.util.Set<String> ext) {
-        return checkFunctions(
-            caps.glTexStorage1DEXT, caps.glTexStorage2DEXT, caps.glTexStorage3DEXT, caps.hasDSA(ext) ? caps.glTextureStorage1DEXT : -1L, 
-            caps.hasDSA(ext) ? caps.glTextureStorage2DEXT : -1L, caps.hasDSA(ext) ? caps.glTextureStorage3DEXT : -1L
-        );
     }
 
     // --- [ glTexStorage1DEXT ] ---

@@ -8,6 +8,9 @@ package org.lwjgl.egl;
 import org.lwjgl.system.*;
 import java.util.Set;
 
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.Checks.*;
+
 /** Defines the capabilities of an EGLDisplay or the EGL client library. */
 public class EGLCapabilities {
 
@@ -975,23 +978,23 @@ public class EGLCapabilities {
         eglQueryWaylandBufferWL = functions[139];
         eglCreateWaylandBufferFromImageWL = functions[140];
 
-        EGL10 = ext.contains("EGL10") && EGL.checkExtension("EGL10", org.lwjgl.egl.EGL10.isAvailable(this));
-        EGL11 = ext.contains("EGL11") && EGL.checkExtension("EGL11", org.lwjgl.egl.EGL11.isAvailable(this));
-        EGL12 = ext.contains("EGL12") && EGL.checkExtension("EGL12", org.lwjgl.egl.EGL12.isAvailable(this));
+        EGL10 = check_EGL10(ext);
+        EGL11 = check_EGL11(ext);
+        EGL12 = check_EGL12(ext);
         EGL13 = ext.contains("EGL13");
-        EGL14 = ext.contains("EGL14") && EGL.checkExtension("EGL14", org.lwjgl.egl.EGL14.isAvailable(this));
-        EGL15 = ext.contains("EGL15") && EGL.checkExtension("EGL15", org.lwjgl.egl.EGL15.isAvailable(this));
-        EGL_ANDROID_blob_cache = ext.contains("EGL_ANDROID_blob_cache") && EGL.checkExtension("EGL_ANDROID_blob_cache", ANDROIDBlobCache.isAvailable(this));
-        EGL_ANDROID_create_native_client_buffer = ext.contains("EGL_ANDROID_create_native_client_buffer") && EGL.checkExtension("EGL_ANDROID_create_native_client_buffer", ANDROIDCreateNativeClientBuffer.isAvailable(this));
+        EGL14 = check_EGL14(ext);
+        EGL15 = check_EGL15(ext);
+        EGL_ANDROID_blob_cache = check_ANDROID_blob_cache(ext);
+        EGL_ANDROID_create_native_client_buffer = check_ANDROID_create_native_client_buffer(ext);
         EGL_ANDROID_framebuffer_target = ext.contains("EGL_ANDROID_framebuffer_target");
         EGL_ANDROID_front_buffer_auto_refresh = ext.contains("EGL_ANDROID_front_buffer_auto_refresh");
         EGL_ANDROID_image_native_buffer = ext.contains("EGL_ANDROID_image_native_buffer");
-        EGL_ANDROID_native_fence_sync = ext.contains("EGL_ANDROID_native_fence_sync") && EGL.checkExtension("EGL_ANDROID_native_fence_sync", ANDROIDNativeFenceSync.isAvailable(this));
-        EGL_ANDROID_presentation_time = ext.contains("EGL_ANDROID_presentation_time") && EGL.checkExtension("EGL_ANDROID_presentation_time", ANDROIDPresentationTime.isAvailable(this));
+        EGL_ANDROID_native_fence_sync = check_ANDROID_native_fence_sync(ext);
+        EGL_ANDROID_presentation_time = check_ANDROID_presentation_time(ext);
         EGL_ANDROID_recordable = ext.contains("EGL_ANDROID_recordable");
         EGL_ANGLE_d3d_share_handle_client_buffer = ext.contains("EGL_ANGLE_d3d_share_handle_client_buffer");
         EGL_ANGLE_device_d3d = ext.contains("EGL_ANGLE_device_d3d");
-        EGL_ANGLE_query_surface_pointer = ext.contains("EGL_ANGLE_query_surface_pointer") && EGL.checkExtension("EGL_ANGLE_query_surface_pointer", ANGLEQuerySurfacePointer.isAvailable(this));
+        EGL_ANGLE_query_surface_pointer = check_ANGLE_query_surface_pointer(ext);
         EGL_ANGLE_surface_d3d_texture_2d_share_handle = ext.contains("EGL_ANGLE_surface_d3d_texture_2d_share_handle");
         EGL_ANGLE_window_fixed_size = ext.contains("EGL_ANGLE_window_fixed_size");
         EGL_ARM_image_format = ext.contains("EGL_ARM_image_format");
@@ -999,14 +1002,14 @@ public class EGLCapabilities {
         EGL_EXT_bind_to_front = ext.contains("EGL_EXT_bind_to_front");
         EGL_EXT_buffer_age = ext.contains("EGL_EXT_buffer_age");
         EGL_EXT_client_extensions = ext.contains("EGL_EXT_client_extensions");
-        EGL_EXT_client_sync = ext.contains("EGL_EXT_client_sync") && EGL.checkExtension("EGL_EXT_client_sync", EXTClientSync.isAvailable(this));
-        EGL_EXT_compositor = ext.contains("EGL_EXT_compositor") && EGL.checkExtension("EGL_EXT_compositor", EXTCompositor.isAvailable(this));
+        EGL_EXT_client_sync = check_EXT_client_sync(ext);
+        EGL_EXT_compositor = check_EXT_compositor(ext);
         EGL_EXT_create_context_robustness = ext.contains("EGL_EXT_create_context_robustness");
-        EGL_EXT_device_base = ext.contains("EGL_EXT_device_base") && EGL.checkExtension("EGL_EXT_device_base", EXTDeviceBase.isAvailable(this));
+        EGL_EXT_device_base = check_EXT_device_base(ext);
         EGL_EXT_device_drm = ext.contains("EGL_EXT_device_drm");
-        EGL_EXT_device_enumeration = ext.contains("EGL_EXT_device_enumeration") && EGL.checkExtension("EGL_EXT_device_enumeration", EXTDeviceEnumeration.isAvailable(this));
+        EGL_EXT_device_enumeration = check_EXT_device_enumeration(ext);
         EGL_EXT_device_openwf = ext.contains("EGL_EXT_device_openwf");
-        EGL_EXT_device_query = ext.contains("EGL_EXT_device_query") && EGL.checkExtension("EGL_EXT_device_query", EXTDeviceQuery.isAvailable(this));
+        EGL_EXT_device_query = check_EXT_device_query(ext);
         EGL_EXT_gl_colorspace_bt2020_linear = ext.contains("EGL_EXT_gl_colorspace_bt2020_linear");
         EGL_EXT_gl_colorspace_bt2020_pq = ext.contains("EGL_EXT_gl_colorspace_bt2020_pq");
         EGL_EXT_gl_colorspace_display_p3 = ext.contains("EGL_EXT_gl_colorspace_display_p3");
@@ -1015,72 +1018,72 @@ public class EGLCapabilities {
         EGL_EXT_gl_colorspace_scrgb = ext.contains("EGL_EXT_gl_colorspace_scrgb");
         EGL_EXT_gl_colorspace_scrgb_linear = ext.contains("EGL_EXT_gl_colorspace_scrgb_linear");
         EGL_EXT_image_dma_buf_import = ext.contains("EGL_EXT_image_dma_buf_import");
-        EGL_EXT_image_dma_buf_import_modifiers = ext.contains("EGL_EXT_image_dma_buf_import_modifiers") && EGL.checkExtension("EGL_EXT_image_dma_buf_import_modifiers", EXTImageDMABufImportModifiers.isAvailable(this));
+        EGL_EXT_image_dma_buf_import_modifiers = check_EXT_image_dma_buf_import_modifiers(ext);
         EGL_EXT_image_gl_colorspace = ext.contains("EGL_EXT_image_gl_colorspace");
         EGL_EXT_image_implicit_sync_control = ext.contains("EGL_EXT_image_implicit_sync_control");
         EGL_EXT_multiview_window = ext.contains("EGL_EXT_multiview_window");
-        EGL_EXT_output_base = ext.contains("EGL_EXT_output_base") && EGL.checkExtension("EGL_EXT_output_base", EXTOutputBase.isAvailable(this));
+        EGL_EXT_output_base = check_EXT_output_base(ext);
         EGL_EXT_output_drm = ext.contains("EGL_EXT_output_drm");
         EGL_EXT_output_openwf = ext.contains("EGL_EXT_output_openwf");
         EGL_EXT_pixel_format_float = ext.contains("EGL_EXT_pixel_format_float");
-        EGL_EXT_platform_base = ext.contains("EGL_EXT_platform_base") && EGL.checkExtension("EGL_EXT_platform_base", EXTPlatformBase.isAvailable(this));
+        EGL_EXT_platform_base = check_EXT_platform_base(ext);
         EGL_EXT_platform_device = ext.contains("EGL_EXT_platform_device");
         EGL_EXT_platform_wayland = ext.contains("EGL_EXT_platform_wayland");
         EGL_EXT_platform_x11 = ext.contains("EGL_EXT_platform_x11");
         EGL_EXT_protected_content = ext.contains("EGL_EXT_protected_content");
         EGL_EXT_protected_surface = ext.contains("EGL_EXT_protected_surface");
-        EGL_EXT_stream_consumer_egloutput = ext.contains("EGL_EXT_stream_consumer_egloutput") && EGL.checkExtension("EGL_EXT_stream_consumer_egloutput", EXTStreamConsumerEGLOutput.isAvailable(this));
+        EGL_EXT_stream_consumer_egloutput = check_EXT_stream_consumer_egloutput(ext);
         EGL_EXT_surface_CTA861_3_metadata = ext.contains("EGL_EXT_surface_CTA861_3_metadata");
         EGL_EXT_surface_SMPTE2086_metadata = ext.contains("EGL_EXT_surface_SMPTE2086_metadata");
-        EGL_EXT_swap_buffers_with_damage = ext.contains("EGL_EXT_swap_buffers_with_damage") && EGL.checkExtension("EGL_EXT_swap_buffers_with_damage", EXTSwapBuffersWithDamage.isAvailable(this));
-        EGL_EXT_sync_reuse = ext.contains("EGL_EXT_sync_reuse") && EGL.checkExtension("EGL_EXT_sync_reuse", EXTSyncReuse.isAvailable(this));
+        EGL_EXT_swap_buffers_with_damage = check_EXT_swap_buffers_with_damage(ext);
+        EGL_EXT_sync_reuse = check_EXT_sync_reuse(ext);
         EGL_EXT_yuv_surface = ext.contains("EGL_EXT_yuv_surface");
-        EGL_HI_clientpixmap = ext.contains("EGL_HI_clientpixmap") && EGL.checkExtension("EGL_HI_clientpixmap", HIClientpixmap.isAvailable(this));
+        EGL_HI_clientpixmap = check_HI_clientpixmap(ext);
         EGL_HI_colorformats = ext.contains("EGL_HI_colorformats");
         EGL_IMG_context_priority = ext.contains("EGL_IMG_context_priority");
         EGL_IMG_image_plane_attribs = ext.contains("EGL_IMG_image_plane_attribs");
-        EGL_KHR_cl_event2 = ext.contains("EGL_KHR_cl_event2") && EGL.checkExtension("EGL_KHR_cl_event2", KHRCLEvent2.isAvailable(this));
+        EGL_KHR_cl_event2 = check_KHR_cl_event2(ext);
         EGL_KHR_client_get_all_proc_addresses = ext.contains("EGL_KHR_client_get_all_proc_addresses");
         EGL_KHR_config_attribs = ext.contains("EGL_KHR_config_attribs");
         EGL_KHR_context_flush_control = ext.contains("EGL_KHR_context_flush_control");
         EGL_KHR_create_context = ext.contains("EGL_KHR_create_context");
         EGL_KHR_create_context_no_error = ext.contains("EGL_KHR_create_context_no_error");
-        EGL_KHR_debug = ext.contains("EGL_KHR_debug") && EGL.checkExtension("EGL_KHR_debug", KHRDebug.isAvailable(this));
-        EGL_KHR_display_reference = ext.contains("EGL_KHR_display_reference") && EGL.checkExtension("EGL_KHR_display_reference", KHRDisplayReference.isAvailable(this));
-        EGL_KHR_fence_sync = ext.contains("EGL_KHR_fence_sync") && EGL.checkExtension("EGL_KHR_fence_sync", KHRFenceSync.isAvailable(this));
+        EGL_KHR_debug = check_KHR_debug(ext);
+        EGL_KHR_display_reference = check_KHR_display_reference(ext);
+        EGL_KHR_fence_sync = check_KHR_fence_sync(ext);
         EGL_KHR_get_all_proc_addresses = ext.contains("EGL_KHR_get_all_proc_addresses");
         EGL_KHR_gl_colorspace = ext.contains("EGL_KHR_gl_colorspace");
         EGL_KHR_gl_renderbuffer_image = ext.contains("EGL_KHR_gl_renderbuffer_image");
         EGL_KHR_gl_texture_2D_image = ext.contains("EGL_KHR_gl_texture_2D_image");
         EGL_KHR_gl_texture_3D_image = ext.contains("EGL_KHR_gl_texture_3D_image");
         EGL_KHR_gl_texture_cubemap_image = ext.contains("EGL_KHR_gl_texture_cubemap_image");
-        EGL_KHR_image = ext.contains("EGL_KHR_image") && EGL.checkExtension("EGL_KHR_image", KHRImage.isAvailable(this));
-        EGL_KHR_image_base = ext.contains("EGL_KHR_image_base") && EGL.checkExtension("EGL_KHR_image_base", KHRImageBase.isAvailable(this));
+        EGL_KHR_image = check_KHR_image(ext);
+        EGL_KHR_image_base = check_KHR_image_base(ext);
         EGL_KHR_image_pixmap = ext.contains("EGL_KHR_image_pixmap");
-        EGL_KHR_lock_surface3 = ext.contains("EGL_KHR_lock_surface3") && EGL.checkExtension("EGL_KHR_lock_surface3", KHRLockSurface3.isAvailable(this));
+        EGL_KHR_lock_surface3 = check_KHR_lock_surface3(ext);
         EGL_KHR_mutable_render_buffer = ext.contains("EGL_KHR_mutable_render_buffer");
         EGL_KHR_no_config_context = ext.contains("EGL_KHR_no_config_context");
-        EGL_KHR_partial_update = ext.contains("EGL_KHR_partial_update") && EGL.checkExtension("EGL_KHR_partial_update", KHRPartialUpdate.isAvailable(this));
+        EGL_KHR_partial_update = check_KHR_partial_update(ext);
         EGL_KHR_platform_android = ext.contains("EGL_KHR_platform_android");
         EGL_KHR_platform_gbm = ext.contains("EGL_KHR_platform_gbm");
         EGL_KHR_platform_wayland = ext.contains("EGL_KHR_platform_wayland");
         EGL_KHR_platform_x11 = ext.contains("EGL_KHR_platform_x11");
-        EGL_KHR_reusable_sync = ext.contains("EGL_KHR_reusable_sync") && EGL.checkExtension("EGL_KHR_reusable_sync", KHRReusableSync.isAvailable(this));
-        EGL_KHR_stream = ext.contains("EGL_KHR_stream") && EGL.checkExtension("EGL_KHR_stream", KHRStream.isAvailable(this));
-        EGL_KHR_stream_attrib = ext.contains("EGL_KHR_stream_attrib") && EGL.checkExtension("EGL_KHR_stream_attrib", KHRStreamAttrib.isAvailable(this));
-        EGL_KHR_stream_consumer_gltexture = ext.contains("EGL_KHR_stream_consumer_gltexture") && EGL.checkExtension("EGL_KHR_stream_consumer_gltexture", KHRStreamConsumerGLTexture.isAvailable(this));
-        EGL_KHR_stream_cross_process_fd = ext.contains("EGL_KHR_stream_cross_process_fd") && EGL.checkExtension("EGL_KHR_stream_cross_process_fd", KHRStreamCrossProcessFD.isAvailable(this));
-        EGL_KHR_stream_fifo = ext.contains("EGL_KHR_stream_fifo") && EGL.checkExtension("EGL_KHR_stream_fifo", KHRStreamFIFO.isAvailable(this));
+        EGL_KHR_reusable_sync = check_KHR_reusable_sync(ext);
+        EGL_KHR_stream = check_KHR_stream(ext);
+        EGL_KHR_stream_attrib = check_KHR_stream_attrib(ext);
+        EGL_KHR_stream_consumer_gltexture = check_KHR_stream_consumer_gltexture(ext);
+        EGL_KHR_stream_cross_process_fd = check_KHR_stream_cross_process_fd(ext);
+        EGL_KHR_stream_fifo = check_KHR_stream_fifo(ext);
         EGL_KHR_stream_producer_aldatalocator = ext.contains("EGL_KHR_stream_producer_aldatalocator");
-        EGL_KHR_stream_producer_eglsurface = ext.contains("EGL_KHR_stream_producer_eglsurface") && EGL.checkExtension("EGL_KHR_stream_producer_eglsurface", KHRStreamProducerEGLSurface.isAvailable(this));
+        EGL_KHR_stream_producer_eglsurface = check_KHR_stream_producer_eglsurface(ext);
         EGL_KHR_surfaceless_context = ext.contains("EGL_KHR_surfaceless_context");
-        EGL_KHR_swap_buffers_with_damage = ext.contains("EGL_KHR_swap_buffers_with_damage") && EGL.checkExtension("EGL_KHR_swap_buffers_with_damage", KHRSwapBuffersWithDamage.isAvailable(this));
+        EGL_KHR_swap_buffers_with_damage = check_KHR_swap_buffers_with_damage(ext);
         EGL_KHR_vg_parent_image = ext.contains("EGL_KHR_vg_parent_image");
-        EGL_KHR_wait_sync = ext.contains("EGL_KHR_wait_sync") && EGL.checkExtension("EGL_KHR_wait_sync", KHRWaitSync.isAvailable(this));
-        EGL_MESA_drm_image = ext.contains("EGL_MESA_drm_image") && EGL.checkExtension("EGL_MESA_drm_image", MESADRMImage.isAvailable(this));
-        EGL_MESA_image_dma_buf_export = ext.contains("EGL_MESA_image_dma_buf_export") && EGL.checkExtension("EGL_MESA_image_dma_buf_export", MESAImageDMABufExport.isAvailable(this));
+        EGL_KHR_wait_sync = check_KHR_wait_sync(ext);
+        EGL_MESA_drm_image = check_MESA_drm_image(ext);
+        EGL_MESA_image_dma_buf_export = check_MESA_image_dma_buf_export(ext);
         EGL_MESA_platform_gbm = ext.contains("EGL_MESA_platform_gbm");
-        EGL_NOK_swap_region2 = ext.contains("EGL_NOK_swap_region2") && EGL.checkExtension("EGL_NOK_swap_region2", NOKSwapRegion2.isAvailable(this));
+        EGL_NOK_swap_region2 = check_NOK_swap_region2(ext);
         EGL_NOK_texture_from_pixmap = ext.contains("EGL_NOK_texture_from_pixmap");
         EGL_NV_3dvision_surface = ext.contains("EGL_NV_3dvision_surface");
         EGL_NV_context_priority_realtime = ext.contains("EGL_NV_context_priority_realtime");
@@ -1089,12 +1092,12 @@ public class EGLCapabilities {
         EGL_NV_cuda_event = ext.contains("EGL_NV_cuda_event");
         EGL_NV_depth_nonlinear = ext.contains("EGL_NV_depth_nonlinear");
         EGL_NV_device_cuda = ext.contains("EGL_NV_device_cuda");
-        EGL_NV_native_query = ext.contains("EGL_NV_native_query") && EGL.checkExtension("EGL_NV_native_query", NVNativeQuery.isAvailable(this));
+        EGL_NV_native_query = check_NV_native_query(ext);
         EGL_NV_post_convert_rounding = ext.contains("EGL_NV_post_convert_rounding");
-        EGL_NV_post_sub_buffer = ext.contains("EGL_NV_post_sub_buffer") && EGL.checkExtension("EGL_NV_post_sub_buffer", NVPostSubBuffer.isAvailable(this));
+        EGL_NV_post_sub_buffer = check_NV_post_sub_buffer(ext);
         EGL_NV_quadruple_buffer = ext.contains("EGL_NV_quadruple_buffer");
         EGL_NV_robustness_video_memory_purge = ext.contains("EGL_NV_robustness_video_memory_purge");
-        EGL_NV_stream_consumer_gltexture_yuv = ext.contains("EGL_NV_stream_consumer_gltexture_yuv") && EGL.checkExtension("EGL_NV_stream_consumer_gltexture_yuv", NVStreamConsumerGLTextureYUV.isAvailable(this));
+        EGL_NV_stream_consumer_gltexture_yuv = check_NV_stream_consumer_gltexture_yuv(ext);
         EGL_NV_stream_cross_display = ext.contains("EGL_NV_stream_cross_display");
         EGL_NV_stream_cross_object = ext.contains("EGL_NV_stream_cross_object");
         EGL_NV_stream_cross_partition = ext.contains("EGL_NV_stream_cross_partition");
@@ -1103,22 +1106,354 @@ public class EGLCapabilities {
         EGL_NV_stream_dma = ext.contains("EGL_NV_stream_dma");
         EGL_NV_stream_fifo_next = ext.contains("EGL_NV_stream_fifo_next");
         EGL_NV_stream_fifo_synchronous = ext.contains("EGL_NV_stream_fifo_synchronous");
-        EGL_NV_stream_flush = ext.contains("EGL_NV_stream_flush") && EGL.checkExtension("EGL_NV_stream_flush", NVStreamFlush.isAvailable(this));
+        EGL_NV_stream_flush = check_NV_stream_flush(ext);
         EGL_NV_stream_frame_limits = ext.contains("EGL_NV_stream_frame_limits");
-        EGL_NV_stream_metadata = ext.contains("EGL_NV_stream_metadata") && EGL.checkExtension("EGL_NV_stream_metadata", NVStreamMetadata.isAvailable(this));
+        EGL_NV_stream_metadata = check_NV_stream_metadata(ext);
         EGL_NV_stream_remote = ext.contains("EGL_NV_stream_remote");
-        EGL_NV_stream_reset = ext.contains("EGL_NV_stream_reset") && EGL.checkExtension("EGL_NV_stream_reset", NVStreamReset.isAvailable(this));
+        EGL_NV_stream_reset = check_NV_stream_reset(ext);
         EGL_NV_stream_socket = ext.contains("EGL_NV_stream_socket");
         EGL_NV_stream_socket_inet = ext.contains("EGL_NV_stream_socket_inet");
         EGL_NV_stream_socket_unix = ext.contains("EGL_NV_stream_socket_unix");
-        EGL_NV_stream_sync = ext.contains("EGL_NV_stream_sync") && EGL.checkExtension("EGL_NV_stream_sync", NVStreamSync.isAvailable(this));
-        EGL_NV_sync = ext.contains("EGL_NV_sync") && EGL.checkExtension("EGL_NV_sync", NVSync.isAvailable(this));
-        EGL_NV_system_time = ext.contains("EGL_NV_system_time") && EGL.checkExtension("EGL_NV_system_time", NVSystemTime.isAvailable(this));
+        EGL_NV_stream_sync = check_NV_stream_sync(ext);
+        EGL_NV_sync = check_NV_sync(ext);
+        EGL_NV_system_time = check_NV_system_time(ext);
         EGL_NV_triple_buffer = ext.contains("EGL_NV_triple_buffer");
         EGL_TIZEN_image_native_buffer = ext.contains("EGL_TIZEN_image_native_buffer");
         EGL_TIZEN_image_native_surface = ext.contains("EGL_TIZEN_image_native_surface");
-        EGL_WL_bind_wayland_display = ext.contains("EGL_WL_bind_wayland_display") && EGL.checkExtension("EGL_WL_bind_wayland_display", WLBindWaylandDisplay.isAvailable(this));
-        EGL_WL_create_wayland_buffer_from_image = ext.contains("EGL_WL_create_wayland_buffer_from_image") && EGL.checkExtension("EGL_WL_create_wayland_buffer_from_image", WLCreateWaylandBufferFromImage.isAvailable(this));
+        EGL_WL_bind_wayland_display = check_WL_bind_wayland_display(ext);
+        EGL_WL_create_wayland_buffer_from_image = check_WL_create_wayland_buffer_from_image(ext);
+    }
+
+    private static boolean checkExtension(String extension, boolean supported) {
+        if (supported) {
+            return true;
+        }
+
+        apiLog("[EGL] " + extension + " was reported as available but an entry point is missing.");
+        return false;
+    }
+
+    private boolean check_EGL10(java.util.Set<String> ext) {
+        return ext.contains("EGL10") && checkExtension("EGL10", checkFunctions(
+            eglChooseConfig, eglCopyBuffers, eglCreateContext, eglCreatePbufferSurface, eglCreatePixmapSurface, eglCreateWindowSurface, eglDestroyContext, 
+            eglDestroySurface, eglGetConfigAttrib, eglGetConfigs, eglGetCurrentDisplay, eglGetCurrentSurface, eglGetDisplay, eglGetError, eglGetProcAddress, 
+            eglInitialize, eglMakeCurrent, eglQueryContext, eglQueryString, eglQuerySurface, eglSwapBuffers, eglTerminate, eglWaitGL, eglWaitNative
+        ));
+    }
+
+    private boolean check_EGL11(java.util.Set<String> ext) {
+        return ext.contains("EGL11") && checkExtension("EGL11", checkFunctions(
+            eglBindTexImage, eglReleaseTexImage, eglSurfaceAttrib, eglSwapInterval
+        ));
+    }
+
+    private boolean check_EGL12(java.util.Set<String> ext) {
+        return ext.contains("EGL12") && checkExtension("EGL12", checkFunctions(
+            eglBindAPI, eglQueryAPI, eglCreatePbufferFromClientBuffer, eglReleaseThread, eglWaitClient
+        ));
+    }
+
+    private boolean check_EGL14(java.util.Set<String> ext) {
+        return ext.contains("EGL14") && checkExtension("EGL14", checkFunctions(
+            eglGetCurrentContext
+        ));
+    }
+
+    private boolean check_EGL15(java.util.Set<String> ext) {
+        return ext.contains("EGL15") && checkExtension("EGL15", checkFunctions(
+            eglCreateSync, eglDestroySync, eglClientWaitSync, eglGetSyncAttrib, eglCreateImage, eglDestroyImage, eglGetPlatformDisplay, 
+            eglCreatePlatformWindowSurface, eglCreatePlatformPixmapSurface, eglWaitSync
+        ));
+    }
+
+    private boolean check_ANDROID_blob_cache(java.util.Set<String> ext) {
+        return ext.contains("EGL_ANDROID_blob_cache") && checkExtension("EGL_ANDROID_blob_cache", checkFunctions(
+            eglSetBlobCacheFuncsANDROID
+        ));
+    }
+
+    private boolean check_ANDROID_create_native_client_buffer(java.util.Set<String> ext) {
+        return ext.contains("EGL_ANDROID_create_native_client_buffer") && checkExtension("EGL_ANDROID_create_native_client_buffer", checkFunctions(
+            eglCreateNativeClientBufferANDROID
+        ));
+    }
+
+    private boolean check_ANDROID_native_fence_sync(java.util.Set<String> ext) {
+        return ext.contains("EGL_ANDROID_native_fence_sync") && checkExtension("EGL_ANDROID_native_fence_sync", checkFunctions(
+            eglDupNativeFenceFDANDROID
+        ));
+    }
+
+    private boolean check_ANDROID_presentation_time(java.util.Set<String> ext) {
+        return ext.contains("EGL_ANDROID_presentation_time") && checkExtension("EGL_ANDROID_presentation_time", checkFunctions(
+            eglPresentationTimeANDROID
+        ));
+    }
+
+    private boolean check_ANGLE_query_surface_pointer(java.util.Set<String> ext) {
+        return ext.contains("EGL_ANGLE_query_surface_pointer") && checkExtension("EGL_ANGLE_query_surface_pointer", checkFunctions(
+            eglQuerySurfacePointerANGLE
+        ));
+    }
+
+    private boolean check_EXT_client_sync(java.util.Set<String> ext) {
+        return ext.contains("EGL_EXT_client_sync") && checkExtension("EGL_EXT_client_sync", checkFunctions(
+            eglClientSignalSyncEXT
+        ));
+    }
+
+    private boolean check_EXT_compositor(java.util.Set<String> ext) {
+        return ext.contains("EGL_EXT_compositor") && checkExtension("EGL_EXT_compositor", checkFunctions(
+            eglCompositorSetContextListEXT, eglCompositorSetContextAttributesEXT, eglCompositorSetWindowListEXT, eglCompositorSetWindowAttributesEXT, 
+            eglCompositorBindTexWindowEXT, eglCompositorSetSizeEXT, eglCompositorSwapPolicyEXT
+        ));
+    }
+
+    private boolean check_EXT_device_base(java.util.Set<String> ext) {
+        return ext.contains("EGL_EXT_device_base") && checkExtension("EGL_EXT_device_base", checkFunctions(
+            eglQueryDeviceAttribEXT, eglQueryDeviceStringEXT, eglQueryDisplayAttribEXT, eglQueryDevicesEXT
+        ));
+    }
+
+    private boolean check_EXT_device_enumeration(java.util.Set<String> ext) {
+        return ext.contains("EGL_EXT_device_enumeration") && checkExtension("EGL_EXT_device_enumeration", checkFunctions(
+            eglQueryDevicesEXT
+        ));
+    }
+
+    private boolean check_EXT_device_query(java.util.Set<String> ext) {
+        return ext.contains("EGL_EXT_device_query") && checkExtension("EGL_EXT_device_query", checkFunctions(
+            eglQueryDeviceAttribEXT, eglQueryDeviceStringEXT, eglQueryDisplayAttribEXT
+        ));
+    }
+
+    private boolean check_EXT_image_dma_buf_import_modifiers(java.util.Set<String> ext) {
+        return ext.contains("EGL_EXT_image_dma_buf_import_modifiers") && checkExtension("EGL_EXT_image_dma_buf_import_modifiers", checkFunctions(
+            eglQueryDmaBufFormatsEXT, eglQueryDmaBufModifiersEXT
+        ));
+    }
+
+    private boolean check_EXT_output_base(java.util.Set<String> ext) {
+        return ext.contains("EGL_EXT_output_base") && checkExtension("EGL_EXT_output_base", checkFunctions(
+            eglGetOutputLayersEXT, eglGetOutputPortsEXT, eglOutputLayerAttribEXT, eglQueryOutputLayerAttribEXT, eglQueryOutputLayerStringEXT, 
+            eglOutputPortAttribEXT, eglQueryOutputPortAttribEXT, eglQueryOutputPortStringEXT
+        ));
+    }
+
+    private boolean check_EXT_platform_base(java.util.Set<String> ext) {
+        return ext.contains("EGL_EXT_platform_base") && checkExtension("EGL_EXT_platform_base", checkFunctions(
+            eglGetPlatformDisplayEXT, eglCreatePlatformWindowSurfaceEXT, eglCreatePlatformPixmapSurfaceEXT
+        ));
+    }
+
+    private boolean check_EXT_stream_consumer_egloutput(java.util.Set<String> ext) {
+        return ext.contains("EGL_EXT_stream_consumer_egloutput") && checkExtension("EGL_EXT_stream_consumer_egloutput", checkFunctions(
+            eglStreamConsumerOutputEXT
+        ));
+    }
+
+    private boolean check_EXT_swap_buffers_with_damage(java.util.Set<String> ext) {
+        return ext.contains("EGL_EXT_swap_buffers_with_damage") && checkExtension("EGL_EXT_swap_buffers_with_damage", checkFunctions(
+            eglSwapBuffersWithDamageEXT
+        ));
+    }
+
+    private boolean check_EXT_sync_reuse(java.util.Set<String> ext) {
+        return ext.contains("EGL_EXT_sync_reuse") && checkExtension("EGL_EXT_sync_reuse", checkFunctions(
+            eglUnsignalSyncEXT
+        ));
+    }
+
+    private boolean check_HI_clientpixmap(java.util.Set<String> ext) {
+        return ext.contains("EGL_HI_clientpixmap") && checkExtension("EGL_HI_clientpixmap", checkFunctions(
+            eglCreatePixmapSurfaceHI
+        ));
+    }
+
+    private boolean check_KHR_cl_event2(java.util.Set<String> ext) {
+        return ext.contains("EGL_KHR_cl_event2") && checkExtension("EGL_KHR_cl_event2", checkFunctions(
+            eglCreateSync64KHR
+        ));
+    }
+
+    private boolean check_KHR_debug(java.util.Set<String> ext) {
+        return ext.contains("EGL_KHR_debug") && checkExtension("EGL_KHR_debug", checkFunctions(
+            eglDebugMessageControlKHR, eglQueryDebugKHR, eglLabelObjectKHR
+        ));
+    }
+
+    private boolean check_KHR_display_reference(java.util.Set<String> ext) {
+        return ext.contains("EGL_KHR_display_reference") && checkExtension("EGL_KHR_display_reference", checkFunctions(
+            eglQueryDisplayAttribKHR
+        ));
+    }
+
+    private boolean check_KHR_fence_sync(java.util.Set<String> ext) {
+        return ext.contains("EGL_KHR_fence_sync") && checkExtension("EGL_KHR_fence_sync", checkFunctions(
+            eglCreateSyncKHR, eglDestroySyncKHR, eglClientWaitSyncKHR, eglGetSyncAttribKHR
+        ));
+    }
+
+    private boolean check_KHR_image(java.util.Set<String> ext) {
+        return ext.contains("EGL_KHR_image") && checkExtension("EGL_KHR_image", checkFunctions(
+            eglCreateImageKHR, eglDestroyImageKHR
+        ));
+    }
+
+    private boolean check_KHR_image_base(java.util.Set<String> ext) {
+        return ext.contains("EGL_KHR_image_base") && checkExtension("EGL_KHR_image_base", checkFunctions(
+            eglCreateImageKHR, eglDestroyImageKHR
+        ));
+    }
+
+    private boolean check_KHR_lock_surface3(java.util.Set<String> ext) {
+        return ext.contains("EGL_KHR_lock_surface3") && checkExtension("EGL_KHR_lock_surface3", checkFunctions(
+            eglLockSurfaceKHR, eglUnlockSurfaceKHR, eglQuerySurface64KHR
+        ));
+    }
+
+    private boolean check_KHR_partial_update(java.util.Set<String> ext) {
+        return ext.contains("EGL_KHR_partial_update") && checkExtension("EGL_KHR_partial_update", checkFunctions(
+            eglSetDamageRegionKHR
+        ));
+    }
+
+    private boolean check_KHR_reusable_sync(java.util.Set<String> ext) {
+        return ext.contains("EGL_KHR_reusable_sync") && checkExtension("EGL_KHR_reusable_sync", checkFunctions(
+            eglCreateSyncKHR, eglDestroySyncKHR, eglClientWaitSyncKHR, eglSignalSyncKHR, eglGetSyncAttribKHR
+        ));
+    }
+
+    private boolean check_KHR_stream(java.util.Set<String> ext) {
+        return ext.contains("EGL_KHR_stream") && checkExtension("EGL_KHR_stream", checkFunctions(
+            eglCreateStreamKHR, eglDestroyStreamKHR, eglStreamAttribKHR, eglQueryStreamKHR, eglQueryStreamu64KHR
+        ));
+    }
+
+    private boolean check_KHR_stream_attrib(java.util.Set<String> ext) {
+        return ext.contains("EGL_KHR_stream_attrib") && checkExtension("EGL_KHR_stream_attrib", checkFunctions(
+            eglCreateStreamAttribKHR, eglSetStreamAttribKHR, eglQueryStreamAttribKHR, eglStreamConsumerAcquireAttribKHR, eglStreamConsumerReleaseAttribKHR
+        ));
+    }
+
+    private boolean check_KHR_stream_consumer_gltexture(java.util.Set<String> ext) {
+        return ext.contains("EGL_KHR_stream_consumer_gltexture") && checkExtension("EGL_KHR_stream_consumer_gltexture", checkFunctions(
+            eglStreamConsumerGLTextureExternalKHR, eglStreamConsumerAcquireKHR, eglStreamConsumerReleaseKHR
+        ));
+    }
+
+    private boolean check_KHR_stream_cross_process_fd(java.util.Set<String> ext) {
+        return ext.contains("EGL_KHR_stream_cross_process_fd") && checkExtension("EGL_KHR_stream_cross_process_fd", checkFunctions(
+            eglGetStreamFileDescriptorKHR, eglCreateStreamFromFileDescriptorKHR
+        ));
+    }
+
+    private boolean check_KHR_stream_fifo(java.util.Set<String> ext) {
+        return ext.contains("EGL_KHR_stream_fifo") && checkExtension("EGL_KHR_stream_fifo", checkFunctions(
+            eglQueryStreamTimeKHR
+        ));
+    }
+
+    private boolean check_KHR_stream_producer_eglsurface(java.util.Set<String> ext) {
+        return ext.contains("EGL_KHR_stream_producer_eglsurface") && checkExtension("EGL_KHR_stream_producer_eglsurface", checkFunctions(
+            eglCreateStreamProducerSurfaceKHR
+        ));
+    }
+
+    private boolean check_KHR_swap_buffers_with_damage(java.util.Set<String> ext) {
+        return ext.contains("EGL_KHR_swap_buffers_with_damage") && checkExtension("EGL_KHR_swap_buffers_with_damage", checkFunctions(
+            eglSwapBuffersWithDamageKHR
+        ));
+    }
+
+    private boolean check_KHR_wait_sync(java.util.Set<String> ext) {
+        return ext.contains("EGL_KHR_wait_sync") && checkExtension("EGL_KHR_wait_sync", checkFunctions(
+            eglWaitSyncKHR
+        ));
+    }
+
+    private boolean check_MESA_drm_image(java.util.Set<String> ext) {
+        return ext.contains("EGL_MESA_drm_image") && checkExtension("EGL_MESA_drm_image", checkFunctions(
+            eglCreateDRMImageMESA, eglExportDRMImageMESA
+        ));
+    }
+
+    private boolean check_MESA_image_dma_buf_export(java.util.Set<String> ext) {
+        return ext.contains("EGL_MESA_image_dma_buf_export") && checkExtension("EGL_MESA_image_dma_buf_export", checkFunctions(
+            eglExportDMABUFImageQueryMESA, eglExportDMABUFImageMESA
+        ));
+    }
+
+    private boolean check_NOK_swap_region2(java.util.Set<String> ext) {
+        return ext.contains("EGL_NOK_swap_region2") && checkExtension("EGL_NOK_swap_region2", checkFunctions(
+            eglSwapBuffersRegion2NOK
+        ));
+    }
+
+    private boolean check_NV_native_query(java.util.Set<String> ext) {
+        return ext.contains("EGL_NV_native_query") && checkExtension("EGL_NV_native_query", checkFunctions(
+            eglQueryNativeDisplayNV, eglQueryNativeWindowNV, eglQueryNativePixmapNV
+        ));
+    }
+
+    private boolean check_NV_post_sub_buffer(java.util.Set<String> ext) {
+        return ext.contains("EGL_NV_post_sub_buffer") && checkExtension("EGL_NV_post_sub_buffer", checkFunctions(
+            eglPostSubBufferNV
+        ));
+    }
+
+    private boolean check_NV_stream_consumer_gltexture_yuv(java.util.Set<String> ext) {
+        return ext.contains("EGL_NV_stream_consumer_gltexture_yuv") && checkExtension("EGL_NV_stream_consumer_gltexture_yuv", checkFunctions(
+            eglStreamConsumerGLTextureExternalAttribsNV
+        ));
+    }
+
+    private boolean check_NV_stream_flush(java.util.Set<String> ext) {
+        return ext.contains("EGL_NV_stream_flush") && checkExtension("EGL_NV_stream_flush", checkFunctions(
+            eglStreamFlush
+        ));
+    }
+
+    private boolean check_NV_stream_metadata(java.util.Set<String> ext) {
+        return ext.contains("EGL_NV_stream_metadata") && checkExtension("EGL_NV_stream_metadata", checkFunctions(
+            eglQueryDisplayAttribNV, eglSetStreamMetadataNV, eglQueryStreamMetadataNV
+        ));
+    }
+
+    private boolean check_NV_stream_reset(java.util.Set<String> ext) {
+        return ext.contains("EGL_NV_stream_reset") && checkExtension("EGL_NV_stream_reset", checkFunctions(
+            eglResetStreamNV
+        ));
+    }
+
+    private boolean check_NV_stream_sync(java.util.Set<String> ext) {
+        return ext.contains("EGL_NV_stream_sync") && checkExtension("EGL_NV_stream_sync", checkFunctions(
+            eglCreateStreamSyncNV
+        ));
+    }
+
+    private boolean check_NV_sync(java.util.Set<String> ext) {
+        return ext.contains("EGL_NV_sync") && checkExtension("EGL_NV_sync", checkFunctions(
+            eglCreateFenceSyncNV, eglDestroySyncNV, eglFenceNV, eglClientWaitSyncNV, eglSignalSyncNV, eglGetSyncAttribNV
+        ));
+    }
+
+    private boolean check_NV_system_time(java.util.Set<String> ext) {
+        return ext.contains("EGL_NV_system_time") && checkExtension("EGL_NV_system_time", checkFunctions(
+            eglGetSystemTimeFrequencyNV, eglGetSystemTimeNV
+        ));
+    }
+
+    private boolean check_WL_bind_wayland_display(java.util.Set<String> ext) {
+        return ext.contains("EGL_WL_bind_wayland_display") && checkExtension("EGL_WL_bind_wayland_display", checkFunctions(
+            eglBindWaylandDisplayWL, eglUnbindWaylandDisplayWL, eglQueryWaylandBufferWL
+        ));
+    }
+
+    private boolean check_WL_create_wayland_buffer_from_image(java.util.Set<String> ext) {
+        return ext.contains("EGL_WL_create_wayland_buffer_from_image") && checkExtension("EGL_WL_create_wayland_buffer_from_image", checkFunctions(
+            eglCreateWaylandBufferFromImageWL
+        ));
     }
 
 }

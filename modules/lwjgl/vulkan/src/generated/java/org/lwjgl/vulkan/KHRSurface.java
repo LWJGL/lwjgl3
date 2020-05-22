@@ -272,16 +272,6 @@ public class KHRSurface {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsInstance(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_surface") && VK.checkExtension("VK_KHR_surface",
-               VK.isSupported(provider, "vkDestroySurfaceKHR", caps)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceSurfaceSupportKHR", caps)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceSurfaceCapabilitiesKHR", caps)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceSurfaceFormatsKHR", caps)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceSurfacePresentModesKHR", caps)
-        );
-    }
-
     // --- [ vkDestroySurfaceKHR ] ---
 
     /** Unsafe version of: {@link #vkDestroySurfaceKHR DestroySurfaceKHR} */

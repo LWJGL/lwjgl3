@@ -26,12 +26,6 @@ public class GLXSGIXSwapBarrier {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLXCapabilities caps) {
-        return checkFunctions(
-            caps.glXBindSwapBarrierSGIX, caps.glXQueryMaxSwapBarriersSGIX
-        );
-    }
-
     // --- [ glXBindSwapBarrierSGIX ] ---
 
     /**

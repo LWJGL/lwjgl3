@@ -95,12 +95,6 @@ public class EXTBufferDeviceAddress {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_buffer_device_address") && VK.checkExtension("VK_EXT_buffer_device_address",
-               VK.isSupported(provider, "vkGetBufferDeviceAddressEXT", caps)
-        );
-    }
-
     // --- [ vkGetBufferDeviceAddressEXT ] ---
 
     /** Unsafe version of: {@link #vkGetBufferDeviceAddressEXT GetBufferDeviceAddressEXT} */

@@ -118,12 +118,6 @@ public class KHRExternalFenceCapabilities {
         throw new UnsupportedOperationException();
     }
 
-    static boolean checkCapsInstance(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_external_fence_capabilities") && VK.checkExtension("VK_KHR_external_fence_capabilities",
-               VK.isSupported(provider, "vkGetPhysicalDeviceExternalFencePropertiesKHR", caps)
-        );
-    }
-
     // --- [ vkGetPhysicalDeviceExternalFencePropertiesKHR ] ---
 
     /** Unsafe version of: {@link #vkGetPhysicalDeviceExternalFencePropertiesKHR GetPhysicalDeviceExternalFencePropertiesKHR} */

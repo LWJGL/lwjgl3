@@ -7,8 +7,6 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_copy_buffer.txt">ARB_copy_buffer</a> extension.
  * 
@@ -31,12 +29,6 @@ public class ARBCopyBuffer {
 
     protected ARBCopyBuffer() {
         throw new UnsupportedOperationException();
-    }
-
-    static boolean isAvailable(GLCapabilities caps) {
-        return checkFunctions(
-            caps.glCopyBufferSubData
-        );
     }
 
     // --- [ glCopyBufferSubData ] ---

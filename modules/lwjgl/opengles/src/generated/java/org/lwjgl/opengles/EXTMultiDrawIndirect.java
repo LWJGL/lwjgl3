@@ -33,12 +33,6 @@ public class EXTMultiDrawIndirect {
         throw new UnsupportedOperationException();
     }
 
-    static boolean isAvailable(GLESCapabilities caps) {
-        return checkFunctions(
-            caps.glMultiDrawArraysIndirectEXT, caps.glMultiDrawElementsIndirectEXT
-        );
-    }
-
     // --- [ glMultiDrawArraysIndirectEXT ] ---
 
     public static native void nglMultiDrawArraysIndirectEXT(int mode, long indirect, int drawcount, int stride);
