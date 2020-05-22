@@ -111,7 +111,7 @@ for( int i = 0; i < numViews; i++ ) {
 
     val NamedFramebufferTextureLayer = GL45["NamedFramebufferTextureLayer"]
 
-    DependsOn("caps.hasDSA(ext)")..void(
+    DependsOn("hasDSA(ext)")..void(
         "NamedFramebufferTextureMultiviewOVR",
         "",
 

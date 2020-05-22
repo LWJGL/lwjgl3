@@ -35,9 +35,6 @@ val OPENVR_FNTABLE_BINDING: APIBinding = Generator.register(object : APIBinding(
         writer.println("$t${t}long $FUNCTION_ADDRESS = OpenVR.${function.nativeClass.capabilitiesField}.${function.simpleName};")
     }
 
-    override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
-    }
-
     init {
         javaImport(
             "java.nio.*",

@@ -37,37 +37,6 @@ val ARB_direct_state_access = "ARBDirectStateAccess".nativeClassGL("ARB_direct_s
         "QUERY_TARGET"..0x82EA
     )
 
-    fun checkExtensionPresent(core: String, extension: String) {
-        customMethod("""
-    private static boolean $extension(java.util.Set<String> ext) {
-        return ext.contains("OpenGL$core") || ext.contains("GL_$extension");
-    }
-    """)
-    }
-
-    checkExtensionPresent("30", "ARB_framebuffer_object")
-    checkExtensionPresent("30", "ARB_map_buffer_range")
-    checkExtensionPresent("30", "ARB_vertex_array_object")
-    checkExtensionPresent("31", "ARB_copy_buffer")
-    checkExtensionPresent("31", "ARB_texture_buffer_object") // TextureBuffer
-    checkExtensionPresent("31", "ARB_uniform_buffer_object") // TransformFeedbackBufferBase, TransformFeedbackBufferRange
-    checkExtensionPresent("33", "ARB_instanced_arrays")
-    checkExtensionPresent("33", "ARB_sampler_objects")
-    checkExtensionPresent("40", "ARB_transform_feedback2")
-    checkExtensionPresent("41", "ARB_vertex_attrib_64bit")
-    checkExtensionPresent("41", "ARB_separate_shader_objects")
-    checkExtensionPresent("42", "ARB_texture_storage")
-    checkExtensionPresent("43", "ARB_texture_storage_multisample")
-    checkExtensionPresent("43", "ARB_vertex_attrib_binding")
-    checkExtensionPresent("43", "ARB_invalidate_subdata")
-    checkExtensionPresent("43", "ARB_texture_buffer_range")
-    checkExtensionPresent("43", "ARB_clear_buffer_object")
-    checkExtensionPresent("43", "ARB_framebuffer_no_attachments")
-    checkExtensionPresent("44", "ARB_buffer_storage")
-    checkExtensionPresent("44", "ARB_clear_texture")
-    checkExtensionPresent("44", "ARB_multi_bind")
-    checkExtensionPresent("44", "ARB_query_buffer_object")
-
     fun dsa(extension: String, func: String) {
         DependsOn("$extension(ext)")..(GL45C reuse func)
     }

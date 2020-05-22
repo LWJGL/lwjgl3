@@ -33,16 +33,21 @@ val ALCBinding = Generator.register(object : APIBinding(
         writer.println("\t\tlong $FUNCTION_ADDRESS = ALC.getICD().${function.name};")
     }
 
-    override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
-        println("\n\tstatic boolean isAvailable($ALC_CAP_CLASS caps) {")
-        print("\t\treturn checkFunctions(")
-        nativeClass.printPointers(this, { "caps.${it.name}" })
-        println(");")
+    private fun PrintWriter.checkExtensionFunctions(nativeClass: NativeClass) {
+        val capName = nativeClass.capName("ALC")
+
+        println("\n\tprivate boolean check_${nativeClass.templateName}(java.util.Set<String> ext) {")
+        print("\t\treturn ext.contains(\"$capName\") && checkExtension(\"$capName\", checkFunctions(")
+        nativeClass.printPointers(this, { it.name })
+        println("));")
         println("\t}")
     }
 
     init {
-        javaImport("static org.lwjgl.system.APIUtil.*")
+        javaImport(
+            "static org.lwjgl.system.APIUtil.*",
+            "static org.lwjgl.system.Checks.*"
+        )
 
         documentation = "Defines the capabilities of the OpenAL Context API."
     }
@@ -71,10 +76,12 @@ val ALCBinding = Generator.register(object : APIBinding(
 
         for (extension in classes) {
             val capName = extension.capName("ALC")
-            print("\n\t\t$capName = ext.contains(\"$capName\")")
-            if (extension.hasNativeFunctions && extension.prefix == "ALC")
-                print(" && checkExtension(\"$capName\", ${if (capName == extension.className) "$packageName.${extension.className}" else extension.className}.isAvailable(this))")
-            print(";")
+            print(
+                if (extension.hasNativeFunctions && extension.prefix == "ALC")
+                    "\n$t$t$capName = check_${extension.templateName}(ext);"
+                else
+                    "\n$t$t$capName = ext.contains(\"$capName\");"
+            )
         }
         print("""
     }
@@ -87,8 +94,15 @@ val ALCBinding = Generator.register(object : APIBinding(
         apiLog("[ALC] " + extension + " was reported as available but an entry point is missing.");
         return false;
     }
+""")
 
-}""")
+        for (extension in classes) {
+            if (extension.hasNativeFunctions && extension.prefix == "ALC") {
+                checkExtensionFunctions(extension)
+            }
+        }
+
+        println("\n}")
     }
 
 })

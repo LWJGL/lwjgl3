@@ -95,7 +95,7 @@ val NV_memory_attachment = "NVMemoryAttachment".nativeClassGL("NV_memory_attachm
         GLuint64("offset", "")
     )
 
-    DependsOn("caps.hasDSA(ext)")..void(
+    DependsOn("hasDSA(ext)")..void(
         "TextureAttachMemoryNV",
         "",
 
@@ -104,7 +104,7 @@ val NV_memory_attachment = "NVMemoryAttachment".nativeClassGL("NV_memory_attachm
         GLuint64("offset", "")
     )
 
-    DependsOn("caps.hasDSA(ext)")..void(
+    DependsOn("hasDSA(ext)")..void(
         "NamedBufferAttachMemoryNV",
         "",
 

@@ -63,15 +63,22 @@ private val CLBinding = Generator.register(object : APIBinding(
         writer.println("$t${t}long $FUNCTION_ADDRESS = CL.getICD().${function.name};")
     }
 
-    override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
-        println("\n${t}static boolean isAvailable($CAPABILITIES_CLASS caps) {")
-        print("$t${t}return checkFunctions(")
-        nativeClass.printPointers(this, { "caps.${it.name}" })
-        println(");")
+    private fun PrintWriter.checkExtensionFunctions(nativeClass: NativeClass) {
+        val capName = nativeClass.capName
+
+        println("\n${t}private boolean check_${nativeClass.templateName}(java.util.Set<String> ext) {")
+        print("$t${t}return ext.contains(\"$capName\") && checkExtension(\"$capName\", checkFunctions(")
+        nativeClass.printPointers(this, { it.name })
+        println("));")
         println("$t}")
     }
 
     init {
+        javaImport(
+            "static org.lwjgl.system.APIUtil.*",
+            "static org.lwjgl.system.Checks.*"
+        )
+
         documentation =
             """
             Defines the capabilities of an OpenCL platform or device.
@@ -101,25 +108,50 @@ private val CLBinding = Generator.register(object : APIBinding(
 
         // ICD/Platform constructor
         println("\n$t$CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext) {")
-        println(addresses.map { "provider.getFunctionAddress(${it.functionAddress})" }.joinToString(",\n$t$t$t", prefix = "$t${t}this(ext,\n$t$t$t", postfix = "\n$t$t);\n$t}"))
+        println(addresses.joinToString(",\n$t$t$t", prefix = "$t${t}this(ext,\n$t$t$t", postfix = "\n$t$t);\n$t}") {
+            "provider.getFunctionAddress(${it.functionAddress})"
+        })
 
         // Device constructor
         println("\n$t$CAPABILITIES_CLASS(CLCapabilities caps, Set<String> ext) {")
-        println(addresses.map { "caps.${it.name}" }.joinToString(",\n$t$t$t", prefix = "$t${t}this(ext,\n$t$t$t", postfix = "\n$t$t);\n$t}"))
+        println(addresses.joinToString(",\n$t$t$t", prefix = "$t${t}this(ext,\n$t$t$t", postfix = "\n$t$t);\n$t}") {
+            "caps.${it.name}"
+        })
 
         // Common constructor
         println("\n${t}private $CAPABILITIES_CLASS(Set<String> ext, long... functions) {")
-        println(addresses.mapIndexed { i, function -> "${function.name} = functions[$i];" }.joinToString("\n$t$t", prefix = "$t$t", postfix = "\n"))
+        println(addresses.mapIndexed { i, function -> "${function.name} = functions[$i];" }.joinToString("\n$t$t", prefix = "$t$t"))
         for (extension in classes) {
             val capName = extension.capName
-            print("$t$t$capName = ext.contains(\"$capName\")")
-            if (extension.hasNativeFunctions)
-                print(" && CL.checkExtension(\"$capName\", ${if (capName == extension.className) "$packageName.${extension.className}" else extension.className}.isAvailable(this))")
-            println(";")
+            print(
+                if (extension.hasNativeFunctions)
+                    "\n$t$t$capName = check_${extension.templateName}(ext);"
+                else
+                    "\n$t$t$capName = ext.contains(\"$capName\");"
+            )
         }
-        println("$t}")
+        print("""
+    }
 
-        print("\n}")
+    private static boolean checkExtension(String extension, boolean supported) {
+        if (supported) {
+            return true;
+        }
+
+        apiLog("[CL] " + extension + " was reported as available but an entry point is missing.");
+        return false;
+    }
+""")
+
+        for (extension in classes) {
+            if (!extension.hasNativeFunctions) {
+                continue
+            }
+
+            checkExtensionFunctions(extension)
+        }
+
+        println("\n}")
     }
 
 })

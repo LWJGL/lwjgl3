@@ -34,7 +34,7 @@ val EXT_EGL_image_storage = "EXTEGLImageStorage".nativeClassGL("EXT_EGL_image_st
         nullable..NullTerminated..int.const.p("attrib_list", "")
     )
 
-    DependsOn("caps.hasDSA(ext)")..void(
+    DependsOn("hasDSA(ext)")..void(
         "EGLImageTargetTextureStorageEXT",
         "",
 

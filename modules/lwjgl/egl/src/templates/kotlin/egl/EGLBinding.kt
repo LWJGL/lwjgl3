@@ -51,15 +51,21 @@ private val EGLBinding = Generator.register(object : APIBinding(
         writer.println("$t${t}long $FUNCTION_ADDRESS = EGL.getCapabilities().${function.name};")
     }
 
-    override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
-        println("\n${t}static boolean isAvailable($CAPABILITIES_CLASS caps) {")
-        print("$t${t}return checkFunctions(")
-        nativeClass.printPointers(this, { "caps.${it.name}" })
-        println(");")
+    private fun PrintWriter.checkExtensionFunctions(nativeClass: NativeClass) {
+        val capName = nativeClass.capName
+
+        println("\n${t}private boolean check_${nativeClass.templateName}(java.util.Set<String> ext) {")
+        print("$t${t}return ext.contains(\"$capName\") && checkExtension(\"$capName\", checkFunctions(")
+        nativeClass.printPointers(this, { it.name })
+        println("));")
         println("$t}")
     }
 
     init {
+        javaImport(
+            "static org.lwjgl.system.APIUtil.*",
+            "static org.lwjgl.system.Checks.*"
+        )
         documentation = "Defines the capabilities of an EGLDisplay or the EGL client library."
     }
 
@@ -89,17 +95,37 @@ private val EGLBinding = Generator.register(object : APIBinding(
 
         // Common constructor
         println("\n${t}private $CAPABILITIES_CLASS(Set<String> ext, long... functions) {")
-        println(addresses.mapIndexed { i, function -> "${function.name} = functions[$i];" }.joinToString("\n$t$t", prefix = "$t$t", postfix = "\n"))
+        print(addresses.mapIndexed { i, function -> "${function.name} = functions[$i];" }.joinToString("\n$t$t", prefix = "$t$t", postfix = "\n"))
         for (extension in classes) {
             val capName = extension.capName
-            print("$t$t$capName = ext.contains(\"$capName\")")
-            if (extension.hasNativeFunctions)
-                print(" && EGL.checkExtension(\"$capName\", ${if (capName == extension.className) "$packageName.${extension.className}" else extension.className}.isAvailable(this))")
-            println(";")
+            print(
+                if (extension.hasNativeFunctions)
+                    "\n$t$t$capName = check_${extension.templateName}(ext);"
+                else
+                    "\n$t$t$capName = ext.contains(\"$capName\");"
+            )
         }
-        println("$t}")
+        println("""
+    }
 
-        print("\n}")
+    private static boolean checkExtension(String extension, boolean supported) {
+        if (supported) {
+            return true;
+        }
+
+        apiLog("[EGL] " + extension + " was reported as available but an entry point is missing.");
+        return false;
+    }""")
+
+        for (extension in classes) {
+            if (!extension.hasNativeFunctions) {
+                continue
+            }
+
+            checkExtensionFunctions(extension)
+        }
+
+        println("\n}")
     }
 
 })

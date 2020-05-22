@@ -95,21 +95,21 @@ private val GLESBinding = register(object : APIBinding(
 
     private val EXTENSION_NAME = "[A-Za-z0-9_]+".toRegex()
 
-    override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
-        print("\n${t}static boolean isAvailable($CAPABILITIES_CLASS caps")
-        if (nativeClass.functions.any { it.has<DependsOn>() }) print(", java.util.Set<String> ext")
-        println(") {")
+    private fun PrintWriter.checkExtensionFunctions(nativeClass: NativeClass) {
+        println("\n${t}private boolean check_${nativeClass.templateName}(java.util.Set<String> ext) {")
 
         val printPointer = { func: Func ->
             if (func.has<DependsOn>())
-                "${func.get<DependsOn>().reference.let { if (EXTENSION_NAME.matches(it)) "ext.contains(\"$it\")" else it }} ? caps.${func.name} : -1L"
+                "${func.get<DependsOn>().reference.let { if (EXTENSION_NAME.matches(it)) "ext.contains(\"$it\")" else it }} ? ${func.name} : -1L"
             else
-                "caps.${func.name}"
+                func.name
         }
 
-        print("$t${t}return checkFunctions(")
+        val capName = nativeClass.capName
+
+        print("$t${t}return ext.contains(\"$capName\") && checkExtension(\"$capName\", checkFunctions(")
         nativeClass.printPointers(this, printPointer) { !it.has(IgnoreMissing) }
-        println(");")
+        println("));")
         println("$t}")
     }
 
@@ -120,7 +120,7 @@ private val GLESBinding = register(object : APIBinding(
             "java.util.List",
             "java.util.function.IntFunction",
             "static org.lwjgl.system.APIUtil.*",
-            "static org.lwjgl.system.MemoryUtil.*"
+            "static org.lwjgl.system.Checks.*"
         )
 
         documentation = "Defines the capabilities of an OpenGL ES context."
@@ -154,12 +154,12 @@ private val GLESBinding = register(object : APIBinding(
 
         for (extension in classes) {
             val capName = extension.capName
-            if (extension.hasNativeFunctions) {
-                print("\n$t$t$capName = ext.contains(\"$capName\") && checkExtension(\"$capName\", ${if (capName == extension.className) "$packageName.${extension.className}" else extension.className}.isAvailable(this")
-                if (extension.functions.any { it.has<DependsOn>() }) print(", ext")
-                print("));")
-            } else
-                print("\n$t$t$capName = ext.contains(\"$capName\");")
+            print(
+                if (extension.hasNativeFunctions)
+                    "\n$t$t$capName = check_${extension.templateName}(ext);"
+                else
+                    "\n$t$t$capName = ext.contains(\"$capName\");"
+            )
         }
         print("""
 
@@ -183,8 +183,17 @@ private val GLESBinding = register(object : APIBinding(
         apiLog("[GLES] " + extension + " was reported as available but an entry point is missing.");
         return false;
     }
+""")
 
-}""")
+        for (extension in classes) {
+            if (!extension.hasNativeFunctions) {
+                continue
+            }
+
+            checkExtensionFunctions(extension)
+        }
+
+        println("\n}")
     }
 
 })

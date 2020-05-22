@@ -117,24 +117,24 @@ val GLBinding = Generator.register(object : APIBinding(
 
     private val EXTENSION_NAME = "[A-Za-z0-9_]+".toRegex()
 
-    override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
+    private fun PrintWriter.checkExtensionFunctions(nativeClass: NativeClass) {
         if (nativeClass.isCore) {
             return
         }
 
+        val capName = nativeClass.capName
         val hasDeprecated = nativeClass.functions.hasDeprecated
 
-        print("\n${t}static boolean isAvailable($CAPABILITIES_CLASS caps")
-        if (nativeClass.functions.any { it.has<DependsOn>() }) print(", java.util.Set<String> ext")
+        print("\n${t}private boolean check_${nativeClass.templateName}(java.util.Set<String> ext")
         if (hasDeprecated) print(", boolean fc")
         println(") {")
-        print("$t${t}return ")
+        print("$t${t}return ext.contains(\"$capName\") && checkExtension(\"$capName\", ")
 
         val printPointer = { func: Func ->
             if (func.has<DependsOn>())
-                "${func.get<DependsOn>().reference.let { if (EXTENSION_NAME.matches(it)) "ext.contains(\"$it\")" else it }} ? caps.${func.name} : -1L"
+                "${func.get<DependsOn>().reference.let { if (EXTENSION_NAME.matches(it)) "ext.contains(\"$it\")" else it }} ? ${func.name} : -1L"
             else
-                "caps.${func.name}"
+                func.name
         }
 
         if (hasDeprecated) {
@@ -148,8 +148,12 @@ val GLBinding = Generator.register(object : APIBinding(
             nativeClass.printPointers(this, printPointer) { (!it.has(DeprecatedGL) || it.has<DependsOn>()) && !it.has(IgnoreMissing) }
         else
             nativeClass.printPointers(this, printPointer) { !it.has(IgnoreMissing) }
-        println(");")
+        println("));")
         println("$t}")
+    }
+
+    private fun PrintWriter.checkExtensionPresent(core: String, extension: String) {
+        println("""${t}private static boolean $extension(java.util.Set<String> ext) { return ext.contains("OpenGL$core") || ext.contains("GL_$extension"); }""")
     }
 
     init {
@@ -159,6 +163,7 @@ val GLBinding = Generator.register(object : APIBinding(
             "java.util.List",
             "java.util.function.IntFunction",
             "static org.lwjgl.system.APIUtil.*",
+            "static org.lwjgl.system.Checks.*",
             "static org.lwjgl.system.MemoryUtil.*"
         )
 
@@ -208,10 +213,9 @@ val GLBinding = Generator.register(object : APIBinding(
             }
             val capName = extension.capName
             if (extension.hasNativeFunctions) {
-                print("\n$t$t$capName = ext.contains(\"$capName\") && checkExtension(\"$capName\", ${if (capName == extension.className) "$packageName.${extension.className}" else extension.className}.isAvailable(this")
-                if (extension.functions.any { it.has<DependsOn>() }) print(", ext")
+                print("\n$t$t$capName = check_${extension.templateName}(ext")
                 if (extension.functions.hasDeprecated) print(", fc")
-                print("));")
+                print(");")
             } else
                 print("\n$t$t$capName = ext.contains(\"$capName\");")
         }
@@ -225,7 +229,7 @@ val GLBinding = Generator.register(object : APIBinding(
         return addresses;
     }
 
-    boolean hasDSA(Set<String> ext) {
+    private static boolean hasDSA(Set<String> ext) {
         return ext.contains("GL45") || ext.contains("GL_ARB_direct_state_access") || ext.contains("GL_EXT_direct_state_access");
     }
 
@@ -241,8 +245,42 @@ val GLBinding = Generator.register(object : APIBinding(
         apiLog("[GL] " + extension + " was reported as available but an entry point is missing.");
         return false;
     }
+""")
 
-}""")
+        for (extension in classes) {
+            if (extension.isCore || !extension.hasNativeFunctions) {
+                continue
+            }
+
+            checkExtensionFunctions(extension)
+        }
+
+        println()
+
+        checkExtensionPresent("30", "ARB_framebuffer_object")
+        checkExtensionPresent("30", "ARB_map_buffer_range")
+        checkExtensionPresent("30", "ARB_vertex_array_object")
+        checkExtensionPresent("31", "ARB_copy_buffer")
+        checkExtensionPresent("31", "ARB_texture_buffer_object") // TextureBuffer
+        checkExtensionPresent("31", "ARB_uniform_buffer_object") // TransformFeedbackBufferBase, TransformFeedbackBufferRange
+        checkExtensionPresent("33", "ARB_instanced_arrays")
+        checkExtensionPresent("33", "ARB_sampler_objects")
+        checkExtensionPresent("40", "ARB_transform_feedback2")
+        checkExtensionPresent("41", "ARB_vertex_attrib_64bit")
+        checkExtensionPresent("41", "ARB_separate_shader_objects")
+        checkExtensionPresent("42", "ARB_texture_storage")
+        checkExtensionPresent("43", "ARB_texture_storage_multisample")
+        checkExtensionPresent("43", "ARB_vertex_attrib_binding")
+        checkExtensionPresent("43", "ARB_invalidate_subdata")
+        checkExtensionPresent("43", "ARB_texture_buffer_range")
+        checkExtensionPresent("43", "ARB_clear_buffer_object")
+        checkExtensionPresent("43", "ARB_framebuffer_no_attachments")
+        checkExtensionPresent("44", "ARB_buffer_storage")
+        checkExtensionPresent("44", "ARB_clear_texture")
+        checkExtensionPresent("44", "ARB_multi_bind")
+        checkExtensionPresent("44", "ARB_query_buffer_object")
+
+        println("\n}")
     }
 
 })

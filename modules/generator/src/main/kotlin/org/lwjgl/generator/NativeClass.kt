@@ -73,14 +73,12 @@ abstract class APIBinding(
 
     abstract fun generateFunctionAddress(writer: PrintWriter, function: Func)
 
-    abstract fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass)
-
     // OVERRIDES
 
     open fun getFunctionOrdinal(function: Func): Int = 0
 
     /** Can be overridden to generate binding-specific alternative methods. */
-    open fun generateAlternativeMethods(
+    internal open fun generateAlternativeMethods(
         writer: PrintWriter,
         function: Func,
         transforms: MutableMap<QualifiedType, Transform>
@@ -112,6 +110,8 @@ abstract class SimpleBinding(
         writer.println("$t${t}long ${if (function has Address) RESULT else FUNCTION_ADDRESS} = Functions.${function.simpleName};")
     }
 
+    abstract fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass)
+
     protected fun PrintWriter.generateFunctionsClass(nativeClass: NativeClass, javadoc: String) {
         val bindingFunctions = nativeClass.functions.filter { !it.hasExplicitFunctionAddress && !it.has<Macro>() }
         if (bindingFunctions.none())
@@ -138,6 +138,8 @@ abstract class SimpleBinding(
     }""")
     }
 }
+// TODO: Remove if KT-7859 is fixed.
+private fun SimpleBinding.generateFunctionSetup(writer: PrintWriter, nativeClass: NativeClass) = writer.generateFunctionSetup(nativeClass)
 
 /** Creates a simple APIBinding that stores the shared library and function pointers inside the binding class. The shared library is never unloaded. */
 fun simpleBinding(
@@ -167,9 +169,6 @@ fun APIBinding.delegate(
         generateFunctionsClass(nativeClass, "\n$t/** Contains the function pointers loaded from {@code $libraryExpression}. */")
     }
 }
-
-// TODO: Remove if KT-7859 is fixed.
-private fun APIBinding.generateFunctionSetup(writer: PrintWriter, nativeClass: NativeClass) = writer.generateFunctionSetup(nativeClass)
 
 class NativeClass internal constructor(
     module: Module,
@@ -461,38 +460,48 @@ class NativeClass internal constructor(
             }
 
             if ((hasFunctions || binding != null) && module !== Module.CORE) {
-                println("import org.lwjgl.system.*;\n")
+                println("import org.lwjgl.system.*;")
             }
 
-            if (hasFunctions && (binding is SimpleBinding || (binding != null && functions.any { it.has<MapPointer>() })))
-                println("import static org.lwjgl.system.APIUtil.*;")
-            if (hasFunctions && ((binding != null && binding !is SimpleBinding) || functions.any { func ->
-                func.hasParam { param ->
-                    param.nativeType is PointerType<*> && func.getReferenceParam<AutoSize>(param.name).let {
-                        if (it == null)
-                            !param.has<Nullable>() && param.nativeType.elementType !is StructType
-                        else
-                            it.get<AutoSize>().reference != param.name // dependent auto-size
-                    }
-                }
-            }))
-                println("import static org.lwjgl.system.Checks.*;")
+            val staticImports = ArrayList<String>()
+
+            if (hasFunctions) {
+                if (binding is SimpleBinding || (binding != null && functions.any { it.has<MapPointer>() }))
+                    staticImports.add("org.lwjgl.system.APIUtil.*")
+                if ((binding != null && binding.apiCapabilities == APICapabilities.JAVA_CAPABILITIES) || functions.any { func ->
+                        func.hasParam { param ->
+                            param.nativeType is PointerType<*> && func.getReferenceParam<AutoSize>(param.name).let {
+                                if (it == null)
+                                    !param.has<Nullable>() && param.nativeType.elementType !is StructType
+                                else
+                                    it.get<AutoSize>().reference != param.name // dependent auto-size
+                            }
+                        } || (module.arrayOverloads && func.hasArrayOverloads)
+                    })
+                    staticImports.add("org.lwjgl.system.Checks.*")
+            }
             if (binding != null && functions.any { !it.hasCustomJNI || it.hasArrayOverloads })
-                println("import static org.lwjgl.system.JNI.*;")
+                staticImports.add("org.lwjgl.system.JNI.*")
             if (hasMemoryStack)
-                println("import static org.lwjgl.system.MemoryStack.*;")
+                staticImports.add("org.lwjgl.system.MemoryStack.*")
             if (hasBuffers && functions.any {
                 it.returns.isBufferPointer || it.hasParam { param ->
                     param.nativeType.let { type -> type is PointerType<*> && type.mapping !== PointerMapping.OPAQUE_POINTER && (type.elementType !is StructType || param.has<Nullable>()) }
                 }
             }) {
-                println("import static org.lwjgl.system.MemoryUtil.*;")
+                staticImports.add("org.lwjgl.system.MemoryUtil.*")
                 if (functions.any { func ->
                     func.hasParam {
                         it.has<MultiType> { types.contains(PointerMapping.DATA_POINTER) } && func.hasAutoSizeFor(it)
                     }
                 })
-                    println("import static org.lwjgl.system.Pointer.*;")
+                    staticImports.add("org.lwjgl.system.Pointer.*")
+            }
+            if (staticImports.isNotEmpty()) {
+                println()
+                for (import in staticImports) {
+                    println("import static $import;")
+                }
             }
             println()
         }
@@ -544,7 +553,9 @@ class NativeClass internal constructor(
     ${if (isOpen) "protected" else "private"} $className() {
         throw new UnsupportedOperationException();
     }""")
-                    binding.generateFunctionSetup(this, this@NativeClass)
+                    if (binding is SimpleBinding) {
+                        binding.generateFunctionSetup(this, this@NativeClass)
+                    }
                 }
                 printCustomMethods(static = true)
             } else {

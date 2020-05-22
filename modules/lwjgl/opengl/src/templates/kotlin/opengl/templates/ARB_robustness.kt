@@ -125,7 +125,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
     )
 
     var src = GL11["GetMapdv"]
-    DependsOn("caps.glGetMapdv != NULL")..void(
+    DependsOn("glGetMapdv != NULL")..void(
         "GetnMapdvARB",
         "Robust version of ${src.javaDocLink}",
 
@@ -136,7 +136,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
     )
 
     src = GL11["GetMapfv"]
-    DependsOn("caps.glGetMapfv != NULL")..void(
+    DependsOn("glGetMapfv != NULL")..void(
         "GetnMapfvARB",
         "Robust version of ${src.javaDocLink}",
 
@@ -147,7 +147,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
     )
 
     src = GL11["GetMapiv"]
-    DependsOn("caps.glGetMapiv != NULL")..void(
+    DependsOn("glGetMapiv != NULL")..void(
         "GetnMapivARB",
         "Robust version of ${src.javaDocLink}",
 
@@ -158,7 +158,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
     )
 
     src = GL11["GetPixelMapfv"]
-    DependsOn("caps.glGetPixelMapfv != NULL")..void(
+    DependsOn("glGetPixelMapfv != NULL")..void(
         "GetnPixelMapfvARB",
         "Robust version of ${src.javaDocLink}",
 
@@ -168,7 +168,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
     )
 
     src = GL11["GetPixelMapuiv"]
-    DependsOn("caps.glGetPixelMapuiv != NULL")..void(
+    DependsOn("glGetPixelMapuiv != NULL")..void(
         "GetnPixelMapuivARB",
         "Robust version of ${src.javaDocLink}",
 
@@ -178,7 +178,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
     )
 
     src = GL11["GetPixelMapusv"]
-    DependsOn("caps.glGetPixelMapusv != NULL")..void(
+    DependsOn("glGetPixelMapusv != NULL")..void(
         "GetnPixelMapusvARB",
         "Robust version of ${src.javaDocLink}",
 
@@ -188,7 +188,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
     )
 
     src = GL11["GetPolygonStipple"]
-    DependsOn("caps.glGetPolygonStipple != NULL")..void(
+    DependsOn("glGetPolygonStipple != NULL")..void(
         "GetnPolygonStippleARB",
         "Robust version of ${src.javaDocLink}",
 
@@ -225,7 +225,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
     )
 
     src = ARB_imaging["GetColorTable"]
-    DependsOn("ext.contains(\"GL_ARB_imaging\") && caps.glGetColorTable != NULL")..void(
+    DependsOn("ext.contains(\"GL_ARB_imaging\") && glGetColorTable != NULL")..void(
         "GetnColorTableARB",
         "Robust version of ${src.javaDocLink}",
 
@@ -237,7 +237,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
     )
 
     src = ARB_imaging["GetConvolutionFilter"]
-    DependsOn("ext.contains(\"GL_ARB_imaging\") && caps.glGetConvolutionFilter != NULL")..void(
+    DependsOn("ext.contains(\"GL_ARB_imaging\") && glGetConvolutionFilter != NULL")..void(
         "GetnConvolutionFilterARB",
         "Robust version of ${src.javaDocLink}",
 
@@ -249,7 +249,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
     )
 
     src = ARB_imaging["GetSeparableFilter"]
-    DependsOn("ext.contains(\"GL_ARB_imaging\") && caps.glGetSeparableFilter != NULL")..void(
+    DependsOn("ext.contains(\"GL_ARB_imaging\") && glGetSeparableFilter != NULL")..void(
         "GetnSeparableFilterARB",
         "Robust version of ${src.javaDocLink}",
 
@@ -264,7 +264,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
     )
 
     src = ARB_imaging["GetHistogram"]
-    DependsOn("ext.contains(\"GL_ARB_imaging\") && caps.glGetHistogram != NULL")..void(
+    DependsOn("ext.contains(\"GL_ARB_imaging\") && glGetHistogram != NULL")..void(
         "GetnHistogramARB",
         "Robust version of ${src.javaDocLink}",
 
@@ -277,7 +277,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
     )
 
     src = ARB_imaging["GetMinmax"]
-    DependsOn("ext.contains(\"GL_ARB_imaging\") && caps.glGetMinmax != NULL")..void(
+    DependsOn("ext.contains(\"GL_ARB_imaging\") && glGetMinmax != NULL")..void(
         "GetnMinmaxARB",
         "Robust version of ${src.javaDocLink}",
 

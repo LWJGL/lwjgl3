@@ -210,7 +210,7 @@ val EXT_memory_object = "EXTMemoryObject".nativeClassGLES("EXT_memory_object", p
         GLuint64("offset", "")
     )
 
-    DependsOn("caps.hasDSA(ext)")..void(
+    DependsOn("hasDSA(ext)")..void(
         "TextureStorageMem2DEXT",
         "",
 
@@ -223,7 +223,7 @@ val EXT_memory_object = "EXTMemoryObject".nativeClassGLES("EXT_memory_object", p
         GLuint64("offset", "")
     )
 
-    DependsOn("caps.hasDSA(ext)")..void(
+    DependsOn("hasDSA(ext)")..void(
         "TextureStorageMem2DMultisampleEXT",
         "",
 
@@ -237,7 +237,7 @@ val EXT_memory_object = "EXTMemoryObject".nativeClassGLES("EXT_memory_object", p
         GLuint64("offset", "")
     )
 
-    DependsOn("caps.hasDSA(ext)")..void(
+    DependsOn("hasDSA(ext)")..void(
         "TextureStorageMem3DEXT",
         "",
 
@@ -251,7 +251,7 @@ val EXT_memory_object = "EXTMemoryObject".nativeClassGLES("EXT_memory_object", p
         GLuint64("offset", "")
     )
 
-    DependsOn("caps.hasDSA(ext)")..void(
+    DependsOn("hasDSA(ext)")..void(
         "TextureStorageMem3DMultisampleEXT",
         "",
 
@@ -266,7 +266,7 @@ val EXT_memory_object = "EXTMemoryObject".nativeClassGLES("EXT_memory_object", p
         GLuint64("offset", "")
     )
 
-    DependsOn("caps.hasDSA(ext)")..void(
+    DependsOn("hasDSA(ext)")..void(
         "NamedBufferStorageMemEXT",
         "",
 

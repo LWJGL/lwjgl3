@@ -48,7 +48,7 @@ val EXT_external_buffer = "EXTExternalBuffer".nativeClassGL("EXT_external_buffer
         GLbitfield("flags", "")
     )
 
-    DependsOn("caps.hasDSA(ext)")..void(
+    DependsOn("hasDSA(ext)")..void(
         "NamedBufferStorageExternalEXT",
         "",
 

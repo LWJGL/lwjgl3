@@ -19,18 +19,21 @@ val GLXBinding = Generator.register(object : APIBinding(
         writer.println("$t${t}long $FUNCTION_ADDRESS = GL.getCapabilitiesGLXClient().${function.name};")
     }
 
-    override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
-        println("\n${t}static boolean isAvailable($CAPABILITIES_CLASS caps) {")
-        print("$t${t}return ")
+    private fun PrintWriter.checkExtensionFunctions(nativeClass: NativeClass) {
+        val capName = nativeClass.capName
 
-        print("checkFunctions(")
-        nativeClass.printPointers(this, { "caps.${it.name}" }) { !(it has IgnoreMissing) }
-        println(");")
+        println("\n${t}private boolean check_${nativeClass.templateName}(java.util.Set<String> ext) {")
+        print("$t${t}return ext.contains(\"$capName\") && checkExtension(\"$capName\", checkFunctions(")
+        nativeClass.printPointers(this, { it.name }) { !(it has IgnoreMissing) }
+        println("));")
         println("$t}")
     }
 
     init {
-        javaImport("static org.lwjgl.system.APIUtil.*")
+        javaImport(
+            "static org.lwjgl.system.APIUtil.*",
+            "static org.lwjgl.system.Checks.*"
+        )
 
         documentation = "Defines the GLX capabilities of a connection."
     }
@@ -62,10 +65,11 @@ val GLXBinding = Generator.register(object : APIBinding(
 
         for (extension in classes) {
             val capName = extension.capName
-            print(if (extension.hasNativeFunctions)
-                "\n$t$t$capName = ext.contains(\"$capName\") && checkExtension(\"$capName\", ${if (capName == extension.className) "$packageName.${extension.className}" else extension.className}.isAvailable(this));"
-            else
-                "\n$t$t$capName = ext.contains(\"$capName\");"
+            print(
+                if (extension.hasNativeFunctions)
+                    "\n$t$t$capName = check_${extension.templateName}(ext);"
+                else
+                    "\n$t$t$capName = ext.contains(\"$capName\");"
             )
         }
         print("""
@@ -79,8 +83,17 @@ val GLXBinding = Generator.register(object : APIBinding(
         apiLog("[GLX] " + extension + " was reported as available but an entry point is missing.");
         return false;
     }
+""")
 
-}""")
+        for (extension in classes) {
+            if (!extension.hasNativeFunctions) {
+                continue
+            }
+
+            checkExtensionFunctions(extension)
+        }
+
+        println("\n}")
     }
 
 })

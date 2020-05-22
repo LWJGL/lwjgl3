@@ -21,11 +21,13 @@ private val ALBinding = Generator.register(object : APIBinding(
         writer.println("$t${t}long $FUNCTION_ADDRESS = AL.getICD().${function.name};")
     }
 
-    override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
-        println("\n${t}static boolean isAvailable($CAPABILITIES_CLASS caps) {")
-        print("$t${t}return checkFunctions(")
-        nativeClass.printPointers(this, { "caps.${it.name}" })
-        println(");")
+    private fun PrintWriter.checkExtensionFunctions(nativeClass: NativeClass) {
+        val capName = nativeClass.capName("AL")
+
+        println("\n${t}private boolean check_${nativeClass.templateName}(java.util.Set<String> ext) {")
+        print("$t${t}return ext.contains(\"$capName\") && checkExtension(\"$capName\", checkFunctions(")
+        nativeClass.printPointers(this, { it.name })
+        println("));")
         println("$t}")
     }
 
@@ -35,7 +37,8 @@ private val ALBinding = Generator.register(object : APIBinding(
             "java.lang.reflect.Field",
             "java.util.List",
             "java.util.function.IntFunction",
-            "static org.lwjgl.system.APIUtil.*"
+            "static org.lwjgl.system.APIUtil.*",
+            "static org.lwjgl.system.Checks.*"
         )
 
         documentation = "Defines the capabilities of an OpenAL context."
@@ -70,10 +73,12 @@ private val ALBinding = Generator.register(object : APIBinding(
 
         for (extension in classes) {
             val capName = extension.capName("AL")
-            print("\n$t$t$capName = ext.contains(\"$capName\")")
-            if (extension.hasNativeFunctions)
-                print(" && checkExtension(\"$capName\", ${if (capName == extension.className) "$packageName.${extension.className}" else extension.className}.isAvailable(this))")
-            print(";")
+            print(
+                if (extension.hasNativeFunctions)
+                    "\n$t$t$capName = check_${extension.templateName}(ext);"
+                else
+                    "\n$t$t$capName = ext.contains(\"$capName\");"
+            )
         }
         print("""
 
@@ -93,8 +98,17 @@ private val ALBinding = Generator.register(object : APIBinding(
         apiLog("[AL] " + extension + " was reported as available but an entry point is missing.");
         return false;
     }
+""")
 
-}""")
+        for (extension in classes) {
+            if (!extension.hasNativeFunctions) {
+                continue
+            }
+
+            checkExtensionFunctions(extension)
+        }
+
+        println("\n}")
     }
 
 })

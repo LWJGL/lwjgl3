@@ -62,60 +62,33 @@ val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
         )
     }
 
-    override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
-        if (nativeClass.functions.any { it.isInstanceFunction }) {
-            print("""
-    static boolean checkCapsInstance(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
-        return ext.contains("${nativeClass.capName}") && VK.checkExtension("${nativeClass.capName}",""")
-            nativeClass.functions
-                .filter { it.isInstanceFunction }
-                .forEachIndexed { index, it ->
-                    print("\n$t$t$t${if (index == 0) "   " else "&& "}VK.isSupported(provider, \"${it.name}\", caps")
-                    if (it.has<DependsOn>()) {
-                        print(", ${it.get<DependsOn>().reference.let { if (EXTENSION_NAME.matches(it)) "ext.contains(\"$it\")" else it }}")
-                    }
-                    print(")")
-                }
-            println("""
-        );
-    }""")
-        }
+    private fun PrintWriter.checkExtensionFunctions(nativeClass: NativeClass) {
+        val capName = nativeClass.capName
 
-        if (nativeClass.functions.any { it.isDeviceFunction }) {
-            val isDeviceExtension = EXTENSION_TYPES[nativeClass.templateName] == "device" || nativeClass.templateName.startsWith("VK")
-            val hasDependencies = nativeClass.functions.any { it.has<DependsOn>() }
-            print("""
-    static boolean checkCapsDevice(FunctionProvider provider, java.util.Map<String, Long> caps""")
-            if (isDeviceExtension || hasDependencies) {
-                print(", java.util.Set<String> ext")
-            } else if (!isDeviceExtension) {
-                print(", VKCapabilitiesInstance capsInstance")
-            }
-            print(""") {
-        return """)
-            if (isDeviceExtension) {
-                print("ext.contains(\"${nativeClass.capName}\")")
-            } else {
-                print("capsInstance.${nativeClass.capName}")
-            }
-            print(""" && VK.checkExtension("${nativeClass.capName}",""")
-            nativeClass.functions
-                .filter { it.isDeviceFunction }
-                .forEachIndexed { index, it ->
-                    print("\n$t$t$t${if (index == 0) "   " else "&& "}VK.isSupported(provider, \"${it.name}\", caps")
-                    if (it.has<DependsOn>()) {
-                        print(", ${it.get<DependsOn>().reference.let { if (EXTENSION_NAME.matches(it)) "ext.contains(\"$it\")" else it }}")
-                    }
-                    print(")")
+        print("""
+    private static boolean check_${nativeClass.templateName}(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+        return ext.contains("$capName") && VK.checkExtension("$capName",""")
+        nativeClass.functions
+            .filter { it.isInstanceFunction }
+            .forEachIndexed { index, it ->
+                print("\n$t$t$t${if (index == 0) "   " else "&& "}VK.isSupported(provider, \"${it.name}\", caps")
+                if (it.has<DependsOn>()) {
+                    print(", ${it.get<DependsOn>().reference.let { if (EXTENSION_NAME.matches(it)) "ext.contains(\"$it\")" else it }}")
                 }
-            println("""
+                print(")")
+            }
+        println("""
         );
     }""")
-        }
     }
 
     init {
-        javaImport("java.util.*")
+        javaImport(
+            "java.util.*",
+
+            "static org.lwjgl.system.APIUtil.*",
+            "static org.lwjgl.system.Checks.*"
+        )
 
         documentation = "Defines the capabilities of a Vulkan {@code VkInstance}."
     }
@@ -175,12 +148,12 @@ val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
         classes.forEach {
             val capName = it.capName
             val hasFlag = EXTENSION_TYPES[it.templateName] == "instance" || it.templateName.startsWith("VK")
-            if (it.functions.any { it.isInstanceFunction }) {
+            if (it.functions.any { func -> func.isInstanceFunction }) {
                 print(
                     if (hasFlag)
-                        "\n$t$t$capName = ${it.className}.checkCapsInstance(provider, caps, ext);"
+                        "\n$t$t$capName = check_${it.templateName}(provider, caps, ext);"
                     else
-                        "\n$t$t${it.className}.checkCapsInstance(provider, caps, deviceExt);"
+                        "\n$t${t}check_${it.templateName}(provider, caps, deviceExt);"
                 )
             } else if (hasFlag) {
                 print("\n$t$t$capName = ext.contains(\"$capName\");")
@@ -192,22 +165,65 @@ val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
             print("\n$t$t$it = VK.get(caps, \"$it\");")
         }
 
-        println(
+        print(
             """
     }
+""")
 
-}"""
-        )
+        for (extension in classes) {
+            if (extension.functions.any { it.isInstanceFunction }) {
+                checkExtensionFunctions(extension)
+            }
+        }
+
+        println("\n}")
     }
 
 })
 
 val VK_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.VULKAN, CAPS_DEVICE) {
 
+    private fun PrintWriter.checkExtensionFunctions(nativeClass: NativeClass) {
+        val capName = nativeClass.capName
+
+        val isDeviceExtension = EXTENSION_TYPES[nativeClass.templateName] == "device" || nativeClass.templateName.startsWith("VK")
+        val hasDependencies = nativeClass.functions.any { it.has<DependsOn>() }
+        print("""
+    private static boolean check_${nativeClass.templateName}(FunctionProvider provider, java.util.Map<String, Long> caps""")
+        if (isDeviceExtension || hasDependencies) {
+            print(", java.util.Set<String> ext")
+        } else if (!isDeviceExtension) {
+            print(", VKCapabilitiesInstance capsInstance")
+        }
+        print(""") {
+        return """)
+        if (isDeviceExtension) {
+            print("ext.contains(\"$capName\")")
+        } else {
+            print("capsInstance.$capName")
+        }
+        print(""" && VK.checkExtension("$capName",""")
+        nativeClass.functions
+            .filter { it.isDeviceFunction }
+            .forEachIndexed { index, it ->
+                print("\n$t$t$t${if (index == 0) "   " else "&& "}VK.isSupported(provider, \"${it.name}\", caps")
+                if (it.has<DependsOn>()) {
+                    print(", ${it.get<DependsOn>().reference.let { if (EXTENSION_NAME.matches(it)) "ext.contains(\"$it\")" else it }}")
+                }
+                print(")")
+            }
+        println("""
+        );
+    }""")
+    }
+
     init {
         javaImport(
             "java.util.*",
-            "org.lwjgl.system.*"
+            "org.lwjgl.system.*",
+
+            "static org.lwjgl.system.APIUtil.*",
+            "static org.lwjgl.system.Checks.*"
         )
 
         documentation = "Defines the capabilities of a Vulkan {@code VkDevice}."
@@ -273,9 +289,9 @@ val VK_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.VULKA
             if (it.functions.any { it.isDeviceFunction }) {
                 print(
                     if (hasFlag)
-                        "\n$t$t$capName = ${it.className}.checkCapsDevice(provider, caps, ext);"
+                        "\n$t$t$capName = check_${it.templateName}(provider, caps, ext);"
                     else
-                        "\n$t$t${it.className}.checkCapsDevice(provider, caps, capsInstance);"
+                        "\n$t${t}check_${it.templateName}(provider, caps, capsInstance);"
                 )
             } else if (hasFlag) {
                 print("\n$t$t$capName = ext.contains(\"$capName\");")
@@ -287,12 +303,18 @@ val VK_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.VULKA
             print("\n$t$t$it = VK.get(caps, \"$it\");")
         }
 
-        println(
+        print(
             """
     }
+""")
 
-}"""
-        )
+        for (extension in classes) {
+            if (extension.functions.any { it.isDeviceFunction }) {
+                checkExtensionFunctions(extension)
+            }
+        }
+
+        println("\n}")
     }
 
 })

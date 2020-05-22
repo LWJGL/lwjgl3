@@ -65,7 +65,7 @@ val EXT_buffer_storage = "EXTBufferStorage".nativeClassGLES("EXT_buffer_storage"
         GLbitfield("flags", "")
     )
 
-    DependsOn("caps.hasDSA(ext)")..void(
+    DependsOn("hasDSA(ext)")..void(
         "NamedBufferStorageEXT",
         "",
 
