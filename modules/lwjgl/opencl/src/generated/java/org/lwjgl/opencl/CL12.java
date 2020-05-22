@@ -1019,13 +1019,13 @@ public class CL12 extends CL11 {
      * @param num_devices        the number of devices listed in {@code device_list}
      * @param num_input_programs the number of programs in array referenced by {@code input_programs}
      */
-    public static long nclLinkProgram(long context, int num_devices, long device_list, long options, int num_input_programs, long input_programs, long pfn_notify, long user_data) {
+    public static long nclLinkProgram(long context, int num_devices, long device_list, long options, int num_input_programs, long input_programs, long pfn_notify, long user_data, long errcode_ret) {
         long __functionAddress = CL.getICD().clLinkProgram;
         if (CHECKS) {
             check(__functionAddress);
             check(context);
         }
-        return callPPPPPPP(context, num_devices, device_list, options, num_input_programs, input_programs, pfn_notify, user_data, __functionAddress);
+        return callPPPPPPPP(context, num_devices, device_list, options, num_input_programs, input_programs, pfn_notify, user_data, errcode_ret, __functionAddress);
     }
 
     /**
@@ -1062,6 +1062,7 @@ public class CL12 extends CL11 {
      *                       
      *                       <p>If {@code pfn_notify} is {@code NULL}, {@code clLinkProgram} does not return until the linker has completed.</p>
      * @param user_data      will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be {@code NULL}.
+     * @param errcode_ret    will return an appropriate error code. If {@code errcode_ret} is {@code NULL}, no error code is returned.
      *
      * @return a valid non-zero program object, if the linking operation can begin. The linking operation can begin if the context, list of devices, input programs and
      *         linker options specified are all valid and appropriate host and device resources needed to perform the link are available.
@@ -1099,11 +1100,12 @@ public class CL12 extends CL11 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clLinkProgram.html">Reference Page</a>
      */
     @NativeType("cl_program")
-    public static long clLinkProgram(@NativeType("cl_context") long context, @Nullable @NativeType("cl_device_id const *") PointerBuffer device_list, @NativeType("cl_char const *") ByteBuffer options, @Nullable @NativeType("cl_program const *") PointerBuffer input_programs, @Nullable @NativeType("void (*) (cl_program, void *)") CLProgramCallbackI pfn_notify, @NativeType("void *") long user_data) {
+    public static long clLinkProgram(@NativeType("cl_context") long context, @Nullable @NativeType("cl_device_id const *") PointerBuffer device_list, @NativeType("cl_char const *") ByteBuffer options, @Nullable @NativeType("cl_program const *") PointerBuffer input_programs, @Nullable @NativeType("void (*) (cl_program, void *)") CLProgramCallbackI pfn_notify, @NativeType("void *") long user_data, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
         if (CHECKS) {
             checkNT1(options);
+            checkSafe(errcode_ret, 1);
         }
-        return nclLinkProgram(context, remainingSafe(device_list), memAddressSafe(device_list), memAddress(options), remainingSafe(input_programs), memAddressSafe(input_programs), memAddressSafe(pfn_notify), user_data);
+        return nclLinkProgram(context, remainingSafe(device_list), memAddressSafe(device_list), memAddress(options), remainingSafe(input_programs), memAddressSafe(input_programs), memAddressSafe(pfn_notify), user_data, memAddressSafe(errcode_ret));
     }
 
     /**
@@ -1140,6 +1142,7 @@ public class CL12 extends CL11 {
      *                       
      *                       <p>If {@code pfn_notify} is {@code NULL}, {@code clLinkProgram} does not return until the linker has completed.</p>
      * @param user_data      will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be {@code NULL}.
+     * @param errcode_ret    will return an appropriate error code. If {@code errcode_ret} is {@code NULL}, no error code is returned.
      *
      * @return a valid non-zero program object, if the linking operation can begin. The linking operation can begin if the context, list of devices, input programs and
      *         linker options specified are all valid and appropriate host and device resources needed to perform the link are available.
@@ -1177,12 +1180,15 @@ public class CL12 extends CL11 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clLinkProgram.html">Reference Page</a>
      */
     @NativeType("cl_program")
-    public static long clLinkProgram(@NativeType("cl_context") long context, @Nullable @NativeType("cl_device_id const *") PointerBuffer device_list, @NativeType("cl_char const *") CharSequence options, @Nullable @NativeType("cl_program const *") PointerBuffer input_programs, @Nullable @NativeType("void (*) (cl_program, void *)") CLProgramCallbackI pfn_notify, @NativeType("void *") long user_data) {
+    public static long clLinkProgram(@NativeType("cl_context") long context, @Nullable @NativeType("cl_device_id const *") PointerBuffer device_list, @NativeType("cl_char const *") CharSequence options, @Nullable @NativeType("cl_program const *") PointerBuffer input_programs, @Nullable @NativeType("void (*) (cl_program, void *)") CLProgramCallbackI pfn_notify, @NativeType("void *") long user_data, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+        if (CHECKS) {
+            checkSafe(errcode_ret, 1);
+        }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCII(options, true);
             long optionsEncoded = stack.getPointerAddress();
-            return nclLinkProgram(context, remainingSafe(device_list), memAddressSafe(device_list), optionsEncoded, remainingSafe(input_programs), memAddressSafe(input_programs), memAddressSafe(pfn_notify), user_data);
+            return nclLinkProgram(context, remainingSafe(device_list), memAddressSafe(device_list), optionsEncoded, remainingSafe(input_programs), memAddressSafe(input_programs), memAddressSafe(pfn_notify), user_data, memAddressSafe(errcode_ret));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1212,6 +1218,7 @@ public class CL12 extends CL11 {
      *                    
      *                    <p>If {@code pfn_notify} is {@code NULL}, {@code clLinkProgram} does not return until the linker has completed.</p>
      * @param user_data   will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be {@code NULL}.
+     * @param errcode_ret will return an appropriate error code. If {@code errcode_ret} is {@code NULL}, no error code is returned.
      *
      * @return a valid non-zero program object, if the linking operation can begin. The linking operation can begin if the context, list of devices, input programs and
      *         linker options specified are all valid and appropriate host and device resources needed to perform the link are available.
@@ -1249,13 +1256,16 @@ public class CL12 extends CL11 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clLinkProgram.html">Reference Page</a>
      */
     @NativeType("cl_program")
-    public static long clLinkProgram(@NativeType("cl_context") long context, @Nullable @NativeType("cl_device_id const *") PointerBuffer device_list, @NativeType("cl_char const *") CharSequence options, @NativeType("cl_program const *") long input_program, @Nullable @NativeType("void (*) (cl_program, void *)") CLProgramCallbackI pfn_notify, @NativeType("void *") long user_data) {
+    public static long clLinkProgram(@NativeType("cl_context") long context, @Nullable @NativeType("cl_device_id const *") PointerBuffer device_list, @NativeType("cl_char const *") CharSequence options, @NativeType("cl_program const *") long input_program, @Nullable @NativeType("void (*) (cl_program, void *)") CLProgramCallbackI pfn_notify, @NativeType("void *") long user_data, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+        if (CHECKS) {
+            checkSafe(errcode_ret, 1);
+        }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCII(options, true);
             long optionsEncoded = stack.getPointerAddress();
             PointerBuffer input_programs = stack.pointers(input_program);
-            return nclLinkProgram(context, remainingSafe(device_list), memAddressSafe(device_list), optionsEncoded, 1, memAddress(input_programs), memAddressSafe(pfn_notify), user_data);
+            return nclLinkProgram(context, remainingSafe(device_list), memAddressSafe(device_list), optionsEncoded, 1, memAddress(input_programs), memAddressSafe(pfn_notify), user_data, memAddressSafe(errcode_ret));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1959,6 +1969,46 @@ public class CL12 extends CL11 {
             stack.nASCII(kernel_names, true);
             long kernel_namesEncoded = stack.getPointerAddress();
             return callPPPPP(context, device_list.remaining(), memAddress(device_list), kernel_namesEncoded, errcode_ret, __functionAddress);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    /**
+     * Array version of: {@link #clLinkProgram LinkProgram}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clLinkProgram.html">Reference Page</a>
+     */
+    @NativeType("cl_program")
+    public static long clLinkProgram(@NativeType("cl_context") long context, @Nullable @NativeType("cl_device_id const *") PointerBuffer device_list, @NativeType("cl_char const *") ByteBuffer options, @Nullable @NativeType("cl_program const *") PointerBuffer input_programs, @Nullable @NativeType("void (*) (cl_program, void *)") CLProgramCallbackI pfn_notify, @NativeType("void *") long user_data, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+        long __functionAddress = CL.getICD().clLinkProgram;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+            checkNT1(options);
+            checkSafe(errcode_ret, 1);
+        }
+        return callPPPPPPPP(context, remainingSafe(device_list), memAddressSafe(device_list), memAddress(options), remainingSafe(input_programs), memAddressSafe(input_programs), memAddressSafe(pfn_notify), user_data, errcode_ret, __functionAddress);
+    }
+
+    /**
+     * Array version of: {@link #clLinkProgram LinkProgram}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clLinkProgram.html">Reference Page</a>
+     */
+    @NativeType("cl_program")
+    public static long clLinkProgram(@NativeType("cl_context") long context, @Nullable @NativeType("cl_device_id const *") PointerBuffer device_list, @NativeType("cl_char const *") CharSequence options, @Nullable @NativeType("cl_program const *") PointerBuffer input_programs, @Nullable @NativeType("void (*) (cl_program, void *)") CLProgramCallbackI pfn_notify, @NativeType("void *") long user_data, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+        long __functionAddress = CL.getICD().clLinkProgram;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(context);
+            checkSafe(errcode_ret, 1);
+        }
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nASCII(options, true);
+            long optionsEncoded = stack.getPointerAddress();
+            return callPPPPPPPP(context, remainingSafe(device_list), memAddressSafe(device_list), optionsEncoded, remainingSafe(input_programs), memAddressSafe(input_programs), memAddressSafe(pfn_notify), user_data, errcode_ret, __functionAddress);
         } finally {
             stack.setPointer(stackPointer);
         }

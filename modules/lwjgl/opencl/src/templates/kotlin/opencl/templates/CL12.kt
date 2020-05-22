@@ -700,6 +700,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
             """
         ),
         nullable..opaque_p("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be #NULL."),
+        ERROR_RET,
 
         returnDoc =
         """
