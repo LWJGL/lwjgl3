@@ -226,21 +226,16 @@ public final class VK {
         return true;
     }
 
-    static boolean isSupported(FunctionProvider provider, String functionName, Map<String, Long> caps, boolean satisfiedDependency) {
-        return !satisfiedDependency || isSupported(provider, functionName, caps);
+    static boolean isSupported(FunctionProvider provider, String functionName, long[] caps, int index, boolean satisfiedDependency) {
+        return !satisfiedDependency || isSupported(provider, functionName, caps, index);
     }
-    static boolean isSupported(FunctionProvider provider, String functionName, Map<String, Long> caps) {
+    static boolean isSupported(FunctionProvider provider, String functionName, long[] caps, int index) {
         long address = provider.getFunctionAddress(functionName);
         if (address != NULL) {
-            caps.put(functionName, address);
+            caps[index] = address;
             return true;
         }
         return false;
-    }
-
-    static long get(Map<String, Long> caps, String functionName) {
-        Long address = caps.get(functionName);
-        return address == null ? NULL : address;
     }
 
 }

@@ -62,16 +62,16 @@ val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
         )
     }
 
-    private fun PrintWriter.checkExtensionFunctions(nativeClass: NativeClass) {
+    private fun PrintWriter.checkExtensionFunctions(nativeClass: NativeClass, commands: Map<String, Int>) {
         val capName = nativeClass.capName
 
         print("""
-    private static boolean check_${nativeClass.templateName}(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_${nativeClass.templateName}(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("$capName") && VK.checkExtension("$capName",""")
         nativeClass.functions
             .filter { it.isInstanceFunction }
             .forEachIndexed { index, it ->
-                print("\n$t$t$t${if (index == 0) "   " else "&& "}VK.isSupported(provider, \"${it.name}\", caps")
+                print("\n$t$t$t${if (index == 0) "   " else "&& "}VK.isSupported(provider, \"${it.name}\", caps, ${commands[it.name]}")
                 if (it.has<DependsOn>()) {
                     print(", ${it.get<DependsOn>().reference.let { if (EXTENSION_NAME.matches(it)) "ext.contains(\"$it\")" else it }}")
                 }
@@ -99,7 +99,7 @@ val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
 
         val classes = super.getClasses("VK")
 
-        val instanceCommands = LinkedHashSet<String>()
+        val instanceCommands = LinkedHashMap<String, Int>()
         classes.asSequence()
             .filter { it.hasNativeFunctions }
             .forEach {
@@ -107,7 +107,7 @@ val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
                     .filter { cmd ->
                         if (cmd.isInstanceFunction) {
                             if (!instanceCommands.contains(cmd.name)) {
-                                instanceCommands.add(cmd.name)
+                                instanceCommands[cmd.name] = instanceCommands.size
                                 return@filter true
                             }
                         }
@@ -141,7 +141,7 @@ val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
     $CAPS_INSTANCE(FunctionProvider provider, int apiVersion, Set<String> ext, Set<String> deviceExt) {
         this.apiVersion = apiVersion;
 
-        Map<String, Long> caps = new HashMap<>(${instanceCommands.size});
+        long[] caps = new long[${instanceCommands.size}];
 """
         )
 
@@ -161,8 +161,8 @@ val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
         }
 
         println()
-        instanceCommands.forEach {
-            print("\n$t$t$it = VK.get(caps, \"$it\");")
+        instanceCommands.forEach { (it, index) ->
+            print("\n$t$t$it = caps[$index];")
         }
 
         print(
@@ -172,7 +172,7 @@ val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
 
         for (extension in classes) {
             if (extension.functions.any { it.isInstanceFunction }) {
-                checkExtensionFunctions(extension)
+                checkExtensionFunctions(extension, instanceCommands)
             }
         }
 
@@ -183,13 +183,13 @@ val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
 
 val VK_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.VULKAN, CAPS_DEVICE) {
 
-    private fun PrintWriter.checkExtensionFunctions(nativeClass: NativeClass) {
+    private fun PrintWriter.checkExtensionFunctions(nativeClass: NativeClass, commands: Map<String, Int>) {
         val capName = nativeClass.capName
 
         val isDeviceExtension = EXTENSION_TYPES[nativeClass.templateName] == "device" || nativeClass.templateName.startsWith("VK")
         val hasDependencies = nativeClass.functions.any { it.has<DependsOn>() }
         print("""
-    private static boolean check_${nativeClass.templateName}(FunctionProvider provider, java.util.Map<String, Long> caps""")
+    private static boolean check_${nativeClass.templateName}(FunctionProvider provider, long[] caps""")
         if (isDeviceExtension || hasDependencies) {
             print(", java.util.Set<String> ext")
         } else if (!isDeviceExtension) {
@@ -206,7 +206,7 @@ val VK_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.VULKA
         nativeClass.functions
             .filter { it.isDeviceFunction }
             .forEachIndexed { index, it ->
-                print("\n$t$t$t${if (index == 0) "   " else "&& "}VK.isSupported(provider, \"${it.name}\", caps")
+                print("\n$t$t$t${if (index == 0) "   " else "&& "}VK.isSupported(provider, \"${it.name}\", caps, ${commands[it.name]}")
                 if (it.has<DependsOn>()) {
                     print(", ${it.get<DependsOn>().reference.let { if (EXTENSION_NAME.matches(it)) "ext.contains(\"$it\")" else it }}")
                 }
@@ -235,23 +235,21 @@ val VK_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.VULKA
 
         val classes = VK_BINDING_INSTANCE.getClasses("VK")
 
-        val deviceCommands = LinkedHashSet<String>()
+        val deviceCommands = LinkedHashMap<String, Int>()
         classes.asSequence()
             .filter { it.hasNativeFunctions }
             .forEach {
                 val functions = it.functions.asSequence()
-                    .filter {
-                        if (it.type === DEVICE && !it.has<Macro>()) {
-                            if (!deviceCommands.contains(it.name)) {
-                                deviceCommands.add(it.name)
+                    .filter { cmd ->
+                        if (cmd.type === DEVICE && !cmd.has<Macro>()) {
+                            if (!deviceCommands.contains(cmd.name)) {
+                                deviceCommands[cmd.name] = deviceCommands.size
                                 return@filter true
                             }
                         }
                         false
                     }
-                    .joinToString(",\n$t$t") {
-                        it.name
-                    }
+                    .joinToString(",\n$t$t") { cmd -> cmd.name }
 
                 if (functions.isNotEmpty()) {
                     println("\n$t// ${it.templateName}")
@@ -279,14 +277,14 @@ val VK_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.VULKA
     $CAPS_DEVICE(FunctionProvider provider, VKCapabilitiesInstance capsInstance, Set<String> ext) {
         this.apiVersion = capsInstance.apiVersion;
 
-        Map<String, Long> caps = new HashMap<>(${deviceCommands.size});
+        long[] caps = new long[${deviceCommands.size}];
 """
         )
 
         classes.forEach {
             val capName = it.capName
             val hasFlag = EXTENSION_TYPES[it.templateName] == "device" || it.templateName.startsWith("VK")
-            if (it.functions.any { it.isDeviceFunction }) {
+            if (it.functions.any { func -> func.isDeviceFunction }) {
                 print(
                     if (hasFlag)
                         "\n$t$t$capName = check_${it.templateName}(provider, caps, ext);"
@@ -299,8 +297,8 @@ val VK_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.VULKA
         }
 
         println()
-        deviceCommands.forEach {
-            print("\n$t$t$it = VK.get(caps, \"$it\");")
+        deviceCommands.forEach { (it, index) ->
+            print("\n$t$t$it = caps[$index];")
         }
 
         print(
@@ -310,7 +308,7 @@ val VK_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.VULKA
 
         for (extension in classes) {
             if (extension.functions.any { it.isDeviceFunction }) {
-                checkExtensionFunctions(extension)
+                checkExtensionFunctions(extension, deviceCommands)
             }
         }
 

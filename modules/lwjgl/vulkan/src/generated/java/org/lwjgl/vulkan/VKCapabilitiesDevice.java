@@ -813,7 +813,7 @@ public class VKCapabilitiesDevice {
     VKCapabilitiesDevice(FunctionProvider provider, VKCapabilitiesInstance capsInstance, Set<String> ext) {
         this.apiVersion = capsInstance.apiVersion;
 
-        Map<String, Long> caps = new HashMap<>(295);
+        long[] caps = new long[295];
 
         Vulkan10 = check_VK10(provider, caps, ext);
         Vulkan11 = check_VK11(provider, caps, ext);
@@ -980,884 +980,884 @@ public class VKCapabilitiesDevice {
         VK_NVX_image_view_handle = check_NVX_image_view_handle(provider, caps, ext);
         VK_NVX_multiview_per_view_attributes = ext.contains("VK_NVX_multiview_per_view_attributes");
 
-        vkGetDeviceProcAddr = VK.get(caps, "vkGetDeviceProcAddr");
-        vkDestroyDevice = VK.get(caps, "vkDestroyDevice");
-        vkGetDeviceQueue = VK.get(caps, "vkGetDeviceQueue");
-        vkQueueSubmit = VK.get(caps, "vkQueueSubmit");
-        vkQueueWaitIdle = VK.get(caps, "vkQueueWaitIdle");
-        vkDeviceWaitIdle = VK.get(caps, "vkDeviceWaitIdle");
-        vkAllocateMemory = VK.get(caps, "vkAllocateMemory");
-        vkFreeMemory = VK.get(caps, "vkFreeMemory");
-        vkMapMemory = VK.get(caps, "vkMapMemory");
-        vkUnmapMemory = VK.get(caps, "vkUnmapMemory");
-        vkFlushMappedMemoryRanges = VK.get(caps, "vkFlushMappedMemoryRanges");
-        vkInvalidateMappedMemoryRanges = VK.get(caps, "vkInvalidateMappedMemoryRanges");
-        vkGetDeviceMemoryCommitment = VK.get(caps, "vkGetDeviceMemoryCommitment");
-        vkBindBufferMemory = VK.get(caps, "vkBindBufferMemory");
-        vkBindImageMemory = VK.get(caps, "vkBindImageMemory");
-        vkGetBufferMemoryRequirements = VK.get(caps, "vkGetBufferMemoryRequirements");
-        vkGetImageMemoryRequirements = VK.get(caps, "vkGetImageMemoryRequirements");
-        vkGetImageSparseMemoryRequirements = VK.get(caps, "vkGetImageSparseMemoryRequirements");
-        vkQueueBindSparse = VK.get(caps, "vkQueueBindSparse");
-        vkCreateFence = VK.get(caps, "vkCreateFence");
-        vkDestroyFence = VK.get(caps, "vkDestroyFence");
-        vkResetFences = VK.get(caps, "vkResetFences");
-        vkGetFenceStatus = VK.get(caps, "vkGetFenceStatus");
-        vkWaitForFences = VK.get(caps, "vkWaitForFences");
-        vkCreateSemaphore = VK.get(caps, "vkCreateSemaphore");
-        vkDestroySemaphore = VK.get(caps, "vkDestroySemaphore");
-        vkCreateEvent = VK.get(caps, "vkCreateEvent");
-        vkDestroyEvent = VK.get(caps, "vkDestroyEvent");
-        vkGetEventStatus = VK.get(caps, "vkGetEventStatus");
-        vkSetEvent = VK.get(caps, "vkSetEvent");
-        vkResetEvent = VK.get(caps, "vkResetEvent");
-        vkCreateQueryPool = VK.get(caps, "vkCreateQueryPool");
-        vkDestroyQueryPool = VK.get(caps, "vkDestroyQueryPool");
-        vkGetQueryPoolResults = VK.get(caps, "vkGetQueryPoolResults");
-        vkCreateBuffer = VK.get(caps, "vkCreateBuffer");
-        vkDestroyBuffer = VK.get(caps, "vkDestroyBuffer");
-        vkCreateBufferView = VK.get(caps, "vkCreateBufferView");
-        vkDestroyBufferView = VK.get(caps, "vkDestroyBufferView");
-        vkCreateImage = VK.get(caps, "vkCreateImage");
-        vkDestroyImage = VK.get(caps, "vkDestroyImage");
-        vkGetImageSubresourceLayout = VK.get(caps, "vkGetImageSubresourceLayout");
-        vkCreateImageView = VK.get(caps, "vkCreateImageView");
-        vkDestroyImageView = VK.get(caps, "vkDestroyImageView");
-        vkCreateShaderModule = VK.get(caps, "vkCreateShaderModule");
-        vkDestroyShaderModule = VK.get(caps, "vkDestroyShaderModule");
-        vkCreatePipelineCache = VK.get(caps, "vkCreatePipelineCache");
-        vkDestroyPipelineCache = VK.get(caps, "vkDestroyPipelineCache");
-        vkGetPipelineCacheData = VK.get(caps, "vkGetPipelineCacheData");
-        vkMergePipelineCaches = VK.get(caps, "vkMergePipelineCaches");
-        vkCreateGraphicsPipelines = VK.get(caps, "vkCreateGraphicsPipelines");
-        vkCreateComputePipelines = VK.get(caps, "vkCreateComputePipelines");
-        vkDestroyPipeline = VK.get(caps, "vkDestroyPipeline");
-        vkCreatePipelineLayout = VK.get(caps, "vkCreatePipelineLayout");
-        vkDestroyPipelineLayout = VK.get(caps, "vkDestroyPipelineLayout");
-        vkCreateSampler = VK.get(caps, "vkCreateSampler");
-        vkDestroySampler = VK.get(caps, "vkDestroySampler");
-        vkCreateDescriptorSetLayout = VK.get(caps, "vkCreateDescriptorSetLayout");
-        vkDestroyDescriptorSetLayout = VK.get(caps, "vkDestroyDescriptorSetLayout");
-        vkCreateDescriptorPool = VK.get(caps, "vkCreateDescriptorPool");
-        vkDestroyDescriptorPool = VK.get(caps, "vkDestroyDescriptorPool");
-        vkResetDescriptorPool = VK.get(caps, "vkResetDescriptorPool");
-        vkAllocateDescriptorSets = VK.get(caps, "vkAllocateDescriptorSets");
-        vkFreeDescriptorSets = VK.get(caps, "vkFreeDescriptorSets");
-        vkUpdateDescriptorSets = VK.get(caps, "vkUpdateDescriptorSets");
-        vkCreateFramebuffer = VK.get(caps, "vkCreateFramebuffer");
-        vkDestroyFramebuffer = VK.get(caps, "vkDestroyFramebuffer");
-        vkCreateRenderPass = VK.get(caps, "vkCreateRenderPass");
-        vkDestroyRenderPass = VK.get(caps, "vkDestroyRenderPass");
-        vkGetRenderAreaGranularity = VK.get(caps, "vkGetRenderAreaGranularity");
-        vkCreateCommandPool = VK.get(caps, "vkCreateCommandPool");
-        vkDestroyCommandPool = VK.get(caps, "vkDestroyCommandPool");
-        vkResetCommandPool = VK.get(caps, "vkResetCommandPool");
-        vkAllocateCommandBuffers = VK.get(caps, "vkAllocateCommandBuffers");
-        vkFreeCommandBuffers = VK.get(caps, "vkFreeCommandBuffers");
-        vkBeginCommandBuffer = VK.get(caps, "vkBeginCommandBuffer");
-        vkEndCommandBuffer = VK.get(caps, "vkEndCommandBuffer");
-        vkResetCommandBuffer = VK.get(caps, "vkResetCommandBuffer");
-        vkCmdBindPipeline = VK.get(caps, "vkCmdBindPipeline");
-        vkCmdSetViewport = VK.get(caps, "vkCmdSetViewport");
-        vkCmdSetScissor = VK.get(caps, "vkCmdSetScissor");
-        vkCmdSetLineWidth = VK.get(caps, "vkCmdSetLineWidth");
-        vkCmdSetDepthBias = VK.get(caps, "vkCmdSetDepthBias");
-        vkCmdSetBlendConstants = VK.get(caps, "vkCmdSetBlendConstants");
-        vkCmdSetDepthBounds = VK.get(caps, "vkCmdSetDepthBounds");
-        vkCmdSetStencilCompareMask = VK.get(caps, "vkCmdSetStencilCompareMask");
-        vkCmdSetStencilWriteMask = VK.get(caps, "vkCmdSetStencilWriteMask");
-        vkCmdSetStencilReference = VK.get(caps, "vkCmdSetStencilReference");
-        vkCmdBindDescriptorSets = VK.get(caps, "vkCmdBindDescriptorSets");
-        vkCmdBindIndexBuffer = VK.get(caps, "vkCmdBindIndexBuffer");
-        vkCmdBindVertexBuffers = VK.get(caps, "vkCmdBindVertexBuffers");
-        vkCmdDraw = VK.get(caps, "vkCmdDraw");
-        vkCmdDrawIndexed = VK.get(caps, "vkCmdDrawIndexed");
-        vkCmdDrawIndirect = VK.get(caps, "vkCmdDrawIndirect");
-        vkCmdDrawIndexedIndirect = VK.get(caps, "vkCmdDrawIndexedIndirect");
-        vkCmdDispatch = VK.get(caps, "vkCmdDispatch");
-        vkCmdDispatchIndirect = VK.get(caps, "vkCmdDispatchIndirect");
-        vkCmdCopyBuffer = VK.get(caps, "vkCmdCopyBuffer");
-        vkCmdCopyImage = VK.get(caps, "vkCmdCopyImage");
-        vkCmdBlitImage = VK.get(caps, "vkCmdBlitImage");
-        vkCmdCopyBufferToImage = VK.get(caps, "vkCmdCopyBufferToImage");
-        vkCmdCopyImageToBuffer = VK.get(caps, "vkCmdCopyImageToBuffer");
-        vkCmdUpdateBuffer = VK.get(caps, "vkCmdUpdateBuffer");
-        vkCmdFillBuffer = VK.get(caps, "vkCmdFillBuffer");
-        vkCmdClearColorImage = VK.get(caps, "vkCmdClearColorImage");
-        vkCmdClearDepthStencilImage = VK.get(caps, "vkCmdClearDepthStencilImage");
-        vkCmdClearAttachments = VK.get(caps, "vkCmdClearAttachments");
-        vkCmdResolveImage = VK.get(caps, "vkCmdResolveImage");
-        vkCmdSetEvent = VK.get(caps, "vkCmdSetEvent");
-        vkCmdResetEvent = VK.get(caps, "vkCmdResetEvent");
-        vkCmdWaitEvents = VK.get(caps, "vkCmdWaitEvents");
-        vkCmdPipelineBarrier = VK.get(caps, "vkCmdPipelineBarrier");
-        vkCmdBeginQuery = VK.get(caps, "vkCmdBeginQuery");
-        vkCmdEndQuery = VK.get(caps, "vkCmdEndQuery");
-        vkCmdResetQueryPool = VK.get(caps, "vkCmdResetQueryPool");
-        vkCmdWriteTimestamp = VK.get(caps, "vkCmdWriteTimestamp");
-        vkCmdCopyQueryPoolResults = VK.get(caps, "vkCmdCopyQueryPoolResults");
-        vkCmdPushConstants = VK.get(caps, "vkCmdPushConstants");
-        vkCmdBeginRenderPass = VK.get(caps, "vkCmdBeginRenderPass");
-        vkCmdNextSubpass = VK.get(caps, "vkCmdNextSubpass");
-        vkCmdEndRenderPass = VK.get(caps, "vkCmdEndRenderPass");
-        vkCmdExecuteCommands = VK.get(caps, "vkCmdExecuteCommands");
-        vkBindBufferMemory2 = VK.get(caps, "vkBindBufferMemory2");
-        vkBindImageMemory2 = VK.get(caps, "vkBindImageMemory2");
-        vkGetDeviceGroupPeerMemoryFeatures = VK.get(caps, "vkGetDeviceGroupPeerMemoryFeatures");
-        vkCmdSetDeviceMask = VK.get(caps, "vkCmdSetDeviceMask");
-        vkCmdDispatchBase = VK.get(caps, "vkCmdDispatchBase");
-        vkGetImageMemoryRequirements2 = VK.get(caps, "vkGetImageMemoryRequirements2");
-        vkGetBufferMemoryRequirements2 = VK.get(caps, "vkGetBufferMemoryRequirements2");
-        vkGetImageSparseMemoryRequirements2 = VK.get(caps, "vkGetImageSparseMemoryRequirements2");
-        vkTrimCommandPool = VK.get(caps, "vkTrimCommandPool");
-        vkGetDeviceQueue2 = VK.get(caps, "vkGetDeviceQueue2");
-        vkCreateSamplerYcbcrConversion = VK.get(caps, "vkCreateSamplerYcbcrConversion");
-        vkDestroySamplerYcbcrConversion = VK.get(caps, "vkDestroySamplerYcbcrConversion");
-        vkCreateDescriptorUpdateTemplate = VK.get(caps, "vkCreateDescriptorUpdateTemplate");
-        vkDestroyDescriptorUpdateTemplate = VK.get(caps, "vkDestroyDescriptorUpdateTemplate");
-        vkUpdateDescriptorSetWithTemplate = VK.get(caps, "vkUpdateDescriptorSetWithTemplate");
-        vkGetDescriptorSetLayoutSupport = VK.get(caps, "vkGetDescriptorSetLayoutSupport");
-        vkCmdDrawIndirectCount = VK.get(caps, "vkCmdDrawIndirectCount");
-        vkCmdDrawIndexedIndirectCount = VK.get(caps, "vkCmdDrawIndexedIndirectCount");
-        vkCreateRenderPass2 = VK.get(caps, "vkCreateRenderPass2");
-        vkCmdBeginRenderPass2 = VK.get(caps, "vkCmdBeginRenderPass2");
-        vkCmdNextSubpass2 = VK.get(caps, "vkCmdNextSubpass2");
-        vkCmdEndRenderPass2 = VK.get(caps, "vkCmdEndRenderPass2");
-        vkResetQueryPool = VK.get(caps, "vkResetQueryPool");
-        vkGetSemaphoreCounterValue = VK.get(caps, "vkGetSemaphoreCounterValue");
-        vkWaitSemaphores = VK.get(caps, "vkWaitSemaphores");
-        vkSignalSemaphore = VK.get(caps, "vkSignalSemaphore");
-        vkGetBufferDeviceAddress = VK.get(caps, "vkGetBufferDeviceAddress");
-        vkGetBufferOpaqueCaptureAddress = VK.get(caps, "vkGetBufferOpaqueCaptureAddress");
-        vkGetDeviceMemoryOpaqueCaptureAddress = VK.get(caps, "vkGetDeviceMemoryOpaqueCaptureAddress");
-        vkCmdWriteBufferMarkerAMD = VK.get(caps, "vkCmdWriteBufferMarkerAMD");
-        vkSetLocalDimmingAMD = VK.get(caps, "vkSetLocalDimmingAMD");
-        vkCmdDrawIndirectCountAMD = VK.get(caps, "vkCmdDrawIndirectCountAMD");
-        vkCmdDrawIndexedIndirectCountAMD = VK.get(caps, "vkCmdDrawIndexedIndirectCountAMD");
-        vkGetShaderInfoAMD = VK.get(caps, "vkGetShaderInfoAMD");
-        vkGetBufferDeviceAddressEXT = VK.get(caps, "vkGetBufferDeviceAddressEXT");
-        vkGetCalibratedTimestampsEXT = VK.get(caps, "vkGetCalibratedTimestampsEXT");
-        vkCmdBeginConditionalRenderingEXT = VK.get(caps, "vkCmdBeginConditionalRenderingEXT");
-        vkCmdEndConditionalRenderingEXT = VK.get(caps, "vkCmdEndConditionalRenderingEXT");
-        vkDebugMarkerSetObjectTagEXT = VK.get(caps, "vkDebugMarkerSetObjectTagEXT");
-        vkDebugMarkerSetObjectNameEXT = VK.get(caps, "vkDebugMarkerSetObjectNameEXT");
-        vkCmdDebugMarkerBeginEXT = VK.get(caps, "vkCmdDebugMarkerBeginEXT");
-        vkCmdDebugMarkerEndEXT = VK.get(caps, "vkCmdDebugMarkerEndEXT");
-        vkCmdDebugMarkerInsertEXT = VK.get(caps, "vkCmdDebugMarkerInsertEXT");
-        vkSetDebugUtilsObjectNameEXT = VK.get(caps, "vkSetDebugUtilsObjectNameEXT");
-        vkSetDebugUtilsObjectTagEXT = VK.get(caps, "vkSetDebugUtilsObjectTagEXT");
-        vkQueueBeginDebugUtilsLabelEXT = VK.get(caps, "vkQueueBeginDebugUtilsLabelEXT");
-        vkQueueEndDebugUtilsLabelEXT = VK.get(caps, "vkQueueEndDebugUtilsLabelEXT");
-        vkQueueInsertDebugUtilsLabelEXT = VK.get(caps, "vkQueueInsertDebugUtilsLabelEXT");
-        vkCmdBeginDebugUtilsLabelEXT = VK.get(caps, "vkCmdBeginDebugUtilsLabelEXT");
-        vkCmdEndDebugUtilsLabelEXT = VK.get(caps, "vkCmdEndDebugUtilsLabelEXT");
-        vkCmdInsertDebugUtilsLabelEXT = VK.get(caps, "vkCmdInsertDebugUtilsLabelEXT");
-        vkCmdSetDiscardRectangleEXT = VK.get(caps, "vkCmdSetDiscardRectangleEXT");
-        vkDisplayPowerControlEXT = VK.get(caps, "vkDisplayPowerControlEXT");
-        vkRegisterDeviceEventEXT = VK.get(caps, "vkRegisterDeviceEventEXT");
-        vkRegisterDisplayEventEXT = VK.get(caps, "vkRegisterDisplayEventEXT");
-        vkGetSwapchainCounterEXT = VK.get(caps, "vkGetSwapchainCounterEXT");
-        vkGetMemoryHostPointerPropertiesEXT = VK.get(caps, "vkGetMemoryHostPointerPropertiesEXT");
-        vkAcquireFullScreenExclusiveModeEXT = VK.get(caps, "vkAcquireFullScreenExclusiveModeEXT");
-        vkReleaseFullScreenExclusiveModeEXT = VK.get(caps, "vkReleaseFullScreenExclusiveModeEXT");
-        vkGetDeviceGroupSurfacePresentModes2EXT = VK.get(caps, "vkGetDeviceGroupSurfacePresentModes2EXT");
-        vkSetHdrMetadataEXT = VK.get(caps, "vkSetHdrMetadataEXT");
-        vkResetQueryPoolEXT = VK.get(caps, "vkResetQueryPoolEXT");
-        vkGetImageDrmFormatModifierPropertiesEXT = VK.get(caps, "vkGetImageDrmFormatModifierPropertiesEXT");
-        vkCmdSetLineStippleEXT = VK.get(caps, "vkCmdSetLineStippleEXT");
-        vkCmdSetSampleLocationsEXT = VK.get(caps, "vkCmdSetSampleLocationsEXT");
-        vkCmdBindTransformFeedbackBuffersEXT = VK.get(caps, "vkCmdBindTransformFeedbackBuffersEXT");
-        vkCmdBeginTransformFeedbackEXT = VK.get(caps, "vkCmdBeginTransformFeedbackEXT");
-        vkCmdEndTransformFeedbackEXT = VK.get(caps, "vkCmdEndTransformFeedbackEXT");
-        vkCmdBeginQueryIndexedEXT = VK.get(caps, "vkCmdBeginQueryIndexedEXT");
-        vkCmdEndQueryIndexedEXT = VK.get(caps, "vkCmdEndQueryIndexedEXT");
-        vkCmdDrawIndirectByteCountEXT = VK.get(caps, "vkCmdDrawIndirectByteCountEXT");
-        vkCreateValidationCacheEXT = VK.get(caps, "vkCreateValidationCacheEXT");
-        vkDestroyValidationCacheEXT = VK.get(caps, "vkDestroyValidationCacheEXT");
-        vkMergeValidationCachesEXT = VK.get(caps, "vkMergeValidationCachesEXT");
-        vkGetValidationCacheDataEXT = VK.get(caps, "vkGetValidationCacheDataEXT");
-        vkGetRefreshCycleDurationGOOGLE = VK.get(caps, "vkGetRefreshCycleDurationGOOGLE");
-        vkGetPastPresentationTimingGOOGLE = VK.get(caps, "vkGetPastPresentationTimingGOOGLE");
-        vkInitializePerformanceApiINTEL = VK.get(caps, "vkInitializePerformanceApiINTEL");
-        vkUninitializePerformanceApiINTEL = VK.get(caps, "vkUninitializePerformanceApiINTEL");
-        vkCmdSetPerformanceMarkerINTEL = VK.get(caps, "vkCmdSetPerformanceMarkerINTEL");
-        vkCmdSetPerformanceStreamMarkerINTEL = VK.get(caps, "vkCmdSetPerformanceStreamMarkerINTEL");
-        vkCmdSetPerformanceOverrideINTEL = VK.get(caps, "vkCmdSetPerformanceOverrideINTEL");
-        vkAcquirePerformanceConfigurationINTEL = VK.get(caps, "vkAcquirePerformanceConfigurationINTEL");
-        vkReleasePerformanceConfigurationINTEL = VK.get(caps, "vkReleasePerformanceConfigurationINTEL");
-        vkQueueSetPerformanceConfigurationINTEL = VK.get(caps, "vkQueueSetPerformanceConfigurationINTEL");
-        vkGetPerformanceParameterINTEL = VK.get(caps, "vkGetPerformanceParameterINTEL");
-        vkBindBufferMemory2KHR = VK.get(caps, "vkBindBufferMemory2KHR");
-        vkBindImageMemory2KHR = VK.get(caps, "vkBindImageMemory2KHR");
-        vkGetBufferDeviceAddressKHR = VK.get(caps, "vkGetBufferDeviceAddressKHR");
-        vkGetBufferOpaqueCaptureAddressKHR = VK.get(caps, "vkGetBufferOpaqueCaptureAddressKHR");
-        vkGetDeviceMemoryOpaqueCaptureAddressKHR = VK.get(caps, "vkGetDeviceMemoryOpaqueCaptureAddressKHR");
-        vkCreateRenderPass2KHR = VK.get(caps, "vkCreateRenderPass2KHR");
-        vkCmdBeginRenderPass2KHR = VK.get(caps, "vkCmdBeginRenderPass2KHR");
-        vkCmdNextSubpass2KHR = VK.get(caps, "vkCmdNextSubpass2KHR");
-        vkCmdEndRenderPass2KHR = VK.get(caps, "vkCmdEndRenderPass2KHR");
-        vkCreateDescriptorUpdateTemplateKHR = VK.get(caps, "vkCreateDescriptorUpdateTemplateKHR");
-        vkDestroyDescriptorUpdateTemplateKHR = VK.get(caps, "vkDestroyDescriptorUpdateTemplateKHR");
-        vkUpdateDescriptorSetWithTemplateKHR = VK.get(caps, "vkUpdateDescriptorSetWithTemplateKHR");
-        vkCmdPushDescriptorSetWithTemplateKHR = VK.get(caps, "vkCmdPushDescriptorSetWithTemplateKHR");
-        vkGetDeviceGroupPeerMemoryFeaturesKHR = VK.get(caps, "vkGetDeviceGroupPeerMemoryFeaturesKHR");
-        vkCmdSetDeviceMaskKHR = VK.get(caps, "vkCmdSetDeviceMaskKHR");
-        vkCmdDispatchBaseKHR = VK.get(caps, "vkCmdDispatchBaseKHR");
-        vkGetDeviceGroupPresentCapabilitiesKHR = VK.get(caps, "vkGetDeviceGroupPresentCapabilitiesKHR");
-        vkGetDeviceGroupSurfacePresentModesKHR = VK.get(caps, "vkGetDeviceGroupSurfacePresentModesKHR");
-        vkAcquireNextImage2KHR = VK.get(caps, "vkAcquireNextImage2KHR");
-        vkCreateSharedSwapchainsKHR = VK.get(caps, "vkCreateSharedSwapchainsKHR");
-        vkCmdDrawIndirectCountKHR = VK.get(caps, "vkCmdDrawIndirectCountKHR");
-        vkCmdDrawIndexedIndirectCountKHR = VK.get(caps, "vkCmdDrawIndexedIndirectCountKHR");
-        vkImportFenceFdKHR = VK.get(caps, "vkImportFenceFdKHR");
-        vkGetFenceFdKHR = VK.get(caps, "vkGetFenceFdKHR");
-        vkImportFenceWin32HandleKHR = VK.get(caps, "vkImportFenceWin32HandleKHR");
-        vkGetFenceWin32HandleKHR = VK.get(caps, "vkGetFenceWin32HandleKHR");
-        vkGetMemoryFdKHR = VK.get(caps, "vkGetMemoryFdKHR");
-        vkGetMemoryFdPropertiesKHR = VK.get(caps, "vkGetMemoryFdPropertiesKHR");
-        vkGetMemoryWin32HandleKHR = VK.get(caps, "vkGetMemoryWin32HandleKHR");
-        vkGetMemoryWin32HandlePropertiesKHR = VK.get(caps, "vkGetMemoryWin32HandlePropertiesKHR");
-        vkImportSemaphoreFdKHR = VK.get(caps, "vkImportSemaphoreFdKHR");
-        vkGetSemaphoreFdKHR = VK.get(caps, "vkGetSemaphoreFdKHR");
-        vkImportSemaphoreWin32HandleKHR = VK.get(caps, "vkImportSemaphoreWin32HandleKHR");
-        vkGetSemaphoreWin32HandleKHR = VK.get(caps, "vkGetSemaphoreWin32HandleKHR");
-        vkGetImageMemoryRequirements2KHR = VK.get(caps, "vkGetImageMemoryRequirements2KHR");
-        vkGetBufferMemoryRequirements2KHR = VK.get(caps, "vkGetBufferMemoryRequirements2KHR");
-        vkGetImageSparseMemoryRequirements2KHR = VK.get(caps, "vkGetImageSparseMemoryRequirements2KHR");
-        vkTrimCommandPoolKHR = VK.get(caps, "vkTrimCommandPoolKHR");
-        vkGetDescriptorSetLayoutSupportKHR = VK.get(caps, "vkGetDescriptorSetLayoutSupportKHR");
-        vkAcquireProfilingLockKHR = VK.get(caps, "vkAcquireProfilingLockKHR");
-        vkReleaseProfilingLockKHR = VK.get(caps, "vkReleaseProfilingLockKHR");
-        vkGetPipelineExecutablePropertiesKHR = VK.get(caps, "vkGetPipelineExecutablePropertiesKHR");
-        vkGetPipelineExecutableStatisticsKHR = VK.get(caps, "vkGetPipelineExecutableStatisticsKHR");
-        vkGetPipelineExecutableInternalRepresentationsKHR = VK.get(caps, "vkGetPipelineExecutableInternalRepresentationsKHR");
-        vkCmdPushDescriptorSetKHR = VK.get(caps, "vkCmdPushDescriptorSetKHR");
-        vkCreateSamplerYcbcrConversionKHR = VK.get(caps, "vkCreateSamplerYcbcrConversionKHR");
-        vkDestroySamplerYcbcrConversionKHR = VK.get(caps, "vkDestroySamplerYcbcrConversionKHR");
-        vkGetSwapchainStatusKHR = VK.get(caps, "vkGetSwapchainStatusKHR");
-        vkCreateSwapchainKHR = VK.get(caps, "vkCreateSwapchainKHR");
-        vkDestroySwapchainKHR = VK.get(caps, "vkDestroySwapchainKHR");
-        vkGetSwapchainImagesKHR = VK.get(caps, "vkGetSwapchainImagesKHR");
-        vkAcquireNextImageKHR = VK.get(caps, "vkAcquireNextImageKHR");
-        vkQueuePresentKHR = VK.get(caps, "vkQueuePresentKHR");
-        vkGetSemaphoreCounterValueKHR = VK.get(caps, "vkGetSemaphoreCounterValueKHR");
-        vkWaitSemaphoresKHR = VK.get(caps, "vkWaitSemaphoresKHR");
-        vkSignalSemaphoreKHR = VK.get(caps, "vkSignalSemaphoreKHR");
-        vkCmdSetViewportWScalingNV = VK.get(caps, "vkCmdSetViewportWScalingNV");
-        vkCmdSetCheckpointNV = VK.get(caps, "vkCmdSetCheckpointNV");
-        vkGetQueueCheckpointDataNV = VK.get(caps, "vkGetQueueCheckpointDataNV");
-        vkGetMemoryWin32HandleNV = VK.get(caps, "vkGetMemoryWin32HandleNV");
-        vkCmdDrawMeshTasksNV = VK.get(caps, "vkCmdDrawMeshTasksNV");
-        vkCmdDrawMeshTasksIndirectNV = VK.get(caps, "vkCmdDrawMeshTasksIndirectNV");
-        vkCmdDrawMeshTasksIndirectCountNV = VK.get(caps, "vkCmdDrawMeshTasksIndirectCountNV");
-        vkCreateAccelerationStructureNV = VK.get(caps, "vkCreateAccelerationStructureNV");
-        vkDestroyAccelerationStructureNV = VK.get(caps, "vkDestroyAccelerationStructureNV");
-        vkGetAccelerationStructureMemoryRequirementsNV = VK.get(caps, "vkGetAccelerationStructureMemoryRequirementsNV");
-        vkBindAccelerationStructureMemoryNV = VK.get(caps, "vkBindAccelerationStructureMemoryNV");
-        vkCmdBuildAccelerationStructureNV = VK.get(caps, "vkCmdBuildAccelerationStructureNV");
-        vkCmdCopyAccelerationStructureNV = VK.get(caps, "vkCmdCopyAccelerationStructureNV");
-        vkCmdTraceRaysNV = VK.get(caps, "vkCmdTraceRaysNV");
-        vkCreateRayTracingPipelinesNV = VK.get(caps, "vkCreateRayTracingPipelinesNV");
-        vkGetRayTracingShaderGroupHandlesNV = VK.get(caps, "vkGetRayTracingShaderGroupHandlesNV");
-        vkGetAccelerationStructureHandleNV = VK.get(caps, "vkGetAccelerationStructureHandleNV");
-        vkCmdWriteAccelerationStructuresPropertiesNV = VK.get(caps, "vkCmdWriteAccelerationStructuresPropertiesNV");
-        vkCompileDeferredNV = VK.get(caps, "vkCompileDeferredNV");
-        vkCmdSetExclusiveScissorNV = VK.get(caps, "vkCmdSetExclusiveScissorNV");
-        vkCmdBindShadingRateImageNV = VK.get(caps, "vkCmdBindShadingRateImageNV");
-        vkCmdSetViewportShadingRatePaletteNV = VK.get(caps, "vkCmdSetViewportShadingRatePaletteNV");
-        vkCmdSetCoarseSampleOrderNV = VK.get(caps, "vkCmdSetCoarseSampleOrderNV");
-        vkCmdProcessCommandsNVX = VK.get(caps, "vkCmdProcessCommandsNVX");
-        vkCmdReserveSpaceForCommandsNVX = VK.get(caps, "vkCmdReserveSpaceForCommandsNVX");
-        vkCreateIndirectCommandsLayoutNVX = VK.get(caps, "vkCreateIndirectCommandsLayoutNVX");
-        vkDestroyIndirectCommandsLayoutNVX = VK.get(caps, "vkDestroyIndirectCommandsLayoutNVX");
-        vkCreateObjectTableNVX = VK.get(caps, "vkCreateObjectTableNVX");
-        vkDestroyObjectTableNVX = VK.get(caps, "vkDestroyObjectTableNVX");
-        vkRegisterObjectsNVX = VK.get(caps, "vkRegisterObjectsNVX");
-        vkUnregisterObjectsNVX = VK.get(caps, "vkUnregisterObjectsNVX");
-        vkGetImageViewHandleNVX = VK.get(caps, "vkGetImageViewHandleNVX");
+        vkGetDeviceProcAddr = caps[0];
+        vkDestroyDevice = caps[1];
+        vkGetDeviceQueue = caps[2];
+        vkQueueSubmit = caps[3];
+        vkQueueWaitIdle = caps[4];
+        vkDeviceWaitIdle = caps[5];
+        vkAllocateMemory = caps[6];
+        vkFreeMemory = caps[7];
+        vkMapMemory = caps[8];
+        vkUnmapMemory = caps[9];
+        vkFlushMappedMemoryRanges = caps[10];
+        vkInvalidateMappedMemoryRanges = caps[11];
+        vkGetDeviceMemoryCommitment = caps[12];
+        vkBindBufferMemory = caps[13];
+        vkBindImageMemory = caps[14];
+        vkGetBufferMemoryRequirements = caps[15];
+        vkGetImageMemoryRequirements = caps[16];
+        vkGetImageSparseMemoryRequirements = caps[17];
+        vkQueueBindSparse = caps[18];
+        vkCreateFence = caps[19];
+        vkDestroyFence = caps[20];
+        vkResetFences = caps[21];
+        vkGetFenceStatus = caps[22];
+        vkWaitForFences = caps[23];
+        vkCreateSemaphore = caps[24];
+        vkDestroySemaphore = caps[25];
+        vkCreateEvent = caps[26];
+        vkDestroyEvent = caps[27];
+        vkGetEventStatus = caps[28];
+        vkSetEvent = caps[29];
+        vkResetEvent = caps[30];
+        vkCreateQueryPool = caps[31];
+        vkDestroyQueryPool = caps[32];
+        vkGetQueryPoolResults = caps[33];
+        vkCreateBuffer = caps[34];
+        vkDestroyBuffer = caps[35];
+        vkCreateBufferView = caps[36];
+        vkDestroyBufferView = caps[37];
+        vkCreateImage = caps[38];
+        vkDestroyImage = caps[39];
+        vkGetImageSubresourceLayout = caps[40];
+        vkCreateImageView = caps[41];
+        vkDestroyImageView = caps[42];
+        vkCreateShaderModule = caps[43];
+        vkDestroyShaderModule = caps[44];
+        vkCreatePipelineCache = caps[45];
+        vkDestroyPipelineCache = caps[46];
+        vkGetPipelineCacheData = caps[47];
+        vkMergePipelineCaches = caps[48];
+        vkCreateGraphicsPipelines = caps[49];
+        vkCreateComputePipelines = caps[50];
+        vkDestroyPipeline = caps[51];
+        vkCreatePipelineLayout = caps[52];
+        vkDestroyPipelineLayout = caps[53];
+        vkCreateSampler = caps[54];
+        vkDestroySampler = caps[55];
+        vkCreateDescriptorSetLayout = caps[56];
+        vkDestroyDescriptorSetLayout = caps[57];
+        vkCreateDescriptorPool = caps[58];
+        vkDestroyDescriptorPool = caps[59];
+        vkResetDescriptorPool = caps[60];
+        vkAllocateDescriptorSets = caps[61];
+        vkFreeDescriptorSets = caps[62];
+        vkUpdateDescriptorSets = caps[63];
+        vkCreateFramebuffer = caps[64];
+        vkDestroyFramebuffer = caps[65];
+        vkCreateRenderPass = caps[66];
+        vkDestroyRenderPass = caps[67];
+        vkGetRenderAreaGranularity = caps[68];
+        vkCreateCommandPool = caps[69];
+        vkDestroyCommandPool = caps[70];
+        vkResetCommandPool = caps[71];
+        vkAllocateCommandBuffers = caps[72];
+        vkFreeCommandBuffers = caps[73];
+        vkBeginCommandBuffer = caps[74];
+        vkEndCommandBuffer = caps[75];
+        vkResetCommandBuffer = caps[76];
+        vkCmdBindPipeline = caps[77];
+        vkCmdSetViewport = caps[78];
+        vkCmdSetScissor = caps[79];
+        vkCmdSetLineWidth = caps[80];
+        vkCmdSetDepthBias = caps[81];
+        vkCmdSetBlendConstants = caps[82];
+        vkCmdSetDepthBounds = caps[83];
+        vkCmdSetStencilCompareMask = caps[84];
+        vkCmdSetStencilWriteMask = caps[85];
+        vkCmdSetStencilReference = caps[86];
+        vkCmdBindDescriptorSets = caps[87];
+        vkCmdBindIndexBuffer = caps[88];
+        vkCmdBindVertexBuffers = caps[89];
+        vkCmdDraw = caps[90];
+        vkCmdDrawIndexed = caps[91];
+        vkCmdDrawIndirect = caps[92];
+        vkCmdDrawIndexedIndirect = caps[93];
+        vkCmdDispatch = caps[94];
+        vkCmdDispatchIndirect = caps[95];
+        vkCmdCopyBuffer = caps[96];
+        vkCmdCopyImage = caps[97];
+        vkCmdBlitImage = caps[98];
+        vkCmdCopyBufferToImage = caps[99];
+        vkCmdCopyImageToBuffer = caps[100];
+        vkCmdUpdateBuffer = caps[101];
+        vkCmdFillBuffer = caps[102];
+        vkCmdClearColorImage = caps[103];
+        vkCmdClearDepthStencilImage = caps[104];
+        vkCmdClearAttachments = caps[105];
+        vkCmdResolveImage = caps[106];
+        vkCmdSetEvent = caps[107];
+        vkCmdResetEvent = caps[108];
+        vkCmdWaitEvents = caps[109];
+        vkCmdPipelineBarrier = caps[110];
+        vkCmdBeginQuery = caps[111];
+        vkCmdEndQuery = caps[112];
+        vkCmdResetQueryPool = caps[113];
+        vkCmdWriteTimestamp = caps[114];
+        vkCmdCopyQueryPoolResults = caps[115];
+        vkCmdPushConstants = caps[116];
+        vkCmdBeginRenderPass = caps[117];
+        vkCmdNextSubpass = caps[118];
+        vkCmdEndRenderPass = caps[119];
+        vkCmdExecuteCommands = caps[120];
+        vkBindBufferMemory2 = caps[121];
+        vkBindImageMemory2 = caps[122];
+        vkGetDeviceGroupPeerMemoryFeatures = caps[123];
+        vkCmdSetDeviceMask = caps[124];
+        vkCmdDispatchBase = caps[125];
+        vkGetImageMemoryRequirements2 = caps[126];
+        vkGetBufferMemoryRequirements2 = caps[127];
+        vkGetImageSparseMemoryRequirements2 = caps[128];
+        vkTrimCommandPool = caps[129];
+        vkGetDeviceQueue2 = caps[130];
+        vkCreateSamplerYcbcrConversion = caps[131];
+        vkDestroySamplerYcbcrConversion = caps[132];
+        vkCreateDescriptorUpdateTemplate = caps[133];
+        vkDestroyDescriptorUpdateTemplate = caps[134];
+        vkUpdateDescriptorSetWithTemplate = caps[135];
+        vkGetDescriptorSetLayoutSupport = caps[136];
+        vkCmdDrawIndirectCount = caps[137];
+        vkCmdDrawIndexedIndirectCount = caps[138];
+        vkCreateRenderPass2 = caps[139];
+        vkCmdBeginRenderPass2 = caps[140];
+        vkCmdNextSubpass2 = caps[141];
+        vkCmdEndRenderPass2 = caps[142];
+        vkResetQueryPool = caps[143];
+        vkGetSemaphoreCounterValue = caps[144];
+        vkWaitSemaphores = caps[145];
+        vkSignalSemaphore = caps[146];
+        vkGetBufferDeviceAddress = caps[147];
+        vkGetBufferOpaqueCaptureAddress = caps[148];
+        vkGetDeviceMemoryOpaqueCaptureAddress = caps[149];
+        vkCmdWriteBufferMarkerAMD = caps[150];
+        vkSetLocalDimmingAMD = caps[151];
+        vkCmdDrawIndirectCountAMD = caps[152];
+        vkCmdDrawIndexedIndirectCountAMD = caps[153];
+        vkGetShaderInfoAMD = caps[154];
+        vkGetBufferDeviceAddressEXT = caps[155];
+        vkGetCalibratedTimestampsEXT = caps[156];
+        vkCmdBeginConditionalRenderingEXT = caps[157];
+        vkCmdEndConditionalRenderingEXT = caps[158];
+        vkDebugMarkerSetObjectTagEXT = caps[159];
+        vkDebugMarkerSetObjectNameEXT = caps[160];
+        vkCmdDebugMarkerBeginEXT = caps[161];
+        vkCmdDebugMarkerEndEXT = caps[162];
+        vkCmdDebugMarkerInsertEXT = caps[163];
+        vkSetDebugUtilsObjectNameEXT = caps[164];
+        vkSetDebugUtilsObjectTagEXT = caps[165];
+        vkQueueBeginDebugUtilsLabelEXT = caps[166];
+        vkQueueEndDebugUtilsLabelEXT = caps[167];
+        vkQueueInsertDebugUtilsLabelEXT = caps[168];
+        vkCmdBeginDebugUtilsLabelEXT = caps[169];
+        vkCmdEndDebugUtilsLabelEXT = caps[170];
+        vkCmdInsertDebugUtilsLabelEXT = caps[171];
+        vkCmdSetDiscardRectangleEXT = caps[172];
+        vkDisplayPowerControlEXT = caps[173];
+        vkRegisterDeviceEventEXT = caps[174];
+        vkRegisterDisplayEventEXT = caps[175];
+        vkGetSwapchainCounterEXT = caps[176];
+        vkGetMemoryHostPointerPropertiesEXT = caps[177];
+        vkAcquireFullScreenExclusiveModeEXT = caps[178];
+        vkReleaseFullScreenExclusiveModeEXT = caps[179];
+        vkGetDeviceGroupSurfacePresentModes2EXT = caps[180];
+        vkSetHdrMetadataEXT = caps[181];
+        vkResetQueryPoolEXT = caps[182];
+        vkGetImageDrmFormatModifierPropertiesEXT = caps[183];
+        vkCmdSetLineStippleEXT = caps[184];
+        vkCmdSetSampleLocationsEXT = caps[185];
+        vkCmdBindTransformFeedbackBuffersEXT = caps[186];
+        vkCmdBeginTransformFeedbackEXT = caps[187];
+        vkCmdEndTransformFeedbackEXT = caps[188];
+        vkCmdBeginQueryIndexedEXT = caps[189];
+        vkCmdEndQueryIndexedEXT = caps[190];
+        vkCmdDrawIndirectByteCountEXT = caps[191];
+        vkCreateValidationCacheEXT = caps[192];
+        vkDestroyValidationCacheEXT = caps[193];
+        vkMergeValidationCachesEXT = caps[194];
+        vkGetValidationCacheDataEXT = caps[195];
+        vkGetRefreshCycleDurationGOOGLE = caps[196];
+        vkGetPastPresentationTimingGOOGLE = caps[197];
+        vkInitializePerformanceApiINTEL = caps[198];
+        vkUninitializePerformanceApiINTEL = caps[199];
+        vkCmdSetPerformanceMarkerINTEL = caps[200];
+        vkCmdSetPerformanceStreamMarkerINTEL = caps[201];
+        vkCmdSetPerformanceOverrideINTEL = caps[202];
+        vkAcquirePerformanceConfigurationINTEL = caps[203];
+        vkReleasePerformanceConfigurationINTEL = caps[204];
+        vkQueueSetPerformanceConfigurationINTEL = caps[205];
+        vkGetPerformanceParameterINTEL = caps[206];
+        vkBindBufferMemory2KHR = caps[207];
+        vkBindImageMemory2KHR = caps[208];
+        vkGetBufferDeviceAddressKHR = caps[209];
+        vkGetBufferOpaqueCaptureAddressKHR = caps[210];
+        vkGetDeviceMemoryOpaqueCaptureAddressKHR = caps[211];
+        vkCreateRenderPass2KHR = caps[212];
+        vkCmdBeginRenderPass2KHR = caps[213];
+        vkCmdNextSubpass2KHR = caps[214];
+        vkCmdEndRenderPass2KHR = caps[215];
+        vkCreateDescriptorUpdateTemplateKHR = caps[216];
+        vkDestroyDescriptorUpdateTemplateKHR = caps[217];
+        vkUpdateDescriptorSetWithTemplateKHR = caps[218];
+        vkCmdPushDescriptorSetWithTemplateKHR = caps[219];
+        vkGetDeviceGroupPeerMemoryFeaturesKHR = caps[220];
+        vkCmdSetDeviceMaskKHR = caps[221];
+        vkCmdDispatchBaseKHR = caps[222];
+        vkGetDeviceGroupPresentCapabilitiesKHR = caps[223];
+        vkGetDeviceGroupSurfacePresentModesKHR = caps[224];
+        vkAcquireNextImage2KHR = caps[225];
+        vkCreateSharedSwapchainsKHR = caps[226];
+        vkCmdDrawIndirectCountKHR = caps[227];
+        vkCmdDrawIndexedIndirectCountKHR = caps[228];
+        vkImportFenceFdKHR = caps[229];
+        vkGetFenceFdKHR = caps[230];
+        vkImportFenceWin32HandleKHR = caps[231];
+        vkGetFenceWin32HandleKHR = caps[232];
+        vkGetMemoryFdKHR = caps[233];
+        vkGetMemoryFdPropertiesKHR = caps[234];
+        vkGetMemoryWin32HandleKHR = caps[235];
+        vkGetMemoryWin32HandlePropertiesKHR = caps[236];
+        vkImportSemaphoreFdKHR = caps[237];
+        vkGetSemaphoreFdKHR = caps[238];
+        vkImportSemaphoreWin32HandleKHR = caps[239];
+        vkGetSemaphoreWin32HandleKHR = caps[240];
+        vkGetImageMemoryRequirements2KHR = caps[241];
+        vkGetBufferMemoryRequirements2KHR = caps[242];
+        vkGetImageSparseMemoryRequirements2KHR = caps[243];
+        vkTrimCommandPoolKHR = caps[244];
+        vkGetDescriptorSetLayoutSupportKHR = caps[245];
+        vkAcquireProfilingLockKHR = caps[246];
+        vkReleaseProfilingLockKHR = caps[247];
+        vkGetPipelineExecutablePropertiesKHR = caps[248];
+        vkGetPipelineExecutableStatisticsKHR = caps[249];
+        vkGetPipelineExecutableInternalRepresentationsKHR = caps[250];
+        vkCmdPushDescriptorSetKHR = caps[251];
+        vkCreateSamplerYcbcrConversionKHR = caps[252];
+        vkDestroySamplerYcbcrConversionKHR = caps[253];
+        vkGetSwapchainStatusKHR = caps[254];
+        vkCreateSwapchainKHR = caps[255];
+        vkDestroySwapchainKHR = caps[256];
+        vkGetSwapchainImagesKHR = caps[257];
+        vkAcquireNextImageKHR = caps[258];
+        vkQueuePresentKHR = caps[259];
+        vkGetSemaphoreCounterValueKHR = caps[260];
+        vkWaitSemaphoresKHR = caps[261];
+        vkSignalSemaphoreKHR = caps[262];
+        vkCmdSetViewportWScalingNV = caps[263];
+        vkCmdSetCheckpointNV = caps[264];
+        vkGetQueueCheckpointDataNV = caps[265];
+        vkGetMemoryWin32HandleNV = caps[266];
+        vkCmdDrawMeshTasksNV = caps[267];
+        vkCmdDrawMeshTasksIndirectNV = caps[268];
+        vkCmdDrawMeshTasksIndirectCountNV = caps[269];
+        vkCreateAccelerationStructureNV = caps[270];
+        vkDestroyAccelerationStructureNV = caps[271];
+        vkGetAccelerationStructureMemoryRequirementsNV = caps[272];
+        vkBindAccelerationStructureMemoryNV = caps[273];
+        vkCmdBuildAccelerationStructureNV = caps[274];
+        vkCmdCopyAccelerationStructureNV = caps[275];
+        vkCmdTraceRaysNV = caps[276];
+        vkCreateRayTracingPipelinesNV = caps[277];
+        vkGetRayTracingShaderGroupHandlesNV = caps[278];
+        vkGetAccelerationStructureHandleNV = caps[279];
+        vkCmdWriteAccelerationStructuresPropertiesNV = caps[280];
+        vkCompileDeferredNV = caps[281];
+        vkCmdSetExclusiveScissorNV = caps[282];
+        vkCmdBindShadingRateImageNV = caps[283];
+        vkCmdSetViewportShadingRatePaletteNV = caps[284];
+        vkCmdSetCoarseSampleOrderNV = caps[285];
+        vkCmdProcessCommandsNVX = caps[286];
+        vkCmdReserveSpaceForCommandsNVX = caps[287];
+        vkCreateIndirectCommandsLayoutNVX = caps[288];
+        vkDestroyIndirectCommandsLayoutNVX = caps[289];
+        vkCreateObjectTableNVX = caps[290];
+        vkDestroyObjectTableNVX = caps[291];
+        vkRegisterObjectsNVX = caps[292];
+        vkUnregisterObjectsNVX = caps[293];
+        vkGetImageViewHandleNVX = caps[294];
     }
 
-    private static boolean check_VK10(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_VK10(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("Vulkan10") && VK.checkExtension("Vulkan10",
-               VK.isSupported(provider, "vkGetDeviceProcAddr", caps)
-            && VK.isSupported(provider, "vkDestroyDevice", caps)
-            && VK.isSupported(provider, "vkGetDeviceQueue", caps)
-            && VK.isSupported(provider, "vkQueueSubmit", caps)
-            && VK.isSupported(provider, "vkQueueWaitIdle", caps)
-            && VK.isSupported(provider, "vkDeviceWaitIdle", caps)
-            && VK.isSupported(provider, "vkAllocateMemory", caps)
-            && VK.isSupported(provider, "vkFreeMemory", caps)
-            && VK.isSupported(provider, "vkMapMemory", caps)
-            && VK.isSupported(provider, "vkUnmapMemory", caps)
-            && VK.isSupported(provider, "vkFlushMappedMemoryRanges", caps)
-            && VK.isSupported(provider, "vkInvalidateMappedMemoryRanges", caps)
-            && VK.isSupported(provider, "vkGetDeviceMemoryCommitment", caps)
-            && VK.isSupported(provider, "vkBindBufferMemory", caps)
-            && VK.isSupported(provider, "vkBindImageMemory", caps)
-            && VK.isSupported(provider, "vkGetBufferMemoryRequirements", caps)
-            && VK.isSupported(provider, "vkGetImageMemoryRequirements", caps)
-            && VK.isSupported(provider, "vkGetImageSparseMemoryRequirements", caps)
-            && VK.isSupported(provider, "vkQueueBindSparse", caps)
-            && VK.isSupported(provider, "vkCreateFence", caps)
-            && VK.isSupported(provider, "vkDestroyFence", caps)
-            && VK.isSupported(provider, "vkResetFences", caps)
-            && VK.isSupported(provider, "vkGetFenceStatus", caps)
-            && VK.isSupported(provider, "vkWaitForFences", caps)
-            && VK.isSupported(provider, "vkCreateSemaphore", caps)
-            && VK.isSupported(provider, "vkDestroySemaphore", caps)
-            && VK.isSupported(provider, "vkCreateEvent", caps)
-            && VK.isSupported(provider, "vkDestroyEvent", caps)
-            && VK.isSupported(provider, "vkGetEventStatus", caps)
-            && VK.isSupported(provider, "vkSetEvent", caps)
-            && VK.isSupported(provider, "vkResetEvent", caps)
-            && VK.isSupported(provider, "vkCreateQueryPool", caps)
-            && VK.isSupported(provider, "vkDestroyQueryPool", caps)
-            && VK.isSupported(provider, "vkGetQueryPoolResults", caps)
-            && VK.isSupported(provider, "vkCreateBuffer", caps)
-            && VK.isSupported(provider, "vkDestroyBuffer", caps)
-            && VK.isSupported(provider, "vkCreateBufferView", caps)
-            && VK.isSupported(provider, "vkDestroyBufferView", caps)
-            && VK.isSupported(provider, "vkCreateImage", caps)
-            && VK.isSupported(provider, "vkDestroyImage", caps)
-            && VK.isSupported(provider, "vkGetImageSubresourceLayout", caps)
-            && VK.isSupported(provider, "vkCreateImageView", caps)
-            && VK.isSupported(provider, "vkDestroyImageView", caps)
-            && VK.isSupported(provider, "vkCreateShaderModule", caps)
-            && VK.isSupported(provider, "vkDestroyShaderModule", caps)
-            && VK.isSupported(provider, "vkCreatePipelineCache", caps)
-            && VK.isSupported(provider, "vkDestroyPipelineCache", caps)
-            && VK.isSupported(provider, "vkGetPipelineCacheData", caps)
-            && VK.isSupported(provider, "vkMergePipelineCaches", caps)
-            && VK.isSupported(provider, "vkCreateGraphicsPipelines", caps)
-            && VK.isSupported(provider, "vkCreateComputePipelines", caps)
-            && VK.isSupported(provider, "vkDestroyPipeline", caps)
-            && VK.isSupported(provider, "vkCreatePipelineLayout", caps)
-            && VK.isSupported(provider, "vkDestroyPipelineLayout", caps)
-            && VK.isSupported(provider, "vkCreateSampler", caps)
-            && VK.isSupported(provider, "vkDestroySampler", caps)
-            && VK.isSupported(provider, "vkCreateDescriptorSetLayout", caps)
-            && VK.isSupported(provider, "vkDestroyDescriptorSetLayout", caps)
-            && VK.isSupported(provider, "vkCreateDescriptorPool", caps)
-            && VK.isSupported(provider, "vkDestroyDescriptorPool", caps)
-            && VK.isSupported(provider, "vkResetDescriptorPool", caps)
-            && VK.isSupported(provider, "vkAllocateDescriptorSets", caps)
-            && VK.isSupported(provider, "vkFreeDescriptorSets", caps)
-            && VK.isSupported(provider, "vkUpdateDescriptorSets", caps)
-            && VK.isSupported(provider, "vkCreateFramebuffer", caps)
-            && VK.isSupported(provider, "vkDestroyFramebuffer", caps)
-            && VK.isSupported(provider, "vkCreateRenderPass", caps)
-            && VK.isSupported(provider, "vkDestroyRenderPass", caps)
-            && VK.isSupported(provider, "vkGetRenderAreaGranularity", caps)
-            && VK.isSupported(provider, "vkCreateCommandPool", caps)
-            && VK.isSupported(provider, "vkDestroyCommandPool", caps)
-            && VK.isSupported(provider, "vkResetCommandPool", caps)
-            && VK.isSupported(provider, "vkAllocateCommandBuffers", caps)
-            && VK.isSupported(provider, "vkFreeCommandBuffers", caps)
-            && VK.isSupported(provider, "vkBeginCommandBuffer", caps)
-            && VK.isSupported(provider, "vkEndCommandBuffer", caps)
-            && VK.isSupported(provider, "vkResetCommandBuffer", caps)
-            && VK.isSupported(provider, "vkCmdBindPipeline", caps)
-            && VK.isSupported(provider, "vkCmdSetViewport", caps)
-            && VK.isSupported(provider, "vkCmdSetScissor", caps)
-            && VK.isSupported(provider, "vkCmdSetLineWidth", caps)
-            && VK.isSupported(provider, "vkCmdSetDepthBias", caps)
-            && VK.isSupported(provider, "vkCmdSetBlendConstants", caps)
-            && VK.isSupported(provider, "vkCmdSetDepthBounds", caps)
-            && VK.isSupported(provider, "vkCmdSetStencilCompareMask", caps)
-            && VK.isSupported(provider, "vkCmdSetStencilWriteMask", caps)
-            && VK.isSupported(provider, "vkCmdSetStencilReference", caps)
-            && VK.isSupported(provider, "vkCmdBindDescriptorSets", caps)
-            && VK.isSupported(provider, "vkCmdBindIndexBuffer", caps)
-            && VK.isSupported(provider, "vkCmdBindVertexBuffers", caps)
-            && VK.isSupported(provider, "vkCmdDraw", caps)
-            && VK.isSupported(provider, "vkCmdDrawIndexed", caps)
-            && VK.isSupported(provider, "vkCmdDrawIndirect", caps)
-            && VK.isSupported(provider, "vkCmdDrawIndexedIndirect", caps)
-            && VK.isSupported(provider, "vkCmdDispatch", caps)
-            && VK.isSupported(provider, "vkCmdDispatchIndirect", caps)
-            && VK.isSupported(provider, "vkCmdCopyBuffer", caps)
-            && VK.isSupported(provider, "vkCmdCopyImage", caps)
-            && VK.isSupported(provider, "vkCmdBlitImage", caps)
-            && VK.isSupported(provider, "vkCmdCopyBufferToImage", caps)
-            && VK.isSupported(provider, "vkCmdCopyImageToBuffer", caps)
-            && VK.isSupported(provider, "vkCmdUpdateBuffer", caps)
-            && VK.isSupported(provider, "vkCmdFillBuffer", caps)
-            && VK.isSupported(provider, "vkCmdClearColorImage", caps)
-            && VK.isSupported(provider, "vkCmdClearDepthStencilImage", caps)
-            && VK.isSupported(provider, "vkCmdClearAttachments", caps)
-            && VK.isSupported(provider, "vkCmdResolveImage", caps)
-            && VK.isSupported(provider, "vkCmdSetEvent", caps)
-            && VK.isSupported(provider, "vkCmdResetEvent", caps)
-            && VK.isSupported(provider, "vkCmdWaitEvents", caps)
-            && VK.isSupported(provider, "vkCmdPipelineBarrier", caps)
-            && VK.isSupported(provider, "vkCmdBeginQuery", caps)
-            && VK.isSupported(provider, "vkCmdEndQuery", caps)
-            && VK.isSupported(provider, "vkCmdResetQueryPool", caps)
-            && VK.isSupported(provider, "vkCmdWriteTimestamp", caps)
-            && VK.isSupported(provider, "vkCmdCopyQueryPoolResults", caps)
-            && VK.isSupported(provider, "vkCmdPushConstants", caps)
-            && VK.isSupported(provider, "vkCmdBeginRenderPass", caps)
-            && VK.isSupported(provider, "vkCmdNextSubpass", caps)
-            && VK.isSupported(provider, "vkCmdEndRenderPass", caps)
-            && VK.isSupported(provider, "vkCmdExecuteCommands", caps)
+               VK.isSupported(provider, "vkGetDeviceProcAddr", caps, 0)
+            && VK.isSupported(provider, "vkDestroyDevice", caps, 1)
+            && VK.isSupported(provider, "vkGetDeviceQueue", caps, 2)
+            && VK.isSupported(provider, "vkQueueSubmit", caps, 3)
+            && VK.isSupported(provider, "vkQueueWaitIdle", caps, 4)
+            && VK.isSupported(provider, "vkDeviceWaitIdle", caps, 5)
+            && VK.isSupported(provider, "vkAllocateMemory", caps, 6)
+            && VK.isSupported(provider, "vkFreeMemory", caps, 7)
+            && VK.isSupported(provider, "vkMapMemory", caps, 8)
+            && VK.isSupported(provider, "vkUnmapMemory", caps, 9)
+            && VK.isSupported(provider, "vkFlushMappedMemoryRanges", caps, 10)
+            && VK.isSupported(provider, "vkInvalidateMappedMemoryRanges", caps, 11)
+            && VK.isSupported(provider, "vkGetDeviceMemoryCommitment", caps, 12)
+            && VK.isSupported(provider, "vkBindBufferMemory", caps, 13)
+            && VK.isSupported(provider, "vkBindImageMemory", caps, 14)
+            && VK.isSupported(provider, "vkGetBufferMemoryRequirements", caps, 15)
+            && VK.isSupported(provider, "vkGetImageMemoryRequirements", caps, 16)
+            && VK.isSupported(provider, "vkGetImageSparseMemoryRequirements", caps, 17)
+            && VK.isSupported(provider, "vkQueueBindSparse", caps, 18)
+            && VK.isSupported(provider, "vkCreateFence", caps, 19)
+            && VK.isSupported(provider, "vkDestroyFence", caps, 20)
+            && VK.isSupported(provider, "vkResetFences", caps, 21)
+            && VK.isSupported(provider, "vkGetFenceStatus", caps, 22)
+            && VK.isSupported(provider, "vkWaitForFences", caps, 23)
+            && VK.isSupported(provider, "vkCreateSemaphore", caps, 24)
+            && VK.isSupported(provider, "vkDestroySemaphore", caps, 25)
+            && VK.isSupported(provider, "vkCreateEvent", caps, 26)
+            && VK.isSupported(provider, "vkDestroyEvent", caps, 27)
+            && VK.isSupported(provider, "vkGetEventStatus", caps, 28)
+            && VK.isSupported(provider, "vkSetEvent", caps, 29)
+            && VK.isSupported(provider, "vkResetEvent", caps, 30)
+            && VK.isSupported(provider, "vkCreateQueryPool", caps, 31)
+            && VK.isSupported(provider, "vkDestroyQueryPool", caps, 32)
+            && VK.isSupported(provider, "vkGetQueryPoolResults", caps, 33)
+            && VK.isSupported(provider, "vkCreateBuffer", caps, 34)
+            && VK.isSupported(provider, "vkDestroyBuffer", caps, 35)
+            && VK.isSupported(provider, "vkCreateBufferView", caps, 36)
+            && VK.isSupported(provider, "vkDestroyBufferView", caps, 37)
+            && VK.isSupported(provider, "vkCreateImage", caps, 38)
+            && VK.isSupported(provider, "vkDestroyImage", caps, 39)
+            && VK.isSupported(provider, "vkGetImageSubresourceLayout", caps, 40)
+            && VK.isSupported(provider, "vkCreateImageView", caps, 41)
+            && VK.isSupported(provider, "vkDestroyImageView", caps, 42)
+            && VK.isSupported(provider, "vkCreateShaderModule", caps, 43)
+            && VK.isSupported(provider, "vkDestroyShaderModule", caps, 44)
+            && VK.isSupported(provider, "vkCreatePipelineCache", caps, 45)
+            && VK.isSupported(provider, "vkDestroyPipelineCache", caps, 46)
+            && VK.isSupported(provider, "vkGetPipelineCacheData", caps, 47)
+            && VK.isSupported(provider, "vkMergePipelineCaches", caps, 48)
+            && VK.isSupported(provider, "vkCreateGraphicsPipelines", caps, 49)
+            && VK.isSupported(provider, "vkCreateComputePipelines", caps, 50)
+            && VK.isSupported(provider, "vkDestroyPipeline", caps, 51)
+            && VK.isSupported(provider, "vkCreatePipelineLayout", caps, 52)
+            && VK.isSupported(provider, "vkDestroyPipelineLayout", caps, 53)
+            && VK.isSupported(provider, "vkCreateSampler", caps, 54)
+            && VK.isSupported(provider, "vkDestroySampler", caps, 55)
+            && VK.isSupported(provider, "vkCreateDescriptorSetLayout", caps, 56)
+            && VK.isSupported(provider, "vkDestroyDescriptorSetLayout", caps, 57)
+            && VK.isSupported(provider, "vkCreateDescriptorPool", caps, 58)
+            && VK.isSupported(provider, "vkDestroyDescriptorPool", caps, 59)
+            && VK.isSupported(provider, "vkResetDescriptorPool", caps, 60)
+            && VK.isSupported(provider, "vkAllocateDescriptorSets", caps, 61)
+            && VK.isSupported(provider, "vkFreeDescriptorSets", caps, 62)
+            && VK.isSupported(provider, "vkUpdateDescriptorSets", caps, 63)
+            && VK.isSupported(provider, "vkCreateFramebuffer", caps, 64)
+            && VK.isSupported(provider, "vkDestroyFramebuffer", caps, 65)
+            && VK.isSupported(provider, "vkCreateRenderPass", caps, 66)
+            && VK.isSupported(provider, "vkDestroyRenderPass", caps, 67)
+            && VK.isSupported(provider, "vkGetRenderAreaGranularity", caps, 68)
+            && VK.isSupported(provider, "vkCreateCommandPool", caps, 69)
+            && VK.isSupported(provider, "vkDestroyCommandPool", caps, 70)
+            && VK.isSupported(provider, "vkResetCommandPool", caps, 71)
+            && VK.isSupported(provider, "vkAllocateCommandBuffers", caps, 72)
+            && VK.isSupported(provider, "vkFreeCommandBuffers", caps, 73)
+            && VK.isSupported(provider, "vkBeginCommandBuffer", caps, 74)
+            && VK.isSupported(provider, "vkEndCommandBuffer", caps, 75)
+            && VK.isSupported(provider, "vkResetCommandBuffer", caps, 76)
+            && VK.isSupported(provider, "vkCmdBindPipeline", caps, 77)
+            && VK.isSupported(provider, "vkCmdSetViewport", caps, 78)
+            && VK.isSupported(provider, "vkCmdSetScissor", caps, 79)
+            && VK.isSupported(provider, "vkCmdSetLineWidth", caps, 80)
+            && VK.isSupported(provider, "vkCmdSetDepthBias", caps, 81)
+            && VK.isSupported(provider, "vkCmdSetBlendConstants", caps, 82)
+            && VK.isSupported(provider, "vkCmdSetDepthBounds", caps, 83)
+            && VK.isSupported(provider, "vkCmdSetStencilCompareMask", caps, 84)
+            && VK.isSupported(provider, "vkCmdSetStencilWriteMask", caps, 85)
+            && VK.isSupported(provider, "vkCmdSetStencilReference", caps, 86)
+            && VK.isSupported(provider, "vkCmdBindDescriptorSets", caps, 87)
+            && VK.isSupported(provider, "vkCmdBindIndexBuffer", caps, 88)
+            && VK.isSupported(provider, "vkCmdBindVertexBuffers", caps, 89)
+            && VK.isSupported(provider, "vkCmdDraw", caps, 90)
+            && VK.isSupported(provider, "vkCmdDrawIndexed", caps, 91)
+            && VK.isSupported(provider, "vkCmdDrawIndirect", caps, 92)
+            && VK.isSupported(provider, "vkCmdDrawIndexedIndirect", caps, 93)
+            && VK.isSupported(provider, "vkCmdDispatch", caps, 94)
+            && VK.isSupported(provider, "vkCmdDispatchIndirect", caps, 95)
+            && VK.isSupported(provider, "vkCmdCopyBuffer", caps, 96)
+            && VK.isSupported(provider, "vkCmdCopyImage", caps, 97)
+            && VK.isSupported(provider, "vkCmdBlitImage", caps, 98)
+            && VK.isSupported(provider, "vkCmdCopyBufferToImage", caps, 99)
+            && VK.isSupported(provider, "vkCmdCopyImageToBuffer", caps, 100)
+            && VK.isSupported(provider, "vkCmdUpdateBuffer", caps, 101)
+            && VK.isSupported(provider, "vkCmdFillBuffer", caps, 102)
+            && VK.isSupported(provider, "vkCmdClearColorImage", caps, 103)
+            && VK.isSupported(provider, "vkCmdClearDepthStencilImage", caps, 104)
+            && VK.isSupported(provider, "vkCmdClearAttachments", caps, 105)
+            && VK.isSupported(provider, "vkCmdResolveImage", caps, 106)
+            && VK.isSupported(provider, "vkCmdSetEvent", caps, 107)
+            && VK.isSupported(provider, "vkCmdResetEvent", caps, 108)
+            && VK.isSupported(provider, "vkCmdWaitEvents", caps, 109)
+            && VK.isSupported(provider, "vkCmdPipelineBarrier", caps, 110)
+            && VK.isSupported(provider, "vkCmdBeginQuery", caps, 111)
+            && VK.isSupported(provider, "vkCmdEndQuery", caps, 112)
+            && VK.isSupported(provider, "vkCmdResetQueryPool", caps, 113)
+            && VK.isSupported(provider, "vkCmdWriteTimestamp", caps, 114)
+            && VK.isSupported(provider, "vkCmdCopyQueryPoolResults", caps, 115)
+            && VK.isSupported(provider, "vkCmdPushConstants", caps, 116)
+            && VK.isSupported(provider, "vkCmdBeginRenderPass", caps, 117)
+            && VK.isSupported(provider, "vkCmdNextSubpass", caps, 118)
+            && VK.isSupported(provider, "vkCmdEndRenderPass", caps, 119)
+            && VK.isSupported(provider, "vkCmdExecuteCommands", caps, 120)
         );
     }
 
-    private static boolean check_VK11(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_VK11(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("Vulkan11") && VK.checkExtension("Vulkan11",
-               VK.isSupported(provider, "vkBindBufferMemory2", caps)
-            && VK.isSupported(provider, "vkBindImageMemory2", caps)
-            && VK.isSupported(provider, "vkGetDeviceGroupPeerMemoryFeatures", caps)
-            && VK.isSupported(provider, "vkCmdSetDeviceMask", caps)
-            && VK.isSupported(provider, "vkCmdDispatchBase", caps)
-            && VK.isSupported(provider, "vkGetImageMemoryRequirements2", caps)
-            && VK.isSupported(provider, "vkGetBufferMemoryRequirements2", caps)
-            && VK.isSupported(provider, "vkGetImageSparseMemoryRequirements2", caps)
-            && VK.isSupported(provider, "vkTrimCommandPool", caps)
-            && VK.isSupported(provider, "vkGetDeviceQueue2", caps)
-            && VK.isSupported(provider, "vkCreateSamplerYcbcrConversion", caps)
-            && VK.isSupported(provider, "vkDestroySamplerYcbcrConversion", caps)
-            && VK.isSupported(provider, "vkCreateDescriptorUpdateTemplate", caps)
-            && VK.isSupported(provider, "vkDestroyDescriptorUpdateTemplate", caps)
-            && VK.isSupported(provider, "vkUpdateDescriptorSetWithTemplate", caps)
-            && VK.isSupported(provider, "vkGetDescriptorSetLayoutSupport", caps)
+               VK.isSupported(provider, "vkBindBufferMemory2", caps, 121)
+            && VK.isSupported(provider, "vkBindImageMemory2", caps, 122)
+            && VK.isSupported(provider, "vkGetDeviceGroupPeerMemoryFeatures", caps, 123)
+            && VK.isSupported(provider, "vkCmdSetDeviceMask", caps, 124)
+            && VK.isSupported(provider, "vkCmdDispatchBase", caps, 125)
+            && VK.isSupported(provider, "vkGetImageMemoryRequirements2", caps, 126)
+            && VK.isSupported(provider, "vkGetBufferMemoryRequirements2", caps, 127)
+            && VK.isSupported(provider, "vkGetImageSparseMemoryRequirements2", caps, 128)
+            && VK.isSupported(provider, "vkTrimCommandPool", caps, 129)
+            && VK.isSupported(provider, "vkGetDeviceQueue2", caps, 130)
+            && VK.isSupported(provider, "vkCreateSamplerYcbcrConversion", caps, 131)
+            && VK.isSupported(provider, "vkDestroySamplerYcbcrConversion", caps, 132)
+            && VK.isSupported(provider, "vkCreateDescriptorUpdateTemplate", caps, 133)
+            && VK.isSupported(provider, "vkDestroyDescriptorUpdateTemplate", caps, 134)
+            && VK.isSupported(provider, "vkUpdateDescriptorSetWithTemplate", caps, 135)
+            && VK.isSupported(provider, "vkGetDescriptorSetLayoutSupport", caps, 136)
         );
     }
 
-    private static boolean check_VK12(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_VK12(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("Vulkan12") && VK.checkExtension("Vulkan12",
-               VK.isSupported(provider, "vkCmdDrawIndirectCount", caps)
-            && VK.isSupported(provider, "vkCmdDrawIndexedIndirectCount", caps)
-            && VK.isSupported(provider, "vkCreateRenderPass2", caps)
-            && VK.isSupported(provider, "vkCmdBeginRenderPass2", caps)
-            && VK.isSupported(provider, "vkCmdNextSubpass2", caps)
-            && VK.isSupported(provider, "vkCmdEndRenderPass2", caps)
-            && VK.isSupported(provider, "vkResetQueryPool", caps)
-            && VK.isSupported(provider, "vkGetSemaphoreCounterValue", caps)
-            && VK.isSupported(provider, "vkWaitSemaphores", caps)
-            && VK.isSupported(provider, "vkSignalSemaphore", caps)
-            && VK.isSupported(provider, "vkGetBufferDeviceAddress", caps)
-            && VK.isSupported(provider, "vkGetBufferOpaqueCaptureAddress", caps)
-            && VK.isSupported(provider, "vkGetDeviceMemoryOpaqueCaptureAddress", caps)
+               VK.isSupported(provider, "vkCmdDrawIndirectCount", caps, 137)
+            && VK.isSupported(provider, "vkCmdDrawIndexedIndirectCount", caps, 138)
+            && VK.isSupported(provider, "vkCreateRenderPass2", caps, 139)
+            && VK.isSupported(provider, "vkCmdBeginRenderPass2", caps, 140)
+            && VK.isSupported(provider, "vkCmdNextSubpass2", caps, 141)
+            && VK.isSupported(provider, "vkCmdEndRenderPass2", caps, 142)
+            && VK.isSupported(provider, "vkResetQueryPool", caps, 143)
+            && VK.isSupported(provider, "vkGetSemaphoreCounterValue", caps, 144)
+            && VK.isSupported(provider, "vkWaitSemaphores", caps, 145)
+            && VK.isSupported(provider, "vkSignalSemaphore", caps, 146)
+            && VK.isSupported(provider, "vkGetBufferDeviceAddress", caps, 147)
+            && VK.isSupported(provider, "vkGetBufferOpaqueCaptureAddress", caps, 148)
+            && VK.isSupported(provider, "vkGetDeviceMemoryOpaqueCaptureAddress", caps, 149)
         );
     }
 
-    private static boolean check_AMD_buffer_marker(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_AMD_buffer_marker(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_AMD_buffer_marker") && VK.checkExtension("VK_AMD_buffer_marker",
-               VK.isSupported(provider, "vkCmdWriteBufferMarkerAMD", caps)
+               VK.isSupported(provider, "vkCmdWriteBufferMarkerAMD", caps, 150)
         );
     }
 
-    private static boolean check_AMD_display_native_hdr(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_AMD_display_native_hdr(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_AMD_display_native_hdr") && VK.checkExtension("VK_AMD_display_native_hdr",
-               VK.isSupported(provider, "vkSetLocalDimmingAMD", caps)
+               VK.isSupported(provider, "vkSetLocalDimmingAMD", caps, 151)
         );
     }
 
-    private static boolean check_AMD_draw_indirect_count(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_AMD_draw_indirect_count(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_AMD_draw_indirect_count") && VK.checkExtension("VK_AMD_draw_indirect_count",
-               VK.isSupported(provider, "vkCmdDrawIndirectCountAMD", caps)
-            && VK.isSupported(provider, "vkCmdDrawIndexedIndirectCountAMD", caps)
+               VK.isSupported(provider, "vkCmdDrawIndirectCountAMD", caps, 152)
+            && VK.isSupported(provider, "vkCmdDrawIndexedIndirectCountAMD", caps, 153)
         );
     }
 
-    private static boolean check_AMD_shader_info(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_AMD_shader_info(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_AMD_shader_info") && VK.checkExtension("VK_AMD_shader_info",
-               VK.isSupported(provider, "vkGetShaderInfoAMD", caps)
+               VK.isSupported(provider, "vkGetShaderInfoAMD", caps, 154)
         );
     }
 
-    private static boolean check_EXT_buffer_device_address(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_EXT_buffer_device_address(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_EXT_buffer_device_address") && VK.checkExtension("VK_EXT_buffer_device_address",
-               VK.isSupported(provider, "vkGetBufferDeviceAddressEXT", caps)
+               VK.isSupported(provider, "vkGetBufferDeviceAddressEXT", caps, 155)
         );
     }
 
-    private static boolean check_EXT_calibrated_timestamps(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_EXT_calibrated_timestamps(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_EXT_calibrated_timestamps") && VK.checkExtension("VK_EXT_calibrated_timestamps",
-               VK.isSupported(provider, "vkGetCalibratedTimestampsEXT", caps)
+               VK.isSupported(provider, "vkGetCalibratedTimestampsEXT", caps, 156)
         );
     }
 
-    private static boolean check_EXT_conditional_rendering(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_EXT_conditional_rendering(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_EXT_conditional_rendering") && VK.checkExtension("VK_EXT_conditional_rendering",
-               VK.isSupported(provider, "vkCmdBeginConditionalRenderingEXT", caps)
-            && VK.isSupported(provider, "vkCmdEndConditionalRenderingEXT", caps)
+               VK.isSupported(provider, "vkCmdBeginConditionalRenderingEXT", caps, 157)
+            && VK.isSupported(provider, "vkCmdEndConditionalRenderingEXT", caps, 158)
         );
     }
 
-    private static boolean check_EXT_debug_marker(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_EXT_debug_marker(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_EXT_debug_marker") && VK.checkExtension("VK_EXT_debug_marker",
-               VK.isSupported(provider, "vkDebugMarkerSetObjectTagEXT", caps)
-            && VK.isSupported(provider, "vkDebugMarkerSetObjectNameEXT", caps)
-            && VK.isSupported(provider, "vkCmdDebugMarkerBeginEXT", caps)
-            && VK.isSupported(provider, "vkCmdDebugMarkerEndEXT", caps)
-            && VK.isSupported(provider, "vkCmdDebugMarkerInsertEXT", caps)
+               VK.isSupported(provider, "vkDebugMarkerSetObjectTagEXT", caps, 159)
+            && VK.isSupported(provider, "vkDebugMarkerSetObjectNameEXT", caps, 160)
+            && VK.isSupported(provider, "vkCmdDebugMarkerBeginEXT", caps, 161)
+            && VK.isSupported(provider, "vkCmdDebugMarkerEndEXT", caps, 162)
+            && VK.isSupported(provider, "vkCmdDebugMarkerInsertEXT", caps, 163)
         );
     }
 
-    private static boolean check_EXT_debug_utils(FunctionProvider provider, java.util.Map<String, Long> caps, VKCapabilitiesInstance capsInstance) {
+    private static boolean check_EXT_debug_utils(FunctionProvider provider, long[] caps, VKCapabilitiesInstance capsInstance) {
         return capsInstance.VK_EXT_debug_utils && VK.checkExtension("VK_EXT_debug_utils",
-               VK.isSupported(provider, "vkSetDebugUtilsObjectNameEXT", caps)
-            && VK.isSupported(provider, "vkSetDebugUtilsObjectTagEXT", caps)
-            && VK.isSupported(provider, "vkQueueBeginDebugUtilsLabelEXT", caps)
-            && VK.isSupported(provider, "vkQueueEndDebugUtilsLabelEXT", caps)
-            && VK.isSupported(provider, "vkQueueInsertDebugUtilsLabelEXT", caps)
-            && VK.isSupported(provider, "vkCmdBeginDebugUtilsLabelEXT", caps)
-            && VK.isSupported(provider, "vkCmdEndDebugUtilsLabelEXT", caps)
-            && VK.isSupported(provider, "vkCmdInsertDebugUtilsLabelEXT", caps)
+               VK.isSupported(provider, "vkSetDebugUtilsObjectNameEXT", caps, 164)
+            && VK.isSupported(provider, "vkSetDebugUtilsObjectTagEXT", caps, 165)
+            && VK.isSupported(provider, "vkQueueBeginDebugUtilsLabelEXT", caps, 166)
+            && VK.isSupported(provider, "vkQueueEndDebugUtilsLabelEXT", caps, 167)
+            && VK.isSupported(provider, "vkQueueInsertDebugUtilsLabelEXT", caps, 168)
+            && VK.isSupported(provider, "vkCmdBeginDebugUtilsLabelEXT", caps, 169)
+            && VK.isSupported(provider, "vkCmdEndDebugUtilsLabelEXT", caps, 170)
+            && VK.isSupported(provider, "vkCmdInsertDebugUtilsLabelEXT", caps, 171)
         );
     }
 
-    private static boolean check_EXT_discard_rectangles(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_EXT_discard_rectangles(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_EXT_discard_rectangles") && VK.checkExtension("VK_EXT_discard_rectangles",
-               VK.isSupported(provider, "vkCmdSetDiscardRectangleEXT", caps)
+               VK.isSupported(provider, "vkCmdSetDiscardRectangleEXT", caps, 172)
         );
     }
 
-    private static boolean check_EXT_display_control(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_EXT_display_control(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_EXT_display_control") && VK.checkExtension("VK_EXT_display_control",
-               VK.isSupported(provider, "vkDisplayPowerControlEXT", caps)
-            && VK.isSupported(provider, "vkRegisterDeviceEventEXT", caps)
-            && VK.isSupported(provider, "vkRegisterDisplayEventEXT", caps)
-            && VK.isSupported(provider, "vkGetSwapchainCounterEXT", caps)
+               VK.isSupported(provider, "vkDisplayPowerControlEXT", caps, 173)
+            && VK.isSupported(provider, "vkRegisterDeviceEventEXT", caps, 174)
+            && VK.isSupported(provider, "vkRegisterDisplayEventEXT", caps, 175)
+            && VK.isSupported(provider, "vkGetSwapchainCounterEXT", caps, 176)
         );
     }
 
-    private static boolean check_EXT_external_memory_host(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_EXT_external_memory_host(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_EXT_external_memory_host") && VK.checkExtension("VK_EXT_external_memory_host",
-               VK.isSupported(provider, "vkGetMemoryHostPointerPropertiesEXT", caps)
+               VK.isSupported(provider, "vkGetMemoryHostPointerPropertiesEXT", caps, 177)
         );
     }
 
-    private static boolean check_EXT_full_screen_exclusive(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_EXT_full_screen_exclusive(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_EXT_full_screen_exclusive") && VK.checkExtension("VK_EXT_full_screen_exclusive",
-               VK.isSupported(provider, "vkAcquireFullScreenExclusiveModeEXT", caps)
-            && VK.isSupported(provider, "vkReleaseFullScreenExclusiveModeEXT", caps)
-            && VK.isSupported(provider, "vkGetDeviceGroupSurfacePresentModes2EXT", caps, ext.contains("Vulkan11") || ext.contains("VK_KHR_device_group"))
+               VK.isSupported(provider, "vkAcquireFullScreenExclusiveModeEXT", caps, 178)
+            && VK.isSupported(provider, "vkReleaseFullScreenExclusiveModeEXT", caps, 179)
+            && VK.isSupported(provider, "vkGetDeviceGroupSurfacePresentModes2EXT", caps, 180, ext.contains("Vulkan11") || ext.contains("VK_KHR_device_group"))
         );
     }
 
-    private static boolean check_EXT_hdr_metadata(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_EXT_hdr_metadata(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_EXT_hdr_metadata") && VK.checkExtension("VK_EXT_hdr_metadata",
-               VK.isSupported(provider, "vkSetHdrMetadataEXT", caps)
+               VK.isSupported(provider, "vkSetHdrMetadataEXT", caps, 181)
         );
     }
 
-    private static boolean check_EXT_host_query_reset(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_EXT_host_query_reset(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_EXT_host_query_reset") && VK.checkExtension("VK_EXT_host_query_reset",
-               VK.isSupported(provider, "vkResetQueryPoolEXT", caps)
+               VK.isSupported(provider, "vkResetQueryPoolEXT", caps, 182)
         );
     }
 
-    private static boolean check_EXT_image_drm_format_modifier(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_EXT_image_drm_format_modifier(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_EXT_image_drm_format_modifier") && VK.checkExtension("VK_EXT_image_drm_format_modifier",
-               VK.isSupported(provider, "vkGetImageDrmFormatModifierPropertiesEXT", caps)
+               VK.isSupported(provider, "vkGetImageDrmFormatModifierPropertiesEXT", caps, 183)
         );
     }
 
-    private static boolean check_EXT_line_rasterization(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_EXT_line_rasterization(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_EXT_line_rasterization") && VK.checkExtension("VK_EXT_line_rasterization",
-               VK.isSupported(provider, "vkCmdSetLineStippleEXT", caps)
+               VK.isSupported(provider, "vkCmdSetLineStippleEXT", caps, 184)
         );
     }
 
-    private static boolean check_EXT_sample_locations(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_EXT_sample_locations(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_EXT_sample_locations") && VK.checkExtension("VK_EXT_sample_locations",
-               VK.isSupported(provider, "vkCmdSetSampleLocationsEXT", caps)
+               VK.isSupported(provider, "vkCmdSetSampleLocationsEXT", caps, 185)
         );
     }
 
-    private static boolean check_EXT_transform_feedback(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_EXT_transform_feedback(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_EXT_transform_feedback") && VK.checkExtension("VK_EXT_transform_feedback",
-               VK.isSupported(provider, "vkCmdBindTransformFeedbackBuffersEXT", caps)
-            && VK.isSupported(provider, "vkCmdBeginTransformFeedbackEXT", caps)
-            && VK.isSupported(provider, "vkCmdEndTransformFeedbackEXT", caps)
-            && VK.isSupported(provider, "vkCmdBeginQueryIndexedEXT", caps)
-            && VK.isSupported(provider, "vkCmdEndQueryIndexedEXT", caps)
-            && VK.isSupported(provider, "vkCmdDrawIndirectByteCountEXT", caps)
+               VK.isSupported(provider, "vkCmdBindTransformFeedbackBuffersEXT", caps, 186)
+            && VK.isSupported(provider, "vkCmdBeginTransformFeedbackEXT", caps, 187)
+            && VK.isSupported(provider, "vkCmdEndTransformFeedbackEXT", caps, 188)
+            && VK.isSupported(provider, "vkCmdBeginQueryIndexedEXT", caps, 189)
+            && VK.isSupported(provider, "vkCmdEndQueryIndexedEXT", caps, 190)
+            && VK.isSupported(provider, "vkCmdDrawIndirectByteCountEXT", caps, 191)
         );
     }
 
-    private static boolean check_EXT_validation_cache(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_EXT_validation_cache(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_EXT_validation_cache") && VK.checkExtension("VK_EXT_validation_cache",
-               VK.isSupported(provider, "vkCreateValidationCacheEXT", caps)
-            && VK.isSupported(provider, "vkDestroyValidationCacheEXT", caps)
-            && VK.isSupported(provider, "vkMergeValidationCachesEXT", caps)
-            && VK.isSupported(provider, "vkGetValidationCacheDataEXT", caps)
+               VK.isSupported(provider, "vkCreateValidationCacheEXT", caps, 192)
+            && VK.isSupported(provider, "vkDestroyValidationCacheEXT", caps, 193)
+            && VK.isSupported(provider, "vkMergeValidationCachesEXT", caps, 194)
+            && VK.isSupported(provider, "vkGetValidationCacheDataEXT", caps, 195)
         );
     }
 
-    private static boolean check_GOOGLE_display_timing(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_GOOGLE_display_timing(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_GOOGLE_display_timing") && VK.checkExtension("VK_GOOGLE_display_timing",
-               VK.isSupported(provider, "vkGetRefreshCycleDurationGOOGLE", caps)
-            && VK.isSupported(provider, "vkGetPastPresentationTimingGOOGLE", caps)
+               VK.isSupported(provider, "vkGetRefreshCycleDurationGOOGLE", caps, 196)
+            && VK.isSupported(provider, "vkGetPastPresentationTimingGOOGLE", caps, 197)
         );
     }
 
-    private static boolean check_INTEL_performance_query(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_INTEL_performance_query(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_INTEL_performance_query") && VK.checkExtension("VK_INTEL_performance_query",
-               VK.isSupported(provider, "vkInitializePerformanceApiINTEL", caps)
-            && VK.isSupported(provider, "vkUninitializePerformanceApiINTEL", caps)
-            && VK.isSupported(provider, "vkCmdSetPerformanceMarkerINTEL", caps)
-            && VK.isSupported(provider, "vkCmdSetPerformanceStreamMarkerINTEL", caps)
-            && VK.isSupported(provider, "vkCmdSetPerformanceOverrideINTEL", caps)
-            && VK.isSupported(provider, "vkAcquirePerformanceConfigurationINTEL", caps)
-            && VK.isSupported(provider, "vkReleasePerformanceConfigurationINTEL", caps)
-            && VK.isSupported(provider, "vkQueueSetPerformanceConfigurationINTEL", caps)
-            && VK.isSupported(provider, "vkGetPerformanceParameterINTEL", caps)
+               VK.isSupported(provider, "vkInitializePerformanceApiINTEL", caps, 198)
+            && VK.isSupported(provider, "vkUninitializePerformanceApiINTEL", caps, 199)
+            && VK.isSupported(provider, "vkCmdSetPerformanceMarkerINTEL", caps, 200)
+            && VK.isSupported(provider, "vkCmdSetPerformanceStreamMarkerINTEL", caps, 201)
+            && VK.isSupported(provider, "vkCmdSetPerformanceOverrideINTEL", caps, 202)
+            && VK.isSupported(provider, "vkAcquirePerformanceConfigurationINTEL", caps, 203)
+            && VK.isSupported(provider, "vkReleasePerformanceConfigurationINTEL", caps, 204)
+            && VK.isSupported(provider, "vkQueueSetPerformanceConfigurationINTEL", caps, 205)
+            && VK.isSupported(provider, "vkGetPerformanceParameterINTEL", caps, 206)
         );
     }
 
-    private static boolean check_KHR_bind_memory2(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_KHR_bind_memory2(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_KHR_bind_memory2") && VK.checkExtension("VK_KHR_bind_memory2",
-               VK.isSupported(provider, "vkBindBufferMemory2KHR", caps)
-            && VK.isSupported(provider, "vkBindImageMemory2KHR", caps)
+               VK.isSupported(provider, "vkBindBufferMemory2KHR", caps, 207)
+            && VK.isSupported(provider, "vkBindImageMemory2KHR", caps, 208)
         );
     }
 
-    private static boolean check_KHR_buffer_device_address(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_KHR_buffer_device_address(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_KHR_buffer_device_address") && VK.checkExtension("VK_KHR_buffer_device_address",
-               VK.isSupported(provider, "vkGetBufferDeviceAddressKHR", caps)
-            && VK.isSupported(provider, "vkGetBufferOpaqueCaptureAddressKHR", caps)
-            && VK.isSupported(provider, "vkGetDeviceMemoryOpaqueCaptureAddressKHR", caps)
+               VK.isSupported(provider, "vkGetBufferDeviceAddressKHR", caps, 209)
+            && VK.isSupported(provider, "vkGetBufferOpaqueCaptureAddressKHR", caps, 210)
+            && VK.isSupported(provider, "vkGetDeviceMemoryOpaqueCaptureAddressKHR", caps, 211)
         );
     }
 
-    private static boolean check_KHR_create_renderpass2(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_KHR_create_renderpass2(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_KHR_create_renderpass2") && VK.checkExtension("VK_KHR_create_renderpass2",
-               VK.isSupported(provider, "vkCreateRenderPass2KHR", caps)
-            && VK.isSupported(provider, "vkCmdBeginRenderPass2KHR", caps)
-            && VK.isSupported(provider, "vkCmdNextSubpass2KHR", caps)
-            && VK.isSupported(provider, "vkCmdEndRenderPass2KHR", caps)
+               VK.isSupported(provider, "vkCreateRenderPass2KHR", caps, 212)
+            && VK.isSupported(provider, "vkCmdBeginRenderPass2KHR", caps, 213)
+            && VK.isSupported(provider, "vkCmdNextSubpass2KHR", caps, 214)
+            && VK.isSupported(provider, "vkCmdEndRenderPass2KHR", caps, 215)
         );
     }
 
-    private static boolean check_KHR_descriptor_update_template(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_KHR_descriptor_update_template(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_KHR_descriptor_update_template") && VK.checkExtension("VK_KHR_descriptor_update_template",
-               VK.isSupported(provider, "vkCreateDescriptorUpdateTemplateKHR", caps)
-            && VK.isSupported(provider, "vkDestroyDescriptorUpdateTemplateKHR", caps)
-            && VK.isSupported(provider, "vkUpdateDescriptorSetWithTemplateKHR", caps)
-            && VK.isSupported(provider, "vkCmdPushDescriptorSetWithTemplateKHR", caps, ext.contains("VK_KHR_push_descriptor"))
+               VK.isSupported(provider, "vkCreateDescriptorUpdateTemplateKHR", caps, 216)
+            && VK.isSupported(provider, "vkDestroyDescriptorUpdateTemplateKHR", caps, 217)
+            && VK.isSupported(provider, "vkUpdateDescriptorSetWithTemplateKHR", caps, 218)
+            && VK.isSupported(provider, "vkCmdPushDescriptorSetWithTemplateKHR", caps, 219, ext.contains("VK_KHR_push_descriptor"))
         );
     }
 
-    private static boolean check_KHR_device_group(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_KHR_device_group(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_KHR_device_group") && VK.checkExtension("VK_KHR_device_group",
-               VK.isSupported(provider, "vkGetDeviceGroupPeerMemoryFeaturesKHR", caps)
-            && VK.isSupported(provider, "vkCmdSetDeviceMaskKHR", caps)
-            && VK.isSupported(provider, "vkCmdDispatchBaseKHR", caps)
-            && VK.isSupported(provider, "vkGetDeviceGroupPresentCapabilitiesKHR", caps, ext.contains("VK_KHR_surface"))
-            && VK.isSupported(provider, "vkGetDeviceGroupSurfacePresentModesKHR", caps, ext.contains("VK_KHR_surface"))
-            && VK.isSupported(provider, "vkAcquireNextImage2KHR", caps, ext.contains("VK_KHR_swapchain"))
+               VK.isSupported(provider, "vkGetDeviceGroupPeerMemoryFeaturesKHR", caps, 220)
+            && VK.isSupported(provider, "vkCmdSetDeviceMaskKHR", caps, 221)
+            && VK.isSupported(provider, "vkCmdDispatchBaseKHR", caps, 222)
+            && VK.isSupported(provider, "vkGetDeviceGroupPresentCapabilitiesKHR", caps, 223, ext.contains("VK_KHR_surface"))
+            && VK.isSupported(provider, "vkGetDeviceGroupSurfacePresentModesKHR", caps, 224, ext.contains("VK_KHR_surface"))
+            && VK.isSupported(provider, "vkAcquireNextImage2KHR", caps, 225, ext.contains("VK_KHR_swapchain"))
         );
     }
 
-    private static boolean check_KHR_display_swapchain(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_KHR_display_swapchain(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_KHR_display_swapchain") && VK.checkExtension("VK_KHR_display_swapchain",
-               VK.isSupported(provider, "vkCreateSharedSwapchainsKHR", caps)
+               VK.isSupported(provider, "vkCreateSharedSwapchainsKHR", caps, 226)
         );
     }
 
-    private static boolean check_KHR_draw_indirect_count(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_KHR_draw_indirect_count(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_KHR_draw_indirect_count") && VK.checkExtension("VK_KHR_draw_indirect_count",
-               VK.isSupported(provider, "vkCmdDrawIndirectCountKHR", caps)
-            && VK.isSupported(provider, "vkCmdDrawIndexedIndirectCountKHR", caps)
+               VK.isSupported(provider, "vkCmdDrawIndirectCountKHR", caps, 227)
+            && VK.isSupported(provider, "vkCmdDrawIndexedIndirectCountKHR", caps, 228)
         );
     }
 
-    private static boolean check_KHR_external_fence_fd(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_KHR_external_fence_fd(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_KHR_external_fence_fd") && VK.checkExtension("VK_KHR_external_fence_fd",
-               VK.isSupported(provider, "vkImportFenceFdKHR", caps)
-            && VK.isSupported(provider, "vkGetFenceFdKHR", caps)
+               VK.isSupported(provider, "vkImportFenceFdKHR", caps, 229)
+            && VK.isSupported(provider, "vkGetFenceFdKHR", caps, 230)
         );
     }
 
-    private static boolean check_KHR_external_fence_win32(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_KHR_external_fence_win32(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_KHR_external_fence_win32") && VK.checkExtension("VK_KHR_external_fence_win32",
-               VK.isSupported(provider, "vkImportFenceWin32HandleKHR", caps)
-            && VK.isSupported(provider, "vkGetFenceWin32HandleKHR", caps)
+               VK.isSupported(provider, "vkImportFenceWin32HandleKHR", caps, 231)
+            && VK.isSupported(provider, "vkGetFenceWin32HandleKHR", caps, 232)
         );
     }
 
-    private static boolean check_KHR_external_memory_fd(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_KHR_external_memory_fd(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_KHR_external_memory_fd") && VK.checkExtension("VK_KHR_external_memory_fd",
-               VK.isSupported(provider, "vkGetMemoryFdKHR", caps)
-            && VK.isSupported(provider, "vkGetMemoryFdPropertiesKHR", caps)
+               VK.isSupported(provider, "vkGetMemoryFdKHR", caps, 233)
+            && VK.isSupported(provider, "vkGetMemoryFdPropertiesKHR", caps, 234)
         );
     }
 
-    private static boolean check_KHR_external_memory_win32(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_KHR_external_memory_win32(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_KHR_external_memory_win32") && VK.checkExtension("VK_KHR_external_memory_win32",
-               VK.isSupported(provider, "vkGetMemoryWin32HandleKHR", caps)
-            && VK.isSupported(provider, "vkGetMemoryWin32HandlePropertiesKHR", caps)
+               VK.isSupported(provider, "vkGetMemoryWin32HandleKHR", caps, 235)
+            && VK.isSupported(provider, "vkGetMemoryWin32HandlePropertiesKHR", caps, 236)
         );
     }
 
-    private static boolean check_KHR_external_semaphore_fd(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_KHR_external_semaphore_fd(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_KHR_external_semaphore_fd") && VK.checkExtension("VK_KHR_external_semaphore_fd",
-               VK.isSupported(provider, "vkImportSemaphoreFdKHR", caps)
-            && VK.isSupported(provider, "vkGetSemaphoreFdKHR", caps)
+               VK.isSupported(provider, "vkImportSemaphoreFdKHR", caps, 237)
+            && VK.isSupported(provider, "vkGetSemaphoreFdKHR", caps, 238)
         );
     }
 
-    private static boolean check_KHR_external_semaphore_win32(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_KHR_external_semaphore_win32(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_KHR_external_semaphore_win32") && VK.checkExtension("VK_KHR_external_semaphore_win32",
-               VK.isSupported(provider, "vkImportSemaphoreWin32HandleKHR", caps)
-            && VK.isSupported(provider, "vkGetSemaphoreWin32HandleKHR", caps)
+               VK.isSupported(provider, "vkImportSemaphoreWin32HandleKHR", caps, 239)
+            && VK.isSupported(provider, "vkGetSemaphoreWin32HandleKHR", caps, 240)
         );
     }
 
-    private static boolean check_KHR_get_memory_requirements2(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_KHR_get_memory_requirements2(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_KHR_get_memory_requirements2") && VK.checkExtension("VK_KHR_get_memory_requirements2",
-               VK.isSupported(provider, "vkGetImageMemoryRequirements2KHR", caps)
-            && VK.isSupported(provider, "vkGetBufferMemoryRequirements2KHR", caps)
-            && VK.isSupported(provider, "vkGetImageSparseMemoryRequirements2KHR", caps)
+               VK.isSupported(provider, "vkGetImageMemoryRequirements2KHR", caps, 241)
+            && VK.isSupported(provider, "vkGetBufferMemoryRequirements2KHR", caps, 242)
+            && VK.isSupported(provider, "vkGetImageSparseMemoryRequirements2KHR", caps, 243)
         );
     }
 
-    private static boolean check_KHR_maintenance1(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_KHR_maintenance1(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_KHR_maintenance1") && VK.checkExtension("VK_KHR_maintenance1",
-               VK.isSupported(provider, "vkTrimCommandPoolKHR", caps)
+               VK.isSupported(provider, "vkTrimCommandPoolKHR", caps, 244)
         );
     }
 
-    private static boolean check_KHR_maintenance3(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_KHR_maintenance3(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_KHR_maintenance3") && VK.checkExtension("VK_KHR_maintenance3",
-               VK.isSupported(provider, "vkGetDescriptorSetLayoutSupportKHR", caps)
+               VK.isSupported(provider, "vkGetDescriptorSetLayoutSupportKHR", caps, 245)
         );
     }
 
-    private static boolean check_KHR_performance_query(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_KHR_performance_query(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_KHR_performance_query") && VK.checkExtension("VK_KHR_performance_query",
-               VK.isSupported(provider, "vkAcquireProfilingLockKHR", caps)
-            && VK.isSupported(provider, "vkReleaseProfilingLockKHR", caps)
+               VK.isSupported(provider, "vkAcquireProfilingLockKHR", caps, 246)
+            && VK.isSupported(provider, "vkReleaseProfilingLockKHR", caps, 247)
         );
     }
 
-    private static boolean check_KHR_pipeline_executable_properties(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_KHR_pipeline_executable_properties(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_KHR_pipeline_executable_properties") && VK.checkExtension("VK_KHR_pipeline_executable_properties",
-               VK.isSupported(provider, "vkGetPipelineExecutablePropertiesKHR", caps)
-            && VK.isSupported(provider, "vkGetPipelineExecutableStatisticsKHR", caps)
-            && VK.isSupported(provider, "vkGetPipelineExecutableInternalRepresentationsKHR", caps)
+               VK.isSupported(provider, "vkGetPipelineExecutablePropertiesKHR", caps, 248)
+            && VK.isSupported(provider, "vkGetPipelineExecutableStatisticsKHR", caps, 249)
+            && VK.isSupported(provider, "vkGetPipelineExecutableInternalRepresentationsKHR", caps, 250)
         );
     }
 
-    private static boolean check_KHR_push_descriptor(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_KHR_push_descriptor(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_KHR_push_descriptor") && VK.checkExtension("VK_KHR_push_descriptor",
-               VK.isSupported(provider, "vkCmdPushDescriptorSetKHR", caps)
-            && VK.isSupported(provider, "vkCmdPushDescriptorSetWithTemplateKHR", caps, ext.contains("Vulkan11"))
+               VK.isSupported(provider, "vkCmdPushDescriptorSetKHR", caps, 251)
+            && VK.isSupported(provider, "vkCmdPushDescriptorSetWithTemplateKHR", caps, 219, ext.contains("Vulkan11"))
         );
     }
 
-    private static boolean check_KHR_sampler_ycbcr_conversion(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_KHR_sampler_ycbcr_conversion(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_KHR_sampler_ycbcr_conversion") && VK.checkExtension("VK_KHR_sampler_ycbcr_conversion",
-               VK.isSupported(provider, "vkCreateSamplerYcbcrConversionKHR", caps)
-            && VK.isSupported(provider, "vkDestroySamplerYcbcrConversionKHR", caps)
+               VK.isSupported(provider, "vkCreateSamplerYcbcrConversionKHR", caps, 252)
+            && VK.isSupported(provider, "vkDestroySamplerYcbcrConversionKHR", caps, 253)
         );
     }
 
-    private static boolean check_KHR_shared_presentable_image(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_KHR_shared_presentable_image(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_KHR_shared_presentable_image") && VK.checkExtension("VK_KHR_shared_presentable_image",
-               VK.isSupported(provider, "vkGetSwapchainStatusKHR", caps)
+               VK.isSupported(provider, "vkGetSwapchainStatusKHR", caps, 254)
         );
     }
 
-    private static boolean check_KHR_swapchain(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_KHR_swapchain(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_KHR_swapchain") && VK.checkExtension("VK_KHR_swapchain",
-               VK.isSupported(provider, "vkCreateSwapchainKHR", caps)
-            && VK.isSupported(provider, "vkDestroySwapchainKHR", caps)
-            && VK.isSupported(provider, "vkGetSwapchainImagesKHR", caps)
-            && VK.isSupported(provider, "vkAcquireNextImageKHR", caps)
-            && VK.isSupported(provider, "vkQueuePresentKHR", caps)
-            && VK.isSupported(provider, "vkGetDeviceGroupPresentCapabilitiesKHR", caps, ext.contains("Vulkan11"))
-            && VK.isSupported(provider, "vkGetDeviceGroupSurfacePresentModesKHR", caps, ext.contains("Vulkan11"))
-            && VK.isSupported(provider, "vkAcquireNextImage2KHR", caps, ext.contains("Vulkan11"))
+               VK.isSupported(provider, "vkCreateSwapchainKHR", caps, 255)
+            && VK.isSupported(provider, "vkDestroySwapchainKHR", caps, 256)
+            && VK.isSupported(provider, "vkGetSwapchainImagesKHR", caps, 257)
+            && VK.isSupported(provider, "vkAcquireNextImageKHR", caps, 258)
+            && VK.isSupported(provider, "vkQueuePresentKHR", caps, 259)
+            && VK.isSupported(provider, "vkGetDeviceGroupPresentCapabilitiesKHR", caps, 223, ext.contains("Vulkan11"))
+            && VK.isSupported(provider, "vkGetDeviceGroupSurfacePresentModesKHR", caps, 224, ext.contains("Vulkan11"))
+            && VK.isSupported(provider, "vkAcquireNextImage2KHR", caps, 225, ext.contains("Vulkan11"))
         );
     }
 
-    private static boolean check_KHR_timeline_semaphore(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_KHR_timeline_semaphore(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_KHR_timeline_semaphore") && VK.checkExtension("VK_KHR_timeline_semaphore",
-               VK.isSupported(provider, "vkGetSemaphoreCounterValueKHR", caps)
-            && VK.isSupported(provider, "vkWaitSemaphoresKHR", caps)
-            && VK.isSupported(provider, "vkSignalSemaphoreKHR", caps)
+               VK.isSupported(provider, "vkGetSemaphoreCounterValueKHR", caps, 260)
+            && VK.isSupported(provider, "vkWaitSemaphoresKHR", caps, 261)
+            && VK.isSupported(provider, "vkSignalSemaphoreKHR", caps, 262)
         );
     }
 
-    private static boolean check_NV_clip_space_w_scaling(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_NV_clip_space_w_scaling(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_NV_clip_space_w_scaling") && VK.checkExtension("VK_NV_clip_space_w_scaling",
-               VK.isSupported(provider, "vkCmdSetViewportWScalingNV", caps)
+               VK.isSupported(provider, "vkCmdSetViewportWScalingNV", caps, 263)
         );
     }
 
-    private static boolean check_NV_device_diagnostic_checkpoints(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_NV_device_diagnostic_checkpoints(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_NV_device_diagnostic_checkpoints") && VK.checkExtension("VK_NV_device_diagnostic_checkpoints",
-               VK.isSupported(provider, "vkCmdSetCheckpointNV", caps)
-            && VK.isSupported(provider, "vkGetQueueCheckpointDataNV", caps)
+               VK.isSupported(provider, "vkCmdSetCheckpointNV", caps, 264)
+            && VK.isSupported(provider, "vkGetQueueCheckpointDataNV", caps, 265)
         );
     }
 
-    private static boolean check_NV_external_memory_win32(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_NV_external_memory_win32(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_NV_external_memory_win32") && VK.checkExtension("VK_NV_external_memory_win32",
-               VK.isSupported(provider, "vkGetMemoryWin32HandleNV", caps)
+               VK.isSupported(provider, "vkGetMemoryWin32HandleNV", caps, 266)
         );
     }
 
-    private static boolean check_NV_mesh_shader(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_NV_mesh_shader(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_NV_mesh_shader") && VK.checkExtension("VK_NV_mesh_shader",
-               VK.isSupported(provider, "vkCmdDrawMeshTasksNV", caps)
-            && VK.isSupported(provider, "vkCmdDrawMeshTasksIndirectNV", caps)
-            && VK.isSupported(provider, "vkCmdDrawMeshTasksIndirectCountNV", caps)
+               VK.isSupported(provider, "vkCmdDrawMeshTasksNV", caps, 267)
+            && VK.isSupported(provider, "vkCmdDrawMeshTasksIndirectNV", caps, 268)
+            && VK.isSupported(provider, "vkCmdDrawMeshTasksIndirectCountNV", caps, 269)
         );
     }
 
-    private static boolean check_NV_ray_tracing(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_NV_ray_tracing(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_NV_ray_tracing") && VK.checkExtension("VK_NV_ray_tracing",
-               VK.isSupported(provider, "vkCreateAccelerationStructureNV", caps)
-            && VK.isSupported(provider, "vkDestroyAccelerationStructureNV", caps)
-            && VK.isSupported(provider, "vkGetAccelerationStructureMemoryRequirementsNV", caps)
-            && VK.isSupported(provider, "vkBindAccelerationStructureMemoryNV", caps)
-            && VK.isSupported(provider, "vkCmdBuildAccelerationStructureNV", caps)
-            && VK.isSupported(provider, "vkCmdCopyAccelerationStructureNV", caps)
-            && VK.isSupported(provider, "vkCmdTraceRaysNV", caps)
-            && VK.isSupported(provider, "vkCreateRayTracingPipelinesNV", caps)
-            && VK.isSupported(provider, "vkGetRayTracingShaderGroupHandlesNV", caps)
-            && VK.isSupported(provider, "vkGetAccelerationStructureHandleNV", caps)
-            && VK.isSupported(provider, "vkCmdWriteAccelerationStructuresPropertiesNV", caps)
-            && VK.isSupported(provider, "vkCompileDeferredNV", caps)
+               VK.isSupported(provider, "vkCreateAccelerationStructureNV", caps, 270)
+            && VK.isSupported(provider, "vkDestroyAccelerationStructureNV", caps, 271)
+            && VK.isSupported(provider, "vkGetAccelerationStructureMemoryRequirementsNV", caps, 272)
+            && VK.isSupported(provider, "vkBindAccelerationStructureMemoryNV", caps, 273)
+            && VK.isSupported(provider, "vkCmdBuildAccelerationStructureNV", caps, 274)
+            && VK.isSupported(provider, "vkCmdCopyAccelerationStructureNV", caps, 275)
+            && VK.isSupported(provider, "vkCmdTraceRaysNV", caps, 276)
+            && VK.isSupported(provider, "vkCreateRayTracingPipelinesNV", caps, 277)
+            && VK.isSupported(provider, "vkGetRayTracingShaderGroupHandlesNV", caps, 278)
+            && VK.isSupported(provider, "vkGetAccelerationStructureHandleNV", caps, 279)
+            && VK.isSupported(provider, "vkCmdWriteAccelerationStructuresPropertiesNV", caps, 280)
+            && VK.isSupported(provider, "vkCompileDeferredNV", caps, 281)
         );
     }
 
-    private static boolean check_NV_scissor_exclusive(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_NV_scissor_exclusive(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_NV_scissor_exclusive") && VK.checkExtension("VK_NV_scissor_exclusive",
-               VK.isSupported(provider, "vkCmdSetExclusiveScissorNV", caps)
+               VK.isSupported(provider, "vkCmdSetExclusiveScissorNV", caps, 282)
         );
     }
 
-    private static boolean check_NV_shading_rate_image(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_NV_shading_rate_image(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_NV_shading_rate_image") && VK.checkExtension("VK_NV_shading_rate_image",
-               VK.isSupported(provider, "vkCmdBindShadingRateImageNV", caps)
-            && VK.isSupported(provider, "vkCmdSetViewportShadingRatePaletteNV", caps)
-            && VK.isSupported(provider, "vkCmdSetCoarseSampleOrderNV", caps)
+               VK.isSupported(provider, "vkCmdBindShadingRateImageNV", caps, 283)
+            && VK.isSupported(provider, "vkCmdSetViewportShadingRatePaletteNV", caps, 284)
+            && VK.isSupported(provider, "vkCmdSetCoarseSampleOrderNV", caps, 285)
         );
     }
 
-    private static boolean check_NVX_device_generated_commands(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_NVX_device_generated_commands(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_NVX_device_generated_commands") && VK.checkExtension("VK_NVX_device_generated_commands",
-               VK.isSupported(provider, "vkCmdProcessCommandsNVX", caps)
-            && VK.isSupported(provider, "vkCmdReserveSpaceForCommandsNVX", caps)
-            && VK.isSupported(provider, "vkCreateIndirectCommandsLayoutNVX", caps)
-            && VK.isSupported(provider, "vkDestroyIndirectCommandsLayoutNVX", caps)
-            && VK.isSupported(provider, "vkCreateObjectTableNVX", caps)
-            && VK.isSupported(provider, "vkDestroyObjectTableNVX", caps)
-            && VK.isSupported(provider, "vkRegisterObjectsNVX", caps)
-            && VK.isSupported(provider, "vkUnregisterObjectsNVX", caps)
+               VK.isSupported(provider, "vkCmdProcessCommandsNVX", caps, 286)
+            && VK.isSupported(provider, "vkCmdReserveSpaceForCommandsNVX", caps, 287)
+            && VK.isSupported(provider, "vkCreateIndirectCommandsLayoutNVX", caps, 288)
+            && VK.isSupported(provider, "vkDestroyIndirectCommandsLayoutNVX", caps, 289)
+            && VK.isSupported(provider, "vkCreateObjectTableNVX", caps, 290)
+            && VK.isSupported(provider, "vkDestroyObjectTableNVX", caps, 291)
+            && VK.isSupported(provider, "vkRegisterObjectsNVX", caps, 292)
+            && VK.isSupported(provider, "vkUnregisterObjectsNVX", caps, 293)
         );
     }
 
-    private static boolean check_NVX_image_view_handle(FunctionProvider provider, java.util.Map<String, Long> caps, java.util.Set<String> ext) {
+    private static boolean check_NVX_image_view_handle(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         return ext.contains("VK_NVX_image_view_handle") && VK.checkExtension("VK_NVX_image_view_handle",
-               VK.isSupported(provider, "vkGetImageViewHandleNVX", caps)
+               VK.isSupported(provider, "vkGetImageViewHandleNVX", caps, 294)
         );
     }
 
