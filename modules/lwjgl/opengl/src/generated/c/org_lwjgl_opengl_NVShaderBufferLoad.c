@@ -24,77 +24,77 @@ typedef void (APIENTRY *glProgramUniformui64vNVPROC) (jint, jint, jint, intptr_t
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShaderBufferLoad_glMakeBufferResidentNV(JNIEnv *__env, jclass clazz, jint target, jint access) {
-    glMakeBufferResidentNVPROC glMakeBufferResidentNV = (glMakeBufferResidentNVPROC)tlsGetFunction(2116);
+    glMakeBufferResidentNVPROC glMakeBufferResidentNV = (glMakeBufferResidentNVPROC)tlsGetFunction(2117);
     UNUSED_PARAM(clazz)
     glMakeBufferResidentNV(target, access);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShaderBufferLoad_glMakeBufferNonResidentNV(JNIEnv *__env, jclass clazz, jint target) {
-    glMakeBufferNonResidentNVPROC glMakeBufferNonResidentNV = (glMakeBufferNonResidentNVPROC)tlsGetFunction(2117);
+    glMakeBufferNonResidentNVPROC glMakeBufferNonResidentNV = (glMakeBufferNonResidentNVPROC)tlsGetFunction(2118);
     UNUSED_PARAM(clazz)
     glMakeBufferNonResidentNV(target);
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_NVShaderBufferLoad_glIsBufferResidentNV(JNIEnv *__env, jclass clazz, jint target) {
-    glIsBufferResidentNVPROC glIsBufferResidentNV = (glIsBufferResidentNVPROC)tlsGetFunction(2118);
+    glIsBufferResidentNVPROC glIsBufferResidentNV = (glIsBufferResidentNVPROC)tlsGetFunction(2119);
     UNUSED_PARAM(clazz)
     return (jboolean)glIsBufferResidentNV(target);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShaderBufferLoad_glMakeNamedBufferResidentNV(JNIEnv *__env, jclass clazz, jint buffer, jint access) {
-    glMakeNamedBufferResidentNVPROC glMakeNamedBufferResidentNV = (glMakeNamedBufferResidentNVPROC)tlsGetFunction(2119);
+    glMakeNamedBufferResidentNVPROC glMakeNamedBufferResidentNV = (glMakeNamedBufferResidentNVPROC)tlsGetFunction(2120);
     UNUSED_PARAM(clazz)
     glMakeNamedBufferResidentNV(buffer, access);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShaderBufferLoad_glMakeNamedBufferNonResidentNV(JNIEnv *__env, jclass clazz, jint buffer) {
-    glMakeNamedBufferNonResidentNVPROC glMakeNamedBufferNonResidentNV = (glMakeNamedBufferNonResidentNVPROC)tlsGetFunction(2120);
+    glMakeNamedBufferNonResidentNVPROC glMakeNamedBufferNonResidentNV = (glMakeNamedBufferNonResidentNVPROC)tlsGetFunction(2121);
     UNUSED_PARAM(clazz)
     glMakeNamedBufferNonResidentNV(buffer);
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_NVShaderBufferLoad_glIsNamedBufferResidentNV(JNIEnv *__env, jclass clazz, jint buffer) {
-    glIsNamedBufferResidentNVPROC glIsNamedBufferResidentNV = (glIsNamedBufferResidentNVPROC)tlsGetFunction(2121);
+    glIsNamedBufferResidentNVPROC glIsNamedBufferResidentNV = (glIsNamedBufferResidentNVPROC)tlsGetFunction(2122);
     UNUSED_PARAM(clazz)
     return (jboolean)glIsNamedBufferResidentNV(buffer);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShaderBufferLoad_nglGetBufferParameterui64vNV__IIJ(JNIEnv *__env, jclass clazz, jint target, jint pname, jlong paramsAddress) {
-    glGetBufferParameterui64vNVPROC glGetBufferParameterui64vNV = (glGetBufferParameterui64vNVPROC)tlsGetFunction(2122);
+    glGetBufferParameterui64vNVPROC glGetBufferParameterui64vNV = (glGetBufferParameterui64vNVPROC)tlsGetFunction(2123);
     intptr_t params = (intptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetBufferParameterui64vNV(target, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShaderBufferLoad_nglGetNamedBufferParameterui64vNV__IIJ(JNIEnv *__env, jclass clazz, jint buffer, jint pname, jlong paramsAddress) {
-    glGetNamedBufferParameterui64vNVPROC glGetNamedBufferParameterui64vNV = (glGetNamedBufferParameterui64vNVPROC)tlsGetFunction(2123);
+    glGetNamedBufferParameterui64vNVPROC glGetNamedBufferParameterui64vNV = (glGetNamedBufferParameterui64vNVPROC)tlsGetFunction(2124);
     intptr_t params = (intptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetNamedBufferParameterui64vNV(buffer, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShaderBufferLoad_nglGetIntegerui64vNV__IJ(JNIEnv *__env, jclass clazz, jint value, jlong resultAddress) {
-    glGetIntegerui64vNVPROC glGetIntegerui64vNV = (glGetIntegerui64vNVPROC)tlsGetFunction(2124);
+    glGetIntegerui64vNVPROC glGetIntegerui64vNV = (glGetIntegerui64vNVPROC)tlsGetFunction(2125);
     intptr_t result = (intptr_t)resultAddress;
     UNUSED_PARAM(clazz)
     glGetIntegerui64vNV(value, result);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShaderBufferLoad_glUniformui64NV(JNIEnv *__env, jclass clazz, jint location, jlong value) {
-    glUniformui64NVPROC glUniformui64NV = (glUniformui64NVPROC)tlsGetFunction(2125);
+    glUniformui64NVPROC glUniformui64NV = (glUniformui64NVPROC)tlsGetFunction(2126);
     UNUSED_PARAM(clazz)
     glUniformui64NV(location, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShaderBufferLoad_nglUniformui64vNV__IIJ(JNIEnv *__env, jclass clazz, jint location, jint count, jlong valueAddress) {
-    glUniformui64vNVPROC glUniformui64vNV = (glUniformui64vNVPROC)tlsGetFunction(2126);
+    glUniformui64vNVPROC glUniformui64vNV = (glUniformui64vNVPROC)tlsGetFunction(2127);
     intptr_t value = (intptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniformui64vNV(location, count, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShaderBufferLoad_nglGetUniformui64vNV__IIJ(JNIEnv *__env, jclass clazz, jint program, jint location, jlong paramsAddress) {
-    glGetUniformui64vNVPROC glGetUniformui64vNV = (glGetUniformui64vNVPROC)tlsGetFunction(2127);
+    glGetUniformui64vNVPROC glGetUniformui64vNV = (glGetUniformui64vNVPROC)tlsGetFunction(1075);
     intptr_t params = (intptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetUniformui64vNV(program, location, params);

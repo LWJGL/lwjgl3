@@ -14,6 +14,7 @@ import static org.lwjgl.system.Checks.*;
 /** Defines the WGL capabilities of an OpenGL device. */
 public final class WGLCapabilities {
 
+    // WGL_AMD_gpu_association
     public final long
         wglGetGPUIDsAMD,
         wglGetGPUInfoAMD,
@@ -23,31 +24,67 @@ public final class WGLCapabilities {
         wglDeleteAssociatedContextAMD,
         wglMakeAssociatedContextCurrentAMD,
         wglGetCurrentAssociatedContextAMD,
-        wglBlitContextFramebufferAMD,
+        wglBlitContextFramebufferAMD;
+
+    // WGL_ARB_buffer_region
+    public final long
         wglCreateBufferRegionARB,
         wglDeleteBufferRegionARB,
         wglSaveBufferRegionARB,
-        wglRestoreBufferRegionARB,
-        wglCreateContextAttribsARB,
-        wglGetExtensionsStringARB,
+        wglRestoreBufferRegionARB;
+
+    // WGL_ARB_create_context
+    public final long
+        wglCreateContextAttribsARB;
+
+    // WGL_ARB_extensions_string
+    public final long
+        wglGetExtensionsStringARB;
+
+    // WGL_ARB_make_current_read
+    public final long
         wglMakeContextCurrentARB,
-        wglGetCurrentReadDCARB,
+        wglGetCurrentReadDCARB;
+
+    // WGL_ARB_pbuffer
+    public final long
         wglCreatePbufferARB,
         wglGetPbufferDCARB,
         wglReleasePbufferDCARB,
         wglDestroyPbufferARB,
-        wglQueryPbufferARB,
+        wglQueryPbufferARB;
+
+    // WGL_ARB_pixel_format
+    public final long
         wglGetPixelFormatAttribivARB,
         wglGetPixelFormatAttribfvARB,
-        wglChoosePixelFormatARB,
+        wglChoosePixelFormatARB;
+
+    // WGL_ARB_render_texture
+    public final long
         wglBindTexImageARB,
         wglReleaseTexImageARB,
-        wglSetPbufferAttribARB,
-        wglGetExtensionsStringEXT,
+        wglSetPbufferAttribARB;
+
+    // WGL_EXT_extensions_string
+    public final long
+        wglGetExtensionsStringEXT;
+
+    // WGL_EXT_swap_control
+    public final long
         wglSwapIntervalEXT,
-        wglGetSwapIntervalEXT,
-        wglCopyImageSubDataNV,
-        wglDelayBeforeSwapNV,
+        wglGetSwapIntervalEXT;
+
+    // WGL_NV_copy_image
+    public final long
+        wglCopyImageSubDataNV;
+
+    // WGL_NV_delay_before_swap
+    public final long
+        wglDelayBeforeSwapNV;
+
+    // WGL_NV_DX_interop
+    public final long
         wglDXSetResourceShareHandleNV,
         wglDXOpenDeviceNV,
         wglDXCloseDeviceNV,
@@ -55,18 +92,27 @@ public final class WGLCapabilities {
         wglDXUnregisterObjectNV,
         wglDXObjectAccessNV,
         wglDXLockObjectsNV,
-        wglDXUnlockObjectsNV,
+        wglDXUnlockObjectsNV;
+
+    // WGL_NV_gpu_affinity
+    public final long
         wglEnumGpusNV,
         wglEnumGpuDevicesNV,
         wglCreateAffinityDCNV,
         wglEnumGpusFromAffinityDCNV,
-        wglDeleteDCNV,
+        wglDeleteDCNV;
+
+    // WGL_NV_swap_group
+    public final long
         wglJoinSwapGroupNV,
         wglBindSwapBarrierNV,
         wglQuerySwapGroupNV,
         wglQueryMaxSwapGroupsNV,
         wglQueryFrameCountNV,
-        wglResetFrameCountNV,
+        wglResetFrameCountNV;
+
+    // WGL_NV_vertex_array_range
+    public final long
         wglAllocateMemoryNV,
         wglFreeMemoryNV;
 
@@ -181,76 +227,23 @@ public final class WGLCapabilities {
     public final boolean WGL_NV_vertex_array_range;
 
     WGLCapabilities(FunctionProvider provider, Set<String> ext) {
-        wglGetGPUIDsAMD = provider.getFunctionAddress("wglGetGPUIDsAMD");
-        wglGetGPUInfoAMD = provider.getFunctionAddress("wglGetGPUInfoAMD");
-        wglGetContextGPUIDAMD = provider.getFunctionAddress("wglGetContextGPUIDAMD");
-        wglCreateAssociatedContextAMD = provider.getFunctionAddress("wglCreateAssociatedContextAMD");
-        wglCreateAssociatedContextAttribsAMD = provider.getFunctionAddress("wglCreateAssociatedContextAttribsAMD");
-        wglDeleteAssociatedContextAMD = provider.getFunctionAddress("wglDeleteAssociatedContextAMD");
-        wglMakeAssociatedContextCurrentAMD = provider.getFunctionAddress("wglMakeAssociatedContextCurrentAMD");
-        wglGetCurrentAssociatedContextAMD = provider.getFunctionAddress("wglGetCurrentAssociatedContextAMD");
-        wglBlitContextFramebufferAMD = provider.getFunctionAddress("wglBlitContextFramebufferAMD");
-        wglCreateBufferRegionARB = provider.getFunctionAddress("wglCreateBufferRegionARB");
-        wglDeleteBufferRegionARB = provider.getFunctionAddress("wglDeleteBufferRegionARB");
-        wglSaveBufferRegionARB = provider.getFunctionAddress("wglSaveBufferRegionARB");
-        wglRestoreBufferRegionARB = provider.getFunctionAddress("wglRestoreBufferRegionARB");
-        wglCreateContextAttribsARB = provider.getFunctionAddress("wglCreateContextAttribsARB");
-        wglGetExtensionsStringARB = provider.getFunctionAddress("wglGetExtensionsStringARB");
-        wglMakeContextCurrentARB = provider.getFunctionAddress("wglMakeContextCurrentARB");
-        wglGetCurrentReadDCARB = provider.getFunctionAddress("wglGetCurrentReadDCARB");
-        wglCreatePbufferARB = provider.getFunctionAddress("wglCreatePbufferARB");
-        wglGetPbufferDCARB = provider.getFunctionAddress("wglGetPbufferDCARB");
-        wglReleasePbufferDCARB = provider.getFunctionAddress("wglReleasePbufferDCARB");
-        wglDestroyPbufferARB = provider.getFunctionAddress("wglDestroyPbufferARB");
-        wglQueryPbufferARB = provider.getFunctionAddress("wglQueryPbufferARB");
-        wglGetPixelFormatAttribivARB = provider.getFunctionAddress("wglGetPixelFormatAttribivARB");
-        wglGetPixelFormatAttribfvARB = provider.getFunctionAddress("wglGetPixelFormatAttribfvARB");
-        wglChoosePixelFormatARB = provider.getFunctionAddress("wglChoosePixelFormatARB");
-        wglBindTexImageARB = provider.getFunctionAddress("wglBindTexImageARB");
-        wglReleaseTexImageARB = provider.getFunctionAddress("wglReleaseTexImageARB");
-        wglSetPbufferAttribARB = provider.getFunctionAddress("wglSetPbufferAttribARB");
-        wglGetExtensionsStringEXT = provider.getFunctionAddress("wglGetExtensionsStringEXT");
-        wglSwapIntervalEXT = provider.getFunctionAddress("wglSwapIntervalEXT");
-        wglGetSwapIntervalEXT = provider.getFunctionAddress("wglGetSwapIntervalEXT");
-        wglCopyImageSubDataNV = provider.getFunctionAddress("wglCopyImageSubDataNV");
-        wglDelayBeforeSwapNV = provider.getFunctionAddress("wglDelayBeforeSwapNV");
-        wglDXSetResourceShareHandleNV = provider.getFunctionAddress("wglDXSetResourceShareHandleNV");
-        wglDXOpenDeviceNV = provider.getFunctionAddress("wglDXOpenDeviceNV");
-        wglDXCloseDeviceNV = provider.getFunctionAddress("wglDXCloseDeviceNV");
-        wglDXRegisterObjectNV = provider.getFunctionAddress("wglDXRegisterObjectNV");
-        wglDXUnregisterObjectNV = provider.getFunctionAddress("wglDXUnregisterObjectNV");
-        wglDXObjectAccessNV = provider.getFunctionAddress("wglDXObjectAccessNV");
-        wglDXLockObjectsNV = provider.getFunctionAddress("wglDXLockObjectsNV");
-        wglDXUnlockObjectsNV = provider.getFunctionAddress("wglDXUnlockObjectsNV");
-        wglEnumGpusNV = provider.getFunctionAddress("wglEnumGpusNV");
-        wglEnumGpuDevicesNV = provider.getFunctionAddress("wglEnumGpuDevicesNV");
-        wglCreateAffinityDCNV = provider.getFunctionAddress("wglCreateAffinityDCNV");
-        wglEnumGpusFromAffinityDCNV = provider.getFunctionAddress("wglEnumGpusFromAffinityDCNV");
-        wglDeleteDCNV = provider.getFunctionAddress("wglDeleteDCNV");
-        wglJoinSwapGroupNV = provider.getFunctionAddress("wglJoinSwapGroupNV");
-        wglBindSwapBarrierNV = provider.getFunctionAddress("wglBindSwapBarrierNV");
-        wglQuerySwapGroupNV = provider.getFunctionAddress("wglQuerySwapGroupNV");
-        wglQueryMaxSwapGroupsNV = provider.getFunctionAddress("wglQueryMaxSwapGroupsNV");
-        wglQueryFrameCountNV = provider.getFunctionAddress("wglQueryFrameCountNV");
-        wglResetFrameCountNV = provider.getFunctionAddress("wglResetFrameCountNV");
-        wglAllocateMemoryNV = provider.getFunctionAddress("wglAllocateMemoryNV");
-        wglFreeMemoryNV = provider.getFunctionAddress("wglFreeMemoryNV");
+        long[] caps = new long[54];
 
-        WGL_AMD_gpu_association = check_WGL_AMD_gpu_association(ext);
-        WGL_ARB_buffer_region = check_WGL_ARB_buffer_region(ext);
+        WGL_AMD_gpu_association = check_WGL_AMD_gpu_association(provider, caps, ext);
+        WGL_ARB_buffer_region = check_WGL_ARB_buffer_region(provider, caps, ext);
         WGL_ARB_context_flush_control = ext.contains("WGL_ARB_context_flush_control");
-        WGL_ARB_create_context = check_WGL_ARB_create_context(ext);
+        WGL_ARB_create_context = check_WGL_ARB_create_context(provider, caps, ext);
         WGL_ARB_create_context_no_error = ext.contains("WGL_ARB_create_context_no_error");
         WGL_ARB_create_context_profile = ext.contains("WGL_ARB_create_context_profile");
         WGL_ARB_create_context_robustness = ext.contains("WGL_ARB_create_context_robustness");
-        WGL_ARB_extensions_string = check_WGL_ARB_extensions_string(ext);
+        WGL_ARB_extensions_string = check_WGL_ARB_extensions_string(provider, caps, ext);
         WGL_ARB_framebuffer_sRGB = ext.contains("WGL_ARB_framebuffer_sRGB");
-        WGL_ARB_make_current_read = check_WGL_ARB_make_current_read(ext);
+        WGL_ARB_make_current_read = check_WGL_ARB_make_current_read(provider, caps, ext);
         WGL_ARB_multisample = ext.contains("WGL_ARB_multisample");
-        WGL_ARB_pbuffer = check_WGL_ARB_pbuffer(ext);
-        WGL_ARB_pixel_format = check_WGL_ARB_pixel_format(ext);
+        WGL_ARB_pbuffer = check_WGL_ARB_pbuffer(provider, caps, ext);
+        WGL_ARB_pixel_format = check_WGL_ARB_pixel_format(provider, caps, ext);
         WGL_ARB_pixel_format_float = ext.contains("WGL_ARB_pixel_format_float");
-        WGL_ARB_render_texture = check_WGL_ARB_render_texture(ext);
+        WGL_ARB_render_texture = check_WGL_ARB_render_texture(provider, caps, ext);
         WGL_ARB_robustness_application_isolation = ext.contains("WGL_ARB_robustness_application_isolation");
         WGL_ARB_robustness_share_group_isolation = ext.contains("WGL_ARB_robustness_share_group_isolation");
         WGL_ATI_pixel_format_float = ext.contains("WGL_ATI_pixel_format_float");
@@ -259,130 +252,272 @@ public final class WGLCapabilities {
         WGL_EXT_create_context_es2_profile = ext.contains("WGL_EXT_create_context_es2_profile");
         WGL_EXT_create_context_es_profile = ext.contains("WGL_EXT_create_context_es_profile");
         WGL_EXT_depth_float = ext.contains("WGL_EXT_depth_float");
-        WGL_EXT_extensions_string = check_WGL_EXT_extensions_string(ext);
+        WGL_EXT_extensions_string = check_WGL_EXT_extensions_string(provider, caps, ext);
         WGL_EXT_framebuffer_sRGB = ext.contains("WGL_EXT_framebuffer_sRGB");
         WGL_EXT_pixel_format_packed_float = ext.contains("WGL_EXT_pixel_format_packed_float");
-        WGL_EXT_swap_control = check_WGL_EXT_swap_control(ext);
+        WGL_EXT_swap_control = check_WGL_EXT_swap_control(provider, caps, ext);
         WGL_EXT_swap_control_tear = ext.contains("WGL_EXT_swap_control_tear");
-        WGL_NV_copy_image = check_WGL_NV_copy_image(ext);
-        WGL_NV_delay_before_swap = check_WGL_NV_delay_before_swap(ext);
-        WGL_NV_DX_interop = check_WGL_NV_DX_interop(ext);
+        WGL_NV_copy_image = check_WGL_NV_copy_image(provider, caps, ext);
+        WGL_NV_delay_before_swap = check_WGL_NV_delay_before_swap(provider, caps, ext);
+        WGL_NV_DX_interop = check_WGL_NV_DX_interop(provider, caps, ext);
         WGL_NV_DX_interop2 = ext.contains("WGL_NV_DX_interop2");
         WGL_NV_float_buffer = ext.contains("WGL_NV_float_buffer");
-        WGL_NV_gpu_affinity = check_WGL_NV_gpu_affinity(ext);
+        WGL_NV_gpu_affinity = check_WGL_NV_gpu_affinity(provider, caps, ext);
         WGL_NV_multigpu_context = ext.contains("WGL_NV_multigpu_context");
         WGL_NV_multisample_coverage = ext.contains("WGL_NV_multisample_coverage");
         WGL_NV_render_depth_texture = ext.contains("WGL_NV_render_depth_texture");
         WGL_NV_render_texture_rectangle = ext.contains("WGL_NV_render_texture_rectangle");
-        WGL_NV_swap_group = check_WGL_NV_swap_group(ext);
-        WGL_NV_vertex_array_range = check_WGL_NV_vertex_array_range(ext);
+        WGL_NV_swap_group = check_WGL_NV_swap_group(provider, caps, ext);
+        WGL_NV_vertex_array_range = check_WGL_NV_vertex_array_range(provider, caps, ext);
+
+        wglGetGPUIDsAMD = caps[0];
+        wglGetGPUInfoAMD = caps[1];
+        wglGetContextGPUIDAMD = caps[2];
+        wglCreateAssociatedContextAMD = caps[3];
+        wglCreateAssociatedContextAttribsAMD = caps[4];
+        wglDeleteAssociatedContextAMD = caps[5];
+        wglMakeAssociatedContextCurrentAMD = caps[6];
+        wglGetCurrentAssociatedContextAMD = caps[7];
+        wglBlitContextFramebufferAMD = caps[8];
+        wglCreateBufferRegionARB = caps[9];
+        wglDeleteBufferRegionARB = caps[10];
+        wglSaveBufferRegionARB = caps[11];
+        wglRestoreBufferRegionARB = caps[12];
+        wglCreateContextAttribsARB = caps[13];
+        wglGetExtensionsStringARB = caps[14];
+        wglMakeContextCurrentARB = caps[15];
+        wglGetCurrentReadDCARB = caps[16];
+        wglCreatePbufferARB = caps[17];
+        wglGetPbufferDCARB = caps[18];
+        wglReleasePbufferDCARB = caps[19];
+        wglDestroyPbufferARB = caps[20];
+        wglQueryPbufferARB = caps[21];
+        wglGetPixelFormatAttribivARB = caps[22];
+        wglGetPixelFormatAttribfvARB = caps[23];
+        wglChoosePixelFormatARB = caps[24];
+        wglBindTexImageARB = caps[25];
+        wglReleaseTexImageARB = caps[26];
+        wglSetPbufferAttribARB = caps[27];
+        wglGetExtensionsStringEXT = caps[28];
+        wglSwapIntervalEXT = caps[29];
+        wglGetSwapIntervalEXT = caps[30];
+        wglCopyImageSubDataNV = caps[31];
+        wglDelayBeforeSwapNV = caps[32];
+        wglDXSetResourceShareHandleNV = caps[33];
+        wglDXOpenDeviceNV = caps[34];
+        wglDXCloseDeviceNV = caps[35];
+        wglDXRegisterObjectNV = caps[36];
+        wglDXUnregisterObjectNV = caps[37];
+        wglDXObjectAccessNV = caps[38];
+        wglDXLockObjectsNV = caps[39];
+        wglDXUnlockObjectsNV = caps[40];
+        wglEnumGpusNV = caps[41];
+        wglEnumGpuDevicesNV = caps[42];
+        wglCreateAffinityDCNV = caps[43];
+        wglEnumGpusFromAffinityDCNV = caps[44];
+        wglDeleteDCNV = caps[45];
+        wglJoinSwapGroupNV = caps[46];
+        wglBindSwapBarrierNV = caps[47];
+        wglQuerySwapGroupNV = caps[48];
+        wglQueryMaxSwapGroupsNV = caps[49];
+        wglQueryFrameCountNV = caps[50];
+        wglResetFrameCountNV = caps[51];
+        wglAllocateMemoryNV = caps[52];
+        wglFreeMemoryNV = caps[53];
     }
 
-    private static boolean checkExtension(String extension, boolean supported) {
-        if (supported) {
-            return true;
+    private static boolean check_WGL_AMD_gpu_association(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("WGL_AMD_gpu_association")) {
+            return false;
         }
 
-        apiLog("[WGL] " + extension + " was reported as available but an entry point is missing.");
-        return false;
+        return checkFunctions(provider, caps, new int[] {
+            0, 1, 2, 3, 4, 5, 6, 7
+        },
+            "wglGetGPUIDsAMD", "wglGetGPUInfoAMD", "wglGetContextGPUIDAMD", "wglCreateAssociatedContextAMD", "wglCreateAssociatedContextAttribsAMD", 
+            "wglDeleteAssociatedContextAMD", "wglMakeAssociatedContextCurrentAMD", "wglGetCurrentAssociatedContextAMD"
+        ) || reportMissing("WGL", "WGL_AMD_gpu_association");
     }
 
-    private boolean check_WGL_AMD_gpu_association(java.util.Set<String> ext) {
-        return ext.contains("WGL_AMD_gpu_association") && checkExtension("WGL_AMD_gpu_association", checkFunctions(
-            wglGetGPUIDsAMD, wglGetGPUInfoAMD, wglGetContextGPUIDAMD, wglCreateAssociatedContextAMD, wglCreateAssociatedContextAttribsAMD, 
-            wglDeleteAssociatedContextAMD, wglMakeAssociatedContextCurrentAMD, wglGetCurrentAssociatedContextAMD
-        ));
+    private static boolean check_WGL_ARB_buffer_region(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("WGL_ARB_buffer_region")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            9, 10, 11, 12
+        },
+            "wglCreateBufferRegionARB", "wglDeleteBufferRegionARB", "wglSaveBufferRegionARB", "wglRestoreBufferRegionARB"
+        ) || reportMissing("WGL", "WGL_ARB_buffer_region");
     }
 
-    private boolean check_WGL_ARB_buffer_region(java.util.Set<String> ext) {
-        return ext.contains("WGL_ARB_buffer_region") && checkExtension("WGL_ARB_buffer_region", checkFunctions(
-            wglCreateBufferRegionARB, wglDeleteBufferRegionARB, wglSaveBufferRegionARB, wglRestoreBufferRegionARB
-        ));
+    private static boolean check_WGL_ARB_create_context(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("WGL_ARB_create_context")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            13
+        },
+            "wglCreateContextAttribsARB"
+        ) || reportMissing("WGL", "WGL_ARB_create_context");
     }
 
-    private boolean check_WGL_ARB_create_context(java.util.Set<String> ext) {
-        return ext.contains("WGL_ARB_create_context") && checkExtension("WGL_ARB_create_context", checkFunctions(
-            wglCreateContextAttribsARB
-        ));
+    private static boolean check_WGL_ARB_extensions_string(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("WGL_ARB_extensions_string")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            14
+        },
+            "wglGetExtensionsStringARB"
+        ) || reportMissing("WGL", "WGL_ARB_extensions_string");
     }
 
-    private boolean check_WGL_ARB_extensions_string(java.util.Set<String> ext) {
-        return ext.contains("WGL_ARB_extensions_string") && checkExtension("WGL_ARB_extensions_string", checkFunctions(
-            wglGetExtensionsStringARB
-        ));
+    private static boolean check_WGL_ARB_make_current_read(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("WGL_ARB_make_current_read")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            15, 16
+        },
+            "wglMakeContextCurrentARB", "wglGetCurrentReadDCARB"
+        ) || reportMissing("WGL", "WGL_ARB_make_current_read");
     }
 
-    private boolean check_WGL_ARB_make_current_read(java.util.Set<String> ext) {
-        return ext.contains("WGL_ARB_make_current_read") && checkExtension("WGL_ARB_make_current_read", checkFunctions(
-            wglMakeContextCurrentARB, wglGetCurrentReadDCARB
-        ));
+    private static boolean check_WGL_ARB_pbuffer(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("WGL_ARB_pbuffer")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            17, 18, 19, 20, 21
+        },
+            "wglCreatePbufferARB", "wglGetPbufferDCARB", "wglReleasePbufferDCARB", "wglDestroyPbufferARB", "wglQueryPbufferARB"
+        ) || reportMissing("WGL", "WGL_ARB_pbuffer");
     }
 
-    private boolean check_WGL_ARB_pbuffer(java.util.Set<String> ext) {
-        return ext.contains("WGL_ARB_pbuffer") && checkExtension("WGL_ARB_pbuffer", checkFunctions(
-            wglCreatePbufferARB, wglGetPbufferDCARB, wglReleasePbufferDCARB, wglDestroyPbufferARB, wglQueryPbufferARB
-        ));
+    private static boolean check_WGL_ARB_pixel_format(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("WGL_ARB_pixel_format")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            22, 23, 24
+        },
+            "wglGetPixelFormatAttribivARB", "wglGetPixelFormatAttribfvARB", "wglChoosePixelFormatARB"
+        ) || reportMissing("WGL", "WGL_ARB_pixel_format");
     }
 
-    private boolean check_WGL_ARB_pixel_format(java.util.Set<String> ext) {
-        return ext.contains("WGL_ARB_pixel_format") && checkExtension("WGL_ARB_pixel_format", checkFunctions(
-            wglGetPixelFormatAttribivARB, wglGetPixelFormatAttribfvARB, wglChoosePixelFormatARB
-        ));
+    private static boolean check_WGL_ARB_render_texture(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("WGL_ARB_render_texture")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            25, 26, 27
+        },
+            "wglBindTexImageARB", "wglReleaseTexImageARB", "wglSetPbufferAttribARB"
+        ) || reportMissing("WGL", "WGL_ARB_render_texture");
     }
 
-    private boolean check_WGL_ARB_render_texture(java.util.Set<String> ext) {
-        return ext.contains("WGL_ARB_render_texture") && checkExtension("WGL_ARB_render_texture", checkFunctions(
-            wglBindTexImageARB, wglReleaseTexImageARB, wglSetPbufferAttribARB
-        ));
+    private static boolean check_WGL_EXT_extensions_string(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("WGL_EXT_extensions_string")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            28
+        },
+            "wglGetExtensionsStringEXT"
+        ) || reportMissing("WGL", "WGL_EXT_extensions_string");
     }
 
-    private boolean check_WGL_EXT_extensions_string(java.util.Set<String> ext) {
-        return ext.contains("WGL_EXT_extensions_string") && checkExtension("WGL_EXT_extensions_string", checkFunctions(
-            wglGetExtensionsStringEXT
-        ));
+    private static boolean check_WGL_EXT_swap_control(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("WGL_EXT_swap_control")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            29, 30
+        },
+            "wglSwapIntervalEXT", "wglGetSwapIntervalEXT"
+        ) || reportMissing("WGL", "WGL_EXT_swap_control");
     }
 
-    private boolean check_WGL_EXT_swap_control(java.util.Set<String> ext) {
-        return ext.contains("WGL_EXT_swap_control") && checkExtension("WGL_EXT_swap_control", checkFunctions(
-            wglSwapIntervalEXT, wglGetSwapIntervalEXT
-        ));
+    private static boolean check_WGL_NV_copy_image(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("WGL_NV_copy_image")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            31
+        },
+            "wglCopyImageSubDataNV"
+        ) || reportMissing("WGL", "WGL_NV_copy_image");
     }
 
-    private boolean check_WGL_NV_copy_image(java.util.Set<String> ext) {
-        return ext.contains("WGL_NV_copy_image") && checkExtension("WGL_NV_copy_image", checkFunctions(
-            wglCopyImageSubDataNV
-        ));
+    private static boolean check_WGL_NV_delay_before_swap(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("WGL_NV_delay_before_swap")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            32
+        },
+            "wglDelayBeforeSwapNV"
+        ) || reportMissing("WGL", "WGL_NV_delay_before_swap");
     }
 
-    private boolean check_WGL_NV_delay_before_swap(java.util.Set<String> ext) {
-        return ext.contains("WGL_NV_delay_before_swap") && checkExtension("WGL_NV_delay_before_swap", checkFunctions(
-            wglDelayBeforeSwapNV
-        ));
+    private static boolean check_WGL_NV_DX_interop(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("WGL_NV_DX_interop")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            33, 34, 35, 36, 37, 38, 39, 40
+        },
+            "wglDXSetResourceShareHandleNV", "wglDXOpenDeviceNV", "wglDXCloseDeviceNV", "wglDXRegisterObjectNV", "wglDXUnregisterObjectNV", 
+            "wglDXObjectAccessNV", "wglDXLockObjectsNV", "wglDXUnlockObjectsNV"
+        ) || reportMissing("WGL", "WGL_NV_DX_interop");
     }
 
-    private boolean check_WGL_NV_DX_interop(java.util.Set<String> ext) {
-        return ext.contains("WGL_NV_DX_interop") && checkExtension("WGL_NV_DX_interop", checkFunctions(
-            wglDXSetResourceShareHandleNV, wglDXOpenDeviceNV, wglDXCloseDeviceNV, wglDXRegisterObjectNV, wglDXUnregisterObjectNV, wglDXObjectAccessNV, 
-            wglDXLockObjectsNV, wglDXUnlockObjectsNV
-        ));
+    private static boolean check_WGL_NV_gpu_affinity(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("WGL_NV_gpu_affinity")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            41, 42, 43, 44, 45
+        },
+            "wglEnumGpusNV", "wglEnumGpuDevicesNV", "wglCreateAffinityDCNV", "wglEnumGpusFromAffinityDCNV", "wglDeleteDCNV"
+        ) || reportMissing("WGL", "WGL_NV_gpu_affinity");
     }
 
-    private boolean check_WGL_NV_gpu_affinity(java.util.Set<String> ext) {
-        return ext.contains("WGL_NV_gpu_affinity") && checkExtension("WGL_NV_gpu_affinity", checkFunctions(
-            wglEnumGpusNV, wglEnumGpuDevicesNV, wglCreateAffinityDCNV, wglEnumGpusFromAffinityDCNV, wglDeleteDCNV
-        ));
+    private static boolean check_WGL_NV_swap_group(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("WGL_NV_swap_group")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            46, 47, 48, 49, 50, 51
+        },
+            "wglJoinSwapGroupNV", "wglBindSwapBarrierNV", "wglQuerySwapGroupNV", "wglQueryMaxSwapGroupsNV", "wglQueryFrameCountNV", "wglResetFrameCountNV"
+        ) || reportMissing("WGL", "WGL_NV_swap_group");
     }
 
-    private boolean check_WGL_NV_swap_group(java.util.Set<String> ext) {
-        return ext.contains("WGL_NV_swap_group") && checkExtension("WGL_NV_swap_group", checkFunctions(
-            wglJoinSwapGroupNV, wglBindSwapBarrierNV, wglQuerySwapGroupNV, wglQueryMaxSwapGroupsNV, wglQueryFrameCountNV, wglResetFrameCountNV
-        ));
-    }
+    private static boolean check_WGL_NV_vertex_array_range(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("WGL_NV_vertex_array_range")) {
+            return false;
+        }
 
-    private boolean check_WGL_NV_vertex_array_range(java.util.Set<String> ext) {
-        return ext.contains("WGL_NV_vertex_array_range") && checkExtension("WGL_NV_vertex_array_range", checkFunctions(
-            wglAllocateMemoryNV, wglFreeMemoryNV
-        ));
+        return checkFunctions(provider, caps, new int[] {
+            52, 53
+        },
+            "wglAllocateMemoryNV", "wglFreeMemoryNV"
+        ) || reportMissing("WGL", "WGL_NV_vertex_array_range");
     }
 
 }

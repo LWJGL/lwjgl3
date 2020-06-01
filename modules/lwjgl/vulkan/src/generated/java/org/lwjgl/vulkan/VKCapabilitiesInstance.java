@@ -382,251 +382,417 @@ public class VKCapabilitiesInstance {
     }
 
     private static boolean check_VK10(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("Vulkan10") && VK.checkExtension("Vulkan10",
-               VK.isSupported(provider, "vkDestroyInstance", caps, 0)
-            && VK.isSupported(provider, "vkEnumeratePhysicalDevices", caps, 1)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceFeatures", caps, 2)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceFormatProperties", caps, 3)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceImageFormatProperties", caps, 4)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceProperties", caps, 5)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceQueueFamilyProperties", caps, 6)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceMemoryProperties", caps, 7)
-            && VK.isSupported(provider, "vkCreateDevice", caps, 8)
-            && VK.isSupported(provider, "vkEnumerateDeviceExtensionProperties", caps, 9)
-            && VK.isSupported(provider, "vkEnumerateDeviceLayerProperties", caps, 10)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceSparseImageFormatProperties", caps, 11)
-        );
+        if (!ext.contains("Vulkan10")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+        },
+            "vkDestroyInstance", "vkEnumeratePhysicalDevices", "vkGetPhysicalDeviceFeatures", "vkGetPhysicalDeviceFormatProperties", 
+            "vkGetPhysicalDeviceImageFormatProperties", "vkGetPhysicalDeviceProperties", "vkGetPhysicalDeviceQueueFamilyProperties", 
+            "vkGetPhysicalDeviceMemoryProperties", "vkCreateDevice", "vkEnumerateDeviceExtensionProperties", "vkEnumerateDeviceLayerProperties", 
+            "vkGetPhysicalDeviceSparseImageFormatProperties"
+        ) || reportMissing("VK", "Vulkan10");
     }
 
     private static boolean check_VK11(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("Vulkan11") && VK.checkExtension("Vulkan11",
-               VK.isSupported(provider, "vkEnumeratePhysicalDeviceGroups", caps, 12)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceFeatures2", caps, 13)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceProperties2", caps, 14)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceFormatProperties2", caps, 15)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceImageFormatProperties2", caps, 16)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceQueueFamilyProperties2", caps, 17)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceMemoryProperties2", caps, 18)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceSparseImageFormatProperties2", caps, 19)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceExternalBufferProperties", caps, 20)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceExternalFenceProperties", caps, 21)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceExternalSemaphoreProperties", caps, 22)
-        );
+        if (!ext.contains("Vulkan11")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22
+        },
+            "vkEnumeratePhysicalDeviceGroups", "vkGetPhysicalDeviceFeatures2", "vkGetPhysicalDeviceProperties2", "vkGetPhysicalDeviceFormatProperties2", 
+            "vkGetPhysicalDeviceImageFormatProperties2", "vkGetPhysicalDeviceQueueFamilyProperties2", "vkGetPhysicalDeviceMemoryProperties2", 
+            "vkGetPhysicalDeviceSparseImageFormatProperties2", "vkGetPhysicalDeviceExternalBufferProperties", "vkGetPhysicalDeviceExternalFenceProperties", 
+            "vkGetPhysicalDeviceExternalSemaphoreProperties"
+        ) || reportMissing("VK", "Vulkan11");
     }
 
     private static boolean check_EXT_acquire_xlib_display(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_acquire_xlib_display") && VK.checkExtension("VK_EXT_acquire_xlib_display",
-               VK.isSupported(provider, "vkAcquireXlibDisplayEXT", caps, 23)
-            && VK.isSupported(provider, "vkGetRandROutputDisplayEXT", caps, 24)
-        );
+        if (!ext.contains("VK_EXT_acquire_xlib_display")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            23, 24
+        },
+            "vkAcquireXlibDisplayEXT", "vkGetRandROutputDisplayEXT"
+        ) || reportMissing("VK", "VK_EXT_acquire_xlib_display");
     }
 
     private static boolean check_EXT_calibrated_timestamps(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_calibrated_timestamps") && VK.checkExtension("VK_EXT_calibrated_timestamps",
-               VK.isSupported(provider, "vkGetPhysicalDeviceCalibrateableTimeDomainsEXT", caps, 25)
-        );
+        if (!ext.contains("VK_EXT_calibrated_timestamps")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            25
+        },
+            "vkGetPhysicalDeviceCalibrateableTimeDomainsEXT"
+        ) || reportMissing("VK", "VK_EXT_calibrated_timestamps");
     }
 
     private static boolean check_EXT_debug_report(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_debug_report") && VK.checkExtension("VK_EXT_debug_report",
-               VK.isSupported(provider, "vkCreateDebugReportCallbackEXT", caps, 26)
-            && VK.isSupported(provider, "vkDestroyDebugReportCallbackEXT", caps, 27)
-            && VK.isSupported(provider, "vkDebugReportMessageEXT", caps, 28)
-        );
+        if (!ext.contains("VK_EXT_debug_report")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            26, 27, 28
+        },
+            "vkCreateDebugReportCallbackEXT", "vkDestroyDebugReportCallbackEXT", "vkDebugReportMessageEXT"
+        ) || reportMissing("VK", "VK_EXT_debug_report");
     }
 
     private static boolean check_EXT_debug_utils(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_debug_utils") && VK.checkExtension("VK_EXT_debug_utils",
-               VK.isSupported(provider, "vkCreateDebugUtilsMessengerEXT", caps, 29)
-            && VK.isSupported(provider, "vkDestroyDebugUtilsMessengerEXT", caps, 30)
-            && VK.isSupported(provider, "vkSubmitDebugUtilsMessageEXT", caps, 31)
-        );
+        if (!ext.contains("VK_EXT_debug_utils")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            29, 30, 31
+        },
+            "vkCreateDebugUtilsMessengerEXT", "vkDestroyDebugUtilsMessengerEXT", "vkSubmitDebugUtilsMessageEXT"
+        ) || reportMissing("VK", "VK_EXT_debug_utils");
     }
 
     private static boolean check_EXT_direct_mode_display(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_direct_mode_display") && VK.checkExtension("VK_EXT_direct_mode_display",
-               VK.isSupported(provider, "vkReleaseDisplayEXT", caps, 32)
-        );
+        if (!ext.contains("VK_EXT_direct_mode_display")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            32
+        },
+            "vkReleaseDisplayEXT"
+        ) || reportMissing("VK", "VK_EXT_direct_mode_display");
     }
 
     private static boolean check_EXT_display_surface_counter(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_display_surface_counter") && VK.checkExtension("VK_EXT_display_surface_counter",
-               VK.isSupported(provider, "vkGetPhysicalDeviceSurfaceCapabilities2EXT", caps, 33)
-        );
+        if (!ext.contains("VK_EXT_display_surface_counter")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            33
+        },
+            "vkGetPhysicalDeviceSurfaceCapabilities2EXT"
+        ) || reportMissing("VK", "VK_EXT_display_surface_counter");
     }
 
     private static boolean check_EXT_full_screen_exclusive(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_full_screen_exclusive") && VK.checkExtension("VK_EXT_full_screen_exclusive",
-               VK.isSupported(provider, "vkGetPhysicalDeviceSurfacePresentModes2EXT", caps, 34)
-        );
+        if (!ext.contains("VK_EXT_full_screen_exclusive")) {
+            return false;
+        }
+
+        int flag0 = ext.contains("Vulkan11") || ext.contains("VK_KHR_device_group") ? 0 : Integer.MIN_VALUE;
+
+        return checkFunctions(provider, caps, new int[] {
+            34
+        },
+            "vkGetPhysicalDeviceSurfacePresentModes2EXT"
+        ) || reportMissing("VK", "VK_EXT_full_screen_exclusive");
     }
 
     private static boolean check_EXT_headless_surface(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_headless_surface") && VK.checkExtension("VK_EXT_headless_surface",
-               VK.isSupported(provider, "vkCreateHeadlessSurfaceEXT", caps, 35)
-        );
+        if (!ext.contains("VK_EXT_headless_surface")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            35
+        },
+            "vkCreateHeadlessSurfaceEXT"
+        ) || reportMissing("VK", "VK_EXT_headless_surface");
     }
 
     private static boolean check_EXT_metal_surface(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_metal_surface") && VK.checkExtension("VK_EXT_metal_surface",
-               VK.isSupported(provider, "vkCreateMetalSurfaceEXT", caps, 36)
-        );
+        if (!ext.contains("VK_EXT_metal_surface")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            36
+        },
+            "vkCreateMetalSurfaceEXT"
+        ) || reportMissing("VK", "VK_EXT_metal_surface");
     }
 
     private static boolean check_EXT_sample_locations(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_sample_locations") && VK.checkExtension("VK_EXT_sample_locations",
-               VK.isSupported(provider, "vkGetPhysicalDeviceMultisamplePropertiesEXT", caps, 37)
-        );
+        if (!ext.contains("VK_EXT_sample_locations")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            37
+        },
+            "vkGetPhysicalDeviceMultisamplePropertiesEXT"
+        ) || reportMissing("VK", "VK_EXT_sample_locations");
     }
 
     private static boolean check_EXT_tooling_info(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_tooling_info") && VK.checkExtension("VK_EXT_tooling_info",
-               VK.isSupported(provider, "vkGetPhysicalDeviceToolPropertiesEXT", caps, 38)
-        );
+        if (!ext.contains("VK_EXT_tooling_info")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            38
+        },
+            "vkGetPhysicalDeviceToolPropertiesEXT"
+        ) || reportMissing("VK", "VK_EXT_tooling_info");
     }
 
     private static boolean check_KHR_device_group(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_device_group") && VK.checkExtension("VK_KHR_device_group",
-               VK.isSupported(provider, "vkGetPhysicalDevicePresentRectanglesKHR", caps, 39, ext.contains("VK_KHR_surface"))
-        );
+        if (!ext.contains("VK_KHR_device_group")) {
+            return false;
+        }
+
+        int flag0 = ext.contains("VK_KHR_surface") ? 0 : Integer.MIN_VALUE;
+        int flag3 = ext.contains("VK_KHR_swapchain") ? 0 : Integer.MIN_VALUE;
+
+        return checkFunctions(provider, caps, new int[] {
+            flag0 + 39
+        },
+            "vkGetPhysicalDevicePresentRectanglesKHR"
+        ) || reportMissing("VK", "VK_KHR_device_group");
     }
 
     private static boolean check_KHR_device_group_creation(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_device_group_creation") && VK.checkExtension("VK_KHR_device_group_creation",
-               VK.isSupported(provider, "vkEnumeratePhysicalDeviceGroupsKHR", caps, 40)
-        );
+        if (!ext.contains("VK_KHR_device_group_creation")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            40
+        },
+            "vkEnumeratePhysicalDeviceGroupsKHR"
+        ) || reportMissing("VK", "VK_KHR_device_group_creation");
     }
 
     private static boolean check_KHR_display(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_display") && VK.checkExtension("VK_KHR_display",
-               VK.isSupported(provider, "vkGetPhysicalDeviceDisplayPropertiesKHR", caps, 41)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceDisplayPlanePropertiesKHR", caps, 42)
-            && VK.isSupported(provider, "vkGetDisplayPlaneSupportedDisplaysKHR", caps, 43)
-            && VK.isSupported(provider, "vkGetDisplayModePropertiesKHR", caps, 44)
-            && VK.isSupported(provider, "vkCreateDisplayModeKHR", caps, 45)
-            && VK.isSupported(provider, "vkGetDisplayPlaneCapabilitiesKHR", caps, 46)
-            && VK.isSupported(provider, "vkCreateDisplayPlaneSurfaceKHR", caps, 47)
-        );
+        if (!ext.contains("VK_KHR_display")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            41, 42, 43, 44, 45, 46, 47
+        },
+            "vkGetPhysicalDeviceDisplayPropertiesKHR", "vkGetPhysicalDeviceDisplayPlanePropertiesKHR", "vkGetDisplayPlaneSupportedDisplaysKHR", 
+            "vkGetDisplayModePropertiesKHR", "vkCreateDisplayModeKHR", "vkGetDisplayPlaneCapabilitiesKHR", "vkCreateDisplayPlaneSurfaceKHR"
+        ) || reportMissing("VK", "VK_KHR_display");
     }
 
     private static boolean check_KHR_external_fence_capabilities(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_external_fence_capabilities") && VK.checkExtension("VK_KHR_external_fence_capabilities",
-               VK.isSupported(provider, "vkGetPhysicalDeviceExternalFencePropertiesKHR", caps, 48)
-        );
+        if (!ext.contains("VK_KHR_external_fence_capabilities")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            48
+        },
+            "vkGetPhysicalDeviceExternalFencePropertiesKHR"
+        ) || reportMissing("VK", "VK_KHR_external_fence_capabilities");
     }
 
     private static boolean check_KHR_external_memory_capabilities(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_external_memory_capabilities") && VK.checkExtension("VK_KHR_external_memory_capabilities",
-               VK.isSupported(provider, "vkGetPhysicalDeviceExternalBufferPropertiesKHR", caps, 49)
-        );
+        if (!ext.contains("VK_KHR_external_memory_capabilities")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            49
+        },
+            "vkGetPhysicalDeviceExternalBufferPropertiesKHR"
+        ) || reportMissing("VK", "VK_KHR_external_memory_capabilities");
     }
 
     private static boolean check_KHR_external_semaphore_capabilities(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_external_semaphore_capabilities") && VK.checkExtension("VK_KHR_external_semaphore_capabilities",
-               VK.isSupported(provider, "vkGetPhysicalDeviceExternalSemaphorePropertiesKHR", caps, 50)
-        );
+        if (!ext.contains("VK_KHR_external_semaphore_capabilities")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            50
+        },
+            "vkGetPhysicalDeviceExternalSemaphorePropertiesKHR"
+        ) || reportMissing("VK", "VK_KHR_external_semaphore_capabilities");
     }
 
     private static boolean check_KHR_get_display_properties2(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_get_display_properties2") && VK.checkExtension("VK_KHR_get_display_properties2",
-               VK.isSupported(provider, "vkGetPhysicalDeviceDisplayProperties2KHR", caps, 51)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceDisplayPlaneProperties2KHR", caps, 52)
-            && VK.isSupported(provider, "vkGetDisplayModeProperties2KHR", caps, 53)
-            && VK.isSupported(provider, "vkGetDisplayPlaneCapabilities2KHR", caps, 54)
-        );
+        if (!ext.contains("VK_KHR_get_display_properties2")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            51, 52, 53, 54
+        },
+            "vkGetPhysicalDeviceDisplayProperties2KHR", "vkGetPhysicalDeviceDisplayPlaneProperties2KHR", "vkGetDisplayModeProperties2KHR", 
+            "vkGetDisplayPlaneCapabilities2KHR"
+        ) || reportMissing("VK", "VK_KHR_get_display_properties2");
     }
 
     private static boolean check_KHR_get_physical_device_properties2(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_get_physical_device_properties2") && VK.checkExtension("VK_KHR_get_physical_device_properties2",
-               VK.isSupported(provider, "vkGetPhysicalDeviceFeatures2KHR", caps, 55)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceProperties2KHR", caps, 56)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceFormatProperties2KHR", caps, 57)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceImageFormatProperties2KHR", caps, 58)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceQueueFamilyProperties2KHR", caps, 59)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceMemoryProperties2KHR", caps, 60)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceSparseImageFormatProperties2KHR", caps, 61)
-        );
+        if (!ext.contains("VK_KHR_get_physical_device_properties2")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            55, 56, 57, 58, 59, 60, 61
+        },
+            "vkGetPhysicalDeviceFeatures2KHR", "vkGetPhysicalDeviceProperties2KHR", "vkGetPhysicalDeviceFormatProperties2KHR", 
+            "vkGetPhysicalDeviceImageFormatProperties2KHR", "vkGetPhysicalDeviceQueueFamilyProperties2KHR", "vkGetPhysicalDeviceMemoryProperties2KHR", 
+            "vkGetPhysicalDeviceSparseImageFormatProperties2KHR"
+        ) || reportMissing("VK", "VK_KHR_get_physical_device_properties2");
     }
 
     private static boolean check_KHR_get_surface_capabilities2(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_get_surface_capabilities2") && VK.checkExtension("VK_KHR_get_surface_capabilities2",
-               VK.isSupported(provider, "vkGetPhysicalDeviceSurfaceCapabilities2KHR", caps, 62)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceSurfaceFormats2KHR", caps, 63)
-        );
+        if (!ext.contains("VK_KHR_get_surface_capabilities2")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            62, 63
+        },
+            "vkGetPhysicalDeviceSurfaceCapabilities2KHR", "vkGetPhysicalDeviceSurfaceFormats2KHR"
+        ) || reportMissing("VK", "VK_KHR_get_surface_capabilities2");
     }
 
     private static boolean check_KHR_performance_query(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_performance_query") && VK.checkExtension("VK_KHR_performance_query",
-               VK.isSupported(provider, "vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR", caps, 64)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR", caps, 65)
-        );
+        if (!ext.contains("VK_KHR_performance_query")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            64, 65
+        },
+            "vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR", "vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR"
+        ) || reportMissing("VK", "VK_KHR_performance_query");
     }
 
     private static boolean check_KHR_surface(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_surface") && VK.checkExtension("VK_KHR_surface",
-               VK.isSupported(provider, "vkDestroySurfaceKHR", caps, 66)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceSurfaceSupportKHR", caps, 67)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceSurfaceCapabilitiesKHR", caps, 68)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceSurfaceFormatsKHR", caps, 69)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceSurfacePresentModesKHR", caps, 70)
-        );
+        if (!ext.contains("VK_KHR_surface")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            66, 67, 68, 69, 70
+        },
+            "vkDestroySurfaceKHR", "vkGetPhysicalDeviceSurfaceSupportKHR", "vkGetPhysicalDeviceSurfaceCapabilitiesKHR", "vkGetPhysicalDeviceSurfaceFormatsKHR", 
+            "vkGetPhysicalDeviceSurfacePresentModesKHR"
+        ) || reportMissing("VK", "VK_KHR_surface");
     }
 
     private static boolean check_KHR_swapchain(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_swapchain") && VK.checkExtension("VK_KHR_swapchain",
-               VK.isSupported(provider, "vkGetPhysicalDevicePresentRectanglesKHR", caps, 39, ext.contains("Vulkan11"))
-        );
+        if (!ext.contains("VK_KHR_swapchain")) {
+            return false;
+        }
+
+        int flag0 = ext.contains("Vulkan11") ? 0 : Integer.MIN_VALUE;
+
+        return checkFunctions(provider, caps, new int[] {
+            flag0 + 39
+        },
+            "vkGetPhysicalDevicePresentRectanglesKHR"
+        ) || reportMissing("VK", "VK_KHR_swapchain");
     }
 
     private static boolean check_KHR_wayland_surface(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_wayland_surface") && VK.checkExtension("VK_KHR_wayland_surface",
-               VK.isSupported(provider, "vkCreateWaylandSurfaceKHR", caps, 71)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceWaylandPresentationSupportKHR", caps, 72)
-        );
+        if (!ext.contains("VK_KHR_wayland_surface")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            71, 72
+        },
+            "vkCreateWaylandSurfaceKHR", "vkGetPhysicalDeviceWaylandPresentationSupportKHR"
+        ) || reportMissing("VK", "VK_KHR_wayland_surface");
     }
 
     private static boolean check_KHR_win32_surface(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_win32_surface") && VK.checkExtension("VK_KHR_win32_surface",
-               VK.isSupported(provider, "vkCreateWin32SurfaceKHR", caps, 73)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceWin32PresentationSupportKHR", caps, 74)
-        );
+        if (!ext.contains("VK_KHR_win32_surface")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            73, 74
+        },
+            "vkCreateWin32SurfaceKHR", "vkGetPhysicalDeviceWin32PresentationSupportKHR"
+        ) || reportMissing("VK", "VK_KHR_win32_surface");
     }
 
     private static boolean check_KHR_xlib_surface(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_xlib_surface") && VK.checkExtension("VK_KHR_xlib_surface",
-               VK.isSupported(provider, "vkCreateXlibSurfaceKHR", caps, 75)
-            && VK.isSupported(provider, "vkGetPhysicalDeviceXlibPresentationSupportKHR", caps, 76)
-        );
+        if (!ext.contains("VK_KHR_xlib_surface")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            75, 76
+        },
+            "vkCreateXlibSurfaceKHR", "vkGetPhysicalDeviceXlibPresentationSupportKHR"
+        ) || reportMissing("VK", "VK_KHR_xlib_surface");
     }
 
     private static boolean check_MVK_macos_surface(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_MVK_macos_surface") && VK.checkExtension("VK_MVK_macos_surface",
-               VK.isSupported(provider, "vkCreateMacOSSurfaceMVK", caps, 77)
-        );
+        if (!ext.contains("VK_MVK_macos_surface")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            77
+        },
+            "vkCreateMacOSSurfaceMVK"
+        ) || reportMissing("VK", "VK_MVK_macos_surface");
     }
 
     private static boolean check_NV_cooperative_matrix(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_NV_cooperative_matrix") && VK.checkExtension("VK_NV_cooperative_matrix",
-               VK.isSupported(provider, "vkGetPhysicalDeviceCooperativeMatrixPropertiesNV", caps, 78)
-        );
+        if (!ext.contains("VK_NV_cooperative_matrix")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            78
+        },
+            "vkGetPhysicalDeviceCooperativeMatrixPropertiesNV"
+        ) || reportMissing("VK", "VK_NV_cooperative_matrix");
     }
 
     private static boolean check_NV_coverage_reduction_mode(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_NV_coverage_reduction_mode") && VK.checkExtension("VK_NV_coverage_reduction_mode",
-               VK.isSupported(provider, "vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV", caps, 79)
-        );
+        if (!ext.contains("VK_NV_coverage_reduction_mode")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            79
+        },
+            "vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV"
+        ) || reportMissing("VK", "VK_NV_coverage_reduction_mode");
     }
 
     private static boolean check_NV_external_memory_capabilities(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_NV_external_memory_capabilities") && VK.checkExtension("VK_NV_external_memory_capabilities",
-               VK.isSupported(provider, "vkGetPhysicalDeviceExternalImageFormatPropertiesNV", caps, 80)
-        );
+        if (!ext.contains("VK_NV_external_memory_capabilities")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            80
+        },
+            "vkGetPhysicalDeviceExternalImageFormatPropertiesNV"
+        ) || reportMissing("VK", "VK_NV_external_memory_capabilities");
     }
 
     private static boolean check_NVX_device_generated_commands(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_NVX_device_generated_commands") && VK.checkExtension("VK_NVX_device_generated_commands",
-               VK.isSupported(provider, "vkGetPhysicalDeviceGeneratedCommandsPropertiesNVX", caps, 81)
-        );
+        if (!ext.contains("VK_NVX_device_generated_commands")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            81
+        },
+            "vkGetPhysicalDeviceGeneratedCommandsPropertiesNVX"
+        ) || reportMissing("VK", "VK_NVX_device_generated_commands");
     }
 
 }

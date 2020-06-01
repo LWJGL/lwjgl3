@@ -1133,7 +1133,7 @@ public class EGLCapabilities {
         return false;
     }
 
-    private boolean check_EGL10(java.util.Set<String> ext) {
+    private boolean check_EGL10(Set<String> ext) {
         return ext.contains("EGL10") && checkExtension("EGL10", checkFunctions(
             eglChooseConfig, eglCopyBuffers, eglCreateContext, eglCreatePbufferSurface, eglCreatePixmapSurface, eglCreateWindowSurface, eglDestroyContext, 
             eglDestroySurface, eglGetConfigAttrib, eglGetConfigs, eglGetCurrentDisplay, eglGetCurrentSurface, eglGetDisplay, eglGetError, eglGetProcAddress, 
@@ -1141,316 +1141,316 @@ public class EGLCapabilities {
         ));
     }
 
-    private boolean check_EGL11(java.util.Set<String> ext) {
+    private boolean check_EGL11(Set<String> ext) {
         return ext.contains("EGL11") && checkExtension("EGL11", checkFunctions(
             eglBindTexImage, eglReleaseTexImage, eglSurfaceAttrib, eglSwapInterval
         ));
     }
 
-    private boolean check_EGL12(java.util.Set<String> ext) {
+    private boolean check_EGL12(Set<String> ext) {
         return ext.contains("EGL12") && checkExtension("EGL12", checkFunctions(
             eglBindAPI, eglQueryAPI, eglCreatePbufferFromClientBuffer, eglReleaseThread, eglWaitClient
         ));
     }
 
-    private boolean check_EGL14(java.util.Set<String> ext) {
+    private boolean check_EGL14(Set<String> ext) {
         return ext.contains("EGL14") && checkExtension("EGL14", checkFunctions(
             eglGetCurrentContext
         ));
     }
 
-    private boolean check_EGL15(java.util.Set<String> ext) {
+    private boolean check_EGL15(Set<String> ext) {
         return ext.contains("EGL15") && checkExtension("EGL15", checkFunctions(
             eglCreateSync, eglDestroySync, eglClientWaitSync, eglGetSyncAttrib, eglCreateImage, eglDestroyImage, eglGetPlatformDisplay, 
             eglCreatePlatformWindowSurface, eglCreatePlatformPixmapSurface, eglWaitSync
         ));
     }
 
-    private boolean check_ANDROID_blob_cache(java.util.Set<String> ext) {
+    private boolean check_ANDROID_blob_cache(Set<String> ext) {
         return ext.contains("EGL_ANDROID_blob_cache") && checkExtension("EGL_ANDROID_blob_cache", checkFunctions(
             eglSetBlobCacheFuncsANDROID
         ));
     }
 
-    private boolean check_ANDROID_create_native_client_buffer(java.util.Set<String> ext) {
+    private boolean check_ANDROID_create_native_client_buffer(Set<String> ext) {
         return ext.contains("EGL_ANDROID_create_native_client_buffer") && checkExtension("EGL_ANDROID_create_native_client_buffer", checkFunctions(
             eglCreateNativeClientBufferANDROID
         ));
     }
 
-    private boolean check_ANDROID_native_fence_sync(java.util.Set<String> ext) {
+    private boolean check_ANDROID_native_fence_sync(Set<String> ext) {
         return ext.contains("EGL_ANDROID_native_fence_sync") && checkExtension("EGL_ANDROID_native_fence_sync", checkFunctions(
             eglDupNativeFenceFDANDROID
         ));
     }
 
-    private boolean check_ANDROID_presentation_time(java.util.Set<String> ext) {
+    private boolean check_ANDROID_presentation_time(Set<String> ext) {
         return ext.contains("EGL_ANDROID_presentation_time") && checkExtension("EGL_ANDROID_presentation_time", checkFunctions(
             eglPresentationTimeANDROID
         ));
     }
 
-    private boolean check_ANGLE_query_surface_pointer(java.util.Set<String> ext) {
+    private boolean check_ANGLE_query_surface_pointer(Set<String> ext) {
         return ext.contains("EGL_ANGLE_query_surface_pointer") && checkExtension("EGL_ANGLE_query_surface_pointer", checkFunctions(
             eglQuerySurfacePointerANGLE
         ));
     }
 
-    private boolean check_EXT_client_sync(java.util.Set<String> ext) {
+    private boolean check_EXT_client_sync(Set<String> ext) {
         return ext.contains("EGL_EXT_client_sync") && checkExtension("EGL_EXT_client_sync", checkFunctions(
             eglClientSignalSyncEXT
         ));
     }
 
-    private boolean check_EXT_compositor(java.util.Set<String> ext) {
+    private boolean check_EXT_compositor(Set<String> ext) {
         return ext.contains("EGL_EXT_compositor") && checkExtension("EGL_EXT_compositor", checkFunctions(
             eglCompositorSetContextListEXT, eglCompositorSetContextAttributesEXT, eglCompositorSetWindowListEXT, eglCompositorSetWindowAttributesEXT, 
             eglCompositorBindTexWindowEXT, eglCompositorSetSizeEXT, eglCompositorSwapPolicyEXT
         ));
     }
 
-    private boolean check_EXT_device_base(java.util.Set<String> ext) {
+    private boolean check_EXT_device_base(Set<String> ext) {
         return ext.contains("EGL_EXT_device_base") && checkExtension("EGL_EXT_device_base", checkFunctions(
             eglQueryDeviceAttribEXT, eglQueryDeviceStringEXT, eglQueryDisplayAttribEXT, eglQueryDevicesEXT
         ));
     }
 
-    private boolean check_EXT_device_enumeration(java.util.Set<String> ext) {
+    private boolean check_EXT_device_enumeration(Set<String> ext) {
         return ext.contains("EGL_EXT_device_enumeration") && checkExtension("EGL_EXT_device_enumeration", checkFunctions(
             eglQueryDevicesEXT
         ));
     }
 
-    private boolean check_EXT_device_query(java.util.Set<String> ext) {
+    private boolean check_EXT_device_query(Set<String> ext) {
         return ext.contains("EGL_EXT_device_query") && checkExtension("EGL_EXT_device_query", checkFunctions(
             eglQueryDeviceAttribEXT, eglQueryDeviceStringEXT, eglQueryDisplayAttribEXT
         ));
     }
 
-    private boolean check_EXT_image_dma_buf_import_modifiers(java.util.Set<String> ext) {
+    private boolean check_EXT_image_dma_buf_import_modifiers(Set<String> ext) {
         return ext.contains("EGL_EXT_image_dma_buf_import_modifiers") && checkExtension("EGL_EXT_image_dma_buf_import_modifiers", checkFunctions(
             eglQueryDmaBufFormatsEXT, eglQueryDmaBufModifiersEXT
         ));
     }
 
-    private boolean check_EXT_output_base(java.util.Set<String> ext) {
+    private boolean check_EXT_output_base(Set<String> ext) {
         return ext.contains("EGL_EXT_output_base") && checkExtension("EGL_EXT_output_base", checkFunctions(
             eglGetOutputLayersEXT, eglGetOutputPortsEXT, eglOutputLayerAttribEXT, eglQueryOutputLayerAttribEXT, eglQueryOutputLayerStringEXT, 
             eglOutputPortAttribEXT, eglQueryOutputPortAttribEXT, eglQueryOutputPortStringEXT
         ));
     }
 
-    private boolean check_EXT_platform_base(java.util.Set<String> ext) {
+    private boolean check_EXT_platform_base(Set<String> ext) {
         return ext.contains("EGL_EXT_platform_base") && checkExtension("EGL_EXT_platform_base", checkFunctions(
             eglGetPlatformDisplayEXT, eglCreatePlatformWindowSurfaceEXT, eglCreatePlatformPixmapSurfaceEXT
         ));
     }
 
-    private boolean check_EXT_stream_consumer_egloutput(java.util.Set<String> ext) {
+    private boolean check_EXT_stream_consumer_egloutput(Set<String> ext) {
         return ext.contains("EGL_EXT_stream_consumer_egloutput") && checkExtension("EGL_EXT_stream_consumer_egloutput", checkFunctions(
             eglStreamConsumerOutputEXT
         ));
     }
 
-    private boolean check_EXT_swap_buffers_with_damage(java.util.Set<String> ext) {
+    private boolean check_EXT_swap_buffers_with_damage(Set<String> ext) {
         return ext.contains("EGL_EXT_swap_buffers_with_damage") && checkExtension("EGL_EXT_swap_buffers_with_damage", checkFunctions(
             eglSwapBuffersWithDamageEXT
         ));
     }
 
-    private boolean check_EXT_sync_reuse(java.util.Set<String> ext) {
+    private boolean check_EXT_sync_reuse(Set<String> ext) {
         return ext.contains("EGL_EXT_sync_reuse") && checkExtension("EGL_EXT_sync_reuse", checkFunctions(
             eglUnsignalSyncEXT
         ));
     }
 
-    private boolean check_HI_clientpixmap(java.util.Set<String> ext) {
+    private boolean check_HI_clientpixmap(Set<String> ext) {
         return ext.contains("EGL_HI_clientpixmap") && checkExtension("EGL_HI_clientpixmap", checkFunctions(
             eglCreatePixmapSurfaceHI
         ));
     }
 
-    private boolean check_KHR_cl_event2(java.util.Set<String> ext) {
+    private boolean check_KHR_cl_event2(Set<String> ext) {
         return ext.contains("EGL_KHR_cl_event2") && checkExtension("EGL_KHR_cl_event2", checkFunctions(
             eglCreateSync64KHR
         ));
     }
 
-    private boolean check_KHR_debug(java.util.Set<String> ext) {
+    private boolean check_KHR_debug(Set<String> ext) {
         return ext.contains("EGL_KHR_debug") && checkExtension("EGL_KHR_debug", checkFunctions(
             eglDebugMessageControlKHR, eglQueryDebugKHR, eglLabelObjectKHR
         ));
     }
 
-    private boolean check_KHR_display_reference(java.util.Set<String> ext) {
+    private boolean check_KHR_display_reference(Set<String> ext) {
         return ext.contains("EGL_KHR_display_reference") && checkExtension("EGL_KHR_display_reference", checkFunctions(
             eglQueryDisplayAttribKHR
         ));
     }
 
-    private boolean check_KHR_fence_sync(java.util.Set<String> ext) {
+    private boolean check_KHR_fence_sync(Set<String> ext) {
         return ext.contains("EGL_KHR_fence_sync") && checkExtension("EGL_KHR_fence_sync", checkFunctions(
             eglCreateSyncKHR, eglDestroySyncKHR, eglClientWaitSyncKHR, eglGetSyncAttribKHR
         ));
     }
 
-    private boolean check_KHR_image(java.util.Set<String> ext) {
+    private boolean check_KHR_image(Set<String> ext) {
         return ext.contains("EGL_KHR_image") && checkExtension("EGL_KHR_image", checkFunctions(
             eglCreateImageKHR, eglDestroyImageKHR
         ));
     }
 
-    private boolean check_KHR_image_base(java.util.Set<String> ext) {
+    private boolean check_KHR_image_base(Set<String> ext) {
         return ext.contains("EGL_KHR_image_base") && checkExtension("EGL_KHR_image_base", checkFunctions(
             eglCreateImageKHR, eglDestroyImageKHR
         ));
     }
 
-    private boolean check_KHR_lock_surface3(java.util.Set<String> ext) {
+    private boolean check_KHR_lock_surface3(Set<String> ext) {
         return ext.contains("EGL_KHR_lock_surface3") && checkExtension("EGL_KHR_lock_surface3", checkFunctions(
             eglLockSurfaceKHR, eglUnlockSurfaceKHR, eglQuerySurface64KHR
         ));
     }
 
-    private boolean check_KHR_partial_update(java.util.Set<String> ext) {
+    private boolean check_KHR_partial_update(Set<String> ext) {
         return ext.contains("EGL_KHR_partial_update") && checkExtension("EGL_KHR_partial_update", checkFunctions(
             eglSetDamageRegionKHR
         ));
     }
 
-    private boolean check_KHR_reusable_sync(java.util.Set<String> ext) {
+    private boolean check_KHR_reusable_sync(Set<String> ext) {
         return ext.contains("EGL_KHR_reusable_sync") && checkExtension("EGL_KHR_reusable_sync", checkFunctions(
             eglCreateSyncKHR, eglDestroySyncKHR, eglClientWaitSyncKHR, eglSignalSyncKHR, eglGetSyncAttribKHR
         ));
     }
 
-    private boolean check_KHR_stream(java.util.Set<String> ext) {
+    private boolean check_KHR_stream(Set<String> ext) {
         return ext.contains("EGL_KHR_stream") && checkExtension("EGL_KHR_stream", checkFunctions(
             eglCreateStreamKHR, eglDestroyStreamKHR, eglStreamAttribKHR, eglQueryStreamKHR, eglQueryStreamu64KHR
         ));
     }
 
-    private boolean check_KHR_stream_attrib(java.util.Set<String> ext) {
+    private boolean check_KHR_stream_attrib(Set<String> ext) {
         return ext.contains("EGL_KHR_stream_attrib") && checkExtension("EGL_KHR_stream_attrib", checkFunctions(
             eglCreateStreamAttribKHR, eglSetStreamAttribKHR, eglQueryStreamAttribKHR, eglStreamConsumerAcquireAttribKHR, eglStreamConsumerReleaseAttribKHR
         ));
     }
 
-    private boolean check_KHR_stream_consumer_gltexture(java.util.Set<String> ext) {
+    private boolean check_KHR_stream_consumer_gltexture(Set<String> ext) {
         return ext.contains("EGL_KHR_stream_consumer_gltexture") && checkExtension("EGL_KHR_stream_consumer_gltexture", checkFunctions(
             eglStreamConsumerGLTextureExternalKHR, eglStreamConsumerAcquireKHR, eglStreamConsumerReleaseKHR
         ));
     }
 
-    private boolean check_KHR_stream_cross_process_fd(java.util.Set<String> ext) {
+    private boolean check_KHR_stream_cross_process_fd(Set<String> ext) {
         return ext.contains("EGL_KHR_stream_cross_process_fd") && checkExtension("EGL_KHR_stream_cross_process_fd", checkFunctions(
             eglGetStreamFileDescriptorKHR, eglCreateStreamFromFileDescriptorKHR
         ));
     }
 
-    private boolean check_KHR_stream_fifo(java.util.Set<String> ext) {
+    private boolean check_KHR_stream_fifo(Set<String> ext) {
         return ext.contains("EGL_KHR_stream_fifo") && checkExtension("EGL_KHR_stream_fifo", checkFunctions(
             eglQueryStreamTimeKHR
         ));
     }
 
-    private boolean check_KHR_stream_producer_eglsurface(java.util.Set<String> ext) {
+    private boolean check_KHR_stream_producer_eglsurface(Set<String> ext) {
         return ext.contains("EGL_KHR_stream_producer_eglsurface") && checkExtension("EGL_KHR_stream_producer_eglsurface", checkFunctions(
             eglCreateStreamProducerSurfaceKHR
         ));
     }
 
-    private boolean check_KHR_swap_buffers_with_damage(java.util.Set<String> ext) {
+    private boolean check_KHR_swap_buffers_with_damage(Set<String> ext) {
         return ext.contains("EGL_KHR_swap_buffers_with_damage") && checkExtension("EGL_KHR_swap_buffers_with_damage", checkFunctions(
             eglSwapBuffersWithDamageKHR
         ));
     }
 
-    private boolean check_KHR_wait_sync(java.util.Set<String> ext) {
+    private boolean check_KHR_wait_sync(Set<String> ext) {
         return ext.contains("EGL_KHR_wait_sync") && checkExtension("EGL_KHR_wait_sync", checkFunctions(
             eglWaitSyncKHR
         ));
     }
 
-    private boolean check_MESA_drm_image(java.util.Set<String> ext) {
+    private boolean check_MESA_drm_image(Set<String> ext) {
         return ext.contains("EGL_MESA_drm_image") && checkExtension("EGL_MESA_drm_image", checkFunctions(
             eglCreateDRMImageMESA, eglExportDRMImageMESA
         ));
     }
 
-    private boolean check_MESA_image_dma_buf_export(java.util.Set<String> ext) {
+    private boolean check_MESA_image_dma_buf_export(Set<String> ext) {
         return ext.contains("EGL_MESA_image_dma_buf_export") && checkExtension("EGL_MESA_image_dma_buf_export", checkFunctions(
             eglExportDMABUFImageQueryMESA, eglExportDMABUFImageMESA
         ));
     }
 
-    private boolean check_NOK_swap_region2(java.util.Set<String> ext) {
+    private boolean check_NOK_swap_region2(Set<String> ext) {
         return ext.contains("EGL_NOK_swap_region2") && checkExtension("EGL_NOK_swap_region2", checkFunctions(
             eglSwapBuffersRegion2NOK
         ));
     }
 
-    private boolean check_NV_native_query(java.util.Set<String> ext) {
+    private boolean check_NV_native_query(Set<String> ext) {
         return ext.contains("EGL_NV_native_query") && checkExtension("EGL_NV_native_query", checkFunctions(
             eglQueryNativeDisplayNV, eglQueryNativeWindowNV, eglQueryNativePixmapNV
         ));
     }
 
-    private boolean check_NV_post_sub_buffer(java.util.Set<String> ext) {
+    private boolean check_NV_post_sub_buffer(Set<String> ext) {
         return ext.contains("EGL_NV_post_sub_buffer") && checkExtension("EGL_NV_post_sub_buffer", checkFunctions(
             eglPostSubBufferNV
         ));
     }
 
-    private boolean check_NV_stream_consumer_gltexture_yuv(java.util.Set<String> ext) {
+    private boolean check_NV_stream_consumer_gltexture_yuv(Set<String> ext) {
         return ext.contains("EGL_NV_stream_consumer_gltexture_yuv") && checkExtension("EGL_NV_stream_consumer_gltexture_yuv", checkFunctions(
             eglStreamConsumerGLTextureExternalAttribsNV
         ));
     }
 
-    private boolean check_NV_stream_flush(java.util.Set<String> ext) {
+    private boolean check_NV_stream_flush(Set<String> ext) {
         return ext.contains("EGL_NV_stream_flush") && checkExtension("EGL_NV_stream_flush", checkFunctions(
             eglStreamFlush
         ));
     }
 
-    private boolean check_NV_stream_metadata(java.util.Set<String> ext) {
+    private boolean check_NV_stream_metadata(Set<String> ext) {
         return ext.contains("EGL_NV_stream_metadata") && checkExtension("EGL_NV_stream_metadata", checkFunctions(
             eglQueryDisplayAttribNV, eglSetStreamMetadataNV, eglQueryStreamMetadataNV
         ));
     }
 
-    private boolean check_NV_stream_reset(java.util.Set<String> ext) {
+    private boolean check_NV_stream_reset(Set<String> ext) {
         return ext.contains("EGL_NV_stream_reset") && checkExtension("EGL_NV_stream_reset", checkFunctions(
             eglResetStreamNV
         ));
     }
 
-    private boolean check_NV_stream_sync(java.util.Set<String> ext) {
+    private boolean check_NV_stream_sync(Set<String> ext) {
         return ext.contains("EGL_NV_stream_sync") && checkExtension("EGL_NV_stream_sync", checkFunctions(
             eglCreateStreamSyncNV
         ));
     }
 
-    private boolean check_NV_sync(java.util.Set<String> ext) {
+    private boolean check_NV_sync(Set<String> ext) {
         return ext.contains("EGL_NV_sync") && checkExtension("EGL_NV_sync", checkFunctions(
             eglCreateFenceSyncNV, eglDestroySyncNV, eglFenceNV, eglClientWaitSyncNV, eglSignalSyncNV, eglGetSyncAttribNV
         ));
     }
 
-    private boolean check_NV_system_time(java.util.Set<String> ext) {
+    private boolean check_NV_system_time(Set<String> ext) {
         return ext.contains("EGL_NV_system_time") && checkExtension("EGL_NV_system_time", checkFunctions(
             eglGetSystemTimeFrequencyNV, eglGetSystemTimeNV
         ));
     }
 
-    private boolean check_WL_bind_wayland_display(java.util.Set<String> ext) {
+    private boolean check_WL_bind_wayland_display(Set<String> ext) {
         return ext.contains("EGL_WL_bind_wayland_display") && checkExtension("EGL_WL_bind_wayland_display", checkFunctions(
             eglBindWaylandDisplayWL, eglUnbindWaylandDisplayWL, eglQueryWaylandBufferWL
         ));
     }
 
-    private boolean check_WL_create_wayland_buffer_from_image(java.util.Set<String> ext) {
+    private boolean check_WL_create_wayland_buffer_from_image(Set<String> ext) {
         return ext.contains("EGL_WL_create_wayland_buffer_from_image") && checkExtension("EGL_WL_create_wayland_buffer_from_image", checkFunctions(
             eglCreateWaylandBufferFromImageWL
         ));

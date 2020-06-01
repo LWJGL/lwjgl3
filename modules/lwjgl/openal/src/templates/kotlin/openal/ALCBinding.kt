@@ -36,7 +36,7 @@ val ALCBinding = Generator.register(object : APIBinding(
     private fun PrintWriter.checkExtensionFunctions(nativeClass: NativeClass) {
         val capName = nativeClass.capName("ALC")
 
-        println("\n\tprivate boolean check_${nativeClass.templateName}(java.util.Set<String> ext) {")
+        println("\n\tprivate boolean check_${nativeClass.templateName}(Set<String> ext) {")
         print("\t\treturn ext.contains(\"$capName\") && checkExtension(\"$capName\", checkFunctions(")
         nativeClass.printPointers(this, { it.name })
         println("));")

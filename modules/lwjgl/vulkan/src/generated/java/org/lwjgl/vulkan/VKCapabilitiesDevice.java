@@ -1277,588 +1277,738 @@ public class VKCapabilitiesDevice {
         vkGetImageViewHandleNVX = caps[294];
     }
 
-    private static boolean check_VK10(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("Vulkan10") && VK.checkExtension("Vulkan10",
-               VK.isSupported(provider, "vkGetDeviceProcAddr", caps, 0)
-            && VK.isSupported(provider, "vkDestroyDevice", caps, 1)
-            && VK.isSupported(provider, "vkGetDeviceQueue", caps, 2)
-            && VK.isSupported(provider, "vkQueueSubmit", caps, 3)
-            && VK.isSupported(provider, "vkQueueWaitIdle", caps, 4)
-            && VK.isSupported(provider, "vkDeviceWaitIdle", caps, 5)
-            && VK.isSupported(provider, "vkAllocateMemory", caps, 6)
-            && VK.isSupported(provider, "vkFreeMemory", caps, 7)
-            && VK.isSupported(provider, "vkMapMemory", caps, 8)
-            && VK.isSupported(provider, "vkUnmapMemory", caps, 9)
-            && VK.isSupported(provider, "vkFlushMappedMemoryRanges", caps, 10)
-            && VK.isSupported(provider, "vkInvalidateMappedMemoryRanges", caps, 11)
-            && VK.isSupported(provider, "vkGetDeviceMemoryCommitment", caps, 12)
-            && VK.isSupported(provider, "vkBindBufferMemory", caps, 13)
-            && VK.isSupported(provider, "vkBindImageMemory", caps, 14)
-            && VK.isSupported(provider, "vkGetBufferMemoryRequirements", caps, 15)
-            && VK.isSupported(provider, "vkGetImageMemoryRequirements", caps, 16)
-            && VK.isSupported(provider, "vkGetImageSparseMemoryRequirements", caps, 17)
-            && VK.isSupported(provider, "vkQueueBindSparse", caps, 18)
-            && VK.isSupported(provider, "vkCreateFence", caps, 19)
-            && VK.isSupported(provider, "vkDestroyFence", caps, 20)
-            && VK.isSupported(provider, "vkResetFences", caps, 21)
-            && VK.isSupported(provider, "vkGetFenceStatus", caps, 22)
-            && VK.isSupported(provider, "vkWaitForFences", caps, 23)
-            && VK.isSupported(provider, "vkCreateSemaphore", caps, 24)
-            && VK.isSupported(provider, "vkDestroySemaphore", caps, 25)
-            && VK.isSupported(provider, "vkCreateEvent", caps, 26)
-            && VK.isSupported(provider, "vkDestroyEvent", caps, 27)
-            && VK.isSupported(provider, "vkGetEventStatus", caps, 28)
-            && VK.isSupported(provider, "vkSetEvent", caps, 29)
-            && VK.isSupported(provider, "vkResetEvent", caps, 30)
-            && VK.isSupported(provider, "vkCreateQueryPool", caps, 31)
-            && VK.isSupported(provider, "vkDestroyQueryPool", caps, 32)
-            && VK.isSupported(provider, "vkGetQueryPoolResults", caps, 33)
-            && VK.isSupported(provider, "vkCreateBuffer", caps, 34)
-            && VK.isSupported(provider, "vkDestroyBuffer", caps, 35)
-            && VK.isSupported(provider, "vkCreateBufferView", caps, 36)
-            && VK.isSupported(provider, "vkDestroyBufferView", caps, 37)
-            && VK.isSupported(provider, "vkCreateImage", caps, 38)
-            && VK.isSupported(provider, "vkDestroyImage", caps, 39)
-            && VK.isSupported(provider, "vkGetImageSubresourceLayout", caps, 40)
-            && VK.isSupported(provider, "vkCreateImageView", caps, 41)
-            && VK.isSupported(provider, "vkDestroyImageView", caps, 42)
-            && VK.isSupported(provider, "vkCreateShaderModule", caps, 43)
-            && VK.isSupported(provider, "vkDestroyShaderModule", caps, 44)
-            && VK.isSupported(provider, "vkCreatePipelineCache", caps, 45)
-            && VK.isSupported(provider, "vkDestroyPipelineCache", caps, 46)
-            && VK.isSupported(provider, "vkGetPipelineCacheData", caps, 47)
-            && VK.isSupported(provider, "vkMergePipelineCaches", caps, 48)
-            && VK.isSupported(provider, "vkCreateGraphicsPipelines", caps, 49)
-            && VK.isSupported(provider, "vkCreateComputePipelines", caps, 50)
-            && VK.isSupported(provider, "vkDestroyPipeline", caps, 51)
-            && VK.isSupported(provider, "vkCreatePipelineLayout", caps, 52)
-            && VK.isSupported(provider, "vkDestroyPipelineLayout", caps, 53)
-            && VK.isSupported(provider, "vkCreateSampler", caps, 54)
-            && VK.isSupported(provider, "vkDestroySampler", caps, 55)
-            && VK.isSupported(provider, "vkCreateDescriptorSetLayout", caps, 56)
-            && VK.isSupported(provider, "vkDestroyDescriptorSetLayout", caps, 57)
-            && VK.isSupported(provider, "vkCreateDescriptorPool", caps, 58)
-            && VK.isSupported(provider, "vkDestroyDescriptorPool", caps, 59)
-            && VK.isSupported(provider, "vkResetDescriptorPool", caps, 60)
-            && VK.isSupported(provider, "vkAllocateDescriptorSets", caps, 61)
-            && VK.isSupported(provider, "vkFreeDescriptorSets", caps, 62)
-            && VK.isSupported(provider, "vkUpdateDescriptorSets", caps, 63)
-            && VK.isSupported(provider, "vkCreateFramebuffer", caps, 64)
-            && VK.isSupported(provider, "vkDestroyFramebuffer", caps, 65)
-            && VK.isSupported(provider, "vkCreateRenderPass", caps, 66)
-            && VK.isSupported(provider, "vkDestroyRenderPass", caps, 67)
-            && VK.isSupported(provider, "vkGetRenderAreaGranularity", caps, 68)
-            && VK.isSupported(provider, "vkCreateCommandPool", caps, 69)
-            && VK.isSupported(provider, "vkDestroyCommandPool", caps, 70)
-            && VK.isSupported(provider, "vkResetCommandPool", caps, 71)
-            && VK.isSupported(provider, "vkAllocateCommandBuffers", caps, 72)
-            && VK.isSupported(provider, "vkFreeCommandBuffers", caps, 73)
-            && VK.isSupported(provider, "vkBeginCommandBuffer", caps, 74)
-            && VK.isSupported(provider, "vkEndCommandBuffer", caps, 75)
-            && VK.isSupported(provider, "vkResetCommandBuffer", caps, 76)
-            && VK.isSupported(provider, "vkCmdBindPipeline", caps, 77)
-            && VK.isSupported(provider, "vkCmdSetViewport", caps, 78)
-            && VK.isSupported(provider, "vkCmdSetScissor", caps, 79)
-            && VK.isSupported(provider, "vkCmdSetLineWidth", caps, 80)
-            && VK.isSupported(provider, "vkCmdSetDepthBias", caps, 81)
-            && VK.isSupported(provider, "vkCmdSetBlendConstants", caps, 82)
-            && VK.isSupported(provider, "vkCmdSetDepthBounds", caps, 83)
-            && VK.isSupported(provider, "vkCmdSetStencilCompareMask", caps, 84)
-            && VK.isSupported(provider, "vkCmdSetStencilWriteMask", caps, 85)
-            && VK.isSupported(provider, "vkCmdSetStencilReference", caps, 86)
-            && VK.isSupported(provider, "vkCmdBindDescriptorSets", caps, 87)
-            && VK.isSupported(provider, "vkCmdBindIndexBuffer", caps, 88)
-            && VK.isSupported(provider, "vkCmdBindVertexBuffers", caps, 89)
-            && VK.isSupported(provider, "vkCmdDraw", caps, 90)
-            && VK.isSupported(provider, "vkCmdDrawIndexed", caps, 91)
-            && VK.isSupported(provider, "vkCmdDrawIndirect", caps, 92)
-            && VK.isSupported(provider, "vkCmdDrawIndexedIndirect", caps, 93)
-            && VK.isSupported(provider, "vkCmdDispatch", caps, 94)
-            && VK.isSupported(provider, "vkCmdDispatchIndirect", caps, 95)
-            && VK.isSupported(provider, "vkCmdCopyBuffer", caps, 96)
-            && VK.isSupported(provider, "vkCmdCopyImage", caps, 97)
-            && VK.isSupported(provider, "vkCmdBlitImage", caps, 98)
-            && VK.isSupported(provider, "vkCmdCopyBufferToImage", caps, 99)
-            && VK.isSupported(provider, "vkCmdCopyImageToBuffer", caps, 100)
-            && VK.isSupported(provider, "vkCmdUpdateBuffer", caps, 101)
-            && VK.isSupported(provider, "vkCmdFillBuffer", caps, 102)
-            && VK.isSupported(provider, "vkCmdClearColorImage", caps, 103)
-            && VK.isSupported(provider, "vkCmdClearDepthStencilImage", caps, 104)
-            && VK.isSupported(provider, "vkCmdClearAttachments", caps, 105)
-            && VK.isSupported(provider, "vkCmdResolveImage", caps, 106)
-            && VK.isSupported(provider, "vkCmdSetEvent", caps, 107)
-            && VK.isSupported(provider, "vkCmdResetEvent", caps, 108)
-            && VK.isSupported(provider, "vkCmdWaitEvents", caps, 109)
-            && VK.isSupported(provider, "vkCmdPipelineBarrier", caps, 110)
-            && VK.isSupported(provider, "vkCmdBeginQuery", caps, 111)
-            && VK.isSupported(provider, "vkCmdEndQuery", caps, 112)
-            && VK.isSupported(provider, "vkCmdResetQueryPool", caps, 113)
-            && VK.isSupported(provider, "vkCmdWriteTimestamp", caps, 114)
-            && VK.isSupported(provider, "vkCmdCopyQueryPoolResults", caps, 115)
-            && VK.isSupported(provider, "vkCmdPushConstants", caps, 116)
-            && VK.isSupported(provider, "vkCmdBeginRenderPass", caps, 117)
-            && VK.isSupported(provider, "vkCmdNextSubpass", caps, 118)
-            && VK.isSupported(provider, "vkCmdEndRenderPass", caps, 119)
-            && VK.isSupported(provider, "vkCmdExecuteCommands", caps, 120)
-        );
+    private static boolean check_VK10(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("Vulkan10")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 
+            39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 
+            76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 
+            110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120
+        },
+            "vkGetDeviceProcAddr", "vkDestroyDevice", "vkGetDeviceQueue", "vkQueueSubmit", "vkQueueWaitIdle", "vkDeviceWaitIdle", "vkAllocateMemory", 
+            "vkFreeMemory", "vkMapMemory", "vkUnmapMemory", "vkFlushMappedMemoryRanges", "vkInvalidateMappedMemoryRanges", "vkGetDeviceMemoryCommitment", 
+            "vkBindBufferMemory", "vkBindImageMemory", "vkGetBufferMemoryRequirements", "vkGetImageMemoryRequirements", "vkGetImageSparseMemoryRequirements", 
+            "vkQueueBindSparse", "vkCreateFence", "vkDestroyFence", "vkResetFences", "vkGetFenceStatus", "vkWaitForFences", "vkCreateSemaphore", 
+            "vkDestroySemaphore", "vkCreateEvent", "vkDestroyEvent", "vkGetEventStatus", "vkSetEvent", "vkResetEvent", "vkCreateQueryPool", 
+            "vkDestroyQueryPool", "vkGetQueryPoolResults", "vkCreateBuffer", "vkDestroyBuffer", "vkCreateBufferView", "vkDestroyBufferView", "vkCreateImage", 
+            "vkDestroyImage", "vkGetImageSubresourceLayout", "vkCreateImageView", "vkDestroyImageView", "vkCreateShaderModule", "vkDestroyShaderModule", 
+            "vkCreatePipelineCache", "vkDestroyPipelineCache", "vkGetPipelineCacheData", "vkMergePipelineCaches", "vkCreateGraphicsPipelines", 
+            "vkCreateComputePipelines", "vkDestroyPipeline", "vkCreatePipelineLayout", "vkDestroyPipelineLayout", "vkCreateSampler", "vkDestroySampler", 
+            "vkCreateDescriptorSetLayout", "vkDestroyDescriptorSetLayout", "vkCreateDescriptorPool", "vkDestroyDescriptorPool", "vkResetDescriptorPool", 
+            "vkAllocateDescriptorSets", "vkFreeDescriptorSets", "vkUpdateDescriptorSets", "vkCreateFramebuffer", "vkDestroyFramebuffer", "vkCreateRenderPass", 
+            "vkDestroyRenderPass", "vkGetRenderAreaGranularity", "vkCreateCommandPool", "vkDestroyCommandPool", "vkResetCommandPool", 
+            "vkAllocateCommandBuffers", "vkFreeCommandBuffers", "vkBeginCommandBuffer", "vkEndCommandBuffer", "vkResetCommandBuffer", "vkCmdBindPipeline", 
+            "vkCmdSetViewport", "vkCmdSetScissor", "vkCmdSetLineWidth", "vkCmdSetDepthBias", "vkCmdSetBlendConstants", "vkCmdSetDepthBounds", 
+            "vkCmdSetStencilCompareMask", "vkCmdSetStencilWriteMask", "vkCmdSetStencilReference", "vkCmdBindDescriptorSets", "vkCmdBindIndexBuffer", 
+            "vkCmdBindVertexBuffers", "vkCmdDraw", "vkCmdDrawIndexed", "vkCmdDrawIndirect", "vkCmdDrawIndexedIndirect", "vkCmdDispatch", 
+            "vkCmdDispatchIndirect", "vkCmdCopyBuffer", "vkCmdCopyImage", "vkCmdBlitImage", "vkCmdCopyBufferToImage", "vkCmdCopyImageToBuffer", 
+            "vkCmdUpdateBuffer", "vkCmdFillBuffer", "vkCmdClearColorImage", "vkCmdClearDepthStencilImage", "vkCmdClearAttachments", "vkCmdResolveImage", 
+            "vkCmdSetEvent", "vkCmdResetEvent", "vkCmdWaitEvents", "vkCmdPipelineBarrier", "vkCmdBeginQuery", "vkCmdEndQuery", "vkCmdResetQueryPool", 
+            "vkCmdWriteTimestamp", "vkCmdCopyQueryPoolResults", "vkCmdPushConstants", "vkCmdBeginRenderPass", "vkCmdNextSubpass", "vkCmdEndRenderPass", 
+            "vkCmdExecuteCommands"
+        ) || reportMissing("VK", "Vulkan10");
     }
 
-    private static boolean check_VK11(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("Vulkan11") && VK.checkExtension("Vulkan11",
-               VK.isSupported(provider, "vkBindBufferMemory2", caps, 121)
-            && VK.isSupported(provider, "vkBindImageMemory2", caps, 122)
-            && VK.isSupported(provider, "vkGetDeviceGroupPeerMemoryFeatures", caps, 123)
-            && VK.isSupported(provider, "vkCmdSetDeviceMask", caps, 124)
-            && VK.isSupported(provider, "vkCmdDispatchBase", caps, 125)
-            && VK.isSupported(provider, "vkGetImageMemoryRequirements2", caps, 126)
-            && VK.isSupported(provider, "vkGetBufferMemoryRequirements2", caps, 127)
-            && VK.isSupported(provider, "vkGetImageSparseMemoryRequirements2", caps, 128)
-            && VK.isSupported(provider, "vkTrimCommandPool", caps, 129)
-            && VK.isSupported(provider, "vkGetDeviceQueue2", caps, 130)
-            && VK.isSupported(provider, "vkCreateSamplerYcbcrConversion", caps, 131)
-            && VK.isSupported(provider, "vkDestroySamplerYcbcrConversion", caps, 132)
-            && VK.isSupported(provider, "vkCreateDescriptorUpdateTemplate", caps, 133)
-            && VK.isSupported(provider, "vkDestroyDescriptorUpdateTemplate", caps, 134)
-            && VK.isSupported(provider, "vkUpdateDescriptorSetWithTemplate", caps, 135)
-            && VK.isSupported(provider, "vkGetDescriptorSetLayoutSupport", caps, 136)
-        );
+    private static boolean check_VK11(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("Vulkan11")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136
+        },
+            "vkBindBufferMemory2", "vkBindImageMemory2", "vkGetDeviceGroupPeerMemoryFeatures", "vkCmdSetDeviceMask", "vkCmdDispatchBase", 
+            "vkGetImageMemoryRequirements2", "vkGetBufferMemoryRequirements2", "vkGetImageSparseMemoryRequirements2", "vkTrimCommandPool", "vkGetDeviceQueue2", 
+            "vkCreateSamplerYcbcrConversion", "vkDestroySamplerYcbcrConversion", "vkCreateDescriptorUpdateTemplate", "vkDestroyDescriptorUpdateTemplate", 
+            "vkUpdateDescriptorSetWithTemplate", "vkGetDescriptorSetLayoutSupport"
+        ) || reportMissing("VK", "Vulkan11");
     }
 
-    private static boolean check_VK12(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("Vulkan12") && VK.checkExtension("Vulkan12",
-               VK.isSupported(provider, "vkCmdDrawIndirectCount", caps, 137)
-            && VK.isSupported(provider, "vkCmdDrawIndexedIndirectCount", caps, 138)
-            && VK.isSupported(provider, "vkCreateRenderPass2", caps, 139)
-            && VK.isSupported(provider, "vkCmdBeginRenderPass2", caps, 140)
-            && VK.isSupported(provider, "vkCmdNextSubpass2", caps, 141)
-            && VK.isSupported(provider, "vkCmdEndRenderPass2", caps, 142)
-            && VK.isSupported(provider, "vkResetQueryPool", caps, 143)
-            && VK.isSupported(provider, "vkGetSemaphoreCounterValue", caps, 144)
-            && VK.isSupported(provider, "vkWaitSemaphores", caps, 145)
-            && VK.isSupported(provider, "vkSignalSemaphore", caps, 146)
-            && VK.isSupported(provider, "vkGetBufferDeviceAddress", caps, 147)
-            && VK.isSupported(provider, "vkGetBufferOpaqueCaptureAddress", caps, 148)
-            && VK.isSupported(provider, "vkGetDeviceMemoryOpaqueCaptureAddress", caps, 149)
-        );
+    private static boolean check_VK12(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("Vulkan12")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149
+        },
+            "vkCmdDrawIndirectCount", "vkCmdDrawIndexedIndirectCount", "vkCreateRenderPass2", "vkCmdBeginRenderPass2", "vkCmdNextSubpass2", 
+            "vkCmdEndRenderPass2", "vkResetQueryPool", "vkGetSemaphoreCounterValue", "vkWaitSemaphores", "vkSignalSemaphore", "vkGetBufferDeviceAddress", 
+            "vkGetBufferOpaqueCaptureAddress", "vkGetDeviceMemoryOpaqueCaptureAddress"
+        ) || reportMissing("VK", "Vulkan12");
     }
 
-    private static boolean check_AMD_buffer_marker(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_AMD_buffer_marker") && VK.checkExtension("VK_AMD_buffer_marker",
-               VK.isSupported(provider, "vkCmdWriteBufferMarkerAMD", caps, 150)
-        );
+    private static boolean check_AMD_buffer_marker(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_AMD_buffer_marker")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            150
+        },
+            "vkCmdWriteBufferMarkerAMD"
+        ) || reportMissing("VK", "VK_AMD_buffer_marker");
     }
 
-    private static boolean check_AMD_display_native_hdr(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_AMD_display_native_hdr") && VK.checkExtension("VK_AMD_display_native_hdr",
-               VK.isSupported(provider, "vkSetLocalDimmingAMD", caps, 151)
-        );
+    private static boolean check_AMD_display_native_hdr(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_AMD_display_native_hdr")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            151
+        },
+            "vkSetLocalDimmingAMD"
+        ) || reportMissing("VK", "VK_AMD_display_native_hdr");
     }
 
-    private static boolean check_AMD_draw_indirect_count(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_AMD_draw_indirect_count") && VK.checkExtension("VK_AMD_draw_indirect_count",
-               VK.isSupported(provider, "vkCmdDrawIndirectCountAMD", caps, 152)
-            && VK.isSupported(provider, "vkCmdDrawIndexedIndirectCountAMD", caps, 153)
-        );
+    private static boolean check_AMD_draw_indirect_count(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_AMD_draw_indirect_count")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            152, 153
+        },
+            "vkCmdDrawIndirectCountAMD", "vkCmdDrawIndexedIndirectCountAMD"
+        ) || reportMissing("VK", "VK_AMD_draw_indirect_count");
     }
 
-    private static boolean check_AMD_shader_info(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_AMD_shader_info") && VK.checkExtension("VK_AMD_shader_info",
-               VK.isSupported(provider, "vkGetShaderInfoAMD", caps, 154)
-        );
+    private static boolean check_AMD_shader_info(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_AMD_shader_info")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            154
+        },
+            "vkGetShaderInfoAMD"
+        ) || reportMissing("VK", "VK_AMD_shader_info");
     }
 
-    private static boolean check_EXT_buffer_device_address(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_buffer_device_address") && VK.checkExtension("VK_EXT_buffer_device_address",
-               VK.isSupported(provider, "vkGetBufferDeviceAddressEXT", caps, 155)
-        );
+    private static boolean check_EXT_buffer_device_address(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_EXT_buffer_device_address")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            155
+        },
+            "vkGetBufferDeviceAddressEXT"
+        ) || reportMissing("VK", "VK_EXT_buffer_device_address");
     }
 
-    private static boolean check_EXT_calibrated_timestamps(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_calibrated_timestamps") && VK.checkExtension("VK_EXT_calibrated_timestamps",
-               VK.isSupported(provider, "vkGetCalibratedTimestampsEXT", caps, 156)
-        );
+    private static boolean check_EXT_calibrated_timestamps(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_EXT_calibrated_timestamps")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            156
+        },
+            "vkGetCalibratedTimestampsEXT"
+        ) || reportMissing("VK", "VK_EXT_calibrated_timestamps");
     }
 
-    private static boolean check_EXT_conditional_rendering(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_conditional_rendering") && VK.checkExtension("VK_EXT_conditional_rendering",
-               VK.isSupported(provider, "vkCmdBeginConditionalRenderingEXT", caps, 157)
-            && VK.isSupported(provider, "vkCmdEndConditionalRenderingEXT", caps, 158)
-        );
+    private static boolean check_EXT_conditional_rendering(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_EXT_conditional_rendering")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            157, 158
+        },
+            "vkCmdBeginConditionalRenderingEXT", "vkCmdEndConditionalRenderingEXT"
+        ) || reportMissing("VK", "VK_EXT_conditional_rendering");
     }
 
-    private static boolean check_EXT_debug_marker(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_debug_marker") && VK.checkExtension("VK_EXT_debug_marker",
-               VK.isSupported(provider, "vkDebugMarkerSetObjectTagEXT", caps, 159)
-            && VK.isSupported(provider, "vkDebugMarkerSetObjectNameEXT", caps, 160)
-            && VK.isSupported(provider, "vkCmdDebugMarkerBeginEXT", caps, 161)
-            && VK.isSupported(provider, "vkCmdDebugMarkerEndEXT", caps, 162)
-            && VK.isSupported(provider, "vkCmdDebugMarkerInsertEXT", caps, 163)
-        );
+    private static boolean check_EXT_debug_marker(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_EXT_debug_marker")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            159, 160, 161, 162, 163
+        },
+            "vkDebugMarkerSetObjectTagEXT", "vkDebugMarkerSetObjectNameEXT", "vkCmdDebugMarkerBeginEXT", "vkCmdDebugMarkerEndEXT", "vkCmdDebugMarkerInsertEXT"
+        ) || reportMissing("VK", "VK_EXT_debug_marker");
     }
 
     private static boolean check_EXT_debug_utils(FunctionProvider provider, long[] caps, VKCapabilitiesInstance capsInstance) {
-        return capsInstance.VK_EXT_debug_utils && VK.checkExtension("VK_EXT_debug_utils",
-               VK.isSupported(provider, "vkSetDebugUtilsObjectNameEXT", caps, 164)
-            && VK.isSupported(provider, "vkSetDebugUtilsObjectTagEXT", caps, 165)
-            && VK.isSupported(provider, "vkQueueBeginDebugUtilsLabelEXT", caps, 166)
-            && VK.isSupported(provider, "vkQueueEndDebugUtilsLabelEXT", caps, 167)
-            && VK.isSupported(provider, "vkQueueInsertDebugUtilsLabelEXT", caps, 168)
-            && VK.isSupported(provider, "vkCmdBeginDebugUtilsLabelEXT", caps, 169)
-            && VK.isSupported(provider, "vkCmdEndDebugUtilsLabelEXT", caps, 170)
-            && VK.isSupported(provider, "vkCmdInsertDebugUtilsLabelEXT", caps, 171)
-        );
+        if (!capsInstance.VK_EXT_debug_utils) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            164, 165, 166, 167, 168, 169, 170, 171
+        },
+            "vkSetDebugUtilsObjectNameEXT", "vkSetDebugUtilsObjectTagEXT", "vkQueueBeginDebugUtilsLabelEXT", "vkQueueEndDebugUtilsLabelEXT", 
+            "vkQueueInsertDebugUtilsLabelEXT", "vkCmdBeginDebugUtilsLabelEXT", "vkCmdEndDebugUtilsLabelEXT", "vkCmdInsertDebugUtilsLabelEXT"
+        ) || reportMissing("VK", "VK_EXT_debug_utils");
     }
 
-    private static boolean check_EXT_discard_rectangles(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_discard_rectangles") && VK.checkExtension("VK_EXT_discard_rectangles",
-               VK.isSupported(provider, "vkCmdSetDiscardRectangleEXT", caps, 172)
-        );
+    private static boolean check_EXT_discard_rectangles(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_EXT_discard_rectangles")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            172
+        },
+            "vkCmdSetDiscardRectangleEXT"
+        ) || reportMissing("VK", "VK_EXT_discard_rectangles");
     }
 
-    private static boolean check_EXT_display_control(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_display_control") && VK.checkExtension("VK_EXT_display_control",
-               VK.isSupported(provider, "vkDisplayPowerControlEXT", caps, 173)
-            && VK.isSupported(provider, "vkRegisterDeviceEventEXT", caps, 174)
-            && VK.isSupported(provider, "vkRegisterDisplayEventEXT", caps, 175)
-            && VK.isSupported(provider, "vkGetSwapchainCounterEXT", caps, 176)
-        );
+    private static boolean check_EXT_display_control(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_EXT_display_control")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            173, 174, 175, 176
+        },
+            "vkDisplayPowerControlEXT", "vkRegisterDeviceEventEXT", "vkRegisterDisplayEventEXT", "vkGetSwapchainCounterEXT"
+        ) || reportMissing("VK", "VK_EXT_display_control");
     }
 
-    private static boolean check_EXT_external_memory_host(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_external_memory_host") && VK.checkExtension("VK_EXT_external_memory_host",
-               VK.isSupported(provider, "vkGetMemoryHostPointerPropertiesEXT", caps, 177)
-        );
+    private static boolean check_EXT_external_memory_host(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_EXT_external_memory_host")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            177
+        },
+            "vkGetMemoryHostPointerPropertiesEXT"
+        ) || reportMissing("VK", "VK_EXT_external_memory_host");
     }
 
-    private static boolean check_EXT_full_screen_exclusive(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_full_screen_exclusive") && VK.checkExtension("VK_EXT_full_screen_exclusive",
-               VK.isSupported(provider, "vkAcquireFullScreenExclusiveModeEXT", caps, 178)
-            && VK.isSupported(provider, "vkReleaseFullScreenExclusiveModeEXT", caps, 179)
-            && VK.isSupported(provider, "vkGetDeviceGroupSurfacePresentModes2EXT", caps, 180, ext.contains("Vulkan11") || ext.contains("VK_KHR_device_group"))
-        );
+    private static boolean check_EXT_full_screen_exclusive(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_EXT_full_screen_exclusive")) {
+            return false;
+        }
+
+        int flag0 = ext.contains("Vulkan11") || ext.contains("VK_KHR_device_group") ? 0 : Integer.MIN_VALUE;
+
+        return checkFunctions(provider, caps, new int[] {
+            178, 179, flag0 + 180
+        },
+            "vkAcquireFullScreenExclusiveModeEXT", "vkReleaseFullScreenExclusiveModeEXT", "vkGetDeviceGroupSurfacePresentModes2EXT"
+        ) || reportMissing("VK", "VK_EXT_full_screen_exclusive");
     }
 
-    private static boolean check_EXT_hdr_metadata(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_hdr_metadata") && VK.checkExtension("VK_EXT_hdr_metadata",
-               VK.isSupported(provider, "vkSetHdrMetadataEXT", caps, 181)
-        );
+    private static boolean check_EXT_hdr_metadata(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_EXT_hdr_metadata")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            181
+        },
+            "vkSetHdrMetadataEXT"
+        ) || reportMissing("VK", "VK_EXT_hdr_metadata");
     }
 
-    private static boolean check_EXT_host_query_reset(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_host_query_reset") && VK.checkExtension("VK_EXT_host_query_reset",
-               VK.isSupported(provider, "vkResetQueryPoolEXT", caps, 182)
-        );
+    private static boolean check_EXT_host_query_reset(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_EXT_host_query_reset")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            182
+        },
+            "vkResetQueryPoolEXT"
+        ) || reportMissing("VK", "VK_EXT_host_query_reset");
     }
 
-    private static boolean check_EXT_image_drm_format_modifier(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_image_drm_format_modifier") && VK.checkExtension("VK_EXT_image_drm_format_modifier",
-               VK.isSupported(provider, "vkGetImageDrmFormatModifierPropertiesEXT", caps, 183)
-        );
+    private static boolean check_EXT_image_drm_format_modifier(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_EXT_image_drm_format_modifier")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            183
+        },
+            "vkGetImageDrmFormatModifierPropertiesEXT"
+        ) || reportMissing("VK", "VK_EXT_image_drm_format_modifier");
     }
 
-    private static boolean check_EXT_line_rasterization(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_line_rasterization") && VK.checkExtension("VK_EXT_line_rasterization",
-               VK.isSupported(provider, "vkCmdSetLineStippleEXT", caps, 184)
-        );
+    private static boolean check_EXT_line_rasterization(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_EXT_line_rasterization")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            184
+        },
+            "vkCmdSetLineStippleEXT"
+        ) || reportMissing("VK", "VK_EXT_line_rasterization");
     }
 
-    private static boolean check_EXT_sample_locations(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_sample_locations") && VK.checkExtension("VK_EXT_sample_locations",
-               VK.isSupported(provider, "vkCmdSetSampleLocationsEXT", caps, 185)
-        );
+    private static boolean check_EXT_sample_locations(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_EXT_sample_locations")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            185
+        },
+            "vkCmdSetSampleLocationsEXT"
+        ) || reportMissing("VK", "VK_EXT_sample_locations");
     }
 
-    private static boolean check_EXT_transform_feedback(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_transform_feedback") && VK.checkExtension("VK_EXT_transform_feedback",
-               VK.isSupported(provider, "vkCmdBindTransformFeedbackBuffersEXT", caps, 186)
-            && VK.isSupported(provider, "vkCmdBeginTransformFeedbackEXT", caps, 187)
-            && VK.isSupported(provider, "vkCmdEndTransformFeedbackEXT", caps, 188)
-            && VK.isSupported(provider, "vkCmdBeginQueryIndexedEXT", caps, 189)
-            && VK.isSupported(provider, "vkCmdEndQueryIndexedEXT", caps, 190)
-            && VK.isSupported(provider, "vkCmdDrawIndirectByteCountEXT", caps, 191)
-        );
+    private static boolean check_EXT_transform_feedback(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_EXT_transform_feedback")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            186, 187, 188, 189, 190, 191
+        },
+            "vkCmdBindTransformFeedbackBuffersEXT", "vkCmdBeginTransformFeedbackEXT", "vkCmdEndTransformFeedbackEXT", "vkCmdBeginQueryIndexedEXT", 
+            "vkCmdEndQueryIndexedEXT", "vkCmdDrawIndirectByteCountEXT"
+        ) || reportMissing("VK", "VK_EXT_transform_feedback");
     }
 
-    private static boolean check_EXT_validation_cache(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_EXT_validation_cache") && VK.checkExtension("VK_EXT_validation_cache",
-               VK.isSupported(provider, "vkCreateValidationCacheEXT", caps, 192)
-            && VK.isSupported(provider, "vkDestroyValidationCacheEXT", caps, 193)
-            && VK.isSupported(provider, "vkMergeValidationCachesEXT", caps, 194)
-            && VK.isSupported(provider, "vkGetValidationCacheDataEXT", caps, 195)
-        );
+    private static boolean check_EXT_validation_cache(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_EXT_validation_cache")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            192, 193, 194, 195
+        },
+            "vkCreateValidationCacheEXT", "vkDestroyValidationCacheEXT", "vkMergeValidationCachesEXT", "vkGetValidationCacheDataEXT"
+        ) || reportMissing("VK", "VK_EXT_validation_cache");
     }
 
-    private static boolean check_GOOGLE_display_timing(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_GOOGLE_display_timing") && VK.checkExtension("VK_GOOGLE_display_timing",
-               VK.isSupported(provider, "vkGetRefreshCycleDurationGOOGLE", caps, 196)
-            && VK.isSupported(provider, "vkGetPastPresentationTimingGOOGLE", caps, 197)
-        );
+    private static boolean check_GOOGLE_display_timing(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_GOOGLE_display_timing")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            196, 197
+        },
+            "vkGetRefreshCycleDurationGOOGLE", "vkGetPastPresentationTimingGOOGLE"
+        ) || reportMissing("VK", "VK_GOOGLE_display_timing");
     }
 
-    private static boolean check_INTEL_performance_query(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_INTEL_performance_query") && VK.checkExtension("VK_INTEL_performance_query",
-               VK.isSupported(provider, "vkInitializePerformanceApiINTEL", caps, 198)
-            && VK.isSupported(provider, "vkUninitializePerformanceApiINTEL", caps, 199)
-            && VK.isSupported(provider, "vkCmdSetPerformanceMarkerINTEL", caps, 200)
-            && VK.isSupported(provider, "vkCmdSetPerformanceStreamMarkerINTEL", caps, 201)
-            && VK.isSupported(provider, "vkCmdSetPerformanceOverrideINTEL", caps, 202)
-            && VK.isSupported(provider, "vkAcquirePerformanceConfigurationINTEL", caps, 203)
-            && VK.isSupported(provider, "vkReleasePerformanceConfigurationINTEL", caps, 204)
-            && VK.isSupported(provider, "vkQueueSetPerformanceConfigurationINTEL", caps, 205)
-            && VK.isSupported(provider, "vkGetPerformanceParameterINTEL", caps, 206)
-        );
+    private static boolean check_INTEL_performance_query(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_INTEL_performance_query")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            198, 199, 200, 201, 202, 203, 204, 205, 206
+        },
+            "vkInitializePerformanceApiINTEL", "vkUninitializePerformanceApiINTEL", "vkCmdSetPerformanceMarkerINTEL", "vkCmdSetPerformanceStreamMarkerINTEL", 
+            "vkCmdSetPerformanceOverrideINTEL", "vkAcquirePerformanceConfigurationINTEL", "vkReleasePerformanceConfigurationINTEL", 
+            "vkQueueSetPerformanceConfigurationINTEL", "vkGetPerformanceParameterINTEL"
+        ) || reportMissing("VK", "VK_INTEL_performance_query");
     }
 
-    private static boolean check_KHR_bind_memory2(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_bind_memory2") && VK.checkExtension("VK_KHR_bind_memory2",
-               VK.isSupported(provider, "vkBindBufferMemory2KHR", caps, 207)
-            && VK.isSupported(provider, "vkBindImageMemory2KHR", caps, 208)
-        );
+    private static boolean check_KHR_bind_memory2(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_KHR_bind_memory2")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            207, 208
+        },
+            "vkBindBufferMemory2KHR", "vkBindImageMemory2KHR"
+        ) || reportMissing("VK", "VK_KHR_bind_memory2");
     }
 
-    private static boolean check_KHR_buffer_device_address(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_buffer_device_address") && VK.checkExtension("VK_KHR_buffer_device_address",
-               VK.isSupported(provider, "vkGetBufferDeviceAddressKHR", caps, 209)
-            && VK.isSupported(provider, "vkGetBufferOpaqueCaptureAddressKHR", caps, 210)
-            && VK.isSupported(provider, "vkGetDeviceMemoryOpaqueCaptureAddressKHR", caps, 211)
-        );
+    private static boolean check_KHR_buffer_device_address(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_KHR_buffer_device_address")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            209, 210, 211
+        },
+            "vkGetBufferDeviceAddressKHR", "vkGetBufferOpaqueCaptureAddressKHR", "vkGetDeviceMemoryOpaqueCaptureAddressKHR"
+        ) || reportMissing("VK", "VK_KHR_buffer_device_address");
     }
 
-    private static boolean check_KHR_create_renderpass2(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_create_renderpass2") && VK.checkExtension("VK_KHR_create_renderpass2",
-               VK.isSupported(provider, "vkCreateRenderPass2KHR", caps, 212)
-            && VK.isSupported(provider, "vkCmdBeginRenderPass2KHR", caps, 213)
-            && VK.isSupported(provider, "vkCmdNextSubpass2KHR", caps, 214)
-            && VK.isSupported(provider, "vkCmdEndRenderPass2KHR", caps, 215)
-        );
+    private static boolean check_KHR_create_renderpass2(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_KHR_create_renderpass2")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            212, 213, 214, 215
+        },
+            "vkCreateRenderPass2KHR", "vkCmdBeginRenderPass2KHR", "vkCmdNextSubpass2KHR", "vkCmdEndRenderPass2KHR"
+        ) || reportMissing("VK", "VK_KHR_create_renderpass2");
     }
 
-    private static boolean check_KHR_descriptor_update_template(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_descriptor_update_template") && VK.checkExtension("VK_KHR_descriptor_update_template",
-               VK.isSupported(provider, "vkCreateDescriptorUpdateTemplateKHR", caps, 216)
-            && VK.isSupported(provider, "vkDestroyDescriptorUpdateTemplateKHR", caps, 217)
-            && VK.isSupported(provider, "vkUpdateDescriptorSetWithTemplateKHR", caps, 218)
-            && VK.isSupported(provider, "vkCmdPushDescriptorSetWithTemplateKHR", caps, 219, ext.contains("VK_KHR_push_descriptor"))
-        );
+    private static boolean check_KHR_descriptor_update_template(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_KHR_descriptor_update_template")) {
+            return false;
+        }
+
+        int flag0 = ext.contains("VK_KHR_push_descriptor") ? 0 : Integer.MIN_VALUE;
+
+        return checkFunctions(provider, caps, new int[] {
+            216, 217, 218, flag0 + 219
+        },
+            "vkCreateDescriptorUpdateTemplateKHR", "vkDestroyDescriptorUpdateTemplateKHR", "vkUpdateDescriptorSetWithTemplateKHR", 
+            "vkCmdPushDescriptorSetWithTemplateKHR"
+        ) || reportMissing("VK", "VK_KHR_descriptor_update_template");
     }
 
-    private static boolean check_KHR_device_group(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_device_group") && VK.checkExtension("VK_KHR_device_group",
-               VK.isSupported(provider, "vkGetDeviceGroupPeerMemoryFeaturesKHR", caps, 220)
-            && VK.isSupported(provider, "vkCmdSetDeviceMaskKHR", caps, 221)
-            && VK.isSupported(provider, "vkCmdDispatchBaseKHR", caps, 222)
-            && VK.isSupported(provider, "vkGetDeviceGroupPresentCapabilitiesKHR", caps, 223, ext.contains("VK_KHR_surface"))
-            && VK.isSupported(provider, "vkGetDeviceGroupSurfacePresentModesKHR", caps, 224, ext.contains("VK_KHR_surface"))
-            && VK.isSupported(provider, "vkAcquireNextImage2KHR", caps, 225, ext.contains("VK_KHR_swapchain"))
-        );
+    private static boolean check_KHR_device_group(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_KHR_device_group")) {
+            return false;
+        }
+
+        int flag0 = ext.contains("VK_KHR_surface") ? 0 : Integer.MIN_VALUE;
+        int flag3 = ext.contains("VK_KHR_swapchain") ? 0 : Integer.MIN_VALUE;
+
+        return checkFunctions(provider, caps, new int[] {
+            220, 221, 222, flag0 + 223, flag0 + 224, flag3 + 225
+        },
+            "vkGetDeviceGroupPeerMemoryFeaturesKHR", "vkCmdSetDeviceMaskKHR", "vkCmdDispatchBaseKHR", "vkGetDeviceGroupPresentCapabilitiesKHR", 
+            "vkGetDeviceGroupSurfacePresentModesKHR", "vkAcquireNextImage2KHR"
+        ) || reportMissing("VK", "VK_KHR_device_group");
     }
 
-    private static boolean check_KHR_display_swapchain(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_display_swapchain") && VK.checkExtension("VK_KHR_display_swapchain",
-               VK.isSupported(provider, "vkCreateSharedSwapchainsKHR", caps, 226)
-        );
+    private static boolean check_KHR_display_swapchain(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_KHR_display_swapchain")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            226
+        },
+            "vkCreateSharedSwapchainsKHR"
+        ) || reportMissing("VK", "VK_KHR_display_swapchain");
     }
 
-    private static boolean check_KHR_draw_indirect_count(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_draw_indirect_count") && VK.checkExtension("VK_KHR_draw_indirect_count",
-               VK.isSupported(provider, "vkCmdDrawIndirectCountKHR", caps, 227)
-            && VK.isSupported(provider, "vkCmdDrawIndexedIndirectCountKHR", caps, 228)
-        );
+    private static boolean check_KHR_draw_indirect_count(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_KHR_draw_indirect_count")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            227, 228
+        },
+            "vkCmdDrawIndirectCountKHR", "vkCmdDrawIndexedIndirectCountKHR"
+        ) || reportMissing("VK", "VK_KHR_draw_indirect_count");
     }
 
-    private static boolean check_KHR_external_fence_fd(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_external_fence_fd") && VK.checkExtension("VK_KHR_external_fence_fd",
-               VK.isSupported(provider, "vkImportFenceFdKHR", caps, 229)
-            && VK.isSupported(provider, "vkGetFenceFdKHR", caps, 230)
-        );
+    private static boolean check_KHR_external_fence_fd(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_KHR_external_fence_fd")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            229, 230
+        },
+            "vkImportFenceFdKHR", "vkGetFenceFdKHR"
+        ) || reportMissing("VK", "VK_KHR_external_fence_fd");
     }
 
-    private static boolean check_KHR_external_fence_win32(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_external_fence_win32") && VK.checkExtension("VK_KHR_external_fence_win32",
-               VK.isSupported(provider, "vkImportFenceWin32HandleKHR", caps, 231)
-            && VK.isSupported(provider, "vkGetFenceWin32HandleKHR", caps, 232)
-        );
+    private static boolean check_KHR_external_fence_win32(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_KHR_external_fence_win32")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            231, 232
+        },
+            "vkImportFenceWin32HandleKHR", "vkGetFenceWin32HandleKHR"
+        ) || reportMissing("VK", "VK_KHR_external_fence_win32");
     }
 
-    private static boolean check_KHR_external_memory_fd(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_external_memory_fd") && VK.checkExtension("VK_KHR_external_memory_fd",
-               VK.isSupported(provider, "vkGetMemoryFdKHR", caps, 233)
-            && VK.isSupported(provider, "vkGetMemoryFdPropertiesKHR", caps, 234)
-        );
+    private static boolean check_KHR_external_memory_fd(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_KHR_external_memory_fd")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            233, 234
+        },
+            "vkGetMemoryFdKHR", "vkGetMemoryFdPropertiesKHR"
+        ) || reportMissing("VK", "VK_KHR_external_memory_fd");
     }
 
-    private static boolean check_KHR_external_memory_win32(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_external_memory_win32") && VK.checkExtension("VK_KHR_external_memory_win32",
-               VK.isSupported(provider, "vkGetMemoryWin32HandleKHR", caps, 235)
-            && VK.isSupported(provider, "vkGetMemoryWin32HandlePropertiesKHR", caps, 236)
-        );
+    private static boolean check_KHR_external_memory_win32(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_KHR_external_memory_win32")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            235, 236
+        },
+            "vkGetMemoryWin32HandleKHR", "vkGetMemoryWin32HandlePropertiesKHR"
+        ) || reportMissing("VK", "VK_KHR_external_memory_win32");
     }
 
-    private static boolean check_KHR_external_semaphore_fd(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_external_semaphore_fd") && VK.checkExtension("VK_KHR_external_semaphore_fd",
-               VK.isSupported(provider, "vkImportSemaphoreFdKHR", caps, 237)
-            && VK.isSupported(provider, "vkGetSemaphoreFdKHR", caps, 238)
-        );
+    private static boolean check_KHR_external_semaphore_fd(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_KHR_external_semaphore_fd")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            237, 238
+        },
+            "vkImportSemaphoreFdKHR", "vkGetSemaphoreFdKHR"
+        ) || reportMissing("VK", "VK_KHR_external_semaphore_fd");
     }
 
-    private static boolean check_KHR_external_semaphore_win32(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_external_semaphore_win32") && VK.checkExtension("VK_KHR_external_semaphore_win32",
-               VK.isSupported(provider, "vkImportSemaphoreWin32HandleKHR", caps, 239)
-            && VK.isSupported(provider, "vkGetSemaphoreWin32HandleKHR", caps, 240)
-        );
+    private static boolean check_KHR_external_semaphore_win32(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_KHR_external_semaphore_win32")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            239, 240
+        },
+            "vkImportSemaphoreWin32HandleKHR", "vkGetSemaphoreWin32HandleKHR"
+        ) || reportMissing("VK", "VK_KHR_external_semaphore_win32");
     }
 
-    private static boolean check_KHR_get_memory_requirements2(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_get_memory_requirements2") && VK.checkExtension("VK_KHR_get_memory_requirements2",
-               VK.isSupported(provider, "vkGetImageMemoryRequirements2KHR", caps, 241)
-            && VK.isSupported(provider, "vkGetBufferMemoryRequirements2KHR", caps, 242)
-            && VK.isSupported(provider, "vkGetImageSparseMemoryRequirements2KHR", caps, 243)
-        );
+    private static boolean check_KHR_get_memory_requirements2(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_KHR_get_memory_requirements2")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            241, 242, 243
+        },
+            "vkGetImageMemoryRequirements2KHR", "vkGetBufferMemoryRequirements2KHR", "vkGetImageSparseMemoryRequirements2KHR"
+        ) || reportMissing("VK", "VK_KHR_get_memory_requirements2");
     }
 
-    private static boolean check_KHR_maintenance1(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_maintenance1") && VK.checkExtension("VK_KHR_maintenance1",
-               VK.isSupported(provider, "vkTrimCommandPoolKHR", caps, 244)
-        );
+    private static boolean check_KHR_maintenance1(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_KHR_maintenance1")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            244
+        },
+            "vkTrimCommandPoolKHR"
+        ) || reportMissing("VK", "VK_KHR_maintenance1");
     }
 
-    private static boolean check_KHR_maintenance3(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_maintenance3") && VK.checkExtension("VK_KHR_maintenance3",
-               VK.isSupported(provider, "vkGetDescriptorSetLayoutSupportKHR", caps, 245)
-        );
+    private static boolean check_KHR_maintenance3(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_KHR_maintenance3")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            245
+        },
+            "vkGetDescriptorSetLayoutSupportKHR"
+        ) || reportMissing("VK", "VK_KHR_maintenance3");
     }
 
-    private static boolean check_KHR_performance_query(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_performance_query") && VK.checkExtension("VK_KHR_performance_query",
-               VK.isSupported(provider, "vkAcquireProfilingLockKHR", caps, 246)
-            && VK.isSupported(provider, "vkReleaseProfilingLockKHR", caps, 247)
-        );
+    private static boolean check_KHR_performance_query(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_KHR_performance_query")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            246, 247
+        },
+            "vkAcquireProfilingLockKHR", "vkReleaseProfilingLockKHR"
+        ) || reportMissing("VK", "VK_KHR_performance_query");
     }
 
-    private static boolean check_KHR_pipeline_executable_properties(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_pipeline_executable_properties") && VK.checkExtension("VK_KHR_pipeline_executable_properties",
-               VK.isSupported(provider, "vkGetPipelineExecutablePropertiesKHR", caps, 248)
-            && VK.isSupported(provider, "vkGetPipelineExecutableStatisticsKHR", caps, 249)
-            && VK.isSupported(provider, "vkGetPipelineExecutableInternalRepresentationsKHR", caps, 250)
-        );
+    private static boolean check_KHR_pipeline_executable_properties(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_KHR_pipeline_executable_properties")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            248, 249, 250
+        },
+            "vkGetPipelineExecutablePropertiesKHR", "vkGetPipelineExecutableStatisticsKHR", "vkGetPipelineExecutableInternalRepresentationsKHR"
+        ) || reportMissing("VK", "VK_KHR_pipeline_executable_properties");
     }
 
-    private static boolean check_KHR_push_descriptor(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_push_descriptor") && VK.checkExtension("VK_KHR_push_descriptor",
-               VK.isSupported(provider, "vkCmdPushDescriptorSetKHR", caps, 251)
-            && VK.isSupported(provider, "vkCmdPushDescriptorSetWithTemplateKHR", caps, 219, ext.contains("Vulkan11"))
-        );
+    private static boolean check_KHR_push_descriptor(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_KHR_push_descriptor")) {
+            return false;
+        }
+
+        int flag0 = ext.contains("Vulkan11") ? 0 : Integer.MIN_VALUE;
+
+        return checkFunctions(provider, caps, new int[] {
+            251, flag0 + 219
+        },
+            "vkCmdPushDescriptorSetKHR", "vkCmdPushDescriptorSetWithTemplateKHR"
+        ) || reportMissing("VK", "VK_KHR_push_descriptor");
     }
 
-    private static boolean check_KHR_sampler_ycbcr_conversion(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_sampler_ycbcr_conversion") && VK.checkExtension("VK_KHR_sampler_ycbcr_conversion",
-               VK.isSupported(provider, "vkCreateSamplerYcbcrConversionKHR", caps, 252)
-            && VK.isSupported(provider, "vkDestroySamplerYcbcrConversionKHR", caps, 253)
-        );
+    private static boolean check_KHR_sampler_ycbcr_conversion(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_KHR_sampler_ycbcr_conversion")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            252, 253
+        },
+            "vkCreateSamplerYcbcrConversionKHR", "vkDestroySamplerYcbcrConversionKHR"
+        ) || reportMissing("VK", "VK_KHR_sampler_ycbcr_conversion");
     }
 
-    private static boolean check_KHR_shared_presentable_image(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_shared_presentable_image") && VK.checkExtension("VK_KHR_shared_presentable_image",
-               VK.isSupported(provider, "vkGetSwapchainStatusKHR", caps, 254)
-        );
+    private static boolean check_KHR_shared_presentable_image(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_KHR_shared_presentable_image")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            254
+        },
+            "vkGetSwapchainStatusKHR"
+        ) || reportMissing("VK", "VK_KHR_shared_presentable_image");
     }
 
-    private static boolean check_KHR_swapchain(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_swapchain") && VK.checkExtension("VK_KHR_swapchain",
-               VK.isSupported(provider, "vkCreateSwapchainKHR", caps, 255)
-            && VK.isSupported(provider, "vkDestroySwapchainKHR", caps, 256)
-            && VK.isSupported(provider, "vkGetSwapchainImagesKHR", caps, 257)
-            && VK.isSupported(provider, "vkAcquireNextImageKHR", caps, 258)
-            && VK.isSupported(provider, "vkQueuePresentKHR", caps, 259)
-            && VK.isSupported(provider, "vkGetDeviceGroupPresentCapabilitiesKHR", caps, 223, ext.contains("Vulkan11"))
-            && VK.isSupported(provider, "vkGetDeviceGroupSurfacePresentModesKHR", caps, 224, ext.contains("Vulkan11"))
-            && VK.isSupported(provider, "vkAcquireNextImage2KHR", caps, 225, ext.contains("Vulkan11"))
-        );
+    private static boolean check_KHR_swapchain(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_KHR_swapchain")) {
+            return false;
+        }
+
+        int flag0 = ext.contains("Vulkan11") ? 0 : Integer.MIN_VALUE;
+
+        return checkFunctions(provider, caps, new int[] {
+            255, 256, 257, 258, 259, flag0 + 223, flag0 + 224, flag0 + 225
+        },
+            "vkCreateSwapchainKHR", "vkDestroySwapchainKHR", "vkGetSwapchainImagesKHR", "vkAcquireNextImageKHR", "vkQueuePresentKHR", 
+            "vkGetDeviceGroupPresentCapabilitiesKHR", "vkGetDeviceGroupSurfacePresentModesKHR", "vkAcquireNextImage2KHR"
+        ) || reportMissing("VK", "VK_KHR_swapchain");
     }
 
-    private static boolean check_KHR_timeline_semaphore(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_KHR_timeline_semaphore") && VK.checkExtension("VK_KHR_timeline_semaphore",
-               VK.isSupported(provider, "vkGetSemaphoreCounterValueKHR", caps, 260)
-            && VK.isSupported(provider, "vkWaitSemaphoresKHR", caps, 261)
-            && VK.isSupported(provider, "vkSignalSemaphoreKHR", caps, 262)
-        );
+    private static boolean check_KHR_timeline_semaphore(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_KHR_timeline_semaphore")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            260, 261, 262
+        },
+            "vkGetSemaphoreCounterValueKHR", "vkWaitSemaphoresKHR", "vkSignalSemaphoreKHR"
+        ) || reportMissing("VK", "VK_KHR_timeline_semaphore");
     }
 
-    private static boolean check_NV_clip_space_w_scaling(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_NV_clip_space_w_scaling") && VK.checkExtension("VK_NV_clip_space_w_scaling",
-               VK.isSupported(provider, "vkCmdSetViewportWScalingNV", caps, 263)
-        );
+    private static boolean check_NV_clip_space_w_scaling(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_NV_clip_space_w_scaling")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            263
+        },
+            "vkCmdSetViewportWScalingNV"
+        ) || reportMissing("VK", "VK_NV_clip_space_w_scaling");
     }
 
-    private static boolean check_NV_device_diagnostic_checkpoints(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_NV_device_diagnostic_checkpoints") && VK.checkExtension("VK_NV_device_diagnostic_checkpoints",
-               VK.isSupported(provider, "vkCmdSetCheckpointNV", caps, 264)
-            && VK.isSupported(provider, "vkGetQueueCheckpointDataNV", caps, 265)
-        );
+    private static boolean check_NV_device_diagnostic_checkpoints(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_NV_device_diagnostic_checkpoints")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            264, 265
+        },
+            "vkCmdSetCheckpointNV", "vkGetQueueCheckpointDataNV"
+        ) || reportMissing("VK", "VK_NV_device_diagnostic_checkpoints");
     }
 
-    private static boolean check_NV_external_memory_win32(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_NV_external_memory_win32") && VK.checkExtension("VK_NV_external_memory_win32",
-               VK.isSupported(provider, "vkGetMemoryWin32HandleNV", caps, 266)
-        );
+    private static boolean check_NV_external_memory_win32(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_NV_external_memory_win32")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            266
+        },
+            "vkGetMemoryWin32HandleNV"
+        ) || reportMissing("VK", "VK_NV_external_memory_win32");
     }
 
-    private static boolean check_NV_mesh_shader(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_NV_mesh_shader") && VK.checkExtension("VK_NV_mesh_shader",
-               VK.isSupported(provider, "vkCmdDrawMeshTasksNV", caps, 267)
-            && VK.isSupported(provider, "vkCmdDrawMeshTasksIndirectNV", caps, 268)
-            && VK.isSupported(provider, "vkCmdDrawMeshTasksIndirectCountNV", caps, 269)
-        );
+    private static boolean check_NV_mesh_shader(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_NV_mesh_shader")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            267, 268, 269
+        },
+            "vkCmdDrawMeshTasksNV", "vkCmdDrawMeshTasksIndirectNV", "vkCmdDrawMeshTasksIndirectCountNV"
+        ) || reportMissing("VK", "VK_NV_mesh_shader");
     }
 
-    private static boolean check_NV_ray_tracing(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_NV_ray_tracing") && VK.checkExtension("VK_NV_ray_tracing",
-               VK.isSupported(provider, "vkCreateAccelerationStructureNV", caps, 270)
-            && VK.isSupported(provider, "vkDestroyAccelerationStructureNV", caps, 271)
-            && VK.isSupported(provider, "vkGetAccelerationStructureMemoryRequirementsNV", caps, 272)
-            && VK.isSupported(provider, "vkBindAccelerationStructureMemoryNV", caps, 273)
-            && VK.isSupported(provider, "vkCmdBuildAccelerationStructureNV", caps, 274)
-            && VK.isSupported(provider, "vkCmdCopyAccelerationStructureNV", caps, 275)
-            && VK.isSupported(provider, "vkCmdTraceRaysNV", caps, 276)
-            && VK.isSupported(provider, "vkCreateRayTracingPipelinesNV", caps, 277)
-            && VK.isSupported(provider, "vkGetRayTracingShaderGroupHandlesNV", caps, 278)
-            && VK.isSupported(provider, "vkGetAccelerationStructureHandleNV", caps, 279)
-            && VK.isSupported(provider, "vkCmdWriteAccelerationStructuresPropertiesNV", caps, 280)
-            && VK.isSupported(provider, "vkCompileDeferredNV", caps, 281)
-        );
+    private static boolean check_NV_ray_tracing(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_NV_ray_tracing")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281
+        },
+            "vkCreateAccelerationStructureNV", "vkDestroyAccelerationStructureNV", "vkGetAccelerationStructureMemoryRequirementsNV", 
+            "vkBindAccelerationStructureMemoryNV", "vkCmdBuildAccelerationStructureNV", "vkCmdCopyAccelerationStructureNV", "vkCmdTraceRaysNV", 
+            "vkCreateRayTracingPipelinesNV", "vkGetRayTracingShaderGroupHandlesNV", "vkGetAccelerationStructureHandleNV", 
+            "vkCmdWriteAccelerationStructuresPropertiesNV", "vkCompileDeferredNV"
+        ) || reportMissing("VK", "VK_NV_ray_tracing");
     }
 
-    private static boolean check_NV_scissor_exclusive(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_NV_scissor_exclusive") && VK.checkExtension("VK_NV_scissor_exclusive",
-               VK.isSupported(provider, "vkCmdSetExclusiveScissorNV", caps, 282)
-        );
+    private static boolean check_NV_scissor_exclusive(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_NV_scissor_exclusive")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            282
+        },
+            "vkCmdSetExclusiveScissorNV"
+        ) || reportMissing("VK", "VK_NV_scissor_exclusive");
     }
 
-    private static boolean check_NV_shading_rate_image(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_NV_shading_rate_image") && VK.checkExtension("VK_NV_shading_rate_image",
-               VK.isSupported(provider, "vkCmdBindShadingRateImageNV", caps, 283)
-            && VK.isSupported(provider, "vkCmdSetViewportShadingRatePaletteNV", caps, 284)
-            && VK.isSupported(provider, "vkCmdSetCoarseSampleOrderNV", caps, 285)
-        );
+    private static boolean check_NV_shading_rate_image(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_NV_shading_rate_image")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            283, 284, 285
+        },
+            "vkCmdBindShadingRateImageNV", "vkCmdSetViewportShadingRatePaletteNV", "vkCmdSetCoarseSampleOrderNV"
+        ) || reportMissing("VK", "VK_NV_shading_rate_image");
     }
 
-    private static boolean check_NVX_device_generated_commands(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_NVX_device_generated_commands") && VK.checkExtension("VK_NVX_device_generated_commands",
-               VK.isSupported(provider, "vkCmdProcessCommandsNVX", caps, 286)
-            && VK.isSupported(provider, "vkCmdReserveSpaceForCommandsNVX", caps, 287)
-            && VK.isSupported(provider, "vkCreateIndirectCommandsLayoutNVX", caps, 288)
-            && VK.isSupported(provider, "vkDestroyIndirectCommandsLayoutNVX", caps, 289)
-            && VK.isSupported(provider, "vkCreateObjectTableNVX", caps, 290)
-            && VK.isSupported(provider, "vkDestroyObjectTableNVX", caps, 291)
-            && VK.isSupported(provider, "vkRegisterObjectsNVX", caps, 292)
-            && VK.isSupported(provider, "vkUnregisterObjectsNVX", caps, 293)
-        );
+    private static boolean check_NVX_device_generated_commands(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_NVX_device_generated_commands")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            286, 287, 288, 289, 290, 291, 292, 293
+        },
+            "vkCmdProcessCommandsNVX", "vkCmdReserveSpaceForCommandsNVX", "vkCreateIndirectCommandsLayoutNVX", "vkDestroyIndirectCommandsLayoutNVX", 
+            "vkCreateObjectTableNVX", "vkDestroyObjectTableNVX", "vkRegisterObjectsNVX", "vkUnregisterObjectsNVX"
+        ) || reportMissing("VK", "VK_NVX_device_generated_commands");
     }
 
-    private static boolean check_NVX_image_view_handle(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("VK_NVX_image_view_handle") && VK.checkExtension("VK_NVX_image_view_handle",
-               VK.isSupported(provider, "vkGetImageViewHandleNVX", caps, 294)
-        );
+    private static boolean check_NVX_image_view_handle(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_NVX_image_view_handle")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            294
+        },
+            "vkGetImageViewHandleNVX"
+        ) || reportMissing("VK", "VK_NVX_image_view_handle");
     }
 
 }

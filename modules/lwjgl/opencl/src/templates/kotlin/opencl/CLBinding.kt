@@ -66,7 +66,7 @@ private val CLBinding = Generator.register(object : APIBinding(
     private fun PrintWriter.checkExtensionFunctions(nativeClass: NativeClass) {
         val capName = nativeClass.capName
 
-        println("\n${t}private boolean check_${nativeClass.templateName}(java.util.Set<String> ext) {")
+        println("\n${t}private boolean check_${nativeClass.templateName}(Set<String> ext) {")
         print("$t${t}return ext.contains(\"$capName\") && checkExtension(\"$capName\", checkFunctions(")
         nativeClass.printPointers(this, { it.name })
         println("));")

@@ -45,6 +45,35 @@ private val Func.isDeviceFunction get() = type === DEVICE && !has<Macro>()
 
 private val EXTENSION_NAME = "[A-Za-z0-9_]+".toRegex()
 
+private fun getFunctionDependencyExpression(func: Func) = func.get<DependsOn>()
+    .reference
+    .let { expression ->
+        if (EXTENSION_NAME.matches(expression))
+            "ext.contains(\"$expression\")"
+        else
+            expression
+    }
+
+private fun PrintWriter.printCheckFunctions(
+    nativeClass: NativeClass,
+    commands: Map<String, Int>,
+    dependencies: LinkedHashMap<String, Int>,
+    filter: (Func) -> Boolean
+) {
+    print("checkFunctions(provider, caps, new int[] {")
+    nativeClass.printPointers(this, { func ->
+        val index = commands[func.name]
+        if (func.has<DependsOn>()) {
+            "flag${dependencies[getFunctionDependencyExpression(func)]} + $index"
+        } else{
+            index.toString()
+        }
+    }, filter)
+    print("},")
+    nativeClass.printPointers(this, { "\"${it.name}\"" }, filter)
+    print(")")
+}
+
 val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
     Module.VULKAN,
     CAPS_INSTANCE,
@@ -67,19 +96,30 @@ val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
 
         print("""
     private static boolean check_${nativeClass.templateName}(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
-        return ext.contains("$capName") && VK.checkExtension("$capName",""")
-        nativeClass.functions
-            .filter { it.isInstanceFunction }
-            .forEachIndexed { index, it ->
-                print("\n$t$t$t${if (index == 0) "   " else "&& "}VK.isSupported(provider, \"${it.name}\", caps, ${commands[it.name]}")
-                if (it.has<DependsOn>()) {
-                    print(", ${it.get<DependsOn>().reference.let { if (EXTENSION_NAME.matches(it)) "ext.contains(\"$it\")" else it }}")
+        if (!ext.contains("$capName")) {
+            return false;
+        }""")
+
+        val dependencies = nativeClass.functions
+            .filter { it.has<DependsOn>() }
+            .map(::getFunctionDependencyExpression)
+            .foldIndexed(LinkedHashMap<String, Int>()) { index, map, expression ->
+                if (!map.containsKey(expression)) {
+                    map[expression] = index
                 }
-                print(")")
+                map
             }
-        println("""
-        );
-    }""")
+        if (dependencies.isNotEmpty()) {
+            println()
+            dependencies.forEach { (expression, index) ->
+                print("\n$t${t}int flag$index = $expression ? 0 : Integer.MIN_VALUE;")
+            }
+        }
+
+        print("\n\n$t${t}return ")
+        printCheckFunctions(nativeClass, commands, dependencies) { it.isInstanceFunction }
+        println(" || reportMissing(\"VK\", \"$capName\");")
+        println("$t}")
     }
 
     init {
@@ -191,30 +231,39 @@ val VK_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.VULKA
         print("""
     private static boolean check_${nativeClass.templateName}(FunctionProvider provider, long[] caps""")
         if (isDeviceExtension || hasDependencies) {
-            print(", java.util.Set<String> ext")
+            print(", Set<String> ext")
         } else if (!isDeviceExtension) {
             print(", VKCapabilitiesInstance capsInstance")
         }
         print(""") {
-        return """)
-        if (isDeviceExtension) {
-            print("ext.contains(\"$capName\")")
+        if (!${if (isDeviceExtension) {
+            "ext.contains(\"$capName\")"
         } else {
-            print("capsInstance.$capName")
-        }
-        print(""" && VK.checkExtension("$capName",""")
-        nativeClass.functions
-            .filter { it.isDeviceFunction }
-            .forEachIndexed { index, it ->
-                print("\n$t$t$t${if (index == 0) "   " else "&& "}VK.isSupported(provider, \"${it.name}\", caps, ${commands[it.name]}")
-                if (it.has<DependsOn>()) {
-                    print(", ${it.get<DependsOn>().reference.let { if (EXTENSION_NAME.matches(it)) "ext.contains(\"$it\")" else it }}")
+            "capsInstance.$capName"
+        }}) {
+            return false;
+        }""")
+
+        val dependencies = nativeClass.functions
+            .filter { it.has<DependsOn>() }
+            .map(::getFunctionDependencyExpression)
+            .foldIndexed(LinkedHashMap<String, Int>()) { index, map, expression ->
+                if (!map.containsKey(expression)) {
+                    map[expression] = index
                 }
-                print(")")
+                map
             }
-        println("""
-        );
-    }""")
+        if (dependencies.isNotEmpty()) {
+            println()
+            dependencies.forEach { (expression, index) ->
+                print("\n$t${t}int flag$index = $expression ? 0 : Integer.MIN_VALUE;")
+            }
+        }
+
+        print("\n\n$t${t}return ")
+        printCheckFunctions(nativeClass, commands, dependencies) { it.isDeviceFunction }
+        println(" || reportMissing(\"VK\", \"$capName\");")
+        println("$t}")
     }
 
     init {

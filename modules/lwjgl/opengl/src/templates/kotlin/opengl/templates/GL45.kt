@@ -246,7 +246,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
     GL45C reuse "GetGraphicsResetStatus"
 
     var src = GL11["GetMapdv"]
-    DependsOn("glGetMapdv != NULL")..IgnoreMissing..void(
+    DependsOn("provider.getFunctionAddress(\"glGetMapdv\") != NULL")..IgnoreMissing..void(
         "GetnMapdv",
         "Robust version of ${src.javaDocLink}",
 
@@ -257,7 +257,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
     )
 
     src = GL11["GetMapfv"]
-    DependsOn("glGetMapfv != NULL")..IgnoreMissing..void(
+    DependsOn("provider.getFunctionAddress(\"glGetMapfv\") != NULL")..IgnoreMissing..void(
         "GetnMapfv",
         "Robust version of ${src.javaDocLink}",
 
@@ -268,7 +268,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
     )
 
     src = GL11["GetMapiv"]
-    DependsOn("glGetMapiv != NULL")..IgnoreMissing..void(
+    DependsOn("provider.getFunctionAddress(\"glGetMapiv\") != NULL")..IgnoreMissing..void(
         "GetnMapiv",
         "Robust version of ${src.javaDocLink}",
 
@@ -279,7 +279,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
     )
 
     src = GL11["GetPixelMapfv"]
-    DependsOn("glGetPixelMapfv != NULL")..IgnoreMissing..void(
+    DependsOn("provider.getFunctionAddress(\"glGetPixelMapfv\") != NULL")..IgnoreMissing..void(
         "GetnPixelMapfv",
         "Robust version of ${src.javaDocLink}",
 
@@ -289,7 +289,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
     )
 
     src = GL11["GetPixelMapuiv"]
-    DependsOn("glGetPixelMapuiv != NULL")..IgnoreMissing..void(
+    DependsOn("provider.getFunctionAddress(\"glGetPixelMapuiv\") != NULL")..IgnoreMissing..void(
         "GetnPixelMapuiv",
         "Robust version of ${src.javaDocLink}",
 
@@ -299,7 +299,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
     )
 
     src = GL11["GetPixelMapusv"]
-    DependsOn("glGetPixelMapusv != NULL")..IgnoreMissing..void(
+    DependsOn("provider.getFunctionAddress(\"glGetPixelMapusv\") != NULL")..IgnoreMissing..void(
         "GetnPixelMapusv",
         "Robust version of ${src.javaDocLink}",
 
@@ -309,7 +309,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
     )
 
     src = GL11["GetPolygonStipple"]
-    DependsOn("glGetPolygonStipple != NULL")..IgnoreMissing..void(
+    DependsOn("provider.getFunctionAddress(\"glGetPolygonStipple\") != NULL")..IgnoreMissing..void(
         "GetnPolygonStipple",
         "Robust version of ${src.javaDocLink}",
 
@@ -321,7 +321,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
     GL45C reuse "ReadnPixels"
 
     src = ARB_imaging["GetColorTable"]
-    DependsOn("ext.contains(\"GL_ARB_imaging\") && glGetColorTable != NULL")..IgnoreMissing..void(
+    DependsOn("ext.contains(\"GL_ARB_imaging\") && provider.getFunctionAddress(\"glGetColorTable\") != NULL")..IgnoreMissing..void(
         "GetnColorTable",
         "Robust version of ${src.javaDocLink}",
 
@@ -333,7 +333,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
     )
 
     src = ARB_imaging["GetConvolutionFilter"]
-    DependsOn("ext.contains(\"GL_ARB_imaging\") && glGetConvolutionFilter != NULL")..IgnoreMissing..void(
+    DependsOn("ext.contains(\"GL_ARB_imaging\") && provider.getFunctionAddress(\"glGetConvolutionFilter\") != NULL")..IgnoreMissing..void(
         "GetnConvolutionFilter",
         "Robust version of ${src.javaDocLink}",
 
@@ -345,7 +345,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
     )
 
     src = ARB_imaging["GetSeparableFilter"]
-    DependsOn("ext.contains(\"GL_ARB_imaging\") && glGetSeparableFilter != NULL")..IgnoreMissing..void(
+    DependsOn("ext.contains(\"GL_ARB_imaging\") && provider.getFunctionAddress(\"glGetSeparableFilter\") != NULL")..IgnoreMissing..void(
         "GetnSeparableFilter",
         "Robust version of ${src.javaDocLink}",
 
@@ -360,7 +360,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
     )
 
     src = ARB_imaging["GetHistogram"]
-    DependsOn("ext.contains(\"GL_ARB_imaging\") && glGetHistogram != NULL")..IgnoreMissing..void(
+    DependsOn("ext.contains(\"GL_ARB_imaging\") && provider.getFunctionAddress(\"glGetHistogram\") != NULL")..IgnoreMissing..void(
         "GetnHistogram",
         "Robust version of ${src.javaDocLink}",
 
@@ -373,7 +373,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
     )
 
     src = ARB_imaging["GetMinmax"]
-    DependsOn("ext.contains(\"GL_ARB_imaging\") && glGetMinmax != NULL")..IgnoreMissing..void(
+    DependsOn("ext.contains(\"GL_ARB_imaging\") && provider.getFunctionAddress(\"glGetMinmax\") != NULL")..IgnoreMissing..void(
         "GetnMinmax",
         "Robust version of ${src.javaDocLink}",
 

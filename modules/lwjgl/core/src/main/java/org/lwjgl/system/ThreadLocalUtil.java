@@ -6,10 +6,6 @@ package org.lwjgl.system;
 
 import org.lwjgl.*;
 
-import java.lang.reflect.*;
-import java.util.*;
-import java.util.function.*;
-
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.Pointer.*;
@@ -170,16 +166,6 @@ public final class ThreadLocalUtil {
         }
     }
 
-    public static List<Field> getFieldsFromCapabilities(Class<?> capabilitiesClass, int functionCount) {
-        List<Field> fields = new ArrayList<>(functionCount);
-        for (Field field : capabilitiesClass.getFields()) {
-            if (field.getType() == long.class) {
-                fields.add(field);
-            }
-        }
-        return fields;
-    }
-
     // Ensures FUNCTION_MISSING_ABORT will be called even if no context is current,
     public static void setFunctionMissingAddresses(int functionCount, int index) {
         if (functionCount == 0) {
@@ -198,18 +184,12 @@ public final class ThreadLocalUtil {
         }
     }
 
-    public static PointerBuffer getAddressesFromCapabilities(Object caps, List<Field> fields, IntFunction<PointerBuffer> bufferFactory) {
-        PointerBuffer addresses = bufferFactory.apply(fields.size());
-
-        try {
-            for (int i = 0; i < fields.size(); i++) {
-                long a = fields.get(i).getLong(caps);
-                addresses.put(i, a != NULL ? a : FUNCTION_MISSING_ABORT);
+    public static PointerBuffer setupAddressBuffer(PointerBuffer addresses) {
+        for (int i = addresses.position(); i < addresses.limit(); i++) {
+            if (addresses.get(i) == NULL) {
+                addresses.put(i, FUNCTION_MISSING_ABORT);
             }
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
         }
-
         return addresses;
     }
 

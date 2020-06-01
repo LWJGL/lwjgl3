@@ -216,14 +216,22 @@ public final class CL {
         icd = null;
     }
 
+    static <T> T check(@Nullable T t) {
+        if (t == null) {
+            throw new IllegalStateException("OpenCL library has not been loaded.");
+        }
+        return t;
+    }
+
     /** Returns the {@link FunctionProviderLocal} for the OpenCL native library. */
-    @Nullable
     public static FunctionProviderLocal getFunctionProvider() {
-        return functionProvider;
+        return check(functionProvider);
     }
 
     /** Returns the {@link CLCapabilities} of the ICD. */
-    @Nullable public static CLCapabilities getICD() { return icd; }
+    public static CLCapabilities getICD() {
+        return check(icd);
+    }
 
     /**
      * Creates a {@link CLCapabilities} instance for the specified OpenCL platform.

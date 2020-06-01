@@ -9,6 +9,7 @@ import org.lwjgl.*;
 import javax.annotation.*;
 import java.nio.*;
 
+import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.CheckIntrinsics.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
@@ -86,6 +87,61 @@ public final class Checks {
             }
         }
         return true;
+    }
+
+    /**
+     * Checks if all functions are available in the function provider.
+     *
+     * @param provider  the function address provider
+     * @param caps      the function address buffer
+     * @param indices   the function indices
+     * @param functions the function names
+     *
+     * @return true if all functions are available, false otherwise
+     */
+    public static boolean checkFunctions(FunctionProvider provider, PointerBuffer caps, int[] indices, String... functions) {
+        for (int i = 0; i < indices.length; i++) {
+            int index = indices[i];
+            if (index < 0 || caps.get(index) != NULL) {
+                continue;
+            }
+            long address = provider.getFunctionAddress(functions[i]);
+            if (address == NULL) {
+                return false;
+            }
+            caps.put(index, address);
+        }
+        return true;
+    }
+
+    /**
+     * Checks if all functions are available in the function provider.
+     *
+     * @param provider  the function address provider
+     * @param caps      the function address buffer
+     * @param indices   the function indices
+     * @param functions the function names
+     *
+     * @return true if all functions are available, false otherwise
+     */
+    public static boolean checkFunctions(FunctionProvider provider, long[] caps, int[] indices, String... functions) {
+        for (int i = 0; i < indices.length; i++) {
+            int index = indices[i];
+            if (index < 0 || caps[index] != NULL) {
+                continue;
+            }
+            long address = provider.getFunctionAddress(functions[i]);
+            if (address == NULL) {
+                return false;
+            }
+            caps[index] = address;
+        }
+        return true;
+    }
+
+    public static boolean reportMissing(String api, String extension) {
+        apiLog("[" + api + "] " + extension + " was reported as available but an entry point is missing.");
+        return false;
     }
 
     /**

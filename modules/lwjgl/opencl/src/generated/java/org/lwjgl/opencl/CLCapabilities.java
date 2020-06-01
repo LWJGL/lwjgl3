@@ -1435,7 +1435,7 @@ public class CLCapabilities {
         return false;
     }
 
-    private boolean check_CL10(java.util.Set<String> ext) {
+    private boolean check_CL10(Set<String> ext) {
         return ext.contains("OpenCL10") && checkExtension("OpenCL10", checkFunctions(
             clGetPlatformIDs, clGetPlatformInfo, clGetDeviceIDs, clGetDeviceInfo, clCreateContext, clCreateContextFromType, clRetainContext, clReleaseContext, 
             clGetContextInfo, clCreateCommandQueue, clRetainCommandQueue, clReleaseCommandQueue, clGetCommandQueueInfo, clCreateBuffer, clEnqueueReadBuffer, 
@@ -1450,21 +1450,21 @@ public class CLCapabilities {
         ));
     }
 
-    private boolean check_CL10GL(java.util.Set<String> ext) {
+    private boolean check_CL10GL(Set<String> ext) {
         return ext.contains("OpenCL10GL") && checkExtension("OpenCL10GL", checkFunctions(
             clCreateFromGLBuffer, clCreateFromGLTexture2D, clCreateFromGLTexture3D, clCreateFromGLRenderbuffer, clGetGLObjectInfo, clGetGLTextureInfo, 
             clEnqueueAcquireGLObjects, clEnqueueReleaseGLObjects
         ));
     }
 
-    private boolean check_CL11(java.util.Set<String> ext) {
+    private boolean check_CL11(Set<String> ext) {
         return ext.contains("OpenCL11") && checkExtension("OpenCL11", checkFunctions(
             clCreateSubBuffer, clSetMemObjectDestructorCallback, clEnqueueReadBufferRect, clEnqueueWriteBufferRect, clEnqueueCopyBufferRect, clCreateUserEvent, 
             clSetUserEventStatus, clSetEventCallback
         ));
     }
 
-    private boolean check_CL12(java.util.Set<String> ext) {
+    private boolean check_CL12(Set<String> ext) {
         return ext.contains("OpenCL12") && checkExtension("OpenCL12", checkFunctions(
             clGetExtensionFunctionAddressForPlatform, clRetainDevice, clReleaseDevice, clCreateSubDevices, clCreateImage, clCreateProgramWithBuiltInKernels, 
             clCompileProgram, clLinkProgram, clUnloadPlatformCompiler, clGetKernelArgInfo, clEnqueueFillBuffer, clEnqueueFillImage, clEnqueueMigrateMemObjects, 
@@ -1472,130 +1472,130 @@ public class CLCapabilities {
         ));
     }
 
-    private boolean check_CL12GL(java.util.Set<String> ext) {
+    private boolean check_CL12GL(Set<String> ext) {
         return ext.contains("OpenCL12GL") && checkExtension("OpenCL12GL", checkFunctions(
             clCreateFromGLTexture
         ));
     }
 
-    private boolean check_CL20(java.util.Set<String> ext) {
+    private boolean check_CL20(Set<String> ext) {
         return ext.contains("OpenCL20") && checkExtension("OpenCL20", checkFunctions(
             clCreateCommandQueueWithProperties, clCreatePipe, clGetPipeInfo, clSVMAlloc, clSVMFree, clEnqueueSVMFree, clEnqueueSVMMemcpy, clEnqueueSVMMemFill, 
             clEnqueueSVMMap, clEnqueueSVMUnmap, clSetKernelArgSVMPointer, clSetKernelExecInfo, clCreateSamplerWithProperties
         ));
     }
 
-    private boolean check_CL21(java.util.Set<String> ext) {
+    private boolean check_CL21(Set<String> ext) {
         return ext.contains("OpenCL21") && checkExtension("OpenCL21", checkFunctions(
             clSetDefaultDeviceCommandQueue, clGetDeviceAndHostTimer, clGetHostTimer, clCreateProgramWithIL, clCloneKernel, clGetKernelSubGroupInfo, 
             clEnqueueSVMMigrateMem
         ));
     }
 
-    private boolean check_CL22(java.util.Set<String> ext) {
+    private boolean check_CL22(Set<String> ext) {
         return ext.contains("OpenCL22") && checkExtension("OpenCL22", checkFunctions(
             clSetProgramReleaseCallback, clSetProgramSpecializationConstant
         ));
     }
 
-    private boolean check_altera_live_object_tracking(java.util.Set<String> ext) {
+    private boolean check_altera_live_object_tracking(Set<String> ext) {
         return ext.contains("cl_altera_live_object_tracking") && checkExtension("cl_altera_live_object_tracking", checkFunctions(
             clTrackLiveObjectsAltera, clReportLiveObjectsAltera
         ));
     }
 
-    private boolean check_amd_bus_addressable_memory(java.util.Set<String> ext) {
+    private boolean check_amd_bus_addressable_memory(Set<String> ext) {
         return ext.contains("cl_amd_bus_addressable_memory") && checkExtension("cl_amd_bus_addressable_memory", checkFunctions(
             clEnqueueWaitSignalAMD, clEnqueueWriteSignalAMD, clEnqueueMakeBuffersResidentAMD
         ));
     }
 
-    private boolean check_APPLE_command_queue_priority(java.util.Set<String> ext) {
+    private boolean check_APPLE_command_queue_priority(Set<String> ext) {
         return ext.contains("cl_APPLE_command_queue_priority") && checkExtension("cl_APPLE_command_queue_priority", checkFunctions(
             clCreateCommandQueueWithPropertiesAPPLE
         ));
     }
 
-    private boolean check_APPLE_command_queue_select_compute_units(java.util.Set<String> ext) {
+    private boolean check_APPLE_command_queue_select_compute_units(Set<String> ext) {
         return ext.contains("cl_APPLE_command_queue_select_compute_units") && checkExtension("cl_APPLE_command_queue_select_compute_units", checkFunctions(
             clCreateCommandQueueWithPropertiesAPPLE
         ));
     }
 
-    private boolean check_APPLE_ContextLoggingFunctions(java.util.Set<String> ext) {
+    private boolean check_APPLE_ContextLoggingFunctions(Set<String> ext) {
         return ext.contains("cl_APPLE_ContextLoggingFunctions") && checkExtension("cl_APPLE_ContextLoggingFunctions", checkFunctions(
             clLogMessagesToSystemLogAPPLE, clLogMessagesToStdoutAPPLE, clLogMessagesToStderrAPPLE
         ));
     }
 
-    private boolean check_APPLE_gl_sharing(java.util.Set<String> ext) {
+    private boolean check_APPLE_gl_sharing(Set<String> ext) {
         return ext.contains("cl_APPLE_gl_sharing") && checkExtension("cl_APPLE_gl_sharing", checkFunctions(
             clGetGLContextInfoAPPLE
         ));
     }
 
-    private boolean check_ext_device_fission(java.util.Set<String> ext) {
+    private boolean check_ext_device_fission(Set<String> ext) {
         return ext.contains("cl_ext_device_fission") && checkExtension("cl_ext_device_fission", checkFunctions(
             clReleaseDeviceEXT, clRetainDeviceEXT, clCreateSubDevicesEXT
         ));
     }
 
-    private boolean check_ext_migrate_memobject(java.util.Set<String> ext) {
+    private boolean check_ext_migrate_memobject(Set<String> ext) {
         return ext.contains("cl_ext_migrate_memobject") && checkExtension("cl_ext_migrate_memobject", checkFunctions(
             clEnqueueMigrateMemObjectEXT
         ));
     }
 
-    private boolean check_intel_accelerator(java.util.Set<String> ext) {
+    private boolean check_intel_accelerator(Set<String> ext) {
         return ext.contains("cl_intel_accelerator") && checkExtension("cl_intel_accelerator", checkFunctions(
             clCreateAcceleratorINTEL, clRetainAcceleratorINTEL, clReleaseAcceleratorINTEL, clGetAcceleratorInfoINTEL
         ));
     }
 
-    private boolean check_intel_subgroups(java.util.Set<String> ext) {
+    private boolean check_intel_subgroups(Set<String> ext) {
         return ext.contains("cl_intel_subgroups") && checkExtension("cl_intel_subgroups", checkFunctions(
             clGetKernelSubGroupInfoKHR
         ));
     }
 
-    private boolean check_intel_va_api_media_sharing(java.util.Set<String> ext) {
+    private boolean check_intel_va_api_media_sharing(Set<String> ext) {
         return ext.contains("cl_intel_va_api_media_sharing") && checkExtension("cl_intel_va_api_media_sharing", checkFunctions(
             clGetDeviceIDsFromVA_APIMediaAdapterINTEL, clCreateFromVA_APIMediaSurfaceINTEL, clEnqueueAcquireVA_APIMediaSurfacesINTEL, 
             clEnqueueReleaseVA_APIMediaSurfacesINTEL
         ));
     }
 
-    private boolean check_khr_egl_event(java.util.Set<String> ext) {
+    private boolean check_khr_egl_event(Set<String> ext) {
         return ext.contains("cl_khr_egl_event") && checkExtension("cl_khr_egl_event", checkFunctions(
             clCreateEventFromEGLSyncKHR
         ));
     }
 
-    private boolean check_khr_egl_image(java.util.Set<String> ext) {
+    private boolean check_khr_egl_image(Set<String> ext) {
         return ext.contains("cl_khr_egl_image") && checkExtension("cl_khr_egl_image", checkFunctions(
             clCreateFromEGLImageKHR, clEnqueueAcquireEGLObjectsKHR, clEnqueueReleaseEGLObjectsKHR
         ));
     }
 
-    private boolean check_khr_gl_event(java.util.Set<String> ext) {
+    private boolean check_khr_gl_event(Set<String> ext) {
         return ext.contains("cl_khr_gl_event") && checkExtension("cl_khr_gl_event", checkFunctions(
             clCreateEventFromGLsyncKHR
         ));
     }
 
-    private boolean check_khr_gl_sharing(java.util.Set<String> ext) {
+    private boolean check_khr_gl_sharing(Set<String> ext) {
         return ext.contains("cl_khr_gl_sharing") && checkExtension("cl_khr_gl_sharing", checkFunctions(
             clGetGLContextInfoKHR
         ));
     }
 
-    private boolean check_khr_terminate_context(java.util.Set<String> ext) {
+    private boolean check_khr_terminate_context(Set<String> ext) {
         return ext.contains("cl_khr_terminate_context") && checkExtension("cl_khr_terminate_context", checkFunctions(
             clTerminateContextKHR
         ));
     }
 
-    private boolean check_qcom_ext_host_ptr(java.util.Set<String> ext) {
+    private boolean check_qcom_ext_host_ptr(Set<String> ext) {
         return ext.contains("cl_qcom_ext_host_ptr") && checkExtension("cl_qcom_ext_host_ptr", checkFunctions(
             clGetDeviceImageInfoQCOM
         ));

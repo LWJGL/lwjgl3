@@ -41,9 +41,18 @@ val GLBinding = Generator.register(object : APIBinding(
     }
 
     private val functionOrdinals by lazy {
-        functions.asSequence()
-            .mapIndexed { index, func -> func.name to index }
-            .toMap()
+        LinkedHashMap<String, Int>().also { functionOrdinals ->
+            classes.asSequence()
+                .filter { !it.isCore && it.hasNativeFunctions }
+                .forEach {
+                    it.functions.asSequence()
+                        .forEach { cmd ->
+                            if (!cmd.has<Macro>() && !functionOrdinals.contains(cmd.name)) {
+                                functionOrdinals[cmd.name] = functionOrdinals.size
+                            }
+                        }
+                }
+        }
     }
 
     override fun getFunctionOrdinal(function: Func) = functionOrdinals[function.name]!!
@@ -117,6 +126,34 @@ val GLBinding = Generator.register(object : APIBinding(
 
     private val EXTENSION_NAME = "[A-Za-z0-9_]+".toRegex()
 
+    private fun getFunctionDependencyExpression(func: Func) = func.get<DependsOn>()
+            .reference
+            .let { expression ->
+                if (EXTENSION_NAME.matches(expression))
+                    "ext.contains(\"$expression\")"
+                else
+                    expression
+            }
+
+    private fun PrintWriter.printCheckFunctions(
+        nativeClass: NativeClass,
+        dependencies: LinkedHashMap<String, Int>,
+        filter: (Func) -> Boolean
+    ) {
+        print("checkFunctions(provider, caps, new int[] {")
+        nativeClass.printPointers(this, { func ->
+            val index = functionOrdinals[func.name]
+            if (func.has<DependsOn>()) {
+                "flag${dependencies[getFunctionDependencyExpression(func)]} + $index"
+            } else{
+                index.toString()
+            }
+        }, filter)
+        print("},")
+        nativeClass.printPointers(this, { "\"${it.name}\"" }, filter)
+        print(")")
+    }
+
     private fun PrintWriter.checkExtensionFunctions(nativeClass: NativeClass) {
         if (nativeClass.isCore) {
             return
@@ -125,42 +162,51 @@ val GLBinding = Generator.register(object : APIBinding(
         val capName = nativeClass.capName
         val hasDeprecated = nativeClass.functions.hasDeprecated
 
-        print("\n${t}private boolean check_${nativeClass.templateName}(java.util.Set<String> ext")
+        print("\n${t}private static boolean check_${nativeClass.templateName}(FunctionProvider provider, PointerBuffer caps, Set<String> ext")
         if (hasDeprecated) print(", boolean fc")
-        println(") {")
-        print("$t${t}return ext.contains(\"$capName\") && checkExtension(\"$capName\", ")
-
-        val printPointer = { func: Func ->
-            if (func.has<DependsOn>())
-                "${func.get<DependsOn>().reference.let { if (EXTENSION_NAME.matches(it)) "ext.contains(\"$it\")" else it }} ? ${func.name} : -1L"
-            else
-                func.name
+        print(""") {
+        if (!ext.contains("$capName")) {
+            return false;
+        }""")
+        val dependencies = nativeClass.functions
+            .filter { it.has<DependsOn>() }
+            .map(::getFunctionDependencyExpression)
+            .foldIndexed(LinkedHashMap<String, Int>()) { index, map, expression ->
+                if (!map.containsKey(expression)) {
+                    map[expression] = index
+                }
+                map
+            }
+        if (dependencies.isNotEmpty()) {
+            println()
+            dependencies.forEach { (expression, index) ->
+                print("\n$t${t}int flag$index = $expression ? 0 : Integer.MIN_VALUE;")
+            }
         }
 
+        print("\n\n$t${t}return (")
         if (hasDeprecated) {
-            print("(fc || checkFunctions(")
-            nativeClass.printPointers(this, printPointer) { it has DeprecatedGL && !it.has<DependsOn>() }
-            print(")) && ")
+            print("(fc || ")
+            printCheckFunctions(nativeClass, dependencies) {
+                it has DeprecatedGL && !it.has<DependsOn>()
+            }
+            print(") && ")
         }
-
-        print("checkFunctions(")
-        if (hasDeprecated)
-            nativeClass.printPointers(this, printPointer) { (!it.has(DeprecatedGL) || it.has<DependsOn>()) && !it.has(IgnoreMissing) }
+        printCheckFunctions(nativeClass, dependencies, if (hasDeprecated)
+            { it-> (!it.has(DeprecatedGL) || it.has<DependsOn>()) && !it.has(IgnoreMissing) }
         else
-            nativeClass.printPointers(this, printPointer) { !it.has(IgnoreMissing) }
-        println("));")
+            { it-> !it.has(IgnoreMissing) })
+        println(") || reportMissing(\"GL\", \"$capName\");")
         println("$t}")
     }
 
     private fun PrintWriter.checkExtensionPresent(core: String, extension: String) {
-        println("""${t}private static boolean $extension(java.util.Set<String> ext) { return ext.contains("OpenGL$core") || ext.contains("GL_$extension"); }""")
+        println("""${t}private static boolean $extension(Set<String> ext) { return ext.contains("OpenGL$core") || ext.contains("GL_$extension"); }""")
     }
 
     init {
         javaImport(
             "org.lwjgl.*",
-            "java.lang.reflect.Field",
-            "java.util.List",
             "java.util.function.IntFunction",
             "static org.lwjgl.system.APIUtil.*",
             "static org.lwjgl.system.Checks.*",
@@ -174,14 +220,31 @@ val GLBinding = Generator.register(object : APIBinding(
         generateJavaPreamble()
         println("""public final class $CAPABILITIES_CLASS {
 
-    static final List<Field> ADDRESS_FIELDS = ThreadLocalUtil.getFieldsFromCapabilities($CAPABILITIES_CLASS.class, ${functions.size});
-""")
+    static final int ADDRESS_BUFFER_SIZE = ${functions.size};""")
 
-        println("${t}public final long")
-        println(functions
-            .map(Func::name)
-            .joinToString(",\n$t$t", prefix = "$t$t", postfix = ";\n"))
+        val functionSet = LinkedHashSet<String>()
+        classes.asSequence()
+            .filter { !it.isCore && it.hasNativeFunctions }
+            .forEach {
+                val functions = it.functions.asSequence()
+                    .filter { cmd ->
+                        if (!cmd.has<Macro>()) {
+                            if (functionSet.add(cmd.name)) {
+                                return@filter true
+                            }
+                        }
+                        false
+                    }
+                    .joinToString(",\n$t$t") { cmd -> cmd.name }
 
+                if (functions.isNotEmpty()) {
+                    println("\n$t// ${it.templateName}")
+                    println("${t}public final long")
+                    println("$t$t$functions;")
+                }
+            }
+
+        println()
         classes.asSequence()
             .filter { !it.isCore }
             .forEach {
@@ -198,14 +261,8 @@ val GLBinding = Generator.register(object : APIBinding(
 
     $CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext, boolean fc, IntFunction<PointerBuffer> bufferFactory) {
         forwardCompatible = fc;
-""")
 
-        println(functions.joinToString(prefix = "$t$t", separator = "\n$t$t") {
-            if (it has DeprecatedGL && !it.has<DependsOn>())
-                "${it.name} = getFunctionAddress(fc, provider, ${it.functionAddress});"
-            else
-                "${it.name} = provider.getFunctionAddress(${it.functionAddress});"
-        })
+        PointerBuffer caps = bufferFactory.apply(ADDRESS_BUFFER_SIZE);""")
 
         for (extension in classes) {
             if (extension.isCore) {
@@ -213,15 +270,21 @@ val GLBinding = Generator.register(object : APIBinding(
             }
             val capName = extension.capName
             if (extension.hasNativeFunctions) {
-                print("\n$t$t$capName = check_${extension.templateName}(ext")
+                print("\n$t$t$capName = check_${extension.templateName}(provider, caps, ext")
                 if (extension.functions.hasDeprecated) print(", fc")
                 print(");")
             } else
                 print("\n$t$t$capName = ext.contains(\"$capName\");")
         }
+
+        println()
+        functionOrdinals.forEach { (it, index) ->
+            print("\n$t$t$it = caps.get($index);")
+        }
+
         print("""
 
-        addresses = ThreadLocalUtil.getAddressesFromCapabilities(this, ADDRESS_FIELDS, bufferFactory);
+        addresses = ThreadLocalUtil.setupAddressBuffer(caps);
     }
 
     /** Returns the buffer of OpenGL function pointers. */
@@ -229,21 +292,9 @@ val GLBinding = Generator.register(object : APIBinding(
         return addresses;
     }
 
-    private static boolean hasDSA(Set<String> ext) {
-        return ext.contains("GL45") || ext.contains("GL_ARB_direct_state_access") || ext.contains("GL_EXT_direct_state_access");
-    }
-
-    private static long getFunctionAddress(boolean fc, FunctionProvider provider, String functionName) {
-        return fc ? NULL : provider.getFunctionAddress(functionName);
-    }
-
-    private static boolean checkExtension(String extension, boolean supported) {
-        if (supported) {
-            return true;
-        }
-
-        apiLog("[GL] " + extension + " was reported as available but an entry point is missing.");
-        return false;
+    /** Ensures that the lwjgl_opengl shared library has been loaded. */
+    public static void initialize() {
+        // intentionally empty to trigger static initializer
     }
 """)
 
@@ -255,8 +306,13 @@ val GLBinding = Generator.register(object : APIBinding(
             checkExtensionFunctions(extension)
         }
 
-        println()
+        println("""
+    private static boolean hasDSA(Set<String> ext) {
+        return ext.contains("GL45") || ext.contains("GL_ARB_direct_state_access") || ext.contains("GL_EXT_direct_state_access");
+    }
+""")
 
+        // TODO: some are unused
         checkExtensionPresent("30", "ARB_framebuffer_object")
         checkExtensionPresent("30", "ARB_map_buffer_range")
         checkExtensionPresent("30", "ARB_vertex_array_object")

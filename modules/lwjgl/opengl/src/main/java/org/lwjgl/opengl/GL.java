@@ -208,7 +208,7 @@ public final class GL {
         }
 
         GL.functionProvider = functionProvider;
-        ThreadLocalUtil.setFunctionMissingAddresses(GLCapabilities.ADDRESS_FIELDS.size(), 3);
+        ThreadLocalUtil.setFunctionMissingAddresses(GLCapabilities.ADDRESS_BUFFER_SIZE, 3);
     }
 
     /** Unloads the OpenGL native library. */

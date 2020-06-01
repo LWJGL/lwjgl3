@@ -218,24 +218,4 @@ public final class VK {
         return enabledExtensions;
     }
 
-    static boolean checkExtension(String extension, boolean available) {
-        if (!available) {
-            apiLog("[VK] " + extension + " was reported as available but an entry point is missing.");
-            return false;
-        }
-        return true;
-    }
-
-    static boolean isSupported(FunctionProvider provider, String functionName, long[] caps, int index, boolean satisfiedDependency) {
-        return !satisfiedDependency || isSupported(provider, functionName, caps, index);
-    }
-    static boolean isSupported(FunctionProvider provider, String functionName, long[] caps, int index) {
-        long address = provider.getFunctionAddress(functionName);
-        if (address != NULL) {
-            caps[index] = address;
-            return true;
-        }
-        return false;
-    }
-
 }

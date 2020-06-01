@@ -138,10 +138,16 @@ public final class EGL {
         functionProvider = null;
     }
 
+    static <T> T check(@Nullable T t) {
+        if (t == null) {
+            throw new IllegalStateException("EGL library has not been loaded.");
+        }
+        return t;
+    }
+
     /** Returns the {@link FunctionProvider} for the EGL native library. */
-    @Nullable
     public static FunctionProvider getFunctionProvider() {
-        return functionProvider;
+        return check(functionProvider);
     }
 
     /**
@@ -150,9 +156,8 @@ public final class EGL {
      * The capability flags in this instance are only set for the core EGL versions and client extensions. This may only happen if EGL 1.5 or the
      * {@link EGLCapabilities#EGL_EXT_client_extensions} extension are supported. If not, all flags will be false and the version fields zero.
      */
-    @Nullable
     public static EGLCapabilities getCapabilities() {
-        return caps;
+        return check(caps);
     }
 
     private static EGLCapabilities createClientCapabilities() {
@@ -228,7 +233,7 @@ public final class EGL {
             addExtensions(extensionsString, supportedExtensions);
         }
 
-        return new EGLCapabilities(functionProvider, supportedExtensions);
+        return new EGLCapabilities(Objects.requireNonNull(caps), supportedExtensions);
     }
 
     private static void addEGLVersions(int MAJOR, int MINOR, Set<String> supportedExtensions) {

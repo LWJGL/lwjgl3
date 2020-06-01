@@ -16,40 +16,40 @@ typedef void (APIENTRY *glGetTexParameterIuivEXTPROC) (jint, jint, intptr_t);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTTextureInteger_glClearColorIiEXT(JNIEnv *__env, jclass clazz, jint r, jint g, jint b, jint a) {
-    glClearColorIiEXTPROC glClearColorIiEXT = (glClearColorIiEXTPROC)tlsGetFunction(1820);
+    glClearColorIiEXTPROC glClearColorIiEXT = (glClearColorIiEXTPROC)tlsGetFunction(1854);
     UNUSED_PARAM(clazz)
     glClearColorIiEXT(r, g, b, a);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTTextureInteger_glClearColorIuiEXT(JNIEnv *__env, jclass clazz, jint r, jint g, jint b, jint a) {
-    glClearColorIuiEXTPROC glClearColorIuiEXT = (glClearColorIuiEXTPROC)tlsGetFunction(1821);
+    glClearColorIuiEXTPROC glClearColorIuiEXT = (glClearColorIuiEXTPROC)tlsGetFunction(1855);
     UNUSED_PARAM(clazz)
     glClearColorIuiEXT(r, g, b, a);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTTextureInteger_nglTexParameterIivEXT__IIJ(JNIEnv *__env, jclass clazz, jint target, jint pname, jlong paramsAddress) {
-    glTexParameterIivEXTPROC glTexParameterIivEXT = (glTexParameterIivEXTPROC)tlsGetFunction(1822);
+    glTexParameterIivEXTPROC glTexParameterIivEXT = (glTexParameterIivEXTPROC)tlsGetFunction(1856);
     intptr_t params = (intptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glTexParameterIivEXT(target, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTTextureInteger_nglTexParameterIuivEXT__IIJ(JNIEnv *__env, jclass clazz, jint target, jint pname, jlong paramsAddress) {
-    glTexParameterIuivEXTPROC glTexParameterIuivEXT = (glTexParameterIuivEXTPROC)tlsGetFunction(1823);
+    glTexParameterIuivEXTPROC glTexParameterIuivEXT = (glTexParameterIuivEXTPROC)tlsGetFunction(1857);
     intptr_t params = (intptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glTexParameterIuivEXT(target, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTTextureInteger_nglGetTexParameterIivEXT__IIJ(JNIEnv *__env, jclass clazz, jint target, jint pname, jlong paramsAddress) {
-    glGetTexParameterIivEXTPROC glGetTexParameterIivEXT = (glGetTexParameterIivEXTPROC)tlsGetFunction(1824);
+    glGetTexParameterIivEXTPROC glGetTexParameterIivEXT = (glGetTexParameterIivEXTPROC)tlsGetFunction(1858);
     intptr_t params = (intptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetTexParameterIivEXT(target, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTTextureInteger_nglGetTexParameterIuivEXT__IIJ(JNIEnv *__env, jclass clazz, jint target, jint pname, jlong paramsAddress) {
-    glGetTexParameterIuivEXTPROC glGetTexParameterIuivEXT = (glGetTexParameterIuivEXTPROC)tlsGetFunction(1825);
+    glGetTexParameterIuivEXTPROC glGetTexParameterIuivEXT = (glGetTexParameterIuivEXTPROC)tlsGetFunction(1859);
     intptr_t params = (intptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetTexParameterIuivEXT(target, pname, params);

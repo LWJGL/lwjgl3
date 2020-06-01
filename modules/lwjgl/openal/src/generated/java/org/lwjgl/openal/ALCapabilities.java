@@ -8,8 +8,6 @@ package org.lwjgl.openal;
 import org.lwjgl.system.*;
 import java.util.Set;
 import org.lwjgl.*;
-import java.lang.reflect.Field;
-import java.util.List;
 import java.util.function.IntFunction;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -18,8 +16,7 @@ import static org.lwjgl.system.Checks.*;
 /** Defines the capabilities of an OpenAL context. */
 public final class ALCapabilities {
 
-    static final List<Field> ADDRESS_FIELDS = ThreadLocalUtil.getFieldsFromCapabilities(ALCapabilities.class, 123);
-
+    // AL10
     public final long
         alGetError,
         alEnable,
@@ -75,7 +72,10 @@ public final class ALCapabilities {
         alBufferData,
         alGetEnumValue,
         alGetProcAddress,
-        alIsExtensionPresent,
+        alIsExtensionPresent;
+
+    // AL11
+    public final long
         alListener3i,
         alGetListeneriv,
         alSource3i,
@@ -89,7 +89,10 @@ public final class ALCapabilities {
         alBufferiv,
         alGetBufferiv,
         alGetBufferfv,
-        alSpeedOfSound,
+        alSpeedOfSound;
+
+    // EXT_EFX
+    public final long
         alGenEffects,
         alDeleteEffects,
         alIsEffect,
@@ -122,15 +125,30 @@ public final class ALCapabilities {
         alGetAuxiliaryEffectSloti,
         alGetAuxiliaryEffectSlotiv,
         alGetAuxiliaryEffectSlotf,
-        alGetAuxiliaryEffectSlotfv,
-        alBufferDataStatic,
+        alGetAuxiliaryEffectSlotfv;
+
+    // EXT_static_buffer
+    public final long
+        alBufferDataStatic;
+
+    // SOFT_buffer_samples
+    public final long
         alBufferSamplesSOFT,
         alBufferSubSamplesSOFT,
         alGetBufferSamplesSOFT,
-        alIsBufferFormatSupportedSOFT,
-        alBufferSubDataSOFT,
+        alIsBufferFormatSupportedSOFT;
+
+    // SOFT_buffer_sub_data
+    public final long
+        alBufferSubDataSOFT;
+
+    // SOFT_deferred_updates
+    public final long
         alDeferUpdatesSOFT,
-        alProcessUpdatesSOFT,
+        alProcessUpdatesSOFT;
+
+    // SOFT_source_latency
+    public final long
         alSourcedSOFT,
         alSource3dSOFT,
         alSourcedvSOFT,
@@ -142,7 +160,10 @@ public final class ALCapabilities {
         alSourcei64vSOFT,
         alGetSourcei64SOFT,
         alGetSource3i64SOFT,
-        alGetSourcei64vSOFT,
+        alGetSourcei64vSOFT;
+
+    // SOFT_source_resampler
+    public final long
         alGetStringiSOFT;
 
     /** When true, {@link AL10} is supported. */
@@ -224,137 +245,15 @@ public final class ALCapabilities {
     final PointerBuffer addresses;
 
     ALCapabilities(FunctionProvider provider, Set<String> ext, IntFunction<PointerBuffer> bufferFactory) {
-        alGetError = provider.getFunctionAddress("alGetError");
-        alEnable = provider.getFunctionAddress("alEnable");
-        alDisable = provider.getFunctionAddress("alDisable");
-        alIsEnabled = provider.getFunctionAddress("alIsEnabled");
-        alGetBoolean = provider.getFunctionAddress("alGetBoolean");
-        alGetInteger = provider.getFunctionAddress("alGetInteger");
-        alGetFloat = provider.getFunctionAddress("alGetFloat");
-        alGetDouble = provider.getFunctionAddress("alGetDouble");
-        alGetBooleanv = provider.getFunctionAddress("alGetBooleanv");
-        alGetIntegerv = provider.getFunctionAddress("alGetIntegerv");
-        alGetFloatv = provider.getFunctionAddress("alGetFloatv");
-        alGetDoublev = provider.getFunctionAddress("alGetDoublev");
-        alGetString = provider.getFunctionAddress("alGetString");
-        alDistanceModel = provider.getFunctionAddress("alDistanceModel");
-        alDopplerFactor = provider.getFunctionAddress("alDopplerFactor");
-        alDopplerVelocity = provider.getFunctionAddress("alDopplerVelocity");
-        alListenerf = provider.getFunctionAddress("alListenerf");
-        alListeneri = provider.getFunctionAddress("alListeneri");
-        alListener3f = provider.getFunctionAddress("alListener3f");
-        alListenerfv = provider.getFunctionAddress("alListenerfv");
-        alGetListenerf = provider.getFunctionAddress("alGetListenerf");
-        alGetListeneri = provider.getFunctionAddress("alGetListeneri");
-        alGetListener3f = provider.getFunctionAddress("alGetListener3f");
-        alGetListenerfv = provider.getFunctionAddress("alGetListenerfv");
-        alGenSources = provider.getFunctionAddress("alGenSources");
-        alDeleteSources = provider.getFunctionAddress("alDeleteSources");
-        alIsSource = provider.getFunctionAddress("alIsSource");
-        alSourcef = provider.getFunctionAddress("alSourcef");
-        alSource3f = provider.getFunctionAddress("alSource3f");
-        alSourcefv = provider.getFunctionAddress("alSourcefv");
-        alSourcei = provider.getFunctionAddress("alSourcei");
-        alGetSourcef = provider.getFunctionAddress("alGetSourcef");
-        alGetSource3f = provider.getFunctionAddress("alGetSource3f");
-        alGetSourcefv = provider.getFunctionAddress("alGetSourcefv");
-        alGetSourcei = provider.getFunctionAddress("alGetSourcei");
-        alGetSourceiv = provider.getFunctionAddress("alGetSourceiv");
-        alSourceQueueBuffers = provider.getFunctionAddress("alSourceQueueBuffers");
-        alSourceUnqueueBuffers = provider.getFunctionAddress("alSourceUnqueueBuffers");
-        alSourcePlay = provider.getFunctionAddress("alSourcePlay");
-        alSourcePause = provider.getFunctionAddress("alSourcePause");
-        alSourceStop = provider.getFunctionAddress("alSourceStop");
-        alSourceRewind = provider.getFunctionAddress("alSourceRewind");
-        alSourcePlayv = provider.getFunctionAddress("alSourcePlayv");
-        alSourcePausev = provider.getFunctionAddress("alSourcePausev");
-        alSourceStopv = provider.getFunctionAddress("alSourceStopv");
-        alSourceRewindv = provider.getFunctionAddress("alSourceRewindv");
-        alGenBuffers = provider.getFunctionAddress("alGenBuffers");
-        alDeleteBuffers = provider.getFunctionAddress("alDeleteBuffers");
-        alIsBuffer = provider.getFunctionAddress("alIsBuffer");
-        alGetBufferf = provider.getFunctionAddress("alGetBufferf");
-        alGetBufferi = provider.getFunctionAddress("alGetBufferi");
-        alBufferData = provider.getFunctionAddress("alBufferData");
-        alGetEnumValue = provider.getFunctionAddress("alGetEnumValue");
-        alGetProcAddress = provider.getFunctionAddress("alGetProcAddress");
-        alIsExtensionPresent = provider.getFunctionAddress("alIsExtensionPresent");
-        alListener3i = provider.getFunctionAddress("alListener3i");
-        alGetListeneriv = provider.getFunctionAddress("alGetListeneriv");
-        alSource3i = provider.getFunctionAddress("alSource3i");
-        alListeneriv = provider.getFunctionAddress("alListeneriv");
-        alSourceiv = provider.getFunctionAddress("alSourceiv");
-        alBufferf = provider.getFunctionAddress("alBufferf");
-        alBuffer3f = provider.getFunctionAddress("alBuffer3f");
-        alBufferfv = provider.getFunctionAddress("alBufferfv");
-        alBufferi = provider.getFunctionAddress("alBufferi");
-        alBuffer3i = provider.getFunctionAddress("alBuffer3i");
-        alBufferiv = provider.getFunctionAddress("alBufferiv");
-        alGetBufferiv = provider.getFunctionAddress("alGetBufferiv");
-        alGetBufferfv = provider.getFunctionAddress("alGetBufferfv");
-        alSpeedOfSound = provider.getFunctionAddress("alSpeedOfSound");
-        alGenEffects = provider.getFunctionAddress("alGenEffects");
-        alDeleteEffects = provider.getFunctionAddress("alDeleteEffects");
-        alIsEffect = provider.getFunctionAddress("alIsEffect");
-        alEffecti = provider.getFunctionAddress("alEffecti");
-        alEffectiv = provider.getFunctionAddress("alEffectiv");
-        alEffectf = provider.getFunctionAddress("alEffectf");
-        alEffectfv = provider.getFunctionAddress("alEffectfv");
-        alGetEffecti = provider.getFunctionAddress("alGetEffecti");
-        alGetEffectiv = provider.getFunctionAddress("alGetEffectiv");
-        alGetEffectf = provider.getFunctionAddress("alGetEffectf");
-        alGetEffectfv = provider.getFunctionAddress("alGetEffectfv");
-        alGenFilters = provider.getFunctionAddress("alGenFilters");
-        alDeleteFilters = provider.getFunctionAddress("alDeleteFilters");
-        alIsFilter = provider.getFunctionAddress("alIsFilter");
-        alFilteri = provider.getFunctionAddress("alFilteri");
-        alFilteriv = provider.getFunctionAddress("alFilteriv");
-        alFilterf = provider.getFunctionAddress("alFilterf");
-        alFilterfv = provider.getFunctionAddress("alFilterfv");
-        alGetFilteri = provider.getFunctionAddress("alGetFilteri");
-        alGetFilteriv = provider.getFunctionAddress("alGetFilteriv");
-        alGetFilterf = provider.getFunctionAddress("alGetFilterf");
-        alGetFilterfv = provider.getFunctionAddress("alGetFilterfv");
-        alGenAuxiliaryEffectSlots = provider.getFunctionAddress("alGenAuxiliaryEffectSlots");
-        alDeleteAuxiliaryEffectSlots = provider.getFunctionAddress("alDeleteAuxiliaryEffectSlots");
-        alIsAuxiliaryEffectSlot = provider.getFunctionAddress("alIsAuxiliaryEffectSlot");
-        alAuxiliaryEffectSloti = provider.getFunctionAddress("alAuxiliaryEffectSloti");
-        alAuxiliaryEffectSlotiv = provider.getFunctionAddress("alAuxiliaryEffectSlotiv");
-        alAuxiliaryEffectSlotf = provider.getFunctionAddress("alAuxiliaryEffectSlotf");
-        alAuxiliaryEffectSlotfv = provider.getFunctionAddress("alAuxiliaryEffectSlotfv");
-        alGetAuxiliaryEffectSloti = provider.getFunctionAddress("alGetAuxiliaryEffectSloti");
-        alGetAuxiliaryEffectSlotiv = provider.getFunctionAddress("alGetAuxiliaryEffectSlotiv");
-        alGetAuxiliaryEffectSlotf = provider.getFunctionAddress("alGetAuxiliaryEffectSlotf");
-        alGetAuxiliaryEffectSlotfv = provider.getFunctionAddress("alGetAuxiliaryEffectSlotfv");
-        alBufferDataStatic = provider.getFunctionAddress("alBufferDataStatic");
-        alBufferSamplesSOFT = provider.getFunctionAddress("alBufferSamplesSOFT");
-        alBufferSubSamplesSOFT = provider.getFunctionAddress("alBufferSubSamplesSOFT");
-        alGetBufferSamplesSOFT = provider.getFunctionAddress("alGetBufferSamplesSOFT");
-        alIsBufferFormatSupportedSOFT = provider.getFunctionAddress("alIsBufferFormatSupportedSOFT");
-        alBufferSubDataSOFT = provider.getFunctionAddress("alBufferSubDataSOFT");
-        alDeferUpdatesSOFT = provider.getFunctionAddress("alDeferUpdatesSOFT");
-        alProcessUpdatesSOFT = provider.getFunctionAddress("alProcessUpdatesSOFT");
-        alSourcedSOFT = provider.getFunctionAddress("alSourcedSOFT");
-        alSource3dSOFT = provider.getFunctionAddress("alSource3dSOFT");
-        alSourcedvSOFT = provider.getFunctionAddress("alSourcedvSOFT");
-        alGetSourcedSOFT = provider.getFunctionAddress("alGetSourcedSOFT");
-        alGetSource3dSOFT = provider.getFunctionAddress("alGetSource3dSOFT");
-        alGetSourcedvSOFT = provider.getFunctionAddress("alGetSourcedvSOFT");
-        alSourcei64SOFT = provider.getFunctionAddress("alSourcei64SOFT");
-        alSource3i64SOFT = provider.getFunctionAddress("alSource3i64SOFT");
-        alSourcei64vSOFT = provider.getFunctionAddress("alSourcei64vSOFT");
-        alGetSourcei64SOFT = provider.getFunctionAddress("alGetSourcei64SOFT");
-        alGetSource3i64SOFT = provider.getFunctionAddress("alGetSource3i64SOFT");
-        alGetSourcei64vSOFT = provider.getFunctionAddress("alGetSourcei64vSOFT");
-        alGetStringiSOFT = provider.getFunctionAddress("alGetStringiSOFT");
+        PointerBuffer caps = bufferFactory.apply(123);
 
-        OpenAL10 = check_AL10(ext);
-        OpenAL11 = check_AL11(ext);
+        OpenAL10 = check_AL10(provider, caps, ext);
+        OpenAL11 = check_AL11(provider, caps, ext);
         OpenAL_SOFT_bformat_ex = ext.contains("OpenAL_SOFT_bformat_ex");
         AL_EXT_ALAW = ext.contains("AL_EXT_ALAW");
         AL_EXT_BFORMAT = ext.contains("AL_EXT_BFORMAT");
         AL_EXT_DOUBLE = ext.contains("AL_EXT_DOUBLE");
-        ALC_EXT_EFX = check_EXT_EFX(ext);
+        ALC_EXT_EFX = check_EXT_EFX(provider, caps, ext);
         AL_EXT_EXPONENT_DISTANCE = ext.contains("AL_EXT_EXPONENT_DISTANCE");
         AL_EXT_FLOAT32 = ext.contains("AL_EXT_FLOAT32");
         AL_EXT_IMA4 = ext.contains("AL_EXT_IMA4");
@@ -366,27 +265,151 @@ public final class ALCapabilities {
         AL_EXT_OFFSET = ext.contains("AL_EXT_OFFSET");
         AL_EXT_source_distance_model = ext.contains("AL_EXT_source_distance_model");
         AL_EXT_SOURCE_RADIUS = ext.contains("AL_EXT_SOURCE_RADIUS");
-        AL_EXT_static_buffer = check_EXT_static_buffer(ext);
+        AL_EXT_static_buffer = check_EXT_static_buffer(provider, caps, ext);
         AL_EXT_STEREO_ANGLES = ext.contains("AL_EXT_STEREO_ANGLES");
         AL_EXT_vorbis = ext.contains("AL_EXT_vorbis");
         AL_LOKI_IMA_ADPCM = ext.contains("AL_LOKI_IMA_ADPCM");
         AL_LOKI_quadriphonic = ext.contains("AL_LOKI_quadriphonic");
         AL_LOKI_WAVE_format = ext.contains("AL_LOKI_WAVE_format");
         AL_SOFT_block_alignment = ext.contains("AL_SOFT_block_alignment");
-        AL_SOFT_buffer_samples = check_SOFT_buffer_samples(ext);
-        AL_SOFT_buffer_sub_data = check_SOFT_buffer_sub_data(ext);
-        AL_SOFT_deferred_updates = check_SOFT_deferred_updates(ext);
+        AL_SOFT_buffer_samples = check_SOFT_buffer_samples(provider, caps, ext);
+        AL_SOFT_buffer_sub_data = check_SOFT_buffer_sub_data(provider, caps, ext);
+        AL_SOFT_deferred_updates = check_SOFT_deferred_updates(provider, caps, ext);
         AL_SOFT_direct_channels = ext.contains("AL_SOFT_direct_channels");
         AL_SOFT_direct_channels_remix = ext.contains("AL_SOFT_direct_channels_remix");
         AL_SOFT_gain_clamp_ex = ext.contains("AL_SOFT_gain_clamp_ex");
         AL_SOFT_loop_points = ext.contains("AL_SOFT_loop_points");
         AL_SOFT_MSADPCM = ext.contains("AL_SOFT_MSADPCM");
-        AL_SOFT_source_latency = check_SOFT_source_latency(ext);
+        AL_SOFT_source_latency = check_SOFT_source_latency(provider, caps, ext);
         AL_SOFT_source_length = ext.contains("AL_SOFT_source_length");
-        AL_SOFT_source_resampler = check_SOFT_source_resampler(ext);
+        AL_SOFT_source_resampler = check_SOFT_source_resampler(provider, caps, ext);
         AL_SOFT_source_spatialize = ext.contains("AL_SOFT_source_spatialize");
 
-        addresses = ThreadLocalUtil.getAddressesFromCapabilities(this, ADDRESS_FIELDS, bufferFactory);
+        alGetError = caps.get(0);
+        alEnable = caps.get(1);
+        alDisable = caps.get(2);
+        alIsEnabled = caps.get(3);
+        alGetBoolean = caps.get(4);
+        alGetInteger = caps.get(5);
+        alGetFloat = caps.get(6);
+        alGetDouble = caps.get(7);
+        alGetBooleanv = caps.get(8);
+        alGetIntegerv = caps.get(9);
+        alGetFloatv = caps.get(10);
+        alGetDoublev = caps.get(11);
+        alGetString = caps.get(12);
+        alDistanceModel = caps.get(13);
+        alDopplerFactor = caps.get(14);
+        alDopplerVelocity = caps.get(15);
+        alListenerf = caps.get(16);
+        alListeneri = caps.get(17);
+        alListener3f = caps.get(18);
+        alListenerfv = caps.get(19);
+        alGetListenerf = caps.get(20);
+        alGetListeneri = caps.get(21);
+        alGetListener3f = caps.get(22);
+        alGetListenerfv = caps.get(23);
+        alGenSources = caps.get(24);
+        alDeleteSources = caps.get(25);
+        alIsSource = caps.get(26);
+        alSourcef = caps.get(27);
+        alSource3f = caps.get(28);
+        alSourcefv = caps.get(29);
+        alSourcei = caps.get(30);
+        alGetSourcef = caps.get(31);
+        alGetSource3f = caps.get(32);
+        alGetSourcefv = caps.get(33);
+        alGetSourcei = caps.get(34);
+        alGetSourceiv = caps.get(35);
+        alSourceQueueBuffers = caps.get(36);
+        alSourceUnqueueBuffers = caps.get(37);
+        alSourcePlay = caps.get(38);
+        alSourcePause = caps.get(39);
+        alSourceStop = caps.get(40);
+        alSourceRewind = caps.get(41);
+        alSourcePlayv = caps.get(42);
+        alSourcePausev = caps.get(43);
+        alSourceStopv = caps.get(44);
+        alSourceRewindv = caps.get(45);
+        alGenBuffers = caps.get(46);
+        alDeleteBuffers = caps.get(47);
+        alIsBuffer = caps.get(48);
+        alGetBufferf = caps.get(49);
+        alGetBufferi = caps.get(50);
+        alBufferData = caps.get(51);
+        alGetEnumValue = caps.get(52);
+        alGetProcAddress = caps.get(53);
+        alIsExtensionPresent = caps.get(54);
+        alListener3i = caps.get(55);
+        alGetListeneriv = caps.get(56);
+        alSource3i = caps.get(57);
+        alListeneriv = caps.get(58);
+        alSourceiv = caps.get(59);
+        alBufferf = caps.get(60);
+        alBuffer3f = caps.get(61);
+        alBufferfv = caps.get(62);
+        alBufferi = caps.get(63);
+        alBuffer3i = caps.get(64);
+        alBufferiv = caps.get(65);
+        alGetBufferiv = caps.get(66);
+        alGetBufferfv = caps.get(67);
+        alSpeedOfSound = caps.get(68);
+        alGenEffects = caps.get(69);
+        alDeleteEffects = caps.get(70);
+        alIsEffect = caps.get(71);
+        alEffecti = caps.get(72);
+        alEffectiv = caps.get(73);
+        alEffectf = caps.get(74);
+        alEffectfv = caps.get(75);
+        alGetEffecti = caps.get(76);
+        alGetEffectiv = caps.get(77);
+        alGetEffectf = caps.get(78);
+        alGetEffectfv = caps.get(79);
+        alGenFilters = caps.get(80);
+        alDeleteFilters = caps.get(81);
+        alIsFilter = caps.get(82);
+        alFilteri = caps.get(83);
+        alFilteriv = caps.get(84);
+        alFilterf = caps.get(85);
+        alFilterfv = caps.get(86);
+        alGetFilteri = caps.get(87);
+        alGetFilteriv = caps.get(88);
+        alGetFilterf = caps.get(89);
+        alGetFilterfv = caps.get(90);
+        alGenAuxiliaryEffectSlots = caps.get(91);
+        alDeleteAuxiliaryEffectSlots = caps.get(92);
+        alIsAuxiliaryEffectSlot = caps.get(93);
+        alAuxiliaryEffectSloti = caps.get(94);
+        alAuxiliaryEffectSlotiv = caps.get(95);
+        alAuxiliaryEffectSlotf = caps.get(96);
+        alAuxiliaryEffectSlotfv = caps.get(97);
+        alGetAuxiliaryEffectSloti = caps.get(98);
+        alGetAuxiliaryEffectSlotiv = caps.get(99);
+        alGetAuxiliaryEffectSlotf = caps.get(100);
+        alGetAuxiliaryEffectSlotfv = caps.get(101);
+        alBufferDataStatic = caps.get(102);
+        alBufferSamplesSOFT = caps.get(103);
+        alBufferSubSamplesSOFT = caps.get(104);
+        alGetBufferSamplesSOFT = caps.get(105);
+        alIsBufferFormatSupportedSOFT = caps.get(106);
+        alBufferSubDataSOFT = caps.get(107);
+        alDeferUpdatesSOFT = caps.get(108);
+        alProcessUpdatesSOFT = caps.get(109);
+        alSourcedSOFT = caps.get(110);
+        alSource3dSOFT = caps.get(111);
+        alSourcedvSOFT = caps.get(112);
+        alGetSourcedSOFT = caps.get(113);
+        alGetSource3dSOFT = caps.get(114);
+        alGetSourcedvSOFT = caps.get(115);
+        alSourcei64SOFT = caps.get(116);
+        alSource3i64SOFT = caps.get(117);
+        alSourcei64vSOFT = caps.get(118);
+        alGetSourcei64SOFT = caps.get(119);
+        alGetSource3i64SOFT = caps.get(120);
+        alGetSourcei64vSOFT = caps.get(121);
+        alGetStringiSOFT = caps.get(122);
+
+        addresses = ThreadLocalUtil.setupAddressBuffer(caps);
     }
 
     /** Returns the buffer of OpenAL function pointers. */
@@ -394,78 +417,125 @@ public final class ALCapabilities {
         return addresses;
     }
 
-    private static boolean checkExtension(String extension, boolean supported) {
-        if (supported) {
-            return true;
+    private static boolean check_AL10(FunctionProvider provider, PointerBuffer caps, Set<String> ext) {
+        if (!ext.contains("OpenAL10")) {
+            return false;
         }
 
-        apiLog("[AL] " + extension + " was reported as available but an entry point is missing.");
-        return false;
+        return checkFunctions(provider, caps, new int[] {
+            0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 
+            39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54
+        },
+            "alGetError", "alEnable", "alDisable", "alIsEnabled", "alGetBoolean", "alGetInteger", "alGetFloat", "alGetDouble", "alGetBooleanv", "alGetIntegerv", 
+            "alGetFloatv", "alGetDoublev", "alGetString", "alDistanceModel", "alDopplerFactor", "alDopplerVelocity", "alListenerf", "alListeneri", 
+            "alListener3f", "alListenerfv", "alGetListenerf", "alGetListeneri", "alGetListener3f", "alGetListenerfv", "alGenSources", "alDeleteSources", 
+            "alIsSource", "alSourcef", "alSource3f", "alSourcefv", "alSourcei", "alGetSourcef", "alGetSource3f", "alGetSourcefv", "alGetSourcei", 
+            "alGetSourceiv", "alSourceQueueBuffers", "alSourceUnqueueBuffers", "alSourcePlay", "alSourcePause", "alSourceStop", "alSourceRewind", 
+            "alSourcePlayv", "alSourcePausev", "alSourceStopv", "alSourceRewindv", "alGenBuffers", "alDeleteBuffers", "alIsBuffer", "alGetBufferf", 
+            "alGetBufferi", "alBufferData", "alGetEnumValue", "alGetProcAddress", "alIsExtensionPresent"
+        ) || reportMissing("AL", "OpenAL10");
     }
 
-    private boolean check_AL10(java.util.Set<String> ext) {
-        return ext.contains("OpenAL10") && checkExtension("OpenAL10", checkFunctions(
-            alGetError, alEnable, alDisable, alIsEnabled, alGetBoolean, alGetInteger, alGetFloat, alGetDouble, alGetBooleanv, alGetIntegerv, alGetFloatv, 
-            alGetDoublev, alGetString, alDistanceModel, alDopplerFactor, alDopplerVelocity, alListenerf, alListeneri, alListener3f, alListenerfv, 
-            alGetListenerf, alGetListeneri, alGetListener3f, alGetListenerfv, alGenSources, alDeleteSources, alIsSource, alSourcef, alSource3f, alSourcefv, 
-            alSourcei, alGetSourcef, alGetSource3f, alGetSourcefv, alGetSourcei, alGetSourceiv, alSourceQueueBuffers, alSourceUnqueueBuffers, alSourcePlay, 
-            alSourcePause, alSourceStop, alSourceRewind, alSourcePlayv, alSourcePausev, alSourceStopv, alSourceRewindv, alGenBuffers, alDeleteBuffers, 
-            alIsBuffer, alGetBufferf, alGetBufferi, alBufferData, alGetEnumValue, alGetProcAddress, alIsExtensionPresent
-        ));
+    private static boolean check_AL11(FunctionProvider provider, PointerBuffer caps, Set<String> ext) {
+        if (!ext.contains("OpenAL11")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68
+        },
+            "alListener3i", "alGetListeneriv", "alSource3i", "alListeneriv", "alSourceiv", "alBufferf", "alBuffer3f", "alBufferfv", "alBufferi", "alBuffer3i", 
+            "alBufferiv", "alGetBufferiv", "alGetBufferfv", "alSpeedOfSound"
+        ) || reportMissing("AL", "OpenAL11");
     }
 
-    private boolean check_AL11(java.util.Set<String> ext) {
-        return ext.contains("OpenAL11") && checkExtension("OpenAL11", checkFunctions(
-            alListener3i, alGetListeneriv, alSource3i, alListeneriv, alSourceiv, alBufferf, alBuffer3f, alBufferfv, alBufferi, alBuffer3i, alBufferiv, 
-            alGetBufferiv, alGetBufferfv, alSpeedOfSound
-        ));
+    private static boolean check_EXT_EFX(FunctionProvider provider, PointerBuffer caps, Set<String> ext) {
+        if (!ext.contains("ALC_EXT_EFX")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101
+        },
+            "alGenEffects", "alDeleteEffects", "alIsEffect", "alEffecti", "alEffectiv", "alEffectf", "alEffectfv", "alGetEffecti", "alGetEffectiv", 
+            "alGetEffectf", "alGetEffectfv", "alGenFilters", "alDeleteFilters", "alIsFilter", "alFilteri", "alFilteriv", "alFilterf", "alFilterfv", 
+            "alGetFilteri", "alGetFilteriv", "alGetFilterf", "alGetFilterfv", "alGenAuxiliaryEffectSlots", "alDeleteAuxiliaryEffectSlots", 
+            "alIsAuxiliaryEffectSlot", "alAuxiliaryEffectSloti", "alAuxiliaryEffectSlotiv", "alAuxiliaryEffectSlotf", "alAuxiliaryEffectSlotfv", 
+            "alGetAuxiliaryEffectSloti", "alGetAuxiliaryEffectSlotiv", "alGetAuxiliaryEffectSlotf", "alGetAuxiliaryEffectSlotfv"
+        ) || reportMissing("AL", "ALC_EXT_EFX");
     }
 
-    private boolean check_EXT_EFX(java.util.Set<String> ext) {
-        return ext.contains("ALC_EXT_EFX") && checkExtension("ALC_EXT_EFX", checkFunctions(
-            alGenEffects, alDeleteEffects, alIsEffect, alEffecti, alEffectiv, alEffectf, alEffectfv, alGetEffecti, alGetEffectiv, alGetEffectf, alGetEffectfv, 
-            alGenFilters, alDeleteFilters, alIsFilter, alFilteri, alFilteriv, alFilterf, alFilterfv, alGetFilteri, alGetFilteriv, alGetFilterf, alGetFilterfv, 
-            alGenAuxiliaryEffectSlots, alDeleteAuxiliaryEffectSlots, alIsAuxiliaryEffectSlot, alAuxiliaryEffectSloti, alAuxiliaryEffectSlotiv, 
-            alAuxiliaryEffectSlotf, alAuxiliaryEffectSlotfv, alGetAuxiliaryEffectSloti, alGetAuxiliaryEffectSlotiv, alGetAuxiliaryEffectSlotf, 
-            alGetAuxiliaryEffectSlotfv
-        ));
+    private static boolean check_EXT_static_buffer(FunctionProvider provider, PointerBuffer caps, Set<String> ext) {
+        if (!ext.contains("AL_EXT_static_buffer")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            102
+        },
+            "alBufferDataStatic"
+        ) || reportMissing("AL", "AL_EXT_static_buffer");
     }
 
-    private boolean check_EXT_static_buffer(java.util.Set<String> ext) {
-        return ext.contains("AL_EXT_static_buffer") && checkExtension("AL_EXT_static_buffer", checkFunctions(
-            alBufferDataStatic
-        ));
+    private static boolean check_SOFT_buffer_samples(FunctionProvider provider, PointerBuffer caps, Set<String> ext) {
+        if (!ext.contains("AL_SOFT_buffer_samples")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            103, 104, 105, 106
+        },
+            "alBufferSamplesSOFT", "alBufferSubSamplesSOFT", "alGetBufferSamplesSOFT", "alIsBufferFormatSupportedSOFT"
+        ) || reportMissing("AL", "AL_SOFT_buffer_samples");
     }
 
-    private boolean check_SOFT_buffer_samples(java.util.Set<String> ext) {
-        return ext.contains("AL_SOFT_buffer_samples") && checkExtension("AL_SOFT_buffer_samples", checkFunctions(
-            alBufferSamplesSOFT, alBufferSubSamplesSOFT, alGetBufferSamplesSOFT, alIsBufferFormatSupportedSOFT
-        ));
+    private static boolean check_SOFT_buffer_sub_data(FunctionProvider provider, PointerBuffer caps, Set<String> ext) {
+        if (!ext.contains("AL_SOFT_buffer_sub_data")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            107
+        },
+            "alBufferSubDataSOFT"
+        ) || reportMissing("AL", "AL_SOFT_buffer_sub_data");
     }
 
-    private boolean check_SOFT_buffer_sub_data(java.util.Set<String> ext) {
-        return ext.contains("AL_SOFT_buffer_sub_data") && checkExtension("AL_SOFT_buffer_sub_data", checkFunctions(
-            alBufferSubDataSOFT
-        ));
+    private static boolean check_SOFT_deferred_updates(FunctionProvider provider, PointerBuffer caps, Set<String> ext) {
+        if (!ext.contains("AL_SOFT_deferred_updates")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            108, 109
+        },
+            "alDeferUpdatesSOFT", "alProcessUpdatesSOFT"
+        ) || reportMissing("AL", "AL_SOFT_deferred_updates");
     }
 
-    private boolean check_SOFT_deferred_updates(java.util.Set<String> ext) {
-        return ext.contains("AL_SOFT_deferred_updates") && checkExtension("AL_SOFT_deferred_updates", checkFunctions(
-            alDeferUpdatesSOFT, alProcessUpdatesSOFT
-        ));
+    private static boolean check_SOFT_source_latency(FunctionProvider provider, PointerBuffer caps, Set<String> ext) {
+        if (!ext.contains("AL_SOFT_source_latency")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121
+        },
+            "alSourcedSOFT", "alSource3dSOFT", "alSourcedvSOFT", "alGetSourcedSOFT", "alGetSource3dSOFT", "alGetSourcedvSOFT", "alSourcei64SOFT", 
+            "alSource3i64SOFT", "alSourcei64vSOFT", "alGetSourcei64SOFT", "alGetSource3i64SOFT", "alGetSourcei64vSOFT"
+        ) || reportMissing("AL", "AL_SOFT_source_latency");
     }
 
-    private boolean check_SOFT_source_latency(java.util.Set<String> ext) {
-        return ext.contains("AL_SOFT_source_latency") && checkExtension("AL_SOFT_source_latency", checkFunctions(
-            alSourcedSOFT, alSource3dSOFT, alSourcedvSOFT, alGetSourcedSOFT, alGetSource3dSOFT, alGetSourcedvSOFT, alSourcei64SOFT, alSource3i64SOFT, 
-            alSourcei64vSOFT, alGetSourcei64SOFT, alGetSource3i64SOFT, alGetSourcei64vSOFT
-        ));
-    }
+    private static boolean check_SOFT_source_resampler(FunctionProvider provider, PointerBuffer caps, Set<String> ext) {
+        if (!ext.contains("AL_SOFT_source_resampler")) {
+            return false;
+        }
 
-    private boolean check_SOFT_source_resampler(java.util.Set<String> ext) {
-        return ext.contains("AL_SOFT_source_resampler") && checkExtension("AL_SOFT_source_resampler", checkFunctions(
-            alGetStringiSOFT
-        ));
+        return checkFunctions(provider, caps, new int[] {
+            122
+        },
+            "alGetStringiSOFT"
+        ) || reportMissing("AL", "AL_SOFT_source_resampler");
     }
 
 }

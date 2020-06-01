@@ -19,19 +19,19 @@ typedef void (APIENTRY *glBlendFuncSeparatePROC) (jint, jint, jint, jint);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL14C_glBlendColor(JNIEnv *__env, jclass clazz, jfloat red, jfloat green, jfloat blue, jfloat alpha) {
-    glBlendColorPROC glBlendColor = (glBlendColorPROC)tlsGetFunction(424);
+    glBlendColorPROC glBlendColor = (glBlendColorPROC)tlsGetFunction(386);
     UNUSED_PARAM(clazz)
     glBlendColor(red, green, blue, alpha);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL14C_glBlendEquation(JNIEnv *__env, jclass clazz, jint mode) {
-    glBlendEquationPROC glBlendEquation = (glBlendEquationPROC)tlsGetFunction(425);
+    glBlendEquationPROC glBlendEquation = (glBlendEquationPROC)tlsGetFunction(387);
     UNUSED_PARAM(clazz)
     glBlendEquation(mode);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL14C_nglMultiDrawArrays__IJJI(JNIEnv *__env, jclass clazz, jint mode, jlong firstAddress, jlong countAddress, jint drawcount) {
-    glMultiDrawArraysPROC glMultiDrawArrays = (glMultiDrawArraysPROC)tlsGetFunction(426);
+    glMultiDrawArraysPROC glMultiDrawArrays = (glMultiDrawArraysPROC)tlsGetFunction(393);
     intptr_t first = (intptr_t)firstAddress;
     intptr_t count = (intptr_t)countAddress;
     UNUSED_PARAM(clazz)
@@ -39,7 +39,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL14C_nglMultiDrawArrays__IJJI(JNIE
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL14C_nglMultiDrawElements__IJIJI(JNIEnv *__env, jclass clazz, jint mode, jlong countAddress, jint type, jlong indicesAddress, jint drawcount) {
-    glMultiDrawElementsPROC glMultiDrawElements = (glMultiDrawElementsPROC)tlsGetFunction(427);
+    glMultiDrawElementsPROC glMultiDrawElements = (glMultiDrawElementsPROC)tlsGetFunction(394);
     intptr_t count = (intptr_t)countAddress;
     intptr_t indices = (intptr_t)indicesAddress;
     UNUSED_PARAM(clazz)
@@ -47,33 +47,33 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL14C_nglMultiDrawElements__IJIJI(J
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL14C_glPointParameterf(JNIEnv *__env, jclass clazz, jint pname, jfloat param) {
-    glPointParameterfPROC glPointParameterf = (glPointParameterfPROC)tlsGetFunction(428);
+    glPointParameterfPROC glPointParameterf = (glPointParameterfPROC)tlsGetFunction(395);
     UNUSED_PARAM(clazz)
     glPointParameterf(pname, param);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL14C_glPointParameteri(JNIEnv *__env, jclass clazz, jint pname, jint param) {
-    glPointParameteriPROC glPointParameteri = (glPointParameteriPROC)tlsGetFunction(429);
+    glPointParameteriPROC glPointParameteri = (glPointParameteriPROC)tlsGetFunction(396);
     UNUSED_PARAM(clazz)
     glPointParameteri(pname, param);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL14C_nglPointParameterfv__IJ(JNIEnv *__env, jclass clazz, jint pname, jlong paramsAddress) {
-    glPointParameterfvPROC glPointParameterfv = (glPointParameterfvPROC)tlsGetFunction(430);
+    glPointParameterfvPROC glPointParameterfv = (glPointParameterfvPROC)tlsGetFunction(397);
     intptr_t params = (intptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glPointParameterfv(pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL14C_nglPointParameteriv__IJ(JNIEnv *__env, jclass clazz, jint pname, jlong paramsAddress) {
-    glPointParameterivPROC glPointParameteriv = (glPointParameterivPROC)tlsGetFunction(431);
+    glPointParameterivPROC glPointParameteriv = (glPointParameterivPROC)tlsGetFunction(398);
     intptr_t params = (intptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glPointParameteriv(pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL14C_glBlendFuncSeparate(JNIEnv *__env, jclass clazz, jint sfactorRGB, jint dfactorRGB, jint sfactorAlpha, jint dfactorAlpha) {
-    glBlendFuncSeparatePROC glBlendFuncSeparate = (glBlendFuncSeparatePROC)tlsGetFunction(432);
+    glBlendFuncSeparatePROC glBlendFuncSeparate = (glBlendFuncSeparatePROC)tlsGetFunction(416);
     UNUSED_PARAM(clazz)
     glBlendFuncSeparate(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha);
 }

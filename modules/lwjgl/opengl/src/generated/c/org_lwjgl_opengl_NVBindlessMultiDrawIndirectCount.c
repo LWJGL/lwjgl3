@@ -12,14 +12,14 @@ typedef void (APIENTRY *glMultiDrawElementsIndirectBindlessCountNVPROC) (jint, j
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVBindlessMultiDrawIndirectCount_nglMultiDrawArraysIndirectBindlessCountNV(JNIEnv *__env, jclass clazz, jint mode, jlong indirectAddress, jlong drawCount, jint maxDrawCount, jint stride, jint vertexBufferCount) {
-    glMultiDrawArraysIndirectBindlessCountNVPROC glMultiDrawArraysIndirectBindlessCountNV = (glMultiDrawArraysIndirectBindlessCountNVPROC)tlsGetFunction(1870);
+    glMultiDrawArraysIndirectBindlessCountNVPROC glMultiDrawArraysIndirectBindlessCountNV = (glMultiDrawArraysIndirectBindlessCountNVPROC)tlsGetFunction(1904);
     intptr_t indirect = (intptr_t)indirectAddress;
     UNUSED_PARAM(clazz)
     glMultiDrawArraysIndirectBindlessCountNV(mode, indirect, (intptr_t)drawCount, maxDrawCount, stride, vertexBufferCount);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVBindlessMultiDrawIndirectCount_nglMultiDrawElementsIndirectBindlessCountNV(JNIEnv *__env, jclass clazz, jint mode, jint type, jlong indirectAddress, jlong drawCount, jint maxDrawCount, jint stride, jint vertexBufferCount) {
-    glMultiDrawElementsIndirectBindlessCountNVPROC glMultiDrawElementsIndirectBindlessCountNV = (glMultiDrawElementsIndirectBindlessCountNVPROC)tlsGetFunction(1871);
+    glMultiDrawElementsIndirectBindlessCountNVPROC glMultiDrawElementsIndirectBindlessCountNV = (glMultiDrawElementsIndirectBindlessCountNVPROC)tlsGetFunction(1905);
     intptr_t indirect = (intptr_t)indirectAddress;
     UNUSED_PARAM(clazz)
     glMultiDrawElementsIndirectBindlessCountNV(mode, type, indirect, (intptr_t)drawCount, maxDrawCount, stride, vertexBufferCount);

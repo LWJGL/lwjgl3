@@ -14,11 +14,18 @@ import static org.lwjgl.system.Checks.*;
 /** Defines the GLX capabilities of a connection. */
 public final class GLXCapabilities {
 
+    // GLX11
     public final long
         glXQueryExtensionsString,
         glXGetClientString,
-        glXQueryServerString,
-        glXGetCurrentDisplay,
+        glXQueryServerString;
+
+    // GLX12
+    public final long
+        glXGetCurrentDisplay;
+
+    // GLX13
+    public final long
         glXGetFBConfigs,
         glXChooseFBConfig,
         glXGetFBConfigAttrib,
@@ -34,8 +41,14 @@ public final class GLXCapabilities {
         glXGetCurrentReadDrawable,
         glXQueryContext,
         glXSelectEvent,
-        glXGetSelectedEvent,
-        glXGetProcAddress,
+        glXGetSelectedEvent;
+
+    // GLX14
+    public final long
+        glXGetProcAddress;
+
+    // GLX_AMD_gpu_association
+    public final long
         glXBlitContextFramebufferAMD,
         glXCreateAssociatedContextAMD,
         glXCreateAssociatedContextAttribsAMD,
@@ -44,45 +57,93 @@ public final class GLXCapabilities {
         glXGetCurrentAssociatedContextAMD,
         glXGetGPUIDsAMD,
         glXGetGPUInfoAMD,
-        glXMakeAssociatedContextCurrentAMD,
-        glXCreateContextAttribsARB,
-        glXGetProcAddressARB,
+        glXMakeAssociatedContextCurrentAMD;
+
+    // GLX_ARB_create_context
+    public final long
+        glXCreateContextAttribsARB;
+
+    // GLX_ARB_get_proc_address
+    public final long
+        glXGetProcAddressARB;
+
+    // GLX_EXT_import_context
+    public final long
         glXGetCurrentDisplayEXT,
         glXQueryContextInfoEXT,
         glXGetContextIDEXT,
         glXImportContextEXT,
-        glXFreeContextEXT,
-        glXSwapIntervalEXT,
+        glXFreeContextEXT;
+
+    // GLX_EXT_swap_control
+    public final long
+        glXSwapIntervalEXT;
+
+    // GLX_EXT_texture_from_pixmap
+    public final long
         glXBindTexImageEXT,
-        glXReleaseTexImageEXT,
+        glXReleaseTexImageEXT;
+
+    // GLX_NV_copy_buffer
+    public final long
         glXCopyBufferSubDataNV,
-        glXNamedCopyBufferSubDataNV,
-        glXCopyImageSubDataNV,
-        glXDelayBeforeSwapNV,
+        glXNamedCopyBufferSubDataNV;
+
+    // GLX_NV_copy_image
+    public final long
+        glXCopyImageSubDataNV;
+
+    // GLX_NV_delay_before_swap
+    public final long
+        glXDelayBeforeSwapNV;
+
+    // GLX_NV_swap_group
+    public final long
         glXJoinSwapGroupNV,
         glXBindSwapBarrierNV,
         glXQuerySwapGroupNV,
         glXQueryMaxSwapGroupsNV,
         glXQueryFrameCountNV,
-        glXResetFrameCountNV,
+        glXResetFrameCountNV;
+
+    // GLX_SGI_make_current_read
+    public final long
         glXMakeCurrentReadSGI,
-        glXGetCurrentReadDrawableSGI,
-        glXSwapIntervalSGI,
+        glXGetCurrentReadDrawableSGI;
+
+    // GLX_SGI_swap_control
+    public final long
+        glXSwapIntervalSGI;
+
+    // GLX_SGI_video_sync
+    public final long
         glXGetVideoSyncSGI,
-        glXWaitVideoSyncSGI,
+        glXWaitVideoSyncSGI;
+
+    // GLX_SGIX_fbconfig
+    public final long
         glXGetFBConfigAttribSGIX,
         glXChooseFBConfigSGIX,
         glXCreateGLXPixmapWithConfigSGIX,
         glXCreateContextWithConfigSGIX,
         glXGetVisualFromFBConfigSGIX,
-        glXGetFBConfigFromVisualSGIX,
+        glXGetFBConfigFromVisualSGIX;
+
+    // GLX_SGIX_pbuffer
+    public final long
         glXCreateGLXPbufferSGIX,
         glXDestroyGLXPbufferSGIX,
         glXQueryGLXPbufferSGIX,
         glXSelectEventSGIX,
-        glXGetSelectedEventSGIX,
+        glXGetSelectedEventSGIX;
+
+    // GLX_SGIX_swap_barrier
+    public final long
         glXBindSwapBarrierSGIX,
-        glXQueryMaxSwapBarriersSGIX,
+        glXQueryMaxSwapBarriersSGIX;
+
+    // GLX_SGIX_swap_group
+    public final long
         glXJoinSwapGroupSGIX;
 
     /** When true, {@link GLX11} is supported. */
@@ -203,89 +264,21 @@ public final class GLXCapabilities {
     public final boolean GLX_SGIX_swap_group;
 
     GLXCapabilities(FunctionProvider provider, Set<String> ext) {
-        glXQueryExtensionsString = provider.getFunctionAddress("glXQueryExtensionsString");
-        glXGetClientString = provider.getFunctionAddress("glXGetClientString");
-        glXQueryServerString = provider.getFunctionAddress("glXQueryServerString");
-        glXGetCurrentDisplay = provider.getFunctionAddress("glXGetCurrentDisplay");
-        glXGetFBConfigs = provider.getFunctionAddress("glXGetFBConfigs");
-        glXChooseFBConfig = provider.getFunctionAddress("glXChooseFBConfig");
-        glXGetFBConfigAttrib = provider.getFunctionAddress("glXGetFBConfigAttrib");
-        glXGetVisualFromFBConfig = provider.getFunctionAddress("glXGetVisualFromFBConfig");
-        glXCreateWindow = provider.getFunctionAddress("glXCreateWindow");
-        glXCreatePixmap = provider.getFunctionAddress("glXCreatePixmap");
-        glXDestroyPixmap = provider.getFunctionAddress("glXDestroyPixmap");
-        glXCreatePbuffer = provider.getFunctionAddress("glXCreatePbuffer");
-        glXDestroyPbuffer = provider.getFunctionAddress("glXDestroyPbuffer");
-        glXQueryDrawable = provider.getFunctionAddress("glXQueryDrawable");
-        glXCreateNewContext = provider.getFunctionAddress("glXCreateNewContext");
-        glXMakeContextCurrent = provider.getFunctionAddress("glXMakeContextCurrent");
-        glXGetCurrentReadDrawable = provider.getFunctionAddress("glXGetCurrentReadDrawable");
-        glXQueryContext = provider.getFunctionAddress("glXQueryContext");
-        glXSelectEvent = provider.getFunctionAddress("glXSelectEvent");
-        glXGetSelectedEvent = provider.getFunctionAddress("glXGetSelectedEvent");
-        glXGetProcAddress = provider.getFunctionAddress("glXGetProcAddress");
-        glXBlitContextFramebufferAMD = provider.getFunctionAddress("glXBlitContextFramebufferAMD");
-        glXCreateAssociatedContextAMD = provider.getFunctionAddress("glXCreateAssociatedContextAMD");
-        glXCreateAssociatedContextAttribsAMD = provider.getFunctionAddress("glXCreateAssociatedContextAttribsAMD");
-        glXDeleteAssociatedContextAMD = provider.getFunctionAddress("glXDeleteAssociatedContextAMD");
-        glXGetContextGPUIDAMD = provider.getFunctionAddress("glXGetContextGPUIDAMD");
-        glXGetCurrentAssociatedContextAMD = provider.getFunctionAddress("glXGetCurrentAssociatedContextAMD");
-        glXGetGPUIDsAMD = provider.getFunctionAddress("glXGetGPUIDsAMD");
-        glXGetGPUInfoAMD = provider.getFunctionAddress("glXGetGPUInfoAMD");
-        glXMakeAssociatedContextCurrentAMD = provider.getFunctionAddress("glXMakeAssociatedContextCurrentAMD");
-        glXCreateContextAttribsARB = provider.getFunctionAddress("glXCreateContextAttribsARB");
-        glXGetProcAddressARB = provider.getFunctionAddress("glXGetProcAddressARB");
-        glXGetCurrentDisplayEXT = provider.getFunctionAddress("glXGetCurrentDisplayEXT");
-        glXQueryContextInfoEXT = provider.getFunctionAddress("glXQueryContextInfoEXT");
-        glXGetContextIDEXT = provider.getFunctionAddress("glXGetContextIDEXT");
-        glXImportContextEXT = provider.getFunctionAddress("glXImportContextEXT");
-        glXFreeContextEXT = provider.getFunctionAddress("glXFreeContextEXT");
-        glXSwapIntervalEXT = provider.getFunctionAddress("glXSwapIntervalEXT");
-        glXBindTexImageEXT = provider.getFunctionAddress("glXBindTexImageEXT");
-        glXReleaseTexImageEXT = provider.getFunctionAddress("glXReleaseTexImageEXT");
-        glXCopyBufferSubDataNV = provider.getFunctionAddress("glXCopyBufferSubDataNV");
-        glXNamedCopyBufferSubDataNV = provider.getFunctionAddress("glXNamedCopyBufferSubDataNV");
-        glXCopyImageSubDataNV = provider.getFunctionAddress("glXCopyImageSubDataNV");
-        glXDelayBeforeSwapNV = provider.getFunctionAddress("glXDelayBeforeSwapNV");
-        glXJoinSwapGroupNV = provider.getFunctionAddress("glXJoinSwapGroupNV");
-        glXBindSwapBarrierNV = provider.getFunctionAddress("glXBindSwapBarrierNV");
-        glXQuerySwapGroupNV = provider.getFunctionAddress("glXQuerySwapGroupNV");
-        glXQueryMaxSwapGroupsNV = provider.getFunctionAddress("glXQueryMaxSwapGroupsNV");
-        glXQueryFrameCountNV = provider.getFunctionAddress("glXQueryFrameCountNV");
-        glXResetFrameCountNV = provider.getFunctionAddress("glXResetFrameCountNV");
-        glXMakeCurrentReadSGI = provider.getFunctionAddress("glXMakeCurrentReadSGI");
-        glXGetCurrentReadDrawableSGI = provider.getFunctionAddress("glXGetCurrentReadDrawableSGI");
-        glXSwapIntervalSGI = provider.getFunctionAddress("glXSwapIntervalSGI");
-        glXGetVideoSyncSGI = provider.getFunctionAddress("glXGetVideoSyncSGI");
-        glXWaitVideoSyncSGI = provider.getFunctionAddress("glXWaitVideoSyncSGI");
-        glXGetFBConfigAttribSGIX = provider.getFunctionAddress("glXGetFBConfigAttribSGIX");
-        glXChooseFBConfigSGIX = provider.getFunctionAddress("glXChooseFBConfigSGIX");
-        glXCreateGLXPixmapWithConfigSGIX = provider.getFunctionAddress("glXCreateGLXPixmapWithConfigSGIX");
-        glXCreateContextWithConfigSGIX = provider.getFunctionAddress("glXCreateContextWithConfigSGIX");
-        glXGetVisualFromFBConfigSGIX = provider.getFunctionAddress("glXGetVisualFromFBConfigSGIX");
-        glXGetFBConfigFromVisualSGIX = provider.getFunctionAddress("glXGetFBConfigFromVisualSGIX");
-        glXCreateGLXPbufferSGIX = provider.getFunctionAddress("glXCreateGLXPbufferSGIX");
-        glXDestroyGLXPbufferSGIX = provider.getFunctionAddress("glXDestroyGLXPbufferSGIX");
-        glXQueryGLXPbufferSGIX = provider.getFunctionAddress("glXQueryGLXPbufferSGIX");
-        glXSelectEventSGIX = provider.getFunctionAddress("glXSelectEventSGIX");
-        glXGetSelectedEventSGIX = provider.getFunctionAddress("glXGetSelectedEventSGIX");
-        glXBindSwapBarrierSGIX = provider.getFunctionAddress("glXBindSwapBarrierSGIX");
-        glXQueryMaxSwapBarriersSGIX = provider.getFunctionAddress("glXQueryMaxSwapBarriersSGIX");
-        glXJoinSwapGroupSGIX = provider.getFunctionAddress("glXJoinSwapGroupSGIX");
+        long[] caps = new long[69];
 
-        GLX11 = check_GLX11(ext);
-        GLX12 = check_GLX12(ext);
-        GLX13 = check_GLX13(ext);
-        GLX14 = check_GLX14(ext);
-        GLX_AMD_gpu_association = check_GLX_AMD_gpu_association(ext);
+        GLX11 = check_GLX11(provider, caps, ext);
+        GLX12 = check_GLX12(provider, caps, ext);
+        GLX13 = check_GLX13(provider, caps, ext);
+        GLX14 = check_GLX14(provider, caps, ext);
+        GLX_AMD_gpu_association = check_GLX_AMD_gpu_association(provider, caps, ext);
         GLX_ARB_context_flush_control = ext.contains("GLX_ARB_context_flush_control");
-        GLX_ARB_create_context = check_GLX_ARB_create_context(ext);
+        GLX_ARB_create_context = check_GLX_ARB_create_context(provider, caps, ext);
         GLX_ARB_create_context_no_error = ext.contains("GLX_ARB_create_context_no_error");
         GLX_ARB_create_context_profile = ext.contains("GLX_ARB_create_context_profile");
         GLX_ARB_create_context_robustness = ext.contains("GLX_ARB_create_context_robustness");
         GLX_ARB_fbconfig_float = ext.contains("GLX_ARB_fbconfig_float");
         GLX_ARB_framebuffer_sRGB = ext.contains("GLX_ARB_framebuffer_sRGB");
-        GLX_ARB_get_proc_address = check_GLX_ARB_get_proc_address(ext);
+        GLX_ARB_get_proc_address = check_GLX_ARB_get_proc_address(provider, caps, ext);
         GLX_ARB_multisample = ext.contains("GLX_ARB_multisample");
         GLX_ARB_robustness_application_isolation = ext.contains("GLX_ARB_robustness_application_isolation");
         GLX_ARB_robustness_share_group_isolation = ext.contains("GLX_ARB_robustness_share_group_isolation");
@@ -296,169 +289,356 @@ public final class GLXCapabilities {
         GLX_EXT_create_context_es_profile = ext.contains("GLX_EXT_create_context_es_profile");
         GLX_EXT_fbconfig_packed_float = ext.contains("GLX_EXT_fbconfig_packed_float");
         GLX_EXT_framebuffer_sRGB = ext.contains("GLX_EXT_framebuffer_sRGB");
-        GLX_EXT_import_context = check_GLX_EXT_import_context(ext);
+        GLX_EXT_import_context = check_GLX_EXT_import_context(provider, caps, ext);
         GLX_EXT_no_config_context = ext.contains("GLX_EXT_no_config_context");
         GLX_EXT_stereo_tree = ext.contains("GLX_EXT_stereo_tree");
-        GLX_EXT_swap_control = check_GLX_EXT_swap_control(ext);
+        GLX_EXT_swap_control = check_GLX_EXT_swap_control(provider, caps, ext);
         GLX_EXT_swap_control_tear = ext.contains("GLX_EXT_swap_control_tear");
-        GLX_EXT_texture_from_pixmap = check_GLX_EXT_texture_from_pixmap(ext);
+        GLX_EXT_texture_from_pixmap = check_GLX_EXT_texture_from_pixmap(provider, caps, ext);
         GLX_EXT_visual_info = ext.contains("GLX_EXT_visual_info");
         GLX_EXT_visual_rating = ext.contains("GLX_EXT_visual_rating");
         GLX_INTEL_swap_event = ext.contains("GLX_INTEL_swap_event");
-        GLX_NV_copy_buffer = check_GLX_NV_copy_buffer(ext);
-        GLX_NV_copy_image = check_GLX_NV_copy_image(ext);
-        GLX_NV_delay_before_swap = check_GLX_NV_delay_before_swap(ext);
+        GLX_NV_copy_buffer = check_GLX_NV_copy_buffer(provider, caps, ext);
+        GLX_NV_copy_image = check_GLX_NV_copy_image(provider, caps, ext);
+        GLX_NV_delay_before_swap = check_GLX_NV_delay_before_swap(provider, caps, ext);
         GLX_NV_float_buffer = ext.contains("GLX_NV_float_buffer");
         GLX_NV_multigpu_context = ext.contains("GLX_NV_multigpu_context");
         GLX_NV_multisample_coverage = ext.contains("GLX_NV_multisample_coverage");
         GLX_NV_robustness_video_memory_purge = ext.contains("GLX_NV_robustness_video_memory_purge");
-        GLX_NV_swap_group = check_GLX_NV_swap_group(ext);
-        GLX_SGI_make_current_read = check_GLX_SGI_make_current_read(ext);
-        GLX_SGI_swap_control = check_GLX_SGI_swap_control(ext);
-        GLX_SGI_video_sync = check_GLX_SGI_video_sync(ext);
-        GLX_SGIX_fbconfig = check_GLX_SGIX_fbconfig(ext);
-        GLX_SGIX_pbuffer = check_GLX_SGIX_pbuffer(ext);
-        GLX_SGIX_swap_barrier = check_GLX_SGIX_swap_barrier(ext);
-        GLX_SGIX_swap_group = check_GLX_SGIX_swap_group(ext);
+        GLX_NV_swap_group = check_GLX_NV_swap_group(provider, caps, ext);
+        GLX_SGI_make_current_read = check_GLX_SGI_make_current_read(provider, caps, ext);
+        GLX_SGI_swap_control = check_GLX_SGI_swap_control(provider, caps, ext);
+        GLX_SGI_video_sync = check_GLX_SGI_video_sync(provider, caps, ext);
+        GLX_SGIX_fbconfig = check_GLX_SGIX_fbconfig(provider, caps, ext);
+        GLX_SGIX_pbuffer = check_GLX_SGIX_pbuffer(provider, caps, ext);
+        GLX_SGIX_swap_barrier = check_GLX_SGIX_swap_barrier(provider, caps, ext);
+        GLX_SGIX_swap_group = check_GLX_SGIX_swap_group(provider, caps, ext);
+
+        glXQueryExtensionsString = caps[0];
+        glXGetClientString = caps[1];
+        glXQueryServerString = caps[2];
+        glXGetCurrentDisplay = caps[3];
+        glXGetFBConfigs = caps[4];
+        glXChooseFBConfig = caps[5];
+        glXGetFBConfigAttrib = caps[6];
+        glXGetVisualFromFBConfig = caps[7];
+        glXCreateWindow = caps[8];
+        glXCreatePixmap = caps[9];
+        glXDestroyPixmap = caps[10];
+        glXCreatePbuffer = caps[11];
+        glXDestroyPbuffer = caps[12];
+        glXQueryDrawable = caps[13];
+        glXCreateNewContext = caps[14];
+        glXMakeContextCurrent = caps[15];
+        glXGetCurrentReadDrawable = caps[16];
+        glXQueryContext = caps[17];
+        glXSelectEvent = caps[18];
+        glXGetSelectedEvent = caps[19];
+        glXGetProcAddress = caps[20];
+        glXBlitContextFramebufferAMD = caps[21];
+        glXCreateAssociatedContextAMD = caps[22];
+        glXCreateAssociatedContextAttribsAMD = caps[23];
+        glXDeleteAssociatedContextAMD = caps[24];
+        glXGetContextGPUIDAMD = caps[25];
+        glXGetCurrentAssociatedContextAMD = caps[26];
+        glXGetGPUIDsAMD = caps[27];
+        glXGetGPUInfoAMD = caps[28];
+        glXMakeAssociatedContextCurrentAMD = caps[29];
+        glXCreateContextAttribsARB = caps[30];
+        glXGetProcAddressARB = caps[31];
+        glXGetCurrentDisplayEXT = caps[32];
+        glXQueryContextInfoEXT = caps[33];
+        glXGetContextIDEXT = caps[34];
+        glXImportContextEXT = caps[35];
+        glXFreeContextEXT = caps[36];
+        glXSwapIntervalEXT = caps[37];
+        glXBindTexImageEXT = caps[38];
+        glXReleaseTexImageEXT = caps[39];
+        glXCopyBufferSubDataNV = caps[40];
+        glXNamedCopyBufferSubDataNV = caps[41];
+        glXCopyImageSubDataNV = caps[42];
+        glXDelayBeforeSwapNV = caps[43];
+        glXJoinSwapGroupNV = caps[44];
+        glXBindSwapBarrierNV = caps[45];
+        glXQuerySwapGroupNV = caps[46];
+        glXQueryMaxSwapGroupsNV = caps[47];
+        glXQueryFrameCountNV = caps[48];
+        glXResetFrameCountNV = caps[49];
+        glXMakeCurrentReadSGI = caps[50];
+        glXGetCurrentReadDrawableSGI = caps[51];
+        glXSwapIntervalSGI = caps[52];
+        glXGetVideoSyncSGI = caps[53];
+        glXWaitVideoSyncSGI = caps[54];
+        glXGetFBConfigAttribSGIX = caps[55];
+        glXChooseFBConfigSGIX = caps[56];
+        glXCreateGLXPixmapWithConfigSGIX = caps[57];
+        glXCreateContextWithConfigSGIX = caps[58];
+        glXGetVisualFromFBConfigSGIX = caps[59];
+        glXGetFBConfigFromVisualSGIX = caps[60];
+        glXCreateGLXPbufferSGIX = caps[61];
+        glXDestroyGLXPbufferSGIX = caps[62];
+        glXQueryGLXPbufferSGIX = caps[63];
+        glXSelectEventSGIX = caps[64];
+        glXGetSelectedEventSGIX = caps[65];
+        glXBindSwapBarrierSGIX = caps[66];
+        glXQueryMaxSwapBarriersSGIX = caps[67];
+        glXJoinSwapGroupSGIX = caps[68];
     }
 
-    private static boolean checkExtension(String extension, boolean supported) {
-        if (supported) {
-            return true;
+    private static boolean check_GLX11(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("GLX11")) {
+            return false;
         }
 
-        apiLog("[GLX] " + extension + " was reported as available but an entry point is missing.");
-        return false;
+        return checkFunctions(provider, caps, new int[] {
+            0, 1, 2
+        },
+            "glXQueryExtensionsString", "glXGetClientString", "glXQueryServerString"
+        ) || reportMissing("GLX", "GLX11");
     }
 
-    private boolean check_GLX11(java.util.Set<String> ext) {
-        return ext.contains("GLX11") && checkExtension("GLX11", checkFunctions(
-            glXQueryExtensionsString, glXGetClientString, glXQueryServerString
-        ));
+    private static boolean check_GLX12(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("GLX12")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            3
+        },
+            "glXGetCurrentDisplay"
+        ) || reportMissing("GLX", "GLX12");
     }
 
-    private boolean check_GLX12(java.util.Set<String> ext) {
-        return ext.contains("GLX12") && checkExtension("GLX12", checkFunctions(
-            glXGetCurrentDisplay
-        ));
+    private static boolean check_GLX13(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("GLX13")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19
+        },
+            "glXGetFBConfigs", "glXChooseFBConfig", "glXGetFBConfigAttrib", "glXGetVisualFromFBConfig", "glXCreateWindow", "glXCreatePixmap", 
+            "glXDestroyPixmap", "glXCreatePbuffer", "glXDestroyPbuffer", "glXQueryDrawable", "glXCreateNewContext", "glXMakeContextCurrent", 
+            "glXGetCurrentReadDrawable", "glXQueryContext", "glXSelectEvent", "glXGetSelectedEvent"
+        ) || reportMissing("GLX", "GLX13");
     }
 
-    private boolean check_GLX13(java.util.Set<String> ext) {
-        return ext.contains("GLX13") && checkExtension("GLX13", checkFunctions(
-            glXGetFBConfigs, glXChooseFBConfig, glXGetFBConfigAttrib, glXGetVisualFromFBConfig, glXCreateWindow, glXCreatePixmap, glXDestroyPixmap, 
-            glXCreatePbuffer, glXDestroyPbuffer, glXQueryDrawable, glXCreateNewContext, glXMakeContextCurrent, glXGetCurrentReadDrawable, glXQueryContext, 
-            glXSelectEvent, glXGetSelectedEvent
-        ));
+    private static boolean check_GLX14(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("GLX14")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            20
+        },
+            "glXGetProcAddress"
+        ) || reportMissing("GLX", "GLX14");
     }
 
-    private boolean check_GLX14(java.util.Set<String> ext) {
-        return ext.contains("GLX14") && checkExtension("GLX14", checkFunctions(
-            glXGetProcAddress
-        ));
+    private static boolean check_GLX_AMD_gpu_association(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("GLX_AMD_gpu_association")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            21, 22, 23, 24, 25, 26, 27, 28, 29
+        },
+            "glXBlitContextFramebufferAMD", "glXCreateAssociatedContextAMD", "glXCreateAssociatedContextAttribsAMD", "glXDeleteAssociatedContextAMD", 
+            "glXGetContextGPUIDAMD", "glXGetCurrentAssociatedContextAMD", "glXGetGPUIDsAMD", "glXGetGPUInfoAMD", "glXMakeAssociatedContextCurrentAMD"
+        ) || reportMissing("GLX", "GLX_AMD_gpu_association");
     }
 
-    private boolean check_GLX_AMD_gpu_association(java.util.Set<String> ext) {
-        return ext.contains("GLX_AMD_gpu_association") && checkExtension("GLX_AMD_gpu_association", checkFunctions(
-            glXBlitContextFramebufferAMD, glXCreateAssociatedContextAMD, glXCreateAssociatedContextAttribsAMD, glXDeleteAssociatedContextAMD, 
-            glXGetContextGPUIDAMD, glXGetCurrentAssociatedContextAMD, glXGetGPUIDsAMD, glXGetGPUInfoAMD, glXMakeAssociatedContextCurrentAMD
-        ));
+    private static boolean check_GLX_ARB_create_context(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("GLX_ARB_create_context")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            30
+        },
+            "glXCreateContextAttribsARB"
+        ) || reportMissing("GLX", "GLX_ARB_create_context");
     }
 
-    private boolean check_GLX_ARB_create_context(java.util.Set<String> ext) {
-        return ext.contains("GLX_ARB_create_context") && checkExtension("GLX_ARB_create_context", checkFunctions(
-            glXCreateContextAttribsARB
-        ));
+    private static boolean check_GLX_ARB_get_proc_address(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("GLX_ARB_get_proc_address")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            31
+        },
+            "glXGetProcAddressARB"
+        ) || reportMissing("GLX", "GLX_ARB_get_proc_address");
     }
 
-    private boolean check_GLX_ARB_get_proc_address(java.util.Set<String> ext) {
-        return ext.contains("GLX_ARB_get_proc_address") && checkExtension("GLX_ARB_get_proc_address", checkFunctions(
-            glXGetProcAddressARB
-        ));
+    private static boolean check_GLX_EXT_import_context(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("GLX_EXT_import_context")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            32, 33, 34, 35, 36
+        },
+            "glXGetCurrentDisplayEXT", "glXQueryContextInfoEXT", "glXGetContextIDEXT", "glXImportContextEXT", "glXFreeContextEXT"
+        ) || reportMissing("GLX", "GLX_EXT_import_context");
     }
 
-    private boolean check_GLX_EXT_import_context(java.util.Set<String> ext) {
-        return ext.contains("GLX_EXT_import_context") && checkExtension("GLX_EXT_import_context", checkFunctions(
-            glXGetCurrentDisplayEXT, glXQueryContextInfoEXT, glXGetContextIDEXT, glXImportContextEXT, glXFreeContextEXT
-        ));
+    private static boolean check_GLX_EXT_swap_control(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("GLX_EXT_swap_control")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            37
+        },
+            "glXSwapIntervalEXT"
+        ) || reportMissing("GLX", "GLX_EXT_swap_control");
     }
 
-    private boolean check_GLX_EXT_swap_control(java.util.Set<String> ext) {
-        return ext.contains("GLX_EXT_swap_control") && checkExtension("GLX_EXT_swap_control", checkFunctions(
-            glXSwapIntervalEXT
-        ));
+    private static boolean check_GLX_EXT_texture_from_pixmap(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("GLX_EXT_texture_from_pixmap")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            38, 39
+        },
+            "glXBindTexImageEXT", "glXReleaseTexImageEXT"
+        ) || reportMissing("GLX", "GLX_EXT_texture_from_pixmap");
     }
 
-    private boolean check_GLX_EXT_texture_from_pixmap(java.util.Set<String> ext) {
-        return ext.contains("GLX_EXT_texture_from_pixmap") && checkExtension("GLX_EXT_texture_from_pixmap", checkFunctions(
-            glXBindTexImageEXT, glXReleaseTexImageEXT
-        ));
+    private static boolean check_GLX_NV_copy_buffer(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("GLX_NV_copy_buffer")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            40, 41
+        },
+            "glXCopyBufferSubDataNV", "glXNamedCopyBufferSubDataNV"
+        ) || reportMissing("GLX", "GLX_NV_copy_buffer");
     }
 
-    private boolean check_GLX_NV_copy_buffer(java.util.Set<String> ext) {
-        return ext.contains("GLX_NV_copy_buffer") && checkExtension("GLX_NV_copy_buffer", checkFunctions(
-            glXCopyBufferSubDataNV, glXNamedCopyBufferSubDataNV
-        ));
+    private static boolean check_GLX_NV_copy_image(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("GLX_NV_copy_image")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            42
+        },
+            "glXCopyImageSubDataNV"
+        ) || reportMissing("GLX", "GLX_NV_copy_image");
     }
 
-    private boolean check_GLX_NV_copy_image(java.util.Set<String> ext) {
-        return ext.contains("GLX_NV_copy_image") && checkExtension("GLX_NV_copy_image", checkFunctions(
-            glXCopyImageSubDataNV
-        ));
+    private static boolean check_GLX_NV_delay_before_swap(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("GLX_NV_delay_before_swap")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            43
+        },
+            "glXDelayBeforeSwapNV"
+        ) || reportMissing("GLX", "GLX_NV_delay_before_swap");
     }
 
-    private boolean check_GLX_NV_delay_before_swap(java.util.Set<String> ext) {
-        return ext.contains("GLX_NV_delay_before_swap") && checkExtension("GLX_NV_delay_before_swap", checkFunctions(
-            glXDelayBeforeSwapNV
-        ));
+    private static boolean check_GLX_NV_swap_group(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("GLX_NV_swap_group")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            44, 45, 46, 47, 48, 49
+        },
+            "glXJoinSwapGroupNV", "glXBindSwapBarrierNV", "glXQuerySwapGroupNV", "glXQueryMaxSwapGroupsNV", "glXQueryFrameCountNV", "glXResetFrameCountNV"
+        ) || reportMissing("GLX", "GLX_NV_swap_group");
     }
 
-    private boolean check_GLX_NV_swap_group(java.util.Set<String> ext) {
-        return ext.contains("GLX_NV_swap_group") && checkExtension("GLX_NV_swap_group", checkFunctions(
-            glXJoinSwapGroupNV, glXBindSwapBarrierNV, glXQuerySwapGroupNV, glXQueryMaxSwapGroupsNV, glXQueryFrameCountNV, glXResetFrameCountNV
-        ));
+    private static boolean check_GLX_SGI_make_current_read(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("GLX_SGI_make_current_read")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            50, 51
+        },
+            "glXMakeCurrentReadSGI", "glXGetCurrentReadDrawableSGI"
+        ) || reportMissing("GLX", "GLX_SGI_make_current_read");
     }
 
-    private boolean check_GLX_SGI_make_current_read(java.util.Set<String> ext) {
-        return ext.contains("GLX_SGI_make_current_read") && checkExtension("GLX_SGI_make_current_read", checkFunctions(
-            glXMakeCurrentReadSGI, glXGetCurrentReadDrawableSGI
-        ));
+    private static boolean check_GLX_SGI_swap_control(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("GLX_SGI_swap_control")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            52
+        },
+            "glXSwapIntervalSGI"
+        ) || reportMissing("GLX", "GLX_SGI_swap_control");
     }
 
-    private boolean check_GLX_SGI_swap_control(java.util.Set<String> ext) {
-        return ext.contains("GLX_SGI_swap_control") && checkExtension("GLX_SGI_swap_control", checkFunctions(
-            glXSwapIntervalSGI
-        ));
+    private static boolean check_GLX_SGI_video_sync(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("GLX_SGI_video_sync")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            53, 54
+        },
+            "glXGetVideoSyncSGI", "glXWaitVideoSyncSGI"
+        ) || reportMissing("GLX", "GLX_SGI_video_sync");
     }
 
-    private boolean check_GLX_SGI_video_sync(java.util.Set<String> ext) {
-        return ext.contains("GLX_SGI_video_sync") && checkExtension("GLX_SGI_video_sync", checkFunctions(
-            glXGetVideoSyncSGI, glXWaitVideoSyncSGI
-        ));
+    private static boolean check_GLX_SGIX_fbconfig(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("GLX_SGIX_fbconfig")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            55, 56, 57, 58, 59, 60
+        },
+            "glXGetFBConfigAttribSGIX", "glXChooseFBConfigSGIX", "glXCreateGLXPixmapWithConfigSGIX", "glXCreateContextWithConfigSGIX", 
+            "glXGetVisualFromFBConfigSGIX", "glXGetFBConfigFromVisualSGIX"
+        ) || reportMissing("GLX", "GLX_SGIX_fbconfig");
     }
 
-    private boolean check_GLX_SGIX_fbconfig(java.util.Set<String> ext) {
-        return ext.contains("GLX_SGIX_fbconfig") && checkExtension("GLX_SGIX_fbconfig", checkFunctions(
-            glXGetFBConfigAttribSGIX, glXChooseFBConfigSGIX, glXCreateGLXPixmapWithConfigSGIX, glXCreateContextWithConfigSGIX, glXGetVisualFromFBConfigSGIX, 
-            glXGetFBConfigFromVisualSGIX
-        ));
+    private static boolean check_GLX_SGIX_pbuffer(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("GLX_SGIX_pbuffer")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            61, 62, 63, 64, 65
+        },
+            "glXCreateGLXPbufferSGIX", "glXDestroyGLXPbufferSGIX", "glXQueryGLXPbufferSGIX", "glXSelectEventSGIX", "glXGetSelectedEventSGIX"
+        ) || reportMissing("GLX", "GLX_SGIX_pbuffer");
     }
 
-    private boolean check_GLX_SGIX_pbuffer(java.util.Set<String> ext) {
-        return ext.contains("GLX_SGIX_pbuffer") && checkExtension("GLX_SGIX_pbuffer", checkFunctions(
-            glXCreateGLXPbufferSGIX, glXDestroyGLXPbufferSGIX, glXQueryGLXPbufferSGIX, glXSelectEventSGIX, glXGetSelectedEventSGIX
-        ));
+    private static boolean check_GLX_SGIX_swap_barrier(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("GLX_SGIX_swap_barrier")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            66, 67
+        },
+            "glXBindSwapBarrierSGIX", "glXQueryMaxSwapBarriersSGIX"
+        ) || reportMissing("GLX", "GLX_SGIX_swap_barrier");
     }
 
-    private boolean check_GLX_SGIX_swap_barrier(java.util.Set<String> ext) {
-        return ext.contains("GLX_SGIX_swap_barrier") && checkExtension("GLX_SGIX_swap_barrier", checkFunctions(
-            glXBindSwapBarrierSGIX, glXQueryMaxSwapBarriersSGIX
-        ));
-    }
+    private static boolean check_GLX_SGIX_swap_group(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("GLX_SGIX_swap_group")) {
+            return false;
+        }
 
-    private boolean check_GLX_SGIX_swap_group(java.util.Set<String> ext) {
-        return ext.contains("GLX_SGIX_swap_group") && checkExtension("GLX_SGIX_swap_group", checkFunctions(
-            glXJoinSwapGroupSGIX
-        ));
+        return checkFunctions(provider, caps, new int[] {
+            68
+        },
+            "glXJoinSwapGroupSGIX"
+        ) || reportMissing("GLX", "GLX_SGIX_swap_group");
     }
 
 }

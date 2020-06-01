@@ -7,6 +7,7 @@ package org.lwjgl.demo.openal;
 import org.lwjgl.*;
 import org.lwjgl.openal.*;
 import org.lwjgl.stb.*;
+import org.lwjgl.system.*;
 
 import java.io.*;
 import java.nio.*;
@@ -57,7 +58,7 @@ public final class ALCDemo {
 
         long context = alcCreateContext(device, (IntBuffer)null);
         alcSetThreadContext(context);
-        ALCapabilities caps = AL.createCapabilities(deviceCaps, memAllocPointer(ALCapabilities.ADDRESS_BUFFER_SIZE));
+        ALCapabilities caps = AL.createCapabilities(deviceCaps, MemoryUtil::memAllocPointer);
 
         System.out.println("ALC_FREQUENCY: " + alcGetInteger(device, ALC_FREQUENCY) + "Hz");
         System.out.println("ALC_REFRESH: " + alcGetInteger(device, ALC_REFRESH) + "Hz");

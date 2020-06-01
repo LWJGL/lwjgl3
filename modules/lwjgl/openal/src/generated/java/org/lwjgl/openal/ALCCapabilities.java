@@ -142,50 +142,50 @@ public final class ALCCapabilities {
         return false;
     }
 
-	private boolean check_ALC10(java.util.Set<String> ext) {
+	private boolean check_ALC10(Set<String> ext) {
 		return ext.contains("OpenALC10") && checkExtension("OpenALC10", checkFunctions(
             alcOpenDevice, alcCloseDevice, alcCreateContext, alcMakeContextCurrent, alcProcessContext, alcSuspendContext, alcDestroyContext, 
             alcGetCurrentContext, alcGetContextsDevice, alcIsExtensionPresent, alcGetProcAddress, alcGetEnumValue, alcGetError, alcGetString, alcGetIntegerv
         ));
 	}
 
-	private boolean check_ALC11(java.util.Set<String> ext) {
+	private boolean check_ALC11(Set<String> ext) {
 		return ext.contains("OpenALC11") && checkExtension("OpenALC11", checkFunctions(
             alcCaptureOpenDevice, alcCaptureCloseDevice, alcCaptureStart, alcCaptureStop, alcCaptureSamples
         ));
 	}
 
-	private boolean check_EXT_CAPTURE(java.util.Set<String> ext) {
+	private boolean check_EXT_CAPTURE(Set<String> ext) {
 		return ext.contains("ALC_EXT_CAPTURE") && checkExtension("ALC_EXT_CAPTURE", checkFunctions(
             alcCaptureOpenDevice, alcCaptureCloseDevice, alcCaptureStart, alcCaptureStop, alcCaptureSamples
         ));
 	}
 
-	private boolean check_EXT_thread_local_context(java.util.Set<String> ext) {
+	private boolean check_EXT_thread_local_context(Set<String> ext) {
 		return ext.contains("ALC_EXT_thread_local_context") && checkExtension("ALC_EXT_thread_local_context", checkFunctions(
             alcSetThreadContext, alcGetThreadContext
         ));
 	}
 
-	private boolean check_SOFT_device_clock(java.util.Set<String> ext) {
+	private boolean check_SOFT_device_clock(Set<String> ext) {
 		return ext.contains("ALC_SOFT_device_clock") && checkExtension("ALC_SOFT_device_clock", checkFunctions(
             alcGetInteger64vSOFT
         ));
 	}
 
-	private boolean check_SOFT_HRTF(java.util.Set<String> ext) {
+	private boolean check_SOFT_HRTF(Set<String> ext) {
 		return ext.contains("ALC_SOFT_HRTF") && checkExtension("ALC_SOFT_HRTF", checkFunctions(
             alcGetStringiSOFT, alcResetDeviceSOFT
         ));
 	}
 
-	private boolean check_SOFT_loopback(java.util.Set<String> ext) {
+	private boolean check_SOFT_loopback(Set<String> ext) {
 		return ext.contains("ALC_SOFT_loopback") && checkExtension("ALC_SOFT_loopback", checkFunctions(
             alcLoopbackOpenDeviceSOFT, alcIsRenderFormatSupportedSOFT, alcRenderSamplesSOFT
         ));
 	}
 
-	private boolean check_SOFT_pause_device(java.util.Set<String> ext) {
+	private boolean check_SOFT_pause_device(Set<String> ext) {
 		return ext.contains("ALC_SOFT_pause_device") && checkExtension("ALC_SOFT_pause_device", checkFunctions(
             alcDevicePauseSOFT, alcDeviceResumeSOFT
         ));
