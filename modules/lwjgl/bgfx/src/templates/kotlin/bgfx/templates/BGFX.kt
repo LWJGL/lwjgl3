@@ -14,7 +14,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     IntConstant(
         "API version",
 
-        "API_VERSION".."106"
+        "API_VERSION".."108"
     )
 
     ShortConstant(
@@ -547,6 +547,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "RENDERER_TYPE_OPENGLES".enum("OpenGL ES 2.0+"),
         "RENDERER_TYPE_OPENGL".enum("OpenGL 2.1+"),
         "RENDERER_TYPE_VULKAN".enum("Vulkan"),
+        "BGFX_RENDERER_TYPE_WEBGPU".enum("WebGPU"),
 
         "RENDERER_TYPE_COUNT".enum
     ).javaDocLinks
@@ -915,14 +916,18 @@ RGBA16S
         uint32_t("_num", "number of vertices to convert from source to destination")
     )
 
-    uint16_t(
+    uint32_t(
         "weld_vertices",
         "Welds vertices.",
 
-        uint16_t.p("_output", "welded vertices remapping table. The size of buffer be the same as number of vertices."),
+        MultiType(
+            PointerMapping.DATA_SHORT,
+            PointerMapping.DATA_INT
+        )..void.p("_output", "welded vertices remapping table. The size of buffer must be the same as number of vertices."),
         bgfx_vertex_layout_t.const.p("_layout", "vertex stream layout"),
         Unsafe..void.const.p("_data", "vertex stream"),
-        AutoSize("_output")..uint16_t("_num", "number of vertices in vertex stream"),
+        AutoSizeShr("(_index32 ? 2 : 1)", "_output")..uint32_t("_num", "number of vertices in vertex stream"),
+        bool("_index32", "set to {@code true} if input indices are 32-bit"),
         float("_epsilon", "error tolerance for vertex position comparison"),
 
         returnDoc = "number of unique vertices after vertex welding"

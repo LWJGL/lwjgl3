@@ -22,6 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code maxEncoders} &ndash; maximum number of encoder threads</li>
+ * <li>{@code minResourceCbSize} &ndash; minimum resource command buffer size</li>
  * <li>{@code transientVbSize} &ndash; maximum transient vertex buffer size</li>
  * <li>{@code transientIbSize} &ndash; maximum transient index buffer size</li>
  * </ul>
@@ -31,6 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre><code>
  * struct bgfx_init_limits_t {
  *     uint16_t maxEncoders;
+ *     uint32_t minResourceCbSize;
  *     uint32_t transientVbSize;
  *     uint32_t transientIbSize;
  * }</code></pre>
@@ -47,12 +49,14 @@ public class BGFXInitLimits extends Struct implements NativeResource {
     /** The struct member offsets. */
     public static final int
         MAXENCODERS,
+        MINRESOURCECBSIZE,
         TRANSIENTVBSIZE,
         TRANSIENTIBSIZE;
 
     static {
         Layout layout = __struct(
             __member(2),
+            __member(4),
             __member(4),
             __member(4)
         );
@@ -61,8 +65,9 @@ public class BGFXInitLimits extends Struct implements NativeResource {
         ALIGNOF = layout.getAlignment();
 
         MAXENCODERS = layout.offsetof(0);
-        TRANSIENTVBSIZE = layout.offsetof(1);
-        TRANSIENTIBSIZE = layout.offsetof(2);
+        MINRESOURCECBSIZE = layout.offsetof(1);
+        TRANSIENTVBSIZE = layout.offsetof(2);
+        TRANSIENTIBSIZE = layout.offsetof(3);
     }
 
     /**
@@ -81,6 +86,9 @@ public class BGFXInitLimits extends Struct implements NativeResource {
     /** Returns the value of the {@code maxEncoders} field. */
     @NativeType("uint16_t")
     public short maxEncoders() { return nmaxEncoders(address()); }
+    /** Returns the value of the {@code minResourceCbSize} field. */
+    @NativeType("uint32_t")
+    public int minResourceCbSize() { return nminResourceCbSize(address()); }
     /** Returns the value of the {@code transientVbSize} field. */
     @NativeType("uint32_t")
     public int transientVbSize() { return ntransientVbSize(address()); }
@@ -90,6 +98,8 @@ public class BGFXInitLimits extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@code maxEncoders} field. */
     public BGFXInitLimits maxEncoders(@NativeType("uint16_t") short value) { nmaxEncoders(address(), value); return this; }
+    /** Sets the specified value to the {@code minResourceCbSize} field. */
+    public BGFXInitLimits minResourceCbSize(@NativeType("uint32_t") int value) { nminResourceCbSize(address(), value); return this; }
     /** Sets the specified value to the {@code transientVbSize} field. */
     public BGFXInitLimits transientVbSize(@NativeType("uint32_t") int value) { ntransientVbSize(address(), value); return this; }
     /** Sets the specified value to the {@code transientIbSize} field. */
@@ -98,10 +108,12 @@ public class BGFXInitLimits extends Struct implements NativeResource {
     /** Initializes this struct with the specified values. */
     public BGFXInitLimits set(
         short maxEncoders,
+        int minResourceCbSize,
         int transientVbSize,
         int transientIbSize
     ) {
         maxEncoders(maxEncoders);
+        minResourceCbSize(minResourceCbSize);
         transientVbSize(transientVbSize);
         transientIbSize(transientIbSize);
 
@@ -183,6 +195,8 @@ public class BGFXInitLimits extends Struct implements NativeResource {
 
     /** Unsafe version of {@link #maxEncoders}. */
     public static short nmaxEncoders(long struct) { return UNSAFE.getShort(null, struct + BGFXInitLimits.MAXENCODERS); }
+    /** Unsafe version of {@link #minResourceCbSize}. */
+    public static int nminResourceCbSize(long struct) { return UNSAFE.getInt(null, struct + BGFXInitLimits.MINRESOURCECBSIZE); }
     /** Unsafe version of {@link #transientVbSize}. */
     public static int ntransientVbSize(long struct) { return UNSAFE.getInt(null, struct + BGFXInitLimits.TRANSIENTVBSIZE); }
     /** Unsafe version of {@link #transientIbSize}. */
@@ -190,6 +204,8 @@ public class BGFXInitLimits extends Struct implements NativeResource {
 
     /** Unsafe version of {@link #maxEncoders(short) maxEncoders}. */
     public static void nmaxEncoders(long struct, short value) { UNSAFE.putShort(null, struct + BGFXInitLimits.MAXENCODERS, value); }
+    /** Unsafe version of {@link #minResourceCbSize(int) minResourceCbSize}. */
+    public static void nminResourceCbSize(long struct, int value) { UNSAFE.putInt(null, struct + BGFXInitLimits.MINRESOURCECBSIZE, value); }
     /** Unsafe version of {@link #transientVbSize(int) transientVbSize}. */
     public static void ntransientVbSize(long struct, int value) { UNSAFE.putInt(null, struct + BGFXInitLimits.TRANSIENTVBSIZE, value); }
     /** Unsafe version of {@link #transientIbSize(int) transientIbSize}. */

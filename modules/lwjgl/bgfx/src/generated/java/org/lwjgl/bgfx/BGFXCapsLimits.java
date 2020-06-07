@@ -40,6 +40,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>{@code maxUniforms} &ndash; maximum number of uniform handles</li>
  * <li>{@code maxOcclusionQueries} &ndash; maximum number of occlusion query handles</li>
  * <li>{@code maxEncoders} &ndash; maximum number of encoder threads</li>
+ * <li>{@code minResourceCbSize} &ndash; minimum resource command buffer size</li>
  * <li>{@code transientVbSize} &ndash; maximum transient vertex buffer size</li>
  * <li>{@code transientIbSize} &ndash; maximum transient index buffer size</li>
  * </ul>
@@ -69,6 +70,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     uint32_t maxUniforms;
  *     uint32_t maxOcclusionQueries;
  *     uint32_t maxEncoders;
+ *     uint32_t minResourceCbSize;
  *     uint32_t transientVbSize;
  *     uint32_t transientIbSize;
  * }</code></pre>
@@ -105,11 +107,13 @@ public class BGFXCapsLimits extends Struct {
         MAXUNIFORMS,
         MAXOCCLUSIONQUERIES,
         MAXENCODERS,
+        MINRESOURCECBSIZE,
         TRANSIENTVBSIZE,
         TRANSIENTIBSIZE;
 
     static {
         Layout layout = __struct(
+            __member(4),
             __member(4),
             __member(4),
             __member(4),
@@ -159,8 +163,9 @@ public class BGFXCapsLimits extends Struct {
         MAXUNIFORMS = layout.offsetof(18);
         MAXOCCLUSIONQUERIES = layout.offsetof(19);
         MAXENCODERS = layout.offsetof(20);
-        TRANSIENTVBSIZE = layout.offsetof(21);
-        TRANSIENTIBSIZE = layout.offsetof(22);
+        MINRESOURCECBSIZE = layout.offsetof(21);
+        TRANSIENTVBSIZE = layout.offsetof(22);
+        TRANSIENTIBSIZE = layout.offsetof(23);
     }
 
     /**
@@ -239,6 +244,9 @@ public class BGFXCapsLimits extends Struct {
     /** Returns the value of the {@code maxEncoders} field. */
     @NativeType("uint32_t")
     public int maxEncoders() { return nmaxEncoders(address()); }
+    /** Returns the value of the {@code minResourceCbSize} field. */
+    @NativeType("uint32_t")
+    public int minResourceCbSize() { return nminResourceCbSize(address()); }
     /** Returns the value of the {@code transientVbSize} field. */
     @NativeType("uint32_t")
     public int transientVbSize() { return ntransientVbSize(address()); }
@@ -319,6 +327,8 @@ public class BGFXCapsLimits extends Struct {
     public static int nmaxOcclusionQueries(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MAXOCCLUSIONQUERIES); }
     /** Unsafe version of {@link #maxEncoders}. */
     public static int nmaxEncoders(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MAXENCODERS); }
+    /** Unsafe version of {@link #minResourceCbSize}. */
+    public static int nminResourceCbSize(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MINRESOURCECBSIZE); }
     /** Unsafe version of {@link #transientVbSize}. */
     public static int ntransientVbSize(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.TRANSIENTVBSIZE); }
     /** Unsafe version of {@link #transientIbSize}. */
@@ -425,6 +435,9 @@ public class BGFXCapsLimits extends Struct {
         /** Returns the value of the {@code maxEncoders} field. */
         @NativeType("uint32_t")
         public int maxEncoders() { return BGFXCapsLimits.nmaxEncoders(address()); }
+        /** Returns the value of the {@code minResourceCbSize} field. */
+        @NativeType("uint32_t")
+        public int minResourceCbSize() { return BGFXCapsLimits.nminResourceCbSize(address()); }
         /** Returns the value of the {@code transientVbSize} field. */
         @NativeType("uint32_t")
         public int transientVbSize() { return BGFXCapsLimits.ntransientVbSize(address()); }

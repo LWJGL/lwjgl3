@@ -1099,10 +1099,10 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
 
     StringConstant(
         """
-        Specifies whether the Collada loader should use Collada names as node names.
+        Specifies whether the Collada loader should use Collada names.
 
-        If this property is set to true, the Collada names will be used as the node name. The default is to use the id tag (resp. sid tag, if no id tag is
-        present) instead.
+        If this property is set to true, the Collada names will be used as the node and mesh names. The default is to use the id tag (resp. sid tag, if no id
+        tag is present) instead.
 
         Property type: Bool. Default value: false.
         """,

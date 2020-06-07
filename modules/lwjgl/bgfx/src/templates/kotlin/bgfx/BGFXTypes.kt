@@ -263,6 +263,7 @@ val bgfx_caps_limits_t = struct(Module.BGFX, "BGFXCapsLimits", nativeName = "bgf
     uint32_t("maxUniforms", "maximum number of uniform handles")
     uint32_t("maxOcclusionQueries", "maximum number of occlusion query handles")
     uint32_t("maxEncoders", "maximum number of encoder threads")
+    uint32_t("minResourceCbSize", "minimum resource command buffer size")
     uint32_t("transientVbSize", "maximum transient vertex buffer size")
     uint32_t("transientIbSize", "maximum transient index buffer size")
 }
@@ -539,6 +540,7 @@ val bgfx_init_limits_t = struct(Module.BGFX, "BGFXInitLimits", nativeName = "bgf
     documentation = "Configurable runtime limits parameters."
 
     uint16_t("maxEncoders", "maximum number of encoder threads")
+    uint32_t("minResourceCbSize", "minimum resource command buffer size")
     uint32_t("transientVbSize", "maximum transient vertex buffer size")
     uint32_t("transientIbSize", "maximum transient index buffer size")
 }
