@@ -404,6 +404,30 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
             Platform or system settings limitation. Pick another standard cursor shape or create a custom cursor.
             """,
             0x0001000B
+        ),
+        "FEATURE_UNAVAILABLE".enum(
+            """
+            The requested feature is not provided by the platform.
+ 
+            The requested feature is not provided by the platform, so GLFW is unable to implement it. The documentation for each function notes if it could
+            emit this error.
+ 
+            Platform or platform version limitation. The error can be ignored unless the feature is critical to the application.
+
+            A function call that emits this error has no effect other than the error and updating any existing out parameters.
+            """,
+            0x0001000C
+        ),
+        "FEATURE_UNIMPLEMENTED".enum(
+            """
+            The requested feature has not yet been implemented in GLFW for this platform.
+
+            An incomplete implementation of GLFW for this platform, hopefully fixed in a future release. The error can be ignored unless the feature is
+            critical to the application.
+
+            A function call that emits this error has no effect other than the error and updating any existing out parameters.
+            """,
+            0x0001000D
         )
     )
 
@@ -885,11 +909,15 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     void(
         "Terminate",
         """
-        Destroys all remaining windows and cursors, restores any modified gamma ramps and frees any other allocated resources. Once this function is called, you
-        must again call #Init() successfully before you will be able to use most GLFW functions.
+        Terminates the GLFW library.
+        
+        This function destroys all remaining windows and cursors, restores any modified gamma ramps and frees any other allocated resources. Once this function
+        is called, you must again call #Init() successfully before you will be able to use most GLFW functions.
 
         If GLFW has been successfully initialized, this function should be called before the application exits. If initialization fails, there is no need to
         call this function, as it is called by #Init() before it returns failure.
+        
+        This function has no effect if GLFW is not initialized.
 
         ${note(ul(
             "This function may be called before #Init().",
@@ -1624,14 +1652,14 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
             "This function must only be called from the main thread.",
             "The specified image data is copied before this function returns.",
             """
-            <b>macOS</b>: The GLFW window has no icon, as it is not a document window, so this function does nothing. The dock icon will be the same as the
+            <b>macOS</b>: Regular windows do not have icons on macOS. This function will emit #FEATURE_UNAVAILABLE. The dock icon will be the same as the
             application bundle's icon. For more information on bundles, see the ${url(
                 "https://developer.apple.com/library/content/documentation/CoreFoundation/Conceptual/CFBundles/",
                 "Bundle Programming Guide")} in the Mac Developer Library.
             """,
             """
             <b>Wayland</b>: There is no existing protocol to change an icon, the window will thus inherit the one defined in the application's desktop file.
-            This function always emits #PLATFORM_ERROR.
+            This function will emit #FEATURE_UNAVAILABLE.
             """
         )}
         """,
@@ -1653,7 +1681,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         Notes:
         ${ul(
             "This function must only be called from the main thread.",
-            "<b>Wayland</b>: There is no way for an application to retrieve the global position of its windows, this function will always emit #PLATFORM_ERROR."
+            "<b>Wayland</b>: There is no way for an application to retrieve the global position of its windows. This function will emit #FEATURE_UNAVAILABLE."
         )}
         """,
 
@@ -1678,7 +1706,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         Notes:
         ${ul(
             "This function must only be called from the main thread.",
-            "<b>Wayland</b>: There is no way for an application to set the global position of its windows, this function will always emit #PLATFORM_ERROR."
+            "<b>Wayland</b>: There is no way for an application to set the global position of its windows. This function will emit #FEATURE_UNAVAILABLE."
         )}
         """,
 
@@ -1883,7 +1911,11 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
 
         A window created with framebuffer transparency may not use whole window transparency. The results of doing this are undefined.
 
-        This function must only be called from the main thread.
+        Notes:
+        ${ul(
+            "This function must only be called from the main thread.",
+            "<b>Wayland</b>: There is no way to set an opacity factor for a window. This function will emit #FEATURE_UNAVAILABLE."
+        )}
         """,
 
         GLFWwindow.p("window", "the window to set the opacity for"),
@@ -1989,7 +2021,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         Notes:
         ${ul(
             "This function must only be called from the main thread.",
-            "<b>Wayland</b>: It is not possible for an application to bring its windows to front, this function will always emit #PLATFORM_ERROR."
+            "<b>Wayland</b>: It is not possible for an application to set the input focus. This function will emit #FEATURE_UNAVAILABLE."
         )}
         """,
 
@@ -2457,8 +2489,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         bit when Num Lock was on.
 
         If the mode is #RAW_MOUSE_MOTION, the value must be either #TRUE to enable raw (unscaled and unaccelerated) mouse motion when the cursor is disabled,
-        or #FALSE to disable it. If raw motion is not supported, attempting to set this will emit #PLATFORM_ERROR. Call #RawMouseMotionSupported() to check for
-        support.
+        or #FALSE to disable it. If raw motion is not supported, attempting to set this will emit #FEATURE_UNAVAILABLE. Call #RawMouseMotionSupported() to
+        check for support.
 
         This function must only be called from the main thread.
         """,

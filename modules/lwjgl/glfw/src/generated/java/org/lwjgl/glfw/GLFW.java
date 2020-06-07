@@ -361,21 +361,41 @@ public class GLFW {
      * 
      * <p>Platform or system settings limitation. Pick another standard cursor shape or create a custom cursor.</p>
      * </li>
+     * <li>{@link #GLFW_FEATURE_UNAVAILABLE FEATURE_UNAVAILABLE} - 
+     * The requested feature is not provided by the platform.
+     * 
+     * <p>The requested feature is not provided by the platform, so GLFW is unable to implement it. The documentation for each function notes if it could
+     * emit this error.</p>
+     * 
+     * <p>Platform or platform version limitation. The error can be ignored unless the feature is critical to the application.</p>
+     * 
+     * <p>A function call that emits this error has no effect other than the error and updating any existing out parameters.</p>
+     * </li>
+     * <li>{@link #GLFW_FEATURE_UNIMPLEMENTED FEATURE_UNIMPLEMENTED} - 
+     * The requested feature has not yet been implemented in GLFW for this platform.
+     * 
+     * <p>An incomplete implementation of GLFW for this platform, hopefully fixed in a future release. The error can be ignored unless the feature is
+     * critical to the application.</p>
+     * 
+     * <p>A function call that emits this error has no effect other than the error and updating any existing out parameters.</p>
+     * </li>
      * </ul>
      */
     public static final int
-        GLFW_NO_ERROR            = 0,
-        GLFW_NOT_INITIALIZED     = 0x10001,
-        GLFW_NO_CURRENT_CONTEXT  = 0x10002,
-        GLFW_INVALID_ENUM        = 0x10003,
-        GLFW_INVALID_VALUE       = 0x10004,
-        GLFW_OUT_OF_MEMORY       = 0x10005,
-        GLFW_API_UNAVAILABLE     = 0x10006,
-        GLFW_VERSION_UNAVAILABLE = 0x10007,
-        GLFW_PLATFORM_ERROR      = 0x10008,
-        GLFW_FORMAT_UNAVAILABLE  = 0x10009,
-        GLFW_NO_WINDOW_CONTEXT   = 0x1000A,
-        GLFW_CURSOR_UNAVAILABLE  = 0x1000B;
+        GLFW_NO_ERROR              = 0,
+        GLFW_NOT_INITIALIZED       = 0x10001,
+        GLFW_NO_CURRENT_CONTEXT    = 0x10002,
+        GLFW_INVALID_ENUM          = 0x10003,
+        GLFW_INVALID_VALUE         = 0x10004,
+        GLFW_OUT_OF_MEMORY         = 0x10005,
+        GLFW_API_UNAVAILABLE       = 0x10006,
+        GLFW_VERSION_UNAVAILABLE   = 0x10007,
+        GLFW_PLATFORM_ERROR        = 0x10008,
+        GLFW_FORMAT_UNAVAILABLE    = 0x10009,
+        GLFW_NO_WINDOW_CONTEXT     = 0x1000A,
+        GLFW_CURSOR_UNAVAILABLE    = 0x1000B,
+        GLFW_FEATURE_UNAVAILABLE   = 0x1000C,
+        GLFW_FEATURE_UNIMPLEMENTED = 0x1000D;
 
     /**
      * Window attributes.
@@ -932,11 +952,15 @@ public class GLFW {
     // --- [ glfwTerminate ] ---
 
     /**
-     * Destroys all remaining windows and cursors, restores any modified gamma ramps and frees any other allocated resources. Once this function is called, you
-     * must again call {@link #glfwInit Init} successfully before you will be able to use most GLFW functions.
+     * Terminates the GLFW library.
+     * 
+     * <p>This function destroys all remaining windows and cursors, restores any modified gamma ramps and frees any other allocated resources. Once this function
+     * is called, you must again call {@link #glfwInit Init} successfully before you will be able to use most GLFW functions.</p>
      * 
      * <p>If GLFW has been successfully initialized, this function should be called before the application exits. If initialization fails, there is no need to
      * call this function, as it is called by {@link #glfwInit Init} before it returns failure.</p>
+     * 
+     * <p>This function has no effect if GLFW is not initialized.</p>
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
@@ -2145,10 +2169,10 @@ public class GLFW {
      * <ul>
      * <li>This function must only be called from the main thread.</li>
      * <li>The specified image data is copied before this function returns.</li>
-     * <li><b>macOS</b>: The GLFW window has no icon, as it is not a document window, so this function does nothing. The dock icon will be the same as the
+     * <li><b>macOS</b>: Regular windows do not have icons on macOS. This function will emit {@link #GLFW_FEATURE_UNAVAILABLE FEATURE_UNAVAILABLE}. The dock icon will be the same as the
      * application bundle's icon. For more information on bundles, see the <a target="_blank" href="https://developer.apple.com/library/content/documentation/CoreFoundation/Conceptual/CFBundles/">Bundle Programming Guide</a> in the Mac Developer Library.</li>
      * <li><b>Wayland</b>: There is no existing protocol to change an icon, the window will thus inherit the one defined in the application's desktop file.
-     * This function always emits {@link #GLFW_PLATFORM_ERROR PLATFORM_ERROR}.</li>
+     * This function will emit {@link #GLFW_FEATURE_UNAVAILABLE FEATURE_UNAVAILABLE}.</li>
      * </ul>
      *
      * @param window the window whose icon to set
@@ -2180,7 +2204,7 @@ public class GLFW {
      * 
      * <ul>
      * <li>This function must only be called from the main thread.</li>
-     * <li><b>Wayland</b>: There is no way for an application to retrieve the global position of its windows, this function will always emit {@link #GLFW_PLATFORM_ERROR PLATFORM_ERROR}.</li>
+     * <li><b>Wayland</b>: There is no way for an application to retrieve the global position of its windows. This function will emit {@link #GLFW_FEATURE_UNAVAILABLE FEATURE_UNAVAILABLE}.</li>
      * </ul>
      *
      * @param window the window to query
@@ -2212,7 +2236,7 @@ public class GLFW {
      * 
      * <ul>
      * <li>This function must only be called from the main thread.</li>
-     * <li><b>Wayland</b>: There is no way for an application to set the global position of its windows, this function will always emit {@link #GLFW_PLATFORM_ERROR PLATFORM_ERROR}.</li>
+     * <li><b>Wayland</b>: There is no way for an application to set the global position of its windows. This function will emit {@link #GLFW_FEATURE_UNAVAILABLE FEATURE_UNAVAILABLE}.</li>
      * </ul>
      *
      * @param window the window to query
@@ -2513,7 +2537,12 @@ public class GLFW {
      * 
      * <p>A window created with framebuffer transparency may not use whole window transparency. The results of doing this are undefined.</p>
      * 
-     * <p>This function must only be called from the main thread.</p>
+     * <p>Notes:</p>
+     * 
+     * <ul>
+     * <li>This function must only be called from the main thread.</li>
+     * <li><b>Wayland</b>: There is no way to set an opacity factor for a window. This function will emit {@link #GLFW_FEATURE_UNAVAILABLE FEATURE_UNAVAILABLE}.</li>
+     * </ul>
      *
      * @param window  the window to set the opacity for
      * @param opacity the desired opacity of the specified window
@@ -2656,7 +2685,7 @@ public class GLFW {
      * 
      * <ul>
      * <li>This function must only be called from the main thread.</li>
-     * <li><b>Wayland</b>: It is not possible for an application to bring its windows to front, this function will always emit {@link #GLFW_PLATFORM_ERROR PLATFORM_ERROR}.</li>
+     * <li><b>Wayland</b>: It is not possible for an application to set the input focus. This function will emit {@link #GLFW_FEATURE_UNAVAILABLE FEATURE_UNAVAILABLE}.</li>
      * </ul>
      *
      * @param window the window to give input focus
@@ -3322,8 +3351,8 @@ public class GLFW {
      * bit when Num Lock was on.</p>
      * 
      * <p>If the mode is {@link #GLFW_RAW_MOUSE_MOTION RAW_MOUSE_MOTION}, the value must be either {@link #GLFW_TRUE TRUE} to enable raw (unscaled and unaccelerated) mouse motion when the cursor is disabled,
-     * or {@link #GLFW_FALSE FALSE} to disable it. If raw motion is not supported, attempting to set this will emit {@link #GLFW_PLATFORM_ERROR PLATFORM_ERROR}. Call {@link #glfwRawMouseMotionSupported RawMouseMotionSupported} to check for
-     * support.</p>
+     * or {@link #GLFW_FALSE FALSE} to disable it. If raw motion is not supported, attempting to set this will emit {@link #GLFW_FEATURE_UNAVAILABLE FEATURE_UNAVAILABLE}. Call {@link #glfwRawMouseMotionSupported RawMouseMotionSupported} to
+     * check for support.</p>
      * 
      * <p>This function must only be called from the main thread.</p>
      *
