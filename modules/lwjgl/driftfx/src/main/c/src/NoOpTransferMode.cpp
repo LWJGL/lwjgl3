@@ -20,8 +20,8 @@ namespace internal {
 class NoOpTransferMode : public TransferMode {
 
 public:
-	SharedTexture* CreateSharedTexture(GLContext* glContext, Context* fxContext, math::Vec2ui size) {
-		return new NoopSharedTexture(glContext, size);
+	SharedTexture* CreateSharedTexture(GLContext* glContext, Context* fxContext, Frame* frame) {
+		return new NoopSharedTexture(glContext, frame);
 	}
 	int OnTextureCreated(prism::PrismBridge* bridge, Frame* frame, jobject fxTexture) {
 		return 0;

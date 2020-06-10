@@ -35,8 +35,8 @@ namespace d3d {
 
 class MainMemoryTransferMode : public TransferMode {
 public:
-	SharedTexture* CreateSharedTexture(GLContext* glContext, Context* fxContext, math::Vec2ui size) {
-		return new MainMemorySharedTexture(glContext, size);
+	SharedTexture* CreateSharedTexture(GLContext* glContext, Context* fxContext, Frame* frame) {
+		return new MainMemorySharedTexture(glContext, frame);
 	}
 	int OnTextureCreated(prism::PrismBridge* bridge, Frame* frame, jobject fxTexture) {
 				LogDebug("OnTextureCreated(" << bridge << ", " << frame << ", " << fxTexture << ")");
@@ -53,11 +53,11 @@ public:
 		java8::D3DResource* d3dResource = (java8::D3DResource*) resourceHandle;
 
 		IDirect3DTexture9* texture = d3dResource->pTexture;
-	
-		
+
+
 		// upload to D3D texture
 		auto size = frame->GetSize();
-		
+
 		D3DLOCKED_RECT tmp;
 		auto start = std::chrono::steady_clock::now();
 		WERR(texture->LockRect(0, &tmp, NULL, D3DLOCK_DISCARD));

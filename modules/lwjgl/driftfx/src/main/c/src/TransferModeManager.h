@@ -13,8 +13,6 @@
 #ifndef DRIFTFX_TRANSFERMODEMANAGER_H_
 #define DRIFTFX_TRANSFERMODEMANAGER_H_
 
-#include <jni.h>
-
 #include <map>
 #include <list>
 #include <string>
@@ -37,7 +35,7 @@ namespace internal {
 		virtual ~TransferMode();
 		std::string Name();
 		TransferModeId Id();
-		virtual SharedTexture* CreateSharedTexture(GLContext*, Context*, math::Vec2ui size) = 0;
+		virtual SharedTexture* CreateSharedTexture(GLContext*, Context*, Frame*) = 0;
 		virtual int OnTextureCreated(prism::PrismBridge*, Frame*, jobject) = 0;
 		virtual bool isPlatformDefault();
 		virtual bool isFallback();

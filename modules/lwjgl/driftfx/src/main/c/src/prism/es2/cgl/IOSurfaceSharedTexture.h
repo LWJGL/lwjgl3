@@ -38,7 +38,7 @@ private:
 public:
 	static int OnTextureCreated(PrismBridge* bridge, Frame* frame, jobject fxTexture);
 
-	IOSurfaceSharedTexture(gl::GLContext* context, math::Vec2ui size);
+	IOSurfaceSharedTexture(gl::GLContext* context, Frame* frame);
 	virtual ~IOSurfaceSharedTexture();
 
 	virtual bool BeforeRender();
@@ -48,12 +48,6 @@ public:
 
 	virtual IOSurfaceID GetIOSurfaceID();
 
-	virtual ShareData* CreateShareData();
-
-protected:
-
-	virtual void Allocate();
-	virtual void Release();
 };
 
 }

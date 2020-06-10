@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="OpenJFX 11">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/bin/libs/java/openjfx11/javafx-base.jar!/" />
+      <root url="jar://$PROJECT_DIR$/bin/libs/java/openjfx11/javafx-graphics.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

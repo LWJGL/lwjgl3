@@ -30,6 +30,8 @@ public:
 
 	virtual std::string GetName();
 
+	virtual bool IsValid();
+
 //	static GLenum glGetError();
 //	static void glGenTextures(GLsizei n, GLuint* textures);
 //	static void glDeleteTextures(GLsizei n, GLuint* textures);
@@ -59,14 +61,20 @@ public:
 //	static std::string getGLErrorString(GLenum error);
 
 //	static bool checkGLErrors;
+
+
 protected:
 	std::string name;
 	long instanceNum;
+
+	bool valid = true;
 
 	static void* resolve(const GLubyte* name);
 
 	static long instanceCount;
 	static bool initialized;
+
+
 
 };
 

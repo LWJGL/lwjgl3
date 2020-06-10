@@ -33,25 +33,21 @@ public:
 class MainMemorySharedTexture : public SharedTexture {
 
 public:
-	MainMemorySharedTexture(GLContext* context, math::Vec2ui size);
+	MainMemorySharedTexture(GLContext* context, Frame* frame);
 	virtual ~MainMemorySharedTexture();
 
 	virtual bool BeforeRender();
 	virtual bool AfterRender();
 
-	virtual ShareData* CreateShareData();
-
 protected:
 
-	virtual void Allocate();
-	virtual void Release();
 
 	void DownloadToMemory();
 
 
 private:
 
-	unsigned long memSize;
+	unsigned long size;
 	void* pointer;
 
 

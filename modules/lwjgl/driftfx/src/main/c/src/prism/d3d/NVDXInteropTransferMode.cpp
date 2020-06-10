@@ -40,9 +40,9 @@ namespace d3d {
 
 class NVDXInteropTransferMode : public TransferMode {
 public:
-	SharedTexture* CreateSharedTexture(GLContext* glContext, Context* fxContext, math::Vec2ui size) {
+	SharedTexture* CreateSharedTexture(GLContext* glContext, Context* fxContext, Frame* frame) {
        	D3D9ExContext* d3dContext = static_cast<D3D9ExContext*>(fxContext);
-	    return new D3DSharedTexture(glContext, d3dContext, size);
+	    return new D3DSharedTexture(glContext, d3dContext, frame);
     }
 	int OnTextureCreated(prism::PrismBridge* bridge, Frame* frame, jobject fxTexture) {
 		return D3DSharedTexture::OnTextureCreated(bridge, frame, fxTexture);

@@ -19,8 +19,6 @@
 #include "SharedTexture.h"
 #include "JNINativeSurface.h"
 
-#include "jni/JNITiming.h"
-
 using namespace std;
 
 using namespace driftfx::internal;
@@ -109,9 +107,6 @@ void JNINativeSurface::Initialize() {
 	jni::Frame::Initialize(env);
 	jni::SurfaceData::Initialize(env);
 	jni::NativeSurface::Initialize(env);
-
-	jni::Timing::Initialize(env);
-
 	LogDebug("initialization complete")
 }
 void JNINativeSurface::Dispose() {

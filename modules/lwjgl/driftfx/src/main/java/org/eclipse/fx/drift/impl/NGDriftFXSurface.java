@@ -10,23 +10,13 @@
  *******************************************************************************/
 package org.eclipse.fx.drift.impl;
 
-import java.time.Duration;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.atomic.AtomicReference;
 
-import org.eclipse.fx.drift.DriftFXSurface;
+import org.eclipse.fx.drift.BaseDriftFXSurface;
+import org.eclipse.fx.drift.internal.DriftUtil;
 import org.eclipse.fx.drift.internal.FPSCounter;
 import org.eclipse.fx.drift.internal.Frame;
-import org.eclipse.fx.drift.internal.FrameProfiler;
-import org.eclipse.fx.drift.internal.GPUSyncUtil.WaitSyncResult;
 import org.eclipse.fx.drift.internal.GraphicsPipelineUtil;
 import org.eclipse.fx.drift.internal.Log;
 import org.eclipse.fx.drift.internal.NativeAPI;
@@ -63,7 +53,7 @@ public class NGDriftFXSurface extends NGNode {
 	private SurfaceData surfaceData;
 	
 	private ResourceFactory resourceFactory;
-	private DriftFXSurface node;
+	private BaseDriftFXSurface node;
 	
 	
 	private int currentFrameDataHash;
@@ -74,28 +64,28 @@ public class NGDriftFXSurface extends NGNode {
 	private int renderedHash;
 	private Texture renderedTexture;
 	
-	private Queue<Frame> nextFrame = new ConcurrentLinkedQueue<>();
+	private AtomicReference<Frame> nextFrame = new AtomicReference<>();
 	
-	private final static boolean showFPS = Boolean.getBoolean("driftfx.showfps");
+	private static final boolean SHOW_FPS = Boolean.getBoolean("driftfx.showfps");
 	FPSCounter renderContent = new FPSCounter();
 	FPSCounter renderTexture = new FPSCounter();
 	
-	public void present(Frame frame) {
-		nextFrame.offer(frame);
-	}
-	
-	private static boolean profile = Boolean.getBoolean("driftfx.profile");
-	
-	private void dispose(Frame frame) {
-		if (profile) FrameProfiler.addFrame(frame);
-		NativeAPI.disposeFrame(frame);
-	}
-	
-	public NGDriftFXSurface(DriftFXSurface node, long nativeSurfaceId) {
+	public NGDriftFXSurface(BaseDriftFXSurface node, long nativeSurfaceId) {
 		this.node = node;
 		this.nativeSurfaceHandle = nativeSurfaceId;
 		Log.debug("NGNativeSurface got handle: " + this.nativeSurfaceHandle);
 		this.resourceFactory = GraphicsPipelineUtil.getResourceFactory();
+	}
+	
+	public void present(Frame frame) {
+		Frame toDispose = nextFrame.getAndSet(frame);
+		if (toDispose != null) {
+			dispose(toDispose);
+		}
+	}
+	
+	private void dispose(Frame frame) {
+		NativeAPI.disposeFrame(frame);
 	}
 	
 	public void destroy() {
@@ -124,9 +114,8 @@ public class NGDriftFXSurface extends NGNode {
 	}
 
 	private Texture createTexture(Graphics g, Frame frame) {
-		if (showFPS) renderTexture.frame();
-		frame.begin("NGDriftFXSurface#renderTexture");
-
+		if (SHOW_FPS) renderTexture.frame();
+		
 		int w = frame.textureWidth;
 		int h = frame.textureHeight;
 		
@@ -148,7 +137,6 @@ public class NGDriftFXSurface extends NGNode {
 		
 		int result = exec.getResult();
 		
-		frame.end("NGDriftFXSurface#renderTexture");
 		if (result == 0) {
 			// once the texture is ready we want to dispose the frame
 			dispose(frame);
@@ -160,7 +148,6 @@ public class NGDriftFXSurface extends NGNode {
 			return null;
 		}
 	}
-	
 	
 	private int toPixels(double value) {
 		return (int) Math.ceil(value);
@@ -276,7 +263,6 @@ public class NGDriftFXSurface extends NGNode {
 		if (renderedHash != frame.hashCode()) {
 			// re-create texture
 			
-			
 			Texture texture = createTexture(g, frame);
 			if (texture != null) {
 				if (renderedTexture != null) {
@@ -312,7 +298,7 @@ public class NGDriftFXSurface extends NGNode {
 		String stats = String.format("%s\nfx:  %5.1ffps\ntex: %5.1ffps", stats0, renderContent.avgFps(), renderTexture.avgFps());
 		
 		Font font = Font.font(18);
-		PGFont pgFont = (PGFont) font.impl_getNativeFont();
+		PGFont pgFont = DriftUtil.getFont(font);
 		
 		FontStrike strike = pgFont.getStrike(BaseTransform.IDENTITY_TRANSFORM);
 		
@@ -376,25 +362,13 @@ public class NGDriftFXSurface extends NGNode {
 	}
 	
 	private Frame getNextFrame() {
-		Frame next = null;
-		List<Frame> skipped = new LinkedList<>();
-		do {
-			if (next != null) {
-				skipped.add(next);
-			}
-			next = nextFrame.poll();
-			
-		} while (!nextFrame.isEmpty());
-		if (!skipped.isEmpty()) {
-			Log.debug("Skipped " + skipped.size() + " frames! " + skipped);
-			skipped.forEach(this::dispose);
-		}
+		Frame next = nextFrame.getAndSet(null);
 		return next;
 	}
 	
 	@Override
 	protected void renderContent(Graphics g) {
-		if (showFPS) renderContent.frame();
+		if (SHOW_FPS) renderContent.frame();
 		
 		BaseTransform saved = g.getTransformNoClone().copy();
 		
@@ -409,7 +383,7 @@ public class NGDriftFXSurface extends NGNode {
 		
 		g.setTransform(saved);
 		
-		if (showFPS) {
+		if (SHOW_FPS) {
 			drawStats(g);
 		}
 	}

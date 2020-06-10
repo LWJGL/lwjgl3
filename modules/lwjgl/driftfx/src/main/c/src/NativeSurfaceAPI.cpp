@@ -65,7 +65,7 @@ extern "C" JNIEXPORT void JNICALL Java_org_eclipse_fx_drift_internal_NativeAPI_n
 extern "C" JNIEXPORT void JNICALL Java_org_eclipse_fx_drift_internal_NativeAPI_nDisposeFrame(JNIEnv* env, jclass cls, jlong surfaceId, jlong frameId) {
 	LogDebug("dispose frame " << dec << surfaceId << "." << dec << frameId);
 	NativeSurface* surface = NativeSurfaceRegistry::Get()->Get((long) surfaceId);
-	surface->DisposeFrame((long long) frameId);
+	surface->GetFrameManager()->DisposeFrame((long long) frameId);
 }
 
 
@@ -125,8 +125,6 @@ extern "C" JNIEXPORT jobjectArray JNICALL Java_org_eclipse_fx_drift_internal_Nat
 
 
 extern "C" JNIEXPORT jint JNICALL Java_org_eclipse_fx_drift_internal_NativeAPI_nOnTextureCreated(JNIEnv* env, jclass cls, jlong surfaceId, jlong frameId, jobject fxTexture) {
-	auto begin = std::chrono::steady_clock::now();
-
 	LogDebug("onTextureCreated " << dec << surfaceId << "." << frameId);
 
 	NativeSurface* surface = NativeSurfaceRegistry::Get()->Get((long) surfaceId);
@@ -141,11 +139,6 @@ extern "C" JNIEXPORT jint JNICALL Java_org_eclipse_fx_drift_internal_NativeAPI_n
 
 	LogDebug(" -> surfaceData.transferMode = " << surfaceData.transferMode );
 
-	jint result = prism::PrismBridge::Get()->OnTextureCreated(frame, fxTexture);
-
-	frame->fxPresentBegin = begin;
-	frame->fxPresentEnd = std::chrono::steady_clock::now();
-
-	return result;
+	return prism::PrismBridge::Get()->OnTextureCreated(frame, fxTexture);
 }
 

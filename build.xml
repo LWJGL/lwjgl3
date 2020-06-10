@@ -355,7 +355,9 @@
             <compileBinding binding="bgfx"/>
             <compileBinding binding="bullet"/>
             <compileBinding binding="cuda"/>
-            <compileBinding binding="driftfx"/>
+            <compileBinding binding="driftfx">
+                <compilerarg line='--boot-class-path "${env.JAVA8_HOME}/jre/lib/rt.jar${path.separator}${env.JAVA8_HOME}/jre/lib/ext/jfxrt.jar"' if:set="set-boot-class-path"/>
+            </compileBinding>
             <compileBinding binding="egl"/>
             <compileBinding binding="jawt"/>
             <compileBinding binding="jemalloc"/>
@@ -402,6 +404,24 @@
             <compileBinding binding="vma">
                 <pathelement path="${bin.lwjgl}/vulkan"/>
             </compileBinding>
+            <sequential>
+                <mkdir dir="${bin.lwjgl}/driftfx/META-INF/versions/11" if:set="driftfx11"/>
+                <lwjgl.javac11
+                        destdir="${bin.lwjgl}/driftfx/META-INF/versions/11"
+
+                        srcdir="${module.lwjgl}/driftfx/src/main/java11"
+                        includes="**"
+
+                        taskname="javac: DriftFX - Java 11"
+                        if:set="driftfx11"
+                >
+                    <classpath>
+                        <pathelement path="${bin.lwjgl}/driftfx"/>
+                        <pathelement path="${lib}/java/openjfx11/javafx-base.jar"/>
+                        <pathelement path="${lib}/java/openjfx11/javafx-graphics.jar"/>
+                    </classpath>
+                </lwjgl.javac11>
+            </sequential>
         </parallel>
 
         <compileBinding binding="glfw">
@@ -736,6 +756,7 @@
             <classpath>
                 <pathelement path="${bin.lwjgl}/core/META-INF/versions/9" if:set="core.java9"/>
                 <pathelement path="${bin.lwjgl}/core/META-INF/versions/10" if:set="core.java10"/>
+                <pathelement path="${bin.lwjgl}/driftfx/META-INF/versions/11" if:set="driftfx11"/>
                 <pathelement path="${module.classpath}"/>
                 <pathelement path="${bin.test}"/>
                 <pathelement path="${bin.samples}"/>
@@ -748,6 +769,10 @@
                 <pathelement path="${lib}/native"/>
             </classpath>
 
+            <modulepath if:set="driftfx11">
+                <pathelement path="${lib}/java/openjfx11"/>
+            </modulepath>
+
             <jvmarg value="-XstartOnFirstThread" if:set="platform.macos"/>
             <!--<jvmarg value="-Xcheck:jni"/>-->
 
@@ -756,6 +781,25 @@
             <jvmarg line="-XX:LogFile=${jitwatch}" if:set="jitwatch"/>
 
             <jvmarg line="${jvmargs}" if:set="jvmargs"/>
+            <jvmarg line="--add-modules javafx.graphics
+
+--add-exports javafx.graphics/com.sun.javafx.font=ALL-UNNAMED
+--add-exports javafx.graphics/com.sun.javafx.geom=ALL-UNNAMED
+--add-exports javafx.graphics/com.sun.javafx.geom.transform=ALL-UNNAMED
+--add-exports javafx.graphics/com.sun.javafx.graphics=ALL-UNNAMED
+--add-exports javafx.graphics/com.sun.javafx.jmx=ALL-UNNAMED
+--add-exports javafx.graphics/com.sun.javafx.scene=ALL-UNNAMED
+--add-exports javafx.graphics/com.sun.javafx.scene.text=ALL-UNNAMED
+--add-exports javafx.graphics/com.sun.javafx.sg.prism=ALL-UNNAMED
+--add-exports javafx.graphics/com.sun.javafx.stage=ALL-UNNAMED
+--add-exports javafx.graphics/com.sun.javafx.tk=ALL-UNNAMED
+--add-exports javafx.graphics/com.sun.javafx.util=ALL-UNNAMED
+
+--add-opens javafx.graphics/com.sun.prism=ALL-UNNAMED
+--add-opens javafx.graphics/com.sun.prism.d3d=ALL-UNNAMED
+--add-opens javafx.graphics/com.sun.prism.es2=ALL-UNNAMED
+--add-opens javafx.graphics/com.sun.prism.impl=ALL-UNNAMED
+--add-opens javafx.graphics/com.sun.prism.sw=ALL-UNNAMED" if:set="driftfx11"/>
 
             <arg line="${args}" if:set="args"/>
         </java>
@@ -1225,15 +1269,17 @@
         <parallel threadcount="4" failonany="true">
 
         <!-- CORE -->
-        <quiet>
-            <copy todir="${module.lwjgl}/core/src/generated/java/META-INF/versions/9" if:set="jdk9">
-                <fileset dir="${module.lwjgl}/core/src/main/java9" includes="**"/>
-            </copy>
-            <copy todir="${module.lwjgl}/core/src/generated/java/META-INF/versions/10" if:set="jdk10">
-                <fileset dir="${module.lwjgl}/core/src/main/java10" includes="**"/>
-            </copy>
-        </quiet>
-        <release-module name="core" native-library="lwjgl" title="Core"/>
+        <sequential>
+            <quiet>
+                <copy todir="${module.lwjgl}/core/src/generated/java/META-INF/versions/9" if:set="jdk9">
+                    <fileset dir="${module.lwjgl}/core/src/main/java9" includes="**"/>
+                </copy>
+                <copy todir="${module.lwjgl}/core/src/generated/java/META-INF/versions/10" if:set="jdk10">
+                    <fileset dir="${module.lwjgl}/core/src/main/java10" includes="**"/>
+                </copy>
+            </quiet>
+            <release-module name="core" native-library="lwjgl" title="Core"/>
+        </sequential>
 
         <!-- Assimp -->
         <release-module name="assimp" native-library="assimp" title="assimp" if:true="${binding.assimp}"/>
@@ -1248,7 +1294,14 @@
         <release-module name="cuda" title="CUDA" if:true="${binding.cuda}"/>
 
         <!-- DriftFX -->
-        <release-module name="driftfx" native-library="lwjgl_driftfx" title="DriftFX" if:true="${binding.driftfx}"/>
+        <sequential>
+            <quiet>
+                <copy todir="${module.lwjgl}/driftfx/src/generated/java/META-INF/versions/11" if:set="driftfx11">
+                    <fileset dir="${module.lwjgl}/driftfx/src/main/java11" includes="**"/>
+                </copy>
+            </quiet>
+            <release-module name="driftfx" native-library="lwjgl_driftfx" title="DriftFX" if:true="${binding.driftfx}"/>
+        </sequential>
 
         <!-- EGL -->
         <release-module name="egl" title="EGL" if:true="${binding.egl}"/>

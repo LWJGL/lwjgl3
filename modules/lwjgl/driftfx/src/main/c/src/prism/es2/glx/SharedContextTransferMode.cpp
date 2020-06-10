@@ -32,17 +32,14 @@ namespace internal {
 namespace prism {
 namespace es2 {
 namespace glx {
-	
+
 class SharedContextTransferMode : public TransferMode {
 	public:
-	SharedTexture* CreateSharedTexture(GLContext* glContext, Context* fxContext, math::Vec2ui size) {
+	SharedTexture* CreateSharedTexture(GLContext* glContext, Context* fxContext, Frame* frame) {
 		GLContext* fxGlContext = static_cast<GLContext*>(fxContext);
-		return new GLXSharedTexture(glContext, fxGlContext, size);
+		return new GLXSharedTexture(glContext, fxGlContext, frame);
 	}
 	int OnTextureCreated(prism::PrismBridge* bridge, Frame* frame, jobject fxTexture) {
-		frame->Begin("SharedContextTransferMode#OnTextureCreated");
-		LogDebug("OnTextureCreated " << bridge << ", " << frame << ", " << fxTexture);
-
 			ES2PrismBridge* es2Bridge = static_cast<ES2PrismBridge*>(bridge);
 			ShareData* data = frame->GetData();
 			GLXShareData* shareData = (GLXShareData*) data;
@@ -75,17 +72,7 @@ class SharedContextTransferMode : public TransferMode {
 
 			GLCALL( glDeleteFramebuffers(2, &fbos[0]) );
 
-
-			// We need to wait here for the blit operation to finish to prevent copying an empty texture in FX context
-			//GLCALL( glFinish() );
-//			GLsync fence;
-//			GLCALL( fence = glFenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0) );
-//			GLCALL( glFlush() );
-//			GLCALL( glWaitSync(fence, 0, GL_TIMEOUT_IGNORED) );
-//			GLCALL( glDeleteSync( fence ) );
-
-
-			frame->End("SharedContextTransferMode#OnTextureCreated");
+			// The fence operation happens on the java side
 			return 0;
 	}
 	virtual bool isPlatformDefault() {

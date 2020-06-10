@@ -37,51 +37,28 @@ using namespace driftfx::internal;
 
 
 
-MainMemorySharedTexture::MainMemorySharedTexture(GLContext* context, math::Vec2ui size)
-: SharedTexture(context, size),
-  memSize(size.x * size.y * 4),
+MainMemorySharedTexture::MainMemorySharedTexture(GLContext* context, Frame* frame)
+: SharedTexture(context, frame),
+  size(frame->GetSize().x * frame->GetSize().y * 4),
   pointer(nullptr) {
 
-	Allocate();
 }
 
 MainMemorySharedTexture::~MainMemorySharedTexture() {
-	Release();
-}
-
-ShareData* MainMemorySharedTexture::CreateShareData() {
-	MainMemoryShareData* data = new MainMemoryShareData();
-	data->pointer = pointer;
-	data->length = memSize;
-	return data;
-}
-
-void MainMemorySharedTexture::Allocate() {
-	auto begin = std::chrono::steady_clock::now();
-
-	// prepare the texture
-	glTexture = static_cast<GLTexture*>(glContext->CreateTexture(size.x, size.y));
-
-	GLCALL( glBindTexture(GL_TEXTURE_2D, glTexture->Name()) );
-	GLCALL( glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size.x, size.y, 0, GL_BGRA, GL_UNSIGNED_BYTE, 0) );
-	GLCALL( glBindTexture(GL_TEXTURE_2D, 0) );
-
-	// prepare the memory
-	pointer = malloc(memSize);
-
-	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now() - begin);
-	LogDebug("allocation needed " << duration.count() << "ns");
-}
-
-void MainMemorySharedTexture::Release() {
-	// release texture
-	delete glTexture;
-	// release memory
+	LogDebug("Freeing memory");
 	free(pointer);
 	pointer = nullptr;
 }
 
 bool MainMemorySharedTexture::BeforeRender() {
+	// prepare the texture
+	auto textureSize = frame->GetSize();
+	glTexture = static_cast<GLTexture*>(glContext->CreateTexture(textureSize.x, textureSize.y));
+
+	GLCALL( glBindTexture(GL_TEXTURE_2D, glTexture->Name()) );
+	GLCALL( glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureSize.x, textureSize.y, 0, GL_BGRA, GL_UNSIGNED_BYTE, 0) );
+	GLCALL( glBindTexture(GL_TEXTURE_2D, 0) );
+
 	return true;
 }
 
@@ -90,6 +67,8 @@ bool MainMemorySharedTexture::AfterRender() {
 
 	// TODO move the download operation to another thread
 	DownloadToMemory();
+
+	delete glTexture;
 
 	return true;
 }
@@ -134,12 +113,17 @@ void DownloadToMemoryBuf(unsigned int tex, unsigned int size, void* pointer) {
 }
 
 void MainMemorySharedTexture::DownloadToMemory() {
+	// allocate
+	pointer = malloc(size);
 	WaitForFrameReady();
 	// download pixel data
 	auto begin = std::chrono::steady_clock::now();
-	DownloadToMemoryBuf(GetTexture()->Name(), memSize, pointer);
+	DownloadToMemoryBuf(GetTexture()->Name(), size, pointer);
 	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now() - begin);
 	LogDebug("download frame needed " << duration.count() << "ns");
 
-
+	MainMemoryShareData* data = new MainMemoryShareData();
+	data->pointer = pointer;
+	data->length = size;
+	frame->SetData(data);
 }

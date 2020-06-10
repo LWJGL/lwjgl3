@@ -11,19 +11,21 @@
 package org.eclipse.fx.drift;
 
 import org.eclipse.fx.drift.impl.NGDriftFXSurface;
+import org.eclipse.fx.drift.internal.DriftHelper;
+import org.eclipse.fx.drift.internal.DriftHelper.DriftFXSurfaceAccessor;
 import org.eclipse.fx.drift.internal.SurfaceData;
 
 import com.sun.javafx.geom.BaseBounds;
 import com.sun.javafx.geom.transform.BaseTransform;
-import com.sun.javafx.jmx.MXNodeAlgorithm;
-import com.sun.javafx.jmx.MXNodeAlgorithmContext;
 import com.sun.javafx.scene.DirtyBits;
+import com.sun.javafx.scene.NodeHelper;
+import com.sun.javafx.scene.SceneHelper;
 import com.sun.javafx.sg.prism.NGNode;
 
+import javafx.scene.Node;
 import javafx.scene.Scene;
 
 //Note: this implementation is against internal JavafX API
-@SuppressWarnings("restriction")
 public class DriftFXSurface extends BaseDriftFXSurface {
 	public static class TransferMode {
 		private String name;
@@ -66,86 +68,94 @@ public class DriftFXSurface extends BaseDriftFXSurface {
 		}
 	}
 
+	static {
+		DriftHelper.setDriftFXSurfaceAccessor(new DriftFXSurfaceAccessor() {
+			private BaseDriftFXSurface cast(Node node) {
+				return (BaseDriftFXSurface) node;
+			}
+
+			@Override
+			public void doUpdatePeer(Node node) {
+				cast(node).drift_updatePeer();
+			}
+
+			@Override
+			public NGNode doCreatePeer(Node node) {
+				return cast(node).drift_createPeer();
+			}
+
+			@Override
+			public BaseBounds doComputeGeomBounds(Node node, BaseBounds bounds, BaseTransform tx) {
+				return cast(node).drift_computeGeomBounds(bounds, tx);
+			}
+
+			@Override
+			public boolean doComputeContains(Node node, double localX, double localY) {
+				return cast(node).drift_computeContains(localX, localY);
+			}
+		});
+	}
+
+	{
+		// To initialize the class helper at the begining each constructor of this class
+		DriftHelper.initHelper(this);
+	}
+
 	public DriftFXSurface() {
+		System.err.println("Java 11 :: DriftFXSurface");
 		init();
 	}
 
 	@Override
 	protected void drift_updatePeer() {
-		impl_updatePeer();
-	}
+		NGDriftFXSurface peer = drift_getPeer();
 
-	@Deprecated
-	@Override
-	public void impl_updatePeer() {
-		super.impl_updatePeer();
-		NGDriftFXSurface peer = impl_getPeer();
-
-		if (impl_isDirty(DirtyBits.NODE_GEOMETRY)) {
+		if ( NodeHelper.isDirty(this,DirtyBits.NODE_GEOMETRY)) {
 			SurfaceData data = surfaceData.get();
 			peer.updateSurface(data);
 			peer.markDirty();
 		}
 
-		if (impl_isDirty(DirtyBits.NODE_CONTENTS)) {
+		if ( NodeHelper.isDirty(this,DirtyBits.NODE_CONTENTS)) {
 			peer.markDirty();
 		}
-
-	}
-
-	@Override
-	public BaseBounds impl_computeGeomBounds(BaseBounds bounds, BaseTransform tx) {
-		return drift_computeGeomBounds(bounds, tx);
-	}
-
-	@Override
-	protected boolean impl_computeContains(double localX, double localY) {
-		return drift_computeContains(localX, localY);
-	}
-
-	@Override
-	public Object impl_processMXNode(MXNodeAlgorithm alg, MXNodeAlgorithmContext ctx) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	@Override
-	protected NGNode impl_createPeer() {
-		NGDriftFXSurface peer = new NGDriftFXSurface(this, nativeSurfaceId);
-		return peer;
 	}
 
 	@Override
 	protected NGNode drift_createPeer() {
-		return impl_createPeer();
+		return new NGDriftFXSurface(this, nativeSurfaceId);
 	}
 
 	@Override
 	protected void drift_markDirty(DirtyBits dirtyBit) {
-		impl_markDirty(dirtyBit);
+		NodeHelper.getNodeAccessor().doMarkDirty(this, dirtyBit);
 	}
 
 	@Override
 	protected NGDriftFXSurface drift_getPeer() {
-		return impl_getPeer();
+		return NodeHelper.getPeer(this);
 	}
 
 	@Override
 	protected void drift_beginPeerAccess() {
-		Scene.impl_setAllowPGAccess(true);
+		SceneHelper.setAllowPGAccess(true);
 	}
 
 	@Override
 	protected void drift_endPeerAccess() {
-		Scene.impl_setAllowPGAccess(false);
+		SceneHelper.setAllowPGAccess(false);
 	}
 
 	@Override
 	protected void drift_geomChanged() {
-		impl_geomChanged();
+		NodeHelper.getNodeAccessor().doGeomChanged(this);
 	}
 
 	@Override
 	protected void drift_layoutBoundsChanged() {
-		impl_layoutBoundsChanged();
+		NodeHelper.getNodeAccessor().layoutBoundsChanged(this);
 	}
+
+
+
 }

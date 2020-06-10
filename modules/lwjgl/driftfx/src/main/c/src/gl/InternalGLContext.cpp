@@ -46,6 +46,10 @@ InternalGLContext::~InternalGLContext() {
 	LogDebug("destroyed context " << GetName());
 }
 
+bool InternalGLContext::IsValid() {
+	return valid;
+}
+
 
 std::string InternalGLContext::GetName() {
 	std::ostringstream s;

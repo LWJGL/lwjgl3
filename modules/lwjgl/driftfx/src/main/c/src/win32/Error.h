@@ -20,7 +20,7 @@
 #include <iostream>
 #include <iomanip>
 
-#define WERR(errcode) errcode; { DWORD err = GetLastError(); SetLastError(0); if (err != 0) LogError("Windows Error 0x" << std::hex << HRESULT_CODE(err) << " (" << #errcode ")" << std::endl << "Message: " << ::ToString(HRESULT_CODE(err))) }
+#define WERR(errcode) errcode; { DWORD err = GetLastError(); SetLastError(0); if (err != 0) LogError("Windows Error 0x" << std::hex << HRESULT_CODE(err) << " (" << #errcode ")" << std::endl << "Message: " << ToString(HRESULT_CODE(err))) }
 
 std::string ToString(DWORD err);
 

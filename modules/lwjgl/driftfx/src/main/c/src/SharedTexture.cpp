@@ -25,29 +25,22 @@ using namespace driftfx::math;
 using namespace driftfx::gl;
 using namespace driftfx::internal;
 
-SharedTexture::SharedTexture(GLContext* glContext, math::Vec2ui size) :
-	size(size),
+SharedTexture::SharedTexture(GLContext* glContext, Frame* frame) :
+	frame(frame),
 	glContext(glContext),
 	glTexture(nullptr),
 	frameReady(nullptr) {
 }
 
 SharedTexture::~SharedTexture() {
-	LogDebug(" * SharedTexture Destructor!")
-}
-
-std::string SharedTexture::ToString() {
-	std::ostringstream s;
-	s << "SharedTexture[" << GetSize().x << " x " << GetSize().y << " ]";
-	return s.str();
 }
 
 GLTexture* SharedTexture::GetTexture() {
 	return glTexture;
 }
 
-math::Vec2ui SharedTexture::GetSize() {
-	return size;
+Frame* SharedTexture::GetFrame() {
+	return frame;
 }
 
 void SharedTexture::SignalFrameReady() {
@@ -78,14 +71,15 @@ SharedTextureFactoryId SharedTextureFactory::FALLBACK = 2;
 SharedTextureFactoryId SharedTextureFactory::nextType = 10;
 std::map<SharedTextureFactoryId, SharedTextureFactoryData> SharedTextureFactory::factories;
 
-SharedTexture* SharedTextureFactory::CreateSharedTexture(SharedTextureFactoryId type, GLContext* context, Context* fxContext, math::Vec2ui size) {
+SharedTexture* SharedTextureFactory::CreateSharedTexture(SharedTextureFactoryId type, GLContext* context, Context* fxContext, Frame* frame) {
 	LogDebug("CreateSharedTexture " << type);
 	auto iter = factories.find(type);
 	if (iter != factories.end()) {
 		auto data = iter->second;
 		auto factory = data.func;
 
-		auto sharedTexture = factory(context, fxContext, size);
+		auto sharedTexture = factory(context, fxContext, frame);
+		frame->SetSharedTexture(sharedTexture);
 		return sharedTexture;
 	}
 	else {

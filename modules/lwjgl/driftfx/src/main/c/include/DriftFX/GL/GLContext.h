@@ -37,6 +37,7 @@ public:
 
 	virtual std::string GetName() = 0;
 
+	virtual bool IsValid() = 0;
 };
 
 //struct DRIFT_API GLContextException : public std::exception {

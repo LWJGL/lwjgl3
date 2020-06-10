@@ -6,4 +6,5 @@ module org.lwjgl.driftfx {
     requires transitive org.lwjgl;
 
     exports org.eclipse.fx.drift;
+    exports org.lwjgl.driftfx;
 }

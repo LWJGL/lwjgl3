@@ -28,32 +28,29 @@ using namespace driftfx::gl;
 using namespace driftfx::math;
 using namespace driftfx::internal;
 
-NoopSharedTexture::NoopSharedTexture(GLContext* context, math::Vec2ui size) : SharedTexture(context, size) {
-	Allocate();
+NoopSharedTexture::NoopSharedTexture(GLContext* context, Frame* frame) : SharedTexture(context, frame) {
+
 }
 
 NoopSharedTexture::~NoopSharedTexture() {
-	Release();
-}
 
-ShareData* NoopSharedTexture::CreateShareData() {
-	return nullptr;
-}
-
-void NoopSharedTexture::Allocate() {
-	glTexture = static_cast<GLTexture*>(glContext->CreateTexture(size.x, size.y));
-	GLCALL( glBindTexture(GL_TEXTURE_2D, glTexture->Name()) );
-	GLCALL( glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size.x, size.y, 0, GL_BGRA, GL_UNSIGNED_BYTE, 0) );
-}
-void NoopSharedTexture::Release() {
-	delete glTexture;
 }
 
 bool NoopSharedTexture::BeforeRender() {
+	// prepare texture
+	auto textureSize = frame->GetSize();
+	glTexture = static_cast<GLTexture*>(glContext->CreateTexture(textureSize.x, textureSize.y));
+
+	GLCALL( glBindTexture(GL_TEXTURE_2D, glTexture->Name()) );
+	GLCALL( glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureSize.x, textureSize.y, 0, GL_BGRA, GL_UNSIGNED_BYTE, 0) );
+
 	return true;
 }
 
 bool NoopSharedTexture::AfterRender() {
+	// destroy texture
+	delete glTexture;
+
 	return true;
 }
 

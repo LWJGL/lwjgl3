@@ -37,17 +37,12 @@ private:
 
 public:
 
-	GLXSharedTexture(GLContext* context, GLContext* fxContext, math::Vec2ui size);
+	GLXSharedTexture(GLContext* context, GLContext* fxContext, Frame* frame);
 	virtual ~GLXSharedTexture();
 
 	virtual bool BeforeRender();
 	virtual bool AfterRender();
 
-	virtual ShareData* CreateShareData();
-
-protected:
-	virtual void Allocate();
-	virtual void Release();
 };
 
 }

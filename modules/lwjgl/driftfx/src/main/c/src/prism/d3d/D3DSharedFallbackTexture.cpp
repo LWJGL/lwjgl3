@@ -87,35 +87,23 @@ void D3DSharedFallbackTexture::DownloadPixels(GLTexture* texture, byte* pixels) 
 }
 
 
-D3DSharedFallbackTexture::D3DSharedFallbackTexture(GLContext* glContext, D3D9ExContext* d3dContext, math::Vec2ui size) :
-	SharedTexture(glContext, size),
+D3DSharedFallbackTexture::D3DSharedFallbackTexture(GLContext* glContext, D3D9ExContext* d3dContext, Frame* frame) :
+	SharedTexture(glContext, frame),
 	d3dContext(d3dContext),
 	d3dTexture(nullptr) {
+	auto size = frame->GetSize();
 	d3dTexture = new D3D9Texture(d3dContext, size.x, size.y);
-	
-	Allocate();
+	WDDMShareData* frameData = new WDDMShareData();
+	frameData->shareHandle = d3dTexture->GetShareHandle();
+	frame->SetData(frameData);
 }
 
 D3DSharedFallbackTexture::~D3DSharedFallbackTexture() {
-	Release();
 	delete d3dTexture;
 }
 
-void D3DSharedFallbackTexture::Allocate() {
-
-}
-
-void D3DSharedFallbackTexture::Release() {
-
-}
-
-ShareData* D3DSharedFallbackTexture::CreateShareData() {
-	WDDMShareData* frameData = new WDDMShareData();
-	frameData->shareHandle = d3dTexture->GetShareHandle();
-	return frameData;
-}
-
 bool D3DSharedFallbackTexture::BeforeRender() {
+	auto size = GetFrame()->GetSize();
 	glTexture = new GLTexture(glContext, size.x, size.y);
 	glBindTexture(GL_TEXTURE_2D, glTexture->Name());
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size.x, size.y, 0, GL_BGRA, GL_UNSIGNED_BYTE, 0);
@@ -124,8 +112,9 @@ bool D3DSharedFallbackTexture::BeforeRender() {
 }
 
 bool D3DSharedFallbackTexture::AfterRender() {
+	auto frameSize = GetFrame()->GetSize();
 
-	size_t size = sizeof(byte) * 4 * this->size.x * this->size.y;
+	size_t size = sizeof(byte) * 4 * frameSize.x * frameSize.y;
 	LogDebug("Using size: " << dec <<  size);
 
 	byte* pixels = (byte*) malloc(size);

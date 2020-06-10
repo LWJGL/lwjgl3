@@ -164,7 +164,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 
     <presetdef name="lwjgl.javac">
         <javac sourcepath="" debug="yes" source="8" target="8" encoding="UTF-8">
-            <compilerarg line='--boot-class-path "${env.JAVA8_HOME}/jre/lib/rt.jar${path.separator}${env.JAVA8_HOME}/jre/lib/ext/jfxrt.jar"' if:set="set-boot-class-path"/>
+            <compilerarg line='--boot-class-path "${env.JAVA8_HOME}/jre/lib/rt.jar"' if:set="set-boot-class-path"/>
             <compilerarg value="-Xlint:all"/>
             <compilerarg value="-XDignore.symbol.file"/> <!-- Suppresses internal API (e.g. Unsafe) usage warnings -->
         </javac>
@@ -185,6 +185,21 @@ This script is included in /build.xml and /config/update-dependencies.xml.
             <compilerarg value="-XDignore.symbol.file"/>
         </javac>
     </presetdef>
+
+    <presetdef name="lwjgl.javac11">
+        <javac sourcepath="" debug="yes" encoding="UTF-8">
+            <compilerarg line="--release 11"/>
+            <compilerarg value="-Xlint:all"/>
+            <compilerarg value="-XDignore.symbol.file"/>
+        </javac>
+    </presetdef>
+
+    <condition property="driftfx11">
+        <and>
+            <istrue value="${binding.driftfx}"/>
+            <isset property="jdk11"/>
+        </and>
+    </condition>
 
     <macrodef name="quiet">
         <element name="body" implicit="yes"/>
@@ -302,11 +317,13 @@ This script is included in /build.xml and /config/update-dependencies.xml.
         <attribute name="group"/>
         <attribute name="artifact"/>
         <attribute name="version"/>
+        <attribute name="classifier" default=""/>
+        <attribute name="subfolder" default=""/>
         <attribute name="sources" default="true"/>
 
         <sequential>
-            <get-quiet name="@{name}" url="https://repo.maven.apache.org/maven2/@{group}/@{artifact}/@{version}/@{artifact}-@{version}.jar" dest="${lib}/java/@{artifact}.jar" skipexisting="false"/>
-            <get-quiet name="@{name}" url="https://repo.maven.apache.org/maven2/@{group}/@{artifact}/@{version}/@{artifact}-@{version}-sources.jar" dest="${lib}/java/@{artifact}-sources.jar" skipexisting="false" if:true="@{sources}"/>
+            <get-quiet name="@{name}" url="https://repo.maven.apache.org/maven2/@{group}/@{artifact}/@{version}/@{artifact}-@{version}@{classifier}.jar" dest="${lib}/java@{subfolder}/@{artifact}.jar" skipexisting="false"/>
+            <get-quiet name="@{name}" url="https://repo.maven.apache.org/maven2/@{group}/@{artifact}/@{version}/@{artifact}-@{version}-sources.jar" dest="${lib}/java@{subfolder}/@{artifact}-sources.jar" skipexisting="false" if:true="@{sources}"/>
         </sequential>
     </macrodef>
 

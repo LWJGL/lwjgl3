@@ -1,7 +1,5 @@
 package org.eclipse.fx.drift.internal;
 
-import com.sun.javafx.stage.ScreenHelper;
-
 import javafx.scene.Node;
 import javafx.stage.Screen;
 
@@ -13,7 +11,8 @@ public class ScreenObserver extends BaseScreenObserver {
 
 	@Override
 	protected double getRenderScale(Screen screen) {
-		return ScreenHelper.getScreenAccessor().getRenderScale(getCurrentScreen());
+		System.err.println("Java 11 :: getRenderScale");
+		return screen.getOutputScaleX();
 	}
 
 }

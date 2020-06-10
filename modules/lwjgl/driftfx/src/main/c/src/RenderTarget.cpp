@@ -13,4 +13,5 @@
 using namespace driftfx;
 
 RenderTarget::~RenderTarget() {
+
 }

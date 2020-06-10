@@ -49,7 +49,7 @@ using namespace driftfx::internal::prism::es2::cgl;
 
 
 int IOSurfaceSharedTexture::OnTextureCreated(PrismBridge* bridge, Frame* frame, jobject fxTexture) {
-	frame->Begin("IOSurfaceSharedTexture#OnTextureCreated");
+
 	ES2PrismBridge* es2Bridge = static_cast<ES2PrismBridge*>(bridge);
 
 	GLContext* fxShared = es2Bridge->GetFXSharedGLContext();
@@ -77,17 +77,9 @@ int IOSurfaceSharedTexture::OnTextureCreated(PrismBridge* bridge, Frame* frame, 
 	IOSurfaceID surfaceID = sharedTexture->GetIOSurfaceID();
 	IOSurfaceRef ioSurface = IOSurfaceLookup(surfaceID);
 
-	LogDebug(frame->ToString());
-
-	LogDebug("Connecting to ioSurface: id=" << surfaceID << ", pointer=" << ioSurface << ", width=" << width << ", height=" << height);
+	LogDebug("Connecting to ioSurface: id=" << surfaceID << ", pointer=" << ioSurface);
 
 	if (ioSurface != nullptr) {
-
-//		GLsizei w = (GLsizei) IOSurfaceGetWidth(ioSurface);
-//		GLsizei h = (GLsizei) IOSurfaceGetHeight(ioSurface);
-
-//		LogDebug(" w: " << width << " <-> " << w);
-//		LogDebug(" h: " << height << " <-> " << h);
 
 		GLuint tmpTex;
 
@@ -99,27 +91,53 @@ int IOSurfaceSharedTexture::OnTextureCreated(PrismBridge* bridge, Frame* frame, 
 
 		// COPY OVER
 		// Note: we need to copy the texture here, because iosurface works with GL_TEXTURE_RECTANGLE, while javafx can only work with GL_TEXTURE_2D
-		ES2PrismBridge::CopyTexture(tmpTex, textureName, width, height);
+		// ES2PrismBridge::CopyTexture(shareData->textureName, targetTex, size.x, size.y);
+
+		GLuint fbos[2];
+
+		GLCALL( glGenFramebuffers(2, &fbos[0]) );
+
+		GLCALL( glBindFramebuffer(GL_READ_FRAMEBUFFER, fbos[0]) );
+		GLCALL( glFramebufferTexture(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, tmpTex, 0) );
+
+		GLCALL( glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbos[1]); );
+		GLCALL( glFramebufferTexture(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, textureName, 0) );
+
+		GLCALL( glClearColor(0, 0, 0, 0) );
+		GLCALL( glClear(GL_COLOR_BUFFER_BIT) );
+
+		GLCALL( glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_COLOR_BUFFER_BIT, GL_LINEAR) );
+
+
+		GLCALL( glFlush() );
+
+		GLCALL( glDeleteFramebuffers(2, &fbos[0]) );
+
+		// The fence operation happens on the java side
 
 		GLCALL( glDeleteTextures(1, &tmpTex) );
 
 		LogDebug("Releasing IOSurface id=" << surfaceID);
 		releaseIOSurface(ioSurface);
 
-		frame->End("IOSurfaceSharedTexture#OnTextureCreated");
-
 		return 0;
 
 	}
-	frame->End("IOSurfaceSharedTexture#OnTextureCreated");
 
 	return -1;
 }
 
 
-IOSurfaceSharedTexture::IOSurfaceSharedTexture(GLContext* context, math::Vec2ui size) :
-	SharedTexture(context, size)
+IOSurfaceSharedTexture::IOSurfaceSharedTexture(GLContext* context, Frame* frame) :
+	SharedTexture(context, frame)
 		{
+	auto textureSize = frame->GetSize();
+	ioSurface = createIOSurface(textureSize.x, textureSize.y);
+	ioSurfaceID = IOSurfaceGetID(ioSurface);
+
+	IOSurfaceShareData* data = new IOSurfaceShareData();
+	data->ioSurfaceID = ioSurfaceID;
+	frame->SetData(data);
 
 	if (!glContext->IsCurrent()) {
 		std::ostringstream s;
@@ -127,55 +145,47 @@ IOSurfaceSharedTexture::IOSurfaceSharedTexture(GLContext* context, math::Vec2ui 
 		LogError(s.str());
 	}
 
-	Allocate();
+
 }
 
 IOSurfaceSharedTexture::~IOSurfaceSharedTexture() {
+	LogDebug("Releasing IOSurface id: " << ioSurfaceID << ", handle: " << ioSurface);
 
-	Release();
+	if (ioSurface != nullptr) {
+		releaseIOSurface(ioSurface);
+		ioSurface = nullptr;
+	}
+
+
+//	if (!glContext->IsCurrent()) {
+//		LogInfo("Forcing context switch to " << glContext->GetName());
+//		glContext->SetCurrent();
+//	}
+
 }
 
-ShareData* IOSurfaceSharedTexture::CreateShareData() {
-	IOSurfaceShareData* data = new IOSurfaceShareData();
-	data->ioSurfaceID = ioSurfaceID;
-	return data;
-}
+bool IOSurfaceSharedTexture::BeforeRender() {
 
-void IOSurfaceSharedTexture::Allocate() {
-	glTexture = static_cast<GLTexture*>(glContext->CreateTexture(size.x, size.y));
-
-	ioSurface = createIOSurface(size.x, size.y);
-	ioSurfaceID = IOSurfaceGetID(ioSurface);
+	auto textureSize = frame->GetSize();
+	glTexture = static_cast<GLTexture*>(glContext->CreateTexture(textureSize.x, textureSize.y));
 
 	CGLGLContext* cglCtx = static_cast<CGLGLContext*>(glContext);
 
 	CGLError success;
 	GLCALL( glBindTexture(GL_TEXTURE_RECTANGLE, glTexture->Name()) );
-	CGLCALL( success = CGLTexImageIOSurface2D(cglCtx->GetCGLContextObj(), GL_TEXTURE_RECTANGLE, GL_RGBA, size.x, size.y, GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV, ioSurface, 0) );
+	CGLCALL( success = CGLTexImageIOSurface2D(cglCtx->GetCGLContextObj(), GL_TEXTURE_RECTANGLE, GL_RGBA, textureSize.x, textureSize.y, GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV, ioSurface, 0) );
 	GLCALL( glBindTexture(GL_TEXTURE_RECTANGLE, 0) );
 	//IOSurfaceLock(ioSurface, kIOSurfaceLockAvoidSync, NULL);
-
+	return success == kCGLNoError;
 }
-
-void IOSurfaceSharedTexture::Release() {
-	LogDebug("Releasing IOSurface id: " << ioSurfaceID << ", handle: " << ioSurface);
-	if (ioSurface != nullptr) {
-		releaseIOSurface(ioSurface);
-		ioSurface = nullptr;
-	}
-	delete glTexture;
-}
-
-bool IOSurfaceSharedTexture::BeforeRender() {
-	return true;
-}
-
 bool IOSurfaceSharedTexture::AfterRender() {
-//	SignalFrameReady();
-//	WaitForFrameReady();
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glBindTexture(GL_TEXTURE_RECTANGLE, 0);
 	glFlush();
+	//IOSurfaceUnlock(ioSurface, kIOSurfaceLockAvoidSync, NULL);
+	delete glTexture;
+//	releaseIOSurface(ioSurface);
+//	ioSurface = nullptr;
 	return true;
 }
 

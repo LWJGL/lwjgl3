@@ -12,7 +12,7 @@
 #ifndef PRISM_ES2_GLX_GLXES2PRISMBRIDGE_H_
 #define PRISM_ES2_GLX_GLXES2PRISMBRIDGE_H_
 
-#include <jni.h>
+
 #include "../ES2PrismBridge.h"
 
 namespace driftfx {

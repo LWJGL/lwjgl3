@@ -27,10 +27,23 @@ using namespace driftfx::internal::win32;
 using namespace driftfx::internal::prism;
 using namespace driftfx::internal::prism::d3d;
 
+jint throwRuntimeException(JNIEnv* env, char* message)
+{
+	jclass exClass;
+	char* className = "java/lang/RuntimeException";
+	exClass = env->FindClass(className);
+	return env->ThrowNew(exClass, message);
+}
 
 extern "C" JNIEXPORT void JNICALL Java_org_eclipse_fx_drift_internal_NativeAPI_nInitializeD3DPipeline(JNIEnv *env, jclass cls, jlong pContext) {
 	LogDebug("nInitializeD3DPipeline(" << pContext << ")");
 	D3DPrismBridge::Initialize(pContext);
+
+	// check the context to fail early in java
+	auto defaultContext = PrismBridge::Get()->GetDefaultContext();
+	if (defaultContext == NULL || !defaultContext->IsValid()) {
+		throwRuntimeException(env, "Error during default context creation");
+	}
 }
 
 extern "C" JNIEXPORT void JNICALL Java_org_eclipse_fx_drift_internal_NativeAPI_nDestroyD3DPipeline(JNIEnv *env, jclass cls) {

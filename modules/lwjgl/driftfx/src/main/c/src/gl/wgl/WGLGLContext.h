@@ -44,6 +44,8 @@ public:
 	virtual GLContext* CreateSharedContext(std::string name);
 
 private:
+	bool errorDuringCreation = false;
+
 	WGLGLContext *shared;
 
 	HWND hWnd;

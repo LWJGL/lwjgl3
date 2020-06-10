@@ -24,18 +24,12 @@ namespace internal {
 
 class NoopSharedTexture : public SharedTexture {
 public:
-	NoopSharedTexture(GLContext* context, math::Vec2ui size);
+	NoopSharedTexture(GLContext* context, Frame* frame);
 	virtual ~NoopSharedTexture();
 
 	virtual bool BeforeRender();
 	virtual bool AfterRender();
-
-	virtual ShareData* CreateShareData();
-protected:
-	virtual void Allocate();
-	virtual void Release();
 };
-
 
 }
 }

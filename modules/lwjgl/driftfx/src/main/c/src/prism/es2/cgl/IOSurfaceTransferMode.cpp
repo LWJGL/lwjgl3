@@ -32,8 +32,8 @@ namespace cgl {
 
 class IOSurfaceTransferMode : public TransferMode {
 public:
-	SharedTexture* CreateSharedTexture(GLContext* glContext, Context* fxContext, math::Vec2ui size) {
-    	return new IOSurfaceSharedTexture(glContext, size);
+	SharedTexture* CreateSharedTexture(GLContext* glContext, Context* fxContext, Frame* frame) {
+    	return new IOSurfaceSharedTexture(glContext, frame);
 	}
 	int OnTextureCreated(prism::PrismBridge* bridge, Frame* frame, jobject fxTexture) {
 		return IOSurfaceSharedTexture::OnTextureCreated(bridge, frame, fxTexture);

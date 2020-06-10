@@ -144,6 +144,13 @@ WGLGLContext::WGLGLContext(std::string name, WGLGLContext *shared) : InternalGLC
 			WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_CLIPSIBLINGS,
 			0, 0, 1, 1,
 			NULL, NULL, hInst, this);
+
+
+	if (errorDuringCreation) {
+		LogError("An error occured during context creation!");
+		valid = false;
+	}
+
 }
 
 GLContext* WGLGLContext::CreateSharedContext() {
@@ -152,7 +159,12 @@ GLContext* WGLGLContext::CreateSharedContext() {
 GLContext* WGLGLContext::CreateSharedContext(std::string name) {
 	ostringstream s;
 	s << GetName() << "/" << name;
-	return new WGLGLContext(s.str(), this);
+	WGLGLContext *context = new WGLGLContext(s.str(), this);
+	if (context->errorDuringCreation) {
+		delete context;
+		return NULL;
+	}
+	return context;
 }
 
 WGLGLContext::~WGLGLContext() {
@@ -177,7 +189,12 @@ void WGLGLContext::createGL(HWND hWnd) {
 
 	//cout << "Creating Temp OpenGL Context" << endl;
 	WERR(HGLRC hTempContext = wglCreateContext(hDC);)
-	//cout << " Temp OpenGL Context = " << hTempContext << endl;
+
+	if (hTempContext == NULL) {
+		LogError("Could not create temp context!");
+		errorDuringCreation = true;
+		return;
+	}
 
 	WERR(wglMakeCurrent(hDC, hTempContext);)
 	// glewInit always seems to produce an 0x7f windows error
@@ -207,8 +224,25 @@ void WGLGLContext::createGL(HWND hWnd) {
 
 	//cout << "Creating OpenGL Context" << endl;
 
+	//cout << "calling function pointer " << wglCreateContextAttribsARB << endl;
+
+	if (wglCreateContextAttribsARB == NULL) {
+		LogError("Could not acquire function pointer for context creation! (wglCreateContextAttribsARB)");
+		errorDuringCreation = true;
+		return;
+	}
+
 
 	WERR(hGLRC = wglCreateContextAttribsARB(hDC, sharedHGLRC, attribList);)
+
+
+	if (hGLRC == NULL) {
+		LogError("Could not create context!")
+		errorDuringCreation = true;
+		return;
+	}
+
+	
 
 	//LogDebug("created OpenGL Context = " << hGLRC)
 

@@ -20,6 +20,7 @@
     <property name="jmh-generator-annprocess" value="1.22"/>
     <property name="jopt-simple" value="5.0.4"/>
     <property name="commons-math3" value="3.6.1"/>
+    <property name="openjfx" value="11.0.2"/>
     <!-- *********************************** -->
 
     <target name="check-dependencies" description="Updates LWJGL dependencies, if required" unless="${build.offline}">
@@ -81,6 +82,14 @@
         <update-mvn name="JMH Generators: Annotation Processing" group="org/openjdk/jmh" artifact="jmh-generator-annprocess" version="${jmh-generator-annprocess}" sources="false"/>
         <update-mvn name="JOpt Simple" group="net/sf/jopt-simple" artifact="jopt-simple" version="${jopt-simple}" sources="false"/>
         <update-mvn name="Apache Commons Math" group="org/apache/commons" artifact="commons-math3" version="${commons-math3}" sources="false"/>
+
+        <mkdir dir="${lib}/java/openjfx11" if:set="driftfx11"/>
+        <property name="platform.openjfx" value="linux" if:set="platform.linux"/>
+        <property name="platform.openjfx" value="mac" if:set="platform.macos"/>
+        <property name="platform.openjfx" value="win" if:set="platform.windows"/>
+
+        <update-mvn name="OpenJFX Base" group="org/openjfx" artifact="javafx-base" version="${openjfx}" classifier="-${platform.openjfx}" subfolder="/openjfx11" sources="false" if:set="driftfx11"/>
+        <update-mvn name="OpenJFX Graphics" group="org/openjfx" artifact="javafx-graphics" version="${openjfx}" classifier="-${platform.openjfx}" subfolder="/openjfx11" sources="false" if:set="driftfx11"/>
 
         <touch file="${lib}/touch.txt" verbose="false"/>
     </target>
