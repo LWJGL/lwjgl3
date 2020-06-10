@@ -22,7 +22,7 @@ namespace
     HRESULT ValidateIndices(
         _In_reads_(nFaces * 3) const index_t* indices, _In_ size_t nFaces,
         _In_ size_t nVerts, _In_reads_opt_(nFaces * 3) const uint32_t* adjacency,
-        _In_ DWORD flags, _In_opt_ std::wstring* msgs)
+        _In_ VALIDATE_FLAGS flags, _In_opt_ std::wstring* msgs)
     {
         bool result = true;
 
@@ -361,7 +361,7 @@ HRESULT DirectX::Validate(
     size_t nFaces,
     size_t nVerts,
     const uint32_t* adjacency,
-    DWORD flags,
+    VALIDATE_FLAGS flags,
     std::wstring* msgs)
 {
     if (!indices || !nFaces || !nVerts)
@@ -398,7 +398,7 @@ HRESULT DirectX::Validate(
     size_t nFaces,
     size_t nVerts,
     const uint32_t* adjacency,
-    DWORD flags,
+    VALIDATE_FLAGS flags,
     std::wstring* msgs)
 {
     if (!indices || !nFaces || !nVerts)

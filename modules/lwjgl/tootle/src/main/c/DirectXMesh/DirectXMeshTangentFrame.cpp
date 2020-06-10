@@ -140,9 +140,9 @@ namespace
                     // Reset both tangent and bi-tangent from normal
                     XMVECTOR axis;
 
-                    float d0 = fabs(XMVectorGetX(XMVector3Dot(g_XMIdentityR0, b0)));
-                    float d1 = fabs(XMVectorGetX(XMVector3Dot(g_XMIdentityR1, b0)));
-                    float d2 = fabs(XMVectorGetX(XMVector3Dot(g_XMIdentityR2, b0)));
+                    float d0 = fabsf(XMVectorGetX(XMVector3Dot(g_XMIdentityR0, b0)));
+                    float d1 = fabsf(XMVectorGetX(XMVector3Dot(g_XMIdentityR1, b0)));
+                    float d2 = fabsf(XMVectorGetX(XMVector3Dot(g_XMIdentityR2, b0)));
                     if (d0 < d1)
                     {
                         axis = (d0 < d2) ? g_XMIdentityR0 : g_XMIdentityR2;

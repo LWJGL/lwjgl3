@@ -12,6 +12,14 @@
 #pragma once
 
 //=====================================================================================
+// Bitmask flags enumerator operators
+//=====================================================================================
+DEFINE_ENUM_FLAG_OPERATORS(CNORM_FLAGS);
+DEFINE_ENUM_FLAG_OPERATORS(VALIDATE_FLAGS);
+DEFINE_ENUM_FLAG_OPERATORS(MESHLET_FLAGS);
+
+
+//=====================================================================================
 // DXGI Format Utilities
 //=====================================================================================
 _Use_decl_annotations_

@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------------------------
 // DirectXMesh.h
-//  
+//
 // DirectX Mesh Geometry Library
 //
 // Copyright (c) Microsoft Corporation. All rights reserved.
@@ -26,9 +26,10 @@
 #endif
 
 #include <DirectXMath.h>
+#include <DirectXCollision.h>
+#include <DirectXPackedVector.h>
 
-#define DIRECTX_MESH_VERSION 140
-
+#define DIRECTX_MESH_VERSION 150
 
 namespace DirectX
 {
@@ -231,7 +232,7 @@ namespace DirectX
     //---------------------------------------------------------------------------------
     // Normals, Tangents, and Bi-Tangents Computation
 
-    enum CNORM_FLAGS : uint32_t
+    enum CNORM_FLAGS : unsigned long
     {
         CNORM_DEFAULT                   = 0x0,
             // Default is to compute normals using weight-by-angle
@@ -249,12 +250,12 @@ namespace DirectX
     HRESULT __cdecl ComputeNormals(
         _In_reads_(nFaces * 3) const uint16_t* indices, _In_ size_t nFaces,
         _In_reads_(nVerts) const XMFLOAT3* positions, _In_ size_t nVerts,
-        _In_ DWORD flags,
+        _In_ CNORM_FLAGS flags,
         _Out_writes_(nVerts) XMFLOAT3* normals) noexcept;
     HRESULT __cdecl ComputeNormals(
         _In_reads_(nFaces * 3) const uint32_t* indices, _In_ size_t nFaces,
         _In_reads_(nVerts) const XMFLOAT3* positions, _In_ size_t nVerts,
-        _In_ DWORD flags,
+        _In_ CNORM_FLAGS flags,
         _Out_writes_(nVerts) XMFLOAT3* normals) noexcept;
         // Computes vertex normals
 
@@ -303,7 +304,7 @@ namespace DirectX
     //---------------------------------------------------------------------------------
     // Mesh clean-up and validation
 
-    enum VALIDATE_FLAGS : uint32_t
+    enum VALIDATE_FLAGS : unsigned long
     {
         VALIDATE_DEFAULT                = 0x0,
 
@@ -326,11 +327,11 @@ namespace DirectX
     HRESULT __cdecl Validate(
         _In_reads_(nFaces * 3) const uint16_t* indices, _In_ size_t nFaces,
         _In_ size_t nVerts, _In_reads_opt_(nFaces * 3) const uint32_t* adjacency,
-        _In_ DWORD flags, _In_opt_ std::wstring* msgs = nullptr);
+        _In_ VALIDATE_FLAGS flags, _In_opt_ std::wstring* msgs = nullptr);
     HRESULT __cdecl Validate(
         _In_reads_(nFaces * 3) const uint32_t* indices, _In_ size_t nFaces,
         _In_ size_t nVerts, _In_reads_opt_(nFaces * 3) const uint32_t* adjacency,
-        _In_ DWORD flags, _In_opt_ std::wstring* msgs = nullptr);
+        _In_ VALIDATE_FLAGS flags, _In_opt_ std::wstring* msgs = nullptr);
         // Checks the mesh for common problems, return 'S_OK' if no problems were found
 
     HRESULT __cdecl Clean(
@@ -518,6 +519,111 @@ namespace DirectX
         _Out_writes_bytes_((nVerts - trailingUnused)*stride) void* vbout) noexcept;
         // Applies a vertex remap which contains a known number of unused entries at the end
 
+    //---------------------------------------------------------------------------------
+    // Meshlet Generation
+
+    constexpr size_t MESHLET_DEFAULT_MAX_VERTS = 128u;
+    constexpr size_t MESHLET_DEFAULT_MAX_PRIMS = 128u;
+
+    constexpr size_t MESHLET_MINIMUM_SIZE = 32u;
+    constexpr size_t MESHLET_MAXIMUM_SIZE = 256u;
+
+    enum MESHLET_FLAGS : unsigned long
+    {
+        MESHLET_DEFAULT = 0x0,
+
+        MESHLET_WIND_CW = 0x1,
+            // Vertices are clock-wise (defaults to CCW)
+    };
+
+    struct Meshlet
+    {
+        uint32_t VertCount;
+        uint32_t VertOffset;
+        uint32_t PrimCount;
+        uint32_t PrimOffset;
+    };
+
+    struct MeshletTriangle
+    {
+        uint32_t i0 : 10;
+        uint32_t i1 : 10;
+        uint32_t i2 : 10;
+    };
+
+    struct CullData
+    {
+        DirectX::BoundingSphere             BoundingSphere; // xyz = center, w = radius
+        DirectX::PackedVector::XMUBYTEN4    NormalCone;     // xyz = axis, w = -cos(a + 90)
+        float                               ApexOffset;     // apex = center - axis * offset
+    };
+
+    HRESULT __cdecl ComputeMeshlets(
+        _In_reads_(nFaces * 3) const uint16_t* indices, _In_ size_t nFaces,
+        _In_reads_(nVerts) const XMFLOAT3* positions, _In_ size_t nVerts,
+        _In_reads_opt_(nFaces * 3) const uint32_t* adjacency,
+        _Inout_ std::vector<Meshlet>& meshlets,
+        _Inout_ std::vector<uint8_t>& uniqueVertexIB,
+        _Inout_ std::vector<MeshletTriangle>& primitiveIndices,
+        _In_ size_t maxVerts = MESHLET_DEFAULT_MAX_VERTS, _In_ size_t maxPrims = MESHLET_DEFAULT_MAX_PRIMS);
+    HRESULT __cdecl ComputeMeshlets(
+        _In_reads_(nFaces * 3) const uint32_t* indices, _In_ size_t nFaces,
+        _In_reads_(nVerts) const XMFLOAT3* positions, _In_ size_t nVerts,
+        _In_reads_opt_(nFaces * 3) const uint32_t* adjacency,
+        _Inout_ std::vector<Meshlet>& meshlets,
+        _Inout_ std::vector<uint8_t>& uniqueVertexIB,
+        _Inout_ std::vector<MeshletTriangle>& primitiveIndices,
+        _In_ size_t maxVerts = MESHLET_DEFAULT_MAX_VERTS, _In_ size_t maxPrims = MESHLET_DEFAULT_MAX_PRIMS);
+        // Generates meshlets for a single subset mesh
+
+    HRESULT __cdecl ComputeMeshlets(
+        _In_reads_(nFaces * 3) const uint16_t* indices, _In_ size_t nFaces,
+        _In_reads_(nVerts) const XMFLOAT3* positions, _In_ size_t nVerts,
+        _In_reads_(nSubsets) const std::pair<size_t, size_t>* subsets, _In_ size_t nSubsets,
+        _In_reads_opt_(nFaces * 3) const uint32_t* adjacency,
+        _Inout_ std::vector<Meshlet>& meshlets,
+        _Inout_ std::vector<uint8_t>& uniqueVertexIB,
+        _Inout_ std::vector<MeshletTriangle>& primitiveIndices,
+        _Out_writes_(nSubsets) std::pair<size_t, size_t>* meshletSubsets,
+        _In_ size_t maxVerts = MESHLET_DEFAULT_MAX_VERTS, _In_ size_t maxPrims = MESHLET_DEFAULT_MAX_PRIMS);
+    HRESULT __cdecl ComputeMeshlets(
+        _In_reads_(nFaces * 3) const uint32_t* indices, _In_ size_t nFaces,
+        _In_reads_(nVerts) const XMFLOAT3* positions, _In_ size_t nVerts,
+        _In_reads_(nSubsets) const std::pair<size_t, size_t>* subsets, _In_ size_t nSubsets,
+        _In_reads_opt_(nFaces * 3) const uint32_t* adjacency,
+        _Inout_ std::vector<Meshlet>& meshlets,
+        _Inout_ std::vector<uint8_t>& uniqueVertexIB,
+        _Inout_ std::vector<MeshletTriangle>& primitiveIndices,
+        _Out_writes_(nSubsets) std::pair<size_t, size_t>* meshletSubsets,
+        _In_ size_t maxVerts = MESHLET_DEFAULT_MAX_VERTS, _In_ size_t maxPrims = MESHLET_DEFAULT_MAX_PRIMS);
+        // Generates meshlets for a mesh with several face subsets
+
+    HRESULT __cdecl ComputeCullData(
+        _In_reads_(nVerts) const XMFLOAT3* positions, _In_ size_t nVerts,
+        _In_reads_(nMeshlets) const Meshlet* meshlets, _In_ size_t nMeshlets,
+        _In_reads_(nVertIndices) const uint16_t* uniqueVertexIndices, _In_ size_t nVertIndices,
+        _In_reads_(nPrimIndices) const MeshletTriangle* primitiveIndices, _In_ size_t nPrimIndices,
+        _Out_writes_(nMeshlets) CullData* cullData,
+        _In_ MESHLET_FLAGS flags = MESHLET_DEFAULT) noexcept;
+    HRESULT __cdecl ComputeCullData(
+        _In_reads_(nVerts) const XMFLOAT3* positions, _In_ size_t nVerts,
+        _In_reads_(nMeshlets) const Meshlet* meshlets, _In_ size_t nMeshlets,
+        _In_reads_(nVertIndices) const uint32_t* uniqueVertexIndices, _In_ size_t nVertIndices,
+        _In_reads_(nPrimIndices) const MeshletTriangle* primitiveIndices, _In_ size_t nPrimIndices,
+        _Out_writes_(nMeshlets) CullData* cullData,
+        _In_ MESHLET_FLAGS flags = MESHLET_DEFAULT) noexcept;
+        // Computes culling data for each input meshlet
+
+    //---------------------------------------------------------------------------------
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-dynamic-exception-spec"
+#endif
+
 #include "DirectXMesh.inl"
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
 
 } // namespace

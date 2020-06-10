@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------------------------
 // DirectXMeshVBWriter.cpp
-//
+//  
 // DirectX Mesh Geometry Library - Vertex Buffer Writer
 //
 // Copyright (c) Microsoft Corporation. All rights reserved.

@@ -270,7 +270,7 @@ HRESULT DirectX::ComputeNormals(
     size_t nFaces,
     const XMFLOAT3* positions,
     size_t nVerts,
-    DWORD flags,
+    CNORM_FLAGS flags,
     XMFLOAT3* normals) noexcept
 {
     if (!indices || !positions || !nFaces || !nVerts || !normals)
@@ -304,7 +304,7 @@ HRESULT DirectX::ComputeNormals(
     size_t nFaces,
     const XMFLOAT3* positions,
     size_t nVerts,
-    DWORD flags,
+    CNORM_FLAGS flags,
     XMFLOAT3* normals) noexcept
 {
     if (!indices || !positions || !nFaces || !nVerts || !normals)

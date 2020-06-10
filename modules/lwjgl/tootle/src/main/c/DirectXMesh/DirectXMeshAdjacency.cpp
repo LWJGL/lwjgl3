@@ -157,7 +157,7 @@ namespace
 
         if (epsilon == 0.f)
         {
-            size_t hashSize = nVerts / 3;
+            auto hashSize = std::max<size_t>(nVerts / 3, 1);
 
             std::unique_ptr<vertexHashEntry*[]> hashTable(new (std::nothrow) vertexHashEntry*[hashSize]);
             if (!hashTable)
@@ -338,7 +338,7 @@ namespace
         _In_reads_(nVerts) const uint32_t* pointRep,
         _Out_writes_(nFaces * 3) uint32_t* adjacency) noexcept
     {
-        size_t hashSize = nVerts / 3;
+        auto hashSize = std::max<size_t>(nVerts / 3, 1);
 
         std::unique_ptr<edgeHashEntry*[]> hashTable(new (std::nothrow) edgeHashEntry*[hashSize]);
         if (!hashTable)
