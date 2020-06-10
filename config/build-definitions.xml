@@ -116,26 +116,39 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 
     <property name="lib.native" location="${lib}/native/${platform}/${build.arch}" relative="true"/>
 
-    <!-- JDK version -->
-    <condition property="jdk10"> <!-- 10 or higher -->
-        <!--
-        VNUM = [1-9][0-9]*((\.0)*\.[1-9][0-9]*)*
-        PRE = [a-zA-Z0-9]+
-        java.version = $VNUM(\-$PRE)?
-        -->
-        <matches string="${java.version}" pattern="^[1-9][0-9]+((\.0)*\.[1-9][0-9]*)*(-[a-zA-Z0-9]+)?$"/>
+    <!--
+    Detect version of JDK running the Ant build.
+
+    VNUM = [1-9][0-9]*((\.0)*\.[1-9][0-9]*)*
+    PRE = [a-zA-Z0-9]+
+    java.version = $VNUM(\-$PRE)?
+    -->
+    <local name="java.version.regex"/>
+    <property name="java.version.regex" value="[1-9][0-9]+((\.0)*\.[1-9][0-9]*)*(-[a-zA-Z0-9]+)?"/>
+
+    <condition property="jdk14">                             <matches string="${java.version}" pattern="^(?!1[0-3])${java.version.regex}$"/>     </condition>
+    <condition property="jdk13"><or><isset property="jdk14"/><matches string="${java.version}" pattern="^(?!1[0-2])${java.version.regex}$"/></or></condition>
+    <condition property="jdk12"><or><isset property="jdk13"/><matches string="${java.version}" pattern="^(?!1[0-1])${java.version.regex}$"/></or></condition>
+    <condition property="jdk11"><or><isset property="jdk12"/><matches string="${java.version}" pattern="^(?!1[0-0])${java.version.regex}$"/></or></condition>
+    <condition property="jdk10">
+        <or>
+            <isset property="jdk11"/>
+            <matches string="${java.version}" pattern="^10((\.0)*\.[1-9][0-9]*)*(-[a-zA-Z0-9]+)?$"/>
+        </or>
     </condition>
-    <condition property="jdk9"> <!-- 9 or higher -->
+    <condition property="jdk9">
         <or>
             <isset property="jdk10"/>
             <matches string="${java.version}" pattern="^9((\.0)*\.[1-9][0-9]*)*(-[a-zA-Z0-9]+)?$"/>
         </or>
     </condition>
 
-    <!-- Used for testing multi-release implementations. -->
+    <!-- May be set in the ant command line to test multi-release implementations. -->
+    <condition property="core.java13"><isset property="core.java14"/></condition>
+    <condition property="core.java12"><isset property="core.java13"/></condition>
     <condition property="core.java11"><isset property="core.java12"/></condition>
     <condition property="core.java10"><isset property="core.java11"/></condition>
-    <condition property="core.java9"><isset property="core.java10"/></condition>
+    <condition property="core.java9"> <isset property="core.java10"/></condition>
 
     <property name="jni.headers" location="${java.home}/include" if:set="jdk9"/>
     <property name="jni.headers" location="${java.home}/../include" unless:set="jdk9"/>
