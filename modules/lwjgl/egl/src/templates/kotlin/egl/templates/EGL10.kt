@@ -205,8 +205,8 @@ val EGL10 = "EGL10".nativeClassEGL("EGL10", postfix = "") {
         "",
 
         EGLDisplay("dpy", ""),
-        Check(1)..EGLint.p("major", ""),
-        Check(1)..EGLint.p("minor", "")
+        nullable..Check(1)..EGLint.p("major", ""),
+        nullable..Check(1)..EGLint.p("minor", "")
     )
 
     EGLBoolean(

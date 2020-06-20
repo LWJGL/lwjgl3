@@ -373,12 +373,12 @@ public class EGL10 {
 
     /** <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglInitialize.xhtml">Reference Page</a> */
     @NativeType("EGLBoolean")
-    public static boolean eglInitialize(@NativeType("EGLDisplay") long dpy, @NativeType("EGLint *") IntBuffer major, @NativeType("EGLint *") IntBuffer minor) {
+    public static boolean eglInitialize(@NativeType("EGLDisplay") long dpy, @Nullable @NativeType("EGLint *") IntBuffer major, @Nullable @NativeType("EGLint *") IntBuffer minor) {
         if (CHECKS) {
-            check(major, 1);
-            check(minor, 1);
+            checkSafe(major, 1);
+            checkSafe(minor, 1);
         }
-        return neglInitialize(dpy, memAddress(major), memAddress(minor)) != 0;
+        return neglInitialize(dpy, memAddressSafe(major), memAddressSafe(minor)) != 0;
     }
 
     // --- [ eglMakeCurrent ] ---
@@ -631,13 +631,13 @@ public class EGL10 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglInitialize.xhtml">Reference Page</a>
      */
     @NativeType("EGLBoolean")
-    public static boolean eglInitialize(@NativeType("EGLDisplay") long dpy, @NativeType("EGLint *") int[] major, @NativeType("EGLint *") int[] minor) {
+    public static boolean eglInitialize(@NativeType("EGLDisplay") long dpy, @Nullable @NativeType("EGLint *") int[] major, @Nullable @NativeType("EGLint *") int[] minor) {
         long __functionAddress = EGL.getCapabilities().eglInitialize;
         if (CHECKS) {
             check(__functionAddress);
             check(dpy);
-            check(major, 1);
-            check(minor, 1);
+            checkSafe(major, 1);
+            checkSafe(minor, 1);
         }
         return callPPPI(dpy, major, minor, __functionAddress) != 0;
     }
