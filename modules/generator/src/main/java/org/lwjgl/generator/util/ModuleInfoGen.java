@@ -18,7 +18,7 @@ public final class ModuleInfoGen implements AutoCloseable {
 
     private static final Pattern
         MODULE_NAME = Pattern.compile("^\\s*(?:open\\s+)?module\\s+(" + JAVA_PACKAGE + ")\\s*\\{", Pattern.MULTILINE),
-        REQUIRES    = Pattern.compile("^\\s*requires(?:\\s+(?:transitive|static))?\\s+(.+)\\s*;", Pattern.MULTILINE);
+        REQUIRES    = Pattern.compile("^\\s*requires(?:\\s+(transitive|static))?\\s+(.+)\\s*;", Pattern.MULTILINE);
 
     private static final Path METAINF = Paths.get("META-INF", "versions", "9");
 
@@ -57,9 +57,9 @@ public final class ModuleInfoGen implements AutoCloseable {
         final String nameJava;
         final String name;
 
-        final Set<String> dependencies;
+        final Set<Dependency> dependencies;
 
-        Module(String info, String nameJava, Set<String> dependencies) {
+        Module(String info, String nameJava, Set<Dependency> dependencies) {
             this.info = info;
             this.nameJava = nameJava;
             this.name = getModule(nameJava);
@@ -84,8 +84,17 @@ public final class ModuleInfoGen implements AutoCloseable {
 
         private void compile(ModuleInfoGen gen) {
             String modulePath = dependencies.stream()
-                .map(it -> "bin/classes/lwjgl/" + it)
+                .filter(it -> !it.missing)
+                .map(it -> "bin/classes/lwjgl/" + it.name)
                 .collect(Collectors.joining(File.pathSeparator));
+
+            String info = this.info;
+            for (Dependency dependency : dependencies) {
+                if (dependency.missing) {
+                    String stmt = "requires static org.lwjgl." + dependency.name + ";";
+                    info = info.replace(stmt, "//" + stmt);
+                }
+            }
 
             gen.compile(
                 name,
@@ -95,6 +104,18 @@ public final class ModuleInfoGen implements AutoCloseable {
                 Paths.get("bin", "classes", "lwjgl", name),
                 null
             );
+        }
+
+        private static class Dependency {
+            final String  name;
+            final boolean optional;
+
+            boolean missing;
+
+            Dependency(String name, boolean optional) {
+                this.name = name;
+                this.optional = optional;
+            }
         }
     }
 
@@ -166,7 +187,7 @@ public final class ModuleInfoGen implements AutoCloseable {
                                             "\n" +
                                             "    opens " + nativePackage + ";\n" +
                                             "}",
-                                            Stream.concat(Stream.of(module.name), module.dependencies.stream())
+                                            Stream.concat(Stream.of(module.name), module.dependencies.stream().map(it -> it.name))
                                                 .map(it -> "bin/classes/lwjgl/" + it + "/META-INF/versions/9")
                                                 .collect(Collectors.joining(File.pathSeparator)),
                                             architecture,
@@ -207,13 +228,13 @@ public final class ModuleInfoGen implements AutoCloseable {
         }
         String nameJava = matcher.group(1);
 
-        Set<String> dependencies = new HashSet<>();
+        Set<Module.Dependency> dependencies = new HashSet<>();
 
         matcher = REQUIRES.matcher(info);
         while (matcher.find()) {
-            String dependency = matcher.group(1);
+            String dependency = matcher.group(2);
             if (dependency.startsWith("org.lwjgl")) {
-                dependencies.add(getModule(dependency));
+                dependencies.add(new Module.Dependency(getModule(dependency), "static".equals(matcher.group(1))));
             }
         }
 
@@ -254,10 +275,14 @@ public final class ModuleInfoGen implements AutoCloseable {
         }
 
         visited.add(module);
-        for (String predecessor : module.dependencies) {
-            Module depModule = moduleRegistry.get(predecessor);
+        for (Module.Dependency predecessor : module.dependencies) {
+            Module depModule = moduleRegistry.get(predecessor.name);
             if (depModule == null) {
-                throw new IllegalStateException("Module " + module.name + " depends on module " + predecessor + " which does not exist.");
+                if (!predecessor.optional) {
+                    throw new IllegalStateException("Module " + module.name + " depends on module " + predecessor.name + " which does not exist.");
+                }
+                predecessor.missing = true;
+                continue;
             }
             traverse(depModule, moduleRegistry, stack, visited, expanded);
         }
@@ -269,10 +294,13 @@ public final class ModuleInfoGen implements AutoCloseable {
     // Order stack by name in groups with no interdependencies
     private static void push(List<Module> stack, Module module) {
         int i = stack.size();
+        out:
         while (0 < i) {
             Module sibling = stack.get(i - 1);
-            if (module.dependencies.contains(sibling.name)) {
-                break;
+            for (Module.Dependency dependency : module.dependencies) {
+                if (dependency.name.equals(sibling.name)) {
+                    break out;
+                }
             }
             if (sibling.name.compareTo(module.name) < 0) {
                 break;

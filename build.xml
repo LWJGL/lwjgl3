@@ -307,6 +307,9 @@
         <attribute name="binding"/>
         <element name="body" implicit="yes" optional="yes"/>
         <sequential>
+            <!-- cleanup in case there was an earlier "release" failure -->
+            <delete dir="${module.lwjgl}/@{binding}/src/generated/java/META-INF" quiet="true"/>
+
             <local name="hasMain"/>
             <available file="${module.lwjgl}/@{binding}/src/main/java" type="dir" property="hasMain"/>
 
@@ -315,7 +318,6 @@
                 <classpath>
                     <pathelement path="${bin.lwjgl}/core"/>
                     <pathelement path="${lib}/java/jsr305.jar"/>
-                    <body/>
                 </classpath>
 
                 <src>
@@ -323,6 +325,8 @@
                     <pathelement path="${module.lwjgl}/@{binding}/src/generated/java"/>
                 </src>
                 <include name="**"/>
+
+                <body/>
             </lwjgl.javac>
         </sequential>
     </macrodef>
@@ -409,16 +413,16 @@
 
         <parallel threadsPerProcessor="1">
             <compileBinding binding="opengl">
-                <pathelement path="${bin.lwjgl}/opencl"/>
+                <classpath><pathelement path="${bin.lwjgl}/opencl"/></classpath>
             </compileBinding>
             <compileBinding binding="opengles">
-                <pathelement path="${bin.lwjgl}/egl"/>
+                <classpath><pathelement path="${bin.lwjgl}/egl"/></classpath>
             </compileBinding>
             <compileBinding binding="ovr">
-                <pathelement path="${bin.lwjgl}/vulkan"/>
+                <classpath><pathelement path="${bin.lwjgl}/vulkan"/></classpath>
             </compileBinding>
             <compileBinding binding="vma">
-                <pathelement path="${bin.lwjgl}/vulkan"/>
+                <classpath><pathelement path="${bin.lwjgl}/vulkan"/></classpath>
             </compileBinding>
             <sequential>
                 <mkdir dir="${bin.lwjgl}/driftfx/META-INF/versions/11" if:set="driftfx11"/>
@@ -441,10 +445,17 @@
         </parallel>
 
         <compileBinding binding="glfw">
-            <pathelement path="${bin.lwjgl}/egl"/>
-            <pathelement path="${bin.lwjgl}/opengl"/>
-            <pathelement path="${bin.lwjgl}/opengles"/>
-            <pathelement path="${bin.lwjgl}/vulkan"/>
+            <classpath>
+                <pathelement path="${bin.lwjgl}/egl"/>
+                <pathelement path="${bin.lwjgl}/opengl"/>
+                <pathelement path="${bin.lwjgl}/opengles"/>
+                <pathelement path="${bin.lwjgl}/vulkan"/>
+            </classpath>
+            <exclude name="org/lwjgl/glfw/GLFWNativeEGL.java" unless:true="${binding.egl}"/>
+            <exclude name="org/lwjgl/glfw/GLFWNativeGLX.java" unless:true="${binding.opengl}"/>
+            <exclude name="org/lwjgl/glfw/GLFWNativeNSGL.java" unless:true="${binding.opengl}"/>
+            <exclude name="org/lwjgl/glfw/GLFWNativeWGL.java" unless:true="${binding.opengl}"/>
+            <exclude name="org/lwjgl/glfw/GLFWVulkan.java" unless:true="${binding.vulkan}"/>
         </compileBinding>
     </target>
 
