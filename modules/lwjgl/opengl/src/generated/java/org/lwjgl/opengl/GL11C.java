@@ -219,6 +219,9 @@ public class GL11C {
         GL_NAND          = 0x150E,
         GL_SET           = 0x150F;
 
+    /** Token accepted or provided by the {@code identifier} parameters of ObjectLabel and GetObjectLabel. */
+    public static final int GL_TEXTURE = 0x1702;
+
     /** PixelCopyType */
     public static final int
         GL_COLOR   = 0x1800,

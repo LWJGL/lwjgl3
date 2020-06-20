@@ -280,6 +280,11 @@ val GL11C = "GL11C".nativeClassGL("GL11C") {
     )
 
     IntConstant(
+        "Token accepted or provided by the {@code identifier} parameters of ObjectLabel and GetObjectLabel.",
+        "TEXTURE"..0x1702
+    )
+
+    IntConstant(
         "PixelCopyType",
         "COLOR"..0x1800,
         "DEPTH"..0x1801,
