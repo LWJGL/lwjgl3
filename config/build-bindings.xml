@@ -78,91 +78,14 @@ This script is included in /config/build-definitions.xml.
     <!-- Set the path to the Oculus SDK to enable. -->
     <!-- TODO: add headers in here -->
     <property name="OCULUS_SDK_PATH" location="../OculusSDK" relative="false"/>
+    <condition property="binding.ovr" value="true" else="false">
+        <and>
+            <isset property="OCULUS_SDK_PATH"/>
+            <available file="${OCULUS_SDK_PATH}/LibOVR/Include/OVR_CAPI.h"/>
+        </and>
+    </condition>
 
     <!-- // ================================ // -->
-
-    <target name="bindings">
-        <condition property="binding.ovr" value="true" else="false">
-            <and>
-                <isset property="OCULUS_SDK_PATH"/>
-                <available file="${OCULUS_SDK_PATH}/LibOVR/Include/OVR_CAPI.h"/>
-            </and>
-        </condition>
-
-        <local name="dependency_problem"/>
-        <condition property="dependency_problem" value="1">
-            <and>
-                <istrue value="${binding.ovr}"/>
-
-                <and>
-                    <isfalse value="${binding.opengl}"/>
-                    <isfalse value="${binding.vulkan}"/>
-                </and>
-            </and>
-        </condition>
-        <fail if="dependency_problem" message="The OpenGL or Vulkan bindings are required."/>
-
-        <condition property="dependency_problem" value="1">
-            <and>
-                <istrue value="${binding.nanovg}"/>
-                <or>
-                    <isfalse value="${binding.stb}"/>
-                    <and>
-                        <isfalse value="${binding.bgfx}"/>
-                        <isfalse value="${binding.opengl}"/>
-                        <isfalse value="${binding.opengles}"/>
-                    </and>
-                </or>
-            </and>
-        </condition>
-        <fail if="dependency_problem" message="The stb and OpenGL or OpenGL ES bindings are required."/>
-
-        <script language="javascript">
-        var props = LWJGL.getProperties();
-
-        var modules = ["core"];
-        var bindings = ["-Dbinding.DISABLE_CHECKS=" + props.get("binding.DISABLE_CHECKS")];
-
-        for each (p in props.entrySet()) {
-            var name = p.key;
-            if (name.startsWith("binding.") &amp;&amp; p.value == "true") {
-                var module = name.substring(8);
-
-                modules.push(module);
-                bindings.push("-D" + name + "=true");
-            }
-        }
-
-        LWJGL.setProperty("binding.core", "true");
-        LWJGL.setProperty("generator.bindings", bindings.join(" "));
-        LWJGL.setProperty("module.list", modules.join(","));
-
-        var classes = [];
-        var templates = [];
-        var sources = [];
-
-        modules.forEach(function(it) {
-            LWJGL.setProperty("module." + it + ".path", it == "core" ? "org/lwjgl" : "org/lwjgl/" + it);
-
-            classes.push("bin/classes/lwjgl/" + it);
-
-            var src = "modules/lwjgl/" + it + "/src";
-
-            templates.push(src + "/templates/kotlin");
-            sources.push(src + "/generated/java");
-            if (java.nio.file.Files.isDirectory(java.nio.file.Paths.get(src + "/main/java"))) {
-                sources.push(src + "/main/java");
-            }
-        });
-
-        LWJGL.setProperty("module.classpath", classes.join(java.io.File.pathSeparator));
-        LWJGL.setProperty("module.templatepath", templates.join(java.io.File.pathSeparator));
-        LWJGL.setProperty("module.sourcepath", sources.join(java.io.File.pathSeparator));
-        LWJGL.setProperty("module.javadocsourcepath", sources.filter(function(it) {
-            return it.indexOf('driftfx/src/main/java') === -1;
-        }).join(java.io.File.pathSeparator));
-        </script>
-    </target>
 
     <macrodef name="forEachBinding">
         <element name="body" implicit="yes"/>

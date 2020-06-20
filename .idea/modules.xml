@@ -5,6 +5,9 @@
       <!-- Exposes the repository root -->
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/root.iml" filepath="$PROJECT_DIR$/.idea/modules/root.iml" />
 
+      <!-- Custom Ant tasks -->
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ant.iml" filepath="$PROJECT_DIR$/.idea/modules/ant.iml" />
+
       <!-- The code generator -->
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/generator.iml" filepath="$PROJECT_DIR$/.idea/modules/generator.iml" />
 

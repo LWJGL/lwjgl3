@@ -7,7 +7,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="KotlinRuntime" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Ant Launcher" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Ant" level="project" />
     <orderEntry type="module" module-name="templates.assimp" />
     <orderEntry type="module" module-name="templates.bgfx" />
     <orderEntry type="module" module-name="templates.bullet" />

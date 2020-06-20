@@ -13,7 +13,7 @@
     <import file="${config}/${platform}/build.xml"/>
 
     <!-- Initialize build -->
-    <target name="init" description="Initializes the directories required by the build process" depends="bindings">
+    <target name="init" description="Initializes the directories required by the build process">
         <fail message="LWJGL requires Ant version 1.9.3 or higher.">
             <condition>
                 <not><antversion atleast="1.9.3"/></not>
@@ -26,6 +26,22 @@
         <echo taskname="override" message="Build offline: ${build.offline}" if:set="env.LWJGL_BUILD_OFFLINE"/>
 
         <mkdir-symlink dir="bin"/>
+
+        <!-- Compile custom Ant tasks -->
+        <mkdir dir="${bin.ant}"/>
+        <lwjgl.javac
+            destdir="${bin.ant}"
+            classpath="${ant.core.lib}"
+
+            srcdir="${src.ant}/java"
+            includes="org/lwjgl/**"
+
+            taskname="javac: Custom Ant Tasks"
+        />
+
+        <taskdef name="logLevel" classname="org.lwjgl.SetLogLevel" classpath="${bin.ant}"/>
+        <taskdef name="bindingConfig" classname="org.lwjgl.BindingConfig" classpath="${bin.ant}"/>
+        <bindingConfig/>
 
         <ant antfile="update-dependencies.xml" target="check-dependencies" inheritAll="false"/>
 
