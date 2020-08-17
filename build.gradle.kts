@@ -432,7 +432,6 @@ publishing {
                                         appendChild(ownerDocument.createElement("artifactId").also(::appendChild).apply { textContent = module.artifact })
                                         appendChild(ownerDocument.createElement("version").also(::appendChild).apply { textContent = project.version as String })
                                         appendChild(ownerDocument.createElement("classifier").also(::appendChild).apply { textContent = "natives-${it.classifier}" })
-                                        appendChild(ownerDocument.createElement("scope").also(::appendChild).apply { textContent = "compile" })
                                     }
                                 }
                             }
