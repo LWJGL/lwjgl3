@@ -256,7 +256,7 @@ public final class APIUtil {
 
         Object state = option.get();
         if (state instanceof String) {
-            version = apiParseVersion((String)state, null);
+            version = apiParseVersion((String)state);
         } else if (state instanceof APIVersion) {
             version = (APIVersion)state;
         } else {
@@ -267,33 +267,18 @@ public final class APIUtil {
     }
 
     /**
-     * Parses a version string. The version string must have the format {@code MAJOR.MINOR.REVISION IMPL}, where {@code MAJOR} is the major version (integer),
-     * {@code MINOR} is the minor version (integer), {@code REVISION} is the revision version (string, optional) and {@code IMPL} is implementation-specific
-     * information (string, optional).
+     * Parses a version string.
      *
-     * @param version the API version string
+     * <p>The version string must have the format {@code PREFIX MAJOR.MINOR.REVISION IMPL}, where {@code PREFIX} is a prefix without digits (string, optional),
+     * {@code MAJOR} is the major version (integer), {@code MINOR} is the minor version (integer), {@code REVISION} is the revision version (string, optional)
+     * and {@code IMPL} is implementation-specific information (string, optional).</p>
+     *
+     * @param version the version string
      *
      * @return the parsed {@link APIVersion}
      */
     public static APIVersion apiParseVersion(String version) {
-        return apiParseVersion(version, null);
-    }
-
-    /**
-     * Parses a version string. The version string must have the format {@code PREFIX MAJOR.MINOR.REVISION IMPL}, where {@code PREFIX} is the specified prefix
-     * (string, optional), {@code MAJOR} is the major version (integer), {@code MINOR} is the minor version (integer), {@code REVISION} is the revision version
-     * (string, optional) and {@code IMPL} is implementation-specific information (string, optional).
-     *
-     * @param version the version string
-     * @param prefix  the version string prefix, may be null
-     *
-     * @return the parsed {@link APIVersion}
-     */
-    public static APIVersion apiParseVersion(String version, @Nullable String prefix) {
-        String pattern = "([0-9]+)[.]([0-9]+)([.]\\S+)?\\s*(.+)?";
-        if (prefix != null) {
-            pattern = "(?:" + prefix + "\\s+)?" + pattern;
-        }
+        String pattern = "(?:\\D+)?(\\d+)[.](\\d+)([.]\\S+)?\\s*(.+)?";
 
         Matcher matcher = Pattern.compile(pattern).matcher(version);
         if (!matcher.matches()) {
@@ -306,6 +291,21 @@ public final class APIUtil {
             matcher.group(3),
             matcher.group(4)
         );
+    }
+
+    /**
+     * Deprecated, use {@link #apiParseVersion(String)} instead.
+     *
+     * <p>This method will be removed in LWJGL 3.3.</p>
+     *
+     * @param version the version string
+     * @param prefix  ignored
+     *
+     * @return the parsed {@link APIVersion}
+     */
+    @Deprecated // TODO: remove in 3.3
+    public static APIVersion apiParseVersion(String version, @Nullable String prefix) {
+        return apiParseVersion(version);
     }
 
     public static String apiUnknownToken(int token) {

@@ -150,7 +150,7 @@ public final class CL {
                 return false;
             }
 
-            APIVersion apiVersion = apiParseVersion(memASCII(version, bytes - 1), "OpenCL");
+            APIVersion apiVersion = apiParseVersion(memASCII(version, bytes - 1));
             return 1 < apiVersion.major || 2 <= apiVersion.minor;
         }
 
@@ -268,7 +268,7 @@ public final class CL {
         }
 
         // Parse PLATFORM_VERSION string
-        APIVersion version = apiParseVersion(getPlatformInfoStringASCII(cl_platform_id, CL_PLATFORM_VERSION), "OpenCL");
+        APIVersion version = apiParseVersion(getPlatformInfoStringASCII(cl_platform_id, CL_PLATFORM_VERSION));
         CL.addCLVersions(version.major, version.minor, supportedExtensions);
 
         return new CLCapabilities(functionName -> getFunctionProvider().getFunctionAddress(cl_platform_id, functionName), supportedExtensions);
@@ -291,7 +291,7 @@ public final class CL {
         CL.addExtensions(extensionsString, supportedExtensions);
 
         // Parse DEVICE_VERSION string
-        APIVersion version = apiParseVersion(getDeviceInfoStringASCII(cl_device_id, CL_DEVICE_VERSION), "OpenCL");
+        APIVersion version = apiParseVersion(getDeviceInfoStringASCII(cl_device_id, CL_DEVICE_VERSION));
         CL.addCLVersions(version.major, version.minor, supportedExtensions);
 
         return new CLCapabilities(platformCapabilities, supportedExtensions);

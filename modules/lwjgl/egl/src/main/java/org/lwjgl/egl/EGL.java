@@ -180,7 +180,7 @@ public final class EGL {
             if (versionString == null) {
                 callI(functionProvider.getFunctionAddress("eglGetError")); // clear error
             } else {
-                APIVersion version = apiParseVersion(versionString, "EGL");
+                APIVersion version = apiParseVersion(versionString);
                 addEGLVersions(version.major, version.minor, ext);
             }
         }

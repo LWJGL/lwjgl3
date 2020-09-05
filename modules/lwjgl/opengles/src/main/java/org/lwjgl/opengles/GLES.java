@@ -266,7 +266,7 @@ public final class GLES {
                         throw new IllegalStateException("There is no OpenGL ES context current in the current thread.");
                     }
 
-                    APIVersion version = apiParseVersion(versionString, "OpenGL ES");
+                    APIVersion version = apiParseVersion(versionString);
 
                     majorVersion = version.major;
                     minorVersion = version.minor;

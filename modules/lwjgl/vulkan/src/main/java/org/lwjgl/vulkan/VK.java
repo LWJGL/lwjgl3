@@ -12,7 +12,6 @@ import java.nio.*;
 import java.util.*;
 
 import static java.lang.Math.*;
-import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
