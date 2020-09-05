@@ -100,6 +100,7 @@ public final class Checks {
      * @return true if all functions are available, false otherwise
      */
     public static boolean checkFunctions(FunctionProvider provider, PointerBuffer caps, int[] indices, String... functions) {
+        boolean available = true;
         for (int i = 0; i < indices.length; i++) {
             int index = indices[i];
             if (index < 0 || caps.get(index) != NULL) {
@@ -107,11 +108,12 @@ public final class Checks {
             }
             long address = provider.getFunctionAddress(functions[i]);
             if (address == NULL) {
-                return false;
+                available = false;
+                continue;
             }
             caps.put(index, address);
         }
-        return true;
+        return available;
     }
 
     /**
@@ -125,6 +127,7 @@ public final class Checks {
      * @return true if all functions are available, false otherwise
      */
     public static boolean checkFunctions(FunctionProvider provider, long[] caps, int[] indices, String... functions) {
+        boolean available = true;
         for (int i = 0; i < indices.length; i++) {
             int index = indices[i];
             if (index < 0 || caps[index] != NULL) {
@@ -132,11 +135,12 @@ public final class Checks {
             }
             long address = provider.getFunctionAddress(functions[i]);
             if (address == NULL) {
-                return false;
+                available = false;
+                continue;
             }
             caps[index] = address;
         }
-        return true;
+        return available;
     }
 
     public static boolean reportMissing(String api, String extension) {
