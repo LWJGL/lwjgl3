@@ -4113,10 +4113,13 @@ public final class GLESCapabilities {
             return false;
         }
 
+        int flag0 = ext.contains("GLES30") ? 0 : Integer.MIN_VALUE;
+        int flag3 = ext.contains("GLES31") ? 0 : Integer.MIN_VALUE;
+
         return checkFunctions(provider, caps, new int[] {
-            390, 391, 392, 393
+            flag0 + 390, flag0 + 391, flag0 + 392
         },
-            "glBindFragDataLocationIndexedEXT", "glGetFragDataIndexEXT", "glBindFragDataLocationEXT", "glGetProgramResourceLocationIndexEXT"
+            "glBindFragDataLocationIndexedEXT", "glGetFragDataIndexEXT", "glBindFragDataLocationEXT"
         ) || reportMissing("GLES", "GL_EXT_blend_func_extended");
     }
 

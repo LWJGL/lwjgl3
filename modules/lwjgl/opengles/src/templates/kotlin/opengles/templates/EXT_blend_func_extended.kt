@@ -53,7 +53,7 @@ val EXT_blend_func_extended = "EXTBlendFuncExtended".nativeClassGLES("EXT_blend_
         "MAX_DUAL_SOURCE_DRAW_BUFFERS_EXT"..0x88FC
     )
 
-    void(
+    DependsOn("GLES30")..void(
         "BindFragDataLocationIndexedEXT",
         "",
 
@@ -63,7 +63,7 @@ val EXT_blend_func_extended = "EXTBlendFuncExtended".nativeClassGLES("EXT_blend_
         GLcharASCII.const.p("name", "")
     )
 
-    GLint(
+    DependsOn("GLES30")..GLint(
         "GetFragDataIndexEXT",
         "",
 
@@ -71,7 +71,7 @@ val EXT_blend_func_extended = "EXTBlendFuncExtended".nativeClassGLES("EXT_blend_
         GLcharASCII.const.p("name", "")
     )
 
-    void(
+    DependsOn("GLES30")..void(
         "BindFragDataLocationEXT",
         "",
 
@@ -80,7 +80,8 @@ val EXT_blend_func_extended = "EXTBlendFuncExtended".nativeClassGLES("EXT_blend_
         GLcharASCII.const.p("name", "")
     )
 
-    GLint(
+    // Missing on Windows with OpenGL ES 3.2 NVIDIA 452.06
+    IgnoreMissing..DependsOn("GLES31")..GLint(
         "GetProgramResourceLocationIndexEXT",
         "",
 
