@@ -119,7 +119,7 @@ public final class GLES {
                     if (address == NULL) {
                         address = library.getFunctionAddress(functionName);
                         if (address == NULL && DEBUG_FUNCTIONS) {
-                            apiLog("Failed to locate address for GLES function " + functionName);
+                            apiLog("Failed to locate address for GLES function " + memASCII(functionName));
                         }
                     }
 
