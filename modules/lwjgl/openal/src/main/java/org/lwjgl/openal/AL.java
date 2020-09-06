@@ -245,6 +245,7 @@ public final class AL {
         @Nullable
         private static ALCapabilities tempCaps;
 
+        @SuppressWarnings("AssignmentToStaticFieldFromInstanceMethod")
         @Override
         public void set(@Nullable ALCapabilities caps) {
             if (tempCaps == null) {
@@ -256,20 +257,20 @@ public final class AL {
         }
 
         @Override
-        @Nullable
         public ALCapabilities get() {
             return WriteOnce.caps;
         }
 
         private static final class WriteOnce {
             // This will be initialized the first time get() above is called
-            @Nullable
-            static final ALCapabilities caps = ICDStatic.tempCaps;
+            static final ALCapabilities caps;
 
             static {
-                if (caps == null) {
+                ALCapabilities tempCaps = ICDStatic.tempCaps;
+                if (tempCaps == null) {
                     throw new IllegalStateException("No ALCapabilities instance has been set");
                 }
+                caps = tempCaps;
             }
         }
 

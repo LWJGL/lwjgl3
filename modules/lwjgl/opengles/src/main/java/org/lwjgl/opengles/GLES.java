@@ -385,6 +385,7 @@ public final class GLES {
         @Nullable
         private static GLESCapabilities tempCaps;
 
+        @SuppressWarnings("AssignmentToStaticFieldFromInstanceMethod")
         @Override
         public void set(@Nullable GLESCapabilities caps) {
             if (tempCaps == null) {
@@ -396,20 +397,20 @@ public final class GLES {
         }
 
         @Override
-        @Nullable
         public GLESCapabilities get() {
             return WriteOnce.caps;
         }
 
         private static final class WriteOnce {
             // This will be initialized the first time get() above is called
-            @Nullable
-            static final GLESCapabilities caps = ICDStatic.tempCaps;
+            static final GLESCapabilities caps;
 
             static {
-                if (caps == null) {
+                GLESCapabilities tempCaps = ICDStatic.tempCaps;
+                if (tempCaps == null) {
                     throw new IllegalStateException("No GLESCapabilities instance has been set");
                 }
+                caps = tempCaps;
             }
         }
 

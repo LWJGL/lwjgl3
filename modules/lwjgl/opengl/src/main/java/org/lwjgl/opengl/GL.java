@@ -730,6 +730,7 @@ public final class GL {
         @Nullable
         private static GLCapabilities tempCaps;
 
+        @SuppressWarnings("AssignmentToStaticFieldFromInstanceMethod")
         @Override
         public void set(@Nullable GLCapabilities caps) {
             if (tempCaps == null) {
@@ -747,13 +748,14 @@ public final class GL {
 
         private static final class WriteOnce {
             // This will be initialized the first time get() above is called
-            @Nullable
-            static final GLCapabilities caps = ICDStatic.tempCaps;
+            static final GLCapabilities caps;
 
             static {
-                if (caps == null) {
+                GLCapabilities tempCaps = ICDStatic.tempCaps;
+                if (tempCaps == null) {
                     throw new IllegalStateException("No GLCapabilities instance has been set");
                 }
+                caps = tempCaps;
             }
         }
 
