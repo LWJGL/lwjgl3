@@ -393,6 +393,7 @@
             <compileBinding binding="odbc"/>
             <compileBinding binding="openal"/>
             <compileBinding binding="opencl"/>
+            <compileBinding binding="opengles"/>
             <compileBinding binding="openvr"/>
             <compileBinding binding="opus"/>
             <compileBinding binding="par"/>
@@ -414,9 +415,6 @@
         <parallel threadsPerProcessor="1">
             <compileBinding binding="opengl">
                 <classpath><pathelement path="${bin.lwjgl}/opencl"/></classpath>
-            </compileBinding>
-            <compileBinding binding="opengles">
-                <classpath><pathelement path="${bin.lwjgl}/egl"/></classpath>
             </compileBinding>
             <compileBinding binding="ovr">
                 <classpath><pathelement path="${bin.lwjgl}/vulkan"/></classpath>

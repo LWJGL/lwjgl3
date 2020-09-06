@@ -131,7 +131,7 @@ public class Configuration<T> {
      * ({@link MemoryUtil#memAlloc memAlloc}/{@link MemoryUtil#memFree memFree}/etc). Supported values:
      *
      * <ul>
-     * <li><em>jemalloc</em> - The allocator provided by the jemalloc library</li>
+     * <li><em>jemalloc</em> - The allocator provided by the jemalloc library.</li>
      * <li><em>rpmalloc</em> - The allocator provided by the rpmalloc library.<br>
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><p>LWJGL calls {@code rpmalloc_initialize} once, when the allocator is
      * created. It never calls {@code rpmalloc_finalize}. The user is responsible for calling {@code rpmalloc_thread_initialize} and
@@ -436,6 +436,23 @@ public class Configuration<T> {
 
     /** Similar to {@link #OPENGL_MAXVERSION} for the OpenGL ES library (<b>org.lwjgl.opengles.maxVersion</b>). */
     public static final Configuration<Object> OPENGLES_MAXVERSION = new Configuration<>("org.lwjgl.opengles.maxVersion", StateInit.STRING);
+
+    /**
+     * Defines the API that manages OpenGL ES contexts. Supported values:
+     *
+     * <ul>
+     * <li><em>EGL</em> - context management is provided by EGL.</li>
+     * <li><em>native</em> - context management is provided by the native platform.<br>
+     * </ul>
+     *
+     * <p>If this option is not set, LWJGL will first attempt to use EGL. If EGL is not available, it will attempt to use the native platform API.</p>
+     *
+     * <p style="font-family: monospace">
+     * Property: <b>org.lwjgl.opengl.contextAPI</b><br>
+     * &nbsp; &nbsp; Type: String<br>
+     * &nbsp; &nbsp;Usage: Dynamic</p>
+     */
+    public static final Configuration<String> OPENGLES_CONTEXT_API = new Configuration<>("org.lwjgl.opengles.contextAPI", StateInit.STRING);
 
     // -- OPENVR
 

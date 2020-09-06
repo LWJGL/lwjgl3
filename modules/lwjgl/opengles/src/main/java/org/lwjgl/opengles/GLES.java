@@ -5,7 +5,6 @@
 package org.lwjgl.opengles;
 
 import org.lwjgl.*;
-import org.lwjgl.egl.*;
 import org.lwjgl.system.*;
 
 import javax.annotation.*;
@@ -105,17 +104,48 @@ public final class GLES {
         create(Library.loadNative(GLES.class, "org.lwjgl.opengles", libName));
     }
 
-    private static void create(SharedLibrary GLES) {
-        try {
-            FunctionProvider egl = EGL.getFunctionProvider();
-            if (egl == null) {
-                throw new IllegalStateException("The EGL function provider is not available.");
-            }
+    @Nullable
+    private static FunctionProvider getContextProvider() {
+        FunctionProvider provider = null;
 
+        String contextAPI = Configuration.OPENGLES_CONTEXT_API.get();
+        if (contextAPI == null || "EGL".equals(contextAPI)) {
+            try {
+                provider = (FunctionProvider)Class
+                    .forName("org.lwjgl.egl.EGL")
+                    .getMethod("getFunctionProvider")
+                    .invoke(null);
+            } catch (Throwable ignored) {
+                apiLog("[GLES] Failed to initialize EGL");
+            }
+        }
+
+        if (provider == null && (contextAPI == null || "native".equals(contextAPI))) {
+            try {
+                provider = (FunctionProvider)Class
+                    .forName("org.lwjgl.opengl.GL")
+                    .getMethod("getFunctionProvider")
+                    .invoke(null);
+            } catch (Throwable ignored) {
+                apiLog("[GLES] Failed to initialize OpenGL");
+            }
+        }
+
+        return provider;
+    }
+
+    private static void create(SharedLibrary GLES) {
+        FunctionProvider contextProvider = getContextProvider();
+        if (contextProvider == null) {
+            GLES.free();
+            throw new IllegalStateException("There is no OpenGL ES context management API available.");
+        }
+
+        try {
             create((FunctionProvider)new SharedLibrary.Delegate(GLES) {
                 @Override
                 public long getFunctionAddress(ByteBuffer functionName) {
-                    long address = egl.getFunctionAddress(functionName);
+                    long address = contextProvider.getFunctionAddress(functionName);
                     if (address == NULL) {
                         address = library.getFunctionAddress(functionName);
                         if (address == NULL && DEBUG_FUNCTIONS) {

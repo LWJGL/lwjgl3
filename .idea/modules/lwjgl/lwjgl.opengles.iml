@@ -11,7 +11,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="lwjgl.core" />
-    <orderEntry type="module" module-name="lwjgl.egl" />
     <orderEntry type="library" scope="PROVIDED" name="jsr305" level="project" />
   </component>
 </module>
