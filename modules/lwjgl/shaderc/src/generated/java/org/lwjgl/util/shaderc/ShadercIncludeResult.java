@@ -318,7 +318,7 @@ public class ShadercIncludeResult extends Struct implements NativeResource {
     /** Sets the specified value to the {@code content_length} field of the specified {@code struct}. */
     public static void ncontent_length(long struct, long value) { memPutAddress(struct + ShadercIncludeResult.CONTENT_LENGTH, value); }
     /** Unsafe version of {@link #user_data(long) user_data}. */
-    public static void nuser_data(long struct, long value) { memPutAddress(struct + ShadercIncludeResult.USER_DATA, check(value)); }
+    public static void nuser_data(long struct, long value) { memPutAddress(struct + ShadercIncludeResult.USER_DATA, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -328,7 +328,6 @@ public class ShadercIncludeResult extends Struct implements NativeResource {
     public static void validate(long struct) {
         check(memGetAddress(struct + ShadercIncludeResult.SOURCE_NAME));
         check(memGetAddress(struct + ShadercIncludeResult.CONTENT));
-        check(memGetAddress(struct + ShadercIncludeResult.USER_DATA));
     }
 
     /**
