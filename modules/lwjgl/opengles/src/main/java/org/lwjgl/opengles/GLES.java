@@ -227,112 +227,108 @@ public final class GLES {
             throw new IllegalStateException("OpenGL ES library not been loaded.");
         }
 
-        GLESCapabilities caps = null;
+        // We don't have a current GLESCapabilities when this method is called
+        // so we have to use the native bindings directly.
+        long GetError    = functionProvider.getFunctionAddress("glGetError");
+        long GetString   = functionProvider.getFunctionAddress("glGetString");
+        long GetIntegerv = functionProvider.getFunctionAddress("glGetIntegerv");
 
-        try {
-            // We don't have a current GLESCapabilities when this method is called
-            // so we have to use the native bindings directly.
-            long GetError    = functionProvider.getFunctionAddress("glGetError");
-            long GetString   = functionProvider.getFunctionAddress("glGetString");
-            long GetIntegerv = functionProvider.getFunctionAddress("glGetIntegerv");
+        if (GetError == NULL || GetString == NULL || GetIntegerv == NULL) {
+            throw new IllegalStateException(
+                "Core OpenGL ES functions could not be found. Make sure that the OpenGL ES library has been loaded correctly."
+            );
+        }
 
-            if (GetError == NULL || GetString == NULL || GetIntegerv == NULL) {
-                throw new IllegalStateException(
-                    "Core OpenGL ES functions could not be found. Make sure that the OpenGL ES library has been loaded correctly."
-                );
+        int errorCode = callI(GetError);
+        if (errorCode != GL_NO_ERROR) {
+            apiLog(String.format("An OpenGL ES context was in an error state before the creation of its capabilities instance. Error: [0x%X]", errorCode));
+        }
+
+        int majorVersion;
+        int minorVersion;
+
+        try (MemoryStack stack = stackPush()) {
+            IntBuffer pi = stack.ints(0);
+
+            // Try the 3.0+ version query first
+            callPV(GL_MAJOR_VERSION, memAddress(pi), GetIntegerv);
+            if (callI(GetError) == GL_NO_ERROR && 3 <= (majorVersion = pi.get(0))) {
+                // We're on an 3.0+ context.
+                callPV(GL_MINOR_VERSION, memAddress(pi), GetIntegerv);
+                minorVersion = pi.get(0);
+            } else {
+                // Fallback to the string query.
+                String versionString = memUTF8Safe(callP(GL_VERSION, GetString));
+                if (versionString == null || callI(GetError) != GL_NO_ERROR) {
+                    throw new IllegalStateException("There is no OpenGL ES context current in the current thread.");
+                }
+
+                APIVersion version = apiParseVersion(versionString);
+
+                majorVersion = version.major;
+                minorVersion = version.minor;
+            }
+        }
+
+        if (majorVersion < 2) {
+            throw new IllegalStateException("OpenGL ES 2.0 is required.");
+        }
+
+        int[] GL_VERSIONS = {
+            -1, // OpenGL ES 1.0 not supported
+            0, // OpenGL ES 2.0
+            2 // OpenGL ES 3.0 to 3.2
+        };
+
+        Set<String> supportedExtensions = new HashSet<>(128);
+
+        int maxMajor = min(majorVersion, GL_VERSIONS.length);
+        if (MAX_VERSION != null) {
+            maxMajor = min(MAX_VERSION.major, maxMajor);
+        }
+        for (int M = 2; M <= maxMajor; M++) {
+            int maxMinor = GL_VERSIONS[M - 1];
+            if (M == majorVersion) {
+                maxMinor = min(minorVersion, maxMinor);
+            }
+            if (MAX_VERSION != null && M == MAX_VERSION.major) {
+                maxMinor = min(MAX_VERSION.minor, maxMinor);
             }
 
-            int errorCode = callI(GetError);
-            if (errorCode != GL_NO_ERROR) {
-                apiLog(String.format("An OpenGL ES context was in an error state before the creation of its capabilities instance. Error: [0x%X]", errorCode));
+            for (int m = 0; m <= maxMinor; m++) {
+                supportedExtensions.add(String.format("GLES%d%d", M, m));
             }
+        }
 
-            int majorVersion;
-            int minorVersion;
+        if (majorVersion < 3) {
+            // Parse EXTENSIONS string
+            String extensionsString = memASCIISafe(callP(GL_EXTENSIONS, GetString));
+            if (extensionsString != null) {
+                StringTokenizer tokenizer = new StringTokenizer(extensionsString);
+                while (tokenizer.hasMoreTokens()) {
+                    supportedExtensions.add(tokenizer.nextToken());
+                }
+            }
+        } else {
+            // Use indexed EXTENSIONS
+            int extensionCount;
 
             try (MemoryStack stack = stackPush()) {
                 IntBuffer pi = stack.ints(0);
 
-                // Try the 3.0+ version query first
-                callPV(GL_MAJOR_VERSION, memAddress(pi), GetIntegerv);
-                if (callI(GetError) == GL_NO_ERROR && 3 <= (majorVersion = pi.get(0))) {
-                    // We're on an 3.0+ context.
-                    callPV(GL_MINOR_VERSION, memAddress(pi), GetIntegerv);
-                    minorVersion = pi.get(0);
-                } else {
-                    // Fallback to the string query.
-                    String versionString = memUTF8Safe(callP(GL_VERSION, GetString));
-                    if (versionString == null || callI(GetError) != GL_NO_ERROR) {
-                        throw new IllegalStateException("There is no OpenGL ES context current in the current thread.");
-                    }
-
-                    APIVersion version = apiParseVersion(versionString);
-
-                    majorVersion = version.major;
-                    minorVersion = version.minor;
-                }
+                callPV(GL_NUM_EXTENSIONS, memAddress(pi), GetIntegerv);
+                extensionCount = pi.get(0);
             }
 
-            if (majorVersion < 2) {
-                throw new IllegalStateException("OpenGL ES 2.0 is required.");
+            long GetStringi = apiGetFunctionAddress(functionProvider, "glGetStringi");
+            for (int i = 0; i < extensionCount; i++) {
+                supportedExtensions.add(memASCII(callP(GL_EXTENSIONS, i, GetStringi)));
             }
-
-            int[] GL_VERSIONS = {
-                -1, // OpenGL ES 1.0 not supported
-                0, // OpenGL ES 2.0
-                2 // OpenGL ES 3.0 to 3.2
-            };
-
-            Set<String> supportedExtensions = new HashSet<>(128);
-
-            int maxMajor = min(majorVersion, GL_VERSIONS.length);
-            if (MAX_VERSION != null) {
-                maxMajor = min(MAX_VERSION.major, maxMajor);
-            }
-            for (int M = 2; M <= maxMajor; M++) {
-                int maxMinor = GL_VERSIONS[M - 1];
-                if (M == majorVersion) {
-                    maxMinor = min(minorVersion, maxMinor);
-                }
-                if (MAX_VERSION != null && M == MAX_VERSION.major) {
-                    maxMinor = min(MAX_VERSION.minor, maxMinor);
-                }
-
-                for (int m = 0; m <= maxMinor; m++) {
-                    supportedExtensions.add(String.format("GLES%d%d", M, m));
-                }
-            }
-
-            if (majorVersion < 3) {
-                // Parse EXTENSIONS string
-                String extensionsString = memASCIISafe(callP(GL_EXTENSIONS, GetString));
-                if (extensionsString != null) {
-                    StringTokenizer tokenizer = new StringTokenizer(extensionsString);
-                    while (tokenizer.hasMoreTokens()) {
-                        supportedExtensions.add(tokenizer.nextToken());
-                    }
-                }
-            } else {
-                // Use indexed EXTENSIONS
-                int extensionCount;
-
-                try (MemoryStack stack = stackPush()) {
-                    IntBuffer pi = stack.ints(0);
-
-                    callPV(GL_NUM_EXTENSIONS, memAddress(pi), GetIntegerv);
-                    extensionCount = pi.get(0);
-                }
-
-                long GetStringi = apiGetFunctionAddress(functionProvider, "glGetStringi");
-                for (int i = 0; i < extensionCount; i++) {
-                    supportedExtensions.add(memASCII(callP(GL_EXTENSIONS, i, GetStringi)));
-                }
-            }
-
-            caps = new GLESCapabilities(functionProvider, supportedExtensions, bufferFactory == null ? BufferUtils::createPointerBuffer : bufferFactory);
-        } finally {
-            setCapabilities(caps);
         }
+
+        GLESCapabilities caps = new GLESCapabilities(functionProvider, supportedExtensions, bufferFactory == null ? BufferUtils::createPointerBuffer : bufferFactory);
+
+        setCapabilities(caps);
 
         return caps;
     }

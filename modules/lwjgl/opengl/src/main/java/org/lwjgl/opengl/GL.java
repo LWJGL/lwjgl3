@@ -377,134 +377,132 @@ public final class GL {
             throw new IllegalStateException("OpenGL library has not been loaded.");
         }
 
-        GLCapabilities caps = null;
+        // We don't have a current ContextCapabilities when this method is called
+        // so we have to use the native bindings directly.
+        long GetError    = functionProvider.getFunctionAddress("glGetError");
+        long GetString   = functionProvider.getFunctionAddress("glGetString");
+        long GetIntegerv = functionProvider.getFunctionAddress("glGetIntegerv");
 
-        try {
-            // We don't have a current ContextCapabilities when this method is called
-            // so we have to use the native bindings directly.
-            long GetError    = functionProvider.getFunctionAddress("glGetError");
-            long GetString   = functionProvider.getFunctionAddress("glGetString");
-            long GetIntegerv = functionProvider.getFunctionAddress("glGetIntegerv");
+        if (GetError == NULL || GetString == NULL || GetIntegerv == NULL) {
+            throw new IllegalStateException("Core OpenGL functions could not be found. Make sure that the OpenGL library has been loaded correctly.");
+        }
 
-            if (GetError == NULL || GetString == NULL || GetIntegerv == NULL) {
-                throw new IllegalStateException("Core OpenGL functions could not be found. Make sure that the OpenGL library has been loaded correctly.");
-            }
+        int errorCode = callI(GetError);
+        if (errorCode != GL_NO_ERROR) {
+            apiLog(String.format("An OpenGL context was in an error state before the creation of its capabilities instance. Error: 0x%X", errorCode));
+        }
 
-            int errorCode = callI(GetError);
-            if (errorCode != GL_NO_ERROR) {
-                apiLog(String.format("An OpenGL context was in an error state before the creation of its capabilities instance. Error: 0x%X", errorCode));
-            }
+        int majorVersion;
+        int minorVersion;
 
-            int majorVersion;
-            int minorVersion;
+        try (MemoryStack stack = stackPush()) {
+            IntBuffer version = stack.ints(0);
 
-            try (MemoryStack stack = stackPush()) {
-                IntBuffer version = stack.ints(0);
-
-                // Try the 3.0+ version query first
-                callPV(GL_MAJOR_VERSION, memAddress(version), GetIntegerv);
-                if (callI(GetError) == GL_NO_ERROR && 3 <= (majorVersion = version.get(0))) {
-                    // We're on an 3.0+ context.
-                    callPV(GL_MINOR_VERSION, memAddress(version), GetIntegerv);
-                    minorVersion = version.get(0);
-                } else {
-                    // Fallback to the string query.
-                    String versionString = memUTF8Safe(callP(GL_VERSION, GetString));
-                    if (versionString == null || callI(GetError) != GL_NO_ERROR) {
-                        throw new IllegalStateException("There is no OpenGL context current in the current thread.");
-                    }
-
-                    APIVersion apiVersion = apiParseVersion(versionString);
-
-                    majorVersion = apiVersion.major;
-                    minorVersion = apiVersion.minor;
-                }
-            }
-
-            if (majorVersion < 1 || (majorVersion == 1 && minorVersion < 1)) {
-                throw new IllegalStateException("OpenGL 1.1 is required.");
-            }
-
-            int[] GL_VERSIONS = {
-                5, // OpenGL 1.1 to 1.5
-                1, // OpenGL 2.0 to 2.1
-                3, // OpenGL 3.0 to 3.3
-                6, // OpenGL 4.0 to 4.6
-            };
-
-            Set<String> supportedExtensions = new HashSet<>(512);
-
-            int maxMajor = min(majorVersion, GL_VERSIONS.length);
-            if (MAX_VERSION != null) {
-                maxMajor = min(MAX_VERSION.major, maxMajor);
-            }
-            for (int M = 1; M <= maxMajor; M++) {
-                int maxMinor = GL_VERSIONS[M - 1];
-                if (M == majorVersion) {
-                    maxMinor = min(minorVersion, maxMinor);
-                }
-                if (MAX_VERSION != null && M == MAX_VERSION.major) {
-                    maxMinor = min(MAX_VERSION.minor, maxMinor);
-                }
-
-                for (int m = M == 1 ? 1 : 0; m <= maxMinor; m++) {
-                    supportedExtensions.add(String.format("OpenGL%d%d", M, m));
-                }
-            }
-
-            if (majorVersion < 3) {
-                // Parse EXTENSIONS string
-                String extensionsString = memASCIISafe(callP(GL_EXTENSIONS, GetString));
-                if (extensionsString != null) {
-                    StringTokenizer tokenizer = new StringTokenizer(extensionsString);
-                    while (tokenizer.hasMoreTokens()) {
-                        supportedExtensions.add(tokenizer.nextToken());
-                    }
-                }
+            // Try the 3.0+ version query first
+            callPV(GL_MAJOR_VERSION, memAddress(version), GetIntegerv);
+            if (callI(GetError) == GL_NO_ERROR && 3 <= (majorVersion = version.get(0))) {
+                // We're on an 3.0+ context.
+                callPV(GL_MINOR_VERSION, memAddress(version), GetIntegerv);
+                minorVersion = version.get(0);
             } else {
-                // Use indexed EXTENSIONS
-                try (MemoryStack stack = stackPush()) {
-                    IntBuffer pi = stack.ints(0);
+                // Fallback to the string query.
+                String versionString = memUTF8Safe(callP(GL_VERSION, GetString));
+                if (versionString == null || callI(GetError) != GL_NO_ERROR) {
+                    throw new IllegalStateException("There is no OpenGL context current in the current thread.");
+                }
 
-                    callPV(GL_NUM_EXTENSIONS, memAddress(pi), GetIntegerv);
-                    int extensionCount = pi.get(0);
+                APIVersion apiVersion = apiParseVersion(versionString);
 
-                    long GetStringi = apiGetFunctionAddress(functionProvider, "glGetStringi");
-                    for (int i = 0; i < extensionCount; i++) {
-                        supportedExtensions.add(memASCII(callP(GL_EXTENSIONS, i, GetStringi)));
-                    }
+                majorVersion = apiVersion.major;
+                minorVersion = apiVersion.minor;
+            }
+        }
 
-                    // In real drivers, we may encounter the following weird scenarios:
-                    // - 3.1 context without GL_ARB_compatibility but with deprecated functionality exposed and working.
-                    // - Core or forward-compatible context with GL_ARB_compatibility exposed, but not working when used.
-                    // We ignore these and go by the spec.
+        if (majorVersion < 1 || (majorVersion == 1 && minorVersion < 1)) {
+            throw new IllegalStateException("OpenGL 1.1 is required.");
+        }
 
-                    // Force forwardCompatible to true if the context is a forward-compatible context.
-                    callPV(GL_CONTEXT_FLAGS, memAddress(pi), GetIntegerv);
-                    if ((pi.get(0) & GL_CONTEXT_FLAG_FORWARD_COMPATIBLE_BIT) != 0) {
-                        forwardCompatible = true;
-                    } else {
-                        // Force forwardCompatible to true if the context is a core profile context.
-                        if ((3 < majorVersion || 1 <= minorVersion)) { // OpenGL 3.1+
-                            if (3 < majorVersion || 2 <= minorVersion) { // OpenGL 3.2+
-                                callPV(GL_CONTEXT_PROFILE_MASK, memAddress(pi), GetIntegerv);
-                                if ((pi.get(0) & GL_CONTEXT_CORE_PROFILE_BIT) != 0) {
-                                    forwardCompatible = true;
-                                }
-                            } else {
-                                forwardCompatible = !supportedExtensions.contains("GL_ARB_compatibility");
+        int[] GL_VERSIONS = {
+            5, // OpenGL 1.1 to 1.5
+            1, // OpenGL 2.0 to 2.1
+            3, // OpenGL 3.0 to 3.3
+            6, // OpenGL 4.0 to 4.6
+        };
+
+        Set<String> supportedExtensions = new HashSet<>(512);
+
+        int maxMajor = min(majorVersion, GL_VERSIONS.length);
+        if (MAX_VERSION != null) {
+            maxMajor = min(MAX_VERSION.major, maxMajor);
+        }
+        for (int M = 1; M <= maxMajor; M++) {
+            int maxMinor = GL_VERSIONS[M - 1];
+            if (M == majorVersion) {
+                maxMinor = min(minorVersion, maxMinor);
+            }
+            if (MAX_VERSION != null && M == MAX_VERSION.major) {
+                maxMinor = min(MAX_VERSION.minor, maxMinor);
+            }
+
+            for (int m = M == 1 ? 1 : 0; m <= maxMinor; m++) {
+                supportedExtensions.add(String.format("OpenGL%d%d", M, m));
+            }
+        }
+
+        if (majorVersion < 3) {
+            // Parse EXTENSIONS string
+            String extensionsString = memASCIISafe(callP(GL_EXTENSIONS, GetString));
+            if (extensionsString != null) {
+                StringTokenizer tokenizer = new StringTokenizer(extensionsString);
+                while (tokenizer.hasMoreTokens()) {
+                    supportedExtensions.add(tokenizer.nextToken());
+                }
+            }
+        } else {
+            // Use indexed EXTENSIONS
+            try (MemoryStack stack = stackPush()) {
+                IntBuffer pi = stack.ints(0);
+
+                callPV(GL_NUM_EXTENSIONS, memAddress(pi), GetIntegerv);
+                int extensionCount = pi.get(0);
+
+                long GetStringi = apiGetFunctionAddress(functionProvider, "glGetStringi");
+                for (int i = 0; i < extensionCount; i++) {
+                    supportedExtensions.add(memASCII(callP(GL_EXTENSIONS, i, GetStringi)));
+                }
+
+                // In real drivers, we may encounter the following weird scenarios:
+                // - 3.1 context without GL_ARB_compatibility but with deprecated functionality exposed and working.
+                // - Core or forward-compatible context with GL_ARB_compatibility exposed, but not working when used.
+                // We ignore these and go by the spec.
+
+                // Force forwardCompatible to true if the context is a forward-compatible context.
+                callPV(GL_CONTEXT_FLAGS, memAddress(pi), GetIntegerv);
+                if ((pi.get(0) & GL_CONTEXT_FLAG_FORWARD_COMPATIBLE_BIT) != 0) {
+                    forwardCompatible = true;
+                } else {
+                    // Force forwardCompatible to true if the context is a core profile context.
+                    if ((3 < majorVersion || 1 <= minorVersion)) { // OpenGL 3.1+
+                        if (3 < majorVersion || 2 <= minorVersion) { // OpenGL 3.2+
+                            callPV(GL_CONTEXT_PROFILE_MASK, memAddress(pi), GetIntegerv);
+                            if ((pi.get(0) & GL_CONTEXT_CORE_PROFILE_BIT) != 0) {
+                                forwardCompatible = true;
                             }
+                        } else {
+                            forwardCompatible = !supportedExtensions.contains("GL_ARB_compatibility");
                         }
                     }
                 }
             }
-
-            return caps = new GLCapabilities(functionProvider, supportedExtensions, forwardCompatible, bufferFactory == null
-                ? BufferUtils::createPointerBuffer
-                : bufferFactory);
-        } finally {
-            setCapabilities(caps);
         }
+
+        GLCapabilities caps = new GLCapabilities(functionProvider, supportedExtensions, forwardCompatible, bufferFactory == null
+            ? BufferUtils::createPointerBuffer
+            : bufferFactory);
+
+        setCapabilities(caps);
+
+        return caps;
     }
 
     /** Creates a dummy context and retrieves the WGL capabilities. */

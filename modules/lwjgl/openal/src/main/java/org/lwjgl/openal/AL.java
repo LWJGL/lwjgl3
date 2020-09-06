@@ -139,6 +139,8 @@ public final class AL {
     /**
      * Creates a new {@link ALCapabilities} instance for the OpenAL context that is current in the current thread or process.
      *
+     * <p>This method calls {@link #setCurrentProcess} (or {@link #setCurrentThread} if applicable) with the new instance before returning.</p>
+     *
      * @param alcCaps the {@link ALCCapabilities} of the device associated with the current context
      *
      * @return the ALCapabilities instance
@@ -158,69 +160,67 @@ public final class AL {
     public static ALCapabilities createCapabilities(ALCCapabilities alcCaps, @Nullable IntFunction<PointerBuffer> bufferFactory) {
         FunctionProvider functionProvider = ALC.check(AL.functionProvider);
 
-        ALCapabilities caps = null;
+        long GetString          = functionProvider.getFunctionAddress("alGetString");
+        long GetError           = functionProvider.getFunctionAddress("alGetError");
+        long IsExtensionPresent = functionProvider.getFunctionAddress("alIsExtensionPresent");
+        if (GetString == NULL || GetError == NULL || IsExtensionPresent == NULL) {
+            throw new IllegalStateException("Core OpenAL functions could not be found. Make sure that the OpenAL library has been loaded correctly.");
+        }
 
-        try {
-            long GetString          = functionProvider.getFunctionAddress("alGetString");
-            long GetError           = functionProvider.getFunctionAddress("alGetError");
-            long IsExtensionPresent = functionProvider.getFunctionAddress("alIsExtensionPresent");
-            if (GetString == NULL || GetError == NULL || IsExtensionPresent == NULL) {
-                throw new IllegalStateException("Core OpenAL functions could not be found. Make sure that the OpenAL library has been loaded correctly.");
-            }
+        String versionString = memASCIISafe(invokeP(AL_VERSION, GetString));
+        if (versionString == null || invokeI(GetError) != AL_NO_ERROR) {
+            throw new IllegalStateException("There is no OpenAL context current in the current thread or process.");
+        }
 
-            String versionString = memASCIISafe(invokeP(AL_VERSION, GetString));
-            if (versionString == null || invokeI(GetError) != AL_NO_ERROR) {
-                throw new IllegalStateException("There is no OpenAL context current in the current thread or process.");
-            }
+        APIVersion apiVersion = apiParseVersion(versionString);
 
-            APIVersion apiVersion = apiParseVersion(versionString);
+        int majorVersion = apiVersion.major;
+        int minorVersion = apiVersion.minor;
 
-            int majorVersion = apiVersion.major;
-            int minorVersion = apiVersion.minor;
+        int[][] AL_VERSIONS = {
+            {0, 1}  // OpenAL 1
+        };
 
-            int[][] AL_VERSIONS = {
-                {0, 1}  // OpenAL 1
-            };
+        Set<String> supportedExtensions = new HashSet<>(32);
 
-            Set<String> supportedExtensions = new HashSet<>(32);
-
-            for (int major = 1; major <= AL_VERSIONS.length; major++) {
-                int[] minors = AL_VERSIONS[major - 1];
-                for (int minor : minors) {
-                    if (major < majorVersion || (major == majorVersion && minor <= minorVersion)) {
-                        supportedExtensions.add("OpenAL" + major + minor);
-                    }
+        for (int major = 1; major <= AL_VERSIONS.length; major++) {
+            int[] minors = AL_VERSIONS[major - 1];
+            for (int minor : minors) {
+                if (major < majorVersion || (major == majorVersion && minor <= minorVersion)) {
+                    supportedExtensions.add("OpenAL" + major + minor);
                 }
-            }
-
-            // Parse EXTENSIONS string
-            String extensionsString = memASCIISafe(invokeP(AL_EXTENSIONS, GetString));
-            if (extensionsString != null) {
-                MemoryStack stack = stackGet();
-
-                StringTokenizer tokenizer = new StringTokenizer(extensionsString);
-                while (tokenizer.hasMoreTokens()) {
-                    String extName = tokenizer.nextToken();
-                    try (MemoryStack frame = stack.push()) {
-                        if (invokePZ(memAddress(frame.ASCII(extName, true)), IsExtensionPresent)) {
-                            supportedExtensions.add(extName);
-                        }
-                    }
-                }
-            }
-
-            if (alcCaps.ALC_EXT_EFX) {
-                supportedExtensions.add("ALC_EXT_EFX");
-            }
-
-            return caps = new ALCapabilities(functionProvider, supportedExtensions, bufferFactory == null ? BufferUtils::createPointerBuffer : bufferFactory);
-        } finally {
-            if (alcCaps.ALC_EXT_thread_local_context && alcGetThreadContext() != NULL) {
-                setCurrentThread(caps);
-            } else {
-                setCurrentProcess(caps);
             }
         }
+
+        // Parse EXTENSIONS string
+        String extensionsString = memASCIISafe(invokeP(AL_EXTENSIONS, GetString));
+        if (extensionsString != null) {
+            MemoryStack stack = stackGet();
+
+            StringTokenizer tokenizer = new StringTokenizer(extensionsString);
+            while (tokenizer.hasMoreTokens()) {
+                String extName = tokenizer.nextToken();
+                try (MemoryStack frame = stack.push()) {
+                    if (invokePZ(memAddress(frame.ASCII(extName, true)), IsExtensionPresent)) {
+                        supportedExtensions.add(extName);
+                    }
+                }
+            }
+        }
+
+        if (alcCaps.ALC_EXT_EFX) {
+            supportedExtensions.add("ALC_EXT_EFX");
+        }
+
+        ALCapabilities caps = new ALCapabilities(functionProvider, supportedExtensions, bufferFactory == null ? BufferUtils::createPointerBuffer : bufferFactory);
+
+        if (alcCaps.ALC_EXT_thread_local_context && alcGetThreadContext() != NULL) {
+            setCurrentThread(caps);
+        } else {
+            setCurrentProcess(caps);
+        }
+
+        return caps;
     }
 
     static ALCapabilities getICD() {
