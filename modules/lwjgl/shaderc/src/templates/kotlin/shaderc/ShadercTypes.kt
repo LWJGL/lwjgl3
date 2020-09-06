@@ -37,7 +37,7 @@ val shaderc_include_result = struct(Module.SHADERC, "ShadercIncludeResult", nati
     AutoSize("source_name")..size_t("source_name_length", "")
     charUTF8.const.p("content", "the text contents of the source file in the normal case. For a failed inclusion, this contains the error message.")
     AutoSize("content")..size_t("content_length", "")
-    opaque_p("user_data", "user data to be passed along with this request")
+    nullable..opaque_p("user_data", "user data to be passed along with this request")
 }
 
 val shaderc_include_resolve_fn = Module.SHADERC.callback {
@@ -52,7 +52,7 @@ val shaderc_include_resolve_fn = Module.SHADERC.callback {
         on the result object.
         """,
 
-        opaque_p("user_data", ""),
+        nullable..opaque_p("user_data", ""),
         charUTF8.const.p("requested_source", ""),
         int("type", ""),
         charUTF8.const.p("requesting_source", ""),
