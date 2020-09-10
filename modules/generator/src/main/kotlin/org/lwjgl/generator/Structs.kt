@@ -479,6 +479,16 @@ $indent}"""
         it.has<T>(reference)
     } // Assumes at most 1 parameter will be found that references the specified parameter
 
+    private fun getAutoSizeExpression(reference: String)= members
+        .filter { it.has<AutoSizeMember>(reference) }
+        .joinToString(" * ") { it.autoSize }
+        .run {
+            if (this.isEmpty())
+                null
+            else
+                this
+        }
+
     private fun PrintWriter.printDocumentation() {
         val builder = StringBuilder()
 
@@ -1863,34 +1873,34 @@ ${validations.joinToString("\n")}
                 if (it is StructMemberArray) {
                     if (it.nativeType.dereference is StructType) {
                         val nestedStruct = it.nativeType.javaMethodType
-                        val size = getReferenceMember<AutoSizeMember>(it.name)?.autoSize ?: it.size
+                        val capacity = getAutoSizeExpression(it.name) ?: it.size
                         if (it.nativeType is PointerType<*>) {
                             val autoSizeIndirect = getReferenceMember<AutoSizeIndirect>(it.name)
 
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$getter}. */")
-                            println("${t}public static PointerBuffer n$getter(long $STRUCT) { return ${it.mem("PointerBuffer")}($STRUCT + $field, $size); }")
+                            println("${t}public static PointerBuffer n$getter(long $STRUCT) { return ${it.mem("PointerBuffer")}($STRUCT + $field, $capacity); }")
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$getter(int) $getter}. */")
                             println("$t${it.nullable("public")} static $nestedStruct${if (autoSizeIndirect == null) "" else ".Buffer"} n$getter(long $STRUCT, int index) {")
-                            println("$t${t}return ${it.construct(nestedStruct)}(memGetAddress($STRUCT + $field + check(index, $size) * POINTER_SIZE)${
+                            println("$t${t}return ${it.construct(nestedStruct)}(memGetAddress($STRUCT + $field + check(index, $capacity) * POINTER_SIZE)${
                                 if (autoSizeIndirect == null) "" else ", n${autoSizeIndirect.name}($STRUCT)"
                             });")
                             println("$t}")
                         } else {
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$getter}. */")
-                            println("${t}public static $nestedStruct.Buffer n$getter(long $STRUCT) { return ${it.construct(nestedStruct)}($STRUCT + $field, $size); }")
+                            println("${t}public static $nestedStruct.Buffer n$getter(long $STRUCT) { return ${it.construct(nestedStruct)}($STRUCT + $field, $capacity); }")
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$getter(int) $getter}. */")
                             println("$t${it.nullable("public")} static $nestedStruct n$getter(long $STRUCT, int index) {")
-                            println("$t${t}return ${it.construct(nestedStruct)}($STRUCT + $field + check(index, $size) * $nestedStruct.SIZEOF);")
+                            println("$t${t}return ${it.construct(nestedStruct)}($STRUCT + $field + check(index, $capacity) * $nestedStruct.SIZEOF);")
                             println("$t}")
                         }
                     } else if (it.nativeType is CharType) {
                         val mapping = it.nativeType.mapping
-                        val capacity = getReferenceMember<AutoSizeMember>(it.name)
-                        val byteSize = capacity?.autoSize ?: if (mapping.bytes == 1) it.size else "${it.size} * ${mapping.bytes}"
+                        val capacity = getAutoSizeExpression(it.name)
+                        val byteSize = capacity ?: if (mapping.bytes == 1) it.size else "${it.size} * ${mapping.bytes}"
 
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$getter}. */")
@@ -1904,7 +1914,7 @@ ${validations.joinToString("\n")}
 
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$getter}. */")
-                        println("${t}public static $bufferType n$getter(long $STRUCT) { return ${it.mem(bufferType)}($STRUCT + $field, ${getReferenceMember<AutoSizeMember>(it.name)?.autoSize ?: it.size}); }")
+                        println("${t}public static $bufferType n$getter(long $STRUCT) { return ${it.mem(bufferType)}($STRUCT + $field, ${getAutoSizeExpression(it.name) ?: it.size}); }")
 
                         val javaType = it.nativeType.nativeMethodType
 
@@ -1930,16 +1940,18 @@ ${validations.joinToString("\n")}
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$getter}. */")
                         println(if (it.isStructBuffer) {
-                            val capacity = getReferenceMember<AutoSizeMember>(it.name)
+                            val capacity = getAutoSizeExpression(it.name)
+
                             if (capacity == null)
                                 "$t${it.nullable("public")} static $returnType.Buffer n$getter(long $STRUCT, int $BUFFER_CAPACITY_PARAM) { return ${it.construct(returnType)}(memGetAddress($STRUCT + $field), $BUFFER_CAPACITY_PARAM); }"
                             else
-                                "$t${it.nullable("public")} static $returnType.Buffer n$getter(long $STRUCT) { return ${it.construct(returnType)}(memGetAddress($STRUCT + $field), ${capacity.autoSize}); }"
+                                "$t${it.nullable("public")} static $returnType.Buffer n$getter(long $STRUCT) { return ${it.construct(returnType)}(memGetAddress($STRUCT + $field), $capacity); }"
                         } else
                             "$t${it.nullable("public")} static $returnType n$getter(long $STRUCT) { return ${it.construct(returnType)}(memGetAddress($STRUCT + $field)); }"
                         )
                     } else {
-                        val capacity = getReferenceMember<AutoSizeMember>(it.name)
+                        val capacity = getAutoSizeExpression(it.name)
+
                         if (capacity == null) {
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$getter(int) $getter}. */")
@@ -1947,7 +1959,7 @@ ${validations.joinToString("\n")}
                         } else {
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$getter() $getter}. */")
-                            println("$t${it.nullable("public")} static $returnType n$getter(long $STRUCT) { return ${it.mem(returnType)}(memGetAddress($STRUCT + $field), ${capacity.autoSize}); }")
+                            println("$t${it.nullable("public")} static $returnType n$getter(long $STRUCT) { return ${it.mem(returnType)}(memGetAddress($STRUCT + $field), $capacity); }")
                         }
                     }
                 }
