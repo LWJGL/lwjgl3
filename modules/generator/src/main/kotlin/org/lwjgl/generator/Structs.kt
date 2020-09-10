@@ -207,6 +207,7 @@ class Struct(
     }
 
     private val customMethods = ArrayList<String>()
+    private val customMethodsBuffer = ArrayList<String>()
 
     private val members = ArrayList<StructMember>()
 
@@ -270,6 +271,7 @@ class Struct(
 
             copy.documentation = definition.documentation
             copy.customMethods.addAll(definition.customMethods)
+            copy.customMethodsBuffer.addAll(definition.customMethodsBuffer)
             copy.members.addAll(definition.members)
             copy.usageInput = definition.usageInput
             copy.usageOutput = definition.usageOutput
@@ -338,11 +340,15 @@ class Struct(
         customMethods.add(method.trim())
     }
 
-    private fun PrintWriter.printCustomMethods(static: Boolean) {
+    fun customMethodBuffer(method: String) {
+        customMethodsBuffer.add(method.trim())
+    }
+
+    private fun PrintWriter.printCustomMethods(customMethods: ArrayList<String>, static: Boolean, indent: String = "$t") {
         customMethods
             .filter { it.startsWith("static {") == static }
             .forEach {
-                println("\n$t$it")
+                println("\n$indent$it")
             }
     }
 
@@ -832,7 +838,7 @@ $indentation}"""
                 )
         }
 
-        printCustomMethods(static = true)
+        printCustomMethods(customMethods, static = true)
 
         print("""
     /**
@@ -1094,7 +1100,7 @@ ${validations.joinToString("\n")}
             }
         }
 
-        printCustomMethods(static = false)
+        printCustomMethods(customMethods, static = false)
 
         if (generateBuffer) {
             println("\n$t// -----------------------------------")
@@ -1167,6 +1173,8 @@ ${validations.joinToString("\n")}
                     generateSetters(AccessMode.FLYWEIGHT, settableMembers)
                 }
             }
+
+            printCustomMethods(customMethodsBuffer, static = false, indent = "$t$t")
 
             print("""
     }
