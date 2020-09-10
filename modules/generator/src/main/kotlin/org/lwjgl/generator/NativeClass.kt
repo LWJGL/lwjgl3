@@ -56,8 +56,8 @@ abstract class APIBinding(
         return classes
     }
 
-    protected fun List<NativeClass>.getFunctionPointers() = this.asSequence()
-        .filter { it.hasNativeFunctions }
+    protected fun List<NativeClass>.getFunctionPointers(predicate: (NativeClass) -> Boolean = { it.hasNativeFunctions }) = this.asSequence()
+        .filter(predicate)
         .flatMap { it.functions.asSequence() }
         .filter { !it.has<Reuse>() }
         .toList()

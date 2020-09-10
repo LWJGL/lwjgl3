@@ -4,11 +4,13 @@
  */
 package org.lwjgl.openal;
 
+import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import javax.annotation.*;
 import java.nio.*;
 import java.util.*;
+import java.util.function.*;
 
 import static org.lwjgl.openal.ALC10.*;
 import static org.lwjgl.system.APIUtil.*;
@@ -41,7 +43,12 @@ public final class ALC {
     private static FunctionProviderLocal functionProvider;
 
     @Nullable
-    private static ALCCapabilities icd;
+    private static ALCCapabilities router;
+
+    private static final ThreadLocal<ALCCapabilities> capabilitiesTLS = new ThreadLocal<>();
+
+    @Nullable
+    private static ICD icd;
 
     static {
         if (!Configuration.OPENAL_EXPLICIT_INIT.get(false)) {
@@ -91,9 +98,12 @@ public final class ALC {
 
         @Override
         public long getFunctionAddress(long handle, ByteBuffer functionName) {
-            long address = invokePPP(handle, memAddress(functionName), alcGetProcAddress);
+            long address = library.getFunctionAddress(functionName);
+            if (address == NULL && handle != NULL) {
+                address = invokePPP(handle, memAddress(functionName), alcGetProcAddress);
+            }
             if (address == NULL && Checks.DEBUG_FUNCTIONS) {
-                apiLog("Failed to locate address for ALC extension function " + memASCII(functionName));
+                apiLog("Failed to locate address for ALC function " + memASCII(functionName));
             }
             return address;
         }
@@ -127,7 +137,7 @@ public final class ALC {
 
         ALC.functionProvider = functionProvider;
 
-        icd = new ALCCapabilities(functionProvider, NULL, Collections.emptySet());
+        router = createCapabilities(NULL);
 
         AL.init();
     }
@@ -140,7 +150,7 @@ public final class ALC {
 
         AL.destroy();
 
-        icd = null;
+        router = null;
 
         if (functionProvider instanceof NativeResource) {
             ((NativeResource)functionProvider).free();
@@ -160,17 +170,66 @@ public final class ALC {
         return check(ALC.functionProvider);
     }
 
-    /** Returns the {@link ALCCapabilities} of the OpenAL implementation. */
-    static ALCCapabilities getICD() {
-        return check(icd);
+    /**
+     * Sets the specified {@link ALCCapabilities} for the current thread.
+     *
+     * <p>Any ALC functions called in the current thread will use the specified {@code ALCCapabilities}.</p>
+     *
+     * @param caps the {@link ALCCapabilities} to make current, or null
+     */
+    public static void setCapabilities(@Nullable ALCCapabilities caps) {
+        capabilitiesTLS.set(caps);
+        if (icd == null) {
+            icd = new ICDStatic();
+        }
+        icd.set(caps);
+    }
+
+    /**
+     * Returns the {@link ALCCapabilities} for the current thread.
+     *
+     * @throws IllegalStateException if OpenAL has not been loaded.
+     */
+    public static ALCCapabilities getCapabilities() {
+        ALCCapabilities caps = capabilitiesTLS.get();
+        if (caps == null) {
+            caps = router;
+        }
+
+        return checkCapabilities(caps);
+    }
+
+    private static ALCCapabilities checkCapabilities(@Nullable ALCCapabilities caps) {
+        if (caps == null) {
+            throw new IllegalStateException("No ALCCapabilities instance set");
+        }
+        return caps;
     }
 
     /**
      * Creates a new {@link ALCCapabilities} instance for the specified OpenAL device.
      *
+     * <p>This method calls {@link #setCapabilities} with the new instance before returning.</p>
+     *
+     * @param device the {@code ALCdevice} for which to create the capabilities instance
+     *
      * @return the {@code ALCCapabilities} instance
      */
     public static ALCCapabilities createCapabilities(long device) {
+        return createCapabilities(device, null);
+    }
+
+    /**
+     * Creates a new {@link ALCCapabilities} instance for the specified OpenAL device.
+     *
+     * <p>This method calls {@link #setCapabilities} with the new instance before returning.</p>
+     *
+     * @param device the {@code ALCdevice} for which to create the capabilities instance
+     * @param bufferFactory a function that allocates a {@link PointerBuffer} given a size. If {@code null}, LWJGL will allocate a GC-managed buffer internally.
+     *
+     * @return the {@code ALCCapabilities} instance
+     */
+    public static ALCCapabilities createCapabilities(long device, @Nullable IntFunction<PointerBuffer> bufferFactory) {
         FunctionProviderLocal functionProvider = getFunctionProvider();
 
         // We don't have an ALCCapabilities instance when this method is called
@@ -225,7 +284,68 @@ public final class ALC {
             }
         }
 
-        return new ALCCapabilities(functionProvider, device, supportedExtensions);
+        ALCCapabilities caps = new ALCCapabilities(functionProvider, device, supportedExtensions, bufferFactory == null ? BufferUtils::createPointerBuffer : bufferFactory);
+        if (device != NULL) {
+            setCapabilities(caps);
+        }
+
+        return caps;
+    }
+
+    static ALCCapabilities getICD() {
+        ALCCapabilities caps = icd == null ? null : icd.get();
+        if (caps == null) {
+            caps = router;
+        }
+        return check(caps);
+    }
+
+    /** Function pointer provider. */
+    private interface ICD {
+        default void set(@Nullable ALCCapabilities caps) {}
+        @Nullable ALCCapabilities get();
+    }
+
+    /**
+     * Write-once {@link ICD}.
+     *
+     * <p>This is the default implementation that skips the thread/process lookup. When a new ALCCapabilities is set, we compare it to the write-once
+     * capabilities. If different function pointers are found, we fall back to the expensive lookup.</p>
+     */
+    private static class ICDStatic implements ICD {
+
+        @Nullable
+        private static ALCCapabilities tempCaps;
+
+        @SuppressWarnings("AssignmentToStaticFieldFromInstanceMethod")
+        @Override
+        public void set(@Nullable ALCCapabilities caps) {
+            if (tempCaps == null) {
+                tempCaps = caps;
+            } else if (caps != null && caps != tempCaps && ThreadLocalUtil.areCapabilitiesDifferent(tempCaps.addresses, caps.addresses)) {
+                apiLog("[WARNING] Incompatible context detected. Falling back to thread/process lookup for AL contexts.");
+                icd = ALC::getCapabilities; // fall back to thread/process lookup
+            }
+        }
+
+        @Override
+        public ALCCapabilities get() {
+            return WriteOnce.caps;
+        }
+
+        private static final class WriteOnce {
+            // This will be initialized the first time get() above is called
+            static final ALCCapabilities caps;
+
+            static {
+                ALCCapabilities tempCaps = ICDStatic.tempCaps;
+                if (tempCaps == null) {
+                    throw new IllegalStateException("No ALCCapabilities instance has been set");
+                }
+                caps = tempCaps;
+            }
+        }
+
     }
 
 }

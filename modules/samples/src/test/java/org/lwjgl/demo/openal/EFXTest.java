@@ -26,19 +26,19 @@ import static org.lwjgl.system.MemoryUtil.*;
 public final class EFXTest {
 
     public static void main(String[] args) throws Exception {
-        silentTests();
-        playbackTest();
-        efxUtilTest();
+        silentTests(args);
+        playbackTest(args);
+        efxUtilTest(args);
     }
 
     /**
      * Runs a series of API calls similar to the tutorials in the Effects Extension Guide of the
      * OpenAL SDK. Nothing is played in this method.
      */
-    private static void silentTests() throws Exception {
-        long device = alcOpenDevice((ByteBuffer)null);
+    private static void silentTests(String[] args) throws Exception {
+        long device = alcOpenDevice(args.length == 0 ? null : args[0]);
         if (device == NULL) {
-            throw new IllegalStateException("Failed to open the default device.");
+            throw new IllegalStateException("Failed to open an OpenAL device.");
         }
 
         ALCCapabilities deviceCaps = ALC.createCapabilities(device);
@@ -59,11 +59,13 @@ public final class EFXTest {
         contextAttribList.put(0);
         contextAttribList.flip();
 
-        long newContext = alcCreateContext(device, contextAttribList);
+        long context = alcCreateContext(device, contextAttribList);
 
-        boolean makeCurrentFailed = !alcSetThreadContext(newContext);
-        if (makeCurrentFailed) {
-            throw new Exception("Failed to make context current.");
+        boolean useTLC = deviceCaps.ALC_EXT_thread_local_context && alcSetThreadContext(context);
+        if (!useTLC) {
+            if (!alcMakeContextCurrent(context)) {
+                throw new IllegalStateException();
+            }
         }
         AL.createCapabilities(deviceCaps);
 
@@ -236,16 +238,22 @@ public final class EFXTest {
         alDeleteEffects(effectsBuf);
         alDeleteFilters(filter);
 
-        alcSetThreadContext(NULL);
-        alcDestroyContext(newContext);
+        alcMakeContextCurrent(NULL);
+        if (useTLC) {
+            AL.setCurrentThread(null);
+        } else {
+            AL.setCurrentProcess(null);
+        }
+
+        alcDestroyContext(context);
         alcCloseDevice(device);
     }
 
     /** Plays a sound with various effects applied to it. */
-    private static void playbackTest() throws Exception {
-        long device = alcOpenDevice((ByteBuffer)null);
+    private static void playbackTest(String[] args) throws Exception {
+        long device = alcOpenDevice(args.length == 0 ? null : args[0]);
         if (device == NULL) {
-            throw new IllegalStateException("Failed to open the default device.");
+            throw new IllegalStateException("Failed to open an OpenAL device.");
         }
 
         ALCCapabilities deviceCaps = ALC.createCapabilities(device);
@@ -256,8 +264,14 @@ public final class EFXTest {
         }
         System.out.println("EXTEfx found.");
 
-        long alContext = alcCreateContext(device, (IntBuffer)null);
-        alcSetThreadContext(alContext);
+        long context = alcCreateContext(device, (IntBuffer)null);
+
+        boolean useTLC = deviceCaps.ALC_EXT_thread_local_context && alcSetThreadContext(context);
+        if (!useTLC) {
+            if (!alcMakeContextCurrent(context)) {
+                throw new IllegalStateException();
+            }
+        }
         AL.createCapabilities(deviceCaps);
 
         // Create a source and buffer audio data
@@ -323,16 +337,22 @@ public final class EFXTest {
         alSourcePlay(source);
         Thread.sleep(7500);
 
-        alcSetThreadContext(NULL);
-        alcDestroyContext(alContext);
+        alcMakeContextCurrent(NULL);
+        if (useTLC) {
+            AL.setCurrentThread(null);
+        } else {
+            AL.setCurrentProcess(null);
+        }
+
+        alcDestroyContext(context);
         alcCloseDevice(device);
     }
 
     /** Checks OpenAL for every EFX 1.0 effect and filter and prints the result to the console. */
-    private static void efxUtilTest() throws Exception {
-        long device = alcOpenDevice((ByteBuffer)null);
+    private static void efxUtilTest(String[] args) throws Exception {
+        long device = alcOpenDevice(args.length == 0 ? null : args[0]);
         if (device == NULL) {
-            throw new IllegalStateException("Failed to open the default device.");
+            throw new IllegalStateException("Failed to open an OpenAL device.");
         }
 
         ALCCapabilities deviceCaps = ALC.createCapabilities(device);
@@ -343,8 +363,14 @@ public final class EFXTest {
         }
         System.out.println("EXTEfx found.");
 
-        long alContext = alcCreateContext(device, (IntBuffer)null);
-        alcSetThreadContext(alContext);
+        long context = alcCreateContext(device, (IntBuffer)null);
+
+        boolean useTLC = deviceCaps.ALC_EXT_thread_local_context && alcSetThreadContext(context);
+        if (!useTLC) {
+            if (!alcMakeContextCurrent(context)) {
+                throw new IllegalStateException();
+            }
+        }
         AL.createCapabilities(deviceCaps);
 
         System.out.println();
@@ -371,8 +397,14 @@ public final class EFXTest {
         check("AL_FILTER_HIGHPASS", EFXUtil.isFilterSupported(AL_FILTER_HIGHPASS));
         check("AL_FILTER_BANDPASS", EFXUtil.isFilterSupported(AL_FILTER_BANDPASS));
 
-        alcSetThreadContext(NULL);
-        alcDestroyContext(alContext);
+        alcMakeContextCurrent(NULL);
+        if (useTLC) {
+            AL.setCurrentThread(null);
+        } else {
+            AL.setCurrentProcess(null);
+        }
+
+        alcDestroyContext(context);
         alcCloseDevice(device);
     }
 

@@ -8,7 +8,6 @@ import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import javax.annotation.*;
-import java.nio.*;
 import java.util.*;
 import java.util.function.*;
 
@@ -46,9 +45,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 public final class AL {
 
     @Nullable
-    private static FunctionProvider functionProvider;
-
-    @Nullable
     private static ALCapabilities processCaps;
 
     private static final ThreadLocal<ALCapabilities> capabilitiesTLS = new ThreadLocal<>();
@@ -58,31 +54,10 @@ public final class AL {
     private AL() {}
 
     static void init() {
-        functionProvider = new FunctionProvider() {
-            // We'll use alGetProcAddress for both core and extension entry points.
-            // To do that, we need to first grab the alGetProcAddress function from
-            // the OpenAL native library.
-            private final long alGetProcAddress = ALC.getFunctionProvider().getFunctionAddress("alGetProcAddress");
-
-            @Override
-            public long getFunctionAddress(ByteBuffer functionName) {
-                long address = invokePP(memAddress(functionName), alGetProcAddress);
-                if (address == NULL && Checks.DEBUG_FUNCTIONS) {
-                    apiLog("Failed to locate address for AL function " + memASCII(functionName));
-                }
-                return address;
-            }
-        };
     }
 
     static void destroy() {
-        if (functionProvider == null) {
-            return;
-        }
-
         setCurrentProcess(null);
-
-        functionProvider = null;
     }
 
     /**
@@ -158,7 +133,21 @@ public final class AL {
      * @return the ALCapabilities instance
      */
     public static ALCapabilities createCapabilities(ALCCapabilities alcCaps, @Nullable IntFunction<PointerBuffer> bufferFactory) {
-        FunctionProvider functionProvider = ALC.check(AL.functionProvider);
+        // We'll use alGetProcAddress for both core and extension entry points.
+        // To do that, we need to first grab the alGetProcAddress function from
+        // the OpenAL native library.
+        long alGetProcAddress = ALC.getFunctionProvider().getFunctionAddress(NULL,"alGetProcAddress");
+        if (alGetProcAddress == NULL) {
+            throw new RuntimeException("A core AL function is missing. Make sure that the OpenAL library has been loaded correctly.");
+        }
+
+        FunctionProvider functionProvider = functionName -> {
+            long address = invokePP(memAddress(functionName), alGetProcAddress);
+            if (address == NULL && Checks.DEBUG_FUNCTIONS) {
+                apiLog("Failed to locate address for AL function " + memASCII(functionName));
+            }
+            return address;
+        };
 
         long GetString          = functionProvider.getFunctionAddress("alGetString");
         long GetError           = functionProvider.getFunctionAddress("alGetError");

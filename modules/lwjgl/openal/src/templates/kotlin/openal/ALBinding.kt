@@ -145,11 +145,9 @@ private val ALBinding = Generator.register(object : APIBinding(
 """)
 
         for (extension in classes) {
-            if (!extension.hasNativeFunctions) {
-                continue
+            if (extension.hasNativeFunctions) {
+                checkExtensionFunctions(extension)
             }
-
-            checkExtensionFunctions(extension)
         }
 
         println("\n}")

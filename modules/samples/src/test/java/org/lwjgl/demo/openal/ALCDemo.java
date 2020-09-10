@@ -27,9 +27,9 @@ public final class ALCDemo {
     }
 
     public static void main(String[] args) {
-        long device = alcOpenDevice((ByteBuffer)null);
+        long device = alcOpenDevice(args.length == 0 ? null : args[0]);
         if (device == NULL) {
-            throw new IllegalStateException("Failed to open the default device.");
+            throw new IllegalStateException("Failed to open an OpenAL device.");
         }
 
         ALCCapabilities deviceCaps = ALC.createCapabilities(device);
@@ -38,9 +38,9 @@ public final class ALCDemo {
             throw new IllegalStateException();
         }
 
-        System.out.println("OpenALC10: " + deviceCaps.OpenALC10);
-        System.out.println("OpenALC11: " + deviceCaps.OpenALC11);
-        System.out.println("caps.ALC_EXT_EFX = " + deviceCaps.ALC_EXT_EFX);
+        System.out.println("OpenALC10  : " + deviceCaps.OpenALC10);
+        System.out.println("OpenALC11  : " + deviceCaps.OpenALC11);
+        System.out.println("ALC_EXT_EFX: " + deviceCaps.ALC_EXT_EFX);
 
         if (deviceCaps.OpenALC11) {
             List<String> devices = ALUtil.getStringList(NULL, ALC_ALL_DEVICES_SPECIFIER);
@@ -56,22 +56,38 @@ public final class ALCDemo {
         String defaultDeviceSpecifier = Objects.requireNonNull(alcGetString(NULL, ALC_DEFAULT_DEVICE_SPECIFIER));
         System.out.println("Default device: " + defaultDeviceSpecifier);
 
+        System.out.println("ALC device specifier: " + alcGetString(device, ALC_DEVICE_SPECIFIER));
+
         long context = alcCreateContext(device, (IntBuffer)null);
-        alcSetThreadContext(context);
+        checkALCError(device);
+
+        boolean useTLC = deviceCaps.ALC_EXT_thread_local_context && alcSetThreadContext(context);
+        if (!useTLC) {
+            if (!alcMakeContextCurrent(context)) {
+                throw new IllegalStateException();
+            }
+        }
+        checkALCError(device);
+
         ALCapabilities caps = AL.createCapabilities(deviceCaps, MemoryUtil::memAllocPointer);
 
-        System.out.println("ALC_FREQUENCY: " + alcGetInteger(device, ALC_FREQUENCY) + "Hz");
-        System.out.println("ALC_REFRESH: " + alcGetInteger(device, ALC_REFRESH) + "Hz");
-        System.out.println("ALC_SYNC: " + (alcGetInteger(device, ALC_SYNC) == ALC_TRUE));
-        System.out.println("ALC_MONO_SOURCES: " + alcGetInteger(device, ALC_MONO_SOURCES));
+        System.out.println("ALC_FREQUENCY     : " + alcGetInteger(device, ALC_FREQUENCY) + "Hz");
+        System.out.println("ALC_REFRESH       : " + alcGetInteger(device, ALC_REFRESH) + "Hz");
+        System.out.println("ALC_SYNC          : " + (alcGetInteger(device, ALC_SYNC) == ALC_TRUE));
+        System.out.println("ALC_MONO_SOURCES  : " + alcGetInteger(device, ALC_MONO_SOURCES));
         System.out.println("ALC_STEREO_SOURCES: " + alcGetInteger(device, ALC_STEREO_SOURCES));
 
         try {
             testPlayback();
         } finally {
             alcMakeContextCurrent(NULL);
+            if (useTLC) {
+                AL.setCurrentThread(null);
+            } else {
+                AL.setCurrentProcess(null);
+            }
             memFree(caps.getAddressBuffer());
-            AL.setCurrentThread(null);
+
             alcDestroyContext(context);
             alcCloseDevice(device);
         }

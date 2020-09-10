@@ -27,25 +27,67 @@ val ALCBinding = Generator.register(object : APIBinding(
     APICapabilities.JAVA_CAPABILITIES
 ) {
 
+    private val classes by lazy { super.getClasses("ALC") }
+
+    private val functions by lazy {
+        classes.getFunctionPointers {
+            it.hasNativeFunctions && it.prefix == "ALC"
+        }
+    }
+
+    private val functionOrdinals by lazy {
+        LinkedHashMap<String, Int>().also { functionOrdinals ->
+            classes.asSequence()
+                .filter { it.hasNativeFunctions && it.prefix == "ALC" }
+                .forEach {
+                    it.functions.asSequence()
+                        .forEach { cmd ->
+                            if (!cmd.has<Macro>() && !functionOrdinals.contains(cmd.name)) {
+                                functionOrdinals[cmd.name] = functionOrdinals.size
+                            }
+                        }
+                }
+        }
+    }
+
     override fun shouldCheckFunctionAddress(function: Func): Boolean = function.nativeClass.templateName != "ALC10"
 
     override fun generateFunctionAddress(writer: PrintWriter, function: Func) {
         writer.println("\t\tlong $FUNCTION_ADDRESS = ALC.getICD().${function.name};")
     }
 
+    private fun PrintWriter.printCheckFunctions(
+        nativeClass: NativeClass,
+        filter: (Func) -> Boolean
+    ) {
+        print("checkFunctions(provider, device, caps, new int[] {")
+        nativeClass.printPointers(this, { func -> functionOrdinals[func.name].toString() }, filter)
+        print("},")
+        nativeClass.printPointers(this, { "\"${it.name}\"" }, filter)
+        print(")")
+    }
+
     private fun PrintWriter.checkExtensionFunctions(nativeClass: NativeClass) {
         val capName = nativeClass.capName("ALC")
 
-        println("\n\tprivate boolean check_${nativeClass.templateName}(Set<String> ext) {")
-        print("\t\treturn ext.contains(\"$capName\") && checkExtension(\"$capName\", checkFunctions(")
-        nativeClass.printPointers(this, { it.name })
-        println("));")
-        println("\t}")
+        print(
+            """
+    private static boolean check_${nativeClass.templateName}(FunctionProviderLocal provider, long device, PointerBuffer caps, Set<String> ext) {
+        if (!ext.contains("$capName")) {
+            return false;
+        }"""
+        )
+
+        print("\n\n$t${t}return ")
+        printCheckFunctions(nativeClass) { !it.has(IgnoreMissing) }
+        println(" || reportMissing(\"ALC\", \"$capName\");")
+        println("$t}")
     }
 
     init {
         javaImport(
-            "static org.lwjgl.system.APIUtil.*",
+            "org.lwjgl.*",
+            "java.util.function.IntFunction",
             "static org.lwjgl.system.Checks.*"
         )
 
@@ -54,47 +96,79 @@ val ALCBinding = Generator.register(object : APIBinding(
 
     override fun PrintWriter.generateJava() {
         generateJavaPreamble()
-        println("public final class $ALC_CAP_CLASS {\n")
+        println("public final class $ALC_CAP_CLASS {")
 
-        val classes = super.getClasses("ALC")
-
-        val addresses = classes
+        val functionSet = LinkedHashSet<String>()
+        classes.asSequence()
             .filter { it.hasNativeFunctions && it.prefix == "ALC" }
-            .getFunctionPointers()
+            .forEach {
+                val functions = it.functions.asSequence()
+                    .filter { cmd ->
+                        if (!cmd.has<Macro>()) {
+                            if (functionSet.add(cmd.name)) {
+                                return@filter true
+                            }
+                        }
+                        false
+                    }
+                    .joinToString(",\n$t$t") { cmd -> cmd.name }
 
-        println("\tpublic final long")
-        println(addresses.map(Func::name).joinToString(",\n\t\t", prefix = "\t\t", postfix = ";\n"))
+                if (functions.isNotEmpty()) {
+                    println("\n$t// ${it.templateName}")
+                    println("${t}public final long")
+                    println("$t$t$functions;")
+                }
+            }
+
+        println()
 
         classes.forEach {
             println(it.getCapabilityJavadoc())
-            println("\tpublic final boolean ${it.capName("ALC")};")
+            println("${t}public final boolean ${it.capName("ALC")};")
         }
 
-        println("\n\t$ALC_CAP_CLASS(FunctionProviderLocal provider, long device, Set<String> ext) {")
+        print(
+            """
+    /** Device handle. */
+    final long device;
 
-        println(addresses.joinToString("\n\t\t", prefix = "\t\t") { "${it.name} = provider.getFunctionAddress(${if (it.nativeClass.isCore) "" else "device, "}${it.functionAddress});" })
+    /** Off-heap array of the above function addresses. */
+    final PointerBuffer addresses;
+
+    $ALC_CAP_CLASS(FunctionProviderLocal provider, long device, Set<String> ext, IntFunction<PointerBuffer> bufferFactory) {
+        this.device = device;
+
+        PointerBuffer caps = bufferFactory.apply(${functions.size});
+"""
+        )
 
         for (extension in classes) {
             val capName = extension.capName("ALC")
             print(
                 if (extension.hasNativeFunctions && extension.prefix == "ALC")
-                    "\n$t$t$capName = check_${extension.templateName}(ext);"
+                    "\n$t$t$capName = check_${extension.templateName}(provider, device, caps, ext);"
                 else
                     "\n$t$t$capName = ext.contains(\"$capName\");"
             )
         }
-        print("""
-    }
 
-    private static boolean checkExtension(String extension, boolean supported) {
-        if (supported) {
-            return true;
+        println()
+        functionOrdinals.forEach { (it, index) ->
+            print("\n$t$t$it = caps.get($index);")
         }
 
-        apiLog("[ALC] " + extension + " was reported as available but an entry point is missing.");
-        return false;
+        print(
+            """
+
+        addresses = ThreadLocalUtil.setupAddressBuffer(caps);
     }
-""")
+
+    /** Returns the buffer of OpenAL function pointers. */
+    public PointerBuffer getAddressBuffer() {
+        return addresses;
+    }
+"""
+        )
 
         for (extension in classes) {
             if (extension.hasNativeFunctions && extension.prefix == "ALC") {

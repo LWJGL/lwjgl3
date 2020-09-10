@@ -120,6 +120,34 @@ public final class Checks {
      * Checks if all functions are available in the function provider.
      *
      * @param provider  the function address provider
+     * @param handle    the handle to a platform/device/context
+     * @param caps      the function address buffer
+     * @param indices   the function indices
+     * @param functions the function names
+     *
+     * @return true if all functions are available, false otherwise
+     */
+    public static boolean checkFunctions(FunctionProviderLocal provider, long handle, PointerBuffer caps, int[] indices, String... functions) {
+        boolean available = true;
+        for (int i = 0; i < indices.length; i++) {
+            int index = indices[i];
+            if (index < 0 || caps.get(index) != NULL) {
+                continue;
+            }
+            long address = provider.getFunctionAddress(handle, functions[i]);
+            if (address != NULL) {
+                caps.put(index, address);
+                continue;
+            }
+            available = false;
+        }
+        return available;
+    }
+
+    /**
+     * Checks if all functions are available in the function provider.
+     *
+     * @param provider  the function address provider
      * @param caps      the function address buffer
      * @param indices   the function indices
      * @param functions the function names

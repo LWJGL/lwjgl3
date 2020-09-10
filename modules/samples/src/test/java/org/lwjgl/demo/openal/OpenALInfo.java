@@ -28,14 +28,24 @@ public class OpenALInfo {
 
     public static void main(String[] args) {
         long device = alcOpenDevice(args.length == 0 ? null : args[0]);
+        if (device == NULL) {
+            throw new IllegalStateException("Failed to open an OpenAL device.");
+        }
 
         ALCCapabilities deviceCaps = ALC.createCapabilities(device);
 
-        long alContext = alcCreateContext(device, (IntBuffer)null);
+        long context = alcCreateContext(device, (IntBuffer)null);
         checkALCError(device);
 
-        alcSetThreadContext(alContext);
-        ALCapabilities contextCaps = AL.createCapabilities(deviceCaps);
+        boolean useTLC = deviceCaps.ALC_EXT_thread_local_context && alcSetThreadContext(context);
+        if (!useTLC) {
+            if (!alcMakeContextCurrent(context)) {
+                throw new IllegalStateException();
+            }
+        }
+        checkALCError(device);
+
+        AL.createCapabilities(deviceCaps);
 
         printALCInfo(device, deviceCaps);
         printALInfo();
@@ -43,8 +53,14 @@ public class OpenALInfo {
             printEFXInfo(device);
         }
 
-        alcSetThreadContext(NULL);
-        alcDestroyContext(alContext);
+        alcMakeContextCurrent(NULL);
+        if (useTLC) {
+            AL.setCurrentThread(null);
+        } else {
+            AL.setCurrentProcess(null);
+        }
+
+        alcDestroyContext(context);
         alcCloseDevice(device);
     }
 
@@ -68,6 +84,8 @@ public class OpenALInfo {
         }
 
         System.out.println("Default capture device: " + alcGetString(0, ALC_CAPTURE_DEFAULT_DEVICE_SPECIFIER));
+
+        System.out.println("ALC device specifier: " + alcGetString(device, ALC_DEVICE_SPECIFIER));
 
         int majorVersion = alcGetInteger(device, ALC_MAJOR_VERSION);
         int minorVersion = alcGetInteger(device, ALC_MINOR_VERSION);
