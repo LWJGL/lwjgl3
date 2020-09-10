@@ -104,14 +104,14 @@ val aiTexture = struct(Module.ASSIMP, "AITexture", nativeName = "struct aiTextur
         zero-based index of the texture in the ##AIScene{@code ::mTextures} array).
         """
 
-    unsigned_int(
+    AutoSize("pcData")..unsigned_int(
         "mWidth",
         """
         Width of the texture, in pixels. If {@code mHeight} is zero the texture is compressed in a format like JPEG. In this case {@code mWidth} specifies the
         size of the memory area {@code pcData} is pointing to, in bytes.
         """
     )
-    unsigned_int(
+    AutoSize("pcData")..unsigned_int(
         "mHeight",
         "Height of the texture, in pixels. If this value is zero, {@code pcData} points to an compressed texture in any format (e.g. JPEG)."
     )
@@ -135,7 +135,7 @@ val aiTexture = struct(Module.ASSIMP, "AITexture", nativeName = "struct aiTextur
         (JPEG maps to 'jpg', not to 'jpeg'). E.g. 'dds\0', 'pcx\0', 'jpg\0'. All characters are lower-case. The fourth character will always be '\0'.
         """
     )[HINTMAXTEXTURELEN] // 8 for string + 1 for terminator.
-    Unsafe..aiTexel.p(
+    aiTexel.p(
         "pcData",
         """
         Data of the texture.
@@ -146,6 +146,36 @@ val aiTexture = struct(Module.ASSIMP, "AITexture", nativeName = "struct aiTextur
         """
     )
     aiString("mFilename", "texture original filename. Used to get the texture reference.")
+
+    // TODO: remove in 3.3
+    customMethod("""
+    /** Deprecated (to be removed in LWJGL 3.3). Use {@link #pcData()} or {@link #pcDataCompressed} depending on the value of {@code mHeight}. */
+    @NativeType("struct aiTexel *")
+    @Deprecated
+    public AITexel.Buffer pcData(int capacity) { return npcData(address(), capacity); }
+
+    /** Deprecated (to be removed in LWJGL 3.3). Use {@link #npcData(long)} or {@link #npcDataCompressed} depending on the value of {@code mHeight}. */
+    @Deprecated
+    public static AITexel.Buffer npcData(long struct, int capacity) { return AITexel.create(memGetAddress(struct + AITexture.PCDATA), capacity); }""")
+
+    customMethod("""
+    /** Returns a {@code char *} view of the array pointed to by the {@code pcData} field. */
+    @NativeType("char *")
+    public ByteBuffer pcDataCompressed() { return npcDataCompressed(address()); }
+
+    /** Unsafe version of {@link #pcDataCompressed}. */
+    public static ByteBuffer npcDataCompressed(long struct) { return memByteBuffer(memGetAddress(struct + AITexture.PCDATA), nmWidth(struct)); }""")
+
+    // TODO: remove in 3.3
+    customMethodBuffer("""
+        $t/** Deprecated (to be removed in LWJGL 3.3). Use {@link #pcData()} or {@link #pcDataCompressed} depending on the value of {@code mHeight}. */
+        @NativeType("struct aiTexel *")
+        public AITexel.Buffer pcData(int capacity) { return AITexture.npcData(address(), capacity); }""")
+
+    customMethodBuffer("""
+        $t/** Returns a {@code char *} view of the array pointed to by the {@code pcData} field. */
+        @NativeType("char *")
+        public ByteBuffer pcDataCompressed() { return npcDataCompressed(address()); }""")
 }
 
 val aiColor4D = struct(Module.ASSIMP, "AIColor4D", nativeName = "struct aiColor4D") {

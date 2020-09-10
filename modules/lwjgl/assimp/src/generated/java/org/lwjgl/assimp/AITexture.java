@@ -133,13 +133,9 @@ public class AITexture extends Struct {
     /** Decodes the null-terminated string stored in the {@code achFormatHint} field. */
     @NativeType("char[9]")
     public String achFormatHintString() { return nachFormatHintString(address()); }
-    /**
-     * Returns a {@link AITexel.Buffer} view of the struct array pointed to by the {@code pcData} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** Returns a {@link AITexel.Buffer} view of the struct array pointed to by the {@code pcData} field. */
     @NativeType("struct aiTexel *")
-    public AITexel.Buffer pcData(int capacity) { return npcData(address(), capacity); }
+    public AITexel.Buffer pcData() { return npcData(address()); }
     /** Returns a {@link AIString} view of the {@code mFilename} field. */
     @NativeType("struct aiString")
     public AIString mFilename() { return nmFilename(address()); }
@@ -184,9 +180,25 @@ public class AITexture extends Struct {
     /** Unsafe version of {@link #achFormatHintString}. */
     public static String nachFormatHintString(long struct) { return memASCII(struct + AITexture.ACHFORMATHINT); }
     /** Unsafe version of {@link #pcData}. */
-    public static AITexel.Buffer npcData(long struct, int capacity) { return AITexel.create(memGetAddress(struct + AITexture.PCDATA), capacity); }
+    public static AITexel.Buffer npcData(long struct) { return AITexel.create(memGetAddress(struct + AITexture.PCDATA), nmWidth(struct) * nmHeight(struct)); }
     /** Unsafe version of {@link #mFilename}. */
     public static AIString nmFilename(long struct) { return AIString.create(struct + AITexture.MFILENAME); }
+
+    /** Deprecated (to be removed in LWJGL 3.3). Use {@link #pcData()} or {@link #pcDataCompressed} depending on the value of {@code mHeight}. */
+    @NativeType("struct aiTexel *")
+    @Deprecated
+    public AITexel.Buffer pcData(int capacity) { return npcData(address(), capacity); }
+
+    /** Deprecated (to be removed in LWJGL 3.3). Use {@link #npcData(long)} or {@link #npcDataCompressed} depending on the value of {@code mHeight}. */
+    @Deprecated
+    public static AITexel.Buffer npcData(long struct, int capacity) { return AITexel.create(memGetAddress(struct + AITexture.PCDATA), capacity); }
+
+    /** Returns a {@code char *} view of the array pointed to by the {@code pcData} field. */
+    @NativeType("char *")
+    public ByteBuffer pcDataCompressed() { return npcDataCompressed(address()); }
+
+    /** Unsafe version of {@link #pcDataCompressed}. */
+    public static ByteBuffer npcDataCompressed(long struct) { return memByteBuffer(memGetAddress(struct + AITexture.PCDATA), nmWidth(struct)); }
 
     // -----------------------------------
 
@@ -238,16 +250,20 @@ public class AITexture extends Struct {
         /** Decodes the null-terminated string stored in the {@code achFormatHint} field. */
         @NativeType("char[9]")
         public String achFormatHintString() { return AITexture.nachFormatHintString(address()); }
-        /**
-         * Returns a {@link AITexel.Buffer} view of the struct array pointed to by the {@code pcData} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** Returns a {@link AITexel.Buffer} view of the struct array pointed to by the {@code pcData} field. */
         @NativeType("struct aiTexel *")
-        public AITexel.Buffer pcData(int capacity) { return AITexture.npcData(address(), capacity); }
+        public AITexel.Buffer pcData() { return AITexture.npcData(address()); }
         /** Returns a {@link AIString} view of the {@code mFilename} field. */
         @NativeType("struct aiString")
         public AIString mFilename() { return AITexture.nmFilename(address()); }
+
+        /** Deprecated (to be removed in LWJGL 3.3). Use {@link #pcData()} or {@link #pcDataCompressed} depending on the value of {@code mHeight}. */
+        @NativeType("struct aiTexel *")
+        public AITexel.Buffer pcData(int capacity) { return AITexture.npcData(address(), capacity); }
+
+        /** Returns a {@code char *} view of the array pointed to by the {@code pcData} field. */
+        @NativeType("char *")
+        public ByteBuffer pcDataCompressed() { return npcDataCompressed(address()); }
 
     }
 
