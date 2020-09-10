@@ -40,6 +40,16 @@ public final class APIUtil {
      */
     public static final PrintStream DEBUG_STREAM = getDebugStream();
 
+    private static final Pattern API_VERSION_PATTERN;
+
+    static {
+        String PREFIX         = "[^\\d\\n\\r]*";
+        String VERSION        = "(\\d+)[.](\\d+)(?:[.](\\S+))?";
+        String IMPLEMENTATION = "(?:\\s+(.+?))?\\s*";
+
+        API_VERSION_PATTERN = Pattern.compile("^" + PREFIX + VERSION + IMPLEMENTATION + "$", Pattern.DOTALL);
+    }
+
     @SuppressWarnings({"unchecked", "resource", "UseOfSystemOutOrSystemErr"})
     private static PrintStream getDebugStream() {
         PrintStream debugStream = System.err;
@@ -278,9 +288,7 @@ public final class APIUtil {
      * @return the parsed {@link APIVersion}
      */
     public static APIVersion apiParseVersion(String version) {
-        String pattern = "(?:\\D+)?(\\d+)[.](\\d+)([.]\\S+)?\\s*(.+)?";
-
-        Matcher matcher = Pattern.compile(pattern).matcher(version);
+        Matcher matcher = API_VERSION_PATTERN.matcher(version);
         if (!matcher.matches()) {
             throw new IllegalArgumentException(String.format("Malformed API version string [%s]", version));
         }
