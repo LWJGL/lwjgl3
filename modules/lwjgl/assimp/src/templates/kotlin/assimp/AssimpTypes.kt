@@ -14,6 +14,7 @@ val ASSIMP_BINDING = simpleBinding(
 
 val ai_int32 = typedef(int32_t, "ai_int32")
 val ai_uint32 = typedef(uint32_t, "ai_uint32")
+val ai_real = typedef(float, "ai_real")
 
 /*val aiPlane = struct(Binding.ASSIMP, "AIPlane", nativeName = "struct aiPlane") {
     documentation = "Represents a plane in a three-dimensional, euclidean space."

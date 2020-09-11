@@ -1504,7 +1504,7 @@ public class Assimp {
         aiMorphingMethod_MORPH_RELATIVE   = 0x3;
 
     /**
-     * Enum used to distinguish data types.
+     * Enum used to distinguish data types. {@code aiMetadataType}
      * 
      * <h5>Enum values:</h5>
      * 
@@ -1516,6 +1516,7 @@ public class Assimp {
      * <li>{@link #AI_DOUBLE AI_DOUBLE}</li>
      * <li>{@link #AI_AISTRING AI_AISTRING}</li>
      * <li>{@link #AI_AIVECTOR3D AI_AIVECTOR3D}</li>
+     * <li>{@link #AI_AIMETADATA AI_AIMETADATA}</li>
      * <li>{@link #AI_META_MAX AI_META_MAX}</li>
      * </ul>
      */
@@ -1527,7 +1528,8 @@ public class Assimp {
         AI_DOUBLE     = 4,
         AI_AISTRING   = 5,
         AI_AIVECTOR3D = 6,
-        AI_META_MAX   = 7;
+        AI_AIMETADATA = 7,
+        AI_META_MAX   = 8;
 
     /**
      * Scene metadata holding the name of the importer which loaded the source asset.
@@ -2088,6 +2090,9 @@ public class Assimp {
 
     /** Assimp was compiled with {@code ASSIMP_BUILD_SINGLETHREADED} defined */
     public static final int ASSIMP_CFLAGS_SINGLETHREADED = 0x10;
+
+    /** Assimp was compiled with {@code ASSIMP_DOUBLE_PRECISION} defined */
+    public static final int ASSIMP_CFLAGS_DOUBLE_SUPPORT = 0x10;
 
     protected Assimp() {
         throw new UnsupportedOperationException();
@@ -4606,7 +4611,7 @@ public class Assimp {
      * @param angle    receives the output rotation angle
      * @param position receives the output position for the x,y,z axes
      */
-    public static void aiMatrix4DecomposeIntoScalingAxisAnglePosition(@NativeType("struct aiMatrix4x4 const *") AIMatrix4x4 mat, @NativeType("struct aiVector3D *") AIVector3D scaling, @NativeType("struct aiVector3D *") AIVector3D axis, @NativeType("float *") FloatBuffer angle, @NativeType("struct aiVector3D *") AIVector3D position) {
+    public static void aiMatrix4DecomposeIntoScalingAxisAnglePosition(@NativeType("struct aiMatrix4x4 const *") AIMatrix4x4 mat, @NativeType("struct aiVector3D *") AIVector3D scaling, @NativeType("struct aiVector3D *") AIVector3D axis, @NativeType("ai_real *") FloatBuffer angle, @NativeType("struct aiVector3D *") AIVector3D position) {
         if (CHECKS) {
             check(angle, 1);
         }
@@ -5566,7 +5571,7 @@ public class Assimp {
     }
 
     /** Array version of: {@link #aiMatrix4DecomposeIntoScalingAxisAnglePosition Matrix4DecomposeIntoScalingAxisAnglePosition} */
-    public static void aiMatrix4DecomposeIntoScalingAxisAnglePosition(@NativeType("struct aiMatrix4x4 const *") AIMatrix4x4 mat, @NativeType("struct aiVector3D *") AIVector3D scaling, @NativeType("struct aiVector3D *") AIVector3D axis, @NativeType("float *") float[] angle, @NativeType("struct aiVector3D *") AIVector3D position) {
+    public static void aiMatrix4DecomposeIntoScalingAxisAnglePosition(@NativeType("struct aiMatrix4x4 const *") AIMatrix4x4 mat, @NativeType("struct aiVector3D *") AIVector3D scaling, @NativeType("struct aiVector3D *") AIVector3D axis, @NativeType("ai_real *") float[] angle, @NativeType("struct aiVector3D *") AIVector3D position) {
         long __functionAddress = Functions.Matrix4DecomposeIntoScalingAxisAnglePosition;
         if (CHECKS) {
             check(angle, 1);

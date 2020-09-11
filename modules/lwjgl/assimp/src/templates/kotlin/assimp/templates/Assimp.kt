@@ -2376,7 +2376,7 @@ aiAttachLogStream(&c);""")}
         aiMatrix4x4.const.p("mat", "matrix to decompose"),
         aiVector3D.p("scaling", "receives the rotational component"),
         aiVector3D.p("axis", "receives the output rotation axis"),
-        Check(1)..float.p("angle", "receives the output rotation angle"),
+        Check(1)..ai_real.p("angle", "receives the output rotation angle"),
         aiVector3D.p("position", "receives the output position for the x,y,z axes")
     )
 
@@ -3108,7 +3108,7 @@ aiAttachLogStream(&c);""")}
     // metadata.h
 
     EnumConstant(
-        "Enum used to distinguish data types.",
+        "Enum used to distinguish data types. {@code aiMetadataType}",
 
         "AI_BOOL".enum("", "0"),
         "AI_INT32".enum,
@@ -3117,6 +3117,7 @@ aiAttachLogStream(&c);""")}
         "AI_DOUBLE".enum,
         "AI_AISTRING".enum,
         "AI_AIVECTOR3D".enum,
+        "AI_AIMETADATA".enum,
         "AI_META_MAX".enum
     ).noPrefix()
 
@@ -3805,6 +3806,11 @@ x1""")}
     IntConstant(
         "Assimp was compiled with {@code ASSIMP_BUILD_SINGLETHREADED} defined",
         "ASSIMP_CFLAGS_SINGLETHREADED"..0x10
+    ).noPrefix()
+
+    IntConstant(
+        "Assimp was compiled with {@code ASSIMP_DOUBLE_PRECISION} defined",
+        "ASSIMP_CFLAGS_DOUBLE_SUPPORT"..0x10
     ).noPrefix()
 
     Nonnull..charASCII.const.p(
