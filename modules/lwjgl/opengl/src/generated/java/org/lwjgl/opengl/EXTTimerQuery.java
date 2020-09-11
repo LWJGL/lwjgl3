@@ -53,6 +53,10 @@ public class EXTTimerQuery {
         nglGetQueryObjecti64vEXT(id, pname, memAddress(params));
     }
 
+    public static void glGetQueryObjecti64vEXT(@NativeType("GLuint") int id, @NativeType("GLenum") int pname, @NativeType("GLint64 *") long params) {
+        nglGetQueryObjecti64vEXT(id, pname, params);
+    }
+
     @NativeType("void")
     public static long glGetQueryObjecti64EXT(@NativeType("GLuint") int id, @NativeType("GLenum") int pname) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -74,6 +78,10 @@ public class EXTTimerQuery {
             check(params, 1);
         }
         nglGetQueryObjectui64vEXT(id, pname, memAddress(params));
+    }
+
+    public static void glGetQueryObjectui64vEXT(@NativeType("GLuint") int id, @NativeType("GLenum") int pname, @NativeType("GLuint64 *") long params) {
+        nglGetQueryObjectui64vEXT(id, pname, params);
     }
 
     @NativeType("void")

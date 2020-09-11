@@ -130,7 +130,7 @@ val ARB_occlusion_query = "ARBOcclusionQuery".nativeClassGL("ARB_occlusion_query
 
         GLuint("id", "the name of a query object"),
         GLenum("pname", "the symbolic name of a query object parameter", QUERY_OBJECT_PARAMETERS),
-        Check(1)..ReturnParam..GLint.p("params", "the requested data")
+        RawPointer..Check(1)..ReturnParam..GLint.p("params", "the requested data")
     )
 
     void(
@@ -139,7 +139,7 @@ val ARB_occlusion_query = "ARBOcclusionQuery".nativeClassGL("ARB_occlusion_query
 
         GLuint("id", "the name of a query object"),
         GLenum("pname", "the symbolic name of a query object parameter", QUERY_OBJECT_PARAMETERS),
-        Check(1)..ReturnParam..GLuint.p("params", "the requested data")
+        RawPointer..Check(1)..ReturnParam..GLuint.p("params", "the requested data")
     )
 
 }

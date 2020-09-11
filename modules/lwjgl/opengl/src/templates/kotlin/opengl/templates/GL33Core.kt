@@ -269,7 +269,7 @@ val GL33C = "GL33C".nativeClassGL("GL33C") {
 
         GLuint("id", "the name of a query object"),
         GLenum("pname", "the symbolic name of a query object parameter", "#QUERY_RESULT #QUERY_RESULT_AVAILABLE"),
-        Check(1)..ReturnParam..GLint64.p("params", "the requested data")
+        RawPointer..Check(1)..ReturnParam..GLint64.p("params", "the requested data")
     )
 
     void(
@@ -278,7 +278,7 @@ val GL33C = "GL33C".nativeClassGL("GL33C") {
 
         GLuint("id", "the name of a query object"),
         GLenum("pname", "the symbolic name of a query object parameter"),
-        Check(1)..ReturnParam..GLuint64.p("params", "the requested data")
+        RawPointer..Check(1)..ReturnParam..GLuint64.p("params", "the requested data")
     )
 
     // ARB_instanced_arrays

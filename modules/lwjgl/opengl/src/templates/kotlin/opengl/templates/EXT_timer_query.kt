@@ -39,7 +39,7 @@ val EXT_timer_query = "EXTTimerQuery".nativeClassGL("EXT_timer_query", postfix =
 
         GLuint("id", ""),
         GLenum("pname", ""),
-        ReturnParam..Check(1)..GLint64.p("params", "")
+        RawPointer..ReturnParam..Check(1)..GLint64.p("params", "")
     )
 
     void(
@@ -48,6 +48,6 @@ val EXT_timer_query = "EXTTimerQuery".nativeClassGL("EXT_timer_query", postfix =
 
         GLuint("id", ""),
         GLenum("pname", ""),
-        ReturnParam..Check(1)..GLuint64.p("params", "")
+        RawPointer..ReturnParam..Check(1)..GLuint64.p("params", "")
     )
 }

@@ -225,6 +225,17 @@ public class ARBOcclusionQuery {
     /**
      * Returns the integer value of a query object parameter.
      *
+     * @param id     the name of a query object
+     * @param pname  the symbolic name of a query object parameter. One of:<br><table><tr><td>{@link #GL_QUERY_RESULT_ARB QUERY_RESULT_ARB}</td><td>{@link #GL_QUERY_RESULT_AVAILABLE_ARB QUERY_RESULT_AVAILABLE_ARB}</td></tr></table>
+     * @param params the requested data
+     */
+    public static void glGetQueryObjectivARB(@NativeType("GLuint") int id, @NativeType("GLenum") int pname, @NativeType("GLint *") long params) {
+        nglGetQueryObjectivARB(id, pname, params);
+    }
+
+    /**
+     * Returns the integer value of a query object parameter.
+     *
      * @param id    the name of a query object
      * @param pname the symbolic name of a query object parameter. One of:<br><table><tr><td>{@link #GL_QUERY_RESULT_ARB QUERY_RESULT_ARB}</td><td>{@link #GL_QUERY_RESULT_AVAILABLE_ARB QUERY_RESULT_AVAILABLE_ARB}</td></tr></table>
      */
@@ -257,6 +268,17 @@ public class ARBOcclusionQuery {
             check(params, 1);
         }
         nglGetQueryObjectuivARB(id, pname, memAddress(params));
+    }
+
+    /**
+     * Unsigned version of {@link #glGetQueryObjectivARB GetQueryObjectivARB}.
+     *
+     * @param id     the name of a query object
+     * @param pname  the symbolic name of a query object parameter. One of:<br><table><tr><td>{@link #GL_QUERY_RESULT_ARB QUERY_RESULT_ARB}</td><td>{@link #GL_QUERY_RESULT_AVAILABLE_ARB QUERY_RESULT_AVAILABLE_ARB}</td></tr></table>
+     * @param params the requested data
+     */
+    public static void glGetQueryObjectuivARB(@NativeType("GLuint") int id, @NativeType("GLenum") int pname, @NativeType("GLuint *") long params) {
+        nglGetQueryObjectuivARB(id, pname, params);
     }
 
     /**
