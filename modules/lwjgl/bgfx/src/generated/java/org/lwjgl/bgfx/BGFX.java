@@ -24,7 +24,7 @@ import static org.lwjgl.system.Pointer.*;
 public class BGFX {
 
     /** API version */
-    public static final int BGFX_API_VERSION = 108;
+    public static final int BGFX_API_VERSION = 109;
 
     /** Invalid handle */
     public static final short BGFX_INVALID_HANDLE = (short)0xFFFF;
@@ -1099,8 +1099,11 @@ public class BGFX {
             encoder_set_dynamic_index_buffer                     = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_dynamic_index_buffer"),
             encoder_set_transient_index_buffer                   = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_transient_index_buffer"),
             encoder_set_vertex_buffer                            = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_vertex_buffer"),
+            encoder_set_vertex_buffer_with_layout                = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_vertex_buffer_with_layout"),
             encoder_set_dynamic_vertex_buffer                    = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_dynamic_vertex_buffer"),
+            encoder_set_dynamic_vertex_buffer_with_layout        = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_dynamic_vertex_buffer_with_layout"),
             encoder_set_transient_vertex_buffer                  = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_transient_vertex_buffer"),
+            encoder_set_transient_vertex_buffer_with_layout      = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_transient_vertex_buffer_with_layout"),
             encoder_set_vertex_count                             = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_vertex_count"),
             encoder_set_instance_data_buffer                     = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_instance_data_buffer"),
             encoder_set_instance_data_from_vertex_buffer         = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_instance_data_from_vertex_buffer"),
@@ -1136,8 +1139,11 @@ public class BGFX {
             set_dynamic_index_buffer                             = apiGetFunctionAddress(BGFX, "bgfx_set_dynamic_index_buffer"),
             set_transient_index_buffer                           = apiGetFunctionAddress(BGFX, "bgfx_set_transient_index_buffer"),
             set_vertex_buffer                                    = apiGetFunctionAddress(BGFX, "bgfx_set_vertex_buffer"),
+            set_vertex_buffer_with_layout                        = apiGetFunctionAddress(BGFX, "bgfx_set_vertex_buffer_with_layout"),
             set_dynamic_vertex_buffer                            = apiGetFunctionAddress(BGFX, "bgfx_set_dynamic_vertex_buffer"),
+            set_dynamic_vertex_buffer_with_layout                = apiGetFunctionAddress(BGFX, "bgfx_set_dynamic_vertex_buffer_with_layout"),
             set_transient_vertex_buffer                          = apiGetFunctionAddress(BGFX, "bgfx_set_transient_vertex_buffer"),
+            set_transient_vertex_buffer_with_layout              = apiGetFunctionAddress(BGFX, "bgfx_set_transient_vertex_buffer_with_layout"),
             set_vertex_count                                     = apiGetFunctionAddress(BGFX, "bgfx_set_vertex_count"),
             set_instance_data_buffer                             = apiGetFunctionAddress(BGFX, "bgfx_set_instance_data_buffer"),
             set_instance_data_from_vertex_buffer                 = apiGetFunctionAddress(BGFX, "bgfx_set_instance_data_from_vertex_buffer"),
@@ -4411,8 +4417,32 @@ public class BGFX {
     // --- [ bgfx_encoder_set_vertex_buffer ] ---
 
     /** Unsafe version of: {@link #bgfx_encoder_set_vertex_buffer encoder_set_vertex_buffer} */
-    public static void nbgfx_encoder_set_vertex_buffer(long _this, byte _stream, short _handle, int _startVertex, int _numVertices, short _layoutHandle) {
+    public static void nbgfx_encoder_set_vertex_buffer(long _this, byte _stream, short _handle, int _startVertex, int _numVertices) {
         long __functionAddress = Functions.encoder_set_vertex_buffer;
+        if (CHECKS) {
+            check(_this);
+        }
+        invokePV(_this, _stream, _handle, _startVertex, _numVertices, __functionAddress);
+    }
+
+    /**
+     * Sets vertex buffer for draw primitive.
+     *
+     * @param _this        the encoder
+     * @param _stream      vertex stream
+     * @param _handle      vertex buffer
+     * @param _startVertex first vertex to render
+     * @param _numVertices number of vertices to render
+     */
+    public static void bgfx_encoder_set_vertex_buffer(@NativeType("struct bgfx_encoder_s *") long _this, @NativeType("uint8_t") int _stream, @NativeType("bgfx_vertex_buffer_handle_t") short _handle, @NativeType("uint32_t") int _startVertex, @NativeType("uint32_t") int _numVertices) {
+        nbgfx_encoder_set_vertex_buffer(_this, (byte)_stream, _handle, _startVertex, _numVertices);
+    }
+
+    // --- [ bgfx_encoder_set_vertex_buffer_with_layout ] ---
+
+    /** Unsafe version of: {@link #bgfx_encoder_set_vertex_buffer_with_layout encoder_set_vertex_buffer_with_layout} */
+    public static void nbgfx_encoder_set_vertex_buffer_with_layout(long _this, byte _stream, short _handle, int _startVertex, int _numVertices, short _layoutHandle) {
+        long __functionAddress = Functions.encoder_set_vertex_buffer_with_layout;
         if (CHECKS) {
             check(_this);
         }
@@ -4429,15 +4459,39 @@ public class BGFX {
      * @param _numVertices  number of vertices to render
      * @param _layoutHandle vertex layout for aliasing vertex buffer. If invalid handle is used, vertex layout used for creation of vertex buffer will be used.
      */
-    public static void bgfx_encoder_set_vertex_buffer(@NativeType("struct bgfx_encoder_s *") long _this, @NativeType("uint8_t") int _stream, @NativeType("bgfx_vertex_buffer_handle_t") short _handle, @NativeType("uint32_t") int _startVertex, @NativeType("uint32_t") int _numVertices, @NativeType("bgfx_vertex_layout_handle_t") short _layoutHandle) {
-        nbgfx_encoder_set_vertex_buffer(_this, (byte)_stream, _handle, _startVertex, _numVertices, _layoutHandle);
+    public static void bgfx_encoder_set_vertex_buffer_with_layout(@NativeType("struct bgfx_encoder_s *") long _this, @NativeType("uint8_t") int _stream, @NativeType("bgfx_vertex_buffer_handle_t") short _handle, @NativeType("uint32_t") int _startVertex, @NativeType("uint32_t") int _numVertices, @NativeType("bgfx_vertex_layout_handle_t") short _layoutHandle) {
+        nbgfx_encoder_set_vertex_buffer_with_layout(_this, (byte)_stream, _handle, _startVertex, _numVertices, _layoutHandle);
     }
 
     // --- [ bgfx_encoder_set_dynamic_vertex_buffer ] ---
 
     /** Unsafe version of: {@link #bgfx_encoder_set_dynamic_vertex_buffer encoder_set_dynamic_vertex_buffer} */
-    public static void nbgfx_encoder_set_dynamic_vertex_buffer(long _this, byte _stream, short _handle, int _startVertex, int _numVertices, short _layoutHandle) {
+    public static void nbgfx_encoder_set_dynamic_vertex_buffer(long _this, byte _stream, short _handle, int _startVertex, int _numVertices) {
         long __functionAddress = Functions.encoder_set_dynamic_vertex_buffer;
+        if (CHECKS) {
+            check(_this);
+        }
+        invokePV(_this, _stream, _handle, _startVertex, _numVertices, __functionAddress);
+    }
+
+    /**
+     * Sets vertex buffer for draw primitive.
+     *
+     * @param _this        the encoder
+     * @param _stream      vertex stream
+     * @param _handle      dynamic vertex buffer
+     * @param _startVertex first vertex to render
+     * @param _numVertices number of vertices to render
+     */
+    public static void bgfx_encoder_set_dynamic_vertex_buffer(@NativeType("struct bgfx_encoder_s *") long _this, @NativeType("uint8_t") int _stream, @NativeType("bgfx_dynamic_vertex_buffer_handle_t") short _handle, @NativeType("uint32_t") int _startVertex, @NativeType("uint32_t") int _numVertices) {
+        nbgfx_encoder_set_dynamic_vertex_buffer(_this, (byte)_stream, _handle, _startVertex, _numVertices);
+    }
+
+    // --- [ bgfx_encoder_set_dynamic_vertex_buffer_with_layout ] ---
+
+    /** Unsafe version of: {@link #bgfx_encoder_set_dynamic_vertex_buffer_with_layout encoder_set_dynamic_vertex_buffer_with_layout} */
+    public static void nbgfx_encoder_set_dynamic_vertex_buffer_with_layout(long _this, byte _stream, short _handle, int _startVertex, int _numVertices, short _layoutHandle) {
+        long __functionAddress = Functions.encoder_set_dynamic_vertex_buffer_with_layout;
         if (CHECKS) {
             check(_this);
         }
@@ -4454,15 +4508,40 @@ public class BGFX {
      * @param _numVertices  number of vertices to render
      * @param _layoutHandle vertex layout for aliasing vertex buffer. If invalid handle is used, vertex layout used for creation of vertex buffer will be used.
      */
-    public static void bgfx_encoder_set_dynamic_vertex_buffer(@NativeType("struct bgfx_encoder_s *") long _this, @NativeType("uint8_t") int _stream, @NativeType("bgfx_dynamic_vertex_buffer_handle_t") short _handle, @NativeType("uint32_t") int _startVertex, @NativeType("uint32_t") int _numVertices, @NativeType("bgfx_vertex_layout_handle_t") short _layoutHandle) {
-        nbgfx_encoder_set_dynamic_vertex_buffer(_this, (byte)_stream, _handle, _startVertex, _numVertices, _layoutHandle);
+    public static void bgfx_encoder_set_dynamic_vertex_buffer_with_layout(@NativeType("struct bgfx_encoder_s *") long _this, @NativeType("uint8_t") int _stream, @NativeType("bgfx_dynamic_vertex_buffer_handle_t") short _handle, @NativeType("uint32_t") int _startVertex, @NativeType("uint32_t") int _numVertices, @NativeType("bgfx_vertex_layout_handle_t") short _layoutHandle) {
+        nbgfx_encoder_set_dynamic_vertex_buffer_with_layout(_this, (byte)_stream, _handle, _startVertex, _numVertices, _layoutHandle);
     }
 
     // --- [ bgfx_encoder_set_transient_vertex_buffer ] ---
 
     /** Unsafe version of: {@link #bgfx_encoder_set_transient_vertex_buffer encoder_set_transient_vertex_buffer} */
-    public static void nbgfx_encoder_set_transient_vertex_buffer(long _this, byte _stream, long _tvb, int _startVertex, int _numVertices, short _layoutHandle) {
+    public static void nbgfx_encoder_set_transient_vertex_buffer(long _this, byte _stream, long _tvb, int _startVertex, int _numVertices) {
         long __functionAddress = Functions.encoder_set_transient_vertex_buffer;
+        if (CHECKS) {
+            check(_this);
+            BGFXTransientVertexBuffer.validate(_tvb);
+        }
+        invokePPV(_this, _stream, _tvb, _startVertex, _numVertices, __functionAddress);
+    }
+
+    /**
+     * Sets vertex buffer for draw primitive.
+     *
+     * @param _this        the encoder
+     * @param _stream      vertex stream
+     * @param _tvb         transient vertex buffer
+     * @param _startVertex first vertex to render
+     * @param _numVertices number of vertices to render
+     */
+    public static void bgfx_encoder_set_transient_vertex_buffer(@NativeType("struct bgfx_encoder_s *") long _this, @NativeType("uint8_t") int _stream, @NativeType("bgfx_transient_vertex_buffer_t const *") BGFXTransientVertexBuffer _tvb, @NativeType("uint32_t") int _startVertex, @NativeType("uint32_t") int _numVertices) {
+        nbgfx_encoder_set_transient_vertex_buffer(_this, (byte)_stream, _tvb.address(), _startVertex, _numVertices);
+    }
+
+    // --- [ bgfx_encoder_set_transient_vertex_buffer_with_layout ] ---
+
+    /** Unsafe version of: {@link #bgfx_encoder_set_transient_vertex_buffer_with_layout encoder_set_transient_vertex_buffer_with_layout} */
+    public static void nbgfx_encoder_set_transient_vertex_buffer_with_layout(long _this, byte _stream, long _tvb, int _startVertex, int _numVertices, short _layoutHandle) {
+        long __functionAddress = Functions.encoder_set_transient_vertex_buffer_with_layout;
         if (CHECKS) {
             check(_this);
             BGFXTransientVertexBuffer.validate(_tvb);
@@ -4480,8 +4559,8 @@ public class BGFX {
      * @param _numVertices  number of vertices to render
      * @param _layoutHandle vertex layout for aliasing vertex buffer. If invalid handle is used, vertex layout used for creation of vertex buffer will be used.
      */
-    public static void bgfx_encoder_set_transient_vertex_buffer(@NativeType("struct bgfx_encoder_s *") long _this, @NativeType("uint8_t") int _stream, @NativeType("bgfx_transient_vertex_buffer_t const *") BGFXTransientVertexBuffer _tvb, @NativeType("uint32_t") int _startVertex, @NativeType("uint32_t") int _numVertices, @NativeType("bgfx_vertex_layout_handle_t") short _layoutHandle) {
-        nbgfx_encoder_set_transient_vertex_buffer(_this, (byte)_stream, _tvb.address(), _startVertex, _numVertices, _layoutHandle);
+    public static void bgfx_encoder_set_transient_vertex_buffer_with_layout(@NativeType("struct bgfx_encoder_s *") long _this, @NativeType("uint8_t") int _stream, @NativeType("bgfx_transient_vertex_buffer_t const *") BGFXTransientVertexBuffer _tvb, @NativeType("uint32_t") int _startVertex, @NativeType("uint32_t") int _numVertices, @NativeType("bgfx_vertex_layout_handle_t") short _layoutHandle) {
+        nbgfx_encoder_set_transient_vertex_buffer_with_layout(_this, (byte)_stream, _tvb.address(), _startVertex, _numVertices, _layoutHandle);
     }
 
     // --- [ bgfx_encoder_set_vertex_count ] ---
@@ -5346,6 +5425,27 @@ public class BGFX {
         nbgfx_set_vertex_buffer((byte)_stream, _handle, _startVertex, _numVertices);
     }
 
+    // --- [ bgfx_set_vertex_buffer_with_layout ] ---
+
+    /** Unsafe version of: {@link #bgfx_set_vertex_buffer_with_layout set_vertex_buffer_with_layout} */
+    public static void nbgfx_set_vertex_buffer_with_layout(byte _stream, short _handle, int _startVertex, int _numVertices, short _layoutHandle) {
+        long __functionAddress = Functions.set_vertex_buffer_with_layout;
+        invokeV(_stream, _handle, _startVertex, _numVertices, _layoutHandle, __functionAddress);
+    }
+
+    /**
+     * Sets vertex buffer for draw primitive.
+     *
+     * @param _stream       vertex stream
+     * @param _handle       vertex buffer
+     * @param _startVertex  first vertex to render
+     * @param _numVertices  number of vertices to render
+     * @param _layoutHandle vertex layout for aliasing vertex buffer. If invalid handle is used, vertex layout used for creation of vertex buffer will be used.
+     */
+    public static void bgfx_set_vertex_buffer_with_layout(@NativeType("uint8_t") int _stream, @NativeType("bgfx_vertex_buffer_handle_t") short _handle, @NativeType("uint32_t") int _startVertex, @NativeType("uint32_t") int _numVertices, @NativeType("bgfx_vertex_layout_handle_t") short _layoutHandle) {
+        nbgfx_set_vertex_buffer_with_layout((byte)_stream, _handle, _startVertex, _numVertices, _layoutHandle);
+    }
+
     // --- [ bgfx_set_dynamic_vertex_buffer ] ---
 
     /** Unsafe version of: {@link #bgfx_set_dynamic_vertex_buffer set_dynamic_vertex_buffer} */
@@ -5364,6 +5464,27 @@ public class BGFX {
      */
     public static void bgfx_set_dynamic_vertex_buffer(@NativeType("uint8_t") int _stream, @NativeType("bgfx_dynamic_vertex_buffer_handle_t") short _handle, @NativeType("uint32_t") int _startVertex, @NativeType("uint32_t") int _numVertices) {
         nbgfx_set_dynamic_vertex_buffer((byte)_stream, _handle, _startVertex, _numVertices);
+    }
+
+    // --- [ bgfx_set_dynamic_vertex_buffer_with_layout ] ---
+
+    /** Unsafe version of: {@link #bgfx_set_dynamic_vertex_buffer_with_layout set_dynamic_vertex_buffer_with_layout} */
+    public static void nbgfx_set_dynamic_vertex_buffer_with_layout(byte _stream, short _handle, int _startVertex, int _numVertices, short _layoutHandle) {
+        long __functionAddress = Functions.set_dynamic_vertex_buffer_with_layout;
+        invokeV(_stream, _handle, _startVertex, _numVertices, _layoutHandle, __functionAddress);
+    }
+
+    /**
+     * Sets vertex buffer for draw primitive.
+     *
+     * @param _stream       vertex stream
+     * @param _handle       dynamic vertex buffer
+     * @param _startVertex  first vertex to render
+     * @param _numVertices  number of vertices to render
+     * @param _layoutHandle vertex layout for aliasing vertex buffer. If invalid handle is used, vertex layout used for creation of vertex buffer will be used.
+     */
+    public static void bgfx_set_dynamic_vertex_buffer_with_layout(@NativeType("uint8_t") int _stream, @NativeType("bgfx_dynamic_vertex_buffer_handle_t") short _handle, @NativeType("uint32_t") int _startVertex, @NativeType("uint32_t") int _numVertices, @NativeType("bgfx_vertex_layout_handle_t") short _layoutHandle) {
+        nbgfx_set_dynamic_vertex_buffer_with_layout((byte)_stream, _handle, _startVertex, _numVertices, _layoutHandle);
     }
 
     // --- [ bgfx_set_transient_vertex_buffer ] ---
@@ -5387,6 +5508,30 @@ public class BGFX {
      */
     public static void bgfx_set_transient_vertex_buffer(@NativeType("uint8_t") int _stream, @NativeType("bgfx_transient_vertex_buffer_t const *") BGFXTransientVertexBuffer _tvb, @NativeType("uint32_t") int _startVertex, @NativeType("uint32_t") int _numVertices) {
         nbgfx_set_transient_vertex_buffer((byte)_stream, _tvb.address(), _startVertex, _numVertices);
+    }
+
+    // --- [ bgfx_set_transient_vertex_buffer_with_layout ] ---
+
+    /** Unsafe version of: {@link #bgfx_set_transient_vertex_buffer_with_layout set_transient_vertex_buffer_with_layout} */
+    public static void nbgfx_set_transient_vertex_buffer_with_layout(byte _stream, long _tvb, int _startVertex, int _numVertices, short _layoutHandle) {
+        long __functionAddress = Functions.set_transient_vertex_buffer_with_layout;
+        if (CHECKS) {
+            BGFXTransientVertexBuffer.validate(_tvb);
+        }
+        invokePV(_stream, _tvb, _startVertex, _numVertices, _layoutHandle, __functionAddress);
+    }
+
+    /**
+     * Sets vertex buffer for draw primitive.
+     *
+     * @param _stream       vertex stream
+     * @param _tvb          transient vertex buffer
+     * @param _startVertex  first vertex to render
+     * @param _numVertices  number of vertices to render
+     * @param _layoutHandle vertex layout for aliasing vertex buffer. If invalid handle is used, vertex layout used for creation of vertex buffer will be used.
+     */
+    public static void bgfx_set_transient_vertex_buffer_with_layout(@NativeType("uint8_t") int _stream, @NativeType("bgfx_transient_vertex_buffer_t const *") BGFXTransientVertexBuffer _tvb, @NativeType("uint32_t") int _startVertex, @NativeType("uint32_t") int _numVertices, @NativeType("bgfx_vertex_layout_handle_t") short _layoutHandle) {
+        nbgfx_set_transient_vertex_buffer_with_layout((byte)_stream, _tvb.address(), _startVertex, _numVertices, _layoutHandle);
     }
 
     // --- [ bgfx_set_vertex_count ] ---

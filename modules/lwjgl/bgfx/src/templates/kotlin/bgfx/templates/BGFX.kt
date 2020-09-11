@@ -14,7 +14,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     IntConstant(
         "API version",
 
-        "API_VERSION".."108"
+        "API_VERSION".."109"
     )
 
     ShortConstant(
@@ -2235,6 +2235,17 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         MapToInt..uint8_t("_stream", "vertex stream"),
         bgfx_vertex_buffer_handle_t("_handle", "vertex buffer"),
         uint32_t("_startVertex", "first vertex to render"),
+        uint32_t("_numVertices", "number of vertices to render")
+    )
+
+    void(
+        "encoder_set_vertex_buffer_with_layout",
+        "Sets vertex buffer for draw primitive.",
+
+        bgfx_encoder_s.p("_this", "the encoder"),
+        MapToInt..uint8_t("_stream", "vertex stream"),
+        bgfx_vertex_buffer_handle_t("_handle", "vertex buffer"),
+        uint32_t("_startVertex", "first vertex to render"),
         uint32_t("_numVertices", "number of vertices to render"),
         bgfx_vertex_layout_handle_t(
             "_layoutHandle",
@@ -2250,6 +2261,17 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         MapToInt..uint8_t("_stream", "vertex stream"),
         bgfx_dynamic_vertex_buffer_handle_t("_handle", "dynamic vertex buffer"),
         uint32_t("_startVertex", "first vertex to render"),
+        uint32_t("_numVertices", "number of vertices to render")
+    )
+
+    void(
+        "encoder_set_dynamic_vertex_buffer_with_layout",
+        "Sets vertex buffer for draw primitive.",
+
+        bgfx_encoder_s.p("_this", "the encoder"),
+        MapToInt..uint8_t("_stream", "vertex stream"),
+        bgfx_dynamic_vertex_buffer_handle_t("_handle", "dynamic vertex buffer"),
+        uint32_t("_startVertex", "first vertex to render"),
         uint32_t("_numVertices", "number of vertices to render"),
         bgfx_vertex_layout_handle_t(
             "_layoutHandle",
@@ -2259,6 +2281,17 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
 
     void(
         "encoder_set_transient_vertex_buffer",
+        "Sets vertex buffer for draw primitive.",
+
+        bgfx_encoder_s.p("_this", "the encoder"),
+        MapToInt..uint8_t("_stream", "vertex stream"),
+        bgfx_transient_vertex_buffer_t.const.p("_tvb", "transient vertex buffer"),
+        uint32_t("_startVertex", "first vertex to render"),
+        uint32_t("_numVertices", "number of vertices to render")
+    )
+
+    void(
+        "encoder_set_transient_vertex_buffer_with_layout",
         "Sets vertex buffer for draw primitive.",
 
         bgfx_encoder_s.p("_this", "the encoder"),
@@ -2688,6 +2721,20 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
     )
 
     void(
+        "set_vertex_buffer_with_layout",
+        "Sets vertex buffer for draw primitive.",
+
+        MapToInt..uint8_t("_stream", "vertex stream"),
+        bgfx_vertex_buffer_handle_t("_handle", "vertex buffer"),
+        uint32_t("_startVertex", "first vertex to render"),
+        uint32_t("_numVertices", "number of vertices to render"),
+        bgfx_vertex_layout_handle_t(
+            "_layoutHandle",
+            "vertex layout for aliasing vertex buffer. If invalid handle is used, vertex layout used for creation of vertex buffer will be used."
+        )
+    )
+
+    void(
         "set_dynamic_vertex_buffer",
         "Sets vertex buffer for draw primitive.",
 
@@ -2698,6 +2745,20 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
     )
 
     void(
+        "set_dynamic_vertex_buffer_with_layout",
+        "Sets vertex buffer for draw primitive.",
+
+        MapToInt..uint8_t("_stream", "vertex stream"),
+        bgfx_dynamic_vertex_buffer_handle_t("_handle", "dynamic vertex buffer"),
+        uint32_t("_startVertex", "first vertex to render"),
+        uint32_t("_numVertices", "number of vertices to render"),
+        bgfx_vertex_layout_handle_t(
+            "_layoutHandle",
+            "vertex layout for aliasing vertex buffer. If invalid handle is used, vertex layout used for creation of vertex buffer will be used."
+        )
+    )
+
+    void(
         "set_transient_vertex_buffer",
         "Sets vertex buffer for draw primitive.",
 
@@ -2705,6 +2766,20 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         bgfx_transient_vertex_buffer_t.const.p("_tvb", "transient vertex buffer"),
         uint32_t("_startVertex", "first vertex to render"),
         uint32_t("_numVertices", "number of vertices to render")
+    )
+
+    void(
+        "set_transient_vertex_buffer_with_layout",
+        "Sets vertex buffer for draw primitive.",
+
+        MapToInt..uint8_t("_stream", "vertex stream"),
+        bgfx_transient_vertex_buffer_t.const.p("_tvb", "transient vertex buffer"),
+        uint32_t("_startVertex", "first vertex to render"),
+        uint32_t("_numVertices", "number of vertices to render"),
+        bgfx_vertex_layout_handle_t(
+            "_layoutHandle",
+            "vertex layout for aliasing vertex buffer. If invalid handle is used, vertex layout used for creation of vertex buffer will be used."
+        )
     )
 
     void(
