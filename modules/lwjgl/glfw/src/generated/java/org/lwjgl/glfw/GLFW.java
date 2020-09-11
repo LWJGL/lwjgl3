@@ -450,14 +450,20 @@ public class GLFW {
      * windows.
      * </li>
      * <li>{@link #GLFW_TRANSPARENT_FRAMEBUFFER TRANSPARENT_FRAMEBUFFER} - 
-     * {@code WindowHint}: specifies whether the window framebuffer will be transparent. If enabled and supported by the system, the window framebuffer
+     * {@code WindowHint}: Specifies whether the window framebuffer will be transparent. If enabled and supported by the system, the window framebuffer
      * alpha channel will be used to combine the framebuffer with the background. This does not affect window decorations.
      * </li>
-     * <li>{@link #GLFW_HOVERED HOVERED} - {@code GetWindowAttrib}: indicates whether the cursor is currently directly over the content area of the window, with no other windows between.</li>
+     * <li>{@link #GLFW_HOVERED HOVERED} - {@code GetWindowAttrib}: Indicates whether the cursor is currently directly over the content area of the window, with no other windows between.</li>
      * <li>{@link #GLFW_FOCUS_ON_SHOW FOCUS_ON_SHOW} - 
-     * {@code WindowHint}: specifies whether input focuses on calling show window.
+     * {@code WindowHint}: Specifies whether input focuses on calling show window.
      * 
      * <p>{@code GetWindowAttrib}: Indicates whether input focuses on calling show window.</p>
+     * </li>
+     * <li>{@link #GLFW_MOUSE_PASSTHROUGH MOUSE_PASSTHROUGH} - 
+     * {@code WindowHint}: Specifies whether the window is transparent to mouse input, letting any mouse events pass through to whatever window is behind
+     * it. This is only supported for undecorated windows. Decorated windows with this enabled will behave differently between platforms.
+     * 
+     * <p>{@code GetWindowAttrib}: Indicates whether the window is transparent to mouse input.</p>
      * </li>
      * </ul>
      */
@@ -473,7 +479,8 @@ public class GLFW {
         GLFW_CENTER_CURSOR           = 0x20009,
         GLFW_TRANSPARENT_FRAMEBUFFER = 0x2000A,
         GLFW_HOVERED                 = 0x2000B,
-        GLFW_FOCUS_ON_SHOW           = 0x2000C;
+        GLFW_FOCUS_ON_SHOW           = 0x2000C,
+        GLFW_MOUSE_PASSTHROUGH       = 0x2000D;
 
     /** Input options. */
     public static final int
@@ -580,11 +587,38 @@ public class GLFW {
         GLFW_CONNECTED    = 0x40001,
         GLFW_DISCONNECTED = 0x40002;
 
-    /** Init hints. */
-    public static final int
-        GLFW_JOYSTICK_HAT_BUTTONS  = 0x50001,
-        GLFW_COCOA_CHDIR_RESOURCES = 0x51001,
-        GLFW_COCOA_MENUBAR         = 0x51002;
+    /**
+     * Joystick hat buttons init hint.
+     * 
+     * <p>Specifies whether to also expose joystick hats as buttons, for compatibility with earlier versions of GLFW that did not have {@link #glfwGetJoystickHats GetJoystickHats}.
+     * Possible values are {@link #GLFW_TRUE TRUE} and {@link #GLFW_FALSE FALSE}.</p>
+     */
+    public static final int GLFW_JOYSTICK_HAT_BUTTONS = 0x50001;
+
+    /**
+     * ANGLE rendering backend init hint.
+     * 
+     * <p>Specifies the platform type (rendering backend) to request when using OpenGL ES and EGL via <a target="_blank" href="https://chromium.googlesource.com/angle/angle/">ANGLE</a>. If the requested platform type is unavailable, ANGLE will use its default. Possible values are one of {@link #GLFW_ANGLE_PLATFORM_TYPE_NONE ANGLE_PLATFORM_TYPE_NONE},
+     * {@link #GLFW_ANGLE_PLATFORM_TYPE_OPENGL ANGLE_PLATFORM_TYPE_OPENGL}, {@link #GLFW_ANGLE_PLATFORM_TYPE_OPENGLES ANGLE_PLATFORM_TYPE_OPENGLES}, {@link #GLFW_ANGLE_PLATFORM_TYPE_D3D9 ANGLE_PLATFORM_TYPE_D3D9}, {@link #GLFW_ANGLE_PLATFORM_TYPE_D3D11 ANGLE_PLATFORM_TYPE_D3D11}, {@link #GLFW_ANGLE_PLATFORM_TYPE_VULKAN ANGLE_PLATFORM_TYPE_VULKAN} and
+     * {@link #GLFW_ANGLE_PLATFORM_TYPE_METAL ANGLE_PLATFORM_TYPE_METAL}.</p>
+     */
+    public static final int GLFW_ANGLE_PLATFORM_TYPE = 0x50002;
+
+    /**
+     * macOS specific init hint.
+     * 
+     * <p>Specifies whether to set the current directory to the application to the {@code Contents/Resources} subdirectory of the application's bundle, if
+     * present. Possible values are {@link #GLFW_TRUE TRUE}` and {@link #GLFW_FALSE FALSE}`. This is ignored on other platforms.</p>
+     */
+    public static final int GLFW_COCOA_CHDIR_RESOURCES = 0x51001;
+
+    /**
+     * macOS specific init hint.
+     * 
+     * <p>Specifies whether to create the menu bar and dock icon when GLFW is initialized. This applies whether the menu bar is created from a nib or manually by
+     * GLFW. Possible values are {@link #GLFW_TRUE TRUE} and {@link #GLFW_FALSE FALSE}. This is ignored on other platforms.</p>
+     */
+    public static final int GLFW_COCOA_MENUBAR = 0x51002;
 
     /** Don't care value. */
     public static final int GLFW_DONT_CARE = -1;
@@ -660,12 +694,12 @@ public class GLFW {
      * 
      * <p>{@code GetWindowAttrib}: Indicates if the window's context is an OpenGL forward-compatible one.</p>
      * </li>
-     * <li>{@link #GLFW_OPENGL_DEBUG_CONTEXT OPENGL_DEBUG_CONTEXT} - 
-     * {@code WindowHint}: Specifies whether to create a debug OpenGL context, which may have additional error and performance issue reporting functionality.
-     * If OpenGL ES is requested, this hint is ignored.
+     * <li>{@link #GLFW_CONTEXT_DEBUG CONTEXT_DEBUG} - 
+     * {@code WindowHint}: Specifies whether to create a debug context, which may have additional error and performance issue reporting functionality.
      * 
-     * <p>{@code GetWindowAttrib}: Indicates if the window's context is an OpenGL debug context.</p>
+     * <p>{@code GetWindowAttrib}: Indicates if the window's context is a debug context.</p>
      * </li>
+     * <li>{@link #GLFW_OPENGL_DEBUG_CONTEXT OPENGL_DEBUG_CONTEXT} - Alias of {@link #GLFW_CONTEXT_DEBUG CONTEXT_DEBUG} for compatibility with earlier versions.</li>
      * <li>{@link #GLFW_OPENGL_PROFILE OPENGL_PROFILE} - 
      * {@code WindowHint}: Specifies which OpenGL profile to create the context for. Possible values are one of {@link #GLFW_OPENGL_CORE_PROFILE OPENGL_CORE_PROFILE} or {@link #GLFW_OPENGL_COMPAT_PROFILE OPENGL_COMPAT_PROFILE},
      * or {@link #GLFW_OPENGL_ANY_PROFILE OPENGL_ANY_PROFILE} to not request a specific profile. If requesting an OpenGL version below 3.2, {@link #GLFW_OPENGL_ANY_PROFILE OPENGL_ANY_PROFILE} must be used. If OpenGL ES
@@ -715,7 +749,8 @@ public class GLFW {
         GLFW_CONTEXT_REVISION         = 0x22004,
         GLFW_CONTEXT_ROBUSTNESS       = 0x22005,
         GLFW_OPENGL_FORWARD_COMPAT    = 0x22006,
-        GLFW_OPENGL_DEBUG_CONTEXT     = 0x22007,
+        GLFW_CONTEXT_DEBUG            = 0x22007,
+        GLFW_OPENGL_DEBUG_CONTEXT     = GLFW_CONTEXT_DEBUG,
         GLFW_OPENGL_PROFILE           = 0x22008,
         GLFW_CONTEXT_RELEASE_BEHAVIOR = 0x22009,
         GLFW_CONTEXT_NO_ERROR         = 0x2200A,
@@ -779,6 +814,16 @@ public class GLFW {
         GLFW_NATIVE_CONTEXT_API = 0x36001,
         GLFW_EGL_CONTEXT_API    = 0x36002,
         GLFW_OSMESA_CONTEXT_API = 0x36003;
+
+    /** Values for the {@link #GLFW_ANGLE_PLATFORM_TYPE ANGLE_PLATFORM_TYPE} hint. */
+    public static final int
+        GLFW_ANGLE_PLATFORM_TYPE_NONE     = 0x37001,
+        GLFW_ANGLE_PLATFORM_TYPE_OPENGL   = 0x37002,
+        GLFW_ANGLE_PLATFORM_TYPE_OPENGLES = 0x37003,
+        GLFW_ANGLE_PLATFORM_TYPE_D3D9     = 0x37004,
+        GLFW_ANGLE_PLATFORM_TYPE_D3D11    = 0x37005,
+        GLFW_ANGLE_PLATFORM_TYPE_VULKAN   = 0x37007,
+        GLFW_ANGLE_PLATFORM_TYPE_METAL    = 0x37008;
 
     protected GLFW() {
         throw new UnsupportedOperationException();
@@ -996,7 +1041,7 @@ public class GLFW {
      * <li>This function must only be called from the main thread.</li>
      * </ul></div>
      *
-     * @param hint  the init hint to set. One of:<br><table><tr><td>{@link #GLFW_JOYSTICK_HAT_BUTTONS JOYSTICK_HAT_BUTTONS}</td><td>{@link #GLFW_COCOA_CHDIR_RESOURCES COCOA_CHDIR_RESOURCES}</td><td>{@link #GLFW_COCOA_MENUBAR COCOA_MENUBAR}</td></tr></table>
+     * @param hint  the init hint to set. One of:<br><table><tr><td>{@link #GLFW_JOYSTICK_HAT_BUTTONS JOYSTICK_HAT_BUTTONS}</td><td>{@link #GLFW_ANGLE_PLATFORM_TYPE ANGLE_PLATFORM_TYPE}</td><td>{@link #GLFW_COCOA_CHDIR_RESOURCES COCOA_CHDIR_RESOURCES}</td><td>{@link #GLFW_COCOA_MENUBAR COCOA_MENUBAR}</td></tr></table>
      * @param value the new value of the init hint
      *
      * @since version 3.3
@@ -1701,6 +1746,7 @@ public class GLFW {
      * <tr><td>{@link #GLFW_TRANSPARENT_FRAMEBUFFER TRANSPARENT_FRAMEBUFFER}</td><td>{@link #GLFW_FALSE FALSE}</td><td>{@link #GLFW_TRUE TRUE} or {@link #GLFW_FALSE FALSE}</td></tr>
      * <tr><td>{@link #GLFW_FOCUS_ON_SHOW FOCUS_ON_SHOW}</td><td>{@link #GLFW_TRUE TRUE}</td><td>{@link #GLFW_TRUE TRUE} or {@link #GLFW_FALSE FALSE}</td></tr>
      * <tr><td>{@link #GLFW_SCALE_TO_MONITOR SCALE_TO_MONITOR}</td><td>{@link #GLFW_FALSE FALSE}</td><td>{@link #GLFW_TRUE TRUE} or {@link #GLFW_FALSE FALSE}</td></tr>
+     * <tr><td>{@link #GLFW_MOUSE_PASSTHROUGH MOUSE_PASSTHROUGH}</td><td>{@link #GLFW_FALSE FALSE}</td><td>{@link #GLFW_TRUE TRUE} or {@link #GLFW_FALSE FALSE}</td></tr>
      * <tr><td>{@link #GLFW_RED_BITS RED_BITS}</td><td>8</td><td>0 to {@link Integer#MAX_VALUE} or {@link #GLFW_DONT_CARE DONT_CARE}</td></tr>
      * <tr><td>{@link #GLFW_GREEN_BITS GREEN_BITS}</td><td>8</td><td>0 to {@link Integer#MAX_VALUE} or {@link #GLFW_DONT_CARE DONT_CARE}</td></tr>
      * <tr><td>{@link #GLFW_BLUE_BITS BLUE_BITS}</td><td>8</td><td>0 to {@link Integer#MAX_VALUE} or {@link #GLFW_DONT_CARE DONT_CARE}</td></tr>
@@ -1734,7 +1780,7 @@ public class GLFW {
      * 
      * <p>This function must only be called from the main thread.</p>
      *
-     * @param hint  the window hint to set. One of:<br><table><tr><td>{@link #GLFW_FOCUSED FOCUSED}</td><td>{@link #GLFW_RESIZABLE RESIZABLE}</td><td>{@link #GLFW_VISIBLE VISIBLE}</td><td>{@link #GLFW_DECORATED DECORATED}</td><td>{@link #GLFW_AUTO_ICONIFY AUTO_ICONIFY}</td></tr><tr><td>{@link #GLFW_FLOATING FLOATING}</td><td>{@link #GLFW_MAXIMIZED MAXIMIZED}</td><td>{@link #GLFW_CENTER_CURSOR CENTER_CURSOR}</td><td>{@link #GLFW_TRANSPARENT_FRAMEBUFFER TRANSPARENT_FRAMEBUFFER}</td><td>{@link #GLFW_FOCUS_ON_SHOW FOCUS_ON_SHOW}</td></tr><tr><td>{@link #GLFW_CLIENT_API CLIENT_API}</td><td>{@link #GLFW_CONTEXT_VERSION_MAJOR CONTEXT_VERSION_MAJOR}</td><td>{@link #GLFW_CONTEXT_VERSION_MINOR CONTEXT_VERSION_MINOR}</td><td>{@link #GLFW_CONTEXT_ROBUSTNESS CONTEXT_ROBUSTNESS}</td><td>{@link #GLFW_OPENGL_FORWARD_COMPAT OPENGL_FORWARD_COMPAT}</td></tr><tr><td>{@link #GLFW_OPENGL_DEBUG_CONTEXT OPENGL_DEBUG_CONTEXT}</td><td>{@link #GLFW_OPENGL_PROFILE OPENGL_PROFILE}</td><td>{@link #GLFW_CONTEXT_RELEASE_BEHAVIOR CONTEXT_RELEASE_BEHAVIOR}</td><td>{@link #GLFW_CONTEXT_NO_ERROR CONTEXT_NO_ERROR}</td><td>{@link #GLFW_CONTEXT_CREATION_API CONTEXT_CREATION_API}</td></tr><tr><td>{@link #GLFW_SCALE_TO_MONITOR SCALE_TO_MONITOR}</td><td>{@link #GLFW_RED_BITS RED_BITS}</td><td>{@link #GLFW_GREEN_BITS GREEN_BITS}</td><td>{@link #GLFW_BLUE_BITS BLUE_BITS}</td><td>{@link #GLFW_ALPHA_BITS ALPHA_BITS}</td></tr><tr><td>{@link #GLFW_DEPTH_BITS DEPTH_BITS}</td><td>{@link #GLFW_STENCIL_BITS STENCIL_BITS}</td><td>{@link #GLFW_ACCUM_RED_BITS ACCUM_RED_BITS}</td><td>{@link #GLFW_ACCUM_GREEN_BITS ACCUM_GREEN_BITS}</td><td>{@link #GLFW_ACCUM_BLUE_BITS ACCUM_BLUE_BITS}</td></tr><tr><td>{@link #GLFW_ACCUM_ALPHA_BITS ACCUM_ALPHA_BITS}</td><td>{@link #GLFW_AUX_BUFFERS AUX_BUFFERS}</td><td>{@link #GLFW_STEREO STEREO}</td><td>{@link #GLFW_SAMPLES SAMPLES}</td><td>{@link #GLFW_SRGB_CAPABLE SRGB_CAPABLE}</td></tr><tr><td>{@link #GLFW_REFRESH_RATE REFRESH_RATE}</td><td>{@link #GLFW_DOUBLEBUFFER DOUBLEBUFFER}</td><td>{@link #GLFW_COCOA_RETINA_FRAMEBUFFER COCOA_RETINA_FRAMEBUFFER}</td><td>{@link #GLFW_COCOA_GRAPHICS_SWITCHING COCOA_GRAPHICS_SWITCHING}</td></tr></table>
+     * @param hint  the window hint to set. One of:<br><table><tr><td>{@link #GLFW_FOCUSED FOCUSED}</td><td>{@link #GLFW_RESIZABLE RESIZABLE}</td><td>{@link #GLFW_VISIBLE VISIBLE}</td><td>{@link #GLFW_DECORATED DECORATED}</td><td>{@link #GLFW_AUTO_ICONIFY AUTO_ICONIFY}</td></tr><tr><td>{@link #GLFW_FLOATING FLOATING}</td><td>{@link #GLFW_MAXIMIZED MAXIMIZED}</td><td>{@link #GLFW_CENTER_CURSOR CENTER_CURSOR}</td><td>{@link #GLFW_TRANSPARENT_FRAMEBUFFER TRANSPARENT_FRAMEBUFFER}</td><td>{@link #GLFW_FOCUS_ON_SHOW FOCUS_ON_SHOW}</td></tr><tr><td>{@link #GLFW_MOUSE_PASSTHROUGH MOUSE_PASSTHROUGH}</td><td>{@link #GLFW_CLIENT_API CLIENT_API}</td><td>{@link #GLFW_CONTEXT_VERSION_MAJOR CONTEXT_VERSION_MAJOR}</td><td>{@link #GLFW_CONTEXT_VERSION_MINOR CONTEXT_VERSION_MINOR}</td><td>{@link #GLFW_CONTEXT_ROBUSTNESS CONTEXT_ROBUSTNESS}</td></tr><tr><td>{@link #GLFW_OPENGL_FORWARD_COMPAT OPENGL_FORWARD_COMPAT}</td><td>{@link #GLFW_CONTEXT_DEBUG CONTEXT_DEBUG}</td><td>{@link #GLFW_OPENGL_DEBUG_CONTEXT OPENGL_DEBUG_CONTEXT}</td><td>{@link #GLFW_OPENGL_PROFILE OPENGL_PROFILE}</td><td>{@link #GLFW_CONTEXT_RELEASE_BEHAVIOR CONTEXT_RELEASE_BEHAVIOR}</td></tr><tr><td>{@link #GLFW_CONTEXT_NO_ERROR CONTEXT_NO_ERROR}</td><td>{@link #GLFW_CONTEXT_CREATION_API CONTEXT_CREATION_API}</td><td>{@link #GLFW_SCALE_TO_MONITOR SCALE_TO_MONITOR}</td><td>{@link #GLFW_RED_BITS RED_BITS}</td><td>{@link #GLFW_GREEN_BITS GREEN_BITS}</td></tr><tr><td>{@link #GLFW_BLUE_BITS BLUE_BITS}</td><td>{@link #GLFW_ALPHA_BITS ALPHA_BITS}</td><td>{@link #GLFW_DEPTH_BITS DEPTH_BITS}</td><td>{@link #GLFW_STENCIL_BITS STENCIL_BITS}</td><td>{@link #GLFW_ACCUM_RED_BITS ACCUM_RED_BITS}</td></tr><tr><td>{@link #GLFW_ACCUM_GREEN_BITS ACCUM_GREEN_BITS}</td><td>{@link #GLFW_ACCUM_BLUE_BITS ACCUM_BLUE_BITS}</td><td>{@link #GLFW_ACCUM_ALPHA_BITS ACCUM_ALPHA_BITS}</td><td>{@link #GLFW_AUX_BUFFERS AUX_BUFFERS}</td><td>{@link #GLFW_STEREO STEREO}</td></tr><tr><td>{@link #GLFW_SAMPLES SAMPLES}</td><td>{@link #GLFW_SRGB_CAPABLE SRGB_CAPABLE}</td><td>{@link #GLFW_REFRESH_RATE REFRESH_RATE}</td><td>{@link #GLFW_DOUBLEBUFFER DOUBLEBUFFER}</td><td>{@link #GLFW_COCOA_RETINA_FRAMEBUFFER COCOA_RETINA_FRAMEBUFFER}</td></tr><tr><td>{@link #GLFW_COCOA_GRAPHICS_SWITCHING COCOA_GRAPHICS_SWITCHING}</td></tr></table>
      * @param value the new value of the window hint
      *
      * @since version 2.2
@@ -2808,7 +2854,7 @@ public class GLFW {
      * function should not fail as long as it is passed valid arguments and the library has been initialized.</p>
      *
      * @param window the window to query
-     * @param attrib the <a href="http://www.glfw.org/docs/latest/window.html#window_attribs">window attribute</a> whose value to return. One of:<br><table><tr><td>{@link #GLFW_FOCUSED FOCUSED}</td><td>{@link #GLFW_ICONIFIED ICONIFIED}</td><td>{@link #GLFW_RESIZABLE RESIZABLE}</td><td>{@link #GLFW_VISIBLE VISIBLE}</td><td>{@link #GLFW_DECORATED DECORATED}</td></tr><tr><td>{@link #GLFW_FLOATING FLOATING}</td><td>{@link #GLFW_MAXIMIZED MAXIMIZED}</td><td>{@link #GLFW_CENTER_CURSOR CENTER_CURSOR}</td><td>{@link #GLFW_TRANSPARENT_FRAMEBUFFER TRANSPARENT_FRAMEBUFFER}</td><td>{@link #GLFW_HOVERED HOVERED}</td></tr><tr><td>{@link #GLFW_FOCUS_ON_SHOW FOCUS_ON_SHOW}</td><td>{@link #GLFW_CLIENT_API CLIENT_API}</td><td>{@link #GLFW_CONTEXT_VERSION_MAJOR CONTEXT_VERSION_MAJOR}</td><td>{@link #GLFW_CONTEXT_VERSION_MINOR CONTEXT_VERSION_MINOR}</td><td>{@link #GLFW_CONTEXT_REVISION CONTEXT_REVISION}</td></tr><tr><td>{@link #GLFW_CONTEXT_ROBUSTNESS CONTEXT_ROBUSTNESS}</td><td>{@link #GLFW_OPENGL_FORWARD_COMPAT OPENGL_FORWARD_COMPAT}</td><td>{@link #GLFW_OPENGL_DEBUG_CONTEXT OPENGL_DEBUG_CONTEXT}</td><td>{@link #GLFW_OPENGL_PROFILE OPENGL_PROFILE}</td><td>{@link #GLFW_CONTEXT_RELEASE_BEHAVIOR CONTEXT_RELEASE_BEHAVIOR}</td></tr><tr><td>{@link #GLFW_CONTEXT_NO_ERROR CONTEXT_NO_ERROR}</td><td>{@link #GLFW_CONTEXT_CREATION_API CONTEXT_CREATION_API}</td><td>{@link #GLFW_SCALE_TO_MONITOR SCALE_TO_MONITOR}</td></tr></table>
+     * @param attrib the <a href="http://www.glfw.org/docs/latest/window.html#window_attribs">window attribute</a> whose value to return. One of:<br><table><tr><td>{@link #GLFW_FOCUSED FOCUSED}</td><td>{@link #GLFW_ICONIFIED ICONIFIED}</td><td>{@link #GLFW_RESIZABLE RESIZABLE}</td><td>{@link #GLFW_VISIBLE VISIBLE}</td><td>{@link #GLFW_DECORATED DECORATED}</td></tr><tr><td>{@link #GLFW_FLOATING FLOATING}</td><td>{@link #GLFW_MAXIMIZED MAXIMIZED}</td><td>{@link #GLFW_CENTER_CURSOR CENTER_CURSOR}</td><td>{@link #GLFW_TRANSPARENT_FRAMEBUFFER TRANSPARENT_FRAMEBUFFER}</td><td>{@link #GLFW_HOVERED HOVERED}</td></tr><tr><td>{@link #GLFW_FOCUS_ON_SHOW FOCUS_ON_SHOW}</td><td>{@link #GLFW_MOUSE_PASSTHROUGH MOUSE_PASSTHROUGH}</td><td>{@link #GLFW_CLIENT_API CLIENT_API}</td><td>{@link #GLFW_CONTEXT_VERSION_MAJOR CONTEXT_VERSION_MAJOR}</td><td>{@link #GLFW_CONTEXT_VERSION_MINOR CONTEXT_VERSION_MINOR}</td></tr><tr><td>{@link #GLFW_CONTEXT_REVISION CONTEXT_REVISION}</td><td>{@link #GLFW_CONTEXT_ROBUSTNESS CONTEXT_ROBUSTNESS}</td><td>{@link #GLFW_OPENGL_FORWARD_COMPAT OPENGL_FORWARD_COMPAT}</td><td>{@link #GLFW_CONTEXT_DEBUG CONTEXT_DEBUG}</td><td>{@link #GLFW_OPENGL_DEBUG_CONTEXT OPENGL_DEBUG_CONTEXT}</td></tr><tr><td>{@link #GLFW_OPENGL_PROFILE OPENGL_PROFILE}</td><td>{@link #GLFW_CONTEXT_RELEASE_BEHAVIOR CONTEXT_RELEASE_BEHAVIOR}</td><td>{@link #GLFW_CONTEXT_NO_ERROR CONTEXT_NO_ERROR}</td><td>{@link #GLFW_CONTEXT_CREATION_API CONTEXT_CREATION_API}</td><td>{@link #GLFW_SCALE_TO_MONITOR SCALE_TO_MONITOR}</td></tr></table>
      *
      * @return the value of the attribute, or zero if an error occurred
      *
@@ -2836,7 +2882,7 @@ public class GLFW {
      *               
      *               <p>Some of these attributes are ignored for windowed mode windows. The new value will take effect if the window is later made full screen.</p>
      *               
-     *               <p>Calling {@link #glfwGetWindowAttrib GetWindowAttrib} will always return the latest value, even if that value is ignored by the current mode of the window. One of:<br></p><table><tr><td>{@link #GLFW_DECORATED DECORATED}</td><td>{@link #GLFW_RESIZABLE RESIZABLE}</td><td>{@link #GLFW_FLOATING FLOATING}</td><td>{@link #GLFW_AUTO_ICONIFY AUTO_ICONIFY}</td><td>{@link #GLFW_FOCUS_ON_SHOW FOCUS_ON_SHOW}</td></tr></table>
+     *               <p>Calling {@link #glfwGetWindowAttrib GetWindowAttrib} will always return the latest value, even if that value is ignored by the current mode of the window. One of:<br></p><table><tr><td>{@link #GLFW_DECORATED DECORATED}</td><td>{@link #GLFW_RESIZABLE RESIZABLE}</td><td>{@link #GLFW_FLOATING FLOATING}</td><td>{@link #GLFW_AUTO_ICONIFY AUTO_ICONIFY}</td><td>{@link #GLFW_FOCUS_ON_SHOW FOCUS_ON_SHOW}</td><td>{@link #GLFW_MOUSE_PASSTHROUGH MOUSE_PASSTHROUGH}</td></tr></table>
      * @param value  the value to set
      *
      * @since version 3.3

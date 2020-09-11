@@ -499,20 +499,28 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
             0x00020009),
         "TRANSPARENT_FRAMEBUFFER".enum(
             """
-            {@code WindowHint}: specifies whether the window framebuffer will be transparent. If enabled and supported by the system, the window framebuffer
+            {@code WindowHint}: Specifies whether the window framebuffer will be transparent. If enabled and supported by the system, the window framebuffer
             alpha channel will be used to combine the framebuffer with the background. This does not affect window decorations.
             """,
             0x0002000A),
         "HOVERED".enum(
-            "{@code GetWindowAttrib}: indicates whether the cursor is currently directly over the content area of the window, with no other windows between.",
+            "{@code GetWindowAttrib}: Indicates whether the cursor is currently directly over the content area of the window, with no other windows between.",
             0x0002000B),
         "FOCUS_ON_SHOW".enum(
             """
-            {@code WindowHint}: specifies whether input focuses on calling show window.
+            {@code WindowHint}: Specifies whether input focuses on calling show window.
 
             {@code GetWindowAttrib}: Indicates whether input focuses on calling show window.
             """,
-            0x0002000C)
+            0x0002000C),
+        "MOUSE_PASSTHROUGH".enum(
+            """
+            {@code WindowHint}: Specifies whether the window is transparent to mouse input, letting any mouse events pass through to whatever window is behind
+            it. This is only supported for undecorated windows. Decorated windows with this enabled will behave differently between platforms.
+
+            {@code GetWindowAttrib}: Indicates whether the window is transparent to mouse input.
+            """,
+            0x0002000D)
     ).javaDocLinks
 
     val InputModes = IntConstant(
@@ -620,11 +628,50 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     )
 
     IntConstant(
-        "Init hints.",
+        """
+        Joystick hat buttons init hint.
+        
+        Specifies whether to also expose joystick hats as buttons, for compatibility with earlier versions of GLFW that did not have #GetJoystickHats().
+        Possible values are #TRUE and #FALSE.
+        """,
 
-        "JOYSTICK_HAT_BUTTONS"..0x00050001,
+        "JOYSTICK_HAT_BUTTONS"..0x00050001
+    )
 
-        "COCOA_CHDIR_RESOURCES"..0x00051001,
+    IntConstant(
+        """
+        ANGLE rendering backend init hint.
+        
+        Specifies the platform type (rendering backend) to request when using OpenGL ES and EGL via ${url(
+            "https://chromium.googlesource.com/angle/angle/", 
+            "ANGLE")
+        }. If the requested platform type is unavailable, ANGLE will use its default. Possible values are one of #ANGLE_PLATFORM_TYPE_NONE,
+        #ANGLE_PLATFORM_TYPE_OPENGL, #ANGLE_PLATFORM_TYPE_OPENGLES, #ANGLE_PLATFORM_TYPE_D3D9, #ANGLE_PLATFORM_TYPE_D3D11, #ANGLE_PLATFORM_TYPE_VULKAN and
+        #ANGLE_PLATFORM_TYPE_METAL.
+        """,
+
+        "ANGLE_PLATFORM_TYPE"..0x00050002
+    )
+
+    IntConstant(
+        """
+        macOS specific init hint.
+        
+        Specifies whether to set the current directory to the application to the {@code Contents/Resources} subdirectory of the application's bundle, if
+        present. Possible values are #TRUE` and #FALSE`. This is ignored on other platforms.
+        """,
+
+        "COCOA_CHDIR_RESOURCES"..0x00051001
+    )
+
+    IntConstant(
+        """
+        macOS specific init hint.
+        
+        Specifies whether to create the menu bar and dock icon when GLFW is initialized. This applies whether the menu bar is created from a nib or manually by
+        GLFW. Possible values are #TRUE and #FALSE. This is ignored on other platforms.
+        """,
+
         "COCOA_MENUBAR"..0x00051002
     )
 
@@ -725,14 +772,17 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
             """,
             0x00022006
         ),
-        "OPENGL_DEBUG_CONTEXT".enum(
+        "CONTEXT_DEBUG".enum(
             """
-            {@code WindowHint}: Specifies whether to create a debug OpenGL context, which may have additional error and performance issue reporting functionality.
-            If OpenGL ES is requested, this hint is ignored.
+            {@code WindowHint}: Specifies whether to create a debug context, which may have additional error and performance issue reporting functionality.
 
-            {@code GetWindowAttrib}: Indicates if the window's context is an OpenGL debug context.
+            {@code GetWindowAttrib}: Indicates if the window's context is a debug context.
             """,
             0x00022007
+        ),
+        "OPENGL_DEBUG_CONTEXT".enum(
+            "Alias of #CONTEXT_DEBUG for compatibility with earlier versions.",
+            "GLFW_CONTEXT_DEBUG"
         ),
         "OPENGL_PROFILE".enum(
             """
@@ -873,6 +923,18 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         "OSMESA_CONTEXT_API"..0x00036003
     ).javaDocLinks
 
+    IntConstant(
+        "Values for the #ANGLE_PLATFORM_TYPE hint.",
+
+        "ANGLE_PLATFORM_TYPE_NONE"..0x00037001,
+        "ANGLE_PLATFORM_TYPE_OPENGL"..0x00037002,
+        "ANGLE_PLATFORM_TYPE_OPENGLES"..0x00037003,
+        "ANGLE_PLATFORM_TYPE_D3D9"..0x00037004,
+        "ANGLE_PLATFORM_TYPE_D3D11"..0x00037005,
+        "ANGLE_PLATFORM_TYPE_VULKAN"..0x00037007,
+        "ANGLE_PLATFORM_TYPE_METAL"..0x00037008
+    )
+
     intb(
         "Init",
         """
@@ -946,7 +1008,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         ))}
         """,
 
-        int("hint", "the init hint to set", "#JOYSTICK_HAT_BUTTONS #COCOA_CHDIR_RESOURCES #COCOA_MENUBAR"),
+        int("hint", "the init hint to set", "#JOYSTICK_HAT_BUTTONS #ANGLE_PLATFORM_TYPE #COCOA_CHDIR_RESOURCES #COCOA_MENUBAR"),
         int("value", "the new value of the init hint"),
 
         since = "version 3.3"
@@ -1383,6 +1445,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
             tr(td("#TRANSPARENT_FRAMEBUFFER"), td("#FALSE"), td("#TRUE or #FALSE")),
             tr(td("#FOCUS_ON_SHOW"), td("#TRUE"), td("#TRUE or #FALSE")),
             tr(td("#SCALE_TO_MONITOR"), td("#FALSE"), td("#TRUE or #FALSE")),
+            tr(td("#MOUSE_PASSTHROUGH"), td("#FALSE"), td("#TRUE or #FALSE")),
 
             tr(td("#RED_BITS"), td("8"), td("0 to Integer#MAX_VALUE or #DONT_CARE")),
             tr(td("#GREEN_BITS"), td("8"), td("0 to Integer#MAX_VALUE or #DONT_CARE")),
@@ -2146,7 +2209,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
 
             Calling #GetWindowAttrib() will always return the latest value, even if that value is ignored by the current mode of the window.
             """,
-            "#DECORATED #RESIZABLE #FLOATING #AUTO_ICONIFY #FOCUS_ON_SHOW"
+            "#DECORATED #RESIZABLE #FLOATING #AUTO_ICONIFY #FOCUS_ON_SHOW #MOUSE_PASSTHROUGH"
         ),
         int("value", "the value to set"),
 
