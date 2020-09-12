@@ -75,7 +75,7 @@ val spvc_reflected_resource = struct(Module.SPVC, "SpvcReflectedResource") {
         """
     )
     charUTF8.const.p(
-        "name", 
+        "name",
         """
         The declared name ({@code OpName}) of the resource.
 	
@@ -138,15 +138,30 @@ val spvc_msl_vertex_attribute = struct(Module.SPVC, "SpvcMslVertexAttribute") {
         """
 
     unsigned_int("location", "")
-    unsigned_int("msl_buffer", "")
-    unsigned_int("msl_offset", "")
-    unsigned_int("msl_stride", "")
-    spvc_bool("per_instance", "")
+    unsigned_int("msl_buffer", "Obsolete, do not use. Only lingers on for ABI compatibility.")
+    unsigned_int("msl_offset", "Obsolete, do not use. Only lingers on for ABI compatibility.")
+    unsigned_int("msl_stride", "Obsolete, do not use. Only lingers on for ABI compatibility.")
+    spvc_bool("per_instance", "Obsolete, do not use. Only lingers on for ABI compatibility.")
     spvc_msl_vertex_format("format", "")
     SpvBuiltIn("builtin", "")
 }
 
-val spvc_msl_resource_binding = struct(Module.SPVC, "SpvcMslResourceBinding") {
+val spvc_msl_shader_input = struct(Module.SPVC, "SpvcMslShaderInput", nativeName = "spvc_msl_shader_input") {
+    documentation =
+        """
+        Defines MSL characteristics of an input variable at a particular location.
+
+        After compilation, it is possible to query whether or not this location was used. If {@code vecsize} is nonzero, it must be greater than or equal to
+        the {@code vecsize} declared in the shader, or behavior is undefined.
+        """
+
+	unsigned("location", "")
+	spvc_msl_vertex_format("format", "")
+	SpvBuiltIn("builtin", "")
+	unsigned("vecsize", "")
+}
+
+val spvc_msl_resource_binding = struct(Module.SPVC, "SpvcMslResourceBinding", nativeName = "spvc_msl_resource_binding") {
     documentation =
         """
         Matches the binding index of a MSL resource for a binding within a descriptor set.

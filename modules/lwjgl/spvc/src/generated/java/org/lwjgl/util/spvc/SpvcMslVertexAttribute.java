@@ -20,6 +20,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>After compilation, it is possible to query whether or not this location was used.</p>
  * 
+ * <h3>Member documentation</h3>
+ * 
+ * <ul>
+ * <li>{@code msl_buffer} &ndash; Obsolete, do not use. Only lingers on for ABI compatibility.</li>
+ * <li>{@code msl_offset} &ndash; Obsolete, do not use. Only lingers on for ABI compatibility.</li>
+ * <li>{@code msl_stride} &ndash; Obsolete, do not use. Only lingers on for ABI compatibility.</li>
+ * <li>{@code per_instance} &ndash; Obsolete, do not use. Only lingers on for ABI compatibility.</li>
+ * </ul>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>

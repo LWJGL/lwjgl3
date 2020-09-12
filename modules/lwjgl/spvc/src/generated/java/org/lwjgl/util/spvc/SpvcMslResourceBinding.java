@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Layout</h3>
  * 
  * <pre><code>
- * struct SpvcMslResourceBinding {
+ * struct spvc_msl_resource_binding {
  *     SpvExecutionModel stage;
  *     unsigned int desc_set;
  *     unsigned int binding;
@@ -36,6 +36,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned int msl_sampler;
  * }</code></pre>
  */
+@NativeType("struct spvc_msl_resource_binding")
 public class SpvcMslResourceBinding extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
