@@ -184,7 +184,7 @@ public class OpusCustom {
     // --- [ opus_custom_encoder_destroy ] ---
 
     /**
-     * Destroys a an encoder state.
+     * Destroys an encoder state.
      *
      * @param st state to be freed
      */
@@ -353,7 +353,7 @@ public class OpusCustom {
     // --- [ opus_custom_decoder_destroy ] ---
 
     /**
-     * Destroys a an decoder state.
+     * Destroys a decoder state.
      *
      * @param st state to be freed
      */
