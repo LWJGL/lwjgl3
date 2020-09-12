@@ -111,6 +111,10 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_JNI_invokePI__JSJ(JNIEnv *__env, jc
     UNUSED_PARAMS(__env, clazz)
     return ((jint (*) (intptr_t, jshort))(intptr_t)__functionAddress)((intptr_t)param0, param1);
 }
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_JNI_invokePI__JZJ(JNIEnv *__env, jclass clazz, jlong param0, jboolean param1, jlong __functionAddress) {
+    UNUSED_PARAMS(__env, clazz)
+    return ((jint (*) (intptr_t, jboolean))(intptr_t)__functionAddress)((intptr_t)param0, param1);
+}
 JNIEXPORT jint JNICALL Java_org_lwjgl_system_JNI_invokePI__SJJ(JNIEnv *__env, jclass clazz, jshort param0, jlong param1, jlong __functionAddress) {
     UNUSED_PARAMS(__env, clazz)
     return ((jint (*) (jshort, intptr_t))(intptr_t)__functionAddress)(param0, (intptr_t)param1);

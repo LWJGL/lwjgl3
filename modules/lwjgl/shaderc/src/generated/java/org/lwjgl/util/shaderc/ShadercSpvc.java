@@ -107,6 +107,9 @@ public class ShadercSpvc {
      * <li>{@link #shaderc_spvc_status_uninitialized_compiler_error status_uninitialized_compiler_error}</li>
      * <li>{@link #shaderc_spvc_status_missing_context_error status_missing_context_error}</li>
      * <li>{@link #shaderc_spvc_status_invalid_out_param status_invalid_out_param}</li>
+     * <li>{@link #shaderc_spvc_spvc_status_missing_options_error spvc_status_missing_options_error}</li>
+     * <li>{@link #shaderc_spvc_spvc_status_invalid_in_param spvc_status_invalid_in_param}</li>
+     * <li>{@link #shaderc_spvc_spvc_status_missing_result_error spvc_status_missing_result_error}</li>
      * </ul>
      */
     public static final int
@@ -118,7 +121,10 @@ public class ShadercSpvc {
         shaderc_spvc_status_configuration_error          = 5,
         shaderc_spvc_status_uninitialized_compiler_error = 6,
         shaderc_spvc_status_missing_context_error        = 7,
-        shaderc_spvc_status_invalid_out_param            = 8;
+        shaderc_spvc_status_invalid_out_param            = 8,
+        shaderc_spvc_spvc_status_missing_options_error   = 9,
+        shaderc_spvc_spvc_status_invalid_in_param        = 10,
+        shaderc_spvc_spvc_status_missing_result_error    = 11;
 
     /**
      * {@code shaderc_spvc_execution_model}
@@ -148,17 +154,23 @@ public class ShadercSpvc {
      * <li>{@link #shaderc_spvc_binding_type_storage_buffer binding_type_storage_buffer}</li>
      * <li>{@link #shaderc_spvc_binding_type_readonly_storage_buffer binding_type_readonly_storage_buffer}</li>
      * <li>{@link #shaderc_spvc_binding_type_sampler binding_type_sampler}</li>
-     * <li>{@link #shaderc_spvc_binding_type_sampled_texture binding_type_sampled_texture}</li>
+     * <li>{@link #shaderc_spvc_binding_type_comparison_sampler binding_type_comparison_sampler}</li>
      * <li>{@link #shaderc_spvc_binding_type_storage_texture binding_type_storage_texture}</li>
+     * <li>{@link #shaderc_spvc_binding_type_sampled_texture binding_type_sampled_texture}</li>
+     * <li>{@link #shaderc_spvc_binding_type_readonly_storage_texture binding_type_readonly_storage_texture}</li>
+     * <li>{@link #shaderc_spvc_binding_type_writeonly_storage_texture binding_type_writeonly_storage_texture}</li>
      * </ul>
      */
     public static final int
-        shaderc_spvc_binding_type_uniform_buffer          = 0x0,
-        shaderc_spvc_binding_type_storage_buffer          = 0x1,
-        shaderc_spvc_binding_type_readonly_storage_buffer = 0x2,
-        shaderc_spvc_binding_type_sampler                 = 0x3,
-        shaderc_spvc_binding_type_sampled_texture         = 0x4,
-        shaderc_spvc_binding_type_storage_texture         = 0x5;
+        shaderc_spvc_binding_type_uniform_buffer            = 0x0,
+        shaderc_spvc_binding_type_storage_buffer            = 0x1,
+        shaderc_spvc_binding_type_readonly_storage_buffer   = 0x2,
+        shaderc_spvc_binding_type_sampler                   = 0x3,
+        shaderc_spvc_binding_type_comparison_sampler        = 0x4,
+        shaderc_spvc_binding_type_storage_texture           = 0x6,
+        shaderc_spvc_binding_type_sampled_texture           = 0x5,
+        shaderc_spvc_binding_type_readonly_storage_texture  = 0x7,
+        shaderc_spvc_binding_type_writeonly_storage_texture = 0x8;
 
     /**
      * {@code shaderc_spvc_texture_view_dimension}
@@ -190,17 +202,17 @@ public class ShadercSpvc {
      * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #shaderc_spvc_shaderc_spvc_texture_format_type_float shaderc_spvc_texture_format_type_float}</li>
-     * <li>{@link #shaderc_spvc_shaderc_spvc_texture_format_type_sint shaderc_spvc_texture_format_type_sint}</li>
-     * <li>{@link #shaderc_spvc_shaderc_spvc_texture_format_type_uint shaderc_spvc_texture_format_type_uint}</li>
-     * <li>{@link #shaderc_spvc_shaderc_spvc_texture_format_type_other shaderc_spvc_texture_format_type_other}</li>
+     * <li>{@link #shaderc_spvc_texture_format_type_float texture_format_type_float}</li>
+     * <li>{@link #shaderc_spvc_texture_format_type_sint texture_format_type_sint}</li>
+     * <li>{@link #shaderc_spvc_texture_format_type_uint texture_format_type_uint}</li>
+     * <li>{@link #shaderc_spvc_texture_format_type_other texture_format_type_other}</li>
      * </ul>
      */
     public static final int
-        shaderc_spvc_shaderc_spvc_texture_format_type_float = 0,
-        shaderc_spvc_shaderc_spvc_texture_format_type_sint  = 1,
-        shaderc_spvc_shaderc_spvc_texture_format_type_uint  = 2,
-        shaderc_spvc_shaderc_spvc_texture_format_type_other = 3;
+        shaderc_spvc_texture_format_type_float = 0,
+        shaderc_spvc_texture_format_type_sint  = 1,
+        shaderc_spvc_texture_format_type_uint  = 2,
+        shaderc_spvc_texture_format_type_other = 3;
 
     /**
      * {@code shaderc_spvc_shader_resource}
@@ -208,17 +220,193 @@ public class ShadercSpvc {
      * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #shaderc_spvc_shaderc_spvc_shader_resource_uniform_buffers shaderc_spvc_shader_resource_uniform_buffers}</li>
-     * <li>{@link #shaderc_spvc_shaderc_spvc_shader_resource_separate_images shaderc_spvc_shader_resource_separate_images}</li>
-     * <li>{@link #shaderc_spvc_shaderc_spvc_shader_resource_separate_samplers shaderc_spvc_shader_resource_separate_samplers}</li>
-     * <li>{@link #shaderc_spvc_shaderc_spvc_shader_resource_storage_buffers shaderc_spvc_shader_resource_storage_buffers}</li>
+     * <li>{@link #shaderc_spvc_shader_resource_uniform_buffers shader_resource_uniform_buffers}</li>
+     * <li>{@link #shaderc_spvc_shader_resource_separate_images shader_resource_separate_images}</li>
+     * <li>{@link #shaderc_spvc_shader_resource_separate_samplers shader_resource_separate_samplers}</li>
+     * <li>{@link #shaderc_spvc_shader_resource_storage_buffers shader_resource_storage_buffers}</li>
+     * <li>{@link #shaderc_spvc_shader_resource_storage_images shader_resource_storage_images}</li>
      * </ul>
      */
     public static final int
-        shaderc_spvc_shaderc_spvc_shader_resource_uniform_buffers   = 0,
-        shaderc_spvc_shaderc_spvc_shader_resource_separate_images   = 1,
-        shaderc_spvc_shaderc_spvc_shader_resource_separate_samplers = 2,
-        shaderc_spvc_shaderc_spvc_shader_resource_storage_buffers   = 3;
+        shaderc_spvc_shader_resource_uniform_buffers   = 0,
+        shaderc_spvc_shader_resource_separate_images   = 1,
+        shaderc_spvc_shader_resource_separate_samplers = 2,
+        shaderc_spvc_shader_resource_storage_buffers   = 3,
+        shaderc_spvc_shader_resource_storage_images    = 4;
+
+    /**
+     * {@code shaderc_spvc_storage_texture_format}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #shaderc_spvc_storage_texture_format_undefined storage_texture_format_undefined}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_r8unorm storage_texture_format_r8unorm}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_r8snorm storage_texture_format_r8snorm}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_r8uint storage_texture_format_r8uint}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_r8sint storage_texture_format_r8sint}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_r16uint storage_texture_format_r16uint}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_r16sint storage_texture_format_r16sint}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_r16float storage_texture_format_r16float}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_rg8unorm storage_texture_format_rg8unorm}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_rg8snorm storage_texture_format_rg8snorm}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_rg8uint storage_texture_format_rg8uint}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_rg8sint storage_texture_format_rg8sint}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_r32float storage_texture_format_r32float}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_r32uint storage_texture_format_r32uint}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_r32sint storage_texture_format_r32sint}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_rg16uint storage_texture_format_rg16uint}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_rg16sint storage_texture_format_rg16sint}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_rg16float storage_texture_format_rg16float}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_rgba8unorm storage_texture_format_rgba8unorm}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_rgba8unormsrgb storage_texture_format_rgba8unormsrgb}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_rgba8snorm storage_texture_format_rgba8snorm}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_rgba8uint storage_texture_format_rgba8uint}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_rgba8sint storage_texture_format_rgba8sint}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_bgra8unorm storage_texture_format_bgra8unorm}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_bgra8unormsrgb storage_texture_format_bgra8unormsrgb}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_rgb10a2unorm storage_texture_format_rgb10a2unorm}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_rg11b10float storage_texture_format_rg11b10float}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_rg32float storage_texture_format_rg32float}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_rg32uint storage_texture_format_rg32uint}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_rg32sint storage_texture_format_rg32sint}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_rgba16uint storage_texture_format_rgba16uint}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_rgba16sint storage_texture_format_rgba16sint}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_rgba16float storage_texture_format_rgba16float}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_rgba32float storage_texture_format_rgba32float}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_rgba32uint storage_texture_format_rgba32uint}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_rgba32sint storage_texture_format_rgba32sint}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_depth32float storage_texture_format_depth32float}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_depth24plus storage_texture_format_depth24plus}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_depth24plusstencil8 storage_texture_format_depth24plusstencil8}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_bc1rgbaunorm storage_texture_format_bc1rgbaunorm}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_bc1rgbaunormsrgb storage_texture_format_bc1rgbaunormsrgb}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_bc2rgbaunorm storage_texture_format_bc2rgbaunorm}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_bc2rgbaunormsrgb storage_texture_format_bc2rgbaunormsrgb}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_bc3rgbaunorm storage_texture_format_bc3rgbaunorm}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_bc3rgbaunormsrgb storage_texture_format_bc3rgbaunormsrgb}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_bc4runorm storage_texture_format_bc4runorm}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_bc4rsnorm storage_texture_format_bc4rsnorm}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_bc5rgunorm storage_texture_format_bc5rgunorm}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_bc5rgsnorm storage_texture_format_bc5rgsnorm}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_bc6hrgbufloat storage_texture_format_bc6hrgbufloat}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_bc6hrgbsfloat storage_texture_format_bc6hrgbsfloat}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_bc7rgbaunorm storage_texture_format_bc7rgbaunorm}</li>
+     * <li>{@link #shaderc_spvc_storage_texture_format_bc7rgbaunormsrgb storage_texture_format_bc7rgbaunormsrgb}</li>
+     * </ul>
+     */
+    public static final int
+        shaderc_spvc_storage_texture_format_undefined           = 0x0,
+        shaderc_spvc_storage_texture_format_r8unorm             = 0x1,
+        shaderc_spvc_storage_texture_format_r8snorm             = 0x2,
+        shaderc_spvc_storage_texture_format_r8uint              = 0x3,
+        shaderc_spvc_storage_texture_format_r8sint              = 0x4,
+        shaderc_spvc_storage_texture_format_r16uint             = 0x5,
+        shaderc_spvc_storage_texture_format_r16sint             = 0x6,
+        shaderc_spvc_storage_texture_format_r16float            = 0x7,
+        shaderc_spvc_storage_texture_format_rg8unorm            = 0x8,
+        shaderc_spvc_storage_texture_format_rg8snorm            = 0x9,
+        shaderc_spvc_storage_texture_format_rg8uint             = 0xA,
+        shaderc_spvc_storage_texture_format_rg8sint             = 0xB,
+        shaderc_spvc_storage_texture_format_r32float            = 0xC,
+        shaderc_spvc_storage_texture_format_r32uint             = 0xD,
+        shaderc_spvc_storage_texture_format_r32sint             = 0xE,
+        shaderc_spvc_storage_texture_format_rg16uint            = 0xF,
+        shaderc_spvc_storage_texture_format_rg16sint            = 0x10,
+        shaderc_spvc_storage_texture_format_rg16float           = 0x11,
+        shaderc_spvc_storage_texture_format_rgba8unorm          = 0x12,
+        shaderc_spvc_storage_texture_format_rgba8unormsrgb      = 0x13,
+        shaderc_spvc_storage_texture_format_rgba8snorm          = 0x14,
+        shaderc_spvc_storage_texture_format_rgba8uint           = 0x15,
+        shaderc_spvc_storage_texture_format_rgba8sint           = 0x16,
+        shaderc_spvc_storage_texture_format_bgra8unorm          = 0x17,
+        shaderc_spvc_storage_texture_format_bgra8unormsrgb      = 0x18,
+        shaderc_spvc_storage_texture_format_rgb10a2unorm        = 0x19,
+        shaderc_spvc_storage_texture_format_rg11b10float        = 0x1A,
+        shaderc_spvc_storage_texture_format_rg32float           = 0x1B,
+        shaderc_spvc_storage_texture_format_rg32uint            = 0x1C,
+        shaderc_spvc_storage_texture_format_rg32sint            = 0x1D,
+        shaderc_spvc_storage_texture_format_rgba16uint          = 0x1E,
+        shaderc_spvc_storage_texture_format_rgba16sint          = 0x1F,
+        shaderc_spvc_storage_texture_format_rgba16float         = 0x20,
+        shaderc_spvc_storage_texture_format_rgba32float         = 0x21,
+        shaderc_spvc_storage_texture_format_rgba32uint          = 0x22,
+        shaderc_spvc_storage_texture_format_rgba32sint          = 0x23,
+        shaderc_spvc_storage_texture_format_depth32float        = 0x24,
+        shaderc_spvc_storage_texture_format_depth24plus         = 0x25,
+        shaderc_spvc_storage_texture_format_depth24plusstencil8 = 0x26,
+        shaderc_spvc_storage_texture_format_bc1rgbaunorm        = 0x27,
+        shaderc_spvc_storage_texture_format_bc1rgbaunormsrgb    = 0x28,
+        shaderc_spvc_storage_texture_format_bc2rgbaunorm        = 0x29,
+        shaderc_spvc_storage_texture_format_bc2rgbaunormsrgb    = 0x2A,
+        shaderc_spvc_storage_texture_format_bc3rgbaunorm        = 0x2B,
+        shaderc_spvc_storage_texture_format_bc3rgbaunormsrgb    = 0x2C,
+        shaderc_spvc_storage_texture_format_bc4runorm           = 0x2D,
+        shaderc_spvc_storage_texture_format_bc4rsnorm           = 0x2E,
+        shaderc_spvc_storage_texture_format_bc5rgunorm          = 0x2F,
+        shaderc_spvc_storage_texture_format_bc5rgsnorm          = 0x30,
+        shaderc_spvc_storage_texture_format_bc6hrgbufloat       = 0x31,
+        shaderc_spvc_storage_texture_format_bc6hrgbsfloat       = 0x32,
+        shaderc_spvc_storage_texture_format_bc7rgbaunorm        = 0x33,
+        shaderc_spvc_storage_texture_format_bc7rgbaunormsrgb    = 0x34;
+
+    /**
+     * {@code shaderc_spvc_spv_env}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #shaderc_spvc_spv_env_universal_1_0 spv_env_universal_1_0}</li>
+     * <li>{@link #shaderc_spvc_spv_env_vulkan_1_0 spv_env_vulkan_1_0}</li>
+     * <li>{@link #shaderc_spvc_spv_env_universal_1_1 spv_env_universal_1_1}</li>
+     * <li>{@link #shaderc_spvc_spv_env_opencl_2_1 spv_env_opencl_2_1}</li>
+     * <li>{@link #shaderc_spvc_spv_env_opencl_2_2 spv_env_opencl_2_2}</li>
+     * <li>{@link #shaderc_spvc_spv_env_opengl_4_0 spv_env_opengl_4_0}</li>
+     * <li>{@link #shaderc_spvc_spv_env_opengl_4_1 spv_env_opengl_4_1}</li>
+     * <li>{@link #shaderc_spvc_spv_env_opengl_4_2 spv_env_opengl_4_2}</li>
+     * <li>{@link #shaderc_spvc_spv_env_opengl_4_3 spv_env_opengl_4_3}</li>
+     * <li>{@link #shaderc_spvc_spv_env_opengl_4_5 spv_env_opengl_4_5}</li>
+     * <li>{@link #shaderc_spvc_spv_env_universal_1_2 spv_env_universal_1_2}</li>
+     * <li>{@link #shaderc_spvc_spv_env_opencl_1_2 spv_env_opencl_1_2}</li>
+     * <li>{@link #shaderc_spvc_spv_env_opencl_embedded_1_2 spv_env_opencl_embedded_1_2}</li>
+     * <li>{@link #shaderc_spvc_spv_env_opencl_2_0 spv_env_opencl_2_0}</li>
+     * <li>{@link #shaderc_spvc_spv_env_opencl_embedded_2_0 spv_env_opencl_embedded_2_0}</li>
+     * <li>{@link #shaderc_spvc_spv_env_opencl_embedded_2_1 spv_env_opencl_embedded_2_1}</li>
+     * <li>{@link #shaderc_spvc_spv_env_opencl_embedded_2_2 spv_env_opencl_embedded_2_2}</li>
+     * <li>{@link #shaderc_spvc_spv_env_universal_1_3 spv_env_universal_1_3}</li>
+     * <li>{@link #shaderc_spvc_spv_env_vulkan_1_1 spv_env_vulkan_1_1}</li>
+     * <li>{@link #shaderc_spvc_spv_env_webgpu_0 spv_env_webgpu_0}</li>
+     * <li>{@link #shaderc_spvc_spv_env_universal_1_4 spv_env_universal_1_4}</li>
+     * <li>{@link #shaderc_spvc_spv_env_vulkan_1_1_spirv_1_4 spv_env_vulkan_1_1_spirv_1_4}</li>
+     * <li>{@link #shaderc_spvc_spv_env_universal_1_5 spv_env_universal_1_5}</li>
+     * <li>{@link #shaderc_spvc_spv_env_vulkan_1_2 spv_env_vulkan_1_2}</li>
+     * </ul>
+     */
+    public static final int
+        shaderc_spvc_spv_env_universal_1_0        = 0,
+        shaderc_spvc_spv_env_vulkan_1_0           = 1,
+        shaderc_spvc_spv_env_universal_1_1        = 2,
+        shaderc_spvc_spv_env_opencl_2_1           = 3,
+        shaderc_spvc_spv_env_opencl_2_2           = 4,
+        shaderc_spvc_spv_env_opengl_4_0           = 5,
+        shaderc_spvc_spv_env_opengl_4_1           = 6,
+        shaderc_spvc_spv_env_opengl_4_2           = 7,
+        shaderc_spvc_spv_env_opengl_4_3           = 8,
+        shaderc_spvc_spv_env_opengl_4_5           = 9,
+        shaderc_spvc_spv_env_universal_1_2        = 10,
+        shaderc_spvc_spv_env_opencl_1_2           = 11,
+        shaderc_spvc_spv_env_opencl_embedded_1_2  = 12,
+        shaderc_spvc_spv_env_opencl_2_0           = 13,
+        shaderc_spvc_spv_env_opencl_embedded_2_0  = 14,
+        shaderc_spvc_spv_env_opencl_embedded_2_1  = 15,
+        shaderc_spvc_spv_env_opencl_embedded_2_2  = 16,
+        shaderc_spvc_spv_env_universal_1_3        = 17,
+        shaderc_spvc_spv_env_vulkan_1_1           = 18,
+        shaderc_spvc_spv_env_webgpu_0             = 19,
+        shaderc_spvc_spv_env_universal_1_4        = 20,
+        shaderc_spvc_spv_env_vulkan_1_1_spirv_1_4 = 21,
+        shaderc_spvc_spv_env_universal_1_5        = 22,
+        shaderc_spvc_spv_env_vulkan_1_2           = 23;
 
     protected ShadercSpvc() {
         throw new UnsupportedOperationException();
@@ -233,69 +421,74 @@ public class ShadercSpvc {
 
         /** Function address. */
         public static final long
-            context_create                                      = apiGetFunctionAddress(SHADERC, "shaderc_spvc_context_create"),
-            context_destroy                                     = apiGetFunctionAddress(SHADERC, "shaderc_spvc_context_destroy"),
-            context_get_messages                                = apiGetFunctionAddress(SHADERC, "shaderc_spvc_context_get_messages"),
-            context_set_use_spvc_parser                         = apiGetFunctionAddress(SHADERC, "shaderc_spvc_context_set_use_spvc_parser"),
-            compile_options_create                              = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_create"),
-            compile_options_clone                               = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_clone"),
-            compile_options_destroy                             = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_destroy"),
-            compile_options_set_entry_point                     = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_entry_point"),
-            compile_options_set_remove_unused_variables         = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_remove_unused_variables"),
-            compile_options_set_robust_buffer_access_pass       = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_robust_buffer_access_pass"),
-            compile_options_set_emit_line_directives            = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_emit_line_directives"),
-            compile_options_set_source_env                      = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_source_env"),
-            compile_options_set_target_env                      = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_target_env"),
-            compile_options_set_vulkan_semantics                = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_vulkan_semantics"),
-            compile_options_set_separate_shader_objects         = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_separate_shader_objects"),
-            compile_options_set_flatten_ubo                     = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_flatten_ubo"),
-            compile_options_set_glsl_language_version           = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_glsl_language_version"),
-            compile_options_set_flatten_multidimensional_arrays = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_flatten_multidimensional_arrays"),
-            compile_options_set_es                              = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_es"),
-            compile_options_set_glsl_emit_push_constant_as_ubo  = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_glsl_emit_push_constant_as_ubo"),
-            compile_options_set_msl_language_version            = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_msl_language_version"),
-            compile_options_set_msl_swizzle_texture_samples     = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_msl_swizzle_texture_samples"),
-            compile_options_set_msl_platform                    = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_msl_platform"),
-            compile_options_set_msl_pad_fragment_output         = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_msl_pad_fragment_output"),
-            compile_options_set_msl_capture                     = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_msl_capture"),
-            compile_options_set_msl_domain_lower_left           = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_msl_domain_lower_left"),
-            compile_options_set_msl_argument_buffers            = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_msl_argument_buffers"),
-            compile_options_set_msl_discrete_descriptor_sets    = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_msl_discrete_descriptor_sets"),
-            compile_options_set_msl_enable_point_size_builtin   = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_msl_enable_point_size_builtin"),
-            compile_options_set_msl_buffer_size_buffer_index    = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_msl_buffer_size_buffer_index"),
-            compile_options_set_hlsl_shader_model               = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_hlsl_shader_model"),
-            compile_options_set_hlsl_point_size_compat          = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_hlsl_point_size_compat"),
-            compile_options_set_hlsl_point_coord_compat         = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_hlsl_point_coord_compat"),
-            compile_options_set_fixup_clipspace                 = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_fixup_clipspace"),
-            compile_options_set_flip_vert_y                     = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_flip_vert_y"),
-            compile_options_set_validate                        = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_validate"),
-            compile_options_set_optimize                        = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_optimize"),
-            compile_options_set_for_fuzzing                     = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_for_fuzzing"),
-            initialize_for_glsl                                 = apiGetFunctionAddress(SHADERC, "shaderc_spvc_initialize_for_glsl"),
-            initialize_for_hlsl                                 = apiGetFunctionAddress(SHADERC, "shaderc_spvc_initialize_for_hlsl"),
-            initialize_for_msl                                  = apiGetFunctionAddress(SHADERC, "shaderc_spvc_initialize_for_msl"),
-            initialize_for_vulkan                               = apiGetFunctionAddress(SHADERC, "shaderc_spvc_initialize_for_vulkan"),
-            compile_shader                                      = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_shader"),
-            get_decoration                                      = apiGetFunctionAddress(SHADERC, "shaderc_spvc_get_decoration"),
-            unset_decoration                                    = apiGetFunctionAddress(SHADERC, "shaderc_spvc_unset_decoration"),
-            set_name                                            = apiGetFunctionAddress(SHADERC, "shaderc_spvc_set_name"),
-            build_combined_image_samplers                       = apiGetFunctionAddress(SHADERC, "shaderc_spvc_build_combined_image_samplers"),
-            get_combined_image_samplers                         = apiGetFunctionAddress(SHADERC, "shaderc_spvc_get_combined_image_samplers"),
-            set_decoration                                      = apiGetFunctionAddress(SHADERC, "shaderc_spvc_set_decoration"),
-            add_msl_resource_binding                            = apiGetFunctionAddress(SHADERC, "shaderc_spvc_add_msl_resource_binding"),
-            get_workgroup_size                                  = apiGetFunctionAddress(SHADERC, "shaderc_spvc_get_workgroup_size"),
-            needs_buffer_size_buffer                            = apiGetFunctionAddress(SHADERC, "shaderc_spvc_needs_buffer_size_buffer"),
-            get_execution_model                                 = apiGetFunctionAddress(SHADERC, "shaderc_spvc_get_execution_model"),
-            get_push_constant_buffer_count                      = apiGetFunctionAddress(SHADERC, "shaderc_spvc_get_push_constant_buffer_count"),
-            get_binding_info                                    = apiGetFunctionAddress(SHADERC, "shaderc_spvc_get_binding_info"),
-            get_input_stage_location_info                       = apiGetFunctionAddress(SHADERC, "shaderc_spvc_get_input_stage_location_info"),
-            get_output_stage_location_info                      = apiGetFunctionAddress(SHADERC, "shaderc_spvc_get_output_stage_location_info"),
-            get_output_stage_type_info                          = apiGetFunctionAddress(SHADERC, "shaderc_spvc_get_output_stage_type_info"),
-            result_create                                       = apiGetFunctionAddress(SHADERC, "shaderc_spvc_result_create"),
-            result_destroy                                      = apiGetFunctionAddress(SHADERC, "shaderc_spvc_result_destroy"),
-            result_get_string_output                            = apiGetFunctionAddress(SHADERC, "shaderc_spvc_result_get_string_output"),
-            result_get_binary_output                            = apiGetFunctionAddress(SHADERC, "shaderc_spvc_result_get_binary_output"),
-            result_get_binary_length                            = apiGetFunctionAddress(SHADERC, "shaderc_spvc_result_get_binary_length");
+            context_create                                          = apiGetFunctionAddress(SHADERC, "shaderc_spvc_context_create"),
+            context_destroy                                         = apiGetFunctionAddress(SHADERC, "shaderc_spvc_context_destroy"),
+            context_get_messages                                    = apiGetFunctionAddress(SHADERC, "shaderc_spvc_context_get_messages"),
+            context_set_use_spvc_parser                             = apiGetFunctionAddress(SHADERC, "shaderc_spvc_context_set_use_spvc_parser"),
+            compile_options_create                                  = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_create"),
+            compile_options_clone                                   = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_clone"),
+            compile_options_destroy                                 = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_destroy"),
+            compile_options_set_source_env                          = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_source_env"),
+            compile_options_set_target_env                          = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_target_env"),
+            compile_options_set_entry_point                         = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_entry_point"),
+            compile_options_set_remove_unused_variables             = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_remove_unused_variables"),
+            compile_options_set_robust_buffer_access_pass           = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_robust_buffer_access_pass"),
+            compile_options_set_emit_line_directives                = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_emit_line_directives"),
+            compile_options_set_vulkan_semantics                    = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_vulkan_semantics"),
+            compile_options_set_separate_shader_objects             = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_separate_shader_objects"),
+            compile_options_set_flatten_ubo                         = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_flatten_ubo"),
+            compile_options_set_glsl_language_version               = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_glsl_language_version"),
+            compile_options_set_flatten_multidimensional_arrays     = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_flatten_multidimensional_arrays"),
+            compile_options_set_force_zero_initialized_variables    = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_force_zero_initialized_variables"),
+            compile_options_set_es                                  = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_es"),
+            compile_options_set_glsl_emit_push_constant_as_ubo      = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_glsl_emit_push_constant_as_ubo"),
+            compile_options_set_msl_language_version                = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_msl_language_version"),
+            compile_options_set_msl_swizzle_texture_samples         = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_msl_swizzle_texture_samples"),
+            compile_options_set_msl_platform                        = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_msl_platform"),
+            compile_options_set_msl_pad_fragment_output             = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_msl_pad_fragment_output"),
+            compile_options_set_msl_capture                         = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_msl_capture"),
+            compile_options_set_msl_domain_lower_left               = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_msl_domain_lower_left"),
+            compile_options_set_msl_argument_buffers                = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_msl_argument_buffers"),
+            compile_options_set_msl_discrete_descriptor_sets        = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_msl_discrete_descriptor_sets"),
+            compile_options_set_msl_enable_point_size_builtin       = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_msl_enable_point_size_builtin"),
+            compile_options_set_msl_buffer_size_buffer_index        = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_msl_buffer_size_buffer_index"),
+            compile_options_set_msl_additional_fixed_sample_mask    = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_msl_additional_fixed_sample_mask"),
+            compile_options_set_hlsl_shader_model                   = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_hlsl_shader_model"),
+            compile_options_set_hlsl_point_size_compat              = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_hlsl_point_size_compat"),
+            compile_options_set_hlsl_point_coord_compat             = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_hlsl_point_coord_compat"),
+            compile_options_set_hlsl_enable_16bit_types             = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_hlsl_enable_16bit_types"),
+            compile_options_set_hlsl_nonwritable_uav_texture_as_srv = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_hlsl_nonwritable_uav_texture_as_srv"),
+            set_hlsl_force_storage_buffer_as_uav                    = apiGetFunctionAddress(SHADERC, "shaderc_spvc_set_hlsl_force_storage_buffer_as_uav"),
+            compile_options_set_fixup_clipspace                     = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_fixup_clipspace"),
+            compile_options_set_flip_vert_y                         = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_flip_vert_y"),
+            compile_options_set_validate                            = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_validate"),
+            compile_options_set_optimize                            = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_optimize"),
+            compile_options_set_for_fuzzing                         = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_options_set_for_fuzzing"),
+            initialize_for_glsl                                     = apiGetFunctionAddress(SHADERC, "shaderc_spvc_initialize_for_glsl"),
+            initialize_for_hlsl                                     = apiGetFunctionAddress(SHADERC, "shaderc_spvc_initialize_for_hlsl"),
+            initialize_for_msl                                      = apiGetFunctionAddress(SHADERC, "shaderc_spvc_initialize_for_msl"),
+            initialize_for_vulkan                                   = apiGetFunctionAddress(SHADERC, "shaderc_spvc_initialize_for_vulkan"),
+            compile_shader                                          = apiGetFunctionAddress(SHADERC, "shaderc_spvc_compile_shader"),
+            get_decoration                                          = apiGetFunctionAddress(SHADERC, "shaderc_spvc_get_decoration"),
+            unset_decoration                                        = apiGetFunctionAddress(SHADERC, "shaderc_spvc_unset_decoration"),
+            set_name                                                = apiGetFunctionAddress(SHADERC, "shaderc_spvc_set_name"),
+            build_combined_image_samplers                           = apiGetFunctionAddress(SHADERC, "shaderc_spvc_build_combined_image_samplers"),
+            get_combined_image_samplers                             = apiGetFunctionAddress(SHADERC, "shaderc_spvc_get_combined_image_samplers"),
+            set_decoration                                          = apiGetFunctionAddress(SHADERC, "shaderc_spvc_set_decoration"),
+            add_msl_resource_binding                                = apiGetFunctionAddress(SHADERC, "shaderc_spvc_add_msl_resource_binding"),
+            get_workgroup_size                                      = apiGetFunctionAddress(SHADERC, "shaderc_spvc_get_workgroup_size"),
+            needs_buffer_size_buffer                                = apiGetFunctionAddress(SHADERC, "shaderc_spvc_needs_buffer_size_buffer"),
+            get_execution_model                                     = apiGetFunctionAddress(SHADERC, "shaderc_spvc_get_execution_model"),
+            get_push_constant_buffer_count                          = apiGetFunctionAddress(SHADERC, "shaderc_spvc_get_push_constant_buffer_count"),
+            get_binding_info                                        = apiGetFunctionAddress(SHADERC, "shaderc_spvc_get_binding_info"),
+            get_input_stage_location_info                           = apiGetFunctionAddress(SHADERC, "shaderc_spvc_get_input_stage_location_info"),
+            get_output_stage_location_info                          = apiGetFunctionAddress(SHADERC, "shaderc_spvc_get_output_stage_location_info"),
+            get_output_stage_type_info                              = apiGetFunctionAddress(SHADERC, "shaderc_spvc_get_output_stage_type_info"),
+            result_create                                           = apiGetFunctionAddress(SHADERC, "shaderc_spvc_result_create"),
+            result_destroy                                          = apiGetFunctionAddress(SHADERC, "shaderc_spvc_result_destroy"),
+            result_get_string_output                                = apiGetFunctionAddress(SHADERC, "shaderc_spvc_result_get_string_output"),
+            result_get_binary_output                                = apiGetFunctionAddress(SHADERC, "shaderc_spvc_result_get_binary_output"),
+            result_get_binary_length                                = apiGetFunctionAddress(SHADERC, "shaderc_spvc_result_get_binary_length");
 
     }
 
@@ -355,12 +548,13 @@ public class ShadercSpvc {
     // --- [ shaderc_spvc_context_set_use_spvc_parser ] ---
 
     /** If true, use spvc built in parser to generate IR for spirv-cross, otherwise use spirv-cross's implementation. */
-    public static void shaderc_spvc_context_set_use_spvc_parser(@NativeType("shaderc_spvc_context_t") long context, @NativeType("bool") boolean b) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_context_set_use_spvc_parser(@NativeType("shaderc_spvc_context_t") long context, @NativeType("bool") boolean b) {
         long __functionAddress = Functions.context_set_use_spvc_parser;
         if (CHECKS) {
             check(context);
         }
-        invokePV(context, b, __functionAddress);
+        return invokePI(context, b, __functionAddress);
     }
 
     // --- [ shaderc_spvc_compile_options_create ] ---
@@ -372,18 +566,14 @@ public class ShadercSpvc {
      * offer the basic thread-safety guarantee.</p>
      */
     @NativeType("shaderc_spvc_compile_options_t")
-    public static long shaderc_spvc_compile_options_create() {
+    public static long shaderc_spvc_compile_options_create(@NativeType("shaderc_spvc_spv_env") int source_env, @NativeType("shaderc_spvc_spv_env") int target_env) {
         long __functionAddress = Functions.compile_options_create;
-        return invokeP(__functionAddress);
+        return invokeP(source_env, target_env, __functionAddress);
     }
 
     // --- [ shaderc_spvc_compile_options_clone ] ---
 
-    /**
-     * Returns a copy of the given options.
-     * 
-     * <p>If {@code NULL} is passed as the parameter the call is the same as {@link Shaderc#shaderc_compile_options_initialize compile_options_initialize}.</p>
-     */
+    /** Returns a copy of the given options. */
     @NativeType("shaderc_spvc_compile_options_t")
     public static long shaderc_spvc_compile_options_clone(@NativeType("shaderc_spvc_compile_options_t const") long options) {
         long __functionAddress = Functions.compile_options_clone;
@@ -402,32 +592,71 @@ public class ShadercSpvc {
         invokePV(options, __functionAddress);
     }
 
+    // --- [ shaderc_spvc_compile_options_set_source_env ] ---
+
+    /**
+     * Sets the source shader environment, affecting which warnings or errors will be issued during validation.
+     * 
+     * <p>Default value for environment is Vulkan 1.0.</p>
+     * 
+     * <p>This function is deprecated.</p>
+     */
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_source_env(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("shaderc_target_env") int env, @NativeType("shaderc_env_version") int version) {
+        long __functionAddress = Functions.compile_options_set_source_env;
+        if (CHECKS) {
+            check(options);
+        }
+        return invokePI(options, env, version, __functionAddress);
+    }
+
+    // --- [ shaderc_spvc_compile_options_set_target_env ] ---
+
+    /**
+     * Sets the target shader environment, if this is different from the source environment, then a transform between the environments will be performed if
+     * possible.
+     * 
+     * <p>Currently only WebGPU &lt;-&gt; Vulkan 1.1 are defined. Default value for environment is Vulkan 1.0.</p>
+     * 
+     * <p>This function is deprecated.</p>
+     */
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_target_env(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("shaderc_target_env") int env, @NativeType("shaderc_env_version") int version) {
+        long __functionAddress = Functions.compile_options_set_target_env;
+        if (CHECKS) {
+            check(options);
+        }
+        return invokePI(options, env, version, __functionAddress);
+    }
+
     // --- [ shaderc_spvc_compile_options_set_entry_point ] ---
 
     /** Unsafe version of: {@link #shaderc_spvc_compile_options_set_entry_point compile_options_set_entry_point} */
-    public static void nshaderc_spvc_compile_options_set_entry_point(long options, long entry_point) {
+    public static int nshaderc_spvc_compile_options_set_entry_point(long options, long entry_point) {
         long __functionAddress = Functions.compile_options_set_entry_point;
         if (CHECKS) {
             check(options);
         }
-        invokePPV(options, entry_point, __functionAddress);
+        return invokePPI(options, entry_point, __functionAddress);
     }
 
     /** Sets the entry point. */
-    public static void shaderc_spvc_compile_options_set_entry_point(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("char const *") ByteBuffer entry_point) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_entry_point(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("char const *") ByteBuffer entry_point) {
         if (CHECKS) {
             checkNT1(entry_point);
         }
-        nshaderc_spvc_compile_options_set_entry_point(options, memAddress(entry_point));
+        return nshaderc_spvc_compile_options_set_entry_point(options, memAddress(entry_point));
     }
 
     /** Sets the entry point. */
-    public static void shaderc_spvc_compile_options_set_entry_point(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("char const *") CharSequence entry_point) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_entry_point(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("char const *") CharSequence entry_point) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8(entry_point, true);
             long entry_pointEncoded = stack.getPointerAddress();
-            nshaderc_spvc_compile_options_set_entry_point(options, entry_pointEncoded);
+            return nshaderc_spvc_compile_options_set_entry_point(options, entry_pointEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -436,12 +665,13 @@ public class ShadercSpvc {
     // --- [ shaderc_spvc_compile_options_set_remove_unused_variables ] ---
 
     /** If true, unused variables will not appear in the output. */
-    public static void shaderc_spvc_compile_options_set_remove_unused_variables(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_remove_unused_variables(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
         long __functionAddress = Functions.compile_options_set_remove_unused_variables;
         if (CHECKS) {
             check(options);
         }
-        invokePV(options, b, __functionAddress);
+        return invokePI(options, b, __functionAddress);
     }
 
     // --- [ shaderc_spvc_compile_options_set_robust_buffer_access_pass ] ---
@@ -452,64 +682,36 @@ public class ShadercSpvc {
      * <p>Inject code to clamp indexed accesses to buffers and internal arrays, providing guarantees satisfying Vulkan's {@code robustBufferAccess} rules. This
      * is useful when an implementation does not support robust-buffer access as a driver option.</p>
      */
-    public static void shaderc_spvc_compile_options_set_robust_buffer_access_pass(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_robust_buffer_access_pass(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
         long __functionAddress = Functions.compile_options_set_robust_buffer_access_pass;
         if (CHECKS) {
             check(options);
         }
-        invokePV(options, b, __functionAddress);
+        return invokePI(options, b, __functionAddress);
     }
 
     // --- [ shaderc_spvc_compile_options_set_emit_line_directives ] ---
 
-    public static void shaderc_spvc_compile_options_set_emit_line_directives(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_emit_line_directives(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
         long __functionAddress = Functions.compile_options_set_emit_line_directives;
         if (CHECKS) {
             check(options);
         }
-        invokePV(options, b, __functionAddress);
-    }
-
-    // --- [ shaderc_spvc_compile_options_set_source_env ] ---
-
-    /**
-     * Sets the source shader environment, affecting which warnings or errors will be issued during validation.
-     * 
-     * <p>Default value for environment is Vulkan 1.0.</p>
-     */
-    public static void shaderc_spvc_compile_options_set_source_env(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("shaderc_target_env") int env, @NativeType("shaderc_env_version") int version) {
-        long __functionAddress = Functions.compile_options_set_source_env;
-        if (CHECKS) {
-            check(options);
-        }
-        invokePV(options, env, version, __functionAddress);
-    }
-
-    // --- [ shaderc_spvc_compile_options_set_target_env ] ---
-
-    /**
-     * Sets the target shader environment, if this is different from the source environment, then a transform between the environments will be performed if
-     * possible.
-     * 
-     * <p>Currently only WebGPU &lt;-&gt; Vulkan 1.1 are defined. Default value for environment is Vulkan 1.0.</p>
-     */
-    public static void shaderc_spvc_compile_options_set_target_env(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("shaderc_target_env") int env, @NativeType("shaderc_env_version") int version) {
-        long __functionAddress = Functions.compile_options_set_target_env;
-        if (CHECKS) {
-            check(options);
-        }
-        invokePV(options, env, version, __functionAddress);
+        return invokePI(options, b, __functionAddress);
     }
 
     // --- [ shaderc_spvc_compile_options_set_vulkan_semantics ] ---
 
     /** If true, Vulkan GLSL features are used instead of GL-compatible features. */
-    public static void shaderc_spvc_compile_options_set_vulkan_semantics(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_vulkan_semantics(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
         long __functionAddress = Functions.compile_options_set_vulkan_semantics;
         if (CHECKS) {
             check(options);
         }
-        invokePV(options, b, __functionAddress);
+        return invokePI(options, b, __functionAddress);
     }
 
     // --- [ shaderc_spvc_compile_options_set_separate_shader_objects ] ---
@@ -519,23 +721,25 @@ public class ShadercSpvc {
      * 
      * <p>The members of {@code gl_PerVertex} is determined by which built-ins are declared by the shader.</p>
      */
-    public static void shaderc_spvc_compile_options_set_separate_shader_objects(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_separate_shader_objects(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
         long __functionAddress = Functions.compile_options_set_separate_shader_objects;
         if (CHECKS) {
             check(options);
         }
-        invokePV(options, b, __functionAddress);
+        return invokePI(options, b, __functionAddress);
     }
 
     // --- [ shaderc_spvc_compile_options_set_flatten_ubo ] ---
 
     /** Flatten uniform or push constant variable into {@code (i|u)vec4} array. */
-    public static void shaderc_spvc_compile_options_set_flatten_ubo(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_flatten_ubo(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
         long __functionAddress = Functions.compile_options_set_flatten_ubo;
         if (CHECKS) {
             check(options);
         }
-        invokePV(options, b, __functionAddress);
+        return invokePI(options, b, __functionAddress);
     }
 
     // --- [ shaderc_spvc_compile_options_set_glsl_language_version ] ---
@@ -545,45 +749,61 @@ public class ShadercSpvc {
      * 
      * <p>Default is 450 (i.e. 4.5).</p>
      */
-    public static void shaderc_spvc_compile_options_set_glsl_language_version(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("uint32_t") int version) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_glsl_language_version(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("uint32_t") int version) {
         long __functionAddress = Functions.compile_options_set_glsl_language_version;
         if (CHECKS) {
             check(options);
         }
-        invokePV(options, version, __functionAddress);
+        return invokePI(options, version, __functionAddress);
     }
 
     // --- [ shaderc_spvc_compile_options_set_flatten_multidimensional_arrays ] ---
 
     /** If true, flatten multidimensional arrays, e.g. {@code foo[a][b][c] -> foo[a*b*c]}. Default is false. */
-    public static void shaderc_spvc_compile_options_set_flatten_multidimensional_arrays(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_flatten_multidimensional_arrays(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
         long __functionAddress = Functions.compile_options_set_flatten_multidimensional_arrays;
         if (CHECKS) {
             check(options);
         }
-        invokePV(options, b, __functionAddress);
+        return invokePI(options, b, __functionAddress);
+    }
+
+    // --- [ shaderc_spvc_compile_options_set_force_zero_initialized_variables ] ---
+
+    /** If true, initialize new variables from cross-compile to 0 if possible. Default is false. */
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_force_zero_initialized_variables(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
+        long __functionAddress = Functions.compile_options_set_force_zero_initialized_variables;
+        if (CHECKS) {
+            check(options);
+        }
+        return invokePI(options, b, __functionAddress);
     }
 
     // --- [ shaderc_spvc_compile_options_set_es ] ---
 
     /** Force interpretion as ES, or not. Default is to detect from source. */
-    public static void shaderc_spvc_compile_options_set_es(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_es(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
         long __functionAddress = Functions.compile_options_set_es;
         if (CHECKS) {
             check(options);
         }
-        invokePV(options, b, __functionAddress);
+        return invokePI(options, b, __functionAddress);
     }
 
     // --- [ shaderc_spvc_compile_options_set_glsl_emit_push_constant_as_ubo ] ---
 
     /** If true, emit push constants as uniform buffer objects. Default is false. */
-    public static void shaderc_spvc_compile_options_set_glsl_emit_push_constant_as_ubo(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_glsl_emit_push_constant_as_ubo(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
         long __functionAddress = Functions.compile_options_set_glsl_emit_push_constant_as_ubo;
         if (CHECKS) {
             check(options);
         }
-        invokePV(options, b, __functionAddress);
+        return invokePI(options, b, __functionAddress);
     }
 
     // --- [ shaderc_spvc_compile_options_set_msl_language_version ] ---
@@ -593,119 +813,141 @@ public class ShadercSpvc {
      * 
      * <p>Default is 10200 (i.e. 1.2).</p>
      */
-    public static void shaderc_spvc_compile_options_set_msl_language_version(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("uint32_t") int version) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_msl_language_version(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("uint32_t") int version) {
         long __functionAddress = Functions.compile_options_set_msl_language_version;
         if (CHECKS) {
             check(options);
         }
-        invokePV(options, version, __functionAddress);
+        return invokePI(options, version, __functionAddress);
     }
 
     // --- [ shaderc_spvc_compile_options_set_msl_swizzle_texture_samples ] ---
 
     /** If true, swizzle MSL texture samples. Default is false. */
-    public static void shaderc_spvc_compile_options_set_msl_swizzle_texture_samples(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_msl_swizzle_texture_samples(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
         long __functionAddress = Functions.compile_options_set_msl_swizzle_texture_samples;
         if (CHECKS) {
             check(options);
         }
-        invokePV(options, b, __functionAddress);
+        return invokePI(options, b, __functionAddress);
     }
 
     // --- [ shaderc_spvc_compile_options_set_msl_platform ] ---
 
     /** Choose MSL platform. Default is MacOS. */
-    public static void shaderc_spvc_compile_options_set_msl_platform(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("shaderc_spvc_msl_platform") int platform) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_msl_platform(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("shaderc_spvc_msl_platform") int platform) {
         long __functionAddress = Functions.compile_options_set_msl_platform;
         if (CHECKS) {
             check(options);
         }
-        invokePV(options, platform, __functionAddress);
+        return invokePI(options, platform, __functionAddress);
     }
 
     // --- [ shaderc_spvc_compile_options_set_msl_pad_fragment_output ] ---
 
     /** If true, pad MSL fragment output. Default is false. */
-    public static void shaderc_spvc_compile_options_set_msl_pad_fragment_output(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_msl_pad_fragment_output(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
         long __functionAddress = Functions.compile_options_set_msl_pad_fragment_output;
         if (CHECKS) {
             check(options);
         }
-        invokePV(options, b, __functionAddress);
+        return invokePI(options, b, __functionAddress);
     }
 
     // --- [ shaderc_spvc_compile_options_set_msl_capture ] ---
 
     /** If true, capture MSL output to buffer. Default is false. */
-    public static void shaderc_spvc_compile_options_set_msl_capture(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_msl_capture(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
         long __functionAddress = Functions.compile_options_set_msl_capture;
         if (CHECKS) {
             check(options);
         }
-        invokePV(options, b, __functionAddress);
+        return invokePI(options, b, __functionAddress);
     }
 
     // --- [ shaderc_spvc_compile_options_set_msl_domain_lower_left ] ---
 
     /** If true, flip the Y-coord of the built-in {@code TessCoord}. Default is top left. */
-    public static void shaderc_spvc_compile_options_set_msl_domain_lower_left(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_msl_domain_lower_left(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
         long __functionAddress = Functions.compile_options_set_msl_domain_lower_left;
         if (CHECKS) {
             check(options);
         }
-        invokePV(options, b, __functionAddress);
+        return invokePI(options, b, __functionAddress);
     }
 
     // --- [ shaderc_spvc_compile_options_set_msl_argument_buffers ] ---
 
     /** Enable use of MSL 2.0 indirect argument buffers. Default is not to use them. */
-    public static void shaderc_spvc_compile_options_set_msl_argument_buffers(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_msl_argument_buffers(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
         long __functionAddress = Functions.compile_options_set_msl_argument_buffers;
         if (CHECKS) {
             check(options);
         }
-        invokePV(options, b, __functionAddress);
+        return invokePI(options, b, __functionAddress);
     }
 
     // --- [ shaderc_spvc_compile_options_set_msl_discrete_descriptor_sets ] ---
 
     /** Unsafe version of: {@link #shaderc_spvc_compile_options_set_msl_discrete_descriptor_sets compile_options_set_msl_discrete_descriptor_sets} */
-    public static void nshaderc_spvc_compile_options_set_msl_discrete_descriptor_sets(long options, long descriptors, long num_descriptors) {
+    public static int nshaderc_spvc_compile_options_set_msl_discrete_descriptor_sets(long options, long descriptors, long num_descriptors) {
         long __functionAddress = Functions.compile_options_set_msl_discrete_descriptor_sets;
         if (CHECKS) {
             check(options);
         }
-        invokePPPV(options, descriptors, num_descriptors, __functionAddress);
+        return invokePPPI(options, descriptors, num_descriptors, __functionAddress);
     }
 
     /**
      * When using MSL argument buffers, force "classic" MSL 1.0 binding for the given descriptor sets. This corresponds to {@code VK_KHR_push_descriptor} in
      * Vulkan.
      */
-    public static void shaderc_spvc_compile_options_set_msl_discrete_descriptor_sets(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("uint32_t const *") IntBuffer descriptors) {
-        nshaderc_spvc_compile_options_set_msl_discrete_descriptor_sets(options, memAddress(descriptors), descriptors.remaining());
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_msl_discrete_descriptor_sets(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("uint32_t const *") IntBuffer descriptors) {
+        return nshaderc_spvc_compile_options_set_msl_discrete_descriptor_sets(options, memAddress(descriptors), descriptors.remaining());
     }
 
     // --- [ shaderc_spvc_compile_options_set_msl_enable_point_size_builtin ] ---
 
     /** Set whether or not {@code PointSize} builtin is used for MSL shaders. */
-    public static void shaderc_spvc_compile_options_set_msl_enable_point_size_builtin(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_msl_enable_point_size_builtin(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
         long __functionAddress = Functions.compile_options_set_msl_enable_point_size_builtin;
         if (CHECKS) {
             check(options);
         }
-        invokePV(options, b, __functionAddress);
+        return invokePI(options, b, __functionAddress);
     }
 
     // --- [ shaderc_spvc_compile_options_set_msl_buffer_size_buffer_index ] ---
 
     /** Set the index in the buffer size in the buffer for MSL. */
-    public static void shaderc_spvc_compile_options_set_msl_buffer_size_buffer_index(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("uint32_t") int index) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_msl_buffer_size_buffer_index(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("uint32_t") int index) {
         long __functionAddress = Functions.compile_options_set_msl_buffer_size_buffer_index;
         if (CHECKS) {
             check(options);
         }
-        invokePV(options, index, __functionAddress);
+        return invokePI(options, index, __functionAddress);
+    }
+
+    // --- [ shaderc_spvc_compile_options_set_msl_additional_fixed_sample_mask ] ---
+
+    /** Set the additional fixed sample mask for MSL. */
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_msl_additional_fixed_sample_mask(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("uint32_t") int mask) {
+        long __functionAddress = Functions.compile_options_set_msl_additional_fixed_sample_mask;
+        if (CHECKS) {
+            check(options);
+        }
+        return invokePI(options, mask, __functionAddress);
     }
 
     // --- [ shaderc_spvc_compile_options_set_hlsl_shader_model ] ---
@@ -715,34 +957,73 @@ public class ShadercSpvc {
      * 
      * <p>Default is 30.</p>
      */
-    public static void shaderc_spvc_compile_options_set_hlsl_shader_model(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("uint32_t") int model) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_hlsl_shader_model(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("uint32_t") int model) {
         long __functionAddress = Functions.compile_options_set_hlsl_shader_model;
         if (CHECKS) {
             check(options);
         }
-        invokePV(options, model, __functionAddress);
+        return invokePI(options, model, __functionAddress);
     }
 
     // --- [ shaderc_spvc_compile_options_set_hlsl_point_size_compat ] ---
 
     /** If true, ignore {@code PointSize}. Default is false. */
-    public static void shaderc_spvc_compile_options_set_hlsl_point_size_compat(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_hlsl_point_size_compat(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
         long __functionAddress = Functions.compile_options_set_hlsl_point_size_compat;
         if (CHECKS) {
             check(options);
         }
-        invokePV(options, b, __functionAddress);
+        return invokePI(options, b, __functionAddress);
     }
 
     // --- [ shaderc_spvc_compile_options_set_hlsl_point_coord_compat ] ---
 
     /** If true, ignore {@code PointCoord}. Default is false. */
-    public static void shaderc_spvc_compile_options_set_hlsl_point_coord_compat(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_hlsl_point_coord_compat(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
         long __functionAddress = Functions.compile_options_set_hlsl_point_coord_compat;
         if (CHECKS) {
             check(options);
         }
-        invokePV(options, b, __functionAddress);
+        return invokePI(options, b, __functionAddress);
+    }
+
+    // --- [ shaderc_spvc_compile_options_set_hlsl_enable_16bit_types ] ---
+
+    /** If true, enable 16-bit types. Default is false. */
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_hlsl_enable_16bit_types(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
+        long __functionAddress = Functions.compile_options_set_hlsl_enable_16bit_types;
+        if (CHECKS) {
+            check(options);
+        }
+        return invokePI(options, b, __functionAddress);
+    }
+
+    // --- [ shaderc_spvc_compile_options_set_hlsl_nonwritable_uav_texture_as_srv ] ---
+
+    /** If true, set non-writable storage images to be SRV, see {@code spirv_hlsl.hpp} in SPIRV-Cross for more details. */
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_hlsl_nonwritable_uav_texture_as_srv(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
+        long __functionAddress = Functions.compile_options_set_hlsl_nonwritable_uav_texture_as_srv;
+        if (CHECKS) {
+            check(options);
+        }
+        return invokePI(options, b, __functionAddress);
+    }
+
+    // --- [ shaderc_spvc_set_hlsl_force_storage_buffer_as_uav ] ---
+
+    /** Set storage buffers to be always declared as UAV, even if the read-only declaration is used, see {@code spirv_hlsl.hpp} in SPIRV-Cross for more details. */
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_set_hlsl_force_storage_buffer_as_uav(@NativeType("shaderc_spvc_context_t const") long context, @NativeType("uint32_t") int desc_set, @NativeType("uint32_t") int binding) {
+        long __functionAddress = Functions.set_hlsl_force_storage_buffer_as_uav;
+        if (CHECKS) {
+            check(context);
+        }
+        return invokePI(context, desc_set, binding, __functionAddress);
     }
 
     // --- [ shaderc_spvc_compile_options_set_fixup_clipspace ] ---
@@ -756,12 +1037,13 @@ public class ShadercSpvc {
      * <li>HLSL: map depth from GL style to Vulkan/D3D style, i.e. {@code [-w,w] -> [ 0,w]}</li>
      * </ul>
      */
-    public static void shaderc_spvc_compile_options_set_fixup_clipspace(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_fixup_clipspace(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
         long __functionAddress = Functions.compile_options_set_fixup_clipspace;
         if (CHECKS) {
             check(options);
         }
-        invokePV(options, b, __functionAddress);
+        return invokePI(options, b, __functionAddress);
     }
 
     // --- [ shaderc_spvc_compile_options_set_flip_vert_y ] ---
@@ -771,34 +1053,37 @@ public class ShadercSpvc {
      * 
      * <p>Default is false.</p>
      */
-    public static void shaderc_spvc_compile_options_set_flip_vert_y(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_flip_vert_y(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
         long __functionAddress = Functions.compile_options_set_flip_vert_y;
         if (CHECKS) {
             check(options);
         }
-        invokePV(options, b, __functionAddress);
+        return invokePI(options, b, __functionAddress);
     }
 
     // --- [ shaderc_spvc_compile_options_set_validate ] ---
 
     /** Set if validation should be performed. Default is true. */
-    public static void shaderc_spvc_compile_options_set_validate(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_validate(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
         long __functionAddress = Functions.compile_options_set_validate;
         if (CHECKS) {
             check(options);
         }
-        invokePV(options, b, __functionAddress);
+        return invokePI(options, b, __functionAddress);
     }
 
     // --- [ shaderc_spvc_compile_options_set_optimize ] ---
 
     /** Set if optimization should be performed. Default is true. */
-    public static void shaderc_spvc_compile_options_set_optimize(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_compile_options_set_optimize(@NativeType("shaderc_spvc_compile_options_t") long options, @NativeType("bool") boolean b) {
         long __functionAddress = Functions.compile_options_set_optimize;
         if (CHECKS) {
             check(options);
         }
-        invokePV(options, b, __functionAddress);
+        return invokePI(options, b, __functionAddress);
     }
 
     // --- [ shaderc_spvc_compile_options_set_for_fuzzing ] ---
@@ -950,12 +1235,12 @@ public class ShadercSpvc {
     // --- [ shaderc_spvc_set_name ] ---
 
     /** Unsafe version of: {@link #shaderc_spvc_set_name set_name} */
-    public static void nshaderc_spvc_set_name(long context, int id, long name) {
+    public static int nshaderc_spvc_set_name(long context, int id, long name) {
         long __functionAddress = Functions.set_name;
         if (CHECKS) {
             check(context);
         }
-        invokePPV(context, id, name, __functionAddress);
+        return invokePPI(context, id, name, __functionAddress);
     }
 
     /**
@@ -963,11 +1248,12 @@ public class ShadercSpvc {
      * 
      * <p>Assuming {@code id} is valid.</p>
      */
-    public static void shaderc_spvc_set_name(@NativeType("shaderc_spvc_context_t const") long context, @NativeType("uint32_t") int id, @NativeType("char const *") ByteBuffer name) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_set_name(@NativeType("shaderc_spvc_context_t const") long context, @NativeType("uint32_t") int id, @NativeType("char const *") ByteBuffer name) {
         if (CHECKS) {
             checkNT1(name);
         }
-        nshaderc_spvc_set_name(context, id, memAddress(name));
+        return nshaderc_spvc_set_name(context, id, memAddress(name));
     }
 
     /**
@@ -975,12 +1261,13 @@ public class ShadercSpvc {
      * 
      * <p>Assuming {@code id} is valid.</p>
      */
-    public static void shaderc_spvc_set_name(@NativeType("shaderc_spvc_context_t const") long context, @NativeType("uint32_t") int id, @NativeType("char const *") CharSequence name) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_set_name(@NativeType("shaderc_spvc_context_t const") long context, @NativeType("uint32_t") int id, @NativeType("char const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCII(name, true);
             long nameEncoded = stack.getPointerAddress();
-            nshaderc_spvc_set_name(context, id, nameEncoded);
+            return nshaderc_spvc_set_name(context, id, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -989,23 +1276,24 @@ public class ShadercSpvc {
     // --- [ shaderc_spvc_build_combined_image_samplers ] ---
 
     /** Analyzes all separate image and samplers used from the currently selected entry point, and re-routes them all to a combined image sampler instead. */
-    public static void shaderc_spvc_build_combined_image_samplers(@NativeType("shaderc_spvc_context_t const") long context) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_build_combined_image_samplers(@NativeType("shaderc_spvc_context_t const") long context) {
         long __functionAddress = Functions.build_combined_image_samplers;
         if (CHECKS) {
             check(context);
         }
-        invokePV(context, __functionAddress);
+        return invokePI(context, __functionAddress);
     }
 
     // --- [ shaderc_spvc_get_combined_image_samplers ] ---
 
     /** Unsafe version of: {@link #shaderc_spvc_get_combined_image_samplers get_combined_image_samplers} */
-    public static void nshaderc_spvc_get_combined_image_samplers(long context, long samplers, long num_samplers) {
+    public static int nshaderc_spvc_get_combined_image_samplers(long context, long samplers, long num_samplers) {
         long __functionAddress = Functions.get_combined_image_samplers;
         if (CHECKS) {
             check(context);
         }
-        invokePPPV(context, samplers, num_samplers, __functionAddress);
+        return invokePPPI(context, samplers, num_samplers, __functionAddress);
     }
 
     /**
@@ -1014,11 +1302,12 @@ public class ShadercSpvc {
      * <p>If {@code samplers} is {@code NULL}, then {@code num_samplers} is set, and no data is copied. The caller is responsible for {@code samplers} being large
      * enough to contain all of the data.</p>
      */
-    public static void shaderc_spvc_get_combined_image_samplers(@NativeType("shaderc_spvc_context_t const") long context, @Nullable @NativeType("shaderc_spvc_combined_image_sampler *") ShadercSPVCCombinedImageSampler samplers, @NativeType("size_t *") PointerBuffer num_samplers) {
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_get_combined_image_samplers(@NativeType("shaderc_spvc_context_t const") long context, @Nullable @NativeType("shaderc_spvc_combined_image_sampler *") ShadercSPVCCombinedImageSampler samplers, @NativeType("size_t *") PointerBuffer num_samplers) {
         if (CHECKS) {
             check(num_samplers, 1);
         }
-        nshaderc_spvc_get_combined_image_samplers(context, memAddressSafe(samplers), memAddress(num_samplers));
+        return nshaderc_spvc_get_combined_image_samplers(context, memAddressSafe(samplers), memAddress(num_samplers));
     }
 
     // --- [ shaderc_spvc_set_decoration ] ---
@@ -1290,12 +1579,12 @@ public class ShadercSpvc {
     // --- [ shaderc_spvc_result_get_string_output ] ---
 
     /** Unsafe version of: {@link #shaderc_spvc_result_get_string_output result_get_string_output} */
-    public static long nshaderc_spvc_result_get_string_output(long result) {
+    public static int nshaderc_spvc_result_get_string_output(long result, long str) {
         long __functionAddress = Functions.result_get_string_output;
         if (CHECKS) {
             check(result);
         }
-        return invokePP(result, __functionAddress);
+        return invokePPI(result, str, __functionAddress);
     }
 
     /**
@@ -1303,22 +1592,23 @@ public class ShadercSpvc {
      * 
      * <p>This is only supported compiling to GLSL, HSL, and MSL.</p>
      */
-    @Nullable
-    @NativeType("char const *")
-    public static String shaderc_spvc_result_get_string_output(@NativeType("shaderc_spvc_compilation_result_t const") long result) {
-        long __result = nshaderc_spvc_result_get_string_output(result);
-        return memUTF8Safe(__result);
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_result_get_string_output(@NativeType("shaderc_spvc_compilation_result_t const") long result, @NativeType("char const **") PointerBuffer str) {
+        if (CHECKS) {
+            check(str, 1);
+        }
+        return nshaderc_spvc_result_get_string_output(result, memAddress(str));
     }
 
     // --- [ shaderc_spvc_result_get_binary_output ] ---
 
     /** Unsafe version of: {@link #shaderc_spvc_result_get_binary_output result_get_binary_output} */
-    public static long nshaderc_spvc_result_get_binary_output(long result) {
+    public static int nshaderc_spvc_result_get_binary_output(long result, long data) {
         long __functionAddress = Functions.result_get_binary_output;
         if (CHECKS) {
             check(result);
         }
-        return invokePP(result, __functionAddress);
+        return invokePPI(result, data, __functionAddress);
     }
 
     /**
@@ -1326,39 +1616,36 @@ public class ShadercSpvc {
      * 
      * <p>This is only supported compiling to Vulkan.</p>
      */
-    @Nullable
-    @NativeType("uint32_t const *")
-    public static IntBuffer shaderc_spvc_result_get_binary_output(@NativeType("shaderc_spvc_compilation_result_t const") long result) {
-        long __result = nshaderc_spvc_result_get_binary_output(result);
-        return memIntBufferSafe(__result, shaderc_spvc_result_get_binary_length(result));
-    }
-
-    /**
-     * Get validation/compilation result as a binary buffer.
-     * 
-     * <p>This is only supported compiling to Vulkan.</p>
-     */
-    @Nullable
-    @NativeType("uint32_t const *")
-    public static IntBuffer shaderc_spvc_result_get_binary_output(@NativeType("shaderc_spvc_compilation_result_t const") long result, long length) {
-        long __result = nshaderc_spvc_result_get_binary_output(result);
-        return memIntBufferSafe(__result, (int)length);
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_result_get_binary_output(@NativeType("shaderc_spvc_compilation_result_t const") long result, @NativeType("uint32_t const **") PointerBuffer data) {
+        if (CHECKS) {
+            check(data, 1);
+        }
+        return nshaderc_spvc_result_get_binary_output(result, memAddress(data));
     }
 
     // --- [ shaderc_spvc_result_get_binary_length ] ---
+
+    /** Unsafe version of: {@link #shaderc_spvc_result_get_binary_length result_get_binary_length} */
+    public static int nshaderc_spvc_result_get_binary_length(long result, long len) {
+        long __functionAddress = Functions.result_get_binary_length;
+        if (CHECKS) {
+            check(result);
+        }
+        return invokePPI(result, len, __functionAddress);
+    }
 
     /**
      * Get length of validation/compilation result as a binary buffer.
      * 
      * <p>This is only supported compiling to Vulkan.</p>
      */
-    @NativeType("uint32_t")
-    public static int shaderc_spvc_result_get_binary_length(@NativeType("shaderc_spvc_compilation_result_t const") long result) {
-        long __functionAddress = Functions.result_get_binary_length;
+    @NativeType("shaderc_spvc_status")
+    public static int shaderc_spvc_result_get_binary_length(@NativeType("shaderc_spvc_compilation_result_t const") long result, @NativeType("uint32_t *") IntBuffer len) {
         if (CHECKS) {
-            check(result);
+            check(len, 1);
         }
-        return invokePI(result, __functionAddress);
+        return nshaderc_spvc_result_get_binary_length(result, memAddress(len));
     }
 
 }

@@ -28,6 +28,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     shaderc_spvc_texture_view_dimension texture_dimension;
  *     shaderc_spvc_texture_format_type texture_component_type;
  *     bool multisampled;
+ *     shaderc_spvc_storage_texture_format storage_texture_format;
+ *     uint64_t minimum_buffer_size;
  * }</code></pre>
  */
 @NativeType("struct shaderc_spvc_binding_info")
@@ -48,7 +50,9 @@ public class ShadercSPVCBindingInfo extends Struct implements NativeResource {
         BINDING_TYPE,
         TEXTURE_DIMENSION,
         TEXTURE_COMPONENT_TYPE,
-        MULTISAMPLED;
+        MULTISAMPLED,
+        STORAGE_TEXTURE_FORMAT,
+        MINIMUM_BUFFER_SIZE;
 
     static {
         Layout layout = __struct(
@@ -59,7 +63,9 @@ public class ShadercSPVCBindingInfo extends Struct implements NativeResource {
             __member(4),
             __member(4),
             __member(4),
-            __member(1)
+            __member(1),
+            __member(4),
+            __member(8)
         );
 
         SIZEOF = layout.getSize();
@@ -73,6 +79,8 @@ public class ShadercSPVCBindingInfo extends Struct implements NativeResource {
         TEXTURE_DIMENSION = layout.offsetof(5);
         TEXTURE_COMPONENT_TYPE = layout.offsetof(6);
         MULTISAMPLED = layout.offsetof(7);
+        STORAGE_TEXTURE_FORMAT = layout.offsetof(8);
+        MINIMUM_BUFFER_SIZE = layout.offsetof(9);
     }
 
     /**
@@ -112,6 +120,12 @@ public class ShadercSPVCBindingInfo extends Struct implements NativeResource {
     /** Returns the value of the {@code multisampled} field. */
     @NativeType("bool")
     public boolean multisampled() { return nmultisampled(address()); }
+    /** Returns the value of the {@code storage_texture_format} field. */
+    @NativeType("shaderc_spvc_storage_texture_format")
+    public int storage_texture_format() { return nstorage_texture_format(address()); }
+    /** Returns the value of the {@code minimum_buffer_size} field. */
+    @NativeType("uint64_t")
+    public long minimum_buffer_size() { return nminimum_buffer_size(address()); }
 
     // -----------------------------------
 
@@ -272,6 +286,10 @@ public class ShadercSPVCBindingInfo extends Struct implements NativeResource {
     public static int ntexture_component_type(long struct) { return UNSAFE.getInt(null, struct + ShadercSPVCBindingInfo.TEXTURE_COMPONENT_TYPE); }
     /** Unsafe version of {@link #multisampled}. */
     public static boolean nmultisampled(long struct) { return UNSAFE.getByte(null, struct + ShadercSPVCBindingInfo.MULTISAMPLED) != 0; }
+    /** Unsafe version of {@link #storage_texture_format}. */
+    public static int nstorage_texture_format(long struct) { return UNSAFE.getInt(null, struct + ShadercSPVCBindingInfo.STORAGE_TEXTURE_FORMAT); }
+    /** Unsafe version of {@link #minimum_buffer_size}. */
+    public static long nminimum_buffer_size(long struct) { return UNSAFE.getLong(null, struct + ShadercSPVCBindingInfo.MINIMUM_BUFFER_SIZE); }
 
     // -----------------------------------
 
@@ -335,6 +353,12 @@ public class ShadercSPVCBindingInfo extends Struct implements NativeResource {
         /** Returns the value of the {@code multisampled} field. */
         @NativeType("bool")
         public boolean multisampled() { return ShadercSPVCBindingInfo.nmultisampled(address()); }
+        /** Returns the value of the {@code storage_texture_format} field. */
+        @NativeType("shaderc_spvc_storage_texture_format")
+        public int storage_texture_format() { return ShadercSPVCBindingInfo.nstorage_texture_format(address()); }
+        /** Returns the value of the {@code minimum_buffer_size} field. */
+        @NativeType("uint64_t")
+        public long minimum_buffer_size() { return ShadercSPVCBindingInfo.nminimum_buffer_size(address()); }
 
     }
 

@@ -86,7 +86,9 @@ val shaderc_spvc_binding_type = "shaderc_spvc_binding_type".enumType
 val shaderc_spvc_decoration = "shaderc_spvc_decoration".enumType
 val shaderc_spvc_execution_model = "shaderc_spvc_execution_model".enumType
 val shaderc_spvc_shader_resource = "shaderc_spvc_shader_resource".enumType
+val shaderc_spvc_spv_env = "shaderc_spvc_spv_env".enumType
 val shaderc_spvc_status = "shaderc_spvc_status".enumType
+val shaderc_spvc_storage_texture_format = "shaderc_spvc_storage_texture_format".enumType
 val shaderc_spvc_texture_format_type = "shaderc_spvc_texture_format_type".enumType
 val shaderc_spvc_texture_view_dimension = "shaderc_spvc_texture_view_dimension".enumType
 
@@ -125,6 +127,8 @@ val shaderc_spvc_binding_info = struct(Module.SHADERC, "ShadercSPVCBindingInfo",
     shaderc_spvc_texture_view_dimension("texture_dimension", "")
     shaderc_spvc_texture_format_type("texture_component_type", "")
     bool("multisampled", "")
+    shaderc_spvc_storage_texture_format("storage_texture_format", "")
+    uint64_t("minimum_buffer_size", "")
 }
 
 val shaderc_spvc_resource_location_info = struct(Module.SHADERC, "ShadercSPVCResourceLocationInfo", nativeName = "shaderc_spvc_resource_location_info", mutable = false) {
