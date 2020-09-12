@@ -937,6 +937,19 @@ public class GL15 extends GL14 {
     /**
      * Returns the integer value of a query object parameter.
      *
+     * @param id     the name of a query object
+     * @param pname  the symbolic name of a query object parameter. One of:<br><table><tr><td>{@link GL15C#GL_QUERY_RESULT QUERY_RESULT}</td><td>{@link GL15C#GL_QUERY_RESULT_AVAILABLE QUERY_RESULT_AVAILABLE}</td></tr></table>
+     * @param params the requested data
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetQueryObject">Reference Page</a>
+     */
+    public static void glGetQueryObjectiv(@NativeType("GLuint") int id, @NativeType("GLenum") int pname, @NativeType("GLint *") long params) {
+        GL15C.glGetQueryObjectiv(id, pname, params);
+    }
+
+    /**
+     * Returns the integer value of a query object parameter.
+     *
      * @param id    the name of a query object
      * @param pname the symbolic name of a query object parameter. One of:<br><table><tr><td>{@link GL15C#GL_QUERY_RESULT QUERY_RESULT}</td><td>{@link GL15C#GL_QUERY_RESULT_AVAILABLE QUERY_RESULT_AVAILABLE}</td></tr></table>
      * 
@@ -964,6 +977,19 @@ public class GL15 extends GL14 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetQueryObject">Reference Page</a>
      */
     public static void glGetQueryObjectuiv(@NativeType("GLuint") int id, @NativeType("GLenum") int pname, @NativeType("GLuint *") IntBuffer params) {
+        GL15C.glGetQueryObjectuiv(id, pname, params);
+    }
+
+    /**
+     * Unsigned version of {@link #glGetQueryObjectiv GetQueryObjectiv}.
+     *
+     * @param id     the name of a query object
+     * @param pname  the symbolic name of a query object parameter. One of:<br><table><tr><td>{@link GL15C#GL_QUERY_RESULT QUERY_RESULT}</td><td>{@link GL15C#GL_QUERY_RESULT_AVAILABLE QUERY_RESULT_AVAILABLE}</td></tr></table>
+     * @param params the requested data
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetQueryObject">Reference Page</a>
+     */
+    public static void glGetQueryObjectuiv(@NativeType("GLuint") int id, @NativeType("GLenum") int pname, @NativeType("GLuint *") long params) {
         GL15C.glGetQueryObjectuiv(id, pname, params);
     }
 

@@ -76,6 +76,17 @@ public class ARBTimerQuery {
     /**
      * Returns the 64bit integer value of query object parameter.
      *
+     * @param id     the name of a query object
+     * @param pname  the symbolic name of a query object parameter. One of:<br><table><tr><td>{@link GL15#GL_QUERY_RESULT QUERY_RESULT}</td><td>{@link GL15#GL_QUERY_RESULT_AVAILABLE QUERY_RESULT_AVAILABLE}</td></tr></table>
+     * @param params the requested data
+     */
+    public static void glGetQueryObjecti64v(@NativeType("GLuint") int id, @NativeType("GLenum") int pname, @NativeType("GLint64 *") long params) {
+        GL33C.glGetQueryObjecti64v(id, pname, params);
+    }
+
+    /**
+     * Returns the 64bit integer value of query object parameter.
+     *
      * @param id    the name of a query object
      * @param pname the symbolic name of a query object parameter. One of:<br><table><tr><td>{@link GL15#GL_QUERY_RESULT QUERY_RESULT}</td><td>{@link GL15#GL_QUERY_RESULT_AVAILABLE QUERY_RESULT_AVAILABLE}</td></tr></table>
      */
@@ -99,6 +110,17 @@ public class ARBTimerQuery {
      * @param params the requested data
      */
     public static void glGetQueryObjectui64v(@NativeType("GLuint") int id, @NativeType("GLenum") int pname, @NativeType("GLuint64 *") LongBuffer params) {
+        GL33C.glGetQueryObjectui64v(id, pname, params);
+    }
+
+    /**
+     * Unsigned version of {@link #glGetQueryObjecti64v GetQueryObjecti64v}.
+     *
+     * @param id     the name of a query object
+     * @param pname  the symbolic name of a query object parameter
+     * @param params the requested data
+     */
+    public static void glGetQueryObjectui64v(@NativeType("GLuint") int id, @NativeType("GLenum") int pname, @NativeType("GLuint64 *") long params) {
         GL33C.glGetQueryObjectui64v(id, pname, params);
     }
 
