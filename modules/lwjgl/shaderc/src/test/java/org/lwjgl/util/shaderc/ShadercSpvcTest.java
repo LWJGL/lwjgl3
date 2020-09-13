@@ -4,11 +4,14 @@
  */
 package org.lwjgl.util.shaderc;
 
+import org.lwjgl.*;
+import org.lwjgl.system.*;
 import org.testng.annotations.*;
 
 import java.nio.*;
 import java.util.*;
 
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.util.shaderc.Shaderc.*;
 import static org.lwjgl.util.shaderc.ShadercSpvc.*;
 import static org.testng.Assert.*;
@@ -51,7 +54,7 @@ public class ShadercSpvcTest {
         long spvc_result = shaderc_spvc_result_create();
 
         long spvc_context = shaderc_spvc_context_create();
-        long spvc_options = shaderc_spvc_compile_options_create();
+        long spvc_options = shaderc_spvc_compile_options_create(shaderc_spvc_spv_env_opengl_4_5, shaderc_spvc_spv_env_opengl_4_5);
 
         assertEquals(shaderc_spvc_initialize_for_glsl(spvc_context, bb.asIntBuffer(), spvc_options), shaderc_spvc_status_success);
         assertEquals(shaderc_spvc_compile_shader(spvc_context, spvc_result), shaderc_spvc_status_success);
@@ -61,7 +64,12 @@ public class ShadercSpvcTest {
 
         shaderc_result_release(result);
 
-        String glsl = Objects.requireNonNull(shaderc_spvc_result_get_string_output(spvc_result));
+        String glsl;
+        try (MemoryStack stack = stackPush()) {
+            PointerBuffer pp = stack.callocPointer(1);
+            assertEquals(shaderc_spvc_result_get_string_output(spvc_result, pp), shaderc_spvc_status_success);
+            glsl = pp.getStringASCII();
+        }
 
         assertTrue(glsl.contains("#version 450"));
         assertTrue(glsl.contains("layout(location = 0) in vec4 vtxColor"));
