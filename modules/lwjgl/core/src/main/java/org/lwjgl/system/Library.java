@@ -15,6 +15,7 @@ import java.nio.file.*;
 import java.security.*;
 import java.util.*;
 import java.util.function.*;
+import java.util.jar.*;
 import java.util.regex.*;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -41,7 +42,7 @@ public final class Library {
         if (DEBUG) {
             apiLog("Version: " + Version.getVersion());
             apiLog("\t OS: " + System.getProperty("os.name") + " v" + System.getProperty("os.version"));
-            apiLog("\tJRE: " + System.getProperty("java.version") + " " + System.getProperty("os.arch"));
+            apiLog("\tJRE: " + Platform.get().getName() + " " + System.getProperty("os.arch") + " " + System.getProperty("java.version"));
             apiLog(
                 "\tJVM: " + System.getProperty("java.vm.name") + " v" + System.getProperty("java.vm.version") + " by " + System.getProperty("java.vm.vendor")
             );
@@ -158,6 +159,7 @@ public final class Library {
             apiLog(String.format("\t%s not found in %s", libName, JAVA_LIBRARY_PATH));
         }
 
+        detectPlatformMismatch(context, module);
         printError(true);
         throw new UnsatisfiedLinkError("Failed to locate library: " + libName);
     }
@@ -319,6 +321,7 @@ public final class Library {
         }
 
         if (printError) {
+            detectPlatformMismatch(context, module);
             printError(bundledWithLWJGL);
         }
         throw new UnsatisfiedLinkError("Failed to locate library: " + libName);
@@ -476,6 +479,51 @@ public final class Library {
             }
         }
         return null;
+    }
+
+    private static void detectPlatformMismatch(Class<?> context, String module) {
+        String moduleTitle = module.equals("org.lwjgl") ? "lwjgl" : "lwjgl-" + module.substring("org.lwjgl.".length());
+
+        List<String> platforms = new ArrayList<>(8);
+        try {
+            Enumeration<URL> manifests = context.getClassLoader().getResources(JarFile.MANIFEST_NAME);
+            while (manifests.hasMoreElements()) {
+                try (InputStream is = manifests.nextElement().openStream()) {
+                    Manifest   manifest = new Manifest(is);
+                    Attributes attribs  = manifest.getMainAttributes();
+
+                    if (moduleTitle.equals(attribs.getValue("Implementation-Title"))) {
+                        String jarPlatform = attribs.getValue("LWJGL-Platform");
+                        if (jarPlatform != null) {
+                            platforms.add(jarPlatform);
+                        }
+                    }
+                }
+            }
+        } catch (IOException ignored) {
+        }
+
+        if (!platforms.isEmpty()) {
+            DEBUG_STREAM.println("[LWJGL] Platform/architecture mismatch detected for module: " + module);
+            DEBUG_STREAM.println("\tJVM platform:");
+            DEBUG_STREAM.format(
+                "\t\t%s %s %s\n",
+                Platform.get().getName(),
+                System.getProperty("os.arch"),
+                System.getProperty("java.version")
+            );
+            DEBUG_STREAM.format(
+                "\t\t%s v%s by %s\n",
+                System.getProperty("java.vm.name"),
+                System.getProperty("java.vm.version"),
+                System.getProperty("java.vm.vendor")
+            );
+            DEBUG_STREAM.format(
+                "\tPlatform%s available on classpath:\n\t\t%s\n",
+                (platforms.size() == 1 ? "" : "s"),
+                String.join("\n\t\t", platforms)
+            );
+        }
     }
 
     private static void printError(boolean bundledWithLWJGL) {

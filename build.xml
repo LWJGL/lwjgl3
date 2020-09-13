@@ -972,8 +972,12 @@
     <macrodef name="lwjgl-jar">
         <attribute name="destfile"/>
         <attribute name="title"/>
+        <attribute name="platform" default=""/>
         <element name="content" optional="true" implicit="true"/>
         <sequential>
+            <local name="platform-attrib"/>
+            <condition property="platform-attrib" value="true" else="false"><not><length string="@{platform}" length="0"/></not></condition>
+
             <jar destfile="@{destfile}" level="9" index="true" indexmetainf="true" whenmanifestonly="skip">
                 <manifest>
                     <attribute name="Specification-Title" value="Lightweight Java Game Library - @{title}"/>
@@ -982,6 +986,7 @@
                     <attribute name="Implementation-Title" value="${module}"/>
                     <attribute name="Implementation-Version" value="${revision}"/>
                     <attribute name="Implementation-Vendor" value="lwjgl.org"/>
+                    <attribute name="LWJGL-Platform" value="@{platform}" if:true="${platform-attrib}"/>
                     <attribute name="Multi-Release" value="true" if:set="jdk9"/>
                 </manifest>
                 <content/>
@@ -1004,7 +1009,7 @@
                 </resourcecount>
             </condition>
 
-            <lwjgl-jar destfile="${release}/${module}/${module}-natives-@{platform}.jar" title="@{title}" unless:set="platform.skip">
+            <lwjgl-jar destfile="${release}/${module}/${module}-natives-@{platform}.jar" platform="@{path}" title="@{title}" unless:set="platform.skip">
                 <fileset dir="${release}/${module}/native" includes="@{path}/${module.path}/*.@{type}*"/>
                 <fileset dir="${release}/${module}/native/@{path}" includes="META-INF/versions/9/module-info.class" if:set="jdk9"/>
                 <content/>
