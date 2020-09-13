@@ -11,6 +11,8 @@ val ARB = "ARB"
 val EXT = "EXT"
 val KHR = "KHR"
 
+val `3DFX` = "3DFX"
+
 val AMD = "AMD"
 val ATI = "ATI"
 
@@ -22,6 +24,8 @@ val NV = "NV"
 val NVX = "NVX"
 
 val OVR = "OVR"
+
+val S3TC = "S3TC"
 
 val SGI = "SGI"
 val SGIX = "SGIX"

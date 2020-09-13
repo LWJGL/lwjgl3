@@ -2782,6 +2782,8 @@ public final class GLCapabilities {
     public final boolean OpenGL45;
     /** When true, {@link GL46} is supported. */
     public final boolean OpenGL46;
+    /** When true, {@link _3DFXTextureCompressionFXT1} is supported. */
+    public final boolean GL_3DFX_texture_compression_FXT1;
     /** When true, {@link AMDBlendMinmaxFactor} is supported. */
     public final boolean GL_AMD_blend_minmax_factor;
     /**
@@ -4651,6 +4653,12 @@ public final class GLCapabilities {
      * prohibited such usage globally for rectangle textures.</p>
      */
     public final boolean GL_NV_texture_rectangle_compressed;
+    /** When true, {@link NVTextureShader} is supported. */
+    public final boolean GL_NV_texture_shader;
+    /** When true, {@link NVTextureShader2} is supported. */
+    public final boolean GL_NV_texture_shader2;
+    /** When true, {@link NVTextureShader3} is supported. */
+    public final boolean GL_NV_texture_shader3;
     /** When true, {@link NVTransformFeedback} is supported. */
     public final boolean GL_NV_transform_feedback;
     /** When true, {@link NVTransformFeedback2} is supported. */
@@ -4713,6 +4721,8 @@ public final class GLCapabilities {
      * <p>Requires {@link GL30 OpenGL 3.0} and {@link OVRMultiview OVR_multiview}.</p>
      */
     public final boolean GL_OVR_multiview2;
+    /** When true, {@link S3S3TC} is supported. */
+    public final boolean GL_S3_s3tc;
 
     /** When true, deprecated functions are not available. */
     public final boolean forwardCompatible;
@@ -4743,6 +4753,7 @@ public final class GLCapabilities {
         OpenGL44 = check_GL44(provider, caps, ext);
         OpenGL45 = check_GL45(provider, caps, ext);
         OpenGL46 = check_GL46(provider, caps, ext);
+        GL_3DFX_texture_compression_FXT1 = ext.contains("GL_3DFX_texture_compression_FXT1");
         GL_AMD_blend_minmax_factor = ext.contains("GL_AMD_blend_minmax_factor");
         GL_AMD_conservative_depth = ext.contains("GL_AMD_conservative_depth");
         GL_AMD_debug_output = check_AMD_debug_output(provider, caps, ext);
@@ -5130,6 +5141,9 @@ public final class GLCapabilities {
         GL_NV_texture_compression_vtc = ext.contains("GL_NV_texture_compression_vtc");
         GL_NV_texture_multisample = check_NV_texture_multisample(provider, caps, ext);
         GL_NV_texture_rectangle_compressed = ext.contains("GL_NV_texture_rectangle_compressed");
+        GL_NV_texture_shader = ext.contains("GL_NV_texture_shader");
+        GL_NV_texture_shader2 = ext.contains("GL_NV_texture_shader2");
+        GL_NV_texture_shader3 = ext.contains("GL_NV_texture_shader3");
         GL_NV_transform_feedback = check_NV_transform_feedback(provider, caps, ext);
         GL_NV_transform_feedback2 = check_NV_transform_feedback2(provider, caps, ext);
         GL_NV_uniform_buffer_unified_memory = ext.contains("GL_NV_uniform_buffer_unified_memory");
@@ -5146,6 +5160,7 @@ public final class GLCapabilities {
         GL_NVX_progress_fence = check_NVX_progress_fence(provider, caps, ext);
         GL_OVR_multiview = check_OVR_multiview(provider, caps, ext);
         GL_OVR_multiview2 = ext.contains("GL_OVR_multiview2");
+        GL_S3_s3tc = ext.contains("GL_S3_s3tc");
 
         glEnable = caps.get(0);
         glDisable = caps.get(1);
