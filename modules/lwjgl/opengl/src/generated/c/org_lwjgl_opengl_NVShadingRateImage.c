@@ -17,46 +17,46 @@ typedef void (APIENTRY *glGetShadingRateSampleLocationivNVPROC) (jint, jint, jin
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShadingRateImage_glBindShadingRateImageNV(JNIEnv *__env, jclass clazz, jint texture) {
-    glBindShadingRateImageNVPROC glBindShadingRateImageNV = (glBindShadingRateImageNVPROC)tlsGetFunction(2130);
+    glBindShadingRateImageNVPROC glBindShadingRateImageNV = (glBindShadingRateImageNVPROC)tlsGetFunction(2134);
     UNUSED_PARAM(clazz)
     glBindShadingRateImageNV(texture);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShadingRateImage_nglShadingRateImagePaletteNV__IIIJ(JNIEnv *__env, jclass clazz, jint viewport, jint first, jint count, jlong ratesAddress) {
-    glShadingRateImagePaletteNVPROC glShadingRateImagePaletteNV = (glShadingRateImagePaletteNVPROC)tlsGetFunction(2131);
+    glShadingRateImagePaletteNVPROC glShadingRateImagePaletteNV = (glShadingRateImagePaletteNVPROC)tlsGetFunction(2135);
     intptr_t rates = (intptr_t)ratesAddress;
     UNUSED_PARAM(clazz)
     glShadingRateImagePaletteNV(viewport, first, count, rates);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShadingRateImage_nglGetShadingRateImagePaletteNV__IIJ(JNIEnv *__env, jclass clazz, jint viewport, jint entry, jlong rateAddress) {
-    glGetShadingRateImagePaletteNVPROC glGetShadingRateImagePaletteNV = (glGetShadingRateImagePaletteNVPROC)tlsGetFunction(2132);
+    glGetShadingRateImagePaletteNVPROC glGetShadingRateImagePaletteNV = (glGetShadingRateImagePaletteNVPROC)tlsGetFunction(2136);
     intptr_t rate = (intptr_t)rateAddress;
     UNUSED_PARAM(clazz)
     glGetShadingRateImagePaletteNV(viewport, entry, rate);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShadingRateImage_glShadingRateImageBarrierNV(JNIEnv *__env, jclass clazz, jboolean synchronize) {
-    glShadingRateImageBarrierNVPROC glShadingRateImageBarrierNV = (glShadingRateImageBarrierNVPROC)tlsGetFunction(2133);
+    glShadingRateImageBarrierNVPROC glShadingRateImageBarrierNV = (glShadingRateImageBarrierNVPROC)tlsGetFunction(2137);
     UNUSED_PARAM(clazz)
     glShadingRateImageBarrierNV(synchronize);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShadingRateImage_glShadingRateSampleOrderNV(JNIEnv *__env, jclass clazz, jint order) {
-    glShadingRateSampleOrderNVPROC glShadingRateSampleOrderNV = (glShadingRateSampleOrderNVPROC)tlsGetFunction(2134);
+    glShadingRateSampleOrderNVPROC glShadingRateSampleOrderNV = (glShadingRateSampleOrderNVPROC)tlsGetFunction(2138);
     UNUSED_PARAM(clazz)
     glShadingRateSampleOrderNV(order);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShadingRateImage_nglShadingRateSampleOrderCustomNV__IIJ(JNIEnv *__env, jclass clazz, jint rate, jint samples, jlong locationsAddress) {
-    glShadingRateSampleOrderCustomNVPROC glShadingRateSampleOrderCustomNV = (glShadingRateSampleOrderCustomNVPROC)tlsGetFunction(2135);
+    glShadingRateSampleOrderCustomNVPROC glShadingRateSampleOrderCustomNV = (glShadingRateSampleOrderCustomNVPROC)tlsGetFunction(2139);
     intptr_t locations = (intptr_t)locationsAddress;
     UNUSED_PARAM(clazz)
     glShadingRateSampleOrderCustomNV(rate, samples, locations);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShadingRateImage_nglGetShadingRateSampleLocationivNV__IIIJ(JNIEnv *__env, jclass clazz, jint rate, jint samples, jint index, jlong locationAddress) {
-    glGetShadingRateSampleLocationivNVPROC glGetShadingRateSampleLocationivNV = (glGetShadingRateSampleLocationivNVPROC)tlsGetFunction(2136);
+    glGetShadingRateSampleLocationivNVPROC glGetShadingRateSampleLocationivNV = (glGetShadingRateSampleLocationivNVPROC)tlsGetFunction(2140);
     intptr_t location = (intptr_t)locationAddress;
     UNUSED_PARAM(clazz)
     glGetShadingRateSampleLocationivNV(rate, samples, index, location);

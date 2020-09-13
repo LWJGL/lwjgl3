@@ -13,19 +13,19 @@ typedef void (APIENTRY *glMultiDrawMeshTasksIndirectNVPROC) (intptr_t, jint, jin
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVMeshShader_glDrawMeshTasksNV(JNIEnv *__env, jclass clazz, jint first, jint count) {
-    glDrawMeshTasksNVPROC glDrawMeshTasksNV = (glDrawMeshTasksNVPROC)tlsGetFunction(679);
+    glDrawMeshTasksNVPROC glDrawMeshTasksNV = (glDrawMeshTasksNVPROC)tlsGetFunction(683);
     UNUSED_PARAM(clazz)
     glDrawMeshTasksNV(first, count);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVMeshShader_glDrawMeshTasksIndirectNV(JNIEnv *__env, jclass clazz, jlong indirect) {
-    glDrawMeshTasksIndirectNVPROC glDrawMeshTasksIndirectNV = (glDrawMeshTasksIndirectNVPROC)tlsGetFunction(680);
+    glDrawMeshTasksIndirectNVPROC glDrawMeshTasksIndirectNV = (glDrawMeshTasksIndirectNVPROC)tlsGetFunction(684);
     UNUSED_PARAM(clazz)
     glDrawMeshTasksIndirectNV((intptr_t)indirect);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVMeshShader_glMultiDrawMeshTasksIndirectNV(JNIEnv *__env, jclass clazz, jlong indirect, jint drawcount, jint stride) {
-    glMultiDrawMeshTasksIndirectNVPROC glMultiDrawMeshTasksIndirectNV = (glMultiDrawMeshTasksIndirectNVPROC)tlsGetFunction(681);
+    glMultiDrawMeshTasksIndirectNVPROC glMultiDrawMeshTasksIndirectNV = (glMultiDrawMeshTasksIndirectNVPROC)tlsGetFunction(685);
     UNUSED_PARAM(clazz)
     glMultiDrawMeshTasksIndirectNV((intptr_t)indirect, drawcount, stride);
 }
