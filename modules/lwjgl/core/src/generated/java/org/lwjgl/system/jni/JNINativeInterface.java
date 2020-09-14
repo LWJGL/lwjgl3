@@ -1082,7 +1082,7 @@ public class JNINativeInterface {
     public static native ByteBuffer nNewDirectByteBuffer(long address, long capacity);
 
     /**
-     * Allocates and returns a direct {@code java.nio.ByteBuffer} referring to the block of memory starting at the memory address address and extending
+     * Allocates and returns a direct {@code java.nio.ByteBuffer} referring to the block of memory starting at the memory address and extending
      * capacity bytes.
      * 
      * <p>Native code that calls this function and returns the resulting byte-buffer object to Java-level code should ensure that the buffer refers to a valid
