@@ -43,7 +43,7 @@ abstract class APIBinding(
 
     fun getClasses(corePrefix: String): List<NativeClass> {
         val classes = ArrayList(_classes)
-        classes.sortWith(Comparator { o1, o2 ->
+        classes.sortWith { o1, o2 ->
             // Core functionality first, extensions after
             val isCore1 = o1.templateName.startsWith(corePrefix)
             val isCore2 = o2.templateName.startsWith(corePrefix)
@@ -52,7 +52,7 @@ abstract class APIBinding(
                 (if (isCore1) -1 else 1)
             else
                 o1.templateName.compareTo(o2.templateName, ignoreCase = true)
-        })
+        }
         return classes
     }
 
@@ -119,7 +119,7 @@ abstract class SimpleBinding(
 
         print(javadoc)
 
-        val alignment = bindingFunctions.map { it.simpleName.length }.max()!!
+        val alignment = bindingFunctions.map { it.simpleName.length }.maxOrNull()!!
 
         println("""
     public static final class Functions {
@@ -269,7 +269,7 @@ class NativeClass internal constructor(
                         name = func.name,
                         documentation = documentation,
                         nativeClass = this@NativeClass,
-                        parameters = *func.parameters.asSequence().map {
+                        parameters = func.parameters.asSequence().map {
                             if (it.isArrayParameter(autoSizeResultOutParams))
                                 it
                                     .copy(ArrayType(it.nativeType as PointerType<*>))
@@ -304,7 +304,7 @@ class NativeClass internal constructor(
                             name = func.name,
                             documentation = documentation,
                             nativeClass = this@NativeClass,
-                            parameters = *func.parameters.asSequence().map {
+                            parameters = func.parameters.asSequence().map {
                                 if (it.isArrayParameter(autoSizeResultOutParams))
                                     it
                                         .copy(ArrayType(it.nativeType as PointerType<*>))
@@ -740,7 +740,7 @@ class NativeClass internal constructor(
             div < 1                    -> throw IllegalArgumentException()
             div == 1                   -> AutoSize(reference, *dependent)
             Integer.bitCount(div) == 1 -> AutoSizeShr(Integer.numberOfTrailingZeros(div).toString(), reference, *dependent)
-            else                       -> AutoSizeDiv(div.toString(), reference, dependent = *dependent)
+            else                       -> AutoSizeDiv(div.toString(), reference, dependent = dependent)
         }
 
     fun AutoSizeDiv(expression: String, reference: String, vararg dependent: String) =
@@ -810,7 +810,7 @@ class NativeClass internal constructor(
                 )
             },
             nativeClass = this@NativeClass,
-            parameters = *params
+            parameters = params
         )
 
         require(_functions.put(name, func) == null) {
@@ -842,7 +842,7 @@ class NativeClass internal constructor(
             name = reference.name,
             documentation = { this@NativeClass.convertDocumentation(this, reference.name, reference.documentation(it)) },
             nativeClass = this@NativeClass,
-            parameters = *reference.parameters
+            parameters = reference.parameters
         ).copyModifiers(reference)
 
         this@NativeClass._functions[functionName] = func
