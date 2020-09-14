@@ -1,4 +1,4 @@
-// stb_dxt.h - v1.09 - DXT1/DXT5 compressor - public domain
+// stb_dxt.h - v1.10 - DXT1/DXT5 compressor - public domain
 // original by fabian "ryg" giesen - ported to C by stb
 // use '#define STB_DXT_IMPLEMENTATION' before including to create the implementation
 //
@@ -10,6 +10,7 @@
 //     You can turn on dithering and "high quality" using mode.
 //
 // version history:
+//   v1.10  - (i.c) various small quality improvements
 //   v1.09  - (stb) update documentation re: surprising alpha channel requirement
 //   v1.08  - (stb) fix bug in dxt-with-alpha block
 //   v1.07  - (stb) bc4; allow not using libc; add STB_DXT_STATIC
@@ -24,8 +25,10 @@
 //   v1.00  - (stb) first release
 //
 // contributors:
+//   Rich Geldreich (more accurate index selection)
 //   Kevin Schmidt (#defines for "freestanding" compilation)
 //   github:ppiastucki (BC4 support)
+//   Ignacio Castano - improve DXT endpoint quantization
 //
 // LICENSE
 //
@@ -239,14 +242,14 @@ static unsigned int stb__MatchColorsBlock(unsigned char *block, unsigned char *c
    // but it's very close and a lot faster.
    // http://cbloomrants.blogspot.com/2008/12/12-08-08-dxtc-summary.html
 
-   c0Point   = (stops[1] + stops[3]) >> 1;
-   halfPoint = (stops[3] + stops[2]) >> 1;
-   c3Point   = (stops[2] + stops[0]) >> 1;
+   c0Point   = (stops[1] + stops[3]);
+   halfPoint = (stops[3] + stops[2]);
+   c3Point   = (stops[2] + stops[0]);
 
    if(!dither) {
       // the version without dithering is straightforward
       for (i=15;i>=0;i--) {
-         int dot = dots[i];
+         int dot = dots[i]*2;
          mask <<= 2;
 
          if(dot < halfPoint)
@@ -259,9 +262,9 @@ static unsigned int stb__MatchColorsBlock(unsigned char *block, unsigned char *c
       int err[8],*ep1 = err,*ep2 = err+4;
       int *dp = dots, y;
 
-      c0Point   <<= 4;
-      halfPoint <<= 4;
-      c3Point   <<= 4;
+      c0Point   <<= 3;
+      halfPoint <<= 3;
+      c3Point   <<= 3;
       for(i=0;i<8;i++)
          err[i] = 0;
 
@@ -415,12 +418,34 @@ static void stb__OptimizeColorsBlock(unsigned char *block, unsigned short *pmax1
    *pmin16 = stb__As16Bit(minp[0],minp[1],minp[2]);
 }
 
-static int stb__sclamp(float y, int p0, int p1)
+static const float midpoints5[32] = {
+   0.015686f, 0.047059f, 0.078431f, 0.111765f, 0.145098f, 0.176471f, 0.207843f, 0.241176f, 0.274510f, 0.305882f, 0.337255f, 0.370588f, 0.403922f, 0.435294f, 0.466667f, 0.5f,
+   0.533333f, 0.564706f, 0.596078f, 0.629412f, 0.662745f, 0.694118f, 0.725490f, 0.758824f, 0.792157f, 0.823529f, 0.854902f, 0.888235f, 0.921569f, 0.952941f, 0.984314f, 1.0f
+};
+
+static const float midpoints6[64] = {
+   0.007843f, 0.023529f, 0.039216f, 0.054902f, 0.070588f, 0.086275f, 0.101961f, 0.117647f, 0.133333f, 0.149020f, 0.164706f, 0.180392f, 0.196078f, 0.211765f, 0.227451f, 0.245098f,
+   0.262745f, 0.278431f, 0.294118f, 0.309804f, 0.325490f, 0.341176f, 0.356863f, 0.372549f, 0.388235f, 0.403922f, 0.419608f, 0.435294f, 0.450980f, 0.466667f, 0.482353f, 0.500000f,
+   0.517647f, 0.533333f, 0.549020f, 0.564706f, 0.580392f, 0.596078f, 0.611765f, 0.627451f, 0.643137f, 0.658824f, 0.674510f, 0.690196f, 0.705882f, 0.721569f, 0.737255f, 0.754902f,
+   0.772549f, 0.788235f, 0.803922f, 0.819608f, 0.835294f, 0.850980f, 0.866667f, 0.882353f, 0.898039f, 0.913725f, 0.929412f, 0.945098f, 0.960784f, 0.976471f, 0.992157f, 1.0f
+};
+
+static unsigned short stb__Quantize5(float x)
 {
-   int x = (int) y;
-   if (x < p0) return p0;
-   if (x > p1) return p1;
-   return x;
+   unsigned short q;
+   x = x < 0 ? 0 : x > 1 ? 1 : x;  // saturate
+   q = (unsigned short)(x * 31);
+   q += (x > midpoints5[q]);
+   return q;
+}
+
+static unsigned short stb__Quantize6(float x)
+{
+   unsigned short q;
+   x = x < 0 ? 0 : x > 1 ? 1 : x;  // saturate
+   q = (unsigned short)(x * 63);
+   q += (x > midpoints6[q]);
+   return q;
 }
 
 // The refinement function. (Clever code, part 2)
@@ -433,7 +458,7 @@ static int stb__RefineBlock(unsigned char *block, unsigned short *pmax16, unsign
    // ^some magic to save a lot of multiplies in the accumulating loop...
    // (precomputed products of weights for least squares system, accumulated inside one 32-bit register)
 
-   float frb,fg;
+   float f;
    unsigned short oldMin, oldMax, min16, max16;
    int i, akku = 0, xx,xy,yy;
    int At1_r,At1_g,At1_b;
@@ -486,17 +511,15 @@ static int stb__RefineBlock(unsigned char *block, unsigned short *pmax16, unsign
       yy = (akku >> 8) & 0xff;
       xy = (akku >> 0) & 0xff;
 
-      frb = 3.0f * 31.0f / 255.0f / (xx*yy - xy*xy);
-      fg = frb * 63.0f / 31.0f;
+      f = 3.0f / 255.0f / (xx*yy - xy*xy);
 
-      // solve.
-      max16 =  (unsigned short)(stb__sclamp((At1_r*yy - At2_r*xy)*frb+0.5f,0,31) << 11);
-      max16 |= (unsigned short)(stb__sclamp((At1_g*yy - At2_g*xy)*fg +0.5f,0,63) << 5);
-      max16 |= (unsigned short)(stb__sclamp((At1_b*yy - At2_b*xy)*frb+0.5f,0,31) << 0);
+      max16 =  stb__Quantize5((At1_r*yy - At2_r * xy) * f) << 11;
+      max16 |= stb__Quantize6((At1_g*yy - At2_g * xy) * f) << 5;
+      max16 |= stb__Quantize5((At1_b*yy - At2_b * xy) * f) << 0;
 
-      min16 =  (unsigned short)(stb__sclamp((At2_r*xx - At1_r*xy)*frb+0.5f,0,31) << 11);
-      min16 |= (unsigned short)(stb__sclamp((At2_g*xx - At1_g*xy)*fg +0.5f,0,63) << 5);
-      min16 |= (unsigned short)(stb__sclamp((At2_b*xx - At1_b*xy)*frb+0.5f,0,31) << 0);
+      min16 =  stb__Quantize5((At2_r*xx - At1_r * xy) * f) << 11;
+      min16 |= stb__Quantize6((At2_g*xx - At1_g * xy) * f) << 5;
+      min16 |= stb__Quantize5((At2_b*xx - At1_b * xy) * f) << 0;
    }
 
    *pmin16 = min16;
