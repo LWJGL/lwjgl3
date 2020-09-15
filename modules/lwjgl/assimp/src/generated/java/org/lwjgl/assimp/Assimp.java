@@ -3908,8 +3908,6 @@ public class Assimp {
      *
      * @param a first vector
      * @param b second vector
-     *
-     * @return the dot product of vectors
      */
     public static float aiVector2DotProduct(@NativeType("struct aiVector2D const *") AIVector2D a, @NativeType("struct aiVector2D const *") AIVector2D b) {
         return naiVector2DotProduct(a.address(), b.address());
@@ -4162,8 +4160,6 @@ public class Assimp {
      *
      * @param a first vector
      * @param b second vector
-     *
-     * @return the dot product of vectors
      */
     public static float aiVector3DotProduct(@NativeType("struct aiVector3D const *") AIVector3D a, @NativeType("struct aiVector3D const *") AIVector3D b) {
         return naiVector3DotProduct(a.address(), b.address());
@@ -4183,8 +4179,6 @@ public class Assimp {
      * @param dst vector to receive the result
      * @param a   first vector
      * @param b   second vector
-     *
-     * @return the dot product of vectors
      */
     public static void aiVector3CrossProduct(@NativeType("struct aiVector3D *") AIVector3D dst, @NativeType("struct aiVector3D const *") AIVector3D a, @NativeType("struct aiVector3D const *") AIVector3D b) {
         naiVector3CrossProduct(dst.address(), a.address(), b.address());

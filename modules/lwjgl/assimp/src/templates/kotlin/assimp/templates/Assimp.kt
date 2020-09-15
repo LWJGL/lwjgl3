@@ -2063,9 +2063,7 @@ aiAttachLogStream(&c);""")}
         "Get the dot product of 2D vectors.",
 
         aiVector2D.const.p("a", "first vector"),
-        aiVector2D.const.p("b", "second vector"),
-
-        returnDoc = "the dot product of vectors"
+        aiVector2D.const.p("b", "second vector")
     )
 
     void(
@@ -2174,9 +2172,7 @@ aiAttachLogStream(&c);""")}
         "Get the dot product of 3D vectors.",
 
         aiVector3D.const.p("a", "first vector"),
-        aiVector3D.const.p("b", "second vector"),
-
-        returnDoc = "the dot product of vectors"
+        aiVector3D.const.p("b", "second vector")
     )
 
     void(
@@ -2185,9 +2181,7 @@ aiAttachLogStream(&c);""")}
 
         aiVector3D.p("dst", "vector to receive the result"),
         aiVector3D.const.p("a", "first vector"),
-        aiVector3D.const.p("b", "second vector"),
-
-        returnDoc = "the dot product of vectors"
+        aiVector3D.const.p("b", "second vector")
     )
 
     void(
