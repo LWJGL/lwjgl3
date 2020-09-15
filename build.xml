@@ -238,6 +238,101 @@
         <touch file="${bin.templates}/touch.txt"/>
     </target>
 
+    <target name="cache-kotlinc" description="Uploads the compiled Kotlin templates to build.lwjgl.org" depends="-check-AWS-credentials,clean-kotlin,compile-templates,-build-version">
+        <local name="commit"/>
+        <exec executable="git" failonerror="true" outputproperty="commit" taskname="Git revision">
+            <arg value="log"/>
+            <arg value="--first-parent"/>
+            <arg value="--pretty=format:%H"/>
+            <arg value="HEAD~1..HEAD"/>
+        </exec>
+
+        <jar destfile="templates.jar" level="9" taskname="Building templates.jar">
+            <manifest>
+                <attribute name="Specification-Title" value="LWJGL Kotlin Template Cache"/>
+                <attribute name="Specification-Version" value="${build.version}"/>
+                <attribute name="Specification-Vendor" value="lwjgl.org"/>
+                <attribute name="Implementation-Version" value="${commit}"/>
+            </manifest>
+            <fileset dir=".">
+                <include name="${bin.generator}/**"/>
+                <include name="${bin.templates}/**"/>
+                <exclude name="**/*.txt"/>
+            </fileset>
+        </jar>
+
+        <apply executable="aws" failonerror="true" relative="true" taskname="S3 upload">
+            <arg value="s3"/>
+            <arg value="mv"/>
+
+            <srcfile/>
+
+            <arg value="s3://build.lwjgl.org/nightly/"/>
+            <arg line='--acl public-read --cache-control "public, must-revalidate, proxy-revalidate, max-age=0"'/>
+
+            <fileset file="templates.jar"/>
+        </apply>
+    </target>
+
+    <target name="hydrate-kotlinc" description="Downloads the compiled Kotlin templates to build.lwjgl.org">
+        <!-- Download cache -->
+        <get taskname="Downloading templates.jar" src="https://build.lwjgl.org/nightly/templates.jar" dest="."/>
+
+        <!-- Validate commit -->
+        <local name="Implementation-Version"/>
+        <loadproperties taskname="Cache revision">
+            <zipentry zipfile="templates.jar" name="META-INF/MANIFEST.MF"/>
+            <filterchain>
+                <linecontains>
+                    <contains value="Implementation-Version"/>
+                </linecontains>
+            </filterchain>
+        </loadproperties>
+
+        <local name="commit_message"/>
+        <exec executable="git" failonerror="true" outputproperty="commit_message" taskname="Git message">
+            <arg value="log"/>
+            <arg value="--first-parent"/>
+            <arg value="--pretty=format:%s"/>
+            <arg value="HEAD~1..HEAD"/>
+        </exec>
+
+        <local name="commit_CI"/>
+        <condition property="commit_CI" value="true" else="false">
+            <equals arg1="${commit_message}" arg2="CI configuration"/>
+        </condition>
+
+        <local name="commit"/>
+        <exec executable="git" failonerror="true" outputproperty="commit" taskname="Git revision">
+            <arg value="log"/>
+            <arg value="--first-parent"/>
+            <arg value="--pretty=format:%H"/>
+            <arg value="HEAD~2..HEAD~1" if:true="${commit_CI}"/>
+            <arg value="HEAD~1..HEAD" unless:true="${commit_CI}"/>
+        </exec>
+
+        <local name="commit_mismatch"/>
+        <condition property="commit_mismatch" value="true">
+            <not><equals arg1="${Implementation-Version}" arg2="${commit}"/></not>
+        </condition>
+        <delete file="templates.jar" taskname="Deleting the compiled Kotlin templates cache" if:set="commit_mismatch"/>
+        <fail message="The current commit does not match the Kotlin template cache's commit." if="commit_mismatch"/>
+
+        <!-- Hydrate -->
+        <antcall target="clean-kotlin"/>
+        <unzip src="templates.jar" dest="." taskname="Hydrating the compiled Kotlin templates">
+            <patternset>
+                <include name="**/*"/>
+                <exclude name="META-INF"/>
+                <exclude name="META-INF/MANIFEST.MF"/>
+            </patternset>
+        </unzip>
+        <antcall target="touch-kotlinc"/>
+
+        <!-- Cleanup -->
+        <delete file="templates.jar" taskname="Deleting the compiled Kotlin templates cache"/>
+    </target>
+
     <target name="formatter" description="Runs the template formatter tool" depends="-compile-generator">
         <java
             classname="org.lwjgl.generator.util.TemplateFormatter"
@@ -840,6 +935,22 @@
         </java>
     </target>
 
+    <target name="-check-AWS-credentials">
+        <fail message="AWS credentials not configured.">
+            <condition>
+                <not>
+                    <or>
+                        <and>
+                            <isset property="env.AWS_ACCESS_KEY_ID"/>
+                            <isset property="env.AWS_SECRET_ACCESS_KEY"/>
+                        </and>
+                        <isset property="env.AWS_CONFIG_FILE"/>
+                    </or>
+                </not>
+            </condition>
+        </fail>
+    </target>
+
     <!-- Includes all modules for javadoc.lwjgl.org -->
     <target name="javadoc" description="Generates the LWJGL JavaDoc" depends="-compile-generator,-build-version">
         <echo message="It is recommended to generate JavaDoc on JDK 10 or higher." unless:set="jdk10" taskname="Warning"/>
@@ -890,21 +1001,7 @@
         </java>
     </target>
 
-    <target name="upload-native" description="Uploads native build artifacts to build.lwjgl.org" depends="compile-native">
-        <fail message="AWS credentials not configured.">
-            <condition>
-                <not>
-                    <or>
-                        <and>
-                            <isset property="env.AWS_ACCESS_KEY_ID"/>
-                            <isset property="env.AWS_SECRET_ACCESS_KEY"/>
-                        </and>
-                        <isset property="env.AWS_CONFIG_FILE"/>
-                    </or>
-                </not>
-            </condition>
-        </fail>
-
+    <target name="upload-native" description="Uploads native build artifacts to build.lwjgl.org" depends="compile-native,-check-AWS-credentials">
         <local name="revision"/>
         <property name="revision" value="liblwjgl.so.git" if:set="platform.linux"/>
         <property name="revision" value="liblwjgl.dylib.git" if:set="platform.macos"/>
