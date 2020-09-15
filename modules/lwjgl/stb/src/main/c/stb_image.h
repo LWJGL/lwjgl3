@@ -926,11 +926,7 @@ static void    *stbi__pnm_load(stbi__context *s, int *x, int *y, int *comp, int 
 static int      stbi__pnm_info(stbi__context *s, int *x, int *y, int *comp);
 #endif
 
-static
-#ifdef STBI_THREAD_LOCAL
-STBI_THREAD_LOCAL
-#endif
-const char *stbi__g_failure_reason;
+static STBI_THREAD_LOCAL const char *stbi__g_failure_reason;
 
 STBIDEF const char *stbi_failure_reason(void)
 {
@@ -1064,7 +1060,7 @@ STBIDEF void stbi_set_flip_vertically_on_load(int flag_true_if_should_flip)
    stbi__vertically_flip_on_load_global = flag_true_if_should_flip;
 }
 
-#ifndef STBI_THREAD_LOCAL
+#ifdef STBI_NO_THREAD_LOCALS
 #define stbi__vertically_flip_on_load  stbi__vertically_flip_on_load_global
 #else
 static STBI_THREAD_LOCAL int stbi__vertically_flip_on_load_local, stbi__vertically_flip_on_load_set;
