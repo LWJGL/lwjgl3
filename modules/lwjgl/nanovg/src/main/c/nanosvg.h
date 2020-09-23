@@ -1613,22 +1613,29 @@ static int nsvg__parseRotate(float* xform, const char* str)
 static void nsvg__parseTransform(float* xform, const char* str)
 {
 	float t[6];
+	int len;
 	nsvg__xformIdentity(xform);
 	while (*str)
 	{
 		if (strncmp(str, "matrix", 6) == 0)
-			str += nsvg__parseMatrix(t, str);
+			len = nsvg__parseMatrix(t, str);
 		else if (strncmp(str, "translate", 9) == 0)
-			str += nsvg__parseTranslate(t, str);
+			len = nsvg__parseTranslate(t, str);
 		else if (strncmp(str, "scale", 5) == 0)
-			str += nsvg__parseScale(t, str);
+			len = nsvg__parseScale(t, str);
 		else if (strncmp(str, "rotate", 6) == 0)
-			str += nsvg__parseRotate(t, str);
+			len = nsvg__parseRotate(t, str);
 		else if (strncmp(str, "skewX", 5) == 0)
-			str += nsvg__parseSkewX(t, str);
+			len = nsvg__parseSkewX(t, str);
 		else if (strncmp(str, "skewY", 5) == 0)
-			str += nsvg__parseSkewY(t, str);
+			len = nsvg__parseSkewY(t, str);
 		else{
+			++str;
+			continue;
+		}
+		if (len != 0) {
+			str += len;
+		} else {
 			++str;
 			continue;
 		}

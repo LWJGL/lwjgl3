@@ -1870,6 +1870,56 @@ public class NanoVG {
         }
     }
 
+    // --- [ nvgCreateFontAtIndex ] ---
+
+    /** Unsafe version of: {@link #nvgCreateFontAtIndex CreateFontAtIndex} */
+    public static native int nnvgCreateFontAtIndex(long ctx, long name, long filename, int fontIndex);
+
+    /**
+     * Creates font by loading it from the disk from specified file name.
+     *
+     * @param ctx       the NanoVG context
+     * @param name      the font name
+     * @param filename  the font file name
+     * @param fontIndex specifies which font face to load from a .ttf/.ttc file
+     *
+     * @return a handle to the font
+     */
+    public static int nvgCreateFontAtIndex(@NativeType("NVGcontext *") long ctx, @NativeType("char const *") ByteBuffer name, @NativeType("char const *") ByteBuffer filename, int fontIndex) {
+        if (CHECKS) {
+            check(ctx);
+            checkNT1(name);
+            checkNT1(filename);
+        }
+        return nnvgCreateFontAtIndex(ctx, memAddress(name), memAddress(filename), fontIndex);
+    }
+
+    /**
+     * Creates font by loading it from the disk from specified file name.
+     *
+     * @param ctx       the NanoVG context
+     * @param name      the font name
+     * @param filename  the font file name
+     * @param fontIndex specifies which font face to load from a .ttf/.ttc file
+     *
+     * @return a handle to the font
+     */
+    public static int nvgCreateFontAtIndex(@NativeType("NVGcontext *") long ctx, @NativeType("char const *") CharSequence name, @NativeType("char const *") CharSequence filename, int fontIndex) {
+        if (CHECKS) {
+            check(ctx);
+        }
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            stack.nASCII(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            return nnvgCreateFontAtIndex(ctx, nameEncoded, filenameEncoded, fontIndex);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     // --- [ nvgCreateFontMem ] ---
 
     /**
@@ -1920,6 +1970,63 @@ public class NanoVG {
             stack.nASCII(name, true);
             long nameEncoded = stack.getPointerAddress();
             return nnvgCreateFontMem(ctx, nameEncoded, memAddress(data), data.remaining(), freeData);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ nvgCreateFontMemAtIndex ] ---
+
+    /**
+     * Unsafe version of: {@link #nvgCreateFontMemAtIndex CreateFontMemAtIndex}
+     *
+     * @param ndata the font data size, in bytes
+     */
+    public static native int nnvgCreateFontMemAtIndex(long ctx, long name, long data, int ndata, int freeData, int fontIndex);
+
+    /**
+     * Creates font by loading it from the specified memory chunk.
+     * 
+     * <p>The memory chunk must remain valid for as long as the font is used by NanoVG.</p>
+     *
+     * @param ctx       the NanoVG context
+     * @param name      the font name
+     * @param data      the font data
+     * @param freeData  1 if the font data should be freed automatically, 0 otherwise
+     * @param fontIndex specifies which font face to load from a .ttf/.ttc file
+     *
+     * @return a handle to the font
+     */
+    public static int nvgCreateFontMemAtIndex(@NativeType("NVGcontext *") long ctx, @NativeType("char const *") ByteBuffer name, @NativeType("unsigned char *") ByteBuffer data, int freeData, int fontIndex) {
+        if (CHECKS) {
+            check(ctx);
+            checkNT1(name);
+        }
+        return nnvgCreateFontMemAtIndex(ctx, memAddress(name), memAddress(data), data.remaining(), freeData, fontIndex);
+    }
+
+    /**
+     * Creates font by loading it from the specified memory chunk.
+     * 
+     * <p>The memory chunk must remain valid for as long as the font is used by NanoVG.</p>
+     *
+     * @param ctx       the NanoVG context
+     * @param name      the font name
+     * @param data      the font data
+     * @param freeData  1 if the font data should be freed automatically, 0 otherwise
+     * @param fontIndex specifies which font face to load from a .ttf/.ttc file
+     *
+     * @return a handle to the font
+     */
+    public static int nvgCreateFontMemAtIndex(@NativeType("NVGcontext *") long ctx, @NativeType("char const *") CharSequence name, @NativeType("unsigned char *") ByteBuffer data, int freeData, int fontIndex) {
+        if (CHECKS) {
+            check(ctx);
+        }
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nnvgCreateFontMemAtIndex(ctx, nameEncoded, memAddress(data), data.remaining(), freeData, fontIndex);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2016,6 +2123,60 @@ public class NanoVG {
             stack.nASCII(fallbackFont, true);
             long fallbackFontEncoded = stack.getPointerAddress();
             return nnvgAddFallbackFont(ctx, baseFontEncoded, fallbackFontEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ nvgResetFallbackFontsId ] ---
+
+    /** Unsafe version of: {@link #nvgResetFallbackFontsId ResetFallbackFontsId} */
+    public static native void nnvgResetFallbackFontsId(long ctx, int baseFont);
+
+    /**
+     * Resets fallback fonts by handle.
+     *
+     * @param ctx the NanoVG context
+     */
+    public static void nvgResetFallbackFontsId(@NativeType("NVGcontext *") long ctx, int baseFont) {
+        if (CHECKS) {
+            check(ctx);
+        }
+        nnvgResetFallbackFontsId(ctx, baseFont);
+    }
+
+    // --- [ nvgResetFallbackFonts ] ---
+
+    /** Unsafe version of: {@link #nvgResetFallbackFonts ResetFallbackFonts} */
+    public static native void nnvgResetFallbackFonts(long ctx, long baseFont);
+
+    /**
+     * Resets fallback fonts by name.
+     *
+     * @param ctx the NanoVG context
+     */
+    public static void nvgResetFallbackFonts(@NativeType("NVGcontext *") long ctx, @NativeType("char const *") ByteBuffer baseFont) {
+        if (CHECKS) {
+            check(ctx);
+            checkNT1(baseFont);
+        }
+        nnvgResetFallbackFonts(ctx, memAddress(baseFont));
+    }
+
+    /**
+     * Resets fallback fonts by name.
+     *
+     * @param ctx the NanoVG context
+     */
+    public static void nvgResetFallbackFonts(@NativeType("NVGcontext *") long ctx, @NativeType("char const *") CharSequence baseFont) {
+        if (CHECKS) {
+            check(ctx);
+        }
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nASCII(baseFont, true);
+            long baseFontEncoded = stack.getPointerAddress();
+            nnvgResetFallbackFonts(ctx, baseFontEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

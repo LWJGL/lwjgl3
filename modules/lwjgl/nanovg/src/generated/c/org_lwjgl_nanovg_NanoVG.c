@@ -511,12 +511,28 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_nanovg_NanoVG_nnvgCreateFont(JNIEnv *__env
     return (jint)nvgCreateFont(ctx, name, filename);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_nanovg_NanoVG_nnvgCreateFontAtIndex(JNIEnv *__env, jclass clazz, jlong ctxAddress, jlong nameAddress, jlong filenameAddress, jint fontIndex) {
+    NVGcontext *ctx = (NVGcontext *)(intptr_t)ctxAddress;
+    char const *name = (char const *)(intptr_t)nameAddress;
+    char const *filename = (char const *)(intptr_t)filenameAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)nvgCreateFontAtIndex(ctx, name, filename, fontIndex);
+}
+
 JNIEXPORT jint JNICALL Java_org_lwjgl_nanovg_NanoVG_nnvgCreateFontMem(JNIEnv *__env, jclass clazz, jlong ctxAddress, jlong nameAddress, jlong dataAddress, jint ndata, jint freeData) {
     NVGcontext *ctx = (NVGcontext *)(intptr_t)ctxAddress;
     char const *name = (char const *)(intptr_t)nameAddress;
     unsigned char *data = (unsigned char *)(intptr_t)dataAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jint)nvgCreateFontMem(ctx, name, data, ndata, freeData);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_nanovg_NanoVG_nnvgCreateFontMemAtIndex(JNIEnv *__env, jclass clazz, jlong ctxAddress, jlong nameAddress, jlong dataAddress, jint ndata, jint freeData, jint fontIndex) {
+    NVGcontext *ctx = (NVGcontext *)(intptr_t)ctxAddress;
+    char const *name = (char const *)(intptr_t)nameAddress;
+    unsigned char *data = (unsigned char *)(intptr_t)dataAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)nvgCreateFontMemAtIndex(ctx, name, data, ndata, freeData, fontIndex);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_nanovg_NanoVG_nnvgFindFont(JNIEnv *__env, jclass clazz, jlong ctxAddress, jlong nameAddress) {
@@ -538,6 +554,19 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_nanovg_NanoVG_nnvgAddFallbackFont(JNIEnv *
     char const *fallbackFont = (char const *)(intptr_t)fallbackFontAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jint)nvgAddFallbackFont(ctx, baseFont, fallbackFont);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_NanoVG_nnvgResetFallbackFontsId(JNIEnv *__env, jclass clazz, jlong ctxAddress, jint baseFont) {
+    NVGcontext *ctx = (NVGcontext *)(intptr_t)ctxAddress;
+    UNUSED_PARAMS(__env, clazz)
+    nvgResetFallbackFontsId(ctx, baseFont);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_NanoVG_nnvgResetFallbackFonts(JNIEnv *__env, jclass clazz, jlong ctxAddress, jlong baseFontAddress) {
+    NVGcontext *ctx = (NVGcontext *)(intptr_t)ctxAddress;
+    char const *baseFont = (char const *)(intptr_t)baseFontAddress;
+    UNUSED_PARAMS(__env, clazz)
+    nvgResetFallbackFonts(ctx, baseFont);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_NanoVG_nnvgFontSize(JNIEnv *__env, jclass clazz, jlong ctxAddress, jfloat size) {

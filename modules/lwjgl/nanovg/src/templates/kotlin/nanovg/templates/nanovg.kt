@@ -1017,6 +1017,18 @@ nvgFill(vg);""")}
     )
 
     int(
+        "CreateFontAtIndex",
+        "Creates font by loading it from the disk from specified file name.",
+
+        ctx,
+        charASCII.const.p("name", "the font name"),
+        charASCII.const.p("filename", "the font file name"),
+        int("fontIndex", "specifies which font face to load from a .ttf/.ttc file"),
+
+        returnDoc = "a handle to the font"
+    )
+
+    int(
         "CreateFontMem",
         """
         Creates font by loading it from the specified memory chunk.
@@ -1029,6 +1041,24 @@ nvgFill(vg);""")}
         unsigned_char.p("data", "the font data"),
         AutoSize("data")..int("ndata", "the font data size, in bytes"),
         int("freeData", "1 if the font data should be freed automatically, 0 otherwise"),
+
+        returnDoc = "a handle to the font"
+    )
+
+    int(
+        "CreateFontMemAtIndex",
+        """
+        Creates font by loading it from the specified memory chunk.
+
+        The memory chunk must remain valid for as long as the font is used by NanoVG.
+        """,
+
+        ctx,
+        charASCII.const.p("name", "the font name"),
+        unsigned_char.p("data", "the font data"),
+        AutoSize("data")..int("ndata", "the font data size, in bytes"),
+        int("freeData", "1 if the font data should be freed automatically, 0 otherwise"),
+        int("fontIndex", "specifies which font face to load from a .ttf/.ttc file"),
 
         returnDoc = "a handle to the font"
     )
@@ -1057,6 +1087,22 @@ nvgFill(vg);""")}
         ctx,
         charASCII.const.p("baseFont", ""),
         charASCII.const.p("fallbackFont", "")
+    )
+
+    void(
+        "ResetFallbackFontsId",
+        "Resets fallback fonts by handle.",
+
+        ctx,
+        int("baseFont", "")
+    )
+
+    void(
+        "ResetFallbackFonts",
+        "Resets fallback fonts by name.",
+
+        ctx,
+        charASCII.const.p("baseFont", "")
     )
 
     void(
