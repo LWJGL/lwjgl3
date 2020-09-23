@@ -109,7 +109,7 @@ ENABLE_WARNINGS()""")
 
         "VERSION_MAJOR".."1",
         "VERSION_MINOR".."4",
-        "VERSION_RELEASE".."4"
+        "VERSION_RELEASE".."5"
     )
 
     IntConstant("Version number.", "VERSION_NUMBER".."(ZSTD_VERSION_MAJOR *100*100 + ZSTD_VERSION_MINOR *100 + ZSTD_VERSION_RELEASE)")
@@ -169,7 +169,8 @@ ENABLE_WARNINGS()""")
 
             Note 1: it's possible to pass a negative compression level.
 
-            Note 2: setting a level resets all other compression parameters to default.
+            Note 2: setting a level does not automatically set all other compression parameters to default. Setting this will however eventually dynamically
+            impact the compression parameters which have not been manually set. The manually set ones will 'stick'.
             """,
             "100"
         ),
@@ -347,12 +348,16 @@ ENABLE_WARNINGS()""")
         "d_experimentalParam1".enum(
             """
             Note: additional experimental parameters are also available within the experimental section of the API. At the time of this writing, they include:
-            #c_format
+            ${ul(
+                "#d_format",
+                "#d_stableOutBuffer"
+            )}
 
             Note: never ever use {@code experimentalParam}? names directly
             """,
             "1000"
-        )
+        ),
+        "d_experimentalParam2".enum
     ).javaDocLinks
 
     val endDirectives = EnumConstant(

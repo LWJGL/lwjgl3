@@ -44,7 +44,8 @@ ENABLE_WARNINGS()""")*/
         "error_dstBuffer_null".."74",
         /* following error codes are not stable and may be removed or changed in a future version */
         "error_frameIndex_tooLarge".."100",
-        "error_seekableIO".."102"
+        "error_seekableIO".."102",
+        "error_dstBuffer_wrong".."104"
     )
 
     ZSTD_ErrorCode(

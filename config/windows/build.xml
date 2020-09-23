@@ -447,11 +447,6 @@ EXPORTS
         <build module="zstd" simple="true" if:true="${binding.zstd}">
             <beforeCompile>
                 <compile flags="/DZSTD_MULTITHREAD">
-                    <arg value="/I${src.main}"/>
-                    <arg value="/I${src.main}\common"/>
-                    <arg value="/I${src.main}\compress"/>
-                    <arg value="/I${src.main}\decompress"/>
-                    <arg value="/I${src.main}\dictBuilder"/>
                     <arg value="/I${module.lwjgl}\xxhash\src\main\c"/>
                     <fileset dir="." includes="${src.main}/common/*.c"/>
                     <fileset dir="." includes="${src.main}/compress/*.c"/>

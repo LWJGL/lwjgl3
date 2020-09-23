@@ -144,7 +144,7 @@ ENABLE_WARNINGS()""")
     )
     IntConstant(
         "Force back-reference distances to remain &lt; {@code windowSize}, even when referencing into Dictionary content. (default:0)",
-        
+
         "c_forceMaxWindow".."ZSTD_c_experimentalParam3"
     )
     IntConstant(
@@ -153,7 +153,7 @@ ENABLE_WARNINGS()""")
 
         Accepts values from the {@code ZSTD_dictAttachPref_e} enum.
         """,
-        
+
         "c_forceAttachDict".."ZSTD_c_experimentalParam4"
     )
     IntConstant(
@@ -181,7 +181,36 @@ ENABLE_WARNINGS()""")
         """,
         "c_srcSizeHint".."ZSTD_c_experimentalParam7"
     )
-    IntConstant("", "d_format".."ZSTD_d_experimentalParam1")
+    IntConstant(
+        """
+        Experimental parameter.
+            
+        Allows selection between {@code ZSTD_format_e} input compression formats.
+        """,
+        "d_format".."ZSTD_d_experimentalParam1"
+    )
+    IntConstant(
+        """
+        Experimental parameter. Default is 0 == disabled. Set to 1 to enable.
+
+        Tells the decompressor that the {@code ZSTD_outBuffer} will ALWAYS be the same between calls, except for the modifications that zstd makes to
+        {@code pos} (the caller must not modify {@code pos}). This is checked by the decompressor, and decompression will fail if it ever changes. Therefore
+        the {@code ZSTD_outBuffer} MUST be large enough to fit the entire decompressed frame. This will be checked when the frame content size is known. The
+        data in the {@code ZSTD_outBuffer} in the range {@code [dst, dst + pos)} MUST not be modified during decompression or you will get data corruption.
+ 
+        When this flags is enabled zstd won't allocate an output buffer, because it can write directly to the {@code ZSTD_outBuffer}, but it will still
+        allocate an input buffer large enough to fit any compressed block. This will also avoid the {@code memcpy()} from the internal output buffer to the
+        {@code ZSTD_outBuffer}. If you need to avoid the input buffer allocation use the buffer-less streaming API.
+ 
+        NOTE: So long as the {@code ZSTD_outBuffer} always points to valid memory, using this flag is ALWAYS memory safe, and will never access out-of-bounds
+        memory. However, decompression WILL fail if you violate the preconditions.
+ 
+        WARNING: The data in the {@code ZSTD_outBuffer} in the range {@code [dst, dst + pos)} MUST not be modified during decompression or you will get data
+        corruption. This is because zstd needs to reference data in the {@code ZSTD_outBuffer} to regenerate matches. Normally zstd maintains its own buffer
+        for this purpose, but passing this flag tells zstd to use the user provided buffer.
+        """,
+        "d_stableOutBuffer".."ZSTD_d_experimentalParam2"
+    )
 
     EnumConstant(
         "{@code ZSTD_literalCompressionMode_e}",
@@ -282,14 +311,19 @@ ENABLE_WARNINGS()""")
         """
         Estimages memory usage of a future {@code CCtx}, before its creation.
 
-        {@code ZSTD_estimateCCtxSize()} will provide a budget large enough for any compression level up to selected one. Unlike
-        {@code ZSTD_estimateCStreamSize*}, this estimate does not include space for a window buffer, so this estimate is guaranteed to be enough for
-        single-shot compressions, but not streaming compressions. It will however assume the input may be arbitrarily large,  which is the worst case. If
-        {@code srcSize} is known to always be small, #estimateCCtxSize_usingCParams() can provide a tighter estimation. #estimateCCtxSize_usingCParams() can be
-        used in tandem with #getCParams() to create {@code cParams} from compressionLevel. #estimateCCtxSize_usingCCtxParams() can be used in tandem with
-        #CCtxParams_setParameter().
-
-        Note: only single-threaded compression is supported. This function will return an error code if #c_nbWorkers is &ge; 1.
+        {@code ZSTD_estimateCCtxSize()} will provide a memory budget large enough for any compression level up to selected one.
+   
+        Note: Unlike {@code ZSTD_estimateCStreamSize*()}, this estimate does not include space for a window buffer. Therefore, the estimation is only
+        guaranteed for single-shot compressions, not streaming.
+   
+        The estimate will assume the input may be arbitrarily large, which is the worst case.
+        
+         When {@code srcSize} can be bound by a known and rather "small" value, this fact can be used to provide a tighter estimation because the CCtx
+        compression context will need less memory. This tighter estimation can be provided by more advanced functions #estimateCCtxSize_usingCParams(), which
+        can be used in tandem with #getCParams(), and #estimateCCtxSize_usingCCtxParams(), which can be used in tandem with #CCtxParams_setParameter(). Both
+        can be used to estimate memory using custom compression parameters and arbitrary {@code srcSize} limits.
+ 
+        Note 2: only single-threaded compression is supported. #estimateCCtxSize_usingCCtxParams() will return an error code if #c_nbWorkers is &ge; 1.
         """,
 
         int("compressionLevel", "")

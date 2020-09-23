@@ -412,11 +412,6 @@
         <build module="zstd" simple="true" if:true="${binding.zstd}">
             <beforeCompile>
                 <compile flags="-DZSTD_MULTITHREAD">
-                    <arg value="-I${src.main.rel}"/>
-                    <arg value="-I${src.main.rel}/common"/>
-                    <arg value="-I${src.main.rel}/compress"/>
-                    <arg value="-I${src.main.rel}/decompress"/>
-                    <arg value="-I${src.main.rel}/dictBuilder"/>
                     <arg value="-I${module.lwjgl.rel}/xxhash/src/main/c"/>
                     <fileset dir="." includes="${src.main}/common/*.c"/>
                     <fileset dir="." includes="${src.main}/compress/*.c"/>

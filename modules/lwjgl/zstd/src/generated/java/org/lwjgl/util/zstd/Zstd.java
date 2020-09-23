@@ -110,7 +110,7 @@ public class Zstd {
     public static final int
         ZSTD_VERSION_MAJOR   = 1,
         ZSTD_VERSION_MINOR   = 4,
-        ZSTD_VERSION_RELEASE = 4;
+        ZSTD_VERSION_RELEASE = 5;
 
     /** Version number. */
     public static final int ZSTD_VERSION_NUMBER = (ZSTD_VERSION_MAJOR *100*100 + ZSTD_VERSION_MINOR *100 + ZSTD_VERSION_RELEASE);
@@ -183,7 +183,8 @@ public class Zstd {
      * 
      * <p>Note 1: it's possible to pass a negative compression level.</p>
      * 
-     * <p>Note 2: setting a level resets all other compression parameters to default.</p>
+     * <p>Note 2: setting a level does not automatically set all other compression parameters to default. Setting this will however eventually dynamically
+     * impact the compression parameters which have not been manually set. The manually set ones will 'stick'.</p>
      * </li>
      * <li>{@link #ZSTD_c_windowLog c_windowLog} - 
      * Maximum allowed back-reference distance, expressed as power of 2.
@@ -355,15 +356,21 @@ public class Zstd {
      * </li>
      * <li>{@link #ZSTD_d_experimentalParam1 d_experimentalParam1} - 
      * Note: additional experimental parameters are also available within the experimental section of the API. At the time of this writing, they include:
-     * {@link ZstdX#ZSTD_c_format c_format}
+     * 
+     * <ul>
+     * <li>{@link ZstdX#ZSTD_d_format d_format}</li>
+     * <li>{@link ZstdX#ZSTD_d_stableOutBuffer d_stableOutBuffer}</li>
+     * </ul>
      * 
      * <p>Note: never ever use {@code experimentalParam}? names directly</p>
      * </li>
+     * <li>{@link #ZSTD_d_experimentalParam2 d_experimentalParam2}</li>
      * </ul>
      */
     public static final int
         ZSTD_d_windowLogMax       = 100,
-        ZSTD_d_experimentalParam1 = 1000;
+        ZSTD_d_experimentalParam1 = 1000,
+        ZSTD_d_experimentalParam2 = 1001;
 
     /**
      * {@code ZSTD_EndDirective}
@@ -790,7 +797,7 @@ public class Zstd {
      * <p>All parameters have valid bounds. Bounds can be queried using {@link #ZSTD_dParam_getBounds dParam_getBounds}. Providing a value beyond bound will either clamp it, or trigger an
      * error (depending on parameter). Setting a parameter is only possible during frame initialization (before starting decompression).</p>
      *
-     * @param param one of:<br><table><tr><td>{@link #ZSTD_d_windowLogMax d_windowLogMax}</td><td>{@link #ZSTD_d_experimentalParam1 d_experimentalParam1}</td></tr></table>
+     * @param param one of:<br><table><tr><td>{@link #ZSTD_d_windowLogMax d_windowLogMax}</td><td>{@link #ZSTD_d_experimentalParam1 d_experimentalParam1}</td><td>{@link #ZSTD_d_experimentalParam2 d_experimentalParam2}</td></tr></table>
      *
      * @return 0, or an error code (which can be tested using {@link #ZSTD_isError isError})
      */
