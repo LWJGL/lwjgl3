@@ -26,7 +26,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * {@link VR#k_ulInvalidInputValueHandle}, this parameter is ignored.</li>
  * <li>{@code nPriority} &ndash; 
  * the priority of this action set relative to other action sets. Any inputs bound to a source (e.g. trackpad, joystick, trigger) will disable bindings in
- * other active action sets with a smaller priority.</li>
+ * other active action sets with a smaller priority.
+ * 
+ * <p>Overlay applications (i.e. ApplicationType_Overlay) may set their action set priority to a value between {@link VR#k_nActionSetOverlayGlobalPriorityMin} and
+ * {@link VR#k_nActionSetOverlayGlobalPriorityMax} to cause any inputs bound to a source used by that action set to be disabled in scene applications.</p>
+ * 
+ * <p>No action set priority may value may be larger than {@link VR#k_nActionSetPriorityReservedMin}.</p></li>
  * </ul>
  * 
  * <h3>Layout</h3>

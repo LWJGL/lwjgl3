@@ -12,6 +12,7 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -28,6 +29,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VRTextureWithPose_t {
+ *     void * handle;
+ *     ETextureType eType;
+ *     EColorSpace eColorSpace;
  *     {@link HmdMatrix34 HmdMatrix34_t} mDeviceToAbsoluteTracking;
  * }</code></pre>
  */
@@ -42,17 +46,26 @@ public class VRTextureWithPose extends Struct implements NativeResource {
 
     /** The struct member offsets. */
     public static final int
+        HANDLE,
+        ETYPE,
+        ECOLORSPACE,
         MDEVICETOABSOLUTETRACKING;
 
     static {
         Layout layout = __struct(
+            __member(POINTER_SIZE),
+            __member(4),
+            __member(4),
             __member(HmdMatrix34.SIZEOF, HmdMatrix34.ALIGNOF)
         );
 
         SIZEOF = layout.getSize();
         ALIGNOF = layout.getAlignment();
 
-        MDEVICETOABSOLUTETRACKING = layout.offsetof(0);
+        HANDLE = layout.offsetof(0);
+        ETYPE = layout.offsetof(1);
+        ECOLORSPACE = layout.offsetof(2);
+        MDEVICETOABSOLUTETRACKING = layout.offsetof(3);
     }
 
     /**
@@ -68,14 +81,44 @@ public class VRTextureWithPose extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
+    /** Returns the value of the {@code handle} field. */
+    @NativeType("void *")
+    public long handle() { return nhandle(address()); }
+    /** Returns the value of the {@code eType} field. */
+    @NativeType("ETextureType")
+    public int eType() { return neType(address()); }
+    /** Returns the value of the {@code eColorSpace} field. */
+    @NativeType("EColorSpace")
+    public int eColorSpace() { return neColorSpace(address()); }
     /** Returns a {@link HmdMatrix34} view of the {@code mDeviceToAbsoluteTracking} field. */
     @NativeType("HmdMatrix34_t")
     public HmdMatrix34 mDeviceToAbsoluteTracking() { return nmDeviceToAbsoluteTracking(address()); }
 
+    /** Sets the specified value to the {@code handle} field. */
+    public VRTextureWithPose handle(@NativeType("void *") long value) { nhandle(address(), value); return this; }
+    /** Sets the specified value to the {@code eType} field. */
+    public VRTextureWithPose eType(@NativeType("ETextureType") int value) { neType(address(), value); return this; }
+    /** Sets the specified value to the {@code eColorSpace} field. */
+    public VRTextureWithPose eColorSpace(@NativeType("EColorSpace") int value) { neColorSpace(address(), value); return this; }
     /** Copies the specified {@link HmdMatrix34} to the {@code mDeviceToAbsoluteTracking} field. */
     public VRTextureWithPose mDeviceToAbsoluteTracking(@NativeType("HmdMatrix34_t") HmdMatrix34 value) { nmDeviceToAbsoluteTracking(address(), value); return this; }
     /** Passes the {@code mDeviceToAbsoluteTracking} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VRTextureWithPose mDeviceToAbsoluteTracking(java.util.function.Consumer<HmdMatrix34> consumer) { consumer.accept(mDeviceToAbsoluteTracking()); return this; }
+
+    /** Initializes this struct with the specified values. */
+    public VRTextureWithPose set(
+        long handle,
+        int eType,
+        int eColorSpace,
+        HmdMatrix34 mDeviceToAbsoluteTracking
+    ) {
+        handle(handle);
+        eType(eType);
+        eColorSpace(eColorSpace);
+        mDeviceToAbsoluteTracking(mDeviceToAbsoluteTracking);
+
+        return this;
+    }
 
     /**
      * Copies the specified struct data to this struct.
@@ -232,11 +275,44 @@ public class VRTextureWithPose extends Struct implements NativeResource {
 
     // -----------------------------------
 
+    /** Unsafe version of {@link #handle}. */
+    public static long nhandle(long struct) { return memGetAddress(struct + VRTextureWithPose.HANDLE); }
+    /** Unsafe version of {@link #eType}. */
+    public static int neType(long struct) { return UNSAFE.getInt(null, struct + VRTextureWithPose.ETYPE); }
+    /** Unsafe version of {@link #eColorSpace}. */
+    public static int neColorSpace(long struct) { return UNSAFE.getInt(null, struct + VRTextureWithPose.ECOLORSPACE); }
     /** Unsafe version of {@link #mDeviceToAbsoluteTracking}. */
     public static HmdMatrix34 nmDeviceToAbsoluteTracking(long struct) { return HmdMatrix34.create(struct + VRTextureWithPose.MDEVICETOABSOLUTETRACKING); }
 
+    /** Unsafe version of {@link #handle(long) handle}. */
+    public static void nhandle(long struct, long value) { memPutAddress(struct + VRTextureWithPose.HANDLE, check(value)); }
+    /** Unsafe version of {@link #eType(int) eType}. */
+    public static void neType(long struct, int value) { UNSAFE.putInt(null, struct + VRTextureWithPose.ETYPE, value); }
+    /** Unsafe version of {@link #eColorSpace(int) eColorSpace}. */
+    public static void neColorSpace(long struct, int value) { UNSAFE.putInt(null, struct + VRTextureWithPose.ECOLORSPACE, value); }
     /** Unsafe version of {@link #mDeviceToAbsoluteTracking(HmdMatrix34) mDeviceToAbsoluteTracking}. */
     public static void nmDeviceToAbsoluteTracking(long struct, HmdMatrix34 value) { memCopy(value.address(), struct + VRTextureWithPose.MDEVICETOABSOLUTETRACKING, HmdMatrix34.SIZEOF); }
+
+    /**
+     * Validates pointer members that should not be {@code NULL}.
+     *
+     * @param struct the struct to validate
+     */
+    public static void validate(long struct) {
+        check(memGetAddress(struct + VRTextureWithPose.HANDLE));
+    }
+
+    /**
+     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
+     *
+     * @param array the struct array to validate
+     * @param count the number of structs in {@code array}
+     */
+    public static void validate(long array, int count) {
+        for (int i = 0; i < count; i++) {
+            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
+        }
+    }
 
     // -----------------------------------
 
@@ -276,10 +352,25 @@ public class VRTextureWithPose extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
+        /** Returns the value of the {@code handle} field. */
+        @NativeType("void *")
+        public long handle() { return VRTextureWithPose.nhandle(address()); }
+        /** Returns the value of the {@code eType} field. */
+        @NativeType("ETextureType")
+        public int eType() { return VRTextureWithPose.neType(address()); }
+        /** Returns the value of the {@code eColorSpace} field. */
+        @NativeType("EColorSpace")
+        public int eColorSpace() { return VRTextureWithPose.neColorSpace(address()); }
         /** Returns a {@link HmdMatrix34} view of the {@code mDeviceToAbsoluteTracking} field. */
         @NativeType("HmdMatrix34_t")
         public HmdMatrix34 mDeviceToAbsoluteTracking() { return VRTextureWithPose.nmDeviceToAbsoluteTracking(address()); }
 
+        /** Sets the specified value to the {@code handle} field. */
+        public VRTextureWithPose.Buffer handle(@NativeType("void *") long value) { VRTextureWithPose.nhandle(address(), value); return this; }
+        /** Sets the specified value to the {@code eType} field. */
+        public VRTextureWithPose.Buffer eType(@NativeType("ETextureType") int value) { VRTextureWithPose.neType(address(), value); return this; }
+        /** Sets the specified value to the {@code eColorSpace} field. */
+        public VRTextureWithPose.Buffer eColorSpace(@NativeType("EColorSpace") int value) { VRTextureWithPose.neColorSpace(address(), value); return this; }
         /** Copies the specified {@link HmdMatrix34} to the {@code mDeviceToAbsoluteTracking} field. */
         public VRTextureWithPose.Buffer mDeviceToAbsoluteTracking(@NativeType("HmdMatrix34_t") HmdMatrix34 value) { VRTextureWithPose.nmDeviceToAbsoluteTracking(address(), value); return this; }
         /** Passes the {@code mDeviceToAbsoluteTracking} field to the specified {@link java.util.function.Consumer Consumer}. */

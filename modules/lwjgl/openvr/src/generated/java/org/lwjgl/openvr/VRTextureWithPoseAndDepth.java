@@ -12,6 +12,7 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -20,6 +21,10 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VRTextureWithPoseAndDepth_t {
+ *     void * handle;
+ *     ETextureType eType;
+ *     EColorSpace eColorSpace;
+ *     {@link HmdMatrix34 HmdMatrix34_t} mDeviceToAbsoluteTracking;
  *     {@link VRTextureDepthInfo VRTextureDepthInfo_t} depth;
  * }</code></pre>
  */
@@ -34,17 +39,29 @@ public class VRTextureWithPoseAndDepth extends Struct implements NativeResource 
 
     /** The struct member offsets. */
     public static final int
+        HANDLE,
+        ETYPE,
+        ECOLORSPACE,
+        MDEVICETOABSOLUTETRACKING,
         DEPTH;
 
     static {
         Layout layout = __struct(
+            __member(POINTER_SIZE),
+            __member(4),
+            __member(4),
+            __member(HmdMatrix34.SIZEOF, HmdMatrix34.ALIGNOF),
             __member(VRTextureDepthInfo.SIZEOF, VRTextureDepthInfo.ALIGNOF)
         );
 
         SIZEOF = layout.getSize();
         ALIGNOF = layout.getAlignment();
 
-        DEPTH = layout.offsetof(0);
+        HANDLE = layout.offsetof(0);
+        ETYPE = layout.offsetof(1);
+        ECOLORSPACE = layout.offsetof(2);
+        MDEVICETOABSOLUTETRACKING = layout.offsetof(3);
+        DEPTH = layout.offsetof(4);
     }
 
     /**
@@ -60,14 +77,53 @@ public class VRTextureWithPoseAndDepth extends Struct implements NativeResource 
     @Override
     public int sizeof() { return SIZEOF; }
 
+    /** Returns the value of the {@code handle} field. */
+    @NativeType("void *")
+    public long handle() { return nhandle(address()); }
+    /** Returns the value of the {@code eType} field. */
+    @NativeType("ETextureType")
+    public int eType() { return neType(address()); }
+    /** Returns the value of the {@code eColorSpace} field. */
+    @NativeType("EColorSpace")
+    public int eColorSpace() { return neColorSpace(address()); }
+    /** Returns a {@link HmdMatrix34} view of the {@code mDeviceToAbsoluteTracking} field. */
+    @NativeType("HmdMatrix34_t")
+    public HmdMatrix34 mDeviceToAbsoluteTracking() { return nmDeviceToAbsoluteTracking(address()); }
     /** Returns a {@link VRTextureDepthInfo} view of the {@code depth} field. */
     @NativeType("VRTextureDepthInfo_t")
     public VRTextureDepthInfo depth() { return ndepth(address()); }
 
+    /** Sets the specified value to the {@code handle} field. */
+    public VRTextureWithPoseAndDepth handle(@NativeType("void *") long value) { nhandle(address(), value); return this; }
+    /** Sets the specified value to the {@code eType} field. */
+    public VRTextureWithPoseAndDepth eType(@NativeType("ETextureType") int value) { neType(address(), value); return this; }
+    /** Sets the specified value to the {@code eColorSpace} field. */
+    public VRTextureWithPoseAndDepth eColorSpace(@NativeType("EColorSpace") int value) { neColorSpace(address(), value); return this; }
+    /** Copies the specified {@link HmdMatrix34} to the {@code mDeviceToAbsoluteTracking} field. */
+    public VRTextureWithPoseAndDepth mDeviceToAbsoluteTracking(@NativeType("HmdMatrix34_t") HmdMatrix34 value) { nmDeviceToAbsoluteTracking(address(), value); return this; }
+    /** Passes the {@code mDeviceToAbsoluteTracking} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VRTextureWithPoseAndDepth mDeviceToAbsoluteTracking(java.util.function.Consumer<HmdMatrix34> consumer) { consumer.accept(mDeviceToAbsoluteTracking()); return this; }
     /** Copies the specified {@link VRTextureDepthInfo} to the {@code depth} field. */
     public VRTextureWithPoseAndDepth depth(@NativeType("VRTextureDepthInfo_t") VRTextureDepthInfo value) { ndepth(address(), value); return this; }
     /** Passes the {@code depth} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VRTextureWithPoseAndDepth depth(java.util.function.Consumer<VRTextureDepthInfo> consumer) { consumer.accept(depth()); return this; }
+
+    /** Initializes this struct with the specified values. */
+    public VRTextureWithPoseAndDepth set(
+        long handle,
+        int eType,
+        int eColorSpace,
+        HmdMatrix34 mDeviceToAbsoluteTracking,
+        VRTextureDepthInfo depth
+    ) {
+        handle(handle);
+        eType(eType);
+        eColorSpace(eColorSpace);
+        mDeviceToAbsoluteTracking(mDeviceToAbsoluteTracking);
+        depth(depth);
+
+        return this;
+    }
 
     /**
      * Copies the specified struct data to this struct.
@@ -224,9 +280,25 @@ public class VRTextureWithPoseAndDepth extends Struct implements NativeResource 
 
     // -----------------------------------
 
+    /** Unsafe version of {@link #handle}. */
+    public static long nhandle(long struct) { return memGetAddress(struct + VRTextureWithPoseAndDepth.HANDLE); }
+    /** Unsafe version of {@link #eType}. */
+    public static int neType(long struct) { return UNSAFE.getInt(null, struct + VRTextureWithPoseAndDepth.ETYPE); }
+    /** Unsafe version of {@link #eColorSpace}. */
+    public static int neColorSpace(long struct) { return UNSAFE.getInt(null, struct + VRTextureWithPoseAndDepth.ECOLORSPACE); }
+    /** Unsafe version of {@link #mDeviceToAbsoluteTracking}. */
+    public static HmdMatrix34 nmDeviceToAbsoluteTracking(long struct) { return HmdMatrix34.create(struct + VRTextureWithPoseAndDepth.MDEVICETOABSOLUTETRACKING); }
     /** Unsafe version of {@link #depth}. */
     public static VRTextureDepthInfo ndepth(long struct) { return VRTextureDepthInfo.create(struct + VRTextureWithPoseAndDepth.DEPTH); }
 
+    /** Unsafe version of {@link #handle(long) handle}. */
+    public static void nhandle(long struct, long value) { memPutAddress(struct + VRTextureWithPoseAndDepth.HANDLE, check(value)); }
+    /** Unsafe version of {@link #eType(int) eType}. */
+    public static void neType(long struct, int value) { UNSAFE.putInt(null, struct + VRTextureWithPoseAndDepth.ETYPE, value); }
+    /** Unsafe version of {@link #eColorSpace(int) eColorSpace}. */
+    public static void neColorSpace(long struct, int value) { UNSAFE.putInt(null, struct + VRTextureWithPoseAndDepth.ECOLORSPACE, value); }
+    /** Unsafe version of {@link #mDeviceToAbsoluteTracking(HmdMatrix34) mDeviceToAbsoluteTracking}. */
+    public static void nmDeviceToAbsoluteTracking(long struct, HmdMatrix34 value) { memCopy(value.address(), struct + VRTextureWithPoseAndDepth.MDEVICETOABSOLUTETRACKING, HmdMatrix34.SIZEOF); }
     /** Unsafe version of {@link #depth(VRTextureDepthInfo) depth}. */
     public static void ndepth(long struct, VRTextureDepthInfo value) { memCopy(value.address(), struct + VRTextureWithPoseAndDepth.DEPTH, VRTextureDepthInfo.SIZEOF); }
 
@@ -236,6 +308,7 @@ public class VRTextureWithPoseAndDepth extends Struct implements NativeResource 
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
+        check(memGetAddress(struct + VRTextureWithPoseAndDepth.HANDLE));
         VRTextureDepthInfo.validate(struct + VRTextureWithPoseAndDepth.DEPTH);
     }
 
@@ -289,10 +362,32 @@ public class VRTextureWithPoseAndDepth extends Struct implements NativeResource 
             return ELEMENT_FACTORY;
         }
 
+        /** Returns the value of the {@code handle} field. */
+        @NativeType("void *")
+        public long handle() { return VRTextureWithPoseAndDepth.nhandle(address()); }
+        /** Returns the value of the {@code eType} field. */
+        @NativeType("ETextureType")
+        public int eType() { return VRTextureWithPoseAndDepth.neType(address()); }
+        /** Returns the value of the {@code eColorSpace} field. */
+        @NativeType("EColorSpace")
+        public int eColorSpace() { return VRTextureWithPoseAndDepth.neColorSpace(address()); }
+        /** Returns a {@link HmdMatrix34} view of the {@code mDeviceToAbsoluteTracking} field. */
+        @NativeType("HmdMatrix34_t")
+        public HmdMatrix34 mDeviceToAbsoluteTracking() { return VRTextureWithPoseAndDepth.nmDeviceToAbsoluteTracking(address()); }
         /** Returns a {@link VRTextureDepthInfo} view of the {@code depth} field. */
         @NativeType("VRTextureDepthInfo_t")
         public VRTextureDepthInfo depth() { return VRTextureWithPoseAndDepth.ndepth(address()); }
 
+        /** Sets the specified value to the {@code handle} field. */
+        public VRTextureWithPoseAndDepth.Buffer handle(@NativeType("void *") long value) { VRTextureWithPoseAndDepth.nhandle(address(), value); return this; }
+        /** Sets the specified value to the {@code eType} field. */
+        public VRTextureWithPoseAndDepth.Buffer eType(@NativeType("ETextureType") int value) { VRTextureWithPoseAndDepth.neType(address(), value); return this; }
+        /** Sets the specified value to the {@code eColorSpace} field. */
+        public VRTextureWithPoseAndDepth.Buffer eColorSpace(@NativeType("EColorSpace") int value) { VRTextureWithPoseAndDepth.neColorSpace(address(), value); return this; }
+        /** Copies the specified {@link HmdMatrix34} to the {@code mDeviceToAbsoluteTracking} field. */
+        public VRTextureWithPoseAndDepth.Buffer mDeviceToAbsoluteTracking(@NativeType("HmdMatrix34_t") HmdMatrix34 value) { VRTextureWithPoseAndDepth.nmDeviceToAbsoluteTracking(address(), value); return this; }
+        /** Passes the {@code mDeviceToAbsoluteTracking} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VRTextureWithPoseAndDepth.Buffer mDeviceToAbsoluteTracking(java.util.function.Consumer<HmdMatrix34> consumer) { consumer.accept(mDeviceToAbsoluteTracking()); return this; }
         /** Copies the specified {@link VRTextureDepthInfo} to the {@code depth} field. */
         public VRTextureWithPoseAndDepth.Buffer depth(@NativeType("VRTextureDepthInfo_t") VRTextureDepthInfo value) { VRTextureWithPoseAndDepth.ndepth(address(), value); return this; }
         /** Passes the {@code depth} field to the specified {@link java.util.function.Consumer Consumer}. */

@@ -201,7 +201,11 @@ public class VRChaperoneSetup {
         callPV(pQuadsBuffer, unQuadsCount, __functionAddress);
     }
 
-    /** Sets the Collision Bounds in the working copy. */
+    /**
+     * Sets the Collision Bounds in the working copy.
+     * 
+     * <p>Note: ceiling height is ignored.</p>
+     */
     public static void VRChaperoneSetup_SetWorkingCollisionBoundsInfo(@NativeType("HmdQuad_t *") HmdQuad.Buffer pQuadsBuffer) {
         nVRChaperoneSetup_SetWorkingCollisionBoundsInfo(pQuadsBuffer.address(), pQuadsBuffer.remaining());
     }

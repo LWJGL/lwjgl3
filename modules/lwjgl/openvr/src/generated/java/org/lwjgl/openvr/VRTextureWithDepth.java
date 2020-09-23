@@ -12,6 +12,7 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -20,6 +21,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VRTextureWithDepth_t {
+ *     void * handle;
+ *     ETextureType eType;
+ *     EColorSpace eColorSpace;
  *     {@link VRTextureDepthInfo VRTextureDepthInfo_t} depth;
  * }</code></pre>
  */
@@ -34,17 +38,26 @@ public class VRTextureWithDepth extends Struct implements NativeResource {
 
     /** The struct member offsets. */
     public static final int
+        HANDLE,
+        ETYPE,
+        ECOLORSPACE,
         DEPTH;
 
     static {
         Layout layout = __struct(
+            __member(POINTER_SIZE),
+            __member(4),
+            __member(4),
             __member(VRTextureDepthInfo.SIZEOF, VRTextureDepthInfo.ALIGNOF)
         );
 
         SIZEOF = layout.getSize();
         ALIGNOF = layout.getAlignment();
 
-        DEPTH = layout.offsetof(0);
+        HANDLE = layout.offsetof(0);
+        ETYPE = layout.offsetof(1);
+        ECOLORSPACE = layout.offsetof(2);
+        DEPTH = layout.offsetof(3);
     }
 
     /**
@@ -60,14 +73,44 @@ public class VRTextureWithDepth extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
+    /** Returns the value of the {@code handle} field. */
+    @NativeType("void *")
+    public long handle() { return nhandle(address()); }
+    /** Returns the value of the {@code eType} field. */
+    @NativeType("ETextureType")
+    public int eType() { return neType(address()); }
+    /** Returns the value of the {@code eColorSpace} field. */
+    @NativeType("EColorSpace")
+    public int eColorSpace() { return neColorSpace(address()); }
     /** Returns a {@link VRTextureDepthInfo} view of the {@code depth} field. */
     @NativeType("VRTextureDepthInfo_t")
     public VRTextureDepthInfo depth() { return ndepth(address()); }
 
+    /** Sets the specified value to the {@code handle} field. */
+    public VRTextureWithDepth handle(@NativeType("void *") long value) { nhandle(address(), value); return this; }
+    /** Sets the specified value to the {@code eType} field. */
+    public VRTextureWithDepth eType(@NativeType("ETextureType") int value) { neType(address(), value); return this; }
+    /** Sets the specified value to the {@code eColorSpace} field. */
+    public VRTextureWithDepth eColorSpace(@NativeType("EColorSpace") int value) { neColorSpace(address(), value); return this; }
     /** Copies the specified {@link VRTextureDepthInfo} to the {@code depth} field. */
     public VRTextureWithDepth depth(@NativeType("VRTextureDepthInfo_t") VRTextureDepthInfo value) { ndepth(address(), value); return this; }
     /** Passes the {@code depth} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VRTextureWithDepth depth(java.util.function.Consumer<VRTextureDepthInfo> consumer) { consumer.accept(depth()); return this; }
+
+    /** Initializes this struct with the specified values. */
+    public VRTextureWithDepth set(
+        long handle,
+        int eType,
+        int eColorSpace,
+        VRTextureDepthInfo depth
+    ) {
+        handle(handle);
+        eType(eType);
+        eColorSpace(eColorSpace);
+        depth(depth);
+
+        return this;
+    }
 
     /**
      * Copies the specified struct data to this struct.
@@ -224,9 +267,21 @@ public class VRTextureWithDepth extends Struct implements NativeResource {
 
     // -----------------------------------
 
+    /** Unsafe version of {@link #handle}. */
+    public static long nhandle(long struct) { return memGetAddress(struct + VRTextureWithDepth.HANDLE); }
+    /** Unsafe version of {@link #eType}. */
+    public static int neType(long struct) { return UNSAFE.getInt(null, struct + VRTextureWithDepth.ETYPE); }
+    /** Unsafe version of {@link #eColorSpace}. */
+    public static int neColorSpace(long struct) { return UNSAFE.getInt(null, struct + VRTextureWithDepth.ECOLORSPACE); }
     /** Unsafe version of {@link #depth}. */
     public static VRTextureDepthInfo ndepth(long struct) { return VRTextureDepthInfo.create(struct + VRTextureWithDepth.DEPTH); }
 
+    /** Unsafe version of {@link #handle(long) handle}. */
+    public static void nhandle(long struct, long value) { memPutAddress(struct + VRTextureWithDepth.HANDLE, check(value)); }
+    /** Unsafe version of {@link #eType(int) eType}. */
+    public static void neType(long struct, int value) { UNSAFE.putInt(null, struct + VRTextureWithDepth.ETYPE, value); }
+    /** Unsafe version of {@link #eColorSpace(int) eColorSpace}. */
+    public static void neColorSpace(long struct, int value) { UNSAFE.putInt(null, struct + VRTextureWithDepth.ECOLORSPACE, value); }
     /** Unsafe version of {@link #depth(VRTextureDepthInfo) depth}. */
     public static void ndepth(long struct, VRTextureDepthInfo value) { memCopy(value.address(), struct + VRTextureWithDepth.DEPTH, VRTextureDepthInfo.SIZEOF); }
 
@@ -236,6 +291,7 @@ public class VRTextureWithDepth extends Struct implements NativeResource {
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
+        check(memGetAddress(struct + VRTextureWithDepth.HANDLE));
         VRTextureDepthInfo.validate(struct + VRTextureWithDepth.DEPTH);
     }
 
@@ -289,10 +345,25 @@ public class VRTextureWithDepth extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
+        /** Returns the value of the {@code handle} field. */
+        @NativeType("void *")
+        public long handle() { return VRTextureWithDepth.nhandle(address()); }
+        /** Returns the value of the {@code eType} field. */
+        @NativeType("ETextureType")
+        public int eType() { return VRTextureWithDepth.neType(address()); }
+        /** Returns the value of the {@code eColorSpace} field. */
+        @NativeType("EColorSpace")
+        public int eColorSpace() { return VRTextureWithDepth.neColorSpace(address()); }
         /** Returns a {@link VRTextureDepthInfo} view of the {@code depth} field. */
         @NativeType("VRTextureDepthInfo_t")
         public VRTextureDepthInfo depth() { return VRTextureWithDepth.ndepth(address()); }
 
+        /** Sets the specified value to the {@code handle} field. */
+        public VRTextureWithDepth.Buffer handle(@NativeType("void *") long value) { VRTextureWithDepth.nhandle(address(), value); return this; }
+        /** Sets the specified value to the {@code eType} field. */
+        public VRTextureWithDepth.Buffer eType(@NativeType("ETextureType") int value) { VRTextureWithDepth.neType(address(), value); return this; }
+        /** Sets the specified value to the {@code eColorSpace} field. */
+        public VRTextureWithDepth.Buffer eColorSpace(@NativeType("EColorSpace") int value) { VRTextureWithDepth.neColorSpace(address(), value); return this; }
         /** Copies the specified {@link VRTextureDepthInfo} to the {@code depth} field. */
         public VRTextureWithDepth.Buffer depth(@NativeType("VRTextureDepthInfo_t") VRTextureDepthInfo value) { VRTextureWithDepth.ndepth(address(), value); return this; }
         /** Passes the {@code depth} field to the specified {@link java.util.function.Consumer Consumer}. */

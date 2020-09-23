@@ -24,6 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     char rchInputPathName[128];
  *     char rchModeName[128];
  *     char rchSlotName[128];
+ *     char rchInputSourceType[32];
  * }</code></pre>
  */
 @NativeType("struct InputBindingInfo_t")
@@ -40,14 +41,16 @@ public class InputBindingInfo extends Struct implements NativeResource {
         RCHDEVICEPATHNAME,
         RCHINPUTPATHNAME,
         RCHMODENAME,
-        RCHSLOTNAME;
+        RCHSLOTNAME,
+        RCHINPUTSOURCETYPE;
 
     static {
         Layout layout = __struct(
             __array(1, 128),
             __array(1, 128),
             __array(1, 128),
-            __array(1, 128)
+            __array(1, 128),
+            __array(1, 32)
         );
 
         SIZEOF = layout.getSize();
@@ -57,6 +60,7 @@ public class InputBindingInfo extends Struct implements NativeResource {
         RCHINPUTPATHNAME = layout.offsetof(1);
         RCHMODENAME = layout.offsetof(2);
         RCHSLOTNAME = layout.offsetof(3);
+        RCHINPUTSOURCETYPE = layout.offsetof(4);
     }
 
     /**
@@ -96,6 +100,12 @@ public class InputBindingInfo extends Struct implements NativeResource {
     /** Decodes the null-terminated string stored in the {@code rchSlotName} field. */
     @NativeType("char[128]")
     public String rchSlotNameString() { return nrchSlotNameString(address()); }
+    /** Returns a {@link ByteBuffer} view of the {@code rchInputSourceType} field. */
+    @NativeType("char[32]")
+    public ByteBuffer rchInputSourceType() { return nrchInputSourceType(address()); }
+    /** Decodes the null-terminated string stored in the {@code rchInputSourceType} field. */
+    @NativeType("char[32]")
+    public String rchInputSourceTypeString() { return nrchInputSourceTypeString(address()); }
 
     // -----------------------------------
 
@@ -256,6 +266,10 @@ public class InputBindingInfo extends Struct implements NativeResource {
     public static ByteBuffer nrchSlotName(long struct) { return memByteBuffer(struct + InputBindingInfo.RCHSLOTNAME, 128); }
     /** Unsafe version of {@link #rchSlotNameString}. */
     public static String nrchSlotNameString(long struct) { return memASCII(struct + InputBindingInfo.RCHSLOTNAME); }
+    /** Unsafe version of {@link #rchInputSourceType}. */
+    public static ByteBuffer nrchInputSourceType(long struct) { return memByteBuffer(struct + InputBindingInfo.RCHINPUTSOURCETYPE, 32); }
+    /** Unsafe version of {@link #rchInputSourceTypeString}. */
+    public static String nrchInputSourceTypeString(long struct) { return memASCII(struct + InputBindingInfo.RCHINPUTSOURCETYPE); }
 
     // -----------------------------------
 
@@ -319,6 +333,12 @@ public class InputBindingInfo extends Struct implements NativeResource {
         /** Decodes the null-terminated string stored in the {@code rchSlotName} field. */
         @NativeType("char[128]")
         public String rchSlotNameString() { return InputBindingInfo.nrchSlotNameString(address()); }
+        /** Returns a {@link ByteBuffer} view of the {@code rchInputSourceType} field. */
+        @NativeType("char[32]")
+        public ByteBuffer rchInputSourceType() { return InputBindingInfo.nrchInputSourceType(address()); }
+        /** Decodes the null-terminated string stored in the {@code rchInputSourceType} field. */
+        @NativeType("char[32]")
+        public String rchInputSourceTypeString() { return InputBindingInfo.nrchInputSourceTypeString(address()); }
 
     }
 

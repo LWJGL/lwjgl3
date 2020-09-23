@@ -38,7 +38,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link VREventEditingCameraSurface VREvent_EditingCameraSurface_t} cameraSurface;
  *     {@link VREventMessageOverlay VREvent_MessageOverlay_t} messageOverlay;
  *     {@link VREventProperty VREvent_Property_t} property;
- *     {@link VREventDualAnalog VREvent_DualAnalog_t} dualAnalog;
  *     {@link VREventHapticVibration VREvent_HapticVibration_t} hapticVibration;
  *     {@link VREventWebConsole VREvent_WebConsole_t} webConsole;
  *     {@link VREventInputBindingLoad VREvent_InputBindingLoad_t} inputBinding;
@@ -77,7 +76,6 @@ public class VREventData extends Struct {
         CAMERASURFACE,
         MESSAGEOVERLAY,
         PROPERTY,
-        DUALANALOG,
         HAPTICVIBRATION,
         WEBCONSOLE,
         INPUTBINDING,
@@ -106,7 +104,6 @@ public class VREventData extends Struct {
             __member(VREventEditingCameraSurface.SIZEOF, VREventEditingCameraSurface.ALIGNOF),
             __member(VREventMessageOverlay.SIZEOF, VREventMessageOverlay.ALIGNOF),
             __member(VREventProperty.SIZEOF, VREventProperty.ALIGNOF),
-            __member(VREventDualAnalog.SIZEOF, VREventDualAnalog.ALIGNOF),
             __member(VREventHapticVibration.SIZEOF, VREventHapticVibration.ALIGNOF),
             __member(VREventWebConsole.SIZEOF, VREventWebConsole.ALIGNOF),
             __member(VREventInputBindingLoad.SIZEOF, VREventInputBindingLoad.ALIGNOF),
@@ -137,12 +134,11 @@ public class VREventData extends Struct {
         CAMERASURFACE = layout.offsetof(17);
         MESSAGEOVERLAY = layout.offsetof(18);
         PROPERTY = layout.offsetof(19);
-        DUALANALOG = layout.offsetof(20);
-        HAPTICVIBRATION = layout.offsetof(21);
-        WEBCONSOLE = layout.offsetof(22);
-        INPUTBINDING = layout.offsetof(23);
-        ACTIONMANIFEST = layout.offsetof(24);
-        SPATIALANCHOR = layout.offsetof(25);
+        HAPTICVIBRATION = layout.offsetof(20);
+        WEBCONSOLE = layout.offsetof(21);
+        INPUTBINDING = layout.offsetof(22);
+        ACTIONMANIFEST = layout.offsetof(23);
+        SPATIALANCHOR = layout.offsetof(24);
     }
 
     /**
@@ -218,9 +214,6 @@ public class VREventData extends Struct {
     /** Returns a {@link VREventProperty} view of the {@code property} field. */
     @NativeType("VREvent_Property_t")
     public VREventProperty property() { return nproperty(address()); }
-    /** Returns a {@link VREventDualAnalog} view of the {@code dualAnalog} field. */
-    @NativeType("VREvent_DualAnalog_t")
-    public VREventDualAnalog dualAnalog() { return ndualAnalog(address()); }
     /** Returns a {@link VREventHapticVibration} view of the {@code hapticVibration} field. */
     @NativeType("VREvent_HapticVibration_t")
     public VREventHapticVibration hapticVibration() { return nhapticVibration(address()); }
@@ -308,8 +301,6 @@ public class VREventData extends Struct {
     public static VREventMessageOverlay nmessageOverlay(long struct) { return VREventMessageOverlay.create(struct + VREventData.MESSAGEOVERLAY); }
     /** Unsafe version of {@link #property}. */
     public static VREventProperty nproperty(long struct) { return VREventProperty.create(struct + VREventData.PROPERTY); }
-    /** Unsafe version of {@link #dualAnalog}. */
-    public static VREventDualAnalog ndualAnalog(long struct) { return VREventDualAnalog.create(struct + VREventData.DUALANALOG); }
     /** Unsafe version of {@link #hapticVibration}. */
     public static VREventHapticVibration nhapticVibration(long struct) { return VREventHapticVibration.create(struct + VREventData.HAPTICVIBRATION); }
     /** Unsafe version of {@link #webConsole}. */
@@ -419,9 +410,6 @@ public class VREventData extends Struct {
         /** Returns a {@link VREventProperty} view of the {@code property} field. */
         @NativeType("VREvent_Property_t")
         public VREventProperty property() { return VREventData.nproperty(address()); }
-        /** Returns a {@link VREventDualAnalog} view of the {@code dualAnalog} field. */
-        @NativeType("VREvent_DualAnalog_t")
-        public VREventDualAnalog dualAnalog() { return VREventData.ndualAnalog(address()); }
         /** Returns a {@link VREventHapticVibration} view of the {@code hapticVibration} field. */
         @NativeType("VREvent_HapticVibration_t")
         public VREventHapticVibration hapticVibration() { return VREventData.nhapticVibration(address()); }

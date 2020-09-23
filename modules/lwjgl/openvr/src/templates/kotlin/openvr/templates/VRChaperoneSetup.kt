@@ -98,7 +98,11 @@ val VRChaperoneSetup = "VRChaperoneSetup".nativeClass(
 
     void(
         "SetWorkingCollisionBoundsInfo",
-        "Sets the Collision Bounds in the working copy.",
+        """
+        Sets the Collision Bounds in the working copy.
+        
+        Note: ceiling height is ignored.
+        """,
 
         HmdQuad_t.p("pQuadsBuffer", ""),
         AutoSize("pQuadsBuffer")..uint32_t("unQuadsCount", "")

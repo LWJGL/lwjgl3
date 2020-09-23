@@ -312,7 +312,7 @@ public class VROverlay {
     /**
      * Specify flag setting for a given overlay.
      *
-     * @param eOverlayFlag one of:<br><table><tr><td>{@link VR#VROverlayFlags_NoDashboardTab}</td><td>{@link VR#VROverlayFlags_SendVRDiscreteScrollEvents}</td></tr><tr><td>{@link VR#VROverlayFlags_SendVRTouchpadEvents}</td><td>{@link VR#VROverlayFlags_ShowTouchPadScrollWheel}</td></tr><tr><td>{@link VR#VROverlayFlags_TransferOwnershipToInternalProcess}</td><td>{@link VR#VROverlayFlags_SideBySide_Parallel}</td></tr><tr><td>{@link VR#VROverlayFlags_SideBySide_Crossed}</td><td>{@link VR#VROverlayFlags_Panorama}</td></tr><tr><td>{@link VR#VROverlayFlags_StereoPanorama}</td><td>{@link VR#VROverlayFlags_SortWithNonSceneOverlays}</td></tr><tr><td>{@link VR#VROverlayFlags_VisibleInDashboard}</td><td>{@link VR#VROverlayFlags_MakeOverlaysInteractiveIfVisible}</td></tr><tr><td>{@link VR#VROverlayFlags_SendVRSmoothScrollEvents}</td><td>{@link VR#VROverlayFlags_ProtectedContent}</td></tr><tr><td>{@link VR#VROverlayFlags_HideLaserIntersection}</td></tr></table>
+     * @param eOverlayFlag one of:<br><table><tr><td>{@link VR#VROverlayFlags_NoDashboardTab}</td><td>{@link VR#VROverlayFlags_SendVRDiscreteScrollEvents}</td></tr><tr><td>{@link VR#VROverlayFlags_SendVRTouchpadEvents}</td><td>{@link VR#VROverlayFlags_ShowTouchPadScrollWheel}</td></tr><tr><td>{@link VR#VROverlayFlags_TransferOwnershipToInternalProcess}</td><td>{@link VR#VROverlayFlags_SideBySide_Parallel}</td></tr><tr><td>{@link VR#VROverlayFlags_SideBySide_Crossed}</td><td>{@link VR#VROverlayFlags_Panorama}</td></tr><tr><td>{@link VR#VROverlayFlags_StereoPanorama}</td><td>{@link VR#VROverlayFlags_SortWithNonSceneOverlays}</td></tr><tr><td>{@link VR#VROverlayFlags_VisibleInDashboard}</td><td>{@link VR#VROverlayFlags_MakeOverlaysInteractiveIfVisible}</td></tr><tr><td>{@link VR#VROverlayFlags_SendVRSmoothScrollEvents}</td><td>{@link VR#VROverlayFlags_ProtectedContent}</td></tr><tr><td>{@link VR#VROverlayFlags_HideLaserIntersection}</td><td>{@link VR#VROverlayFlags_WantsModalBehavior}</td></tr><tr><td>{@link VR#VROverlayFlags_IsPremultiplied}</td></tr></table>
      */
     @NativeType("EVROverlayError")
     public static int VROverlay_SetOverlayFlag(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("VROverlayFlags") int eOverlayFlag, @NativeType("bool") boolean bEnabled) {
@@ -337,7 +337,7 @@ public class VROverlay {
     /**
      * Gets flag setting for a given overlay.
      *
-     * @param eOverlayFlag one of:<br><table><tr><td>{@link VR#VROverlayFlags_NoDashboardTab}</td><td>{@link VR#VROverlayFlags_SendVRDiscreteScrollEvents}</td></tr><tr><td>{@link VR#VROverlayFlags_SendVRTouchpadEvents}</td><td>{@link VR#VROverlayFlags_ShowTouchPadScrollWheel}</td></tr><tr><td>{@link VR#VROverlayFlags_TransferOwnershipToInternalProcess}</td><td>{@link VR#VROverlayFlags_SideBySide_Parallel}</td></tr><tr><td>{@link VR#VROverlayFlags_SideBySide_Crossed}</td><td>{@link VR#VROverlayFlags_Panorama}</td></tr><tr><td>{@link VR#VROverlayFlags_StereoPanorama}</td><td>{@link VR#VROverlayFlags_SortWithNonSceneOverlays}</td></tr><tr><td>{@link VR#VROverlayFlags_VisibleInDashboard}</td><td>{@link VR#VROverlayFlags_MakeOverlaysInteractiveIfVisible}</td></tr><tr><td>{@link VR#VROverlayFlags_SendVRSmoothScrollEvents}</td><td>{@link VR#VROverlayFlags_ProtectedContent}</td></tr><tr><td>{@link VR#VROverlayFlags_HideLaserIntersection}</td></tr></table>
+     * @param eOverlayFlag one of:<br><table><tr><td>{@link VR#VROverlayFlags_NoDashboardTab}</td><td>{@link VR#VROverlayFlags_SendVRDiscreteScrollEvents}</td></tr><tr><td>{@link VR#VROverlayFlags_SendVRTouchpadEvents}</td><td>{@link VR#VROverlayFlags_ShowTouchPadScrollWheel}</td></tr><tr><td>{@link VR#VROverlayFlags_TransferOwnershipToInternalProcess}</td><td>{@link VR#VROverlayFlags_SideBySide_Parallel}</td></tr><tr><td>{@link VR#VROverlayFlags_SideBySide_Crossed}</td><td>{@link VR#VROverlayFlags_Panorama}</td></tr><tr><td>{@link VR#VROverlayFlags_StereoPanorama}</td><td>{@link VR#VROverlayFlags_SortWithNonSceneOverlays}</td></tr><tr><td>{@link VR#VROverlayFlags_VisibleInDashboard}</td><td>{@link VR#VROverlayFlags_MakeOverlaysInteractiveIfVisible}</td></tr><tr><td>{@link VR#VROverlayFlags_SendVRSmoothScrollEvents}</td><td>{@link VR#VROverlayFlags_ProtectedContent}</td></tr><tr><td>{@link VR#VROverlayFlags_HideLaserIntersection}</td><td>{@link VR#VROverlayFlags_WantsModalBehavior}</td></tr><tr><td>{@link VR#VROverlayFlags_IsPremultiplied}</td></tr></table>
      */
     @NativeType("EVROverlayError")
     public static int VROverlay_GetOverlayFlag(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("VROverlayFlags") int eOverlayFlag, @NativeType("bool *") ByteBuffer pbEnabled) {
@@ -651,56 +651,6 @@ public class VROverlay {
     @NativeType("EVROverlayError")
     public static int VROverlay_GetOverlayTextureBounds(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("VRTextureBounds_t *") VRTextureBounds pOverlayTextureBounds) {
         return nVROverlay_GetOverlayTextureBounds(ulOverlayHandle, pOverlayTextureBounds.address());
-    }
-
-    // --- [ VROverlay_GetOverlayRenderModel ] ---
-
-    /** Unsafe version of: {@link #VROverlay_GetOverlayRenderModel GetOverlayRenderModel} */
-    public static int nVROverlay_GetOverlayRenderModel(long ulOverlayHandle, long pchValue, int unBufferSize, long pColor, long pError) {
-        long __functionAddress = OpenVR.VROverlay.GetOverlayRenderModel;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        return callJPPPI(ulOverlayHandle, pchValue, unBufferSize, pColor, pError, __functionAddress);
-    }
-
-    /** Gets render model to draw behind this overlay. */
-    @NativeType("uint32_t")
-    public static int VROverlay_GetOverlayRenderModel(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("char *") ByteBuffer pchValue, @NativeType("HmdColor_t *") HmdColor pColor, @NativeType("EVROverlayError *") IntBuffer pError) {
-        if (CHECKS) {
-            check(pError, 1);
-        }
-        return nVROverlay_GetOverlayRenderModel(ulOverlayHandle, memAddress(pchValue), pchValue.remaining(), pColor.address(), memAddress(pError));
-    }
-
-    // --- [ VROverlay_SetOverlayRenderModel ] ---
-
-    public static int nVROverlay_SetOverlayRenderModel(long ulOverlayHandle, long pchRenderModel, long pColor) {
-        long __functionAddress = OpenVR.VROverlay.SetOverlayRenderModel;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        return callJPPI(ulOverlayHandle, pchRenderModel, pColor, __functionAddress);
-    }
-
-    @NativeType("EVROverlayError")
-    public static int VROverlay_SetOverlayRenderModel(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("char const *") ByteBuffer pchRenderModel, @NativeType("HmdColor_t *") HmdColor pColor) {
-        if (CHECKS) {
-            checkNT1(pchRenderModel);
-        }
-        return nVROverlay_SetOverlayRenderModel(ulOverlayHandle, memAddress(pchRenderModel), pColor.address());
-    }
-
-    @NativeType("EVROverlayError")
-    public static int VROverlay_SetOverlayRenderModel(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("char const *") CharSequence pchRenderModel, @NativeType("HmdColor_t *") HmdColor pColor) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            stack.nASCII(pchRenderModel, true);
-            long pchRenderModelEncoded = stack.getPointerAddress();
-            return nVROverlay_SetOverlayRenderModel(ulOverlayHandle, pchRenderModelEncoded, pColor.address());
-        } finally {
-            stack.setPointer(stackPointer);
-        }
     }
 
     // --- [ VROverlay_GetOverlayTransformType ] ---
@@ -1048,7 +998,7 @@ public class VROverlay {
     /**
      * Sets the input settings for the specified overlay.
      *
-     * @param eInputMethod one of:<br><table><tr><td>{@link VR#VROverlayInputMethod_None}</td><td>{@link VR#VROverlayInputMethod_Mouse}</td></tr><tr><td>{@link VR#VROverlayInputMethod_DualAnalog}</td></tr></table>
+     * @param eInputMethod one of:<br><table><tr><td>{@link VR#VROverlayInputMethod_None}</td><td>{@link VR#VROverlayInputMethod_Mouse}</td></tr></table>
      */
     @NativeType("EVROverlayError")
     public static int VROverlay_SetOverlayInputMethod(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("VROverlayInputMethod") int eInputMethod) {
@@ -1132,51 +1082,6 @@ public class VROverlay {
             check(__functionAddress);
         }
         return callJZ(ulOverlayHandle, __functionAddress);
-    }
-
-    // --- [ VROverlay_SetOverlayDualAnalogTransform ] ---
-
-    /** Unsafe version of: {@link #VROverlay_SetOverlayDualAnalogTransform SetOverlayDualAnalogTransform} */
-    public static int nVROverlay_SetOverlayDualAnalogTransform(long ulOverlay, int eWhich, long pvCenter, float fRadius) {
-        long __functionAddress = OpenVR.VROverlay.SetOverlayDualAnalogTransform;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        return callJPI(ulOverlay, eWhich, pvCenter, fRadius, __functionAddress);
-    }
-
-    /**
-     * Sets the analog input to Dual Analog coordinate scale for the specified overlay.
-     *
-     * @param eWhich one of:<br><table><tr><td>{@link VR#EDualAnalogWhich_k_EDualAnalog_Left}</td><td>{@link VR#EDualAnalogWhich_k_EDualAnalog_Right}</td></tr></table>
-     */
-    @NativeType("EVROverlayError")
-    public static int VROverlay_SetOverlayDualAnalogTransform(@NativeType("VROverlayHandle_t") long ulOverlay, @NativeType("EDualAnalogWhich") int eWhich, @NativeType("HmdVector2_t *") HmdVector2 pvCenter, float fRadius) {
-        return nVROverlay_SetOverlayDualAnalogTransform(ulOverlay, eWhich, pvCenter.address(), fRadius);
-    }
-
-    // --- [ VROverlay_GetOverlayDualAnalogTransform ] ---
-
-    /** Unsafe version of: {@link #VROverlay_GetOverlayDualAnalogTransform GetOverlayDualAnalogTransform} */
-    public static int nVROverlay_GetOverlayDualAnalogTransform(long ulOverlay, int eWhich, long pvCenter, long pfRadius) {
-        long __functionAddress = OpenVR.VROverlay.GetOverlayDualAnalogTransform;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        return callJPPI(ulOverlay, eWhich, pvCenter, pfRadius, __functionAddress);
-    }
-
-    /**
-     * Gets the analog input to Dual Analog coordinate scale for the specified overlay.
-     *
-     * @param eWhich one of:<br><table><tr><td>{@link VR#EDualAnalogWhich_k_EDualAnalog_Left}</td><td>{@link VR#EDualAnalogWhich_k_EDualAnalog_Right}</td></tr></table>
-     */
-    @NativeType("EVROverlayError")
-    public static int VROverlay_GetOverlayDualAnalogTransform(@NativeType("VROverlayHandle_t") long ulOverlay, @NativeType("EDualAnalogWhich") int eWhich, @NativeType("HmdVector2_t *") HmdVector2 pvCenter, @NativeType("float *") FloatBuffer pfRadius) {
-        if (CHECKS) {
-            check(pfRadius, 1);
-        }
-        return nVROverlay_GetOverlayDualAnalogTransform(ulOverlay, eWhich, pvCenter.address(), memAddress(pfRadius));
     }
 
     // --- [ VROverlay_SetOverlayIntersectionMask ] ---
@@ -1561,44 +1466,48 @@ public class VROverlay {
     // --- [ VROverlay_ShowKeyboard ] ---
 
     /** Unsafe version of: {@link #VROverlay_ShowKeyboard ShowKeyboard} */
-    public static int nVROverlay_ShowKeyboard(int eInputMode, int eLineInputMode, long pchDescription, int unCharMax, long pchExistingText, boolean bUseMinimalMode, long uUserValue) {
+    public static int nVROverlay_ShowKeyboard(int eInputMode, int eLineInputMode, int unFlags, long pchDescription, int unCharMax, long pchExistingText, boolean bUseMinimalMode, long uUserValue) {
         long __functionAddress = OpenVR.VROverlay.ShowKeyboard;
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPJI(eInputMode, eLineInputMode, pchDescription, unCharMax, pchExistingText, bUseMinimalMode, uUserValue, __functionAddress);
+        return callPPJI(eInputMode, eLineInputMode, unFlags, pchDescription, unCharMax, pchExistingText, bUseMinimalMode, uUserValue, __functionAddress);
     }
 
     /**
      * Show the virtual keyboard to accept input.
+     * 
+     * <p>In most cases, you should pass {@link VR#EKeyboardFlags_KeyboardFlag_Modal} to enable modal overlay behavior on the keyboard itself. See {@code EKeyboardFlags} for more.</p>
      *
      * @param eInputMode     one of:<br><table><tr><td>{@link VR#EGamepadTextInputMode_k_EGamepadTextInputModeNormal}</td></tr><tr><td>{@link VR#EGamepadTextInputMode_k_EGamepadTextInputModePassword}</td></tr><tr><td>{@link VR#EGamepadTextInputMode_k_EGamepadTextInputModeSubmit}</td></tr></table>
      * @param eLineInputMode one of:<br><table><tr><td>{@link VR#EGamepadTextInputLineMode_k_EGamepadTextInputLineModeSingleLine}</td></tr><tr><td>{@link VR#EGamepadTextInputLineMode_k_EGamepadTextInputLineModeMultipleLines}</td></tr></table>
      */
     @NativeType("EVROverlayError")
-    public static int VROverlay_ShowKeyboard(@NativeType("EGamepadTextInputMode") int eInputMode, @NativeType("EGamepadTextInputLineMode") int eLineInputMode, @NativeType("char const *") ByteBuffer pchDescription, @NativeType("uint32_t") int unCharMax, @NativeType("char const *") ByteBuffer pchExistingText, @NativeType("bool") boolean bUseMinimalMode, @NativeType("uint64_t") long uUserValue) {
+    public static int VROverlay_ShowKeyboard(@NativeType("EGamepadTextInputMode") int eInputMode, @NativeType("EGamepadTextInputLineMode") int eLineInputMode, @NativeType("uint32_t") int unFlags, @NativeType("char const *") ByteBuffer pchDescription, @NativeType("uint32_t") int unCharMax, @NativeType("char const *") ByteBuffer pchExistingText, @NativeType("bool") boolean bUseMinimalMode, @NativeType("uint64_t") long uUserValue) {
         if (CHECKS) {
             checkNT1(pchDescription);
             checkNT1(pchExistingText);
         }
-        return nVROverlay_ShowKeyboard(eInputMode, eLineInputMode, memAddress(pchDescription), unCharMax, memAddress(pchExistingText), bUseMinimalMode, uUserValue);
+        return nVROverlay_ShowKeyboard(eInputMode, eLineInputMode, unFlags, memAddress(pchDescription), unCharMax, memAddress(pchExistingText), bUseMinimalMode, uUserValue);
     }
 
     /**
      * Show the virtual keyboard to accept input.
+     * 
+     * <p>In most cases, you should pass {@link VR#EKeyboardFlags_KeyboardFlag_Modal} to enable modal overlay behavior on the keyboard itself. See {@code EKeyboardFlags} for more.</p>
      *
      * @param eInputMode     one of:<br><table><tr><td>{@link VR#EGamepadTextInputMode_k_EGamepadTextInputModeNormal}</td></tr><tr><td>{@link VR#EGamepadTextInputMode_k_EGamepadTextInputModePassword}</td></tr><tr><td>{@link VR#EGamepadTextInputMode_k_EGamepadTextInputModeSubmit}</td></tr></table>
      * @param eLineInputMode one of:<br><table><tr><td>{@link VR#EGamepadTextInputLineMode_k_EGamepadTextInputLineModeSingleLine}</td></tr><tr><td>{@link VR#EGamepadTextInputLineMode_k_EGamepadTextInputLineModeMultipleLines}</td></tr></table>
      */
     @NativeType("EVROverlayError")
-    public static int VROverlay_ShowKeyboard(@NativeType("EGamepadTextInputMode") int eInputMode, @NativeType("EGamepadTextInputLineMode") int eLineInputMode, @NativeType("char const *") CharSequence pchDescription, @NativeType("uint32_t") int unCharMax, @NativeType("char const *") CharSequence pchExistingText, @NativeType("bool") boolean bUseMinimalMode, @NativeType("uint64_t") long uUserValue) {
+    public static int VROverlay_ShowKeyboard(@NativeType("EGamepadTextInputMode") int eInputMode, @NativeType("EGamepadTextInputLineMode") int eLineInputMode, @NativeType("uint32_t") int unFlags, @NativeType("char const *") CharSequence pchDescription, @NativeType("uint32_t") int unCharMax, @NativeType("char const *") CharSequence pchExistingText, @NativeType("bool") boolean bUseMinimalMode, @NativeType("uint64_t") long uUserValue) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCII(pchDescription, true);
             long pchDescriptionEncoded = stack.getPointerAddress();
             stack.nASCII(pchExistingText, true);
             long pchExistingTextEncoded = stack.getPointerAddress();
-            return nVROverlay_ShowKeyboard(eInputMode, eLineInputMode, pchDescriptionEncoded, unCharMax, pchExistingTextEncoded, bUseMinimalMode, uUserValue);
+            return nVROverlay_ShowKeyboard(eInputMode, eLineInputMode, unFlags, pchDescriptionEncoded, unCharMax, pchExistingTextEncoded, bUseMinimalMode, uUserValue);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1607,40 +1516,48 @@ public class VROverlay {
     // --- [ VROverlay_ShowKeyboardForOverlay ] ---
 
     /** Unsafe version of: {@link #VROverlay_ShowKeyboardForOverlay ShowKeyboardForOverlay} */
-    public static int nVROverlay_ShowKeyboardForOverlay(long ulOverlayHandle, int eInputMode, int eLineInputMode, long pchDescription, int unCharMax, long pchExistingText, boolean bUseMinimalMode, long uUserValue) {
+    public static int nVROverlay_ShowKeyboardForOverlay(long ulOverlayHandle, int eInputMode, int eLineInputMode, int unFlags, long pchDescription, int unCharMax, long pchExistingText, boolean bUseMinimalMode, long uUserValue) {
         long __functionAddress = OpenVR.VROverlay.ShowKeyboardForOverlay;
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPPJI(ulOverlayHandle, eInputMode, eLineInputMode, pchDescription, unCharMax, pchExistingText, bUseMinimalMode, uUserValue, __functionAddress);
+        return callJPPJI(ulOverlayHandle, eInputMode, eLineInputMode, unFlags, pchDescription, unCharMax, pchExistingText, bUseMinimalMode, uUserValue, __functionAddress);
     }
 
     /**
+     * Show the virtual keyboard to accept input for an overlay.
+     * 
+     * <p>In most cases, you should pass {@link VR#EKeyboardFlags_KeyboardFlag_Modal} to enable modal overlay behavior on the keyboard itself. See {@code EKeyboardFlags} for more.</p>
+     *
      * @param eInputMode     one of:<br><table><tr><td>{@link VR#EGamepadTextInputMode_k_EGamepadTextInputModeNormal}</td></tr><tr><td>{@link VR#EGamepadTextInputMode_k_EGamepadTextInputModePassword}</td></tr><tr><td>{@link VR#EGamepadTextInputMode_k_EGamepadTextInputModeSubmit}</td></tr></table>
      * @param eLineInputMode one of:<br><table><tr><td>{@link VR#EGamepadTextInputLineMode_k_EGamepadTextInputLineModeSingleLine}</td></tr><tr><td>{@link VR#EGamepadTextInputLineMode_k_EGamepadTextInputLineModeMultipleLines}</td></tr></table>
      */
     @NativeType("EVROverlayError")
-    public static int VROverlay_ShowKeyboardForOverlay(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("EGamepadTextInputMode") int eInputMode, @NativeType("EGamepadTextInputLineMode") int eLineInputMode, @NativeType("char const *") ByteBuffer pchDescription, @NativeType("uint32_t") int unCharMax, @NativeType("char const *") ByteBuffer pchExistingText, @NativeType("bool") boolean bUseMinimalMode, @NativeType("uint64_t") long uUserValue) {
+    public static int VROverlay_ShowKeyboardForOverlay(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("EGamepadTextInputMode") int eInputMode, @NativeType("EGamepadTextInputLineMode") int eLineInputMode, @NativeType("uint32_t") int unFlags, @NativeType("char const *") ByteBuffer pchDescription, @NativeType("uint32_t") int unCharMax, @NativeType("char const *") ByteBuffer pchExistingText, @NativeType("bool") boolean bUseMinimalMode, @NativeType("uint64_t") long uUserValue) {
         if (CHECKS) {
             checkNT1(pchDescription);
             checkNT1(pchExistingText);
         }
-        return nVROverlay_ShowKeyboardForOverlay(ulOverlayHandle, eInputMode, eLineInputMode, memAddress(pchDescription), unCharMax, memAddress(pchExistingText), bUseMinimalMode, uUserValue);
+        return nVROverlay_ShowKeyboardForOverlay(ulOverlayHandle, eInputMode, eLineInputMode, unFlags, memAddress(pchDescription), unCharMax, memAddress(pchExistingText), bUseMinimalMode, uUserValue);
     }
 
     /**
+     * Show the virtual keyboard to accept input for an overlay.
+     * 
+     * <p>In most cases, you should pass {@link VR#EKeyboardFlags_KeyboardFlag_Modal} to enable modal overlay behavior on the keyboard itself. See {@code EKeyboardFlags} for more.</p>
+     *
      * @param eInputMode     one of:<br><table><tr><td>{@link VR#EGamepadTextInputMode_k_EGamepadTextInputModeNormal}</td></tr><tr><td>{@link VR#EGamepadTextInputMode_k_EGamepadTextInputModePassword}</td></tr><tr><td>{@link VR#EGamepadTextInputMode_k_EGamepadTextInputModeSubmit}</td></tr></table>
      * @param eLineInputMode one of:<br><table><tr><td>{@link VR#EGamepadTextInputLineMode_k_EGamepadTextInputLineModeSingleLine}</td></tr><tr><td>{@link VR#EGamepadTextInputLineMode_k_EGamepadTextInputLineModeMultipleLines}</td></tr></table>
      */
     @NativeType("EVROverlayError")
-    public static int VROverlay_ShowKeyboardForOverlay(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("EGamepadTextInputMode") int eInputMode, @NativeType("EGamepadTextInputLineMode") int eLineInputMode, @NativeType("char const *") CharSequence pchDescription, @NativeType("uint32_t") int unCharMax, @NativeType("char const *") CharSequence pchExistingText, @NativeType("bool") boolean bUseMinimalMode, @NativeType("uint64_t") long uUserValue) {
+    public static int VROverlay_ShowKeyboardForOverlay(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("EGamepadTextInputMode") int eInputMode, @NativeType("EGamepadTextInputLineMode") int eLineInputMode, @NativeType("uint32_t") int unFlags, @NativeType("char const *") CharSequence pchDescription, @NativeType("uint32_t") int unCharMax, @NativeType("char const *") CharSequence pchExistingText, @NativeType("bool") boolean bUseMinimalMode, @NativeType("uint64_t") long uUserValue) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCII(pchDescription, true);
             long pchDescriptionEncoded = stack.getPointerAddress();
             stack.nASCII(pchExistingText, true);
             long pchExistingTextEncoded = stack.getPointerAddress();
-            return nVROverlay_ShowKeyboardForOverlay(ulOverlayHandle, eInputMode, eLineInputMode, pchDescriptionEncoded, unCharMax, pchExistingTextEncoded, bUseMinimalMode, uUserValue);
+            return nVROverlay_ShowKeyboardForOverlay(ulOverlayHandle, eInputMode, eLineInputMode, unFlags, pchDescriptionEncoded, unCharMax, pchExistingTextEncoded, bUseMinimalMode, uUserValue);
         } finally {
             stack.setPointer(stackPointer);
         }

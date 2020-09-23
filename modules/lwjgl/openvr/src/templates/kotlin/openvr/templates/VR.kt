@@ -19,8 +19,8 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "OpenVR version.",
 
         "k_nSteamVRVersionMajor".."1",
-	    "k_nSteamVRVersionMinor".."9",
-	    "k_nSteamVRVersionBuild".."16"
+	    "k_nSteamVRVersionMinor".."14",
+	    "k_nSteamVRVersionBuild".."15"
     )
 
     IntConstant(
@@ -39,6 +39,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "k_unBoolPropertyTag".."4",
         "k_unStringPropertyTag".."5",
         "k_unErrorPropertyTag".."6",
+        "k_unDoublePropertyTag".."7",
         "k_unHmdMatrix34PropertyTag".."20",
         "k_unHmdMatrix44PropertyTag".."21",
         "k_unHmdVector3PropertyTag".."22",
@@ -59,11 +60,14 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "k_unOpenVRInternalReserved_End".."10000",
         "k_unScreenshotHandleInvalid".."0",
         "k_unNotificationTextMaxSize".."256",
-        "k_unMaxActionNameLength".."64",
-        "k_unMaxActionSetNameLength".."64",
-        "k_unMaxActionOriginCount".."16",
-        "k_unMaxBoneNameLength".."32"
+        "k_unHeadsetViewMaxWidth".."3840",
+        "k_unHeadsetViewMaxHeight".."2160"
     )
+
+    IntConstant("Maximum number of characters in an action name, including the trailing null.", "k_unMaxActionNameLength".."64")
+    IntConstant("Maximum number of characters in an action set name, including the trailing null.", "k_unMaxActionSetNameLength".."64")
+    IntConstant("Maximum number of origins for an action.", "k_unMaxActionOriginCount".."16")
+    IntConstant("Maximum number of characters in a bone name, including the trailing null.", "k_unMaxBoneNameLength".."32")
 
     LongConstant(
         "OpenVR constants.",
@@ -75,7 +79,8 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "k_ulInvalidActionSetHandle".."0L",
         "k_ulInvalidInputValueHandle".."0L",
         "k_ulInvalidIOBufferHandle".."0L",
-        "k_ulInvalidSpatialAnchorHandle".."0L"
+        "k_ulInvalidSpatialAnchorHandle".."0L"/*,
+        "k_ulInvalidPathHandle".."0L"*/
     )
 
     IntConstant("No string property will ever be longer than this length.", "k_unMaxPropertyStringSize".."32768")
@@ -91,16 +96,19 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
     StringConstant(
         "OpenVR constants.",
 
-        "IVRSystem_Version".."IVRSystem_021",
+        "IVRSystem_Version".."IVRSystem_022",
         "IVRExtendedDisplay_Version".."IVRExtendedDisplay_001",
         "IVRTrackedCamera_Version".."IVRTrackedCamera_006",
         "k_pch_MimeType_HomeApp".."vr/home",
         "k_pch_MimeType_GameTheater".."vr/game_theater",
         "IVRApplications_Version".."IVRApplications_007",
-        "IVRChaperone_Version".."IVRChaperone_003",
+        "IVRChaperone_Version".."IVRChaperone_004",
         "IVRChaperoneSetup_Version".."IVRChaperoneSetup_006",
-        "IVRCompositor_Version".."IVRCompositor_024",
-        "IVROverlay_Version".."IVROverlay_022",
+        "IVRCompositor_Version".."IVRCompositor_026",
+        "IVROverlay_Version".."IVROverlay_024",
+        "IVROverlayView_Version".."IVROverlayView_003",
+        "k_pchHeadsetViewOverlayKey".."system.HeadsetView",
+        "IVRHeadsetView_Version".."IVRHeadsetView_001",
         "k_pch_Controller_Component_GDC2015".."gdc2015",
         "k_pch_Controller_Component_Base".."base",
         "k_pch_Controller_Component_Tip".."tip",
@@ -176,6 +184,10 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "k_pch_SteamVR_CustomIconStyle_String".."customIconStyle",
         "k_pch_SteamVR_CustomOffIconStyle_String".."customOffIconStyle",
         "k_pch_SteamVR_CustomIconForceUpdate_String".."customIconForceUpdate",
+        "k_pch_SteamVR_AllowGlobalActionSetPriority".."globalActionSetPriority",
+        "k_pch_SteamVR_OverlayRenderQuality".."overlayRenderQuality_2",
+        "k_pch_SteamVR_BlockOculusSDKOnOpenVRLaunchOption_Bool".."blockOculusSDKOnOpenVRLaunchOption",
+        "k_pch_SteamVR_BlockOculusSDKOnAllLaunches_Bool".."blockOculusSDKOnAllLaunches",
         "k_pch_DirectMode_Section".."direct_mode",
         "k_pch_DirectMode_Enable_Bool".."enable",
         "k_pch_DirectMode_Count_Int32".."count",
@@ -204,6 +216,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "k_pch_Null_RenderHeight_Int32".."renderHeight",
         "k_pch_Null_SecondsFromVsyncToPhotons_Float".."secondsFromVsyncToPhotons",
         "k_pch_Null_DisplayFrequency_Float".."displayFrequency",
+        "k_pch_WindowsMR_Section".."driver_holographic",
         "k_pch_UserInterface_Section".."userinterface",
         "k_pch_UserInterface_StatusAlwaysOnTop_Bool".."StatusAlwaysOnTop",
         "k_pch_UserInterface_MinimizeToTray_Bool".."MinimizeToTray",
@@ -232,6 +245,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "k_pch_CollisionBounds_CenterMarkerOn_Bool".."CollisionBoundsCenterMarkerOn",
         "k_pch_CollisionBounds_PlaySpaceOn_Bool".."CollisionBoundsPlaySpaceOn",
         "k_pch_CollisionBounds_FadeDistance_Float".."CollisionBoundsFadeDistance",
+        "k_pch_CollisionBounds_WallHeight_Float".."CollisionBoundsWallHeight",
         "k_pch_CollisionBounds_ColorGammaR_Int32".."CollisionBoundsColorGammaR",
         "k_pch_CollisionBounds_ColorGammaG_Int32".."CollisionBoundsColorGammaG",
         "k_pch_CollisionBounds_ColorGammaB_Int32".."CollisionBoundsColorGammaB",
@@ -239,15 +253,15 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "k_pch_CollisionBounds_EnableDriverImport".."enableDriverBoundsImport",
         "k_pch_Camera_Section".."camera",
         "k_pch_Camera_EnableCamera_Bool".."enableCamera",
-        "k_pch_Camera_EnableCameraInDashboard_Bool".."enableCameraInDashboard",
+        "k_pch_Camera_ShowOnController_Bool".."showOnController",
         "k_pch_Camera_EnableCameraForCollisionBounds_Bool".."enableCameraForCollisionBounds",
-        "k_pch_Camera_EnableCameraForRoomView_Bool".."enableCameraForRoomView",
+        "k_pch_Camera_RoomView_Int32".."roomView",
         "k_pch_Camera_BoundsColorGammaR_Int32".."cameraBoundsColorGammaR",
         "k_pch_Camera_BoundsColorGammaG_Int32".."cameraBoundsColorGammaG",
         "k_pch_Camera_BoundsColorGammaB_Int32".."cameraBoundsColorGammaB",
         "k_pch_Camera_BoundsColorGammaA_Int32".."cameraBoundsColorGammaA",
         "k_pch_Camera_BoundsStrength_Int32".."cameraBoundsStrength",
-        "k_pch_Camera_RoomViewMode_Int32".."cameraRoomViewMode",
+        "k_pch_Camera_RoomViewStyle_Int32".."roomViewStyle",
         "k_pch_audio_Section".."audio",
         "k_pch_audio_SetOsDefaultPlaybackDevice_Bool".."setOsDefaultPlaybackDevice",
         "k_pch_audio_EnablePlaybackDeviceOverride_Bool".."enablePlaybackDeviceOverride",
@@ -261,8 +275,11 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "k_pch_audio_PlaybackMirrorDevice_String".."playbackMirrorDevice",
         "k_pch_audio_PlaybackMirrorDeviceName_String".."playbackMirrorDeviceName",
         "k_pch_audio_OldPlaybackMirrorDevice_String".."onPlaybackMirrorDevice",
+        "k_pch_audio_ActiveMirrorDevice_String".."activePlaybackMirrorDevice",
+        "k_pch_audio_EnablePlaybackMirrorIndependentVolume_Bool".."enablePlaybackMirrorIndependentVolume",
         "k_pch_audio_LastHmdPlaybackDeviceId_String".."lastHmdPlaybackDeviceId",
         "k_pch_audio_VIVEHDMIGain".."viveHDMIGain",
+        "k_pch_audio_DualSpeakerAndJackOutput_Bool".."dualSpeakerAndJackOutput",
         "k_pch_Power_Section".."power",
         "k_pch_Power_PowerOffOnExit_Bool".."powerOffOnExit",
         "k_pch_Power_TurnOffScreensTimeout_Float".."turnOffScreensTimeout",
@@ -273,13 +290,12 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "k_pch_Dashboard_Section".."dashboard",
         "k_pch_Dashboard_EnableDashboard_Bool".."enableDashboard",
         "k_pch_Dashboard_ArcadeMode_Bool".."arcadeMode",
-        "k_pch_Dashboard_UseWebKeyboard".."useWebKeyboard",
-        "k_pch_Dashboard_UseWebSettings".."useWebSettings",
         "k_pch_Dashboard_Position".."position",
         "k_pch_Dashboard_DesktopScale".."desktopScale",
         "k_pch_Dashboard_DashboardScale".."dashboardScale",
         "k_pch_modelskin_Section".."modelskins",
         "k_pch_Driver_Enable_Bool".."enable",
+        "k_pch_Driver_BlockedBySafemode_Bool".."blocked_by_safe_mode",
         "k_pch_Driver_LoadPriority_Int32".."loadPriority",
         "k_pch_WebInterface_Section".."WebInterface",
         "k_pch_VRWebHelper_Section".."VRWebHelper",
@@ -287,9 +303,13 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "k_pch_VRWebHelper_DebuggerPort_Int32".."DebuggerPort",
         "k_pch_TrackingOverride_Section".."TrackingOverrides",
         "k_pch_App_BindingAutosaveURLSuffix_String".."AutosaveURL",
+        "k_pch_App_BindingLegacyAPISuffix_String".."_legacy",
+        "k_pch_App_BindingSteamVRInputAPISuffix_String".."_steamvrinput",
         "k_pch_App_BindingCurrentURLSuffix_String".."CurrentURL",
         "k_pch_App_BindingPreviousURLSuffix_String".."PreviousURL",
         "k_pch_App_NeedToUpdateAutosaveSuffix_Bool".."NeedToUpdateAutosave",
+        "k_pch_App_DominantHand_Int32".."DominantHand",
+        "k_pch_App_BlockOculusSDK_Bool".."blockOculusSDK",
         "k_pch_Trackers_Section".."trackers",
         "k_pch_DesktopUI_Section".."DesktopUI",
         "k_pch_LastKnown_Section".."LastKnown",
@@ -304,11 +324,58 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "IVRScreenshots_Version".."IVRScreenshots_001",
         "IVRResources_Version".."IVRResources_001",
         "IVRDriverManager_Version".."IVRDriverManager_001",
-        "IVRInput_Version".."IVRInput_007",
+        "IVRInput_Version".."IVRInput_010",
         "IVRIOBuffer_Version".."IVRIOBuffer_002",
         "IVRSpatialAnchors_Version".."IVRSpatialAnchors_001",
-        "IVRDebug_Version".."IVRDebug_001"
+        "IVRDebug_Version".."IVRDebug_001"/*,
+        "IVRProperties_Version".."IVRProperties_001",
+        "k_pchPathUserHandRight".."/user/hand/right",
+        "k_pchPathUserHandLeft".."/user/hand/left",
+        "k_pchPathUserHandPrimary".."/user/hand/primary",
+        "k_pchPathUserHandSecondary".."/user/hand/secondary",
+        "k_pchPathUserHead".."/user/head",
+        "k_pchPathUserGamepad".."/user/gamepad",
+        "k_pchPathUserTreadmill".."/user/treadmill",
+        "k_pchPathUserStylus".."/user/stylus",
+        "k_pchPathDevices".."/devices",
+        "k_pchPathDevicePath".."/device_path",
+        "k_pchPathBestAliasPath".."/best_alias_path",
+        "k_pchPathBoundTrackerAliasPath".."/bound_tracker_path",
+        "k_pchPathBoundTrackerRole".."/bound_tracker_role",
+        "k_pchPathPoseRaw".."/pose/raw",
+        "k_pchPathPoseTip".."/pose/tip",
+        "k_pchPathPoseGrip".."/pose/grip",
+        "k_pchPathSystemButtonClick".."/input/system/click",
+        "k_pchPathProximity".."/proximity",
+        "k_pchPathControllerTypePrefix".."/controller_type/",
+        "k_pchPathInputProfileSuffix".."/input_profile",
+        "k_pchPathBindingNameSuffix".."/binding_name",
+        "k_pchPathBindingUrlSuffix".."/binding_url",
+        "k_pchPathBindingErrorSuffix".."/binding_error",
+        "k_pchPathActiveActionSets".."/active_action_sets",
+        "k_pchPathComponentUpdates".."/total_component_updates",
+        "k_pchPathUserFootLeft".."/user/foot/left",
+        "k_pchPathUserFootRight".."/user/foot/right",
+        "k_pchPathUserShoulderLeft".."/user/shoulder/left",
+        "k_pchPathUserShoulderRight".."/user/shoulder/right",
+        "k_pchPathUserElbowLeft".."/user/elbow/left",
+        "k_pchPathUserElbowRight".."/user/elbow/right",
+        "k_pchPathUserKneeLeft".."/user/knee/left",
+        "k_pchPathUserKneeRight".."/user/knee/right",
+        "k_pchPathUserWaist".."/user/waist",
+        "k_pchPathUserChest".."/user/chest",
+        "k_pchPathUserCamera".."/user/camera",
+        "k_pchPathUserKeyboard".."/user/keyboard",
+        "k_pchPathClientAppKey".."/client_info/app_key",
+        "IVRPaths_Version".."IVRPaths_001",
+        "IVRBlockQueue_Version".."IVRBlockQueue_004"*/
     )
+
+    /*LongConstant(
+        "",
+
+        "k_ulDisplayRedirectContainer".."25769803779L"
+    )*/
 
     // OpenVR Enums
 
@@ -387,7 +454,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "ETrackedControllerRole_TrackedControllerRole_LeftHand".enum("Tracked device associated with the left hand."),
         "ETrackedControllerRole_TrackedControllerRole_RightHand".enum("Tracked device associated with the right hand."),
         "ETrackedControllerRole_TrackedControllerRole_OptOut".enum("Tracked device is opting out of left/right hand selection."),
-        "ETrackedControllerRole_TrackedControllerRole_Treadmill".enum("Tracked device is a treadmill."),
+        "ETrackedControllerRole_TrackedControllerRole_Treadmill".enum("Tracked device is a treadmill or other locomotion device."),
         "ETrackedControllerRole_TrackedControllerRole_Stylus".enum("Tracked device is a stylus."),
         "ETrackedControllerRole_TrackedControllerRole_Max".enum
     )
@@ -558,6 +625,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "ETrackedDeviceProperty_Prop_DriverProvidedChaperoneVisibility_Bool".enum,
         "ETrackedDeviceProperty_Prop_HmdColumnCorrectionSettingPrefix_String".enum,
         "ETrackedDeviceProperty_Prop_CameraSupportsCompatibilityModes_Bool".enum,
+        "ETrackedDeviceProperty_Prop_SupportsRoomViewDepthProjection_Bool".enum,
         "ETrackedDeviceProperty_Prop_DisplayAvailableFrameRates_Float_Array".enum(
             "populated by compositor from actual EDID list when available from GPU driver",
             2080
@@ -571,9 +639,8 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "ETrackedDeviceProperty_Prop_DisplaySupportsAnalogGain_Bool".enum,
         "ETrackedDeviceProperty_Prop_DisplayMinAnalogGain_Float".enum,
         "ETrackedDeviceProperty_Prop_DisplayMaxAnalogGain_Float".enum,
-        "ETrackedDeviceProperty_Prop_DashboardLayoutPathName_String".enum("", 2090),
-        "ETrackedDeviceProperty_Prop_DashboardScale_Float".enum,
-        "ETrackedDeviceProperty_Prop_IpdUIRangeMinMeters_Float".enum("", 2100),
+        "ETrackedDeviceProperty_Prop_DashboardScale_Float".enum("", "2091"),
+        "ETrackedDeviceProperty_Prop_IpdUIRangeMinMeters_Float".enum("", "2100"),
         "ETrackedDeviceProperty_Prop_IpdUIRangeMaxMeters_Float".enum,
         "ETrackedDeviceProperty_Prop_DriverRequestedMuraCorrectionMode_Int32".enum("", "2200"),
 	    "ETrackedDeviceProperty_Prop_DriverRequestedMuraFeather_InnerLeft_Int32".enum,
@@ -587,6 +654,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "ETrackedDeviceProperty_Prop_Audio_DefaultPlaybackDeviceId_String".enum("", "2300"),
         "ETrackedDeviceProperty_Prop_Audio_DefaultRecordingDeviceId_String".enum,
         "ETrackedDeviceProperty_Prop_Audio_DefaultPlaybackDeviceVolume_Float".enum,
+        "ETrackedDeviceProperty_Prop_Audio_SupportsDualSpeakerAndJackOutput_Bool".enum,
         "ETrackedDeviceProperty_Prop_AttachedDeviceId_String".enum("", "3000"),
         "ETrackedDeviceProperty_Prop_SupportedButtons_Uint64".enum,
         "ETrackedDeviceProperty_Prop_Axis0Type_Int32".enum,
@@ -695,6 +763,18 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
             This flag can be combined with #EVRSubmit_TextureWithPose to pass a ##VRTextureWithPoseAndDepth.
             """,
             "16"
+        ),
+        "EVRSubmitFlags_Submit_FrameDiscontinuty".enum(
+            """
+            Set to indicate a discontinuity between this and the last frame.
+
+            This will prevent motion smoothing from attempting to extrapolate using the pair.
+            """,
+            "32"
+        ),
+        "EVRSubmitFlags_VulkanTextureWithArrayData".enum(
+            "Set to indicate that {@code pTexture->handle} is a contains {@code VRVulkanTextureArrayData_t}.",
+            "64"
         )
     )
 
@@ -734,14 +814,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EVREventType_VREvent_ButtonUnpress".enum("data is controller"),
         "EVREventType_VREvent_ButtonTouch".enum("data is controller"),
         "EVREventType_VREvent_ButtonUntouch".enum("data is controller"),
-        "EVREventType_VREvent_DualAnalog_Press".enum("data is dualAnalog", "250"),
-        "EVREventType_VREvent_DualAnalog_Unpress".enum("data is dualAnalog"),
-        "EVREventType_VREvent_DualAnalog_Touch".enum("data is dualAnalog"),
-        "EVREventType_VREvent_DualAnalog_Untouch".enum("data is dualAnalog"),
-        "EVREventType_VREvent_DualAnalog_Move".enum("data is dualAnalog"),
-        "EVREventType_VREvent_DualAnalog_ModeSwitch1".enum("data is dualAnalog"),
-        "EVREventType_VREvent_DualAnalog_ModeSwitch2".enum("data is dualAnalog"),
-        "EVREventType_VREvent_DualAnalog_Cancel".enum("data is dualAnalog"),
+        "EVREventType_VREvent_Modal_Cancel".enum("data is dualAnalog", "257"),
         "EVREventType_VREvent_MouseMove".enum("data is mouse", "300"),
         "EVREventType_VREvent_MouseButtonDown".enum("data is mouse"),
         "EVREventType_VREvent_MouseButtonUp".enum("data is mouse"),
@@ -752,6 +825,8 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EVREventType_VREvent_OverlayFocusChanged".enum("data is overlay, global event"),
         "EVREventType_VREvent_ReloadOverlays".enum,
         "EVREventType_VREvent_ScrollSmooth".enum("data is scroll"),
+        "EVREventType_VREvent_LockMousePosition".enum,
+        "EVREventType_VREvent_UnlockMousePosition".enum,
         "EVREventType_VREvent_InputFocusCaptured".enum("data is process DEPRECATED", "400"),
         "EVREventType_VREvent_InputFocusReleased".enum("data is process DEPRECATED"),
         "EVREventType_VREvent_SceneApplicationChanged".enum("data is process - The App actually drawing the scene changed (usually to or from the compositor)", "404"),
@@ -770,8 +845,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EVREventType_VREvent_DashboardDeactivated".enum,
         "EVREventType_VREvent_DashboardRequested".enum("Sent to the overlay manager - data is overlay"),
         "EVREventType_VREvent_ResetDashboard".enum("Sent to the overlay manager"),
-        "EVREventType_VREvent_RenderToast".enum("Sent to the dashboard to render a toast - data is the notification ID"),
-        "EVREventType_VREvent_ImageLoaded".enum("Sent to overlays when a SetOverlayRaw or SetOverlayFromFile call finishes loading"),
+        "EVREventType_VREvent_ImageLoaded".enum("Sent to overlays when a SetOverlayRaw or SetOverlayFromFile call finishes loading", "508"),
         "EVREventType_VREvent_ShowKeyboard".enum("Sent to keyboard renderer in the dashboard to invoke it"),
         "EVREventType_VREvent_HideKeyboard".enum("Sent to keyboard renderer in the dashboard to hide it"),
         "EVREventType_VREvent_OverlayGamepadFocusGained".enum("Sent to an overlay when IVROverlay::SetFocusOverlay is called on it"),
@@ -793,6 +867,8 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EVREventType_VREvent_RoomViewHidden".enum("Sent by compositor whenever room-view is disabled"),
         "EVREventType_VREvent_ShowUI".enum("data is showUi"),
         "EVREventType_VREvent_ShowDevTools".enum("data is showDevTools"),
+        "EVREventType_VREvent_DesktopViewUpdating".enum,
+        "EVREventType_VREvent_DesktopViewReady".enum,
         "EVREventType_VREvent_Notification_Shown".enum("", "600"),
         "EVREventType_VREvent_Notification_Hidden".enum,
         "EVREventType_VREvent_Notification_BeginInteraction".enum,
@@ -810,6 +886,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EVREventType_VREvent_ChaperoneFlushCache".enum("Sent when the process needs to reload any cached data it retrieved from {@code VRChaperone()}"),
         "EVREventType_VREvent_ChaperoneRoomSetupStarting".enum("Triggered by {@code CVRChaperoneClient::RoomSetupStarting}"),
         "EVREventType_VREvent_ChaperoneRoomSetupFinished".enum("Triggered by {@code CVRChaperoneClient::CommitWorkingCopy}"),
+        "EVREventType_VREvent_StandingZeroPoseReset".enum,
         "EVREventType_VREvent_AudioSettingsHaveChanged".enum("", "820"),
         "EVREventType_VREvent_BackgroundSettingHasChanged".enum("", "850"),
         "EVREventType_VREvent_CameraSettingsHaveChanged".enum,
@@ -831,6 +908,8 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EVREventType_VREvent_LastKnownSectionSettingChanged".enum,
         "EVREventType_VREvent_DismissedWarningsSectionSettingChanged".enum,
         "EVREventType_VREvent_GpuSpeedSectionSettingChanged".enum,
+        "EVREventType_VREvent_WindowsMRSectionSettingChanged".enum,
+        "EVREventType_VREvent_OtherSectionSettingChanged".enum,
         "EVREventType_VREvent_StatusUpdate".enum("", "900"),
         "EVREventType_VREvent_WebInterface_InstallDriverCompleted".enum("", "950"),
         "EVREventType_VREvent_MCImageUpdated".enum("", "1000"),
@@ -929,13 +1008,6 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
     )
 
     EnumConstant(
-        "{@code EDualAnalogWhich}",
-
-        "EDualAnalogWhich_k_EDualAnalog_Left".enum("", "0"),
-        "EDualAnalogWhich_k_EDualAnalog_Right".enum
-    )
-
-    EnumConstant(
         "{@code EShowUIType}",
 
         "EShowUIType_ShowUI_ControllerBinding".enum("", "0"),
@@ -943,7 +1015,18 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EShowUIType_ShowUI_Pairing".enum("", "3"),
         "EShowUIType_ShowUI_Settings".enum,
         "EShowUIType_ShowUI_DebugCommands".enum,
-        "EShowUIType_ShowUI_FullControllerBinding".enum
+        "EShowUIType_ShowUI_FullControllerBinding".enum,
+        "EShowUIType_ShowUI_ManageDrivers".enum
+    )
+
+    EnumConstant(
+        "{@code EVRComponentProperty}",
+
+        "EVRComponentProperty_VRComponentProperty_IsStatic".enum("", "1"),
+        "EVRComponentProperty_VRComponentProperty_IsVisible".enum("", "2"),
+        "EVRComponentProperty_VRComponentProperty_IsTouched".enum("", "4"),
+        "EVRComponentProperty_VRComponentProperty_IsPressed".enum("", "8"),
+        "EVRComponentProperty_VRComponentProperty_IsScrolled".enum("", "16")
     )
 
     EnumConstant(
@@ -976,9 +1059,12 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EVRInputError_VRInputError_BufferTooSmall".enum,
         "EVRInputError_VRInputError_MismatchedActionManifest".enum,
         "EVRInputError_VRInputError_MissingSkeletonData".enum,
-        "EVRInputError_VRInputError_InvalidBoneIndex".enum
+        "EVRInputError_VRInputError_InvalidBoneIndex".enum,
+        "EVRInputError_VRInputError_InvalidPriority".enum,
+        "EVRInputError_VRInputError_PermissionDenied".enum,
+        "EVRInputError_VRInputError_InvalidRenderModel".enum
     )
-    
+
     EnumConstant(
         "{@code EVRSpatialAnchorError}",
 
@@ -1085,7 +1171,8 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EVRApplicationType_VRApplication_SteamWatchdog".enum("Reserved for Steam."),
         "EVRApplicationType_VRApplication_Bootstrapper".enum("Reserved for vrstartup."),
         "EVRApplicationType_VRApplication_WebHelper".enum("Reserved for vrwebhelper."),
-        "EVRApplicationType_VRApplication_Max".enum("")
+        "EVRApplicationType_VRApplication_OpenXR".enum("Reserved for openxr."),
+        "EVRApplicationType_VRApplication_Max".enum
     )
 
     EnumConstant(
@@ -1152,7 +1239,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
             """
         ),
         "EVRSkeletalTrackingLevel_VRSkeletalTrackingLevel_Count".enum,
-        "EVRSkeletalTrackingLevel_VRSkeletalTrackingLevel_Max".enum("", "2")
+        "EVRSkeletalTrackingLevel_VRSkeletalTrackingLevel_Max".enum("", "EVRSkeletalTrackingLevel_VRSkeletalTrackingLevel_Count - 1")
     )
 
     EnumConstant(
@@ -1311,7 +1398,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EVRInitError_VRInitError_Compositor_CreateFallbackSyncTexture".enum,
         "EVRInitError_VRInitError_Compositor_ShareFallbackSyncTexture".enum,
         "EVRInitError_VRInitError_Compositor_CreateOverlayIndexBuffer".enum,
-        "EVRInitError_VRInitError_Compositor_CreateOverlayVertextBuffer".enum,
+        "EVRInitError_VRInitError_Compositor_CreateOverlayVertexBuffer".enum,
         "EVRInitError_VRInitError_Compositor_CreateTextVertexBuffer".enum,
         "EVRInitError_VRInitError_Compositor_CreateTextIndexBuffer".enum,
         "EVRInitError_VRInitError_Compositor_CreateMirrorTextures".enum,
@@ -1319,6 +1406,9 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EVRInitError_VRInitError_Compositor_CreateMirrorOverlay".enum,
         "EVRInitError_VRInitError_Compositor_FailedToCreateVirtualDisplayBackbuffer".enum,
         "EVRInitError_VRInitError_Compositor_DisplayModeNotSupported".enum,
+        "EVRInitError_VRInitError_Compositor_CreateOverlayInvalidCall".enum,
+        "EVRInitError_VRInitError_Compositor_CreateOverlayAlreadyInitialized".enum,
+        "EVRInitError_VRInitError_Compositor_FailedToCreateMailbox".enum,
         "EVRInitError_VRInitError_VendorSpecific_UnableToConnectToOculusRuntime".enum("", "1000"),
         "EVRInitError_VRInitError_VendorSpecific_WindowsNotInDevMode".enum,
         "EVRInitError_VRInitError_VendorSpecific_HmdFound_CantOpenDevice".enum("", "1101"),
@@ -1410,6 +1500,17 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EVRDistortionFunctionType_VRDistortionFunctionType_FTheta".enum,
         "EVRDistortionFunctionType_VRDistortionFunctionType_Extended_FTheta".enum,
         "EVRDistortionFunctionType_MAX_DISTORTION_FUNCTION_TYPES".enum
+    )
+
+    EnumConstant(
+        """
+        These flags will be set on ##DriverDirectModeFrameTiming{@code ::m_nReprojectionFlags} when #GetFrameTiming() is called for drivers to optionally
+        respond to.
+        """,
+
+        "VRCompositor_ReprojectionMotion_Enabled".enum("Motion Smoothing is enabled in the UI for the currently running application.", "0x100"),
+        "VRCompositor_ReprojectionMotion_ForcedOn".enum("Motion Smoothing is forced on in the UI for the currently running application.", "0x200"),
+        "VRCompositor_ReprojectionMotion_AppThrottled".enum("Application is requesting throttling via {@code ForceInterleavedReprojectionOn}.", "0x400")
     )
 
     EnumConstant(
@@ -1557,8 +1658,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "{@code VROverlayInputMethod}: Types of input supported by VR Overlays.",
 
         "VROverlayInputMethod_None".enum("No input events will be generated automatically for this overlay.", "0"),
-        "VROverlayInputMethod_Mouse".enum("Tracked controllers will get mouse events automatically."),
-        "VROverlayInputMethod_DualAnalog".enum("Analog inputs from tracked controllers are turned into DualAnalog events.")
+        "VROverlayInputMethod_Mouse".enum("Tracked controllers will get mouse events automatically.")
     )
 
     EnumConstant(
@@ -1571,7 +1671,8 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "VROverlayTransformType_VROverlayTransform_TrackedComponent".enum,
         "VROverlayTransformType_VROverlayTransform_Cursor".enum,
         "VROverlayTransformType_VROverlayTransform_DashboardTab".enum,
-        "VROverlayTransformType_VROverlayTransform_DashboardThumb".enum
+        "VROverlayTransformType_VROverlayTransform_DashboardThumb".enum,
+        "VROverlayTransformType_VROverlayTransform_Mountable".enum
     )
 
     EnumConstant(
@@ -1618,6 +1719,18 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "VROverlayFlags_HideLaserIntersection".enum(
             "If this is set, the laser mouse splat will not be drawn over this overlay. The overlay will be responsible for drawing its own \"cursor\".",
             "1 << 19"
+        ),
+        "VROverlayFlags_WantsModalBehavior".enum(
+            """
+            If this is set, clicking away from the overlay will cause it to receive a #EVREventType_VREvent_Modal_Cancel event.
+
+            This is ignored for dashboard overlays.
+            """,
+            "1 << 20"
+        ),
+        "VROverlayFlags_IsPremultiplied".enum(
+            "If this is set, alpha composition assumes the texture is pre-multiplied",
+            "1 << 21"
         )
     )
 
@@ -1656,6 +1769,29 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
     )
 
     EnumConstant(
+        "{@code EKeyboardFlags}",
+
+        "EKeyboardFlags_KeyboardFlag_Minimal".enum("Makes the keyboard send key events immediately instead of accumulating a buffer.", "1 << 0"),
+        "EKeyboardFlags_KeyboardFlag_Modal".enum("Makes the keyboard take all focus and dismiss when clicking off the panel.", "2 << 0")
+    )
+
+    EnumConstant(
+        "{@code EDeviceType}",
+
+        "EDeviceType_DeviceType_Invalid".enum("", "-1"),
+        "EDeviceType_DeviceType_DirectX11".enum,
+        "EDeviceType_DeviceType_Vulkan".enum
+    )
+
+    EnumConstant(
+        "{@code HeadsetViewMode_t}",
+
+        "HeadsetViewMode_t_HeadsetViewMode_Left".enum("", "0"),
+        "HeadsetViewMode_t_HeadsetViewMode_Right".enum,
+        "HeadsetViewMode_t_HeadsetViewMode_Both".enum
+    )
+
+    EnumConstant(
         "{@code EVRRenderModelError}: Errors that can occur with the VR compositor.",
 
         "EVRRenderModelError_VRRenderModelError_None".enum("", "0"),
@@ -1674,13 +1810,13 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
     )
 
     EnumConstant(
-        "{@code EVRComponentProperty}",
+        "{@code EVRRenderModelTextureFormat}",
 
-        "EVRComponentProperty_VRComponentProperty_IsStatic".enum("", "1"),
-        "EVRComponentProperty_VRComponentProperty_IsVisible".enum("", "2"),
-        "EVRComponentProperty_VRComponentProperty_IsTouched".enum("", "4"),
-        "EVRComponentProperty_VRComponentProperty_IsPressed".enum("", "8"),
-        "EVRComponentProperty_VRComponentProperty_IsScrolled".enum("", "16")
+        "EVRRenderModelTextureFormat_VRRenderModelTextureFormat_RGBA8_SRGB".enum("RGBA with 8 bits per channel per pixel. Data size is {@code width * height * 4ub}", "0"),
+        "EVRRenderModelTextureFormat_VRRenderModelTextureFormat_BC2".enum,
+        "EVRRenderModelTextureFormat_VRRenderModelTextureFormat_BC4".enum,
+        "EVRRenderModelTextureFormat_VRRenderModelTextureFormat_BC7".enum,
+        "EVRRenderModelTextureFormat_VRRenderModelTextureFormat_BC7_SRGB".enum
     )
 
     EnumConstant(
@@ -1821,6 +1957,22 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EVRInputStringBits_VRInputString_All".enum("", "-1")
     )
 
+    IntConstant(
+        """
+        Experimental global action set priority
+
+        These constants are part of the experimental support in SteamVR for overlay apps selectively overriding input in the base scene application. This may
+        be useful for overlay applications that need to use part or all of a controller without taking away all input to the game. This system must be enabled
+        by the "Experimental overlay input overrides" setting in the developer section of SteamVR settings.
+	
+	    To use this system, set the nPriority field of an action set to any number in this range.
+        """,
+
+        "k_nActionSetOverlayGlobalPriorityMin"..0x01000000,
+        "k_nActionSetOverlayGlobalPriorityMax"..0x01FFFFFF,
+        "k_nActionSetPriorityReservedMin"..0x02000000
+    )
+
     EnumConstant(
         "{@code EIOBufferError}",
 
@@ -1847,6 +1999,40 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EVRDebugError_VRDebugError_Success".enum("", "1"),
         "EVRDebugError_VRDebugError_BadParameter".enum
     )
+
+    /*
+    EnumConstant(
+        "{@code EPropertyWriteType}",
+
+        "EPropertyWriteType_PropertyWrite_Set".enum("", "0"),
+        "EPropertyWriteType_PropertyWrite_Erase".enum,
+        "EPropertyWriteType_PropertyWrite_SetError".enum
+    )
+
+    EnumConstant(
+        "{@code EBlockQueueError}",
+
+        "EBlockQueueError_BlockQueueError_None".enum("", "0"),
+        "EBlockQueueError_BlockQueueError_QueueAlreadyExists".enum,
+        "EBlockQueueError_BlockQueueError_QueueNotFound".enum,
+        "EBlockQueueError_BlockQueueError_BlockNotAvailable".enum,
+        "EBlockQueueError_BlockQueueError_InvalidHandle".enum,
+        "EBlockQueueError_BlockQueueError_InvalidParam".enum,
+        "EBlockQueueError_BlockQueueError_ParamMismatch".enum,
+        "EBlockQueueError_BlockQueueError_InternalError".enum,
+        "EBlockQueueError_BlockQueueError_AlreadyInitialized".enum,
+        "EBlockQueueError_BlockQueueError_OperationIsServerOnly".enum,
+        "EBlockQueueError_BlockQueueError_TooManyConnections".enum
+    )
+
+    EnumConstant(
+        "{@code EBlockQueueReadType}",
+
+        "EBlockQueueReadType_BlockQueueRead_Latest".enum("", "0"),
+        "EBlockQueueReadType_BlockQueueRead_New".enum,
+        "EBlockQueueReadType_BlockQueueRead_Next".enum
+    )
+    */
 
     uint32_t(
         "InitInternal",

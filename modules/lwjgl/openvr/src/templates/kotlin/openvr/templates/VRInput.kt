@@ -132,6 +132,25 @@ val VRInput = "VRInput".nativeClass(
     )
 
     EVRInputError(
+        "GetDominantHand",
+        """
+        Returns the current dominant hand for the user for this application.
+
+        This function will only return success for applications which include {@code "supports_dominant_hand_setting": true} in their action manifests. The
+        dominant hand will only change after a call to #UpdateActionState(), and the action data returned after that point will use the new dominant hand.
+        """,
+
+        Check(1)..ETrackedControllerRole.p("peDominantHand", "")
+    )
+
+    EVRInputError(
+        "SetDominantHand",
+        "Sets the dominant hand for the user for this application.",
+
+        ETrackedControllerRole("eDominantHand", "", "ETrackedControllerRole_\\w+")
+    );
+
+    EVRInputError(
         "GetBoneCount",
         "Reads the number of bones in skeleton associated with the given action.",
 
@@ -299,6 +318,18 @@ val VRInput = "VRInput".nativeClass(
         VRInputValueHandle_t("originToHighlight", "")
     )
 
+    EVRInputError(
+        "GetComponentStateForBinding",
+        "Use this to query what action on the component returned by #GetOriginTrackedDeviceInfo() would trigger this binding.",
+
+        charASCII.const.p("pchRenderModelName", ""),
+        charASCII.const.p("pchComponentName", ""),
+        InputBindingInfo_t.const.p("pOriginInfo", ""),
+        Expression("InputBindingInfo.SIZEOF")..uint32_t("unBindingInfoSize", ""),
+        AutoSize("pOriginInfo")..uint32_t("unBindingInfoCount", ""),
+        Check(1)..RenderModel_ComponentState_t.p("pComponentState", "")
+    )
+
     bool(
         "IsUsingLegacyInput",
         ""
@@ -316,5 +347,14 @@ val VRInput = "VRInput".nativeClass(
         VRActionSetHandle_t("ulActionSetHandle", ""),
         VRInputValueHandle_t("ulDeviceHandle", ""),
         bool("bShowOnDesktop", "")
+    )
+
+    EVRInputError(
+        "GetBindingVariant",
+        "Returns the variant set in the current bindings. If the binding doesn't include a variant setting, this function will return an empty string.",
+
+        VRInputValueHandle_t("ulDevicePath", ""),
+        charASCII.p("pchVariantArray", ""),
+        AutoSize("pchVariantArray")..uint32_t("unVariantArraySize", "")
     )
 }

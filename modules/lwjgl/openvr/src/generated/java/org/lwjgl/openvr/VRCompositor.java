@@ -138,7 +138,7 @@ public class VRCompositor {
      * <p>OpenGL dirty state: glBindTexture</p>
      *
      * @param eEye         one of:<br><table><tr><td>{@link VR#EVREye_Eye_Left}</td><td>{@link VR#EVREye_Eye_Right}</td></tr></table>
-     * @param nSubmitFlags one of:<br><table><tr><td>{@link VR#EVRSubmitFlags_Submit_Default}</td><td>{@link VR#EVRSubmitFlags_Submit_LensDistortionAlreadyApplied}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_GlRenderBuffer}</td><td>{@link VR#EVRSubmitFlags_Submit_Reserved}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_TextureWithDepth}</td></tr></table>
+     * @param nSubmitFlags one of:<br><table><tr><td>{@link VR#EVRSubmitFlags_Submit_Default}</td><td>{@link VR#EVRSubmitFlags_Submit_LensDistortionAlreadyApplied}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_GlRenderBuffer}</td><td>{@link VR#EVRSubmitFlags_Submit_Reserved}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_TextureWithDepth}</td><td>{@link VR#EVRSubmitFlags_Submit_FrameDiscontinuty}</td></tr><tr><td>{@link VR#EVRSubmitFlags_VulkanTextureWithArrayData}</td></tr></table>
      *
      * @return return codes:
      *         
@@ -872,6 +872,69 @@ public class VRCompositor {
             check(__functionAddress);
         }
         callV(__functionAddress);
+    }
+
+    // --- [ VRCompositor_GetCompositorBenchmarkResults ] ---
+
+    /**
+     * Unsafe version of: {@link #VRCompositor_GetCompositorBenchmarkResults GetCompositorBenchmarkResults}
+     *
+     * @param nSizeOfBenchmarkResults should be set to {@code sizeof(Compositor_BenchmarkResults)}
+     */
+    public static boolean nVRCompositor_GetCompositorBenchmarkResults(long pBenchmarkResults, int nSizeOfBenchmarkResults) {
+        long __functionAddress = OpenVR.VRCompositor.GetCompositorBenchmarkResults;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callPZ(pBenchmarkResults, nSizeOfBenchmarkResults, __functionAddress);
+    }
+
+    /** Returns true if {@code pBenchmarkResults} is filled it. Sets {@code pBenchmarkResults} with the result of the compositor benchmark. */
+    @NativeType("bool")
+    public static boolean VRCompositor_GetCompositorBenchmarkResults(@NativeType("Compositor_BenchmarkResults *") Compositor_BenchmarkResults.Buffer pBenchmarkResults) {
+        return nVRCompositor_GetCompositorBenchmarkResults(pBenchmarkResults.address(), pBenchmarkResults.remaining());
+    }
+
+    // --- [ VRCompositor_GetLastPosePredictionIDs ] ---
+
+    /** Unsafe version of: {@link #VRCompositor_GetLastPosePredictionIDs GetLastPosePredictionIDs} */
+    public static int nVRCompositor_GetLastPosePredictionIDs(long pRenderPosePredictionID, long pGamePosePredictionID) {
+        long __functionAddress = OpenVR.VRCompositor.GetLastPosePredictionIDs;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callPPI(pRenderPosePredictionID, pGamePosePredictionID, __functionAddress);
+    }
+
+    /**
+     * Returns the frame id associated with the poses last returned by {@link #VRCompositor_WaitGetPoses WaitGetPoses}.
+     * 
+     * <p>Deltas between IDs correspond to number of headset vsync intervals.</p>
+     */
+    @NativeType("EVRCompositorError")
+    public static int VRCompositor_GetLastPosePredictionIDs(@NativeType("uint32_t *") IntBuffer pRenderPosePredictionID, @NativeType("uint32_t *") IntBuffer pGamePosePredictionID) {
+        if (CHECKS) {
+            check(pRenderPosePredictionID, 1);
+            check(pGamePosePredictionID, 1);
+        }
+        return nVRCompositor_GetLastPosePredictionIDs(memAddress(pRenderPosePredictionID), memAddress(pGamePosePredictionID));
+    }
+
+    // --- [ VRCompositor_GetPosesForFrame ] ---
+
+    /** Unsafe version of: {@link #VRCompositor_GetPosesForFrame GetPosesForFrame} */
+    public static int nVRCompositor_GetPosesForFrame(int unPosePredictionID, long pPoseArray, int unPoseArrayCount) {
+        long __functionAddress = OpenVR.VRCompositor.GetPosesForFrame;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callPI(unPosePredictionID, pPoseArray, unPoseArrayCount, __functionAddress);
+    }
+
+    /** Get the most up-to-date predicted (or recorded - up to 100ms old) set of poses for a given frame id. */
+    @NativeType("EVRCompositorError")
+    public static int VRCompositor_GetPosesForFrame(@NativeType("uint32_t") int unPosePredictionID, @NativeType("TrackedDevicePose_t *") TrackedDevicePose.Buffer pPoseArray) {
+        return nVRCompositor_GetPosesForFrame(unPosePredictionID, pPoseArray.address(), pPoseArray.remaining());
     }
 
 }

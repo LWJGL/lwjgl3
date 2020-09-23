@@ -349,6 +349,47 @@ public class VRInput {
         return nVRInput_GetSkeletalActionData(action, pActionData.address(), InputSkeletalActionData.SIZEOF);
     }
 
+    // --- [ VRInput_GetDominantHand ] ---
+
+    /** Unsafe version of: {@link #VRInput_GetDominantHand GetDominantHand} */
+    public static int nVRInput_GetDominantHand(long peDominantHand) {
+        long __functionAddress = OpenVR.VRInput.GetDominantHand;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callPI(peDominantHand, __functionAddress);
+    }
+
+    /**
+     * Returns the current dominant hand for the user for this application.
+     * 
+     * <p>This function will only return success for applications which include {@code "supports_dominant_hand_setting": true} in their action manifests. The
+     * dominant hand will only change after a call to {@link #VRInput_UpdateActionState UpdateActionState}, and the action data returned after that point will use the new dominant hand.</p>
+     */
+    @NativeType("EVRInputError")
+    public static int VRInput_GetDominantHand(@NativeType("ETrackedControllerRole *") IntBuffer peDominantHand) {
+        if (CHECKS) {
+            check(peDominantHand, 1);
+        }
+        return nVRInput_GetDominantHand(memAddress(peDominantHand));
+    }
+
+    // --- [ VRInput_SetDominantHand ] ---
+
+    /**
+     * Sets the dominant hand for the user for this application.
+     *
+     * @param eDominantHand one of:<br><table><tr><td>{@link VR#ETrackedControllerRole_TrackedControllerRole_Invalid}</td></tr><tr><td>{@link VR#ETrackedControllerRole_TrackedControllerRole_LeftHand}</td></tr><tr><td>{@link VR#ETrackedControllerRole_TrackedControllerRole_RightHand}</td></tr><tr><td>{@link VR#ETrackedControllerRole_TrackedControllerRole_OptOut}</td></tr><tr><td>{@link VR#ETrackedControllerRole_TrackedControllerRole_Treadmill}</td></tr><tr><td>{@link VR#ETrackedControllerRole_TrackedControllerRole_Stylus}</td></tr><tr><td>{@link VR#ETrackedControllerRole_TrackedControllerRole_Max}</td></tr></table>
+     */
+    @NativeType("EVRInputError")
+    public static int VRInput_SetDominantHand(@NativeType("ETrackedControllerRole") int eDominantHand) {
+        long __functionAddress = OpenVR.VRInput.SetDominantHand;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callI(eDominantHand, __functionAddress);
+    }
+
     // --- [ VRInput_GetBoneCount ] ---
 
     /** Unsafe version of: {@link #VRInput_GetBoneCount GetBoneCount} */
@@ -653,6 +694,46 @@ public class VRInput {
         return nVRInput_ShowBindingsForActionSet(pSets.address(), unSizeOfVRSelectedActionSet_t, pSets.remaining(), originToHighlight);
     }
 
+    // --- [ VRInput_GetComponentStateForBinding ] ---
+
+    /** Unsafe version of: {@link #VRInput_GetComponentStateForBinding GetComponentStateForBinding} */
+    public static int nVRInput_GetComponentStateForBinding(long pchRenderModelName, long pchComponentName, long pOriginInfo, int unBindingInfoSize, int unBindingInfoCount, long pComponentState) {
+        long __functionAddress = OpenVR.VRInput.GetComponentStateForBinding;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callPPPPI(pchRenderModelName, pchComponentName, pOriginInfo, unBindingInfoSize, unBindingInfoCount, pComponentState, __functionAddress);
+    }
+
+    /** Use this to query what action on the component returned by {@link #VRInput_GetOriginTrackedDeviceInfo GetOriginTrackedDeviceInfo} would trigger this binding. */
+    @NativeType("EVRInputError")
+    public static int VRInput_GetComponentStateForBinding(@NativeType("char const *") ByteBuffer pchRenderModelName, @NativeType("char const *") ByteBuffer pchComponentName, @NativeType("InputBindingInfo_t const *") InputBindingInfo.Buffer pOriginInfo, @NativeType("RenderModel_ComponentState_t *") RenderModelComponentState.Buffer pComponentState) {
+        if (CHECKS) {
+            checkNT1(pchRenderModelName);
+            checkNT1(pchComponentName);
+            check(pComponentState, 1);
+        }
+        return nVRInput_GetComponentStateForBinding(memAddress(pchRenderModelName), memAddress(pchComponentName), pOriginInfo.address(), InputBindingInfo.SIZEOF, pOriginInfo.remaining(), pComponentState.address());
+    }
+
+    /** Use this to query what action on the component returned by {@link #VRInput_GetOriginTrackedDeviceInfo GetOriginTrackedDeviceInfo} would trigger this binding. */
+    @NativeType("EVRInputError")
+    public static int VRInput_GetComponentStateForBinding(@NativeType("char const *") CharSequence pchRenderModelName, @NativeType("char const *") CharSequence pchComponentName, @NativeType("InputBindingInfo_t const *") InputBindingInfo.Buffer pOriginInfo, @NativeType("RenderModel_ComponentState_t *") RenderModelComponentState.Buffer pComponentState) {
+        if (CHECKS) {
+            check(pComponentState, 1);
+        }
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nASCII(pchRenderModelName, true);
+            long pchRenderModelNameEncoded = stack.getPointerAddress();
+            stack.nASCII(pchComponentName, true);
+            long pchComponentNameEncoded = stack.getPointerAddress();
+            return nVRInput_GetComponentStateForBinding(pchRenderModelNameEncoded, pchComponentNameEncoded, pOriginInfo.address(), InputBindingInfo.SIZEOF, pOriginInfo.remaining(), pComponentState.address());
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     // --- [ VRInput_OpenBindingUI ] ---
 
     /** Unsafe version of: {@link #VRInput_OpenBindingUI OpenBindingUI} */
@@ -692,6 +773,23 @@ public class VRInput {
         } finally {
             stack.setPointer(stackPointer);
         }
+    }
+
+    // --- [ VRInput_GetBindingVariant ] ---
+
+    /** Unsafe version of: {@link #VRInput_GetBindingVariant GetBindingVariant} */
+    public static int nVRInput_GetBindingVariant(long ulDevicePath, long pchVariantArray, int unVariantArraySize) {
+        long __functionAddress = OpenVR.VRInput.GetBindingVariant;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callJPI(ulDevicePath, pchVariantArray, unVariantArraySize, __functionAddress);
+    }
+
+    /** Returns the variant set in the current bindings. If the binding doesn't include a variant setting, this function will return an empty string. */
+    @NativeType("EVRInputError")
+    public static int VRInput_GetBindingVariant(@NativeType("VRInputValueHandle_t") long ulDevicePath, @NativeType("char *") ByteBuffer pchVariantArray) {
+        return nVRInput_GetBindingVariant(ulDevicePath, memAddress(pchVariantArray), pchVariantArray.remaining());
     }
 
 }

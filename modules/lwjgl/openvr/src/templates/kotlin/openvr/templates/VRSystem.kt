@@ -231,19 +231,6 @@ typedef struct HiddenAreaMesh_t
         AutoSize("pTrackedDevicePoseArray")..uint32_t("unTrackedDevicePoseArrayCount", "")
     )
 
-    void(
-        "ResetSeatedZeroPose",
-        """
-        Sets the zero pose for the seated tracker coordinate system to the current position and yaw of the HMD. After {@code ResetSeatedZeroPose} all
-        #GetDeviceToAbsoluteTrackingPose() calls that pass #ETrackingUniverseOrigin_TrackingUniverseSeated as the origin will be relative to this new zero
-        pose. The new zero coordinate system will not change the fact that the Y axis is up in the real world, so the next pose returned from
-        {@code GetDeviceToAbsoluteTrackingPose} after a call to {@code ResetSeatedZeroPose} may not be exactly an identity matrix.
-
-        NOTE: This function overrides the user's previously saved seated zero pose and should only be called as the result of a user action. Users are also
-        able to set their seated zero pose via the OpenVR Dashboard.
-        """
-    )
-
     HmdMatrix34_t(
         "GetSeatedZeroPoseToStandingAbsoluteTrackingPose",
         """
@@ -251,7 +238,7 @@ typedef struct HiddenAreaMesh_t
         used or transform object positions from one coordinate system to the other.
 
         The seated origin may or may not be inside the Play Area or Collision Bounds returned by {@code IVRChaperone}. Its position depends on what the user
-        has set from the Dashboard settings and previous calls to #ResetSeatedZeroPose().
+        has set from the Dashboard settings and previous calls to #ResetZeroPose().
         """,
         void()
     )

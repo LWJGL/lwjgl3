@@ -22,7 +22,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code unHeight} &ndash; width and height of the texture map in pixels</li>
- * <li>{@code rubTextureMapData} &ndash; Map texture data. All textures are RGBA with 8 bits per channel per pixel. Data size is width * height * 4ub</li>
+ * <li>{@code rubTextureMapData} &ndash; Map texture data.</li>
+ * <li>{@code format} &ndash; one of:<br><table><tr><td>{@link VR#EVRRenderModelTextureFormat_VRRenderModelTextureFormat_RGBA8_SRGB}</td></tr><tr><td>{@link VR#EVRRenderModelTextureFormat_VRRenderModelTextureFormat_BC2}</td></tr><tr><td>{@link VR#EVRRenderModelTextureFormat_VRRenderModelTextureFormat_BC4}</td></tr><tr><td>{@link VR#EVRRenderModelTextureFormat_VRRenderModelTextureFormat_BC7}</td></tr><tr><td>{@link VR#EVRRenderModelTextureFormat_VRRenderModelTextureFormat_BC7_SRGB}</td></tr></table></li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -32,6 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint16_t unWidth;
  *     uint16_t unHeight;
  *     uint8_t const * rubTextureMapData;
+ *     EVRRenderModelTextureFormat format;
  * }</code></pre>
  */
 @NativeType("struct RenderModel_TextureMap_t")
@@ -47,14 +49,16 @@ public class RenderModelTextureMap extends Struct implements NativeResource {
     public static final int
         UNWIDTH,
         UNHEIGHT,
-        RUBTEXTUREMAPDATA;
+        RUBTEXTUREMAPDATA,
+        FORMAT;
 
     static {
         Layout layout = __struct(
             Platform.get() == Platform.LINUX || Platform.get() == Platform.MACOSX ? 4 : DEFAULT_PACK_ALIGNMENT, DEFAULT_ALIGN_AS,
             __member(2),
             __member(2),
-            __member(POINTER_SIZE)
+            __member(POINTER_SIZE),
+            __member(4)
         );
 
         SIZEOF = layout.getSize();
@@ -63,6 +67,7 @@ public class RenderModelTextureMap extends Struct implements NativeResource {
         UNWIDTH = layout.offsetof(0);
         UNHEIGHT = layout.offsetof(1);
         RUBTEXTUREMAPDATA = layout.offsetof(2);
+        FORMAT = layout.offsetof(3);
     }
 
     /**
@@ -91,6 +96,9 @@ public class RenderModelTextureMap extends Struct implements NativeResource {
      */
     @NativeType("uint8_t const *")
     public ByteBuffer rubTextureMapData(int capacity) { return nrubTextureMapData(address(), capacity); }
+    /** Returns the value of the {@code format} field. */
+    @NativeType("EVRRenderModelTextureFormat")
+    public int format() { return nformat(address()); }
 
     // -----------------------------------
 
@@ -241,6 +249,8 @@ public class RenderModelTextureMap extends Struct implements NativeResource {
     public static short nunHeight(long struct) { return UNSAFE.getShort(null, struct + RenderModelTextureMap.UNHEIGHT); }
     /** Unsafe version of {@link #rubTextureMapData(int) rubTextureMapData}. */
     public static ByteBuffer nrubTextureMapData(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + RenderModelTextureMap.RUBTEXTUREMAPDATA), capacity); }
+    /** Unsafe version of {@link #format}. */
+    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + RenderModelTextureMap.FORMAT); }
 
     // -----------------------------------
 
@@ -293,6 +303,9 @@ public class RenderModelTextureMap extends Struct implements NativeResource {
          */
         @NativeType("uint8_t const *")
         public ByteBuffer rubTextureMapData(int capacity) { return RenderModelTextureMap.nrubTextureMapData(address(), capacity); }
+        /** Returns the value of the {@code format} field. */
+        @NativeType("EVRRenderModelTextureFormat")
+        public int format() { return RenderModelTextureMap.nformat(address()); }
 
     }
 
