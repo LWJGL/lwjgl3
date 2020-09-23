@@ -39,8 +39,9 @@ public final class XXHashDemo {
 
         assertEquals(hash32, 0xC5C8C208);
         assertEquals(hash64, 0x656D889F290F0BCCL);
-        assertEquals(hash128.high64(), 0x2A3D06D3261fBBC1L);
-        assertEquals(hash128.low64(), 0x34BA1D414B6D39F6L);
+
+        assertEquals(hash128.high64(), 0xCF675433C345E921L);
+        assertEquals(hash128.low64(), 0x9A021761E5D533D6L);
 
         System.out.format("test %d-bit hash = 0x%X\n", 32, hash32);
         System.out.format("test %d-bit hash = 0x%X\n", 64, hash64);

@@ -35,7 +35,11 @@
 #ifndef XXH_STATIC_LINKING_ONLY
 #  define XXH_STATIC_LINKING_ONLY  /* XXH64_state_t */
 #endif
+#if defined(LWJGL_WINDOWS) || defined(LWJGL_arm64) || defined(LWJGL_arm32)
 #include "xxhash.h"                /* XXH_reset, update, digest */
+#else
+#include "xxh_x86dispatch.h"
+#endif
 
 #if defined (__cplusplus)
 extern "C" {
@@ -261,7 +265,7 @@ typedef enum {
  *         - ZSTD_overlap_src_before_dst: The src and dst may overlap, but they MUST be at least 8 bytes apart.
  *           The src buffer must be before the dst buffer.
  */
-MEM_STATIC FORCE_INLINE_ATTR 
+MEM_STATIC FORCE_INLINE_ATTR
 void ZSTD_wildcopy(void* dst, const void* src, ptrdiff_t length, ZSTD_overlap_e const ovtype)
 {
     ptrdiff_t diff = (BYTE*)dst - (const BYTE*)src;

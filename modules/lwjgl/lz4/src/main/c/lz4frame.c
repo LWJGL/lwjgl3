@@ -94,7 +94,11 @@
 #define LZ4_HC_STATIC_LINKING_ONLY
 #include "lz4hc.h"
 #define XXH_STATIC_LINKING_ONLY
+#if defined(LWJGL_WINDOWS) || defined(LWJGL_arm64) || defined(LWJGL_arm32)
 #include "xxhash.h"
+#else
+#include "xxh_x86dispatch.h"
+#endif
 
 
 /*-************************************

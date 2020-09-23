@@ -16,6 +16,8 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
+import static org.lwjgl.util.xxhash.XXHash.*;
+
 /**
  * XXH3 state for stack allocation. Unstable API.
  * 
@@ -24,18 +26,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre><code>
  * struct XXH3_state_t {
  *     XXH32_hash_t acc[8];
- *     unsigned char customSecret[192];
+ *     unsigned char customSecret[XXH_SECRET_DEFAULT_SIZE];
  *     unsigned char buffer[256];
  *     XXH32_hash_t bufferedSize;
- *     XXH32_hash_t nbStripesPerBlock;
- *     XXH32_hash_t nbStripesSoFar;
- *     XXH32_hash_t secretLimit;
  *     XXH32_hash_t reserved32;
- *     XXH32_hash_t reserved32_2;
+ *     size_t nbStripesSoFar;
  *     XXH32_hash_t totalLen;
+ *     size_t nbStripesPerBlock;
+ *     size_t secretLimit;
  *     XXH32_hash_t seed;
  *     XXH32_hash_t reserved64;
- *     unsigned char const * secret;
+ *     unsigned char const * extSecret;
  * }</code></pre>
  */
 @NativeType("struct XXH3_state_t")
@@ -53,28 +54,26 @@ public class XXH3State extends Struct implements NativeResource {
         CUSTOMSECRET,
         BUFFER,
         BUFFEREDSIZE,
-        NBSTRIPESPERBLOCK,
-        NBSTRIPESSOFAR,
-        SECRETLIMIT,
         RESERVED32,
-        RESERVED32_2,
+        NBSTRIPESSOFAR,
         TOTALLEN,
+        NBSTRIPESPERBLOCK,
+        SECRETLIMIT,
         SEED,
         RESERVED64,
-        SECRET;
+        EXTSECRET;
 
     static {
         Layout layout = __struct(
             __array(8, 8),
-            __array(1, 192),
+            __array(1, XXH_SECRET_DEFAULT_SIZE),
             __array(1, 256),
             __member(4),
             __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
+            __member(POINTER_SIZE),
             __member(8),
+            __member(POINTER_SIZE),
+            __member(POINTER_SIZE),
             __member(8),
             __member(8),
             __member(POINTER_SIZE)
@@ -87,15 +86,14 @@ public class XXH3State extends Struct implements NativeResource {
         CUSTOMSECRET = layout.offsetof(1);
         BUFFER = layout.offsetof(2);
         BUFFEREDSIZE = layout.offsetof(3);
-        NBSTRIPESPERBLOCK = layout.offsetof(4);
+        RESERVED32 = layout.offsetof(4);
         NBSTRIPESSOFAR = layout.offsetof(5);
-        SECRETLIMIT = layout.offsetof(6);
-        RESERVED32 = layout.offsetof(7);
-        RESERVED32_2 = layout.offsetof(8);
-        TOTALLEN = layout.offsetof(9);
-        SEED = layout.offsetof(10);
-        RESERVED64 = layout.offsetof(11);
-        SECRET = layout.offsetof(12);
+        TOTALLEN = layout.offsetof(6);
+        NBSTRIPESPERBLOCK = layout.offsetof(7);
+        SECRETLIMIT = layout.offsetof(8);
+        SEED = layout.offsetof(9);
+        RESERVED64 = layout.offsetof(10);
+        EXTSECRET = layout.offsetof(11);
     }
 
     /**
@@ -118,7 +116,7 @@ public class XXH3State extends Struct implements NativeResource {
     @NativeType("XXH32_hash_t")
     public long acc(int index) { return nacc(address(), index); }
     /** Returns a {@link ByteBuffer} view of the {@code customSecret} field. */
-    @NativeType("unsigned char[192]")
+    @NativeType("unsigned char[XXH_SECRET_DEFAULT_SIZE]")
     public ByteBuffer customSecret() { return ncustomSecret(address()); }
     /** Returns the value at the specified index of the {@code customSecret} field. */
     @NativeType("unsigned char")
@@ -132,24 +130,21 @@ public class XXH3State extends Struct implements NativeResource {
     /** Returns the value of the {@code bufferedSize} field. */
     @NativeType("XXH32_hash_t")
     public int bufferedSize() { return nbufferedSize(address()); }
-    /** Returns the value of the {@code nbStripesPerBlock} field. */
-    @NativeType("XXH32_hash_t")
-    public int nbStripesPerBlock() { return nnbStripesPerBlock(address()); }
-    /** Returns the value of the {@code nbStripesSoFar} field. */
-    @NativeType("XXH32_hash_t")
-    public int nbStripesSoFar() { return nnbStripesSoFar(address()); }
-    /** Returns the value of the {@code secretLimit} field. */
-    @NativeType("XXH32_hash_t")
-    public int secretLimit() { return nsecretLimit(address()); }
     /** Returns the value of the {@code reserved32} field. */
     @NativeType("XXH32_hash_t")
     public int reserved32() { return nreserved32(address()); }
-    /** Returns the value of the {@code reserved32_2} field. */
-    @NativeType("XXH32_hash_t")
-    public int reserved32_2() { return nreserved32_2(address()); }
+    /** Returns the value of the {@code nbStripesSoFar} field. */
+    @NativeType("size_t")
+    public long nbStripesSoFar() { return nnbStripesSoFar(address()); }
     /** Returns the value of the {@code totalLen} field. */
     @NativeType("XXH32_hash_t")
     public long totalLen() { return ntotalLen(address()); }
+    /** Returns the value of the {@code nbStripesPerBlock} field. */
+    @NativeType("size_t")
+    public long nbStripesPerBlock() { return nnbStripesPerBlock(address()); }
+    /** Returns the value of the {@code secretLimit} field. */
+    @NativeType("size_t")
+    public long secretLimit() { return nsecretLimit(address()); }
     /** Returns the value of the {@code seed} field. */
     @NativeType("XXH32_hash_t")
     public long seed() { return nseed(address()); }
@@ -157,12 +152,12 @@ public class XXH3State extends Struct implements NativeResource {
     @NativeType("XXH32_hash_t")
     public long reserved64() { return nreserved64(address()); }
     /**
-     * Returns a {@link ByteBuffer} view of the data pointed to by the {@code secret} field.
+     * Returns a {@link ByteBuffer} view of the data pointed to by the {@code extSecret} field.
      *
      * @param capacity the number of elements in the returned buffer
      */
     @NativeType("unsigned char const *")
-    public ByteBuffer secret(int capacity) { return nsecret(address(), capacity); }
+    public ByteBuffer extSecret(int capacity) { return nextSecret(address(), capacity); }
 
     // -----------------------------------
 
@@ -314,10 +309,10 @@ public class XXH3State extends Struct implements NativeResource {
         return UNSAFE.getLong(null, struct + XXH3State.ACC + check(index, 8) * 8);
     }
     /** Unsafe version of {@link #customSecret}. */
-    public static ByteBuffer ncustomSecret(long struct) { return memByteBuffer(struct + XXH3State.CUSTOMSECRET, 192); }
+    public static ByteBuffer ncustomSecret(long struct) { return memByteBuffer(struct + XXH3State.CUSTOMSECRET, XXH_SECRET_DEFAULT_SIZE); }
     /** Unsafe version of {@link #customSecret(int) customSecret}. */
     public static byte ncustomSecret(long struct, int index) {
-        return UNSAFE.getByte(null, struct + XXH3State.CUSTOMSECRET + check(index, 192) * 1);
+        return UNSAFE.getByte(null, struct + XXH3State.CUSTOMSECRET + check(index, XXH_SECRET_DEFAULT_SIZE) * 1);
     }
     /** Unsafe version of {@link #buffer}. */
     public static ByteBuffer nbuffer(long struct) { return memByteBuffer(struct + XXH3State.BUFFER, 256); }
@@ -327,24 +322,22 @@ public class XXH3State extends Struct implements NativeResource {
     }
     /** Unsafe version of {@link #bufferedSize}. */
     public static int nbufferedSize(long struct) { return UNSAFE.getInt(null, struct + XXH3State.BUFFEREDSIZE); }
-    /** Unsafe version of {@link #nbStripesPerBlock}. */
-    public static int nnbStripesPerBlock(long struct) { return UNSAFE.getInt(null, struct + XXH3State.NBSTRIPESPERBLOCK); }
-    /** Unsafe version of {@link #nbStripesSoFar}. */
-    public static int nnbStripesSoFar(long struct) { return UNSAFE.getInt(null, struct + XXH3State.NBSTRIPESSOFAR); }
-    /** Unsafe version of {@link #secretLimit}. */
-    public static int nsecretLimit(long struct) { return UNSAFE.getInt(null, struct + XXH3State.SECRETLIMIT); }
     /** Unsafe version of {@link #reserved32}. */
     public static int nreserved32(long struct) { return UNSAFE.getInt(null, struct + XXH3State.RESERVED32); }
-    /** Unsafe version of {@link #reserved32_2}. */
-    public static int nreserved32_2(long struct) { return UNSAFE.getInt(null, struct + XXH3State.RESERVED32_2); }
+    /** Unsafe version of {@link #nbStripesSoFar}. */
+    public static long nnbStripesSoFar(long struct) { return memGetAddress(struct + XXH3State.NBSTRIPESSOFAR); }
     /** Unsafe version of {@link #totalLen}. */
     public static long ntotalLen(long struct) { return UNSAFE.getLong(null, struct + XXH3State.TOTALLEN); }
+    /** Unsafe version of {@link #nbStripesPerBlock}. */
+    public static long nnbStripesPerBlock(long struct) { return memGetAddress(struct + XXH3State.NBSTRIPESPERBLOCK); }
+    /** Unsafe version of {@link #secretLimit}. */
+    public static long nsecretLimit(long struct) { return memGetAddress(struct + XXH3State.SECRETLIMIT); }
     /** Unsafe version of {@link #seed}. */
     public static long nseed(long struct) { return UNSAFE.getLong(null, struct + XXH3State.SEED); }
     /** Unsafe version of {@link #reserved64}. */
     public static long nreserved64(long struct) { return UNSAFE.getLong(null, struct + XXH3State.RESERVED64); }
-    /** Unsafe version of {@link #secret(int) secret}. */
-    public static ByteBuffer nsecret(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + XXH3State.SECRET), capacity); }
+    /** Unsafe version of {@link #extSecret(int) extSecret}. */
+    public static ByteBuffer nextSecret(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + XXH3State.EXTSECRET), capacity); }
 
     // -----------------------------------
 
@@ -391,7 +384,7 @@ public class XXH3State extends Struct implements NativeResource {
         @NativeType("XXH32_hash_t")
         public long acc(int index) { return XXH3State.nacc(address(), index); }
         /** Returns a {@link ByteBuffer} view of the {@code customSecret} field. */
-        @NativeType("unsigned char[192]")
+        @NativeType("unsigned char[XXH_SECRET_DEFAULT_SIZE]")
         public ByteBuffer customSecret() { return XXH3State.ncustomSecret(address()); }
         /** Returns the value at the specified index of the {@code customSecret} field. */
         @NativeType("unsigned char")
@@ -405,24 +398,21 @@ public class XXH3State extends Struct implements NativeResource {
         /** Returns the value of the {@code bufferedSize} field. */
         @NativeType("XXH32_hash_t")
         public int bufferedSize() { return XXH3State.nbufferedSize(address()); }
-        /** Returns the value of the {@code nbStripesPerBlock} field. */
-        @NativeType("XXH32_hash_t")
-        public int nbStripesPerBlock() { return XXH3State.nnbStripesPerBlock(address()); }
-        /** Returns the value of the {@code nbStripesSoFar} field. */
-        @NativeType("XXH32_hash_t")
-        public int nbStripesSoFar() { return XXH3State.nnbStripesSoFar(address()); }
-        /** Returns the value of the {@code secretLimit} field. */
-        @NativeType("XXH32_hash_t")
-        public int secretLimit() { return XXH3State.nsecretLimit(address()); }
         /** Returns the value of the {@code reserved32} field. */
         @NativeType("XXH32_hash_t")
         public int reserved32() { return XXH3State.nreserved32(address()); }
-        /** Returns the value of the {@code reserved32_2} field. */
-        @NativeType("XXH32_hash_t")
-        public int reserved32_2() { return XXH3State.nreserved32_2(address()); }
+        /** Returns the value of the {@code nbStripesSoFar} field. */
+        @NativeType("size_t")
+        public long nbStripesSoFar() { return XXH3State.nnbStripesSoFar(address()); }
         /** Returns the value of the {@code totalLen} field. */
         @NativeType("XXH32_hash_t")
         public long totalLen() { return XXH3State.ntotalLen(address()); }
+        /** Returns the value of the {@code nbStripesPerBlock} field. */
+        @NativeType("size_t")
+        public long nbStripesPerBlock() { return XXH3State.nnbStripesPerBlock(address()); }
+        /** Returns the value of the {@code secretLimit} field. */
+        @NativeType("size_t")
+        public long secretLimit() { return XXH3State.nsecretLimit(address()); }
         /** Returns the value of the {@code seed} field. */
         @NativeType("XXH32_hash_t")
         public long seed() { return XXH3State.nseed(address()); }
@@ -430,12 +420,12 @@ public class XXH3State extends Struct implements NativeResource {
         @NativeType("XXH32_hash_t")
         public long reserved64() { return XXH3State.nreserved64(address()); }
         /**
-         * Returns a {@link ByteBuffer} view of the data pointed to by the {@code secret} field.
+         * Returns a {@link ByteBuffer} view of the data pointed to by the {@code extSecret} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
         @NativeType("unsigned char const *")
-        public ByteBuffer secret(int capacity) { return XXH3State.nsecret(address(), capacity); }
+        public ByteBuffer extSecret(int capacity) { return XXH3State.nextSecret(address(), capacity); }
 
     }
 

@@ -53,20 +53,20 @@ val XXH64_canonical_t = struct(Module.XXHASH, "XXH64Canonical", nativeName = "XX
 
 val XXH3_state_t = struct(Module.XXHASH, "XXH3State", nativeName = "XXH3_state_t", mutable = false) {
     documentation = "XXH3 state for stack allocation. Unstable API."
+    javaImport("static org.lwjgl.util.xxhash.XXHash.*")
 
     /*XXH_ALIGN(64) */XXH64_hash_t("acc", "")[8]
-    /*XXH_ALIGN(64) */unsigned_char("customSecret", "")[192]
+    /*XXH_ALIGN(64) */unsigned_char("customSecret", "")["XXH_SECRET_DEFAULT_SIZE"]
     /*XXH_ALIGN(64) */unsigned_char("buffer", "")[256]
     XXH32_hash_t("bufferedSize", "")
-    XXH32_hash_t("nbStripesPerBlock", "")
-    XXH32_hash_t("nbStripesSoFar", "")
-    XXH32_hash_t("secretLimit", "")
     XXH32_hash_t("reserved32", "")
-    XXH32_hash_t("reserved32_2", "")
+    size_t("nbStripesSoFar", "")
     XXH64_hash_t("totalLen", "")
+    size_t("nbStripesPerBlock", "")
+    size_t("secretLimit", "")
     XXH64_hash_t("seed", "")
     XXH64_hash_t("reserved64", "")
-    unsigned_char.const.p("secret", "")
+    unsigned_char.const.p("extSecret", "")
 }
 
 val XXH128_hash_t = struct(Module.XXHASH, "XXH128Hash", nativeName = "XXH128_hash_t", mutable = false) {

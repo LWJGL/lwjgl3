@@ -5,9 +5,15 @@
  */
 #include "common_tools.h"
 DISABLE_WARNINGS()
-#define XXH_INLINE_ALL
+//#define XXH_INLINE_ALL
+#define XXH_STATIC_LINKING_ONLY
+#define XXH_IMPLEMENTATION
 #include "lwjgl_malloc.h"
+#if defined(LWJGL_WINDOWS) || defined(LWJGL_arm64) || defined(LWJGL_arm32)
 #include "xxhash.h"
+#else
+#include "xxh_x86dispatch.h"
+#endif
 ENABLE_WARNINGS()
 
 EXTERN_C_ENTER
@@ -128,17 +134,17 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_xxhash_XXHash_nXXH3_164bits(JNIEnv *
     return (jlong)XXH3_64bits(data, (size_t)len);
 }
 
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_xxhash_XXHash_nXXH3_164bits_1withSeed(JNIEnv *__env, jclass clazz, jlong dataAddress, jlong len, jlong seed) {
+    void const *data = (void const *)(intptr_t)dataAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)XXH3_64bits_withSeed(data, (size_t)len, (XXH32_hash_t)seed);
+}
+
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_xxhash_XXHash_nXXH3_164bits_1withSecret(JNIEnv *__env, jclass clazz, jlong dataAddress, jlong len, jlong secretAddress, jlong secretSize) {
     void const *data = (void const *)(intptr_t)dataAddress;
     void const *secret = (void const *)(intptr_t)secretAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jlong)XXH3_64bits_withSecret(data, (size_t)len, secret, (size_t)secretSize);
-}
-
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_xxhash_XXHash_nXXH3_164bits_1withSeed(JNIEnv *__env, jclass clazz, jlong dataAddress, jlong len, jlong seed) {
-    void const *data = (void const *)(intptr_t)dataAddress;
-    UNUSED_PARAMS(__env, clazz)
-    return (jlong)XXH3_64bits_withSeed(data, (size_t)len, (XXH32_hash_t)seed);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_xxhash_XXHash_nXXH3_1createState(JNIEnv *__env, jclass clazz) {
@@ -189,12 +195,6 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_xxhash_XXHash_nXXH3_164bits_1digest(
     XXH3_state_t const *statePtr = (XXH3_state_t const *)(intptr_t)statePtrAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jlong)XXH3_64bits_digest(statePtr);
-}
-
-JNIEXPORT void JNICALL Java_org_lwjgl_util_xxhash_XXHash_nXXH128(JNIEnv *__env, jclass clazz, jlong dataAddress, jlong len, jlong seed, jlong __result) {
-    void const *data = (void const *)(intptr_t)dataAddress;
-    UNUSED_PARAMS(__env, clazz)
-    *((XXH128_hash_t*)(intptr_t)__result) = XXH128(data, (size_t)len, (XXH32_hash_t)seed);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_util_xxhash_XXHash_nXXH3_1128bits(JNIEnv *__env, jclass clazz, jlong dataAddress, jlong len, jlong __result) {
@@ -273,6 +273,19 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_xxhash_XXHash_nXXH128_1hashFromCanoni
     XXH128_canonical_t const *src = (XXH128_canonical_t const *)(intptr_t)srcAddress;
     UNUSED_PARAMS(__env, clazz)
     *((XXH128_hash_t*)(intptr_t)__result) = XXH128_hashFromCanonical(src);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_xxhash_XXHash_nXXH3_1generateSecret(JNIEnv *__env, jclass clazz, jlong secretBufferAddress, jlong customSeedAddress, jlong customSeedSize) {
+    void *secretBuffer = (void *)(intptr_t)secretBufferAddress;
+    void const *customSeed = (void const *)(intptr_t)customSeedAddress;
+    UNUSED_PARAMS(__env, clazz)
+    XXH3_generateSecret(secretBuffer, customSeed, (size_t)customSeedSize);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_xxhash_XXHash_nXXH128(JNIEnv *__env, jclass clazz, jlong dataAddress, jlong len, jlong seed, jlong __result) {
+    void const *data = (void const *)(intptr_t)dataAddress;
+    UNUSED_PARAMS(__env, clazz)
+    *((XXH128_hash_t*)(intptr_t)__result) = XXH128(data, (size_t)len, (XXH32_hash_t)seed);
 }
 
 EXTERN_C_EXIT

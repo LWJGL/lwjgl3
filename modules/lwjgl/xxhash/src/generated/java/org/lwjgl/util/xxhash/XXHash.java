@@ -59,15 +59,17 @@ public class XXHash {
     public static final int XXH_VERSION_MAJOR = 0;
 
     /** The minor version number. */
-    public static final int XXH_VERSION_MINOR = 7;
+    public static final int XXH_VERSION_MINOR = 8;
 
     /** The release version number. */
-    public static final int XXH_VERSION_RELEASE = 2;
+    public static final int XXH_VERSION_RELEASE = 0;
 
     /** The version number */
     public static final int XXH_VERSION_NUMBER = (XXH_VERSION_MAJOR *100*100 + XXH_VERSION_MINOR *100 + XXH_VERSION_RELEASE);
 
     public static final int XXH_3_SECRET_SIZE_MIN = 0x88;
+
+    public static final int XXH_SECRET_DEFAULT_SIZE = 192;
 
     static { LibXXHash.initialize(); }
 
@@ -392,6 +394,21 @@ public class XXHash {
         return nXXH3_64bits(memAddress(data), data.remaining());
     }
 
+    // --- [ XXH3_64bits_withSeed ] ---
+
+    /** Unsafe version of: {@link #XXH3_64bits_withSeed} */
+    public static native long nXXH3_64bits_withSeed(long data, long len, long seed);
+
+    /**
+     * This variant generates on the fly a custom secret, based on the default secret, altered using the {@code seed} value.
+     * 
+     * <p>While this operation is decently fast, note that it's not completely free. Note {@code seed==0} produces same results as {@link #XXH3_64bits 3_64bits}.</p>
+     */
+    @NativeType("XXH32_hash_t")
+    public static long XXH3_64bits_withSeed(@NativeType("void const *") ByteBuffer data, @NativeType("XXH32_hash_t") long seed) {
+        return nXXH3_64bits_withSeed(memAddress(data), data.remaining(), seed);
+    }
+
     // --- [ XXH3_64bits_withSecret ] ---
 
     /** Unsafe version of: {@link #XXH3_64bits_withSecret} */
@@ -407,21 +424,6 @@ public class XXHash {
     @NativeType("XXH32_hash_t")
     public static long XXH3_64bits_withSecret(@NativeType("void const *") ByteBuffer data, @NativeType("void const *") ByteBuffer secret) {
         return nXXH3_64bits_withSecret(memAddress(data), data.remaining(), memAddress(secret), secret.remaining());
-    }
-
-    // --- [ XXH3_64bits_withSeed ] ---
-
-    /** Unsafe version of: {@link #XXH3_64bits_withSeed} */
-    public static native long nXXH3_64bits_withSeed(long data, long len, long seed);
-
-    /**
-     * This variant generates on the fly a custom secret, based on the default secret, altered using the {@code seed} value.
-     * 
-     * <p>While this operation is decently fast, note that it's not completely free. Note {@code seed==0} produces same results as {@link #XXH3_64bits 3_64bits}.</p>
-     */
-    @NativeType("XXH32_hash_t")
-    public static long XXH3_64bits_withSeed(@NativeType("void const *") ByteBuffer data, @NativeType("XXH32_hash_t") long seed) {
-        return nXXH3_64bits_withSeed(memAddress(data), data.remaining(), seed);
     }
 
     // --- [ XXH3_createState ] ---
@@ -513,16 +515,6 @@ public class XXHash {
     @NativeType("XXH32_hash_t")
     public static long XXH3_64bits_digest(@NativeType("XXH3_state_t const *") XXH3State statePtr) {
         return nXXH3_64bits_digest(statePtr.address());
-    }
-
-    // --- [ XXH128 ] ---
-
-    public static native void nXXH128(long data, long len, long seed, long __result);
-
-    @NativeType("XXH128_hash_t")
-    public static XXH128Hash XXH128(@NativeType("void const *") ByteBuffer data, @NativeType("XXH32_hash_t") long seed, @NativeType("XXH128_hash_t") XXH128Hash __result) {
-        nXXH128(memAddress(data), data.remaining(), seed, __result.address());
-        return __result;
     }
 
     // --- [ XXH3_128bits ] ---
@@ -641,6 +633,48 @@ public class XXHash {
     @NativeType("XXH128_hash_t")
     public static XXH128Hash XXH128_hashFromCanonical(@NativeType("XXH128_canonical_t const *") XXH128Canonical src, @NativeType("XXH128_hash_t") XXH128Hash __result) {
         nXXH128_hashFromCanonical(src.address(), __result.address());
+        return __result;
+    }
+
+    // --- [ XXH3_generateSecret ] ---
+
+    /** Unsafe version of: {@link #XXH3_generateSecret} */
+    public static native void nXXH3_generateSecret(long secretBuffer, long customSeed, long customSeedSize);
+
+    /**
+     * Derives a high-entropy secret from any user-defined content, named {@code customSeed}.
+     * 
+     * <p>The generated secret can be used in combination with {@code *_withSecret()} functions.  The {@code _withSecret()} variants are useful to provide a
+     * higher level of protection than 64-bit seed, as it becomes much more difficult for an external actor to guess how to impact the calculation logic.</p>
+     * 
+     * <p>The function accepts as input a custom seed of any length and any content, and derives from it a high-entropy secret of length {@link #XXH_SECRET_DEFAULT_SIZE SECRET_DEFAULT_SIZE}
+     * into an already allocated buffer {@code secretBuffer}. The generated secret is <i>always</i> {@link #XXH_SECRET_DEFAULT_SIZE SECRET_DEFAULT_SIZE} bytes long.</p>
+     * 
+     * <p>The generated secret can then be used with any {@code *_withSecret()} variant. Functions {@link #XXH3_128bits_withSecret 3_128bits_withSecret}, {@link #XXH3_64bits_withSecret 3_64bits_withSecret},
+     * {@link #XXH3_128bits_reset_withSecret 3_128bits_reset_withSecret} and {@link #XXH3_64bits_reset_withSecret 3_64bits_reset_withSecret} are part of this list. They all accept a {@code secret} parameter which must be very
+     * long for implementation reasons (&ge; {@link #XXH_3_SECRET_SIZE_MIN 3_SECRET_SIZE_MIN}) <i>and</i>> feature very high entropy (consist of random-looking bytes). These conditions can
+     * be a high bar to meet, so this function can be used to generate a secret of proper quality.</p>
+     * 
+     * <p>{@code customSeed} can be anything. It can have any size, even small ones, and its content can be anything, even stupidly "low entropy" source such as
+     * a bunch of zeroes. The resulting {@code secret} will nonetheless provide all expected qualities.</p>
+     * 
+     * <p>Supplying {@code NULL} as the {@code customSeed} copies the default secret into {@code secretBuffer}.  When {@code customSeedSize} &gt; 0, supplying {@code NULL} as
+     * {@code customSeed} is undefined behavior.</p>
+     */
+    public static void XXH3_generateSecret(@NativeType("void *") ByteBuffer secretBuffer, @Nullable @NativeType("void const *") ByteBuffer customSeed) {
+        if (CHECKS) {
+            check(secretBuffer, XXH_SECRET_DEFAULT_SIZE);
+        }
+        nXXH3_generateSecret(memAddress(secretBuffer), memAddressSafe(customSeed), remainingSafe(customSeed));
+    }
+
+    // --- [ XXH128 ] ---
+
+    public static native void nXXH128(long data, long len, long seed, long __result);
+
+    @NativeType("XXH128_hash_t")
+    public static XXH128Hash XXH128(@NativeType("void const *") ByteBuffer data, @NativeType("XXH32_hash_t") long seed, @NativeType("XXH128_hash_t") XXH128Hash __result) {
+        nXXH128(memAddress(data), data.remaining(), seed, __result.address());
         return __result;
     }
 

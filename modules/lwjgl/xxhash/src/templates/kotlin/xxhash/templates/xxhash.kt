@@ -10,9 +10,15 @@ import xxhash.*
 val xxhash = "XXHash".nativeClass(Module.XXHASH, prefix = "XXH", prefixMethod = "XXH") {
     nativeDirective(
         """DISABLE_WARNINGS()
-#define XXH_INLINE_ALL
+//#define XXH_INLINE_ALL
+#define XXH_STATIC_LINKING_ONLY
+#define XXH_IMPLEMENTATION
 #include "lwjgl_malloc.h"
+#if defined(LWJGL_WINDOWS) || defined(LWJGL_arm64) || defined(LWJGL_arm32)
 #include "xxhash.h"
+#else
+#include "xxh_x86dispatch.h"
+#endif
 ENABLE_WARNINGS()""")
 
     documentation =
@@ -50,18 +56,17 @@ ENABLE_WARNINGS()""")
     )
 
     IntConstant("The major version number.", "VERSION_MAJOR".."0")
-    IntConstant("The minor version number.", "VERSION_MINOR".."7")
-    IntConstant("The release version number.", "VERSION_RELEASE".."2")
+    IntConstant("The minor version number.", "VERSION_MINOR".."8")
+    IntConstant("The release version number.", "VERSION_RELEASE".."0")
 
     IntConstant(
         "The version number",
         "VERSION_NUMBER".."(XXH_VERSION_MAJOR *100*100 + XXH_VERSION_MINOR *100 + XXH_VERSION_RELEASE)"
     )
 
-    IntConstant(
-        "",
-        "3_SECRET_SIZE_MIN"..136
-    )
+    IntConstant("", "3_SECRET_SIZE_MIN"..136)
+    IntConstant("", "SECRET_DEFAULT_SIZE".."192")
+
 
     // 32-bits hash
 
@@ -255,6 +260,19 @@ ENABLE_WARNINGS()""")
     )
 
     XXH64_hash_t(
+        "3_64bits_withSeed",
+        """
+        This variant generates on the fly a custom secret, based on the default secret, altered using the {@code seed} value.
+
+        While this operation is decently fast, note that it's not completely free. Note {@code seed==0} produces same results as #3_64bits().
+        """,
+
+        void.const.p("data", ""),
+        AutoSize("data")..size_t("len", ""),
+        XXH64_hash_t("seed", "")
+    )
+
+    XXH64_hash_t(
         "3_64bits_withSecret",
         """
         It's possible to provide any blob of bytes as a "secret" to generate the hash. This makes it more difficult for an external actor to prepare an
@@ -268,19 +286,6 @@ ENABLE_WARNINGS()""")
         AutoSize("data")..size_t("len", ""),
         void.const.p("secret", ""),
         AutoSize("secret")..size_t("secretSize", "")
-    )
-
-    XXH64_hash_t(
-        "3_64bits_withSeed",
-        """
-        This variant generates on the fly a custom secret, based on the default secret, altered using the {@code seed} value.
-
-        While this operation is decently fast, note that it's not completely free. Note {@code seed==0} produces same results as #3_64bits().
-        """,
-
-        void.const.p("data", ""),
-        AutoSize("data")..size_t("len", ""),
-        XXH64_hash_t("seed", "")
     )
 
     XXH3_state_t.p(
@@ -355,15 +360,6 @@ ENABLE_WARNINGS()""")
         "",
 
         XXH3_state_t.const.p("statePtr", "")
-    )
-
-    XXH128_hash_t(
-        "128",
-        "",
-
-        void.const.p("data", ""),
-        AutoSize("data")..size_t("len", ""),
-        XXH64_hash_t("seed", "")
     )
 
     XXH128_hash_t(
@@ -462,5 +458,42 @@ ENABLE_WARNINGS()""")
         "",
 
         XXH128_canonical_t.const.p("src", "")
+    )
+
+    void(
+        "3_generateSecret",
+        """
+        Derives a high-entropy secret from any user-defined content, named {@code customSeed}.
+
+        The generated secret can be used in combination with {@code *_withSecret()} functions.  The {@code _withSecret()} variants are useful to provide a
+        higher level of protection than 64-bit seed, as it becomes much more difficult for an external actor to guess how to impact the calculation logic.
+
+        The function accepts as input a custom seed of any length and any content, and derives from it a high-entropy secret of length #SECRET_DEFAULT_SIZE
+        into an already allocated buffer {@code secretBuffer}. The generated secret is <i>always</i> #SECRET_DEFAULT_SIZE bytes long.
+
+        The generated secret can then be used with any {@code *_withSecret()} variant. Functions #3_128bits_withSecret(), #3_64bits_withSecret(),
+        #3_128bits_reset_withSecret() and #3_64bits_reset_withSecret() are part of this list. They all accept a {@code secret} parameter which must be very
+        long for implementation reasons (&ge; #3_SECRET_SIZE_MIN) <i>and</i>> feature very high entropy (consist of random-looking bytes). These conditions can
+        be a high bar to meet, so this function can be used to generate a secret of proper quality.
+ 
+        {@code customSeed} can be anything. It can have any size, even small ones, and its content can be anything, even stupidly "low entropy" source such as
+        a bunch of zeroes. The resulting {@code secret} will nonetheless provide all expected qualities.
+ 
+        Supplying #NULL as the {@code customSeed} copies the default secret into {@code secretBuffer}.  When {@code customSeedSize} &gt; 0, supplying #NULL as
+        {@code customSeed} is undefined behavior.
+        """,
+
+        Check("XXH_SECRET_DEFAULT_SIZE")..void.p("secretBuffer", ""),
+        nullable..void.const.p("customSeed", ""),
+        AutoSize("customSeed")..size_t("customSeedSize", "")
+    )
+
+    XXH128_hash_t(
+        "128",
+        "",
+
+        void.const.p("data", ""),
+        AutoSize("data")..size_t("len", ""),
+        XXH64_hash_t("seed", "")
     )
 }

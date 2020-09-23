@@ -28,6 +28,12 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     </fail>
 
     <property name="build.arch.${build.arch}" value="true"/>
+    <condition property="build.arch.arm" value="true">
+        <or>
+            <isset property="build.arch.arm64"/>
+            <isset property="build.arch.arm32"/>
+        </or>
+    </condition>
 
     <import file="build-bindings.xml"/>
 

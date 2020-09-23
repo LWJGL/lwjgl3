@@ -268,7 +268,8 @@
                     <arg value="-I${src.main.rel}"/>
                     <arg value="-I${module.lwjgl.rel}/xxhash/src/main/c"/>
                     <fileset dir="." includes="${src.main}/*.c"/>
-                    <fileset dir="." includes="${module.lwjgl}/xxhash/src/main/c/*.c"/>
+                    <fileset dir="." includes="${module.lwjgl}/xxhash/src/main/c/xxhash.c"/>
+                    <fileset dir="." includes="${module.lwjgl}/xxhash/src/main/c/xxh_x86dispatch.c" unless:set="build.arch.arm"/>
                 </compile>
             </beforeCompile>
         </build>
@@ -396,7 +397,13 @@
         </build>
 
         <!-- xxHash -->
-        <build_simple module="xxhash"/>
+        <build module="xxhash" if:true="${binding.xxhash}">
+            <source>
+                <arg value="-I${src.main.rel}"/>
+                <fileset dir="." includes="${src.generated}/*.c"/>
+                <fileset dir="." includes="${src.main}/xxh_x86dispatch.c" unless:set="build.arch.arm"/>
+            </source>
+        </build>
 
         <!-- yoga -->
         <build module="yoga" simple="true" lang="c++" if:true="${binding.yoga}">
@@ -417,7 +424,8 @@
                     <fileset dir="." includes="${src.main}/compress/*.c"/>
                     <fileset dir="." includes="${src.main}/decompress/*.c"/>
                     <fileset dir="." includes="${src.main}/dictBuilder/*.c"/>
-                    <fileset dir="." includes="${module.lwjgl}/xxhash/src/main/c/*.c"/>
+                    <fileset dir="." includes="${module.lwjgl}/xxhash/src/main/c/xxhash.c"/>
+                    <fileset dir="." includes="${module.lwjgl}/xxhash/src/main/c/xxh_x86dispatch.c" unless:set="build.arch.arm"/>
                 </compile>
             </beforeCompile>
             <source>
