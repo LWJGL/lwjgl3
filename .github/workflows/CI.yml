@@ -1,0 +1,207 @@
+# TODO: https://github.blog/changelog/2022-08-09-github-actions-the-ubuntu-18-04-actions-runner-image-is-being-deprecated-and-will-be-removed-by-12-1-22/
+name: LWJGL Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+env:
+  AWS_DEFAULT_REGION: us-east-1
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  S3_PARAMS: --cache-control "public,must-revalidate,proxy-revalidate,max-age=0"
+  ANT_OPTS: -Xmx1G
+
+jobs:
+  check-kotlinc-cache:
+    name: Check kotlinc cache
+    runs-on: ubuntu-18.04
+    env:
+      JAVA_HOME: jdk8
+      LWJGL_BUILD_TYPE: nightly
+      ANT_OPTS: -Xmx2G
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 3
+      - run: |
+          curl https://cdn.azul.com/zulu/bin/zulu8.64.0.19-ca-fx-jdk8.0.345-linux_x64.tar.gz --output jdk8.tar.gz
+          mkdir jdk8
+          tar xf jdk8.tar.gz -C jdk8 --strip-components 1
+        name: Download JDK
+      - run: ant -emacs hydrate-kotlinc
+        id: hydration
+        name: Check generator hydration
+        continue-on-error: true
+      - run: |
+          git clone https://github.com/LWJGL-CI/OculusSDK.git ../OculusSDK
+          ant -emacs cache-kotlinc -Drevision="HEAD~2..HEAD~1"
+        if: steps.hydration.outcome == 'failure'
+        name: Cache kotlinc output
+  linux:
+    name: Linux
+    needs: check-kotlinc-cache
+    runs-on: ubuntu-18.04
+    strategy:
+      fail-fast: false
+      matrix:
+        ARCH: [x64, arm32, arm64]
+        include:
+          - ARCH: x64
+            PACKAGES: xorg-dev libgtk-3-dev libglu-dev libgl1-mesa-glx libx11-dev
+            NATIVE_PARAMS: -Dgcc.libpath.opengl=/usr/lib/x86_64-linux-gnu/mesa
+          - ARCH: arm32
+            PACKAGES: gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf libc6-dev-armhf-cross
+            CROSS_ARCH: armhf
+            CROSS_PACKAGES: libgtk-3-dev:armhf libatk-bridge2.0-dev:armhf libgdk-pixbuf2.0-dev:armhf libglu-dev:armhf libgl1-mesa-glx:armhf libx11-dev:armhf
+            NATIVE_PARAMS: -Dgcc.libpath.opengl=/usr/lib/arm-linux-gnueabihf/mesa
+          - ARCH: arm64
+            PACKAGES: gcc-aarch64-linux-gnu g++-aarch64-linux-gnu gcc-aarch64-linux-gnu g++-aarch64-linux-gnu libc6-dev-arm64-cross
+            CROSS_ARCH: arm64
+            CROSS_PACKAGES: libgtk-3-dev:arm64 libatk-bridge2.0-dev:arm64 libgdk-pixbuf2.0-dev:arm64 libglu-dev:arm64 libgl1-mesa-glx:arm64 libx11-dev:arm64
+            NATIVE_PARAMS: -Dgcc.libpath.opengl=/usr/lib/aarch64-linux-gnu/mesa
+    env:
+      JAVA_HOME: jdk8
+      LWJGL_BUILD_TYPE: nightly
+      LWJGL_BUILD_ARCH: ${{matrix.ARCH}}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 3
+      - run: |
+          sudo apt-get update
+          sudo apt-get upgrade
+          sudo apt-get -yq install ${{matrix.PACKAGES}}
+          curl https://cdn.azul.com/zulu/bin/zulu8.64.0.19-ca-fx-jdk8.0.345-linux_x64.tar.gz --output jdk8.tar.gz
+          mkdir jdk8
+          tar xf jdk8.tar.gz -C jdk8 --strip-components 1
+        name: Install dependencies
+      - run: |
+          if [[ "${{matrix.ARCH}}" != "mips64" ]]
+          then
+            sudo sed -i 's/deb http/deb [arch=amd64,i386] http/' /etc/apt/sources.list
+            sudo grep "ubuntu.com/ubuntu" /etc/apt/sources.list | sudo tee /etc/apt/sources.list.d/ports.list
+            sudo sed -i 's/amd64,i386/armhf,arm64/' /etc/apt/sources.list.d/ports.list
+            sudo sed -i 's#http://.*/ubuntu#http://ports.ubuntu.com/ubuntu-ports#' /etc/apt/sources.list.d/ports.list
+          else
+            sudo apt-get -yq install gcc-mips64el-linux-gnuabi64 libc6-dev-mips64el-cross
+            sudo rm -rf /etc/apt/sources.list
+            sudo sh -c "echo 'deb http://deb.debian.org/debian buster main' >> /etc/apt/sources.list"
+          fi
+          sudo dpkg --add-architecture ${{matrix.CROSS_ARCH}}
+          sudo apt-get clean
+          sudo apt-get update || true
+        if: contains(matrix.ARCH, 'x64') != true
+        name: Prepare cross-compilation
+      - run: sudo apt-get -yq -f --allow-unauthenticated --no-install-suggests --no-install-recommends install ${{matrix.CROSS_PACKAGES}} -o Dpkg::Options::="--force-overwrite"
+        if: contains(matrix.ARCH, 'x64') != true
+        name: Install cross-compilation dependencies
+      - run: ant -emacs hydrate-kotlinc clean-generated generate
+        name: Hydrate generator
+      - run: ant -emacs compile
+        name: Build Java
+      - run: ant -emacs compile-native ${{matrix.NATIVE_PARAMS}}
+        name: Build native
+      - run: ant -emacs tests
+        name: Run tests
+        if: contains(matrix.ARCH, 'x64')
+      - run: ant -emacs upload-native
+        name: Upload artifacts
+
+  macos:
+    name: macOS
+    needs: check-kotlinc-cache
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ARCH: [x64, arm64]
+        include:
+          - ARCH: x64
+            SDK_ROOT:
+          - ARCH: arm64
+            SDK_ROOT: SDKROOT=$(xcrun -sdk macosx11.1 --show-sdk-path)
+    env:
+      JAVA_HOME: jdk8
+      LWJGL_BUILD_TYPE: nightly
+      LWJGL_BUILD_ARCH: ${{matrix.ARCH}}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 3
+      - run: |
+          curl https://cdn.azul.com/zulu/bin/zulu8.64.0.19-ca-fx-jdk8.0.345-macosx_x64.tar.gz --output jdk8.tar.gz
+          mkdir jdk8
+          tar xf jdk8.tar.gz -C jdk8 --strip-components 1
+        name: Install dependencies
+      - run: ant -emacs hydrate-kotlinc clean-generated generate
+        name: Hydrate generator
+      - run: ant -emacs compile
+        name: Build Java
+      - run: ${{matrix.SDK_ROOT}} ant -emacs compile-native
+        name: Build native
+      - run: ant -emacs tests
+        name: Run tests
+        if: contains(matrix.ARCH, 'arm') != true
+      - run: ant -emacs upload-native
+        name: Upload artifacts
+
+  windows:
+    name: Windows
+    needs: check-kotlinc-cache
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ARCH: [x86, x64, arm64]
+        include:
+          - ARCH: x86
+            JDK: zulu8.64.0.19-ca-fx-jdk8.0.345-win_i686
+            MSVC_ARCH: amd64_x86
+          - ARCH: x64
+            JDK: zulu8.64.0.19-ca-fx-jdk8.0.345-win_x64
+            MSVC_ARCH: amd64
+          - ARCH: arm64
+            JDK: zulu8.64.0.19-ca-fx-jdk8.0.345-win_x64
+            MSVC_ARCH: amd64_arm64
+    env:
+      JAVA_HOME: ${{matrix.JDK}}
+      LWJGL_BUILD_TYPE: nightly
+      LWJGL_BUILD_ARCH: ${{matrix.ARCH}}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 3
+      - uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: ${{ matrix.MSVC_ARCH }}
+          #call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{matrix.MSVC_ARCH}}
+      - run: git clone https://github.com/LWJGL-CI/OculusSDK.git ../OculusSDK
+        name: Clone Oculus SDK
+        if: contains(matrix.ARCH, 'arm') != true
+      - run: |
+          Invoke-WebRequest https://cdn.azul.com/zulu/bin/${{matrix.JDK}}.zip -OutFile jdk.zip
+          Expand-Archive -Path jdk.zip -DestinationPath .\
+        name: Install dependencies
+      - run: ant -emacs hydrate-kotlinc clean-generated generate
+        shell: cmd
+        name: Generate bindings
+      - run: ant -emacs compile
+        shell: cmd
+        name: Build Java
+      - run: ant -emacs compile-native
+        shell: cmd
+        name: Build native
+      - run: ant -emacs tests
+        shell: cmd
+        if: contains(matrix.ARCH, 'arm') != true
+        name: Run tests
+      - run: type bin\test\testng-results.xml
+        shell: cmd
+        if: failure()
+        name: Print test results
+      - run: ant -emacs upload-native
+        shell: cmd
+        name: Upload artifacts
