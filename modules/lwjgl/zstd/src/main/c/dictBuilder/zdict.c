@@ -42,11 +42,11 @@
 #define HUF_STATIC_LINKING_ONLY
 #include "../common/huf.h"           /* HUF_buildCTable, HUF_writeCTable */
 #include "../common/zstd_internal.h" /* includes zstd.h */
-#if defined(LWJGL_WINDOWS) || defined(LWJGL_arm64) || defined(LWJGL_arm32)
+//#if defined(LWJGL_WINDOWS) || defined(LWJGL_arm64) || defined(LWJGL_arm32)
 #include "xxhash.h"        /* XXH64 */
-#else
-#include "xxh_x86dispatch.h"
-#endif
+//#else
+//#include "xxh_x86dispatch.h"
+//#endif
 #include "divsufsort.h"
 #ifndef ZDICT_STATIC_LINKING_ONLY
 #  define ZDICT_STATIC_LINKING_ONLY

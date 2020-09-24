@@ -14,11 +14,11 @@ val xxhash = "XXHash".nativeClass(Module.XXHASH, prefix = "XXH", prefixMethod = 
 #define XXH_STATIC_LINKING_ONLY
 #define XXH_IMPLEMENTATION
 #include "lwjgl_malloc.h"
-#if defined(LWJGL_WINDOWS) || defined(LWJGL_arm64) || defined(LWJGL_arm32)
+//#if defined(LWJGL_WINDOWS) || defined(LWJGL_arm64) || defined(LWJGL_arm32)
 #include "xxhash.h"
-#else
-#include "xxh_x86dispatch.h"
-#endif
+//#else
+//#include "xxh_x86dispatch.h"
+//#endif
 ENABLE_WARNINGS()""")
 
     documentation =

@@ -35,11 +35,11 @@
 #ifndef XXH_STATIC_LINKING_ONLY
 #  define XXH_STATIC_LINKING_ONLY  /* XXH64_state_t */
 #endif
-#if defined(LWJGL_WINDOWS) || defined(LWJGL_arm64) || defined(LWJGL_arm32)
+//#if defined(LWJGL_WINDOWS) || defined(LWJGL_arm64) || defined(LWJGL_arm32)
 #include "xxhash.h"                /* XXH_reset, update, digest */
-#else
-#include "xxh_x86dispatch.h"
-#endif
+//#else
+//#include "xxh_x86dispatch.h"
+//#endif
 
 #if defined (__cplusplus)
 extern "C" {

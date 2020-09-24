@@ -282,7 +282,7 @@
                     <arg value="-I${module.lwjgl.rel}/xxhash/src/main/c"/>
                     <fileset dir="." includes="${src.main}/*.c"/>
                     <fileset dir="." includes="${module.lwjgl}/xxhash/src/main/c/xxhash.c"/>
-                    <fileset dir="." includes="${module.lwjgl}/xxhash/src/main/c/xxh_x86dispatch.c" unless:set="build.arch.arm"/>
+                    <!--<fileset dir="." includes="${module.lwjgl}/xxhash/src/main/c/xxh_x86dispatch.c" unless:set="build.arch.arm"/>-->
                 </compile>
             </beforeCompile>
         </build>
@@ -470,7 +470,7 @@
             <source>
                 <arg value="-I${src.main.rel}"/>
                 <fileset dir="." includes="${src.generated}/*.c"/>
-                <fileset dir="." includes="${src.main}/xxh_x86dispatch.c" unless:set="build.arch.arm"/>
+                <!--<fileset dir="." includes="${src.main}/xxh_x86dispatch.c" unless:set="build.arch.arm"/>-->
             </source>
         </build>
 
@@ -494,7 +494,7 @@
                     <fileset dir="." includes="${src.main}/decompress/*.c"/>
                     <fileset dir="." includes="${src.main}/dictBuilder/*.c"/>
                     <fileset dir="." includes="${module.lwjgl}/xxhash/src/main/c/xxhash.c"/>
-                    <fileset dir="." includes="${module.lwjgl}/xxhash/src/main/c/xxh_x86dispatch.c" unless:set="build.arch.arm"/>
+                    <!--<fileset dir="." includes="${module.lwjgl}/xxhash/src/main/c/xxh_x86dispatch.c" unless:set="build.arch.arm"/>-->
                 </compile>
             </beforeCompile>
             <source>
