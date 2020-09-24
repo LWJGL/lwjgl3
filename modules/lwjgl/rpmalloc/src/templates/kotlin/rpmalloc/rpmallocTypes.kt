@@ -182,6 +182,7 @@ val rpmalloc_config_t = struct(Module.RPMALLOC, "RPMallocConfig", nativeName = "
         <a href="https://www.kernel.org/doc/Documentation/vm/hugetlbpage.txt">hugetlbpage.txt</a>.
         """
     )
+    padding(4)
 }
 
 val rpmalloc_global_statistics_t = struct(
@@ -231,7 +232,7 @@ val rpmalloc_thread_statistics_t = struct(
 		size_t("to_reserved", "Number of spans transitioned to reserved state")
 		size_t("from_reserved", "Number of spans transitioned from reserved state")
 		size_t("map_calls", "Number of raw memory map calls (not hitting the reserve spans but resulting in actual OS mmap calls)")
-	}("span_use", "Per span count statistics (only if {@code ENABLE_STATISTICS=1})")[32]
+	}("span_use", "Per span count statistics (only if {@code ENABLE_STATISTICS=1})")[64]
 	struct {
 		size_t("alloc_current", "Current number of allocations")
 		size_t("alloc_peak", "Peak number of allocations")

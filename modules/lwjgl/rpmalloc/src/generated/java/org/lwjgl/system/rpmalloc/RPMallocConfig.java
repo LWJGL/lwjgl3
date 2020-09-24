@@ -70,6 +70,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     size_t span_size;
  *     size_t span_map_count;
  *     int enable_huge_pages;
+ *     char[4];
  * }</code></pre>
  */
 @NativeType("struct rpmalloc_config_t")
@@ -97,7 +98,8 @@ public class RPMallocConfig extends Struct implements NativeResource {
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
-            __member(4)
+            __member(4),
+            __padding(4, true)
         );
 
         SIZEOF = layout.getSize();

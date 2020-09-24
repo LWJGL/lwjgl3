@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code spancache} &ndash; Current number of bytes available in thread span caches for small and medium sizes (&lt;32KiB)</li>
  * <li>{@code thread_to_global} &ndash; Total number of bytes transitioned from thread cache to global cache (only if {@code ENABLE_STATISTICS=1})</li>
  * <li>{@code global_to_thread} &ndash; Total number of bytes transitioned from global cache to thread cache (only if {@code ENABLE_STATISTICS=1})</li>
- * <li>{@code span_use[32]} &ndash; Per span count statistics (only if {@code ENABLE_STATISTICS=1})</li>
+ * <li>{@code span_use[64]} &ndash; Per span count statistics (only if {@code ENABLE_STATISTICS=1})</li>
  * <li>{@code size_use[128]} &ndash; Per size class statistics (only if {@code ENABLE_STATISTICS=1})</li>
  * </ul>
  * 
@@ -46,7 +46,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *         size_t to_reserved;
  *         size_t from_reserved;
  *         size_t map_calls;
- *     } {@link span_use span_use}[32];
+ *     } {@link span_use span_use}[64];
  *     struct {
  *         size_t alloc_current;
  *         size_t alloc_peak;
@@ -83,7 +83,7 @@ public class RPmallocThreadStatistics extends Struct implements NativeResource {
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
-            __array(span_use.SIZEOF, span_use.ALIGNOF, 32),
+            __array(span_use.SIZEOF, span_use.ALIGNOF, 64),
             __array(size_use.SIZEOF, size_use.ALIGNOF, 128)
         );
 
@@ -124,7 +124,7 @@ public class RPmallocThreadStatistics extends Struct implements NativeResource {
     @NativeType("size_t")
     public long global_to_thread() { return nglobal_to_thread(address()); }
     /** Returns a {@link span_use}.Buffer view of the {@code span_use} field. */
-    @NativeType("*[32]")
+    @NativeType("*[64]")
     public span_use.Buffer span_use() { return nspan_use(address()); }
     /** Returns a {@link span_use} view of the struct at the specified index of the {@code span_use} field. */
     @NativeType("*")
@@ -288,10 +288,10 @@ public class RPmallocThreadStatistics extends Struct implements NativeResource {
     /** Unsafe version of {@link #global_to_thread}. */
     public static long nglobal_to_thread(long struct) { return memGetAddress(struct + RPmallocThreadStatistics.GLOBAL_TO_THREAD); }
     /** Unsafe version of {@link #span_use}. */
-    public static span_use.Buffer nspan_use(long struct) { return span_use.create(struct + RPmallocThreadStatistics.SPAN_USE, 32); }
+    public static span_use.Buffer nspan_use(long struct) { return span_use.create(struct + RPmallocThreadStatistics.SPAN_USE, 64); }
     /** Unsafe version of {@link #span_use(int) span_use}. */
     public static span_use nspan_use(long struct, int index) {
-        return span_use.create(struct + RPmallocThreadStatistics.SPAN_USE + check(index, 32) * span_use.SIZEOF);
+        return span_use.create(struct + RPmallocThreadStatistics.SPAN_USE + check(index, 64) * span_use.SIZEOF);
     }
     /** Unsafe version of {@link #size_use}. */
     public static size_use.Buffer nsize_use(long struct) { return size_use.create(struct + RPmallocThreadStatistics.SIZE_USE, 128); }
@@ -351,7 +351,7 @@ public class RPmallocThreadStatistics extends Struct implements NativeResource {
         @NativeType("size_t")
         public long global_to_thread() { return RPmallocThreadStatistics.nglobal_to_thread(address()); }
         /** Returns a {@link span_use}.Buffer view of the {@code span_use} field. */
-        @NativeType("*[32]")
+        @NativeType("*[64]")
         public span_use.Buffer span_use() { return RPmallocThreadStatistics.nspan_use(address()); }
         /** Returns a {@link span_use} view of the struct at the specified index of the {@code span_use} field. */
         @NativeType("*")

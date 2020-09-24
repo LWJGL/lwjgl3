@@ -111,7 +111,7 @@ typedef struct rpmalloc_thread_statistics_t {
 		size_t from_reserved;
 		//! Number of raw memory map calls (not hitting the reserve spans but resulting in actual OS mmap calls)
 		size_t map_calls;
-	} span_use[32];
+	} span_use[64];
 	//! Per size class statistics (only if ENABLE_STATISTICS=1)
 	struct {
 		//! Current number of allocations
@@ -175,6 +175,7 @@ typedef struct rpmalloc_config_t {
 	//  For Windows, see https://docs.microsoft.com/en-us/windows/desktop/memory/large-page-support
 	//  For Linux, see https://www.kernel.org/doc/Documentation/vm/hugetlbpage.txt
 	int enable_huge_pages;
+	int unused;
 } rpmalloc_config_t;
 
 //! Initialize allocator with default configuration
