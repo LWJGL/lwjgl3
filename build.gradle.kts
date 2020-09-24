@@ -11,6 +11,9 @@ plugins {
 }
 
 val lwjglVersion: String by project
+val signingKeyId: String by project
+val signingKey: String by project
+val signingPassword: String by project
 val sonatypeUsername: String by project
 val sonatypePassword: String by project
 
@@ -27,25 +30,19 @@ enum class BuildType {
 
 data class Deployment(
     val type: BuildType,
-    val repo: URI,
-    val user: String? = null,
-    val password: String? = null
+    val repo: URI
 )
 
 val deployment = when {
     hasProperty("release") -> Deployment(
         type = BuildType.RELEASE,
-        repo = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/"),
-        user = sonatypeUsername,
-        password = sonatypePassword
+        repo = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
     )
     hasProperty("snapshot") -> {
         version = "$version-SNAPSHOT"
         Deployment(
             type = BuildType.SNAPSHOT,
-            repo = uri("https://oss.sonatype.org/content/repositories/snapshots/"),
-            user = sonatypeUsername,
-            password = sonatypePassword
+            repo = uri("https://oss.sonatype.org/content/repositories/snapshots/")
         )
     }
     else -> {
@@ -345,8 +342,8 @@ publishing {
 
             if (deployment.type !== BuildType.LOCAL) {
                 credentials {
-                    username = deployment.user
-                    password = deployment.password
+                    username = sonatypeUsername
+                    password = sonatypePassword
                 }
             }
         }
@@ -490,7 +487,11 @@ publishing {
 }
 
 signing {
-    isRequired = deployment.type === BuildType.RELEASE
+    useInMemoryPgpKeys(
+        signingKeyId,
+        signingKey,
+        signingPassword
+    )
     sign(publishing.publications)
 }
 
