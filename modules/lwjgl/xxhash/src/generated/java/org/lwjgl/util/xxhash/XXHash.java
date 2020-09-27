@@ -652,7 +652,7 @@ public class XXHash {
      * 
      * <p>The generated secret can then be used with any {@code *_withSecret()} variant. Functions {@link #XXH3_128bits_withSecret 3_128bits_withSecret}, {@link #XXH3_64bits_withSecret 3_64bits_withSecret},
      * {@link #XXH3_128bits_reset_withSecret 3_128bits_reset_withSecret} and {@link #XXH3_64bits_reset_withSecret 3_64bits_reset_withSecret} are part of this list. They all accept a {@code secret} parameter which must be very
-     * long for implementation reasons (&ge; {@link #XXH_3_SECRET_SIZE_MIN 3_SECRET_SIZE_MIN}) <i>and</i>> feature very high entropy (consist of random-looking bytes). These conditions can
+     * long for implementation reasons (&ge; {@link #XXH_3_SECRET_SIZE_MIN 3_SECRET_SIZE_MIN}) <i>and</i> feature very high entropy (consist of random-looking bytes). These conditions can
      * be a high bar to meet, so this function can be used to generate a secret of proper quality.</p>
      * 
      * <p>{@code customSeed} can be anything. It can have any size, even small ones, and its content can be anything, even stupidly "low entropy" source such as
