@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * int (*) (
+ * nk_bool (*) (
  *     struct nk_text_edit const *edit,
  *     nk_rune unicode
  * )</code></pre>
@@ -67,7 +67,7 @@ public abstract class NkPluginFilter extends Callback implements NkPluginFilterI
         }
 
         @Override
-        public int invoke(long edit, int unicode) {
+        public boolean invoke(long edit, int unicode) {
             return delegate.invoke(edit, unicode);
         }
 

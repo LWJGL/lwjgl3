@@ -15,28 +15,28 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * int (*) (
+ * nk_bool (*) (
  *     struct nk_text_edit const *edit,
  *     nk_rune unicode
  * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("nk_plugin_filter")
-public interface NkPluginFilterI extends CallbackI.I {
+public interface NkPluginFilterI extends CallbackI.Z {
 
-    String SIGNATURE = "(pi)i";
+    String SIGNATURE = "(pi)B";
 
     @Override
     default String getSignature() { return SIGNATURE; }
 
     @Override
-    default int callback(long args) {
+    default boolean callback(long args) {
         return invoke(
             dcbArgPointer(args),
             dcbArgInt(args)
         );
     }
 
-    int invoke(@NativeType("struct nk_text_edit const *") long edit, @NativeType("nk_rune") int unicode);
+    @NativeType("nk_bool") boolean invoke(@NativeType("struct nk_text_edit const *") long edit, @NativeType("nk_rune") int unicode);
 
 }

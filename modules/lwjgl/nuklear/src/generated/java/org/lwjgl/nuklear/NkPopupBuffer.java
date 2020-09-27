@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     nk_size parent;
  *     nk_size last;
  *     nk_size end;
- *     int active;
+ *     nk_bool active;
  * }</code></pre>
  */
 @NativeType("struct nk_popup_buffer")
@@ -48,7 +48,7 @@ public class NkPopupBuffer extends Struct {
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
-            __member(4)
+            __member(1)
         );
 
         SIZEOF = layout.getSize();
@@ -87,7 +87,8 @@ public class NkPopupBuffer extends Struct {
     @NativeType("nk_size")
     public long end() { return nend(address()); }
     /** Returns the value of the {@code active} field. */
-    public int active() { return nactive(address()); }
+    @NativeType("nk_bool")
+    public boolean active() { return nactive(address()); }
 
     // -----------------------------------
 
@@ -129,7 +130,7 @@ public class NkPopupBuffer extends Struct {
     /** Unsafe version of {@link #end}. */
     public static long nend(long struct) { return memGetAddress(struct + NkPopupBuffer.END); }
     /** Unsafe version of {@link #active}. */
-    public static int nactive(long struct) { return UNSAFE.getInt(null, struct + NkPopupBuffer.ACTIVE); }
+    public static boolean nactive(long struct) { return UNSAFE.getByte(null, struct + NkPopupBuffer.ACTIVE) != 0; }
 
     // -----------------------------------
 
@@ -182,7 +183,8 @@ public class NkPopupBuffer extends Struct {
         @NativeType("nk_size")
         public long end() { return NkPopupBuffer.nend(address()); }
         /** Returns the value of the {@code active} field. */
-        public int active() { return NkPopupBuffer.nactive(address()); }
+        @NativeType("nk_bool")
+        public boolean active() { return NkPopupBuffer.nactive(address()); }
 
     }
 

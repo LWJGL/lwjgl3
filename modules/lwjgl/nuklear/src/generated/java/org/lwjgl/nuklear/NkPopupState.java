@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     enum nk_panel_type type;
  *     {@link NkPopupBuffer struct nk_popup_buffer} buf;
  *     nk_hash name;
- *     int active;
+ *     nk_bool active;
  *     unsigned combo_count;
  *     unsigned con_count;
  *     unsigned con_old;
@@ -64,7 +64,7 @@ public class NkPopupState extends Struct {
             __member(4),
             __member(NkPopupBuffer.SIZEOF, NkPopupBuffer.ALIGNOF),
             __member(4),
-            __member(4),
+            __member(1),
             __member(4),
             __member(4),
             __member(4),
@@ -113,7 +113,8 @@ public class NkPopupState extends Struct {
     @NativeType("nk_hash")
     public int name() { return nname(address()); }
     /** Returns the value of the {@code active} field. */
-    public int active() { return nactive(address()); }
+    @NativeType("nk_bool")
+    public boolean active() { return nactive(address()); }
     /** Returns the value of the {@code combo_count} field. */
     @NativeType("unsigned")
     public int combo_count() { return ncombo_count(address()); }
@@ -170,7 +171,7 @@ public class NkPopupState extends Struct {
     /** Unsafe version of {@link #name}. */
     public static int nname(long struct) { return UNSAFE.getInt(null, struct + NkPopupState.NAME); }
     /** Unsafe version of {@link #active}. */
-    public static int nactive(long struct) { return UNSAFE.getInt(null, struct + NkPopupState.ACTIVE); }
+    public static boolean nactive(long struct) { return UNSAFE.getByte(null, struct + NkPopupState.ACTIVE) != 0; }
     /** Unsafe version of {@link #combo_count}. */
     public static int ncombo_count(long struct) { return UNSAFE.getInt(null, struct + NkPopupState.COMBO_COUNT); }
     /** Unsafe version of {@link #con_count}. */
@@ -233,7 +234,8 @@ public class NkPopupState extends Struct {
         @NativeType("nk_hash")
         public int name() { return NkPopupState.nname(address()); }
         /** Returns the value of the {@code active} field. */
-        public int active() { return NkPopupState.nactive(address()); }
+        @NativeType("nk_bool")
+        public boolean active() { return NkPopupState.nactive(address()); }
         /** Returns the value of the {@code combo_count} field. */
         @NativeType("unsigned")
         public int combo_count() { return NkPopupState.ncombo_count(address()); }

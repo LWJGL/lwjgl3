@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <pre><code>
  * struct nk_mouse_button {
- *     int down;
+ *     nk_bool down;
  *     unsigned int clicked;
  *     {@link NkVec2 struct nk_vec2} clicked_pos;
  * }</code></pre>
@@ -40,7 +40,7 @@ public class NkMouseButton extends Struct {
 
     static {
         Layout layout = __struct(
-            __member(4),
+            __member(1),
             __member(4),
             __member(NkVec2.SIZEOF, NkVec2.ALIGNOF)
         );
@@ -67,7 +67,8 @@ public class NkMouseButton extends Struct {
     public int sizeof() { return SIZEOF; }
 
     /** Returns the value of the {@code down} field. */
-    public int down() { return ndown(address()); }
+    @NativeType("nk_bool")
+    public boolean down() { return ndown(address()); }
     /** Returns the value of the {@code clicked} field. */
     @NativeType("unsigned int")
     public int clicked() { return nclicked(address()); }
@@ -107,7 +108,7 @@ public class NkMouseButton extends Struct {
     // -----------------------------------
 
     /** Unsafe version of {@link #down}. */
-    public static int ndown(long struct) { return UNSAFE.getInt(null, struct + NkMouseButton.DOWN); }
+    public static boolean ndown(long struct) { return UNSAFE.getByte(null, struct + NkMouseButton.DOWN) != 0; }
     /** Unsafe version of {@link #clicked}. */
     public static int nclicked(long struct) { return UNSAFE.getInt(null, struct + NkMouseButton.CLICKED); }
     /** Unsafe version of {@link #clicked_pos}. */
@@ -152,7 +153,8 @@ public class NkMouseButton extends Struct {
         }
 
         /** Returns the value of the {@code down} field. */
-        public int down() { return NkMouseButton.ndown(address()); }
+        @NativeType("nk_bool")
+        public boolean down() { return NkMouseButton.ndown(address()); }
         /** Returns the value of the {@code clicked} field. */
         @NativeType("unsigned int")
         public int clicked() { return NkMouseButton.nclicked(address()); }

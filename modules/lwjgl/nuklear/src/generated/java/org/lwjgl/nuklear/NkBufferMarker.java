@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <pre><code>
  * struct nk_buffer_marker {
- *     int active;
+ *     nk_bool active;
  *     nk_size offset;
  * }</code></pre>
  */
@@ -38,7 +38,7 @@ public class NkBufferMarker extends Struct {
 
     static {
         Layout layout = __struct(
-            __member(4),
+            __member(1),
             __member(POINTER_SIZE)
         );
 
@@ -63,7 +63,8 @@ public class NkBufferMarker extends Struct {
     public int sizeof() { return SIZEOF; }
 
     /** Returns the value of the {@code active} field. */
-    public int active() { return nactive(address()); }
+    @NativeType("nk_bool")
+    public boolean active() { return nactive(address()); }
     /** Returns the value of the {@code offset} field. */
     @NativeType("nk_size")
     public long offset() { return noffset(address()); }
@@ -100,7 +101,7 @@ public class NkBufferMarker extends Struct {
     // -----------------------------------
 
     /** Unsafe version of {@link #active}. */
-    public static int nactive(long struct) { return UNSAFE.getInt(null, struct + NkBufferMarker.ACTIVE); }
+    public static boolean nactive(long struct) { return UNSAFE.getByte(null, struct + NkBufferMarker.ACTIVE) != 0; }
     /** Unsafe version of {@link #offset}. */
     public static long noffset(long struct) { return memGetAddress(struct + NkBufferMarker.OFFSET); }
 
@@ -143,7 +144,8 @@ public class NkBufferMarker extends Struct {
         }
 
         /** Returns the value of the {@code active} field. */
-        public int active() { return NkBufferMarker.nactive(address()); }
+        @NativeType("nk_bool")
+        public boolean active() { return NkBufferMarker.nactive(address()); }
         /** Returns the value of the {@code offset} field. */
         @NativeType("nk_size")
         public long offset() { return NkBufferMarker.noffset(address()); }

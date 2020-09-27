@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <pre><code>
  * struct nk_key {
- *     int down;
+ *     nk_bool down;
  *     unsigned int clicked;
  * }</code></pre>
  */
@@ -38,7 +38,7 @@ public class NkKey extends Struct {
 
     static {
         Layout layout = __struct(
-            __member(4),
+            __member(1),
             __member(4)
         );
 
@@ -63,7 +63,8 @@ public class NkKey extends Struct {
     public int sizeof() { return SIZEOF; }
 
     /** Returns the value of the {@code down} field. */
-    public int down() { return ndown(address()); }
+    @NativeType("nk_bool")
+    public boolean down() { return ndown(address()); }
     /** Returns the value of the {@code clicked} field. */
     @NativeType("unsigned int")
     public int clicked() { return nclicked(address()); }
@@ -100,7 +101,7 @@ public class NkKey extends Struct {
     // -----------------------------------
 
     /** Unsafe version of {@link #down}. */
-    public static int ndown(long struct) { return UNSAFE.getInt(null, struct + NkKey.DOWN); }
+    public static boolean ndown(long struct) { return UNSAFE.getByte(null, struct + NkKey.DOWN) != 0; }
     /** Unsafe version of {@link #clicked}. */
     public static int nclicked(long struct) { return UNSAFE.getInt(null, struct + NkKey.CLICKED); }
 
@@ -143,7 +144,8 @@ public class NkKey extends Struct {
         }
 
         /** Returns the value of the {@code down} field. */
-        public int down() { return NkKey.ndown(address()); }
+        @NativeType("nk_bool")
+        public boolean down() { return NkKey.ndown(address()); }
         /** Returns the value of the {@code clicked} field. */
         @NativeType("unsigned int")
         public int clicked() { return NkKey.nclicked(address()); }
