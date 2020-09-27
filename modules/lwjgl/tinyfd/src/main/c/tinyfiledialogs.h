@@ -1,23 +1,28 @@
 /*_________
- /         \ tinyfiledialogs.h v3.6.1 [Apr 24, 2020] zlib licence
+ /         \ tinyfiledialogs.h v3.6.6 [Sep 23, 2020] zlib licence
  |tiny file| Unique header file created [November 9, 2014]
  | dialogs | Copyright (c) 2014 - 2020 Guillaume Vareille http://ysengrin.com
  \____  ___/ http://tinyfiledialogs.sourceforge.net
       \|     git clone http://git.code.sf.net/p/tinyfiledialogs/code tinyfd
-              ____________________________________________
-             |                                            |
-             |   email: tinyfiledialogs at ysengrin.com   |
-             |____________________________________________|
-  _________________________________________________________________________________
- |                                                                                 |
- | the windows only wchar_t UTF-16 functions are at the bottom of this header file |
- |_________________________________________________________________________________|
-  _________________________________________________________
- |                                                         |
- | on windows: - since v3.6 char is UTF-8 by default       |
- |             - if you want MBCS set tinyfd_winUtf8 to 0  |
- |             - functions like fopen expect MBCS          |
- |_________________________________________________________|
+ ____________________________________________
+|                                            |
+|   email: tinyfiledialogs at ysengrin.com   |
+|____________________________________________|
+ ________________________________________________________________________________
+|  ____________________________________________________________________________  |
+| |                                                                            | |
+| | on windows:                                                                | |
+| |  - for UTF-16, use the wchar_t functions at the bottom of the header file  | |
+| |  - _wfopen() requires wchar_t                                              | |
+| |                                                                            | |
+| |  - in tinyfiledialogs, char is UTF-8 by default (since v3.6)               | |
+| |  - but fopen() expects MBCS (not UTF-8)                                    | |
+| |  - if you want char to be MBCS: set tinyfd_winUtf8 to 0                    | |
+| |                                                                            | |
+| |  - alternatively, tinyfiledialogs provides                                 | |
+| |                        functions to convert between UTF-8, UTF-16 and MBCS | |
+| |____________________________________________________________________________| |
+|________________________________________________________________________________|
 
 If you like tinyfiledialogs, please upvote my stackoverflow answer
 https://stackoverflow.com/a/47651444
@@ -68,7 +73,6 @@ on Windows Mac Linux Bsd Solaris Minix Raspbian
 using Gnome Kde Enlightenment Mate Cinnamon Budgie Unity Lxde Lxqt Xfce
 WindowMaker IceWm Cde Jds OpenBox Awesome Jwm Xdm Cwm
 
-
 Bindings for LUA and C# dll, Haskell, Fortran
 Included in LWJGL(java), Rust, Allegrobasic
 
@@ -110,9 +114,13 @@ extern int tinyfd_winUtf8; /* on windows char strings can be 1:UTF-8(default) or
 
 /* Here are some functions to help you convert between UTF-16 UTF-8 MBSC */
 char * tinyfd_utf8toMbcs(char const * aUtf8string);
+char * tinyfd_utf16toMbcs(wchar_t const * aUtf16string);
+wchar_t * tinyfd_mbcsTo16(char const * aMbcsString);
+char * tinyfd_mbcsTo8(char const * aMbcsString);
 wchar_t * tinyfd_utf8to16(char const * aUtf8string);
 char * tinyfd_utf16to8(wchar_t const * aUtf16string);
-void tinyfd_setWinUtf8(int aIsUtf8); /* made to be used from C# to set the global variable tinyfd_winUtf8 to 1 or 0 */
+
+void tinyfd_setWinUtf8(int aIsUtf8); /* only to be used from C# to set the global variable tinyfd_winUtf8 to 1 or 0 */
 #endif
 /******************************************************************************************************/
 /******************************************************************************************************/
@@ -121,8 +129,10 @@ void tinyfd_setWinUtf8(int aIsUtf8); /* made to be used from C# to set the globa
 extern char const tinyfd_version[8]; /* contains tinyfd current version number */
 extern char const tinyfd_needs[]; /* info about requirements */
 extern int tinyfd_verbose; /* 0 (default) or 1 : on unix, prints the command line calls */
-extern int tinyfd_silent; /* 1 (default) or 0 : on unix, hide errors and warnings from called dialogs*/
-extern int tinyfd_allowCursesDialogs; /* 0 (default) or 1 : curses dialogs are difficult to use, on windows they are only ascii*/
+extern int tinyfd_silent; /* 1 (default) or 0 : on unix, hide errors and warnings from called dialogs */
+
+/* Curses dialogs are difficult to use, on windows they are only ascii */
+/* int const tinyfd_allowCursesDialogs; 0 (default) or 1 : you can change this in tinyfiledialogs.c */
 
 extern int tinyfd_forceConsole;  /* 0 (default) or 1 */
 /* for unix & windows: 0 (graphic mode) or 1 (console mode).
@@ -202,7 +212,7 @@ char * tinyfd_colorChooser(
 		/* returns NULL on cancel */
 
 
-/************ NOT CROSS PLATFORM SECTION STARTS HERE ************************/
+/************ WINDOWS ONLY SECTION ************************/
 #ifdef _WIN32
 
 /* windows only - utf-16 version */
@@ -264,17 +274,6 @@ wchar_t * tinyfd_colorChooserW(
 		/* aDefaultRGB and aoResultRGB can be the same array */
 		/* returns NULL on cancel */
 
-#else /*_WIN32*/
-
-/* unix zenity only */
-char * tinyfd_arrayDialog(
-	char const * aTitle , /* NULL or "" */
-	int aNumOfColumns , /* 2 */
-	char const * const * aColumns, /* {"Column 1","Column 2"} */
-	int aNumOfRows, /* 2 */
-	char const * const * aCells);
-		/* {"Row1 Col1","Row1 Col2","Row2 Col1","Row2 Col2"} */
-
 #endif /*_WIN32 */
 
 #ifdef	__cplusplus
@@ -284,11 +283,10 @@ char * tinyfd_arrayDialog(
 #endif /* TINYFILEDIALOGS_H */
 
 /*
-- This is not for android nor ios.
+- This is not for ios nor android (it works in termux though).
 - The code is pure C, perfectly compatible with C++.
-- the windows only wchar_t (utf-16) prototypes are in the header file
 - windows is fully supported from XP to 10 (maybe even older versions)
-- C# & LUA via dll, see example files
+- C# & LUA via dll, see files in the folder EXTRAS
 - OSX supported from 10.4 to latest (maybe even older versions)
 - Avoid using " and ' in titles and messages.
 - There's one file filter only, it may contain several patterns.
@@ -297,8 +295,9 @@ char * tinyfd_arrayDialog(
 - char const * filterPatterns[3] = { "*.obj" , "*.stl" , "*.dxf" } ;
 - On windows char defaults to UTF-8, set tinyfd_winUtf8=0 to use MBCS
 - On windows link against Comdlg32.lib and Ole32.lib
-  This linking is not compulsary for console mode (see above).
-- On unix: it tries command line calls, so no such need.
+  (on windows the no linking claim is a lie)
+  This linking is not compulsary for console mode (see header file).
+- On unix: it tries command line calls, so no such need (NO LINKING).
 - On unix you need one of the following:
   applescript, kdialog, zenity, matedialog, shellementary, qarma,
   python (2 or 3)/tkinter/python-dbus (optional), Xdialog
@@ -315,18 +314,16 @@ char * tinyfd_arrayDialog(
   make sure it ends with a separator.
 - tinyfd_forceConsole=1; at run time, forces dialogs into console mode.
 - On windows, console mode only make sense for console applications.
-- On windows, Console mode is not implemented for wchar_T UTF-16, but it is for MBCS.
+- On windows, Console mode is not implemented for wchar_T UTF-16.
 - Mutiple selects are not allowed in console mode.
-- The enhanced console mode uses the package "dialog" based on "curses".
-- It is difficult to use (for advanced users only).
-- It must be present on the target machine for tinyfiledialogs to call it.
-- It is already installed on most unix systems.
-- On osx, the package "dialog" can be installed via
+- The package dialog must be installed to run in enhanced console mode.
+  It is already installed on most unix systems.
+- On osx, the package dialog can be installed via
   http://macappstore.org/dialog or http://macports.org
-- On windows, for enhanced console mode (but only ascii mode),
+- On windows, for enhanced console mode,
   dialog.exe should be copied somewhere on your executable path.
   It can be found at the bottom of the following page:
   http://andrear.altervista.org/home/cdialog.php
-- If "dialog" is missing, it will switch to basic console input.
+- If dialog is missing, it will switch to basic console input.
 - You can query the type of dialog that will be use (pass "tinyfd_query" as aTitle)
 */
