@@ -94,6 +94,35 @@ public class TinyFileDialogs {
     /** 1 (default) or 0 : on unix, hide errors and warnings from called dialog. */
     public static final IntBuffer tinyfd_silent = tinyfd_silent();
 
+    // --- [ tinyfd_allowCursesDialogs ] ---
+
+    private static native long ntinyfd_allowCursesDialogs();
+
+    @NativeType("int *")
+    private static IntBuffer tinyfd_allowCursesDialogs() {
+        long __result = ntinyfd_allowCursesDialogs();
+        return memIntBuffer(__result, 1);
+    }
+
+    /** 0 (default) or 1 : curses dialogs are difficult to use, on windows they are only ascii. */
+    public static final IntBuffer tinyfd_allowCursesDialogs = tinyfd_allowCursesDialogs();
+
+    // --- [ tinyfd_assumeGraphicDisplay ] ---
+
+    private static native long ntinyfd_assumeGraphicDisplay();
+
+    @NativeType("int *")
+    private static IntBuffer tinyfd_assumeGraphicDisplay() {
+        long __result = ntinyfd_assumeGraphicDisplay();
+        return memIntBuffer(__result, 1);
+    }
+
+    /**
+     * 0 (default) or 1 : some systems don't set the environment variable {@code DISPLAY} even when a graphic display is present. Set this to 1 to tell
+     * tinyfiledialogs to assume the existence of a graphic display.
+     */
+    public static final IntBuffer tinyfd_assumeGraphicDisplay = tinyfd_assumeGraphicDisplay();
+
     // --- [ tinyfd_winUtf8 ] ---
 
     private static native long ntinyfd_winUtf8();

@@ -53,6 +53,21 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(Module.TINYFD, prefix = "tin
         void()
     )
 
+    macro..Address..int.p(
+        "allowCursesDialogs",
+        "0 (default) or 1 : curses dialogs are difficult to use, on windows they are only ascii.",
+        void()
+    )
+
+    macro..Address..int.p(
+        "assumeGraphicDisplay",
+        """
+        0 (default) or 1 : some systems don't set the environment variable {@code DISPLAY} even when a graphic display is present. Set this to 1 to tell
+        tinyfiledialogs to assume the existence of a graphic display.
+        """,
+        void()
+    )
+
     private..macro..Address..int.p(
         "winUtf8",
         "On windows string char can be 0:MBSC or 1:UTF-8. Unless your code is really prepared for UTF-8 on windows, leave this on MBSC.",
