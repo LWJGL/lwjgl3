@@ -538,6 +538,18 @@ val arm_core_id = EXT_FLAG.nativeClassCL("arm_core_id", ARM) {
         present on the device. A device info query allows the application to know the IDs associated with the compute units on a given device.
         """
 }
+val arm_integer_dot_product_int8 = EXT_FLAG.nativeClassCL("arm_integer_dot_product_int8", ARM) {
+    documentation = "When true, the ${extensionLink("arm_integer_dot_product", name = "cl_arm_integer_dot_product_int8")} extension is supported."
+}
+val arm_integer_dot_product_accumulate_int8 = EXT_FLAG.nativeClassCL("arm_integer_dot_product_accumulate_int8", ARM) {
+    documentation = "When true, the ${extensionLink("arm_integer_dot_product", name = "cl_arm_integer_dot_product_accumulate_int8")} extension is supported."
+}
+val arm_integer_dot_product_accumulate_int16 = EXT_FLAG.nativeClassCL("arm_integer_dot_product_accumulate_int16", ARM) {
+    documentation = "When true, the ${extensionLink("arm_integer_dot_product", name = "cl_arm_integer_dot_product_accumulate_int16")} extension is supported."
+}
+val arm_integer_dot_product_accumulate_saturate_int8 = EXT_FLAG.nativeClassCL("arm_integer_dot_product_accumulate_saturate_int8", ARM) {
+    documentation = "When true, the ${extensionLink("arm_integer_dot_product", name = "cl_arm_integer_dot_product_accumulate_saturate_int8")} extension is supported."
+}
 
 val intel_media_block_io = EXT_FLAG.nativeClassCL("intel_media_block_io", INTEL) {
     documentation =
@@ -554,6 +566,60 @@ val intel_media_block_io = EXT_FLAG.nativeClassCL("intel_media_block_io", INTEL)
         """
 }
 val intel_printf = EXT_FLAG.nativeClassCL("intel_printf", INTEL)
+val intel_spirv_device_side_avc_motion_estimation = EXT_FLAG.nativeClassCL("intel_spirv_device_side_avc_motion_estimation", INTEL) {
+    documentation =
+        """
+        This extension defines how modules using the SPIR-V extension {@code SPV_INTEL_device_side_avc_motion_estimation} may behave in an OpenCL environment.
+
+        Requires {@link CL21 OpenCL 2.1} and ${intel_device_side_avc_motion_estimation.link}.
+        """
+}
+val intel_spirv_media_block_io = EXT_FLAG.nativeClassCL("intel_spirv_media_block_io", INTEL) {
+    documentation =
+        """
+        This extension defines how modules using the SPIR-V extension {@code SPV_INTEL_media_block_io} may behave in an OpenCL environment.
+        
+        Requires {@link CL21 OpenCL 2.1} and ${intel_media_block_io.link}.
+        """
+}
+val intel_spirv_subgroups = EXT_FLAG.nativeClassCL("intel_spirv_subgroups", INTEL) {
+    documentation =
+        """
+        This extension defines how modules using the SPIR-V extension {@code SPV_INTEL_subgroups} may behave in an OpenCL environment.
+
+        Requires {@link CL21 OpenCL 2.1} and ${intel_subgroups.link}.
+        """
+}
+val intel_subgroups_char = EXT_FLAG.nativeClassCL("intel_subgroups_char", INTEL) {
+    documentation =
+        """
+        The goal of this extension is to allow programmers to improve the performance of applications operating on 8-bit data types by extending the subgroup
+        functions described in the ${intel_subgroups.link} extension to support 8-bit integer data types (chars and uchars). Specifically, the extension:
+        ${ul(
+            "Extends the subgroup broadcast function to allow 8-bit integer values to be broadcast from one work item to all other work items in the subgroup.",
+            "Extends the subgroup scan and reduction functions to operate on 8-bit integer data types.",
+            "Extends the Intel subgroup shuffle functions to allow arbitrarily exchanging 8-bit integer values among work items in the subgroup.",
+            "Extends the Intel subgroup block read and write functions to allow reading and writing 8-bit integer data from images and buffers."
+        )}
+
+        Requires {@link CL12 OpenCL 1.2} and ${intel_subgroups.link}.
+        """
+}
+val intel_subgroups_long = EXT_FLAG.nativeClassCL("intel_subgroups_long", INTEL) {
+    documentation =
+        """
+        The goal of this extension is to allow programmers to improve the performance of applications operating on 64-bit data types by extending the subgroup
+        functions described in the ${intel_subgroups.link} extension to support 64-bit integer data types (longs and ulongs). Specifically, the extension:
+        ${ul(
+            "Extends the Intel subgroup block read and write functions to allow reading and writing 64-bit integer data from images and buffers."
+        )}
+        
+        Note that {@code cl_intel_subgroups} and {@code cl_khr_subgroups} already support broadcasts, scans, and reductions for 64-bit integer types, and that
+        {@code cl_intel_subgroups} already supports shuffles for 64-bit integer types.
+
+        Requires {@link CL12 OpenCL 1.2} and ${intel_subgroups.link}.
+        """
+}
 val intel_subgroups_short = EXT_FLAG.nativeClassCL("intel_subgroups_short", INTEL) {
     documentation =
         """
@@ -566,7 +632,7 @@ val intel_subgroups_short = EXT_FLAG.nativeClassCL("intel_subgroups_short", INTE
             "Extends the Intel subgroup block read and write functions to allow reading and writing 16-bit integer data from images and buffers."
         )}
 
-        Requires {@link CL12 OpenCL 1.2} and ${intel_subgroups.link}
+        Requires {@link CL12 OpenCL 1.2} and ${intel_subgroups.link}.
         """
 }
 

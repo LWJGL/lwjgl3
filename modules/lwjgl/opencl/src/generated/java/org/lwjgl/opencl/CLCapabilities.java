@@ -159,6 +159,7 @@ public class CLCapabilities {
         clRetainAcceleratorINTEL,
         clReleaseAcceleratorINTEL,
         clGetAcceleratorInfoINTEL,
+        clCreateBufferWithPropertiesINTEL,
         clGetKernelSubGroupInfoKHR,
         clGetDeviceIDsFromVA_APIMediaAdapterINTEL,
         clCreateFromVA_APIMediaSurfaceINTEL,
@@ -604,12 +605,24 @@ public class CLCapabilities {
      * present on the device. A device info query allows the application to know the IDs associated with the compute units on a given device.</p>
      */
     public final boolean cl_arm_core_id;
+    /** When true, the <a target="_blank" href="http://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_integer_dot_product.txt">cl_arm_integer_dot_product_accumulate_int16</a> extension is supported. */
+    public final boolean cl_arm_integer_dot_product_accumulate_int16;
+    /** When true, the <a target="_blank" href="http://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_integer_dot_product.txt">cl_arm_integer_dot_product_accumulate_int8</a> extension is supported. */
+    public final boolean cl_arm_integer_dot_product_accumulate_int8;
+    /** When true, the <a target="_blank" href="http://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_integer_dot_product.txt">cl_arm_integer_dot_product_accumulate_saturate_int8</a> extension is supported. */
+    public final boolean cl_arm_integer_dot_product_accumulate_saturate_int8;
+    /** When true, the <a target="_blank" href="http://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_integer_dot_product.txt">cl_arm_integer_dot_product_int8</a> extension is supported. */
+    public final boolean cl_arm_integer_dot_product_int8;
     /** When true, {@link ARMPrintf} is supported. */
     public final boolean cl_arm_printf;
+    /** When true, {@link ARMSchedulingControls} is supported. */
+    public final boolean cl_arm_scheduling_controls;
     /** When true, {@link EXTAtomicCounters32} is supported. */
     public final boolean cl_ext_atomic_counters_32;
     /** When true, {@link EXTAtomicCounters64} is supported. */
     public final boolean cl_ext_atomic_counters_64;
+    /** When true, {@link EXTCXXForOpencl} is supported. */
+    public final boolean cl_ext_cxx_for_opencl;
     /** When true, {@link EXTDeviceFission} is supported. */
     public final boolean cl_ext_device_fission;
     /** When true, {@link EXTMigrateMemobject} is supported. */
@@ -618,6 +631,8 @@ public class CLCapabilities {
     public final boolean cl_intel_accelerator;
     /** When true, {@link INTELAdvancedMotionEstimation} is supported. */
     public final boolean cl_intel_advanced_motion_estimation;
+    /** When true, {@link INTELCreateBufferWithProperties} is supported. */
+    public final boolean cl_intel_create_buffer_with_properties;
     /** When true, {@link INTELDevicePartitionByNames} is supported. */
     public final boolean cl_intel_device_partition_by_names;
     /** When true, {@link INTELDeviceSideAVCMotionEstimation} is supported. */
@@ -638,6 +653,10 @@ public class CLCapabilities {
      * needed.</p>
      */
     public final boolean cl_intel_media_block_io;
+    /** When true, {@link INTELMemChannelProperty} is supported. */
+    public final boolean cl_intel_mem_channel_property;
+    /** When true, {@link INTELMemForceHostMemory} is supported. */
+    public final boolean cl_intel_mem_force_host_memory;
     /** When true, {@link INTELMotionEstimation} is supported. */
     public final boolean cl_intel_motion_estimation;
     /** When true, {@link INTELPackedYUV} is supported. */
@@ -650,8 +669,54 @@ public class CLCapabilities {
     public final boolean cl_intel_required_subgroup_size;
     /** When true, {@link INTELSimultaneousSharing} is supported. */
     public final boolean cl_intel_simultaneous_sharing;
+    /**
+     * This extension defines how modules using the SPIR-V extension {@code SPV_INTEL_device_side_avc_motion_estimation} may behave in an OpenCL environment.
+     * 
+     * <p>Requires {@link CL21 OpenCL 2.1} and {@link INTELDeviceSideAVCMotionEstimation intel_device_side_avc_motion_estimation}.</p>
+     */
+    public final boolean cl_intel_spirv_device_side_avc_motion_estimation;
+    /**
+     * This extension defines how modules using the SPIR-V extension {@code SPV_INTEL_media_block_io} may behave in an OpenCL environment.
+     * 
+     * <p>Requires {@link CL21 OpenCL 2.1} and {@link  intel_media_block_io}.</p>
+     */
+    public final boolean cl_intel_spirv_media_block_io;
+    /**
+     * This extension defines how modules using the SPIR-V extension {@code SPV_INTEL_subgroups} may behave in an OpenCL environment.
+     * 
+     * <p>Requires {@link CL21 OpenCL 2.1} and {@link INTELSubgroups intel_subgroups}.</p>
+     */
+    public final boolean cl_intel_spirv_subgroups;
     /** When true, {@link INTELSubgroups} is supported. */
     public final boolean cl_intel_subgroups;
+    /**
+     * The goal of this extension is to allow programmers to improve the performance of applications operating on 8-bit data types by extending the subgroup
+     * functions described in the {@link INTELSubgroups intel_subgroups} extension to support 8-bit integer data types (chars and uchars). Specifically, the extension:
+     * 
+     * <ul>
+     * <li>Extends the subgroup broadcast function to allow 8-bit integer values to be broadcast from one work item to all other work items in the subgroup.</li>
+     * <li>Extends the subgroup scan and reduction functions to operate on 8-bit integer data types.</li>
+     * <li>Extends the Intel subgroup shuffle functions to allow arbitrarily exchanging 8-bit integer values among work items in the subgroup.</li>
+     * <li>Extends the Intel subgroup block read and write functions to allow reading and writing 8-bit integer data from images and buffers.</li>
+     * </ul>
+     * 
+     * <p>Requires {@link CL12 OpenCL 1.2} and {@link INTELSubgroups intel_subgroups}.</p>
+     */
+    public final boolean cl_intel_subgroups_char;
+    /**
+     * The goal of this extension is to allow programmers to improve the performance of applications operating on 64-bit data types by extending the subgroup
+     * functions described in the {@link INTELSubgroups intel_subgroups} extension to support 64-bit integer data types (longs and ulongs). Specifically, the extension:
+     * 
+     * <ul>
+     * <li>Extends the Intel subgroup block read and write functions to allow reading and writing 64-bit integer data from images and buffers.</li>
+     * </ul>
+     * 
+     * <p>Note that {@code cl_intel_subgroups} and {@code cl_khr_subgroups} already support broadcasts, scans, and reductions for 64-bit integer types, and that
+     * {@code cl_intel_subgroups} already supports shuffles for 64-bit integer types.</p>
+     * 
+     * <p>Requires {@link CL12 OpenCL 1.2} and {@link INTELSubgroups intel_subgroups}.</p>
+     */
+    public final boolean cl_intel_subgroups_long;
     /**
      * The goal of this extension is to allow programmers to improve the performance of applications operating on 16-bit data types by extending the subgroup
      * functions described in the {@link INTELSubgroups intel_subgroups} extension to support 16-bit integer data types (shorts and ushorts). Specifically, the extension:
@@ -663,7 +728,7 @@ public class CLCapabilities {
      * <li>Extends the Intel subgroup block read and write functions to allow reading and writing 16-bit integer data from images and buffers.</li>
      * </ul>
      * 
-     * <p>Requires {@link CL12 OpenCL 1.2} and {@link INTELSubgroups intel_subgroups}</p>
+     * <p>Requires {@link CL12 OpenCL 1.2} and {@link INTELSubgroups intel_subgroups}.</p>
      */
     public final boolean cl_intel_subgroups_short;
     /** When true, {@link INTELThreadLocalExec} is supported. */
@@ -1009,6 +1074,7 @@ public class CLCapabilities {
             provider.getFunctionAddress("clRetainAcceleratorINTEL"),
             provider.getFunctionAddress("clReleaseAcceleratorINTEL"),
             provider.getFunctionAddress("clGetAcceleratorInfoINTEL"),
+            provider.getFunctionAddress("clCreateBufferWithPropertiesINTEL"),
             provider.getFunctionAddress("clGetKernelSubGroupInfoKHR"),
             provider.getFunctionAddress("clGetDeviceIDsFromVA_APIMediaAdapterINTEL"),
             provider.getFunctionAddress("clCreateFromVA_APIMediaSurfaceINTEL"),
@@ -1164,6 +1230,7 @@ public class CLCapabilities {
             caps.clRetainAcceleratorINTEL,
             caps.clReleaseAcceleratorINTEL,
             caps.clGetAcceleratorInfoINTEL,
+            caps.clCreateBufferWithPropertiesINTEL,
             caps.clGetKernelSubGroupInfoKHR,
             caps.clGetDeviceIDsFromVA_APIMediaAdapterINTEL,
             caps.clCreateFromVA_APIMediaSurfaceINTEL,
@@ -1318,19 +1385,20 @@ public class CLCapabilities {
         clRetainAcceleratorINTEL = functions[134];
         clReleaseAcceleratorINTEL = functions[135];
         clGetAcceleratorInfoINTEL = functions[136];
-        clGetKernelSubGroupInfoKHR = functions[137];
-        clGetDeviceIDsFromVA_APIMediaAdapterINTEL = functions[138];
-        clCreateFromVA_APIMediaSurfaceINTEL = functions[139];
-        clEnqueueAcquireVA_APIMediaSurfacesINTEL = functions[140];
-        clEnqueueReleaseVA_APIMediaSurfacesINTEL = functions[141];
-        clCreateEventFromEGLSyncKHR = functions[142];
-        clCreateFromEGLImageKHR = functions[143];
-        clEnqueueAcquireEGLObjectsKHR = functions[144];
-        clEnqueueReleaseEGLObjectsKHR = functions[145];
-        clCreateEventFromGLsyncKHR = functions[146];
-        clGetGLContextInfoKHR = functions[147];
-        clTerminateContextKHR = functions[148];
-        clGetDeviceImageInfoQCOM = functions[149];
+        clCreateBufferWithPropertiesINTEL = functions[137];
+        clGetKernelSubGroupInfoKHR = functions[138];
+        clGetDeviceIDsFromVA_APIMediaAdapterINTEL = functions[139];
+        clCreateFromVA_APIMediaSurfaceINTEL = functions[140];
+        clEnqueueAcquireVA_APIMediaSurfacesINTEL = functions[141];
+        clEnqueueReleaseVA_APIMediaSurfacesINTEL = functions[142];
+        clCreateEventFromEGLSyncKHR = functions[143];
+        clCreateFromEGLImageKHR = functions[144];
+        clEnqueueAcquireEGLObjectsKHR = functions[145];
+        clEnqueueReleaseEGLObjectsKHR = functions[146];
+        clCreateEventFromGLsyncKHR = functions[147];
+        clGetGLContextInfoKHR = functions[148];
+        clTerminateContextKHR = functions[149];
+        clGetDeviceImageInfoQCOM = functions[150];
 
         OpenCL10 = check_CL10(ext);
         OpenCL10GL = check_CL10GL(ext);
@@ -1368,25 +1436,39 @@ public class CLCapabilities {
         cl_APPLE_gl_sharing = check_APPLE_gl_sharing(ext);
         cl_APPLE_query_kernel_names = ext.contains("cl_APPLE_query_kernel_names");
         cl_arm_core_id = ext.contains("cl_arm_core_id");
+        cl_arm_integer_dot_product_accumulate_int16 = ext.contains("cl_arm_integer_dot_product_accumulate_int16");
+        cl_arm_integer_dot_product_accumulate_int8 = ext.contains("cl_arm_integer_dot_product_accumulate_int8");
+        cl_arm_integer_dot_product_accumulate_saturate_int8 = ext.contains("cl_arm_integer_dot_product_accumulate_saturate_int8");
+        cl_arm_integer_dot_product_int8 = ext.contains("cl_arm_integer_dot_product_int8");
         cl_arm_printf = ext.contains("cl_arm_printf");
+        cl_arm_scheduling_controls = ext.contains("cl_arm_scheduling_controls");
         cl_ext_atomic_counters_32 = ext.contains("cl_ext_atomic_counters_32");
         cl_ext_atomic_counters_64 = ext.contains("cl_ext_atomic_counters_64");
+        cl_ext_cxx_for_opencl = ext.contains("cl_ext_cxx_for_opencl");
         cl_ext_device_fission = check_ext_device_fission(ext);
         cl_ext_migrate_memobject = check_ext_migrate_memobject(ext);
         cl_intel_accelerator = check_intel_accelerator(ext);
         cl_intel_advanced_motion_estimation = ext.contains("cl_intel_advanced_motion_estimation");
+        cl_intel_create_buffer_with_properties = check_intel_create_buffer_with_properties(ext);
         cl_intel_device_partition_by_names = ext.contains("cl_intel_device_partition_by_names");
         cl_intel_device_side_avc_motion_estimation = ext.contains("cl_intel_device_side_avc_motion_estimation");
         cl_intel_driver_diagnostics = ext.contains("cl_intel_driver_diagnostics");
         cl_intel_egl_image_yuv = ext.contains("cl_intel_egl_image_yuv");
         cl_intel_media_block_io = ext.contains("cl_intel_media_block_io");
+        cl_intel_mem_channel_property = ext.contains("cl_intel_mem_channel_property");
+        cl_intel_mem_force_host_memory = ext.contains("cl_intel_mem_force_host_memory");
         cl_intel_motion_estimation = ext.contains("cl_intel_motion_estimation");
         cl_intel_packed_yuv = ext.contains("cl_intel_packed_yuv");
         cl_intel_planar_yuv = ext.contains("cl_intel_planar_yuv");
         cl_intel_printf = ext.contains("cl_intel_printf");
         cl_intel_required_subgroup_size = ext.contains("cl_intel_required_subgroup_size");
         cl_intel_simultaneous_sharing = ext.contains("cl_intel_simultaneous_sharing");
+        cl_intel_spirv_device_side_avc_motion_estimation = ext.contains("cl_intel_spirv_device_side_avc_motion_estimation");
+        cl_intel_spirv_media_block_io = ext.contains("cl_intel_spirv_media_block_io");
+        cl_intel_spirv_subgroups = ext.contains("cl_intel_spirv_subgroups");
         cl_intel_subgroups = check_intel_subgroups(ext);
+        cl_intel_subgroups_char = ext.contains("cl_intel_subgroups_char");
+        cl_intel_subgroups_long = ext.contains("cl_intel_subgroups_long");
         cl_intel_subgroups_short = ext.contains("cl_intel_subgroups_short");
         cl_intel_thread_local_exec = ext.contains("cl_intel_thread_local_exec");
         cl_intel_va_api_media_sharing = check_intel_va_api_media_sharing(ext);
@@ -1549,6 +1631,12 @@ public class CLCapabilities {
     private boolean check_intel_accelerator(Set<String> ext) {
         return ext.contains("cl_intel_accelerator") && checkExtension("cl_intel_accelerator", checkFunctions(
             clCreateAcceleratorINTEL, clRetainAcceleratorINTEL, clReleaseAcceleratorINTEL, clGetAcceleratorInfoINTEL
+        ));
+    }
+
+    private boolean check_intel_create_buffer_with_properties(Set<String> ext) {
+        return ext.contains("cl_intel_create_buffer_with_properties") && checkExtension("cl_intel_create_buffer_with_properties", checkFunctions(
+            clCreateBufferWithPropertiesINTEL
         ));
     }
 

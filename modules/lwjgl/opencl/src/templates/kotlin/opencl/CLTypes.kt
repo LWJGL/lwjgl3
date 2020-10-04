@@ -391,6 +391,8 @@ val cl_accelerator_intel = "cl_accelerator_intel".handle
 val cl_accelerator_type_intel = typedef(cl_uint, "cl_accelerator_type_intel")
 val cl_accelerator_info_intel = typedef(cl_uint, "cl_accelerator_info_intel")
 
+val cl_mem_properties_intel = typedef(cl_bitfield, "cl_mem_properties_intel")
+
 val cl_va_api_device_source_intel = typedef(cl_uint, "cl_va_api_device_source_intel")
 val cl_va_api_device_set_intel = typedef(cl_uint, "cl_va_api_device_set_intel")
 val VASurfaceID = typedef(unsigned_int, "VASurfaceID")
