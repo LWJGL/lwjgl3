@@ -124,73 +124,45 @@ public final class GL {
         create(Library.loadNative(GL.class, "org.lwjgl.opengl", libName));
     }
 
-    private abstract static class SharedLibraryGL extends SharedLibrary.Delegate {
-
-        SharedLibraryGL(SharedLibrary library) {
-            super(library);
-        }
-        abstract long getExtensionAddress(long name);
-
-        @Override
-        public long getFunctionAddress(ByteBuffer functionName) {
-            long address = getExtensionAddress(memAddress(functionName));
-            if (address == NULL) {
-                address = library.getFunctionAddress(functionName);
-                if (address == NULL && DEBUG_FUNCTIONS) {
-                    apiLog("Failed to locate address for GL function " + memASCII(functionName));
-                }
-            }
-
-            return address;
-        }
-
-    }
-
     private static void create(SharedLibrary OPENGL) {
-        FunctionProvider functionProvider;
         try {
-            switch (Platform.get()) {
-                case WINDOWS:
-                    functionProvider = new SharedLibraryGL(OPENGL) {
-                        private final long wglGetProcAddress = library.getFunctionAddress("wglGetProcAddress");
+            create((FunctionProvider)new SharedLibrary.Delegate(OPENGL) {
+                private final long GetProcAddress;
 
-                        @Override
-                        long getExtensionAddress(long name) {
-                            return callPP(name, wglGetProcAddress);
-                        }
-                    };
-                    break;
-                case LINUX:
-                    functionProvider = new SharedLibraryGL(OPENGL) {
-                        private final long glXGetProcAddress;
+                {
+                    long GetProcAddress = NULL;
 
-                        {
-                            long GetProcAddress = library.getFunctionAddress("glXGetProcAddress");
+                    switch (Platform.get()) {
+                        case LINUX:
+                            GetProcAddress = library.getFunctionAddress("glXGetProcAddress");
                             if (GetProcAddress == NULL) {
                                 GetProcAddress = library.getFunctionAddress("glXGetProcAddressARB");
                             }
+                            break;
+                        case WINDOWS:
+                            GetProcAddress = library.getFunctionAddress("wglGetProcAddress");
+                            break;
+                    }
+                    if (GetProcAddress == NULL) {
+                        GetProcAddress = library.getFunctionAddress("OSMesaGetProcAddress");
+                    }
 
-                            glXGetProcAddress = GetProcAddress;
-                        }
+                    this.GetProcAddress = GetProcAddress;
+                }
 
-                        @Override
-                        long getExtensionAddress(long name) {
-                            return glXGetProcAddress == NULL ? NULL : callPP(name, glXGetProcAddress);
+                @Override
+                public long getFunctionAddress(ByteBuffer functionName) {
+                    long address = GetProcAddress == NULL ? NULL : callPP(memAddress(functionName), GetProcAddress);
+                    if (address == NULL) {
+                        address = library.getFunctionAddress(functionName);
+                        if (address == NULL && DEBUG_FUNCTIONS) {
+                            apiLog("Failed to locate address for GL function " + memASCII(functionName));
                         }
-                    };
-                    break;
-                case MACOSX:
-                    functionProvider = new SharedLibraryGL(OPENGL) {
-                        @Override
-                        long getExtensionAddress(long name) {
-                            return NULL;
-                        }
-                    };
-                    break;
-                default:
-                    throw new IllegalStateException();
-            }
-            create(functionProvider);
+                    }
+
+                    return address;
+                }
+            });
         } catch (RuntimeException e) {
             OPENGL.free();
             throw e;
