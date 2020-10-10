@@ -81,7 +81,7 @@ public class GLXGears {
             ByteBuffer fs = ioResourceToByteBuffer("demo/gears/gears.frag", 4096);
 
             int version;
-            if (caps.OpenGL30) {
+            if (caps.OpenGL33) {
                 version = 330;
             } else if (caps.OpenGL21) {
                 version = 120;
