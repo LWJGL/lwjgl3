@@ -162,20 +162,29 @@ val GLFWVulkan = "GLFWVulkan".dependsOn(Module.VULKAN)?.nativeClass(Module.GLFW,
     )
 
     customMethod("""
-    /** Calls {@link #setPath(String)} with the path of the Vulkan shared library loaded by LWJGL. */
+    /** Deprecated (to be removed in LWJGL 3.3). Calls {@link #setPath(String)} with the path of the Vulkan shared library loaded by LWJGL. */
+    @Deprecated
     public static void setPathLWJGL() {
-        FunctionProvider fp = VK.getFunctionProvider();
-        if (!(fp instanceof SharedLibrary)) {
-            apiLog("GLFW Vulkan path override not set: Vulkan function provider is not a shared library.");
+        setPath(VK.getFunctionProvider());
+    }
+    
+    /**
+     * Calls {@link #setPath(String)} with the path of the specified {@link SharedLibrary}.
+     * 
+     * <p>Example usage: ${code("GLFWVulkan.setPath(VK.getFunctionProvider());")}</p> 
+     *
+     * @param sharedLibrary a {@code FunctionProvider} instance that will be cast to {@code SharedLibrary}
+     */
+    public static void setPath(FunctionProvider sharedLibrary) {
+        if (!(sharedLibrary instanceof SharedLibrary)) {
+            apiLog("GLFW Vulkan path override not set: function provider is not a shared library.");
             return;
-
         }
 
-        String path = ((SharedLibrary)fp).getPath();
+        String path = ((SharedLibrary)sharedLibrary).getPath();
         if (path == null) {
-            apiLog("GLFW Vulkan path override not set: Could not resolve the Vulkan shared library path.");
+            apiLog("GLFW Vulkan path override not set: Could not resolve the shared library path.");
             return;
-
         }
 
         setPath(path);

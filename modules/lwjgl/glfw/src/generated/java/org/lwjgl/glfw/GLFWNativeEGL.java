@@ -13,7 +13,6 @@ import static org.lwjgl.system.JNI.*;
 
 import javax.annotation.*;
 import org.lwjgl.egl.EGL;
-import org.lwjgl.egl.EGL10;
 import org.lwjgl.opengles.GLES;
 
 import static org.lwjgl.system.MemoryUtil.*;
@@ -97,18 +96,28 @@ public class GLFWNativeEGL {
         return invokePP(window, __functionAddress);
     }
 
-    /** Calls {@link #setEGLPath(String)} with the path of the EGL shared library loaded by LWJGL. */
+    /** Deprecated (to be removed in LWJGL 3.3). Calls {@link #setEGLPath(String)} with the path of the EGL shared library loaded by LWJGL. */
+    @Deprecated
     public static void setEGLPathLWJGL() {
-        FunctionProvider fp = EGL.getFunctionProvider();
-        if (!(fp instanceof SharedLibrary)) {
-            apiLog("GLFW EGL path override not set: EGL function provider is not a shared library.");
-            return;
+        setEGLPath(EGL.getFunctionProvider());
+    }
 
+    /**
+     * Calls {@link #setEGLPath(String)} with the path of the specified {@link SharedLibrary}.
+     * 
+     * <p>Example usage: <code>GLFWNativeEGL.setEGLPath(EGL.getFunctionProvider());</code></p> 
+     *
+     * @param sharedLibrary a {@code FunctionProvider} instance that will be cast to {@code SharedLibrary}
+     */
+    public static void setEGLPath(FunctionProvider sharedLibrary) {
+        if (!(sharedLibrary instanceof SharedLibrary)) {
+            apiLog("GLFW EGL path override not set: Function provider is not a shared library.");
+            return;
         }
 
-        String path = ((SharedLibrary)fp).getPath();
+        String path = ((SharedLibrary)sharedLibrary).getPath();
         if (path == null) {
-            apiLog("GLFW EGL path override not set: Could not resolve the EGL shared library path.");
+            apiLog("GLFW EGL path override not set: Could not resolve the shared library path.");
             return;
 
         }
@@ -132,18 +141,28 @@ public class GLFWNativeEGL {
         }
     }
     
-    /** Calls {@link #setGLESPath(String)} with the path of the OpenGL ES shared library loaded by LWJGL. */
+    /** Deprecated (to be removed in LWJGL 3.3). Calls {@link #setGLESPath(String)} with the path of the OpenGL ES shared library loaded by LWJGL. */
+    @Deprecated
     public static void setGLESPathLWJGL() {
-        FunctionProvider fp = GLES.getFunctionProvider();
-        if (!(fp instanceof SharedLibrary)) {
-            apiLog("GLFW OpenGL ES path override not set: OpenGL ES function provider is not a shared library.");
-            return;
+        setGLESPath(GLES.getFunctionProvider());
+    }
 
+    /**
+     * Calls {@link #setGLESPath(String)} with the path of the specified {@link SharedLibrary}.
+     * 
+     * <p>Example usage: <code>GLFWNativeEGL.setGLESPath(GLES.getFunctionProvider());</code></p> 
+     *
+     * @param sharedLibrary a {@code FunctionProvider} instance that will be cast to {@code SharedLibrary}
+     */
+    public static void setGLESPath(FunctionProvider sharedLibrary) {
+        if (!(sharedLibrary instanceof SharedLibrary)) {
+            apiLog("GLFW OpenGL ES path override not set: Function provider is not a shared library.");
+            return;
         }
 
-        String path = ((SharedLibrary)fp).getPath();
+        String path = ((SharedLibrary)sharedLibrary).getPath();
         if (path == null) {
-            apiLog("GLFW OpenGL ES path override not set: Could not resolve the OpenGL ES shared library path.");
+            apiLog("GLFW OpenGL ES path override not set: Could not resolve the shared library path.");
             return;
 
         }
