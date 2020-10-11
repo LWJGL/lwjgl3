@@ -163,7 +163,7 @@ public class CL20 extends CL12 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateCommandQueueWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_command_queue")
-    public static long clCreateCommandQueueWithProperties(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @Nullable @NativeType("cl_command_queue_properties const *") LongBuffer properties, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateCommandQueueWithProperties(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @Nullable @NativeType("cl_queue_properties const *") LongBuffer properties, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
         if (CHECKS) {
             checkNTSafe(properties);
             checkSafe(errcode_ret, 1);
@@ -212,7 +212,7 @@ public class CL20 extends CL12 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreatePipe.html">Reference Page</a>
      */
     @NativeType("cl_mem")
-    public static long clCreatePipe(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_uint") int pipe_packet_size, @NativeType("cl_uint") int pipe_max_packets, @Nullable @NativeType("cl_pipe_properties const *") IntBuffer properties, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreatePipe(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_uint") int pipe_packet_size, @NativeType("cl_uint") int pipe_max_packets, @Nullable @NativeType("cl_pipe_properties const *") PointerBuffer properties, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
         if (CHECKS) {
             checkNTSafe(properties);
             checkSafe(errcode_ret, 1);
@@ -958,7 +958,7 @@ public class CL20 extends CL12 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateSamplerWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_sampler")
-    public static long clCreateSamplerWithProperties(@NativeType("cl_context") long context, @Nullable @NativeType("cl_sampler_properties const *") IntBuffer sampler_properties, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
+    public static long clCreateSamplerWithProperties(@NativeType("cl_context") long context, @Nullable @NativeType("cl_sampler_properties const *") LongBuffer sampler_properties, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
         if (CHECKS) {
             checkNTSafe(sampler_properties);
             checkSafe(errcode_ret, 1);
@@ -972,7 +972,7 @@ public class CL20 extends CL12 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateCommandQueueWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_command_queue")
-    public static long clCreateCommandQueueWithProperties(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @Nullable @NativeType("cl_command_queue_properties const *") long[] properties, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateCommandQueueWithProperties(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @Nullable @NativeType("cl_queue_properties const *") long[] properties, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateCommandQueueWithProperties;
         if (CHECKS) {
             check(__functionAddress);
@@ -990,7 +990,7 @@ public class CL20 extends CL12 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreatePipe.html">Reference Page</a>
      */
     @NativeType("cl_mem")
-    public static long clCreatePipe(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_uint") int pipe_packet_size, @NativeType("cl_uint") int pipe_max_packets, @Nullable @NativeType("cl_pipe_properties const *") int[] properties, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreatePipe(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_uint") int pipe_packet_size, @NativeType("cl_uint") int pipe_max_packets, @Nullable @NativeType("cl_pipe_properties const *") PointerBuffer properties, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
         long __functionAddress = CL.getICD().clCreatePipe;
         if (CHECKS) {
             check(__functionAddress);
@@ -998,7 +998,7 @@ public class CL20 extends CL12 {
             checkNTSafe(properties);
             checkSafe(errcode_ret, 1);
         }
-        return callPJPPP(context, flags, pipe_packet_size, pipe_max_packets, properties, errcode_ret, __functionAddress);
+        return callPJPPP(context, flags, pipe_packet_size, pipe_max_packets, memAddressSafe(properties), errcode_ret, __functionAddress);
     }
 
     /**
@@ -1038,7 +1038,7 @@ public class CL20 extends CL12 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateSamplerWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_sampler")
-    public static long clCreateSamplerWithProperties(@NativeType("cl_context") long context, @Nullable @NativeType("cl_sampler_properties const *") int[] sampler_properties, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
+    public static long clCreateSamplerWithProperties(@NativeType("cl_context") long context, @Nullable @NativeType("cl_sampler_properties const *") long[] sampler_properties, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateSamplerWithProperties;
         if (CHECKS) {
             check(__functionAddress);

@@ -36,6 +36,7 @@ val cl_sampler = "cl_sampler".handle
 
 val cl_bool = typedef(intb, "cl_bool")
 val cl_bitfield = typedef(cl_ulong, "cl_bitfield")
+val cl_properties = typedef(cl_ulong, "cl_properties")
 val cl_device_type = typedef(cl_bitfield, "cl_device_type")
 val cl_platform_info = typedef(cl_uint, "cl_platform_info")
 val cl_device_info = typedef(cl_uint, "cl_device_info")
@@ -43,16 +44,19 @@ val cl_device_fp_config = typedef(cl_bitfield, "cl_device_fp_config")
 val cl_device_mem_cache_type = typedef(cl_uint, "cl_device_mem_cache_type")
 val cl_device_local_mem_type = typedef(cl_uint, "cl_device_local_mem_type")
 val cl_device_exec_capabilities = typedef(cl_bitfield, "cl_device_exec_capabilities")
+val cl_device_svm_capabilities = typedef(cl_bitfield, "cl_device_svm_capabilities")
 val cl_command_queue_properties = typedef(cl_bitfield, "cl_command_queue_properties")
 val cl_device_partition_property = typedef(intptr_t, "cl_device_partition_property")
 val cl_device_affinity_domain = typedef(cl_bitfield, "cl_device_affinity_domain")
 
-val cl_context_properties = PrimitiveType("cl_context_properties", PrimitiveMapping.POINTER)
+val cl_context_properties = typedef(intptr_t, "cl_context_properties")
 val cl_context_info = typedef(cl_uint, "cl_context_info")
+val cl_queue_properties = typedef(cl_properties, "cl_queue_properties")
 val cl_command_queue_info = typedef(cl_uint, "cl_command_queue_info")
 val cl_channel_order = typedef(cl_uint, "cl_channel_order")
 val cl_channel_type = typedef(cl_uint, "cl_channel_type")
 val cl_mem_flags = typedef(cl_bitfield, "cl_mem_flags")
+val cl_svm_mem_flags = typedef(cl_bitfield, "cl_svm_mem_flags")
 val cl_mem_object_type = typedef(cl_uint, "cl_mem_object_type")
 val cl_mem_info = typedef(cl_uint, "cl_mem_info")
 val cl_mem_migration_flags = typedef(cl_bitfield, "cl_mem_migration_flags")
@@ -62,6 +66,8 @@ val cl_addressing_mode = typedef(cl_uint, "cl_addressing_mode")
 val cl_filter_mode = typedef(cl_uint, "cl_filter_mode")
 val cl_sampler_info = typedef(cl_uint, "cl_sampler_info")
 val cl_map_flags = typedef(cl_bitfield, "cl_map_flags")
+val cl_pipe_properties = typedef(intptr_t, "cl_pipe_properties")
+val cl_pipe_info = typedef(cl_uint, "cl_pipe_info")
 val cl_program_info = typedef(cl_uint, "cl_program_info")
 val cl_program_build_info = typedef(cl_uint, "cl_program_build_info")
 val cl_program_binary_type = typedef(cl_uint, "cl_program_binary_type")
@@ -76,13 +82,13 @@ val cl_kernel_sub_group_info = typedef(cl_uint, "cl_kernel_sub_group_info")
 val cl_event_info = typedef(cl_uint, "cl_event_info")
 val cl_command_type = typedef(cl_uint, "cl_command_type")
 val cl_profiling_info = typedef(cl_uint, "cl_profiling_info")
-
-// OpenCL 2.0
-val cl_sampler_properties = typedef(cl_uint, "cl_sampler_properties")
-val cl_pipe_properties = typedef(cl_uint, "cl_pipe_properties")
-val cl_pipe_info = typedef(cl_uint, "cl_pipe_info")
+val cl_sampler_properties = typedef(cl_properties, "cl_sampler_properties")
 val cl_kernel_exec_info = typedef(cl_uint, "cl_kernel_exec_info")
-val cl_svm_mem_flags = typedef(cl_bitfield, "cl_svm_mem_flags")
+val cl_device_atomic_capabilities = typedef(cl_bitfield, "cl_device_atomic_capabilities")
+val cl_device_device_enqueue_capabilities = typedef(cl_bitfield, "cl_device_device_enqueue_capabilities")
+val cl_khronos_vendor_id = typedef(cl_uint, "cl_khronos_vendor_id")
+val cl_mem_properties = typedef(cl_properties, "cl_mem_properties")
+val cl_version = typedef(cl_uint, "cl_version")
 
 // strings
 
@@ -159,15 +165,23 @@ val cl_image_desc = struct(Module.OPENCL, "CLImageDesc", nativeName = "cl_image_
     )
     cl_uint("num_mip_levels", "must be 0")
     cl_uint("num_samples", "must be 0")
-    nullable..cl_mem(
-        "buffer",
-        """
-        refers to a valid buffer memory object if {@code image_type} is #MEM_OBJECT_IMAGE1D_BUFFER. Otherwise it must be #NULL. For a 1D image buffer
-        object, the image pixels are taken from the buffer object's data store. When the contents of a buffer object's data store are modified, those changes
-        are reflected in the contents of the 1D image buffer object and vice-versa at corresponding sychronization points. The {@code image_width * size} of
-        element in bytes must be &le; size of buffer object data store.
-        """
-    )
+    union {
+        nullable..cl_mem("buffer", "alias for {@code mem_object}")
+        nullable..cl_mem(
+            "mem_object",
+            """
+            refers to a valid buffer or image memory object.
+
+            {@code mem_object} can be a buffer memory object if {@code image_type} is #MEM_OBJECT_IMAGE1D_BUFFER or #MEM_OBJECT_IMAGE2D. {@code mem_object} can
+            be an image object if {@code image_type} is #MEM_OBJECT_IMAGE2D. Otherwise it must be #NULL. The image pixels are taken from the memory object’s
+            data store. When the contents of the specified memory object’s data store are modified, those changes are reflected in the contents of the image
+            object and vice-versa at corresponding sychronization points. For a 1D image buffer object, the {@code image_width * size} of element in bytes must
+            be &le; size of buffer object data store. For a 2D image created from a buffer, the {@code image_row_pitch * image_height} must be &le; size of
+            buffer object data store. For an image object created from another image object, the values specified in the image descriptor except for
+            {@code mem_object} must match the image descriptor information associated with {@code mem_object}.
+            """
+        )
+    }
 }
 
 val cl_bus_address_amd = struct(Module.OPENCL, "CLBusAddressAMD", nativeName = "cl_bus_address_amd") {

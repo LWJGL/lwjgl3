@@ -47,11 +47,21 @@ import static org.lwjgl.system.MemoryStack.*;
  * {@code image_row_pitch} for a 1D image array. If {@code image_slice_pitch} is not 0, it must be a multiple of the {@code image_row_pitch}.</li>
  * <li>{@code num_mip_levels} &ndash; must be 0</li>
  * <li>{@code num_samples} &ndash; must be 0</li>
- * <li>{@code buffer} &ndash; 
- * refers to a valid buffer memory object if {@code image_type} is {@link CL12#CL_MEM_OBJECT_IMAGE1D_BUFFER MEM_OBJECT_IMAGE1D_BUFFER}. Otherwise it must be {@code NULL}. For a 1D image buffer
- * object, the image pixels are taken from the buffer object's data store. When the contents of a buffer object's data store are modified, those changes
- * are reflected in the contents of the 1D image buffer object and vice-versa at corresponding sychronization points. The {@code image_width * size} of
- * element in bytes must be &le; size of buffer object data store.</li>
+ * <li><em>&lt;union&gt;</em>
+ * 
+ * <ul>
+ * <li>{@code buffer} &ndash; alias for {@code mem_object}</li>
+ * <li>{@code mem_object} &ndash; 
+ * refers to a valid buffer or image memory object.
+ * 
+ * <p>{@code mem_object} can be a buffer memory object if {@code image_type} is {@link CL12#CL_MEM_OBJECT_IMAGE1D_BUFFER MEM_OBJECT_IMAGE1D_BUFFER} or {@link CL10#CL_MEM_OBJECT_IMAGE2D MEM_OBJECT_IMAGE2D}. {@code mem_object} can
+ * be an image object if {@code image_type} is {@link CL10#CL_MEM_OBJECT_IMAGE2D MEM_OBJECT_IMAGE2D}. Otherwise it must be {@code NULL}. The image pixels are taken from the memory object’s
+ * data store. When the contents of the specified memory object’s data store are modified, those changes are reflected in the contents of the image
+ * object and vice-versa at corresponding sychronization points. For a 1D image buffer object, the {@code image_width * size} of element in bytes must
+ * be &le; size of buffer object data store. For a 2D image created from a buffer, the {@code image_row_pitch * image_height} must be &le; size of
+ * buffer object data store. For an image object created from another image object, the values specified in the image descriptor except for
+ * {@code mem_object} must match the image descriptor information associated with {@code mem_object}.</p></li>
+ * </ul></li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -67,7 +77,10 @@ import static org.lwjgl.system.MemoryStack.*;
  *     size_t image_slice_pitch;
  *     cl_uint num_mip_levels;
  *     cl_uint num_samples;
- *     cl_mem buffer;
+ *     union {
+ *         cl_mem buffer;
+ *         cl_mem mem_object;
+ *     };
  * }</code></pre>
  */
 @NativeType("struct cl_image_desc")
@@ -90,7 +103,8 @@ public class CLImageDesc extends Struct implements NativeResource {
         IMAGE_SLICE_PITCH,
         NUM_MIP_LEVELS,
         NUM_SAMPLES,
-        BUFFER;
+        BUFFER,
+        MEM_OBJECT;
 
     static {
         Layout layout = __struct(
@@ -103,7 +117,10 @@ public class CLImageDesc extends Struct implements NativeResource {
             __member(POINTER_SIZE),
             __member(4),
             __member(4),
-            __member(POINTER_SIZE)
+            __union(
+                __member(POINTER_SIZE),
+                __member(POINTER_SIZE)
+            )
         );
 
         SIZEOF = layout.getSize();
@@ -118,7 +135,8 @@ public class CLImageDesc extends Struct implements NativeResource {
         IMAGE_SLICE_PITCH = layout.offsetof(6);
         NUM_MIP_LEVELS = layout.offsetof(7);
         NUM_SAMPLES = layout.offsetof(8);
-        BUFFER = layout.offsetof(9);
+        BUFFER = layout.offsetof(10);
+        MEM_OBJECT = layout.offsetof(11);
     }
 
     /**
@@ -164,6 +182,9 @@ public class CLImageDesc extends Struct implements NativeResource {
     /** Returns the value of the {@code buffer} field. */
     @NativeType("cl_mem")
     public long buffer() { return nbuffer(address()); }
+    /** Returns the value of the {@code mem_object} field. */
+    @NativeType("cl_mem")
+    public long mem_object() { return nmem_object(address()); }
 
     /** Sets the specified value to the {@code image_type} field. */
     public CLImageDesc image_type(@NativeType("cl_mem_object_type") int value) { nimage_type(address(), value); return this; }
@@ -185,33 +206,8 @@ public class CLImageDesc extends Struct implements NativeResource {
     public CLImageDesc num_samples(@NativeType("cl_uint") int value) { nnum_samples(address(), value); return this; }
     /** Sets the specified value to the {@code buffer} field. */
     public CLImageDesc buffer(@NativeType("cl_mem") long value) { nbuffer(address(), value); return this; }
-
-    /** Initializes this struct with the specified values. */
-    public CLImageDesc set(
-        int image_type,
-        long image_width,
-        long image_height,
-        long image_depth,
-        long image_array_size,
-        long image_row_pitch,
-        long image_slice_pitch,
-        int num_mip_levels,
-        int num_samples,
-        long buffer
-    ) {
-        image_type(image_type);
-        image_width(image_width);
-        image_height(image_height);
-        image_depth(image_depth);
-        image_array_size(image_array_size);
-        image_row_pitch(image_row_pitch);
-        image_slice_pitch(image_slice_pitch);
-        num_mip_levels(num_mip_levels);
-        num_samples(num_samples);
-        buffer(buffer);
-
-        return this;
-    }
+    /** Sets the specified value to the {@code mem_object} field. */
+    public CLImageDesc mem_object(@NativeType("cl_mem") long value) { nmem_object(address(), value); return this; }
 
     /**
      * Copies the specified struct data to this struct.
@@ -388,6 +384,8 @@ public class CLImageDesc extends Struct implements NativeResource {
     public static int nnum_samples(long struct) { return UNSAFE.getInt(null, struct + CLImageDesc.NUM_SAMPLES); }
     /** Unsafe version of {@link #buffer}. */
     public static long nbuffer(long struct) { return memGetAddress(struct + CLImageDesc.BUFFER); }
+    /** Unsafe version of {@link #mem_object}. */
+    public static long nmem_object(long struct) { return memGetAddress(struct + CLImageDesc.MEM_OBJECT); }
 
     /** Unsafe version of {@link #image_type(int) image_type}. */
     public static void nimage_type(long struct, int value) { UNSAFE.putInt(null, struct + CLImageDesc.IMAGE_TYPE, value); }
@@ -409,6 +407,8 @@ public class CLImageDesc extends Struct implements NativeResource {
     public static void nnum_samples(long struct, int value) { UNSAFE.putInt(null, struct + CLImageDesc.NUM_SAMPLES, value); }
     /** Unsafe version of {@link #buffer(long) buffer}. */
     public static void nbuffer(long struct, long value) { memPutAddress(struct + CLImageDesc.BUFFER, value); }
+    /** Unsafe version of {@link #mem_object(long) mem_object}. */
+    public static void nmem_object(long struct, long value) { memPutAddress(struct + CLImageDesc.MEM_OBJECT, value); }
 
     // -----------------------------------
 
@@ -478,6 +478,9 @@ public class CLImageDesc extends Struct implements NativeResource {
         /** Returns the value of the {@code buffer} field. */
         @NativeType("cl_mem")
         public long buffer() { return CLImageDesc.nbuffer(address()); }
+        /** Returns the value of the {@code mem_object} field. */
+        @NativeType("cl_mem")
+        public long mem_object() { return CLImageDesc.nmem_object(address()); }
 
         /** Sets the specified value to the {@code image_type} field. */
         public CLImageDesc.Buffer image_type(@NativeType("cl_mem_object_type") int value) { CLImageDesc.nimage_type(address(), value); return this; }
@@ -499,6 +502,8 @@ public class CLImageDesc extends Struct implements NativeResource {
         public CLImageDesc.Buffer num_samples(@NativeType("cl_uint") int value) { CLImageDesc.nnum_samples(address(), value); return this; }
         /** Sets the specified value to the {@code buffer} field. */
         public CLImageDesc.Buffer buffer(@NativeType("cl_mem") long value) { CLImageDesc.nbuffer(address(), value); return this; }
+        /** Sets the specified value to the {@code mem_object} field. */
+        public CLImageDesc.Buffer mem_object(@NativeType("cl_mem") long value) { CLImageDesc.nmem_object(address(), value); return this; }
 
     }
 
