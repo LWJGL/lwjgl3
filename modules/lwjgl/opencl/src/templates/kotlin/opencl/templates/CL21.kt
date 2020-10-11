@@ -18,21 +18,66 @@ val CL21 = "CL21".nativeClassCL("CL21") {
     )
 
     IntConstant(
-        "cl_platform_info",
+        """
+        Accepted as the {@code param_name} parameter of #GetPlatformInfo(), returns a {@code cl_ulong} value.
+
+        Returns the resolution of the host timer in nanoseconds as used by #GetDeviceAndHostTimer().
+
+        Support for device and host timer synchronization is required for platforms supporting OpenCL 2.1 or 2.2. This value must be 0 for devices that do not
+        support device and host timer synchronization.
+        """,
 
         "PLATFORM_HOST_TIMER_RESOLUTION"..0x0905
     )
 
     IntConstant(
-        "cl_device_info",
+        """
+        Accepted as the {@code param_name} parameter of #GetDeviceInfo(), returns a {@code char[]} value.
 
-        "DEVICE_IL_VERSION"..0x105B,
-        "DEVICE_MAX_NUM_SUB_GROUPS"..0x105C,
+        The intermediate languages that can be supported by #CreateProgramWithIL() for this device. Returns a space-separated list of IL version strings of the
+        form {@code <IL_Prefix>_<Major_Version>.<Minor_Version>}.
+
+        For an OpenCL 2.1 or 2.2 device, SPIR-V is a required IL prefix.
+
+        If the device does not support intermediate language programs, the value must be {@code ""} (an empty string).
+        """,
+
+        "DEVICE_IL_VERSION"..0x105B
+    )
+
+    IntConstant(
+        """
+        Accepted as the {@code param_name} parameter of #GetDeviceInfo(), returns a {@code cl_uint} value.
+
+        Maximum number of sub-groups in a workgroup that a device is capable of executing on a single compute unit, for any given kernel instance running on
+        the device.
+
+        The minimum value is 1 if the device supports subgroups, and must be 0 for devices that do not support subgroups. Support for subgroups is required for
+        an OpenCL 2.1 or 2.2 device.
+        """,
+
+        "DEVICE_MAX_NUM_SUB_GROUPS"..0x105C
+    )
+
+    IntConstant(
+        """
+        Accepted as the {@code param_name} parameter of #GetDeviceInfo(), returns a {@code cl_bool} value.
+
+        Is #TRUE if this device supports independent forward progress of sub-groups, #FALSE otherwise.
+
+        This query must return #TRUE for devices that support the {@code cl_khr_subgroups} extension, and must return #FALSE for devices that do not support
+        subgroups.
+        """,
+
         "DEVICE_SUB_GROUP_INDEPENDENT_FORWARD_PROGRESS"..0x105D
     )
 
     IntConstant(
-        "cl_command_queue_info",
+        """
+        Accepted as the {@code param_name} parameter of #GetCommandQueueInfo(), returns a {@code cl_command_queue} value.
+
+        Return the current default command queue for the underlying device.
+        """,
 
         "QUEUE_DEVICE_DEFAULT"..0x1095
     )
@@ -43,27 +88,83 @@ val CL21 = "CL21".nativeClassCL("CL21") {
         "UNORM_INT_101010_2"..0x10E0
     )
 
-
     IntConstant(
-        "cl_program_info",
+        """
+        Accepted as the {@code param_name} parameter of #GetProgramInfo(), returns a {@code char[]} value.
+
+        Returns the program IL for programs created with #CreateProgramWithIL().
+
+        If program is created with #CreateProgramWithSource(), #CreateProgramWithBinary() or #CreateProgramWithBuiltInKernels() the memory pointed to by
+        {@code param_value} will be unchanged and {@code param_value_size_ret} will be set to 0.
+        """,
 
         "PROGRAM_IL"..0x1169
     )
 
-    val GetKernelSubGroupInfoA = IntConstant(
-        "cl_kernel_info",
+    IntConstant(
+        """
+        Accepted as the {@code param_name} parameter of #GetKernelInfo(), returns a {@code size_t} value.
 
-        "KERNEL_MAX_NUM_SUB_GROUPS"..0x11B9,
+        This provides a mechanism for the application to query the maximum number of sub-groups that may make up each workgroup to execute a kernel on a
+        specific device given by device. The OpenCL implementation uses the resource requirements of the kernel (register usage etc.) to determine what this
+        work-group size should be. The returned value may be used to compute a work-group size to enqueue the kernel with to give a round number of sub-groups
+        for an enqueue.
+        """,
+
+        "KERNEL_MAX_NUM_SUB_GROUPS"..0x11B9
+    )
+
+    IntConstant(
+        """
+        Accepted as the {@code param_name} parameter of #GetKernelInfo(), returns a {@code size_t} value.
+
+        Returns the number of sub-groups per workgroup specified in the kernel source or IL. If the sub-group count is not specified then 0 is returned.
+        """,
+
         "KERNEL_COMPILE_NUM_SUB_GROUPS"..0x11BA
-    ).javaDocLinks
+    )
 
-    val GetKernelSubGroupInfoB = IntConstant(
-        "cl_kernel_sub_group_info",
+    IntConstant(
+        """
+        Accepted as the {@code param_name} parameter of #GetKernelSubGroupInfo(), returns a {@code size_t} value.
 
-        "KERNEL_MAX_SUB_GROUP_SIZE_FOR_NDRANGE"..0x2033,
-        "KERNEL_SUB_GROUP_COUNT_FOR_NDRANGE"..0x2034,
-        "KERNEL_LOCAL_SIZE_FOR_SUB_GROUP_COUNT"..0x11B8
-    ).javaDocLinks
+        Returns the maximum sub-group size for this kernel. All sub-groups must be the same size, while the last subgroup in any work-group (i.e. the subgroup
+        with the maximum index) could be the same or smaller size.
+
+        The {@code input_value} must be an array of {@code size_t} values corresponding to the local work size parameter of the intended dispatch. The number
+        of dimensions in the ND-range will be inferred from the value specified for {@code input_value_size}.
+        """,
+
+        "KERNEL_MAX_SUB_GROUP_SIZE_FOR_NDRANGE"..0x2033
+    )
+
+    IntConstant(
+        """
+        Accepted as the {@code param_name} parameter of #GetKernelSubGroupInfo(), returns a {@code size_t} value.
+
+        Returns the number of sub-groups that will be present in each workgroup for a given local work size. All workgroups, apart from the last workgroup in
+        each dimension in the presence of nonuniform work-group sizes, will have the same number of subgroups.
+
+        The {@code input_value} must be an array of {@code size_t} values corresponding to the local work size parameter of the intended dispatch. The number
+        of dimensions in the ND-range will be inferred from the value specified for {@code input_value_size}.
+        """,
+
+        "KERNEL_SUB_GROUP_COUNT_FOR_NDRANGE"..0x2034
+    )
+
+    IntConstant(
+        """
+        Accepted as the {@code param_name} parameter of #GetKernelSubGroupInfo(), returns a {@code size_t[]} value.
+
+        Returns the local size that will generate the requested number of sub-groups for the kernel. The output array must be an array of {@code size_t} values
+        corresponding to the local size parameter. Any returned workgroup will have one dimension. Other dimensions inferred from the value specified for
+        {@code param_value_size} will be filled with the value 1. The returned value will produce an exact number of sub-groups and result in no partial groups
+        for an executing kernel except in the case where the last work-group in a dimension has a size different from that of the other groups. If no
+        work-group size can accommodate the requested number of sub-groups, 0 will be returned in each element of the return array.
+        """,
+
+        "KERNEL_LOCAL_SIZE_FOR_SUB_GROUP_COUNT"..0x2034
+    )
 
     cl_int(
         "SetDefaultDeviceCommandQueue",
@@ -230,7 +331,14 @@ val CL21 = "CL21".nativeClassCL("CL21") {
             associated with {@code kernel}. If the list of devices associated with kernel is a single device, device can be a #NULL value.
             """
         ),
-        cl_kernel_sub_group_info("param_name", "the information to query", "$GetKernelSubGroupInfoA $GetKernelSubGroupInfoB"),
+        cl_kernel_sub_group_info(
+            "param_name",
+            "the information to query",
+            """
+            #KERNEL_MAX_NUM_SUB_GROUPS #KERNEL_COMPILE_NUM_SUB_GROUPS #KERNEL_MAX_SUB_GROUP_SIZE_FOR_NDRANGE #KERNEL_SUB_GROUP_COUNT_FOR_NDRANGE
+            #KERNEL_LOCAL_SIZE_FOR_SUB_GROUP_COUNT
+            """
+        ),
         AutoSize("input_value")..size_t("input_value_size", "the size in bytes of memory pointed to by {@code input_value}"),
         nullable..void.const.p(
             "input_value",

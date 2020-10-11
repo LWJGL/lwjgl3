@@ -18,16 +18,43 @@ val CL22 = "CL22".nativeClassCL("CL22") {
     )
 
     IntConstant(
-        "Error Codes",
+        "Returned when the specified specialization constant ID is not valid for the specified program.",
 
-        "INVALID_SPEC_ID".."-71",
+        "INVALID_SPEC_ID".."-71"
+    )
+
+    IntConstant(
+        "Returned when the size of the specified kernel argument value exceeds the maximum size defined for the kernel argument.",
+
         "MAX_SIZE_RESTRICTION_EXCEEDED".."-72"
     )
 
     IntConstant(
-        "cl_program_info",
+        """
+        Accepted as the {@code param_name} parameter of #GetProgramInfo(), returns a {@code cl_bool} value.
 
-        "PROGRAM_SCOPE_GLOBAL_CTORS_PRESENT"..0x116A,
+        This indicates that the program object contains non-trivial constructor(s) that will be executed by runtime before any kernel from the program is
+        executed. This information is only available after a successful program executable has been built for at least one device in the list of devices
+        associated with {@code program}.
+
+        Querying {@code CL_PROGRAM_SCOPE_GLOBAL_CTORS_PRESENT} may unconditionally return #FALSE if no devices associated with program support constructors for
+        program scope global variables. Support for constructors and destructors for program scope global variables is required only for OpenCL 2.2 devices.
+        """,
+
+        "PROGRAM_SCOPE_GLOBAL_CTORS_PRESENT"..0x116A
+    )
+
+    IntConstant(
+        """
+        Accepted as the {@code param_name} parameter of #GetProgramInfo(), returns a {@code cl_bool} value.
+
+        This indicates that the program object contains non-trivial destructor(s) that will be executed by runtime when program is destroyed. This information
+        is only available after a successful program executable has been built for at least one device in the list of devices associated with program.
+
+        Querying {@code CL_PROGRAM_SCOPE_} GLOBAL_CTORS_PRESENT may unconditionally return #FALSE if no devices associated with program support destructors for
+        program scope global variables. Support for constructors and destructors for program scope global variables is required only for OpenCL 2.2 devices.
+        """,
+
         "PROGRAM_SCOPE_GLOBAL_DTORS_PRESENT"..0x116B
     )
 

@@ -19,15 +19,34 @@ public class CL22 extends CL21 {
     /** OpenCL Version. */
     public static final int CL_VERSION_2_2 = 1;
 
-    /** Error Codes */
-    public static final int
-        CL_INVALID_SPEC_ID               = -71,
-        CL_MAX_SIZE_RESTRICTION_EXCEEDED = -72;
+    /** Returned when the specified specialization constant ID is not valid for the specified program. */
+    public static final int CL_INVALID_SPEC_ID = -71;
 
-    /** cl_program_info */
-    public static final int
-        CL_PROGRAM_SCOPE_GLOBAL_CTORS_PRESENT = 0x116A,
-        CL_PROGRAM_SCOPE_GLOBAL_DTORS_PRESENT = 0x116B;
+    /** Returned when the size of the specified kernel argument value exceeds the maximum size defined for the kernel argument. */
+    public static final int CL_MAX_SIZE_RESTRICTION_EXCEEDED = -72;
+
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetProgramInfo GetProgramInfo}, returns a {@code cl_bool} value.
+     * 
+     * <p>This indicates that the program object contains non-trivial constructor(s) that will be executed by runtime before any kernel from the program is
+     * executed. This information is only available after a successful program executable has been built for at least one device in the list of devices
+     * associated with {@code program}.</p>
+     * 
+     * <p>Querying {@code CL_PROGRAM_SCOPE_GLOBAL_CTORS_PRESENT} may unconditionally return {@link CL10#CL_FALSE FALSE} if no devices associated with program support constructors for
+     * program scope global variables. Support for constructors and destructors for program scope global variables is required only for OpenCL 2.2 devices.</p>
+     */
+    public static final int CL_PROGRAM_SCOPE_GLOBAL_CTORS_PRESENT = 0x116A;
+
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetProgramInfo GetProgramInfo}, returns a {@code cl_bool} value.
+     * 
+     * <p>This indicates that the program object contains non-trivial destructor(s) that will be executed by runtime when program is destroyed. This information
+     * is only available after a successful program executable has been built for at least one device in the list of devices associated with program.</p>
+     * 
+     * <p>Querying {@code CL_PROGRAM_SCOPE_} GLOBAL_CTORS_PRESENT may unconditionally return {@link CL10#CL_FALSE FALSE} if no devices associated with program support destructors for
+     * program scope global variables. Support for constructors and destructors for program scope global variables is required only for OpenCL 2.2 devices.</p>
+     */
+    public static final int CL_PROGRAM_SCOPE_GLOBAL_DTORS_PRESENT = 0x116B;
 
     protected CL22() {
         throw new UnsupportedOperationException();

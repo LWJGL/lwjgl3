@@ -24,34 +24,118 @@ public class CL21 extends CL20 {
     /** OpenCL Version. */
     public static final int CL_VERSION_2_1 = 1;
 
-    /** cl_platform_info */
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetPlatformInfo GetPlatformInfo}, returns a {@code cl_ulong} value.
+     * 
+     * <p>Returns the resolution of the host timer in nanoseconds as used by {@link #clGetDeviceAndHostTimer GetDeviceAndHostTimer}.</p>
+     * 
+     * <p>Support for device and host timer synchronization is required for platforms supporting OpenCL 2.1 or 2.2. This value must be 0 for devices that do not
+     * support device and host timer synchronization.</p>
+     */
     public static final int CL_PLATFORM_HOST_TIMER_RESOLUTION = 0x905;
 
-    /** cl_device_info */
-    public static final int
-        CL_DEVICE_IL_VERSION                             = 0x105B,
-        CL_DEVICE_MAX_NUM_SUB_GROUPS                     = 0x105C,
-        CL_DEVICE_SUB_GROUP_INDEPENDENT_FORWARD_PROGRESS = 0x105D;
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetDeviceInfo GetDeviceInfo}, returns a {@code char[]} value.
+     * 
+     * <p>The intermediate languages that can be supported by {@link #clCreateProgramWithIL CreateProgramWithIL} for this device. Returns a space-separated list of IL version strings of the
+     * form {@code <IL_Prefix>_<Major_Version>.<Minor_Version>}.</p>
+     * 
+     * <p>For an OpenCL 2.1 or 2.2 device, SPIR-V is a required IL prefix.</p>
+     * 
+     * <p>If the device does not support intermediate language programs, the value must be {@code ""} (an empty string).</p>
+     */
+    public static final int CL_DEVICE_IL_VERSION = 0x105B;
 
-    /** cl_command_queue_info */
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetDeviceInfo GetDeviceInfo}, returns a {@code cl_uint} value.
+     * 
+     * <p>Maximum number of sub-groups in a workgroup that a device is capable of executing on a single compute unit, for any given kernel instance running on
+     * the device.</p>
+     * 
+     * <p>The minimum value is 1 if the device supports subgroups, and must be 0 for devices that do not support subgroups. Support for subgroups is required for
+     * an OpenCL 2.1 or 2.2 device.</p>
+     */
+    public static final int CL_DEVICE_MAX_NUM_SUB_GROUPS = 0x105C;
+
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetDeviceInfo GetDeviceInfo}, returns a {@code cl_bool} value.
+     * 
+     * <p>Is {@link CL10#CL_TRUE TRUE} if this device supports independent forward progress of sub-groups, {@link CL10#CL_FALSE FALSE} otherwise.</p>
+     * 
+     * <p>This query must return {@link CL10#CL_TRUE TRUE} for devices that support the {@code cl_khr_subgroups} extension, and must return {@link CL10#CL_FALSE FALSE} for devices that do not support
+     * subgroups.</p>
+     */
+    public static final int CL_DEVICE_SUB_GROUP_INDEPENDENT_FORWARD_PROGRESS = 0x105D;
+
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetCommandQueueInfo GetCommandQueueInfo}, returns a {@code cl_command_queue} value.
+     * 
+     * <p>Return the current default command queue for the underlying device.</p>
+     */
     public static final int CL_QUEUE_DEVICE_DEFAULT = 0x1095;
 
     /** cl_channel_type */
     public static final int CL_UNORM_INT_101010_2 = 0x10E0;
 
-    /** cl_program_info */
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetProgramInfo GetProgramInfo}, returns a {@code char[]} value.
+     * 
+     * <p>Returns the program IL for programs created with {@link #clCreateProgramWithIL CreateProgramWithIL}.</p>
+     * 
+     * <p>If program is created with {@link CL10#clCreateProgramWithSource CreateProgramWithSource}, {@link CL10#clCreateProgramWithBinary CreateProgramWithBinary} or {@link CL12#clCreateProgramWithBuiltInKernels CreateProgramWithBuiltInKernels} the memory pointed to by
+     * {@code param_value} will be unchanged and {@code param_value_size_ret} will be set to 0.</p>
+     */
     public static final int CL_PROGRAM_IL = 0x1169;
 
-    /** cl_kernel_info */
-    public static final int
-        CL_KERNEL_MAX_NUM_SUB_GROUPS     = 0x11B9,
-        CL_KERNEL_COMPILE_NUM_SUB_GROUPS = 0x11BA;
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetKernelInfo GetKernelInfo}, returns a {@code size_t} value.
+     * 
+     * <p>This provides a mechanism for the application to query the maximum number of sub-groups that may make up each workgroup to execute a kernel on a
+     * specific device given by device. The OpenCL implementation uses the resource requirements of the kernel (register usage etc.) to determine what this
+     * work-group size should be. The returned value may be used to compute a work-group size to enqueue the kernel with to give a round number of sub-groups
+     * for an enqueue.</p>
+     */
+    public static final int CL_KERNEL_MAX_NUM_SUB_GROUPS = 0x11B9;
 
-    /** cl_kernel_sub_group_info */
-    public static final int
-        CL_KERNEL_MAX_SUB_GROUP_SIZE_FOR_NDRANGE = 0x2033,
-        CL_KERNEL_SUB_GROUP_COUNT_FOR_NDRANGE    = 0x2034,
-        CL_KERNEL_LOCAL_SIZE_FOR_SUB_GROUP_COUNT = 0x11B8;
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetKernelInfo GetKernelInfo}, returns a {@code size_t} value.
+     * 
+     * <p>Returns the number of sub-groups per workgroup specified in the kernel source or IL. If the sub-group count is not specified then 0 is returned.</p>
+     */
+    public static final int CL_KERNEL_COMPILE_NUM_SUB_GROUPS = 0x11BA;
+
+    /**
+     * Accepted as the {@code param_name} parameter of {@link #clGetKernelSubGroupInfo GetKernelSubGroupInfo}, returns a {@code size_t} value.
+     * 
+     * <p>Returns the maximum sub-group size for this kernel. All sub-groups must be the same size, while the last subgroup in any work-group (i.e. the subgroup
+     * with the maximum index) could be the same or smaller size.</p>
+     * 
+     * <p>The {@code input_value} must be an array of {@code size_t} values corresponding to the local work size parameter of the intended dispatch. The number
+     * of dimensions in the ND-range will be inferred from the value specified for {@code input_value_size}.</p>
+     */
+    public static final int CL_KERNEL_MAX_SUB_GROUP_SIZE_FOR_NDRANGE = 0x2033;
+
+    /**
+     * Accepted as the {@code param_name} parameter of {@link #clGetKernelSubGroupInfo GetKernelSubGroupInfo}, returns a {@code size_t} value.
+     * 
+     * <p>Returns the number of sub-groups that will be present in each workgroup for a given local work size. All workgroups, apart from the last workgroup in
+     * each dimension in the presence of nonuniform work-group sizes, will have the same number of subgroups.</p>
+     * 
+     * <p>The {@code input_value} must be an array of {@code size_t} values corresponding to the local work size parameter of the intended dispatch. The number
+     * of dimensions in the ND-range will be inferred from the value specified for {@code input_value_size}.</p>
+     */
+    public static final int CL_KERNEL_SUB_GROUP_COUNT_FOR_NDRANGE = 0x2034;
+
+    /**
+     * Accepted as the {@code param_name} parameter of {@link #clGetKernelSubGroupInfo GetKernelSubGroupInfo}, returns a {@code size_t[]} value.
+     * 
+     * <p>Returns the local size that will generate the requested number of sub-groups for the kernel. The output array must be an array of {@code size_t} values
+     * corresponding to the local size parameter. Any returned workgroup will have one dimension. Other dimensions inferred from the value specified for
+     * {@code param_value_size} will be filled with the value 1. The returned value will produce an exact number of sub-groups and result in no partial groups
+     * for an executing kernel except in the case where the last work-group in a dimension has a size different from that of the other groups. If no
+     * work-group size can accommodate the requested number of sub-groups, 0 will be returned in each element of the return array.</p>
+     */
+    public static final int CL_KERNEL_LOCAL_SIZE_FOR_SUB_GROUP_COUNT = 0x2034;
 
     protected CL21() {
         throw new UnsupportedOperationException();

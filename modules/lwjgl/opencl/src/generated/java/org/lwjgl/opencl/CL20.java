@@ -29,24 +29,200 @@ public class CL20 extends CL12 {
         CL_INVALID_PIPE_SIZE    = -69,
         CL_INVALID_DEVICE_QUEUE = -70;
 
-    /** cl_device_info */
-    public static final int
-        CL_DEVICE_QUEUE_ON_HOST_PROPERTIES             = 0x102A,
-        CL_DEVICE_MAX_READ_WRITE_IMAGE_ARGS            = 0x104C,
-        CL_DEVICE_MAX_GLOBAL_VARIABLE_SIZE             = 0x104D,
-        CL_DEVICE_QUEUE_ON_DEVICE_PROPERTIES           = 0x104E,
-        CL_DEVICE_QUEUE_ON_DEVICE_PREFERRED_SIZE       = 0x104F,
-        CL_DEVICE_QUEUE_ON_DEVICE_MAX_SIZE             = 0x1050,
-        CL_DEVICE_MAX_ON_DEVICE_QUEUES                 = 0x1051,
-        CL_DEVICE_MAX_ON_DEVICE_EVENTS                 = 0x1052,
-        CL_DEVICE_SVM_CAPABILITIES                     = 0x1053,
-        CL_DEVICE_GLOBAL_VARIABLE_PREFERRED_TOTAL_SIZE = 0x1054,
-        CL_DEVICE_MAX_PIPE_ARGS                        = 0x1055,
-        CL_DEVICE_PIPE_MAX_ACTIVE_RESERVATIONS         = 0x1056,
-        CL_DEVICE_PIPE_MAX_PACKET_SIZE                 = 0x1057,
-        CL_DEVICE_PREFERRED_PLATFORM_ATOMIC_ALIGNMENT  = 0x1058,
-        CL_DEVICE_PREFERRED_GLOBAL_ATOMIC_ALIGNMENT    = 0x1059,
-        CL_DEVICE_PREFERRED_LOCAL_ATOMIC_ALIGNMENT     = 0x105A;
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetDeviceInfo GetDeviceInfo}, returns a {@code cl_command_queue_properties} value.
+     * 
+     * <p>Describes the on host command-queue properties supported by the device. This is a bitfield that describes one or more of the following values:</p>
+     * 
+     * <ul>
+     * <li>{@link CL10#CL_QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE}</li>
+     * <li>{@link CL10#CL_QUEUE_PROFILING_ENABLE QUEUE_PROFILING_ENABLE}</li>
+     * </ul>
+     * 
+     * <p>The mandated minimum capability is: {@code CL_QUEUE_PROFILING_ENABLE}.</p>
+     */
+    public static final int CL_DEVICE_QUEUE_ON_HOST_PROPERTIES = 0x102A;
+
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetDeviceInfo GetDeviceInfo}, returns a {@code cl_uint} value.
+     * 
+     * <p>The row pitch alignment size in pixels for images created from a buffer. The value returned must be a power of 2. If the device does not support
+     * images, this value should be 0.</p>
+     */
+    public static final int CL_DEVICE_IMAGE_PITCH_ALIGNMENT = 0x104A;
+
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetDeviceInfo GetDeviceInfo}, returns a {@code cl_uint} value.
+     * 
+     * <p>This query should be used when an image is created from a buffer which was created using {@link CL10#CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR}. The value returned must be a
+     * power of 2.</p>
+     * 
+     * <p>This query specifies the minimum alignment in pixels of the {@code host_ptr} specified to {@link CL10#clCreateBuffer CreateBuffer}. If the device does not support
+     * images, this value should be 0.</p>
+     */
+    public static final int CL_DEVICE_IMAGE_BASE_ADDRESS_ALIGNMENT = 0x104B;
+
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetDeviceInfo GetDeviceInfo}, returns a {@code cl_uint} value.
+     * 
+     * <p>Max number of image objects arguments of a kernel declared with the {@code write_only} or {@code read_write} qualifier.</p>
+     * 
+     * <p>Support for read-write image arguments is required for an OpenCL 2.0, 2.1, or 2.2 device if {@link CL10#CL_DEVICE_IMAGE_SUPPORT DEVICE_IMAGE_SUPPORT} is {@link CL10#CL_TRUE TRUE}.</p>
+     * 
+     * <p>The minimum value is 64 if the device supports read-write images arguments, and must be 0 for devices that do not support read-write images.</p>
+     */
+    public static final int CL_DEVICE_MAX_READ_WRITE_IMAGE_ARGS = 0x104C;
+
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetDeviceInfo GetDeviceInfo}, returns a {@code size_t} value.
+     * 
+     * <p>The maximum number of bytes of storage that may be allocated for any single variable in program scope or inside a function in an OpenCL kernel language
+     * declared in the global address space.</p>
+     * 
+     * <p>Support for program scope global variables is required for an OpenCL 2.0, 2.1, or 2.2 device. The minimum value is 64 KB if the device supports program
+     * scope global variables, and must be 0 for devices that do not support program scope global variables.</p>
+     */
+    public static final int CL_DEVICE_MAX_GLOBAL_VARIABLE_SIZE = 0x104D;
+
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetDeviceInfo GetDeviceInfo}, returns a {@code cl_command_queue_properties} value.
+     * 
+     * <p>Describes the on device command-queue properties supported by the device. This is a bitfield that describes one or more of the following values:</p>
+     * 
+     * <ul>
+     * <li>{@link CL10#CL_QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE}</li>
+     * <li>{@link CL10#CL_QUEUE_PROFILING_ENABLE QUEUE_PROFILING_ENABLE}</li>
+     * </ul>
+     * 
+     * <p>Support for on-device queues is required for an OpenCL 2.0, 2.1, or 2.2 device. When on-device queues are supported, the mandated minimum capability
+     * is:</p>
+     * 
+     * <pre><code>
+     *         CL_QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE |
+     *         CL_QUEUE_PROFILING_ENABLE.    </code></pre>
+     * 
+     * <p>Must be 0 for devices that do not support on-device queues.</p>
+     */
+    public static final int CL_DEVICE_QUEUE_ON_DEVICE_PROPERTIES = 0x104E;
+
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetDeviceInfo GetDeviceInfo}, returns a {@code cl_uint} value.
+     * 
+     * <p>The preferred size of the device queue, in bytes. Applications should use this size for the device queue to ensure good performance.</p>
+     * 
+     * <p>The minimum value is 16 KB for devices supporting on-device queues, and must be 0 for devices that do not support on-device queues.</p>
+     */
+    public static final int CL_DEVICE_QUEUE_ON_DEVICE_PREFERRED_SIZE = 0x104F;
+
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetDeviceInfo GetDeviceInfo}, returns a {@code cl_uint} value.
+     * 
+     * <p>The maximum size of the device queue in bytes.</p>
+     * 
+     * <p>The minimum value is 256 KB for the full profile and 64 KB for the embedded profile for devices supporting on-device queues, and must be 0 for devices
+     * that do not support on-device queues.</p>
+     */
+    public static final int CL_DEVICE_QUEUE_ON_DEVICE_MAX_SIZE = 0x1050;
+
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetDeviceInfo GetDeviceInfo}, returns a {@code cl_uint} value.
+     * 
+     * <p>The maximum number of device queues that can be created for this device in a single context.</p>
+     * 
+     * <p>The minimum value is 1 for devices supporting on-device queues, and must be 0 for devices that do not support on-device queues.</p>
+     */
+    public static final int CL_DEVICE_MAX_ON_DEVICE_QUEUES = 0x1051;
+
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetDeviceInfo GetDeviceInfo}, returns a {@code cl_uint} value.
+     * 
+     * <p>The maximum number of events in use by a device queue. These refer to events returned by the {@code enqueue_} built-in functions to a device queue or
+     * user events returned by the {@code create_user_event} built-in function that have not been released.</p>
+     * 
+     * <p>The minimum value is 1024 for devices supporting on-device queues, and must be 0 for devices that do not support on-device queues.</p>
+     */
+    public static final int CL_DEVICE_MAX_ON_DEVICE_EVENTS = 0x1052;
+
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetDeviceInfo GetDeviceInfo}, returns a {@code cl_device_svm_capabilities} value.
+     * 
+     * <p>Describes the various shared virtual memory (SVM) memory allocation types the device supports. This is a bit-field that describes a combination of the
+     * following values:</p>
+     * 
+     * <ul>
+     * <li>{@link #CL_DEVICE_SVM_COARSE_GRAIN_BUFFER DEVICE_SVM_COARSE_GRAIN_BUFFER} - Support for coarse-grain buffer sharing using {@link #clSVMAlloc SVMAlloc}. Memory consistency is guaranteed at synchronization
+     * points and the host must use calls to {@link CL10#clEnqueueMapBuffer EnqueueMapBuffer} and {@link CL10#clEnqueueUnmapMemObject EnqueueUnmapMemObject}.</li>
+     * <li>{@link #CL_DEVICE_SVM_FINE_GRAIN_BUFFER DEVICE_SVM_FINE_GRAIN_BUFFER} - Support for fine-grain buffer sharing using {@code clSVMAlloc}. Memory consistency is guaranteed at synchronization
+     * points without need for {@code clEnqueueMapBuffer} and {@code clEnqueueUnmapMemObject}.</li>
+     * <li>{@link #CL_DEVICE_SVM_FINE_GRAIN_SYSTEM DEVICE_SVM_FINE_GRAIN_SYSTEM} - Support for sharing the host’s entire virtual memory including memory allocated using malloc. Memory consistency is
+     * guaranteed at synchronization points.</li>
+     * <li>{@link #CL_DEVICE_SVM_ATOMICS DEVICE_SVM_ATOMICS} - Support for the OpenCL 2.0 atomic operations that provide memory consistency across the host and all OpenCL devices
+     * supporting fine-grain SVM allocations.</li>
+     * </ul>
+     * 
+     * <p>The mandated minimum capability for an OpenCL 2.0, 2.1, or 2.2 device is {@code CL_DEVICE_SVM_COARSE_GRAIN_BUFFER}.</p>
+     * 
+     * <p>For other device versions there is no mandated minimum capability.</p>
+     */
+    public static final int CL_DEVICE_SVM_CAPABILITIES = 0x1053;
+
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetDeviceInfo GetDeviceInfo}, returns a {@code size_t} value.
+     * 
+     * <p>Maximum preferred total size, in bytes, of all program variables in the global address space. This is a performance hint. An implementation may place
+     * such variables in storage with optimized device access. This query returns the capacity of such storage. The minimum value is 0.</p>
+     */
+    public static final int CL_DEVICE_GLOBAL_VARIABLE_PREFERRED_TOTAL_SIZE = 0x1054;
+
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetDeviceInfo GetDeviceInfo}, returns a {@code cl_uint} value.
+     * 
+     * <p>The maximum number of pipe objects that can be passed as arguments to a kernel. The minimum value is 16 for devices supporting pipes, and must be 0 for
+     * devices that do not support pipes.</p>
+     */
+    public static final int CL_DEVICE_MAX_PIPE_ARGS = 0x1055;
+
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetDeviceInfo GetDeviceInfo}, returns a {@code cl_uint} value.
+     * 
+     * <p>The maximum number of reservations that can be active for a pipe per work-item in a kernel. A work-group reservation is counted as one reservation per
+     * work-item. The minimum value is 1 for devices supporting pipes, and must be 0 for devices that do not support pipes.</p>
+     */
+    public static final int CL_DEVICE_PIPE_MAX_ACTIVE_RESERVATIONS = 0x1056;
+
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetDeviceInfo GetDeviceInfo}, returns a {@code cl_uint} value.
+     * 
+     * <p>The maximum size of pipe packet in bytes.</p>
+     * 
+     * <p>Support for pipes is required for an OpenCL 2.0, 2.1, or 2.2 device. The minimum value is 1024 bytes if the device supports pipes, and must be 0 for
+     * devices that do not support pipes.</p>
+     */
+    public static final int CL_DEVICE_PIPE_MAX_PACKET_SIZE = 0x1057;
+
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetDeviceInfo GetDeviceInfo}, returns a {@code cl_uint} value.
+     * 
+     * <p>Returns the value representing the preferred alignment in bytes for OpenCL 2.0 fine-grained SVM atomic types. This query can return 0 which indicates
+     * that the preferred alignment is aligned to the natural size of the type.</p>
+     */
+    public static final int CL_DEVICE_PREFERRED_PLATFORM_ATOMIC_ALIGNMENT = 0x1058;
+
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetDeviceInfo GetDeviceInfo}, returns a {@code cl_uint} value.
+     * 
+     * <p>Returns the value representing the preferred alignment in bytes for OpenCL 2.0 atomic types to global memory. This query can return 0 which indicates
+     * that the preferred alignment is aligned to the natural size of the type.</p>
+     */
+    public static final int CL_DEVICE_PREFERRED_GLOBAL_ATOMIC_ALIGNMENT = 0x1059;
+
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetDeviceInfo GetDeviceInfo}, returns a {@code cl_uint} value.
+     * 
+     * <p>Returns the value representing the preferred alignment in bytes for OpenCL 2.0 atomic types to local memory. This query can return 0 which indicates
+     * that the preferred alignment is aligned to the natural size of the type.</p>
+     */
+    public static final int CL_DEVICE_PREFERRED_LOCAL_ATOMIC_ALIGNMENT = 0x105A;
 
     /** cl_command_queue_properties */
     public static final int
@@ -60,18 +236,49 @@ public class CL20 extends CL12 {
         CL_DEVICE_SVM_FINE_GRAIN_SYSTEM   = 1 << 2,
         CL_DEVICE_SVM_ATOMICS             = 1 << 3;
 
-    /** cl_command_queue_info */
+    /**
+     * Accepted {@code cl_uint} value for the {@code properties} parameter to {@link #clCreateCommandQueueWithProperties CreateCommandQueueWithProperties}.
+     * 
+     * <p>Specifies the size of the device queue in bytes.</p>
+     * 
+     * <p>This can only be specified if {@link #CL_QUEUE_ON_DEVICE QUEUE_ON_DEVICE} is set in {@link CL10#CL_QUEUE_PROPERTIES QUEUE_PROPERTIES}. This must be a value &le; {@link #CL_DEVICE_QUEUE_ON_DEVICE_MAX_SIZE DEVICE_QUEUE_ON_DEVICE_MAX_SIZE}.</p>
+     * 
+     * <p>For best performance, this should be &le; {@link #CL_DEVICE_QUEUE_ON_DEVICE_PREFERRED_SIZE DEVICE_QUEUE_ON_DEVICE_PREFERRED_SIZE}.</p>
+     * 
+     * <p>If {@code CL_QUEUE_SIZE} is not specified, the device queue is created with {@code CL_DEVICE_QUEUE_ON_DEVICE_PREFERRED_SIZE} as the size of the queue.</p>
+     */
     public static final int CL_QUEUE_SIZE = 0x1094;
 
-    /** cl_svm_mem_flags */
-    public static final int
-        CL_MEM_SVM_FINE_GRAIN_BUFFER = 1 << 10,
-        CL_MEM_SVM_ATOMICS           = 1 << 11;
+    /**
+     * SVM memory flag accepted by {@link #clSVMAlloc SVMAlloc}.
+     * 
+     * <p>This specifies that the application wants the OpenCL implementation to do a fine-grained allocation.</p>
+     */
+    public static final int CL_MEM_SVM_FINE_GRAIN_BUFFER = 1 << 10;
+
+    /**
+     * SVM memory flag accepted by {@link #clSVMAlloc SVMAlloc}.
+     * 
+     * <p>This flag is valid only if {@link #CL_MEM_SVM_FINE_GRAIN_BUFFER MEM_SVM_FINE_GRAIN_BUFFER} is specified in flags. It is used to indicate that SVM atomic operations can control visibility
+     * of memory accesses in this SVM buffer.</p>
+     */
+    public static final int CL_MEM_SVM_ATOMICS = 1 << 11;
+
+    /**
+     * This flag is only used by {@link CL10#clGetSupportedImageFormats GetSupportedImageFormats} to query image formats that may be both read from and written to by the same kernel instance. To
+     * create a memory object that may be read from and written to use {@link CL10#CL_MEM_READ_WRITE MEM_READ_WRITE}.
+     */
+    public static final int CL_MEM_KERNEL_READ_AND_WRITE = 1 << 12;
 
     /** cl_mem_object_type */
     public static final int CL_MEM_OBJECT_PIPE = 0x10F7;
 
-    /** cl_mem_info */
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetMemObjectInfo GetMemObjectInfo}, returns a {@code cl_bool} value.
+     * 
+     * <p>Return {@link CL10#CL_TRUE TRUE} if {@code memobj} is a buffer object that was created with {@link CL10#CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} or is a sub-buffer object of a buffer object that was created
+     * with {@code CL_MEM_USE_HOST_PTR} and the {@code host_ptr} specified when the buffer object was created is a SVM pointer; otherwise returns {@link CL10#CL_FALSE FALSE}.</p>
+     */
     public static final int CL_MEM_USES_SVM_POINTER = 0x1109;
 
     /** cl_channel_order */
@@ -82,10 +289,19 @@ public class CL20 extends CL12 {
         CL_sBGRA = 0x10C2,
         CL_ABGR  = 0x10C3;
 
-    /** cl_pipe_info */
-    public static final int
-        CL_PIPE_PACKET_SIZE = 0x1120,
-        CL_PIPE_MAX_PACKETS = 0x1121;
+    /**
+     * Accepted as the {@code param_name} parameter of {@link #clGetPipeInfo GetPipeInfo}, returns a {@code cl_uint} value.
+     * 
+     * <p>Return pipe packet size specified when {@code pipe} is created with {@link #clCreatePipe CreatePipe}.</p>
+     */
+    public static final int CL_PIPE_PACKET_SIZE = 0x1120;
+
+    /**
+     * Accepted as the {@code param_name} parameter of {@link #clGetPipeInfo GetPipeInfo}, returns a {@code cl_uint} value.
+     * 
+     * <p>Return max. number of packets specified when {@code pipe} is created with {@link #clCreatePipe CreatePipe}.</p>
+     */
+    public static final int CL_PIPE_MAX_PACKETS = 0x1121;
 
     /** cl_sampler_info */
     public static final int
@@ -93,16 +309,34 @@ public class CL20 extends CL12 {
         CL_SAMPLER_LOD_MIN         = 0x1156,
         CL_SAMPLER_LOD_MAX         = 0x1157;
 
-    /** cl_program_build_info */
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetProgramBuildInfo GetProgramBuildInfo}, returns a {@code size_t} value.
+     * 
+     * <p>The total amount of storage, in bytes, used by program variables in the global address space.</p>
+     */
     public static final int CL_PROGRAM_BUILD_GLOBAL_VARIABLE_TOTAL_SIZE = 0x1185;
 
     /** cl_kernel_arg_type_qualifier */
     public static final int CL_KERNEL_ARG_TYPE_PIPE = 1 << 3;
 
-    /** cl_kernel_exec_info */
-    public static final int
-        CL_KERNEL_EXEC_INFO_SVM_PTRS              = 0x11B6,
-        CL_KERNEL_EXEC_INFO_SVM_FINE_GRAIN_SYSTEM = 0x11B7;
+    /**
+     * Accepted as the {@code param_name} parameter of {@link #clSetKernelExecInfo SetKernelExecInfo}, returns a {@code void*[]} value.
+     * 
+     * <p>SVM pointers must reference locations contained entirely within buffers that are passed to kernel as arguments, or that are passed through the
+     * execution information.</p>
+     * 
+     * <p>Non-argument SVM buffers must be specified by passing pointers to those buffers via {@code clSetKernelExecInfo} for coarse-grain and fine-grain buffer
+     * SVM allocations but not for finegrain system SVM allocations.</p>
+     */
+    public static final int CL_KERNEL_EXEC_INFO_SVM_PTRS = 0x11B6;
+
+    /**
+     * Accepted as the {@code param_name} parameter of {@link #clSetKernelExecInfo SetKernelExecInfo}, returns a {@code cl_bool} value.
+     * 
+     * <p>This flag indicates whether the kernel uses pointers that are fine grain system SVM allocations. These fine grain system SVM pointers may be passed as
+     * arguments or defined in SVM buffers that are passed as arguments to kernel.</p>
+     */
+    public static final int CL_KERNEL_EXEC_INFO_SVM_FINE_GRAIN_SYSTEM = 0x11B7;
 
     /** cl_command_type */
     public static final int
@@ -112,7 +346,12 @@ public class CL20 extends CL12 {
         CL_COMMAND_SVM_MAP     = 0x120C,
         CL_COMMAND_SVM_UNMAP   = 0x120D;
 
-    /** cl_profiling_info */
+    /**
+     * Accepted as the {@code param_name} parameter of {@link CL10#clGetEventProfilingInfo GetEventProfilingInfo}, returns a {@code cl_ulong} value.
+     * 
+     * <p>A 64-bit value that describes the current device time counter in nanoseconds when the command identified by event and any child commands enqueued by
+     * this command on the device have finished execution.</p>
+     */
     public static final int CL_PROFILING_COMMAND_COMPLETE = 0x1284;
 
     protected CL20() {

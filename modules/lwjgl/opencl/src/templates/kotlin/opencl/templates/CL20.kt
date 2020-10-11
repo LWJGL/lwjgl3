@@ -25,23 +25,253 @@ val CL20 = "CL20".nativeClassCL("CL20") {
     )
 
     IntConstant(
-        "cl_device_info",
+        """
+        Accepted as the {@code param_name} parameter of #GetDeviceInfo(), returns a {@code cl_command_queue_properties} value.
 
-        "DEVICE_QUEUE_ON_HOST_PROPERTIES"..0x102A,
-        "DEVICE_MAX_READ_WRITE_IMAGE_ARGS"..0x104C,
-        "DEVICE_MAX_GLOBAL_VARIABLE_SIZE"..0x104D,
-        "DEVICE_QUEUE_ON_DEVICE_PROPERTIES"..0x104E,
-        "DEVICE_QUEUE_ON_DEVICE_PREFERRED_SIZE"..0x104F,
-        "DEVICE_QUEUE_ON_DEVICE_MAX_SIZE"..0x1050,
-        "DEVICE_MAX_ON_DEVICE_QUEUES"..0x1051,
-        "DEVICE_MAX_ON_DEVICE_EVENTS"..0x1052,
-        "DEVICE_SVM_CAPABILITIES"..0x1053,
-        "DEVICE_GLOBAL_VARIABLE_PREFERRED_TOTAL_SIZE"..0x1054,
-        "DEVICE_MAX_PIPE_ARGS"..0x1055,
-        "DEVICE_PIPE_MAX_ACTIVE_RESERVATIONS"..0x1056,
-        "DEVICE_PIPE_MAX_PACKET_SIZE"..0x1057,
-        "DEVICE_PREFERRED_PLATFORM_ATOMIC_ALIGNMENT"..0x1058,
-        "DEVICE_PREFERRED_GLOBAL_ATOMIC_ALIGNMENT"..0x1059,
+        Describes the on host command-queue properties supported by the device. This is a bitfield that describes one or more of the following values:
+        ${ul(
+            "#QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE",
+            "#QUEUE_PROFILING_ENABLE"
+        )}
+        The mandated minimum capability is: {@code CL_QUEUE_PROFILING_ENABLE}.
+        """,
+
+        "DEVICE_QUEUE_ON_HOST_PROPERTIES"..0x102A
+    )
+
+    IntConstant(
+        """
+        Accepted as the {@code param_name} parameter of #GetDeviceInfo(), returns a {@code cl_uint} value.
+
+        The row pitch alignment size in pixels for images created from a buffer. The value returned must be a power of 2. If the device does not support
+        images, this value should be 0.
+        """,
+
+        "DEVICE_IMAGE_PITCH_ALIGNMENT"..0x104A
+    )
+
+    IntConstant(
+        """
+        Accepted as the {@code param_name} parameter of #GetDeviceInfo(), returns a {@code cl_uint} value.
+
+        This query should be used when an image is created from a buffer which was created using #MEM_USE_HOST_PTR. The value returned must be a
+        power of 2.
+
+        This query specifies the minimum alignment in pixels of the {@code host_ptr} specified to #CreateBuffer(). If the device does not support
+        images, this value should be 0.
+        """,
+
+        "DEVICE_IMAGE_BASE_ADDRESS_ALIGNMENT"..0x104B
+    )
+
+    IntConstant(
+        """
+        Accepted as the {@code param_name} parameter of #GetDeviceInfo(), returns a {@code cl_uint} value.
+
+        Max number of image objects arguments of a kernel declared with the {@code write_only} or {@code read_write} qualifier.
+
+        Support for read-write image arguments is required for an OpenCL 2.0, 2.1, or 2.2 device if #DEVICE_IMAGE_SUPPORT is #TRUE.
+
+        The minimum value is 64 if the device supports read-write images arguments, and must be 0 for devices that do not support read-write images.
+        """,
+
+        "DEVICE_MAX_READ_WRITE_IMAGE_ARGS"..0x104C
+    )
+
+    IntConstant(
+        """
+        Accepted as the {@code param_name} parameter of #GetDeviceInfo(), returns a {@code size_t} value.
+
+        The maximum number of bytes of storage that may be allocated for any single variable in program scope or inside a function in an OpenCL kernel language
+        declared in the global address space.
+
+        Support for program scope global variables is required for an OpenCL 2.0, 2.1, or 2.2 device. The minimum value is 64 KB if the device supports program
+        scope global variables, and must be 0 for devices that do not support program scope global variables.
+        """,
+
+        "DEVICE_MAX_GLOBAL_VARIABLE_SIZE"..0x104D
+    )
+
+    IntConstant(
+        """
+        Accepted as the {@code param_name} parameter of #GetDeviceInfo(), returns a {@code cl_command_queue_properties} value.
+
+        Describes the on device command-queue properties supported by the device. This is a bitfield that describes one or more of the following values:
+        ${ul(
+            "#QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE",
+            "#QUEUE_PROFILING_ENABLE"
+        )}
+
+        Support for on-device queues is required for an OpenCL 2.0, 2.1, or 2.2 device. When on-device queues are supported, the mandated minimum capability
+        is:
+        ${codeBlock("""
+        CL_QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE |
+        CL_QUEUE_PROFILING_ENABLE.    
+        """)}
+        Must be 0 for devices that do not support on-device queues.
+        """,
+
+        "DEVICE_QUEUE_ON_DEVICE_PROPERTIES"..0x104E
+    )
+
+    IntConstant(
+        """
+        Accepted as the {@code param_name} parameter of #GetDeviceInfo(), returns a {@code cl_uint} value.
+
+        The preferred size of the device queue, in bytes. Applications should use this size for the device queue to ensure good performance.
+
+        The minimum value is 16 KB for devices supporting on-device queues, and must be 0 for devices that do not support on-device queues.
+        """,
+
+        "DEVICE_QUEUE_ON_DEVICE_PREFERRED_SIZE"..0x104F
+    )
+
+    IntConstant(
+        """
+        Accepted as the {@code param_name} parameter of #GetDeviceInfo(), returns a {@code cl_uint} value.
+
+        The maximum size of the device queue in bytes.
+
+        The minimum value is 256 KB for the full profile and 64 KB for the embedded profile for devices supporting on-device queues, and must be 0 for devices
+        that do not support on-device queues.
+        """,
+
+        "DEVICE_QUEUE_ON_DEVICE_MAX_SIZE"..0x1050
+    )
+
+    IntConstant(
+        """
+        Accepted as the {@code param_name} parameter of #GetDeviceInfo(), returns a {@code cl_uint} value.
+
+        The maximum number of device queues that can be created for this device in a single context.
+
+        The minimum value is 1 for devices supporting on-device queues, and must be 0 for devices that do not support on-device queues.
+        """,
+
+        "DEVICE_MAX_ON_DEVICE_QUEUES"..0x1051
+    )
+
+    IntConstant(
+        """
+        Accepted as the {@code param_name} parameter of #GetDeviceInfo(), returns a {@code cl_uint} value.
+
+        The maximum number of events in use by a device queue. These refer to events returned by the {@code enqueue_} built-in functions to a device queue or
+        user events returned by the {@code create_user_event} built-in function that have not been released.
+
+        The minimum value is 1024 for devices supporting on-device queues, and must be 0 for devices that do not support on-device queues.
+        """,
+
+        "DEVICE_MAX_ON_DEVICE_EVENTS"..0x1052
+    )
+
+    IntConstant(
+        """
+        Accepted as the {@code param_name} parameter of #GetDeviceInfo(), returns a {@code cl_device_svm_capabilities} value.
+
+        Describes the various shared virtual memory (SVM) memory allocation types the device supports. This is a bit-field that describes a combination of the
+        following values:
+        ${ul(
+            """
+            #DEVICE_SVM_COARSE_GRAIN_BUFFER - Support for coarse-grain buffer sharing using #SVMAlloc(). Memory consistency is guaranteed at synchronization
+            points and the host must use calls to #EnqueueMapBuffer() and #EnqueueUnmapMemObject().
+            """,
+            """
+            #DEVICE_SVM_FINE_GRAIN_BUFFER - Support for fine-grain buffer sharing using {@code clSVMAlloc}. Memory consistency is guaranteed at synchronization
+            points without need for {@code clEnqueueMapBuffer} and {@code clEnqueueUnmapMemObject}.
+            """,
+            """
+            #DEVICE_SVM_FINE_GRAIN_SYSTEM - Support for sharing the host’s entire virtual memory including memory allocated using malloc. Memory consistency is
+            guaranteed at synchronization points.
+            """,
+            """
+            #DEVICE_SVM_ATOMICS - Support for the OpenCL 2.0 atomic operations that provide memory consistency across the host and all OpenCL devices
+            supporting fine-grain SVM allocations.
+            """
+        )}
+        The mandated minimum capability for an OpenCL 2.0, 2.1, or 2.2 device is {@code CL_DEVICE_SVM_COARSE_GRAIN_BUFFER}.
+
+        For other device versions there is no mandated minimum capability.
+        """,
+
+        "DEVICE_SVM_CAPABILITIES"..0x1053
+    )
+
+    IntConstant(
+        """
+        Accepted as the {@code param_name} parameter of #GetDeviceInfo(), returns a {@code size_t} value.
+
+        Maximum preferred total size, in bytes, of all program variables in the global address space. This is a performance hint. An implementation may place
+        such variables in storage with optimized device access. This query returns the capacity of such storage. The minimum value is 0.
+        """,
+
+        "DEVICE_GLOBAL_VARIABLE_PREFERRED_TOTAL_SIZE"..0x1054
+    )
+
+    IntConstant(
+        """
+        Accepted as the {@code param_name} parameter of #GetDeviceInfo(), returns a {@code cl_uint} value.
+
+        The maximum number of pipe objects that can be passed as arguments to a kernel. The minimum value is 16 for devices supporting pipes, and must be 0 for
+        devices that do not support pipes.
+        """,
+
+        "DEVICE_MAX_PIPE_ARGS"..0x1055
+    )
+
+    IntConstant(
+        """
+        Accepted as the {@code param_name} parameter of #GetDeviceInfo(), returns a {@code cl_uint} value.
+
+        The maximum number of reservations that can be active for a pipe per work-item in a kernel. A work-group reservation is counted as one reservation per
+        work-item. The minimum value is 1 for devices supporting pipes, and must be 0 for devices that do not support pipes.
+        """,
+
+        "DEVICE_PIPE_MAX_ACTIVE_RESERVATIONS"..0x1056
+    )
+
+    IntConstant(
+        """
+        Accepted as the {@code param_name} parameter of #GetDeviceInfo(), returns a {@code cl_uint} value.
+
+        The maximum size of pipe packet in bytes.
+
+        Support for pipes is required for an OpenCL 2.0, 2.1, or 2.2 device. The minimum value is 1024 bytes if the device supports pipes, and must be 0 for
+        devices that do not support pipes.
+        """,
+
+        "DEVICE_PIPE_MAX_PACKET_SIZE"..0x1057
+    )
+
+    IntConstant(
+        """
+        Accepted as the {@code param_name} parameter of #GetDeviceInfo(), returns a {@code cl_uint} value.
+
+        Returns the value representing the preferred alignment in bytes for OpenCL 2.0 fine-grained SVM atomic types. This query can return 0 which indicates
+        that the preferred alignment is aligned to the natural size of the type.
+        """,
+
+        "DEVICE_PREFERRED_PLATFORM_ATOMIC_ALIGNMENT"..0x1058
+    )
+
+    IntConstant(
+        """
+        Accepted as the {@code param_name} parameter of #GetDeviceInfo(), returns a {@code cl_uint} value.
+
+        Returns the value representing the preferred alignment in bytes for OpenCL 2.0 atomic types to global memory. This query can return 0 which indicates
+        that the preferred alignment is aligned to the natural size of the type.
+        """,
+
+        "DEVICE_PREFERRED_GLOBAL_ATOMIC_ALIGNMENT"..0x1059
+    )
+
+    IntConstant(
+        """
+        Accepted as the {@code param_name} parameter of #GetDeviceInfo(), returns a {@code cl_uint} value.
+
+        Returns the value representing the preferred alignment in bytes for OpenCL 2.0 atomic types to local memory. This query can return 0 which indicates
+        that the preferred alignment is aligned to the natural size of the type.
+        """,
+
         "DEVICE_PREFERRED_LOCAL_ATOMIC_ALIGNMENT"..0x105A
     )
 
@@ -62,16 +292,49 @@ val CL20 = "CL20".nativeClassCL("CL20") {
     )
 
     IntConstant(
-        "cl_command_queue_info",
+        """
+        Accepted {@code cl_uint} value for the {@code properties} parameter to #CreateCommandQueueWithProperties().
+
+        Specifies the size of the device queue in bytes.
+
+        This can only be specified if #QUEUE_ON_DEVICE is set in #QUEUE_PROPERTIES. This must be a value &le; #DEVICE_QUEUE_ON_DEVICE_MAX_SIZE.
+
+        For best performance, this should be &le; #DEVICE_QUEUE_ON_DEVICE_PREFERRED_SIZE.
+
+        If {@code CL_QUEUE_SIZE} is not specified, the device queue is created with {@code CL_DEVICE_QUEUE_ON_DEVICE_PREFERRED_SIZE} as the size of the queue.
+        """,
 
         "QUEUE_SIZE"..0x1094
     )
 
     IntConstant(
-        "cl_svm_mem_flags",
+        """
+        SVM memory flag accepted by #SVMAlloc().
+        
+        This specifies that the application wants the OpenCL implementation to do a fine-grained allocation.
+        """,
 
-        "MEM_SVM_FINE_GRAIN_BUFFER".."1 << 10",
+        "MEM_SVM_FINE_GRAIN_BUFFER".."1 << 10"
+    )
+
+    IntConstant(
+        """
+        SVM memory flag accepted by #SVMAlloc().
+        
+        This flag is valid only if #MEM_SVM_FINE_GRAIN_BUFFER is specified in flags. It is used to indicate that SVM atomic operations can control visibility
+        of memory accesses in this SVM buffer.
+        """,
+
         "MEM_SVM_ATOMICS".."1 << 11"
+    )
+
+    IntConstant(
+        """
+        This flag is only used by #GetSupportedImageFormats() to query image formats that may be both read from and written to by the same kernel instance. To
+        create a memory object that may be read from and written to use #MEM_READ_WRITE.
+        """,
+
+        "MEM_KERNEL_READ_AND_WRITE".."1 << 12"
     )
 
     IntConstant(
@@ -81,7 +344,12 @@ val CL20 = "CL20".nativeClassCL("CL20") {
     )
 
     IntConstant(
-        "cl_mem_info",
+        """
+        Accepted as the {@code param_name} parameter of #GetMemObjectInfo(), returns a {@code cl_bool} value.
+
+        Return #TRUE if {@code memobj} is a buffer object that was created with #MEM_USE_HOST_PTR or is a sub-buffer object of a buffer object that was created
+        with {@code CL_MEM_USE_HOST_PTR} and the {@code host_ptr} specified when the buffer object was created is a SVM pointer; otherwise returns #FALSE.
+        """,
 
         "MEM_USES_SVM_POINTER"..0x1109
     )
@@ -97,9 +365,22 @@ val CL20 = "CL20".nativeClassCL("CL20") {
     )
 
     IntConstant(
-        "cl_pipe_info",
+        """
+        Accepted as the {@code param_name} parameter of #GetPipeInfo(), returns a {@code cl_uint} value.
 
-        "PIPE_PACKET_SIZE"..0x1120,
+        Return pipe packet size specified when {@code pipe} is created with #CreatePipe().
+        """,
+
+        "PIPE_PACKET_SIZE"..0x1120
+    )
+
+    IntConstant(
+        """
+        Accepted as the {@code param_name} parameter of #GetPipeInfo(), returns a {@code cl_uint} value.
+
+        Return max. number of packets specified when {@code pipe} is created with #CreatePipe().
+        """,
+
         "PIPE_MAX_PACKETS"..0x1121
     )
 
@@ -112,7 +393,11 @@ val CL20 = "CL20".nativeClassCL("CL20") {
     )
 
     IntConstant(
-        "cl_program_build_info",
+        """
+        Accepted as the {@code param_name} parameter of #GetProgramBuildInfo(), returns a {@code size_t} value.
+
+        The total amount of storage, in bytes, used by program variables in the global address space.
+        """,
 
         "PROGRAM_BUILD_GLOBAL_VARIABLE_TOTAL_SIZE"..0x1185
     )
@@ -123,12 +408,30 @@ val CL20 = "CL20".nativeClassCL("CL20") {
         "KERNEL_ARG_TYPE_PIPE".."1 << 3"
     )
 
-    val cl_kernel_exec_infos = IntConstant(
-        "cl_kernel_exec_info",
+    IntConstant(
+        """
+        Accepted as the {@code param_name} parameter of #SetKernelExecInfo(), returns a {@code void*[]} value.
 
-        "KERNEL_EXEC_INFO_SVM_PTRS"..0x11B6,
+        SVM pointers must reference locations contained entirely within buffers that are passed to kernel as arguments, or that are passed through the
+        execution information.
+
+        Non-argument SVM buffers must be specified by passing pointers to those buffers via {@code clSetKernelExecInfo} for coarse-grain and fine-grain buffer
+        SVM allocations but not for finegrain system SVM allocations.
+        """,
+
+        "KERNEL_EXEC_INFO_SVM_PTRS"..0x11B6
+    )
+
+    IntConstant(
+        """
+        Accepted as the {@code param_name} parameter of #SetKernelExecInfo(), returns a {@code cl_bool} value.
+
+        This flag indicates whether the kernel uses pointers that are fine grain system SVM allocations. These fine grain system SVM pointers may be passed as
+        arguments or defined in SVM buffers that are passed as arguments to kernel.
+        """,
+
         "KERNEL_EXEC_INFO_SVM_FINE_GRAIN_SYSTEM"..0x11B7
-    ).javaDocLinks
+    )
 
     IntConstant(
         "cl_command_type",
@@ -141,7 +444,12 @@ val CL20 = "CL20".nativeClassCL("CL20") {
     )
 
     IntConstant(
-        "cl_profiling_info",
+        """
+        Accepted as the {@code param_name} parameter of #GetEventProfilingInfo(), returns a {@code cl_ulong} value.
+
+        A 64-bit value that describes the current device time counter in nanoseconds when the command identified by event and any child commands enqueued by
+        this command on the device have finished execution.
+        """,
 
         "PROFILING_COMMAND_COMPLETE"..0x1284
     )
@@ -165,7 +473,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
             device type as device type specified when context is created using #CreateContextFromType().
             """
         ),
-        nullable..NullTerminated..cl_command_queue_properties.const.p(
+        nullable..NullTerminated..cl_queue_properties.const.p(
             "properties",
             """
             a list of properties for the command-queue and their corresponding values. Each property name is immediately followed by the corresponding desired
@@ -635,7 +943,11 @@ val CL20 = "CL20".nativeClassCL("CL20") {
         """,
 
         cl_kernel("kernel", "the kernel object being queried"),
-        cl_kernel_exec_info("param_name", "the information to be passed to {@code kernel}", cl_kernel_exec_infos),
+        cl_kernel_exec_info(
+            "param_name",
+            "the information to be passed to {@code kernel}",
+            "#KERNEL_EXEC_INFO_SVM_PTRS #KERNEL_EXEC_INFO_SVM_FINE_GRAIN_SYSTEM"
+        ),
         AutoSize("param_value")..size_t("param_value_size", "the size in bytes of the memory pointed to by {@code param_value}"),
         MultiType(PointerMapping.DATA_POINTER, PointerMapping.DATA_INT)..void.const.p("param_value", "a pointer to memory where the appropriate values determined by {@code param_name} are specified"),
 
@@ -686,5 +998,4 @@ val CL20 = "CL20".nativeClassCL("CL20") {
         )}
         """
     )
-
 }
