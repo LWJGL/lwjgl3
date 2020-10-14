@@ -141,6 +141,9 @@ public class CLCapabilities {
         clEnqueueSVMMigrateMem,
         clSetProgramReleaseCallback,
         clSetProgramSpecializationConstant,
+        clSetContextDestructorCallback,
+        clCreateBufferWithProperties,
+        clCreateImageWithProperties,
         clTrackLiveObjectsAltera,
         clReportLiveObjectsAltera,
         clEnqueueWaitSignalAMD,
@@ -190,6 +193,8 @@ public class CLCapabilities {
     public final boolean OpenCL21;
     /** When true, {@link CL22} is supported. */
     public final boolean OpenCL22;
+    /** When true, {@link CL30} is supported. */
+    public final boolean OpenCL30;
     /** When true, {@link ALTERACompilerMode} is supported. */
     public final boolean cl_altera_compiler_mode;
     /** When true, {@link ALTERADeviceTemperature} is supported. */
@@ -1056,6 +1061,9 @@ public class CLCapabilities {
             provider.getFunctionAddress("clEnqueueSVMMigrateMem"),
             provider.getFunctionAddress("clSetProgramReleaseCallback"),
             provider.getFunctionAddress("clSetProgramSpecializationConstant"),
+            provider.getFunctionAddress("clSetContextDestructorCallback"),
+            provider.getFunctionAddress("clCreateBufferWithProperties"),
+            provider.getFunctionAddress("clCreateImageWithProperties"),
             provider.getFunctionAddress("clTrackLiveObjectsAltera"),
             provider.getFunctionAddress("clReportLiveObjectsAltera"),
             provider.getFunctionAddress("clEnqueueWaitSignalAMD"),
@@ -1212,6 +1220,9 @@ public class CLCapabilities {
             caps.clEnqueueSVMMigrateMem,
             caps.clSetProgramReleaseCallback,
             caps.clSetProgramSpecializationConstant,
+            caps.clSetContextDestructorCallback,
+            caps.clCreateBufferWithProperties,
+            caps.clCreateImageWithProperties,
             caps.clTrackLiveObjectsAltera,
             caps.clReportLiveObjectsAltera,
             caps.clEnqueueWaitSignalAMD,
@@ -1367,38 +1378,41 @@ public class CLCapabilities {
         clEnqueueSVMMigrateMem = functions[116];
         clSetProgramReleaseCallback = functions[117];
         clSetProgramSpecializationConstant = functions[118];
-        clTrackLiveObjectsAltera = functions[119];
-        clReportLiveObjectsAltera = functions[120];
-        clEnqueueWaitSignalAMD = functions[121];
-        clEnqueueWriteSignalAMD = functions[122];
-        clEnqueueMakeBuffersResidentAMD = functions[123];
-        clCreateCommandQueueWithPropertiesAPPLE = functions[124];
-        clLogMessagesToSystemLogAPPLE = functions[125];
-        clLogMessagesToStdoutAPPLE = functions[126];
-        clLogMessagesToStderrAPPLE = functions[127];
-        clGetGLContextInfoAPPLE = functions[128];
-        clReleaseDeviceEXT = functions[129];
-        clRetainDeviceEXT = functions[130];
-        clCreateSubDevicesEXT = functions[131];
-        clEnqueueMigrateMemObjectEXT = functions[132];
-        clCreateAcceleratorINTEL = functions[133];
-        clRetainAcceleratorINTEL = functions[134];
-        clReleaseAcceleratorINTEL = functions[135];
-        clGetAcceleratorInfoINTEL = functions[136];
-        clCreateBufferWithPropertiesINTEL = functions[137];
-        clGetKernelSubGroupInfoKHR = functions[138];
-        clGetDeviceIDsFromVA_APIMediaAdapterINTEL = functions[139];
-        clCreateFromVA_APIMediaSurfaceINTEL = functions[140];
-        clEnqueueAcquireVA_APIMediaSurfacesINTEL = functions[141];
-        clEnqueueReleaseVA_APIMediaSurfacesINTEL = functions[142];
-        clCreateEventFromEGLSyncKHR = functions[143];
-        clCreateFromEGLImageKHR = functions[144];
-        clEnqueueAcquireEGLObjectsKHR = functions[145];
-        clEnqueueReleaseEGLObjectsKHR = functions[146];
-        clCreateEventFromGLsyncKHR = functions[147];
-        clGetGLContextInfoKHR = functions[148];
-        clTerminateContextKHR = functions[149];
-        clGetDeviceImageInfoQCOM = functions[150];
+        clSetContextDestructorCallback = functions[119];
+        clCreateBufferWithProperties = functions[120];
+        clCreateImageWithProperties = functions[121];
+        clTrackLiveObjectsAltera = functions[122];
+        clReportLiveObjectsAltera = functions[123];
+        clEnqueueWaitSignalAMD = functions[124];
+        clEnqueueWriteSignalAMD = functions[125];
+        clEnqueueMakeBuffersResidentAMD = functions[126];
+        clCreateCommandQueueWithPropertiesAPPLE = functions[127];
+        clLogMessagesToSystemLogAPPLE = functions[128];
+        clLogMessagesToStdoutAPPLE = functions[129];
+        clLogMessagesToStderrAPPLE = functions[130];
+        clGetGLContextInfoAPPLE = functions[131];
+        clReleaseDeviceEXT = functions[132];
+        clRetainDeviceEXT = functions[133];
+        clCreateSubDevicesEXT = functions[134];
+        clEnqueueMigrateMemObjectEXT = functions[135];
+        clCreateAcceleratorINTEL = functions[136];
+        clRetainAcceleratorINTEL = functions[137];
+        clReleaseAcceleratorINTEL = functions[138];
+        clGetAcceleratorInfoINTEL = functions[139];
+        clCreateBufferWithPropertiesINTEL = functions[140];
+        clGetKernelSubGroupInfoKHR = functions[141];
+        clGetDeviceIDsFromVA_APIMediaAdapterINTEL = functions[142];
+        clCreateFromVA_APIMediaSurfaceINTEL = functions[143];
+        clEnqueueAcquireVA_APIMediaSurfacesINTEL = functions[144];
+        clEnqueueReleaseVA_APIMediaSurfacesINTEL = functions[145];
+        clCreateEventFromEGLSyncKHR = functions[146];
+        clCreateFromEGLImageKHR = functions[147];
+        clEnqueueAcquireEGLObjectsKHR = functions[148];
+        clEnqueueReleaseEGLObjectsKHR = functions[149];
+        clCreateEventFromGLsyncKHR = functions[150];
+        clGetGLContextInfoKHR = functions[151];
+        clTerminateContextKHR = functions[152];
+        clGetDeviceImageInfoQCOM = functions[153];
 
         OpenCL10 = check_CL10(ext);
         OpenCL10GL = check_CL10GL(ext);
@@ -1408,6 +1422,7 @@ public class CLCapabilities {
         OpenCL20 = check_CL20(ext);
         OpenCL21 = check_CL21(ext);
         OpenCL22 = check_CL22(ext);
+        OpenCL30 = check_CL30(ext);
         cl_altera_compiler_mode = ext.contains("cl_altera_compiler_mode");
         cl_altera_device_temperature = ext.contains("cl_altera_device_temperature");
         cl_altera_live_object_tracking = check_altera_live_object_tracking(ext);
@@ -1577,6 +1592,12 @@ public class CLCapabilities {
     private boolean check_CL22(Set<String> ext) {
         return ext.contains("OpenCL22") && checkExtension("OpenCL22", checkFunctions(
             clSetProgramReleaseCallback, clSetProgramSpecializationConstant
+        ));
+    }
+
+    private boolean check_CL30(Set<String> ext) {
+        return ext.contains("OpenCL30") && checkExtension("OpenCL30", checkFunctions(
+            clSetContextDestructorCallback, clCreateBufferWithProperties, clCreateImageWithProperties
         ));
     }
 

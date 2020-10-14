@@ -953,7 +953,18 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
     cl_mem(
         "CreateBuffer",
-        "Creates a buffer object.",
+        """
+        Creates a buffer object.
+        
+        If {@code clCreateBuffer} is called with #MEM_USE_HOST_PTR set in its {@code flags} argument, the contents of the memory pointed to by {@code host_ptr}
+        at the time of the {@code clCreateBuffer} call define the initial contents of the buffer object.
+
+        If {@code clCreateBuffer} is called with a pointer returned by #SVMAlloc() as its {@code host_ptr} argument, and {@code CL_MEM_USE_HOST_PTR} is set in
+        its {@code flags} argument, {@code clCreateBuffer} will succeed and return a valid non-zero buffer object as long as the {@code size} argument is no
+        larger than the size argument passed in the original {@code clSVMAlloc} call. The new buffer object returned has the shared memory as the underlying
+        storage. Locations in the buffers underlying shared memory can be operated on using atomic operations to the devices level of support as defined in the
+        memory model.
+        """,
 
         cl_context("context", "a valid OpenCL context used to create the buffer object"),
         cl_mem_flags(
@@ -980,14 +991,11 @@ val CL10 = "CL10".nativeClassCL("CL10") {
         with one of the following error values returned in $errcode_ret:
         ${ul(
             ICE,
-            "$INVALID_VALUE if values specified in flags are not valid.",
+            "$INVALID_VALUE if values specified in {@code flags} are not valid.",
+            "$INVALID_BUFFER_SIZE if {@code size} is 0 or if {@code size} is greater than #DEVICE_MAX_MEM_ALLOC_SIZE for all devices in context.",
             """
-            $INVALID_BUFFER_SIZE if size is 0. Implementations may return $INVALID_BUFFER_SIZE if size is greater than
-            #DEVICE_MAX_MEM_ALLOC_SIZE value all devices in context.
-            """,
-            """
-            $INVALID_HOST_PTR if {@code host_ptr} is #NULL and #MEM_USE_HOST_PTR or #MEM_COPY_HOST_PTR are set in flags or if
-            {@code host_ptr} is not #NULL but #MEM_COPY_HOST_PTR or #MEM_USE_HOST_PTR are not set in flags.
+            $INVALID_HOST_PTR if {@code host_ptr} is #NULL and #MEM_USE_HOST_PTR or #MEM_COPY_HOST_PTR are set in {@code flags} or if {@code host_ptr} is not
+            #NULL but #MEM_COPY_HOST_PTR or #MEM_USE_HOST_PTR are not set in {@code flags}.
             """,
             "#MEM_OBJECT_ALLOCATION_FAILURE if there is a failure to allocate memory for buffer object.",
             OORE,

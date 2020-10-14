@@ -37,19 +37,31 @@ public class APPLEContextLoggingFunctions {
     // --- [ clLogMessagesToSystemLogAPPLE ] ---
 
     private static void clLogMessagesToSystemLogAPPLE() {
-        ;
+        long __functionAddress = CL.getICD().clLogMessagesToSystemLogAPPLE;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callV(__functionAddress);
     }
 
     // --- [ clLogMessagesToStdoutAPPLE ] ---
 
     private static void clLogMessagesToStdoutAPPLE() {
-        ;
+        long __functionAddress = CL.getICD().clLogMessagesToStdoutAPPLE;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callV(__functionAddress);
     }
 
     // --- [ clLogMessagesToStderrAPPLE ] ---
 
     private static void clLogMessagesToStderrAPPLE() {
-        ;
+        long __functionAddress = CL.getICD().clLogMessagesToStderrAPPLE;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callV(__functionAddress);
     }
 
 }

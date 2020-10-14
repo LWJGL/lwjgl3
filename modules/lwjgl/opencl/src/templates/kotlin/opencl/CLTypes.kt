@@ -203,6 +203,12 @@ fun config() {
 
         size_t("origin", "the region offset, in bytes")
         size_t("size", "the region size, in bytes")
+    }
+
+    val CL_NAME_VERSION_MAX_NAME_SIZE = 64
+    struct(Module.OPENCL, "CLNameVersion", nativeName = "cl_name_version", mutable = false) {
+        cl_version("version", "")
+        charASCII("name", "")[CL_NAME_VERSION_MAX_NAME_SIZE]
     }.definition.hasUsageOutput()
 
     union(Module.OPENCL, "CLDeviceTopologyAMD", nativeName = "cl_device_topology_amd", mutable = false) {
@@ -343,6 +349,25 @@ val cl_program_release_callback = Module.OPENCL.callback {
         void.p("user_data", "the user-specified value that was passed when calling #SetProgramReleaseCallback()")
     ) {
         documentation = "Instances of this interface may be passed to the #SetProgramReleaseCallback() method."
+    }
+}
+
+val cl_context_destructor_callback = Module.OPENCL.callback {
+    void(
+        "CLContextDestructorCallback",
+        "Will be called when a context is destroyed.",
+
+        cl_context(
+            "context",
+            """
+            the OpenCL context being deleted.
+
+            When the callback function is called by the implementation, this context is no longer valid. {@code context} is only provided for reference purposes.
+            """
+        ),
+        void.p("user_data", "the user-specified value that was passed when calling #SetContextDestructorCallback()")
+    ) {
+        documentation = "Instances of this interface may be passed to the #SetContextDestructorCallback() method."
     }
 }
 

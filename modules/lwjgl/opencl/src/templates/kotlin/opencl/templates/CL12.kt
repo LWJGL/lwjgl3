@@ -461,12 +461,12 @@ val CL12 = "CL12".nativeClassCL("CL12") {
             ${table(
                 tr(th("ImageType"), th("Size of buffer that {@code host_ptr} points to")),
 
-                tr(td("#MEM_OBJECT_IMAGE1D"), td("&#x2265; {@code image_row_pitch}")),
-                tr(td("#MEM_OBJECT_IMAGE1D_BUFFER"), td("&#x2265; {@code image_row_pitch}")),
-                tr(td("#MEM_OBJECT_IMAGE2D"), td("&#x2265; {@code image_row_pitch * image_height}")),
-                tr(td("#MEM_OBJECT_IMAGE3D"), td("&#x2265; {@code image_slice_pitch * image_depth}")),
-                tr(td("#MEM_OBJECT_IMAGE1D_ARRAY"), td("&#x2265; {@code image_slice_pitch * image_array_size}")),
-                tr(td("#MEM_OBJECT_IMAGE2D_ARRAY"), td("&#x2265; {@code image_slice_pitch * image_array_size}"))
+                tr(td("#MEM_OBJECT_IMAGE1D"), td("&ge; {@code image_row_pitch}")),
+                tr(td("#MEM_OBJECT_IMAGE1D_BUFFER"), td("&ge; {@code image_row_pitch}")),
+                tr(td("#MEM_OBJECT_IMAGE2D"), td("&ge; {@code image_row_pitch * image_height}")),
+                tr(td("#MEM_OBJECT_IMAGE3D"), td("&ge; {@code image_slice_pitch * image_depth}")),
+                tr(td("#MEM_OBJECT_IMAGE1D_ARRAY"), td("&ge; {@code image_slice_pitch * image_array_size}")),
+                tr(td("#MEM_OBJECT_IMAGE2D_ARRAY"), td("&ge; {@code image_slice_pitch * image_array_size}"))
             )}
             """
         ),
@@ -492,17 +492,23 @@ val CL12 = "CL12".nativeClassCL("CL12") {
             #NULL but #MEM_COPY_HOST_PTR or #MEM_USE_HOST_PTR are not set in flags.
             """,
             """
-            #INVALID_VALUE if an image buffer is being created and the buffer object was created with #MEM_WRITE_ONLY and flags specifies
-            #MEM_READ_WRITE or #MEM_READ_ONLY, or if the buffer object was created with #MEM_READ_ONLY and flags specifies #MEM_READ_WRITE or
-            #MEM_WRITE_ONLY, or if flags specifies #MEM_USE_HOST_PTR or #MEM_ALLOC_HOST_PTR or #MEM_COPY_HOST_PTR.
+            #INVALID_VALUE if an image is being created from another memory object (buffer or image) under one of the following circumstances:
+            ${ol(
+                """
+                {@code mem_object} was created with {@code CL_MEM_WRITE_ONLY} and {@code flags} specifies {@code CL_MEM_READ_WRITE} or
+                {@code CL_MEM_READ_ONLY},
+                """,
+                "{@code mem_object} was created with {@code CL_MEM_READ_ONLY} and flags specifies {@code CL_MEM_READ_WRITE} or {@code CL_MEM_WRITE_ONLY},",
+                "{@code flags} specifies {@code CL_MEM_USE_HOST_PTR} or {@code CL_MEM_ALLOC_HOST_PTR} or {@code CL_MEM_COPY_HOST_PTR}."
+            )} 
             """,
             """
-            #INVALID_VALUE if an image buffer is being created or an image is being created from another memory object (image or buffer) and the
-            {@code mem_object} object was created with #MEM_HOST_WRITE_ONLY and flags specifies #MEM_HOST_READ_ONLY, or if {@code mem_object} was created with
-            #MEM_HOST_READ_ONLY and flags specifies #MEM_HOST_WRITE_ONLY, or if {@code mem_object} was created with #MEM_HOST_NO_ACCESS and flags specifies
-            #MEM_HOST_READ_ONLY or #MEM_HOST_WRITE_ONLY.
+            #INVALID_VALUE if an image is being created from another memory object (buffer or image) and {@code mem_object} was created with
+            {@code CL_MEM_HOST_WRITE_ONLY} and {@code flags} specifies {@code CL_MEM_HOST_READ_ONLY}, or if {@code mem_object} was created with
+            {@code CL_MEM_HOST_READ_ONLY} and {@code flags} specifies {@code CL_MEM_HOST_WRITE_ONLY}, or if {@code mem_object} was created with
+            {@code CL_MEM_HOST_NO_ACCESS} and {@code flags} specifies {@code CL_MEM_HOST_READ_ONLY} or {@code CL_MEM_HOST_WRITE_ONLY}.
             """,
-            "#IMAGE_FORMAT_NOT_SUPPORTED if the {@code image_format} is not supported.",
+            "#IMAGE_FORMAT_NOT_SUPPORTED if there are no devices in context that support {@code image_format}.",
             "#MEM_OBJECT_ALLOCATION_FAILURE if there is a failure to allocate memory for image object.",
             "#INVALID_OPERATION if there are no devices in context that support images.",
             OORE,

@@ -59,7 +59,7 @@ abstract class APIBinding(
     protected fun List<NativeClass>.getFunctionPointers(predicate: (NativeClass) -> Boolean = { it.hasNativeFunctions }) = this.asSequence()
         .filter(predicate)
         .flatMap { it.functions.asSequence() }
-        .filter { !it.has<Reuse>() }
+        .filter { !it.has<Reuse>() && !it.has<Macro>() }
         .toList()
 
     fun addClass(clazz: NativeClass) {
@@ -624,7 +624,7 @@ class NativeClass internal constructor(
     ) {
         out.print("\n$t$t$t")
 
-        val functions = _functions.values.let { if (filter == null) it else it.filter(filter) }
+        val functions = _functions.values.let { if (filter == null) it.filter { func -> !func.has<Macro>() } else it.filter(filter) }
 
         var lineSize = 12
         functions.forEachWithMore { func, more ->

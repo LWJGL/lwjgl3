@@ -1198,6 +1198,15 @@ public class CL10 {
 
     /**
      * Creates a buffer object.
+     * 
+     * <p>If {@code clCreateBuffer} is called with {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} set in its {@code flags} argument, the contents of the memory pointed to by {@code host_ptr}
+     * at the time of the {@code clCreateBuffer} call define the initial contents of the buffer object.</p>
+     * 
+     * <p>If {@code clCreateBuffer} is called with a pointer returned by {@link CL20#clSVMAlloc SVMAlloc} as its {@code host_ptr} argument, and {@code CL_MEM_USE_HOST_PTR} is set in
+     * its {@code flags} argument, {@code clCreateBuffer} will succeed and return a valid non-zero buffer object as long as the {@code size} argument is no
+     * larger than the size argument passed in the original {@code clSVMAlloc} call. The new buffer object returned has the shared memory as the underlying
+     * storage. Locations in the buffers underlying shared memory can be operated on using atomic operations to the devices level of support as defined in the
+     * memory model.</p>
      *
      * @param context     a valid OpenCL context used to create the buffer object
      * @param flags       a bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer object and
@@ -1210,11 +1219,10 @@ public class CL10 {
      *         
      *         <ul>
      *         <li>{@link #CL_INVALID_CONTEXT INVALID_CONTEXT} if {@code context} is not a valid context.</li>
-     *         <li>{@link #CL_INVALID_VALUE INVALID_VALUE} if values specified in flags are not valid.</li>
-     *         <li>{@link #CL_INVALID_BUFFER_SIZE INVALID_BUFFER_SIZE} if size is 0. Implementations may return {@link #CL_INVALID_BUFFER_SIZE INVALID_BUFFER_SIZE} if size is greater than
-     *         {@link #CL_DEVICE_MAX_MEM_ALLOC_SIZE DEVICE_MAX_MEM_ALLOC_SIZE} value all devices in context.</li>
-     *         <li>{@link #CL_INVALID_HOST_PTR INVALID_HOST_PTR} if {@code host_ptr} is {@code NULL} and {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} or {@link #CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} are set in flags or if
-     *         {@code host_ptr} is not {@code NULL} but {@link #CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} or {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} are not set in flags.</li>
+     *         <li>{@link #CL_INVALID_VALUE INVALID_VALUE} if values specified in {@code flags} are not valid.</li>
+     *         <li>{@link #CL_INVALID_BUFFER_SIZE INVALID_BUFFER_SIZE} if {@code size} is 0 or if {@code size} is greater than {@link #CL_DEVICE_MAX_MEM_ALLOC_SIZE DEVICE_MAX_MEM_ALLOC_SIZE} for all devices in context.</li>
+     *         <li>{@link #CL_INVALID_HOST_PTR INVALID_HOST_PTR} if {@code host_ptr} is {@code NULL} and {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} or {@link #CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} are set in {@code flags} or if {@code host_ptr} is not
+     *         {@code NULL} but {@link #CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} or {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} are not set in {@code flags}.</li>
      *         <li>{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for buffer object.</li>
      *         <li>{@link #CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link #CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
@@ -1232,6 +1240,15 @@ public class CL10 {
 
     /**
      * Creates a buffer object.
+     * 
+     * <p>If {@code clCreateBuffer} is called with {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} set in its {@code flags} argument, the contents of the memory pointed to by {@code host_ptr}
+     * at the time of the {@code clCreateBuffer} call define the initial contents of the buffer object.</p>
+     * 
+     * <p>If {@code clCreateBuffer} is called with a pointer returned by {@link CL20#clSVMAlloc SVMAlloc} as its {@code host_ptr} argument, and {@code CL_MEM_USE_HOST_PTR} is set in
+     * its {@code flags} argument, {@code clCreateBuffer} will succeed and return a valid non-zero buffer object as long as the {@code size} argument is no
+     * larger than the size argument passed in the original {@code clSVMAlloc} call. The new buffer object returned has the shared memory as the underlying
+     * storage. Locations in the buffers underlying shared memory can be operated on using atomic operations to the devices level of support as defined in the
+     * memory model.</p>
      *
      * @param context     a valid OpenCL context used to create the buffer object
      * @param flags       a bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer object and
@@ -1245,11 +1262,10 @@ public class CL10 {
      *         
      *         <ul>
      *         <li>{@link #CL_INVALID_CONTEXT INVALID_CONTEXT} if {@code context} is not a valid context.</li>
-     *         <li>{@link #CL_INVALID_VALUE INVALID_VALUE} if values specified in flags are not valid.</li>
-     *         <li>{@link #CL_INVALID_BUFFER_SIZE INVALID_BUFFER_SIZE} if size is 0. Implementations may return {@link #CL_INVALID_BUFFER_SIZE INVALID_BUFFER_SIZE} if size is greater than
-     *         {@link #CL_DEVICE_MAX_MEM_ALLOC_SIZE DEVICE_MAX_MEM_ALLOC_SIZE} value all devices in context.</li>
-     *         <li>{@link #CL_INVALID_HOST_PTR INVALID_HOST_PTR} if {@code host_ptr} is {@code NULL} and {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} or {@link #CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} are set in flags or if
-     *         {@code host_ptr} is not {@code NULL} but {@link #CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} or {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} are not set in flags.</li>
+     *         <li>{@link #CL_INVALID_VALUE INVALID_VALUE} if values specified in {@code flags} are not valid.</li>
+     *         <li>{@link #CL_INVALID_BUFFER_SIZE INVALID_BUFFER_SIZE} if {@code size} is 0 or if {@code size} is greater than {@link #CL_DEVICE_MAX_MEM_ALLOC_SIZE DEVICE_MAX_MEM_ALLOC_SIZE} for all devices in context.</li>
+     *         <li>{@link #CL_INVALID_HOST_PTR INVALID_HOST_PTR} if {@code host_ptr} is {@code NULL} and {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} or {@link #CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} are set in {@code flags} or if {@code host_ptr} is not
+     *         {@code NULL} but {@link #CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} or {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} are not set in {@code flags}.</li>
      *         <li>{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for buffer object.</li>
      *         <li>{@link #CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link #CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
@@ -1267,6 +1283,15 @@ public class CL10 {
 
     /**
      * Creates a buffer object.
+     * 
+     * <p>If {@code clCreateBuffer} is called with {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} set in its {@code flags} argument, the contents of the memory pointed to by {@code host_ptr}
+     * at the time of the {@code clCreateBuffer} call define the initial contents of the buffer object.</p>
+     * 
+     * <p>If {@code clCreateBuffer} is called with a pointer returned by {@link CL20#clSVMAlloc SVMAlloc} as its {@code host_ptr} argument, and {@code CL_MEM_USE_HOST_PTR} is set in
+     * its {@code flags} argument, {@code clCreateBuffer} will succeed and return a valid non-zero buffer object as long as the {@code size} argument is no
+     * larger than the size argument passed in the original {@code clSVMAlloc} call. The new buffer object returned has the shared memory as the underlying
+     * storage. Locations in the buffers underlying shared memory can be operated on using atomic operations to the devices level of support as defined in the
+     * memory model.</p>
      *
      * @param context     a valid OpenCL context used to create the buffer object
      * @param flags       a bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer object and
@@ -1280,11 +1305,10 @@ public class CL10 {
      *         
      *         <ul>
      *         <li>{@link #CL_INVALID_CONTEXT INVALID_CONTEXT} if {@code context} is not a valid context.</li>
-     *         <li>{@link #CL_INVALID_VALUE INVALID_VALUE} if values specified in flags are not valid.</li>
-     *         <li>{@link #CL_INVALID_BUFFER_SIZE INVALID_BUFFER_SIZE} if size is 0. Implementations may return {@link #CL_INVALID_BUFFER_SIZE INVALID_BUFFER_SIZE} if size is greater than
-     *         {@link #CL_DEVICE_MAX_MEM_ALLOC_SIZE DEVICE_MAX_MEM_ALLOC_SIZE} value all devices in context.</li>
-     *         <li>{@link #CL_INVALID_HOST_PTR INVALID_HOST_PTR} if {@code host_ptr} is {@code NULL} and {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} or {@link #CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} are set in flags or if
-     *         {@code host_ptr} is not {@code NULL} but {@link #CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} or {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} are not set in flags.</li>
+     *         <li>{@link #CL_INVALID_VALUE INVALID_VALUE} if values specified in {@code flags} are not valid.</li>
+     *         <li>{@link #CL_INVALID_BUFFER_SIZE INVALID_BUFFER_SIZE} if {@code size} is 0 or if {@code size} is greater than {@link #CL_DEVICE_MAX_MEM_ALLOC_SIZE DEVICE_MAX_MEM_ALLOC_SIZE} for all devices in context.</li>
+     *         <li>{@link #CL_INVALID_HOST_PTR INVALID_HOST_PTR} if {@code host_ptr} is {@code NULL} and {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} or {@link #CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} are set in {@code flags} or if {@code host_ptr} is not
+     *         {@code NULL} but {@link #CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} or {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} are not set in {@code flags}.</li>
      *         <li>{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for buffer object.</li>
      *         <li>{@link #CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link #CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
@@ -1302,6 +1326,15 @@ public class CL10 {
 
     /**
      * Creates a buffer object.
+     * 
+     * <p>If {@code clCreateBuffer} is called with {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} set in its {@code flags} argument, the contents of the memory pointed to by {@code host_ptr}
+     * at the time of the {@code clCreateBuffer} call define the initial contents of the buffer object.</p>
+     * 
+     * <p>If {@code clCreateBuffer} is called with a pointer returned by {@link CL20#clSVMAlloc SVMAlloc} as its {@code host_ptr} argument, and {@code CL_MEM_USE_HOST_PTR} is set in
+     * its {@code flags} argument, {@code clCreateBuffer} will succeed and return a valid non-zero buffer object as long as the {@code size} argument is no
+     * larger than the size argument passed in the original {@code clSVMAlloc} call. The new buffer object returned has the shared memory as the underlying
+     * storage. Locations in the buffers underlying shared memory can be operated on using atomic operations to the devices level of support as defined in the
+     * memory model.</p>
      *
      * @param context     a valid OpenCL context used to create the buffer object
      * @param flags       a bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer object and
@@ -1315,11 +1348,10 @@ public class CL10 {
      *         
      *         <ul>
      *         <li>{@link #CL_INVALID_CONTEXT INVALID_CONTEXT} if {@code context} is not a valid context.</li>
-     *         <li>{@link #CL_INVALID_VALUE INVALID_VALUE} if values specified in flags are not valid.</li>
-     *         <li>{@link #CL_INVALID_BUFFER_SIZE INVALID_BUFFER_SIZE} if size is 0. Implementations may return {@link #CL_INVALID_BUFFER_SIZE INVALID_BUFFER_SIZE} if size is greater than
-     *         {@link #CL_DEVICE_MAX_MEM_ALLOC_SIZE DEVICE_MAX_MEM_ALLOC_SIZE} value all devices in context.</li>
-     *         <li>{@link #CL_INVALID_HOST_PTR INVALID_HOST_PTR} if {@code host_ptr} is {@code NULL} and {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} or {@link #CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} are set in flags or if
-     *         {@code host_ptr} is not {@code NULL} but {@link #CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} or {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} are not set in flags.</li>
+     *         <li>{@link #CL_INVALID_VALUE INVALID_VALUE} if values specified in {@code flags} are not valid.</li>
+     *         <li>{@link #CL_INVALID_BUFFER_SIZE INVALID_BUFFER_SIZE} if {@code size} is 0 or if {@code size} is greater than {@link #CL_DEVICE_MAX_MEM_ALLOC_SIZE DEVICE_MAX_MEM_ALLOC_SIZE} for all devices in context.</li>
+     *         <li>{@link #CL_INVALID_HOST_PTR INVALID_HOST_PTR} if {@code host_ptr} is {@code NULL} and {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} or {@link #CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} are set in {@code flags} or if {@code host_ptr} is not
+     *         {@code NULL} but {@link #CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} or {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} are not set in {@code flags}.</li>
      *         <li>{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for buffer object.</li>
      *         <li>{@link #CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link #CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
@@ -1337,6 +1369,15 @@ public class CL10 {
 
     /**
      * Creates a buffer object.
+     * 
+     * <p>If {@code clCreateBuffer} is called with {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} set in its {@code flags} argument, the contents of the memory pointed to by {@code host_ptr}
+     * at the time of the {@code clCreateBuffer} call define the initial contents of the buffer object.</p>
+     * 
+     * <p>If {@code clCreateBuffer} is called with a pointer returned by {@link CL20#clSVMAlloc SVMAlloc} as its {@code host_ptr} argument, and {@code CL_MEM_USE_HOST_PTR} is set in
+     * its {@code flags} argument, {@code clCreateBuffer} will succeed and return a valid non-zero buffer object as long as the {@code size} argument is no
+     * larger than the size argument passed in the original {@code clSVMAlloc} call. The new buffer object returned has the shared memory as the underlying
+     * storage. Locations in the buffers underlying shared memory can be operated on using atomic operations to the devices level of support as defined in the
+     * memory model.</p>
      *
      * @param context     a valid OpenCL context used to create the buffer object
      * @param flags       a bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer object and
@@ -1350,11 +1391,10 @@ public class CL10 {
      *         
      *         <ul>
      *         <li>{@link #CL_INVALID_CONTEXT INVALID_CONTEXT} if {@code context} is not a valid context.</li>
-     *         <li>{@link #CL_INVALID_VALUE INVALID_VALUE} if values specified in flags are not valid.</li>
-     *         <li>{@link #CL_INVALID_BUFFER_SIZE INVALID_BUFFER_SIZE} if size is 0. Implementations may return {@link #CL_INVALID_BUFFER_SIZE INVALID_BUFFER_SIZE} if size is greater than
-     *         {@link #CL_DEVICE_MAX_MEM_ALLOC_SIZE DEVICE_MAX_MEM_ALLOC_SIZE} value all devices in context.</li>
-     *         <li>{@link #CL_INVALID_HOST_PTR INVALID_HOST_PTR} if {@code host_ptr} is {@code NULL} and {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} or {@link #CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} are set in flags or if
-     *         {@code host_ptr} is not {@code NULL} but {@link #CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} or {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} are not set in flags.</li>
+     *         <li>{@link #CL_INVALID_VALUE INVALID_VALUE} if values specified in {@code flags} are not valid.</li>
+     *         <li>{@link #CL_INVALID_BUFFER_SIZE INVALID_BUFFER_SIZE} if {@code size} is 0 or if {@code size} is greater than {@link #CL_DEVICE_MAX_MEM_ALLOC_SIZE DEVICE_MAX_MEM_ALLOC_SIZE} for all devices in context.</li>
+     *         <li>{@link #CL_INVALID_HOST_PTR INVALID_HOST_PTR} if {@code host_ptr} is {@code NULL} and {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} or {@link #CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} are set in {@code flags} or if {@code host_ptr} is not
+     *         {@code NULL} but {@link #CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} or {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} are not set in {@code flags}.</li>
      *         <li>{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for buffer object.</li>
      *         <li>{@link #CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link #CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
@@ -1372,6 +1412,15 @@ public class CL10 {
 
     /**
      * Creates a buffer object.
+     * 
+     * <p>If {@code clCreateBuffer} is called with {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} set in its {@code flags} argument, the contents of the memory pointed to by {@code host_ptr}
+     * at the time of the {@code clCreateBuffer} call define the initial contents of the buffer object.</p>
+     * 
+     * <p>If {@code clCreateBuffer} is called with a pointer returned by {@link CL20#clSVMAlloc SVMAlloc} as its {@code host_ptr} argument, and {@code CL_MEM_USE_HOST_PTR} is set in
+     * its {@code flags} argument, {@code clCreateBuffer} will succeed and return a valid non-zero buffer object as long as the {@code size} argument is no
+     * larger than the size argument passed in the original {@code clSVMAlloc} call. The new buffer object returned has the shared memory as the underlying
+     * storage. Locations in the buffers underlying shared memory can be operated on using atomic operations to the devices level of support as defined in the
+     * memory model.</p>
      *
      * @param context     a valid OpenCL context used to create the buffer object
      * @param flags       a bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer object and
@@ -1385,11 +1434,10 @@ public class CL10 {
      *         
      *         <ul>
      *         <li>{@link #CL_INVALID_CONTEXT INVALID_CONTEXT} if {@code context} is not a valid context.</li>
-     *         <li>{@link #CL_INVALID_VALUE INVALID_VALUE} if values specified in flags are not valid.</li>
-     *         <li>{@link #CL_INVALID_BUFFER_SIZE INVALID_BUFFER_SIZE} if size is 0. Implementations may return {@link #CL_INVALID_BUFFER_SIZE INVALID_BUFFER_SIZE} if size is greater than
-     *         {@link #CL_DEVICE_MAX_MEM_ALLOC_SIZE DEVICE_MAX_MEM_ALLOC_SIZE} value all devices in context.</li>
-     *         <li>{@link #CL_INVALID_HOST_PTR INVALID_HOST_PTR} if {@code host_ptr} is {@code NULL} and {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} or {@link #CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} are set in flags or if
-     *         {@code host_ptr} is not {@code NULL} but {@link #CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} or {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} are not set in flags.</li>
+     *         <li>{@link #CL_INVALID_VALUE INVALID_VALUE} if values specified in {@code flags} are not valid.</li>
+     *         <li>{@link #CL_INVALID_BUFFER_SIZE INVALID_BUFFER_SIZE} if {@code size} is 0 or if {@code size} is greater than {@link #CL_DEVICE_MAX_MEM_ALLOC_SIZE DEVICE_MAX_MEM_ALLOC_SIZE} for all devices in context.</li>
+     *         <li>{@link #CL_INVALID_HOST_PTR INVALID_HOST_PTR} if {@code host_ptr} is {@code NULL} and {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} or {@link #CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} are set in {@code flags} or if {@code host_ptr} is not
+     *         {@code NULL} but {@link #CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} or {@link #CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} are not set in {@code flags}.</li>
      *         <li>{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for buffer object.</li>
      *         <li>{@link #CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link #CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>

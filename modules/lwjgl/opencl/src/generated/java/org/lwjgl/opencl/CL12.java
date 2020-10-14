@@ -443,12 +443,12 @@ public class CL12 extends CL11 {
      *                     
      *                     <table class=striped>
      *                     <tr><th>ImageType</th><th>Size of buffer that {@code host_ptr} points to</th></tr>
-     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE1D MEM_OBJECT_IMAGE1D}</td><td>&#x2265; {@code image_row_pitch}</td></tr>
-     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE1D_BUFFER MEM_OBJECT_IMAGE1D_BUFFER}</td><td>&#x2265; {@code image_row_pitch}</td></tr>
-     *                     <tr><td>{@link CL10#CL_MEM_OBJECT_IMAGE2D MEM_OBJECT_IMAGE2D}</td><td>&#x2265; {@code image_row_pitch * image_height}</td></tr>
-     *                     <tr><td>{@link CL10#CL_MEM_OBJECT_IMAGE3D MEM_OBJECT_IMAGE3D}</td><td>&#x2265; {@code image_slice_pitch * image_depth}</td></tr>
-     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE1D_ARRAY MEM_OBJECT_IMAGE1D_ARRAY}</td><td>&#x2265; {@code image_slice_pitch * image_array_size}</td></tr>
-     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE2D_ARRAY MEM_OBJECT_IMAGE2D_ARRAY}</td><td>&#x2265; {@code image_slice_pitch * image_array_size}</td></tr>
+     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE1D MEM_OBJECT_IMAGE1D}</td><td>&ge; {@code image_row_pitch}</td></tr>
+     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE1D_BUFFER MEM_OBJECT_IMAGE1D_BUFFER}</td><td>&ge; {@code image_row_pitch}</td></tr>
+     *                     <tr><td>{@link CL10#CL_MEM_OBJECT_IMAGE2D MEM_OBJECT_IMAGE2D}</td><td>&ge; {@code image_row_pitch * image_height}</td></tr>
+     *                     <tr><td>{@link CL10#CL_MEM_OBJECT_IMAGE3D MEM_OBJECT_IMAGE3D}</td><td>&ge; {@code image_slice_pitch * image_depth}</td></tr>
+     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE1D_ARRAY MEM_OBJECT_IMAGE1D_ARRAY}</td><td>&ge; {@code image_slice_pitch * image_array_size}</td></tr>
+     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE2D_ARRAY MEM_OBJECT_IMAGE2D_ARRAY}</td><td>&ge; {@code image_slice_pitch * image_array_size}</td></tr>
      *                     </table>
      * @param errcode_ret  will return an appropriate error code. If {@code errcode_ret} is {@code NULL}, no error code is returned.
      *
@@ -466,14 +466,19 @@ public class CL12 extends CL11 {
      *         <li>{@link CL10#CL_INVALID_IMAGE_SIZE INVALID_IMAGE_SIZE} if image dimensions specified in {@code image_desc} exceed the maximum image dimensions for all devices in context.</li>
      *         <li>{@link CL10#CL_INVALID_HOST_PTR INVALID_HOST_PTR} if {@code host_ptr} is {@code NULL} and {@link CL10#CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} or {@link CL10#CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} are set in flags or if {@code host_ptr} is not
      *         {@code NULL} but {@link CL10#CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} or {@link CL10#CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} are not set in flags.</li>
-     *         <li>{@link CL10#CL_INVALID_VALUE INVALID_VALUE} if an image buffer is being created and the buffer object was created with {@link CL10#CL_MEM_WRITE_ONLY MEM_WRITE_ONLY} and flags specifies
-     *         {@link CL10#CL_MEM_READ_WRITE MEM_READ_WRITE} or {@link CL10#CL_MEM_READ_ONLY MEM_READ_ONLY}, or if the buffer object was created with {@link CL10#CL_MEM_READ_ONLY MEM_READ_ONLY} and flags specifies {@link CL10#CL_MEM_READ_WRITE MEM_READ_WRITE} or
-     *         {@link CL10#CL_MEM_WRITE_ONLY MEM_WRITE_ONLY}, or if flags specifies {@link CL10#CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} or {@link CL10#CL_MEM_ALLOC_HOST_PTR MEM_ALLOC_HOST_PTR} or {@link CL10#CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR}.</li>
-     *         <li>{@link CL10#CL_INVALID_VALUE INVALID_VALUE} if an image buffer is being created or an image is being created from another memory object (image or buffer) and the
-     *         {@code mem_object} object was created with {@link #CL_MEM_HOST_WRITE_ONLY MEM_HOST_WRITE_ONLY} and flags specifies {@link #CL_MEM_HOST_READ_ONLY MEM_HOST_READ_ONLY}, or if {@code mem_object} was created with
-     *         {@link #CL_MEM_HOST_READ_ONLY MEM_HOST_READ_ONLY} and flags specifies {@link #CL_MEM_HOST_WRITE_ONLY MEM_HOST_WRITE_ONLY}, or if {@code mem_object} was created with {@link #CL_MEM_HOST_NO_ACCESS MEM_HOST_NO_ACCESS} and flags specifies
-     *         {@link #CL_MEM_HOST_READ_ONLY MEM_HOST_READ_ONLY} or {@link #CL_MEM_HOST_WRITE_ONLY MEM_HOST_WRITE_ONLY}.</li>
-     *         <li>{@link CL10#CL_IMAGE_FORMAT_NOT_SUPPORTED IMAGE_FORMAT_NOT_SUPPORTED} if the {@code image_format} is not supported.</li>
+     *         <li>{@link CL10#CL_INVALID_VALUE INVALID_VALUE} if an image is being created from another memory object (buffer or image) under one of the following circumstances:
+     *         
+     *         <ol>
+     *         <li>{@code mem_object} was created with {@code CL_MEM_WRITE_ONLY} and {@code flags} specifies {@code CL_MEM_READ_WRITE} or
+     *         {@code CL_MEM_READ_ONLY},</li>
+     *         <li>{@code mem_object} was created with {@code CL_MEM_READ_ONLY} and flags specifies {@code CL_MEM_READ_WRITE} or {@code CL_MEM_WRITE_ONLY},</li>
+     *         <li>{@code flags} specifies {@code CL_MEM_USE_HOST_PTR} or {@code CL_MEM_ALLOC_HOST_PTR} or {@code CL_MEM_COPY_HOST_PTR}.</li>
+     *         </ol></li>
+     *         <li>{@link CL10#CL_INVALID_VALUE INVALID_VALUE} if an image is being created from another memory object (buffer or image) and {@code mem_object} was created with
+     *         {@code CL_MEM_HOST_WRITE_ONLY} and {@code flags} specifies {@code CL_MEM_HOST_READ_ONLY}, or if {@code mem_object} was created with
+     *         {@code CL_MEM_HOST_READ_ONLY} and {@code flags} specifies {@code CL_MEM_HOST_WRITE_ONLY}, or if {@code mem_object} was created with
+     *         {@code CL_MEM_HOST_NO_ACCESS} and {@code flags} specifies {@code CL_MEM_HOST_READ_ONLY} or {@code CL_MEM_HOST_WRITE_ONLY}.</li>
+     *         <li>{@link CL10#CL_IMAGE_FORMAT_NOT_SUPPORTED IMAGE_FORMAT_NOT_SUPPORTED} if there are no devices in context that support {@code image_format}.</li>
      *         <li>{@link CL10#CL_MEM_OBJECT_ALLOCATION_FAILURE MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for image object.</li>
      *         <li>{@link CL10#CL_INVALID_OPERATION INVALID_OPERATION} if there are no devices in context that support images.</li>
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
@@ -522,12 +527,12 @@ public class CL12 extends CL11 {
      *                     
      *                     <table class=striped>
      *                     <tr><th>ImageType</th><th>Size of buffer that {@code host_ptr} points to</th></tr>
-     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE1D MEM_OBJECT_IMAGE1D}</td><td>&#x2265; {@code image_row_pitch}</td></tr>
-     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE1D_BUFFER MEM_OBJECT_IMAGE1D_BUFFER}</td><td>&#x2265; {@code image_row_pitch}</td></tr>
-     *                     <tr><td>{@link CL10#CL_MEM_OBJECT_IMAGE2D MEM_OBJECT_IMAGE2D}</td><td>&#x2265; {@code image_row_pitch * image_height}</td></tr>
-     *                     <tr><td>{@link CL10#CL_MEM_OBJECT_IMAGE3D MEM_OBJECT_IMAGE3D}</td><td>&#x2265; {@code image_slice_pitch * image_depth}</td></tr>
-     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE1D_ARRAY MEM_OBJECT_IMAGE1D_ARRAY}</td><td>&#x2265; {@code image_slice_pitch * image_array_size}</td></tr>
-     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE2D_ARRAY MEM_OBJECT_IMAGE2D_ARRAY}</td><td>&#x2265; {@code image_slice_pitch * image_array_size}</td></tr>
+     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE1D MEM_OBJECT_IMAGE1D}</td><td>&ge; {@code image_row_pitch}</td></tr>
+     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE1D_BUFFER MEM_OBJECT_IMAGE1D_BUFFER}</td><td>&ge; {@code image_row_pitch}</td></tr>
+     *                     <tr><td>{@link CL10#CL_MEM_OBJECT_IMAGE2D MEM_OBJECT_IMAGE2D}</td><td>&ge; {@code image_row_pitch * image_height}</td></tr>
+     *                     <tr><td>{@link CL10#CL_MEM_OBJECT_IMAGE3D MEM_OBJECT_IMAGE3D}</td><td>&ge; {@code image_slice_pitch * image_depth}</td></tr>
+     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE1D_ARRAY MEM_OBJECT_IMAGE1D_ARRAY}</td><td>&ge; {@code image_slice_pitch * image_array_size}</td></tr>
+     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE2D_ARRAY MEM_OBJECT_IMAGE2D_ARRAY}</td><td>&ge; {@code image_slice_pitch * image_array_size}</td></tr>
      *                     </table>
      * @param errcode_ret  will return an appropriate error code. If {@code errcode_ret} is {@code NULL}, no error code is returned.
      *
@@ -545,14 +550,19 @@ public class CL12 extends CL11 {
      *         <li>{@link CL10#CL_INVALID_IMAGE_SIZE INVALID_IMAGE_SIZE} if image dimensions specified in {@code image_desc} exceed the maximum image dimensions for all devices in context.</li>
      *         <li>{@link CL10#CL_INVALID_HOST_PTR INVALID_HOST_PTR} if {@code host_ptr} is {@code NULL} and {@link CL10#CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} or {@link CL10#CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} are set in flags or if {@code host_ptr} is not
      *         {@code NULL} but {@link CL10#CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} or {@link CL10#CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} are not set in flags.</li>
-     *         <li>{@link CL10#CL_INVALID_VALUE INVALID_VALUE} if an image buffer is being created and the buffer object was created with {@link CL10#CL_MEM_WRITE_ONLY MEM_WRITE_ONLY} and flags specifies
-     *         {@link CL10#CL_MEM_READ_WRITE MEM_READ_WRITE} or {@link CL10#CL_MEM_READ_ONLY MEM_READ_ONLY}, or if the buffer object was created with {@link CL10#CL_MEM_READ_ONLY MEM_READ_ONLY} and flags specifies {@link CL10#CL_MEM_READ_WRITE MEM_READ_WRITE} or
-     *         {@link CL10#CL_MEM_WRITE_ONLY MEM_WRITE_ONLY}, or if flags specifies {@link CL10#CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} or {@link CL10#CL_MEM_ALLOC_HOST_PTR MEM_ALLOC_HOST_PTR} or {@link CL10#CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR}.</li>
-     *         <li>{@link CL10#CL_INVALID_VALUE INVALID_VALUE} if an image buffer is being created or an image is being created from another memory object (image or buffer) and the
-     *         {@code mem_object} object was created with {@link #CL_MEM_HOST_WRITE_ONLY MEM_HOST_WRITE_ONLY} and flags specifies {@link #CL_MEM_HOST_READ_ONLY MEM_HOST_READ_ONLY}, or if {@code mem_object} was created with
-     *         {@link #CL_MEM_HOST_READ_ONLY MEM_HOST_READ_ONLY} and flags specifies {@link #CL_MEM_HOST_WRITE_ONLY MEM_HOST_WRITE_ONLY}, or if {@code mem_object} was created with {@link #CL_MEM_HOST_NO_ACCESS MEM_HOST_NO_ACCESS} and flags specifies
-     *         {@link #CL_MEM_HOST_READ_ONLY MEM_HOST_READ_ONLY} or {@link #CL_MEM_HOST_WRITE_ONLY MEM_HOST_WRITE_ONLY}.</li>
-     *         <li>{@link CL10#CL_IMAGE_FORMAT_NOT_SUPPORTED IMAGE_FORMAT_NOT_SUPPORTED} if the {@code image_format} is not supported.</li>
+     *         <li>{@link CL10#CL_INVALID_VALUE INVALID_VALUE} if an image is being created from another memory object (buffer or image) under one of the following circumstances:
+     *         
+     *         <ol>
+     *         <li>{@code mem_object} was created with {@code CL_MEM_WRITE_ONLY} and {@code flags} specifies {@code CL_MEM_READ_WRITE} or
+     *         {@code CL_MEM_READ_ONLY},</li>
+     *         <li>{@code mem_object} was created with {@code CL_MEM_READ_ONLY} and flags specifies {@code CL_MEM_READ_WRITE} or {@code CL_MEM_WRITE_ONLY},</li>
+     *         <li>{@code flags} specifies {@code CL_MEM_USE_HOST_PTR} or {@code CL_MEM_ALLOC_HOST_PTR} or {@code CL_MEM_COPY_HOST_PTR}.</li>
+     *         </ol></li>
+     *         <li>{@link CL10#CL_INVALID_VALUE INVALID_VALUE} if an image is being created from another memory object (buffer or image) and {@code mem_object} was created with
+     *         {@code CL_MEM_HOST_WRITE_ONLY} and {@code flags} specifies {@code CL_MEM_HOST_READ_ONLY}, or if {@code mem_object} was created with
+     *         {@code CL_MEM_HOST_READ_ONLY} and {@code flags} specifies {@code CL_MEM_HOST_WRITE_ONLY}, or if {@code mem_object} was created with
+     *         {@code CL_MEM_HOST_NO_ACCESS} and {@code flags} specifies {@code CL_MEM_HOST_READ_ONLY} or {@code CL_MEM_HOST_WRITE_ONLY}.</li>
+     *         <li>{@link CL10#CL_IMAGE_FORMAT_NOT_SUPPORTED IMAGE_FORMAT_NOT_SUPPORTED} if there are no devices in context that support {@code image_format}.</li>
      *         <li>{@link CL10#CL_MEM_OBJECT_ALLOCATION_FAILURE MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for image object.</li>
      *         <li>{@link CL10#CL_INVALID_OPERATION INVALID_OPERATION} if there are no devices in context that support images.</li>
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
@@ -601,12 +611,12 @@ public class CL12 extends CL11 {
      *                     
      *                     <table class=striped>
      *                     <tr><th>ImageType</th><th>Size of buffer that {@code host_ptr} points to</th></tr>
-     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE1D MEM_OBJECT_IMAGE1D}</td><td>&#x2265; {@code image_row_pitch}</td></tr>
-     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE1D_BUFFER MEM_OBJECT_IMAGE1D_BUFFER}</td><td>&#x2265; {@code image_row_pitch}</td></tr>
-     *                     <tr><td>{@link CL10#CL_MEM_OBJECT_IMAGE2D MEM_OBJECT_IMAGE2D}</td><td>&#x2265; {@code image_row_pitch * image_height}</td></tr>
-     *                     <tr><td>{@link CL10#CL_MEM_OBJECT_IMAGE3D MEM_OBJECT_IMAGE3D}</td><td>&#x2265; {@code image_slice_pitch * image_depth}</td></tr>
-     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE1D_ARRAY MEM_OBJECT_IMAGE1D_ARRAY}</td><td>&#x2265; {@code image_slice_pitch * image_array_size}</td></tr>
-     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE2D_ARRAY MEM_OBJECT_IMAGE2D_ARRAY}</td><td>&#x2265; {@code image_slice_pitch * image_array_size}</td></tr>
+     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE1D MEM_OBJECT_IMAGE1D}</td><td>&ge; {@code image_row_pitch}</td></tr>
+     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE1D_BUFFER MEM_OBJECT_IMAGE1D_BUFFER}</td><td>&ge; {@code image_row_pitch}</td></tr>
+     *                     <tr><td>{@link CL10#CL_MEM_OBJECT_IMAGE2D MEM_OBJECT_IMAGE2D}</td><td>&ge; {@code image_row_pitch * image_height}</td></tr>
+     *                     <tr><td>{@link CL10#CL_MEM_OBJECT_IMAGE3D MEM_OBJECT_IMAGE3D}</td><td>&ge; {@code image_slice_pitch * image_depth}</td></tr>
+     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE1D_ARRAY MEM_OBJECT_IMAGE1D_ARRAY}</td><td>&ge; {@code image_slice_pitch * image_array_size}</td></tr>
+     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE2D_ARRAY MEM_OBJECT_IMAGE2D_ARRAY}</td><td>&ge; {@code image_slice_pitch * image_array_size}</td></tr>
      *                     </table>
      * @param errcode_ret  will return an appropriate error code. If {@code errcode_ret} is {@code NULL}, no error code is returned.
      *
@@ -624,14 +634,19 @@ public class CL12 extends CL11 {
      *         <li>{@link CL10#CL_INVALID_IMAGE_SIZE INVALID_IMAGE_SIZE} if image dimensions specified in {@code image_desc} exceed the maximum image dimensions for all devices in context.</li>
      *         <li>{@link CL10#CL_INVALID_HOST_PTR INVALID_HOST_PTR} if {@code host_ptr} is {@code NULL} and {@link CL10#CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} or {@link CL10#CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} are set in flags or if {@code host_ptr} is not
      *         {@code NULL} but {@link CL10#CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} or {@link CL10#CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} are not set in flags.</li>
-     *         <li>{@link CL10#CL_INVALID_VALUE INVALID_VALUE} if an image buffer is being created and the buffer object was created with {@link CL10#CL_MEM_WRITE_ONLY MEM_WRITE_ONLY} and flags specifies
-     *         {@link CL10#CL_MEM_READ_WRITE MEM_READ_WRITE} or {@link CL10#CL_MEM_READ_ONLY MEM_READ_ONLY}, or if the buffer object was created with {@link CL10#CL_MEM_READ_ONLY MEM_READ_ONLY} and flags specifies {@link CL10#CL_MEM_READ_WRITE MEM_READ_WRITE} or
-     *         {@link CL10#CL_MEM_WRITE_ONLY MEM_WRITE_ONLY}, or if flags specifies {@link CL10#CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} or {@link CL10#CL_MEM_ALLOC_HOST_PTR MEM_ALLOC_HOST_PTR} or {@link CL10#CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR}.</li>
-     *         <li>{@link CL10#CL_INVALID_VALUE INVALID_VALUE} if an image buffer is being created or an image is being created from another memory object (image or buffer) and the
-     *         {@code mem_object} object was created with {@link #CL_MEM_HOST_WRITE_ONLY MEM_HOST_WRITE_ONLY} and flags specifies {@link #CL_MEM_HOST_READ_ONLY MEM_HOST_READ_ONLY}, or if {@code mem_object} was created with
-     *         {@link #CL_MEM_HOST_READ_ONLY MEM_HOST_READ_ONLY} and flags specifies {@link #CL_MEM_HOST_WRITE_ONLY MEM_HOST_WRITE_ONLY}, or if {@code mem_object} was created with {@link #CL_MEM_HOST_NO_ACCESS MEM_HOST_NO_ACCESS} and flags specifies
-     *         {@link #CL_MEM_HOST_READ_ONLY MEM_HOST_READ_ONLY} or {@link #CL_MEM_HOST_WRITE_ONLY MEM_HOST_WRITE_ONLY}.</li>
-     *         <li>{@link CL10#CL_IMAGE_FORMAT_NOT_SUPPORTED IMAGE_FORMAT_NOT_SUPPORTED} if the {@code image_format} is not supported.</li>
+     *         <li>{@link CL10#CL_INVALID_VALUE INVALID_VALUE} if an image is being created from another memory object (buffer or image) under one of the following circumstances:
+     *         
+     *         <ol>
+     *         <li>{@code mem_object} was created with {@code CL_MEM_WRITE_ONLY} and {@code flags} specifies {@code CL_MEM_READ_WRITE} or
+     *         {@code CL_MEM_READ_ONLY},</li>
+     *         <li>{@code mem_object} was created with {@code CL_MEM_READ_ONLY} and flags specifies {@code CL_MEM_READ_WRITE} or {@code CL_MEM_WRITE_ONLY},</li>
+     *         <li>{@code flags} specifies {@code CL_MEM_USE_HOST_PTR} or {@code CL_MEM_ALLOC_HOST_PTR} or {@code CL_MEM_COPY_HOST_PTR}.</li>
+     *         </ol></li>
+     *         <li>{@link CL10#CL_INVALID_VALUE INVALID_VALUE} if an image is being created from another memory object (buffer or image) and {@code mem_object} was created with
+     *         {@code CL_MEM_HOST_WRITE_ONLY} and {@code flags} specifies {@code CL_MEM_HOST_READ_ONLY}, or if {@code mem_object} was created with
+     *         {@code CL_MEM_HOST_READ_ONLY} and {@code flags} specifies {@code CL_MEM_HOST_WRITE_ONLY}, or if {@code mem_object} was created with
+     *         {@code CL_MEM_HOST_NO_ACCESS} and {@code flags} specifies {@code CL_MEM_HOST_READ_ONLY} or {@code CL_MEM_HOST_WRITE_ONLY}.</li>
+     *         <li>{@link CL10#CL_IMAGE_FORMAT_NOT_SUPPORTED IMAGE_FORMAT_NOT_SUPPORTED} if there are no devices in context that support {@code image_format}.</li>
      *         <li>{@link CL10#CL_MEM_OBJECT_ALLOCATION_FAILURE MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for image object.</li>
      *         <li>{@link CL10#CL_INVALID_OPERATION INVALID_OPERATION} if there are no devices in context that support images.</li>
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
@@ -680,12 +695,12 @@ public class CL12 extends CL11 {
      *                     
      *                     <table class=striped>
      *                     <tr><th>ImageType</th><th>Size of buffer that {@code host_ptr} points to</th></tr>
-     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE1D MEM_OBJECT_IMAGE1D}</td><td>&#x2265; {@code image_row_pitch}</td></tr>
-     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE1D_BUFFER MEM_OBJECT_IMAGE1D_BUFFER}</td><td>&#x2265; {@code image_row_pitch}</td></tr>
-     *                     <tr><td>{@link CL10#CL_MEM_OBJECT_IMAGE2D MEM_OBJECT_IMAGE2D}</td><td>&#x2265; {@code image_row_pitch * image_height}</td></tr>
-     *                     <tr><td>{@link CL10#CL_MEM_OBJECT_IMAGE3D MEM_OBJECT_IMAGE3D}</td><td>&#x2265; {@code image_slice_pitch * image_depth}</td></tr>
-     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE1D_ARRAY MEM_OBJECT_IMAGE1D_ARRAY}</td><td>&#x2265; {@code image_slice_pitch * image_array_size}</td></tr>
-     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE2D_ARRAY MEM_OBJECT_IMAGE2D_ARRAY}</td><td>&#x2265; {@code image_slice_pitch * image_array_size}</td></tr>
+     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE1D MEM_OBJECT_IMAGE1D}</td><td>&ge; {@code image_row_pitch}</td></tr>
+     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE1D_BUFFER MEM_OBJECT_IMAGE1D_BUFFER}</td><td>&ge; {@code image_row_pitch}</td></tr>
+     *                     <tr><td>{@link CL10#CL_MEM_OBJECT_IMAGE2D MEM_OBJECT_IMAGE2D}</td><td>&ge; {@code image_row_pitch * image_height}</td></tr>
+     *                     <tr><td>{@link CL10#CL_MEM_OBJECT_IMAGE3D MEM_OBJECT_IMAGE3D}</td><td>&ge; {@code image_slice_pitch * image_depth}</td></tr>
+     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE1D_ARRAY MEM_OBJECT_IMAGE1D_ARRAY}</td><td>&ge; {@code image_slice_pitch * image_array_size}</td></tr>
+     *                     <tr><td>{@link #CL_MEM_OBJECT_IMAGE2D_ARRAY MEM_OBJECT_IMAGE2D_ARRAY}</td><td>&ge; {@code image_slice_pitch * image_array_size}</td></tr>
      *                     </table>
      * @param errcode_ret  will return an appropriate error code. If {@code errcode_ret} is {@code NULL}, no error code is returned.
      *
@@ -703,14 +718,19 @@ public class CL12 extends CL11 {
      *         <li>{@link CL10#CL_INVALID_IMAGE_SIZE INVALID_IMAGE_SIZE} if image dimensions specified in {@code image_desc} exceed the maximum image dimensions for all devices in context.</li>
      *         <li>{@link CL10#CL_INVALID_HOST_PTR INVALID_HOST_PTR} if {@code host_ptr} is {@code NULL} and {@link CL10#CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} or {@link CL10#CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} are set in flags or if {@code host_ptr} is not
      *         {@code NULL} but {@link CL10#CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR} or {@link CL10#CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} are not set in flags.</li>
-     *         <li>{@link CL10#CL_INVALID_VALUE INVALID_VALUE} if an image buffer is being created and the buffer object was created with {@link CL10#CL_MEM_WRITE_ONLY MEM_WRITE_ONLY} and flags specifies
-     *         {@link CL10#CL_MEM_READ_WRITE MEM_READ_WRITE} or {@link CL10#CL_MEM_READ_ONLY MEM_READ_ONLY}, or if the buffer object was created with {@link CL10#CL_MEM_READ_ONLY MEM_READ_ONLY} and flags specifies {@link CL10#CL_MEM_READ_WRITE MEM_READ_WRITE} or
-     *         {@link CL10#CL_MEM_WRITE_ONLY MEM_WRITE_ONLY}, or if flags specifies {@link CL10#CL_MEM_USE_HOST_PTR MEM_USE_HOST_PTR} or {@link CL10#CL_MEM_ALLOC_HOST_PTR MEM_ALLOC_HOST_PTR} or {@link CL10#CL_MEM_COPY_HOST_PTR MEM_COPY_HOST_PTR}.</li>
-     *         <li>{@link CL10#CL_INVALID_VALUE INVALID_VALUE} if an image buffer is being created or an image is being created from another memory object (image or buffer) and the
-     *         {@code mem_object} object was created with {@link #CL_MEM_HOST_WRITE_ONLY MEM_HOST_WRITE_ONLY} and flags specifies {@link #CL_MEM_HOST_READ_ONLY MEM_HOST_READ_ONLY}, or if {@code mem_object} was created with
-     *         {@link #CL_MEM_HOST_READ_ONLY MEM_HOST_READ_ONLY} and flags specifies {@link #CL_MEM_HOST_WRITE_ONLY MEM_HOST_WRITE_ONLY}, or if {@code mem_object} was created with {@link #CL_MEM_HOST_NO_ACCESS MEM_HOST_NO_ACCESS} and flags specifies
-     *         {@link #CL_MEM_HOST_READ_ONLY MEM_HOST_READ_ONLY} or {@link #CL_MEM_HOST_WRITE_ONLY MEM_HOST_WRITE_ONLY}.</li>
-     *         <li>{@link CL10#CL_IMAGE_FORMAT_NOT_SUPPORTED IMAGE_FORMAT_NOT_SUPPORTED} if the {@code image_format} is not supported.</li>
+     *         <li>{@link CL10#CL_INVALID_VALUE INVALID_VALUE} if an image is being created from another memory object (buffer or image) under one of the following circumstances:
+     *         
+     *         <ol>
+     *         <li>{@code mem_object} was created with {@code CL_MEM_WRITE_ONLY} and {@code flags} specifies {@code CL_MEM_READ_WRITE} or
+     *         {@code CL_MEM_READ_ONLY},</li>
+     *         <li>{@code mem_object} was created with {@code CL_MEM_READ_ONLY} and flags specifies {@code CL_MEM_READ_WRITE} or {@code CL_MEM_WRITE_ONLY},</li>
+     *         <li>{@code flags} specifies {@code CL_MEM_USE_HOST_PTR} or {@code CL_MEM_ALLOC_HOST_PTR} or {@code CL_MEM_COPY_HOST_PTR}.</li>
+     *         </ol></li>
+     *         <li>{@link CL10#CL_INVALID_VALUE INVALID_VALUE} if an image is being created from another memory object (buffer or image) and {@code mem_object} was created with
+     *         {@code CL_MEM_HOST_WRITE_ONLY} and {@code flags} specifies {@code CL_MEM_HOST_READ_ONLY}, or if {@code mem_object} was created with
+     *         {@code CL_MEM_HOST_READ_ONLY} and {@code flags} specifies {@code CL_MEM_HOST_WRITE_ONLY}, or if {@code mem_object} was created with
+     *         {@code CL_MEM_HOST_NO_ACCESS} and {@code flags} specifies {@code CL_MEM_HOST_READ_ONLY} or {@code CL_MEM_HOST_WRITE_ONLY}.</li>
+     *         <li>{@link CL10#CL_IMAGE_FORMAT_NOT_SUPPORTED IMAGE_FORMAT_NOT_SUPPORTED} if there are no devices in context that support {@code image_format}.</li>
      *         <li>{@link CL10#CL_MEM_OBJECT_ALLOCATION_FAILURE MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for image object.</li>
      *         <li>{@link CL10#CL_INVALID_OPERATION INVALID_OPERATION} if there are no devices in context that support images.</li>
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>

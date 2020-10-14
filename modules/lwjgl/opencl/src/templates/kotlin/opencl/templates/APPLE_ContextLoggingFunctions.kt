@@ -34,7 +34,7 @@ val APPLE_ContextLoggingFunctions = "APPLEContextLoggingFunctions".nativeClassCL
         "clLogMessagesToStderrAPPLE".."CL.getICD().clLogMessagesToStderrAPPLE"
     ).noPrefix()
 
-    private..macro(expression = "")..void("LogMessagesToSystemLogAPPLE", "")
-    private..macro(expression = "")..void("LogMessagesToStdoutAPPLE", "")
-    private..macro(expression = "")..void("LogMessagesToStderrAPPLE", "")
+    private..void("LogMessagesToSystemLogAPPLE", "", void())
+    private..void("LogMessagesToStdoutAPPLE", "", void())
+    private..void("LogMessagesToStderrAPPLE", "", void())
 }
