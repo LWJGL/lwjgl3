@@ -146,8 +146,8 @@ val btDynamicsWorld = "BTDynamicsWorld".nativeClass(Module.BULLET, prefixMethod 
         "",
 
         opaque_p("obj", ""),
-        opaque_p("cb", ""),
-        opaque_p("worldUserInfo", ""),
+        btInternalTickCallback("cb", ""),
+        nullable..opaque_p("worldUserInfo", ""),
         bool("isPreTick", "")
     )
 

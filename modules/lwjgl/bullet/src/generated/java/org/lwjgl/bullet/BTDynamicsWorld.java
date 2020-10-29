@@ -240,14 +240,16 @@ public class BTDynamicsWorld {
 
     // --- [ btDynamicsWorld_setInternalTickCallback ] ---
 
-    public static void btDynamicsWorld_setInternalTickCallback(@NativeType("void *") long obj, @NativeType("void *") long cb, @NativeType("void *") long worldUserInfo, @NativeType("bool") boolean isPreTick) {
+    public static void nbtDynamicsWorld_setInternalTickCallback(long obj, long cb, long worldUserInfo, boolean isPreTick) {
         long __functionAddress = Functions.DynamicsWorld_setInternalTickCallback;
         if (CHECKS) {
             check(obj);
-            check(cb);
-            check(worldUserInfo);
         }
         invokePPPV(obj, cb, worldUserInfo, isPreTick, __functionAddress);
+    }
+
+    public static void btDynamicsWorld_setInternalTickCallback(@NativeType("void *") long obj, @NativeType("btInternalTickCallback") BTInternalTickCallbackI cb, @NativeType("void *") long worldUserInfo, @NativeType("bool") boolean isPreTick) {
+        nbtDynamicsWorld_setInternalTickCallback(obj, cb.address(), worldUserInfo, isPreTick);
     }
 
     // --- [ btDynamicsWorld_setWorldUserInfo ] ---

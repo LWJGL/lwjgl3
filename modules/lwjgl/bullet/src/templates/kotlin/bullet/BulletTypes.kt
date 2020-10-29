@@ -36,6 +36,18 @@ val btTransform = struct(Module.BULLET, "BTTransform", nativeName = "btTransform
     btVector3("m_origin", "")
 }
 
+val btInternalTickCallback = Module.BULLET.callback {
+    void(
+        "BTInternalTickCallback",
+        "",
+
+        opaque_p("world", ""),
+        btScalar("timeStep", ""),
+
+        nativeType = "btInternalTickCallback"
+    )
+}
+
 val p_btCollisionWorld_ConvexResultCallback_addSingleResult = Module.BULLET.callback {
     btScalar(
         "BTCollisionWorldConvexResultCallbackAddSingleResult",

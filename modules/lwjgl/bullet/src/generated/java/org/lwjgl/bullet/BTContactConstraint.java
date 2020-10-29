@@ -7,7 +7,6 @@ package org.lwjgl.bullet;
 
 import org.lwjgl.system.*;
 
-
 public final class BTContactConstraint {
 
     private BTContactConstraint() {
