@@ -127,13 +127,19 @@ val GLBinding = Generator.register(object : APIBinding(
     private val EXTENSION_NAME = "[A-Za-z0-9_]+".toRegex()
 
     private fun getFunctionDependencyExpression(func: Func) = func.get<DependsOn>()
-            .reference
-            .let { expression ->
-                if (EXTENSION_NAME.matches(expression))
-                    "ext.contains(\"$expression\")"
-                else
-                    expression
+        .reference
+        .let { expression ->
+            if (EXTENSION_NAME.matches(expression))
+                "ext.contains(\"$expression\")"
+            else
+                expression
+        }.let {
+            if (func has DeprecatedGL) {
+                "fc || ${if (it.contains(' ')) "($it)" else it}"
+            } else {
+                it
             }
+        }
 
     private fun PrintWriter.printCheckFunctions(
         nativeClass: NativeClass,
@@ -145,7 +151,7 @@ val GLBinding = Generator.register(object : APIBinding(
             val index = functionOrdinals[func.name]
             if (func.has<DependsOn>()) {
                 "flag${dependencies[getFunctionDependencyExpression(func)]} + $index"
-            } else{
+            } else {
                 index.toString()
             }
         }, filter)
@@ -193,9 +199,9 @@ val GLBinding = Generator.register(object : APIBinding(
             print(") && ")
         }
         printCheckFunctions(nativeClass, dependencies, if (hasDeprecated)
-            { it-> (!it.has(DeprecatedGL) || it.has<DependsOn>()) && !it.has(IgnoreMissing) }
+            { it -> (!it.has(DeprecatedGL) || it.has<DependsOn>()) && !it.has(IgnoreMissing) }
         else
-            { it-> !it.has(IgnoreMissing) })
+            { it -> !it.has(IgnoreMissing) })
         println(") || reportMissing(\"GL\", \"$capName\");")
         println("$t}")
     }
