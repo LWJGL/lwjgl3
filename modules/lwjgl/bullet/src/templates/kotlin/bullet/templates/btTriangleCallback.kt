@@ -12,7 +12,7 @@ val btTriangleCallback = "BTTriangleCallback".nativeClass(Module.BULLET, prefixM
         "TriangleCallbackWrapper_new",
         "",
 
-        opaque_p("processTriangleCallback", "")
+        p_btTriangleCallback_processTriangle("processTriangleCallback", "")
     )
 
     void(
@@ -26,7 +26,7 @@ val btTriangleCallback = "BTTriangleCallback".nativeClass(Module.BULLET, prefixM
         "InternalTriangleIndexCallbackWrapper_new",
         "",
 
-        opaque_p("internalProcessTriangleIndexCallback", "")
+        p_btInternalTriangleIndexCallback_internalProcessTriangleIndex("internalProcessTriangleIndexCallback", "")
     )
 
     void(

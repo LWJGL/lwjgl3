@@ -141,7 +141,7 @@ val btOverlappingPairCache = "BTOverlappingPairCache".nativeClass(Module.BULLET,
         "OverlapFilterCallbackWrapper_new",
         "",
 
-        opaque_p("needBroadphaseCollision", "")
+        p_btOverlapFilterCallback_needBroadphaseCollision("needBroadphaseCollision", "")
     )
 
     opaque_p(

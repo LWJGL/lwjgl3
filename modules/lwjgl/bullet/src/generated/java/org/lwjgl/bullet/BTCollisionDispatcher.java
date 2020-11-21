@@ -5,6 +5,8 @@
  */
 package org.lwjgl.bullet;
 
+import javax.annotation.*;
+
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -83,13 +85,18 @@ public class BTCollisionDispatcher {
 
     // --- [ btCollisionDispatcher_getNearCallback ] ---
 
-    @NativeType("void *")
-    public static long btCollisionDispatcher_getNearCallback(@NativeType("void *") long obj) {
+    public static long nbtCollisionDispatcher_getNearCallback(long obj) {
         long __functionAddress = Functions.CollisionDispatcher_getNearCallback;
         if (CHECKS) {
             check(obj);
         }
         return invokePP(obj, __functionAddress);
+    }
+
+    @Nullable
+    @NativeType("btNearCallback")
+    public static BTNearCallback btCollisionDispatcher_getNearCallback(@NativeType("void *") long obj) {
+        return BTNearCallback.createSafe(nbtCollisionDispatcher_getNearCallback(obj));
     }
 
     // --- [ btCollisionDispatcher_registerCollisionCreateFunc ] ---
@@ -137,13 +144,16 @@ public class BTCollisionDispatcher {
 
     // --- [ btCollisionDispatcher_setNearCallback ] ---
 
-    public static void btCollisionDispatcher_setNearCallback(@NativeType("void *") long obj, @NativeType("void *") long nearCallback) {
+    public static void nbtCollisionDispatcher_setNearCallback(long obj, long nearCallback) {
         long __functionAddress = Functions.CollisionDispatcher_setNearCallback;
         if (CHECKS) {
             check(obj);
-            check(nearCallback);
         }
         invokePPV(obj, nearCallback, __functionAddress);
+    }
+
+    public static void btCollisionDispatcher_setNearCallback(@NativeType("void *") long obj, @NativeType("btNearCallback") BTNearCallbackI nearCallback) {
+        nbtCollisionDispatcher_setNearCallback(obj, nearCallback.address());
     }
 
 }

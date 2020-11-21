@@ -12,8 +12,8 @@ val btMotionState = "BTMotionState".nativeClass(Module.BULLET, prefixMethod = "b
         "MotionStateWrapper_new",
         "",
 
-        opaque_p("getWorldTransformCallback", ""),
-        opaque_p("setWorldTransformCallback", "")
+        p_btMotionState_getWorldTransform("getWorldTransformCallback", ""),
+        p_btMotionState_setWorldTransform("setWorldTransformCallback", "")
     )
 
     void(

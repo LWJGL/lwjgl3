@@ -474,7 +474,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
         opaque_p("obj", "")
     )
 
-    opaque_p(
+    ContactAddedCallback(
         "getGContactAddedCallback",
         "",
 
@@ -485,7 +485,7 @@ val btManifoldPoint = "BTManifoldPoint".nativeClass(Module.BULLET, prefixMethod 
         "setGContactAddedCallback",
         "",
 
-        opaque_p("value", "")
+        ContactAddedCallback("value", "")
     )
 
 }

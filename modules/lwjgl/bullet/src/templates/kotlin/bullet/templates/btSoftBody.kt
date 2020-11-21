@@ -155,8 +155,8 @@ val btSoftBody = "BTSoftBody".nativeClass(Module.BULLET, prefixMethod = "bt", bi
         "SoftBody_AJoint_IControlWrapper_new",
         "",
 
-        opaque_p("PrepareCallback", ""),
-        opaque_p("SpeedCallback", "")
+        p_btSoftBody_AJoint_IControl_Prepare("PrepareCallback", ""),
+        p_btSoftBody_AJoint_IControl_Speed("SpeedCallback", "")
     )
 
     opaque_p(
@@ -1491,7 +1491,7 @@ val btSoftBody = "BTSoftBody".nativeClass(Module.BULLET, prefixMethod = "bt", bi
         "SoftBody_ImplicitFnWrapper_new",
         "",
 
-        opaque_p("EvalCallback", "")
+        p_btSoftBody_ImplicitFn_Eval("EvalCallback", "")
     )
 
     btScalar(

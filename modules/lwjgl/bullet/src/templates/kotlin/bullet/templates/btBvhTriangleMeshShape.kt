@@ -70,7 +70,7 @@ val btBvhTriangleMeshShape = "BTBvhTriangleMeshShape".nativeClass(Module.BULLET,
         "",
 
         opaque_p("obj", ""),
-        opaque_p("callback", ""),
+        "btTriangleCallback".opaque.p("callback", ""),
         btVector3.const.p("boxSource", ""),
         btVector3.const.p("boxTarget", ""),
         btVector3.const.p("boxMin", ""),
@@ -82,7 +82,7 @@ val btBvhTriangleMeshShape = "BTBvhTriangleMeshShape".nativeClass(Module.BULLET,
         "",
 
         opaque_p("obj", ""),
-        opaque_p("callback", ""),
+        "btTriangleCallback".opaque.p("callback", ""),
         btVector3.const.p("raySource", ""),
         btVector3.const.p("rayTarget", "")
     )

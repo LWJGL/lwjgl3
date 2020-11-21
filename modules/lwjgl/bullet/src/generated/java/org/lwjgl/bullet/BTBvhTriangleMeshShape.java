@@ -137,7 +137,7 @@ public class BTBvhTriangleMeshShape {
         invokePPPPPPV(obj, callback, boxSource, boxTarget, boxMin, boxMax, __functionAddress);
     }
 
-    public static void btBvhTriangleMeshShape_performConvexcast(@NativeType("void *") long obj, @NativeType("void *") long callback, @NativeType("btVector3 const *") BTVector3 boxSource, @NativeType("btVector3 const *") BTVector3 boxTarget, @NativeType("btVector3 const *") BTVector3 boxMin, @NativeType("btVector3 const *") BTVector3 boxMax) {
+    public static void btBvhTriangleMeshShape_performConvexcast(@NativeType("void *") long obj, @NativeType("btTriangleCallback *") long callback, @NativeType("btVector3 const *") BTVector3 boxSource, @NativeType("btVector3 const *") BTVector3 boxTarget, @NativeType("btVector3 const *") BTVector3 boxMin, @NativeType("btVector3 const *") BTVector3 boxMax) {
         nbtBvhTriangleMeshShape_performConvexcast(obj, callback, boxSource.address(), boxTarget.address(), boxMin.address(), boxMax.address());
     }
 
@@ -152,7 +152,7 @@ public class BTBvhTriangleMeshShape {
         invokePPPPV(obj, callback, raySource, rayTarget, __functionAddress);
     }
 
-    public static void btBvhTriangleMeshShape_performRaycast(@NativeType("void *") long obj, @NativeType("void *") long callback, @NativeType("btVector3 const *") BTVector3 raySource, @NativeType("btVector3 const *") BTVector3 rayTarget) {
+    public static void btBvhTriangleMeshShape_performRaycast(@NativeType("void *") long obj, @NativeType("btTriangleCallback *") long callback, @NativeType("btVector3 const *") BTVector3 raySource, @NativeType("btVector3 const *") BTVector3 rayTarget) {
         nbtBvhTriangleMeshShape_performRaycast(obj, callback, raySource.address(), rayTarget.address());
     }
 

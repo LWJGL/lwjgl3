@@ -220,14 +220,14 @@ val btPersistentManifold = "BTPersistentManifold".nativeClass(Module.BULLET, pre
         opaque_p("obj", "")
     )
 
-    opaque_p(
+    ContactDestroyedCallback(
         "getGContactDestroyedCallback",
         "",
 
         void()
     )
 
-    opaque_p(
+    ContactProcessedCallback(
         "getGContactProcessedCallback",
         "",
 
@@ -238,14 +238,14 @@ val btPersistentManifold = "BTPersistentManifold".nativeClass(Module.BULLET, pre
         "setGContactDestroyedCallback",
         "",
 
-        opaque_p("callback", "")
+        ContactDestroyedCallback("callback", "")
     )
 
     void(
         "setGContactProcessedCallback",
         "",
 
-        opaque_p("callback", "")
+        ContactProcessedCallback("callback", "")
     )
 
 }

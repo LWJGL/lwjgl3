@@ -55,13 +55,14 @@ public class BTBroadphaseInterface {
 
     // --- [ btBroadphaseAabbCallbackWrapper_new ] ---
 
-    @NativeType("void *")
-    public static long btBroadphaseAabbCallbackWrapper_new(@NativeType("void *") long processCallback) {
+    public static long nbtBroadphaseAabbCallbackWrapper_new(long processCallback) {
         long __functionAddress = Functions.BroadphaseAabbCallbackWrapper_new;
-        if (CHECKS) {
-            check(processCallback);
-        }
         return invokePP(processCallback, __functionAddress);
+    }
+
+    @NativeType("void *")
+    public static long btBroadphaseAabbCallbackWrapper_new(@NativeType("p_btBroadphaseAabbCallback_process") BTBroadphaseAabbCallbackProcessI processCallback) {
+        return nbtBroadphaseAabbCallbackWrapper_new(processCallback.address());
     }
 
     // --- [ btBroadphaseAabbCallback_process ] ---
@@ -88,13 +89,14 @@ public class BTBroadphaseInterface {
 
     // --- [ btBroadphaseRayCallbackWrapper_new ] ---
 
-    @NativeType("void *")
-    public static long btBroadphaseRayCallbackWrapper_new(@NativeType("void *") long processCallback) {
+    public static long nbtBroadphaseRayCallbackWrapper_new(long processCallback) {
         long __functionAddress = Functions.BroadphaseRayCallbackWrapper_new;
-        if (CHECKS) {
-            check(processCallback);
-        }
         return invokePP(processCallback, __functionAddress);
+    }
+
+    @NativeType("void *")
+    public static long btBroadphaseRayCallbackWrapper_new(@NativeType("p_btBroadphaseAabbCallback_process") BTBroadphaseAabbCallbackProcessI processCallback) {
+        return nbtBroadphaseRayCallbackWrapper_new(processCallback.address());
     }
 
     // --- [ btBroadphaseRayCallback_getLambda_max ] ---

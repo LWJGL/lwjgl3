@@ -5,6 +5,8 @@
  */
 package org.lwjgl.bullet;
 
+import javax.annotation.*;
+
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -347,38 +349,50 @@ public class BTPersistentManifold {
 
     // --- [ getGContactDestroyedCallback ] ---
 
-    @NativeType("void *")
-    public static long getGContactDestroyedCallback() {
+    public static long ngetGContactDestroyedCallback() {
         long __functionAddress = Functions.getGContactDestroyedCallback;
         return invokeP(__functionAddress);
     }
 
+    @Nullable
+    @NativeType("ContactDestroyedCallback")
+    public static BTContactDestroyedCallback getGContactDestroyedCallback() {
+        return BTContactDestroyedCallback.createSafe(ngetGContactDestroyedCallback());
+    }
+
     // --- [ getGContactProcessedCallback ] ---
 
-    @NativeType("void *")
-    public static long getGContactProcessedCallback() {
+    public static long ngetGContactProcessedCallback() {
         long __functionAddress = Functions.getGContactProcessedCallback;
         return invokeP(__functionAddress);
     }
 
+    @Nullable
+    @NativeType("ContactProcessedCallback")
+    public static BTContactProcessedCallback getGContactProcessedCallback() {
+        return BTContactProcessedCallback.createSafe(ngetGContactProcessedCallback());
+    }
+
     // --- [ setGContactDestroyedCallback ] ---
 
-    public static void setGContactDestroyedCallback(@NativeType("void *") long callback) {
+    public static void nsetGContactDestroyedCallback(long callback) {
         long __functionAddress = Functions.setGContactDestroyedCallback;
-        if (CHECKS) {
-            check(callback);
-        }
         invokePV(callback, __functionAddress);
+    }
+
+    public static void setGContactDestroyedCallback(@NativeType("ContactDestroyedCallback") BTContactDestroyedCallbackI callback) {
+        nsetGContactDestroyedCallback(callback.address());
     }
 
     // --- [ setGContactProcessedCallback ] ---
 
-    public static void setGContactProcessedCallback(@NativeType("void *") long callback) {
+    public static void nsetGContactProcessedCallback(long callback) {
         long __functionAddress = Functions.setGContactProcessedCallback;
-        if (CHECKS) {
-            check(callback);
-        }
         invokePV(callback, __functionAddress);
+    }
+
+    public static void setGContactProcessedCallback(@NativeType("ContactProcessedCallback") BTContactProcessedCallbackI callback) {
+        nsetGContactProcessedCallback(callback.address());
     }
 
 }

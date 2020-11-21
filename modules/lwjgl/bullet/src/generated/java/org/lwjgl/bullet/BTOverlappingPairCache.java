@@ -237,13 +237,14 @@ public class BTOverlappingPairCache {
 
     // --- [ btOverlapFilterCallbackWrapper_new ] ---
 
-    @NativeType("void *")
-    public static long btOverlapFilterCallbackWrapper_new(@NativeType("void *") long needBroadphaseCollision) {
+    public static long nbtOverlapFilterCallbackWrapper_new(long needBroadphaseCollision) {
         long __functionAddress = Functions.OverlapFilterCallbackWrapper_new;
-        if (CHECKS) {
-            check(needBroadphaseCollision);
-        }
         return invokePP(needBroadphaseCollision, __functionAddress);
+    }
+
+    @NativeType("void *")
+    public static long btOverlapFilterCallbackWrapper_new(@NativeType("p_btOverlapFilterCallback_needBroadphaseCollision") BTOverlapFilterCallbackNeedBroadphaseCollisionI needBroadphaseCollision) {
+        return nbtOverlapFilterCallbackWrapper_new(needBroadphaseCollision.address());
     }
 
     // --- [ btHashedOverlappingPairCache_new ] ---

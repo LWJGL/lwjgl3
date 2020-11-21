@@ -12,7 +12,7 @@ val btBroadphaseInterface = "BTBroadphaseInterface".nativeClass(Module.BULLET, p
         "BroadphaseAabbCallbackWrapper_new",
         "",
 
-        opaque_p("processCallback", "")
+        p_btBroadphaseAabbCallback_process("processCallback", "")
     )
 
     bool(
@@ -34,7 +34,7 @@ val btBroadphaseInterface = "BTBroadphaseInterface".nativeClass(Module.BULLET, p
         "BroadphaseRayCallbackWrapper_new",
         "",
 
-        opaque_p("processCallback", "")
+        p_btBroadphaseAabbCallback_process("processCallback", "")
     )
 
     btScalar(

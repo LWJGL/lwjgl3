@@ -793,14 +793,14 @@ public class BTSoftBody {
 
     // --- [ btSoftBody_AJoint_IControlWrapper_new ] ---
 
-    @NativeType("void *")
-    public static long btSoftBody_AJoint_IControlWrapper_new(@NativeType("void *") long PrepareCallback, @NativeType("void *") long SpeedCallback) {
+    public static long nbtSoftBody_AJoint_IControlWrapper_new(long PrepareCallback, long SpeedCallback) {
         long __functionAddress = Functions.SoftBody_AJoint_IControlWrapper_new;
-        if (CHECKS) {
-            check(PrepareCallback);
-            check(SpeedCallback);
-        }
         return invokePPP(PrepareCallback, SpeedCallback, __functionAddress);
+    }
+
+    @NativeType("void *")
+    public static long btSoftBody_AJoint_IControlWrapper_new(@NativeType("p_btSoftBody_AJoint_IControl_Prepare") BTSoftBodyAJointIControlPrepareI PrepareCallback, @NativeType("p_btSoftBody_AJoint_IControl_Speed") BTSoftBodyAJointIControlSpeedI SpeedCallback) {
+        return nbtSoftBody_AJoint_IControlWrapper_new(PrepareCallback.address(), SpeedCallback.address());
     }
 
     // --- [ btSoftBody_AJoint_IControlWrapper_getWrapperData ] ---
@@ -2783,13 +2783,14 @@ public class BTSoftBody {
 
     // --- [ btSoftBody_ImplicitFnWrapper_new ] ---
 
-    @NativeType("void *")
-    public static long btSoftBody_ImplicitFnWrapper_new(@NativeType("void *") long EvalCallback) {
+    public static long nbtSoftBody_ImplicitFnWrapper_new(long EvalCallback) {
         long __functionAddress = Functions.SoftBody_ImplicitFnWrapper_new;
-        if (CHECKS) {
-            check(EvalCallback);
-        }
         return invokePP(EvalCallback, __functionAddress);
+    }
+
+    @NativeType("void *")
+    public static long btSoftBody_ImplicitFnWrapper_new(@NativeType("p_btSoftBody_ImplicitFn_Eval") BTSoftBodyImplicitFnEvalI EvalCallback) {
+        return nbtSoftBody_ImplicitFnWrapper_new(EvalCallback.address());
     }
 
     // --- [ btSoftBody_ImplicitFn_Eval ] ---

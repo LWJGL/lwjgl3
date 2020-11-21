@@ -38,7 +38,7 @@ val btCollisionDispatcher = "BTCollisionDispatcher".nativeClass(Module.BULLET, p
         opaque_p("obj", "")
     )
 
-    opaque_p(
+    btNearCallback(
         "CollisionDispatcher_getNearCallback",
         "",
 
@@ -86,7 +86,7 @@ val btCollisionDispatcher = "BTCollisionDispatcher".nativeClass(Module.BULLET, p
         "",
 
         opaque_p("obj", ""),
-        opaque_p("nearCallback", "")
+        btNearCallback("nearCallback", "")
     )
 
 }

@@ -1090,14 +1090,14 @@ public class BTCollisionWorld {
 
     // --- [ btCollisionWorld_RayResultCallbackWrapper_new ] ---
 
-    @NativeType("void *")
-    public static long btCollisionWorld_RayResultCallbackWrapper_new(@NativeType("void *") long addSingleResultCallback, @NativeType("void *") long needsCollisionCallback) {
+    public static long nbtCollisionWorld_RayResultCallbackWrapper_new(long addSingleResultCallback, long needsCollisionCallback) {
         long __functionAddress = Functions.CollisionWorld_RayResultCallbackWrapper_new;
-        if (CHECKS) {
-            check(addSingleResultCallback);
-            check(needsCollisionCallback);
-        }
         return invokePPP(addSingleResultCallback, needsCollisionCallback, __functionAddress);
+    }
+
+    @NativeType("void *")
+    public static long btCollisionWorld_RayResultCallbackWrapper_new(@NativeType("p_btCollisionWorld_RayResultCallback_addSingleResult") BTCollisionWorldRayResultCallbackAddSingleResultI addSingleResultCallback, @NativeType("p_btCollisionWorld_RayResultCallback_needsCollision") BTCollisionWorldRayResultCallbackNeedsCollisionI needsCollisionCallback) {
+        return nbtCollisionWorld_RayResultCallbackWrapper_new(addSingleResultCallback.address(), needsCollisionCallback.address());
     }
 
     // --- [ btCollisionWorld_RayResultCallbackWrapper_needsCollision ] ---

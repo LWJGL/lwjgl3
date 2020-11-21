@@ -33,14 +33,14 @@ public class BTMotionState {
 
     // --- [ btMotionStateWrapper_new ] ---
 
-    @NativeType("void *")
-    public static long btMotionStateWrapper_new(@NativeType("void *") long getWorldTransformCallback, @NativeType("void *") long setWorldTransformCallback) {
+    public static long nbtMotionStateWrapper_new(long getWorldTransformCallback, long setWorldTransformCallback) {
         long __functionAddress = Functions.MotionStateWrapper_new;
-        if (CHECKS) {
-            check(getWorldTransformCallback);
-            check(setWorldTransformCallback);
-        }
         return invokePPP(getWorldTransformCallback, setWorldTransformCallback, __functionAddress);
+    }
+
+    @NativeType("void *")
+    public static long btMotionStateWrapper_new(@NativeType("p_btMotionState_getWorldTransform") BTMotionStateGetWorldTransformI getWorldTransformCallback, @NativeType("p_btMotionState_setWorldTransform") BTMotionStateSetWorldTransformI setWorldTransformCallback) {
+        return nbtMotionStateWrapper_new(getWorldTransformCallback.address(), setWorldTransformCallback.address());
     }
 
     // --- [ btMotionState_getWorldTransform ] ---

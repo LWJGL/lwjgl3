@@ -33,13 +33,14 @@ public class BTTriangleCallback {
 
     // --- [ btTriangleCallbackWrapper_new ] ---
 
-    @NativeType("void *")
-    public static long btTriangleCallbackWrapper_new(@NativeType("void *") long processTriangleCallback) {
+    public static long nbtTriangleCallbackWrapper_new(long processTriangleCallback) {
         long __functionAddress = Functions.TriangleCallbackWrapper_new;
-        if (CHECKS) {
-            check(processTriangleCallback);
-        }
         return invokePP(processTriangleCallback, __functionAddress);
+    }
+
+    @NativeType("void *")
+    public static long btTriangleCallbackWrapper_new(@NativeType("p_btTriangleCallback_processTriangle") BTTriangleCallbackProcessTriangleI processTriangleCallback) {
+        return nbtTriangleCallbackWrapper_new(processTriangleCallback.address());
     }
 
     // --- [ btTriangleCallback_delete ] ---
@@ -54,13 +55,14 @@ public class BTTriangleCallback {
 
     // --- [ btInternalTriangleIndexCallbackWrapper_new ] ---
 
-    @NativeType("void *")
-    public static long btInternalTriangleIndexCallbackWrapper_new(@NativeType("void *") long internalProcessTriangleIndexCallback) {
+    public static long nbtInternalTriangleIndexCallbackWrapper_new(long internalProcessTriangleIndexCallback) {
         long __functionAddress = Functions.InternalTriangleIndexCallbackWrapper_new;
-        if (CHECKS) {
-            check(internalProcessTriangleIndexCallback);
-        }
         return invokePP(internalProcessTriangleIndexCallback, __functionAddress);
+    }
+
+    @NativeType("void *")
+    public static long btInternalTriangleIndexCallbackWrapper_new(@NativeType("p_btInternalTriangleIndexCallback_internalProcessTriangleIndex") BTInternalTriangleIndexCallbackInternalProcessTriangleIndexI internalProcessTriangleIndexCallback) {
+        return nbtInternalTriangleIndexCallbackWrapper_new(internalProcessTriangleIndexCallback.address());
     }
 
     // --- [ btInternalTriangleIndexCallback_delete ] ---

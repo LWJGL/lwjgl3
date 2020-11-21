@@ -5,6 +5,8 @@
  */
 package org.lwjgl.bullet;
 
+import javax.annotation.*;
+
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -775,20 +777,26 @@ public class BTManifoldPoint {
 
     // --- [ getGContactAddedCallback ] ---
 
-    @NativeType("void *")
-    public static long getGContactAddedCallback() {
+    public static long ngetGContactAddedCallback() {
         long __functionAddress = Functions.getGContactAddedCallback;
         return invokeP(__functionAddress);
     }
 
+    @Nullable
+    @NativeType("ContactAddedCallback")
+    public static BTContactAddedCallback getGContactAddedCallback() {
+        return BTContactAddedCallback.createSafe(ngetGContactAddedCallback());
+    }
+
     // --- [ setGContactAddedCallback ] ---
 
-    public static void setGContactAddedCallback(@NativeType("void *") long value) {
+    public static void nsetGContactAddedCallback(long value) {
         long __functionAddress = Functions.setGContactAddedCallback;
-        if (CHECKS) {
-            check(value);
-        }
         invokePV(value, __functionAddress);
+    }
+
+    public static void setGContactAddedCallback(@NativeType("ContactAddedCallback") BTContactAddedCallbackI value) {
+        nsetGContactAddedCallback(value.address());
     }
 
 }

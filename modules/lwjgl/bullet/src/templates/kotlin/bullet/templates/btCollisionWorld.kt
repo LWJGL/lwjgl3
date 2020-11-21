@@ -624,8 +624,8 @@ val CollisionWorld = "BTCollisionWorld".nativeClass(Module.BULLET, prefixMethod 
         "CollisionWorld_RayResultCallbackWrapper_new",
         "",
 
-        opaque_p("addSingleResultCallback", ""),
-        opaque_p("needsCollisionCallback", "")
+        p_btCollisionWorld_RayResultCallback_addSingleResult("addSingleResultCallback", ""),
+        p_btCollisionWorld_RayResultCallback_needsCollision("needsCollisionCallback", "")
     )
 
     bool(
