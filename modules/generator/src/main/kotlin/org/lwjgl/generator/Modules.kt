@@ -703,6 +703,15 @@ enum class Module(
         library = JNILibrary.create("LibVma", setupAllocator = true, cpp = true),
         arrayOverloads = false
     ),
+    VPX(
+        "vpx",
+        "org.lwjgl.vpx",
+        """
+        Contains bindings to ${url("https://www.webmproject.org/code/", "libvpx")}.
+		""",
+        library = JNILibrary.simple(),
+        arrayOverloads = false
+    ),
     VULKAN(
         "vulkan",
         "org.lwjgl.vulkan",

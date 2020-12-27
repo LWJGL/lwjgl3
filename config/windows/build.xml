@@ -391,6 +391,20 @@ EXPORTS
                 <arg value="D3d9.lib"/>
             </linkargs>
         </build>
+		
+        <!-- vpx -->
+        <build module="vpx" simple="true" if:true="${binding.vpx}">
+            <compileargs>
+                <arg value="/IC:\Users\Alex\Desktop\projects\libvpx"/>
+                <arg value="/IC:\Users\Alex\Desktop\projects\libvpx\vpx"/>
+                <arg value="/IC:\Users\Alex\Desktop\projects\libvpx\bin"/>
+            </compileargs>
+            <link>
+                <fileset dir="C:\Users\Alex\Desktop\projects\libvpx\bin\x64\Release">
+                    <include name="vpxmt.lib"/>
+                </fileset>
+            </link>
+        </build>
 
         <!-- Vulkan Memory Allocator -->
         <build module="vma" if:true="${binding.vma}">

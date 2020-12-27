@@ -501,6 +501,7 @@
             <compileBinding binding="tinyexr"/>
             <compileBinding binding="tinyfd"/>
             <compileBinding binding="tootle"/>
+            <compileBinding binding="vpx"/>
             <compileBinding binding="vulkan"/>
             <compileBinding binding="xxhash"/>
             <compileBinding binding="yoga"/>
@@ -1650,6 +1651,9 @@
 
         <!-- Vulkan Memory Allocator -->
         <release-module name="vma" native-library="lwjgl_vma" title="vma" if:true="${binding.vma}"/>
+		
+        <!-- vpx -->
+        <release-module name="vpx" native-library="lwjgl_vpx" title="vpx" if:true="${binding.vpx}"/>
 
         <!-- Vulkan -->
         <release-module name="vulkan" title="Vulkan" if:true="${binding.vulkan}">
