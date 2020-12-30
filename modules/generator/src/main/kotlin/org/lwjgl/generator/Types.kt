@@ -104,7 +104,7 @@ class CArrayType<T : DataType> internal constructor(
     name: String,
     val elementType: T,
     val dimensions: Array<String>
-) : BaseType(name, elementType.mapping), AggregateType {
+) : BaseType(name, elementType.p.mapping), AggregateType {
     /*override val p by lazy {
         PointerType("${elementType.name}(*)[$size]", PointerMapping.DATA_POINTER, elementType = this, includesPointer = true)
     }*/
@@ -235,6 +235,7 @@ class FunctionType internal constructor(
 
 // typedefs
 fun typedef(@Suppress("UNUSED_PARAMETER") typedef: OpaqueType, name: String) = OpaqueType(name)
+fun typedef(typedef: StructType, name: String) = StructType(typedef.definition, name)
 fun typedef(typedef: PrimitiveType, name: String) = PrimitiveType(name, typedef.mapping)
 fun typedef(typedef: IntegerType, name: String) = IntegerType(name, typedef.mapping, typedef.unsigned)
 fun <T: DataType> typedef(typedef: CArrayType<T>, name: String) = CArrayType(name, typedef.elementType, typedef.dimensions)

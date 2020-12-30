@@ -109,7 +109,6 @@ enum class Module(
 
         Until these bindings are sufficiently tested, this API should be considered unstable.
 		""",
-        library = JNILibrary.create("LibBullet"),
         arrayOverloads = false
     ),
     CUDA(
@@ -702,6 +701,15 @@ enum class Module(
         )}
         """,
         library = JNILibrary.create("LibVma", setupAllocator = true, cpp = true),
+        arrayOverloads = false
+    ),
+    VPX(
+        "vpx",
+        "org.lwjgl.vpx",
+        """
+        Contains bindings to ${url("https://www.webmproject.org/code/", "libvpx")}.
+		""",
+        library = JNILibrary.simple(),
         arrayOverloads = false
     ),
     VULKAN(

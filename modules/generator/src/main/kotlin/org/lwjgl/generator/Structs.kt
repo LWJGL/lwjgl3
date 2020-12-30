@@ -1798,7 +1798,8 @@ ${validations.joinToString("\n")}
                         println("${indent}public $returnType $setter(${it.annotate(bufferType)} value) { $n$setter($ADDRESS, value); return this; }")
                         println("$indent/** Sets the specified value at the specified index of the {@code $member} field. */")
                         if (overrides) println("$indent@Override")
-                        println("${indent}public $returnType $setter(int index, ${it.annotate(it.nativeType.javaMethodType, it.nativeType)} value) { $n$setter($ADDRESS, index, value); return this; }")
+						val v = if(it.nativeType.isPointerData) it.memAddressValue else "value"
+                        println("${indent}public $returnType $setter(int index, ${it.annotate(it.nativeType.javaMethodType, it.nativeType)} value) { $n$setter($ADDRESS, index, ${v}); return this; }")
                     }
                 } else if (it.nativeType is CharSequenceType) {
                     println("$indent/** Sets the address of the specified encoded string to the {@code $member} field. */")

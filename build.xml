@@ -501,6 +501,7 @@
             <compileBinding binding="tinyexr"/>
             <compileBinding binding="tinyfd"/>
             <compileBinding binding="tootle"/>
+            <compileBinding binding="vpx"/>
             <compileBinding binding="vulkan"/>
             <compileBinding binding="xxhash"/>
             <compileBinding binding="yoga"/>
@@ -591,7 +592,7 @@
         <touch file="${bin.extract}/touch.txt"/>
     </target>
 
-    <target name="extract" description="Runs the LWJGL Template Extraction tool" depends="compile-native, -compile-extract">
+    <target name="extract" description="Runs the LWJGL Template Extraction tool" depends="init, -compile-extract">
         <java classname="org.lwjgl.extract.MainKt" fork="true" spawn="true" taskname="LWJGL Template Extraction Tool">
             <classpath>
                 <pathelement path="${bin.lwjgl}/core/META-INF/versions/9" if:set="core.java9"/>
@@ -1033,16 +1034,17 @@
     </target>
 
     <macrodef name="get-release-offline">
+        <attribute name="platform"/>
         <attribute name="arch"/>
         <attribute name="file"/>
 
         <sequential>
             <local name="available"/>
-            <available file="${lib.native}/${module.path}/@{file}" property="available"/>
+            <available file="${lib}/native/@{platform}/@{arch}/${module.path}/@{file}" property="available"/>
 
-            <echo message="release: ${lib.native}/${module.path}/@{file} is missing" level="warning" unless:set="available"/>
+            <echo message="release: ${lib}/native/@{platform}/@{arch}/${module.path}/@{file} is missing" level="warning" unless:set="available"/>
             <quiet if:set="available">
-                <copy file="${lib.native}/${module.path}/@{file}" todir="${release}/${module}/native/${platform}/@{arch}/${module.path}"/>
+                <copy file="${lib}/native/@{platform}/@{arch}/${module.path}/@{file}" todir="${release}/${module}/native/@{platform}/@{arch}/${module.path}"/>
             </quiet>
         </sequential>
     </macrodef>
@@ -1062,7 +1064,7 @@
                 usetimestamp="true"
                 unless:true="${build.offline}"
             />
-            <get-release-offline arch="@{arch}" file="@{file}" if:true="${build.offline}"/>
+            <get-release-offline platform="@{platform}" arch="@{arch}" file="@{file}" if:true="${build.offline}"/>
         </sequential>
     </macrodef>
 
@@ -1415,7 +1417,7 @@
         <release-module name="bgfx" native-library="bgfx" title="bgfx" if:true="${binding.bgfx}"/>
 
         <!-- Bullet -->
-        <release-module name="bullet" native-library="lwjgl_bullet" title="bullet" if:true="${binding.bullet}"/>
+        <release-module name="bullet" native-library="bulletc" title="bullet" if:true="${binding.bullet}"/>
 
         <!-- CUDA -->
         <release-module name="cuda" title="CUDA" if:true="${binding.cuda}"/>
@@ -1649,6 +1651,9 @@
 
         <!-- Vulkan Memory Allocator -->
         <release-module name="vma" native-library="lwjgl_vma" title="vma" if:true="${binding.vma}"/>
+		
+        <!-- vpx -->
+        <release-module name="vpx" native-library="lwjgl_vpx" title="vpx" if:true="${binding.vpx}"/>
 
         <!-- Vulkan -->
         <release-module name="vulkan" title="Vulkan" if:true="${binding.vulkan}">

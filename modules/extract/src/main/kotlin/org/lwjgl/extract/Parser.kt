@@ -10,6 +10,7 @@ import org.lwjgl.llvm.ClangIndex.*
 import org.lwjgl.system.*
 import org.lwjgl.system.MemoryStack.*
 import org.lwjgl.system.MemoryUtil.*
+import java.nio.file.*
 
 internal fun parseSimpleType(name: String, nativeName: String, type: String) = "val $name = \"$nativeName\".$type"
 
@@ -642,7 +643,12 @@ private val CXType.lwjgl: String
                 .replace("unsigned ", "unsigned_")
                 .replace("signed ", "")
                 .replace("long ", "long_")
-            CXType_Pointer         -> "${clang_getPointeeType(this, CXType.mallocStack(stack)).lwjgl}.p"
+            CXType_Pointer         -> {
+				val t = clang_getPointeeType(this, CXType.mallocStack(stack))
+				if(t.kind() == CXType_Void){
+					"opaque_p"
+				} else "${t.lwjgl}.p"
+			}
             //CXType_BlockPointer ->
             CXType_Record          -> {
                 this.spelling.let {
@@ -657,7 +663,7 @@ private val CXType.lwjgl: String
             }
             CXType_Typedef         -> clang_getTypedefName(this, stack.str).str
             //CXType_FunctionNoProto ->
-            //CXType_FunctionProto ->
+            CXType_FunctionProto -> "FunctionProto"
             // TODO: curand.h - typedef unsigned int curandDirectionVectors32_t[32];
             CXType_ConstantArray   -> clang_getElementType(this, CXType.mallocStack(stack)).lwjgl.arrayDimension(clang_getArraySize(this))
             //CXType_Vector ->
@@ -671,7 +677,7 @@ private val CXType.lwjgl: String
             else                   -> {
                 println(this.spelling)
                 println(clang_getTypeKindSpelling(kind, stack.str).str)
-                TODO()
+                TODO(this.spelling + " --- " + clang_getTypeKindSpelling(kind, stack.str).str)
             }
         }
     }

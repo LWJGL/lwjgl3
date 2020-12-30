@@ -938,7 +938,7 @@ class Func(
         if (hasCustomJNI || !has<Address>()) {
             generateNativeMethodCall(
                 code,
-                code.hasStatements(code.javaAfterNative, false, hasArrays),
+                code.hasStatements(code.javaAfterNative, false, hasArrays) || returns.nativeType is CArrayType<*>,
                 hasStack || code.hasStatements(code.javaFinally, false, hasArrays)
             ) {
                 printList(getNativeParams()) {
@@ -1006,6 +1006,25 @@ class Func(
                         }
                     }
                 }
+                println(");")
+            } else if (returns.nativeType is CArrayType<*>) {
+                if (hasFinally)
+                    print(t)
+                print("$t${t}return ")
+
+                val isNullTerminated = returns.nativeType is CharSequenceType
+                print(
+                    if (returns.nativeType.dereference is StructType) {
+                        "${returns.nativeType.javaMethodType}.create"
+                    } else {
+                        "mem${if (isNullTerminated)
+                            "ByteBuffer"
+                        else
+                            returns.nativeType.mapping.javaMethodName}"
+                    }
+                )
+
+                print("($RESULT, ${returns.nativeType.size}")
                 println(");")
             } else if (code.hasStatements(code.javaAfterNative, false, hasArrays)) {
                 if (hasFinally)
