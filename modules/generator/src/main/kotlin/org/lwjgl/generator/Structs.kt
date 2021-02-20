@@ -677,8 +677,10 @@ $indentation}"""
 
         val nativeLayout = !skipNative
         if (nativeLayout) {
-            checkNotNull(module.library) {
-                "${t}Missing module library for native layout of struct: ${module.packageKotlin}.$className"
+            if (module !== Module.CORE && !module.key.startsWith("core.")) {
+                checkNotNull(module.library) {
+                    "${t}Missing module library for native layout of struct: ${module.packageKotlin}.$className"
+                }
             }
         } else if (preamble.hasNativeDirectives) {
             kotlin.io.println("${t}Unnecessary native directives in struct: ${module.packageKotlin}.$className")
@@ -773,10 +775,13 @@ $indentation}"""
                 // Member offset initialization
 
                 if (nativeLayout) {
+                    if (module.library != null) {
+                        print(
+                        """
+        ${module.library.expression(module)}""")
+                    }
                     print(
                         """
-        ${module.library!!.expression(module)}
-
         try (MemoryStack stack = stackPush()) {
             IntBuffer offsets = stack.mallocInt(${memberCount + 1});
             SIZEOF = offsets(memAddress(offsets));

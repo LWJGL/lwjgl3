@@ -46,6 +46,14 @@ enum class Module(
         "org.lwjgl.system.libc",
         "Contains bindings to standard C library APIs."
     ),
+    CORE_LIBFFI(
+        "core.libffi",
+        "org.lwjgl.system.libffi",
+        """
+        Contains bindings to the ${url("https://sourceware.org/libffi/", "libffi")}, a portable, high level programming interface to various calling
+        conventions. This allows a programmer to call any function specified by a call interface description at run-time.
+        """
+    ),
     CORE_LINUX(
         "core.linux",
         "org.lwjgl.system.linux",

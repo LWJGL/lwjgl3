@@ -215,6 +215,7 @@
             <src path="${core.kotlin.path}/dyncall"/>
             <src path="${core.kotlin.path}/jni"/>
             <src path="${core.kotlin.path}/libc"/>
+            <src path="${core.kotlin.path}/libffi"/>
             <src path="${core.kotlin.path}/linux"/>
             <src path="${core.kotlin.path}/macos"/>
             <src path="${core.kotlin.path}/templates"/>

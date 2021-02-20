@@ -11,6 +11,7 @@
             <package name="org.lwjgl.system"/>
             <package name="org.lwjgl.system.dyncall"/>
             <package name="org.lwjgl.system.libc"/>
+            <package name="org.lwjgl.system.libffi"/>
         </packages>
     </test>
     <test name="libdivide" parallel="methods" thread-count="4">
