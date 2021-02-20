@@ -14,14 +14,6 @@ This script is included in /config/build-definitions.xml.
 
     <!-- // ========== BINDING FLAGS ======== // -->
 
-    <local name="notARM"/>
-    <condition property="notARM">
-        <or>
-            <isset property="build.arch.x64"/>
-            <isset property="build.arch.x86"/>
-        </or>
-    </condition>
-
     <property name="binding.assimp" value="true"/>
     <property name="binding.bgfx" value="true"/>
     <property name="binding.bullet" value="true"/>
@@ -37,31 +29,31 @@ This script is included in /config/build-definitions.xml.
     <property name="binding.lz4" value="true"/>
     <condition property="binding.meow" value="true" else="false">
         <or>
-            <isset property="notARM"/>
+            <not><isset property="build.arch.arm"/></not>
             <isset property="build.arch.arm64"/>
         </or>
     </condition>
     <property name="binding.meshoptimizer" value="true"/>
     <property name="binding.nanovg" value="true"/>
-    <condition property="binding.nfd" value="true" else="false"><isset property="notARM"/></condition>
+    <condition property="binding.nfd" value="false" else="true"><isset property="build.arch.arm"/></condition>
     <property name="binding.nuklear" value="true"/>
     <property name="binding.odbc" value="true"/>
     <property name="binding.openal" value="true"/>
     <property name="binding.opencl" value="true"/>
     <property name="binding.opengl" value="true"/>
     <property name="binding.opengles" value="true"/>
-    <condition property="binding.openvr" value="true" else="false"><isset property="notARM"/></condition>
+    <condition property="binding.openvr" value="false" else="true"><isset property="build.arch.arm"/></condition>
     <property name="binding.opus" value="true"/>
     <property name="binding.par" value="true"/>
     <property name="binding.remotery" value="true"/>
     <property name="binding.rpmalloc" value="true"/>
     <property name="binding.shaderc" value="true"/>
     <property name="binding.spvc" value="true"/>
-    <condition property="binding.sse" value="true" else="false"><isset property="notARM"/></condition>
+    <condition property="binding.sse" value="false" else="true"><isset property="build.arch.arm"/></condition>
     <property name="binding.stb" value="true"/>
     <property name="binding.tinyexr" value="true"/>
     <property name="binding.tinyfd" value="true"/>
-    <condition property="binding.tootle" value="true" else="false"><isset property="notARM"/></condition>
+    <condition property="binding.tootle" value="false" else="true"><isset property="build.arch.arm"/></condition>
     <property name="binding.vma" value="true"/>
     <property name="binding.vulkan" value="true"/>
     <property name="binding.xxhash" value="true"/>

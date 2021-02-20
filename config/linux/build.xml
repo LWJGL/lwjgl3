@@ -297,11 +297,8 @@
 
         <!-- Meow -->
         <local name="meow.flags"/>
-        <condition property="meow.flags" value="-maes -msse4.2" else="-march=armv8-a+crypto">
-            <or>
-                <isset property="build.arch.x64"/>
-                <isset property="build.arch.x86"/>
-            </or>
+        <condition property="meow.flags" value="-march=armv8-a+crypto" else="-maes -msse4.2">
+            <isset property="build.arch.arm"/>
         </condition>
         <build module="meow" simple="true" flags="-Werror -Wfatal-errors ${meow.flags}" if:true="${binding.meow}"/>
 

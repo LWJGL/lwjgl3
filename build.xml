@@ -986,7 +986,8 @@
 
             <arg value="-XDignore.symbol.file"/> <!-- Suppresses internal API (e.g. Unsafe) usage warnings -->
 
-            <arg line="-Xdoclint:html,reference,syntax"/>
+            <arg line="-Xdoclint:none" if:set="nodoclint"/>
+            <arg line="-Xdoclint:html,reference,syntax" unless:set="nodoclint"/>
             <arg line="-Xmaxerrs 1000 -Xmaxwarns 1000"/>
             <arg line="-notimestamp"/>
             <arg value="-html5" if:set="jdk9"/>
