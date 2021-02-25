@@ -53,7 +53,7 @@ public abstract class GLFWWindowRefreshCallback extends Callback implements GLFW
     }
 
     protected GLFWWindowRefreshCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     GLFWWindowRefreshCallback(long functionPointer) {

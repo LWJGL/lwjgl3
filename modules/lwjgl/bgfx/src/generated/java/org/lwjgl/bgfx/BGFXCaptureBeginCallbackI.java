@@ -6,8 +6,11 @@
 package org.lwjgl.bgfx;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Called when video capture begins.
@@ -26,22 +29,26 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  */
 @FunctionalInterface
 @NativeType("void (*) (bgfx_callback_interface_t *, uint32_t, uint32_t, uint32_t, bgfx_texture_format_t, bool)")
-public interface BGFXCaptureBeginCallbackI extends CallbackI.V {
+public interface BGFXCaptureBeginCallbackI extends CallbackI {
 
-    String SIGNATURE = "(piiiiB)v";
+    FFICIF CIF = apiCreateCIF(
+        FFI_DEFAULT_ABI,
+        ffi_type_void,
+        ffi_type_pointer, ffi_type_uint32, ffi_type_uint32, ffi_type_uint32, ffi_type_uint32, ffi_type_uint8
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default void callback(long args) {
+    default void callback(long ret, long args) {
         invoke(
-            dcbArgPointer(args),
-            dcbArgInt(args),
-            dcbArgInt(args),
-            dcbArgInt(args),
-            dcbArgInt(args),
-            dcbArgBool(args)
+            memGetAddress(memGetAddress(args)),
+            memGetInt(memGetAddress(args + POINTER_SIZE)),
+            memGetInt(memGetAddress(args + 2 * POINTER_SIZE)),
+            memGetInt(memGetAddress(args + 3 * POINTER_SIZE)),
+            memGetInt(memGetAddress(args + 4 * POINTER_SIZE)),
+            memGetByte(memGetAddress(args + 5 * POINTER_SIZE)) != 0
         );
     }
 

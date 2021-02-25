@@ -6,8 +6,11 @@
 package org.lwjgl.util.par;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Instances of this interface may be passed to the {@link ParShapes#par_shapes_create_lsystem create_lsystem} method.
@@ -21,18 +24,23 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  */
 @FunctionalInterface
 @NativeType("par_shapes_rand_fn")
-public interface ParShapesRandFnI extends CallbackI.F {
+public interface ParShapesRandFnI extends CallbackI {
 
-    String SIGNATURE = "(p)f";
+    FFICIF CIF = apiCreateCIF(
+        FFI_DEFAULT_ABI,
+        ffi_type_float,
+        ffi_type_pointer
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default float callback(long args) {
-        return invoke(
-            dcbArgPointer(args)
+    default void callback(long ret, long args) {
+        float __result = invoke(
+            memGetAddress(memGetAddress(args))
         );
+        apiClosureRet(ret, __result);
     }
 
     float invoke(@NativeType("void *") long context);

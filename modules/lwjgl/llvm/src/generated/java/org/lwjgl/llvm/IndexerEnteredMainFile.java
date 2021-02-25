@@ -51,7 +51,7 @@ public abstract class IndexerEnteredMainFile extends Callback implements Indexer
     }
 
     protected IndexerEnteredMainFile() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     IndexerEnteredMainFile(long functionPointer) {

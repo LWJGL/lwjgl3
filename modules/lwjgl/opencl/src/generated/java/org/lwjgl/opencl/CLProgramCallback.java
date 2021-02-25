@@ -50,7 +50,7 @@ public abstract class CLProgramCallback extends Callback implements CLProgramCal
     }
 
     protected CLProgramCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     CLProgramCallback(long functionPointer) {

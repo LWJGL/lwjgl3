@@ -49,7 +49,7 @@ public abstract class BGFXCaptureEndCallback extends Callback implements BGFXCap
     }
 
     protected BGFXCaptureEndCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     BGFXCaptureEndCallback(long functionPointer) {

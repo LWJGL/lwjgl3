@@ -6,8 +6,11 @@
 package org.lwjgl.stb;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Instances of this interface may be set to the {@code read} field of the {@link STBIIOCallbacks} struct.
@@ -23,20 +26,25 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  */
 @FunctionalInterface
 @NativeType("int (*) (void *, char *, int)")
-public interface STBIReadCallbackI extends CallbackI.I {
+public interface STBIReadCallbackI extends CallbackI {
 
-    String SIGNATURE = "(ppi)i";
+    FFICIF CIF = apiCreateCIF(
+        FFI_DEFAULT_ABI,
+        ffi_type_sint32,
+        ffi_type_pointer, ffi_type_pointer, ffi_type_sint32
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default int callback(long args) {
-        return invoke(
-            dcbArgPointer(args),
-            dcbArgPointer(args),
-            dcbArgInt(args)
+    default void callback(long ret, long args) {
+        int __result = invoke(
+            memGetAddress(memGetAddress(args)),
+            memGetAddress(memGetAddress(args + POINTER_SIZE)),
+            memGetInt(memGetAddress(args + 2 * POINTER_SIZE))
         );
+        apiClosureRet(ret, __result);
     }
 
     /**

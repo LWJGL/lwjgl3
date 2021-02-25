@@ -54,7 +54,7 @@ public abstract class GLFWMouseButtonCallback extends Callback implements GLFWMo
     }
 
     protected GLFWMouseButtonCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     GLFWMouseButtonCallback(long functionPointer) {

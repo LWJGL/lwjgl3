@@ -54,7 +54,7 @@ public abstract class GLFWWindowIconifyCallback extends Callback implements GLFW
     }
 
     protected GLFWWindowIconifyCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     GLFWWindowIconifyCallback(long functionPointer) {

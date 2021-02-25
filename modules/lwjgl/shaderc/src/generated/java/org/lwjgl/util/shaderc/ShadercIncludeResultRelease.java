@@ -50,7 +50,7 @@ public abstract class ShadercIncludeResultRelease extends Callback implements Sh
     }
 
     protected ShadercIncludeResultRelease() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     ShadercIncludeResultRelease(long functionPointer) {

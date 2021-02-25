@@ -52,7 +52,7 @@ public abstract class NkTextWidthCallback extends Callback implements NkTextWidt
     }
 
     protected NkTextWidthCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     NkTextWidthCallback(long functionPointer) {

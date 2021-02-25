@@ -47,7 +47,7 @@ public abstract class YGDirtiedFunc extends Callback implements YGDirtiedFuncI {
     }
 
     protected YGDirtiedFunc() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     YGDirtiedFunc(long functionPointer) {

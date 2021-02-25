@@ -52,7 +52,7 @@ public abstract class CXInclusionVisitor extends Callback implements CXInclusion
     }
 
     protected CXInclusionVisitor() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     CXInclusionVisitor(long functionPointer) {

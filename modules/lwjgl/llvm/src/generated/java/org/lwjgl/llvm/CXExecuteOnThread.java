@@ -49,7 +49,7 @@ public abstract class CXExecuteOnThread extends Callback implements CXExecuteOnT
     }
 
     protected CXExecuteOnThread() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     CXExecuteOnThread(long functionPointer) {

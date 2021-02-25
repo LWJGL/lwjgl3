@@ -6,8 +6,11 @@
 package org.lwjgl.bgfx;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Profiler region end.
@@ -21,17 +24,21 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  */
 @FunctionalInterface
 @NativeType("void (*) (bgfx_callback_interface_t *)")
-public interface BGFXProfilerEndI extends CallbackI.V {
+public interface BGFXProfilerEndI extends CallbackI {
 
-    String SIGNATURE = "(p)v";
+    FFICIF CIF = apiCreateCIF(
+        FFI_DEFAULT_ABI,
+        ffi_type_void,
+        ffi_type_pointer
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default void callback(long args) {
+    default void callback(long ret, long args) {
         invoke(
-            dcbArgPointer(args)
+            memGetAddress(memGetAddress(args))
         );
     }
 

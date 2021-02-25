@@ -50,7 +50,7 @@ public abstract class IndexerIndexEntityReference extends Callback implements In
     }
 
     protected IndexerIndexEntityReference() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     IndexerIndexEntityReference(long functionPointer) {

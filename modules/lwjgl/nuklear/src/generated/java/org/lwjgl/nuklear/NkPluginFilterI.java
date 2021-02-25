@@ -6,8 +6,11 @@
 package org.lwjgl.nuklear;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Instances of this interface may be set to the {@link NkTextEdit} struct.
@@ -22,19 +25,24 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  */
 @FunctionalInterface
 @NativeType("nk_plugin_filter")
-public interface NkPluginFilterI extends CallbackI.Z {
+public interface NkPluginFilterI extends CallbackI {
 
-    String SIGNATURE = "(pi)B";
+    FFICIF CIF = apiCreateCIF(
+        FFI_DEFAULT_ABI,
+        ffi_type_uint8,
+        ffi_type_pointer, ffi_type_uint32
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default boolean callback(long args) {
-        return invoke(
-            dcbArgPointer(args),
-            dcbArgInt(args)
+    default void callback(long ret, long args) {
+        boolean __result = invoke(
+            memGetAddress(memGetAddress(args)),
+            memGetInt(memGetAddress(args + POINTER_SIZE))
         );
+        apiClosureRet(ret, __result);
     }
 
     @NativeType("nk_bool") boolean invoke(@NativeType("struct nk_text_edit const *") long edit, @NativeType("nk_rune") int unicode);

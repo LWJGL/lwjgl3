@@ -3786,7 +3786,7 @@ void foo <float , 2147483649, true>();""")}
             "the cursor whose child may be visited. All kinds of cursors can be visited, including invalid cursors (which, by definition, have no children)."
         ),
         CXCursorVisitor("visitor", "the visitor function that will be invoked for each child of {@code parent}"),
-        UserData("visitor")..CXClientData(
+        nullable..CXClientData(
             "client_data",
             "pointer data supplied by the client, which will be passed to the visitor each time it is invoked"
         ),
@@ -5221,7 +5221,7 @@ void foo <float , 2147483649, true>();""")}
 
         CXType("T", "the record type whose field may be visited"),
         CXFieldVisitor("visitor", "the visitor function that will be invoked for each field of {@code T}"),
-        UserData("visitor")..CXClientData(
+        nullable..CXClientData(
             "client_data",
             "pointer data supplied by the client, which will be passed to the visitor each time it is invoked"
         ),

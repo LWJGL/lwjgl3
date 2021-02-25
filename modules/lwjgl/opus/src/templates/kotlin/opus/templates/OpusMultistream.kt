@@ -413,7 +413,7 @@ nb_samples = opus_packet_get_samples_per_frame(data, 48000) * nb_frames;""")}
      * @param request CTL request
      */
     public static int opus_multistream_encoder_ctl(@NativeType("OpusMSEncoder *") long st, int request) {
-        return new CTLRequest(request).apply(st, Functions.multistream_encoder_ctl);
+        return new CTLRequestV(request).apply(st, Functions.multistream_encoder_ctl);
     }
 
     /**
@@ -433,7 +433,7 @@ nb_samples = opus_packet_get_samples_per_frame(data, 48000) * nb_frames;""")}
      * @param request CTL request
      */
     public static int opus_multistream_decoder_ctl(@NativeType("OpusMSDecoder *") long st, int request) {
-        return new CTLRequest(request).apply(st, Functions.multistream_decoder_ctl);
+        return new CTLRequestV(request).apply(st, Functions.multistream_decoder_ctl);
     }
 
     /**

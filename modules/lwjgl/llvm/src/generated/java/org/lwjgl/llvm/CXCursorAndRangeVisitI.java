@@ -6,8 +6,11 @@
 package org.lwjgl.llvm;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Instances of this interface may be set to the {@code visit} field of the {@link CXCursorAndRangeVisitor} struct.
@@ -23,21 +26,27 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  */
 @FunctionalInterface
 @NativeType("enum CXVisitorResult (*) (void *, CXCursor, CXSourceRange)")
-public interface CXCursorAndRangeVisitI extends CallbackI.I {
+public interface CXCursorAndRangeVisitI extends CallbackI {
 
-    String SIGNATURE = "(pp)i";
+    FFICIF CIF = apiCreateCIF(
+        FFI_DEFAULT_ABI,
+        ffi_type_uint32,
+        ffi_type_pointer, apiCreateStruct(ffi_type_uint32, ffi_type_sint32, apiCreateArray(ffi_type_pointer, 3)), apiCreateStruct(apiCreateArray(ffi_type_pointer, 2), ffi_type_uint32, ffi_type_uint32)
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default int callback(long args) {
-        return invoke(
-            CXCursor.create(dcbArgPointer(args)),
-            CXSourceRange.create(dcbArgPointer(args))
+    default void callback(long ret, long args) {
+        int __result = invoke(
+            memGetAddress(memGetAddress(args)),
+            CXCursor.create(memGetAddress(args + POINTER_SIZE)),
+            CXSourceRange.create(memGetAddress(args + 2 * POINTER_SIZE))
         );
+        apiClosureRet(ret, __result);
     }
 
-    @NativeType("enum CXVisitorResult") int invoke(CXCursor cursor, CXSourceRange range);
+    @NativeType("enum CXVisitorResult") int invoke(@NativeType("void *") long context, CXCursor cursor, CXSourceRange range);
 
 }

@@ -52,7 +52,7 @@ public abstract class VmaAllocateDeviceMemoryFunction extends Callback implement
     }
 
     protected VmaAllocateDeviceMemoryFunction() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     VmaAllocateDeviceMemoryFunction(long functionPointer) {

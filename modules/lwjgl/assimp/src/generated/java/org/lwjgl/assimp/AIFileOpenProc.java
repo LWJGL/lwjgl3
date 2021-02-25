@@ -49,7 +49,7 @@ public abstract class AIFileOpenProc extends Callback implements AIFileOpenProcI
     }
 
     protected AIFileOpenProc() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     AIFileOpenProc(long functionPointer) {

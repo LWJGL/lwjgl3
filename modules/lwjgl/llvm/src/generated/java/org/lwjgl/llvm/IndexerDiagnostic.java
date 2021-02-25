@@ -51,7 +51,7 @@ public abstract class IndexerDiagnostic extends Callback implements IndexerDiagn
     }
 
     protected IndexerDiagnostic() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     IndexerDiagnostic(long functionPointer) {

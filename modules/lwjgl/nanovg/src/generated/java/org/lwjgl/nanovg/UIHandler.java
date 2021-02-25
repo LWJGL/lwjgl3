@@ -50,7 +50,7 @@ public abstract class UIHandler extends Callback implements UIHandlerI {
     }
 
     protected UIHandler() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     UIHandler(long functionPointer) {

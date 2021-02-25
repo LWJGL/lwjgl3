@@ -51,7 +51,7 @@ public abstract class CUstreamCallback extends Callback implements CUstreamCallb
     }
 
     protected CUstreamCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     CUstreamCallback(long functionPointer) {

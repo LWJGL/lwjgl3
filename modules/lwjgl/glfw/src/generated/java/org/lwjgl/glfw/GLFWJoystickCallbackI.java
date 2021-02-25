@@ -6,8 +6,11 @@
 package org.lwjgl.glfw;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Instances of this interface may be passed to the {@link GLFW#glfwSetJoystickCallback SetJoystickCallback} method.
@@ -24,18 +27,22 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  */
 @FunctionalInterface
 @NativeType("GLFWjoystickfun")
-public interface GLFWJoystickCallbackI extends CallbackI.V {
+public interface GLFWJoystickCallbackI extends CallbackI {
 
-    String SIGNATURE = "(ii)v";
+    FFICIF CIF = apiCreateCIF(
+        FFI_DEFAULT_ABI,
+        ffi_type_void,
+        ffi_type_sint32, ffi_type_sint32
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default void callback(long args) {
+    default void callback(long ret, long args) {
         invoke(
-            dcbArgInt(args),
-            dcbArgInt(args)
+            memGetInt(memGetAddress(args)),
+            memGetInt(memGetAddress(args + POINTER_SIZE))
         );
     }
 

@@ -451,7 +451,7 @@ public class OpusCustom {
      * @param request CTL request
      */
     public static int opus_custom_encoder_ctl(@NativeType("OpusCustomEncoder *") long st, int request) {
-        return new CTLRequest(request).apply(st, Functions.custom_encoder_ctl);
+        return new CTLRequestV(request).apply(st, Functions.custom_encoder_ctl);
     }
 
     /**
@@ -471,7 +471,7 @@ public class OpusCustom {
      * @param request CTL request
      */
     public static int opus_custom_decoder_ctl(@NativeType("OpusCustomDecoder *") long st, int request) {
-        return new CTLRequest(request).apply(st, Functions.custom_decoder_ctl);
+        return new CTLRequestV(request).apply(st, Functions.custom_decoder_ctl);
     }
 
     /**

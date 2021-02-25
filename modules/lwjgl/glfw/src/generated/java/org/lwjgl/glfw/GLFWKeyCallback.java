@@ -55,7 +55,7 @@ public abstract class GLFWKeyCallback extends Callback implements GLFWKeyCallbac
     }
 
     protected GLFWKeyCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     GLFWKeyCallback(long functionPointer) {

@@ -64,12 +64,28 @@ public class CXCursorAndRangeVisitor extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
+    /** Returns the value of the {@code context} field. */
+    @NativeType("void *")
+    public long context() { return ncontext(address()); }
     /** Returns the value of the {@code visit} field. */
     @NativeType("enum CXVisitorResult (*) (void *, CXCursor, CXSourceRange)")
     public CXCursorAndRangeVisit visit() { return nvisit(address()); }
 
+    /** Sets the specified value to the {@code context} field. */
+    public CXCursorAndRangeVisitor context(@NativeType("void *") long value) { ncontext(address(), value); return this; }
     /** Sets the specified value to the {@code visit} field. */
     public CXCursorAndRangeVisitor visit(@NativeType("enum CXVisitorResult (*) (void *, CXCursor, CXSourceRange)") CXCursorAndRangeVisitI value) { nvisit(address(), value); return this; }
+
+    /** Initializes this struct with the specified values. */
+    public CXCursorAndRangeVisitor set(
+        long context,
+        CXCursorAndRangeVisitI visit
+    ) {
+        context(context);
+        visit(visit);
+
+        return this;
+    }
 
     /**
      * Copies the specified struct data to this struct.
@@ -226,14 +242,15 @@ public class CXCursorAndRangeVisitor extends Struct implements NativeResource {
 
     // -----------------------------------
 
+    /** Unsafe version of {@link #context}. */
+    public static long ncontext(long struct) { return memGetAddress(struct + CXCursorAndRangeVisitor.CONTEXT); }
     /** Unsafe version of {@link #visit}. */
-    public static CXCursorAndRangeVisit nvisit(long struct) { return CXCursorAndRangeVisit.create(memGetAddress(struct + CXCursorAndRangeVisitor.CONTEXT)); }
+    public static CXCursorAndRangeVisit nvisit(long struct) { return CXCursorAndRangeVisit.create(memGetAddress(struct + CXCursorAndRangeVisitor.VISIT)); }
 
+    /** Unsafe version of {@link #context(long) context}. */
+    public static void ncontext(long struct, long value) { memPutAddress(struct + CXCursorAndRangeVisitor.CONTEXT, check(value)); }
     /** Unsafe version of {@link #visit(CXCursorAndRangeVisitI) visit}. */
-    public static void nvisit(long struct, CXCursorAndRangeVisitI value) {
-        memPutAddress(struct + CXCursorAndRangeVisitor.VISIT, CXCursorAndRangeVisit.DELEGATE);
-        memPutAddress(struct + CXCursorAndRangeVisitor.CONTEXT, value.address());
-    }
+    public static void nvisit(long struct, CXCursorAndRangeVisitI value) { memPutAddress(struct + CXCursorAndRangeVisitor.VISIT, value.address()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -295,10 +312,15 @@ public class CXCursorAndRangeVisitor extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
+        /** Returns the value of the {@code context} field. */
+        @NativeType("void *")
+        public long context() { return CXCursorAndRangeVisitor.ncontext(address()); }
         /** Returns the value of the {@code visit} field. */
         @NativeType("enum CXVisitorResult (*) (void *, CXCursor, CXSourceRange)")
         public CXCursorAndRangeVisit visit() { return CXCursorAndRangeVisitor.nvisit(address()); }
 
+        /** Sets the specified value to the {@code context} field. */
+        public CXCursorAndRangeVisitor.Buffer context(@NativeType("void *") long value) { CXCursorAndRangeVisitor.ncontext(address(), value); return this; }
         /** Sets the specified value to the {@code visit} field. */
         public CXCursorAndRangeVisitor.Buffer visit(@NativeType("enum CXVisitorResult (*) (void *, CXCursor, CXSourceRange)") CXCursorAndRangeVisitI value) { CXCursorAndRangeVisitor.nvisit(address(), value); return this; }
 

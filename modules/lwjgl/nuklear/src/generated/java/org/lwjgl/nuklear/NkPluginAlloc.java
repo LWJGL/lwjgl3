@@ -49,7 +49,7 @@ public abstract class NkPluginAlloc extends Callback implements NkPluginAllocI {
     }
 
     protected NkPluginAlloc() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     NkPluginAlloc(long functionPointer) {

@@ -50,7 +50,7 @@ public abstract class IndexerAbortQuery extends Callback implements IndexerAbort
     }
 
     protected IndexerAbortQuery() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     IndexerAbortQuery(long functionPointer) {

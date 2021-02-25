@@ -53,7 +53,7 @@ public abstract class ExtentDalloc extends Callback implements ExtentDallocI {
     }
 
     protected ExtentDalloc() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     ExtentDalloc(long functionPointer) {

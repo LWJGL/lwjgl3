@@ -6,8 +6,11 @@
 package org.lwjgl.llvm;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Instances of this interface may be passed to the {@link ClangIndex#clang_Type_visitFields Type_visitFields} method.
@@ -22,18 +25,24 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  */
 @FunctionalInterface
 @NativeType("enum CXVisitorResult (*) (CXCursor, CXClientData)")
-public interface CXFieldVisitorI extends CallbackI.I {
+public interface CXFieldVisitorI extends CallbackI {
 
-    String SIGNATURE = "(p)i";
+    FFICIF CIF = apiCreateCIF(
+        FFI_DEFAULT_ABI,
+        ffi_type_uint32,
+        apiCreateStruct(ffi_type_uint32, ffi_type_sint32, apiCreateArray(ffi_type_pointer, 3)), ffi_type_pointer
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default int callback(long args) {
-        return invoke(
-            CXCursor.create(dcbArgPointer(args))
+    default void callback(long ret, long args) {
+        int __result = invoke(
+            CXCursor.create(memGetAddress(args)),
+            memGetAddress(memGetAddress(args + POINTER_SIZE))
         );
+        apiClosureRet(ret, __result);
     }
 
     /**
@@ -44,6 +53,6 @@ public interface CXFieldVisitorI extends CallbackI.I {
      * 
      * <p>The visitor should return one of the {@code CXVisitorResult} values to direct {@code {@link ClangIndex#clang_Type_visitFields Type_visitFields}}.</p>
      */
-    @NativeType("enum CXVisitorResult") int invoke(CXCursor C);
+    @NativeType("enum CXVisitorResult") int invoke(CXCursor C, @NativeType("CXClientData") long client_data);
 
 }

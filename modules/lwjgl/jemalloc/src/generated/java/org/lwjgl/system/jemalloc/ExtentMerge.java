@@ -55,7 +55,7 @@ public abstract class ExtentMerge extends Callback implements ExtentMergeI {
     }
 
     protected ExtentMerge() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     ExtentMerge(long functionPointer) {

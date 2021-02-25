@@ -6,8 +6,11 @@
 package org.lwjgl.stb;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Instances of this interface may be set to the {@code eof} field of the {@link STBIIOCallbacks} struct.
@@ -21,18 +24,23 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  */
 @FunctionalInterface
 @NativeType("int (*) (void *)")
-public interface STBIEOFCallbackI extends CallbackI.I {
+public interface STBIEOFCallbackI extends CallbackI {
 
-    String SIGNATURE = "(p)i";
+    FFICIF CIF = apiCreateCIF(
+        FFI_DEFAULT_ABI,
+        ffi_type_sint32,
+        ffi_type_pointer
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default int callback(long args) {
-        return invoke(
-            dcbArgPointer(args)
+    default void callback(long ret, long args) {
+        int __result = invoke(
+            memGetAddress(memGetAddress(args))
         );
+        apiClosureRet(ret, __result);
     }
 
     /**

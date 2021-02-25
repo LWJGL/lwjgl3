@@ -50,7 +50,7 @@ public abstract class LLVMOrcSymbolResolverFn extends Callback implements LLVMOr
     }
 
     protected LLVMOrcSymbolResolverFn() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     LLVMOrcSymbolResolverFn(long functionPointer) {

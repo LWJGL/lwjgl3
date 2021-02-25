@@ -53,7 +53,7 @@ public abstract class GLFWWindowSizeCallback extends Callback implements GLFWWin
     }
 
     protected GLFWWindowSizeCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     GLFWWindowSizeCallback(long functionPointer) {

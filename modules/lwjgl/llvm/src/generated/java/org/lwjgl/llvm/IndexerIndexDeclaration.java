@@ -50,7 +50,7 @@ public abstract class IndexerIndexDeclaration extends Callback implements Indexe
     }
 
     protected IndexerIndexDeclaration() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     IndexerIndexDeclaration(long functionPointer) {

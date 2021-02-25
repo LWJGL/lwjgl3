@@ -12,15 +12,7 @@ class CallbackFunction internal constructor(
     nativeType: String,
     val returns: NativeType,
     vararg val signature: Parameter
-) : GeneratorTargetNative(module, className) {
-
-    init {
-        require(skipNative || signature.singleOrNull { it.has<UserData>() } != null) {
-            "Callbacks with struct-by-value results or parameters must specify the user data parameter. [$className, module: ${module.java}]"
-        }
-    }
-
-    private val javaSignature = signature.asSequence().filter { !it.has<UserData>() }
+) : GeneratorTarget(module, className) {
 
     internal var functionDoc: (CallbackFunction) -> String = { "" }
     var additionalCode = ""
@@ -45,31 +37,47 @@ class CallbackFunction internal constructor(
     else
         nativeType
 
-    private val NativeType.dyncall
-        get() = when (this) {
-            is PointerType<*> -> 'p'
-            is PrimitiveType  -> when (mapping) {
-                PrimitiveMapping.BOOLEAN -> 'B'
-                PrimitiveMapping.BYTE    -> 'c'
-                PrimitiveMapping.SHORT   -> 's'
-                PrimitiveMapping.BOOLEAN4,
-                PrimitiveMapping.INT     -> 'i'
-                PrimitiveMapping.LONG    -> 'l'
-                PrimitiveMapping.CLONG   -> 'j'
-                PrimitiveMapping.POINTER -> 'p'
-                PrimitiveMapping.FLOAT   -> 'f'
-                PrimitiveMapping.DOUBLE  -> 'd'
+    private val NativeType.libffi
+        get(): String = when (this) {
+            is PointerType<*> -> "ffi_type_pointer"
+            is IntegerType    -> when (mapping) {
+                PrimitiveMapping.BYTE    -> if (this.unsigned) "ffi_type_uint8" else "ffi_type_sint8"
+                PrimitiveMapping.SHORT   -> if (this.unsigned) "ffi_type_uint16" else "ffi_type_sint16"
+                PrimitiveMapping.INT     -> if (this.unsigned) "ffi_type_uint32" else "ffi_type_sint32"
+                PrimitiveMapping.LONG    -> if (this.unsigned) "ffi_type_uint64" else "ffi_type_sint64"
+                PrimitiveMapping.CLONG   -> if (this.unsigned) "ffi_type_ulong" else "ffi_type_slong"
+                PrimitiveMapping.POINTER -> "ffi_type_pointer"
                 else                     -> throw IllegalArgumentException("Unsupported callback native type: $this")
             }
-            is StructType     -> 'p'
-            else              -> if (mapping === TypeMapping.VOID) 'v' else throw IllegalArgumentException("Unsupported callback native type: $this")
+            is PrimitiveType  -> when (mapping) {
+                PrimitiveMapping.BOOLEAN  -> "ffi_type_uint8"
+                PrimitiveMapping.BOOLEAN4 -> "ffi_type_uint32"
+                PrimitiveMapping.FLOAT    -> "ffi_type_float"
+                PrimitiveMapping.DOUBLE   -> "ffi_type_double"
+                else                      -> throw IllegalArgumentException("Unsupported callback native type: $this")
+            }
+            is StructType     -> if (this.definition.nativeLayout)
+                throw IllegalArgumentException("Unsupported struct type with native layout: $this")
+            else
+                "apiCreate${if (this.definition.union) "Union" else "Struct"}(${
+                    this.definition.members.joinToString(", ") { member ->
+                        member.nativeType.libffi.let {
+                            if (member is StructMemberArray) {
+                                "apiCreateArray($it, ${member.size})"
+                            } else {
+                                it
+                            }
+                        }
+                    }
+                })"
+            is VoidType       -> "ffi_type_void"
+            else              -> throw IllegalArgumentException("Unsupported native type: $this")
         }
 
-    private val NativeType.argType
-        get() = if (isPointer) "Pointer" else when (mapping) {
-            PrimitiveMapping.BOOLEAN -> "Bool"
-            PrimitiveMapping.LONG    -> "LongLong"
-            PrimitiveMapping.CLONG   -> "Long"
+    private val NativeType.memGetType
+        get() = if (isPointer) "Address" else when (mapping) {
+            PrimitiveMapping.BOOLEAN -> "Byte"
+            PrimitiveMapping.CLONG   -> "CLong"
             else                     -> (mapping as PrimitiveMapping).javaMethodName.upperCaseFirst
         }
 
@@ -117,12 +125,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 
         generateDocumentation(true)
         println("""${access.modifier}abstract class $className extends Callback implements ${className}I {""")
-        if (!skipNative) {
-            println("""
-    public static final long DELEGATE = getDelegate();
-
-    private static native long getDelegate();""")
-        }
         print("""
     /**
      * Creates a {@code $className} instance from the specified function pointer.
@@ -150,7 +152,7 @@ import static org.lwjgl.system.MemoryUtil.*;
     }
 
     protected $className() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     $className(long functionPointer) {
@@ -174,14 +176,21 @@ import static org.lwjgl.system.MemoryUtil.*;
         }
 
         @Override
-        public ${returns.nativeMethodType} invoke(${javaSignature.joinToString(", ") {
+        public ${if (returns is StructType) "void" else returns.nativeMethodType} invoke(${signature.asSequence()
+            .map {
                 "${if (it.nativeType.mapping == PrimitiveMapping.BOOLEAN4) "boolean"
                 else if (it.nativeType is StructType)
                     it.nativeType.definition.className
                 else
                     it.nativeType.nativeMethodType} ${it.name}"
-            }}) {
-            ${if (returns.mapping != TypeMapping.VOID) "return " else ""}delegate.invoke(${javaSignature.map { it.name }.joinToString(", ")});
+            }
+            .let { if (returns is StructType) it + "${returns.javaMethodType} $RESULT" else it }
+            .joinToString(", ")}) {
+            ${if (returns.mapping !== TypeMapping.VOID && returns !is StructType) "return " else ""}delegate.invoke(${signature.asSequence()
+                .map { it.name }
+                .let { if (returns is StructType) it + RESULT else it }
+                .joinToString(", ")
+            });
         }
 
     }
@@ -193,32 +202,57 @@ import static org.lwjgl.system.MemoryUtil.*;
         print(HEADER)
         println("package $packageName;\n")
 
-        println("import org.lwjgl.system.*;\n")
+        println("import org.lwjgl.system.*;")
+        println("import org.lwjgl.system.libffi.*;\n")
+        println("import static org.lwjgl.system.APIUtil.*;")
         if (signature.isNotEmpty()) {
-            println("import static org.lwjgl.system.dyncall.DynCallback.*;\n")
+            println("import static org.lwjgl.system.MemoryUtil.*;")
+            println("import static org.lwjgl.system.libffi.LibFFI.*;")
         }
+        println()
 
         generateDocumentation(false)
         print("""@FunctionalInterface
 @NativeType("$nativeType")
-${access.modifier}interface ${className}I extends CallbackI.${returns.jniSignature} {
+${access.modifier}interface ${className}I extends CallbackI {
 
-    String SIGNATURE = ${"\"(${javaSignature.map { it.nativeType.dyncall }.joinToString("")})${returns.dyncall}\"".let {
-            if (module.callingConvention === CallingConvention.STDCALL) "Callback.__stdcall($it)" else it
-        }};
+    FFICIF CIF = apiCreateCIF(
+        ${if (module.callingConvention === CallingConvention.STDCALL) "apiStdcall()" else "FFI_DEFAULT_ABI"},
+        ${returns.libffi},
+        ${signature.joinToString(", ") { it.nativeType.libffi }}
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default ${returns.nativeMethodType} callback(long args) {
+    default void callback(long ret, long args) {
         """)
-        if (returns.mapping != TypeMapping.VOID)
-            print("return ")
-        print("""invoke(${if (javaSignature.none()) "" else javaSignature.joinToString(",\n", prefix = "\n", postfix = "\n$t$t") {
-            val arg = "dcbArg${it.nativeType.argType}(args)${if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN4) " != 0" else ""}"
-            "$t$t$t${if (it.nativeType is StructType) "${it.nativeType.definition.className}.create($arg)" else arg}"
-        }});
+        if (returns.mapping !== TypeMapping.VOID && returns !is StructType) {
+            print("${returns.nativeMethodType} $RESULT = ")
+        }
+        print("""invoke(${if (signature.none() && returns !is StructType) "" else signature.asSequence()
+            .mapIndexed { i, it ->
+                val arg = "memGetAddress(args${
+                    when (i) {
+                        0    -> ""
+                        1    -> " + POINTER_SIZE"
+                        else -> " + $i * POINTER_SIZE"
+                    }
+                })"
+                if (it.nativeType is StructType) {
+                    "${it.nativeType.definition.className}.create($arg)"
+                } else {
+                    "memGet${it.nativeType.memGetType}($arg)${if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN || it.nativeType.mapping === PrimitiveMapping.BOOLEAN4) " != 0" else ""}"
+                }
+            }
+            .let { if (returns is StructType) it + "${returns.javaMethodType}.create(ret)" else it }
+            .joinToString(",\n$t$t$t", prefix = "\n$t$t$t", postfix = "\n$t$t")
+        });""");
+        if (returns.mapping !== TypeMapping.VOID && returns !is StructType) {
+            print("\n$t${t}apiClosureRet${if (returns.isPointer) "P" else if (returns.mapping === PrimitiveMapping.LONG) "L" else ""}(ret, $RESULT);")
+        }
+        print("""
     }
 """)
         val doc = functionDoc(this@CallbackFunction)
@@ -227,42 +261,13 @@ ${access.modifier}interface ${className}I extends CallbackI.${returns.jniSignatu
             print(doc)
         }
         print("""
-    ${returns.annotate(returns.nativeMethodType)} invoke(${javaSignature.joinToString(", ") {
-            "${it.nativeType.annotate(if (it.nativeType.mapping == PrimitiveMapping.BOOLEAN4) "boolean" else if (it.nativeType is StructType) it.nativeType.definition.className else it.nativeType.nativeMethodType)} ${it.name}"
-        }});
+    ${if (returns is StructType) "void" else returns.annotate(returns.nativeMethodType)} invoke(${signature.asSequence()
+            .map { "${it.nativeType.annotate(if (it.nativeType.mapping == PrimitiveMapping.BOOLEAN4) "boolean" else if (it.nativeType is StructType) it.nativeType.definition.className else it.nativeType.nativeMethodType)} ${it.name}" }
+            .let { if (returns is StructType) it + "${returns.annotate(returns.javaMethodType)} $RESULT" else it }
+            .joinToString(", ")});
 
 }""")
     }
-
-    override val skipNative: Boolean
-        get() = returns !is StructType && signature.none { it.nativeType is StructType }
-
-    override fun PrintWriter.generateNative() {
-        print(HEADER)
-        preamble.printNative(this)
-
-        println(
-            """
-static ${returns.jniFunctionType} delegate(${signature.asSequence().joinToString(", ") {
-    "${it.nativeType.name} ${it.name}"
-}}) {
-    ${if (returns.mapping === TypeMapping.VOID) "" else "return "}((${returns.name} (*)(${javaSignature.joinToString(", ") {
-        "${it.toNativeType(null)}${if (it.nativeType is StructType) " *" else ""}"
-    }}))(uintptr_t)${signature.single { it.has<UserData>() }.name})(${javaSignature.joinToString(", ") {
-        "${if (it.nativeType is StructType) "&" else ""}${it.name}"
-    }});
-}
-
-EXTERN_C_ENTER
-
-JNIEXPORT jlong JNICALL Java_${nativeFileNameJNI}_getDelegate(JNIEnv *$JNIENV, jclass clazz) {
-    UNUSED_PARAMS($JNIENV, clazz)
-    return (intptr_t)delegate;
-}
-
-EXTERN_C_EXIT""")
-    }
-
 }
 
 internal class CallbackInterface(

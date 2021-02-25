@@ -6686,9 +6686,6 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_visitChildren visitChildren} */
     public static int nclang_visitChildren(long parent, long visitor, long client_data) {
         long __functionAddress = Functions.visitChildren;
-        if (CHECKS) {
-            check(client_data);
-        }
         return nclang_visitChildren(parent, visitor, client_data, __functionAddress);
     }
 
@@ -6699,14 +6696,15 @@ public class ClangIndex {
      * The traversal may be recursive, if the visitor returns {@link #CXChildVisit_Recurse ChildVisit_Recurse}. The traversal may also be ended prematurely, if the visitor returns
      * {@link #CXChildVisit_Break ChildVisit_Break}.</p>
      *
-     * @param parent  the cursor whose child may be visited. All kinds of cursors can be visited, including invalid cursors (which, by definition, have no children).
-     * @param visitor the visitor function that will be invoked for each child of {@code parent}
+     * @param parent      the cursor whose child may be visited. All kinds of cursors can be visited, including invalid cursors (which, by definition, have no children).
+     * @param visitor     the visitor function that will be invoked for each child of {@code parent}
+     * @param client_data pointer data supplied by the client, which will be passed to the visitor each time it is invoked
      *
      * @return a non-zero value if the traversal was terminated prematurely by the visitor returning {@link #CXChildVisit_Break ChildVisit_Break}
      */
     @NativeType("unsigned")
-    public static boolean clang_visitChildren(CXCursor parent, @NativeType("enum CXChildVisitResult (*) (CXCursor, CXCursor, CXClientData)") CXCursorVisitorI visitor) {
-        return nclang_visitChildren(parent.address(), CXCursorVisitor.DELEGATE, visitor.address()) != 0;
+    public static boolean clang_visitChildren(CXCursor parent, @NativeType("enum CXChildVisitResult (*) (CXCursor, CXCursor, CXClientData)") CXCursorVisitorI visitor, @NativeType("CXClientData") long client_data) {
+        return nclang_visitChildren(parent.address(), visitor.address(), client_data) != 0;
     }
 
     // --- [ clang_getCursorUSR ] ---
@@ -9540,9 +9538,6 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Type_visitFields Type_visitFields} */
     public static int nclang_Type_visitFields(long T, long visitor, long client_data) {
         long __functionAddress = Functions.Type_visitFields;
-        if (CHECKS) {
-            check(client_data);
-        }
         return nclang_Type_visitFields(T, visitor, client_data, __functionAddress);
     }
 
@@ -9552,14 +9547,15 @@ public class ClangIndex {
      * <p>This function visits all the direct fields of the given cursor, invoking the given {@code visitor} function with the cursors of each visited field. The
      * traversal may be ended prematurely, if the visitor returns {@link #CXVisit_Break Visit_Break}.</p>
      *
-     * @param T       the record type whose field may be visited
-     * @param visitor the visitor function that will be invoked for each field of {@code T}
+     * @param T           the record type whose field may be visited
+     * @param visitor     the visitor function that will be invoked for each field of {@code T}
+     * @param client_data pointer data supplied by the client, which will be passed to the visitor each time it is invoked
      *
      * @return a non-zero value if the traversal was terminated prematurely by the visitor returning {@link #CXVisit_Break Visit_Break}
      */
     @NativeType("unsigned")
-    public static boolean clang_Type_visitFields(CXType T, @NativeType("enum CXVisitorResult (*) (CXCursor, CXClientData)") CXFieldVisitorI visitor) {
-        return nclang_Type_visitFields(T.address(), CXFieldVisitor.DELEGATE, visitor.address()) != 0;
+    public static boolean clang_Type_visitFields(CXType T, @NativeType("enum CXVisitorResult (*) (CXCursor, CXClientData)") CXFieldVisitorI visitor, @NativeType("CXClientData") long client_data) {
+        return nclang_Type_visitFields(T.address(), visitor.address(), client_data) != 0;
     }
 
 }

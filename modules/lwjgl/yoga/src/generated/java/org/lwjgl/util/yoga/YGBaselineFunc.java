@@ -49,7 +49,7 @@ public abstract class YGBaselineFunc extends Callback implements YGBaselineFuncI
     }
 
     protected YGBaselineFunc() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     YGBaselineFunc(long functionPointer) {

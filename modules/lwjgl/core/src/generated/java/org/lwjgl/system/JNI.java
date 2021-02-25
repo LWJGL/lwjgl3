@@ -10,7 +10,7 @@ import javax.annotation.*;
 /**
  * This class contains native methods that can be used to call dynamically loaded functions. It is used internally by the LWJGL bindings, but can also
  * be used to call other dynamically loaded functions. Not all possible signatures are available, only those needed by the LWJGL bindings. To call a
- * function that does not have a matching JNI method, {@link org.lwjgl.system.dyncall.DynCall DynCall} can used.
+ * function that does not have a matching JNI method, {@link org.lwjgl.system.libffi.LibFFI LibFFI} can used.
  * 
  * <p>All JNI methods in this class take an extra parameter, called {@code __functionAddress}. This must be a valid pointer to a native function with a
  * matching signature. Due to overloading, method names are partially mangled:</p>
@@ -115,7 +115,6 @@ public final class JNI {
     public static native long invokeJ(long __functionAddress);
     public static native long invokePJ(long param0, long __functionAddress);
     public static native long invokePJ(long param0, int param1, long __functionAddress);
-    public static native long invokePJ(long param0, float param1, int param2, float param3, int param4, long __functionAddress);
     public static native long invokePPJ(long param0, long param1, long __functionAddress);
     public static native long invokePPJ(long param0, long param1, int param2, long __functionAddress);
     public static native long invokePN(long param0, long __functionAddress);
@@ -139,6 +138,7 @@ public final class JNI {
     public static native long invokePP(long param0, short param1, boolean param2, long __functionAddress);
     public static native long invokePP(int param0, int param1, int param2, long param3, long __functionAddress);
     public static native long invokePP(long param0, int param1, int param2, int param3, long __functionAddress);
+    public static native long invokePP(long param0, float param1, int param2, float param3, int param4, long __functionAddress);
     public static native long invokeJP(short param0, short param1, short param2, byte param3, int param4, long param5, long __functionAddress);
     public static native long invokePP(long param0, int param1, byte param2, int param3, boolean param4, boolean param5, long __functionAddress);
     public static native long invokePP(long param0, int param1, int param2, int param3, int param4, int param5, long __functionAddress);

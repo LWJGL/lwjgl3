@@ -6,8 +6,11 @@
 package org.lwjgl.nuklear;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Instances of this interface may be passed to the {@link Nuklear#nk_plot_function plot_function} function.
@@ -22,19 +25,24 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  */
 @FunctionalInterface
 @NativeType("nk_value_getter")
-public interface NkValueGetterI extends CallbackI.F {
+public interface NkValueGetterI extends CallbackI {
 
-    String SIGNATURE = "(pi)f";
+    FFICIF CIF = apiCreateCIF(
+        FFI_DEFAULT_ABI,
+        ffi_type_float,
+        ffi_type_pointer, ffi_type_sint32
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default float callback(long args) {
-        return invoke(
-            dcbArgPointer(args),
-            dcbArgInt(args)
+    default void callback(long ret, long args) {
+        float __result = invoke(
+            memGetAddress(memGetAddress(args)),
+            memGetInt(memGetAddress(args + POINTER_SIZE))
         );
+        apiClosureRet(ret, __result);
     }
 
     float invoke(@NativeType("void *") long userdata, int index);

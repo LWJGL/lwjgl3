@@ -49,7 +49,7 @@ public abstract class CUhostFn extends Callback implements CUhostFnI {
     }
 
     protected CUhostFn() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     CUhostFn(long functionPointer) {

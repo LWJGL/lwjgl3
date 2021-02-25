@@ -52,7 +52,7 @@ public abstract class BGFXCacheWriteCallback extends Callback implements BGFXCac
     }
 
     protected BGFXCacheWriteCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     BGFXCacheWriteCallback(long functionPointer) {

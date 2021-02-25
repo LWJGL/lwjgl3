@@ -63,7 +63,7 @@ public abstract class VkDebugUtilsMessengerCallbackEXT extends Callback implemen
     }
 
     protected VkDebugUtilsMessengerCallbackEXT() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     VkDebugUtilsMessengerCallbackEXT(long functionPointer) {

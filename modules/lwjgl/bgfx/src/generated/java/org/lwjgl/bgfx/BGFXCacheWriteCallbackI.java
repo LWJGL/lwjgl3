@@ -6,8 +6,11 @@
 package org.lwjgl.bgfx;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Writes cached item.
@@ -24,20 +27,24 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  */
 @FunctionalInterface
 @NativeType("void (*) (bgfx_callback_interface_t *, uint64_t, void const *, uint32_t)")
-public interface BGFXCacheWriteCallbackI extends CallbackI.V {
+public interface BGFXCacheWriteCallbackI extends CallbackI {
 
-    String SIGNATURE = "(plpi)v";
+    FFICIF CIF = apiCreateCIF(
+        FFI_DEFAULT_ABI,
+        ffi_type_void,
+        ffi_type_pointer, ffi_type_uint64, ffi_type_pointer, ffi_type_uint32
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default void callback(long args) {
+    default void callback(long ret, long args) {
         invoke(
-            dcbArgPointer(args),
-            dcbArgLongLong(args),
-            dcbArgPointer(args),
-            dcbArgInt(args)
+            memGetAddress(memGetAddress(args)),
+            memGetLong(memGetAddress(args + POINTER_SIZE)),
+            memGetAddress(memGetAddress(args + 2 * POINTER_SIZE)),
+            memGetInt(memGetAddress(args + 3 * POINTER_SIZE))
         );
     }
 

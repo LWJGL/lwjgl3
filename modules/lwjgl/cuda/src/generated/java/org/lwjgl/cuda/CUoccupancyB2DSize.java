@@ -49,7 +49,7 @@ public abstract class CUoccupancyB2DSize extends Callback implements CUoccupancy
     }
 
     protected CUoccupancyB2DSize() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     CUoccupancyB2DSize(long functionPointer) {

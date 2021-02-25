@@ -24,10 +24,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public abstract class CXFieldVisitor extends Callback implements CXFieldVisitorI {
 
-    public static final long DELEGATE = getDelegate();
-
-    private static native long getDelegate();
-
     /**
      * Creates a {@code CXFieldVisitor} instance from the specified function pointer.
      *
@@ -54,7 +50,7 @@ public abstract class CXFieldVisitor extends Callback implements CXFieldVisitorI
     }
 
     protected CXFieldVisitor() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     CXFieldVisitor(long functionPointer) {
@@ -71,8 +67,8 @@ public abstract class CXFieldVisitor extends Callback implements CXFieldVisitorI
         }
 
         @Override
-        public int invoke(CXCursor C) {
-            return delegate.invoke(C);
+        public int invoke(CXCursor C, long client_data) {
+            return delegate.invoke(C, client_data);
         }
 
     }

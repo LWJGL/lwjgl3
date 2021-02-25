@@ -57,7 +57,7 @@ public abstract class VkInternalFreeNotification extends Callback implements VkI
     }
 
     protected VkInternalFreeNotification() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     VkInternalFreeNotification(long functionPointer) {

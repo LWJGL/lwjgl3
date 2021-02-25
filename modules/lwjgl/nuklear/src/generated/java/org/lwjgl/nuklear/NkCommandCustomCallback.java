@@ -52,7 +52,7 @@ public abstract class NkCommandCustomCallback extends Callback implements NkComm
     }
 
     protected NkCommandCustomCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     NkCommandCustomCallback(long functionPointer) {

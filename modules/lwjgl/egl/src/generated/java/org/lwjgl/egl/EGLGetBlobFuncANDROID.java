@@ -52,7 +52,7 @@ public abstract class EGLGetBlobFuncANDROID extends Callback implements EGLGetBl
     }
 
     protected EGLGetBlobFuncANDROID() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     EGLGetBlobFuncANDROID(long functionPointer) {

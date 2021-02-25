@@ -6,8 +6,11 @@
 package org.lwjgl.llvm;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Instances of this interface may be passed to the {@link ClangIndex#clang_visitChildren visitChildren} method.
@@ -23,19 +26,25 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  */
 @FunctionalInterface
 @NativeType("enum CXChildVisitResult (*) (CXCursor, CXCursor, CXClientData)")
-public interface CXCursorVisitorI extends CallbackI.I {
+public interface CXCursorVisitorI extends CallbackI {
 
-    String SIGNATURE = "(pp)i";
+    FFICIF CIF = apiCreateCIF(
+        FFI_DEFAULT_ABI,
+        ffi_type_uint32,
+        apiCreateStruct(ffi_type_uint32, ffi_type_sint32, apiCreateArray(ffi_type_pointer, 3)), apiCreateStruct(ffi_type_uint32, ffi_type_sint32, apiCreateArray(ffi_type_pointer, 3)), ffi_type_pointer
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default int callback(long args) {
-        return invoke(
-            CXCursor.create(dcbArgPointer(args)),
-            CXCursor.create(dcbArgPointer(args))
+    default void callback(long ret, long args) {
+        int __result = invoke(
+            CXCursor.create(memGetAddress(args)),
+            CXCursor.create(memGetAddress(args + POINTER_SIZE)),
+            memGetAddress(memGetAddress(args + 2 * POINTER_SIZE))
         );
+        apiClosureRet(ret, __result);
     }
 
     /**
@@ -46,6 +55,6 @@ public interface CXCursorVisitorI extends CallbackI.I {
      * 
      * <p>The visitor should return one of the {@code CXChildVisitResult} values to direct {@code clang_visitChildren()}.</p>
      */
-    @NativeType("enum CXChildVisitResult") int invoke(CXCursor cursor, CXCursor parent);
+    @NativeType("enum CXChildVisitResult") int invoke(CXCursor cursor, CXCursor parent, @NativeType("CXClientData") long client_data);
 
 }

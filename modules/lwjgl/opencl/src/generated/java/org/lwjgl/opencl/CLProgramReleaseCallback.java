@@ -50,7 +50,7 @@ public abstract class CLProgramReleaseCallback extends Callback implements CLPro
     }
 
     protected CLProgramReleaseCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     CLProgramReleaseCallback(long functionPointer) {

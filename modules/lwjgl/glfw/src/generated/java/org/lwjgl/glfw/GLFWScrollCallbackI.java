@@ -6,8 +6,11 @@
 package org.lwjgl.glfw;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Instances of this interface may be passed to the {@link GLFW#glfwSetScrollCallback SetScrollCallback} method.
@@ -25,19 +28,23 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  */
 @FunctionalInterface
 @NativeType("GLFWscrollfun")
-public interface GLFWScrollCallbackI extends CallbackI.V {
+public interface GLFWScrollCallbackI extends CallbackI {
 
-    String SIGNATURE = "(pdd)v";
+    FFICIF CIF = apiCreateCIF(
+        FFI_DEFAULT_ABI,
+        ffi_type_void,
+        ffi_type_pointer, ffi_type_double, ffi_type_double
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default void callback(long args) {
+    default void callback(long ret, long args) {
         invoke(
-            dcbArgPointer(args),
-            dcbArgDouble(args),
-            dcbArgDouble(args)
+            memGetAddress(memGetAddress(args)),
+            memGetDouble(memGetAddress(args + POINTER_SIZE)),
+            memGetDouble(memGetAddress(args + 2 * POINTER_SIZE))
         );
     }
 

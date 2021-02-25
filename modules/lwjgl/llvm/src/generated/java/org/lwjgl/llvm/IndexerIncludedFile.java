@@ -50,7 +50,7 @@ public abstract class IndexerIncludedFile extends Callback implements IndexerInc
     }
 
     protected IndexerIncludedFile() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     IndexerIncludedFile(long functionPointer) {

@@ -50,7 +50,7 @@ public abstract class ZSTDAllocFunction extends Callback implements ZSTDAllocFun
     }
 
     protected ZSTDAllocFunction() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     ZSTDAllocFunction(long functionPointer) {

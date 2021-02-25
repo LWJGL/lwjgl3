@@ -52,7 +52,7 @@ public abstract class CLContextCallback extends Callback implements CLContextCal
     }
 
     protected CLContextCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     CLContextCallback(long functionPointer) {

@@ -6,8 +6,11 @@
 package org.lwjgl.glfw;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Instances of this interface may be passed to the {@link GLFW#glfwSetWindowContentScaleCallback SetWindowContentScaleCallback} method.
@@ -25,19 +28,23 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  */
 @FunctionalInterface
 @NativeType("GLFWwindowcontentscalefun")
-public interface GLFWWindowContentScaleCallbackI extends CallbackI.V {
+public interface GLFWWindowContentScaleCallbackI extends CallbackI {
 
-    String SIGNATURE = "(pff)v";
+    FFICIF CIF = apiCreateCIF(
+        FFI_DEFAULT_ABI,
+        ffi_type_void,
+        ffi_type_pointer, ffi_type_float, ffi_type_float
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default void callback(long args) {
+    default void callback(long ret, long args) {
         invoke(
-            dcbArgPointer(args),
-            dcbArgFloat(args),
-            dcbArgFloat(args)
+            memGetAddress(memGetAddress(args)),
+            memGetFloat(memGetAddress(args + POINTER_SIZE)),
+            memGetFloat(memGetAddress(args + 2 * POINTER_SIZE))
         );
     }
 

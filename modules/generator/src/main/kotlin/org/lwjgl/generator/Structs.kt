@@ -131,7 +131,7 @@ class Struct(
     nativeSubPath: String = "",
     /** The native struct name. May be different than className. */
     val nativeName: String,
-    private val union: Boolean,
+    internal val union: Boolean,
     /** when true, a declaration is missing, we need to output one. */
     private val virtual: Boolean,
     /** when false, setters methods will not be generated. */
@@ -139,7 +139,7 @@ class Struct(
     /** if specified, this struct aliases it. */
     private val alias: Struct?,
     /** when true, the struct layout will be built using native code. */
-    private val nativeLayout: Boolean,
+    internal val nativeLayout: Boolean,
     /** when true, a nested StructBuffer subclass will be generated as well. */
     private val generateBuffer: Boolean
 ) : GeneratorTargetNative(module, className, nativeSubPath) {
@@ -209,7 +209,7 @@ class Struct(
     private val customMethods = ArrayList<String>()
     private val customMethodsBuffer = ArrayList<String>()
 
-    private val members = ArrayList<StructMember>()
+    internal val members = ArrayList<StructMember>()
 
     private val visibleMembers
         get() = members.asSequence().filter { it !is StructMemberPadding }
@@ -223,7 +223,7 @@ class Struct(
 
     private val settableMembers: Sequence<StructMember> by lazy(LazyThreadSafetyMode.NONE) {
         val mutableMembers = mutableMembers()
-        mutableMembers.filter { !(it.has<AutoSizeMember> { !keepSetter(mutableMembers) } || it.has<UserDataMember>()) }
+        mutableMembers.filter { !it.has<AutoSizeMember> { !keepSetter(mutableMembers) } }
     }
 
     private fun hasMutableMembers(members: Sequence<StructMember> = publicMembers) = this.members.isNotEmpty() && (mutable || mutableMembers(members).any())
@@ -344,7 +344,7 @@ class Struct(
         customMethodsBuffer.add(method.trim())
     }
 
-    private fun PrintWriter.printCustomMethods(customMethods: ArrayList<String>, static: Boolean, indent: String = "$t") {
+    private fun PrintWriter.printCustomMethods(customMethods: ArrayList<String>, static: Boolean, indent: String = t) {
         customMethods
             .filter { it.startsWith("static {") == static }
             .forEach {
@@ -1500,10 +1500,6 @@ ${validations.joinToString("\n")}
         parentField: String = ""
     ) {
         members.forEach {
-            if (it.has<UserDataMember>()) {
-                return@forEach
-            }
-
             val setter = it.field(parentMember)
             val field = getFieldOffset(it, parentStruct, parentField)
 
@@ -1528,16 +1524,7 @@ ${validations.joinToString("\n")}
                     if (it.nativeType is WrappedPointerType) {
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$setter(${it.nativeType.javaMethodType}) $setter}. */")
-                        print("${t}public static void n$setter(long $STRUCT, ${it.nullable(it.nativeType.javaMethodType)} value) {")
-
-                        val userDataMember = if (it.nativeType is FunctionType) getReferenceMember<UserDataMember>(it.name) else null
-                        if (userDataMember != null) {
-                            print("\n$t${t}memPutAddress($STRUCT + $field, ${(it.nativeType as FunctionType).function.className}.DELEGATE);")
-                            print("\n$t${t}memPutAddress($STRUCT + ${getFieldOffset(userDataMember, parentStruct, parentField)}, ${it.addressValue});")
-                            println("\n$t}")
-                        } else {
-                            println(" memPutAddress($STRUCT + $field, ${it.addressValue}); }")
-                        }
+                        println("${t}public static void n$setter(long $STRUCT, ${it.nullable(it.nativeType.javaMethodType)} value) { memPutAddress($STRUCT + $field, ${it.addressValue}); }")
                     } else {
                         val javaType = it.nativeType.nativeMethodType
 
@@ -1713,10 +1700,6 @@ ${validations.joinToString("\n")}
     ) {
         val n = if (accessMode === AccessMode.INSTANCE) "n" else "$className.n"
         members.forEach {
-            if (it.has<UserDataMember>()) {
-                return@forEach
-            }
-
             val setter = it.field(parentSetter)
             val member = it.fieldName(parentMember)
 
@@ -1832,10 +1815,6 @@ ${validations.joinToString("\n")}
         parentField: String = ""
     ) {
         members.forEach {
-            if (it.has<UserDataMember>()) {
-                return@forEach
-            }
-
             val getter = it.field(parentGetter)
             val field = getFieldOffset(it, parentStruct, parentField)
 
@@ -1860,13 +1839,7 @@ ${validations.joinToString("\n")}
                     if (it.public)
                         println("$t/** Unsafe version of {@link #$getter}. */")
                     if (it.nativeType is FunctionType) {
-                        val callbackField = getReferenceMember<UserDataMember>(it.name).let { userDataMember ->
-                            if (userDataMember == null)
-                                field
-                            else
-                                getFieldOffset(userDataMember, parentStruct, parentField)
-                        }
-                        println("$t${it.nullable("public")} static ${it.nativeType.className} n$getter(long $STRUCT) { return ${it.construct(it.nativeType.className)}(memGetAddress($STRUCT + $callbackField)); }")
+                        println("$t${it.nullable("public")} static ${it.nativeType.className} n$getter(long $STRUCT) { return ${it.construct(it.nativeType.className)}(memGetAddress($STRUCT + $field)); }")
                     } else if (it.getter != null) {
                         println("${t}public static ${it.nativeType.nativeMethodType} n$getter(long $STRUCT) { return ${it.getter}; }")
                     } else if (it.bits != -1) {
@@ -1998,10 +1971,6 @@ ${validations.joinToString("\n")}
     ) {
         val n = if (accessMode === AccessMode.INSTANCE) "n" else "$className.n"
         members.forEach {
-            if (it.has<UserDataMember>()) {
-                return@forEach
-            }
-
             val getter = it.field(parentGetter)
             val member = it.fieldName(parentMember)
 

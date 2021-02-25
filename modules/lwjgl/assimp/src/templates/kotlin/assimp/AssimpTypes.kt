@@ -1209,7 +1209,7 @@ val aiLogStreamCallback = Module.ASSIMP.callback {
         "Callback to be called for log stream messages",
 
         charUTF8.const.p("message", "The message to be logged"),
-        opaque_p("user", "The user data from the log stream"),
+        Unsafe..nullable..char.p("user", "The user data from the log stream"),
 
         nativeType = "aiLogStreamCallback"
     )
@@ -1219,7 +1219,7 @@ val aiLogStream = struct(Module.ASSIMP, "AILogStream", nativeName = "struct aiLo
     documentation = "Represents a log stream. A log stream receives all log messages and streams them somewhere"
 
     aiLogStreamCallback("callback", "callback to be called")
-    opaque_p("user", "user data to be passed to the callback")
+    nullable..char.p("user", "user data to be passed to the callback")
 }
 
 val aiPropertyStore = struct(Module.ASSIMP, "AIPropertyStore", nativeName = "struct aiPropertyStore") {

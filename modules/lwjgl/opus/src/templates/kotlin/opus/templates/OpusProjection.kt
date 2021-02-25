@@ -310,8 +310,7 @@ val OpusProjection = "OpusProjection".nativeClass(Module.OPUS, prefix = "OPUS", 
     )
 
     javaImport(
-        "static org.lwjgl.util.opus.Opus.*",
-        "static org.lwjgl.system.dyncall.DynCall.*"
+        "static org.lwjgl.util.opus.Opus.*"
     )
 
     customMethod("""
@@ -322,7 +321,7 @@ val OpusProjection = "OpusProjection".nativeClass(Module.OPUS, prefix = "OPUS", 
      * @param request CTL request
      */
     public static int opus_projection_encoder_ctl(@NativeType("OpusProjectionEncoder *") long st, int request) {
-        return new CTLRequest(request).apply(st, Functions.projection_encoder_ctl);
+        return new CTLRequestV(request).apply(st, Functions.projection_encoder_ctl);
     }
 
     /**
@@ -342,7 +341,7 @@ val OpusProjection = "OpusProjection".nativeClass(Module.OPUS, prefix = "OPUS", 
      * @param request CTL request
      */
     public static int opus_projection_decoder_ctl(@NativeType("OpusProjectionDecoder *") long st, int request) {
-        return new CTLRequest(request).apply(st, Functions.projection_decoder_ctl);
+        return new CTLRequestV(request).apply(st, Functions.projection_decoder_ctl);
     }
 
     /**
@@ -360,30 +359,20 @@ val OpusProjection = "OpusProjection".nativeClass(Module.OPUS, prefix = "OPUS", 
      *
      * @return the gain (in dB. S7.8-format) of the demixing matrix.
      */
-    public static CTLRequest OPUS_PROJECTION_GET_DEMIXING_MATRIX_GAIN(IntBuffer value) { return new CTLRequestGetI(OPUS_PROJECTION_GET_DEMIXING_MATRIX_GAIN_REQUEST, value); }
+    public static CTLRequest OPUS_PROJECTION_GET_DEMIXING_MATRIX_GAIN(IntBuffer value) { return new CTLRequestP(OPUS_PROJECTION_GET_DEMIXING_MATRIX_GAIN_REQUEST, memAddress(value)); }
 
     /**
      * Gets the size in bytes of the demixing matrix from the encoder.
      *
      * @return the size in bytes of the demixing matrix.
      */
-    public static CTLRequest OPUS_PROJECTION_GET_DEMIXING_MATRIX_SIZE(IntBuffer value) { return new CTLRequestGetI(OPUS_PROJECTION_GET_DEMIXING_MATRIX_SIZE_REQUEST, value); }
+    public static CTLRequest OPUS_PROJECTION_GET_DEMIXING_MATRIX_SIZE(IntBuffer value) { return new CTLRequestP(OPUS_PROJECTION_GET_DEMIXING_MATRIX_SIZE_REQUEST, memAddress(value)); }
 
     /**
      * Copies the demixing matrix to the supplied pointer location.
      *
      * @param matrix returns the demixing matrix to the supplied pointer location.
      */
-    public static CTLRequest OPUS_PROJECTION_GET_DEMIXING_MATRIX(ByteBuffer matrix) {
-        long address = memAddress(matrix);
-        int size = matrix.remaining();
-        return new CTLRequest(OPUS_PROJECTION_GET_DEMIXING_MATRIX_REQUEST) {
-            @Override
-            void apply(long vm) {
-                dcArgPointer(vm, address);
-                dcArgInt(vm, size);
-            }
-        };
-    }
+    public static CTLRequest OPUS_PROJECTION_GET_DEMIXING_MATRIX(ByteBuffer matrix) {  return new CTLRequestPI(OPUS_PROJECTION_GET_DEMIXING_MATRIX_REQUEST, memAddress(matrix), matrix.remaining()); }
     """)
 }

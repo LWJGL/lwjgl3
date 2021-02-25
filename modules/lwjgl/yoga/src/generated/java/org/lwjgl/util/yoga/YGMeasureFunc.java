@@ -11,13 +11,11 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-import static java.lang.Float.*;
-
 /**
  * <h3>Type</h3>
  * 
  * <pre><code>
- * uint64_t (*) (
+ * YGSize (*) (
  *     YGNodeRef node,
  *     float width,
  *     YGMeasureMode widthMode,
@@ -53,15 +51,11 @@ public abstract class YGMeasureFunc extends Callback implements YGMeasureFuncI {
     }
 
     protected YGMeasureFunc() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     YGMeasureFunc(long functionPointer) {
         super(functionPointer);
-    }
-
-    public static long toLong(YGSize size) {
-        return floatToRawIntBits(size.width()) | ((long)floatToRawIntBits(size.height()) << 32);
     }
 
     private static final class Container extends YGMeasureFunc {
@@ -74,8 +68,8 @@ public abstract class YGMeasureFunc extends Callback implements YGMeasureFuncI {
         }
 
         @Override
-        public long invoke(long node, float width, int widthMode, float height, int heightMode) {
-            return delegate.invoke(node, width, widthMode, height, heightMode);
+        public void invoke(long node, float width, int widthMode, float height, int heightMode, YGSize __result) {
+            delegate.invoke(node, width, widthMode, height, heightMode, __result);
         }
 
     }

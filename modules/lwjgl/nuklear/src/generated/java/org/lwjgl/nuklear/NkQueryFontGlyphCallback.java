@@ -53,7 +53,7 @@ public abstract class NkQueryFontGlyphCallback extends Callback implements NkQue
     }
 
     protected NkQueryFontGlyphCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     NkQueryFontGlyphCallback(long functionPointer) {

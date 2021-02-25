@@ -54,7 +54,7 @@ public abstract class GLFWWindowFocusCallback extends Callback implements GLFWWi
     }
 
     protected GLFWWindowFocusCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     GLFWWindowFocusCallback(long functionPointer) {

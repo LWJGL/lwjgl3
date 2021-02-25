@@ -55,7 +55,7 @@ public abstract class ExtentAlloc extends Callback implements ExtentAllocI {
     }
 
     protected ExtentAlloc() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     ExtentAlloc(long functionPointer) {

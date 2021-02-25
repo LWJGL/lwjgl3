@@ -52,7 +52,7 @@ public abstract class CGEventTapCallBack extends Callback implements CGEventTapC
     }
 
     protected CGEventTapCallBack() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     CGEventTapCallBack(long functionPointer) {

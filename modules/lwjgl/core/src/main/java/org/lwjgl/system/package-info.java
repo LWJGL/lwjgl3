@@ -12,7 +12,7 @@
  * <li>Functionality required for loading native shared libraries (the LWJGL JNI code, as well as 3rd-party libraries) and invoking native functions.</li>
  * <li>Functionality required for efficiently accessing and managing off-heap memory.</li>
  * <li>Platform and operating system specific API bindings.</li>
- * <li>The dyncall bindings, used for implementing native function callbacks via Java code.</li>
+ * <li>The libffi bindings, used for implementing native function callbacks via Java code.</li>
  * <li>Miscellaneous bindings for advanced users, or bindings that are not proven to be generally useful yet.</li>
  * <li>Functionality used internally by API bindings. This functionality is unfortunately public, as it is shared by all bindings.</li>
  * </ul>

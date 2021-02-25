@@ -209,9 +209,9 @@ internal fun parse(
     }
 
     stackPush().use { stack ->
-        clang_visitChildren(clang_getTranslationUnitCursor(context.tu, CXCursor.mallocStack(stack))) { cursor, _ ->
+        CXCursorVisitor.create { cursor, _, _ ->
             if (!header.shouldParse(cursor, options)) {
-                return@clang_visitChildren CXChildVisit_Continue
+                return@create CXChildVisit_Continue
             }
 
             stack.push().use { frame ->
@@ -244,7 +244,7 @@ internal fun parse(
                         val underlyingType = clang_getTypedefDeclUnderlyingType(cursor, CXType.mallocStack(frame))
                         when (underlyingType.kind()) {
                             CXType_Elaborated -> {
-                                clang_visitChildren(cursor) { child, _ ->
+                                CXCursorVisitor.create { child, _, _ ->
                                     when (clang_getCursorKind(child)) {
                                         CXCursor_EnumDecl  -> {
                                             if (options.parseConstants) {
@@ -288,7 +288,7 @@ internal fun parse(
                                         else               -> TODO()
                                     }
                                     CXChildVisit_Continue
-                                }
+                                }.use { clang_visitChildren(cursor, it, NULL) }
                             }
                             CXType_Pointer    -> {
                                 val pointee = clang_getPointeeType(underlyingType, CXType.mallocStack(frame))
@@ -347,7 +347,7 @@ internal fun parse(
                 Unit
             }
             CXChildVisit_Continue
-        }
+        }.use { clang_visitChildren(clang_getTranslationUnitCursor(context.tu, CXCursor.mallocStack(stack)), it, NULL) }
     }
 
     if (handles.isNotEmpty()) {

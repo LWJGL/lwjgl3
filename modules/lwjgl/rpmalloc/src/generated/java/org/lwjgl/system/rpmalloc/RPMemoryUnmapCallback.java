@@ -52,7 +52,7 @@ public abstract class RPMemoryUnmapCallback extends Callback implements RPMemory
     }
 
     protected RPMemoryUnmapCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     RPMemoryUnmapCallback(long functionPointer) {

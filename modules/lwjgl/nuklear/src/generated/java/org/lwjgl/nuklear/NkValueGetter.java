@@ -50,7 +50,7 @@ public abstract class NkValueGetter extends Callback implements NkValueGetterI {
     }
 
     protected NkValueGetter() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     NkValueGetter(long functionPointer) {

@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre><code>
  * struct aiLogStream {
  *     {@link AILogStreamCallbackI aiLogStreamCallback} callback;
- *     void * user;
+ *     char * user;
  * }</code></pre>
  */
 @NativeType("struct aiLogStream")
@@ -77,19 +77,24 @@ public class AILogStream extends Struct implements NativeResource {
     /** Returns the value of the {@code callback} field. */
     @NativeType("aiLogStreamCallback")
     public AILogStreamCallback callback() { return ncallback(address()); }
-    /** Returns the value of the {@code user} field. */
-    @NativeType("void *")
-    public long user() { return nuser(address()); }
+    /**
+     * Returns a {@link ByteBuffer} view of the data pointed to by the {@code user} field.
+     *
+     * @param capacity the number of elements in the returned buffer
+     */
+    @Nullable
+    @NativeType("char *")
+    public ByteBuffer user(int capacity) { return nuser(address(), capacity); }
 
     /** Sets the specified value to the {@code callback} field. */
     public AILogStream callback(@NativeType("aiLogStreamCallback") AILogStreamCallbackI value) { ncallback(address(), value); return this; }
-    /** Sets the specified value to the {@code user} field. */
-    public AILogStream user(@NativeType("void *") long value) { nuser(address(), value); return this; }
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code user} field. */
+    public AILogStream user(@Nullable @NativeType("char *") ByteBuffer value) { nuser(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public AILogStream set(
         AILogStreamCallbackI callback,
-        long user
+        @Nullable ByteBuffer user
     ) {
         callback(callback);
         user(user);
@@ -254,13 +259,13 @@ public class AILogStream extends Struct implements NativeResource {
 
     /** Unsafe version of {@link #callback}. */
     public static AILogStreamCallback ncallback(long struct) { return AILogStreamCallback.create(memGetAddress(struct + AILogStream.CALLBACK)); }
-    /** Unsafe version of {@link #user}. */
-    public static long nuser(long struct) { return memGetAddress(struct + AILogStream.USER); }
+    /** Unsafe version of {@link #user(int) user}. */
+    @Nullable public static ByteBuffer nuser(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + AILogStream.USER), capacity); }
 
     /** Unsafe version of {@link #callback(AILogStreamCallbackI) callback}. */
     public static void ncallback(long struct, AILogStreamCallbackI value) { memPutAddress(struct + AILogStream.CALLBACK, value.address()); }
-    /** Unsafe version of {@link #user(long) user}. */
-    public static void nuser(long struct, long value) { memPutAddress(struct + AILogStream.USER, check(value)); }
+    /** Unsafe version of {@link #user(ByteBuffer) user}. */
+    public static void nuser(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + AILogStream.USER, memAddressSafe(value)); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -269,7 +274,6 @@ public class AILogStream extends Struct implements NativeResource {
      */
     public static void validate(long struct) {
         check(memGetAddress(struct + AILogStream.CALLBACK));
-        check(memGetAddress(struct + AILogStream.USER));
     }
 
     /**
@@ -325,14 +329,19 @@ public class AILogStream extends Struct implements NativeResource {
         /** Returns the value of the {@code callback} field. */
         @NativeType("aiLogStreamCallback")
         public AILogStreamCallback callback() { return AILogStream.ncallback(address()); }
-        /** Returns the value of the {@code user} field. */
-        @NativeType("void *")
-        public long user() { return AILogStream.nuser(address()); }
+        /**
+         * Returns a {@link ByteBuffer} view of the data pointed to by the {@code user} field.
+         *
+         * @param capacity the number of elements in the returned buffer
+         */
+        @Nullable
+        @NativeType("char *")
+        public ByteBuffer user(int capacity) { return AILogStream.nuser(address(), capacity); }
 
         /** Sets the specified value to the {@code callback} field. */
         public AILogStream.Buffer callback(@NativeType("aiLogStreamCallback") AILogStreamCallbackI value) { AILogStream.ncallback(address(), value); return this; }
-        /** Sets the specified value to the {@code user} field. */
-        public AILogStream.Buffer user(@NativeType("void *") long value) { AILogStream.nuser(address(), value); return this; }
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code user} field. */
+        public AILogStream.Buffer user(@Nullable @NativeType("char *") ByteBuffer value) { AILogStream.nuser(address(), value); return this; }
 
     }
 

@@ -54,7 +54,7 @@ public abstract class GLFWCursorEnterCallback extends Callback implements GLFWCu
     }
 
     protected GLFWCursorEnterCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     GLFWCursorEnterCallback(long functionPointer) {

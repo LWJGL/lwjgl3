@@ -6,8 +6,11 @@
 package org.lwjgl.nuklear;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * <h3>Type</h3>
@@ -24,23 +27,28 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  */
 @FunctionalInterface
 @NativeType("nk_command_custom_callback")
-public interface NkCommandCustomCallbackI extends CallbackI.P {
+public interface NkCommandCustomCallbackI extends CallbackI {
 
-    String SIGNATURE = "(pssssp)p";
+    FFICIF CIF = apiCreateCIF(
+        FFI_DEFAULT_ABI,
+        ffi_type_pointer,
+        ffi_type_pointer, ffi_type_sint16, ffi_type_sint16, ffi_type_uint16, ffi_type_uint16, ffi_type_pointer
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default long callback(long args) {
-        return invoke(
-            dcbArgPointer(args),
-            dcbArgShort(args),
-            dcbArgShort(args),
-            dcbArgShort(args),
-            dcbArgShort(args),
-            dcbArgPointer(args)
+    default void callback(long ret, long args) {
+        long __result = invoke(
+            memGetAddress(memGetAddress(args)),
+            memGetShort(memGetAddress(args + POINTER_SIZE)),
+            memGetShort(memGetAddress(args + 2 * POINTER_SIZE)),
+            memGetShort(memGetAddress(args + 3 * POINTER_SIZE)),
+            memGetShort(memGetAddress(args + 4 * POINTER_SIZE)),
+            memGetAddress(memGetAddress(args + 5 * POINTER_SIZE))
         );
+        apiClosureRetP(ret, __result);
     }
 
     @NativeType("void *") long invoke(@NativeType("void *") long canvas, short x, short y, @NativeType("unsigned short") short w, @NativeType("unsigned short") short h, @NativeType("nk_handle") long callback_data);

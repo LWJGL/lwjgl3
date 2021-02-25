@@ -52,7 +52,7 @@ public abstract class CLSVMFreeCallback extends Callback implements CLSVMFreeCal
     }
 
     protected CLSVMFreeCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     CLSVMFreeCallback(long functionPointer) {

@@ -52,15 +52,9 @@ public class YogaNodeTest {
     }
 
     private static YGMeasureFunc getTestMeasureFunc(float testWidth, float testHeight) {
-        return YGMeasureFunc.create((node, width, widthMode, height, heightMode) -> {
-            try (MemoryStack stack = stackPush()) {
-                return YGMeasureFunc.toLong(
-                    YGSize.mallocStack(stack)
-                        .width(testWidth)
-                        .height(testHeight)
-                );
-            }
-        });
+        return YGMeasureFunc.create((node, width, widthMode, height, heightMode, __result) -> __result
+            .width(testWidth)
+            .height(testHeight));
     }
 
     @Test
@@ -414,15 +408,9 @@ public class YogaNodeTest {
         node.setBorder(YogaEdge.BOTTOM, 4);
         node.setDirection(YogaDirection.RTL);
         node.markLayoutSeen();
-        node.setMeasureFunction((n, width, widthMode, height, heightMode) -> {
-            try (MemoryStack stack = stackPush()) {
-                return YGMeasureFunc.toLong(
-                    YGSize.mallocStack(stack)
-                        .width(100)
-                        .height(100)
-                );
-            }
-        });
+        node.setMeasureFunction((n, width, widthMode, height, heightMode, __result) -> __result
+            .width(100)
+            .height(100));
         node.setBaselineFunction((n, width, height) -> height);
 
         node.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);

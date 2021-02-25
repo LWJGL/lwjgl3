@@ -5,6 +5,7 @@
 package org.lwjgl.system;
 
 import org.lwjgl.*;
+import org.lwjgl.system.libffi.*;
 import org.lwjgl.system.linux.*;
 import org.lwjgl.system.macosx.*;
 import org.lwjgl.system.windows.*;
@@ -22,8 +23,10 @@ import java.util.regex.*;
 import java.util.stream.*;
 
 import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.MemoryStack.*;
+import static org.lwjgl.system.MemoryUtil.wrap;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.Pointer.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Utility class useful to API bindings. [INTERNAL USE ONLY]
@@ -521,5 +524,129 @@ public final class APIUtil {
     }
 
     // ----------------------------------------
+
+    // These FFITypes will never be deallocated, use the allocator directly to ignore them when detecting memory leaks.
+
+    public static FFIType apiCreateStruct(FFIType... members) {
+        MemoryAllocator allocator = MemoryUtil.getAllocator();
+
+        PointerBuffer elementBuffer = PointerBuffer.create(
+            allocator.malloc((members.length + 1) * POINTER_SIZE),
+            members.length + 1
+        );
+        for (int i = 0; i < members.length; i++) {
+            elementBuffer.put(i, members[i]);
+        }
+        elementBuffer.put(members.length, NULL);
+
+        return FFIType.create(allocator.calloc(1, FFIType.SIZEOF))
+            .type(FFI_TYPE_STRUCT)
+            .elements(elementBuffer);
+    }
+
+    private static FFIType prep(FFIType type) {
+        try (MemoryStack stack = stackPush()) {
+            FFICIF cif = FFICIF.callocStack(stack);
+            if (ffi_prep_cif(cif, FFI_DEFAULT_ABI, type, null) != FFI_OK) {
+                throw new IllegalStateException("Failed to prepare LibFFI type.");
+            }
+        }
+        return type;
+    }
+
+    public static FFIType apiCreateUnion(FFIType... members) {
+        MemoryAllocator allocator = MemoryUtil.getAllocator();
+
+        // ffi_prep_cif is used to make libffi initialize size/alignment of each member
+        FFIType maxType      = prep(members[0]);
+        short   maxAlignment = members[0].alignment();
+        for (int i = 1; i < members.length; i++) {
+            FFIType type = prep(members[i]);
+            if (maxType.size() < type.size()) {
+                maxType = type;
+            }
+            if (maxAlignment < type.alignment()) {
+                maxAlignment = type.alignment();
+            }
+        }
+
+        return FFIType.create(allocator.malloc(FFIType.SIZEOF))
+            .size(maxType.size())
+            .alignment(maxAlignment)
+            .type(FFI_TYPE_STRUCT)
+            .elements(PointerBuffer.create(allocator.malloc(2 * POINTER_SIZE), 2)
+                .put(0, maxType)
+                .put(1, NULL));
+    }
+
+    public static FFIType apiCreateArray(FFIType type, int length) {
+        MemoryAllocator allocator = MemoryUtil.getAllocator();
+
+        PointerBuffer elementBuffer = PointerBuffer.create(
+            allocator.malloc((length + 1) * POINTER_SIZE),
+            length + 1
+        );
+        for (int i = 0; i < length; i++) {
+            elementBuffer.put(i, type);
+        }
+        elementBuffer.put(length, NULL);
+
+        return FFIType.create(allocator.calloc(1, FFIType.SIZEOF))
+            .type(FFI_TYPE_STRUCT)
+            .elements(elementBuffer);
+    }
+
+    /** Allocates and prepares a libffi CIF. */
+    public static FFICIF apiCreateCIF(int abi, FFIType rtype, FFIType... atypes) {
+        // These CIFs will never be deallocated, use the allocator directly to ignore them when detecting memory leaks.
+        MemoryAllocator allocator = MemoryUtil.getAllocator();
+
+        PointerBuffer pArgTypes = PointerBuffer.create(allocator.malloc(atypes.length * POINTER_SIZE), atypes.length);
+        for (int i = 0; i < atypes.length; i++) {
+            pArgTypes.put(i, atypes[i]);
+        }
+
+        FFICIF cif = FFICIF.create(allocator.malloc(FFICIF.SIZEOF));
+
+        int errcode = ffi_prep_cif(cif, abi, rtype, pArgTypes);
+        if (errcode != FFI_OK) {
+            throw new IllegalStateException("Failed to prepare libffi CIF: " + errcode);
+        }
+
+        return cif;
+    }
+
+    /** Allocates and prepares a libffi var CIF. */
+    public static FFICIF apiCreateCIFVar(int abi, int nfixedargs, FFIType rtype, FFIType... atypes) {
+        // These CIFs will never be deallocated, use the allocator directly to ignore them when detecting memory leaks.
+        MemoryAllocator allocator = MemoryUtil.getAllocator();
+
+        PointerBuffer pArgTypes = PointerBuffer.create(allocator.malloc(atypes.length * POINTER_SIZE), atypes.length);
+        for (int i = 0; i < atypes.length; i++) {
+            pArgTypes.put(i, atypes[i]);
+        }
+
+        FFICIF cif = FFICIF.create(allocator.malloc(FFICIF.SIZEOF));
+
+        int errcode = ffi_prep_cif_var(cif, abi, nfixedargs, rtype, pArgTypes);
+        if (errcode != FFI_OK) {
+            throw new IllegalStateException("Failed to prepare libffi var CIF: " + errcode);
+        }
+
+        return cif;
+    }
+
+    public static int apiStdcall() {
+        return Platform.get() == Platform.WINDOWS && Pointer.BITS32 ? FFI_STDCALL : FFI_DEFAULT_ABI;
+    }
+
+    public static void apiClosureRet(long ret, boolean __result) { memPutAddress(ret, __result ? 1L : 0L); }
+    public static void apiClosureRet(long ret, byte __result)    { memPutAddress(ret, __result & 0xFFL); }
+    public static void apiClosureRet(long ret, short __result)   { memPutAddress(ret, __result & 0xFFFFL); }
+    public static void apiClosureRet(long ret, int __result)     { memPutAddress(ret, __result & 0xFFFF_FFFFL); }
+    public static void apiClosureRetL(long ret, long __result)   { memPutLong(ret, __result); }
+    public static void apiClosureRetP(long ret, long __result)   { memPutAddress(ret, __result); }
+    public static void apiClosureRet(long ret, float __result)   { memPutFloat(ret, __result); }
+    public static void apiClosureRet(long ret, double __result)  { memPutDouble(ret, __result); }
 
 }

@@ -47,7 +47,7 @@ public abstract class YGPrintFunc extends Callback implements YGPrintFuncI {
     }
 
     protected YGPrintFunc() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     YGPrintFunc(long functionPointer) {

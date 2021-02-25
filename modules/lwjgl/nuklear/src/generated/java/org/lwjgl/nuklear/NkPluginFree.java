@@ -48,7 +48,7 @@ public abstract class NkPluginFree extends Callback implements NkPluginFreeI {
     }
 
     protected NkPluginFree() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     NkPluginFree(long functionPointer) {

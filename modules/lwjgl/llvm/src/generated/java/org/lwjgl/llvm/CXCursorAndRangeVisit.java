@@ -25,10 +25,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public abstract class CXCursorAndRangeVisit extends Callback implements CXCursorAndRangeVisitI {
 
-    public static final long DELEGATE = getDelegate();
-
-    private static native long getDelegate();
-
     /**
      * Creates a {@code CXCursorAndRangeVisit} instance from the specified function pointer.
      *
@@ -55,7 +51,7 @@ public abstract class CXCursorAndRangeVisit extends Callback implements CXCursor
     }
 
     protected CXCursorAndRangeVisit() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     CXCursorAndRangeVisit(long functionPointer) {
@@ -72,8 +68,8 @@ public abstract class CXCursorAndRangeVisit extends Callback implements CXCursor
         }
 
         @Override
-        public int invoke(CXCursor cursor, CXSourceRange range) {
-            return delegate.invoke(cursor, range);
+        public int invoke(long context, CXCursor cursor, CXSourceRange range) {
+            return delegate.invoke(context, cursor, range);
         }
 
     }

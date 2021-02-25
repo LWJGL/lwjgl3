@@ -48,7 +48,7 @@ public abstract class AIFileCloseProc extends Callback implements AIFileClosePro
     }
 
     protected AIFileCloseProc() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     AIFileCloseProc(long functionPointer) {

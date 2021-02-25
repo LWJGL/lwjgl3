@@ -54,7 +54,7 @@ public abstract class BGFXCaptureBeginCallback extends Callback implements BGFXC
     }
 
     protected BGFXCaptureBeginCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     BGFXCaptureBeginCallback(long functionPointer) {

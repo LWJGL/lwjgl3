@@ -4,6 +4,8 @@
  */
 package org.lwjgl.system;
 
+import org.lwjgl.system.libffi.*;
+
 import javax.annotation.*;
 import java.util.*;
 import java.util.Map.*;
@@ -13,8 +15,8 @@ import java.util.concurrent.atomic.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.StackWalkUtil.*;
-import static org.lwjgl.system.dyncall.DynCallback.*;
 import static org.lwjgl.system.libc.LibCStdlib.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /** Provides {@link MemoryAllocator} implementations for {@link MemoryUtil} to use. */
 final class MemoryManage {
@@ -85,60 +87,60 @@ final class MemoryManage {
             this.allocator = allocator;
 
             this.callbacks = new long[] {
-                new CallbackI.P() {
-                    @Override public String getSignature() {
-                        return "(p)p";
+                new CallbackI() {
+                    @Override public FFICIF getCallInterface() {
+                        return apiCreateCIF(FFI_DEFAULT_ABI, ffi_type_pointer, ffi_type_pointer);
                     }
-                    @Override public long callback(long args) {
-                        long size = dcbArgPointer(args);
-                        return malloc(size);
-                    }
-                }.address(),
-                new CallbackI.P() {
-                    @Override public String getSignature() {
-                        return "(pp)p";
-                    }
-                    @Override public long callback(long args) {
-                        long num  = dcbArgPointer(args);
-                        long size = dcbArgPointer(args);
-                        return calloc(num, size);
+                    @Override public void callback(long ret, long args) {
+                        long size = memGetAddress(memGetAddress(args));
+                        memPutAddress(ret, malloc(size));
                     }
                 }.address(),
-                new CallbackI.P() {
-                    @Override public String getSignature() {
-                        return "(pp)p";
+                new CallbackI() {
+                    @Override public FFICIF getCallInterface() {
+                        return apiCreateCIF(FFI_DEFAULT_ABI, ffi_type_pointer, ffi_type_pointer, ffi_type_pointer);
                     }
-                    @Override public long callback(long args) {
-                        long ptr  = dcbArgPointer(args);
-                        long size = dcbArgPointer(args);
-                        return realloc(ptr, size);
+                    @Override public void callback(long ret, long args) {
+                        long num  = memGetAddress(memGetAddress(args));
+                        long size = memGetAddress(memGetAddress(args + POINTER_SIZE));
+                        memPutAddress(ret, calloc(num, size));
                     }
                 }.address(),
-                new CallbackI.V() {
-                    @Override public String getSignature() {
-                        return "(p)v";
+                new CallbackI() {
+                    @Override public FFICIF getCallInterface() {
+                        return apiCreateCIF(FFI_DEFAULT_ABI, ffi_type_pointer, ffi_type_pointer, ffi_type_pointer);
                     }
-                    @Override public void callback(long args) {
-                        long ptr = dcbArgPointer(args);
+                    @Override public void callback(long ret, long args) {
+                        long ptr  = memGetAddress(memGetAddress(args));
+                        long size = memGetAddress(memGetAddress(args + POINTER_SIZE));
+                        memPutAddress(ret, realloc(ptr, size));
+                    }
+                }.address(),
+                new CallbackI() {
+                    @Override public FFICIF getCallInterface() {
+                        return apiCreateCIF(FFI_DEFAULT_ABI, ffi_type_void, ffi_type_pointer);
+                    }
+                    @Override public void callback(long ret, long args) {
+                        long ptr = memGetAddress(memGetAddress(args));
                         free(ptr);
                     }
                 }.address(),
-                new CallbackI.P() {
-                    @Override public String getSignature() {
-                        return "(pp)p";
+                new CallbackI() {
+                    @Override public FFICIF getCallInterface() {
+                        return apiCreateCIF(FFI_DEFAULT_ABI, ffi_type_pointer, ffi_type_pointer, ffi_type_pointer);
                     }
-                    @Override public long callback(long args) {
-                        long alignment = dcbArgPointer(args);
-                        long size      = dcbArgPointer(args);
-                        return aligned_alloc(alignment, size);
+                    @Override public void callback(long ret, long args) {
+                        long alignment = memGetAddress(memGetAddress(args));
+                        long size      = memGetAddress(memGetAddress(args + POINTER_SIZE));
+                        memPutAddress(ret, aligned_alloc(alignment, size));
                     }
                 }.address(),
-                new CallbackI.V() {
-                    @Override public String getSignature() {
-                        return "(p)v";
+                new CallbackI() {
+                    @Override public FFICIF getCallInterface() {
+                        return apiCreateCIF(FFI_DEFAULT_ABI, ffi_type_void, ffi_type_pointer);
                     }
-                    @Override public void callback(long args) {
-                        long ptr = dcbArgPointer(args);
+                    @Override public void callback(long ret, long args) {
+                        long ptr = memGetAddress(memGetAddress(args));
                         aligned_free(ptr);
                     }
                 }.address()

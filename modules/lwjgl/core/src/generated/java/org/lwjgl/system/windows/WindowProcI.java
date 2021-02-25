@@ -6,8 +6,11 @@
 package org.lwjgl.system.windows;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * An application-defined function that processes messages sent to a window.
@@ -24,21 +27,26 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  */
 @FunctionalInterface
 @NativeType("WNDPROC")
-public interface WindowProcI extends CallbackI.P {
+public interface WindowProcI extends CallbackI {
 
-    String SIGNATURE = Callback.__stdcall("(pipp)p");
+    FFICIF CIF = apiCreateCIF(
+        apiStdcall(),
+        ffi_type_pointer,
+        ffi_type_pointer, ffi_type_uint32, ffi_type_pointer, ffi_type_pointer
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default long callback(long args) {
-        return invoke(
-            dcbArgPointer(args),
-            dcbArgInt(args),
-            dcbArgPointer(args),
-            dcbArgPointer(args)
+    default void callback(long ret, long args) {
+        long __result = invoke(
+            memGetAddress(memGetAddress(args)),
+            memGetInt(memGetAddress(args + POINTER_SIZE)),
+            memGetAddress(memGetAddress(args + 2 * POINTER_SIZE)),
+            memGetAddress(memGetAddress(args + 3 * POINTER_SIZE))
         );
+        apiClosureRetP(ret, __result);
     }
 
     /**

@@ -53,7 +53,7 @@ public abstract class GLFWWindowCloseCallback extends Callback implements GLFWWi
     }
 
     protected GLFWWindowCloseCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     GLFWWindowCloseCallback(long functionPointer) {

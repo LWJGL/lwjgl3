@@ -56,7 +56,7 @@ public abstract class BGFXFatalCallback extends Callback implements BGFXFatalCal
     }
 
     protected BGFXFatalCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     BGFXFatalCallback(long functionPointer) {

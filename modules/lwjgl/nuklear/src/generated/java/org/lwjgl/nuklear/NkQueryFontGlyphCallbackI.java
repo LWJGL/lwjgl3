@@ -6,8 +6,11 @@
 package org.lwjgl.nuklear;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Instances of this interface may be set to the {@link NkUserFont} struct.
@@ -25,21 +28,25 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  */
 @FunctionalInterface
 @NativeType("nk_query_font_glyph_f")
-public interface NkQueryFontGlyphCallbackI extends CallbackI.V {
+public interface NkQueryFontGlyphCallbackI extends CallbackI {
 
-    String SIGNATURE = "(pfpii)v";
+    FFICIF CIF = apiCreateCIF(
+        FFI_DEFAULT_ABI,
+        ffi_type_void,
+        ffi_type_pointer, ffi_type_float, ffi_type_pointer, ffi_type_uint32, ffi_type_uint32
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default void callback(long args) {
+    default void callback(long ret, long args) {
         invoke(
-            dcbArgPointer(args),
-            dcbArgFloat(args),
-            dcbArgPointer(args),
-            dcbArgInt(args),
-            dcbArgInt(args)
+            memGetAddress(memGetAddress(args)),
+            memGetFloat(memGetAddress(args + POINTER_SIZE)),
+            memGetAddress(memGetAddress(args + 2 * POINTER_SIZE)),
+            memGetInt(memGetAddress(args + 3 * POINTER_SIZE)),
+            memGetInt(memGetAddress(args + 4 * POINTER_SIZE))
         );
     }
 

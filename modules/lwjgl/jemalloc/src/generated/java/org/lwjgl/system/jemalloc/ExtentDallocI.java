@@ -6,8 +6,11 @@
 package org.lwjgl.system.jemalloc;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Instances of this interface may be set to the {@link ExtentHooks} struct.
@@ -25,22 +28,27 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  */
 @FunctionalInterface
 @NativeType("extent_dalloc_t")
-public interface ExtentDallocI extends CallbackI.Z {
+public interface ExtentDallocI extends CallbackI {
 
-    String SIGNATURE = "(pppBi)B";
+    FFICIF CIF = apiCreateCIF(
+        FFI_DEFAULT_ABI,
+        ffi_type_uint8,
+        ffi_type_pointer, ffi_type_pointer, ffi_type_pointer, ffi_type_uint8, ffi_type_uint32
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default boolean callback(long args) {
-        return invoke(
-            dcbArgPointer(args),
-            dcbArgPointer(args),
-            dcbArgPointer(args),
-            dcbArgBool(args),
-            dcbArgInt(args)
+    default void callback(long ret, long args) {
+        boolean __result = invoke(
+            memGetAddress(memGetAddress(args)),
+            memGetAddress(memGetAddress(args + POINTER_SIZE)),
+            memGetAddress(memGetAddress(args + 2 * POINTER_SIZE)),
+            memGetByte(memGetAddress(args + 3 * POINTER_SIZE)) != 0,
+            memGetInt(memGetAddress(args + 4 * POINTER_SIZE))
         );
+        apiClosureRet(ret, __result);
     }
 
     /**

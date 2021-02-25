@@ -50,7 +50,7 @@ public abstract class NkDrawBeginCallback extends Callback implements NkDrawBegi
     }
 
     protected NkDrawBeginCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     NkDrawBeginCallback(long functionPointer) {

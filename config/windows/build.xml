@@ -159,6 +159,7 @@ EXPORTS
             <source>
                 <fileset dir=".">
                     <include name="${src.main}/*.c"/>
+                    <exclude name="${src.main}/org_lwjgl_system_SharedLibraryUtil.c"/>
                     <include name="${src.generated}/*.c"/>
                     <include name="${src.generated}/${platform}/*.c"/>
                     <include name="${module.lwjgl}/jawt/src/generated/c/*.c" if:true="${binding.jawt}"/>

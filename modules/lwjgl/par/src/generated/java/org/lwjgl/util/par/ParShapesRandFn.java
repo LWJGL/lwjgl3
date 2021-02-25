@@ -49,7 +49,7 @@ public abstract class ParShapesRandFn extends Callback implements ParShapesRandF
     }
 
     protected ParShapesRandFn() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     ParShapesRandFn(long functionPointer) {

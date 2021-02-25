@@ -54,7 +54,7 @@ public abstract class LLVMMemoryManagerAllocateDataSectionCallback extends Callb
     }
 
     protected LLVMMemoryManagerAllocateDataSectionCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     LLVMMemoryManagerAllocateDataSectionCallback(long functionPointer) {

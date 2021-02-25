@@ -52,7 +52,7 @@ public abstract class CLReportLiveObjectsAlteraCallback extends Callback impleme
     }
 
     protected CLReportLiveObjectsAlteraCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     CLReportLiveObjectsAlteraCallback(long functionPointer) {

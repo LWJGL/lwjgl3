@@ -6,8 +6,11 @@
 package org.lwjgl.vulkan;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Application-defined debug messenger callback function.
@@ -35,21 +38,26 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  */
 @FunctionalInterface
 @NativeType("PFN_vkDebugUtilsMessengerCallbackEXT")
-public interface VkDebugUtilsMessengerCallbackEXTI extends CallbackI.I {
+public interface VkDebugUtilsMessengerCallbackEXTI extends CallbackI {
 
-    String SIGNATURE = Callback.__stdcall("(iipp)i");
+    FFICIF CIF = apiCreateCIF(
+        apiStdcall(),
+        ffi_type_uint32,
+        ffi_type_uint32, ffi_type_uint32, ffi_type_pointer, ffi_type_pointer
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default int callback(long args) {
-        return invoke(
-            dcbArgInt(args),
-            dcbArgInt(args),
-            dcbArgPointer(args),
-            dcbArgPointer(args)
+    default void callback(long ret, long args) {
+        int __result = invoke(
+            memGetInt(memGetAddress(args)),
+            memGetInt(memGetAddress(args + POINTER_SIZE)),
+            memGetAddress(memGetAddress(args + 2 * POINTER_SIZE)),
+            memGetAddress(memGetAddress(args + 3 * POINTER_SIZE))
         );
+        apiClosureRet(ret, __result);
     }
 
     /**

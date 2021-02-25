@@ -50,7 +50,7 @@ public abstract class SpvcErrorCallback extends Callback implements SpvcErrorCal
     }
 
     protected SpvcErrorCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     SpvcErrorCallback(long functionPointer) {

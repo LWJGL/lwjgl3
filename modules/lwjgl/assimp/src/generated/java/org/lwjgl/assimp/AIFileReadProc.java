@@ -50,7 +50,7 @@ public abstract class AIFileReadProc extends Callback implements AIFileReadProcI
     }
 
     protected AIFileReadProc() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     AIFileReadProc(long functionPointer) {

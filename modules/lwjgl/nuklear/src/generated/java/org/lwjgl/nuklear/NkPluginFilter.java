@@ -50,7 +50,7 @@ public abstract class NkPluginFilter extends Callback implements NkPluginFilterI
     }
 
     protected NkPluginFilter() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     NkPluginFilter(long functionPointer) {

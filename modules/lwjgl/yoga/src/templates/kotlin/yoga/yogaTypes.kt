@@ -37,11 +37,10 @@ val YGValue = struct(Module.YOGA, "YGValue") {
     YGUnit("unit", "")
 }
 
-// TODO: Returns struct by value
 val YGMeasureFunc = Module.YOGA.callback {
-    uint64_t/*YGSize*/(
+    YGSize(
         "YGMeasureFunc",
-        "Use {@link YGMeasureFunc\\#toLong toLong} to create the return value.",
+        "",
 
         YGNodeRef("node", ""),
         float("width", ""),
@@ -50,14 +49,7 @@ val YGMeasureFunc = Module.YOGA.callback {
         YGMeasureMode("heightMode", ""),
 
         nativeType = "YGMeasureFunc"
-    ) {
-        javaImport("static java.lang.Float.*")
-        additionalCode = """
-    public static long toLong(YGSize size) {
-        return floatToRawIntBits(size.width()) | ((long)floatToRawIntBits(size.height()) << 32);
-    }
-    """
-    }
+    )
 }
 
 val YGBaselineFunc = Module.YOGA.callback {

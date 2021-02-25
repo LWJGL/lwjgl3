@@ -50,7 +50,7 @@ public abstract class ZSTDFreeFunction extends Callback implements ZSTDFreeFunct
     }
 
     protected ZSTDFreeFunction() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     ZSTDFreeFunction(long functionPointer) {

@@ -50,7 +50,7 @@ public abstract class RPMemoryMapCallback extends Callback implements RPMemoryMa
     }
 
     protected RPMemoryMapCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     RPMemoryMapCallback(long functionPointer) {

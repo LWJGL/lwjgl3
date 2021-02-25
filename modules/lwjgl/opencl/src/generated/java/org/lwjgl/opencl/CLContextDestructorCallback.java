@@ -50,7 +50,7 @@ public abstract class CLContextDestructorCallback extends Callback implements CL
     }
 
     protected CLContextDestructorCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     CLContextDestructorCallback(long functionPointer) {

@@ -52,7 +52,7 @@ public abstract class BGFXCacheReadCallback extends Callback implements BGFXCach
     }
 
     protected BGFXCacheReadCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     BGFXCacheReadCallback(long functionPointer) {

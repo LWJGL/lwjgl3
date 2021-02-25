@@ -47,7 +47,7 @@ public abstract class YGNodeCleanupFunc extends Callback implements YGNodeCleanu
     }
 
     protected YGNodeCleanupFunc() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     YGNodeCleanupFunc(long functionPointer) {

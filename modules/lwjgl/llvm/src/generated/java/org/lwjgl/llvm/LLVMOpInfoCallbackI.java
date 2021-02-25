@@ -6,8 +6,11 @@
 package org.lwjgl.llvm;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Instances of this interface may be passed to the {@link LLVMDisassembler#LLVMCreateDisasm CreateDisasm}, {@link LLVMDisassembler#LLVMCreateDisasmCPU CreateDisasmCPU} and {@link LLVMDisassembler#LLVMCreateDisasmCPUFeatures CreateDisasmCPUFeatures} methods.
@@ -26,23 +29,28 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  */
 @FunctionalInterface
 @NativeType("int (*) (void *, uint64_t, uint64_t, uint64_t, int, void *)")
-public interface LLVMOpInfoCallbackI extends CallbackI.I {
+public interface LLVMOpInfoCallbackI extends CallbackI {
 
-    String SIGNATURE = "(plllip)i";
+    FFICIF CIF = apiCreateCIF(
+        FFI_DEFAULT_ABI,
+        ffi_type_sint32,
+        ffi_type_pointer, ffi_type_uint64, ffi_type_uint64, ffi_type_uint64, ffi_type_sint32, ffi_type_pointer
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default int callback(long args) {
-        return invoke(
-            dcbArgPointer(args),
-            dcbArgLongLong(args),
-            dcbArgLongLong(args),
-            dcbArgLongLong(args),
-            dcbArgInt(args),
-            dcbArgPointer(args)
+    default void callback(long ret, long args) {
+        int __result = invoke(
+            memGetAddress(memGetAddress(args)),
+            memGetLong(memGetAddress(args + POINTER_SIZE)),
+            memGetLong(memGetAddress(args + 2 * POINTER_SIZE)),
+            memGetLong(memGetAddress(args + 3 * POINTER_SIZE)),
+            memGetInt(memGetAddress(args + 4 * POINTER_SIZE)),
+            memGetAddress(memGetAddress(args + 5 * POINTER_SIZE))
         );
+        apiClosureRet(ret, __result);
     }
 
     /**

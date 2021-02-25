@@ -48,7 +48,7 @@ public abstract class RMTFree extends Callback implements RMTFreeI {
     }
 
     protected RMTFree() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     RMTFree(long functionPointer) {

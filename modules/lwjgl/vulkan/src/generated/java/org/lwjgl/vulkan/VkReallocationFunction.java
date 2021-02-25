@@ -72,7 +72,7 @@ public abstract class VkReallocationFunction extends Callback implements VkReall
     }
 
     protected VkReallocationFunction() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     VkReallocationFunction(long functionPointer) {

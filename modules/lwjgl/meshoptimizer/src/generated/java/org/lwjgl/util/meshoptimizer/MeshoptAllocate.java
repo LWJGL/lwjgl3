@@ -49,7 +49,7 @@ public abstract class MeshoptAllocate extends Callback implements MeshoptAllocat
     }
 
     protected MeshoptAllocate() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     MeshoptAllocate(long functionPointer) {

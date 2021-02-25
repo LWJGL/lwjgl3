@@ -87,7 +87,7 @@ open class IntegerType(name: String, mapping: PrimitiveMapping, val unsigned: Bo
     override val p by lazy { PointerType(this.name, this.mapping.toPointer, elementType = this) }
     override val const by lazy { IntegerType(this.name.const, this.mapping, unsigned) }
 }
-val String.enumType get() = IntegerType(this, PrimitiveMapping.INT)
+val String.enumType get() = IntegerType(this, PrimitiveMapping.INT, unsigned = true)
 fun String.enumType(type: IntegerType) = typedef(type, this)
 
 // Specialization for string characters.

@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * long currentThread = invokePPP(NSThread, sel_getUid("currentThread"), objc_msgSend);</code></pre>
  * 
  * <p>The safe way to use objc_msgSend in C code is to cast it to an appropriate function pointer. This is exactly what the {@link org.lwjgl.system.JNI JNI}
- * class does. If a particular function signature is not available, {@link org.lwjgl.system.dyncall.DynCall DynCall} may be used to invoke it.</p>
+ * class does. If a particular function signature is not available, {@link org.lwjgl.system.libffi.LibFFI LibFFI} may be used to invoke it.</p>
  * 
  * <p>The functions not exposed are:</p>
  * 
