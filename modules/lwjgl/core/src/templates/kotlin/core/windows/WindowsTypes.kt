@@ -45,6 +45,7 @@ val TCHAR = CharType("TCHAR", CharMapping.UTF16)
 val LPCSTR = typedef(CHAR.const.p, "LPCSTR")
 val LPCWSTR = typedef(WCHAR.const.p, "LPCWSTR")
 val LPCTSTR = typedef(TCHAR.const.p, "LPCTSTR")
+val LPTSTR = typedef(TCHAR.p, "LPTSTR")
 
 val FARPROC = "FARPROC".handle
 val PROC = "PROC".handle

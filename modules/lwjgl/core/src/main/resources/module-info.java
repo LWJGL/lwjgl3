@@ -7,7 +7,6 @@ module org.lwjgl {
 
     exports org.lwjgl;
     exports org.lwjgl.system;
-    exports org.lwjgl.system.dyncall;
     exports org.lwjgl.system.jni;
     exports org.lwjgl.system.libc;
     exports org.lwjgl.system.libffi;

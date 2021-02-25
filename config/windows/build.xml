@@ -147,7 +147,6 @@ EXPORTS
         <!-- CORE -->
         <build module="core" flags="/Wall /WX /wd4710 /wd4711">
             <compileargs>
-                <arg value="/I${src.main}\dyncall"/>
                 <arg value="/I${src.main}\libffi"/>
                 <arg value="/I${src.main}\libffi\aarch64" if:set="build.arch.arm64"/>
                 <arg value="/I${src.main}\libffi\arm" if:set="build.arch.arm32"/>
@@ -167,15 +166,11 @@ EXPORTS
             </source>
             <beforeLink>
                 <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-dependencies-uptodate">
-                    <update-dependency module="core" artifact="core/dyncall_s.lib"/>
-                    <update-dependency module="core" artifact="core/dyncallback_s.lib"/>
-                    <update-dependency module="core" artifact="core/dynload_s.lib"/>
                     <update-dependency module="core" artifact="core/libffi.lib"/>
                 </parallel>
             </beforeLink>
             <link>
                 <fileset dir="${lib.native}/org/lwjgl">
-                    <include name="dyn*.lib"/>
                     <include name="libffi.lib"/>
                 </fileset>
             </link>

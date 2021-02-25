@@ -98,6 +98,73 @@ public class WinBase {
         }
     }
 
+    // --- [ GetModuleFileName ] ---
+
+    /**
+     * Unsafe version of: {@link #GetModuleFileName}
+     *
+     * @param nSize the size of the {@code lpFilename} buffer, in {@code TCHAR}s.
+     */
+    public static native int nGetModuleFileName(long hModule, long lpFilename, int nSize);
+
+    /**
+     * Retrieves the fully qualified path for the file that contains the specified module. The module must have been loaded by the current process.
+     *
+     * @param hModule    a handle to the loaded module whose path is being requested.
+     *                   
+     *                   <p>If this parameter is NULL, {@code GetModuleFileName} retrieves the path of the executable file of the current process.</p>
+     * @param lpFilename a pointer to a buffer that receives the fully qualified path of the module.
+     *                   
+     *                   <p>If the length of the path is less than the size that the {@code nSize} parameter specifies, the function succeeds and the path is returned as a
+     *                   null-terminated string.</p>
+     *                   
+     *                   <p>If the length of the path exceeds the size that the {@code nSize} parameter specifies, the function succeeds and the string is truncated to
+     *                   {@code nSize} characters including the terminating null character.</p>
+     *                   
+     *                   <p>The string returned will use the same format that was specified when the module was loaded. Therefore, the path can be a long or short file name,
+     *                   and can use the prefix "\?".</p>
+     *
+     * @return if the function succeeds, the return value is the length of the string that is copied to the buffer, in characters, not including the terminating null
+     *         character.
+     *         
+     *         <p>If the buffer is too small to hold the module name, the string is truncated to {@code nSize} characters including the terminating null character, the
+     *         function returns {@code nSize}, and the function sets the last error to {@code ERROR_INSUFFICIENT_BUFFER}.</p>
+     *         
+     *         <p>If the function fails, the return value is 0 (zero). To get extended error information, call {@link #GetLastError}.</p>
+     */
+    @NativeType("DWORD")
+    public static int GetModuleFileName(@NativeType("HMODULE") long hModule, @NativeType("LPTSTR") ByteBuffer lpFilename) {
+        return nGetModuleFileName(hModule, memAddress(lpFilename), lpFilename.remaining() >> 1);
+    }
+
+    /**
+     * Retrieves the fully qualified path for the file that contains the specified module. The module must have been loaded by the current process.
+     *
+     * @param hModule a handle to the loaded module whose path is being requested.
+     *                
+     *                <p>If this parameter is NULL, {@code GetModuleFileName} retrieves the path of the executable file of the current process.</p>
+     * @param nSize   the size of the {@code lpFilename} buffer, in {@code TCHAR}s.
+     *
+     * @return if the function succeeds, the return value is the length of the string that is copied to the buffer, in characters, not including the terminating null
+     *         character.
+     *         
+     *         <p>If the buffer is too small to hold the module name, the string is truncated to {@code nSize} characters including the terminating null character, the
+     *         function returns {@code nSize}, and the function sets the last error to {@code ERROR_INSUFFICIENT_BUFFER}.</p>
+     *         
+     *         <p>If the function fails, the return value is 0 (zero). To get extended error information, call {@link #GetLastError}.</p>
+     */
+    @NativeType("DWORD")
+    public static String GetModuleFileName(@NativeType("HMODULE") long hModule, @NativeType("DWORD") int nSize) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            ByteBuffer lpFilename = stack.malloc(nSize);
+            int __result = nGetModuleFileName(hModule, memAddress(lpFilename), nSize);
+            return memUTF16(lpFilename, __result);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     // --- [ LoadLibrary ] ---
 
     /** Unsafe version of: {@link #LoadLibrary} */

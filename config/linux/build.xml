@@ -169,7 +169,6 @@
         <!-- CORE -->
         <build module="core" flags="-Werror -Wfatal-errors -Wall -Wextra -pedantic">
             <source>
-                <arg value="-I${src.main.rel}/dyncall"/>
                 <arg value="-I${src.main.rel}/libffi"/>
                 <arg value="-I${src.main.rel}/libffi/aarch64" if:set="build.arch.arm64"/>
                 <arg value="-I${src.main.rel}/libffi/arm" if:set="build.arch.arm32"/>
@@ -185,15 +184,11 @@
             </source>
             <beforeLink>
                 <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-dependencies-uptodate">
-                    <update-dependency module="core" artifact="core/libdyncall_s.a"/>
-                    <update-dependency module="core" artifact="core/libdyncallback_s.a"/>
-                    <update-dependency module="core" artifact="core/libdynload_s.a"/>
                     <update-dependency module="core" artifact="core/libffi.a"/>
                 </parallel>
             </beforeLink>
             <link>
                 <fileset dir="${lib.native}/org/lwjgl">
-                    <include name="libdyn*.a"/>
                     <include name="libffi.a"/>
                 </fileset>
                 <arg value="-ldl"/>

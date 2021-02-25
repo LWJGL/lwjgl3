@@ -9,7 +9,6 @@
         <packages>
             <package name="org.lwjgl"/>
             <package name="org.lwjgl.system"/>
-            <package name="org.lwjgl.system.dyncall"/>
             <package name="org.lwjgl.system.libc"/>
             <package name="org.lwjgl.system.libffi"/>
         </packages>

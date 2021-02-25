@@ -6,6 +6,7 @@ package org.lwjgl.system.macosx;
 
 import org.lwjgl.system.*;
 
+import javax.annotation.*;
 import java.nio.*;
 
 import static org.lwjgl.system.MemoryStack.*;
@@ -32,6 +33,12 @@ public class MacOSXLibraryDL extends MacOSXLibrary {
             throw new UnsatisfiedLinkError("Failed to dynamically load library: " + name + "(error = " + dlerror() + ")");
         }
         return handle;
+    }
+
+    @Nullable
+    @Override
+    public String getPath() {
+        return SharedLibraryUtil.getLibraryPath(address());
     }
 
     @Override

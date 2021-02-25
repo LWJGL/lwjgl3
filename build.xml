@@ -212,7 +212,6 @@
             <compilerarg value="-Xreport-perf"/>
             <compilerarg value="-progressive"/>
 
-            <src path="${core.kotlin.path}/dyncall"/>
             <src path="${core.kotlin.path}/jni"/>
             <src path="${core.kotlin.path}/libc"/>
             <src path="${core.kotlin.path}/libffi"/>
