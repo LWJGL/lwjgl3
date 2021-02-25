@@ -4,7 +4,7 @@
 
 ### Version History
 
-* YYYY-MM-DD [3.2.4](3.2.4.md) (work in progress)
+* YYYY-MM-DD [3.3.0](3.3.0.md) (work in progress)
 * 2019-09-01 [3.2.3](3.2.3.md) (latest)
 * 2019-05-05 [3.2.2](3.2.2.md)
 * 2018-12-08 [3.2.1](3.2.1.md)
