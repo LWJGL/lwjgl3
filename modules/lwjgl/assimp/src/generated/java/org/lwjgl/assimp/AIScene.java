@@ -55,6 +55,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>This data contains global metadata which belongs to the scene like unit-conversions, versions, vendors or other model-specific data. This can be used
  * to store format-specific metadata as well.</p></li>
+ * <li>{@code mName} &ndash; The name of the scene itself.</li>
  * <li>{@code mPrivate} &ndash; Internal use only, do not touch!</li>
  * </ul>
  * 
@@ -77,6 +78,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned int mNumCameras;
  *     {@link AICamera struct aiCamera} ** mCameras;
  *     {@link AIMetaData struct aiMetadata} * mMetaData;
+ *     {@link AIString struct aiString} mName;
  *     char * mPrivate;
  * }</code></pre>
  */
@@ -106,6 +108,7 @@ public class AIScene extends Struct implements NativeResource {
         MNUMCAMERAS,
         MCAMERAS,
         MMETADATA,
+        MNAME,
         MPRIVATE;
 
     static {
@@ -125,6 +128,7 @@ public class AIScene extends Struct implements NativeResource {
             __member(4),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
+            __member(AIString.SIZEOF, AIString.ALIGNOF),
             __member(POINTER_SIZE)
         );
 
@@ -146,7 +150,8 @@ public class AIScene extends Struct implements NativeResource {
         MNUMCAMERAS = layout.offsetof(12);
         MCAMERAS = layout.offsetof(13);
         MMETADATA = layout.offsetof(14);
-        MPRIVATE = layout.offsetof(15);
+        MNAME = layout.offsetof(15);
+        MPRIVATE = layout.offsetof(16);
     }
 
     /**
@@ -215,6 +220,9 @@ public class AIScene extends Struct implements NativeResource {
     @Nullable
     @NativeType("struct aiMetadata *")
     public AIMetaData mMetaData() { return nmMetaData(address()); }
+    /** Returns a {@link AIString} view of the {@code mName} field. */
+    @NativeType("struct aiString")
+    public AIString mName() { return nmName(address()); }
 
     /** Sets the specified value to the {@code mFlags} field. */
     public AIScene mFlags(@NativeType("unsigned int") int value) { nmFlags(address(), value); return this; }
@@ -234,6 +242,10 @@ public class AIScene extends Struct implements NativeResource {
     public AIScene mCameras(@Nullable @NativeType("struct aiCamera **") PointerBuffer value) { nmCameras(address(), value); return this; }
     /** Sets the address of the specified {@link AIMetaData} to the {@code mMetaData} field. */
     public AIScene mMetaData(@Nullable @NativeType("struct aiMetadata *") AIMetaData value) { nmMetaData(address(), value); return this; }
+    /** Copies the specified {@link AIString} to the {@code mName} field. */
+    public AIScene mName(@NativeType("struct aiString") AIString value) { nmName(address(), value); return this; }
+    /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public AIScene mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
 
     /** Initializes this struct with the specified values. */
     public AIScene set(
@@ -245,7 +257,8 @@ public class AIScene extends Struct implements NativeResource {
         @Nullable PointerBuffer mTextures,
         @Nullable PointerBuffer mLights,
         @Nullable PointerBuffer mCameras,
-        @Nullable AIMetaData mMetaData
+        @Nullable AIMetaData mMetaData,
+        AIString mName
     ) {
         mFlags(mFlags);
         mRootNode(mRootNode);
@@ -256,6 +269,7 @@ public class AIScene extends Struct implements NativeResource {
         mLights(mLights);
         mCameras(mCameras);
         mMetaData(mMetaData);
+        mName(mName);
 
         return this;
     }
@@ -445,6 +459,8 @@ public class AIScene extends Struct implements NativeResource {
     @Nullable public static PointerBuffer nmCameras(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIScene.MCAMERAS), nmNumCameras(struct)); }
     /** Unsafe version of {@link #mMetaData}. */
     @Nullable public static AIMetaData nmMetaData(long struct) { return AIMetaData.createSafe(memGetAddress(struct + AIScene.MMETADATA)); }
+    /** Unsafe version of {@link #mName}. */
+    public static AIString nmName(long struct) { return AIString.create(struct + AIScene.MNAME); }
     public static ByteBuffer nmPrivate(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + AIScene.MPRIVATE), capacity); }
 
     /** Unsafe version of {@link #mFlags(int) mFlags}. */
@@ -477,6 +493,8 @@ public class AIScene extends Struct implements NativeResource {
     public static void nmCameras(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + AIScene.MCAMERAS, memAddressSafe(value)); nmNumCameras(struct, value == null ? 0 : value.remaining()); }
     /** Unsafe version of {@link #mMetaData(AIMetaData) mMetaData}. */
     public static void nmMetaData(long struct, @Nullable AIMetaData value) { memPutAddress(struct + AIScene.MMETADATA, memAddressSafe(value)); }
+    /** Unsafe version of {@link #mName(AIString) mName}. */
+    public static void nmName(long struct, AIString value) { memCopy(value.address(), struct + AIScene.MNAME, AIString.SIZEOF); }
     public static void nmPrivate(long struct, ByteBuffer value) { memPutAddress(struct + AIScene.MPRIVATE, memAddress(value)); }
 
     /**
@@ -616,6 +634,9 @@ public class AIScene extends Struct implements NativeResource {
         @Nullable
         @NativeType("struct aiMetadata *")
         public AIMetaData mMetaData() { return AIScene.nmMetaData(address()); }
+        /** Returns a {@link AIString} view of the {@code mName} field. */
+        @NativeType("struct aiString")
+        public AIString mName() { return AIScene.nmName(address()); }
 
         /** Sets the specified value to the {@code mFlags} field. */
         public AIScene.Buffer mFlags(@NativeType("unsigned int") int value) { AIScene.nmFlags(address(), value); return this; }
@@ -635,6 +656,10 @@ public class AIScene extends Struct implements NativeResource {
         public AIScene.Buffer mCameras(@Nullable @NativeType("struct aiCamera **") PointerBuffer value) { AIScene.nmCameras(address(), value); return this; }
         /** Sets the address of the specified {@link AIMetaData} to the {@code mMetaData} field. */
         public AIScene.Buffer mMetaData(@Nullable @NativeType("struct aiMetadata *") AIMetaData value) { AIScene.nmMetaData(address(), value); return this; }
+        /** Copies the specified {@link AIString} to the {@code mName} field. */
+        public AIScene.Buffer mName(@NativeType("struct aiString") AIString value) { AIScene.nmName(address(), value); return this; }
+        /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public AIScene.Buffer mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
 
     }
 

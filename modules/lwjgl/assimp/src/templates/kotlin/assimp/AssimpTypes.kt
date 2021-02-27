@@ -1037,6 +1037,7 @@ val aiScene = struct(Module.ASSIMP, "AIScene", nativeName = "struct aiScene") {
         to store format-specific metadata as well.
         """
     )
+    aiString("mName", "The name of the scene itself.")
 
     char.p("mPrivate", "Internal use only, do not touch!").private()
 }

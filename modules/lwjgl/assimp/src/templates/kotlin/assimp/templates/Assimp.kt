@@ -588,6 +588,16 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
 
     StringConstant(
         """
+        Set whether the fbx importer will read weights.
+
+        Property type: bool. The default value is true (1)
+        """,
+
+        "AI_CONFIG_IMPORT_FBX_READ_WEIGHTS".."IMPORT_FBX_READ_WEIGHTS"
+    ).noPrefix()
+
+    StringConstant(
+        """
         Set whether the fbx importer will act in strict mode in which only FBX 2013 is supported and any other sub formats are rejected. FBX 2013 is the
         primary target for the importer, so this format is best supported and well-tested.
 
@@ -2870,6 +2880,14 @@ aiAttachLogStream(&c);""")}
         "AI_MATKEY_GLTF_PBRSPECULARGLOSSINESS".."\$mat.gltf.pbrSpecularGlossiness",
         "AI_MATKEY_GLTF_PBRSPECULARGLOSSINESS_GLOSSINESS_FACTOR".."\$mat.gltf.pbrMetallicRoughness.glossinessFactor",
         "AI_MATKEY_GLTF_UNLIT".."\$mat.gltf.unlit",
+        "AI_MATKEY_GLTF_MATERIAL_SHEEN".."\$mat.gltf.materialSheen",
+        "AI_MATKEY_GLTF_MATERIAL_SHEEN_COLOR_FACTOR".."\$mat.gltf.materialSheen.sheenColorFactor",
+        "AI_MATKEY_GLTF_MATERIAL_SHEEN_ROUGHNESS_FACTOR".."\$mat.gltf.materialSheen.sheenRoughnessFactor",
+        "AI_MATKEY_GLTF_MATERIAL_CLEARCOAT".."\$mat.gltf.materialClearcoat",
+        "AI_MATKEY_GLTF_MATERIAL_CLEARCOAT_FACTOR".."\$mat.gltf.materialClearcoat.clearcoatFactor",
+        "AI_MATKEY_GLTF_MATERIAL_CLEARCOAT_ROUGHNESS_FACTOR".."\$mat.gltf.materialClearcoat.clearcoatRoughnessFactor",
+        "AI_MATKEY_GLTF_MATERIAL_TRANSMISSION".."\$mat.gltf.materialTransmission",
+        "AI_MATKEY_GLTF_MATERIAL_TRANSMISSION_FACTOR".."\$mat.gltf.materialTransmission.transmissionFactor",
 
         "_AI_MATKEY_GLTF_TEXTURE_TEXCOORD_BASE".."\$tex.file.texCoord",
         "_AI_MATKEY_GLTF_MAPPINGNAME_BASE".."\$tex.mappingname",
@@ -2883,7 +2901,13 @@ aiAttachLogStream(&c);""")}
     IntConstant(
         "",
         "AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_BASE_COLOR_TEXTURE".."aiTextureType_DIFFUSE",
-        "AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLICROUGHNESS_TEXTURE".."aiTextureType_UNKNOWN"
+        "AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLICROUGHNESS_TEXTURE".."aiTextureType_UNKNOWN",
+        "AI_MATKEY_GLTF_MATERIAL_SHEEN_COLOR_TEXTURE".."aiTextureType_UNKNOWN",
+        "AI_MATKEY_GLTF_MATERIAL_SHEEN_ROUGHNESS_TEXTURE".."aiTextureType_UNKNOWN",
+        "AI_MATKEY_GLTF_MATERIAL_CLEARCOAT_TEXTURE".."aiTextureType_UNKNOWN",
+        "AI_MATKEY_GLTF_MATERIAL_CLEARCOAT_ROUGHNESS_TEXTURE".."aiTextureType_UNKNOWN",
+        "AI_MATKEY_GLTF_MATERIAL_CLEARCOAT_NORMAL_TEXTURE".."aiTextureType_UNKNOWN",
+        "AI_MATKEY_GLTF_MATERIAL_TRANSMISSION_TEXTURE".."aiTextureType_UNKNOWN"
     ).noPrefix()
 
     charASCII.const.p(
