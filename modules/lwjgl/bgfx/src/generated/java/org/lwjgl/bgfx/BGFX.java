@@ -24,7 +24,7 @@ import static org.lwjgl.system.Pointer.*;
 public class BGFX {
 
     /** API version */
-    public static final int BGFX_API_VERSION = 109;
+    public static final int BGFX_API_VERSION = 112;
 
     /** Invalid handle */
     public static final short BGFX_INVALID_HANDLE = (short)0xFFFF;
@@ -387,31 +387,31 @@ public class BGFX {
         BGFX_CAPS_DRAW_INDIRECT            = 0x10L,
         BGFX_CAPS_FRAGMENT_DEPTH           = 0x20L,
         BGFX_CAPS_FRAGMENT_ORDERING        = 0x40L,
-        BGFX_CAPS_FRAMEBUFFER_RW           = 0x80L,
-        BGFX_CAPS_GRAPHICS_DEBUGGER        = 0x100L,
-        BGFX_CAPS_RESERVED                 = 0x200L,
-        BGFX_CAPS_HDR10                    = 0x400L,
-        BGFX_CAPS_HIDPI                    = 0x800L,
-        BGFX_CAPS_INDEX32                  = 0x1000L,
-        BGFX_CAPS_INSTANCING               = 0x2000L,
-        BGFX_CAPS_OCCLUSION_QUERY          = 0x4000L,
-        BGFX_CAPS_RENDERER_MULTITHREADED   = 0x8000L,
-        BGFX_CAPS_SWAP_CHAIN               = 0x10000L,
-        BGFX_CAPS_TEXTURE_2D_ARRAY         = 0x20000L,
-        BGFX_CAPS_TEXTURE_3D               = 0x40000L,
-        BGFX_CAPS_TEXTURE_BLIT             = 0x180000L,
-        BGFX_CAPS_TEXTURE_COMPARE_RESERVED = 0x100000L,
-        BGFX_CAPS_TEXTURE_COMPARE_LEQUAL   = 0x200000L,
+        BGFX_CAPS_GRAPHICS_DEBUGGER        = 0x80L,
+        BGFX_CAPS_HDR10                    = 0x100L,
+        BGFX_CAPS_HIDPI                    = 0x200L,
+        BGFX_CAPS_IMAGE_RW                 = 0x400L,
+        BGFX_CAPS_INDEX32                  = 0x800L,
+        BGFX_CAPS_INSTANCING               = 0x1000L,
+        BGFX_CAPS_OCCLUSION_QUERY          = 0x2000L,
+        BGFX_CAPS_RENDERER_MULTITHREADED   = 0x4000L,
+        BGFX_CAPS_SWAP_CHAIN               = 0x8000L,
+        BGFX_CAPS_TEXTURE_2D_ARRAY         = 0x10000L,
+        BGFX_CAPS_TEXTURE_3D               = 0x20000L,
+        BGFX_CAPS_TEXTURE_BLIT             = 0x40000L,
+        BGFX_CAPS_TEXTURE_COMPARE_RESERVED = 0x80000L,
+        BGFX_CAPS_TEXTURE_COMPARE_LEQUAL   = 0x100000L,
         BGFX_CAPS_TEXTURE_COMPARE_ALL      = BGFX_CAPS_TEXTURE_COMPARE_RESERVED | BGFX_CAPS_TEXTURE_COMPARE_LEQUAL,
-        BGFX_CAPS_TEXTURE_CUBE_ARRAY       = 0x400000L,
-        BGFX_CAPS_TEXTURE_DIRECT_ACCESS    = 0x800000L,
-        BGFX_CAPS_TEXTURE_READ_BACK        = 0x1000000L,
-        BGFX_CAPS_VERTEX_ATTRIB_HALF       = 0x2000000L,
-        BGFX_CAPS_VERTEX_ATTRIB_UINT10     = 0x4000000L,
-        BGFX_CAPS_VERTEX_ID                = 0x8000000L;
+        BGFX_CAPS_TEXTURE_CUBE_ARRAY       = 0x200000L,
+        BGFX_CAPS_TEXTURE_DIRECT_ACCESS    = 0x400000L,
+        BGFX_CAPS_TEXTURE_READ_BACK        = 0x800000L,
+        BGFX_CAPS_VERTEX_ATTRIB_HALF       = 0x1000000L,
+        BGFX_CAPS_VERTEX_ATTRIB_UINT10     = 0x2000000L,
+        BGFX_CAPS_VERTEX_ID                = 0x4000000L,
+        BGFX_CAPS_VIEWPORT_LAYER_ARRAY     = 0x8000000L;
 
     /** Format caps */
-    public static final short
+    public static final int
         BGFX_CAPS_FORMAT_TEXTURE_NONE             = 0x0,
         BGFX_CAPS_FORMAT_TEXTURE_2D               = 0x1,
         BGFX_CAPS_FORMAT_TEXTURE_2D_SRGB          = 0x2,
@@ -423,11 +423,12 @@ public class BGFX {
         BGFX_CAPS_FORMAT_TEXTURE_CUBE_SRGB        = 0x80,
         BGFX_CAPS_FORMAT_TEXTURE_CUBE_EMULATED    = 0x100,
         BGFX_CAPS_FORMAT_TEXTURE_VERTEX           = 0x200,
-        BGFX_CAPS_FORMAT_TEXTURE_IMAGE            = 0x400,
-        BGFX_CAPS_FORMAT_TEXTURE_FRAMEBUFFER      = 0x800,
-        BGFX_CAPS_FORMAT_TEXTURE_FRAMEBUFFER_MSAA = 0x1000,
-        BGFX_CAPS_FORMAT_TEXTURE_MSAA             = 0x2000,
-        BGFX_CAPS_FORMAT_TEXTURE_MIP_AUTOGEN      = 0x4000;
+        BGFX_CAPS_FORMAT_TEXTURE_IMAGE_READ       = 0x400,
+        BGFX_CAPS_FORMAT_TEXTURE_IMAGE_WRITE      = 0x800,
+        BGFX_CAPS_FORMAT_TEXTURE_FRAMEBUFFER      = 0x1000,
+        BGFX_CAPS_FORMAT_TEXTURE_FRAMEBUFFER_MSAA = 0x2000,
+        BGFX_CAPS_FORMAT_TEXTURE_MSAA             = 0x4000,
+        BGFX_CAPS_FORMAT_TEXTURE_MIP_AUTOGEN      = 0x8000;
 
     /** Resolve flags. */
     public static final byte
@@ -1175,22 +1176,23 @@ public class BGFX {
     // --- [ bgfx_attachment_init ] ---
 
     /** Unsafe version of: {@link #bgfx_attachment_init attachment_init} */
-    public static void nbgfx_attachment_init(long _this, short _handle, int _access, short _layer, short _mip, byte _resolve) {
+    public static void nbgfx_attachment_init(long _this, short _handle, int _access, short _layer, short _numLayers, short _mip, byte _resolve) {
         long __functionAddress = Functions.attachment_init;
-        invokePV(_this, _handle, _access, _layer, _mip, _resolve, __functionAddress);
+        invokePV(_this, _handle, _access, _layer, _numLayers, _mip, _resolve, __functionAddress);
     }
 
     /**
      * Init attachment.
      *
-     * @param _handle  render target texture handle
-     * @param _access  access. One of:<br><table><tr><td>{@link #BGFX_ACCESS_READ ACCESS_READ}</td><td>{@link #BGFX_ACCESS_WRITE ACCESS_WRITE}</td><td>{@link #BGFX_ACCESS_READWRITE ACCESS_READWRITE}</td></tr></table>
-     * @param _layer   cubemap side or depth layer/slice
-     * @param _mip     mip level
-     * @param _resolve resolve flags. One of:<br><table><tr><td>{@link #BGFX_RESOLVE_NONE RESOLVE_NONE}</td><td>{@link #BGFX_RESOLVE_AUTO_GEN_MIPS RESOLVE_AUTO_GEN_MIPS}</td></tr></table>
+     * @param _handle    render target texture handle
+     * @param _access    access. One of:<br><table><tr><td>{@link #BGFX_ACCESS_READ ACCESS_READ}</td><td>{@link #BGFX_ACCESS_WRITE ACCESS_WRITE}</td><td>{@link #BGFX_ACCESS_READWRITE ACCESS_READWRITE}</td></tr></table>
+     * @param _layer     cubemap side or depth layer/slice to use
+     * @param _numLayers number of texture layer/slice(s) in array to use
+     * @param _mip       mip level
+     * @param _resolve   resolve flags. One of:<br><table><tr><td>{@link #BGFX_RESOLVE_NONE RESOLVE_NONE}</td><td>{@link #BGFX_RESOLVE_AUTO_GEN_MIPS RESOLVE_AUTO_GEN_MIPS}</td></tr></table>
      */
-    public static void bgfx_attachment_init(@NativeType("bgfx_attachment_t *") BGFXAttachment _this, @NativeType("bgfx_texture_handle_t") short _handle, @NativeType("bgfx_access_t") int _access, @NativeType("uint16_t") int _layer, @NativeType("uint16_t") int _mip, @NativeType("uint8_t") int _resolve) {
-        nbgfx_attachment_init(_this.address(), _handle, _access, (short)_layer, (short)_mip, (byte)_resolve);
+    public static void bgfx_attachment_init(@NativeType("bgfx_attachment_t *") BGFXAttachment _this, @NativeType("bgfx_texture_handle_t") short _handle, @NativeType("bgfx_access_t") int _access, @NativeType("uint16_t") int _layer, @NativeType("uint16_t") int _numLayers, @NativeType("uint16_t") int _mip, @NativeType("uint8_t") int _resolve) {
+        nbgfx_attachment_init(_this.address(), _handle, _access, (short)_layer, (short)_numLayers, (short)_mip, (byte)_resolve);
     }
 
     // --- [ bgfx_vertex_layout_begin ] ---
@@ -2648,9 +2650,9 @@ public class BGFX {
     // --- [ bgfx_alloc_transient_index_buffer ] ---
 
     /** Unsafe version of: {@link #bgfx_alloc_transient_index_buffer alloc_transient_index_buffer} */
-    public static void nbgfx_alloc_transient_index_buffer(long _tib, int _num) {
+    public static void nbgfx_alloc_transient_index_buffer(long _tib, int _num, boolean _index32) {
         long __functionAddress = Functions.alloc_transient_index_buffer;
-        invokePV(_tib, _num, __functionAddress);
+        invokePV(_tib, _num, _index32, __functionAddress);
     }
 
     /**
@@ -2658,11 +2660,12 @@ public class BGFX {
      * 
      * <p>Only 16-bit index buffer is supported.</p>
      *
-     * @param _tib {@link BGFXTransientIndexBuffer} structure is filled and is valid for the duration of frame, and it can be reused for multiple draw calls
-     * @param _num number of indices to allocate
+     * @param _tib     {@link BGFXTransientIndexBuffer} structure is filled and is valid for the duration of frame, and it can be reused for multiple draw calls
+     * @param _num     number of indices to allocate
+     * @param _index32 set to {@code true} if input indices will be 32-bit
      */
-    public static void bgfx_alloc_transient_index_buffer(@NativeType("bgfx_transient_index_buffer_t *") BGFXTransientIndexBuffer _tib, @NativeType("uint32_t") int _num) {
-        nbgfx_alloc_transient_index_buffer(_tib.address(), _num);
+    public static void bgfx_alloc_transient_index_buffer(@NativeType("bgfx_transient_index_buffer_t *") BGFXTransientIndexBuffer _tib, @NativeType("uint32_t") int _num, @NativeType("bool") boolean _index32) {
+        nbgfx_alloc_transient_index_buffer(_tib.address(), _num, _index32);
     }
 
     // --- [ bgfx_alloc_transient_vertex_buffer ] ---

@@ -301,6 +301,7 @@ public final class JNI {
     public static native void invokePV(long param0, int param1, double param2, long __functionAddress);
     public static native void invokePV(long param0, int param1, int param2, long __functionAddress);
     public static native void invokePV(long param0, int param1, short param2, long __functionAddress);
+    public static native void invokePV(long param0, int param1, boolean param2, long __functionAddress);
     public static native void invokePV(long param0, short param1, boolean param2, long __functionAddress);
     public static native void invokePV(short param0, int param1, long param2, long __functionAddress);
     public static native void invokePV(short param0, long param1, int param2, long __functionAddress);
@@ -322,10 +323,10 @@ public final class JNI {
     public static native void invokePV(long param0, byte param1, short param2, byte param3, int param4, int param5, long __functionAddress);
     public static native void invokePV(long param0, byte param1, short param2, int param3, int param4, short param5, long __functionAddress);
     public static native void invokePV(long param0, int param1, int param2, int param3, int param4, boolean param5, long __functionAddress);
-    public static native void invokePV(long param0, short param1, int param2, short param3, short param4, byte param5, long __functionAddress);
     public static native void invokePV(long param0, short param1, short param2, short param3, int param4, byte param5, long __functionAddress);
     public static native void invokePV(short param0, short param1, short param2, short param3, long param4, short param5, long __functionAddress);
     public static native void invokePV(int param0, int param1, int param2, int param3, int param4, int param5, long param6, long __functionAddress);
+    public static native void invokePV(long param0, short param1, int param2, short param3, short param4, short param5, byte param6, long __functionAddress);
     public static native void invokePV(long param0, short param1, short param2, int param3, int param4, int param5, byte param6, long __functionAddress);
     public static native void invokePV(long param0, short param1, short param2, short param3, short param4, short param5, byte param6, long __functionAddress);
     public static native void invokePV(long param0, short param1, short param2, short param3, short param4, short param5, int param6, byte param7, long __functionAddress);
