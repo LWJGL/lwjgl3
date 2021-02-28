@@ -176,13 +176,18 @@ class Generator(private val moduleRoot: String) {
             .also {
                 it.forEach { path ->
                     try {
-                        Class
-                            .forName("$packageName.${path.fileName.toString().substringBeforeLast('.').upperCaseFirst}Kt")
-                            .methods
-                            .asSequence()
-                            .consume()
-                    } catch (e: ClassNotFoundException) {
-                        // ignore
+                        try {
+                            Class
+                                .forName("$packageName.${path.fileName.toString().substringBeforeLast('.').upperCaseFirst}Kt")
+                                .methods
+                                .asSequence()
+                                .consume()
+                        }
+                        catch (e: ClassNotFoundException) {
+                            // ignore
+                        }
+                    } catch (e: ExceptionInInitializerError) {
+                        println("Caught $e when loading $path from $packageName")
                     }
                 }
                 it.close()

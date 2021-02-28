@@ -74,7 +74,7 @@ class CallbackFunction internal constructor(
         }
 
     private fun PrintWriter.generateDocumentation(isClass: Boolean) {
-        val documentation = if (module === Module.VULKAN)
+        val documentation = if (module === Module.VULKAN || module === Module.OPENXR)
             super.documentation
         else {
             val type =

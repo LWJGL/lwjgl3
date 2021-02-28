@@ -51,6 +51,7 @@ This script is included in /config/build-definitions.xml.
     <property name="binding.opengl" value="true"/>
     <property name="binding.opengles" value="true"/>
     <condition property="binding.openvr" value="true" else="false"><isset property="notARM"/></condition>
+    <property name="binding.openxr" value="true"/>
     <property name="binding.opus" value="true"/>
     <property name="binding.par" value="true"/>
     <property name="binding.remotery" value="true"/>
@@ -115,6 +116,7 @@ This script is included in /config/build-definitions.xml.
                 <sequential if:true="${binding.opengl}"><local name="module"/><property name="module" value="opengl"/><body/></sequential>
                 <sequential if:true="${binding.opengles}"><local name="module"/><property name="module" value="opengles"/><body/></sequential>
                 <sequential if:true="${binding.openvr}"><local name="module"/><property name="module" value="openvr"/><body/></sequential>
+                <sequential if:true="${binding.openxr}"><local name="module"/><property name="module" value="openxr"/><body/></sequential>
                 <sequential if:true="${binding.opus}"><local name="module"/><property name="module" value="opus"/><body/></sequential>
                 <sequential if:true="${binding.ovr}"><local name="module"/><property name="module" value="ovr"/><body/></sequential>
                 <sequential if:true="${binding.par}"><local name="module"/><property name="module" value="par"/><body/></sequential>

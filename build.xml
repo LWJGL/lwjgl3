@@ -188,7 +188,7 @@
             </and>
         </condition>
 
-        <local name="vulkan_types"/>
+        <local name="vulkan_types"/><!--TODO check this out-->
         <condition property="vulkan_types">
             <and>
                 <isfalse value="${binding.vulkan}"/>
@@ -226,7 +226,7 @@
             <src path="${module.lwjgl}/opengl/src/templates/kotlin/opengl/GLTypes.kt" if:set="opengl_types"/>
             <src path="${module.lwjgl}/opengl/src/templates/kotlin/opengl/GLXTypes.kt" if:set="opengl_types"/>
             <src path="${module.lwjgl}/opengl/src/templates/kotlin/opengl/WGLTypes.kt" if:set="opengl_types"/>
-            <src path="${module.lwjgl}/vulkan/src/templates/kotlin/vulkan/VKBase.kt" if:set="vulkan_types"/>
+            <src path="${module.lwjgl}/vulkan/src/templates/kotlin/vulkan/VKBase.kt" if:set="vulkan_types"/> <!--TODO also check this out-->
             <src path="${module.lwjgl}/vulkan/src/templates/kotlin/vulkan/VKTypes.kt" if:set="vulkan_types"/>
             <src path="${module.lwjgl}/vulkan/src/templates/kotlin/vulkan/ExtensionTypes.kt" if:set="vulkan_types"/>
         </kotlinc>
@@ -536,6 +536,14 @@
                 </lwjgl.javac11>
             </sequential>
         </parallel>
+
+        <compileBinding binding="openxr">
+            <classpath>
+                <pathelement path="${bin.lwjgl}/opengl"/>
+                <pathelement path="${bin.lwjgl}/opengles"/>
+                <pathelement path="${bin.lwjgl}/vulkan"/>
+            </classpath>
+        </compileBinding>
 
         <compileBinding binding="glfw">
             <classpath>
@@ -1565,6 +1573,9 @@
                 <get-release platform="windows" arch="x86" file="openvr_api.dll.git"/>
             </natives>
         </release-module>
+
+        <!-- OpenXR -->
+        <release-module name="openxr" title="OpenXR" if:true="${binding.openxr}"/>
 
         <!-- Opus -->
         <release-module name="opus" native-library="opus" title="Opus" if:true="${binding.opus}"/>

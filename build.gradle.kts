@@ -193,6 +193,11 @@ enum class Artifacts(
         "An API and runtime that allows access to VR hardware from multiple vendors without requiring that applications have specific knowledge of the hardware they are targeting.",
         Platforms.LINUX, Platforms.MACOS, Platforms.WINDOWS, Platforms.WINDOWS_X86
     ),
+    OPENXR(
+        "lwjgl-openxr", "LWJGL - OpenXR bindings",
+        "A royalty-free, open standard that provides high-performance access to Augmented Reality (AR) and Virtual Reality (VR)—collectively known as XR—platforms and devices.",
+        *Platforms.ALL
+    ),
     OPUS(
         "lwjgl-opus", "LWJGL - Opus bindings",
         "A totally open, royalty-free, highly versatile audio codec.",

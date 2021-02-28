@@ -503,6 +503,17 @@ enum class Module(
         library = JNILibrary.create("OpenVR", custom = true),
         arrayOverloads = false
     ),
+    OPENXR(
+        "openxr",
+        "org.lwjgl.openxr",
+        """
+        Contains bindings to ${url("https://www.khronos.org/openxr/", "OpenXR")}, a royalty-free, open standard that provides high-performance 
+        access to Augmented Reality (AR) and Virtual Reality (VR)—collectively known as XR—platforms and devices.
+
+        Not yet ready for release
+        """,
+        CallingConvention.STDCALL
+    ),
     OPUS(
         "opus",
         "org.lwjgl.util.opus",
