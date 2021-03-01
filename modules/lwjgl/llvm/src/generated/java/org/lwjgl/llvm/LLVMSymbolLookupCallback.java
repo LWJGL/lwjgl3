@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * char const * (*) (
+ * char const * (*{@link #invoke}) (
  *     void *DisInfo,
  *     uint64_t ReferenceValue,
  *     uint64_t *ReferenceType,

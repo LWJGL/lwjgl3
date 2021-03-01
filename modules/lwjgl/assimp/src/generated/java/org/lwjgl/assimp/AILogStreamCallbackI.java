@@ -16,7 +16,7 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     char const *message,
  *     char *user
  * )</code></pre>

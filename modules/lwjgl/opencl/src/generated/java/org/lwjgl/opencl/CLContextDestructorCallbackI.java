@@ -18,7 +18,7 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     cl_context context,
  *     void *user_data
  * )</code></pre>

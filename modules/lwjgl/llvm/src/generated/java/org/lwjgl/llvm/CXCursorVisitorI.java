@@ -18,7 +18,7 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * enum CXChildVisitResult (*) (
+ * enum CXChildVisitResult (*{@link #invoke}) (
  *     CXCursor cursor,
  *     CXCursor parent,
  *     CXClientData client_data

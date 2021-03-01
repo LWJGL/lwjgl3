@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * YGSize (*) (
+ * YGSize (*{@link #invoke}) (
  *     YGNodeRef node,
  *     float width,
  *     YGMeasureMode widthMode,

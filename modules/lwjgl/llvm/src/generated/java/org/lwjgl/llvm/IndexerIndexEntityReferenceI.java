@@ -18,7 +18,7 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     CXClientData client_data,
  *     CXIdxEntityRefInfo const *info
  * )</code></pre>

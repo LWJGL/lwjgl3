@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * CGEventRef (*) (
+ * CGEventRef (*{@link #invoke}) (
  *     CGEventTapProxy proxy,
  *     CGEventType type,
  *     CGEventRef event,

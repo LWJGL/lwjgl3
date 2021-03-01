@@ -18,7 +18,7 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * uint64_t (*) (
+ * uint64_t (*{@link #invoke}) (
  *     char const *Name,
  *     void *LookupCtx
  * )</code></pre>

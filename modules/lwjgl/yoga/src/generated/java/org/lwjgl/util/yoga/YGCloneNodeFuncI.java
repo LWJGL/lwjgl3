@@ -16,7 +16,7 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * YGNodeRef (*) (
+ * YGNodeRef (*{@link #invoke}) (
  *     YGNodeRef oldNode,
  *     YGNodeRef owner,
  *     int childIndex

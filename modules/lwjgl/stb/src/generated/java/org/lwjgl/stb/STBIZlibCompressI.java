@@ -18,7 +18,7 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * unsigned char * (*) (
+ * unsigned char * (*{@link #invoke}) (
  *     unsigned char *data,
  *     int data_len,
  *     int *out_len,

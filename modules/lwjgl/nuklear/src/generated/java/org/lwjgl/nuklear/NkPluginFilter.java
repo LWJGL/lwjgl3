@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * nk_bool (*) (
+ * nk_bool (*{@link #invoke}) (
  *     struct nk_text_edit const *edit,
  *     nk_rune unicode
  * )</code></pre>

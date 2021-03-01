@@ -19,7 +19,7 @@ import java.nio.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * int (*) (
+ * int (*{@link #invoke}) (
  *     void *user,
  *     char *data,
  *     int size

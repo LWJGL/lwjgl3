@@ -18,7 +18,7 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * uint32_t (*) (
+ * uint32_t (*{@link #invoke}) (
  *     bgfx_callback_interface_t *_this,
  *     uint64_t _id
  * )</code></pre>

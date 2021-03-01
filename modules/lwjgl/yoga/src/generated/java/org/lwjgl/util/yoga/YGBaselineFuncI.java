@@ -16,7 +16,7 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * float (*) (
+ * float (*{@link #invoke}) (
  *     YGNodeRef node,
  *     float width,
  *     float height

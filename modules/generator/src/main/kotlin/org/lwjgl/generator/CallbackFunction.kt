@@ -89,7 +89,7 @@ class CallbackFunction internal constructor(
                 """
                 <h3>Type</h3>
 
-                ${codeBlock(nativeType("", ",\n$t", "\n$t", "\n"))}
+                ${codeBlock(nativeType("{@link \\#invoke}", ",\n$t", "\n$t", "\n"))}
                 """
 
             super.documentation.let {

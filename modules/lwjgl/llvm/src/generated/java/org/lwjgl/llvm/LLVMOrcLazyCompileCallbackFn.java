@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * uint64_t (*) (
+ * uint64_t (*{@link #invoke}) (
  *     LLVMOrcJITStackRef JITStack,
  *     void *CallbackCtx
  * )</code></pre>

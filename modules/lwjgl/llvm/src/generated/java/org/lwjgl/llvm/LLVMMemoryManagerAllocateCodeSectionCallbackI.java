@@ -18,7 +18,7 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * uint8_t * (*) (
+ * uint8_t * (*{@link #invoke}) (
  *     void *Opaque,
  *     uintptr_t Size,
  *     unsigned int Alignment,

@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * float (*) (
+ * float (*{@link #invoke}) (
  *     void *userdata,
  *     int selected,
  *     char const **item

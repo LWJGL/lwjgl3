@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * EGLsizeiANDROID (*) (
+ * EGLsizeiANDROID (*{@link #invoke}) (
  *     void const *key,
  *     EGLsizeiANDROID keySize,
  *     void *value,

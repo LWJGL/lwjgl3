@@ -18,7 +18,7 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * bool (*) (
+ * bool (*{@link #invoke}) (
  *     extent_hooks_t *extent_hooks,
  *     void *addr_a,
  *     size_t size_a,

@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * CXIdxClientFile (*) (
+ * CXIdxClientFile (*{@link #invoke}) (
  *     CXClientData client_data,
  *     CXIdxIncludedFileInfo const *info
  * )</code></pre>

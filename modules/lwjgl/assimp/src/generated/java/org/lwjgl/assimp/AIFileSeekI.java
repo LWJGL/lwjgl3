@@ -16,7 +16,7 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * aiReturn (*) (
+ * aiReturn (*{@link #invoke}) (
  *     struct aiFile *pFile,
  *     size_t offset,
  *     aiOrigin origin

@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * enum CXVisitorResult (*) (
+ * enum CXVisitorResult (*{@link #invoke}) (
  *     CXCursor C,
  *     CXClientData client_data
  * )</code></pre>

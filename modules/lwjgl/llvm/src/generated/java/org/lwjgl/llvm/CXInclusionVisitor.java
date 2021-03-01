@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     CXFile included_file,
  *     CXSourceLocation *inclusion_stack,
  *     unsigned include_len,

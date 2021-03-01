@@ -18,7 +18,7 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * LRESULT (*) (
+ * LRESULT (*{@link #invoke}) (
  *     HWND hwnd,
  *     UINT uMsg,
  *     WPARAM wParam,

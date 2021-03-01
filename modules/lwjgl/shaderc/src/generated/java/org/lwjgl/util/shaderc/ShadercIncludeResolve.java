@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * shaderc_include_result * (*) (
+ * shaderc_include_result * (*{@link #invoke}) (
  *     void *user_data,
  *     char const *requested_source,
  *     int type,

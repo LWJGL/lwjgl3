@@ -16,7 +16,7 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * struct aiFile * (*) (
+ * struct aiFile * (*{@link #invoke}) (
  *     struct aiFileIO *pFileIO,
  *     char const *fileName,
  *     char const *openMode
