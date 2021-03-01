@@ -50,10 +50,12 @@ public interface AIFileReadProcI extends CallbackI {
     /**
      * File read procedure
      *
-     * @param pFile   File pointer to read from
-     * @param pBuffer The buffer to read the values
-     * @param size    Size in bytes of each element to be read
-     * @param count   Number of elements to be read
+     * @param pFile   file pointer to read from
+     * @param pBuffer the buffer to read the values
+     * @param size    size in bytes of each element to be read
+     * @param count   number of elements to be read
+     *
+     * @return the number of elements read
      */
     @NativeType("size_t") long invoke(@NativeType("struct aiFile *") long pFile, @NativeType("char *") long pBuffer, @NativeType("size_t") long size, @NativeType("size_t") long count);
 

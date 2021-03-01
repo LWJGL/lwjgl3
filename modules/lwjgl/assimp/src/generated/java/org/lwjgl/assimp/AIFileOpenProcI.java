@@ -48,9 +48,11 @@ public interface AIFileOpenProcI extends CallbackI {
     /**
      * File open procedure
      *
-     * @param pFileIO  FileIO system pointer
-     * @param fileName The name of the file to be opened
-     * @param openMode The mode in which to open the file
+     * @param pFileIO  {@code FileIO} pointer
+     * @param fileName name of the file to be opened
+     * @param openMode mode in which to open the file
+     *
+     * @return pointer to an {@link AIFile} structure, or {@code NULL} if the file could not be opened
      */
     @NativeType("struct aiFile *") long invoke(@NativeType("struct aiFileIO *") long pFileIO, @NativeType("char const *") long fileName, @NativeType("char const *") long openMode);
 

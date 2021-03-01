@@ -1014,7 +1014,7 @@ public class Assimp {
     public static final int MAXLEN = 0x400;
 
     /**
-     * Standard return type for some library functions. Rarely used.
+     * Standard return type for some library functions, rarely used. (@code aiReturn}
      * 
      * <h5>Enum values:</h5>
      * 

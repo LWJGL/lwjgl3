@@ -50,10 +50,12 @@ public interface AIFileWriteProcI extends CallbackI {
     /**
      * File write procedure.
      *
-     * @param pFile   File pointer to write to
-     * @param pBuffer The buffer to be written
-     * @param memB    Size of the individual element to be written
-     * @param count   Number of elements to be written
+     * @param pFile   file pointer to write to
+     * @param pBuffer the buffer to be written
+     * @param memB    size of the individual element to be written
+     * @param count   number of elements to be written
+     *
+     * @return the number of elements written
      */
     @NativeType("size_t") long invoke(@NativeType("struct aiFile *") long pFile, @NativeType("char const *") long pBuffer, @NativeType("size_t") long memB, @NativeType("size_t") long count);
 

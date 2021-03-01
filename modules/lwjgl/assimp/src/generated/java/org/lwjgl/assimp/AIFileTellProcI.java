@@ -44,7 +44,9 @@ public interface AIFileTellProcI extends CallbackI {
     /**
      * File tell procedure.
      *
-     * @param pFile File pointer to find ftell() on
+     * @param pFile file pointer to query
+     *
+     * @return the current file position
      */
     @NativeType("size_t") long invoke(@NativeType("struct aiFile *") long pFile);
 

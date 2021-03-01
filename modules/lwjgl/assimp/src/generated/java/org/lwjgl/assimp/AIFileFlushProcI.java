@@ -43,7 +43,7 @@ public interface AIFileFlushProcI extends CallbackI {
     /**
      * File flush procedure.
      *
-     * @param pFile File pointer to flush
+     * @param pFile file pointer to flush
      */
     void invoke(@NativeType("struct aiFile *") long pFile);
 

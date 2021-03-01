@@ -48,9 +48,11 @@ public interface AIFileSeekI extends CallbackI {
     /**
      * File seek procedure
      *
-     * @param pFile  File pointer to seek to
-     * @param offset Number of bytes to shift from origin
-     * @param origin Position used as reference for the offset.
+     * @param pFile  file pointer to seek
+     * @param offset number of bytes to shift from origin
+     * @param origin position used as reference for the offset
+     *
+     * @return an {@code aiReturn} value
      */
     @NativeType("aiReturn") int invoke(@NativeType("struct aiFile *") long pFile, @NativeType("size_t") long offset, @NativeType("aiOrigin") int origin);
 

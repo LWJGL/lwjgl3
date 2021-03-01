@@ -1299,7 +1299,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
     ).noPrefix()
 
     EnumConstant(
-        "Standard return type for some library functions. Rarely used.",
+        "Standard return type for some library functions, rarely used. (@code aiReturn}",
 
         "Return_SUCCESS".enum("Indicates that a function was successful.", 0x0),
         "Return_FAILURE".enum("Indicates that a function failed.", -0x1),

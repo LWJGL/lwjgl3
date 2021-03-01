@@ -45,8 +45,8 @@ public interface AIFileCloseProcI extends CallbackI {
     /**
      * File close procedure
      *
-     * @param pFileIO FileIO system pointer
-     * @param pFile   File pointer to close
+     * @param pFileIO {@code FileIO} pointer
+     * @param pFile   file pointer to close
      */
     void invoke(@NativeType("struct aiFileIO *") long pFileIO, @NativeType("struct aiFile *") long pFile);
 
