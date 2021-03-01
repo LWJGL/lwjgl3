@@ -12,6 +12,8 @@ import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
 import org.lwjgl.util.par.*;
 
+import javax.annotation.*;
+import java.io.*;
 import java.nio.*;
 import java.nio.file.*;
 import java.util.*;
@@ -19,6 +21,7 @@ import java.util.concurrent.*;
 
 import static java.lang.Math.*;
 import static org.lwjgl.assimp.Assimp.*;
+import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL31C.*;
@@ -939,16 +942,10 @@ public final class HelloTootle {
             int result = NFD_OpenDialog(null, Paths.get("modules/samples/src/test/resources/demo").toAbsolutePath().toString(), pp);
             switch (result) {
                 case NFD_OKAY:
-                    AIScene scene = aiImportFileExWithProperties(pp.getStringUTF8(0),
-                        aiProcess_JoinIdenticalVertices |
-                        aiProcess_Triangulate |
-                        aiProcess_GenSmoothNormals |
-                        aiProcess_PreTransformVertices,
-                        null,
-                        propertyStore
-                    );
+                    String filePath = pp.getStringUTF8(0);
                     nNFD_Free(pp.get(0));
 
+                    AIScene scene = importScene(stack, filePath);
                     if (scene != null) {
                         try {
                             PointerBuffer meshes = scene.mMeshes();
@@ -974,6 +971,87 @@ public final class HelloTootle {
                     System.err.format("Error: %s\n", NFD_GetError());
             }
         }
+    }
+
+    @Nullable
+    private AIScene importScene(MemoryStack stack, String filePath) {
+        // buffer cache (AIFileIO's OpenProc/CloseProc may be called multiple times per file)
+        Map<String, ByteBuffer> dataMap = new HashMap<>();
+
+        AIFileIO fileIO = AIFileIO.mallocStack(stack)
+            .OpenProc((pFileIO, fileName, openMode) -> {
+                String path = memUTF8(fileName);
+
+                ByteBuffer buffer = dataMap.get(path);
+                if (buffer == null) {
+                    try {
+                        buffer = ioResourceToByteBuffer(path, 8192);
+                        dataMap.put(path, buffer);
+                    } catch (IOException e) {
+                        throw new RuntimeException("Could not open file: " + path, e);
+                    }
+                } else {
+                    buffer.clear(); // reset position
+                }
+
+                ByteBuffer data = buffer;
+                return AIFile.mallocStack(stack)
+                    .ReadProc((pFile, pBuffer, size, count) -> {
+                        long max = min(data.remaining() / size, count);
+                        memCopy(memAddress(data), pBuffer, max * size);
+                        data.position(data.position() + (int)(max * size));
+                        return max;
+                    })
+                    .WriteProc((pFile, pBuffer, memB, count) -> { throw new IllegalStateException(); })
+                    .TellProc(pFile -> data.position())
+                    .FileSizeProc(pFile -> data.limit())
+                    .SeekProc((pFile, offset, origin) -> {
+                        if (origin == aiOrigin_SET) {
+                            data.position((int)offset);
+                        } else if (origin == aiOrigin_CUR) {
+                            data.position(data.position() + (int)offset);
+                        } else if (origin == aiOrigin_END) {
+                            data.position(data.limit() - (int)offset);
+                        }
+                        return 0;
+                    })
+                    .FlushProc(pFile -> { throw new IllegalStateException(); })
+                    .UserData(NULL)
+                    .address();
+            })
+            .CloseProc((pFileIO, pFile) -> {
+                AIFile file = AIFile.create(pFile);
+
+                file.FlushProc().free();
+                file.SeekProc().free();
+                file.FileSizeProc().free();
+                file.TellProc().free();
+                file.WriteProc().free();
+                file.ReadProc().free();
+            })
+            .UserData(NULL);
+
+        AILogStream logStream = AILogStream.mallocStack(stack);
+        aiGetPredefinedLogStream(aiDefaultLogStream_STDERR, (CharSequence)null, logStream);
+        aiAttachLogStream(logStream);
+
+        aiEnableVerboseLogging(true);
+
+        AIScene scene = aiImportFileExWithProperties(filePath,
+            aiProcess_JoinIdenticalVertices |
+            aiProcess_Triangulate |
+            aiProcess_GenSmoothNormals |
+            aiProcess_PreTransformVertices,
+            fileIO,
+            propertyStore
+        );
+
+        aiDetachLogStream(logStream);
+
+        fileIO.CloseProc().free();
+        fileIO.OpenProc().free();
+
+        return scene;
     }
 
     private static ParShapesMesh copyAssimpToParShapes(AIMesh aiMesh) {

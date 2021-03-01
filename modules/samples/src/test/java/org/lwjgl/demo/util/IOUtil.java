@@ -12,6 +12,7 @@ import java.nio.channels.*;
 import java.nio.file.*;
 
 import static org.lwjgl.BufferUtils.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 public final class IOUtil {
 
@@ -66,7 +67,7 @@ public final class IOUtil {
         }
 
         buffer.flip();
-        return buffer;
+        return memSlice(buffer);
     }
 
 }
