@@ -49,7 +49,7 @@ public class XRCapabilitiesInstance {
         xrSuggestInteractionProfileBindings;
 
     /** The OpenXR API version number. */
-    public final int apiVersion;
+    public final long apiVersion;
 
     /** When true, {@link EPICViewConfigurationFov} is supported. */
     public final boolean XR_EPIC_view_configuration_fov;
@@ -113,8 +113,6 @@ public class XRCapabilitiesInstance {
     public final boolean XR_KHR_visibility_mask;
     /** When true, {@link KHRVulkanSwapchainFormatList} is supported. */
     public final boolean XR_KHR_vulkan_swapchain_format_list;
-    /** When true, {@link KHRWin32ConvertPerformanceCounterTime} is supported. */
-    public final boolean XR_KHR_win32_convert_performance_counter_time;
     /** When true, {@link MNDHeadless} is supported. */
     public final boolean XR_MND_headless;
     /** When true, {@link MNDSwapchainUsageInputAttachmentBit} is supported. */
@@ -146,7 +144,7 @@ public class XRCapabilitiesInstance {
     /** When true, {@link XR10} is supported. */
     public final boolean OpenXR10;
 
-    XRCapabilitiesInstance(FunctionProvider provider, int apiVersion, Set<String> ext, Set<String> deviceExt) {
+    XRCapabilitiesInstance(FunctionProvider provider, long apiVersion, Set<String> ext, Set<String> deviceExt) {
         this.apiVersion = apiVersion;
 
         long[] caps = new long[21];
@@ -182,7 +180,6 @@ public class XRCapabilitiesInstance {
         XR_KHR_opengl_es_enable = check_KHR_opengl_es_enable(provider, caps, ext);
         XR_KHR_visibility_mask = ext.contains("XR_KHR_visibility_mask");
         XR_KHR_vulkan_swapchain_format_list = ext.contains("XR_KHR_vulkan_swapchain_format_list");
-        XR_KHR_win32_convert_performance_counter_time = ext.contains("XR_KHR_win32_convert_performance_counter_time");
         XR_MND_headless = ext.contains("XR_MND_headless");
         XR_MND_swapchain_usage_input_attachment_bit = ext.contains("XR_MND_swapchain_usage_input_attachment_bit");
         XR_MNDX_egl_enable = ext.contains("XR_MNDX_egl_enable");

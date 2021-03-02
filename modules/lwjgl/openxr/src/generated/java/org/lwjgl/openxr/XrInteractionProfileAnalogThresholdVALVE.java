@@ -328,7 +328,7 @@ public class XrInteractionProfileAnalogThresholdVALVE extends Struct implements 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrInteractionProfileAnalogThresholdVALVE.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrInteractionProfileAnalogThresholdVALVE.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrInteractionProfileAnalogThresholdVALVE.NEXT, value); }
     /** Unsafe version of {@link #action(XrAction) action}. */
     public static void naction(long struct, XrAction value) { memPutAddress(struct + XrInteractionProfileAnalogThresholdVALVE.ACTION, value.address()); }
     /** Unsafe version of {@link #binding(long) binding}. */
@@ -348,16 +348,7 @@ public class XrInteractionProfileAnalogThresholdVALVE extends Struct implements 
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrInteractionProfileAnalogThresholdVALVE.NEXT));
         check(memGetAddress(struct + XrInteractionProfileAnalogThresholdVALVE.ACTION));
-        long onHaptic = memGetAddress(struct + XrInteractionProfileAnalogThresholdVALVE.ONHAPTIC);
-        if (onHaptic != NULL) {
-            XrHapticBaseHeader.validate(onHaptic);
-        }
-        long offHaptic = memGetAddress(struct + XrInteractionProfileAnalogThresholdVALVE.OFFHAPTIC);
-        if (offHaptic != NULL) {
-            XrHapticBaseHeader.validate(offHaptic);
-        }
     }
 
     /**

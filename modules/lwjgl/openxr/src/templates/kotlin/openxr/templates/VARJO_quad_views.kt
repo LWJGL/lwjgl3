@@ -7,8 +7,9 @@ package openxr.templates
 
 import org.lwjgl.generator.*
 import openxr.*
+import openxr.VARJO as VARJO_
 
-val VARJO_quad_views = "VARJOQuadViews".nativeClassXR("VARJO_quad_views", type = "instance", postfix = VARJO) {
+val VARJO_quad_views = "VARJOQuadViews".nativeClassXR("VARJO_quad_views", type = "instance", postfix = VARJO_) {
     documentation =
         """
         The $templateName extension.

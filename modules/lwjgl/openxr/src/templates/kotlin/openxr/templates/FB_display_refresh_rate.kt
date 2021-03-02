@@ -7,8 +7,9 @@ package openxr.templates
 
 import org.lwjgl.generator.*
 import openxr.*
+import openxr.FB as FB_
 
-val FB_display_refresh_rate = "FBDisplayRefreshRate".nativeClassXR("FB_display_refresh_rate", type = "instance", postfix = FB) {
+val FB_display_refresh_rate = "FBDisplayRefreshRate".nativeClassXR("FB_display_refresh_rate", type = "instance", postfix = FB_) {
     documentation =
         """
         The $templateName extension.

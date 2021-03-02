@@ -7,8 +7,9 @@ package openxr.templates
 
 import org.lwjgl.generator.*
 import openxr.*
+import openxr.KHR as KHR_
 
-val KHR_visibility_mask = "KHRVisibilityMask".nativeClassXR("KHR_visibility_mask", type = "instance", postfix = KHR) {
+val KHR_visibility_mask = "KHRVisibilityMask".nativeClassXR("KHR_visibility_mask", type = "instance", postfix = KHR_) {
     documentation =
         """
         The $templateName extension.

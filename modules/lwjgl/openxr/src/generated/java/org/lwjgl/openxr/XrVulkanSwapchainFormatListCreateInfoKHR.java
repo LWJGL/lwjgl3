@@ -275,7 +275,7 @@ public class XrVulkanSwapchainFormatListCreateInfoKHR extends Struct implements 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrVulkanSwapchainFormatListCreateInfoKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrVulkanSwapchainFormatListCreateInfoKHR.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrVulkanSwapchainFormatListCreateInfoKHR.NEXT, value); }
     /** Sets the specified value to the {@code viewFormatCount} field of the specified {@code struct}. */
     public static void nviewFormatCount(long struct, int value) { UNSAFE.putInt(null, struct + XrVulkanSwapchainFormatListCreateInfoKHR.VIEWFORMATCOUNT, value); }
     /** Unsafe version of {@link #viewFormats(IntBuffer) viewFormats}. */
@@ -287,7 +287,6 @@ public class XrVulkanSwapchainFormatListCreateInfoKHR extends Struct implements 
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrVulkanSwapchainFormatListCreateInfoKHR.NEXT));
         if (nviewFormatCount(struct) != 0) {
             check(memGetAddress(struct + XrVulkanSwapchainFormatListCreateInfoKHR.VIEWFORMATS));
         }

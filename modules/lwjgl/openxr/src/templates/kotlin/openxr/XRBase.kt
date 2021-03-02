@@ -16,7 +16,8 @@ val XrPath = XR_DEFINE_ATOM("XrPath")
 val XrSystemId = XR_DEFINE_ATOM("XrSystemId")
 val XrControllerModelKeyMSFT = XR_DEFINE_ATOM("XrControllerModelKeyMSFT")
 
-//val PFN_vkVoidFunction = typedef(opaque_p, "PFN_vkVoidFunction")
+val PFN_vkGetInstanceProcAddr = typedef(vulkan.PFN_vkVoidFunction, "PFN_vkGetInstanceProcAddr")
+val PFNEGLGETPROCADDRESSPROC = typedef(egl.__eglMustCastToProperFunctionPointerType, "PFNEGLGETPROCADDRESSPROC")
 
 fun XR_DEFINE_HANDLE(name: String) = WrappedPointerType(name)
 fun XR_DEFINE_ATOM(name: String) = typedef(uint64_t, name)

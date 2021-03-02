@@ -7,8 +7,9 @@ package openxr.templates
 
 import org.lwjgl.generator.*
 import openxr.*
+import openxr.MND as MND_
 
-val MND_headless = "MNDHeadless".nativeClassXR("MND_headless", type = "instance", postfix = MND) {
+val MND_headless = "MNDHeadless".nativeClassXR("MND_headless", type = "instance", postfix = MND_) {
     documentation =
         """
         The $templateName extension.

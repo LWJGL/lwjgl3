@@ -25,6 +25,7 @@ val LONG = IntegerType("LONG", PrimitiveMapping.INT)
 val ULONG = IntegerType("ULONG", PrimitiveMapping.INT, unsigned = true)
 val FLOAT = PrimitiveType("FLOAT", PrimitiveMapping.FLOAT)
 val LDOUBLE = PrimitiveType("LDOUBLE", PrimitiveMapping.DOUBLE)
+val LARGE_INTEGER = PrimitiveType("LARGE_INTEGER", PrimitiveMapping.LONG)
 
 val ATOM = PrimitiveType("ATOM", PrimitiveMapping.SHORT)
 

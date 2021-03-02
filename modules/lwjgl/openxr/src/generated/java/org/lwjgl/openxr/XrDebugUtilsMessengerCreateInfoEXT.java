@@ -302,7 +302,7 @@ public class XrDebugUtilsMessengerCreateInfoEXT extends Struct implements Native
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrDebugUtilsMessengerCreateInfoEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrDebugUtilsMessengerCreateInfoEXT.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrDebugUtilsMessengerCreateInfoEXT.NEXT, value); }
     /** Unsafe version of {@link #messageSeverities(long) messageSeverities}. */
     public static void nmessageSeverities(long struct, long value) { UNSAFE.putLong(null, struct + XrDebugUtilsMessengerCreateInfoEXT.MESSAGESEVERITIES, value); }
     /** Unsafe version of {@link #messageTypes(long) messageTypes}. */
@@ -318,7 +318,6 @@ public class XrDebugUtilsMessengerCreateInfoEXT extends Struct implements Native
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrDebugUtilsMessengerCreateInfoEXT.NEXT));
         check(memGetAddress(struct + XrDebugUtilsMessengerCreateInfoEXT.USERCALLBACK));
     }
 

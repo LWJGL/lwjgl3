@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -289,34 +288,13 @@ public class XrFrameState extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrFrameState.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrFrameState.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrFrameState.NEXT, value); }
     /** Unsafe version of {@link #predictedDisplayTime(long) predictedDisplayTime}. */
     public static void npredictedDisplayTime(long struct, long value) { UNSAFE.putLong(null, struct + XrFrameState.PREDICTEDDISPLAYTIME, value); }
     /** Unsafe version of {@link #predictedDisplayPeriod(long) predictedDisplayPeriod}. */
     public static void npredictedDisplayPeriod(long struct, long value) { UNSAFE.putLong(null, struct + XrFrameState.PREDICTEDDISPLAYPERIOD, value); }
     /** Unsafe version of {@link #shouldRender(boolean) shouldRender}. */
     public static void nshouldRender(long struct, int value) { UNSAFE.putInt(null, struct + XrFrameState.SHOULDRENDER, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrFrameState.NEXT));
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
-        }
-    }
 
     // -----------------------------------
 

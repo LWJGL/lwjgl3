@@ -7,8 +7,9 @@ package openxr.templates
 
 import org.lwjgl.generator.*
 import openxr.*
+import openxr.HUAWEI as HUAWEI_
 
-val HUAWEI_controller_interaction = "HUAWEIControllerInteraction".nativeClassXR("HUAWEI_controller_interaction", type = "instance", postfix = HUAWEI) {
+val HUAWEI_controller_interaction = "HUAWEIControllerInteraction".nativeClassXR("HUAWEI_controller_interaction", type = "instance", postfix = HUAWEI_) {
     documentation =
         """
         The $templateName extension.

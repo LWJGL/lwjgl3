@@ -7,8 +7,9 @@ package openxr.templates
 
 import org.lwjgl.generator.*
 import openxr.*
+import openxr.EXTX as EXTX_
 
-val EXTX_overlay = "EXTXOverlay".nativeClassXR("EXTX_overlay", type = "instance", postfix = EXTX) {
+val EXTX_overlay = "EXTXOverlay".nativeClassXR("EXTX_overlay", type = "instance", postfix = EXTX_) {
     documentation =
         """
         The $templateName extension.

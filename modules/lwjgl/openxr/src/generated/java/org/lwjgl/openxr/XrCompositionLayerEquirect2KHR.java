@@ -365,7 +365,7 @@ public class XrCompositionLayerEquirect2KHR extends Struct implements NativeReso
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerEquirect2KHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerEquirect2KHR.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerEquirect2KHR.NEXT, value); }
     /** Unsafe version of {@link #layerFlags(long) layerFlags}. */
     public static void nlayerFlags(long struct, long value) { UNSAFE.putLong(null, struct + XrCompositionLayerEquirect2KHR.LAYERFLAGS, value); }
     /** Unsafe version of {@link #space(XrSpace) space}. */
@@ -391,7 +391,6 @@ public class XrCompositionLayerEquirect2KHR extends Struct implements NativeReso
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrCompositionLayerEquirect2KHR.NEXT));
         check(memGetAddress(struct + XrCompositionLayerEquirect2KHR.SPACE));
         XrSwapchainSubImage.validate(struct + XrCompositionLayerEquirect2KHR.SUBIMAGE);
     }

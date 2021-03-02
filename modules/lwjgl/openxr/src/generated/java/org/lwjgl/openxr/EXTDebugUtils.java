@@ -53,7 +53,6 @@ public class EXTDebugUtils {
         long __functionAddress = instance.getCapabilities().xrSetDebugUtilsObjectNameEXT;
         if (CHECKS) {
             check(__functionAddress);
-            XrDebugUtilsObjectNameInfoEXT.validate(nameInfo);
         }
         return callPPI(instance.address(), nameInfo, __functionAddress);
     }

@@ -7,8 +7,9 @@ package openxr.templates
 
 import org.lwjgl.generator.*
 import openxr.*
+import openxr.HTC as HTC_
 
-val HTC_vive_cosmos_controller_interaction = "HTCViveCosmosControllerInteraction".nativeClassXR("HTC_vive_cosmos_controller_interaction", type = "instance", postfix = HTC) {
+val HTC_vive_cosmos_controller_interaction = "HTCViveCosmosControllerInteraction".nativeClassXR("HTC_vive_cosmos_controller_interaction", type = "instance", postfix = HTC_) {
     documentation =
         """
         The $templateName extension.

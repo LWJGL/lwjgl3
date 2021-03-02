@@ -7,8 +7,9 @@ package openxr.templates
 
 import org.lwjgl.generator.*
 import openxr.*
+import openxr.EXT as EXT_
 
-val EXT_performance_settings = "EXTPerformanceSettings".nativeClassXR("EXT_performance_settings", type = "instance", postfix = EXT) {
+val EXT_performance_settings = "EXTPerformanceSettings".nativeClassXR("EXT_performance_settings", type = "instance", postfix = EXT_) {
     documentation =
         """
         The $templateName extension.

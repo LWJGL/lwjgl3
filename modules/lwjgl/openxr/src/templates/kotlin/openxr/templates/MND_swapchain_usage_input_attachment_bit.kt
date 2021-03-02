@@ -7,8 +7,9 @@ package openxr.templates
 
 import org.lwjgl.generator.*
 import openxr.*
+import openxr.MND as MND_
 
-val MND_swapchain_usage_input_attachment_bit = "MNDSwapchainUsageInputAttachmentBit".nativeClassXR("MND_swapchain_usage_input_attachment_bit", type = "instance", postfix = MND) {
+val MND_swapchain_usage_input_attachment_bit = "MNDSwapchainUsageInputAttachmentBit".nativeClassXR("MND_swapchain_usage_input_attachment_bit", type = "instance", postfix = MND_) {
     documentation =
         """
         The $templateName extension.

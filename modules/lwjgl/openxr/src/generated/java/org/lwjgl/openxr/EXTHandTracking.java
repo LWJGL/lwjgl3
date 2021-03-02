@@ -134,7 +134,6 @@ public class EXTHandTracking {
         long __functionAddress = session.getCapabilities().xrCreateHandTrackerEXT;
         if (CHECKS) {
             check(__functionAddress);
-            XrHandTrackerCreateInfoEXT.validate(createInfo);
         }
         return callPPPI(session.address(), createInfo, handTracker, __functionAddress);
     }

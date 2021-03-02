@@ -268,7 +268,7 @@ public class XrDebugUtilsLabelEXT extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrDebugUtilsLabelEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrDebugUtilsLabelEXT.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrDebugUtilsLabelEXT.NEXT, value); }
     /** Unsafe version of {@link #labelName(ByteBuffer) labelName}. */
     public static void nlabelName(long struct, ByteBuffer value) {
         if (CHECKS) { checkNT1(value); }
@@ -281,7 +281,6 @@ public class XrDebugUtilsLabelEXT extends Struct implements NativeResource {
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrDebugUtilsLabelEXT.NEXT));
         check(memGetAddress(struct + XrDebugUtilsLabelEXT.LABELNAME));
     }
 

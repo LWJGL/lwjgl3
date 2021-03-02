@@ -7,8 +7,9 @@ package openxr.templates
 
 import org.lwjgl.generator.*
 import openxr.*
+import openxr.VALVE as VALVE_
 
-val VALVE_analog_threshold = "VALVEAnalogThreshold".nativeClassXR("VALVE_analog_threshold", type = "instance", postfix = VALVE) {
+val VALVE_analog_threshold = "VALVEAnalogThreshold".nativeClassXR("VALVE_analog_threshold", type = "instance", postfix = VALVE_) {
     documentation =
         """
         The $templateName extension.

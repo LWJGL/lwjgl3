@@ -7,8 +7,9 @@ package openxr.templates
 
 import org.lwjgl.generator.*
 import openxr.*
+import openxr.FB as FB_
 
-val FB_color_space = "FBColorSpace".nativeClassXR("FB_color_space", type = "instance", postfix = FB) {
+val FB_color_space = "FBColorSpace".nativeClassXR("FB_color_space", type = "instance", postfix = FB_) {
     documentation =
         """
         The $templateName extension.

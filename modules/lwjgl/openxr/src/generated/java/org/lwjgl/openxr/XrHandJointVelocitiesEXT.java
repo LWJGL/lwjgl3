@@ -272,7 +272,7 @@ public class XrHandJointVelocitiesEXT extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrHandJointVelocitiesEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrHandJointVelocitiesEXT.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrHandJointVelocitiesEXT.NEXT, value); }
     /** Sets the specified value to the {@code jointCount} field of the specified {@code struct}. */
     public static void njointCount(long struct, int value) { UNSAFE.putInt(null, struct + XrHandJointVelocitiesEXT.JOINTCOUNT, value); }
     /** Unsafe version of {@link #jointVelocities(XrHandJointVelocityEXT.Buffer) jointVelocities}. */
@@ -284,7 +284,6 @@ public class XrHandJointVelocitiesEXT extends Struct implements NativeResource {
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrHandJointVelocitiesEXT.NEXT));
         check(memGetAddress(struct + XrHandJointVelocitiesEXT.JOINTVELOCITIES));
     }
 

@@ -7,8 +7,9 @@ package openxr.templates
 
 import org.lwjgl.generator.*
 import openxr.*
+import openxr.KHR as KHR_
 
-val KHR_android_thread_settings = "KHRAndroidThreadSettings".nativeClassXR("KHR_android_thread_settings", type = "instance", postfix = KHR) {
+val KHR_android_thread_settings = "KHRAndroidThreadSettings".nativeClassXR("KHR_android_thread_settings", type = "instance", postfix = KHR_) {
     documentation =
         """
         The $templateName extension.

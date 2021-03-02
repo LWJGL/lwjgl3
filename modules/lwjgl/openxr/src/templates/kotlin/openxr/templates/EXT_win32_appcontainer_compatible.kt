@@ -7,8 +7,9 @@ package openxr.templates
 
 import org.lwjgl.generator.*
 import openxr.*
+import openxr.EXT as EXT_
 
-val EXT_win32_appcontainer_compatible = "EXTWin32AppcontainerCompatible".nativeClassXR("EXT_win32_appcontainer_compatible", type = "instance", postfix = EXT) {
+val EXT_win32_appcontainer_compatible = "EXTWin32AppcontainerCompatible".nativeClassXR("EXT_win32_appcontainer_compatible", type = "instance", postfix = EXT_) {
     documentation =
         """
         The $templateName extension.

@@ -7,8 +7,8 @@ package org.lwjgl.openxr;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.Checks.*;
 
 /** The KHR_loader_init extension. */
 public class KHRLoaderInit {

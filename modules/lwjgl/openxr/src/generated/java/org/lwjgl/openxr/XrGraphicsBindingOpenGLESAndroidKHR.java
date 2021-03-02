@@ -16,8 +16,6 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
-import org.lwjgl.opengl.*;
-
 /**
  * <h3>Layout</h3>
  * 
@@ -291,7 +289,7 @@ public class XrGraphicsBindingOpenGLESAndroidKHR extends Struct implements Nativ
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrGraphicsBindingOpenGLESAndroidKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrGraphicsBindingOpenGLESAndroidKHR.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrGraphicsBindingOpenGLESAndroidKHR.NEXT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XrGraphicsBindingOpenGLESAndroidKHR.DISPLAY, check(value)); }
     /** Unsafe version of {@link #config(long) config}. */
@@ -305,7 +303,6 @@ public class XrGraphicsBindingOpenGLESAndroidKHR extends Struct implements Nativ
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrGraphicsBindingOpenGLESAndroidKHR.NEXT));
         check(memGetAddress(struct + XrGraphicsBindingOpenGLESAndroidKHR.DISPLAY));
         check(memGetAddress(struct + XrGraphicsBindingOpenGLESAndroidKHR.CONFIG));
         check(memGetAddress(struct + XrGraphicsBindingOpenGLESAndroidKHR.CONTEXT));

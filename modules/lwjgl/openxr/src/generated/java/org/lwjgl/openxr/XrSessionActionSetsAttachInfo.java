@@ -272,7 +272,7 @@ public class XrSessionActionSetsAttachInfo extends Struct implements NativeResou
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSessionActionSetsAttachInfo.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrSessionActionSetsAttachInfo.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrSessionActionSetsAttachInfo.NEXT, value); }
     /** Sets the specified value to the {@code countActionSets} field of the specified {@code struct}. */
     public static void ncountActionSets(long struct, int value) { UNSAFE.putInt(null, struct + XrSessionActionSetsAttachInfo.COUNTACTIONSETS, value); }
     /** Unsafe version of {@link #actionSets(PointerBuffer) actionSets}. */
@@ -284,7 +284,6 @@ public class XrSessionActionSetsAttachInfo extends Struct implements NativeResou
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrSessionActionSetsAttachInfo.NEXT));
         check(memGetAddress(struct + XrSessionActionSetsAttachInfo.ACTIONSETS));
     }
 

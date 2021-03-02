@@ -276,7 +276,7 @@ public class XrHandJointsLocateInfoEXT extends Struct implements NativeResource 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrHandJointsLocateInfoEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrHandJointsLocateInfoEXT.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrHandJointsLocateInfoEXT.NEXT, value); }
     /** Unsafe version of {@link #baseSpace(XrSpace) baseSpace}. */
     public static void nbaseSpace(long struct, XrSpace value) { memPutAddress(struct + XrHandJointsLocateInfoEXT.BASESPACE, value.address()); }
     /** Unsafe version of {@link #time(long) time}. */
@@ -288,7 +288,6 @@ public class XrHandJointsLocateInfoEXT extends Struct implements NativeResource 
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrHandJointsLocateInfoEXT.NEXT));
         check(memGetAddress(struct + XrHandJointsLocateInfoEXT.BASESPACE));
     }
 

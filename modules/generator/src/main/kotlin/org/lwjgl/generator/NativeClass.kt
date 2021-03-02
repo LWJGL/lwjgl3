@@ -192,7 +192,7 @@ class NativeClass internal constructor(
 
     private val constantBlocks = ArrayList<ConstantBlock<*>>()
 
-    private val _functions = LinkedHashMap<String, Func>()
+    public val _functions = LinkedHashMap<String, Func>()
     val functions: Sequence<Func>
         get() = _functions.values.asSequence()
 
@@ -476,7 +476,7 @@ class NativeClass internal constructor(
                                 else
                                     it.get<AutoSize>().reference != param.name // dependent auto-size
                             }
-                        } || (module.arrayOverloads && func.hasArrayOverloads)
+                        } || (module.arrayOverloads && func.hasArrayOverloads) || (binding?.shouldCheckFunctionAddress(func) == true && !func.hasCustomJNI)
                     })
                     staticImports.add("org.lwjgl.system.Checks.*")
             }

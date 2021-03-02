@@ -7,11 +7,11 @@ package openxr.templates
 
 import org.lwjgl.generator.*
 import core.windows.*
-import opengl.*;
 import core.linux.*
 import openxr.*
+import openxr.KHR as KHR_
 
-val KHR_opengl_enable = "KHROpenglEnable".nativeClassXR("KHR_opengl_enable", type = "instance", postfix = KHR) {
+val KHR_opengl_enable = "KHROpenglEnable".nativeClassXR("KHR_opengl_enable", type = "instance", postfix = KHR_) {
     documentation =
         """
         The $templateName extension.

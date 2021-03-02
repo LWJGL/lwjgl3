@@ -8,9 +8,9 @@ package openxr.templates
 import org.lwjgl.generator.*
 import vulkan.*
 import openxr.*
-import openxr.KHR as KHR1
+import openxr.KHR as KHR_
 
-val KHR_vulkan_swapchain_format_list = "KHRVulkanSwapchainFormatList".nativeClassXR("KHR_vulkan_swapchain_format_list", type = "instance", postfix = KHR1) {
+val KHR_vulkan_swapchain_format_list = "KHRVulkanSwapchainFormatList".nativeClassXR("KHR_vulkan_swapchain_format_list", type = "instance", postfix = KHR_) {
     documentation =
         """
         The $templateName extension.

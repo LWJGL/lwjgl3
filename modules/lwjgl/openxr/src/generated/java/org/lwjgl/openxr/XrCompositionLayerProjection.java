@@ -298,7 +298,7 @@ public class XrCompositionLayerProjection extends Struct implements NativeResour
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerProjection.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerProjection.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerProjection.NEXT, value); }
     /** Unsafe version of {@link #layerFlags(long) layerFlags}. */
     public static void nlayerFlags(long struct, long value) { UNSAFE.putLong(null, struct + XrCompositionLayerProjection.LAYERFLAGS, value); }
     /** Unsafe version of {@link #space(XrSpace) space}. */
@@ -314,7 +314,6 @@ public class XrCompositionLayerProjection extends Struct implements NativeResour
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrCompositionLayerProjection.NEXT));
         check(memGetAddress(struct + XrCompositionLayerProjection.SPACE));
         int viewCount = nviewCount(struct);
         long views = memGetAddress(struct + XrCompositionLayerProjection.VIEWS);

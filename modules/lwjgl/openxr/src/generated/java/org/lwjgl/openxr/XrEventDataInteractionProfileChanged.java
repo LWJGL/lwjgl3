@@ -263,7 +263,7 @@ public class XrEventDataInteractionProfileChanged extends Struct implements Nati
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataInteractionProfileChanged.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataInteractionProfileChanged.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataInteractionProfileChanged.NEXT, value); }
     /** Unsafe version of {@link #session(XrSession) session}. */
     public static void nsession(long struct, XrSession value) { memPutAddress(struct + XrEventDataInteractionProfileChanged.SESSION, value.address()); }
 
@@ -273,7 +273,6 @@ public class XrEventDataInteractionProfileChanged extends Struct implements Nati
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrEventDataInteractionProfileChanged.NEXT));
         check(memGetAddress(struct + XrEventDataInteractionProfileChanged.SESSION));
     }
 

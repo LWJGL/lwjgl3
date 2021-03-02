@@ -49,7 +49,6 @@ public class MSFTSpatialGraphBridge {
         long __functionAddress = session.getCapabilities().xrCreateSpatialGraphNodeSpaceMSFT;
         if (CHECKS) {
             check(__functionAddress);
-            XrSpatialGraphNodeSpaceCreateInfoMSFT.validate(createInfo);
         }
         return callPPPI(session.address(), createInfo, space, __functionAddress);
     }

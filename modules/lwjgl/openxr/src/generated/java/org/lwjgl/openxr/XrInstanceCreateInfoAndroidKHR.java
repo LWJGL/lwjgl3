@@ -276,7 +276,7 @@ public class XrInstanceCreateInfoAndroidKHR extends Struct implements NativeReso
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrInstanceCreateInfoAndroidKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrInstanceCreateInfoAndroidKHR.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrInstanceCreateInfoAndroidKHR.NEXT, value); }
     /** Unsafe version of {@link #applicationVM(long) applicationVM}. */
     public static void napplicationVM(long struct, long value) { memPutAddress(struct + XrInstanceCreateInfoAndroidKHR.APPLICATIONVM, check(value)); }
     /** Unsafe version of {@link #applicationActivity(long) applicationActivity}. */
@@ -288,7 +288,6 @@ public class XrInstanceCreateInfoAndroidKHR extends Struct implements NativeReso
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrInstanceCreateInfoAndroidKHR.NEXT));
         check(memGetAddress(struct + XrInstanceCreateInfoAndroidKHR.APPLICATIONVM));
         check(memGetAddress(struct + XrInstanceCreateInfoAndroidKHR.APPLICATIONACTIVITY));
     }

@@ -583,9 +583,6 @@ public class XR10 {
 
     public static int nxrGetSystem(XrInstance instance, long getInfo, long systemId) {
         long __functionAddress = instance.getCapabilities().xrGetSystem;
-        if (CHECKS) {
-            XrSystemGetInfo.validate(getInfo);
-        }
         return callPPPI(instance.address(), getInfo, systemId, __functionAddress);
     }
 
@@ -628,9 +625,6 @@ public class XR10 {
 
     public static int nxrCreateSession(XrInstance instance, long createInfo, long session) {
         long __functionAddress = instance.getCapabilities().xrCreateSession;
-        if (CHECKS) {
-            XrSessionCreateInfo.validate(createInfo);
-        }
         return callPPPI(instance.address(), createInfo, session, __functionAddress);
     }
 
@@ -669,9 +663,6 @@ public class XR10 {
 
     public static int nxrCreateReferenceSpace(XrSession session, long createInfo, long space) {
         long __functionAddress = session.getCapabilities().xrCreateReferenceSpace;
-        if (CHECKS) {
-            XrReferenceSpaceCreateInfo.validate(createInfo);
-        }
         return callPPPI(session.address(), createInfo, space, __functionAddress);
     }
 
@@ -794,9 +785,6 @@ public class XR10 {
 
     public static int nxrCreateSwapchain(XrSession session, long createInfo, long swapchain) {
         long __functionAddress = session.getCapabilities().xrCreateSwapchain;
-        if (CHECKS) {
-            XrSwapchainCreateInfo.validate(createInfo);
-        }
         return callPPPI(session.address(), createInfo, swapchain, __functionAddress);
     }
 
@@ -835,9 +823,6 @@ public class XR10 {
 
     public static int nxrAcquireSwapchainImage(XrSwapchain swapchain, long acquireInfo, long index) {
         long __functionAddress = swapchain.getCapabilities().xrAcquireSwapchainImage;
-        if (CHECKS) {
-            if (acquireInfo != NULL) { XrSwapchainImageAcquireInfo.validate(acquireInfo); }
-        }
         return callPPPI(swapchain.address(), acquireInfo, index, __functionAddress);
     }
 
@@ -853,9 +838,6 @@ public class XR10 {
 
     public static int nxrWaitSwapchainImage(XrSwapchain swapchain, long waitInfo) {
         long __functionAddress = swapchain.getCapabilities().xrWaitSwapchainImage;
-        if (CHECKS) {
-            XrSwapchainImageWaitInfo.validate(waitInfo);
-        }
         return callPPI(swapchain.address(), waitInfo, __functionAddress);
     }
 
@@ -868,9 +850,6 @@ public class XR10 {
 
     public static int nxrReleaseSwapchainImage(XrSwapchain swapchain, long releaseInfo) {
         long __functionAddress = swapchain.getCapabilities().xrReleaseSwapchainImage;
-        if (CHECKS) {
-            if (releaseInfo != NULL) { XrSwapchainImageReleaseInfo.validate(releaseInfo); }
-        }
         return callPPI(swapchain.address(), releaseInfo, __functionAddress);
     }
 
@@ -883,9 +862,6 @@ public class XR10 {
 
     public static int nxrBeginSession(XrSession session, long beginInfo) {
         long __functionAddress = session.getCapabilities().xrBeginSession;
-        if (CHECKS) {
-            XrSessionBeginInfo.validate(beginInfo);
-        }
         return callPPI(session.address(), beginInfo, __functionAddress);
     }
 
@@ -914,9 +890,6 @@ public class XR10 {
 
     public static int nxrWaitFrame(XrSession session, long frameWaitInfo, long frameState) {
         long __functionAddress = session.getCapabilities().xrWaitFrame;
-        if (CHECKS) {
-            if (frameWaitInfo != NULL) { XrFrameWaitInfo.validate(frameWaitInfo); }
-        }
         return callPPPI(session.address(), frameWaitInfo, frameState, __functionAddress);
     }
 
@@ -929,9 +902,6 @@ public class XR10 {
 
     public static int nxrBeginFrame(XrSession session, long frameBeginInfo) {
         long __functionAddress = session.getCapabilities().xrBeginFrame;
-        if (CHECKS) {
-            if (frameBeginInfo != NULL) { XrFrameBeginInfo.validate(frameBeginInfo); }
-        }
         return callPPI(session.address(), frameBeginInfo, __functionAddress);
     }
 
@@ -944,9 +914,6 @@ public class XR10 {
 
     public static int nxrEndFrame(XrSession session, long frameEndInfo) {
         long __functionAddress = session.getCapabilities().xrEndFrame;
-        if (CHECKS) {
-            XrFrameEndInfo.validate(frameEndInfo);
-        }
         return callPPI(session.address(), frameEndInfo, __functionAddress);
     }
 
@@ -1023,9 +990,6 @@ public class XR10 {
 
     public static int nxrCreateActionSet(XrInstance instance, long createInfo, long actionSet) {
         long __functionAddress = instance.getCapabilities().xrCreateActionSet;
-        if (CHECKS) {
-            XrActionSetCreateInfo.validate(createInfo);
-        }
         return callPPPI(instance.address(), createInfo, actionSet, __functionAddress);
     }
 
@@ -1049,9 +1013,6 @@ public class XR10 {
 
     public static int nxrCreateAction(XrActionSet actionSet, long createInfo, long action) {
         long __functionAddress = actionSet.getCapabilities().xrCreateAction;
-        if (CHECKS) {
-            XrActionCreateInfo.validate(createInfo);
-        }
         return callPPPI(actionSet.address(), createInfo, action, __functionAddress);
     }
 
@@ -1177,9 +1138,6 @@ public class XR10 {
 
     public static int nxrSyncActions(XrSession session, long syncInfo) {
         long __functionAddress = session.getCapabilities().xrSyncActions;
-        if (CHECKS) {
-            XrActionsSyncInfo.validate(syncInfo);
-        }
         return callPPI(session.address(), syncInfo, __functionAddress);
     }
 
@@ -1210,9 +1168,6 @@ public class XR10 {
 
     public static int nxrGetInputSourceLocalizedName(XrSession session, long getInfo, int bufferCapacityInput, long bufferCountOutput, long buffer) {
         long __functionAddress = session.getCapabilities().xrGetInputSourceLocalizedName;
-        if (CHECKS) {
-            XrInputSourceLocalizedNameGetInfo.validate(getInfo);
-        }
         return callPPPPI(session.address(), getInfo, bufferCapacityInput, bufferCountOutput, buffer, __functionAddress);
     }
 
@@ -1230,7 +1185,6 @@ public class XR10 {
         long __functionAddress = session.getCapabilities().xrApplyHapticFeedback;
         if (CHECKS) {
             XrHapticActionInfo.validate(hapticActionInfo);
-            XrHapticBaseHeader.validate(hapticFeedback);
         }
         return callPPPI(session.address(), hapticActionInfo, hapticFeedback, __functionAddress);
     }
@@ -1299,7 +1253,6 @@ public class XR10 {
         long __functionAddress = instance.getCapabilities().xrGetSystem;
         if (CHECKS) {
             check(systemId, 1);
-            XrSystemGetInfo.validate(getInfo.address());
         }
         return callPPPI(instance.address(), getInfo.address(), systemId, __functionAddress);
     }
@@ -1370,7 +1323,6 @@ public class XR10 {
         long __functionAddress = swapchain.getCapabilities().xrAcquireSwapchainImage;
         if (CHECKS) {
             check(index, 1);
-            if (acquireInfo != null) { XrSwapchainImageAcquireInfo.validate(acquireInfo.address()); }
         }
         return callPPPI(swapchain.address(), memAddressSafe(acquireInfo), index, __functionAddress);
     }
@@ -1441,7 +1393,6 @@ public class XR10 {
         long __functionAddress = session.getCapabilities().xrGetInputSourceLocalizedName;
         if (CHECKS) {
             check(bufferCountOutput, 1);
-            XrInputSourceLocalizedNameGetInfo.validate(getInfo.address());
         }
         return callPPPPI(session.address(), getInfo.address(), remainingSafe(buffer), bufferCountOutput, memAddressSafe(buffer), __functionAddress);
     }

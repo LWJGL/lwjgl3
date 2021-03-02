@@ -7,8 +7,9 @@ package openxr.templates
 
 import org.lwjgl.generator.*
 import openxr.*
+import openxr.KHR as KHR_
 
-val KHR_composition_layer_depth = "KHRCompositionLayerDepth".nativeClassXR("KHR_composition_layer_depth", type = "instance", postfix = KHR) {
+val KHR_composition_layer_depth = "KHRCompositionLayerDepth".nativeClassXR("KHR_composition_layer_depth", type = "instance", postfix = KHR_) {
     documentation =
         """
         The $templateName extension.

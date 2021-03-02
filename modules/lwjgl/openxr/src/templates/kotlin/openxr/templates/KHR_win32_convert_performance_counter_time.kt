@@ -8,8 +8,9 @@ package openxr.templates
 import org.lwjgl.generator.*
 import core.windows.*
 import openxr.*
+import openxr.KHR as KHR_
 
-val KHR_win32_convert_performance_counter_time = "KHRWin32ConvertPerformanceCounterTime".nativeClassXR("KHR_win32_convert_performance_counter_time", type = "instance", postfix = KHR) {
+val KHR_win32_convert_performance_counter_time = "KHRWin32ConvertPerformanceCounterTime".nativeClassXR("KHR_win32_convert_performance_counter_time", type = "instance", postfix = KHR_) {
     documentation =
         """
         The $templateName extension.
@@ -27,14 +28,14 @@ val KHR_win32_convert_performance_counter_time = "KHRWin32ConvertPerformanceCoun
         "KHR_WIN32_CONVERT_PERFORMANCE_COUNTER_TIME_EXTENSION_NAME".."XR_KHR_win32_convert_performance_counter_time"
     )
 
-//    XrResult(
-//        "ConvertWin32PerformanceCounterToTimeKHR",
-//        "",
-//
-//        XrInstance("instance", ""),
-//        LARGE_INTEGER.const.p("performanceCounter", ""),
-//        Check(1)..XrTime.p("time", "")
-//    )
+    XrResult(
+        "ConvertWin32PerformanceCounterToTimeKHR",
+        "",
+
+        XrInstance("instance", ""),
+        LARGE_INTEGER.const.p("performanceCounter", ""),
+        Check(1)..XrTime.p("time", "")
+    )
 //
 //    XrResult(
 //        "ConvertTimeToWin32PerformanceCounterKHR",

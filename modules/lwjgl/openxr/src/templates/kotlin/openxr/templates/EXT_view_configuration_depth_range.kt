@@ -7,8 +7,9 @@ package openxr.templates
 
 import org.lwjgl.generator.*
 import openxr.*
+import openxr.EXT as EXT_
 
-val EXT_view_configuration_depth_range = "EXTViewConfigurationDepthRange".nativeClassXR("EXT_view_configuration_depth_range", type = "instance", postfix = EXT) {
+val EXT_view_configuration_depth_range = "EXTViewConfigurationDepthRange".nativeClassXR("EXT_view_configuration_depth_range", type = "instance", postfix = EXT_) {
     documentation =
         """
         The $templateName extension.

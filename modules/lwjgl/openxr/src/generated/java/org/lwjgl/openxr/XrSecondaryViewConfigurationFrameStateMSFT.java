@@ -272,7 +272,7 @@ public class XrSecondaryViewConfigurationFrameStateMSFT extends Struct implement
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSecondaryViewConfigurationFrameStateMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrSecondaryViewConfigurationFrameStateMSFT.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrSecondaryViewConfigurationFrameStateMSFT.NEXT, value); }
     /** Sets the specified value to the {@code viewConfigurationCount} field of the specified {@code struct}. */
     public static void nviewConfigurationCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSecondaryViewConfigurationFrameStateMSFT.VIEWCONFIGURATIONCOUNT, value); }
     /** Unsafe version of {@link #viewConfigurationStates(XrSecondaryViewConfigurationStateMSFT.Buffer) viewConfigurationStates}. */
@@ -284,11 +284,7 @@ public class XrSecondaryViewConfigurationFrameStateMSFT extends Struct implement
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrSecondaryViewConfigurationFrameStateMSFT.NEXT));
-        int viewConfigurationCount = nviewConfigurationCount(struct);
-        long viewConfigurationStates = memGetAddress(struct + XrSecondaryViewConfigurationFrameStateMSFT.VIEWCONFIGURATIONSTATES);
-        check(viewConfigurationStates);
-        XrSecondaryViewConfigurationStateMSFT.validate(viewConfigurationStates, viewConfigurationCount);
+        check(memGetAddress(struct + XrSecondaryViewConfigurationFrameStateMSFT.VIEWCONFIGURATIONSTATES));
     }
 
     /**

@@ -7,8 +7,9 @@ package openxr.templates
 
 import org.lwjgl.generator.*
 import openxr.*
+import openxr.EXT as EXT_
 
-val EXT_hp_mixed_reality_controller = "EXTHpMixedRealityController".nativeClassXR("EXT_hp_mixed_reality_controller", type = "instance", postfix = EXT) {
+val EXT_hp_mixed_reality_controller = "EXTHpMixedRealityController".nativeClassXR("EXT_hp_mixed_reality_controller", type = "instance", postfix = EXT_) {
     documentation =
         """
         The $templateName extension.

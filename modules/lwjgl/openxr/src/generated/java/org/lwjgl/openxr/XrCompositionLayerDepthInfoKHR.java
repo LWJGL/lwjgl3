@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -312,7 +311,7 @@ public class XrCompositionLayerDepthInfoKHR extends Struct implements NativeReso
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerDepthInfoKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerDepthInfoKHR.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerDepthInfoKHR.NEXT, value); }
     /** Unsafe version of {@link #subImage(XrSwapchainSubImage) subImage}. */
     public static void nsubImage(long struct, XrSwapchainSubImage value) { memCopy(value.address(), struct + XrCompositionLayerDepthInfoKHR.SUBIMAGE, XrSwapchainSubImage.SIZEOF); }
     /** Unsafe version of {@link #minDepth(float) minDepth}. */
@@ -330,7 +329,6 @@ public class XrCompositionLayerDepthInfoKHR extends Struct implements NativeReso
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrCompositionLayerDepthInfoKHR.NEXT));
         XrSwapchainSubImage.validate(struct + XrCompositionLayerDepthInfoKHR.SUBIMAGE);
     }
 

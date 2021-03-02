@@ -317,7 +317,7 @@ public class XrGraphicsBindingVulkanKHR extends Struct implements NativeResource
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrGraphicsBindingVulkanKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrGraphicsBindingVulkanKHR.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrGraphicsBindingVulkanKHR.NEXT, value); }
     /** Unsafe version of {@link #instance(VkInstance) instance}. */
     public static void ninstance(long struct, VkInstance value) { memPutAddress(struct + XrGraphicsBindingVulkanKHR.INSTANCE, value.address()); }
     /** Unsafe version of {@link #physicalDevice(VkPhysicalDevice) physicalDevice}. */
@@ -335,7 +335,6 @@ public class XrGraphicsBindingVulkanKHR extends Struct implements NativeResource
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrGraphicsBindingVulkanKHR.NEXT));
         check(memGetAddress(struct + XrGraphicsBindingVulkanKHR.INSTANCE));
         check(memGetAddress(struct + XrGraphicsBindingVulkanKHR.PHYSICALDEVICE));
         check(memGetAddress(struct + XrGraphicsBindingVulkanKHR.DEVICE));

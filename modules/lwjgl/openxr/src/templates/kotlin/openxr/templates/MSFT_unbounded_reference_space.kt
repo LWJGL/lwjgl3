@@ -7,8 +7,9 @@ package openxr.templates
 
 import org.lwjgl.generator.*
 import openxr.*
+import openxr.MSFT as MSFT_
 
-val MSFT_unbounded_reference_space = "MSFTUnboundedReferenceSpace".nativeClassXR("MSFT_unbounded_reference_space", type = "instance", postfix = MSFT) {
+val MSFT_unbounded_reference_space = "MSFTUnboundedReferenceSpace".nativeClassXR("MSFT_unbounded_reference_space", type = "instance", postfix = MSFT_) {
     documentation =
         """
         The $templateName extension.

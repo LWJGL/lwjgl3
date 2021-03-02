@@ -7,10 +7,10 @@ package openxr.templates
 
 import org.lwjgl.generator.*
 import vulkan.*
-import openxr.KHR as KHR1
 import openxr.*
+import openxr.KHR as KHR_
 
-val KHR_vulkan_enable2 = "KHRVulkanEnable2".nativeClassXR("KHR_vulkan_enable2", type = "instance", postfix = KHR1) {
+val KHR_vulkan_enable2 = "KHRVulkanEnable2".nativeClassXR("KHR_vulkan_enable2", type = "instance", postfix = KHR_) {
     documentation =
         """
         The $templateName extension.
@@ -39,25 +39,25 @@ val KHR_vulkan_enable2 = "KHRVulkanEnable2".nativeClassXR("KHR_vulkan_enable2", 
         "TYPE_GRAPHICS_REQUIREMENTS_VULKAN2_KHR".."1000090002"
     )
 
-//    XrResult(
-//        "CreateVulkanInstanceKHR",
-//        "",
-//
-//        XrInstance("instance", ""),
-//        XrVulkanInstanceCreateInfoKHR.const.p("createInfo", ""),
-//        VkInstance.p("vulkanInstance", ""),
-//        VkResult.p("vulkanResult", "")
-//    )
-//
-//    XrResult(
-//        "CreateVulkanDeviceKHR",
-//        "",
-//
-//        XrInstance("instance", ""),
-//        XrVulkanDeviceCreateInfoKHR.const.p("createInfo", ""),
-//        VkDevice.p("vulkanDevice", ""),
-//        VkResult.p("vulkanResult", "")
-//    )
+    XrResult(
+        "CreateVulkanInstanceKHR",
+        "",
+
+        XrInstance("instance", ""),
+        XrVulkanInstanceCreateInfoKHR.const.p("createInfo", ""),
+        VkInstance.p("vulkanInstance", ""),
+        VkResult.p("vulkanResult", "")
+    )
+
+    XrResult(
+        "CreateVulkanDeviceKHR",
+        "",
+
+        XrInstance("instance", ""),
+        XrVulkanDeviceCreateInfoKHR.const.p("createInfo", ""),
+        VkDevice.p("vulkanDevice", ""),
+        VkResult.p("vulkanResult", "")
+    )
 
     XrResult(
         "GetVulkanGraphicsDevice2KHR",

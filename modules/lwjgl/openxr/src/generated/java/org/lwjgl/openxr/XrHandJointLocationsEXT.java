@@ -285,7 +285,7 @@ public class XrHandJointLocationsEXT extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrHandJointLocationsEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrHandJointLocationsEXT.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrHandJointLocationsEXT.NEXT, value); }
     /** Unsafe version of {@link #isActive(boolean) isActive}. */
     public static void nisActive(long struct, int value) { UNSAFE.putInt(null, struct + XrHandJointLocationsEXT.ISACTIVE, value); }
     /** Sets the specified value to the {@code jointCount} field of the specified {@code struct}. */
@@ -299,7 +299,6 @@ public class XrHandJointLocationsEXT extends Struct implements NativeResource {
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrHandJointLocationsEXT.NEXT));
         check(memGetAddress(struct + XrHandJointLocationsEXT.JOINTLOCATIONS));
     }
 

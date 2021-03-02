@@ -7,8 +7,9 @@ package openxr.templates
 
 import org.lwjgl.generator.*
 import openxr.*
+import openxr.EPIC as EPIC_
 
-val EPIC_view_configuration_fov = "EPICViewConfigurationFov".nativeClassXR("EPIC_view_configuration_fov", type = "instance", postfix = EPIC) {
+val EPIC_view_configuration_fov = "EPICViewConfigurationFov".nativeClassXR("EPIC_view_configuration_fov", type = "instance", postfix = EPIC_) {
     documentation =
         """
         The $templateName extension.

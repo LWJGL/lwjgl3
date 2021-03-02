@@ -288,7 +288,7 @@ public class XrControllerModelNodePropertiesMSFT extends Struct implements Nativ
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrControllerModelNodePropertiesMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrControllerModelNodePropertiesMSFT.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrControllerModelNodePropertiesMSFT.NEXT, value); }
     /** Unsafe version of {@link #parentNodeName(ByteBuffer) parentNodeName}. */
     public static void nparentNodeName(long struct, ByteBuffer value) {
         if (CHECKS) {
@@ -304,27 +304,6 @@ public class XrControllerModelNodePropertiesMSFT extends Struct implements Nativ
             checkGT(value, XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT);
         }
         memCopy(memAddress(value), struct + XrControllerModelNodePropertiesMSFT.NODENAME, value.remaining());
-    }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrControllerModelNodePropertiesMSFT.NEXT));
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
-        }
     }
 
     // -----------------------------------

@@ -66,7 +66,6 @@ public class MSFTHandTrackingMesh {
         long __functionAddress = handTracker.getCapabilities().xrCreateHandMeshSpaceMSFT;
         if (CHECKS) {
             check(__functionAddress);
-            XrHandMeshSpaceCreateInfoMSFT.validate(createInfo);
         }
         return callPPPI(handTracker.address(), createInfo, space, __functionAddress);
     }
@@ -85,7 +84,6 @@ public class MSFTHandTrackingMesh {
         long __functionAddress = handTracker.getCapabilities().xrUpdateHandMeshMSFT;
         if (CHECKS) {
             check(__functionAddress);
-            XrHandMeshUpdateInfoMSFT.validate(updateInfo);
         }
         return callPPPI(handTracker.address(), updateInfo, handMesh, __functionAddress);
     }

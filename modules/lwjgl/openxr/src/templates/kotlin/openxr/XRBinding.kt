@@ -164,7 +164,7 @@ val XR_BINDING_INSTANCE = Generator.register(object : APIBinding(
         println(
             """
     /** The OpenXR API version number. */
-    public final int apiVersion;
+    public final long apiVersion;
 """
         )
 
@@ -177,7 +177,7 @@ val XR_BINDING_INSTANCE = Generator.register(object : APIBinding(
 
         print(
             """
-    $CAPS_INSTANCE(FunctionProvider provider, int apiVersion, Set<String> ext, Set<String> deviceExt) {
+    $CAPS_INSTANCE(FunctionProvider provider, long apiVersion, Set<String> ext, Set<String> deviceExt) {
         this.apiVersion = apiVersion;
 
         long[] caps = new long[${instanceCommands.size}];
@@ -309,7 +309,7 @@ val XR_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.OPENX
         println(
             """
     /** The Vulkan API version number. */
-    public final int apiVersion;
+    public final long apiVersion;
 """
         )
 

@@ -118,7 +118,7 @@ public class XRCapabilitiesDevice {
         xrCreateSpatialGraphNodeSpaceMSFT;
 
     /** The Vulkan API version number. */
-    public final int apiVersion;
+    public final long apiVersion;
 
     /** When true, {@link XR10} is supported. */
     public final boolean OpenXR10;

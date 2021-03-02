@@ -276,7 +276,7 @@ public class XrLoaderInitInfoAndroidKHR extends Struct implements NativeResource
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrLoaderInitInfoAndroidKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrLoaderInitInfoAndroidKHR.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrLoaderInitInfoAndroidKHR.NEXT, value); }
     /** Unsafe version of {@link #applicationVM(long) applicationVM}. */
     public static void napplicationVM(long struct, long value) { memPutAddress(struct + XrLoaderInitInfoAndroidKHR.APPLICATIONVM, check(value)); }
     /** Unsafe version of {@link #applicationContext(long) applicationContext}. */
@@ -288,7 +288,6 @@ public class XrLoaderInitInfoAndroidKHR extends Struct implements NativeResource
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrLoaderInitInfoAndroidKHR.NEXT));
         check(memGetAddress(struct + XrLoaderInitInfoAndroidKHR.APPLICATIONVM));
         check(memGetAddress(struct + XrLoaderInitInfoAndroidKHR.APPLICATIONCONTEXT));
     }

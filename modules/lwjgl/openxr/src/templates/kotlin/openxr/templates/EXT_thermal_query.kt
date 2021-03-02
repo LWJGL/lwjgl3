@@ -7,8 +7,9 @@ package openxr.templates
 
 import org.lwjgl.generator.*
 import openxr.*
+import openxr.EXT as EXT_
 
-val EXT_thermal_query = "EXTThermalQuery".nativeClassXR("EXT_thermal_query", type = "instance", postfix = EXT) {
+val EXT_thermal_query = "EXTThermalQuery".nativeClassXR("EXT_thermal_query", type = "instance", postfix = EXT_) {
     documentation =
         """
         The $templateName extension.

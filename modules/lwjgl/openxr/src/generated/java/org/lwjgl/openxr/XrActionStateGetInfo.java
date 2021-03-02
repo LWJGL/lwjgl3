@@ -276,7 +276,7 @@ public class XrActionStateGetInfo extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrActionStateGetInfo.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrActionStateGetInfo.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrActionStateGetInfo.NEXT, value); }
     /** Unsafe version of {@link #action(XrAction) action}. */
     public static void naction(long struct, XrAction value) { memPutAddress(struct + XrActionStateGetInfo.ACTION, value.address()); }
     /** Unsafe version of {@link #subactionPath(long) subactionPath}. */
@@ -288,7 +288,6 @@ public class XrActionStateGetInfo extends Struct implements NativeResource {
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrActionStateGetInfo.NEXT));
         check(memGetAddress(struct + XrActionStateGetInfo.ACTION));
     }
 

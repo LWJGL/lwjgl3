@@ -7,8 +7,9 @@ package openxr.templates
 
 import org.lwjgl.generator.*
 import openxr.*
+import openxr.FB as FB_
 
-val FB_android_surface_swapchain_create = "FBAndroidSurfaceSwapchainCreate".nativeClassXR("FB_android_surface_swapchain_create", type = "instance", postfix = FB) {
+val FB_android_surface_swapchain_create = "FBAndroidSurfaceSwapchainCreate".nativeClassXR("FB_android_surface_swapchain_create", type = "instance", postfix = FB_) {
     documentation =
         """
         The $templateName extension.

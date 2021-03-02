@@ -7,8 +7,9 @@ package openxr.templates
 
 import org.lwjgl.generator.*
 import openxr.*
+import openxr.MSFT as MSFT_
 
-val MSFT_secondary_view_configuration = "MSFTSecondaryViewConfiguration".nativeClassXR("MSFT_secondary_view_configuration", type = "instance", postfix = MSFT) {
+val MSFT_secondary_view_configuration = "MSFTSecondaryViewConfiguration".nativeClassXR("MSFT_secondary_view_configuration", type = "instance", postfix = MSFT_) {
     documentation =
         """
         The $templateName extension.

@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -367,7 +366,7 @@ public class XrSwapchainCreateInfo extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSwapchainCreateInfo.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrSwapchainCreateInfo.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrSwapchainCreateInfo.NEXT, value); }
     /** Unsafe version of {@link #createFlags(long) createFlags}. */
     public static void ncreateFlags(long struct, long value) { UNSAFE.putLong(null, struct + XrSwapchainCreateInfo.CREATEFLAGS, value); }
     /** Unsafe version of {@link #usageFlags(long) usageFlags}. */
@@ -386,27 +385,6 @@ public class XrSwapchainCreateInfo extends Struct implements NativeResource {
     public static void narraySize(long struct, int value) { UNSAFE.putInt(null, struct + XrSwapchainCreateInfo.ARRAYSIZE, value); }
     /** Unsafe version of {@link #mipCount(int) mipCount}. */
     public static void nmipCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSwapchainCreateInfo.MIPCOUNT, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrSwapchainCreateInfo.NEXT));
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
-        }
-    }
 
     // -----------------------------------
 

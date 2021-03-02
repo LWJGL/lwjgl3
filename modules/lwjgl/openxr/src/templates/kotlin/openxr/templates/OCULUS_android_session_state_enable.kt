@@ -7,8 +7,9 @@ package openxr.templates
 
 import org.lwjgl.generator.*
 import openxr.*
+import openxr.OCULUS as OCULUS_
 
-val OCULUS_android_session_state_enable = "OCULUSAndroidSessionStateEnable".nativeClassXR("OCULUS_android_session_state_enable", type = "instance", postfix = OCULUS) {
+val OCULUS_android_session_state_enable = "OCULUSAndroidSessionStateEnable".nativeClassXR("OCULUS_android_session_state_enable", type = "instance", postfix = OCULUS_) {
     documentation =
         """
         The $templateName extension.

@@ -81,7 +81,7 @@ val PFN_xrVoidFunction = Module.OPENXR.callback {
 val XrApiLayerProperties = struct(Module.OPENXR, "XrApiLayerProperties", mutable = false) {
     javaImport("static org.lwjgl.openxr.XR10.*")
     XrStructureType("type", "")
-    opaque_p("next", "")
+    nullable..opaque_p("next", "")
     charUTF8("layerName", "")["XR_MAX_API_LAYER_NAME_SIZE"]
     XrVersion("specVersion", "")
     uint32_t("layerVersion", "")
@@ -91,7 +91,7 @@ val XrApiLayerProperties = struct(Module.OPENXR, "XrApiLayerProperties", mutable
 val XrExtensionProperties = struct(Module.OPENXR, "XrExtensionProperties", mutable = false) {
     javaImport("static org.lwjgl.openxr.XR10.*")
     XrStructureType("type", "")
-    opaque_p("next", "")
+    nullable..opaque_p("next", "")
     charUTF8("extensionName", "")["XR_MAX_EXTENSION_NAME_SIZE"]
     uint32_t("extensionVersion", "")
 }
@@ -107,7 +107,7 @@ val XrApplicationInfo = struct(Module.OPENXR, "XrApplicationInfo") {
 
 val XrInstanceCreateInfo = struct(Module.OPENXR, "XrInstanceCreateInfo") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrInstanceCreateFlags("createFlags", "")
     XrApplicationInfo("applicationInfo", "")
     AutoSize("enabledApiLayerNames", optional = true)..uint32_t("enabledApiLayerCount", "")
@@ -119,20 +119,20 @@ val XrInstanceCreateInfo = struct(Module.OPENXR, "XrInstanceCreateInfo") {
 val XrInstanceProperties = struct(Module.OPENXR, "XrInstanceProperties", mutable = false) {
     javaImport("static org.lwjgl.openxr.XR10.*")
     XrStructureType("type", "")
-    opaque_p("next", "")
+    nullable..opaque_p("next", "")
     XrVersion("runtimeVersion", "")
     charUTF8("runtimeName", "")["XR_MAX_RUNTIME_NAME_SIZE"]
 }
 
 val XrEventDataBuffer = struct(Module.OPENXR, "XrEventDataBuffer") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     uint8_t("varying", "")[4000]
 }
 
 val XrSystemGetInfo = struct(Module.OPENXR, "XrSystemGetInfo") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrFormFactor("formFactor", "")
 }
 
@@ -150,7 +150,7 @@ val XrSystemTrackingProperties = struct(Module.OPENXR, "XrSystemTrackingProperti
 val XrSystemProperties = struct(Module.OPENXR, "XrSystemProperties", mutable = false) {
     javaImport("static org.lwjgl.openxr.XR10.*")
     XrStructureType("type", "")
-    opaque_p("next", "")
+    nullable..opaque_p("next", "")
     XrSystemId("systemId", "")
     uint32_t("vendorId", "")
     charUTF8("systemName", "")["XR_MAX_SYSTEM_NAME_SIZE"]
@@ -160,7 +160,7 @@ val XrSystemProperties = struct(Module.OPENXR, "XrSystemProperties", mutable = f
 
 val XrSessionCreateInfo = struct(Module.OPENXR, "XrSessionCreateInfo") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrSessionCreateFlags("createFlags", "")
     XrSystemId("systemId", "")
 }
@@ -173,7 +173,7 @@ val XrVector3f = struct(Module.OPENXR, "XrVector3f") {
 
 val XrSpaceVelocity = struct(Module.OPENXR, "XrSpaceVelocity") {
     XrStructureType("type", "")
-    opaque_p("next", "")
+    nullable..opaque_p("next", "")
     XrSpaceVelocityFlags("velocityFlags", "")
     XrVector3f("linearVelocity", "")
     XrVector3f("angularVelocity", "")
@@ -193,7 +193,7 @@ val XrPosef = struct(Module.OPENXR, "XrPosef") {
 
 val XrReferenceSpaceCreateInfo = struct(Module.OPENXR, "XrReferenceSpaceCreateInfo") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrReferenceSpaceType("referenceSpaceType", "")
     XrPosef("poseInReferenceSpace", "")
 }
@@ -205,7 +205,7 @@ val XrExtent2Df = struct(Module.OPENXR, "XrExtent2Df") {
 
 val XrActionSpaceCreateInfo = struct(Module.OPENXR, "XrActionSpaceCreateInfo") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrAction("action", "")
     XrPath("subactionPath", "")
     XrPosef("poseInActionSpace", "")
@@ -213,21 +213,21 @@ val XrActionSpaceCreateInfo = struct(Module.OPENXR, "XrActionSpaceCreateInfo") {
 
 val XrSpaceLocation = struct(Module.OPENXR, "XrSpaceLocation") {
     XrStructureType("type", "")
-    opaque_p("next", "")
+    nullable..opaque_p("next", "")
     XrSpaceLocationFlags("locationFlags", "")
     XrPosef("pose", "")
 }
 
 val XrViewConfigurationProperties = struct(Module.OPENXR, "XrViewConfigurationProperties") {
     XrStructureType("type", "")
-    opaque_p("next", "")
+    nullable..opaque_p("next", "")
     XrViewConfigurationType("viewConfigurationType", "")
     XrBool32("fovMutable", "")
 }
 
 val XrViewConfigurationView = struct(Module.OPENXR, "XrViewConfigurationView") {
     XrStructureType("type", "")
-    opaque_p("next", "")
+    nullable..opaque_p("next", "")
     uint32_t("recommendedImageRectWidth", "")
     uint32_t("maxImageRectWidth", "")
     uint32_t("recommendedImageRectHeight", "")
@@ -238,7 +238,7 @@ val XrViewConfigurationView = struct(Module.OPENXR, "XrViewConfigurationView") {
 
 val XrSwapchainCreateInfo = struct(Module.OPENXR, "XrSwapchainCreateInfo") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrSwapchainCreateFlags("createFlags", "")
     XrSwapchainUsageFlags("usageFlags", "")
     int64_t("format", "")
@@ -252,39 +252,39 @@ val XrSwapchainCreateInfo = struct(Module.OPENXR, "XrSwapchainCreateInfo") {
 
 val XrSwapchainImageBaseHeader = struct(Module.OPENXR, "XrSwapchainImageBaseHeader") {
     XrStructureType("type", "")
-    opaque_p("next", "")
+    nullable..opaque_p("next", "")
 }
 
 val XrSwapchainImageAcquireInfo = struct(Module.OPENXR, "XrSwapchainImageAcquireInfo") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
 }
 
 val XrSwapchainImageWaitInfo = struct(Module.OPENXR, "XrSwapchainImageWaitInfo") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrDuration("timeout", "")
 }
 
 val XrSwapchainImageReleaseInfo = struct(Module.OPENXR, "XrSwapchainImageReleaseInfo") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
 }
 
 val XrSessionBeginInfo = struct(Module.OPENXR, "XrSessionBeginInfo") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrViewConfigurationType("primaryViewConfigurationType", "")
 }
 
 val XrFrameWaitInfo = struct(Module.OPENXR, "XrFrameWaitInfo") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
 }
 
 val XrFrameState = struct(Module.OPENXR, "XrFrameState") {
     XrStructureType("type", "")
-    opaque_p("next", "")
+    nullable..opaque_p("next", "")
     XrTime("predictedDisplayTime", "")
     XrDuration("predictedDisplayPeriod", "")
     XrBool32("shouldRender", "")
@@ -292,19 +292,19 @@ val XrFrameState = struct(Module.OPENXR, "XrFrameState") {
 
 val XrFrameBeginInfo = struct(Module.OPENXR, "XrFrameBeginInfo") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
 }
 
 val XrCompositionLayerBaseHeader = struct(Module.OPENXR, "XrCompositionLayerBaseHeader") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrCompositionLayerFlags("layerFlags", "")
     XrSpace("space", "")
 }
 
 val XrFrameEndInfo = struct(Module.OPENXR, "XrFrameEndInfo") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrTime("displayTime", "")
     XrEnvironmentBlendMode("environmentBlendMode", "")
     AutoSize("layers", optional = true)..uint32_t("layerCount", "")
@@ -313,7 +313,7 @@ val XrFrameEndInfo = struct(Module.OPENXR, "XrFrameEndInfo") {
 
 val XrViewLocateInfo = struct(Module.OPENXR, "XrViewLocateInfo") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrViewConfigurationType("viewConfigurationType", "")
     XrTime("displayTime", "")
     XrSpace("space", "")
@@ -321,7 +321,7 @@ val XrViewLocateInfo = struct(Module.OPENXR, "XrViewLocateInfo") {
 
 val XrViewState = struct(Module.OPENXR, "XrViewState") {
     XrStructureType("type", "")
-    opaque_p("next", "")
+    nullable..opaque_p("next", "")
     XrViewStateFlags("viewStateFlags", "")
 }
 
@@ -334,7 +334,7 @@ val XrFovf = struct(Module.OPENXR, "XrFovf") {
 
 val XrView = struct(Module.OPENXR, "XrView") {
     XrStructureType("type", "")
-    opaque_p("next", "")
+    nullable..opaque_p("next", "")
     XrPosef("pose", "")
     XrFovf("fov", "")
 }
@@ -342,7 +342,7 @@ val XrView = struct(Module.OPENXR, "XrView") {
 val XrActionSetCreateInfo = struct(Module.OPENXR, "XrActionSetCreateInfo") {
     javaImport("static org.lwjgl.openxr.XR10.*")
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     charUTF8("actionSetName", "")["XR_MAX_ACTION_SET_NAME_SIZE"]
     charUTF8("localizedActionSetName", "")["XR_MAX_LOCALIZED_ACTION_SET_NAME_SIZE"]
     uint32_t("priority", "")
@@ -351,7 +351,7 @@ val XrActionSetCreateInfo = struct(Module.OPENXR, "XrActionSetCreateInfo") {
 val XrActionCreateInfo = struct(Module.OPENXR, "XrActionCreateInfo") {
     javaImport("static org.lwjgl.openxr.XR10.*")
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     charUTF8("actionName", "")["XR_MAX_ACTION_NAME_SIZE"]
     XrActionType("actionType", "")
     AutoSize("subactionPaths", optional = true)..uint32_t("countSubactionPaths", "")
@@ -366,7 +366,7 @@ val XrActionSuggestedBinding = struct(Module.OPENXR, "XrActionSuggestedBinding")
 
 val XrInteractionProfileSuggestedBinding = struct(Module.OPENXR, "XrInteractionProfileSuggestedBinding") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrPath("interactionProfile", "")
     AutoSize("suggestedBindings")..uint32_t("countSuggestedBindings", "")
     XrActionSuggestedBinding.const.p("suggestedBindings", "")
@@ -374,27 +374,27 @@ val XrInteractionProfileSuggestedBinding = struct(Module.OPENXR, "XrInteractionP
 
 val XrSessionActionSetsAttachInfo = struct(Module.OPENXR, "XrSessionActionSetsAttachInfo") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     AutoSize("actionSets")..uint32_t("countActionSets", "")
     XrActionSet.const.p("actionSets", "")
 }
 
 val XrInteractionProfileState = struct(Module.OPENXR, "XrInteractionProfileState") {
     XrStructureType("type", "")
-    opaque_p("next", "")
+    nullable..opaque_p("next", "")
     XrPath("interactionProfile", "")
 }
 
 val XrActionStateGetInfo = struct(Module.OPENXR, "XrActionStateGetInfo") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrAction("action", "")
     XrPath("subactionPath", "")
 }
 
 val XrActionStateBoolean = struct(Module.OPENXR, "XrActionStateBoolean") {
     XrStructureType("type", "")
-    opaque_p("next", "")
+    nullable..opaque_p("next", "")
     XrBool32("currentState", "")
     XrBool32("changedSinceLastSync", "")
     XrTime("lastChangeTime", "")
@@ -403,7 +403,7 @@ val XrActionStateBoolean = struct(Module.OPENXR, "XrActionStateBoolean") {
 
 val XrActionStateFloat = struct(Module.OPENXR, "XrActionStateFloat") {
     XrStructureType("type", "")
-    opaque_p("next", "")
+    nullable..opaque_p("next", "")
     float("currentState", "")
     XrBool32("changedSinceLastSync", "")
     XrTime("lastChangeTime", "")
@@ -417,7 +417,7 @@ val XrVector2f = struct(Module.OPENXR, "XrVector2f") {
 
 val XrActionStateVector2f = struct(Module.OPENXR, "XrActionStateVector2f") {
     XrStructureType("type", "")
-    opaque_p("next", "")
+    nullable..opaque_p("next", "")
     XrVector2f("currentState", "")
     XrBool32("changedSinceLastSync", "")
     XrTime("lastChangeTime", "")
@@ -426,7 +426,7 @@ val XrActionStateVector2f = struct(Module.OPENXR, "XrActionStateVector2f") {
 
 val XrActionStatePose = struct(Module.OPENXR, "XrActionStatePose") {
     XrStructureType("type", "")
-    opaque_p("next", "")
+    nullable..opaque_p("next", "")
     XrBool32("isActive", "")
 }
 
@@ -437,34 +437,34 @@ val XrActiveActionSet = struct(Module.OPENXR, "XrActiveActionSet") {
 
 val XrActionsSyncInfo = struct(Module.OPENXR, "XrActionsSyncInfo") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     AutoSize("activeActionSets", optional = true)..uint32_t("countActiveActionSets", "")
     nullable..XrActiveActionSet.const.p("activeActionSets", "")
 }
 
 val XrBoundSourcesForActionEnumerateInfo = struct(Module.OPENXR, "XrBoundSourcesForActionEnumerateInfo") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrAction("action", "")
 }
 
 val XrInputSourceLocalizedNameGetInfo = struct(Module.OPENXR, "XrInputSourceLocalizedNameGetInfo") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrPath("sourcePath", "")
     XrInputSourceLocalizedNameFlags("whichComponents", "")
 }
 
 val XrHapticActionInfo = struct(Module.OPENXR, "XrHapticActionInfo") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrAction("action", "")
     XrPath("subactionPath", "")
 }
 
 val XrHapticBaseHeader = struct(Module.OPENXR, "XrHapticBaseHeader") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
 }
 
 val _XrBaseInStructure = struct(Module.OPENXR, "XrBaseInStructure")
@@ -502,7 +502,7 @@ val XrSwapchainSubImage = struct(Module.OPENXR, "XrSwapchainSubImage") {
 
 val XrCompositionLayerProjectionView = struct(Module.OPENXR, "XrCompositionLayerProjectionView") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrPosef("pose", "")
     XrFovf("fov", "")
     XrSwapchainSubImage("subImage", "")
@@ -510,7 +510,7 @@ val XrCompositionLayerProjectionView = struct(Module.OPENXR, "XrCompositionLayer
 
 val XrCompositionLayerProjection = struct(Module.OPENXR, "XrCompositionLayerProjection") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrCompositionLayerFlags("layerFlags", "")
     XrSpace("space", "")
     AutoSize("views")..uint32_t("viewCount", "")
@@ -519,7 +519,7 @@ val XrCompositionLayerProjection = struct(Module.OPENXR, "XrCompositionLayerProj
 
 val XrCompositionLayerQuad = struct(Module.OPENXR, "XrCompositionLayerQuad") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrCompositionLayerFlags("layerFlags", "")
     XrSpace("space", "")
     XrEyeVisibility("eyeVisibility", "")
@@ -530,24 +530,24 @@ val XrCompositionLayerQuad = struct(Module.OPENXR, "XrCompositionLayerQuad") {
 
 val XrEventDataBaseHeader = struct(Module.OPENXR, "XrEventDataBaseHeader") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
 }
 
 val XrEventDataEventsLost = struct(Module.OPENXR, "XrEventDataEventsLost") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     uint32_t("lostEventCount", "")
 }
 
 val XrEventDataInstanceLossPending = struct(Module.OPENXR, "XrEventDataInstanceLossPending") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrTime("lossTime", "")
 }
 
 val XrEventDataSessionStateChanged = struct(Module.OPENXR, "XrEventDataSessionStateChanged") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrSession("session", "")
     XrSessionState("state", "")
     XrTime("time", "")
@@ -555,7 +555,7 @@ val XrEventDataSessionStateChanged = struct(Module.OPENXR, "XrEventDataSessionSt
 
 val XrEventDataReferenceSpaceChangePending = struct(Module.OPENXR, "XrEventDataReferenceSpaceChangePending") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrSession("session", "")
     XrReferenceSpaceType("referenceSpaceType", "")
     XrTime("changeTime", "")
@@ -565,13 +565,13 @@ val XrEventDataReferenceSpaceChangePending = struct(Module.OPENXR, "XrEventDataR
 
 val XrEventDataInteractionProfileChanged = struct(Module.OPENXR, "XrEventDataInteractionProfileChanged") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrSession("session", "")
 }
 
 val XrHapticVibration = struct(Module.OPENXR, "XrHapticVibration") {
     XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrDuration("duration", "")
     float("frequency", "")
     float("amplitude", "")

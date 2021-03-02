@@ -358,7 +358,7 @@ public class XrDebugUtilsMessengerCallbackDataEXT extends Struct implements Nati
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrDebugUtilsMessengerCallbackDataEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.NEXT, value); }
     /** Unsafe version of {@link #messageId(ByteBuffer) messageId}. */
     public static void nmessageId(long struct, ByteBuffer value) {
         if (CHECKS) { checkNT1(value); }
@@ -389,7 +389,6 @@ public class XrDebugUtilsMessengerCallbackDataEXT extends Struct implements Nati
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.NEXT));
         check(memGetAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.MESSAGEID));
         check(memGetAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.FUNCTIONNAME));
         check(memGetAddress(struct + XrDebugUtilsMessengerCallbackDataEXT.MESSAGE));

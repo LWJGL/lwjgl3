@@ -331,7 +331,7 @@ public class XrCompositionLayerQuad extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerQuad.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerQuad.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerQuad.NEXT, value); }
     /** Unsafe version of {@link #layerFlags(long) layerFlags}. */
     public static void nlayerFlags(long struct, long value) { UNSAFE.putLong(null, struct + XrCompositionLayerQuad.LAYERFLAGS, value); }
     /** Unsafe version of {@link #space(XrSpace) space}. */
@@ -351,7 +351,6 @@ public class XrCompositionLayerQuad extends Struct implements NativeResource {
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrCompositionLayerQuad.NEXT));
         check(memGetAddress(struct + XrCompositionLayerQuad.SPACE));
         XrSwapchainSubImage.validate(struct + XrCompositionLayerQuad.SUBIMAGE);
     }

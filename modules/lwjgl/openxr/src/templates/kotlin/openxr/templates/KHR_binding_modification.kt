@@ -7,8 +7,9 @@ package openxr.templates
 
 import org.lwjgl.generator.*
 import openxr.*
+import openxr.KHR as KHR_
 
-val KHR_binding_modification = "KHRBindingModification".nativeClassXR("KHR_binding_modification", type = "instance", postfix = KHR) {
+val KHR_binding_modification = "KHRBindingModification".nativeClassXR("KHR_binding_modification", type = "instance", postfix = KHR_) {
     documentation =
         """
         The $templateName extension.

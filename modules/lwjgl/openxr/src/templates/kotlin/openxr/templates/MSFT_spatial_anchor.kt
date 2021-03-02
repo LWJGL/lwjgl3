@@ -7,8 +7,9 @@ package openxr.templates
 
 import org.lwjgl.generator.*
 import openxr.*
+import openxr.MSFT as MSFT_
 
-val MSFT_spatial_anchor = "MSFTSpatialAnchor".nativeClassXR("MSFT_spatial_anchor", type = "instance", postfix = MSFT) {
+val MSFT_spatial_anchor = "MSFTSpatialAnchor".nativeClassXR("MSFT_spatial_anchor", type = "instance", postfix = MSFT_) {
     documentation =
         """
         The $templateName extension.

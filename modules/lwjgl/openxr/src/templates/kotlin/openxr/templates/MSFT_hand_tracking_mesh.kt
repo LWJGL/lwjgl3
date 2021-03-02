@@ -7,8 +7,9 @@ package openxr.templates
 
 import org.lwjgl.generator.*
 import openxr.*
+import openxr.MSFT as MSFT_
 
-val MSFT_hand_tracking_mesh = "MSFTHandTrackingMesh".nativeClassXR("MSFT_hand_tracking_mesh", type = "instance", postfix = MSFT) {
+val MSFT_hand_tracking_mesh = "MSFTHandTrackingMesh".nativeClassXR("MSFT_hand_tracking_mesh", type = "instance", postfix = MSFT_) {
     documentation =
         """
         The $templateName extension.

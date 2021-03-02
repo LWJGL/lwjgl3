@@ -7,8 +7,9 @@ package openxr.templates
 
 import org.lwjgl.generator.*
 import openxr.*
+import openxr.EXT as EXT_
 
-val EXT_eye_gaze_interaction = "EXTEyeGazeInteraction".nativeClassXR("EXT_eye_gaze_interaction", type = "instance", postfix = EXT) {
+val EXT_eye_gaze_interaction = "EXTEyeGazeInteraction".nativeClassXR("EXT_eye_gaze_interaction", type = "instance", postfix = EXT_) {
     documentation =
         """
         The $templateName extension.

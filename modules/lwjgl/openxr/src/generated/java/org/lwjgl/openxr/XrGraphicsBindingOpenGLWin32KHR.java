@@ -17,7 +17,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 import org.lwjgl.system.windows.*;
-import org.lwjgl.opengl.*;
 
 /**
  * <h3>Layout</h3>
@@ -279,7 +278,7 @@ public class XrGraphicsBindingOpenGLWin32KHR extends Struct implements NativeRes
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrGraphicsBindingOpenGLWin32KHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrGraphicsBindingOpenGLWin32KHR.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrGraphicsBindingOpenGLWin32KHR.NEXT, value); }
     /** Unsafe version of {@link #hDC(long) hDC}. */
     public static void nhDC(long struct, long value) { memPutAddress(struct + XrGraphicsBindingOpenGLWin32KHR.HDC, check(value)); }
     /** Unsafe version of {@link #hGLRC(long) hGLRC}. */
@@ -291,7 +290,6 @@ public class XrGraphicsBindingOpenGLWin32KHR extends Struct implements NativeRes
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrGraphicsBindingOpenGLWin32KHR.NEXT));
         check(memGetAddress(struct + XrGraphicsBindingOpenGLWin32KHR.HDC));
         check(memGetAddress(struct + XrGraphicsBindingOpenGLWin32KHR.HGLRC));
     }
