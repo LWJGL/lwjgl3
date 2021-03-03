@@ -42,7 +42,7 @@ public class Spvc {
 
     public static final int SPVC_C_API_VERSION_MAJOR = 0;
 
-    public static final int SPVC_C_API_VERSION_MINOR = 39;
+    public static final int SPVC_C_API_VERSION_MINOR = 45;
 
     public static final int SPVC_C_API_VERSION_PATCH = 0;
 
@@ -622,6 +622,7 @@ public class Spvc {
      * <li>{@link #SPVC_COMPILER_OPTION_MSL_TEXTURE_1D_AS_2D COMPILER_OPTION_MSL_TEXTURE_1D_AS_2D}</li>
      * <li>{@link #SPVC_COMPILER_OPTION_MSL_ENABLE_BASE_INDEX_ZERO COMPILER_OPTION_MSL_ENABLE_BASE_INDEX_ZERO}</li>
      * <li>{@link #SPVC_COMPILER_OPTION_MSL_IOS_FRAMEBUFFER_FETCH_SUBPASS COMPILER_OPTION_MSL_IOS_FRAMEBUFFER_FETCH_SUBPASS}</li>
+     * <li>{@link #SPVC_COMPILER_OPTION_MSL_FRAMEBUFFER_FETCH_SUBPASS COMPILER_OPTION_MSL_FRAMEBUFFER_FETCH_SUBPASS}</li>
      * <li>{@link #SPVC_COMPILER_OPTION_MSL_INVARIANT_FP_MATH COMPILER_OPTION_MSL_INVARIANT_FP_MATH}</li>
      * <li>{@link #SPVC_COMPILER_OPTION_MSL_EMULATE_CUBEMAP_ARRAY COMPILER_OPTION_MSL_EMULATE_CUBEMAP_ARRAY}</li>
      * <li>{@link #SPVC_COMPILER_OPTION_MSL_ENABLE_DECORATION_BINDING COMPILER_OPTION_MSL_ENABLE_DECORATION_BINDING}</li>
@@ -644,6 +645,14 @@ public class Spvc {
      * <li>{@link #SPVC_COMPILER_OPTION_GLSL_FORCE_FLATTENED_IO_BLOCKS COMPILER_OPTION_GLSL_FORCE_FLATTENED_IO_BLOCKS}</li>
      * <li>{@link #SPVC_COMPILER_OPTION_MSL_MULTIVIEW_LAYERED_RENDERING COMPILER_OPTION_MSL_MULTIVIEW_LAYERED_RENDERING}</li>
      * <li>{@link #SPVC_COMPILER_OPTION_MSL_ARRAYED_SUBPASS_INPUT COMPILER_OPTION_MSL_ARRAYED_SUBPASS_INPUT}</li>
+     * <li>{@link #SPVC_COMPILER_OPTION_MSL_R32UI_LINEAR_TEXTURE_ALIGNMENT COMPILER_OPTION_MSL_R32UI_LINEAR_TEXTURE_ALIGNMENT}</li>
+     * <li>{@link #SPVC_COMPILER_OPTION_MSL_R32UI_ALIGNMENT_CONSTANT_ID COMPILER_OPTION_MSL_R32UI_ALIGNMENT_CONSTANT_ID}</li>
+     * <li>{@link #SPVC_COMPILER_OPTION_HLSL_FLATTEN_MATRIX_VERTEX_INPUT_SEMANTICS COMPILER_OPTION_HLSL_FLATTEN_MATRIX_VERTEX_INPUT_SEMANTICS}</li>
+     * <li>{@link #SPVC_COMPILER_OPTION_MSL_IOS_USE_SIMDGROUP_FUNCTIONS COMPILER_OPTION_MSL_IOS_USE_SIMDGROUP_FUNCTIONS}</li>
+     * <li>{@link #SPVC_COMPILER_OPTION_MSL_EMULATE_SUBGROUPS COMPILER_OPTION_MSL_EMULATE_SUBGROUPS}</li>
+     * <li>{@link #SPVC_COMPILER_OPTION_MSL_FIXED_SUBGROUP_SIZE COMPILER_OPTION_MSL_FIXED_SUBGROUP_SIZE}</li>
+     * <li>{@link #SPVC_COMPILER_OPTION_MSL_FORCE_SAMPLE_RATE_SHADING COMPILER_OPTION_MSL_FORCE_SAMPLE_RATE_SHADING}</li>
+     * <li>{@link #SPVC_COMPILER_OPTION_MSL_IOS_SUPPORT_BASE_VERTEX_INSTANCE COMPILER_OPTION_MSL_IOS_SUPPORT_BASE_VERTEX_INSTANCE}</li>
      * </ul>
      */
     public static final int
@@ -695,6 +704,7 @@ public class Spvc {
         SPVC_COMPILER_OPTION_MSL_TEXTURE_1D_AS_2D                           = 44 | SPVC_COMPILER_OPTION_MSL_BIT,
         SPVC_COMPILER_OPTION_MSL_ENABLE_BASE_INDEX_ZERO                     = 45 | SPVC_COMPILER_OPTION_MSL_BIT,
         SPVC_COMPILER_OPTION_MSL_IOS_FRAMEBUFFER_FETCH_SUBPASS              = 46 | SPVC_COMPILER_OPTION_MSL_BIT,
+        SPVC_COMPILER_OPTION_MSL_FRAMEBUFFER_FETCH_SUBPASS                  = 46 | SPVC_COMPILER_OPTION_MSL_BIT,
         SPVC_COMPILER_OPTION_MSL_INVARIANT_FP_MATH                          = 47 | SPVC_COMPILER_OPTION_MSL_BIT,
         SPVC_COMPILER_OPTION_MSL_EMULATE_CUBEMAP_ARRAY                      = 48 | SPVC_COMPILER_OPTION_MSL_BIT,
         SPVC_COMPILER_OPTION_MSL_ENABLE_DECORATION_BINDING                  = 49 | SPVC_COMPILER_OPTION_MSL_BIT,
@@ -716,7 +726,15 @@ public class Spvc {
         SPVC_COMPILER_OPTION_MSL_VERTEX_INDEX_TYPE                          = 65 | SPVC_COMPILER_OPTION_MSL_BIT,
         SPVC_COMPILER_OPTION_GLSL_FORCE_FLATTENED_IO_BLOCKS                 = 66 | SPVC_COMPILER_OPTION_GLSL_BIT,
         SPVC_COMPILER_OPTION_MSL_MULTIVIEW_LAYERED_RENDERING                = 67 | SPVC_COMPILER_OPTION_MSL_BIT,
-        SPVC_COMPILER_OPTION_MSL_ARRAYED_SUBPASS_INPUT                      = 68 | SPVC_COMPILER_OPTION_MSL_BIT;
+        SPVC_COMPILER_OPTION_MSL_ARRAYED_SUBPASS_INPUT                      = 68 | SPVC_COMPILER_OPTION_MSL_BIT,
+        SPVC_COMPILER_OPTION_MSL_R32UI_LINEAR_TEXTURE_ALIGNMENT             = 69 | SPVC_COMPILER_OPTION_MSL_BIT,
+        SPVC_COMPILER_OPTION_MSL_R32UI_ALIGNMENT_CONSTANT_ID                = 70 | SPVC_COMPILER_OPTION_MSL_BIT,
+        SPVC_COMPILER_OPTION_HLSL_FLATTEN_MATRIX_VERTEX_INPUT_SEMANTICS     = 71 | SPVC_COMPILER_OPTION_HLSL_BIT,
+        SPVC_COMPILER_OPTION_MSL_IOS_USE_SIMDGROUP_FUNCTIONS                = 72 | SPVC_COMPILER_OPTION_MSL_BIT,
+        SPVC_COMPILER_OPTION_MSL_EMULATE_SUBGROUPS                          = 73 | SPVC_COMPILER_OPTION_MSL_BIT,
+        SPVC_COMPILER_OPTION_MSL_FIXED_SUBGROUP_SIZE                        = 74 | SPVC_COMPILER_OPTION_MSL_BIT,
+        SPVC_COMPILER_OPTION_MSL_FORCE_SAMPLE_RATE_SHADING                  = 75 | SPVC_COMPILER_OPTION_MSL_BIT,
+        SPVC_COMPILER_OPTION_MSL_IOS_SUPPORT_BASE_VERTEX_INSTANCE           = 76 | SPVC_COMPILER_OPTION_MSL_BIT;
 
     protected Spvc() {
         throw new UnsupportedOperationException();
@@ -786,6 +804,8 @@ public class Spvc {
             compiler_msl_get_automatic_resource_binding_secondary = apiGetFunctionAddress(SPVC, "spvc_compiler_msl_get_automatic_resource_binding_secondary"),
             compiler_msl_add_dynamic_buffer                       = apiGetFunctionAddress(SPVC, "spvc_compiler_msl_add_dynamic_buffer"),
             compiler_msl_add_inline_uniform_block                 = apiGetFunctionAddress(SPVC, "spvc_compiler_msl_add_inline_uniform_block"),
+            compiler_msl_set_combined_sampler_suffix              = apiGetFunctionAddress(SPVC, "spvc_compiler_msl_set_combined_sampler_suffix"),
+            compiler_msl_get_combined_sampler_suffix              = apiGetFunctionAddress(SPVC, "spvc_compiler_msl_get_combined_sampler_suffix"),
             compiler_get_active_interface_variables               = apiGetFunctionAddress(SPVC, "spvc_compiler_get_active_interface_variables"),
             compiler_set_enabled_interface_variables              = apiGetFunctionAddress(SPVC, "spvc_compiler_set_enabled_interface_variables"),
             compiler_create_shader_resources                      = apiGetFunctionAddress(SPVC, "spvc_compiler_create_shader_resources"),
@@ -1668,6 +1688,53 @@ public class Spvc {
             check(compiler);
         }
         return invokePI(compiler, desc_set, binding, __functionAddress);
+    }
+
+    // --- [ spvc_compiler_msl_set_combined_sampler_suffix ] ---
+
+    public static int nspvc_compiler_msl_set_combined_sampler_suffix(long compiler, long suffix) {
+        long __functionAddress = Functions.compiler_msl_set_combined_sampler_suffix;
+        if (CHECKS) {
+            check(compiler);
+        }
+        return invokePPI(compiler, suffix, __functionAddress);
+    }
+
+    @NativeType("spvc_result")
+    public static int spvc_compiler_msl_set_combined_sampler_suffix(@NativeType("spvc_compiler") long compiler, @NativeType("char const *") ByteBuffer suffix) {
+        if (CHECKS) {
+            checkNT1(suffix);
+        }
+        return nspvc_compiler_msl_set_combined_sampler_suffix(compiler, memAddress(suffix));
+    }
+
+    @NativeType("spvc_result")
+    public static int spvc_compiler_msl_set_combined_sampler_suffix(@NativeType("spvc_compiler") long compiler, @NativeType("char const *") CharSequence suffix) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(suffix, true);
+            long suffixEncoded = stack.getPointerAddress();
+            return nspvc_compiler_msl_set_combined_sampler_suffix(compiler, suffixEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ spvc_compiler_msl_get_combined_sampler_suffix ] ---
+
+    public static long nspvc_compiler_msl_get_combined_sampler_suffix(long compiler) {
+        long __functionAddress = Functions.compiler_msl_get_combined_sampler_suffix;
+        if (CHECKS) {
+            check(compiler);
+        }
+        return invokePP(compiler, __functionAddress);
+    }
+
+    @Nullable
+    @NativeType("char const *")
+    public static String spvc_compiler_msl_get_combined_sampler_suffix(@NativeType("spvc_compiler") long compiler) {
+        long __result = nspvc_compiler_msl_get_combined_sampler_suffix(compiler);
+        return memUTF8Safe(__result);
     }
 
     // --- [ spvc_compiler_get_active_interface_variables ] ---
