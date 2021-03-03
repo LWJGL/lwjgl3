@@ -29,7 +29,7 @@ public class Shaderc {
      * <li>{@link #shaderc_target_env_vulkan target_env_vulkan} - SPIR-V under Vulkan semantics</li>
      * <li>{@link #shaderc_target_env_opengl target_env_opengl} - SPIR-V under OpenGL semantics. SPIR-V code generation is not supported for shaders under OpenGL compatibility profile.</li>
      * <li>{@link #shaderc_target_env_opengl_compat target_env_opengl_compat} - SPIR-V under OpenGL semantics, including compatibility profile functions</li>
-     * <li>{@link #shaderc_target_env_webgpu target_env_webgpu} - SPIR-V under WebGPU semantics</li>
+     * <li>{@link #shaderc_target_env_webgpu target_env_webgpu} - deprecated, SPIR-V under WebGPU semantics</li>
      * <li>{@link #shaderc_target_env_default target_env_default}</li>
      * </ul>
      */
@@ -50,7 +50,7 @@ public class Shaderc {
      * <li>{@link #shaderc_env_version_vulkan_1_1 env_version_vulkan_1_1}</li>
      * <li>{@link #shaderc_env_version_vulkan_1_2 env_version_vulkan_1_2}</li>
      * <li>{@link #shaderc_env_version_opengl_4_5 env_version_opengl_4_5}</li>
-     * <li>{@link #shaderc_env_version_webgpu env_version_webgpu}</li>
+     * <li>{@link #shaderc_env_version_webgpu env_version_webgpu} - deprecated, WebGPU env never defined versions</li>
      * </ul>
      */
     public static final int
