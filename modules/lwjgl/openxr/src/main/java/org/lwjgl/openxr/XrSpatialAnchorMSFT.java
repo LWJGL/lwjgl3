@@ -5,7 +5,7 @@
 package org.lwjgl.openxr;
 
 public class XrSpatialAnchorMSFT extends DispatchableHandleDevice {
-    XrSpatialAnchorMSFT(long handle, XRCapabilitiesDevice capabilities) {
+    XrSpatialAnchorMSFT(long handle, XRCapabilitiesSession capabilities) {
         super(handle, capabilities);
     }
 }

@@ -12,7 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 
 /** Defines the capabilities of a Vulkan {@code VkDevice}. */
-public class XRCapabilitiesDevice {
+public class XRCapabilitiesSession {
 
     // XR10
     public final long
@@ -123,7 +123,7 @@ public class XRCapabilitiesDevice {
     /** When true, {@link XR10} is supported. */
     public final boolean OpenXR10;
 
-    XRCapabilitiesDevice(FunctionProvider provider, XRCapabilitiesInstance capsInstance, Set<String> ext) {
+    XRCapabilitiesSession(FunctionProvider provider, XRCapabilitiesInstance capsInstance, Set<String> ext) {
         this.apiVersion = capsInstance.apiVersion;
 
         long[] caps = new long[64];

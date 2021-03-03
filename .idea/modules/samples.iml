@@ -65,5 +65,6 @@
     <orderEntry type="module" module-name="lwjgl.xxhash" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.yoga" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.zstd" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.openxr" scope="TEST" />
   </component>
 </module>

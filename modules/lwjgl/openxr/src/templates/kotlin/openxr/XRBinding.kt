@@ -18,7 +18,7 @@ private val NativeClass.capName: String
     }
 
 private const val CAPS_INSTANCE = "XRCapabilitiesInstance"
-private const val CAPS_DEVICE = "XRCapabilitiesDevice"
+private const val CAPS_SESSION = "XRCapabilitiesSession"
 
 private val EXTENSION_TYPES = HashMap<String, String>()
 
@@ -26,7 +26,7 @@ private enum class XRFunctionType {
     PROC,
     GLOBAL,
     INSTANCE,
-    DEVICE
+    SESSION
 }
 
 private val Func.type: XRFunctionType
@@ -36,11 +36,11 @@ private val Func.type: XRFunctionType
         parameters[0].nativeType.let {
             it === XrInstance /*|| it === VkPhysicalDevice*/
         }                                               -> XRFunctionType.INSTANCE // vkGetInstanceProcAddr: instance handle
-        else                                            -> XRFunctionType.DEVICE // vkGetDeviceProcAddr: device handle
+        else                                            -> XRFunctionType.SESSION // vkGetDeviceProcAddr: device handle
     }
 
 private val Func.isInstanceFunction get() = type === XRFunctionType.INSTANCE && !has<Macro>()
-private val Func.isDeviceFunction get() = type === XRFunctionType.DEVICE && !has<Macro>()
+private val Func.isSessionFunction get() = type === XRFunctionType.SESSION && !has<Macro>()
 
 private val EXTENSION_NAME = "[A-Za-z0-9_]+".toRegex()
 
@@ -220,12 +220,12 @@ val XR_BINDING_INSTANCE = Generator.register(object : APIBinding(
 
 })
 
-val XR_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.OPENXR, CAPS_DEVICE) {
+val XR_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.OPENXR, CAPS_SESSION) {
 
     private fun PrintWriter.checkExtensionFunctions(nativeClass: NativeClass, commands: Map<String, Int>) {
         val capName = nativeClass.capName
 
-        val isDeviceExtension = EXTENSION_TYPES[nativeClass.templateName] == "device" || nativeClass.templateName.startsWith("XR")
+        val isDeviceExtension = EXTENSION_TYPES[nativeClass.templateName] == "session" || nativeClass.templateName.startsWith("XR")
         val hasDependencies = nativeClass.functions.any { it.has<DependsOn>() }
         print("""
     private static boolean check_${nativeClass.templateName}(FunctionProvider provider, long[] caps""")
@@ -260,7 +260,7 @@ val XR_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.OPENX
         }
 
         print("\n\n$t${t}return ")
-        printCheckFunctions(nativeClass, commands, dependencies) { it.isDeviceFunction }
+        printCheckFunctions(nativeClass, commands, dependencies) { it.isSessionFunction }
         println(" || reportMissing(\"XR\", \"$capName\");")
         println("$t}")
     }
@@ -279,7 +279,7 @@ val XR_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.OPENX
 
     override fun PrintWriter.generateJava() {
         generateJavaPreamble()
-        println("public class $CAPS_DEVICE {")
+        println("public class $CAPS_SESSION {")
 
         val classes = XR_BINDING_INSTANCE.getClasses("XR")
 
@@ -289,7 +289,7 @@ val XR_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.OPENX
             .forEach {
                 val functions = it.functions.asSequence()
                     .filter { cmd ->
-                        if (cmd.type === XRFunctionType.DEVICE && !cmd.has<Macro>()) {
+                        if (cmd.type === XRFunctionType.SESSION && !cmd.has<Macro>()) {
                             if (!deviceCommands.contains(cmd.name)) {
                                 deviceCommands[cmd.name] = deviceCommands.size
                                 return@filter true
@@ -314,7 +314,7 @@ val XR_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.OPENX
         )
 
         classes
-            .filter { EXTENSION_TYPES[it.templateName] ?: "device" == "device" }
+            .filter { EXTENSION_TYPES[it.templateName] ?: "session" == "session" }
             .forEach {
                 println(it.getCapabilityJavadoc())
                 println("${t}public final boolean ${it.capName};")
@@ -322,7 +322,7 @@ val XR_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.OPENX
 
         print(
             """
-    ${CAPS_DEVICE}(FunctionProvider provider, XRCapabilitiesInstance capsInstance, Set<String> ext) {
+    ${CAPS_SESSION}(FunctionProvider provider, XRCapabilitiesInstance capsInstance, Set<String> ext) {
         this.apiVersion = capsInstance.apiVersion;
 
         long[] caps = new long[${deviceCommands.size}];
@@ -331,8 +331,8 @@ val XR_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.OPENX
 
         classes.forEach {
             val capName = it.capName
-            val hasFlag = EXTENSION_TYPES[it.templateName] == "device" || it.templateName.startsWith("XR")
-            if (it.functions.any { func -> func.isDeviceFunction }) {
+            val hasFlag = EXTENSION_TYPES[it.templateName] == "session" || it.templateName.startsWith("XR")
+            if (it.functions.any { func -> func.isSessionFunction }) {
                 print(
                     if (hasFlag)
                         "\n$t$t$capName = check_${it.templateName}(provider, caps, ext);"
@@ -355,7 +355,7 @@ val XR_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.OPENX
 """)
 
         for (extension in classes) {
-            if (extension.functions.any { it.isDeviceFunction }) {
+            if (extension.functions.any { it.isSessionFunction }) {
                 checkExtensionFunctions(extension, deviceCommands)
             }
         }

@@ -7,10 +7,10 @@ package org.lwjgl.openxr;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
 
-/** The KHR_loader_init extension. */
+/** The KHR_loader_init extensffffffffffion. */
 public class KHRLoaderInit {
 
     /** The extension specification version. */
@@ -29,7 +29,6 @@ public class KHRLoaderInit {
         long __functionAddress = XR.getGlobalCommands().xrInitializeLoaderKHR;
         if (CHECKS) {
             check(__functionAddress);
-            XrLoaderInitInfoBaseHeaderKHR.validate(loaderInitInfo);
         }
         return callPI(loaderInitInfo, __functionAddress);
     }

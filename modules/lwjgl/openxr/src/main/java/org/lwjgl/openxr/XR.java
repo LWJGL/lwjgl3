@@ -10,9 +10,11 @@ import org.lwjgl.vulkan.*;
 
 import javax.annotation.*;
 
+import java.nio.*;
 import java.util.*;
 
 import static java.lang.Math.*;
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -21,7 +23,7 @@ import static org.lwjgl.vulkan.VK10.*;
 public class XR {
 
     @Nullable
-    public static FunctionProvider functionProvider;
+    private static FunctionProvider functionProvider;
 
     @Nullable
     private static GlobalCommands globalCommands;
@@ -57,15 +59,23 @@ public class XR {
                 throw new IllegalArgumentException("A critical function is missing. Make sure that OpenXR is available.");
             }
 
-            xrInitializeLoaderKHR = NULL;
-
-            //TODO see if its possible to get these pointers through calling xrGetInstanceProcAddr just in case they aren't directly provided by the lib file
             xrCreateInstance = library.getFunctionAddress("xrCreateInstance");
-            xrEnumerateInstanceExtensionProperties = library.getFunctionAddress("xrEnumerateInstanceExtensionProperties");
-            xrEnumerateApiLayerProperties = library.getFunctionAddress("xrEnumerateApiLayerProperties");
-//            xrEnumerateInstanceExtensionProperties = getFunctionAddress("xrEnumerateInstanceExtensionProperties");
-//            xrEnumerateApiLayerProperties = getFunctionAddress("xrEnumerateApiLayerProperties");
-//            xrInitializeLoaderKHR = getFunctionAddress("xrInitializeLoaderKHR", false);
+            xrEnumerateInstanceExtensionProperties = getFunctionAddress("xrEnumerateInstanceExtensionProperties");
+            xrEnumerateApiLayerProperties = getFunctionAddress("xrEnumerateApiLayerProperties");
+            xrInitializeLoaderKHR = getFunctionAddress("xrInitializeLoaderKHR", false);
+        }
+
+        private long getFunctionAddress(String name) { return getFunctionAddress(name, true); }
+        private long getFunctionAddress(String name, boolean required) {
+            try (MemoryStack stack = stackPush()) {
+                PointerBuffer pp = stack.mallocPointer(1);
+                callPPPI(NULL, memAddress(stack.ASCII(name)), memAddress(pp), xrGetInstanceProcAddr);
+                long address = pp.get();
+                if (address == NULL && required) {
+                    throw new IllegalArgumentException("A critical function is missing. Make sure that Vulkan is available.");
+                }
+                return address;
+            }
         }
     }
 
