@@ -23,13 +23,13 @@ public class XrSession extends DispatchableHandleDevice {
         Set<String> set = new HashSet<>();
         set.add("OpenXR10");
 
-        return new XRCapabilitiesSession(functionName -> {
+        return new XRCapabilitiesSession(functionName -> {//TODO just have this run when XRCapabilitiesInstance initializes since XRCapabilitiesSession has no extensions
             try (MemoryStack stack = stackPush()) {
                 PointerBuffer pp = stack.mallocPointer(1);
                 callPPPI(handle, memAddress(functionName), memAddress(pp), XR.getGlobalCommands().xrGetInstanceProcAddr);
                 long address = pp.get();
                 if (address == NULL && Checks.DEBUG_FUNCTIONS) {
-                    apiLog("Failed to locate address for XR instance function " + memASCII(functionName));
+                    apiLog("Failed to locate address for XR session function " + memASCII(functionName));
                 }
                 return address;
             }
