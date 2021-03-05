@@ -837,7 +837,7 @@
     </target>
 
     <target name="tests" description="Runs the LWJGL test suite" depends="compile-tests, compile-native">
-        <testng outputDir="${bin.test.html}" taskname="Tests">
+        <testng haltonfailure="true" outputDir="${bin.test.html}" taskname="Tests">
             <classpath>
                 <pathelement path="${bin.lwjgl}/core/META-INF/versions/9" if:set="core.java9"/>
                 <pathelement path="${bin.lwjgl}/core/META-INF/versions/10" if:set="core.java10"/>
