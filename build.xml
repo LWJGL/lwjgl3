@@ -238,7 +238,10 @@
         <touch file="${bin.templates}/touch.txt"/>
     </target>
 
-    <target name="cache-kotlinc" description="Uploads the compiled Kotlin templates to build.lwjgl.org" depends="-check-AWS-credentials,clean-kotlin,compile-templates,-build-version">
+    <target name="cache-kotlinc" description="Uploads the compiled Kotlin templates to build.lwjgl.org" depends="-build-version">
+        <antcall target="clean-kotlin" unless:set="quick"/>
+        <antcall target="compile-templates" unless:set="quick"/>
+
         <local name="commit"/>
         <exec executable="git" failonerror="true" outputproperty="commit" taskname="Git revision">
             <arg value="log"/>
