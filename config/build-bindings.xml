@@ -15,8 +15,13 @@ This script is included in /config/build-definitions.xml.
     <!-- // ========== BINDING FLAGS ======== // -->
 
     <property name="binding.assimp" value="true"/>
-    <property name="binding.bgfx" value="true"/>
-    <property name="binding.bullet" value="true"/>
+    <condition property="binding.bgfx" value="false" else="true">
+        <and>
+            <isset property="platform.windows"/>
+            <isset property="build.arch.arm"/>
+        </and>
+    </condition>
+    <property name="binding.bullet" value="false"/>
     <property name="binding.cuda" value="true"/>
     <property name="binding.driftfx" value="true"/>
     <property name="binding.egl" value="true"/>
@@ -35,7 +40,7 @@ This script is included in /config/build-definitions.xml.
     </condition>
     <property name="binding.meshoptimizer" value="true"/>
     <property name="binding.nanovg" value="true"/>
-    <condition property="binding.nfd" value="false" else="true"><isset property="build.arch.arm"/></condition>
+    <property name="binding.nfd" value="true"/>
     <property name="binding.nuklear" value="true"/>
     <property name="binding.odbc" value="true"/>
     <property name="binding.openal" value="true"/>
@@ -74,6 +79,7 @@ This script is included in /config/build-definitions.xml.
         <and>
             <isset property="OCULUS_SDK_PATH"/>
             <available file="${OCULUS_SDK_PATH}/LibOVR/Include/OVR_CAPI.h"/>
+            <not><isset property="build.arch.arm"/></not>
         </and>
     </condition>
 

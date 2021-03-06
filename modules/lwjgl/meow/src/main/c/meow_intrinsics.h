@@ -150,9 +150,15 @@ typedef struct {
 static int
 MeowHashesAreEqualImpl(meow_u128 A, meow_u128 B)
 {
+    #ifdef LWJGL_WINDOWS
+    uint8x16_t Powers = {.n128_u8={
+        1, 2, 4, 8, 16, 32, 64, 128, 1, 2, 4, 8, 16, 32, 64, 128,
+    }};
+    #else
     uint8x16_t Powers = {
         1, 2, 4, 8, 16, 32, 64, 128, 1, 2, 4, 8, 16, 32, 64, 128,
     };
+    #endif
 
     uint8x16_t Input = vceqq_u8(A, B);
     uint64x2_t Mask = vpaddlq_u32(vpaddlq_u16(vpaddlq_u8(vandq_u8(Input, Powers))));

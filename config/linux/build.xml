@@ -320,14 +320,13 @@
         <!-- NativeFileDialog -->
         <build module="nfd" simple="true" if:true="${binding.nfd}">
             <beforeCompile>
-                <local name="gtk3"/>
-                <local name="stderr"/>
-                <exec outputproperty="gtk3" errorproperty="stderr" executable="pkg-config" failonerror="true" taskname="gtk-3.0">
-                    <arg line="--cflags gtk+-3.0"/>
-                </exec>
+                <local name="linux.triplet"/>
+                <condition property="linux.triplet" value="x86_64-linux-gnu"><not><isset property="build.arch.arm"/></not></condition>
+                <condition property="linux.triplet" value="arm-linux-gnueabihf"><isset property="build.arch.arm32"/></condition>
+                <condition property="linux.triplet" value="aarch64-linux-gnu"><isset property="build.arch.arm64"/></condition>
 
                 <compile>
-                    <arg line="${gtk3}"/>
+                    <arg line="-I/usr/include/gtk-3.0 -I/usr/include/glib-2.0 -I/usr/lib/${linux.triplet}/glib-2.0/include -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/atk-1.0"/>
                     <arg value="-I${src.main.rel}"/>
                     <arg value="-I${src.main.rel}/include"/>
                     <fileset dir="." includes="${src.main}/nfd_common.c"/>
@@ -527,7 +526,6 @@
             <update-dependency module="openvr" artifact="libopenvr_api.so"/>
             <update-dependency module="opus" artifact="libopus.so"/>
             <update-dependency module="shaderc" artifact="libshaderc.so"/>
-            <update-dependency module="shaderc" artifact="libshaderc_spvc.so"/>
             <update-dependency module="spvc" artifact="libspirv-cross.so"/>
 
             </parallel>
