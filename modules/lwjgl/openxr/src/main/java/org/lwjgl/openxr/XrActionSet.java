@@ -4,8 +4,8 @@
  */
 package org.lwjgl.openxr;
 
-public class XrActionSet extends DispatchableHandleDevice {
-    XrActionSet(long handle, XRCapabilitiesSession capabilities) {
+public class XrActionSet extends DispatchableHandleSession {
+    public XrActionSet(long handle, XRCapabilitiesSession capabilities) {
         super(handle, capabilities);
     }
 }

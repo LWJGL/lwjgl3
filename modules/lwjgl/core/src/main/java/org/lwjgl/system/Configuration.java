@@ -485,6 +485,9 @@ public class Configuration<T> {
     /** Similar to {@link #LIBRARY_NAME} for the Vulkan library (<b>org.lwjgl.vulkan.libname</b>). */
     public static final Configuration<String> VULKAN_LIBRARY_NAME = new Configuration<>("org.lwjgl.vulkan.libname", StateInit.STRING);
 
+    /** Similar to {@link #LIBRARY_NAME} for the OpenXR library (<b>org.lwjgl.vulkan.libname</b>). */
+    public static final Configuration<String> OPENXR_LIBRARY_NAME = new Configuration<>("org.lwjgl.openxr.libname", StateInit.STRING);
+
     private interface StateInit<T> extends Function<String, T> {
         StateInit<Boolean> BOOLEAN = property -> {
             String value = System.getProperty(property);

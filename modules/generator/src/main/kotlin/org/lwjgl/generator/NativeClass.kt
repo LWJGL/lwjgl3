@@ -192,7 +192,7 @@ class NativeClass internal constructor(
 
     private val constantBlocks = ArrayList<ConstantBlock<*>>()
 
-    public val _functions = LinkedHashMap<String, Func>()
+    private val _functions = LinkedHashMap<String, Func>()
     val functions: Sequence<Func>
         get() = _functions.values.asSequence()
 

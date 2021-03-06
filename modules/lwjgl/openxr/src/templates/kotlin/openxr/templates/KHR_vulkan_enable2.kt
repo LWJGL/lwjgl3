@@ -45,8 +45,8 @@ val KHR_vulkan_enable2 = "KHRVulkanEnable2".nativeClassXR("KHR_vulkan_enable2", 
 
         XrInstance("instance", ""),
         XrVulkanInstanceCreateInfoKHR.const.p("createInfo", ""),
-        VkInstance.p("vulkanInstance", ""),
-        VkResult.p("vulkanResult", "")
+        Check(1)..VkInstance.p("vulkanInstance", ""),
+        Check(1)..VkResult.p("vulkanResult", "")
     )
 
     XrResult(
@@ -55,8 +55,8 @@ val KHR_vulkan_enable2 = "KHRVulkanEnable2".nativeClassXR("KHR_vulkan_enable2", 
 
         XrInstance("instance", ""),
         XrVulkanDeviceCreateInfoKHR.const.p("createInfo", ""),
-        VkDevice.p("vulkanDevice", ""),
-        VkResult.p("vulkanResult", "")
+        Check(1)..VkDevice.p("vulkanDevice", ""),
+        Check(1)..VkResult.p("vulkanResult", "")
     )
 
     XrResult(
@@ -65,7 +65,7 @@ val KHR_vulkan_enable2 = "KHRVulkanEnable2".nativeClassXR("KHR_vulkan_enable2", 
 
         XrInstance("instance", ""),
         XrVulkanGraphicsDeviceGetInfoKHR.const.p("getInfo", ""),
-        VkPhysicalDevice.p("vulkanPhysicalDevice", "")
+        Check(1)..VkPhysicalDevice.p("vulkanPhysicalDevice", "")
     )
 
     XrResult(
@@ -74,6 +74,6 @@ val KHR_vulkan_enable2 = "KHRVulkanEnable2".nativeClassXR("KHR_vulkan_enable2", 
 
         XrInstance("instance", ""),
         XrSystemId("systemId", ""),
-        XrGraphicsRequirementsVulkanKHR.p("graphicsRequirements", "")
+        Check(1)..XrGraphicsRequirementsVulkanKHR.p("graphicsRequirements", "")
     )
 }

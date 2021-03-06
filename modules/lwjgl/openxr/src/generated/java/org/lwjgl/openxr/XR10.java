@@ -1350,6 +1350,42 @@ public class XR10 {
         return ((major & 0xffffL) << 48) | ((minor & 0xffffL) << 32) | patch;
     }
 
+    // --- [ XR_VERSION_MAJOR ] ---
+
+    /**
+     * Extracts the API major version number from a packed version number.
+     *
+     * @param version the OpenXR API version
+     */
+    @NativeType("uint64_t")
+    public static long XR_VERSION_MAJOR(@NativeType("uint64_t") long version) {
+        return (version >>> 48) & 0xffffL;
+    }
+
+    // --- [ VK_VERSION_MINOR ] ---
+
+    /**
+     * Extracts the API minor version number from a packed version number.
+     *
+     * @param version the OpenXR API version
+     */
+    @NativeType("uint64_t")
+    public static long VK_VERSION_MINOR(@NativeType("uint64_t") long version) {
+        return (version >>> 32) & 0xffffL;
+    }
+
+    // --- [ VK_VERSION_PATCH ] ---
+
+    /**
+     * Extracts the API patch version number from a packed version number.
+     *
+     * @param version the OpenXR API version
+     */
+    @NativeType("uint64_t")
+    public static long VK_VERSION_PATCH(@NativeType("uint64_t") long version) {
+        return version & 0xffffffffL;
+    }
+
     /** Array version of: {@link #xrEnumerateApiLayerProperties EnumerateApiLayerProperties} */
     @NativeType("XrResult")
     public static int xrEnumerateApiLayerProperties(@NativeType("uint32_t *") int[] propertyCountOutput, @Nullable @NativeType("XrApiLayerProperties *") XrApiLayerProperties.Buffer properties) {

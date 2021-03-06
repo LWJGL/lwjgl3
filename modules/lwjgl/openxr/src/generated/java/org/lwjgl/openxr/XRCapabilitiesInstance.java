@@ -29,6 +29,25 @@ public class XRCapabilitiesInstance {
     public final long
         xrGetOpenGLESGraphicsRequirementsKHR;
 
+    // KHR_vulkan_enable
+    public final long
+        xrGetVulkanInstanceExtensionsKHR,
+        xrGetVulkanDeviceExtensionsKHR,
+        xrGetVulkanGraphicsDeviceKHR,
+        xrGetVulkanGraphicsRequirementsKHR;
+
+    // KHR_vulkan_enable2
+    public final long
+        xrCreateVulkanInstanceKHR,
+        xrCreateVulkanDeviceKHR,
+        xrGetVulkanGraphicsDevice2KHR,
+        xrGetVulkanGraphicsRequirements2KHR;
+
+    // KHR_win32_convert_performance_counter_time
+    public final long
+        xrConvertWin32PerformanceCounterToTimeKHR,
+        xrConvertTimeToWin32PerformanceCounterKHR;
+
     // XR10
     public final long
         xrDestroyInstance,
@@ -77,6 +96,8 @@ public class XRCapabilitiesInstance {
     public final boolean XR_EXTX_overlay;
     /** When true, {@link FBAndroidSurfaceSwapchainCreate} is supported. */
     public final boolean XR_FB_android_surface_swapchain_create;
+    /** When true, {@link FBColorSpace} is supported. */
+    public final boolean XR_FB_color_space;
     /** When true, {@link FBDisplayRefreshRate} is supported. */
     public final boolean XR_FB_display_refresh_rate;
     /** When true, {@link HTCViveCosmosControllerInteraction} is supported. */
@@ -111,8 +132,14 @@ public class XRCapabilitiesInstance {
     public final boolean XR_KHR_opengl_es_enable;
     /** When true, {@link KHRVisibilityMask} is supported. */
     public final boolean XR_KHR_visibility_mask;
+    /** When true, {@link KHRVulkanEnable} is supported. */
+    public final boolean XR_KHR_vulkan_enable;
+    /** When true, {@link KHRVulkanEnable2} is supported. */
+    public final boolean XR_KHR_vulkan_enable2;
     /** When true, {@link KHRVulkanSwapchainFormatList} is supported. */
     public final boolean XR_KHR_vulkan_swapchain_format_list;
+    /** When true, {@link KHRWin32ConvertPerformanceCounterTime} is supported. */
+    public final boolean XR_KHR_win32_convert_performance_counter_time;
     /** When true, {@link MNDHeadless} is supported. */
     public final boolean XR_MND_headless;
     /** When true, {@link MNDSwapchainUsageInputAttachmentBit} is supported. */
@@ -147,7 +174,7 @@ public class XRCapabilitiesInstance {
     XRCapabilitiesInstance(FunctionProvider provider, long apiVersion, Set<String> ext, Set<String> deviceExt) {
         this.apiVersion = apiVersion;
 
-        long[] caps = new long[21];
+        long[] caps = new long[31];
 
         XR_EPIC_view_configuration_fov = ext.contains("XR_EPIC_view_configuration_fov");
         XR_EXT_conformance_automation = ext.contains("XR_EXT_conformance_automation");
@@ -162,6 +189,7 @@ public class XRCapabilitiesInstance {
         XR_EXT_win32_appcontainer_compatible = ext.contains("XR_EXT_win32_appcontainer_compatible");
         XR_EXTX_overlay = ext.contains("XR_EXTX_overlay");
         XR_FB_android_surface_swapchain_create = ext.contains("XR_FB_android_surface_swapchain_create");
+        XR_FB_color_space = ext.contains("XR_FB_color_space");
         XR_FB_display_refresh_rate = ext.contains("XR_FB_display_refresh_rate");
         XR_HTC_vive_cosmos_controller_interaction = ext.contains("XR_HTC_vive_cosmos_controller_interaction");
         XR_HUAWEI_controller_interaction = ext.contains("XR_HUAWEI_controller_interaction");
@@ -179,7 +207,10 @@ public class XRCapabilitiesInstance {
         XR_KHR_opengl_enable = check_KHR_opengl_enable(provider, caps, ext);
         XR_KHR_opengl_es_enable = check_KHR_opengl_es_enable(provider, caps, ext);
         XR_KHR_visibility_mask = ext.contains("XR_KHR_visibility_mask");
+        XR_KHR_vulkan_enable = check_KHR_vulkan_enable(provider, caps, ext);
+        XR_KHR_vulkan_enable2 = check_KHR_vulkan_enable2(provider, caps, ext);
         XR_KHR_vulkan_swapchain_format_list = ext.contains("XR_KHR_vulkan_swapchain_format_list");
+        XR_KHR_win32_convert_performance_counter_time = check_KHR_win32_convert_performance_counter_time(provider, caps, ext);
         XR_MND_headless = ext.contains("XR_MND_headless");
         XR_MND_swapchain_usage_input_attachment_bit = ext.contains("XR_MND_swapchain_usage_input_attachment_bit");
         XR_MNDX_egl_enable = ext.contains("XR_MNDX_egl_enable");
@@ -201,22 +232,32 @@ public class XRCapabilitiesInstance {
         xrSubmitDebugUtilsMessageEXT = caps[2];
         xrGetOpenGLGraphicsRequirementsKHR = caps[3];
         xrGetOpenGLESGraphicsRequirementsKHR = caps[4];
-        xrDestroyInstance = caps[5];
-        xrGetInstanceProperties = caps[6];
-        xrPollEvent = caps[7];
-        xrResultToString = caps[8];
-        xrStructureTypeToString = caps[9];
-        xrGetSystem = caps[10];
-        xrGetSystemProperties = caps[11];
-        xrEnumerateEnvironmentBlendModes = caps[12];
-        xrCreateSession = caps[13];
-        xrEnumerateViewConfigurations = caps[14];
-        xrGetViewConfigurationProperties = caps[15];
-        xrEnumerateViewConfigurationViews = caps[16];
-        xrStringToPath = caps[17];
-        xrPathToString = caps[18];
-        xrCreateActionSet = caps[19];
-        xrSuggestInteractionProfileBindings = caps[20];
+        xrGetVulkanInstanceExtensionsKHR = caps[5];
+        xrGetVulkanDeviceExtensionsKHR = caps[6];
+        xrGetVulkanGraphicsDeviceKHR = caps[7];
+        xrGetVulkanGraphicsRequirementsKHR = caps[8];
+        xrCreateVulkanInstanceKHR = caps[9];
+        xrCreateVulkanDeviceKHR = caps[10];
+        xrGetVulkanGraphicsDevice2KHR = caps[11];
+        xrGetVulkanGraphicsRequirements2KHR = caps[12];
+        xrConvertWin32PerformanceCounterToTimeKHR = caps[13];
+        xrConvertTimeToWin32PerformanceCounterKHR = caps[14];
+        xrDestroyInstance = caps[15];
+        xrGetInstanceProperties = caps[16];
+        xrPollEvent = caps[17];
+        xrResultToString = caps[18];
+        xrStructureTypeToString = caps[19];
+        xrGetSystem = caps[20];
+        xrGetSystemProperties = caps[21];
+        xrEnumerateEnvironmentBlendModes = caps[22];
+        xrCreateSession = caps[23];
+        xrEnumerateViewConfigurations = caps[24];
+        xrGetViewConfigurationProperties = caps[25];
+        xrEnumerateViewConfigurationViews = caps[26];
+        xrStringToPath = caps[27];
+        xrPathToString = caps[28];
+        xrCreateActionSet = caps[29];
+        xrSuggestInteractionProfileBindings = caps[30];
     }
 
     private static boolean check_EXT_debug_utils(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
@@ -255,13 +296,49 @@ public class XRCapabilitiesInstance {
         ) || reportMissing("XR", "XR_KHR_opengl_es_enable");
     }
 
+    private static boolean check_KHR_vulkan_enable(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
+        if (!ext.contains("XR_KHR_vulkan_enable")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            5, 6, 7, 8
+        },
+            "xrGetVulkanInstanceExtensionsKHR", "xrGetVulkanDeviceExtensionsKHR", "xrGetVulkanGraphicsDeviceKHR", "xrGetVulkanGraphicsRequirementsKHR"
+        ) || reportMissing("XR", "XR_KHR_vulkan_enable");
+    }
+
+    private static boolean check_KHR_vulkan_enable2(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
+        if (!ext.contains("XR_KHR_vulkan_enable2")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            9, 10, 11, 12
+        },
+            "xrCreateVulkanInstanceKHR", "xrCreateVulkanDeviceKHR", "xrGetVulkanGraphicsDevice2KHR", "xrGetVulkanGraphicsRequirements2KHR"
+        ) || reportMissing("XR", "XR_KHR_vulkan_enable2");
+    }
+
+    private static boolean check_KHR_win32_convert_performance_counter_time(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
+        if (!ext.contains("XR_KHR_win32_convert_performance_counter_time")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            13, 14
+        },
+            "xrConvertWin32PerformanceCounterToTimeKHR", "xrConvertTimeToWin32PerformanceCounterKHR"
+        ) || reportMissing("XR", "XR_KHR_win32_convert_performance_counter_time");
+    }
+
     private static boolean check_XR10(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
         if (!ext.contains("OpenXR10")) {
             return false;
         }
 
         return checkFunctions(provider, caps, new int[] {
-            5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+            15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30
         },
             "xrDestroyInstance", "xrGetInstanceProperties", "xrPollEvent", "xrResultToString", "xrStructureTypeToString", "xrGetSystem", 
             "xrGetSystemProperties", "xrEnumerateEnvironmentBlendModes", "xrCreateSession", "xrEnumerateViewConfigurations", "xrGetViewConfigurationProperties", 

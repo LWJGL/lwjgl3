@@ -67,6 +67,6 @@ val FB_color_space = "FBColorSpace".nativeClassXR("FB_color_space", type = "inst
         "",
 
         XrSession("session", ""),
-        XrColorSpaceFB.const.p("colorspace", "")
+        XrColorSpaceFB.const("colorspace", "")
     )
 }

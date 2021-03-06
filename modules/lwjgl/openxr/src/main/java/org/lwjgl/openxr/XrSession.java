@@ -14,13 +14,13 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-public class XrSession extends DispatchableHandleDevice {
+public class XrSession extends DispatchableHandleSession {
     public XrSession(long handle, XrInstance xrInstance) {
         super(handle, getSessionCapabilities(handle, xrInstance));
     }
 
     private static XRCapabilitiesSession getSessionCapabilities(long handle, XrInstance xrInstance) {
-        Set<String> set = new HashSet<>();
+        Set<String> set = new HashSet<>(1);
         set.add("OpenXR10");
 
         return new XRCapabilitiesSession(functionName -> {//TODO just have this run when XRCapabilitiesInstance initializes since XRCapabilitiesSession has no extensions

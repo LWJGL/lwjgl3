@@ -4,8 +4,8 @@
  */
 package org.lwjgl.openxr;
 
-public class XrHandTrackerEXT extends DispatchableHandleDevice {
-    XrHandTrackerEXT(long handle, XRCapabilitiesSession capabilities) {
+public class XrHandTrackerEXT extends DispatchableHandleSession {
+    public XrHandTrackerEXT(long handle, XRCapabilitiesSession capabilities) {
         super(handle, capabilities);
     }
 }

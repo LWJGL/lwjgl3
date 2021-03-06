@@ -11,6 +11,8 @@ import openxr.*
 import openxr.KHR as KHR_
 
 val KHR_vulkan_enable = "KHRVulkanEnable".nativeClassXR("KHR_vulkan_enable", type = "instance", postfix = KHR_) {
+    javaImport("org.lwjgl.vulkan.*")
+
     documentation =
         """
         The $templateName extension.
@@ -65,7 +67,7 @@ val KHR_vulkan_enable = "KHRVulkanEnable".nativeClassXR("KHR_vulkan_enable", typ
         XrInstance("instance", ""),
         XrSystemId("systemId", ""),
         VkInstance("vkInstance", ""),
-        VkPhysicalDevice.p("vkPhysicalDevice", "")
+        Check(1)..VkPhysicalDevice.p("vkPhysicalDevice", "")
     )
 
     XrResult(

@@ -6,7 +6,6 @@ package org.lwjgl.demo.vulkan;
 
 import org.lwjgl.*;
 import org.lwjgl.glfw.*;
-import org.lwjgl.openxr.*;
 import org.lwjgl.system.*;
 import org.lwjgl.vulkan.*;
 
@@ -16,7 +15,6 @@ import java.util.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.glfw.GLFWVulkan.*;
-import static org.lwjgl.openxr.XR10.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.vulkan.EXTDebugReport.*;
@@ -1960,4 +1958,5 @@ public final class HelloVulkan {
     public static void main(String[] args) {
         new HelloVulkan().run();
     }
+
 }

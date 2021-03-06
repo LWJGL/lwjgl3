@@ -62,5 +62,32 @@ fun templateCustomization() {
 
             noPrefix = true
         )
+
+        macro(expression = "(version >>> 48) & 0xffffL")..uint64_t(
+            "XR_VERSION_MAJOR",
+            "Extracts the API major version number from a packed version number.",
+
+            uint64_t("version", "the OpenXR API version"),
+
+            noPrefix = true
+        )
+
+        macro(expression = "(version >>> 32) & 0xffffL")..uint64_t(
+            "VK_VERSION_MINOR",
+            "Extracts the API minor version number from a packed version number.",
+
+            uint64_t("version", "the OpenXR API version"),
+
+            noPrefix = true
+        )
+
+        macro(expression = "version & 0xffffffffL")..uint64_t(
+            "VK_VERSION_PATCH",
+            "Extracts the API patch version number from a packed version number.",
+
+            uint64_t("version", "the OpenXR API version"),
+
+            noPrefix = true
+        )
     }
 }

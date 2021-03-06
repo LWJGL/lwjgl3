@@ -81,6 +81,11 @@ public class XRCapabilitiesSession {
     public final long
         xrThermalGetTemperatureTrendEXT;
 
+    // FB_color_space
+    public final long
+        xrEnumerateColorSpacesFB,
+        xrSetColorSpaceFB;
+
     // FB_display_refresh_rate
     public final long
         xrEnumerateDisplayRefreshRatesFB,
@@ -126,7 +131,7 @@ public class XRCapabilitiesSession {
     XRCapabilitiesSession(FunctionProvider provider, XRCapabilitiesInstance capsInstance, Set<String> ext) {
         this.apiVersion = capsInstance.apiVersion;
 
-        long[] caps = new long[64];
+        long[] caps = new long[66];
 
         OpenXR10 = check_XR10(provider, caps, ext);
         check_EXT_conformance_automation(provider, caps, capsInstance);
@@ -134,6 +139,7 @@ public class XRCapabilitiesSession {
         check_EXT_hand_tracking(provider, caps, capsInstance);
         check_EXT_performance_settings(provider, caps, capsInstance);
         check_EXT_thermal_query(provider, caps, capsInstance);
+        check_FB_color_space(provider, caps, capsInstance);
         check_FB_display_refresh_rate(provider, caps, capsInstance);
         check_KHR_android_thread_settings(provider, caps, capsInstance);
         check_KHR_visibility_mask(provider, caps, capsInstance);
@@ -191,21 +197,23 @@ public class XRCapabilitiesSession {
         xrLocateHandJointsEXT = caps[46];
         xrPerfSettingsSetPerformanceLevelEXT = caps[47];
         xrThermalGetTemperatureTrendEXT = caps[48];
-        xrEnumerateDisplayRefreshRatesFB = caps[49];
-        xrGetDisplayRefreshRateFB = caps[50];
-        xrRequestDisplayRefreshRateFB = caps[51];
-        xrSetAndroidApplicationThreadKHR = caps[52];
-        xrGetVisibilityMaskKHR = caps[53];
-        xrGetControllerModelKeyMSFT = caps[54];
-        xrLoadControllerModelMSFT = caps[55];
-        xrGetControllerModelPropertiesMSFT = caps[56];
-        xrGetControllerModelStateMSFT = caps[57];
-        xrCreateHandMeshSpaceMSFT = caps[58];
-        xrUpdateHandMeshMSFT = caps[59];
-        xrCreateSpatialAnchorMSFT = caps[60];
-        xrCreateSpatialAnchorSpaceMSFT = caps[61];
-        xrDestroySpatialAnchorMSFT = caps[62];
-        xrCreateSpatialGraphNodeSpaceMSFT = caps[63];
+        xrEnumerateColorSpacesFB = caps[49];
+        xrSetColorSpaceFB = caps[50];
+        xrEnumerateDisplayRefreshRatesFB = caps[51];
+        xrGetDisplayRefreshRateFB = caps[52];
+        xrRequestDisplayRefreshRateFB = caps[53];
+        xrSetAndroidApplicationThreadKHR = caps[54];
+        xrGetVisibilityMaskKHR = caps[55];
+        xrGetControllerModelKeyMSFT = caps[56];
+        xrLoadControllerModelMSFT = caps[57];
+        xrGetControllerModelPropertiesMSFT = caps[58];
+        xrGetControllerModelStateMSFT = caps[59];
+        xrCreateHandMeshSpaceMSFT = caps[60];
+        xrUpdateHandMeshMSFT = caps[61];
+        xrCreateSpatialAnchorMSFT = caps[62];
+        xrCreateSpatialAnchorSpaceMSFT = caps[63];
+        xrDestroySpatialAnchorMSFT = caps[64];
+        xrCreateSpatialGraphNodeSpaceMSFT = caps[65];
     }
 
     private static boolean check_XR10(FunctionProvider provider, long[] caps, Set<String> ext) {
@@ -287,13 +295,25 @@ public class XRCapabilitiesSession {
         ) || reportMissing("XR", "XR_EXT_thermal_query");
     }
 
+    private static boolean check_FB_color_space(FunctionProvider provider, long[] caps, XRCapabilitiesInstance capsInstance) {
+        if (!capsInstance.XR_FB_color_space) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            49, 50
+        },
+            "xrEnumerateColorSpacesFB", "xrSetColorSpaceFB"
+        ) || reportMissing("XR", "XR_FB_color_space");
+    }
+
     private static boolean check_FB_display_refresh_rate(FunctionProvider provider, long[] caps, XRCapabilitiesInstance capsInstance) {
         if (!capsInstance.XR_FB_display_refresh_rate) {
             return false;
         }
 
         return checkFunctions(provider, caps, new int[] {
-            49, 50, 51
+            51, 52, 53
         },
             "xrEnumerateDisplayRefreshRatesFB", "xrGetDisplayRefreshRateFB", "xrRequestDisplayRefreshRateFB"
         ) || reportMissing("XR", "XR_FB_display_refresh_rate");
@@ -305,7 +325,7 @@ public class XRCapabilitiesSession {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            52
+            54
         },
             "xrSetAndroidApplicationThreadKHR"
         ) || reportMissing("XR", "XR_KHR_android_thread_settings");
@@ -317,7 +337,7 @@ public class XRCapabilitiesSession {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            53
+            55
         },
             "xrGetVisibilityMaskKHR"
         ) || reportMissing("XR", "XR_KHR_visibility_mask");
@@ -329,7 +349,7 @@ public class XRCapabilitiesSession {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            54, 55, 56, 57
+            56, 57, 58, 59
         },
             "xrGetControllerModelKeyMSFT", "xrLoadControllerModelMSFT", "xrGetControllerModelPropertiesMSFT", "xrGetControllerModelStateMSFT"
         ) || reportMissing("XR", "XR_MSFT_controller_model");
@@ -341,7 +361,7 @@ public class XRCapabilitiesSession {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            58, 59
+            60, 61
         },
             "xrCreateHandMeshSpaceMSFT", "xrUpdateHandMeshMSFT"
         ) || reportMissing("XR", "XR_MSFT_hand_tracking_mesh");
@@ -353,7 +373,7 @@ public class XRCapabilitiesSession {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            60, 61, 62
+            62, 63, 64
         },
             "xrCreateSpatialAnchorMSFT", "xrCreateSpatialAnchorSpaceMSFT", "xrDestroySpatialAnchorMSFT"
         ) || reportMissing("XR", "XR_MSFT_spatial_anchor");
@@ -365,7 +385,7 @@ public class XRCapabilitiesSession {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            63
+            65
         },
             "xrCreateSpatialGraphNodeSpaceMSFT"
         ) || reportMissing("XR", "XR_MSFT_spatial_graph_bridge");

@@ -6,7 +6,6 @@ package org.lwjgl.openxr;
 
 import org.lwjgl.system.*;
 
-//TODO compact this
 abstract class DispatchableHandleInstance extends Pointer.Default {
 
     private final XRCapabilitiesInstance capabilities;

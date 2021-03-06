@@ -28,31 +28,62 @@ public class KHRWin32ConvertPerformanceCounterTime {
 
     // --- [ xrConvertWin32PerformanceCounterToTimeKHR ] ---
 
-    public static int nxrConvertWin32PerformanceCounterToTimeKHR(XrInstance instance, long time) {
-        long __functionAddress = NULL;
+    public static int nxrConvertWin32PerformanceCounterToTimeKHR(XrInstance instance, long performanceCounter, long time) {
+        long __functionAddress = instance.getCapabilities().xrConvertWin32PerformanceCounterToTimeKHR;
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(instance.address(), time, __functionAddress);
+        return callPPPI(instance.address(), performanceCounter, time, __functionAddress);
     }
 
     @NativeType("XrResult")
-    public static int xrConvertWin32PerformanceCounterToTimeKHR(XrInstance instance, @NativeType("XrTime *") LongBuffer time) {
+    public static int xrConvertWin32PerformanceCounterToTimeKHR(XrInstance instance, @NativeType("LARGE_INTEGER const *") LongBuffer performanceCounter, @NativeType("XrTime *") LongBuffer time) {
         if (CHECKS) {
+            check(performanceCounter, 1);
             check(time, 1);
         }
-        return nxrConvertWin32PerformanceCounterToTimeKHR(instance, memAddress(time));
+        return nxrConvertWin32PerformanceCounterToTimeKHR(instance, memAddress(performanceCounter), memAddress(time));
+    }
+
+    // --- [ xrConvertTimeToWin32PerformanceCounterKHR ] ---
+
+    public static int nxrConvertTimeToWin32PerformanceCounterKHR(XrInstance instance, long time, long performanceCounter) {
+        long __functionAddress = instance.getCapabilities().xrConvertTimeToWin32PerformanceCounterKHR;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callPJPI(instance.address(), time, performanceCounter, __functionAddress);
+    }
+
+    @NativeType("XrResult")
+    public static int xrConvertTimeToWin32PerformanceCounterKHR(XrInstance instance, @NativeType("XrTime") long time, @NativeType("LARGE_INTEGER *") LongBuffer performanceCounter) {
+        if (CHECKS) {
+            check(performanceCounter, 1);
+        }
+        return nxrConvertTimeToWin32PerformanceCounterKHR(instance, time, memAddress(performanceCounter));
     }
 
     /** Array version of: {@link #xrConvertWin32PerformanceCounterToTimeKHR ConvertWin32PerformanceCounterToTimeKHR} */
     @NativeType("XrResult")
-    public static int xrConvertWin32PerformanceCounterToTimeKHR(XrInstance instance, @NativeType("XrTime *") long[] time) {
-        long __functionAddress = NULL;
+    public static int xrConvertWin32PerformanceCounterToTimeKHR(XrInstance instance, @NativeType("LARGE_INTEGER const *") long[] performanceCounter, @NativeType("XrTime *") long[] time) {
+        long __functionAddress = instance.getCapabilities().xrConvertWin32PerformanceCounterToTimeKHR;
         if (CHECKS) {
             check(__functionAddress);
+            check(performanceCounter, 1);
             check(time, 1);
         }
-        return callPPI(instance.address(), time, __functionAddress);
+        return callPPPI(instance.address(), performanceCounter, time, __functionAddress);
+    }
+
+    /** Array version of: {@link #xrConvertTimeToWin32PerformanceCounterKHR ConvertTimeToWin32PerformanceCounterKHR} */
+    @NativeType("XrResult")
+    public static int xrConvertTimeToWin32PerformanceCounterKHR(XrInstance instance, @NativeType("XrTime") long time, @NativeType("LARGE_INTEGER *") long[] performanceCounter) {
+        long __functionAddress = instance.getCapabilities().xrConvertTimeToWin32PerformanceCounterKHR;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(performanceCounter, 1);
+        }
+        return callPJPI(instance.address(), time, performanceCounter, __functionAddress);
     }
 
 }

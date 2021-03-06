@@ -4,8 +4,8 @@
  */
 package org.lwjgl.openxr;
 
-public class XrDebugUtilsMessengerEXT extends DispatchableHandleDevice {
-    XrDebugUtilsMessengerEXT(long handle, XRCapabilitiesSession capabilities) {
+public class XrDebugUtilsMessengerEXT extends DispatchableHandleSession {
+    public XrDebugUtilsMessengerEXT(long handle, XRCapabilitiesSession capabilities) {
         super(handle, capabilities);
     }
 }

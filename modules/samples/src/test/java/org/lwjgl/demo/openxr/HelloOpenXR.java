@@ -22,6 +22,14 @@ import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
+/**
+ * Slightly tweaked combination of
+ * https://github.com/maluoi/OpenXRSamples/blob/master/SingleFileExample
+ * and
+ * https://github.com/ReliaSolve/OpenXR-OpenGL-Example
+ * Currently missing actions, XrResult failure catching, and can only run on windows
+ * Requires a stero headset and an install of the OpenXR runtime to run
+ */
 public class HelloOpenXR {
 
     long window;
@@ -65,14 +73,13 @@ public class HelloOpenXR {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        SharedLibrary defaultOpenXRLoader = Library.loadNative(XR.class, "org.lwjgl.openxr", Configuration.OPENXR_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("openxr_loader.dll")), true);
-        XR.create(defaultOpenXRLoader);
+//            XR.create("C:\\Program Files (x86)\\Steam\\steamapps\\common\\SteamVR\\bin\\win64\\openxr_loader.dll");
+        XR.create();
 
         HelloOpenXR helloOpenXR = new HelloOpenXR();
         helloOpenXR.createOpenXRInstance();
         helloOpenXR.initializeOpenXRSystem();
         helloOpenXR.initializeAndBindOpenGL();
-        //initialize openxr actions
         helloOpenXR.createXRReferenceSpace();
         helloOpenXR.createXRSwapchains();
         helloOpenXR.createOpenGLResourses();
@@ -171,7 +178,7 @@ public class HelloOpenXR {
 
             XrApplicationInfo applicationInfo = XrApplicationInfo.mallocStack();
             applicationInfo.apiVersion(XR10.XR_CURRENT_API_VERSION);
-            applicationInfo.applicationName(stack.UTF8("TEST NAME"));
+            applicationInfo.applicationName(stack.UTF8("HelloOpenXR"));
 
             XrInstanceCreateInfo createInfo = XrInstanceCreateInfo.mallocStack();
             createInfo.set(
@@ -198,6 +205,9 @@ public class HelloOpenXR {
             LongBuffer lBuf = stack.longs(0);
             XR10.xrGetSystem(xrInstance, systemInfo, lBuf);
             systemID = lBuf.get();
+            if (systemID == 0) {
+                throw new IllegalStateException("No compatible headset detected");
+            }
             System.out.printf("Headset found with System ID:%d\n", systemID);
         }
     }
@@ -213,12 +223,12 @@ public class HelloOpenXR {
             if (!glfwInit()) {
                 throw new IllegalStateException("Failed to initialize GLFW.");
             }
-            window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
-            glfwMakeContextCurrent(window);
             glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
             glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
             glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-            glfwSwapInterval(0);
+            glfwWindowHint(GLFW_DOUBLEBUFFER, GL_FALSE);
+            window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+            glfwMakeContextCurrent(window);
             GL.createCapabilities();
 
             //Check if OpenGL ver is supported by OpenXR ver
@@ -229,9 +239,32 @@ public class HelloOpenXR {
             //Bind the OpenGL context to the OpenXR instance and create the session
             switch (Platform.get()) {
                 case LINUX:
-                    throw new IllegalStateException();//TODO
+//                    if (xlib) { TODO
+//                        XrGraphicsBindingOpenGLXlibKHR graphicsBinding = XrGraphicsBindingOpenGLXlibKHR.malloc();
+//                        graphicsBinding.set(
+//                            KHROpenglEnable.XR_TYPE_GRAPHICS_BINDING_OPENGL_XLIB_KHR,
+//                            NULL,
+//                            GLFWNativeX11.glfwGetX11Display(),
+//                            ,
+//                            ,
+//                            GLX.glXGetCurrentDrawable(),
+//                            GLFWNativeGLX.glfwGetGLXContext(window)
+//                        );
+//                        this.graphicsBinding = graphicsBinding;
+//                    } else if (wayland) {
+//                        XrGraphicsBindingOpenGLWaylandKHR graphicsBinding = XrGraphicsBindingOpenGLWaylandKHR.malloc();
+//                        graphicsBinding.set(
+//                            KHROpenglEnable.XR_TYPE_GRAPHICS_BINDING_OPENGL_WAYLAND_KHR,
+//                            NULL,
+//                            GLFWNativeWayland.glfwGetWaylandDisplay()
+//                        );
+//                        this.graphicsBinding = graphicsBinding;
+//                    } else {
+//                        throw new IllegalStateException();
+//                    }
+                    throw new IllegalStateException();
                 case WINDOWS:
-                    XrGraphicsBindingOpenGLWin32KHR graphicsBinding = new XrGraphicsBindingOpenGLWin32KHR(memAlloc(XrGraphicsBindingOpenGLWin32KHR.SIZEOF));
+                    XrGraphicsBindingOpenGLWin32KHR graphicsBinding = XrGraphicsBindingOpenGLWin32KHR.malloc();
                     graphicsBinding.set(
                         KHROpenglEnable.XR_TYPE_GRAPHICS_BINDING_OPENGL_WIN32_KHR,
                         NULL,
@@ -270,7 +303,7 @@ public class HelloOpenXR {
             referenceSpaceCreateInfo.set(
                 XR10.XR_TYPE_REFERENCE_SPACE_CREATE_INFO,
                 NULL,
-                XR10.XR_REFERENCE_SPACE_TYPE_STAGE,
+                XR10.XR_REFERENCE_SPACE_TYPE_LOCAL,
                 identityPose
             );
             PointerBuffer pp = stack.mallocPointer(1);
@@ -304,8 +337,6 @@ public class HelloOpenXR {
             views = new XrView.Buffer(
                 mallocAndFillBufferUnsafe(viewCountNumber, XrView.SIZEOF, XR10.XR_TYPE_VIEW)
             );
-
-            assert (viewCountNumber == 2);  //For now this demo is only meant for stereo headsets
 
             if (viewCountNumber > 0) {
                 XR10.xrEnumerateSwapchainFormats(xrSession, intBuf, null);
@@ -689,14 +720,30 @@ public class HelloOpenXR {
 
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-        if (viewIndex == 0) { //Copy the left eye's view to the glfw window, no color correction is applied so this image may look wrong
+        if (viewIndex == 0 || true) { //The view to the glfw window
+            try (MemoryStack stack = stackPush()) {
+                Swapchain swapchain = swapchains[viewIndex];
+                IntBuffer ww        = stack.mallocInt(1);
+                IntBuffer wh        = stack.mallocInt(1);
+                glfwGetWindowSize(window, ww, wh);
+
+                int wh2 = (int)(((float)swapchain.height / swapchain.width) * ww.get(0));
+                if (wh2 > wh.get(0)) {
+                    int ww2 = (int)(((float)swapchain.width / swapchain.height) * wh.get(0));
+                    glViewport(ww2 * viewIndex, 0, ww2, wh.get(0));
+                } else {
+                    glViewport(ww.get(0) * viewIndex, 0, ww.get(0), wh2);
+                }
+            }
             glFrontFace(GL_CCW);
             glUseProgram(screenShader);
             glBindVertexArray(quadVAO);
             glDisable(GL_DEPTH_TEST);
             glBindTexture(GL_TEXTURE_2D, swapchainImage.image());
             glDrawArrays(GL_TRIANGLES, 0, 6);
-            glfwSwapBuffers(window);
+            if (viewIndex == swapchains.length - 1) {
+                glFlush();
+            }
         }
     }
 

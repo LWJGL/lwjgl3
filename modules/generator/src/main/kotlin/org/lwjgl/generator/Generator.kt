@@ -187,7 +187,7 @@ class Generator(private val moduleRoot: String) {
                             // ignore
                         }
                     } catch (e: ExceptionInInitializerError) {
-                        println("Caught $e when loading $path from $packageName")
+                        println("Caught exception when loading $path: ${e.exception}")
                     }
                 }
                 it.close()
