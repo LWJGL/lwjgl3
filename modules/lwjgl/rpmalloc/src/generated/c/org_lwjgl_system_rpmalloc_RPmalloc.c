@@ -64,9 +64,9 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_rpmalloc_1thread_
     rpmalloc_thread_initialize();
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_rpmalloc_1thread_1finalize(JNIEnv *__env, jclass clazz) {
+JNIEXPORT void JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpmalloc_1thread_1finalize(JNIEnv *__env, jclass clazz, jint release_caches) {
     UNUSED_PARAMS(__env, clazz)
-    rpmalloc_thread_finalize();
+    rpmalloc_thread_finalize(release_caches);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_rpmalloc_1thread_1collect(JNIEnv *__env, jclass clazz) {

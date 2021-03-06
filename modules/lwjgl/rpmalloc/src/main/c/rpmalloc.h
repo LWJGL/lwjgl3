@@ -200,7 +200,7 @@ rpmalloc_thread_initialize(void);
 
 //! Finalize allocator for calling thread
 RPMALLOC_EXPORT void
-rpmalloc_thread_finalize(void);
+rpmalloc_thread_finalize(int release_caches);
 
 //! Perform deferred deallocations pending for the calling thread heap
 RPMALLOC_EXPORT void
@@ -284,7 +284,7 @@ rpmalloc_usable_size(void* ptr);
 typedef struct heap_t rpmalloc_heap_t;
 
 //! Acquire a new heap. Will reuse existing released heaps or allocate memory for a new heap
-//  if none available. Heap API is imlemented with the strict assumption that only one single
+//  if none available. Heap API is implemented with the strict assumption that only one single
 //  thread will call heap functions for a given heap at any given time, no functions are thread safe.
 RPMALLOC_EXPORT rpmalloc_heap_t*
 rpmalloc_heap_acquire(void);
@@ -327,7 +327,7 @@ rpmalloc_heap_realloc(rpmalloc_heap_t* heap, void* ptr, size_t size, unsigned in
 //  less than memory page size. A caveat of rpmalloc internals is that this must also be strictly less than
 //  the span size (default 64KiB).
 RPMALLOC_EXPORT RPMALLOC_ALLOCATOR void*
-rpmalloc_heap_aligned_realloc(rpmalloc_heap_t* heap, void* ptr, size_t alignment, size_t size, unsigned int flags) RPMALLOC_ATTRIB_MALLOC RPMALLOC_ATTRIB_ALLOC_SIZE(3);
+rpmalloc_heap_aligned_realloc(rpmalloc_heap_t* heap, void* ptr, size_t alignment, size_t size, unsigned int flags) RPMALLOC_ATTRIB_MALLOC RPMALLOC_ATTRIB_ALLOC_SIZE(4);
 
 //! Free the given memory block from the given heap. The memory block MUST be allocated
 //  by the same heap given to this function.

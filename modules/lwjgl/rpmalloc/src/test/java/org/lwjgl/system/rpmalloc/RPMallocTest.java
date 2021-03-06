@@ -45,7 +45,7 @@ public class RPMallocTest {
                 for (int j = 0; j < 100; j++) {
                     rpmalloc_thread_initialize();
                     rpfree(rpmalloc(8));
-                    rpmalloc_thread_finalize();
+                    rpmalloc_thread_finalize(true);
                 }
             });
             t.start();
