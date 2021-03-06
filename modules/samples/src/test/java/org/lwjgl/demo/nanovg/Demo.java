@@ -920,7 +920,7 @@ class Demo {
         }
 
         data.fontEmoji = nvgCreateFontMem(vg, "emoji", data.NotoEmojiRegular, 0);
-        if (data.fontBold == -1) {
+        if (data.fontEmoji == -1) {
             System.err.format("Could not add font emoji.\n");
             return -1;
         }
