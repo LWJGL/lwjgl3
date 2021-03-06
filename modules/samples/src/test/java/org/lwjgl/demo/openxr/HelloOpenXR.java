@@ -65,11 +65,8 @@ public class HelloOpenXR {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        SharedLibrary XRlib;
-        //TODO put openxr_loader inside the OpenXR jar file
-        XRlib = Library.loadNative(XR.class, "org.lwjgl.openxr", Configuration.OPENXR_LIBRARY_NAME, "C:\\Program Files (x86)\\Steam\\steamapps\\common\\SteamVR\\bin\\win64\\openxr_loader.dll");
-        System.out.printf("\"%s\" opened as OpenXR loader\n", XRlib.getPath());
-        XR.create(XRlib);
+        SharedLibrary defaultOpenXRLoader = Library.loadNative(XR.class, "org.lwjgl.openxr", Configuration.OPENXR_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("openxr_loader.dll")), true);
+        XR.create(defaultOpenXRLoader);
 
         HelloOpenXR helloOpenXR = new HelloOpenXR();
         helloOpenXR.createOpenXRInstance();
@@ -113,7 +110,7 @@ public class HelloOpenXR {
         glDeleteProgram(helloOpenXR.screenShader);
         glDeleteProgram(helloOpenXR.textureShader);
         glDeleteProgram(helloOpenXR.colorShader);
-        glfwDestroyWindow(helloOpenXR.window);
+        glfwTerminate();
     }
 
     /**
