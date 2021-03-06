@@ -10,7 +10,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
-/** The KHR_loader_init extensffffffffffion. */
+/** The KHR_loader_init extension. */
 public class KHRLoaderInit {
 
     /** The extension specification version. */

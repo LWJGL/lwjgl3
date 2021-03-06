@@ -42,6 +42,24 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassXR("EXT_debug_utils", type = "i
         "OBJECT_TYPE_DEBUG_UTILS_MESSENGER_EXT".."1000019000"
     )
 
+    EnumConstant(
+        "XrDebugUtilsMessageSeverityFlagBitsEXT",
+
+        "DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT".enum(0x00000001),
+        "DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT".enum(0x00000010),
+        "DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT".enum(0x00000100),
+        "DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT".enum(0x00001000)
+    )
+
+    EnumConstant(
+        "XrDebugUtilsMessageTypeFlagBitsEXT",
+
+        "DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT".enum(0x00000001),
+        "DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT".enum(0x00000002),
+        "DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT".enum(0x00000004),
+        "DEBUG_UTILS_MESSAGE_TYPE_CONFORMANCE_BIT_EXT".enum(0x00000008)
+    )
+
     XrResult(
         "SetDebugUtilsObjectNameEXT",
         "",

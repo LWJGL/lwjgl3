@@ -294,6 +294,20 @@ public class XR10 {
         XR_ENVIRONMENT_BLEND_MODE_ALPHA_BLEND = 3;
 
     /**
+     * XrSpaceVelocityFlagBits
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #XR_SPACE_VELOCITY_LINEAR_VALID_BIT SPACE_VELOCITY_LINEAR_VALID_BIT}</li>
+     * <li>{@link #XR_SPACE_VELOCITY_ANGULAR_VALID_BIT SPACE_VELOCITY_ANGULAR_VALID_BIT}</li>
+     * </ul>
+     */
+    public static final int
+        XR_SPACE_VELOCITY_LINEAR_VALID_BIT  = 0x1,
+        XR_SPACE_VELOCITY_ANGULAR_VALID_BIT = 0x2;
+
+    /**
      * XrReferenceSpaceType
      * 
      * <h5>Enum values:</h5>
@@ -308,6 +322,96 @@ public class XR10 {
         XR_REFERENCE_SPACE_TYPE_VIEW  = 1,
         XR_REFERENCE_SPACE_TYPE_LOCAL = 2,
         XR_REFERENCE_SPACE_TYPE_STAGE = 3;
+
+    /**
+     * XrSpaceLocationFlagBits
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #XR_SPACE_LOCATION_ORIENTATION_VALID_BIT SPACE_LOCATION_ORIENTATION_VALID_BIT}</li>
+     * <li>{@link #XR_SPACE_LOCATION_POSITION_VALID_BIT SPACE_LOCATION_POSITION_VALID_BIT}</li>
+     * <li>{@link #XR_SPACE_LOCATION_ORIENTATION_TRACKED_BIT SPACE_LOCATION_ORIENTATION_TRACKED_BIT}</li>
+     * <li>{@link #XR_SPACE_LOCATION_POSITION_TRACKED_BIT SPACE_LOCATION_POSITION_TRACKED_BIT}</li>
+     * </ul>
+     */
+    public static final int
+        XR_SPACE_LOCATION_ORIENTATION_VALID_BIT   = 0x1,
+        XR_SPACE_LOCATION_POSITION_VALID_BIT      = 0x2,
+        XR_SPACE_LOCATION_ORIENTATION_TRACKED_BIT = 0x4,
+        XR_SPACE_LOCATION_POSITION_TRACKED_BIT    = 0x8;
+
+    /**
+     * XrSwapchainCreateFlagBits
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #XR_SWAPCHAIN_CREATE_PROTECTED_CONTENT_BIT SWAPCHAIN_CREATE_PROTECTED_CONTENT_BIT}</li>
+     * <li>{@link #XR_SWAPCHAIN_CREATE_STATIC_IMAGE_BIT SWAPCHAIN_CREATE_STATIC_IMAGE_BIT}</li>
+     * </ul>
+     */
+    public static final int
+        XR_SWAPCHAIN_CREATE_PROTECTED_CONTENT_BIT = 0x1,
+        XR_SWAPCHAIN_CREATE_STATIC_IMAGE_BIT      = 0x2;
+
+    /**
+     * XrSwapchainUsageFlagBits
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #XR_SWAPCHAIN_USAGE_COLOR_ATTACHMENT_BIT SWAPCHAIN_USAGE_COLOR_ATTACHMENT_BIT}</li>
+     * <li>{@link #XR_SWAPCHAIN_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT SWAPCHAIN_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT}</li>
+     * <li>{@link #XR_SWAPCHAIN_USAGE_UNORDERED_ACCESS_BIT SWAPCHAIN_USAGE_UNORDERED_ACCESS_BIT}</li>
+     * <li>{@link #XR_SWAPCHAIN_USAGE_TRANSFER_SRC_BIT SWAPCHAIN_USAGE_TRANSFER_SRC_BIT}</li>
+     * <li>{@link #XR_SWAPCHAIN_USAGE_TRANSFER_DST_BIT SWAPCHAIN_USAGE_TRANSFER_DST_BIT}</li>
+     * <li>{@link #XR_SWAPCHAIN_USAGE_SAMPLED_BIT SWAPCHAIN_USAGE_SAMPLED_BIT}</li>
+     * <li>{@link #XR_SWAPCHAIN_USAGE_MUTABLE_FORMAT_BIT SWAPCHAIN_USAGE_MUTABLE_FORMAT_BIT}</li>
+     * </ul>
+     */
+    public static final int
+        XR_SWAPCHAIN_USAGE_COLOR_ATTACHMENT_BIT         = 0x1,
+        XR_SWAPCHAIN_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT = 0x2,
+        XR_SWAPCHAIN_USAGE_UNORDERED_ACCESS_BIT         = 0x4,
+        XR_SWAPCHAIN_USAGE_TRANSFER_SRC_BIT             = 0x8,
+        XR_SWAPCHAIN_USAGE_TRANSFER_DST_BIT             = 0x10,
+        XR_SWAPCHAIN_USAGE_SAMPLED_BIT                  = 0x20,
+        XR_SWAPCHAIN_USAGE_MUTABLE_FORMAT_BIT           = 0x40;
+
+    /**
+     * XrCompositionLayerFlagBits
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #XR_COMPOSITION_LAYER_CORRECT_CHROMATIC_ABERRATION_BIT COMPOSITION_LAYER_CORRECT_CHROMATIC_ABERRATION_BIT}</li>
+     * <li>{@link #XR_COMPOSITION_LAYER_BLEND_TEXTURE_SOURCE_ALPHA_BIT COMPOSITION_LAYER_BLEND_TEXTURE_SOURCE_ALPHA_BIT}</li>
+     * <li>{@link #XR_COMPOSITION_LAYER_UNPREMULTIPLIED_ALPHA_BIT COMPOSITION_LAYER_UNPREMULTIPLIED_ALPHA_BIT}</li>
+     * </ul>
+     */
+    public static final int
+        XR_COMPOSITION_LAYER_CORRECT_CHROMATIC_ABERRATION_BIT = 0x1,
+        XR_COMPOSITION_LAYER_BLEND_TEXTURE_SOURCE_ALPHA_BIT   = 0x2,
+        XR_COMPOSITION_LAYER_UNPREMULTIPLIED_ALPHA_BIT        = 0x4;
+
+    /**
+     * XrViewStateFlagBits
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #XR_VIEW_STATE_ORIENTATION_VALID_BIT VIEW_STATE_ORIENTATION_VALID_BIT}</li>
+     * <li>{@link #XR_VIEW_STATE_POSITION_VALID_BIT VIEW_STATE_POSITION_VALID_BIT}</li>
+     * <li>{@link #XR_VIEW_STATE_ORIENTATION_TRACKED_BIT VIEW_STATE_ORIENTATION_TRACKED_BIT}</li>
+     * <li>{@link #XR_VIEW_STATE_POSITION_TRACKED_BIT VIEW_STATE_POSITION_TRACKED_BIT}</li>
+     * </ul>
+     */
+    public static final int
+        XR_VIEW_STATE_ORIENTATION_VALID_BIT   = 0x1,
+        XR_VIEW_STATE_POSITION_VALID_BIT      = 0x2,
+        XR_VIEW_STATE_ORIENTATION_TRACKED_BIT = 0x4,
+        XR_VIEW_STATE_POSITION_TRACKED_BIT    = 0x8;
 
     /**
      * XrActionType
@@ -328,6 +432,22 @@ public class XR10 {
         XR_ACTION_TYPE_VECTOR2F_INPUT   = 3,
         XR_ACTION_TYPE_POSE_INPUT       = 4,
         XR_ACTION_TYPE_VIBRATION_OUTPUT = 100;
+
+    /**
+     * XrInputSourceLocalizedNameFlagBits
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #XR_INPUT_SOURCE_LOCALIZED_NAME_USER_PATH_BIT INPUT_SOURCE_LOCALIZED_NAME_USER_PATH_BIT}</li>
+     * <li>{@link #XR_INPUT_SOURCE_LOCALIZED_NAME_INTERACTION_PROFILE_BIT INPUT_SOURCE_LOCALIZED_NAME_INTERACTION_PROFILE_BIT}</li>
+     * <li>{@link #XR_INPUT_SOURCE_LOCALIZED_NAME_COMPONENT_BIT INPUT_SOURCE_LOCALIZED_NAME_COMPONENT_BIT}</li>
+     * </ul>
+     */
+    public static final int
+        XR_INPUT_SOURCE_LOCALIZED_NAME_USER_PATH_BIT           = 0x1,
+        XR_INPUT_SOURCE_LOCALIZED_NAME_INTERACTION_PROFILE_BIT = 0x2,
+        XR_INPUT_SOURCE_LOCALIZED_NAME_COMPONENT_BIT           = 0x4;
 
     /**
      * XrEyeVisibility
@@ -417,6 +537,11 @@ public class XR10 {
         XR_MAX_LOCALIZED_ACTION_SET_NAME_SIZE = 128,
         XR_MAX_LOCALIZED_ACTION_NAME_SIZE     = 128,
         XR_MIN_COMPOSITION_LAYERS_SUPPORTED   = 16;
+
+    public static final long XR_INFINITE_DURATION = 0x7fffffffffffffffL;
+
+    /** XR_CURRENT_API_VERSION is the current version of the OpenXR API. */
+    public static final long XR_CURRENT_API_VERSION = XR_MAKE_VERSION(1, 0, 14);
 
     protected XR10() {
         throw new UnsupportedOperationException();
@@ -1207,6 +1332,22 @@ public class XR10 {
     @NativeType("XrResult")
     public static int xrStopHapticFeedback(XrSession session, @NativeType("XrHapticActionInfo const *") XrHapticActionInfo hapticActionInfo) {
         return nxrStopHapticFeedback(session, hapticActionInfo.address());
+    }
+
+    // --- [ XR_MAKE_VERSION ] ---
+
+    /**
+     * Constructs an API version number.
+     * 
+     * <p>This macro <b>can</b> be used when constructing the {@link XrApplicationInfo}{@code ::pname:apiVersion} parameter passed to {@link #xrCreateInstance CreateInstance}.</p>
+     *
+     * @param major the major version number
+     * @param minor the minor version number
+     * @param patch the patch version number
+     */
+    @NativeType("uint64_t")
+    public static long XR_MAKE_VERSION(@NativeType("uint32_t") int major, @NativeType("uint32_t") int minor, @NativeType("uint32_t") int patch) {
+        return ((major & 0xffffL) << 48) | ((minor & 0xffffL) << 32) | patch;
     }
 
     /** Array version of: {@link #xrEnumerateApiLayerProperties EnumerateApiLayerProperties} */

@@ -32,7 +32,7 @@ public class HelloOpenXR {
     long                           systemID;
     Struct                         graphicsBinding;
     XrSession                      xrSession;
-    XrSpace                        xrAppSpace;  //The relitive real world space in which the program runs
+    XrSpace                        xrAppSpace;  //The real world space in which the program runs
     long                           glColorFormat;
     XrView.Buffer                  views;       //Each view reperesents an eye in the headset with views[0] being left and views[1] being right
     Swapchain[]                    swapchains;  //One swapchain per view
@@ -116,12 +116,11 @@ public class HelloOpenXR {
         glfwDestroyWindow(helloOpenXR.window);
     }
 
-    private static long XR_MAKE_VERSION(long major, long minor, long patch) { //TODO define in XR10
-        return ((major & 0xffffL) << 48) | ((minor & 0xffffL) << 32) | patch;
-    }
-
-    private static ByteBuffer createAndFillVec(MemoryStack stack, int capacity, int sizeof, int type) {
-        ByteBuffer b = stack.malloc(capacity * sizeof);
+    /**
+     * Creates an array of XrStructs with their types pre set to @param type
+     */
+    private static ByteBuffer mallocAndFillBufferStack(int capacity, int sizeof, int type) {
+        ByteBuffer b = stackMalloc(capacity * sizeof);
 
         for (int i = 0; i < capacity; i++) {
             b.position(i * sizeof);
@@ -131,7 +130,7 @@ public class HelloOpenXR {
         return b;
     }
 
-    private static ByteBuffer createAndFillVec(int capacity, int sizeof, int type) {
+    private static ByteBuffer mallocAndFillBufferUnsafe(int capacity, int sizeof, int type) {
         ByteBuffer b = memAlloc(capacity * sizeof);
 
         for (int i = 0; i < capacity; i++) {
@@ -148,7 +147,7 @@ public class HelloOpenXR {
             XR10.xrEnumerateInstanceExtensionProperties((ByteBuffer)null, numExtensions, null);
 
             XrExtensionProperties.Buffer properties = new XrExtensionProperties.Buffer(
-                createAndFillVec(stack, numExtensions.get(0), XrExtensionProperties.SIZEOF, XR10.XR_TYPE_EXTENSION_PROPERTIES)
+                mallocAndFillBufferStack(numExtensions.get(0), XrExtensionProperties.SIZEOF, XR10.XR_TYPE_EXTENSION_PROPERTIES)
             );
 
             XR10.xrEnumerateInstanceExtensionProperties((ByteBuffer)null, numExtensions, properties);
@@ -170,14 +169,14 @@ public class HelloOpenXR {
             System.out.println("~~~~~~~~~~~~~~~~~~");
 
             if (missingOpenGL) {
-                throw new IllegalStateException("OpenXR library does not provide extension: " + KHROpenglEnable.XR_KHR_OPENGL_ENABLE_EXTENSION_NAME);
+                throw new IllegalStateException("OpenXR library does not provide required extension: " + KHROpenglEnable.XR_KHR_OPENGL_ENABLE_EXTENSION_NAME);
             }
 
-            XrApplicationInfo applicationInfo = new XrApplicationInfo(stack.malloc(XrApplicationInfo.SIZEOF));
-            applicationInfo.apiVersion(XR_MAKE_VERSION(1, 0, 14)); //TODO replace this with XR_CURRENT_API_VERSION once it
+            XrApplicationInfo applicationInfo = XrApplicationInfo.mallocStack();
+            applicationInfo.apiVersion(XR10.XR_CURRENT_API_VERSION);
             applicationInfo.applicationName(stack.UTF8("TEST NAME"));
 
-            XrInstanceCreateInfo createInfo = new XrInstanceCreateInfo(stack.malloc(XrInstanceCreateInfo.SIZEOF));
+            XrInstanceCreateInfo createInfo = XrInstanceCreateInfo.mallocStack();
             createInfo.set(
                 XR10.XR_TYPE_INSTANCE_CREATE_INFO,
                 0,
@@ -196,7 +195,7 @@ public class HelloOpenXR {
     public void initializeOpenXRSystem() {
         try (MemoryStack stack = stackPush()) {
             //Get headset
-            XrSystemGetInfo systemInfo = new XrSystemGetInfo(stack.malloc(XrSystemGetInfo.SIZEOF));
+            XrSystemGetInfo systemInfo = XrSystemGetInfo.mallocStack();
             systemInfo.set(XR10.XR_TYPE_SYSTEM_GET_INFO, 0, XR10.XR_FORM_FACTOR_HEAD_MOUNTED_DISPLAY);
 
             LongBuffer lBuf = stack.longs(0);
@@ -209,7 +208,7 @@ public class HelloOpenXR {
     public void initializeAndBindOpenGL() {
         try (MemoryStack stack = stackPush()) {
             //Initialize OpenXR's OpenGL compatability
-            XrGraphicsRequirementsOpenGLKHR graphicsRequirements = new XrGraphicsRequirementsOpenGLKHR(stack.malloc(XrGraphicsRequirementsOpenGLKHR.SIZEOF));
+            XrGraphicsRequirementsOpenGLKHR graphicsRequirements = XrGraphicsRequirementsOpenGLKHR.mallocStack();
             graphicsRequirements.set(KHROpenglEnable.XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_KHR, 0, 0, 0);
             KHROpenglEnable.xrGetOpenGLGraphicsRequirementsKHR(xrInstance, systemID, graphicsRequirements);
 
@@ -222,10 +221,11 @@ public class HelloOpenXR {
             glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
             glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
             glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+            glfwSwapInterval(0);
             GL.createCapabilities();
 
             //Check if OpenGL ver is supported by OpenXR ver
-            if (graphicsRequirements.minApiVersionSupported() > XR_MAKE_VERSION(GL11.glGetInteger(GL30.GL_MAJOR_VERSION), GL11.glGetInteger(GL30.GL_MINOR_VERSION), 0)) {
+            if (graphicsRequirements.minApiVersionSupported() > XR10.XR_MAKE_VERSION(GL11.glGetInteger(GL30.GL_MAJOR_VERSION), GL11.glGetInteger(GL30.GL_MINOR_VERSION), 0)) {
                 throw new IllegalStateException("Runtime does not support desired Graphics API and/or version");
             }
 
@@ -247,7 +247,7 @@ public class HelloOpenXR {
                     throw new IllegalStateException();
             }
 
-            XrSessionCreateInfo sessionCreateInfo = new XrSessionCreateInfo(stack.malloc(XrSessionCreateInfo.SIZEOF));
+            XrSessionCreateInfo sessionCreateInfo = XrSessionCreateInfo.mallocStack();
             sessionCreateInfo.set(
                 XR10.XR_TYPE_SESSION_CREATE_INFO,
                 graphicsBinding.address(),
@@ -263,18 +263,18 @@ public class HelloOpenXR {
 
     public void createXRReferenceSpace() {
         try (MemoryStack stack = stackPush()) {
-            XrPosef pose = new XrPosef(stack.malloc(XrPosef.SIZEOF));
-            pose.set(
-                new XrQuaternionf(stack.malloc(XrQuaternionf.SIZEOF)).set(0, 0, 0, 1),
-                new XrVector3f(stack.calloc(XrVector3f.SIZEOF))
+            XrPosef identityPose = XrPosef.mallocStack();
+            identityPose.set(
+                XrQuaternionf.mallocStack().set(0, 0, 0, 1),
+                XrVector3f.callocStack()
             );
 
-            XrReferenceSpaceCreateInfo referenceSpaceCreateInfo = new XrReferenceSpaceCreateInfo(stack.malloc(XrReferenceSpaceCreateInfo.SIZEOF));
+            XrReferenceSpaceCreateInfo referenceSpaceCreateInfo = XrReferenceSpaceCreateInfo.mallocStack();
             referenceSpaceCreateInfo.set(
                 XR10.XR_TYPE_REFERENCE_SPACE_CREATE_INFO,
                 NULL,
                 XR10.XR_REFERENCE_SPACE_TYPE_STAGE,
-                pose
+                identityPose
             );
             PointerBuffer pp = stack.mallocPointer(1);
             XR10.xrCreateReferenceSpace(xrSession, referenceSpaceCreateInfo, pp);
@@ -284,10 +284,10 @@ public class HelloOpenXR {
 
     public void createXRSwapchains() {
         try (MemoryStack stack = stackPush()) {
-            ByteBuffer buf = stack.calloc(XrSystemProperties.SIZEOF); //need to calloc so next = 0
-            buf.putInt(XR10.XR_TYPE_SYSTEM_PROPERTIES);
-            buf.rewind();
-            XrSystemProperties systemProperties = new XrSystemProperties(buf); //TODO make type mutable so this workaround isnt necicary
+//            ByteBuffer buf = stack.calloc(XrSystemProperties.SIZEOF);
+//            buf.putInt(XR10.XR_TYPE_SYSTEM_PROPERTIES);
+//            buf.rewind();
+            XrSystemProperties systemProperties = XrSystemProperties.callocStack();
             XR10.xrGetSystemProperties(xrInstance, systemID, systemProperties);
 
             System.out.printf("Headset name:%s vendor:%d \n", memUTF8(systemProperties.systemName()), systemProperties.vendorId());
@@ -299,88 +299,84 @@ public class HelloOpenXR {
             IntBuffer intBuf = stack.mallocInt(1);
             XR10.xrEnumerateViewConfigurationViews(xrInstance, systemID, viewConfigType, intBuf, null);
             viewConfigs = new XrViewConfigurationView.Buffer(
-                createAndFillVec(stack, intBuf.get(0), XrViewConfigurationView.SIZEOF, XR10.XR_TYPE_VIEW_CONFIGURATION_VIEW)
+                mallocAndFillBufferUnsafe(intBuf.get(0), XrViewConfigurationView.SIZEOF, XR10.XR_TYPE_VIEW_CONFIGURATION_VIEW)
             );
             XR10.xrEnumerateViewConfigurationViews(xrInstance, systemID, viewConfigType, intBuf, viewConfigs);
             int viewCountNumber = intBuf.get(0);
 
             views = new XrView.Buffer(
-                createAndFillVec(stack, viewCountNumber, XrView.SIZEOF, XR10.XR_TYPE_VIEW)
+                mallocAndFillBufferUnsafe(viewCountNumber, XrView.SIZEOF, XR10.XR_TYPE_VIEW)
             );
 
-            assert (viewCountNumber == 2);
+            assert (viewCountNumber == 2);  //For now this demo is only meant for stereo headsets
 
-//            if (viewCountNumber > 0) {
-            XR10.xrEnumerateSwapchainFormats(xrSession, intBuf, null);
-            LongBuffer longBuf = stack.callocLong(intBuf.get(0));
-            XR10.xrEnumerateSwapchainFormats(xrSession, intBuf, longBuf);
+            if (viewCountNumber > 0) {
+                XR10.xrEnumerateSwapchainFormats(xrSession, intBuf, null);
+                LongBuffer swapchainFormats = stack.mallocLong(intBuf.get(0));
+                XR10.xrEnumerateSwapchainFormats(xrSession, intBuf, swapchainFormats);
 
-            long[] desiredSwapchainFormats = {
-                GL11.GL_RGB10_A2,
-                GL30.GL_RGBA16F,
-                // The two below should only be used as a fallback, as they are linear color formats without enough bits for color
-                // depth, thus leading to banding.
-                GL11.GL_RGBA8,
-                GL31.GL_RGBA8_SNORM
-            };
-            for (long iglFormat : desiredSwapchainFormats) {
-                longBuf.rewind();
-                while (longBuf.hasRemaining()) {
-                    if (iglFormat == longBuf.get()) {
-                        glColorFormat = iglFormat;
+                long[] desiredSwapchainFormats = {
+                    GL11.GL_RGB10_A2,
+                    GL30.GL_RGBA16F,
+                    // The two below should only be used as a fallback, as they are linear color formats without enough bits for color
+                    // depth, thus leading to banding.
+                    GL11.GL_RGBA8,
+                    GL31.GL_RGBA8_SNORM
+                };
+                for (long glFormatIter : desiredSwapchainFormats) {
+                    swapchainFormats.rewind();
+                    while (swapchainFormats.hasRemaining()) {
+                        if (glFormatIter == swapchainFormats.get()) {
+                            glColorFormat = glFormatIter;
+                            break;
+                        }
+                    }
+                    if (glColorFormat != 0) {
                         break;
                     }
                 }
-                if (glColorFormat != 0) {
-                    break;
-                }
-            }
-            if (glColorFormat == 0) {
-                throw new IllegalStateException("No compatable swapchain / framebuffer format availible");
-            }
-
-            swapchains = new Swapchain[viewCountNumber];
-            for (int i = 0; i < viewCountNumber; i++) {
-                XrViewConfigurationView viewConfig          = viewConfigs.get(i);
-                XrSwapchainCreateInfo   swapchainCreateInfo = new XrSwapchainCreateInfo(stack.malloc(XrSwapchainCreateInfo.SIZEOF));
-                Swapchain               swapchainWrapper    = new Swapchain();
-
-                int XR_SWAPCHAIN_USAGE_SAMPLED_BIT          = 0x00000020; //TODO generate these in XR10
-                int XR_SWAPCHAIN_USAGE_COLOR_ATTACHMENT_BIT = 0x00000001;
-
-                swapchainCreateInfo.set(
-                    XR10.XR_TYPE_SWAPCHAIN_CREATE_INFO,
-                    NULL,
-                    0,
-                    XR_SWAPCHAIN_USAGE_SAMPLED_BIT | XR_SWAPCHAIN_USAGE_COLOR_ATTACHMENT_BIT,
-                    glColorFormat,
-                    viewConfig.recommendedSwapchainSampleCount(),
-                    viewConfig.recommendedImageRectWidth(),
-                    viewConfig.recommendedImageRectHeight(),
-                    1,
-                    1,
-                    1
-                );
-
-                PointerBuffer pp = stack.mallocPointer(1);
-                XR10.xrCreateSwapchain(xrSession, swapchainCreateInfo, pp);
-                swapchainWrapper.handle = new XrSwapchain(pp.get(0), xrSession);
-                swapchainWrapper.width = swapchainCreateInfo.width();
-                swapchainWrapper.height = swapchainCreateInfo.height();
-
-                XR10.xrEnumerateSwapchainImages(swapchainWrapper.handle, intBuf, null);
-                int imageCount = intBuf.get(0);
-
-                XrSwapchainImageOpenGLKHR.Buffer swapchainImageBuffer = new XrSwapchainImageOpenGLKHR.Buffer(memAlloc(XrSwapchainImageOpenGLKHR.SIZEOF * imageCount));
-                for (XrSwapchainImageOpenGLKHR image : swapchainImageBuffer) {
-                    image.type(KHROpenglEnable.XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR);
+                if (glColorFormat == 0) {
+                    throw new IllegalStateException("No compatable swapchain / framebuffer format availible");
                 }
 
-                XR10.xrEnumerateSwapchainImages(swapchainWrapper.handle, intBuf, new XrSwapchainImageBaseHeader.Buffer(swapchainImageBuffer.address(), swapchainImageBuffer.capacity()));
-                swapchainWrapper.images = swapchainImageBuffer;
-                swapchains[i] = swapchainWrapper;
+                swapchains = new Swapchain[viewCountNumber];
+                for (int i = 0; i < viewCountNumber; i++) {
+                    XrViewConfigurationView viewConfig          = viewConfigs.get(i);
+                    XrSwapchainCreateInfo   swapchainCreateInfo = XrSwapchainCreateInfo.mallocStack();
+                    Swapchain               swapchainWrapper    = new Swapchain();
+
+                    swapchainCreateInfo.set(
+                        XR10.XR_TYPE_SWAPCHAIN_CREATE_INFO,
+                        NULL,
+                        0,
+                        XR10.XR_SWAPCHAIN_USAGE_SAMPLED_BIT | XR10.XR_SWAPCHAIN_USAGE_COLOR_ATTACHMENT_BIT,
+                        glColorFormat,
+                        viewConfig.recommendedSwapchainSampleCount(),
+                        viewConfig.recommendedImageRectWidth(),
+                        viewConfig.recommendedImageRectHeight(),
+                        1,
+                        1,
+                        1
+                    );
+
+                    PointerBuffer pp = stack.mallocPointer(1);
+                    XR10.xrCreateSwapchain(xrSession, swapchainCreateInfo, pp);
+                    swapchainWrapper.handle = new XrSwapchain(pp.get(0), xrSession);
+                    swapchainWrapper.width = swapchainCreateInfo.width();
+                    swapchainWrapper.height = swapchainCreateInfo.height();
+
+                    XR10.xrEnumerateSwapchainImages(swapchainWrapper.handle, intBuf, null);
+                    int                              imageCount           = intBuf.get(0);
+                    XrSwapchainImageOpenGLKHR.Buffer swapchainImageBuffer = XrSwapchainImageOpenGLKHR.create(imageCount);
+                    for (XrSwapchainImageOpenGLKHR image : swapchainImageBuffer) {
+                        image.type(KHROpenglEnable.XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR);
+                    }
+
+                    XR10.xrEnumerateSwapchainImages(swapchainWrapper.handle, intBuf, XrSwapchainImageBaseHeader.create(swapchainImageBuffer.address(), swapchainImageBuffer.capacity()));
+                    swapchainWrapper.images = swapchainImageBuffer;
+                    swapchains[i] = swapchainWrapper;
+                }
             }
-//            }
         }
     }
 
@@ -507,7 +503,7 @@ public class HelloOpenXR {
         switch (sessionState) {
             case XR10.XR_SESSION_STATE_READY: {
                 assert (xrSession != null);
-                XrSessionBeginInfo sessionBeginInfo = XrSessionBeginInfo.create();
+                XrSessionBeginInfo sessionBeginInfo = XrSessionBeginInfo.mallocStack();
                 sessionBeginInfo.set(XR10.XR_TYPE_SESSION_BEGIN_INFO, 0, viewConfigType);
                 XR10.xrBeginSession(xrSession, sessionBeginInfo);
                 sessionRunning = true;
@@ -537,28 +533,28 @@ public class HelloOpenXR {
 
     private void renderFrameOpenXR() {
         try (MemoryStack stack = stackPush()) {
-            XrFrameWaitInfo frameWaitInfo = new XrFrameWaitInfo(stack.calloc(XrFrameWaitInfo.SIZEOF));
+            XrFrameWaitInfo frameWaitInfo = XrFrameWaitInfo.callocStack();
             frameWaitInfo.type(XR10.XR_TYPE_FRAME_WAIT_INFO);
-            XrFrameState frameState = new XrFrameState(stack.calloc(XrFrameState.SIZEOF));
+            XrFrameState frameState = XrFrameState.callocStack();
             frameState.type(XR10.XR_TYPE_FRAME_STATE);
             XR10.xrWaitFrame(xrSession, frameWaitInfo, frameState);
 
-            XrFrameBeginInfo frameBeginInfo = new XrFrameBeginInfo(stack.calloc(XrFrameBeginInfo.SIZEOF));
+            XrFrameBeginInfo frameBeginInfo = XrFrameBeginInfo.callocStack();
             frameBeginInfo.type(XR10.XR_TYPE_FRAME_BEGIN_INFO);
             XR10.xrBeginFrame(xrSession, frameBeginInfo);
 
-            XrCompositionLayerProjection layer = new XrCompositionLayerProjection(stack.calloc(XrCompositionLayerProjection.SIZEOF));
-            layer.type(XR10.XR_TYPE_COMPOSITION_LAYER_PROJECTION);
+            XrCompositionLayerProjection layerProjection = XrCompositionLayerProjection.callocStack();
+            layerProjection.type(XR10.XR_TYPE_COMPOSITION_LAYER_PROJECTION);
             PointerBuffer layers = stack.callocPointer(1);
 
             if (frameState.shouldRender()) {
-                if (renderLayerOpenXR(frameState.predictedDisplayTime(), layer)) {
-                    layers.put(layer.address());
+                if (renderLayerOpenXR(frameState.predictedDisplayTime(), layerProjection)) {
+                    layers.put(layerProjection.address());
                 }
             }
             layers.flip();
 
-            XrFrameEndInfo frameEndInfo = new XrFrameEndInfo(stack.malloc(XrFrameEndInfo.SIZEOF));
+            XrFrameEndInfo frameEndInfo = XrFrameEndInfo.mallocStack();
             frameEndInfo.set(
                 XR10.XR_TYPE_FRAME_END_INFO,
                 0,
@@ -569,7 +565,7 @@ public class HelloOpenXR {
             );
 
             if (layers.limit() > 0) {
-                layer.views().free(); //These values were allocated in a child function so they must be freed manually as we could not use the stack
+                layerProjection.views().free(); //These values were allocated in a child function so they must be freed manually as we could not use the stack
             }
 
             XR10.xrEndFrame(xrSession, frameEndInfo);
@@ -593,11 +589,9 @@ public class HelloOpenXR {
             );
 
             XR10.xrLocateViews(xrSession, viewLocateInfo, viewState, intBuf, views);
-            int  XR_VIEW_STATE_ORIENTATION_VALID_BIT = 0x00000001;//TODO gen this in XR10
-            int  XR_VIEW_STATE_POSITION_VALID_BIT    = 0x00000002;
-            long XR_INFINITE_DURATION                = 0x7fffffffffffffffL;
-            if ((viewState.viewStateFlags() & XR_VIEW_STATE_POSITION_VALID_BIT) == 0 ||
-                (viewState.viewStateFlags() & XR_VIEW_STATE_ORIENTATION_VALID_BIT) == 0) {
+
+            if ((viewState.viewStateFlags() & XR10.XR_VIEW_STATE_POSITION_VALID_BIT) == 0 ||
+                (viewState.viewStateFlags() & XR10.XR_VIEW_STATE_ORIENTATION_VALID_BIT) == 0) {
                 return false;  // There is no valid tracking poses for the views.
             }
             int viewCountOutput = intBuf.get(0);
@@ -605,7 +599,7 @@ public class HelloOpenXR {
             assert (viewCountOutput == viewConfigs.capacity());
             assert (viewCountOutput == swapchains.length);
 
-            projectionLayerViews = new XrCompositionLayerProjectionView.Buffer(createAndFillVec(viewCountOutput, XrCompositionLayerProjectionView.SIZEOF, XR10.XR_TYPE_COMPOSITION_LAYER_PROJECTION_VIEW));
+            projectionLayerViews = new XrCompositionLayerProjectionView.Buffer(mallocAndFillBufferUnsafe(viewCountOutput, XrCompositionLayerProjectionView.SIZEOF, XR10.XR_TYPE_COMPOSITION_LAYER_PROJECTION_VIEW));
 
             // Render view to the appropriate part of the swapchain image.
             for (int viewIndex = 0; viewIndex < viewCountOutput; viewIndex++) {
@@ -619,7 +613,7 @@ public class HelloOpenXR {
                 int swapchainImageIndex = intBuf.get(0);
 
                 XrSwapchainImageWaitInfo waitInfo = new XrSwapchainImageWaitInfo(stack.malloc(XrSwapchainImageWaitInfo.SIZEOF));
-                waitInfo.set(XR10.XR_TYPE_SWAPCHAIN_IMAGE_WAIT_INFO, 0, XR_INFINITE_DURATION);
+                waitInfo.set(XR10.XR_TYPE_SWAPCHAIN_IMAGE_WAIT_INFO, 0, XR10.XR_INFINITE_DURATION);
 
                 XR10.xrWaitSwapchainImage(viewSwapchain.handle, waitInfo);
 
@@ -671,13 +665,13 @@ public class HelloOpenXR {
         XrPosef       pose        = layerView.pose();
         XrVector3f    pos         = pose.position$();
         XrQuaternionf orientation = pose.orientation();
-        projectionMatrix = createProjectionFov(layerView.fov(), 0.1f, 100f);
+        createProjectionFov(projectionMatrix, layerView.fov(), 0.1f, 100f);
         viewMatrix.translationRotateScaleInvert(pos.x(), pos.y(), pos.z(), orientation.x(), orientation.y(), orientation.z(), orientation.w(), 1, 1, 1);
 
         glDisable(GL_CULL_FACE);    // Disable back-face culling so we can see the inside of the world-space cube and backside of the plane
 
         {   // Rotating plane
-            modelviewMatrix.translation(0, (float)Math.sin(-glfwGetTime() / 10), -3).rotate((float)-glfwGetTime(), 1, 0, 0);
+            modelviewMatrix.translation(0, 0, -3).rotate((float)-glfwGetTime(), 1, 0, 0);
             glUseProgram(colorShader);
             glUniformMatrix4fv(glGetUniformLocation(colorShader, "projection"), false, projectionMatrix.get(mvpMatrix));
             glUniformMatrix4fv(glGetUniformLocation(colorShader, "view"), false, viewMatrix.get(mvpMatrix));
@@ -709,7 +703,7 @@ public class HelloOpenXR {
         }
     }
 
-    private static Matrix4f createProjectionFov(XrFovf fov, float nearZ, float farZ) {
+    private static Matrix4f createProjectionFov(Matrix4f dest, XrFovf fov, float nearZ, float farZ) {
         try (MemoryStack stack = stackPush()) {
             float tanLeft        = Math.tan(fov.angleLeft());
             float tanRight       = Math.tan(fov.angleRight());
@@ -738,7 +732,7 @@ public class HelloOpenXR {
             m.put(7, 0.0f);
             m.put(11, -1.0f);
             m.put(15, 0.0f);
-            return new Matrix4f(m);
+            return dest.set(m);
         }
     }
 

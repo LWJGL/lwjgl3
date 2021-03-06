@@ -33,4 +33,16 @@ val EXTX_overlay = "EXTXOverlay".nativeClassXR("EXTX_overlay", type = "instance"
         "TYPE_SESSION_CREATE_INFO_OVERLAY_EXTX".."1000033000",
         "TYPE_EVENT_DATA_MAIN_SESSION_VISIBILITY_CHANGED_EXTX".."1000033003"
     )
+
+    EnumConstant(
+        "XrOverlaySessionCreateFlagBitsEXTX",
+
+        "OVERLAY_SESSION_CREATE_RELAXED_DISPLAY_TIME_BIT_EXTX".enum(0x00000001)
+    )
+
+    EnumConstant(
+        "XrOverlayMainSessionFlagBitsEXTX",
+
+        "OVERLAY_MAIN_SESSION_ENABLED_COMPOSITION_LAYER_INFO_DEPTH_BIT_EXTX".enum(0x00000001)
+    )
 }

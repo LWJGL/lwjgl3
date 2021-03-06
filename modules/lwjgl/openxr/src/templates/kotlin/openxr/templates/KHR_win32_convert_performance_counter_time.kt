@@ -36,13 +36,13 @@ val KHR_win32_convert_performance_counter_time = "KHRWin32ConvertPerformanceCoun
         LARGE_INTEGER.const.p("performanceCounter", ""),
         Check(1)..XrTime.p("time", "")
     )
-//
-//    XrResult(
-//        "ConvertTimeToWin32PerformanceCounterKHR",
-//        "",
-//
-//        XrInstance("instance", ""),
-//        XrTime("time", ""),
-//        Check(1)..LARGE_INTEGER.p("performanceCounter", "")
-//    )
+
+    XrResult(
+        "ConvertTimeToWin32PerformanceCounterKHR",
+        "",
+
+        XrInstance("instance", ""),
+        XrTime("time", ""),
+        Check(1)..LARGE_INTEGER.p("performanceCounter", "")
+    )
 }

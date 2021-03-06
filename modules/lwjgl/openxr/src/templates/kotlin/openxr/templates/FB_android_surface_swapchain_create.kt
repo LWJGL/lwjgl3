@@ -32,4 +32,11 @@ val FB_android_surface_swapchain_create = "FBAndroidSurfaceSwapchainCreate".nati
 
         "TYPE_ANDROID_SURFACE_SWAPCHAIN_CREATE_INFO_FB".."1000070000"
     )
+
+    EnumConstant(
+        "XrAndroidSurfaceSwapchainFlagBitsFB",
+
+        "ANDROID_SURFACE_SWAPCHAIN_SYNCHRONOUS_BIT_FB".enum(0x00000001),
+        "ANDROID_SURFACE_SWAPCHAIN_USE_TIMESTAMPS_BIT_FB".enum(0x00000002)
+    )
 }

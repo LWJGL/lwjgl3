@@ -1,6 +1,7 @@
 /*
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
+ * MACHINE GENERATED FILE, DO NOT EDIT
  */
 package openxr.templates
 
@@ -11,7 +12,7 @@ import openxr.KHR as KHR_
 val KHR_loader_init = "KHRLoaderInit".nativeClassXR("KHR_loader_init", type = "instance", postfix = KHR_) {
     documentation =
         """
-        The $templateName extensffffffffffion.
+        The $templateName extension.
         """
 
     IntConstant(

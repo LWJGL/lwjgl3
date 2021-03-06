@@ -151,11 +151,63 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
     )
 
     EnumConstant(
+        "XrSpaceVelocityFlagBits",
+
+        "SPACE_VELOCITY_LINEAR_VALID_BIT".enum(0x00000001),
+        "SPACE_VELOCITY_ANGULAR_VALID_BIT".enum(0x00000002)
+    )
+
+    EnumConstant(
         "XrReferenceSpaceType",
 
         "REFERENCE_SPACE_TYPE_VIEW".."1",
         "REFERENCE_SPACE_TYPE_LOCAL".."2",
         "REFERENCE_SPACE_TYPE_STAGE".."3"
+    )
+
+    EnumConstant(
+        "XrSpaceLocationFlagBits",
+
+        "SPACE_LOCATION_ORIENTATION_VALID_BIT".enum(0x00000001),
+        "SPACE_LOCATION_POSITION_VALID_BIT".enum(0x00000002),
+        "SPACE_LOCATION_ORIENTATION_TRACKED_BIT".enum(0x00000004),
+        "SPACE_LOCATION_POSITION_TRACKED_BIT".enum(0x00000008)
+    )
+
+    EnumConstant(
+        "XrSwapchainCreateFlagBits",
+
+        "SWAPCHAIN_CREATE_PROTECTED_CONTENT_BIT".enum(0x00000001),
+        "SWAPCHAIN_CREATE_STATIC_IMAGE_BIT".enum(0x00000002)
+    )
+
+    EnumConstant(
+        "XrSwapchainUsageFlagBits",
+
+        "SWAPCHAIN_USAGE_COLOR_ATTACHMENT_BIT".enum(0x00000001),
+        "SWAPCHAIN_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT".enum(0x00000002),
+        "SWAPCHAIN_USAGE_UNORDERED_ACCESS_BIT".enum(0x00000004),
+        "SWAPCHAIN_USAGE_TRANSFER_SRC_BIT".enum(0x00000008),
+        "SWAPCHAIN_USAGE_TRANSFER_DST_BIT".enum(0x00000010),
+        "SWAPCHAIN_USAGE_SAMPLED_BIT".enum(0x00000020),
+        "SWAPCHAIN_USAGE_MUTABLE_FORMAT_BIT".enum(0x00000040)
+    )
+
+    EnumConstant(
+        "XrCompositionLayerFlagBits",
+
+        "COMPOSITION_LAYER_CORRECT_CHROMATIC_ABERRATION_BIT".enum(0x00000001),
+        "COMPOSITION_LAYER_BLEND_TEXTURE_SOURCE_ALPHA_BIT".enum(0x00000002),
+        "COMPOSITION_LAYER_UNPREMULTIPLIED_ALPHA_BIT".enum(0x00000004)
+    )
+
+    EnumConstant(
+        "XrViewStateFlagBits",
+
+        "VIEW_STATE_ORIENTATION_VALID_BIT".enum(0x00000001),
+        "VIEW_STATE_POSITION_VALID_BIT".enum(0x00000002),
+        "VIEW_STATE_ORIENTATION_TRACKED_BIT".enum(0x00000004),
+        "VIEW_STATE_POSITION_TRACKED_BIT".enum(0x00000008)
     )
 
     EnumConstant(
@@ -166,6 +218,14 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
         "ACTION_TYPE_VECTOR2F_INPUT".."3",
         "ACTION_TYPE_POSE_INPUT".."4",
         "ACTION_TYPE_VIBRATION_OUTPUT".."100"
+    )
+
+    EnumConstant(
+        "XrInputSourceLocalizedNameFlagBits",
+
+        "INPUT_SOURCE_LOCALIZED_NAME_USER_PATH_BIT".enum(0x00000001),
+        "INPUT_SOURCE_LOCALIZED_NAME_INTERACTION_PROFILE_BIT".enum(0x00000002),
+        "INPUT_SOURCE_LOCALIZED_NAME_COMPONENT_BIT".enum(0x00000004)
     )
 
     EnumConstant(
