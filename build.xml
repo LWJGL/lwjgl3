@@ -1128,8 +1128,10 @@
         <element name="linux-arm64-content" optional="true"/>
         <element name="linux-arm32-content" optional="true"/>
         <element name="macos-content" optional="true"/>
+        <element name="macos-arm64-content" optional="true"/>
         <element name="windows-content" optional="true"/>
         <element name="windows-x86-content" optional="true"/>
+        <element name="windows-arm64-content" optional="true"/>
         <sequential>
             <local name="auto-natives"/>
             <condition property="auto-natives">
@@ -1158,11 +1160,17 @@
                 <get-release platform="macos" arch="x64" file="lib@{native-library}.dylib" if:set="auto-natives"/>
                 <get-release platform="macos" arch="x64" file="lib@{native-library}.dylib.git" if:set="git-revision"/>
 
+                <get-release platform="macos" arch="arm64" file="lib@{native-library}.dylib" if:set="auto-natives"/>
+                <get-release platform="macos" arch="arm64" file="lib@{native-library}.dylib.git" if:set="git-revision"/>
+
                 <get-release platform="windows" arch="x64" file="@{native-library}.dll" if:set="auto-natives"/>
                 <get-release platform="windows" arch="x64" file="@{native-library}.dll.git" if:set="git-revision"/>
 
                 <get-release platform="windows" arch="x86" file="@{native-library}.dll" if:set="auto-natives"/>
                 <get-release platform="windows" arch="x86" file="@{native-library}.dll.git" if:set="git-revision"/>
+
+                <get-release platform="windows" arch="arm64" file="@{native-library}.dll" if:set="auto-natives"/>
+                <get-release platform="windows" arch="arm64" file="@{native-library}.dll.git" if:set="git-revision"/>
 
                 <content/>
             </parallel>
@@ -1215,11 +1223,17 @@
                 <natives-jar name="@{name}" title="@{title}" platform="macos" path="macos/x64" type="dylib">
                     <macos-content/>
                 </natives-jar>
+                <natives-jar name="@{name}" title="@{title}" platform="macos-arm64" path="macos/arm64" type="dylib">
+                    <macos-arm64-content/>
+                </natives-jar>
                 <natives-jar name="@{name}" title="@{title}" platform="windows" path="windows/x64" type="dll">
                     <windows-content/>
                 </natives-jar>
                 <natives-jar name="@{name}" title="@{title}" platform="windows-x86" path="windows/x86" type="dll">
                     <windows-x86-content/>
+                </natives-jar>
+                <natives-jar name="@{name}" title="@{title}" platform="windows-arm64" path="windows/arm64" type="dll">
+                    <windows-arm64-content/>
                 </natives-jar>
             </parallel>
         </sequential>
@@ -1234,8 +1248,10 @@
         <element name="linux-arm64" optional="true"/>
         <element name="linux-arm32" optional="true"/>
         <element name="macos" optional="true"/>
+        <element name="macos-arm64" optional="true"/>
         <element name="windows" optional="true"/>
         <element name="windows-x86" optional="true"/>
+        <element name="windows-arm64" optional="true"/>
         <sequential>
             <local name="module.name"/>
             <property name="module.name" value="@{name}"/>
@@ -1255,8 +1271,10 @@
                 <linux-arm64-content><linux-arm64/></linux-arm64-content>
                 <linux-arm32-content><linux-arm32/></linux-arm32-content>
                 <macos-content><macos/></macos-content>
+                <macos-arm64-content><macos-arm64/></macos-arm64-content>
                 <windows-content><windows/></windows-content>
                 <windows-x86-content><windows-x86/></windows-x86-content>
+                <windows-arm64-content><windows-arm64/></windows-arm64-content>
             </release-natives>
 
             <!-- Bundle classes -->
