@@ -683,7 +683,7 @@ public class CLCapabilities {
     /**
      * This extension defines how modules using the SPIR-V extension {@code SPV_INTEL_media_block_io} may behave in an OpenCL environment.
      * 
-     * <p>Requires {@link CL21 OpenCL 2.1} and {@link  intel_media_block_io}.</p>
+     * <p>Requires {@link CL21 OpenCL 2.1} and <a target="_blank" href="http://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_media_block_io.txt">intel_spirv_media_block_io</a>.</p>
      */
     public final boolean cl_intel_spirv_media_block_io;
     /**

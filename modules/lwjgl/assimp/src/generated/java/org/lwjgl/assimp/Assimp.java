@@ -5713,9 +5713,9 @@ public class Assimp {
      * <pre><code>
      * struct aiLogStream c;
      * c = aiGetPredefinedLogStream(aiDefaultLogStream_FILE, "log.txt");
-     * aiAttachLogStream(&c);
+     * aiAttachLogStream(&amp;c);
      * c = aiGetPredefinedLogStream(aiDefaultLogStream_STDOUT, NULL);
-     * aiAttachLogStream(&c);</code></pre>
+     * aiAttachLogStream(&amp;c);</code></pre>
      *
      * @param pStreams One of the {@code aiDefaultLogStream} enumerated values. One of:<br><table><tr><td>{@link #aiDefaultLogStream_FILE DefaultLogStream_FILE}</td><td>{@link #aiDefaultLogStream_STDOUT DefaultLogStream_STDOUT}</td><td>{@link #aiDefaultLogStream_STDERR DefaultLogStream_STDERR}</td></tr><tr><td>{@link #aiDefaultLogStream_DEBUGGER DefaultLogStream_DEBUGGER}</td></tr></table>
      * @param file     Solely for the {@link #aiDefaultLogStream_FILE DefaultLogStream_FILE} flag: specifies the file to write to. Pass {@code NULL} for all other flags.
@@ -5740,9 +5740,9 @@ public class Assimp {
      * <pre><code>
      * struct aiLogStream c;
      * c = aiGetPredefinedLogStream(aiDefaultLogStream_FILE, "log.txt");
-     * aiAttachLogStream(&c);
+     * aiAttachLogStream(&amp;c);
      * c = aiGetPredefinedLogStream(aiDefaultLogStream_STDOUT, NULL);
-     * aiAttachLogStream(&c);</code></pre>
+     * aiAttachLogStream(&amp;c);</code></pre>
      *
      * @param pStreams One of the {@code aiDefaultLogStream} enumerated values. One of:<br><table><tr><td>{@link #aiDefaultLogStream_FILE DefaultLogStream_FILE}</td><td>{@link #aiDefaultLogStream_STDOUT DefaultLogStream_STDOUT}</td><td>{@link #aiDefaultLogStream_STDERR DefaultLogStream_STDERR}</td></tr><tr><td>{@link #aiDefaultLogStream_DEBUGGER DefaultLogStream_DEBUGGER}</td></tr></table>
      * @param file     Solely for the {@link #aiDefaultLogStream_FILE DefaultLogStream_FILE} flag: specifies the file to write to. Pass {@code NULL} for all other flags.

@@ -12,6 +12,7 @@ val GLFWNativeEGL = "GLFWNativeEGL".nativeClass(Module.GLFW, nativeSubPath = "eg
     javaImport(
         "javax.annotation.*",
         "org.lwjgl.egl.EGL",
+        "org.lwjgl.egl.EGL10",
         "org.lwjgl.opengles.GLES",
         "static org.lwjgl.system.MemoryUtil.*"
     )

@@ -579,7 +579,7 @@ val intel_spirv_media_block_io = EXT_FLAG.nativeClassCL("intel_spirv_media_block
         """
         This extension defines how modules using the SPIR-V extension {@code SPV_INTEL_media_block_io} may behave in an OpenCL environment.
         
-        Requires {@link CL21 OpenCL 2.1} and ${intel_media_block_io.link}.
+        Requires {@link CL21 OpenCL 2.1} and ${extensionLink("intel_media_block_io")}.
         """
 }
 val intel_spirv_subgroups = EXT_FLAG.nativeClassCL("intel_spirv_subgroups", INTEL) {

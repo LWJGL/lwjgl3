@@ -13,6 +13,7 @@ import static org.lwjgl.system.JNI.*;
 
 import javax.annotation.*;
 import org.lwjgl.egl.EGL;
+import org.lwjgl.egl.EGL10;
 import org.lwjgl.opengles.GLES;
 
 import static org.lwjgl.system.MemoryUtil.*;
