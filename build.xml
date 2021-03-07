@@ -270,7 +270,7 @@
 
             <srcfile/>
 
-            <arg value="s3://build.lwjgl.org/nightly/"/>
+            <arg value="s3://build.lwjgl.org/ci/"/>
             <arg line='--acl public-read --cache-control "public, must-revalidate, proxy-revalidate, max-age=0"'/>
 
             <fileset file="templates.jar"/>
@@ -279,7 +279,7 @@
 
     <target name="hydrate-kotlinc" description="Downloads the compiled Kotlin templates to build.lwjgl.org">
         <!-- Download cache -->
-        <get taskname="Downloading templates.jar" src="https://build.lwjgl.org/nightly/templates.jar" dest="."/>
+        <get taskname="Downloading templates.jar" src="https://build.lwjgl.org/ci/templates.jar" dest="."/>
 
         <!-- Validate commit -->
         <local name="Implementation-Version"/>
