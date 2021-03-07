@@ -976,8 +976,9 @@
             notree="true"
             public="true"
             Splitindex="true"
-            maxmemory="1G"
+            maxmemory="2G"
             failonerror="true"
+            verbose="true"
         >
             <doctitle><![CDATA[<h1>Lightweight Java Game Library</h1>]]></doctitle>
             <bottom><![CDATA[<i>Copyright LWJGL. All Rights Reserved. <a href="https://www.lwjgl.org/license">License terms</a>.</i>]]></bottom>
@@ -1286,6 +1287,7 @@
                 nohelp="true"
                 notree="true"
                 public="true"
+                maxmemory="1G"
                 failonerror="true"
                 unless:set="javadoc.skip"
             >
