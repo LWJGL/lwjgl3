@@ -12,8 +12,8 @@ public final class Version {
     /** Current version of library. */
     public static final int
         VERSION_MAJOR    = 3,
-        VERSION_MINOR    = 2,
-        VERSION_REVISION = 4;
+        VERSION_MINOR    = 3,
+        VERSION_REVISION = 0;
 
     /** The development state of the current build. */
     public static final BuildType BUILD_TYPE = BuildType.STABLE;
