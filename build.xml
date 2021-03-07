@@ -1436,7 +1436,30 @@
         <release-module name="assimp" native-library="assimp" title="assimp" if:true="${binding.assimp}"/>
 
         <!-- bgfx -->
-        <release-module name="bgfx" native-library="bgfx" title="bgfx" if:true="${binding.bgfx}"/>
+        <release-module name="bgfx" title="bgfx" if:true="${binding.bgfx}">
+            <natives>
+                <get-release platform="linux" arch="x64" file="libbgfx.so"/>
+                <get-release platform="linux" arch="x64" file="libbgfx.so.git"/>
+
+                <get-release platform="linux" arch="arm64" file="libbgfx.so"/>
+                <get-release platform="linux" arch="arm64" file="libbgfx.so.git"/>
+
+                <get-release platform="linux" arch="arm32" file="libbgfx.so"/>
+                <get-release platform="linux" arch="arm32" file="libbgfx.so.git"/>
+
+                <get-release platform="macos" arch="x64" file="libbgfx.dylib"/>
+                <get-release platform="macos" arch="x64" file="libbgfx.dylib.git"/>
+
+                <get-release platform="macos" arch="arm64" file="libbgfx.dylib"/>
+                <get-release platform="macos" arch="arm64" file="libbgfx.dylib.git"/>
+
+                <get-release platform="windows" arch="x64" file="bgfx.dll"/>
+                <get-release platform="windows" arch="x64" file="bgfx.dll.git"/>
+
+                <get-release platform="windows" arch="x86" file="bgfx.dll"/>
+                <get-release platform="windows" arch="x86" file="bgfx.dll.git"/>
+            </natives>
+        </release-module>
 
         <!-- Bullet -->
         <release-module name="bullet" native-library="lwjgl_bullet" title="bullet" if:true="${binding.bullet}"/>
