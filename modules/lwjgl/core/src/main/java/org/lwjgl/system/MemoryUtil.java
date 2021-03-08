@@ -1963,18 +1963,6 @@ public final class MemoryUtil {
      */
     public static native <T> T memGlobalRefToObject(long globalRef);
 
-    /** Deprecated, use {@link JNINativeInterface#NewGlobalRef} instead. */
-    @Deprecated public static long memNewGlobalRef(Object obj) { return NewGlobalRef(obj); }
-
-    /** Deprecated, use {@link JNINativeInterface#DeleteGlobalRef} instead. */
-    @Deprecated public static void memDeleteGlobalRef(long globalRef) { DeleteGlobalRef(globalRef); }
-
-    /** Deprecated, use {@link JNINativeInterface#NewWeakGlobalRef} instead. */
-    @Deprecated public static long memNewWeakGlobalRef(Object obj) { return NewWeakGlobalRef(obj); }
-
-    /** Deprecated, use {@link JNINativeInterface#DeleteWeakGlobalRef} instead. */
-    @Deprecated public static void memDeleteWeakGlobalRef(long globalRef) { DeleteWeakGlobalRef(globalRef);}
-
     /*  -------------------------------------
         -------------------------------------
                   TEXT ENCODING API

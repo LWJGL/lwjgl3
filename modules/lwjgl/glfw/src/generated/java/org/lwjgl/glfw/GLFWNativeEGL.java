@@ -97,12 +97,6 @@ public class GLFWNativeEGL {
         return invokePP(window, __functionAddress);
     }
 
-    /** Deprecated (to be removed in LWJGL 3.3). Calls {@link #setEGLPath(String)} with the path of the EGL shared library loaded by LWJGL. */
-    @Deprecated
-    public static void setEGLPathLWJGL() {
-        setEGLPath(EGL.getFunctionProvider());
-    }
-
     /**
      * Calls {@link #setEGLPath(String)} with the path of the specified {@link SharedLibrary}.
      * 
@@ -142,12 +136,6 @@ public class GLFWNativeEGL {
         }
     }
     
-    /** Deprecated (to be removed in LWJGL 3.3). Calls {@link #setGLESPath(String)} with the path of the OpenGL ES shared library loaded by LWJGL. */
-    @Deprecated
-    public static void setGLESPathLWJGL() {
-        setGLESPath(GLES.getFunctionProvider());
-    }
-
     /**
      * Calls {@link #setGLESPath(String)} with the path of the specified {@link SharedLibrary}.
      * 

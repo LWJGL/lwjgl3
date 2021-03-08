@@ -31,12 +31,6 @@ val GLFWNativeWGL = "GLFWNativeWGL".nativeClass(Module.GLFW, nativeSubPath = "wi
     )
 
     customMethod("""
-    /** Deprecated (to be removed in LWJGL 3.3). Calls {@link #setPath(String)} with the path of the OpenGL shared library loaded by LWJGL. */
-    @Deprecated
-    public static void setPathLWJGL() {
-        setPath(GL.getFunctionProvider());
-    }
-    
     /**
      * Calls {@link #setPath(String)} with the path of the specified {@link SharedLibrary}.
      * 

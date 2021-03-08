@@ -148,17 +148,6 @@ val aiTexture = struct(Module.ASSIMP, "AITexture", nativeName = "struct aiTextur
     )
     aiString("mFilename", "texture original filename. Used to get the texture reference.")
 
-    // TODO: remove in 3.3
-    customMethod("""
-    /** Deprecated (to be removed in LWJGL 3.3). Use {@link #pcData()} or {@link #pcDataCompressed} depending on the value of {@code mHeight}. */
-    @NativeType("struct aiTexel *")
-    @Deprecated
-    public AITexel.Buffer pcData(int capacity) { return npcData(address(), capacity); }
-
-    /** Deprecated (to be removed in LWJGL 3.3). Use {@link #npcData(long)} or {@link #npcDataCompressed} depending on the value of {@code mHeight}. */
-    @Deprecated
-    public static AITexel.Buffer npcData(long struct, int capacity) { return AITexel.create(memGetAddress(struct + AITexture.PCDATA), capacity); }""")
-
     customMethod("""
     /** Returns a {@code char *} view of the array pointed to by the {@code pcData} field. */
     @NativeType("char *")
@@ -166,12 +155,6 @@ val aiTexture = struct(Module.ASSIMP, "AITexture", nativeName = "struct aiTextur
 
     /** Unsafe version of {@link #pcDataCompressed}. */
     public static ByteBuffer npcDataCompressed(long struct) { return memByteBuffer(memGetAddress(struct + AITexture.PCDATA), nmWidth(struct)); }""")
-
-    // TODO: remove in 3.3
-    customMethodBuffer("""
-        $t/** Deprecated (to be removed in LWJGL 3.3). Use {@link #pcData()} or {@link #pcDataCompressed} depending on the value of {@code mHeight}. */
-        @NativeType("struct aiTexel *")
-        public AITexel.Buffer pcData(int capacity) { return AITexture.npcData(address(), capacity); }""")
 
     customMethodBuffer("""
         $t/** Returns a {@code char *} view of the array pointed to by the {@code pcData} field. */

@@ -184,15 +184,6 @@ public class AITexture extends Struct {
     /** Unsafe version of {@link #mFilename}. */
     public static AIString nmFilename(long struct) { return AIString.create(struct + AITexture.MFILENAME); }
 
-    /** Deprecated (to be removed in LWJGL 3.3). Use {@link #pcData()} or {@link #pcDataCompressed} depending on the value of {@code mHeight}. */
-    @NativeType("struct aiTexel *")
-    @Deprecated
-    public AITexel.Buffer pcData(int capacity) { return npcData(address(), capacity); }
-
-    /** Deprecated (to be removed in LWJGL 3.3). Use {@link #npcData(long)} or {@link #npcDataCompressed} depending on the value of {@code mHeight}. */
-    @Deprecated
-    public static AITexel.Buffer npcData(long struct, int capacity) { return AITexel.create(memGetAddress(struct + AITexture.PCDATA), capacity); }
-
     /** Returns a {@code char *} view of the array pointed to by the {@code pcData} field. */
     @NativeType("char *")
     public ByteBuffer pcDataCompressed() { return npcDataCompressed(address()); }
@@ -256,10 +247,6 @@ public class AITexture extends Struct {
         /** Returns a {@link AIString} view of the {@code mFilename} field. */
         @NativeType("struct aiString")
         public AIString mFilename() { return AITexture.nmFilename(address()); }
-
-        /** Deprecated (to be removed in LWJGL 3.3). Use {@link #pcData()} or {@link #pcDataCompressed} depending on the value of {@code mHeight}. */
-        @NativeType("struct aiTexel *")
-        public AITexel.Buffer pcData(int capacity) { return AITexture.npcData(address(), capacity); }
 
         /** Returns a {@code char *} view of the array pointed to by the {@code pcData} field. */
         @NativeType("char *")

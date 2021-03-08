@@ -17,7 +17,7 @@ val GLFWVulkan = "GLFWVulkan".dependsOn(Module.VULKAN)?.nativeClass(Module.GLFW,
     customMethod("""
     static {
         if (Platform.get() == Platform.MACOSX) {
-            setPathLWJGL();
+            setPath(VK.getFunctionProvider());
         }
     }""")
 
@@ -162,12 +162,6 @@ val GLFWVulkan = "GLFWVulkan".dependsOn(Module.VULKAN)?.nativeClass(Module.GLFW,
     )
 
     customMethod("""
-    /** Deprecated (to be removed in LWJGL 3.3). Calls {@link #setPath(String)} with the path of the Vulkan shared library loaded by LWJGL. */
-    @Deprecated
-    public static void setPathLWJGL() {
-        setPath(VK.getFunctionProvider());
-    }
-    
     /**
      * Calls {@link #setPath(String)} with the path of the specified {@link SharedLibrary}.
      * 

@@ -53,7 +53,7 @@ public final class APIUtil {
         API_VERSION_PATTERN = Pattern.compile("^" + PREFIX + VERSION + IMPLEMENTATION + "$", Pattern.DOTALL);
     }
 
-    @SuppressWarnings({"unchecked", "resource", "UseOfSystemOutOrSystemErr"})
+    @SuppressWarnings({"unchecked", "UseOfSystemOutOrSystemErr"})
     private static PrintStream getDebugStream() {
         PrintStream debugStream = System.err;
 
@@ -302,21 +302,6 @@ public final class APIUtil {
             matcher.group(3),
             matcher.group(4)
         );
-    }
-
-    /**
-     * Deprecated, use {@link #apiParseVersion(String)} instead.
-     *
-     * <p>This method will be removed in LWJGL 3.3.</p>
-     *
-     * @param version the version string
-     * @param prefix  ignored
-     *
-     * @return the parsed {@link APIVersion}
-     */
-    @Deprecated // TODO: remove in 3.3
-    public static APIVersion apiParseVersion(String version, @Nullable String prefix) {
-        return apiParseVersion(version);
     }
 
     public static String apiUnknownToken(int token) {

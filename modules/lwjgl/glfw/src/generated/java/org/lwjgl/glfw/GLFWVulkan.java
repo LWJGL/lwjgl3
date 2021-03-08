@@ -45,7 +45,7 @@ public class GLFWVulkan {
 
     static {
         if (Platform.get() == Platform.MACOSX) {
-            setPathLWJGL();
+            setPath(VK.getFunctionProvider());
         }
     }
 
@@ -300,12 +300,6 @@ public class GLFWVulkan {
         return invokePPPPI(instance.address(), window, memAddressSafe(allocator), surface, __functionAddress);
     }
 
-    /** Deprecated (to be removed in LWJGL 3.3). Calls {@link #setPath(String)} with the path of the Vulkan shared library loaded by LWJGL. */
-    @Deprecated
-    public static void setPathLWJGL() {
-        setPath(VK.getFunctionProvider());
-    }
-    
     /**
      * Calls {@link #setPath(String)} with the path of the specified {@link SharedLibrary}.
      * 
