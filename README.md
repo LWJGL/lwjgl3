@@ -1,12 +1,11 @@
 [![Maven Central](https://img.shields.io/maven-central/v/org.lwjgl/lwjgl.svg?label=maven%20central)](https://search.maven.org/search?q=g:org.lwjgl)
 [![API Javadoc](https://img.shields.io/badge/API-docs-blue.svg)](https://javadoc.lwjgl.org/)
 [![License](https://img.shields.io/badge/license-BSD-blue.svg?colorB=lightgray)](https://github.com/LWJGL/lwjgl3/blob/master/LICENSE.md)
-[![Slack Status](https://slackin-bfxneqmzsp.now.sh/badge.svg)](http://slack.lwjgl.org/)
 
 [![Backers on Open Collective](https://opencollective.com/lwjgl/backers/badge.svg)](#backers)
 [![Sponsors on Open Collective](https://opencollective.com/lwjgl/sponsors/badge.svg)](#sponsors)
 ![Size](https://img.shields.io/github/repo-size/LWJGL/lwjgl3.svg?label=size&colorB=lightgray)
-[![Build Status](https://travis-ci.org/LWJGL-CI/lwjgl3.svg?branch=master-linux64)](https://travis-ci.org/LWJGL-CI/lwjgl3)
+[![Build Status](https://img.shields.io/github/workflow/status/LWJGL-CI/glfw/LWJGL%20Build?logo=github)](https://github.com/LWJGL-CI/lwjgl3/actions/workflows/CI.yml)
 
 ## LWJGL - Lightweight Java Game Library 3
 
@@ -34,7 +33,8 @@ Useful links:
 Contact:
 
 - [Forum](http://forum.lwjgl.org)
-- [Slack](https://lwjgl.slack.com/) (invitations [here](http://slack.lwjgl.org/))
+- [Slack](https://lwjgl.slack.com/) (click [this](http://slack.lwjgl.org/) to join)
+- [Discord](https://discord.gg/6CywMCs)
 - [Twitter](https://twitter.com/LWJGL)
 
 If you'd like to contribute, see [doc/README](https://github.com/LWJGL/lwjgl3/tree/master/doc)
