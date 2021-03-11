@@ -15,6 +15,7 @@ val EXT_buffer_device_address = "EXTBufferDeviceAddress".nativeClassVK("EXT_buff
 
         It also allows buffer device addresses to be provided by a trace replay tool, so that it matches the address used when the trace was captured.
 
+        <h5>VK_EXT_buffer_device_address</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_buffer_device_address}</dd>
@@ -48,12 +49,20 @@ val EXT_buffer_device_address = "EXTBufferDeviceAddress".nativeClassVK("EXT_buff
             <dd><ul>
                 <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_buffer_device_address:%20&amp;body=@jeffbolznv%20">jeffbolznv</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2019-01-06</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
+
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
+                <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/EXT/SPV_EXT_physical_storage_buffer.html">{@code SPV_EXT_physical_storage_buffer}</a></li>
+            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>

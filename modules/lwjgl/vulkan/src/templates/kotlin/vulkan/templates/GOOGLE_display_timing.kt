@@ -22,6 +22,7 @@ val GOOGLE_display_timing = "GOOGLEDisplayTiming".nativeClassVK("GOOGLE_display_
         The example code for the this extension (like the {@link KHRSurface VK_KHR_surface} and {@code VK_GOOGLE_display_timing} extensions) is contained in the cube demo that is shipped with the official Khronos SDK, and is being kept up-to-date in that location (see: https://github.com/KhronosGroup/Vulkan-Tools/blob/master/cube/cube.c ).
         </div>
 
+        <h5>VK_GOOGLE_display_timing</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_GOOGLE_display_timing}</dd>
@@ -45,7 +46,10 @@ val GOOGLE_display_timing = "GOOGLEDisplayTiming".nativeClassVK("GOOGLE_display_
             <dd><ul>
                 <li>Ian Elliott <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_GOOGLE_display_timing:%20&amp;body=@ianelliottus%20">ianelliottus</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2017-02-14</dd>
 
@@ -114,6 +118,7 @@ val GOOGLE_display_timing = "GOOGLEDisplayTiming".nativeClassVK("GOOGLE_display_
 
             <dt>On failure, this command returns</dt>
             <dd><ul>
+                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
                 <li>#ERROR_DEVICE_LOST</li>
                 <li>#ERROR_SURFACE_LOST_KHR</li>
             </ul></dd>
@@ -172,6 +177,7 @@ val GOOGLE_display_timing = "GOOGLEDisplayTiming".nativeClassVK("GOOGLE_display_
 
             <dt>On failure, this command returns</dt>
             <dd><ul>
+                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
                 <li>#ERROR_DEVICE_LOST</li>
                 <li>#ERROR_OUT_OF_DATE_KHR</li>
                 <li>#ERROR_SURFACE_LOST_KHR</li>

@@ -34,6 +34,7 @@ val AMD_rasterization_order = "AMDRasterizationOrder".nativeClassVK("AMD_rasteri
         <h5>Examples</h5>
         None
 
+        <h5>VK_AMD_rasterization_order</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_AMD_rasterization_order}</dd>
@@ -56,7 +57,10 @@ val AMD_rasterization_order = "AMDRasterizationOrder".nativeClassVK("AMD_rasteri
             <dd><ul>
                 <li>Daniel Rakos <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_rasterization_order:%20&amp;body=@drakos-amd%20">drakos-amd</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2016-04-25</dd>
 

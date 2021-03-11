@@ -41,13 +41,21 @@ open class StructMember(
     override fun validate(modifier: StructMemberModifier) = modifier.validate(this)
 
     internal var getter: String? = null
-    fun getter(expression: String) {
+    fun getter(expression: String): StructMember {
         this.getter = expression
+        return this
     }
 
     internal var setter: String? = null
-    fun setter(expression: String) {
+    fun setter(expression: String): StructMember {
         this.setter = expression
+        return this
+    }
+
+    fun copyAccessors(member: StructMember): StructMember {
+        this.getter = member.getter
+        this.setter = member.setter
+        return this
     }
 
     internal val offsetField

@@ -18,6 +18,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         The example code for the {@code VK_KHR_display} and {@link KHRDisplaySwapchain VK_KHR_display_swapchain} extensions was removed from the appendix after revision 1.0.43. The display enumeration example code was ported to the cube demo that is shipped with the official Khronos SDK, and is being kept up-to-date in that location (see: https://github.com/KhronosGroup/Vulkan-Tools/blob/master/cube/cube.c).
         </div>
 
+        <h5>VK_KHR_display</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_display}</dd>
@@ -42,7 +43,10 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
                 <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_display:%20&amp;body=@cubanismo%20">cubanismo</a></li>
                 <li>Norbert Nopper <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_display:%20&amp;body=@FslNopper%20">FslNopper</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2017-03-13</dd>
 
@@ -279,6 +283,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
             <li>{@code display} <b>must</b> be a valid {@code VkDisplayKHR} handle</li>
             <li>{@code pPropertyCount} <b>must</b> be a valid pointer to a {@code uint32_t} value</li>
             <li>If the value referenced by {@code pPropertyCount} is not 0, and {@code pProperties} is not {@code NULL}, {@code pProperties} <b>must</b> be a valid pointer to an array of {@code pPropertyCount} ##VkDisplayModePropertiesKHR structures</li>
+            <li>{@code display} <b>must</b> have been created, allocated, or retrieved from {@code physicalDevice}</li>
         </ul>
 
         <h5>Return Codes</h5>
@@ -329,6 +334,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
             <li>{@code pCreateInfo} <b>must</b> be a valid pointer to a valid ##VkDisplayModeCreateInfoKHR structure</li>
             <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid ##VkAllocationCallbacks structure</li>
             <li>{@code pMode} <b>must</b> be a valid pointer to a {@code VkDisplayModeKHR} handle</li>
+            <li>{@code display} <b>must</b> have been created, allocated, or retrieved from {@code physicalDevice}</li>
         </ul>
 
         <h5>Host Synchronization</h5>

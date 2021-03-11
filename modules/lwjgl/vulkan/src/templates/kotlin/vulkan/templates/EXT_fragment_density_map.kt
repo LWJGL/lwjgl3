@@ -15,6 +15,7 @@ val EXT_fragment_density_map = "EXTFragmentDensityMap".nativeClassVK("EXT_fragme
 
         The primary use of this extension is to reduce workloads in areas where lower quality may not be perceived such as the distorted edges of a lens or the periphery of a user's gaze.
 
+        <h5>VK_EXT_fragment_density_map</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_fragment_density_map}</dd>
@@ -38,13 +39,16 @@ val EXT_fragment_density_map = "EXTFragmentDensityMap".nativeClassVK("EXT_fragme
             <dd><ul>
                 <li>Matthew Netsch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_fragment_density_map:%20&amp;body=@mnetsch%20">mnetsch</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2018-09-25</dd>
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension requires the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/EXT/SPV_EXT_fragment_invocation_density.html">{@code SPV_EXT_fragment_invocation_density}</a> SPIR-V extension.</li>
+                <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/EXT/SPV_EXT_fragment_invocation_density.html">{@code SPV_EXT_fragment_invocation_density}</a></li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

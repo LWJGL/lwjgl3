@@ -13,9 +13,7 @@ val AMD_memory_overallocation_behavior = "AMDMemoryOverallocationBehavior".nativ
         """
         This extension allows controlling whether explicit overallocation beyond the device memory heap sizes (reported by ##VkPhysicalDeviceMemoryProperties) is allowed or not. Overallocation may lead to performance loss and is not supported for all platforms.
 
-        <h5>Examples</h5>
-        None.
-
+        <h5>VK_AMD_memory_overallocation_behavior</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_AMD_memory_overallocation_behavior}</dd>
@@ -38,7 +36,10 @@ val AMD_memory_overallocation_behavior = "AMDMemoryOverallocationBehavior".nativ
             <dd><ul>
                 <li>Martin Dinkov <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_memory_overallocation_behavior:%20&amp;body=@mdinkov%20">mdinkov</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2018-09-19</dd>
 
@@ -79,7 +80,7 @@ val AMD_memory_overallocation_behavior = "AMDMemoryOverallocationBehavior".nativ
 
         <h5>Description</h5>
         <ul>
-            <li>#MEMORY_OVERALLOCATION_BEHAVIOR_DEFAULT_AMD lets the implementation decide if overallocation should be allowed.</li>
+            <li>#MEMORY_OVERALLOCATION_BEHAVIOR_DEFAULT_AMD lets the implementation decide if overallocation is allowed.</li>
             <li>#MEMORY_OVERALLOCATION_BEHAVIOR_ALLOWED_AMD specifies overallocation is allowed if platform permits.</li>
             <li>#MEMORY_OVERALLOCATION_BEHAVIOR_DISALLOWED_AMD specifies the application is not allowed to allocate device memory beyond the heap sizes reported by ##VkPhysicalDeviceMemoryProperties. Allocations that are not explicitly made by the application within the scope of the Vulkan instance are not accounted for.</li>
         </ul>

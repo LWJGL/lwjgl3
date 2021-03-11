@@ -16,6 +16,7 @@ val KHR_shader_subgroup_extended_types = "KHRShaderSubgroupExtendedTypes".native
         <h5>Promotion to Vulkan 1.2</h5>
         All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
 
+        <h5>VK_KHR_shader_subgroup_extended_types</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_shader_subgroup_extended_types}</dd>
@@ -43,7 +44,10 @@ val KHR_shader_subgroup_extended_types = "KHRShaderSubgroupExtendedTypes".native
             <dd><ul>
                 <li>Neil Henning <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_shader_subgroup_extended_types:%20&amp;body=@sheredom%20">sheredom</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2019-01-08</dd>
 
@@ -53,6 +57,7 @@ val KHR_shader_subgroup_extended_types = "KHRShaderSubgroupExtendedTypes".native
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
                 <li>Promoted to Vulkan 1.2 Core</li>
+                <li>This extension provides API support for <a target="_blank" href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GLSL_EXT_shader_subgroup_extended_types.txt">{@code GLSL_EXT_shader_subgroup_extended_types}</a></li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

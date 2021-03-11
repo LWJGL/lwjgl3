@@ -58,6 +58,11 @@
             <package name="org.lwjgl.util.simd"/>
         </packages>
     </test>
+    <test name="vulkan">
+        <packages>
+            <package name="org.lwjgl.vulkan"/>
+        </packages>
+    </test>
     <test name="yoga">
         <packages>
             <package name="org.lwjgl.util.yoga"/>

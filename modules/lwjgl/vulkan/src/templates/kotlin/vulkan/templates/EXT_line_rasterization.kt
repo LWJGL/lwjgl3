@@ -13,6 +13,7 @@ val EXT_line_rasterization = "EXTLineRasterization".nativeClassVK("EXT_line_rast
         """
         This extension adds some line rasterization features that are commonly used in CAD applications and supported in other APIs like OpenGL. Bresenham-style line rasterization is supported, smooth rectangular lines (coverage to alpha) are supported, and stippled lines are supported for all three line rasterization modes.
 
+        <h5>VK_EXT_line_rasterization</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_line_rasterization}</dd>
@@ -32,11 +33,19 @@ val EXT_line_rasterization = "EXTLineRasterization".nativeClassVK("EXT_line_rast
                 <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</li>
             </ul></dd>
 
+            <dt><b>Special Use</b></dt>
+            <dd><ul>
+                <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#extendingvulkan-compatibility-specialuse">CAD support</a></li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_line_rasterization:%20&amp;body=@jeffbolznv%20">jeffbolznv</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2019-05-09</dd>
 
@@ -118,7 +127,6 @@ val EXT_line_rasterization = "EXTLineRasterization".nativeClassVK("EXT_line_rast
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The bound graphics pipeline <b>must</b> have been created with the #DYNAMIC_STATE_LINE_STIPPLE_EXT dynamic state enabled</li>
             <li>{@code lineStippleFactor} <b>must</b> be in the range <code>[1,256]</code></li>
         </ul>
 

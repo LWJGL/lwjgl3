@@ -17,6 +17,7 @@ val EXT_discard_rectangles = "EXTDiscardRectangles".nativeClassVK("EXT_discard_r
 
         These discard rectangles operate orthogonally to the existing scissor test functionality. The discard rectangles can be different for each physical device in a device group by specifying the device mask and setting discard rectangle dynamic state.
 
+        <h5>VK_EXT_discard_rectangles</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_discard_rectangles}</dd>
@@ -40,7 +41,10 @@ val EXT_discard_rectangles = "EXTDiscardRectangles".nativeClassVK("EXT_discard_r
             <dd><ul>
                 <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_discard_rectangles:%20&amp;body=@pdaniell-nv%20">pdaniell-nv</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2016-12-22</dd>
 
@@ -89,8 +93,8 @@ val EXT_discard_rectangles = "EXTDiscardRectangles".nativeClassVK("EXT_discard_r
 
         <h5>Description</h5>
         <ul>
-            <li>#DISCARD_RECTANGLE_MODE_INCLUSIVE_EXT specifies that a fragment within any discard rectangle satisfies the test.</li>
-            <li>#DISCARD_RECTANGLE_MODE_EXCLUSIVE_EXT specifies that a fragment not within any of the discard rectangles satisfies the test.</li>
+            <li>#DISCARD_RECTANGLE_MODE_INCLUSIVE_EXT specifies that the discard rectangle test is inclusive.</li>
+            <li>#DISCARD_RECTANGLE_MODE_EXCLUSIVE_EXT specifies that the discard rectangle test is exclusive.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -107,7 +111,7 @@ val EXT_discard_rectangles = "EXTDiscardRectangles".nativeClassVK("EXT_discard_r
         Set discard rectangles dynamically.
 
         <h5>C Specification</h5>
-        If the pipeline state object was created with the #DYNAMIC_STATE_DISCARD_RECTANGLE_EXT dynamic state enabled, the discard rectangles are dynamically set and changed with the command:
+        The discard rectangles <b>can</b> be set dynamically with the command:
 
         <pre><code>
 ￿void vkCmdSetDiscardRectangleEXT(
@@ -117,11 +121,12 @@ val EXT_discard_rectangles = "EXTDiscardRectangles".nativeClassVK("EXT_discard_r
 ￿    const VkRect2D*                             pDiscardRectangles);</code></pre>
 
         <h5>Description</h5>
-        The discard rectangle taken from element <code>i</code> of {@code pDiscardRectangles} replace the current state for the discard rectangle index <code>firstDiscardRectangle + i</code>, for <code>i</code> in <code>[0, discardRectangleCount)</code>.
+        The discard rectangle taken from element <code>i</code> of {@code pDiscardRectangles} replace the current state for the discard rectangle at index <code>firstDiscardRectangle + i</code>, for <code>i</code> in <code>[0, discardRectangleCount)</code>.
+
+        This command sets the state for a given draw when the graphics pipeline is created with #DYNAMIC_STATE_DISCARD_RECTANGLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}.
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The bound graphics pipeline <b>must</b> have been created with the #DYNAMIC_STATE_DISCARD_RECTANGLE_EXT dynamic state enabled</li>
             <li>The sum of {@code firstDiscardRectangle} and {@code discardRectangleCount} <b>must</b> be less than or equal to ##VkPhysicalDeviceDiscardRectanglePropertiesEXT{@code ::maxDiscardRectangles}</li>
             <li>The {@code x} and {@code y} member of {@code offset} in each ##VkRect2D element of {@code pDiscardRectangles} <b>must</b> be greater than or equal to 0</li>
             <li>Evaluation of <code>(offset.x + extent.width)</code> in each ##VkRect2D element of {@code pDiscardRectangles} <b>must</b> not cause a signed integer addition overflow</li>

@@ -22,6 +22,7 @@ val NV_shading_rate_image = "NVShadingRateImage".nativeClassVK("NV_shading_rate_
 
         When using SPIR-V in conjunction with the OpenGL Shading Language (GLSL), the fragment shader capabilities are provided by the {@code GL_NV_shading_rate_image} language extension and correspond to the built-in variables {@code gl_FragmentSizeNV} and {@code gl_InvocationsPerPixelNV}, respectively.
 
+        <h5>VK_NV_shading_rate_image</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NV_shading_rate_image}</dd>
@@ -45,9 +46,18 @@ val NV_shading_rate_image = "NVShadingRateImage".nativeClassVK("NV_shading_rate_
             <dd><ul>
                 <li>Pat Brown <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_shading_rate_image:%20&amp;body=@nvpbrown%20">nvpbrown</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2019-07-18</dd>
+
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
+                <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/NV/SPV_NV_shading_rate.html">{@code SPV_NV_shading_rate}</a></li>
+                <li>This extension provides API support for <a target="_blank" href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/nv/GLSL_NV_shading_rate_image.txt">{@code GL_NV_shading_rate_image}</a></li>
+            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
@@ -164,8 +174,8 @@ val NV_shading_rate_image = "NVShadingRateImage".nativeClassVK("NV_shading_rate_
         <ul>
             <li>#COARSE_SAMPLE_ORDER_TYPE_DEFAULT_NV specifies that coverage samples will be ordered in an implementation-dependent manner.</li>
             <li>#COARSE_SAMPLE_ORDER_TYPE_CUSTOM_NV specifies that coverage samples will be ordered according to the array of custom orderings provided in either the {@code pCustomSampleOrders} member of ##VkPipelineViewportCoarseSampleOrderStateCreateInfoNV or the {@code pCustomSampleOrders} member of #CmdSetCoarseSampleOrderNV().</li>
-            <li>#COARSE_SAMPLE_ORDER_TYPE_PIXEL_MAJOR_NV specifies that coverage samples will be ordered sequentially, sorted first by pixel coordinate (in row-major order) and then by coverage sample number.</li>
-            <li>#COARSE_SAMPLE_ORDER_TYPE_SAMPLE_MAJOR_NV specifies that coverage samples will be ordered sequentially, sorted first by coverage sample number and then by pixel coordinate (in row-major order).</li>
+            <li>#COARSE_SAMPLE_ORDER_TYPE_PIXEL_MAJOR_NV specifies that coverage samples will be ordered sequentially, sorted first by pixel coordinate (in row-major order) and then by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#primsrast-multisampling-coverage-mask">sample index</a>.</li>
+            <li>#COARSE_SAMPLE_ORDER_TYPE_SAMPLE_MAJOR_NV specifies that coverage samples will be ordered sequentially, sorted first by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#primsrast-multisampling-coverage-mask">sample index</a> and then by pixel coordinate (in row-major order).</li>
         </ul>
 
         <h5>See Also</h5>
@@ -194,12 +204,12 @@ val NV_shading_rate_image = "NVShadingRateImage".nativeClassVK("NV_shading_rate_
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-shadingRateImage">shading rate image</a> feature <b>must</b> be enabled.</li>
-            <li>If {@code imageView} is not #NULL_HANDLE, it <b>must</b> be a valid {@code VkImageView} handle of type #IMAGE_VIEW_TYPE_2D or #IMAGE_VIEW_TYPE_2D_ARRAY.</li>
-            <li>If {@code imageView} is not #NULL_HANDLE, it <b>must</b> have a format of #FORMAT_R8_UINT.</li>
+            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-shadingRateImage">shading rate image</a> feature <b>must</b> be enabled</li>
+            <li>If {@code imageView} is not #NULL_HANDLE, it <b>must</b> be a valid {@code VkImageView} handle of type #IMAGE_VIEW_TYPE_2D or #IMAGE_VIEW_TYPE_2D_ARRAY</li>
+            <li>If {@code imageView} is not #NULL_HANDLE, it <b>must</b> have a format of #FORMAT_R8_UINT</li>
             <li>If {@code imageView} is not #NULL_HANDLE, it <b>must</b> have been created with a {@code usage} value including #IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV</li>
-            <li>If {@code imageView} is not #NULL_HANDLE, {@code imageLayout} <b>must</b> match the actual {@code VkImageLayout} of each subresource accessible from {@code imageView} at the time the subresource is accessed.</li>
-            <li>If {@code imageView} is not #NULL_HANDLE, {@code imageLayout} <b>must</b> be #IMAGE_LAYOUT_SHADING_RATE_OPTIMAL_NV or #IMAGE_LAYOUT_GENERAL.</li>
+            <li>If {@code imageView} is not #NULL_HANDLE, {@code imageLayout} <b>must</b> match the actual {@code VkImageLayout} of each subresource accessible from {@code imageView} at the time the subresource is accessed</li>
+            <li>If {@code imageView} is not #NULL_HANDLE, {@code imageLayout} <b>must</b> be #IMAGE_LAYOUT_SHADING_RATE_OPTIMAL_NV or #IMAGE_LAYOUT_GENERAL</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -247,9 +257,7 @@ val NV_shading_rate_image = "NVShadingRateImage".nativeClassVK("NV_shading_rate_
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-shadingRateImage">shading rate image</a> feature <b>must</b> be enabled.</li>
-            <li>The bound graphics pipeline <b>must</b> have been created with the #DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV dynamic state enabled</li>
-            <li>{@code firstViewport} <b>must</b> be less than ##VkPhysicalDeviceLimits{@code ::maxViewports}</li>
+            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-shadingRateImage">shading rate image</a> feature <b>must</b> be enabled</li>
             <li>The sum of {@code firstViewport} and {@code viewportCount} <b>must</b> be between 1 and ##VkPhysicalDeviceLimits{@code ::maxViewports}, inclusive</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-multiViewport">multiple viewports</a> feature is not enabled, {@code firstViewport} <b>must</b> be 0</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-multiViewport">multiple viewports</a> feature is not enabled, {@code viewportCount} <b>must</b> be 1</li>
@@ -307,7 +315,7 @@ val NV_shading_rate_image = "NVShadingRateImage".nativeClassVK("NV_shading_rate_
         <h5>Valid Usage</h5>
         <ul>
             <li>If {@code sampleOrderType} is not #COARSE_SAMPLE_ORDER_TYPE_CUSTOM_NV, {@code customSamplerOrderCount} <b>must</b> be 0</li>
-            <li>The array {@code pCustomSampleOrders} <b>must</b> not contain two structures with matching values for both the {@code shadingRate} and {@code sampleCount} members.</li>
+            <li>The array {@code pCustomSampleOrders} <b>must</b> not contain two structures with matching values for both the {@code shadingRate} and {@code sampleCount} members</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

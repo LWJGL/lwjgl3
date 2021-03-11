@@ -17,6 +17,7 @@ val EXT_sample_locations = "EXTSampleLocations".nativeClassVK("EXT_sample_locati
 
         Some implementations <b>may</b> need to evaluate depth image values while performing image layout transitions. To accommodate this, instances of the ##VkSampleLocationsInfoEXT structure <b>can</b> be specified for each situation where an explicit or automatic layout transition has to take place. ##VkSampleLocationsInfoEXT <b>can</b> be chained from ##VkImageMemoryBarrier structures to provide sample locations for layout transitions performed by #CmdWaitEvents() and #CmdPipelineBarrier() calls, and ##VkRenderPassSampleLocationsBeginInfoEXT <b>can</b> be chained from ##VkRenderPassBeginInfo to provide sample locations for layout transitions performed implicitly by a render pass instance.
 
+        <h5>VK_EXT_sample_locations</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_sample_locations}</dd>
@@ -40,7 +41,10 @@ val EXT_sample_locations = "EXTSampleLocations".nativeClassVK("EXT_sample_locati
             <dd><ul>
                 <li>Daniel Rakos <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_sample_locations:%20&amp;body=@drakos-amd%20">drakos-amd</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2017-08-02</dd>
 
@@ -108,7 +112,6 @@ val EXT_sample_locations = "EXTSampleLocations".nativeClassVK("EXT_sample_locati
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The bound graphics pipeline <b>must</b> have been created with the #DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT dynamic state enabled</li>
             <li>The {@code sampleLocationsPerPixel} member of {@code pSampleLocationsInfo} <b>must</b> equal the {@code rasterizationSamples} member of the ##VkPipelineMultisampleStateCreateInfo structure the bound graphics pipeline has been created with</li>
             <li>If ##VkPhysicalDeviceSampleLocationsPropertiesEXT{@code ::variableSampleLocations} is #FALSE then the current render pass <b>must</b> have been begun by specifying a ##VkRenderPassSampleLocationsBeginInfoEXT structure whose {@code pPostSubpassSampleLocations} member contains an element with a {@code subpassIndex} matching the current subpass index and the {@code sampleLocationsInfo} member of that element <b>must</b> match the sample locations state pointed to by {@code pSampleLocationsInfo}</li>
         </ul>

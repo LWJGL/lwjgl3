@@ -17,6 +17,7 @@ val EXT_validation_features = "EXTValidationFeatures".nativeClassVK("EXT_validat
         The {@link EXTValidationFeatures VK_EXT_validation_features} extension subsumes all the functionality provided in the {@link EXTValidationFlags VK_EXT_validation_flags} extension.
         </div>
 
+        <h5>VK_EXT_validation_features</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_validation_features}</dd>
@@ -28,18 +29,26 @@ val EXT_validation_features = "EXTValidationFeatures".nativeClassVK("EXT_validat
             <dd>248</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>2</dd>
+            <dd>4</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
             </ul></dd>
 
+            <dt><b>Special Use</b></dt>
+            <dd><ul>
+                <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#extendingvulkan-compatibility-specialuse">Debugging tools</a></li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Karl Schultz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_validation_features:%20&amp;body=@karl-lunarg%20">karl-lunarg</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2018-11-14</dd>
 
@@ -52,6 +61,8 @@ val EXT_validation_features = "EXTValidationFeatures".nativeClassVK("EXT_validat
                 <li>Dave Houlton, LunarG</li>
                 <li>Mark Lobodzinski, LunarG</li>
                 <li>Camden Stocker, LunarG</li>
+                <li>Tony Barbour, LunarG</li>
+                <li>John Zulauf, LunarG</li>
             </ul></dd>
         </dl>
         """
@@ -59,7 +70,7 @@ val EXT_validation_features = "EXTValidationFeatures".nativeClassVK("EXT_validat
     IntConstant(
         "The extension specification version.",
 
-        "EXT_VALIDATION_FEATURES_SPEC_VERSION".."2"
+        "EXT_VALIDATION_FEATURES_SPEC_VERSION".."4"
     )
 
     StringConstant(
@@ -81,8 +92,10 @@ val EXT_validation_features = "EXTValidationFeatures".nativeClassVK("EXT_validat
         <h5>Description</h5>
         <ul>
             <li>#VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_EXT specifies that GPU-assisted validation is enabled. Activating this feature instruments shader programs to generate additional diagnostic data. This feature is disabled by default.</li>
-            <li>#VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_RESERVE_BINDING_SLOT_EXT specifies that the validation layers reserve a descriptor set binding slot for their own use. The layer reports a value for ##VkPhysicalDeviceLimits{@code ::maxBoundDescriptorSets} that is one less than the value reported by the device. If the device supports the binding of only one descriptor set, the validation layer does not perform GPU-assisted validation. This feature is disabled by default. The GPU-assisted validation feature must be enabled in order to use this feature.</li>
+            <li>#VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_RESERVE_BINDING_SLOT_EXT specifies that the validation layers reserve a descriptor set binding slot for their own use. The layer reports a value for ##VkPhysicalDeviceLimits{@code ::maxBoundDescriptorSets} that is one less than the value reported by the device. If the device supports the binding of only one descriptor set, the validation layer does not perform GPU-assisted validation. This feature is disabled by default.</li>
             <li>#VALIDATION_FEATURE_ENABLE_BEST_PRACTICES_EXT specifies that Vulkan best-practices validation is enabled. Activating this feature enables the output of warnings related to common misuse of the API, but which are not explicitly prohibited by the specification. This feature is disabled by default.</li>
+            <li>#VALIDATION_FEATURE_ENABLE_DEBUG_PRINTF_EXT specifies that the layers will process {@code debugPrintfEXT} operations in shaders and send the resulting output to the debug callback. This feature is disabled by default.</li>
+            <li>#VALIDATION_FEATURE_ENABLE_SYNCHRONIZATION_VALIDATION_EXT specifies that Vulkan synchronization validation is enabled. This feature reports resource access conflicts due to missing or incorrect synchronization operations between actions (Draw, Copy, Dispatch, Blit) reading or writing the same regions of memory. This feature is disabled by default.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -91,7 +104,9 @@ val EXT_validation_features = "EXTValidationFeatures".nativeClassVK("EXT_validat
 
         "VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_EXT".."0",
         "VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_RESERVE_BINDING_SLOT_EXT".."1",
-        "VALIDATION_FEATURE_ENABLE_BEST_PRACTICES_EXT".."2"
+        "VALIDATION_FEATURE_ENABLE_BEST_PRACTICES_EXT".."2",
+        "VALIDATION_FEATURE_ENABLE_DEBUG_PRINTF_EXT".."3",
+        "VALIDATION_FEATURE_ENABLE_SYNCHRONIZATION_VALIDATION_EXT".."4"
     )
 
     EnumConstant(

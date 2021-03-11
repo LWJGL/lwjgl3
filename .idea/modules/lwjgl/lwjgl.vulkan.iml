@@ -7,10 +7,12 @@
     <content url="file://$MODULE_DIR$/../../../modules/lwjgl/vulkan">
       <sourceFolder url="file://$MODULE_DIR$/../../../modules/lwjgl/vulkan/src/generated/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../../modules/lwjgl/vulkan/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../modules/lwjgl/vulkan/src/test/java" isTestSource="true" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="lwjgl.core" />
     <orderEntry type="library" scope="PROVIDED" name="jsr305" level="project" />
+    <orderEntry type="library" name="TestNG" level="project" />
   </component>
 </module>

@@ -41,9 +41,7 @@ val KHR_device_group = "KHRDeviceGroup".nativeClassVK("KHR_device_group", type =
 
         The base functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
 
-        <h5>Examples</h5>
-        TODO
-
+        <h5>VK_KHR_device_group</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_device_group}</dd>
@@ -72,7 +70,10 @@ val KHR_device_group = "KHRDeviceGroup".nativeClassVK("KHR_device_group", type =
             <dd><ul>
                 <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_device_group:%20&amp;body=@jeffbolznv%20">jeffbolznv</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2017-10-10</dd>
 

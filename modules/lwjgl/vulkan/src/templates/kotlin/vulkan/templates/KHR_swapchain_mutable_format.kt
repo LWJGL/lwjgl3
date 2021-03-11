@@ -11,12 +11,11 @@ import vulkan.*
 val KHR_swapchain_mutable_format = "KHRSwapchainMutableFormat".nativeClassVK("KHR_swapchain_mutable_format", type = "device", postfix = KHR) {
     documentation =
         """
-        <h5>Short Description</h5>
-        Allows processing of swapchain images as different formats to that used by the window system, which is particularly useful for switching between sRGB and linear RGB formats.
+        This extension allows processing of swapchain images as different formats to that used by the window system, which is particularly useful for switching between sRGB and linear RGB formats.
 
-        <h5>Description</h5>
-        This extension adds a new swapchain creation flag that enables creating image views from presentable images with a different format than the one used to create the swapchain.
+        It adds a new swapchain creation flag that enables creating image views from presentable images with a different format than the one used to create the swapchain.
 
+        <h5>VK_KHR_swapchain_mutable_format</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_swapchain_mutable_format}</dd>
@@ -42,7 +41,10 @@ val KHR_swapchain_mutable_format = "KHRSwapchainMutableFormat".nativeClassVK("KH
             <dd><ul>
                 <li>Daniel Rakos <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_swapchain_mutable_format:%20&amp;body=@drakos-arm%20">drakos-arm</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2018-03-28</dd>
 

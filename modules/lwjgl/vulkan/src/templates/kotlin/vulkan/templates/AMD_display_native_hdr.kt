@@ -21,6 +21,7 @@ val AMD_display_native_hdr = "AMDDisplayNativeHdr".nativeClassVK("AMD_display_na
         <h5>Examples</h5>
         None.
 
+        <h5>VK_AMD_display_native_hdr</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_AMD_display_native_hdr}</dd>
@@ -46,7 +47,10 @@ val AMD_display_native_hdr = "AMDDisplayNativeHdr".nativeClassVK("AMD_display_na
             <dd><ul>
                 <li>Matthaeus G. Chajdas <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_display_native_hdr:%20&amp;body=@anteru%20">anteru</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2018-12-18</dd>
 
@@ -113,7 +117,7 @@ val AMD_display_native_hdr = "AMDDisplayNativeHdr".nativeClassVK("AMD_display_na
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>It is only valid to call #SetLocalDimmingAMD() if ##VkDisplayNativeHdrSurfaceCapabilitiesAMD{@code ::localDimmingSupport} is supported.</li>
+            <li>##VkDisplayNativeHdrSurfaceCapabilitiesAMD{@code ::localDimmingSupport} <b>must</b> be supported</li>
         </ul>
         """,
 

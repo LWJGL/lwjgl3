@@ -21,6 +21,7 @@ val EXT_global_priority = "EXTGlobalPriority".nativeClassVK("EXT_global_priority
 
         The driver implementation may fail the queue allocation request if resources required to complete the operation have been exhausted (either by the same process or a different process). In this scenario #ERROR_INITIALIZATION_FAILED is returned.
 
+        <h5>VK_EXT_global_priority</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_global_priority}</dd>
@@ -43,7 +44,10 @@ val EXT_global_priority = "EXTGlobalPriority".nativeClassVK("EXT_global_priority
             <dd><ul>
                 <li>Andres Rodriguez <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_global_priority:%20&amp;body=@lostgoat%20">lostgoat</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2017-10-06</dd>
 

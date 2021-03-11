@@ -15,6 +15,7 @@ val INTEL_shader_integer_functions2 = "INTELShaderIntegerFunctions2".nativeClass
 
         The added integer functions are defined by the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/INTEL/SPV_INTEL_shader_integer_functions2.html">{@code SPV_INTEL_shader_integer_functions}</a> SPIR-V extension and can be used with the GL_INTEL_shader_integer_functions2 GLSL extension.
 
+        <h5>VK_INTEL_shader_integer_functions2</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_INTEL_shader_integer_functions2}</dd>
@@ -38,7 +39,10 @@ val INTEL_shader_integer_functions2 = "INTELShaderIntegerFunctions2".nativeClass
             <dd><ul>
                 <li>Ian Romanick <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_INTEL_shader_integer_functions2:%20&amp;body=@ianromanick%20">ianromanick</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2019-04-30</dd>
 

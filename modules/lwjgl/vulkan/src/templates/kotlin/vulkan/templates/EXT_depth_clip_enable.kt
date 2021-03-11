@@ -15,6 +15,7 @@ val EXT_depth_clip_enable = "EXTDepthClipEnable".nativeClassVK("EXT_depth_clip_e
 
         This is useful for translating DX content which assumes depth clamping is always enabled, but depth clip can be controlled by the DepthClipEnable rasterization state (D3D12_RASTERIZER_DESC).
 
+        <h5>VK_EXT_depth_clip_enable</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_depth_clip_enable}</dd>
@@ -33,12 +34,20 @@ val EXT_depth_clip_enable = "EXTDepthClipEnable".nativeClassVK("EXT_depth_clip_e
                 <li>Requires Vulkan 1.0</li>
             </ul></dd>
 
+            <dt><b>Special Use</b></dt>
+            <dd><ul>
+                <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#extendingvulkan-compatibility-specialuse">D3D support</a></li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_depth_clip_enable:%20&amp;body=@pdaniell-nv%20">pdaniell-nv</a></li>
             </ul></dd>
+        </dl>
 
-            <dt><b>Last Modified Data</b></dt>
+        <h5>Other Extension Metadata</h5>
+        <dl>
+            <dt><b>Last Modified Date</b></dt>
             <dd>2018-12-20</dd>
 
             <dt><b>Contributors</b></dt>

@@ -13,6 +13,7 @@ val EXT_calibrated_timestamps = "EXTCalibratedTimestamps".nativeClassVK("EXT_cal
         """
         This extension provides an interface to query calibrated timestamps obtained quasi simultaneously from two time domains.
 
+        <h5>VK_EXT_calibrated_timestamps</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_calibrated_timestamps}</dd>
@@ -35,7 +36,10 @@ val EXT_calibrated_timestamps = "EXTCalibratedTimestamps".nativeClassVK("EXT_cal
             <dd><ul>
                 <li>Daniel Rakos <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_calibrated_timestamps:%20&amp;body=@drakos-amd%20">drakos-amd</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2018-10-04</dd>
 
@@ -78,7 +82,7 @@ val EXT_calibrated_timestamps = "EXTCalibratedTimestamps".nativeClassVK("EXT_cal
 
         <h5>Description</h5>
         <ul>
-            <li>#TIME_DOMAIN_DEVICE_EXT specifies the device time domain. Timestamp values in this time domain use the same units and are comparable with device timestamp values captured using #CmdWriteTimestamp() and are defined to be incrementing according to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-timestampPeriod">timestampPeriod</a> of the device.</li>
+            <li>#TIME_DOMAIN_DEVICE_EXT specifies the device time domain. Timestamp values in this time domain use the same units and are comparable with device timestamp values captured using #CmdWriteTimestamp() or #CmdWriteTimestamp2KHR() and are defined to be incrementing according to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-timestampPeriod">timestampPeriod</a> of the device.</li>
             <li>#TIME_DOMAIN_CLOCK_MONOTONIC_EXT specifies the CLOCK_MONOTONIC time domain available on POSIX platforms. Timestamp values in this time domain are in units of nanoseconds and are comparable with platform timestamp values captured using the POSIX clock_gettime API as computed by this example:</li>
         </ul>
 
@@ -183,7 +187,7 @@ val EXT_calibrated_timestamps = "EXTCalibratedTimestamps".nativeClassVK("EXT_cal
         The maximum deviation <b>may</b> vary between calls to {@code vkGetCalibratedTimestampsEXT} even for the same set of time domains due to implementation and platform specific reasons. It is the application's responsibility to assess whether the returned maximum deviation makes the timestamp values suitable for any particular purpose and <b>can</b> choose to re-issue the timestamp calibration call pursuing a lower devation value.
         </div>
 
-        Calibrated timestamp values <b>can</b> be extrapolated to estimate future coinciding timestamp values, however, depending on the nature of the time domains and other properties of the platform extrapolating values over a sufficiently long period of time <b>may</b> no longer be accurate enough to fit any particular purpose so applications are expected to re-calibrate the timestamps on a regular basis.
+        Calibrated timestamp values <b>can</b> be extrapolated to estimate future coinciding timestamp values, however, depending on the nature of the time domains and other properties of the platform extrapolating values over a sufficiently long period of time <b>may</b> no longer be accurate enough to fit any particular purpose, so applications are expected to re-calibrate the timestamps on a regular basis.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

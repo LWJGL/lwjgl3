@@ -16,6 +16,7 @@ val KHR_external_memory_capabilities = "KHRExternalMemoryCapabilities".nativeCla
         <h5>Promotion to Vulkan 1.1</h5>
         All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
 
+        <h5>VK_KHR_external_memory_capabilities</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_external_memory_capabilities}</dd>
@@ -44,7 +45,10 @@ val KHR_external_memory_capabilities = "KHRExternalMemoryCapabilities".nativeCla
             <dd><ul>
                 <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_external_memory_capabilities:%20&amp;body=@cubanismo%20">cubanismo</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2016-10-17</dd>
 

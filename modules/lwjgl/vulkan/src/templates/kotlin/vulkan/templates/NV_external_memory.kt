@@ -17,6 +17,7 @@ val NV_external_memory = "NVExternalMemory".nativeClassVK("NV_external_memory", 
         <pre><code>
 ￿    // TODO: Write some sample code here.</code></pre>
 
+        <h5>VK_NV_external_memory</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NV_external_memory}</dd>
@@ -50,7 +51,10 @@ val NV_external_memory = "NVExternalMemory".nativeClassVK("NV_external_memory", 
             <dd><ul>
                 <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_external_memory:%20&amp;body=@cubanismo%20">cubanismo</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2016-08-19</dd>
 

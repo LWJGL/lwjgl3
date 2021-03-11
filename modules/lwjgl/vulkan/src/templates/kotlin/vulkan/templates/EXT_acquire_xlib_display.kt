@@ -14,6 +14,7 @@ val EXT_acquire_xlib_display = "EXTAcquireXlibDisplay".nativeClassVK("EXT_acquir
         """
         This extension allows an application to take exclusive control on a display currently associated with an X11 screen. When control is acquired, the display will be deassociated from the X11 screen until control is released or the specified display connection is closed. Essentially, the X11 screen will behave as if the monitor has been unplugged until control is released.
 
+        <h5>VK_EXT_acquire_xlib_display</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_acquire_xlib_display}</dd>
@@ -37,7 +38,10 @@ val EXT_acquire_xlib_display = "EXTAcquireXlibDisplay".nativeClassVK("EXT_acquir
             <dd><ul>
                 <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_acquire_xlib_display:%20&amp;body=@cubanismo%20">cubanismo</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2016-12-13</dd>
 
@@ -95,6 +99,7 @@ val EXT_acquire_xlib_display = "EXTAcquireXlibDisplay".nativeClassVK("EXT_acquir
             <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
             <li>{@code dpy} <b>must</b> be a valid pointer to a {@code Display} value</li>
             <li>{@code display} <b>must</b> be a valid {@code VkDisplayKHR} handle</li>
+            <li>{@code display} <b>must</b> have been created, allocated, or retrieved from {@code physicalDevice}</li>
         </ul>
 
         <h5>Return Codes</h5>
@@ -106,6 +111,7 @@ val EXT_acquire_xlib_display = "EXTAcquireXlibDisplay".nativeClassVK("EXT_acquir
 
             <dt>On failure, this command returns</dt>
             <dd><ul>
+                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
                 <li>#ERROR_INITIALIZATION_FAILED</li>
             </ul></dd>
         </dl>
@@ -146,6 +152,11 @@ val EXT_acquire_xlib_display = "EXTAcquireXlibDisplay".nativeClassVK("EXT_acquir
             <dt>On success, this command returns</dt>
             <dd><ul>
                 <li>#SUCCESS</li>
+            </ul></dd>
+
+            <dt>On failure, this command returns</dt>
+            <dd><ul>
+                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
             </ul></dd>
         </dl>
         """,

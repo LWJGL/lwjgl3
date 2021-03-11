@@ -11,10 +11,15 @@ import vulkan.*
 val EXT_memory_budget = "EXTMemoryBudget".nativeClassVK("EXT_memory_budget", type = "device", postfix = EXT) {
     documentation =
         """
-        This extension adds support for querying the amount of memory used and the total memory budget for a memory heap. The values returned by this query are implementation-dependent and can depend on a variety of factors including operating system and system load.
+        While running a Vulkan application, other processes on the machine might also be attempting to use the same device memory, which can pose problems. This extension adds support for querying the amount of memory used and the total memory budget for a memory heap. The values returned by this query are implementation-dependent and can depend on a variety of factors including operating system and system load.
 
-        The {@code heapBudget} values can be used as a guideline for how much total memory from each heap the process can use at any given time, before allocations may start failing or causing performance degradation. The values may change based on other activity in the system that is outside the scope and control of the Vulkan implementation.
+        The ##VkPhysicalDeviceMemoryBudgetPropertiesEXT{@code ::heapBudget} values can be used as a guideline for how much total memory from each heap the <b>current process</b> can use at any given time, before allocations may start failing or causing performance degradation. The values may change based on other activity in the system that is outside the scope and control of the Vulkan implementation.
 
+        The ##VkPhysicalDeviceMemoryBudgetPropertiesEXT{@code ::heapUsage} will display the <b>current process</b> estimated heap usage.
+
+        With this information, the idea is for an application at some interval (once per frame, per few seconds, etc) to query {@code heapBudget} and {@code heapUsage}. From here the application can notice if it is over budget and decide how it wants to handle the memory situation (free it, move to host memory, changing mipmap levels, etc). This extension is designed to be used in concert with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VK_EXT_memory_priority">VK_EXT_memory_priority</a> to help with this part of memory management.
+
+        <h5>VK_EXT_memory_budget</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_memory_budget}</dd>
@@ -38,11 +43,14 @@ val EXT_memory_budget = "EXTMemoryBudget".nativeClassVK("EXT_memory_budget", typ
             <dd><ul>
                 <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_memory_budget:%20&amp;body=@jeffbolznv%20">jeffbolznv</a></li>
             </ul></dd>
+        </dl>
 
-            <dt>Last Modified Date</dt>
+        <h5>Other Extension Metadata</h5>
+        <dl>
+            <dt><b>Last Modified Date</b></dt>
             <dd>2018-10-08</dd>
 
-            <dt>Contributors</dt>
+            <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Jeff Bolz, NVIDIA</li>
                 <li>Jeff Juliano, NVIDIA</li>

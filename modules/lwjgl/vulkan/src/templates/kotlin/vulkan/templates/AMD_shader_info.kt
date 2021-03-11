@@ -71,6 +71,7 @@ val AMD_shader_info = "AMDShaderInfo".nativeClassVK("AMD_shader_info", type = "d
 ￿    free(disassembly);
 ￿}</code></pre>
 
+        <h5>VK_AMD_shader_info</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_AMD_shader_info}</dd>
@@ -89,11 +90,19 @@ val AMD_shader_info = "AMDShaderInfo".nativeClassVK("AMD_shader_info", type = "d
                 <li>Requires Vulkan 1.0</li>
             </ul></dd>
 
+            <dt><b>Special Use</b></dt>
+            <dd><ul>
+                <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#extendingvulkan-compatibility-specialuse">Developer tools</a></li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Jaakko Konttinen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_shader_info:%20&amp;body=@jaakkoamd%20">jaakkoamd</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2017-10-09</dd>
 
@@ -203,6 +212,6 @@ val AMD_shader_info = "AMDShaderInfo".nativeClassVK("AMD_shader_info", type = "d
         VkShaderStageFlagBits("shaderStage", "identifies the particular shader within the pipeline about which information is being queried."),
         VkShaderInfoTypeAMD("infoType", "describes what kind of information is being queried."),
         AutoSize("pInfo")..Check(1)..size_t.p("pInfoSize", "a pointer to a value related to the amount of data the query returns, as described below."),
-        nullable..void.p("pInfo", "either NULL or a pointer to a buffer.")
+        nullable..void.p("pInfo", "either {@code NULL} or a pointer to a buffer.")
     )
 }

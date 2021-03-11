@@ -13,9 +13,7 @@ val EXT_pipeline_creation_feedback = "EXTPipelineCreationFeedback".nativeClassVK
         """
         This extension adds a mechanism to provide feedback to an application about pipeline creation, with the specific goal of allowing a feedback loop between build systems and in-the-field application executions to ensure effective pipeline caches are shipped to customers.
 
-        <h5>Examples</h5>
-        None.
-
+        <h5>VK_EXT_pipeline_creation_feedback</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_pipeline_creation_feedback}</dd>
@@ -34,11 +32,19 @@ val EXT_pipeline_creation_feedback = "EXTPipelineCreationFeedback".nativeClassVK
                 <li>Requires Vulkan 1.0</li>
             </ul></dd>
 
+            <dt><b>Special Use</b></dt>
+            <dd><ul>
+                <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#extendingvulkan-compatibility-specialuse">Developer tools</a></li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Jean-Francois Roy <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_pipeline_creation_feedback:%20&amp;body=@jfroy%20">jfroy</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2019-03-12</dd>
 
@@ -88,7 +94,7 @@ val EXT_pipeline_creation_feedback = "EXTPipelineCreationFeedback".nativeClassVK
             <li>#PIPELINE_CREATION_FEEDBACK_VALID_BIT_EXT indicates that the feedback information is valid.</li>
             <li>
                 #PIPELINE_CREATION_FEEDBACK_APPLICATION_PIPELINE_CACHE_HIT_BIT_EXT indicates that a readily usable pipeline or pipeline stage was found in the {@code pipelineCache} specified by the application in the pipeline creation command.
-                An implementation <b>should</b> set the #PIPELINE_CREATION_FEEDBACK_APPLICATION_PIPELINE_CACHE_HIT_BIT_EXT bit if it was able to avoid the large majority of pipeline or pipeline stage creation work by using the {@code pipelineCache} parameter of #CreateGraphicsPipelines(), #CreateRayTracingPipelinesNV(), or #CreateComputePipelines(). When an implementation sets this bit for the entire pipeline, it <b>may</b> leave it unset for any stage.
+                An implementation <b>should</b> set the #PIPELINE_CREATION_FEEDBACK_APPLICATION_PIPELINE_CACHE_HIT_BIT_EXT bit if it was able to avoid the large majority of pipeline or pipeline stage creation work by using the {@code pipelineCache} parameter of #CreateGraphicsPipelines(), #CreateRayTracingPipelinesKHR(), #CreateRayTracingPipelinesNV(), or #CreateComputePipelines(). When an implementation sets this bit for the entire pipeline, it <b>may</b> leave it unset for any stage.
 
                 <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         Implementations are encouraged to provide a meaningful signal to applications using this bit. The intention is to communicate to the application that the pipeline or pipeline stage was created "as fast as it gets" using the pipeline cache provided by the application. If an implementation uses an internal cache, it is discouraged from setting this bit as the feedback would be unactionable.

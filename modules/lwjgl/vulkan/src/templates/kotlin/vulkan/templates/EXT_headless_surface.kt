@@ -17,6 +17,7 @@ val EXT_headless_surface = "EXTHeadlessSurface".nativeClassVK("EXT_headless_surf
 
         This functionality is expected to be useful for application and driver development because it allows any platform to expose an arbitrary or customisable set of restrictions and features of a presentation engine. This makes it a useful portable test target for applications targeting a wide range of presentation engines where the actual target presentation engines might be scarce, unavailable or otherwise undesirable or inconvenient to use for general Vulkan application development.
 
+        <h5>VK_EXT_headless_surface</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_headless_surface}</dd>
@@ -40,7 +41,10 @@ val EXT_headless_surface = "EXTHeadlessSurface".nativeClassVK("EXT_headless_surf
             <dd><ul>
                 <li>Lisa Wu <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_headless_surface:%20&amp;body=@chengtianww%20">chengtianww</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2019-03-21</dd>
 

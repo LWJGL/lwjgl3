@@ -13,6 +13,7 @@ val KHR_win32_keyed_mutex = "KHRWin32KeyedMutex".nativeClassVK("KHR_win32_keyed_
         """
         Applications that wish to import Direct3D 11 memory objects into the Vulkan API may wish to use the native keyed mutex mechanism to synchronize access to the memory between Vulkan and Direct3D. This extension provides a way for an application to access the keyed mutex associated with an imported Vulkan memory object when submitting command buffers to a queue.
 
+        <h5>VK_KHR_win32_keyed_mutex</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_win32_keyed_mutex}</dd>
@@ -36,7 +37,10 @@ val KHR_win32_keyed_mutex = "KHRWin32KeyedMutex".nativeClassVK("KHR_win32_keyed_
             <dd><ul>
                 <li>Carsten Rohde <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_win32_keyed_mutex:%20&amp;body=@crohde%20">crohde</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2016-10-21</dd>
 

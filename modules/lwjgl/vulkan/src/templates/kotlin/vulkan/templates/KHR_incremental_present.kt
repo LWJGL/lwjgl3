@@ -15,9 +15,7 @@ val KHR_incremental_present = "KHRIncrementalPresent".nativeClassVK("KHR_increme
 
         This extension is leveraged from the {@code EGL_KHR_swap_buffers_with_damage} extension.
 
-        <h5>Examples</h5>
-        None.
-
+        <h5>VK_KHR_incremental_present</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_incremental_present}</dd>
@@ -41,7 +39,10 @@ val KHR_incremental_present = "KHRIncrementalPresent".nativeClassVK("KHR_increme
             <dd><ul>
                 <li>Ian Elliott <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_incremental_present:%20&amp;body=@ianelliottus%20">ianelliottus</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2016-11-02</dd>
 

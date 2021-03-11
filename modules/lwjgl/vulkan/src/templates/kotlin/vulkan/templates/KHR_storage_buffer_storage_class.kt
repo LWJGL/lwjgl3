@@ -22,6 +22,7 @@ val KHR_storage_buffer_storage_class = "KHRStorageBufferStorageClass".nativeClas
         <h5>Promotion to Vulkan 1.1</h5>
         All functionality in this extension is included in core Vulkan 1.1.
 
+        <h5>VK_KHR_storage_buffer_storage_class</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_storage_buffer_storage_class}</dd>
@@ -49,7 +50,10 @@ val KHR_storage_buffer_storage_class = "KHRStorageBufferStorageClass".nativeClas
             <dd><ul>
                 <li>Alexander Galazin <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_storage_buffer_storage_class:%20&amp;body=@alegal-arm%20">alegal-arm</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2017-09-05</dd>
 
@@ -58,7 +62,7 @@ val KHR_storage_buffer_storage_class = "KHRStorageBufferStorageClass".nativeClas
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension requires the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_storage_buffer_storage_class.html">{@code SPV_KHR_storage_buffer_storage_class}</a> SPIR-V extension.</li>
+                <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_storage_buffer_storage_class.html">{@code SPV_KHR_storage_buffer_storage_class}</a></li>
                 <li>Promoted to Vulkan 1.1 Core</li>
             </ul></dd>
 
