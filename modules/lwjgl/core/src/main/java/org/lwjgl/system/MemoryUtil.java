@@ -96,7 +96,9 @@ public final class MemoryUtil {
     private static final long PARENT_DOUBLE;
 
     static {
+        System.out.println("before Library.initialize();");
         Library.initialize();
+        System.out.println("after Library.initialize();");
 
         //ACCESSOR = MemoryAccess.getInstance();
         ByteBuffer bb = ByteBuffer.allocateDirect(0).order(NATIVE_ORDER);
@@ -124,13 +126,13 @@ public final class MemoryUtil {
             long offset = (max(max(max(MARK, POSITION), LIMIT), CAPACITY) + 4 + (oopSize - 1)) & ~Integer.toUnsignedLong(oopSize - 1);
             long a      = memAddress(bb);
 
-            PARENT_BYTE = getParentOffset(offset, oopSize, bb, bb.duplicate().order(bb.order()));
-            PARENT_SHORT = getParentOffset(offset, oopSize, memShortBuffer(a, 0), bb.asShortBuffer());
-            PARENT_CHAR = getParentOffset(offset, oopSize, memCharBuffer(a, 0), bb.asCharBuffer());
-            PARENT_INT = getParentOffset(offset, oopSize, memIntBuffer(a, 0), bb.asIntBuffer());
-            PARENT_LONG = getParentOffset(offset, oopSize, memLongBuffer(a, 0), bb.asLongBuffer());
-            PARENT_FLOAT = getParentOffset(offset, oopSize, memFloatBuffer(a, 0), bb.asFloatBuffer());
-            PARENT_DOUBLE = getParentOffset(offset, oopSize, memDoubleBuffer(a, 0), bb.asDoubleBuffer());
+            PARENT_BYTE = getParentOffset(bb, bb.duplicate().order(bb.order()));
+            PARENT_SHORT = getParentOffset(memShortBuffer(a, 0), bb.asShortBuffer());
+            PARENT_CHAR = getParentOffset(memCharBuffer(a, 0), bb.asCharBuffer());
+            PARENT_INT = getParentOffset(memIntBuffer(a, 0), bb.asIntBuffer());
+            PARENT_LONG = getParentOffset(memLongBuffer(a, 0), bb.asLongBuffer());
+            PARENT_FLOAT = getParentOffset(memFloatBuffer(a, 0), bb.asFloatBuffer());
+            PARENT_DOUBLE = getParentOffset(memDoubleBuffer(a, 0), bb.asDoubleBuffer());
         } catch (Throwable t) {
             throw new UnsupportedOperationException(t);
         }
@@ -3129,76 +3131,39 @@ public final class MemoryUtil {
     }
 
     private static long getAddressOffset() {
-        long MAGIC_ADDRESS = 0xDEADBEEF8BADF00DL;
-        if (BITS32) {
-            MAGIC_ADDRESS &= 0xFFFFFFFFL;
-        }
-
-        ByteBuffer bb = Objects.requireNonNull(NewDirectByteBuffer(MAGIC_ADDRESS, 0));
-
-        long offset = 8L; // 8 byte aligned, cannot be at 0
-        while (true) {
-            if (UNSAFE.getLong(bb, offset) == MAGIC_ADDRESS) {
-                return offset;
-            }
-            offset += 8L;
-        }
+        return getInstanceFieldOffset("java/nio/DirectByteBuffer", "address", "J", UNSAFE);
     }
 
-    private static final int MAGIC_CAPACITY = 0x0D15EA5E;
-    private static final int MAGIC_POSITION = 0x00FACADE;
-
-    private static long getIntFieldOffset(ByteBuffer bb, int magicValue) {
-        long offset = 4L; // 4 byte aligned, cannot be at 0
-        while (true) {
-            if (UNSAFE.getInt(bb, offset) == magicValue) {
-                return offset;
-            }
-            offset += 4L;
-        }
-    }
+    private static native long getInstanceFieldOffset(String className, String fieldName, String fieldDescriptor, Unsafe unsafeInstance) throws NoSuchFieldError;
 
     private static long getMarkOffset() {
-        ByteBuffer bb = Objects.requireNonNull(NewDirectByteBuffer(1L, 0));
-        return getIntFieldOffset(bb, -1);
+        System.out.println("getMarkOffset");
+        return getInstanceFieldOffset("java/nio/DirectByteBuffer", "mark", "I", UNSAFE);
     }
 
     private static long getPositionOffset() {
-        ByteBuffer bb = Objects.requireNonNull(NewDirectByteBuffer(-1L, MAGIC_CAPACITY));
-        bb.position(MAGIC_POSITION);
-        return getIntFieldOffset(bb, MAGIC_POSITION);
+        System.out.println("getPositionOffset");
+        return getInstanceFieldOffset("java/nio/DirectByteBuffer", "position", "I", UNSAFE);
     }
 
     private static long getLimitOffset() {
-        ByteBuffer bb = Objects.requireNonNull(NewDirectByteBuffer(-1L, MAGIC_CAPACITY));
-        bb.limit(MAGIC_POSITION);
-        return getIntFieldOffset(bb, MAGIC_POSITION);
+        System.out.println("getLimitOffset");
+        return getInstanceFieldOffset("java/nio/DirectByteBuffer", "limit", "I", UNSAFE);
     }
 
     private static long getCapacityOffset() {
-        ByteBuffer bb = Objects.requireNonNull(NewDirectByteBuffer(-1L, MAGIC_CAPACITY));
-        bb.limit(0);
-        return getIntFieldOffset(bb, MAGIC_CAPACITY);
+        System.out.println("getCapacityOffset");
+        return getInstanceFieldOffset("java/nio/DirectByteBuffer", "capacity", "I", UNSAFE);
     }
 
-    private static <T extends Buffer> long getParentOffset(long offset, int oopSize, T buffer, T bufferWithAttachment) {
-        switch (oopSize) {
-            case Integer.BYTES: // 32-bit or 64-bit with compressed oops
-                while (true) {
-                    if (UNSAFE.getInt(buffer, offset) != UNSAFE.getInt(bufferWithAttachment, offset)) {
-                        return offset;
-                    }
-                    offset += oopSize;
-                }
-            case Long.BYTES: // 64-bit with uncompressed oops
-                while (true) {
-                    if (UNSAFE.getLong(buffer, offset) != UNSAFE.getLong(bufferWithAttachment, offset)) {
-                        return offset;
-                    }
-                    offset += oopSize;
-                }
-            default:
-                throw new IllegalStateException();
+    private static <T extends Buffer> long getParentOffset(T buffer, T bufferWithAttachment) {
+        System.out.println("getParentOffset");
+        try {
+            // try att field first
+            return getInstanceFieldOffset(bufferWithAttachment.getClass().getName().replace('.', '/'), "att", "Ljava/lang/Object;", UNSAFE);
+        } catch (NoSuchFieldError e) {
+            // then try bb field
+            return getInstanceFieldOffset(bufferWithAttachment.getClass().getName(), "bb", "Ljava/nio/ByteBuffer;", UNSAFE);
         }
     }
 
