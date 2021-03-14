@@ -22,6 +22,8 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <p>None.</p>
  * 
+ * <h5>VK_AMD_display_native_hdr</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_AMD_display_native_hdr}</dd>
@@ -42,6 +44,11 @@ import static org.lwjgl.system.JNI.*;
  * <dd><ul>
  * <li>Matthaeus G. Chajdas <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_display_native_hdr:%20&amp;body=@anteru%20">anteru</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2018-12-18</dd>
  * <dt><b>IP Status</b></dt>
@@ -112,7 +119,7 @@ public class AMDDisplayNativeHdr {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>It is only valid to call {@link #vkSetLocalDimmingAMD SetLocalDimmingAMD} if {@link VkDisplayNativeHdrSurfaceCapabilitiesAMD}{@code ::localDimmingSupport} is supported.</li>
+     * <li>{@link VkDisplayNativeHdrSurfaceCapabilitiesAMD}{@code ::localDimmingSupport} <b>must</b> be supported</li>
      * </ul>
      *
      * @param device             the device associated with {@code swapChain}.

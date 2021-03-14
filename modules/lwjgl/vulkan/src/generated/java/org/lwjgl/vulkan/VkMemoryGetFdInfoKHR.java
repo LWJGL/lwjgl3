@@ -30,8 +30,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code handleType} <b>must</b> have been included in {@link VkExportMemoryAllocateInfo}{@code ::handleTypes} when {@code memory} was created.</li>
- * <li>{@code handleType} <b>must</b> be defined as a POSIX file descriptor handle.</li>
+ * <li>{@code handleType} <b>must</b> have been included in {@link VkExportMemoryAllocateInfo}{@code ::handleTypes} when {@code memory} was created</li>
+ * <li>{@code handleType} <b>must</b> be defined as a POSIX file descriptor handle</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -51,7 +51,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code memory} &ndash; the memory object from which the handle will be exported.</li>
  * <li>{@code handleType} &ndash; the type of handle requested.</li>
  * </ul>

@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code supportsProtected} &ndash; specifies whether a protected swapchain created from {@link VkPhysicalDeviceSurfaceInfo2KHR}{@code ::surface} for a particular windowing system <b>can</b> be displayed on screen or not. If {@code supportsProtected} is {@link VK10#VK_TRUE TRUE}, then creation of swapchains with the {@link KHRSwapchain#VK_SWAPCHAIN_CREATE_PROTECTED_BIT_KHR SWAPCHAIN_CREATE_PROTECTED_BIT_KHR} flag set <b>must</b> be supported for {@code surface}.</li>
  * </ul>
  * 

@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code allowCommandBufferQueryCopies} &ndash; {@link VK10#VK_TRUE TRUE} if the performance query pools are allowed to be used with {@link VK10#vkCmdCopyQueryPoolResults CmdCopyQueryPoolResults}.</li>
  * </ul>
  * 

@@ -22,7 +22,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code pView} <b>must</b> be a valid {@code NSView} and <b>must</b> be backed by a {@code CALayer} instance of type dlink:CAMetalLayer.</li>
+ * <li>If {@code pView} is a {@code CAMetalLayer} object, it <b>must</b> be a valid {@code CAMetalLayer}.</li>
+ * <li>If {@code pView} is an {@code NSView} object, it <b>must</b> be a valid {@code NSView}, <b>must</b> be backed by a {@code CALayer} object of type {@code CAMetalLayer}, and {@link MVKMacosSurface#vkCreateMacOSSurfaceMVK CreateMacOSSurfaceMVK} <b>must</b> be called on the main thread.</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -41,9 +42,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code flags} &ndash; reserved for future use.</li>
- * <li>{@code pView} &ndash; a reference to a {@code NSView} object which will display this surface. This {@code NSView} <b>must</b> be backed by a {@code CALayer} instance of type dlink:CAMetalLayer.</li>
+ * <li>{@code pView} &ndash; a reference to either a {@code CAMetalLayer} object or an {@code NSView} object.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

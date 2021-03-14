@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>This structure <b>can</b> be used either to specify the sample locations to be used for rendering or to specify the set of sample locations an image subresource has been last rendered with for the purposes of layout transitions of depth/stencil images created with {@link EXTSampleLocations#VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT}.</p>
  * 
- * <p>The sample locations in {@code pSampleLocations} specify {@code sampleLocationsPerPixel} number of sample locations for each pixel in the grid of the size specified in {@code sampleLocationGridSize}. The sample location for sample <code>i</code> at the pixel grid location <code>(x,y)</code> is taken from <code>pSampleLocations[(x + y <b> sampleLocationGridSize.width) </b> sampleLocationsPerPixel + i]</code>.</p>
+ * <p>The sample locations in {@code pSampleLocations} specify {@code sampleLocationsPerPixel} number of sample locations for each pixel in the grid of the size specified in {@code sampleLocationGridSize}. The sample location for sample <code>i</code> at the pixel grid location <code>(x,y)</code> is taken from <code>pSampleLocations[(x + y × sampleLocationGridSize.width) × sampleLocationsPerPixel + i]</code>.</p>
  * 
  * <p>If the render pass has a fragment density map, the implementation will choose the sample locations for the fragment and the contents of {@code pSampleLocations} <b>may</b> be ignored.</p>
  * 
@@ -38,7 +38,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTSampleLocations#VK_STRUCTURE_TYPE_SAMPLE_LOCATIONS_INFO_EXT STRUCTURE_TYPE_SAMPLE_LOCATIONS_INFO_EXT}</li>
- * <li>If {@code sampleLocationsPerPixel} is not 0, {@code sampleLocationsPerPixel} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
  * <li>If {@code sampleLocationsCount} is not 0, {@code pSampleLocations} <b>must</b> be a valid pointer to an array of {@code sampleLocationsCount} {@link VkSampleLocationEXT} structures</li>
  * </ul>
  * 
@@ -50,8 +49,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code sampleLocationsPerPixel} &ndash; a {@code VkSampleCountFlagBits} specifying the number of sample locations per pixel.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
+ * <li>{@code sampleLocationsPerPixel} &ndash; a {@code VkSampleCountFlagBits} value specifying the number of sample locations per pixel.</li>
  * <li>{@code sampleLocationGridSize} &ndash; the size of the sample location grid to select custom sample locations for.</li>
  * <li>{@code sampleLocationsCount} &ndash; the number of sample locations in {@code pSampleLocations}.</li>
  * <li>{@code pSampleLocations} &ndash; a pointer to an array of {@code sampleLocationsCount} {@link VkSampleLocationEXT} structures.</li>

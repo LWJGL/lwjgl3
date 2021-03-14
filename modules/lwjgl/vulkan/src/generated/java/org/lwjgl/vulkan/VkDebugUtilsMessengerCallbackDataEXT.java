@@ -30,9 +30,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
  * 
- * <p>{@code pQueueLabels} will only be non-NULL if one of the objects in {@code pObjects} can be related directly to a defined {@code VkQueue} which has had one or more labels associated with it.</p>
+ * <p>{@code pQueueLabels} will only be non-{@code NULL} if one of the objects in {@code pObjects} can be related directly to a defined {@code VkQueue} which has had one or more labels associated with it.</p>
  * 
- * <p>Likewise, {@code pCmdBufLabels} will only be non-NULL if one of the objects in {@code pObjects} can be related directly to a defined {@code VkCommandBuffer} which has had one or more labels associated with it. Additionally, while command buffer labels allow for beginning and ending across different command buffers, the debug messaging framework <b>cannot</b> guarantee that labels in {@code pCmdBufLables} will contain those defined outside of the associated command buffer. This is partially due to the fact that the association of one command buffer with another may not have been defined at the time the debug message is triggered.</p>
+ * <p>Likewise, {@code pCmdBufLabels} will only be non-{@code NULL} if one of the objects in {@code pObjects} can be related directly to a defined {@code VkCommandBuffer} which has had one or more labels associated with it. Additionally, while command buffer labels allow for beginning and ending across different command buffers, the debug messaging framework <b>cannot</b> guarantee that labels in {@code pCmdBufLables} will contain those defined outside of the associated command buffer. This is partially due to the fact that the association of one command buffer with another may not have been defined at the time the debug message is triggered.</p>
  * </div>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -56,15 +56,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code flags} &ndash; 0 and reserved for future use.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
+ * <li>{@code flags} &ndash; 0 and is reserved for future use.</li>
  * <li>{@code pMessageIdName} &ndash; a null-terminated string that identifies the particular message ID that is associated with the provided message. If the message corresponds to a validation layer message, then this string may contain the portion of the Vulkan specification that is believed to have been violated.</li>
  * <li>{@code messageIdNumber} &ndash; the ID number of the triggering message. If the message corresponds to a validation layer message, then this number is related to the internal number associated with the message being triggered.</li>
  * <li>{@code pMessage} &ndash; a null-terminated string detailing the trigger conditions.</li>
  * <li>{@code queueLabelCount} &ndash; a count of items contained in the {@code pQueueLabels} array.</li>
- * <li>{@code pQueueLabels} &ndash; NULL or a pointer to an array of {@link VkDebugUtilsLabelEXT} active in the current {@code VkQueue} at the time the callback was triggered. Refer to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#debugging-queue-labels">Queue Labels</a> for more information.</li>
+ * <li>{@code pQueueLabels} &ndash; {@code NULL} or a pointer to an array of {@link VkDebugUtilsLabelEXT} active in the current {@code VkQueue} at the time the callback was triggered. Refer to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#debugging-queue-labels">Queue Labels</a> for more information.</li>
  * <li>{@code cmdBufLabelCount} &ndash; a count of items contained in the {@code pCmdBufLabels} array.</li>
- * <li>{@code pCmdBufLabels} &ndash; NULL or a pointer to an array of {@link VkDebugUtilsLabelEXT} active in the current {@code VkCommandBuffer} at the time the callback was triggered. Refer to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#debugging-command-buffer-labels">Command Buffer Labels</a> for more information.</li>
+ * <li>{@code pCmdBufLabels} &ndash; {@code NULL} or a pointer to an array of {@link VkDebugUtilsLabelEXT} active in the current {@code VkCommandBuffer} at the time the callback was triggered. Refer to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#debugging-command-buffer-labels">Command Buffer Labels</a> for more information.</li>
  * <li>{@code objectCount} &ndash; a count of items contained in the {@code pObjects} array.</li>
  * <li>{@code pObjects} &ndash; a pointer to an array of {@link VkDebugUtilsObjectNameInfoEXT} objects related to the detected issue. The array is roughly in order or importance, but the 0th element is always guaranteed to be the most important object for this message.</li>
  * </ul>

@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkClearValue}, {@link VK10#vkCmdClearColorImage CmdClearColorImage}</p>
+ * <p>{@link VkClearValue}, {@link VkSamplerCustomBorderColorCreateInfoEXT}, {@link VK10#vkCmdClearColorImage CmdClearColorImage}</p>
  * 
  * <h3>Member documentation</h3>
  * 

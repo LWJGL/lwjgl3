@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code disabledValidationCheckCount} &ndash; the number of checks to disable.</li>
  * <li>{@code pDisabledValidationChecks} &ndash; a pointer to an array of {@code VkValidationCheckEXT} values specifying the validation checks to be disabled.</li>
  * </ul>

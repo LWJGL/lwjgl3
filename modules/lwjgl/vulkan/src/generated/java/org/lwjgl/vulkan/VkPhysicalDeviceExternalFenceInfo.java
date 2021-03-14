@@ -41,7 +41,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure</li>
- * <li>{@code pNext} &ndash; NULL or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code handleType} &ndash; a {@code VkExternalFenceHandleTypeFlagBits} value indicating an external fence handle type for which capabilities will be returned.</li>
  * </ul>
  * 

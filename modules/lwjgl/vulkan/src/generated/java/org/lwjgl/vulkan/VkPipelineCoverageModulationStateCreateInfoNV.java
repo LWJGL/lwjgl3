@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If {@code coverageModulationTableEnable} is {@link VK10#VK_FALSE FALSE}, then for each color sample the associated bits of the fragment's coverage are counted and divided by the number of associated bits to produce a modulation factor <code>R</code> in the range <code>(0,1]</code> (a value of zero would have been killed due to a color coverage of 0). Specifically:</p>
+ * <p>If {@code coverageModulationTableEnable} is {@link VK10#VK_FALSE FALSE}, then for each color sample the associated bits of the pixel coverage are counted and divided by the number of associated bits to produce a modulation factor <code>R</code> in the range <code>(0,1]</code> (a value of zero would have been killed due to a color coverage of 0). Specifically:</p>
  * 
  * <ul>
  * <li><code>N</code> = value of {@code rasterizationSamples}</li>
@@ -62,7 +62,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code flags} &ndash; reserved for future use.</li>
  * <li>{@code coverageModulationMode} &ndash; a {@code VkCoverageModulationModeNV} value controlling which color components are modulated.</li>
  * <li>{@code coverageModulationTableEnable} &ndash; controls whether the modulation factor is looked up from a table in {@code pCoverageModulationTable}.</li>

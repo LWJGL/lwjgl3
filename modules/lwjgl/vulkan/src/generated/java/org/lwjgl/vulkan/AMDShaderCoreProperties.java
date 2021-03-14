@@ -74,6 +74,8 @@ package org.lwjgl.vulkan;
  *     m_shader_core_properties.vgpr_allocation_granularity =
  *     shader_core_properties.vgprAllocationGranularity;</code></pre>
  * 
+ * <h5>VK_AMD_shader_core_properties</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_AMD_shader_core_properties}</dd>
@@ -92,6 +94,11 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Martin Dinkov <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_shader_core_properties:%20&amp;body=@mdinkov%20">mdinkov</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2019-06-25</dd>
  * <dt><b>IP Status</b></dt>

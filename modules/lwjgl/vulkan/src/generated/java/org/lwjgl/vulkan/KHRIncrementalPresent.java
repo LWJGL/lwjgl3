@@ -10,9 +10,7 @@ package org.lwjgl.vulkan;
  * 
  * <p>This extension is leveraged from the {@code EGL_KHR_swap_buffers_with_damage} extension.</p>
  * 
- * <h5>Examples</h5>
- * 
- * <p>None.</p>
+ * <h5>VK_KHR_incremental_present</h5>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -32,6 +30,11 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Ian Elliott <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_incremental_present:%20&amp;body=@ianelliottus%20">ianelliottus</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2016-11-02</dd>
  * <dt><b>IP Status</b></dt>

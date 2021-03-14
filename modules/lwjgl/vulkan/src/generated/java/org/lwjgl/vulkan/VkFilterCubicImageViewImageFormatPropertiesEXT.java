@@ -27,14 +27,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If the {@code pNext} chain of the {@link VkImageFormatProperties2} structure includes a {@link VkFilterCubicImageViewImageFormatPropertiesEXT} structure, the {@code pNext} chain of the {@link VkPhysicalDeviceImageFormatInfo2} structure <b>must</b> include a {@link VkPhysicalDeviceImageViewImageFormatInfoEXT} structure with an {@code imageViewType} that is compatible with {@code imageType}.</li>
+ * <li>If the {@code pNext} chain of the {@link VkImageFormatProperties2} structure includes a {@link VkFilterCubicImageViewImageFormatPropertiesEXT} structure, the {@code pNext} chain of the {@link VkPhysicalDeviceImageFormatInfo2} structure <b>must</b> include a {@link VkPhysicalDeviceImageViewImageFormatInfoEXT} structure with an {@code imageViewType} that is compatible with {@code imageType}</li>
  * </ul>
  * 
  * <h3>Member documentation</h3>
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code filterCubic} &ndash; tells if image format, image type and image view type <b>can</b> be used with cubic filtering. This field is set by the implementation. User-specified value is ignored.</li>
  * <li>{@code filterCubicMinmax} &ndash; tells if image format, image type and image view type <b>can</b> be used with cubic filtering and minmax filtering. This field is set by the implementation. User-specified value is ignored.</li>
  * </ul>

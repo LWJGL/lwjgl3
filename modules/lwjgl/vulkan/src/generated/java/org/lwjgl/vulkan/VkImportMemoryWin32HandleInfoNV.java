@@ -28,8 +28,8 @@ import org.lwjgl.system.windows.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code handleType} <b>must</b> not have more than one bit set.</li>
- * <li>{@code handle} <b>must</b> be a valid handle to memory, obtained as specified by {@code handleType}.</li>
+ * <li>{@code handleType} <b>must</b> not have more than one bit set</li>
+ * <li>{@code handle} <b>must</b> be a valid handle to memory, obtained as specified by {@code handleType}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -43,7 +43,7 @@ import org.lwjgl.system.windows.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code handleType} &ndash; 0 or a {@code VkExternalMemoryHandleTypeFlagBitsNV} value specifying the type of memory handle in {@code handle}.</li>
  * <li>{@code handle} &ndash; a Windows {@code HANDLE} referring to the memory.</li>
  * </ul>

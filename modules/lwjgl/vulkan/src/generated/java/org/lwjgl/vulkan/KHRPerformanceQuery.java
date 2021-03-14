@@ -238,6 +238,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     break;
  * }</code></pre>
  * 
+ * <h5>VK_KHR_performance_query</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_performance_query}</dd>
@@ -252,10 +254,19 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>Requires Vulkan 1.0</li>
  * <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</li>
  * </ul></dd>
+ * <dt><b>Special Use</b></dt>
+ * <dd><ul>
+ * <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#extendingvulkan-compatibility-specialuse">Developer tools</a></li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Alon Or-bach <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_performance_query:%20&amp;body=@alonorbach%20">alonorbach</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2019-10-08</dd>
  * <dt><b>IP Status</b></dt>
@@ -413,17 +424,26 @@ public class KHRPerformanceQuery {
      * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_PERFORMANCE_COUNTER_DESCRIPTION_PERFORMANCE_IMPACTING_KHR PERFORMANCE_COUNTER_DESCRIPTION_PERFORMANCE_IMPACTING_KHR} specifies that recording the counter <b>may</b> have a noticable performance impact.</li>
-     * <li>{@link #VK_PERFORMANCE_COUNTER_DESCRIPTION_CONCURRENTLY_IMPACTED_KHR PERFORMANCE_COUNTER_DESCRIPTION_CONCURRENTLY_IMPACTED_KHR} specifies that concurrently recording the counter while other submitted command buffers are running <b>may</b> impact the accuracy of the recording.</li>
+     * <li>{@link #VK_PERFORMANCE_COUNTER_DESCRIPTION_PERFORMANCE_IMPACTING_BIT_KHR PERFORMANCE_COUNTER_DESCRIPTION_PERFORMANCE_IMPACTING_BIT_KHR} specifies that recording the counter <b>may</b> have a noticeable performance impact.</li>
+     * <li>{@link #VK_PERFORMANCE_COUNTER_DESCRIPTION_CONCURRENTLY_IMPACTED_BIT_KHR PERFORMANCE_COUNTER_DESCRIPTION_CONCURRENTLY_IMPACTED_BIT_KHR} specifies that concurrently recording the counter while other submitted command buffers are running <b>may</b> impact the accuracy of the recording.</li>
      * </ul>
      * 
      * <h5>See Also</h5>
      * 
      * <p>{@code VkPerformanceCounterDescriptionFlagsKHR}</p>
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_PERFORMANCE_COUNTER_DESCRIPTION_PERFORMANCE_IMPACTING_KHR PERFORMANCE_COUNTER_DESCRIPTION_PERFORMANCE_IMPACTING_KHR}</li>
+     * <li>{@link #VK_PERFORMANCE_COUNTER_DESCRIPTION_CONCURRENTLY_IMPACTED_KHR PERFORMANCE_COUNTER_DESCRIPTION_CONCURRENTLY_IMPACTED_KHR}</li>
+     * </ul>
      */
     public static final int
-        VK_PERFORMANCE_COUNTER_DESCRIPTION_PERFORMANCE_IMPACTING_KHR = 0x1,
-        VK_PERFORMANCE_COUNTER_DESCRIPTION_CONCURRENTLY_IMPACTED_KHR = 0x2;
+        VK_PERFORMANCE_COUNTER_DESCRIPTION_PERFORMANCE_IMPACTING_BIT_KHR = 0x1,
+        VK_PERFORMANCE_COUNTER_DESCRIPTION_PERFORMANCE_IMPACTING_KHR     = 0x1,
+        VK_PERFORMANCE_COUNTER_DESCRIPTION_CONCURRENTLY_IMPACTED_BIT_KHR = 0x2,
+        VK_PERFORMANCE_COUNTER_DESCRIPTION_CONCURRENTLY_IMPACTED_KHR     = 0x2;
 
     protected KHRPerformanceQuery() {
         throw new UnsupportedOperationException();
@@ -603,6 +623,7 @@ public class KHRPerformanceQuery {
      * </ul></dd>
      * <dt>On failure, this command returns</dt>
      * <dd><ul>
+     * <li>{@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY}</li>
      * <li>{@link VK10#VK_TIMEOUT TIMEOUT}</li>
      * </ul></dd>
      * </dl>

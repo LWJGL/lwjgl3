@@ -68,6 +68,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     vkDestroyDebugReportCallbackEXT(instance, cb2);
  *     vkDestroyDebugReportCallbackEXT(instance, cb3);</code></pre>
  * 
+ * <h5>VK_EXT_debug_report</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_debug_report}</dd>
@@ -85,12 +87,21 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd><ul>
  * <li><em>Deprecated</em> by {@link EXTDebugUtils VK_EXT_debug_utils} extension</li>
  * </ul></dd>
+ * <dt><b>Special Use</b></dt>
+ * <dd><ul>
+ * <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#extendingvulkan-compatibility-specialuse">Debugging tools</a></li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Courtney Goeltzenleuchter <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_debug_report:%20&amp;body=@courtney-g%20">courtney-g</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2017-09-12</dd>
+ * <dd>2020-12-14</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
@@ -145,11 +156,35 @@ public class EXTDebugReport {
         VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_EXT = 1000085000;
 
     /**
+     * VkDebugReportFlagBitsEXT - Bitmask specifying events which cause a debug report callback
+     * 
+     * <h5>Description</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_DEBUG_REPORT_ERROR_BIT_EXT DEBUG_REPORT_ERROR_BIT_EXT} specifies that the application has violated a valid usage condition of the specification.</li>
+     * <li>{@link #VK_DEBUG_REPORT_WARNING_BIT_EXT DEBUG_REPORT_WARNING_BIT_EXT} specifies use of Vulkan that <b>may</b> expose an app bug. Such cases may not be immediately harmful, such as a fragment shader outputting to a location with no attachment. Other cases <b>may</b> point to behavior that is almost certainly bad when unintended such as using an image whose memory has not been filled. In general if you see a warning but you know that the behavior is intended/desired, then simply ignore the warning.</li>
+     * <li>{@link #VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT} specifies a potentially non-optimal use of Vulkan, e.g. using {@link VK10#vkCmdClearColorImage CmdClearColorImage} when setting {@link VkAttachmentDescription}{@code ::loadOp} to {@link VK10#VK_ATTACHMENT_LOAD_OP_CLEAR ATTACHMENT_LOAD_OP_CLEAR} would have worked.</li>
+     * <li>{@link #VK_DEBUG_REPORT_INFORMATION_BIT_EXT DEBUG_REPORT_INFORMATION_BIT_EXT} specifies an informational message such as resource details that may be handy when debugging an application.</li>
+     * <li>{@link #VK_DEBUG_REPORT_DEBUG_BIT_EXT DEBUG_REPORT_DEBUG_BIT_EXT} specifies diagnostic information from the implementation and layers.</li>
+     * </ul>
+     * 
+     * <h5>See Also</h5>
+     * 
+     * <p>{@code VkDebugReportFlagsEXT}</p>
+     */
+    public static final int
+        VK_DEBUG_REPORT_INFORMATION_BIT_EXT         = 0x1,
+        VK_DEBUG_REPORT_WARNING_BIT_EXT             = 0x2,
+        VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT = 0x4,
+        VK_DEBUG_REPORT_ERROR_BIT_EXT               = 0x8,
+        VK_DEBUG_REPORT_DEBUG_BIT_EXT               = 0x10;
+
+    /**
      * VkDebugReportObjectTypeEXT - Specify the type of an object handle
      * 
      * <h5>Description</h5>
      * 
-     * <h6>VkDebugReportObjectTypeEXT and Vulkan Handle Relationship</h6>
+     * <h6>{@code VkDebugReportObjectTypeEXT} and Vulkan Handle Relationship</h6>
      * 
      * <table class="lwjgl">
      * <thead><tr><th>{@code VkDebugReportObjectTypeEXT}</th><th>Vulkan Handle Type</th></tr></thead>
@@ -185,8 +220,6 @@ public class EXTDebugReport {
      * <tr><td>{@link #VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT}</td><td>{@code VkDebugReportCallbackEXT}</td></tr>
      * <tr><td>{@link #VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT}</td><td>{@code VkDisplayKHR}</td></tr>
      * <tr><td>{@link #VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT}</td><td>{@code VkDisplayModeKHR}</td></tr>
-     * <tr><td>{@link #VK_DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT}</td><td>{@code VkObjectTableNVX}</td></tr>
-     * <tr><td>{@link #VK_DEBUG_REPORT_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX_EXT DEBUG_REPORT_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX_EXT}</td><td>{@code VkIndirectCommandsLayoutNVX}</td></tr>
      * <tr><td>{@link #VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_EXT DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_EXT}</td><td>{@code VkDescriptorUpdateTemplate}</td></tr>
      * </tbody>
      * </table>
@@ -209,66 +242,40 @@ public class EXTDebugReport {
      * </ul>
      */
     public static final int
-        VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT                      = 0,
-        VK_DEBUG_REPORT_OBJECT_TYPE_INSTANCE_EXT                     = 1,
-        VK_DEBUG_REPORT_OBJECT_TYPE_PHYSICAL_DEVICE_EXT              = 2,
-        VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_EXT                       = 3,
-        VK_DEBUG_REPORT_OBJECT_TYPE_QUEUE_EXT                        = 4,
-        VK_DEBUG_REPORT_OBJECT_TYPE_SEMAPHORE_EXT                    = 5,
-        VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_BUFFER_EXT               = 6,
-        VK_DEBUG_REPORT_OBJECT_TYPE_FENCE_EXT                        = 7,
-        VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_MEMORY_EXT                = 8,
-        VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_EXT                       = 9,
-        VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_EXT                        = 10,
-        VK_DEBUG_REPORT_OBJECT_TYPE_EVENT_EXT                        = 11,
-        VK_DEBUG_REPORT_OBJECT_TYPE_QUERY_POOL_EXT                   = 12,
-        VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_VIEW_EXT                  = 13,
-        VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_VIEW_EXT                   = 14,
-        VK_DEBUG_REPORT_OBJECT_TYPE_SHADER_MODULE_EXT                = 15,
-        VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_CACHE_EXT               = 16,
-        VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_LAYOUT_EXT              = 17,
-        VK_DEBUG_REPORT_OBJECT_TYPE_RENDER_PASS_EXT                  = 18,
-        VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_EXT                     = 19,
-        VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT_EXT        = 20,
-        VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_EXT                      = 21,
-        VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_POOL_EXT              = 22,
-        VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_EXT               = 23,
-        VK_DEBUG_REPORT_OBJECT_TYPE_FRAMEBUFFER_EXT                  = 24,
-        VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL_EXT                 = 25,
-        VK_DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT                  = 26,
-        VK_DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT                = 27,
-        VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT    = 28,
-        VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT                 = 28,
-        VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT                  = 29,
-        VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT             = 30,
-        VK_DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT             = 31,
-        VK_DEBUG_REPORT_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX_EXT = 32,
-        VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT_EXT         = 33,
-        VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT             = 33;
-
-    /**
-     * VkDebugReportFlagBitsEXT - Bitmask specifying events which cause a debug report callback
-     * 
-     * <h5>Description</h5>
-     * 
-     * <ul>
-     * <li>{@link #VK_DEBUG_REPORT_ERROR_BIT_EXT DEBUG_REPORT_ERROR_BIT_EXT} specifies that the application has violated a valid usage condition of the specification.</li>
-     * <li>{@link #VK_DEBUG_REPORT_WARNING_BIT_EXT DEBUG_REPORT_WARNING_BIT_EXT} specifies use of Vulkan that <b>may</b> expose an app bug. Such cases may not be immediately harmful, such as a fragment shader outputting to a location with no attachment. Other cases <b>may</b> point to behavior that is almost certainly bad when unintended such as using an image whose memory has not been filled. In general if you see a warning but you know that the behavior is intended/desired, then simply ignore the warning.</li>
-     * <li>{@link #VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT} specifies a potentially non-optimal use of Vulkan, e.g. using {@link VK10#vkCmdClearColorImage CmdClearColorImage} when setting {@link VkAttachmentDescription}{@code ::loadOp} to {@link VK10#VK_ATTACHMENT_LOAD_OP_CLEAR ATTACHMENT_LOAD_OP_CLEAR} would have worked.</li>
-     * <li>{@link #VK_DEBUG_REPORT_INFORMATION_BIT_EXT DEBUG_REPORT_INFORMATION_BIT_EXT} specifies an informational message such as resource details that may be handy when debugging an application.</li>
-     * <li>{@link #VK_DEBUG_REPORT_DEBUG_BIT_EXT DEBUG_REPORT_DEBUG_BIT_EXT} specifies diagnostic information from the implementation and layers.</li>
-     * </ul>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@code VkDebugReportFlagsEXT}</p>
-     */
-    public static final int
-        VK_DEBUG_REPORT_INFORMATION_BIT_EXT         = 0x1,
-        VK_DEBUG_REPORT_WARNING_BIT_EXT             = 0x2,
-        VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT = 0x4,
-        VK_DEBUG_REPORT_ERROR_BIT_EXT               = 0x8,
-        VK_DEBUG_REPORT_DEBUG_BIT_EXT               = 0x10;
+        VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT                   = 0,
+        VK_DEBUG_REPORT_OBJECT_TYPE_INSTANCE_EXT                  = 1,
+        VK_DEBUG_REPORT_OBJECT_TYPE_PHYSICAL_DEVICE_EXT           = 2,
+        VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_EXT                    = 3,
+        VK_DEBUG_REPORT_OBJECT_TYPE_QUEUE_EXT                     = 4,
+        VK_DEBUG_REPORT_OBJECT_TYPE_SEMAPHORE_EXT                 = 5,
+        VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_BUFFER_EXT            = 6,
+        VK_DEBUG_REPORT_OBJECT_TYPE_FENCE_EXT                     = 7,
+        VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_MEMORY_EXT             = 8,
+        VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_EXT                    = 9,
+        VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_EXT                     = 10,
+        VK_DEBUG_REPORT_OBJECT_TYPE_EVENT_EXT                     = 11,
+        VK_DEBUG_REPORT_OBJECT_TYPE_QUERY_POOL_EXT                = 12,
+        VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_VIEW_EXT               = 13,
+        VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_VIEW_EXT                = 14,
+        VK_DEBUG_REPORT_OBJECT_TYPE_SHADER_MODULE_EXT             = 15,
+        VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_CACHE_EXT            = 16,
+        VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_LAYOUT_EXT           = 17,
+        VK_DEBUG_REPORT_OBJECT_TYPE_RENDER_PASS_EXT               = 18,
+        VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_EXT                  = 19,
+        VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT_EXT     = 20,
+        VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_EXT                   = 21,
+        VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_POOL_EXT           = 22,
+        VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_EXT            = 23,
+        VK_DEBUG_REPORT_OBJECT_TYPE_FRAMEBUFFER_EXT               = 24,
+        VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL_EXT              = 25,
+        VK_DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT               = 26,
+        VK_DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT             = 27,
+        VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT = 28,
+        VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT              = 28,
+        VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT               = 29,
+        VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT          = 30,
+        VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT_EXT      = 33,
+        VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT          = 33;
 
     protected EXTDebugReport() {
         throw new UnsupportedOperationException();
@@ -378,9 +385,9 @@ public class EXTDebugReport {
      * 
      * <ul>
      * <li>{@code instance} <b>must</b> be a valid {@code VkInstance} handle</li>
-     * <li>{@code callback} <b>must</b> be a valid {@code VkDebugReportCallbackEXT} handle</li>
+     * <li>If {@code callback} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code callback} <b>must</b> be a valid {@code VkDebugReportCallbackEXT} handle</li>
      * <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid {@link VkAllocationCallbacks} structure</li>
-     * <li>{@code callback} <b>must</b> have been created, allocated, or retrieved from {@code instance}</li>
+     * <li>If {@code callback} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code instance}</li>
      * </ul>
      * 
      * <h5>Host Synchronization</h5>
@@ -438,7 +445,7 @@ public class EXTDebugReport {
      * 
      * <ul>
      * <li>{@code object} <b>must</b> be a Vulkan object or {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
-     * <li>If {@code objectType} is not {@link #VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT} and {@code object} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code object} <b>must</b> be a Vulkan object of the corresponding type associated with {@code objectType} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#debug-report-object-types">{@code VkDebugReportObjectTypeEXT} and Vulkan Handle Relationship</a>.</li>
+     * <li>If {@code objectType} is not {@link #VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT} and {@code object} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code object} <b>must</b> be a Vulkan object of the corresponding type associated with {@code objectType} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#debug-report-object-types">{@code VkDebugReportObjectTypeEXT} and Vulkan Handle Relationship</a></li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -455,7 +462,7 @@ public class EXTDebugReport {
      * @param instance     the debug stream&#8217;s {@code VkInstance}.
      * @param flags        specifies the {@code VkDebugReportFlagBitsEXT} classification of this event/message.
      * @param objectType   a {@code VkDebugReportObjectTypeEXT} specifying the type of object being used or created at the time the event was triggered.
-     * @param object       this is the object where the issue was detected. {@code object} <b>can</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE} if there is no object associated with the event.
+     * @param object       the object where the issue was detected. {@code object} <b>can</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE} if there is no object associated with the event.
      * @param location     an application defined value.
      * @param messageCode  an application defined value.
      * @param pLayerPrefix the abbreviation of the component making this event/message.
@@ -495,7 +502,7 @@ public class EXTDebugReport {
      * 
      * <ul>
      * <li>{@code object} <b>must</b> be a Vulkan object or {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
-     * <li>If {@code objectType} is not {@link #VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT} and {@code object} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code object} <b>must</b> be a Vulkan object of the corresponding type associated with {@code objectType} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#debug-report-object-types">{@code VkDebugReportObjectTypeEXT} and Vulkan Handle Relationship</a>.</li>
+     * <li>If {@code objectType} is not {@link #VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT} and {@code object} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code object} <b>must</b> be a Vulkan object of the corresponding type associated with {@code objectType} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#debug-report-object-types">{@code VkDebugReportObjectTypeEXT} and Vulkan Handle Relationship</a></li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -512,7 +519,7 @@ public class EXTDebugReport {
      * @param instance     the debug stream&#8217;s {@code VkInstance}.
      * @param flags        specifies the {@code VkDebugReportFlagBitsEXT} classification of this event/message.
      * @param objectType   a {@code VkDebugReportObjectTypeEXT} specifying the type of object being used or created at the time the event was triggered.
-     * @param object       this is the object where the issue was detected. {@code object} <b>can</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE} if there is no object associated with the event.
+     * @param object       the object where the issue was detected. {@code object} <b>can</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE} if there is no object associated with the event.
      * @param location     an application defined value.
      * @param messageCode  an application defined value.
      * @param pLayerPrefix the abbreviation of the component making this event/message.

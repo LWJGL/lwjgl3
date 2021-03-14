@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code shadingRateTexelSize} &ndash; indicates the width and height of the portion of the framebuffer corresponding to each texel in the shading rate image.</li>
  * <li>{@code shadingRatePaletteSize} &ndash; indicates the maximum number of palette entries supported for the shading rate image.</li>
  * <li>{@code shadingRateMaxCoarseSamples} &ndash; specifies the maximum number of coverage samples supported in a single fragment. If the product of the fragment size derived from the base shading rate and the number of coverage samples per pixel exceeds this limit, the final shading rate will be adjusted so that its product does not exceed the limit.</li>

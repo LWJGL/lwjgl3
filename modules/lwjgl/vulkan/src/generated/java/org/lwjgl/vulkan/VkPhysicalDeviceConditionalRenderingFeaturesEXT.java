@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code conditionalRendering} &ndash; specifies whether conditional rendering is supported.</li>
  * <li>{@code inheritedConditionalRendering} &ndash; specifies whether a secondary command buffer <b>can</b> be executed while conditional rendering is active in the primary command buffer.</li>
  * </ul>

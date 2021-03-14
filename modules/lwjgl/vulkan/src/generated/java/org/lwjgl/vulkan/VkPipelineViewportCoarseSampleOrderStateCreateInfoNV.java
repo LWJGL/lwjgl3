@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>If {@code sampleOrderType} is not {@link NVShadingRateImage#VK_COARSE_SAMPLE_ORDER_TYPE_CUSTOM_NV COARSE_SAMPLE_ORDER_TYPE_CUSTOM_NV}, {@code customSamplerOrderCount} <b>must</b> be 0</li>
- * <li>The array {@code pCustomSampleOrders} <b>must</b> not contain two structures with matching values for both the {@code shadingRate} and {@code sampleCount} members.</li>
+ * <li>The array {@code pCustomSampleOrders} <b>must</b> not contain two structures with matching values for both the {@code shadingRate} and {@code sampleCount} members</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -50,7 +50,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code sampleOrderType} &ndash; specifies the mechanism used to order coverage samples in fragments larger than one pixel.</li>
  * <li>{@code customSampleOrderCount} &ndash; specifies the number of custom sample orderings to use when ordering coverage samples.</li>
  * <li>{@code pCustomSampleOrders} &ndash; a pointer to an array of {@code customSampleOrderCount} {@link VkCoarseSampleOrderCustomNV} structures, each of which specifies the coverage sample order for a single combination of fragment area and coverage sample count.</li>

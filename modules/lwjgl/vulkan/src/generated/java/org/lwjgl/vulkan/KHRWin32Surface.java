@@ -18,6 +18,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * The {@code VK_KHR_win32_surface} extension is an instance extension. It provides a mechanism to create a {@code VkSurfaceKHR} object (defined by the {@link KHRSurface VK_KHR_surface} extension) that refers to a Win32 {@code HWND}, as well as a query to determine support for rendering to the windows desktop.
  * 
+ * <h5>VK_KHR_win32_surface</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_win32_surface}</dd>
@@ -37,6 +39,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>Jesse Hall <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_win32_surface:%20&amp;body=@critsec%20">critsec</a></li>
  * <li>Ian Elliott <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_win32_surface:%20&amp;body=@ianelliottus%20">ianelliottus</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-04-24</dd>
  * <dt><b>IP Status</b></dt>

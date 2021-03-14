@@ -15,7 +15,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
-import static org.lwjgl.vulkan.VK12.*;
+import static org.lwjgl.vulkan.VK10.*;
 
 /**
  * Structure containing driver identification information.
@@ -38,10 +38,10 @@ import static org.lwjgl.vulkan.VK12.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension specific structure. :anchor-prefix: extension-</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code driverID} &ndash; a unique identifier for the driver of the physical device.</li>
- * <li>{@code driverName[VK_MAX_DRIVER_NAME_SIZE]} &ndash; an array of {@link KHRDriverProperties#VK_MAX_DRIVER_NAME_SIZE_KHR MAX_DRIVER_NAME_SIZE_KHR} {@code char} containing a null-terminated UTF-8 string which is the name of the driver.</li>
- * <li>{@code driverInfo[VK_MAX_DRIVER_INFO_SIZE]} &ndash; an array of {@link KHRDriverProperties#VK_MAX_DRIVER_INFO_SIZE_KHR MAX_DRIVER_INFO_SIZE_KHR} {@code char} containing a null-terminated UTF-8 string with additional information about the driver.</li>
+ * <li>{@code driverName[VK_MAX_DRIVER_NAME_SIZE]} &ndash; an array of {@link VK10#VK_MAX_DRIVER_NAME_SIZE MAX_DRIVER_NAME_SIZE} {@code char} containing a null-terminated UTF-8 string which is the name of the driver.</li>
+ * <li>{@code driverInfo[VK_MAX_DRIVER_INFO_SIZE]} &ndash; an array of {@link VK10#VK_MAX_DRIVER_INFO_SIZE MAX_DRIVER_INFO_SIZE} {@code char} containing a null-terminated UTF-8 string with additional information about the driver.</li>
  * <li>{@code conformanceVersion} &ndash; the version of the Vulkan conformance test this driver is conformant against (see {@link VkConformanceVersion}).</li>
  * </ul>
  * 

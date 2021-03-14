@@ -22,6 +22,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If the {@link VkPhysicalDeviceSubgroupSizeControlPropertiesEXT} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceProperties2}, it is filled with the implementation-dependent limits.</p>
  * 
+ * <p>If {@link VkPhysicalDeviceSubgroupProperties}{@code ::supportedOperations} includes <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-subgroup-quad">{@link VK11#VK_SUBGROUP_FEATURE_QUAD_BIT SUBGROUP_FEATURE_QUAD_BIT}</a>, {@code minSubgroupSize} <b>must</b> be greater than or equal to 4.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
@@ -32,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code minSubgroupSize} &ndash; the minimum subgroup size supported by this device. {@code minSubgroupSize} is at least one if any of the physical device&#8217;s queues support {@link VK10#VK_QUEUE_GRAPHICS_BIT QUEUE_GRAPHICS_BIT} or {@link VK10#VK_QUEUE_COMPUTE_BIT QUEUE_COMPUTE_BIT}. {@code minSubgroupSize} is a power-of-two. {@code minSubgroupSize} is less than or equal to {@code maxSubgroupSize}. {@code minSubgroupSize} is less than or equal to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-subgroup-size">subgroupSize</a>.</li>
  * <li>{@code maxSubgroupSize} &ndash; the maximum subgroup size supported by this device. {@code maxSubgroupSize} is at least one if any of the physical device&#8217;s queues support {@link VK10#VK_QUEUE_GRAPHICS_BIT QUEUE_GRAPHICS_BIT} or {@link VK10#VK_QUEUE_COMPUTE_BIT QUEUE_COMPUTE_BIT}. {@code maxSubgroupSize} is a power-of-two. {@code maxSubgroupSize} is greater than or equal to {@code minSubgroupSize}. {@code maxSubgroupSize} is greater than or equal to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-subgroup-size">subgroupSize</a>.</li>
  * <li>{@code maxComputeWorkgroupSubgroups} &ndash; the maximum number of subgroups supported by the implementation within a workgroup.</li>

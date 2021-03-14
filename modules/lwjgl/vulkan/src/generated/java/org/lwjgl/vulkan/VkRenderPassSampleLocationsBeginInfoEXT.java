@@ -35,7 +35,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code attachmentInitialSampleLocationsCount} &ndash; the number of elements in the {@code pAttachmentInitialSampleLocations} array.</li>
  * <li>{@code pAttachmentInitialSampleLocations} &ndash; a pointer to an array of {@code attachmentInitialSampleLocationsCount} {@link VkAttachmentSampleLocationsEXT} structures specifying the attachment indices and their corresponding sample location state. Each element of {@code pAttachmentInitialSampleLocations} <b>can</b> specify the sample location state to use in the automatic layout transition performed to transition a depth/stencil attachment from the initial layout of the attachment to the image layout specified for the attachment in the first subpass using it.</li>
  * <li>{@code postSubpassSampleLocationsCount} &ndash; the number of elements in the {@code pPostSubpassSampleLocations} array.</li>

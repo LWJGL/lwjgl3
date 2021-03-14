@@ -30,8 +30,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code waitSemaphoreValuesCount} <b>must</b> be the same value as {@link VkSubmitInfo}{@code ::waitSemaphoreCount}, where {@link VkSubmitInfo} is in the {@code pNext} chain of this {@link VkD3D12FenceSubmitInfoKHR} structure.</li>
- * <li>{@code signalSemaphoreValuesCount} <b>must</b> be the same value as {@link VkSubmitInfo}{@code ::signalSemaphoreCount}, where {@link VkSubmitInfo} is in the {@code pNext} chain of this {@link VkD3D12FenceSubmitInfoKHR} structure.</li>
+ * <li>{@code waitSemaphoreValuesCount} <b>must</b> be the same value as {@link VkSubmitInfo}{@code ::waitSemaphoreCount}, where {@link VkSubmitInfo} is in the {@code pNext} chain of this {@link VkD3D12FenceSubmitInfoKHR} structure</li>
+ * <li>{@code signalSemaphoreValuesCount} <b>must</b> be the same value as {@link VkSubmitInfo}{@code ::signalSemaphoreCount}, where {@link VkSubmitInfo} is in the {@code pNext} chain of this {@link VkD3D12FenceSubmitInfoKHR} structure</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -46,7 +46,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code waitSemaphoreValuesCount} &ndash; the number of semaphore wait values specified in {@code pWaitSemaphoreValues}.</li>
  * <li>{@code pWaitSemaphoreValues} &ndash; a pointer to an array of {@code waitSemaphoreValuesCount} values for the corresponding semaphores in {@link VkSubmitInfo}{@code ::pWaitSemaphores} to wait for.</li>
  * <li>{@code signalSemaphoreValuesCount} &ndash; the number of semaphore signal values specified in {@code pSignalSemaphoreValues}.</li>

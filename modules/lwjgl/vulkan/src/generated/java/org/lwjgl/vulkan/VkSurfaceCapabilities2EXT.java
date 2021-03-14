@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code supportedSurfaceCounters} <b>must</b> not include {@link EXTDisplaySurfaceCounter#VK_SURFACE_COUNTER_VBLANK_EXT SURFACE_COUNTER_VBLANK_EXT} unless the surface queried is a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#wsi-display-surfaces">display surface</a>.</li>
+ * <li>{@code supportedSurfaceCounters} <b>must</b> not include {@link EXTDisplaySurfaceCounter#VK_SURFACE_COUNTER_VBLANK_BIT_EXT SURFACE_COUNTER_VBLANK_BIT_EXT} unless the surface queried is a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#wsi-display-surfaces">display surface</a></li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code supportedSurfaceCounters} &ndash; a bitmask of {@code VkSurfaceCounterFlagBitsEXT} indicating the supported surface counter types.</li>
  * </ul>
  * 

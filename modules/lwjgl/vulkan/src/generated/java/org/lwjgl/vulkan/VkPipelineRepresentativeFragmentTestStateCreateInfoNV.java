@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If this structure is not present, {@code representativeFragmentTestEnable} is considered to be {@link VK10#VK_FALSE FALSE}, and the representative fragment test is disabled.</p>
  * 
- * <p>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-early-mode">early fragment tests</a> are not enabled in the active fragment shader, the representative fragment shader test has no effect, even if enabled.</p>
+ * <p>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#shaders-fragment-earlytest">early fragment tests</a> are not enabled in the active fragment shader, the representative fragment shader test has no effect, even if enabled.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code representativeFragmentTestEnable} &ndash; controls whether the representative fragment test is enabled.</li>
  * </ul>
  * 

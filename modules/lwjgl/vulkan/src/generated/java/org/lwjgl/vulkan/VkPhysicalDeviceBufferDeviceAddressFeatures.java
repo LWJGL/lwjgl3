@@ -40,7 +40,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code bufferDeviceAddress} &ndash; indicates that the implementation supports accessing buffer memory in shaders as storage buffers via an address queried from {@link VK12#vkGetBufferDeviceAddress GetBufferDeviceAddress}.</li>
  * <li>{@code bufferDeviceAddressCaptureReplay} &ndash; indicates that the implementation supports saving and reusing buffer and device addresses, e.g. for trace capture and replay.</li>
- * <li>{@code bufferDeviceAddressMultiDevice} &ndash; indicates that the implementation supports the {@code bufferDeviceAddress} feature for logical devices created with multiple physical devices. If this feature is not supported, buffer addresses <b>must</b> not be queried on a logical device created with more than one physical device.</li>
+ * <li>{@code bufferDeviceAddressMultiDevice} &ndash; indicates that the implementation supports the {@code bufferDeviceAddress} , {@code rayTracingPipeline} and {@code rayQuery} features for logical devices created with multiple physical devices. If this feature is not supported, buffer and acceleration structure addresses <b>must</b> not be queried on a logical device created with more than one physical device.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

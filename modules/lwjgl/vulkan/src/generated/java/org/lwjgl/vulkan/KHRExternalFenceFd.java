@@ -16,6 +16,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * An application using external memory may wish to synchronize access to that memory using fences. This extension enables an application to export fence payload to and import fence payload from POSIX file descriptors.
  * 
+ * <h5>VK_KHR_external_fence_fd</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_external_fence_fd}</dd>
@@ -34,6 +36,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd><ul>
  * <li>Jesse Hall <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_external_fence_fd:%20&amp;body=@critsec%20">critsec</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-05-08</dd>
  * <dt><b>IP Status</b></dt>

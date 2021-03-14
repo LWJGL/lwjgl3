@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code dataSize} &ndash; the number of bytes of inline uniform block data pointed to by {@code pData}.</li>
  * <li>{@code pData} &ndash; a pointer to {@code dataSize} number of bytes of data to write to the inline uniform block.</li>
  * </ul>

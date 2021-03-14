@@ -105,6 +105,8 @@ import static org.lwjgl.system.JNI.*;
  *     // End the house annotation started above
  *     pfnCmdDebugMarkerEndEXT(commandBuffer);</code></pre>
  * 
+ * <h5>VK_EXT_debug_marker</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_debug_marker}</dd>
@@ -123,10 +125,19 @@ import static org.lwjgl.system.JNI.*;
  * <dd><ul>
  * <li><em>Promoted</em> to {@link EXTDebugUtils VK_EXT_debug_utils} extension</li>
  * </ul></dd>
+ * <dt><b>Special Use</b></dt>
+ * <dd><ul>
+ * <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#extendingvulkan-compatibility-specialuse">Debugging tools</a></li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Baldur Karlsson <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_debug_marker:%20&amp;body=@baldurk%20">baldurk</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-01-31</dd>
  * <dt><b>IP Status</b></dt>
@@ -202,7 +213,7 @@ public class EXTDebugMarker {
      * <h5>Host Synchronization</h5>
      * 
      * <ul>
-     * <li>Host access to {@code pTagInfo.object} <b>must</b> be externally synchronized</li>
+     * <li>Host access to {@code pTagInfo}&#8594;object <b>must</b> be externally synchronized</li>
      * </ul>
      * 
      * <h5>Return Codes</h5>
@@ -265,7 +276,7 @@ public class EXTDebugMarker {
      * <h5>Host Synchronization</h5>
      * 
      * <ul>
-     * <li>Host access to {@code pNameInfo.object} <b>must</b> be externally synchronized</li>
+     * <li>Host access to {@code pNameInfo}&#8594;object <b>must</b> be externally synchronized</li>
      * </ul>
      * 
      * <h5>Return Codes</h5>
@@ -330,6 +341,7 @@ public class EXTDebugMarker {
      * <h5>Host Synchronization</h5>
      * 
      * <ul>
+     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
      * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
      * </ul>
      * 
@@ -372,7 +384,7 @@ public class EXTDebugMarker {
      * 
      * <ul>
      * <li>There <b>must</b> be an outstanding {@link #vkCmdDebugMarkerBeginEXT CmdDebugMarkerBeginEXT} command prior to the {@code vkCmdDebugMarkerEndEXT} on the queue that {@code commandBuffer} is submitted to</li>
-     * <li>If {@code commandBuffer} is a secondary command buffer, there <b>must</b> be an outstanding {@link #vkCmdDebugMarkerBeginEXT CmdDebugMarkerBeginEXT} command recorded to {@code commandBuffer} that has not previously been ended by a call to {@link #vkCmdDebugMarkerEndEXT CmdDebugMarkerEndEXT}.</li>
+     * <li>If {@code commandBuffer} is a secondary command buffer, there <b>must</b> be an outstanding {@link #vkCmdDebugMarkerBeginEXT CmdDebugMarkerBeginEXT} command recorded to {@code commandBuffer} that has not previously been ended by a call to {@link #vkCmdDebugMarkerEndEXT CmdDebugMarkerEndEXT}</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -386,6 +398,7 @@ public class EXTDebugMarker {
      * <h5>Host Synchronization</h5>
      * 
      * <ul>
+     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
      * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
      * </ul>
      * 
@@ -442,6 +455,7 @@ public class EXTDebugMarker {
      * <h5>Host Synchronization</h5>
      * 
      * <ul>
+     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
      * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
      * </ul>
      * 

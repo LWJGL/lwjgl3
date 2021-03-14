@@ -52,6 +52,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * <p>Providing a {@code NULL} {@link VkInstanceCreateInfo}{@code ::pApplicationInfo} or providing an {@code apiVersion} of 0 is equivalent to providing an {@code apiVersion} of {@code VK_MAKE_VERSION(1,0,0)}.</p>
  * </div>
  * 
+ * <h5>Valid Usage</h5>
+ * 
+ * <ul>
+ * <li>If {@code apiVersion} is not 0, then it <b>must</b> be greater or equal to {@link VK10#VK_API_VERSION_1_0 API_VERSION_1_0}</li>
+ * </ul>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
@@ -69,7 +75,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code pApplicationName} &ndash; {@code NULL} or is a pointer to a null-terminated UTF-8 string containing the name of the application.</li>
  * <li>{@code applicationVersion} &ndash; an unsigned integer variable containing the developer-supplied version number of the application.</li>
  * <li>{@code pEngineName} &ndash; {@code NULL} or is a pointer to a null-terminated UTF-8 string containing the name of the engine (if any) used to create the application.</li>

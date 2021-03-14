@@ -23,7 +23,9 @@ import org.lwjgl.system.windows.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If this structure is not present, or if {@code pAttributes} is set to {@code NULL}, default security descriptor values will be used, and child processes created by the application will not inherit the handle, as described in the MSDN documentation for "{@code Synchronization Object Security and Access Rights}"<sup>1</sup>. Further, if the structure is not present, the access rights used depend on the handle type.</p>
+ * <p>If {@link VkExportMemoryAllocateInfo} is not present in the same {@code pNext} chain, this structure is ignored.</p>
+ * 
+ * <p>If {@link VkExportMemoryAllocateInfo} is present in the {@code pNext} chain of {@link VkMemoryAllocateInfo} with a Windows {@code handleType}, but either {@link VkExportMemoryWin32HandleInfoKHR} is not present in the {@code pNext} chain, or if it is but {@code pAttributes} is set to {@code NULL}, default security descriptor values will be used, and child processes created by the application will not inherit the handle, as described in the MSDN documentation for "{@code Synchronization Object Security and Access Rights}"<sup>1</sup>. Further, if the structure is not present, the access rights used depend on the handle type.</p>
  * 
  * <p>For handles of the following types:</p>
  * 
@@ -47,7 +49,7 @@ import org.lwjgl.system.windows.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If {@link VkExportMemoryAllocateInfo}{@code ::handleTypes} does not include {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT}, {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT}, {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT}, or {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT}, a {@link VkExportMemoryWin32HandleInfoKHR} structure <b>must</b> not be included in the {@code pNext} chain of {@link VkMemoryAllocateInfo}.</li>
+ * <li>If {@link VkExportMemoryAllocateInfo}{@code ::handleTypes} does not include {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT}, {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT}, {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT}, or {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT}, a {@link VkExportMemoryWin32HandleInfoKHR} structure <b>must</b> not be included in the {@code pNext} chain of {@link VkMemoryAllocateInfo}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -61,10 +63,10 @@ import org.lwjgl.system.windows.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code pAttributes} &ndash; a pointer to a Windows {@code SECURITY_ATTRIBUTES} structure specifying security attributes of the handle.</li>
  * <li>{@code dwAccess} &ndash; a {@code DWORD} specifying access rights of the handle.</li>
- * <li>{@code name} &ndash; a null-terminated UTF-16 string to associate with the underlying resource referenced by NT handles exported from the created memory.</li>
+ * <li>{@code name} &ndash; a null-terminated UTF-16 string to associate with the payload referenced by NT handles exported from the created memory.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

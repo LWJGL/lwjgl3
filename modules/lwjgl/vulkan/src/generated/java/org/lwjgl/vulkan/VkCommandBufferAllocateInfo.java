@@ -18,12 +18,6 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying the allocation parameters for command buffer object.
  * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code commandBufferCount} <b>must</b> be greater than 0</li>
- * </ul>
- * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
@@ -41,7 +35,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code commandPool} &ndash; the command pool from which the command buffers are allocated.</li>
  * <li>{@code level} &ndash; a {@code VkCommandBufferLevel} value specifying the command buffer level.</li>
  * <li>{@code commandBufferCount} &ndash; the number of command buffers to allocate from the pool.</li>

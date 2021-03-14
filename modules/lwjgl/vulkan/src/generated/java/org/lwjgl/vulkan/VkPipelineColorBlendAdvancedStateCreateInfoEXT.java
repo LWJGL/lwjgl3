@@ -41,7 +41,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code srcPremultiplied} &ndash; specifies whether the source color of the blend operation is treated as premultiplied.</li>
  * <li>{@code dstPremultiplied} &ndash; specifies whether the destination color of the blend operation is treated as premultiplied.</li>
  * <li>{@code blendOverlap} &ndash; a {@code VkBlendOverlapEXT} value specifying how the source and destination sample&#8217;s coverage is correlated.</li>

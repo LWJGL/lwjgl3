@@ -28,13 +28,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <p>One common scenario for an implementation to skip per-stage feedback is when {@link EXTPipelineCreationFeedback#VK_PIPELINE_CREATION_FEEDBACK_APPLICATION_PIPELINE_CACHE_HIT_BIT_EXT PIPELINE_CREATION_FEEDBACK_APPLICATION_PIPELINE_CACHE_HIT_BIT_EXT} is set in {@code pPipelineCreationFeedback}.</p>
  * </div>
  * 
- * <p>When chained to {@link VkRayTracingPipelineCreateInfoNV} or {@link VkGraphicsPipelineCreateInfo}, the {@code i} element of {@code pPipelineStageCreationFeedbacks} corresponds to the {@code i} element of {@link VkRayTracingPipelineCreateInfoNV}{@code ::pStages} or {@link VkGraphicsPipelineCreateInfo}{@code ::pStages}. When chained to {@link VkComputePipelineCreateInfo}, the first element of {@code pPipelineStageCreationFeedbacks} corresponds to {@link VkComputePipelineCreateInfo}{@code ::stage}.</p>
+ * <p>When chained to {@link VkRayTracingPipelineCreateInfoKHR}, {@link VkRayTracingPipelineCreateInfoNV}, or {@link VkGraphicsPipelineCreateInfo}, the {@code i} element of {@code pPipelineStageCreationFeedbacks} corresponds to the {@code i} element of {@link VkRayTracingPipelineCreateInfoKHR}{@code ::pStages}, {@link VkRayTracingPipelineCreateInfoNV}{@code ::pStages}, or {@link VkGraphicsPipelineCreateInfo}{@code ::pStages}. When chained to {@link VkComputePipelineCreateInfo}, the first element of {@code pPipelineStageCreationFeedbacks} corresponds to {@link VkComputePipelineCreateInfo}{@code ::stage}.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
  * <li>When chained to {@link VkGraphicsPipelineCreateInfo}, {@link VkPipelineCreationFeedbackEXT}{@code ::pipelineStageCreationFeedbackCount} <b>must</b> equal {@link VkGraphicsPipelineCreateInfo}{@code ::stageCount}</li>
  * <li>When chained to {@link VkComputePipelineCreateInfo}, {@link VkPipelineCreationFeedbackEXT}{@code ::pipelineStageCreationFeedbackCount} <b>must</b> equal 1</li>
+ * <li>When chained to {@link VkRayTracingPipelineCreateInfoKHR}, {@link VkPipelineCreationFeedbackEXT}{@code ::pipelineStageCreationFeedbackCount} <b>must</b> equal {@link VkRayTracingPipelineCreateInfoKHR}{@code ::stageCount}</li>
  * <li>When chained to {@link VkRayTracingPipelineCreateInfoNV}, {@link VkPipelineCreationFeedbackEXT}{@code ::pipelineStageCreationFeedbackCount} <b>must</b> equal {@link VkRayTracingPipelineCreateInfoNV}{@code ::stageCount}</li>
  * </ul>
  * 
@@ -49,13 +50,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkComputePipelineCreateInfo}, {@link VkGraphicsPipelineCreateInfo}, {@link VkPipelineCreationFeedbackEXT}, {@link VkRayTracingPipelineCreateInfoNV}</p>
+ * <p>{@link VkComputePipelineCreateInfo}, {@link VkGraphicsPipelineCreateInfo}, {@link VkPipelineCreationFeedbackEXT}, {@link VkRayTracingPipelineCreateInfoKHR}, {@link VkRayTracingPipelineCreateInfoNV}</p>
  * 
  * <h3>Member documentation</h3>
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code pPipelineCreationFeedback} &ndash; a pointer to a {@link VkPipelineCreationFeedbackEXT} structure.</li>
  * <li>{@code pipelineStageCreationFeedbackCount} &ndash; the number of elements in {@code pPipelineStageCreationFeedbacks}.</li>
  * <li>{@code pPipelineStageCreationFeedbacks} &ndash; a pointer to an array of {@code pipelineStageCreationFeedbackCount} {@link VkPipelineCreationFeedbackEXT} structures.</li>

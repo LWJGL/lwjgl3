@@ -47,6 +47,8 @@ package org.lwjgl.vulkan;
  *     fragColor = fragOne;
  * }</code></pre>
  * 
+ * <h5>VK_AMD_shader_fragment_mask</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_AMD_shader_fragment_mask}</dd>
@@ -64,13 +66,18 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Aaron Hagan <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_shader_fragment_mask:%20&amp;body=@AaronHaganAMD%20">AaronHaganAMD</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-08-16</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
- * <dt><b>Dependencies</b></dt>
+ * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>Requires the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/AMD/SPV_AMD_shader_fragment_mask.html">{@code SPV_AMD_shader_fragment_mask}</a> SPIR-V extension.</li>
+ * <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/AMD/SPV_AMD_shader_fragment_mask.html">{@code SPV_AMD_shader_fragment_mask}</a></li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

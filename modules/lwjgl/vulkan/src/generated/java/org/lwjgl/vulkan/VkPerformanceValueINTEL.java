@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code type} <b>must</b> be a valid {@code VkPerformanceValueTypeINTEL} value</li>
- * <li>{@code data} <b>must</b> be a valid {@link VkPerformanceValueDataINTEL} union</li>
+ * <li>If {@code type} is {@link INTELPerformanceQuery#VK_PERFORMANCE_VALUE_TYPE_STRING_INTEL PERFORMANCE_VALUE_TYPE_STRING_INTEL}, the {@code valueString} member of {@code data} <b>must</b> be a null-terminated UTF-8 string</li>
  * </ul>
  * 
  * <h5>See Also</h5>

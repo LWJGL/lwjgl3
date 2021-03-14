@@ -24,8 +24,8 @@ import org.lwjgl.system.linux.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code dpy} <b>must</b> point to a valid Xlib {@code Display}.</li>
- * <li>{@code window} <b>must</b> be a valid Xlib {@code Window}.</li>
+ * <li>{@code dpy} <b>must</b> point to a valid Xlib {@code Display}</li>
+ * <li>{@code window} <b>must</b> be a valid Xlib {@code Window}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -44,7 +44,7 @@ import org.lwjgl.system.linux.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code flags} &ndash; reserved for future use.</li>
  * <li>{@code dpy} &ndash; a pointer to an Xlib {@code Display} connection to the X server.</li>
  * <li>{@code window} &ndash; an Xlib {@code Window} to associate the surface with.</li>

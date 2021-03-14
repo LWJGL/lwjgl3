@@ -10,6 +10,8 @@ package org.lwjgl.vulkan;
  * 
  * <p>Device coherent and uncached memory are expected to have lower performance for general access than non-device coherent memory, but can be useful in certain scenarios; particularly so for debugging.</p>
  * 
+ * <h5>VK_AMD_device_coherent_memory</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_AMD_device_coherent_memory}</dd>
@@ -27,6 +29,11 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_device_coherent_memory:%20&amp;body=@tobski%20">tobski</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2019-02-04</dd>
  * <dt><b>Contributors</b></dt>

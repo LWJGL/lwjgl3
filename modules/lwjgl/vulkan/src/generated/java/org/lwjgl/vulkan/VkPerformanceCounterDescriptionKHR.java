@@ -35,7 +35,7 @@ import static org.lwjgl.vulkan.VK10.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code flags} &ndash; a bitmask of {@code VkPerformanceCounterDescriptionFlagBitsKHR} indicating the usage behavior for the counter.</li>
  * <li>{@code name[VK_MAX_DESCRIPTION_SIZE]} &ndash; an array of size {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE}, containing a null-terminated UTF-8 string specifying the name of the counter.</li>
  * <li>{@code category[VK_MAX_DESCRIPTION_SIZE]} &ndash; an array of size {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE}, containing a null-terminated UTF-8 string specifying the category of the counter.</li>

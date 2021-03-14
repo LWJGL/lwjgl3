@@ -33,12 +33,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code offset} <b>must</b> be less than the size of {@code buffer}</li>
  * <li>If {@code range} is not equal to {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, {@code range} <b>must</b> be greater than 0</li>
  * <li>If {@code range} is not equal to {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, {@code range} <b>must</b> be less than or equal to the size of {@code buffer} minus {@code offset}</li>
+ * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-nullDescriptor">nullDescriptor</a> feature is not enabled, {@code buffer} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
+ * <li>If {@code buffer} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code offset} <b>must</b> be zero and {@code range} <b>must</b> be {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
- * <li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
+ * <li>If {@code buffer} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -48,7 +50,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code buffer} &ndash; the buffer resource.</li>
+ * <li>{@code buffer} &ndash; {@link VK10#VK_NULL_HANDLE NULL_HANDLE} or the buffer resource.</li>
  * <li>{@code offset} &ndash; the offset in bytes from the start of {@code buffer}. Access to buffer memory via this descriptor uses addressing that is relative to this starting offset.</li>
  * <li>{@code range} &ndash; the size in bytes that is used for this descriptor update, or {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE} to use the range from {@code offset} to the end of the buffer.</li>
  * </ul>

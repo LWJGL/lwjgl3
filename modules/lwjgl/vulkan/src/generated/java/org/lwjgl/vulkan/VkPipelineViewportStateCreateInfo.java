@@ -21,15 +21,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-multiViewport">multiple viewports</a> feature is not enabled, {@code viewportCount} <b>must</b> be 1</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-multiViewport">multiple viewports</a> feature is not enabled, {@code scissorCount} <b>must</b> be 1</li>
- * <li>{@code viewportCount} <b>must</b> be between 1 and {@link VkPhysicalDeviceLimits}{@code ::maxViewports}, inclusive</li>
- * <li>{@code scissorCount} <b>must</b> be between 1 and {@link VkPhysicalDeviceLimits}{@code ::maxViewports}, inclusive</li>
- * <li>{@code scissorCount} and {@code viewportCount} <b>must</b> be identical</li>
+ * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-multiViewport">multiple viewports</a> feature is not enabled, {@code viewportCount} <b>must</b> not be greater than 1</li>
+ * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-multiViewport">multiple viewports</a> feature is not enabled, {@code scissorCount} <b>must</b> not be greater than 1</li>
+ * <li>{@code viewportCount} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxViewports}</li>
+ * <li>{@code scissorCount} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxViewports}</li>
  * <li>The {@code x} and {@code y} members of {@code offset} member of any element of {@code pScissors} <b>must</b> be greater than or equal to 0</li>
  * <li>Evaluation of <code>(offset.x + extent.width)</code> <b>must</b> not cause a signed integer addition overflow for any element of {@code pScissors}</li>
  * <li>Evaluation of <code>(offset.y + extent.height)</code> <b>must</b> not cause a signed integer addition overflow for any element of {@code pScissors}</li>
- * <li>If the {@code viewportWScalingEnable} member of a {@link VkPipelineViewportWScalingStateCreateInfoNV} structure included in the {@code pNext} chain is {@link VK10#VK_TRUE TRUE}, the {@code viewportCount} member of the {@link VkPipelineViewportWScalingStateCreateInfoNV} structure <b>must</b> be equal to {@code viewportCount}</li>
+ * <li>If the graphics pipeline is being created without {@link EXTExtendedDynamicState#VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT} and {@link EXTExtendedDynamicState#VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT} set then {@code scissorCount} and {@code viewportCount} <b>must</b> be identical</li>
+ * <li>If the graphics pipeline is being created with {@link EXTExtendedDynamicState#VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT} set then {@code viewportCount} <b>must</b> be 0, otherwise it <b>must</b> be greater than 0</li>
+ * <li>If the graphics pipeline is being created with {@link EXTExtendedDynamicState#VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT} set then {@code scissorCount} <b>must</b> be 0, otherwise it <b>must</b> be greater than 0</li>
+ * <li>If the {@code viewportWScalingEnable} member of a {@link VkPipelineViewportWScalingStateCreateInfoNV} structure included in the {@code pNext} chain is {@link VK10#VK_TRUE TRUE}, the {@code viewportCount} member of the {@link VkPipelineViewportWScalingStateCreateInfoNV} structure <b>must</b> be greater than or equal to {@link VkPipelineViewportStateCreateInfo}{@code ::viewportCount}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -37,10 +39,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO}</li>
  * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkPipelineViewportCoarseSampleOrderStateCreateInfoNV}, {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV}, {@link VkPipelineViewportShadingRateImageStateCreateInfoNV}, {@link VkPipelineViewportSwizzleStateCreateInfoNV}, or {@link VkPipelineViewportWScalingStateCreateInfoNV}</li>
- * <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be 0</li>
- * <li>{@code viewportCount} <b>must</b> be greater than 0</li>
- * <li>{@code scissorCount} <b>must</b> be greater than 0</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -51,7 +51,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code flags} &ndash; reserved for future use.</li>
  * <li>{@code viewportCount} &ndash; the number of viewports used by the pipeline.</li>
  * <li>{@code pViewports} &ndash; a pointer to an array of {@link VkViewport} structures, defining the viewport transforms. If the viewport state is dynamic, this member is ignored.</li>

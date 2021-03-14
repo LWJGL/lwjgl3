@@ -45,7 +45,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code format} &ndash; the image format.</li>
  * <li>{@code type} &ndash; the dimensionality of image.</li>
  * <li>{@code samples} &ndash; the number of samples per texel as defined in {@code VkSampleCountFlagBits}.</li>

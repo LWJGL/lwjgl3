@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>If {@code aspectMask} contains {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT}, it <b>must</b> not contain either of {@link VK10#VK_IMAGE_ASPECT_DEPTH_BIT IMAGE_ASPECT_DEPTH_BIT} or {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT}</li>
  * <li>{@code aspectMask} <b>must</b> not contain {@link VK10#VK_IMAGE_ASPECT_METADATA_BIT IMAGE_ASPECT_METADATA_BIT}</li>
- * <li>{@code aspectMask} <b>must</b> not include {@code VK_IMAGE_ASPECT_MEMORY_PLANE_i_BIT_EXT} for any index {@code i}.</li>
+ * <li>{@code aspectMask} <b>must</b> not include {@code VK_IMAGE_ASPECT_MEMORY_PLANE_i_BIT_EXT} for any index {@code i}</li>
  * <li>{@code layerCount} <b>must</b> be greater than 0</li>
  * </ul>
  * 
@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkBufferImageCopy}, {@link VkImageBlit}, {@link VkImageCopy}, {@link VkImageResolve}</p>
+ * <p>{@link VkBufferImageCopy}, {@link VkBufferImageCopy2KHR}, {@link VkImageBlit}, {@link VkImageBlit2KHR}, {@link VkImageCopy}, {@link VkImageCopy2KHR}, {@link VkImageResolve}, {@link VkImageResolve2KHR}</p>
  * 
  * <h3>Member documentation</h3>
  * 

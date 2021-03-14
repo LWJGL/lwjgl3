@@ -20,12 +20,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If this structure is not present, the default coverage reduction mode is inferred as follows:</p>
+ * <p>If this structure is not present, or if the extension is not enabled, the default coverage reduction mode is inferred as follows:</p>
  * 
  * <ul>
- * <li>If the {@code VK_NV_framebuffer_mixed_samples} extension is enabled, then it is as if the {@code coverageReductionMode} is {@link NVCoverageReductionMode#VK_COVERAGE_REDUCTION_MODE_MERGE_NV COVERAGE_REDUCTION_MODE_MERGE_NV}.</li>
- * <li>If the {@code VK_AMD_mixed_attachment_samples} extension is enabled, then it is as if the {@code coverageReductionMode} is {@link NVCoverageReductionMode#VK_COVERAGE_REDUCTION_MODE_TRUNCATE_NV COVERAGE_REDUCTION_MODE_TRUNCATE_NV}.</li>
- * <li>If both {@code VK_NV_framebuffer_mixed_samples} and {@code VK_AMD_mixed_attachment_samples} are enabled, then the default coverage reduction mode is implementation-dependent.</li>
+ * <li>If the {@code VK_NV_framebuffer_mixed_samples.html[VK_NV_framebuffer_mixed_samples]} extension is enabled, then it is as if the {@code coverageReductionMode} is {@link NVCoverageReductionMode#VK_COVERAGE_REDUCTION_MODE_MERGE_NV COVERAGE_REDUCTION_MODE_MERGE_NV}.</li>
+ * <li>If the {@code VK_AMD_mixed_attachment_samples.html[VK_AMD_mixed_attachment_samples]} extension is enabled, then it is as if the {@code coverageReductionMode} is {@link NVCoverageReductionMode#VK_COVERAGE_REDUCTION_MODE_TRUNCATE_NV COVERAGE_REDUCTION_MODE_TRUNCATE_NV}.</li>
+ * <li>If both {@code VK_NV_framebuffer_mixed_samples.html[VK_NV_framebuffer_mixed_samples]} and {@code VK_AMD_mixed_attachment_samples.html[VK_AMD_mixed_attachment_samples]} are enabled, then the default coverage reduction mode is implementation-dependent.</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -40,9 +40,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code flags} &ndash; reserved for future use.</li>
- * <li>{@code coverageReductionMode} &ndash; a {@code VkCoverageReductionModeNV} value controlling how the <em>color sample mask</em> is generated from the coverage mask.</li>
+ * <li>{@code coverageReductionMode} &ndash; a {@code VkCoverageReductionModeNV} value controlling how color sample coverage is generated from pixel coverage.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

@@ -71,8 +71,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code flags} &ndash; 0 and reserved for future use.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
+ * <li>{@code flags} &ndash; 0 and is reserved for future use.</li>
  * <li>{@code messageSeverity} &ndash; a bitmask of {@code VkDebugUtilsMessageSeverityFlagBitsEXT} specifying which severity of event(s) will cause this callback to be called.</li>
  * <li>{@code messageType} &ndash; a bitmask of {@code VkDebugUtilsMessageTypeFlagBitsEXT} specifying which type of event(s) will cause this callback to be called.</li>
  * <li>{@code pfnUserCallback} &ndash; the application callback function to call.</li>

@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * This extension provides new entry points to query device features, device properties, and format properties in a way that can be easily extended by other extensions, without introducing any further entry points. The Vulkan 1.0 feature/limit/formatproperty structures do not include {@code sType}/{@code pNext} members. This extension wraps them in new structures with {@code sType}/{@code pNext} members, so an application can query a chain of feature/limit/formatproperty structures by constructing the chain and letting the implementation fill them in. A new command is added for each {@code vkGetPhysicalDevice*} command in core Vulkan 1.0. The new feature structure (and a chain of extension structures) can also be passed in to device creation to enable features.
+ * This extension provides new entry points to query device features, device properties, and format properties in a way that can be easily extended by other extensions, without introducing any further entry points. The Vulkan 1.0 feature/limit/formatproperty structures do not include {@code sType}/{@code pNext} members. This extension wraps them in new structures with {@code sType}/{@code pNext} members, so an application can query a chain of feature/limit/formatproperty structures by constructing the chain and letting the implementation fill them in. A new command is added for each {@code vkGetPhysicalDevice*} command in core Vulkan 1.0. The new feature structure (and a {@code pNext} chain of extending structures) can also be passed in to device creation to enable features.
  * 
  * <p>This extension also allows applications to use the physical-device components of device extensions before {@link VK10#vkCreateDevice CreateDevice} is called.</p>
  * 
@@ -72,6 +72,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     VkDevice device;
  *     vkCreateDevice(physicalDevice, &amp;deviceCreateInfo, NULL, &amp;device);</code></pre>
  * 
+ * <h5>VK_KHR_get_physical_device_properties2</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_get_physical_device_properties2}</dd>
@@ -93,6 +95,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd><ul>
  * <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_get_physical_device_properties2:%20&amp;body=@jeffbolznv%20">jeffbolznv</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-09-05</dd>
  * <dt><b>IP Status</b></dt>

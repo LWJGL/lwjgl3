@@ -151,6 +151,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     // Get the external memory opaque FD handle
  *     vkGetMemoryWin32HandleNV(device, memory, &amp;memoryHnd);</code></pre>
  * 
+ * <h5>VK_NV_external_memory_win32</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_NV_external_memory_win32}</dd>
@@ -173,6 +175,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd><ul>
  * <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_external_memory_win32:%20&amp;body=@cubanismo%20">cubanismo</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2016-08-19</dd>
  * <dt><b>IP Status</b></dt>

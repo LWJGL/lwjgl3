@@ -36,7 +36,7 @@ import static org.lwjgl.vulkan.VK10.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code unit} &ndash; a {@code VkPerformanceCounterUnitKHR} specifying the unit that the counter data will record.</li>
  * <li>{@code scope} &ndash; a {@code VkPerformanceCounterScopeKHR} specifying the scope that the counter belongs to.</li>
  * <li>{@code storage} &ndash; a {@code VkPerformanceCounterStorageKHR} specifying the storage type that the counter&#8217;s data uses.</li>

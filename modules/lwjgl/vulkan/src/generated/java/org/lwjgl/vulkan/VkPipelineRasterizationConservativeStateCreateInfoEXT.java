@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code flags} &ndash; reserved for future use.</li>
  * <li>{@code conservativeRasterizationMode} &ndash; the conservative rasterization mode to use.</li>
  * <li>{@code extraPrimitiveOverestimationSize} &ndash; the extra size in pixels to increase the generating primitive during conservative rasterization at each of its edges in {@code X} and {@code Y} equally in screen space beyond the base overestimation specified in {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT}{@code ::primitiveOverestimationSize}.</li>

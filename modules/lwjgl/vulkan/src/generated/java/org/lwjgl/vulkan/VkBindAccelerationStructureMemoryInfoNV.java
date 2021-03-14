@@ -48,7 +48,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code accelerationStructure} &ndash; the acceleration structure to be attached to memory.</li>
  * <li>{@code memory} &ndash; a {@code VkDeviceMemory} object describing the device memory to attach.</li>
  * <li>{@code memoryOffset} &ndash; the start offset of the region of memory that is to be bound to the acceleration structure. The number of bytes returned in the {@link VkMemoryRequirements}{@code ::size} member in {@code memory}, starting from {@code memoryOffset} bytes, will be bound to the specified acceleration structure.</li>

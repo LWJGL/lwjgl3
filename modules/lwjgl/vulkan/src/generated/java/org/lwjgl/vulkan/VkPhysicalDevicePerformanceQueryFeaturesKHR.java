@@ -24,15 +24,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link KHRPerformanceQuery#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR}</li>
  * </ul>
  * 
- * <p>To query supported performance counter query pool features, call {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2} with a {@link VkPhysicalDevicePerformanceQueryFeaturesKHR} structure included in the {@code pNext} chain of its {@code pFeatures} parameter. The {@link VkPhysicalDevicePerformanceQueryFeaturesKHR} structure <b>can</b> also be included in the {@code pNext} chain of a {@link VkDeviceCreateInfo} structure, in which case it controls which additional features are enabled in the device.</p>
- * 
  * <h3>Member documentation</h3>
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code performanceCounterQueryPools} &ndash; {@link VK10#VK_TRUE TRUE} if the physical device supports performance counter query pools.</li>
- * <li>{@code performanceCounterMultipleQueryPools} &ndash; {@link VK10#VK_TRUE TRUE}` if the physical device supports using multiple performance query pools in a primary command buffer and secondary command buffers executed within it.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
+ * <li>{@code performanceCounterQueryPools} &ndash; indicates whether the implementation supports performance counter query pools.</li>
+ * <li>{@code performanceCounterMultipleQueryPools} &ndash; indicates whether the implementation supports using multiple performance query pools in a primary command buffer and secondary command buffers executed within it.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

@@ -32,14 +32,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>The value of {@code stencilResolveMode} <b>must</b> be one of the bits set in {@link VkPhysicalDeviceDepthStencilResolveProperties}{@code ::supportedStencilResolveModes} or {@link VK12#VK_RESOLVE_MODE_NONE RESOLVE_MODE_NONE}</li>
  * <li>If the {@code VkFormat} of {@code pDepthStencilResolveAttachment} has both depth and stencil components, {@link VkPhysicalDeviceDepthStencilResolveProperties}{@code ::independentResolve} is {@link VK10#VK_FALSE FALSE}, and {@link VkPhysicalDeviceDepthStencilResolveProperties}{@code ::independentResolveNone} is {@link VK10#VK_FALSE FALSE}, then the values of {@code depthResolveMode} and {@code stencilResolveMode} <b>must</b> be identical</li>
  * <li>If the {@code VkFormat} of {@code pDepthStencilResolveAttachment} has both depth and stencil components, {@link VkPhysicalDeviceDepthStencilResolveProperties}{@code ::independentResolve} is {@link VK10#VK_FALSE FALSE} and {@link VkPhysicalDeviceDepthStencilResolveProperties}{@code ::independentResolveNone} is {@link VK10#VK_TRUE TRUE}, then the values of {@code depthResolveMode} and {@code stencilResolveMode} <b>must</b> be identical or one of them <b>must</b> be {@link VK12#VK_RESOLVE_MODE_NONE RESOLVE_MODE_NONE}</li>
+ * <li>If the {@code VkFormat} of {@code pDepthStencilResolveAttachment} has a depth component, {@code depthResolveMode} <b>must</b> be a valid {@code VkResolveModeFlagBits} value</li>
+ * <li>If the {@code VkFormat} of {@code pDepthStencilResolveAttachment} has a stencil component, {@code stencilResolveMode} <b>must</b> be a valid {@code VkResolveModeFlagBits} value</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE}</li>
- * <li>{@code depthResolveMode} <b>must</b> be a valid {@code VkResolveModeFlagBits} value</li>
- * <li>{@code stencilResolveMode} <b>must</b> be a valid {@code VkResolveModeFlagBits} value</li>
  * <li>If {@code pDepthStencilResolveAttachment} is not {@code NULL}, {@code pDepthStencilResolveAttachment} <b>must</b> be a valid pointer to a valid {@link VkAttachmentReference2} structure</li>
  * </ul>
  * 
@@ -51,7 +51,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code depthResolveMode} &ndash; a bitmask of {@code VkResolveModeFlagBits} describing the depth resolve mode.</li>
  * <li>{@code stencilResolveMode} &ndash; a bitmask of {@code VkResolveModeFlagBits} describing the stencil resolve mode.</li>
  * <li>{@code pDepthStencilResolveAttachment} &ndash; an optional {@link VkAttachmentReference} structure defining the depth/stencil resolve attachment for this subpass and its layout.</li>

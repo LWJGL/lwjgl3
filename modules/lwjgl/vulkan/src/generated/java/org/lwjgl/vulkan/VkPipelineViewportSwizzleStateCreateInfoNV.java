@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code viewportCount} <b>must</b> match the {@code viewportCount} set in {@link VkPipelineViewportStateCreateInfo}</li>
+ * <li>{@code viewportCount} <b>must</b> be greater than or equal to the {@code viewportCount} set in {@link VkPipelineViewportStateCreateInfo}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -42,7 +42,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code flags} &ndash; reserved for future use.</li>
  * <li>{@code viewportCount} &ndash; the number of viewport swizzles used by the pipeline.</li>
  * <li>{@code pViewportSwizzles} &ndash; a pointer to an array of {@link VkViewportSwizzleNV} structures, defining the viewport swizzles.</li>

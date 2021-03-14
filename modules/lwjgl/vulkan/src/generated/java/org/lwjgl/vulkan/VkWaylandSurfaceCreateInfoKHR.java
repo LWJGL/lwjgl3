@@ -24,8 +24,8 @@ import org.lwjgl.system.linux.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code display} <b>must</b> point to a valid Wayland {@code wl_display}.</li>
- * <li>{@code surface} <b>must</b> point to a valid Wayland {@code wl_surface}.</li>
+ * <li>{@code display} <b>must</b> point to a valid Wayland {@code wl_display}</li>
+ * <li>{@code surface} <b>must</b> point to a valid Wayland {@code wl_surface}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -44,7 +44,7 @@ import org.lwjgl.system.linux.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code flags} &ndash; reserved for future use.</li>
  * <li>{@code display} &ndash; {@code display} and {@code surface} are pointers to the Wayland {@code wl_display} and {@code wl_surface} to associate the surface with.</li>
  * <li>{@code surface} &ndash; see {@code display}</li>

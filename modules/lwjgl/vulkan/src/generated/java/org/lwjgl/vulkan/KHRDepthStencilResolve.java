@@ -8,9 +8,15 @@ package org.lwjgl.vulkan;
 /**
  * This extension adds support for automatically resolving multisampled depth/stencil attachments in a subpass in a similar manner as for color attachments.
  * 
+ * <p>Multisampled color attachments can be resolved at the end of a subpass by specifying {@code pResolveAttachments} entries corresponding to the {@code pColorAttachments} array entries. This does not allow for a way to map the resolve attachments to the depth/stencil attachment. The {@link VK10#vkCmdResolveImage CmdResolveImage} command does not allow for depth/stencil images. While there are other ways to resolve the depth/stencil attachment, they can give sub-optimal performance. Extending the {@link VkSubpassDescription2} in this extension allows an application to add a {@code pDepthStencilResolveAttachment}, that is similar to the color {@code pResolveAttachments}, that the {@code pDepthStencilAttachment} can be resolved into.</p>
+ * 
+ * <p>Depth and stencil samples are resolved to a single value based on the resolve mode. The set of possible resolve modes is defined in the {@code VkResolveModeFlagBits} enum. The {@link VK12#VK_RESOLVE_MODE_SAMPLE_ZERO_BIT RESOLVE_MODE_SAMPLE_ZERO_BIT} mode is the only mode that is required of all implementations (that support the extension or support Vulkan 1.2 or higher). Some implementations may also support averaging (the same as color sample resolve) or taking the minimum or maximum sample, which may be more suitable for depth/stencil resolve.</p>
+ * 
  * <h5>Promotion to Vulkan 1.2</h5>
  * 
  * <p>All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.</p>
+ * 
+ * <h5>VK_KHR_depth_stencil_resolve</h5>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -34,13 +40,18 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Jan-Harald Fredriksen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_depth_stencil_resolve:%20&amp;body=@janharald%20">janharald</a></li>
  * </ul></dd>
- * <dt>Last Modified Date</dt>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
+ * <dt><b>Last Modified Date</b></dt>
  * <dd>2018-04-09</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
  * <li>Promoted to Vulkan 1.2 Core</li>
  * </ul></dd>
- * <dt>Contributors</dt>
+ * <dt><b>Contributors</b></dt>
  * <dd><ul>
  * <li>Jan-Harald Fredriksen, Arm</li>
  * <li>Andrew Garrard, Samsung Electronics</li>

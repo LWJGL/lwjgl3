@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code memoryTypeBits} &ndash; a bitmask containing one bit set for every memory type which the specified host pointer <b>can</b> be imported as.</li>
  * </ul>
  * 

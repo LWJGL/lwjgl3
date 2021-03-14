@@ -30,8 +30,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code extent.height} <b>must</b> either be a multiple of the sparse image block height of the image, or else <code>(extent.height offset.y)</code> <b>must</b> equal the height of the image subresource</li>
  * <li>{@code offset.z} <b>must</b> be a multiple of the sparse image block depth ({@link VkSparseImageFormatProperties}{@code ::imageGranularity}.depth) of the image</li>
  * <li>{@code extent.depth} <b>must</b> either be a multiple of the sparse image block depth of the image, or else <code>(extent.depth offset.z)</code> <b>must</b> equal the depth of the image subresource</li>
- * <li>If {@code memory} was created with {@link VkExportMemoryAllocateInfo}{@code ::handleTypes} not equal to 0, at least one handle type it contained <b>must</b> also have been set in {@link VkExternalMemoryImageCreateInfo}{@code ::handleTypes} when the image was created.</li>
- * <li>If {@code memory} was created by a memory import operation, the external handle type of the imported memory <b>must</b> also have been set in {@link VkExternalMemoryImageCreateInfo}{@code ::handleTypes} when {@code image} was created.</li>
+ * <li>If {@code memory} was created with {@link VkExportMemoryAllocateInfo}{@code ::handleTypes} not equal to 0, at least one handle type it contained <b>must</b> also have been set in {@link VkExternalMemoryImageCreateInfo}{@code ::handleTypes} when the image was created</li>
+ * <li>If {@code memory} was created by a memory import operation, the external handle type of the imported memory <b>must</b> also have been set in {@link VkExternalMemoryImageCreateInfo}{@code ::handleTypes} when {@code image} was created</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

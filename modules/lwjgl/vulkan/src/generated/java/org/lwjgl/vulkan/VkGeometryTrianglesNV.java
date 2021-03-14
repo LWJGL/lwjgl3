@@ -28,6 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code vertexOffset} <b>must</b> be less than the size of {@code vertexData}</li>
  * <li>{@code vertexOffset} <b>must</b> be a multiple of the component size of {@code vertexFormat}</li>
  * <li>{@code vertexFormat} <b>must</b> be one of {@link VK10#VK_FORMAT_R32G32B32_SFLOAT FORMAT_R32G32B32_SFLOAT}, {@link VK10#VK_FORMAT_R32G32_SFLOAT FORMAT_R32G32_SFLOAT}, {@link VK10#VK_FORMAT_R16G16B16_SFLOAT FORMAT_R16G16B16_SFLOAT}, {@link VK10#VK_FORMAT_R16G16_SFLOAT FORMAT_R16G16_SFLOAT}, {@link VK10#VK_FORMAT_R16G16_SNORM FORMAT_R16G16_SNORM}, or {@link VK10#VK_FORMAT_R16G16B16_SNORM FORMAT_R16G16B16_SNORM}</li>
+ * <li>{@code vertexStride} <b>must</b> be less than or equal to <code>2<sup>32</sup>-1</code></li>
  * <li>{@code indexOffset} <b>must</b> be less than the size of {@code indexData}</li>
  * <li>{@code indexOffset} <b>must</b> be a multiple of the element size of {@code indexType}</li>
  * <li>{@code indexType} <b>must</b> be {@link VK10#VK_INDEX_TYPE_UINT16 INDEX_TYPE_UINT16}, {@link VK10#VK_INDEX_TYPE_UINT32 INDEX_TYPE_UINT32}, or {@link NVRayTracing#VK_INDEX_TYPE_NONE_NV INDEX_TYPE_NONE_NV}</li>
@@ -59,17 +60,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code vertexData} &ndash; the buffer containing vertex data for this geometry.</li>
  * <li>{@code vertexOffset} &ndash; the offset in bytes within {@code vertexData} containing vertex data for this geometry.</li>
  * <li>{@code vertexCount} &ndash; the number of valid vertices.</li>
  * <li>{@code vertexStride} &ndash; the stride in bytes between each vertex.</li>
- * <li>{@code vertexFormat} &ndash; the format of each vertex element.</li>
+ * <li>{@code vertexFormat} &ndash; a {@code VkFormat} describing the format of each vertex element.</li>
  * <li>{@code indexData} &ndash; the buffer containing index data for this geometry.</li>
  * <li>{@code indexOffset} &ndash; the offset in bytes within {@code indexData} containing index data for this geometry.</li>
  * <li>{@code indexCount} &ndash; the number of indices to include in this geometry.</li>
- * <li>{@code indexType} &ndash; the format of each index.</li>
- * <li>{@code transformData} &ndash; a buffer containing optional reference to an array of 32-bit floats representing a 3x4 row major affine transformation matrix for this geometry.</li>
+ * <li>{@code indexType} &ndash; a {@code VkIndexType} describing the format of each index.</li>
+ * <li>{@code transformData} &ndash; an optional buffer containing an {@link VkTransformMatrixNV} structure defining a transformation to be applied to this geometry.</li>
  * <li>{@code transformOffset} &ndash; the offset in bytes in {@code transformData} of the transform information described above.</li>
  * </ul>
  * 

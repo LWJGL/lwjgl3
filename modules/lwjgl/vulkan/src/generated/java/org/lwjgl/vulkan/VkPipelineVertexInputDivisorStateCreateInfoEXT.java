@@ -35,7 +35,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure</li>
  * <li>{@code vertexBindingDivisorCount} &ndash; the number of elements in the {@code pVertexBindingDivisors} array.</li>
  * <li>{@code pVertexBindingDivisors} &ndash; a pointer to an array of {@link VkVertexInputBindingDivisorDescriptionEXT} structures, which specifies the divisor value for each binding.</li>
  * </ul>

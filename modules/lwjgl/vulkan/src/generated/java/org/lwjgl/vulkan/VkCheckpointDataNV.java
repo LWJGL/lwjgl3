@@ -18,14 +18,16 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * return structure for command buffer checkpoint data.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>The stages at which a checkpoint marker <b>can</b> be executed are implementation-defined and <b>can</b> be queried by calling {@link VK11#vkGetPhysicalDeviceQueueFamilyProperties2 GetPhysicalDeviceQueueFamilyProperties2}.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link NVDeviceDiagnosticCheckpoints#VK_STRUCTURE_TYPE_CHECKPOINT_DATA_NV STRUCTURE_TYPE_CHECKPOINT_DATA_NV}</li>
  * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
  * </ul>
- * 
- * <p>Note that the stages at which a checkpoint marker <b>can</b> be executed are implementation-defined and <b>can</b> be queried by calling {@link VK11#vkGetPhysicalDeviceQueueFamilyProperties2 GetPhysicalDeviceQueueFamilyProperties2}.</p>
  * 
  * <h5>See Also</h5>
  * 
@@ -35,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code stage} &ndash; indicates which pipeline stage the checkpoint marker data refers to.</li>
  * <li>{@code pCheckpointMarker} &ndash; contains the value of the last checkpoint marker executed in the stage that {@code stage} refers to.</li>
  * </ul>

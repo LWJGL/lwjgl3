@@ -30,7 +30,7 @@ import org.lwjgl.system.windows.*;
  * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
  * 
- * <p>It's the responsibility of the application to change the display settings of the targeted Win32 display using the appropriate platform APIs. Such changes <b>may</b> alter the surface capabilities reported for the created surface.</p>
+ * <p>It is the responsibility of the application to change the display settings of the targeted Win32 display using the appropriate platform APIs. Such changes <b>may</b> alter the surface capabilities reported for the created surface.</p>
  * </div>
  * 
  * <h5>Valid Usage</h5>
@@ -49,7 +49,7 @@ import org.lwjgl.system.windows.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code hmonitor} &ndash; the Win32 {@code HMONITOR} handle identifying the display to create the surface with.</li>
  * </ul>
  * 

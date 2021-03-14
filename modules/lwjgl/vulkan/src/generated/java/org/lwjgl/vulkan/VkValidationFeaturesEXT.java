@@ -19,6 +19,13 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Specify validation features to enable or disable for a Vulkan instance.
  * 
+ * <h5>Valid Usage</h5>
+ * 
+ * <ul>
+ * <li>If the {@code pEnabledValidationFeatures} array contains {@link EXTValidationFeatures#VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_RESERVE_BINDING_SLOT_EXT VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_RESERVE_BINDING_SLOT_EXT}, then it <b>must</b> also contain {@link EXTValidationFeatures#VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_EXT VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_EXT}</li>
+ * <li>If the {@code pEnabledValidationFeatures} array contains {@link EXTValidationFeatures#VK_VALIDATION_FEATURE_ENABLE_DEBUG_PRINTF_EXT VALIDATION_FEATURE_ENABLE_DEBUG_PRINTF_EXT}, then it <b>must</b> not contain {@link EXTValidationFeatures#VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_EXT VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_EXT}</li>
+ * </ul>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
@@ -31,7 +38,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code enabledValidationFeatureCount} &ndash; the number of features to enable.</li>
  * <li>{@code pEnabledValidationFeatures} &ndash; a pointer to an array of {@code VkValidationFeatureEnableEXT} values specifying the validation features to be enabled.</li>
  * <li>{@code disabledValidationFeatureCount} &ndash; the number of features to disable.</li>

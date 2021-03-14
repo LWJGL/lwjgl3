@@ -21,16 +21,16 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>When using a custom sample ordering, element <em>i</em> in {@code pSampleLocations} specifies a specific pixel and per-pixel coverage sample number that corresponds to the coverage sample numbered <em>i</em> in the multi-pixel fragment.</p>
+ * <p>When using a custom sample ordering, element <em>j</em> in {@code pSampleLocations} specifies a specific pixel location and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-multisampling-coverage-mask">sample index</a> that corresponds to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-multisampling-coverage-mask">coverage index</a> <em>j</em> in the multi-pixel fragment.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code shadingRate} <b>must</b> be a shading rate that generates fragments with more than one pixel.</li>
- * <li>{@code sampleCount} <b>must</b> correspond to a sample count enumerated in {@code VkSampleCountFlags} whose corresponding bit is set in {@link VkPhysicalDeviceLimits}{@code ::framebufferNoAttachmentsSampleCounts}.</li>
- * <li>{@code sampleLocationCount} <b>must</b> be equal to the product of {@code sampleCount}, the fragment width for {@code shadingRate}, and the fragment height for {@code shadingRate}.</li>
- * <li>{@code sampleLocationCount} <b>must</b> be less than or equal to the value of {@link VkPhysicalDeviceShadingRateImagePropertiesNV}{@code ::shadingRateMaxCoarseSamples}.</li>
- * <li>The array {@code pSampleLocations} <b>must</b> contain exactly one entry for every combination of valid values for {@code pixelX}, {@code pixelY}, and {@code sample} in the structure {@link VkCoarseSampleOrderCustomNV}.</li>
+ * <li>{@code shadingRate} <b>must</b> be a shading rate that generates fragments with more than one pixel</li>
+ * <li>{@code sampleCount} <b>must</b> correspond to a sample count enumerated in {@code VkSampleCountFlags} whose corresponding bit is set in {@link VkPhysicalDeviceLimits}{@code ::framebufferNoAttachmentsSampleCounts}</li>
+ * <li>{@code sampleLocationCount} <b>must</b> be equal to the product of {@code sampleCount}, the fragment width for {@code shadingRate}, and the fragment height for {@code shadingRate}</li>
+ * <li>{@code sampleLocationCount} <b>must</b> be less than or equal to the value of {@link VkPhysicalDeviceShadingRateImagePropertiesNV}{@code ::shadingRateMaxCoarseSamples}</li>
+ * <li>The array {@code pSampleLocations} <b>must</b> contain exactly one entry for every combination of valid values for {@code pixelX}, {@code pixelY}, and {@code sample} in the structure {@link VkCoarseSampleOrderCustomNV}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -51,7 +51,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code shadingRate} &ndash; a shading rate palette entry that identifies the fragment width and height for the combination of fragment area and per-pixel coverage sample count to control.</li>
  * <li>{@code sampleCount} &ndash; identifies the per-pixel coverage sample count for the combination of fragment area and coverage sample count to control.</li>
  * <li>{@code sampleLocationCount} &ndash; specifies the number of sample locations in the custom ordering.</li>
- * <li>{@code pSampleLocations} &ndash; a pointer to an array of {@link VkCoarseSampleOrderCustomNV} structures specifying the location of each sample in the custom ordering.</li>
+ * <li>{@code pSampleLocations} &ndash; a pointer to an array of {@link VkCoarseSampleLocationNV} structures specifying the location of each sample in the custom ordering.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

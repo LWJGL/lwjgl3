@@ -26,6 +26,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>Other vendors <b>may</b> support only a 1-1 mapping between pixels in the presentable images and the display mode. This <b>may</b> be indicated by returning <code>(0,0)</code> for {@code minSrcPosition}, {@code maxSrcPosition}, {@code minDstPosition}, and {@code maxDstPosition}, and (display mode width, display mode height) for {@code minSrcExtent}, {@code maxSrcExtent}, {@code minDstExtent}, and {@code maxDstExtent}.</p>
  * 
+ * <p>The value {@code supportedAlpha} <b>must</b> contain at least one valid {@code VkDisplayPlaneAlphaFlagBitsKHR} bit.</p>
+ * 
  * <p>These values indicate the limits of the implementation's individual fields. Not all combinations of values within the offset and extent ranges returned in {@link VkDisplayPlaneCapabilitiesKHR} are guaranteed to be supported. Presentation requests specifying unsupported combinations <b>may</b> fail.</p>
  * 
  * <h5>See Also</h5>

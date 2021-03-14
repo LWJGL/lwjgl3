@@ -28,9 +28,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code shaderBufferInt64Atomics} &ndash; indicates whether shaders <b>can</b> support 64-bit unsigned and signed integer atomic operations on buffers.</li>
- * <li>{@code shaderSharedInt64Atomics} &ndash; indicates whether shaders <b>can</b> support 64-bit unsigned and signed integer atomic operations on shared memory.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
+ * <li>{@code shaderBufferInt64Atomics} &ndash; indicates whether shaders <b>can</b> perform 64-bit unsigned and signed integer atomic operations on buffers.</li>
+ * <li>{@code shaderSharedInt64Atomics} &ndash; indicates whether shaders <b>can</b> perform 64-bit unsigned and signed integer atomic operations on shared memory.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

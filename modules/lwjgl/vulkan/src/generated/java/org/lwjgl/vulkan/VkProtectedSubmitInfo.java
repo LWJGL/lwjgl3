@@ -21,10 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If the protected memory feature is not enabled, {@code protectedSubmit} <b>must</b> not be {@link VK10#VK_TRUE TRUE}.</li>
- * <li>If {@code protectedSubmit} is {@link VK10#VK_TRUE TRUE}, then each element of the {@code pCommandBuffers} array <b>must</b> be a protected command buffer.</li>
- * <li>If {@code protectedSubmit} is {@link VK10#VK_FALSE FALSE}, then each element of the {@code pCommandBuffers} array <b>must</b> be an unprotected command buffer.</li>
- * <li>If the {@link VkSubmitInfo}{@code ::pNext} chain does not include a {@link VkProtectedSubmitInfo} structure, then each element of the command buffer of the {@code pCommandBuffers} array <b>must</b> be an unprotected command buffer.</li>
+ * <li>If the protected memory feature is not enabled, {@code protectedSubmit} <b>must</b> not be {@link VK10#VK_TRUE TRUE}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

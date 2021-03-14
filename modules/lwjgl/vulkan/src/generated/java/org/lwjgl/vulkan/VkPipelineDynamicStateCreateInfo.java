@@ -36,13 +36,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkGraphicsPipelineCreateInfo}</p>
+ * <p>{@link VkGraphicsPipelineCreateInfo}, {@link VkRayTracingPipelineCreateInfoKHR}</p>
  * 
  * <h3>Member documentation</h3>
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code flags} &ndash; reserved for future use.</li>
  * <li>{@code dynamicStateCount} &ndash; the number of elements in the {@code pDynamicStates} array.</li>
  * <li>{@code pDynamicStates} &ndash; a pointer to an array of {@code VkDynamicState} values specifying which pieces of pipeline state will use the values from dynamic state commands rather than from pipeline state creation info.</li>

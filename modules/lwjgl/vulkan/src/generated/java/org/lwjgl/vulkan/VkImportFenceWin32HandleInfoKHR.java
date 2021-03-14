@@ -38,13 +38,13 @@ import org.lwjgl.system.windows.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code handleType} <b>must</b> be a value included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-fence-handletypes-win32">Handle Types Supported by VkImportFenceWin32HandleInfoKHR</a> table.</li>
- * <li>If {@code handleType} is not {@link VK11#VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT}, {@code name} <b>must</b> be {@code NULL}.</li>
- * <li>If {@code handleType} is not 0 and {@code handle} is {@code NULL}, {@code name} <b>must</b> name a valid synchronization primitive of the type specified by {@code handleType}.</li>
- * <li>If {@code handleType} is not 0 and {@code name} is {@code NULL}, {@code handle} <b>must</b> be a valid handle of the type specified by {@code handleType}.</li>
- * <li>If {@code handle} is not {@code NULL}, {@code name} must be {@code NULL}.</li>
- * <li>If {@code handle} is not {@code NULL}, it <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#external-fence-handle-types-compatibility">external fence handle types compatibility</a>.</li>
- * <li>If {@code name} is not {@code NULL}, it <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#external-fence-handle-types-compatibility">external fence handle types compatibility</a>.</li>
+ * <li>{@code handleType} <b>must</b> be a value included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-fence-handletypes-win32">Handle Types Supported by {@link VkImportFenceWin32HandleInfoKHR}</a> table</li>
+ * <li>If {@code handleType} is not {@link VK11#VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT}, {@code name} <b>must</b> be {@code NULL}</li>
+ * <li>If {@code handle} is {@code NULL}, {@code name} <b>must</b> name a valid synchronization primitive of the type specified by {@code handleType}</li>
+ * <li>If {@code name} is {@code NULL}, {@code handle} <b>must</b> be a valid handle of the type specified by {@code handleType}</li>
+ * <li>If {@code handle} is not {@code NULL}, {@code name} <b>must</b> be {@code NULL}</li>
+ * <li>If {@code handle} is not {@code NULL}, it <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#external-fence-handle-types-compatibility">external fence handle types compatibility</a></li>
+ * <li>If {@code name} is not {@code NULL}, it <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#external-fence-handle-types-compatibility">external fence handle types compatibility</a></li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -54,7 +54,6 @@ import org.lwjgl.system.windows.*;
  * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
  * <li>{@code fence} <b>must</b> be a valid {@code VkFence} handle</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkFenceImportFlagBits} values</li>
- * <li>If {@code handleType} is not 0, {@code handleType} <b>must</b> be a valid {@code VkExternalFenceHandleTypeFlagBits} value</li>
  * </ul>
  * 
  * <h5>Host Synchronization</h5>
@@ -71,7 +70,7 @@ import org.lwjgl.system.windows.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code fence} &ndash; the fence into which the state will be imported.</li>
  * <li>{@code flags} &ndash; a bitmask of {@code VkFenceImportFlagBits} specifying additional parameters for the fence payload import operation.</li>
  * <li>{@code handleType} &ndash; specifies the type of {@code handle}.</li>

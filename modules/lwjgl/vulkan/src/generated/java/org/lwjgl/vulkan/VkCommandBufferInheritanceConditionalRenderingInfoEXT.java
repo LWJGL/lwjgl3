@@ -38,7 +38,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure</li>
  * <li>{@code conditionalRenderingEnable} &ndash; specifies whether the command buffer <b>can</b> be executed while conditional rendering is active in the primary command buffer. If this is {@link VK10#VK_TRUE TRUE}, then this command buffer <b>can</b> be executed whether the primary command buffer has active conditional rendering or not. If this is {@link VK10#VK_FALSE FALSE}, then the primary command buffer <b>must</b> not have conditional rendering active.</li>
  * </ul>
  * 

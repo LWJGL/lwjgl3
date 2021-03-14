@@ -16,6 +16,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * An application using external memory may wish to synchronize access to that memory using fences. This extension enables an application to export fence payload to and import fence payload from Windows handles.
  * 
+ * <h5>VK_KHR_external_fence_win32</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_external_fence_win32}</dd>
@@ -34,6 +36,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd><ul>
  * <li>Jesse Hall <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_external_fence_win32:%20&amp;body=@critsec%20">critsec</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-05-08</dd>
  * <dt><b>IP Status</b></dt>
@@ -105,6 +112,12 @@ public class KHRExternalFenceWin32 {
      * <p>Importing a fence payload from Windows handles does not transfer ownership of the handle to the Vulkan implementation. For handle types defined as NT handles, the application <b>must</b> release ownership using the {@code CloseHandle} system call when the handle is no longer needed.</p>
      * 
      * <p>Applications <b>can</b> import the same fence payload into multiple instances of Vulkan, into the same instance from which it was exported, and multiple times into a given Vulkan instance.</p>
+     * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>{@code fence} <b>must</b> not be associated with any queue command that has not yet completed execution on that queue</li>
+     * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

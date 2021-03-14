@@ -16,23 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters to create a pool of performance queries.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link INTELPerformanceQuery#VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO_INTEL STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO_INTEL}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code performanceCountersSampling} <b>must</b> be a valid {@code VkQueryPoolSamplingModeINTEL} value</li>
- * </ul>
- * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code performanceCountersSampling} &ndash; describe how performance queries should be captured.</li>
- * </ul>
+ * See {@link VkQueryPoolPerformanceQueryCreateInfoINTEL}.
  * 
  * <h3>Layout</h3>
  * 
@@ -43,34 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkQueryPoolSamplingModeINTEL performanceCountersSampling;
  * }</code></pre>
  */
-public class VkQueryPoolCreateInfoINTEL extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        PERFORMANCECOUNTERSSAMPLING;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        PERFORMANCECOUNTERSSAMPLING = layout.offsetof(2);
-    }
+public class VkQueryPoolCreateInfoINTEL extends VkQueryPoolPerformanceQueryCreateInfoINTEL {
 
     /**
      * Creates a {@code VkQueryPoolCreateInfoINTEL} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -79,30 +36,21 @@ public class VkQueryPoolCreateInfoINTEL extends Struct implements NativeResource
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkQueryPoolCreateInfoINTEL(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** Returns the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code performanceCountersSampling} field. */
-    @NativeType("VkQueryPoolSamplingModeINTEL")
-    public int performanceCountersSampling() { return nperformanceCountersSampling(address()); }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkQueryPoolCreateInfoINTEL sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkQueryPoolCreateInfoINTEL pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code performanceCountersSampling} field. */
+    @Override
     public VkQueryPoolCreateInfoINTEL performanceCountersSampling(@NativeType("VkQueryPoolSamplingModeINTEL") int value) { nperformanceCountersSampling(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkQueryPoolCreateInfoINTEL set(
         int sType,
         long pNext,
@@ -270,24 +218,8 @@ public class VkQueryPoolCreateInfoINTEL extends Struct implements NativeResource
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkQueryPoolCreateInfoINTEL.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkQueryPoolCreateInfoINTEL.PNEXT); }
-    /** Unsafe version of {@link #performanceCountersSampling}. */
-    public static int nperformanceCountersSampling(long struct) { return UNSAFE.getInt(null, struct + VkQueryPoolCreateInfoINTEL.PERFORMANCECOUNTERSSAMPLING); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkQueryPoolCreateInfoINTEL.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkQueryPoolCreateInfoINTEL.PNEXT, value); }
-    /** Unsafe version of {@link #performanceCountersSampling(int) performanceCountersSampling}. */
-    public static void nperformanceCountersSampling(long struct, int value) { UNSAFE.putInt(null, struct + VkQueryPoolCreateInfoINTEL.PERFORMANCECOUNTERSSAMPLING, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkQueryPoolCreateInfoINTEL} structs. */
-    public static class Buffer extends StructBuffer<VkQueryPoolCreateInfoINTEL, Buffer> implements NativeResource {
+    public static class Buffer extends VkQueryPoolPerformanceQueryCreateInfoINTEL.Buffer {
 
         private static final VkQueryPoolCreateInfoINTEL ELEMENT_FACTORY = VkQueryPoolCreateInfoINTEL.create(-1L);
 
@@ -301,7 +233,7 @@ public class VkQueryPoolCreateInfoINTEL extends Struct implements NativeResource
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -322,21 +254,14 @@ public class VkQueryPoolCreateInfoINTEL extends Struct implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkQueryPoolCreateInfoINTEL.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkQueryPoolCreateInfoINTEL.npNext(address()); }
-        /** Returns the value of the {@code performanceCountersSampling} field. */
-        @NativeType("VkQueryPoolSamplingModeINTEL")
-        public int performanceCountersSampling() { return VkQueryPoolCreateInfoINTEL.nperformanceCountersSampling(address()); }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkQueryPoolCreateInfoINTEL.Buffer sType(@NativeType("VkStructureType") int value) { VkQueryPoolCreateInfoINTEL.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkQueryPoolCreateInfoINTEL.Buffer pNext(@NativeType("void const *") long value) { VkQueryPoolCreateInfoINTEL.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code performanceCountersSampling} field. */
+        @Override
         public VkQueryPoolCreateInfoINTEL.Buffer performanceCountersSampling(@NativeType("VkQueryPoolSamplingModeINTEL") int value) { VkQueryPoolCreateInfoINTEL.nperformanceCountersSampling(address(), value); return this; }
 
     }

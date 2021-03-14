@@ -57,6 +57,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  *    imageStore(image, ivec2(gl_LaunchIDNV.xy), col);
  * }</code></pre>
  * 
+ * <h5>VK_NV_ray_tracing</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_NV_ray_tracing}</dd>
@@ -76,12 +78,17 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd><ul>
  * <li>Eric Werness <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_ray_tracing:%20&amp;body=@ewerness%20">ewerness</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2018-11-20</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>This extension requires the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/NV/SPV_NV_ray_tracing.html">{@code SPV_NV_ray_tracing}</a> SPIR-V extension.</li>
- * <li>This extension requires the <a target="_blank" href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/nv/GLSL_NV_ray_tracing.txt">{@code GL_NV_ray_tracing}</a> extension for GLSL source languages.</li>
+ * <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/NV/SPV_NV_ray_tracing.html">{@code SPV_NV_ray_tracing}</a></li>
+ * <li>This extension provides API support for <a target="_blank" href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/nv/GLSL_NV_ray_tracing.txt">{@code GL_NV_ray_tracing}</a></li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
@@ -218,42 +225,15 @@ public class NVRayTracing {
     public static final int VK_INDEX_TYPE_NONE_NV = 1000165000;
 
     /**
-     * VkAccelerationStructureTypeNV - Type of acceleration structure
+     * Extends {@code VkRayTracingShaderGroupTypeKHR}.
      * 
-     * <h5>Description</h5>
-     * 
-     * <ul>
-     * <li>{@link #VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV} is a top-level acceleration structure containing instance data referring to bottom-level level acceleration structures.</li>
-     * <li>{@link #VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV} is a bottom-level acceleration structure containing the AABBs or geometry to be intersected.</li>
-     * </ul>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link VkAccelerationStructureInfoNV}</p>
-     */
-    public static final int
-        VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV    = 0,
-        VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV = 1;
-
-    /**
-     * VkRayTracingShaderGroupTypeNV - Shader group types
-     * 
-     * <h5>Description</h5>
+     * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #VK_RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_NV RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_NV} indicates a shader group with a single {@link #VK_SHADER_STAGE_RAYGEN_BIT_NV SHADER_STAGE_RAYGEN_BIT_NV}, {@link #VK_SHADER_STAGE_MISS_BIT_NV SHADER_STAGE_MISS_BIT_NV}, or {@link #VK_SHADER_STAGE_CALLABLE_BIT_NV SHADER_STAGE_CALLABLE_BIT_NV} shader in it.</li>
-     * <li>{@link #VK_RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_NV RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_NV} specifies a shader group that only hits triangles and <b>must</b> not contain an intersection shader, only closest hit and any-hit.</li>
-     * <li>{@link #VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_NV RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_NV} specifies a shader group that only intersects with custom geometry and <b>must</b> contain an intersection shader and <b>may</b> contain closest hit and any-hit shaders.</li>
+     * <li>{@link #VK_RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_NV RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_NV}</li>
+     * <li>{@link #VK_RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_NV RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_NV}</li>
+     * <li>{@link #VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_NV RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_NV}</li>
      * </ul>
-     * 
-     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-     * 
-     * <p>For current group types, the hit group type could be inferred from the presence or absence of the intersection shader, but we provide the type explicitly for future hit groups that do not have that property.</p>
-     * </div>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link VkRayTracingShaderGroupCreateInfoNV}</p>
      */
     public static final int
         VK_RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_NV              = 0,
@@ -261,58 +241,58 @@ public class NVRayTracing {
         VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_NV = 2;
 
     /**
-     * VkGeometryTypeNV - Enum specifying which type of geometry is provided
+     * Extends {@code VkGeometryTypeKHR}.
      * 
-     * <h5>Description</h5>
+     * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #VK_GEOMETRY_TYPE_TRIANGLES_NV GEOMETRY_TYPE_TRIANGLES_NV} indicates that the {@code triangles} of {@link VkGeometryDataNV} contains valid data.</li>
-     * <li>{@link #VK_GEOMETRY_TYPE_AABBS_NV GEOMETRY_TYPE_AABBS_NV} indicates that the {@code aabbs} of {@link VkGeometryDataNV} contains valid data.</li>
+     * <li>{@link #VK_GEOMETRY_TYPE_TRIANGLES_NV GEOMETRY_TYPE_TRIANGLES_NV}</li>
+     * <li>{@link #VK_GEOMETRY_TYPE_AABBS_NV GEOMETRY_TYPE_AABBS_NV}</li>
      * </ul>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link VkGeometryNV}</p>
      */
     public static final int
         VK_GEOMETRY_TYPE_TRIANGLES_NV = 0,
         VK_GEOMETRY_TYPE_AABBS_NV     = 1;
 
     /**
-     * VkGeometryFlagBitsNV - Bitmask specifying additional parameters for a geometry
+     * Extends {@code VkAccelerationStructureTypeKHR}.
      * 
-     * <h5>Description</h5>
+     * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #VK_GEOMETRY_OPAQUE_BIT_NV GEOMETRY_OPAQUE_BIT_NV} indicates that this geometry does not invoke the any-hit shaders even if present in a hit group.</li>
-     * <li>{@link #VK_GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_NV GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_NV} indicates that the implementation <b>must</b> only call the any-hit shader a single time for each primitive in this geometry. If this bit is absent an implementation <b>may</b> invoke the any-hit shader more than once for this geometry.</li>
+     * <li>{@link #VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV}</li>
+     * <li>{@link #VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV}</li>
      * </ul>
+     */
+    public static final int
+        VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV    = 0,
+        VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV = 1;
+
+    /**
+     * Extends {@code VkGeometryFlagBitsKHR}.
      * 
-     * <h5>See Also</h5>
+     * <h5>Enum values:</h5>
      * 
-     * <p>{@code VkGeometryFlagsNV}</p>
+     * <ul>
+     * <li>{@link #VK_GEOMETRY_OPAQUE_BIT_NV GEOMETRY_OPAQUE_BIT_NV}</li>
+     * <li>{@link #VK_GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_NV GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_NV}</li>
+     * </ul>
      */
     public static final int
         VK_GEOMETRY_OPAQUE_BIT_NV                          = 0x1,
         VK_GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_NV = 0x2;
 
     /**
-     * VkGeometryInstanceFlagBitsNV - Instance flag bits
+     * Extends {@code VkGeometryInstanceFlagBitsKHR}.
      * 
-     * <h5>Description</h5>
+     * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #VK_GEOMETRY_INSTANCE_TRIANGLE_CULL_DISABLE_BIT_NV GEOMETRY_INSTANCE_TRIANGLE_CULL_DISABLE_BIT_NV} disables face culling for this instance.</li>
-     * <li>{@link #VK_GEOMETRY_INSTANCE_TRIANGLE_FRONT_COUNTERCLOCKWISE_BIT_NV GEOMETRY_INSTANCE_TRIANGLE_FRONT_COUNTERCLOCKWISE_BIT_NV} indicates that the front face of the triangle for culling purposes is the face that is counter clockwise in object space relative to the ray origin. Because the facing is determined in object space, an instance transform matrix does not change the winding, but a geometry transform does.</li>
-     * <li>{@link #VK_GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_NV GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_NV} causes this instance to act as though {@link #VK_GEOMETRY_OPAQUE_BIT_NV GEOMETRY_OPAQUE_BIT_NV} were specified on all geometries referenced by this instance. This behavior <b>can</b> be overridden by the ray flag {@code gl_RayFlagsNoOpaqueNV}.</li>
-     * <li>{@link #VK_GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_NV GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_NV} causes this instance to act as though {@link #VK_GEOMETRY_OPAQUE_BIT_NV GEOMETRY_OPAQUE_BIT_NV} were not specified on all geometries referenced by this instance. This behavior <b>can</b> be overridden by the ray flag {@code gl_RayFlagsOpaqueNV}.</li>
+     * <li>{@link #VK_GEOMETRY_INSTANCE_TRIANGLE_CULL_DISABLE_BIT_NV GEOMETRY_INSTANCE_TRIANGLE_CULL_DISABLE_BIT_NV}</li>
+     * <li>{@link #VK_GEOMETRY_INSTANCE_TRIANGLE_FRONT_COUNTERCLOCKWISE_BIT_NV GEOMETRY_INSTANCE_TRIANGLE_FRONT_COUNTERCLOCKWISE_BIT_NV}</li>
+     * <li>{@link #VK_GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_NV GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_NV}</li>
+     * <li>{@link #VK_GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_NV GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_NV}</li>
      * </ul>
-     * 
-     * <p>{@link #VK_GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_NV GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_NV} and {@link #VK_GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_NV GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_NV} <b>must</b> not be used in the same flag.</p>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@code VkGeometryInstanceFlagsNV}</p>
      */
     public static final int
         VK_GEOMETRY_INSTANCE_TRIANGLE_CULL_DISABLE_BIT_NV           = 0x1,
@@ -321,26 +301,17 @@ public class NVRayTracing {
         VK_GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_NV                 = 0x8;
 
     /**
-     * VkBuildAccelerationStructureFlagBitsNV - Bitmask specifying additional parameters for acceleration structure builds
+     * Extends {@code VkBuildAccelerationStructureFlagBitsKHR}.
      * 
-     * <h5>Description</h5>
+     * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NV BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NV} indicates that the specified acceleration structure <b>can</b> be updated with {@code update} of {@link VK10#VK_TRUE TRUE} in {@link #vkCmdBuildAccelerationStructureNV CmdBuildAccelerationStructureNV}.</li>
-     * <li>{@link #VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_NV BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_NV} indicates that the specified acceleration structure <b>can</b> act as the source for {@link #vkCmdCopyAccelerationStructureNV CmdCopyAccelerationStructureNV} with {@code mode} of {@link #VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_NV COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_NV} to produce a compacted acceleration structure.</li>
-     * <li>{@link #VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_NV BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_NV} indicates that the given acceleration structure build <b>should</b> prioritize trace performance over build time.</li>
-     * <li>{@link #VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_NV BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_NV} indicates that the given acceleration structure build <b>should</b> prioritize build time over trace performance.</li>
-     * <li>{@link #VK_BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_NV BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_NV} indicates that this acceleration structure <b>should</b> minimize the size of the scratch memory and the final result build, potentially at the expense of build time or trace performance.</li>
+     * <li>{@link #VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NV BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NV}</li>
+     * <li>{@link #VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_NV BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_NV}</li>
+     * <li>{@link #VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_NV BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_NV}</li>
+     * <li>{@link #VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_NV BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_NV}</li>
+     * <li>{@link #VK_BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_NV BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_NV}</li>
      * </ul>
-     * 
-     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-     * 
-     * <p>{@link #VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NV BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NV} and {@link #VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_NV BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_NV} <b>may</b> take more time and memory than a normal build, and so <b>should</b> only be used when those features are used.</p>
-     * </div>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@code VkBuildAccelerationStructureFlagsNV}</p>
      */
     public static final int
         VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NV      = 0x1,
@@ -350,18 +321,14 @@ public class NVRayTracing {
         VK_BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_NV        = 0x10;
 
     /**
-     * VkCopyAccelerationStructureModeNV - Acceleration structure copy mode
+     * Extends {@code VkCopyAccelerationStructureModeKHR}.
      * 
-     * <h5>Description</h5>
+     * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #VK_COPY_ACCELERATION_STRUCTURE_MODE_CLONE_NV COPY_ACCELERATION_STRUCTURE_MODE_CLONE_NV} creates a direct copy of the acceleration structure specified in {@code src} into the one specified by {@code dst}. The {@code dst} acceleration structure <b>must</b> have been created with the same parameters as {@code src}.</li>
-     * <li>{@link #VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_NV COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_NV} creates a more compact version of an acceleration structure {@code src} into {@code dst}. The acceleration structure {@code dst} <b>must</b> have been created with a {@code compactedSize} corresponding to the one returned by {@link #vkCmdWriteAccelerationStructuresPropertiesNV CmdWriteAccelerationStructuresPropertiesNV} after the build of the acceleration structure specified by {@code src}.</li>
+     * <li>{@link #VK_COPY_ACCELERATION_STRUCTURE_MODE_CLONE_NV COPY_ACCELERATION_STRUCTURE_MODE_CLONE_NV}</li>
+     * <li>{@link #VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_NV COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_NV}</li>
      * </ul>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link #vkCmdCopyAccelerationStructureNV CmdCopyAccelerationStructureNV}</p>
      */
     public static final int
         VK_COPY_ACCELERATION_STRUCTURE_MODE_CLONE_NV   = 0,
@@ -500,9 +467,15 @@ public class NVRayTracing {
      * 
      * <ul>
      * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-     * <li>{@code accelerationStructure} <b>must</b> be a valid {@code VkAccelerationStructureNV} handle</li>
+     * <li>If {@code accelerationStructure} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code accelerationStructure} <b>must</b> be a valid {@code VkAccelerationStructureNV} handle</li>
      * <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid {@link VkAllocationCallbacks} structure</li>
-     * <li>{@code accelerationStructure} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+     * <li>If {@code accelerationStructure} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+     * </ul>
+     * 
+     * <h5>Host Synchronization</h5>
+     * 
+     * <ul>
+     * <li>Host access to {@code accelerationStructure} <b>must</b> be externally synchronized</li>
      * </ul>
      * 
      * <h5>See Also</h5>
@@ -535,7 +508,9 @@ public class NVRayTracing {
      * 
      * <p>An acceleration structure has memory requirements for the structure object itself, scratch space for the build, and scratch space for the update.</p>
      * 
-     * <p>To query the memory requirements call:</p>
+     * <p>Scratch space is allocated as a {@code VkBuffer}, so for {@link #VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_BUILD_SCRATCH_NV ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_BUILD_SCRATCH_NV} and {@link #VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_UPDATE_SCRATCH_NV ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_UPDATE_SCRATCH_NV} the {@code pMemoryRequirements}-&gt;alignment and {@code pMemoryRequirements}-&gt;memoryTypeBits values returned by this call <b>must</b> be filled with zero, and <b>should</b> be ignored by the application.</p>
+     * 
+     * <p>To query the memory requirements, call:</p>
      * 
      * <pre><code>
      * void vkGetAccelerationStructureMemoryRequirementsNV(
@@ -619,7 +594,7 @@ public class NVRayTracing {
      * <p>{@link VkBindAccelerationStructureMemoryInfoNV}</p>
      *
      * @param device     the logical device that owns the acceleration structures and memory.
-     * @param pBindInfos a pointer to an array of {@link VkBindAccelerationStructureMemoryInfoNV} structures describing images and memory to bind.
+     * @param pBindInfos a pointer to an array of {@link VkBindAccelerationStructureMemoryInfoNV} structures describing acceleration structures and memory to bind.
      */
     @NativeType("VkResult")
     public static int vkBindAccelerationStructureMemoryNV(VkDevice device, @NativeType("VkBindAccelerationStructureMemoryInfoNV const *") VkBindAccelerationStructureMemoryInfoNV.Buffer pBindInfos) {
@@ -657,15 +632,25 @@ public class NVRayTracing {
      *     VkBuffer                                    scratch,
      *     VkDeviceSize                                scratchOffset);</code></pre>
      * 
+     * <h5>Description</h5>
+     * 
+     * <p>Accesses to {@code dst}, {@code src}, and {@code scratch} <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies">synchronized</a> with the {@link KHRAccelerationStructure#VK_PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR} <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-pipeline-stages">pipeline stage</a> and an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-access-types">access type</a> of {@link KHRAccelerationStructure#VK_ACCESS_ACCELERATION_STRUCTURE_READ_BIT_KHR ACCESS_ACCELERATION_STRUCTURE_READ_BIT_KHR} or {@link KHRAccelerationStructure#VK_ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT_KHR ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT_KHR}.</p>
+     * 
      * <h5>Valid Usage</h5>
      * 
      * <ul>
      * <li>{@code geometryCount} <b>must</b> be less than or equal to {@link VkPhysicalDeviceRayTracingPropertiesNV}{@code ::maxGeometryCount}</li>
-     * <li>{@code dst} <b>must</b> have been created with compatible {@link VkAccelerationStructureInfoNV} where {@link VkAccelerationStructureInfoNV}{@code ::type} and {@link VkAccelerationStructureInfoNV}{@code ::flags} are identical, {@link VkAccelerationStructureInfoNV}{@code ::instanceCount} and {@link VkAccelerationStructureInfoNV}{@code ::geometryCount} for {@code dst} are greater than or equal to the build size and each geometry in {@link VkAccelerationStructureInfoNV}{@code ::pGeometries} for {@code dst} has greater than or equal to the number of vertices, indices, and AABBs.</li>
+     * <li>{@code dst} <b>must</b> have been created with compatible {@link VkAccelerationStructureInfoNV} where {@link VkAccelerationStructureInfoNV}{@code ::type} and {@link VkAccelerationStructureInfoNV}{@code ::flags} are identical, {@link VkAccelerationStructureInfoNV}{@code ::instanceCount} and {@link VkAccelerationStructureInfoNV}{@code ::geometryCount} for {@code dst} are greater than or equal to the build size and each geometry in {@link VkAccelerationStructureInfoNV}{@code ::pGeometries} for {@code dst} has greater than or equal to the number of vertices, indices, and AABBs</li>
      * <li>If {@code update} is {@link VK10#VK_TRUE TRUE}, {@code src} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
      * <li>If {@code update} is {@link VK10#VK_TRUE TRUE}, {@code src} <b>must</b> have been built before with {@link #VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NV BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NV} set in {@link VkAccelerationStructureInfoNV}{@code ::flags}</li>
-     * <li>If {@code update} is {@link VK10#VK_FALSE FALSE}, The {@code size} member of the {@link VkMemoryRequirements} structure returned from a call to {@link #vkGetAccelerationStructureMemoryRequirementsNV GetAccelerationStructureMemoryRequirementsNV} with {@link VkAccelerationStructureMemoryRequirementsInfoNV}{@code ::accelerationStructure} set to {@code dst} and {@link VkAccelerationStructureMemoryRequirementsInfoNV}{@code ::type} set to {@link #VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_BUILD_SCRATCH_NV ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_BUILD_SCRATCH_NV} <b>must</b> be less than or equal to the size of {@code scratch} minus {@code scratchOffset}</li>
-     * <li>If {@code update} is {@link VK10#VK_TRUE TRUE}, The {@code size} member of the {@link VkMemoryRequirements} structure returned from a call to {@link #vkGetAccelerationStructureMemoryRequirementsNV GetAccelerationStructureMemoryRequirementsNV} with {@link VkAccelerationStructureMemoryRequirementsInfoNV}{@code ::accelerationStructure} set to {@code dst} and {@link VkAccelerationStructureMemoryRequirementsInfoNV}{@code ::type} set to {@link #VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_UPDATE_SCRATCH_NV ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_UPDATE_SCRATCH_NV} <b>must</b> be less than or equal to the size of {@code scratch} minus {@code scratchOffset}</li>
+     * <li>If {@code update} is {@link VK10#VK_FALSE FALSE}, the {@code size} member of the {@link VkMemoryRequirements} structure returned from a call to {@link #vkGetAccelerationStructureMemoryRequirementsNV GetAccelerationStructureMemoryRequirementsNV} with {@link VkAccelerationStructureMemoryRequirementsInfoNV}{@code ::accelerationStructure} set to {@code dst} and {@link VkAccelerationStructureMemoryRequirementsInfoNV}{@code ::type} set to {@link #VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_BUILD_SCRATCH_NV ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_BUILD_SCRATCH_NV} <b>must</b> be less than or equal to the size of {@code scratch} minus {@code scratchOffset}</li>
+     * <li>If {@code update} is {@link VK10#VK_TRUE TRUE}, the {@code size} member of the {@link VkMemoryRequirements} structure returned from a call to {@link #vkGetAccelerationStructureMemoryRequirementsNV GetAccelerationStructureMemoryRequirementsNV} with {@link VkAccelerationStructureMemoryRequirementsInfoNV}{@code ::accelerationStructure} set to {@code dst} and {@link VkAccelerationStructureMemoryRequirementsInfoNV}{@code ::type} set to {@link #VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_UPDATE_SCRATCH_NV ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_UPDATE_SCRATCH_NV} <b>must</b> be less than or equal to the size of {@code scratch} minus {@code scratchOffset}</li>
+     * <li>{@code scratch} <b>must</b> have been created with {@link #VK_BUFFER_USAGE_RAY_TRACING_BIT_NV BUFFER_USAGE_RAY_TRACING_BIT_NV} usage flag</li>
+     * <li>If {@code instanceData} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code instanceData} <b>must</b> have been created with {@link #VK_BUFFER_USAGE_RAY_TRACING_BIT_NV BUFFER_USAGE_RAY_TRACING_BIT_NV} usage flag</li>
+     * <li>Each {@link VkAccelerationStructureInstanceKHR}{@code ::accelerationStructureReference} value in {@code instanceData} <b>must</b> be a valid device address containing a value obtained from {@link #vkGetAccelerationStructureHandleNV GetAccelerationStructureHandleNV}</li>
+     * <li>If {@code update} is {@link VK10#VK_TRUE TRUE}, then objects that were previously active <b>must</b> not be made inactive as per <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#acceleration-structure-inactive-prims">Inactive Primitives and Instances</a></li>
+     * <li>If {@code update} is {@link VK10#VK_TRUE TRUE}, then objects that were previously inactive <b>must</b> not be made active as per <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#acceleration-structure-inactive-prims">Inactive Primitives and Instances</a></li>
+     * <li>If {@code update} is {@link VK10#VK_TRUE TRUE}, the {@code src} and {@code dst} objects <b>must</b> either be the same object or not have any <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#resources-memory-aliasing">memory aliasing</a></li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -686,6 +671,7 @@ public class NVRayTracing {
      * <h5>Host Synchronization</h5>
      * 
      * <ul>
+     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
      * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
      * </ul>
      * 
@@ -702,7 +688,7 @@ public class NVRayTracing {
      *
      * @param commandBuffer  the command buffer into which the command will be recorded.
      * @param pInfo          contains the shared information for the acceleration structure&#8217;s structure.
-     * @param instanceData   the buffer containing instance data that will be used to build the acceleration structure as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#acceleration-structure-instance">Accelerator structure instances.</a> This parameter <b>must</b> be {@code NULL} for bottom level acceleration structures.
+     * @param instanceData   the buffer containing an array of {@link VkAccelerationStructureInstanceKHR} structures defining acceleration structures. This parameter <b>must</b> be {@code NULL} for bottom level acceleration structures.
      * @param instanceOffset the offset in bytes (relative to the start of {@code instanceData}) at which the instance data is located.
      * @param update         specifies whether to update the {@code dst} acceleration structure with the data in {@code src}.
      * @param dst            a pointer to the target acceleration structure for the build.
@@ -728,13 +714,19 @@ public class NVRayTracing {
      *     VkCommandBuffer                             commandBuffer,
      *     VkAccelerationStructureNV                   dst,
      *     VkAccelerationStructureNV                   src,
-     *     VkCopyAccelerationStructureModeNV           mode);</code></pre>
+     *     VkCopyAccelerationStructureModeKHR          mode);</code></pre>
+     * 
+     * <h5>Description</h5>
+     * 
+     * <p>Accesses to {@code src} and {@code dst} <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies">synchronized</a> with the {@link KHRAccelerationStructure#VK_PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR} <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-pipeline-stages">pipeline stage</a> and an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-access-types">access type</a> of {@link KHRAccelerationStructure#VK_ACCESS_ACCELERATION_STRUCTURE_READ_BIT_KHR ACCESS_ACCELERATION_STRUCTURE_READ_BIT_KHR} or {@link KHRAccelerationStructure#VK_ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT_KHR ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT_KHR} as appropriate.</p>
      * 
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>{@code mode} <b>must</b> be {@link #VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_NV COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_NV} or {@link #VK_COPY_ACCELERATION_STRUCTURE_MODE_CLONE_NV COPY_ACCELERATION_STRUCTURE_MODE_CLONE_NV}</li>
-     * <li>{@code src} <b>must</b> have been built with {@link #VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_NV BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_NV} if {@code mode} is {@link #VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_NV COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_NV}</li>
+     * <li>{@code mode} <b>must</b> be {@link KHRAccelerationStructure#VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_KHR COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_KHR} or {@link KHRAccelerationStructure#VK_COPY_ACCELERATION_STRUCTURE_MODE_CLONE_KHR COPY_ACCELERATION_STRUCTURE_MODE_CLONE_KHR}</li>
+     * <li>If {@code mode} is {@link KHRAccelerationStructure#VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_KHR COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_KHR}, {@code src} <b>must</b> have been built with {@link KHRAccelerationStructure#VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR}</li>
+     * <li>The {@code buffer} used to create {@code src} <b>must</b> be bound to device memory</li>
+     * <li>The {@code buffer} used to create {@code dst} <b>must</b> be bound to device memory</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -743,7 +735,7 @@ public class NVRayTracing {
      * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
      * <li>{@code dst} <b>must</b> be a valid {@code VkAccelerationStructureNV} handle</li>
      * <li>{@code src} <b>must</b> be a valid {@code VkAccelerationStructureNV} handle</li>
-     * <li>{@code mode} <b>must</b> be a valid {@code VkCopyAccelerationStructureModeNV} value</li>
+     * <li>{@code mode} <b>must</b> be a valid {@code VkCopyAccelerationStructureModeKHR} value</li>
      * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
      * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support compute operations</li>
      * <li>This command <b>must</b> only be called outside of a render pass instance</li>
@@ -753,6 +745,7 @@ public class NVRayTracing {
      * <h5>Host Synchronization</h5>
      * 
      * <ul>
+     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
      * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
      * </ul>
      * 
@@ -764,11 +757,11 @@ public class NVRayTracing {
      * </table>
      *
      * @param commandBuffer the command buffer into which the command will be recorded.
-     * @param dst           a pointer to the target acceleration structure for the copy.
-     * @param src           a pointer to the source acceleration structure for the copy.
-     * @param mode          a {@code VkCopyAccelerationStructureModeNV} value specifying additional operations to perform during the copy.
+     * @param dst           the target acceleration structure for the copy.
+     * @param src           the source acceleration structure for the copy.
+     * @param mode          a {@code VkCopyAccelerationStructureModeKHR} value specifying additional operations to perform during the copy.
      */
-    public static void vkCmdCopyAccelerationStructureNV(VkCommandBuffer commandBuffer, @NativeType("VkAccelerationStructureNV") long dst, @NativeType("VkAccelerationStructureNV") long src, @NativeType("VkCopyAccelerationStructureModeNV") int mode) {
+    public static void vkCmdCopyAccelerationStructureNV(VkCommandBuffer commandBuffer, @NativeType("VkAccelerationStructureNV") long dst, @NativeType("VkAccelerationStructureNV") long src, @NativeType("VkCopyAccelerationStructureModeKHR") int mode) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdCopyAccelerationStructureNV;
         if (CHECKS) {
             check(__functionAddress);
@@ -783,7 +776,7 @@ public class NVRayTracing {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>To dispatch a ray tracing call use:</p>
+     * <p>To dispatch ray tracing use:</p>
      * 
      * <pre><code>
      * void vkCmdTraceRaysNV(
@@ -810,39 +803,56 @@ public class NVRayTracing {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>If a {@code VkImageView} is sampled with {@link VK10#VK_FILTER_LINEAR FILTER_LINEAR} as a result of this command, then the image view&#8217;s <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#resources-image-view-format-features">format features</a> <b>must</b> contain {@link VK10#VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT}</li>
+     * <li>If a {@code VkSampler} created with {@code magFilter} or {@code minFilter} equal to {@link VK10#VK_FILTER_LINEAR FILTER_LINEAR} and {@code compareEnable} equal to {@link VK10#VK_FALSE FALSE} is used to sample a {@code VkImageView} as a result of this command, then the image view&#8217;s <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#resources-image-view-format-features">format features</a> <b>must</b> contain {@link VK10#VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT}</li>
      * <li>If a {@code VkImageView} is accessed using atomic operations as a result of this command, then the image view&#8217;s <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#resources-image-view-format-features">format features</a> <b>must</b> contain {@link VK10#VK_FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT}</li>
      * <li>If a {@code VkImageView} is sampled with {@link EXTFilterCubic#VK_FILTER_CUBIC_EXT FILTER_CUBIC_EXT} as a result of this command, then the image view&#8217;s <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#resources-image-view-format-features">format features</a> <b>must</b> contain {@link EXTFilterCubic#VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT}</li>
      * <li>Any {@code VkImageView} being sampled with {@link EXTFilterCubic#VK_FILTER_CUBIC_EXT FILTER_CUBIC_EXT} as a result of this command <b>must</b> have a {@code VkImageViewType} and format that supports cubic filtering, as specified by {@link VkFilterCubicImageViewImageFormatPropertiesEXT}{@code ::filterCubic} returned by {@code vkGetPhysicalDeviceImageFormatProperties2}</li>
      * <li>Any {@code VkImageView} being sampled with {@link EXTFilterCubic#VK_FILTER_CUBIC_EXT FILTER_CUBIC_EXT} with a reduction mode of either {@link VK12#VK_SAMPLER_REDUCTION_MODE_MIN SAMPLER_REDUCTION_MODE_MIN} or {@link VK12#VK_SAMPLER_REDUCTION_MODE_MAX SAMPLER_REDUCTION_MODE_MAX} as a result of this command <b>must</b> have a {@code VkImageViewType} and format that supports cubic filtering together with minmax filtering, as specified by {@link VkFilterCubicImageViewImageFormatPropertiesEXT}{@code ::filterCubicMinmax} returned by {@code vkGetPhysicalDeviceImageFormatProperties2}</li>
-     * <li>Any {@code VkImage} created with a {@link VkImageCreateInfo}{@code ::flags} containing {@link NVCornerSampledImage#VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV IMAGE_CREATE_CORNER_SAMPLED_BIT_NV} sampled as a result of this command <b>must</b> only be sampled using a {@code VkSamplerAddressMode} of {@link VK10#VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE}.</li>
+     * <li>Any {@code VkImage} created with a {@link VkImageCreateInfo}{@code ::flags} containing {@link NVCornerSampledImage#VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV IMAGE_CREATE_CORNER_SAMPLED_BIT_NV} sampled as a result of this command <b>must</b> only be sampled using a {@code VkSamplerAddressMode} of {@link VK10#VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE}</li>
      * <li>For each set <em>n</em> that is statically used by the {@code VkPipeline} bound to the pipeline bind point used by this command, a descriptor set <b>must</b> have been bound to <em>n</em> at the same pipeline bind point, with a {@code VkPipelineLayout} that is compatible for set <em>n</em>, with the {@code VkPipelineLayout} used to create the current {@code VkPipeline}, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#descriptorsets-compatibility">Pipeline Layout Compatibility</a></li>
      * <li>For each push constant that is statically used by the {@code VkPipeline} bound to the pipeline bind point used by this command, a push constant value <b>must</b> have been set for the same pipeline bind point, with a {@code VkPipelineLayout} that is compatible for push constants, with the {@code VkPipelineLayout} used to create the current {@code VkPipeline}, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#descriptorsets-compatibility">Pipeline Layout Compatibility</a></li>
      * <li>Descriptors in each bound descriptor set, specified via {@code vkCmdBindDescriptorSets}, <b>must</b> be valid if they are statically used by the {@code VkPipeline} bound to the pipeline bind point used by this command</li>
      * <li>A valid pipeline <b>must</b> be bound to the pipeline bind point used by this command</li>
-     * <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command requires any dynamic state, that state <b>must</b> have been set for {@code commandBuffer}</li>
+     * <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command requires any dynamic state, that state <b>must</b> have been set for {@code commandBuffer}, and done so after any previously bound pipeline with the corresponding state not specified as dynamic</li>
+     * <li>There <b>must</b> not have been any calls to dynamic state setting commands for any state not specified as dynamic in the {@code VkPipeline} object bound to the pipeline bind point used by this command, since that pipeline was bound</li>
      * <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a {@code VkSampler} object that uses unnormalized coordinates, that sampler <b>must</b> not be used to sample from any {@code VkImage} with a {@code VkImageView} of the type {@link VK10#VK_IMAGE_VIEW_TYPE_3D IMAGE_VIEW_TYPE_3D}, {@link VK10#VK_IMAGE_VIEW_TYPE_CUBE IMAGE_VIEW_TYPE_CUBE}, {@link VK10#VK_IMAGE_VIEW_TYPE_1D_ARRAY IMAGE_VIEW_TYPE_1D_ARRAY}, {@link VK10#VK_IMAGE_VIEW_TYPE_2D_ARRAY IMAGE_VIEW_TYPE_2D_ARRAY} or {@link VK10#VK_IMAGE_VIEW_TYPE_CUBE_ARRAY IMAGE_VIEW_TYPE_CUBE_ARRAY}, in any shader stage</li>
      * <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a {@code VkSampler} object that uses unnormalized coordinates, that sampler <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with {@code ImplicitLod}, {@code Dref} or {@code Proj} in their name, in any shader stage</li>
      * <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a {@code VkSampler} object that uses unnormalized coordinates, that sampler <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that includes a LOD bias or any offset values, in any shader stage</li>
      * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess">robust buffer access</a> feature is not enabled, and if the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a uniform buffer, it <b>must</b> not access values outside of the range of the buffer as specified in the descriptor set bound to the same pipeline bind point</li>
      * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess">robust buffer access</a> feature is not enabled, and if the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a storage buffer, it <b>must</b> not access values outside of the range of the buffer as specified in the descriptor set bound to the same pipeline bind point</li>
      * <li>If {@code commandBuffer} is an unprotected command buffer, any resource accessed by the {@code VkPipeline} object bound to the pipeline bind point used by this command <b>must</b> not be a protected resource</li>
-     * <li>If {@code commandBuffer} is a protected command buffer, any resource written to by the {@code VkPipeline} object bound to the pipeline bind point used by this command <b>must</b> not be an unprotected resource</li>
-     * <li>If {@code commandBuffer} is a protected command buffer, pipeline stages other than the framebuffer-space and compute stages in the {@code VkPipeline} object bound to the pipeline bind point <b>must</b> not write to any resource</li>
+     * <li>If a {@code VkImageView} is accessed using {@code OpImageWrite} as a result of this command, then the {@code Type} of the {@code Texel} operand of that instruction <b>must</b> have at least as many components as the image view&#8217;s format.</li>
+     * <li>If a {@code VkBufferView} is accessed using {@code OpImageWrite} as a result of this command, then the {@code Type} of the {@code Texel} operand of that instruction <b>must</b> have at least as many components as the buffer view&#8217;s format.</li>
+     * <li>If a {@code VkImageView} with a {@code VkFormat} that has a 64-bit channel width is accessed as a result of this command, the {@code SampledType} of the {@code OpTypeImage} operand of that instruction <b>must</b> have a {@code Width} of 64.</li>
+     * <li>If a {@code VkImageView} with a {@code VkFormat} that has a channel width less than 64-bit is accessed as a result of this command, the {@code SampledType} of the {@code OpTypeImage} operand of that instruction <b>must</b> have a {@code Width} of 32.</li>
+     * <li>If a {@code VkBufferView} with a {@code VkFormat} that has a 64-bit channel width is accessed as a result of this command, the {@code SampledType} of the {@code OpTypeImage} operand of that instruction <b>must</b> have a {@code Width} of 64.</li>
+     * <li>If a {@code VkBufferView} with a {@code VkFormat} that has a channel width less than 64-bit is accessed as a result of this command, the {@code SampledType} of the {@code OpTypeImage} operand of that instruction <b>must</b> have a {@code Width} of 32.</li>
+     * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-sparseImageInt64Atomics">{@code sparseImageInt64Atomics}</a> feature is not enabled, {@code VkImage} objects created with the {@link VK10#VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT IMAGE_CREATE_SPARSE_RESIDENCY_BIT} flag <b>must</b> not be accessed by atomic instructions through an {@code OpTypeImage} with a {@code SampledType} with a {@code Width} of 64 by this command.</li>
+     * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-sparseImageInt64Atomics">{@code sparseImageInt64Atomics}</a> feature is not enabled, {@code VkBuffer} objects created with the {@link VK10#VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT BUFFER_CREATE_SPARSE_RESIDENCY_BIT} flag <b>must</b> not be accessed by atomic instructions through an {@code OpTypeImage} with a {@code SampledType} with a {@code Width} of 64 by this command.</li>
+     * <li>Any shader group handle referenced by this call <b>must</b> have been queried from the currently bound ray tracing shader pipeline</li>
+     * </ul>
+     * 
+     * <ul>
+     * <li>{@code commandBuffer} <b>must</b> not be a protected command buffer</li>
+     * <li>This command <b>must</b> not cause a trace ray instruction to be executed from a shader invocation with a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#ray-tracing-recursion-depth">recursion depth</a> greater than the value of {@code maxRecursionDepth} used to create the bound ray tracing pipeline</li>
+     * <li>If {@code raygenShaderBindingTableBuffer} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
      * <li>{@code raygenShaderBindingOffset} <b>must</b> be less than the size of {@code raygenShaderBindingTableBuffer}</li>
      * <li>{@code raygenShaderBindingOffset} <b>must</b> be a multiple of {@link VkPhysicalDeviceRayTracingPropertiesNV}{@code ::shaderGroupBaseAlignment}</li>
+     * <li>If {@code missShaderBindingTableBuffer} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
      * <li>{@code missShaderBindingOffset} <b>must</b> be less than the size of {@code missShaderBindingTableBuffer}</li>
      * <li>{@code missShaderBindingOffset} <b>must</b> be a multiple of {@link VkPhysicalDeviceRayTracingPropertiesNV}{@code ::shaderGroupBaseAlignment}</li>
+     * <li>If {@code hitShaderBindingTableBuffer} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
      * <li>{@code hitShaderBindingOffset} <b>must</b> be less than the size of {@code hitShaderBindingTableBuffer}</li>
      * <li>{@code hitShaderBindingOffset} <b>must</b> be a multiple of {@link VkPhysicalDeviceRayTracingPropertiesNV}{@code ::shaderGroupBaseAlignment}</li>
+     * <li>If {@code callableShaderBindingTableBuffer} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
      * <li>{@code callableShaderBindingOffset} <b>must</b> be less than the size of {@code callableShaderBindingTableBuffer}</li>
      * <li>{@code callableShaderBindingOffset} <b>must</b> be a multiple of {@link VkPhysicalDeviceRayTracingPropertiesNV}{@code ::shaderGroupBaseAlignment}</li>
      * <li>{@code missShaderBindingStride} <b>must</b> be a multiple of {@link VkPhysicalDeviceRayTracingPropertiesNV}{@code ::shaderGroupHandleSize}</li>
      * <li>{@code hitShaderBindingStride} <b>must</b> be a multiple of {@link VkPhysicalDeviceRayTracingPropertiesNV}{@code ::shaderGroupHandleSize}</li>
      * <li>{@code callableShaderBindingStride} <b>must</b> be a multiple of {@link VkPhysicalDeviceRayTracingPropertiesNV}{@code ::shaderGroupHandleSize}</li>
-     * <li>{@code missShaderBindingStride} <b>must</b> be a less than or equal to {@link VkPhysicalDeviceRayTracingPropertiesNV}{@code ::maxShaderGroupStride}</li>
-     * <li>{@code hitShaderBindingStride} <b>must</b> be a less than or equal to {@link VkPhysicalDeviceRayTracingPropertiesNV}{@code ::maxShaderGroupStride}</li>
-     * <li>{@code callableShaderBindingStride} <b>must</b> be a less than or equal to {@link VkPhysicalDeviceRayTracingPropertiesNV}{@code ::maxShaderGroupStride}</li>
+     * <li>{@code missShaderBindingStride} <b>must</b> be less than or equal to {@link VkPhysicalDeviceRayTracingPropertiesNV}{@code ::maxShaderGroupStride}</li>
+     * <li>{@code hitShaderBindingStride} <b>must</b> be less than or equal to {@link VkPhysicalDeviceRayTracingPropertiesNV}{@code ::maxShaderGroupStride}</li>
+     * <li>{@code callableShaderBindingStride} <b>must</b> be less than or equal to {@link VkPhysicalDeviceRayTracingPropertiesNV}{@code ::maxShaderGroupStride}</li>
      * <li>{@code width} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxComputeWorkGroupCount}[0]</li>
      * <li>{@code height} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxComputeWorkGroupCount}[1]</li>
      * <li>{@code depth} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxComputeWorkGroupCount}[2]</li>
@@ -865,6 +875,7 @@ public class NVRayTracing {
      * <h5>Host Synchronization</h5>
      * 
      * <ul>
+     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
      * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
      * </ul>
      * 
@@ -937,6 +948,8 @@ public class NVRayTracing {
      * <ul>
      * <li>If the {@code flags} member of any element of {@code pCreateInfos} contains the {@link VK10#VK_PIPELINE_CREATE_DERIVATIVE_BIT PIPELINE_CREATE_DERIVATIVE_BIT} flag, and the {@code basePipelineIndex} member of that same element is not {@code -1}, {@code basePipelineIndex} <b>must</b> be less than the index into {@code pCreateInfos} that corresponds to that element</li>
      * <li>If the {@code flags} member of any element of {@code pCreateInfos} contains the {@link VK10#VK_PIPELINE_CREATE_DERIVATIVE_BIT PIPELINE_CREATE_DERIVATIVE_BIT} flag, the base pipeline <b>must</b> have been created with the {@link VK10#VK_PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT} flag set</li>
+     * <li>{@code flags} <b>must</b> not contain the {@link VK11#VK_PIPELINE_CREATE_DISPATCH_BASE PIPELINE_CREATE_DISPATCH_BASE} flag</li>
+     * <li>If {@code pipelineCache} was created with {@link EXTPipelineCreationCacheControl#VK_PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT_EXT PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT_EXT}, host access to {@code pipelineCache} <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fundamentals-threadingbehavior">externally synchronized</a></li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -957,6 +970,7 @@ public class NVRayTracing {
      * <dt>On success, this command returns</dt>
      * <dd><ul>
      * <li>{@link VK10#VK_SUCCESS SUCCESS}</li>
+     * <li>{@link EXTPipelineCreationCacheControl#VK_PIPELINE_COMPILE_REQUIRED_EXT PIPELINE_COMPILE_REQUIRED_EXT}</li>
      * </ul></dd>
      * <dt>On failure, this command returns</dt>
      * <dd><ul>
@@ -1000,55 +1014,11 @@ public class NVRayTracing {
     }
 
     /**
-     * Query ray tracing pipeline shader group handles.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <p>To query the opaque handles of shaders in the ray tracing pipeline, call:</p>
-     * 
-     * <pre><code>
-     * VkResult vkGetRayTracingShaderGroupHandlesNV(
-     *     VkDevice                                    device,
-     *     VkPipeline                                  pipeline,
-     *     uint32_t                                    firstGroup,
-     *     uint32_t                                    groupCount,
-     *     size_t                                      dataSize,
-     *     void*                                       pData);</code></pre>
-     * 
-     * <h5>Valid Usage</h5>
-     * 
-     * <ul>
-     * <li>The sum of {@code firstGroup} and {@code groupCount} <b>must</b> be less than the number of shader groups in {@code pipeline}.</li>
-     * <li>{@code dataSize} <b>must</b> be at least <code>{@link VkPhysicalDeviceRayTracingPropertiesNV}::shaderGroupHandleSize × groupCount</code></li>
-     * </ul>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-     * <li>{@code pipeline} <b>must</b> be a valid {@code VkPipeline} handle</li>
-     * <li>{@code pData} <b>must</b> be a valid pointer to an array of {@code dataSize} bytes</li>
-     * <li>{@code dataSize} <b>must</b> be greater than 0</li>
-     * <li>{@code pipeline} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
-     * </ul>
-     * 
-     * <h5>Return Codes</h5>
-     * 
-     * <dl>
-     * <dt>On success, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link VK10#VK_SUCCESS SUCCESS}</li>
-     * </ul></dd>
-     * <dt>On failure, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY}</li>
-     * <li>{@link VK10#VK_ERROR_OUT_OF_DEVICE_MEMORY ERROR_OUT_OF_DEVICE_MEMORY}</li>
-     * </ul></dd>
-     * </dl>
+     * See {@link KHRRayTracingPipeline#vkGetRayTracingShaderGroupHandlesKHR GetRayTracingShaderGroupHandlesKHR}.
      *
      * @param device     the logical device containing the ray tracing pipeline.
      * @param pipeline   the ray tracing pipeline object containing the shaders.
-     * @param firstGroup the index of the first group to retrieve a handle for from the {@link VkRayTracingShaderGroupCreateInfoNV}{@code ::pGroups} array.
+     * @param firstGroup the index of the first group to retrieve a handle for from the {@link VkRayTracingPipelineCreateInfoKHR}{@code ::pGroups} or {@link VkRayTracingPipelineCreateInfoNV}{@code ::pGroups} array.
      * @param groupCount the number of shader handles to retrieve.
      * @param pData      a pointer to a user-allocated buffer where the results will be written.
      */
@@ -1211,13 +1181,18 @@ public class NVRayTracing {
      *     VkQueryPool                                 queryPool,
      *     uint32_t                                    firstQuery);</code></pre>
      * 
+     * <h5>Description</h5>
+     * 
+     * <p>Accesses to any of the acceleration structures listed in {@code pAccelerationStructures} <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies">synchronized</a> with the {@link KHRAccelerationStructure#VK_PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR} <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-pipeline-stages">pipeline stage</a> and an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-access-types">access type</a> of {@link KHRAccelerationStructure#VK_ACCESS_ACCELERATION_STRUCTURE_READ_BIT_KHR ACCESS_ACCELERATION_STRUCTURE_READ_BIT_KHR}.</p>
+     * 
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>{@code queryType} <b>must</b> be {@link #VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_NV QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_NV}</li>
      * <li>{@code queryPool} <b>must</b> have been created with a {@code queryType} matching {@code queryType}</li>
      * <li>The queries identified by {@code queryPool} and {@code firstQuery} <b>must</b> be <em>unavailable</em></li>
-     * <li>All acceleration structures in {@code accelerationStructures} <b>must</b> have been built with {@link #VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_NV BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_NV} if {@code queryType} is {@link #VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_NV QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_NV}</li>
+     * <li>{@code accelerationStructure} <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object via {@link #vkBindAccelerationStructureMemoryNV BindAccelerationStructureMemoryNV}</li>
+     * <li>All acceleration structures in {@code pAccelerationStructures} <b>must</b> have been built with {@link KHRAccelerationStructure#VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR} if {@code queryType} is {@link #VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_NV QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_NV}</li>
+     * <li>{@code queryType} <b>must</b> be {@link #VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_NV QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_NV}</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -1237,6 +1212,7 @@ public class NVRayTracing {
      * <h5>Host Synchronization</h5>
      * 
      * <ul>
+     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
      * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
      * </ul>
      * 
@@ -1275,6 +1251,7 @@ public class NVRayTracing {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
+     * <li>{@code pipeline} <b>must</b> be a ray tracing pipeline</li>
      * <li>{@code pipeline} <b>must</b> have been created with {@link #VK_PIPELINE_CREATE_DEFER_COMPILE_BIT_NV PIPELINE_CREATE_DEFER_COMPILE_BIT_NV}</li>
      * <li>{@code shader} <b>must</b> not have been called as a deferred compile before</li>
      * </ul>

@@ -40,7 +40,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code swapchainCount} &ndash; the number of swapchains being presented to by this command.</li>
  * <li>{@code pRegions} &ndash; {@code NULL} or a pointer to an array of {@link VkPresentRegionKHR} elements with {@code swapchainCount} entries. If not {@code NULL}, each element of {@code pRegions} contains the region that has changed since the last present to the swapchain in the corresponding entry in the {@link VkPresentInfoKHR}{@code ::pSwapchains} array.</li>
  * </ul>

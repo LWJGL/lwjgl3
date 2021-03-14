@@ -28,11 +28,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code drmFormatModifier} must be compatible with the parameters in {@link VkImageCreateInfo} and its {@code pNext} chain, as determined by querying {@link VkPhysicalDeviceImageFormatInfo2} extended with {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT}.</li>
- * <li>{@code drmFormatModifierPlaneCount} <b>must</b> be equal to the {@link VkDrmFormatModifierPropertiesEXT}{@code ::drmFormatModifierPlaneCount} associated with {@link VkImageCreateInfo}{@code ::format} and {@code drmFormatModifier}, as found by querying {@link VkDrmFormatModifierPropertiesListEXT}.</li>
+ * <li>{@code drmFormatModifier} <b>must</b> be compatible with the parameters in {@link VkImageCreateInfo} and its {@code pNext} chain, as determined by querying {@link VkPhysicalDeviceImageFormatInfo2} extended with {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT}</li>
+ * <li>{@code drmFormatModifierPlaneCount} <b>must</b> be equal to the {@link VkDrmFormatModifierPropertiesEXT}{@code ::drmFormatModifierPlaneCount} associated with {@link VkImageCreateInfo}{@code ::format} and {@code drmFormatModifier}, as found by querying {@link VkDrmFormatModifierPropertiesListEXT}</li>
  * <li>For each element of {@code pPlaneLayouts}, {@code size} <b>must</b> be 0</li>
- * <li>For each element of {@code pPlaneLayouts}, {@code arrayPitch} <b>must</b> be 0 if {@link VkImageCreateInfo}{@code ::arrayLayers} is 1.</li>
- * <li>For each element of {@code pPlaneLayouts}, {@code depthPitch} <b>must</b> be 0 if {@link VkImageCreateInfo}{@code ::extent}.depth is 1.</li>
+ * <li>For each element of {@code pPlaneLayouts}, {@code arrayPitch} <b>must</b> be 0 if {@link VkImageCreateInfo}{@code ::arrayLayers} is 1</li>
+ * <li>For each element of {@code pPlaneLayouts}, {@code depthPitch} <b>must</b> be 0 if {@link VkImageCreateInfo}{@code ::extent}.depth is 1</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -50,7 +50,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code drmFormatModifier} &ndash; the <em>Linux DRM format modifier</em> with which the image will be created.</li>
  * <li>{@code drmFormatModifierPlaneCount} &ndash; the number of <em>memory planes</em> in the image (as reported by {@link VkDrmFormatModifierPropertiesEXT}) as well as the length of the {@code pPlaneLayouts} array.</li>
  * <li>{@code pPlaneLayouts} &ndash; a pointer to an array of {@link VkSubresourceLayout} structures describing the image&#8217;s <em>memory planes</em>.</li>

@@ -140,6 +140,8 @@ package org.lwjgl.vulkan;
  *     submit_info.pCommandBuffers = &amp;cmd_buf;
  *     vkQueueSubmit(queue, 1, &amp;submit_info, VK_NULL_HANDLE);</code></pre>
  * 
+ * <h5>VK_NV_win32_keyed_mutex</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_NV_win32_keyed_mutex}</dd>
@@ -162,6 +164,11 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Carsten Rohde <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_win32_keyed_mutex:%20&amp;body=@crohde%20">crohde</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2016-08-19</dd>
  * <dt><b>IP Status</b></dt>

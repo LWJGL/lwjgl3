@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>The bits in {@code handleTypes} <b>must</b> be supported and compatible, as reported by {@link VkExternalSemaphoreProperties}.</li>
+ * <li>The bits in {@code handleTypes} <b>must</b> be supported and compatible, as reported by {@link VkExternalSemaphoreProperties}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -35,7 +35,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code handleTypes} &ndash; a bitmask of {@code VkExternalSemaphoreHandleTypeFlagBits} specifying one or more semaphore handle types the application <b>can</b> export from the resulting semaphore. The application <b>can</b> request multiple handle types for the same semaphore.</li>
  * </ul>
  * 

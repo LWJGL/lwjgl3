@@ -20,13 +20,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>Importing memory from a host pointer shares ownership of the memory between the host and the Vulkan implementation. The application <b>can</b> continue to access the memory through the host pointer but it is the application's responsibility to synchronize device and non-device access to the underlying memory as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#memory-device-hostaccess">Host Access to Device Memory Objects</a>.</p>
+ * <p>Importing memory from a host pointer shares ownership of the memory between the host and the Vulkan implementation. The application <b>can</b> continue to access the memory through the host pointer but it is the application's responsibility to synchronize device and non-device access to the payload as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#memory-device-hostaccess">Host Access to Device Memory Objects</a>.</p>
  * 
- * <p>Applications <b>can</b> import the same underlying memory into multiple instances of Vulkan and multiple times into a given Vulkan instance. However, implementations <b>may</b> fail to import the same underlying memory multiple times into a given physical device due to platform constraints.</p>
+ * <p>Applications <b>can</b> import the same payload into multiple instances of Vulkan and multiple times into a given Vulkan instance. However, implementations <b>may</b> fail to import the same payload multiple times into a given physical device due to platform constraints.</p>
  * 
  * <p>Importing memory from a particular host pointer <b>may</b> not be possible due to additional platform-specific restrictions beyond the scope of this specification in which case the implementation <b>must</b> fail the memory import operation with the error code {@link KHRExternalMemory#VK_ERROR_INVALID_EXTERNAL_HANDLE_KHR ERROR_INVALID_EXTERNAL_HANDLE_KHR}.</p>
  * 
- * <p>The application <b>must</b> ensure that the imported memory range remains valid and accessible for the lifetime of the imported memory object.</p>
+ * <p>Whether device memory objects imported from a host pointer hold a reference to their payload is undefined. As such, the application <b>must</b> ensure that the imported memory range remains valid and accessible for the lifetime of the imported memory object.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
@@ -49,7 +49,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code handleType} &ndash; specifies the handle type.</li>
  * <li>{@code pHostPointer} &ndash; the host pointer to import from.</li>
  * </ul>

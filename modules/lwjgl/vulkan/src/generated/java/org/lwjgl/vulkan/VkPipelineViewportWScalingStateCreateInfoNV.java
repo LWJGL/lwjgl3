@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code viewportWScalingEnable} &ndash; controls whether viewport <b>W</b> scaling is enabled.</li>
  * <li>{@code viewportCount} &ndash; the number of viewports used by <b>W</b> scaling, and <b>must</b> match the number of viewports in the pipeline if viewport <b>W</b> scaling is enabled.</li>
  * <li>{@code pViewportWScalings} &ndash; a pointer to an array of {@link VkViewportWScalingNV} structures defining the <b>W</b> scaling parameters for the corresponding viewports. If the viewport <b>W</b> scaling state is dynamic, this member is ignored.</li>

@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code maxTransformFeedbackStreams} &ndash; the maximum number of vertex streams that can be output from geometry shaders declared with the {@code GeometryStreams} capability. If the implementation does not support {@link VkPhysicalDeviceTransformFeedbackFeaturesEXT}{@code ::geometryStreams} then {@code maxTransformFeedbackStreams} <b>must</b> be set to 1.</li>
  * <li>{@code maxTransformFeedbackBuffers} &ndash; the maximum number of transform feedback buffers that can be bound for capturing shader outputs from the last vertex processing stage.</li>
  * <li>{@code maxTransformFeedbackBufferSize} &ndash; the maximum size that can be specified when binding a buffer for transform feedback in {@link EXTTransformFeedback#vkCmdBindTransformFeedbackBuffersEXT CmdBindTransformFeedbackBuffersEXT}.</li>

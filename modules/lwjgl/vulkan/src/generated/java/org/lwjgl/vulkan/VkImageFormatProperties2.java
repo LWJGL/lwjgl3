@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2 STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2}</li>
  * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkExternalImageFormatProperties}, {@link VkFilterCubicImageViewImageFormatPropertiesEXT}, {@link VkSamplerYcbcrConversionImageFormatProperties}, or {@link VkTextureLODGatherFormatPropertiesAMD}</li>
- * <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -43,7 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure. The {@code pNext} chain of {@link VkImageFormatProperties2} is used to allow the specification of additional capabilities to be returned from {@code vkGetPhysicalDeviceImageFormatProperties2}.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure. The {@code pNext} chain of {@link VkImageFormatProperties2} is used to allow the specification of additional capabilities to be returned from {@code vkGetPhysicalDeviceImageFormatProperties2}.</li>
  * <li>{@code imageFormatProperties} &ndash; a {@link VkImageFormatProperties} structure in which capabilities are returned.</li>
  * </ul>
  * 

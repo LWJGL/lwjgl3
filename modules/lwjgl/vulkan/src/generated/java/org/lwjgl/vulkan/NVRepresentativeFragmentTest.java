@@ -12,6 +12,8 @@ package org.lwjgl.vulkan;
  * 
  * <p>The representative fragment test has no effect if early fragment tests are not enabled via the fragment shader. The set of fragments discarded by the representative fragment test is implementation-dependent and may vary from frame to frame. In some cases, the representative fragment test may not discard any fragments for a given primitive.</p>
  * 
+ * <h5>VK_NV_representative_fragment_test</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_NV_representative_fragment_test}</dd>
@@ -29,6 +31,11 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Kedarnath Thangudu <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_representative_fragment_test:%20&amp;body=@kthangudu%20">kthangudu</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2018-09-13</dd>
  * <dt><b>Contributors</b></dt>

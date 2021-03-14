@@ -31,14 +31,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>It is only valid to set {@code localDimmingEnable} to {@link VK10#VK_TRUE TRUE} if {@link VkDisplayNativeHdrSurfaceCapabilitiesAMD}{@code ::localDimmingSupport} is supported.</li>
+ * <li>It is only valid to set {@code localDimmingEnable} to {@link VK10#VK_TRUE TRUE} if {@link VkDisplayNativeHdrSurfaceCapabilitiesAMD}{@code ::localDimmingSupport} is supported</li>
  * </ul>
  * 
  * <h3>Member documentation</h3>
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code localDimmingEnable} &ndash; specifies whether local dimming is enabled for the swapchain.</li>
  * </ul>
  * 

@@ -10,6 +10,8 @@ package org.lwjgl.vulkan;
  * 
  * <p>This functionality may be useful for deferred rendering algorithms, where the second pass needs to know which samples belong to which original fragments.</p>
  * 
+ * <h5>VK_NV_fragment_coverage_to_color</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_NV_fragment_coverage_to_color}</dd>
@@ -27,6 +29,11 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_fragment_coverage_to_color:%20&amp;body=@jeffbolznv%20">jeffbolznv</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-05-21</dd>
  * <dt><b>Contributors</b></dt>

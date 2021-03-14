@@ -41,7 +41,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If the format is a depth/stencil format, this bit only specifies that the depth aspect (not the stencil aspect) of an image of this format supports min/max filtering, and that min/max filtering of the depth aspect is supported when depth compare is disabled in the sampler.</p>
  * 
- * <p>If {@code filterMinmaxImageComponentMapping} is {@link VK10#VK_FALSE FALSE} the component mapping of the image view used with min/max filtering <b>must</b> have been created with the {@code r} component set to {@link VK10#VK_COMPONENT_SWIZZLE_IDENTITY COMPONENT_SWIZZLE_IDENTITY}. Only the {@code r} component of the sampled image value is defined and the other component values are undefined. If {@code filterMinmaxImageComponentMapping} is {@link VK10#VK_TRUE TRUE} this restriction does not apply and image component mapping works as normal.</p>
+ * <p>If {@code filterMinmaxImageComponentMapping} is {@link VK10#VK_FALSE FALSE} the component mapping of the image view used with min/max filtering <b>must</b> have been created with the {@code r} component set to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#resources-image-views-identity-mappings">identity swizzle</a>. Only the {@code r} component of the sampled image value is defined and the other component values are undefined. If {@code filterMinmaxImageComponentMapping} is {@link VK10#VK_TRUE TRUE} this restriction does not apply and image component mapping works as normal.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -53,7 +53,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code filterMinmaxSingleComponentFormats} &ndash; a boolean value indicating whether a minimum set of required formats support min/max filtering.</li>
  * <li>{@code filterMinmaxImageComponentMapping} &ndash; a boolean value indicating whether the implementation supports non-identity component mapping of the image when doing min/max filtering.</li>
  * </ul>

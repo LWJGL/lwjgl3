@@ -21,13 +21,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>Applications <b>may</b> change the name associated with an object simply by calling {@code vkSetDebugUtilsObjectNameEXT} again with a new string. If {@code pObjectName} is an empty string, then any previously set name is removed.</p>
+ * <p>Applications <b>may</b> change the name associated with an object simply by calling {@code vkSetDebugUtilsObjectNameEXT} again with a new string. If {@code pObjectName} is either {@code NULL} or an empty string, then any previously set name is removed.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
  * <li>If {@code objectType} is {@link VK10#VK_OBJECT_TYPE_UNKNOWN OBJECT_TYPE_UNKNOWN}, {@code objectHandle} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>If {@code objectType} is not {@link VK10#VK_OBJECT_TYPE_UNKNOWN OBJECT_TYPE_UNKNOWN}, {@code objectHandle} <b>must</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE} or a valid Vulkan handle of the type associated with {@code objectType} as defined in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#debugging-object-types">VkObjectType and Vulkan Handle Relationship</a> table</li>
+ * <li>If {@code objectType} is not {@link VK10#VK_OBJECT_TYPE_UNKNOWN OBJECT_TYPE_UNKNOWN}, {@code objectHandle} <b>must</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE} or a valid Vulkan handle of the type associated with {@code objectType} as defined in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#debugging-object-types">{@code VkObjectType} and Vulkan Handle Relationship</a> table</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -47,10 +47,10 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code objectType} &ndash; a {@code VkObjectType} specifying the type of the object to be named.</li>
  * <li>{@code objectHandle} &ndash; the object to be named.</li>
- * <li>{@code pObjectName} &ndash; a null-terminated UTF-8 string specifying the name to apply to {@code objectHandle}.</li>
+ * <li>{@code pObjectName} &ndash; either {@code NULL} or a null-terminated UTF-8 string specifying the name to apply to {@code objectHandle}.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

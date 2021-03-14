@@ -17,7 +17,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 import static org.lwjgl.vulkan.VK10.*;
-import static org.lwjgl.vulkan.VK11.*;
 
 /**
  * Structure specifying physical device properties for functionality promoted to Vulkan 1.1.
@@ -30,7 +29,6 @@ import static org.lwjgl.vulkan.VK11.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_PROPERTIES}</li>
- * <li>{@code pointClippingBehavior} <b>must</b> be a valid {@code VkPointClippingBehavior} value</li>
  * </ul>
  * 
  * <h3>Member documentation</h3>
@@ -38,13 +36,13 @@ import static org.lwjgl.vulkan.VK11.*;
  * <ul>
  * <li>{@code deviceUUID[VK_UUID_SIZE]} &ndash; an array of {@link VK10#VK_UUID_SIZE UUID_SIZE} {@code uint8_t} values representing a universally unique identifier for the device.</li>
  * <li>{@code driverUUID[VK_UUID_SIZE]} &ndash; an array of {@link VK10#VK_UUID_SIZE UUID_SIZE} {@code uint8_t} values representing a universally unique identifier for the driver build in use by the device.</li>
- * <li>{@code deviceLUID[VK_LUID_SIZE]} &ndash; an array of {@link VK11#VK_LUID_SIZE LUID_SIZE} {@code uint8_t} values representing a locally unique identifier for the device.</li>
+ * <li>{@code deviceLUID[VK_LUID_SIZE]} &ndash; an array of {@link VK10#VK_LUID_SIZE LUID_SIZE} {@code uint8_t} values representing a locally unique identifier for the device.</li>
  * <li>{@code deviceNodeMask} &ndash; a {@code uint32_t} bitfield identifying the node within a linked device adapter corresponding to the device.</li>
  * <li>{@code deviceLUIDValid} &ndash; a boolean value that will be {@link VK10#VK_TRUE TRUE} if {@code deviceLUID} contains a valid LUID and {@code deviceNodeMask} contains a valid node mask, and {@link VK10#VK_FALSE FALSE} if they do not.</li>
  * <li>{@code subgroupSize} &ndash; the default number of invocations in each subgroup. {@code subgroupSize} is at least 1 if any of the physical device&#8217;s queues support {@link VK10#VK_QUEUE_GRAPHICS_BIT QUEUE_GRAPHICS_BIT} or {@link VK10#VK_QUEUE_COMPUTE_BIT QUEUE_COMPUTE_BIT}. {@code subgroupSize} is a power-of-two.</li>
- * <li>{@code subgroupSupportedStages} &ndash; a bitfield of {@code VkShaderStageFlagBits} describing the shader stages that subgroup operations are supported in. {@code subgroupSupportedStages} will have the {@link VK10#VK_SHADER_STAGE_COMPUTE_BIT SHADER_STAGE_COMPUTE_BIT} bit set if any of the physical device&#8217;s queues support {@link VK10#VK_QUEUE_COMPUTE_BIT QUEUE_COMPUTE_BIT}.</li>
- * <li>{@code subgroupSupportedOperations} &ndash; a bitmask of {@code VkSubgroupFeatureFlagBits} specifying the sets of subgroup operations supported on this device. {@code subgroupSupportedOperations} will have the {@link VK11#VK_SUBGROUP_FEATURE_BASIC_BIT SUBGROUP_FEATURE_BASIC_BIT} bit set if any of the physical device&#8217;s queues support {@link VK10#VK_QUEUE_GRAPHICS_BIT QUEUE_GRAPHICS_BIT} or {@link VK10#VK_QUEUE_COMPUTE_BIT QUEUE_COMPUTE_BIT}.</li>
- * <li>{@code subgroupQuadOperationsInAllStages} &ndash; a boolean specifying whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-subgroup-quad">quad subgroup operations</a> are available in all stages, or are restricted to fragment and compute stages.</li>
+ * <li>{@code subgroupSupportedStages} &ndash; a bitfield of {@code VkShaderStageFlagBits} describing the shader stages that <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#shaders-group-operations">group operations</a> with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#shaders-scope-subgroup">subgroup scope</a> are supported in. {@code subgroupSupportedStages} will have the {@link VK10#VK_SHADER_STAGE_COMPUTE_BIT SHADER_STAGE_COMPUTE_BIT} bit set if any of the physical device&#8217;s queues support {@link VK10#VK_QUEUE_COMPUTE_BIT QUEUE_COMPUTE_BIT}.</li>
+ * <li>{@code subgroupSupportedOperations} &ndash; a bitmask of {@code VkSubgroupFeatureFlagBits} specifying the sets of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#shaders-group-operations">group operations</a> with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#shaders-scope-subgroup">subgroup scope</a> supported on this device. {@code subgroupSupportedOperations} will have the {@link VK11#VK_SUBGROUP_FEATURE_BASIC_BIT SUBGROUP_FEATURE_BASIC_BIT} bit set if any of the physical device&#8217;s queues support {@link VK10#VK_QUEUE_GRAPHICS_BIT QUEUE_GRAPHICS_BIT} or {@link VK10#VK_QUEUE_COMPUTE_BIT QUEUE_COMPUTE_BIT}.</li>
+ * <li>{@code subgroupQuadOperationsInAllStages} &ndash; a boolean specifying whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#shaders-quad-operations">quad group operations</a> are available in all stages, or are restricted to fragment and compute stages.</li>
  * <li>{@code pointClippingBehavior} &ndash; a {@code VkPointClippingBehavior} value specifying the point clipping behavior supported by the implementation.</li>
  * <li>{@code maxMultiviewViewCount} &ndash; one greater than the maximum view index that <b>can</b> be used in a subpass.</li>
  * <li>{@code maxMultiviewInstanceIndex} &ndash; the maximum valid value of instance index allowed to be generated by a drawing command recorded within a subpass of a multiview render pass instance.</li>
@@ -225,80 +223,14 @@ public class VkPhysicalDeviceVulkan11Properties extends Struct implements Native
     public VkPhysicalDeviceVulkan11Properties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceVulkan11Properties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Copies the specified {@link ByteBuffer} to the {@code deviceUUID} field. */
-    public VkPhysicalDeviceVulkan11Properties deviceUUID(@NativeType("uint8_t[VK_UUID_SIZE]") ByteBuffer value) { ndeviceUUID(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@code deviceUUID} field. */
-    public VkPhysicalDeviceVulkan11Properties deviceUUID(int index, @NativeType("uint8_t") byte value) { ndeviceUUID(address(), index, value); return this; }
-    /** Copies the specified {@link ByteBuffer} to the {@code driverUUID} field. */
-    public VkPhysicalDeviceVulkan11Properties driverUUID(@NativeType("uint8_t[VK_UUID_SIZE]") ByteBuffer value) { ndriverUUID(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@code driverUUID} field. */
-    public VkPhysicalDeviceVulkan11Properties driverUUID(int index, @NativeType("uint8_t") byte value) { ndriverUUID(address(), index, value); return this; }
-    /** Copies the specified {@link ByteBuffer} to the {@code deviceLUID} field. */
-    public VkPhysicalDeviceVulkan11Properties deviceLUID(@NativeType("uint8_t[VK_LUID_SIZE]") ByteBuffer value) { ndeviceLUID(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@code deviceLUID} field. */
-    public VkPhysicalDeviceVulkan11Properties deviceLUID(int index, @NativeType("uint8_t") byte value) { ndeviceLUID(address(), index, value); return this; }
-    /** Sets the specified value to the {@code deviceNodeMask} field. */
-    public VkPhysicalDeviceVulkan11Properties deviceNodeMask(@NativeType("uint32_t") int value) { ndeviceNodeMask(address(), value); return this; }
-    /** Sets the specified value to the {@code deviceLUIDValid} field. */
-    public VkPhysicalDeviceVulkan11Properties deviceLUIDValid(@NativeType("VkBool32") boolean value) { ndeviceLUIDValid(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code subgroupSize} field. */
-    public VkPhysicalDeviceVulkan11Properties subgroupSize(@NativeType("uint32_t") int value) { nsubgroupSize(address(), value); return this; }
-    /** Sets the specified value to the {@code subgroupSupportedStages} field. */
-    public VkPhysicalDeviceVulkan11Properties subgroupSupportedStages(@NativeType("VkShaderStageFlags") int value) { nsubgroupSupportedStages(address(), value); return this; }
-    /** Sets the specified value to the {@code subgroupSupportedOperations} field. */
-    public VkPhysicalDeviceVulkan11Properties subgroupSupportedOperations(@NativeType("VkSubgroupFeatureFlags") int value) { nsubgroupSupportedOperations(address(), value); return this; }
-    /** Sets the specified value to the {@code subgroupQuadOperationsInAllStages} field. */
-    public VkPhysicalDeviceVulkan11Properties subgroupQuadOperationsInAllStages(@NativeType("VkBool32") boolean value) { nsubgroupQuadOperationsInAllStages(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code pointClippingBehavior} field. */
-    public VkPhysicalDeviceVulkan11Properties pointClippingBehavior(@NativeType("VkPointClippingBehavior") int value) { npointClippingBehavior(address(), value); return this; }
-    /** Sets the specified value to the {@code maxMultiviewViewCount} field. */
-    public VkPhysicalDeviceVulkan11Properties maxMultiviewViewCount(@NativeType("uint32_t") int value) { nmaxMultiviewViewCount(address(), value); return this; }
-    /** Sets the specified value to the {@code maxMultiviewInstanceIndex} field. */
-    public VkPhysicalDeviceVulkan11Properties maxMultiviewInstanceIndex(@NativeType("uint32_t") int value) { nmaxMultiviewInstanceIndex(address(), value); return this; }
-    /** Sets the specified value to the {@code protectedNoFault} field. */
-    public VkPhysicalDeviceVulkan11Properties protectedNoFault(@NativeType("VkBool32") boolean value) { nprotectedNoFault(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code maxPerSetDescriptors} field. */
-    public VkPhysicalDeviceVulkan11Properties maxPerSetDescriptors(@NativeType("uint32_t") int value) { nmaxPerSetDescriptors(address(), value); return this; }
-    /** Sets the specified value to the {@code maxMemoryAllocationSize} field. */
-    public VkPhysicalDeviceVulkan11Properties maxMemoryAllocationSize(@NativeType("VkDeviceSize") long value) { nmaxMemoryAllocationSize(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPhysicalDeviceVulkan11Properties set(
         int sType,
-        long pNext,
-        ByteBuffer deviceUUID,
-        ByteBuffer driverUUID,
-        ByteBuffer deviceLUID,
-        int deviceNodeMask,
-        boolean deviceLUIDValid,
-        int subgroupSize,
-        int subgroupSupportedStages,
-        int subgroupSupportedOperations,
-        boolean subgroupQuadOperationsInAllStages,
-        int pointClippingBehavior,
-        int maxMultiviewViewCount,
-        int maxMultiviewInstanceIndex,
-        boolean protectedNoFault,
-        int maxPerSetDescriptors,
-        long maxMemoryAllocationSize
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        deviceUUID(deviceUUID);
-        driverUUID(driverUUID);
-        deviceLUID(deviceLUID);
-        deviceNodeMask(deviceNodeMask);
-        deviceLUIDValid(deviceLUIDValid);
-        subgroupSize(subgroupSize);
-        subgroupSupportedStages(subgroupSupportedStages);
-        subgroupSupportedOperations(subgroupSupportedOperations);
-        subgroupQuadOperationsInAllStages(subgroupQuadOperationsInAllStages);
-        pointClippingBehavior(pointClippingBehavior);
-        maxMultiviewViewCount(maxMultiviewViewCount);
-        maxMultiviewInstanceIndex(maxMultiviewInstanceIndex);
-        protectedNoFault(protectedNoFault);
-        maxPerSetDescriptors(maxPerSetDescriptors);
-        maxMemoryAllocationSize(maxMemoryAllocationSize);
 
         return this;
     }
@@ -509,57 +441,6 @@ public class VkPhysicalDeviceVulkan11Properties extends Struct implements Native
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan11Properties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceVulkan11Properties.PNEXT, value); }
-    /** Unsafe version of {@link #deviceUUID(ByteBuffer) deviceUUID}. */
-    public static void ndeviceUUID(long struct, ByteBuffer value) {
-        if (CHECKS) { checkGT(value, VK_UUID_SIZE); }
-        memCopy(memAddress(value), struct + VkPhysicalDeviceVulkan11Properties.DEVICEUUID, value.remaining() * 1);
-    }
-    /** Unsafe version of {@link #deviceUUID(int, byte) deviceUUID}. */
-    public static void ndeviceUUID(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + VkPhysicalDeviceVulkan11Properties.DEVICEUUID + check(index, VK_UUID_SIZE) * 1, value);
-    }
-    /** Unsafe version of {@link #driverUUID(ByteBuffer) driverUUID}. */
-    public static void ndriverUUID(long struct, ByteBuffer value) {
-        if (CHECKS) { checkGT(value, VK_UUID_SIZE); }
-        memCopy(memAddress(value), struct + VkPhysicalDeviceVulkan11Properties.DRIVERUUID, value.remaining() * 1);
-    }
-    /** Unsafe version of {@link #driverUUID(int, byte) driverUUID}. */
-    public static void ndriverUUID(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + VkPhysicalDeviceVulkan11Properties.DRIVERUUID + check(index, VK_UUID_SIZE) * 1, value);
-    }
-    /** Unsafe version of {@link #deviceLUID(ByteBuffer) deviceLUID}. */
-    public static void ndeviceLUID(long struct, ByteBuffer value) {
-        if (CHECKS) { checkGT(value, VK_LUID_SIZE); }
-        memCopy(memAddress(value), struct + VkPhysicalDeviceVulkan11Properties.DEVICELUID, value.remaining() * 1);
-    }
-    /** Unsafe version of {@link #deviceLUID(int, byte) deviceLUID}. */
-    public static void ndeviceLUID(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + VkPhysicalDeviceVulkan11Properties.DEVICELUID + check(index, VK_LUID_SIZE) * 1, value);
-    }
-    /** Unsafe version of {@link #deviceNodeMask(int) deviceNodeMask}. */
-    public static void ndeviceNodeMask(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan11Properties.DEVICENODEMASK, value); }
-    /** Unsafe version of {@link #deviceLUIDValid(boolean) deviceLUIDValid}. */
-    public static void ndeviceLUIDValid(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan11Properties.DEVICELUIDVALID, value); }
-    /** Unsafe version of {@link #subgroupSize(int) subgroupSize}. */
-    public static void nsubgroupSize(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan11Properties.SUBGROUPSIZE, value); }
-    /** Unsafe version of {@link #subgroupSupportedStages(int) subgroupSupportedStages}. */
-    public static void nsubgroupSupportedStages(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan11Properties.SUBGROUPSUPPORTEDSTAGES, value); }
-    /** Unsafe version of {@link #subgroupSupportedOperations(int) subgroupSupportedOperations}. */
-    public static void nsubgroupSupportedOperations(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan11Properties.SUBGROUPSUPPORTEDOPERATIONS, value); }
-    /** Unsafe version of {@link #subgroupQuadOperationsInAllStages(boolean) subgroupQuadOperationsInAllStages}. */
-    public static void nsubgroupQuadOperationsInAllStages(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan11Properties.SUBGROUPQUADOPERATIONSINALLSTAGES, value); }
-    /** Unsafe version of {@link #pointClippingBehavior(int) pointClippingBehavior}. */
-    public static void npointClippingBehavior(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan11Properties.POINTCLIPPINGBEHAVIOR, value); }
-    /** Unsafe version of {@link #maxMultiviewViewCount(int) maxMultiviewViewCount}. */
-    public static void nmaxMultiviewViewCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan11Properties.MAXMULTIVIEWVIEWCOUNT, value); }
-    /** Unsafe version of {@link #maxMultiviewInstanceIndex(int) maxMultiviewInstanceIndex}. */
-    public static void nmaxMultiviewInstanceIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan11Properties.MAXMULTIVIEWINSTANCEINDEX, value); }
-    /** Unsafe version of {@link #protectedNoFault(boolean) protectedNoFault}. */
-    public static void nprotectedNoFault(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan11Properties.PROTECTEDNOFAULT, value); }
-    /** Unsafe version of {@link #maxPerSetDescriptors(int) maxPerSetDescriptors}. */
-    public static void nmaxPerSetDescriptors(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan11Properties.MAXPERSETDESCRIPTORS, value); }
-    /** Unsafe version of {@link #maxMemoryAllocationSize(long) maxMemoryAllocationSize}. */
-    public static void nmaxMemoryAllocationSize(long struct, long value) { UNSAFE.putLong(null, struct + VkPhysicalDeviceVulkan11Properties.MAXMEMORYALLOCATIONSIZE, value); }
 
     // -----------------------------------
 
@@ -664,42 +545,6 @@ public class VkPhysicalDeviceVulkan11Properties extends Struct implements Native
         public VkPhysicalDeviceVulkan11Properties.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceVulkan11Properties.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceVulkan11Properties.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceVulkan11Properties.npNext(address(), value); return this; }
-        /** Copies the specified {@link ByteBuffer} to the {@code deviceUUID} field. */
-        public VkPhysicalDeviceVulkan11Properties.Buffer deviceUUID(@NativeType("uint8_t[VK_UUID_SIZE]") ByteBuffer value) { VkPhysicalDeviceVulkan11Properties.ndeviceUUID(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@code deviceUUID} field. */
-        public VkPhysicalDeviceVulkan11Properties.Buffer deviceUUID(int index, @NativeType("uint8_t") byte value) { VkPhysicalDeviceVulkan11Properties.ndeviceUUID(address(), index, value); return this; }
-        /** Copies the specified {@link ByteBuffer} to the {@code driverUUID} field. */
-        public VkPhysicalDeviceVulkan11Properties.Buffer driverUUID(@NativeType("uint8_t[VK_UUID_SIZE]") ByteBuffer value) { VkPhysicalDeviceVulkan11Properties.ndriverUUID(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@code driverUUID} field. */
-        public VkPhysicalDeviceVulkan11Properties.Buffer driverUUID(int index, @NativeType("uint8_t") byte value) { VkPhysicalDeviceVulkan11Properties.ndriverUUID(address(), index, value); return this; }
-        /** Copies the specified {@link ByteBuffer} to the {@code deviceLUID} field. */
-        public VkPhysicalDeviceVulkan11Properties.Buffer deviceLUID(@NativeType("uint8_t[VK_LUID_SIZE]") ByteBuffer value) { VkPhysicalDeviceVulkan11Properties.ndeviceLUID(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@code deviceLUID} field. */
-        public VkPhysicalDeviceVulkan11Properties.Buffer deviceLUID(int index, @NativeType("uint8_t") byte value) { VkPhysicalDeviceVulkan11Properties.ndeviceLUID(address(), index, value); return this; }
-        /** Sets the specified value to the {@code deviceNodeMask} field. */
-        public VkPhysicalDeviceVulkan11Properties.Buffer deviceNodeMask(@NativeType("uint32_t") int value) { VkPhysicalDeviceVulkan11Properties.ndeviceNodeMask(address(), value); return this; }
-        /** Sets the specified value to the {@code deviceLUIDValid} field. */
-        public VkPhysicalDeviceVulkan11Properties.Buffer deviceLUIDValid(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan11Properties.ndeviceLUIDValid(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code subgroupSize} field. */
-        public VkPhysicalDeviceVulkan11Properties.Buffer subgroupSize(@NativeType("uint32_t") int value) { VkPhysicalDeviceVulkan11Properties.nsubgroupSize(address(), value); return this; }
-        /** Sets the specified value to the {@code subgroupSupportedStages} field. */
-        public VkPhysicalDeviceVulkan11Properties.Buffer subgroupSupportedStages(@NativeType("VkShaderStageFlags") int value) { VkPhysicalDeviceVulkan11Properties.nsubgroupSupportedStages(address(), value); return this; }
-        /** Sets the specified value to the {@code subgroupSupportedOperations} field. */
-        public VkPhysicalDeviceVulkan11Properties.Buffer subgroupSupportedOperations(@NativeType("VkSubgroupFeatureFlags") int value) { VkPhysicalDeviceVulkan11Properties.nsubgroupSupportedOperations(address(), value); return this; }
-        /** Sets the specified value to the {@code subgroupQuadOperationsInAllStages} field. */
-        public VkPhysicalDeviceVulkan11Properties.Buffer subgroupQuadOperationsInAllStages(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan11Properties.nsubgroupQuadOperationsInAllStages(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code pointClippingBehavior} field. */
-        public VkPhysicalDeviceVulkan11Properties.Buffer pointClippingBehavior(@NativeType("VkPointClippingBehavior") int value) { VkPhysicalDeviceVulkan11Properties.npointClippingBehavior(address(), value); return this; }
-        /** Sets the specified value to the {@code maxMultiviewViewCount} field. */
-        public VkPhysicalDeviceVulkan11Properties.Buffer maxMultiviewViewCount(@NativeType("uint32_t") int value) { VkPhysicalDeviceVulkan11Properties.nmaxMultiviewViewCount(address(), value); return this; }
-        /** Sets the specified value to the {@code maxMultiviewInstanceIndex} field. */
-        public VkPhysicalDeviceVulkan11Properties.Buffer maxMultiviewInstanceIndex(@NativeType("uint32_t") int value) { VkPhysicalDeviceVulkan11Properties.nmaxMultiviewInstanceIndex(address(), value); return this; }
-        /** Sets the specified value to the {@code protectedNoFault} field. */
-        public VkPhysicalDeviceVulkan11Properties.Buffer protectedNoFault(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan11Properties.nprotectedNoFault(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code maxPerSetDescriptors} field. */
-        public VkPhysicalDeviceVulkan11Properties.Buffer maxPerSetDescriptors(@NativeType("uint32_t") int value) { VkPhysicalDeviceVulkan11Properties.nmaxPerSetDescriptors(address(), value); return this; }
-        /** Sets the specified value to the {@code maxMemoryAllocationSize} field. */
-        public VkPhysicalDeviceVulkan11Properties.Buffer maxMemoryAllocationSize(@NativeType("VkDeviceSize") long value) { VkPhysicalDeviceVulkan11Properties.nmaxMemoryAllocationSize(address(), value); return this; }
 
     }
 

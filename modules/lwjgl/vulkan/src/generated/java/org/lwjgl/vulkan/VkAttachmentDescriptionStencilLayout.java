@@ -38,7 +38,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code stencilInitialLayout} &ndash; the layout the stencil aspect of the attachment image subresource will be in when a render pass instance begins.</li>
  * <li>{@code stencilFinalLayout} &ndash; the layout the stencil aspect of the attachment image subresource will be transitioned to when a render pass instance ends.</li>
  * </ul>

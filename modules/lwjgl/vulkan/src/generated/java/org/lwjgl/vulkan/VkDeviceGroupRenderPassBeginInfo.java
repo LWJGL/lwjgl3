@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code deviceMask} <b>must</b> be a valid device mask value</li>
  * <li>{@code deviceMask} <b>must</b> not be zero</li>
  * <li>{@code deviceMask} <b>must</b> be a subset of the command buffer&#8217;s initial device mask</li>
- * <li>{@code deviceRenderAreaCount} <b>must</b> either be zero or equal to the number of physical devices in the logical device.</li>
+ * <li>{@code deviceRenderAreaCount} <b>must</b> either be zero or equal to the number of physical devices in the logical device</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -51,7 +51,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code deviceMask} &ndash; the device mask for the render pass instance.</li>
  * <li>{@code deviceRenderAreaCount} &ndash; the number of elements in the {@code pDeviceRenderAreas} array.</li>
  * <li>{@code pDeviceRenderAreas} &ndash; a pointer to an array of {@link VkRect2D} structures defining the render area for each physical device.</li>

@@ -6,13 +6,13 @@
 package org.lwjgl.vulkan;
 
 /**
- * <h5>Description</h5>
- * 
- * <p>This extension provides the ability to determine device-specific properties on NVIDIA GPUs. It provides the number of streaming multiprocessors (SMs), the maximum number of warps (subgroups) that can run on an SM, and shader builtins to enable invocations to identify which SM and warp a shader invocation is executing on.</p>
+ * This extension provides the ability to determine device-specific properties on NVIDIA GPUs. It provides the number of streaming multiprocessors (SMs), the maximum number of warps (subgroups) that can run on an SM, and shader builtins to enable invocations to identify which SM and warp a shader invocation is executing on.
  * 
  * <p>This extension enables support for the SPIR-V {@code ShaderSMBuiltinsNV} capability.</p>
  * 
  * <p>These properties and built-ins <b>should</b> typically only be used for debugging purposes.</p>
+ * 
+ * <h5>VK_NV_shader_sm_builtins</h5>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -31,6 +31,11 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Daniel Koch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_shader_sm_builtins:%20&amp;body=@dgkoch%20">dgkoch</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2019-05-28</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>

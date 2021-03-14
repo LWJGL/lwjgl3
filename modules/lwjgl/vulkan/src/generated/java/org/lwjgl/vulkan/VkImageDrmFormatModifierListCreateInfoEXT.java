@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>Each <em>modifier</em> in {@code pDrmFormatModifiers} must be compatible with the parameters in {@link VkImageCreateInfo} and its {@code pNext} chain, as determined by querying {@link VkPhysicalDeviceImageFormatInfo2} extended with {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT}.</li>
+ * <li>Each <em>modifier</em> in {@code pDrmFormatModifiers} <b>must</b> be compatible with the parameters in {@link VkImageCreateInfo} and its {@code pNext} chain, as determined by querying {@link VkPhysicalDeviceImageFormatInfo2} extended with {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code drmFormatModifierCount} &ndash; the length of the {@code pDrmFormatModifiers} array.</li>
  * <li>{@code pDrmFormatModifiers} &ndash; a pointer to an array of <em>Linux DRM format modifiers</em>.</li>
  * </ul>

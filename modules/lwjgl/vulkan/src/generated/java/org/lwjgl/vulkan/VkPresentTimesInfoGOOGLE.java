@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code swapchainCount} <b>must</b> be the same value as {@link VkPresentInfoKHR}{@code ::swapchainCount}, where {@link VkPresentInfoKHR} is included in the {@code pNext} chain of this {@link VkPresentTimesInfoGOOGLE} structure.</li>
+ * <li>{@code swapchainCount} <b>must</b> be the same value as {@link VkPresentInfoKHR}{@code ::swapchainCount}, where {@link VkPresentInfoKHR} is included in the {@code pNext} chain of this {@link VkPresentTimesInfoGOOGLE} structure</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -40,7 +40,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code swapchainCount} &ndash; the number of swapchains being presented to by this command.</li>
  * <li>{@code pTimes} &ndash; {@code NULL} or a pointer to an array of {@link VkPresentTimeGOOGLE} elements with {@code swapchainCount} entries. If not {@code NULL}, each element of {@code pTimes} contains the earliest time to present the image corresponding to the entry in the {@link VkPresentInfoKHR}{@code ::pImageIndices} array.</li>
  * </ul>

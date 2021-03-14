@@ -22,6 +22,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If the {@link VkPhysicalDeviceRayTracingPropertiesNV} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceProperties2}, it is filled with the implementation-dependent limits.</p>
  * 
+ * <p>Limits specified by this structure <b>must</b> match those specified with the same name in {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR} and {@link VkPhysicalDeviceRayTracingPipelinePropertiesKHR}.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
@@ -32,11 +34,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code shaderGroupHandleSize} &ndash; size in bytes of the shader header.</li>
  * <li>{@code maxRecursionDepth} &ndash; the maximum number of levels of recursion allowed in a trace command.</li>
- * <li>{@code maxShaderGroupStride} &ndash; the maximum stride in bytes allowed between shader groups in the SBT.</li>
- * <li>{@code shaderGroupBaseAlignment} &ndash; the required alignment in bytes for the base of the SBTs.</li>
+ * <li>{@code maxShaderGroupStride} &ndash; the maximum stride in bytes allowed between shader groups in the shader binding table.</li>
+ * <li>{@code shaderGroupBaseAlignment} &ndash; the required: alignment in bytes for the base of the shader binding table.</li>
  * <li>{@code maxGeometryCount} &ndash; the maximum number of geometries in the bottom level acceleration structure.</li>
  * <li>{@code maxInstanceCount} &ndash; the maximum number of instances in the top level acceleration structure.</li>
  * <li>{@code maxTriangleCount} &ndash; the maximum number of triangles in all geometries in the bottom level acceleration structure.</li>

@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If the {@link EXTPipelineCreationFeedback#VK_PIPELINE_CREATION_FEEDBACK_VALID_BIT_EXT PIPELINE_CREATION_FEEDBACK_VALID_BIT_EXT} is not set in {@code flags}, an implementation <b>must</b> not set any other bits in {@code flags}, and all other {@link VkPipelineCreationFeedbackEXT} data members are undefined.</p>
+ * <p>If the {@link EXTPipelineCreationFeedback#VK_PIPELINE_CREATION_FEEDBACK_VALID_BIT_EXT PIPELINE_CREATION_FEEDBACK_VALID_BIT_EXT} is not set in {@code flags}, an implementation <b>must</b> not set any other bits in {@code flags}, and the values of all other {@link VkPipelineCreationFeedbackEXT} data members are undefined.</p>
  * 
  * <h5>See Also</h5>
  * 

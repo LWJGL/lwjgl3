@@ -32,6 +32,8 @@ package org.lwjgl.vulkan;
  * 
  * <p>All functionality in this extension is included in core Vulkan 1.1, however a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-shaderDrawParameters">feature bit was added</a> to distinguish whether it is actually available or not.</p>
  * 
+ * <h5>VK_KHR_shader_draw_parameters</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_shader_draw_parameters}</dd>
@@ -53,14 +55,19 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Daniel Koch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_shader_draw_parameters:%20&amp;body=@dgkoch%20">dgkoch</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-09-05</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>Requires the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_shader_draw_parameters.html">{@code SPV_KHR_shader_draw_parameters}</a> SPIR-V extension.</li>
- * <li>Requires <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_draw_parameters.txt">{@code GL_ARB_shader_draw_parameters}</a> for GLSL source languages.</li>
+ * <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_shader_draw_parameters.html">{@code SPV_KHR_shader_draw_parameters}</a></li>
+ * <li>This extension provides API support for <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_draw_parameters.txt">{@code GL_ARB_shader_draw_parameters}</a></li>
  * <li>Promoted to Vulkan 1.1 Core</li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>

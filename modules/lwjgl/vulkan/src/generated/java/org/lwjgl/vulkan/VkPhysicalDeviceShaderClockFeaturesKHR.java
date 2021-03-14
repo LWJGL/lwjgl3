@@ -32,9 +32,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code shaderSubgroupClock} &ndash; indicates whether shaders <b>can</b> support {@code Subgroup} scoped clock reads.</li>
- * <li>{@code shaderDeviceClock} &ndash; indicates whether shaders <b>can</b> support {@code Device} scoped clock reads.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
+ * <li>{@code shaderSubgroupClock} &ndash; indicates whether shaders <b>can</b> perform {@code Subgroup} scoped clock reads.</li>
+ * <li>{@code shaderDeviceClock} &ndash; indicates whether shaders <b>can</b> perform {@code Device} scoped clock reads.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

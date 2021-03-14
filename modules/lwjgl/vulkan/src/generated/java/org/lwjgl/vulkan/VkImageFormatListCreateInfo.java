@@ -23,14 +23,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If {@code viewFormatCount} is zero, {@code pViewFormats} is ignored and the image is created as if the {@link VkImageFormatListCreateInfo} structure were not included in the {@code pNext} list of {@link VkImageCreateInfo}.</p>
  * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code viewFormatCount} is not 0, all of the formats in the {@code pViewFormats} array <b>must</b> be compatible with the format specified in the {@code format} field of {@link VkImageCreateInfo}, as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#formats-compatibility">compatibility table</a>.</li>
- * <li>If {@link VkImageCreateInfo}{@code ::flags} does not contain {@link VK10#VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT IMAGE_CREATE_MUTABLE_FORMAT_BIT}, {@code viewFormatCount} <b>must</b> be 0 or 1.</li>
- * <li>If {@code viewFormatCount} is not 0, {@link VkImageCreateInfo}{@code ::format} <b>must</b> be in {@code pViewFormats}.</li>
- * </ul>
- * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
@@ -42,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code viewFormatCount} &ndash; the number of entries in the {@code pViewFormats} array.</li>
  * <li>{@code pViewFormats} &ndash; an array which lists of all formats which <b>can</b> be used when creating views of this image.</li>
  * </ul>

@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code shaderIntegerFunctions2} &ndash; indicates that the implementation supports the {@code ShaderIntegerFunctions2INTEL} SPIR-V capability.</li>
+ * <li>{@code shaderIntegerFunctions2} &ndash; indicates that the implementation supports the {@code IntegerFunctions2INTEL} SPIR-V capability.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

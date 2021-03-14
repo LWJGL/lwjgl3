@@ -25,11 +25,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code handleType} <b>must</b> have been included in {@link VkExportFenceCreateInfo}{@code ::handleTypes} when the {@code fence}&#8217;s current payload was created.</li>
- * <li>If {@code handleType} is defined as an NT handle, {@link KHRExternalFenceWin32#vkGetFenceWin32HandleKHR GetFenceWin32HandleKHR} <b>must</b> be called no more than once for each valid unique combination of {@code fence} and {@code handleType}.</li>
- * <li>{@code fence} <b>must</b> not currently have its payload replaced by an imported payload as described below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-fences-importing">Importing Fence Payloads</a> unless that imported payload&#8217;s handle type was included in {@link VkExternalFenceProperties}{@code ::exportFromImportedHandleTypes} for {@code handleType}.</li>
- * <li>If {@code handleType} refers to a handle type with copy payload transference semantics, {@code fence} <b>must</b> be signaled, or have an associated <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-fences-signaling">fence signal operation</a> pending execution.</li>
- * <li>{@code handleType} <b>must</b> be defined as an NT handle or a global share handle.</li>
+ * <li>{@code handleType} <b>must</b> have been included in {@link VkExportFenceCreateInfo}{@code ::handleTypes} when the {@code fence}&#8217;s current payload was created</li>
+ * <li>If {@code handleType} is defined as an NT handle, {@link KHRExternalFenceWin32#vkGetFenceWin32HandleKHR GetFenceWin32HandleKHR} <b>must</b> be called no more than once for each valid unique combination of {@code fence} and {@code handleType}</li>
+ * <li>{@code fence} <b>must</b> not currently have its payload replaced by an imported payload as described below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-fences-importing">Importing Fence Payloads</a> unless that imported payload&#8217;s handle type was included in {@link VkExternalFenceProperties}{@code ::exportFromImportedHandleTypes} for {@code handleType}</li>
+ * <li>If {@code handleType} refers to a handle type with copy payload transference semantics, {@code fence} <b>must</b> be signaled, or have an associated <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-fences-signaling">fence signal operation</a> pending execution</li>
+ * <li>{@code handleType} <b>must</b> be defined as an NT handle or a global share handle</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -49,7 +49,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code fence} &ndash; the fence from which state will be exported.</li>
  * <li>{@code handleType} &ndash; the type of handle requested.</li>
  * </ul>

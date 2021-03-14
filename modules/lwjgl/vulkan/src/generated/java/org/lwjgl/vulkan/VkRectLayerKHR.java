@@ -21,8 +21,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>The sum of {@code offset} and {@code extent} <b>must</b> be no greater than the {@code imageExtent} member of the {@link VkSwapchainCreateInfoKHR} structure given to {@link KHRSwapchain#vkCreateSwapchainKHR CreateSwapchainKHR}.</li>
- * <li>{@code layer} <b>must</b> be less than {@code imageArrayLayers} member of the {@link VkSwapchainCreateInfoKHR} structure given to {@link KHRSwapchain#vkCreateSwapchainKHR CreateSwapchainKHR}.</li>
+ * <li>The sum of {@code offset} and {@code extent} <b>must</b> be no greater than the {@code imageExtent} member of the {@link VkSwapchainCreateInfoKHR} structure passed to {@link KHRSwapchain#vkCreateSwapchainKHR CreateSwapchainKHR}</li>
+ * <li>{@code layer} <b>must</b> be less than the {@code imageArrayLayers} member of the {@link VkSwapchainCreateInfoKHR} structure passed to {@link KHRSwapchain#vkCreateSwapchainKHR CreateSwapchainKHR}</li>
  * </ul>
  * 
  * <p>Some platforms allow the size of a surface to change, and then scale the pixels of the image to fit the surface. {@link VkRectLayerKHR} specifies pixels of the swapchain's image(s), which will be constant for the life of the swapchain.</p>

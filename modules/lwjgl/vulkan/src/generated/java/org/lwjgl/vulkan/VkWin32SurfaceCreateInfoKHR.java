@@ -24,8 +24,8 @@ import org.lwjgl.system.windows.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code hinstance} <b>must</b> be a valid Win32 {@code HINSTANCE}.</li>
- * <li>{@code hwnd} <b>must</b> be a valid Win32 {@code HWND}.</li>
+ * <li>{@code hinstance} <b>must</b> be a valid Win32 {@code HINSTANCE}</li>
+ * <li>{@code hwnd} <b>must</b> be a valid Win32 {@code HWND}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -44,7 +44,7 @@ import org.lwjgl.system.windows.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code flags} &ndash; reserved for future use.</li>
  * <li>{@code hinstance} &ndash; the Win32 {@code HINSTANCE} for the window to associate the surface with.</li>
  * <li>{@code hwnd} &ndash; the Win32 {@code HWND} for the window to associate the surface with.</li>

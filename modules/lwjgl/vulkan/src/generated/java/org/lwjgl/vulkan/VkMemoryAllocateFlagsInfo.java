@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If {@link VK11#VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT MEMORY_ALLOCATE_DEVICE_MASK_BIT} is set, {@code deviceMask} <b>must</b> be a valid device mask.</li>
+ * <li>If {@link VK11#VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT MEMORY_ALLOCATE_DEVICE_MASK_BIT} is set, {@code deviceMask} <b>must</b> be a valid device mask</li>
  * <li>If {@link VK11#VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT MEMORY_ALLOCATE_DEVICE_MASK_BIT} is set, {@code deviceMask} <b>must</b> not be zero</li>
  * </ul>
  * 
@@ -47,7 +47,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code flags} &ndash; a bitmask of {@code VkMemoryAllocateFlagBits} controlling the allocation.</li>
  * <li>{@code deviceMask} &ndash; a mask of physical devices in the logical device, indicating that memory <b>must</b> be allocated on each device in the mask, if {@link VK11#VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT MEMORY_ALLOCATE_DEVICE_MASK_BIT} is set in {@code flags}.</li>
  * </ul>

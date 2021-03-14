@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code pciDomain} &ndash; the PCI bus domain.</li>
  * <li>{@code pciBus} &ndash; the PCI bus identifier.</li>
  * <li>{@code pciDevice} &ndash; the PCI device identifier.</li>

@@ -54,6 +54,12 @@ package org.lwjgl.vulkan;
  * 
  * <p>The built-in function {@code allInvocationsARB}() will return the same value for all invocations in the group, so the group will either execute {@code do_fast_path}() or {@code do_general_path}(), but never both. For example, shader code might want to evaluate a complex function iteratively by starting with an approximation of the result and then refining the approximation. Some input values may require a small number of iterations to generate an accurate result ({@code do_fast_path}) while others require a larger number ({@code do_general_path}). In another example, shader code might want to evaluate a complex function ({@code do_general_path}) that can be greatly simplified when assuming a specific value for one of its inputs ({@code do_fast_path}).</p>
  * 
+ * <h5>Deprecated by Vulkan 1.1</h5>
+ * 
+ * <p>All functionality in this extension is superseded by the core Vulkan 1.1 <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkPhysicalDeviceSubgroupProperties"> subgroup operations</a>.</p>
+ * 
+ * <h5>VK_EXT_shader_subgroup_vote</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_shader_subgroup_vote}</dd>
@@ -67,18 +73,27 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
  * </ul></dd>
+ * <dt><b>Deprecation state</b></dt>
+ * <dd><ul>
+ * <li><em>Deprecated</em> by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#versions-1.1-new-features">Vulkan 1.1</a></li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Daniel Koch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_shader_subgroup_vote:%20&amp;body=@dgkoch%20">dgkoch</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2016-11-28</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>This extension requires the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_subgroup_vote.html">{@code SPV_KHR_subgroup_vote}</a> SPIR-V extension.</li>
- * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_group_vote.txt">{@code GL_ARB_shader_group_vote}</a> extension for GLSL source languages.</li>
+ * <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_subgroup_vote.html">{@code SPV_KHR_subgroup_vote}</a></li>
+ * <li>This extension provides API support for <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_group_vote.txt">{@code GL_ARB_shader_group_vote}</a></li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

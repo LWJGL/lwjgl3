@@ -44,7 +44,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code MSize} &ndash; the number of rows in matrices A, C, and D.</li>
  * <li>{@code NSize} &ndash; the number of columns in matrices B, C, D.</li>
  * <li>{@code KSize} &ndash; the number of columns in matrix A and rows in matrix B.</li>

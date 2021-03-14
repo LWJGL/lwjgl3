@@ -18,6 +18,15 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying a copy descriptor set operation.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>If the {@link VkDescriptorSetLayoutBinding} for {@code dstBinding} is {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE} and {@code srcBinding} is not {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE}, the new active descriptor type becomes the descriptor type of {@code srcBinding}. If both {@link VkDescriptorSetLayoutBinding} for {@code srcBinding} and {@code dstBinding} are {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE}, the active descriptor type in each source descriptor is copied into the corresponding destination descriptor. The active descriptor type <b>can</b> be different for each source descriptor.</p>
+ * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>The intention is that copies to and from mutable descriptors is a simple memcpy. Copies between non-mutable and mutable descriptors are expected to require one memcpy per descriptor to handle the difference in size, but this use case with more than one {@code descriptorCount} is considered rare.</p>
+ * </div>
+ * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
@@ -35,6 +44,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If the descriptor pool from which {@code srcSet} was allocated was created with the {@link VK12#VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT} flag set, then the descriptor pool from which {@code dstSet} was allocated <b>must</b> also have been created with the {@link VK12#VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT} flag set</li>
  * <li>If the descriptor pool from which {@code srcSet} was allocated was created without the {@link VK12#VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT} flag set, then the descriptor pool from which {@code dstSet} was allocated <b>must</b> also have been created without the {@link VK12#VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT} flag set</li>
  * <li>If the descriptor type of the descriptor set binding specified by {@code dstBinding} is {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLER DESCRIPTOR_TYPE_SAMPLER}, then {@code dstSet} <b>must</b> not have been allocated with a layout that included immutable samplers for {@code dstBinding}</li>
+ * <li>If {@link VkDescriptorSetLayoutBinding} for {@code dstSet} at {@code dstBinding} is {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE}, the new active descriptor type <b>must</b> exist in the corresponding {@code pMutableDescriptorTypeLists} list for {@code dstBinding} if the new active descriptor type is not {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE}</li>
+ * <li>If {@link VkDescriptorSetLayoutBinding} for {@code srcSet} at {@code srcBinding} is {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE} and the {@link VkDescriptorSetLayoutBinding} for {@code dstSet} at {@code dstBinding} is not {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE}, the active descriptor type for the source descriptor <b>must</b> match the descriptor type of {@code dstBinding}</li>
+ * <li>If {@link VkDescriptorSetLayoutBinding} for {@code dstSet} at {@code dstBinding} is {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE}, and the new active descriptor type is {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE}, the {@code pMutableDescriptorTypeLists} for {@code srcBinding} and {@code dstBinding} <b>must</b> match exactly</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -55,7 +67,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code srcSet} &ndash; {@code srcSet}, {@code srcBinding}, and {@code srcArrayElement} are the source set, binding, and array element, respectively. If the descriptor binding identified by {@code srcSet} and {@code srcBinding} has a descriptor type of {@link EXTInlineUniformBlock#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT} then {@code srcArrayElement} specifies the starting byte offset within the binding to copy from.</li>
  * <li>{@code srcBinding} &ndash; see {@code srcSet}</li>
  * <li>{@code srcArrayElement} &ndash; see {@code srcSet}</li>

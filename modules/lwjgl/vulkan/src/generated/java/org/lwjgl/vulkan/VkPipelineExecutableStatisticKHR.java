@@ -35,7 +35,7 @@ import static org.lwjgl.vulkan.VK10.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code name[VK_MAX_DESCRIPTION_SIZE]} &ndash; an array of {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE} {@code char} containing a null-terminated UTF-8 string which is a short human readable name for this statistic.</li>
  * <li>{@code description[VK_MAX_DESCRIPTION_SIZE]} &ndash; an array of {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE} {@code char} containing a null-terminated UTF-8 string which is a human readable description for this statistic.</li>
  * <li>{@code format} &ndash; a {@code VkPipelineExecutableStatisticFormatKHR} value specifying the format of the data found in {@code value}.</li>

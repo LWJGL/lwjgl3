@@ -46,7 +46,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code waitSemaphoreCount} &ndash; the number of elements in the {@code pWaitSemaphoreDeviceIndices} array.</li>
  * <li>{@code pWaitSemaphoreDeviceIndices} &ndash; a pointer to an array of {@code waitSemaphoreCount} device indices indicating which physical device executes the semaphore wait operation in the corresponding element of {@link VkSubmitInfo}{@code ::pWaitSemaphores}.</li>
  * <li>{@code commandBufferCount} &ndash; the number of elements in the {@code pCommandBufferDeviceMasks} array.</li>

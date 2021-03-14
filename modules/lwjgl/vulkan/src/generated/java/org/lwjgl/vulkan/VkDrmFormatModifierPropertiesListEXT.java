@@ -38,7 +38,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code drmFormatModifierCount} &ndash; an inout parameter related to the number of modifiers compatible with the {@code format}, as described below.</li>
  * <li>{@code pDrmFormatModifierProperties} &ndash; either {@code NULL} or an array of {@link VkDrmFormatModifierPropertiesEXT} structures.</li>
  * </ul>

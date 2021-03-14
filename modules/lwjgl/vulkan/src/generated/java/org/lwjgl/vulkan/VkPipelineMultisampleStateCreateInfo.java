@@ -18,13 +18,19 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying parameters of a newly created pipeline multisample state.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>Each bit in the sample mask is associated with a unique <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-multisampling-coverage-mask">sample index</a> as defined for the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-multisampling-coverage-mask">coverage mask</a>. Each bit <code>b</code> for mask word <code>w</code> in the sample mask corresponds to sample index <code>i</code>, where <code>i = 32 × w + b</code>. {@code pSampleMask} has a length equal to <code>⌈ rasterizationSamples / 32 ⌉</code> words.</p>
+ * 
+ * <p>If {@code pSampleMask} is {@code NULL}, it is treated as if the mask has all bits set to 1.</p>
+ * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
  * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-sampleRateShading">sample rate shading</a> feature is not enabled, {@code sampleShadingEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
  * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-alphaToOne">alpha to one</a> feature is not enabled, {@code alphaToOneEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
  * <li>{@code minSampleShading} <b>must</b> be in the range <code>[0,1]</code></li>
- * <li>If the {@code VK_NV_framebuffer_mixed_samples} extension is enabled, and if the subpass has any color attachments and {@code rasterizationSamples} is greater than the number of color samples, then {@code sampleShadingEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
+ * <li>If the {@code VK_NV_framebuffer_mixed_samples.html[VK_NV_framebuffer_mixed_samples]} extension is enabled, and if the subpass has any color attachments and {@code rasterizationSamples} is greater than the number of color samples, then {@code sampleShadingEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -32,7 +38,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO}</li>
  * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkPipelineCoverageModulationStateCreateInfoNV}, {@link VkPipelineCoverageReductionStateCreateInfoNV}, {@link VkPipelineCoverageToColorStateCreateInfoNV}, or {@link VkPipelineSampleLocationsStateCreateInfoEXT}</li>
- * <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be 0</li>
  * <li>{@code rasterizationSamples} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
  * <li>If {@code pSampleMask} is not {@code NULL}, {@code pSampleMask} <b>must</b> be a valid pointer to an array of {@code ceil(rasterizationSamples / 32)} {@code VkSampleMask} values</li>
@@ -46,12 +52,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code flags} &ndash; reserved for future use.</li>
  * <li>{@code rasterizationSamples} &ndash; a {@code VkSampleCountFlagBits} specifying the number of samples used in rasterization.</li>
  * <li>{@code sampleShadingEnable} &ndash; <b>can</b> be used to enable <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-sampleshading">Sample Shading</a>.</li>
  * <li>{@code minSampleShading} &ndash; specifies a minimum fraction of sample shading if {@code sampleShadingEnable} is set to {@link VK10#VK_TRUE TRUE}.</li>
- * <li>{@code pSampleMask} &ndash; a bitmask of static coverage information that is ANDed with the coverage information generated during rasterization, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-samplemask">Sample Mask</a>.</li>
+ * <li>{@code pSampleMask} &ndash; an array of {@code VkSampleMask} values used in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-samplemask">sample mask test</a>.</li>
  * <li>{@code alphaToCoverageEnable} &ndash; controls whether a temporary coverage value is generated based on the alpha component of the fragment&#8217;s first color output as specified in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-covg">Multisample Coverage</a> section.</li>
  * <li>{@code alphaToOneEnable} &ndash; controls whether the alpha component of the fragment&#8217;s first color output is replaced with one as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-covg">Multisample Coverage</a>.</li>
  * </ul>

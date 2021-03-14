@@ -42,7 +42,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code flags} &ndash; a bitmask of {@code VkImageCreateFlagBits}, matching the value of {@link VkImageCreateInfo}{@code ::flags} used to create an image that will be used with this framebuffer.</li>
  * <li>{@code usage} &ndash; a bitmask of {@code VkImageUsageFlagBits}, matching the value of {@link VkImageCreateInfo}{@code ::usage} used to create an image used with this framebuffer.</li>
  * <li>{@code width} &ndash; the width of the image view used for rendering.</li>

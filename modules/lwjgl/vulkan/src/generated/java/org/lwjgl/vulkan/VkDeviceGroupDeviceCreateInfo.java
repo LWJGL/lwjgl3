@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>Each element of {@code pPhysicalDevices} <b>must</b> be unique</li>
  * <li>All elements of {@code pPhysicalDevices} <b>must</b> be in the same device group as enumerated by {@link VK11#vkEnumeratePhysicalDeviceGroups EnumeratePhysicalDeviceGroups}</li>
- * <li>If {@code physicalDeviceCount} is not 0, the {@code physicalDevice} parameter of {@link VK10#vkCreateDevice CreateDevice} <b>must</b> be an element of {@code pPhysicalDevices}.</li>
+ * <li>If {@code physicalDeviceCount} is not 0, the {@code physicalDevice} parameter of {@link VK10#vkCreateDevice CreateDevice} <b>must</b> be an element of {@code pPhysicalDevices}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -44,7 +44,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code physicalDeviceCount} &ndash; the number of elements in the {@code pPhysicalDevices} array.</li>
  * <li>{@code pPhysicalDevices} &ndash; a pointer to an array of physical device handles belonging to the same device group.</li>
  * </ul>

@@ -12,11 +12,10 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
-import static org.lwjgl.vulkan.VK12.*;
+import static org.lwjgl.vulkan.VK10.*;
 
 /**
  * Structure specifying physical device properties for functionality promoted to Vulkan 1.2.
@@ -29,16 +28,6 @@ import static org.lwjgl.vulkan.VK12.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_PROPERTIES}</li>
- * <li>{@code driverID} <b>must</b> be a valid {@code VkDriverId} value</li>
- * <li>{@code driverName} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to VK_MAX_DRIVER_NAME_SIZE</li>
- * <li>{@code driverInfo} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to VK_MAX_DRIVER_INFO_SIZE</li>
- * <li>{@code denormBehaviorIndependence} <b>must</b> be a valid {@code VkShaderFloatControlsIndependence} value</li>
- * <li>{@code roundingModeIndependence} <b>must</b> be a valid {@code VkShaderFloatControlsIndependence} value</li>
- * <li>{@code supportedDepthResolveModes} <b>must</b> be a valid combination of {@code VkResolveModeFlagBits} values</li>
- * <li>{@code supportedDepthResolveModes} <b>must</b> not be 0</li>
- * <li>{@code supportedStencilResolveModes} <b>must</b> be a valid combination of {@code VkResolveModeFlagBits} values</li>
- * <li>{@code supportedStencilResolveModes} <b>must</b> not be 0</li>
- * <li>{@code framebufferIntegerColorSampleCounts} <b>must</b> be a valid combination of {@code VkSampleCountFlagBits} values</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -49,8 +38,8 @@ import static org.lwjgl.vulkan.VK12.*;
  * 
  * <ul>
  * <li>{@code driverID} &ndash; a unique identifier for the driver of the physical device.</li>
- * <li>{@code driverName[VK_MAX_DRIVER_NAME_SIZE]} &ndash; an array of {@link KHRDriverProperties#VK_MAX_DRIVER_NAME_SIZE_KHR MAX_DRIVER_NAME_SIZE_KHR} {@code char} containing a null-terminated UTF-8 string which is the name of the driver.</li>
- * <li>{@code driverInfo[VK_MAX_DRIVER_INFO_SIZE]} &ndash; an array of {@link KHRDriverProperties#VK_MAX_DRIVER_INFO_SIZE_KHR MAX_DRIVER_INFO_SIZE_KHR} {@code char} containing a null-terminated UTF-8 string with additional information about the driver.</li>
+ * <li>{@code driverName[VK_MAX_DRIVER_NAME_SIZE]} &ndash; an array of {@link VK10#VK_MAX_DRIVER_NAME_SIZE MAX_DRIVER_NAME_SIZE} {@code char} containing a null-terminated UTF-8 string which is the name of the driver.</li>
+ * <li>{@code driverInfo[VK_MAX_DRIVER_INFO_SIZE]} &ndash; an array of {@link VK10#VK_MAX_DRIVER_INFO_SIZE MAX_DRIVER_INFO_SIZE} {@code char} containing a null-terminated UTF-8 string with additional information about the driver.</li>
  * <li>{@code conformanceVersion} &ndash; the version of the Vulkan conformance test this driver is conformant against (see {@link VkConformanceVersion}).</li>
  * <li>{@code denormBehaviorIndependence} &ndash; a {@code VkShaderFloatControlsIndependence} value indicating whether, and how, denorm behavior can be set independently for different bit widths.</li>
  * <li>{@code roundingModeIndependence} &ndash; a {@code VkShaderFloatControlsIndependence} value indicating whether, and how, rounding modes can be set independently for different bit widths.</li>
@@ -86,9 +75,9 @@ import static org.lwjgl.vulkan.VK12.*;
  * <li>{@code maxPerStageUpdateAfterBindResources} &ndash; similar to {@code maxPerStageResources} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set.</li>
  * <li>{@code maxDescriptorSetUpdateAfterBindSamplers} &ndash; similar to {@code maxDescriptorSetSamplers} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set.</li>
  * <li>{@code maxDescriptorSetUpdateAfterBindUniformBuffers} &ndash; similar to {@code maxDescriptorSetUniformBuffers} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set.</li>
- * <li>{@code maxDescriptorSetUpdateAfterBindUniformBuffersDynamic} &ndash; similar to {@code maxDescriptorSetUniformBuffersDynamic} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set.</li>
+ * <li>{@code maxDescriptorSetUpdateAfterBindUniformBuffersDynamic} &ndash; similar to {@code maxDescriptorSetUniformBuffersDynamic} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. While an application <b>can</b> allocate dynamic uniform buffer descriptors from a pool created with the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT}, bindings for these descriptors <b>must</b> not be present in any descriptor set layout that includes bindings created with {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT}.</li>
  * <li>{@code maxDescriptorSetUpdateAfterBindStorageBuffers} &ndash; similar to {@code maxDescriptorSetStorageBuffers} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set.</li>
- * <li>{@code maxDescriptorSetUpdateAfterBindStorageBuffersDynamic} &ndash; similar to {@code maxDescriptorSetStorageBuffersDynamic} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set.</li>
+ * <li>{@code maxDescriptorSetUpdateAfterBindStorageBuffersDynamic} &ndash; similar to {@code maxDescriptorSetStorageBuffersDynamic} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. While an application <b>can</b> allocate dynamic storage buffer descriptors from a pool created with the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT}, bindings for these descriptors <b>must</b> not be present in any descriptor set layout that includes bindings created with {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT}.</li>
  * <li>{@code maxDescriptorSetUpdateAfterBindSampledImages} &ndash; similar to {@code maxDescriptorSetSampledImages} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set.</li>
  * <li>{@code maxDescriptorSetUpdateAfterBindStorageImages} &ndash; similar to {@code maxDescriptorSetStorageImages} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set.</li>
  * <li>{@code maxDescriptorSetUpdateAfterBindInputAttachments} &ndash; similar to {@code maxDescriptorSetInputAttachments} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set.</li>
@@ -529,224 +518,14 @@ public class VkPhysicalDeviceVulkan12Properties extends Struct implements Native
     public VkPhysicalDeviceVulkan12Properties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceVulkan12Properties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code driverID} field. */
-    public VkPhysicalDeviceVulkan12Properties driverID(@NativeType("VkDriverId") int value) { ndriverID(address(), value); return this; }
-    /** Copies the specified encoded string to the {@code driverName} field. */
-    public VkPhysicalDeviceVulkan12Properties driverName(@NativeType("char[VK_MAX_DRIVER_NAME_SIZE]") ByteBuffer value) { ndriverName(address(), value); return this; }
-    /** Copies the specified encoded string to the {@code driverInfo} field. */
-    public VkPhysicalDeviceVulkan12Properties driverInfo(@NativeType("char[VK_MAX_DRIVER_INFO_SIZE]") ByteBuffer value) { ndriverInfo(address(), value); return this; }
-    /** Copies the specified {@link VkConformanceVersion} to the {@code conformanceVersion} field. */
-    public VkPhysicalDeviceVulkan12Properties conformanceVersion(VkConformanceVersion value) { nconformanceVersion(address(), value); return this; }
-    /** Passes the {@code conformanceVersion} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkPhysicalDeviceVulkan12Properties conformanceVersion(java.util.function.Consumer<VkConformanceVersion> consumer) { consumer.accept(conformanceVersion()); return this; }
-    /** Sets the specified value to the {@code denormBehaviorIndependence} field. */
-    public VkPhysicalDeviceVulkan12Properties denormBehaviorIndependence(@NativeType("VkShaderFloatControlsIndependence") int value) { ndenormBehaviorIndependence(address(), value); return this; }
-    /** Sets the specified value to the {@code roundingModeIndependence} field. */
-    public VkPhysicalDeviceVulkan12Properties roundingModeIndependence(@NativeType("VkShaderFloatControlsIndependence") int value) { nroundingModeIndependence(address(), value); return this; }
-    /** Sets the specified value to the {@code shaderSignedZeroInfNanPreserveFloat16} field. */
-    public VkPhysicalDeviceVulkan12Properties shaderSignedZeroInfNanPreserveFloat16(@NativeType("VkBool32") boolean value) { nshaderSignedZeroInfNanPreserveFloat16(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderSignedZeroInfNanPreserveFloat32} field. */
-    public VkPhysicalDeviceVulkan12Properties shaderSignedZeroInfNanPreserveFloat32(@NativeType("VkBool32") boolean value) { nshaderSignedZeroInfNanPreserveFloat32(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderSignedZeroInfNanPreserveFloat64} field. */
-    public VkPhysicalDeviceVulkan12Properties shaderSignedZeroInfNanPreserveFloat64(@NativeType("VkBool32") boolean value) { nshaderSignedZeroInfNanPreserveFloat64(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderDenormPreserveFloat16} field. */
-    public VkPhysicalDeviceVulkan12Properties shaderDenormPreserveFloat16(@NativeType("VkBool32") boolean value) { nshaderDenormPreserveFloat16(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderDenormPreserveFloat32} field. */
-    public VkPhysicalDeviceVulkan12Properties shaderDenormPreserveFloat32(@NativeType("VkBool32") boolean value) { nshaderDenormPreserveFloat32(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderDenormPreserveFloat64} field. */
-    public VkPhysicalDeviceVulkan12Properties shaderDenormPreserveFloat64(@NativeType("VkBool32") boolean value) { nshaderDenormPreserveFloat64(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderDenormFlushToZeroFloat16} field. */
-    public VkPhysicalDeviceVulkan12Properties shaderDenormFlushToZeroFloat16(@NativeType("VkBool32") boolean value) { nshaderDenormFlushToZeroFloat16(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderDenormFlushToZeroFloat32} field. */
-    public VkPhysicalDeviceVulkan12Properties shaderDenormFlushToZeroFloat32(@NativeType("VkBool32") boolean value) { nshaderDenormFlushToZeroFloat32(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderDenormFlushToZeroFloat64} field. */
-    public VkPhysicalDeviceVulkan12Properties shaderDenormFlushToZeroFloat64(@NativeType("VkBool32") boolean value) { nshaderDenormFlushToZeroFloat64(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderRoundingModeRTEFloat16} field. */
-    public VkPhysicalDeviceVulkan12Properties shaderRoundingModeRTEFloat16(@NativeType("VkBool32") boolean value) { nshaderRoundingModeRTEFloat16(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderRoundingModeRTEFloat32} field. */
-    public VkPhysicalDeviceVulkan12Properties shaderRoundingModeRTEFloat32(@NativeType("VkBool32") boolean value) { nshaderRoundingModeRTEFloat32(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderRoundingModeRTEFloat64} field. */
-    public VkPhysicalDeviceVulkan12Properties shaderRoundingModeRTEFloat64(@NativeType("VkBool32") boolean value) { nshaderRoundingModeRTEFloat64(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderRoundingModeRTZFloat16} field. */
-    public VkPhysicalDeviceVulkan12Properties shaderRoundingModeRTZFloat16(@NativeType("VkBool32") boolean value) { nshaderRoundingModeRTZFloat16(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderRoundingModeRTZFloat32} field. */
-    public VkPhysicalDeviceVulkan12Properties shaderRoundingModeRTZFloat32(@NativeType("VkBool32") boolean value) { nshaderRoundingModeRTZFloat32(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderRoundingModeRTZFloat64} field. */
-    public VkPhysicalDeviceVulkan12Properties shaderRoundingModeRTZFloat64(@NativeType("VkBool32") boolean value) { nshaderRoundingModeRTZFloat64(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code maxUpdateAfterBindDescriptorsInAllPools} field. */
-    public VkPhysicalDeviceVulkan12Properties maxUpdateAfterBindDescriptorsInAllPools(@NativeType("uint32_t") int value) { nmaxUpdateAfterBindDescriptorsInAllPools(address(), value); return this; }
-    /** Sets the specified value to the {@code shaderUniformBufferArrayNonUniformIndexingNative} field. */
-    public VkPhysicalDeviceVulkan12Properties shaderUniformBufferArrayNonUniformIndexingNative(@NativeType("VkBool32") boolean value) { nshaderUniformBufferArrayNonUniformIndexingNative(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderSampledImageArrayNonUniformIndexingNative} field. */
-    public VkPhysicalDeviceVulkan12Properties shaderSampledImageArrayNonUniformIndexingNative(@NativeType("VkBool32") boolean value) { nshaderSampledImageArrayNonUniformIndexingNative(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderStorageBufferArrayNonUniformIndexingNative} field. */
-    public VkPhysicalDeviceVulkan12Properties shaderStorageBufferArrayNonUniformIndexingNative(@NativeType("VkBool32") boolean value) { nshaderStorageBufferArrayNonUniformIndexingNative(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderStorageImageArrayNonUniformIndexingNative} field. */
-    public VkPhysicalDeviceVulkan12Properties shaderStorageImageArrayNonUniformIndexingNative(@NativeType("VkBool32") boolean value) { nshaderStorageImageArrayNonUniformIndexingNative(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderInputAttachmentArrayNonUniformIndexingNative} field. */
-    public VkPhysicalDeviceVulkan12Properties shaderInputAttachmentArrayNonUniformIndexingNative(@NativeType("VkBool32") boolean value) { nshaderInputAttachmentArrayNonUniformIndexingNative(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code robustBufferAccessUpdateAfterBind} field. */
-    public VkPhysicalDeviceVulkan12Properties robustBufferAccessUpdateAfterBind(@NativeType("VkBool32") boolean value) { nrobustBufferAccessUpdateAfterBind(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code quadDivergentImplicitLod} field. */
-    public VkPhysicalDeviceVulkan12Properties quadDivergentImplicitLod(@NativeType("VkBool32") boolean value) { nquadDivergentImplicitLod(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code maxPerStageDescriptorUpdateAfterBindSamplers} field. */
-    public VkPhysicalDeviceVulkan12Properties maxPerStageDescriptorUpdateAfterBindSamplers(@NativeType("uint32_t") int value) { nmaxPerStageDescriptorUpdateAfterBindSamplers(address(), value); return this; }
-    /** Sets the specified value to the {@code maxPerStageDescriptorUpdateAfterBindUniformBuffers} field. */
-    public VkPhysicalDeviceVulkan12Properties maxPerStageDescriptorUpdateAfterBindUniformBuffers(@NativeType("uint32_t") int value) { nmaxPerStageDescriptorUpdateAfterBindUniformBuffers(address(), value); return this; }
-    /** Sets the specified value to the {@code maxPerStageDescriptorUpdateAfterBindStorageBuffers} field. */
-    public VkPhysicalDeviceVulkan12Properties maxPerStageDescriptorUpdateAfterBindStorageBuffers(@NativeType("uint32_t") int value) { nmaxPerStageDescriptorUpdateAfterBindStorageBuffers(address(), value); return this; }
-    /** Sets the specified value to the {@code maxPerStageDescriptorUpdateAfterBindSampledImages} field. */
-    public VkPhysicalDeviceVulkan12Properties maxPerStageDescriptorUpdateAfterBindSampledImages(@NativeType("uint32_t") int value) { nmaxPerStageDescriptorUpdateAfterBindSampledImages(address(), value); return this; }
-    /** Sets the specified value to the {@code maxPerStageDescriptorUpdateAfterBindStorageImages} field. */
-    public VkPhysicalDeviceVulkan12Properties maxPerStageDescriptorUpdateAfterBindStorageImages(@NativeType("uint32_t") int value) { nmaxPerStageDescriptorUpdateAfterBindStorageImages(address(), value); return this; }
-    /** Sets the specified value to the {@code maxPerStageDescriptorUpdateAfterBindInputAttachments} field. */
-    public VkPhysicalDeviceVulkan12Properties maxPerStageDescriptorUpdateAfterBindInputAttachments(@NativeType("uint32_t") int value) { nmaxPerStageDescriptorUpdateAfterBindInputAttachments(address(), value); return this; }
-    /** Sets the specified value to the {@code maxPerStageUpdateAfterBindResources} field. */
-    public VkPhysicalDeviceVulkan12Properties maxPerStageUpdateAfterBindResources(@NativeType("uint32_t") int value) { nmaxPerStageUpdateAfterBindResources(address(), value); return this; }
-    /** Sets the specified value to the {@code maxDescriptorSetUpdateAfterBindSamplers} field. */
-    public VkPhysicalDeviceVulkan12Properties maxDescriptorSetUpdateAfterBindSamplers(@NativeType("uint32_t") int value) { nmaxDescriptorSetUpdateAfterBindSamplers(address(), value); return this; }
-    /** Sets the specified value to the {@code maxDescriptorSetUpdateAfterBindUniformBuffers} field. */
-    public VkPhysicalDeviceVulkan12Properties maxDescriptorSetUpdateAfterBindUniformBuffers(@NativeType("uint32_t") int value) { nmaxDescriptorSetUpdateAfterBindUniformBuffers(address(), value); return this; }
-    /** Sets the specified value to the {@code maxDescriptorSetUpdateAfterBindUniformBuffersDynamic} field. */
-    public VkPhysicalDeviceVulkan12Properties maxDescriptorSetUpdateAfterBindUniformBuffersDynamic(@NativeType("uint32_t") int value) { nmaxDescriptorSetUpdateAfterBindUniformBuffersDynamic(address(), value); return this; }
-    /** Sets the specified value to the {@code maxDescriptorSetUpdateAfterBindStorageBuffers} field. */
-    public VkPhysicalDeviceVulkan12Properties maxDescriptorSetUpdateAfterBindStorageBuffers(@NativeType("uint32_t") int value) { nmaxDescriptorSetUpdateAfterBindStorageBuffers(address(), value); return this; }
-    /** Sets the specified value to the {@code maxDescriptorSetUpdateAfterBindStorageBuffersDynamic} field. */
-    public VkPhysicalDeviceVulkan12Properties maxDescriptorSetUpdateAfterBindStorageBuffersDynamic(@NativeType("uint32_t") int value) { nmaxDescriptorSetUpdateAfterBindStorageBuffersDynamic(address(), value); return this; }
-    /** Sets the specified value to the {@code maxDescriptorSetUpdateAfterBindSampledImages} field. */
-    public VkPhysicalDeviceVulkan12Properties maxDescriptorSetUpdateAfterBindSampledImages(@NativeType("uint32_t") int value) { nmaxDescriptorSetUpdateAfterBindSampledImages(address(), value); return this; }
-    /** Sets the specified value to the {@code maxDescriptorSetUpdateAfterBindStorageImages} field. */
-    public VkPhysicalDeviceVulkan12Properties maxDescriptorSetUpdateAfterBindStorageImages(@NativeType("uint32_t") int value) { nmaxDescriptorSetUpdateAfterBindStorageImages(address(), value); return this; }
-    /** Sets the specified value to the {@code maxDescriptorSetUpdateAfterBindInputAttachments} field. */
-    public VkPhysicalDeviceVulkan12Properties maxDescriptorSetUpdateAfterBindInputAttachments(@NativeType("uint32_t") int value) { nmaxDescriptorSetUpdateAfterBindInputAttachments(address(), value); return this; }
-    /** Sets the specified value to the {@code supportedDepthResolveModes} field. */
-    public VkPhysicalDeviceVulkan12Properties supportedDepthResolveModes(@NativeType("VkResolveModeFlags") int value) { nsupportedDepthResolveModes(address(), value); return this; }
-    /** Sets the specified value to the {@code supportedStencilResolveModes} field. */
-    public VkPhysicalDeviceVulkan12Properties supportedStencilResolveModes(@NativeType("VkResolveModeFlags") int value) { nsupportedStencilResolveModes(address(), value); return this; }
-    /** Sets the specified value to the {@code independentResolveNone} field. */
-    public VkPhysicalDeviceVulkan12Properties independentResolveNone(@NativeType("VkBool32") boolean value) { nindependentResolveNone(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code independentResolve} field. */
-    public VkPhysicalDeviceVulkan12Properties independentResolve(@NativeType("VkBool32") boolean value) { nindependentResolve(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code filterMinmaxSingleComponentFormats} field. */
-    public VkPhysicalDeviceVulkan12Properties filterMinmaxSingleComponentFormats(@NativeType("VkBool32") boolean value) { nfilterMinmaxSingleComponentFormats(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code filterMinmaxImageComponentMapping} field. */
-    public VkPhysicalDeviceVulkan12Properties filterMinmaxImageComponentMapping(@NativeType("VkBool32") boolean value) { nfilterMinmaxImageComponentMapping(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code maxTimelineSemaphoreValueDifference} field. */
-    public VkPhysicalDeviceVulkan12Properties maxTimelineSemaphoreValueDifference(@NativeType("uint64_t") long value) { nmaxTimelineSemaphoreValueDifference(address(), value); return this; }
-    /** Sets the specified value to the {@code framebufferIntegerColorSampleCounts} field. */
-    public VkPhysicalDeviceVulkan12Properties framebufferIntegerColorSampleCounts(@NativeType("VkSampleCountFlags") int value) { nframebufferIntegerColorSampleCounts(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPhysicalDeviceVulkan12Properties set(
         int sType,
-        long pNext,
-        int driverID,
-        ByteBuffer driverName,
-        ByteBuffer driverInfo,
-        VkConformanceVersion conformanceVersion,
-        int denormBehaviorIndependence,
-        int roundingModeIndependence,
-        boolean shaderSignedZeroInfNanPreserveFloat16,
-        boolean shaderSignedZeroInfNanPreserveFloat32,
-        boolean shaderSignedZeroInfNanPreserveFloat64,
-        boolean shaderDenormPreserveFloat16,
-        boolean shaderDenormPreserveFloat32,
-        boolean shaderDenormPreserveFloat64,
-        boolean shaderDenormFlushToZeroFloat16,
-        boolean shaderDenormFlushToZeroFloat32,
-        boolean shaderDenormFlushToZeroFloat64,
-        boolean shaderRoundingModeRTEFloat16,
-        boolean shaderRoundingModeRTEFloat32,
-        boolean shaderRoundingModeRTEFloat64,
-        boolean shaderRoundingModeRTZFloat16,
-        boolean shaderRoundingModeRTZFloat32,
-        boolean shaderRoundingModeRTZFloat64,
-        int maxUpdateAfterBindDescriptorsInAllPools,
-        boolean shaderUniformBufferArrayNonUniformIndexingNative,
-        boolean shaderSampledImageArrayNonUniformIndexingNative,
-        boolean shaderStorageBufferArrayNonUniformIndexingNative,
-        boolean shaderStorageImageArrayNonUniformIndexingNative,
-        boolean shaderInputAttachmentArrayNonUniformIndexingNative,
-        boolean robustBufferAccessUpdateAfterBind,
-        boolean quadDivergentImplicitLod,
-        int maxPerStageDescriptorUpdateAfterBindSamplers,
-        int maxPerStageDescriptorUpdateAfterBindUniformBuffers,
-        int maxPerStageDescriptorUpdateAfterBindStorageBuffers,
-        int maxPerStageDescriptorUpdateAfterBindSampledImages,
-        int maxPerStageDescriptorUpdateAfterBindStorageImages,
-        int maxPerStageDescriptorUpdateAfterBindInputAttachments,
-        int maxPerStageUpdateAfterBindResources,
-        int maxDescriptorSetUpdateAfterBindSamplers,
-        int maxDescriptorSetUpdateAfterBindUniformBuffers,
-        int maxDescriptorSetUpdateAfterBindUniformBuffersDynamic,
-        int maxDescriptorSetUpdateAfterBindStorageBuffers,
-        int maxDescriptorSetUpdateAfterBindStorageBuffersDynamic,
-        int maxDescriptorSetUpdateAfterBindSampledImages,
-        int maxDescriptorSetUpdateAfterBindStorageImages,
-        int maxDescriptorSetUpdateAfterBindInputAttachments,
-        int supportedDepthResolveModes,
-        int supportedStencilResolveModes,
-        boolean independentResolveNone,
-        boolean independentResolve,
-        boolean filterMinmaxSingleComponentFormats,
-        boolean filterMinmaxImageComponentMapping,
-        long maxTimelineSemaphoreValueDifference,
-        int framebufferIntegerColorSampleCounts
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        driverID(driverID);
-        driverName(driverName);
-        driverInfo(driverInfo);
-        conformanceVersion(conformanceVersion);
-        denormBehaviorIndependence(denormBehaviorIndependence);
-        roundingModeIndependence(roundingModeIndependence);
-        shaderSignedZeroInfNanPreserveFloat16(shaderSignedZeroInfNanPreserveFloat16);
-        shaderSignedZeroInfNanPreserveFloat32(shaderSignedZeroInfNanPreserveFloat32);
-        shaderSignedZeroInfNanPreserveFloat64(shaderSignedZeroInfNanPreserveFloat64);
-        shaderDenormPreserveFloat16(shaderDenormPreserveFloat16);
-        shaderDenormPreserveFloat32(shaderDenormPreserveFloat32);
-        shaderDenormPreserveFloat64(shaderDenormPreserveFloat64);
-        shaderDenormFlushToZeroFloat16(shaderDenormFlushToZeroFloat16);
-        shaderDenormFlushToZeroFloat32(shaderDenormFlushToZeroFloat32);
-        shaderDenormFlushToZeroFloat64(shaderDenormFlushToZeroFloat64);
-        shaderRoundingModeRTEFloat16(shaderRoundingModeRTEFloat16);
-        shaderRoundingModeRTEFloat32(shaderRoundingModeRTEFloat32);
-        shaderRoundingModeRTEFloat64(shaderRoundingModeRTEFloat64);
-        shaderRoundingModeRTZFloat16(shaderRoundingModeRTZFloat16);
-        shaderRoundingModeRTZFloat32(shaderRoundingModeRTZFloat32);
-        shaderRoundingModeRTZFloat64(shaderRoundingModeRTZFloat64);
-        maxUpdateAfterBindDescriptorsInAllPools(maxUpdateAfterBindDescriptorsInAllPools);
-        shaderUniformBufferArrayNonUniformIndexingNative(shaderUniformBufferArrayNonUniformIndexingNative);
-        shaderSampledImageArrayNonUniformIndexingNative(shaderSampledImageArrayNonUniformIndexingNative);
-        shaderStorageBufferArrayNonUniformIndexingNative(shaderStorageBufferArrayNonUniformIndexingNative);
-        shaderStorageImageArrayNonUniformIndexingNative(shaderStorageImageArrayNonUniformIndexingNative);
-        shaderInputAttachmentArrayNonUniformIndexingNative(shaderInputAttachmentArrayNonUniformIndexingNative);
-        robustBufferAccessUpdateAfterBind(robustBufferAccessUpdateAfterBind);
-        quadDivergentImplicitLod(quadDivergentImplicitLod);
-        maxPerStageDescriptorUpdateAfterBindSamplers(maxPerStageDescriptorUpdateAfterBindSamplers);
-        maxPerStageDescriptorUpdateAfterBindUniformBuffers(maxPerStageDescriptorUpdateAfterBindUniformBuffers);
-        maxPerStageDescriptorUpdateAfterBindStorageBuffers(maxPerStageDescriptorUpdateAfterBindStorageBuffers);
-        maxPerStageDescriptorUpdateAfterBindSampledImages(maxPerStageDescriptorUpdateAfterBindSampledImages);
-        maxPerStageDescriptorUpdateAfterBindStorageImages(maxPerStageDescriptorUpdateAfterBindStorageImages);
-        maxPerStageDescriptorUpdateAfterBindInputAttachments(maxPerStageDescriptorUpdateAfterBindInputAttachments);
-        maxPerStageUpdateAfterBindResources(maxPerStageUpdateAfterBindResources);
-        maxDescriptorSetUpdateAfterBindSamplers(maxDescriptorSetUpdateAfterBindSamplers);
-        maxDescriptorSetUpdateAfterBindUniformBuffers(maxDescriptorSetUpdateAfterBindUniformBuffers);
-        maxDescriptorSetUpdateAfterBindUniformBuffersDynamic(maxDescriptorSetUpdateAfterBindUniformBuffersDynamic);
-        maxDescriptorSetUpdateAfterBindStorageBuffers(maxDescriptorSetUpdateAfterBindStorageBuffers);
-        maxDescriptorSetUpdateAfterBindStorageBuffersDynamic(maxDescriptorSetUpdateAfterBindStorageBuffersDynamic);
-        maxDescriptorSetUpdateAfterBindSampledImages(maxDescriptorSetUpdateAfterBindSampledImages);
-        maxDescriptorSetUpdateAfterBindStorageImages(maxDescriptorSetUpdateAfterBindStorageImages);
-        maxDescriptorSetUpdateAfterBindInputAttachments(maxDescriptorSetUpdateAfterBindInputAttachments);
-        supportedDepthResolveModes(supportedDepthResolveModes);
-        supportedStencilResolveModes(supportedStencilResolveModes);
-        independentResolveNone(independentResolveNone);
-        independentResolve(independentResolve);
-        filterMinmaxSingleComponentFormats(filterMinmaxSingleComponentFormats);
-        filterMinmaxImageComponentMapping(filterMinmaxImageComponentMapping);
-        maxTimelineSemaphoreValueDifference(maxTimelineSemaphoreValueDifference);
-        framebufferIntegerColorSampleCounts(framebufferIntegerColorSampleCounts);
 
         return this;
     }
@@ -1023,122 +802,6 @@ public class VkPhysicalDeviceVulkan12Properties extends Struct implements Native
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceVulkan12Properties.PNEXT, value); }
-    /** Unsafe version of {@link #driverID(int) driverID}. */
-    public static void ndriverID(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.DRIVERID, value); }
-    /** Unsafe version of {@link #driverName(ByteBuffer) driverName}. */
-    public static void ndriverName(long struct, ByteBuffer value) {
-        if (CHECKS) {
-            checkNT1(value);
-            checkGT(value, VK_MAX_DRIVER_NAME_SIZE);
-        }
-        memCopy(memAddress(value), struct + VkPhysicalDeviceVulkan12Properties.DRIVERNAME, value.remaining());
-    }
-    /** Unsafe version of {@link #driverInfo(ByteBuffer) driverInfo}. */
-    public static void ndriverInfo(long struct, ByteBuffer value) {
-        if (CHECKS) {
-            checkNT1(value);
-            checkGT(value, VK_MAX_DRIVER_INFO_SIZE);
-        }
-        memCopy(memAddress(value), struct + VkPhysicalDeviceVulkan12Properties.DRIVERINFO, value.remaining());
-    }
-    /** Unsafe version of {@link #conformanceVersion(VkConformanceVersion) conformanceVersion}. */
-    public static void nconformanceVersion(long struct, VkConformanceVersion value) { memCopy(value.address(), struct + VkPhysicalDeviceVulkan12Properties.CONFORMANCEVERSION, VkConformanceVersion.SIZEOF); }
-    /** Unsafe version of {@link #denormBehaviorIndependence(int) denormBehaviorIndependence}. */
-    public static void ndenormBehaviorIndependence(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.DENORMBEHAVIORINDEPENDENCE, value); }
-    /** Unsafe version of {@link #roundingModeIndependence(int) roundingModeIndependence}. */
-    public static void nroundingModeIndependence(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.ROUNDINGMODEINDEPENDENCE, value); }
-    /** Unsafe version of {@link #shaderSignedZeroInfNanPreserveFloat16(boolean) shaderSignedZeroInfNanPreserveFloat16}. */
-    public static void nshaderSignedZeroInfNanPreserveFloat16(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.SHADERSIGNEDZEROINFNANPRESERVEFLOAT16, value); }
-    /** Unsafe version of {@link #shaderSignedZeroInfNanPreserveFloat32(boolean) shaderSignedZeroInfNanPreserveFloat32}. */
-    public static void nshaderSignedZeroInfNanPreserveFloat32(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.SHADERSIGNEDZEROINFNANPRESERVEFLOAT32, value); }
-    /** Unsafe version of {@link #shaderSignedZeroInfNanPreserveFloat64(boolean) shaderSignedZeroInfNanPreserveFloat64}. */
-    public static void nshaderSignedZeroInfNanPreserveFloat64(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.SHADERSIGNEDZEROINFNANPRESERVEFLOAT64, value); }
-    /** Unsafe version of {@link #shaderDenormPreserveFloat16(boolean) shaderDenormPreserveFloat16}. */
-    public static void nshaderDenormPreserveFloat16(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.SHADERDENORMPRESERVEFLOAT16, value); }
-    /** Unsafe version of {@link #shaderDenormPreserveFloat32(boolean) shaderDenormPreserveFloat32}. */
-    public static void nshaderDenormPreserveFloat32(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.SHADERDENORMPRESERVEFLOAT32, value); }
-    /** Unsafe version of {@link #shaderDenormPreserveFloat64(boolean) shaderDenormPreserveFloat64}. */
-    public static void nshaderDenormPreserveFloat64(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.SHADERDENORMPRESERVEFLOAT64, value); }
-    /** Unsafe version of {@link #shaderDenormFlushToZeroFloat16(boolean) shaderDenormFlushToZeroFloat16}. */
-    public static void nshaderDenormFlushToZeroFloat16(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.SHADERDENORMFLUSHTOZEROFLOAT16, value); }
-    /** Unsafe version of {@link #shaderDenormFlushToZeroFloat32(boolean) shaderDenormFlushToZeroFloat32}. */
-    public static void nshaderDenormFlushToZeroFloat32(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.SHADERDENORMFLUSHTOZEROFLOAT32, value); }
-    /** Unsafe version of {@link #shaderDenormFlushToZeroFloat64(boolean) shaderDenormFlushToZeroFloat64}. */
-    public static void nshaderDenormFlushToZeroFloat64(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.SHADERDENORMFLUSHTOZEROFLOAT64, value); }
-    /** Unsafe version of {@link #shaderRoundingModeRTEFloat16(boolean) shaderRoundingModeRTEFloat16}. */
-    public static void nshaderRoundingModeRTEFloat16(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.SHADERROUNDINGMODERTEFLOAT16, value); }
-    /** Unsafe version of {@link #shaderRoundingModeRTEFloat32(boolean) shaderRoundingModeRTEFloat32}. */
-    public static void nshaderRoundingModeRTEFloat32(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.SHADERROUNDINGMODERTEFLOAT32, value); }
-    /** Unsafe version of {@link #shaderRoundingModeRTEFloat64(boolean) shaderRoundingModeRTEFloat64}. */
-    public static void nshaderRoundingModeRTEFloat64(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.SHADERROUNDINGMODERTEFLOAT64, value); }
-    /** Unsafe version of {@link #shaderRoundingModeRTZFloat16(boolean) shaderRoundingModeRTZFloat16}. */
-    public static void nshaderRoundingModeRTZFloat16(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.SHADERROUNDINGMODERTZFLOAT16, value); }
-    /** Unsafe version of {@link #shaderRoundingModeRTZFloat32(boolean) shaderRoundingModeRTZFloat32}. */
-    public static void nshaderRoundingModeRTZFloat32(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.SHADERROUNDINGMODERTZFLOAT32, value); }
-    /** Unsafe version of {@link #shaderRoundingModeRTZFloat64(boolean) shaderRoundingModeRTZFloat64}. */
-    public static void nshaderRoundingModeRTZFloat64(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.SHADERROUNDINGMODERTZFLOAT64, value); }
-    /** Unsafe version of {@link #maxUpdateAfterBindDescriptorsInAllPools(int) maxUpdateAfterBindDescriptorsInAllPools}. */
-    public static void nmaxUpdateAfterBindDescriptorsInAllPools(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.MAXUPDATEAFTERBINDDESCRIPTORSINALLPOOLS, value); }
-    /** Unsafe version of {@link #shaderUniformBufferArrayNonUniformIndexingNative(boolean) shaderUniformBufferArrayNonUniformIndexingNative}. */
-    public static void nshaderUniformBufferArrayNonUniformIndexingNative(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.SHADERUNIFORMBUFFERARRAYNONUNIFORMINDEXINGNATIVE, value); }
-    /** Unsafe version of {@link #shaderSampledImageArrayNonUniformIndexingNative(boolean) shaderSampledImageArrayNonUniformIndexingNative}. */
-    public static void nshaderSampledImageArrayNonUniformIndexingNative(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.SHADERSAMPLEDIMAGEARRAYNONUNIFORMINDEXINGNATIVE, value); }
-    /** Unsafe version of {@link #shaderStorageBufferArrayNonUniformIndexingNative(boolean) shaderStorageBufferArrayNonUniformIndexingNative}. */
-    public static void nshaderStorageBufferArrayNonUniformIndexingNative(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.SHADERSTORAGEBUFFERARRAYNONUNIFORMINDEXINGNATIVE, value); }
-    /** Unsafe version of {@link #shaderStorageImageArrayNonUniformIndexingNative(boolean) shaderStorageImageArrayNonUniformIndexingNative}. */
-    public static void nshaderStorageImageArrayNonUniformIndexingNative(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.SHADERSTORAGEIMAGEARRAYNONUNIFORMINDEXINGNATIVE, value); }
-    /** Unsafe version of {@link #shaderInputAttachmentArrayNonUniformIndexingNative(boolean) shaderInputAttachmentArrayNonUniformIndexingNative}. */
-    public static void nshaderInputAttachmentArrayNonUniformIndexingNative(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.SHADERINPUTATTACHMENTARRAYNONUNIFORMINDEXINGNATIVE, value); }
-    /** Unsafe version of {@link #robustBufferAccessUpdateAfterBind(boolean) robustBufferAccessUpdateAfterBind}. */
-    public static void nrobustBufferAccessUpdateAfterBind(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.ROBUSTBUFFERACCESSUPDATEAFTERBIND, value); }
-    /** Unsafe version of {@link #quadDivergentImplicitLod(boolean) quadDivergentImplicitLod}. */
-    public static void nquadDivergentImplicitLod(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.QUADDIVERGENTIMPLICITLOD, value); }
-    /** Unsafe version of {@link #maxPerStageDescriptorUpdateAfterBindSamplers(int) maxPerStageDescriptorUpdateAfterBindSamplers}. */
-    public static void nmaxPerStageDescriptorUpdateAfterBindSamplers(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDSAMPLERS, value); }
-    /** Unsafe version of {@link #maxPerStageDescriptorUpdateAfterBindUniformBuffers(int) maxPerStageDescriptorUpdateAfterBindUniformBuffers}. */
-    public static void nmaxPerStageDescriptorUpdateAfterBindUniformBuffers(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDUNIFORMBUFFERS, value); }
-    /** Unsafe version of {@link #maxPerStageDescriptorUpdateAfterBindStorageBuffers(int) maxPerStageDescriptorUpdateAfterBindStorageBuffers}. */
-    public static void nmaxPerStageDescriptorUpdateAfterBindStorageBuffers(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDSTORAGEBUFFERS, value); }
-    /** Unsafe version of {@link #maxPerStageDescriptorUpdateAfterBindSampledImages(int) maxPerStageDescriptorUpdateAfterBindSampledImages}. */
-    public static void nmaxPerStageDescriptorUpdateAfterBindSampledImages(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDSAMPLEDIMAGES, value); }
-    /** Unsafe version of {@link #maxPerStageDescriptorUpdateAfterBindStorageImages(int) maxPerStageDescriptorUpdateAfterBindStorageImages}. */
-    public static void nmaxPerStageDescriptorUpdateAfterBindStorageImages(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDSTORAGEIMAGES, value); }
-    /** Unsafe version of {@link #maxPerStageDescriptorUpdateAfterBindInputAttachments(int) maxPerStageDescriptorUpdateAfterBindInputAttachments}. */
-    public static void nmaxPerStageDescriptorUpdateAfterBindInputAttachments(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDINPUTATTACHMENTS, value); }
-    /** Unsafe version of {@link #maxPerStageUpdateAfterBindResources(int) maxPerStageUpdateAfterBindResources}. */
-    public static void nmaxPerStageUpdateAfterBindResources(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.MAXPERSTAGEUPDATEAFTERBINDRESOURCES, value); }
-    /** Unsafe version of {@link #maxDescriptorSetUpdateAfterBindSamplers(int) maxDescriptorSetUpdateAfterBindSamplers}. */
-    public static void nmaxDescriptorSetUpdateAfterBindSamplers(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.MAXDESCRIPTORSETUPDATEAFTERBINDSAMPLERS, value); }
-    /** Unsafe version of {@link #maxDescriptorSetUpdateAfterBindUniformBuffers(int) maxDescriptorSetUpdateAfterBindUniformBuffers}. */
-    public static void nmaxDescriptorSetUpdateAfterBindUniformBuffers(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.MAXDESCRIPTORSETUPDATEAFTERBINDUNIFORMBUFFERS, value); }
-    /** Unsafe version of {@link #maxDescriptorSetUpdateAfterBindUniformBuffersDynamic(int) maxDescriptorSetUpdateAfterBindUniformBuffersDynamic}. */
-    public static void nmaxDescriptorSetUpdateAfterBindUniformBuffersDynamic(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.MAXDESCRIPTORSETUPDATEAFTERBINDUNIFORMBUFFERSDYNAMIC, value); }
-    /** Unsafe version of {@link #maxDescriptorSetUpdateAfterBindStorageBuffers(int) maxDescriptorSetUpdateAfterBindStorageBuffers}. */
-    public static void nmaxDescriptorSetUpdateAfterBindStorageBuffers(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.MAXDESCRIPTORSETUPDATEAFTERBINDSTORAGEBUFFERS, value); }
-    /** Unsafe version of {@link #maxDescriptorSetUpdateAfterBindStorageBuffersDynamic(int) maxDescriptorSetUpdateAfterBindStorageBuffersDynamic}. */
-    public static void nmaxDescriptorSetUpdateAfterBindStorageBuffersDynamic(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.MAXDESCRIPTORSETUPDATEAFTERBINDSTORAGEBUFFERSDYNAMIC, value); }
-    /** Unsafe version of {@link #maxDescriptorSetUpdateAfterBindSampledImages(int) maxDescriptorSetUpdateAfterBindSampledImages}. */
-    public static void nmaxDescriptorSetUpdateAfterBindSampledImages(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.MAXDESCRIPTORSETUPDATEAFTERBINDSAMPLEDIMAGES, value); }
-    /** Unsafe version of {@link #maxDescriptorSetUpdateAfterBindStorageImages(int) maxDescriptorSetUpdateAfterBindStorageImages}. */
-    public static void nmaxDescriptorSetUpdateAfterBindStorageImages(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.MAXDESCRIPTORSETUPDATEAFTERBINDSTORAGEIMAGES, value); }
-    /** Unsafe version of {@link #maxDescriptorSetUpdateAfterBindInputAttachments(int) maxDescriptorSetUpdateAfterBindInputAttachments}. */
-    public static void nmaxDescriptorSetUpdateAfterBindInputAttachments(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.MAXDESCRIPTORSETUPDATEAFTERBINDINPUTATTACHMENTS, value); }
-    /** Unsafe version of {@link #supportedDepthResolveModes(int) supportedDepthResolveModes}. */
-    public static void nsupportedDepthResolveModes(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.SUPPORTEDDEPTHRESOLVEMODES, value); }
-    /** Unsafe version of {@link #supportedStencilResolveModes(int) supportedStencilResolveModes}. */
-    public static void nsupportedStencilResolveModes(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.SUPPORTEDSTENCILRESOLVEMODES, value); }
-    /** Unsafe version of {@link #independentResolveNone(boolean) independentResolveNone}. */
-    public static void nindependentResolveNone(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.INDEPENDENTRESOLVENONE, value); }
-    /** Unsafe version of {@link #independentResolve(boolean) independentResolve}. */
-    public static void nindependentResolve(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.INDEPENDENTRESOLVE, value); }
-    /** Unsafe version of {@link #filterMinmaxSingleComponentFormats(boolean) filterMinmaxSingleComponentFormats}. */
-    public static void nfilterMinmaxSingleComponentFormats(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.FILTERMINMAXSINGLECOMPONENTFORMATS, value); }
-    /** Unsafe version of {@link #filterMinmaxImageComponentMapping(boolean) filterMinmaxImageComponentMapping}. */
-    public static void nfilterMinmaxImageComponentMapping(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.FILTERMINMAXIMAGECOMPONENTMAPPING, value); }
-    /** Unsafe version of {@link #maxTimelineSemaphoreValueDifference(long) maxTimelineSemaphoreValueDifference}. */
-    public static void nmaxTimelineSemaphoreValueDifference(long struct, long value) { UNSAFE.putLong(null, struct + VkPhysicalDeviceVulkan12Properties.MAXTIMELINESEMAPHOREVALUEDIFFERENCE, value); }
-    /** Unsafe version of {@link #framebufferIntegerColorSampleCounts(int) framebufferIntegerColorSampleCounts}. */
-    public static void nframebufferIntegerColorSampleCounts(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkan12Properties.FRAMEBUFFERINTEGERCOLORSAMPLECOUNTS, value); }
 
     // -----------------------------------
 
@@ -1350,112 +1013,6 @@ public class VkPhysicalDeviceVulkan12Properties extends Struct implements Native
         public VkPhysicalDeviceVulkan12Properties.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceVulkan12Properties.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceVulkan12Properties.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceVulkan12Properties.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code driverID} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer driverID(@NativeType("VkDriverId") int value) { VkPhysicalDeviceVulkan12Properties.ndriverID(address(), value); return this; }
-        /** Copies the specified encoded string to the {@code driverName} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer driverName(@NativeType("char[VK_MAX_DRIVER_NAME_SIZE]") ByteBuffer value) { VkPhysicalDeviceVulkan12Properties.ndriverName(address(), value); return this; }
-        /** Copies the specified encoded string to the {@code driverInfo} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer driverInfo(@NativeType("char[VK_MAX_DRIVER_INFO_SIZE]") ByteBuffer value) { VkPhysicalDeviceVulkan12Properties.ndriverInfo(address(), value); return this; }
-        /** Copies the specified {@link VkConformanceVersion} to the {@code conformanceVersion} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer conformanceVersion(VkConformanceVersion value) { VkPhysicalDeviceVulkan12Properties.nconformanceVersion(address(), value); return this; }
-        /** Passes the {@code conformanceVersion} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer conformanceVersion(java.util.function.Consumer<VkConformanceVersion> consumer) { consumer.accept(conformanceVersion()); return this; }
-        /** Sets the specified value to the {@code denormBehaviorIndependence} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer denormBehaviorIndependence(@NativeType("VkShaderFloatControlsIndependence") int value) { VkPhysicalDeviceVulkan12Properties.ndenormBehaviorIndependence(address(), value); return this; }
-        /** Sets the specified value to the {@code roundingModeIndependence} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer roundingModeIndependence(@NativeType("VkShaderFloatControlsIndependence") int value) { VkPhysicalDeviceVulkan12Properties.nroundingModeIndependence(address(), value); return this; }
-        /** Sets the specified value to the {@code shaderSignedZeroInfNanPreserveFloat16} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer shaderSignedZeroInfNanPreserveFloat16(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Properties.nshaderSignedZeroInfNanPreserveFloat16(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderSignedZeroInfNanPreserveFloat32} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer shaderSignedZeroInfNanPreserveFloat32(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Properties.nshaderSignedZeroInfNanPreserveFloat32(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderSignedZeroInfNanPreserveFloat64} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer shaderSignedZeroInfNanPreserveFloat64(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Properties.nshaderSignedZeroInfNanPreserveFloat64(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderDenormPreserveFloat16} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer shaderDenormPreserveFloat16(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Properties.nshaderDenormPreserveFloat16(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderDenormPreserveFloat32} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer shaderDenormPreserveFloat32(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Properties.nshaderDenormPreserveFloat32(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderDenormPreserveFloat64} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer shaderDenormPreserveFloat64(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Properties.nshaderDenormPreserveFloat64(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderDenormFlushToZeroFloat16} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer shaderDenormFlushToZeroFloat16(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Properties.nshaderDenormFlushToZeroFloat16(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderDenormFlushToZeroFloat32} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer shaderDenormFlushToZeroFloat32(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Properties.nshaderDenormFlushToZeroFloat32(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderDenormFlushToZeroFloat64} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer shaderDenormFlushToZeroFloat64(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Properties.nshaderDenormFlushToZeroFloat64(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderRoundingModeRTEFloat16} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer shaderRoundingModeRTEFloat16(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Properties.nshaderRoundingModeRTEFloat16(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderRoundingModeRTEFloat32} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer shaderRoundingModeRTEFloat32(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Properties.nshaderRoundingModeRTEFloat32(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderRoundingModeRTEFloat64} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer shaderRoundingModeRTEFloat64(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Properties.nshaderRoundingModeRTEFloat64(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderRoundingModeRTZFloat16} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer shaderRoundingModeRTZFloat16(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Properties.nshaderRoundingModeRTZFloat16(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderRoundingModeRTZFloat32} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer shaderRoundingModeRTZFloat32(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Properties.nshaderRoundingModeRTZFloat32(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderRoundingModeRTZFloat64} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer shaderRoundingModeRTZFloat64(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Properties.nshaderRoundingModeRTZFloat64(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code maxUpdateAfterBindDescriptorsInAllPools} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer maxUpdateAfterBindDescriptorsInAllPools(@NativeType("uint32_t") int value) { VkPhysicalDeviceVulkan12Properties.nmaxUpdateAfterBindDescriptorsInAllPools(address(), value); return this; }
-        /** Sets the specified value to the {@code shaderUniformBufferArrayNonUniformIndexingNative} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer shaderUniformBufferArrayNonUniformIndexingNative(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Properties.nshaderUniformBufferArrayNonUniformIndexingNative(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderSampledImageArrayNonUniformIndexingNative} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer shaderSampledImageArrayNonUniformIndexingNative(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Properties.nshaderSampledImageArrayNonUniformIndexingNative(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderStorageBufferArrayNonUniformIndexingNative} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer shaderStorageBufferArrayNonUniformIndexingNative(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Properties.nshaderStorageBufferArrayNonUniformIndexingNative(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderStorageImageArrayNonUniformIndexingNative} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer shaderStorageImageArrayNonUniformIndexingNative(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Properties.nshaderStorageImageArrayNonUniformIndexingNative(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderInputAttachmentArrayNonUniformIndexingNative} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer shaderInputAttachmentArrayNonUniformIndexingNative(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Properties.nshaderInputAttachmentArrayNonUniformIndexingNative(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code robustBufferAccessUpdateAfterBind} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer robustBufferAccessUpdateAfterBind(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Properties.nrobustBufferAccessUpdateAfterBind(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code quadDivergentImplicitLod} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer quadDivergentImplicitLod(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Properties.nquadDivergentImplicitLod(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code maxPerStageDescriptorUpdateAfterBindSamplers} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer maxPerStageDescriptorUpdateAfterBindSamplers(@NativeType("uint32_t") int value) { VkPhysicalDeviceVulkan12Properties.nmaxPerStageDescriptorUpdateAfterBindSamplers(address(), value); return this; }
-        /** Sets the specified value to the {@code maxPerStageDescriptorUpdateAfterBindUniformBuffers} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer maxPerStageDescriptorUpdateAfterBindUniformBuffers(@NativeType("uint32_t") int value) { VkPhysicalDeviceVulkan12Properties.nmaxPerStageDescriptorUpdateAfterBindUniformBuffers(address(), value); return this; }
-        /** Sets the specified value to the {@code maxPerStageDescriptorUpdateAfterBindStorageBuffers} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer maxPerStageDescriptorUpdateAfterBindStorageBuffers(@NativeType("uint32_t") int value) { VkPhysicalDeviceVulkan12Properties.nmaxPerStageDescriptorUpdateAfterBindStorageBuffers(address(), value); return this; }
-        /** Sets the specified value to the {@code maxPerStageDescriptorUpdateAfterBindSampledImages} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer maxPerStageDescriptorUpdateAfterBindSampledImages(@NativeType("uint32_t") int value) { VkPhysicalDeviceVulkan12Properties.nmaxPerStageDescriptorUpdateAfterBindSampledImages(address(), value); return this; }
-        /** Sets the specified value to the {@code maxPerStageDescriptorUpdateAfterBindStorageImages} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer maxPerStageDescriptorUpdateAfterBindStorageImages(@NativeType("uint32_t") int value) { VkPhysicalDeviceVulkan12Properties.nmaxPerStageDescriptorUpdateAfterBindStorageImages(address(), value); return this; }
-        /** Sets the specified value to the {@code maxPerStageDescriptorUpdateAfterBindInputAttachments} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer maxPerStageDescriptorUpdateAfterBindInputAttachments(@NativeType("uint32_t") int value) { VkPhysicalDeviceVulkan12Properties.nmaxPerStageDescriptorUpdateAfterBindInputAttachments(address(), value); return this; }
-        /** Sets the specified value to the {@code maxPerStageUpdateAfterBindResources} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer maxPerStageUpdateAfterBindResources(@NativeType("uint32_t") int value) { VkPhysicalDeviceVulkan12Properties.nmaxPerStageUpdateAfterBindResources(address(), value); return this; }
-        /** Sets the specified value to the {@code maxDescriptorSetUpdateAfterBindSamplers} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer maxDescriptorSetUpdateAfterBindSamplers(@NativeType("uint32_t") int value) { VkPhysicalDeviceVulkan12Properties.nmaxDescriptorSetUpdateAfterBindSamplers(address(), value); return this; }
-        /** Sets the specified value to the {@code maxDescriptorSetUpdateAfterBindUniformBuffers} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer maxDescriptorSetUpdateAfterBindUniformBuffers(@NativeType("uint32_t") int value) { VkPhysicalDeviceVulkan12Properties.nmaxDescriptorSetUpdateAfterBindUniformBuffers(address(), value); return this; }
-        /** Sets the specified value to the {@code maxDescriptorSetUpdateAfterBindUniformBuffersDynamic} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer maxDescriptorSetUpdateAfterBindUniformBuffersDynamic(@NativeType("uint32_t") int value) { VkPhysicalDeviceVulkan12Properties.nmaxDescriptorSetUpdateAfterBindUniformBuffersDynamic(address(), value); return this; }
-        /** Sets the specified value to the {@code maxDescriptorSetUpdateAfterBindStorageBuffers} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer maxDescriptorSetUpdateAfterBindStorageBuffers(@NativeType("uint32_t") int value) { VkPhysicalDeviceVulkan12Properties.nmaxDescriptorSetUpdateAfterBindStorageBuffers(address(), value); return this; }
-        /** Sets the specified value to the {@code maxDescriptorSetUpdateAfterBindStorageBuffersDynamic} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer maxDescriptorSetUpdateAfterBindStorageBuffersDynamic(@NativeType("uint32_t") int value) { VkPhysicalDeviceVulkan12Properties.nmaxDescriptorSetUpdateAfterBindStorageBuffersDynamic(address(), value); return this; }
-        /** Sets the specified value to the {@code maxDescriptorSetUpdateAfterBindSampledImages} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer maxDescriptorSetUpdateAfterBindSampledImages(@NativeType("uint32_t") int value) { VkPhysicalDeviceVulkan12Properties.nmaxDescriptorSetUpdateAfterBindSampledImages(address(), value); return this; }
-        /** Sets the specified value to the {@code maxDescriptorSetUpdateAfterBindStorageImages} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer maxDescriptorSetUpdateAfterBindStorageImages(@NativeType("uint32_t") int value) { VkPhysicalDeviceVulkan12Properties.nmaxDescriptorSetUpdateAfterBindStorageImages(address(), value); return this; }
-        /** Sets the specified value to the {@code maxDescriptorSetUpdateAfterBindInputAttachments} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer maxDescriptorSetUpdateAfterBindInputAttachments(@NativeType("uint32_t") int value) { VkPhysicalDeviceVulkan12Properties.nmaxDescriptorSetUpdateAfterBindInputAttachments(address(), value); return this; }
-        /** Sets the specified value to the {@code supportedDepthResolveModes} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer supportedDepthResolveModes(@NativeType("VkResolveModeFlags") int value) { VkPhysicalDeviceVulkan12Properties.nsupportedDepthResolveModes(address(), value); return this; }
-        /** Sets the specified value to the {@code supportedStencilResolveModes} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer supportedStencilResolveModes(@NativeType("VkResolveModeFlags") int value) { VkPhysicalDeviceVulkan12Properties.nsupportedStencilResolveModes(address(), value); return this; }
-        /** Sets the specified value to the {@code independentResolveNone} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer independentResolveNone(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Properties.nindependentResolveNone(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code independentResolve} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer independentResolve(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Properties.nindependentResolve(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code filterMinmaxSingleComponentFormats} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer filterMinmaxSingleComponentFormats(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Properties.nfilterMinmaxSingleComponentFormats(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code filterMinmaxImageComponentMapping} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer filterMinmaxImageComponentMapping(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Properties.nfilterMinmaxImageComponentMapping(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code maxTimelineSemaphoreValueDifference} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer maxTimelineSemaphoreValueDifference(@NativeType("uint64_t") long value) { VkPhysicalDeviceVulkan12Properties.nmaxTimelineSemaphoreValueDifference(address(), value); return this; }
-        /** Sets the specified value to the {@code framebufferIntegerColorSampleCounts} field. */
-        public VkPhysicalDeviceVulkan12Properties.Buffer framebufferIntegerColorSampleCounts(@NativeType("VkSampleCountFlags") int value) { VkPhysicalDeviceVulkan12Properties.nframebufferIntegerColorSampleCounts(address(), value); return this; }
 
     }
 

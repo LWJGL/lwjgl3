@@ -35,7 +35,7 @@ import static org.lwjgl.vulkan.VK10.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code name[VK_MAX_EXTENSION_NAME_SIZE]} &ndash; a null-terminated UTF-8 string containing the name of the tool.</li>
  * <li>{@code version[VK_MAX_EXTENSION_NAME_SIZE]} &ndash; a null-terminated UTF-8 string containing the version of the tool.</li>
  * <li>{@code purposes} &ndash; a bitmask of {@code VkToolPurposeFlagBitsEXT} which is populated with purposes supported by the tool.</li>

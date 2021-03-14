@@ -13,9 +13,11 @@ import static org.lwjgl.system.JNI.*;
 /**
  * This extension allows an application to source the number of draw calls for indirect draw calls from a buffer. This enables applications to generate arbitrary amounts of draw commands and execute them without host intervention.
  * 
- * <h5>Promotion to VK_KHR_draw_indirect_count</h5>
+ * <h5>Promotion to {@code VK_KHR_draw_indirect_count}</h5>
  * 
  * <p>All functionality in this extension is included in {@link KHRDrawIndirectCount VK_KHR_draw_indirect_count}, with the suffix changed to KHR. The original type, enum and command names are still available as aliases of the core functionality.</p>
+ * 
+ * <h5>VK_AMD_draw_indirect_count</h5>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -43,6 +45,11 @@ import static org.lwjgl.system.JNI.*;
  * <dd><ul>
  * <li>Daniel Rakos <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_draw_indirect_count:%20&amp;body=@drakos-amd%20">drakos-amd</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2016-08-23</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
@@ -97,7 +104,7 @@ public class AMDDrawIndirectCount {
     // --- [ vkCmdDrawIndexedIndirectCountAMD ] ---
 
     /**
-     * See {@link KHRDrawIndirectCount#vkCmdDrawIndexedIndirectCountKHR CmdDrawIndexedIndirectCountKHR}.
+     * See {@link VK12#vkCmdDrawIndexedIndirectCount CmdDrawIndexedIndirectCount}.
      *
      * @param commandBuffer     the command buffer into which the command is recorded.
      * @param buffer            the buffer containing draw parameters.

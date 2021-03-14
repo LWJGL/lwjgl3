@@ -31,17 +31,23 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If {@code flags} has the {@link VK12#VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT} bit set, descriptor pool creation <b>may</b> fail with the error {@link VK12#VK_ERROR_FRAGMENTATION ERROR_FRAGMENTATION} if the total number of descriptors across all pools (including this one) created with this bit set exceeds {@code maxUpdateAfterBindDescriptorsInAllPools}, or if fragmentation of the underlying hardware resources occurs.</p>
  * 
+ * <p>If a {@code pPoolSizes}[i]{@code ::type} is {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE}, a {@link VkMutableDescriptorTypeCreateInfoVALVE} struct in the {@code pNext} chain <b>can</b> be used to specify which mutable descriptor types <b>can</b> be allocated from the pool. If present in the {@code pNext} chain, {@link VkMutableDescriptorTypeCreateInfoVALVE}{@code ::pMutableDescriptorTypeLists}[i] specifies which kind of {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE} descriptors <b>can</b> be allocated from this pool entry. If {@link VkMutableDescriptorTypeCreateInfoVALVE} does not exist in the {@code pNext} chain, or {@link VkMutableDescriptorTypeCreateInfoVALVE}{@code ::pMutableDescriptorTypeLists}[i] is out of range, the descriptor pool allocates enough memory to be able to allocate a {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE} descriptor with any supported {@code VkDescriptorType} as a mutable descriptor. A mutable descriptor <b>can</b> be allocated from a pool entry if the type list in {@link VkDescriptorSetLayoutCreateInfo} is a subset of the type list declared in the descriptor pool, or if the pool entry is created without a descriptor type list.</p>
+ * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
  * <li>{@code maxSets} <b>must</b> be greater than 0</li>
+ * <li>If {@code flags} has the {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_POOL_CREATE_HOST_ONLY_BIT_VALVE DESCRIPTOR_POOL_CREATE_HOST_ONLY_BIT_VALVE} bit set, then the {@link VK12#VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT} bit <b>must</b> not be set</li>
+ * <li>If {@link VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE}{@code ::mutableDescriptorType} is not enabled, {@code pPoolSizes} <b>must</b> not contain a {@code descriptorType} of {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE}</li>
+ * <li>If {@code flags} has the {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_POOL_CREATE_HOST_ONLY_BIT_VALVE DESCRIPTOR_POOL_CREATE_HOST_ONLY_BIT_VALVE} bit set, {@link VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE}{@code ::mutableDescriptorType} <b>must</b> be enabled</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkDescriptorPoolInlineUniformBlockCreateInfoEXT}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDescriptorPoolInlineUniformBlockCreateInfoEXT} or {@link VkMutableDescriptorTypeCreateInfoVALVE}</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkDescriptorPoolCreateFlagBits} values</li>
  * <li>{@code pPoolSizes} <b>must</b> be a valid pointer to an array of {@code poolSizeCount} valid {@link VkDescriptorPoolSize} structures</li>
  * <li>{@code poolSizeCount} <b>must</b> be greater than 0</li>
@@ -55,7 +61,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code flags} &ndash; a bitmask of {@code VkDescriptorPoolCreateFlagBits} specifying certain supported operations on the pool.</li>
  * <li>{@code maxSets} &ndash; the maximum number of descriptor sets that <b>can</b> be allocated from the pool.</li>
  * <li>{@code poolSizeCount} &ndash; the number of elements in {@code pPoolSizes}.</li>

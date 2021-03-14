@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>If {@code buffer} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
  * <li>{@code buffer} <b>must</b> have been created with the {@link EXTConditionalRendering#VK_BUFFER_USAGE_CONDITIONAL_RENDERING_BIT_EXT BUFFER_USAGE_CONDITIONAL_RENDERING_BIT_EXT} bit set</li>
- * <li>{@code offset} <b>must</b> be less than the size of {@code buffer} by at least 32 bits.</li>
+ * <li>{@code offset} <b>must</b> be less than the size of {@code buffer} by at least 32 bits</li>
  * <li>{@code offset} <b>must</b> be a multiple of 4</li>
  * </ul>
  * 
@@ -48,7 +48,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code buffer} &ndash; a buffer containing the predicate for conditional rendering.</li>
  * <li>{@code offset} &ndash; the byte offset into {@code buffer} where the predicate is located.</li>
  * <li>{@code flags} &ndash; a bitmask of {@code VkConditionalRenderingFlagsEXT} specifying the behavior of conditional rendering.</li>

@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code localDimmingSupport} &ndash; specifies whether the surface supports local dimming. If this is {@link VK10#VK_TRUE TRUE}, {@link VkSwapchainDisplayNativeHdrCreateInfoAMD} <b>can</b> be used to explicitly enable or disable local dimming for the surface. Local dimming may also be overriden by {@link AMDDisplayNativeHdr#vkSetLocalDimmingAMD SetLocalDimmingAMD} during the lifetime of the swapchain.</li>
  * </ul>
  * 

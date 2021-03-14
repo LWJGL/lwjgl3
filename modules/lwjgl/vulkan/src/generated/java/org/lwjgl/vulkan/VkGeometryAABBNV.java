@@ -46,7 +46,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code aabbData} &ndash; the buffer containing axis-aligned bounding box data.</li>
  * <li>{@code numAABBs} &ndash; the number of AABBs in this geometry.</li>
  * <li>{@code stride} &ndash; the stride in bytes between AABBs in {@code aabbData}.</li>

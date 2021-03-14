@@ -43,7 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code flags} &ndash; a bitmask of {@code VkDebugReportFlagBitsEXT} specifying which event(s) will cause this callback to be called.</li>
  * <li>{@code pfnCallback} &ndash; the application callback function to call.</li>
  * <li>{@code pUserData} &ndash; user data to be passed to the callback.</li>

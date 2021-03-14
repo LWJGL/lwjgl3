@@ -18,6 +18,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * This extension defines a set of utility functions for use with the {@link KHRDisplay VK_KHR_display} and {@link KHRDisplaySwapchain VK_KHR_display_swapchain} extensions.
  * 
+ * <h5>VK_EXT_display_control</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_display_control}</dd>
@@ -37,6 +39,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd><ul>
  * <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_display_control:%20&amp;body=@cubanismo%20">cubanismo</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2016-12-13</dd>
  * <dt><b>IP Status</b></dt>
@@ -161,6 +168,7 @@ public class EXTDisplayControl {
      * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
      * <li>{@code display} <b>must</b> be a valid {@code VkDisplayKHR} handle</li>
      * <li>{@code pDisplayPowerInfo} <b>must</b> be a valid pointer to a valid {@link VkDisplayPowerInfoEXT} structure</li>
+     * <li>Both of {@code device}, and {@code display} <b>must</b> have been created, allocated, or retrieved from the same {@code VkPhysicalDevice}</li>
      * </ul>
      * 
      * <h5>Return Codes</h5>
@@ -169,6 +177,10 @@ public class EXTDisplayControl {
      * <dt>On success, this command returns</dt>
      * <dd><ul>
      * <li>{@link VK10#VK_SUCCESS SUCCESS}</li>
+     * </ul></dd>
+     * <dt>On failure, this command returns</dt>
+     * <dd><ul>
+     * <li>{@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY}</li>
      * </ul></dd>
      * </dl>
      * 
@@ -227,6 +239,10 @@ public class EXTDisplayControl {
      * <dd><ul>
      * <li>{@link VK10#VK_SUCCESS SUCCESS}</li>
      * </ul></dd>
+     * <dt>On failure, this command returns</dt>
+     * <dd><ul>
+     * <li>{@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY}</li>
+     * </ul></dd>
      * </dl>
      * 
      * <h5>See Also</h5>
@@ -281,6 +297,7 @@ public class EXTDisplayControl {
      * <li>{@code pDisplayEventInfo} <b>must</b> be a valid pointer to a valid {@link VkDisplayEventInfoEXT} structure</li>
      * <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid {@link VkAllocationCallbacks} structure</li>
      * <li>{@code pFence} <b>must</b> be a valid pointer to a {@code VkFence} handle</li>
+     * <li>Both of {@code device}, and {@code display} <b>must</b> have been created, allocated, or retrieved from the same {@code VkPhysicalDevice}</li>
      * </ul>
      * 
      * <h5>Return Codes</h5>
@@ -289,6 +306,10 @@ public class EXTDisplayControl {
      * <dt>On success, this command returns</dt>
      * <dd><ul>
      * <li>{@link VK10#VK_SUCCESS SUCCESS}</li>
+     * </ul></dd>
+     * <dt>On failure, this command returns</dt>
+     * <dd><ul>
+     * <li>{@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY}</li>
      * </ul></dd>
      * </dl>
      * 
@@ -342,7 +363,7 @@ public class EXTDisplayControl {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>One or more present commands on {@code swapchain} <b>must</b> have been processed by the presentation engine.</li>
+     * <li>One or more present commands on {@code swapchain} <b>must</b> have been processed by the presentation engine</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -364,6 +385,7 @@ public class EXTDisplayControl {
      * </ul></dd>
      * <dt>On failure, this command returns</dt>
      * <dd><ul>
+     * <li>{@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY}</li>
      * <li>{@link VK10#VK_ERROR_DEVICE_LOST ERROR_DEVICE_LOST}</li>
      * <li>{@link KHRSwapchain#VK_ERROR_OUT_OF_DATE_KHR ERROR_OUT_OF_DATE_KHR}</li>
      * </ul></dd>

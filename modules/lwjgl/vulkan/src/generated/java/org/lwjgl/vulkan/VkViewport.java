@@ -20,6 +20,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>Despite their names, {@code minDepth} <b>can</b> be less than, equal to, or greater than {@code maxDepth}.</p>
+ * </div>
+ * 
  * <p>The framebuffer depth coordinate <code>z<sub>f</sub></code> <b>may</b> be represented using either a fixed-point or floating-point representation. However, a floating-point representation <b>must</b> be used if the depth/stencil attachment has a floating-point depth component. If an <code>m</code>-bit fixed-point representation is used, we assume that it represents each value <code>k / (2<sup>m</sup> - 1)</code>, where <code>k ∈ { 0, 1, ..., 2<sup>m</sup>-1 }</code>, as <code>k</code> (e.g. 1.0 is represented in binary as a string of all ones).</p>
  * 
  * <p>The viewport parameters shown in the above equations are found from these values as</p>
@@ -32,6 +37,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <dd><code>p<sub>y</sub> = height</code></dd>
  * <dd><code>p<sub>z</sub> = maxDepth - minDepth</code>.</dd>
  * </dl>
+ * 
+ * <p>If a render pass transform is enabled, the values <code>(p<sub>x</sub>,p<sub>y</sub>)</code> and <code>(o<sub>x</sub>, o<sub>y</sub>)</code> defining the viewport are transformed as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#vertexpostproc-renderpass-transform">render pass transform</a> before participating in the viewport transform.</p>
  * 
  * <p>The application <b>can</b> specify a negative term for {@code height}, which has the effect of negating the y coordinate in clip space before performing the transform. When using a negative {@code height}, the application <b>should</b> also adjust the {@code y} value to point to the lower left corner of the viewport instead of the upper left corner. Using the negative {@code height} allows the application to avoid having to negate the y component of the {@code Position} output from the last vertex processing stage in shaders that also target other graphics APIs.</p>
  * 
@@ -51,13 +58,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code y} <b>must</b> be less than or equal to {@code viewportBoundsRange}[1]</li>
  * <li><code>(y + height)</code> <b>must</b> be greater than or equal to {@code viewportBoundsRange}[0]</li>
  * <li><code>(y + height)</code> <b>must</b> be less than or equal to {@code viewportBoundsRange}[1]</li>
- * <li>Unless {@link EXTDepthRangeUnrestricted VK_EXT_depth_range_unrestricted} extension is enabled {@code minDepth} <b>must</b> be between {@code 0.0} and {@code 1.0}, inclusive</li>
- * <li>Unless {@link EXTDepthRangeUnrestricted VK_EXT_depth_range_unrestricted} extension is enabled {@code maxDepth} <b>must</b> be between {@code 0.0} and {@code 1.0}, inclusive</li>
+ * <li>Unless {@code VK_EXT_depth_range_unrestricted.html[VK_EXT_depth_range_unrestricted]} extension is enabled {@code minDepth} <b>must</b> be between {@code 0.0} and {@code 1.0}, inclusive</li>
+ * <li>Unless {@code VK_EXT_depth_range_unrestricted.html[VK_EXT_depth_range_unrestricted]} extension is enabled {@code maxDepth} <b>must</b> be between {@code 0.0} and {@code 1.0}, inclusive</li>
  * </ul>
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkPipelineViewportStateCreateInfo}, {@link VK10#vkCmdSetViewport CmdSetViewport}</p>
+ * <p>{@link VkPipelineViewportStateCreateInfo}, {@link VK10#vkCmdSetViewport CmdSetViewport}, {@link EXTExtendedDynamicState#vkCmdSetViewportWithCountEXT CmdSetViewportWithCountEXT}</p>
  * 
  * <h3>Member documentation</h3>
  * 
@@ -66,7 +73,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code y} &ndash; see {@code x}</li>
  * <li>{@code width} &ndash; {@code width} and {@code height} are the viewport&#8217;s width and height, respectively.</li>
  * <li>{@code height} &ndash; see {@code width}</li>
- * <li>{@code minDepth} &ndash; {@code minDepth} and {@code maxDepth} are the depth range for the viewport. It is valid for {@code minDepth} to be greater than or equal to {@code maxDepth}.</li>
+ * <li>{@code minDepth} &ndash; {@code minDepth} and {@code maxDepth} are the depth range for the viewport.</li>
  * <li>{@code maxDepth} &ndash; see {@code minDepth}</li>
  * </ul>
  * 

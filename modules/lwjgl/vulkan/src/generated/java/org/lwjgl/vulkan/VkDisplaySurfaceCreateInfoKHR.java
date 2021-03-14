@@ -31,8 +31,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code planeIndex} <b>must</b> be less than the number of display planes supported by the device as determined by calling {@code vkGetPhysicalDeviceDisplayPlanePropertiesKHR}</li>
  * <li>If the {@code planeReorderPossible} member of the {@link VkDisplayPropertiesKHR} structure returned by {@code vkGetPhysicalDeviceDisplayPropertiesKHR} for the display corresponding to {@code displayMode} is {@link VK10#VK_TRUE TRUE} then {@code planeStackIndex} <b>must</b> be less than the number of display planes supported by the device as determined by calling {@code vkGetPhysicalDeviceDisplayPlanePropertiesKHR}; otherwise {@code planeStackIndex} <b>must</b> equal the {@code currentStackIndex} member of {@link VkDisplayPlanePropertiesKHR} returned by {@code vkGetPhysicalDeviceDisplayPlanePropertiesKHR} for the display plane corresponding to {@code displayMode}</li>
  * <li>If {@code alphaMode} is {@link KHRDisplay#VK_DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR} then {@code globalAlpha} <b>must</b> be between 0 and 1, inclusive</li>
- * <li>{@code alphaMode} <b>must</b> be 0 or one of the bits present in the {@code supportedAlpha} member of {@link VkDisplayPlaneCapabilitiesKHR} returned by {@code vkGetDisplayPlaneCapabilitiesKHR} for the display plane corresponding to {@code displayMode}</li>
- * <li>The {@code width} and {@code height} members of {@code imageExtent} <b>must</b> be less than the {@code maxImageDimensions2D} member of {@link VkPhysicalDeviceLimits}</li>
+ * <li>{@code alphaMode} <b>must</b> be one of the bits present in the {@code supportedAlpha} member of {@link VkDisplayPlaneCapabilitiesKHR} for the display plane corresponding to {@code displayMode}</li>
+ * <li>The {@code width} and {@code height} members of {@code imageExtent} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxImageDimension2D}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -54,7 +54,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code flags} &ndash; reserved for future use, and <b>must</b> be zero.</li>
  * <li>{@code displayMode} &ndash; a {@code VkDisplayModeKHR} handle specifying the mode to use when displaying this surface.</li>
  * <li>{@code planeIndex} &ndash; the plane on which this surface appears.</li>

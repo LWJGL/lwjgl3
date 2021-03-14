@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} is the type of this structure.</li>
- * <li>{@code pNext} is {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} is {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code deviceIndexCount} is the number of elements in {@code pDeviceIndices}.</li>
  * <li>{@code pDeviceIndices} is a pointer to an array of device indices.</li>
  * </ul>

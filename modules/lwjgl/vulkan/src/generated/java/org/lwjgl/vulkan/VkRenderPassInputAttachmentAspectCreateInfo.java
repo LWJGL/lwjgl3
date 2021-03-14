@@ -19,6 +19,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying, for a given subpass/input attachment pair, which aspect <b>can</b> be read.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>An application <b>can</b> access any aspect of an input attachment that does not have a specified aspect mask in the {@code pAspectReferences} array. Otherwise, an application <b>must</b> not access aspect(s) of an input attachment other than those in its specified aspect mask.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
@@ -35,9 +39,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code aspectReferenceCount} &ndash; the number of elements in the {@code pAspectReferences} array.</li>
- * <li>{@code pAspectReferences} &ndash; a pointer to an array of {@code aspectReferenceCount} {@link VkInputAttachmentAspectReference} structures describing which aspect(s) <b>can</b> be accessed for a given input attachment within a given subpass.</li>
+ * <li>{@code pAspectReferences} &ndash; a pointer to an array of {@code aspectReferenceCount} {@link VkInputAttachmentAspectReference} structures containing a mask describing which aspect(s) <b>can</b> be accessed for a given input attachment within a given subpass.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

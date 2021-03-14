@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * return structure for queue family checkpoint info query.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>Additional queue family information can be queried by setting {@link VkQueueFamilyProperties2}{@code ::pNext} to point to a {@link VkQueueFamilyCheckpointPropertiesNV} structure.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
@@ -28,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code checkpointExecutionStageMask} &ndash; a mask indicating which pipeline stages the implementation can execute checkpoint markers in.</li>
  * </ul>
  * 

@@ -20,11 +20,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If {@code coverageToColorEnable} is {@link VK10#VK_TRUE TRUE}, the fragment coverage information is treated as a bitmask with one bit for each sample (as in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-samplemask">Sample Mask</a> section), and this bitmask replaces the first component of the color value corresponding to the fragment shader output location with {@code Location} equal to {@code coverageToColorLocation} and {@code Index} equal to zero. If the color attachment format has fewer bits than the sample coverage, the low bits of the sample coverage bitmask are taken without any clamping. If the color attachment format has more bits than the sample coverage, the high bits of the sample coverage bitmask are filled with zeros.</p>
+ * <p>If the {@code pNext} chain of {@link VkPipelineMultisampleStateCreateInfo} includes a {@link VkPipelineCoverageToColorStateCreateInfoNV} structure, then that structure controls whether the fragment coverage is substituted for a fragment color output and, if so, which output is replaced.</p>
  * 
- * <p>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-sampleshading">Sample Shading</a> is in use, the coverage bitmask only has bits set for samples that correspond to the fragment shader invocation that shades those samples.</p>
- * 
- * <p>This pipeline stage occurs after sample counting and before blending, and is always performed after fragment shading regardless of the setting of {@code EarlyFragmentTests}.</p>
+ * <p>If {@code coverageToColorEnable} is {@link VK10#VK_TRUE TRUE}, the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-multisampling-coverage-mask">coverage mask</a> replaces the first component of the color value corresponding to the fragment shader output location with {@code Location} equal to {@code coverageToColorLocation} and {@code Index} equal to zero. If the color attachment format has fewer bits than the coverage mask, the low bits of the sample coverage mask are taken without any clamping. If the color attachment format has more bits than the coverage mask, the high bits of the sample coverage mask are filled with zeros.</p>
  * 
  * <p>If {@code coverageToColorEnable} is {@link VK10#VK_FALSE FALSE}, these operations are skipped. If this structure is not present, it is as if {@code coverageToColorEnable} is {@link VK10#VK_FALSE FALSE}.</p>
  * 
@@ -45,7 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure</li>
  * <li>{@code flags} &ndash; reserved for future use.</li>
  * <li>{@code coverageToColorEnable} &ndash; controls whether the fragment coverage value replaces a fragment color output.</li>
  * <li>{@code coverageToColorLocation} &ndash; controls which fragment shader color output value is replaced.</li>

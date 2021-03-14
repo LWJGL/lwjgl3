@@ -40,7 +40,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code timeDomain} &ndash; a {@code VkTimeDomainEXT} value specifying the time domain from which the calibrated timestamp value should be returned.</li>
  * </ul>
  * 

@@ -23,6 +23,8 @@ package org.lwjgl.vulkan;
  * 
  * <p>Functionality in this extension is included in core Vulkan 1.2, with the EXT suffix omitted. However, if Vulkan 1.2 is supported and this extension is not, the {@code descriptorIndexing} capability is optional. The original type, enum and command names are still available as aliases of the core functionality.</p>
  * 
+ * <h5>VK_EXT_descriptor_indexing</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_descriptor_indexing}</dd>
@@ -46,9 +48,12 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_descriptor_indexing:%20&amp;body=@jeffbolznv%20">jeffbolznv</a></li>
  * </ul></dd>
- * <dt><b>Status</b></dt>
- * <dd>Complete</dd>
- * <dt><b>Last Modified Data</b></dt>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
+ * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-10-02</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>

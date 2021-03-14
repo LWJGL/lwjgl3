@@ -21,9 +21,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code pixelX} <b>must</b> be less than the width (in pixels) of the fragment.</li>
- * <li>{@code pixelY} <b>must</b> be less than the height (in pixels) of the fragment.</li>
- * <li>{@code sample} <b>must</b> be less than the number of coverage samples in each pixel belonging to the fragment.</li>
+ * <li>{@code pixelX} <b>must</b> be less than the width (in pixels) of the fragment</li>
+ * <li>{@code pixelY} <b>must</b> be less than the height (in pixels) of the fragment</li>
+ * <li>{@code sample} <b>must</b> be less than the number of coverage samples in each pixel belonging to the fragment</li>
  * </ul>
  * 
  * <h5>See Also</h5>

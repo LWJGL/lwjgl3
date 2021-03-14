@@ -8,9 +8,7 @@ package org.lwjgl.vulkan;
 /**
  * This extension allows controlling whether explicit overallocation beyond the device memory heap sizes (reported by {@link VkPhysicalDeviceMemoryProperties}) is allowed or not. Overallocation may lead to performance loss and is not supported for all platforms.
  * 
- * <h5>Examples</h5>
- * 
- * <p>None.</p>
+ * <h5>VK_AMD_memory_overallocation_behavior</h5>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -29,6 +27,11 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Martin Dinkov <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_memory_overallocation_behavior:%20&amp;body=@mdinkov%20">mdinkov</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2018-09-19</dd>
  * <dt><b>IP Status</b></dt>
@@ -59,7 +62,7 @@ public final class AMDMemoryOverallocationBehavior {
      * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_MEMORY_OVERALLOCATION_BEHAVIOR_DEFAULT_AMD MEMORY_OVERALLOCATION_BEHAVIOR_DEFAULT_AMD} lets the implementation decide if overallocation should be allowed.</li>
+     * <li>{@link #VK_MEMORY_OVERALLOCATION_BEHAVIOR_DEFAULT_AMD MEMORY_OVERALLOCATION_BEHAVIOR_DEFAULT_AMD} lets the implementation decide if overallocation is allowed.</li>
      * <li>{@link #VK_MEMORY_OVERALLOCATION_BEHAVIOR_ALLOWED_AMD MEMORY_OVERALLOCATION_BEHAVIOR_ALLOWED_AMD} specifies overallocation is allowed if platform permits.</li>
      * <li>{@link #VK_MEMORY_OVERALLOCATION_BEHAVIOR_DISALLOWED_AMD MEMORY_OVERALLOCATION_BEHAVIOR_DISALLOWED_AMD} specifies the application is not allowed to allocate device memory beyond the heap sizes reported by {@link VkPhysicalDeviceMemoryProperties}. Allocations that are not explicitly made by the application within the scope of the Vulkan instance are not accounted for.</li>
      * </ul>

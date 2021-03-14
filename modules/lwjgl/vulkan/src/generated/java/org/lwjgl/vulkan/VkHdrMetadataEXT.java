@@ -38,13 +38,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code displayPrimaryRed} &ndash; the mastering display&#8217;s red primary in chromaticity coordinates</li>
- * <li>{@code displayPrimaryGreen} &ndash; the mastering display&#8217;s green primary in chromaticity coordinates</li>
- * <li>{@code displayPrimaryBlue} &ndash; the mastering display&#8217;s blue primary in chromaticity coordinates</li>
- * <li>{@code whitePoint} &ndash; the mastering display&#8217;s white-point in chromaticity coordinates</li>
- * <li>{@code maxLuminance} &ndash; the maximum luminance of the mastering display in nits</li>
- * <li>{@code minLuminance} &ndash; the minimum luminance of the mastering display in nits</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
+ * <li>{@code displayPrimaryRed} &ndash; the reference monitor&#8217;s red primary in chromaticity coordinates</li>
+ * <li>{@code displayPrimaryGreen} &ndash; the reference monitor&#8217;s green primary in chromaticity coordinates</li>
+ * <li>{@code displayPrimaryBlue} &ndash; the reference monitor&#8217;s blue primary in chromaticity coordinates</li>
+ * <li>{@code whitePoint} &ndash; the reference monitor&#8217;s white-point in chromaticity coordinates</li>
+ * <li>{@code maxLuminance} &ndash; the maximum luminance of the reference monitor in nits</li>
+ * <li>{@code minLuminance} &ndash; the minimum luminance of the reference monitor in nits</li>
  * <li>{@code maxContentLightLevel} &ndash; content&#8217;s maximum luminance in nits</li>
  * <li>{@code maxFrameAverageLightLevel} &ndash; the maximum frame average light level in nits</li>
  * </ul>

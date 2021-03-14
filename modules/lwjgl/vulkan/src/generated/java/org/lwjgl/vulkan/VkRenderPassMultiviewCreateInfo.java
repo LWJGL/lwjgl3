@@ -56,7 +56,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code subpassCount} &ndash; zero or the number of subpasses in the render pass.</li>
  * <li>{@code pViewMasks} &ndash; a pointer to an array of {@code subpassCount} view masks, where each mask is a bitfield of view indices describing which views rendering is broadcast to in each subpass, when multiview is enabled. If {@code subpassCount} is zero, each view mask is treated as zero.</li>
  * <li>{@code dependencyCount} &ndash; zero or the number of dependencies in the render pass.</li>

@@ -43,8 +43,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code size} <b>must</b> be less than or equal to the size of the resource minus {@code resourceOffset}</li>
  * <li>{@code memoryOffset} <b>must</b> be less than the size of {@code memory}</li>
  * <li>{@code size} <b>must</b> be less than or equal to the size of {@code memory} minus {@code memoryOffset}</li>
- * <li>If {@code memory} was created with {@link VkExportMemoryAllocateInfo}{@code ::handleTypes} not equal to 0, at least one handle type it contained <b>must</b> also have been set in {@link VkExternalMemoryBufferCreateInfo}{@code ::handleTypes} or {@link VkExternalMemoryImageCreateInfo}{@code ::handleTypes} when the resource was created.</li>
- * <li>If {@code memory} was created by a memory import operation, the external handle type of the imported memory <b>must</b> also have been set in {@link VkExternalMemoryBufferCreateInfo}{@code ::handleTypes} or {@link VkExternalMemoryImageCreateInfo}{@code ::handleTypes} when the resource was created.</li>
+ * <li>If {@code memory} was created with {@link VkExportMemoryAllocateInfo}{@code ::handleTypes} not equal to 0, at least one handle type it contained <b>must</b> also have been set in {@link VkExternalMemoryBufferCreateInfo}{@code ::handleTypes} or {@link VkExternalMemoryImageCreateInfo}{@code ::handleTypes} when the resource was created</li>
+ * <li>If {@code memory} was created by a memory import operation, the external handle type of the imported memory <b>must</b> also have been set in {@link VkExternalMemoryBufferCreateInfo}{@code ::handleTypes} or {@link VkExternalMemoryImageCreateInfo}{@code ::handleTypes} when the resource was created</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
