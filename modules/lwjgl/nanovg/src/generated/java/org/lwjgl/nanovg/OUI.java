@@ -16,6 +16,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class OUI {
 
+    static { LibNanoVG.initialize(); }
+
     /**
      * <h5>Enum values:</h5>
      * 
@@ -146,8 +148,6 @@ public class OUI {
         UI_KEY_DOWN        = 0x10000,
         UI_KEY_UP          = 0x20000,
         UI_CHAR            = 0x40000;
-
-    static { LibNanoVG.initialize(); }
 
     protected OUI() {
         throw new UnsupportedOperationException();

@@ -19,6 +19,20 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Contains bindings to <a href="https://docs.nvidia.com/cuda/cuda-driver-api/index.html">CUDA Driver API</a>. */
 public class CU65 extends CU60 {
 
+    /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            OccupancyMaxActiveBlocksPerMultiprocessor          = apiGetFunctionAddress(CU.getLibrary(), "cuOccupancyMaxActiveBlocksPerMultiprocessor"),
+            OccupancyMaxActiveBlocksPerMultiprocessorWithFlags = apiGetFunctionAddress(CU.getLibrary(), "cuOccupancyMaxActiveBlocksPerMultiprocessorWithFlags"),
+            OccupancyMaxPotentialBlockSize                     = apiGetFunctionAddress(CU.getLibrary(), "cuOccupancyMaxPotentialBlockSize"),
+            OccupancyMaxPotentialBlockSizeWithFlags            = apiGetFunctionAddress(CU.getLibrary(), "cuOccupancyMaxPotentialBlockSizeWithFlags");
+
+    }
+
     /**
      * Occupancy calculator flag. ({@code CUoccupancy_flags})
      * 
@@ -35,20 +49,6 @@ public class CU65 extends CU60 {
 
     protected CU65() {
         throw new UnsupportedOperationException();
-    }
-
-    /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            OccupancyMaxActiveBlocksPerMultiprocessor          = apiGetFunctionAddress(CU.getLibrary(), "cuOccupancyMaxActiveBlocksPerMultiprocessor"),
-            OccupancyMaxActiveBlocksPerMultiprocessorWithFlags = apiGetFunctionAddress(CU.getLibrary(), "cuOccupancyMaxActiveBlocksPerMultiprocessorWithFlags"),
-            OccupancyMaxPotentialBlockSize                     = apiGetFunctionAddress(CU.getLibrary(), "cuOccupancyMaxPotentialBlockSize"),
-            OccupancyMaxPotentialBlockSizeWithFlags            = apiGetFunctionAddress(CU.getLibrary(), "cuOccupancyMaxPotentialBlockSizeWithFlags");
-
     }
 
     // --- [ cuOccupancyMaxActiveBlocksPerMultiprocessor ] ---

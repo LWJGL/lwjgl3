@@ -17,6 +17,8 @@ import org.lwjgl.system.*;
  */
 public class ARBClipControl {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code origin} parameter of {@link #glClipControl ClipControl}. */
     public static final int
         GL_LOWER_LEFT = 0x8CA1,
@@ -31,8 +33,6 @@ public class ARBClipControl {
     public static final int
         GL_CLIP_ORIGIN     = 0x935C,
         GL_CLIP_DEPTH_MODE = 0x935D;
-
-    static { GL.initialize(); }
 
     protected ARBClipControl() {
         throw new UnsupportedOperationException();

@@ -156,6 +156,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVCommandList {
 
+    static { GL.initialize(); }
+
     /** Used in DrawCommandsStates buffer formats, in GetCommandHeaderNV to return the header. */
     public static final int
         GL_TERMINATE_SEQUENCE_COMMAND_NV      = 0x0,
@@ -177,8 +179,6 @@ public class NVCommandList {
         GL_VIEWPORT_COMMAND_NV                = 0x10,
         GL_SCISSOR_COMMAND_NV                 = 0x11,
         GL_FRONT_FACE_COMMAND_NV              = 0x12;
-
-    static { GL.initialize(); }
 
     protected NVCommandList() {
         throw new UnsupportedOperationException();

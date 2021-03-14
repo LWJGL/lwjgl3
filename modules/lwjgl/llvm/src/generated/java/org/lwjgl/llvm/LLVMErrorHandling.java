@@ -13,10 +13,6 @@ import static org.lwjgl.system.JNI.*;
 
 public class LLVMErrorHandling {
 
-    protected LLVMErrorHandling() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */
     public static final class Functions {
 
@@ -28,6 +24,10 @@ public class LLVMErrorHandling {
             ResetFatalErrorHandler   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMResetFatalErrorHandler"),
             EnablePrettyStackTrace   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMEnablePrettyStackTrace");
 
+    }
+
+    protected LLVMErrorHandling() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ LLVMInstallFatalErrorHandler ] ---

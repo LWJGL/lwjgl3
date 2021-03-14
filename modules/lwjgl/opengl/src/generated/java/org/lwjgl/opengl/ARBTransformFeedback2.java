@@ -31,6 +31,8 @@ import org.lwjgl.system.*;
  */
 public class ARBTransformFeedback2 {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code target} parameter of BindTransformFeedback. */
     public static final int GL_TRANSFORM_FEEDBACK = 0x8E22;
 
@@ -39,8 +41,6 @@ public class ARBTransformFeedback2 {
         GL_TRANSFORM_FEEDBACK_BUFFER_PAUSED = 0x8E23,
         GL_TRANSFORM_FEEDBACK_BUFFER_ACTIVE = 0x8E24,
         GL_TRANSFORM_FEEDBACK_BINDING       = 0x8E25;
-
-    static { GL.initialize(); }
 
     protected ARBTransformFeedback2() {
         throw new UnsupportedOperationException();

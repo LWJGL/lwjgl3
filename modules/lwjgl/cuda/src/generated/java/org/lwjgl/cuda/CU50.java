@@ -19,6 +19,28 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Contains bindings to <a href="https://docs.nvidia.com/cuda/cuda-driver-api/index.html">CUDA Driver API</a>. */
 public class CU50 extends CU42 {
 
+    /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            MipmappedArrayCreate                    = apiGetFunctionAddress(CU.getLibrary(), "cuMipmappedArrayCreate"),
+            MipmappedArrayGetLevel                  = apiGetFunctionAddress(CU.getLibrary(), "cuMipmappedArrayGetLevel"),
+            MipmappedArrayDestroy                   = apiGetFunctionAddress(CU.getLibrary(), "cuMipmappedArrayDestroy"),
+            TexObjectCreate                         = apiGetFunctionAddress(CU.getLibrary(), "cuTexObjectCreate"),
+            TexObjectDestroy                        = apiGetFunctionAddress(CU.getLibrary(), "cuTexObjectDestroy"),
+            TexObjectGetResourceDesc                = apiGetFunctionAddress(CU.getLibrary(), "cuTexObjectGetResourceDesc"),
+            TexObjectGetTextureDesc                 = apiGetFunctionAddress(CU.getLibrary(), "cuTexObjectGetTextureDesc"),
+            TexObjectGetResourceViewDesc            = apiGetFunctionAddress(CU.getLibrary(), "cuTexObjectGetResourceViewDesc"),
+            SurfObjectCreate                        = apiGetFunctionAddress(CU.getLibrary(), "cuSurfObjectCreate"),
+            SurfObjectDestroy                       = apiGetFunctionAddress(CU.getLibrary(), "cuSurfObjectDestroy"),
+            SurfObjectGetResourceDesc               = apiGetFunctionAddress(CU.getLibrary(), "cuSurfObjectGetResourceDesc"),
+            GraphicsResourceGetMappedMipmappedArray = apiGetFunctionAddress(CU.getLibrary(), "cuGraphicsResourceGetMappedMipmappedArray");
+
+    }
+
     /**
      * Resource types. ({@code CUresourcetype})
      * 
@@ -119,28 +141,6 @@ public class CU50 extends CU42 {
 
     protected CU50() {
         throw new UnsupportedOperationException();
-    }
-
-    /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            MipmappedArrayCreate                    = apiGetFunctionAddress(CU.getLibrary(), "cuMipmappedArrayCreate"),
-            MipmappedArrayGetLevel                  = apiGetFunctionAddress(CU.getLibrary(), "cuMipmappedArrayGetLevel"),
-            MipmappedArrayDestroy                   = apiGetFunctionAddress(CU.getLibrary(), "cuMipmappedArrayDestroy"),
-            TexObjectCreate                         = apiGetFunctionAddress(CU.getLibrary(), "cuTexObjectCreate"),
-            TexObjectDestroy                        = apiGetFunctionAddress(CU.getLibrary(), "cuTexObjectDestroy"),
-            TexObjectGetResourceDesc                = apiGetFunctionAddress(CU.getLibrary(), "cuTexObjectGetResourceDesc"),
-            TexObjectGetTextureDesc                 = apiGetFunctionAddress(CU.getLibrary(), "cuTexObjectGetTextureDesc"),
-            TexObjectGetResourceViewDesc            = apiGetFunctionAddress(CU.getLibrary(), "cuTexObjectGetResourceViewDesc"),
-            SurfObjectCreate                        = apiGetFunctionAddress(CU.getLibrary(), "cuSurfObjectCreate"),
-            SurfObjectDestroy                       = apiGetFunctionAddress(CU.getLibrary(), "cuSurfObjectDestroy"),
-            SurfObjectGetResourceDesc               = apiGetFunctionAddress(CU.getLibrary(), "cuSurfObjectGetResourceDesc"),
-            GraphicsResourceGetMappedMipmappedArray = apiGetFunctionAddress(CU.getLibrary(), "cuGraphicsResourceGetMappedMipmappedArray");
-
     }
 
     // --- [ cuMipmappedArrayCreate ] ---

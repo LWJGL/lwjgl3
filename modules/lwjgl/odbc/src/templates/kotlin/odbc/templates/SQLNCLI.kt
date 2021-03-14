@@ -7,7 +7,7 @@ package odbc.templates
 import org.lwjgl.generator.*
 import odbc.*
 
-val sqlncli = "SQLNCLI".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", binding = ODBC_BINDING_DELEGATE) {
+val sqlncli = "SQLNCLI".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL") {
     javaImport("static org.lwjgl.system.MemoryUtil.*")
 
     documentation =

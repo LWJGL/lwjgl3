@@ -26,6 +26,8 @@ import org.lwjgl.system.*;
  */
 public class ARBTextureMultisample {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetMultisamplefv. */
     public static final int GL_SAMPLE_POSITION = 0x8E50;
 
@@ -72,8 +74,6 @@ public class ARBTextureMultisample {
         GL_SAMPLER_2D_MULTISAMPLE_ARRAY              = 0x910B,
         GL_INT_SAMPLER_2D_MULTISAMPLE_ARRAY          = 0x910C,
         GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY = 0x910D;
-
-    static { GL.initialize(); }
 
     protected ARBTextureMultisample() {
         throw new UnsupportedOperationException();

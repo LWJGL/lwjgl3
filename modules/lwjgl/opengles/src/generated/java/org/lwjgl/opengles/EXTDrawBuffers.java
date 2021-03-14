@@ -27,6 +27,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTDrawBuffers {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetIntegerv. */
     public static final int GL_MAX_COLOR_ATTACHMENTS_EXT = 0x8CDF;
 
@@ -71,8 +73,6 @@ public class EXTDrawBuffers {
         GL_COLOR_ATTACHMENT13_EXT = 0x8CED,
         GL_COLOR_ATTACHMENT14_EXT = 0x8CEE,
         GL_COLOR_ATTACHMENT15_EXT = 0x8CEF;
-
-    static { GLES.initialize(); }
 
     protected EXTDrawBuffers() {
         throw new UnsupportedOperationException();

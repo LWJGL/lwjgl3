@@ -34,6 +34,8 @@ import org.lwjgl.system.*;
  */
 public class EXTTextureBuffer {
 
+    static { GLES.initialize(); }
+
     /**
      * Accepted by the {@code target} parameter of BindBuffer, BufferData, BufferSubData, MapBufferRange, BindTexture, UnmapBuffer, GetBufferParameteriv,
      * GetBufferPointerv, TexBufferEXT, and TexBufferRangeEXT.
@@ -64,8 +66,6 @@ public class EXTTextureBuffer {
         GL_TEXTURE_BUFFER_DATA_STORE_BINDING_EXT = 0x8C2D,
         GL_TEXTURE_BUFFER_OFFSET_EXT             = 0x919D,
         GL_TEXTURE_BUFFER_SIZE_EXT               = 0x919E;
-
-    static { GLES.initialize(); }
 
     protected EXTTextureBuffer() {
         throw new UnsupportedOperationException();

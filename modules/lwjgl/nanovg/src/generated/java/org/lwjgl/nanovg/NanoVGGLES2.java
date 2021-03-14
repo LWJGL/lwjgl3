@@ -15,6 +15,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Implementation of the NanoVG API using OpenGL ES 2.0. */
 public class NanoVGGLES2 {
 
+    static { LibNanoVG.initialize(); }
+
     /**
      * Create flags.
      * 
@@ -44,8 +46,6 @@ public class NanoVGGLES2 {
      * </ul>
      */
     public static final int NVG_IMAGE_NODELETE = 1<<16;
-
-    static { LibNanoVG.initialize(); }
 
     protected NanoVGGLES2() {
         throw new UnsupportedOperationException();

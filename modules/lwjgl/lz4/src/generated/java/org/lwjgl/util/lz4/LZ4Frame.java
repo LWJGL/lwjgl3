@@ -24,6 +24,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class LZ4Frame {
 
+    static { LibLZ4.initialize(); }
+
     /**
      * Version number.
      * 
@@ -179,8 +181,6 @@ public class LZ4Frame {
         LZ4F_ERROR_contentChecksum_invalid      = 18,
         LZ4F_ERROR_frameDecoding_alreadyStarted = 19,
         LZ4F_ERROR_maxCode                      = 20;
-
-    static { LibLZ4.initialize(); }
 
     protected LZ4Frame() {
         throw new UnsupportedOperationException();

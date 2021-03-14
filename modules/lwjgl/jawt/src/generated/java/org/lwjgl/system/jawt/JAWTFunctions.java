@@ -31,6 +31,24 @@ import java.awt.Frame;
  */
 public class JAWTFunctions {
 
+    private static final SharedLibrary JAWT = Library.loadNative(JAWTFunctions.class, "org.lwjgl.jawt", Configuration.JAWT_LIBRARY_NAME, "jawt", apiFindLibrary(System.getProperty("java.home"), "jawt"));
+
+    /** Contains the function pointers loaded from the jawt {@link SharedLibrary}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            GetAWT = apiGetFunctionAddress(JAWT, Pointer.BITS64 || Platform.get() != Platform.WINDOWS ? "JAWT_GetAWT" : "_JAWT_GetAWT@8");
+
+    }
+
+    /** Returns the jawt {@link SharedLibrary}. */
+    public static SharedLibrary getLibrary() {
+        return JAWT;
+    }
+
     /** JAWT versions. */
     public static final int
         JAWT_VERSION_1_3 = 0x10003,
@@ -65,24 +83,6 @@ public class JAWTFunctions {
 
     protected JAWTFunctions() {
         throw new UnsupportedOperationException();
-    }
-
-    private static final SharedLibrary JAWT = Library.loadNative(JAWTFunctions.class, "org.lwjgl.jawt", Configuration.JAWT_LIBRARY_NAME, "jawt", apiFindLibrary(System.getProperty("java.home"), "jawt"));
-
-    /** Contains the function pointers loaded from the jawt {@link SharedLibrary}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            GetAWT = apiGetFunctionAddress(JAWT, Pointer.BITS64 || Platform.get() != Platform.WINDOWS ? "JAWT_GetAWT" : "_JAWT_GetAWT@8");
-
-    }
-
-    /** Returns the jawt {@link SharedLibrary}. */
-    public static SharedLibrary getLibrary() {
-        return JAWT;
     }
 
     // --- [ JAWT_GetAWT ] ---

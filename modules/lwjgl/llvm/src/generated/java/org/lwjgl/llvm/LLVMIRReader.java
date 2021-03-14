@@ -16,10 +16,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class LLVMIRReader {
 
-    protected LLVMIRReader() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */
     public static final class Functions {
 
@@ -29,6 +25,10 @@ public class LLVMIRReader {
         public static final long
             ParseIRInContext = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMParseIRInContext");
 
+    }
+
+    protected LLVMIRReader() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ LLVMParseIRInContext ] ---

@@ -35,6 +35,8 @@ import org.lwjgl.system.*;
  */
 public class EXTDepthBoundsTest {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
      * GetDoublev.
@@ -43,8 +45,6 @@ public class EXTDepthBoundsTest {
 
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_DEPTH_BOUNDS_EXT = 0x8891;
-
-    static { GL.initialize(); }
 
     protected EXTDepthBoundsTest() {
         throw new UnsupportedOperationException();

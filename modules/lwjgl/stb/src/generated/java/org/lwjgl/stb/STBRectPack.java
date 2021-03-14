@@ -17,6 +17,8 @@ import org.lwjgl.system.*;
  */
 public class STBRectPack {
 
+    static { LibSTB.initialize(); }
+
     /**
      * Packing heuristics
      * 
@@ -32,8 +34,6 @@ public class STBRectPack {
         STBRP_HEURISTIC_Skyline_default       = 0,
         STBRP_HEURISTIC_Skyline_BL_sortHeight = STBRP_HEURISTIC_Skyline_default,
         STBRP_HEURISTIC_Skyline_BF_sortHeight = 1;
-
-    static { LibSTB.initialize(); }
 
     protected STBRectPack() {
         throw new UnsupportedOperationException();

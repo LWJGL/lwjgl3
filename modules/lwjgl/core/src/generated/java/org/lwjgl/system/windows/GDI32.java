@@ -16,6 +16,28 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Native bindings to wingdi.h and gdi32.dll. */
 public class GDI32 {
 
+    private static final SharedLibrary GDI32 = Library.loadNative(GDI32.class, "org.lwjgl", "gdi32");
+
+    /** Contains the function pointers loaded from the gdi32 {@link SharedLibrary}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            ChoosePixelFormat   = apiGetFunctionAddress(GDI32, "ChoosePixelFormat"),
+            DescribePixelFormat = apiGetFunctionAddress(GDI32, "DescribePixelFormat"),
+            GetPixelFormat      = apiGetFunctionAddress(GDI32, "GetPixelFormat"),
+            SetPixelFormat      = apiGetFunctionAddress(GDI32, "SetPixelFormat"),
+            SwapBuffers         = apiGetFunctionAddress(GDI32, "SwapBuffers");
+
+    }
+
+    /** Returns the gdi32 {@link SharedLibrary}. */
+    public static SharedLibrary getLibrary() {
+        return GDI32;
+    }
+
     /** Display device state flags. */
     public static final int
         DISPLAY_DEVICE_ATTACHED_TO_DESKTOP = 0x1,
@@ -124,28 +146,6 @@ public class GDI32 {
 
     protected GDI32() {
         throw new UnsupportedOperationException();
-    }
-
-    private static final SharedLibrary GDI32 = Library.loadNative(GDI32.class, "org.lwjgl", "gdi32");
-
-    /** Contains the function pointers loaded from the gdi32 {@link SharedLibrary}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            ChoosePixelFormat   = apiGetFunctionAddress(GDI32, "ChoosePixelFormat"),
-            DescribePixelFormat = apiGetFunctionAddress(GDI32, "DescribePixelFormat"),
-            GetPixelFormat      = apiGetFunctionAddress(GDI32, "GetPixelFormat"),
-            SetPixelFormat      = apiGetFunctionAddress(GDI32, "SetPixelFormat"),
-            SwapBuffers         = apiGetFunctionAddress(GDI32, "SwapBuffers");
-
-    }
-
-    /** Returns the gdi32 {@link SharedLibrary}. */
-    public static SharedLibrary getLibrary() {
-        return GDI32;
     }
 
     // --- [ ChoosePixelFormat ] ---

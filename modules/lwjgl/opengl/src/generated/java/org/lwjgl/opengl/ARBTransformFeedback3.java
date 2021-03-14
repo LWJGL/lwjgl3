@@ -45,12 +45,12 @@ import org.lwjgl.system.*;
  */
 public class ARBTransformFeedback3 {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv. */
     public static final int
         GL_MAX_TRANSFORM_FEEDBACK_BUFFERS = 0x8E70,
         GL_MAX_VERTEX_STREAMS             = 0x8E71;
-
-    static { GL.initialize(); }
 
     protected ARBTransformFeedback3() {
         throw new UnsupportedOperationException();

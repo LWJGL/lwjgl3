@@ -31,6 +31,8 @@ import org.lwjgl.system.*;
  */
 public class ARBGeometryShader4 {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code type} parameter of CreateShader and returned by the {@code params} parameter of GetShaderiv. */
     public static final int GL_GEOMETRY_SHADER_ARB = 0x8DD9;
 
@@ -71,8 +73,6 @@ public class ARBGeometryShader4 {
      * GetBooleanv.
      */
     public static final int GL_PROGRAM_POINT_SIZE_ARB = 0x8642;
-
-    static { GL.initialize(); }
 
     protected ARBGeometryShader4() {
         throw new UnsupportedOperationException();

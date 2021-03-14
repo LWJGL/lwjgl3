@@ -24,6 +24,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class ARBVertexBlend {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code value} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int
         GL_MAX_VERTEX_UNITS_ARB    = 0x86A4,
@@ -89,8 +91,6 @@ public class ARBVertexBlend {
      * GetIntegerv, GetFloatv, and GetDoublev.
      */
     public static final int GL_WEIGHT_ARRAY_ARB = 0x86AD;
-
-    static { GL.initialize(); }
 
     protected ARBVertexBlend() {
         throw new UnsupportedOperationException();

@@ -19,6 +19,22 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class LLVMDisassembler {
 
+    /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            CreateDisasm            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMCreateDisasm"),
+            CreateDisasmCPU         = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMCreateDisasmCPU"),
+            CreateDisasmCPUFeatures = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMCreateDisasmCPUFeatures"),
+            SetDisasmOptions        = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMSetDisasmOptions"),
+            DisasmDispose           = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDisasmDispose"),
+            DisasmInstruction       = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDisasmInstruction");
+
+    }
+
     public static final int
         LLVMDisassembler_VariantKind_None                    = 0,
         LLVMDisassembler_VariantKind_ARM_HI16                = 1,
@@ -58,22 +74,6 @@ public class LLVMDisassembler {
 
     protected LLVMDisassembler() {
         throw new UnsupportedOperationException();
-    }
-
-    /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            CreateDisasm            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMCreateDisasm"),
-            CreateDisasmCPU         = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMCreateDisasmCPU"),
-            CreateDisasmCPUFeatures = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMCreateDisasmCPUFeatures"),
-            SetDisasmOptions        = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMSetDisasmOptions"),
-            DisasmDispose           = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDisasmDispose"),
-            DisasmInstruction       = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDisasmInstruction");
-
     }
 
     // --- [ LLVMCreateDisasm ] ---

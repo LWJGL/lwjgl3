@@ -25,6 +25,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVVertexBufferUnifiedMemory {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code cap} parameter of DisableClientState, EnableClientState, IsEnabled. */
     public static final int
         GL_VERTEX_ATTRIB_ARRAY_UNIFIED_NV = 0x8F1E,
@@ -61,8 +63,6 @@ public class NVVertexBufferUnifiedMemory {
         GL_SECONDARY_COLOR_ARRAY_LENGTH_NV = 0x8F31,
         GL_FOG_COORD_ARRAY_LENGTH_NV       = 0x8F32,
         GL_ELEMENT_ARRAY_LENGTH_NV         = 0x8F33;
-
-    static { GL.initialize(); }
 
     protected NVVertexBufferUnifiedMemory() {
         throw new UnsupportedOperationException();

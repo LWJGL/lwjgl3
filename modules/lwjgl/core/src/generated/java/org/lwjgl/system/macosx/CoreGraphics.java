@@ -21,6 +21,57 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Native bindings to &lt;CoreGraphics.h&gt;. */
 public class CoreGraphics {
 
+    private static final SharedLibrary COREGRAPHICS = Library.loadNative(CoreGraphics.class, "org.lwjgl", "/System/Library/Frameworks/CoreGraphics.framework");
+
+    /** Contains the function pointers loaded from the CoreGraphics {@link SharedLibrary}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            EventGetTypeID                = apiGetFunctionAddress(COREGRAPHICS, "CGEventGetTypeID"),
+            EventCreate                   = apiGetFunctionAddress(COREGRAPHICS, "CGEventCreate"),
+            EventCreateData               = apiGetFunctionAddress(COREGRAPHICS, "CGEventCreateData"),
+            EventCreateFromData           = apiGetFunctionAddress(COREGRAPHICS, "CGEventCreateFromData"),
+            EventCreateMouseEvent         = apiGetFunctionAddress(COREGRAPHICS, "CGEventCreateMouseEvent"),
+            EventCreateKeyboardEvent      = apiGetFunctionAddress(COREGRAPHICS, "CGEventCreateKeyboardEvent"),
+            EventCreateScrollWheelEvent   = apiGetFunctionAddress(COREGRAPHICS, "CGEventCreateScrollWheelEvent"),
+            EventCreateScrollWheelEvent2  = COREGRAPHICS.getFunctionAddress("CGEventCreateScrollWheelEvent2"),
+            EventCreateCopy               = apiGetFunctionAddress(COREGRAPHICS, "CGEventCreateCopy"),
+            EventCreateSourceFromEvent    = apiGetFunctionAddress(COREGRAPHICS, "CGEventCreateSourceFromEvent"),
+            EventSetSource                = apiGetFunctionAddress(COREGRAPHICS, "CGEventSetSource"),
+            EventGetType                  = apiGetFunctionAddress(COREGRAPHICS, "CGEventGetType"),
+            EventSetType                  = apiGetFunctionAddress(COREGRAPHICS, "CGEventSetType"),
+            EventGetTimestamp             = apiGetFunctionAddress(COREGRAPHICS, "CGEventGetTimestamp"),
+            EventSetTimestamp             = apiGetFunctionAddress(COREGRAPHICS, "CGEventSetTimestamp"),
+            EventGetLocation              = apiGetFunctionAddress(COREGRAPHICS, "CGEventGetLocation"),
+            EventGetUnflippedLocation     = apiGetFunctionAddress(COREGRAPHICS, "CGEventGetUnflippedLocation"),
+            EventSetLocation              = apiGetFunctionAddress(COREGRAPHICS, "CGEventSetLocation"),
+            EventGetFlags                 = apiGetFunctionAddress(COREGRAPHICS, "CGEventGetFlags"),
+            EventSetFlags                 = apiGetFunctionAddress(COREGRAPHICS, "CGEventSetFlags"),
+            EventKeyboardGetUnicodeString = apiGetFunctionAddress(COREGRAPHICS, "CGEventKeyboardGetUnicodeString"),
+            EventKeyboardSetUnicodeString = apiGetFunctionAddress(COREGRAPHICS, "CGEventKeyboardSetUnicodeString"),
+            EventGetIntegerValueField     = apiGetFunctionAddress(COREGRAPHICS, "CGEventGetIntegerValueField"),
+            EventSetIntegerValueField     = apiGetFunctionAddress(COREGRAPHICS, "CGEventSetIntegerValueField"),
+            EventGetDoubleValueField      = apiGetFunctionAddress(COREGRAPHICS, "CGEventGetDoubleValueField"),
+            EventSetDoubleValueField      = apiGetFunctionAddress(COREGRAPHICS, "CGEventSetDoubleValueField"),
+            EventTapCreate                = apiGetFunctionAddress(COREGRAPHICS, "CGEventTapCreate"),
+            EventTapCreateForPid          = COREGRAPHICS.getFunctionAddress("CGEventTapCreateForPid"),
+            EventTapEnable                = apiGetFunctionAddress(COREGRAPHICS, "CGEventTapEnable"),
+            EventTapIsEnabled             = apiGetFunctionAddress(COREGRAPHICS, "CGEventTapIsEnabled"),
+            EventTapPostEvent             = apiGetFunctionAddress(COREGRAPHICS, "CGEventTapPostEvent"),
+            EventPost                     = apiGetFunctionAddress(COREGRAPHICS, "CGEventPost"),
+            EventPostToPid                = COREGRAPHICS.getFunctionAddress("CGEventPostToPid"),
+            GetEventTapList               = apiGetFunctionAddress(COREGRAPHICS, "CGGetEventTapList");
+
+    }
+
+    /** Returns the CoreGraphics {@link SharedLibrary}. */
+    public static SharedLibrary getLibrary() {
+        return COREGRAPHICS;
+    }
+
     /**
      * Types used for errors and error handlers. ({@code CGError})
      * 
@@ -365,57 +416,6 @@ public class CoreGraphics {
 
     protected CoreGraphics() {
         throw new UnsupportedOperationException();
-    }
-
-    private static final SharedLibrary COREGRAPHICS = Library.loadNative(CoreGraphics.class, "org.lwjgl", "/System/Library/Frameworks/CoreGraphics.framework");
-
-    /** Contains the function pointers loaded from the CoreGraphics {@link SharedLibrary}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            EventGetTypeID                = apiGetFunctionAddress(COREGRAPHICS, "CGEventGetTypeID"),
-            EventCreate                   = apiGetFunctionAddress(COREGRAPHICS, "CGEventCreate"),
-            EventCreateData               = apiGetFunctionAddress(COREGRAPHICS, "CGEventCreateData"),
-            EventCreateFromData           = apiGetFunctionAddress(COREGRAPHICS, "CGEventCreateFromData"),
-            EventCreateMouseEvent         = apiGetFunctionAddress(COREGRAPHICS, "CGEventCreateMouseEvent"),
-            EventCreateKeyboardEvent      = apiGetFunctionAddress(COREGRAPHICS, "CGEventCreateKeyboardEvent"),
-            EventCreateScrollWheelEvent   = apiGetFunctionAddress(COREGRAPHICS, "CGEventCreateScrollWheelEvent"),
-            EventCreateScrollWheelEvent2  = COREGRAPHICS.getFunctionAddress("CGEventCreateScrollWheelEvent2"),
-            EventCreateCopy               = apiGetFunctionAddress(COREGRAPHICS, "CGEventCreateCopy"),
-            EventCreateSourceFromEvent    = apiGetFunctionAddress(COREGRAPHICS, "CGEventCreateSourceFromEvent"),
-            EventSetSource                = apiGetFunctionAddress(COREGRAPHICS, "CGEventSetSource"),
-            EventGetType                  = apiGetFunctionAddress(COREGRAPHICS, "CGEventGetType"),
-            EventSetType                  = apiGetFunctionAddress(COREGRAPHICS, "CGEventSetType"),
-            EventGetTimestamp             = apiGetFunctionAddress(COREGRAPHICS, "CGEventGetTimestamp"),
-            EventSetTimestamp             = apiGetFunctionAddress(COREGRAPHICS, "CGEventSetTimestamp"),
-            EventGetLocation              = apiGetFunctionAddress(COREGRAPHICS, "CGEventGetLocation"),
-            EventGetUnflippedLocation     = apiGetFunctionAddress(COREGRAPHICS, "CGEventGetUnflippedLocation"),
-            EventSetLocation              = apiGetFunctionAddress(COREGRAPHICS, "CGEventSetLocation"),
-            EventGetFlags                 = apiGetFunctionAddress(COREGRAPHICS, "CGEventGetFlags"),
-            EventSetFlags                 = apiGetFunctionAddress(COREGRAPHICS, "CGEventSetFlags"),
-            EventKeyboardGetUnicodeString = apiGetFunctionAddress(COREGRAPHICS, "CGEventKeyboardGetUnicodeString"),
-            EventKeyboardSetUnicodeString = apiGetFunctionAddress(COREGRAPHICS, "CGEventKeyboardSetUnicodeString"),
-            EventGetIntegerValueField     = apiGetFunctionAddress(COREGRAPHICS, "CGEventGetIntegerValueField"),
-            EventSetIntegerValueField     = apiGetFunctionAddress(COREGRAPHICS, "CGEventSetIntegerValueField"),
-            EventGetDoubleValueField      = apiGetFunctionAddress(COREGRAPHICS, "CGEventGetDoubleValueField"),
-            EventSetDoubleValueField      = apiGetFunctionAddress(COREGRAPHICS, "CGEventSetDoubleValueField"),
-            EventTapCreate                = apiGetFunctionAddress(COREGRAPHICS, "CGEventTapCreate"),
-            EventTapCreateForPid          = COREGRAPHICS.getFunctionAddress("CGEventTapCreateForPid"),
-            EventTapEnable                = apiGetFunctionAddress(COREGRAPHICS, "CGEventTapEnable"),
-            EventTapIsEnabled             = apiGetFunctionAddress(COREGRAPHICS, "CGEventTapIsEnabled"),
-            EventTapPostEvent             = apiGetFunctionAddress(COREGRAPHICS, "CGEventTapPostEvent"),
-            EventPost                     = apiGetFunctionAddress(COREGRAPHICS, "CGEventPost"),
-            EventPostToPid                = COREGRAPHICS.getFunctionAddress("CGEventPostToPid"),
-            GetEventTapList               = apiGetFunctionAddress(COREGRAPHICS, "CGGetEventTapList");
-
-    }
-
-    /** Returns the CoreGraphics {@link SharedLibrary}. */
-    public static SharedLibrary getLibrary() {
-        return COREGRAPHICS;
     }
 
     // --- [ CGEventGetTypeID ] ---

@@ -25,6 +25,8 @@ import org.lwjgl.system.*;
  */
 public class NVFramebufferMultisampleCoverage {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetRenderbufferParameterivEXT. */
     public static final int
         GL_RENDERBUFFER_COVERAGE_SAMPLES_NV = 0x8CAB,
@@ -34,8 +36,6 @@ public class NVFramebufferMultisampleCoverage {
     public static final int
         GL_MAX_MULTISAMPLE_COVERAGE_MODES_NV = 0x8E11,
         GL_MULTISAMPLE_COVERAGE_MODES_NV     = 0x8E12;
-
-    static { GL.initialize(); }
 
     protected NVFramebufferMultisampleCoverage() {
         throw new UnsupportedOperationException();

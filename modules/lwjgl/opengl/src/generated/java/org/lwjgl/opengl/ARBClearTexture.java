@@ -33,10 +33,10 @@ import org.lwjgl.system.*;
  */
 public class ARBClearTexture {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter for {@link GL42C#glGetInternalformativ GetInternalformativ} and {@link GL43C#glGetInternalformati64v GetInternalformati64v}. */
     public static final int GL_CLEAR_TEXTURE = 0x9365;
-
-    static { GL.initialize(); }
 
     protected ARBClearTexture() {
         throw new UnsupportedOperationException();

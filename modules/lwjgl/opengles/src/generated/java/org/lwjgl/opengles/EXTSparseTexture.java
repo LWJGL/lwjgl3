@@ -24,6 +24,8 @@ import org.lwjgl.system.*;
  */
 public class EXTSparseTexture {
 
+    static { GLES.initialize(); }
+
     /**
      * Accepted by the {@code pname} parameter to TexParameter{if}{v}, GetTexParameter{if}v, TexParameterI{u}ivOES, GetTexParameterI{u}ivOES
      * TexParameterI{u}ivEXT, and GetTexParameterI{u}ivEXT.
@@ -56,8 +58,6 @@ public class EXTSparseTexture {
         GL_MAX_SPARSE_3D_TEXTURE_SIZE_EXT             = 0x9199,
         GL_MAX_SPARSE_ARRAY_TEXTURE_LAYERS_EXT        = 0x919A,
         GL_SPARSE_TEXTURE_FULL_ARRAY_CUBE_MIPMAPS_EXT = 0x91A9;
-
-    static { GLES.initialize(); }
 
     protected EXTSparseTexture() {
         throw new UnsupportedOperationException();

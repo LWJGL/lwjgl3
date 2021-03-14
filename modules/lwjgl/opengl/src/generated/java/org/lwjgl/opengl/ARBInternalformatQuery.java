@@ -22,10 +22,10 @@ import org.lwjgl.system.*;
  */
 public class ARBInternalformatQuery {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetInternalformativ. */
     public static final int GL_NUM_SAMPLE_COUNTS = 0x9380;
-
-    static { GL.initialize(); }
 
     protected ARBInternalformatQuery() {
         throw new UnsupportedOperationException();

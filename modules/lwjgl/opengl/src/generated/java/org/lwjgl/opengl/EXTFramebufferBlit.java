@@ -18,6 +18,8 @@ import org.lwjgl.system.*;
  */
 public class EXTFramebufferBlit {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code target} parameter of BindFramebufferEXT, CheckFramebufferStatusEXT, FramebufferTexture{1D|2D|3D}EXT, FramebufferRenderbufferEXT,
      * and GetFramebufferAttachmentParameterivEXT.
@@ -30,8 +32,6 @@ public class EXTFramebufferBlit {
     public static final int
         GL_DRAW_FRAMEBUFFER_BINDING_EXT = 0x8CA6,
         GL_READ_FRAMEBUFFER_BINDING_EXT = 0x8CAA;
-
-    static { GL.initialize(); }
 
     protected EXTFramebufferBlit() {
         throw new UnsupportedOperationException();

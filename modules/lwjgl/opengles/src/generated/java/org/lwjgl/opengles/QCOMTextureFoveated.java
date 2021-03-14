@@ -35,6 +35,8 @@ import org.lwjgl.system.*;
  */
 public class QCOMTextureFoveated {
 
+    static { GLES.initialize(); }
+
     /**
      * Accepted as a value for {@code pname} for the TexParameter{if} and TexParameter{if}v commands and for the {@code pname} parameter of
      * GetTexParameter{if}v.
@@ -59,8 +61,6 @@ public class QCOMTextureFoveated {
 
     /** Returned by {@link GLES20#glCheckFramebufferStatus CheckFramebufferStatus}. */
     public static final int GL_FRAMEBUFFER_INCOMPLETE_FOVEATION_QCOM = 0x8BFF;
-
-    static { GLES.initialize(); }
 
     protected QCOMTextureFoveated() {
         throw new UnsupportedOperationException();

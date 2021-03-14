@@ -17,10 +17,10 @@ import org.lwjgl.system.*;
  */
 public class EXTMemoryObjectFD {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code handleType} parameter of {@link #glImportMemoryFdEXT ImportMemoryFdEXT} */
     public static final int GL_HANDLE_TYPE_OPAQUE_FD_EXT = 0x9586;
-
-    static { GL.initialize(); }
 
     protected EXTMemoryObjectFD() {
         throw new UnsupportedOperationException();

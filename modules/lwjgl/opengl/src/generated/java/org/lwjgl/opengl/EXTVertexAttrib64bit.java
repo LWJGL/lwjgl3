@@ -43,6 +43,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTVertexAttrib64bit {
 
+    static { GL.initialize(); }
+
     /** Returned in the {@code type} parameter of GetActiveAttrib. */
     public static final int
         GL_DOUBLE_VEC2_EXT   = 0x8FFC,
@@ -57,8 +59,6 @@ public class EXTVertexAttrib64bit {
         GL_DOUBLE_MAT3x4_EXT = 0x8F4C,
         GL_DOUBLE_MAT4x2_EXT = 0x8F4D,
         GL_DOUBLE_MAT4x3_EXT = 0x8F4E;
-
-    static { GL.initialize(); }
 
     protected EXTVertexAttrib64bit() {
         throw new UnsupportedOperationException();

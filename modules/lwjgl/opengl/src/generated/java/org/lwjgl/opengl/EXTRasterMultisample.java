@@ -23,6 +23,8 @@ import org.lwjgl.system.*;
  */
 public class EXTRasterMultisample {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code cap} parameter of Enable, Disable, IsEnabled. */
     public static final int GL_RASTER_MULTISAMPLE_EXT = 0x9327;
 
@@ -33,8 +35,6 @@ public class EXTRasterMultisample {
         GL_RASTER_FIXED_SAMPLE_LOCATIONS_EXT     = 0x932A,
         GL_MULTISAMPLE_RASTERIZATION_ALLOWED_EXT = 0x932B,
         GL_EFFECTIVE_RASTER_SAMPLES_EXT          = 0x932C;
-
-    static { GL.initialize(); }
 
     protected EXTRasterMultisample() {
         throw new UnsupportedOperationException();

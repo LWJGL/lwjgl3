@@ -22,6 +22,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class ARBMultitexture {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code texture} parameter of ActiveTexture and MultiTexCoord. */
     public static final int
         GL_TEXTURE0_ARB  = 0x84C0,
@@ -62,8 +64,6 @@ public class ARBMultitexture {
         GL_ACTIVE_TEXTURE_ARB        = 0x84E0,
         GL_CLIENT_ACTIVE_TEXTURE_ARB = 0x84E1,
         GL_MAX_TEXTURE_UNITS_ARB     = 0x84E2;
-
-    static { GL.initialize(); }
 
     protected ARBMultitexture() {
         throw new UnsupportedOperationException();

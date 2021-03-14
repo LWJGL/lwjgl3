@@ -23,10 +23,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class OESVertexArrayObject {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv. */
     public static final int GL_VERTEX_ARRAY_BINDING_OES = 0x85B5;
-
-    static { GLES.initialize(); }
 
     protected OESVertexArrayObject() {
         throw new UnsupportedOperationException();

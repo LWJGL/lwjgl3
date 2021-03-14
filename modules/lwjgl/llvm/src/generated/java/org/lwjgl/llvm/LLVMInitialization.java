@@ -13,10 +13,6 @@ import static org.lwjgl.system.JNI.*;
 
 public class LLVMInitialization {
 
-    protected LLVMInitialization() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */
     public static final class Functions {
 
@@ -38,6 +34,10 @@ public class LLVMInitialization {
             InitializeCodeGen                = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMInitializeCodeGen"),
             InitializeTarget                 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMInitializeTarget");
 
+    }
+
+    protected LLVMInitialization() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ LLVMInitializeCore ] ---

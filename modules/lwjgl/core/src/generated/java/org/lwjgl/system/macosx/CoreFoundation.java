@@ -15,6 +15,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Native bindings to &lt;CoreFoundation.h&gt;. */
 public class CoreFoundation {
 
+    static { Library.initialize(); }
+
     /** Boolean values. */
     public static final byte
         TRUE  = 1,
@@ -42,8 +44,6 @@ public class CoreFoundation {
         kCFURLPOSIXPathStyle   = 0,
         kCFURLHFSPathStyle     = 1,
         kCFURLWindowsPathStyle = 2;
-
-    static { Library.initialize(); }
 
     protected CoreFoundation() {
         throw new UnsupportedOperationException();

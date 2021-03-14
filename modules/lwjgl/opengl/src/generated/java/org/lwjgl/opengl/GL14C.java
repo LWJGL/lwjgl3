@@ -35,6 +35,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class GL14C extends GL13C {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code sfactor} and {@code dfactor} parameters of BlendFunc. */
     public static final int
         GL_CONSTANT_COLOR           = 0x8001,
@@ -96,8 +98,6 @@ public class GL14C extends GL13C {
      * when their {@code pname} parameter is TEXTURE_WRAP_S, TEXTURE_WRAP_T, or TEXTURE_WRAP_R.
      */
     public static final int GL_MIRRORED_REPEAT = 0x8370;
-
-    static { GL.initialize(); }
 
     protected GL14C() {
         throw new UnsupportedOperationException();

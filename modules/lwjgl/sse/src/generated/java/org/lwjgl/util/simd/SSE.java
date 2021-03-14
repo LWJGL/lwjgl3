@@ -10,6 +10,8 @@ import org.lwjgl.system.*;
 /** Bindings to SSE macros. */
 public class SSE {
 
+    static { LibSSE.initialize(); }
+
     /** Exception state. */
     public static final int
         _MM_EXCEPT_MASK      = 0x3F,
@@ -43,8 +45,6 @@ public class SSE {
         _MM_FLUSH_ZERO_MASK = 0x8000,
         _MM_FLUSH_ZERO_ON   = 0x8000,
         _MM_FLUSH_ZERO_OFF  = 0x0;
-
-    static { LibSSE.initialize(); }
 
     protected SSE() {
         throw new UnsupportedOperationException();

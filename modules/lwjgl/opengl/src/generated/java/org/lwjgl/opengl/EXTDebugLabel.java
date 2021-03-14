@@ -28,6 +28,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTDebugLabel {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code type} parameter of LabelObjectEXT and GetObjectLabelEXT. */
     public static final int
         GL_BUFFER_OBJECT_EXT           = 0x9151,
@@ -36,8 +38,6 @@ public class EXTDebugLabel {
         GL_VERTEX_ARRAY_OBJECT_EXT     = 0x9154,
         GL_QUERY_OBJECT_EXT            = 0x9153,
         GL_PROGRAM_PIPELINE_OBJECT_EXT = 0x8A4F;
-
-    static { GL.initialize(); }
 
     protected EXTDebugLabel() {
         throw new UnsupportedOperationException();

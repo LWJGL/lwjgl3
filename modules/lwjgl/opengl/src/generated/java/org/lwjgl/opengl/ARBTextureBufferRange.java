@@ -19,6 +19,8 @@ import org.lwjgl.system.*;
  */
 public class ARBTextureBufferRange {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetTexLevelParameter. */
     public static final int
         GL_TEXTURE_BUFFER_OFFSET = 0x919D,
@@ -26,8 +28,6 @@ public class ARBTextureBufferRange {
 
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT = 0x919F;
-
-    static { GL.initialize(); }
 
     protected ARBTextureBufferRange() {
         throw new UnsupportedOperationException();

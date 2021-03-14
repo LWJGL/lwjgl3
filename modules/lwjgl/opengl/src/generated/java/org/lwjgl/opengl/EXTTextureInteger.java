@@ -53,6 +53,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTTextureInteger {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_RGBA_INTEGER_MODE_EXT = 0x8D9E;
 
@@ -107,8 +109,6 @@ public class EXTTextureInteger {
         GL_BGRA_INTEGER_EXT            = 0x8D9B,
         GL_LUMINANCE_INTEGER_EXT       = 0x8D9C,
         GL_LUMINANCE_ALPHA_INTEGER_EXT = 0x8D9D;
-
-    static { GL.initialize(); }
 
     protected EXTTextureInteger() {
         throw new UnsupportedOperationException();

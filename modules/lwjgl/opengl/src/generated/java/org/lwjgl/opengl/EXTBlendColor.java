@@ -17,6 +17,8 @@ import org.lwjgl.system.*;
  */
 public class EXTBlendColor {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code sfactor} and {@code dfactor} parameters of BlendFunc. */
     public static final int
         GL_CONSTANT_COLOR_EXT           = 0x8001,
@@ -26,8 +28,6 @@ public class EXTBlendColor {
 
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_BLEND_COLOR_EXT = 0x8005;
-
-    static { GL.initialize(); }
 
     protected EXTBlendColor() {
         throw new UnsupportedOperationException();

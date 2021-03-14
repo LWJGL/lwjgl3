@@ -42,6 +42,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class ARBShaderObjects {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} argument of GetHandleARB. */
     public static final int GL_PROGRAM_OBJECT_ARB = 0x8B40;
 
@@ -85,8 +87,6 @@ public class ARBShaderObjects {
         GL_SAMPLER_2D_SHADOW_ARB      = 0x8B62,
         GL_SAMPLER_2D_RECT_ARB        = 0x8B63,
         GL_SAMPLER_2D_RECT_SHADOW_ARB = 0x8B64;
-
-    static { GL.initialize(); }
 
     protected ARBShaderObjects() {
         throw new UnsupportedOperationException();

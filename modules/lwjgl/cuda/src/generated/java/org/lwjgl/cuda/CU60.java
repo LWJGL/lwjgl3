@@ -21,6 +21,19 @@ import static org.lwjgl.cuda.CUDA.*;
 /** Contains bindings to <a href="https://docs.nvidia.com/cuda/cuda-driver-api/index.html">CUDA Driver API</a>. */
 public class CU60 extends CU55 {
 
+    /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            MemAllocManaged      = apiGetFunctionAddress(CU.getLibrary(), "cuMemAllocManaged"),
+            PointerSetAttribute  = apiGetFunctionAddress(CU.getLibrary(), "cuPointerSetAttribute"),
+            StreamAttachMemAsync = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuStreamAttachMemAsync"));
+
+    }
+
     /**
      * CUDA Mem Attach Flags. ({@code CUmemAttach_flags})
      * 
@@ -39,19 +52,6 @@ public class CU60 extends CU55 {
 
     protected CU60() {
         throw new UnsupportedOperationException();
-    }
-
-    /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            MemAllocManaged      = apiGetFunctionAddress(CU.getLibrary(), "cuMemAllocManaged"),
-            PointerSetAttribute  = apiGetFunctionAddress(CU.getLibrary(), "cuPointerSetAttribute"),
-            StreamAttachMemAsync = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuStreamAttachMemAsync"));
-
     }
 
     // --- [ cuMemAllocManaged ] ---

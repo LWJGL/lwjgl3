@@ -18,6 +18,8 @@ import org.lwjgl.system.*;
  */
 public class NVFramebufferBlit {
 
+    static { GLES.initialize(); }
+
     /**
      * Accepted by the {@code target} parameter of BindFramebuffer, CheckFramebufferStatus, FramebufferTexture2D, FramebufferRenderbuffer, and
      * GetFramebufferAttachmentParameteriv.
@@ -30,8 +32,6 @@ public class NVFramebufferBlit {
     public static final int
         GL_DRAW_FRAMEBUFFER_BINDING_NV = 0x8CA6,
         GL_READ_FRAMEBUFFER_BINDING_NV = 0x8CAA;
-
-    static { GLES.initialize(); }
 
     protected NVFramebufferBlit() {
         throw new UnsupportedOperationException();

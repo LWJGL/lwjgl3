@@ -27,14 +27,14 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVHalfFloat {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code type} argument of VertexPointer, NormalPointer, ColorPointer, TexCoordPointer, FogCoordPointerEXT, SecondaryColorPointerEXT,
      * VertexWeightPointerEXT, VertexAttribPointerNV, DrawPixels, ReadPixels, TexImage1D, TexImage2D, TexImage3D, TexSubImage1D, TexSubImage2D, TexSubImage3D,
      * and GetTexImage.
      */
     public static final int GL_HALF_FLOAT_NV = 0x140B;
-
-    static { GL.initialize(); }
 
     protected NVHalfFloat() {
         throw new UnsupportedOperationException();

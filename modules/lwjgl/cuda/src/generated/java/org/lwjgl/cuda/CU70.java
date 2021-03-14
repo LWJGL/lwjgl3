@@ -19,6 +19,23 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Contains bindings to <a href="https://docs.nvidia.com/cuda/cuda-driver-api/index.html">CUDA Driver API</a>. */
 public class CU70 extends CU65 {
 
+    /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            DevicePrimaryCtxRetain   = apiGetFunctionAddress(CU.getLibrary(), "cuDevicePrimaryCtxRetain"),
+            DevicePrimaryCtxRelease  = apiGetFunctionAddress(CU.getLibrary(), "cuDevicePrimaryCtxRelease"),
+            DevicePrimaryCtxSetFlags = apiGetFunctionAddress(CU.getLibrary(), "cuDevicePrimaryCtxSetFlags"),
+            DevicePrimaryCtxGetState = apiGetFunctionAddress(CU.getLibrary(), "cuDevicePrimaryCtxGetState"),
+            DevicePrimaryCtxReset    = apiGetFunctionAddress(CU.getLibrary(), "cuDevicePrimaryCtxReset"),
+            CtxGetFlags              = apiGetFunctionAddress(CU.getLibrary(), "cuCtxGetFlags"),
+            PointerGetAttributes     = apiGetFunctionAddress(CU.getLibrary(), "cuPointerGetAttributes");
+
+    }
+
     /**
      * Legacy stream handle.
      * 
@@ -35,23 +52,6 @@ public class CU70 extends CU65 {
 
     protected CU70() {
         throw new UnsupportedOperationException();
-    }
-
-    /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            DevicePrimaryCtxRetain   = apiGetFunctionAddress(CU.getLibrary(), "cuDevicePrimaryCtxRetain"),
-            DevicePrimaryCtxRelease  = apiGetFunctionAddress(CU.getLibrary(), "cuDevicePrimaryCtxRelease"),
-            DevicePrimaryCtxSetFlags = apiGetFunctionAddress(CU.getLibrary(), "cuDevicePrimaryCtxSetFlags"),
-            DevicePrimaryCtxGetState = apiGetFunctionAddress(CU.getLibrary(), "cuDevicePrimaryCtxGetState"),
-            DevicePrimaryCtxReset    = apiGetFunctionAddress(CU.getLibrary(), "cuDevicePrimaryCtxReset"),
-            CtxGetFlags              = apiGetFunctionAddress(CU.getLibrary(), "cuCtxGetFlags"),
-            PointerGetAttributes     = apiGetFunctionAddress(CU.getLibrary(), "cuPointerGetAttributes");
-
     }
 
     // --- [ cuDevicePrimaryCtxRetain ] ---

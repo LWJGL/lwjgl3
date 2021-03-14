@@ -10,13 +10,13 @@ import org.lwjgl.system.*;
 /** Bindings to SSE3 macros. */
 public class SSE3 {
 
+    static { LibSSE.initialize(); }
+
     /** Denormals are zero mode. */
     public static final int
         _MM_DENORMALS_ZERO_MASK = 0x40,
         _MM_DENORMALS_ZERO_ON   = 0x40,
         _MM_DENORMALS_ZERO_OFF  = 0x0;
-
-    static { LibSSE.initialize(); }
 
     protected SSE3() {
         throw new UnsupportedOperationException();

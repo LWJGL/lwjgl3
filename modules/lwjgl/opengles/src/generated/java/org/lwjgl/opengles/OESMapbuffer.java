@@ -26,6 +26,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class OESMapbuffer {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code access} parameter of MapBufferOES. */
     public static final int GL_WRITE_ONLY_OES = 0x88B9;
 
@@ -36,8 +38,6 @@ public class OESMapbuffer {
 
     /** Accepted by the {@code pname} parameter of GetBufferPointervOES. */
     public static final int GL_BUFFER_MAP_POINTER_OES = 0x88BD;
-
-    static { GLES.initialize(); }
 
     protected OESMapbuffer() {
         throw new UnsupportedOperationException();

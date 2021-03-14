@@ -29,10 +29,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class ANGLETranslatedShaderSource {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetShaderiv. */
     public static final int GL_TRANSLATED_SHADER_SOURCE_LENGTH_ANGLE = 0x93A0;
-
-    static { GLES.initialize(); }
 
     protected ANGLETranslatedShaderSource() {
         throw new UnsupportedOperationException();

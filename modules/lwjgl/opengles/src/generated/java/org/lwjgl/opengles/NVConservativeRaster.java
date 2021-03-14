@@ -24,6 +24,8 @@ import org.lwjgl.system.*;
  */
 public class NVConservativeRaster {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code cap} parameter of Enable, Disable, IsEnabled. */
     public static final int GL_CONSERVATIVE_RASTERIZATION_NV = 0x9346;
 
@@ -32,8 +34,6 @@ public class NVConservativeRaster {
         GL_SUBPIXEL_PRECISION_BIAS_X_BITS_NV   = 0x9347,
         GL_SUBPIXEL_PRECISION_BIAS_Y_BITS_NV   = 0x9348,
         GL_MAX_SUBPIXEL_PRECISION_BIAS_BITS_NV = 0x9349;
-
-    static { GLES.initialize(); }
 
     protected NVConservativeRaster() {
         throw new UnsupportedOperationException();

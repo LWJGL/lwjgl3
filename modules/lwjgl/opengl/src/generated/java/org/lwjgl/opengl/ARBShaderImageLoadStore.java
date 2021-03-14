@@ -37,6 +37,8 @@ import org.lwjgl.system.*;
  */
 public class ARBShaderImageLoadStore {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev, and GetInteger64v. */
     public static final int
         GL_MAX_IMAGE_UNITS                               = 0x8F38,
@@ -120,8 +122,6 @@ public class ARBShaderImageLoadStore {
     public static final int
         GL_IMAGE_FORMAT_COMPATIBILITY_BY_SIZE  = 0x90C8,
         GL_IMAGE_FORMAT_COMPATIBILITY_BY_CLASS = 0x90C9;
-
-    static { GL.initialize(); }
 
     protected ARBShaderImageLoadStore() {
         throw new UnsupportedOperationException();

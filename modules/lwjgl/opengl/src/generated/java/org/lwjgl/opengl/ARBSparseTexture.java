@@ -22,6 +22,8 @@ import org.lwjgl.system.*;
  */
 public class ARBSparseTexture {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter to TexParameter{i f}{v}, TexParameterI{u}v, GetTexParameter{if}v and GetTexParameterIi{u}v. */
     public static final int
         GL_TEXTURE_SPARSE_ARB          = 0x91A6,
@@ -43,8 +45,6 @@ public class ARBSparseTexture {
         GL_MAX_SPARSE_3D_TEXTURE_SIZE_ARB             = 0x9199,
         GL_MAX_SPARSE_ARRAY_TEXTURE_LAYERS_ARB        = 0x919A,
         GL_SPARSE_TEXTURE_FULL_ARRAY_CUBE_MIPMAPS_ARB = 0x91A9;
-
-    static { GL.initialize(); }
 
     protected ARBSparseTexture() {
         throw new UnsupportedOperationException();

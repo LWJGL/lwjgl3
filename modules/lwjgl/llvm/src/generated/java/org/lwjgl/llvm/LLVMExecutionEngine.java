@@ -19,10 +19,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class LLVMExecutionEngine {
 
-    protected LLVMExecutionEngine() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */
     public static final class Functions {
 
@@ -68,6 +64,10 @@ public class LLVMExecutionEngine {
             CreateOProfileJITEventListener  = LLVMCore.getLibrary().getFunctionAddress("LLVMCreateOProfileJITEventListener"),
             CreatePerfJITEventListener      = LLVMCore.getLibrary().getFunctionAddress("LLVMCreatePerfJITEventListener");
 
+    }
+
+    protected LLVMExecutionEngine() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ LLVMLinkInMCJIT ] ---

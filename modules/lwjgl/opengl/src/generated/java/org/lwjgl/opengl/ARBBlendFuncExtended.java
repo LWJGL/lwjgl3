@@ -25,6 +25,8 @@ import org.lwjgl.system.*;
  */
 public class ARBBlendFuncExtended {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code src} and {@code dst} parameters of BlendFunc and BlendFunci, and by the {@code srcRGB}, {@code dstRGB}, {@code srcAlpha} and
      * {@code dstAlpha} parameters of BlendFuncSeparate and BlendFuncSeparatei.
@@ -36,8 +38,6 @@ public class ARBBlendFuncExtended {
 
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv and GetDoublev. */
     public static final int GL_MAX_DUAL_SOURCE_DRAW_BUFFERS = 0x88FC;
-
-    static { GL.initialize(); }
 
     protected ARBBlendFuncExtended() {
         throw new UnsupportedOperationException();

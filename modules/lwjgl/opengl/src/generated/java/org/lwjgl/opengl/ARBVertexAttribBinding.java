@@ -41,6 +41,8 @@ import org.lwjgl.system.*;
  */
 public class ARBVertexAttribBinding {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetVertexAttrib*v. */
     public static final int
         GL_VERTEX_ATTRIB_BINDING         = 0x82D4,
@@ -57,8 +59,6 @@ public class ARBVertexAttribBinding {
     public static final int
         GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET = 0x82D9,
         GL_MAX_VERTEX_ATTRIB_BINDINGS        = 0x82DA;
-
-    static { GL.initialize(); }
 
     protected ARBVertexAttribBinding() {
         throw new UnsupportedOperationException();

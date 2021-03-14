@@ -21,6 +21,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTSecondaryColor {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
      * GetDoublev.
@@ -39,8 +41,6 @@ public class EXTSecondaryColor {
 
     /** Accepted by the {@code array} parameter of EnableClientState and DisableClientState. */
     public static final int GL_SECONDARY_COLOR_ARRAY_EXT = 0x845E;
-
-    static { GL.initialize(); }
 
     protected EXTSecondaryColor() {
         throw new UnsupportedOperationException();

@@ -23,6 +23,8 @@ import org.lwjgl.system.*;
  */
 public class ARBComputeVariableGroupSize {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetIntegerv, GetBooleanv, GetFloatv, GetDoublev and GetInteger64v. */
     public static final int
         GL_MAX_COMPUTE_VARIABLE_GROUP_INVOCATIONS_ARB = 0x9344,
@@ -32,8 +34,6 @@ public class ARBComputeVariableGroupSize {
     public static final int
         GL_MAX_COMPUTE_VARIABLE_GROUP_SIZE_ARB = 0x9345,
         GL_MAX_COMPUTE_FIXED_GROUP_SIZE_ARB    = 0x91BF;
-
-    static { GL.initialize(); }
 
     protected ARBComputeVariableGroupSize() {
         throw new UnsupportedOperationException();

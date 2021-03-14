@@ -21,6 +21,19 @@ import static org.lwjgl.cuda.CUDA.*;
 /** Contains bindings to <a href="https://docs.nvidia.com/cuda/cuda-driver-api/index.html">CUDA Driver API</a>. */
 public class CU90 extends CU80 {
 
+    /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            FuncSetAttribute                   = apiGetFunctionAddress(CU.getLibrary(), "cuFuncSetAttribute"),
+            LaunchCooperativeKernel            = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuLaunchCooperativeKernel")),
+            LaunchCooperativeKernelMultiDevice = apiGetFunctionAddress(CU.getLibrary(), "cuLaunchCooperativeKernelMultiDevice");
+
+    }
+
     /**
      * <h5>Enum values:</h5>
      * 
@@ -41,19 +54,6 @@ public class CU90 extends CU80 {
 
     protected CU90() {
         throw new UnsupportedOperationException();
-    }
-
-    /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            FuncSetAttribute                   = apiGetFunctionAddress(CU.getLibrary(), "cuFuncSetAttribute"),
-            LaunchCooperativeKernel            = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuLaunchCooperativeKernel")),
-            LaunchCooperativeKernelMultiDevice = apiGetFunctionAddress(CU.getLibrary(), "cuLaunchCooperativeKernelMultiDevice");
-
     }
 
     // --- [ cuFuncSetAttribute ] ---

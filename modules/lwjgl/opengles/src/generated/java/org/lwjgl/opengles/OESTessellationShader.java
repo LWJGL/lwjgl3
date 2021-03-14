@@ -56,6 +56,8 @@ import org.lwjgl.system.*;
  */
 public class OESTessellationShader {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code mode} parameter of DrawArrays, DrawElements, and other commands which draw primitives. */
     public static final int GL_PATCHES_OES = 0xE;
 
@@ -126,8 +128,6 @@ public class OESTessellationShader {
     public static final int
         GL_TESS_CONTROL_SHADER_BIT_OES    = 0x8,
         GL_TESS_EVALUATION_SHADER_BIT_OES = 0x10;
-
-    static { GLES.initialize(); }
 
     protected OESTessellationShader() {
         throw new UnsupportedOperationException();

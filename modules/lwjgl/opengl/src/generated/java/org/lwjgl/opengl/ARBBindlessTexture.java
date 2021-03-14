@@ -45,10 +45,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class ARBBindlessTexture {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code type} parameter of VertexAttribLPointer. */
     public static final int GL_UNSIGNED_INT64_ARB = 0x140F;
-
-    static { GL.initialize(); }
 
     protected ARBBindlessTexture() {
         throw new UnsupportedOperationException();

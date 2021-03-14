@@ -17,27 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class ClangCompilationDatabase {
 
-    /**
-     * Error codes for Compilation Database
-     * 
-     * <p>({@code CXCompilationDatabase_Error})</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXCompilationDatabase_NoError CompilationDatabase_NoError} - No error occurred</li>
-     * <li>{@link #CXCompilationDatabase_CanNotLoadDatabase CompilationDatabase_CanNotLoadDatabase} - Database can not be loaded</li>
-     * </ul>
-     */
-    public static final int
-        CXCompilationDatabase_NoError            = 0,
-        CXCompilationDatabase_CanNotLoadDatabase = 1;
-
     static { LibLLVM.initialize(); }
-
-    protected ClangCompilationDatabase() {
-        throw new UnsupportedOperationException();
-    }
 
     /** Contains the function pointers loaded from {@code ClangIndex.getLibrary()}. */
     public static final class Functions {
@@ -61,6 +41,26 @@ public class ClangCompilationDatabase {
             CompileCommand_getMappedSourcePath        = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_CompileCommand_getMappedSourcePath"),
             CompileCommand_getMappedSourceContent     = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_CompileCommand_getMappedSourceContent");
 
+    }
+
+    /**
+     * Error codes for Compilation Database
+     * 
+     * <p>({@code CXCompilationDatabase_Error})</p>
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #CXCompilationDatabase_NoError CompilationDatabase_NoError} - No error occurred</li>
+     * <li>{@link #CXCompilationDatabase_CanNotLoadDatabase CompilationDatabase_CanNotLoadDatabase} - Database can not be loaded</li>
+     * </ul>
+     */
+    public static final int
+        CXCompilationDatabase_NoError            = 0,
+        CXCompilationDatabase_CanNotLoadDatabase = 1;
+
+    protected ClangCompilationDatabase() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ clang_CompilationDatabase_fromDirectory ] ---

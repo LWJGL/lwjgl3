@@ -34,6 +34,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class Remotery {
 
+    static { LibRemotery.initialize(); }
+
     /**
      * All possible error codes ({@code rmtError}).
      * 
@@ -149,8 +151,6 @@ public class Remotery {
         RMTSF_None      = 0,
         RMTSF_Aggregate = 1,
         RMTSF_Recursive = 2;
-
-    static { LibRemotery.initialize(); }
 
     protected Remotery() {
         throw new UnsupportedOperationException();

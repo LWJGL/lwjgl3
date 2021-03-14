@@ -29,6 +29,8 @@ import org.lwjgl.system.*;
  */
 public class IMGMultisampledRenderToTexture {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetRenderbufferParameteriv. */
     public static final int GL_RENDERBUFFER_SAMPLES_IMG = 0x9133;
 
@@ -40,8 +42,6 @@ public class IMGMultisampledRenderToTexture {
 
     /** Accepted by the {@code pname} parameter of GetFramebufferAttachmentParameteriv. */
     public static final int GL_TEXTURE_SAMPLES_IMG = 0x9136;
-
-    static { GLES.initialize(); }
 
     protected IMGMultisampledRenderToTexture() {
         throw new UnsupportedOperationException();

@@ -105,6 +105,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class STBImage {
 
+    static { LibSTB.initialize(); }
+
     /**
      * Component count.
      * 
@@ -124,8 +126,6 @@ public class STBImage {
         STBI_grey_alpha = 2,
         STBI_rgb        = 3,
         STBI_rgb_alpha  = 4;
-
-    static { LibSTB.initialize(); }
 
     protected STBImage() {
         throw new UnsupportedOperationException();

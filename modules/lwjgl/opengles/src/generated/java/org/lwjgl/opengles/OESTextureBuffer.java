@@ -36,6 +36,8 @@ import org.lwjgl.system.*;
  */
 public class OESTextureBuffer {
 
+    static { GLES.initialize(); }
+
     /**
      * Accepted by the {@code target} parameter of BindBuffer, BufferData, BufferSubData, MapBufferRange, BindTexture, UnmapBuffer, GetBufferParameteriv,
      * GetBufferPointerv, TexBufferOES, and TexBufferRangeOES.
@@ -64,8 +66,6 @@ public class OESTextureBuffer {
         GL_TEXTURE_BUFFER_DATA_STORE_BINDING_OES = 0x8C2D,
         GL_TEXTURE_BUFFER_OFFSET_OES             = 0x919D,
         GL_TEXTURE_BUFFER_SIZE_OES               = 0x919E;
-
-    static { GLES.initialize(); }
 
     protected OESTextureBuffer() {
         throw new UnsupportedOperationException();

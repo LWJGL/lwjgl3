@@ -52,6 +52,8 @@ import org.lwjgl.system.*;
  */
 public class ARBTessellationShader {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code mode} parameter of Begin and all vertex array functions that implicitly call Begin. */
     public static final int GL_PATCHES = 0xE;
 
@@ -107,8 +109,6 @@ public class ARBTessellationShader {
     public static final int
         GL_TESS_EVALUATION_SHADER = 0x8E87,
         GL_TESS_CONTROL_SHADER    = 0x8E88;
-
-    static { GL.initialize(); }
 
     protected ARBTessellationShader() {
         throw new UnsupportedOperationException();

@@ -27,6 +27,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class OESTexture3D {
 
+    static { GLES.initialize(); }
+
     /**
      * Accepted by the {@code target} parameter of TexImage3DOES, TexSubImage3DOES, CopyTexSubImage3DOES, CompressedTexImage3DOES and
      * CompressedTexSubImage3DOES, GetTexParameteriv, and GetTexParameterfv.
@@ -40,8 +42,6 @@ public class OESTexture3D {
     public static final int
         GL_MAX_3D_TEXTURE_SIZE_OES = 0x8073,
         GL_TEXTURE_BINDING_3D_OES  = 0x806A;
-
-    static { GLES.initialize(); }
 
     protected OESTexture3D() {
         throw new UnsupportedOperationException();

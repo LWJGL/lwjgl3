@@ -24,6 +24,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVMemoryAttachment {
 
+    static { GLES.initialize(); }
+
     /**
      * Accepted by the {@code pname} parameter of TexParameter{ifx}{v}, TexParameterI{i ui}v, TextureParameter{if}{v}, TextureParameterI{i ui}v,
      * GetTexParameter{if}v, GetTexParameterI{i ui}v, GetTextureParameter{if}v, GetTextureParameterI{i ui}v, GetBufferParameter{i|i64}v and
@@ -52,8 +54,6 @@ public class NVMemoryAttachment {
     public static final int
         GL_MAX_DETACHED_TEXTURES_NV = 0x95AC,
         GL_MAX_DETACHED_BUFFERS_NV  = 0x95AD;
-
-    static { GLES.initialize(); }
 
     protected NVMemoryAttachment() {
         throw new UnsupportedOperationException();

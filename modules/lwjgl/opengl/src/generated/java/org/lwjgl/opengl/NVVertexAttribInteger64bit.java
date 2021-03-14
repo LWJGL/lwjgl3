@@ -27,12 +27,12 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVVertexAttribInteger64bit {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code type} parameter of VertexAttribLPointerEXT, VertexArrayVertexAttribLOffsetEXT, and VertexAttribLFormatNV. */
     public static final int
         GL_INT64_NV          = 0x140E,
         GL_UNSIGNED_INT64_NV = 0x140F;
-
-    static { GL.initialize(); }
 
     protected NVVertexAttribInteger64bit() {
         throw new UnsupportedOperationException();

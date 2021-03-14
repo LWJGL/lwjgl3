@@ -19,6 +19,8 @@ import org.lwjgl.system.*;
  */
 public class NVMeshShader {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code type} parameter of {@link GLES20#glCreateShader CreateShader} and returned by the {@code params} parameter of {@link GLES20#glGetShaderiv GetShaderiv}. */
     public static final int
         GL_MESH_SHADER_NV = 0x9559,
@@ -81,8 +83,6 @@ public class NVMeshShader {
     public static final int
         GL_MESH_SHADER_BIT_NV = 0x40,
         GL_TASK_SHADER_BIT_NV = 0x80;
-
-    static { GLES.initialize(); }
 
     protected NVMeshShader() {
         throw new UnsupportedOperationException();

@@ -23,12 +23,12 @@ import org.lwjgl.system.*;
  */
 public class EXTBlendEquationSeparate {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int
         GL_BLEND_EQUATION_RGB_EXT   = 0x8009,
         GL_BLEND_EQUATION_ALPHA_EXT = 0x883D;
-
-    static { GL.initialize(); }
 
     protected EXTBlendEquationSeparate() {
         throw new UnsupportedOperationException();

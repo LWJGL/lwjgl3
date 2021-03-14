@@ -17,6 +17,8 @@ import static org.lwjgl.system.Checks.*;
  */
 public class EXTSemaphoreWin32 {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code handleType} parameter of {@link EXTMemoryObjectWin32#glImportMemoryWin32HandleEXT ImportMemoryWin32HandleEXT}, {@link EXTMemoryObjectWin32#glImportMemoryWin32NameEXT ImportMemoryWin32NameEXT}, {@link #glImportSemaphoreWin32HandleEXT ImportSemaphoreWin32HandleEXT}, and
      * {@link #glImportSemaphoreWin32NameEXT ImportSemaphoreWin32NameEXT}.
@@ -42,8 +44,6 @@ public class EXTSemaphoreWin32 {
 
     /** Accepted by the {@code pname} parameter of {@link EXTSemaphore#glSemaphoreParameterui64vEXT SemaphoreParameterui64vEXT} and {@link EXTSemaphore#glGetSemaphoreParameterui64vEXT GetSemaphoreParameterui64vEXT}. */
     public static final int GL_D3D12_FENCE_VALUE_EXT = 0x9595;
-
-    static { GL.initialize(); }
 
     protected EXTSemaphoreWin32() {
         throw new UnsupportedOperationException();

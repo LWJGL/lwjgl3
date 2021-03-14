@@ -6,7 +6,7 @@ package spvc.templates
 
 import org.lwjgl.generator.*
 
-val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv", prefixMethod = "Spv", binding = SPVC_BINDING) {
+val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv", prefixMethod = "Spv") {
     documentation = "Enumeration tokens for SPIR-V."
 
     IntConstant("", "SPV_VERSION".."0x10500").noPrefix()

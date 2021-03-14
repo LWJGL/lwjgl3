@@ -30,6 +30,8 @@ import org.lwjgl.system.*;
  */
 public class ARBGetProgramBinary {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of ProgramParameteri and GetProgramiv. */
     public static final int GL_PROGRAM_BINARY_RETRIEVABLE_HINT = 0x8257;
 
@@ -40,8 +42,6 @@ public class ARBGetProgramBinary {
     public static final int
         GL_NUM_PROGRAM_BINARY_FORMATS = 0x87FE,
         GL_PROGRAM_BINARY_FORMATS     = 0x87FF;
-
-    static { GL.initialize(); }
 
     protected ARBGetProgramBinary() {
         throw new UnsupportedOperationException();

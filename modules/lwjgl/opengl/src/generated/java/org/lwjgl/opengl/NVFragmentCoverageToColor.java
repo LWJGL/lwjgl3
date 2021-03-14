@@ -21,13 +21,13 @@ import org.lwjgl.system.*;
  */
 public class NVFragmentCoverageToColor {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code cap} parameter of Enable, Disable, IsEnabled. */
     public static final int GL_FRAGMENT_COVERAGE_TO_COLOR_NV = 0x92DD;
 
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv. */
     public static final int GL_FRAGMENT_COVERAGE_COLOR_NV = 0x92DE;
-
-    static { GL.initialize(); }
 
     protected NVFragmentCoverageToColor() {
         throw new UnsupportedOperationException();

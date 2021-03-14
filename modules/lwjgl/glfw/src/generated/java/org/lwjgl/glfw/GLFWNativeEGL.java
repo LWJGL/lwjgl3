@@ -21,10 +21,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Native bindings to the GLFW library's EGL native access functions. */
 public class GLFWNativeEGL {
 
-    protected GLFWNativeEGL() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code GLFW.getLibrary()}. */
     public static final class Functions {
 
@@ -36,6 +32,10 @@ public class GLFWNativeEGL {
             GetEGLContext = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetEGLContext"),
             GetEGLSurface = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetEGLSurface");
 
+    }
+
+    protected GLFWNativeEGL() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ glfwGetEGLDisplay ] ---

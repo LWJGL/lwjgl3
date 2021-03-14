@@ -40,6 +40,8 @@ import org.lwjgl.system.*;
  */
 public class ARBShaderAtomicCounters {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code target} parameter of BindBufferBase and BindBufferRange. */
     public static final int GL_ATOMIC_COUNTER_BUFFER = 0x92C0;
 
@@ -90,8 +92,6 @@ public class ARBShaderAtomicCounters {
 
     /** Returned in {@code params} by GetActiveUniform and GetActiveUniformsiv. */
     public static final int GL_UNSIGNED_INT_ATOMIC_COUNTER = 0x92DB;
-
-    static { GL.initialize(); }
 
     protected ARBShaderAtomicCounters() {
         throw new UnsupportedOperationException();

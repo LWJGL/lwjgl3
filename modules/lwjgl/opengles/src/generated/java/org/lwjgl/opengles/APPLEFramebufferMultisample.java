@@ -30,6 +30,8 @@ import org.lwjgl.system.*;
  */
 public class APPLEFramebufferMultisample {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetRenderbufferParameteriv. */
     public static final int GL_RENDERBUFFER_SAMPLES_APPLE = 0x8CAB;
 
@@ -51,8 +53,6 @@ public class APPLEFramebufferMultisample {
     public static final int
         GL_DRAW_FRAMEBUFFER_BINDING_APPLE = 0x8CA6,
         GL_READ_FRAMEBUFFER_BINDING_APPLE = 0x8CAA;
-
-    static { GLES.initialize(); }
 
     protected APPLEFramebufferMultisample() {
         throw new UnsupportedOperationException();

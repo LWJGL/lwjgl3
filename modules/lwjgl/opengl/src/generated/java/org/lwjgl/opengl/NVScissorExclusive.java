@@ -28,6 +28,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVScissorExclusive {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code cap} parameter of {@link CGL#CGLEnable Enable}, {@link CGL#CGLDisable Disable}, and {@link CGL#CGLIsEnabled IsEnabled}, by the {@code target} parameter of {@link GL30C#glEnablei Enablei}, {@link GL30C#glDisablei Disablei},
      * {@link GL30C#glIsEnabledi IsEnabledi}, {@link EXTDrawBuffers2#glEnableIndexedEXT EnableIndexedEXT}, {@link EXTDrawBuffers2#glDisableIndexedEXT DisableIndexedEXT}, and {@link EXTDrawBuffers2#glIsEnabledIndexedEXT IsEnabledIndexedEXT}, and by the {@code pname} parameter of {@link GL11C#glGetBooleanv GetBooleanv},
@@ -42,8 +44,6 @@ public class NVScissorExclusive {
      * {@link EXTDirectStateAccess#glGetFloatIndexedvEXT GetFloatIndexedvEXT}.
      */
     public static final int GL_SCISSOR_BOX_EXCLUSIVE_NV = 0x9556;
-
-    static { GL.initialize(); }
 
     protected NVScissorExclusive() {
         throw new UnsupportedOperationException();

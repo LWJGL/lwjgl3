@@ -29,6 +29,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class GL13C extends GL12C {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, and CopyTexImage2D. */
     public static final int
         GL_COMPRESSED_RGB  = 0x84ED,
@@ -136,8 +138,6 @@ public class GL13C extends GL12C {
      * when their {@code pname} parameter is TEXTURE_WRAP_S, TEXTURE_WRAP_T, or TEXTURE_WRAP_R.
      */
     public static final int GL_CLAMP_TO_BORDER = 0x812D;
-
-    static { GL.initialize(); }
 
     protected GL13C() {
         throw new UnsupportedOperationException();

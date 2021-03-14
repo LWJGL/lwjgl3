@@ -33,6 +33,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class INTELMapTexture {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of TexParameteri, for target TEXTURE_2D. */
     public static final int GL_TEXTURE_MEMORY_LAYOUT_INTEL = 0x83FF;
 
@@ -41,8 +43,6 @@ public class INTELMapTexture {
         GL_LAYOUT_DEFAULT_INTEL           = 0,
         GL_LAYOUT_LINEAR_INTEL            = 1,
         GL_LAYOUT_LINEAR_CPU_CACHED_INTEL = 2;
-
-    static { GL.initialize(); }
 
     protected INTELMapTexture() {
         throw new UnsupportedOperationException();

@@ -106,6 +106,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class Zstd {
 
+    static { LibZstd.initialize(); }
+
     /** Version number part. */
     public static final int
         ZSTD_VERSION_MAJOR   = 1,
@@ -395,8 +397,6 @@ public class Zstd {
         ZSTD_e_continue = 0,
         ZSTD_e_flush    = 1,
         ZSTD_e_end      = 2;
-
-    static { LibZstd.initialize(); }
 
     protected Zstd() {
         throw new UnsupportedOperationException();

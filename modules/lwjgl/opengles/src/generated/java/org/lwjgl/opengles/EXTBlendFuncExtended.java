@@ -33,6 +33,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTBlendFuncExtended {
 
+    static { GLES.initialize(); }
+
     /**
      * Accepted by the {@code src} and {@code dst} parameters of BlendFunc and BlendFunciEXT, and by the {@code srcRGB}, {@code dstRGB}, {@code srcAlpha} and
      * {@code dstAlpha} parameters of BlendFuncSeparate and BlendFuncSeparateiEXT.
@@ -49,8 +51,6 @@ public class EXTBlendFuncExtended {
 
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, and GetFloatv. */
     public static final int GL_MAX_DUAL_SOURCE_DRAW_BUFFERS_EXT = 0x88FC;
-
-    static { GLES.initialize(); }
 
     protected EXTBlendFuncExtended() {
         throw new UnsupportedOperationException();

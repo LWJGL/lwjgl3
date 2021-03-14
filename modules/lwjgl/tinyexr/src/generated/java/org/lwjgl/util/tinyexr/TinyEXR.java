@@ -22,6 +22,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class TinyEXR {
 
+    static { Library.loadSystem(System::load, System::loadLibrary, TinyEXR.class, "org.lwjgl.tinyexr", Platform.mapLibraryNameBundled("lwjgl_tinyexr")); }
+
     /** Error codes. */
     public static final int
         TINYEXR_SUCCESS                    = 0,
@@ -74,8 +76,6 @@ public class TinyEXR {
     public static final int
         TINYEXR_TILE_ROUND_DOWN = 0,
         TINYEXR_TILE_ROUND_UP   = 1;
-
-    static { Library.loadSystem(System::load, System::loadLibrary, TinyEXR.class, "org.lwjgl.tinyexr", Platform.mapLibraryNameBundled("lwjgl_tinyexr")); }
 
     protected TinyEXR() {
         throw new UnsupportedOperationException();

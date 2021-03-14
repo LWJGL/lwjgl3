@@ -20,6 +20,85 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Native bindings to WinUser.h and user32.dll. */
 public class User32 {
 
+    private static final SharedLibrary USER32 = Library.loadNative(User32.class, "org.lwjgl", "user32");
+
+    /** Contains the function pointers loaded from the user32 {@link SharedLibrary}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            RegisterClassEx                     = apiGetFunctionAddress(USER32, "RegisterClassExW"),
+            UnregisterClass                     = apiGetFunctionAddress(USER32, "UnregisterClassW"),
+            CreateWindowEx                      = apiGetFunctionAddress(USER32, "CreateWindowExW"),
+            DestroyWindow                       = apiGetFunctionAddress(USER32, "DestroyWindow"),
+            DefWindowProc                       = apiGetFunctionAddress(USER32, "DefWindowProcW"),
+            CallWindowProc                      = apiGetFunctionAddress(USER32, "CallWindowProcW"),
+            ShowWindow                          = apiGetFunctionAddress(USER32, "ShowWindow"),
+            UpdateWindow                        = apiGetFunctionAddress(USER32, "UpdateWindow"),
+            SetWindowPos                        = apiGetFunctionAddress(USER32, "SetWindowPos"),
+            SetWindowText                       = apiGetFunctionAddress(USER32, "SetWindowTextW"),
+            GetMessage                          = apiGetFunctionAddress(USER32, "GetMessageW"),
+            PeekMessage                         = apiGetFunctionAddress(USER32, "PeekMessageW"),
+            TranslateMessage                    = apiGetFunctionAddress(USER32, "TranslateMessage"),
+            WaitMessage                         = apiGetFunctionAddress(USER32, "WaitMessage"),
+            DispatchMessage                     = apiGetFunctionAddress(USER32, "DispatchMessageW"),
+            PostMessage                         = apiGetFunctionAddress(USER32, "PostMessageW"),
+            SendMessage                         = apiGetFunctionAddress(USER32, "SendMessageW"),
+            AdjustWindowRectEx                  = apiGetFunctionAddress(USER32, "AdjustWindowRectEx"),
+            GetWindowRect                       = apiGetFunctionAddress(USER32, "GetWindowRect"),
+            MoveWindow                          = apiGetFunctionAddress(USER32, "MoveWindow"),
+            GetWindowPlacement                  = apiGetFunctionAddress(USER32, "GetWindowPlacement"),
+            SetWindowPlacement                  = apiGetFunctionAddress(USER32, "SetWindowPlacement"),
+            IsWindowVisible                     = apiGetFunctionAddress(USER32, "IsWindowVisible"),
+            IsIconic                            = apiGetFunctionAddress(USER32, "IsIconic"),
+            IsZoomed                            = apiGetFunctionAddress(USER32, "IsZoomed"),
+            BringWindowToTop                    = apiGetFunctionAddress(USER32, "BringWindowToTop"),
+            SetWindowLongPtr                    = apiGetFunctionAddress(USER32, Pointer.BITS64 ? "SetWindowLongPtrW" : "SetWindowLongW"),
+            GetWindowLongPtr                    = apiGetFunctionAddress(USER32, Pointer.BITS64 ? "GetWindowLongPtrW" : "GetWindowLongW"),
+            SetClassLongPtr                     = apiGetFunctionAddress(USER32, Pointer.BITS64 ? "SetClassLongPtrW" : "SetClassLongW"),
+            GetClassLongPtr                     = apiGetFunctionAddress(USER32, Pointer.BITS64 ? "GetClassLongPtrW" : "GetClassLongW"),
+            SetLayeredWindowAttributes          = apiGetFunctionAddress(USER32, "SetLayeredWindowAttributes"),
+            LoadIcon                            = apiGetFunctionAddress(USER32, "LoadIconW"),
+            LoadCursor                          = apiGetFunctionAddress(USER32, "LoadCursorW"),
+            GetDC                               = apiGetFunctionAddress(USER32, "GetDC"),
+            ReleaseDC                           = apiGetFunctionAddress(USER32, "ReleaseDC"),
+            GetSystemMetrics                    = apiGetFunctionAddress(USER32, "GetSystemMetrics"),
+            RegisterTouchWindow                 = USER32.getFunctionAddress("RegisterTouchWindow"),
+            UnregisterTouchWindow               = USER32.getFunctionAddress("UnregisterTouchWindow"),
+            IsTouchWindow                       = USER32.getFunctionAddress("IsTouchWindow"),
+            GetTouchInputInfo                   = USER32.getFunctionAddress("GetTouchInputInfo"),
+            CloseTouchInputHandle               = USER32.getFunctionAddress("CloseTouchInputHandle"),
+            MonitorFromWindow                   = apiGetFunctionAddress(USER32, "MonitorFromWindow"),
+            GetMonitorInfo                      = apiGetFunctionAddress(USER32, "GetMonitorInfoW"),
+            EnumDisplayDevices                  = apiGetFunctionAddress(USER32, "EnumDisplayDevicesW"),
+            EnumDisplaySettingsEx               = apiGetFunctionAddress(USER32, "EnumDisplaySettingsExW"),
+            ChangeDisplaySettingsEx             = apiGetFunctionAddress(USER32, "ChangeDisplaySettingsExW"),
+            GetCursorPos                        = apiGetFunctionAddress(USER32, "GetCursorPos"),
+            SetCursorPos                        = apiGetFunctionAddress(USER32, "SetCursorPos"),
+            ClipCursor                          = apiGetFunctionAddress(USER32, "ClipCursor"),
+            ShowCursor                          = apiGetFunctionAddress(USER32, "ShowCursor"),
+            SetCursor                           = apiGetFunctionAddress(USER32, "SetCursor"),
+            ClientToScreen                      = apiGetFunctionAddress(USER32, "ClientToScreen"),
+            GetAsyncKeyState                    = apiGetFunctionAddress(USER32, "GetAsyncKeyState"),
+            GetMessageExtraInfo                 = apiGetFunctionAddress(USER32, "GetMessageExtraInfo"),
+            SendInput                           = apiGetFunctionAddress(USER32, "SendInput"),
+            GetDpiForSystem                     = USER32.getFunctionAddress("GetDpiForSystem"),
+            GetDpiForWindow                     = USER32.getFunctionAddress("GetDpiForWindow"),
+            GetAwarenessFromDpiAwarenessContext = USER32.getFunctionAddress("GetAwarenessFromDpiAwarenessContext"),
+            GetThreadDpiAwarenessContext        = USER32.getFunctionAddress("GetThreadDpiAwarenessContext"),
+            GetWindowDpiAwarenessContext        = USER32.getFunctionAddress("GetWindowDpiAwarenessContext"),
+            IsValidDpiAwarenessContext          = USER32.getFunctionAddress("IsValidDpiAwarenessContext"),
+            SetThreadDpiAwarenessContext        = USER32.getFunctionAddress("SetThreadDpiAwarenessContext");
+
+    }
+
+    /** Returns the user32 {@link SharedLibrary}. */
+    public static SharedLibrary getLibrary() {
+        return USER32;
+    }
+
     /** Window Styles */
     public static final int
         WS_OVERLAPPED       = 0x0,
@@ -1024,85 +1103,6 @@ public class User32 {
 
     protected User32() {
         throw new UnsupportedOperationException();
-    }
-
-    private static final SharedLibrary USER32 = Library.loadNative(User32.class, "org.lwjgl", "user32");
-
-    /** Contains the function pointers loaded from the user32 {@link SharedLibrary}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            RegisterClassEx                     = apiGetFunctionAddress(USER32, "RegisterClassExW"),
-            UnregisterClass                     = apiGetFunctionAddress(USER32, "UnregisterClassW"),
-            CreateWindowEx                      = apiGetFunctionAddress(USER32, "CreateWindowExW"),
-            DestroyWindow                       = apiGetFunctionAddress(USER32, "DestroyWindow"),
-            DefWindowProc                       = apiGetFunctionAddress(USER32, "DefWindowProcW"),
-            CallWindowProc                      = apiGetFunctionAddress(USER32, "CallWindowProcW"),
-            ShowWindow                          = apiGetFunctionAddress(USER32, "ShowWindow"),
-            UpdateWindow                        = apiGetFunctionAddress(USER32, "UpdateWindow"),
-            SetWindowPos                        = apiGetFunctionAddress(USER32, "SetWindowPos"),
-            SetWindowText                       = apiGetFunctionAddress(USER32, "SetWindowTextW"),
-            GetMessage                          = apiGetFunctionAddress(USER32, "GetMessageW"),
-            PeekMessage                         = apiGetFunctionAddress(USER32, "PeekMessageW"),
-            TranslateMessage                    = apiGetFunctionAddress(USER32, "TranslateMessage"),
-            WaitMessage                         = apiGetFunctionAddress(USER32, "WaitMessage"),
-            DispatchMessage                     = apiGetFunctionAddress(USER32, "DispatchMessageW"),
-            PostMessage                         = apiGetFunctionAddress(USER32, "PostMessageW"),
-            SendMessage                         = apiGetFunctionAddress(USER32, "SendMessageW"),
-            AdjustWindowRectEx                  = apiGetFunctionAddress(USER32, "AdjustWindowRectEx"),
-            GetWindowRect                       = apiGetFunctionAddress(USER32, "GetWindowRect"),
-            MoveWindow                          = apiGetFunctionAddress(USER32, "MoveWindow"),
-            GetWindowPlacement                  = apiGetFunctionAddress(USER32, "GetWindowPlacement"),
-            SetWindowPlacement                  = apiGetFunctionAddress(USER32, "SetWindowPlacement"),
-            IsWindowVisible                     = apiGetFunctionAddress(USER32, "IsWindowVisible"),
-            IsIconic                            = apiGetFunctionAddress(USER32, "IsIconic"),
-            IsZoomed                            = apiGetFunctionAddress(USER32, "IsZoomed"),
-            BringWindowToTop                    = apiGetFunctionAddress(USER32, "BringWindowToTop"),
-            SetWindowLongPtr                    = apiGetFunctionAddress(USER32, Pointer.BITS64 ? "SetWindowLongPtrW" : "SetWindowLongW"),
-            GetWindowLongPtr                    = apiGetFunctionAddress(USER32, Pointer.BITS64 ? "GetWindowLongPtrW" : "GetWindowLongW"),
-            SetClassLongPtr                     = apiGetFunctionAddress(USER32, Pointer.BITS64 ? "SetClassLongPtrW" : "SetClassLongW"),
-            GetClassLongPtr                     = apiGetFunctionAddress(USER32, Pointer.BITS64 ? "GetClassLongPtrW" : "GetClassLongW"),
-            SetLayeredWindowAttributes          = apiGetFunctionAddress(USER32, "SetLayeredWindowAttributes"),
-            LoadIcon                            = apiGetFunctionAddress(USER32, "LoadIconW"),
-            LoadCursor                          = apiGetFunctionAddress(USER32, "LoadCursorW"),
-            GetDC                               = apiGetFunctionAddress(USER32, "GetDC"),
-            ReleaseDC                           = apiGetFunctionAddress(USER32, "ReleaseDC"),
-            GetSystemMetrics                    = apiGetFunctionAddress(USER32, "GetSystemMetrics"),
-            RegisterTouchWindow                 = USER32.getFunctionAddress("RegisterTouchWindow"),
-            UnregisterTouchWindow               = USER32.getFunctionAddress("UnregisterTouchWindow"),
-            IsTouchWindow                       = USER32.getFunctionAddress("IsTouchWindow"),
-            GetTouchInputInfo                   = USER32.getFunctionAddress("GetTouchInputInfo"),
-            CloseTouchInputHandle               = USER32.getFunctionAddress("CloseTouchInputHandle"),
-            MonitorFromWindow                   = apiGetFunctionAddress(USER32, "MonitorFromWindow"),
-            GetMonitorInfo                      = apiGetFunctionAddress(USER32, "GetMonitorInfoW"),
-            EnumDisplayDevices                  = apiGetFunctionAddress(USER32, "EnumDisplayDevicesW"),
-            EnumDisplaySettingsEx               = apiGetFunctionAddress(USER32, "EnumDisplaySettingsExW"),
-            ChangeDisplaySettingsEx             = apiGetFunctionAddress(USER32, "ChangeDisplaySettingsExW"),
-            GetCursorPos                        = apiGetFunctionAddress(USER32, "GetCursorPos"),
-            SetCursorPos                        = apiGetFunctionAddress(USER32, "SetCursorPos"),
-            ClipCursor                          = apiGetFunctionAddress(USER32, "ClipCursor"),
-            ShowCursor                          = apiGetFunctionAddress(USER32, "ShowCursor"),
-            SetCursor                           = apiGetFunctionAddress(USER32, "SetCursor"),
-            ClientToScreen                      = apiGetFunctionAddress(USER32, "ClientToScreen"),
-            GetAsyncKeyState                    = apiGetFunctionAddress(USER32, "GetAsyncKeyState"),
-            GetMessageExtraInfo                 = apiGetFunctionAddress(USER32, "GetMessageExtraInfo"),
-            SendInput                           = apiGetFunctionAddress(USER32, "SendInput"),
-            GetDpiForSystem                     = USER32.getFunctionAddress("GetDpiForSystem"),
-            GetDpiForWindow                     = USER32.getFunctionAddress("GetDpiForWindow"),
-            GetAwarenessFromDpiAwarenessContext = USER32.getFunctionAddress("GetAwarenessFromDpiAwarenessContext"),
-            GetThreadDpiAwarenessContext        = USER32.getFunctionAddress("GetThreadDpiAwarenessContext"),
-            GetWindowDpiAwarenessContext        = USER32.getFunctionAddress("GetWindowDpiAwarenessContext"),
-            IsValidDpiAwarenessContext          = USER32.getFunctionAddress("IsValidDpiAwarenessContext"),
-            SetThreadDpiAwarenessContext        = USER32.getFunctionAddress("SetThreadDpiAwarenessContext");
-
-    }
-
-    /** Returns the user32 {@link SharedLibrary}. */
-    public static SharedLibrary getLibrary() {
-        return USER32;
     }
 
     // --- [ RegisterClassEx ] ---

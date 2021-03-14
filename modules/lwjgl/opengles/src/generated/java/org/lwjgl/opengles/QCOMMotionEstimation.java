@@ -18,12 +18,12 @@ import org.lwjgl.system.*;
  */
 public class QCOMMotionEstimation {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetIntegerv, GetInteger64v, and GetFloatv. */
     public static final int
         GL_MOTION_ESTIMATION_SEARCH_BLOCK_X_QCOM = 0x8C90,
         GL_MOTION_ESTIMATION_SEARCH_BLOCK_Y_QCOM = 0x8C91;
-
-    static { GLES.initialize(); }
 
     protected QCOMMotionEstimation() {
         throw new UnsupportedOperationException();

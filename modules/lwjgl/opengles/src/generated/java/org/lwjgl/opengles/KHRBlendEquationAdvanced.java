@@ -50,6 +50,8 @@ import org.lwjgl.system.*;
  */
 public class KHRBlendEquationAdvanced {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code mode} parameter of BlendEquation and BlendEquationi. */
     public static final int
         GL_MULTIPLY_KHR       = 0x9294,
@@ -67,8 +69,6 @@ public class KHRBlendEquationAdvanced {
         GL_HSL_SATURATION_KHR = 0x92AE,
         GL_HSL_COLOR_KHR      = 0x92AF,
         GL_HSL_LUMINOSITY_KHR = 0x92B0;
-
-    static { GLES.initialize(); }
 
     protected KHRBlendEquationAdvanced() {
         throw new UnsupportedOperationException();

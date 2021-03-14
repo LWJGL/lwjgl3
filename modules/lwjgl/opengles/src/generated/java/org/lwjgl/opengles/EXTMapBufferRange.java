@@ -34,6 +34,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTMapBufferRange {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code access} parameter of MapBufferRangeEXT. */
     public static final int
         GL_MAP_READ_BIT_EXT              = 0x1,
@@ -42,8 +44,6 @@ public class EXTMapBufferRange {
         GL_MAP_INVALIDATE_BUFFER_BIT_EXT = 0x8,
         GL_MAP_FLUSH_EXPLICIT_BIT_EXT    = 0x10,
         GL_MAP_UNSYNCHRONIZED_BIT_EXT    = 0x20;
-
-    static { GLES.initialize(); }
 
     protected EXTMapBufferRange() {
         throw new UnsupportedOperationException();

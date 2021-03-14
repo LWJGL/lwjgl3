@@ -21,6 +21,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** The core OpenGL ES 3.2 functionality. */
 public class GLES32 extends GLES31 {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetFloatv, GetIntegerv, and GetInteger64v. */
     public static final int
         GL_MULTISAMPLE_LINE_WIDTH_RANGE_ARB       = 0x9381,
@@ -407,8 +409,6 @@ public class GLES32 extends GLES31 {
         GL_SAMPLER_2D_MULTISAMPLE_ARRAY              = 0x910B,
         GL_INT_SAMPLER_2D_MULTISAMPLE_ARRAY          = 0x910C,
         GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY = 0x910D;
-
-    static { GLES.initialize(); }
 
     protected GLES32() {
         throw new UnsupportedOperationException();

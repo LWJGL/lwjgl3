@@ -35,6 +35,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class Blendish {
 
+    static { LibNanoVG.initialize(); }
+
     /** Alpha of disabled widget groups. Can be used in conjunction with {@link NanoVG#nvgGlobalAlpha GlobalAlpha}. */
     public static final float BND_DISABLED_ALPHA = 0.5f;
 
@@ -1087,8 +1089,6 @@ public class Blendish {
         BND_ICON_IMAGE_ALPHA            = BND_ICONID(11,0),
         BND_ICON_IMAGE_ZDEPTH           = BND_ICONID(12,0),
         BND_ICON_IMAGEFILE              = BND_ICONID(13,0);
-
-    static { LibNanoVG.initialize(); }
 
     protected Blendish() {
         throw new UnsupportedOperationException();

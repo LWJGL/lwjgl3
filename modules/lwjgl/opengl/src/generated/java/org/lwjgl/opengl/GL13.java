@@ -34,6 +34,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class GL13 extends GL12 {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, and CopyTexImage2D. */
     public static final int
         GL_COMPRESSED_ALPHA           = 0x84E9,
@@ -207,8 +209,6 @@ public class GL13 extends GL12 {
         GL_TRANSPOSE_PROJECTION_MATRIX = 0x84E4,
         GL_TRANSPOSE_TEXTURE_MATRIX    = 0x84E5,
         GL_TRANSPOSE_COLOR_MATRIX      = 0x84E6;
-
-    static { GL.initialize(); }
 
     protected GL13() {
         throw new UnsupportedOperationException();

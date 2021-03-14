@@ -24,6 +24,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class QCOMExtendedGet {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code pname} parameter of ExtGetTexLevelParameterivQCOM. */
     public static final int
         GL_TEXTURE_WIDTH_QCOM           = 0x8BD2,
@@ -39,8 +41,6 @@ public class QCOMExtendedGet {
 
     /** Accepted by the {@code pname} parameter of ExtTexObjectStateOverrideiQCOM. */
     public static final int GL_STATE_RESTORE = 0x8BDC;
-
-    static { GLES.initialize(); }
 
     protected QCOMExtendedGet() {
         throw new UnsupportedOperationException();

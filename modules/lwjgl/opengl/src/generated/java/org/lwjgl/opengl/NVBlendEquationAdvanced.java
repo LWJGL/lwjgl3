@@ -20,6 +20,8 @@ import org.lwjgl.system.*;
  */
 public class NVBlendEquationAdvanced {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of BlendParameteriNV, GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int
         GL_BLEND_PREMULTIPLIED_SRC_NV = 0x9280,
@@ -77,8 +79,6 @@ public class NVBlendEquationAdvanced {
         GL_RED_NV                = 0x1903,
         GL_GREEN_NV              = 0x1904,
         GL_BLUE_NV               = 0x1905;
-
-    static { GL.initialize(); }
 
     protected NVBlendEquationAdvanced() {
         throw new UnsupportedOperationException();

@@ -26,6 +26,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTOcclusionQueryBoolean {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code target} parameter of BeginQueryEXT, EndQueryEXT, and GetQueryivEXT. */
     public static final int
         GL_ANY_SAMPLES_PASSED_EXT              = 0x8C2F,
@@ -38,8 +40,6 @@ public class EXTOcclusionQueryBoolean {
     public static final int
         GL_QUERY_RESULT_EXT           = 0x8866,
         GL_QUERY_RESULT_AVAILABLE_EXT = 0x8867;
-
-    static { GLES.initialize(); }
 
     protected EXTOcclusionQueryBoolean() {
         throw new UnsupportedOperationException();

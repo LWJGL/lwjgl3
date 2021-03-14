@@ -31,6 +31,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class LibFFI {
 
+    static { Library.initialize(); }
+
     /** Types used to create custom {@link FFICIF}. */
     public static final short
         FFI_TYPE_VOID       = 0,
@@ -106,8 +108,6 @@ public class LibFFI {
         FFI_OK          = 0,
         FFI_BAD_TYPEDEF = 1,
         FFI_BAD_ABI     = 2;
-
-    static { Library.initialize(); }
 
     protected LibFFI() {
         throw new UnsupportedOperationException();

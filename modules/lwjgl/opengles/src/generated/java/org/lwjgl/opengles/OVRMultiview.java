@@ -29,6 +29,8 @@ import org.lwjgl.system.*;
  */
 public class OVRMultiview {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code pname} parameter of {@link GLES20#glGetFramebufferAttachmentParameteriv GetFramebufferAttachmentParameteriv}. */
     public static final int
         GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_NUM_VIEWS_OVR       = 0x9630,
@@ -39,8 +41,6 @@ public class OVRMultiview {
 
     /** Returned by {@link GLES20#glCheckFramebufferStatus CheckFramebufferStatus}. */
     public static final int GL_FRAMEBUFFER_INCOMPLETE_VIEW_TARGETS_OVR = 0x9633;
-
-    static { GLES.initialize(); }
 
     protected OVRMultiview() {
         throw new UnsupportedOperationException();

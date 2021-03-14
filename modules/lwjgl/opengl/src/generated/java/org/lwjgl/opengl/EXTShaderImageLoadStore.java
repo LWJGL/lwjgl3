@@ -38,6 +38,8 @@ import org.lwjgl.system.*;
  */
 public class EXTShaderImageLoadStore {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int
         GL_MAX_IMAGE_UNITS_EXT                               = 0x8F38,
@@ -104,8 +106,6 @@ public class EXTShaderImageLoadStore {
         GL_UNSIGNED_INT_IMAGE_CUBE_MAP_ARRAY_EXT       = 0x906A,
         GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE_EXT       = 0x906B,
         GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE_ARRAY_EXT = 0x906C;
-
-    static { GL.initialize(); }
 
     protected EXTShaderImageLoadStore() {
         throw new UnsupportedOperationException();

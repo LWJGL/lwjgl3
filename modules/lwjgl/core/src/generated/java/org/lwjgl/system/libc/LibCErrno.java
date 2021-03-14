@@ -10,6 +10,8 @@ import org.lwjgl.system.*;
 /** Native bindings to errno.h. */
 public class LibCErrno {
 
+    static { Library.initialize(); }
+
     /**
      * Standard error codes.
      * 
@@ -99,8 +101,6 @@ public class LibCErrno {
         ENOTEMPTY    = 0x29,
         EILSEQ       = 0x2A,
         STRUNCATE    = 0x50;
-
-    static { Library.initialize(); }
 
     protected LibCErrno() {
         throw new UnsupportedOperationException();

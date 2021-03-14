@@ -28,6 +28,8 @@ import org.lwjgl.system.*;
  */
 public class ARBDrawIndirect {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, GetBufferPointerv,
      * MapBufferRange, FlushMappedBufferRange, GetBufferParameteriv, and CopyBufferSubData.
@@ -36,8 +38,6 @@ public class ARBDrawIndirect {
 
     /** Accepted by the {@code value} parameter of GetIntegerv, GetBooleanv, GetFloatv, and GetDoublev. */
     public static final int GL_DRAW_INDIRECT_BUFFER_BINDING = 0x8F43;
-
-    static { GL.initialize(); }
 
     protected ARBDrawIndirect() {
         throw new UnsupportedOperationException();

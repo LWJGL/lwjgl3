@@ -53,6 +53,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class KHRRobustness {
 
+    static { GLES.initialize(); }
+
     /** Returned by {@link #glGetGraphicsResetStatusKHR GetGraphicsResetStatusKHR}. */
     public static final int
         GL_GUILTY_CONTEXT_RESET_KHR   = 0x8253,
@@ -71,8 +73,6 @@ public class KHRRobustness {
 
     /** Returned by {@link GLES20#glGetError GetError}. */
     public static final int GL_CONTEXT_LOST_KHR = 0x507;
-
-    static { GLES.initialize(); }
 
     protected KHRRobustness() {
         throw new UnsupportedOperationException();

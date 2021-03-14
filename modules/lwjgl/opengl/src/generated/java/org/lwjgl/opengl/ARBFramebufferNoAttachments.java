@@ -45,6 +45,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class ARBFramebufferNoAttachments {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code pname} parameter of FramebufferParameteri, GetFramebufferParameteriv, NamedFramebufferParameteriEXT, and
      * GetNamedFramebufferParameterivEXT.
@@ -62,8 +64,6 @@ public class ARBFramebufferNoAttachments {
         GL_MAX_FRAMEBUFFER_HEIGHT  = 0x9316,
         GL_MAX_FRAMEBUFFER_LAYERS  = 0x9317,
         GL_MAX_FRAMEBUFFER_SAMPLES = 0x9318;
-
-    static { GL.initialize(); }
 
     protected ARBFramebufferNoAttachments() {
         throw new UnsupportedOperationException();

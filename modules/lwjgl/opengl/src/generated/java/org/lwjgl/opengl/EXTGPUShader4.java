@@ -69,6 +69,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTGPUShader4 {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameters of GetVertexAttribdv, GetVertexAttribfv, GetVertexAttribiv, GetVertexAttribIuivEXT and GetVertexAttribIivEXT. */
     public static final int GL_VERTEX_ATTRIB_ARRAY_INTEGER_EXT = 0x88FD;
 
@@ -104,8 +106,6 @@ public class EXTGPUShader4 {
     public static final int
         GL_MIN_PROGRAM_TEXEL_OFFSET_EXT = 0x8904,
         GL_MAX_PROGRAM_TEXEL_OFFSET_EXT = 0x8905;
-
-    static { GL.initialize(); }
 
     protected EXTGPUShader4() {
         throw new UnsupportedOperationException();

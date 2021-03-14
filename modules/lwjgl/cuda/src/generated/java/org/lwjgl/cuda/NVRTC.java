@@ -22,6 +22,35 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Contains bindings to <a href="https://docs.nvidia.com/cuda/nvrtc/index.html">NVRTC</a>, a runtime compilation library for CUDA C++. */
 public class NVRTC {
 
+    private static final SharedLibrary NVRTC          = CUDA.getToolkitLibrary(NVRTC.class, Configuration.CUDA_NVRTC_LIBRARY_NAME, "nvrtc");
+    private static final SharedLibrary NVRTC_BUILTINS = CUDA.getToolkitLibrary(NVRTC.class, Configuration.CUDA_NVRTC_BUILTINS_LIBRARY_NAME, "nvrtc-builtins");
+
+    /** Contains the function pointers loaded from the NVRTC {@link SharedLibrary}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            GetErrorString    = apiGetFunctionAddress(NVRTC, "nvrtcGetErrorString"),
+            Version           = apiGetFunctionAddress(NVRTC, "nvrtcVersion"),
+            CreateProgram     = apiGetFunctionAddress(NVRTC, "nvrtcCreateProgram"),
+            DestroyProgram    = apiGetFunctionAddress(NVRTC, "nvrtcDestroyProgram"),
+            CompileProgram    = apiGetFunctionAddress(NVRTC, "nvrtcCompileProgram"),
+            GetPTXSize        = apiGetFunctionAddress(NVRTC, "nvrtcGetPTXSize"),
+            GetPTX            = apiGetFunctionAddress(NVRTC, "nvrtcGetPTX"),
+            GetProgramLogSize = apiGetFunctionAddress(NVRTC, "nvrtcGetProgramLogSize"),
+            GetProgramLog     = apiGetFunctionAddress(NVRTC, "nvrtcGetProgramLog"),
+            AddNameExpression = apiGetFunctionAddress(NVRTC, "nvrtcAddNameExpression"),
+            GetLoweredName    = apiGetFunctionAddress(NVRTC, "nvrtcGetLoweredName");
+
+    }
+
+    /** Returns the NVRTC {@link SharedLibrary}. */
+    public static SharedLibrary getLibrary() {
+        return NVRTC;
+    }
+
     /**
      * The enumerated type {@code nvrtcResult} defines API call result codes.
      * 
@@ -60,35 +89,6 @@ public class NVRTC {
 
     protected NVRTC() {
         throw new UnsupportedOperationException();
-    }
-
-    private static final SharedLibrary NVRTC          = CUDA.getToolkitLibrary(NVRTC.class, Configuration.CUDA_NVRTC_LIBRARY_NAME, "nvrtc");
-    private static final SharedLibrary NVRTC_BUILTINS = CUDA.getToolkitLibrary(NVRTC.class, Configuration.CUDA_NVRTC_BUILTINS_LIBRARY_NAME, "nvrtc-builtins");
-
-    /** Contains the function pointers loaded from the NVRTC {@link SharedLibrary}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            GetErrorString    = apiGetFunctionAddress(NVRTC, "nvrtcGetErrorString"),
-            Version           = apiGetFunctionAddress(NVRTC, "nvrtcVersion"),
-            CreateProgram     = apiGetFunctionAddress(NVRTC, "nvrtcCreateProgram"),
-            DestroyProgram    = apiGetFunctionAddress(NVRTC, "nvrtcDestroyProgram"),
-            CompileProgram    = apiGetFunctionAddress(NVRTC, "nvrtcCompileProgram"),
-            GetPTXSize        = apiGetFunctionAddress(NVRTC, "nvrtcGetPTXSize"),
-            GetPTX            = apiGetFunctionAddress(NVRTC, "nvrtcGetPTX"),
-            GetProgramLogSize = apiGetFunctionAddress(NVRTC, "nvrtcGetProgramLogSize"),
-            GetProgramLog     = apiGetFunctionAddress(NVRTC, "nvrtcGetProgramLog"),
-            AddNameExpression = apiGetFunctionAddress(NVRTC, "nvrtcAddNameExpression"),
-            GetLoweredName    = apiGetFunctionAddress(NVRTC, "nvrtcGetLoweredName");
-
-    }
-
-    /** Returns the NVRTC {@link SharedLibrary}. */
-    public static SharedLibrary getLibrary() {
-        return NVRTC;
     }
 
     // --- [ nvrtcGetErrorString ] ---

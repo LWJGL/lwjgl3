@@ -85,6 +85,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class KHRDebug {
 
+    static { GLES.initialize(); }
+
     /** Tokens accepted by the {@code target} parameters of Enable, Disable, and  IsEnabled. */
     public static final int
         GL_DEBUG_OUTPUT_KHR             = 0x92E0,
@@ -161,8 +163,6 @@ public class KHRDebug {
         GL_QUERY_KHR            = 0x82E3,
         GL_PROGRAM_PIPELINE_KHR = 0x82E4,
         GL_SAMPLER_KHR          = 0x82E6;
-
-    static { GLES.initialize(); }
 
     protected KHRDebug() {
         throw new UnsupportedOperationException();

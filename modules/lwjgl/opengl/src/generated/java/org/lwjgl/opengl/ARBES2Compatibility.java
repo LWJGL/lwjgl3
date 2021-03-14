@@ -19,6 +19,8 @@ import org.lwjgl.system.*;
  */
 public class ARBES2Compatibility {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code value} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int
         GL_SHADER_COMPILER                  = 0x8DFA,
@@ -44,8 +46,6 @@ public class ARBES2Compatibility {
 
     /** Accepted by the {@code format} parameter of most commands taking sized internal formats. */
     public static final int GL_RGB565 = 0x8D62;
-
-    static { GL.initialize(); }
 
     protected ARBES2Compatibility() {
         throw new UnsupportedOperationException();

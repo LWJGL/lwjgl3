@@ -15,6 +15,21 @@ import static org.lwjgl.system.JNI.*;
 /** Native bindings to the C platform API of the <a target="_blank" href="https://github.com/bkaradzic/bgfx">bgfx</a> library. */
 public class BGFXPlatform {
 
+    /** Contains the function pointers loaded from {@code BGFX.getLibrary()}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            render_frame                  = apiGetFunctionAddress(BGFX.getLibrary(), "bgfx_render_frame"),
+            set_platform_data             = apiGetFunctionAddress(BGFX.getLibrary(), "bgfx_set_platform_data"),
+            get_internal_data             = apiGetFunctionAddress(BGFX.getLibrary(), "bgfx_get_internal_data"),
+            override_internal_texture_ptr = apiGetFunctionAddress(BGFX.getLibrary(), "bgfx_override_internal_texture_ptr"),
+            override_internal_texture     = apiGetFunctionAddress(BGFX.getLibrary(), "bgfx_override_internal_texture");
+
+    }
+
     /**
      * Render frame. ({@code bgfx_renderer_frame_t})
      * 
@@ -37,21 +52,6 @@ public class BGFXPlatform {
 
     protected BGFXPlatform() {
         throw new UnsupportedOperationException();
-    }
-
-    /** Contains the function pointers loaded from {@code BGFX.getLibrary()}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            render_frame                  = apiGetFunctionAddress(BGFX.getLibrary(), "bgfx_render_frame"),
-            set_platform_data             = apiGetFunctionAddress(BGFX.getLibrary(), "bgfx_set_platform_data"),
-            get_internal_data             = apiGetFunctionAddress(BGFX.getLibrary(), "bgfx_get_internal_data"),
-            override_internal_texture_ptr = apiGetFunctionAddress(BGFX.getLibrary(), "bgfx_override_internal_texture_ptr"),
-            override_internal_texture     = apiGetFunctionAddress(BGFX.getLibrary(), "bgfx_override_internal_texture");
-
     }
 
     // --- [ bgfx_render_frame ] ---

@@ -34,6 +34,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVTransformFeedback2 {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code target} parameter of BindTransformFeedbackNV. */
     public static final int GL_TRANSFORM_FEEDBACK_NV = 0x8E22;
 
@@ -42,8 +44,6 @@ public class NVTransformFeedback2 {
         GL_TRANSFORM_FEEDBACK_BUFFER_PAUSED_NV = 0x8E23,
         GL_TRANSFORM_FEEDBACK_BUFFER_ACTIVE_NV = 0x8E24,
         GL_TRANSFORM_FEEDBACK_BINDING_NV       = 0x8E25;
-
-    static { GL.initialize(); }
 
     protected NVTransformFeedback2() {
         throw new UnsupportedOperationException();

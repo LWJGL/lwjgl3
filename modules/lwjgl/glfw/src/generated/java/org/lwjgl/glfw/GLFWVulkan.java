@@ -24,10 +24,6 @@ import org.lwjgl.vulkan.*;
 /** Native bindings to the GLFW library's Vulkan functions. */
 public class GLFWVulkan {
 
-    protected GLFWVulkan() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code GLFW.getLibrary()}. */
     public static final class Functions {
 
@@ -47,6 +43,10 @@ public class GLFWVulkan {
         if (Platform.get() == Platform.MACOSX) {
             setPath(VK.getFunctionProvider());
         }
+    }
+
+    protected GLFWVulkan() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ glfwVulkanSupported ] ---

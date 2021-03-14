@@ -17,6 +17,8 @@ import static org.lwjgl.system.Checks.*;
  */
 public class EXTMemoryObjectWin32 {
 
+    static { GLES.initialize(); }
+
     /**
      * Accepted by the {@code handleType} parameter of {@link #glImportMemoryWin32HandleEXT ImportMemoryWin32HandleEXT}, {@link #glImportMemoryWin32NameEXT ImportMemoryWin32NameEXT}, {@link EXTSemaphoreWin32#glImportSemaphoreWin32HandleEXT ImportSemaphoreWin32HandleEXT}, and
      * {@link EXTSemaphoreWin32#glImportSemaphoreWin32NameEXT ImportSemaphoreWin32NameEXT}.
@@ -45,8 +47,6 @@ public class EXTMemoryObjectWin32 {
 
     /** Accepted by the {@code handleType} parameter of {@link #glImportMemoryWin32HandleEXT ImportMemoryWin32HandleEXT}. */
     public static final int GL_HANDLE_TYPE_D3D11_IMAGE_KMT_EXT = 0x958C;
-
-    static { GLES.initialize(); }
 
     protected EXTMemoryObjectWin32() {
         throw new UnsupportedOperationException();

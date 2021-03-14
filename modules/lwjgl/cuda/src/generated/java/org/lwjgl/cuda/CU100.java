@@ -23,6 +23,60 @@ import static org.lwjgl.cuda.CUDA.*;
 /** Contains bindings to <a href="https://docs.nvidia.com/cuda/cuda-driver-api/index.html">CUDA Driver API</a>. */
 public class CU100 extends CU92 {
 
+    /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            DeviceGetLuid                         = CU.getLibrary().getFunctionAddress("cuDeviceGetLuid"),
+            StreamBeginCapture                    = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuStreamBeginCapture")),
+            StreamEndCapture                      = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuStreamEndCapture")),
+            StreamIsCapturing                     = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuStreamIsCapturing")),
+            ImportExternalMemory                  = apiGetFunctionAddress(CU.getLibrary(), "cuImportExternalMemory"),
+            ExternalMemoryGetMappedBuffer         = apiGetFunctionAddress(CU.getLibrary(), "cuExternalMemoryGetMappedBuffer"),
+            ExternalMemoryGetMappedMipmappedArray = apiGetFunctionAddress(CU.getLibrary(), "cuExternalMemoryGetMappedMipmappedArray"),
+            DestroyExternalMemory                 = apiGetFunctionAddress(CU.getLibrary(), "cuDestroyExternalMemory"),
+            ImportExternalSemaphore               = apiGetFunctionAddress(CU.getLibrary(), "cuImportExternalSemaphore"),
+            SignalExternalSemaphoresAsync         = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuSignalExternalSemaphoresAsync")),
+            WaitExternalSemaphoresAsync           = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuWaitExternalSemaphoresAsync")),
+            DestroyExternalSemaphore              = apiGetFunctionAddress(CU.getLibrary(), "cuDestroyExternalSemaphore"),
+            LaunchHostFunc                        = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuLaunchHostFunc")),
+            GraphCreate                           = apiGetFunctionAddress(CU.getLibrary(), "cuGraphCreate"),
+            GraphAddKernelNode                    = apiGetFunctionAddress(CU.getLibrary(), "cuGraphAddKernelNode"),
+            GraphKernelNodeGetParams              = apiGetFunctionAddress(CU.getLibrary(), "cuGraphKernelNodeGetParams"),
+            GraphKernelNodeSetParams              = apiGetFunctionAddress(CU.getLibrary(), "cuGraphKernelNodeSetParams"),
+            GraphAddMemcpyNode                    = apiGetFunctionAddress(CU.getLibrary(), "cuGraphAddMemcpyNode"),
+            GraphMemcpyNodeGetParams              = apiGetFunctionAddress(CU.getLibrary(), "cuGraphMemcpyNodeGetParams"),
+            GraphMemcpyNodeSetParams              = apiGetFunctionAddress(CU.getLibrary(), "cuGraphMemcpyNodeSetParams"),
+            GraphAddMemsetNode                    = apiGetFunctionAddress(CU.getLibrary(), "cuGraphAddMemsetNode"),
+            GraphMemsetNodeGetParams              = apiGetFunctionAddress(CU.getLibrary(), "cuGraphMemsetNodeGetParams"),
+            GraphMemsetNodeSetParams              = apiGetFunctionAddress(CU.getLibrary(), "cuGraphMemsetNodeSetParams"),
+            GraphAddHostNode                      = apiGetFunctionAddress(CU.getLibrary(), "cuGraphAddHostNode"),
+            GraphHostNodeGetParams                = apiGetFunctionAddress(CU.getLibrary(), "cuGraphHostNodeGetParams"),
+            GraphHostNodeSetParams                = apiGetFunctionAddress(CU.getLibrary(), "cuGraphHostNodeSetParams"),
+            GraphAddChildGraphNode                = apiGetFunctionAddress(CU.getLibrary(), "cuGraphAddChildGraphNode"),
+            GraphChildGraphNodeGetGraph           = apiGetFunctionAddress(CU.getLibrary(), "cuGraphChildGraphNodeGetGraph"),
+            GraphAddEmptyNode                     = apiGetFunctionAddress(CU.getLibrary(), "cuGraphAddEmptyNode"),
+            GraphClone                            = apiGetFunctionAddress(CU.getLibrary(), "cuGraphClone"),
+            GraphNodeFindInClone                  = apiGetFunctionAddress(CU.getLibrary(), "cuGraphNodeFindInClone"),
+            GraphNodeGetType                      = apiGetFunctionAddress(CU.getLibrary(), "cuGraphNodeGetType"),
+            GraphGetNodes                         = apiGetFunctionAddress(CU.getLibrary(), "cuGraphGetNodes"),
+            GraphGetRootNodes                     = apiGetFunctionAddress(CU.getLibrary(), "cuGraphGetRootNodes"),
+            GraphGetEdges                         = apiGetFunctionAddress(CU.getLibrary(), "cuGraphGetEdges"),
+            GraphNodeGetDependencies              = apiGetFunctionAddress(CU.getLibrary(), "cuGraphNodeGetDependencies"),
+            GraphNodeGetDependentNodes            = apiGetFunctionAddress(CU.getLibrary(), "cuGraphNodeGetDependentNodes"),
+            GraphAddDependencies                  = apiGetFunctionAddress(CU.getLibrary(), "cuGraphAddDependencies"),
+            GraphRemoveDependencies               = apiGetFunctionAddress(CU.getLibrary(), "cuGraphRemoveDependencies"),
+            GraphDestroyNode                      = apiGetFunctionAddress(CU.getLibrary(), "cuGraphDestroyNode"),
+            GraphInstantiate                      = apiGetFunctionAddress(CU.getLibrary(), "cuGraphInstantiate"),
+            GraphLaunch                           = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuGraphLaunch")),
+            GraphExecDestroy                      = apiGetFunctionAddress(CU.getLibrary(), "cuGraphExecDestroy"),
+            GraphDestroy                          = apiGetFunctionAddress(CU.getLibrary(), "cuGraphDestroy");
+
+    }
+
     /** Indicates that the external memory object is a dedicated resource. */
     public static final int CUDA_EXTERNAL_MEMORY_DEDICATED = 0x1;
 
@@ -104,60 +158,6 @@ public class CU100 extends CU92 {
 
     protected CU100() {
         throw new UnsupportedOperationException();
-    }
-
-    /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            DeviceGetLuid                         = CU.getLibrary().getFunctionAddress("cuDeviceGetLuid"),
-            StreamBeginCapture                    = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuStreamBeginCapture")),
-            StreamEndCapture                      = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuStreamEndCapture")),
-            StreamIsCapturing                     = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuStreamIsCapturing")),
-            ImportExternalMemory                  = apiGetFunctionAddress(CU.getLibrary(), "cuImportExternalMemory"),
-            ExternalMemoryGetMappedBuffer         = apiGetFunctionAddress(CU.getLibrary(), "cuExternalMemoryGetMappedBuffer"),
-            ExternalMemoryGetMappedMipmappedArray = apiGetFunctionAddress(CU.getLibrary(), "cuExternalMemoryGetMappedMipmappedArray"),
-            DestroyExternalMemory                 = apiGetFunctionAddress(CU.getLibrary(), "cuDestroyExternalMemory"),
-            ImportExternalSemaphore               = apiGetFunctionAddress(CU.getLibrary(), "cuImportExternalSemaphore"),
-            SignalExternalSemaphoresAsync         = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuSignalExternalSemaphoresAsync")),
-            WaitExternalSemaphoresAsync           = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuWaitExternalSemaphoresAsync")),
-            DestroyExternalSemaphore              = apiGetFunctionAddress(CU.getLibrary(), "cuDestroyExternalSemaphore"),
-            LaunchHostFunc                        = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuLaunchHostFunc")),
-            GraphCreate                           = apiGetFunctionAddress(CU.getLibrary(), "cuGraphCreate"),
-            GraphAddKernelNode                    = apiGetFunctionAddress(CU.getLibrary(), "cuGraphAddKernelNode"),
-            GraphKernelNodeGetParams              = apiGetFunctionAddress(CU.getLibrary(), "cuGraphKernelNodeGetParams"),
-            GraphKernelNodeSetParams              = apiGetFunctionAddress(CU.getLibrary(), "cuGraphKernelNodeSetParams"),
-            GraphAddMemcpyNode                    = apiGetFunctionAddress(CU.getLibrary(), "cuGraphAddMemcpyNode"),
-            GraphMemcpyNodeGetParams              = apiGetFunctionAddress(CU.getLibrary(), "cuGraphMemcpyNodeGetParams"),
-            GraphMemcpyNodeSetParams              = apiGetFunctionAddress(CU.getLibrary(), "cuGraphMemcpyNodeSetParams"),
-            GraphAddMemsetNode                    = apiGetFunctionAddress(CU.getLibrary(), "cuGraphAddMemsetNode"),
-            GraphMemsetNodeGetParams              = apiGetFunctionAddress(CU.getLibrary(), "cuGraphMemsetNodeGetParams"),
-            GraphMemsetNodeSetParams              = apiGetFunctionAddress(CU.getLibrary(), "cuGraphMemsetNodeSetParams"),
-            GraphAddHostNode                      = apiGetFunctionAddress(CU.getLibrary(), "cuGraphAddHostNode"),
-            GraphHostNodeGetParams                = apiGetFunctionAddress(CU.getLibrary(), "cuGraphHostNodeGetParams"),
-            GraphHostNodeSetParams                = apiGetFunctionAddress(CU.getLibrary(), "cuGraphHostNodeSetParams"),
-            GraphAddChildGraphNode                = apiGetFunctionAddress(CU.getLibrary(), "cuGraphAddChildGraphNode"),
-            GraphChildGraphNodeGetGraph           = apiGetFunctionAddress(CU.getLibrary(), "cuGraphChildGraphNodeGetGraph"),
-            GraphAddEmptyNode                     = apiGetFunctionAddress(CU.getLibrary(), "cuGraphAddEmptyNode"),
-            GraphClone                            = apiGetFunctionAddress(CU.getLibrary(), "cuGraphClone"),
-            GraphNodeFindInClone                  = apiGetFunctionAddress(CU.getLibrary(), "cuGraphNodeFindInClone"),
-            GraphNodeGetType                      = apiGetFunctionAddress(CU.getLibrary(), "cuGraphNodeGetType"),
-            GraphGetNodes                         = apiGetFunctionAddress(CU.getLibrary(), "cuGraphGetNodes"),
-            GraphGetRootNodes                     = apiGetFunctionAddress(CU.getLibrary(), "cuGraphGetRootNodes"),
-            GraphGetEdges                         = apiGetFunctionAddress(CU.getLibrary(), "cuGraphGetEdges"),
-            GraphNodeGetDependencies              = apiGetFunctionAddress(CU.getLibrary(), "cuGraphNodeGetDependencies"),
-            GraphNodeGetDependentNodes            = apiGetFunctionAddress(CU.getLibrary(), "cuGraphNodeGetDependentNodes"),
-            GraphAddDependencies                  = apiGetFunctionAddress(CU.getLibrary(), "cuGraphAddDependencies"),
-            GraphRemoveDependencies               = apiGetFunctionAddress(CU.getLibrary(), "cuGraphRemoveDependencies"),
-            GraphDestroyNode                      = apiGetFunctionAddress(CU.getLibrary(), "cuGraphDestroyNode"),
-            GraphInstantiate                      = apiGetFunctionAddress(CU.getLibrary(), "cuGraphInstantiate"),
-            GraphLaunch                           = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuGraphLaunch")),
-            GraphExecDestroy                      = apiGetFunctionAddress(CU.getLibrary(), "cuGraphExecDestroy"),
-            GraphDestroy                          = apiGetFunctionAddress(CU.getLibrary(), "cuGraphDestroy");
-
     }
 
     // --- [ cuDeviceGetLuid ] ---

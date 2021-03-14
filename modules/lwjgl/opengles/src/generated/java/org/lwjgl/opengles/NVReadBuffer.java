@@ -21,10 +21,10 @@ import org.lwjgl.system.*;
  */
 public class NVReadBuffer {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetIntegerv. */
     public static final int GL_READ_BUFFER_NV = 0xC02;
-
-    static { GLES.initialize(); }
 
     protected NVReadBuffer() {
         throw new UnsupportedOperationException();

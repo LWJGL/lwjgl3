@@ -19,6 +19,8 @@ import org.lwjgl.system.*;
  */
 public class NVMeshShader {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code type} parameter of {@link GL20C#glCreateShader CreateShader} and returned by the {@code params} parameter of {@link GL20C#glGetShaderiv GetShaderiv}. */
     public static final int
         GL_MESH_SHADER_NV = 0x9559,
@@ -96,8 +98,6 @@ public class NVMeshShader {
     public static final int
         GL_MESH_SHADER_BIT_NV = 0x40,
         GL_TASK_SHADER_BIT_NV = 0x80;
-
-    static { GL.initialize(); }
 
     protected NVMeshShader() {
         throw new UnsupportedOperationException();

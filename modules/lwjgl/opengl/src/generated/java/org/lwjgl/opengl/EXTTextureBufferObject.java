@@ -33,6 +33,8 @@ import org.lwjgl.system.*;
  */
 public class EXTTextureBufferObject {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code target} parameter of BindBuffer, BufferData, BufferSubData, MapBuffer, BindTexture, UnmapBuffer, GetBufferSubData,
      * GetBufferParameteriv, GetBufferPointerv, and TexBufferEXT, and the {@code pname} parameter of GetBooleanv, GetDoublev, GetFloatv, and GetIntegerv.
@@ -45,8 +47,6 @@ public class EXTTextureBufferObject {
         GL_TEXTURE_BINDING_BUFFER_EXT            = 0x8C2C,
         GL_TEXTURE_BUFFER_DATA_STORE_BINDING_EXT = 0x8C2D,
         GL_TEXTURE_BUFFER_FORMAT_EXT             = 0x8C2E;
-
-    static { GL.initialize(); }
 
     protected EXTTextureBufferObject() {
         throw new UnsupportedOperationException();

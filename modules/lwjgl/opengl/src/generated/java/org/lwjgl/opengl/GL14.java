@@ -38,6 +38,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class GL14 extends GL13 {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of TexParameteri, TexParameterf, TexParameteriv, TexParameterfv, GetTexParameteriv, and GetTexParameterfv. */
     public static final int GL_GENERATE_MIPMAP = 0x8191;
 
@@ -160,8 +162,6 @@ public class GL14 extends GL13 {
      * when their {@code pname} parameter is TEXTURE_WRAP_S, TEXTURE_WRAP_T, or TEXTURE_WRAP_R.
      */
     public static final int GL_MIRRORED_REPEAT = 0x8370;
-
-    static { GL.initialize(); }
 
     protected GL14() {
         throw new UnsupportedOperationException();

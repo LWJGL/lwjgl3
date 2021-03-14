@@ -19,10 +19,6 @@ import static org.lwjgl.cuda.CUDA.*;
 /** Contains bindings to <a href="https://docs.nvidia.com/cuda/cuda-driver-api/index.html">CUDA Driver API</a>. */
 public class CU92 extends CU90 {
 
-    protected CU92() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
     public static final class Functions {
 
@@ -33,6 +29,10 @@ public class CU92 extends CU90 {
             DeviceGetUuid = apiGetFunctionAddress(CU.getLibrary(), "cuDeviceGetUuid"),
             StreamGetCtx  = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuStreamGetCtx"));
 
+    }
+
+    protected CU92() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ cuDeviceGetUuid ] ---

@@ -16,6 +16,20 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class LLVMAnalysis {
 
+    /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            VerifyModule        = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMVerifyModule"),
+            VerifyFunction      = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMVerifyFunction"),
+            ViewFunctionCFG     = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMViewFunctionCFG"),
+            ViewFunctionCFGOnly = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMViewFunctionCFGOnly");
+
+    }
+
     /**
      * <h5>Enum values:</h5>
      * 
@@ -32,20 +46,6 @@ public class LLVMAnalysis {
 
     protected LLVMAnalysis() {
         throw new UnsupportedOperationException();
-    }
-
-    /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            VerifyModule        = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMVerifyModule"),
-            VerifyFunction      = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMVerifyFunction"),
-            ViewFunctionCFG     = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMViewFunctionCFG"),
-            ViewFunctionCFGOnly = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMViewFunctionCFGOnly");
-
     }
 
     // --- [ LLVMVerifyModule ] ---

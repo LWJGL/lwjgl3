@@ -5,8 +5,6 @@
  */
 package org.lwjgl.util.spvc;
 
-import org.lwjgl.system.*;
-
 /** Enumeration tokens for SPIR-V. */
 public final class Spv {
 
@@ -3322,15 +3320,6 @@ public final class Spv {
         SpvOpAtomicFAddEXT                                                         = 6035,
         SpvOpMax                                                                   = 0x7fffffff;
 
-    private Spv() {
-        throw new UnsupportedOperationException();
-    }
-
-    private static final SharedLibrary SPVC = Library.loadNative(Spv.class, "org.lwjgl.spvc", Configuration.SPVC_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("spirv-cross")), true);
-
-    /** Returns the spvc {@link SharedLibrary}. */
-    public static SharedLibrary getLibrary() {
-        return SPVC;
-    }
+    private Spv() {}
 
 }

@@ -35,6 +35,8 @@ import org.lwjgl.system.*;
  */
 public class NVCoverageSample {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code internalformat} parameter of RenderbufferStorageEXT and the {@code format} parameter of ReadPixels. */
     public static final int GL_COVERAGE_COMPONENT_NV = 0x8ED0;
 
@@ -57,8 +59,6 @@ public class NVCoverageSample {
     public static final int
         GL_COVERAGE_BUFFERS_NV = 0x8ED3,
         GL_COVERAGE_SAMPLES_NV = 0x8ED4;
-
-    static { GLES.initialize(); }
 
     protected NVCoverageSample() {
         throw new UnsupportedOperationException();

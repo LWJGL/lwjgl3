@@ -19,11 +19,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Native bindings to the dictionary builder API of <a target="_blank" href="http://facebook.github.io/zstd/">Zstandard</a> (zstd). */
 public class Zdict {
 
+    static { LibZstd.initialize(); }
+
     public static final int
         ZDICT_CONTENTSIZE_MIN = 128,
         ZDICT_DICTSIZE_MIN    = 256;
-
-    static { LibZstd.initialize(); }
 
     protected Zdict() {
         throw new UnsupportedOperationException();

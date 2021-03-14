@@ -24,10 +24,6 @@ import static org.lwjgl.cuda.CUDA.*;
  */
 public class CUWGL {
 
-    protected CUWGL() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
     public static final class Functions {
 
@@ -37,6 +33,10 @@ public class CUWGL {
         public static final long
             WGLGetDevice = apiGetFunctionAddress(CU.getLibrary(), "cuWGLGetDevice");
 
+    }
+
+    protected CUWGL() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ cuWGLGetDevice ] ---

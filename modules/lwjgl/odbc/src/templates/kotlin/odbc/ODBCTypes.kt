@@ -8,7 +8,6 @@ import org.lwjgl.generator.*
 import core.windows.*
 
 val ODBC_BINDING = simpleBinding(Module.ODBC, libraryExpression = "Configuration.ODBC_LIBRARY_NAME, \"odbc32\", \"odbc\"")
-val ODBC_BINDING_DELEGATE = ODBC_BINDING.delegate("SQL.getLibrary()")
 
 val SQLCHAR = typedef(unsigned_char, "SQLCHAR")
 val SQLSCHAR = IntegerType("SQLSCHAR", PrimitiveMapping.BYTE, unsigned = true)

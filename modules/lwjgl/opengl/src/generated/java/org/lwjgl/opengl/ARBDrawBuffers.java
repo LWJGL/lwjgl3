@@ -23,6 +23,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class ARBDrawBuffers {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameters of GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int
         GL_MAX_DRAW_BUFFERS_ARB = 0x8824,
@@ -42,8 +44,6 @@ public class ARBDrawBuffers {
         GL_DRAW_BUFFER13_ARB    = 0x8832,
         GL_DRAW_BUFFER14_ARB    = 0x8833,
         GL_DRAW_BUFFER15_ARB    = 0x8834;
-
-    static { GL.initialize(); }
 
     protected ARBDrawBuffers() {
         throw new UnsupportedOperationException();

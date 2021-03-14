@@ -22,6 +22,8 @@ import org.lwjgl.system.*;
  */
 public class ARBShaderSubroutine {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetProgramStageiv. */
     public static final int
         GL_ACTIVE_SUBROUTINES                   = 0x8DE5,
@@ -39,8 +41,6 @@ public class ARBShaderSubroutine {
     public static final int
         GL_NUM_COMPATIBLE_SUBROUTINES = 0x8E4A,
         GL_COMPATIBLE_SUBROUTINES     = 0x8E4B;
-
-    static { GL.initialize(); }
 
     protected ARBShaderSubroutine() {
         throw new UnsupportedOperationException();

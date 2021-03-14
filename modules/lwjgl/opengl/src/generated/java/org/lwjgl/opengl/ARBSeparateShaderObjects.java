@@ -63,6 +63,8 @@ import org.lwjgl.system.*;
  */
 public class ARBSeparateShaderObjects {
 
+    static { GL.initialize(); }
+
     /** Accepted by {@code stages} parameter to UseProgramStages. */
     public static final int
         GL_VERTEX_SHADER_BIT          = 0x1,
@@ -80,8 +82,6 @@ public class ARBSeparateShaderObjects {
 
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int GL_PROGRAM_PIPELINE_BINDING = 0x825A;
-
-    static { GL.initialize(); }
 
     protected ARBSeparateShaderObjects() {
         throw new UnsupportedOperationException();

@@ -48,6 +48,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVPixelDataRange {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code target} parameter of PixelDataRangeNV and FlushPixelDataRangeNV, and by the {@code cap} parameter of EnableClientState,
      * DisableClientState, and IsEnabled.
@@ -65,8 +67,6 @@ public class NVPixelDataRange {
     public static final int
         GL_WRITE_PIXEL_DATA_RANGE_POINTER_NV = 0x887C,
         GL_READ_PIXEL_DATA_RANGE_POINTER_NV  = 0x887D;
-
-    static { GL.initialize(); }
 
     protected NVPixelDataRange() {
         throw new UnsupportedOperationException();

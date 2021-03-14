@@ -19,6 +19,8 @@ import static org.lwjgl.util.zstd.Zstd.*;
 /** Native bindings to the experimental API of <a target="_blank" href="http://facebook.github.io/zstd/">Zstandard</a> (zstd). */
 public class ZstdX {
 
+    static { LibZstd.initialize(); }
+
     /**
      * {@code ZSTD_dictContentType_e}
      * 
@@ -290,8 +292,6 @@ public class ZstdX {
         ZSTD_lcm_auto         = 0,
         ZSTD_lcm_huffman      = 1,
         ZSTD_lcm_uncompressed = 2;
-
-    static { LibZstd.initialize(); }
 
     protected ZstdX() {
         throw new UnsupportedOperationException();

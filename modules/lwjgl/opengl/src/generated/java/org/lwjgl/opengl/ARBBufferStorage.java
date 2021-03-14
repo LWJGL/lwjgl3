@@ -32,6 +32,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class ARBBufferStorage {
 
+    static { GL.initialize(); }
+
     /** Accepted in the {@code flags} parameter of {@link #glBufferStorage BufferStorage} and {@link #glNamedBufferStorageEXT NamedBufferStorageEXT}. */
     public static final int
         GL_MAP_PERSISTENT_BIT  = 0x40,
@@ -46,8 +48,6 @@ public class ARBBufferStorage {
 
     /** Accepted by the {@code barriers} parameter of {@link GL42C#glMemoryBarrier MemoryBarrier}. */
     public static final int GL_CLIENT_MAPPED_BUFFER_BARRIER_BIT = 0x4000;
-
-    static { GL.initialize(); }
 
     protected ARBBufferStorage() {
         throw new UnsupportedOperationException();

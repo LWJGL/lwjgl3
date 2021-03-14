@@ -36,6 +36,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class GL33C extends GL32C {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code src} and {@code dst} parameters of BlendFunc and BlendFunci, and by the {@code srcRGB}, {@code dstRGB}, {@code srcAlpha} and
      * {@code dstAlpha} parameters of BlendFuncSeparate and BlendFuncSeparatei.
@@ -87,8 +89,6 @@ public class GL33C extends GL32C {
      * VertexAttribP{1234}ui, VertexP*, TexCoordP*, MultiTexCoordP*, NormalP3ui, ColorP*, SecondaryColorP* and VertexAttribP*.
      */
     public static final int GL_INT_2_10_10_10_REV = 0x8D9F;
-
-    static { GL.initialize(); }
 
     protected GL33C() {
         throw new UnsupportedOperationException();

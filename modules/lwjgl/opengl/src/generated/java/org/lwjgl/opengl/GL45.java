@@ -41,6 +41,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class GL45 extends GL44 {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code depth} parameter of {@link #glClipControl ClipControl}. */
     public static final int
         GL_NEGATIVE_ONE_TO_ONE = 0x935E,
@@ -94,8 +96,6 @@ public class GL45 extends GL44 {
 
     /** Returned by {@link GL11C#glGetError GetError}. */
     public static final int GL_CONTEXT_LOST = 0x507;
-
-    static { GL.initialize(); }
 
     protected GL45() {
         throw new UnsupportedOperationException();

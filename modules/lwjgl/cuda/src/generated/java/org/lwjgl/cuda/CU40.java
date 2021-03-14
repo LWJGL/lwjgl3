@@ -23,6 +23,36 @@ import static org.lwjgl.cuda.CUDA.*;
 /** Contains bindings to <a href="https://docs.nvidia.com/cuda/cuda-driver-api/index.html">CUDA Driver API</a>. */
 public class CU40 extends CU {
 
+    /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            CtxDestroy           = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_VERSION("cuCtxDestroy", 2)),
+            CtxPushCurrent       = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_VERSION("cuCtxPushCurrent", 2)),
+            CtxPopCurrent        = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_VERSION("cuCtxPopCurrent", 2)),
+            CtxSetCurrent        = apiGetFunctionAddress(CU.getLibrary(), "cuCtxSetCurrent"),
+            CtxGetCurrent        = apiGetFunctionAddress(CU.getLibrary(), "cuCtxGetCurrent"),
+            MemHostRegister      = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_VERSION("cuMemHostRegister", 2)),
+            MemHostUnregister    = apiGetFunctionAddress(CU.getLibrary(), "cuMemHostUnregister"),
+            Memcpy               = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTDS("cuMemcpy")),
+            MemcpyPeer           = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTDS("cuMemcpyPeer")),
+            Memcpy3DPeer         = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTDS("cuMemcpy3DPeer")),
+            MemcpyAsync          = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuMemcpyAsync")),
+            MemcpyPeerAsync      = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuMemcpyPeerAsync")),
+            Memcpy3DPeerAsync    = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuMemcpy3DPeerAsync")),
+            PointerGetAttribute  = apiGetFunctionAddress(CU.getLibrary(), "cuPointerGetAttribute"),
+            StreamDestroy        = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_VERSION("cuStreamDestroy", 2)),
+            EventDestroy         = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_VERSION("cuEventDestroy", 2)),
+            LaunchKernel         = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuLaunchKernel")),
+            DeviceCanAccessPeer  = apiGetFunctionAddress(CU.getLibrary(), "cuDeviceCanAccessPeer"),
+            CtxEnablePeerAccess  = apiGetFunctionAddress(CU.getLibrary(), "cuCtxEnablePeerAccess"),
+            CtxDisablePeerAccess = apiGetFunctionAddress(CU.getLibrary(), "cuCtxDisablePeerAccess");
+
+    }
+
     /** End of array terminator for the {@code extra} parameter to {@link #cuLaunchKernel LaunchKernel}. */
     public static final long CU_LAUNCH_PARAM_END = 0x0L;
 
@@ -74,36 +104,6 @@ public class CU40 extends CU {
 
     protected CU40() {
         throw new UnsupportedOperationException();
-    }
-
-    /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            CtxDestroy           = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_VERSION("cuCtxDestroy", 2)),
-            CtxPushCurrent       = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_VERSION("cuCtxPushCurrent", 2)),
-            CtxPopCurrent        = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_VERSION("cuCtxPopCurrent", 2)),
-            CtxSetCurrent        = apiGetFunctionAddress(CU.getLibrary(), "cuCtxSetCurrent"),
-            CtxGetCurrent        = apiGetFunctionAddress(CU.getLibrary(), "cuCtxGetCurrent"),
-            MemHostRegister      = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_VERSION("cuMemHostRegister", 2)),
-            MemHostUnregister    = apiGetFunctionAddress(CU.getLibrary(), "cuMemHostUnregister"),
-            Memcpy               = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTDS("cuMemcpy")),
-            MemcpyPeer           = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTDS("cuMemcpyPeer")),
-            Memcpy3DPeer         = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTDS("cuMemcpy3DPeer")),
-            MemcpyAsync          = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuMemcpyAsync")),
-            MemcpyPeerAsync      = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuMemcpyPeerAsync")),
-            Memcpy3DPeerAsync    = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuMemcpy3DPeerAsync")),
-            PointerGetAttribute  = apiGetFunctionAddress(CU.getLibrary(), "cuPointerGetAttribute"),
-            StreamDestroy        = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_VERSION("cuStreamDestroy", 2)),
-            EventDestroy         = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_VERSION("cuEventDestroy", 2)),
-            LaunchKernel         = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuLaunchKernel")),
-            DeviceCanAccessPeer  = apiGetFunctionAddress(CU.getLibrary(), "cuDeviceCanAccessPeer"),
-            CtxEnablePeerAccess  = apiGetFunctionAddress(CU.getLibrary(), "cuCtxEnablePeerAccess"),
-            CtxDisablePeerAccess = apiGetFunctionAddress(CU.getLibrary(), "cuCtxDisablePeerAccess");
-
     }
 
     // --- [ cuCtxDestroy ] ---

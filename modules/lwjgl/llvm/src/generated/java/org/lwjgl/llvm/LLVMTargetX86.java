@@ -12,10 +12,6 @@ import static org.lwjgl.system.JNI.*;
 
 public class LLVMTargetX86 {
 
-    protected LLVMTargetX86() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */
     public static final class Functions {
 
@@ -30,6 +26,10 @@ public class LLVMTargetX86 {
             InitializeX86AsmParser    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMInitializeX86AsmParser"),
             InitializeX86Disassembler = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMInitializeX86Disassembler");
 
+    }
+
+    protected LLVMTargetX86() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ LLVMInitializeX86TargetInfo ] ---

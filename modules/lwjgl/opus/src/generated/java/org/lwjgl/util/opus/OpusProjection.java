@@ -20,26 +20,6 @@ import static org.lwjgl.util.opus.Opus.*;
 
 public class OpusProjection {
 
-    /**
-     * Projection CTLs
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #OPUS_PROJECTION_GET_DEMIXING_MATRIX_GAIN_REQUEST PROJECTION_GET_DEMIXING_MATRIX_GAIN_REQUEST}</li>
-     * <li>{@link #OPUS_PROJECTION_GET_DEMIXING_MATRIX_SIZE_REQUEST PROJECTION_GET_DEMIXING_MATRIX_SIZE_REQUEST}</li>
-     * <li>{@link #OPUS_PROJECTION_GET_DEMIXING_MATRIX_REQUEST PROJECTION_GET_DEMIXING_MATRIX_REQUEST}</li>
-     * </ul>
-     */
-    public static final int
-        OPUS_PROJECTION_GET_DEMIXING_MATRIX_GAIN_REQUEST = 6001,
-        OPUS_PROJECTION_GET_DEMIXING_MATRIX_SIZE_REQUEST = 6003,
-        OPUS_PROJECTION_GET_DEMIXING_MATRIX_REQUEST      = 6005;
-
-    protected OpusProjection() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code Opus.getLibrary()}. */
     public static final class Functions {
 
@@ -62,6 +42,26 @@ public class OpusProjection {
             projection_decoder_ctl                 = apiGetFunctionAddress(Opus.getLibrary(), "opus_projection_decoder_ctl"),
             projection_decoder_destroy             = apiGetFunctionAddress(Opus.getLibrary(), "opus_projection_decoder_destroy");
 
+    }
+
+    /**
+     * Projection CTLs
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #OPUS_PROJECTION_GET_DEMIXING_MATRIX_GAIN_REQUEST PROJECTION_GET_DEMIXING_MATRIX_GAIN_REQUEST}</li>
+     * <li>{@link #OPUS_PROJECTION_GET_DEMIXING_MATRIX_SIZE_REQUEST PROJECTION_GET_DEMIXING_MATRIX_SIZE_REQUEST}</li>
+     * <li>{@link #OPUS_PROJECTION_GET_DEMIXING_MATRIX_REQUEST PROJECTION_GET_DEMIXING_MATRIX_REQUEST}</li>
+     * </ul>
+     */
+    public static final int
+        OPUS_PROJECTION_GET_DEMIXING_MATRIX_GAIN_REQUEST = 6001,
+        OPUS_PROJECTION_GET_DEMIXING_MATRIX_SIZE_REQUEST = 6003,
+        OPUS_PROJECTION_GET_DEMIXING_MATRIX_REQUEST      = 6005;
+
+    protected OpusProjection() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ opus_projection_ambisonics_encoder_get_size ] ---

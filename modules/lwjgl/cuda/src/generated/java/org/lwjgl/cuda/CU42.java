@@ -17,6 +17,19 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Contains bindings to <a href="https://docs.nvidia.com/cuda/cuda-driver-api/index.html">CUDA Driver API</a>. */
 public class CU42 extends CU41 {
 
+    /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            CtxGetSharedMemConfig  = apiGetFunctionAddress(CU.getLibrary(), "cuCtxGetSharedMemConfig"),
+            CtxSetSharedMemConfig  = apiGetFunctionAddress(CU.getLibrary(), "cuCtxSetSharedMemConfig"),
+            FuncSetSharedMemConfig = apiGetFunctionAddress(CU.getLibrary(), "cuFuncSetSharedMemConfig");
+
+    }
+
     /**
      * Shared memory configurations. ({@code CUsharedconfig})
      * 
@@ -53,19 +66,6 @@ public class CU42 extends CU41 {
 
     protected CU42() {
         throw new UnsupportedOperationException();
-    }
-
-    /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            CtxGetSharedMemConfig  = apiGetFunctionAddress(CU.getLibrary(), "cuCtxGetSharedMemConfig"),
-            CtxSetSharedMemConfig  = apiGetFunctionAddress(CU.getLibrary(), "cuCtxSetSharedMemConfig"),
-            FuncSetSharedMemConfig = apiGetFunctionAddress(CU.getLibrary(), "cuFuncSetSharedMemConfig");
-
     }
 
     // --- [ cuCtxGetSharedMemConfig ] ---

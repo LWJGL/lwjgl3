@@ -28,6 +28,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVScissorExclusive {
 
+    static { GLES.initialize(); }
+
     /**
      * Accepted by the {@code cap} parameter of {@link GLES20#glEnable Enable}, {@link GLES20#glDisable Disable}, and {@link GLES20#glIsEnabled IsEnabled}, by the {@code target} parameter of {@link GLES32#glEnablei Enablei}, {@link GLES32#glDisablei Disablei} and
      * {@link GLES32#glIsEnabledi IsEnabledi}, and by the {@code pname} parameter of {@link GLES20#glGetBooleanv GetBooleanv}, {@link GLES20#glGetIntegerv GetIntegerv}, {@link GLES30#glGetInteger64v GetInteger64v}, {@link GLES20#glGetFloatv GetFloatv}, {@link GLES31#glGetBooleani_v GetBooleani_v}, {@link GLES30#glGetIntegeri_v GetIntegeri_v}
@@ -40,8 +42,6 @@ public class NVScissorExclusive {
      * {@link GLES30#glGetInteger64i_v GetInteger64i_v}.
      */
     public static final int GL_SCISSOR_BOX_EXCLUSIVE_NV = 0x9556;
-
-    static { GLES.initialize(); }
 
     protected NVScissorExclusive() {
         throw new UnsupportedOperationException();

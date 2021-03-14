@@ -30,6 +30,8 @@ import org.lwjgl.system.*;
  */
 public class ARBSync {
 
+    static { GL.initialize(); }
+
     /** Accepted as the {@code pname} parameter of GetInteger64v. */
     public static final int GL_MAX_SERVER_WAIT_TIMEOUT = 0x9111;
 
@@ -63,8 +65,6 @@ public class ARBSync {
         GL_TIMEOUT_EXPIRED     = 0x911B,
         GL_CONDITION_SATISFIED = 0x911C,
         GL_WAIT_FAILED         = 0x911D;
-
-    static { GL.initialize(); }
 
     protected ARBSync() {
         throw new UnsupportedOperationException();

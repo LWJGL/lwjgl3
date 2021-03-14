@@ -33,6 +33,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVPointSprite {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
      * GetDoublev, and by the {@code target} parameter of TexEnvi, TexEnviv, TexEnvf, TexEnvfv, GetTexEnviv, and GetTexEnvfv.
@@ -50,8 +52,6 @@ public class NVPointSprite {
      * GetFloatv, and GetDoublev.
      */
     public static final int GL_POINT_SPRITE_R_MODE_NV = 0x8863;
-
-    static { GL.initialize(); }
 
     protected NVPointSprite() {
         throw new UnsupportedOperationException();

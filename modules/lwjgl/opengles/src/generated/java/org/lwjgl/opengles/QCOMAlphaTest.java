@@ -15,6 +15,8 @@ import org.lwjgl.system.*;
  */
 public class QCOMAlphaTest {
 
+    static { GLES.initialize(); }
+
     /**
      * Accepted by the {@code cap} parameter of Enable and Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, and
      * GetFloatv.
@@ -25,8 +27,6 @@ public class QCOMAlphaTest {
     public static final int
         GL_ALPHA_TEST_FUNC_QCOM = 0xBC1,
         GL_ALPHA_TEST_REF_QCOM  = 0xBC2;
-
-    static { GLES.initialize(); }
 
     protected QCOMAlphaTest() {
         throw new UnsupportedOperationException();

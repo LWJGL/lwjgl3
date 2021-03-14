@@ -18,13 +18,13 @@ import org.lwjgl.system.*;
  */
 public class ARBSparseBuffer {
 
+    static { GL.initialize(); }
+
     /** Accepted as part of the {@code flags} parameter to {@link GL44C#glBufferStorage BufferStorage}. */
     public static final int GL_SPARSE_STORAGE_BIT_ARB = 0x400;
 
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetFloatv, GetIntegerv, and GetInteger64v. */
     public static final int GL_SPARSE_BUFFER_PAGE_SIZE_ARB = 0x82F8;
-
-    static { GL.initialize(); }
 
     protected ARBSparseBuffer() {
         throw new UnsupportedOperationException();

@@ -22,6 +22,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVNonSquareMatrices {
 
+    static { GLES.initialize(); }
+
     /** Returned by GetActiveAttrib and GetActiveUniform. */
     public static final int
         GL_FLOAT_MAT2x3_NV = 0x8B65,
@@ -30,8 +32,6 @@ public class NVNonSquareMatrices {
         GL_FLOAT_MAT3x4_NV = 0x8B68,
         GL_FLOAT_MAT4x2_NV = 0x8B69,
         GL_FLOAT_MAT4x3_NV = 0x8B6A;
-
-    static { GLES.initialize(); }
 
     protected NVNonSquareMatrices() {
         throw new UnsupportedOperationException();

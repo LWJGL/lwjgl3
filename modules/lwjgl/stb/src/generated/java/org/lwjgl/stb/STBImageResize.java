@@ -63,6 +63,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class STBImageResize {
 
+    static { LibSTB.initialize(); }
+
     /** Set this flag if you have no alpha channel, or otherwise provide the index of the alpha channel. */
     public static final int STBIR_ALPHA_CHANNEL_NONE = -1;
 
@@ -146,8 +148,6 @@ public class STBImageResize {
         STBIR_TYPE_UINT16 = 1,
         STBIR_TYPE_UINT32 = 2,
         STBIR_TYPE_FLOAT  = 3;
-
-    static { LibSTB.initialize(); }
 
     protected STBImageResize() {
         throw new UnsupportedOperationException();

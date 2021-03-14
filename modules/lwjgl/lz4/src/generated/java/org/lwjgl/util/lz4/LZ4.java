@@ -72,6 +72,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class LZ4 {
 
+    static { LibLZ4.initialize(); }
+
     /** Version number part. */
     public static final int
         LZ4_VERSION_MAJOR   = 1,
@@ -111,8 +113,6 @@ public class LZ4 {
 
     /** History window size; can be user-defined at compile time. */
     public static final int LZ4_DISTANCE_MAX = 64;
-
-    static { LibLZ4.initialize(); }
 
     protected LZ4() {
         throw new UnsupportedOperationException();

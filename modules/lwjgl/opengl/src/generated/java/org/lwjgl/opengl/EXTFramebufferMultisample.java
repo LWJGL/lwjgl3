@@ -54,6 +54,8 @@ import org.lwjgl.system.*;
  */
 public class EXTFramebufferMultisample {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetRenderbufferParameterivEXT. */
     public static final int GL_RENDERBUFFER_SAMPLES_EXT = 0x8CAB;
 
@@ -62,8 +64,6 @@ public class EXTFramebufferMultisample {
 
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_MAX_SAMPLES_EXT = 0x8D57;
-
-    static { GL.initialize(); }
 
     protected EXTFramebufferMultisample() {
         throw new UnsupportedOperationException();

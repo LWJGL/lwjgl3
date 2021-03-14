@@ -16,10 +16,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class LLVMBitReader {
 
-    protected LLVMBitReader() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */
     public static final class Functions {
 
@@ -36,6 +32,10 @@ public class LLVMBitReader {
             GetBitcodeModule           = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetBitcodeModule"),
             GetBitcodeModule2          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetBitcodeModule2");
 
+    }
+
+    protected LLVMBitReader() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ LLVMParseBitcode ] ---

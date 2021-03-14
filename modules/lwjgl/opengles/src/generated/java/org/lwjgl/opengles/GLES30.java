@@ -22,6 +22,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** The core OpenGL ES 3.0 functionality. */
 public class GLES30 extends GLES20 {
 
+    static { GLES.initialize(); }
+
     public static final int
         GL_READ_BUFFER                                   = 0xC02,
         GL_UNPACK_ROW_LENGTH                             = 0xCF2,
@@ -345,8 +347,6 @@ public class GLES30 extends GLES20 {
         GL_TEXTURE_IMMUTABLE_LEVELS                      = 0x82DF;
 
     public static final long GL_TIMEOUT_IGNORED = 0xFFFFFFFFFFFFFFFFL;
-
-    static { GLES.initialize(); }
 
     protected GLES30() {
         throw new UnsupportedOperationException();

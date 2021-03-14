@@ -301,6 +301,59 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  */
 public class Opus {
 
+    private static final SharedLibrary OPUS = Library.loadNative(Opus.class, "org.lwjgl.opus", Configuration.OPUS_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("opus")), true);
+
+    /** Contains the function pointers loaded from the opus {@link SharedLibrary}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            encoder_get_size             = apiGetFunctionAddress(OPUS, "opus_encoder_get_size"),
+            encoder_create               = apiGetFunctionAddress(OPUS, "opus_encoder_create"),
+            encoder_init                 = apiGetFunctionAddress(OPUS, "opus_encoder_init"),
+            encode                       = apiGetFunctionAddress(OPUS, "opus_encode"),
+            encode_float                 = apiGetFunctionAddress(OPUS, "opus_encode_float"),
+            encoder_destroy              = apiGetFunctionAddress(OPUS, "opus_encoder_destroy"),
+            encoder_ctl                  = apiGetFunctionAddress(OPUS, "opus_encoder_ctl"),
+            decoder_get_size             = apiGetFunctionAddress(OPUS, "opus_decoder_get_size"),
+            decoder_create               = apiGetFunctionAddress(OPUS, "opus_decoder_create"),
+            decoder_init                 = apiGetFunctionAddress(OPUS, "opus_decoder_init"),
+            decode                       = apiGetFunctionAddress(OPUS, "opus_decode"),
+            decode_float                 = apiGetFunctionAddress(OPUS, "opus_decode_float"),
+            decoder_ctl                  = apiGetFunctionAddress(OPUS, "opus_decoder_ctl"),
+            decoder_destroy              = apiGetFunctionAddress(OPUS, "opus_decoder_destroy"),
+            packet_parse                 = apiGetFunctionAddress(OPUS, "opus_packet_parse"),
+            packet_get_bandwidth         = apiGetFunctionAddress(OPUS, "opus_packet_get_bandwidth"),
+            packet_get_samples_per_frame = apiGetFunctionAddress(OPUS, "opus_packet_get_samples_per_frame"),
+            packet_get_nb_channels       = apiGetFunctionAddress(OPUS, "opus_packet_get_nb_channels"),
+            packet_get_nb_frames         = apiGetFunctionAddress(OPUS, "opus_packet_get_nb_frames"),
+            packet_get_nb_samples        = apiGetFunctionAddress(OPUS, "opus_packet_get_nb_samples"),
+            decoder_get_nb_samples       = apiGetFunctionAddress(OPUS, "opus_decoder_get_nb_samples"),
+            pcm_soft_clip                = apiGetFunctionAddress(OPUS, "opus_pcm_soft_clip"),
+            repacketizer_get_size        = apiGetFunctionAddress(OPUS, "opus_repacketizer_get_size"),
+            repacketizer_init            = apiGetFunctionAddress(OPUS, "opus_repacketizer_init"),
+            repacketizer_create          = apiGetFunctionAddress(OPUS, "opus_repacketizer_create"),
+            repacketizer_destroy         = apiGetFunctionAddress(OPUS, "opus_repacketizer_destroy"),
+            repacketizer_cat             = apiGetFunctionAddress(OPUS, "opus_repacketizer_cat"),
+            repacketizer_out_range       = apiGetFunctionAddress(OPUS, "opus_repacketizer_out_range"),
+            repacketizer_get_nb_frames   = apiGetFunctionAddress(OPUS, "opus_repacketizer_get_nb_frames"),
+            repacketizer_out             = apiGetFunctionAddress(OPUS, "opus_repacketizer_out"),
+            packet_pad                   = apiGetFunctionAddress(OPUS, "opus_packet_pad"),
+            packet_unpad                 = apiGetFunctionAddress(OPUS, "opus_packet_unpad"),
+            multistream_packet_pad       = apiGetFunctionAddress(OPUS, "opus_multistream_packet_pad"),
+            multistream_packet_unpad     = apiGetFunctionAddress(OPUS, "opus_multistream_packet_unpad"),
+            strerror                     = apiGetFunctionAddress(OPUS, "opus_strerror"),
+            get_version_string           = apiGetFunctionAddress(OPUS, "opus_get_version_string");
+
+    }
+
+    /** Returns the opus {@link SharedLibrary}. */
+    public static SharedLibrary getLibrary() {
+        return OPUS;
+    }
+
     /**
      * Error codes.
      * 
@@ -505,59 +558,6 @@ public class Opus {
 
     protected Opus() {
         throw new UnsupportedOperationException();
-    }
-
-    private static final SharedLibrary OPUS = Library.loadNative(Opus.class, "org.lwjgl.opus", Configuration.OPUS_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("opus")), true);
-
-    /** Contains the function pointers loaded from the opus {@link SharedLibrary}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            encoder_get_size             = apiGetFunctionAddress(OPUS, "opus_encoder_get_size"),
-            encoder_create               = apiGetFunctionAddress(OPUS, "opus_encoder_create"),
-            encoder_init                 = apiGetFunctionAddress(OPUS, "opus_encoder_init"),
-            encode                       = apiGetFunctionAddress(OPUS, "opus_encode"),
-            encode_float                 = apiGetFunctionAddress(OPUS, "opus_encode_float"),
-            encoder_destroy              = apiGetFunctionAddress(OPUS, "opus_encoder_destroy"),
-            encoder_ctl                  = apiGetFunctionAddress(OPUS, "opus_encoder_ctl"),
-            decoder_get_size             = apiGetFunctionAddress(OPUS, "opus_decoder_get_size"),
-            decoder_create               = apiGetFunctionAddress(OPUS, "opus_decoder_create"),
-            decoder_init                 = apiGetFunctionAddress(OPUS, "opus_decoder_init"),
-            decode                       = apiGetFunctionAddress(OPUS, "opus_decode"),
-            decode_float                 = apiGetFunctionAddress(OPUS, "opus_decode_float"),
-            decoder_ctl                  = apiGetFunctionAddress(OPUS, "opus_decoder_ctl"),
-            decoder_destroy              = apiGetFunctionAddress(OPUS, "opus_decoder_destroy"),
-            packet_parse                 = apiGetFunctionAddress(OPUS, "opus_packet_parse"),
-            packet_get_bandwidth         = apiGetFunctionAddress(OPUS, "opus_packet_get_bandwidth"),
-            packet_get_samples_per_frame = apiGetFunctionAddress(OPUS, "opus_packet_get_samples_per_frame"),
-            packet_get_nb_channels       = apiGetFunctionAddress(OPUS, "opus_packet_get_nb_channels"),
-            packet_get_nb_frames         = apiGetFunctionAddress(OPUS, "opus_packet_get_nb_frames"),
-            packet_get_nb_samples        = apiGetFunctionAddress(OPUS, "opus_packet_get_nb_samples"),
-            decoder_get_nb_samples       = apiGetFunctionAddress(OPUS, "opus_decoder_get_nb_samples"),
-            pcm_soft_clip                = apiGetFunctionAddress(OPUS, "opus_pcm_soft_clip"),
-            repacketizer_get_size        = apiGetFunctionAddress(OPUS, "opus_repacketizer_get_size"),
-            repacketizer_init            = apiGetFunctionAddress(OPUS, "opus_repacketizer_init"),
-            repacketizer_create          = apiGetFunctionAddress(OPUS, "opus_repacketizer_create"),
-            repacketizer_destroy         = apiGetFunctionAddress(OPUS, "opus_repacketizer_destroy"),
-            repacketizer_cat             = apiGetFunctionAddress(OPUS, "opus_repacketizer_cat"),
-            repacketizer_out_range       = apiGetFunctionAddress(OPUS, "opus_repacketizer_out_range"),
-            repacketizer_get_nb_frames   = apiGetFunctionAddress(OPUS, "opus_repacketizer_get_nb_frames"),
-            repacketizer_out             = apiGetFunctionAddress(OPUS, "opus_repacketizer_out"),
-            packet_pad                   = apiGetFunctionAddress(OPUS, "opus_packet_pad"),
-            packet_unpad                 = apiGetFunctionAddress(OPUS, "opus_packet_unpad"),
-            multistream_packet_pad       = apiGetFunctionAddress(OPUS, "opus_multistream_packet_pad"),
-            multistream_packet_unpad     = apiGetFunctionAddress(OPUS, "opus_multistream_packet_unpad"),
-            strerror                     = apiGetFunctionAddress(OPUS, "opus_strerror"),
-            get_version_string           = apiGetFunctionAddress(OPUS, "opus_get_version_string");
-
-    }
-
-    /** Returns the opus {@link SharedLibrary}. */
-    public static SharedLibrary getLibrary() {
-        return OPUS;
     }
 
     // --- [ opus_encoder_get_size ] ---

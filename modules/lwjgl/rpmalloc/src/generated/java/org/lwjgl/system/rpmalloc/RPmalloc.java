@@ -37,6 +37,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class RPmalloc {
 
+    static { LibRPmalloc.initialize(); }
+
     /** Flag to {@link #rpaligned_realloc aligned_realloc} to not preserve content in reallocation. */
     public static final int RPMALLOC_NO_PRESERVE = 1;
 
@@ -45,8 +47,6 @@ public class RPmalloc {
      * like a call to realloc which failes to allocate a new block).
      */
     public static final int RPMALLOC_GROW_OR_FAIL = 2;
-
-    static { LibRPmalloc.initialize(); }
 
     protected RPmalloc() {
         throw new UnsupportedOperationException();

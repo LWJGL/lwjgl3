@@ -13,10 +13,6 @@ import static org.lwjgl.system.JNI.*;
 
 public class LLVMTransforms {
 
-    protected LLVMTransforms() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */
     public static final class Functions {
 
@@ -101,6 +97,10 @@ public class LLVMTransforms {
             AddLoopVectorizePass                          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddLoopVectorizePass"),
             AddSLPVectorizePass                           = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddSLPVectorizePass");
 
+    }
+
+    protected LLVMTransforms() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ LLVMAddAggressiveInstCombinerPass ] ---

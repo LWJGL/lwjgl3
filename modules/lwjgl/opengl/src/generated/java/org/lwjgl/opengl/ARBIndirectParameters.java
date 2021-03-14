@@ -31,6 +31,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class ARBIndirectParameters {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, GetBufferPointerv,
      * MapBufferRange, FlushMappedBufferRange, GetBufferParameteriv, and CopyBufferSubData.
@@ -39,8 +41,6 @@ public class ARBIndirectParameters {
 
     /** Accepted by the {@code value} parameter of GetIntegerv, GetBooleanv, GetFloatv, and GetDoublev. */
     public static final int GL_PARAMETER_BUFFER_BINDING_ARB = 0x80EF;
-
-    static { GL.initialize(); }
 
     protected ARBIndirectParameters() {
         throw new UnsupportedOperationException();

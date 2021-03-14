@@ -19,6 +19,20 @@ import static org.lwjgl.cuda.CUDA.*;
 /** Contains bindings to <a href="https://docs.nvidia.com/cuda/cuda-driver-api/index.html">CUDA Driver API</a>. */
 public class CU101 extends CU100 {
 
+    /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            StreamBeginCapture_v2           = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuStreamBeginCapture_v2")),
+            ThreadExchangeStreamCaptureMode = apiGetFunctionAddress(CU.getLibrary(), "cuThreadExchangeStreamCaptureMode"),
+            StreamGetCaptureInfo            = apiGetFunctionAddress(CU.getLibrary(), "cuStreamGetCaptureInfo"),
+            GraphExecKernelNodeSetParams    = apiGetFunctionAddress(CU.getLibrary(), "cuGraphExecKernelNodeSetParams");
+
+    }
+
     /**
      * Possible modes for stream capture thread interactions. ({@code CUstreamCaptureMode})
      * 
@@ -39,20 +53,6 @@ public class CU101 extends CU100 {
 
     protected CU101() {
         throw new UnsupportedOperationException();
-    }
-
-    /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            StreamBeginCapture_v2           = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuStreamBeginCapture_v2")),
-            ThreadExchangeStreamCaptureMode = apiGetFunctionAddress(CU.getLibrary(), "cuThreadExchangeStreamCaptureMode"),
-            StreamGetCaptureInfo            = apiGetFunctionAddress(CU.getLibrary(), "cuStreamGetCaptureInfo"),
-            GraphExecKernelNodeSetParams    = apiGetFunctionAddress(CU.getLibrary(), "cuGraphExecKernelNodeSetParams");
-
     }
 
     // --- [ cuStreamBeginCapture_v2 ] ---

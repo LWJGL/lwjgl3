@@ -82,6 +82,8 @@ import org.lwjgl.system.*;
  */
 public class KHRDebug {
 
+    static { GL.initialize(); }
+
     /** Tokens accepted by the {@code target} parameters of Enable, Disable, and IsEnabled. */
     public static final int
         GL_DEBUG_OUTPUT             = 0x92E0,
@@ -154,8 +156,6 @@ public class KHRDebug {
         GL_PROGRAM_PIPELINE = 0x82E4,
         GL_SAMPLER          = 0x82E6,
         GL_DISPLAY_LIST     = 0x82E7;
-
-    static { GL.initialize(); }
 
     protected KHRDebug() {
         throw new UnsupportedOperationException();

@@ -1321,6 +1321,8 @@ import org.lwjgl.vulkan.*;
  */
 public class Vma {
 
+    static { LibVma.initialize(); }
+
     /**
      * Flags to be used in {@link VmaRecordSettings}{@code ::flags}.
      * 
@@ -1630,8 +1632,6 @@ public class Vma {
         VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT                = 0x4,
         VMA_POOL_CREATE_BUDDY_ALGORITHM_BIT                 = 0x8,
         VMA_POOL_CREATE_ALGORITHM_MASK                      = VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT | VMA_POOL_CREATE_BUDDY_ALGORITHM_BIT;
-
-    static { LibVma.initialize(); }
 
     protected Vma() {
         throw new UnsupportedOperationException();

@@ -18,12 +18,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class LLVMError {
 
-    public static final int LLVMErrorSuccess = 0;
-
-    protected LLVMError() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */
     public static final class Functions {
 
@@ -37,6 +31,12 @@ public class LLVMError {
             DisposeErrorMessage  = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDisposeErrorMessage"),
             GetStringErrorTypeId = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetStringErrorTypeId");
 
+    }
+
+    public static final int LLVMErrorSuccess = 0;
+
+    protected LLVMError() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ LLVMGetErrorTypeId ] ---

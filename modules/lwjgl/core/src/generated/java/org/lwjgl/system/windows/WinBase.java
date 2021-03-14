@@ -18,12 +18,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Native bindings to WinBase.h. */
 public class WinBase {
 
+    static { Library.initialize(); }
+
     /** BOOL return values. */
     public static final int
         FALSE = 0,
         TRUE  = 1;
-
-    static { Library.initialize(); }
 
     protected WinBase() {
         throw new UnsupportedOperationException();

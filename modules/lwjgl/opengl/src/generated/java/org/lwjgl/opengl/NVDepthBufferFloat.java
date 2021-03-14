@@ -27,6 +27,8 @@ import org.lwjgl.system.*;
  */
 public class NVDepthBufferFloat {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, CopyTexImage2D, and RenderbufferStorageEXT, and
      * returned in the {@code data} parameter of GetTexLevelParameter and GetRenderbufferParameterivEXT.
@@ -43,8 +45,6 @@ public class NVDepthBufferFloat {
 
     /** Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_DEPTH_BUFFER_FLOAT_MODE_NV = 0x8DAF;
-
-    static { GL.initialize(); }
 
     protected NVDepthBufferFloat() {
         throw new UnsupportedOperationException();

@@ -19,6 +19,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVVertexArrayRange {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code cap} parameter of EnableClientState, DisableClientState, and IsEnabled. */
     public static final int GL_VERTEX_ARRAY_RANGE_NV = 0x851D;
 
@@ -30,8 +32,6 @@ public class NVVertexArrayRange {
 
     /** Accepted by the {@code pname} parameter of GetPointerv. */
     public static final int GL_VERTEX_ARRAY_RANGE_POINTER_NV = 0x8521;
-
-    static { GL.initialize(); }
 
     protected NVVertexArrayRange() {
         throw new UnsupportedOperationException();

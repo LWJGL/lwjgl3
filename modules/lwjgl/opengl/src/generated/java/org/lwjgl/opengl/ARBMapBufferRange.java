@@ -31,6 +31,8 @@ import org.lwjgl.system.*;
  */
 public class ARBMapBufferRange {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code access} parameter of MapBufferRange. */
     public static final int
         GL_MAP_READ_BIT              = 0x1,
@@ -39,8 +41,6 @@ public class ARBMapBufferRange {
         GL_MAP_INVALIDATE_BUFFER_BIT = 0x8,
         GL_MAP_FLUSH_EXPLICIT_BIT    = 0x10,
         GL_MAP_UNSYNCHRONIZED_BIT    = 0x20;
-
-    static { GL.initialize(); }
 
     protected ARBMapBufferRange() {
         throw new UnsupportedOperationException();

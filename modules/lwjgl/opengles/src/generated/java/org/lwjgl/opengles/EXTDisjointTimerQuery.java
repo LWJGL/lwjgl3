@@ -33,6 +33,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTDisjointTimerQuery {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetQueryivEXT. */
     public static final int
         GL_QUERY_COUNTER_BITS_EXT = 0x8864,
@@ -54,8 +56,6 @@ public class EXTDisjointTimerQuery {
 
     /** Accepted by the {@code value} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int GL_GPU_DISJOINT_EXT = 0x8FBB;
-
-    static { GLES.initialize(); }
 
     protected EXTDisjointTimerQuery() {
         throw new UnsupportedOperationException();

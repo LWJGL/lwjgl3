@@ -53,6 +53,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class GL43C extends GL42C {
 
+    static { GL.initialize(); }
+
     /** No. of supported Shading Language Versions. Accepted by the {@code pname} parameter of GetIntegerv. */
     public static final int GL_NUM_SHADING_LANGUAGE_VERSIONS = 0x82E9;
 
@@ -445,8 +447,6 @@ public class GL43C extends GL42C {
     public static final int
         GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET = 0x82D9,
         GL_MAX_VERTEX_ATTRIB_BINDINGS        = 0x82DA;
-
-    static { GL.initialize(); }
 
     protected GL43C() {
         throw new UnsupportedOperationException();

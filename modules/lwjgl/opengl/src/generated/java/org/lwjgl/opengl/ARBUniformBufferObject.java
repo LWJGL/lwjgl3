@@ -89,6 +89,8 @@ import org.lwjgl.system.*;
  */
 public class ARBUniformBufferObject {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, and GetBufferPointerv. */
     public static final int GL_UNIFORM_BUFFER = 0x8A11;
 
@@ -142,8 +144,6 @@ public class ARBUniformBufferObject {
 
     /** Returned by GetActiveUniformsiv and GetUniformBlockIndex. */
     public static final int GL_INVALID_INDEX = 0xFFFFFFFF;
-
-    static { GL.initialize(); }
 
     protected ARBUniformBufferObject() {
         throw new UnsupportedOperationException();

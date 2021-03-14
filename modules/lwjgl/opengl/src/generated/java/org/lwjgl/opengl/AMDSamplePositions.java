@@ -25,10 +25,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class AMDSamplePositions {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetFloatv. */
     public static final int GL_SUBSAMPLE_DISTANCE_AMD = 0x883F;
-
-    static { GL.initialize(); }
 
     protected AMDSamplePositions() {
         throw new UnsupportedOperationException();

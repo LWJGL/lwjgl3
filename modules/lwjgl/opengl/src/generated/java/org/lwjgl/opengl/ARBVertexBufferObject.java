@@ -58,6 +58,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class ARBVertexBufferObject {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code target} parameters of BindBufferARB, BufferDataARB, BufferSubDataARB, MapBufferARB, UnmapBufferARB, GetBufferSubDataARB,
      * GetBufferParameterivARB, and GetBufferPointervARB.
@@ -110,8 +112,6 @@ public class ARBVertexBufferObject {
 
     /** Accepted by the {@code pname} parameter of GetBufferPointervARB. */
     public static final int GL_BUFFER_MAP_POINTER_ARB = 0x88BD;
-
-    static { GL.initialize(); }
 
     protected ARBVertexBufferObject() {
         throw new UnsupportedOperationException();

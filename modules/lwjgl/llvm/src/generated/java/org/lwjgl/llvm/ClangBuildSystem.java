@@ -19,10 +19,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class ClangBuildSystem {
 
-    protected ClangBuildSystem() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code ClangIndex.getLibrary()}. */
     public static final class Functions {
 
@@ -43,6 +39,10 @@ public class ClangBuildSystem {
             ModuleMapDescriptor_writeToBuffer          = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_ModuleMapDescriptor_writeToBuffer"),
             ModuleMapDescriptor_dispose                = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_ModuleMapDescriptor_dispose");
 
+    }
+
+    protected ClangBuildSystem() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ clang_getBuildSessionTimestamp ] ---

@@ -34,11 +34,11 @@ import static org.lwjgl.system.Pointer.*;
  */
 public class Meow {
 
+    static { LibMeow.initialize(); }
+
     public static final int MEOW_HASH_VERSION = 4;
 
     public static final String MEOW_HASH_VERSION_NAME = "0.4/himalayan";
-
-    static { LibMeow.initialize(); }
 
     protected Meow() {
         throw new UnsupportedOperationException();

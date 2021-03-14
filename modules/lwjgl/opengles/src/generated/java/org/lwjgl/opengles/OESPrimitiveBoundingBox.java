@@ -29,10 +29,10 @@ import org.lwjgl.system.*;
  */
 public class OESPrimitiveBoundingBox {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetFloatv, GetIntegerv, and GetInteger64v. */
     public static final int GL_PRIMITIVE_BOUNDING_BOX_OES = 0x92BE;
-
-    static { GLES.initialize(); }
 
     protected OESPrimitiveBoundingBox() {
         throw new UnsupportedOperationException();

@@ -37,6 +37,8 @@ import org.lwjgl.system.*;
  */
 public class ARBProgramInterfaceQuery {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code programInterface} parameter of GetProgramInterfaceiv, GetProgramResourceIndex, GetProgramResourceName, GetProgramResourceiv,
      * GetProgramResourceLocation, and GetProgramResourceLocationIndex.
@@ -95,8 +97,6 @@ public class ARBProgramInterfaceQuery {
         GL_LOCATION                             = 0x930E,
         GL_LOCATION_INDEX                       = 0x930F,
         GL_IS_PER_PATCH                         = 0x92E7;
-
-    static { GL.initialize(); }
 
     protected ARBProgramInterfaceQuery() {
         throw new UnsupportedOperationException();

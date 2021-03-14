@@ -29,6 +29,8 @@ import org.lwjgl.system.*;
  */
 public class ARBViewportArray {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev and GetInteger64v. */
     public static final int
         GL_MAX_VIEWPORTS                   = 0x825B,
@@ -39,8 +41,6 @@ public class ARBViewportArray {
 
     /** Returned in the {@code data} parameter from a Get query with a {@code pname} of LAYER_PROVOKING_VERTEX or VIEWPORT_INDEX_PROVOKING_VERTEX. */
     public static final int GL_UNDEFINED_VERTEX = 0x8260;
-
-    static { GL.initialize(); }
 
     protected ARBViewportArray() {
         throw new UnsupportedOperationException();

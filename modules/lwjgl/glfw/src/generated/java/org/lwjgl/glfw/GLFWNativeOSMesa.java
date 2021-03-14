@@ -26,10 +26,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Native bindings to the GLFW library's GLX native access functions. */
 public class GLFWNativeOSMesa {
 
-    protected GLFWNativeOSMesa() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code GLFW.getLibrary()}. */
     public static final class Functions {
 
@@ -41,6 +37,10 @@ public class GLFWNativeOSMesa {
             GetOSMesaDepthBuffer = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetOSMesaDepthBuffer"),
             GetOSMesaContext     = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetOSMesaContext");
 
+    }
+
+    protected GLFWNativeOSMesa() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ glfwGetOSMesaColorBuffer ] ---

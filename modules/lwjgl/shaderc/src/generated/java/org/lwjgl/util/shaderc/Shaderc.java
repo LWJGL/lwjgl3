@@ -20,6 +20,63 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Native bindings to the libshaderc C API of the <a target="_blank" href="https://github.com/google/shaderc/">shaderc</a> library. */
 public class Shaderc {
 
+    private static final SharedLibrary SHADERC = Library.loadNative(Shaderc.class, "org.lwjgl.shaderc", Configuration.SHADERC_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("shaderc")), true);
+
+    /** Contains the function pointers loaded from the shaderc {@link SharedLibrary}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            compiler_initialize                                         = apiGetFunctionAddress(SHADERC, "shaderc_compiler_initialize"),
+            compiler_release                                            = apiGetFunctionAddress(SHADERC, "shaderc_compiler_release"),
+            compile_options_initialize                                  = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_initialize"),
+            compile_options_clone                                       = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_clone"),
+            compile_options_release                                     = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_release"),
+            compile_options_add_macro_definition                        = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_add_macro_definition"),
+            compile_options_set_source_language                         = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_source_language"),
+            compile_options_set_generate_debug_info                     = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_generate_debug_info"),
+            compile_options_set_optimization_level                      = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_optimization_level"),
+            compile_options_set_forced_version_profile                  = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_forced_version_profile"),
+            compile_options_set_include_callbacks                       = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_include_callbacks"),
+            compile_options_set_suppress_warnings                       = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_suppress_warnings"),
+            compile_options_set_target_env                              = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_target_env"),
+            compile_options_set_target_spirv                            = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_target_spirv"),
+            compile_options_set_warnings_as_errors                      = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_warnings_as_errors"),
+            compile_options_set_limit                                   = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_limit"),
+            compile_options_set_auto_bind_uniforms                      = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_auto_bind_uniforms"),
+            compile_options_set_hlsl_io_mapping                         = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_hlsl_io_mapping"),
+            compile_options_set_hlsl_offsets                            = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_hlsl_offsets"),
+            compile_options_set_binding_base                            = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_binding_base"),
+            compile_options_set_binding_base_for_stage                  = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_binding_base_for_stage"),
+            compile_options_set_auto_map_locations                      = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_auto_map_locations"),
+            compile_options_set_hlsl_register_set_and_binding_for_stage = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_hlsl_register_set_and_binding_for_stage"),
+            compile_options_set_hlsl_register_set_and_binding           = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_hlsl_register_set_and_binding"),
+            compile_options_set_hlsl_functionality1                     = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_hlsl_functionality1"),
+            compile_options_set_invert_y                                = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_invert_y"),
+            compile_options_set_nan_clamp                               = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_nan_clamp"),
+            compile_into_spv                                            = apiGetFunctionAddress(SHADERC, "shaderc_compile_into_spv"),
+            compile_into_spv_assembly                                   = apiGetFunctionAddress(SHADERC, "shaderc_compile_into_spv_assembly"),
+            compile_into_preprocessed_text                              = apiGetFunctionAddress(SHADERC, "shaderc_compile_into_preprocessed_text"),
+            assemble_into_spv                                           = apiGetFunctionAddress(SHADERC, "shaderc_assemble_into_spv"),
+            result_release                                              = apiGetFunctionAddress(SHADERC, "shaderc_result_release"),
+            result_get_length                                           = apiGetFunctionAddress(SHADERC, "shaderc_result_get_length"),
+            result_get_num_warnings                                     = apiGetFunctionAddress(SHADERC, "shaderc_result_get_num_warnings"),
+            result_get_num_errors                                       = apiGetFunctionAddress(SHADERC, "shaderc_result_get_num_errors"),
+            result_get_compilation_status                               = apiGetFunctionAddress(SHADERC, "shaderc_result_get_compilation_status"),
+            result_get_bytes                                            = apiGetFunctionAddress(SHADERC, "shaderc_result_get_bytes"),
+            result_get_error_message                                    = apiGetFunctionAddress(SHADERC, "shaderc_result_get_error_message"),
+            get_spv_version                                             = apiGetFunctionAddress(SHADERC, "shaderc_get_spv_version"),
+            parse_version_profile                                       = apiGetFunctionAddress(SHADERC, "shaderc_parse_version_profile");
+
+    }
+
+    /** Returns the shaderc {@link SharedLibrary}. */
+    public static SharedLibrary getLibrary() {
+        return SHADERC;
+    }
+
     /**
      * {@code shaderc_target_env}
      * 
@@ -495,63 +552,6 @@ public class Shaderc {
 
     protected Shaderc() {
         throw new UnsupportedOperationException();
-    }
-
-    private static final SharedLibrary SHADERC = Library.loadNative(Shaderc.class, "org.lwjgl.shaderc", Configuration.SHADERC_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("shaderc")), true);
-
-    /** Contains the function pointers loaded from the shaderc {@link SharedLibrary}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            compiler_initialize                                         = apiGetFunctionAddress(SHADERC, "shaderc_compiler_initialize"),
-            compiler_release                                            = apiGetFunctionAddress(SHADERC, "shaderc_compiler_release"),
-            compile_options_initialize                                  = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_initialize"),
-            compile_options_clone                                       = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_clone"),
-            compile_options_release                                     = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_release"),
-            compile_options_add_macro_definition                        = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_add_macro_definition"),
-            compile_options_set_source_language                         = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_source_language"),
-            compile_options_set_generate_debug_info                     = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_generate_debug_info"),
-            compile_options_set_optimization_level                      = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_optimization_level"),
-            compile_options_set_forced_version_profile                  = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_forced_version_profile"),
-            compile_options_set_include_callbacks                       = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_include_callbacks"),
-            compile_options_set_suppress_warnings                       = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_suppress_warnings"),
-            compile_options_set_target_env                              = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_target_env"),
-            compile_options_set_target_spirv                            = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_target_spirv"),
-            compile_options_set_warnings_as_errors                      = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_warnings_as_errors"),
-            compile_options_set_limit                                   = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_limit"),
-            compile_options_set_auto_bind_uniforms                      = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_auto_bind_uniforms"),
-            compile_options_set_hlsl_io_mapping                         = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_hlsl_io_mapping"),
-            compile_options_set_hlsl_offsets                            = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_hlsl_offsets"),
-            compile_options_set_binding_base                            = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_binding_base"),
-            compile_options_set_binding_base_for_stage                  = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_binding_base_for_stage"),
-            compile_options_set_auto_map_locations                      = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_auto_map_locations"),
-            compile_options_set_hlsl_register_set_and_binding_for_stage = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_hlsl_register_set_and_binding_for_stage"),
-            compile_options_set_hlsl_register_set_and_binding           = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_hlsl_register_set_and_binding"),
-            compile_options_set_hlsl_functionality1                     = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_hlsl_functionality1"),
-            compile_options_set_invert_y                                = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_invert_y"),
-            compile_options_set_nan_clamp                               = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_nan_clamp"),
-            compile_into_spv                                            = apiGetFunctionAddress(SHADERC, "shaderc_compile_into_spv"),
-            compile_into_spv_assembly                                   = apiGetFunctionAddress(SHADERC, "shaderc_compile_into_spv_assembly"),
-            compile_into_preprocessed_text                              = apiGetFunctionAddress(SHADERC, "shaderc_compile_into_preprocessed_text"),
-            assemble_into_spv                                           = apiGetFunctionAddress(SHADERC, "shaderc_assemble_into_spv"),
-            result_release                                              = apiGetFunctionAddress(SHADERC, "shaderc_result_release"),
-            result_get_length                                           = apiGetFunctionAddress(SHADERC, "shaderc_result_get_length"),
-            result_get_num_warnings                                     = apiGetFunctionAddress(SHADERC, "shaderc_result_get_num_warnings"),
-            result_get_num_errors                                       = apiGetFunctionAddress(SHADERC, "shaderc_result_get_num_errors"),
-            result_get_compilation_status                               = apiGetFunctionAddress(SHADERC, "shaderc_result_get_compilation_status"),
-            result_get_bytes                                            = apiGetFunctionAddress(SHADERC, "shaderc_result_get_bytes"),
-            result_get_error_message                                    = apiGetFunctionAddress(SHADERC, "shaderc_result_get_error_message"),
-            get_spv_version                                             = apiGetFunctionAddress(SHADERC, "shaderc_get_spv_version"),
-            parse_version_profile                                       = apiGetFunctionAddress(SHADERC, "shaderc_parse_version_profile");
-
-    }
-
-    /** Returns the shaderc {@link SharedLibrary}. */
-    public static SharedLibrary getLibrary() {
-        return SHADERC;
     }
 
     // --- [ shaderc_compiler_initialize ] ---

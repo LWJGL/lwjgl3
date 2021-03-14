@@ -33,6 +33,8 @@ import org.lwjgl.system.*;
  */
 public class GL44 extends GL43 {
 
+    static { GL.initialize(); }
+
     /** Implementation-dependent state which constrains the maximum value of stride parameters to vertex array pointer-setting commands. */
     public static final int GL_MAX_VERTEX_ATTRIB_STRIDE = 0x82E5;
 
@@ -96,8 +98,6 @@ public class GL44 extends GL43 {
      * {@link GL12#GL_TEXTURE_WRAP_R TEXTURE_WRAP_R},
      */
     public static final int GL_MIRROR_CLAMP_TO_EDGE = 0x8743;
-
-    static { GL.initialize(); }
 
     protected GL44() {
         throw new UnsupportedOperationException();

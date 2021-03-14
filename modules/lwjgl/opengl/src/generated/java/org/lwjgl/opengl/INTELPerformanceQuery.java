@@ -45,6 +45,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class INTELPerformanceQuery {
 
+    static { GL.initialize(); }
+
     /** Returned by the capsMask parameter of GetPerfQueryInfoINTEL. */
     public static final int
         GL_PERFQUERY_SINGLE_CONTEXT_INTEL = 0x0,
@@ -81,8 +83,6 @@ public class INTELPerformanceQuery {
 
     /** Accepted by the {@code pname} parameter of GetBooleanv. */
     public static final int GL_PERFQUERY_GPA_EXTENDED_COUNTERS_INTEL = 0x9500;
-
-    static { GL.initialize(); }
 
     protected INTELPerformanceQuery() {
         throw new UnsupportedOperationException();

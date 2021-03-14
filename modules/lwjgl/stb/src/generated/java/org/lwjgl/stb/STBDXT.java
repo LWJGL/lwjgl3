@@ -19,6 +19,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class STBDXT {
 
+    static { LibSTB.initialize(); }
+
     public static final int STB_DXT_NORMAL = 0x0;
 
     /** Use dithering. Dubious win, never use for normal maps and the like! */
@@ -26,8 +28,6 @@ public class STBDXT {
 
     /** High quality mode, does two refinement steps instead of 1. ~30-40% slower. */
     public static final int STB_DXT_HIGHQUAL = 0x2;
-
-    static { LibSTB.initialize(); }
 
     protected STBDXT() {
         throw new UnsupportedOperationException();

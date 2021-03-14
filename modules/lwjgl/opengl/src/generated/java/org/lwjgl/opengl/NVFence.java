@@ -35,6 +35,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVFence {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code condition} parameter of SetFenceNV. */
     public static final int GL_ALL_COMPLETED_NV = 0x84F2;
 
@@ -42,8 +44,6 @@ public class NVFence {
     public static final int
         GL_FENCE_STATUS_NV    = 0x84F3,
         GL_FENCE_CONDITION_NV = 0x84F4;
-
-    static { GL.initialize(); }
 
     protected NVFence() {
         throw new UnsupportedOperationException();

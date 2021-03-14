@@ -10,6 +10,8 @@ import org.lwjgl.system.*;
 /** LibOVR error code declarations. */
 public class OVRErrorCode {
 
+    static { LibOVR.initialize(); }
+
     /**
      * Success codes ({@code ovrSuccessType}). Success is a value greater or equal to 0, while all error types are negative values.
      * 
@@ -178,8 +180,6 @@ public class OVRErrorCode {
         ovrError_NoCalibration                     = -9000,
         ovrError_OldVersion                        = -9001,
         ovrError_MisformattedBlock                 = -9002;
-
-    static { LibOVR.initialize(); }
 
     protected OVRErrorCode() {
         throw new UnsupportedOperationException();

@@ -11,6 +11,52 @@ import static org.lwjgl.system.APIUtil.*;
 
 public class ClangDocumentation {
 
+    static { LibLLVM.initialize(); }
+
+    /** Contains the function pointers loaded from {@code ClangIndex.getLibrary()}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            Cursor_getParsedComment                   = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_Cursor_getParsedComment"),
+            Comment_getKind                           = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_Comment_getKind"),
+            Comment_getNumChildren                    = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_Comment_getNumChildren"),
+            Comment_getChild                          = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_Comment_getChild"),
+            Comment_isWhitespace                      = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_Comment_isWhitespace"),
+            InlineContentComment_hasTrailingNewline   = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_InlineContentComment_hasTrailingNewline"),
+            TextComment_getText                       = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_TextComment_getText"),
+            InlineCommandComment_getCommandName       = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_InlineCommandComment_getCommandName"),
+            InlineCommandComment_getRenderKind        = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_InlineCommandComment_getRenderKind"),
+            InlineCommandComment_getNumArgs           = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_InlineCommandComment_getNumArgs"),
+            InlineCommandComment_getArgText           = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_InlineCommandComment_getArgText"),
+            HTMLTagComment_getTagName                 = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_HTMLTagComment_getTagName"),
+            HTMLStartTagComment_isSelfClosing         = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_HTMLStartTagComment_isSelfClosing"),
+            HTMLStartTag_getNumAttrs                  = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_HTMLStartTag_getNumAttrs"),
+            HTMLStartTag_getAttrName                  = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_HTMLStartTag_getAttrName"),
+            HTMLStartTag_getAttrValue                 = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_HTMLStartTag_getAttrValue"),
+            BlockCommandComment_getCommandName        = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_BlockCommandComment_getCommandName"),
+            BlockCommandComment_getNumArgs            = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_BlockCommandComment_getNumArgs"),
+            BlockCommandComment_getArgText            = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_BlockCommandComment_getArgText"),
+            BlockCommandComment_getParagraph          = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_BlockCommandComment_getParagraph"),
+            ParamCommandComment_getParamName          = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_ParamCommandComment_getParamName"),
+            ParamCommandComment_isParamIndexValid     = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_ParamCommandComment_isParamIndexValid"),
+            ParamCommandComment_getParamIndex         = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_ParamCommandComment_getParamIndex"),
+            ParamCommandComment_isDirectionExplicit   = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_ParamCommandComment_isDirectionExplicit"),
+            ParamCommandComment_getDirection          = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_ParamCommandComment_getDirection"),
+            TParamCommandComment_getParamName         = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_TParamCommandComment_getParamName"),
+            TParamCommandComment_isParamPositionValid = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_TParamCommandComment_isParamPositionValid"),
+            TParamCommandComment_getDepth             = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_TParamCommandComment_getDepth"),
+            TParamCommandComment_getIndex             = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_TParamCommandComment_getIndex"),
+            VerbatimBlockLineComment_getText          = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_VerbatimBlockLineComment_getText"),
+            VerbatimLineComment_getText               = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_VerbatimLineComment_getText"),
+            HTMLTagComment_getAsString                = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_HTMLTagComment_getAsString"),
+            FullComment_getAsHTML                     = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_FullComment_getAsHTML"),
+            FullComment_getAsXML                      = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_FullComment_getAsXML");
+
+    }
+
     /**
      * Describes the type of the comment AST node ( {@code CXComment}). A comment node can be considered block content (e. g., paragraph), inline content
      * (plain text) or neither (the root AST node).
@@ -131,54 +177,8 @@ public class ClangDocumentation {
         CXCommentParamPassDirection_Out   = 1,
         CXCommentParamPassDirection_InOut = 2;
 
-    static { LibLLVM.initialize(); }
-
     protected ClangDocumentation() {
         throw new UnsupportedOperationException();
-    }
-
-    /** Contains the function pointers loaded from {@code ClangIndex.getLibrary()}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            Cursor_getParsedComment                   = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_Cursor_getParsedComment"),
-            Comment_getKind                           = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_Comment_getKind"),
-            Comment_getNumChildren                    = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_Comment_getNumChildren"),
-            Comment_getChild                          = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_Comment_getChild"),
-            Comment_isWhitespace                      = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_Comment_isWhitespace"),
-            InlineContentComment_hasTrailingNewline   = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_InlineContentComment_hasTrailingNewline"),
-            TextComment_getText                       = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_TextComment_getText"),
-            InlineCommandComment_getCommandName       = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_InlineCommandComment_getCommandName"),
-            InlineCommandComment_getRenderKind        = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_InlineCommandComment_getRenderKind"),
-            InlineCommandComment_getNumArgs           = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_InlineCommandComment_getNumArgs"),
-            InlineCommandComment_getArgText           = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_InlineCommandComment_getArgText"),
-            HTMLTagComment_getTagName                 = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_HTMLTagComment_getTagName"),
-            HTMLStartTagComment_isSelfClosing         = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_HTMLStartTagComment_isSelfClosing"),
-            HTMLStartTag_getNumAttrs                  = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_HTMLStartTag_getNumAttrs"),
-            HTMLStartTag_getAttrName                  = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_HTMLStartTag_getAttrName"),
-            HTMLStartTag_getAttrValue                 = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_HTMLStartTag_getAttrValue"),
-            BlockCommandComment_getCommandName        = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_BlockCommandComment_getCommandName"),
-            BlockCommandComment_getNumArgs            = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_BlockCommandComment_getNumArgs"),
-            BlockCommandComment_getArgText            = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_BlockCommandComment_getArgText"),
-            BlockCommandComment_getParagraph          = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_BlockCommandComment_getParagraph"),
-            ParamCommandComment_getParamName          = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_ParamCommandComment_getParamName"),
-            ParamCommandComment_isParamIndexValid     = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_ParamCommandComment_isParamIndexValid"),
-            ParamCommandComment_getParamIndex         = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_ParamCommandComment_getParamIndex"),
-            ParamCommandComment_isDirectionExplicit   = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_ParamCommandComment_isDirectionExplicit"),
-            ParamCommandComment_getDirection          = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_ParamCommandComment_getDirection"),
-            TParamCommandComment_getParamName         = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_TParamCommandComment_getParamName"),
-            TParamCommandComment_isParamPositionValid = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_TParamCommandComment_isParamPositionValid"),
-            TParamCommandComment_getDepth             = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_TParamCommandComment_getDepth"),
-            TParamCommandComment_getIndex             = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_TParamCommandComment_getIndex"),
-            VerbatimBlockLineComment_getText          = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_VerbatimBlockLineComment_getText"),
-            VerbatimLineComment_getText               = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_VerbatimLineComment_getText"),
-            HTMLTagComment_getAsString                = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_HTMLTagComment_getAsString"),
-            FullComment_getAsHTML                     = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_FullComment_getAsHTML"),
-            FullComment_getAsXML                      = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_FullComment_getAsXML");
-
     }
 
     // --- [ clang_Cursor_getParsedComment ] ---

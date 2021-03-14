@@ -34,6 +34,8 @@ import org.lwjgl.system.*;
  */
 public class ARBComputeShader {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code type} parameter of CreateShader and returned in the {@code params} parameter by GetShaderiv. */
     public static final int GL_COMPUTE_SHADER = 0x91B9;
 
@@ -71,8 +73,6 @@ public class ARBComputeShader {
 
     /** Accepted by the {@code stages} parameter of UseProgramStages. */
     public static final int GL_COMPUTE_SHADER_BIT = 0x20;
-
-    static { GL.initialize(); }
 
     protected ARBComputeShader() {
         throw new UnsupportedOperationException();

@@ -26,6 +26,8 @@ import org.lwjgl.system.*;
  */
 public class AMDFramebufferMultisampleAdvanced {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of {@link GL30C#glGetRenderbufferParameteriv GetRenderbufferParameteriv}. */
     public static final int GL_RENDERBUFFER_STORAGE_SAMPLES_AMD = 0x91B2;
 
@@ -36,8 +38,6 @@ public class AMDFramebufferMultisampleAdvanced {
         GL_MAX_DEPTH_STENCIL_FRAMEBUFFER_SAMPLES_AMD = 0x91B5,
         GL_NUM_SUPPORTED_MULTISAMPLE_MODES_AMD       = 0x91B6,
         GL_SUPPORTED_MULTISAMPLE_MODES_AMD           = 0x91B7;
-
-    static { GL.initialize(); }
 
     protected AMDFramebufferMultisampleAdvanced() {
         throw new UnsupportedOperationException();

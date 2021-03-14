@@ -31,6 +31,8 @@ import org.lwjgl.system.*;
  */
 public class GL41 extends GL40 {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code value} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int
         GL_SHADER_COMPILER                  = 0x8DFA,
@@ -96,8 +98,6 @@ public class GL41 extends GL40 {
 
     /** Returned in the {@code data} parameter from a Get query with a {@code pname} of LAYER_PROVOKING_VERTEX or VIEWPORT_INDEX_PROVOKING_VERTEX. */
     public static final int GL_UNDEFINED_VERTEX = 0x8260;
-
-    static { GL.initialize(); }
 
     protected GL41() {
         throw new UnsupportedOperationException();

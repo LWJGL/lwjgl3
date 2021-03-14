@@ -53,6 +53,8 @@ import org.lwjgl.system.*;
  */
 public class QCOMTiledRendering {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code preserveMask} parameter of StartTilingQCOM and EndTilingQCOM. */
     public static final int
         GL_COLOR_BUFFER_BIT0_QCOM       = 0x1,
@@ -87,8 +89,6 @@ public class QCOMTiledRendering {
         GL_MULTISAMPLE_BUFFER_BIT5_QCOM = 0x20000000,
         GL_MULTISAMPLE_BUFFER_BIT6_QCOM = 0x40000000,
         GL_MULTISAMPLE_BUFFER_BIT7_QCOM = 0x80000000;
-
-    static { GLES.initialize(); }
 
     protected QCOMTiledRendering() {
         throw new UnsupportedOperationException();

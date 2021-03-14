@@ -61,6 +61,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class ARBDebugOutput {
 
+    static { GL.initialize(); }
+
     /**
      * Tokens accepted by the {@code target} parameters of Enable, Disable, and IsEnabled.
      * 
@@ -136,8 +138,6 @@ public class ARBDebugOutput {
         GL_DEBUG_SEVERITY_HIGH_ARB   = 0x9146,
         GL_DEBUG_SEVERITY_MEDIUM_ARB = 0x9147,
         GL_DEBUG_SEVERITY_LOW_ARB    = 0x9148;
-
-    static { GL.initialize(); }
 
     protected ARBDebugOutput() {
         throw new UnsupportedOperationException();

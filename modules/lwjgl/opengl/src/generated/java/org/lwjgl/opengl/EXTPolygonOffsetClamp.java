@@ -19,10 +19,10 @@ import org.lwjgl.system.*;
  */
 public class EXTPolygonOffsetClamp {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int GL_POLYGON_OFFSET_CLAMP_EXT = 0x8E1B;
-
-    static { GL.initialize(); }
 
     protected EXTPolygonOffsetClamp() {
         throw new UnsupportedOperationException();

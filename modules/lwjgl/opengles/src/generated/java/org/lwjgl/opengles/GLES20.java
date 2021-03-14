@@ -21,6 +21,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** The core OpenGL ES 2.0 functionality. */
 public class GLES20 {
 
+    static { GLES.initialize(); }
+
     public static final int
         GL_DEPTH_BUFFER_BIT                             = 0x100,
         GL_STENCIL_BUFFER_BIT                           = 0x400,
@@ -323,8 +325,6 @@ public class GLES20 {
         GL_RENDERBUFFER_BINDING                         = 0x8CA7,
         GL_MAX_RENDERBUFFER_SIZE                        = 0x84E8,
         GL_INVALID_FRAMEBUFFER_OPERATION                = 0x506;
-
-    static { GLES.initialize(); }
 
     protected GLES20() {
         throw new UnsupportedOperationException();

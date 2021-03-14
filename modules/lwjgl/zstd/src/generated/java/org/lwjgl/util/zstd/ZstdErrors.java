@@ -12,6 +12,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Native bindings to the experimental error code API of <a target="_blank" href="http://facebook.github.io/zstd/">Zstandard</a> (zstd). */
 public class ZstdErrors {
 
+    static { LibZstd.initialize(); }
+
     /**
      * Error code. ({@code ZSTD_ErrorCode})
      * 
@@ -73,8 +75,6 @@ public class ZstdErrors {
         ZSTD_error_frameIndex_tooLarge           = 100,
         ZSTD_error_seekableIO                    = 102,
         ZSTD_error_dstBuffer_wrong               = 104;
-
-    static { LibZstd.initialize(); }
 
     protected ZstdErrors() {
         throw new UnsupportedOperationException();

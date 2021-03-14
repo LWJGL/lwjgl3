@@ -34,14 +34,14 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVViewportArray {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetInteger64v. */
     public static final int
         GL_MAX_VIEWPORTS_NV                   = 0x825B,
         GL_VIEWPORT_SUBPIXEL_BITS_NV          = 0x825C,
         GL_VIEWPORT_BOUNDS_RANGE_NV           = 0x825D,
         GL_VIEWPORT_INDEX_PROVOKING_VERTEX_NV = 0x825F;
-
-    static { GLES.initialize(); }
 
     protected NVViewportArray() {
         throw new UnsupportedOperationException();

@@ -21,684 +21,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class LLVMCore {
 
-    /**
-     * {@code LLVMOpcode}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMRet Ret} - Terminator Instructions</li>
-     * <li>{@link #LLVMBr Br} - Terminator Instructions</li>
-     * <li>{@link #LLVMSwitch Switch} - Terminator Instructions</li>
-     * <li>{@link #LLVMIndirectBr IndirectBr} - Terminator Instructions</li>
-     * <li>{@link #LLVMInvoke Invoke} - Terminator Instructions</li>
-     * <li>{@link #LLVMUnreachable Unreachable} - removed 6 due to API changes</li>
-     * <li>{@link #LLVMFNeg FNeg} - Standard Unary Operators</li>
-     * <li>{@link #LLVMAdd Add} - Standard Binary Operators</li>
-     * <li>{@link #LLVMFAdd FAdd} - Standard Binary Operators</li>
-     * <li>{@link #LLVMSub Sub} - Standard Binary Operators</li>
-     * <li>{@link #LLVMFSub FSub} - Standard Binary Operators</li>
-     * <li>{@link #LLVMMul Mul} - Standard Binary Operators</li>
-     * <li>{@link #LLVMFMul FMul} - Standard Binary Operators</li>
-     * <li>{@link #LLVMUDiv UDiv} - Standard Binary Operators</li>
-     * <li>{@link #LLVMSDiv SDiv} - Standard Binary Operators</li>
-     * <li>{@link #LLVMFDiv FDiv} - Standard Binary Operators</li>
-     * <li>{@link #LLVMURem URem} - Standard Binary Operators</li>
-     * <li>{@link #LLVMSRem SRem} - Standard Binary Operators</li>
-     * <li>{@link #LLVMFRem FRem} - Standard Binary Operators</li>
-     * <li>{@link #LLVMShl Shl} - Logical Operators</li>
-     * <li>{@link #LLVMLShr LShr} - Logical Operators</li>
-     * <li>{@link #LLVMAShr AShr} - Logical Operators</li>
-     * <li>{@link #LLVMAnd And} - Logical Operators</li>
-     * <li>{@link #LLVMOr Or} - Logical Operators</li>
-     * <li>{@link #LLVMXor Xor} - Logical Operators</li>
-     * <li>{@link #LLVMAlloca Alloca} - Memory Operators</li>
-     * <li>{@link #LLVMLoad Load} - Memory Operators</li>
-     * <li>{@link #LLVMStore Store} - Memory Operators</li>
-     * <li>{@link #LLVMGetElementPtr GetElementPtr} - Memory Operators</li>
-     * <li>{@link #LLVMTrunc Trunc} - Cast Operators</li>
-     * <li>{@link #LLVMZExt ZExt} - Cast Operators</li>
-     * <li>{@link #LLVMSExt SExt} - Cast Operators</li>
-     * <li>{@link #LLVMFPToUI FPToUI} - Cast Operators</li>
-     * <li>{@link #LLVMFPToSI FPToSI} - Cast Operators</li>
-     * <li>{@link #LLVMUIToFP UIToFP} - Cast Operators</li>
-     * <li>{@link #LLVMSIToFP SIToFP} - Cast Operators</li>
-     * <li>{@link #LLVMFPTrunc FPTrunc} - Cast Operators</li>
-     * <li>{@link #LLVMFPExt FPExt} - Cast Operators</li>
-     * <li>{@link #LLVMPtrToInt PtrToInt} - Cast Operators</li>
-     * <li>{@link #LLVMIntToPtr IntToPtr} - Cast Operators</li>
-     * <li>{@link #LLVMBitCast BitCast} - Cast Operators</li>
-     * <li>{@link #LLVMAddrSpaceCast AddrSpaceCast} - Cast Operators</li>
-     * <li>{@link #LLVMICmp ICmp} - Other Operators</li>
-     * <li>{@link #LLVMFCmp FCmp} - Other Operators</li>
-     * <li>{@link #LLVMPHI PHI} - Other Operators</li>
-     * <li>{@link #LLVMCall Call} - Other Operators</li>
-     * <li>{@link #LLVMSelect Select} - Other Operators</li>
-     * <li>{@link #LLVMUserOp1 UserOp1} - Other Operators</li>
-     * <li>{@link #LLVMUserOp2 UserOp2} - Other Operators</li>
-     * <li>{@link #LLVMVAArg VAArg} - Other Operators</li>
-     * <li>{@link #LLVMExtractElement ExtractElement} - Other Operators</li>
-     * <li>{@link #LLVMInsertElement InsertElement} - Other Operators</li>
-     * <li>{@link #LLVMShuffleVector ShuffleVector} - Other Operators</li>
-     * <li>{@link #LLVMExtractValue ExtractValue} - Other Operators</li>
-     * <li>{@link #LLVMInsertValue InsertValue} - Other Operators</li>
-     * <li>{@link #LLVMFence Fence} - Atomic operators</li>
-     * <li>{@link #LLVMAtomicCmpXchg AtomicCmpXchg} - Atomic operators</li>
-     * <li>{@link #LLVMAtomicRMW AtomicRMW} - Atomic operators</li>
-     * <li>{@link #LLVMResume Resume} - Exception Handling Operators</li>
-     * <li>{@link #LLVMLandingPad LandingPad} - Exception Handling Operators</li>
-     * <li>{@link #LLVMCleanupRet CleanupRet} - Exception Handling Operators</li>
-     * <li>{@link #LLVMCatchRet CatchRet} - Exception Handling Operators</li>
-     * <li>{@link #LLVMCatchPad CatchPad} - Exception Handling Operators</li>
-     * <li>{@link #LLVMCleanupPad CleanupPad} - Exception Handling Operators</li>
-     * <li>{@link #LLVMCatchSwitch CatchSwitch} - Exception Handling Operators</li>
-     * </ul>
-     */
-    public static final int
-        LLVMRet            = 1,
-        LLVMBr             = 2,
-        LLVMSwitch         = 3,
-        LLVMIndirectBr     = 4,
-        LLVMInvoke         = 5,
-        LLVMUnreachable    = 7,
-        LLVMFNeg           = 66,
-        LLVMAdd            = 8,
-        LLVMFAdd           = 9,
-        LLVMSub            = 10,
-        LLVMFSub           = 11,
-        LLVMMul            = 12,
-        LLVMFMul           = 13,
-        LLVMUDiv           = 14,
-        LLVMSDiv           = 15,
-        LLVMFDiv           = 16,
-        LLVMURem           = 17,
-        LLVMSRem           = 18,
-        LLVMFRem           = 19,
-        LLVMShl            = 20,
-        LLVMLShr           = 21,
-        LLVMAShr           = 22,
-        LLVMAnd            = 23,
-        LLVMOr             = 24,
-        LLVMXor            = 25,
-        LLVMAlloca         = 26,
-        LLVMLoad           = 27,
-        LLVMStore          = 28,
-        LLVMGetElementPtr  = 29,
-        LLVMTrunc          = 30,
-        LLVMZExt           = 31,
-        LLVMSExt           = 32,
-        LLVMFPToUI         = 33,
-        LLVMFPToSI         = 34,
-        LLVMUIToFP         = 35,
-        LLVMSIToFP         = 36,
-        LLVMFPTrunc        = 37,
-        LLVMFPExt          = 38,
-        LLVMPtrToInt       = 39,
-        LLVMIntToPtr       = 40,
-        LLVMBitCast        = 41,
-        LLVMAddrSpaceCast  = 60,
-        LLVMICmp           = 42,
-        LLVMFCmp           = 43,
-        LLVMPHI            = 44,
-        LLVMCall           = 45,
-        LLVMSelect         = 46,
-        LLVMUserOp1        = 47,
-        LLVMUserOp2        = 48,
-        LLVMVAArg          = 49,
-        LLVMExtractElement = 50,
-        LLVMInsertElement  = 51,
-        LLVMShuffleVector  = 52,
-        LLVMExtractValue   = 53,
-        LLVMInsertValue    = 54,
-        LLVMFence          = 55,
-        LLVMAtomicCmpXchg  = 56,
-        LLVMAtomicRMW      = 57,
-        LLVMResume         = 58,
-        LLVMLandingPad     = 59,
-        LLVMCleanupRet     = 61,
-        LLVMCatchRet       = 62,
-        LLVMCatchPad       = 63,
-        LLVMCleanupPad     = 64,
-        LLVMCatchSwitch    = 65;
-
-    /**
-     * {@code LLVMTypeKind}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMVoidTypeKind VoidTypeKind} - type with no size</li>
-     * <li>{@link #LLVMHalfTypeKind HalfTypeKind} - 16 bit floating point type</li>
-     * <li>{@link #LLVMFloatTypeKind FloatTypeKind} - 32 bit floating point type</li>
-     * <li>{@link #LLVMDoubleTypeKind DoubleTypeKind} - 64 bit floating point type</li>
-     * <li>{@link #LLVMX86_FP80TypeKind X86_FP80TypeKind} - 80 bit floating point type (X87)</li>
-     * <li>{@link #LLVMFP128TypeKind FP128TypeKind} - 128 bit floating point type (112-bit mantissa)</li>
-     * <li>{@link #LLVMPPC_FP128TypeKind PPC_FP128TypeKind} - 128 bit floating point type (two 64-bits)</li>
-     * <li>{@link #LLVMLabelTypeKind LabelTypeKind} - Labels</li>
-     * <li>{@link #LLVMIntegerTypeKind IntegerTypeKind} - Arbitrary bit width integers</li>
-     * <li>{@link #LLVMFunctionTypeKind FunctionTypeKind} - Functions</li>
-     * <li>{@link #LLVMStructTypeKind StructTypeKind} - Structures</li>
-     * <li>{@link #LLVMArrayTypeKind ArrayTypeKind} - Arrays</li>
-     * <li>{@link #LLVMPointerTypeKind PointerTypeKind} - Pointers</li>
-     * <li>{@link #LLVMVectorTypeKind VectorTypeKind} - SIMD 'packed' format, or other vector type</li>
-     * <li>{@link #LLVMMetadataTypeKind MetadataTypeKind} - Metadata</li>
-     * <li>{@link #LLVMX86_MMXTypeKind X86_MMXTypeKind} - X86 MMX</li>
-     * <li>{@link #LLVMTokenTypeKind TokenTypeKind} - Tokens</li>
-     * </ul>
-     */
-    public static final int
-        LLVMVoidTypeKind      = 0,
-        LLVMHalfTypeKind      = 1,
-        LLVMFloatTypeKind     = 2,
-        LLVMDoubleTypeKind    = 3,
-        LLVMX86_FP80TypeKind  = 4,
-        LLVMFP128TypeKind     = 5,
-        LLVMPPC_FP128TypeKind = 6,
-        LLVMLabelTypeKind     = 7,
-        LLVMIntegerTypeKind   = 8,
-        LLVMFunctionTypeKind  = 9,
-        LLVMStructTypeKind    = 10,
-        LLVMArrayTypeKind     = 11,
-        LLVMPointerTypeKind   = 12,
-        LLVMVectorTypeKind    = 13,
-        LLVMMetadataTypeKind  = 14,
-        LLVMX86_MMXTypeKind   = 15,
-        LLVMTokenTypeKind     = 16;
-
-    /**
-     * {@code LLVMLinkage}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMExternalLinkage ExternalLinkage} - Externally visible function</li>
-     * <li>{@link #LLVMAvailableExternallyLinkage AvailableExternallyLinkage}</li>
-     * <li>{@link #LLVMLinkOnceAnyLinkage LinkOnceAnyLinkage} - Keep one copy of function when linking (inline)</li>
-     * <li>{@link #LLVMLinkOnceODRLinkage LinkOnceODRLinkage} - Same, but only replaced by something equivalent.</li>
-     * <li>{@link #LLVMLinkOnceODRAutoHideLinkage LinkOnceODRAutoHideLinkage} - Obsolete</li>
-     * <li>{@link #LLVMWeakAnyLinkage WeakAnyLinkage} - Keep one copy of function when linking (weak)</li>
-     * <li>{@link #LLVMWeakODRLinkage WeakODRLinkage} - Same, but only replaced by something equivalent.</li>
-     * <li>{@link #LLVMAppendingLinkage AppendingLinkage} - Special purpose, only applies to global arrays</li>
-     * <li>{@link #LLVMInternalLinkage InternalLinkage} - Rename collisions when linking (static functions)</li>
-     * <li>{@link #LLVMPrivateLinkage PrivateLinkage} - Like Internal, but omit from symbol table</li>
-     * <li>{@link #LLVMDLLImportLinkage DLLImportLinkage} - Obsolete</li>
-     * <li>{@link #LLVMDLLExportLinkage DLLExportLinkage} - Obsolete</li>
-     * <li>{@link #LLVMExternalWeakLinkage ExternalWeakLinkage} - ExternalWeak linkage description</li>
-     * <li>{@link #LLVMGhostLinkage GhostLinkage} - Obsolete</li>
-     * <li>{@link #LLVMCommonLinkage CommonLinkage} - Tentative definitions</li>
-     * <li>{@link #LLVMLinkerPrivateLinkage LinkerPrivateLinkage} - Like Private, but linker removes.</li>
-     * <li>{@link #LLVMLinkerPrivateWeakLinkage LinkerPrivateWeakLinkage} - Like LinkerPrivate, but is weak.</li>
-     * </ul>
-     */
-    public static final int
-        LLVMExternalLinkage            = 0,
-        LLVMAvailableExternallyLinkage = 1,
-        LLVMLinkOnceAnyLinkage         = 2,
-        LLVMLinkOnceODRLinkage         = 3,
-        LLVMLinkOnceODRAutoHideLinkage = 4,
-        LLVMWeakAnyLinkage             = 5,
-        LLVMWeakODRLinkage             = 6,
-        LLVMAppendingLinkage           = 7,
-        LLVMInternalLinkage            = 8,
-        LLVMPrivateLinkage             = 9,
-        LLVMDLLImportLinkage           = 10,
-        LLVMDLLExportLinkage           = 11,
-        LLVMExternalWeakLinkage        = 12,
-        LLVMGhostLinkage               = 13,
-        LLVMCommonLinkage              = 14,
-        LLVMLinkerPrivateLinkage       = 15,
-        LLVMLinkerPrivateWeakLinkage   = 16;
-
-    /**
-     * {@code LLVMVisibility}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMDefaultVisibility DefaultVisibility} - The GV is visible</li>
-     * <li>{@link #LLVMHiddenVisibility HiddenVisibility} - The GV is hidden</li>
-     * <li>{@link #LLVMProtectedVisibility ProtectedVisibility} - The GV is protected</li>
-     * </ul>
-     */
-    public static final int
-        LLVMDefaultVisibility   = 0,
-        LLVMHiddenVisibility    = 1,
-        LLVMProtectedVisibility = 2;
-
-    /**
-     * {@code LLVMUnnamedAddr}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMNoUnnamedAddr NoUnnamedAddr} - Address of the GV is significant.</li>
-     * <li>{@link #LLVMLocalUnnamedAddr LocalUnnamedAddr} - Address of the GV is locally insignificant.</li>
-     * <li>{@link #LLVMGlobalUnnamedAddr GlobalUnnamedAddr} - Address of the GV is globally insignificant.</li>
-     * </ul>
-     */
-    public static final int
-        LLVMNoUnnamedAddr     = 0,
-        LLVMLocalUnnamedAddr  = 1,
-        LLVMGlobalUnnamedAddr = 2;
-
-    /**
-     * {@code LLVMDLLStorageClass}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMDefaultStorageClass DefaultStorageClass}</li>
-     * <li>{@link #LLVMDLLImportStorageClass DLLImportStorageClass} - Function to be imported from DLL.</li>
-     * <li>{@link #LLVMDLLExportStorageClass DLLExportStorageClass} - Function to be accessible from DLL.</li>
-     * </ul>
-     */
-    public static final int
-        LLVMDefaultStorageClass   = 0,
-        LLVMDLLImportStorageClass = 1,
-        LLVMDLLExportStorageClass = 2;
-
-    /**
-     * {@code LLVMCallConv}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMCCallConv CCallConv}</li>
-     * <li>{@link #LLVMFastCallConv FastCallConv}</li>
-     * <li>{@link #LLVMColdCallConv ColdCallConv}</li>
-     * <li>{@link #LLVMGHCCallConv GHCCallConv}</li>
-     * <li>{@link #LLVMHiPECallConv HiPECallConv}</li>
-     * <li>{@link #LLVMWebKitJSCallConv WebKitJSCallConv}</li>
-     * <li>{@link #LLVMAnyRegCallConv AnyRegCallConv}</li>
-     * <li>{@link #LLVMPreserveMostCallConv PreserveMostCallConv}</li>
-     * <li>{@link #LLVMPreserveAllCallConv PreserveAllCallConv}</li>
-     * <li>{@link #LLVMSwiftCallConv SwiftCallConv}</li>
-     * <li>{@link #LLVMCXXFASTTLSCallConv CXXFASTTLSCallConv}</li>
-     * <li>{@link #LLVMX86StdcallCallConv X86StdcallCallConv}</li>
-     * <li>{@link #LLVMX86FastcallCallConv X86FastcallCallConv}</li>
-     * <li>{@link #LLVMARMAPCSCallConv ARMAPCSCallConv}</li>
-     * <li>{@link #LLVMARMAAPCSCallConv ARMAAPCSCallConv}</li>
-     * <li>{@link #LLVMARMAAPCSVFPCallConv ARMAAPCSVFPCallConv}</li>
-     * <li>{@link #LLVMMSP430INTRCallConv MSP430INTRCallConv}</li>
-     * <li>{@link #LLVMX86ThisCallCallConv X86ThisCallCallConv}</li>
-     * <li>{@link #LLVMPTXKernelCallConv PTXKernelCallConv}</li>
-     * <li>{@link #LLVMPTXDeviceCallConv PTXDeviceCallConv}</li>
-     * <li>{@link #LLVMSPIRFUNCCallConv SPIRFUNCCallConv}</li>
-     * <li>{@link #LLVMSPIRKERNELCallConv SPIRKERNELCallConv}</li>
-     * <li>{@link #LLVMIntelOCLBICallConv IntelOCLBICallConv}</li>
-     * <li>{@link #LLVMX8664SysVCallConv X8664SysVCallConv}</li>
-     * <li>{@link #LLVMWin64CallConv Win64CallConv}</li>
-     * <li>{@link #LLVMX86VectorCallCallConv X86VectorCallCallConv}</li>
-     * <li>{@link #LLVMHHVMCallConv HHVMCallConv}</li>
-     * <li>{@link #LLVMHHVMCCallConv HHVMCCallConv}</li>
-     * <li>{@link #LLVMX86INTRCallConv X86INTRCallConv}</li>
-     * <li>{@link #LLVMAVRINTRCallConv AVRINTRCallConv}</li>
-     * <li>{@link #LLVMAVRSIGNALCallConv AVRSIGNALCallConv}</li>
-     * <li>{@link #LLVMAVRBUILTINCallConv AVRBUILTINCallConv}</li>
-     * <li>{@link #LLVMAMDGPUVSCallConv AMDGPUVSCallConv}</li>
-     * <li>{@link #LLVMAMDGPUGSCallConv AMDGPUGSCallConv}</li>
-     * <li>{@link #LLVMAMDGPUPSCallConv AMDGPUPSCallConv}</li>
-     * <li>{@link #LLVMAMDGPUCSCallConv AMDGPUCSCallConv}</li>
-     * <li>{@link #LLVMAMDGPUKERNELCallConv AMDGPUKERNELCallConv}</li>
-     * <li>{@link #LLVMX86RegCallCallConv X86RegCallCallConv}</li>
-     * <li>{@link #LLVMAMDGPUHSCallConv AMDGPUHSCallConv}</li>
-     * <li>{@link #LLVMMSP430BUILTINCallConv MSP430BUILTINCallConv}</li>
-     * <li>{@link #LLVMAMDGPULSCallConv AMDGPULSCallConv}</li>
-     * <li>{@link #LLVMAMDGPUESCallConv AMDGPUESCallConv}</li>
-     * </ul>
-     */
-    public static final int
-        LLVMCCallConv             = 0,
-        LLVMFastCallConv          = 8,
-        LLVMColdCallConv          = 9,
-        LLVMGHCCallConv           = 10,
-        LLVMHiPECallConv          = 11,
-        LLVMWebKitJSCallConv      = 12,
-        LLVMAnyRegCallConv        = 13,
-        LLVMPreserveMostCallConv  = 14,
-        LLVMPreserveAllCallConv   = 15,
-        LLVMSwiftCallConv         = 16,
-        LLVMCXXFASTTLSCallConv    = 17,
-        LLVMX86StdcallCallConv    = 64,
-        LLVMX86FastcallCallConv   = 65,
-        LLVMARMAPCSCallConv       = 66,
-        LLVMARMAAPCSCallConv      = 67,
-        LLVMARMAAPCSVFPCallConv   = 68,
-        LLVMMSP430INTRCallConv    = 69,
-        LLVMX86ThisCallCallConv   = 70,
-        LLVMPTXKernelCallConv     = 71,
-        LLVMPTXDeviceCallConv     = 72,
-        LLVMSPIRFUNCCallConv      = 75,
-        LLVMSPIRKERNELCallConv    = 76,
-        LLVMIntelOCLBICallConv    = 77,
-        LLVMX8664SysVCallConv     = 78,
-        LLVMWin64CallConv         = 79,
-        LLVMX86VectorCallCallConv = 80,
-        LLVMHHVMCallConv          = 81,
-        LLVMHHVMCCallConv         = 82,
-        LLVMX86INTRCallConv       = 83,
-        LLVMAVRINTRCallConv       = 84,
-        LLVMAVRSIGNALCallConv     = 85,
-        LLVMAVRBUILTINCallConv    = 86,
-        LLVMAMDGPUVSCallConv      = 87,
-        LLVMAMDGPUGSCallConv      = 88,
-        LLVMAMDGPUPSCallConv      = 89,
-        LLVMAMDGPUCSCallConv      = 90,
-        LLVMAMDGPUKERNELCallConv  = 91,
-        LLVMX86RegCallCallConv    = 92,
-        LLVMAMDGPUHSCallConv      = 93,
-        LLVMMSP430BUILTINCallConv = 94,
-        LLVMAMDGPULSCallConv      = 95,
-        LLVMAMDGPUESCallConv      = 96;
-
-    /**
-     * {@code LLVMValueKind}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMArgumentValueKind ArgumentValueKind}</li>
-     * <li>{@link #LLVMBasicBlockValueKind BasicBlockValueKind}</li>
-     * <li>{@link #LLVMMemoryUseValueKind MemoryUseValueKind}</li>
-     * <li>{@link #LLVMMemoryDefValueKind MemoryDefValueKind}</li>
-     * <li>{@link #LLVMMemoryPhiValueKind MemoryPhiValueKind}</li>
-     * <li>{@link #LLVMFunctionValueKind FunctionValueKind}</li>
-     * <li>{@link #LLVMGlobalAliasValueKind GlobalAliasValueKind}</li>
-     * <li>{@link #LLVMGlobalIFuncValueKind GlobalIFuncValueKind}</li>
-     * <li>{@link #LLVMGlobalVariableValueKind GlobalVariableValueKind}</li>
-     * <li>{@link #LLVMBlockAddressValueKind BlockAddressValueKind}</li>
-     * <li>{@link #LLVMConstantExprValueKind ConstantExprValueKind}</li>
-     * <li>{@link #LLVMConstantArrayValueKind ConstantArrayValueKind}</li>
-     * <li>{@link #LLVMConstantStructValueKind ConstantStructValueKind}</li>
-     * <li>{@link #LLVMConstantVectorValueKind ConstantVectorValueKind}</li>
-     * <li>{@link #LLVMUndefValueValueKind UndefValueValueKind}</li>
-     * <li>{@link #LLVMConstantAggregateZeroValueKind ConstantAggregateZeroValueKind}</li>
-     * <li>{@link #LLVMConstantDataArrayValueKind ConstantDataArrayValueKind}</li>
-     * <li>{@link #LLVMConstantDataVectorValueKind ConstantDataVectorValueKind}</li>
-     * <li>{@link #LLVMConstantIntValueKind ConstantIntValueKind}</li>
-     * <li>{@link #LLVMConstantFPValueKind ConstantFPValueKind}</li>
-     * <li>{@link #LLVMConstantPointerNullValueKind ConstantPointerNullValueKind}</li>
-     * <li>{@link #LLVMConstantTokenNoneValueKind ConstantTokenNoneValueKind}</li>
-     * <li>{@link #LLVMMetadataAsValueValueKind MetadataAsValueValueKind}</li>
-     * <li>{@link #LLVMInlineAsmValueKind InlineAsmValueKind}</li>
-     * <li>{@link #LLVMInstructionValueKind InstructionValueKind}</li>
-     * </ul>
-     */
-    public static final int
-        LLVMArgumentValueKind              = 0,
-        LLVMBasicBlockValueKind            = 1,
-        LLVMMemoryUseValueKind             = 2,
-        LLVMMemoryDefValueKind             = 3,
-        LLVMMemoryPhiValueKind             = 4,
-        LLVMFunctionValueKind              = 5,
-        LLVMGlobalAliasValueKind           = 6,
-        LLVMGlobalIFuncValueKind           = 7,
-        LLVMGlobalVariableValueKind        = 8,
-        LLVMBlockAddressValueKind          = 9,
-        LLVMConstantExprValueKind          = 10,
-        LLVMConstantArrayValueKind         = 11,
-        LLVMConstantStructValueKind        = 12,
-        LLVMConstantVectorValueKind        = 13,
-        LLVMUndefValueValueKind            = 14,
-        LLVMConstantAggregateZeroValueKind = 15,
-        LLVMConstantDataArrayValueKind     = 16,
-        LLVMConstantDataVectorValueKind    = 17,
-        LLVMConstantIntValueKind           = 18,
-        LLVMConstantFPValueKind            = 19,
-        LLVMConstantPointerNullValueKind   = 20,
-        LLVMConstantTokenNoneValueKind     = 21,
-        LLVMMetadataAsValueValueKind       = 22,
-        LLVMInlineAsmValueKind             = 23,
-        LLVMInstructionValueKind           = 24;
-
-    /**
-     * {@code LLVMIntPredicate}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMIntEQ IntEQ} - equal</li>
-     * <li>{@link #LLVMIntNE IntNE} - not equal</li>
-     * <li>{@link #LLVMIntUGT IntUGT} - unsigned greater than</li>
-     * <li>{@link #LLVMIntUGE IntUGE} - unsigned greater or equal</li>
-     * <li>{@link #LLVMIntULT IntULT} - unsigned less than</li>
-     * <li>{@link #LLVMIntULE IntULE} - unsigned less or equal</li>
-     * <li>{@link #LLVMIntSGT IntSGT} - signed greater than</li>
-     * <li>{@link #LLVMIntSGE IntSGE} - signed greater or equal</li>
-     * <li>{@link #LLVMIntSLT IntSLT} - signed less than</li>
-     * <li>{@link #LLVMIntSLE IntSLE} - signed less or equal</li>
-     * </ul>
-     */
-    public static final int
-        LLVMIntEQ  = 32,
-        LLVMIntNE  = 33,
-        LLVMIntUGT = 34,
-        LLVMIntUGE = 35,
-        LLVMIntULT = 36,
-        LLVMIntULE = 37,
-        LLVMIntSGT = 38,
-        LLVMIntSGE = 39,
-        LLVMIntSLT = 40,
-        LLVMIntSLE = 41;
-
-    /**
-     * {@code LLVMRealPredicate}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMRealPredicateFalse RealPredicateFalse} - Always false (always folded)</li>
-     * <li>{@link #LLVMRealOEQ RealOEQ} - True if ordered and equal</li>
-     * <li>{@link #LLVMRealOGT RealOGT} - True if ordered and greater than</li>
-     * <li>{@link #LLVMRealOGE RealOGE} - True if ordered and greater than or equal</li>
-     * <li>{@link #LLVMRealOLT RealOLT} - True if ordered and less than</li>
-     * <li>{@link #LLVMRealOLE RealOLE} - True if ordered and less than or equal</li>
-     * <li>{@link #LLVMRealONE RealONE} - True if ordered and operands are unequal</li>
-     * <li>{@link #LLVMRealORD RealORD} - True if ordered (no nans)</li>
-     * <li>{@link #LLVMRealUNO RealUNO} - True if unordered: isnan(X) | isnan(Y)</li>
-     * <li>{@link #LLVMRealUEQ RealUEQ} - True if unordered or equal</li>
-     * <li>{@link #LLVMRealUGT RealUGT} - True if unordered or greater than</li>
-     * <li>{@link #LLVMRealUGE RealUGE} - True if unordered, greater than, or equal</li>
-     * <li>{@link #LLVMRealULT RealULT} - True if unordered or less than</li>
-     * <li>{@link #LLVMRealULE RealULE} - True if unordered, less than, or equal</li>
-     * <li>{@link #LLVMRealUNE RealUNE} - True if unordered or not equal</li>
-     * <li>{@link #LLVMRealPredicateTrue RealPredicateTrue} - Always true (always folded)</li>
-     * </ul>
-     */
-    public static final int
-        LLVMRealPredicateFalse = 0,
-        LLVMRealOEQ            = 1,
-        LLVMRealOGT            = 2,
-        LLVMRealOGE            = 3,
-        LLVMRealOLT            = 4,
-        LLVMRealOLE            = 5,
-        LLVMRealONE            = 6,
-        LLVMRealORD            = 7,
-        LLVMRealUNO            = 8,
-        LLVMRealUEQ            = 9,
-        LLVMRealUGT            = 10,
-        LLVMRealUGE            = 11,
-        LLVMRealULT            = 12,
-        LLVMRealULE            = 13,
-        LLVMRealUNE            = 14,
-        LLVMRealPredicateTrue  = 15;
-
-    /**
-     * {@code LLVMLandingPadClauseTy}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMLandingPadCatch LandingPadCatch} - A catch clause</li>
-     * <li>{@link #LLVMLandingPadFilter LandingPadFilter} - A filter clause</li>
-     * </ul>
-     */
-    public static final int
-        LLVMLandingPadCatch  = 0,
-        LLVMLandingPadFilter = 1;
-
-    /**
-     * {@code LLVMThreadLocalMode}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMNotThreadLocal NotThreadLocal}</li>
-     * <li>{@link #LLVMGeneralDynamicTLSModel GeneralDynamicTLSModel}</li>
-     * <li>{@link #LLVMLocalDynamicTLSModel LocalDynamicTLSModel}</li>
-     * <li>{@link #LLVMInitialExecTLSModel InitialExecTLSModel}</li>
-     * <li>{@link #LLVMLocalExecTLSModel LocalExecTLSModel}</li>
-     * </ul>
-     */
-    public static final int
-        LLVMNotThreadLocal         = 0,
-        LLVMGeneralDynamicTLSModel = 1,
-        LLVMLocalDynamicTLSModel   = 2,
-        LLVMInitialExecTLSModel    = 3,
-        LLVMLocalExecTLSModel      = 4;
-
-    /**
-     * {@code LLVMAtomicOrdering}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMAtomicOrderingNotAtomic AtomicOrderingNotAtomic} - A load or store which is not atomic</li>
-     * <li>{@link #LLVMAtomicOrderingUnordered AtomicOrderingUnordered} - Lowest level of atomicity, guarantees somewhat sane results, lock free.</li>
-     * <li>{@link #LLVMAtomicOrderingMonotonic AtomicOrderingMonotonic} - guarantees that if you take all the operations affecting a specific address, a consistent ordering exists</li>
-     * <li>{@link #LLVMAtomicOrderingAcquire AtomicOrderingAcquire} - Acquire provides a barrier of the sort necessary to acquire a lock to access other memory with normal loads and stores.</li>
-     * <li>{@link #LLVMAtomicOrderingRelease AtomicOrderingRelease} - Release is similar to Acquire, but with a barrier of the sort necessary to release a lock.</li>
-     * <li>{@link #LLVMAtomicOrderingAcquireRelease AtomicOrderingAcquireRelease} - provides both an Acquire and a Release barrier (for fences and operations which both read and write memory).</li>
-     * <li>{@link #LLVMAtomicOrderingSequentiallyConsistent AtomicOrderingSequentiallyConsistent} - 
-     * provides Acquire semantics for loads and Release semantics for stores. Additionally, it guarantees that a total ordering exists between all
-     * SequentiallyConsistent operations.
-     * </li>
-     * </ul>
-     */
-    public static final int
-        LLVMAtomicOrderingNotAtomic              = 0,
-        LLVMAtomicOrderingUnordered              = 1,
-        LLVMAtomicOrderingMonotonic              = 2,
-        LLVMAtomicOrderingAcquire                = 4,
-        LLVMAtomicOrderingRelease                = 5,
-        LLVMAtomicOrderingAcquireRelease         = 6,
-        LLVMAtomicOrderingSequentiallyConsistent = 7;
-
-    /**
-     * {@code LLVMAtomicRMWBinOp}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMAtomicRMWBinOpXchg AtomicRMWBinOpXchg} - Set the new value and return the one old</li>
-     * <li>{@link #LLVMAtomicRMWBinOpAdd AtomicRMWBinOpAdd} - Add a value and return the old one</li>
-     * <li>{@link #LLVMAtomicRMWBinOpSub AtomicRMWBinOpSub} - Subtract a value and return the old one</li>
-     * <li>{@link #LLVMAtomicRMWBinOpAnd AtomicRMWBinOpAnd} - And a value and return the old one</li>
-     * <li>{@link #LLVMAtomicRMWBinOpNand AtomicRMWBinOpNand} - Not-And a value and return the old one</li>
-     * <li>{@link #LLVMAtomicRMWBinOpOr AtomicRMWBinOpOr} - OR a value and return the old one</li>
-     * <li>{@link #LLVMAtomicRMWBinOpXor AtomicRMWBinOpXor} - Xor a value and return the old one</li>
-     * <li>{@link #LLVMAtomicRMWBinOpMax AtomicRMWBinOpMax} - Sets the value if it's greater than the original using a signed comparison and return the old one</li>
-     * <li>{@link #LLVMAtomicRMWBinOpMin AtomicRMWBinOpMin} - Sets the value if it's Smaller than the original using a signed comparison and return the old one</li>
-     * <li>{@link #LLVMAtomicRMWBinOpUMax AtomicRMWBinOpUMax} - Sets the value if it's greater than the original using an unsigned comparison and return the old one</li>
-     * <li>{@link #LLVMAtomicRMWBinOpUMin AtomicRMWBinOpUMin} - Sets the value if it's greater than the original using an unsigned comparison  and return the old one</li>
-     * </ul>
-     */
-    public static final int
-        LLVMAtomicRMWBinOpXchg = 0,
-        LLVMAtomicRMWBinOpAdd  = 1,
-        LLVMAtomicRMWBinOpSub  = 2,
-        LLVMAtomicRMWBinOpAnd  = 3,
-        LLVMAtomicRMWBinOpNand = 4,
-        LLVMAtomicRMWBinOpOr   = 5,
-        LLVMAtomicRMWBinOpXor  = 6,
-        LLVMAtomicRMWBinOpMax  = 7,
-        LLVMAtomicRMWBinOpMin  = 8,
-        LLVMAtomicRMWBinOpUMax = 9,
-        LLVMAtomicRMWBinOpUMin = 10;
-
-    /**
-     * {@code LLVMDiagnosticSeverity}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMDSError DSError}</li>
-     * <li>{@link #LLVMDSWarning DSWarning}</li>
-     * <li>{@link #LLVMDSRemark DSRemark}</li>
-     * <li>{@link #LLVMDSNote DSNote}</li>
-     * </ul>
-     */
-    public static final int
-        LLVMDSError   = 0,
-        LLVMDSWarning = 1,
-        LLVMDSRemark  = 2,
-        LLVMDSNote    = 3;
-
-    /**
-     * {@code LLVMInlineAsmDialect}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMInlineAsmDialectATT InlineAsmDialectATT}</li>
-     * <li>{@link #LLVMInlineAsmDialectIntel InlineAsmDialectIntel}</li>
-     * </ul>
-     */
-    public static final int
-        LLVMInlineAsmDialectATT   = 0,
-        LLVMInlineAsmDialectIntel = 1;
-
-    /**
-     * {@code LLVMModuleFlagBehavior}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMModuleFlagBehaviorError ModuleFlagBehaviorError} - Emits an error if two values disagree, otherwise the resulting value is that of the operands.</li>
-     * <li>{@link #LLVMModuleFlagBehaviorWarning ModuleFlagBehaviorWarning} - Emits a warning if two values disagree. The result value will be the operand for the flag from the first module being linked.</li>
-     * <li>{@link #LLVMModuleFlagBehaviorRequire ModuleFlagBehaviorRequire} - 
-     * Adds a requirement that another module flag be present and have a specified value after linking is performed. The value must be a metadata pair,
-     * where the first element of the pair is the ID of the module flag to be restricted, and the second element of the pair is the value the module flag
-     * should be restricted to. This behavior can be used to restrict the allowable results (via triggering of an error) of linking IDs with the
-            **Override** behavior.
-     * </li>
-     * <li>{@link #LLVMModuleFlagBehaviorOverride ModuleFlagBehaviorOverride} - 
-     * Uses the specified value, regardless of the behavior or value of the other module. If both modules specify **Override**, but the values differ, an
-     * error will be emitted.
-     * </li>
-     * <li>{@link #LLVMModuleFlagBehaviorAppend ModuleFlagBehaviorAppend} - Appends the two values, which are required to be metadata nodes.</li>
-     * <li>{@link #LLVMModuleFlagBehaviorAppendUnique ModuleFlagBehaviorAppendUnique} - 
-     * Appends the two values, which are required to be metadata nodes. However, duplicate entries in the second list are dropped during the append
-     * operation.
-     * </li>
-     * </ul>
-     */
-    public static final int
-        LLVMModuleFlagBehaviorError        = 0,
-        LLVMModuleFlagBehaviorWarning      = 1,
-        LLVMModuleFlagBehaviorRequire      = 2,
-        LLVMModuleFlagBehaviorOverride     = 3,
-        LLVMModuleFlagBehaviorAppend       = 4,
-        LLVMModuleFlagBehaviorAppendUnique = 5;
-
-    /**
-     * Attribute index are either {@code LLVMAttributeReturnIndex}, {@code LLVMAttributeFunctionIndex} or a parameter number from 1 to N.
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMAttributeReturnIndex AttributeReturnIndex}</li>
-     * <li>{@link #LLVMAttributeFunctionIndex AttributeFunctionIndex} - ISO C restricts enumerator values to range of 'int' (4294967295 is too large)</li>
-     * </ul>
-     */
-    public static final int
-        LLVMAttributeReturnIndex   = 0,
-        LLVMAttributeFunctionIndex = -1;
-
-    protected LLVMCore() {
-        throw new UnsupportedOperationException();
-    }
-
     private static final SharedLibrary LLVM = Library.loadNative(LLVMCore.class, "org.lwjgl.llvm", Configuration.LLVM_LIBRARY_NAME, "LLVM", "LLVM-C");
 
     /** Contains the function pointers loaded from the LLVM {@link SharedLibrary}. */
@@ -1377,6 +699,684 @@ public class LLVMCore {
     /** Returns the LLVM {@link SharedLibrary}. */
     public static SharedLibrary getLibrary() {
         return LLVM;
+    }
+
+    /**
+     * {@code LLVMOpcode}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #LLVMRet Ret} - Terminator Instructions</li>
+     * <li>{@link #LLVMBr Br} - Terminator Instructions</li>
+     * <li>{@link #LLVMSwitch Switch} - Terminator Instructions</li>
+     * <li>{@link #LLVMIndirectBr IndirectBr} - Terminator Instructions</li>
+     * <li>{@link #LLVMInvoke Invoke} - Terminator Instructions</li>
+     * <li>{@link #LLVMUnreachable Unreachable} - removed 6 due to API changes</li>
+     * <li>{@link #LLVMFNeg FNeg} - Standard Unary Operators</li>
+     * <li>{@link #LLVMAdd Add} - Standard Binary Operators</li>
+     * <li>{@link #LLVMFAdd FAdd} - Standard Binary Operators</li>
+     * <li>{@link #LLVMSub Sub} - Standard Binary Operators</li>
+     * <li>{@link #LLVMFSub FSub} - Standard Binary Operators</li>
+     * <li>{@link #LLVMMul Mul} - Standard Binary Operators</li>
+     * <li>{@link #LLVMFMul FMul} - Standard Binary Operators</li>
+     * <li>{@link #LLVMUDiv UDiv} - Standard Binary Operators</li>
+     * <li>{@link #LLVMSDiv SDiv} - Standard Binary Operators</li>
+     * <li>{@link #LLVMFDiv FDiv} - Standard Binary Operators</li>
+     * <li>{@link #LLVMURem URem} - Standard Binary Operators</li>
+     * <li>{@link #LLVMSRem SRem} - Standard Binary Operators</li>
+     * <li>{@link #LLVMFRem FRem} - Standard Binary Operators</li>
+     * <li>{@link #LLVMShl Shl} - Logical Operators</li>
+     * <li>{@link #LLVMLShr LShr} - Logical Operators</li>
+     * <li>{@link #LLVMAShr AShr} - Logical Operators</li>
+     * <li>{@link #LLVMAnd And} - Logical Operators</li>
+     * <li>{@link #LLVMOr Or} - Logical Operators</li>
+     * <li>{@link #LLVMXor Xor} - Logical Operators</li>
+     * <li>{@link #LLVMAlloca Alloca} - Memory Operators</li>
+     * <li>{@link #LLVMLoad Load} - Memory Operators</li>
+     * <li>{@link #LLVMStore Store} - Memory Operators</li>
+     * <li>{@link #LLVMGetElementPtr GetElementPtr} - Memory Operators</li>
+     * <li>{@link #LLVMTrunc Trunc} - Cast Operators</li>
+     * <li>{@link #LLVMZExt ZExt} - Cast Operators</li>
+     * <li>{@link #LLVMSExt SExt} - Cast Operators</li>
+     * <li>{@link #LLVMFPToUI FPToUI} - Cast Operators</li>
+     * <li>{@link #LLVMFPToSI FPToSI} - Cast Operators</li>
+     * <li>{@link #LLVMUIToFP UIToFP} - Cast Operators</li>
+     * <li>{@link #LLVMSIToFP SIToFP} - Cast Operators</li>
+     * <li>{@link #LLVMFPTrunc FPTrunc} - Cast Operators</li>
+     * <li>{@link #LLVMFPExt FPExt} - Cast Operators</li>
+     * <li>{@link #LLVMPtrToInt PtrToInt} - Cast Operators</li>
+     * <li>{@link #LLVMIntToPtr IntToPtr} - Cast Operators</li>
+     * <li>{@link #LLVMBitCast BitCast} - Cast Operators</li>
+     * <li>{@link #LLVMAddrSpaceCast AddrSpaceCast} - Cast Operators</li>
+     * <li>{@link #LLVMICmp ICmp} - Other Operators</li>
+     * <li>{@link #LLVMFCmp FCmp} - Other Operators</li>
+     * <li>{@link #LLVMPHI PHI} - Other Operators</li>
+     * <li>{@link #LLVMCall Call} - Other Operators</li>
+     * <li>{@link #LLVMSelect Select} - Other Operators</li>
+     * <li>{@link #LLVMUserOp1 UserOp1} - Other Operators</li>
+     * <li>{@link #LLVMUserOp2 UserOp2} - Other Operators</li>
+     * <li>{@link #LLVMVAArg VAArg} - Other Operators</li>
+     * <li>{@link #LLVMExtractElement ExtractElement} - Other Operators</li>
+     * <li>{@link #LLVMInsertElement InsertElement} - Other Operators</li>
+     * <li>{@link #LLVMShuffleVector ShuffleVector} - Other Operators</li>
+     * <li>{@link #LLVMExtractValue ExtractValue} - Other Operators</li>
+     * <li>{@link #LLVMInsertValue InsertValue} - Other Operators</li>
+     * <li>{@link #LLVMFence Fence} - Atomic operators</li>
+     * <li>{@link #LLVMAtomicCmpXchg AtomicCmpXchg} - Atomic operators</li>
+     * <li>{@link #LLVMAtomicRMW AtomicRMW} - Atomic operators</li>
+     * <li>{@link #LLVMResume Resume} - Exception Handling Operators</li>
+     * <li>{@link #LLVMLandingPad LandingPad} - Exception Handling Operators</li>
+     * <li>{@link #LLVMCleanupRet CleanupRet} - Exception Handling Operators</li>
+     * <li>{@link #LLVMCatchRet CatchRet} - Exception Handling Operators</li>
+     * <li>{@link #LLVMCatchPad CatchPad} - Exception Handling Operators</li>
+     * <li>{@link #LLVMCleanupPad CleanupPad} - Exception Handling Operators</li>
+     * <li>{@link #LLVMCatchSwitch CatchSwitch} - Exception Handling Operators</li>
+     * </ul>
+     */
+    public static final int
+        LLVMRet            = 1,
+        LLVMBr             = 2,
+        LLVMSwitch         = 3,
+        LLVMIndirectBr     = 4,
+        LLVMInvoke         = 5,
+        LLVMUnreachable    = 7,
+        LLVMFNeg           = 66,
+        LLVMAdd            = 8,
+        LLVMFAdd           = 9,
+        LLVMSub            = 10,
+        LLVMFSub           = 11,
+        LLVMMul            = 12,
+        LLVMFMul           = 13,
+        LLVMUDiv           = 14,
+        LLVMSDiv           = 15,
+        LLVMFDiv           = 16,
+        LLVMURem           = 17,
+        LLVMSRem           = 18,
+        LLVMFRem           = 19,
+        LLVMShl            = 20,
+        LLVMLShr           = 21,
+        LLVMAShr           = 22,
+        LLVMAnd            = 23,
+        LLVMOr             = 24,
+        LLVMXor            = 25,
+        LLVMAlloca         = 26,
+        LLVMLoad           = 27,
+        LLVMStore          = 28,
+        LLVMGetElementPtr  = 29,
+        LLVMTrunc          = 30,
+        LLVMZExt           = 31,
+        LLVMSExt           = 32,
+        LLVMFPToUI         = 33,
+        LLVMFPToSI         = 34,
+        LLVMUIToFP         = 35,
+        LLVMSIToFP         = 36,
+        LLVMFPTrunc        = 37,
+        LLVMFPExt          = 38,
+        LLVMPtrToInt       = 39,
+        LLVMIntToPtr       = 40,
+        LLVMBitCast        = 41,
+        LLVMAddrSpaceCast  = 60,
+        LLVMICmp           = 42,
+        LLVMFCmp           = 43,
+        LLVMPHI            = 44,
+        LLVMCall           = 45,
+        LLVMSelect         = 46,
+        LLVMUserOp1        = 47,
+        LLVMUserOp2        = 48,
+        LLVMVAArg          = 49,
+        LLVMExtractElement = 50,
+        LLVMInsertElement  = 51,
+        LLVMShuffleVector  = 52,
+        LLVMExtractValue   = 53,
+        LLVMInsertValue    = 54,
+        LLVMFence          = 55,
+        LLVMAtomicCmpXchg  = 56,
+        LLVMAtomicRMW      = 57,
+        LLVMResume         = 58,
+        LLVMLandingPad     = 59,
+        LLVMCleanupRet     = 61,
+        LLVMCatchRet       = 62,
+        LLVMCatchPad       = 63,
+        LLVMCleanupPad     = 64,
+        LLVMCatchSwitch    = 65;
+
+    /**
+     * {@code LLVMTypeKind}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #LLVMVoidTypeKind VoidTypeKind} - type with no size</li>
+     * <li>{@link #LLVMHalfTypeKind HalfTypeKind} - 16 bit floating point type</li>
+     * <li>{@link #LLVMFloatTypeKind FloatTypeKind} - 32 bit floating point type</li>
+     * <li>{@link #LLVMDoubleTypeKind DoubleTypeKind} - 64 bit floating point type</li>
+     * <li>{@link #LLVMX86_FP80TypeKind X86_FP80TypeKind} - 80 bit floating point type (X87)</li>
+     * <li>{@link #LLVMFP128TypeKind FP128TypeKind} - 128 bit floating point type (112-bit mantissa)</li>
+     * <li>{@link #LLVMPPC_FP128TypeKind PPC_FP128TypeKind} - 128 bit floating point type (two 64-bits)</li>
+     * <li>{@link #LLVMLabelTypeKind LabelTypeKind} - Labels</li>
+     * <li>{@link #LLVMIntegerTypeKind IntegerTypeKind} - Arbitrary bit width integers</li>
+     * <li>{@link #LLVMFunctionTypeKind FunctionTypeKind} - Functions</li>
+     * <li>{@link #LLVMStructTypeKind StructTypeKind} - Structures</li>
+     * <li>{@link #LLVMArrayTypeKind ArrayTypeKind} - Arrays</li>
+     * <li>{@link #LLVMPointerTypeKind PointerTypeKind} - Pointers</li>
+     * <li>{@link #LLVMVectorTypeKind VectorTypeKind} - SIMD 'packed' format, or other vector type</li>
+     * <li>{@link #LLVMMetadataTypeKind MetadataTypeKind} - Metadata</li>
+     * <li>{@link #LLVMX86_MMXTypeKind X86_MMXTypeKind} - X86 MMX</li>
+     * <li>{@link #LLVMTokenTypeKind TokenTypeKind} - Tokens</li>
+     * </ul>
+     */
+    public static final int
+        LLVMVoidTypeKind      = 0,
+        LLVMHalfTypeKind      = 1,
+        LLVMFloatTypeKind     = 2,
+        LLVMDoubleTypeKind    = 3,
+        LLVMX86_FP80TypeKind  = 4,
+        LLVMFP128TypeKind     = 5,
+        LLVMPPC_FP128TypeKind = 6,
+        LLVMLabelTypeKind     = 7,
+        LLVMIntegerTypeKind   = 8,
+        LLVMFunctionTypeKind  = 9,
+        LLVMStructTypeKind    = 10,
+        LLVMArrayTypeKind     = 11,
+        LLVMPointerTypeKind   = 12,
+        LLVMVectorTypeKind    = 13,
+        LLVMMetadataTypeKind  = 14,
+        LLVMX86_MMXTypeKind   = 15,
+        LLVMTokenTypeKind     = 16;
+
+    /**
+     * {@code LLVMLinkage}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #LLVMExternalLinkage ExternalLinkage} - Externally visible function</li>
+     * <li>{@link #LLVMAvailableExternallyLinkage AvailableExternallyLinkage}</li>
+     * <li>{@link #LLVMLinkOnceAnyLinkage LinkOnceAnyLinkage} - Keep one copy of function when linking (inline)</li>
+     * <li>{@link #LLVMLinkOnceODRLinkage LinkOnceODRLinkage} - Same, but only replaced by something equivalent.</li>
+     * <li>{@link #LLVMLinkOnceODRAutoHideLinkage LinkOnceODRAutoHideLinkage} - Obsolete</li>
+     * <li>{@link #LLVMWeakAnyLinkage WeakAnyLinkage} - Keep one copy of function when linking (weak)</li>
+     * <li>{@link #LLVMWeakODRLinkage WeakODRLinkage} - Same, but only replaced by something equivalent.</li>
+     * <li>{@link #LLVMAppendingLinkage AppendingLinkage} - Special purpose, only applies to global arrays</li>
+     * <li>{@link #LLVMInternalLinkage InternalLinkage} - Rename collisions when linking (static functions)</li>
+     * <li>{@link #LLVMPrivateLinkage PrivateLinkage} - Like Internal, but omit from symbol table</li>
+     * <li>{@link #LLVMDLLImportLinkage DLLImportLinkage} - Obsolete</li>
+     * <li>{@link #LLVMDLLExportLinkage DLLExportLinkage} - Obsolete</li>
+     * <li>{@link #LLVMExternalWeakLinkage ExternalWeakLinkage} - ExternalWeak linkage description</li>
+     * <li>{@link #LLVMGhostLinkage GhostLinkage} - Obsolete</li>
+     * <li>{@link #LLVMCommonLinkage CommonLinkage} - Tentative definitions</li>
+     * <li>{@link #LLVMLinkerPrivateLinkage LinkerPrivateLinkage} - Like Private, but linker removes.</li>
+     * <li>{@link #LLVMLinkerPrivateWeakLinkage LinkerPrivateWeakLinkage} - Like LinkerPrivate, but is weak.</li>
+     * </ul>
+     */
+    public static final int
+        LLVMExternalLinkage            = 0,
+        LLVMAvailableExternallyLinkage = 1,
+        LLVMLinkOnceAnyLinkage         = 2,
+        LLVMLinkOnceODRLinkage         = 3,
+        LLVMLinkOnceODRAutoHideLinkage = 4,
+        LLVMWeakAnyLinkage             = 5,
+        LLVMWeakODRLinkage             = 6,
+        LLVMAppendingLinkage           = 7,
+        LLVMInternalLinkage            = 8,
+        LLVMPrivateLinkage             = 9,
+        LLVMDLLImportLinkage           = 10,
+        LLVMDLLExportLinkage           = 11,
+        LLVMExternalWeakLinkage        = 12,
+        LLVMGhostLinkage               = 13,
+        LLVMCommonLinkage              = 14,
+        LLVMLinkerPrivateLinkage       = 15,
+        LLVMLinkerPrivateWeakLinkage   = 16;
+
+    /**
+     * {@code LLVMVisibility}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #LLVMDefaultVisibility DefaultVisibility} - The GV is visible</li>
+     * <li>{@link #LLVMHiddenVisibility HiddenVisibility} - The GV is hidden</li>
+     * <li>{@link #LLVMProtectedVisibility ProtectedVisibility} - The GV is protected</li>
+     * </ul>
+     */
+    public static final int
+        LLVMDefaultVisibility   = 0,
+        LLVMHiddenVisibility    = 1,
+        LLVMProtectedVisibility = 2;
+
+    /**
+     * {@code LLVMUnnamedAddr}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #LLVMNoUnnamedAddr NoUnnamedAddr} - Address of the GV is significant.</li>
+     * <li>{@link #LLVMLocalUnnamedAddr LocalUnnamedAddr} - Address of the GV is locally insignificant.</li>
+     * <li>{@link #LLVMGlobalUnnamedAddr GlobalUnnamedAddr} - Address of the GV is globally insignificant.</li>
+     * </ul>
+     */
+    public static final int
+        LLVMNoUnnamedAddr     = 0,
+        LLVMLocalUnnamedAddr  = 1,
+        LLVMGlobalUnnamedAddr = 2;
+
+    /**
+     * {@code LLVMDLLStorageClass}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #LLVMDefaultStorageClass DefaultStorageClass}</li>
+     * <li>{@link #LLVMDLLImportStorageClass DLLImportStorageClass} - Function to be imported from DLL.</li>
+     * <li>{@link #LLVMDLLExportStorageClass DLLExportStorageClass} - Function to be accessible from DLL.</li>
+     * </ul>
+     */
+    public static final int
+        LLVMDefaultStorageClass   = 0,
+        LLVMDLLImportStorageClass = 1,
+        LLVMDLLExportStorageClass = 2;
+
+    /**
+     * {@code LLVMCallConv}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #LLVMCCallConv CCallConv}</li>
+     * <li>{@link #LLVMFastCallConv FastCallConv}</li>
+     * <li>{@link #LLVMColdCallConv ColdCallConv}</li>
+     * <li>{@link #LLVMGHCCallConv GHCCallConv}</li>
+     * <li>{@link #LLVMHiPECallConv HiPECallConv}</li>
+     * <li>{@link #LLVMWebKitJSCallConv WebKitJSCallConv}</li>
+     * <li>{@link #LLVMAnyRegCallConv AnyRegCallConv}</li>
+     * <li>{@link #LLVMPreserveMostCallConv PreserveMostCallConv}</li>
+     * <li>{@link #LLVMPreserveAllCallConv PreserveAllCallConv}</li>
+     * <li>{@link #LLVMSwiftCallConv SwiftCallConv}</li>
+     * <li>{@link #LLVMCXXFASTTLSCallConv CXXFASTTLSCallConv}</li>
+     * <li>{@link #LLVMX86StdcallCallConv X86StdcallCallConv}</li>
+     * <li>{@link #LLVMX86FastcallCallConv X86FastcallCallConv}</li>
+     * <li>{@link #LLVMARMAPCSCallConv ARMAPCSCallConv}</li>
+     * <li>{@link #LLVMARMAAPCSCallConv ARMAAPCSCallConv}</li>
+     * <li>{@link #LLVMARMAAPCSVFPCallConv ARMAAPCSVFPCallConv}</li>
+     * <li>{@link #LLVMMSP430INTRCallConv MSP430INTRCallConv}</li>
+     * <li>{@link #LLVMX86ThisCallCallConv X86ThisCallCallConv}</li>
+     * <li>{@link #LLVMPTXKernelCallConv PTXKernelCallConv}</li>
+     * <li>{@link #LLVMPTXDeviceCallConv PTXDeviceCallConv}</li>
+     * <li>{@link #LLVMSPIRFUNCCallConv SPIRFUNCCallConv}</li>
+     * <li>{@link #LLVMSPIRKERNELCallConv SPIRKERNELCallConv}</li>
+     * <li>{@link #LLVMIntelOCLBICallConv IntelOCLBICallConv}</li>
+     * <li>{@link #LLVMX8664SysVCallConv X8664SysVCallConv}</li>
+     * <li>{@link #LLVMWin64CallConv Win64CallConv}</li>
+     * <li>{@link #LLVMX86VectorCallCallConv X86VectorCallCallConv}</li>
+     * <li>{@link #LLVMHHVMCallConv HHVMCallConv}</li>
+     * <li>{@link #LLVMHHVMCCallConv HHVMCCallConv}</li>
+     * <li>{@link #LLVMX86INTRCallConv X86INTRCallConv}</li>
+     * <li>{@link #LLVMAVRINTRCallConv AVRINTRCallConv}</li>
+     * <li>{@link #LLVMAVRSIGNALCallConv AVRSIGNALCallConv}</li>
+     * <li>{@link #LLVMAVRBUILTINCallConv AVRBUILTINCallConv}</li>
+     * <li>{@link #LLVMAMDGPUVSCallConv AMDGPUVSCallConv}</li>
+     * <li>{@link #LLVMAMDGPUGSCallConv AMDGPUGSCallConv}</li>
+     * <li>{@link #LLVMAMDGPUPSCallConv AMDGPUPSCallConv}</li>
+     * <li>{@link #LLVMAMDGPUCSCallConv AMDGPUCSCallConv}</li>
+     * <li>{@link #LLVMAMDGPUKERNELCallConv AMDGPUKERNELCallConv}</li>
+     * <li>{@link #LLVMX86RegCallCallConv X86RegCallCallConv}</li>
+     * <li>{@link #LLVMAMDGPUHSCallConv AMDGPUHSCallConv}</li>
+     * <li>{@link #LLVMMSP430BUILTINCallConv MSP430BUILTINCallConv}</li>
+     * <li>{@link #LLVMAMDGPULSCallConv AMDGPULSCallConv}</li>
+     * <li>{@link #LLVMAMDGPUESCallConv AMDGPUESCallConv}</li>
+     * </ul>
+     */
+    public static final int
+        LLVMCCallConv             = 0,
+        LLVMFastCallConv          = 8,
+        LLVMColdCallConv          = 9,
+        LLVMGHCCallConv           = 10,
+        LLVMHiPECallConv          = 11,
+        LLVMWebKitJSCallConv      = 12,
+        LLVMAnyRegCallConv        = 13,
+        LLVMPreserveMostCallConv  = 14,
+        LLVMPreserveAllCallConv   = 15,
+        LLVMSwiftCallConv         = 16,
+        LLVMCXXFASTTLSCallConv    = 17,
+        LLVMX86StdcallCallConv    = 64,
+        LLVMX86FastcallCallConv   = 65,
+        LLVMARMAPCSCallConv       = 66,
+        LLVMARMAAPCSCallConv      = 67,
+        LLVMARMAAPCSVFPCallConv   = 68,
+        LLVMMSP430INTRCallConv    = 69,
+        LLVMX86ThisCallCallConv   = 70,
+        LLVMPTXKernelCallConv     = 71,
+        LLVMPTXDeviceCallConv     = 72,
+        LLVMSPIRFUNCCallConv      = 75,
+        LLVMSPIRKERNELCallConv    = 76,
+        LLVMIntelOCLBICallConv    = 77,
+        LLVMX8664SysVCallConv     = 78,
+        LLVMWin64CallConv         = 79,
+        LLVMX86VectorCallCallConv = 80,
+        LLVMHHVMCallConv          = 81,
+        LLVMHHVMCCallConv         = 82,
+        LLVMX86INTRCallConv       = 83,
+        LLVMAVRINTRCallConv       = 84,
+        LLVMAVRSIGNALCallConv     = 85,
+        LLVMAVRBUILTINCallConv    = 86,
+        LLVMAMDGPUVSCallConv      = 87,
+        LLVMAMDGPUGSCallConv      = 88,
+        LLVMAMDGPUPSCallConv      = 89,
+        LLVMAMDGPUCSCallConv      = 90,
+        LLVMAMDGPUKERNELCallConv  = 91,
+        LLVMX86RegCallCallConv    = 92,
+        LLVMAMDGPUHSCallConv      = 93,
+        LLVMMSP430BUILTINCallConv = 94,
+        LLVMAMDGPULSCallConv      = 95,
+        LLVMAMDGPUESCallConv      = 96;
+
+    /**
+     * {@code LLVMValueKind}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #LLVMArgumentValueKind ArgumentValueKind}</li>
+     * <li>{@link #LLVMBasicBlockValueKind BasicBlockValueKind}</li>
+     * <li>{@link #LLVMMemoryUseValueKind MemoryUseValueKind}</li>
+     * <li>{@link #LLVMMemoryDefValueKind MemoryDefValueKind}</li>
+     * <li>{@link #LLVMMemoryPhiValueKind MemoryPhiValueKind}</li>
+     * <li>{@link #LLVMFunctionValueKind FunctionValueKind}</li>
+     * <li>{@link #LLVMGlobalAliasValueKind GlobalAliasValueKind}</li>
+     * <li>{@link #LLVMGlobalIFuncValueKind GlobalIFuncValueKind}</li>
+     * <li>{@link #LLVMGlobalVariableValueKind GlobalVariableValueKind}</li>
+     * <li>{@link #LLVMBlockAddressValueKind BlockAddressValueKind}</li>
+     * <li>{@link #LLVMConstantExprValueKind ConstantExprValueKind}</li>
+     * <li>{@link #LLVMConstantArrayValueKind ConstantArrayValueKind}</li>
+     * <li>{@link #LLVMConstantStructValueKind ConstantStructValueKind}</li>
+     * <li>{@link #LLVMConstantVectorValueKind ConstantVectorValueKind}</li>
+     * <li>{@link #LLVMUndefValueValueKind UndefValueValueKind}</li>
+     * <li>{@link #LLVMConstantAggregateZeroValueKind ConstantAggregateZeroValueKind}</li>
+     * <li>{@link #LLVMConstantDataArrayValueKind ConstantDataArrayValueKind}</li>
+     * <li>{@link #LLVMConstantDataVectorValueKind ConstantDataVectorValueKind}</li>
+     * <li>{@link #LLVMConstantIntValueKind ConstantIntValueKind}</li>
+     * <li>{@link #LLVMConstantFPValueKind ConstantFPValueKind}</li>
+     * <li>{@link #LLVMConstantPointerNullValueKind ConstantPointerNullValueKind}</li>
+     * <li>{@link #LLVMConstantTokenNoneValueKind ConstantTokenNoneValueKind}</li>
+     * <li>{@link #LLVMMetadataAsValueValueKind MetadataAsValueValueKind}</li>
+     * <li>{@link #LLVMInlineAsmValueKind InlineAsmValueKind}</li>
+     * <li>{@link #LLVMInstructionValueKind InstructionValueKind}</li>
+     * </ul>
+     */
+    public static final int
+        LLVMArgumentValueKind              = 0,
+        LLVMBasicBlockValueKind            = 1,
+        LLVMMemoryUseValueKind             = 2,
+        LLVMMemoryDefValueKind             = 3,
+        LLVMMemoryPhiValueKind             = 4,
+        LLVMFunctionValueKind              = 5,
+        LLVMGlobalAliasValueKind           = 6,
+        LLVMGlobalIFuncValueKind           = 7,
+        LLVMGlobalVariableValueKind        = 8,
+        LLVMBlockAddressValueKind          = 9,
+        LLVMConstantExprValueKind          = 10,
+        LLVMConstantArrayValueKind         = 11,
+        LLVMConstantStructValueKind        = 12,
+        LLVMConstantVectorValueKind        = 13,
+        LLVMUndefValueValueKind            = 14,
+        LLVMConstantAggregateZeroValueKind = 15,
+        LLVMConstantDataArrayValueKind     = 16,
+        LLVMConstantDataVectorValueKind    = 17,
+        LLVMConstantIntValueKind           = 18,
+        LLVMConstantFPValueKind            = 19,
+        LLVMConstantPointerNullValueKind   = 20,
+        LLVMConstantTokenNoneValueKind     = 21,
+        LLVMMetadataAsValueValueKind       = 22,
+        LLVMInlineAsmValueKind             = 23,
+        LLVMInstructionValueKind           = 24;
+
+    /**
+     * {@code LLVMIntPredicate}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #LLVMIntEQ IntEQ} - equal</li>
+     * <li>{@link #LLVMIntNE IntNE} - not equal</li>
+     * <li>{@link #LLVMIntUGT IntUGT} - unsigned greater than</li>
+     * <li>{@link #LLVMIntUGE IntUGE} - unsigned greater or equal</li>
+     * <li>{@link #LLVMIntULT IntULT} - unsigned less than</li>
+     * <li>{@link #LLVMIntULE IntULE} - unsigned less or equal</li>
+     * <li>{@link #LLVMIntSGT IntSGT} - signed greater than</li>
+     * <li>{@link #LLVMIntSGE IntSGE} - signed greater or equal</li>
+     * <li>{@link #LLVMIntSLT IntSLT} - signed less than</li>
+     * <li>{@link #LLVMIntSLE IntSLE} - signed less or equal</li>
+     * </ul>
+     */
+    public static final int
+        LLVMIntEQ  = 32,
+        LLVMIntNE  = 33,
+        LLVMIntUGT = 34,
+        LLVMIntUGE = 35,
+        LLVMIntULT = 36,
+        LLVMIntULE = 37,
+        LLVMIntSGT = 38,
+        LLVMIntSGE = 39,
+        LLVMIntSLT = 40,
+        LLVMIntSLE = 41;
+
+    /**
+     * {@code LLVMRealPredicate}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #LLVMRealPredicateFalse RealPredicateFalse} - Always false (always folded)</li>
+     * <li>{@link #LLVMRealOEQ RealOEQ} - True if ordered and equal</li>
+     * <li>{@link #LLVMRealOGT RealOGT} - True if ordered and greater than</li>
+     * <li>{@link #LLVMRealOGE RealOGE} - True if ordered and greater than or equal</li>
+     * <li>{@link #LLVMRealOLT RealOLT} - True if ordered and less than</li>
+     * <li>{@link #LLVMRealOLE RealOLE} - True if ordered and less than or equal</li>
+     * <li>{@link #LLVMRealONE RealONE} - True if ordered and operands are unequal</li>
+     * <li>{@link #LLVMRealORD RealORD} - True if ordered (no nans)</li>
+     * <li>{@link #LLVMRealUNO RealUNO} - True if unordered: isnan(X) | isnan(Y)</li>
+     * <li>{@link #LLVMRealUEQ RealUEQ} - True if unordered or equal</li>
+     * <li>{@link #LLVMRealUGT RealUGT} - True if unordered or greater than</li>
+     * <li>{@link #LLVMRealUGE RealUGE} - True if unordered, greater than, or equal</li>
+     * <li>{@link #LLVMRealULT RealULT} - True if unordered or less than</li>
+     * <li>{@link #LLVMRealULE RealULE} - True if unordered, less than, or equal</li>
+     * <li>{@link #LLVMRealUNE RealUNE} - True if unordered or not equal</li>
+     * <li>{@link #LLVMRealPredicateTrue RealPredicateTrue} - Always true (always folded)</li>
+     * </ul>
+     */
+    public static final int
+        LLVMRealPredicateFalse = 0,
+        LLVMRealOEQ            = 1,
+        LLVMRealOGT            = 2,
+        LLVMRealOGE            = 3,
+        LLVMRealOLT            = 4,
+        LLVMRealOLE            = 5,
+        LLVMRealONE            = 6,
+        LLVMRealORD            = 7,
+        LLVMRealUNO            = 8,
+        LLVMRealUEQ            = 9,
+        LLVMRealUGT            = 10,
+        LLVMRealUGE            = 11,
+        LLVMRealULT            = 12,
+        LLVMRealULE            = 13,
+        LLVMRealUNE            = 14,
+        LLVMRealPredicateTrue  = 15;
+
+    /**
+     * {@code LLVMLandingPadClauseTy}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #LLVMLandingPadCatch LandingPadCatch} - A catch clause</li>
+     * <li>{@link #LLVMLandingPadFilter LandingPadFilter} - A filter clause</li>
+     * </ul>
+     */
+    public static final int
+        LLVMLandingPadCatch  = 0,
+        LLVMLandingPadFilter = 1;
+
+    /**
+     * {@code LLVMThreadLocalMode}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #LLVMNotThreadLocal NotThreadLocal}</li>
+     * <li>{@link #LLVMGeneralDynamicTLSModel GeneralDynamicTLSModel}</li>
+     * <li>{@link #LLVMLocalDynamicTLSModel LocalDynamicTLSModel}</li>
+     * <li>{@link #LLVMInitialExecTLSModel InitialExecTLSModel}</li>
+     * <li>{@link #LLVMLocalExecTLSModel LocalExecTLSModel}</li>
+     * </ul>
+     */
+    public static final int
+        LLVMNotThreadLocal         = 0,
+        LLVMGeneralDynamicTLSModel = 1,
+        LLVMLocalDynamicTLSModel   = 2,
+        LLVMInitialExecTLSModel    = 3,
+        LLVMLocalExecTLSModel      = 4;
+
+    /**
+     * {@code LLVMAtomicOrdering}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #LLVMAtomicOrderingNotAtomic AtomicOrderingNotAtomic} - A load or store which is not atomic</li>
+     * <li>{@link #LLVMAtomicOrderingUnordered AtomicOrderingUnordered} - Lowest level of atomicity, guarantees somewhat sane results, lock free.</li>
+     * <li>{@link #LLVMAtomicOrderingMonotonic AtomicOrderingMonotonic} - guarantees that if you take all the operations affecting a specific address, a consistent ordering exists</li>
+     * <li>{@link #LLVMAtomicOrderingAcquire AtomicOrderingAcquire} - Acquire provides a barrier of the sort necessary to acquire a lock to access other memory with normal loads and stores.</li>
+     * <li>{@link #LLVMAtomicOrderingRelease AtomicOrderingRelease} - Release is similar to Acquire, but with a barrier of the sort necessary to release a lock.</li>
+     * <li>{@link #LLVMAtomicOrderingAcquireRelease AtomicOrderingAcquireRelease} - provides both an Acquire and a Release barrier (for fences and operations which both read and write memory).</li>
+     * <li>{@link #LLVMAtomicOrderingSequentiallyConsistent AtomicOrderingSequentiallyConsistent} - 
+     * provides Acquire semantics for loads and Release semantics for stores. Additionally, it guarantees that a total ordering exists between all
+     * SequentiallyConsistent operations.
+     * </li>
+     * </ul>
+     */
+    public static final int
+        LLVMAtomicOrderingNotAtomic              = 0,
+        LLVMAtomicOrderingUnordered              = 1,
+        LLVMAtomicOrderingMonotonic              = 2,
+        LLVMAtomicOrderingAcquire                = 4,
+        LLVMAtomicOrderingRelease                = 5,
+        LLVMAtomicOrderingAcquireRelease         = 6,
+        LLVMAtomicOrderingSequentiallyConsistent = 7;
+
+    /**
+     * {@code LLVMAtomicRMWBinOp}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #LLVMAtomicRMWBinOpXchg AtomicRMWBinOpXchg} - Set the new value and return the one old</li>
+     * <li>{@link #LLVMAtomicRMWBinOpAdd AtomicRMWBinOpAdd} - Add a value and return the old one</li>
+     * <li>{@link #LLVMAtomicRMWBinOpSub AtomicRMWBinOpSub} - Subtract a value and return the old one</li>
+     * <li>{@link #LLVMAtomicRMWBinOpAnd AtomicRMWBinOpAnd} - And a value and return the old one</li>
+     * <li>{@link #LLVMAtomicRMWBinOpNand AtomicRMWBinOpNand} - Not-And a value and return the old one</li>
+     * <li>{@link #LLVMAtomicRMWBinOpOr AtomicRMWBinOpOr} - OR a value and return the old one</li>
+     * <li>{@link #LLVMAtomicRMWBinOpXor AtomicRMWBinOpXor} - Xor a value and return the old one</li>
+     * <li>{@link #LLVMAtomicRMWBinOpMax AtomicRMWBinOpMax} - Sets the value if it's greater than the original using a signed comparison and return the old one</li>
+     * <li>{@link #LLVMAtomicRMWBinOpMin AtomicRMWBinOpMin} - Sets the value if it's Smaller than the original using a signed comparison and return the old one</li>
+     * <li>{@link #LLVMAtomicRMWBinOpUMax AtomicRMWBinOpUMax} - Sets the value if it's greater than the original using an unsigned comparison and return the old one</li>
+     * <li>{@link #LLVMAtomicRMWBinOpUMin AtomicRMWBinOpUMin} - Sets the value if it's greater than the original using an unsigned comparison  and return the old one</li>
+     * </ul>
+     */
+    public static final int
+        LLVMAtomicRMWBinOpXchg = 0,
+        LLVMAtomicRMWBinOpAdd  = 1,
+        LLVMAtomicRMWBinOpSub  = 2,
+        LLVMAtomicRMWBinOpAnd  = 3,
+        LLVMAtomicRMWBinOpNand = 4,
+        LLVMAtomicRMWBinOpOr   = 5,
+        LLVMAtomicRMWBinOpXor  = 6,
+        LLVMAtomicRMWBinOpMax  = 7,
+        LLVMAtomicRMWBinOpMin  = 8,
+        LLVMAtomicRMWBinOpUMax = 9,
+        LLVMAtomicRMWBinOpUMin = 10;
+
+    /**
+     * {@code LLVMDiagnosticSeverity}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #LLVMDSError DSError}</li>
+     * <li>{@link #LLVMDSWarning DSWarning}</li>
+     * <li>{@link #LLVMDSRemark DSRemark}</li>
+     * <li>{@link #LLVMDSNote DSNote}</li>
+     * </ul>
+     */
+    public static final int
+        LLVMDSError   = 0,
+        LLVMDSWarning = 1,
+        LLVMDSRemark  = 2,
+        LLVMDSNote    = 3;
+
+    /**
+     * {@code LLVMInlineAsmDialect}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #LLVMInlineAsmDialectATT InlineAsmDialectATT}</li>
+     * <li>{@link #LLVMInlineAsmDialectIntel InlineAsmDialectIntel}</li>
+     * </ul>
+     */
+    public static final int
+        LLVMInlineAsmDialectATT   = 0,
+        LLVMInlineAsmDialectIntel = 1;
+
+    /**
+     * {@code LLVMModuleFlagBehavior}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #LLVMModuleFlagBehaviorError ModuleFlagBehaviorError} - Emits an error if two values disagree, otherwise the resulting value is that of the operands.</li>
+     * <li>{@link #LLVMModuleFlagBehaviorWarning ModuleFlagBehaviorWarning} - Emits a warning if two values disagree. The result value will be the operand for the flag from the first module being linked.</li>
+     * <li>{@link #LLVMModuleFlagBehaviorRequire ModuleFlagBehaviorRequire} - 
+     * Adds a requirement that another module flag be present and have a specified value after linking is performed. The value must be a metadata pair,
+     * where the first element of the pair is the ID of the module flag to be restricted, and the second element of the pair is the value the module flag
+     * should be restricted to. This behavior can be used to restrict the allowable results (via triggering of an error) of linking IDs with the
+            **Override** behavior.
+     * </li>
+     * <li>{@link #LLVMModuleFlagBehaviorOverride ModuleFlagBehaviorOverride} - 
+     * Uses the specified value, regardless of the behavior or value of the other module. If both modules specify **Override**, but the values differ, an
+     * error will be emitted.
+     * </li>
+     * <li>{@link #LLVMModuleFlagBehaviorAppend ModuleFlagBehaviorAppend} - Appends the two values, which are required to be metadata nodes.</li>
+     * <li>{@link #LLVMModuleFlagBehaviorAppendUnique ModuleFlagBehaviorAppendUnique} - 
+     * Appends the two values, which are required to be metadata nodes. However, duplicate entries in the second list are dropped during the append
+     * operation.
+     * </li>
+     * </ul>
+     */
+    public static final int
+        LLVMModuleFlagBehaviorError        = 0,
+        LLVMModuleFlagBehaviorWarning      = 1,
+        LLVMModuleFlagBehaviorRequire      = 2,
+        LLVMModuleFlagBehaviorOverride     = 3,
+        LLVMModuleFlagBehaviorAppend       = 4,
+        LLVMModuleFlagBehaviorAppendUnique = 5;
+
+    /**
+     * Attribute index are either {@code LLVMAttributeReturnIndex}, {@code LLVMAttributeFunctionIndex} or a parameter number from 1 to N.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #LLVMAttributeReturnIndex AttributeReturnIndex}</li>
+     * <li>{@link #LLVMAttributeFunctionIndex AttributeFunctionIndex} - ISO C restricts enumerator values to range of 'int' (4294967295 is too large)</li>
+     * </ul>
+     */
+    public static final int
+        LLVMAttributeReturnIndex   = 0,
+        LLVMAttributeFunctionIndex = -1;
+
+    protected LLVMCore() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ LLVMInitializeCore ] ---

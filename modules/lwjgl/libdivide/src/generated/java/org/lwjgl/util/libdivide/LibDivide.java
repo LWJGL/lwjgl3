@@ -23,6 +23,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class LibDivide {
 
+    static { Library.loadSystem(System::load, System::loadLibrary, LibDivide.class, "org.lwjgl.libdivide", Platform.mapLibraryNameBundled("lwjgl_libdivide")); }
+
     /** Library version. */
     public static final int
         LIBDIVIDE_VERSION_MAJOR = 2,
@@ -43,8 +45,6 @@ public class LibDivide {
         LIBDIVIDE_64_SHIFT_MASK    = 0x3F,
         LIBDIVIDE_ADD_MARKER       = 0x40,
         LIBDIVIDE_NEGATIVE_DIVISOR = 0x80;
-
-    static { Library.loadSystem(System::load, System::loadLibrary, LibDivide.class, "org.lwjgl.libdivide", Platform.mapLibraryNameBundled("lwjgl_libdivide")); }
 
     protected LibDivide() {
         throw new UnsupportedOperationException();

@@ -61,6 +61,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVGPUShader5 {
 
+    static { GL.initialize(); }
+
     /** Returned by the {@code type} parameter of GetActiveAttrib, GetActiveUniform, and GetTransformFeedbackVarying. */
     public static final int
         GL_INT64_NV               = 0x140E,
@@ -91,8 +93,6 @@ public class NVGPUShader5 {
         GL_FLOAT16_VEC2_NV        = 0x8FF9,
         GL_FLOAT16_VEC3_NV        = 0x8FFA,
         GL_FLOAT16_VEC4_NV        = 0x8FFB;
-
-    static { GL.initialize(); }
 
     protected NVGPUShader5() {
         throw new UnsupportedOperationException();

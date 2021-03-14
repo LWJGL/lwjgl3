@@ -39,10 +39,6 @@ import static org.lwjgl.util.opus.Opus.*;
  */
 public class OpusCustom {
 
-    protected OpusCustom() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code Opus.getLibrary()}. */
     public static final class Functions {
 
@@ -67,6 +63,10 @@ public class OpusCustom {
             custom_decode           = apiGetFunctionAddress(Opus.getLibrary(), "opus_custom_decode"),
             custom_decoder_ctl      = apiGetFunctionAddress(Opus.getLibrary(), "opus_custom_decoder_ctl");
 
+    }
+
+    protected OpusCustom() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ opus_custom_mode_create ] ---

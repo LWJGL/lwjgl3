@@ -39,6 +39,8 @@ import org.lwjgl.system.*;
  */
 public class ARBVertexAttrib64Bit {
 
+    static { GL.initialize(); }
+
     /** Returned in the {@code type} parameter of GetActiveAttrib. */
     public static final int
         GL_DOUBLE_VEC2   = 0x8FFC,
@@ -53,8 +55,6 @@ public class ARBVertexAttrib64Bit {
         GL_DOUBLE_MAT3x4 = 0x8F4C,
         GL_DOUBLE_MAT4x2 = 0x8F4D,
         GL_DOUBLE_MAT4x3 = 0x8F4E;
-
-    static { GL.initialize(); }
 
     protected ARBVertexAttrib64Bit() {
         throw new UnsupportedOperationException();

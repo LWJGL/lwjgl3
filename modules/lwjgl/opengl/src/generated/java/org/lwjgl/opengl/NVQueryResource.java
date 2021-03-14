@@ -32,6 +32,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVQueryResource {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code queryType} parameter of {@link #glQueryResourceNV QueryResourceNV}. */
     public static final int GL_QUERY_RESOURCE_TYPE_VIDMEM_ALLOC_NV = 0x9540;
 
@@ -42,8 +44,6 @@ public class NVQueryResource {
         GL_QUERY_RESOURCE_TEXTURE_NV        = 0x9545,
         GL_QUERY_RESOURCE_RENDERBUFFER_NV   = 0x9546,
         GL_QUERY_RESOURCE_BUFFEROBJECT_NV   = 0x9547;
-
-    static { GL.initialize(); }
 
     protected NVQueryResource() {
         throw new UnsupportedOperationException();

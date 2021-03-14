@@ -169,13 +169,13 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTDirectStateAccess {
 
+    static { GL.initialize(); }
+
     /** GetBooleani_v, GetIntegeri_v, GetFloati_vEXT, GetDoublei_vEXT. */
     public static final int
         GL_PROGRAM_MATRIX_EXT             = 0x8E2D,
         GL_TRANSPOSE_PROGRAM_MATRIX_EXT   = 0x8E2E,
         GL_PROGRAM_MATRIX_STACK_DEPTH_EXT = 0x8E2F;
-
-    static { GL.initialize(); }
 
     protected EXTDirectStateAccess() {
         throw new UnsupportedOperationException();
