@@ -1089,7 +1089,7 @@ val VkPhysicalDeviceFeatures = struct(Module.VULKAN, "VkPhysicalDeviceFeatures")
             <li>
                 If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-robustBufferAccess2">{@code robustBufferAccess2}</a> is enabled, vertex input attributes are considered out of bounds if the offset of the attribute in the bound vertex buffer range plus the size of the attribute is greater than the byte size of the memory range bound to the vertex buffer binding.
                 <ul>
-                    <li>If a vertex input attribute is out of bounds, the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#fxvertex-input-extraction">raw data</a> extracted are zero values, and missing G, B, or A components are <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#fxvertex-input-extraction">filled with <code>(0,0,1)</code</a>>.</li>
+                    <li>If a vertex input attribute is out of bounds, the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#fxvertex-input-extraction">raw data</a> extracted are zero values, and missing G, B, or A components are <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#fxvertex-input-extraction">filled with <code>(0,0,1)</code></a>.</li>
                 </ul>
             </li>
             <li>If {@code robustBufferAccess} is not enabled, applications <b>must</b> not perform out of bounds accesses.</li>

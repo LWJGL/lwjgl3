@@ -38,7 +38,7 @@ package org.lwjgl.vulkan;
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
- * <li>See contributors to {@link KHRRayTracing VK_KHR_ray_tracing}</li>
+ * <li>See contributors to {@link KHRRayTracingPipeline VK_KHR_ray_tracing_pipeline}</li>
  * </ul></dd>
  * </dl>
  */

@@ -48,7 +48,7 @@ val KHR_pipeline_library = "KHRPipelineLibrary".nativeClassVK("KHR_pipeline_libr
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
-                <li>See contributors to {@link KHRRayTracing VK_KHR_ray_tracing}</li>
+                <li>See contributors to {@link KHRRayTracingPipeline VK_KHR_ray_tracing_pipeline}</li>
             </ul></dd>
         </dl>
         """
