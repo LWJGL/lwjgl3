@@ -632,6 +632,44 @@ $indentation}"""
         throw IllegalArgumentException("$msg [${this@Struct.className}, member: $name]")
     }
 
+    private fun generateBitfields() {
+        var index = 0
+        var i = 0
+        while (i < members.size) {
+            val ref = members[i]
+            if (ref.bits == -1) {
+                i++
+                continue
+            }
+
+            // skip custom bitfields (e.g. Yoga's <Bitfield.h>)
+            if (0 < i && members[i - 1].virtual) {
+                var bitsLeft = (members[i - 1].nativeType.mapping as PrimitiveMapping).bytes * 8
+                while (0 < bitsLeft && i < members.size && members[i].bits != -1) {
+                    bitsLeft -= members[i++].bits
+                }
+                continue
+            }
+
+            val typeMapping = (ref.nativeType as PrimitiveType).mapping
+
+            var bitsLeft = typeMapping.bytes * 8 - ref.bits
+
+            var n = i + 1
+            while (0 < bitsLeft && n < members.size) {
+                val member = members[n]
+                if (member.bits == -1 || (member.nativeType as PrimitiveType).mapping !== typeMapping || bitsLeft < member.bits) {
+                    break
+                }
+                n++
+                bitsLeft -= member.bits
+            }
+
+            members.add(i, StructMember(ref.nativeType, "bitfield${index++}", "", -1).virtual())
+            i = n + 1
+        }
+    }
+
     private fun validate(mallocable: Boolean) {
         if (mallocable) {
             members.forEach {
@@ -671,6 +709,8 @@ $indentation}"""
             usageOutput = usageOutput or alias.usageOutput
             usageResultPointer = usageResultPointer or alias.usageResultPointer
         }
+
+        generateBitfields()
 
         val mallocable = mutableMembers().any() || usageOutput || (usageInput && !usageResultPointer)
         validate(mallocable)
