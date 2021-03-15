@@ -120,7 +120,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * limit which indicates the color sample counts that are supported for all framebuffer color attachments with integer formats.</li>
  * </ul>
  */
-public class VK12 extends VK10 {
+public class VK12 extends VK11 {
 
     /**
      * Extends {@code VkStructureType}.
