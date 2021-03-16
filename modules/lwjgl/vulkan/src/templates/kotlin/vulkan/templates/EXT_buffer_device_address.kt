@@ -111,7 +111,7 @@ val EXT_buffer_device_address = "EXTBufferDeviceAddress".nativeClassVK("EXT_buff
     EnumConstant(
         "Extends {@code VkResult}.",
 
-        "ERROR_INVALID_DEVICE_ADDRESS_EXT".."-1000244000"
+        "ERROR_INVALID_DEVICE_ADDRESS_EXT".."-1000257000"
     )
 
     VkDeviceAddress(

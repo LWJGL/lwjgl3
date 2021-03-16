@@ -100,7 +100,7 @@ public class EXTBufferDeviceAddress {
     public static final int VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT = 0x10;
 
     /** Extends {@code VkResult}. */
-    public static final int VK_ERROR_INVALID_DEVICE_ADDRESS_EXT = -1000244000;
+    public static final int VK_ERROR_INVALID_DEVICE_ADDRESS_EXT = -1000257000;
 
     protected EXTBufferDeviceAddress() {
         throw new UnsupportedOperationException();
