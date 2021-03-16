@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code preferredFlags} &ndash; 
  * flags that preferably should be set in a memory type chosen for an allocation.
  * 
- * <p>Set to 0 if no additional flags are prefered. If {@code pool} is not null, this member is ignored.</p></li>
+ * <p>Set to 0 if no additional flags are preferred. If {@code pool} is not null, this member is ignored.</p></li>
  * <li>{@code memoryTypeBits} &ndash; 
  * bitmask containing one bit set for every memory type acceptable for this allocation.
  * 
@@ -47,6 +47,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If {@link Vma#VMA_ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT} is used, it must be either null or pointer to a null-terminated string. The string will be then copied
  * to internal buffer, so it doesn't need to be valid after allocation call.</p></li>
+ * <li>{@code priority} &ndash; 
+ * A floating-point value between 0 and 1, indicating the priority of the allocation relative to other memory allocations.
+ * 
+ * <p>It is used only when {@link Vma#VMA_ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT} flag was used during creation of the {@code VmaAllocator} object and this allocation
+ * ends up as dedicated or is explicitly forced as dedicated using {@link Vma#VMA_ALLOCATION_CREATE_DEDICATED_MEMORY_BIT ALLOCATION_CREATE_DEDICATED_MEMORY_BIT}. Otherwise, it has the priority of a memory
+ * block where it is placed and this variable is ignored.</p></li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -60,6 +66,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t memoryTypeBits;
  *     VmaPool pool;
  *     void * pUserData;
+ *     float priority;
  * }</code></pre>
  */
 public class VmaAllocationCreateInfo extends Struct implements NativeResource {
@@ -78,7 +85,8 @@ public class VmaAllocationCreateInfo extends Struct implements NativeResource {
         PREFERREDFLAGS,
         MEMORYTYPEBITS,
         POOL,
-        PUSERDATA;
+        PUSERDATA,
+        PRIORITY;
 
     static {
         Layout layout = __struct(
@@ -88,7 +96,8 @@ public class VmaAllocationCreateInfo extends Struct implements NativeResource {
             __member(4),
             __member(4),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE)
+            __member(POINTER_SIZE),
+            __member(4)
         );
 
         SIZEOF = layout.getSize();
@@ -101,6 +110,7 @@ public class VmaAllocationCreateInfo extends Struct implements NativeResource {
         MEMORYTYPEBITS = layout.offsetof(4);
         POOL = layout.offsetof(5);
         PUSERDATA = layout.offsetof(6);
+        PRIORITY = layout.offsetof(7);
     }
 
     /**
@@ -137,6 +147,8 @@ public class VmaAllocationCreateInfo extends Struct implements NativeResource {
     /** Returns the value of the {@code pUserData} field. */
     @NativeType("void *")
     public long pUserData() { return npUserData(address()); }
+    /** Returns the value of the {@code priority} field. */
+    public float priority() { return npriority(address()); }
 
     /** Sets the specified value to the {@code flags} field. */
     public VmaAllocationCreateInfo flags(@NativeType("VmaAllocationCreateFlags") int value) { nflags(address(), value); return this; }
@@ -152,6 +164,8 @@ public class VmaAllocationCreateInfo extends Struct implements NativeResource {
     public VmaAllocationCreateInfo pool(@NativeType("VmaPool") long value) { npool(address(), value); return this; }
     /** Sets the specified value to the {@code pUserData} field. */
     public VmaAllocationCreateInfo pUserData(@NativeType("void *") long value) { npUserData(address(), value); return this; }
+    /** Sets the specified value to the {@code priority} field. */
+    public VmaAllocationCreateInfo priority(float value) { npriority(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VmaAllocationCreateInfo set(
@@ -161,7 +175,8 @@ public class VmaAllocationCreateInfo extends Struct implements NativeResource {
         int preferredFlags,
         int memoryTypeBits,
         long pool,
-        long pUserData
+        long pUserData,
+        float priority
     ) {
         flags(flags);
         usage(usage);
@@ -170,6 +185,7 @@ public class VmaAllocationCreateInfo extends Struct implements NativeResource {
         memoryTypeBits(memoryTypeBits);
         pool(pool);
         pUserData(pUserData);
+        priority(priority);
 
         return this;
     }
@@ -343,6 +359,8 @@ public class VmaAllocationCreateInfo extends Struct implements NativeResource {
     public static long npool(long struct) { return memGetAddress(struct + VmaAllocationCreateInfo.POOL); }
     /** Unsafe version of {@link #pUserData}. */
     public static long npUserData(long struct) { return memGetAddress(struct + VmaAllocationCreateInfo.PUSERDATA); }
+    /** Unsafe version of {@link #priority}. */
+    public static float npriority(long struct) { return UNSAFE.getFloat(null, struct + VmaAllocationCreateInfo.PRIORITY); }
 
     /** Unsafe version of {@link #flags(int) flags}. */
     public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VmaAllocationCreateInfo.FLAGS, value); }
@@ -358,6 +376,8 @@ public class VmaAllocationCreateInfo extends Struct implements NativeResource {
     public static void npool(long struct, long value) { memPutAddress(struct + VmaAllocationCreateInfo.POOL, value); }
     /** Unsafe version of {@link #pUserData(long) pUserData}. */
     public static void npUserData(long struct, long value) { memPutAddress(struct + VmaAllocationCreateInfo.PUSERDATA, value); }
+    /** Unsafe version of {@link #priority(float) priority}. */
+    public static void npriority(long struct, float value) { UNSAFE.putFloat(null, struct + VmaAllocationCreateInfo.PRIORITY, value); }
 
     // -----------------------------------
 
@@ -418,6 +438,8 @@ public class VmaAllocationCreateInfo extends Struct implements NativeResource {
         /** Returns the value of the {@code pUserData} field. */
         @NativeType("void *")
         public long pUserData() { return VmaAllocationCreateInfo.npUserData(address()); }
+        /** Returns the value of the {@code priority} field. */
+        public float priority() { return VmaAllocationCreateInfo.npriority(address()); }
 
         /** Sets the specified value to the {@code flags} field. */
         public VmaAllocationCreateInfo.Buffer flags(@NativeType("VmaAllocationCreateFlags") int value) { VmaAllocationCreateInfo.nflags(address(), value); return this; }
@@ -433,6 +455,8 @@ public class VmaAllocationCreateInfo extends Struct implements NativeResource {
         public VmaAllocationCreateInfo.Buffer pool(@NativeType("VmaPool") long value) { VmaAllocationCreateInfo.npool(address(), value); return this; }
         /** Sets the specified value to the {@code pUserData} field. */
         public VmaAllocationCreateInfo.Buffer pUserData(@NativeType("void *") long value) { VmaAllocationCreateInfo.npUserData(address(), value); return this; }
+        /** Sets the specified value to the {@code priority} field. */
+        public VmaAllocationCreateInfo.Buffer priority(float value) { VmaAllocationCreateInfo.npriority(address(), value); return this; }
 
     }
 

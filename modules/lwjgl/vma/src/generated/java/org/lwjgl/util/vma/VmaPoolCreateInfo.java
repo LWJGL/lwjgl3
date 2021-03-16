@@ -47,6 +47,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * you allocate resources needed for the current frame, set this value to 1.</p>
  * 
  * <p>If you want to allow any allocations other than used in the current frame to become lost, set this value to 0.</p></li>
+ * <li>{@code priority} &ndash; 
+ * A floating-point value between 0 and 1, indicating the priority of the allocations in this pool relative to other memory allocations.
+ * 
+ * <p>It is used only when {@link Vma#VMA_ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT} flag was used during creation of the {@code VmaAllocator} object. Otherwise, this
+ * variable is ignored.</p></li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -59,6 +64,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     size_t minBlockCount;
  *     size_t maxBlockCount;
  *     uint32_t frameInUseCount;
+ *     float priority;
  * }</code></pre>
  */
 public class VmaPoolCreateInfo extends Struct implements NativeResource {
@@ -76,7 +82,8 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
         BLOCKSIZE,
         MINBLOCKCOUNT,
         MAXBLOCKCOUNT,
-        FRAMEINUSECOUNT;
+        FRAMEINUSECOUNT,
+        PRIORITY;
 
     static {
         Layout layout = __struct(
@@ -85,6 +92,7 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
             __member(8),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
+            __member(4),
             __member(4)
         );
 
@@ -97,6 +105,7 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
         MINBLOCKCOUNT = layout.offsetof(3);
         MAXBLOCKCOUNT = layout.offsetof(4);
         FRAMEINUSECOUNT = layout.offsetof(5);
+        PRIORITY = layout.offsetof(6);
     }
 
     /**
@@ -130,6 +139,8 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
     /** Returns the value of the {@code frameInUseCount} field. */
     @NativeType("uint32_t")
     public int frameInUseCount() { return nframeInUseCount(address()); }
+    /** Returns the value of the {@code priority} field. */
+    public float priority() { return npriority(address()); }
 
     /** Sets the specified value to the {@code memoryTypeIndex} field. */
     public VmaPoolCreateInfo memoryTypeIndex(@NativeType("uint32_t") int value) { nmemoryTypeIndex(address(), value); return this; }
@@ -143,6 +154,8 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
     public VmaPoolCreateInfo maxBlockCount(@NativeType("size_t") long value) { nmaxBlockCount(address(), value); return this; }
     /** Sets the specified value to the {@code frameInUseCount} field. */
     public VmaPoolCreateInfo frameInUseCount(@NativeType("uint32_t") int value) { nframeInUseCount(address(), value); return this; }
+    /** Sets the specified value to the {@code priority} field. */
+    public VmaPoolCreateInfo priority(float value) { npriority(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VmaPoolCreateInfo set(
@@ -151,7 +164,8 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
         long blockSize,
         long minBlockCount,
         long maxBlockCount,
-        int frameInUseCount
+        int frameInUseCount,
+        float priority
     ) {
         memoryTypeIndex(memoryTypeIndex);
         flags(flags);
@@ -159,6 +173,7 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
         minBlockCount(minBlockCount);
         maxBlockCount(maxBlockCount);
         frameInUseCount(frameInUseCount);
+        priority(priority);
 
         return this;
     }
@@ -330,6 +345,8 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
     public static long nmaxBlockCount(long struct) { return memGetAddress(struct + VmaPoolCreateInfo.MAXBLOCKCOUNT); }
     /** Unsafe version of {@link #frameInUseCount}. */
     public static int nframeInUseCount(long struct) { return UNSAFE.getInt(null, struct + VmaPoolCreateInfo.FRAMEINUSECOUNT); }
+    /** Unsafe version of {@link #priority}. */
+    public static float npriority(long struct) { return UNSAFE.getFloat(null, struct + VmaPoolCreateInfo.PRIORITY); }
 
     /** Unsafe version of {@link #memoryTypeIndex(int) memoryTypeIndex}. */
     public static void nmemoryTypeIndex(long struct, int value) { UNSAFE.putInt(null, struct + VmaPoolCreateInfo.MEMORYTYPEINDEX, value); }
@@ -343,6 +360,8 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
     public static void nmaxBlockCount(long struct, long value) { memPutAddress(struct + VmaPoolCreateInfo.MAXBLOCKCOUNT, value); }
     /** Unsafe version of {@link #frameInUseCount(int) frameInUseCount}. */
     public static void nframeInUseCount(long struct, int value) { UNSAFE.putInt(null, struct + VmaPoolCreateInfo.FRAMEINUSECOUNT, value); }
+    /** Unsafe version of {@link #priority(float) priority}. */
+    public static void npriority(long struct, float value) { UNSAFE.putFloat(null, struct + VmaPoolCreateInfo.PRIORITY, value); }
 
     // -----------------------------------
 
@@ -400,6 +419,8 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
         /** Returns the value of the {@code frameInUseCount} field. */
         @NativeType("uint32_t")
         public int frameInUseCount() { return VmaPoolCreateInfo.nframeInUseCount(address()); }
+        /** Returns the value of the {@code priority} field. */
+        public float priority() { return VmaPoolCreateInfo.npriority(address()); }
 
         /** Sets the specified value to the {@code memoryTypeIndex} field. */
         public VmaPoolCreateInfo.Buffer memoryTypeIndex(@NativeType("uint32_t") int value) { VmaPoolCreateInfo.nmemoryTypeIndex(address(), value); return this; }
@@ -413,6 +434,8 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
         public VmaPoolCreateInfo.Buffer maxBlockCount(@NativeType("size_t") long value) { VmaPoolCreateInfo.nmaxBlockCount(address(), value); return this; }
         /** Sets the specified value to the {@code frameInUseCount} field. */
         public VmaPoolCreateInfo.Buffer frameInUseCount(@NativeType("uint32_t") int value) { VmaPoolCreateInfo.nframeInUseCount(address(), value); return this; }
+        /** Sets the specified value to the {@code priority} field. */
+        public VmaPoolCreateInfo.Buffer priority(float value) { VmaPoolCreateInfo.npriority(address(), value); return this; }
 
     }
 

@@ -21,7 +21,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     VmaAllocator allocator,
  *     uint32_t memoryType,
  *     VkDeviceMemory memory,
- *     VkDeviceSize size
+ *     VkDeviceSize size,
+ *     void *pUserData
  * )</code></pre>
  */
 public abstract class VmaAllocateDeviceMemoryFunction extends Callback implements VmaAllocateDeviceMemoryFunctionI {
@@ -69,8 +70,8 @@ public abstract class VmaAllocateDeviceMemoryFunction extends Callback implement
         }
 
         @Override
-        public void invoke(long allocator, int memoryType, long memory, long size) {
-            delegate.invoke(allocator, memoryType, memory, size);
+        public void invoke(long allocator, int memoryType, long memory, long size, long pUserData) {
+            delegate.invoke(allocator, memoryType, memory, size, pUserData);
         }
 
     }

@@ -24,7 +24,7 @@ import org.lwjgl.vulkan.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code flags} &ndash; flags for created allocator. Use {@code VmaAllocatorCreateFlagBits} enum. One of:<br><table><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_EXTERNALLY_SYNCHRONIZED_BIT ALLOCATOR_CREATE_EXTERNALLY_SYNCHRONIZED_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT}</td></tr></table></li>
+ * <li>{@code flags} &ndash; flags for created allocator. Use {@code VmaAllocatorCreateFlagBits} enum. One of:<br><table><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_EXTERNALLY_SYNCHRONIZED_BIT ALLOCATOR_CREATE_EXTERNALLY_SYNCHRONIZED_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_AMD_DEVICE_COHERENT_MEMORY_BIT ALLOCATOR_CREATE_AMD_DEVICE_COHERENT_MEMORY_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_BUFFER_DEVICE_ADDRESS_BIT ALLOCATOR_CREATE_BUFFER_DEVICE_ADDRESS_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT}</td></tr></table></li>
  * <li>{@code physicalDevice} &ndash; Vulkan physical device. It must be valid throughout whole lifetime of created allocator.</li>
  * <li>{@code device} &ndash; Vulkan device. It must be valid throughout whole lifetime of created allocator.</li>
  * <li>{@code preferredLargeHeapBlockSize} &ndash; 
@@ -68,16 +68,13 @@ import org.lwjgl.vulkan.*;
  * 
  * <p>If not null, it enables recording of calls to VMA functions to a file. If support for recording is not enabled using {@code VMA_RECORDING_ENABLED}
  * macro, creation of the allocator object fails with {@code VK_ERROR_FEATURE_NOT_PRESENT}.</p></li>
- * <li>{@code instance} &ndash; 
- * Optional handle to Vulkan instance object.
- * 
- * <p>Optional, can be null. Must be set if {@link Vma#VMA_ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT} flas is used or if {@code vulkanApiVersion >= VK_MAKE_VERSION(1, 1, 0)}.</p></li>
+ * <li>{@code instance} &ndash; handle to Vulkan instance object.</li>
  * <li>{@code vulkanApiVersion} &ndash; 
- * Optional. The highest version of Vulkan that the application is designed to use.
+ * the highest version of Vulkan that the application is designed to use. (optional)
  * 
  * <p>It must be a value in the format as created by macro {@code VK_MAKE_VERSION} or a constant like: {@code VK_API_VERSION_1_1},
  * {@code VK_API_VERSION_1_0}. The patch version number specified is ignored. Only the major and minor versions are considered. It must be less or equal
- * (preferably equal) to value as passed to {@code vkCreateInstance} as {@code VkApplicationInfo::apiVersion}. Only versions 1.0 and 1.1 are supported by
+ * (preferably equal) to value as passed to {@code vkCreateInstance} as {@code VkApplicationInfo::apiVersion}. Only versions 1.0, 1.1 and 1.2 are supported by
  * the current implementation.</p>
  * 
  * <p>Leaving it initialized to zero is equivalent to {@code VK_API_VERSION_1_0}.</p></li>
@@ -209,7 +206,6 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
     @NativeType("VmaRecordSettings const *")
     public VmaRecordSettings pRecordSettings() { return npRecordSettings(address()); }
     /** Returns the value of the {@code instance} field. */
-    @Nullable
     @NativeType("VkInstance")
     public long instance() { return ninstance(address()); }
     /** Returns the value of the {@code vulkanApiVersion} field. */
@@ -237,7 +233,7 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
     /** Sets the address of the specified {@link VmaRecordSettings} to the {@code pRecordSettings} field. */
     public VmaAllocatorCreateInfo pRecordSettings(@Nullable @NativeType("VmaRecordSettings const *") VmaRecordSettings value) { npRecordSettings(address(), value); return this; }
     /** Sets the specified value to the {@code instance} field. */
-    public VmaAllocatorCreateInfo instance(@Nullable VkInstance value) { ninstance(address(), value); return this; }
+    public VmaAllocatorCreateInfo instance(VkInstance value) { ninstance(address(), value); return this; }
     /** Sets the specified value to the {@code vulkanApiVersion} field. */
     public VmaAllocatorCreateInfo vulkanApiVersion(@NativeType("uint32_t") int value) { nvulkanApiVersion(address(), value); return this; }
 
@@ -253,7 +249,7 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
         @Nullable LongBuffer pHeapSizeLimit,
         VmaVulkanFunctions pVulkanFunctions,
         @Nullable VmaRecordSettings pRecordSettings,
-        @Nullable VkInstance instance,
+        VkInstance instance,
         int vulkanApiVersion
     ) {
         flags(flags);
@@ -391,7 +387,7 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
     /** Unsafe version of {@link #pRecordSettings(VmaRecordSettings) pRecordSettings}. */
     public static void npRecordSettings(long struct, @Nullable VmaRecordSettings value) { memPutAddress(struct + VmaAllocatorCreateInfo.PRECORDSETTINGS, memAddressSafe(value)); }
     /** Unsafe version of {@link #instance(VkInstance) instance}. */
-    public static void ninstance(long struct, @Nullable VkInstance value) { memPutAddress(struct + VmaAllocatorCreateInfo.INSTANCE, memAddressSafe(value)); }
+    public static void ninstance(long struct, VkInstance value) { memPutAddress(struct + VmaAllocatorCreateInfo.INSTANCE, value.address()); }
     /** Unsafe version of {@link #vulkanApiVersion(int) vulkanApiVersion}. */
     public static void nvulkanApiVersion(long struct, int value) { UNSAFE.putInt(null, struct + VmaAllocatorCreateInfo.VULKANAPIVERSION, value); }
 
@@ -414,6 +410,7 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
         if (pRecordSettings != NULL) {
             VmaRecordSettings.validate(pRecordSettings);
         }
+        check(memGetAddress(struct + VmaAllocatorCreateInfo.INSTANCE));
     }
 
     /**

@@ -34,18 +34,27 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If the allocation is lost, it is equal to {@code VK_NULL_HANDLE}.</p></li>
  * <li>{@code offset} &ndash; 
- * offset into {@code deviceMemory} object to the beginning of this allocation, in bytes. ({@code deviceMemory}, {@code offset}) pair is unique to this
- * allocation.
+ * offset in {@code VkDeviceMemory} object to the beginning of this allocation, in bytes. {@code (deviceMemory, offset)} pair is unique to this allocation.
+ * 
+ * <p>You usually don't need to use this offset. If you create a buffer or an image together with the allocation using e.g. function {@link Vma#vmaCreateBuffer CreateBuffer},
+ * {@link Vma#vmaCreateImage CreateImage}, functions that operate on these resources refer to the beginning of the buffer or image, not entire device memory block. Functions like
+ * {@link Vma#vmaMapMemory MapMemory}, {@link Vma#vmaBindBufferMemory BindBufferMemory} also refer to the beginning of the allocation and apply this offset automatically.</p>
  * 
  * <p>It can change after call to {@link Vma#vmaDefragment Defragment} if this allocation is passed to the function, or if allocation is lost.</p></li>
  * <li>{@code size} &ndash; 
  * size of this allocation, in bytes.
  * 
- * <p>It never changes, unless allocation is lost.</p></li>
+ * <p>It never changes, unless allocation is lost.</p>
+ * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>Allocation size returned in this variable may be greater than the size requested for the resource e.g. as {@code VkBufferCreateInfo::size}. Whole size
+ * of the allocation is accessible for operations on memory e.g. using a pointer after mapping with {@link Vma#vmaMapMemory MapMemory}, but operations on the resource e.g.
+ * using {@code vkCmdCopyBuffer} must be limited to the size of the resource.</p></div></li>
  * <li>{@code pMappedData} &ndash; 
  * pointer to the beginning of this allocation as mapped data.
  * 
- * <p>If the allocation hasn't been mapped using {@link Vma#vmaMapMemory MapMemory} and hasn't been created with {@link Vma#VMA_ALLOCATION_CREATE_MAPPED_BIT ALLOCATION_CREATE_MAPPED_BIT} flag, this value null.</p>
+ * <p>If the allocation hasn't been mapped using {@link Vma#vmaMapMemory MapMemory} and hasn't been created with {@link Vma#VMA_ALLOCATION_CREATE_MAPPED_BIT ALLOCATION_CREATE_MAPPED_BIT} flag, this value is null.</p>
  * 
  * <p>It can change after call to {@link Vma#vmaMapMemory MapMemory}, {@link Vma#vmaUnmapMemory UnmapMemory}. It can also change after call to {@link Vma#vmaDefragment Defragment} if this allocation is passed to the function.</p></li>
  * <li>{@code pUserData} &ndash; 

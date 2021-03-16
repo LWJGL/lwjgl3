@@ -28,6 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct VmaDeviceMemoryCallbacks {
  *     {@link VmaAllocateDeviceMemoryFunctionI PFN_vmaAllocateDeviceMemoryFunction} pfnAllocate;
  *     {@link VmaFreeDeviceMemoryFunctionI PFN_vmaFreeDeviceMemoryFunction} pfnFree;
+ *     void * pUserData;
  * }</code></pre>
  */
 public class VmaDeviceMemoryCallbacks extends Struct implements NativeResource {
@@ -41,10 +42,12 @@ public class VmaDeviceMemoryCallbacks extends Struct implements NativeResource {
     /** The struct member offsets. */
     public static final int
         PFNALLOCATE,
-        PFNFREE;
+        PFNFREE,
+        PUSERDATA;
 
     static {
         Layout layout = __struct(
+            __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE)
         );
@@ -54,6 +57,7 @@ public class VmaDeviceMemoryCallbacks extends Struct implements NativeResource {
 
         PFNALLOCATE = layout.offsetof(0);
         PFNFREE = layout.offsetof(1);
+        PUSERDATA = layout.offsetof(2);
     }
 
     /**
@@ -77,19 +81,26 @@ public class VmaDeviceMemoryCallbacks extends Struct implements NativeResource {
     @Nullable
     @NativeType("PFN_vmaFreeDeviceMemoryFunction")
     public VmaFreeDeviceMemoryFunction pfnFree() { return npfnFree(address()); }
+    /** Returns the value of the {@code pUserData} field. */
+    @NativeType("void *")
+    public long pUserData() { return npUserData(address()); }
 
     /** Sets the specified value to the {@code pfnAllocate} field. */
     public VmaDeviceMemoryCallbacks pfnAllocate(@Nullable @NativeType("PFN_vmaAllocateDeviceMemoryFunction") VmaAllocateDeviceMemoryFunctionI value) { npfnAllocate(address(), value); return this; }
     /** Sets the specified value to the {@code pfnFree} field. */
     public VmaDeviceMemoryCallbacks pfnFree(@Nullable @NativeType("PFN_vmaFreeDeviceMemoryFunction") VmaFreeDeviceMemoryFunctionI value) { npfnFree(address(), value); return this; }
+    /** Sets the specified value to the {@code pUserData} field. */
+    public VmaDeviceMemoryCallbacks pUserData(@NativeType("void *") long value) { npUserData(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VmaDeviceMemoryCallbacks set(
         VmaAllocateDeviceMemoryFunctionI pfnAllocate,
-        VmaFreeDeviceMemoryFunctionI pfnFree
+        VmaFreeDeviceMemoryFunctionI pfnFree,
+        long pUserData
     ) {
         pfnAllocate(pfnAllocate);
         pfnFree(pfnFree);
+        pUserData(pUserData);
 
         return this;
     }
@@ -253,11 +264,15 @@ public class VmaDeviceMemoryCallbacks extends Struct implements NativeResource {
     @Nullable public static VmaAllocateDeviceMemoryFunction npfnAllocate(long struct) { return VmaAllocateDeviceMemoryFunction.createSafe(memGetAddress(struct + VmaDeviceMemoryCallbacks.PFNALLOCATE)); }
     /** Unsafe version of {@link #pfnFree}. */
     @Nullable public static VmaFreeDeviceMemoryFunction npfnFree(long struct) { return VmaFreeDeviceMemoryFunction.createSafe(memGetAddress(struct + VmaDeviceMemoryCallbacks.PFNFREE)); }
+    /** Unsafe version of {@link #pUserData}. */
+    public static long npUserData(long struct) { return memGetAddress(struct + VmaDeviceMemoryCallbacks.PUSERDATA); }
 
     /** Unsafe version of {@link #pfnAllocate(VmaAllocateDeviceMemoryFunctionI) pfnAllocate}. */
     public static void npfnAllocate(long struct, @Nullable VmaAllocateDeviceMemoryFunctionI value) { memPutAddress(struct + VmaDeviceMemoryCallbacks.PFNALLOCATE, memAddressSafe(value)); }
     /** Unsafe version of {@link #pfnFree(VmaFreeDeviceMemoryFunctionI) pfnFree}. */
     public static void npfnFree(long struct, @Nullable VmaFreeDeviceMemoryFunctionI value) { memPutAddress(struct + VmaDeviceMemoryCallbacks.PFNFREE, memAddressSafe(value)); }
+    /** Unsafe version of {@link #pUserData(long) pUserData}. */
+    public static void npUserData(long struct, long value) { memPutAddress(struct + VmaDeviceMemoryCallbacks.PUSERDATA, value); }
 
     // -----------------------------------
 
@@ -305,11 +320,16 @@ public class VmaDeviceMemoryCallbacks extends Struct implements NativeResource {
         @Nullable
         @NativeType("PFN_vmaFreeDeviceMemoryFunction")
         public VmaFreeDeviceMemoryFunction pfnFree() { return VmaDeviceMemoryCallbacks.npfnFree(address()); }
+        /** Returns the value of the {@code pUserData} field. */
+        @NativeType("void *")
+        public long pUserData() { return VmaDeviceMemoryCallbacks.npUserData(address()); }
 
         /** Sets the specified value to the {@code pfnAllocate} field. */
         public VmaDeviceMemoryCallbacks.Buffer pfnAllocate(@Nullable @NativeType("PFN_vmaAllocateDeviceMemoryFunction") VmaAllocateDeviceMemoryFunctionI value) { VmaDeviceMemoryCallbacks.npfnAllocate(address(), value); return this; }
         /** Sets the specified value to the {@code pfnFree} field. */
         public VmaDeviceMemoryCallbacks.Buffer pfnFree(@Nullable @NativeType("PFN_vmaFreeDeviceMemoryFunction") VmaFreeDeviceMemoryFunctionI value) { VmaDeviceMemoryCallbacks.npfnFree(address(), value); return this; }
+        /** Sets the specified value to the {@code pUserData} field. */
+        public VmaDeviceMemoryCallbacks.Buffer pUserData(@NativeType("void *") long value) { VmaDeviceMemoryCallbacks.npUserData(address(), value); return this; }
 
     }
 

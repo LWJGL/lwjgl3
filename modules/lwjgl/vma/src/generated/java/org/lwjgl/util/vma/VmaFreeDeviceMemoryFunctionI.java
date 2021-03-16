@@ -22,7 +22,8 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  *     VmaAllocator allocator,
  *     uint32_t memoryType,
  *     VkDeviceMemory memory,
- *     VkDeviceSize size
+ *     VkDeviceSize size,
+ *     void *pUserData
  * )</code></pre>
  */
 @FunctionalInterface
@@ -32,7 +33,7 @@ public interface VmaFreeDeviceMemoryFunctionI extends CallbackI {
     FFICIF CIF = apiCreateCIF(
         FFI_DEFAULT_ABI,
         ffi_type_void,
-        ffi_type_pointer, ffi_type_uint32, ffi_type_uint64, ffi_type_uint64
+        ffi_type_pointer, ffi_type_uint32, ffi_type_uint64, ffi_type_uint64, ffi_type_pointer
     );
 
     @Override
@@ -44,11 +45,12 @@ public interface VmaFreeDeviceMemoryFunctionI extends CallbackI {
             memGetAddress(memGetAddress(args)),
             memGetInt(memGetAddress(args + POINTER_SIZE)),
             memGetLong(memGetAddress(args + 2 * POINTER_SIZE)),
-            memGetLong(memGetAddress(args + 3 * POINTER_SIZE))
+            memGetLong(memGetAddress(args + 3 * POINTER_SIZE)),
+            memGetAddress(memGetAddress(args + 4 * POINTER_SIZE))
         );
     }
 
     /** Called before {@code vkFreeMemory}. */
-    void invoke(@NativeType("VmaAllocator") long allocator, @NativeType("uint32_t") int memoryType, @NativeType("VkDeviceMemory") long memory, @NativeType("VkDeviceSize") long size);
+    void invoke(@NativeType("VmaAllocator") long allocator, @NativeType("uint32_t") int memoryType, @NativeType("VkDeviceMemory") long memory, @NativeType("VkDeviceSize") long size, @NativeType("void *") long pUserData);
 
 }

@@ -8,12 +8,15 @@
 DISABLE_WARNINGS()
 #define VMA_IMPLEMENTATION
 #define VMA_STATIC_VULKAN_FUNCTIONS 0
+#define VMA_DYNAMIC_VULKAN_FUNCTIONS 0
 #define VMA_SYSTEM_ALIGNED_MALLOC(size, alignment) org_lwjgl_aligned_alloc((alignment), (size))
 #define VMA_SYSTEM_FREE(ptr) org_lwjgl_aligned_free(ptr)
 #define VMA_VULKAN_VERSION 1001000
 #define VMA_DEDICATED_ALLOCATION 1
 #define VMA_BIND_MEMORY2 1
 #define VMA_MEMORY_BUDGET 1
+#define VMA_BUFFER_DEVICE_ADDRESS 1
+#define VMA_MEMORY_PRIORITY 1
 #include "vk_mem_alloc.h"
 ENABLE_WARNINGS()
 
@@ -30,6 +33,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaDestroyAllocator(JNIEnv *
     VmaAllocator allocator = (VmaAllocator)(intptr_t)allocatorAddress;
     UNUSED_PARAMS(__env, clazz)
     vmaDestroyAllocator(allocator);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaGetAllocatorInfo(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong pAllocatorInfoAddress) {
+    VmaAllocator allocator = (VmaAllocator)(intptr_t)allocatorAddress;
+    VmaAllocatorInfo *pAllocatorInfo = (VmaAllocatorInfo *)(intptr_t)pAllocatorInfoAddress;
+    UNUSED_PARAMS(__env, clazz)
+    vmaGetAllocatorInfo(allocator, pAllocatorInfo);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaGetPhysicalDeviceProperties(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong ppPhysicalDevicePropertiesAddress) {
@@ -207,23 +217,16 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaAllocateMemoryForImage(JN
 
 JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaFreeMemory(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong allocationAddress) {
     VmaAllocator allocator = (VmaAllocator)(intptr_t)allocatorAddress;
-    VmaAllocation allocation = (VmaAllocation)(intptr_t)allocationAddress;
+    VmaAllocation const allocation = (VmaAllocation const)(intptr_t)allocationAddress;
     UNUSED_PARAMS(__env, clazz)
     vmaFreeMemory(allocator, allocation);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaFreeMemoryPages(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong allocationCount, jlong pAllocationsAddress) {
     VmaAllocator allocator = (VmaAllocator)(intptr_t)allocatorAddress;
-    VmaAllocation *pAllocations = (VmaAllocation *)(intptr_t)pAllocationsAddress;
+    VmaAllocation const *pAllocations = (VmaAllocation const *)(intptr_t)pAllocationsAddress;
     UNUSED_PARAMS(__env, clazz)
     vmaFreeMemoryPages(allocator, (size_t)allocationCount, pAllocations);
-}
-
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaResizeAllocation(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong allocationAddress, jlong newSize) {
-    VmaAllocator allocator = (VmaAllocator)(intptr_t)allocatorAddress;
-    VmaAllocation allocation = (VmaAllocation)(intptr_t)allocationAddress;
-    UNUSED_PARAMS(__env, clazz)
-    return (jint)vmaResizeAllocation(allocator, allocation, (VkDeviceSize)newSize);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaGetAllocationInfo(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong allocationAddress, jlong pAllocationInfoAddress) {
@@ -285,6 +288,24 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaInvalidateAllocation(JNIE
     vmaInvalidateAllocation(allocator, allocation, (VkDeviceSize)offset, (VkDeviceSize)size);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaFlushAllocations(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jint allocationCount, jlong allocationsAddress, jlong offsetsAddress, jlong sizesAddress) {
+    VmaAllocator allocator = (VmaAllocator)(intptr_t)allocatorAddress;
+    VmaAllocation const *allocations = (VmaAllocation const *)(intptr_t)allocationsAddress;
+    VkDeviceSize const *offsets = (VkDeviceSize const *)(intptr_t)offsetsAddress;
+    VkDeviceSize const *sizes = (VkDeviceSize const *)(intptr_t)sizesAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)vmaFlushAllocations(allocator, (uint32_t)allocationCount, allocations, offsets, sizes);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaInvalidateAllocations(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jint allocationCount, jlong allocationsAddress, jlong offsetsAddress, jlong sizesAddress) {
+    VmaAllocator allocator = (VmaAllocator)(intptr_t)allocatorAddress;
+    VmaAllocation const *allocations = (VmaAllocation const *)(intptr_t)allocationsAddress;
+    VkDeviceSize const *offsets = (VkDeviceSize const *)(intptr_t)offsetsAddress;
+    VkDeviceSize const *sizes = (VkDeviceSize const *)(intptr_t)sizesAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)vmaInvalidateAllocations(allocator, (uint32_t)allocationCount, allocations, offsets, sizes);
+}
+
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaCheckCorruption(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jint memoryTypeBits) {
     VmaAllocator allocator = (VmaAllocator)(intptr_t)allocatorAddress;
     UNUSED_PARAMS(__env, clazz)
@@ -307,9 +328,24 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaDefragmentationEnd(JNIEnv
     return (jint)vmaDefragmentationEnd(allocator, context);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaBeginDefragmentationPass(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong contextAddress, jlong pInfoAddress) {
+    VmaAllocator allocator = (VmaAllocator)(intptr_t)allocatorAddress;
+    VmaDefragmentationContext context = (VmaDefragmentationContext)(intptr_t)contextAddress;
+    VmaDefragmentationPassInfo *pInfo = (VmaDefragmentationPassInfo *)(intptr_t)pInfoAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)vmaBeginDefragmentationPass(allocator, context, pInfo);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaEndDefragmentationPass(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong contextAddress) {
+    VmaAllocator allocator = (VmaAllocator)(intptr_t)allocatorAddress;
+    VmaDefragmentationContext context = (VmaDefragmentationContext)(intptr_t)contextAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)vmaEndDefragmentationPass(allocator, context);
+}
+
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaDefragment(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong pAllocationsAddress, jlong allocationCount, jlong pAllocationsChangedAddress, jlong pDefragmentationInfoAddress, jlong pDefragmentationStatsAddress) {
     VmaAllocator allocator = (VmaAllocator)(intptr_t)allocatorAddress;
-    VmaAllocation *pAllocations = (VmaAllocation *)(intptr_t)pAllocationsAddress;
+    VmaAllocation const *pAllocations = (VmaAllocation const *)(intptr_t)pAllocationsAddress;
     VkBool32 *pAllocationsChanged = (VkBool32 *)(intptr_t)pAllocationsChangedAddress;
     VmaDefragmentationInfo const *pDefragmentationInfo = (VmaDefragmentationInfo const *)(intptr_t)pDefragmentationInfoAddress;
     VmaDefragmentationStats *pDefragmentationStats = (VmaDefragmentationStats *)(intptr_t)pDefragmentationStatsAddress;

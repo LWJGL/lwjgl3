@@ -86,7 +86,7 @@ import org.lwjgl.vulkan.*;
  *     VmaAllocation * pAllocations;
  *     VkBool32 * pAllocationsChanged;
  *     uint32_t poolCount;
- *     VmaPool * pPools;
+ *     VmaPool const * pPools;
  *     VkDeviceSize maxCpuBytesToMove;
  *     uint32_t maxCpuAllocationsToMove;
  *     VkDeviceSize maxGpuBytesToMove;
@@ -178,7 +178,7 @@ public class VmaDefragmentationInfo2 extends Struct implements NativeResource {
     public int poolCount() { return npoolCount(address()); }
     /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code pPools} field. */
     @Nullable
-    @NativeType("VmaPool *")
+    @NativeType("VmaPool const *")
     public PointerBuffer pPools() { return npPools(address()); }
     /** Returns the value of the {@code maxCpuBytesToMove} field. */
     @NativeType("VkDeviceSize")
@@ -208,7 +208,7 @@ public class VmaDefragmentationInfo2 extends Struct implements NativeResource {
     /** Sets the specified value to the {@code poolCount} field. */
     public VmaDefragmentationInfo2 poolCount(@NativeType("uint32_t") int value) { npoolCount(address(), value); return this; }
     /** Sets the address of the specified {@link PointerBuffer} to the {@code pPools} field. */
-    public VmaDefragmentationInfo2 pPools(@Nullable @NativeType("VmaPool *") PointerBuffer value) { npPools(address(), value); return this; }
+    public VmaDefragmentationInfo2 pPools(@Nullable @NativeType("VmaPool const *") PointerBuffer value) { npPools(address(), value); return this; }
     /** Sets the specified value to the {@code maxCpuBytesToMove} field. */
     public VmaDefragmentationInfo2 maxCpuBytesToMove(@NativeType("VkDeviceSize") long value) { nmaxCpuBytesToMove(address(), value); return this; }
     /** Sets the specified value to the {@code maxCpuAllocationsToMove} field. */
@@ -527,7 +527,7 @@ public class VmaDefragmentationInfo2 extends Struct implements NativeResource {
         public int poolCount() { return VmaDefragmentationInfo2.npoolCount(address()); }
         /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code pPools} field. */
         @Nullable
-        @NativeType("VmaPool *")
+        @NativeType("VmaPool const *")
         public PointerBuffer pPools() { return VmaDefragmentationInfo2.npPools(address()); }
         /** Returns the value of the {@code maxCpuBytesToMove} field. */
         @NativeType("VkDeviceSize")
@@ -557,7 +557,7 @@ public class VmaDefragmentationInfo2 extends Struct implements NativeResource {
         /** Sets the specified value to the {@code poolCount} field. */
         public VmaDefragmentationInfo2.Buffer poolCount(@NativeType("uint32_t") int value) { VmaDefragmentationInfo2.npoolCount(address(), value); return this; }
         /** Sets the address of the specified {@link PointerBuffer} to the {@code pPools} field. */
-        public VmaDefragmentationInfo2.Buffer pPools(@Nullable @NativeType("VmaPool *") PointerBuffer value) { VmaDefragmentationInfo2.npPools(address(), value); return this; }
+        public VmaDefragmentationInfo2.Buffer pPools(@Nullable @NativeType("VmaPool const *") PointerBuffer value) { VmaDefragmentationInfo2.npPools(address(), value); return this; }
         /** Sets the specified value to the {@code maxCpuBytesToMove} field. */
         public VmaDefragmentationInfo2.Buffer maxCpuBytesToMove(@NativeType("VkDeviceSize") long value) { VmaDefragmentationInfo2.nmaxCpuBytesToMove(address(), value); return this; }
         /** Sets the specified value to the {@code maxCpuAllocationsToMove} field. */
