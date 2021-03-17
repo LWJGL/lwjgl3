@@ -12,11 +12,14 @@ val VMA = "Vma".nativeClass(Module.VMA, "Vma", prefix = "VMA") {
     nativeDirective(
         """#include "lwjgl_malloc.h"
 DISABLE_WARNINGS()
+#if LWJGL_MACOS
+    _Pragma("GCC diagnostic ignored \"-Wnullability-completeness\"")
+#endif
 #define VMA_IMPLEMENTATION
 #define VMA_STATIC_VULKAN_FUNCTIONS 0
 #define VMA_DYNAMIC_VULKAN_FUNCTIONS 0
 #define VMA_SYSTEM_ALIGNED_MALLOC(size, alignment) org_lwjgl_aligned_alloc((alignment), (size))
-#define VMA_SYSTEM_FREE(ptr) org_lwjgl_aligned_free(ptr)
+#define VMA_SYSTEM_ALIGNED_FREE(ptr) org_lwjgl_aligned_free(ptr)
 #define VMA_VULKAN_VERSION 1001000
 #define VMA_DEDICATED_ALLOCATION 1
 #define VMA_BIND_MEMORY2 1
