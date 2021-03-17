@@ -1396,8 +1396,8 @@ import org.lwjgl.vulkan.*;
  * 
  * <ul>
  * <li>You can request or prefer to allocate out of such memory types by adding {@code VK_MEMORY_PROPERTY_DEVICE_COHERENT_BIT_AMD} to
- * {@link AllocationCreateInfo}{@code ::requiredFlags} or {@code VmaAllocationCreateInfo::preferredFlags}. Those flags can be freely mixed with other ways
- * of choosing memory type, like setting {@code VmaAllocationCreateInfo::usage}.</li>
+ * {@link VmaAllocationCreateInfo}{@code ::requiredFlags} or {@code VmaAllocationCreateInfo::preferredFlags}. Those flags can be freely mixed with other
+ * ways of choosing memory type, like setting {@code VmaAllocationCreateInfo::usage}.</li>
  * <li>If you manually found memory type index to use for this purpose, force allocation from this specific index by setting
  * {@code VmaAllocationCreateInfo::memoryTypeBits = 1u << index}.</li>
  * </ul>
@@ -1405,7 +1405,7 @@ import org.lwjgl.vulkan.*;
  * <h5>More information</h5>
  * 
  * <p>To learn more about this extension, see
- * <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/{@link chap44.html#VK_AMD_device_coherent_memory}">VK_AMD_device_coherent_memory in Vulkan specification</a>.</p>
+ * <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/chap44.html#VK_AMD_device_coherent_memory">VK_AMD_device_coherent_memory in Vulkan specification</a>.</p>
  * 
  * <p>Example use of this extension can be found in the code of the sample and test suite accompanying this library.</p>
  * 
@@ -1445,7 +1445,7 @@ import org.lwjgl.vulkan.*;
  * <h5>More information</h5>
  * 
  * <p>To learn more about this extension, see
- * <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/{@link chap46.html#VK_KHR_buffer_device_address}">VK_KHR_buffer_device_address in Vulkan specification</a></p>
+ * <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/chap46.html#VK_KHR_buffer_device_address">VK_KHR_buffer_device_address in Vulkan specification</a></p>
  * 
  * <p>Example use of this extension can be found in the code of the sample and test suite accompanying this library.</p>
  * 
@@ -1624,7 +1624,7 @@ public class Vma {
      * 
      * <p>You may set this flag only if you:</p>
      * 
-     * <p>1. (For Vulkan version < 1.2) Found as available and enabled device extension
+     * <p>1. (For Vulkan version &lt; 1.2) Found as available and enabled device extension
      * VK_KHR_buffer_device_address.
      * This extension is promoted to core Vulkan 1.2.
      * 2. Found as available and enabled device feature `VkPhysicalDeviceBufferDeviceAddressFeatures::bufferDeviceAddress`.</p>

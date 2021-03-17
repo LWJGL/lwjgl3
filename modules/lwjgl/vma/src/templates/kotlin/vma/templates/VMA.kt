@@ -1461,8 +1461,8 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         ${ul(
             """
             You can request or prefer to allocate out of such memory types by adding {@code VK_MEMORY_PROPERTY_DEVICE_COHERENT_BIT_AMD} to
-            ##AllocationCreateInfo{@code ::requiredFlags} or {@code VmaAllocationCreateInfo::preferredFlags}. Those flags can be freely mixed with other ways
-            of choosing memory type, like setting {@code VmaAllocationCreateInfo::usage}.
+            ##VmaAllocationCreateInfo{@code ::requiredFlags} or {@code VmaAllocationCreateInfo::preferredFlags}. Those flags can be freely mixed with other
+            ways of choosing memory type, like setting {@code VmaAllocationCreateInfo::usage}.
             """,
             """
             If you manually found memory type index to use for this purpose, force allocation from this specific index by setting
@@ -1473,7 +1473,7 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         <h5>More information</h5>
 
         To learn more about this extension, see
-        <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/chap44.html#VK_AMD_device_coherent_memory">VK_AMD_device_coherent_memory in Vulkan specification</a>.
+        <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/chap44.html\#VK_AMD_device_coherent_memory">VK_AMD_device_coherent_memory in Vulkan specification</a>.
 
         Example use of this extension can be found in the code of the sample and test suite accompanying this library.
 
@@ -1522,7 +1522,7 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         <h5>More information</h5> 
 
         To learn more about this extension, see
-        <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/chap46.html#VK_KHR_buffer_device_address">VK_KHR_buffer_device_address in Vulkan specification</a>
+        <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/chap46.html\#VK_KHR_buffer_device_address">VK_KHR_buffer_device_address in Vulkan specification</a>
 
         Example use of this extension can be found in the code of the sample and test suite accompanying this library.
 
@@ -1736,7 +1736,7 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
 
     You may set this flag only if you:
 
-    1. (For Vulkan version < 1.2) Found as available and enabled device extension
+    1. (For Vulkan version &lt; 1.2) Found as available and enabled device extension
     VK_KHR_buffer_device_address.
     This extension is promoted to core Vulkan 1.2.
     2. Found as available and enabled device feature `VkPhysicalDeviceBufferDeviceAddressFeatures::bufferDeviceAddress`.
