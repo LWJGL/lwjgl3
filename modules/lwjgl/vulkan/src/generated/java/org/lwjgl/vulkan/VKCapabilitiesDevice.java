@@ -8,10 +8,10 @@ package org.lwjgl.vulkan;
 import java.util.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 
 /** Defines the capabilities of a Vulkan {@code VkDevice}. */
+@SuppressWarnings("SimplifiableIfStatement")
 public class VKCapabilitiesDevice {
 
     // VK10
@@ -1978,10 +1978,10 @@ public class VKCapabilitiesDevice {
         }
 
         int flag0 = ext.contains("VK_KHR_surface") ? 0 : Integer.MIN_VALUE;
-        int flag3 = ext.contains("VK_KHR_swapchain") ? 0 : Integer.MIN_VALUE;
+        int flag2 = ext.contains("VK_KHR_swapchain") ? 0 : Integer.MIN_VALUE;
 
         return checkFunctions(provider, caps, new int[] {
-            263, 264, 265, flag0 + 266, flag0 + 267, flag3 + 268
+            263, 264, 265, flag0 + 266, flag0 + 267, flag2 + 268
         },
             "vkGetDeviceGroupPeerMemoryFeaturesKHR", "vkCmdSetDeviceMaskKHR", "vkCmdDispatchBaseKHR", "vkGetDeviceGroupPresentCapabilitiesKHR", 
             "vkGetDeviceGroupSurfacePresentModesKHR", "vkAcquireNextImage2KHR"

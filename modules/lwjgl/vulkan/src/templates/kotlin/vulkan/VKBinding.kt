@@ -101,7 +101,7 @@ val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
         }""")
 
         val dependencies = nativeClass.functions
-            .filter { it.has<DependsOn>() }
+            .filter { it.isInstanceFunction && it.has<DependsOn>() }
             .map(::getFunctionDependencyExpression)
             .foldIndexed(LinkedHashMap<String, Int>()) { index, map, expression ->
                 if (!map.containsKey(expression)) {
@@ -123,18 +123,14 @@ val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
     }
 
     init {
-        javaImport(
-            "java.util.*",
-
-            "static org.lwjgl.system.APIUtil.*",
-            "static org.lwjgl.system.Checks.*"
-        )
+        javaImport("static org.lwjgl.system.Checks.*")
 
         documentation = "Defines the capabilities of a Vulkan {@code VkInstance}."
     }
 
     override fun PrintWriter.generateJava() {
         generateJavaPreamble()
+        println("@SuppressWarnings(\"SimplifiableIfStatement\")")
         println("public class $CAPS_INSTANCE {")
 
         val classes = super.getClasses("VK")
@@ -245,7 +241,7 @@ val VK_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.VULKA
         }""")
 
         val dependencies = nativeClass.functions
-            .filter { it.has<DependsOn>() }
+            .filter { it.isDeviceFunction && it.has<DependsOn>() }
             .map(::getFunctionDependencyExpression)
             .foldIndexed(LinkedHashMap<String, Int>()) { index, map, expression ->
                 if (!map.containsKey(expression)) {
@@ -271,7 +267,6 @@ val VK_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.VULKA
             "java.util.*",
             "org.lwjgl.system.*",
 
-            "static org.lwjgl.system.APIUtil.*",
             "static org.lwjgl.system.Checks.*"
         )
 
@@ -280,6 +275,7 @@ val VK_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.VULKA
 
     override fun PrintWriter.generateJava() {
         generateJavaPreamble()
+        println("@SuppressWarnings(\"SimplifiableIfStatement\")")
         println("public class $CAPS_DEVICE {")
 
         val classes = VK_BINDING_INSTANCE.getClasses("VK")

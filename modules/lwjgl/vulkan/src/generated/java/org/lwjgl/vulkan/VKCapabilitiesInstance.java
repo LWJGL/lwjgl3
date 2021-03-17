@@ -7,12 +7,11 @@ package org.lwjgl.vulkan;
 
 import org.lwjgl.system.*;
 import java.util.Set;
-import java.util.*;
 
-import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 
 /** Defines the capabilities of a Vulkan {@code VkInstance}. */
+@SuppressWarnings("SimplifiableIfStatement")
 public class VKCapabilitiesInstance {
 
     // VK10
@@ -496,8 +495,6 @@ public class VKCapabilitiesInstance {
             return false;
         }
 
-        int flag0 = ext.contains("VK_KHR_device_group") || ext.contains("Vulkan11") ? 0 : Integer.MIN_VALUE;
-
         return checkFunctions(provider, caps, new int[] {
             34
         },
@@ -559,7 +556,6 @@ public class VKCapabilitiesInstance {
         }
 
         int flag0 = ext.contains("VK_KHR_surface") ? 0 : Integer.MIN_VALUE;
-        int flag3 = ext.contains("VK_KHR_swapchain") ? 0 : Integer.MIN_VALUE;
 
         return checkFunctions(provider, caps, new int[] {
             flag0 + 39
