@@ -960,8 +960,8 @@ public class VKCapabilitiesDevice {
     /** When true, {@link VALVEMutableDescriptorType} is supported. */
     public final boolean VK_VALVE_mutable_descriptor_type;
 
-    VKCapabilitiesDevice(FunctionProvider provider, VKCapabilitiesInstance capsInstance, Set<String> ext) {
-        this.apiVersion = capsInstance.apiVersion;
+    VKCapabilitiesDevice(FunctionProvider provider, VKCapabilitiesInstance capsInstance, int apiVersion, Set<String> ext) {
+        this.apiVersion = apiVersion;
 
         long[] caps = new long[354];
 

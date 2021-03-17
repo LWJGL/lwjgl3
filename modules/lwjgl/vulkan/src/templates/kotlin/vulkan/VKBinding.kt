@@ -319,8 +319,8 @@ val VK_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.VULKA
 
         print(
             """
-    $CAPS_DEVICE(FunctionProvider provider, VKCapabilitiesInstance capsInstance, Set<String> ext) {
-        this.apiVersion = capsInstance.apiVersion;
+    $CAPS_DEVICE(FunctionProvider provider, VKCapabilitiesInstance capsInstance, int apiVersion, Set<String> ext) {
+        this.apiVersion = apiVersion;
 
         long[] caps = new long[${deviceCommands.size}];
 """
