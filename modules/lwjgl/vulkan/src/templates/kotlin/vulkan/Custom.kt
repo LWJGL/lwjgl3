@@ -358,18 +358,18 @@ fun templateCustomization() {
     val VkAccelerationStructureInstanceKHR = VkAccelerationStructureInstanceKHR.definition
 
     VkAccelerationStructureInstanceKHR["instanceCustomIndex"]
-        .getter("(nbitfield0(struct) >>> 8) & 0xFFFFFF")
-        .setter("nbitfield0(struct, ((value & 0xFFFFFF) << 8) | (nbitfield0(struct) & 0xFF))")
+        .getter("nbitfield0(struct) & 0x00_FF_FFFF")
+        .setter("nbitfield0(struct, (nbitfield0(struct) & 0xFF_00_0000) | (value & 0x00_FF_FFFF))")
     VkAccelerationStructureInstanceKHR["mask"]
-        .getter("nbitfield0(struct) & 0xFF")
-        .setter("nbitfield0(struct, (nbitfield0(struct) & 0xFFFFFF00) | (value & 0xFF))")
+        .getter("(nbitfield0(struct) >>> 24) & 0xFF")
+        .setter("nbitfield0(struct, ((value & 0xFF) << 24) | (nbitfield0(struct) & 0x00_FF_FFFF))")
 
     VkAccelerationStructureInstanceKHR["instanceShaderBindingTableRecordOffset"]
-        .getter("(nbitfield1(struct) >>> 8) & 0xFFFFFF")
-        .setter("nbitfield1(struct, ((value & 0xFFFFFF) << 8) | (nbitfield1(struct) & 0xFF))")
+        .getter("nbitfield1(struct) & 0x00_FF_FFFF")
+        .setter("nbitfield1(struct, (nbitfield1(struct) & 0xFF_00_0000) | (value & 0x00_FF_FFFF))")
     VkAccelerationStructureInstanceKHR["flags"]
-        .getter("nbitfield1(struct) & 0xFF")
-        .setter("nbitfield1(struct, (nbitfield1(struct) & 0xFFFFFF00) | (value & 0xFF))")
+        .getter("(nbitfield1(struct) >>> 24) & 0xFF")
+        .setter("nbitfield1(struct, ((value & 0xFF) << 24) | (nbitfield1(struct) & 0x00_FF_FFFF))")
 
     val VkAccelerationStructureInstanceNV = VkAccelerationStructureInstanceNV.definition
 
