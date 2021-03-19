@@ -110,9 +110,9 @@ public final class HelloTinyFD {
         glfwSwapInterval(1);
 
         tinyfd_messageBox("tinyfd_query", "", "ok", "info", true);
-        System.out.println("tiny file dialogs " + tinyfd_version + " (" + tinyfd_response() + ")");
+        System.out.println("tiny file dialogs " + tinyfd_getGlobalChar(tinyfd_version) + " (" + tinyfd_getGlobalChar(tinyfd_response) + ")");
         System.out.println();
-        System.out.println(tinyfd_needs);
+        System.out.println(tinyfd_getGlobalChar(tinyfd_needs));
         System.out.println();
         System.out.println("Press 1 to launch a message dialog.");
         System.out.println("Press 2 to launch an input box fialog.");

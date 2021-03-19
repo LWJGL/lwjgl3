@@ -603,7 +603,9 @@ enum class Module(
         "Contains bindings to ${url("https://sourceforge.net/projects/tinyfiledialogs/", "tiny file dialogs")}.",
         library = JNILibrary.simple(
             """Library.loadSystem(System::load, System::loadLibrary, TinyFileDialogs.class, "org.lwjgl.tinyfd", Platform.mapLibraryNameBundled("lwjgl_tinyfd"));
-        tinyfd_winUtf8().put(0, 1);"""
+        if (Platform.get() == Platform.WINDOWS) {
+            tinyfd_setGlobalInt("tinyfd_winUtf8", 1);
+        }"""
         )
     ),
     TOOTLE(

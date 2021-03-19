@@ -8,11 +8,6 @@ import org.lwjgl.generator.*
 
 val tinyfiledialogs = "TinyFileDialogs".nativeClass(Module.TINYFD, prefix = "tinyfd_") {
     nativeImport("tinyfiledialogs.h")
-    nativeDirective(
-        """#ifndef LWJGL_WINDOWS
-    static int tinyfd_winUtf8;
-#endif"""
-    )
 
     documentation =
         """
@@ -29,82 +24,102 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(Module.TINYFD, prefix = "tin
         The dialogs can be forced into console mode.
         """
 
-    macro..charASCII.p(
-        "version",
-        "Contains tinyfd current version number.",
-        void()
-    )
-
-    macro..charASCII.p(
-        "needs",
-        "Contains info about requirements.",
-        void()
-    )
-
-    macro..Address..int.p(
-        "verbose",
-        "0 (default) or 1 : on unix, prints the command line calls.",
-        void()
-    )
-
-    macro..Address..int.p(
-        "silent",
-        "1 (default) or 0 : on unix, hide errors and warnings from called dialog.",
-        void()
-    )
-
-    macro..Address..int.p(
-        "allowCursesDialogs",
-        "0 (default) or 1 : curses dialogs are difficult to use, on windows they are only ascii.",
-        void()
-    )
-
-    macro..Address..int.p(
-        "assumeGraphicDisplay",
-        """
-        0 (default) or 1 : some systems don't set the environment variable {@code DISPLAY} even when a graphic display is present. Set this to 1 to tell
-        tinyfiledialogs to assume the existence of a graphic display.
-        """,
-        void()
-    )
-
-    private..macro..Address..int.p(
-        "winUtf8",
-        "On windows string char can be 0:MBSC or 1:UTF-8. Unless your code is really prepared for UTF-8 on windows, leave this on MBSC.",
-        void()
-    )
-
-    macro..Address..int.p(
-        "forceConsole",
-        """
-        Can be modified at run time.
-
-        For unix &amp; windows: 0 (graphic mode) or 1 (console mode).
-
-        0: try to use a graphic solution, if it fails then it uses console mode.
-        1: forces all dialogs into console mode even when the X server is present. It will use the package dialog or dialog.exe if installed. On windows it
-        only makes sense for console applications.
-        """,
-        void()
-    )
-
-    macro(variable = true)..charUTF8.p(
-        "response",
+    StringConstant("Contains tinyfd current version number.", "version".."tinyfd_version")
+    StringConstant("Contains info about requirements.", "needs".."tinyfd_needs")
+    StringConstant(
         """
         If you pass "tinyfd_query" as {@code aTitle}, the functions will not display the dialogs but will fill {@code tinyfd_response} with the retain solution
-        and return:
+        and return 0 for console mode, 1 for graphic mode.
 
-        Possible values for {@code tinyfd_response} are (all lowercase) for the graphic mode: windows applescript zenity zenity3 matedialog kdialog xdialog
-        tkinter gdialog gxmessage xmessage
+        Possible values for {@code tinyfd_response} are (all lowercase) for the graphic mode:
+        ${codeBlock("""
+windows_wchar windows applescript kdialog zenity zenity3 matedialog
+shellementary qarma yad python2-tkinter python3-tkinter python-dbus
+perl-dbus gxmessage gmessage xmessage xdialog gdialog""")}
 
-        For the console mode: dialog whiptail basicinput
+        For the console mode:
+        ${codeBlock("""
+dialog whiptail basicinput no_solution""")}
         """,
-        void()
+
+        "response".."tinyfd_response"
+    )
+
+    StringConstant(
+        "0 (default) or 1 : on unix, prints the command line calls",
+        "verbose".."tinyfd_verbose"
+    )
+    StringConstant(
+        "1 (default) or 0 : on unix, hide errors and warnings from called dialogs",
+
+        "silent".."tinyfd_silent"
+    )
+    StringConstant(
+        "Curses dialogs are difficult to use, on windows they are only ascii and uses the unix backslash",
+
+        "allowCursesDialogs".."tinyfd_allowCursesDialogs"
+    )
+    StringConstant(
+        """
+        0 (default) or 1. For unix & windows: 0 (graphic mode) or 1 (console mode).
+
+        0: try to use a graphic solution, if it fails then it uses console mode.
+        
+        1: forces all dialogs into console mode even when an X server is present, it can use the package dialog or dialog.exe. On windows it only make sense
+        for console applications
+        """,
+        "forceConsole".."tinyfd_forceConsole")
+    StringConstant(
+        """
+         0 (default) or 1.
+         
+         Some systems don't set the environment variable {@code DISPLAY} even when a graphic display is present. Set this to 1 to tell tinyfiledialogs to
+         assume the existence of a graphic display.
+        """,
+        "assumeGraphicDisplay".."tinyfd_assumeGraphicDisplay")
+    StringConstant(
+        """
+        On windows, set to 1 if you want to use UTF-8.
+        
+        <b>LWJGL note</b>: this is automatically set to 1.
+        """,
+
+        "winUtf8".."tinyfd_winUtf8"
+    )
+
+    charASCII.const.p(
+        "getGlobalChar",
+        "",
+
+        charASCII.const.p("aCharVariableName", "", "#version #needs #response"),
+
+        returnDoc = "#NULL on error"
+    )
+
+    int(
+        "getGlobalInt",
+        "",
+
+        charASCII.const.p("aIntVariableName", "", "#verbose #silent #allowCursesDialogs #forceConsole #assumeGraphicDisplay #winUtf8"),
+
+        returnDoc = "-1 on error"
+    )
+
+    int(
+        "setGlobalInt",
+        "",
+
+        charASCII.const.p("aIntVariableName", "", "#verbose #silent #allowCursesDialogs #forceConsole #assumeGraphicDisplay #winUtf8"),
+        int("aValue", ""),
+
+        returnDoc = "-1 on error"
     )
 
     void(
         "beep",
-        ""
+        "",
+
+        void()
     )
 
     int(
