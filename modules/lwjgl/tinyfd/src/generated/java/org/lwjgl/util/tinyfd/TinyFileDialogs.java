@@ -74,7 +74,7 @@ public class TinyFileDialogs {
     public static final String tinyfd_allowCursesDialogs = "tinyfd_allowCursesDialogs";
 
     /**
-     * 0 (default) or 1. For unix & windows: 0 (graphic mode) or 1 (console mode).
+     * 0 (default) or 1. For unix &amp; windows: 0 (graphic mode) or 1 (console mode).
      * 
      * <p>0: try to use a graphic solution, if it fails then it uses console mode.</p>
      * 

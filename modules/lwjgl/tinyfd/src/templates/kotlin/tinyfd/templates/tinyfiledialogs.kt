@@ -61,7 +61,7 @@ dialog whiptail basicinput no_solution""")}
     )
     StringConstant(
         """
-        0 (default) or 1. For unix & windows: 0 (graphic mode) or 1 (console mode).
+        0 (default) or 1. For unix &amp; windows: 0 (graphic mode) or 1 (console mode).
 
         0: try to use a graphic solution, if it fails then it uses console mode.
         
