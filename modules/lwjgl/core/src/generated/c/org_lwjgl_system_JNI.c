@@ -6516,13 +6516,15 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_JNI_callPPPPV__III_3I_3I_3IJJ(JNIEn
     if (param4 != NULL) { (*__env)->ReleaseIntArrayElements(__env, param4, paramArray4, 0); }
     if (param3 != NULL) { (*__env)->ReleaseIntArrayElements(__env, param3, paramArray3, 0); }
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_system_JNI_callPPPPV__IIJJ_3I_3IIJ(JNIEnv *__env, jclass clazz, jint param0, jint param1, jlong param2, jlong param3, jintArray param4, jintArray param5, jint param6, jlong __functionAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_system_JNI_callPPPPV__IIJ_3I_3I_3IIJ(JNIEnv *__env, jclass clazz, jint param0, jint param1, jlong param2, jintArray param3, jintArray param4, jintArray param5, jint param6, jlong __functionAddress) {
     UNUSED_PARAMS(__env, clazz)
+    void *paramArray3 = param3 == NULL ? NULL : (*__env)->GetIntArrayElements(__env, param3, NULL);
     void *paramArray4 = param4 == NULL ? NULL : (*__env)->GetIntArrayElements(__env, param4, NULL);
     void *paramArray5 = param5 == NULL ? NULL : (*__env)->GetIntArrayElements(__env, param5, NULL);
-    ((void (APIENTRY *) (jint, jint, intptr_t, intptr_t, intptr_t, intptr_t, jint))(intptr_t)__functionAddress)(param0, param1, (intptr_t)param2, (intptr_t)param3, (intptr_t)paramArray4, (intptr_t)paramArray5, param6);
+    ((void (APIENTRY *) (jint, jint, intptr_t, intptr_t, intptr_t, intptr_t, jint))(intptr_t)__functionAddress)(param0, param1, (intptr_t)param2, (intptr_t)paramArray3, (intptr_t)paramArray4, (intptr_t)paramArray5, param6);
     if (param5 != NULL) { (*__env)->ReleaseIntArrayElements(__env, param5, paramArray5, 0); }
     if (param4 != NULL) { (*__env)->ReleaseIntArrayElements(__env, param4, paramArray4, 0); }
+    if (param3 != NULL) { (*__env)->ReleaseIntArrayElements(__env, param3, paramArray3, 0); }
 }
 JNIEXPORT void JNICALL Java_org_lwjgl_system_JNI_callPJPPV__JIJII_3JI_3IJ(JNIEnv *__env, jclass clazz, jlong param0, jint param1, jlong param2, jint param3, jint param4, jlongArray param5, jint param6, jintArray param7, jlong __functionAddress) {
     UNUSED_PARAMS(__env, clazz)

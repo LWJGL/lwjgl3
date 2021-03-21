@@ -1351,7 +1351,7 @@ public final class JNI {
     public static native void callPPPPV(int param0, long param1, @Nullable int[] param2, @Nullable int[] param3, @Nullable int[] param4, int param5, long __functionAddress);
     public static native void callPPPPV(long param0, int param1, int param2, @Nullable long[] param3, @Nullable long[] param4, @Nullable long[] param5, long __functionAddress);
     public static native void callPPPPV(int param0, int param1, int param2, @Nullable int[] param3, @Nullable int[] param4, @Nullable int[] param5, long param6, long __functionAddress);
-    public static native void callPPPPV(int param0, int param1, long param2, long param3, @Nullable int[] param4, @Nullable int[] param5, int param6, long __functionAddress);
+    public static native void callPPPPV(int param0, int param1, long param2, @Nullable int[] param3, @Nullable int[] param4, @Nullable int[] param5, int param6, long __functionAddress);
     public static native void callPJPPV(long param0, int param1, long param2, int param3, int param4, @Nullable long[] param5, int param6, @Nullable int[] param7, long __functionAddress);
     public static native void callPJJJPV(long param0, long param1, long param2, long param3, @Nullable double[] param4, long __functionAddress);
     public static native void callPJJJPV(long param0, long param1, long param2, long param3, @Nullable float[] param4, long __functionAddress);

@@ -523,7 +523,7 @@ public class NVCommandList {
      * @param states    the array of state object names
      * @param fbos      the array of framebuffer object names
      */
-    public static void glListDrawCommandsStatesClientNV(@NativeType("GLuint") int list, @NativeType("GLuint") int segment, @NativeType("void const **") PointerBuffer indirects, @NativeType("size_t const *") PointerBuffer sizes, @NativeType("GLuint const *") IntBuffer states, @NativeType("GLuint const *") IntBuffer fbos) {
+    public static void glListDrawCommandsStatesClientNV(@NativeType("GLuint") int list, @NativeType("GLuint") int segment, @NativeType("void const **") PointerBuffer indirects, @NativeType("GLsizei const *") IntBuffer sizes, @NativeType("GLuint const *") IntBuffer states, @NativeType("GLuint const *") IntBuffer fbos) {
         if (CHECKS) {
             check(sizes, indirects.remaining());
             check(states, indirects.remaining());
@@ -645,7 +645,7 @@ public class NVCommandList {
     }
 
     /** Array version of: {@link #glListDrawCommandsStatesClientNV ListDrawCommandsStatesClientNV} */
-    public static void glListDrawCommandsStatesClientNV(@NativeType("GLuint") int list, @NativeType("GLuint") int segment, @NativeType("void const **") PointerBuffer indirects, @NativeType("size_t const *") PointerBuffer sizes, @NativeType("GLuint const *") int[] states, @NativeType("GLuint const *") int[] fbos) {
+    public static void glListDrawCommandsStatesClientNV(@NativeType("GLuint") int list, @NativeType("GLuint") int segment, @NativeType("void const **") PointerBuffer indirects, @NativeType("GLsizei const *") int[] sizes, @NativeType("GLuint const *") int[] states, @NativeType("GLuint const *") int[] fbos) {
         long __functionAddress = GL.getICD().glListDrawCommandsStatesClientNV;
         if (CHECKS) {
             check(__functionAddress);
@@ -653,7 +653,7 @@ public class NVCommandList {
             check(states, indirects.remaining());
             check(fbos, indirects.remaining());
         }
-        callPPPPV(list, segment, memAddress(indirects), memAddress(sizes), states, fbos, indirects.remaining(), __functionAddress);
+        callPPPPV(list, segment, memAddress(indirects), sizes, states, fbos, indirects.remaining(), __functionAddress);
     }
 
 }
