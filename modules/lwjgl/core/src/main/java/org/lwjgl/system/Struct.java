@@ -195,8 +195,12 @@ public abstract class Struct extends Pointer.Default {
         }
     }
 
-    protected static Member __padding(int size, boolean condition) {
-        return __member(condition ? size : 0, 1);
+    protected static Member __padding(int num, boolean condition) {
+        return __padding(num, 1, condition);
+    }
+
+    protected static Member __padding(int num, int size, boolean condition) {
+        return __member(condition ? num * size : 0, size);
     }
 
     protected static Member __member(int size) {

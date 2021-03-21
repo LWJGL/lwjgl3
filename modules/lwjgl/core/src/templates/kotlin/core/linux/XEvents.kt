@@ -40,7 +40,7 @@ val XEvent = union(Module.CORE_LINUX, "XEvent", mutable = false) {
 	documentation = "This union is defined so Xlib can always use the same sized event structure internally, to avoid memory fragmentation."
 
 	int("type", "")
-	
+
 	XAnyEvent("xany", "")
 	XKeyEvent("xkey", "")
 	struct(Module.CORE_LINUX, "XButtonEvent") {
@@ -460,7 +460,7 @@ val XEvent = union(Module.CORE_LINUX, "XEvent", mutable = false) {
 		void.p("data", "")
 	}("xcookie", "")
 
-	long("pad", "")[24].private()
+	long.padding(24)
 }
 
 val XTimeCoord = struct(Module.CORE_LINUX, "XTimeCoord", mutable = false) {

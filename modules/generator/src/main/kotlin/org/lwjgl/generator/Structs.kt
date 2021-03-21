@@ -115,12 +115,13 @@ open class StructMemberArray(
     override fun copy() = StructMemberArray(arrayType, name, documentation, validSize)
 }
 
-private class StructMemberPadding(size: String, val condition: String?) : StructMemberArray(char[size], ANONYMOUS, "", size) {
+private  class StructMemberPadding(arrayType: CArrayType<*>, val condition: String?) : StructMemberArray(arrayType, ANONYMOUS, "", arrayType.size)
+{
     init {
         public = false
     }
 
-    override fun copy() = StructMemberPadding((nativeType as CArrayType<*>).size, condition)
+    override fun copy(): StructMemberPadding = StructMemberPadding(arrayType, condition)
 }
 
 private enum class MultiSetterMode {
@@ -167,6 +168,7 @@ class Struct(
         )
 
         private const val BUFFER_CAPACITY_PARAM = "capacity"
+        private val BUFFER_CAPACITY = Parameter(int, BUFFER_CAPACITY_PARAM, "the number of elements in the returned buffer")
     }
 
     val nativeType get() = StructType(this)
@@ -310,7 +312,10 @@ class Struct(
     }
 
     fun padding(size: Int, condition: String? = null) = padding(size.toString(), condition)
-    fun padding(size: String, condition: String? = null) = add(StructMemberPadding(size, condition))
+    fun padding(size: String, condition: String? = null) = add(StructMemberPadding(char[size], condition))
+
+    fun PrimitiveType.padding(size: Int, condition: String? = null) = this.padding(size.toString(), condition)
+    fun PrimitiveType.padding(size: String, condition: String? = null) = add(StructMemberPadding(this[size], condition))
 
     /** Anonymous nested member struct definition. */
     fun struct(
@@ -368,7 +373,7 @@ class Struct(
     private val StructMember.isNestedStruct
         get() = nativeType is StructType && this !is StructMemberArray
 
-    /** The nested struct is not defined elsewhere, it's part of the parent struct's definition */
+    /** The nested struct is not defined elsewhere, it's part of the parent struct's definition. */
     private val StructMember.isNestedStructDefinition
         get() = isNestedStruct && (nativeType as StructType).name === ANONYMOUS
 
@@ -514,13 +519,6 @@ $indent}"""
         }
 
         if (members.isNotEmpty()) {
-            val memberDoc = printMemberDocumentation()
-            if (memberDoc.isNotEmpty())
-                builder
-                    .append("<h3>Member documentation</h3>\n\n")
-                    .append(ul(*memberDoc.toTypedArray()))
-                    .append("\n\n")
-
             builder.append("<h3>Layout</h3>\n\n")
             builder.append(codeBlock(printStructLayout()))
         }
@@ -537,7 +535,7 @@ $indent}"""
         }
     }
 
-    private fun printStructLayout(indentation: String = "", parent: String = ""): String {
+    private fun printStructLayout(indentation: String = "", parent: String = "", parentGetter: String = ""): String {
         val memberIndentation = "$indentation    "
         return """$nativeNameQualified {
 ${members.asSequence()
@@ -545,9 +543,18 @@ ${members.asSequence()
         .joinToString(";\n$memberIndentation", prefix = memberIndentation, postfix = ";") { member ->
             if (member.isNestedStructDefinition || (member is StructMemberArray && member.nativeType is StructType && member.nativeType.name === ANONYMOUS)) {
                 val struct = (member.nativeType as StructType).definition
-                "${struct.printStructLayout(memberIndentation, "$parent${struct.className}.")}${if (member.name === ANONYMOUS) "" else " ${member.name.let {
+                val qualifiedClass = if (member.name === ANONYMOUS || struct.className === ANONYMOUS) {
+                    parent
+                } else {
+                    if (parent.isEmpty()) struct.className else "$parent.${struct.className}"
+                }
+                "${struct.printStructLayout(
+                    memberIndentation, 
+                    qualifiedClass, 
+                    if (member.name === ANONYMOUS || (member is StructMemberArray && member.nativeType.name === ANONYMOUS)) parentGetter else member.field(parentGetter)
+                )}${if (member.name === ANONYMOUS) "" else " ${member.name.let {
                     if (member is StructMemberArray)
-                        "{@link $parent${struct.className} $it}${member.arrayType.def}"
+                        "{@link $qualifiedClass $it}${member.arrayType.def}"
                     else
                         it
                 }}"}"
@@ -585,7 +592,14 @@ ${members.asSequence()
                             else                                                     -> it
                         }
                     }
-                    .let { if (anonymous) it else "$it ${member.name}" }
+                    .let {
+                        if (anonymous) 
+                            it
+                        else if (!member.public || (member.documentation.isEmpty() && member.links.isEmpty()))
+                            "$it ${member.name}"
+                        else
+                            "$it {@link $parent\\#${member.field(parentGetter).let { link -> if (parent.isEmpty() && link == member.name) link else "$link ${member.name}"}}}" 
+                    }
                     .let {
                         if (member.bits != -1)
                             "$it : ${member.bits}"
@@ -599,41 +613,55 @@ ${members.asSequence()
 $indentation}"""
     }
 
-    private fun printMemberDocumentation(prefix: String = "", documentation: MutableList<String> = ArrayList()): List<String> {
-        members.forEach {
-            val size = if (it is StructMemberArray) "[${it.size}]" else ""
-            val doc = if (it.documentation.isNotEmpty() || it.links.isNotEmpty()) {
-                if (it.links.isEmpty())
-                    it.documentation
-                else
-                    it.linkMode.appendLinks(
-                        it.documentation,
-                        if (!it.links.contains('+')) it.links else linksFromRegex(it.links)
-                    )
-            } else
-                null
+    private val StructMember.javadoc: String?
+        get() = if (documentation.isNotEmpty() || links.isNotEmpty()) {
+            if (links.isEmpty())
+                documentation
+            else
+                linkMode.appendLinks(
+                    documentation,
+                    if (!links.contains('+')) links else linksFromRegex(links)
+                )
+        } else
+            null
 
-            if (it.isNestedStructDefinition) {
-                val nestedStruct = (it.nativeType as StructType).definition
+    private fun PrintWriter.printSetterJavadoc(accessMode: AccessMode, member: StructMember, indent: String, message: String, getter: String) {
+        println("$indent/** ${message.replace(
+            "#member",
+            if (member.documentation.isEmpty() && member.links.isEmpty()) 
+                "{@code ${member.name}}"
+            else
+                "{@link ${if (accessMode == AccessMode.INSTANCE) "" else className}#$getter}")} */")
+    }
 
-                val memberDoc = ArrayList<String>()
-                nestedStruct.printMemberDocumentation(if (it.name === ANONYMOUS) prefix else "$prefix${it.name}.", memberDoc)
-
-                val name = if (it.name === ANONYMOUS)
-                    "${if (prefix.isEmpty()) "" else "{@code $prefix}"}<em>&lt;${if (nestedStruct.union) "union" else "struct"}&gt;$size</em>"
-                else
-                    "{@code $prefix${it.name}$size}"
-
-                if (memberDoc.isNotEmpty()) {
-                    documentation.add("$name${if (doc == null) "" else " &ndash; $doc"}\n\n${ul(*memberDoc.toTypedArray())}")
-                } else if (doc != null) {
-                    documentation.add("$name &ndash; $doc")
-                }
-            } else if (doc != null) {
-                documentation.add("{@code $prefix${it.name}$size} &ndash; $doc")
+    private fun PrintWriter.printGetterJavadoc(accessMode: AccessMode, member: StructMember, indent: String, message: String, getter: String, memberName: String) {
+        val doc = member.javadoc
+        if (accessMode == AccessMode.INSTANCE) {
+            if (doc != null) {
+                println(processDocumentation(doc).toJavaDoc(indentation = indent))
+                return
             }
         }
-        return documentation
+        println("$indent/** ${message.replace("#member", if (accessMode == AccessMode.INSTANCE || doc == null) {
+            "{@code $memberName}"
+        } else {
+            "{@link ${this@Struct.className}#$getter}"
+        })} */")
+    }
+
+    private fun PrintWriter.printGetterJavadoc(accessMode: AccessMode, member: StructMember, indent: String, message: String, getter: String, memberName: String, vararg parameters: Parameter) {
+        val doc = member.javadoc
+        if (accessMode == AccessMode.INSTANCE) {
+            if (doc != null) {
+                println(toJavaDoc("", parameters.asSequence(), member.nativeType, doc, null, "", indentation = indent))
+                return
+            }
+        }
+        println(toJavaDoc(message.replace("#member", if (accessMode == AccessMode.INSTANCE || doc == null) {
+            "{@code $memberName}"
+        } else {
+            "{@link ${this@Struct.className}#$getter}"
+        }), parameters.asSequence(), member.nativeType, "", null, "", indentation = indent))
     }
 
     private fun StructMember.error(msg: String) {
@@ -1324,7 +1352,8 @@ ${validations.joinToString("\n")}
                 if (more)
                     println(",")
                 if (it is StructMemberPadding) {
-                    print("$indentation${t}__padding(${it.size}, ${it.condition ?: "true"})")
+                    val bytesPerElement = (it.arrayType.elementType as PrimitiveType).mapping.bytesExpression
+                    print("$indentation${t}__padding(${if (bytesPerElement == "1") it.size else "${it.size}, $bytesPerElement"}, ${it.condition ?: "true"})")
                 } else if (it.isNestedStructDefinition) {
                     print("$indentation$t")
                     generateLayout((it.nativeType as StructType).definition, "$indentation$t", field)
@@ -1773,11 +1802,11 @@ ${validations.joinToString("\n")}
                         if (it.name === ANONYMOUS) parentMember else member
                     )
                 else {
-                    println("$indent/** Copies the specified {@link $structType} to the {@code $member} field. */")
+                    printSetterJavadoc(accessMode, it, indent, "Copies the specified {@link $structType} to the #member field.", setter)
                     if (overrides) println("$indent@Override")
                     println("${indent}public $returnType $setter(${it.annotate(structType)} value) { $n$setter($ADDRESS, value); return this; }")
                     if (nestedStruct.mutable) {
-                        println("$indent/** Passes the {@code $member} field to the specified {@link java.util.function.Consumer Consumer}. */")
+                        printSetterJavadoc(accessMode, it, indent, "Passes the #member field to the specified {@link java.util.function.Consumer Consumer}.", setter)
                         println("${indent}public $className${if (accessMode === AccessMode.INSTANCE) "" else ".Buffer"} $setter(java.util.function.Consumer<$structType> consumer) { consumer.accept($setter()); return this; }")
                     }
                 }
@@ -1785,7 +1814,7 @@ ${validations.joinToString("\n")}
                 // Setter
 
                 if (it !is StructMemberArray && !it.nativeType.isPointerData) {
-                    println("$indent/** Sets the specified value to the {@code $member} field. */")
+                    printSetterJavadoc(accessMode, it, indent, "Sets the specified value to the #member field.", setter)
                     if (overrides) println("$indent@Override")
                     println("${indent}public $returnType $setter(${it.annotate(it.nativeType.javaMethodType)} value) { $n$setter($ADDRESS, value${if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN4) " ? 1 : 0" else ""}); return this; }")
                 }
@@ -1800,54 +1829,54 @@ ${validations.joinToString("\n")}
                         if (it.nativeType is PointerType<*>) {
                             nestedStruct = (it.nativeType.dereference as StructType).definition
 
-                            println("$indent/** Copies the specified {@link PointerBuffer} to the {@code $member} field. */")
+                            printSetterJavadoc(accessMode, it, indent, "Copies the specified {@link PointerBuffer} to the #member field.", setter)
                             if (overrides) println("$indent@Override")
                             println("${indent}public $returnType $setter(${it.annotate("PointerBuffer")} value) { $n$setter($ADDRESS, value); return this; }")
-                            println("$indent/** Copies the address of the specified {@link $structType} at the specified index of the {@code $member} field. */")
+                            printSetterJavadoc(accessMode, it, indent, "Copies the address of the specified {@link $retType} at the specified index of the #member field.", setter)
                         } else {
                             nestedStruct = (it.nativeType as StructType).definition
 
-                            println("$indent/** Copies the specified {@link $structType.Buffer} to the {@code $member} field. */")
+                            printSetterJavadoc(accessMode, it, indent, "Copies the specified {@link $structType.Buffer} to the #member field.", setter)
                             if (overrides) println("$indent@Override")
                             println("${indent}public $returnType $setter(${it.annotate("$structType.Buffer")} value) { $n$setter($ADDRESS, value); return this; }")
-                            println("$indent/** Copies the specified {@link $structType} at the specified index of the {@code $member} field. */")
+                            printSetterJavadoc(accessMode, it, indent, "Copies the specified {@link $structType} at the specified index of the #member field.", setter)
                         }
                         if (overrides) println("$indent@Override")
                         println("${indent}public $returnType $setter(int index, ${it.annotate(retType, it.nativeType)} value) { $n$setter($ADDRESS, index, value); return this; }")
 
                         if (nestedStruct.mutable) {
                             if (it.nativeType !is PointerType<*>) {
-                                println("$indent/** Passes the {@code $member} field to the specified {@link java.util.function.Consumer Consumer}. */")
+                                printSetterJavadoc(accessMode, it, indent, "Passes the #member field to the specified {@link java.util.function.Consumer Consumer}.", setter)
                                 println("${indent}public $className${if (accessMode === AccessMode.INSTANCE) "" else ".Buffer"} $setter(java.util.function.Consumer<$structType.Buffer> consumer) { consumer.accept($setter()); return this; }")
                             }
-                            println("$indent/** Passes the element at {@code index} of the {@code $member} field to the specified {@link java.util.function.Consumer Consumer}. */")
+                            printSetterJavadoc(accessMode, it, indent, "Passes the element at {@code index} of the #member field to the specified {@link java.util.function.Consumer Consumer}.", setter)
                             println("${indent}public $className${if (accessMode === AccessMode.INSTANCE) "" else ".Buffer"} $setter(int index, java.util.function.Consumer<$retType> consumer) { consumer.accept($setter(index)); return this; }")
                         }
                     } else if (it.nativeType is CharType) {
-                        println("$indent/** Copies the specified encoded string to the {@code $member} field. */")
+                        printSetterJavadoc(accessMode, it, indent, "Copies the specified encoded string to the #member field.", setter)
                         if (overrides) println("$indent@Override")
                         println("${indent}public $returnType $setter(${it.annotate("ByteBuffer")} value) { $n$setter($ADDRESS, value); return this; }")
                     } else {
                         val bufferType = it.primitiveMapping.toPointer.javaMethodName
-                        println("$indent/** Copies the specified {@link $bufferType} to the {@code $member} field. */")
+                        printSetterJavadoc(accessMode, it, indent, "Copies the specified {@link $bufferType} to the #member field.", setter)
                         if (overrides) println("$indent@Override")
                         println("${indent}public $returnType $setter(${it.annotate(bufferType)} value) { $n$setter($ADDRESS, value); return this; }")
-                        println("$indent/** Sets the specified value at the specified index of the {@code $member} field. */")
+                        printSetterJavadoc(accessMode, it, indent, "Sets the specified value at the specified index of the #member field.", setter)
                         if (overrides) println("$indent@Override")
                         println("${indent}public $returnType $setter(int index, ${it.annotate(it.nativeType.javaMethodType, it.nativeType)} value) { $n$setter($ADDRESS, index, value); return this; }")
                     }
                 } else if (it.nativeType is CharSequenceType) {
-                    println("$indent/** Sets the address of the specified encoded string to the {@code $member} field. */")
+                    printSetterJavadoc(accessMode, it, indent, "Sets the address of the specified encoded string to the #member field.", setter)
                     if (overrides) println("$indent@Override")
                     println("${indent}public $returnType $setter(${it.annotate("ByteBuffer")} value) { $n$setter($ADDRESS, value); return this; }")
                 } else if (it.nativeType.isPointerData) {
                     val pointerType = it.nativeType.javaMethodType
                     if ((it.nativeType as PointerType<*>).elementType is StructType && it.isStructBuffer) {
-                        println("$indent/** Sets the address of the specified {@link $pointerType.Buffer} to the {@code $member} field. */")
+                        printSetterJavadoc(accessMode, it, indent, "Sets the address of the specified {@link $pointerType.Buffer} to the #member field.", setter)
                         if (overrides) println("$indent@Override")
                         println("${indent}public $returnType $setter(${it.annotate("$pointerType.Buffer")} value) { $n$setter($ADDRESS, value); return this; }")
                     } else {
-                        println("$indent/** Sets the address of the specified {@link $pointerType} to the {@code $member} field. */")
+                        printSetterJavadoc(accessMode, it, indent, "Sets the address of the specified {@link $pointerType} to the #member field.", setter)
                         if (overrides) println("$indent@Override")
                         println("${indent}public $returnType $setter(${it.annotate(pointerType)} value) { $n$setter($ADDRESS, value); return this; }")
                     }
@@ -2034,7 +2063,7 @@ ${validations.joinToString("\n")}
                         if (it.name === ANONYMOUS) parentMember else member
                     )
                 else {
-                    println("$indent/** Returns a {@link $structType} view of the {@code $member} field. */")
+                    printGetterJavadoc(accessMode, it, indent, "@return a {@link $structType} view of the #member field.", getter, member)
                     generateGetterAnnotations(indent, it, structType)
                     println("${indent}public $structType $getter() { return $n$getter($ADDRESS); }")
                 }
@@ -2047,7 +2076,7 @@ ${validations.joinToString("\n")}
                         is WrappedPointerType -> "long"
                         else                  -> it.nativeType.javaMethodType
                     }
-                    println("$indent/** Returns the value of the {@code $member} field. */")
+                    printGetterJavadoc(accessMode, it, indent, "@return the value of the #member field.", getter, member)
                     generateGetterAnnotations(indent, it, returnType)
                     println("${indent}public $returnType $getter() { return $n$getter($ADDRESS)${if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN4) " != 0" else ""}; }")
                 }
@@ -2058,43 +2087,43 @@ ${validations.joinToString("\n")}
                     if (it.nativeType.dereference is StructType) {
                         val structType = it.nativeType.javaMethodType
                         if (it.nativeType is PointerType<*>) {
-                            println("$indent/** Returns a {@link PointerBuffer} view of the {@code $member} field. */")
+                            printGetterJavadoc(accessMode, it, indent, "@return a {@link PointerBuffer} view of the #member field.", getter, member)
                             generateGetterAnnotations(indent, it, "PointerBuffer", it.arrayType)
                             println("${indent}public PointerBuffer $getter() { return $n$getter($ADDRESS); }")
 
                             val retType = "$structType${if (getReferenceMember<AutoSizeIndirect>(it.name) == null) "" else ".Buffer"}"
-                            println("$indent/** Returns a {@link $structType} view of the pointer at the specified index of the {@code $member} field. */")
+                            printGetterJavadoc(accessMode, it, indent, "@return a {@link $structType} view of the pointer at the specified index of the #member field.", getter, member)
                             generateGetterAnnotations(indent, it, retType)
                             println("${indent}public $retType $getter(int index) { return $n$getter($ADDRESS, index); }")
                         } else {
-                            println("$indent/** Returns a {@link $structType}.Buffer view of the {@code $member} field. */")
+                            printGetterJavadoc(accessMode, it, indent, "@return a {@link $structType}.Buffer view of the #member field.", getter, member)
                             generateGetterAnnotations(indent, it, "$structType.Buffer", it.arrayType)
                             println("${indent}public $structType.Buffer $getter() { return $n$getter($ADDRESS); }")
-                            println("$indent/** Returns a {@link $structType} view of the struct at the specified index of the {@code $member} field. */")
+                            printGetterJavadoc(accessMode, it, indent, "@return a {@link $structType} view of the struct at the specified index of the #member field.", getter, member)
                             generateGetterAnnotations(indent, it, structType)
                             println("${indent}public $structType $getter(int index) { return $n$getter($ADDRESS, index); }")
                         }
                     } else if (it.nativeType is CharType) {
-                        println("$indent/** Returns a {@link ByteBuffer} view of the {@code $member} field. */")
+                        printGetterJavadoc(accessMode, it, indent, "@return a {@link ByteBuffer} view of the #member field.", getter, member)
                         generateGetterAnnotations(indent, it, "ByteBuffer", it.arrayType)
                         println("${indent}public ByteBuffer $getter() { return $n$getter($ADDRESS); }")
-                        println("$indent/** Decodes the null-terminated string stored in the {@code $member} field. */")
+                        printGetterJavadoc(accessMode, it, indent, "@return the null-terminated string stored in the #member field.", getter, member)
                         generateGetterAnnotations(indent, it, "String", it.arrayType)
                         println("${indent}public String ${getter}String() { return $n${getter}String($ADDRESS); }")
                     } else {
                         val bufferType = it.primitiveMapping.toPointer.javaMethodName
-                        println("$indent/** Returns a {@link $bufferType} view of the {@code $member} field. */")
+                        printGetterJavadoc(accessMode, it, indent, "@return a {@link $bufferType} view of the #member field.", getter, member)
                         generateGetterAnnotations(indent, it, bufferType, it.arrayType)
                         println("${indent}public $bufferType $getter() { return $n$getter($ADDRESS); }")
-                        println("$indent/** Returns the value at the specified index of the {@code $member} field. */")
+                        printGetterJavadoc(accessMode, it, indent, "@return the value at the specified index of the #member field.", getter, member)
                         generateGetterAnnotations(indent, it, it.nativeType.nativeMethodType)
                         println("${indent}public ${it.nativeType.nativeMethodType} $getter(int index) { return $n$getter($ADDRESS, index); }")
                     }
                 } else if (it.nativeType is CharSequenceType) {
-                    println("$indent/** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code $member} field. */")
+                    printGetterJavadoc(accessMode, it, indent, "@return a {@link ByteBuffer} view of the null-terminated string pointed to by the #member field.", getter, member)
                     generateGetterAnnotations(indent, it, "ByteBuffer")
                     println("${indent}public ByteBuffer $getter() { return $n$getter($ADDRESS); }")
-                    println("$indent/** Decodes the null-terminated string pointed to by the {@code $member} field. */")
+                    printGetterJavadoc(accessMode, it, indent, "@return the null-terminated string pointed to by the #member field.", getter, member)
                     generateGetterAnnotations(indent, it, "String")
                     println("${indent}public String ${getter}String() { return $n${getter}String($ADDRESS); }")
                 } else if (it.nativeType.isPointerData) {
@@ -2102,35 +2131,26 @@ ${validations.joinToString("\n")}
                     if (it.nativeType.dereference is StructType) {
                         if (it.isStructBuffer) {
                             if (getReferenceMember<AutoSizeMember>(it.name) == null) {
-                                println("""$indent/**
-$indent * Returns a {@link $returnType.Buffer} view of the struct array pointed to by the {@code $member} field.
-$indent *
-$indent * @param $BUFFER_CAPACITY_PARAM the number of elements in the returned buffer
-$indent */""")
+                                printGetterJavadoc(accessMode, it, indent, "@return a {@link $returnType.Buffer} view of the struct array pointed to by the #member field.", getter, member, BUFFER_CAPACITY)
                                 generateGetterAnnotations(indent, it, "$returnType.Buffer")
                                 println("${indent}public $returnType.Buffer $getter(int $BUFFER_CAPACITY_PARAM) { return $n$getter($ADDRESS, $BUFFER_CAPACITY_PARAM); }")
                             } else {
-                                println("$indent/** Returns a {@link $returnType.Buffer} view of the struct array pointed to by the {@code $member} field. */")
+                                printGetterJavadoc(accessMode, it, indent, "@return a {@link $returnType.Buffer} view of the struct array pointed to by the #member field.", getter, member)
                                 generateGetterAnnotations(indent, it, "$returnType.Buffer")
                                 println("${indent}public $returnType.Buffer $getter() { return $n$getter($ADDRESS); }")
                             }
                         } else {
-                            println("$indent/** Returns a {@link $returnType} view of the struct pointed to by the {@code $member} field. */")
+                            printGetterJavadoc(accessMode, it, indent, "@return a {@link $returnType} view of the struct pointed to by the #member field.", getter, member)
                             generateGetterAnnotations(indent, it, returnType)
                             println("${indent}public $returnType $getter() { return $n$getter($ADDRESS); }")
                         }
                     } else {
                         if (getReferenceMember<AutoSizeMember>(it.name) == null) {
-                            println(
-                                """$indent/**
-$indent * Returns a {@link $returnType} view of the data pointed to by the {@code $member} field.
-$indent *
-$indent * @param $BUFFER_CAPACITY_PARAM the number of elements in the returned buffer
-$indent */""")
+                            printGetterJavadoc(accessMode, it, indent, "@return a {@link $returnType} view of the data pointed to by the #member field.", getter, member, BUFFER_CAPACITY)
                             generateGetterAnnotations(indent, it, returnType)
                             println("${indent}public $returnType $getter(int $BUFFER_CAPACITY_PARAM) { return $n$getter($ADDRESS, $BUFFER_CAPACITY_PARAM); }")
                         } else {
-                            println("$indent/** Returns a {@link $returnType} view of the data pointed to by the {@code $member} field. */")
+                            printGetterJavadoc(accessMode, it, indent, "@return a {@link $returnType} view of the data pointed to by the #member field.", getter, member)
                             generateGetterAnnotations(indent, it, returnType)
                             println("${indent}public $returnType $getter() { return $n$getter($ADDRESS); }")
                         }

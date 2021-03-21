@@ -163,14 +163,15 @@ internal fun GeneratorTarget.toJavaDoc(
     returns: NativeType,
     returnDoc: String,
     see: Array<String>?,
-    since: String
+    since: String,
+    indentation: String = t
 ): String {
     if (returnDoc.isEmpty() && see == null && since.isEmpty()) {
         if (documentation.isEmpty() && params.all { it.documentation == null })
             return ""
 
         if (params.none())
-            return documentation.toJavaDoc()
+            return documentation.toJavaDoc(indentation)
     }
 
     return StringBuilder(if (documentation.isEmpty()) "" else documentation.cleanup())
@@ -188,38 +189,38 @@ internal fun GeneratorTarget.toJavaDoc(
 
                 val multilineAligment = paramMultilineAligment(alignment)
 
-                if (isNotEmpty()) append("\n$t *")
+                if (isNotEmpty()) append("\n$indentation *")
                 paramsWithJavadoc
                     .forEach {
-                        printParam(it.name, it.documentation.let { doc -> if (doc == null) "" else processDocumentation(doc()) }, alignment, multilineAligment)
+                        printParam(it.name, it.documentation.let { doc -> if (doc == null) "" else processDocumentation(doc()) }, indentation, alignment, multilineAligment)
                     }
                 if (returnsStructValue)
-                    printParam(RESULT, processDocumentation(returnDoc), alignment, multilineAligment)
+                    printParam(RESULT, processDocumentation(returnDoc), indentation, alignment, multilineAligment)
             }
 
             if (returnDoc.isNotEmpty() && !returnsStructValue) {
-                if (isNotEmpty()) append("\n$t *\n$t * ")
+                if (isNotEmpty()) append("\n$indentation *\n$indentation * ")
                 append("@return ")
-                append(processDocumentation(returnDoc).cleanup("$t *         "))
+                append(processDocumentation(returnDoc).cleanup("$indentation *         "))
             }
 
             if (see != null) {
-                if (isNotEmpty()) append("\n$t *")
+                if (isNotEmpty()) append("\n$indentation *")
                 see.forEach {
-                    if (isNotEmpty()) append("\n$t * ")
+                    if (isNotEmpty()) append("\n$indentation * ")
                     append("@see ")
                     append(it)
                 }
             }
 
             if (since.isNotEmpty()) {
-                if (isNotEmpty()) append("\n$t *\n$t * ")
+                if (isNotEmpty()) append("\n$indentation *\n$indentation * ")
                 append("@since ")
                 append(since)
             }
         }
         .toString()
-        .layoutJavadoc()
+        .layoutJavadoc(indentation)
 }
 
 // Used for aligning parameter javadoc when it spans multiple lines.
@@ -232,8 +233,8 @@ private fun paramMultilineAligment(alignment: Int): String {
     }.toString()
 }
 
-private fun StringBuilder.printParam(name: String, documentation: String, alignment: Int, multilineAligment: String) {
-    if (isNotEmpty()) append("\n$t * ")
+private fun StringBuilder.printParam(name: String, documentation: String, indentation: String, alignment: Int, multilineAligment: String) {
+    if (isNotEmpty()) append("\n$indentation * ")
     append("@param $name")
 
     // Align
