@@ -77,13 +77,13 @@ public class EXRVersion extends Struct implements NativeResource {
 
     /** this must be 2 */
     public int version() { return nversion(address()); }
-    /** tile format image */
+    /** tile format image; not zero for only a single-part "normal" tiled file (according to spec.) */
     @NativeType("int")
     public boolean tiled() { return ntiled(address()) != 0; }
     /** long name attribute */
     @NativeType("int")
     public boolean long_name() { return nlong_name(address()) != 0; }
-    /** deep image(EXR 2.0) */
+    /** deep image(EXR 2.0); for a multi-part file, indicates that at least one part is of type {@code deep*} (according to spec.) */
     @NativeType("int")
     public boolean non_image() { return nnon_image(address()) != 0; }
     /** multi-part(EXR 2.0) */

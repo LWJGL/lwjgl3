@@ -25,8 +25,8 @@ import static org.lwjgl.util.tinyexr.TinyEXR.*;
  * struct EXRHeader {
  *     float pixel_aspect_ratio;
  *     int line_order;
- *     int data_window[4];
- *     int display_window[4];
+ *     {@link EXRBox2i EXRBox2i} data_window;
+ *     {@link EXRBox2i EXRBox2i} display_window;
  *     float screen_window_center[2];
  *     float screen_window_width;
  *     int chunk_count;
@@ -36,7 +36,7 @@ import static org.lwjgl.util.tinyexr.TinyEXR.*;
  *     int tile_level_mode;
  *     int tile_rounding_mode;
  *     int long_name;
- *     int non_image;
+ *     int {@link #non_image};
  *     int multipart;
  *     unsigned int header_len;
  *     int {@link #num_custom_attributes};
@@ -46,6 +46,7 @@ import static org.lwjgl.util.tinyexr.TinyEXR.*;
  *     int num_channels;
  *     int {@link #compression_type};
  *     int * {@link #requested_pixel_types};
+ *     char {@link #name}[256];
  * }</code></pre>
  */
 public class EXRHeader extends Struct implements NativeResource {
@@ -80,14 +81,15 @@ public class EXRHeader extends Struct implements NativeResource {
         PIXEL_TYPES,
         NUM_CHANNELS,
         COMPRESSION_TYPE,
-        REQUESTED_PIXEL_TYPES;
+        REQUESTED_PIXEL_TYPES,
+        NAME;
 
     static {
         Layout layout = __struct(
             __member(4),
             __member(4),
-            __array(4, 4),
-            __array(4, 4),
+            __member(EXRBox2i.SIZEOF, EXRBox2i.ALIGNOF),
+            __member(EXRBox2i.SIZEOF, EXRBox2i.ALIGNOF),
             __array(4, 2),
             __member(4),
             __member(4),
@@ -106,7 +108,8 @@ public class EXRHeader extends Struct implements NativeResource {
             __member(POINTER_SIZE),
             __member(4),
             __member(4),
-            __member(POINTER_SIZE)
+            __member(POINTER_SIZE),
+            __array(1, 256)
         );
 
         SIZEOF = layout.getSize();
@@ -135,6 +138,7 @@ public class EXRHeader extends Struct implements NativeResource {
         NUM_CHANNELS = layout.offsetof(20);
         COMPRESSION_TYPE = layout.offsetof(21);
         REQUESTED_PIXEL_TYPES = layout.offsetof(22);
+        NAME = layout.offsetof(23);
     }
 
     /**
@@ -154,16 +158,10 @@ public class EXRHeader extends Struct implements NativeResource {
     public float pixel_aspect_ratio() { return npixel_aspect_ratio(address()); }
     /** @return the value of the {@code line_order} field. */
     public int line_order() { return nline_order(address()); }
-    /** @return a {@link IntBuffer} view of the {@code data_window} field. */
-    @NativeType("int[4]")
-    public IntBuffer data_window() { return ndata_window(address()); }
-    /** @return the value at the specified index of the {@code data_window} field. */
-    public int data_window(int index) { return ndata_window(address(), index); }
-    /** @return a {@link IntBuffer} view of the {@code display_window} field. */
-    @NativeType("int[4]")
-    public IntBuffer display_window() { return ndisplay_window(address()); }
-    /** @return the value at the specified index of the {@code display_window} field. */
-    public int display_window(int index) { return ndisplay_window(address(), index); }
+    /** @return a {@link EXRBox2i} view of the {@code data_window} field. */
+    public EXRBox2i data_window() { return ndata_window(address()); }
+    /** @return a {@link EXRBox2i} view of the {@code display_window} field. */
+    public EXRBox2i display_window() { return ndisplay_window(address()); }
     /** @return a {@link FloatBuffer} view of the {@code screen_window_center} field. */
     @NativeType("float[2]")
     public FloatBuffer screen_window_center() { return nscreen_window_center(address()); }
@@ -187,7 +185,7 @@ public class EXRHeader extends Struct implements NativeResource {
     /** @return the value of the {@code long_name} field. */
     @NativeType("int")
     public boolean long_name() { return nlong_name(address()) != 0; }
-    /** @return the value of the {@code non_image} field. */
+    /** For a single-part file, agree with the version field bit 11. For a multi-part file, it is consistent with the type of part. */
     @NativeType("int")
     public boolean non_image() { return nnon_image(address()) != 0; }
     /** @return the value of the {@code multipart} field. */
@@ -215,19 +213,33 @@ public class EXRHeader extends Struct implements NativeResource {
     /** filled initially by {@code ParseEXRHeaderFrom(Memory|File)}, then users can edit it (only valid for HALF pixel type channel) */
     @NativeType("int *")
     public IntBuffer requested_pixel_types() { return nrequested_pixel_types(address()); }
+    /**
+     * Name attribute required for multipart files.
+     * 
+     * <p>Must be unique and non empty (according to spec.). Use {@link TinyEXR#EXRSetNameAttr} for setting value. Max 255 characters allowed - excluding terminating zero.</p>
+     */
+    @NativeType("char[256]")
+    public ByteBuffer name() { return nname(address()); }
+    /**
+     * Name attribute required for multipart files.
+     * 
+     * <p>Must be unique and non empty (according to spec.). Use {@link TinyEXR#EXRSetNameAttr} for setting value. Max 255 characters allowed - excluding terminating zero.</p>
+     */
+    @NativeType("char[256]")
+    public String nameString() { return nnameString(address()); }
 
     /** Sets the specified value to the {@code pixel_aspect_ratio} field. */
     public EXRHeader pixel_aspect_ratio(float value) { npixel_aspect_ratio(address(), value); return this; }
     /** Sets the specified value to the {@code line_order} field. */
     public EXRHeader line_order(int value) { nline_order(address(), value); return this; }
-    /** Copies the specified {@link IntBuffer} to the {@code data_window} field. */
-    public EXRHeader data_window(@NativeType("int[4]") IntBuffer value) { ndata_window(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@code data_window} field. */
-    public EXRHeader data_window(int index, int value) { ndata_window(address(), index, value); return this; }
-    /** Copies the specified {@link IntBuffer} to the {@code display_window} field. */
-    public EXRHeader display_window(@NativeType("int[4]") IntBuffer value) { ndisplay_window(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@code display_window} field. */
-    public EXRHeader display_window(int index, int value) { ndisplay_window(address(), index, value); return this; }
+    /** Copies the specified {@link EXRBox2i} to the {@code data_window} field. */
+    public EXRHeader data_window(EXRBox2i value) { ndata_window(address(), value); return this; }
+    /** Passes the {@code data_window} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public EXRHeader data_window(java.util.function.Consumer<EXRBox2i> consumer) { consumer.accept(data_window()); return this; }
+    /** Copies the specified {@link EXRBox2i} to the {@code display_window} field. */
+    public EXRHeader display_window(EXRBox2i value) { ndisplay_window(address(), value); return this; }
+    /** Passes the {@code display_window} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public EXRHeader display_window(java.util.function.Consumer<EXRBox2i> consumer) { consumer.accept(display_window()); return this; }
     /** Copies the specified {@link FloatBuffer} to the {@code screen_window_center} field. */
     public EXRHeader screen_window_center(@NativeType("float[2]") FloatBuffer value) { nscreen_window_center(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code screen_window_center} field. */
@@ -248,7 +260,7 @@ public class EXRHeader extends Struct implements NativeResource {
     public EXRHeader tile_rounding_mode(int value) { ntile_rounding_mode(address(), value); return this; }
     /** Sets the specified value to the {@code long_name} field. */
     public EXRHeader long_name(@NativeType("int") boolean value) { nlong_name(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code non_image} field. */
+    /** Sets the specified value to the {@link #non_image} field. */
     public EXRHeader non_image(@NativeType("int") boolean value) { nnon_image(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code multipart} field. */
     public EXRHeader multipart(@NativeType("int") boolean value) { nmultipart(address(), value ? 1 : 0); return this; }
@@ -268,13 +280,15 @@ public class EXRHeader extends Struct implements NativeResource {
     public EXRHeader compression_type(int value) { ncompression_type(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@link #requested_pixel_types} field. */
     public EXRHeader requested_pixel_types(@NativeType("int *") IntBuffer value) { nrequested_pixel_types(address(), value); return this; }
+    /** Copies the specified encoded string to the {@link #name} field. */
+    public EXRHeader name(@NativeType("char[256]") ByteBuffer value) { nname(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public EXRHeader set(
         float pixel_aspect_ratio,
         int line_order,
-        IntBuffer data_window,
-        IntBuffer display_window,
+        EXRBox2i data_window,
+        EXRBox2i display_window,
         FloatBuffer screen_window_center,
         float screen_window_width,
         int chunk_count,
@@ -293,7 +307,8 @@ public class EXRHeader extends Struct implements NativeResource {
         IntBuffer pixel_types,
         int num_channels,
         int compression_type,
-        IntBuffer requested_pixel_types
+        IntBuffer requested_pixel_types,
+        ByteBuffer name
     ) {
         pixel_aspect_ratio(pixel_aspect_ratio);
         line_order(line_order);
@@ -318,6 +333,7 @@ public class EXRHeader extends Struct implements NativeResource {
         num_channels(num_channels);
         compression_type(compression_type);
         requested_pixel_types(requested_pixel_types);
+        name(name);
 
         return this;
     }
@@ -482,17 +498,9 @@ public class EXRHeader extends Struct implements NativeResource {
     /** Unsafe version of {@link #line_order}. */
     public static int nline_order(long struct) { return UNSAFE.getInt(null, struct + EXRHeader.LINE_ORDER); }
     /** Unsafe version of {@link #data_window}. */
-    public static IntBuffer ndata_window(long struct) { return memIntBuffer(struct + EXRHeader.DATA_WINDOW, 4); }
-    /** Unsafe version of {@link #data_window(int) data_window}. */
-    public static int ndata_window(long struct, int index) {
-        return UNSAFE.getInt(null, struct + EXRHeader.DATA_WINDOW + check(index, 4) * 4);
-    }
+    public static EXRBox2i ndata_window(long struct) { return EXRBox2i.create(struct + EXRHeader.DATA_WINDOW); }
     /** Unsafe version of {@link #display_window}. */
-    public static IntBuffer ndisplay_window(long struct) { return memIntBuffer(struct + EXRHeader.DISPLAY_WINDOW, 4); }
-    /** Unsafe version of {@link #display_window(int) display_window}. */
-    public static int ndisplay_window(long struct, int index) {
-        return UNSAFE.getInt(null, struct + EXRHeader.DISPLAY_WINDOW + check(index, 4) * 4);
-    }
+    public static EXRBox2i ndisplay_window(long struct) { return EXRBox2i.create(struct + EXRHeader.DISPLAY_WINDOW); }
     /** Unsafe version of {@link #screen_window_center}. */
     public static FloatBuffer nscreen_window_center(long struct) { return memFloatBuffer(struct + EXRHeader.SCREEN_WINDOW_CENTER, 2); }
     /** Unsafe version of {@link #screen_window_center(int) screen_window_center}. */
@@ -535,29 +543,19 @@ public class EXRHeader extends Struct implements NativeResource {
     public static int ncompression_type(long struct) { return UNSAFE.getInt(null, struct + EXRHeader.COMPRESSION_TYPE); }
     /** Unsafe version of {@link #requested_pixel_types() requested_pixel_types}. */
     public static IntBuffer nrequested_pixel_types(long struct) { return memIntBuffer(memGetAddress(struct + EXRHeader.REQUESTED_PIXEL_TYPES), nnum_channels(struct)); }
+    /** Unsafe version of {@link #name}. */
+    public static ByteBuffer nname(long struct) { return memByteBuffer(struct + EXRHeader.NAME, 256); }
+    /** Unsafe version of {@link #nameString}. */
+    public static String nnameString(long struct) { return memUTF8(struct + EXRHeader.NAME); }
 
     /** Unsafe version of {@link #pixel_aspect_ratio(float) pixel_aspect_ratio}. */
     public static void npixel_aspect_ratio(long struct, float value) { UNSAFE.putFloat(null, struct + EXRHeader.PIXEL_ASPECT_RATIO, value); }
     /** Unsafe version of {@link #line_order(int) line_order}. */
     public static void nline_order(long struct, int value) { UNSAFE.putInt(null, struct + EXRHeader.LINE_ORDER, value); }
-    /** Unsafe version of {@link #data_window(IntBuffer) data_window}. */
-    public static void ndata_window(long struct, IntBuffer value) {
-        if (CHECKS) { checkGT(value, 4); }
-        memCopy(memAddress(value), struct + EXRHeader.DATA_WINDOW, value.remaining() * 4);
-    }
-    /** Unsafe version of {@link #data_window(int, int) data_window}. */
-    public static void ndata_window(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + EXRHeader.DATA_WINDOW + check(index, 4) * 4, value);
-    }
-    /** Unsafe version of {@link #display_window(IntBuffer) display_window}. */
-    public static void ndisplay_window(long struct, IntBuffer value) {
-        if (CHECKS) { checkGT(value, 4); }
-        memCopy(memAddress(value), struct + EXRHeader.DISPLAY_WINDOW, value.remaining() * 4);
-    }
-    /** Unsafe version of {@link #display_window(int, int) display_window}. */
-    public static void ndisplay_window(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + EXRHeader.DISPLAY_WINDOW + check(index, 4) * 4, value);
-    }
+    /** Unsafe version of {@link #data_window(EXRBox2i) data_window}. */
+    public static void ndata_window(long struct, EXRBox2i value) { memCopy(value.address(), struct + EXRHeader.DATA_WINDOW, EXRBox2i.SIZEOF); }
+    /** Unsafe version of {@link #display_window(EXRBox2i) display_window}. */
+    public static void ndisplay_window(long struct, EXRBox2i value) { memCopy(value.address(), struct + EXRHeader.DISPLAY_WINDOW, EXRBox2i.SIZEOF); }
     /** Unsafe version of {@link #screen_window_center(FloatBuffer) screen_window_center}. */
     public static void nscreen_window_center(long struct, FloatBuffer value) {
         if (CHECKS) { checkGT(value, 2); }
@@ -603,6 +601,14 @@ public class EXRHeader extends Struct implements NativeResource {
     public static void ncompression_type(long struct, int value) { UNSAFE.putInt(null, struct + EXRHeader.COMPRESSION_TYPE, value); }
     /** Unsafe version of {@link #requested_pixel_types(IntBuffer) requested_pixel_types}. */
     public static void nrequested_pixel_types(long struct, IntBuffer value) { memPutAddress(struct + EXRHeader.REQUESTED_PIXEL_TYPES, memAddress(value)); }
+    /** Unsafe version of {@link #name(ByteBuffer) name}. */
+    public static void nname(long struct, ByteBuffer value) {
+        if (CHECKS) {
+            checkNT1(value);
+            checkGT(value, 256);
+        }
+        memCopy(memAddress(value), struct + EXRHeader.NAME, value.remaining());
+    }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -674,16 +680,10 @@ public class EXRHeader extends Struct implements NativeResource {
         public float pixel_aspect_ratio() { return EXRHeader.npixel_aspect_ratio(address()); }
         /** @return the value of the {@code line_order} field. */
         public int line_order() { return EXRHeader.nline_order(address()); }
-        /** @return a {@link IntBuffer} view of the {@code data_window} field. */
-        @NativeType("int[4]")
-        public IntBuffer data_window() { return EXRHeader.ndata_window(address()); }
-        /** @return the value at the specified index of the {@code data_window} field. */
-        public int data_window(int index) { return EXRHeader.ndata_window(address(), index); }
-        /** @return a {@link IntBuffer} view of the {@code display_window} field. */
-        @NativeType("int[4]")
-        public IntBuffer display_window() { return EXRHeader.ndisplay_window(address()); }
-        /** @return the value at the specified index of the {@code display_window} field. */
-        public int display_window(int index) { return EXRHeader.ndisplay_window(address(), index); }
+        /** @return a {@link EXRBox2i} view of the {@code data_window} field. */
+        public EXRBox2i data_window() { return EXRHeader.ndata_window(address()); }
+        /** @return a {@link EXRBox2i} view of the {@code display_window} field. */
+        public EXRBox2i display_window() { return EXRHeader.ndisplay_window(address()); }
         /** @return a {@link FloatBuffer} view of the {@code screen_window_center} field. */
         @NativeType("float[2]")
         public FloatBuffer screen_window_center() { return EXRHeader.nscreen_window_center(address()); }
@@ -707,7 +707,7 @@ public class EXRHeader extends Struct implements NativeResource {
         /** @return the value of the {@code long_name} field. */
         @NativeType("int")
         public boolean long_name() { return EXRHeader.nlong_name(address()) != 0; }
-        /** @return the value of the {@code non_image} field. */
+        /** @return the value of the {@link EXRHeader#non_image} field. */
         @NativeType("int")
         public boolean non_image() { return EXRHeader.nnon_image(address()) != 0; }
         /** @return the value of the {@code multipart} field. */
@@ -735,19 +735,25 @@ public class EXRHeader extends Struct implements NativeResource {
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link EXRHeader#requested_pixel_types} field. */
         @NativeType("int *")
         public IntBuffer requested_pixel_types() { return EXRHeader.nrequested_pixel_types(address()); }
+        /** @return a {@link ByteBuffer} view of the {@link EXRHeader#name} field. */
+        @NativeType("char[256]")
+        public ByteBuffer name() { return EXRHeader.nname(address()); }
+        /** @return the null-terminated string stored in the {@link EXRHeader#name} field. */
+        @NativeType("char[256]")
+        public String nameString() { return EXRHeader.nnameString(address()); }
 
         /** Sets the specified value to the {@code pixel_aspect_ratio} field. */
         public EXRHeader.Buffer pixel_aspect_ratio(float value) { EXRHeader.npixel_aspect_ratio(address(), value); return this; }
         /** Sets the specified value to the {@code line_order} field. */
         public EXRHeader.Buffer line_order(int value) { EXRHeader.nline_order(address(), value); return this; }
-        /** Copies the specified {@link IntBuffer} to the {@code data_window} field. */
-        public EXRHeader.Buffer data_window(@NativeType("int[4]") IntBuffer value) { EXRHeader.ndata_window(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@code data_window} field. */
-        public EXRHeader.Buffer data_window(int index, int value) { EXRHeader.ndata_window(address(), index, value); return this; }
-        /** Copies the specified {@link IntBuffer} to the {@code display_window} field. */
-        public EXRHeader.Buffer display_window(@NativeType("int[4]") IntBuffer value) { EXRHeader.ndisplay_window(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@code display_window} field. */
-        public EXRHeader.Buffer display_window(int index, int value) { EXRHeader.ndisplay_window(address(), index, value); return this; }
+        /** Copies the specified {@link EXRBox2i} to the {@code data_window} field. */
+        public EXRHeader.Buffer data_window(EXRBox2i value) { EXRHeader.ndata_window(address(), value); return this; }
+        /** Passes the {@code data_window} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public EXRHeader.Buffer data_window(java.util.function.Consumer<EXRBox2i> consumer) { consumer.accept(data_window()); return this; }
+        /** Copies the specified {@link EXRBox2i} to the {@code display_window} field. */
+        public EXRHeader.Buffer display_window(EXRBox2i value) { EXRHeader.ndisplay_window(address(), value); return this; }
+        /** Passes the {@code display_window} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public EXRHeader.Buffer display_window(java.util.function.Consumer<EXRBox2i> consumer) { consumer.accept(display_window()); return this; }
         /** Copies the specified {@link FloatBuffer} to the {@code screen_window_center} field. */
         public EXRHeader.Buffer screen_window_center(@NativeType("float[2]") FloatBuffer value) { EXRHeader.nscreen_window_center(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code screen_window_center} field. */
@@ -768,7 +774,7 @@ public class EXRHeader extends Struct implements NativeResource {
         public EXRHeader.Buffer tile_rounding_mode(int value) { EXRHeader.ntile_rounding_mode(address(), value); return this; }
         /** Sets the specified value to the {@code long_name} field. */
         public EXRHeader.Buffer long_name(@NativeType("int") boolean value) { EXRHeader.nlong_name(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code non_image} field. */
+        /** Sets the specified value to the {@link EXRHeader#non_image} field. */
         public EXRHeader.Buffer non_image(@NativeType("int") boolean value) { EXRHeader.nnon_image(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code multipart} field. */
         public EXRHeader.Buffer multipart(@NativeType("int") boolean value) { EXRHeader.nmultipart(address(), value ? 1 : 0); return this; }
@@ -788,6 +794,8 @@ public class EXRHeader extends Struct implements NativeResource {
         public EXRHeader.Buffer compression_type(int value) { EXRHeader.ncompression_type(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@link EXRHeader#requested_pixel_types} field. */
         public EXRHeader.Buffer requested_pixel_types(@NativeType("int *") IntBuffer value) { EXRHeader.nrequested_pixel_types(address(), value); return this; }
+        /** Copies the specified encoded string to the {@link EXRHeader#name} field. */
+        public EXRHeader.Buffer name(@NativeType("char[256]") ByteBuffer value) { EXRHeader.nname(address(), value); return this; }
 
     }
 

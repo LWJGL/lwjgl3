@@ -30,10 +30,23 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nEXRLayers(JNIEnv *__
     return (jint)EXRLayers(filename, layer_names, num_layers, err);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nEXRNumLevels(JNIEnv *__env, jclass clazz, jlong exr_imageAddress) {
+    EXRImage const *exr_image = (EXRImage const *)(intptr_t)exr_imageAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)EXRNumLevels(exr_image);
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nInitEXRHeader(JNIEnv *__env, jclass clazz, jlong exr_headerAddress) {
     EXRHeader *exr_header = (EXRHeader *)(intptr_t)exr_headerAddress;
     UNUSED_PARAMS(__env, clazz)
     InitEXRHeader(exr_header);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nEXRSetNameAttr(JNIEnv *__env, jclass clazz, jlong exr_headerAddress, jlong nameAddress) {
+    EXRHeader *exr_header = (EXRHeader *)(intptr_t)exr_headerAddress;
+    char const *name = (char const *)(intptr_t)nameAddress;
+    UNUSED_PARAMS(__env, clazz)
+    EXRSetNameAttr(exr_header, name);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nInitEXRImage(JNIEnv *__env, jclass clazz, jlong exr_imageAddress) {
@@ -164,6 +177,24 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nSaveEXRImageToMemor
     char const **err = (char const **)(intptr_t)errAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jlong)SaveEXRImageToMemory(image, exr_header, memory, err);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nSaveEXRMultipartImageToFile(JNIEnv *__env, jclass clazz, jlong imagesAddress, jlong exr_headersAddress, jint num_parts, jlong filenameAddress, jlong errAddress) {
+    EXRImage const *images = (EXRImage const *)(intptr_t)imagesAddress;
+    EXRHeader const **exr_headers = (EXRHeader const **)(intptr_t)exr_headersAddress;
+    char const *filename = (char const *)(intptr_t)filenameAddress;
+    char const **err = (char const **)(intptr_t)errAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)SaveEXRMultipartImageToFile(images, exr_headers, (unsigned int)num_parts, filename, err);
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nSaveEXRMultipartImageToMemory(JNIEnv *__env, jclass clazz, jlong imagesAddress, jlong exr_headersAddress, jint num_parts, jlong memoryAddress, jlong errAddress) {
+    EXRImage const *images = (EXRImage const *)(intptr_t)imagesAddress;
+    EXRHeader const **exr_headers = (EXRHeader const **)(intptr_t)exr_headersAddress;
+    unsigned char **memory = (unsigned char **)(intptr_t)memoryAddress;
+    char const **err = (char const **)(intptr_t)errAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)SaveEXRMultipartImageToMemory(images, exr_headers, (unsigned int)num_parts, memory, err);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nLoadDeepEXR(JNIEnv *__env, jclass clazz, jlong out_imageAddress, jlong filenameAddress, jlong errAddress) {

@@ -99,8 +99,8 @@ ENABLE_WARNINGS()""")
         Check(1)..float.p.p("out_rgba", ""),
         Check(1)..int.p("width", ""),
         Check(1)..int.p("height", ""),
-        charASCII.const.p("filename", ""),
-        charASCII.const.p("layer_name", ""),
+        charUTF8.const.p("filename", ""),
+        charUTF8.const.p("layer_name", ""),
         Check(1)..charASCII.const.p.p("err", ""),
 
         returnDoc =
@@ -114,12 +114,19 @@ ENABLE_WARNINGS()""")
         "EXRLayers",
         "Get layer infos from EXR file.",
 
-        charASCII.const.p("filename", ""),
-        Check(1)..charASCII.const.p.p.p("layer_names", "list of layer names. Application must free memory after using this."),
+        charUTF8.const.p("filename", ""),
+        Check(1)..charUTF8.const.p.p.p("layer_names", "list of layer names. Application must free memory after using this."),
         Check(1)..int.p("num_layers", "the number of layers"),
         Check(1)..charASCII.const.p.p("err", "Error string(will be filled when the function returns error code). Free it using FreeEXRErrorMessage after using this value."),
 
         returnDoc = "#SUCCESS upon success."
+    )
+
+    int(
+        "EXRNumLevels",
+        "Returns the number of resolution levels of the image (including the base).",
+
+        EXRImage.const.p("exr_image", "")
     )
 
     void(
@@ -127,6 +134,14 @@ ENABLE_WARNINGS()""")
         "Initialize ##EXRHeader struct.",
 
         EXRHeader.p("exr_header", "")
+    )
+
+    void(
+        "EXRSetNameAttr",
+        "Sets name attribute of ##EXRHeader struct (it makes a copy).",
+
+        EXRHeader.p("exr_header", ""),
+        charUTF8.const.p("name", "")
     )
 
     void(
@@ -138,21 +153,21 @@ ENABLE_WARNINGS()""")
 
     int(
         "FreeEXRHeader",
-        "Free's internal data of ##EXRHeader struct",
+        "Frees internal data of ##EXRHeader struct",
 
         EXRHeader.p("exr_header", "")
     )
 
     int(
         "FreeEXRImage",
-        "Free's internal data of ##EXRImage struct",
+        "Frees internal data of ##EXRImage struct",
 
         EXRImage.p("exr_image", "")
     )
 
     void(
         "FreeEXRErrorMessage",
-        "Free's error message",
+        "Frees error message",
 
         Unsafe..char.const.p("msg", "")
     )
@@ -162,7 +177,7 @@ ENABLE_WARNINGS()""")
         "Parse EXR version header of a file.",
 
         EXRVersion.p("version", ""),
-        charASCII.const.p("filename", "")
+        charUTF8.const.p("filename", "")
     )
 
     int(
@@ -184,7 +199,7 @@ ENABLE_WARNINGS()""")
 
         EXRHeader.p("header", ""),
         EXRVersion.const.p("version", ""),
-        charASCII.const.p("filename", ""),
+        charUTF8.const.p("filename", ""),
         Check(1)..charASCII.const.p.p("err", "")
     )
 
@@ -214,7 +229,7 @@ ENABLE_WARNINGS()""")
         Check(1)..EXRHeader.p.p.p("headers", ""),
         Check(1)..int.p("num_headers", ""),
         EXRVersion.const.p("version", ""),
-        charASCII.const.p("filename", ""),
+        charUTF8.const.p("filename", ""),
         Check(1)..charASCII.const.p.p("err", "")
     )
 
@@ -246,7 +261,7 @@ ENABLE_WARNINGS()""")
 
         EXRImage.p("image", ""),
         EXRHeader.const.p("header", ""),
-        charASCII.const.p("filename", ""),
+        charUTF8.const.p("filename", ""),
         Check(1)..charASCII.const.p.p("err", ""),
 
         returnDoc = "negative value and may set error string in {@code err} when there's an error"
@@ -284,7 +299,7 @@ ENABLE_WARNINGS()""")
         EXRImage.p("images", ""),
         EXRHeader.const.p.p("headers", ""),
         AutoSize("images", "headers")..unsigned_int("num_parts", ""),
-        charASCII.const.p("filename", ""),
+        charUTF8.const.p("filename", ""),
         Check(1)..charASCII.const.p.p("err", ""),
 
         returnDoc = "negative value and may set error string in {@code err} when there's an error"
@@ -320,7 +335,7 @@ ENABLE_WARNINGS()""")
 
         EXRImage.const.p("image", ""),
         EXRHeader.const.p("exr_header", ""),
-        charASCII.const.p("filename", ""),
+        charUTF8.const.p("filename", ""),
         Check(1)..charASCII.const.p.p("err", ""),
 
         returnDoc = "negative value and may set error string in {@code err} when there's an error"
@@ -344,6 +359,52 @@ ENABLE_WARNINGS()""")
         returnDoc = "the number of bytes if success or zero and may set error string in {@code err} when there's an error"
     )
 
+
+    int(
+        "SaveEXRMultipartImageToFile",
+        """
+        Saves multi-channel, multi-frame OpenEXR image to a file.
+
+        Image is compressed using {@code EXRImage.compression} value. File global attributes (eg. {@code display_window}) must be set in the first header.
+        """,
+
+        EXRImage.const.p("images", ""),
+        EXRHeader.const.p.p("exr_headers", ""),
+        AutoSize("images", "exr_headers")..unsigned_int("num_parts", ""),
+        charUTF8.const.p("filename", ""),
+        Check(1)..charASCII.const.p.p("err", ""),
+
+        returnDoc =
+        """
+        negative value and may set error string in {@code err} when there's an error.
+ 
+        When there was an error message, Application must free {@code err} with #FreeEXRErrorMessage().
+        """
+    )
+
+
+    size_t(
+        "SaveEXRMultipartImageToMemory",
+        """
+        Saves multi-channel, multi-frame OpenEXR image to a memory.
+
+        Image is compressed using {@code EXRImage.compression} value. File global attributes (eg. {@code display_window}) must be set in the first header.
+        """,
+
+        EXRImage.const.p("images", ""),
+        EXRHeader.const.p.p("exr_headers", ""),
+        AutoSize("images", "exr_headers")..unsigned_int("num_parts", ""),
+        Check(1)..unsigned_char.p.p("memory", ""),
+        Check(1)..charASCII.const.p.p("err", ""),
+
+        returnDoc =
+        """
+        the number of bytes if success. Return zero and will set error string in {@code err} when there's an error.
+ 
+        When there was an error message, Application must free {@code err} with #FreeEXRErrorMessage().
+        """
+    )
+
     int(
         "LoadDeepEXR",
         """
@@ -355,7 +416,7 @@ ENABLE_WARNINGS()""")
         """,
 
         DeepImage.p("out_image", ""),
-        charASCII.const.p("filename", ""),
+        charUTF8.const.p("filename", ""),
         Check(1)..charASCII.const.p.p("err", ""),
 
         returnDoc = "negative value and may set error string in {@code err} when there's an error"
@@ -366,7 +427,7 @@ ENABLE_WARNINGS()""")
         "Saves single-frame OpenEXR deep image.",
 
         const..DeepImage_p("in_image", ""),
-        const..charASCII_p("filename", ""),
+        const..charUTF8_p("filename", ""),
         Check(1)..const..charASCII_pp("err", ""),
 
         returnDoc = "negative value and may set error string in {@code err} when there's an error"
@@ -382,7 +443,7 @@ ENABLE_WARNINGS()""")
 
         DeepImage_p.p("out_image", ""),
         AutoSize("out_image")..int("num_parts", ""),
-        const..charASCII_p("filename", ""),
+        const..charUTF8_p("filename", ""),
         Check(1)..const..charASCII_pp("err", "")
     )*/
 }
