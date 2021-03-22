@@ -226,11 +226,6 @@ static int nsvg__isdigit(char c)
 	return c >= '0' && c <= '9';
 }
 
-static int nsvg__isnum(char c)
-{
-	return strchr("0123456789+-.eE", c) != 0;
-}
-
 static NSVG_INLINE float nsvg__minf(float a, float b) { return a < b ? a : b; }
 static NSVG_INLINE float nsvg__maxf(float a, float b) { return a > b ? a : b; }
 
@@ -737,9 +732,11 @@ static void nsvg__lineTo(NSVGparser* p, float x, float y)
 
 static void nsvg__cubicBezTo(NSVGparser* p, float cpx1, float cpy1, float cpx2, float cpy2, float x, float y)
 {
-	nsvg__addPoint(p, cpx1, cpy1);
-	nsvg__addPoint(p, cpx2, cpy2);
-	nsvg__addPoint(p, x, y);
+	if (p->npts > 0) {
+		nsvg__addPoint(p, cpx1, cpy1);
+		nsvg__addPoint(p, cpx2, cpy2);
+		nsvg__addPoint(p, x, y);
+	}
 }
 
 static NSVGattrib* nsvg__getAttr(NSVGparser* p)
@@ -809,7 +806,9 @@ static float nsvg__convertToPixels(NSVGparser* p, NSVGcoordinate c, float orig, 
 static NSVGgradientData* nsvg__findGradientData(NSVGparser* p, const char* id)
 {
 	NSVGgradientData* grad = p->gradients;
-	while (grad) {
+	if (id == NULL || *id == '\0')
+		return NULL;
+	while (grad != NULL) {
 		if (strcmp(grad->id, id) == 0)
 			return grad;
 		grad = grad->next;
@@ -826,19 +825,26 @@ static NSVGgradient* nsvg__createGradient(NSVGparser* p, const char* id, const f
 	NSVGgradient* grad;
 	float ox, oy, sw, sh, sl;
 	int nstops = 0;
+	int refIter;
 
 	data = nsvg__findGradientData(p, id);
 	if (data == NULL) return NULL;
 
 	// TODO: use ref to fill in all unset values too.
 	ref = data;
+	refIter = 0;
 	while (ref != NULL) {
+		NSVGgradientData* nextRef = NULL;
 		if (stops == NULL && ref->stops != NULL) {
 			stops = ref->stops;
 			nstops = ref->nstops;
 			break;
 		}
-		ref = nsvg__findGradientData(p, ref->ref);
+		nextRef = nsvg__findGradientData(p, ref->ref);
+		if (nextRef == ref) break; // prevent infite loops on malformed data
+		ref = nextRef;
+		refIter++;
+		if (refIter > 32) break; // prevent infite loops on malformed data
 	}
 	if (stops == NULL) return NULL;
 
@@ -1040,6 +1046,10 @@ static void nsvg__addPath(NSVGparser* p, char closed)
 
 	if (closed)
 		nsvg__lineTo(p, p->pts[0], p->pts[1]);
+
+	// Expect 1 + N*3 points (N = number of cubic bezier segments).
+	if ((p->npts % 3) != 1)
+		return;
 
 	path = (NSVGpath*)NVG_MALLOC(sizeof(NSVGpath));
 	if (path == NULL) goto error;
@@ -1472,6 +1482,15 @@ static int nsvg__parseUnits(const char* units)
 	else if (units[0] == 'e' && units[1] == 'x')
 		return NSVG_UNITS_EX;
 	return NSVG_UNITS_USER;
+}
+
+static int nsvg__isCoordinate(const char* s)
+{
+	// optional sign
+	if (*s == '-' || *s == '+')
+		s++;
+	// must have at least one digit, or start by a dot
+	return (nsvg__isdigit(*s) || *s == '.');
 }
 
 static NSVGcoordinate nsvg__parseCoordinateRaw(const char* str)
@@ -1913,8 +1932,11 @@ static int nsvg__getArgsPerElement(char cmd)
 		case 'a':
 		case 'A':
 			return 7;
+		case 'z':
+		case 'Z':
+			return 0;
 	}
-	return 0;
+	return -1;
 }
 
 static void nsvg__pathMoveTo(NSVGparser* p, float* cpx, float* cpy, float* args, int rel)
@@ -2224,6 +2246,7 @@ static void nsvg__parsePath(NSVGparser* p, const char** attr)
 	float args[10];
 	int nargs;
 	int rargs = 0;
+	char initPoint;
 	float cpx, cpy, cpx2, cpy2;
 	const char* tmp[4];
 	char closedFlag;
@@ -2246,13 +2269,14 @@ static void nsvg__parsePath(NSVGparser* p, const char** attr)
 		nsvg__resetPath(p);
 		cpx = 0; cpy = 0;
 		cpx2 = 0; cpy2 = 0;
+		initPoint = 0;
 		closedFlag = 0;
 		nargs = 0;
 
 		while (*s) {
 			s = nsvg__getNextPathItem(s, item);
 			if (!*item) break;
-			if (nsvg__isnum(item[0])) {
+			if (cmd != '\0' && nsvg__isCoordinate(item)) {
 				if (nargs < 10)
 					args[nargs++] = (float)nsvg__atof(item);
 				if (nargs >= rargs) {
@@ -2265,6 +2289,7 @@ static void nsvg__parsePath(NSVGparser* p, const char** attr)
 							cmd = (cmd == 'm') ? 'l' : 'L';
 							rargs = nsvg__getArgsPerElement(cmd);
 							cpx2 = cpx; cpy2 = cpy;
+							initPoint = 1;
 							break;
 						case 'l':
 						case 'L':
@@ -2314,7 +2339,6 @@ static void nsvg__parsePath(NSVGparser* p, const char** attr)
 				}
 			} else {
 				cmd = item[0];
-				rargs = nsvg__getArgsPerElement(cmd);
 				if (cmd == 'M' || cmd == 'm') {
 					// Commit path.
 					if (p->npts > 0)
@@ -2323,7 +2347,11 @@ static void nsvg__parsePath(NSVGparser* p, const char** attr)
 					nsvg__resetPath(p);
 					closedFlag = 0;
 					nargs = 0;
-				} else if (cmd == 'Z' || cmd == 'z') {
+				} else if (initPoint == 0) {
+					// Do not allow other commands until initial point has been set (moveTo called once).
+					cmd = '\0';
+				}
+				if (cmd == 'Z' || cmd == 'z') {
 					closedFlag = 1;
 					// Commit path.
 					if (p->npts > 0) {
@@ -2338,6 +2366,12 @@ static void nsvg__parsePath(NSVGparser* p, const char** attr)
 					nsvg__moveTo(p, cpx, cpy);
 					closedFlag = 0;
 					nargs = 0;
+				}
+				rargs = nsvg__getArgsPerElement(cmd);
+				if (rargs == -1) {
+					// Command not recognized
+					cmd = '\0';
+					rargs = 0;
 				}
 			}
 		}
